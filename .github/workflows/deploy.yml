@@ -22,7 +22,7 @@ jobs:
           projectId: careercopilot-staging
           target: careercopilot-staging-frontend
       - name: Deploy Backend to Staging
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: careercopilot-backend-staging
           project_id: ${{ secrets.GCP_STAGING_PROJECT_ID }}
@@ -45,7 +45,7 @@ jobs:
           projectId: careercopilot-prod
           target: careercopilot-prod-frontend
       - name: Deploy Backend to Production
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: careercopilot-backend-prod
           project_id: ${{ secrets.GCP_PROJECT_ID }}
