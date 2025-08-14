@@ -11,3 +11,6 @@ pdfplumber
 weasyprint
 google-api-python-client
 sendgrid
+pytest
+httpx
+pytest-asyncio
