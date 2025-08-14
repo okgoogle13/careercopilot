@@ -11,8 +11,12 @@ app = FastAPI(title="Careercopilot API")
 origins = [
     "http://localhost:3000",
     "http://localhost:8080",
-    os.environ.get("FRONTEND_URL", "https://your-firebase-hosting-url.web.app")
 ]
+
+# Add the frontend URL from environment variables if it exists
+frontend_url = os.environ.get("FRONTEND_URL")
+if frontend_url:
+    origins.append(frontend_url)
 
 app.add_middleware(
     CORSMiddleware,
