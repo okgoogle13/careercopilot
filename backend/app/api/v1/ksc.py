@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel, ValidationError
 from typing import List
 import uuid
 from google.cloud.firestore import SERVER_TIMESTAMP
+from google.api_core.exceptions import GoogleAPICallError, NotFound
 
 from app.core.dependencies import get_current_user
 from app.core.db import db
@@ -17,7 +18,7 @@ class KscGenerateRequest(BaseModel):
 @router.post("/generate")
 async def generate_ksc_responses(
     request: KscGenerateRequest,
-    uid: str = Depends(get_current_user)
+    user: dict = Depends(get_current_user)
 ):
     """
     Generates structured STAR responses for a list of Key Selection Criteria,
@@ -25,11 +26,12 @@ async def generate_ksc_responses(
     document's data.
     """
     try:
+        uid = user["uid"]
         # 1. Fetch the specified user profile variation
         profile_ref = db.collection("users").document(uid).collection("profiles").document(request.profile_variation_id)
-        profile_doc = profile_ref.get()
+        profile_doc = await profile_ref.get()
         if not profile_doc.exists:
-            raise HTTPException(status_code=404, detail="Profile variation not found.")
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Profile variation not found.")
         user_profile_data = profile_doc.to_dict()
 
         # 2. Loop through KSC statements and generate responses
@@ -61,7 +63,6 @@ async def generate_ksc_responses(
         new_doc_data = {
             "id": doc_id,
             "type": "ksc",
-            "title": f"KSC Response Document - {doc_id[:8]}",
             "content": formatted_text,
             "createdAt": SERVER_TIMESTAMP,
             "originalFilename": "ksc_response.txt",
@@ -71,11 +72,16 @@ async def generate_ksc_responses(
             }
         }
         
-        doc_ref.set(new_doc_data)
+        await doc_ref.set(new_doc_data)
 
         # 5. Return the newly created document record
         return new_doc_data
 
+    except ValidationError as e:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
+    except NotFound:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Profile variation not found.")
+    except GoogleAPICallError as e:
+        raise HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Google Cloud API error: {e}")
     except Exception as e:
-        # Consider more specific error handling for Genkit/API errors
-        raise HTTPException(status_code=500, detail=f"An error occurred while generating KSC responses: {str(e)}")
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"An error occurred while generating KSC responses: {str(e)}")

@@ -1,11 +1,32 @@
 from fastapi import FastAPI, APIRouter, Request
+from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
-from app.core.limiter import limiter, _rate_limit_exceeded_handler
+from app.core.limiter import limiter, _rate_limit_exceeded_handler, strict_limiter, _not_authenticated_handler, NotAuthenticatedException
 from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis
+import os
 
 app = FastAPI(title="Careercopilot API")
+
+# Add CORS middleware
+origins = [
+    "http://localhost:3000",
+    "http://localhost:8080",
+    os.environ.get("FRONTEND_URL", "https://your-firebase-hosting-url.web.app")
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.state.limiter = limiter
+app.state.strict_limiter = strict_limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+app.add_exception_handler(NotAuthenticatedException, _not_authenticated_handler)
+
 
 api_router = APIRouter()
 api_router.include_router(profile.router, prefix="/profile", tags=["profile"])
