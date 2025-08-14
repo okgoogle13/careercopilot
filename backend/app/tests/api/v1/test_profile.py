@@ -16,7 +16,7 @@ async def test_generate_and_save_voice_profile(client: AsyncClient, mock_db: Mag
         mock_run.return_value = MockVoiceProfile()
 
         # Make the request to the endpoint
-        response = await client.post("/api/v1/profile/generate-voice-profile", headers={"Authorization": "Bearer test_token"})
+        response = await client.post("/api/v1/profile/generate-voice-profile")
 
         # Assert the response
         assert response.status_code == 200
