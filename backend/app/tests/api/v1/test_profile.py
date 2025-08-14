@@ -11,7 +11,7 @@ class MockVoiceProfile(MagicMock):
 async def test_generate_and_save_voice_profile(client: AsyncClient, mock_db: MagicMock):
     """Test the generate_and_save_voice_profile endpoint."""
     # Mock the Genkit flow's run method
-    with patch('app.genkit_flows.voice_profiler.generateVoiceProfile.run') as mock_run:
+    with patch.object(generateVoiceProfile, "run") as mock_run:
         # Configure the mock to return a future-like object with a result
         mock_run.return_value = MockVoiceProfile()
 
