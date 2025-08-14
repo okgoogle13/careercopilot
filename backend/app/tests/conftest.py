@@ -18,7 +18,7 @@ def mock_get_current_user():
 @pytest.fixture
 async def client(monkeypatch, mock_db, mock_get_current_user):
     """Async test client for the app with mocked dependencies."""
-    monkeypatch.setattr("app.core.db.db", mock_db)
+    monkeypatch.setattr(db, "db", mock_db)
     app.dependency_overrides[get_current_user] = mock_get_current_user
 
     async with AsyncClient(app=app, base_url="http://test") as ac:
