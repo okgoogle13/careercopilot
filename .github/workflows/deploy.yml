@@ -1,0 +1,67 @@
+name: Deploy to GCP
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Cloud SDK (Production)
+        if: github.ref == 'refs/heads/main'
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK (Staging)
+        if: github.ref == 'refs/heads/develop'
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_STAGING_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_STAGING_SA_KEY }}
+
+      - name: Build and Deploy Backend (Production)
+        if: github.ref == 'refs/heads/main'
+        run: |-
+          gcloud config set run/region us-central1
+          gcloud run deploy careercopilot-backend --source ./backend --allow-unauthenticated --project=${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Build and Deploy Backend (Staging)
+        if: github.ref == 'refs/heads/develop'
+        run: |-
+          gcloud config set run/region us-central1
+          gcloud run deploy careercopilot-backend-staging --source ./backend --allow-unauthenticated --project=${{ secrets.GCP_STAGING_PROJECT_ID }}
+
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Frontend
+        run: npm --prefix frontend install && npm --prefix frontend run build
+
+      - name: Deploy to Firebase Hosting (Production)
+        if: github.ref == 'refs/heads/main'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.GCP_SA_KEY }}'
+          channelId: live
+          projectId: ${{ secrets.GCP_PROJECT_ID }}
+          target: careercopilot-frontend
+
+      - name: Deploy to Firebase Hosting (Staging)
+        if: github.ref == 'refs/heads/develop'
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.GCP_STAGING_SA_KEY }}'
+          channelId: live
+          projectId: ${{ secrets.GCP_STAGING_PROJECT_ID }}
+          target: careercopilot-frontend-staging

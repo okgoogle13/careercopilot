@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+python-dotenv
+google-cloud-aiplatform
+google-generativeai
+genkit[googleai]
+firebase-admin
+pydantic
+python-docx
+pdfplumber
+weasyprint
+google-api-python-client
+sendgrid
