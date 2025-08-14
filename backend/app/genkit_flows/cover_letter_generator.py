@@ -1,16 +1,13 @@
 import genkit
 from genkit.plugins import googleai
-import os
 import json
 from typing import Optional
 
-# Initialize Genkit and the Gemini Pro model
+# Initialize Genkit and the Google AI plugin.
+# By not passing an explicit API key, the plugin will automatically
+# use the Application Default Credentials (ADC) of the service account.
 if not genkit.get_plugin("googleai"):
-    # Attempt to get the API key from environment variables
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        raise ValueError("GEMINI_API_KEY environment variable not set.")
-    genkit.init(plugins=[googleai.init(api_key=api_key)])
+    genkit.init(plugins=[googleai.init()])
 
 gemini_pro = googleai.gemini_pro
 
