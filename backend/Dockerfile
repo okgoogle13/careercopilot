@@ -5,7 +5,7 @@ FROM python:3.13-slim
 WORKDIR /usr/src/app
 
 # Expose the port Cloud Run expects
-EXPOSE 8080
+EXpose 8080
 
 # Copy the requirements file into the container
 COPY requirements.txt ./
@@ -21,5 +21,5 @@ COPY ./app /usr/src/app/app
 # CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
 
 # --- TEMPORARY DEBUGGING COMMAND ---
-# This command keeps the container alive so we can inspect its logs and file system.
-CMD ["sh", "-c", "echo 'Container is in debug mode. Keeping alive with a sleep loop.' && while true; do sleep 3600; done"]
+# This command keeps the container alive so we can get a shell inside it.
+CMD ["sh", "-c", "echo 'Container is in debug mode. Keeping alive with an infinite sleep loop.' && while true; do sleep 3600; done"]
