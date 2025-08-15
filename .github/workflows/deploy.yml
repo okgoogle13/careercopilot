@@ -70,10 +70,17 @@ jobs:
           service: 'careercopilot-backend-staging'
           region: 'australia-southeast2'
           image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          # Use flags to directly pass the service account to the gcloud command
           flags: '--service-account="careercopilot-backend-staging@${{ secrets.GCP_STAGING_PROJECT_ID }}.iam.gserviceaccount.com"'
+          # Correctly format the environment variables
           env_vars: |
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            # ... Add all other runtime secrets here ...
+            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
+            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }}
+            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}
 
   deploy-production:
     name: Deploy to Production
@@ -131,7 +138,14 @@ jobs:
           service: 'careercopilot-backend'
           region: 'australia-southeast2'
           image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          # Use flags to directly pass the service account to the gcloud command
           flags: '--service-account="careercopilot-backend@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com"'
+          # Correctly format the environment variables for production
           env_vars: |
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            # ... Add all other runtime secrets here ...
+            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
+            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }}
+            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}
