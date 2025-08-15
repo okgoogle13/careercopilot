@@ -24,6 +24,6 @@ To enable the automated, hourly email scan, you need to configure a **Cloud Sche
         *   Add a new header.
         *   **Header name:** `X-Scheduler-Secret`
         *   **Header value:** The value you have set for the `SCHEDULER_SECRET` environment variable in your backend configuration.
-    *   **Auth header:** For an internal service, you might also configure IAP or a service account for authentication. For this implementation, the secret key provides the primary layer of protection.
+    *   **Auth header:** For an internal service, you might also configure IAP or a service account for authentication. For this implementation, the secret key provides the primary layer of protec[...]  
 
 Once created and enabled, this Cloud Scheduler job will call your API endpoint every hour, which will then process all connected users, ensuring that their job opportunities are always up-to-date.
