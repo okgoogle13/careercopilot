@@ -1,9 +1,10 @@
-// src/firebase-config.ts
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
-export const firebaseConfig = {
+// Your web app's Firebase configuration will be populated here
+const firebaseConfig = {
   apiKey: "AIzaSyDJFFXqfDSBZ4yoGAjaA3p60fg4fAONpSg",
   authDomain: "careercopilot-staging.firebaseapp.com",
   projectId: "careercopilot-staging",
@@ -15,8 +16,7 @@ export const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Cloud Firestore and get a reference to the service
-export const db = getFirestore(app);
-
-// Initialize Firebase Authentication and get a reference to the service
+// Export the services you need
 export const auth = getAuth(app);
+export const db = getFirestore(app);
+export default app;
