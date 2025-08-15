@@ -10,9 +10,8 @@ async def list_opportunities(uid: str = Depends(get_current_user)):
     Lists all job opportunities found for the authenticated user.
     """
     try:
-        opportunities_ref = db.collection('opportunities')
-        # Create a query against the collection
-        query = opportunities_ref.where('user_id', '==', uid).order_by('found_at', direction='DESCENDING')
+        opportunities_ref = db.collection('users').document(uid).collection('opportunities')
+        query = opportunities_ref.order_by('found_at', direction='DESCENDING')
         
         docs = query.stream()
         
