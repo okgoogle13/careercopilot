@@ -13,6 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 5. Copy the entire application source code into the container
 COPY ./app /app/app
 
-# 6. The command to run the application. Uvicorn will listen on the port
-#    provided by the Cloud Run environment ($PORT, which defaults to 8080).
-CMD exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}
+# The command to run the application using Python's module syntax for reliability.
+CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
