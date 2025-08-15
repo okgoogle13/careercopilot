@@ -20,5 +20,5 @@ COPY ./app /usr/src/app/app
 # CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
 
 # --- TEMPORARY DEBUGGING COMMAND ---
-# This command will run, print its output to the Cloud Run logs, and then exit.
-CMD ["sh", "-c", "echo '--- DEBUGGING START ---' && python --version && ls -laR /usr/src/app && echo '--- DEBUGGING END ---'"]
+# This command keeps the container alive so we can inspect its logs and file system.
+CMD ["sh", "-c", "echo 'Container is in debug mode. Keeping alive with a sleep loop.' && while true; do sleep 3600; done"]
