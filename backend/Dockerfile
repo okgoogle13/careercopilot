@@ -16,5 +16,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the backend application code
 COPY ./app /usr/src/app/app
 
-# This command uses a shell to properly substitute the $PORT environment variable.
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Original startup command, temporarily disabled for debugging
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+# --- TEMPORARY DEBUGGING COMMAND ---
+# This command will run, print its output to the Cloud Run logs, and then exit.
+CMD ["sh", "-c", "echo '--- DEBUGGING START ---' && python --version && ls -laR /usr/src/app && echo '--- DEBUGGING END ---'"]
