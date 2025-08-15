@@ -14,3 +14,6 @@ sendgrid
 pytest
 httpx
 pytest-asyncio
+
+# Development and Testing
+black>=24.0.0
