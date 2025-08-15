@@ -13,5 +13,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the backend application code
 COPY ./app /usr/src/app/app
 
-# Run app.main:app when the container launches
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# This command uses a shell to properly substitute the $PORT environment variable.
+CMD exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}
