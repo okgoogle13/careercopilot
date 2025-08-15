@@ -70,7 +70,7 @@ jobs:
           service: 'careercopilot-backend-staging'
           region: 'australia-southeast2'
           image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
-          service_account: 'careercopilot-backend-staging@${{ secrets.GCP_STAGING_PROJECT_ID }}.iam.gserviceaccount.com'
+          flags: '--service-account="careercopilot-backend-staging@${{ secrets.GCP_STAGING_PROJECT_ID }}.iam.gserviceaccount.com"'
           env_vars: |
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
             # ... Add all other runtime secrets here ...
@@ -131,7 +131,7 @@ jobs:
           service: 'careercopilot-backend'
           region: 'australia-southeast2'
           image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
-          service_account: 'careercopilot-backend@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com'
+          flags: '--service-account="careercopilot-backend@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com"'
           env_vars: |
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
             # ... Add all other runtime secrets here ...
