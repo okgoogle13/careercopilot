@@ -14,11 +14,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
       - name: Install Frontend Dependencies
-        run: npm install --prefix frontend
+        run: npm ci --prefix frontend
       - name: Build Frontend
         run: npm run build --prefix frontend
+      - name: Run Linter
+        run: npm run lint --prefix frontend
 
   test-backend:
     runs-on: ubuntu-latest
@@ -27,8 +29,10 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
+          python-version: '3.12'
       - name: Install Backend Dependencies
         run: pip install -r backend/requirements.txt
       - name: Run Linter
         run: black --check backend
+      - name: Run Tests
+        run: pytest backend
