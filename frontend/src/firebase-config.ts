@@ -3,14 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
-// IMPORTANT: Replace with your actual Firebase project configuration
 export const firebaseConfig = {
-  apiKey: "your-api-key",
-  authDomain: "your-auth-domain",
-  projectId: "your-project-id",
-  storageBucket: "your-storage-bucket",
-  messagingSenderId: "your-messaging-sender-id",
-  appId: "your-app-id"
+  apiKey: "AIzaSyDJFFXqfDSBZ4yoGAjaA3p60fg4fAONpSg",
+  authDomain: "careercopilot-staging.firebaseapp.com",
+  projectId: "careercopilot-staging",
+  storageBucket: "careercopilot-staging.firebasestorage.app",
+  messagingSenderId: "473068119033",
+  appId: "1:473068119033:web:d5d5c8582c6912c8a21328"
 };
 
 // Initialize Firebase
