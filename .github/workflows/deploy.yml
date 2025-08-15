@@ -54,9 +54,6 @@ jobs:
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker australia-southeast1-docker.pkg.dev
 
-      - name: Install Backend Dependencies
-        run: pip install -r backend/requirements.txt
-
       - name: Build and Push Docker Image (Staging)
         uses: docker/build-push-action@v5
         with:
@@ -121,9 +118,6 @@ jobs:
         
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker australia-southeast1-docker.pkg.dev
-
-      - name: Install Backend Dependencies
-        run: pip install -r backend/requirements.txt
 
       - name: Build and Push Docker Image (Production)
         uses: docker/build-push-action@v5
