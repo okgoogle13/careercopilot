@@ -51,6 +51,9 @@ jobs:
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker australia-southeast1-docker.pkg.dev
+
       - name: Install Backend Dependencies
         run: pip install -r backend/requirements.txt
 
@@ -108,6 +111,9 @@ jobs:
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker australia-southeast1-docker.pkg.dev
+
       - name: Install Backend Dependencies
         run: pip install -r backend/requirements.txt
 
