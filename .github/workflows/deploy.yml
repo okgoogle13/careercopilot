@@ -1,44 +1,130 @@
-name: Deploy to Firebase Hosting
+name: Deploy Backend and Frontend
 
 on:
   push:
     branches:
-      - develop
       - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
   deploy-staging:
     if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
+    environment: staging
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Frontend Dependencies
-        run: npm ci
-        working-directory: ./frontend
-      - name: Build Frontend
-        run: npm run build
-        working-directory: ./frontend
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_STAGING_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY_STAGING }}
+          export_default_credentials: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install and Build Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      - name: Deploy Frontend to Firebase Hosting (Staging)
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'
-          channelId: live
-          projectId: careercopilot-staging
+          projectId: '${{ secrets.GCP_STAGING_PROJECT_ID }}'
+          entryPoint: ./frontend
+
+      - name: Set up Docker
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Authenticate with Google Artifact Registry
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Build and Push Docker image (Staging)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: us-central1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-backend/backend-staging:latest
+
+      - name: Deploy to Cloud Run (Staging)
+        run: |
+          gcloud run deploy careercopilot-backend-staging \
+            --image us-central1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-backend/backend-staging:latest \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-env-vars="FIREBASE_CONFIG=${{ secrets.FIREBASE_CONFIG_STAGING }}" \
+            --set-env-vars="GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY_STAGING }}"
 
   deploy-production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    environment: production
     steps:
-      - uses: actions/checkout@v4
-      - name: Install Frontend Dependencies
-        run: npm ci
-        working-directory: ./frontend
-      - name: Build Frontend
-        run: npm run build
-        working-directory: ./frontend
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PRODUCTION_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY_PRODUCTION }}
+          export_default_credentials: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install and Build Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      - name: Deploy Frontend to Firebase Hosting (Production)
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}' # Should be production secret
-          channelId: live
-          projectId: careercopilot # Should be production project
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}'
+          projectId: '${{ secrets.GCP_PRODUCTION_PROJECT_ID }}'
+          entryPoint: ./frontend
+
+      - name: Set up Docker
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Authenticate with Google Artifact Registry
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Build and Push Docker image (Production)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: us-central1-docker.pkg.dev/${{ secrets.GCP_PRODUCTION_PROJECT_ID }}/careercopilot-backend/backend-production:latest
+
+      - name: Deploy to Cloud Run (Production)
+        run: |
+          gcloud run deploy careercopilot-backend-production \
+            --image us-central1-docker.pkg.dev/${{ secrets.GCP_PRODUCTION_PROJECT_ID }}/careercopilot-backend/backend-production:latest \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-env-vars="FIREBASE_CONFIG=${{ secrets.FIREBASE_CONFIG_PRODUCTION }}" \
+            --set-env-vars="GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY_PRODUCTION }}"
