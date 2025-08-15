@@ -1,51 +1,46 @@
-from fastapi import FastAPI, APIRouter, Request
-from fastapi.middleware.cors import CORSMiddleware
-from slowapi.errors import RateLimitExceeded
-from app.core.limiter import limiter, _rate_limit_exceeded_handler, strict_limiter, _not_authenticated_handler, NotAuthenticatedException
-from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis
-import os
+import uvicorn
+from fastapi import FastAPI
+from starlette.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="Careercopilot API")
+from app.api.v1.analysis import router as analysis_router
+from app.api.v1.documents import router as documents_router
+from app.api.v1.integrations import router as integrations_router
+from app.api.v1.jobs import router as jobs_router
+from app.api.v1.ksc import router as ksc_router
+from app.api.v1.opportunities import router as opportunities_router
+from app.api.v1.profile import router as profile_router
+from app.api.v1.settings import router as settings_router
+from app.api.v1.users import router as users_router
+from app.core.config import settings
 
-# Add CORS middleware
-origins = [
-    "http://localhost:3000",
-    "http://localhost:8080",
-]
-
-# Add the frontend URL from environment variables if it exists
-frontend_url = os.environ.get("FRONTEND_URL")
-if frontend_url:
-    origins.append(frontend_url)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json",
 )
 
-app.state.limiter = limiter
-app.state.strict_limiter = strict_limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-app.add_exception_handler(NotAuthenticatedException, _not_authenticated_handler)
+# Set all CORS enabled origins
+if settings.BACKEND_CORS_ORIGINS:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
+app.include_router(analysis_router, prefix=settings.API_V1_STR)
+app.include_router(documents_router, prefix=settings.API_V1_STR)
+app.include_router(integrations_router, prefix=settings.API_V1_STR)
+app.include_router(jobs_router, prefix=settings.API_V1_STR)
+app.include_router(ksc_router, prefix=settings.API_V1_STR)
+app.include_router(opportunities_router, prefix=settings.API_V1_STR)
+app.include_router(profile_router, prefix=settings.API_V1_STR)
+app.include_router(settings_router, prefix=settings.API_V1_STR)
+app.include_router(users_router, prefix=settings.API_V1_STR)
 
-api_router = APIRouter()
-api_router.include_router(profile.router, prefix="/profile", tags=["profile"])
-api_router.include_router(documents.router, prefix="/documents", tags=["documents"])
-api_router.include_router(users.router, prefix="/users", tags=["users"])
-api_router.include_router(jobs.router, prefix="/jobs", tags=["jobs"])
-api_router.include_router(integrations.router, prefix="/integrations", tags=["integrations"])
-api_router.include_router(opportunities.router, prefix="/opportunities", tags=["opportunities"])
-api_router.include_router(settings.router, prefix="/settings", tags=["settings"])
-api_router.include_router(ksc.router, prefix="/ksc", tags=["ksc"])
-api_router.include_router(analysis.router, prefix="/analysis", tags=["analysis"])
-
-
-app.include_router(api_router, prefix="/api/v1")
-
-@app.get("/health", tags=["Health"])
-async def health_check():
+@app.get("/health")
+def health_check():
     return {"status": "ok"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8080)
