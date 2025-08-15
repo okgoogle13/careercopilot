@@ -1,5 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.13-slim
+FROM python:3.11-slim
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install black
 
 # Copy the application code
-COPY ./app /usr/src/app/app
+COPY ./app /usr/src of this change./app/app
 
 # Original startup command, temporarily disabled for debugging
 # CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
