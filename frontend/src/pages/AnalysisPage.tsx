@@ -27,6 +27,7 @@ const AnalysisPage: React.FC = () => {
     const [documents, setDocuments] = useState<any[]>([]);
     const [selectedDocumentId, setSelectedDocumentId] = useState<string>('');
     const [jobDescription, setJobDescription] = useState<string>('');
+    const [companyUrl, setCompanyUrl] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
     const [analysisResult, setAnalysisResult] = useState<AtsResult | null>(null);
@@ -84,7 +85,7 @@ const AnalysisPage: React.FC = () => {
             const response = await fetch(`/api/v1/analysis/ats-score/${selectedDocumentId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify({ job_description: jobDescription }),
+                body: JSON.stringify({ job_description: jobDescription, company_url: companyUrl }),
             });
             if (!response.ok) {
                 const errorData = await response.json();
@@ -116,7 +117,7 @@ const AnalysisPage: React.FC = () => {
             const response = await fetch(`/api/v1/analysis/optimize-resume/${selectedDocumentId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify({ job_description: jobDescription }),
+                body: JSON.stringify({ job_description: jobDescription, company_url: companyUrl }),
             });
 
             if (!response.ok) {
@@ -257,6 +258,11 @@ const AnalysisPage: React.FC = () => {
                 <div className="mb-6">
                     <label htmlFor="job-description" className="block text-gray-700 font-bold mb-2">2. Paste Job Description</label>
                     <textarea id="job-description" rows={10} value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3" required placeholder="Paste the full job description here..."></textarea>
+                </div>
+                <div className="mb-6">
+                    <label htmlFor="company-url" className="block text-gray-700 font-bold mb-2">3. Company Website (Optional)</label>
+                    <input type="url" id="company-url" value={companyUrl} onChange={(e) => setCompanyUrl(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3" placeholder="https://example.com" />
+                    <p className="text-sm text-gray-500 mt-1">Providing a URL helps us tailor your resume's tone and keywords to the company culture.</p>
                 </div>
                 <div className="text-center">
                     <button type="submit" disabled={isAnalyzing} className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-3 px-8 rounded-full text-lg transition-transform transform hover:scale-105">

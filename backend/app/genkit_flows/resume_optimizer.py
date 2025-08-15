@@ -17,17 +17,33 @@ class OptimizedResume(BaseModel):
     resume_text: str = Field(description="The complete and updated resume text, with keywords naturally integrated.")
 
 @genkit.flow(output_schema=OptimizedResume)
-def optimizeResume(resumeText: str, missingKeywords: List[str], jobDescription: str) -> OptimizedResume:
+def optimizeResume(
+    resumeText: str,
+    missingKeywords: List[str],
+    jobDescription: str,
+    company_keywords: List[str] = None,
+    company_tone: str = None
+) -> OptimizedResume:
     """
-    Analyzes a resume and a list of missing keywords, then rewrites the resume
-    to naturally incorporate those keywords in the context of the job description.
+    Analyzes a resume, job description, and optional company insights, then rewrites the resume
+    to naturally incorporate keywords and match the company's tone.
     """
 
     keywords_str = ", ".join(missingKeywords)
 
+    company_insights_prompt = ""
+    if company_keywords and company_tone:
+        company_keywords_str = ", ".join(company_keywords)
+        company_insights_prompt = f"""
+    **Company Insights:**
+    - **Company-Specific Keywords to Integrate:** {company_keywords_str}
+    - **Company Tone to Emulate:** {company_tone}
+
+    When revising, also weave in the company-specific keywords and adjust the language to reflect the company's tone.
+    """
+
     prompt = f"""
-    You are an expert resume editor. Your task is to revise the provided resume to seamlessly integrate a list of missing keywords.
-    The goal is to make the resume a stronger match for the target job description without inventing new experiences or skills.
+    You are an expert resume editor. Your task is to revise the provided resume to make it a stronger match for the target job description and company culture.
 
     **Target Job Description:**
     ---
@@ -39,15 +55,16 @@ def optimizeResume(resumeText: str, missingKeywords: List[str], jobDescription: 
     {resumeText}
     ---
 
-    **Keywords to Integrate:**
+    **Job-Specific Keywords to Integrate:**
     - {keywords_str}
-
+    {company_insights_prompt}
     **Instructions:**
-    1.  **Analyze Context:** Read the job description and the original resume to understand the candidate's experience and the employer's needs.
-    2.  **Integrate Naturally:** Weave the keywords into the existing text of the resume. Rephrase bullet points or summaries where appropriate. For example, if a keyword is "Project Management" and the resume says "Led a team," you could change it to "Applied strong Project Management skills to lead a team."
-    3.  **Do Not Fabricate:** You must not add new job roles, invent new skills, or create experiences the candidate does not have. Your role is to edit and enhance, not to create fiction.
-    4.  **Preserve Formatting:** Maintain the overall structure and formatting of the original resume.
-    5.  **Return Full Text:** The final output should be the complete, revised resume text.
+    1.  **Analyze Context:** Read all provided information to understand the candidate's experience, the employer's needs, and the company's character.
+    2.  **Integrate Naturally:** Weave all specified keywords (both job-specific and company-specific) into the existing text. Rephrase bullet points or summaries where appropriate. For example, if a keyword is "Project Management" and the resume says "Led a team," you could change it to "Applied strong Project Management skills to lead a team."
+    3.  **Match the Tone:** Adjust the resume's language and style to align with the company's described tone.
+    4.  **Do Not Fabricate:** You must not add new job roles, invent new skills, or create experiences the candidate does not have. Your role is to edit and enhance, not to create fiction.
+    5.  **Preserve Formatting:** Maintain the overall structure and formatting of the original resume.
+    6.  **Return Full Text:** The final output should be the complete, revised resume text.
 
     Now, please generate the optimized resume.
     """
