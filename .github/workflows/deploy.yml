@@ -24,8 +24,7 @@ jobs:
           node-version: '20'
       
       - name: 'Debug: List Files in Frontend Directory'
-        run: ls -laR
-        working-directory: ./frontend
+        run: ls -laR frontend/
 
       - name: Install Frontend Dependencies
         run: npm ci
@@ -49,6 +48,9 @@ jobs:
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+
+      - name: Install Backend Dependencies
+        run: pip install -r backend/requirements.txt
 
       - name: Build and Push Docker Image (Staging)
         uses: docker/build-push-action@v5
@@ -102,6 +104,9 @@ jobs:
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        
+      - name: Install Backend Dependencies
+        run: pip install -r backend/requirements.txt
 
       - name: Build and Push Docker Image (Production)
         uses: docker/build-push-action@v5
