@@ -7,7 +7,7 @@ from typing import List
 
 # Load environment variables and initialize Genkit
 load_dotenv()
-if not genkit.get_plugin("googleai"):
+if genkit.get_plugin("googleai") is None:
     genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = googleai.gemini_pro
