@@ -13,9 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Frontend Dependencies
-        run: npm --prefix frontend ci
+        run: npm ci
+        working-directory: ./frontend
       - name: Build Frontend
-        run: npm --prefix frontend run build
+        run: npm run build
+        working-directory: ./frontend
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -29,9 +31,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Frontend Dependencies
-        run: npm --prefix frontend ci
+        run: npm ci
+        working-directory: ./frontend
       - name: Build Frontend
-        run: npm --prefix frontend run build
+        run: npm run build
+        working-directory: ./frontend
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
