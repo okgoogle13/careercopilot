@@ -1,8 +1,8 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Users can only read and write to documents within their own user folder.
-    match /users/{userId}/{document=**} {
+    // Allow users to read and write only to their own documents
+    match /users/{userId}/{documents=**} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
   }
