@@ -30,6 +30,9 @@ const AnalysisPage: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
     const [analysisResult, setAnalysisResult] = useState<AtsResult | null>(null);
+    const [isOptimizing, setIsOptimizing] = useState<boolean>(false);
+    const [optimizedResume, setOptimizedResume] = useState<string | null>(null);
+
 
     // --- Effects ---
     useEffect(() => {
@@ -71,16 +74,17 @@ const AnalysisPage: React.FC = () => {
 
         setIsAnalyzing(true);
         setAnalysisResult(null);
+        setOptimizedResume(null); // Reset optimizer on new analysis
         const auth = getAuth();
         const user = auth.currentUser;
         if (!user) { toast.error("Authentication error."); setIsAnalyzing(false); return; }
 
         try {
             const token = await user.getIdToken();
-            const response = await fetch('/api/v1/analysis/ats-score', {
+            const response = await fetch(`/api/v1/analysis/ats-score/${selectedDocumentId}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify({ document_id: selectedDocumentId, job_description: jobDescription }),
+                body: JSON.stringify({ job_description: jobDescription }),
             });
             if (!response.ok) {
                 const errorData = await response.json();
@@ -96,9 +100,44 @@ const AnalysisPage: React.FC = () => {
         }
     };
 
+    const handleOptimizeResume = async () => {
+        if (!selectedDocumentId || !jobDescription) {
+            toast.error("Could not find the job description or selected resume to optimize.");
+            return;
+        }
+        setIsOptimizing(true);
+        setOptimizedResume(null);
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if (!user) { toast.error("Authentication error."); setIsOptimizing(false); return; }
+
+        try {
+            const token = await user.getIdToken();
+            const response = await fetch(`/api/v1/analysis/optimize-resume/${selectedDocumentId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                body: JSON.stringify({ job_description: jobDescription }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.detail || 'Resume optimization failed.');
+            }
+            const data = await response.json();
+            setOptimizedResume(data.optimized_text);
+            toast.success("Your resume has been optimized!");
+        } catch (err: any) {
+            toast.error(`Optimization failed: ${err.message}`);
+        } finally {
+            setIsOptimizing(false);
+        }
+    };
+
     // --- Render Functions ---
     const renderResults = () => {
         if (!analysisResult) return null;
+
+        const hasMissingKeywords = analysisResult.missingKeywords && analysisResult.missingKeywords.length > 0;
 
         return (
             <div id="results-area" className="bg-white shadow-md rounded-lg p-6 animate-fade-in mt-8">
@@ -166,6 +205,37 @@ const AnalysisPage: React.FC = () => {
                         </div>
                     </div>
                 )}
+
+                {/* --- Resume Optimizer Section --- */}
+                <div className="mt-8 pt-6 border-t">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-800">Automated Resume Tailoring</h3>
+                    {hasMissingKeywords ? (
+                        <>
+                            <p className="mb-4 text-gray-600">Your resume is missing some keywords. Let our AI tailor it for you in one click.</p>
+                            <button onClick={handleOptimizeResume} disabled={isOptimizing} className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-full transition-transform transform hover:scale-105">
+                                {isOptimizing ? 'Tailoring Your Resume...' : 'Auto-Tailor My Resume'}
+                            </button>
+                        </>
+                    ) : (
+                        <p className="text-green-600 font-semibold">Great news! Your resume already contains all the key skills from the job description.</p>
+                    )}
+
+                    {isOptimizing && <div className="mt-4 text-center">Optimizing... Please wait.</div>}
+
+                    {optimizedResume && (
+                        <div className="mt-6 animate-fade-in">
+                            <h4 className="text-xl font-semibold mb-3">Your Optimized Resume:</h4>
+                            <textarea
+                                readOnly
+                                value={optimizedResume}
+                                className="w-full h-96 p-4 border rounded-md bg-gray-50 font-mono text-sm"
+                            />
+                            <button onClick={() => toast.success("Save functionality coming soon!")} className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                Save Optimized Resume
+                            {/* Save Optimized Resume button removed until functionality is implemented */}
+                        </div>
+                    )}
+                </div>
             </div>
         );
     };
