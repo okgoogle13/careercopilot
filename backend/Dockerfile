@@ -16,5 +16,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the application code
 COPY ./app /usr/src/app/app
 
-# Start the FastAPI app using Uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Original startup command, temporarily disabled for debugging
+# CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+# --- TEMPORARY DEBUGGING COMMAND ---
+# This command keeps the container alive so we can inspect its logs and file system.
+CMD ["sh", "-c", "echo 'Container is in debug mode. Keeping alive with a sleep loop.' && while true; do sleep 3600; done"]
