@@ -22,6 +22,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+      
+      - name: 'Debug: List Files in Frontend Directory'
+        run: ls -laR
+        working-directory: ./frontend
+
       - name: Install Frontend Dependencies
         run: npm ci
         working-directory: ./frontend
