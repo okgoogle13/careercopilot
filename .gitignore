@@ -1,8 +1,37 @@
-# Placeholder .gitignore
-node_modules/
+# Node
+/node_modules
+/frontend/dist
+.npm
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+/backend/.venv
+/backend/pip-selfcheck.json
+pip-freeze.txt
+
+# Environment
 .env
+.env.*
+!.env.example
+
+# IDE / Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
 .DS_Store
-dist/
-build/
-.cache/
-*.log
+Thumbs.db
