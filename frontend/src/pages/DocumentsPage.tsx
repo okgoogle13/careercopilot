@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from '../firebase-config';
@@ -8,8 +8,6 @@ const DocumentsPage: React.FC = () => {
     const [documents, setDocuments] = useState<any[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [uploading, setUploading] = useState<boolean>(false);
     const [userTheme, setUserTheme] = useState<string>('professional');
 
 
@@ -48,47 +46,6 @@ const DocumentsPage: React.FC = () => {
         });
         return () => unsubscribe();
     }, []);
-
-    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files.length > 0) {
-            setSelectedFile(e.target.files[0]);
-        }
-    };
-
-    const handleUpload = async () => {
-        const auth = getAuth();
-        const user = auth.currentUser;
-        if (!selectedFile || !user) {
-            toast.error("Please select a file to upload.");
-            return;
-        }
-
-        setUploading(true);
-        try {
-            const token = await user.getIdToken();
-            const formData = new FormData();
-            formData.append('files', selectedFile, selectedFile.name);
-
-            const response = await fetch('/api/v1/documents/upload', {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${token}` },
-                body: formData,
-            });
-
-            if (!response.ok) throw new Error('Upload failed');
-            
-            toast.success('File uploaded successfully!');
-            await fetchDocuments(user);
-            setSelectedFile(null);
-            const fileInput = document.getElementById('file-upload') as HTMLInputElement;
-            if (fileInput) fileInput.value = '';
-
-        } catch (err: any) {
-            toast.error(err.message || 'An error occurred during upload.');
-        } finally {
-            setUploading(false);
-        }
-    };
 
     const handleDownload = async (documentId: string, originalFilename: string) => {
         const auth = getAuth();

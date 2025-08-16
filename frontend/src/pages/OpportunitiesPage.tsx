@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import toast from 'react-hot-toast';
 
 // Simple Calendar Icon SVG
 const CalendarIcon = () => (

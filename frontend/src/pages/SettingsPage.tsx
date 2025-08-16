@@ -4,24 +4,9 @@ import { db } from '../firebase-config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 
-const THEMES = [
-    { id: 'professional', name: 'Professional', imageUrl: 'https://via.placeholder.com/150/DDEBF7/8498B5?text=Pro' },
-    { id: 'modern', name: 'Modern', imageUrl: 'https://via.placeholder.com/150/DDEBF7/8498B5?text=Modern' },
-    { id: 'creative', name: 'Creative', imageUrl: 'https://via.placeholder.com/150/DDEBF7/8498B5?text=Creative' },
-];
-
-interface VoiceProfile {
-    tone: string[];
-    common_phrases: string[];
-    skill_keywords: string[];
-}
-
 const SettingsPage: React.FC = () => {
     const [user, setUser] = useState<User | null>(null);
     const [integrationStatus, setIntegrationStatus] = useState<string>('Not Connected');
-    const [selectedTheme, setSelectedTheme] = useState<string>('professional');
-    const [voiceProfile, setVoiceProfile] = useState<VoiceProfile | null>(null);
-    const [isGeneratingVoiceProfile, setIsGeneratingVoiceProfile] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(true);
     const [isDisconnecting, setIsDisconnecting] = useState<boolean>(false);
     const [isScanning, setIsScanning] = useState<boolean>(false);
@@ -36,8 +21,6 @@ const SettingsPage: React.FC = () => {
                     if (docSnap.exists()) {
                         const data = docSnap.data();
                         setIntegrationStatus(data.integrations?.google_gmail?.connected ? 'Connected' : 'Not Connected');
-                        setSelectedTheme(data.preferences?.themeId || 'professional');
-                        setVoiceProfile(data.voice_profile || null);
                     }
                     setLoading(false);
                 });
@@ -93,48 +76,6 @@ const SettingsPage: React.FC = () => {
             toast.error('An error occurred while scanning emails.');
         } finally {
             setIsScanning(false);
-        }
-    };
-
-    const handleThemeSelect = async (themeId: string) => {
-        if (!user) {
-            toast.error("You must be logged in to change settings.");
-            return;
-        }
-        setSelectedTheme(themeId);
-        try {
-            const token = await user.getIdToken();
-            await fetch('/api/v1/settings/theme', {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-                body: JSON.stringify({ theme_id: themeId }),
-            });
-            toast.success("Theme preference saved!");
-        } catch (error) {
-            toast.error("Could not save theme preference.");
-        }
-    };
-
-    const handleGenerateVoiceProfile = async () => {
-        if (!user) {
-            toast.error("You must be logged in.");
-            return;
-        }
-        setIsGeneratingVoiceProfile(true);
-        try {
-            const token = await user.getIdToken();
-            const response = await fetch('/api/v1/profile/generate-voice-profile', { method: 'POST', headers: { 'Authorization': `Bearer ${token}` } });
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || "Failed to generate voice profile.");
-            }
-            const newVoiceProfile = await response.json();
-            setVoiceProfile(newVoiceProfile);
-            toast.success("Successfully generated and saved your voice profile!");
-        } catch (error: any) {
-            toast.error(error.message);
-        } finally {
-            setIsGeneratingVoiceProfile(false);
         }
     };
     
