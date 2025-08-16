@@ -17,5 +17,9 @@ COPY ./app /app/app
 # 6. Expose the port the app runs on
 EXPOSE 8080
 
-# The command to run the application using Python's module syntax for reliability.
-CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Original startup command, temporarily disabled for debugging
+# CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+
+# --- TEMPORARY DEBUGGING COMMAND ---
+# This command keeps the container alive so we can get a shell inside it.
+CMD ["sh", "-c", "echo 'Container is in debug mode. Keeping alive...' && while true; do sleep 3600; done"]

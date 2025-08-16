@@ -1,34 +1,57 @@
-name: CI - Build and Test
+name: Python CI/CD
 
 on:
+  push:
+    branches: [ "main", "develop" ]
   pull_request:
-    branches:
-      - develop
-      - main
+    branches: [ "main", "develop" ]
 
 jobs:
-  test-frontend:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Install Frontend Dependencies
-        run: npm install --prefix frontend
-      - name: Build Frontend
-        run: npm run build --prefix frontend
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+    - name: Lint with black
+      run: |
+        black --check .
+    - name: Test with pytest
+      run: |
+        pytest
 
-  test-backend:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: build
     runs-on: ubuntu-latest
+    
     steps:
-      - uses: actions/checkout@v5
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - name: Install Backend Dependencies
-        run: pip install -r backend/requirements.txt
-      - name: Run Linter
-        run: black --check backend
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Google Auth
+      id: auth
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}'
+
+    - name: Set up Cloud SDK
+      uses: 'google-github-actions/setup-gcloud@v2'
+
+    - name: Build and push Docker image
+      run: |-
+        gcloud builds submit --tag gcr.io/careercopilot-staging/careercopilot-backend ./backend
+
+    - name: Deploy to Cloud Run
+      run: |-
+        gcloud run deploy careercopilot-backend \
+          --image gcr.io/careercopilot-staging/careercopilot-backend \
+          --platform managed \
+          --region us-central1 \
+          --allow-unauthenticated
