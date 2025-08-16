@@ -1,5 +1,5 @@
 import genkit
-from genkit.plugins import googleai
+from genkit_plugins import googleai
 import os
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
