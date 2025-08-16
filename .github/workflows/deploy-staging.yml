@@ -41,4 +41,5 @@ jobs:
             --region us-central1 \
             --platform managed \
             --allow-unauthenticated \
+            --update-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest \
             --project=careercopilot-staging
