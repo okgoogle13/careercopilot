@@ -3,7 +3,7 @@ name: Build and Deploy Backend to Staging
 on:
   push:
     branches:
-      - develop # CORRECT: Staging deployments should trigger from a 'develop' or 'staging' branch, not 'main'.
+      - develop
     paths:
       - 'backend/**'
       - '.github/workflows/deploy.yml'
@@ -18,15 +18,13 @@ env:
 
 jobs:
   # ======================================================================================
-  #  TEST JOB - Now includes secure authentication for tests that require it
+  #  TEST JOB - Authenticates to GCP for tests that require live services
   # ======================================================================================
   test:
     name: Run Tests and Coverage
     runs-on: ubuntu-latest
     permissions:
       contents: 'read'
-      # ADDED: id-token permission might be needed if you switch to WIF in the future
-      # For JSON keys it is not strictly required but good practice to define permissions.
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,7 +33,7 @@ jobs:
         id: auth
         uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS_JSON }}'
+          credentials_json: '${{ secrets.GCP_SA_KEY }}' # <-- UPDATED SECRET NAME
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -50,7 +48,6 @@ jobs:
           pip install pytest pytest-cov
 
       - name: Run tests
-        # CORRECT: No need to set GOOGLE_APPLICATION_CREDENTIALS. The 'auth' action handles it.
         run: |
           cd backend
           pytest --cov=. --cov-report=xml
@@ -62,16 +59,19 @@ jobs:
           file: ./backend/coverage.xml
 
   # ======================================================================================
-  #  BUILD AND DEPLOY JOB - No changes needed here, it was already correct.
+  #  BUILD AND DEPLOY JOB - The core deployment logic
   # ======================================================================================
   build-and-deploy:
     name: Build, Push, and Deploy
     runs-on: ubuntu-latest
-    needs: [test] # This is the quality gate
+    needs: [test]
     if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && needs.test.result == 'success')
     
     permissions:
       contents: 'read'
+
+    outputs:
+      service-url: ${{ steps.deploy.outputs.url }}
 
     steps:
       - name: Checkout code
@@ -84,7 +84,7 @@ jobs:
         id: deploy-auth
         uses: 'google-github-actions/auth@v2'
         with:
-          credentials_json: '${{ secrets.GCP_CREDENTIALS_JSON }}'
+          credentials_json: '${{ secrets.GCP_SA_KEY }}' # <-- UPDATED SECRET NAME
 
       - name: Set up Google Cloud SDK
         uses: 'google-github-actions/setup-gcloud@v2'
@@ -93,6 +93,7 @@ jobs:
         run: gcloud auth configure-docker ${{ env.REGISTRY }}
 
       - name: Build and Push Docker Image
+        id: build
         uses: docker/build-push-action@v5
         with:
           context: ./backend
@@ -102,8 +103,36 @@ jobs:
           cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache,mode=max
 
       - name: Deploy to Cloud Run
+        id: deploy
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE_NAME }}
           region: ${{ env.REGION }}
           image: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+          project_id: ${{ env.PROJECT_ID }}
+          flags: >-
+            --platform=managed
+            --allow-unauthenticated
+            --port=8000
+            --execution-environment=gen2
+            --cpu-boost
+            --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest
+            --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO"
+
+      - name: Wait for service to be ready and run Smoke Test
+        run: |
+          SERVICE_URL=${{ steps.deploy.outputs.url }}
+          echo "Waiting for service to be ready at: $SERVICE_URL"
+          
+          for i in {1..30}; do
+            STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "$SERVICE_URL/health")
+            if [ "$STATUS_CODE" -eq 200 ]; then
+              echo "✅ Service is ready and health check passed!"
+              exit 0
+            fi
+            echo "Waiting... (attempt $i/30, status: $STATUS_CODE)"
+            sleep 10
+          done
+          
+          echo "❌ Service failed to become ready or pass health check within 5 minutes"
+          exit 1
