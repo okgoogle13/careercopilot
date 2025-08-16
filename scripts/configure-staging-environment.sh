@@ -18,7 +18,7 @@ export STAGING_SA_DEPLOYER_NAME="github-actions-staging"
 export STAGING_SA_DEPLOYER_EMAIL="${STAGING_SA_DEPLOYER_NAME}@${STAGING_PROJECT_ID}.iam.gserviceaccount.com"
 export STAGING_SA_RUNTIME_NAME="careercopilot-backend-staging"
 export STAGING_SA_RUNTIME_EMAIL="${STAGING_SA_RUNTIME_NAME}@${STAGING_PROJECT_ID}.iam.gserviceaccount.com"
-export REPO_NAME="careercopilot-repo"
+export REPO_NAME="backend"
 
 # --- SCRIPT START ---
 
