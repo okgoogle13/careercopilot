@@ -12,7 +12,7 @@ on:
 env:
   PROJECT_ID: careercopilot-staging
   REGION: us-central1
-  SERVICE_NAME: careercopilot-backend-staging
+  SERVICE_NAME: careercopilot-repo
   REGISTRY: us-central1-docker.pkg.dev
   REPOSITORY: careercopilot-repo
 
@@ -33,19 +33,14 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Create Python virtual environment
-        run: python3.11 -m venv ./backend/.venv
-
-      - name: Activate venv and install dependencies
+      - name: Install dependencies
         run: |
-          source ./backend/.venv/bin/activate
-          pip install --upgrade pip
-          pip install -r ./backend/requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
           pip install pytest pytest-cov
 
       - name: Run tests with coverage
         run: |
-          source ./backend/.venv/bin/activate
           cd backend
           pytest --cov=. --cov-report=xml
 
@@ -58,5 +53,69 @@ jobs:
           name: backend-coverage-report
 
   # ======================================================================================
+  #  SECURITY SCAN JOB - Runs in parallel with the test job
+  # ======================================================================================
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-
+      - name: Run Trivy vulnerability scanner on filesystem
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: './backend'
+          format: 'sarif'
+          output: 'trivy-fs-results.sarif'
+          severity: 'HIGH,CRITICAL'
+
+      - name: Upload Trivy FS scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-fs-results.sarif'
+
+  # ======================================================================================
+  #  DEPLOY JOB - Runs only if tests and security scans pass on the develop branch
+  # ======================================================================================
+  deploy:
+    name: Build, Push and Deploy
+    needs: [test, security]
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          workload_identity_provider: '${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT }}'
+
+      - name: Build and Push Docker Image
+        run: |-
+          gcloud builds submit ./backend \
+            --tag ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}:${{ github.sha }} \
+            --project=${{ env.PROJECT_ID }}
+
+      - name: Deploy to Cloud Run
+        uses: 'google-github-actions/deploy-cloudrun@v2'
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.REGION }}
+          image: ${{ env.REGISTRY }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}:${{ github.sha }}
+          project_id: ${{ env.PROJECT_ID }}
+          flags: >-
+            --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest
+            --allow-unauthenticated
