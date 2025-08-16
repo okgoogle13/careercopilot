@@ -1,5 +1,8 @@
 {
-  "firebase_hosting": {},
+  "firebase_hosting": {
+    "deploymentHostingUrl": "https://careercopilot-staging.web.app"
+  },
   "cloud_run_deploy": {},
-  "gemini_api": {}
+  "gemini_api": {},
+  "secrets_manager": {}
 }
