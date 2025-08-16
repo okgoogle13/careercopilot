@@ -35,11 +35,12 @@ jobs:
             --project=careercopilot-staging
             
       - name: Deploy to Cloud Run
-        run: |-
-          gcloud run deploy careercopilot-backend-staging \
-            --image us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest \
-            --region us-central1 \
-            --platform managed \
-            --allow-unauthenticated \
-            --update-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest \
-            --project=careercopilot-staging
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: careercopilot-backend-staging
+          region: us-central1
+          image: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest
+          project_id: careercopilot-staging
+          flags: >-
+            --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest
+            --allow-unauthenticated
