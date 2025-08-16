@@ -1,21 +1,17 @@
-# 1. Use the official, required Python version
-FROM python:3.11-slim
+# Use the official, required Python version
+FROM python:3.13-slim
 
-# 2. Set a consistent working directory
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
-# 3. Copy only the requirements file first to leverage Docker layer caching
-COPY ./requirements.txt /app/requirements.txt
-COPY ./requirements.lock /app/requirements.lock
+# Copy the requirements file into the container at /usr/src/app
+COPY requirements.txt ./
 
-# 4. Install the dependencies
-RUN pip install --no-cache-dir -r requirements.lock
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# 5. Copy the entire application source code into the container
-COPY ./app /app/app
+# Copy the rest of the backend application code
+COPY ./app /usr/src/app/app
 
-# 6. Expose the port the app runs on
-EXPOSE 8080
-
-# The command to run the application using Python's module syntax for reliability.
-CMD ["python", "-m", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+# Run app.main:app when the container launches
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
