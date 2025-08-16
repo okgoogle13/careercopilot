@@ -9,9 +9,11 @@ import json
 
 router = APIRouter()
 
+
 class ResumeComparisonRequest(BaseModel):
     document_id: str
     job_description_text: str
+
 
 def get_user_uid_for_limiter(request: Request) -> str:
     """
@@ -23,7 +25,6 @@ def get_user_uid_for_limiter(request: Request) -> str:
     # This is a bit of a workaround to get the uid into the key function.
     # A more robust solution might involve a custom dependency that sets request.state.user
     # For now, we assume the dependency adds it.
-    # Let's adjust the main dependency to do this.
     return request.state.user_uid
 
 
@@ -41,7 +42,7 @@ async def analyze_job(
 
         # Convert the string result to a JSON object
         analysis_result = json.loads(analysis_result_str)
-        
+
         return analysis_result
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
@@ -50,7 +51,7 @@ async def analyze_job(
 @router.post("/compare-resume")
 @limiter.limit("5/minute")
 async def compare_resume(
-    request: Request, # Add Request to access its state
+    request: Request,  # Add Request to access its state
     body: ResumeComparisonRequest,
     uid: str = Depends(get_current_user),
 ):
@@ -59,29 +60,35 @@ async def compare_resume(
     """
     # Manually store uid in request state for the limiter to access
     request.state.user_uid = uid
-    
+
     try:
         # Step A: Analyze the job description
         job_analysis_str = await analyze_job_description.run(body.job_description_text)
         job_analysis_data = json.loads(job_analysis_str)
 
         # Step B: Fetch the user's resume text from Firestore
-        doc_ref = db.collection("users").document(uid).collection("documents").document(body.document_id)
+        doc_ref = (
+            db.collection("users")
+            .document(uid)
+            .collection("documents")
+            .document(body.document_id)
+        )
         doc = doc_ref.get()
         if not doc.exists:
             raise HTTPException(status_code=404, detail="Resume document not found")
-        
+
         resume_text = doc.to_dict().get("extractedText")
         if not resume_text:
             raise HTTPException(status_code=400, detail="Resume has no extracted text.")
 
         # Step C: Compare the resume to the job analysis
         comparison_result_str = await compare_resume_to_job.run(
-            resume_text=resume_text,
-            job_analysis_data=job_analysis_data
+            resume_text=resume_text, job_analysis_data=job_analysis_data
         )
         comparison_result = json.loads(comparison_result_str)
 
         return comparison_result
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"An error occurred during comparison: {e}")
+        raise HTTPException(
+            status_code=500, detail=f"An error occurred during comparison: {e}"
+        )

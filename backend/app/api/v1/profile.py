@@ -7,8 +7,8 @@ import math
 
 router = APIRouter()
 
-# ... (existing GET and PUT endpoints for profile) ...
 
+# ... (existing GET and PUT endpoints for profile) ...
 @router.post("/generate-voice-profile")
 async def generate_and_save_voice_profile(uid: str = Depends(get_current_user)):
     """
@@ -20,13 +20,16 @@ async def generate_and_save_voice_profile(uid: str = Depends(get_current_user)):
         voice_profile_data = await generateVoiceProfile.run(uid)
 
         if not voice_profile_data:
-            raise HTTPException(status_code=404, detail="Could not generate voice profile. Ensure you have uploaded at least one resume or document.")
+            raise HTTPException(
+                status_code=404,
+                detail="Could not generate voice profile. Ensure you have uploaded at least one resume or document.",
+            )
 
         # 2. Save the resulting JSON object to the user's profile
         user_doc_ref = db.collection("users").document(uid)
-        user_doc_ref.set({
-            "voice_profile": voice_profile_data.dict()  # Use .dict() if it's a Pydantic model
-        }, merge=True)
+        user_doc_ref.set(
+            {"voice_profile": voice_profile_data.dict()}, merge=True
+        )  # Use .dict() if it's a Pydantic model
 
         # 3. Return the newly generated voice_profile data
         return voice_profile_data
@@ -35,6 +38,8 @@ async def generate_and_save_voice_profile(uid: str = Depends(get_current_user)):
         # Custom error handling for specific flow exceptions can be added here
         raise HTTPException(
             status_code=500,
-            detail=f"An unexpected error occurred during voice profile generation: {str(e)}"
+            detail=f"An unexpected error occurred during voice profile generation: {str(e)}",
         )
+
+
 # ... (existing profile variation endpoints) ...

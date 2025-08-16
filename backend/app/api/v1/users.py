@@ -6,6 +6,7 @@ from google.cloud.firestore import SERVER_TIMESTAMP
 
 router = APIRouter()
 
+
 @router.post("/me")
 async def create_user_profile(uid: str = Depends(get_current_user)):
     """
@@ -16,8 +17,7 @@ async def create_user_profile(uid: str = Depends(get_current_user)):
         user_ref = db.collection("users").document(uid)
         if user_ref.get().exists:
             raise HTTPException(
-                status_code=409,
-                detail="User profile already exists"
+                status_code=409, detail="User profile already exists"
             )
 
         # Get user data from Firebase Auth
@@ -25,10 +25,7 @@ async def create_user_profile(uid: str = Depends(get_current_user)):
         email = user_record.email
 
         # Create the user profile document
-        profile_data = {
-            "email": email,
-            "createdAt": SERVER_TIMESTAMP
-        }
+        profile_data = {"email": email, "createdAt": SERVER_TIMESTAMP}
         user_ref.set(profile_data)
 
         # Retrieve the created document to return it
