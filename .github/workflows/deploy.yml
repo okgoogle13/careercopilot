@@ -4,19 +4,15 @@ on:
   push:
     branches:
       - develop
-    paths:
+    paths: # Only trigger on changes to the backend
       - 'backend/**'
       - '.github/workflows/deploy.yml'
 
 jobs:
   build-push-and-deploy:
-    name: Build, Push, and Deploy to Cloud Run
+    name: Build, Push, and Deploy
     runs-on: ubuntu-latest
     
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -24,13 +20,10 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: 'google-github-actions/auth@v2'
         with:
-          workload_identity_provider: '${{ secrets.GCP_WIF_PROVIDER }}'
-          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT }}'
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - name: Set up Google Cloud SDK
         uses: 'google-github-actions/setup-gcloud@v2'
-        with:
-          project_id: 'careercopilot-staging'
 
       - name: Configure Docker
         run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
@@ -41,12 +34,13 @@ jobs:
             --tag us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest \
             --project=careercopilot-staging
             
-      - name: Deploy to Cloud Run with Secret
-        run: |-
-          gcloud run deploy careercopilot-backend-staging \
-            --image us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest \
-            --region us-central1 \
-            --platform managed \
-            --allow-unauthenticated \
-            --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest \
-            --project=careercopilot-staging
+      - name: Deploy to Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: careercopilot-repo
+          region: us-central1
+          image: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest
+          project_id: careercopilot-staging
+          flags: >-
+            --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest
+            --allow-unauthenticated
