@@ -1,156 +1,52 @@
-# This is the name of the GitHub Actions workflow.
-name: CD - Deploy to Staging and Production
+name: Build and Deploy Backend to Staging
 
-# This workflow is triggered on any push to the 'develop' or 'main' branches.
 on:
   push:
     branches:
       - develop
-      - main
+    paths:
+      - 'backend/**'
+      - '.github/workflows/deploy.yml'
 
 jobs:
-  # ===================================================================
-  #  STAGING DEPLOYMENT JOB
-  # ===================================================================
-  deploy-staging:
-    name: Deploy to Staging
+  build-push-and-deploy:
+    name: Build, Push, and Deploy to Cloud Run
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop'
-    environment: staging
+    
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      # --- Frontend Deployment (Staging) ---
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Authenticate to Google Cloud
+        uses: 'google-github-actions/auth@v2'
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          workload_identity_provider: '${{ secrets.GCP_WIF_PROVIDER }}'
+          service_account: '${{ secrets.GCP_SERVICE_ACCOUNT }}'
 
-      - name: Install Frontend Dependencies
-        run: npm ci
-        working-directory: ./frontend
-
-      - name: Build Frontend
-        run: npm run build
-        working-directory: ./frontend
-
-      - name: Deploy Frontend to Firebase Hosting (Staging)
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Set up Google Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v2'
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'
-          projectId: '${{ secrets.GCP_STAGING_PROJECT_ID }}'
-          entryPoint: ./frontend
-          channelId: live
+          project_id: 'careercopilot-staging'
 
-      # --- Backend Deployment (Staging) ---
-      - name: Authenticate to Google Cloud (Staging)
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: '${{ secrets.GCP_STAGING_SA_KEY }}'
+      - name: Configure Docker
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
 
-      - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
-      - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev # <-- CHANGED
-
-      - name: Build and Push Docker Image (Staging)
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend
-          push: true
-          tags: us-central1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }} # <-- CHANGED
-
-      - name: Deploy Backend to Cloud Run (Staging)
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: 'careercopilot-backend-staging'
-          region: 'us-central1' # <-- CHANGED
-          image: us-central1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }} # <-- CHANGED
-          flags: '--service-account="careercopilot-backend-staging@${{ secrets.GCP_STAGING_PROJECT_ID }}.iam.gserviceaccount.com"'
-          env_vars: |
-            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
-            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
-            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
-            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
-            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }}
-            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}
-
-  # ===================================================================
-  #  PRODUCTION DEPLOYMENT JOB
-  # ===================================================================
-  deploy-production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    environment: production
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      # --- Frontend Deployment (Production) ---
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
-
-      - name: Install Frontend Dependencies
-        run: npm ci
-        working-directory: ./frontend
-
-      - name: Build Frontend
-        run: npm run build
-        working-directory: ./frontend
-
-      - name: Deploy Frontend to Firebase Hosting (Production)
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-          projectId: '${{ secrets.GCP_PROJECT_ID }}'
-          entryPoint: ./frontend
-          channelId: live
-
-      # --- Backend Deployment (Production) ---
-      - name: Authenticate to Google Cloud (Production)
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: '${{ secrets.GCP_SA_KEY }}'
-
-      - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
-      - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev # <-- CHANGED
-
-      - name: Build and Push Docker Image (Production)
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend
-          push: true
-          tags: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }} # <-- CHANGED
-
-      - name: Deploy Backend to Cloud Run (Production)
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: 'careercopilot-backend'
-          region: 'us-central1' # <-- CHANGED
-          image: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }} # <-- CHANGED
-          flags: '--service-account="careercopilot-backend-prod@${{ secrets.GCP_PROJECT_ID }}.iam.gserviceaccount.com"'
-          env_vars: |
-            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
-            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
-            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
-            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
-            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }}
-            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}
+      - name: Build and Push Docker Image
+        run: |-
+          gcloud builds submit ./backend \
+            --tag us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest \
+            --project=careercopilot-staging
+            
+      - name: Deploy to Cloud Run with Secret
+        run: |-
+          gcloud run deploy careercopilot-backend-staging \
+            --image us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-secrets=GEMINI_API_KEY=GEMINI_API_KEY:latest \
+            --project=careercopilot-staging
