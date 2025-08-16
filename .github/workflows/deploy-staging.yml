@@ -1,33 +1,44 @@
-name: Deploy Staging
+name: Build and Deploy Backend to Staging
 
 on:
   push:
     branches:
       - develop
+    paths: # Only trigger on changes to the backend
+      - 'backend/**'
+      - '.github/workflows/deploy-staging.yml'
 
 jobs:
-  build-and-deploy:
+  build-push-and-deploy:
+    name: Build, Push, and Deploy
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
       - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
+        uses: 'google-github-actions/auth@v2'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-      - name: Ensure Artifact Registry Repository Exists
-        run: |
-          if ! gcloud artifacts repositories describe backend --location=us-central1 --project=careercopilot-staging > /dev/null 2>&1; then
-            gcloud artifacts repositories create backend \
-              --repository-format=docker \
-              --location=us-central1 \
-              --description="Docker repo for careercopilot" \
-              --project=careercopilot-staging
-          else
-            echo "Repository backend already exists."
-          fi
+      - name: Set up Google Cloud SDK
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+      - name: Build and Push Docker Image
+        run: |-
+          gcloud builds submit ./backend \
+            --tag us-central1-docker.pkg.dev/careercopilot-staging/backend:latest \
+            --project=careercopilot-staging
+            
+      - name: Deploy to Cloud Run
+        run: |-
+          gcloud run deploy careercopilot-backend-staging \
+            --image us-central1-docker.pkg.dev/careercopilot-staging/backend:latest \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated \
+            --project=careercopilot-staging

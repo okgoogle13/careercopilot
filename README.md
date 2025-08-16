@@ -36,4 +36,4 @@ which includes testing and linting tools.
 
 **Important:** You must activate the virtual environment in your terminal session before running the application.
 
-
+<!-- This is a non-functional change to trigger the CI/CD workflow -->
