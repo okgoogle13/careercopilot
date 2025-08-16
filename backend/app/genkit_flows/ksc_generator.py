@@ -1,4 +1,4 @@
-    import genkit
+import genkit
 from genkit.plugins import googleai
 import os
 from dotenv import load_dotenv
