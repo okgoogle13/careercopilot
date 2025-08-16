@@ -1,26 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { doc, getDoc } from "firebase/firestore";
-import { db } from '../firebase-config';
 import toast from 'react-hot-toast';
 
-const DocumentsPage: React.FC = () => {
-    const [documents, setDocuments] = useState<any[]>([]);
+interface Profile {
+    id: string;
+    name: string;
+    keywords?: string[];
+    skills?: string[];
+}
+
+const DashboardPage: React.FC = () => {
+    const [profiles, setProfiles] = useState<Profile[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [userTheme, setUserTheme] = useState<string>('professional');
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    
+    // State for the form, used for both create and update
+    const [currentProfile, setCurrentProfile] = useState<Profile | null>(null);
+    const [profileName, setProfileName] = useState<string>('');
+    const [profileKeywords, setProfileKeywords] = useState<string>('');
+    const [profileSkills, setProfileSkills] = useState<string>('');
+    const [nameError, setNameError] = useState<string>('');
 
-
-    const fetchDocuments = async (user: User) => {
+    const fetchProfiles = async (user: User) => {
         try {
             setLoading(true);
             const token = await user.getIdToken();
-            const response = await fetch('/api/v1/documents', {
+            const response = await fetch('/api/v1/profile/variations', {
                 headers: { 'Authorization': `Bearer ${token}` },
             });
-            if (!response.ok) throw new Error('Failed to fetch documents');
+            if (!response.ok) throw new Error('Failed to fetch profile variations');
             const data = await response.json();
-            setDocuments(data);
+            setProfiles(data);
         } catch (err: any) {
             setError(err.message);
         } finally {
@@ -30,15 +41,9 @@ const DocumentsPage: React.FC = () => {
 
     useEffect(() => {
         const auth = getAuth();
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-                await fetchDocuments(user);
-                // Fetch user theme preference
-                const userDocRef = doc(db, 'users', user.uid);
-                const docSnap = await getDoc(userDocRef);
-                if (docSnap.exists() && docSnap.data().preferences?.themeId) {
-                    setUserTheme(docSnap.data().preferences.themeId);
-                }
+                fetchProfiles(user);
             } else {
                 setLoading(false);
                 setError('You must be logged in to view this page.');
@@ -47,89 +52,263 @@ const DocumentsPage: React.FC = () => {
         return () => unsubscribe();
     }, []);
 
-    const handleDownload = async (documentId: string, originalFilename: string) => {
+    const openModalForCreate = () => {
+        setCurrentProfile(null);
+        setProfileName('');
+        setProfileKeywords('');
+        setProfileSkills('');
+        setNameError('');
+        setIsModalOpen(true);
+    };
+
+    const openModalForEdit = (profile: Profile) => {
+        setCurrentProfile(profile);
+        setProfileName(profile.name);
+        setProfileKeywords((profile.keywords || []).join(', '));
+        setProfileSkills((profile.skills || []).join(', '));
+        setNameError('');
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = async (profileId: string) => {
+        if (!window.confirm('Are you sure you want to delete this profile variation?')) {
+            return;
+        }
+        const auth = getAuth();
+        const user = auth.currentUser;
+        if (!user) return;
+
+        try {
+            const token = await user.getIdToken();
+            const response = await fetch(`/api/v1/profile/variations/${profileId}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to delete profile');
+            }
+            
+            setProfiles(profiles.filter(p => p.id !== profileId));
+            toast.success('Profile variation deleted.');
+        } catch (err: any) {
+            toast.error('Failed to delete profile.');
+        }
+    };
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault();
+        
+        if (!profileName.trim()) {
+            setNameError('Profile name cannot be empty');
+            return;
+        }
+        
         const auth = getAuth();
         const user = auth.currentUser;
         if (!user) {
-            toast.error("You must be logged in to download files.");
+            toast.error('You must be logged in');
             return;
         }
 
         try {
             const token = await user.getIdToken();
-            // Append the user's selected theme to the download URL
-            const downloadUrl = `/api/v1/documents/${documentId}/download-pdf?theme=${userTheme}`;
-            const response = await fetch(downloadUrl, {
-                headers: { 'Authorization': `Bearer ${token}` },
+            const keywords = profileKeywords.split(',').map(k => k.trim()).filter(k => k);
+            const skills = profileSkills.split(',').map(s => s.trim()).filter(s => s);
+            const body = JSON.stringify({ name: profileName, keywords, skills });
+
+            const url = currentProfile
+                ? `/api/v1/profile/variations/${currentProfile.id}`
+                : '/api/v1/profile/variations';
+            
+            const method = currentProfile ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body,
             });
 
             if (!response.ok) {
-                throw new Error("PDF download failed.");
+                const errorData = await response.json();
+                throw new Error(errorData.detail || 'Failed to save profile.');
             }
 
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `${originalFilename.split('.')[0]}_${userTheme}.pdf`;
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            window.URL.revokeObjectURL(url);
-            toast.success("PDF download started!");
-
+            const savedProfile = await response.json();
+            if (currentProfile) {
+                setProfiles(profiles.map(p => p.id === savedProfile.id ? savedProfile : p));
+                toast.success('Profile updated successfully!');
+            } else {
+                setProfiles([...profiles, savedProfile]);
+                toast.success('Profile created successfully!');
+            }
+            setIsModalOpen(false);
         } catch (err: any) {
-            toast.error(err.message || "Failed to download PDF.");
+            toast.error(err.message || 'Failed to save profile.');
         }
     };
 
-    const formatDate = (timestamp: any) => {
-        if (!timestamp || !timestamp._seconds) return 'Date not available';
-        return new Date(timestamp._seconds * 1000).toLocaleDateString();
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setProfileName(e.target.value);
+        if (e.target.value.trim()) {
+            setNameError('');
+        }
     };
-    
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setCurrentProfile(null);
+        setProfileName('');
+        setProfileKeywords('');
+        setProfileSkills('');
+        setNameError('');
+    };
+
     const renderContent = () => {
-        if (loading) return <div className="p-4 text-center">Loading documents...</div>;
-        if (error) return <div className="p-4 text-center text-red-500">{error}</div>;
-        if (documents.length === 0) {
+        if (loading) return <div className="p-4 text-center">Loading profiles...</div>;
+        if (error) return <div className="p-4 text-center text-red-500">Error: {error}</div>;
+        if (profiles.length === 0) {
             return (
                 <div className="text-center p-10 border-2 border-dashed rounded-lg">
-                    <p className="text-gray-500">You haven't uploaded any documents. Click 'Upload' to add your first one.</p>
+                    <p className="text-gray-500">You haven't created any profile variations yet. Get started by clicking the 'Create New Profile Variation' button!</p>
                 </div>
             );
         }
         return (
-            <div className="bg-white shadow-md rounded-lg">
-                <ul className="divide-y divide-gray-200">
-                    {documents.map((doc) => (
-                        <li key={doc.id} className="px-6 py-4 flex items-center justify-between">
-                            <div>
-                                <span className="font-medium text-gray-900">{doc.originalFilename}</span>
-                                <span className="text-sm text-gray-500 block">Uploaded: {formatDate(doc.createdAt)}</span>
-                            </div>
-                            <button
-                                onClick={() => handleDownload(doc.id, doc.originalFilename)}
-                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {profiles.map((profile) => (
+                    <div key={profile.id} className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between">
+                        <div>
+                            <h2 className="text-xl font-semibold mb-2">{profile.name}</h2>
+                            {profile.keywords && profile.keywords.length > 0 && (
+                                <div className="mb-2">
+                                    <h4 className="text-sm font-medium text-gray-700">Keywords:</h4>
+                                    <div className="flex flex-wrap gap-1 mt-1">
+                                        {profile.keywords.map((keyword, index) => (
+                                            <span key={index} className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                                {keyword}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                            {profile.skills && profile.skills.length > 0 && (
+                                <div className="mb-3">
+                                    <h4 className="text-sm font-medium text-gray-700">Skills:</h4>
+                                    <div className="flex flex-wrap gap-1 mt-1">
+                                        {profile.skills.map((skill, index) => (
+                                            <span key={index} className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+                                                {skill}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className="flex justify-end gap-2">
+                            <button 
+                                onClick={() => openModalForEdit(profile)} 
+                                className="text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-3 rounded transition-colors"
                             >
-                                Download PDF
+                                Edit
                             </button>
-                        </li>
-                    ))}
-                </ul>
+                            <button 
+                                onClick={() => handleDelete(profile.id)} 
+                                className="text-sm bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded transition-colors"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                ))}
             </div>
         );
-    }
+    };
 
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">My Documents</h1>
-            <div className="bg-white shadow-md rounded-lg p-4 mb-6">
-                <h2 className="text-xl font-semibold mb-2">Upload New Document</h2>
-                {/* Upload form remains the same */}
+            <div className="flex justify-between items-center mb-4">
+                <h1 className="text-2xl font-bold">Your Profile Variations</h1>
+                <button 
+                    onClick={openModalForCreate} 
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors"
+                >
+                    Create New Profile Variation
+                </button>
             </div>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center z-50">
+                    <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
+                        <h2 className="text-2xl font-bold mb-4">{currentProfile ? 'Edit' : 'New'} Profile Variation</h2>
+                        <div>
+                            <div className="mb-4">
+                                <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                                    Name *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    value={profileName} 
+                                    onChange={handleNameChange} 
+                                    className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${nameError ? 'border-red-500' : ''}`}
+                                    placeholder="e.g., Software Developer Focus"
+                                />
+                                {nameError && <p className="text-red-500 text-xs italic mt-1">{nameError}</p>}
+                            </div>
+                            <div className="mb-4">
+                                <label htmlFor="keywords" className="block text-gray-700 text-sm font-bold mb-2">
+                                    Keywords (comma-separated)
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="keywords" 
+                                    value={profileKeywords} 
+                                    onChange={(e) => setProfileKeywords(e.target.value)} 
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                    placeholder="e.g., JavaScript, React, Node.js"
+                                />
+                            </div>
+                            <div className="mb-6">
+                                <label htmlFor="skills" className="block text-gray-700 text-sm font-bold mb-2">
+                                    Skills (comma-separated)
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="skills" 
+                                    value={profileSkills} 
+                                    onChange={(e) => setProfileSkills(e.target.value)} 
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                                    placeholder="e.g., Frontend Development, API Integration"
+                                />
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <button 
+                                    onClick={handleSubmit}
+                                    disabled={!profileName.trim()}
+                                    className="bg-blue-500 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors"
+                                >
+                                    {currentProfile ? 'Update' : 'Create'}
+                                </button>
+                                <button 
+                                    type="button" 
+                                    onClick={closeModal} 
+                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            
             {renderContent()}
         </div>
     );
 };
 
-export default DocumentsPage;
+export default DashboardPage;
