@@ -11,8 +11,7 @@ google-api-python-client>=2.126.0
 google-auth-oauthlib>=1.2.0
 
 # AI Orchestration
-genkit[googleai]>=0.4.0
-genkit-plugins
+google-genkit[googleai]>=0.4.0
 
 # Data Parsing & Generation
 pdfplumber>=0.11.0
