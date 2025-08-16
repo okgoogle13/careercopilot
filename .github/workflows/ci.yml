@@ -70,10 +70,13 @@ jobs:
         with:
           python-version: '3.11'
           cache: 'pip' # Cache pip dependencies to speed up subsequent runs.
-          cache-dependency-path: backend/requirements.lock
+          cache-dependency-path: backend/requirements-dev.txt
 
-      # Step 3: Install all backend dependencies, including development tools.
-      # It's crucial that this uses the '-dev.txt' file which contains 'black'.
+      # Step 3: Install all backend dependencies, INCLUDING development tools.
+      #
+      # THIS IS THE CRITICAL FIX: It uses requirements-dev.txt to ensure
+      # tools like 'black' and 'pytest' are available for the CI runner.
+      #
       - name: Install Backend Dependencies
         run: pip install -r backend/requirements-dev.txt
 
