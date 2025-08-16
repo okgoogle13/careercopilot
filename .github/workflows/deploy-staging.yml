@@ -31,13 +31,13 @@ jobs:
       - name: Build and Push Docker Image
         run: |-
           gcloud builds submit ./backend \
-            --tag us-central1-docker.pkg.dev/careercopilot-staging/backend:latest \
+            --tag us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest \
             --project=careercopilot-staging
             
       - name: Deploy to Cloud Run
         run: |-
           gcloud run deploy careercopilot-backend-staging \
-            --image us-central1-docker.pkg.dev/careercopilot-staging/backend:latest \
+            --image us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo:latest \
             --region us-central1 \
             --platform managed \
             --allow-unauthenticated \
