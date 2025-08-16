@@ -1,8 +1,13 @@
 {
   "compilerOptions": {
     "target": "es2020",
+    "useDefineForClassFields": true,
+    "lib": [
+      "es2020",
+      "dom",
+      "dom.iterable"
+    ],
     "module": "esnext",
-    "lib": ["es2020", "dom"],
     "checkJs": false,
     "jsx": "react-jsx",
     "strict": true,
@@ -14,7 +19,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["vitest/globals"]
+    "types": [
+      "vitest/globals"
+    ]
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
