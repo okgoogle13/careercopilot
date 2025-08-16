@@ -1,0 +1,33 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: Ensure Artifact Registry Repository Exists
+        run: |
+          if ! gcloud artifacts repositories describe backend --location=us-central1 --project=careercopilot-staging > /dev/null 2>&1; then
+            gcloud artifacts repositories create backend \
+              --repository-format=docker \
+              --location=us-central1 \
+              --description="Docker repo for careercopilot" \
+              --project=careercopilot-staging
+          else
+            echo "Repository backend already exists."
+          fi
