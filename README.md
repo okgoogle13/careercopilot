@@ -32,4 +32,8 @@ Once created and enabled, this Cloud Scheduler job will call your API endpoint e
 ### Run Backend Locally
 
 The backend has separate dependencies for production (`requirements.txt`) and development (`requirements-dev.txt`). For local development, you should install the development set.
+which includes testing and linting tools.
+
+**Important:** You must activate the virtual environment in your terminal session before running the application.
+
 
