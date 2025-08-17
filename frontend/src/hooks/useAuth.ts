@@ -15,7 +15,7 @@ interface AuthState {
 }
 
 // Helper to get correct API URL for Node/browser
-function getApiUrl(path: string) {
+function getApiUrl(path: string): string {
   if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
     return `http://localhost${path}`;
   }
@@ -25,7 +25,13 @@ function getApiUrl(path: string) {
 /**
  * Custom hook for handling authentication state
  */
-export function useAuth() {
+export function useAuth(): {
+  user: User | null;
+  isLoading: boolean;
+  error: Error | null;
+  login: (email: string, password: string) => Promise<User>;
+  logout: () => Promise<void>;
+} {
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
     isLoading: true,
@@ -34,17 +40,17 @@ export function useAuth() {
 
   useEffect(() => {
     // Simulate fetching the current user
-    const getCurrentUser = async () => {
+    async function getCurrentUser(): Promise<void> {
       try {
         // This would be a real API call in a production app
-  const response = await fetch(getApiUrl('/api/auth/me'));
-        
+        const response = await fetch(getApiUrl('/api/auth/me'));
+
         if (!response.ok) {
           throw new Error('Failed to authenticate');
         }
-        
-        const userData = await response.json();
-        
+
+        const userData: User = await response.json();
+
         setAuthState({
           user: userData,
           isLoading: false,
@@ -57,9 +63,9 @@ export function useAuth() {
           error: err instanceof Error ? err : new Error('Authentication error'),
         });
       }
-    };
+    }
 
-    getCurrentUser();
+    void getCurrentUser();
   }, []);
 
   const login = async (email: string, password: string): Promise<User> => {
@@ -77,8 +83,8 @@ export function useAuth() {
         throw new Error('Invalid credentials');
       }
       
-      const userData = await response.json();
-      
+      const userData: { user: User } = await response.json();
+
       setAuthState({
         user: userData.user,
         isLoading: false,
@@ -99,13 +105,6 @@ export function useAuth() {
     try {
       // This would be a real logout API call in a production app
   await fetch(getApiUrl('/api/auth/logout'), { method: 'POST' });
-// Helper to get correct API URL for Node/browser
-function getApiUrl(path: string) {
-  if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
-    return `http://localhost${path}`;
-  }
-  return path;
-}
       
       setAuthState({
         user: null,

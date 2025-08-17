@@ -1,5 +1,5 @@
 // src/components/ProfileCard.test.tsx
-import { describe, it, expect, beforeAll, afterEach } from 'vitest';
+import { describe, it, expect, afterEach } from 'vitest';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { server } from '../mocks/server';

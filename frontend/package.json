@@ -14,6 +14,7 @@
     "verify-tests": "node scripts/verify-tests.js",
     "test:watch": "vitest watch --config vitest.config.ts --environment jsdom",
     "tsc": "tsc --noEmit",
+  "typecheck": "tsc --noEmit",
     "test:ci": "vitest run --config vitest.config.ts --environment jsdom --coverage"
   },
   "dependencies": {

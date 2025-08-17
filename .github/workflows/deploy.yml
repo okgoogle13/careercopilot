@@ -10,8 +10,25 @@ on:
       - develop
 
 jobs:
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install frontend deps
+        run: npm ci
+        working-directory: ./frontend
+      - name: Typecheck frontend
+        run: npm run typecheck
+        working-directory: ./frontend
+
   build-and-deploy:
     runs-on: ubuntu-latest
+    needs: typecheck
     timeout-minutes: 30 # Set a reasonable timeout
     env:
       DOCKER_IMAGE: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend@sha256:b2154f5416a37f50e1fd3f79611faafd2dc3c0e6c53ea9acebb851e8300977bf

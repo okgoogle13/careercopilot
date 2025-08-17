@@ -19,6 +19,11 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["frontend/src", "frontend/vite.config.ts"],
+  "include": [
+    "frontend/src",
+    "frontend/vite.config.ts",
+    "frontend/vitest.config.ts",
+    "frontend/e2e/sample.cy.ts"
+  ],
   "references": [{ "path": "./frontend/tsconfig.node.json" }]
 }

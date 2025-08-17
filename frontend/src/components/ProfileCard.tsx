@@ -12,7 +12,7 @@ interface Profile {
 /**
  * A component that displays the user's profile information
  */
-export default function ProfileCard() {
+export default function ProfileCard(): JSX.Element {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);

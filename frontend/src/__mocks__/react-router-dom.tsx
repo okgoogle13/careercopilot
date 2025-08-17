@@ -22,6 +22,6 @@ const NavLink = ({ children, to, className, ...rest }: NavLinkProps): JSX.Elemen
 export { NavLink };
 
 // Re-export BrowserRouter for compatibility
-export const BrowserRouter = ({ children }: { children: React.ReactNode }) => (
+export const BrowserRouter = ({ children }: { children: React.ReactNode }): JSX.Element => (
   <div>{children}</div>
 );

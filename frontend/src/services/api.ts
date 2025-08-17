@@ -7,7 +7,7 @@
  * Fetches the user profile from the API
  * @returns A promise that resolves to the user profile
  */
-export async function fetchUserProfile() {
+export async function fetchUserProfile(): Promise<unknown> {
   // Use absolute URL in Node, relative in browser/jsdom
   let apiUrl = '/api/profile';
   if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
@@ -37,7 +37,7 @@ interface DocumentPayload {
  * @param document - The document payload
  * @returns A promise that resolves to the created document
  */
-export async function createDocument(document: DocumentPayload) {
+export async function createDocument(document: DocumentPayload): Promise<unknown> {
   const response = await fetch(getApiUrl('/api/documents'), {
     method: 'POST',
     headers: {
@@ -53,7 +53,7 @@ export async function createDocument(document: DocumentPayload) {
   return response.json();
 }
 
-function getApiUrl(path: string) {
+function getApiUrl(path: string): string {
   if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
     return `http://localhost${path}`;
   }

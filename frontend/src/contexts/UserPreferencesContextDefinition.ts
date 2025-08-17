@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-interface UserPreferences {
+export interface UserPreferences {
     themeId: string;
 }
 

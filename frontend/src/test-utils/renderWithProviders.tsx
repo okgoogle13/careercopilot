@@ -11,8 +11,8 @@ import { UserPreferencesProvider } from '../contexts/UserPreferencesContext';
 export function renderWithProviders(
   ui: ReactElement,
   options?: Omit<RenderOptions, 'wrapper'>
-) {
-  const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
+): ReturnType<typeof render> {
+  const AllTheProviders = ({ children }: { children: React.ReactNode }): ReactElement => {
     return (
       <BrowserRouter>
         <UserPreferencesProvider>
