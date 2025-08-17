@@ -1,2 +1,3 @@
 cd frontend || exit 0
-npx --no-install lint-staged --config .lintstagedrc.json
+# Force lint-staged to use the local .lintstagedrc.json and run in frontend cwd
+npx --no-install lint-staged --config ./.lintstagedrc.json --cwd .

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- \"$0\")/_/husky.sh"
+# Run lint-staged from the frontend subdirectory so it resolves the correct config
+cd "$(dirname -- \"$0\")/.."/.. || exit 0
+cd frontend || exit 0
+# Force lint-staged to use the local .lintstagedrc.json and run in frontend cwd
+npx --no-install lint-staged --config ./.lintstagedrc.json --cwd .
