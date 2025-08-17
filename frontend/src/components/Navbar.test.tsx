@@ -1,28 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import Navbar from './Navbar';
-import { BrowserRouter } from 'react-router-dom';
+import { mockReactRouterDom } from '../test-utils/test-mocks';
 
-// Mock react-router-dom
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
-  return {
-    ...actual,
-    NavLink: ({ children, to, className }: any) => (
-      <a href={to} className={className} data-testid={`navlink-${to}`}>
-        {children}
-      </a>
-    ),
-  };
-});
+// Mock react-router-dom using our test utility
+mockReactRouterDom();
 
 describe('Navbar', () => {
   it('renders the main navigation links', () => {
-    render(
-      <BrowserRouter>
-        <Navbar />
-      </BrowserRouter>
-    );
+    // Render without trying to manipulate document directly
+    render(<Navbar />);
 
     // Assert that the main navigation links are present
     expect(screen.getByText('Dashboard')).toBeInTheDocument();
