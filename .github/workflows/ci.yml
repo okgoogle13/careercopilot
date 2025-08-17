@@ -49,7 +49,12 @@ jobs:
         run: npm run lint
         working-directory: ./frontend
 
-      # Step 5: Run the production build command. This is the most important test.
+      # Step 5: Run the unit tests
+      - name: Run Tests
+        run: npm test -- --run
+        working-directory: ./frontend
+
+      # Step 6: Run the production build command. This is the most important test.
       # It checks for TypeScript errors and ensures the application is buildable.
       - name: Run Build
         run: npm run build
