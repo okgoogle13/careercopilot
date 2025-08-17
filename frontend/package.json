@@ -12,7 +12,9 @@
     "prepare": "husky",
     "pre-commit": "lint-staged",
     "verify-tests": "node scripts/verify-tests.js",
-    "test:watch": "vitest watch --config vitest.config.ts --environment jsdom"
+    "test:watch": "vitest watch --config vitest.config.ts --environment jsdom",
+    "tsc": "tsc --noEmit",
+    "test:ci": "vitest run --config vitest.config.ts --environment jsdom --coverage"
   },
   "dependencies": {
     "firebase": "^10.12.2",
@@ -34,15 +36,18 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "eslint-plugin-vitest": "^0.5.4",
     "husky": "^9.1.7",
     "jsdom": "^24.1.0",
     "lint-staged": "^16.1.5",
+    "msw": "^2.10.5",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.4.5",
-    "vite": "^5.2.13",
+    "cypress": "^13.6.0",
+    "@percy/cli": "^1.0.0",
+    "@percy/playwright": "^1.0.0",
     "vitest": "^1.6.0",
     "vitest-dom": "^0.1.1"
   },
-  "lint-staged": "{\"*.{ts,tsx}\":[\"eslint --fix\",\"tsc --noEmit\"]}"
 }

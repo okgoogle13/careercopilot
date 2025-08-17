@@ -1,0 +1,59 @@
+// src/services/api.ts
+/**
+ * API service for interacting with the backend
+ */
+
+/**
+ * Fetches the user profile from the API
+ * @returns A promise that resolves to the user profile
+ */
+export async function fetchUserProfile() {
+  // Use absolute URL in Node, relative in browser/jsdom
+  let apiUrl = '/api/profile';
+  if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
+    apiUrl = 'http://localhost/api/profile';
+  }
+  const response = await fetch(apiUrl);
+  
+  if (!response.ok) {
+    throw new Error(`Failed to fetch profile: ${response.status}`);
+  }
+  
+  return response.json();
+}
+
+/**
+ * Interface for document creation payload
+ */
+interface DocumentPayload {
+  title: string;
+  content: string;
+}
+
+/**
+ * Creates a new document
+ * @param document - The document payload
+ * @returns A promise that resolves to the created document
+ */
+export async function createDocument(document: DocumentPayload) {
+  const response = await fetch(getApiUrl('/api/documents'), {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(document),
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Failed to create document: ${response.status}`);
+  }
+  
+  return response.json();
+}
+
+function getApiUrl(path: string) {
+  if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
+    return `http://localhost${path}`;
+  }
+  return path;
+}

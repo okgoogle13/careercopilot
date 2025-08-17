@@ -1,7 +1,7 @@
 // This is a sample test that shows how to use the test mocks
 
 import { describe, it, expect, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+// import { render, screen } from '@testing-library/react';
 import { mockReactRouterDom } from '../test-utils/test-mocks';
 
 // Import the component you want to test

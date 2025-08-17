@@ -1,12 +1,21 @@
 // src/setupTests.ts
-import { afterEach, beforeAll, afterAll, vi } from 'vitest';
+import { afterEach, beforeAll, afterAll, vi, expect } from 'vitest';
 import { cleanup } from '@testing-library/react';
-import 'vitest-dom/extend-expect';
+import * as matchers from '@testing-library/jest-dom/matchers';
+import { server } from './mocks/server';
+// Import top-level hoisted mocks
+import './test-utils/global-mocks';
 
-// Set up a global error handler to catch unhandled promise rejections
+// Extend Vitest's expect with jest-dom matchers
+expect.extend(matchers);
+
+// Start the MSW server
 beforeAll(() => {
+  // Start the interception
+  server.listen({ onUnhandledRequest: 'warn' });
+  
   // Configure global settings
-  vi.useFakeTimers();
+  // Avoid fake timers in global setup to prevent async tests from stalling
   
   // Error handling for unhandled rejections
   const consoleError = console.error;
@@ -25,14 +34,16 @@ beforeAll(() => {
   };
 });
 
-// Automatically clean up after each test
+// Reset MSW handlers after each test
 afterEach(() => {
+  server.resetHandlers();
   cleanup();
   vi.clearAllMocks();
-  vi.clearAllTimers();
+  // Don't clear timers here as we didn't enable fake timers globally
 });
 
 // Clean up after all tests
 afterAll(() => {
-  vi.useRealTimers();
+  server.close();
+  // No fake timers were used globally
 });

@@ -9,6 +9,7 @@ We use Vitest with React Testing Library for component tests. The configuration 
 - Use JSDOM for simulating a browser environment
 - Support DOM testing assertions via vitest-dom
 - Automatically mock certain dependencies like React Router
+- Mock API requests using Mock Service Worker (MSW)
 
 ## Running Tests
 
@@ -20,6 +21,11 @@ npm test
 To run tests in watch mode during development:
 ```bash
 npm run test:watch
+```
+
+To run tests with coverage:
+```bash
+npm run test:ci
 ```
 
 To run tests for a specific file:
@@ -97,6 +103,54 @@ describe('AuthComponent', () => {
 });
 ```
 
+### Testing API Calls with Mock Service Worker
+
+We use MSW (Mock Service Worker) to intercept and mock API calls in tests:
+
+```tsx
+// src/components/ProfileComponent.test.tsx
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { http, HttpResponse } from 'msw';
+import { server } from '../mocks/server';
+import ProfileComponent from './ProfileComponent';
+
+describe('ProfileComponent', () => {
+  it('displays user profile data from API', async () => {
+    // Override the default handler for this specific test if needed
+    server.use(
+      http.get('/api/profile', () => {
+        return HttpResponse.json({
+          id: 'test-id',
+          name: 'Test User',
+          email: 'test@example.com',
+        });
+      })
+    );
+    
+    render(<ProfileComponent />);
+    
+    // Wait for the component to fetch and display data
+    expect(await screen.findByText('Test User')).toBeInTheDocument();
+    expect(screen.getByText('test@example.com')).toBeInTheDocument();
+  });
+  
+  it('handles API error states', async () => {
+    // Mock an error response
+    server.use(
+      http.get('/api/profile', () => {
+        return new HttpResponse(null, { status: 500 });
+      })
+    );
+    
+    render(<ProfileComponent />);
+    
+    // Check for error message
+    expect(await screen.findByText('Failed to load profile')).toBeInTheDocument();
+  });
+});
+```
+
 ## Best Practices
 
 1. **Avoid `any` types**: Use proper TypeScript types in your tests.
@@ -105,6 +159,8 @@ describe('AuthComponent', () => {
 4. **Mock external dependencies**: Use the provided mocks for external dependencies.
 5. **Keep tests isolated**: Each test should run independently without affecting others.
 6. **Clean up after tests**: Our setup handles cleanup automatically, but be mindful of any manual cleanup needed.
+7. **Use MSW for API mocking**: Avoid direct mocking of fetch/axios for API testing.
+8. **Test error states**: Always include tests for failure scenarios.
 
 ## Pre-commit Hooks
 

@@ -1,0 +1,19 @@
+{
+  "extends": "../.eslintrc.json",
+  "rules": {
+    // Allow certain patterns in test files that would be problematic in production code
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "react/display-name": "off",
+    
+    // Enforce good testing practices
+    "vitest/expect-expect": "error",
+    "vitest/no-disabled-tests": "warn",
+    "vitest/no-focused-tests": "error",
+    "vitest/prefer-to-be": "warn",
+    "vitest/valid-expect": "error"
+  },
+  "plugins": [
+    "vitest"
+  ]
+}

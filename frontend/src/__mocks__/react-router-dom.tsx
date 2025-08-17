@@ -2,20 +2,15 @@
 import React from 'react';
 
 // Mock NavLink component
-const NavLink = ({
-  children,
-  to,
-  className,
-  style,
-  ...rest
-}: {
+interface NavLinkProps {
   children: React.ReactNode;
   to: string;
   className?: string;
-  style?: any;
-  [key: string]: any;
-}) => {
-  // Simplified version that doesn't depend on router context
+  // Remove unused 'style'
+  [key: string]: unknown;
+}
+
+const NavLink = ({ children, to, className, ...rest }: NavLinkProps): JSX.Element => {
   return (
     <a href={to} className={className} {...rest}>
       {children}
