@@ -1,109 +1,104 @@
-name: CD - Deploy to Staging and Production
+# Deploy Workflow for Node.js Backend with Docker and Firebase
+# This workflow runs on pushes to develop branch and covers build, test, lint, Docker push, and Firebase deploy.
+# No "--channel" flags are used anywhere.
+
+name: Deploy Backend (Docker + Firebase)
 
 on:
   push:
     branches:
       - develop
-      - main
 
 jobs:
-  deploy-staging:
-    name: Deploy to Staging
+  build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop'
-    environment: staging
+    env:
+      DOCKER_IMAGE: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend@sha256:b2154f5416a37f50e1fd3f79611faafd2dc3c0e6c53ea9acebb851e8300977bf
+      FIREBASE_PROJECT: careercopilot-staging
 
     steps:
-      - name: Checkout Repository
+      # Step 1: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
-      - name: Install Frontend Dependencies
-        run: npm --prefix frontend ci
+      # Step 3: Restore npm cache (for faster installs)
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Build Frontend
-        run: npm --prefix frontend run build
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Deploy Frontend to Firebase Hosting (Staging Preview Channel)
-        run: npx firebase-tools hosting:channel:deploy --channel previewstaging --expires 7d --project ${{ secrets.GCP_STAGING_PROJECT_ID }} --json
-        working-directory: ./frontend
+      # Step 5: Lint code
+      - name: Lint code
+        run: npm run lint
+
+      # Step 6: Run tests
+      - name: Run tests
+        run: npm test
+
+      # Step 7: Build project (if applicable)
+      - name: Build project
+        run: npm run build
+
+      # Step 8: Collect build artifacts (optional)
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            dist/
+            .next/
+            build/
+
+      # Step 9: Log in to Google Artifact Registry (Docker)
+      - name: Authenticate Docker for Google Artifact Registry
+        uses: docker/login-action@v3
+        with:
+          registry: us-central1-docker.pkg.dev
+          username: _json_key
+          password: ${{ secrets.GCP_JSON_KEY }}
+
+      # Step 10: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t $DOCKER_IMAGE .
+
+      # Step 11: Push Docker image
+      - name: Push Docker image
+        run: |
+          docker push $DOCKER_IMAGE
+
+      # Step 12: Install Firebase CLI
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools@latest
+
+      # Step 13: Deploy to Firebase Hosting
+      - name: Deploy to Firebase Hosting
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          firebase deploy --project $FIREBASE_PROJECT --only hosting
 
-      - name: Authenticate to Google Cloud (Staging)
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: '${{ secrets.GCP_STAGING_SA_KEY }}'
+      # Step 14: Summary output
+      - name: Deployment Summary
+        run: echo "Deployment completed for $DOCKER_IMAGE on project $FIREBASE_PROJECT from branch develop"
 
-      - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
+      # Step 15: Notify on failure (optional)
+      - name: Notify failure
+        if: failure()
+        run: echo "Deployment failed on branch develop"
 
-      - name: Deploy Backend to Cloud Run (Staging)
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: 'careercopilot-backend-staging'
-          region: 'us-central1'
-          image: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend@sha256:b2154f5416a37f50e1fd3f79611faafd2dc3c0e6c53ea9acebb851e8300977bf
-          env_vars: |
-            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
-            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
-            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
-            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
-            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }}
-            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}
-
-  deploy-production:
-    name: Deploy to Production
-    runs-on: ubuntu-latest
-    needs: deploy-staging
-    if: github.ref == 'refs/heads/main'
-    environment: production
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Frontend Dependencies
-        run: npm --prefix frontend ci
-
-      - name: Build Frontend
-        run: npm --prefix frontend run build
-
-      - name: Deploy Frontend to Firebase Hosting (Production Preview Channel)
-        run: npx firebase-tools hosting:channel:deploy --channel previewstaging --expires 7d --project ${{ secrets.GCP_PROJECT_ID }} --json
-        working-directory: ./frontend
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}
-
-      - name: Authenticate to Google Cloud (Production)
-        uses: google-github-actions/auth@v2
-        with:
-          credentials_json: '${{ secrets.GCP_SA_KEY }}'
-
-      - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
-
-      - name: Deploy Backend to Cloud Run (Production)
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: 'careercopilot-backend'
-          region: 'us-central1'
-          image: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend@sha256:b2154f5416a37f50e1fd3f79611faafd2dc3c0e6c53ea9acebb851e8300977bf
-          env_vars: |
-            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
-            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
-            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
-            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
-            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }}
-            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}
+# End of workflow file
