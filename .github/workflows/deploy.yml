@@ -37,23 +37,37 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Step 4: Install dependencies
+      # Step 4: Check for package-lock.json consistency
+      - name: Check for lock file consistency
+        run: npm install --package-lock-only
+
+      # Step 5: Install dependencies
       - name: Install dependencies
         run: npm ci
+        
+      # Step 6: Install frontend dependencies
+      - name: Install frontend dependencies
+        run: npm ci
+        working-directory: ./frontend
+        
+      # Step 7: Install functions dependencies
+      - name: Install functions dependencies
+        run: npm ci
+        working-directory: ./functions
 
-      # Step 5: Lint code
+      # Step 8: Lint code
       - name: Lint code
         run: npm run lint
 
-      # Step 6: Run tests
+      # Step 9: Run tests
       - name: Run tests
         run: npm test
 
-      # Step 7: Build project (if applicable)
+      # Step 10: Build project (if applicable)
       - name: Build project
         run: npm run build
 
-      # Step 8: Collect build artifacts (optional)
+      # Step 11: Collect build artifacts (optional)
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -63,7 +77,7 @@ jobs:
             .next/
             build/
 
-      # Step 9: Log in to Google Artifact Registry (Docker)
+      # Step 12: Log in to Google Artifact Registry (Docker)
       - name: Authenticate Docker for Google Artifact Registry
         uses: docker/login-action@v3
         with:
@@ -71,32 +85,32 @@ jobs:
           username: _json_key
           password: ${{ secrets.GCP_JSON_KEY }}
 
-      # Step 10: Build Docker image
+      # Step 13: Build Docker image
       - name: Build Docker image
         run: |
           docker build -t $DOCKER_IMAGE .
 
-      # Step 11: Push Docker image
+      # Step 14: Push Docker image
       - name: Push Docker image
         run: |
           docker push $DOCKER_IMAGE
 
-      # Step 12: Install Firebase CLI
+      # Step 15: Install Firebase CLI
       - name: Install Firebase CLI
         run: npm install -g firebase-tools@latest
 
-      # Step 13: Deploy to Firebase Hosting
+      # Step 16: Deploy to Firebase Hosting
       - name: Deploy to Firebase Hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           firebase deploy --project $FIREBASE_PROJECT --only hosting
 
-      # Step 14: Summary output
+      # Step 17: Summary output
       - name: Deployment Summary
         run: echo "Deployment completed for $DOCKER_IMAGE on project $FIREBASE_PROJECT from branch develop"
 
-      # Step 15: Notify on failure (optional)
+      # Step 18: Notify on failure (optional)
       - name: Notify failure
         if: failure()
         run: echo "Deployment failed on branch develop"
