@@ -60,17 +60,20 @@ jobs:
         run: npm ci
         working-directory: ./functions
 
-      # Step 8: Lint code
+      # Step 8: Lint code (run in frontend directory so Vite/ESLint resolve frontend files)
       - name: Lint code
         run: npm run lint
+        working-directory: ./frontend
 
-      # Step 9: Run tests
+      # Step 9: Run tests (run in frontend directory)
       - name: Run tests
         run: npm test
+        working-directory: ./frontend
 
-      # Step 10: Build project (if applicable)
+      # Step 10: Build project (frontend build — run in frontend directory so Vite finds index.html)
       - name: Build project
         run: npm run build
+        working-directory: ./frontend
 
       # Step 11: Collect build artifacts (optional)
       - name: Upload build artifacts
@@ -78,9 +81,9 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            dist/
-            .next/
-            build/
+            frontend/dist/
+            frontend/.next/
+            frontend/build/
 
       # Step 12: Log in to Google Artifact Registry (Docker)
       - name: Authenticate Docker for Google Artifact Registry
