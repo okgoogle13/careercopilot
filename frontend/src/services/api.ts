@@ -14,6 +14,8 @@ export async function fetchUserProfile() {
     apiUrl = 'http://localhost/api/profile';
   }
   const response = await fetch(apiUrl);
+  // debug: fetch called (no-op for linting)
+  // console.debug('fetchUserProfile called', apiUrl);
   
   if (!response.ok) {
     throw new Error(`Failed to fetch profile: ${response.status}`);
