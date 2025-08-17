@@ -1,7 +1,5 @@
-# This is the name of the GitHub Actions workflow.
 name: CD - Deploy to Staging and Production
 
-# This workflow is triggered on any push to the 'develop' or 'main' branches.
 on:
   push:
     branches:
@@ -40,6 +38,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'
           projectId: '${{ secrets.GCP_STAGING_PROJECT_ID }}'
           entryPoint: ./frontend
+          channelId: staging-preview # <-- required for preview channel deploy
 
       # --- Backend Deployment (Staging) ---
       - name: Authenticate to Google Cloud (Staging)
