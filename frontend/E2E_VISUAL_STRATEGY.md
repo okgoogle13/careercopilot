@@ -29,7 +29,7 @@
         working-directory: ./frontend
       - name: Upload E2E results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: e2e-results
           path: ./frontend/cypress/results

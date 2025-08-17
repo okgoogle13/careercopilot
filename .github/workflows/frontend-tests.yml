@@ -33,7 +33,7 @@ jobs:
         working-directory: ./frontend
       - name: Upload E2E results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: e2e-results
           path: ./frontend/cypress/results
@@ -60,7 +60,7 @@ jobs:
         working-directory: ./frontend
       - name: Upload Percy results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: percy-results
           path: ./frontend/.percy
@@ -111,14 +111,14 @@ jobs:
 
       - name: Upload coverage report
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: ./frontend/coverage
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: ./frontend/coverage
