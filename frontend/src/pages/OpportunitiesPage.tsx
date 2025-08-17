@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '../firebase-config';
 
 // Simple Calendar Icon SVG
 const CalendarIcon = () => (
@@ -40,7 +41,6 @@ const OpportunitiesPage: React.FC = () => {
     };
 
     useEffect(() => {
-        const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 fetchOpportunities(user);

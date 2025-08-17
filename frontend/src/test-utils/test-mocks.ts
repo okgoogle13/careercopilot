@@ -6,7 +6,7 @@ import { vi } from 'vitest';
  */
 export const mockReactRouterDom = (): void => {
   vi.mock('react-router-dom', async (importOriginal) => {
-    const actual = await importOriginal();
+    const actual = await importOriginal() as Record<string, unknown>;
     return {
       ...actual,
       NavLink: ({ children, to, className }: { children: React.ReactNode; to: string; className?: string }): string =>

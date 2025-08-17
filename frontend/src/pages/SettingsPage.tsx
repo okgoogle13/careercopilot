@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { db } from '../firebase-config';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth, db } from '../firebase-config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import toast from 'react-hot-toast';
 
@@ -27,7 +27,6 @@ const SettingsPage: React.FC = () => {
     const [isScanning, setIsScanning] = useState<boolean>(false);
 
     useEffect(() => {
-        const auth = getAuth();
         const unsubscribeAuth = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
                 setUser(currentUser);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from '../firebase-config';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from '../firebase-config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { UserPreferencesContext } from './UserPreferencesContextDefinition';
 
@@ -19,7 +19,6 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
     const [preferences, setPreferences] = useState<UserPreferences>({ themeId: 'professional' });
 
     useEffect(() => {
-        const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 const userDocRef = doc(db, 'users', user.uid);

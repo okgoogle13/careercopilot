@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '../firebase-config';
 import toast from 'react-hot-toast';
 
 // --- Type Definitions ---
@@ -36,7 +37,6 @@ const AnalysisPage: React.FC = () => {
 
     // --- Effects ---
     useEffect(() => {
-        const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 fetchDocuments(user);
@@ -75,7 +75,6 @@ const AnalysisPage: React.FC = () => {
         setIsAnalyzing(true);
         setAnalysisResult(null);
         setOptimizedResume(null); // Reset optimizer on new analysis
-        const auth = getAuth();
         const user = auth.currentUser;
         if (!user) { toast.error("Authentication error."); setIsAnalyzing(false); return; }
 
@@ -108,7 +107,6 @@ const AnalysisPage: React.FC = () => {
         }
         setIsOptimizing(true);
         setOptimizedResume(null);
-        const auth = getAuth();
         const user = auth.currentUser;
         if (!user) { toast.error("Authentication error."); setIsOptimizing(false); return; }
 

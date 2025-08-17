@@ -24,6 +24,7 @@
   "include": [
     "src",
     "vitest.config.ts",
+    "cypress.config.ts",
     "e2e/sample.cy.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]

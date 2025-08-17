@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '../firebase-config';
 import toast from 'react-hot-toast';
 
 const DashboardPage: React.FC = () => {
@@ -34,7 +35,6 @@ const DashboardPage: React.FC = () => {
     };
 
     useEffect(() => {
-        const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 fetchProfiles(user);
@@ -68,7 +68,6 @@ const DashboardPage: React.FC = () => {
         if (!window.confirm('Are you sure you want to delete this profile variation?')) {
             return;
         }
-        const auth = getAuth();
         const user = auth.currentUser;
         if (!user) return;
 
@@ -94,7 +93,6 @@ const DashboardPage: React.FC = () => {
             return;
         }
         
-        const auth = getAuth();
         const user = auth.currentUser;
         if (!user) return;
 

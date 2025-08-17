@@ -9,7 +9,7 @@ vi.mock('firebase/auth', () => {
     signInWithEmailAndPassword: async () => ({}),
     createUserWithEmailAndPassword: async () => ({}),
     signOut: async () => ({}),
-    onAuthStateChanged: (auth: unknown, cb: (u: { uid: string; email?: string } | null) => void): (() => void) => {
+    onAuthStateChanged: (_auth: unknown, cb: (u: { uid: string; email?: string } | null) => void): (() => void) => {
       // Immediately invoke callback with a test user
       cb({ uid: 'test-user-id', email: 'test@example.com' });
       return () => {};

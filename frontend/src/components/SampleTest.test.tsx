@@ -2,13 +2,13 @@
 
 import { describe, it, expect, beforeEach } from 'vitest';
 // import { render, screen } from '@testing-library/react';
-import { mockReactRouterDom } from '../test-utils/test-mocks';
+// import { mockReactRouterDom } from '../test-utils/test-mocks';
 
 // Import the component you want to test
 // import YourComponent from './YourComponent';
 
 // Mock any dependencies
-mockReactRouterDom();
+// mockReactRouterDom();
 
 describe('Sample Test with Mocks', () => {
   beforeEach(() => {

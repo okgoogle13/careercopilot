@@ -12,6 +12,10 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
+    exclude: [
+      'node_modules/**',
+      '**/.storybook/visual.test.js'
+    ],
     setupFiles: [
       './src/setupTests.ts',
       './test-env.setup.js'
@@ -50,7 +54,7 @@ export default defineConfig({
       ],
     },
     // Fail tests on CI if there are console errors
-    onConsoleLog: (log, type) => {
+    onConsoleLog: (_log, type) => {
       if (process.env.CI && type === 'stderr') {
         return false; // Fails the test if there's a console error in CI
       }

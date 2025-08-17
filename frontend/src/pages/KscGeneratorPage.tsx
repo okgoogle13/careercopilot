@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth } from 'firebase/auth';
+import { auth } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -19,8 +19,7 @@ const KscGeneratorPage: React.FC = () => {
     // Fetch profile variations on component mount
     useEffect(() => {
         const fetchProfiles = async () => {
-            const auth = getAuth();
-            const user = auth.currentUser;
+                const user = auth.currentUser;
             if (!user) {
                 toast.error("You must be logged in to access this page.");
                 setLoading(false);
@@ -68,7 +67,6 @@ const KscGeneratorPage: React.FC = () => {
         e.preventDefault();
         setSubmitting(true);
 
-        const auth = getAuth();
         const user = auth.currentUser;
         const statements = kscStatements.filter(s => s.trim() !== '');
 
