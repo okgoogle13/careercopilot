@@ -17,9 +17,13 @@ jobs:
   #  This job checks the frontend code for errors.
   # ===================================================================
   test-frontend:
-    name: Test Frontend
-    runs-on: ubuntu-latest # Use the latest stable version of Ubuntu as the runner.
-
+    name: Test Frontend (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x] # Test multiple Node.js versions
+      fail-fast: false # Continue with other versions if one fails
+    
     steps:
       # Step 1: Check out the repository code so the runner has access to it.
       - name: Checkout Repository
@@ -29,7 +33,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm' # Cache npm dependencies to speed up subsequent runs.
           cache-dependency-path: frontend/package-lock.json
 
@@ -92,6 +96,10 @@ jobs:
   test-functions:
     name: Test Firebase Functions
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x] # Test with the version specified in engines and others
+      fail-fast: false
 
     steps:
       # Step 1: Check out the repository code.
@@ -102,7 +110,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
           cache-dependency-path: functions/package-lock.json
 
@@ -110,8 +118,51 @@ jobs:
       - name: Install Functions Dependencies
         run: npm ci
         working-directory: ./functions
+        continue-on-error: ${{ matrix.node-version == '22.x' }} # Allow Node 22 to fail
         
       # Step 4: Check for lock file consistency
       - name: Check for lock file consistency
         run: npm install --package-lock-only
         working-directory: ./functions
+        
+  # ===================================================================
+  #  SECURITY SCANNING JOB
+  #  This job checks dependencies for known vulnerabilities
+  # ===================================================================
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: [test-frontend, test-backend, test-functions]
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      # Run npm audit on all package.json files
+      - name: Root NPM audit
+        run: npm audit --json || echo "Vulnerabilities found, but continuing"
+        continue-on-error: true
+        
+      - name: Frontend NPM audit
+        working-directory: ./frontend
+        run: npm audit --json || echo "Vulnerabilities found, but continuing"
+        continue-on-error: true
+        
+      - name: Functions NPM audit
+        working-directory: ./functions
+        run: npm audit --json || echo "Vulnerabilities found, but continuing"
+        continue-on-error: true
+        
+      # Optional: Add CodeQL Analysis for more comprehensive security scanning
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript, python
+          
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2
