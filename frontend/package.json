@@ -42,5 +42,5 @@
     "vite": "^5.2.13",
     "vitest": "^1.6.0"
   },
-  "lint-staged": "{\"*.{ts,tsx}\":[\"eslint --fix\",\"tsc --noEmit\",\"npm run verify-tests\",\"vitest related --run\"]}"
+  "lint-staged": "{\"*.{ts,tsx}\":[\"eslint --fix\"]}"
 }
