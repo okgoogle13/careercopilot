@@ -11,7 +11,8 @@
     "test": "vitest run --config vitest.config.ts --environment jsdom",
     "prepare": "husky",
     "pre-commit": "lint-staged",
-    "verify-tests": "node scripts/verify-tests.js"
+    "verify-tests": "node scripts/verify-tests.js",
+    "test:watch": "vitest watch --config vitest.config.ts --environment jsdom"
   },
   "dependencies": {
     "firebase": "^10.12.2",

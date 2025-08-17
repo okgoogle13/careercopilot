@@ -19,6 +19,10 @@ npm install
 
 This will automatically set up the pre-commit hooks.
 
+## Testing
+
+We have a comprehensive testing setup with Vitest and React Testing Library. For detailed information about writing tests, see [TESTING.md](./TESTING.md).
+
 ### Common Issues and Solutions
 
 #### "any" Type Usage
@@ -46,21 +50,19 @@ When testing components that use React Router:
 ```typescript
 // ✅ Good
 import { render, screen } from '@testing-library/react';
-import { vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
+import { mockReactRouterDom } from '../test-utils/test-mocks';
 import Navbar from './Navbar';
 
 // Mock React Router DOM
-vi.mock('react-router-dom', () => ({
-  NavLink: ({ children, to }: { children: React.ReactNode, to: string }) => (
-    <a href={to} data-testid="nav-link">{children}</a>
-  ),
-  useNavigate: () => vi.fn()
-}));
+beforeEach(() => {
+  mockReactRouterDom();
+});
 
 describe('Navbar', () => {
   it('renders correctly', () => {
     render(<Navbar />);
-    expect(screen.getByTestId('nav-link')).toBeInTheDocument();
+    expect(screen.getByText('Dashboard')).toBeInTheDocument();
   });
 });
 ```
