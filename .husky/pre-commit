@@ -1,0 +1,2 @@
+cd frontend || exit 0
+npx --no-install lint-staged --config .lintstagedrc.json
