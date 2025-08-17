@@ -1,9 +1,7 @@
 // src/setupTests.ts
-import '@testing-library/jest-dom';
-
-// Add additional setup for testing environment
 import { afterEach, beforeAll, afterAll, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
+import 'vitest-dom/extend-expect';
 
 // Set up a global error handler to catch unhandled promise rejections
 beforeAll(() => {

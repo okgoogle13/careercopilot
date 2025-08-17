@@ -1,7 +1,7 @@
 // src/test-utils/test-setup.ts
 import { afterEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import 'vitest-dom/extend-expect';
 
 // This file provides a minimal test setup for component tests
 // It creates the necessary DOM environment for testing
@@ -19,7 +19,8 @@ if (typeof document === 'undefined') {
         remove: vi.fn()
       },
       appendChild: vi.fn(),
-      style: {}
+      style: {},
+      textContent: ''
     })),
     createElementNS: vi.fn(() => ({
       classList: {
