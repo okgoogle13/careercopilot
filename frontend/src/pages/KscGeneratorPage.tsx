@@ -38,8 +38,9 @@ const KscGeneratorPage: React.FC = () => {
                 if (data.length > 0) {
                     setSelectedProfileId(data[0].id); // Default to the first profile
                 }
-            } catch (error: any) {
-                toast.error(error.message || 'Could not load profile data.');
+            } catch (error: unknown) {
+                const errorMessage = error instanceof Error ? error.message : 'Could not load profile data.';
+                toast.error(errorMessage);
             } finally {
                 setLoading(false);
             }
@@ -109,8 +110,9 @@ const KscGeneratorPage: React.FC = () => {
             toast.success("Success! Your KSC responses have been generated and saved to 'My Documents'.");
             navigate('/documents');
 
-        } catch (error: any) {
-            toast.error(error.message);
+        } catch (error: unknown) {
+            const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+            toast.error(errorMessage);
         } finally {
             setSubmitting(false);
         }

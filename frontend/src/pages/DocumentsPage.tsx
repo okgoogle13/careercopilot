@@ -32,8 +32,9 @@ const DashboardPage: React.FC = () => {
             if (!response.ok) throw new Error('Failed to fetch profile variations');
             const data = await response.json();
             setProfiles(data);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            const error = err as Error;
+            setError(error.message);
         } finally {
             setLoading(false);
         }
@@ -91,7 +92,8 @@ const DashboardPage: React.FC = () => {
             
             setProfiles(profiles.filter(p => p.id !== profileId));
             toast.success('Profile variation deleted.');
-        } catch (err: any) {
+        } catch (err: unknown) {
+            console.error('Failed to delete profile:', err);
             toast.error('Failed to delete profile.');
         }
     };
@@ -146,8 +148,9 @@ const DashboardPage: React.FC = () => {
                 toast.success('Profile created successfully!');
             }
             setIsModalOpen(false);
-        } catch (err: any) {
-            toast.error(err.message || 'Failed to save profile.');
+        } catch (err: unknown) {
+            const error = err as Error;
+            toast.error(error.message || 'Failed to save profile.');
         }
     };
 
@@ -173,7 +176,7 @@ const DashboardPage: React.FC = () => {
         if (profiles.length === 0) {
             return (
                 <div className="text-center p-10 border-2 border-dashed rounded-lg">
-                    <p className="text-gray-500">You haven't created any profile variations yet. Get started by clicking the 'Create New Profile Variation' button!</p>
+                    <p className="text-gray-500">You haven&apos;t created any profile variations yet. Get started by clicking the &apos;Create New Profile Variation&apos; button!</p>
                 </div>
             );
         }

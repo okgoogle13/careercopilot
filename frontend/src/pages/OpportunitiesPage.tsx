@@ -9,7 +9,16 @@ const CalendarIcon = () => (
 );
 
 const OpportunitiesPage: React.FC = () => {
-    const [opportunities, setOpportunities] = useState<any[]>([]);
+    const [opportunities, setOpportunities] = useState<Array<{
+        id: string;
+        title: string;
+        company: string;
+        location: string;
+        deadline: string;
+        status: string;
+        source_url?: string;
+        calendarEventId?: string;
+    }>>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -23,8 +32,8 @@ const OpportunitiesPage: React.FC = () => {
             if (!response.ok) throw new Error('Failed to fetch opportunities');
             const data = await response.json();
             setOpportunities(data);
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : 'An unexpected error occurred');
         } finally {
             setLoading(false);
         }

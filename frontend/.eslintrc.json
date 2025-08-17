@@ -19,6 +19,7 @@
     "sourceType": "module",
     "project": ["./tsconfig.json"]
   },
+  "ignorePatterns": ["vite.config.ts"],
   "plugins": [
     "react",
     "react-refresh",

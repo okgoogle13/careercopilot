@@ -152,9 +152,10 @@ const SettingsPage: React.FC = () => {
             const newVoiceProfile = await response.json();
             setVoiceProfile(newVoiceProfile);
             toast.success("Successfully generated and saved your voice profile!");
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error('Voice profile generation error:', error);
-            toast.error(error.message);
+            const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+            toast.error(errorMessage);
         } finally {
             setIsGeneratingVoiceProfile(false);
         }
