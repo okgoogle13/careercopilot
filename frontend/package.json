@@ -43,7 +43,7 @@
     "msw": "^2.10.5",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5.4.5",
+  "typescript": "5.4.5",
     "cypress": "^13.6.0",
     "@percy/cli": "^1.0.0",
     "@percy/playwright": "^1.0.0",
