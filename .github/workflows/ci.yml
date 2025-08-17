@@ -51,7 +51,7 @@ jobs:
 
       # Step 5: Run the unit tests
       - name: Run Tests
-        run: npm test -- --run
+        run: npm test
         working-directory: ./frontend
 
       # Step 6: Run the production build command. This is the most important test.
