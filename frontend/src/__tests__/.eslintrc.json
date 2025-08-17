@@ -1,5 +1,5 @@
 {
-  "extends": "../.eslintrc.json",
+  "extends": "../../.eslintrc.json",
   "rules": {
     // Allow certain patterns in test files that would be problematic in production code
     "@typescript-eslint/no-non-null-assertion": "off",
