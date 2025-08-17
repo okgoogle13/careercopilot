@@ -23,3 +23,6 @@ sendgrid>=6.11.0
 
 # Data Validation
 pydantic>=2.7.0
+
+# Formatting / Linting
+black
