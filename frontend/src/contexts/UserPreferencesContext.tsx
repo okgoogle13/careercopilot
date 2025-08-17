@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, useEffect, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../firebase-config';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -7,11 +7,10 @@ interface UserPreferences {
     themeId: string;
 }
 
-const UserPreferencesContext = createContext<UserPreferences | null>(null);
+export const UserPreferencesContext = createContext<UserPreferences | null>(null);
 
-export const useUserPreferences = () => {
-    return useContext(UserPreferencesContext);
-};
+// Hook moved to separate file for Fast Refresh compatibility
+// import { useUserPreferences } from './userPreferencesHooks';
 
 interface UserPreferencesProviderProps {
     children: ReactNode;

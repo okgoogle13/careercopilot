@@ -24,7 +24,7 @@ interface AtsResult {
 
 const AnalysisPage: React.FC = () => {
     // --- State ---
-    const [documents, setDocuments] = useState<any[]>([]);
+    const [documents, setDocuments] = useState<{id: string; name: string; url: string; type: string; originalFilename?: string}[]>([]);
     const [selectedDocumentId, setSelectedDocumentId] = useState<string>('');
     const [jobDescription, setJobDescription] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
@@ -93,8 +93,9 @@ const AnalysisPage: React.FC = () => {
             const result: AtsResult = await response.json();
             setAnalysisResult(result);
             toast.success('Analysis complete!');
-        } catch (err: any) {
-            toast.error(`Analysis failed: ${err.message}`);
+        } catch (err: unknown) {
+            const error = err as Error;
+            toast.error(`Analysis failed: ${error.message}`);
         } finally {
             setIsAnalyzing(false);
         }
@@ -126,8 +127,9 @@ const AnalysisPage: React.FC = () => {
             const data = await response.json();
             setOptimizedResume(data.optimized_text);
             toast.success("Your resume has been optimized!");
-        } catch (err: any) {
-            toast.error(`Optimization failed: ${err.message}`);
+        } catch (err: unknown) {
+            const error = err as Error;
+            toast.error(`Optimization failed: ${error.message}`);
         } finally {
             setIsOptimizing(false);
         }
@@ -198,7 +200,7 @@ const AnalysisPage: React.FC = () => {
                                         <span className="font-semibold">Suggested Location:</span> {suggestion.suggested_location}
                                     </p>
                                     <p className="mt-2 text-sm text-gray-800 bg-gray-100 p-2 rounded-md border-l-4 border-gray-300">
-                                        <span className="font-semibold">Example:</span> "{suggestion.example_sentence}"
+                                        <span className="font-semibold">Example:</span> &quot;{suggestion.example_sentence}&quot;
                                     </p>
                                 </div>
                             ))}

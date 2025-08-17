@@ -19,6 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["frontend/src"],
+  "include": ["frontend/src", "frontend/vite.config.ts"],
   "references": [{ "path": "./frontend/tsconfig.node.json" }]
 }
