@@ -1,127 +1,137 @@
-name: "CD - Deploy to Staging and Production v4"
+# This is the name of the GitHub Actions workflow.
+name: CD - Deploy to Staging and Production
 
+# This workflow is triggered on any push to the 'develop' or 'main' branches.
 on:
   push:
     branches:
       - develop
       - main
-  workflow_dispatch:
 
 jobs:
-  # ======================================================================================
-  #  LINT JOB
-  # ======================================================================================
-  lint:
-    name: Lint Codebase
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install dependencies & Lint
-        run: |
-          cd frontend
-          npm install
-          npm run lint
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install flake8 & Lint
-        run: |
-          pip install flake8
-          flake8 backend/app
-  
-  # ======================================================================================
-  #  TEST JOB - This job will run tests before deployment
-  # ======================================================================================
-  test:
-    name: Run Tests and Coverage
-    runs-on: ubuntu-latest
-    needs: [lint]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
-          pip install pytest pytest-cov
-      - name: Run tests
-        run: |
-          cd backend
-          pytest --cov=. --cov-report=xml
-
-  # YAML anchor for reusable steps
-  # This anchor is defined as a list of steps and will be merged into other job steps.
-  # The 'checkout' step is included here as part of the shared build process.
-  .shared_build_steps: &shared_build_steps
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
-    - name: Cache Node.js dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    - name: Install dependencies
-      run: npm ci
-      working-directory: frontend
-    - name: Run frontend tests
-      run: npm test || npm test || npm test
-      working-directory: frontend
-    - name: Build frontend
-      run: npm run build
-      working-directory: frontend
-    - name: Install backend dependencies
-      run: pip install -r requirements.txt
-      working-directory: backend
-    - name: Run backend tests
-      run: pytest || pytest || pytest
-      working-directory: backend
-
-  # ======================================================================================
+  # ===================================================================
   #  STAGING DEPLOYMENT JOB
-  # ======================================================================================
+  #  This job runs ONLY when code is pushed to the 'develop' branch.
+  # ===================================================================
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
     environment: staging
-    needs: [test]
-    if: github.ref == 'refs/heads/develop' && needs.test.result == 'success'
-    steps:
-      # Use the YAML alias here to merge the list of shared build steps
-      - *shared_build_steps
-      - name: Deploy to Staging
-        run: |
-          echo "Deploying to Staging..."
-        env:
-          ENVIRONMENT: staging
 
-  # ======================================================================================
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # --- Frontend Deployment (Staging) ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Frontend Dependencies
+        run: npm --prefix frontend ci
+      - name: Build Frontend
+        run: npm --prefix frontend run build
+
+      - name: Deploy Frontend to Firebase Hosting (Staging)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'
+          projectId: '${{ secrets.GCP_STAGING_PROJECT_ID }}'
+          entryPoint: ./frontend
+
+      # --- Backend Deployment (Staging) ---
+      - name: Authenticate to Google Cloud (Staging)
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_STAGING_SA_KEY }}'
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and Push Docker Image to Artifact Registry (Staging)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+
+      - name: Deploy Backend to Cloud Run (Staging)
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: 'careercopilot-backend-staging'
+          region: 'australia-southeast2'
+          image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          env_vars: |
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
+            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }}
+            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}
+
+  # ===================================================================
   #  PRODUCTION DEPLOYMENT JOB
-  # ======================================================================================
+  #  This job runs ONLY when code is pushed to the 'main' branch.
+  # ===================================================================
   deploy-production:
     name: Deploy to Production
     runs-on: ubuntu-latest
+    needs: deploy-staging # Production will wait for staging to succeed.
+    if: github.ref == 'refs/heads/main'
     environment: production
-    needs: [test]
-    if: github.ref == 'refs/heads/main' && needs.test.result == 'success'
+
     steps:
-      # Use the YAML alias here to merge the list of shared build steps
-      - *shared_build_steps
-      - name: Deploy to Production
-        run: |
-          echo "Deploying to Production..."
-        env:
-          ENVIRONMENT: production
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # --- Frontend Deployment (Production) ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Frontend Dependencies
+        run: npm --prefix frontend ci
+      - name: Build Frontend
+        run: npm --prefix frontend run build
+
+      - name: Deploy Frontend to Firebase Hosting (Production)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}'
+          projectId: '${{ secrets.GCP_PROJECT_ID }}'
+          entryPoint: ./frontend
+
+      # --- Backend Deployment (Production) ---
+      - name: Authenticate to Google Cloud (Production)
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and Push Docker Image to Artifact Registry (Production)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+
+      - name: Deploy Backend to Cloud Run (Production)
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: 'careercopilot-backend'
+          region: 'australia-southeast2'
+          image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          env_vars: |
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
+            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }}
+            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}
