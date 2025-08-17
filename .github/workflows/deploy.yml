@@ -29,7 +29,7 @@ jobs:
         run: npm --prefix frontend run build
 
       - name: Deploy Frontend to Firebase Hosting (Staging Preview Channel)
-        run: npx firebase-tools hosting:channel:deploy --expires 7d --project ${{ secrets.GCP_STAGING_PROJECT_ID }} --json
+        run: npx firebase-tools hosting:channel:deploy --channel previewstaging --expires 7d --project ${{ secrets.GCP_STAGING_PROJECT_ID }} --json
         working-directory: ./frontend
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}
@@ -80,3 +80,30 @@ jobs:
         run: npm --prefix frontend run build
 
       - name: Deploy Frontend to Firebase Hosting (Production Preview Channel)
+        run: npx firebase-tools hosting:channel:deploy --channel previewstaging --expires 7d --project ${{ secrets.GCP_PROJECT_ID }} --json
+        working-directory: ./frontend
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}
+
+      - name: Authenticate to Google Cloud (Production)
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy Backend to Cloud Run (Production)
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: 'careercopilot-backend'
+          region: 'us-central1'
+          image: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend@sha256:b2154f5416a37f50e1fd3f79611faafd2dc3c0e6c53ea9acebb851e8300977bf
+          env_vars: |
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
+            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }}
+            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}
