@@ -53,15 +53,14 @@ jobs:
           cache: 'npm'
 
       # Step 3: Restore npm cache (for faster installs)
-      - name: Restore npm cache
+      - name: Restore npm cache  
         uses: actions/cache@v4
         with:
           path: |
             ~/.npm
             node_modules
-            frontend/node_modules
             functions/node_modules
-          key: \${{ runner.os }}-node-modules-\${{ hashFiles('**/package-lock.json') }}
+          key: \${{ runner.os }}-node-modules-\${{ hashFiles('package-lock.json', 'functions/package-lock.json') }}
           restore-keys: |
             \${{ runner.os }}-node-modules-
 
@@ -76,11 +75,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
-      # Step 6: Install frontend dependencies
+      # Step 6: Install frontend dependencies  
       - name: Install frontend dependencies
-        # Same rationale as above: allow install to succeed when package.json
-        # and package-lock.json are temporarily out of sync.
-        run: npm install
+        run: |
+          # Clear any problematic cached modules first
+          rm -rf node_modules package-lock.json
+          npm install
         working-directory: ./frontend
         
       # Step 7: Set up Node.js 22 for functions
