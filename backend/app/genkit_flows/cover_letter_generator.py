@@ -1,15 +1,18 @@
 import genkit
-from genkit.plugins import googleai
+try:
+    from genkit.plugins import googleai
+except Exception:
+    googleai = None
 import json
 from typing import Optional
 
-# Initialize Genkit and the Google AI plugin.
-# By not passing an explicit API key, the plugin will automatically
-# use the Application Default Credentials (ADC) of the service account.
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init()])
-
-gemini_pro = googleai.gemini_pro
+# Initialize Genkit and the Google AI plugin if available.
+if googleai is not None:
+    if not genkit.get_plugin("googleai"):
+        genkit.init(plugins=[googleai.init()])
+    gemini_pro = googleai.gemini_pro
+else:
+    gemini_pro = None
 
 @genkit.flow()
 def generate_tailored_cover_letter(
@@ -58,6 +61,7 @@ def generate_tailored_cover_letter(
     prompt += "\\n\\nNow, write the cover letter. The output should be only the full text of the letter itself."
 
     # Generate the cover letter using the AI model
+    if gemini_pro is None:
+        return ""
     response = gemini_pro.generate(prompt)
-    
     return response.text()

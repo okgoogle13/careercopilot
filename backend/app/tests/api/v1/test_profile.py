@@ -2,6 +2,9 @@ import pytest
 from httpx import AsyncClient
 from unittest.mock import patch, MagicMock
 
+# Ensure we can patch the genkit flow used by the endpoint
+from app.genkit_flows.voice_profiler import generateVoiceProfile
+
 # A pydantic model mock to simulate the output of the genkit flow
 class MockVoiceProfile(MagicMock):
     def dict(self):

@@ -1,10 +1,29 @@
-from google.cloud import secretmanager
-from google.api_core.exceptions import NotFound
 import os
+try:
+    from google.cloud import secretmanager
+    from google.api_core.exceptions import NotFound
+    _HAS_SECRETMANAGER = True
+except Exception:
+    secretmanager = None
+    NotFound = Exception
+    _HAS_SECRETMANAGER = False
 
 # Get the project ID from the environment
 GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID")
-client = secretmanager.SecretManagerServiceClient()
+
+# If google-cloud-secret-manager is available, create a real client; otherwise
+# provide a lightweight fallback that raises clear errors at runtime.
+if _HAS_SECRETMANAGER:
+    client = secretmanager.SecretManagerServiceClient()
+else:
+    class _FallbackClient:
+        def __getattr__(self, name):
+            def _err(*a, **k):
+                raise RuntimeError("google-cloud-secretmanager not installed in this environment")
+
+            return _err
+
+    client = _FallbackClient()
 
 def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     """

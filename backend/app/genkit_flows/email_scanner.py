@@ -1,5 +1,8 @@
 import genkit
-from genkit.plugins import googleai
+try:
+    from genkit.plugins import googleai
+except Exception:
+    googleai = None
 from app.core.secrets import get_user_secret
 from app.core.db import db
 import os
@@ -14,10 +17,12 @@ from google.cloud.firestore import SERVER_TIMESTAMP
 from .calendar_manager import createCalendarEvent
 from .notifier import sendNewOpportunityNotification
 
-# Initialize Genkit and the Gemini Pro model
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-gemini_pro = googleai.gemini_pro
+# Initialize Genkit and the Gemini Pro model if available
+gemini_pro = None
+if googleai is not None:
+    if not genkit.get_plugin("googleai"):
+        genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    gemini_pro = googleai.gemini_pro
 
 def get_gmail_service(user_id: str):
     """Creates a Gmail API service client for a given user."""
@@ -131,3 +136,7 @@ async def scanUserEmails(user_id: str) -> list:
     except Exception as e:
         print(f"An unexpected error occurred during email scanning: {e}")
         return []
+
+
+# Backwards-compatible alias expected elsewhere in the codebase
+scan_user_emails = scanUserEmails

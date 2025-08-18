@@ -1,13 +1,18 @@
 import genkit
-from genkit.plugins import googleai
+try:
+    from genkit.plugins import googleai
+except Exception:
+    googleai = None
 from app.core.db import db
 import os
 import json
 
-# Initialize Genkit and the Gemini Pro model
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-gemini_pro = googleai.gemini_pro
+# Initialize Genkit and the Gemini Pro model if available
+gemini_pro = None
+if googleai is not None:
+    if not genkit.get_plugin("googleai"):
+        genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    gemini_pro = googleai.gemini_pro
 
 @genkit.flow()
 def generate_voice_profile(user_id: str) -> dict:
@@ -62,3 +67,7 @@ def generate_voice_profile(user_id: str) -> dict:
         print(f"An error occurred during voice profile generation for user {user_id}: {e}")
         # Re-raise the exception so the calling endpoint can handle it
         raise e
+
+
+# Backwards-compatible alias
+generateVoiceProfile = generate_voice_profile

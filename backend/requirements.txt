@@ -11,7 +11,11 @@ google-api-python-client>=2.126.0
 google-auth-oauthlib>=1.2.0
 
 # AI Orchestration
-google-genkit[googleai]>=0.4.0
+# The code imports `genkit` and its `googleai` plugin (see backend/app/genkit_flows/...).
+# The genkit package currently doesn't declare an extra named `googleai`, so
+# request the base package and pin the minimum version instead of using the
+# non-existent extra to avoid pip warnings during install.
+genkit>=0.4.0
 
 # Data Parsing & Generation
 pdfplumber>=0.11.0
@@ -23,6 +27,9 @@ sendgrid>=6.11.0
 
 # Data Validation
 pydantic>=2.7.0
+# Pin protobuf to a range compatible with google-ai-generativelanguage and other
+# google packages to avoid resolver/backtracking issues during CI installs.
+protobuf<6,>=3.20.2
 
 # Formatting / Linting
 black

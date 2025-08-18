@@ -1,16 +1,20 @@
 import genkit
-from genkit.plugins import googleai
+try:
+    from genkit.plugins import googleai
+except Exception:
+    googleai = None
 import os
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from typing import List
 
-# Load environment variables and initialize Genkit
+# Load environment variables and initialize Genkit if available
 load_dotenv()
-if genkit.get_plugin("googleai") is None:
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-gemini_pro = googleai.gemini_pro
+gemini_pro = None
+if googleai is not None:
+    if genkit.get_plugin("googleai") is None:
+        genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    gemini_pro = googleai.gemini_pro
 
 class OptimizedResume(BaseModel):
     """The full, optimized resume text."""

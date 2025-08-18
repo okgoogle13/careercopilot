@@ -1,17 +1,24 @@
+gemini_pro = googleai.gemini_pro
 import genkit
-from genkit.plugins import googleai
 import os
 from dotenv import load_dotenv
+
+# The googleai plugin may not be installed in all environments; import
+# defensively so tests and static analysis can import this module.
+try:
+    from genkit.plugins import googleai
+except Exception:
+    googleai = None
 
 # Load environment variables from .env file
 load_dotenv()
 
-# Initialize the Google AI plugin if not already initialized
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-# Define the Gemini Pro model
-gemini_pro = googleai.gemini_pro
+# Initialize the Google AI plugin if available
+gemini_pro = None
+if googleai is not None:
+    if not genkit.get_plugin("googleai"):
+        genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    gemini_pro = googleai.gemini_pro
 
 @genkit.flow()
 def generate_tailored_resume(base_profile_data: dict, comparison_analysis: dict) -> str:

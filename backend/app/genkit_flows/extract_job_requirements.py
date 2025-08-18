@@ -1,5 +1,8 @@
 import genkit
-from genkit.plugins import googleai
+try:
+    from genkit.plugins import googleai
+except Exception:
+    googleai = None
 import os
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -8,12 +11,12 @@ from typing import List
 # Load environment variables
 load_dotenv()
 
-# Initialize Google AI plugin if needed
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-# Define the model to use
-gemini_pro = googleai.gemini_pro
+# Initialize Google AI plugin if available
+gemini_pro = None
+if googleai is not None:
+    if not genkit.get_plugin("googleai"):
+        genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    gemini_pro = googleai.gemini_pro
 
 # Define the structured output model for job requirements
 class JobRequirements(BaseModel):

@@ -5,7 +5,7 @@ from app.models.profile import ProfileUpdate, ProfileVariationCreate
 from app.genkit_flows.voice_profiler import generateVoiceProfile
 import math
 
-router = APIRouter()
+router = APIRouter(prefix="/profile")
 
 
 # ... (existing GET and PUT endpoints for profile) ...
@@ -31,7 +31,11 @@ async def generate_and_save_voice_profile(uid: str = Depends(get_current_user)):
             {"voice_profile": voice_profile_data.dict()}, merge=True
         )  # Use .dict() if it's a Pydantic model
 
-        # 3. Return the newly generated voice_profile data
+        # 3. Return the newly generated voice_profile data. If the flow
+        # returns a Pydantic-like object, convert it to dict so FastAPI can
+        # serialize it predictably in tests and runtime.
+        if hasattr(voice_profile_data, "dict"):
+            return voice_profile_data.dict()
         return voice_profile_data
 
     except Exception as e:
