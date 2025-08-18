@@ -10,6 +10,10 @@ on:
       - develop
   workflow_dispatch: {}
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   typecheck:
     runs-on: ubuntu-latest
@@ -119,11 +123,12 @@ jobs:
             frontend/.next/
             frontend/build/
 
-      # Step 12: Authenticate with Google Cloud
+      # Step 12: Authenticate with Google Cloud using Workload Identity
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: \${{ secrets.GCP_SA_JSON }}
+          workload_identity_provider: 'projects/473068119033/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
+          service_account: 'github-actions-deploy@careercopilot-staging.iam.gserviceaccount.com'
           
       # Step 12.1: Configure Docker for Artifact Registry
       - name: Configure Docker for Artifact Registry
