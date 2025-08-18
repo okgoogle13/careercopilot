@@ -88,8 +88,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: functions/package-lock.json
           
       # Step 7.1: Install functions dependencies
       - name: Install functions dependencies
