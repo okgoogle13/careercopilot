@@ -125,7 +125,7 @@ jobs:
         with:
           registry: us-central1-docker.pkg.dev
           username: _json_key
-          password: \${{ secrets.GCP_JSON_KEY }}
+          password: \${{ secrets.GCP_SA_KEY }}
       
       # Step 13: Set up Docker Buildx for better caching and multi-platform builds
       - name: Set up Docker Buildx
