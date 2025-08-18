@@ -64,9 +64,9 @@ jobs:
             ~/.npm
             node_modules
             functions/node_modules
-          key: \${{ runner.os }}-node-modules-\${{ hashFiles('package-lock.json', 'functions/package-lock.json') }}
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json', 'functions/package-lock.json') }}
           restore-keys: |
-            \${{ runner.os }}-node-modules-
+            ${{ runner.os }}-node-modules-
 
       # Step 4: Check for package-lock.json consistency
       - name: Check for lock file consistency
@@ -155,27 +155,27 @@ jobs:
       # Step 16: Deploy to Firebase Hosting
       - name: Deploy to Firebase Hosting
         env:
-          FIREBASE_TOKEN: \${{ secrets.FIREBASE_TOKEN }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           # Use channel deploy with explicit channelID to avoid "channelID is currently required" error.
           # Deploys to the staging channel named `careercopilot-staging`.
-          firebase hosting:channel:deploy careercopilot-staging --project \$FIREBASE_PROJECT --token "\$FIREBASE_TOKEN"
+          firebase hosting:channel:deploy careercopilot-staging --project $FIREBASE_PROJECT --token "$FIREBASE_TOKEN"
 
       # Step 17: Summary output
       - name: Deployment Summary
         run: |
-          echo "# Deployment Summary" >> \$GITHUB_STEP_SUMMARY
-          echo "✅ Docker image: \`\$DOCKER_IMAGE\`" >> \$GITHUB_STEP_SUMMARY
-          echo "✅ Firebase project: \`\$FIREBASE_PROJECT\`" >> \$GITHUB_STEP_SUMMARY
-          echo "✅ Branch: \`develop\`" >> \$GITHUB_STEP_SUMMARY
-          echo "✅ Deployment timestamp: \`\$(date)\`" >> \$GITHUB_STEP_SUMMARY
+          echo "# Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Docker image: \`$DOCKER_IMAGE\`" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Firebase project: \`$FIREBASE_PROJECT\`" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Branch: \`develop\`" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Deployment timestamp: \`$(date)\`" >> $GITHUB_STEP_SUMMARY
 
       # Step 18: Create deployment status
       - name: Create GitHub deployment
         uses: chrnorm/deployment-action@v2
         id: deployment
         with:
-          token: \${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           environment: production
           description: 'Deployment from develop branch'
           
@@ -183,18 +183,18 @@ jobs:
       - name: Update deployment status
         uses: chrnorm/deployment-status@v2
         with:
-          token: \${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           state: success
-          deployment-id: \${{ steps.deployment.outputs.deployment_id }}
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
           environment-url: https://careercopilot-staging.web.app
 
       # Step 20: Notify on failure (optional)
       - name: Notify failure
         if: failure()
         run: |
-          echo "# ❌ Deployment Failed" >> \$GITHUB_STEP_SUMMARY
-          echo "* Branch: develop" >> \$GITHUB_STEP_SUMMARY
-          echo "* Timestamp: \$(date)" >> \$GITHUB_STEP_SUMMARY
-          echo "* See logs above for details" >> \$GITHUB_STEP_SUMMARY
+          echo "# ❌ Deployment Failed" >> $GITHUB_STEP_SUMMARY
+          echo "* Branch: develop" >> $GITHUB_STEP_SUMMARY
+          echo "* Timestamp: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "* See logs above for details" >> $GITHUB_STEP_SUMMARY
 
 # End of workflow file
