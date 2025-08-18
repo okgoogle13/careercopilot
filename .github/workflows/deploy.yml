@@ -133,7 +133,9 @@ jobs:
         env:
           FIREBASE_TOKEN: \${{ secrets.FIREBASE_TOKEN }}
         run: |
-          firebase deploy --project \$FIREBASE_PROJECT --only hosting
+          # Use channel deploy with explicit channelID to avoid "channelID is currently required" error.
+          # Deploys to the staging channel named `careercopilot-staging`.
+          firebase hosting:channel:deploy careercopilot-staging --project \$FIREBASE_PROJECT --token "\$FIREBASE_TOKEN"
 
       # Step 17: Summary output
       - name: Deployment Summary
