@@ -67,7 +67,10 @@ jobs:
 
       # Step 4: Check for package-lock.json consistency
       - name: Check for lock file consistency
-        run: npm install --package-lock-only
+        run: |
+          if [ -f package-lock.json ]; then
+            npm install --package-lock-only
+          fi
 
       # Step 5: Install dependencies
       - name: Install dependencies
@@ -80,7 +83,15 @@ jobs:
         run: npm install
         working-directory: ./frontend
         
-      # Step 7: Install functions dependencies
+      # Step 7: Set up Node.js 22 for functions
+      - name: Set up Node.js 22 for functions  
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: functions/package-lock.json
+          
+      # Step 7.1: Install functions dependencies
       - name: Install functions dependencies
         run: npm ci
         working-directory: ./functions
