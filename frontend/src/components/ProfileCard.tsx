@@ -20,7 +20,7 @@ export default function ProfileCard(): JSX.Element {
   useEffect(() => {
     async function loadProfile() {
       try {
-        const data = await fetchUserProfile();
+        const data = await fetchUserProfile() as Profile;
         setProfile(data);
         setIsLoading(false);
       } catch (err) {

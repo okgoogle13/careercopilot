@@ -3,7 +3,9 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+  // plugin typing between vite and vitest can be incompatible depending on
+  // nested node_modules; cast to `any` which is safe here for config only.
+  plugins: [react() as any],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src')
