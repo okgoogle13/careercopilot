@@ -144,7 +144,7 @@ jobs:
         with:
           context: ./backend
           push: true
-          tags: \${{ env.DOCKER_IMAGE }}
+          tags: ${{ env.DOCKER_IMAGE }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
