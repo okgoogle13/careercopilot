@@ -119,13 +119,15 @@ jobs:
             frontend/.next/
             frontend/build/
 
-      # Step 12: Log in to Google Artifact Registry (Docker)
-      - name: Authenticate Docker for Google Artifact Registry
-        uses: docker/login-action@v3
+      # Step 12: Authenticate with Google Cloud
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          registry: us-central1-docker.pkg.dev
-          username: _json_key
-          password: \${{ secrets.GCP_JSON_KEY }}
+          credentials_json: \${{ secrets.GCP_JSON_KEY }}
+          
+      # Step 12.1: Configure Docker for Artifact Registry
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
       
       # Step 13: Set up Docker Buildx for better caching and multi-platform builds
       - name: Set up Docker Buildx
