@@ -156,6 +156,7 @@ jobs:
       - name: Deploy to Firebase Hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        working-directory: ./frontend
         run: |
           # Use channel deploy with explicit channelID to avoid "channelID is currently required" error.
           # Deploys to the staging channel named `careercopilot-staging`.
