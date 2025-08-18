@@ -9,6 +9,7 @@ from starlette.responses import StreamingResponse
 from google.cloud.firestore import SERVER_TIMESTAMP
 from google.api_core.exceptions import GoogleAPICallError, NotFound
 from pydantic import ValidationError
+
 try:
     from jinja2 import Environment, FileSystemLoader
 except Exception:
@@ -31,6 +32,7 @@ except Exception:
         def get_template(self, path):
             return _SimpleTemplate()
 
+
 try:
     from weasyprint import HTML, CSS
 except Exception:
@@ -46,6 +48,7 @@ except Exception:
 
         def write_pdf(self, stylesheets=None):
             return (self.string or "").encode("utf-8")
+
 
 import io
 
@@ -72,6 +75,7 @@ except Exception:
 
             return _Ctx()
 
+
 try:
     import docx
 except Exception:
@@ -80,6 +84,7 @@ except Exception:
         class Document:
             def __init__(self, path=None):
                 self.paragraphs = []
+
 
 from app.core.dependencies import get_current_user, get_user_document_from_firestore
 from app.core.db import db
@@ -95,9 +100,7 @@ Theme = Literal["professional", "modern", "creative"]
 
 def parse_pdf(file_path: str) -> str:
     with pdfplumber.open(file_path) as pdf:
-        return "".join(
-            page.extract_text() for page in pdf.pages if page.extract_text()
-        )
+        return "".join(page.extract_text() for page in pdf.pages if page.extract_text())
 
 
 def parse_docx(file_path: str) -> str:
@@ -116,11 +119,13 @@ async def process_and_upload_file(file: UploadFile, uid: str, doc_type: str):
 # returns 501 so imports and test collection succeed.
 try:
     import multipart  # type: ignore
+
     MULTIPART_OK = True
 except Exception:
     MULTIPART_OK = False
 
 if MULTIPART_OK:
+
     @router.post("/upload")
     async def upload_and_parse_files(
         files: List[UploadFile] = File(...),
@@ -129,12 +134,17 @@ if MULTIPART_OK:
     ):
         # This is a placeholder for the actual implementation
         pass
+
 else:
+
     @router.post("/upload", include_in_schema=False)
     async def upload_and_parse_files():
         # Multipart not installed in this environment (likely CI/test); return
         # a 501 Not Implemented to avoid import-time errors.
-        raise HTTPException(status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="multipart not installed")
+        raise HTTPException(
+            status_code=status.HTTP_501_NOT_IMPLEMENTED,
+            detail="multipart not installed",
+        )
 
 
 @router.get("/{document_id}/download-pdf")
@@ -163,7 +173,9 @@ async def download_document_as_pdf(
             stylesheets=[stylesheet]
         )
 
-        response = StreamingResponse(io.BytesIO(pdf_bytes), media_type="application/pdf")
+        response = StreamingResponse(
+            io.BytesIO(pdf_bytes), media_type="application/pdf"
+        )
         original_filename = document.get("originalFilename", "document").split(".")[0]
         response.headers[
             "Content-Disposition"

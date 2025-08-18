@@ -9,6 +9,7 @@ load_dotenv()
 
 # Define the Gemini Pro model
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -25,13 +26,14 @@ if googleai is not None:
     genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 # Define the Job Analyzer Genkit flow
 @genkit.flow()
 def analyze_job_description(job_description: str) -> dict:
     """
     Analyzes a job description to extract key information.
     """
-    
+
     prompt = f"""
     Analyze the following job description and extract the key information in a structured JSON format. 
     The JSON object should include the following fields:
@@ -43,7 +45,7 @@ def analyze_job_description(job_description: str) -> dict:
     Job Description:
     {job_description}
     """
-    
+
     response = gemini_pro.generate(prompt)
-    
+
     return response.text()

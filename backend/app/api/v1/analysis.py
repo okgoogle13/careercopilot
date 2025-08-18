@@ -100,7 +100,10 @@ async def optimize_resume_endpoint(
             resumeText=resume_text, jobDescription=request.job_description
         )
 
-        if not analysis_result.missingKeywords or len(analysis_result.missingKeywords) == 0:
+        if (
+            not analysis_result.missingKeywords
+            or len(analysis_result.missingKeywords) == 0
+        ):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail="No missing keywords were found to optimize. Your resume is already well-aligned!",

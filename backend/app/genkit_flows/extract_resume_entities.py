@@ -1,4 +1,5 @@
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -18,11 +19,19 @@ if googleai is not None:
         genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 # Define the structured output model for resume entities
 class ResumeEntities(BaseModel):
-    skills: List[str] = Field(description="A comprehensive list of all skills mentioned in the resume.")
-    experience: List[Dict[str, Any]] = Field(description="A list of job experiences, including titles, companies, and durations.")
-    education: List[Dict[str, Any]] = Field(description="A list of educational qualifications, including degrees and institutions.")
+    skills: List[str] = Field(
+        description="A comprehensive list of all skills mentioned in the resume."
+    )
+    experience: List[Dict[str, Any]] = Field(
+        description="A list of job experiences, including titles, companies, and durations."
+    )
+    education: List[Dict[str, Any]] = Field(
+        description="A list of educational qualifications, including degrees and institutions."
+    )
+
 
 @genkit.flow(output_schema=ResumeEntities)
 def extractResumeEntities(resumeText: str) -> ResumeEntities:
@@ -38,16 +47,17 @@ def extractResumeEntities(resumeText: str) -> ResumeEntities:
     {resumeText}
     ---
     """
-    
+
     response = gemini_pro.generate(
         prompt=prompt,
         config=googleai.GenerationConfig(
             response_mime_type="application/json",
         ),
-        output_schema=ResumeEntities
+        output_schema=ResumeEntities,
     )
-    
+
     return response.output()
+
 
 # Backwards-compatible snake_case alias used by other modules
 def extract_resume_entities(resumeText: str) -> ResumeEntities:

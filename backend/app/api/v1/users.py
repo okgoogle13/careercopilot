@@ -16,9 +16,7 @@ async def create_user_profile(uid: str = Depends(get_current_user)):
         # Check if user profile already exists
         user_ref = db.collection("users").document(uid)
         if user_ref.get().exists:
-            raise HTTPException(
-                status_code=409, detail="User profile already exists"
-            )
+            raise HTTPException(status_code=409, detail="User profile already exists")
 
         # Get user data from Firebase Auth
         user_record = auth.get_user(uid)

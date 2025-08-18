@@ -38,9 +38,11 @@ app.include_router(profile_router, prefix=settings.API_V1_STR)
 app.include_router(settings_router, prefix=settings.API_V1_STR)
 app.include_router(users_router, prefix=settings.API_V1_STR)
 
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)

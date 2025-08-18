@@ -1,4 +1,5 @@
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -24,15 +25,16 @@ if googleai is not None:
         genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 def get_gmail_service(user_id: str):
     """Creates a Gmail API service client for a given user."""
     # This function remains the same
-    creds_json = get_user_secret(user_id, 'google_credentials')
+    creds_json = get_user_secret(user_id, "google_credentials")
     if not creds_json:
         raise Exception("User has not authenticated with Google.")
-    
+
     credentials = Credentials.from_authorized_user_info(creds_json)
-    return build('gmail', 'v1', credentials=credentials)
+    return build("gmail", "v1", credentials=credentials)
 
 
 @genkit.flow()
@@ -52,7 +54,7 @@ def extract_job_details_from_email(email_content: str) -> dict:
     """
     response = gemini_pro.generate(
         prompt=prompt,
-        config=googleai.GenerationConfig(response_mime_type="application/json")
+        config=googleai.GenerationConfig(response_mime_type="application/json"),
     )
     try:
         return json.loads(response.text())
@@ -67,7 +69,7 @@ async def scanUserEmails(user_id: str) -> list:
     """
     try:
         # 1. Get user data for notifications
-        user_ref = db.collection('users').document(user_id)
+        user_ref = db.collection("users").document(user_id)
         user_doc = user_ref.get()
         if not user_doc.exists:
             raise Exception(f"User with ID {user_id} not found in Firestore.")
@@ -76,41 +78,53 @@ async def scanUserEmails(user_id: str) -> list:
         service = get_gmail_service(user_id)
         # Refined query to be more specific
         query = "is:unread (from:greenhouse.io OR from:lever.co OR subject:('Your application for'))"
-        results = service.users().messages().list(userId='me', q=query, maxResults=10).execute()
-        messages = results.get('messages', [])
-        
+        results = (
+            service.users()
+            .messages()
+            .list(userId="me", q=query, maxResults=10)
+            .execute()
+        )
+        messages = results.get("messages", [])
+
         saved_opportunities = []
         if not messages:
             return []
 
         for message_info in messages:
-            msg = service.users().messages().get(userId='me', id=message_info['id'], format='full').execute()
-            
+            msg = (
+                service.users()
+                .messages()
+                .get(userId="me", id=message_info["id"], format="full")
+                .execute()
+            )
+
             # Simplified body extraction logic
-            parts = msg.get('payload', {}).get('parts', [])
+            parts = msg.get("payload", {}).get("parts", [])
             encoded_body = ""
             if parts:
                 for part in parts:
-                    if part.get('mimeType') == 'text/plain':
-                        encoded_body = part.get('body', {}).get('data', '')
+                    if part.get("mimeType") == "text/plain":
+                        encoded_body = part.get("body", {}).get("data", "")
                         break
-            
+
             if not encoded_body:
                 continue
 
-            email_body = base64.urlsafe_b64decode(encoded_body).decode('utf-8')
+            email_body = base64.urlsafe_b64decode(encoded_body).decode("utf-8")
             job_details = await extract_job_details_from_email.run(email_body)
 
             if job_details and job_details.get("title"):
                 # Save to Firestore
-                update_time, opp_ref = user_ref.collection('opportunities').add({
-                    **job_details,
-                    'status': 'new',
-                    'found_at': SERVER_TIMESTAMP,
-                })
-                
+                update_time, opp_ref = user_ref.collection("opportunities").add(
+                    {
+                        **job_details,
+                        "status": "new",
+                        "found_at": SERVER_TIMESTAMP,
+                    }
+                )
+
                 # Add the new document ID for subsequent flows
-                job_details['id'] = opp_ref.id
+                job_details["id"] = opp_ref.id
                 saved_opportunities.append(job_details)
 
                 # 2. Create Calendar Event (if a deadline was found)
@@ -118,16 +132,24 @@ async def scanUserEmails(user_id: str) -> list:
                     try:
                         await createCalendarEvent.run(user_id, job_details)
                     except Exception as e:
-                        print(f"Failed to create calendar event for opportunity {opp_ref.id}: {e}")
-                
+                        print(
+                            f"Failed to create calendar event for opportunity {opp_ref.id}: {e}"
+                        )
+
                 # 3. Send Notification Email
                 try:
                     await sendNewOpportunityNotification.run(user_data, job_details)
                 except Exception as e:
-                    print(f"Failed to send notification for opportunity {opp_ref.id}: {e}")
-                
+                    print(
+                        f"Failed to send notification for opportunity {opp_ref.id}: {e}"
+                    )
+
                 # Mark email as read
-                service.users().messages().modify(userId='me', id=message_info['id'], body={'removeLabelIds': ['UNREAD']}).execute()
+                service.users().messages().modify(
+                    userId="me",
+                    id=message_info["id"],
+                    body={"removeLabelIds": ["UNREAD"]},
+                ).execute()
 
         return saved_opportunities
     except HttpError as error:

@@ -1,4 +1,5 @@
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -14,11 +15,12 @@ if googleai is not None:
 else:
     gemini_pro = None
 
+
 @genkit.flow()
 def generate_tailored_cover_letter(
-    base_profile_data: dict, 
-    job_analysis_data: dict, 
-    voice_profile: Optional[dict] = None
+    base_profile_data: dict,
+    job_analysis_data: dict,
+    voice_profile: Optional[dict] = None,
 ) -> str:
     """
     Acts as an expert career coach to write a tailored cover letter,
@@ -56,7 +58,7 @@ def generate_tailored_cover_letter(
     - **Key Vocabulary to include:** {', '.join(voice_profile.get('professional_vocabulary', []))}
     ---
         """
-    
+
     # Final instruction to the model
     prompt += "\\n\\nNow, write the cover letter. The output should be only the full text of the letter itself."
 

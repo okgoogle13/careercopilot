@@ -12,6 +12,7 @@ if REPO_ROOT not in sys.path:
 
 from app.main import app
 
+
 @pytest.fixture
 def mock_db():
     """Fixture to mock the Firestore database client."""
@@ -20,39 +21,40 @@ def mock_db():
 
 @pytest.fixture(autouse=True)
 def override_dependencies(mock_db):
-        """Automatically override external dependencies for tests.
+    """Automatically override external dependencies for tests.
 
-        - Ensure endpoints using `get_current_user` receive a stable test UID.
-        - Replace the real Firestore `db` client with the MagicMock fixture so
-            route handlers write to the mock during tests.
-        """
-        from app.core.dependencies import get_current_user
-        import app.core.db as core_db
+    - Ensure endpoints using `get_current_user` receive a stable test UID.
+    - Replace the real Firestore `db` client with the MagicMock fixture so
+        route handlers write to the mock during tests.
+    """
+    from app.core.dependencies import get_current_user
+    import app.core.db as core_db
 
-        # Provide a deterministic UID for dependency calls
-        app.dependency_overrides[get_current_user] = lambda: "test_user_id"
+    # Provide a deterministic UID for dependency calls
+    app.dependency_overrides[get_current_user] = lambda: "test_user_id"
 
-        # Swap out the db client used by routes
-        core_db.db = mock_db
+    # Swap out the db client used by routes
+    core_db.db = mock_db
 
-        # Some modules import `db` at module import time (e.g. `from app.core.db import db`).
-        # Update any already-imported app.* modules that have a `db` attribute so
-        # route handlers use the MagicMock during tests.
-        import sys
+    # Some modules import `db` at module import time (e.g. `from app.core.db import db`).
+    # Update any already-imported app.* modules that have a `db` attribute so
+    # route handlers use the MagicMock during tests.
+    import sys
 
-        for mod in list(sys.modules.values()):
-            try:
-                name = getattr(mod, "__name__", "")
-                if name.startswith("app.") and hasattr(mod, "db"):
-                    setattr(mod, "db", mock_db)
-            except Exception:
-                # Be resilient to odd module objects in sys.modules
-                continue
+    for mod in list(sys.modules.values()):
+        try:
+            name = getattr(mod, "__name__", "")
+            if name.startswith("app.") and hasattr(mod, "db"):
+                setattr(mod, "db", mock_db)
+        except Exception:
+            # Be resilient to odd module objects in sys.modules
+            continue
 
-        yield
+    yield
 
-        # Restore clean state after each test
-        app.dependency_overrides.clear()
+    # Restore clean state after each test
+    app.dependency_overrides.clear()
+
 
 @pytest.fixture
 async def client():
@@ -73,9 +75,10 @@ async def client():
         except Exception:
             from httpx._transports.asgi import ASGITransport
 
-        async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as ac:
+        async with AsyncClient(
+            transport=ASGITransport(app=app), base_url="http://test"
+        ) as ac:
             yield ac
-
 
 
 @pytest.fixture

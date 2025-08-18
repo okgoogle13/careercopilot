@@ -13,12 +13,13 @@ if not genkit.get_plugin("googleai"):
 # Define the Gemini Pro model
 gemini_pro = googleai.gemini_pro
 
+
 @genkit.flow()
 def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> dict:
     """
     Acts as an expert career coach to compare a resume to a job analysis.
     """
-    
+
     prompt = f"""
     As an expert career coach, analyze the provided resume against the structured job analysis data.
     Your goal is to provide a detailed comparison and actionable feedback.
@@ -39,9 +40,9 @@ def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> dict:
     {job_analysis_data}
     ---
     """
-    
+
     response = gemini_pro.generate(prompt)
-    
+
     # The output from the model is expected to be a string representation of a JSON object.
     # We will return it as such, and the API endpoint will parse it.
     return response.text()

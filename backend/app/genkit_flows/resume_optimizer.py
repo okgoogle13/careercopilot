@@ -1,4 +1,5 @@
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -16,12 +17,19 @@ if googleai is not None:
         genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 class OptimizedResume(BaseModel):
     """The full, optimized resume text."""
-    resume_text: str = Field(description="The complete and updated resume text, with keywords naturally integrated.")
+
+    resume_text: str = Field(
+        description="The complete and updated resume text, with keywords naturally integrated."
+    )
+
 
 @genkit.flow(output_schema=OptimizedResume)
-def optimizeResume(resumeText: str, missingKeywords: List[str], jobDescription: str) -> OptimizedResume:
+def optimizeResume(
+    resumeText: str, missingKeywords: List[str], jobDescription: str
+) -> OptimizedResume:
     """
     Analyzes a resume and a list of missing keywords, then rewrites the resume
     to naturally incorporate those keywords in the context of the job description.
@@ -59,10 +67,10 @@ def optimizeResume(resumeText: str, missingKeywords: List[str], jobDescription: 
     response = gemini_pro.generate(
         prompt=prompt,
         config=googleai.GenerationConfig(
-            temperature=0.2, # Lower temperature for more focused and less creative output
-            response_mime_type="application/json"
+            temperature=0.2,  # Lower temperature for more focused and less creative output
+            response_mime_type="application/json",
         ),
-        output_schema=OptimizedResume
+        output_schema=OptimizedResume,
     )
 
     optimized_resume = response.output()

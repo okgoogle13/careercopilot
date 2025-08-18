@@ -1,4 +1,5 @@
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -14,6 +15,7 @@ if googleai is not None:
         genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 @genkit.flow()
 def generate_voice_profile(user_id: str) -> dict:
     """
@@ -21,9 +23,9 @@ def generate_voice_profile(user_id: str) -> dict:
     """
     try:
         # 1. Fetch all of the user's documents from Firestore
-        docs_ref = db.collection('users').document(user_id).collection('documents')
+        docs_ref = db.collection("users").document(user_id).collection("documents")
         docs = docs_ref.stream()
-        
+
         all_text = ""
         doc_count = 0
         for doc in docs:
@@ -31,7 +33,7 @@ def generate_voice_profile(user_id: str) -> dict:
             if text:
                 all_text += text + "\\n\\n---\\n\\n"
                 doc_count += 1
-        
+
         if doc_count < 1 or not all_text.strip():
             raise ValueError("Not enough document content to generate a voice profile.")
 
@@ -56,15 +58,15 @@ def generate_voice_profile(user_id: str) -> dict:
         voice_profile_data = json.loads(response.text())
 
         # 4. Save the profile to the user's main document
-        user_ref = db.collection('users').document(user_id)
-        user_ref.set({
-            'voice_profile': voice_profile_data
-        }, merge=True)
+        user_ref = db.collection("users").document(user_id)
+        user_ref.set({"voice_profile": voice_profile_data}, merge=True)
 
         return voice_profile_data
 
     except Exception as e:
-        print(f"An error occurred during voice profile generation for user {user_id}: {e}")
+        print(
+            f"An error occurred during voice profile generation for user {user_id}: {e}"
+        )
         # Re-raise the exception so the calling endpoint can handle it
         raise e
 

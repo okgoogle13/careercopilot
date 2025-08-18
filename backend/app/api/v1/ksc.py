@@ -69,7 +69,10 @@ async def generate_ksc_responses(
         # 4. Save the compiled text as a new document in Firestore
         doc_id = str(uuid.uuid4())
         doc_ref = (
-            db.collection("users").document(uid).collection("documents").document(doc_id)
+            db.collection("users")
+            .document(uid)
+            .collection("documents")
+            .document(doc_id)
         )
 
         new_doc_data = {

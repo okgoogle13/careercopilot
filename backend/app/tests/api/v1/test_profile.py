@@ -5,10 +5,12 @@ from unittest.mock import patch, MagicMock
 # Ensure we can patch the genkit flow used by the endpoint
 from app.genkit_flows.voice_profiler import generateVoiceProfile
 
+
 # A pydantic model mock to simulate the output of the genkit flow
 class MockVoiceProfile(MagicMock):
     def dict(self):
         return {"tone": "professional", "style": "concise"}
+
 
 @pytest.mark.asyncio
 async def test_generate_and_save_voice_profile(client: AsyncClient, mock_db: MagicMock):
@@ -32,6 +34,5 @@ async def test_generate_and_save_voice_profile(client: AsyncClient, mock_db: Mag
         mock_db.collection.assert_called_with("users")
         mock_db.collection.return_value.document.assert_called_with("test_user_id")
         mock_db.collection.return_value.document.return_value.set.assert_called_with(
-            {"voice_profile": {"tone": "professional", "style": "concise"}},
-            merge=True
+            {"voice_profile": {"tone": "professional", "style": "concise"}}, merge=True
         )

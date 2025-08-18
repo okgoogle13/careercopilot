@@ -20,12 +20,13 @@ if googleai is not None:
         genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 @genkit.flow()
 def generate_tailored_resume(base_profile_data: dict, comparison_analysis: dict) -> str:
     """
     Acts as an expert resume writer to generate a tailored resume.
     """
-    
+
     prompt = f"""
     As an expert resume writer, your task is to rewrite the provided base profile data into a new, tailored resume.
     You must use the provided comparison analysis to guide your writing.
@@ -46,7 +47,7 @@ def generate_tailored_resume(base_profile_data: dict, comparison_analysis: dict)
     {comparison_analysis}
     ---
     """
-    
+
     response = gemini_pro.generate(prompt)
-    
+
     return response.text()

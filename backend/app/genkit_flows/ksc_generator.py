@@ -18,6 +18,7 @@ if googleai is not None:
         genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 # Define the structured output model using Pydantic
 class STAR_Response(BaseModel):
     situation: str
@@ -25,12 +26,13 @@ class STAR_Response(BaseModel):
     action: str
     result: str
 
+
 @genkit.flow(output_schema=STAR_Response)
 def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Response:
     """
     Acts as an expert career coach to generate a STAR response for a KSC statement.
     """
-    
+
     prompt = f"""
     As an expert career coach and a master of the STAR interview technique, your task is to generate a response for a Key Selection Criterion (KSC).
 
@@ -47,7 +49,7 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
 
     Now, generate the STAR response based on the user's experience.
     """
-    
+
     # Generate the response using the Gemini model, ensuring JSON output
     response = gemini_pro.generate(
         prompt=prompt,
@@ -55,5 +57,5 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
             response_mime_type="application/json",
         ),
     )
-    
+
     return response.output()

@@ -1,4 +1,5 @@
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -28,7 +29,9 @@ if googleai is not None:
 
 # --- Helper Functions for Scoring Logic ---
 def _calculate_keyword_score(
-    resume_skills: List[str], job_reqs: JobRequirements, profile_keywords: List[str] = None
+    resume_skills: List[str],
+    job_reqs: JobRequirements,
+    profile_keywords: List[str] = None,
 ):
     """Calculates a score based on keyword matching."""
     required_matched = [

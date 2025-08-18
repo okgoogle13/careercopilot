@@ -1,7 +1,9 @@
 import os
+
 try:
     from google.cloud import secretmanager
     from google.api_core.exceptions import NotFound
+
     _HAS_SECRETMANAGER = True
 except Exception:
     secretmanager = None
@@ -16,14 +18,18 @@ GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 if _HAS_SECRETMANAGER:
     client = secretmanager.SecretManagerServiceClient()
 else:
+
     class _FallbackClient:
         def __getattr__(self, name):
             def _err(*a, **k):
-                raise RuntimeError("google-cloud-secretmanager not installed in this environment")
+                raise RuntimeError(
+                    "google-cloud-secretmanager not installed in this environment"
+                )
 
             return _err
 
     client = _FallbackClient()
+
 
 def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     """
@@ -32,9 +38,9 @@ def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     """
     if not GCP_PROJECT_ID:
         raise ValueError("GCP_PROJECT_ID environment variable not set.")
-    
+
     secret_id = f"careercopilot-{secret_name}-{user_id}"
-    
+
     try:
         secret = client.create_secret(
             request={
@@ -44,7 +50,7 @@ def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
             }
         )
         parent = secret.name
-    except Exception: # AlreadyExists
+    except Exception:  # AlreadyExists
         parent = client.secret_path(GCP_PROJECT_ID, secret_id)
 
     response = client.add_secret_version(
@@ -52,13 +58,14 @@ def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     )
     return response.name
 
+
 def get_user_secret(user_id: str, secret_name: str, version: str = "latest") -> str:
     """
     Retrieves a user-specific secret from Google Cloud Secret Manager.
     """
     if not GCP_PROJECT_ID:
         raise ValueError("GCP_PROJECT_ID environment variable not set.")
-    
+
     secret_id = f"careercopilot-{secret_name}-{user_id}"
     name = f"projects/{GCP_PROJECT_ID}/secrets/{secret_id}/versions/{version}"
     response = client.access_secret_version(request={"name": name})

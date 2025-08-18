@@ -1,4 +1,5 @@
 import genkit
+
 try:
     from genkit.plugins import googleai
 except Exception:
@@ -18,11 +19,19 @@ if googleai is not None:
         genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
     gemini_pro = googleai.gemini_pro
 
+
 # Define the structured output model for job requirements
 class JobRequirements(BaseModel):
-    requiredSkills: List[str] = Field(description="A list of essential skills explicitly mentioned as required.")
-    preferredSkills: List[str] = Field(description="A list of skills mentioned as preferred, desired, or 'a plus'.")
-    experienceLevel: str = Field(description="The required experience level (e.g., 'Entry-level', 'Mid-level', 'Senior', '5+ years').")
+    requiredSkills: List[str] = Field(
+        description="A list of essential skills explicitly mentioned as required."
+    )
+    preferredSkills: List[str] = Field(
+        description="A list of skills mentioned as preferred, desired, or 'a plus'."
+    )
+    experienceLevel: str = Field(
+        description="The required experience level (e.g., 'Entry-level', 'Mid-level', 'Senior', '5+ years')."
+    )
+
 
 @genkit.flow(output_schema=JobRequirements)
 def extractJobRequirements(jobDescription: str) -> JobRequirements:
@@ -38,13 +47,13 @@ def extractJobRequirements(jobDescription: str) -> JobRequirements:
     {jobDescription}
     ---
     """
-    
+
     response = gemini_pro.generate(
         prompt=prompt,
         config=googleai.GenerationConfig(
             response_mime_type="application/json",
         ),
-        output_schema=JobRequirements
+        output_schema=JobRequirements,
     )
-    
+
     return response.output()

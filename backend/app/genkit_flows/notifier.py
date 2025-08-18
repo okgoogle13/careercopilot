@@ -3,6 +3,7 @@ import os
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
+
 @genkit.flow()
 def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> None:
     """
@@ -17,9 +18,9 @@ def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> N
     if not user_email:
         raise ValueError("User data must include an email address.")
 
-    job_title = opportunity_data.get('title', 'N/A')
-    company = opportunity_data.get('company', 'N/A')
-    opportunity_id = opportunity_data.get('id')
+    job_title = opportunity_data.get("title", "N/A")
+    company = opportunity_data.get("company", "N/A")
+    opportunity_id = opportunity_data.get("id")
 
     # Construct the link to the opportunity in the app
     # This might need to be adjusted based on your frontend routing
@@ -50,16 +51,18 @@ def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> N
     """
 
     message = Mail(
-        from_email='notifications@careercopilot.com',  # Must be a verified sender in SendGrid
+        from_email="notifications@careercopilot.com",  # Must be a verified sender in SendGrid
         to_emails=user_email,
         subject=subject,
-        html_content=html_content
+        html_content=html_content,
     )
 
     try:
         sg = SendGridAPIClient(sendgrid_api_key)
         response = sg.send(message)
-        print(f"Notification email sent to {user_email}, status code: {response.status_code}")
+        print(
+            f"Notification email sent to {user_email}, status code: {response.status_code}"
+        )
     except Exception as e:
         print(f"Error sending notification email: {e}")
         # Decide if you want to raise an exception or just log the error
