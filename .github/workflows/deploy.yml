@@ -41,7 +41,7 @@ jobs:
     needs: typecheck
     timeout-minutes: 30 # Set a reasonable timeout
     env:
-      DOCKER_IMAGE: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend@sha256:b2154f5416a37f50e1fd3f79611faafd2dc3c0e6c53ea9acebb851e8300977bf
+      DOCKER_IMAGE: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend:latest
       FIREBASE_PROJECT: careercopilot-staging
 
     steps:
