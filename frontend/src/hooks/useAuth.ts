@@ -16,9 +16,18 @@ interface AuthState {
 
 // Helper to get correct API URL for Node/browser
 function getApiUrl(path: string): string {
+  // Check for environment variable first
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  if (backendUrl) {
+    return `${backendUrl}${path}`;
+  }
+  
+  // Node.js testing environment
   if (typeof process !== 'undefined' && process.release && process.release.name === 'node') {
     return `http://localhost${path}`;
   }
+  
+  // Browser - use relative path (proxied by Vite or served by same domain)
   return path;
 }
 
