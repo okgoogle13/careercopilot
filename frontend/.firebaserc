@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "careercopilot-staging"
+    "default": "careercopilot-staging",
+    "staging": "careercopilot-staging",
+    "production": "careercopilot-468811"
   }
 }
