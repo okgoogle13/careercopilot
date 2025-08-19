@@ -1,13 +1,14 @@
-# Deploy Workflow for Node.js Backend with Docker and Firebase
-# This workflow runs on pushes to develop branch and covers build, test, lint, Docker push, and Firebase deploy.
-# No "--channel" flags are used anywhere.
+# Deploy Workflow for Staging and Production environments
+# This workflow is enhanced with Workload Identity Federation for secure authentication
+# and includes comprehensive CI/CD improvements from frontend testing infrastructure
 
-name: Deploy Backend (Docker + Firebase)
+name: CD - Deploy to Staging and Production
 
 on:
   push:
     branches:
       - develop
+      - main
   workflow_dispatch: {}
 
 permissions:
@@ -16,172 +17,135 @@ permissions:
   deployments: write
 
 jobs:
-  typecheck:
+  # ===================================================================
+  #  STAGING DEPLOYMENT JOB
+  #  This job runs ONLY when code is pushed to the 'develop' branch.
+  # ===================================================================
+  deploy-staging:
+    name: Deploy to Staging
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Install frontend deps
-        # Use `npm install` in CI to tolerate a package.json / package-lock.json drift
-        # (the repo's lockfile wasn't updated when vite was bumped). `npm ci` fails
-        # when lockfile doesn't match package.json; `npm install` will install
-        # compatible versions so the job can continue. Consider updating the
-        # lockfile in the repo to restore `npm ci` later.
-        run: npm install
-        working-directory: ./frontend
-      - name: Typecheck frontend
-        run: npm run typecheck
-        working-directory: ./frontend
-
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    needs: typecheck
-    timeout-minutes: 30 # Set a reasonable timeout
-    env:
-      DOCKER_IMAGE: us-central1-docker.pkg.dev/careercopilot-staging/careercopilot-repo/backend:latest
-      FIREBASE_PROJECT: careercopilot-staging
+    if: github.ref == 'refs/heads/develop'
+    environment: staging
+    timeout-minutes: 30
 
     steps:
-      # Step 1: Checkout code
-      - name: Checkout repository
+      # Step 1: Check out the repository code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
+      # Step 2: Set up Node.js with caching
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'npm'
 
-      # Step 3: Restore npm cache (for faster installs)
-      - name: Restore npm cache  
+      # Step 3: Enhanced npm cache for faster installs
+      - name: Restore npm cache
         uses: actions/cache@v4
         with:
           path: |
             ~/.npm
-            node_modules
+            frontend/node_modules
             functions/node_modules
-          key: ${{ runner.os }}-node-modules-${{ hashFiles('package-lock.json', 'functions/package-lock.json') }}
+          key: ${{ runner.os }}-staging-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-node-modules-
+            ${{ runner.os }}-staging-
 
-      # Step 4: Check for package-lock.json consistency
-      - name: Check for lock file consistency
+      # Step 4: Install and test frontend with enhanced error handling
+      - name: Install Frontend Dependencies
         run: |
-          if [ -f package-lock.json ]; then
-            npm install --package-lock-only
-          fi
-
-      # Step 5: Install dependencies
-      - name: Install dependencies
-        run: npm ci
-        
-      # Step 6: Install frontend dependencies  
-      - name: Install frontend dependencies
-        run: |
-          # Clear any problematic cached modules first
-          rm -rf node_modules package-lock.json
+          # Use npm install to handle potential package-lock.json drift
           npm install
         working-directory: ./frontend
-        
-      # Step 7: Set up Node.js 22 for functions
-      - name: Set up Node.js 22 for functions  
+
+      - name: Typecheck Frontend
+        run: npm run typecheck
+        working-directory: ./frontend
+
+      - name: Lint Frontend
+        run: npm run lint
+        working-directory: ./frontend
+
+      - name: Test Frontend
+        run: npm test
+        working-directory: ./frontend
+
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./frontend
+
+      # Step 5: Set up Node.js 22 for functions
+      - name: Set up Node.js 22 for functions
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          
-      # Step 7.1: Install functions dependencies
+
       - name: Install functions dependencies
         run: npm ci
         working-directory: ./functions
 
-      # Step 8: Lint code (run in frontend directory so Vite/ESLint resolve frontend files)
-      - name: Lint code
-        run: npm run lint
-        working-directory: ./frontend
-
-      # Step 9: Run tests (run in frontend directory)
-      - name: Run tests
-        run: npm test
-        working-directory: ./frontend
-
-      # Step 10: Build project (frontend build — run in frontend directory so Vite finds index.html)
-      - name: Build project
-        run: npm run build
-        working-directory: ./frontend
-
-      # Step 11: Collect build artifacts (optional)
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: |
-            frontend/dist/
-            frontend/.next/
-            frontend/build/
-
-      # Step 12: Authenticate with Google Cloud using Workload Identity
-      - name: Authenticate to Google Cloud
+      # Step 6: Enhanced authentication using Workload Identity Federation
+      - name: Authenticate to Google Cloud (Staging)
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: 'projects/473068119033/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider'
           service_account: 'github-actions-deploy@careercopilot-staging.iam.gserviceaccount.com'
-          
-      # Step 12.1: Configure Docker for Artifact Registry
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      # Step 7: Configure Docker authentication
       - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
-      
-      # Step 13: Set up Docker Buildx for better caching and multi-platform builds
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-          
-      # Step 14: Build and push Docker image with layer caching
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./backend
-          push: true
-          tags: ${{ env.DOCKER_IMAGE }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+        run: gcloud auth configure-docker australia-southeast1-docker.pkg.dev --quiet
 
-      # Step 15: Install Firebase CLI
-      - name: Install Firebase CLI
-        run: npm install -g firebase-tools@latest
-
-      # Step 16: Deploy to Firebase Hosting
-      - name: Deploy to Firebase Hosting
+      # Step 8: Deploy Frontend to Firebase Hosting (Staging)
+      - name: Deploy Frontend to Firebase Hosting (Staging)
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         working-directory: ./frontend
         run: |
-          # Use channel deploy with explicit channelID to avoid "channelID is currently required" error.
-          # Deploys to the staging channel named `careercopilot-staging`.
-          firebase hosting:channel:deploy careercopilot-staging --project $FIREBASE_PROJECT --token "$FIREBASE_TOKEN"
+          npm install -g firebase-tools@latest
+          firebase hosting:channel:deploy careercopilot-staging --project ${{ secrets.GCP_STAGING_PROJECT_ID }} --token "$FIREBASE_TOKEN"
 
-      # Step 17: Summary output
-      - name: Deployment Summary
-        run: |
-          echo "# Deployment Summary" >> $GITHUB_STEP_SUMMARY
-          echo "✅ Docker image: \`$DOCKER_IMAGE\`" >> $GITHUB_STEP_SUMMARY
-          echo "✅ Firebase project: \`$FIREBASE_PROJECT\`" >> $GITHUB_STEP_SUMMARY
-          echo "✅ Branch: \`develop\`" >> $GITHUB_STEP_SUMMARY
-          echo "✅ Deployment timestamp: \`$(date)\`" >> $GITHUB_STEP_SUMMARY
+      # Step 9: Build and Push Docker Image with enhanced caching
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      # Step 18: Create deployment status
+      - name: Build and Push Docker Image to Artifact Registry (Staging)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Step 10: Deploy Backend to Cloud Run (Staging)
+      - name: Deploy Backend to Cloud Run (Staging)
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: 'careercopilot-backend-staging'
+          region: 'australia-southeast2'
+          image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          env_vars: |
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
+            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }}
+            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}
+
+      # Step 11: Deployment tracking and summary
       - name: Create GitHub deployment
         uses: chrnorm/deployment-action@v2
         id: deployment
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          environment: production
+          environment: staging
           description: 'Deployment from develop branch'
-          
-      # Step 19: Update deployment status
+
       - name: Update deployment status
         uses: chrnorm/deployment-status@v2
         with:
@@ -190,13 +154,159 @@ jobs:
           deployment-id: ${{ steps.deployment.outputs.deployment_id }}
           environment-url: https://careercopilot-staging.web.app
 
-      # Step 20: Notify on failure (optional)
+      - name: Deployment Summary
+        run: |
+          echo "# 🚀 Staging Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Frontend deployed to Firebase Hosting" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Backend deployed to Cloud Run" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Docker image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_STAGING_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Environment: staging" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Deployment timestamp: $(date)" >> $GITHUB_STEP_SUMMARY
+
+  # ===================================================================
+  #  PRODUCTION DEPLOYMENT JOB
+  #  This job runs ONLY when code is pushed to the 'main' branch.
+  # ===================================================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    environment: production
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Enhanced Node.js setup with caching
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Restore npm cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            frontend/node_modules
+            functions/node_modules
+          key: ${{ runner.os }}-production-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-production-
+
+      # Frontend build and test with enhanced error handling
+      - name: Install Frontend Dependencies
+        run: npm ci
+        working-directory: ./frontend
+
+      - name: Typecheck Frontend
+        run: npm run typecheck
+        working-directory: ./frontend
+
+      - name: Lint Frontend
+        run: npm run lint
+        working-directory: ./frontend
+
+      - name: Test Frontend
+        run: npm test
+        working-directory: ./frontend
+
+      - name: Build Frontend
+        run: npm run build
+        working-directory: ./frontend
+
+      # Functions setup
+      - name: Set up Node.js 22 for functions
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install functions dependencies
+        run: npm ci
+        working-directory: ./functions
+
+      # Production authentication (keeping existing method for now)
+      - name: Authenticate to Google Cloud (Production)
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker australia-southeast1-docker.pkg.dev --quiet
+
+      # Deploy Frontend to Firebase Hosting (Production)
+      - name: Deploy Frontend to Firebase Hosting (Production)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}'
+          projectId: '${{ secrets.GCP_PROJECT_ID }}'
+          entryPoint: ./frontend
+
+      # Enhanced Docker build with caching
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and Push Docker Image to Artifact Registry (Production)
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Deploy Backend to Cloud Run (Production)
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: 'careercopilot-backend'
+          region: 'australia-southeast2'
+          image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}
+          env_vars: |
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+            PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }}
+            PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }}
+            PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }}
+            SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
+            GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }}
+            GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}
+
+      # Production deployment tracking
+      - name: Create GitHub deployment
+        uses: chrnorm/deployment-action@v2
+        id: deployment
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: production
+          description: 'Deployment from main branch'
+
+      - name: Update deployment status
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          state: success
+          deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+          environment-url: https://careercopilot.com
+
+      - name: Deployment Summary
+        run: |
+          echo "# 🚀 Production Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Frontend deployed to Firebase Hosting" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Backend deployed to Cloud Run" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Docker image: australia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/careercopilot-repo/backend:${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Environment: production" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Deployment timestamp: $(date)" >> $GITHUB_STEP_SUMMARY
+
+      # Failure notification
       - name: Notify failure
         if: failure()
         run: |
-          echo "# ❌ Deployment Failed" >> $GITHUB_STEP_SUMMARY
-          echo "* Branch: develop" >> $GITHUB_STEP_SUMMARY
+          echo "# ❌ Production Deployment Failed" >> $GITHUB_STEP_SUMMARY
+          echo "* Branch: main" >> $GITHUB_STEP_SUMMARY
           echo "* Timestamp: $(date)" >> $GITHUB_STEP_SUMMARY
           echo "* See logs above for details" >> $GITHUB_STEP_SUMMARY
-
-# End of workflow file
