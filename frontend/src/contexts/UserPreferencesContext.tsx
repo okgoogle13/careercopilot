@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { db } from './firebase-config';
+import { db } from '../firebase-config';
 import { doc, onSnapshot } from 'firebase/firestore';
 
 interface UserPreferences {
