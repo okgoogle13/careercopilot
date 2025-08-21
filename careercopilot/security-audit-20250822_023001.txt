@@ -1,0 +1,8 @@
+CareerCopilot Security Audit Report
+Generated: Fri Aug 22 02:30:01 AEST 2025
+Score: 115/135 (85%)
+
+Issues Found:
+  • File frontend/.env has incorrect permissions (644, expected 600)
+  • Environment file may be missing required API keys
+  • No package.json found
