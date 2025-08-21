@@ -1,8 +1,56 @@
-# Placeholder .gitignore
+# Dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables (CRITICAL: NEVER commit these)
 .env
-.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*
+
+# Firebase service account keys (CRITICAL: NEVER commit these)
+*-service-account-key.json
+service-account-*.json
+*_key.json
+*-key.json
+firebase-adminsdk-*.json
+
+# Build outputs
 dist/
 build/
 .cache/
+.next/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Firebase
+.firebase/
+
+# Logs
+logs/
 *.log
+
+# Coverage
+coverage/
+.nyc_output
+
+# Temporary folders
+tmp/
+temp/
+
+# Cache directories
+.eslintcache
+.npm
+.rpt2_cache/
