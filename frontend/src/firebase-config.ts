@@ -1,7 +1,7 @@
 // src/firebase-config.ts
-import { initializeApp, FirebaseApp } from "firebase/app";
-import { getFirestore, Firestore } from "firebase/firestore";
-import { getAuth, Auth } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getFirestore, Firestore } from 'firebase/firestore';
+import { getAuth, Auth } from 'firebase/auth';
 
 // Firebase configuration validation
 interface FirebaseConfigKeys {
@@ -21,28 +21,35 @@ function validateFirebaseConfig(): FirebaseConfigKeys {
     projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
     storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID
+    appId: import.meta.env.VITE_FIREBASE_APP_ID,
   };
 
   // Check for missing environment variables
   const missingVars = Object.entries(requiredEnvVars)
     .filter(([_, value]) => !value)
-    .map(([key]) => `VITE_FIREBASE_${key.replace(/([A-Z])/g, '_$1').toUpperCase()}`);
+    .map(
+      ([key]) => `VITE_FIREBASE_${key.replace(/([A-Z])/g, '_$1').toUpperCase()}`
+    );
 
   if (missingVars.length > 0) {
     throw new Error(
       `Missing required Firebase environment variables: ${missingVars.join(', ')}\n` +
-      'Please check your .env file and ensure all Firebase configuration variables are set.'
+        'Please check your .env file and ensure all Firebase configuration variables are set.'
     );
   }
 
   // Check for demo/placeholder values
   const demoPatterns = [
-    'demo', 'test', 'placeholder', 'your-', 'default', 'example'
+    'demo',
+    'test',
+    'placeholder',
+    'your-',
+    'default',
+    'example',
   ];
-  
+
   const invalidConfigs = Object.entries(requiredEnvVars)
-    .filter(([_, value]) => 
+    .filter(([_, value]) =>
       demoPatterns.some(pattern => value?.toLowerCase().includes(pattern))
     )
     .map(([key]) => key);
@@ -50,7 +57,7 @@ function validateFirebaseConfig(): FirebaseConfigKeys {
   if (invalidConfigs.length > 0) {
     throw new Error(
       `Invalid Firebase configuration detected for: ${invalidConfigs.join(', ')}\n` +
-      'Please update your .env file with real Firebase credentials.'
+        'Please update your .env file with real Firebase credentials.'
     );
   }
 
@@ -60,22 +67,14 @@ function validateFirebaseConfig(): FirebaseConfigKeys {
 // Validate and create Firebase configuration
 export const firebaseConfig = validateFirebaseConfig();
 
-// Log configuration status (without exposing sensitive data)
-console.log('Firebase configuration validated successfully', {
-  projectId: firebaseConfig.projectId,
-  authDomain: firebaseConfig.authDomain,
-  hasApiKey: !!firebaseConfig.apiKey,
-  hasAppId: !!firebaseConfig.appId
-});
-
 // Initialize Firebase with error handling
 let app;
 try {
   app = initializeApp(firebaseConfig);
-  console.log('Firebase app initialized successfully');
 } catch (error) {
-  console.error('Failed to initialize Firebase app:', error);
-  throw new Error(`Firebase initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  throw new Error(
+    `Firebase initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+  );
 }
 
 // Initialize Firebase services with error handling
@@ -84,15 +83,16 @@ export let auth: Auth;
 
 try {
   db = getFirestore(app);
-  console.log('Firestore initialized successfully');
 } catch (error) {
-  console.error('Failed to initialize Firestore:', error);
+  throw new Error(
+    `Firestore initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+  );
 }
 
 try {
   auth = getAuth(app);
-  console.log('Firebase Auth initialized successfully');
 } catch (error) {
-  console.error('Failed to initialize Firebase Auth:', error);
-  throw new Error(`Firebase Auth initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  throw new Error(
+    `Firebase Auth initialization failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+  );
 }

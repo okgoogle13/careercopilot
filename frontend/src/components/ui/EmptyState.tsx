@@ -17,7 +17,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
   title,
   description,
   action,
-  className = ''
+  className = '',
 }) => {
   const defaultIcon = (
     <svg
@@ -37,22 +37,12 @@ const EmptyState: React.FC<EmptyStateProps> = ({
 
   return (
     <div className={`text-center py-12 ${className}`}>
-      <div className="flex justify-center mb-4">
-        {icon || defaultIcon}
-      </div>
-      <h3 className="text-lg font-medium text-gray-900 mb-2">
-        {title}
-      </h3>
+      <div className="flex justify-center mb-4">{icon || defaultIcon}</div>
+      <h3 className="text-lg font-medium text-gray-900 mb-2">{title}</h3>
       {description && (
-        <p className="text-gray-600 mb-6 max-w-md mx-auto">
-          {description}
-        </p>
+        <p className="text-gray-600 mb-6 max-w-md mx-auto">{description}</p>
       )}
-      {action && (
-        <Button onClick={action.onClick}>
-          {action.label}
-        </Button>
-      )}
+      {action && <Button onClick={action.onClick}>{action.label}</Button>}
     </div>
   );
 };
