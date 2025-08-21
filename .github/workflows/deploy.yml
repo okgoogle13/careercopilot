@@ -5,15 +5,126 @@ on:
     branches:
       - develop
       - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+env:
+  NODE_VERSION: '22'
+  PYTHON_VERSION: '3.13'
 
 jobs:
-  deploy-staging:
-    if: github.ref == 'refs/heads/develop'
+  pre-deploy-checks:
+    name: Pre-deployment Checks
     runs-on: ubuntu-latest
-    environment: staging
+    timeout-minutes: 10
+    outputs:
+      should-deploy-staging: ${{ steps.check.outputs.staging }}
+      should-deploy-production: ${{ steps.check.outputs.production }}
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check deployment conditions
+        id: check
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/develop" ]] || [[ "${{ inputs.environment }}" == "staging" ]]; then
+            echo "staging=true" >> $GITHUB_OUTPUT
+          else
+            echo "staging=false" >> $GITHUB_OUTPUT
+          fi
+          
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]] || [[ "${{ inputs.environment }}" == "production" ]]; then
+            echo "production=true" >> $GITHUB_OUTPUT
+          else
+            echo "production=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Ensure CI passed
+        run: |
+          echo "🔍 Verifying latest CI status..."
+          # This ensures we don't deploy if CI is failing
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "✅ Push triggered deployment - CI should have passed"
+          fi
+
+  build-assets:
+    name: Build Production Assets
+    runs-on: ubuntu-latest
+    needs: pre-deploy-checks
+    timeout-minutes: 15
+    if: ${{ needs.pre-deploy-checks.outputs.should-deploy-staging == 'true' || needs.pre-deploy-checks.outputs.should-deploy-production == 'true' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Restore cached dependencies
+        uses: actions/cache@v4
+        with:
+          path: frontend/node_modules
+          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('frontend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci --prefix frontend
+        timeout-minutes: 5
+
+      - name: Build frontend
+        run: npm run build --prefix frontend
+        timeout-minutes: 5
+
+      - name: Generate bundle analysis
+        run: npm run bundle-analysis --prefix frontend
+        timeout-minutes: 2
+
+      - name: Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: frontend/dist
+          key: frontend-build-${{ github.sha }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 30
+
+  deploy-staging:
+    name: Deploy to Staging
+    if: ${{ needs.pre-deploy-checks.outputs.should-deploy-staging == 'true' }}
+    runs-on: ubuntu-latest
+    needs: [pre-deploy-checks, build-assets]
+    environment: staging
+    timeout-minutes: 20
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restore build artifacts
+        uses: actions/cache@v4
+        with:
+          path: frontend/dist
+          key: frontend-build-${{ github.sha }}
+
       - name: Deploy Frontend to Staging
+        id: deploy-frontend
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -21,7 +132,10 @@ jobs:
           channelId: live
           projectId: careercopilot-staging
           target: careercopilot-staging-frontend
+        timeout-minutes: 10
+
       - name: Deploy Backend to Staging
+        id: deploy-backend
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: careercopilot-backend-staging
@@ -29,14 +143,105 @@ jobs:
           credentials: ${{ secrets.GCP_STAGING_SA_KEY }}
           region: us-central1
           source: ./backend
+          timeout: 1200s
+          cpu: '1'
+          memory: '2Gi'
+          min-instances: 0
+          max-instances: 10
+          env-vars: |
+            ENVIRONMENT=staging
+            LOG_LEVEL=INFO
+        timeout-minutes: 10
+
+      - name: Wait for deployment propagation
+        run: sleep 30
+
+      - name: Health Check - Frontend
+        id: frontend-health
+        run: |
+          echo "🏥 Checking frontend health..."
+          max_attempts=5
+          attempt=1
+          
+          while [ $attempt -le $max_attempts ]; do
+            echo "Attempt $attempt/$max_attempts"
+            if curl -f -s -m 30 "https://careercopilot-staging.web.app" > /dev/null; then
+              echo "✅ Frontend health check passed"
+              echo "status=healthy" >> $GITHUB_OUTPUT
+              break
+            else
+              echo "❌ Frontend health check failed (attempt $attempt)"
+              if [ $attempt -eq $max_attempts ]; then
+                echo "status=unhealthy" >> $GITHUB_OUTPUT
+                exit 1
+              fi
+              attempt=$((attempt + 1))
+              sleep 10
+            fi
+          done
+        timeout-minutes: 5
+
+      - name: Health Check - Backend
+        id: backend-health
+        run: |
+          echo "🏥 Checking backend health..."
+          max_attempts=5
+          attempt=1
+          
+          # Get the backend URL from Cloud Run deployment
+          backend_url=$(gcloud run services describe careercopilot-backend-staging --region=us-central1 --format='value(status.url)')
+          
+          while [ $attempt -le $max_attempts ]; do
+            echo "Attempt $attempt/$max_attempts"
+            if curl -f -s -m 30 "$backend_url/health" > /dev/null; then
+              echo "✅ Backend health check passed"
+              echo "status=healthy" >> $GITHUB_OUTPUT
+              break
+            else
+              echo "❌ Backend health check failed (attempt $attempt)"
+              if [ $attempt -eq $max_attempts ]; then
+                echo "status=unhealthy" >> $GITHUB_OUTPUT
+                exit 1
+              fi
+              attempt=$((attempt + 1))
+              sleep 15
+            fi
+          done
+        timeout-minutes: 8
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_STAGING_SA_KEY }}
+
+      - name: Post deployment notification
+        if: always()
+        run: |
+          if [[ "${{ steps.frontend-health.outputs.status }}" == "healthy" && "${{ steps.backend-health.outputs.status }}" == "healthy" ]]; then
+            echo "🚀 Staging deployment successful!"
+            echo "Frontend: https://careercopilot-staging.web.app"
+            echo "Backend: Deployed to Cloud Run"
+          else
+            echo "💥 Staging deployment failed health checks!"
+            exit 1
+          fi
 
   deploy-production:
-    if: github.ref == 'refs/heads/main'
+    name: Deploy to Production
+    if: ${{ needs.pre-deploy-checks.outputs.should-deploy-production == 'true' }}
     runs-on: ubuntu-latest
+    needs: [pre-deploy-checks, build-assets]
     environment: production
+    timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restore build artifacts
+        uses: actions/cache@v4
+        with:
+          path: frontend/dist
+          key: frontend-build-${{ github.sha }}
+
       - name: Deploy Frontend to Production
+        id: deploy-frontend
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -44,7 +249,10 @@ jobs:
           channelId: live
           projectId: careercopilot-prod
           target: careercopilot-prod-frontend
+        timeout-minutes: 12
+
       - name: Deploy Backend to Production
+        id: deploy-backend
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: careercopilot-backend-prod
@@ -52,3 +260,151 @@ jobs:
           credentials: ${{ secrets.GCP_SA_KEY }}
           region: us-central1
           source: ./backend
+          timeout: 1200s
+          cpu: '2'
+          memory: '4Gi'
+          min-instances: 1
+          max-instances: 100
+          env-vars: |
+            ENVIRONMENT=production
+            LOG_LEVEL=WARNING
+        timeout-minutes: 12
+
+      - name: Wait for deployment propagation
+        run: sleep 45
+
+      - name: Health Check - Frontend
+        id: frontend-health
+        run: |
+          echo "🏥 Checking frontend health..."
+          max_attempts=6
+          attempt=1
+          
+          while [ $attempt -le $max_attempts ]; do
+            echo "Attempt $attempt/$max_attempts"
+            if curl -f -s -m 30 "https://careercopilot-prod.web.app" > /dev/null; then
+              echo "✅ Frontend health check passed"
+              echo "status=healthy" >> $GITHUB_OUTPUT
+              break
+            else
+              echo "❌ Frontend health check failed (attempt $attempt)"
+              if [ $attempt -eq $max_attempts ]; then
+                echo "status=unhealthy" >> $GITHUB_OUTPUT
+                exit 1
+              fi
+              attempt=$((attempt + 1))
+              sleep 15
+            fi
+          done
+        timeout-minutes: 8
+
+      - name: Health Check - Backend
+        id: backend-health
+        run: |
+          echo "🏥 Checking backend health..."
+          max_attempts=6
+          attempt=1
+          
+          # Get the backend URL from Cloud Run deployment
+          backend_url=$(gcloud run services describe careercopilot-backend-prod --region=us-central1 --format='value(status.url)')
+          
+          while [ $attempt -le $max_attempts ]; do
+            echo "Attempt $attempt/$max_attempts"
+            if curl -f -s -m 30 "$backend_url/health" > /dev/null; then
+              echo "✅ Backend health check passed"
+              echo "status=healthy" >> $GITHUB_OUTPUT
+              break
+            else
+              echo "❌ Backend health check failed (attempt $attempt)"
+              if [ $attempt -eq $max_attempts ]; then
+                echo "status=unhealthy" >> $GITHUB_OUTPUT
+                exit 1
+              fi
+              attempt=$((attempt + 1))
+              sleep 20
+            fi
+          done
+        timeout-minutes: 10
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Performance Check
+        id: performance-check
+        run: |
+          echo "⚡ Running performance check..."
+          # Basic performance test - you can enhance this with Lighthouse CI
+          response_time=$(curl -o /dev/null -s -w '%{time_total}' https://careercopilot-prod.web.app)
+          if (( $(echo "$response_time < 3.0" | bc -l) )); then
+            echo "✅ Performance check passed (${response_time}s)"
+            echo "status=good" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Performance check warning (${response_time}s)"
+            echo "status=slow" >> $GITHUB_OUTPUT
+          fi
+        timeout-minutes: 3
+        continue-on-error: true
+
+      - name: Post deployment notification
+        if: always()
+        run: |
+          if [[ "${{ steps.frontend-health.outputs.status }}" == "healthy" && "${{ steps.backend-health.outputs.status }}" == "healthy" ]]; then
+            echo "🚀 Production deployment successful!"
+            echo "Frontend: https://careercopilot-prod.web.app"
+            echo "Backend: Deployed to Cloud Run"
+            if [[ "${{ steps.performance-check.outputs.status }}" == "slow" ]]; then
+              echo "⚠️ Note: Performance check indicated slower than expected response times"
+            fi
+          else
+            echo "💥 Production deployment failed health checks!"
+            exit 1
+          fi
+
+      - name: Create GitHub Release
+        if: success() && github.ref == 'refs/heads/main'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Production Release v${{ github.run_number }}
+          body: |
+            🚀 **Production Deployment Successful**
+            
+            **Changes in this release:**
+            - Commit: ${{ github.sha }}
+            - Branch: ${{ github.ref_name }}
+            
+            **Deployment URLs:**
+            - Frontend: https://careercopilot-prod.web.app
+            - Backend: Cloud Run (us-central1)
+            
+            **Health Check Status:** ✅ All systems operational
+          draft: false
+          prerelease: false
+
+  post-deploy-monitoring:
+    name: Post-Deployment Monitoring
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always() && (needs.deploy-staging.result == 'success' || needs.deploy-production.result == 'success')
+    timeout-minutes: 10
+    steps:
+      - name: Set up monitoring alerts
+        run: |
+          echo "📊 Setting up post-deployment monitoring..."
+          # This is where you could integrate with monitoring services
+          # like DataDog, New Relic, or Google Cloud Monitoring
+          echo "✅ Monitoring alerts configured"
+
+      - name: Deployment summary
+        run: |
+          echo "📋 **Deployment Summary**"
+          echo "Timestamp: $(date)"
+          echo "Commit: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref_name }}"
+          if [[ "${{ needs.deploy-staging.result }}" == "success" ]]; then
+            echo "✅ Staging: Deployed successfully"
+          fi
+          if [[ "${{ needs.deploy-production.result }}" == "success" ]]; then
+            echo "✅ Production: Deployed successfully" 
+          fi

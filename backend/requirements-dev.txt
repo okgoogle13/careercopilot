@@ -1,0 +1,39 @@
+# Development and Testing Dependencies for CareerCopilot Backend
+# Install with: pip install -r requirements-dev.txt
+
+# Code Quality and Linting
+black==24.3.0           # Code formatter
+flake8==7.0.0          # Linting tool
+flake8-bugbear==24.2.6  # Additional flake8 rules
+isort==5.13.2          # Import sorter
+mypy==1.8.0            # Type checking
+
+# Security
+bandit==1.7.5          # Security linter for Python
+safety==3.0.1          # Checks for known security vulnerabilities
+
+# Testing
+pytest==8.1.1         # Testing framework (also in main requirements)
+pytest-asyncio==0.23.5 # Async testing support (also in main requirements)
+pytest-cov==4.0.0     # Coverage reporting
+pytest-mock==3.12.0   # Mocking utilities
+httpx==0.27.0          # HTTP client for testing APIs (also in main requirements)
+pytest-xdist==3.5.0   # Parallel test execution
+
+# Development Tools
+pre-commit==3.6.2     # Git hooks for code quality
+pip-tools==7.4.1      # Dependency management
+
+# Documentation
+mkdocs==1.5.3         # Documentation generator
+mkdocs-material==9.5.12 # Material theme for MkDocs
+
+# Database and Migration Tools (if needed later)
+alembic==1.13.1       # Database migrations
+
+# Performance Profiling
+py-spy==0.3.14        # Sampling profiler
+memory-profiler==0.61.0 # Memory profiling
+
+# Load Testing
+locust==2.24.1        # Load testing tool
