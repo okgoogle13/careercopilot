@@ -107,7 +107,9 @@ const AnalysisPage: React.FC = () => {
       setAnalysisResult(result);
       toast.success('Analysis complete!');
     } catch (err: unknown) {
-      toast.error(`Analysis failed: ${err instanceof Error ? err.message : 'Unknown error'}`);
+      toast.error(
+        `Analysis failed: ${err instanceof Error ? err.message : 'Unknown error'}`
+      );
     } finally {
       setIsAnalyzing(false);
     }

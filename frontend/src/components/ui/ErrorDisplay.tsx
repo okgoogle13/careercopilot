@@ -52,10 +52,10 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
               />
             </svg>
           </div>
-          
+
           <div className="flex-1">
             <p className="text-sm font-medium text-red-800">{error}</p>
-            
+
             {showRetry && onRetry && (
               <div className="mt-2">
                 <Button
@@ -93,7 +93,9 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
 
 // Specialized error displays for common scenarios
 
-export const NetworkErrorDisplay: React.FC<Omit<ErrorDisplayProps, 'error'>> = (props) => (
+export const NetworkErrorDisplay: React.FC<
+  Omit<ErrorDisplayProps, 'error'>
+> = props => (
   <ErrorDisplay
     error="Network connection failed. Please check your internet connection and try again."
     showRetry={true}
@@ -101,22 +103,20 @@ export const NetworkErrorDisplay: React.FC<Omit<ErrorDisplayProps, 'error'>> = (
   />
 );
 
-export const AuthErrorDisplay: React.FC<Omit<ErrorDisplayProps, 'error'>> = (props) => (
+export const AuthErrorDisplay: React.FC<
+  Omit<ErrorDisplayProps, 'error'>
+> = props => (
   <ErrorDisplay
     error="Your session has expired. Please refresh the page to log in again."
     {...props}
   />
 );
 
-export const LoadingErrorDisplay: React.FC<{ 
+export const LoadingErrorDisplay: React.FC<{
   resourceName?: string;
   onRetry?: () => void;
   isRetrying?: boolean;
-}> = ({ 
-  resourceName = 'data',
-  onRetry,
-  isRetrying 
-}) => (
+}> = ({ resourceName = 'data', onRetry, isRetrying }) => (
   <ErrorDisplay
     error={`Failed to load ${resourceName}. This might be a temporary issue.`}
     showRetry={!!onRetry}
