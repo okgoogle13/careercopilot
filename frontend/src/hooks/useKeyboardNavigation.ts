@@ -1,5 +1,5 @@
 // Keyboard navigation utilities for enhanced accessibility
-import { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 interface KeyboardNavigationOptions {
   onEnter?: () => void;
@@ -149,7 +149,7 @@ export const useRovingTabIndex = (
     const currentIndex = getActiveIndex();
     const nextIndex = (currentIndex + 1) % items.length;
     setActiveItem(nextIndex);
-  }, [getActiveIndex, setActiveItem]);
+  }, [containerRef, itemSelector, getActiveIndex, setActiveItem]);
 
   const moveToPrevious = useCallback(() => {
     const container = containerRef.current;
@@ -159,7 +159,7 @@ export const useRovingTabIndex = (
     const currentIndex = getActiveIndex();
     const previousIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
     setActiveItem(previousIndex);
-  }, [getActiveIndex, setActiveItem]);
+  }, [containerRef, itemSelector, getActiveIndex, setActiveItem]);
 
   const moveToFirst = useCallback(() => {
     setActiveItem(0);

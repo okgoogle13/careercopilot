@@ -17,6 +17,7 @@ interface UserPreferences {
 
 const UserPreferencesContext = createContext<UserPreferences | null>(null);
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUserPreferences = () => {
   return useContext(UserPreferencesContext);
 };

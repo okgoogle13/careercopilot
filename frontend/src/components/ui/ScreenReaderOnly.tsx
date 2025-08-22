@@ -16,7 +16,7 @@ export const ScreenReaderOnly: React.FC<ScreenReaderOnlyProps> = ({
   as = 'span',
   className = '',
 }) => {
-  const Component = as as any; // Type assertion for dynamic component
+  const Component = as as keyof React.JSX.IntrinsicElements; // Type assertion for dynamic component
   
   return (
     <Component

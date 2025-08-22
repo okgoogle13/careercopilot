@@ -24,13 +24,13 @@ export const useLoadingState = (
 ): UseLoadingStateReturn => {
   const { minDuration = 0, delay = 0 } = config;
   
-  const [isLoading, setIsLoadingState] = useState(false);
+  const [, setIsLoadingState] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState(initialMessage);
   const [shouldShow, setShouldShow] = useState(false);
   
   const startTimeRef = useRef<number | null>(null);
-  const delayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const minDurationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const delayTimeoutRef = useRef<number | null>(null);
+  const minDurationTimeoutRef = useRef<number | null>(null);
 
   // Clean up timeouts on unmount
   useEffect(() => {
@@ -107,8 +107,6 @@ export const useLoadingState = (
     try {
       const result = await operation();
       return result;
-    } catch (error) {
-      throw error; // Let caller handle the error
     } finally {
       stopLoading();
     }
