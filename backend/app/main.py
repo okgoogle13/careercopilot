@@ -6,7 +6,7 @@ from app.core.cache_middleware import add_cache_middleware, cache_lifespan, cach
 from app.core.monitoring_middleware import add_monitoring_middleware
 from app.core.logging_config import setup_logging
 from app.core.monitoring import start_system_monitoring, stop_system_monitoring
-from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis, monitoring
+from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis, monitoring, ai_services
 import os
 
 # Setup logging first
@@ -17,6 +17,13 @@ async def app_lifespan(app: FastAPI):
     # Startup
     await cache_lifespan(app).__aenter__()
     await start_system_monitoring()
+    
+    # Initialize AI configuration
+    from app.core.ai_config import setup_ai_config
+    from app.core.ai_client import setup_ai_client
+    
+    ai_config = setup_ai_config()
+    setup_ai_client(ai_config)
     
     yield
     
@@ -71,6 +78,7 @@ api_router.include_router(settings.router, prefix="/settings", tags=["settings"]
 api_router.include_router(ksc.router, prefix="/ksc", tags=["ksc"])
 api_router.include_router(analysis.router, prefix="/analysis", tags=["analysis"])
 api_router.include_router(monitoring.router, prefix="/monitoring", tags=["monitoring"])
+api_router.include_router(ai_services.router, prefix="/ai", tags=["ai-services"])
 
 
 app.include_router(api_router, prefix="/api/v1")
