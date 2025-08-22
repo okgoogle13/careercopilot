@@ -23,14 +23,16 @@ export const useLoadingState = (
   config: LoadingConfig = {}
 ): UseLoadingStateReturn => {
   const { minDuration = 0, delay = 0 } = config;
-  
+
   const [, setIsLoadingState] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState(initialMessage);
   const [shouldShow, setShouldShow] = useState(false);
-  
+
   const startTimeRef = useRef<number | null>(null);
-  const delayTimeoutRef = useRef<number | null>(null);
-  const minDurationTimeoutRef = useRef<number | null>(null);
+  const delayTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const minDurationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
 
   // Clean up timeouts on unmount
   useEffect(() => {
@@ -44,31 +46,36 @@ export const useLoadingState = (
     };
   }, []);
 
-  const startLoading = useCallback((message?: string) => {
-    if (message) {
-      setLoadingMessage(message);
-    }
-    
-    startTimeRef.current = Date.now();
-    setIsLoadingState(true);
+  const startLoading = useCallback(
+    (message?: string) => {
+      if (message) {
+        setLoadingMessage(message);
+      }
 
-    // Clear any existing delay timeout
-    if (delayTimeoutRef.current) {
-      clearTimeout(delayTimeoutRef.current);
-    }
+      startTimeRef.current = Date.now();
+      setIsLoadingState(true);
 
-    if (delay > 0) {
-      // Show loading state after delay
-      delayTimeoutRef.current = setTimeout(() => {
+      // Clear any existing delay timeout
+      if (delayTimeoutRef.current) {
+        clearTimeout(delayTimeoutRef.current);
+      }
+
+      if (delay > 0) {
+        // Show loading state after delay
+        delayTimeoutRef.current = setTimeout(() => {
+          setShouldShow(true);
+        }, delay);
+      } else {
         setShouldShow(true);
-      }, delay);
-    } else {
-      setShouldShow(true);
-    }
-  }, [delay]);
+      }
+    },
+    [delay]
+  );
 
   const stopLoading = useCallback(() => {
-    const elapsed = startTimeRef.current ? Date.now() - startTimeRef.current : 0;
+    const elapsed = startTimeRef.current
+      ? Date.now() - startTimeRef.current
+      : 0;
     const remaining = Math.max(0, minDuration - elapsed);
 
     // Clear delay timeout if still pending
@@ -91,26 +98,32 @@ export const useLoadingState = (
     }
   }, [minDuration, shouldShow]);
 
-  const setLoading = useCallback((loading: boolean, message?: string) => {
-    if (loading) {
-      startLoading(message);
-    } else {
-      stopLoading();
-    }
-  }, [startLoading, stopLoading]);
+  const setLoading = useCallback(
+    (loading: boolean, message?: string) => {
+      if (loading) {
+        startLoading(message);
+      } else {
+        stopLoading();
+      }
+    },
+    [startLoading, stopLoading]
+  );
 
-  const withLoading = useCallback(async <T>(
-    operation: () => Promise<T>,
-    message?: string
-  ): Promise<T | null> => {
-    startLoading(message);
-    try {
-      const result = await operation();
-      return result;
-    } finally {
-      stopLoading();
-    }
-  }, [startLoading, stopLoading]);
+  const withLoading = useCallback(
+    async <T>(
+      operation: () => Promise<T>,
+      message?: string
+    ): Promise<T | null> => {
+      startLoading(message);
+      try {
+        const result = await operation();
+        return result;
+      } finally {
+        stopLoading();
+      }
+    },
+    [startLoading, stopLoading]
+  );
 
   return {
     isLoading: shouldShow,
@@ -128,21 +141,25 @@ export const useAsyncOperation = () => {
   const [error, setError] = useState<string | null>(null);
   const loading = useLoadingState();
 
-  const execute = useCallback(async <T>(
-    operation: () => Promise<T>,
-    loadingMessage?: string,
-    errorMessage?: string
-  ): Promise<T | null> => {
-    setError(null);
-    try {
-      return await loading.withLoading(operation, loadingMessage);
-    } catch (err) {
-      const message = errorMessage || 
-        (err instanceof Error ? err.message : 'Operation failed');
-      setError(message);
-      return null;
-    }
-  }, [loading]);
+  const execute = useCallback(
+    async <T>(
+      operation: () => Promise<T>,
+      loadingMessage?: string,
+      errorMessage?: string
+    ): Promise<T | null> => {
+      setError(null);
+      try {
+        return await loading.withLoading(operation, loadingMessage);
+      } catch (err) {
+        const message =
+          errorMessage ||
+          (err instanceof Error ? err.message : 'Operation failed');
+        setError(message);
+        return null;
+      }
+    },
+    [loading]
+  );
 
   const clearError = useCallback(() => {
     setError(null);
@@ -157,8 +174,11 @@ export const useAsyncOperation = () => {
 };
 
 export const usePageLoading = (initialLoading: boolean = true) => {
-  const loading = useLoadingState('Loading page...', { minDuration: 300, delay: 100 });
-  
+  const loading = useLoadingState('Loading page...', {
+    minDuration: 300,
+    delay: 100,
+  });
+
   useEffect(() => {
     if (initialLoading) {
       loading.startLoading();

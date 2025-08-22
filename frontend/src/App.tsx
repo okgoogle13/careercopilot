@@ -23,19 +23,62 @@ const App: React.FC = () => {
           <Toaster position="top-center" reverseOrder={false} />
           <ProtectedRoute>
             <Navbar />
-            <main id="main-content" className="bg-gray-100 min-h-screen" role="main">
+            <main
+              id="main-content"
+              className="bg-gray-100 min-h-screen"
+              role="main"
+            >
               <div className="container mx-auto">
                 <Suspense fallback={<LoadingSpinner />}>
                   <Routes>
-                    <Route path="/" element={<ErrorBoundary><DashboardPage /></ErrorBoundary>} />
-                    <Route path="/documents" element={<ErrorBoundary><DocumentsPage /></ErrorBoundary>} />
-                    <Route path="/analysis" element={<ErrorBoundary><AnalysisPage /></ErrorBoundary>} />
-                    <Route path="/settings" element={<ErrorBoundary><SettingsPage /></ErrorBoundary>} />
+                    <Route
+                      path="/"
+                      element={
+                        <ErrorBoundary>
+                          <DashboardPage />
+                        </ErrorBoundary>
+                      }
+                    />
+                    <Route
+                      path="/documents"
+                      element={
+                        <ErrorBoundary>
+                          <DocumentsPage />
+                        </ErrorBoundary>
+                      }
+                    />
+                    <Route
+                      path="/analysis"
+                      element={
+                        <ErrorBoundary>
+                          <AnalysisPage />
+                        </ErrorBoundary>
+                      }
+                    />
+                    <Route
+                      path="/settings"
+                      element={
+                        <ErrorBoundary>
+                          <SettingsPage />
+                        </ErrorBoundary>
+                      }
+                    />
                     <Route
                       path="/opportunities"
-                      element={<ErrorBoundary><OpportunitiesPage /></ErrorBoundary>}
+                      element={
+                        <ErrorBoundary>
+                          <OpportunitiesPage />
+                        </ErrorBoundary>
+                      }
                     />
-                    <Route path="/ksc-generator" element={<ErrorBoundary><KscGeneratorPage /></ErrorBoundary>} />
+                    <Route
+                      path="/ksc-generator"
+                      element={
+                        <ErrorBoundary>
+                          <KscGeneratorPage />
+                        </ErrorBoundary>
+                      }
+                    />
                   </Routes>
                 </Suspense>
               </div>
