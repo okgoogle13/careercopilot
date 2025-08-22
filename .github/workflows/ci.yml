@@ -140,7 +140,7 @@ jobs:
         timeout-minutes: 10
 
       - name: Lint Backend (flake8)
-        run: flake8 backend/ --max-line-length=100 --exclude=backend/migrations,backend/__pycache__
+        run: cd backend && flake8 app/
         timeout-minutes: 3
 
       - name: Format Check (black)
