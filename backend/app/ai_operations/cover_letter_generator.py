@@ -350,9 +350,7 @@ Respond with ONLY the JSON object:"""
 
             system_prompt = """You are a template creation expert specializing in professional cover letters across various industries and experience levels. Create versatile, customizable templates that maintain professional standards."""
 
-            prompt = f"""Generate {template_count} professional cover letter templates tailored to the {
-                sanitized_industry.sanitized_content} industry for {
-                sanitized_level.sanitized_content} level professionals.
+            prompt = f"""Generate {template_count} professional cover letter templates tailored to the {sanitized_industry.sanitized_content} industry for {sanitized_level.sanitized_content} level professionals.
 
 Required JSON structure:
 {

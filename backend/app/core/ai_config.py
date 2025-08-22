@@ -478,8 +478,8 @@ class AIConfigManager:
             for fallback_model in service.fallback_models:
                 if fallback_model not in self.models:
                     issues["warnings"].append(
-                        f"Service '{
-                            service.service_name}' uses unknown fallback model: {fallback_model}"
+                        f"Service '{service.service_name}' uses unknown fallback model: "
+                        f"{fallback_model}"
                     )
 
             if service.cost_budget_daily <= 0:
