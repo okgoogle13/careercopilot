@@ -17,7 +17,7 @@ export const ScreenReaderOnly: React.FC<ScreenReaderOnlyProps> = ({
   className = '',
 }) => {
   const Component = as as keyof React.JSX.IntrinsicElements; // Type assertion for dynamic component
-  
+
   return (
     <Component
       className={`sr-only absolute -left-10000px top-auto w-1 h-1 overflow-hidden ${className}`}

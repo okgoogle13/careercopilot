@@ -54,8 +54,6 @@ const DocumentsPage: React.FC = () => {
     return () => unsubscribe();
   }, []);
 
-
-
   const handleDownload = async (
     documentId: string,
     originalFilename: string
@@ -90,7 +88,9 @@ const DocumentsPage: React.FC = () => {
       window.URL.revokeObjectURL(url);
       toast.success('PDF download started!');
     } catch (err: unknown) {
-      toast.error(err instanceof Error ? err.message : 'Failed to download PDF.');
+      toast.error(
+        err instanceof Error ? err.message : 'Failed to download PDF.'
+      );
     }
   };
 

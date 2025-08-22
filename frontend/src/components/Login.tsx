@@ -36,7 +36,9 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
       }
       onSuccess?.();
     } catch (error: unknown) {
-      toast.error(error instanceof Error ? error.message : 'Authentication failed');
+      toast.error(
+        error instanceof Error ? error.message : 'Authentication failed'
+      );
     } finally {
       setLoading(false);
     }
@@ -50,7 +52,9 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
       toast.success('Logged in with Google!');
       onSuccess?.();
     } catch (error: unknown) {
-      toast.error(error instanceof Error ? error.message : 'Google authentication failed');
+      toast.error(
+        error instanceof Error ? error.message : 'Google authentication failed'
+      );
     } finally {
       setLoading(false);
     }

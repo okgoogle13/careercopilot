@@ -42,7 +42,11 @@ const KscGeneratorPage: React.FC = () => {
           setSelectedProfileId(data[0].id); // Default to the first profile
         }
       } catch (error: unknown) {
-        toast.error(error instanceof Error ? error.message : 'Could not load profile data.');
+        toast.error(
+          error instanceof Error
+            ? error.message
+            : 'Could not load profile data.'
+        );
       } finally {
         setLoading(false);
       }
