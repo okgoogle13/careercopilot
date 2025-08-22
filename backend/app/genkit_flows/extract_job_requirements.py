@@ -26,7 +26,8 @@ class JobRequirements(BaseModel):
         description="A list of skills mentioned as preferred, desired, or 'a plus'."
     )
     experienceLevel: str = Field(
-        description="The required experience level (e.g., 'Entry-level', 'Mid-level', 'Senior', '5+ years').")
+        description="The required experience level (e.g., 'Entry-level', 'Mid-level', 'Senior', '5+ years')."
+    )
 
 
 @genkit.flow(output_schema=JobRequirements)

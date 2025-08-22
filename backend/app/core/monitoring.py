@@ -478,6 +478,7 @@ async def stop_system_monitoring():
     global _system_monitor
     if _system_monitor:
         await _system_monitor.stop()
+        _system_monitor = None
 
 
 # Business metrics helpers
@@ -504,14 +505,14 @@ def track_ai_usage(
 
     # Track usage counters
     collector.increment_counter(f"ai_operation_{operation_type}")
-    collector.increment_counter(f"ai_operation_total")
+    collector.increment_counter("ai_operation_total")
 
     if cached:
         collector.increment_counter(f"ai_operation_{operation_type}_cached")
-        collector.increment_counter(f"ai_operation_cached_total")
+        collector.increment_counter("ai_operation_cached_total")
 
     if tokens_used:
-        collector.increment_counter(f"ai_tokens_used_total", tokens_used)
+        collector.increment_counter("ai_tokens_used_total", tokens_used)
         collector.record_histogram(f"ai_tokens_per_{operation_type}", tokens_used)
 
     # Log usage
@@ -532,7 +533,7 @@ def track_error(error_type: str, component: str, error_message: str, user_id: st
 
     # Increment error counters
     collector.increment_counter(f"error_{error_type}", labels={"component": component})
-    collector.increment_counter(f"error_total")
+    collector.increment_counter("error_total")
 
     # Log the error
     logger.error(
