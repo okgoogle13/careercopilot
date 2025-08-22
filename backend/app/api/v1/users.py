@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
-from app.core.dependencies import get_current_user
-from app.core.db import db
 from firebase_admin import auth
 from google.cloud.firestore import SERVER_TIMESTAMP
 
+from app.core.db import db
+from app.core.dependencies import get_current_user
+
 router = APIRouter()
+
 
 @router.post("/me")
 async def create_user_profile(uid: str = Depends(get_current_user)):
@@ -15,20 +17,14 @@ async def create_user_profile(uid: str = Depends(get_current_user)):
         # Check if user profile already exists
         user_ref = db.collection("users").document(uid)
         if user_ref.get().exists:
-            raise HTTPException(
-                status_code=409,
-                detail="User profile already exists"
-            )
+            raise HTTPException(status_code=409, detail="User profile already exists")
 
         # Get user data from Firebase Auth
         user_record = auth.get_user(uid)
         email = user_record.email
 
         # Create the user profile document
-        profile_data = {
-            "email": email,
-            "createdAt": SERVER_TIMESTAMP
-        }
+        profile_data = {"email": email, "createdAt": SERVER_TIMESTAMP}
         user_ref.set(profile_data)
 
         # Retrieve the created document to return it

@@ -1,40 +1,47 @@
-from fastapi import FastAPI, APIRouter, Request
-from fastapi.middleware.cors import CORSMiddleware
-from slowapi.errors import RateLimitExceeded
-from app.core.limiter import limiter, _rate_limit_exceeded_handler, strict_limiter, _not_authenticated_handler, NotAuthenticatedException
-from app.core.cache_middleware import add_cache_middleware, cache_lifespan, cache_health_check
-from app.core.monitoring_middleware import add_monitoring_middleware
-from app.core.logging_config import setup_logging
-from app.core.monitoring import start_system_monitoring, stop_system_monitoring
-from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis, monitoring, ai_services
 import os
 
+from fastapi import APIRouter, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from slowapi.errors import RateLimitExceeded
+
+from app.api.v1 import (ai_services, analysis, documents, integrations, jobs,
+                        ksc, monitoring, opportunities, profile, settings,
+                        users)
+from app.core.cache_middleware import (add_cache_middleware,
+                                       cache_health_check, cache_lifespan)
+from app.core.limiter import (NotAuthenticatedException,
+                              _not_authenticated_handler,
+                              _rate_limit_exceeded_handler, limiter,
+                              strict_limiter)
+from app.core.logging_config import setup_logging
+from app.core.monitoring import start_system_monitoring, stop_system_monitoring
+from app.core.monitoring_middleware import add_monitoring_middleware
+
 # Setup logging first
-setup_logging(environment=os.getenv('ENV', 'development'))
+setup_logging(environment=os.getenv("ENV", "development"))
+
 
 async def app_lifespan(app: FastAPI):
     """Application lifespan management"""
     # Startup
     await cache_lifespan(app).__aenter__()
     await start_system_monitoring()
-    
+
     # Initialize AI configuration
-    from app.core.ai_config import setup_ai_config
     from app.core.ai_client import setup_ai_client
-    
+    from app.core.ai_config import setup_ai_config
+
     ai_config = setup_ai_config()
     setup_ai_client(ai_config)
-    
+
     yield
-    
+
     # Shutdown
     await stop_system_monitoring()
     await cache_lifespan(app).__aexit__(None, None, None)
 
-app = FastAPI(
-    title="Careercopilot API",
-    lifespan=app_lifespan
-)
+
+app = FastAPI(title="Careercopilot API", lifespan=app_lifespan)
 
 # Add CORS middleware
 origins = [
@@ -83,15 +90,19 @@ api_router.include_router(ai_services.router, prefix="/ai", tags=["ai-services"]
 
 app.include_router(api_router, prefix="/api/v1")
 
+
 @app.get("/health", tags=["Health"])
 async def health_check():
     return {"status": "ok"}
+
 
 @app.get("/cache/health", tags=["Health"])
 async def cache_health():
     return await cache_health_check()
 
+
 if __name__ == "__main__":
     import uvicorn
+
     port = int(os.environ.get("PORT", 8080))
     uvicorn.run(app, host="0.0.0.0", port=port)

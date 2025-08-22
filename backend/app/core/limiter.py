@@ -1,14 +1,16 @@
+import firebase_admin
+from firebase_admin import auth, credentials
 from slowapi import Limiter
-from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 from starlette.status import HTTP_401_UNAUTHORIZED
-import firebase_admin
-from firebase_admin import auth, credentials
+
 
 class NotAuthenticatedException(Exception):
     pass
+
 
 def _not_authenticated_handler(request: Request, exc: NotAuthenticatedException) -> JSONResponse:
     return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content={"detail": "Not authenticated"})
@@ -18,10 +20,8 @@ def _rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JS
     """
     Custom handler to return a 429 error when a rate limit is exceeded.
     """
-    return JSONResponse(
-        status_code=429,
-        content={"detail": f"Rate limit exceeded: {exc.detail}"}
-    )
+    return JSONResponse(status_code=429, content={"detail": f"Rate limit exceeded: {exc.detail}"})
+
 
 def key_func_by_user(request: Request) -> str:
     """
@@ -39,7 +39,7 @@ def key_func_by_user(request: Request) -> str:
             return get_remote_address(request)
 
     auth_header = request.headers.get("authorization")
-    
+
     # The endpoint's own security dependency will handle the final rejection.
     if not auth_header or not auth_header.startswith("Bearer "):
         return get_remote_address(request)
@@ -52,6 +52,7 @@ def key_func_by_user(request: Request) -> str:
     except Exception:
         # If token is invalid/expired, fallback to IP. The endpoint dependency will raise 401.
         return get_remote_address(request)
+
 
 def key_func_by_authenticated_user_only(request: Request) -> str:
     """
@@ -68,7 +69,7 @@ def key_func_by_authenticated_user_only(request: Request) -> str:
             raise NotAuthenticatedException() from e
 
     auth_header = request.headers.get("authorization")
-    
+
     if not auth_header or not auth_header.startswith("Bearer "):
         raise NotAuthenticatedException()
 
@@ -81,6 +82,7 @@ def key_func_by_authenticated_user_only(request: Request) -> str:
         return uid
     except Exception as e:
         raise NotAuthenticatedException() from e
+
 
 limiter = Limiter(key_func=key_func_by_user)
 strict_limiter = Limiter(key_func=key_func_by_authenticated_user_only)

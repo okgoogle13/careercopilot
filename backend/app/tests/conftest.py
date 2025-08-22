@@ -1,19 +1,23 @@
-import pytest
-from httpx import AsyncClient
 from unittest.mock import MagicMock
 
-from app.main import app
+import pytest
+from httpx import AsyncClient
+
 from app.core.dependencies import get_current_user
+from app.main import app
+
 
 @pytest.fixture
 def mock_db():
     """Fixture to mock the Firestore database client."""
     return MagicMock()
 
+
 @pytest.fixture
 def mock_get_current_user():
     """Fixture to mock the get_current_user dependency."""
     return lambda: {"uid": "test_user_id"}
+
 
 @pytest.fixture
 async def client(monkeypatch, mock_db, mock_get_current_user):
