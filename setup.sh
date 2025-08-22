@@ -50,7 +50,7 @@ PINECONE_ENVIRONMENT=python
 PINECONE_INDEX_NAME=careercopilot-index
 
 # Search APIs
-SERP_API_KEY=08f40468f6b0284744da6ab6af614cafd93a8d317eb73a7f5a4c5c19ba5443c0
+SERP_API_KEY="your-serp-api-key-here"
 
 # Environment
 ENVIRONMENT=development
