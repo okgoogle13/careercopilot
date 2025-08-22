@@ -119,7 +119,7 @@ async def get_performance_metrics(
                 performance_data = {}
 
         # Add computed performance indicators
-        for op_name, op_metrics in performance_data.items():
+        for _op_name, op_metrics in performance_data.items():
             op_metrics["throughput_per_minute"] = _calculate_throughput(
                 op_metrics.get("count", 0), metrics.get("uptime_seconds", 1)
             )
