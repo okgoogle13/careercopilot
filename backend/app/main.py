@@ -3,12 +3,30 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 from app.core.limiter import limiter, _rate_limit_exceeded_handler, strict_limiter, _not_authenticated_handler, NotAuthenticatedException
 from app.core.cache_middleware import add_cache_middleware, cache_lifespan, cache_health_check
-from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis
+from app.core.monitoring_middleware import add_monitoring_middleware
+from app.core.logging_config import setup_logging
+from app.core.monitoring import start_system_monitoring, stop_system_monitoring
+from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis, monitoring
 import os
+
+# Setup logging first
+setup_logging(environment=os.getenv('ENV', 'development'))
+
+async def app_lifespan(app: FastAPI):
+    """Application lifespan management"""
+    # Startup
+    await cache_lifespan(app).__aenter__()
+    await start_system_monitoring()
+    
+    yield
+    
+    # Shutdown
+    await stop_system_monitoring()
+    await cache_lifespan(app).__aexit__(None, None, None)
 
 app = FastAPI(
     title="Careercopilot API",
-    lifespan=cache_lifespan
+    lifespan=app_lifespan
 )
 
 # Add CORS middleware
@@ -38,6 +56,9 @@ app.add_exception_handler(NotAuthenticatedException, _not_authenticated_handler)
 # Add cache middleware
 add_cache_middleware(app)
 
+# Add monitoring middleware
+add_monitoring_middleware(app)
+
 
 api_router = APIRouter()
 api_router.include_router(profile.router, prefix="/profile", tags=["profile"])
@@ -49,6 +70,7 @@ api_router.include_router(opportunities.router, prefix="/opportunities", tags=["
 api_router.include_router(settings.router, prefix="/settings", tags=["settings"])
 api_router.include_router(ksc.router, prefix="/ksc", tags=["ksc"])
 api_router.include_router(analysis.router, prefix="/analysis", tags=["analysis"])
+api_router.include_router(monitoring.router, prefix="/monitoring", tags=["monitoring"])
 
 
 app.include_router(api_router, prefix="/api/v1")
