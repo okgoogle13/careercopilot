@@ -1,10 +1,10 @@
 name: CD - Deploy to Staging and Production
 
 on:
-  push:
-    branches:
-      - develop
-      - main
+  workflow_run:
+    workflows: ["CI - Build and Test"]
+    types:
+      - completed
   workflow_dispatch:
     inputs:
       environment:
@@ -24,10 +24,12 @@ jobs:
   pre-deploy-checks:
     name: Pre-deployment Checks
     runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     timeout-minutes: 10
     outputs:
       should-deploy-staging: ${{ steps.check.outputs.staging }}
       should-deploy-production: ${{ steps.check.outputs.production }}
+      commit-sha: ${{ steps.vars.outputs.commit_sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,16 +37,40 @@ jobs:
       - name: Check deployment conditions
         id: check
         run: |
-          if [[ "${{ github.ref }}" == "refs/heads/develop" ]] || [[ "${{ inputs.environment }}" == "staging" ]]; then
-            echo "staging=true" >> $GITHUB_OUTPUT
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            if [[ "${{ inputs.environment }}" == "staging" ]]; then
+              echo "staging=true" >> $GITHUB_OUTPUT
+            else
+              echo "staging=false" >> $GITHUB_OUTPUT
+            fi
+            if [[ "${{ inputs.environment }}" == "production" ]]; then
+              echo "production=true" >> $GITHUB_OUTPUT
+            else
+              echo "production=false" >> $GITHUB_OUTPUT
+            fi
+          elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            if [[ "${{ github.event.workflow_run.head_branch }}" == "develop" ]]; then
+              echo "staging=true" >> $GITHUB_OUTPUT
+              echo "production=false" >> $GITHUB_OUTPUT
+            elif [[ "${{ github.event.workflow_run.head_branch }}" == "main" ]]; then
+              echo "staging=false" >> $GITHUB_OUTPUT
+              echo "production=true" >> $GITHUB_OUTPUT
+            else
+              echo "staging=false" >> $GITHUB_OUTPUT
+              echo "production=false" >> $GITHUB_OUTPUT
+            fi
           else
             echo "staging=false" >> $GITHUB_OUTPUT
-          fi
-          
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]] || [[ "${{ inputs.environment }}" == "production" ]]; then
-            echo "production=true" >> $GITHUB_OUTPUT
-          else
             echo "production=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set commit SHA
+        id: vars
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "commit_sha=${{ github.sha }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            echo "commit_sha=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_OUTPUT
           fi
 
       - name: Ensure CI passed
@@ -55,73 +81,22 @@ jobs:
             echo "✅ Push triggered deployment - CI should have passed"
           fi
 
-  build-assets:
-    name: Build Production Assets
-    runs-on: ubuntu-latest
-    needs: pre-deploy-checks
-    timeout-minutes: 15
-    if: ${{ needs.pre-deploy-checks.outputs.should-deploy-staging == 'true' || needs.pre-deploy-checks.outputs.should-deploy-production == 'true' }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: 'frontend/package-lock.json'
-
-      - name: Restore cached dependencies
-        uses: actions/cache@v4
-        with:
-          path: frontend/node_modules
-          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
-            ${{ runner.os }}-node-
-
-      - name: Install dependencies
-        run: npm ci --prefix frontend
-        timeout-minutes: 5
-
-      - name: Build frontend
-        run: npm run build --prefix frontend
-        timeout-minutes: 5
-
-      - name: Generate bundle analysis
-        run: npm run bundle-analysis --prefix frontend
-        timeout-minutes: 2
-
-      - name: Cache build artifacts
-        uses: actions/cache@v4
-        with:
-          path: frontend/dist
-          key: frontend-build-${{ github.sha }}
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: frontend-dist
-          path: frontend/dist/
-          retention-days: 30
-
   deploy-staging:
     name: Deploy to Staging
     if: ${{ needs.pre-deploy-checks.outputs.should-deploy-staging == 'true' }}
     runs-on: ubuntu-latest
-    needs: [pre-deploy-checks, build-assets]
+    needs: [pre-deploy-checks]
     environment: staging
     timeout-minutes: 20
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore build artifacts
-        uses: actions/cache@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
+          name: frontend-dist
           path: frontend/dist
-          key: frontend-build-${{ github.sha }}
 
       - name: Deploy Frontend to Staging
         id: deploy-frontend
@@ -156,7 +131,7 @@ jobs:
             --min-instances 0 \
             --max-instances 10 \
             --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }},PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }},PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}" \
-            --update-labels="managed-by=github-actions,commit-sha=${{ github.sha }},environment=staging,deployed-at=$(date +%s)" \
+            --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=staging,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
           
@@ -237,18 +212,18 @@ jobs:
     name: Deploy to Production
     if: ${{ needs.pre-deploy-checks.outputs.should-deploy-production == 'true' }}
     runs-on: ubuntu-latest
-    needs: [pre-deploy-checks, build-assets]
+    needs: [pre-deploy-checks]
     environment: production
     timeout-minutes: 25
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Restore build artifacts
-        uses: actions/cache@v4
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
         with:
+          name: frontend-dist
           path: frontend/dist
-          key: frontend-build-${{ github.sha }}
 
       - name: Deploy Frontend to Production
         id: deploy-frontend
@@ -283,7 +258,7 @@ jobs:
             --min-instances 1 \
             --max-instances 100 \
             --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }},PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }},PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}" \
-            --update-labels="managed-by=github-actions,commit-sha=${{ github.sha }},environment=production,deployed-at=$(date +%s)" \
+            --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=production,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
           
