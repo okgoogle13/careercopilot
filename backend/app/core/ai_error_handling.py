@@ -168,9 +168,10 @@ class AIOperationHandler:
         # All attempts failed
         logger.error(f"AI operation failed after {self.retry_config.max_attempts} attempts")
         raise AIError(
-            message=f"Operation failed after {
-                self.retry_config.max_attempts} attempts: {
-                str(last_error)}",
+            message=(
+                f"Operation failed after {self.retry_config.max_attempts} attempts: "
+                f"{str(last_error)}"
+            ),
             error_type=self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN,
             original_error=last_error,
         )
