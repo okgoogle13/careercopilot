@@ -79,7 +79,8 @@ class CacheMonitoringMiddleware(BaseHTTPMiddleware):
             response.headers["X-Cache-Stats"] = (
                 f"hits:{
                     self.request_stats['cache_hits']},misses:{
-                    self.request_stats['cache_misses']}")
+                    self.request_stats['cache_misses']}"
+            )
 
         return response
 
@@ -148,7 +149,8 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
                 invalidated = await self.cache.invalidate_user_cache(user_id, operation_types)
                 logger.info(
                     f"Invalidated {invalidated} cache entries for user {user_id} after {
-                        request.method} {endpoint_path}")
+                        request.method} {endpoint_path}"
+                )
 
         except Exception as e:
             logger.error(f"Cache invalidation error: {e}")

@@ -25,7 +25,7 @@ def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> N
 
     # Construct the link to the opportunity in the app
     # This might need to be adjusted based on your frontend routing
-    app_link = f"https://careercopilot-468811.web.app/opportunities"
+    app_link = "https://careercopilot-468811.web.app/opportunities"
 
     subject = f"New Job Opportunity Found: {job_title} at {company}!"
     html_content = f"""

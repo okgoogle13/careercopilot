@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Body, Depends, HTTPException, Request
+
 # from app.genkit_flows.job_analyzer import analyze_job_description  # Temporarily disabled for deployment
 # from app.genkit_flows.resume_analyzer import compare_resume_to_job  #
 # Temporarily disabled for deployment

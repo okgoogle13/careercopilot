@@ -10,8 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 from starlette.responses import StreamingResponse
 from weasyprint import CSS, HTML
 
-from app.core.dependencies import (get_current_user,
-                                   get_user_document_from_firestore)
+from app.core.dependencies import get_current_user, get_user_document_from_firestore
 
 # from app.genkit_flows.extract_resume_entities import
 # extract_resume_entities  # Temporarily disabled for deployment

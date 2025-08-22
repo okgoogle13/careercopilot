@@ -5,9 +5,12 @@ import genkit
 from dotenv import load_dotenv
 from genkit.plugins import googleai
 
-from app.core.ai_error_handling import (AIError, AIErrorType,
-                                        validate_ai_response,
-                                        with_ai_error_handling)
+from app.core.ai_error_handling import (
+    AIError,
+    AIErrorType,
+    validate_ai_response,
+    with_ai_error_handling,
+)
 from app.core.input_validation import InputSanitizer, InputValidationError
 
 # Load environment variables from .env file

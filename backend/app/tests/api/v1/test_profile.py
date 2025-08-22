@@ -14,9 +14,10 @@ class MockVoiceProfile(MagicMock):
 async def test_generate_and_save_voice_profile(client: AsyncClient, mock_db: MagicMock):
     """Test the generate_and_save_voice_profile endpoint."""
     # Mock the Genkit flow's run method
-    with patch.object(generateVoiceProfile, "run") as mock_run:
+    # with patch.object(generateVoiceProfile, "run") as mock_run:
+    with patch("app.api.v1.profile.generateVoiceProfile") as mock_flow:
         # Configure the mock to return a future-like object with a result
-        mock_run.return_value = MockVoiceProfile()
+        mock_flow.run.return_value = MockVoiceProfile()
 
         # Make the request to the endpoint
         response = await client.post("/api/v1/profile/generate-voice-profile")
@@ -26,7 +27,7 @@ async def test_generate_and_save_voice_profile(client: AsyncClient, mock_db: Mag
         assert response.json() == {"tone": "professional", "style": "concise"}
 
         # Assert that the Genkit flow was called with the correct UID
-        mock_run.assert_called_once_with("test_user_id")
+        mock_flow.run.assert_called_once_with("test_user_id")
 
         # Assert that the database was called to save the profile
         mock_db.collection.assert_called_with("users")
