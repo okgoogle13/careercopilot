@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * Bundle Analyzer Script for CareerCopilot Frontend
@@ -175,8 +179,9 @@ function analyzeBundle() {
   }
 }
 
-if (require.main === module) {
+// Check if this script is being run directly
+if (import.meta.url === `file://${process.argv[1]}`) {
   analyzeBundle();
 }
 
-module.exports = { analyzeBundle };
+export { analyzeBundle };
