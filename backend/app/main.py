@@ -2,10 +2,14 @@ from fastapi import FastAPI, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 from app.core.limiter import limiter, _rate_limit_exceeded_handler, strict_limiter, _not_authenticated_handler, NotAuthenticatedException
+from app.core.cache_middleware import add_cache_middleware, cache_lifespan, cache_health_check
 from app.api.v1 import profile, documents, users, jobs, integrations, opportunities, settings, ksc, analysis
 import os
 
-app = FastAPI(title="Careercopilot API")
+app = FastAPI(
+    title="Careercopilot API",
+    lifespan=cache_lifespan
+)
 
 # Add CORS middleware
 origins = [
@@ -31,6 +35,9 @@ app.state.strict_limiter = strict_limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.add_exception_handler(NotAuthenticatedException, _not_authenticated_handler)
 
+# Add cache middleware
+add_cache_middleware(app)
+
 
 api_router = APIRouter()
 api_router.include_router(profile.router, prefix="/profile", tags=["profile"])
@@ -49,6 +56,10 @@ app.include_router(api_router, prefix="/api/v1")
 @app.get("/health", tags=["Health"])
 async def health_check():
     return {"status": "ok"}
+
+@app.get("/cache/health", tags=["Health"])
+async def cache_health():
+    return await cache_health_check()
 
 if __name__ == "__main__":
     import uvicorn
