@@ -12,6 +12,7 @@ jinja2
 google-api-python-client
 google-cloud-secret-manager
 sendgrid
+redis
 pytest
 httpx
 pytest-asyncio
