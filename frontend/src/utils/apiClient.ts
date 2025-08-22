@@ -1,6 +1,11 @@
 // Centralized API client with standardized error handling
 import { getAuth } from 'firebase/auth';
-import { ApiError, AuthenticationError, NetworkError, reportError } from './errors';
+import {
+  ApiError,
+  AuthenticationError,
+  NetworkError,
+  reportError,
+} from './errors';
 
 export interface ApiRequestOptions extends RequestInit {
   timeout?: number;
@@ -45,18 +50,18 @@ class ApiClient {
     } = options;
 
     const url = `${this.baseURL}${endpoint}`;
-    
+
     for (let attempt = 0; attempt <= retries; attempt++) {
       try {
         const token = await this.getAuthToken();
-        
+
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), timeout);
 
         const response = await fetch(url, {
           ...fetchOptions,
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
             ...fetchOptions.headers,
           },
@@ -72,8 +77,10 @@ class ApiClient {
         return response.json();
       } catch (error) {
         // Don't retry on authentication errors or client errors
-        if (error instanceof AuthenticationError || 
-            (error instanceof ApiError && error.isClientError)) {
+        if (
+          error instanceof AuthenticationError ||
+          (error instanceof ApiError && error.isClientError)
+        ) {
           throw error;
         }
 
@@ -82,9 +89,14 @@ class ApiClient {
           if (error instanceof DOMException && error.name === 'AbortError') {
             throw new NetworkError('Request timeout. Please try again.');
           }
-          
-          if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-            throw new NetworkError('Network connection failed. Please check your internet connection.');
+
+          if (
+            error instanceof TypeError &&
+            error.message.includes('Failed to fetch')
+          ) {
+            throw new NetworkError(
+              'Network connection failed. Please check your internet connection.'
+            );
           }
 
           reportError(error, `API Request to ${endpoint}`);
@@ -99,16 +111,23 @@ class ApiClient {
     throw new NetworkError('Maximum retries exceeded');
   }
 
-  private async handleApiError(response: Response, endpoint: string): Promise<never> {
+  private async handleApiError(
+    response: Response,
+    endpoint: string
+  ): Promise<never> {
     const contentType = response.headers.get('content-type');
-    
+
     let errorData: Record<string, unknown> = {};
     let errorMessage = `Request failed with status ${response.status}`;
 
     if (contentType && contentType.includes('application/json')) {
       try {
         errorData = await response.json();
-        errorMessage = errorData.detail || errorData.message || errorMessage;
+        const detail =
+          typeof errorData.detail === 'string' ? errorData.detail : '';
+        const message =
+          typeof errorData.message === 'string' ? errorData.message : '';
+        errorMessage = detail || message || errorMessage;
       } catch {
         // If JSON parsing fails, use default message
       }
@@ -128,7 +147,11 @@ class ApiClient {
     return this.makeRequest<T>(endpoint, { ...options, method: 'GET' });
   }
 
-  async post<T>(endpoint: string, data?: unknown, options?: ApiRequestOptions): Promise<T> {
+  async post<T>(
+    endpoint: string,
+    data?: unknown,
+    options?: ApiRequestOptions
+  ): Promise<T> {
     return this.makeRequest<T>(endpoint, {
       ...options,
       method: 'POST',
@@ -136,7 +159,11 @@ class ApiClient {
     });
   }
 
-  async put<T>(endpoint: string, data?: unknown, options?: ApiRequestOptions): Promise<T> {
+  async put<T>(
+    endpoint: string,
+    data?: unknown,
+    options?: ApiRequestOptions
+  ): Promise<T> {
     return this.makeRequest<T>(endpoint, {
       ...options,
       method: 'PUT',
@@ -148,7 +175,11 @@ class ApiClient {
     return this.makeRequest<T>(endpoint, { ...options, method: 'DELETE' });
   }
 
-  async patch<T>(endpoint: string, data?: unknown, options?: ApiRequestOptions): Promise<T> {
+  async patch<T>(
+    endpoint: string,
+    data?: unknown,
+    options?: ApiRequestOptions
+  ): Promise<T> {
     return this.makeRequest<T>(endpoint, {
       ...options,
       method: 'PATCH',
