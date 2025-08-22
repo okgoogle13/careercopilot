@@ -1,17 +1,19 @@
-from fastapi import APIRouter, Depends, HTTPException, Body, Request
-from app.core.dependencies import get_current_user
-from app.core.db import db
-from app.core.limiter import limiter
+from fastapi import APIRouter, Body, Depends, HTTPException, Request
 # from app.genkit_flows.job_analyzer import analyze_job_description  # Temporarily disabled for deployment
-# from app.genkit_flows.resume_analyzer import compare_resume_to_job  # Temporarily disabled for deployment
+# from app.genkit_flows.resume_analyzer import compare_resume_to_job  #
+# Temporarily disabled for deployment
 from pydantic import BaseModel
-import json
+
+from app.core.dependencies import get_current_user
+from app.core.limiter import limiter
 
 router = APIRouter()
+
 
 class ResumeComparisonRequest(BaseModel):
     document_id: str
     job_description_text: str
+
 
 def get_user_uid_for_limiter(request: Request) -> str:
     """
@@ -36,15 +38,17 @@ async def analyze_job(
     Analyzes a job description using a Genkit flow.
     """
     # Temporarily disabled for deployment - genkit flows unavailable
-    raise HTTPException(status_code=503, detail="AI features temporarily unavailable during deployment")
-    
+    raise HTTPException(
+        status_code=503, detail="AI features temporarily unavailable during deployment"
+    )
+
     # try:
     #     # Call the Genkit flow to analyze the job description
     #     analysis_result_str = await analyze_job_description.run(job_description)
     #
     #     # Convert the string result to a JSON object
     #     analysis_result = json.loads(analysis_result_str)
-    #     
+    #
     #     return analysis_result
     # except Exception as e:
     #     raise HTTPException(status_code=500, detail=f"An error occurred: {e}")
@@ -53,7 +57,7 @@ async def analyze_job(
 @router.post("/compare-resume")
 @limiter.limit("5/minute")
 async def compare_resume(
-    request: Request, # Add Request to access its state
+    request: Request,  # Add Request to access its state
     body: ResumeComparisonRequest,
     uid: str = Depends(get_current_user),
 ):
@@ -62,10 +66,12 @@ async def compare_resume(
     """
     # Manually store uid in request state for the limiter to access
     request.state.user_uid = uid
-    
+
     # Temporarily disabled for deployment - genkit flows unavailable
-    raise HTTPException(status_code=503, detail="AI features temporarily unavailable during deployment")
-    
+    raise HTTPException(
+        status_code=503, detail="AI features temporarily unavailable during deployment"
+    )
+
     # try:
     #     # Step A: Analyze the job description
     #     job_analysis_str = await analyze_job_description.run(body.job_description_text)
@@ -76,7 +82,7 @@ async def compare_resume(
     #     doc = doc_ref.get()
     #     if not doc.exists:
     #         raise HTTPException(status_code=404, detail="Resume document not found")
-    #     
+    #
     #     resume_text = doc.to_dict().get("extractedText")
     #     if not resume_text:
     #         raise HTTPException(status_code=400, detail="Resume has no extracted text.")

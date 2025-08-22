@@ -1,7 +1,8 @@
-import genkit
-from genkit.plugins import googleai
 import os
+
+import genkit
 from dotenv import load_dotenv
+from genkit.plugins import googleai
 
 # Load environment variables from .env file
 load_dotenv()
@@ -12,15 +13,16 @@ genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 # Define the Gemini Pro model
 gemini_pro = googleai.gemini_pro
 
+
 # Define the Job Analyzer Genkit flow
 @genkit.flow()
 def analyze_job_description(job_description: str) -> dict:
     """
     Analyzes a job description to extract key information.
     """
-    
+
     prompt = f"""
-    Analyze the following job description and extract the key information in a structured JSON format. 
+    Analyze the following job description and extract the key information in a structured JSON format.
     The JSON object should include the following fields:
     - job_title (string)
     - key_skills (list of strings)
@@ -30,7 +32,7 @@ def analyze_job_description(job_description: str) -> dict:
     Job Description:
     {job_description}
     """
-    
+
     response = gemini_pro.generate(prompt)
-    
+
     return response.text()

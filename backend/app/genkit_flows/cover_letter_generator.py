@@ -1,7 +1,8 @@
-import genkit
-from genkit.plugins import googleai
 import json
 from typing import Optional
+
+import genkit
+from genkit.plugins import googleai
 
 # Initialize Genkit and the Google AI plugin.
 # By not passing an explicit API key, the plugin will automatically
@@ -11,11 +12,10 @@ if not genkit.get_plugin("googleai"):
 
 gemini_pro = googleai.gemini_pro
 
+
 @genkit.flow()
 def generate_tailored_cover_letter(
-    base_profile_data: dict, 
-    job_analysis_data: dict, 
-    voice_profile: Optional[dict] = None
+    base_profile_data: dict, job_analysis_data: dict, voice_profile: Optional[dict] = None
 ) -> str:
     """
     Acts as an expert career coach to write a tailored cover letter,
@@ -24,7 +24,7 @@ def generate_tailored_cover_letter(
 
     # Construct the core prompt
     prompt = f"""
-    As a professional career coach, your task is to write a compelling and professional cover letter 
+    As a professional career coach, your task is to write a compelling and professional cover letter
     from a job applicant to a potential employer.
 
     **Instructions:**
@@ -53,11 +53,11 @@ def generate_tailored_cover_letter(
     - **Key Vocabulary to include:** {', '.join(voice_profile.get('professional_vocabulary', []))}
     ---
         """
-    
+
     # Final instruction to the model
     prompt += "\\n\\nNow, write the cover letter. The output should be only the full text of the letter itself."
 
     # Generate the cover letter using the AI model
     response = gemini_pro.generate(prompt)
-    
+
     return response.text()
