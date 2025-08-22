@@ -65,7 +65,13 @@ COMPROMISED_PATTERNS=(
     "sk-proj-dU-hIGOA"   # Example OpenAI key  
     "sk-ant-api03-3_b3PD3I" # Example Anthropic key
     "pplx-XuT0D9Qci"     # Example Perplexity key
-    "pcsk_2CmZ6W_"       # Example Pinecone key
+# Use generic patterns below. Replace with actual patterns as needed.
+COMPROMISED_PATTERNS=(
+    "EXAMPLE_GEMINI_KEY"      # Example Gemini/Firebase key pattern
+    "EXAMPLE_OPENAI_KEY"      # Example OpenAI key pattern
+    "EXAMPLE_ANTHROPIC_KEY"   # Example Anthropic key pattern
+    "EXAMPLE_PERPLEXITY_KEY"  # Example Perplexity key pattern
+    "EXAMPLE_PINECONE_KEY"    # Example Pinecone key pattern
     # Add more patterns as needed
 )
 
