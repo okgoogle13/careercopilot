@@ -1,5 +1,22 @@
 {
   "projects": {
     "default": "careercopilot-staging"
-  }
+  },
+  "targets": {
+    "careercopilot-staging": {
+      "hosting": {
+        "careercopilot-staging-frontend": [
+          "careercopilot-staging"
+        ]
+      }
+    },
+    "careercopilot-468811": {
+      "hosting": {
+        "careercopilot-prod-frontend": [
+          "careercopilot-468811"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

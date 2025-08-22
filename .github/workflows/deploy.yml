@@ -247,7 +247,7 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}'
           channelId: live
-          projectId: careercopilot-prod
+          projectId: careercopilot-468811
           target: careercopilot-prod-frontend
         timeout-minutes: 12
 
