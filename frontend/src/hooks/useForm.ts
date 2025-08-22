@@ -1,17 +1,17 @@
 // Comprehensive form management hook with validation
 import { useState, useCallback, useMemo } from 'react';
-import { ValidationRule, FormValidationResult, validateForm, FieldValidation } from '../utils/validation';
+import { ValidationRule, FormValidationResult, validateForm } from '../utils/validation';
 
-export interface FormField {
-  value: any;
+export interface FormField<T = unknown> {
+  value: T;
   error: string | null;
   touched: boolean;
   valid: boolean;
 }
 
-export interface FormConfig<T extends Record<string, any>> {
+export interface FormConfig<T extends Record<string, unknown>> {
   initialValues: T;
-  validationSchema?: Record<string, ValidationRule<any>[]>;
+  validationSchema?: Record<string, ValidationRule<unknown>[]>;
   validateOnChange?: boolean;
   validateOnBlur?: boolean;
   onSubmit?: (values: T) => Promise<void> | void;
@@ -26,7 +26,7 @@ export interface UseFormReturn<T> {
   isDirty: boolean;
   
   // Field operations
-  setValue: (field: keyof T, value: any) => void;
+  setValue: (field: keyof T, value: unknown) => void;
   setFieldTouched: (field: keyof T, touched?: boolean) => void;
   setFieldError: (field: keyof T, error: string | null) => void;
   
@@ -39,8 +39,8 @@ export interface UseFormReturn<T> {
   
   // Helper functions
   getFieldProps: (field: keyof T) => {
-    value: any;
-    onChange: (value: any) => void;
+    value: unknown;
+    onChange: (value: unknown) => void;
     onBlur: () => void;
     error: string | null;
     touched: boolean;
@@ -52,7 +52,7 @@ export interface UseFormReturn<T> {
   isFieldValid: (field: keyof T) => boolean;
 }
 
-export const useForm = <T extends Record<string, any>>(
+export const useForm = <T extends Record<string, unknown>>(
   config: FormConfig<T>
 ): UseFormReturn<T> => {
   const {
@@ -98,11 +98,11 @@ export const useForm = <T extends Record<string, any>>(
     if (!validationSchema || Object.keys(validationSchema).length === 0) {
       return { isValid: true, errors: {} };
     }
-    return validateForm(values, validationSchema as Record<keyof T, ValidationRule<any>[]>);
+    return validateForm(values, validationSchema as Record<keyof T, ValidationRule<unknown>[]>);
   }, [values, validationSchema]);
 
   // Set field value with optional validation
-  const setValue = useCallback((field: keyof T, value: any) => {
+  const setValue = useCallback((field: keyof T, value: unknown) => {
     setValuesState(prev => ({ ...prev, [field]: value }));
     
     if (validateOnChange) {
@@ -186,7 +186,7 @@ export const useForm = <T extends Record<string, any>>(
   // Helper functions
   const getFieldProps = useCallback((field: keyof T) => ({
     value: values[field],
-    onChange: (value: any) => setValue(field, value),
+    onChange: (value: unknown) => setValue(field, value),
     onBlur: () => setFieldTouched(field, true),
     error: errors[field],
     touched: touched[field] || false,

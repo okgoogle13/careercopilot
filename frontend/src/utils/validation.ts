@@ -1,11 +1,11 @@
 // Form validation utilities and rules
 import { ValidationError } from './errors';
 
-export type ValidationRule<T = any> = (value: T) => string | null;
+export type ValidationRule<T = unknown> = (value: T) => string | null;
 
 // Common validation rules
 export const validationRules = {
-  required: (message: string = 'This field is required'): ValidationRule<any> => (value) => {
+  required: (message: string = 'This field is required'): ValidationRule<unknown> => (value) => {
     if (value === null || value === undefined || value === '') {
       return message;
     }
@@ -62,8 +62,8 @@ export const validationRules = {
 
   phoneNumber: (message: string = 'Please enter a valid phone number'): ValidationRule<string> => (value) => {
     if (!value) return null;
-    const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
-    return phoneRegex.test(value.replace(/[\s\-\(\)]/g, '')) ? null : message;
+    const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
+    return phoneRegex.test(value.replace(/[\s\-()]/g, '')) ? null : message;
   },
 
   numeric: (message: string = 'Please enter a valid number'): ValidationRule<string | number> => (value) => {
@@ -139,9 +139,9 @@ export const validateField = <T>(
 };
 
 // Validate entire form
-export const validateForm = <T extends Record<string, any>>(
+export const validateForm = <T extends Record<string, unknown>>(
   values: T,
-  validationSchema: Record<keyof T, ValidationRule<any>[]>
+  validationSchema: Record<keyof T, ValidationRule<unknown>[]>
 ): FormValidationResult => {
   const errors: Record<string, string> = {};
   let firstErrorField: string | undefined;
@@ -169,11 +169,11 @@ export const validateForm = <T extends Record<string, any>>(
 };
 
 // Real-time form validation hook helper
-export const createFormValidator = <T extends Record<string, any>>(
-  validationSchema: Record<keyof T, ValidationRule<any>[]>
+export const createFormValidator = <T extends Record<string, unknown>>(
+  validationSchema: Record<keyof T, ValidationRule<unknown>[]>
 ) => {
   return {
-    validateField: (field: keyof T, value: any): string | null => {
+    validateField: (field: keyof T, value: unknown): string | null => {
       const rules = validationSchema[field];
       if (!rules) return null;
 

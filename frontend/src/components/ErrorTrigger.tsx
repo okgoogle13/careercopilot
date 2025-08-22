@@ -9,7 +9,7 @@ const ErrorTrigger: React.FC<ErrorTriggerProps> = ({ onlyInDev = true }) => {
   const [shouldError, setShouldError] = useState(false);
 
   // Only show in development mode if onlyInDev is true
-  if (onlyInDev && process.env.NODE_ENV !== 'development') {
+  if (onlyInDev && !import.meta.env.DEV) {
     return null;
   }
 
@@ -24,7 +24,7 @@ const ErrorTrigger: React.FC<ErrorTriggerProps> = ({ onlyInDev = true }) => {
 
   const triggerTypeError = () => {
     // This will cause a runtime error
-    const obj: any = null;
+    const obj = null as unknown as { someProperty: { thatDoesNotExist: string } };
     console.log(obj.someProperty.thatDoesNotExist);
   };
 
