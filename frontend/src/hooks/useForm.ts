@@ -1,6 +1,10 @@
 // Comprehensive form management hook with validation
 import { useState, useCallback, useMemo } from 'react';
-import { ValidationRule, FormValidationResult, validateForm } from '../utils/validation';
+import {
+  ValidationRule,
+  FormValidationResult,
+  validateForm,
+} from '../utils/validation';
 
 export interface FormField<T = unknown> {
   value: T;
@@ -24,19 +28,19 @@ export interface UseFormReturn<T> {
   isValid: boolean;
   isSubmitting: boolean;
   isDirty: boolean;
-  
+
   // Field operations
   setValue: (field: keyof T, value: unknown) => void;
   setFieldTouched: (field: keyof T, touched?: boolean) => void;
   setFieldError: (field: keyof T, error: string | null) => void;
-  
+
   // Form operations
   setValues: (values: Partial<T>) => void;
   resetForm: (newValues?: T) => void;
   validateField: (field: keyof T) => string | null;
   validateForm: () => FormValidationResult;
   submitForm: () => Promise<void>;
-  
+
   // Helper functions
   getFieldProps: (field: keyof T) => {
     value: unknown;
@@ -46,7 +50,7 @@ export interface UseFormReturn<T> {
     touched: boolean;
     valid: boolean;
   };
-  
+
   getFieldError: (field: keyof T) => string | null;
   isFieldTouched: (field: keyof T) => boolean;
   isFieldValid: (field: keyof T) => boolean;
@@ -65,8 +69,12 @@ export const useForm = <T extends Record<string, unknown>>(
 
   // Form state
   const [values, setValuesState] = useState<T>(initialValues);
-  const [errors, setErrorsState] = useState<Record<keyof T, string | null>>({} as Record<keyof T, string | null>);
-  const [touched, setTouchedState] = useState<Record<keyof T, boolean>>({} as Record<keyof T, boolean>);
+  const [errors, setErrorsState] = useState<Record<keyof T, string | null>>(
+    {} as Record<keyof T, string | null>
+  );
+  const [touched, setTouchedState] = useState<Record<keyof T, boolean>>(
+    {} as Record<keyof T, boolean>
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Derived state
@@ -79,47 +87,59 @@ export const useForm = <T extends Record<string, unknown>>(
   }, [errors]);
 
   // Field validation
-  const validateField = useCallback((field: keyof T): string | null => {
-    if (!validationSchema) return null;
-    const fieldKey = String(field);
-    const fieldRules = validationSchema[fieldKey];
-    if (!fieldRules || fieldRules.length === 0) return null;
+  const validateField = useCallback(
+    (field: keyof T): string | null => {
+      if (!validationSchema) return null;
+      const fieldKey = String(field);
+      const fieldRules = validationSchema[fieldKey];
+      if (!fieldRules || fieldRules.length === 0) return null;
 
-    const value = values[field];
-    for (const rule of fieldRules) {
-      const error = rule(value);
-      if (error) return error;
-    }
-    return null;
-  }, [values, validationSchema]);
+      const value = values[field];
+      for (const rule of fieldRules) {
+        const error = rule(value);
+        if (error) return error;
+      }
+      return null;
+    },
+    [values, validationSchema]
+  );
 
   // Form validation
   const validateFormFn = useCallback((): FormValidationResult => {
     if (!validationSchema || Object.keys(validationSchema).length === 0) {
       return { isValid: true, errors: {} };
     }
-    return validateForm(values, validationSchema as Record<keyof T, ValidationRule<unknown>[]>);
+    return validateForm(
+      values,
+      validationSchema as Record<keyof T, ValidationRule<unknown>[]>
+    );
   }, [values, validationSchema]);
 
   // Set field value with optional validation
-  const setValue = useCallback((field: keyof T, value: unknown) => {
-    setValuesState(prev => ({ ...prev, [field]: value }));
-    
-    if (validateOnChange) {
-      const error = validateField(field);
-      setErrorsState(prev => ({ ...prev, [field]: error }));
-    }
-  }, [validateField, validateOnChange]);
+  const setValue = useCallback(
+    (field: keyof T, value: unknown) => {
+      setValuesState(prev => ({ ...prev, [field]: value }));
+
+      if (validateOnChange) {
+        const error = validateField(field);
+        setErrorsState(prev => ({ ...prev, [field]: error }));
+      }
+    },
+    [validateField, validateOnChange]
+  );
 
   // Set field as touched
-  const setFieldTouched = useCallback((field: keyof T, isTouched: boolean = true) => {
-    setTouchedState(prev => ({ ...prev, [field]: isTouched }));
-    
-    if (validateOnBlur && isTouched) {
-      const error = validateField(field);
-      setErrorsState(prev => ({ ...prev, [field]: error }));
-    }
-  }, [validateField, validateOnBlur]);
+  const setFieldTouched = useCallback(
+    (field: keyof T, isTouched: boolean = true) => {
+      setTouchedState(prev => ({ ...prev, [field]: isTouched }));
+
+      if (validateOnBlur && isTouched) {
+        const error = validateField(field);
+        setErrorsState(prev => ({ ...prev, [field]: error }));
+      }
+    },
+    [validateField, validateOnBlur]
+  );
 
   // Set field error manually
   const setFieldError = useCallback((field: keyof T, error: string | null) => {
@@ -127,27 +147,33 @@ export const useForm = <T extends Record<string, unknown>>(
   }, []);
 
   // Set multiple values
-  const setValues = useCallback((newValues: Partial<T>) => {
-    setValuesState(prev => ({ ...prev, ...newValues }));
-    
-    if (validateOnChange) {
-      const newErrors: Partial<Record<keyof T, string | null>> = {};
-      Object.keys(newValues).forEach(key => {
-        const field = key as keyof T;
-        newErrors[field] = validateField(field);
-      });
-      setErrorsState(prev => ({ ...prev, ...newErrors }));
-    }
-  }, [validateField, validateOnChange]);
+  const setValues = useCallback(
+    (newValues: Partial<T>) => {
+      setValuesState(prev => ({ ...prev, ...newValues }));
+
+      if (validateOnChange) {
+        const newErrors: Partial<Record<keyof T, string | null>> = {};
+        Object.keys(newValues).forEach(key => {
+          const field = key as keyof T;
+          newErrors[field] = validateField(field);
+        });
+        setErrorsState(prev => ({ ...prev, ...newErrors }));
+      }
+    },
+    [validateField, validateOnChange]
+  );
 
   // Reset form
-  const resetForm = useCallback((newValues?: T) => {
-    const resetValues = newValues || initialValues;
-    setValuesState(resetValues);
-    setErrorsState({} as Record<keyof T, string | null>);
-    setTouchedState({} as Record<keyof T, boolean>);
-    setIsSubmitting(false);
-  }, [initialValues]);
+  const resetForm = useCallback(
+    (newValues?: T) => {
+      const resetValues = newValues || initialValues;
+      setValuesState(resetValues);
+      setErrorsState({} as Record<keyof T, string | null>);
+      setTouchedState({} as Record<keyof T, boolean>);
+      setIsSubmitting(false);
+    },
+    [initialValues]
+  );
 
   // Submit form
   const submitForm = useCallback(async () => {
@@ -167,7 +193,9 @@ export const useForm = <T extends Record<string, unknown>>(
     if (!validation.isValid) {
       // Focus first error field if possible
       if (validation.firstErrorField) {
-        const element = document.querySelector(`[name="${String(validation.firstErrorField)}"]`) as HTMLElement;
+        const element = document.querySelector(
+          `[name="${String(validation.firstErrorField)}"]`
+        ) as HTMLElement;
         element?.focus();
       }
       return;
@@ -184,26 +212,38 @@ export const useForm = <T extends Record<string, unknown>>(
   }, [values, isSubmitting, validateFormFn, onSubmit]);
 
   // Helper functions
-  const getFieldProps = useCallback((field: keyof T) => ({
-    value: values[field],
-    onChange: (value: unknown) => setValue(field, value),
-    onBlur: () => setFieldTouched(field, true),
-    error: errors[field],
-    touched: touched[field] || false,
-    valid: errors[field] === null,
-  }), [values, errors, touched, setValue, setFieldTouched]);
+  const getFieldProps = useCallback(
+    (field: keyof T) => ({
+      value: values[field],
+      onChange: (value: unknown) => setValue(field, value),
+      onBlur: () => setFieldTouched(field, true),
+      error: errors[field],
+      touched: touched[field] || false,
+      valid: errors[field] === null,
+    }),
+    [values, errors, touched, setValue, setFieldTouched]
+  );
 
-  const getFieldError = useCallback((field: keyof T) => {
-    return touched[field] ? errors[field] : null;
-  }, [errors, touched]);
+  const getFieldError = useCallback(
+    (field: keyof T) => {
+      return touched[field] ? errors[field] : null;
+    },
+    [errors, touched]
+  );
 
-  const isFieldTouched = useCallback((field: keyof T) => {
-    return touched[field] || false;
-  }, [touched]);
+  const isFieldTouched = useCallback(
+    (field: keyof T) => {
+      return touched[field] || false;
+    },
+    [touched]
+  );
 
-  const isFieldValid = useCallback((field: keyof T) => {
-    return errors[field] === null;
-  }, [errors]);
+  const isFieldValid = useCallback(
+    (field: keyof T) => {
+      return errors[field] === null;
+    },
+    [errors]
+  );
 
   return {
     values,

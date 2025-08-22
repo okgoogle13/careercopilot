@@ -31,18 +31,19 @@ export const useFocusTrap = (options: FocusTrapOptions) => {
         'select:not([disabled])',
         'a[href]',
         '[tabindex]:not([tabindex="-1"])',
-        '[contenteditable="true"]'
+        '[contenteditable="true"]',
       ].join(', ');
 
-      return Array.from(container.querySelectorAll(focusableSelectors))
-        .filter((element: Element) => {
+      return Array.from(container.querySelectorAll(focusableSelectors)).filter(
+        (element: Element) => {
           const htmlElement = element as HTMLElement;
           return (
             htmlElement.offsetWidth > 0 &&
             htmlElement.offsetHeight > 0 &&
             !htmlElement.hidden
           );
-        }) as HTMLElement[];
+        }
+      ) as HTMLElement[];
     };
 
     // Handle tab key navigation
@@ -58,13 +59,19 @@ export const useFocusTrap = (options: FocusTrapOptions) => {
 
       if (event.shiftKey) {
         // Shift + Tab: moving backwards
-        if (activeElement === firstElement || !container.contains(activeElement)) {
+        if (
+          activeElement === firstElement ||
+          !container.contains(activeElement)
+        ) {
           event.preventDefault();
           lastElement.focus();
         }
       } else {
         // Tab: moving forwards
-        if (activeElement === lastElement || !container.contains(activeElement)) {
+        if (
+          activeElement === lastElement ||
+          !container.contains(activeElement)
+        ) {
           event.preventDefault();
           firstElement.focus();
         }
@@ -87,7 +94,7 @@ export const useFocusTrap = (options: FocusTrapOptions) => {
     // Cleanup function
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
-      
+
       // Restore focus to the previously focused element
       if (options.restoreFocus !== false && previousActiveElement.current) {
         const elementToRestore = previousActiveElement.current as HTMLElement;
