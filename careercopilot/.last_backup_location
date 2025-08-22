@@ -1,1 +1,4 @@
-backups/env_20250822_002959
+# Security
+security-audit-*.txt
+backups/
+.last_backup_location
