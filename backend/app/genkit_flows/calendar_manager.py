@@ -20,9 +20,10 @@ def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
     credentials = Credentials.from_authorized_user_info(creds_json)
     service = build("calendar", "v3", credentials=credentials)
 
-    event_title = f"Application Deadline: {
-        opportunity_data.get('title')} at {
-        opportunity_data.get('company')}"
+    event_title = (
+        f"Application Deadline: {opportunity_data.get('title')} at "
+        f"{opportunity_data.get('company')}"
+    )
 
     # Assuming 'deadline' is a string in ISO format (e.g., 'YYYY-MM-DD')
     deadline_str = opportunity_data.get("deadline")
