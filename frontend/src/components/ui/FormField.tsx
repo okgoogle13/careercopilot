@@ -34,7 +34,9 @@ export const FormField: React.FC<FormFieldProps> = ({
       const ariaDescribedBy = [
         hint && !showError ? hintId : '',
         showError ? errorId : '',
-      ].filter(Boolean).join(' ');
+      ]
+        .filter(Boolean)
+        .join(' ');
 
       return React.cloneElement(child, {
         id: fieldId,
@@ -49,12 +51,19 @@ export const FormField: React.FC<FormFieldProps> = ({
   return (
     <div className={`space-y-1 ${className}`}>
       {label && (
-        <label htmlFor={fieldId} className="block text-sm font-medium text-gray-700">
+        <label
+          htmlFor={fieldId}
+          className="block text-sm font-medium text-gray-700"
+        >
           {label}
-          {required && <span className="text-red-500 ml-1" aria-label="required">*</span>}
+          {required && (
+            <span className="text-red-500 ml-1" aria-label="required">
+              *
+            </span>
+          )}
         </label>
       )}
-      
+
       <div className="relative">
         {enhancedChildren}
         {showError && (
@@ -98,15 +107,16 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, touched, className = '', ...props }, ref) => {
     const hasError = touched && error;
-    
+
     return (
       <input
         ref={ref}
         className={`
           block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset 
-          ${hasError 
-            ? 'ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600' 
-            : 'ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600'
+          ${
+            hasError
+              ? 'ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600'
+              : 'ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600'
           }
           placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none
           disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200
@@ -120,7 +130,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = 'Input';
 
-interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string | null;
   touched?: boolean;
 }
@@ -128,15 +139,16 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ error, touched, className = '', ...props }, ref) => {
     const hasError = touched && error;
-    
+
     return (
       <textarea
         ref={ref}
         className={`
           block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset 
-          ${hasError 
-            ? 'ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600' 
-            : 'ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600'
+          ${
+            hasError
+              ? 'ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600'
+              : 'ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600'
           }
           placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:outline-none resize-y
           disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200
@@ -157,17 +169,21 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ error, touched, className = '', placeholder, children, ...props }, ref) => {
+  (
+    { error, touched, className = '', placeholder, children, ...props },
+    ref
+  ) => {
     const hasError = touched && error;
-    
+
     return (
       <select
         ref={ref}
         className={`
           block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset 
-          ${hasError 
-            ? 'ring-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600' 
-            : 'ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600'
+          ${
+            hasError
+              ? 'ring-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600'
+              : 'ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600'
           }
           focus:ring-2 focus:ring-inset focus:outline-none
           disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200
@@ -197,7 +213,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, error, touched, className = '', ...props }, ref) => {
     const hasError = touched && error;
-    
+
     return (
       <div className="space-y-1">
         <div className="flex items-center">
@@ -212,11 +228,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             `}
             {...props}
           />
-          <label className="ml-2 text-sm text-gray-900">
-            {label}
-          </label>
+          <label className="ml-2 text-sm text-gray-900">{label}</label>
         </div>
-        
+
         {hasError && (
           <p className="text-sm text-red-600" role="alert">
             {error}

@@ -167,6 +167,12 @@ jobs:
       - name: Wait for deployment propagation
         run: sleep 30
 
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          service_account_key: ${{ secrets.GCP_STAGING_SA_KEY }}
+          project_id: ${{ secrets.GCP_STAGING_PROJECT_ID }}
+
       - name: Health Check - Frontend
         id: frontend-health
         run: |
@@ -293,6 +299,12 @@ jobs:
 
       - name: Wait for deployment propagation
         run: sleep 45
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       - name: Health Check - Frontend
         id: frontend-health

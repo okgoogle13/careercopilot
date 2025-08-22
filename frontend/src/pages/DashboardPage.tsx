@@ -17,7 +17,9 @@ const DashboardPage: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // State for the form, used for both create and update
-  const [currentProfile, setCurrentProfile] = useState<ProfileVariation | null>(null);
+  const [currentProfile, setCurrentProfile] = useState<ProfileVariation | null>(
+    null
+  );
   const [profileName, setProfileName] = useState<string>('');
   const [profileKeywords, setProfileKeywords] = useState<string>('');
   const [profileSkills, setProfileSkills] = useState<string>('');
@@ -150,7 +152,9 @@ const DashboardPage: React.FC = () => {
       }
       setIsModalOpen(false);
     } catch (err: unknown) {
-      toast.error(err instanceof Error ? err.message : 'Failed to save profile.');
+      toast.error(
+        err instanceof Error ? err.message : 'Failed to save profile.'
+      );
     }
   };
 
@@ -165,7 +169,13 @@ const DashboardPage: React.FC = () => {
     if (loading)
       return <LoadingState message="Loading your profile variations..." />;
     if (error)
-      return <ErrorDisplay error={error} variant="card" onDismiss={() => setError(null)} />;
+      return (
+        <ErrorDisplay
+          error={error}
+          variant="card"
+          onDismiss={() => setError(null)}
+        />
+      );
     if (profiles.length === 0) {
       return (
         <div className="text-center p-10 border-2 border-dashed rounded-lg">
