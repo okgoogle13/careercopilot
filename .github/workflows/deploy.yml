@@ -134,23 +134,34 @@ jobs:
           target: careercopilot-staging-frontend
         timeout-minutes: 10
 
-      - name: Deploy Backend to Staging
-        id: deploy-backend
-        uses: google-github-actions/deploy-cloudrun@v2
+      - name: Authenticate to Google Cloud (Staging)
+        uses: google-github-actions/auth@v2
         with:
-          service: careercopilot-backend-staging
-          project_id: ${{ secrets.GCP_STAGING_PROJECT_ID }}
-          credentials: ${{ secrets.GCP_STAGING_SA_KEY }}
-          region: us-central1
-          source: ./backend
-          timeout: 1200s
-          cpu: '1'
-          memory: '2Gi'
-          min-instances: 0
-          max-instances: 10
-          env-vars: |
-            ENVIRONMENT=staging
-            LOG_LEVEL=INFO
+          credentials_json: ${{ secrets.GCP_STAGING_SA_KEY }}
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy Backend to Cloud Run (Staging)
+        id: deploy-backend
+        run: |
+          gcloud run deploy careercopilot-backend-staging \
+            --source ./backend \
+            --platform managed \
+            --region us-central1 \
+            --project ${{ secrets.GCP_STAGING_PROJECT_ID }} \
+            --timeout 1200s \
+            --cpu 1 \
+            --memory 2Gi \
+            --min-instances 0 \
+            --max-instances 10 \
+            --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }},PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }},PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}" \
+            --update-labels="managed-by=github-actions,commit-sha=${{ github.sha }},environment=staging,deployed-at=$(date +%s)" \
+            --allow-unauthenticated \
+            --format=json > deployment-output.json
+          
+          # Extract service URL for health checks
+          echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
         timeout-minutes: 10
 
       - name: Wait for deployment propagation
@@ -188,8 +199,9 @@ jobs:
           max_attempts=5
           attempt=1
           
-          # Get the backend URL from Cloud Run deployment
-          backend_url=$(gcloud run services describe careercopilot-backend-staging --region=us-central1 --format='value(status.url)')
+          # Use the service URL from deployment output
+          backend_url="${{ steps.deploy-backend.outputs.service_url }}"
+          echo "Backend URL: $backend_url"
           
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
@@ -208,8 +220,6 @@ jobs:
             fi
           done
         timeout-minutes: 8
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_STAGING_SA_KEY }}
 
       - name: Post deployment notification
         if: always()
@@ -251,23 +261,34 @@ jobs:
           target: careercopilot-prod-frontend
         timeout-minutes: 12
 
-      - name: Deploy Backend to Production
-        id: deploy-backend
-        uses: google-github-actions/deploy-cloudrun@v2
+      - name: Authenticate to Google Cloud (Production)
+        uses: google-github-actions/auth@v2
         with:
-          service: careercopilot-backend-prod
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          credentials: ${{ secrets.GCP_SA_KEY }}
-          region: us-central1
-          source: ./backend
-          timeout: 1200s
-          cpu: '2'
-          memory: '4Gi'
-          min-instances: 1
-          max-instances: 100
-          env-vars: |
-            ENVIRONMENT=production
-            LOG_LEVEL=WARNING
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Deploy Backend to Cloud Run (Production)
+        id: deploy-backend
+        run: |
+          gcloud run deploy careercopilot-backend-prod \
+            --source ./backend \
+            --platform managed \
+            --region us-central1 \
+            --project ${{ secrets.GCP_PROJECT_ID }} \
+            --timeout 1200s \
+            --cpu 2 \
+            --memory 4Gi \
+            --min-instances 1 \
+            --max-instances 100 \
+            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }},PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }},PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}" \
+            --update-labels="managed-by=github-actions,commit-sha=${{ github.sha }},environment=production,deployed-at=$(date +%s)" \
+            --allow-unauthenticated \
+            --format=json > deployment-output.json
+          
+          # Extract service URL for health checks
+          echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
         timeout-minutes: 12
 
       - name: Wait for deployment propagation
@@ -305,8 +326,9 @@ jobs:
           max_attempts=6
           attempt=1
           
-          # Get the backend URL from Cloud Run deployment
-          backend_url=$(gcloud run services describe careercopilot-backend-prod --region=us-central1 --format='value(status.url)')
+          # Use the service URL from deployment output
+          backend_url="${{ steps.deploy-backend.outputs.service_url }}"
+          echo "Backend URL: $backend_url"
           
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
@@ -325,8 +347,6 @@ jobs:
             fi
           done
         timeout-minutes: 10
-        env:
-          GOOGLE_APPLICATION_CREDENTIALS_DATA: ${{ secrets.GCP_SA_KEY }}
 
       - name: Performance Check
         id: performance-check
