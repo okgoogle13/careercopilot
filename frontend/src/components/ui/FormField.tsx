@@ -41,7 +41,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         'aria-invalid': showError ? 'true' : undefined,
         'aria-describedby': ariaDescribedBy || undefined,
         'aria-required': required ? 'true' : undefined,
-      } as any); // Type assertion needed for dynamic prop spreading
+      } as React.Attributes); // Type assertion needed for dynamic prop spreading
     }
     return child;
   });

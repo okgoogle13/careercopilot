@@ -4,7 +4,7 @@ export class ApiError extends Error {
   constructor(
     message: string,
     public status: number,
-    public data?: any
+    public data?: unknown
   ) {
     super(message);
     this.name = 'ApiError';
@@ -119,7 +119,7 @@ export const getErrorMessage = (error: unknown): string => {
 // Error reporting utility (can be extended with analytics)
 export const reportError = (error: unknown, context?: string): void => {
   // In development, log detailed error information
-  if (process.env.NODE_ENV === 'development') {
+  if (import.meta.env.DEV) {
     console.group(`🚨 Error${context ? ` in ${context}` : ''}`);
     console.error('Error:', error);
     if (error instanceof Error) {
