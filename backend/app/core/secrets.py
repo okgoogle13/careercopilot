@@ -1,10 +1,12 @@
-from google.cloud import secretmanager
-from google.api_core.exceptions import NotFound
 import os
+
+from google.api_core.exceptions import NotFound
+from google.cloud import secretmanager
 
 # Get the project ID from the environment
 GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID")
 client = secretmanager.SecretManagerServiceClient()
+
 
 def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     """
@@ -13,9 +15,9 @@ def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     """
     if not GCP_PROJECT_ID:
         raise ValueError("GCP_PROJECT_ID environment variable not set.")
-    
+
     secret_id = f"careercopilot-{secret_name}-{user_id}"
-    
+
     try:
         secret = client.create_secret(
             request={
@@ -25,7 +27,7 @@ def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
             }
         )
         parent = secret.name
-    except Exception: # AlreadyExists
+    except Exception:  # AlreadyExists
         parent = client.secret_path(GCP_PROJECT_ID, secret_id)
 
     response = client.add_secret_version(
@@ -33,13 +35,14 @@ def save_user_secret(user_id: str, secret_name: str, secret_value: str) -> str:
     )
     return response.name
 
+
 def get_user_secret(user_id: str, secret_name: str, version: str = "latest") -> str:
     """
     Retrieves a user-specific secret from Google Cloud Secret Manager.
     """
     if not GCP_PROJECT_ID:
         raise ValueError("GCP_PROJECT_ID environment variable not set.")
-    
+
     secret_id = f"careercopilot-{secret_name}-{user_id}"
     name = f"projects/{GCP_PROJECT_ID}/secrets/{secret_id}/versions/{version}"
     response = client.access_secret_version(request={"name": name})
@@ -62,7 +65,6 @@ def delete_user_secret(user_id: str, secret_name: str):
     except NotFound:
         # If the secret doesn't exist, we can consider it a success.
         print(f"Secret {secret_id} not found, nothing to delete.")
-        pass
     except Exception as e:
         print(f"Error deleting secret {secret_id}: {e}")
         # Re-raise the exception to be handled by the calling function

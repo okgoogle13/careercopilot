@@ -1,11 +1,13 @@
+import json
+
 from genkit import ai
 from genkit.googleai import gemini15_flash
+
 from app.core.db import db
-import os
-import json
 
 # Initialize the Gemini model
 model = gemini15_flash
+
 
 @ai.flow()
 async def generate_voice_profile(user_id: str) -> dict:
@@ -14,9 +16,9 @@ async def generate_voice_profile(user_id: str) -> dict:
     """
     try:
         # 1. Fetch all of the user's documents from Firestore
-        docs_ref = db.collection('users').document(user_id).collection('documents')
+        docs_ref = db.collection("users").document(user_id).collection("documents")
         docs = docs_ref.stream()
-        
+
         all_text = ""
         doc_count = 0
         for doc in docs:
@@ -24,13 +26,13 @@ async def generate_voice_profile(user_id: str) -> dict:
             if text:
                 all_text += text + "\\n\\n---\\n\\n"
                 doc_count += 1
-        
+
         if doc_count < 1 or not all_text.strip():
             raise ValueError("Not enough document content to generate a voice profile.")
 
         # 2. Create the prompt for the Gemini model
         prompt = f"""
-        Analyze the following text block, which contains multiple documents written by a single user. 
+        Analyze the following text block, which contains multiple documents written by a single user.
         Your task is to create a JSON object that accurately describes their writing style.
 
         The JSON object must include the following fields:
@@ -49,10 +51,8 @@ async def generate_voice_profile(user_id: str) -> dict:
         voice_profile_data = json.loads(response.text)
 
         # 4. Save the profile to the user's main document
-        user_ref = db.collection('users').document(user_id)
-        user_ref.set({
-            'voice_profile': voice_profile_data
-        }, merge=True)
+        user_ref = db.collection("users").document(user_id)
+        user_ref.set({"voice_profile": voice_profile_data}, merge=True)
 
         return voice_profile_data
 
