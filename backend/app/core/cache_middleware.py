@@ -77,9 +77,8 @@ class CacheMonitoringMiddleware(BaseHTTPMiddleware):
         # Add cache performance headers in development
         if self.include_headers and os.getenv("ENV") != "production":
             response.headers["X-Cache-Stats"] = (
-                f"hits:{
-                    self.request_stats['cache_hits']},misses:{
-                    self.request_stats['cache_misses']}"
+                f"hits:{self.request_stats['cache_hits']},"
+                f"misses:{self.request_stats['cache_misses']}"
             )
 
         return response

@@ -10,9 +10,14 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 
 from app.core.ai_client import AIClientManager, AIRequest, AIResponse
-from app.core.ai_config import (AIConfigManager, AIModelType, AIProvider,
-                                AIServiceConfig, ModelConfig,
-                                ProviderCredentials)
+from app.core.ai_config import (
+    AIConfigManager,
+    AIModelType,
+    AIProvider,
+    AIServiceConfig,
+    ModelConfig,
+    ProviderCredentials,
+)
 
 
 class TestAIConfigManager:

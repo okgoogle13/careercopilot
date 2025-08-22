@@ -163,8 +163,8 @@ async def atsScoring(
         )
     if semantic_analysis.similarityScore < 70:
         recommendations.append(
-            f"Improve the alignment of your experience with the job description. The analysis noted: '{
-                semantic_analysis.explanation}'"
+            f"Improve the alignment of your experience with the job description. "
+            f"The analysis noted: '{semantic_analysis.explanation}'"
         )
     if formatting_score < 100:
         recommendations.append(
