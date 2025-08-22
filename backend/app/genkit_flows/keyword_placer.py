@@ -20,9 +20,11 @@ class KeywordPlacementSuggestion(BaseModel):
 
     keyword: str = Field(description="The missing keyword.")
     suggested_location: str = Field(
-        description="A short, specific description of the best place in the resume to add the keyword (e.g., 'In the summary section' or 'In the bullet points for the Sr. Accountant role').")
+        description="A short, specific description of the best place in the resume to add the keyword (e.g., 'In the summary section' or 'In the bullet points for the Sr. Accountant role')."
+    )
     example_sentence: str = Field(
-        description="A well-crafted example sentence that naturally incorporates the keyword into the suggested location.")
+        description="A well-crafted example sentence that naturally incorporates the keyword into the suggested location."
+    )
 
 
 class KeywordPlacementResponse(BaseModel):

@@ -17,6 +17,22 @@ from app.core.monitoring import get_metrics_collector
 
 router = APIRouter()
 
+# Module-level Query dependencies to avoid B008 warnings
+ProviderQuery = Query(None, description="Filter by provider")
+ModelTypeQuery = Query(None, description="Filter by model type")
+ServiceQuery = Query(None, description="Filter by service")
+UserIdQuery = Query(..., description="User ID")
+PageQuery = Query(1, ge=1, description="Page number")
+LimitQuery = Query(10, ge=1, le=100, description="Items per page")
+StartTimeQuery = Query(None, description="Start time filter")
+EndTimeQuery = Query(None, description="End time filter")
+OperationQuery = Query(None, description="Operation filter")
+ServiceNameQuery = Query(..., description="Service name")
+PromptQuery = Query(..., description="Prompt text")
+ModelQuery = Query(None, description="Model name")
+MaxTokensQuery = Query(None, description="Maximum tokens")
+TemperatureQuery = Query(None, description="Temperature parameter")
+
 
 @router.get("/status", tags=["AI Services"])
 async def get_ai_services_status():
@@ -60,9 +76,9 @@ async def get_ai_services_status():
 
 @router.get("/models", tags=["AI Services"])
 async def get_available_models(
-    provider: Optional[str] = Query(None, description="Filter by provider"),
-    model_type: Optional[str] = Query(None, description="Filter by model type"),
-    service: Optional[str] = Query(None, description="Filter by service"),
+    provider: Optional[str] = ProviderQuery,
+    model_type: Optional[str] = ModelTypeQuery,
+    service: Optional[str] = ServiceQuery,
 ):
     """
     Get list of available AI models

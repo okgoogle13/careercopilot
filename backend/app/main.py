@@ -4,15 +4,27 @@ from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 
-from app.api.v1 import (ai_services, analysis, documents, integrations, jobs,
-                        ksc, monitoring, opportunities, profile, settings,
-                        users)
-from app.core.cache_middleware import (add_cache_middleware,
-                                       cache_health_check, cache_lifespan)
-from app.core.limiter import (NotAuthenticatedException,
-                              _not_authenticated_handler,
-                              _rate_limit_exceeded_handler, limiter,
-                              strict_limiter)
+from app.api.v1 import (
+    ai_services,
+    analysis,
+    documents,
+    integrations,
+    jobs,
+    ksc,
+    monitoring,
+    opportunities,
+    profile,
+    settings,
+    users,
+)
+from app.core.cache_middleware import add_cache_middleware, cache_health_check, cache_lifespan
+from app.core.limiter import (
+    NotAuthenticatedException,
+    _not_authenticated_handler,
+    _rate_limit_exceeded_handler,
+    limiter,
+    strict_limiter,
+)
 from app.core.logging_config import setup_logging
 from app.core.monitoring import start_system_monitoring, stop_system_monitoring
 from app.core.monitoring_middleware import add_monitoring_middleware

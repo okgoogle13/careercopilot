@@ -83,7 +83,8 @@ class SemanticAnalysis(BaseModel):
     """Structured output for semantic analysis."""
 
     similarityScore: int = Field(
-        description="A score from 0-100 representing how semantically similar the resume is to the job description.")
+        description="A score from 0-100 representing how semantically similar the resume is to the job description."
+    )
     explanation: str = Field(description="A brief explanation for the given score.")
 
 
@@ -158,11 +159,13 @@ async def atsScoring(
     recommendations = []
     if keyword_analysis["missingKeywords"]:
         recommendations.append(
-            f"Incorporate missing keywords to better match the job requirements. See suggestions below for how to add them.")
+            "Incorporate missing keywords to better match the job requirements. See suggestions below for how to add them."
+        )
     if semantic_analysis.similarityScore < 70:
         recommendations.append(
             f"Improve the alignment of your experience with the job description. The analysis noted: '{
-                semantic_analysis.explanation}'")
+                semantic_analysis.explanation}'"
+        )
     if formatting_score < 100:
         recommendations.append(
             "Ensure your resume includes clear sections for Skills, Work Experience, and Education."
