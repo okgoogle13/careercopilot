@@ -1,9 +1,10 @@
-import genkit
-from genkit.plugins import googleai
 import os
+from typing import Any, Dict, List
+
+import genkit
 from dotenv import load_dotenv
+from genkit.plugins import googleai
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any
 
 # Load environment variables
 load_dotenv()
@@ -15,11 +16,19 @@ if not genkit.get_plugin("googleai"):
 # Define the model to use
 gemini_pro = googleai.gemini_pro
 
+
 # Define the structured output model for resume entities
 class ResumeEntities(BaseModel):
-    skills: List[str] = Field(description="A comprehensive list of all skills mentioned in the resume.")
-    experience: List[Dict[str, Any]] = Field(description="A list of job experiences, including titles, companies, and durations.")
-    education: List[Dict[str, Any]] = Field(description="A list of educational qualifications, including degrees and institutions.")
+    skills: List[str] = Field(
+        description="A comprehensive list of all skills mentioned in the resume."
+    )
+    experience: List[Dict[str, Any]] = Field(
+        description="A list of job experiences, including titles, companies, and durations."
+    )
+    education: List[Dict[str, Any]] = Field(
+        description="A list of educational qualifications, including degrees and institutions."
+    )
+
 
 @genkit.flow(output_schema=ResumeEntities)
 def extractResumeEntities(resumeText: str) -> ResumeEntities:
@@ -35,13 +44,13 @@ def extractResumeEntities(resumeText: str) -> ResumeEntities:
     {resumeText}
     ---
     """
-    
+
     response = gemini_pro.generate(
         prompt=prompt,
         config=googleai.GenerationConfig(
             response_mime_type="application/json",
         ),
-        output_schema=ResumeEntities
+        output_schema=ResumeEntities,
     )
-    
+
     return response.output()
