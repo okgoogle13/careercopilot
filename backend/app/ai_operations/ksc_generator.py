@@ -77,8 +77,10 @@ class KSCGenerator:
                     InputSanitizer.sanitize_text_input(ach).sanitized_content
                     for ach in focus_achievements
                 ]
-                achievements_context = f"\n\nPrioritize these achievements if relevant: {
-                    ', '.join(sanitized_achievements)}"
+                achievements_context = (
+                    f"\n\nPrioritize these achievements if relevant: "
+                    f"{', '.join(sanitized_achievements)}"
+                )
 
             # Adjust length instructions based on preference
             length_instructions = {
