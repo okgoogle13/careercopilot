@@ -471,9 +471,8 @@ class AIConfigManager:
         for service in self.services.values():
             if service.primary_model not in self.models:
                 issues["errors"].append(
-                    f"Service '{
-                        service.service_name}' uses unknown primary model: {
-                        service.primary_model}"
+                    f"Service '{service.service_name}' uses unknown primary model: "
+                    f"{service.primary_model}"
                 )
 
             for fallback_model in service.fallback_models:
