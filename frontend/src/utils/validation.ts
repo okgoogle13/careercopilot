@@ -5,96 +5,139 @@ export type ValidationRule<T = unknown> = (value: T) => string | null;
 
 // Common validation rules
 export const validationRules = {
-  required: (message: string = 'This field is required'): ValidationRule<unknown> => (value) => {
-    if (value === null || value === undefined || value === '') {
-      return message;
-    }
-    if (typeof value === 'string' && value.trim() === '') {
-      return message;
-    }
-    if (Array.isArray(value) && value.length === 0) {
-      return message;
-    }
-    return null;
-  },
-
-  email: (message: string = 'Please enter a valid email address'): ValidationRule<string> => (value) => {
-    if (!value) return null; // Let required rule handle empty values
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(value) ? null : message;
-  },
-
-  minLength: (min: number, message?: string): ValidationRule<string> => (value) => {
-    if (!value) return null; // Let required rule handle empty values
-    const actualMessage = message || `Must be at least ${min} characters long`;
-    return value.length >= min ? null : actualMessage;
-  },
-
-  maxLength: (max: number, message?: string): ValidationRule<string> => (value) => {
-    if (!value) return null; // Let required rule handle empty values
-    const actualMessage = message || `Must be no more than ${max} characters long`;
-    return value.length <= max ? null : actualMessage;
-  },
-
-  password: (message: string = 'Password must be at least 8 characters with uppercase, lowercase, number, and special character'): ValidationRule<string> => (value) => {
-    if (!value) return null;
-    const hasMinLength = value.length >= 8;
-    const hasUppercase = /[A-Z]/.test(value);
-    const hasLowercase = /[a-z]/.test(value);
-    const hasNumber = /\d/.test(value);
-    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
-    
-    if (hasMinLength && hasUppercase && hasLowercase && hasNumber && hasSpecialChar) {
+  required:
+    (message: string = 'This field is required'): ValidationRule<unknown> =>
+    value => {
+      if (value === null || value === undefined || value === '') {
+        return message;
+      }
+      if (typeof value === 'string' && value.trim() === '') {
+        return message;
+      }
+      if (Array.isArray(value) && value.length === 0) {
+        return message;
+      }
       return null;
-    }
-    return message;
-  },
+    },
 
-  url: (message: string = 'Please enter a valid URL'): ValidationRule<string> => (value) => {
-    if (!value) return null;
-    try {
-      new URL(value);
-      return null;
-    } catch {
+  email:
+    (
+      message: string = 'Please enter a valid email address'
+    ): ValidationRule<string> =>
+    value => {
+      if (!value) return null; // Let required rule handle empty values
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(value) ? null : message;
+    },
+
+  minLength:
+    (min: number, message?: string): ValidationRule<string> =>
+    value => {
+      if (!value) return null; // Let required rule handle empty values
+      const actualMessage =
+        message || `Must be at least ${min} characters long`;
+      return value.length >= min ? null : actualMessage;
+    },
+
+  maxLength:
+    (max: number, message?: string): ValidationRule<string> =>
+    value => {
+      if (!value) return null; // Let required rule handle empty values
+      const actualMessage =
+        message || `Must be no more than ${max} characters long`;
+      return value.length <= max ? null : actualMessage;
+    },
+
+  password:
+    (
+      message: string = 'Password must be at least 8 characters with uppercase, lowercase, number, and special character'
+    ): ValidationRule<string> =>
+    value => {
+      if (!value) return null;
+      const hasMinLength = value.length >= 8;
+      const hasUppercase = /[A-Z]/.test(value);
+      const hasLowercase = /[a-z]/.test(value);
+      const hasNumber = /\d/.test(value);
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
+
+      if (
+        hasMinLength &&
+        hasUppercase &&
+        hasLowercase &&
+        hasNumber &&
+        hasSpecialChar
+      ) {
+        return null;
+      }
       return message;
-    }
-  },
+    },
 
-  phoneNumber: (message: string = 'Please enter a valid phone number'): ValidationRule<string> => (value) => {
-    if (!value) return null;
-    const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
-    return phoneRegex.test(value.replace(/[\s\-()]/g, '')) ? null : message;
-  },
+  url:
+    (message: string = 'Please enter a valid URL'): ValidationRule<string> =>
+    value => {
+      if (!value) return null;
+      try {
+        new URL(value);
+        return null;
+      } catch {
+        return message;
+      }
+    },
 
-  numeric: (message: string = 'Please enter a valid number'): ValidationRule<string | number> => (value) => {
-    if (!value) return null;
-    const num = typeof value === 'string' ? parseFloat(value) : value;
-    return !isNaN(num) && isFinite(num) ? null : message;
-  },
+  phoneNumber:
+    (
+      message: string = 'Please enter a valid phone number'
+    ): ValidationRule<string> =>
+    value => {
+      if (!value) return null;
+      const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
+      return phoneRegex.test(value.replace(/[\s\-()]/g, '')) ? null : message;
+    },
 
-  min: (min: number, message?: string): ValidationRule<string | number> => (value) => {
-    if (!value) return null;
-    const num = typeof value === 'string' ? parseFloat(value) : value;
-    const actualMessage = message || `Must be at least ${min}`;
-    return num >= min ? null : actualMessage;
-  },
+  numeric:
+    (
+      message: string = 'Please enter a valid number'
+    ): ValidationRule<string | number> =>
+    value => {
+      if (!value) return null;
+      const num = typeof value === 'string' ? parseFloat(value) : value;
+      return !isNaN(num) && isFinite(num) ? null : message;
+    },
 
-  max: (max: number, message?: string): ValidationRule<string | number> => (value) => {
-    if (!value) return null;
-    const num = typeof value === 'string' ? parseFloat(value) : value;
-    const actualMessage = message || `Must be no more than ${max}`;
-    return num <= max ? null : actualMessage;
-  },
+  min:
+    (min: number, message?: string): ValidationRule<string | number> =>
+    value => {
+      if (!value) return null;
+      const num = typeof value === 'string' ? parseFloat(value) : value;
+      const actualMessage = message || `Must be at least ${min}`;
+      return num >= min ? null : actualMessage;
+    },
 
-  pattern: (regex: RegExp, message: string): ValidationRule<string> => (value) => {
-    if (!value) return null;
-    return regex.test(value) ? null : message;
-  },
+  max:
+    (max: number, message?: string): ValidationRule<string | number> =>
+    value => {
+      if (!value) return null;
+      const num = typeof value === 'string' ? parseFloat(value) : value;
+      const actualMessage = message || `Must be no more than ${max}`;
+      return num <= max ? null : actualMessage;
+    },
 
-  custom: <T>(validationFn: (value: T) => boolean, message: string): ValidationRule<T> => (value) => {
-    if (!value) return null;
-    return validationFn(value) ? null : message;
-  },
+  pattern:
+    (regex: RegExp, message: string): ValidationRule<string> =>
+    value => {
+      if (!value) return null;
+      return regex.test(value) ? null : message;
+    },
+
+  custom:
+    <T>(
+      validationFn: (value: T) => boolean,
+      message: string
+    ): ValidationRule<T> =>
+    value => {
+      if (!value) return null;
+      return validationFn(value) ? null : message;
+    },
 };
 
 // Field validation state
@@ -148,7 +191,7 @@ export const validateForm = <T extends Record<string, unknown>>(
 
   for (const [field, rules] of Object.entries(validationSchema)) {
     const value = values[field as keyof T];
-    
+
     for (const rule of rules) {
       const error = rule(value);
       if (error) {
@@ -183,7 +226,7 @@ export const createFormValidator = <T extends Record<string, unknown>>(
       }
       return null;
     },
-    
+
     validateForm: (values: T): FormValidationResult => {
       return validateForm(values, validationSchema);
     },

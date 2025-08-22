@@ -54,3 +54,8 @@ temp/
 .eslintcache
 .npm
 .rpt2_cache/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
