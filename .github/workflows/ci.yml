@@ -100,11 +100,11 @@ jobs:
           path: frontend/dist/bundle-analysis.json
           retention-days: 30
 
-      - name: Cache build artifacts
-        uses: actions/cache@v4
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
-          path: frontend/dist
-          key: frontend-build-${{ github.sha }}
+          name: frontend-dist
+          path: frontend/dist/
 
   test-backend:
     name: Backend Tests
