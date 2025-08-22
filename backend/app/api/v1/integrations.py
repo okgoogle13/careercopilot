@@ -4,7 +4,7 @@ from google_auth_oauthlib.flow import Flow
 from app.core.dependencies import get_current_user
 from app.core.db import db
 from app.core.secrets import save_user_secret, delete_user_secret
-from app.genkit_flows.email_scanner import scan_user_emails
+# from app.genkit_flows.email_scanner import scan_user_emails  # Temporarily disabled for deployment
 from app.core.limiter import strict_limiter
 import os
 import asyncio
@@ -31,7 +31,8 @@ async def trigger_scan(request: Request, user: dict = Depends(get_current_user),
         if not x_scheduler_secret or x_scheduler_secret != SCHEDULER_SECRET:
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid scheduler secret")
 
-    asyncio.create_task(scan_user_emails(user['uid']))
-    return {"message": "Email scan triggered successfully"}
+    # asyncio.create_task(scan_user_emails(user['uid']))  # Temporarily disabled for deployment
+    raise HTTPException(status_code=503, detail="AI features temporarily unavailable during deployment")
+    # return {"message": "Email scan triggered successfully"}
 
 # ... (rest of the file remains the same, including OAuth endpoints)

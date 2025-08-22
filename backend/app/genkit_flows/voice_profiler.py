@@ -1,16 +1,14 @@
-import genkit
-from genkit.plugins import googleai
+from genkit import ai
+from genkit.googleai import gemini15_flash
 from app.core.db import db
 import os
 import json
 
-# Initialize Genkit and the Gemini Pro model
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-gemini_pro = googleai.gemini_pro
+# Initialize the Gemini model
+model = gemini15_flash
 
-@genkit.flow()
-def generate_voice_profile(user_id: str) -> dict:
+@ai.flow()
+async def generate_voice_profile(user_id: str) -> dict:
     """
     Analyzes all of a user's documents to create a voice profile.
     """
@@ -47,8 +45,8 @@ def generate_voice_profile(user_id: str) -> dict:
         """
 
         # 3. Call the model and get the response
-        response = gemini_pro.generate(prompt)
-        voice_profile_data = json.loads(response.text())
+        response = await ai.generate(model=model, prompt=prompt)
+        voice_profile_data = json.loads(response.text)
 
         # 4. Save the profile to the user's main document
         user_ref = db.collection('users').document(user_id)
