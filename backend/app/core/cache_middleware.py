@@ -147,8 +147,8 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
             if operation_types:
                 invalidated = await self.cache.invalidate_user_cache(user_id, operation_types)
                 logger.info(
-                    f"Invalidated {invalidated} cache entries for user {user_id} after {
-                        request.method} {endpoint_path}"
+                    f"Invalidated {invalidated} cache entries for user {user_id} after "
+                    f"{request.method} {endpoint_path}"
                 )
 
         except Exception as e:
