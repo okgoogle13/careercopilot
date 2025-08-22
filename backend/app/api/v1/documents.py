@@ -17,7 +17,7 @@ import docx
 
 from app.core.dependencies import get_current_user, get_user_document_from_firestore
 from app.core.db import db
-from app.genkit_flows.extract_resume_entities import extract_resume_entities
+# from app.genkit_flows.extract_resume_entities import extract_resume_entities  # Temporarily disabled for deployment
 
 router = APIRouter()
 
