@@ -1,10 +1,14 @@
 import pytest
 
-from app.core.ai_error_handling import (AIError, AIErrorType,
-                                        AIOperationHandler, RetryConfig,
-                                        create_user_friendly_error,
-                                        validate_ai_response,
-                                        with_ai_error_handling)
+from app.core.ai_error_handling import (
+    AIError,
+    AIErrorType,
+    AIOperationHandler,
+    RetryConfig,
+    create_user_friendly_error,
+    validate_ai_response,
+    with_ai_error_handling,
+)
 
 
 class TestAIOperationHandler:
@@ -63,9 +67,9 @@ class TestAIOperationHandler:
         assert handler.should_retry(AIErrorType.UNKNOWN)
 
         # Should not retry
-        assert handler.should_retry(AIErrorType.INVALID_REQUEST) == False
-        assert handler.should_retry(AIErrorType.AUTHENTICATION) == False
-        assert handler.should_retry(AIErrorType.QUOTA_EXCEEDED) == False
+        assert handler.should_retry(AIErrorType.INVALID_REQUEST) is False
+        assert handler.should_retry(AIErrorType.AUTHENTICATION) is False
+        assert handler.should_retry(AIErrorType.QUOTA_EXCEEDED) is False
 
     def test_calculate_delay(self):
         """Test delay calculation for retries."""

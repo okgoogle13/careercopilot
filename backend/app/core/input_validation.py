@@ -14,7 +14,6 @@ class InputValidationError(Exception):
     """Raised when input validation fails."""
 
 
-
 class SanitizedInput(BaseModel):
     """Container for sanitized input with metadata."""
 

@@ -229,8 +229,9 @@ async def example_cache_operations():
         return cached_result
 
     # Perform operation and cache result
-    result = await some_expensive_ai_operation(input_data)
-    await cache.set("resume_analysis", user_id, input_data, result)
+    # result = await some_expensive_ai_operation(input_data)
+    # await cache.set("resume_analysis", user_id, input_data, result)
+    result = {"example": "cached result"}
 
     return result
 
@@ -246,7 +247,8 @@ async def example_cache_context():
             return cached
 
         # Perform expensive operation
-        result = await some_expensive_ai_operation(input_data)
+        # result = await some_expensive_ai_operation(input_data)
+        result = {"example": "operation result"}
 
         # Cache the result
         await cached.set_result(result)
