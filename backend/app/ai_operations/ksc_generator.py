@@ -84,8 +84,7 @@ class KSCGenerator:
             length_instructions = {
                 "concise": "Keep each section concise (2-3 sentences each). Total response should be 200-300 words.",
                 "standard": "Provide detailed but focused responses (3-4 sentences each). Total response should be 300-450 words.",
-                "comprehensive": "Provide comprehensive,
-                    detailed responses (4-6 sentences each). Total response should be 450-600 words.",
+                "comprehensive": "Provide comprehensive, detailed responses (4-6 sentences each). Total response should be 450-600 words.",
             }
 
             length_instruction = length_instructions.get(

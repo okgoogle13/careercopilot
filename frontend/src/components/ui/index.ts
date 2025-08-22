@@ -18,7 +18,12 @@ export { default as EmptyState } from './EmptyState';
 export { default as Alert } from './Alert';
 export { default as OptimizedImage } from './OptimizedImage';
 export { default as ErrorBoundary } from './ErrorBoundary';
-export { default as ErrorDisplay, NetworkErrorDisplay, AuthErrorDisplay, LoadingErrorDisplay } from './ErrorDisplay';
+export {
+  default as ErrorDisplay,
+  NetworkErrorDisplay,
+  AuthErrorDisplay,
+  LoadingErrorDisplay,
+} from './ErrorDisplay';
 export { FormField, Input, Textarea, Select, Checkbox } from './FormField';
 export { default as Modal } from './Modal';
 export { default as SkipLink } from './SkipLink';
