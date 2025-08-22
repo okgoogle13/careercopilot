@@ -13,6 +13,7 @@ google-api-python-client
 google-cloud-secret-manager
 sendgrid
 redis
+psutil
 pytest
 httpx
 pytest-asyncio
