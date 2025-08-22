@@ -39,7 +39,7 @@ export const UserPreferencesProvider: React.FC<
       if (user) {
         const userDocRef = doc(db, 'users', user.uid);
         const unsubSnapshot = onSnapshot(
-          userDocRef, 
+          userDocRef,
           docSnap => {
             if (docSnap.exists()) {
               const data = docSnap.data();

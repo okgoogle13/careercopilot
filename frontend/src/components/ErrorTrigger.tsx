@@ -24,7 +24,9 @@ const ErrorTrigger: React.FC<ErrorTriggerProps> = ({ onlyInDev = true }) => {
 
   const triggerTypeError = () => {
     // This will cause a runtime error
-    const obj = null as unknown as { someProperty: { thatDoesNotExist: string } };
+    const obj = null as unknown as {
+      someProperty: { thatDoesNotExist: string };
+    };
     console.log(obj.someProperty.thatDoesNotExist);
   };
 
@@ -39,7 +41,8 @@ const ErrorTrigger: React.FC<ErrorTriggerProps> = ({ onlyInDev = true }) => {
         Error Boundary Testing (Dev Only)
       </h3>
       <p className="text-sm text-yellow-700 mb-4">
-        These buttons will trigger different types of errors to test error boundaries.
+        These buttons will trigger different types of errors to test error
+        boundaries.
       </p>
       <div className="space-y-2">
         <button
