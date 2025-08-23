@@ -1,5 +1,0 @@
-CareerCopilot Security Audit Report
-Generated: Fri Aug 22 02:33:24 AEST 2025
-Score: 155/155 (100%)
-
-Issues Found:

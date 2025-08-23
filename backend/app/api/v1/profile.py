@@ -1,6 +1,5 @@
-from fastapi import APIRouter, Depends, HTTPException
-
 from app.core.dependencies import get_current_user
+from fastapi import APIRouter, Depends, HTTPException
 
 # from app.genkit_flows.voice_profiler import generateVoiceProfile
 

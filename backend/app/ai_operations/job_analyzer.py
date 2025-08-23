@@ -43,13 +43,17 @@ class JobAnalyzer:
         try:
             # Input validation
             if not job_description or not isinstance(job_description, str):
-                raise InputValidationError("Job description is required and must be a string")
+                raise InputValidationError(
+                    "Job description is required and must be a string"
+                )
 
             # Sanitize inputs
             sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
             sanitized_company_info = None
             if company_info:
-                sanitized_company_info = InputSanitizer.sanitize_text_input(company_info)
+                sanitized_company_info = InputSanitizer.sanitize_text_input(
+                    company_info
+                )
 
             system_prompt = """You are an expert HR analyst and job market researcher with deep knowledge of industry requirements, salary ranges, and career progression paths. Analyze job descriptions with precision and industry insight."""
 
@@ -166,7 +170,9 @@ Respond with ONLY the JSON object:"""
                     "job_title": parsed_result.get("job_title", "Unknown"),
                     "cached": response.cached,
                     "required_skills_count": len(
-                        parsed_result.get("required_skills", {}).get("technical_skills", [])
+                        parsed_result.get("required_skills", {}).get(
+                            "technical_skills", []
+                        )
                     ),
                 },
             )
@@ -184,7 +190,10 @@ Respond with ONLY the JSON object:"""
     @monitor_performance("job_requirements_extraction")
     @cached_ai_operation("document_extraction", user_id_param="user_id")
     async def extract_job_requirements(
-        self, user_id: str, job_description: str, focus_areas: Optional[List[str]] = None
+        self,
+        user_id: str,
+        job_description: str,
+        focus_areas: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """
         Extract specific job requirements with focus on particular areas.
@@ -202,7 +211,9 @@ Respond with ONLY the JSON object:"""
 
             focus_instruction = ""
             if focus_areas:
-                focus_instruction = f"\nFocus particularly on these areas: {', '.join(focus_areas)}"
+                focus_instruction = (
+                    f"\nFocus particularly on these areas: {', '.join(focus_areas)}"
+                )
 
             system_prompt = """You are a specialized job requirements analyst with expertise in parsing complex job descriptions for specific requirements and qualifications."""
 
@@ -269,7 +280,9 @@ Respond with ONLY the JSON object:"""
             return parsed_result
 
         except Exception as e:
-            logger.error(f"Error in job requirements extraction for user {user_id}: {str(e)}")
+            logger.error(
+                f"Error in job requirements extraction for user {user_id}: {str(e)}"
+            )
             raise AIError(
                 message=f"Job requirements extraction failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,

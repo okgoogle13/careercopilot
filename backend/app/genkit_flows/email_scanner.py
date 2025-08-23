@@ -3,14 +3,13 @@ import json
 import os
 
 import genkit
+from app.core.db import db
+from app.core.secrets import get_user_secret
 from genkit.plugins import googleai
 from google.cloud.firestore import SERVER_TIMESTAMP
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-
-from app.core.db import db
-from app.core.secrets import get_user_secret
 
 # Import the new flows
 from .calendar_manager import createCalendarEvent
@@ -49,7 +48,8 @@ def extract_job_details_from_email(email_content: str) -> dict:
     ---
     """
     response = gemini_pro.generate(
-        prompt=prompt, config=googleai.GenerationConfig(response_mime_type="application/json")
+        prompt=prompt,
+        config=googleai.GenerationConfig(response_mime_type="application/json"),
     )
     try:
         return json.loads(response.text())
@@ -72,10 +72,13 @@ async def scanUserEmails(user_id: str) -> list:
 
         service = get_gmail_service(user_id)
         # Refined query to be more specific
-        query = (
-            "is:unread (from:greenhouse.io OR from:lever.co OR subject:('Your application for'))"
+        query = "is:unread (from:greenhouse.io OR from:lever.co OR subject:('Your application for'))"
+        results = (
+            service.users()
+            .messages()
+            .list(userId="me", q=query, maxResults=10)
+            .execute()
         )
-        results = service.users().messages().list(userId="me", q=query, maxResults=10).execute()
         messages = results.get("messages", [])
 
         saved_opportunities = []
@@ -124,17 +127,23 @@ async def scanUserEmails(user_id: str) -> list:
                     try:
                         await createCalendarEvent.run(user_id, job_details)
                     except Exception as e:
-                        print(f"Failed to create calendar event for opportunity {opp_ref.id}: {e}")
+                        print(
+                            f"Failed to create calendar event for opportunity {opp_ref.id}: {e}"
+                        )
 
                 # 3. Send Notification Email
                 try:
                     await sendNewOpportunityNotification.run(user_data, job_details)
                 except Exception as e:
-                    print(f"Failed to send notification for opportunity {opp_ref.id}: {e}")
+                    print(
+                        f"Failed to send notification for opportunity {opp_ref.id}: {e}"
+                    )
 
                 # Mark email as read
                 service.users().messages().modify(
-                    userId="me", id=message_info["id"], body={"removeLabelIds": ["UNREAD"]}
+                    userId="me",
+                    id=message_info["id"],
+                    body={"removeLabelIds": ["UNREAD"]},
                 ).execute()
 
         return saved_opportunities

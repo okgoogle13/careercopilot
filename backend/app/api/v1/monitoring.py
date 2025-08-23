@@ -8,13 +8,12 @@ and monitoring data for dashboards and alerting systems.
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query
-from fastapi.responses import PlainTextResponse
-
 from app.core.cache import get_ai_cache
 from app.core.cache_middleware import cache_health_check
 from app.core.dependencies import get_current_user  # For admin-only endpoints
 from app.core.monitoring import get_metrics_collector
+from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import PlainTextResponse
 
 router = APIRouter()
 
@@ -31,7 +30,9 @@ async def get_prometheus_metrics():
         collector = get_metrics_collector()
         return collector.export_prometheus_format()
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to export metrics: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to export metrics: {str(e)}"
+        )
 
 
 @router.get("/metrics/summary", tags=["Monitoring"])
@@ -49,9 +50,15 @@ async def get_metrics_summary():
         # Add additional computed metrics
         summary["computed_metrics"] = await _compute_additional_metrics(summary)
 
-        return {"timestamp": datetime.utcnow().isoformat(), "status": "ok", "metrics": summary}
+        return {
+            "timestamp": datetime.utcnow().isoformat(),
+            "status": "ok",
+            "metrics": summary,
+        }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to get metrics summary: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to get metrics summary: {str(e)}"
+        )
 
 
 @router.get("/health/detailed", tags=["Monitoring"])
@@ -75,7 +82,9 @@ async def get_detailed_health():
         }
 
         # Determine overall status
-        all_healthy = all(check.get("healthy", False) for check in health_checks.values())
+        all_healthy = all(
+            check.get("healthy", False) for check in health_checks.values()
+        )
 
         overall_status = "healthy" if all_healthy else "degraded"
 
@@ -85,13 +94,23 @@ async def get_detailed_health():
             "uptime_seconds": metrics.get("uptime_seconds", 0),
             "checks": health_checks,
             "metrics_summary": {
-                "total_requests": metrics.get("counters", {}).get("http_requests_total", 0),
-                "error_count": metrics.get("counters", {}).get("requests_error_total", 0),
-                "cache_hits": metrics.get("counters", {}).get("ai_operation_cached_total", 0),
+                "total_requests": metrics.get("counters", {}).get(
+                    "http_requests_total", 0
+                ),
+                "error_count": metrics.get("counters", {}).get(
+                    "requests_error_total", 0
+                ),
+                "cache_hits": metrics.get("counters", {}).get(
+                    "ai_operation_cached_total", 0
+                ),
             },
         }
     except Exception as e:
-        return {"timestamp": datetime.utcnow().isoformat(), "status": "unhealthy", "error": str(e)}
+        return {
+            "timestamp": datetime.utcnow().isoformat(),
+            "status": "unhealthy",
+            "error": str(e),
+        }
 
 
 @router.get("/performance", tags=["Monitoring"])
@@ -131,7 +150,9 @@ async def get_performance_metrics(
             "performance_metrics": performance_data,
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to get performance metrics: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to get performance metrics: {str(e)}"
+        )
 
 
 @router.get("/dashboard", tags=["Monitoring"])
@@ -161,13 +182,23 @@ async def get_dashboard_data():
             "kpis": kpis,
             "system_health": {
                 "uptime_seconds": metrics_summary.get("uptime_seconds", 0),
-                "memory_usage": metrics_summary.get("gauges", {}).get("system_memory_percent", 0),
-                "cpu_usage": metrics_summary.get("gauges", {}).get("system_cpu_percent", 0),
-                "disk_usage": metrics_summary.get("gauges", {}).get("system_disk_percent", 0),
+                "memory_usage": metrics_summary.get("gauges", {}).get(
+                    "system_memory_percent", 0
+                ),
+                "cpu_usage": metrics_summary.get("gauges", {}).get(
+                    "system_cpu_percent", 0
+                ),
+                "disk_usage": metrics_summary.get("gauges", {}).get(
+                    "system_disk_percent", 0
+                ),
             },
             "request_metrics": {
-                "total_requests": metrics_summary.get("counters", {}).get("http_requests_total", 0),
-                "error_count": metrics_summary.get("counters", {}).get("requests_error_total", 0),
+                "total_requests": metrics_summary.get("counters", {}).get(
+                    "http_requests_total", 0
+                ),
+                "error_count": metrics_summary.get("counters", {}).get(
+                    "requests_error_total", 0
+                ),
                 "avg_response_time": _get_average_response_time(metrics_summary),
                 "requests_per_minute": _calculate_requests_per_minute(metrics_summary),
             },
@@ -188,7 +219,9 @@ async def get_dashboard_data():
 
         return dashboard_data
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to get dashboard data: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to get dashboard data: {str(e)}"
+        )
 
 
 @router.get("/alerts", tags=["Monitoring"])
@@ -275,7 +308,9 @@ async def clear_metrics(current_user: str = Depends(get_current_user)):
             "message": "All metrics cleared successfully",
         }
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to clear metrics: {str(e)}")
+        raise HTTPException(
+            status_code=500, detail=f"Failed to clear metrics: {str(e)}"
+        )
 
 
 # Helper functions
@@ -302,7 +337,10 @@ async def _check_database_health() -> Dict[str, Any]:
         # Simple connectivity test
         test_doc = db.collection("health_check").document("test")
         await test_doc.get()
-        return {"healthy": True, "response_time_ms": 0}  # Would measure actual response time
+        return {
+            "healthy": True,
+            "response_time_ms": 0,
+        }  # Would measure actual response time
     except Exception as e:
         return {"healthy": False, "error": str(e)}
 
@@ -410,7 +448,9 @@ async def _calculate_kpis(metrics: Dict[str, Any]) -> Dict[str, Any]:
         "avg_response_time_ms": _get_average_response_time(metrics),
         "requests_per_second": round(total_requests / max(uptime_seconds, 1), 2),
         "cache_hit_rate_percent": _calculate_cache_hit_rate(metrics),
-        "ai_operations_per_hour": round(ai_operations / max(uptime_seconds / 3600, 0.01), 2),
+        "ai_operations_per_hour": round(
+            ai_operations / max(uptime_seconds / 3600, 0.01), 2
+        ),
     }
 
 
@@ -620,7 +660,11 @@ async def _check_cache_alerts() -> List[Dict[str, Any]]:
             )
     except Exception:
         alerts.append(
-            {"type": "cache_health", "severity": "critical", "message": "Cache system unreachable"}
+            {
+                "type": "cache_health",
+                "severity": "critical",
+                "message": "Cache system unreachable",
+            }
         )
 
     return alerts

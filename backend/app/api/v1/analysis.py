@@ -1,16 +1,16 @@
 import uuid
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from google.api_core.exceptions import GoogleAPICallError
-from google.cloud.firestore import SERVER_TIMESTAMP
-from pydantic import BaseModel, ValidationError
-
 from app.ai_operations.ats_scoring import ats_scorer
 from app.ai_operations.job_analyzer import job_analyzer
 from app.ai_operations.resume_analyzer import resume_analyzer
 from app.core.ai_error_handling import AIError
 from app.core.db import db
-from app.core.dependencies import get_current_user, get_user_document_from_firestore
+from app.core.dependencies import (get_current_user,
+                                   get_user_document_from_firestore)
+from fastapi import APIRouter, Depends, HTTPException, status
+from google.api_core.exceptions import GoogleAPICallError
+from google.cloud.firestore import SERVER_TIMESTAMP
+from pydantic import BaseModel, ValidationError
 
 router = APIRouter()
 
@@ -50,7 +50,9 @@ async def get_ats_score(
 
         # Perform comprehensive ATS analysis
         analysis_result = await ats_scorer.comprehensive_ats_analysis(
-            user_id=user["uid"], resume_text=resume_text, job_description=request.job_description
+            user_id=user["uid"],
+            resume_text=resume_text,
+            job_description=request.job_description,
         )
 
         # Save the analysis result for tracking
@@ -78,7 +80,8 @@ async def get_ats_score(
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except GoogleAPICallError as e:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Google Cloud API error: {e}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Google Cloud API error: {e}",
         )
     except Exception as e:
         raise HTTPException(
@@ -145,7 +148,8 @@ async def analyze_resume(
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except GoogleAPICallError as e:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Google Cloud API error: {e}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Google Cloud API error: {e}",
         )
     except Exception as e:
         raise HTTPException(
@@ -193,7 +197,8 @@ async def analyze_job_description(
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except GoogleAPICallError as e:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Google Cloud API error: {e}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Google Cloud API error: {e}",
         )
     except Exception as e:
         raise HTTPException(

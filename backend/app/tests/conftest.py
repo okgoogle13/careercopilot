@@ -1,10 +1,9 @@
 from unittest.mock import MagicMock
 
 import pytest
-from httpx import AsyncClient
-
 from app.core.dependencies import get_current_user
 from app.main import app
+from httpx import AsyncClient
 
 
 @pytest.fixture
