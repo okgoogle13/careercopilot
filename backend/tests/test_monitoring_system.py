@@ -226,14 +226,6 @@ class TestBusinessMetrics:
             track_ai_usage("resume_analysis", "user_456", tokens_used=1500, cached=True)
 
             # Verify multiple counters were incremented
-            expected_calls = [
-                (("ai_operation_resume_analysis",), {}),
-                (("ai_operation_total",), {}),
-                (("ai_operation_resume_analysis_cached",), {}),
-                (("ai_operation_cached_total",), {}),
-                (("ai_tokens_used_total",), {"value": 1500}),
-            ]
-
             assert mock_collector.increment_counter.call_count >= 4
             mock_collector.record_histogram.assert_called_with(
                 "ai_tokens_per_resume_analysis", 1500

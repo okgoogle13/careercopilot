@@ -123,7 +123,8 @@ async def atsScoring(
 
     # Step 3: Perform Semantic Relevance analysis
     semantic_prompt = f"""
-    Compare the resume against the job description. Provide a semantic similarity score from 0-100 and a brief explanation.
+    Compare the resume against the job description.
+    Provide a semantic similarity score from 0-100 and a brief explanation.
     Resume: "{resumeText}"
     Job Description: "{jobDescription}"
     """
@@ -164,7 +165,8 @@ async def atsScoring(
     recommendations = []
     if keyword_analysis["missingKeywords"]:
         recommendations.append(
-            "Incorporate missing keywords to better match the job requirements. See suggestions below for how to add them."
+            "Incorporate missing keywords to better match the job requirements. "
+            "See suggestions below for how to add them."
         )
     if semantic_analysis.similarityScore < 70:
         recommendations.append(
