@@ -29,7 +29,7 @@ class CacheEntry:
     expires_at: datetime
     operation_type: str
     input_hash: str
-    metadata: Dict[str, Any] = None
+    metadata: Optional[Dict[str, Any]] = None
 
     def is_expired(self) -> bool:
         from datetime import timezone
