@@ -267,7 +267,11 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
                 body = response.body
                 if len(body) <= self.max_body_size:
                     try:
-                        body_str = body.decode("utf-8") if isinstance(body, bytes) else bytes(body).decode("utf-8")
+                        body_str = (
+                            body.decode("utf-8")
+                            if isinstance(body, bytes)
+                            else bytes(body).decode("utf-8")
+                        )
                         info["response_body"] = json.loads(body_str)
                     except (json.JSONDecodeError, UnicodeDecodeError):
                         info["response_body_size"] = len(body)

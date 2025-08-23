@@ -43,7 +43,9 @@ class RedisCacheBackend(CacheBackend):
                 "Redis is required for RedisCacheBackend. Install with: pip install redis"
             )
 
-        self.redis_url: str = redis_url or os.getenv("REDIS_URL") or "redis://localhost:6379"
+        self.redis_url: str = (
+            redis_url or os.getenv("REDIS_URL") or "redis://localhost:6379"
+        )
         self.compression = compression
         self.serialization = serialization
         self.key_prefix = key_prefix
