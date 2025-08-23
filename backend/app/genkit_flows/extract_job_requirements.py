@@ -1,21 +1,8 @@
-import os
 from typing import List
 
-import genkit
-from dotenv import load_dotenv
-from genkit.plugins import googleai
 from pydantic import BaseModel, Field
 
-# Load environment variables
-load_dotenv()
-
-# Initialize Google AI plugin if needed
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-# Define the model to use
-gemini_pro = googleai.gemini_pro
-
+from .shared import create_extraction_flow
 
 # Define the structured output model for job requirements
 class JobRequirements(BaseModel):
@@ -30,27 +17,20 @@ class JobRequirements(BaseModel):
     )
 
 
-@genkit.flow(output_schema=JobRequirements)
-def extractJobRequirements(jobDescription: str) -> JobRequirements:
-    """
-    Extracts structured information from a job description string.
-    """
-    prompt = f"""
-    Analyze the following job description and extract the specified entities.
-    Your output MUST be a valid JSON object matching the defined schema.
+# Define the prompt template
+JOB_PROMPT_TEMPLATE = """
+Analyze the following job description and extract the specified entities.
+Your output MUST be a valid JSON object matching the defined schema.
 
-    Job Description:
-    ---
-    {jobDescription}
-    ---
-    """
+Job Description:
+---
+{input_text}
+---
+"""
 
-    response = gemini_pro.generate(
-        prompt=prompt,
-        config=googleai.GenerationConfig(
-            response_mime_type="application/json",
-        ),
-        output_schema=JobRequirements,
-    )
-
-    return response.output()
+# Create the flow
+extractJobRequirements = create_extraction_flow(
+    name="extractJobRequirements",
+    prompt_template=JOB_PROMPT_TEMPLATE,
+    output_schema=JobRequirements,
+)
