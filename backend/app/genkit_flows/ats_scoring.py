@@ -21,7 +21,9 @@ gemini_pro = googleai.gemini_pro
 
 
 def _calculate_keyword_score(
-    resume_skills: List[str], job_reqs: JobRequirements, profile_keywords: List[str] = None
+    resume_skills: List[str],
+    job_reqs: JobRequirements,
+    profile_keywords: List[str] = None,
 ):
     """Calculates a score based on keyword matching."""
     required_matched = [
@@ -133,7 +135,9 @@ async def atsScoring(
     semantic_analysis: SemanticAnalysis = semantic_response.output()
 
     # Step 4: Perform Keyword Matching
-    keyword_analysis = _calculate_keyword_score(resume_entities.skills, job_reqs, profileKeywords)
+    keyword_analysis = _calculate_keyword_score(
+        resume_entities.skills, job_reqs, profileKeywords
+    )
 
     # Step 5: Perform Formatting Compliance check
     formatting_score = _calculate_formatting_score(resume_entities)
@@ -150,7 +154,8 @@ async def atsScoring(
     placement_suggestions = None
     if keyword_analysis["missingKeywords"]:
         placement_response = await suggestKeywordPlacement.run(
-            resumeText=resumeText, list_of_missing_keywords=keyword_analysis["missingKeywords"]
+            resumeText=resumeText,
+            list_of_missing_keywords=keyword_analysis["missingKeywords"],
         )
         if placement_response:
             placement_suggestions = placement_response.suggestions

@@ -2,7 +2,6 @@ import json
 from unittest.mock import Mock, patch
 
 import pytest
-
 from app.core.ai_error_handling import AIError
 from app.genkit_flows.resume_analyzer import compare_resume_to_job
 
@@ -136,7 +135,9 @@ class TestResumeAnalyzer:
         mock_response.text.return_value = json.dumps(invalid_response)
         mock_gemini.generate.return_value = mock_response
 
-        with pytest.raises(AIError, match="Match score must be an integer between 0 and 100"):
+        with pytest.raises(
+            AIError, match="Match score must be an integer between 0 and 100"
+        ):
             compare_resume_to_job(self.sample_resume, self.sample_job_data)
 
     @patch("app.genkit_flows.resume_analyzer.gemini_pro")

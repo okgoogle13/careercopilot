@@ -50,10 +50,14 @@ class CoverLetterGenerator:
         try:
             # Input validation
             if not base_profile_data or not isinstance(base_profile_data, dict):
-                raise InputValidationError("Base profile data is required and must be a dictionary")
+                raise InputValidationError(
+                    "Base profile data is required and must be a dictionary"
+                )
 
             if not job_analysis_data or not isinstance(job_analysis_data, dict):
-                raise InputValidationError("Job analysis data is required and must be a dictionary")
+                raise InputValidationError(
+                    "Job analysis data is required and must be a dictionary"
+                )
 
             # Sanitize inputs
             sanitized_profile = InputSanitizer.sanitize_dict_input(base_profile_data)
@@ -170,7 +174,11 @@ Generate the tailored cover letter as a JSON object:"""
                 )
 
             # Validate structure
-            required_sections = ["cover_letter", "letter_analysis", "customization_details"]
+            required_sections = [
+                "cover_letter",
+                "letter_analysis",
+                "customization_details",
+            ]
             missing_sections = [
                 section for section in required_sections if section not in parsed_result
             ]
@@ -198,7 +206,9 @@ Generate the tailored cover letter as a JSON object:"""
                 extra={
                     "user_id": user_id,
                     "model_used": response.model_used,
-                    "word_count": parsed_result.get("letter_analysis", {}).get("word_count", 0),
+                    "word_count": parsed_result.get("letter_analysis", {}).get(
+                        "word_count", 0
+                    ),
                     "cached": response.cached,
                     "voice_profile_used": bool(voice_profile),
                     "company": job_analysis_data.get("company_name", "Unknown"),
@@ -208,7 +218,9 @@ Generate the tailored cover letter as a JSON object:"""
             return parsed_result
 
         except Exception as e:
-            logger.error(f"Error in cover letter generation for user {user_id}: {str(e)}")
+            logger.error(
+                f"Error in cover letter generation for user {user_id}: {str(e)}"
+            )
             raise AIError(
                 message=f"Cover letter generation failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
@@ -246,7 +258,9 @@ Generate the tailored cover letter as a JSON object:"""
                     InputSanitizer.sanitize_text_input(goal).sanitized_content
                     for goal in optimization_goals
                 ]
-                goals_section = f"\n\nOptimization Focus Areas: {', '.join(sanitized_goals)}"
+                goals_section = (
+                    f"\n\nOptimization Focus Areas: {', '.join(sanitized_goals)}"
+                )
 
             system_prompt = """You are a cover letter optimization specialist with expertise in ATS optimization, keyword enhancement, and persuasive writing. Provide specific improvements while maintaining the original voice and authenticity."""
 
@@ -321,7 +335,9 @@ Respond with ONLY the JSON object:"""
             return parsed_result
 
         except Exception as e:
-            logger.error(f"Error in cover letter optimization for user {user_id}: {str(e)}")
+            logger.error(
+                f"Error in cover letter optimization for user {user_id}: {str(e)}"
+            )
             raise AIError(
                 message=f"Cover letter optimization failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
@@ -330,7 +346,11 @@ Respond with ONLY the JSON object:"""
 
     @monitor_performance("cover_letter_templates")
     async def generate_cover_letter_templates(
-        self, user_id: str, industry: str, experience_level: str, template_count: int = 3
+        self,
+        user_id: str,
+        industry: str,
+        experience_level: str,
+        template_count: int = 3,
     ) -> Dict[str, Any]:
         """
         Generate customizable cover letter templates for an industry and experience level.

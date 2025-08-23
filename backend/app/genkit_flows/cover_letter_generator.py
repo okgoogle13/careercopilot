@@ -15,7 +15,9 @@ gemini_pro = googleai.gemini_pro
 
 @genkit.flow()
 def generate_tailored_cover_letter(
-    base_profile_data: dict, job_analysis_data: dict, voice_profile: Optional[dict] = None
+    base_profile_data: dict,
+    job_analysis_data: dict,
+    voice_profile: Optional[dict] = None,
 ) -> str:
     """
     Acts as an expert career coach to write a tailored cover letter,
