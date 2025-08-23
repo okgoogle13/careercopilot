@@ -252,9 +252,7 @@ class AICache:
     ) -> Optional[Any]:
         """Retrieve cached result for an AI operation"""
         try:
-            cache_key = self._generate_cache_key(
-                operation_type, user_id, input_data, **kwargs
-            )
+            cache_key = self._generate_cache_key(operation_type, user_id, input_data, **kwargs)
             entry = await self.backend.get(cache_key)
 
             if entry:
@@ -282,9 +280,7 @@ class AICache:
             if result is None and not config.cache_null_results:
                 return False
 
-            cache_key = self._generate_cache_key(
-                operation_type, user_id, input_data, **kwargs
-            )
+            cache_key = self._generate_cache_key(operation_type, user_id, input_data, **kwargs)
             entry = self._create_cache_entry(
                 cache_key, operation_type, input_data, result, **kwargs
             )
@@ -344,8 +340,7 @@ class AICache:
         return {
             "backend_type": type(self.backend).__name__,
             "configurations": {
-                op_type: asdict(config)
-                for op_type, config in self.CACHE_CONFIGS.items()
+                op_type: asdict(config) for op_type, config in self.CACHE_CONFIGS.items()
             },
         }
 

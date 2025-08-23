@@ -1,0 +1,4 @@
+[flake8]
+exclude = venv,__pycache__,node_modules
+max-line-length = 120
+ignore = B008,E402,F401,F403,B028,B007,B009,B023,E203,E221,E301,E302,W293,W391,B037,W503
