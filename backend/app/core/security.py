@@ -1,6 +1,6 @@
 import os
 
-from fastapi import Depends, HTTPException, Request, status
+from fastapi import HTTPException, Request, status
 from google.auth.transport import requests
 from google.oauth2 import id_token
 
