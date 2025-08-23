@@ -10,10 +10,10 @@ import logging
 import time
 import uuid
 from datetime import datetime
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Callable, Dict, List, Optional
 
 from fastapi import FastAPI, Request, Response
-from fastapi.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi.responses import JSONResponse
 from starlette.types import ASGIApp
 
@@ -32,7 +32,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
         include_request_body: bool = False,
         include_response_body: bool = False,
         max_body_size: int = 1024 * 1024,  # 1MB
-        exclude_paths: list = None,
+        exclude_paths: Optional[List[str]] = None,
     ):
         super().__init__(app)
         self.include_request_body = include_request_body
@@ -96,7 +96,9 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
             response_time = time.time() - start_time
 
             # Track response metrics
-            self.collector.record_histogram("http_request_duration_seconds", response_time)
+            self.collector.record_histogram(
+                "http_request_duration_seconds", response_time
+            )
             self.collector.increment_counter(
                 "http_responses_total",
                 labels={
@@ -265,7 +267,8 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
                 body = response.body
                 if len(body) <= self.max_body_size:
                     try:
-                        info["response_body"] = json.loads(body.decode("utf-8"))
+                        body_str = body.decode("utf-8") if isinstance(body, bytes) else bytes(body).decode("utf-8")
+                        info["response_body"] = json.loads(body_str)
                     except (json.JSONDecodeError, UnicodeDecodeError):
                         info["response_body_size"] = len(body)
                 else:
@@ -338,7 +341,9 @@ class ErrorTrackingMiddleware(BaseHTTPMiddleware):
         """Track error responses (4xx, 5xx)"""
         collector = get_metrics_collector()
 
-        status_category = "client_error" if 400 <= response.status_code < 500 else "server_error"
+        status_category = (
+            "client_error" if 400 <= response.status_code < 500 else "server_error"
+        )
 
         collector.increment_counter(f"requests_{status_category}_total")
         collector.increment_counter("requests_error_total")
@@ -409,7 +414,8 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
 
             # Determine overall health
             all_healthy = all(
-                check.get("healthy", False) for check in health_status["checks"].values()
+                check.get("healthy", False)
+                for check in health_status["checks"].values()
             )
 
             if not all_healthy:
@@ -418,7 +424,8 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
             # Add performance metrics
             if "performance_metrics" in metrics_summary:
                 recent_errors = sum(
-                    pm["error_count"] for pm in metrics_summary["performance_metrics"].values()
+                    pm["error_count"]
+                    for pm in metrics_summary["performance_metrics"].values()
                 )
                 health_status["recent_errors"] = recent_errors
 
@@ -476,7 +483,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
         }
 
 
-def add_monitoring_middleware(app: FastAPI, config: Dict[str, Any] = None):
+def add_monitoring_middleware(app: FastAPI, config: Optional[Dict[str, Any]] = None):
     """Add all monitoring middleware to the FastAPI application"""
 
     config = config or {}
@@ -500,7 +507,9 @@ def add_monitoring_middleware(app: FastAPI, config: Dict[str, Any] = None):
         include_request_body=config.get("include_request_body", False),
         include_response_body=config.get("include_response_body", False),
         max_body_size=config.get("max_body_size", 1024 * 1024),
-        exclude_paths=config.get("exclude_paths", ["/health", "/metrics", "/docs", "/redoc"]),
+        exclude_paths=config.get(
+            "exclude_paths", ["/health", "/metrics", "/docs", "/redoc"]
+        ),
     )
 
     logger.info("Monitoring middleware added to FastAPI application")

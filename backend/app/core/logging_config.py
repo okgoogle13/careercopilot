@@ -10,9 +10,9 @@ import json
 import logging
 import logging.config
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 
 class StructuredFormatter(logging.Formatter):
@@ -26,7 +26,7 @@ class StructuredFormatter(logging.Formatter):
         """Format log record as structured JSON"""
 
         log_entry = {
-            "timestamp": datetime.utcnow().isoformat() + "Z",
+            "timestamp": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
             "level": record.levelname,
             "logger": record.name,
             "message": record.getMessage(),
@@ -96,7 +96,7 @@ class RequestContextFilter(logging.Filter):
         return True
 
 
-def get_logging_config(environment: str = None) -> Dict[str, Any]:
+def get_logging_config(environment: Optional[str] = None) -> Dict[str, Any]:
     """
     Generate logging configuration based on environment
 
@@ -108,7 +108,7 @@ def get_logging_config(environment: str = None) -> Dict[str, Any]:
         environment = os.getenv("ENV", "development").lower()
 
     # Base configuration
-    config = {
+    config: Dict[str, Any] = {
         "version": 1,
         "disable_existing_loggers": False,
         "formatters": {
@@ -222,7 +222,7 @@ def get_logging_config(environment: str = None) -> Dict[str, Any]:
     return config
 
 
-def setup_logging(environment: str = None, log_dir: str = "logs") -> None:
+def setup_logging(environment: Optional[str] = None, log_dir: str = "logs") -> None:
     """
     Setup application logging configuration
 
@@ -267,10 +267,14 @@ class LoggerMixin:
     @property
     def logger(self) -> logging.Logger:
         """Get logger instance for this class"""
-        return logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
+        return logging.getLogger(
+            f"{self.__class__.__module__}.{self.__class__.__name__}"
+        )
 
 
-def log_function_call(logger: logging.Logger = None, level: int = logging.DEBUG):
+def log_function_call(
+    logger: Optional[logging.Logger] = None, level: int = logging.DEBUG
+):
     """
     Decorator to log function calls with parameters and results
 
@@ -371,11 +375,11 @@ user_id_context: contextvars.ContextVar[Optional[str]] = contextvars.ContextVar(
 class RequestContextLogger:
     """Context manager for adding request context to logs"""
 
-    def __init__(self, request_id: str, user_id: str = None, **extra_context):
+    def __init__(self, request_id: str, user_id: Optional[str] = None, **extra_context):
         self.request_id = request_id
         self.user_id = user_id
         self.extra_context = extra_context
-        self.tokens = []
+        self.tokens: List[contextvars.Token] = []
 
     def __enter__(self):
         self.tokens.append(request_id_context.set(self.request_id))
@@ -384,11 +388,22 @@ class RequestContextLogger:
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
+        # Context variable tokens are actually Token objects
+        # We need to reset them properly
         for token in reversed(self.tokens):
-            (token.__exit__(exc_type, exc_val, exc_tb) if hasattr(token, "__exit__") else None)
+            # The token from set() should be reset using contextvars reset
+            try:
+                # Python contextvars tokens have var and old_value attributes
+                token.var.set(token.old_value)
+            except AttributeError:
+                # Fallback: manually reset known context vars to their defaults
+                if self.request_id:
+                    request_id_context.set(None)
+                if self.user_id:
+                    user_id_context.set(None)
 
 
-def get_context_logger(name: str) -> logging.Logger:
+def get_context_logger(name: str) -> logging.LoggerAdapter:
     """Get a logger that includes request context"""
     logger = logging.getLogger(name)
 
