@@ -15,12 +15,42 @@ permissions:
   actions: read
   checks: write
   pull-requests: write
+  security-events: write
 
 env:
   NODE_VERSION: '22'
   PYTHON_VERSION: '3.13'
 
 jobs:
+  codeql-analysis:
+    name: CodeQL Security Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'python', 'javascript' ]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended,security-and-quality
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
 
   test-frontend:
     name: Frontend Tests
@@ -149,12 +179,16 @@ jobs:
   code-quality-gate:
     name: Code Quality Gate
     runs-on: ubuntu-latest
-    needs: [test-frontend, test-backend]
+    needs: [codeql-analysis, test-frontend, test-backend]
     timeout-minutes: 5
     if: always()
     steps:
       - name: Check all jobs status
         run: |
+          if [[ "${{ needs.codeql-analysis.result }}" == "failure" ]]; then
+            echo "❌ CodeQL security analysis failed"
+            exit 1
+          fi
           if [[ "${{ needs.test-frontend.result }}" == "failure" ]]; then
             echo "❌ Frontend tests failed"
             exit 1
