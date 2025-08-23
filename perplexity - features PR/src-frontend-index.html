@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerCopilot Personal Edition</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🎯 CareerCopilot Personal Edition</h1>
+                <p class="subtitle">AI-Powered Job Search Automation</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('dashboard')">Dashboard</button>
+            <button class="nav-tab" onclick="showTab('jobs')">Job Discovery</button>
+            <button class="nav-tab" onclick="showTab('applications')">Applications</button>
+            <button class="nav-tab" onclick="showTab('research')">Company Research</button>
+            <button class="nav-tab" onclick="showTab('settings')">Settings</button>
+        </nav>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <!-- Personal Summary -->
+                <div class="card">
+                    <h3>👤 Personal Summary</h3>
+                    <div class="personal-info">
+                        <p><strong>Name:</strong> {{ data.user_name }}</p>
+                        <p><strong>Location:</strong> {{ data.location }}</p>
+                        <p><strong>Career Transition:</strong> {{ data.career_transition }}</p>
+                        <p><strong>Target Roles:</strong></p>
+                        <ul>
+                            {% for role in data.target_roles %}
+                            <li>{{ role }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card">
+                    <h3>🚀 Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="triggerDailyScan()">
+                            🔍 Run Daily Job Scan
+                        </button>
+                        <button class="btn btn-secondary" onclick="showTab('research')">
+                            🏢 Research Company
+                        </button>
+                        <button class="btn btn-secondary" onclick="triggerWeeklyReview()">
+                            📊 Weekly Review
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card">
+                    <h3>📈 Recent Activity</h3>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="stat-number">{{ data.applications_this_week }}</span>
+                            <span class="stat-label">Applications This Week</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">{{ data.response_rate }}</span>
+                            <span class="stat-label">Response Rate</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">{{ data.last_scan }}</span>
+                            <span class="stat-label">Last Job Scan</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Automation Status -->
+                <div class="card">
+                    <h3>🤖 Automation Status</h3>
+                    <div class="automation-status">
+                        <div class="status-item">
+                            <span class="status-label">Daily Job Scanning:</span>
+                            <span class="status-value {% if data.daily_scan_enabled %}enabled{% else %}disabled{% endif %}">
+                                {% if data.daily_scan_enabled %}✅ Enabled{% else %}❌ Disabled{% endif %}
+                            </span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Email Notifications:</span>
+                            <span class="status-value enabled">✅ Enabled</span>
+                        </div>
+                        <div class="status-item">
+                            <span class="status-label">Next Scan:</span>
+                            <span class="status-value">Tomorrow at 9:00 AM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jobs Tab -->
+        <div id="jobs" class="tab-content">
+            <div class="jobs-section">
+                <div class="section-header">
+                    <h2>🔍 Job Discovery</h2>
+                    <button class="btn btn-primary" onclick="triggerDailyScan()">Scan for Jobs</button>
+                </div>
+
+                <div class="job-filters">
+                    <input type="text" placeholder="Search jobs..." class="search-input">
+                    <select class="filter-select">
+                        <option value="">All Locations</option>
+                        <option value="melbourne">Melbourne</option>
+                        <option value="remote">Remote</option>
+                    </select>
+                    <select class="filter-select">
+                        <option value="">All Roles</option>
+                        <option value="social-worker">Social Worker</option>
+                        <option value="case-manager">Case Manager</option>
+                        <option value="community-worker">Community Worker</option>
+                    </select>
+                </div>
+
+                <div id="jobs-list" class="jobs-list">
+                    <!-- Job items will be loaded here -->
+                    <div class="job-card">
+                        <div class="job-header">
+                            <h4>Social Worker - Community Health</h4>
+                            <span class="match-score">Match: 89%</span>
+                        </div>
+                        <p class="job-company">Melbourne Community Health Services</p>
+                        <p class="job-location">📍 Melbourne, VIC</p>
+                        <p class="job-salary">💰 $65,000 - $75,000</p>
+                        <div class="job-actions">
+                            <button class="btn btn-small btn-primary" onclick="applyToJob('https://example.com/job/123')">
+                                📄 Prepare Application
+                            </button>
+                            <button class="btn btn-small btn-secondary" onclick="researchCompany('https://example.com/job/123')">
+                                🏢 Research Company
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="empty-state" style="display: none;">
+                        <p>No jobs found. Try running a daily scan to discover new opportunities.</p>
+                        <button class="btn btn-primary" onclick="triggerDailyScan()">Run Job Scan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Tab -->
+        <div id="applications" class="tab-content">
+            <div class="applications-section">
+                <div class="section-header">
+                    <h2>📋 Application Tracker</h2>
+                    <button class="btn btn-secondary" onclick="triggerWeeklyReview()">Weekly Review</button>
+                </div>
+
+                <div id="applications-list" class="applications-list">
+                    <!-- Application items will be loaded here -->
+                    <div class="application-card">
+                        <div class="application-header">
+                            <h4>Case Manager</h4>
+                            <span class="status-badge status-applied">Applied</span>
+                        </div>
+                        <p class="application-company">Youth Support Services</p>
+                        <p class="application-date">Applied: August 20, 2025</p>
+                        <div class="application-actions">
+                            <button class="btn btn-small btn-secondary">View Materials</button>
+                            <button class="btn btn-small btn-secondary">Update Status</button>
+                            <button class="btn btn-small btn-secondary">Set Reminder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Research Tab -->
+        <div id="research" class="tab-content">
+            <div class="research-section">
+                <div class="section-header">
+                    <h2>🏢 Company Research</h2>
+                </div>
+
+                <div class="research-form">
+                    <div class="form-group">
+                        <label for="job-url">Job URL:</label>
+                        <input type="url" id="job-url" placeholder="https://seek.com.au/job/..." class="form-input">
+                    </div>
+                    <button class="btn btn-primary" onclick="researchCompanyFromForm()">Research Company</button>
+                </div>
+
+                <div id="research-results" class="research-results" style="display: none;">
+                    <!-- Research results will be displayed here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <div class="settings-section">
+                <div class="section-header">
+                    <h2>⚙️ Personal Settings</h2>
+                </div>
+
+                <form class="settings-form">
+                    <div class="form-section">
+                        <h3>Automation Preferences</h3>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="daily-scan" checked>
+                                Enable daily job scanning
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="email-notifications" checked>
+                                Enable email notifications
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="scan-time">Daily scan time:</label>
+                            <input type="time" id="scan-time" value="09:00" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3>Job Search Preferences</h3>
+                        <div class="form-group">
+                            <label for="target-roles">Target Roles (one per line):</label>
+                            <textarea id="target-roles" class="form-textarea" rows="5">Social Worker
+Case Manager
+Community Services Worker
+Program Coordinator
+Support Worker</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="salary-min">Minimum Salary (AUD):</label>
+                            <input type="number" id="salary-min" value="60000" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="salary-max">Maximum Salary (AUD):</label>
+                            <input type="number" id="salary-max" value="85000" class="form-input">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loading-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="loading-spinner"></div>
+            <p id="loading-message">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification-toast" class="toast" style="display: none;">
+        <span id="toast-message"></span>
+        <button onclick="hideToast()" class="toast-close">&times;</button>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
