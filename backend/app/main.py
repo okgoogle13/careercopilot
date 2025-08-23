@@ -1,14 +1,26 @@
 import os
 
-from app.api.v1 import (ai_services, analysis, documents, integrations, jobs,
-                        ksc, monitoring, opportunities, profile, settings,
-                        users)
-from app.core.cache_middleware import (add_cache_middleware,
-                                       cache_health_check, cache_lifespan)
-from app.core.limiter import (NotAuthenticatedException,
-                              _not_authenticated_handler,
-                              _rate_limit_exceeded_handler, limiter,
-                              strict_limiter)
+from app.api.v1 import (
+    ai_services,
+    analysis,
+    documents,
+    integrations,
+    jobs,
+    ksc,
+    monitoring,
+    opportunities,
+    profile,
+    settings,
+    users,
+)
+from app.core.cache_middleware import add_cache_middleware, cache_health_check, cache_lifespan
+from app.core.limiter import (
+    NotAuthenticatedException,
+    _not_authenticated_handler,
+    _rate_limit_exceeded_handler,
+    limiter,
+    strict_limiter,
+)
 from app.core.logging_config import setup_logging
 from app.core.monitoring import start_system_monitoring, stop_system_monitoring
 from app.core.monitoring_middleware import add_monitoring_middleware
@@ -78,12 +90,8 @@ api_router.include_router(profile.router, prefix="/profile", tags=["profile"])
 api_router.include_router(documents.router, prefix="/documents", tags=["documents"])
 api_router.include_router(users.router, prefix="/users", tags=["users"])
 api_router.include_router(jobs.router, prefix="/jobs", tags=["jobs"])
-api_router.include_router(
-    integrations.router, prefix="/integrations", tags=["integrations"]
-)
-api_router.include_router(
-    opportunities.router, prefix="/opportunities", tags=["opportunities"]
-)
+api_router.include_router(integrations.router, prefix="/integrations", tags=["integrations"])
+api_router.include_router(opportunities.router, prefix="/opportunities", tags=["opportunities"])
 api_router.include_router(settings.router, prefix="/settings", tags=["settings"])
 api_router.include_router(ksc.router, prefix="/ksc", tags=["ksc"])
 api_router.include_router(analysis.router, prefix="/analysis", tags=["analysis"])
