@@ -27,9 +27,11 @@ def generate_tailored_resume(base_profile_data: dict, comparison_analysis: dict)
 
     Your rewritten resume should:
     1.  Emphasize the "matching_skills" from the analysis.
-    2.  Subtly integrate keywords from the job description and address the "missing_skills" by rephrasing experience and responsibilities.
+    2.  Subtly integrate keywords from the job description and address the "missing_skills"
+        by rephrasing experience and responsibilities.
     3.  Incorporate the "improvement_suggestions" from the analysis.
-    4.  The final output should be a single string containing the full text of the newly generated, optimized resume.
+    4.  The final output should be a single string containing the full text of the newly
+        generated, optimized resume.
 
     Base Profile Data:
     ---

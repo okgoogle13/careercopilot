@@ -33,7 +33,8 @@ def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
 
     event = {
         "summary": event_title,
-        "description": f"Reminder to submit your application for the {opportunity_data.get('title')} position. Good luck!",
+        "description": "Reminder to submit your application for the "
+        f"{opportunity_data.get('title')} position. Good luck!",
         "start": {
             "date": deadline_date.isoformat(),
             "timeZone": "America/Los_Angeles",  # Or use a user-specific timezone

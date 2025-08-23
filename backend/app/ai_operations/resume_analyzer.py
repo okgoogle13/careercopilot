@@ -63,13 +63,21 @@ class ResumeAnalyzer:
             # Log warnings if any suspicious content was detected
             if sanitized_resume.warnings:
                 logger.warning(
-                    f"Resume sanitization warnings for user {user_id}: {sanitized_resume.warnings}"
+                    f"Resume sanitization warnings for user {user_id}: "
+                    f"{sanitized_resume.warnings}"
                 )
 
             # Create comprehensive analysis prompt
-            system_prompt = """You are an expert career coach with 15+ years of experience in resume analysis and job matching. Your expertise includes ATS optimization, industry-specific requirements, and career development strategies."""
+            system_prompt = (
+                "You are an expert career coach with 15+ years of experience in "
+                "resume analysis and job matching. Your expertise includes ATS "
+                "optimization, industry-specific requirements, and career "
+                "development strategies."
+            )
 
-            prompt = f"""Analyze the provided resume against the structured job analysis data and provide a comprehensive comparison.
+            prompt = (
+                f"""Analyze the provided resume against the structured job analysis "
+                f"data and provide a comprehensive comparison.
 
 REQUIREMENTS:
 - Respond ONLY with a valid JSON object (no additional text)
@@ -78,20 +86,24 @@ REQUIREMENTS:
 - Include ATS optimization recommendations
 
 Required JSON structure:
-{"match_score": <integer 0-100>,
+{{
+    "match_score": <integer 0-100>,
     "matching_skills": [<list of skills found in both resume and job requirements>],
     "missing_skills": [<list of key job skills not found in resume>],
     "improvement_suggestions": [<list of specific, actionable recommendations>],
     "strengths": [<list of resume strengths relevant to the job>],
     "ats_optimization": [<list of ATS-specific recommendations>],
-    "experience_match": {"level": "<entry/mid/senior/executive>",
+    "experience_match": {{
+        "level": "<entry/mid/senior/executive>",
         "years_gap": <integer, negative if over-qualified, positive if under-qualified>,
         "relevant_experience": [<list of relevant experience highlights>]
-    } ,
-    "industry_alignment": {"score": <integer 0-100>,
+    }},
+    "industry_alignment": {{
+        "score": <integer 0-100>,
         "transferable_skills": [<list of skills that transfer across industries>],
         "industry_specific_gaps": [<list of industry-specific knowledge gaps>]
-    } }
+    }}
+}}
 
 Resume Text:
 ---
@@ -104,8 +116,8 @@ Job Analysis Data:
 ---
 
 Respond with ONLY the JSON object:"""
-
-            # Create AI request
+                # Create AI request
+            )
             request = AIRequest(
                 prompt=prompt,
                 service_name="resume_analysis",
@@ -254,10 +266,14 @@ Respond with ONLY the JSON object:"""
             # Sanitize input
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
 
-            system_prompt = """You are an expert resume parser with deep knowledge of industry skills, technologies, and career progression patterns. Extract comprehensive information with high accuracy."""
+            system_prompt = (
+                "You are an expert resume parser with deep knowledge of industry "
+                "skills, technologies, and career progression patterns. Extract "
+                "comprehensive information with high accuracy."
+            )
 
             context_section = (
-                f"\n\nJob Context (for targeted extraction):\n{job_context}"
+                f"\\n\\nJob Context (for targeted extraction):\\n{job_context}"
                 if job_context
                 else ""
             )
@@ -265,58 +281,65 @@ Respond with ONLY the JSON object:"""
             prompt = f"""Extract comprehensive information from the resume below. Focus on accuracy and completeness.
 
 Required JSON structure:
-{"contact_info": {"name": "<full name>",
+{{
+    "contact_info": {{
+        "name": "<full name>",
         "email": "<email address>",
         "phone": "<phone number>",
         "location": "<city, state/country>",
         "linkedin": "<LinkedIn URL>",
         "portfolio": "<portfolio/website URL>"
-    } ,
+    }},
     "professional_summary": "<2-3 sentence professional summary>",
-    "technical_skills": {"programming_languages": [<list of programming languages>],
+    "technical_skills": {{
+        "programming_languages": [<list of programming languages>],
         "frameworks": [<list of frameworks and libraries>],
         "databases": [<list of database technologies>],
         "cloud_platforms": [<list of cloud platforms>],
         "tools": [<list of development tools and software>],
         "methodologies": [<list of methodologies like Agile, DevOps>]
-    } ,
+    }},
     "soft_skills": [<list of soft skills and interpersonal abilities>],
     "experience": [
-        {"title": "<job title>",
+        {{
+            "title": "<job title>",
             "company": "<company name>",
             "duration": "<start date - end date>",
             "description": "<job description>",
             "achievements": [<list of key achievements>],
             "technologies": [<list of technologies used>]
-        }
+        }}
     ],
     "education": [
-        {"degree": "<degree type>",
+        {{
+            "degree": "<degree type>",
             "field": "<field of study>",
             "institution": "<school name>",
             "graduation_year": "<year>",
             "gpa": "<GPA if mentioned>",
             "honors": [<list of academic honors>]
-        }
+        }}
     ],
     "certifications": [
-        {"name": "<certification name>",
+        {{
+            "name": "<certification name>",
             "issuer": "<issuing organization>",
             "date": "<issue date>",
             "expiry": "<expiry date if applicable>"
-        }
+        }}
     ],
     "projects": [
-        {"name": "<project name>",
+        {{
+            "name": "<project name>",
             "description": "<project description>",
             "technologies": [<list of technologies used>],
             "url": "<project URL if available>"
-        }
+        }}
     ],
     "languages": [<list of spoken languages with proficiency levels>],
     "years_of_experience": <total years of professional experience>,
     "career_level": "<entry/junior/mid/senior/lead/executive>"
-} {context_section}
+}} {context_section}
 
 Resume Text:
 ---

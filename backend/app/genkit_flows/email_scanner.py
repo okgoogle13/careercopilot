@@ -38,7 +38,8 @@ def extract_job_details_from_email(email_content: str) -> dict:
     # This flow remains the same
     prompt = f"""
     Analyze the following email content and extract structured information about a job opportunity.
-    The output must be a valid JSON object with the fields: "company", "title", "deadline" (in YYYY-MM-DD format), and "source_url".
+    The output must be a valid JSON object with the fields: "company", "title", "deadline" (in YYYY-MM-DD format),
+    and "source_url".
     If any field is not present, use a value of null.
     If no clear job opportunity is found, return an empty JSON object {{}}.
 

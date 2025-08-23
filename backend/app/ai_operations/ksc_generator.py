@@ -88,78 +88,91 @@ class KSCGenerator:
 
             # Adjust length instructions based on preference
             length_instructions = {
-                "concise": "Keep each section concise (2-3 sentences each). Total response should be 200-300 words.",
-                "standard": "Provide detailed but focused responses (3-4 sentences each). Total response should be 300-450 words.",
-                "comprehensive": "Provide comprehensive, detailed responses (4-6 sentences each). Total response should be 450-600 words.",
+                "concise": (
+                    "Keep each section concise (2-3 sentences each). "
+                    "Total response should be 200-300 words."
+                ),
+                "standard": (
+                    "Provide detailed but focused responses (3-4 sentences each). "
+                    "Total response should be 300-450 words."
+                ),
+                "comprehensive": (
+                    "Provide comprehensive, detailed responses (4-6 sentences each). "
+                    "Total response should be 450-600 words."
+                ),
             }
 
             length_instruction = length_instructions.get(
                 response_length, length_instructions["comprehensive"]
             )
 
-            system_prompt = """You are an expert career coach specializing in the STAR (Situation,
-                Task, Action, Result) methodology for interview responses and Key Selection Criteria. You excel at identifying the most relevant experiences and crafting compelling, evidence-based responses."""
+            system_prompt = (
+                "You are an expert career coach specializing in the STAR "
+                "(Situation, Task, Action, Result) methodology for interview "
+                "responses and Key Selection Criteria. You excel at identifying "
+                "the most relevant experiences and crafting compelling, "
+                "evidence-based responses."
+            )
 
-            prompt = f"""Generate a compelling STAR methodology response for the Key Selection Criterion using the most relevant experience from the user's profile.
-
-STAR METHODOLOGY REQUIREMENTS:
-- Situation: Set the context with specific details about the scenario
-- Task: Clearly define what needed to be accomplished or the challenge faced
-- Action: Detail specific actions taken, focusing on individual contributions
-- Result: Quantify outcomes and impact, including lessons learned
-
-RESPONSE QUALITY STANDARDS:
-- Use specific, quantifiable examples wherever possible
-- Focus on individual contributions rather than team achievements
-- Include measurable outcomes and impact
-- Demonstrate growth and learning
-- {length_instruction}
-
-Required JSON structure:
-{
-                "ksc_analysis": {
-                    "ksc_interpretation": "<analysis of what the KSC is really asking for>",
-        "key_competencies": [<key skills/competencies this KSC tests>],
-        "success_factors": [<what makes a strong response to this KSC>],
-        "common_pitfalls": [<common mistakes to avoid>]
-    } ,
-    "experience_selection": {
-                    "chosen_experience": "<brief description of selected experience>",
-        "relevance_score": <0-100 score for how well this experience matches>,
-        "selection_rationale": "<why this experience was chosen over others>",
-        "alternative_experiences": [<other potential experiences that could work>]
-    } ,
-    "star_response": {
-                    "situation": "<detailed situation context>",
-        "task": "<specific task or challenge>",
-        "action": "<detailed actions taken>",
-        "result": "<quantified results and outcomes>",
-        "full_response": "<complete STAR response as a cohesive narrative>"
-    } ,
-    "response_enhancement": {
-                    "strength_indicators": [<elements that make this response strong>],
-        "quantified_achievements": [<specific numbers/metrics mentioned>],
-        "competency_demonstration": [<how this shows the required competencies>],
-        "improvement_suggestions": [<optional minor improvements>]
-    } ,
-    "interview_preparation": {
-                    "follow_up_questions": [<likely follow-up questions interviewers might ask>],
-        "key_points_to_emphasize": [<most important points to stress verbally>],
-        "potential_variations": [<how to adapt this response for similar questions>],
-        "supporting_evidence": [<additional evidence that could be mentioned if asked>]
-    }
-} {achievements_context}
-
-Key Selection Criterion:
-"{sanitized_ksc.sanitized_content}"
-
-User Profile Data:
----
-{json.dumps(sanitized_profile, indent=2)}
----
-
-Respond with ONLY the JSON object:"""
-
+            prompt = (
+                "Generate a compelling STAR methodology response for the Key "
+                "Selection Criterion using the most relevant experience from the "
+                "user's profile.\n\n"
+                "STAR METHODOLOGY REQUIREMENTS:\n"
+                "- Situation: Set the context with specific details about the scenario\n"
+                "- Task: Clearly define what needed to be accomplished or the "
+                "challenge faced\n"
+                "- Action: Detail specific actions taken, focusing on individual "
+                "contributions\n"
+                "- Result: Quantify outcomes and impact, including lessons learned\n\n"
+                "RESPONSE QUALITY STANDARDS:\n"
+                "- Use specific, quantifiable examples wherever possible\n"
+                "- Focus on individual contributions rather than team achievements\n"
+                "- Include measurable outcomes and impact\n"
+                "- Demonstrate growth and learning\n"
+                f"- {length_instruction}\n\n"
+                "Required JSON structure:\n"
+                "{\n"
+                '  "ksc_analysis": {\n'
+                '    "ksc_interpretation": "<analysis of what the KSC is really asking for>",\n'
+                '    "key_competencies": [<key skills/competencies this KSC tests>],\n'
+                '    "success_factors": [<what makes a strong response to this KSC>],\n'
+                '    "common_pitfalls": [<common mistakes to avoid>]\n'
+                "  },\n"
+                '  "experience_selection": {\n'
+                '    "chosen_experience": "<brief description of selected experience>",\n'
+                '    "relevance_score": <0-100 score for how well this experience matches>,\n'
+                '    "selection_rationale": "<why this experience was chosen over others>",\n'
+                '    "alternative_experiences": [<other potential experiences that could work>]\n'
+                "  },\n"
+                '  "star_response": {\n'
+                '    "situation": "<detailed situation context>",\n'
+                '    "task": "<specific task or challenge>",\n'
+                '    "action": "<detailed actions taken>",\n'
+                '    "result": "<quantified results and outcomes>",\n'
+                '    "full_response": "<complete STAR response as a cohesive narrative>"\n'
+                "  },\n"
+                '  "response_enhancement": {\n'
+                '    "strength_indicators": [<elements that make this response strong>],\n'
+                '    "quantified_achievements": [<specific numbers/metrics mentioned>],\n'
+                '    "competency_demonstration": [<how this shows the required competencies>],\n'
+                '    "improvement_suggestions": [<optional minor improvements>]\n'
+                "  },\n"
+                '  "interview_preparation": {\n'
+                '    "follow_up_questions": [<likely follow-up questions interviewers might ask>],\n'
+                '    "key_points_to_emphasize": [<most important points to stress verbally>],\n'
+                '    "potential_variations": [<how to adapt this response for similar questions>],\n'
+                '    "supporting_evidence": [<additional evidence that could be mentioned if asked>]\n'
+                "  }\n"
+                "}\n\n"
+                + f"{achievements_context}\n\n"
+                + "Key Selection Criterion:\n"
+                + f'"{sanitized_ksc.sanitized_content}"\n\n'
+                + "User Profile Data:\n---\n"
+                + f"{json.dumps(sanitized_profile, indent=2)}\n"
+                + "---\n\n"
+                + "Respond with ONLY the JSON object:"
+            )
             request = AIRequest(
                 prompt=prompt,
                 service_name="ksc_generation",
@@ -287,10 +300,14 @@ Respond with ONLY the JSON object:"""
             if response_preferences:
                 prefs = InputSanitizer.sanitize_dict_input(response_preferences)
                 preferences_context = (
-                    f"\n\nResponse Preferences: {json.dumps(prefs, indent=2)}"
+                    f"\\n\\nResponse Preferences: {json.dumps(prefs, indent=2)}"
                 )
 
-            system_prompt = """You are an expert career coach specializing in comprehensive KSC response strategies. You excel at selecting diverse experiences to avoid repetition while maximizing the impact of each response."""
+            system_prompt = (
+                "You are an expert career coach specializing in comprehensive KSC "
+                "response strategies. You excel at selecting diverse experiences to "
+                "avoid repetition while maximizing the impact of each response."
+            )
 
             prompt = f"""Generate STAR methodology responses for multiple Key Selection Criteria,
                 ensuring diverse experience selection and avoiding repetition across responses.
@@ -338,7 +355,8 @@ Required JSON structure:
         "transition_strategies": [<how to connect responses in interviews>],
         "backup_experiences": [<alternative experiences to mention if asked>],
         "interview_flow_tips": [<tips for smooth interview delivery>]
-    } } {preferences_context}
+    }}
+}} {preferences_context}
 
 KSC Statements:
 {json.dumps(sanitized_kscs, indent=2)}
@@ -413,57 +431,66 @@ Respond with ONLY the JSON object:"""
                     for area in feedback_areas
                 ]
                 feedback_context = (
-                    f"\n\nFocus improvement on: {', '.join(sanitized_feedback)}"
+                    f"\\n\\nFocus improvement on: {', '.join(sanitized_feedback)}"
                 )
 
-            system_prompt = """You are a STAR response optimization expert who can identify weaknesses in existing responses and provide specific, actionable improvements while maintaining authenticity."""
+            system_prompt = (
+                "You are a STAR response optimization expert who can identify "
+                "weaknesses in existing responses and provide specific, actionable "
+                "improvements while maintaining authenticity."
+            )
 
-            prompt = f"""Analyze and optimize the existing STAR response to better address the KSC statement with improved impact, specificity, and persuasiveness.
-
-Required JSON structure:
-{"current_analysis": {"star_structure_assessment": {"situation_strength": <0-10 score>,
-            "task_clarity": <0-10 score>,
-            "action_specificity": <0-10 score>,
-            "result_quantification": <0-10 score>
-        } ,
-        "improvement_areas": [<specific areas needing enhancement>],
-        "current_strengths": [<elements that are working well>],
-        "ksc_alignment_score": <0-100 current alignment score>
-    } ,
-    "optimized_response": {"improved_situation": "<enhanced situation section>",
-        "improved_task": "<enhanced task section>",
-        "improved_action": "<enhanced action section>",
-        "improved_result": "<enhanced result section>",
-        "full_optimized_response": "<complete enhanced STAR response>"
-    } ,
-    "optimization_details": [
-        {"section": "<situation/task/action/result>",
-            "original_text": "<original text snippet>",
-            "optimized_text": "<improved text snippet>",
-            "improvement_reason": "<why this change improves the response>",
-            "impact_assessment": "<expected impact of this change>"
-        }
-    ],
-    "enhancement_metrics": {"specificity_improvement": <0-100 score>,
-        "quantification_improvement": <0-100 score>,
-        "impact_enhancement": <0-100 score>,
-        "overall_improvement_score": <0-100 score>
-    } ,
-    "interview_delivery_tips": [
-        "<tips for delivering the optimized response effectively>"
-    ]
-} {feedback_context}
-
-KSC Statement:
-"{sanitized_ksc.sanitized_content}"
-
-Current STAR Response:
----
-{sanitized_response.sanitized_content}
----
-
-Respond with ONLY the JSON object:"""
-
+            prompt = (
+                "Analyze and optimize the existing STAR response to better address "
+                "the KSC statement with improved impact, specificity, and "
+                "persuasiveness.\n\n"
+                "Required JSON structure:\n"
+                "{\n"
+                '  "current_analysis": {\n'
+                '    "star_structure_assessment": {\n'
+                '      "situation_strength": <0-10 score>,\n'
+                '      "task_clarity": <0-10 score>,\n'
+                '      "action_specificity": <0-10 score>,\n'
+                '      "result_quantification": <0-10 score>\n'
+                "    },\n"
+                '    "improvement_areas": [<specific areas needing enhancement>],\n'
+                '    "current_strengths": [<elements that are working well>],\n'
+                '    "ksc_alignment_score": <0-100 current alignment score>\n'
+                "  },\n"
+                '  "optimized_response": {\n'
+                '    "improved_situation": "<enhanced situation section>",\n'
+                '    "improved_task": "<enhanced task section>",\n'
+                '    "improved_action": "<enhanced action section>",\n'
+                '    "improved_result": "<enhanced result section>",\n'
+                '    "full_optimized_response": "<complete enhanced STAR response>"\n'
+                "  },\n"
+                '  "optimization_details": [\n'
+                "    {\n"
+                '      "section": "<situation/task/action/result>",\n'
+                '      "original_text": "<original text snippet>",\n'
+                '      "optimized_text": "<improved text snippet>",\n'
+                '      "improvement_reason": "<why this change improves the response>",\n'
+                '      "impact_assessment": "<expected impact of this change>"\n'
+                "    }\n"
+                "  ],\n"
+                '  "enhancement_metrics": {\n'
+                '    "specificity_improvement": <0-100 score>,\n'
+                '    "quantification_improvement": <0-100 score>,\n'
+                '    "impact_enhancement": <0-100 score>,\n'
+                '    "overall_improvement_score": <0-100 score>\n'
+                "  },\n"
+                '  "interview_delivery_tips": [\n'
+                '    "<tips for delivering the optimized response effectively>"\n'
+                "  ]\n"
+                "} "
+                + f"{feedback_context}\n\n"
+                + "KSC Statement:\n"
+                + f'"{sanitized_ksc.sanitized_content}"\n\n'
+                + "Current STAR Response:\n---\n"
+                + f"{sanitized_response.sanitized_content}\n"
+                + "---\n\n"
+                + "Respond with ONLY the JSON object:"
+            )
             request = AIRequest(
                 prompt=prompt,
                 service_name="ksc_generation",

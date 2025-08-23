@@ -30,9 +30,12 @@ def generate_tailored_cover_letter(
     from a job applicant to a potential employer.
 
     **Instructions:**
-    1.  **Use the Applicant's Profile:** Base the cover letter on the applicant's provided profile data. Highlight 2-3 of their most relevant experiences and skills that align with the job.
-    2.  **Address the Job's Needs:** Directly reference the key requirements and skills mentioned in the job analysis data. Show how the applicant is a strong match for this specific role.
-    3.  **Maintain Authenticity:** It is crucial that the cover letter sounds like it was written by the applicant. Adapt your writing style to match the provided voice profile.
+    1.  **Use the Applicant's Profile:** Base the cover letter on the applicant's provided profile data.
+        Highlight 2-3 of their most relevant experiences and skills that align with the job.
+    2.  **Address the Job's Needs:** Directly reference the key requirements and skills mentioned in the
+        job analysis data. Show how the applicant is a strong match for this specific role.
+    3.  **Maintain Authenticity:** It is crucial that the cover letter sounds like it was written by the
+        applicant. Adapt your writing style to match the provided voice profile.
 
     **Applicant's Base Profile:**
     ---
@@ -51,8 +54,10 @@ def generate_tailored_cover_letter(
     **Applicant's Voice Profile (for style matching):**
     ---
     - **Tone:** {voice_profile.get('tone', 'N/A')}
-    - **Common Phrases to consider using:** {', '.join(voice_profile.get('common_phrases', []))}
-    - **Key Vocabulary to include:** {', '.join(voice_profile.get('professional_vocabulary', []))}
+    - **Common Phrases to consider using:**
+        {', '.join(voice_profile.get('common_phrases', []))}
+    - **Key Vocabulary to include:**
+        {', '.join(voice_profile.get('professional_vocabulary', []))}
     ---
         """
 

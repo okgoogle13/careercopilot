@@ -31,13 +31,17 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
     """
 
     prompt = f"""
-    As an expert career coach and a master of the STAR interview technique, your task is to generate a response for a Key Selection Criterion (KSC).
+    As an expert career coach and a master of the STAR interview technique,
+    your task is to generate a response for a Key Selection Criterion (KSC).
 
     **Objective:**
     1.  Analyze the following Key Selection Criterion: "{ksc_statement}".
-    2.  Search through the provided user profile data to find the most relevant real-world example of this skill or experience.
-    3.  Using that single, most relevant example, write a comprehensive response that is strictly formatted using the STAR methodology (Situation, Task, Action, Result).
-    4.  The final output must be a JSON object with four keys: "situation", "task", "action", and "result".
+    2.  Search through the provided user profile data to find the most relevant
+        real-world example of this skill or experience.
+    3.  Using that single, most relevant example, write a comprehensive response
+        that is strictly formatted using the STAR methodology (Situation, Task, Action, Result).
+    4.  The final output must be a JSON object with four keys: "situation",
+        "task", "action", and "result".
 
     **User Profile Data:**
     ```json

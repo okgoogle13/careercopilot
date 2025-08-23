@@ -10,7 +10,7 @@ import json
 import logging
 import os
 import pickle
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional, Union
 
 try:
@@ -116,7 +116,7 @@ class RedisCacheBackend(CacheBackend):
             serialized_data = self._serialize_entry(entry)
 
             # Calculate TTL in seconds
-            now = datetime.utcnow()
+            now = datetime.now(timezone.utc)
             ttl_seconds = int((entry.expires_at - now).total_seconds())
 
             if ttl_seconds <= 0:
