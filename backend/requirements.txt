@@ -3,7 +3,7 @@ uvicorn[standard]
 python-dotenv
 slowapi
 python-multipart
-firebase-admin==7.1.0
+firebase-admin==6.5.0
 pydantic
 python-docx
 pdfplumber
