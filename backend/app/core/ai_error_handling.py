@@ -4,6 +4,7 @@ Provides consistent error handling across all Genkit flows.
 """
 
 import asyncio
+import time
 import logging
 from dataclasses import dataclass
 from enum import Enum
@@ -155,9 +156,7 @@ class AIOperationHandler:
                 # Don't retry certain error types
                 if not self.should_retry(error_type):
                     logger.error(f"Non-retryable error: {error_type.value}")
-                    raise AIError(
-                        message=str(e), error_type=error_type, original_error=e
-                    )
+                    raise AIError(message=str(e), error_type=error_type, original_error=e)
 
                 # Don't retry on the last attempt
                 if attempt >= self.retry_config.max_attempts:
@@ -169,17 +168,63 @@ class AIOperationHandler:
                 await asyncio.sleep(delay)
 
         # All attempts failed
-        logger.error(
-            f"AI operation failed after {self.retry_config.max_attempts} attempts"
-        )
+        logger.error(f"AI operation failed after {self.retry_config.max_attempts} attempts")
         raise AIError(
             message=(
                 f"Operation failed after {self.retry_config.max_attempts} attempts: "
                 f"{str(last_error)}"
             ),
-            error_type=(
-                self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN
+            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
+            original_error=last_error,
+        )
+
+    def execute_with_retry_sync(self, operation: Callable, *args, **kwargs) -> Any:
+        """Synchronous variant of execute_with_retry for non-async operations."""
+        last_error = None
+
+        for attempt in range(1, self.retry_config.max_attempts + 1):
+            try:
+                logger.info(
+                    f"Executing AI operation (sync), attempt {attempt}/{self.retry_config.max_attempts}"
+                )
+
+                result = operation(*args, **kwargs)
+
+                if result is None:
+                    raise AIError(
+                        message="AI operation returned None",
+                        error_type=AIErrorType.UNKNOWN,
+                    )
+
+                logger.info(f"AI operation (sync) succeeded on attempt {attempt}")
+                return result
+
+            except Exception as e:
+                last_error = e
+                error_type = self.classify_error(e)
+
+                logger.warning(
+                    f"AI operation (sync) failed on attempt {attempt}: {error_type.value} - {str(e)}"
+                )
+
+                if not self.should_retry(error_type):
+                    logger.error(f"Non-retryable error: {error_type.value}")
+                    raise AIError(message=str(e), error_type=error_type, original_error=e)
+
+                if attempt >= self.retry_config.max_attempts:
+                    break
+
+                delay = self.calculate_delay(attempt, error_type)
+                logger.info(f"Retrying in {delay:.2f} seconds...")
+                time.sleep(delay)
+
+        logger.error(f"AI operation (sync) failed after {self.retry_config.max_attempts} attempts")
+        raise AIError(
+            message=(
+                f"Operation failed after {self.retry_config.max_attempts} attempts: "
+                f"{str(last_error)}"
             ),
+            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
             original_error=last_error,
         )
 
@@ -199,12 +244,22 @@ def with_ai_error_handling(retry_config: Optional[RetryConfig] = None):
     """
 
     def decorator(func: Callable) -> Callable:
-        @wraps(func)
-        async def wrapper(*args, **kwargs):
-            handler = AIOperationHandler(retry_config)
-            return await handler.execute_with_retry(func, *args, **kwargs)
+        if asyncio.iscoroutinefunction(func):
 
-        return wrapper
+            @wraps(func)
+            async def async_wrapper(*args, **kwargs):
+                handler = AIOperationHandler(retry_config)
+                return await handler.execute_with_retry(func, *args, **kwargs)
+
+            return async_wrapper
+        else:
+
+            @wraps(func)
+            def sync_wrapper(*args, **kwargs):
+                handler = AIOperationHandler(retry_config)
+                return handler.execute_with_retry_sync(func, *args, **kwargs)
+
+            return sync_wrapper
 
     return decorator
 
@@ -224,9 +279,7 @@ def validate_ai_response(response: Any, expected_type: type = str) -> Any:
         AIError: If response is invalid
     """
     if response is None:
-        raise AIError(
-            message="AI response is None", error_type=AIErrorType.INVALID_REQUEST
-        )
+        raise AIError(message="AI response is None", error_type=AIErrorType.INVALID_REQUEST)
 
     if expected_type and not isinstance(response, expected_type):
         raise AIError(
@@ -235,9 +288,7 @@ def validate_ai_response(response: Any, expected_type: type = str) -> Any:
         )
 
     if isinstance(response, str) and not response.strip():
-        raise AIError(
-            message="AI response is empty", error_type=AIErrorType.INVALID_REQUEST
-        )
+        raise AIError(message="AI response is empty", error_type=AIErrorType.INVALID_REQUEST)
 
     return response
 

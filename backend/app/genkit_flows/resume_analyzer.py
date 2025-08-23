@@ -1,7 +1,6 @@
 import json
 import os
 
-import genkit
 from app.core.ai_error_handling import (
     AIError,
     AIErrorType,
@@ -10,20 +9,54 @@ from app.core.ai_error_handling import (
 )
 from app.core.input_validation import InputSanitizer, InputValidationError
 from dotenv import load_dotenv
-from genkit.plugins import googleai
+
+try:
+    import genkit  # type: ignore
+    from genkit.plugins import googleai  # type: ignore
+except Exception:  # pragma: no cover - makes module import-safe without genkit
+    genkit = None  # type: ignore
+    googleai = None  # type: ignore
+
+
+def _noop_flow(*args, **kwargs):
+    def _decorator(fn):
+        return fn
+
+    return _decorator
+
+
+# Use real genkit.flow if available; otherwise a no-op
+genkit_flow = getattr(genkit, "flow", _noop_flow)
 
 # Load environment variables from .env file
 load_dotenv()
-
-# Initialize the Google AI plugin if not already initialized
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-# Define the Gemini Pro model
-gemini_pro = googleai.gemini_pro
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 
-@genkit.flow()
+# Initialize the Google AI plugin if available
+class _DummyGeminiPro:
+    def generate(self, *args, **kwargs):
+        raise ImportError(
+            "Genkit GoogleAI plugin is not available or not configured. "
+            "Tests should patch 'gemini_pro'."
+        )
+
+
+# Default to dummy; override if plugin available
+gemini_pro = _DummyGeminiPro()
+
+if googleai and genkit:
+    try:
+        if not genkit.get_plugin("googleai"):
+            if GEMINI_API_KEY:
+                genkit.init(plugins=[googleai.init(api_key=GEMINI_API_KEY)])
+        if genkit.get_plugin("googleai"):
+            gemini_pro = googleai.gemini_pro  # type: ignore[attr-defined]
+    except Exception:
+        # Keep dummy if initialization fails
+        pass
+
+
 @with_ai_error_handling()
 def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> dict:
     """
@@ -46,9 +79,7 @@ def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> dict:
             raise InputValidationError("Resume text is required and must be a string")
 
         if not job_analysis_data or not isinstance(job_analysis_data, dict):
-            raise InputValidationError(
-                "Job analysis data is required and must be a dictionary"
-            )
+            raise InputValidationError("Job analysis data is required and must be a dictionary")
 
         # Sanitize inputs to prevent prompt injection
         sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
@@ -122,9 +153,7 @@ Respond with ONLY the JSON object:"""
             "missing_skills",
             "improvement_suggestions",
         ]
-        missing_fields = [
-            field for field in required_fields if field not in parsed_result
-        ]
+        missing_fields = [field for field in required_fields if field not in parsed_result]
 
         if missing_fields:
             raise AIError(
@@ -169,3 +198,11 @@ Respond with ONLY the JSON object:"""
             error_type=AIErrorType.UNKNOWN,
             original_error=e,
         )
+
+
+# Optional: Expose a Genkit flow wrapper without changing testable API
+if genkit and getattr(genkit, "flow", None):
+
+    @genkit.flow()  # type: ignore[attr-defined]
+    def resumeAnalyzerFlow(resumeText: str, jobAnalysisData: dict) -> dict:
+        return compare_resume_to_job(resumeText, jobAnalysisData)

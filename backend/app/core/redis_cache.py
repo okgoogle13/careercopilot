@@ -43,9 +43,7 @@ class RedisCacheBackend(CacheBackend):
                 "Redis is required for RedisCacheBackend. Install with: pip install redis"
             )
 
-        self.redis_url: str = (
-            redis_url or os.getenv("REDIS_URL") or "redis://localhost:6379"
-        )
+        self.redis_url: str = redis_url or os.getenv("REDIS_URL") or "redis://localhost:6379"
         self.compression = compression
         self.serialization = serialization
         self.key_prefix = key_prefix
@@ -161,9 +159,7 @@ class RedisCacheBackend(CacheBackend):
             deleted_count = 0
 
             while True:
-                cursor, keys = await self.redis.scan(
-                    cursor=cursor, match=search_pattern, count=100
-                )
+                cursor, keys = await self.redis.scan(cursor=cursor, match=search_pattern, count=100)
 
                 if keys:
                     deleted = await self.redis.delete(*keys)
@@ -176,9 +172,7 @@ class RedisCacheBackend(CacheBackend):
             return deleted_count
 
         except Exception as e:
-            logger.error(
-                f"Redis cache CLEAR_BY_PATTERN error for pattern {pattern}: {e}"
-            )
+            logger.error(f"Redis cache CLEAR_BY_PATTERN error for pattern {pattern}: {e}")
             return 0
 
     async def get_info(self) -> Dict[str, Any]:
