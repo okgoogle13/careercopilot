@@ -23,7 +23,9 @@ async def save_theme_preference(
         user_ref = db.collection("users").document(uid)
 
         # Use set with merge=True to create or update the preferences map
-        user_ref.set({"preferences": {"themeId": theme_data.theme_id}}, merge=True)
+        await user_ref.set(
+            {"preferences": {"themeId": theme_data.theme_id}}, merge=True
+        )
 
         return {
             "status": "success",

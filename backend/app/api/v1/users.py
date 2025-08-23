@@ -15,7 +15,8 @@ async def create_user_profile(uid: str = Depends(get_current_user)):
     try:
         # Check if user profile already exists
         user_ref = db.collection("users").document(uid)
-        if user_ref.get().exists:
+        doc = await user_ref.get()
+        if doc.exists:
             raise HTTPException(status_code=409, detail="User profile already exists")
 
         # Get user data from Firebase Auth
@@ -24,10 +25,10 @@ async def create_user_profile(uid: str = Depends(get_current_user)):
 
         # Create the user profile document
         profile_data = {"email": email, "createdAt": SERVER_TIMESTAMP}
-        user_ref.set(profile_data)
+        await user_ref.set(profile_data)
 
         # Retrieve the created document to return it
-        created_profile = user_ref.get()
+        created_profile = await user_ref.get()
         return created_profile.to_dict()
 
     except auth.UserNotFoundError:
