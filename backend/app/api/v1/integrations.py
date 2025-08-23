@@ -4,7 +4,7 @@ from app.core.security import verify_google_oidc_token
 
 # from app.genkit_flows.email_scanner import scan_user_emails  # Temporarily disabled for deployment
 from app.core.limiter import strict_limiter
-from fastapi import APIRouter, Depends, HTTPException, Query, Request, status
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 
 router = APIRouter()
 
