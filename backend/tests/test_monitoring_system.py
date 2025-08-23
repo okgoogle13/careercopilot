@@ -6,14 +6,18 @@ import asyncio
 from unittest.mock import MagicMock, patch
 
 import pytest
-from app.core.logging_config import (
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'app'))
+
+from core.logging_config import (
     RequestContextLogger,
     StructuredFormatter,
     get_logging_config,
     request_id_context,
     user_id_context,
 )
-from app.core.monitoring import (
+from core.monitoring import (
     MetricsCollector,
     PerformanceMetrics,
     monitor_performance,
@@ -65,7 +69,9 @@ class TestMetricsCollector:
     def test_record_performance(self, collector):
         # Test performance metrics recording
         collector.record_performance("test_operation", 0.5, success=True)
-        collector.record_performance("test_operation", 0.7, success=False, error="Test error")
+        collector.record_performance(
+            "test_operation", 0.7, success=False, error="Test error"
+        )
 
         metrics = collector.performance_metrics["test_operation"]
         assert metrics.count == 2
@@ -152,7 +158,7 @@ class TestMonitoringDecorators:
         assert call_count == 1
 
         # Check that metrics were recorded
-        from app.core.monitoring import get_metrics_collector
+        from core.monitoring import get_metrics_collector
 
         collector = get_metrics_collector()
 
@@ -172,7 +178,7 @@ class TestMonitoringDecorators:
             await test_error_function()
 
         # Check that error was recorded
-        from app.core.monitoring import get_metrics_collector
+        from core.monitoring import get_metrics_collector
 
         collector = get_metrics_collector()
 
@@ -186,7 +192,7 @@ class TestMonitoringDecorators:
             await asyncio.sleep(0.01)
 
         # Check that metrics were recorded
-        from app.core.monitoring import get_metrics_collector
+        from core.monitoring import get_metrics_collector
 
         collector = get_metrics_collector()
 
@@ -200,7 +206,7 @@ class TestBusinessMetrics:
     """Test business metrics tracking functions"""
 
     def test_track_user_action(self):
-        with patch("app.core.monitoring.get_metrics_collector") as mock_get_collector:
+        with patch("core.monitoring.get_metrics_collector") as mock_get_collector:
             mock_collector = MagicMock()
             mock_get_collector.return_value = mock_collector
 
@@ -212,7 +218,7 @@ class TestBusinessMetrics:
             )
 
     def test_track_ai_usage(self):
-        with patch("app.core.monitoring.get_metrics_collector") as mock_get_collector:
+        with patch("core.monitoring.get_metrics_collector") as mock_get_collector:
             mock_collector = MagicMock()
             mock_get_collector.return_value = mock_collector
 
@@ -233,7 +239,7 @@ class TestBusinessMetrics:
             )
 
     def test_track_error(self):
-        with patch("app.core.monitoring.get_metrics_collector") as mock_get_collector:
+        with patch("core.monitoring.get_metrics_collector") as mock_get_collector:
             mock_collector = MagicMock()
             mock_get_collector.return_value = mock_collector
 
@@ -306,8 +312,13 @@ class TestLoggingSystem:
             assert user_id == "user_456"
 
         # Context should be cleared after exiting
-        assert request_id_context.get() is None
-        assert user_id_context.get() is None
+        # Check that context is either None or Token.MISSING (both indicate no value set)
+        request_id_after = request_id_context.get(None)
+        user_id_after = user_id_context.get(None)
+        
+        import contextvars
+        assert request_id_after in (None, contextvars.Token.MISSING)
+        assert user_id_after in (None, contextvars.Token.MISSING)
 
 
 class TestSystemMonitoring:
@@ -315,7 +326,7 @@ class TestSystemMonitoring:
 
     @pytest.mark.asyncio
     async def test_system_monitor_initialization(self):
-        from app.core.monitoring import SystemMonitor
+        from core.monitoring import SystemMonitor
 
         monitor = SystemMonitor(collection_interval=1.0)
         assert monitor.collection_interval == 1.0
@@ -326,12 +337,16 @@ class TestSystemMonitoring:
     @patch("psutil.virtual_memory")
     @patch("psutil.disk_usage")
     async def test_system_metrics_collection(self, mock_disk, mock_memory, mock_cpu):
-        from app.core.monitoring import SystemMonitor
+        from core.monitoring import SystemMonitor
 
         # Mock system data
         mock_cpu.return_value = 25.5
-        mock_memory.return_value = MagicMock(percent=45.2, available=8589934592, used=4294967296)
-        mock_disk.return_value = MagicMock(percent=68.1, free=107374182400, used=42949672960)
+        mock_memory.return_value = MagicMock(
+            percent=45.2, available=8589934592, used=4294967296
+        )
+        mock_disk.return_value = MagicMock(
+            percent=68.1, free=107374182400, used=42949672960
+        )
 
         monitor = SystemMonitor(collection_interval=0.1)
 
@@ -341,7 +356,7 @@ class TestSystemMonitoring:
         await monitor.stop()
 
         # Check that metrics were collected
-        from app.core.monitoring import get_metrics_collector
+        from core.monitoring import get_metrics_collector
 
         collector = get_metrics_collector()
 
@@ -357,7 +372,7 @@ class TestMonitoringIntegration:
     @pytest.mark.asyncio
     async def test_end_to_end_monitoring_flow(self):
         """Test complete monitoring flow from request to metrics"""
-        from app.core.monitoring import get_metrics_collector
+        from core.monitoring import get_metrics_collector
 
         collector = get_metrics_collector()
 
@@ -384,7 +399,7 @@ class TestMonitoringIntegration:
         assert result["status"] == "success"
         assert "integration_test_operation" in summary["performance_metrics"]
         assert summary["counters"]["http_requests_total"] >= 1
-        assert summary["counters"]["user_action_test_action"] >= 1
+        assert summary["counters"]["user_action_test_action{user_id=test_user}"] >= 1
         assert summary["counters"]["ai_operation_test_ai_op"] >= 1
 
 

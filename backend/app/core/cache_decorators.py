@@ -57,11 +57,15 @@ def cached_ai_operation(
                             user_id = args[param_index]
 
                 if not user_id:
-                    logger.warning(f"Could not extract user_id for caching {operation_type}")
+                    logger.warning(
+                        f"Could not extract user_id for caching {operation_type}"
+                    )
                     return await func(*args, **kwargs)
 
                 # Prepare cache input data
-                cache_input = _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
+                cache_input = _prepare_cache_input(
+                    args, kwargs, cache_key_params, exclude_params
+                )
 
                 # Try to get from cache
                 cached_result = await cache.get(operation_type, user_id, cache_input)
@@ -150,13 +154,13 @@ class CacheContext:
         self.user_id = user_id
         self.input_data = input_data
         self.cache = get_ai_cache()
-        self.cached_result = None
+        self.result = None
 
     async def __aenter__(self):
-        self.cached_result = await self.cache.get(
+        self.result = await self.cache.get(
             self.operation_type, self.user_id, self.input_data
         )
-        return self.cached_result
+        return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         # Cache cleanup or additional logic could go here
@@ -164,7 +168,9 @@ class CacheContext:
 
     async def set_result(self, result: Any) -> bool:
         """Cache a result within the context"""
-        return await self.cache.set(self.operation_type, self.user_id, self.input_data, result)
+        return await self.cache.set(
+            self.operation_type, self.user_id, self.input_data, result
+        )
 
 
 # Usage example with context manager:

@@ -61,7 +61,9 @@ def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> N
     try:
         sg = SendGridAPIClient(sendgrid_api_key)
         response = sg.send(message)
-        print(f"Notification email sent to {user_email}, status code: {response.status_code}")
+        print(
+            f"Notification email sent to {user_email}, status code: {response.status_code}"
+        )
     except Exception as e:
         print(f"Error sending notification email: {e}")
         # Decide if you want to raise an exception or just log the error
