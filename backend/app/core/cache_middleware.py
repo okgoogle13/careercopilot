@@ -12,7 +12,6 @@ from datetime import datetime
 from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, Request
-from fastapi.middleware import Middleware
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from .cache import AICache, get_ai_cache
