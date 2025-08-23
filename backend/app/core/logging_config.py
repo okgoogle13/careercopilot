@@ -267,9 +267,7 @@ class LoggerMixin:
     @property
     def logger(self) -> logging.Logger:
         """Get logger instance for this class"""
-        return logging.getLogger(
-            f"{self.__class__.__module__}.{self.__class__.__name__}"
-        )
+        return logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
 
 
 def log_function_call(logger: logging.Logger = None, level: int = logging.DEBUG):
@@ -387,11 +385,7 @@ class RequestContextLogger:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         for token in reversed(self.tokens):
-            (
-                token.__exit__(exc_type, exc_val, exc_tb)
-                if hasattr(token, "__exit__")
-                else None
-            )
+            (token.__exit__(exc_type, exc_val, exc_tb) if hasattr(token, "__exit__") else None)
 
 
 def get_context_logger(name: str) -> logging.Logger:

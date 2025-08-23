@@ -1,6 +1,7 @@
 import os
 
 from app.core.dependencies import get_current_user
+
 # from app.genkit_flows.email_scanner import scan_user_emails  # Temporarily disabled for deployment
 from app.core.limiter import strict_limiter
 from fastapi import APIRouter, Depends, Header, HTTPException, Request, status

@@ -186,9 +186,7 @@ class TestAICache:
         ]
 
         for op_type, input_data in operations:
-            await cache.set(
-                op_type, user_id, input_data, {"result": f"{op_type}_result"}
-            )
+            await cache.set(op_type, user_id, input_data, {"result": f"{op_type}_result"})
 
         # Verify entries exist
         for op_type, input_data in operations:
@@ -196,9 +194,7 @@ class TestAICache:
             assert result is not None
 
         # Invalidate user cache
-        invalidated = await cache.invalidate_user_cache(
-            user_id, ["resume_analysis", "ats_scoring"]
-        )
+        invalidated = await cache.invalidate_user_cache(user_id, ["resume_analysis", "ats_scoring"])
         assert invalidated == 2
 
         # Verify correct entries were invalidated
@@ -368,9 +364,7 @@ class TestCacheIntegration:
         assert result is None
 
         # Set should return False on error
-        success = await cache.set(
-            "test_operation", user_id, input_data, {"result": "data"}
-        )
+        success = await cache.set("test_operation", user_id, input_data, {"result": "data"})
         assert success is False
 
 

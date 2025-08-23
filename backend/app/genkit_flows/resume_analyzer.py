@@ -2,9 +2,12 @@ import json
 import os
 
 import genkit
-from app.core.ai_error_handling import (AIError, AIErrorType,
-                                        validate_ai_response,
-                                        with_ai_error_handling)
+from app.core.ai_error_handling import (
+    AIError,
+    AIErrorType,
+    validate_ai_response,
+    with_ai_error_handling,
+)
 from app.core.input_validation import InputSanitizer, InputValidationError
 from dotenv import load_dotenv
 from genkit.plugins import googleai
@@ -43,9 +46,7 @@ def compare_resume_to_job(resume_text: str, job_analysis_data: dict) -> dict:
             raise InputValidationError("Resume text is required and must be a string")
 
         if not job_analysis_data or not isinstance(job_analysis_data, dict):
-            raise InputValidationError(
-                "Job analysis data is required and must be a dictionary"
-            )
+            raise InputValidationError("Job analysis data is required and must be a dictionary")
 
         # Sanitize inputs to prevent prompt injection
         sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
@@ -118,9 +119,7 @@ Respond with ONLY the JSON object:"""
             "missing_skills",
             "improvement_suggestions",
         ]
-        missing_fields = [
-            field for field in required_fields if field not in parsed_result
-        ]
+        missing_fields = [field for field in required_fields if field not in parsed_result]
 
         if missing_fields:
             raise AIError(

@@ -56,9 +56,7 @@ async def get_ai_services_status():
 
         return {
             "timestamp": datetime.utcnow().isoformat(),
-            "overall_status": (
-                "healthy" if any(provider_health.values()) else "degraded"
-            ),
+            "overall_status": ("healthy" if any(provider_health.values()) else "degraded"),
             "services": service_status,
             "providers": {
                 "health": provider_health,
@@ -72,9 +70,7 @@ async def get_ai_services_status():
             "configuration_issues": config_summary["validation"],
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to get AI services status: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to get AI services status: {str(e)}")
 
 
 @router.get("/models", tags=["AI Services"])
@@ -153,9 +149,7 @@ async def get_ai_services(
             service_data = service_config.to_dict()
 
             # Add model details
-            primary_model = config_manager.get_model_config(
-                service_config.primary_model
-            )
+            primary_model = config_manager.get_model_config(service_config.primary_model)
             service_data["primary_model_details"] = (
                 primary_model.to_dict() if primary_model else None
             )
@@ -165,9 +159,7 @@ async def get_ai_services(
             for fallback_name in service_config.fallback_models:
                 fallback_model = config_manager.get_model_config(fallback_name)
                 if fallback_model:
-                    service_data["fallback_model_details"].append(
-                        fallback_model.to_dict()
-                    )
+                    service_data["fallback_model_details"].append(fallback_model.to_dict())
 
             services.append(service_data)
 
@@ -207,21 +199,15 @@ async def get_ai_usage_metrics(
         # Calculate derived metrics
         total_operations = ai_metrics.get("ai_operation_total", 0)
         cached_operations = ai_metrics.get("ai_operation_cached_total", 0)
-        cache_hit_rate = (
-            (cached_operations / total_operations * 100) if total_operations > 0 else 0
-        )
+        cache_hit_rate = (cached_operations / total_operations * 100) if total_operations > 0 else 0
 
         # Get token usage
         total_tokens = ai_metrics.get("ai_tokens_used_total", 0)
-        avg_tokens_per_operation = (
-            (total_tokens / total_operations) if total_operations > 0 else 0
-        )
+        avg_tokens_per_operation = (total_tokens / total_operations) if total_operations > 0 else 0
 
         # Get performance metrics for AI operations
         ai_performance = {}
-        for perf_name, perf_data in metrics_summary.get(
-            "performance_metrics", {}
-        ).items():
+        for perf_name, perf_data in metrics_summary.get("performance_metrics", {}).items():
             if service and service not in perf_name:
                 continue
             if any(
@@ -262,18 +248,14 @@ async def get_ai_usage_metrics(
             "performance_metrics": ai_performance,
             "cost_breakdown": {
                 "total_estimated_usd": round(estimated_cost, 4),
-                "cost_per_operation": round(
-                    estimated_cost / max(total_operations, 1), 6
-                ),
+                "cost_per_operation": round(estimated_cost / max(total_operations, 1), 6),
                 "savings_from_cache_usd": round(
                     (cached_operations / max(total_operations, 1)) * estimated_cost, 4
                 ),
             },
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to get usage metrics: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to get usage metrics: {str(e)}")
 
 
 @router.post("/test/{service_name}", tags=["AI Services"])
@@ -296,14 +278,10 @@ async def test_ai_service(
         # Check if service exists and is enabled
         service_config = config_manager.get_service_config(service_name)
         if not service_config:
-            raise HTTPException(
-                status_code=404, detail=f"Service '{service_name}' not found"
-            )
+            raise HTTPException(status_code=404, detail=f"Service '{service_name}' not found")
 
         if not service_config.enabled:
-            raise HTTPException(
-                status_code=503, detail=f"Service '{service_name}' is disabled"
-            )
+            raise HTTPException(status_code=503, detail=f"Service '{service_name}' is disabled")
 
         # Create test request
         request = AIRequest(
@@ -370,9 +348,7 @@ async def get_ai_providers():
 
             # Add credential info (without secrets)
             if credentials:
-                provider_info["credentials"] = credentials.to_dict(
-                    include_secrets=False
-                )
+                provider_info["credentials"] = credentials.to_dict(include_secrets=False)
 
             providers.append(provider_info)
 
@@ -383,9 +359,7 @@ async def get_ai_providers():
             "total_healthy": len([p for p in providers if p["healthy"]]),
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to get providers: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to get providers: {str(e)}")
 
 
 # Admin endpoints (require authentication)
@@ -405,12 +379,9 @@ async def get_ai_configuration(current_user: str = Depends(get_current_user)):
         return {
             "timestamp": datetime.utcnow().isoformat(),
             "configuration": config_manager.get_configuration_summary(),
-            "models": {
-                name: model.to_dict() for name, model in config_manager.models.items()
-            },
+            "models": {name: model.to_dict() for name, model in config_manager.models.items()},
             "services": {
-                name: service.to_dict()
-                for name, service in config_manager.services.items()
+                name: service.to_dict() for name, service in config_manager.services.items()
             },
             "providers": {
                 provider.value: creds.to_dict(include_secrets=False)
@@ -418,9 +389,7 @@ async def get_ai_configuration(current_user: str = Depends(get_current_user)):
             },
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to get configuration: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to get configuration: {str(e)}")
 
 
 @router.post("/admin/reload-config", tags=["AI Services", "Admin"])
@@ -447,9 +416,7 @@ async def reload_ai_configuration(current_user: str = Depends(get_current_user))
             "summary": config_manager.get_configuration_summary(),
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to reload configuration: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to reload configuration: {str(e)}")
 
 
 @router.post("/admin/validate-config", tags=["AI Services", "Admin"])
@@ -475,15 +442,11 @@ async def validate_ai_configuration(current_user: str = Depends(get_current_user
             },
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to validate configuration: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to validate configuration: {str(e)}")
 
 
 @router.put("/admin/service/{service_name}/enable", tags=["AI Services", "Admin"])
-async def enable_ai_service(
-    service_name: str, current_user: str = Depends(get_current_user)
-):
+async def enable_ai_service(service_name: str, current_user: str = Depends(get_current_user)):
     """
     Enable an AI service (Admin only)
 
@@ -494,9 +457,7 @@ async def enable_ai_service(
         service_config = config_manager.get_service_config(service_name)
 
         if not service_config:
-            raise HTTPException(
-                status_code=404, detail=f"Service '{service_name}' not found"
-            )
+            raise HTTPException(status_code=404, detail=f"Service '{service_name}' not found")
 
         service_config.enabled = True
 
@@ -507,15 +468,11 @@ async def enable_ai_service(
             "message": f"Service '{service_name}' has been enabled",
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to enable service: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to enable service: {str(e)}")
 
 
 @router.put("/admin/service/{service_name}/disable", tags=["AI Services", "Admin"])
-async def disable_ai_service(
-    service_name: str, current_user: str = Depends(get_current_user)
-):
+async def disable_ai_service(service_name: str, current_user: str = Depends(get_current_user)):
     """
     Disable an AI service (Admin only)
 
@@ -526,9 +483,7 @@ async def disable_ai_service(
         service_config = config_manager.get_service_config(service_name)
 
         if not service_config:
-            raise HTTPException(
-                status_code=404, detail=f"Service '{service_name}' not found"
-            )
+            raise HTTPException(status_code=404, detail=f"Service '{service_name}' not found")
 
         service_config.enabled = False
 
@@ -539,9 +494,7 @@ async def disable_ai_service(
             "message": f"Service '{service_name}' has been disabled",
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to disable service: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to disable service: {str(e)}")
 
 
 @router.get("/admin/cost-analysis", tags=["AI Services", "Admin"])
@@ -561,9 +514,7 @@ async def get_cost_analysis(
         config_manager = get_ai_config()
 
         # Get total tokens used
-        total_tokens = metrics_summary.get("counters", {}).get(
-            "ai_tokens_used_total", 0
-        )
+        total_tokens = metrics_summary.get("counters", {}).get("ai_tokens_used_total", 0)
 
         # Analyze cost by service
         service_costs = {}
@@ -577,16 +528,11 @@ async def get_cost_analysis(
 
             if service_operations > 0:
                 # Rough estimate based on primary model costs
-                primary_model = config_manager.get_model_config(
-                    service_config.primary_model
-                )
+                primary_model = config_manager.get_model_config(service_config.primary_model)
                 if primary_model:
                     # Estimate average tokens per operation for this service
                     avg_tokens = 1500  # Default estimate
-                    if (
-                        "resume_analysis" in service_name
-                        or "job_analysis" in service_name
-                    ):
+                    if "resume_analysis" in service_name or "job_analysis" in service_name:
                         avg_tokens = 2000
                     elif "cover_letter" in service_name:
                         avg_tokens = 1000
@@ -634,6 +580,4 @@ async def get_cost_analysis(
             ],
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Failed to get cost analysis: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to get cost analysis: {str(e)}")

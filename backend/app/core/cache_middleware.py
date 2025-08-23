@@ -85,9 +85,7 @@ class CacheMonitoringMiddleware(BaseHTTPMiddleware):
 
     def get_stats(self) -> Dict[str, Any]:
         """Get cache performance statistics"""
-        total_cache_requests = (
-            self.request_stats["cache_hits"] + self.request_stats["cache_misses"]
-        )
+        total_cache_requests = self.request_stats["cache_hits"] + self.request_stats["cache_misses"]
         hit_rate = (
             self.request_stats["cache_hits"] / total_cache_requests * 100
             if total_cache_requests > 0
@@ -147,9 +145,7 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
                     break
 
             if operation_types:
-                invalidated = await self.cache.invalidate_user_cache(
-                    user_id, operation_types
-                )
+                invalidated = await self.cache.invalidate_user_cache(user_id, operation_types)
                 logger.info(
                     f"Invalidated {invalidated} cache entries for user {user_id} after "
                     f"{request.method} {endpoint_path}"
@@ -195,9 +191,7 @@ async def setup_cache_backend() -> AICache:
 
                 return setup_cache(backend)
             else:
-                logger.warning(
-                    "Redis health check failed, falling back to in-memory cache"
-                )
+                logger.warning("Redis health check failed, falling back to in-memory cache")
         except ImportError:
             logger.warning("Redis not available, falling back to in-memory cache")
         except Exception as e:

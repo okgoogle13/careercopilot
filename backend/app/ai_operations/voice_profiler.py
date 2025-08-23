@@ -51,9 +51,7 @@ class VoiceProfiler:
                 raise InputValidationError("Document texts must be a non-empty list")
 
             if not any(text.strip() for text in document_texts):
-                raise InputValidationError(
-                    "At least one document must contain text content"
-                )
+                raise InputValidationError("At least one document must contain text content")
 
             # Sanitize all document texts
             sanitized_texts = []
@@ -63,9 +61,7 @@ class VoiceProfiler:
                     sanitized_texts.append(sanitized.sanitized_content)
 
             if len(sanitized_texts) == 0:
-                raise InputValidationError(
-                    "No valid document text found after sanitization"
-                )
+                raise InputValidationError("No valid document text found after sanitization")
 
             # Combine texts with separators
             combined_text = "\n\n---DOCUMENT_SEPARATOR---\n\n".join(sanitized_texts)
@@ -73,9 +69,7 @@ class VoiceProfiler:
             # Create document type context if provided
             doc_types_context = ""
             if document_types:
-                doc_types_context = (
-                    f"\n\nDocument Types: {', '.join(document_types[:10])}"
-                )
+                doc_types_context = f"\n\nDocument Types: {', '.join(document_types[:10])}"
 
             # Create focus areas context if provided
             focus_context = ""
@@ -248,9 +242,7 @@ Respond with ONLY the JSON object:"""
             return parsed_result
 
         except Exception as e:
-            logger.error(
-                f"Error in voice profile generation for user {user_id}: {str(e)}"
-            )
+            logger.error(f"Error in voice profile generation for user {user_id}: {str(e)}")
             raise AIError(
                 message=f"Voice profile generation failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
@@ -371,9 +363,7 @@ Respond with ONLY the JSON object:"""
             return parsed_result
 
         except Exception as e:
-            logger.error(
-                f"Error in style consistency analysis for user {user_id}: {str(e)}"
-            )
+            logger.error(f"Error in style consistency analysis for user {user_id}: {str(e)}")
             raise AIError(
                 message=f"Style consistency analysis failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,

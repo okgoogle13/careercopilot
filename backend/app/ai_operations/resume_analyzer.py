@@ -47,14 +47,10 @@ class ResumeAnalyzer:
         try:
             # Input validation and sanitization
             if not resume_text or not isinstance(resume_text, str):
-                raise InputValidationError(
-                    "Resume text is required and must be a string"
-                )
+                raise InputValidationError("Resume text is required and must be a string")
 
             if not job_analysis_data or not isinstance(job_analysis_data, dict):
-                raise InputValidationError(
-                    "Job analysis data is required and must be a dictionary"
-                )
+                raise InputValidationError("Job analysis data is required and must be a dictionary")
 
             # Sanitize inputs to prevent prompt injection
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
@@ -151,9 +147,7 @@ Respond with ONLY the JSON object:"""
                 "experience_match",
                 "industry_alignment",
             ]
-            missing_fields = [
-                field for field in required_fields if field not in parsed_result
-            ]
+            missing_fields = [field for field in required_fields if field not in parsed_result]
 
             if missing_fields:
                 raise AIError(
@@ -225,9 +219,7 @@ Respond with ONLY the JSON object:"""
             raise
 
         except Exception as e:
-            logger.error(
-                f"Unexpected error in resume analysis for user {user_id}: {str(e)}"
-            )
+            logger.error(f"Unexpected error in resume analysis for user {user_id}: {str(e)}")
             raise AIError(
                 message=f"Unexpected error in resume analysis: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
@@ -257,9 +249,7 @@ Respond with ONLY the JSON object:"""
             system_prompt = """You are an expert resume parser with deep knowledge of industry skills, technologies, and career progression patterns. Extract comprehensive information with high accuracy."""
 
             context_section = (
-                f"\n\nJob Context (for targeted extraction):\n{job_context}"
-                if job_context
-                else ""
+                f"\n\nJob Context (for targeted extraction):\n{job_context}" if job_context else ""
             )
 
             prompt = f"""Extract comprehensive information from the resume below. Focus on accuracy and completeness.
@@ -356,9 +346,7 @@ Respond with ONLY the JSON object:"""
                     "model_used": response.model_used,
                     "cached": response.cached,
                     "skills_count": len(
-                        parsed_result.get("technical_skills", {}).get(
-                            "programming_languages", []
-                        )
+                        parsed_result.get("technical_skills", {}).get("programming_languages", [])
                     )
                     + len(parsed_result.get("soft_skills", [])),
                 },

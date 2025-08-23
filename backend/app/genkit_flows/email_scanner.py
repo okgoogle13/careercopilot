@@ -72,13 +72,10 @@ async def scanUserEmails(user_id: str) -> list:
 
         service = get_gmail_service(user_id)
         # Refined query to be more specific
-        query = "is:unread (from:greenhouse.io OR from:lever.co OR subject:('Your application for'))"
-        results = (
-            service.users()
-            .messages()
-            .list(userId="me", q=query, maxResults=10)
-            .execute()
+        query = (
+            "is:unread (from:greenhouse.io OR from:lever.co OR subject:('Your application for'))"
         )
+        results = service.users().messages().list(userId="me", q=query, maxResults=10).execute()
         messages = results.get("messages", [])
 
         saved_opportunities = []
@@ -127,17 +124,13 @@ async def scanUserEmails(user_id: str) -> list:
                     try:
                         await createCalendarEvent.run(user_id, job_details)
                     except Exception as e:
-                        print(
-                            f"Failed to create calendar event for opportunity {opp_ref.id}: {e}"
-                        )
+                        print(f"Failed to create calendar event for opportunity {opp_ref.id}: {e}")
 
                 # 3. Send Notification Email
                 try:
                     await sendNewOpportunityNotification.run(user_data, job_details)
                 except Exception as e:
-                    print(
-                        f"Failed to send notification for opportunity {opp_ref.id}: {e}"
-                    )
+                    print(f"Failed to send notification for opportunity {opp_ref.id}: {e}")
 
                 # Mark email as read
                 service.users().messages().modify(
