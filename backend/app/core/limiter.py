@@ -12,15 +12,23 @@ class NotAuthenticatedException(Exception):
     pass
 
 
-def _not_authenticated_handler(request: Request, exc: NotAuthenticatedException) -> JSONResponse:
-    return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content={"detail": "Not authenticated"})
+def _not_authenticated_handler(
+    request: Request, exc: NotAuthenticatedException
+) -> JSONResponse:
+    return JSONResponse(
+        status_code=HTTP_401_UNAUTHORIZED, content={"detail": "Not authenticated"}
+    )
 
 
-def _rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
+def _rate_limit_exceeded_handler(
+    request: Request, exc: RateLimitExceeded
+) -> JSONResponse:
     """
     Custom handler to return a 429 error when a rate limit is exceeded.
     """
-    return JSONResponse(status_code=429, content={"detail": f"Rate limit exceeded: {exc.detail}"})
+    return JSONResponse(
+        status_code=429, content={"detail": f"Rate limit exceeded: {exc.detail}"}
+    )
 
 
 def key_func_by_user(request: Request) -> str:

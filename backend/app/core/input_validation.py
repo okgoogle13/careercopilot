@@ -49,7 +49,9 @@ class InputSanitizer:
     HTML_TAGS = re.compile(r"<[^>]+>")
 
     @classmethod
-    def sanitize_text_input(cls, text: str, max_length: Optional[int] = None) -> SanitizedInput:
+    def sanitize_text_input(
+        cls, text: str, max_length: Optional[int] = None
+    ) -> SanitizedInput:
         """
         Sanitize text input for AI processing.
 
@@ -94,7 +96,9 @@ class InputSanitizer:
             if re.search(pattern, text_lower, re.IGNORECASE):
                 warnings.append(f"Suspicious pattern detected: {pattern}")
                 # Replace suspicious patterns with safe alternatives
-                sanitized = re.sub(pattern, "[REDACTED]", sanitized, flags=re.IGNORECASE)
+                sanitized = re.sub(
+                    pattern, "[REDACTED]", sanitized, flags=re.IGNORECASE
+                )
 
         # Normalize whitespace
         sanitized = re.sub(r"\s+", " ", sanitized).strip()
@@ -178,8 +182,12 @@ class InputSanitizer:
             prompt = template.format(**safe_kwargs)
 
             # Final safety check on complete prompt
-            if len(prompt) > cls.MAX_PROMPT_LENGTH * 2:  # Allow longer for complete prompts
-                raise InputValidationError(f"Generated prompt too long: {len(prompt)} chars")
+            if (
+                len(prompt) > cls.MAX_PROMPT_LENGTH * 2
+            ):  # Allow longer for complete prompts
+                raise InputValidationError(
+                    f"Generated prompt too long: {len(prompt)} chars"
+                )
 
             return prompt
 
@@ -204,4 +212,6 @@ def sanitize_job_description(job_description: str) -> str:
 
 def create_analysis_prompt(template: str, resume: str, job_desc: str) -> str:
     """Create a safe analysis prompt with sanitized inputs."""
-    return InputSanitizer.create_safe_prompt(template, resume_text=resume, job_description=job_desc)
+    return InputSanitizer.create_safe_prompt(
+        template, resume_text=resume, job_description=job_desc
+    )

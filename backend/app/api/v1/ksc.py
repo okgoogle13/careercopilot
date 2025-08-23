@@ -78,7 +78,12 @@ async def generate_ksc_responses(
 
         # 4. Save the compiled text as a new document in Firestore
         doc_id = str(uuid.uuid4())
-        doc_ref = db.collection("users").document(uid).collection("documents").document(doc_id)
+        doc_ref = (
+            db.collection("users")
+            .document(uid)
+            .collection("documents")
+            .document(doc_id)
+        )
 
         new_doc_data = {
             "id": doc_id,
@@ -155,7 +160,9 @@ async def generate_single_ksc_response(
     except ValidationError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except NotFound:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User profile not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User profile not found."
+        )
     except GoogleAPICallError as e:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
