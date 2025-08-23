@@ -259,7 +259,8 @@ class AIConfigManager:
         # Load global settings from environment
         global_settings = {
             "AI_CACHE_ENABLED": os.getenv("AI_CACHE_ENABLED", "true").lower() == "true",
-            "AI_MONITORING_ENABLED": os.getenv("AI_MONITORING_ENABLED", "true").lower() == "true",
+            "AI_MONITORING_ENABLED": os.getenv("AI_MONITORING_ENABLED", "true").lower()
+            == "true",
             "AI_RETRY_ATTEMPTS": int(os.getenv("AI_RETRY_ATTEMPTS", "3")),
             "AI_TIMEOUT_SECONDS": int(os.getenv("AI_TIMEOUT_SECONDS", "30")),
             "AI_COST_BUDGET_DAILY": float(os.getenv("AI_COST_BUDGET_DAILY", "100.0")),
@@ -437,7 +438,9 @@ class AIConfigManager:
         """Get configuration for a specific service"""
         return self.services.get(service_name)
 
-    def get_provider_credentials(self, provider: AIProvider) -> Optional[ProviderCredentials]:
+    def get_provider_credentials(
+        self, provider: AIProvider
+    ) -> Optional[ProviderCredentials]:
         """Get credentials for a specific provider"""
         return self.credentials.get(provider)
 
@@ -447,7 +450,9 @@ class AIConfigManager:
 
     def get_models_by_type(self, model_type: AIModelType) -> List[ModelConfig]:
         """Get all models of a specific type"""
-        return [model for model in self.models.values() if model.model_type == model_type]
+        return [
+            model for model in self.models.values() if model.model_type == model_type
+        ]
 
     def get_enabled_services(self) -> List[AIServiceConfig]:
         """Get all enabled services"""
@@ -461,11 +466,15 @@ class AIConfigManager:
         used_providers = set(model.provider for model in self.models.values())
         for provider in used_providers:
             if provider not in self.credentials:
-                issues["errors"].append(f"Missing credentials for provider: {provider.value}")
+                issues["errors"].append(
+                    f"Missing credentials for provider: {provider.value}"
+                )
             else:
                 creds = self.credentials[provider]
                 if not creds.api_key and provider != AIProvider.AWS_BEDROCK:
-                    issues["warnings"].append(f"No API key configured for {provider.value}")
+                    issues["warnings"].append(
+                        f"No API key configured for {provider.value}"
+                    )
 
         # Check service configurations
         for service in self.services.values():
@@ -507,7 +516,9 @@ class AIConfigManager:
 
         config_data = {
             "models": {name: model.to_dict() for name, model in self.models.items()},
-            "services": {name: service.to_dict() for name, service in self.services.items()},
+            "services": {
+                name: service.to_dict() for name, service in self.services.items()
+            },
             # Don't save credentials to file for security
             "credentials": {
                 provider.value: creds.to_dict(include_secrets=False)

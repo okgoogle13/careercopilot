@@ -1,11 +1,9 @@
 import os
 
-from fastapi import APIRouter, Depends, Header, HTTPException, Request, status
-
 from app.core.dependencies import get_current_user
-
 # from app.genkit_flows.email_scanner import scan_user_emails  # Temporarily disabled for deployment
 from app.core.limiter import strict_limiter
+from fastapi import APIRouter, Depends, Header, HTTPException, Request, status
 
 router = APIRouter()
 
@@ -24,7 +22,9 @@ SCHEDULER_SECRET = os.getenv("SCHEDULER_SECRET")
 @router.post("/scan-emails")
 @strict_limiter.limit("5/minute")
 async def trigger_scan(
-    request: Request, user: dict = Depends(get_current_user), x_scheduler_secret: str = Header(None)
+    request: Request,
+    user: dict = Depends(get_current_user),
+    x_scheduler_secret: str = Header(None),
 ):
     """
     Triggers an email scan for the authenticated user.
@@ -33,7 +33,8 @@ async def trigger_scan(
     if os.getenv("ENVIRONMENT") == "production":
         if not x_scheduler_secret or x_scheduler_secret != SCHEDULER_SECRET:
             raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid scheduler secret"
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid scheduler secret",
             )
 
     # asyncio.create_task(scan_user_emails(user['uid']))  # Temporarily disabled for deployment

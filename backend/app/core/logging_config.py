@@ -267,7 +267,9 @@ class LoggerMixin:
     @property
     def logger(self) -> logging.Logger:
         """Get logger instance for this class"""
-        return logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
+        return logging.getLogger(
+            f"{self.__class__.__module__}.{self.__class__.__name__}"
+        )
 
 
 def log_function_call(logger: logging.Logger = None, level: int = logging.DEBUG):
@@ -301,7 +303,10 @@ def log_function_call(logger: logging.Logger = None, level: int = logging.DEBUG)
                 func_logger.log(
                     level,
                     f"Function {func.__name__} completed successfully",
-                    extra={"function": func.__name__, "result_type": type(result).__name__},
+                    extra={
+                        "function": func.__name__,
+                        "result_type": type(result).__name__,
+                    },
                 )
                 return result
             except Exception as e:
@@ -331,7 +336,10 @@ def log_function_call(logger: logging.Logger = None, level: int = logging.DEBUG)
                 func_logger.log(
                     level,
                     f"Async function {func.__name__} completed successfully",
-                    extra={"function": func.__name__, "result_type": type(result).__name__},
+                    extra={
+                        "function": func.__name__,
+                        "result_type": type(result).__name__,
+                    },
                 )
                 return result
             except Exception as e:
@@ -379,7 +387,11 @@ class RequestContextLogger:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         for token in reversed(self.tokens):
-            token.__exit__(exc_type, exc_val, exc_tb) if hasattr(token, "__exit__") else None
+            (
+                token.__exit__(exc_type, exc_val, exc_tb)
+                if hasattr(token, "__exit__")
+                else None
+            )
 
 
 def get_context_logger(name: str) -> logging.Logger:
