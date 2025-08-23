@@ -84,11 +84,19 @@ class VoiceProfiler:
                     InputSanitizer.sanitize_text_input(area).sanitized_content
                     for area in focus_areas
                 ]
-                focus_context = f"\n\nFocus Analysis On: {', '.join(sanitized_focus)}"
+                focus_context = f"\\n\\nFocus Analysis On: {', '.join(sanitized_focus)}"
 
-            system_prompt = """You are an expert linguist and communication analyst specializing in writing style analysis, voice identification, and professional communication patterns. Analyze text comprehensively to create detailed voice profiles."""
+            system_prompt = (
+                "You are an expert linguist and communication analyst specializing in "
+                "writing style analysis, voice identification, and professional "
+                "communication patterns. Analyze text comprehensively to create "
+                "detailed voice profiles."
+            )
 
-            prompt = f"""Analyze the provided document collection to create a comprehensive voice profile that captures the user's unique writing style, communication patterns, and professional voice.
+            prompt = f"""
+Analyze the provided document collection to create a comprehensive voice profile
+that captures the user's unique writing style, communication patterns, and
+professional voice.
 
 ANALYSIS REQUIREMENTS:
 - Analyze tone, vocabulary, sentence structure, and communication patterns
@@ -160,9 +168,7 @@ Required JSON structure:
     }},
     "application_guidance": {{
         "cover_letter_voice": {{
-            "recommended_tone": "<tone to use in cover letters>",
             "key_phrases_to_include": [<authentic phrases for cover letters>],
-            "formality_adjustment": "<any adjustments needed for cover letters>"
         }},
         "professional_communication": {{
             "email_style_guide": [<how to apply voice to emails>],
@@ -283,55 +289,71 @@ Respond with ONLY the JSON object:"""
             sanitized_profile = InputSanitizer.sanitize_dict_input(voice_profile)
             sanitized_doc_type = InputSanitizer.sanitize_text_input(document_type)
 
-            system_prompt = """You are a writing style consistency expert who can compare text against established voice profiles and identify alignment gaps and improvement opportunities."""
+            system_prompt = (
+                "You are a writing style consistency expert who can compare text "
+                "against established voice profiles and identify alignment gaps and "
+                "improvement opportunities."
+            )
 
-            prompt = f"""Compare the target text against the established voice profile to assess style consistency and provide recommendations for better alignment.
+            prompt = f"""Compare the target text against the established voice profile
+to assess style consistency and provide recommendations for better alignment.
 
 Required JSON structure:
-{"consistency_analysis": {"overall_consistency_score": <0-100 score>,
-        "tone_alignment": {"score": <0-100>,
+{{
+    "consistency_analysis": {{
+        "overall_consistency_score": <0-100 score>,
+        "tone_alignment": {{
+            "score": <0-100>,
             "current_tone": "<detected tone in target text>",
             "expected_tone": "<tone from voice profile>",
             "alignment_notes": "<explanation of alignment>"
-        } ,
-        "vocabulary_alignment": {"score": <0-100>,
+        }},
+        "vocabulary_alignment": {{
+            "score": <0-100>,
             "matching_vocabulary": [<vocabulary that matches profile>],
             "missing_vocabulary": [<expected vocabulary not used>],
             "inconsistent_vocabulary": [<vocabulary that doesn't match style>]
-        } ,
-        "structure_alignment": {"score": <0-100>,
+        }},
+        "structure_alignment": {{
+            "score": <0-100>,
             "sentence_structure_match": "<assessment of sentence structure consistency>",
             "paragraph_style_match": "<assessment of paragraph style consistency>",
             "flow_consistency": "<assessment of information flow>"
-        } ,
-        "authenticity_assessment": {"score": <0-100>,
+        }},
+        "authenticity_assessment": {{
+            "score": <0-100>,
             "authentic_elements": [<elements that feel authentic to the voice>],
             "inauthentic_elements": [<elements that feel inconsistent>],
             "voice_confidence": "<assessment of voice confidence in text>"
-        }
-    } ,
+        }}
+    }},
     "improvement_recommendations": [
-        {"category": "<tone/vocabulary/structure/authenticity>",
+        {{
+            "category": "<tone/vocabulary/structure/authenticity>",
             "current_issue": "<specific issue identified>",
             "recommendation": "<specific improvement suggestion>",
             "example_improvement": "<example of how to fix it>",
             "priority": "<high/medium/low>"
-        }
+        }}
     ],
-    "style_enhancements": {"phrases_to_add": [<phrases from profile that could be naturally added>],
+    "style_enhancements": {{
+        "phrases_to_add": [<phrases from profile that could be naturally added>],
         "vocabulary_substitutions": [
-            {"current": "<current word/phrase>",
+            {{
+                "current": "<current word/phrase>",
                 "suggested": "<word/phrase from profile>",
                 "reason": "<why this change helps>"
-            }
+            }}
         ],
         "tone_adjustments": [<specific tone adjustments to match profile>],
         "structure_improvements": [<structure changes to match profile>]
-    } ,
-    "document_type_optimization": {"type_specific_recommendations": [<recommendations specific to document type>],
+    }},
+    "document_type_optimization": {{
+        "type_specific_recommendations": [<recommendations specific to document type>],
         "voice_adaptation_for_context": [<how voice should adapt for this document type>],
         "professional_standards_alignment": [<how to maintain professionalism>]
-    } }
+    }}
+}}
 
 Voice Profile:
 ---
@@ -346,7 +368,6 @@ Target Text to Analyze:
 ---
 
 Respond with ONLY the JSON object:"""
-
             request = AIRequest(
                 prompt=prompt,
                 service_name="style_analysis",
@@ -410,59 +431,65 @@ Respond with ONLY the JSON object:"""
                     InputSanitizer.sanitize_text_input(goal).sanitized_content
                     for goal in adaptation_goals
                 ]
-                goals_context = f"\n\nAdaptation Goals: {', '.join(sanitized_goals)}"
+                goals_context = f"\\n\\nAdaptation Goals: {', '.join(sanitized_goals)}"
 
-            system_prompt = """You are a communication adaptation specialist who helps professionals adapt their authentic voice for different contexts while maintaining authenticity and effectiveness."""
+            system_prompt = (
+                "You are a communication adaptation specialist who helps "
+                "professionals adapt their authentic voice for different contexts "
+                "while maintaining authenticity and effectiveness."
+            )
 
-            prompt = f"""Adapt the base voice profile for the specified target context while preserving authenticity and core voice characteristics.
+            prompt = f"""
+Adapt the base voice profile for the specified target context while preserving
+authenticity and core voice characteristics.
 
 Required JSON structure:
-{
-                "adapted_voice_profile": {
-                    "context_specific_tone": {
-                        "primary_tone": "<adapted primary tone>",
+{{
+    "adapted_voice_profile": {{
+        "context_specific_tone": {{
+            "primary_tone": "<adapted primary tone>",
             "tone_adjustments": [<specific tone modifications for context>],
             "formality_level": "<adapted formality level>",
             "context_appropriateness": <0-100 score>
-        } ,
-        "vocabulary_adaptations": {
-                        "context_specific_terms": [<terms appropriate for this context>],
+        }},
+        "vocabulary_adaptations": {{
+            "context_specific_terms": [<terms appropriate for this context>],
             "retained_personal_vocabulary": [<personal terms to keep>],
             "terms_to_avoid": [<terms that may not fit context>],
             "professional_alternatives": [<professional alternatives for casual terms>]
-        } ,
-        "communication_adjustments": {
-                        "sentence_structure_changes": [<structure adaptations needed>],
+        }},
+        "communication_adjustments": {{
+            "sentence_structure_changes": [<structure adaptations needed>],
             "paragraph_style_adjustments": [<paragraph style changes>],
             "emphasis_patterns": [<how to emphasize points in this context>],
             "persuasion_approach": "<adapted persuasion style>"
-        } ,
-        "authenticity_preservation": {
-                        "core_voice_elements_to_maintain": [<essential voice elements to keep>],
+        }},
+        "authenticity_preservation": {{
+            "core_voice_elements_to_maintain": [<essential voice elements to keep>],
             "personal_phrases_adapted": [<how personal phrases fit the context>],
             "personality_integration": [<how personality shows through context>],
             "authenticity_score": <0-100 authenticity preservation score>
-        }
-    } ,
-    "context_specific_guidance": {
-                    "do_emphasize": [<things to emphasize in this context>],
+        }}
+    }},
+    "context_specific_guidance": {{
+        "do_emphasize": [<things to emphasize in this context>],
         "do_avoid": [<things to avoid in this context>],
         "context_expectations": [<what this context typically expects>],
         "competitive_advantages": [<how adapted voice provides advantages>]
-    } ,
-    "application_examples": {
-                    "cover_letter_adaptations": [<how to apply adaptations in cover letters>],
+    }},
+    "application_examples": {{
+        "cover_letter_adaptations": [<how to apply adaptations in cover letters>],
         "email_communication": [<email adaptations for this context>],
         "networking_approach": [<networking adaptations>],
         "interview_preparation": [<interview communication adaptations>]
-    } ,
-    "success_metrics": {
-                    "context_alignment_score": <0-100 predicted success in context>,
+    }},
+    "success_metrics": {{
+        "context_alignment_score": <0-100 predicted success in context>,
         "authenticity_maintenance": <0-100 authenticity preservation>,
         "professional_impact": <0-100 predicted professional impact>,
         "adaptation_difficulty": "<easy/moderate/challenging>"
-    }
-} {goals_context}
+    }}
+}} {goals_context}
 
 Base Voice Profile:
 ---
