@@ -65,18 +65,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: 'frontend/package-lock.json'
 
-      - name: Cache node_modules
-        uses: actions/cache@v4
-        id: npm-cache
-        with:
-          path: frontend/node_modules
-          key: ${{ runner.os }}-node-${{ env.NODE_VERSION }}-${{ hashFiles('frontend/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-${{ env.NODE_VERSION }}-
-            ${{ runner.os }}-node-
-
       - name: Install Frontend Dependencies
-        if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci --prefix frontend
         timeout-minutes: 5
 
@@ -130,15 +119,6 @@ jobs:
           cache-dependency-path: |
             backend/requirements.txt
             backend/requirements-dev.txt
-
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ env.PYTHON_VERSION }}-${{ hashFiles('backend/requirements*.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-${{ env.PYTHON_VERSION }}-
-            ${{ runner.os }}-pip-
 
       - name: Install Backend Dependencies
         run: |
@@ -239,4 +219,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '✅ **All Quality Checks Passed!**\n\nThis PR is ready for review and merge.'
-            })# Force workflow refresh
+            })
