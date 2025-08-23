@@ -64,8 +64,6 @@ async def compare_resume(
     """
     Orchestrates the analysis of a job description and comparison with a user's resume.
     """
-    # Manually store uid in request state for the limiter to access
-    request.state.user_uid = uid
 
     # Temporarily disabled for deployment - genkit flows unavailable
     raise HTTPException(
@@ -79,7 +77,7 @@ async def compare_resume(
     #
     #     # Step B: Fetch the user's resume text from Firestore
     #     doc_ref = db.collection("users").document(uid).collection("documents").document(body.document_id)
-    #     doc = doc_ref.get()
+    #     doc = await doc_ref.get()
     #     if not doc.exists:
     #         raise HTTPException(status_code=404, detail="Resume document not found")
     #
