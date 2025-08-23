@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import { db } from '../firebase-config';
 import toast from 'react-hot-toast';
+import { useUserPreferences } from '../contexts/UserPreferencesContext';
 
 interface DocumentType {
   id: string;
@@ -16,7 +15,8 @@ const DocumentsPage: React.FC = () => {
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [userTheme, setUserTheme] = useState<string>('professional');
+  const userPreferences = useUserPreferences();
+  const userTheme = userPreferences?.themeId || 'professional';
 
   const fetchDocuments = async (user: User) => {
     try {
@@ -40,12 +40,6 @@ const DocumentsPage: React.FC = () => {
     const unsubscribe = onAuthStateChanged(auth, async user => {
       if (user) {
         await fetchDocuments(user);
-        // Fetch user theme preference
-        const userDocRef = doc(db, 'users', user.uid);
-        const docSnap = await getDoc(userDocRef);
-        if (docSnap.exists() && docSnap.data().preferences?.themeId) {
-          setUserTheme(docSnap.data().preferences.themeId);
-        }
       } else {
         setLoading(false);
         setError('You must be logged in to view this page.');

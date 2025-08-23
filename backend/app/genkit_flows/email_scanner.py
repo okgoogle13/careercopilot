@@ -66,7 +66,7 @@ async def scanUserEmails(user_id: str) -> list:
     try:
         # 1. Get user data for notifications
         user_ref = db.collection("users").document(user_id)
-        user_doc = user_ref.get()
+        user_doc = await user_ref.get()
         if not user_doc.exists:
             raise Exception(f"User with ID {user_id} not found in Firestore.")
         user_data = user_doc.to_dict()
