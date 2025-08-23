@@ -54,7 +54,7 @@ async def generate_voice_profile(user_id: str) -> dict:
 
         # 4. Save the profile to the user's main document
         user_ref = db.collection("users").document(user_id)
-        user_ref.set({"voice_profile": voice_profile_data}, merge=True)
+        await user_ref.set({"voice_profile": voice_profile_data}, merge=True)
 
         return voice_profile_data
 
