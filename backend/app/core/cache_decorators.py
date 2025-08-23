@@ -154,13 +154,13 @@ class CacheContext:
         self.user_id = user_id
         self.input_data = input_data
         self.cache = get_ai_cache()
-        self.cached_result = None
+        self.result = None
 
     async def __aenter__(self):
-        self.cached_result = await self.cache.get(
+        self.result = await self.cache.get(
             self.operation_type, self.user_id, self.input_data
         )
-        return self.cached_result
+        return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         # Cache cleanup or additional logic could go here

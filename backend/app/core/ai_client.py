@@ -11,8 +11,13 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from .ai_config import (AIConfigManager, AIModelType, AIProvider, ModelConfig,
-                        get_ai_config)
+from .ai_config import (
+    AIConfigManager,
+    AIModelType,
+    AIProvider,
+    ModelConfig,
+    get_ai_config,
+)
 from .monitoring import monitor_performance, track_ai_usage, track_error
 
 logger = logging.getLogger(__name__)
@@ -85,12 +90,14 @@ class OpenAIClient(AIProviderClient):
     def __init__(self, config_manager: AIConfigManager):
         super().__init__(AIProvider.OPENAI, config_manager)
         self.base_url = "https://api.openai.com/v1"
-        self.headers = {
-            "Authorization": f"Bearer {self.credentials.api_key}",
-            "Content-Type": "application/json",
-        }
-        if self.credentials.organization_id:
-            self.headers["OpenAI-Organization"] = self.credentials.organization_id
+        self.headers = {}
+        if self.credentials and self.credentials.api_key:
+            self.headers = {
+                "Authorization": f"Bearer {self.credentials.api_key}",
+                "Content-Type": "application/json",
+            }
+            if self.credentials.organization_id:
+                self.headers["OpenAI-Organization"] = self.credentials.organization_id
 
     async def generate_text(
         self, request: AIRequest, model_config: ModelConfig
@@ -243,12 +250,14 @@ class GoogleAIClient(AIProviderClient):
             payload["systemInstruction"] = {"parts": [{"text": request.system_prompt}]}
 
         try:
+            if not self.credentials:
+                raise ValueError("Google AI credentials not configured")
             async with httpx.AsyncClient(
                 timeout=model_config.timeout_seconds
             ) as client:
                 response = await client.post(
                     f"{self.base_url}/models/{model_config.model_id}:generateContent"
-                    f"?key={self.credentials.api_key}",
+                    f"?key={self.credentials.api_key if self.credentials else ''}",
                     json=payload,
                 )
                 response.raise_for_status()
@@ -261,8 +270,8 @@ class GoogleAIClient(AIProviderClient):
 
                 # Estimate tokens (Google doesn't always return usage)
                 tokens_used = {
-                    "input": len(request.prompt.split()) * 1.3,  # Rough estimate
-                    "output": len(content.split()) * 1.3,
+                    "input": int(len(request.prompt.split()) * 1.3),  # Rough estimate
+                    "output": int(len(content.split()) * 1.3),
                 }
 
                 cost_estimate = self._calculate_cost(tokens_used, model_config)
@@ -301,9 +310,12 @@ class GoogleAIClient(AIProviderClient):
         try:
             import httpx
 
+            if not self.credentials:
+                return False
+
             async with httpx.AsyncClient(timeout=5.0) as client:
                 response = await client.get(
-                    f"{self.base_url}/models?key={self.credentials.api_key}"
+                    f"{self.base_url}/models?key={self.credentials.api_key if self.credentials else ''}"
                 )
                 return response.status_code == 200
         except Exception:
@@ -328,11 +340,13 @@ class AnthropicClient(AIProviderClient):
     def __init__(self, config_manager: AIConfigManager):
         super().__init__(AIProvider.ANTHROPIC, config_manager)
         self.base_url = "https://api.anthropic.com/v1"
-        self.headers = {
-            "x-api-key": self.credentials.api_key,
-            "Content-Type": "application/json",
-            "anthropic-version": "2023-06-01",
-        }
+        self.headers = {}
+        if self.credentials and self.credentials.api_key:
+            self.headers = {
+                "x-api-key": self.credentials.api_key,
+                "Content-Type": "application/json",
+                "anthropic-version": "2023-06-01",
+            }
 
     async def generate_text(
         self, request: AIRequest, model_config: ModelConfig

@@ -1,12 +1,12 @@
 import uuid
+from typing import Optional
 
 from app.ai_operations.ats_scoring import ats_scorer
 from app.ai_operations.job_analyzer import job_analyzer
 from app.ai_operations.resume_analyzer import resume_analyzer
 from app.core.ai_error_handling import AIError
 from app.core.db import db
-from app.core.dependencies import (get_current_user,
-                                   get_user_document_from_firestore)
+from app.core.dependencies import get_current_user, get_user_document_from_firestore
 from fastapi import APIRouter, Depends, HTTPException, status
 from google.api_core.exceptions import GoogleAPICallError
 from google.cloud.firestore import SERVER_TIMESTAMP
@@ -21,12 +21,12 @@ class AtsScoreRequest(BaseModel):
 
 class ResumeAnalysisRequest(BaseModel):
     job_description: str
-    company_info: str = None
+    company_info: Optional[str] = None
 
 
 class JobAnalysisRequest(BaseModel):
     job_description: str
-    company_info: str = None
+    company_info: Optional[str] = None
 
 
 @router.post("/ats-score/{document_id}")

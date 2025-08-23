@@ -20,10 +20,12 @@ class KeywordPlacementSuggestion(BaseModel):
 
     keyword: str = Field(description="The missing keyword.")
     suggested_location: str = Field(
-        description="A short, specific description of the best place in the resume to add the keyword (e.g., 'In the summary section' or 'In the bullet points for the Sr. Accountant role')."
+        description="A short, specific description of the best place in the resume to add the keyword "
+        "(e.g., 'In the summary section' or 'In the bullet points for the Sr. Accountant role')."
     )
     example_sentence: str = Field(
-        description="A well-crafted example sentence that naturally incorporates the keyword into the suggested location."
+        description="A well-crafted example sentence that naturally incorporates the keyword into the "
+        "suggested location."
     )
 
 
@@ -46,11 +48,15 @@ def suggestKeywordPlacement(
     """
 
     prompt = f"""
-    Act as an expert resume editor. Your task is to analyze the provided resume text and suggest the best placement for a list of missing keywords.
+    Act as an expert resume editor. Your task is to analyze the provided
+    resume text and suggest the best placement for a list of missing keywords.
 
     **Instructions:**
     1.  Review the Resume Text to understand its structure and content.
-    2.  For each keyword in the Missing Keywords list, find the most logical and contextually appropriate location to insert it. This could be in the professional summary, a specific job's responsibilities, or a skills section.
+    2.  For each keyword in the Missing Keywords list, find the most logical
+        and contextually appropriate location to insert it. This could be in
+        the professional summary, a specific job's responsibilities, or a
+        skills section.
     3.  Do not rewrite the resume. Your output must be a list of specific, actionable suggestions.
     4.  Provide a clear example sentence for each suggestion.
 

@@ -55,10 +55,15 @@ class JobAnalyzer:
                     company_info
                 )
 
-            system_prompt = """You are an expert HR analyst and job market researcher with deep knowledge of industry requirements, salary ranges, and career progression paths. Analyze job descriptions with precision and industry insight."""
+            system_prompt = (
+                "You are an expert HR analyst and job market researcher with deep "
+                "knowledge of industry requirements, salary ranges, and career "
+                "progression paths. Analyze job descriptions with precision and "
+                "industry insight."
+            )
 
             company_section = (
-                f"\n\nAdditional Company Information:\n{sanitized_company_info.sanitized_content}"
+                f"\\n\\nAdditional Company Information:\\n{sanitized_company_info.sanitized_content}"
                 if sanitized_company_info
                 else ""
             )
@@ -212,42 +217,46 @@ Respond with ONLY the JSON object:"""
             focus_instruction = ""
             if focus_areas:
                 focus_instruction = (
-                    f"\nFocus particularly on these areas: {', '.join(focus_areas)}"
+                    f"\\nFocus particularly on these areas: {', '.join(focus_areas)}"
                 )
 
-            system_prompt = """You are a specialized job requirements analyst with expertise in parsing complex job descriptions for specific requirements and qualifications."""
+            system_prompt = (
+                "You are a specialized job requirements analyst with expertise in "
+                "parsing complex job descriptions for specific requirements and "
+                "qualifications."
+            )
 
             prompt = f"""Extract specific job requirements from the job description below.{focus_instruction}
 
 Required JSON structure:
-{
-                "must_have_requirements": {
-                    "technical_skills": [<list of absolutely required technical skills>],
+{{
+    "must_have_requirements": {{
+        "technical_skills": [<list of absolutely required technical skills>],
         "experience": [<list of required experience types>],
         "education": [<list of required education/certifications>],
         "soft_skills": [<list of required soft skills>]
-    } ,
-    "nice_to_have_requirements": {
-                    "technical_skills": [<list of preferred technical skills>],
+    }},
+    "nice_to_have_requirements": {{
+        "technical_skills": [<list of preferred technical skills>],
         "experience": [<list of preferred experience types>],
         "education": [<list of preferred education/certifications>],
         "soft_skills": [<list of preferred soft skills>]
-    } ,
+    }},
     "deal_breakers": [<list of absolute requirements that cannot be compromised>],
     "growth_areas": [<list of skills/areas where growth is acceptable>],
     "assessment_criteria": [<list of how candidates will likely be evaluated>],
-    "keyword_importance": {
-                    "high_priority": [<keywords that are very important for ATS>],
+    "keyword_importance": {{
+        "high_priority": [<keywords that are very important for ATS>],
         "medium_priority": [<keywords that are somewhat important>],
         "low_priority": [<keywords that are nice to have>]
-    } ,
-    "role_complexity": {
-                    "technical_complexity": <1-10 scale>,
+    }},
+    "role_complexity": {{
+        "technical_complexity": <1-10 scale>,
         "leadership_complexity": <1-10 scale>,
         "stakeholder_complexity": <1-10 scale>,
         "decision_making_level": <1-10 scale>
-    }
-}
+    }}
+}}
 
 Job Description:
 ---
@@ -312,50 +321,54 @@ Respond with ONLY the JSON object:"""
                 "experience": InputSanitizer.sanitize_text_input(experience_level),
             }
 
-            system_prompt = """You are a compensation analyst with expertise in salary benchmarking,
-                market analysis, and geographic pay variations. Provide accurate salary insights based on current market conditions."""
+            system_prompt = (
+                "You are a compensation analyst with expertise in salary "
+                "benchmarking,\n                market analysis, and geographic "
+                "pay variations. Provide accurate salary insights based on "
+                "current market conditions."
+            )
 
-            prompt = f"""Analyze the job description and provide salary expectations and market insights.
+            prompt = f"""Analyze the job description and provide a comprehensive salary analysis.
 
 Required JSON structure:
-{
-                "salary_analysis": {
-                    "base_salary_range": {
-                        "min": <minimum expected salary>,
+{{
+    "salary_analysis": {{
+        "base_salary_range": {{
+            "min": <minimum expected salary>,
             "max": <maximum expected salary>,
             "median": <median expected salary>,
             "currency": "USD"
-        } ,
-        "total_compensation_range": {
-                        "min": <minimum total comp including benefits>,
+        }},
+        "total_compensation_range": {{
+            "min": <minimum total comp including benefits>,
             "max": <maximum total comp including benefits>,
             "median": <median total comp>
-        } ,
+        }},
         "factors_affecting_salary": [<list of factors that impact salary for this role>],
-        "location_adjustment": {
-                        "location_factor": <multiplier compared to national average>,
+        "location_adjustment": {{
+            "location_factor": <multiplier compared to national average>,
             "cost_of_living_note": "<brief note about location impact>"
-        } ,
-        "experience_premium": {
-                        "current_level_multiplier": <salary multiplier for current experience level>,
+        }},
+        "experience_premium": {{
+            "current_level_multiplier": <salary multiplier for current experience level>,
             "next_level_range": "<salary range for next experience level>"
-        }
-    } ,
-    "market_insights": {
-                    "demand_level": "<low/medium/high>",
+        }}
+    }},
+    "market_insights": {{
+        "demand_level": "<low/medium/high>",
         "supply_level": "<low/medium/high>",
         "growth_trend": "<declining/stable/growing>",
         "key_market_drivers": [<list of factors driving demand/supply>],
         "negotiation_points": [<list of potential negotiation factors>]
-    } ,
+    }},
     "benefits_expectations": [<list of typical benefits for this type of role>],
-    "career_progression": {
-                    "next_level_timeline": "<typical years to next level>",
+    "career_progression": {{
+        "next_level_timeline": "<typical years to next level>",
         "progression_path": [<list of typical career progression steps>],
         "skill_development_priorities": [<list of skills to develop for advancement>]
-    } ,
+    }},
     "recommendations": [<list of actionable recommendations for salary negotiation>]
-}
+}}
 
 Job Description:
 ---

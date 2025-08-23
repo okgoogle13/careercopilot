@@ -1,11 +1,11 @@
 import io
+import json
 from pathlib import Path
 from typing import List, Literal
 
 import docx
 import pdfplumber
-from app.core.dependencies import (get_current_user,
-                                   get_user_document_from_firestore)
+from app.core.dependencies import get_current_user, get_user_document_from_firestore
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from google.api_core.exceptions import GoogleAPICallError
 from jinja2 import Environment, FileSystemLoader
@@ -17,10 +17,16 @@ from weasyprint import CSS, HTML
 
 router = APIRouter()
 
+# --- Template Configuration Loading ---
+config_path = Path(__file__).parent.parent.parent.parent / "config" / "themes.json"
 template_root_dir = Path(__file__).parent.parent.parent / "templates"
-env = Environment(loader=FileSystemLoader(str(template_root_dir)))
 
-Theme = Literal["professional", "modern", "creative"]
+with open(config_path) as f:
+    THEME_CONFIG = json.load(f)
+
+# Dynamically create the Theme literal type from the config file keys
+Theme = Literal[tuple(THEME_CONFIG.keys())]
+env = Environment(loader=FileSystemLoader(str(template_root_dir)))
 
 
 def parse_pdf(file_path: str) -> str:
@@ -56,21 +62,22 @@ async def download_document_as_pdf(
 ):
     try:
         content = document.get("content", "")
+        theme_details = THEME_CONFIG.get(theme)
 
-        theme_dir = template_root_dir / theme
-        html_template_path = theme_dir / "template.html"
-        css_path = theme_dir / "style.css"
-
-        if not html_template_path.exists() or not css_path.exists():
+        if not theme_details:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Theme '{theme}' not found.",
             )
 
-        template = env.get_template(f"{theme}/template.html")
+        template_path = theme_details["template"]
+        css_path = str(template_root_dir / theme_details["css"])
+        base_url_path = str(template_root_dir / theme)
+
+        template = env.get_template(template_path)
         html_content = template.render(content=content)
-        stylesheet = CSS(filename=str(css_path))
-        pdf_bytes = HTML(string=html_content, base_url=str(theme_dir)).write_pdf(
+        stylesheet = CSS(filename=css_path)
+        pdf_bytes = HTML(string=html_content, base_url=base_url_path).write_pdf(
             stylesheets=[stylesheet]
         )
 

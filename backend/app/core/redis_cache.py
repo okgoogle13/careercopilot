@@ -10,12 +10,13 @@ import json
 import logging
 import os
 import pickle
-from datetime import datetime
-from typing import Any, Dict, Optional
+from datetime import datetime, timezone
+from typing import Any, Dict, Optional, Union
 
 try:
     import redis.asyncio as redis
     from redis.asyncio import Redis
+    from redis.asyncio.cluster import RedisCluster
 
     REDIS_AVAILABLE = True
 except ImportError:
@@ -42,7 +43,9 @@ class RedisCacheBackend(CacheBackend):
                 "Redis is required for RedisCacheBackend. Install with: pip install redis"
             )
 
-        self.redis_url = redis_url or os.getenv("REDIS_URL", "redis://localhost:6379")
+        self.redis_url: str = (
+            redis_url or os.getenv("REDIS_URL") or "redis://localhost:6379"
+        )
         self.compression = compression
         self.serialization = serialization
         self.key_prefix = key_prefix
@@ -54,7 +57,7 @@ class RedisCacheBackend(CacheBackend):
             retry_on_timeout=True,
             decode_responses=False,  # We handle serialization ourselves
         )
-        self.redis = Redis(connection_pool=self.pool)
+        self.redis: Union[Redis, RedisCluster] = Redis(connection_pool=self.pool)
 
     def _serialize_entry(self, entry: CacheEntry) -> bytes:
         """Serialize cache entry for storage"""
@@ -113,7 +116,7 @@ class RedisCacheBackend(CacheBackend):
             serialized_data = self._serialize_entry(entry)
 
             # Calculate TTL in seconds
-            now = datetime.utcnow()
+            now = datetime.now(timezone.utc)
             ttl_seconds = int((entry.expires_at - now).total_seconds())
 
             if ttl_seconds <= 0:
@@ -246,10 +249,9 @@ class RedisClusterCacheBackend(RedisCacheBackend):
         self.serialization = kwargs.get("serialization", "json")
         self.key_prefix = kwargs.get("key_prefix", "aicc:")
 
-        self.redis = RedisCluster(
+        self.redis: Union[Redis, RedisCluster] = RedisCluster(
             startup_nodes=cluster_nodes,
             decode_responses=False,
-            skip_full_coverage_check=True,
         )
 
     async def close(self):

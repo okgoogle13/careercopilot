@@ -40,7 +40,8 @@ def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> N
         </ul>
         <p>We've already saved it to your dashboard and added a reminder to your calendar.</p>
         <p>
-            <a href="{app_link}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">
+            <a href="{app_link}" style="display: inline-block; padding: 10px 20px; font-size: 16px;
+            color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">
                 View in Career Copilot
             </a>
         </p>

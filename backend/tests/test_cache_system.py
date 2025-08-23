@@ -3,12 +3,17 @@ Tests for the AI operations caching system
 """
 
 import asyncio
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from unittest.mock import AsyncMock
 
 import pytest
-from app.core.cache import AICache, CacheEntry, InMemoryCacheBackend
-from app.core.cache_decorators import CacheContext, cached_ai_operation
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "app"))
+
+from core.cache import AICache, CacheEntry, InMemoryCacheBackend
+from core.cache_decorators import CacheContext, cached_ai_operation
 
 
 class TestInMemoryCacheBackend:
@@ -23,8 +28,8 @@ class TestInMemoryCacheBackend:
         return CacheEntry(
             key="test_key",
             value={"result": "test_data"},
-            created_at=datetime.utcnow(),
-            expires_at=datetime.utcnow() + timedelta(seconds=3600),
+            created_at=datetime.now(timezone.utc),
+            expires_at=datetime.now(timezone.utc) + timedelta(seconds=3600),
             operation_type="test_operation",
             input_hash="abc123",
         )
@@ -51,8 +56,8 @@ class TestInMemoryCacheBackend:
         expired_entry = CacheEntry(
             key="expired_key",
             value={"data": "expired"},
-            created_at=datetime.utcnow() - timedelta(seconds=7200),
-            expires_at=datetime.utcnow() - timedelta(seconds=3600),
+            created_at=datetime.now(timezone.utc) - timedelta(seconds=7200),
+            expires_at=datetime.now(timezone.utc) - timedelta(seconds=3600),
             operation_type="test",
             input_hash="expired",
         )
@@ -70,8 +75,8 @@ class TestInMemoryCacheBackend:
             entry = CacheEntry(
                 key=f"key_{i}",
                 value={"data": f"value_{i}"},
-                created_at=datetime.utcnow(),
-                expires_at=datetime.utcnow() + timedelta(seconds=3600),
+                created_at=datetime.now(timezone.utc),
+                expires_at=datetime.now(timezone.utc) + timedelta(seconds=3600),
                 operation_type="test",
                 input_hash=f"hash_{i}",
             )
@@ -113,8 +118,8 @@ class TestInMemoryCacheBackend:
             entry = CacheEntry(
                 key=key,
                 value=value,
-                created_at=datetime.utcnow(),
-                expires_at=datetime.utcnow() + timedelta(seconds=3600),
+                created_at=datetime.now(timezone.utc),
+                expires_at=datetime.now(timezone.utc) + timedelta(seconds=3600),
                 operation_type="test",
                 input_hash=key,
             )
@@ -220,7 +225,10 @@ class TestCacheDecorators:
             nonlocal call_count
             call_count += 1
             await asyncio.sleep(0.01)  # Simulate processing time
-            return {"processed": input_text, "timestamp": datetime.utcnow().isoformat()}
+            return {
+                "processed": input_text,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
 
         user_id = "test_user"
         input_text = "test input data"
@@ -248,7 +256,7 @@ class TestCacheDecorators:
 
         # First use - cache miss
         async with CacheContext(operation_type, user_id, input_data) as cached:
-            assert cached is None
+            assert cached.result is None
 
             # Set result in context
             result = {"computed": "result"}
@@ -257,8 +265,8 @@ class TestCacheDecorators:
 
         # Second use - cache hit
         async with CacheContext(operation_type, user_id, input_data) as cached:
-            assert cached is not None
-            assert cached == {"computed": "result"}
+            assert cached.result is not None
+            assert cached.result == {"computed": "result"}
 
 
 class TestCacheConfiguration:
@@ -318,7 +326,7 @@ class TestCacheIntegration:
     @pytest.mark.asyncio
     async def test_end_to_end_cache_flow(self):
         # Test complete flow: miss -> compute -> cache -> hit
-        from app.core.cached_ai_operations import CachedAIOperations
+        from core.cached_ai_operations import CachedAIOperations
 
         user_id = "integration_user"
         resume_text = "Experienced Python developer with expertise in FastAPI and React"

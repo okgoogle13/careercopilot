@@ -8,7 +8,7 @@ These will replace the original operations once genkit dependencies are resolved
 import asyncio
 import hashlib
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from .cache import get_ai_cache
@@ -46,7 +46,7 @@ class CachedAIOperations:
             "strengths": ["Technical expertise", "Full-stack development"],
             "suggestions": ["Add more quantified achievements"],
             "score": 85,
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -69,7 +69,7 @@ class CachedAIOperations:
             "job_type": "Full-time",
             "remote_policy": "Hybrid",
             "salary_range": "$80,000 - $120,000",
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -101,7 +101,7 @@ class CachedAIOperations:
             ],
             "matched_keywords": ["python", "api", "database"],
             "missing_keywords": ["docker", "kubernetes", "ci/cd"],
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -136,7 +136,7 @@ class CachedAIOperations:
             ],
             "writing_style": "concise and technical",
             "confidence_level": "high",
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -180,7 +180,7 @@ Sincerely,
                 "Mentioned specific requirements from job posting",
             ],
             "personalization_score": 85,
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -213,7 +213,7 @@ Sincerely,
                 "Focus on your personal contribution",
                 "Highlight the positive outcome",
             ],
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
 

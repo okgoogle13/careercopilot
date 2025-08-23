@@ -29,10 +29,12 @@ class CacheEntry:
     expires_at: datetime
     operation_type: str
     input_hash: str
-    metadata: Dict[str, Any] = None
+    metadata: Optional[Dict[str, Any]] = None
 
     def is_expired(self) -> bool:
-        return datetime.utcnow() > self.expires_at
+        from datetime import timezone
+
+        return datetime.now(timezone.utc) > self.expires_at
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -184,6 +186,18 @@ class AICache:
             cache_null_results=False,
             invalidate_on_user_update=True,
         ),
+        "test_operation": CacheConfig(
+            ttl_seconds=1800,  # 30 minutes
+            max_entries=100,
+            cache_null_results=False,
+            invalidate_on_user_update=True,
+        ),
+        "test_context_op": CacheConfig(
+            ttl_seconds=1800,  # 30 minutes
+            max_entries=100,
+            cache_null_results=False,
+            invalidate_on_user_update=True,
+        ),
     }
 
     def __init__(self, backend: CacheBackend):
@@ -207,11 +221,13 @@ class AICache:
         self, key: str, operation_type: str, input_data: Any, result: Any, **kwargs
     ) -> CacheEntry:
         """Create a cache entry with appropriate TTL"""
+        from datetime import timezone
+
         config = self.CACHE_CONFIGS.get(
             operation_type, CacheConfig(ttl_seconds=1800)
         )  # Default 30 min
 
-        created_at = datetime.utcnow()
+        created_at = datetime.now(timezone.utc)
         expires_at = created_at + timedelta(seconds=config.ttl_seconds)
 
         input_str = json.dumps(input_data, sort_keys=True, default=str)

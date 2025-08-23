@@ -2,7 +2,7 @@ import json
 
 from app.core.db import db
 from genkit import ai
-from genkit.googleai import gemini15_flash
+from genkit.plugins.google_genai import gemini15_flash
 
 # Initialize the Gemini model
 model = gemini15_flash
@@ -35,9 +35,12 @@ async def generate_voice_profile(user_id: str) -> dict:
         Your task is to create a JSON object that accurately describes their writing style.
 
         The JSON object must include the following fields:
-        - "tone": A short description of the overall tone (e.g., "professional and direct", "casual and friendly", "academic and formal").
-        - "common_phrases": A list of 5-10 recurring phrases or expressions the user frequently uses.
-        - "professional_vocabulary": A list of 10-15 key technical, industry-specific, or advanced vocabulary terms they use.
+        - "tone": A short description of the overall tone (e.g., "professional and direct",
+          "casual and friendly", "academic and formal").
+        - "common_phrases": A list of 5-10 recurring phrases or expressions the user
+          frequently uses.
+        - "professional_vocabulary": A list of 10-15 key technical, industry-specific,
+          or advanced vocabulary terms they use.
 
         Here is the text block:
         ---
@@ -51,7 +54,7 @@ async def generate_voice_profile(user_id: str) -> dict:
 
         # 4. Save the profile to the user's main document
         user_ref = db.collection("users").document(user_id)
-        user_ref.set({"voice_profile": voice_profile_data}, merge=True)
+        await user_ref.set({"voice_profile": voice_profile_data}, merge=True)
 
         return voice_profile_data
 

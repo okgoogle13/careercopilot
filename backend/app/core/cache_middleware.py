@@ -8,11 +8,11 @@ import asyncio
 import logging
 import os
 from contextlib import asynccontextmanager
-from datetime import datetime
-from typing import Any, Dict
+from datetime import datetime, timezone
+from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, Request
-from fastapi.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from .cache import AICache, get_ai_cache
 
@@ -25,12 +25,12 @@ class CacheCleanupMiddleware(BaseHTTPMiddleware):
     def __init__(self, app: FastAPI, cleanup_interval: int = 3600):
         super().__init__(app)
         self.cleanup_interval = cleanup_interval  # seconds
-        self.last_cleanup = datetime.utcnow()
+        self.last_cleanup = datetime.now(timezone.utc)
         self.cache = get_ai_cache()
 
     async def dispatch(self, request: Request, call_next):
         # Check if cleanup is needed
-        now = datetime.utcnow()
+        now = datetime.now(timezone.utc)
         if (now - self.last_cleanup).total_seconds() > self.cleanup_interval:
             # Run cleanup in background to not block request
             asyncio.create_task(self._cleanup_cache())
@@ -158,7 +158,7 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
         except Exception as e:
             logger.error(f"Cache invalidation error: {e}")
 
-    async def _extract_user_id(self, request: Request) -> str:
+    async def _extract_user_id(self, request: Request) -> Optional[str]:
         """Extract user ID from request"""
         # Try to get from auth context first
         if hasattr(request.state, "user_id"):
@@ -254,7 +254,7 @@ async def cache_health_check() -> Dict[str, Any]:
 
     try:
         # Test cache operations
-        test_data = {"timestamp": datetime.utcnow().isoformat()}
+        test_data = {"timestamp": datetime.now(timezone.utc).isoformat()}
 
         # Try to cache and retrieve
         success = await cache.set("health_check", "system", test_data, test_data)

@@ -9,11 +9,11 @@ import json
 import logging
 import time
 import uuid
-from datetime import datetime
-from typing import Any, Callable, Dict, Optional
+from datetime import datetime, timezone
+from typing import Any, Callable, Dict, List, Optional
 
 from fastapi import FastAPI, Request, Response
-from fastapi.middleware.base import BaseHTTPMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from fastapi.responses import JSONResponse
 from starlette.types import ASGIApp
 
@@ -32,7 +32,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
         include_request_body: bool = False,
         include_response_body: bool = False,
         max_body_size: int = 1024 * 1024,  # 1MB
-        exclude_paths: list = None,
+        exclude_paths: Optional[List[str]] = None,
     ):
         super().__init__(app)
         self.include_request_body = include_request_body
@@ -177,7 +177,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
                 content={
                     "error": "Internal server error",
                     "request_id": request_id,
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                 },
                 headers={"X-Request-ID": request_id},
             )
@@ -267,7 +267,12 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
                 body = response.body
                 if len(body) <= self.max_body_size:
                     try:
-                        info["response_body"] = json.loads(body.decode("utf-8"))
+                        body_str = (
+                            body.decode("utf-8")
+                            if isinstance(body, bytes)
+                            else bytes(body).decode("utf-8")
+                        )
+                        info["response_body"] = json.loads(body_str)
                     except (json.JSONDecodeError, UnicodeDecodeError):
                         info["response_body_size"] = len(body)
                 else:
@@ -382,7 +387,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
     def __init__(self, app: ASGIApp, health_check_path: str = "/health"):
         super().__init__(app)
         self.health_check_path = health_check_path
-        self.startup_time = datetime.utcnow()
+        self.startup_time = datetime.now(timezone.utc)
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         # Intercept health check requests
@@ -401,7 +406,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
             # Check various system components
             health_status = {
                 "status": "healthy",
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
                 "uptime_seconds": metrics_summary["uptime_seconds"],
                 "version": "1.0.0",  # Should be injected from environment
                 "checks": {
@@ -436,7 +441,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
             return JSONResponse(
                 content={
                     "status": "unhealthy",
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                     "error": str(e),
                 },
                 status_code=503,
@@ -482,7 +487,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
         }
 
 
-def add_monitoring_middleware(app: FastAPI, config: Dict[str, Any] = None):
+def add_monitoring_middleware(app: FastAPI, config: Optional[Dict[str, Any]] = None):
     """Add all monitoring middleware to the FastAPI application"""
 
     config = config or {}

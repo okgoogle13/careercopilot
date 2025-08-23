@@ -3,7 +3,7 @@ uvicorn[standard]
 python-dotenv
 slowapi
 python-multipart
-firebase-admin
+firebase-admin==6.5.0
 pydantic
 python-docx
 pdfplumber
@@ -14,6 +14,6 @@ google-cloud-secret-manager
 sendgrid
 redis
 psutil
-httpx
+httpx[http2]==0.28.1
 pytest
 pytest-asyncio

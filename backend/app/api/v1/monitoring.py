@@ -5,7 +5,7 @@ Provides endpoints for accessing application metrics, health status,
 and monitoring data for dashboards and alerting systems.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from app.core.cache import get_ai_cache
@@ -51,7 +51,7 @@ async def get_metrics_summary():
         summary["computed_metrics"] = await _compute_additional_metrics(summary)
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "ok",
             "metrics": summary,
         }
@@ -89,7 +89,7 @@ async def get_detailed_health():
         overall_status = "healthy" if all_healthy else "degraded"
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": overall_status,
             "uptime_seconds": metrics.get("uptime_seconds", 0),
             "checks": health_checks,
@@ -107,7 +107,7 @@ async def get_detailed_health():
         }
     except Exception as e:
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": "unhealthy",
             "error": str(e),
         }
@@ -145,7 +145,7 @@ async def get_performance_metrics(
             op_metrics["reliability_score"] = _calculate_reliability_score(op_metrics)
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "time_window_minutes": time_window_minutes,
             "performance_metrics": performance_data,
         }
@@ -177,7 +177,7 @@ async def get_dashboard_data():
         kpis = await _calculate_kpis(metrics_summary)
 
         dashboard_data = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "status": _determine_overall_status(metrics_summary),
             "kpis": kpis,
             "system_health": {
@@ -255,7 +255,7 @@ async def get_active_alerts():
         alerts.extend(cache_alerts)
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "alert_count": len(alerts),
             "alerts": alerts,
         }
@@ -304,7 +304,7 @@ async def clear_metrics(current_user: str = Depends(get_current_user)):
         collector.histograms.clear()
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "message": "All metrics cleared successfully",
         }
     except Exception as e:

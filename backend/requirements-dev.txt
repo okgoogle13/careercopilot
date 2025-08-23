@@ -10,14 +10,14 @@ mypy==1.8.0            # Type checking
 
 # Security
 bandit==1.7.5          # Security linter for Python
-safety==3.0.1          # Checks for known security vulnerabilities
+safety>=3.1.0          # Checks for known security vulnerabilities (compatible with pydantic 2.x)
 
 # Testing
 pytest==8.1.1         # Testing framework (also in main requirements)
 pytest-asyncio==0.23.5 # Async testing support (also in main requirements)
 pytest-cov==4.0.0     # Coverage reporting
 pytest-mock==3.12.0   # Mocking utilities
-httpx==0.27.0          # HTTP client for testing APIs (also in main requirements)
+httpx[http2]==0.28.1   # HTTP client for testing APIs (also in main requirements)
 pytest-xdist==3.5.0   # Parallel test execution
 
 # Development Tools
@@ -37,3 +37,7 @@ memory-profiler==0.61.0 # Memory profiling
 
 # Load Testing
 locust==2.24.1        # Load testing tool
+
+# Genkit
+genkit==0.4.0
+genkit[google-genai]==0.4.0

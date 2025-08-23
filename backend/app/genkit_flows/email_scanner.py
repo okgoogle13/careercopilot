@@ -38,7 +38,8 @@ def extract_job_details_from_email(email_content: str) -> dict:
     # This flow remains the same
     prompt = f"""
     Analyze the following email content and extract structured information about a job opportunity.
-    The output must be a valid JSON object with the fields: "company", "title", "deadline" (in YYYY-MM-DD format), and "source_url".
+    The output must be a valid JSON object with the fields: "company", "title", "deadline" (in YYYY-MM-DD format),
+    and "source_url".
     If any field is not present, use a value of null.
     If no clear job opportunity is found, return an empty JSON object {{}}.
 
@@ -65,7 +66,7 @@ async def scanUserEmails(user_id: str) -> list:
     try:
         # 1. Get user data for notifications
         user_ref = db.collection("users").document(user_id)
-        user_doc = user_ref.get()
+        user_doc = await user_ref.get()
         if not user_doc.exists:
             raise Exception(f"User with ID {user_id} not found in Firestore.")
         user_data = user_doc.to_dict()

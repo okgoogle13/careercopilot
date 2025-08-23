@@ -2,9 +2,12 @@ import json
 import os
 
 import genkit
-from app.core.ai_error_handling import (AIError, AIErrorType,
-                                        validate_ai_response,
-                                        with_ai_error_handling)
+from app.core.ai_error_handling import (
+    AIError,
+    AIErrorType,
+    validate_ai_response,
+    with_ai_error_handling,
+)
 from app.core.input_validation import InputSanitizer, InputValidationError
 from dotenv import load_dotenv
 from genkit.plugins import googleai
@@ -67,7 +70,8 @@ The output must be a valid JSON object with the following structure:
 - "match_score": An integer between 0 and 100 representing how well the resume matches the job.
 - "matching_skills": A list of skills found in both the resume and the job's key skills.
 - "missing_skills": A list of key skills required for the job that are not found in the resume.
-- "improvement_suggestions": A list of specific, actionable suggestions for the user to improve their resume for this job.
+- "improvement_suggestions": A list of specific, actionable suggestions for the user to improve
+  their resume for this job.
 
 Resume Text:
 ---

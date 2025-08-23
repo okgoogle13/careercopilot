@@ -466,7 +466,7 @@ class AIConfigManager:
         used_providers = set(model.provider for model in self.models.values())
         for provider in used_providers:
             if provider not in self.credentials:
-                issues["errors"].append(
+                issues["warnings"].append(
                     f"Missing credentials for provider: {provider.value}"
                 )
             else:
