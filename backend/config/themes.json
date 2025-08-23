@@ -1,0 +1,17 @@
+{
+  "professional": {
+    "displayName": "Professional",
+    "template": "professional/template.html",
+    "css": "professional/style.css"
+  },
+  "modern": {
+    "displayName": "Modern",
+    "template": "modern/template.html",
+    "css": "modern/style.css"
+  },
+  "creative": {
+    "displayName": "Creative",
+    "template": "creative/template.html",
+    "css": "creative/style.css"
+  }
+}
