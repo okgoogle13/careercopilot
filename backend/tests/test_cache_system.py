@@ -7,13 +7,8 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import AsyncMock
 
 import pytest
-import sys
-import os
-
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "app"))
-
-from core.cache import AICache, CacheEntry, InMemoryCacheBackend
-from core.cache_decorators import CacheContext, cached_ai_operation
+from app.core.cache import AICache, CacheEntry, InMemoryCacheBackend
+from app.core.cache_decorators import CacheContext, cached_ai_operation
 
 
 class TestInMemoryCacheBackend:
@@ -191,9 +186,7 @@ class TestAICache:
         ]
 
         for op_type, input_data in operations:
-            await cache.set(
-                op_type, user_id, input_data, {"result": f"{op_type}_result"}
-            )
+            await cache.set(op_type, user_id, input_data, {"result": f"{op_type}_result"})
 
         # Verify entries exist
         for op_type, input_data in operations:
@@ -201,9 +194,7 @@ class TestAICache:
             assert result is not None
 
         # Invalidate user cache
-        invalidated = await cache.invalidate_user_cache(
-            user_id, ["resume_analysis", "ats_scoring"]
-        )
+        invalidated = await cache.invalidate_user_cache(user_id, ["resume_analysis", "ats_scoring"])
         assert invalidated == 2
 
         # Verify correct entries were invalidated
@@ -225,10 +216,7 @@ class TestCacheDecorators:
             nonlocal call_count
             call_count += 1
             await asyncio.sleep(0.01)  # Simulate processing time
-            return {
-                "processed": input_text,
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-            }
+            return {"processed": input_text, "timestamp": datetime.now(timezone.utc).isoformat()}
 
         user_id = "test_user"
         input_text = "test input data"
@@ -255,18 +243,18 @@ class TestCacheDecorators:
         input_data = {"test": "data"}
 
         # First use - cache miss
-        async with CacheContext(operation_type, user_id, input_data) as cached:
-            assert cached.result is None
+        async with CacheContext(operation_type, user_id, input_data) as cache_ctx:
+            assert cache_ctx.result is None
 
             # Set result in context
             result = {"computed": "result"}
-            success = await cached.set_result(result)
+            success = await cache_ctx.set_result(result)
             assert success is True
 
         # Second use - cache hit
-        async with CacheContext(operation_type, user_id, input_data) as cached:
-            assert cached.result is not None
-            assert cached.result == {"computed": "result"}
+        async with CacheContext(operation_type, user_id, input_data) as cache_ctx:
+            assert cache_ctx.result is not None
+            assert cache_ctx.result == {"computed": "result"}
 
 
 class TestCacheConfiguration:
@@ -326,7 +314,7 @@ class TestCacheIntegration:
     @pytest.mark.asyncio
     async def test_end_to_end_cache_flow(self):
         # Test complete flow: miss -> compute -> cache -> hit
-        from core.cached_ai_operations import CachedAIOperations
+        from app.core.cached_ai_operations import CachedAIOperations
 
         user_id = "integration_user"
         resume_text = "Experienced Python developer with expertise in FastAPI and React"
@@ -376,19 +364,11 @@ class TestCacheIntegration:
         assert result is None
 
         # Set should return False on error
-        success = await cache.set(
-            "test_operation", user_id, input_data, {"result": "data"}
-        )
+        success = await cache.set("test_operation", user_id, input_data, {"result": "data"})
         assert success is False
 
 
 # Fixtures for all tests
-@pytest.fixture(scope="session")
-def event_loop():
-    """Create an instance of the default event loop for the test session."""
-    loop = asyncio.new_event_loop()
-    yield loop
-    loop.close()
 
 
 if __name__ == "__main__":
