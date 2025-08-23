@@ -1,4 +1,5 @@
 import uuid
+from typing import Optional
 
 from app.ai_operations.ats_scoring import ats_scorer
 from app.ai_operations.job_analyzer import job_analyzer
@@ -20,12 +21,12 @@ class AtsScoreRequest(BaseModel):
 
 class ResumeAnalysisRequest(BaseModel):
     job_description: str
-    company_info: str = None
+    company_info: Optional[str] = None
 
 
 class JobAnalysisRequest(BaseModel):
     job_description: str
-    company_info: str = None
+    company_info: Optional[str] = None
 
 
 @router.post("/ats-score/{document_id}")

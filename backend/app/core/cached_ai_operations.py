@@ -8,7 +8,7 @@ These will replace the original operations once genkit dependencies are resolved
 import asyncio
 import hashlib
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
 from .cache import get_ai_cache
@@ -46,7 +46,7 @@ class CachedAIOperations:
             "strengths": ["Technical expertise", "Full-stack development"],
             "suggestions": ["Add more quantified achievements"],
             "score": 85,
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -69,7 +69,7 @@ class CachedAIOperations:
             "job_type": "Full-time",
             "remote_policy": "Hybrid",
             "salary_range": "$80,000 - $120,000",
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -84,7 +84,9 @@ class CachedAIOperations:
         await asyncio.sleep(0.2)  # Simulate processing
 
         # Create a deterministic score based on content for testing
-        content_hash = hashlib.md5(f"{resume_text}{job_description}".encode()).hexdigest()
+        content_hash = hashlib.md5(
+            f"{resume_text}{job_description}".encode()
+        ).hexdigest()
         score = (int(content_hash[:4], 16) % 40) + 60  # Score between 60-100
 
         return {
@@ -99,12 +101,14 @@ class CachedAIOperations:
             ],
             "matched_keywords": ["python", "api", "database"],
             "missing_keywords": ["docker", "kubernetes", "ci/cd"],
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
     @cached_ai_operation("voice_profile", user_id_param="user_id")
-    async def generate_voice_profile_cached(user_id: str, document_texts: list) -> Dict[str, Any]:
+    async def generate_voice_profile_cached(
+        user_id: str, document_texts: list
+    ) -> Dict[str, Any]:
         """Cached version of voice profile generation"""
 
         logger.info(f"Generating voice profile for user {user_id} (not cached)")
@@ -132,7 +136,7 @@ class CachedAIOperations:
             ],
             "writing_style": "concise and technical",
             "confidence_level": "high",
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -176,7 +180,7 @@ Sincerely,
                 "Mentioned specific requirements from job posting",
             ],
             "personalization_score": 85,
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
     @staticmethod
@@ -209,7 +213,7 @@ Sincerely,
                 "Focus on your personal contribution",
                 "Highlight the positive outcome",
             ],
-            "processed_at": datetime.utcnow().isoformat(),
+            "processed_at": datetime.now(timezone.utc).isoformat(),
         }
 
 
