@@ -135,9 +135,7 @@ async def atsScoring(
     semantic_analysis: SemanticAnalysis = semantic_response.output()
 
     # Step 4: Perform Keyword Matching
-    keyword_analysis = _calculate_keyword_score(
-        resume_entities.skills, job_reqs, profileKeywords
-    )
+    keyword_analysis = _calculate_keyword_score(resume_entities.skills, job_reqs, profileKeywords)
 
     # Step 5: Perform Formatting Compliance check
     formatting_score = _calculate_formatting_score(resume_entities)

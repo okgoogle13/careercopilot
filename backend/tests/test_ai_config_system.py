@@ -9,9 +9,14 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from app.core.ai_client import AIClientManager, AIRequest, AIResponse
-from app.core.ai_config import (AIConfigManager, AIModelType, AIProvider,
-                                AIServiceConfig, ModelConfig,
-                                ProviderCredentials)
+from app.core.ai_config import (
+    AIConfigManager,
+    AIModelType,
+    AIProvider,
+    AIServiceConfig,
+    ModelConfig,
+    ProviderCredentials,
+)
 
 
 class TestAIConfigManager:
@@ -172,9 +177,7 @@ class TestAIConfigManager:
         # Test get_enabled_services
         enabled_services = config_manager.get_enabled_services()
         assert len(enabled_services) >= 1
-        assert any(
-            service.service_name == "test-service" for service in enabled_services
-        )
+        assert any(service.service_name == "test-service" for service in enabled_services)
 
     def test_configuration_summary(self, temp_config_file):
         """Test configuration summary generation"""
@@ -310,9 +313,7 @@ class TestAIClientManager:
         client_manager.clients[AIProvider.OPENAI] = mock_client
 
         # Create test request
-        request = AIRequest(
-            prompt="Test prompt", service_name="test-service", user_id="user-123"
-        )
+        request = AIRequest(prompt="Test prompt", service_name="test-service", user_id="user-123")
 
         # Generate text
         with patch("app.core.ai_client.track_ai_usage") as mock_track:

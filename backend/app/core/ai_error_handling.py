@@ -155,9 +155,7 @@ class AIOperationHandler:
                 # Don't retry certain error types
                 if not self.should_retry(error_type):
                     logger.error(f"Non-retryable error: {error_type.value}")
-                    raise AIError(
-                        message=str(e), error_type=error_type, original_error=e
-                    )
+                    raise AIError(message=str(e), error_type=error_type, original_error=e)
 
                 # Don't retry on the last attempt
                 if attempt >= self.retry_config.max_attempts:
@@ -169,17 +167,13 @@ class AIOperationHandler:
                 await asyncio.sleep(delay)
 
         # All attempts failed
-        logger.error(
-            f"AI operation failed after {self.retry_config.max_attempts} attempts"
-        )
+        logger.error(f"AI operation failed after {self.retry_config.max_attempts} attempts")
         raise AIError(
             message=(
                 f"Operation failed after {self.retry_config.max_attempts} attempts: "
                 f"{str(last_error)}"
             ),
-            error_type=(
-                self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN
-            ),
+            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
             original_error=last_error,
         )
 
@@ -224,9 +218,7 @@ def validate_ai_response(response: Any, expected_type: type = str) -> Any:
         AIError: If response is invalid
     """
     if response is None:
-        raise AIError(
-            message="AI response is None", error_type=AIErrorType.INVALID_REQUEST
-        )
+        raise AIError(message="AI response is None", error_type=AIErrorType.INVALID_REQUEST)
 
     if expected_type and not isinstance(response, expected_type):
         raise AIError(
@@ -235,9 +227,7 @@ def validate_ai_response(response: Any, expected_type: type = str) -> Any:
         )
 
     if isinstance(response, str) and not response.strip():
-        raise AIError(
-            message="AI response is empty", error_type=AIErrorType.INVALID_REQUEST
-        )
+        raise AIError(message="AI response is empty", error_type=AIErrorType.INVALID_REQUEST)
 
     return response
 

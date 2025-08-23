@@ -1,9 +1,13 @@
 import pytest
-from app.core.ai_error_handling import (AIError, AIErrorType,
-                                        AIOperationHandler, RetryConfig,
-                                        create_user_friendly_error,
-                                        validate_ai_response,
-                                        with_ai_error_handling)
+from app.core.ai_error_handling import (
+    AIError,
+    AIErrorType,
+    AIOperationHandler,
+    RetryConfig,
+    create_user_friendly_error,
+    validate_ai_response,
+    with_ai_error_handling,
+)
 
 
 class TestAIOperationHandler:
@@ -68,9 +72,7 @@ class TestAIOperationHandler:
 
     def test_calculate_delay(self):
         """Test delay calculation for retries."""
-        config = RetryConfig(
-            base_delay=1.0, exponential_base=2.0, max_delay=10.0, jitter=False
-        )
+        config = RetryConfig(base_delay=1.0, exponential_base=2.0, max_delay=10.0, jitter=False)
         handler = AIOperationHandler(config)
 
         # Test exponential backoff
