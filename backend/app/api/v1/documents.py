@@ -4,8 +4,7 @@ from typing import List, Literal
 
 import docx
 import pdfplumber
-from app.core.dependencies import (get_current_user,
-                                   get_user_document_from_firestore)
+from app.core.dependencies import get_current_user, get_user_document_from_firestore
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from google.api_core.exceptions import GoogleAPICallError
 from jinja2 import Environment, FileSystemLoader
@@ -74,9 +73,7 @@ async def download_document_as_pdf(
             stylesheets=[stylesheet]
         )
 
-        response = StreamingResponse(
-            io.BytesIO(pdf_bytes), media_type="application/pdf"
-        )
+        response = StreamingResponse(io.BytesIO(pdf_bytes), media_type="application/pdf")
         original_filename = document.get("originalFilename", "document").split(".")[0]
         response.headers["Content-Disposition"] = (
             f"attachment; filename={original_filename}_{theme}.pdf"
