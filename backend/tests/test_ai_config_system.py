@@ -10,7 +10,8 @@ from unittest.mock import AsyncMock, MagicMock, patch
 import pytest
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'app'))
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "app"))
 
 from core.ai_client import AIClientManager, AIRequest, AIResponse
 from core.ai_config import (

@@ -8,7 +8,8 @@ from unittest.mock import MagicMock, patch
 import pytest
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'app'))
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "app"))
 
 from core.logging_config import (
     RequestContextLogger,
@@ -315,8 +316,9 @@ class TestLoggingSystem:
         # Check that context is either None or Token.MISSING (both indicate no value set)
         request_id_after = request_id_context.get(None)
         user_id_after = user_id_context.get(None)
-        
+
         import contextvars
+
         assert request_id_after in (None, contextvars.Token.MISSING)
         assert user_id_after in (None, contextvars.Token.MISSING)
 
