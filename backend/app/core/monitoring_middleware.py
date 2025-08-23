@@ -9,7 +9,7 @@ import json
 import logging
 import time
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional
 
 from fastapi import FastAPI, Request, Response
@@ -177,7 +177,7 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
                 content={
                     "error": "Internal server error",
                     "request_id": request_id,
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                 },
                 headers={"X-Request-ID": request_id},
             )
@@ -387,7 +387,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
     def __init__(self, app: ASGIApp, health_check_path: str = "/health"):
         super().__init__(app)
         self.health_check_path = health_check_path
-        self.startup_time = datetime.utcnow()
+        self.startup_time = datetime.now(timezone.utc)
 
     async def dispatch(self, request: Request, call_next: Callable) -> Response:
         # Intercept health check requests
@@ -406,7 +406,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
             # Check various system components
             health_status = {
                 "status": "healthy",
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
                 "uptime_seconds": metrics_summary["uptime_seconds"],
                 "version": "1.0.0",  # Should be injected from environment
                 "checks": {
@@ -441,7 +441,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
             return JSONResponse(
                 content={
                     "status": "unhealthy",
-                    "timestamp": datetime.utcnow().isoformat(),
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
                     "error": str(e),
                 },
                 status_code=503,

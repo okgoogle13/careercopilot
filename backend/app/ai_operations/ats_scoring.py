@@ -1,8 +1,8 @@
 """
 ATS Scoring Operations
 
-Comprehensive ATS analysis system using the centralized AI configuration
-with keyword matching, semantic analysis, and formatting compliance scoring.
+Comprehensive ATS analysis system using the centralized AI configuration with
+keyword matching, semantic analysis, and formatting compliance scoring.
 """
 
 import json
@@ -104,63 +104,69 @@ class ATSScorer:
                 "recommendations."
             )
 
-            prompt = f"""Perform a comprehensive ATS analysis of the resume against the job description. Analyze keyword matching, semantic relevance, and formatting compliance.
-
-Required JSON structure:
-{{"keyword_analysis": {{"required_skills_found": [<list of required skills found in resume>],
-        "preferred_skills_found": [<list of preferred skills found in resume>],
-        "missing_required_skills": [<list of missing required skills>],
-        "missing_preferred_skills": [<list of missing preferred skills>],
-        "keyword_score": <0-100 score based on keyword matching>
-    }} ,
-    "semantic_analysis": {{"relevance_score": <0-100 score for semantic relevance>,
-        "content_alignment": <0-100 score for content alignment>,
-        "experience_match": <0-100 score for experience relevance>,
-        "semantic_score": <0-100 overall semantic score>,
-        "explanation": "<brief explanation of semantic analysis>"
-    }} ,
-    "formatting_analysis": {{"structure_score": <0-100 score for resume structure>,
-        "completeness_score": <0-100 score for section completeness>,
-        "readability_score": <0-100 score for ATS readability>,
-        "formatting_score": <0-100 overall formatting score>,
-        "missing_sections": [<list of missing important sections>]
-    }} ,
-    "overall_scoring": {{"keyword_weight": 0.45,
-        "semantic_weight": 0.35,
-        "formatting_weight": 0.20,
-        "weighted_score": <calculated weighted average>,
-        "final_score": <final ATS score 0-100>
-    }} ,
-    "recommendations": {{"high_priority": [<list of high priority improvements>],
-        "medium_priority": [<list of medium priority improvements>],
-        "low_priority": [<list of low priority improvements>]
-    }} ,
-    "keyword_placement_suggestions": [
-        {{
-            "keyword": "<missing keyword>",
-            "suggested_section": "<section to add keyword>",
-            "context_suggestion": "<how to naturally incorporate keyword>",
-            "priority": "<high/medium/low>"
-        }}
-    ],
-    "ats_compatibility": {{"parsing_likelihood": <0-100 score for ATS parsing success>,
-        "keyword_density": "<optimal/low/high>",
-        "formatting_issues": [<list of potential ATS parsing issues>],
-        "improvement_impact": "<estimated score improvement with fixes>"
-    }}
-}} {keywords_context}
-
-Resume Text:
----
-{sanitized_resume.sanitized_content}
----
-
-Job Description:
----
-{sanitized_job_desc.sanitized_content}
----
-
-Respond with ONLY the JSON object:"""
+            prompt = (
+                "Perform a comprehensive ATS analysis of the resume against the job description. "
+                "Analyze keyword matching, semantic relevance, and formatting compliance.\n\n"
+                "Required JSON structure:\n"
+                "{\n"
+                '    "keyword_analysis": {\n'
+                '        "required_skills_found": [<list of required skills found in resume>],\n'
+                '        "preferred_skills_found": [<list of preferred skills found in resume>],\n'
+                '        "missing_required_skills": [<list of missing required skills>],\n'
+                '        "missing_preferred_skills": [<list of missing preferred skills>],\n'
+                '        "keyword_score": <0-100 score based on keyword matching>\n'
+                "    },\n"
+                '    "semantic_analysis": {\n'
+                '        "relevance_score": <0-100 score for semantic relevance>,\n'
+                '        "content_alignment": <0-100 score for content alignment>,\n'
+                '        "experience_match": <0-100 score for experience relevance>,\n'
+                '        "semantic_score": <0-100 overall semantic score>,\n'
+                '        "explanation": "<brief explanation of semantic analysis>"\n'
+                "    },\n"
+                '    "formatting_analysis": {\n'
+                '        "structure_score": <0-100 score for resume structure>,\n'
+                '        "completeness_score": <0-100 score for section completeness>,\n'
+                '        "readability_score": <0-100 score for ATS readability>,\n'
+                '        "formatting_score": <0-100 overall formatting score>,\n'
+                '        "missing_sections": [<list of missing important sections>]\n'
+                "    },\n"
+                '    "overall_scoring": {\n'
+                '        "keyword_weight": 0.45,\n'
+                '        "semantic_weight": 0.35,\n'
+                '        "formatting_weight": 0.20,\n'
+                '        "weighted_score": <calculated weighted average>,\n'
+                '        "final_score": <final ATS score 0-100>\n'
+                "    },\n"
+                '    "recommendations": {\n'
+                '        "high_priority": [<list of high priority improvements>],\n'
+                '        "medium_priority": [<list of medium priority improvements>],\n'
+                '        "low_priority": [<list of low priority improvements>]\n'
+                "    },\n"
+                '    "keyword_placement_suggestions": [\n'
+                "        {\n"
+                '            "keyword": "<missing keyword>",\n'
+                '            "suggested_section": "<section to add keyword>",\n'
+                '            "context_suggestion": "<how to naturally incorporate keyword>",\n'
+                '            "priority": "<high/medium/low>"\n'
+                "        }\n"
+                "    ],\n"
+                '    "ats_compatibility": {\n'
+                '        "parsing_likelihood": <0-100 score for ATS parsing success>,\n'
+                '        "keyword_density": "<optimal/low/high>",\n'
+                '        "formatting_issues": [<list of potential ATS parsing issues>],\n'
+                '        "improvement_impact": "<estimated score improvement with fixes>"\n'
+                "    }\n"
+                f"}} {keywords_context}\n\n"
+                "Resume Text:\n"
+                "---\n"
+                f"{sanitized_resume.sanitized_content}\n"
+                "---\n\n"
+                "Job Description:\n"
+                "---\n"
+                f"{sanitized_job_desc.sanitized_content}\n"
+                "---\n\n"
+                "Respond with ONLY the JSON object:"
+            )
 
             request = AIRequest(
                 prompt=prompt,
@@ -266,11 +272,17 @@ Respond with ONLY the JSON object:"""
 
             focus_instruction = ""
             if focus_sections:
-                focus_instruction = f"\nFocus optimization on these sections: {', '.join(focus_sections)}"
+                focus_instruction = f"\\nFocus optimization on these sections: {', '.join(focus_sections)}"
 
-            system_prompt = """You are a keyword optimization specialist with expertise in ATS systems and resume enhancement. Provide specific, actionable keyword placement recommendations."""
+            system_prompt = (
+                "You are a keyword optimization specialist with expertise in ATS "
+                "systems and resume enhancement. Provide specific, actionable "
+                "keyword placement recommendations."
+            )
 
-            prompt = f"""Analyze the resume and provide targeted keyword optimization recommendations for the specified keywords.{focus_instruction}
+            prompt = f"""
+Analyze the resume and provide targeted keyword optimization recommendations for the specified keywords.\
+{focus_instruction}
 
 Required JSON structure:
 {{
@@ -292,23 +304,28 @@ Required JSON structure:
             "keyword": "keyword to add/improve",
             "target_section": "best section for placement",
             "placement_strategy": "natural/technical/achievement",
-            "example_implementation": "specific example of how to add",
+            "example_implementation":
+                "specific example of how to add",
             "context_suggestions": ["list of context options"],
             "priority": "high/medium/low",
             "impact_estimate": "estimated improvement"
         }}
     ],
     "section_improvements": {{
-        "professional_summary": ["keyword improvements for summary"],
+                "professional_summary":
+            ["keyword improvements for summary"],
         "skills_section": ["keyword improvements for skills"],
-        "experience_section": ["keyword improvements for experience"],
-        "education_section": ["keyword improvements for education"]
+        "experience_section":
+            ["keyword improvements for experience"],
+        "education_section":
+            ["keyword improvements for education"]
     }},
     "density_optimization": {{
         "current_density": "low/optimal/high",
         "recommended_changes": ["list of density adjustments"],
         "keyword_variations": {{"keyword": ["list of variations"]}},
-        "natural_integration_tips": ["tips for natural keyword usage"]
+        "natural_integration_tips":
+            ["tips for natural keyword usage"]
     }}
 }}
 
@@ -369,72 +386,75 @@ Respond with ONLY the JSON object:"""
         try:
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
 
-            system_prompt = """You are an ATS formatting expert who understands how different ATS systems parse and interpret resume formats. Provide detailed formatting compliance analysis."""
+            system_prompt = (
+                "You are an ATS formatting expert who understands how different ATS "
+                "systems parse and interpret resume formats. Provide detailed "
+                "formatting compliance analysis."
+            )
 
-            prompt = f"""Analyze the resume formatting for ATS compliance and parsing success.
-
-Required JSON structure:
-{{
-    "parsing_analysis": {{
-        "structure_clarity": <0-100 score>,
-        "section_identification": <0-100 score>,
-        "data_extraction": <0-100 score>,
-        "overall_parsability": <0-100 score>
-    }},
-    "formatting_issues": [
-        {{
-            "issue": "<specific formatting problem>",
-            "impact": "<how it affects ATS parsing>",
-            "fix_recommendation": "<how to fix it>",
-            "priority": "<high/medium/low>"
-        }}
-    ],
-    "section_analysis": {{
-        "contact_info": {{
-            "present": <true/false>,
-            "ats_friendly": <true/false>,
-            "issues": [<list of issues>]
-        }},
-        "professional_summary": {{
-            "present": <true/false>,
-            "ats_friendly": <true/false>,
-            "issues": [<list of issues>]
-        }},
-        "skills": {{
-            "present": <true/false>,
-            "ats_friendly": <true/false>,
-            "issues": [<list of issues>]
-        }},
-        "experience": {{
-            "present": <true/false>,
-            "ats_friendly": <true/false>,
-            "issues": [<list of issues>]
-        }},
-        "education": {{
-            "present": <true/false>,
-            "ats_friendly": <true/false>,
-            "issues": [<list of issues>]
-        }}
-    }},
-    "optimization_recommendations": [
-        {{
-            "category": "<formatting/structure/content>",
-            "recommendation": "<specific improvement>",
-            "implementation": "<how to implement>",
-            "impact": "<expected improvement>"
-        }}
-    ],
-    "ats_best_practices": [
-        "<list of best practices for ATS optimization>"
-    ]
-}}
-
-Resume Text:
----
-{sanitized_resume.sanitized_content}
----
-
-Respond with ONLY the JSON object:"""
+            prompt = (
+                "Analyze the provided resume for ATS formatting compliance.\n\n"
+                "Required JSON structure:\n"
+                "{\n"
+                '    "parsing_analysis": {\n'
+                '        "structure_clarity": <0-100 score>,\n'
+                '        "section_identification": <0-100 score>,\n'
+                '        "data_extraction": <0-100 score>,\n'
+                '        "overall_parsability": <0-100 score>\n'
+                "    }},\n"
+                '    "formatting_issues": [\n'
+                "        {{\n"
+                '            "issue": "<specific formatting problem>",\n'
+                '            "impact": "<how it affects ATS parsing>",\n'
+                '            "fix_recommendation": "<how to fix it>",\n'
+                '            "priority": "<high/medium/low>"\n'
+                "        }}\n"
+                "    ],\n"
+                '    "section_analysis": {{\n'
+                '        "contact_info": {{\n'
+                '            "present": <true/false>,\n'
+                '            "ats_friendly": <true/false>,\n'
+                '            "issues": [<list of issues>]\n'
+                "        }},\n"
+                '        "professional_summary": {{\n'
+                '            "present": <true/false>,\n'
+                '            "ats_friendly": <true/false>,\n'
+                '            "issues": [<list of issues>]\n'
+                "        }},\n"
+                '        "skills": {{\n'
+                '            "present": <true/false>,\n'
+                '            "ats_friendly": <true/false>,\n'
+                '            "issues": [<list of issues>]\n'
+                "        }},\n"
+                '        "experience": {{\n'
+                '            "present": <true/false>,\n'
+                '            "ats_friendly": <true/false>,\n'
+                '            "issues": [<list of issues>]\n'
+                "        }},\n"
+                '        "education": {{\n'
+                '            "present": <true/false>,\n'
+                '            "ats_friendly": <true/false>,\n'
+                '            "issues": [<list of issues>]\n'
+                "        }}\n"
+                "    }},\n"
+                '    "optimization_recommendations": [\n'
+                "        {{\n"
+                '            "category": "<formatting/structure/content>",\n'
+                '            "recommendation": "<specific improvement>",\n'
+                '            "implementation": "<how to implement>",\n'
+                '            "impact": "<expected improvement>"\n'
+                "        }}\n"
+                "    ],\n"
+                '    "ats_best_practices": [\n'
+                '        "<list of best practices for ATS optimization>"\n'
+                "    ]\n"
+                "}\n\n"
+                "Resume Text:\n"
+                "---\n"
+                f"{sanitized_resume.sanitized_content}\n"
+                "---\n\n"
+                "Respond with ONLY the JSON object:"
+            )
 
             request = AIRequest(
                 prompt=prompt,

@@ -5,7 +5,7 @@ Provides endpoints for managing AI service configurations, monitoring
 AI operations, and administering AI-related features.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from app.core.ai_client import AIRequest, get_ai_client
@@ -55,7 +55,7 @@ async def get_ai_services_status():
         config_summary = config_manager.get_configuration_summary()
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "overall_status": (
                 "healthy" if any(provider_health.values()) else "degraded"
             ),
@@ -116,7 +116,7 @@ async def get_available_models(
                 models.append(model_config.to_dict())
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "filters": {
                 "provider": provider,
                 "model_type": model_type,
@@ -172,7 +172,7 @@ async def get_ai_services(
             services.append(service_data)
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "services": services,
             "total_count": len(services),
             "enabled_only": enabled_only,
@@ -241,7 +241,7 @@ async def get_ai_usage_metrics(
         estimated_cost = total_tokens * 0.001  # Rough estimate: $0.001 per token
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "time_window_hours": time_window_hours,
             "service_filter": service,
             "summary": {
@@ -318,7 +318,7 @@ async def test_ai_service(
         response = await ai_client.generate_text(request)
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "service_name": service_name,
             "test_successful": True,
             "response": {
@@ -332,7 +332,7 @@ async def test_ai_service(
         }
     except Exception as e:
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "service_name": service_name,
             "test_successful": False,
             "error": str(e),
@@ -377,7 +377,7 @@ async def get_ai_providers():
             providers.append(provider_info)
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "providers": providers,
             "total_configured": len([p for p in providers if p["configured"]]),
             "total_healthy": len([p for p in providers if p["healthy"]]),
@@ -403,7 +403,7 @@ async def get_ai_configuration(current_user: str = Depends(get_current_user)):
         config_manager = get_ai_config()
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "configuration": config_manager.get_configuration_summary(),
             "models": {
                 name: model.to_dict() for name, model in config_manager.models.items()
@@ -442,7 +442,7 @@ async def reload_ai_configuration(current_user: str = Depends(get_current_user))
         setup_ai_client(config_manager)
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "message": "AI configuration reloaded successfully",
             "summary": config_manager.get_configuration_summary(),
         }
@@ -465,7 +465,7 @@ async def validate_ai_configuration(current_user: str = Depends(get_current_user
         validation_results = config_manager.validate_configuration()
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "validation": validation_results,
             "is_valid": len(validation_results["errors"]) == 0,
             "has_warnings": len(validation_results["warnings"]) > 0,
@@ -501,7 +501,7 @@ async def enable_ai_service(
         service_config.enabled = True
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "service_name": service_name,
             "enabled": True,
             "message": f"Service '{service_name}' has been enabled",
@@ -533,7 +533,7 @@ async def disable_ai_service(
         service_config.enabled = False
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "service_name": service_name,
             "enabled": False,
             "message": f"Service '{service_name}' has been disabled",
@@ -611,7 +611,7 @@ async def get_cost_analysis(
                     total_estimated_cost += service_cost
 
         return {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "analysis_period_days": days,
             "total_estimated_cost_usd": round(total_estimated_cost, 4),
             "total_tokens_used": total_tokens,
