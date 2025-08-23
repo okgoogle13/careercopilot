@@ -72,14 +72,20 @@ class ATSScorer:
         try:
             # Input validation
             if not resume_text or not isinstance(resume_text, str):
-                raise InputValidationError("Resume text is required and must be a string")
+                raise InputValidationError(
+                    "Resume text is required and must be a string"
+                )
 
             if not job_description or not isinstance(job_description, str):
-                raise InputValidationError("Job description is required and must be a string")
+                raise InputValidationError(
+                    "Job description is required and must be a string"
+                )
 
             # Sanitize inputs
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
-            sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
+            sanitized_job_desc = InputSanitizer.sanitize_text_input(
+                job_description
+            )
 
             # Include profile keywords if provided
             keywords_context = ""
@@ -89,54 +95,62 @@ class ATSScorer:
                     for kw in profile_keywords
                 ]
                 keywords_context = (
-                    f"\n\nAdditional Profile Keywords: {', '.join(sanitized_keywords)}"
+                    "\n\nAdditional Profile Keywords: "
+                    f"{', '.join(sanitized_keywords)}"
                 )
 
-            system_prompt = """You are an expert ATS (Applicant Tracking System) analyst with deep knowledge of resume parsing, keyword optimization, and hiring manager preferences. Provide comprehensive scoring and actionable recommendations."""
+            system_prompt = (
+                "You are an expert ATS (Applicant Tracking System) analyst with deep "
+                "knowledge of resume parsing, keyword optimization, and hiring "
+                "manager preferences. Provide comprehensive scoring and actionable "
+                "recommendations."
+            )
 
             prompt = f"""Perform a comprehensive ATS analysis of the resume against the job description. Analyze keyword matching, semantic relevance, and formatting compliance.
 
 Required JSON structure:
-{"keyword_analysis": {"required_skills_found": [<list of required skills found in resume>],
+{{"keyword_analysis": {{"required_skills_found": [<list of required skills found in resume>],
         "preferred_skills_found": [<list of preferred skills found in resume>],
         "missing_required_skills": [<list of missing required skills>],
         "missing_preferred_skills": [<list of missing preferred skills>],
         "keyword_score": <0-100 score based on keyword matching>
-    } ,
-    "semantic_analysis": {"relevance_score": <0-100 score for semantic relevance>,
+    }} ,
+    "semantic_analysis": {{"relevance_score": <0-100 score for semantic relevance>,
         "content_alignment": <0-100 score for content alignment>,
         "experience_match": <0-100 score for experience relevance>,
         "semantic_score": <0-100 overall semantic score>,
         "explanation": "<brief explanation of semantic analysis>"
-    } ,
-    "formatting_analysis": {"structure_score": <0-100 score for resume structure>,
+    }} ,
+    "formatting_analysis": {{"structure_score": <0-100 score for resume structure>,
         "completeness_score": <0-100 score for section completeness>,
         "readability_score": <0-100 score for ATS readability>,
         "formatting_score": <0-100 overall formatting score>,
         "missing_sections": [<list of missing important sections>]
-    } ,
-    "overall_scoring": {"keyword_weight": 0.45,
+    }} ,
+    "overall_scoring": {{"keyword_weight": 0.45,
         "semantic_weight": 0.35,
         "formatting_weight": 0.20,
         "weighted_score": <calculated weighted average>,
         "final_score": <final ATS score 0-100>
-    } ,
-    "recommendations": {"high_priority": [<list of high priority improvements>],
+    }} ,
+    "recommendations": {{"high_priority": [<list of high priority improvements>],
         "medium_priority": [<list of medium priority improvements>],
         "low_priority": [<list of low priority improvements>]
-    } ,
+    }} ,
     "keyword_placement_suggestions": [
-        {"keyword": "<missing keyword>",
+        {{
+            "keyword": "<missing keyword>",
             "suggested_section": "<section to add keyword>",
             "context_suggestion": "<how to naturally incorporate keyword>",
             "priority": "<high/medium/low>"
-        }
+        }}
     ],
-    "ats_compatibility": {"parsing_likelihood": <0-100 score for ATS parsing success>,
+    "ats_compatibility": {{"parsing_likelihood": <0-100 score for ATS parsing success>,
         "keyword_density": "<optimal/low/high>",
         "formatting_issues": [<list of potential ATS parsing issues>],
         "improvement_impact": "<estimated score improvement with fixes>"
-    } } {keywords_context}
+    }}
+}} {keywords_context}
 
 Resume Text:
 ---
@@ -206,7 +220,9 @@ Respond with ONLY the JSON object:"""
                 extra={
                     "user_id": user_id,
                     "model_used": response.model_used,
-                    "final_score": parsed_result.get("overall_scoring", {}).get("final_score", 0),
+                    "final_score": parsed_result.get("overall_scoring", {}).get(
+                        "final_score", 0
+                    ),
                     "cached": response.cached,
                     "keywords_count": len(profile_keywords) if profile_keywords else 0,
                 },
@@ -246,14 +262,13 @@ Respond with ONLY the JSON object:"""
         try:
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
             sanitized_keywords = [
-                InputSanitizer.sanitize_text_input(kw).sanitized_content for kw in target_keywords
+                InputSanitizer.sanitize_text_input(kw).sanitized_content
+                for kw in target_keywords
             ]
 
             focus_instruction = ""
             if focus_sections:
-                focus_instruction = (
-                    f"\nFocus optimization on these sections: {', '.join(focus_sections)}"
-                )
+                focus_instruction = f"\nFocus optimization on these sections: {', '.join(focus_sections)}"
 
             system_prompt = """You are a keyword optimization specialist with expertise in ATS systems and resume enhancement. Provide specific, actionable keyword placement recommendations."""
 
@@ -340,7 +355,9 @@ Respond with ONLY the JSON object:"""
             )
 
     @monitor_performance("ats_formatting_analysis")
-    async def analyze_formatting_compliance(self, user_id: str, resume_text: str) -> Dict[str, Any]:
+    async def analyze_formatting_compliance(
+        self, user_id: str, resume_text: str
+    ) -> Dict[str, Any]:
         """
         Analyze resume formatting for ATS compliance.
 

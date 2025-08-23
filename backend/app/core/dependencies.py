@@ -1,9 +1,8 @@
 import firebase_admin
+from app.core.db import db
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from firebase_admin import auth, credentials
-
-from app.core.db import db
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -32,7 +31,12 @@ async def get_user_document_from_firestore(
     Fetches a user-owned document from Firestore and handles not-found errors.
     """
     uid = current_user["uid"]
-    doc_ref = db.collection("users").document(uid).collection("documents").document(document_id)
+    doc_ref = (
+        db.collection("users")
+        .document(uid)
+        .collection("documents")
+        .document(document_id)
+    )
     doc = await doc_ref.get()
     if not doc.exists:
         raise HTTPException(status_code=404, detail="Document not found")

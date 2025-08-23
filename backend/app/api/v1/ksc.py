@@ -1,15 +1,14 @@
 import uuid
 from typing import List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from google.api_core.exceptions import GoogleAPICallError, NotFound
-from google.cloud.firestore import SERVER_TIMESTAMP
-from pydantic import BaseModel, ValidationError
-
 from app.ai_operations.ksc_generator import ksc_generator
 from app.core.ai_error_handling import AIError
 from app.core.db import db
 from app.core.dependencies import get_current_user
+from fastapi import APIRouter, Depends, HTTPException, status
+from google.api_core.exceptions import GoogleAPICallError, NotFound
+from google.cloud.firestore import SERVER_TIMESTAMP
+from pydantic import BaseModel, ValidationError
 
 router = APIRouter()
 
@@ -48,7 +47,8 @@ async def generate_ksc_responses(
         profile_doc = await profile_ref.get()
         if not profile_doc.exists:
             raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="Profile variation not found."
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Profile variation not found.",
             )
         user_profile_data = profile_doc.to_dict()
 
@@ -78,7 +78,12 @@ async def generate_ksc_responses(
 
         # 4. Save the compiled text as a new document in Firestore
         doc_id = str(uuid.uuid4())
-        doc_ref = db.collection("users").document(uid).collection("documents").document(doc_id)
+        doc_ref = (
+            db.collection("users")
+            .document(uid)
+            .collection("documents")
+            .document(doc_id)
+        )
 
         new_doc_data = {
             "id": doc_id,
@@ -109,7 +114,8 @@ async def generate_ksc_responses(
         )
     except GoogleAPICallError as e:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Google Cloud API error: {e}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Google Cloud API error: {e}",
         )
     except Exception as e:
         raise HTTPException(
@@ -154,10 +160,13 @@ async def generate_single_ksc_response(
     except ValidationError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except NotFound:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User profile not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User profile not found."
+        )
     except GoogleAPICallError as e:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Google Cloud API error: {e}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Google Cloud API error: {e}",
         )
     except Exception as e:
         raise HTTPException(

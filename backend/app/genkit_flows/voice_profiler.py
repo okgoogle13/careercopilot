@@ -1,9 +1,8 @@
 import json
 
+from app.core.db import db
 from genkit import ai
 from genkit.googleai import gemini15_flash
-
-from app.core.db import db
 
 # Initialize the Gemini model
 model = gemini15_flash
@@ -57,6 +56,8 @@ async def generate_voice_profile(user_id: str) -> dict:
         return voice_profile_data
 
     except Exception as e:
-        print(f"An error occurred during voice profile generation for user {user_id}: {e}")
+        print(
+            f"An error occurred during voice profile generation for user {user_id}: {e}"
+        )
         # Re-raise the exception so the calling endpoint can handle it
         raise e

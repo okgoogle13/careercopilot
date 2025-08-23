@@ -1,11 +1,10 @@
 from datetime import datetime, timedelta
 
 import genkit
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-
 from app.core.db import db
 from app.core.secrets import get_user_secret
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
 
 
 @genkit.flow()

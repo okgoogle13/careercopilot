@@ -1,15 +1,14 @@
 import uuid
 from typing import Any, Dict, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from google.api_core.exceptions import GoogleAPICallError, NotFound
-from google.cloud.firestore import SERVER_TIMESTAMP
-from pydantic import BaseModel, ValidationError
-
 from app.ai_operations.cover_letter_generator import cover_letter_generator
 from app.core.ai_error_handling import AIError
 from app.core.db import db
 from app.core.dependencies import get_current_user
+from fastapi import APIRouter, Depends, HTTPException, status
+from google.api_core.exceptions import GoogleAPICallError, NotFound
+from google.cloud.firestore import SERVER_TIMESTAMP
+from pydantic import BaseModel, ValidationError
 
 router = APIRouter()
 
@@ -53,17 +52,24 @@ async def generate_cover_letter(
         base_profile_data = user_doc.to_dict()
 
         # Generate cover letter
-        cover_letter_result = await cover_letter_generator.generate_tailored_cover_letter(
-            user_id=uid,
-            base_profile_data=base_profile_data,
-            job_analysis_data=request.job_analysis_data,
-            voice_profile=request.voice_profile,
-            customization_preferences=request.customization_preferences,
+        cover_letter_result = (
+            await cover_letter_generator.generate_tailored_cover_letter(
+                user_id=uid,
+                base_profile_data=base_profile_data,
+                job_analysis_data=request.job_analysis_data,
+                voice_profile=request.voice_profile,
+                customization_preferences=request.customization_preferences,
+            )
         )
 
         # Save the cover letter as a document
         doc_id = str(uuid.uuid4())
-        doc_ref = db.collection("users").document(uid).collection("documents").document(doc_id)
+        doc_ref = (
+            db.collection("users")
+            .document(uid)
+            .collection("documents")
+            .document(doc_id)
+        )
 
         cover_letter_content = cover_letter_result["cover_letter"]["full_letter"]
 
@@ -74,8 +80,12 @@ async def generate_cover_letter(
             "createdAt": SERVER_TIMESTAMP,
             "originalFilename": "generated_cover_letter.txt",
             "generatedFrom": {
-                "jobTitle": request.job_analysis_data.get("job_title", "Unknown Position"),
-                "companyName": request.job_analysis_data.get("company_name", "Unknown Company"),
+                "jobTitle": request.job_analysis_data.get(
+                    "job_title", "Unknown Position"
+                ),
+                "companyName": request.job_analysis_data.get(
+                    "company_name", "Unknown Company"
+                ),
                 "voiceProfileUsed": bool(request.voice_profile),
                 "customizationApplied": bool(request.customization_preferences),
             },
@@ -91,10 +101,13 @@ async def generate_cover_letter(
     except ValidationError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except NotFound:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User profile not found.")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="User profile not found."
+        )
     except GoogleAPICallError as e:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Google Cloud API error: {e}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Google Cloud API error: {e}",
         )
     except Exception as e:
         raise HTTPException(
@@ -114,11 +127,13 @@ async def optimize_cover_letter(
         uid = user["uid"]
 
         # Optimize the cover letter
-        optimization_result = await cover_letter_generator.optimize_existing_cover_letter(
-            user_id=uid,
-            existing_cover_letter=request.existing_cover_letter,
-            job_analysis_data=request.job_analysis_data,
-            optimization_goals=request.optimization_goals,
+        optimization_result = (
+            await cover_letter_generator.optimize_existing_cover_letter(
+                user_id=uid,
+                existing_cover_letter=request.existing_cover_letter,
+                job_analysis_data=request.job_analysis_data,
+                optimization_goals=request.optimization_goals,
+            )
         )
 
         return optimization_result

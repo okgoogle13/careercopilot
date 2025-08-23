@@ -1,9 +1,8 @@
+from app.core.db import db
+from app.core.dependencies import get_current_user
 from fastapi import APIRouter, Depends, HTTPException
 from firebase_admin import auth
 from google.cloud.firestore import SERVER_TIMESTAMP
-
-from app.core.db import db
-from app.core.dependencies import get_current_user
 
 router = APIRouter()
 
