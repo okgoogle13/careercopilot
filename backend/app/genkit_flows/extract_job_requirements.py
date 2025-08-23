@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 
 from .shared import create_extraction_flow
 
+
 # Define the structured output model for job requirements
 class JobRequirements(BaseModel):
     requiredSkills: List[str] = Field(
