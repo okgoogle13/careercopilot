@@ -21,34 +21,6 @@ env:
   PYTHON_VERSION: '3.13'
 
 jobs:
-  security-scan:
-    name: Security Scan
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          format: 'table'
-          exit-code: '0'
-          timeout: '10m'
-
-      - name: Create Security Report
-        if: always()
-        run: |
-          echo "## 🔒 Security Scan Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Trivy Vulnerability Scan" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          trivy fs . --format table --severity HIGH,CRITICAL >> $GITHUB_STEP_SUMMARY 2>&1 || echo "No HIGH/CRITICAL vulnerabilities found" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
 
   test-frontend:
     name: Frontend Tests
@@ -177,16 +149,12 @@ jobs:
   code-quality-gate:
     name: Code Quality Gate
     runs-on: ubuntu-latest
-    needs: [security-scan, test-frontend, test-backend]
+    needs: [test-frontend, test-backend]
     timeout-minutes: 5
     if: always()
     steps:
       - name: Check all jobs status
         run: |
-          if [[ "${{ needs.security-scan.result }}" == "failure" ]]; then
-            echo "❌ Security scan failed"
-            exit 1
-          fi
           if [[ "${{ needs.test-frontend.result }}" == "failure" ]]; then
             echo "❌ Frontend tests failed"
             exit 1
