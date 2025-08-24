@@ -558,6 +558,132 @@ class PersonalAutomationCLI:
             
             console.print(cq_table)
 
+    async def generate_email_template(self, template_type: str, job_title: str = None,
+                                    company_name: str = None, contact_name: str = None) -> None:
+        """Generate email template with rich formatting"""
+        console.print(f"\n[bold blue]✉️ Email Template Generation[/bold blue]")
+        console.print(f"Template Type: {template_type.replace('_', ' ').title()}")
+        
+        if job_title:
+            console.print(f"Job Title: {job_title}")
+        if company_name:
+            console.print(f"Company: {company_name}")
+        if contact_name:
+            console.print(f"Contact: {contact_name}")
+        
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Generating email template...", total=1)
+            
+            # Generate template
+            result = await self.workflow.generate_email_template(
+                template_type, job_title, company_name, contact_name
+            )
+            progress.advance(task)
+        
+        if not result.get("success"):
+            console.print(f"[bold red]❌ Template generation failed: {result.get('error', 'Unknown error')}[/bold red]")
+            return
+        
+        # Display template
+        template_panel = Panel(
+            f"[bold green]✉️ {template_type.replace('_', ' ').title()} Email Template[/bold green]\n\n"
+            f"📧 Generated at: {result.get('generated_at', 'N/A')}\n",
+            title="Template Details"
+        )
+        console.print(template_panel)
+        
+        # Subject line
+        if result.get("subject_line"):
+            console.print(f"\n[bold blue]📧 Subject Line:[/bold blue]")
+            console.print(Panel(result["subject_line"], style="blue"))
+        
+        # Email content
+        console.print(f"\n[bold blue]📝 Email Content:[/bold blue]")
+        console.print(Panel(result.get("content", ""), style="green"))
+        
+        # Placeholders
+        placeholders = result.get("placeholders", {})
+        if placeholders:
+            console.print(f"\n[bold blue]🔧 Placeholders:[/bold blue]")
+            placeholder_table = Table(title="Template Placeholders")
+            placeholder_table.add_column("Placeholder", style="cyan")
+            placeholder_table.add_column("Description", style="yellow")
+            
+            for placeholder, description in placeholders.items():
+                placeholder_table.add_row(placeholder, description)
+            
+            console.print(placeholder_table)
+        
+        # Customization tips
+        tips = result.get("customization_tips", [])
+        if tips:
+            console.print(f"\n[bold blue]💡 Customization Tips:[/bold blue]")
+            for i, tip in enumerate(tips, 1):
+                console.print(f"  {i}. {tip}")
+
+    async def generate_cover_letter_template(self, job_title: str = None, 
+                                           company_name: str = None) -> None:
+        """Generate cover letter template with rich formatting"""
+        console.print(f"\n[bold blue]📄 Cover Letter Template Generation[/bold blue]")
+        
+        if job_title:
+            console.print(f"Job Title: {job_title}")
+        if company_name:
+            console.print(f"Company: {company_name}")
+        
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console
+        ) as progress:
+            task = progress.add_task("Generating cover letter template...", total=1)
+            
+            # Generate template
+            result = await self.workflow.generate_cover_letter_template(
+                job_title, company_name
+            )
+            progress.advance(task)
+        
+        if not result.get("success"):
+            console.print(f"[bold red]❌ Template generation failed: {result.get('error', 'Unknown error')}[/bold red]")
+            return
+        
+        # Display template
+        template_panel = Panel(
+            f"[bold green]📄 Cover Letter Template[/bold green]\n\n"
+            f"📧 Generated at: {result.get('generated_at', 'N/A')}\n",
+            title="Template Details"
+        )
+        console.print(template_panel)
+        
+        # Cover letter content
+        console.print(f"\n[bold blue]📝 Cover Letter Content:[/bold blue]")
+        console.print(Panel(result.get("content", ""), style="green"))
+        
+        # Placeholders
+        placeholders = result.get("placeholders", {})
+        if placeholders:
+            console.print(f"\n[bold blue]🔧 Placeholders:[/bold blue]")
+            placeholder_table = Table(title="Template Placeholders")
+            placeholder_table.add_column("Placeholder", style="cyan")
+            placeholder_table.add_column("Description", style="yellow")
+            
+            for placeholder, description in placeholders.items():
+                placeholder_table.add_row(placeholder, description)
+            
+            console.print(placeholder_table)
+        
+        # Customization tips
+        tips = result.get("customization_tips", [])
+        if tips:
+            console.print(f"\n[bold blue]💡 Customization Tips:[/bold blue]")
+            for i, tip in enumerate(tips, 1):
+                console.print(f"  {i}. {tip}")
+
 def create_parser() -> argparse.ArgumentParser:
     """Create argument parser for CLI"""
     parser = argparse.ArgumentParser(
@@ -572,6 +698,9 @@ Examples:
   python personal_automation.py salary "Social Worker" "Community Care" # Salary research
   python personal_automation.py skills           # Analyze skills trends
   python personal_automation.py interview <url>  # Interview preparation
+  python personal_automation.py template email application --company "ABC Corp" --job-title "Social Worker"
+  python personal_automation.py template email networking --contact "Jane Smith"
+  python personal_automation.py template cover --company "XYZ Services" --job-title "Case Manager"
         """
     )
     
@@ -647,6 +776,50 @@ Examples:
         help="URL of the job to prepare for"
     )
     
+    # Template commands
+    template_parser = subparsers.add_parser(
+        "template",
+        help="Generate email and document templates"
+    )
+    template_subparsers = template_parser.add_subparsers(dest="template_command", help="Template types")
+    
+    # Email template command
+    email_parser = template_subparsers.add_parser(
+        "email",
+        help="Generate email template (application, follow_up, networking, thank_you, reference)"
+    )
+    email_parser.add_argument(
+        "template_type",
+        choices=["application", "follow_up", "networking", "thank_you", "reference"],
+        help="Type of email template to generate"
+    )
+    email_parser.add_argument(
+        "--job-title",
+        help="Job title (optional)"
+    )
+    email_parser.add_argument(
+        "--company",
+        help="Company name (optional)"
+    )
+    email_parser.add_argument(
+        "--contact",
+        help="Contact person name (optional)"
+    )
+    
+    # Cover letter template command
+    cover_parser = template_subparsers.add_parser(
+        "cover",
+        help="Generate cover letter template"
+    )
+    cover_parser.add_argument(
+        "--job-title",
+        help="Job title (optional)"
+    )
+    cover_parser.add_argument(
+        "--company", 
+        help="Company name (optional)"
+    )
+    
     return parser
 
 async def main():
@@ -710,6 +883,28 @@ async def main():
                 return
             
             await cli.interview_prep(args.job_url)
+        
+        elif args.command == "template":
+            if not hasattr(args, 'template_command') or not args.template_command:
+                console.print("[bold red]❌ Template subcommand is required[/bold red]")
+                console.print("[dim]Available: template email <type> [options], template cover [options][/dim]")
+                return
+            
+            if args.template_command == "email":
+                await cli.generate_email_template(
+                    args.template_type,
+                    getattr(args, 'job_title', None),
+                    getattr(args, 'company', None),
+                    getattr(args, 'contact', None)
+                )
+            elif args.template_command == "cover":
+                await cli.generate_cover_letter_template(
+                    getattr(args, 'job_title', None),
+                    getattr(args, 'company', None)
+                )
+            else:
+                console.print(f"[bold red]❌ Unknown template command: {args.template_command}[/bold red]")
+                console.print("[dim]Available: email, cover[/dim]")
         
         else:
             console.print(f"[bold red]❌ Unknown command: {args.command}[/bold red]")
