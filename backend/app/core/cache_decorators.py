@@ -8,7 +8,7 @@ import functools
 import logging
 from typing import Any, Callable, Dict, List, Optional
 
-from .cache import get_ai_cache
+from .personal_cache import get_ai_cache
 
 logger = logging.getLogger(__name__)
 
