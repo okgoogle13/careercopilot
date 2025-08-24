@@ -9,7 +9,7 @@ import logging
 import os
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Dict, Any, Optional, Union
+from typing import Dict, Any, Optional, Union, List
 
 logger = logging.getLogger(__name__)
 
@@ -23,11 +23,13 @@ class PersonalCache:
         # Create cache directory if it doesn't exist
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         
-        # Ensure subdirectories exist
+        # Ensure subdirectories exist - unified categories
         (self.cache_dir / "profiles").mkdir(exist_ok=True)
         (self.cache_dir / "research").mkdir(exist_ok=True)
         (self.cache_dir / "jobs").mkdir(exist_ok=True)
         (self.cache_dir / "ai_responses").mkdir(exist_ok=True)
+        (self.cache_dir / "ai_operations").mkdir(exist_ok=True)  # Enhanced for AI operations
+        (self.cache_dir / "general").mkdir(exist_ok=True)        # For generic caching
         
         logger.info(f"PersonalCache initialized with directory: {self.cache_dir}")
     
@@ -247,6 +249,127 @@ class PersonalCache:
         """Get cached job opportunity"""
         return await self.get(f"job_{job_id}", "jobs")
 
+    # Enhanced AI operations methods (absorbing AICache functionality)
+    
+    async def cache_ai_operation(self, operation_type: str, input_data: Dict[str, Any], 
+                                result: Dict[str, Any], user_id: str = "default",
+                                ttl: timedelta = timedelta(hours=72)) -> bool:
+        """
+        Cache AI operation result with enhanced key generation
+        Absorbs AICache functionality for AI operation caching
+        """
+        # Generate deterministic key from operation inputs
+        input_str = json.dumps(input_data, sort_keys=True, default=str)
+        input_hash = hashlib.md5(input_str.encode()).hexdigest()[:16]
+        cache_key = f"{operation_type}_{user_id}_{input_hash}"
+        
+        # Store with metadata for better tracking
+        cache_data = {
+            "result": result,
+            "operation_type": operation_type,
+            "input_hash": input_hash,
+            "user_id": user_id,
+            "cached_at": datetime.now().isoformat()
+        }
+        
+        return await self.set(cache_key, cache_data, ttl, "ai_operations")
+    
+    async def get_ai_operation(self, operation_type: str, input_data: Dict[str, Any], 
+                              user_id: str = "default") -> Optional[Dict[str, Any]]:
+        """
+        Get cached AI operation result
+        Absorbs AICache functionality for AI operation retrieval
+        """
+        # Generate same key as cache_ai_operation
+        input_str = json.dumps(input_data, sort_keys=True, default=str)
+        input_hash = hashlib.md5(input_str.encode()).hexdigest()[:16]
+        cache_key = f"{operation_type}_{user_id}_{input_hash}"
+        
+        cached_data = await self.get(cache_key, "ai_operations")
+        
+        # Return just the result part, maintaining backwards compatibility
+        if cached_data and "result" in cached_data:
+            return cached_data["result"]
+        return cached_data
+    
+    async def clear_ai_operations(self, operation_type: Optional[str] = None) -> int:
+        """
+        Clear AI operations cache, optionally filtered by operation type
+        Enhanced cleanup functionality absorbing AICache patterns
+        """
+        ai_ops_dir = self.cache_dir / "ai_operations" 
+        if not ai_ops_dir.exists():
+            return 0
+            
+        cleared_count = 0
+        
+        for cache_file in ai_ops_dir.glob("*.json"):
+            try:
+                if operation_type:
+                    # Only clear files matching the operation type
+                    if not cache_file.name.startswith(f"{operation_type}_"):
+                        continue
+                
+                os.remove(cache_file)
+                cleared_count += 1
+                
+            except Exception as e:
+                logger.error(f"Error clearing AI operation cache file {cache_file}: {e}")
+        
+        logger.info(f"Cleared {cleared_count} AI operation cache entries")
+        return cleared_count
+    
+    # AICache compatibility methods for backwards compatibility with cache decorators
+    
+    async def get(self, operation_type: str, user_id: str, input_data: Any, **kwargs) -> Optional[Any]:
+        """
+        AICache-compatible get method for cache decorators
+        Maps to enhanced AI operation caching
+        """
+        return await self.get_ai_operation(operation_type, input_data, user_id)
+    
+    async def set(self, operation_type: str, user_id: str, input_data: Any, result: Any, **kwargs) -> bool:
+        """
+        AICache-compatible set method for cache decorators  
+        Maps to enhanced AI operation caching
+        """
+        return await self.cache_ai_operation(operation_type, input_data, result, user_id)
+    
+    async def invalidate_user_cache(self, user_id: str, operation_types: Optional[List[str]] = None) -> int:
+        """
+        AICache-compatible invalidation method
+        Clear cache entries for specific user and operation types
+        """
+        cleared_count = 0
+        ai_ops_dir = self.cache_dir / "ai_operations"
+        
+        if not ai_ops_dir.exists():
+            return 0
+        
+        for cache_file in ai_ops_dir.glob("*.json"):
+            try:
+                # Check if file matches user_id pattern
+                if f"_{user_id}_" not in cache_file.name:
+                    continue
+                    
+                # If operation_types specified, filter by those
+                if operation_types:
+                    matches_operation = any(
+                        cache_file.name.startswith(f"{op_type}_") 
+                        for op_type in operation_types
+                    )
+                    if not matches_operation:
+                        continue
+                
+                os.remove(cache_file)
+                cleared_count += 1
+                
+            except Exception as e:
+                logger.error(f"Error clearing user cache file {cache_file}: {e}")
+        
+        logger.info(f"Invalidated {cleared_count} cache entries for user {user_id}")
+        return cleared_count
+
 # Global instance
 _personal_cache: Optional[PersonalCache] = None
 
@@ -256,3 +379,27 @@ def get_personal_cache(cache_dir: str = "data/cache") -> PersonalCache:
     if _personal_cache is None:
         _personal_cache = PersonalCache(cache_dir)
     return _personal_cache
+
+
+# Unified cache interface - backwards compatibility for AICache usage
+def get_ai_cache() -> PersonalCache:
+    """
+    Get AI cache instance - now unified with PersonalCache
+    This provides backwards compatibility for existing AICache usage
+    """
+    return get_personal_cache()
+
+
+# Additional PersonalCache methods to absorb AICache functionality
+class PersonalCacheExtensions:
+    """Extension methods for PersonalCache to absorb AICache functionality"""
+    
+    @staticmethod
+    def generate_operation_key(operation_type: str, input_data: Dict[str, Any], user_id: str = "default") -> str:
+        """
+        Generate cache key for AI operations (absorbs AICache key generation)
+        """
+        # Create deterministic hash from operation inputs
+        input_str = json.dumps(input_data, sort_keys=True, default=str)
+        input_hash = hashlib.md5(input_str.encode()).hexdigest()[:16]
+        return f"{operation_type}_{user_id}_{input_hash}"

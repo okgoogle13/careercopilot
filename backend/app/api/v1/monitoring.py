@@ -8,7 +8,7 @@ and monitoring data for dashboards and alerting systems.
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-from app.core.cache import get_ai_cache
+from app.core.personal_cache import get_ai_cache
 from app.core.cache_middleware import cache_health_check
 from app.core.dependencies import get_current_user  # For admin-only endpoints
 from app.core.monitoring import get_metrics_collector
