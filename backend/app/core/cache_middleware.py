@@ -14,7 +14,7 @@ from typing import Any, Dict, Optional
 from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from .cache import AICache, get_ai_cache
+from .personal_cache import get_ai_cache
 
 logger = logging.getLogger(__name__)
 
