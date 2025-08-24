@@ -13,31 +13,9 @@ from app.core.ai_client import get_ai_client
 from app.core.cache import get_ai_cache
 from app.core.personal_cache import get_personal_cache
 from app.core.base_agent import BaseAgent, PersonalizedAgent
+from app.core.config import get_personal_config
 
 logger = logging.getLogger(__name__)
-
-@dataclass
-class PersonalCareerConfig:
-    """Personal configuration for CareerCopilot"""
-    name: str = "Your Name"
-    email: str = "nishantdougall@gmail.com"
-    location: str = "Northcote, VIC, Australia"
-    career_transition_from: str = "Finance"
-    career_transition_to: str = "Social Work/Community Services"
-    target_roles: List[str] = field(default_factory=lambda: [
-        "Social Worker", "Case Manager", "Community Services Worker"
-    ])
-    salary_range: Dict[str, int] = field(default_factory=lambda: {
-        "min": 60000, "max": 85000, "currency": "AUD"
-    })
-    transferable_skills: List[str] = field(default_factory=lambda: [
-        "Financial Analysis", "Data Analysis", "Client Relationship Management"
-    ])
-    personal_story: Dict[str, str] = field(default_factory=lambda: {
-        "background": "Finance professional transitioning to social work",
-        "motivation": "Direct community impact and social justice"
-    })
-    email_notifications: bool = True
 
 class DocumentGenerationAgent(PersonalizedAgent):
     """Agent for generating resumes and cover letters"""
@@ -242,7 +220,7 @@ class PersonalCareerWorkflow:
     """
     
     def __init__(self):
-        self.config = PersonalCareerConfig()
+        self.config = get_personal_config()
         self.cache = get_personal_cache()  # Use PersonalCache instead
         
         # Initialize all agents
