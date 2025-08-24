@@ -11,7 +11,7 @@ import logging
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
-from .cache import get_ai_cache
+from .personal_cache import get_ai_cache
 from .cache_decorators import CacheContext, cached_ai_operation
 
 logger = logging.getLogger(__name__)
