@@ -13,6 +13,7 @@ from typing import Dict, Any, Optional, List
 
 from app.core.ai_client import get_ai_client
 from app.core.personal_cache import get_personal_cache
+from app.services.ai_prompt_builder import get_ai_prompt_builder, PromptType, PromptContext
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,7 @@ class BaseAgent(ABC):
         self.agent_name = agent_name
         self.ai_client = get_ai_client()
         self.cache = get_personal_cache()
+        self.ai_prompt_builder = get_ai_prompt_builder()
         self.logger = logging.getLogger(f"agents.{agent_name}")
         
         # Default cache TTLs
@@ -156,8 +158,8 @@ class BaseAgent(ABC):
         }
     
     async def generate_ai_response_with_cache(self, prompt: str, context: Optional[Dict] = None,
-                                            model: str = "default", temperature: float = 0.7) -> str:
-        """Generate AI response with caching support"""
+                                            model: str = "gemini-1.5-pro", temperature: float = 0.7) -> str:
+        """Generate AI response with caching support using unified AIPromptBuilder"""
         
         # Generate cache key
         prompt_hash = self._generate_prompt_hash(prompt, context)
@@ -169,8 +171,15 @@ class BaseAgent(ABC):
             return cached_response.get("response", "")
         
         try:
-            # Generate new response (simplified - in real implementation would use AI client)
-            response = f"AI response to: {prompt[:100]}..." + (f" with context: {str(context)[:50]}..." if context else "")
+            # Use unified AI prompt builder with generic prompt type
+            prompt_context = PromptContext(custom_data=context) if context else None
+            
+            response = await self.ai_prompt_builder.generate_ai_response(
+                PromptType.GENERIC, 
+                prompt, 
+                prompt_context,
+                model=model
+            )
             
             # Cache the response
             cache_data = {
@@ -205,6 +214,7 @@ class BaseAgent(ABC):
         {json.dumps(schema, indent=2)}
         """
         
+        # Use unified AI prompt builder for structured responses
         response = await self.generate_ai_response_with_cache(structured_prompt, context)
         
         try:
