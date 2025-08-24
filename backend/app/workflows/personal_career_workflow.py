@@ -12,6 +12,7 @@ from app.core.config import get_personal_config
 from app.core.cache_decorators import cached_ai_operation
 from app.services.web_search import web_search
 from app.services.ai_prompt_builder import get_ai_prompt_builder, PromptType, PromptContext
+from app.services.template_service import get_template_service, TemplateContext, TemplateType
 
 
 class PersonalCareerWorkflow:
@@ -20,10 +21,11 @@ class PersonalCareerWorkflow:
     """
 
     def __init__(self):
-        """Initializes the workflow with personal configuration and unified AI prompt builder."""
+        """Initializes the workflow with personal configuration, AI prompt builder, and template service."""
         self.config = get_personal_config()
         self.ai_client = get_ai_client()
         self.ai_prompt_builder = get_ai_prompt_builder()
+        self.template_service = get_template_service()
         self.cached_profile = None  # Placeholder for profile data
 
 
@@ -218,24 +220,71 @@ class PersonalCareerWorkflow:
 
     async def apply_to_job(self, job_url: str) -> Dict[str, Any]:
         """
-        Complete application process for a specific job - simplified without agents
+        Complete application process for a specific job with template generation
         """
         try:
-            # Mock company research 
+            # 1. Company research 
             company_research = await self.quick_company_research(job_url)
             
             if not company_research.get("success"):
                 return {"success": False, "error": "Company research failed"}
             
-            # Mock application preparation
+            # 2. Extract job details
             job_details = company_research.get("job_details", {})
+            job_title = job_details.get("title", "Unknown Role")
+            company_name = job_details.get("company", "Unknown Company")
+            job_description = job_details.get("description", "")
+            
+            # 3. Generate complete application materials package
+            application_materials = await self.template_service.generate_application_materials(
+                job_title=job_title,
+                company_name=company_name,
+                job_description=job_description,
+                company_research=company_research.get("talking_points")
+            )
+            
+            # 4. Generate interview prep materials
+            interview_materials = await self.generate_interview_prep(job_url)
             
             return {
                 "success": True,
-                "job_title": job_details.get("title", "Unknown Role"),
-                "company": job_details.get("company", "Unknown Company"),
-                "materials_generated": True,
+                "job_title": job_title,
+                "company": company_name,
+                "job_url": job_url,
+                
+                # Generated application materials
+                "application_materials": {
+                    "email_application": {
+                        "subject": getattr(application_materials.get("email_application"), "subject_line", None),
+                        "content": getattr(application_materials.get("email_application"), "content", ""),
+                        "placeholders": getattr(application_materials.get("email_application"), "placeholders", {})
+                    },
+                    "cover_letter": {
+                        "content": getattr(application_materials.get("cover_letter"), "content", ""),
+                        "placeholders": getattr(application_materials.get("cover_letter"), "placeholders", {})
+                    },
+                    "follow_up_email": {
+                        "subject": getattr(application_materials.get("follow_up_email"), "subject_line", None),
+                        "content": getattr(application_materials.get("follow_up_email"), "content", ""),
+                        "placeholders": getattr(application_materials.get("follow_up_email"), "placeholders", {})
+                    },
+                    "interview_thank_you": {
+                        "subject": getattr(application_materials.get("interview_thank_you"), "subject_line", None),
+                        "content": getattr(application_materials.get("interview_thank_you"), "content", ""),
+                        "placeholders": getattr(application_materials.get("interview_thank_you"), "placeholders", {})
+                    }
+                },
+                
+                # Interview preparation
+                "interview_prep": interview_materials,
+                
+                # Company research
+                "company_research": company_research.get("talking_points", ""),
+                
+                # Status flags
+                "materials_generated": len(application_materials) > 0,
                 "research_completed": True,
+                "interview_prep_completed": interview_materials.get("success", False),
                 "application_tracked": True
             }
             
@@ -346,6 +395,87 @@ class PersonalCareerWorkflow:
                         "Consider networking opportunities in social work field"
                     ]
                 }
+            }
+            
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
+    async def generate_email_template(self, template_type: str, job_title: str = None, 
+                                    company_name: str = None, contact_name: str = None) -> Dict[str, Any]:
+        """
+        Generate specific email template for job applications
+        
+        Args:
+            template_type: Type of email (application, follow_up, networking, thank_you, reference)
+            job_title: Job title if applicable
+            company_name: Company name if applicable
+            contact_name: Contact person name if applicable
+            
+        Returns:
+            Generated email template with subject, content, and placeholders
+        """
+        try:
+            # Map string types to enum values
+            template_map = {
+                "application": TemplateType.EMAIL_APPLICATION,
+                "follow_up": TemplateType.FOLLOW_UP_EMAIL,
+                "networking": TemplateType.NETWORKING_EMAIL,
+                "thank_you": TemplateType.INTERVIEW_THANK_YOU,
+                "reference": TemplateType.REFERENCE_REQUEST
+            }
+            
+            template_enum = template_map.get(template_type.lower())
+            if not template_enum:
+                return {"success": False, "error": f"Unknown template type: {template_type}"}
+            
+            # Create context
+            context = TemplateContext(
+                company_name=company_name,
+                job_title=job_title,
+                contact_name=contact_name
+            )
+            
+            # Generate template
+            template = await self.template_service.generate_template(template_enum, context)
+            
+            return {
+                "success": True,
+                "template_type": template_type,
+                "subject_line": template.subject_line,
+                "content": template.content,
+                "placeholders": template.placeholders,
+                "customization_tips": template.customization_tips,
+                "generated_at": template.generated_at
+            }
+            
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
+    async def generate_cover_letter_template(self, job_title: str = None, 
+                                           company_name: str = None) -> Dict[str, Any]:
+        """
+        Generate cover letter template with career transition context
+        
+        Returns:
+            Generated cover letter template with placeholders and tips
+        """
+        try:
+            context = TemplateContext(
+                company_name=company_name,
+                job_title=job_title
+            )
+            
+            template = await self.template_service.generate_template(
+                TemplateType.COVER_LETTER, context
+            )
+            
+            return {
+                "success": True,
+                "template_type": "cover_letter",
+                "content": template.content,
+                "placeholders": template.placeholders,
+                "customization_tips": template.customization_tips,
+                "generated_at": template.generated_at
             }
             
         except Exception as e:
