@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import toast from 'react-hot-toast';
+import { PageLayout } from '../components/layout/PageLayout';
 
 // --- Type Definitions ---
 interface KeywordPlacementSuggestion {
@@ -255,13 +256,10 @@ const AnalysisPage: React.FC = () => {
   if (loading) return <div className="p-8 text-center">Loading...</div>;
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">ATS Resume Score</h1>
-      <p className="text-center text-gray-600 mb-8">
-        Select your resume and paste a job description to get an instant ATS
-        score and actionable feedback.
-      </p>
-
+    <PageLayout
+      title="ATS Resume Score"
+      subtitle="Select your resume and paste a job description to get an instant ATS score and actionable feedback."
+    >
       <form
         onSubmit={handleAnalysis}
         className="bg-white shadow-md rounded-lg p-6 mb-8"
@@ -316,7 +314,7 @@ const AnalysisPage: React.FC = () => {
       </form>
 
       {renderResults()}
-    </div>
+    </PageLayout>
   );
 };
 

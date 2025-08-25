@@ -2,6 +2,7 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import { LoadingState, ErrorDisplay } from '../components/ui';
+import { PageLayout } from '../components/layout/PageLayout';
 
 interface ProfileVariation {
   id: string;
@@ -215,16 +216,17 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Your Profile Variations</h1>
+    <PageLayout
+      title="Your Profile Variations"
+      actions={
         <button
           onClick={openModalForCreate}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         >
           Create New Profile Variation
         </button>
-      </div>
+      }
+    >
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
           <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
@@ -302,8 +304,8 @@ const DashboardPage: React.FC = () => {
           </div>
         </div>
       )}
-      {renderContent()}e{' '}
-    </div>
+      {renderContent()}
+    </PageLayout>
   );
 };
 
