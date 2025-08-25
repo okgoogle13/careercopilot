@@ -1,3 +1,8 @@
+from functools import lru_cache
+
 from google.cloud import firestore
 
-db = firestore.Client()
+
+@lru_cache()
+def get_db():
+    return firestore.Client()

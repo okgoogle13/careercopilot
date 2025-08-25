@@ -304,10 +304,10 @@ async def _compute_additional_metrics(summary: Dict[str, Any]) -> Dict[str, Any]
 async def _check_database_health() -> Dict[str, Any]:
     """Check database connection health"""
     try:
-        from app.core.db import db
+        from app.core.db import get_db
 
         # Simple connectivity test
-        test_doc = db.collection("health_check").document("test")
+        test_doc = get_db().collection("health_check").document("test")
         await test_doc.get()
         return {
             "healthy": True,

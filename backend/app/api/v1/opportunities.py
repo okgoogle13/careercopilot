@@ -1,4 +1,4 @@
-from app.core.db import db
+from app.core.db import get_db
 from app.core.dependencies import get_current_user
 from fastapi import APIRouter, Depends, HTTPException
 
@@ -11,7 +11,7 @@ async def list_opportunities(uid: str = Depends(get_current_user)):
     Lists all job opportunities found for the authenticated user.
     """
     try:
-        opportunities_ref = db.collection("opportunities")
+        opportunities_ref = get_db().collection("opportunities")
         # Create a query against the collection
         query = opportunities_ref.where("user_id", "==", uid).order_by(
             "found_at", direction="DESCENDING"

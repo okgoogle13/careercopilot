@@ -198,6 +198,12 @@ class AICache:
             cache_null_results=False,
             invalidate_on_user_update=True,
         ),
+        "health_check": CacheConfig(
+            ttl_seconds=60,
+            max_entries=10,
+            cache_null_results=False,
+            invalidate_on_user_update=False,
+        ),
     }
 
     def __init__(self, backend: CacheBackend):

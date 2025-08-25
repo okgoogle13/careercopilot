@@ -3,7 +3,7 @@ from typing import List, Optional
 
 from app.ai_operations.ksc_generator import ksc_generator
 from app.core.ai_error_handling import AIError
-from app.core.db import db
+from app.core.db import get_db
 from app.core.dependencies import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, status
 from google.api_core.exceptions import GoogleAPICallError, NotFound
@@ -39,7 +39,7 @@ async def generate_ksc_responses(
         uid = user["uid"]
         # 1. Fetch the specified user profile variation
         profile_ref = (
-            db.collection("users")
+            get_db().collection("users")
             .document(uid)
             .collection("profiles")
             .document(request.profile_variation_id)
@@ -78,7 +78,7 @@ async def generate_ksc_responses(
 
         # 4. Save the compiled text as a new document in Firestore
         doc_id = str(uuid.uuid4())
-        doc_ref = db.collection("users").document(uid).collection("documents").document(doc_id)
+        doc_ref = get_db().collection("users").document(uid).collection("documents").document(doc_id)
 
         new_doc_data = {
             "id": doc_id,
@@ -130,7 +130,7 @@ async def generate_single_ksc_response(
         uid = user["uid"]
 
         # Get user's profile data (use default/main profile)
-        user_ref = db.collection("users").document(uid)
+        user_ref = get_db().collection("users").document(uid)
         user_doc = await user_ref.get()
         if not user_doc.exists:
             raise HTTPException(

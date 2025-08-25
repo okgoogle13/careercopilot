@@ -1,4 +1,4 @@
-from app.core.db import db
+from app.core.db import get_db
 from app.core.dependencies import get_current_user
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
@@ -20,7 +20,7 @@ async def save_theme_preference(
     Saves the user's preferred PDF theme to their profile.
     """
     try:
-        user_ref = db.collection("users").document(uid)
+        user_ref = get_db().collection("users").document(uid)
 
         # Use set with merge=True to create or update the preferences map
         await user_ref.set({"preferences": {"themeId": theme_data.theme_id}}, merge=True)

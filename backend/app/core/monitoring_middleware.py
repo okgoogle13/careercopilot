@@ -416,7 +416,6 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
             all_healthy = all(
                 check.get("healthy", False) for check in health_status["checks"].values()
             )
-
             if not all_healthy:
                 health_status["status"] = "degraded"
 
@@ -445,10 +444,10 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
         """Check database connectivity"""
         try:
             # Import and test Firestore connection
-            from app.core.db import db
+            from app.core.db import get_db
 
             # Simple test - get a non-existent document (should not raise error)
-            test_doc = db.collection("health_check").document("test")
+            test_doc = get_db().collection("health_check").document("test")
             await test_doc.get()
 
             return {"healthy": True, "service": "firestore"}

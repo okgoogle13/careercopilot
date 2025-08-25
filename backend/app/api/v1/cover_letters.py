@@ -3,7 +3,7 @@ from typing import Any, Dict, List, Optional
 
 from app.ai_operations.cover_letter_generator import cover_letter_generator
 from app.core.ai_error_handling import AIError
-from app.core.db import db
+from app.core.db import get_db
 from app.core.dependencies import get_current_user
 from fastapi import APIRouter, Depends, HTTPException, status
 from google.api_core.exceptions import GoogleAPICallError, NotFound
@@ -42,7 +42,7 @@ async def generate_cover_letter(
         uid = user["uid"]
 
         # Get user's profile data
-        user_ref = db.collection("users").document(uid)
+        user_ref = get_db().collection("users").document(uid)
         user_doc = await user_ref.get()
         if not user_doc.exists:
             raise HTTPException(
@@ -62,7 +62,7 @@ async def generate_cover_letter(
 
         # Save the cover letter as a document
         doc_id = str(uuid.uuid4())
-        doc_ref = db.collection("users").document(uid).collection("documents").document(doc_id)
+        doc_ref = get_db().collection("users").document(uid).collection("documents").document(doc_id)
 
         cover_letter_content = cover_letter_result["cover_letter"]["full_letter"]
 
@@ -155,7 +155,7 @@ async def generate_cover_letter_templates(
         # Save templates for user reference
         templates_id = str(uuid.uuid4())
         templates_ref = (
-            db.collection("users")
+            get_db().collection("users")
             .document(uid)
             .collection("cover_letter_templates")
             .document(templates_id)

@@ -5,7 +5,7 @@ from app.ai_operations.ats_scoring import ats_scorer
 from app.ai_operations.job_analyzer import job_analyzer
 from app.ai_operations.resume_analyzer import resume_analyzer
 from app.core.ai_error_handling import AIError
-from app.core.db import db
+from app.core.db import get_db
 from app.core.dependencies import get_current_user, get_user_document_from_firestore
 from fastapi import APIRouter, Depends, HTTPException, status
 from google.api_core.exceptions import GoogleAPICallError
@@ -57,7 +57,7 @@ async def get_ats_score(
 
         # Save the analysis result for tracking
         doc_ref = (
-            db.collection("users")
+            get_db().collection("users")
             .document(user["uid"])
             .collection("documents")
             .document(document_id)
@@ -122,7 +122,7 @@ async def analyze_resume(
 
         # Save the analysis result
         doc_ref = (
-            db.collection("users")
+            get_db().collection("users")
             .document(user["uid"])
             .collection("documents")
             .document(document_id)
@@ -175,7 +175,7 @@ async def analyze_job_description(
         # Save the job analysis for future reference
         analysis_id = str(uuid.uuid4())
         analysis_ref = (
-            db.collection("users")
+            get_db().collection("users")
             .document(user["uid"])
             .collection("job_analyses")
             .document(analysis_id)
