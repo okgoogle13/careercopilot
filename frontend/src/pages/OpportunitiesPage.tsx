@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { User } from 'firebase/auth';
+import { useAuthStatus } from '../hooks/useAuthStatus';
 
 interface OpportunityType {
   id: string;
@@ -30,38 +31,40 @@ const CalendarIcon = () => (
 
 const OpportunitiesPage: React.FC = () => {
   const [opportunities, setOpportunities] = useState<OpportunityType[]>([]);
+  const { user, loading: authLoading } = useAuthStatus();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchOpportunities = async (user: User) => {
-    try {
-      setLoading(true);
-      const token = await user.getIdToken();
-      const response = await fetch('/api/v1/opportunities', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!response.ok) throw new Error('Failed to fetch opportunities');
-      const data = await response.json();
-      setOpportunities(data);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      if (user) {
-        fetchOpportunities(user);
-      } else {
+    const fetchOpportunities = async (user: User) => {
+      try {
+        setLoading(true);
+        const token = await user.getIdToken();
+        const response = await fetch('/api/v1/opportunities', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!response.ok) throw new Error('Failed to fetch opportunities');
+        const data = await response.json();
+        setOpportunities(data);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
         setLoading(false);
-        setError('You must be logged in to view this page.');
       }
-    });
-    return () => unsubscribe();
-  }, []);
+    };
+
+    if (authLoading) {
+      setLoading(true);
+      return;
+    }
+
+    if (user) {
+      fetchOpportunities(user);
+    } else {
+      setLoading(false);
+      setError('You must be logged in to view this page.');
+    }
+  }, [user, authLoading]);
 
   const renderContent = () => {
     if (loading)

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import { db } from '../firebase-config';
 import { doc, onSnapshot } from 'firebase/firestore';
 import toast from 'react-hot-toast';
@@ -13,6 +13,7 @@ import {
   LoadingState,
   Alert,
 } from '../components/ui';
+import { useAuthStatus } from '../hooks/useAuthStatus';
 
 const THEMES = [
   { id: 'professional', name: 'Professional' },
@@ -27,7 +28,7 @@ interface VoiceProfile {
 }
 
 const SettingsPage: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const { user, loading: authLoading } = useAuthStatus();
   const [integrationStatus, setIntegrationStatus] =
     useState<string>('Not Connected');
   const [selectedTheme, setSelectedTheme] = useState<string>('professional');
@@ -39,32 +40,30 @@ const SettingsPage: React.FC = () => {
   const [isScanning, setIsScanning] = useState<boolean>(false);
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribeAuth = onAuthStateChanged(auth, currentUser => {
-      if (currentUser) {
-        setUser(currentUser);
-        const userDocRef = doc(db, 'users', currentUser.uid);
-        const unsubscribeSnapshot = onSnapshot(userDocRef, docSnap => {
-          if (docSnap.exists()) {
-            const data = docSnap.data();
-            setIntegrationStatus(
-              data.integrations?.google_gmail?.connected
-                ? 'Connected'
-                : 'Not Connected'
-            );
-            setSelectedTheme(data.preferences?.themeId || 'professional');
-            setVoiceProfile(data.voice_profile || null);
-          }
-          setLoading(false);
-        });
-        return () => unsubscribeSnapshot();
-      } else {
-        setUser(null);
+    if (authLoading) {
+      setLoading(true);
+      return;
+    }
+    if (user) {
+      const userDocRef = doc(db, 'users', user.uid);
+      const unsubscribeSnapshot = onSnapshot(userDocRef, docSnap => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          setIntegrationStatus(
+            data.integrations?.google_gmail?.connected
+              ? 'Connected'
+              : 'Not Connected'
+          );
+          setSelectedTheme(data.preferences?.themeId || 'professional');
+          setVoiceProfile(data.voice_profile || null);
+        }
         setLoading(false);
-      }
-    });
-    return () => unsubscribeAuth();
-  }, []);
+      });
+      return () => unsubscribeSnapshot();
+    } else {
+      setLoading(false);
+    }
+  }, [user, authLoading]);
 
   const handleConnect = async () => {
     if (!user) return;
