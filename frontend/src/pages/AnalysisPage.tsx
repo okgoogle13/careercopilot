@@ -42,7 +42,7 @@ const AnalysisPage: React.FC = () => {
         if (data.length > 0) {
           setSelectedDocumentId(data[0].id);
         }
-      } catch {
+      } catch (error) {
         toast.error('Could not load your documents.');
       } finally {
         setLoading(false);
