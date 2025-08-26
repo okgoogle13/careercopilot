@@ -25,7 +25,7 @@ export const KeywordPlacementSuggestions: React.FC<KeywordPlacementSuggestionsPr
       <div className="space-y-4">
         {suggestions.map((suggestion, index) => (
           <div
-            key={index}
+            key={suggestion.keyword}
             className="bg-gray-50 p-4 rounded-lg border border-gray-200"
           >
             <h4 className="font-bold text-lg text-gray-900">
