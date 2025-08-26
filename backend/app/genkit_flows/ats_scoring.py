@@ -1,10 +1,13 @@
+import logging
 import os
 from typing import List, Optional
 
 import genkit
+from app.core.ai_error_handling import AIError, AIErrorType
 from dotenv import load_dotenv
 from genkit.plugins import googleai
-from pydantic import BaseModel, Field
+from google.api_core.exceptions import GoogleAPICallError
+from pydantic import BaseModel, Field, ValidationError
 
 # Import the supporting flows
 from .extract_job_requirements import JobRequirements, extractJobRequirements
@@ -16,6 +19,9 @@ load_dotenv()
 if not genkit.get_plugin("googleai"):
     genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 gemini_pro = googleai.gemini_pro
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 # --- Helper Functions for Scoring Logic ---
 
@@ -115,11 +121,19 @@ async def atsScoring(
     """
     Performs a comprehensive ATS-style analysis of a resume against a job description.
     """
-    # Step 1 & 2: Extract structured data from both inputs in parallel
-    job_reqs_future = extractJobRequirements.run(jobDescription=jobDescription)
-    resume_entities_future = extractResumeEntities.run(resumeText=resumeText)
-    job_reqs: JobRequirements = await job_reqs_future
-    resume_entities: ResumeEntities = await resume_entities_future
+    try:
+        # Step 1 & 2: Extract structured data from both inputs in parallel
+        job_reqs_future = extractJobRequirements.run(jobDescription=jobDescription)
+        resume_entities_future = extractResumeEntities.run(resumeText=resumeText)
+        job_reqs: JobRequirements = await job_reqs_future
+        resume_entities: ResumeEntities = await resume_entities_future
+    except (GoogleAPICallError, ValidationError) as e:
+        logger.error(f"Error extracting job or resume data: {e}")
+        raise AIError(
+            "Failed to extract structured data from the resume or job description.",
+            error_type=AIErrorType.INVALID_REQUEST,
+            original_error=e,
+        )
 
     # Step 3: Perform Semantic Relevance analysis
     semantic_prompt = f"""
@@ -128,15 +142,25 @@ async def atsScoring(
     Resume: "{resumeText}"
     Job Description: "{jobDescription}"
     """
-    semantic_response = await gemini_pro.generate(
-        prompt=semantic_prompt,
-        output_schema=SemanticAnalysis,
-        config=googleai.GenerationConfig(response_mime_type="application/json"),
-    )
-    semantic_analysis: SemanticAnalysis = semantic_response.output()
+    try:
+        semantic_response = await gemini_pro.generate(
+            prompt=semantic_prompt,
+            output_schema=SemanticAnalysis,
+            config=googleai.GenerationConfig(response_mime_type="application/json"),
+        )
+        semantic_analysis: SemanticAnalysis = semantic_response.output()
+    except (GoogleAPICallError, ValidationError) as e:
+        logger.error(f"Error during semantic analysis: {e}")
+        raise AIError(
+            "The AI failed to perform a semantic comparison of the documents.",
+            error_type=AIErrorType.SERVICE_UNAVAILABLE,
+            original_error=e,
+        )
 
     # Step 4: Perform Keyword Matching
-    keyword_analysis = _calculate_keyword_score(resume_entities.skills, job_reqs, profileKeywords)
+    keyword_analysis = _calculate_keyword_score(
+        resume_entities.skills, job_reqs, profileKeywords
+    )
 
     # Step 5: Perform Formatting Compliance check
     formatting_score = _calculate_formatting_score(resume_entities)
@@ -152,12 +176,17 @@ async def atsScoring(
     # Step 7: Get keyword placement suggestions if there are missing keywords
     placement_suggestions = None
     if keyword_analysis["missingKeywords"]:
-        placement_response = await suggestKeywordPlacement.run(
-            resumeText=resumeText,
-            list_of_missing_keywords=keyword_analysis["missingKeywords"],
-        )
-        if placement_response:
-            placement_suggestions = placement_response.suggestions
+        try:
+            placement_response = await suggestKeywordPlacement.run(
+                resumeText=resumeText,
+                list_of_missing_keywords=keyword_analysis["missingKeywords"],
+            )
+            if placement_response:
+                placement_suggestions = placement_response.suggestions
+        except (GoogleAPICallError, ValidationError) as e:
+            logger.warning(f"Could not generate keyword placement suggestions: {e}")
+            # Non-critical error, so we don't re-raise. The flow can continue.
+            placement_suggestions = None
 
     # Step 8: Generate actionable recommendations
     recommendations = []

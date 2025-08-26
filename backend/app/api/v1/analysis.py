@@ -4,7 +4,7 @@ from typing import Optional
 from app.ai_operations.ats_scoring import ats_scorer
 from app.ai_operations.job_analyzer import job_analyzer
 from app.ai_operations.resume_analyzer import resume_analyzer
-from app.core.ai_error_handling import AIError
+from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.db import db
 from app.core.dependencies import get_current_user, get_user_document_from_firestore
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -13,6 +13,25 @@ from google.cloud.firestore import SERVER_TIMESTAMP
 from pydantic import BaseModel, ValidationError
 
 router = APIRouter()
+
+
+def _handle_ai_error(e: AIError):
+    """Maps an AIError to an appropriate HTTPException."""
+    if e.error_type in [
+        AIErrorType.SERVICE_UNAVAILABLE,
+        AIErrorType.TIMEOUT,
+        AIErrorType.RATE_LIMIT,
+        AIErrorType.QUOTA_EXCEEDED,
+    ]:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=str(e)
+        )
+    elif e.error_type == AIErrorType.INVALID_REQUEST:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+        )
 
 
 class AtsScoreRequest(BaseModel):
@@ -75,7 +94,7 @@ async def get_ats_score(
         return analysis_result
 
     except AIError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        _handle_ai_error(e)
     except ValidationError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except GoogleAPICallError as e:
@@ -143,7 +162,7 @@ async def analyze_resume(
         return {"jobAnalysis": job_analysis, "resumeAnalysis": resume_analysis}
 
     except AIError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        _handle_ai_error(e)
     except ValidationError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except GoogleAPICallError as e:
@@ -192,7 +211,7 @@ async def analyze_job_description(
         return job_analysis
 
     except AIError as e:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+        _handle_ai_error(e)
     except ValidationError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e.errors())
     except GoogleAPICallError as e:
