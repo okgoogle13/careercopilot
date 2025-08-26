@@ -29,7 +29,7 @@ export const KeywordLists: React.FC<KeywordListsProps> = ({
         <div className="flex flex-wrap gap-2">
           {missingKeywords.map((kw, i) => (
             <span
-              key={i}
+              key={kw}
               className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
             >
               {kw}
