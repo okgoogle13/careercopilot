@@ -1,26 +1,14 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { User } from 'firebase/auth';
 import toast from 'react-hot-toast';
-
-// --- Type Definitions ---
-interface KeywordPlacementSuggestion {
-  keyword: string;
-  suggested_location: string;
-  example_sentence: string;
-}
-
-interface AtsResult {
-  overallScore: number;
-  breakdown: {
-    keywordScore: number;
-    semanticScore: number;
-    formattingScore: number;
-  };
-  matchedKeywords: string[];
-  missingKeywords: string[];
-  recommendations: string[];
-  keyword_placement_suggestions?: KeywordPlacementSuggestion[];
-}
+import { useAuthStatus, useAnalysis } from '../hooks';
+import {
+  OverallScore,
+  ScoreBreakdown,
+  Recommendations,
+  KeywordLists,
+  KeywordPlacementSuggestions,
+} from '../components/Analysis';
 
 interface DocumentType {
   id: string;
@@ -29,90 +17,58 @@ interface DocumentType {
 
 const AnalysisPage: React.FC = () => {
   // --- State ---
+  const { user, loading: authLoading } = useAuthStatus();
+  const {
+    analysisResult,
+    isAnalyzing,
+    performAnalysis,
+  } = useAnalysis();
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [selectedDocumentId, setSelectedDocumentId] = useState<string>('');
   const [jobDescription, setJobDescription] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
-  const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
-  const [analysisResult, setAnalysisResult] = useState<AtsResult | null>(null);
 
   // --- Effects ---
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      if (user) {
-        fetchDocuments(user);
-      } else {
+    const fetchDocuments = async (user: User) => {
+      try {
+        const token = await user.getIdToken();
+        const response = await fetch('/api/v1/documents', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!response.ok) throw new Error('Failed to fetch documents.');
+        const data = await response.json();
+        setDocuments(data);
+        if (data.length > 0) {
+          setSelectedDocumentId(data[0].id);
+        }
+      } catch {
+        toast.error('Could not load your documents.');
+      } finally {
         setLoading(false);
       }
-    });
-    return () => unsubscribe();
-  }, []);
+    };
 
-  const fetchDocuments = async (user: User) => {
-    try {
-      const token = await user.getIdToken();
-      const response = await fetch('/api/v1/documents', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!response.ok) throw new Error('Failed to fetch documents.');
-      const data = await response.json();
-      setDocuments(data);
-      if (data.length > 0) {
-        setSelectedDocumentId(data[0].id);
-      }
-    } catch {
-      toast.error('Could not load your documents.');
-    } finally {
+    if (authLoading) {
+      setLoading(true);
+      return;
+    }
+
+    if (user) {
+      fetchDocuments(user);
+    } else {
       setLoading(false);
     }
-  };
+  }, [user, authLoading]);
 
   // --- Handlers ---
-  const handleAnalysis = async (e: FormEvent) => {
+  const handleAnalysis = (e: FormEvent) => {
     e.preventDefault();
     if (!selectedDocumentId || !jobDescription) {
       toast.error('Please select a resume and paste a job description.');
       return;
     }
-
-    setIsAnalyzing(true);
-    setAnalysisResult(null);
-    const auth = getAuth();
-    const user = auth.currentUser;
-    if (!user) {
-      toast.error('Authentication error.');
-      setIsAnalyzing(false);
-      return;
-    }
-
-    try {
-      const token = await user.getIdToken();
-      const response = await fetch('/api/v1/analysis/ats-score', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          document_id: selectedDocumentId,
-          job_description: jobDescription,
-        }),
-      });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Analysis request failed.');
-      }
-      const result: AtsResult = await response.json();
-      setAnalysisResult(result);
-      toast.success('Analysis complete!');
-    } catch (err: unknown) {
-      toast.error(
-        `Analysis failed: ${err instanceof Error ? err.message : 'Unknown error'}`
-      );
-    } finally {
-      setIsAnalyzing(false);
-    }
+    performAnalysis(selectedDocumentId, jobDescription);
   };
 
   // --- Render Functions ---
@@ -125,129 +81,18 @@ const AnalysisPage: React.FC = () => {
         className="bg-white shadow-md rounded-lg p-6 animate-fade-in mt-8"
       >
         <h2 className="text-2xl font-bold mb-4">Analysis Results</h2>
-
-        <div className="flex justify-center mb-6">
-          <div className="relative w-48 h-48">
-            <svg className="w-full h-full" viewBox="0 0 36 36">
-              <path
-                className="text-gray-200"
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                fill="none"
-                strokeWidth="3"
-              ></path>
-              <path
-                className="text-blue-500"
-                strokeDasharray={`${analysisResult.overallScore}, 100`}
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                fill="none"
-                strokeWidth="3"
-                strokeLinecap="round"
-              ></path>
-            </svg>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-              <span className="text-4xl font-bold">
-                {analysisResult.overallScore}
-              </span>
-              <span className="block text-sm">Overall Score</span>
-            </div>
-          </div>
-        </div>
-
+        <OverallScore score={analysisResult.overallScore} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Score Breakdown</h3>
-            <ul className="space-y-2">
-              <li className="flex justify-between">
-                <span>Keyword Match:</span>{' '}
-                <strong>
-                  {analysisResult.breakdown.keywordScore.toFixed(1)}%
-                </strong>
-              </li>
-              <li className="flex justify-between">
-                <span>Semantic Relevance:</span>{' '}
-                <strong>
-                  {analysisResult.breakdown.semanticScore.toFixed(1)}%
-                </strong>
-              </li>
-              <li className="flex justify-between">
-                <span>Formatting Compliance:</span>{' '}
-                <strong>
-                  {analysisResult.breakdown.formattingScore.toFixed(1)}%
-                </strong>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Top Recommendations</h3>
-            <ul className="list-disc list-inside space-y-2 text-sm">
-              {analysisResult.recommendations.map((rec, i) => (
-                <li key={i}>{rec}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Matched Keywords</h3>
-            <div className="flex flex-wrap gap-2">
-              {analysisResult.matchedKeywords.map((kw, i) => (
-                <span
-                  key={i}
-                  className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
-                >
-                  {kw}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-3">Missing Keywords</h3>
-            <div className="flex flex-wrap gap-2">
-              {analysisResult.missingKeywords.map((kw, i) => (
-                <span
-                  key={i}
-                  className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
-                >
-                  {kw}
-                </span>
-              ))}
-            </div>
-          </div>
+          <ScoreBreakdown breakdown={analysisResult.breakdown} />
+          <Recommendations recommendations={analysisResult.recommendations} />
+          <KeywordLists
+            matchedKeywords={analysisResult.matchedKeywords}
+            missingKeywords={analysisResult.missingKeywords}
+          />
         </div>
-
-        {analysisResult.keyword_placement_suggestions &&
-          analysisResult.keyword_placement_suggestions.length > 0 && (
-            <div className="mt-8 pt-6 border-t">
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">
-                Keyword Placement Suggestions
-              </h3>
-              <div className="space-y-4">
-                {analysisResult.keyword_placement_suggestions.map(
-                  (suggestion, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-50 p-4 rounded-lg border border-gray-200"
-                    >
-                      <h4 className="font-bold text-lg text-gray-900">
-                        Keyword:{' '}
-                        <span className="bg-blue-100 text-blue-800 font-semibold px-2 py-1 rounded-md">
-                          {suggestion.keyword}
-                        </span>
-                      </h4>
-                      <p className="mt-2 text-sm text-gray-600">
-                        <span className="font-semibold">
-                          Suggested Location:
-                        </span>{' '}
-                        {suggestion.suggested_location}
-                      </p>
-                      <p className="mt-2 text-sm text-gray-800 bg-gray-100 p-2 rounded-md border-l-4 border-gray-300">
-                        <span className="font-semibold">Example:</span> "
-                        {suggestion.example_sentence}"
-                      </p>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-          )}
+        <KeywordPlacementSuggestions
+          suggestions={analysisResult.keyword_placement_suggestions || []}
+        />
       </div>
     );
   };

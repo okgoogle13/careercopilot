@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { getAuth, User } from 'firebase/auth';
 import toast from 'react-hot-toast';
 import { useUserPreferences } from '../contexts/UserPreferencesContext';
+import { useAuthStatus } from '../hooks/useAuthStatus';
 
 interface DocumentType {
   id: string;
@@ -15,38 +16,35 @@ const DocumentsPage: React.FC = () => {
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useAuthStatus();
   const userPreferences = useUserPreferences();
   const userTheme = userPreferences?.themeId || 'professional';
 
-  const fetchDocuments = async (user: User) => {
-    try {
-      setLoading(true);
-      const token = await user.getIdToken();
-      const response = await fetch('/api/v1/documents', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!response.ok) throw new Error('Failed to fetch documents');
-      const data = await response.json();
-      setDocuments(data);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, async user => {
-      if (user) {
-        await fetchDocuments(user);
-      } else {
+    const fetchDocuments = async (user: User) => {
+      try {
+        setLoading(true);
+        const token = await user.getIdToken();
+        const response = await fetch('/api/v1/documents', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (!response.ok) throw new Error('Failed to fetch documents');
+        const data = await response.json();
+        setDocuments(data);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
         setLoading(false);
-        setError('You must be logged in to view this page.');
       }
-    });
-    return () => unsubscribe();
-  }, []);
+    };
+
+    if (user) {
+      fetchDocuments(user);
+    } else {
+      setLoading(false);
+      setError('You must be logged in to view this page.');
+    }
+  }, [user]);
 
   const handleDownload = async (
     documentId: string,
