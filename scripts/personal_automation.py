@@ -99,10 +99,14 @@ class PersonalAutomationCLI:
         console.print(f"\n[bold green]📋 Starting Application Process[/bold green]")
         console.print(f"Job URL: [cyan]{job_url}[/cyan]")
         
-        # Confirm before proceeding
-        if not Confirm.ask("\nProceed with application preparation?"):
-            console.print("[yellow]Application cancelled.[/yellow]")
-            return
+        # Confirm before proceeding (interactive mode only)
+        try:
+            if not Confirm.ask("\nProceed with application preparation?"):
+                console.print("[yellow]Application cancelled.[/yellow]")
+                return
+        except EOFError:
+            # Non-interactive mode - proceed without confirmation
+            console.print("[dim]Running in non-interactive mode - proceeding with application preparation[/dim]")
         
         with Progress(
             SpinnerColumn(),
@@ -224,12 +228,16 @@ class PersonalAutomationCLI:
             
             console.print(table)
             
-            # Cache cleanup option
+            # Cache cleanup option (only in interactive mode)
             if stats.get('total_files', 0) > 0:
-                if Confirm.ask("\nClean expired cache entries?"):
-                    with console.status("[bold green]Cleaning cache..."):
-                        cleared = await self.cache.clear_expired()
-                    console.print(f"[green]✅ Cleared {cleared} expired entries[/green]")
+                try:
+                    if Confirm.ask("\nClean expired cache entries?"):
+                        with console.status("[bold green]Cleaning cache..."):
+                            cleared = await self.cache.clear_expired()
+                        console.print(f"[green]✅ Cleared {cleared} expired entries[/green]")
+                except EOFError:
+                    # Non-interactive mode - skip cleanup prompt
+                    console.print("[dim]Cache cleanup available in interactive mode[/dim]")
         
         except Exception as e:
             console.print(f"[bold red]❌ Failed to get cache stats: {e}[/bold red]")

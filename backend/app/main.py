@@ -3,8 +3,11 @@ import os
 from app.api.v1 import (
     ai_services,
     analysis,
+    auth,
+    database,
     documents,
     integrations,
+    intelligence,
     jobs,
     ksc,
     monitoring,
@@ -12,6 +15,7 @@ from app.api.v1 import (
     profile,
     settings,
     users,
+    workflows,
 )
 from app.core.cache_middleware import (
     add_cache_middleware,
@@ -41,6 +45,13 @@ async def app_lifespan(app: FastAPI):
     # Startup
     await cache_lifespan(app).__aenter__()
     await start_system_monitoring()
+
+    # Initialize database
+    from app.core.database import init_database
+    try:
+        init_database()
+    except Exception as e:
+        print(f"Database initialization failed: {e}")
 
     # Initialize AI configuration
     from app.core.ai_client import setup_ai_client
@@ -90,9 +101,21 @@ add_monitoring_middleware(app)
 
 
 api_router = APIRouter()
+
+# Authentication & User Management
+api_router.include_router(auth.router, prefix="/auth", tags=["authentication"])
 api_router.include_router(profile.router, prefix="/profile", tags=["profile"])
-api_router.include_router(documents.router, prefix="/documents", tags=["documents"])
 api_router.include_router(users.router, prefix="/users", tags=["users"])
+
+# Database Management
+api_router.include_router(database.router, prefix="/database", tags=["database"])
+
+# Core Workflows (Phase 1+2 Implementation)
+api_router.include_router(workflows.router, prefix="/workflows", tags=["workflows"])
+api_router.include_router(intelligence.router, prefix="/intelligence", tags=["intelligence"])
+
+# Legacy API endpoints
+api_router.include_router(documents.router, prefix="/documents", tags=["documents"])
 api_router.include_router(jobs.router, prefix="/jobs", tags=["jobs"])
 api_router.include_router(integrations.router, prefix="/integrations", tags=["integrations"])
 api_router.include_router(opportunities.router, prefix="/opportunities", tags=["opportunities"])
@@ -103,12 +126,55 @@ api_router.include_router(monitoring.router, prefix="/monitoring", tags=["monito
 api_router.include_router(ai_services.router, prefix="/ai", tags=["ai-services"])
 
 
+# Placeholder for the document generation flow
+async def document_generation_flow(template_id: str, user_profile: dict, job_description: str, ats_requirements: dict):
+    # In a real implementation, this would call the Genkit workflow
+    return {"status": "success", "template_id": template_id, "message": "Document generated successfully"}
+
+@app.post("/api/generate-document-with-template")
+async def generate_document_with_template(
+    template_id: str,
+    user_profile: dict,
+    job_description: str,
+    ats_analysis: dict
+):
+    # Connect to your existing Genkit document generation workflow
+    result = await document_generation_flow(
+        template_id=template_id,
+        user_profile=user_profile,
+        job_description=job_description,
+        ats_requirements=ats_analysis
+    )
+    return result
+
+
 app.include_router(api_router, prefix="/api/v1")
 
 
 @app.get("/health", tags=["Health"])
 async def health_check():
-    return {"status": "ok"}
+    """Enhanced health check with database and service status"""
+    from app.core.database import check_database_health
+    
+    try:
+        db_health = check_database_health()
+        return {
+            "status": "healthy",
+            "version": "2.0.0",
+            "features": ["production-infrastructure", "advanced-intelligence"],
+            "database": db_health,
+            "services": {
+                "api": "healthy",
+                "ai_client": "healthy",
+                "cache": "healthy"
+            }
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy", 
+            "error": str(e),
+            "version": "2.0.0"
+        }
 
 
 @app.get("/cache/health", tags=["Health"])

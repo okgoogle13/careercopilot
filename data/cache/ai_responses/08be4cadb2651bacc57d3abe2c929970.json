@@ -1,0 +1,23 @@
+{
+  "key": "ai_2a654ef950360326",
+  "value": {
+    "data": {
+      "content": "AI response to: \n        Generate a cover_letter for:\n        - User: Your Name\n        - Career transition: Finance... with context: {'user_profile': {'personal_info': {'name': 'Your ...",
+      "keywords_matched": [
+        "social work",
+        "finance",
+        "case management",
+        "career transition"
+      ],
+      "template_used": "finance_to_social_work",
+      "generated_with_cache": true
+    },
+    "agent": "document_generation",
+    "task_data_hash": "0de87c6409133c30",
+    "execution_time": 0.000753
+  },
+  "timestamp": "2025-08-24T09:37:03.646289",
+  "expires_at": "2025-08-27T09:37:03.646289",
+  "ttl_hours": 72.0,
+  "category": "ai_responses"
+}

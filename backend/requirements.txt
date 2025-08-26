@@ -17,3 +17,25 @@ psutil
 httpx[http2]==0.28.1
 pytest
 pytest-asyncio
+
+# Database support
+sqlalchemy>=2.0.0
+psycopg2-binary  # PostgreSQL adapter
+alembic  # Database migrations
+
+# Advanced Intelligence (ML/AI)
+scikit-learn>=1.3.0
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Multi-agent orchestration
+asyncio-mqtt>=0.13.0
+celery[redis]>=5.3.0  # Background task queue
+aioredis>=2.0.0  # Async Redis client
+
+# Authentication and Security
+python-jose[cryptography]>=3.3.0  # JWT tokens
+passlib[bcrypt]>=1.7.4  # Password hashing
+python-multipart>=0.0.6  # Form data parsing
