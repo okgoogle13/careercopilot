@@ -244,7 +244,9 @@ class PersonalCareerWorkflow:
             )
             
             # 4. Generate interview prep materials
-            interview_materials = await self.generate_interview_prep(job_url)
+            interview_materials = await self.generate_interview_prep(
+                job_description, company_research.get("talking_points", {})
+            )
             
             return {
                 "success": True,

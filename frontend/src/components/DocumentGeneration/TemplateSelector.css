@@ -1,0 +1,34 @@
+/* TemplateSelector.css */
+.template-selector {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.templates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.template-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.template-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.template-card img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.template-card p {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+}
