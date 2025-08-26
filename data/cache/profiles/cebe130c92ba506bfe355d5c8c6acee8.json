@@ -1,0 +1,40 @@
+{
+  "key": "profile_personal_user",
+  "value": {
+    "personal_info": {
+      "name": "Your Name",
+      "email": "nishantdougall@gmail.com",
+      "location": "Northcote, VIC, Australia"
+    },
+    "career_transition": {
+      "from": "Finance",
+      "to": "Social Work/Community Services",
+      "motivation": "Direct community impact and social justice",
+      "story": {
+        "background": "Finance professional transitioning to social work",
+        "motivation": "Direct community impact and social justice"
+      }
+    },
+    "skills": [
+      "Financial Analysis",
+      "Data Analysis",
+      "Client Relationship Management"
+    ],
+    "preferences": {
+      "target_roles": [
+        "Social Worker",
+        "Case Manager",
+        "Community Services Worker"
+      ],
+      "salary_range": {
+        "min": 60000,
+        "max": 85000,
+        "currency": "AUD"
+      }
+    }
+  },
+  "timestamp": "2025-08-24T09:37:03.638515",
+  "expires_at": "2025-08-31T09:37:03.638515",
+  "ttl_hours": 168.0,
+  "category": "profiles"
+}

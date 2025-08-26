@@ -1,5 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { auth } from '../lib/firebaseClient';
 import toast from 'react-hot-toast';
 import { LoadingState, ErrorDisplay } from '../components/ui';
 
@@ -43,8 +44,7 @@ const DashboardPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, user => {
+  const unsubscribe = onAuthStateChanged(auth, user => {
       if (user) {
         fetchProfiles(user);
       } else {
@@ -79,8 +79,7 @@ const DashboardPage: React.FC = () => {
     ) {
       return;
     }
-    const auth = getAuth();
-    const user = auth.currentUser;
+  const user = auth.currentUser;
     if (!user) return;
 
     try {
@@ -104,8 +103,7 @@ const DashboardPage: React.FC = () => {
       return;
     }
 
-    const auth = getAuth();
-    const user = auth.currentUser;
+  const user = auth.currentUser;
     if (!user) return;
 
     const token = await user.getIdToken();

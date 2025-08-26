@@ -1,0 +1,50 @@
+{
+  "key": "ai_ae1013c9ffffb723",
+  "value": {
+    "response": "AI response to: \n        Generate a resume for:\n        - User: Your Name\n        - Career transition: Finance to So... with context: {'user_profile': {'personal_info': {'name': 'Your ...",
+    "prompt": "\n        Generate a resume for:\n        - User: Your Name\n        - Career transition: Finance to Social Work/Community Services\n        - Job description: Seeking experienced social worker for case m",
+    "context": {
+      "user_profile": {
+        "personal_info": {
+          "name": "Your Name",
+          "email": "nishantdougall@gmail.com",
+          "location": "Northcote, VIC, Australia"
+        },
+        "career_transition": {
+          "from": "Finance",
+          "to": "Social Work/Community Services",
+          "motivation": "Direct community impact and social justice",
+          "story": {
+            "background": "Finance professional transitioning to social work",
+            "motivation": "Direct community impact and social justice"
+          }
+        },
+        "skills": [
+          "Financial Analysis",
+          "Data Analysis",
+          "Client Relationship Management"
+        ],
+        "preferences": {
+          "target_roles": [
+            "Social Worker",
+            "Case Manager",
+            "Community Services Worker"
+          ],
+          "salary_range": {
+            "min": 60000,
+            "max": 85000,
+            "currency": "AUD"
+          }
+        }
+      },
+      "task_type": "resume"
+    },
+    "model": "default",
+    "temperature": 0.7,
+    "generated_at": "2025-08-24T09:37:03.640950"
+  },
+  "timestamp": "2025-08-24T09:37:03.640981",
+  "expires_at": "2025-08-27T09:37:03.640981",
+  "ttl_hours": 72.0,
+  "category": "ai_responses"
+}

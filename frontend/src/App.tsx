@@ -14,6 +14,7 @@ const AnalysisPage = lazy(() => import('./pages/AnalysisPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const OpportunitiesPage = lazy(() => import('./pages/OpportunitiesPage'));
 const KscGeneratorPage = lazy(() => import('./pages/KscGeneratorPage'));
+const DocumentGenerationPage = lazy(() => import('./pages/DocumentGenerationPage'));
 
 const App: React.FC = () => {
   return (
@@ -76,6 +77,14 @@ const App: React.FC = () => {
                       element={
                         <ErrorBoundary>
                           <KscGeneratorPage />
+                        </ErrorBoundary>
+                      }
+                    />
+                    <Route
+                      path="/document-generation"
+                      element={
+                        <ErrorBoundary>
+                          <DocumentGenerationPage />
                         </ErrorBoundary>
                       }
                     />

@@ -1,3 +1,6 @@
+// Import development bootstrap FIRST to prevent Firebase initialization
+import './dev-bootstrap';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

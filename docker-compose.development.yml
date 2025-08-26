@@ -1,0 +1,184 @@
+version: '3.8'
+
+services:
+  # Development PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: careercopilot-dev-postgres
+    environment:
+      POSTGRES_DB: careercopilot_dev
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_HOST_AUTH_METHOD: md5
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev_user -d careercopilot_dev"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Development Redis
+  redis:
+    image: redis:7-alpine
+    container_name: careercopilot-dev-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_dev_data:/data
+    ports:
+      - "6380:6379"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Development Backend with hot reload
+  backend-dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: careercopilot-dev-backend
+    environment:
+      # Database configuration
+      DATABASE_URL: postgresql://dev_user:dev_password@postgres:5432/careercopilot_dev
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: careercopilot_dev
+      DB_USER: dev_user
+      DB_PASSWORD: dev_password
+      
+      # Redis configuration
+      REDIS_URL: redis://redis:6379/0
+      
+      # Development settings
+      ENVIRONMENT: development
+      DEBUG: true
+      LOG_LEVEL: DEBUG
+      
+      # Authentication (development keys)
+      JWT_SECRET_KEY: development-secret-key-not-for-production
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      
+      # AI Services (use your keys)
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      
+      # Caching (shorter TTL for development)
+      CACHE_TTL_HOURS: 1
+      ENABLE_CACHE: true
+      
+      # Rate limiting (more lenient)
+      RATE_LIMIT_ENABLED: false
+      
+    ports:
+      - "8001:8000"  # Different port for development
+    volumes:
+      - ./backend:/app:cached  # Mount source for hot reload
+      - ./data:/app/data
+      - ./logs:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+    # Override command for development with auto-reload
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload", "--log-level", "debug"]
+
+  # Development Frontend with hot reload
+  frontend-dev:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    container_name: careercopilot-dev-frontend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8001
+      - REACT_APP_ENVIRONMENT=development
+    ports:
+      - "3001:3000"  # Different port for development
+    volumes:
+      - ./frontend/src:/app/src:cached
+      - ./frontend/public:/app/public:cached
+      - /app/node_modules  # Anonymous volume for node_modules
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Jupyter Notebook for ML development
+  jupyter:
+    image: jupyter/scipy-notebook:latest
+    container_name: careercopilot-jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./backend:/home/jovyan/work/backend:ro
+      - ./data:/home/jovyan/work/data
+    environment:
+      JUPYTER_ENABLE_LAB: yes
+      JUPYTER_TOKEN: development
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: careercopilot-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@careercopilot.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_dev_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Redis Commander for Redis management
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: careercopilot-redis-commander
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Mailhog for email testing
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: careercopilot-mailhog
+    ports:
+      - "1025:1025"  # SMTP
+      - "8025:8025"  # Web UI
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+networks:
+  careercopilot-dev-network:
+    driver: bridge
+
+volumes:
+  postgres_dev_data:
+  redis_dev_data:
+  pgadmin_dev_data:
