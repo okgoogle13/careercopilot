@@ -13,8 +13,9 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "preview": "vite preview",
     "bundle-analysis": "vite build --mode analyze && node scripts/bundle-analyzer.js",
-    "test": "echo 'No tests specified yet' && exit 0",
-    "test:e2e": "echo 'No e2e tests specified yet' && exit 0"
+  "test": "echo 'No tests specified yet' && exit 0",
+  "test:e2e": "echo 'No e2e tests specified yet' && exit 0",
+  "test:all": "npx jest --runInBand --colors && npx playwright test"
   },
   "dependencies": {
     "firebase": "^12.0.0",
@@ -26,6 +27,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@playwright/test": "^1.55.0",
+    "@testing-library/react": "^16.3.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
@@ -37,6 +40,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "globals": "^16.3.0",
+    "jest": "^30.0.5",
     "postcss": "^8.4.35",
     "prettier": "^3.6.2",
     "tailwindcss": "^4.0.0",
