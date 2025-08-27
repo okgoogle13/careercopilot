@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { useAuth } from '../contexts/AuthContext';
 
 interface OpportunityType {
   id: string;
@@ -29,14 +29,17 @@ const CalendarIcon = () => (
 );
 
 const OpportunitiesPage: React.FC = () => {
+  const { user } = useAuth();
   const [opportunities, setOpportunities] = useState<OpportunityType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchOpportunities = async (user: User) => {
+  const fetchOpportunities = async () => {
+    if (!user) return;
+    
     try {
       setLoading(true);
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       const response = await fetch('/api/v1/opportunities', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -51,17 +54,13 @@ const OpportunitiesPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      if (user) {
-        fetchOpportunities(user);
-      } else {
-        setLoading(false);
-        setError('You must be logged in to view this page.');
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+    if (user) {
+      fetchOpportunities();
+    } else {
+      setLoading(false);
+      setError('You must be logged in to view this page.');
+    }
+  }, [user]);
 
   const renderContent = () => {
     if (loading)

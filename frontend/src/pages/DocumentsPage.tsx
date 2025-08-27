@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 import { useUserPreferences } from '../contexts/UserPreferencesContext';
 
@@ -12,16 +12,19 @@ interface DocumentType {
 }
 
 const DocumentsPage: React.FC = () => {
+  const { user } = useAuth();
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const userPreferences = useUserPreferences();
-  const userTheme = userPreferences?.themeId || 'professional';
+  const { preferences } = useUserPreferences();
+  const userTheme = preferences?.themeId || 'professional';
 
-  const fetchDocuments = async (user: User) => {
+  const fetchDocuments = async () => {
+    if (!user) return;
+    
     try {
       setLoading(true);
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       const response = await fetch('/api/v1/documents', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -36,31 +39,25 @@ const DocumentsPage: React.FC = () => {
   };
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, async user => {
-      if (user) {
-        await fetchDocuments(user);
-      } else {
-        setLoading(false);
-        setError('You must be logged in to view this page.');
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+    if (user) {
+      fetchDocuments();
+    } else {
+      setLoading(false);
+      setError('You must be logged in to view this page.');
+    }
+  }, [user]);
 
   const handleDownload = async (
     documentId: string,
     originalFilename: string
   ) => {
-    const auth = getAuth();
-    const user = auth.currentUser;
     if (!user) {
       toast.error('You must be logged in to download files.');
       return;
     }
 
     try {
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       // Append the user's selected theme to the download URL
       const downloadUrl = `/api/v1/documents/${documentId}/download-pdf?theme=${userTheme}`;
       const response = await fetch(downloadUrl, {

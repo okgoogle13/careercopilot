@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { db } from '../firebase-config';
-import { doc, onSnapshot } from 'firebase/firestore';
+import { useAuth } from '../contexts/AuthContext';
+import { useUserPreferences } from '../contexts/UserPreferencesContext';
 import toast from 'react-hot-toast';
 import { ThemePreview } from '../components';
 import {
@@ -27,57 +26,76 @@ interface VoiceProfile {
 }
 
 const SettingsPage: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const { user } = useAuth();
+  const { preferences, updatePreferences, loading: preferencesLoading } = useUserPreferences();
   const [integrationStatus, setIntegrationStatus] =
     useState<string>('Not Connected');
-  const [selectedTheme, setSelectedTheme] = useState<string>('professional');
   const [voiceProfile, setVoiceProfile] = useState<VoiceProfile | null>(null);
   const [isGeneratingVoiceProfile, setIsGeneratingVoiceProfile] =
     useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [isDisconnecting, setIsDisconnecting] = useState<boolean>(false);
   const [isScanning, setIsScanning] = useState<boolean>(false);
+  // current selected theme comes from user preferences
+  const currentThemeId = preferences?.themeId || 'professional';
 
   useEffect(() => {
-    const auth = getAuth();
-    const unsubscribeAuth = onAuthStateChanged(auth, currentUser => {
-      if (currentUser) {
-        setUser(currentUser);
-        const userDocRef = doc(db, 'users', currentUser.uid);
-        const unsubscribeSnapshot = onSnapshot(userDocRef, docSnap => {
-          if (docSnap.exists()) {
-            const data = docSnap.data();
-            setIntegrationStatus(
-              data.integrations?.google_gmail?.connected
-                ? 'Connected'
-                : 'Not Connected'
-            );
-            setSelectedTheme(data.preferences?.themeId || 'professional');
-            setVoiceProfile(data.voice_profile || null);
-          }
+    if (user) {
+      // Load integration status and voice profile from API
+      const fetchUserData = async () => {
+        try {
+          const token = user.token || 'fallback-token';
+          const response = await fetch('/api/v1/user/settings', {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+              const contentType = response.headers.get('content-type') || '';
+              if (response.ok && contentType.includes('application/json')) {
+                const data = await response.json();
+                setIntegrationStatus(
+                  data.integrations?.google_gmail?.connected
+                    ? 'Connected'
+                    : 'Not Connected'
+                );
+                setVoiceProfile(data.voice_profile || null);
+              } else {
+                // non-JSON or unexpected response (often HTML from an error page)
+                const text = await response.text();
+                console.error(
+                  'Unexpected response when fetching user settings:',
+                  response.status,
+                  text
+                );
+              }
+        } catch (error) {
+          console.error('Failed to fetch user settings:', error);
+        } finally {
           setLoading(false);
-        });
-        return () => unsubscribeSnapshot();
-      } else {
-        setUser(null);
-        setLoading(false);
-      }
-    });
-    return () => unsubscribeAuth();
-  }, []);
+        }
+      };
+      fetchUserData();
+    } else {
+      setLoading(false);
+    }
+  }, [user]);
 
   const handleConnect = async () => {
     if (!user) return;
     try {
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       const response = await fetch('/api/v1/integrations/google/authorize', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (!response.ok) throw new Error('Failed to get authorization URL.');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.detail || 'Failed to get authorization URL.');
+      }
       const data = await response.json();
-      window.location.href = data.authorization_url;
-    } catch {
-      toast.error('Could not initiate connection with Google.');
+      if (data.authorization_url) {
+        window.location.href = data.authorization_url;
+      }
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Could not initiate connection with Google.';
+      toast.error(message);
     }
   };
 
@@ -85,7 +103,7 @@ const SettingsPage: React.FC = () => {
     if (!user) return;
     setIsDisconnecting(true);
     try {
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       await fetch('/api/v1/integrations/google/disconnect', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -103,7 +121,7 @@ const SettingsPage: React.FC = () => {
     setIsScanning(true);
     toast.loading('Scanning for new job opportunities...');
     try {
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       const response = await fetch('/api/v1/integrations/google/scan-emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -125,17 +143,9 @@ const SettingsPage: React.FC = () => {
       toast.error('You must be logged in to change settings.');
       return;
     }
-    setSelectedTheme(themeId);
+    
     try {
-      const token = await user.getIdToken();
-      await fetch('/api/v1/settings/theme', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ theme_id: themeId }),
-      });
+      updatePreferences({ themeId });
       toast.success('Theme preference saved!');
     } catch {
       toast.error('Could not save theme preference.');
@@ -149,7 +159,7 @@ const SettingsPage: React.FC = () => {
     }
     setIsGeneratingVoiceProfile(true);
     try {
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       const response = await fetch('/api/v1/profile/generate-voice-profile', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -170,7 +180,7 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  if (loading) return <LoadingState message="Loading settings..." />;
+  if (loading || preferencesLoading) return <LoadingState message="Loading settings..." />;
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
@@ -237,7 +247,7 @@ const SettingsPage: React.FC = () => {
               <div
                 key={theme.id}
                 className={`border-2 rounded-lg p-4 cursor-pointer transition-all hover:shadow-md ${
-                  selectedTheme === theme.id
+                  (preferences?.themeId || 'professional') === theme.id
                     ? 'border-blue-500 bg-blue-50'
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
@@ -253,7 +263,7 @@ const SettingsPage: React.FC = () => {
                 </div>
                 <div className="text-center">
                   <h3 className="font-semibold">{theme.name}</h3>
-                  {selectedTheme === theme.id && (
+                  {currentThemeId === theme.id && (
                     <span className="text-blue-500 text-sm font-medium">
                       ✓ Selected
                     </span>

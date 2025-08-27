@@ -12,6 +12,13 @@ export default defineConfig(({ mode }) => {
     server: {
       fs: {
         strict: true
+      },
+      proxy: {
+        '/api': {
+          target: 'http://localhost:8000',
+          changeOrigin: true,
+          secure: false
+        }
       }
     },
     build: {
