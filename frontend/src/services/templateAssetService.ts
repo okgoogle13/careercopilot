@@ -34,8 +34,8 @@ class TemplateAssetService {
       isRecommended: true,
       assets: [],
       previewImages: {
-        thumbnail: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fexecutive-professional-thumb.png?alt=media',
-        fullSize: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fexecutive-professional-full.png?alt=media'
+        thumbnail: 'https://picsum.photos/200/260?random=1',
+        fullSize: 'https://picsum.photos/400/520?random=1'
       }
     },
     {
@@ -48,8 +48,8 @@ class TemplateAssetService {
       isRecommended: true,
       assets: [],
       previewImages: {
-        thumbnail: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fmodern-minimalist-thumb.png?alt=media',
-        fullSize: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fmodern-minimalist-full.png?alt=media'
+        thumbnail: 'https://picsum.photos/200/260?random=2',
+        fullSize: 'https://picsum.photos/400/520?random=2'
       }
     },
     {
@@ -62,8 +62,8 @@ class TemplateAssetService {
       isRecommended: false,
       assets: [],
       previewImages: {
-        thumbnail: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fcreative-portfolio-thumb.png?alt=media',
-        fullSize: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fcreative-portfolio-full.png?alt=media'
+        thumbnail: 'https://picsum.photos/200/260?random=3',
+        fullSize: 'https://picsum.photos/400/520?random=3'
       }
     },
     {
@@ -76,8 +76,8 @@ class TemplateAssetService {
       isRecommended: true,
       assets: [],
       previewImages: {
-        thumbnail: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Ftech-specialist-thumb.png?alt=media',
-        fullSize: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Ftech-specialist-full.png?alt=media'
+        thumbnail: 'https://picsum.photos/200/260?random=4',
+        fullSize: 'https://picsum.photos/400/520?random=4'
       }
     },
     {
@@ -90,8 +90,8 @@ class TemplateAssetService {
       isRecommended: false,
       assets: [],
       previewImages: {
-        thumbnail: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fstartup-ready-thumb.png?alt=media',
-        fullSize: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fstartup-ready-full.png?alt=media'
+        thumbnail: 'https://picsum.photos/200/260?random=5',
+        fullSize: 'https://picsum.photos/400/520?random=5'
       }
     },
     {
@@ -104,8 +104,8 @@ class TemplateAssetService {
       isRecommended: false,
       assets: [],
       previewImages: {
-        thumbnail: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fdesign-focused-thumb.png?alt=media',
-        fullSize: 'https://firebasestorage.googleapis.com/v0/b/careercopilot-staging.firebasestorage.app/o/templates%2Fdesign-focused-full.png?alt=media'
+        thumbnail: 'https://picsum.photos/200/260?random=6',
+        fullSize: 'https://picsum.photos/400/520?random=6'
       }
     }
   ];
