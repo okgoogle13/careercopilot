@@ -136,6 +136,59 @@ async def scan_emails():
 async def update_theme():
     return {"message": "Theme updated successfully"}
 
+# Template endpoints
+@app.post("/api/v1/templates/select")
+async def select_template(template_data: dict):
+    """Handle template selection and initiate document generation"""
+    template_id = template_data.get("templateId")
+    user_data = template_data.get("userData", {})
+    job_description = template_data.get("jobDescription", "")
+    
+    return {
+        "success": True,
+        "message": f"Template '{template_id}' selected successfully",
+        "templateId": template_id,
+        "generationId": f"gen-{template_id}-12345",
+        "status": "processing",
+        "estimatedTime": "30 seconds",
+        "previewUrl": f"/api/v1/documents/preview/{template_id}",
+        "jobDescription": job_description
+    }
+
+@app.get("/api/v1/documents/preview/{template_id}")
+async def get_document_preview(template_id: str):
+    """Get document preview for a template"""
+    return {
+        "templateId": template_id,
+        "previewHtml": f"""
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h2 style="color: #1e40af; border-bottom: 2px solid #1e40af; padding-bottom: 10px;">
+                John Doe
+            </h2>
+            <p style="color: #666; margin-bottom: 20px;">Software Engineer | {template_id.replace('-', ' ').title()}</p>
+            
+            <h3 style="color: #1e40af; margin-top: 30px;">Experience</h3>
+            <div style="margin-bottom: 15px;">
+                <strong>Senior Developer</strong> - Tech Corp (2020-2024)
+                <ul style="margin-top: 5px; color: #333;">
+                    <li>Led development of scalable web applications</li>
+                    <li>Managed team of 5 developers</li>
+                    <li>Improved system performance by 40%</li>
+                </ul>
+            </div>
+            
+            <h3 style="color: #1e40af; margin-top: 30px;">Skills</h3>
+            <p style="color: #333;">JavaScript, React, Node.js, Python, AWS, Docker, Git</p>
+            
+            <div style="margin-top: 30px; padding: 15px; background: #f0f9ff; border-left: 4px solid #1e40af;">
+                <p style="margin: 0; color: #1e40af; font-weight: bold;">Template: {template_id.replace('-', ' ').title()}</p>
+                <p style="margin: 5px 0 0 0; color: #666; font-size: 14px;">Generated with CareerCopilot AI</p>
+            </div>
+        </div>
+        """,
+        "generatedAt": "2024-08-26T19:30:00Z"
+    }
+
 # Documents endpoints
 @app.get("/api/v1/documents")
 async def get_documents():
