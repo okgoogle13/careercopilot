@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth } from 'firebase/auth';
+import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
@@ -9,6 +9,7 @@ interface ProfileVariation {
 }
 
 const KscGeneratorPage: React.FC = () => {
+  const { user } = useAuth();
   const [profileVariations, setProfileVariations] = useState<
     ProfileVariation[]
   >([]);
@@ -21,8 +22,6 @@ const KscGeneratorPage: React.FC = () => {
   // Fetch profile variations on component mount
   useEffect(() => {
     const fetchProfiles = async () => {
-      const auth = getAuth();
-      const user = auth.currentUser;
       if (!user) {
         toast.error('You must be logged in to access this page.');
         setLoading(false);
@@ -30,7 +29,7 @@ const KscGeneratorPage: React.FC = () => {
       }
 
       try {
-        const token = await user.getIdToken();
+        const token = user.token || 'fallback-token';
         const response = await fetch('/api/v1/profile/variations', {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -53,7 +52,7 @@ const KscGeneratorPage: React.FC = () => {
     };
 
     fetchProfiles();
-  }, []);
+  }, [user]);
 
   const handleStatementChange = (index: number, value: string) => {
     const updatedStatements = [...kscStatements];
