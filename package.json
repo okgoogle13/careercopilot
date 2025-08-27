@@ -7,11 +7,20 @@
     "frontend",
     "backend"
   ],
+  "scripts": {
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "test:visual": "playwright test --config=playwright-visual.config.ts",
+    "test:all": "npm run test && npm run test:e2e"
+  },
   "devDependencies": {
     "@eslint/js": "^9.34.0",
+    "@playwright/test": "^1.55.0",
+    "@testing-library/react": "^16.3.0",
     "eslint": "^9.34.0",
     "eslint-plugin-react": "^7.37.5",
     "globals": "^16.3.0",
+    "jest": "^30.0.5",
     "jiti": "^2.5.1",
     "typescript-eslint": "^8.40.0"
   }

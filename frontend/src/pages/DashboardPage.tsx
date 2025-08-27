@@ -1,6 +1,5 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { auth } from '../lib/firebaseClient';
+import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 import { LoadingState, ErrorDisplay } from '../components/ui';
 
@@ -12,6 +11,7 @@ interface ProfileVariation {
 }
 
 const DashboardPage: React.FC = () => {
+  const { user } = useAuth();
   const [profiles, setProfiles] = useState<ProfileVariation[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,10 +26,12 @@ const DashboardPage: React.FC = () => {
   const [profileSkills, setProfileSkills] = useState<string>('');
   const [nameError, setNameError] = useState<string>('');
 
-  const fetchProfiles = async (user: User) => {
+  const fetchProfiles = async () => {
+    if (!user) return;
+    
     try {
       setLoading(true);
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       const response = await fetch('/api/v1/profile/variations', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -44,16 +46,13 @@ const DashboardPage: React.FC = () => {
   };
 
   useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, user => {
-      if (user) {
-        fetchProfiles(user);
-      } else {
-        setLoading(false);
-        setError('You must be logged in to view this page.');
-      }
-    });
-    return () => unsubscribe();
-  }, []);
+    if (user) {
+      fetchProfiles();
+    } else {
+      setLoading(false);
+      setError('You must be logged in to view this page.');
+    }
+  }, [user]);
 
   const openModalForCreate = () => {
     setCurrentProfile(null);
@@ -79,11 +78,11 @@ const DashboardPage: React.FC = () => {
     ) {
       return;
     }
-  const user = auth.currentUser;
+    
     if (!user) return;
 
     try {
-      const token = await user.getIdToken();
+      const token = user.token || 'fallback-token';
       await fetch(`/api/v1/profile/variations/${profileId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
@@ -103,10 +102,9 @@ const DashboardPage: React.FC = () => {
       return;
     }
 
-  const user = auth.currentUser;
     if (!user) return;
 
-    const token = await user.getIdToken();
+    const token = user.token || 'fallback-token';
     const keywords = profileKeywords
       .split(',')
       .map(k => k.trim())
@@ -300,7 +298,7 @@ const DashboardPage: React.FC = () => {
           </div>
         </div>
       )}
-      {renderContent()}e{' '}
+      {renderContent()}
     </div>
   );
 };

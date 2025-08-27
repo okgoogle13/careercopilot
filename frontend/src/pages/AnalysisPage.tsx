@@ -1,5 +1,5 @@
 import React, { useState, useEffect, FormEvent } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 
 // --- Type Definitions ---
@@ -29,6 +29,7 @@ interface DocumentType {
 
 const AnalysisPage: React.FC = () => {
   // --- State ---
+  const { user } = useAuth();
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [selectedDocumentId, setSelectedDocumentId] = useState<string>('');
   const [jobDescription, setJobDescription] = useState<string>('');
@@ -47,7 +48,7 @@ const AnalysisPage: React.FC = () => {
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   const fetchDocuments = async (user: User) => {
     try {
@@ -78,8 +79,6 @@ const AnalysisPage: React.FC = () => {
 
     setIsAnalyzing(true);
     setAnalysisResult(null);
-    const auth = getAuth();
-    const user = auth.currentUser;
     if (!user) {
       toast.error('Authentication error.');
       setIsAnalyzing(false);

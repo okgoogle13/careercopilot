@@ -1,5 +1,5 @@
 // Centralized API client with standardized error handling
-import { getAuth } from 'firebase/auth';
+import { pureFallbackAuth } from '../auth/pure-fallback';
 import {
   ApiError,
   AuthenticationError,
@@ -25,13 +25,13 @@ class ApiClient {
   }
 
   private async getAuthToken(): Promise<string> {
-    const user = getAuth().currentUser;
+    const user = pureFallbackAuth.getCurrentUser();
     if (!user) {
       throw new AuthenticationError('User not authenticated');
     }
 
     try {
-      return await user.getIdToken();
+      return user.token || 'fallback-token';
     } catch (error) {
       reportError(error, 'getAuthToken');
       throw new AuthenticationError('Failed to get authentication token');

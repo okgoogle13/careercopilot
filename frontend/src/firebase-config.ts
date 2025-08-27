@@ -1,35 +1,31 @@
-// Disabled Firebase Configuration
-// This file prevents any Firebase initialization
+// Firebase Configuration for Template Assets
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { getStorage } from 'firebase/storage';
 
-console.log('🚫 Firebase completely disabled - using pure fallback authentication');
-
-// Mock Firebase exports to prevent errors
-export const auth = null;
-export const db = null;
-
-// Mock Firebase functions that might be imported elsewhere
-export const signInWithEmailAndPassword = () => {
-  throw new Error('Firebase is disabled. Use pure fallback authentication.');
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-export const createUserWithEmailAndPassword = () => {
-  throw new Error('Firebase is disabled. Use pure fallback authentication.');  
-};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-export const signOut = () => {
-  throw new Error('Firebase is disabled. Use pure fallback authentication.');
-};
+// Initialize services
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
 
-export const onAuthStateChanged = () => {
-  throw new Error('Firebase is disabled. Use pure fallback authentication.');
-};
-
-// Export empty config for debugging
-export const firebaseConfig = {};
 export const debugInfo = {
-  environment: 'development',
-  firebaseDisabled: true,
-  mode: 'pure-fallback-only'
+  config: firebaseConfig,
+  environment: import.meta.env.MODE,
+  isDev: import.meta.env.DEV,
+  storageBucket: firebaseConfig.storageBucket,
 };
 
-export default null;
+export default app;

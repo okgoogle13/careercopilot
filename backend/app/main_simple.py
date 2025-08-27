@@ -61,6 +61,213 @@ async def workflow_status():
         "system_health": "good"
     }
 
+# Profile endpoints
+@app.get("/api/v1/profile/variations")
+async def get_profile_variations():
+    return [
+        {
+            "id": "demo-1",
+            "name": "Software Engineer",
+            "keywords": ["Python", "React", "FastAPI"],
+            "skills": ["Backend Development", "Frontend Development", "API Design"]
+        },
+        {
+            "id": "demo-2", 
+            "name": "Full Stack Developer",
+            "keywords": ["JavaScript", "Node.js", "MongoDB"],
+            "skills": ["Full Stack Development", "Database Design", "DevOps"]
+        }
+    ]
+
+@app.post("/api/v1/profile/variations")
+async def create_profile_variation():
+    return {
+        "id": "new-demo",
+        "name": "New Profile",
+        "keywords": [],
+        "skills": []
+    }
+
+@app.put("/api/v1/profile/variations/{profile_id}")
+async def update_profile_variation(profile_id: str):
+    return {
+        "id": profile_id,
+        "name": "Updated Profile",
+        "keywords": [],
+        "skills": []
+    }
+
+@app.delete("/api/v1/profile/variations/{profile_id}")
+async def delete_profile_variation(profile_id: str):
+    return {"message": "Profile variation deleted"}
+
+# User settings endpoints
+@app.get("/api/v1/user/settings")
+async def get_user_settings():
+    return {
+        "integrations": {
+            "google_gmail": {
+                "connected": False
+            }
+        },
+        "voice_profile": None
+    }
+
+# Integration endpoints
+@app.get("/api/v1/integrations/google/authorize")
+async def google_authorize():
+    # Return an error to trigger the frontend's error handling
+    from fastapi import HTTPException
+    raise HTTPException(
+        status_code=503, 
+        detail="Google integration not available in development mode. This is a mock backend - integration features are disabled."
+    )
+
+@app.post("/api/v1/integrations/google/disconnect")
+async def google_disconnect():
+    return {"message": "Successfully disconnected (mock)"}
+
+@app.post("/api/v1/integrations/google/scan-emails")
+async def scan_emails():
+    return {"message": "Email scan completed (mock) - found 3 opportunities"}
+
+# Settings endpoints  
+@app.put("/api/v1/settings/theme")
+async def update_theme():
+    return {"message": "Theme updated successfully"}
+
+# Documents endpoints
+@app.get("/api/v1/documents")
+async def get_documents():
+    return [
+        {
+            "id": "demo-doc-1",
+            "originalFilename": "resume_v1.pdf",
+            "createdAt": {"_seconds": 1640995200}
+        }
+    ]
+
+# Opportunities endpoints
+@app.get("/api/v1/opportunities")
+async def get_opportunities():
+    return [
+        {
+            "id": "opp-1",
+            "title": "Senior Software Engineer",
+            "company": "Tech Corp",
+            "deadline": "2024-03-15",
+            "source_url": "https://example.com/job/1",
+            "calendarEventId": "cal-123"
+        },
+        {
+            "id": "opp-2",
+            "title": "Full Stack Developer",
+            "company": "Startup Inc",
+            "deadline": "2024-03-20",
+            "source_url": "https://example.com/job/2"
+        },
+        {
+            "id": "opp-3",
+            "title": "Frontend Developer",
+            "company": "Design Co",
+            "deadline": "2024-03-25",
+            "source_url": "https://example.com/job/3"
+        }
+    ]
+
+# Voice Profile endpoints
+@app.post("/api/v1/profile/generate-voice-profile")
+async def generate_voice_profile():
+    # Simulate processing time
+    import asyncio
+    await asyncio.sleep(1)
+    
+    return {
+        "tone": ["professional", "confident", "detail-oriented"],
+        "common_phrases": [
+            "results-driven",
+            "collaborative approach",
+            "innovative solutions",
+            "strategic thinking"
+        ],
+        "skill_keywords": [
+            "leadership",
+            "problem-solving",
+            "technical expertise",
+            "project management"
+        ]
+    }
+
+# KSC Generation endpoints
+@app.post("/api/v1/ksc/generate")
+async def generate_ksc():
+    # Simulate processing time
+    import asyncio
+    await asyncio.sleep(2)
+    
+    return {
+        "message": "KSC statements generated successfully!",
+        "generated_statements": [
+            "Demonstrated strong leadership skills by managing cross-functional teams of 5-8 members",
+            "Applied advanced problem-solving techniques to reduce system downtime by 40%",
+            "Implemented scalable software solutions using modern frameworks and best practices"
+        ]
+    }
+
+# Analysis endpoints
+@app.post("/api/v1/analysis/ats-score")
+async def analyze_ats_score():
+    # Simulate processing time
+    import asyncio
+    await asyncio.sleep(3)
+    
+    return {
+        "overallScore": 85,
+        "breakdown": {
+            "keywordScore": 78,
+            "semanticScore": 92,
+            "formattingScore": 85
+        },
+        "matchedKeywords": [
+            "Python", "React", "FastAPI", "leadership", "problem-solving"
+        ],
+        "missingKeywords": [
+            "Docker", "Kubernetes", "microservices", "agile"
+        ],
+        "recommendations": [
+            "Add more technical keywords related to containerization",
+            "Include specific project management methodologies",
+            "Mention specific technologies used in recent projects"
+        ],
+        "keyword_placement_suggestions": [
+            {
+                "keyword": "Docker",
+                "suggested_location": "Technical Skills section",
+                "example_sentence": "Utilized Docker for containerization and deployment"
+            },
+            {
+                "keyword": "agile",
+                "suggested_location": "Professional Experience",
+                "example_sentence": "Led development teams using agile methodologies"
+            }
+        ]
+    }
+
+# Document download endpoints
+@app.get("/api/v1/documents/{document_id}/download-pdf")
+async def download_document_pdf(document_id: str):
+    from fastapi import Response
+    # Return a mock PDF response
+    pdf_content = b"%PDF-1.4\n1 0 obj\n<<\n/Type /Catalog\n/Pages 2 0 R\n>>\nendobj\n2 0 obj\n<<\n/Type /Pages\n/Kids [3 0 R]\n/Count 1\n>>\nendobj\n3 0 obj\n<<\n/Type /Page\n/Parent 2 0 R\n/MediaBox [0 0 612 792]\n/Contents 4 0 R\n>>\nendobj\n4 0 obj\n<<\n/Length 44\n>>\nstream\nBT\n/F1 12 Tf\n100 700 Td\n(Mock PDF Document) Tj\nET\nendstream\nendobj\nxref\n0 5\n0000000000 65535 f \n0000000010 00000 n \n0000000053 00000 n \n0000000100 00000 n \n0000000178 00000 n \n trailer\n<<\n/Size 5\n/Root 1 0 R\n>>\nstartxref\n268\n%%EOF"
+    
+    return Response(
+        content=pdf_content,
+        media_type="application/pdf",
+        headers={
+            "Content-Disposition": f"attachment; filename=document_{document_id}.pdf"
+        }
+    )
+
 # Development endpoint to test the new features
 @app.get("/api/v1/features")
 async def available_features():
