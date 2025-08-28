@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
 import { useUserPreferences } from '../contexts/UserPreferencesContext';
 import toast from 'react-hot-toast';
 import { ThemePreview } from '../components';
@@ -12,6 +11,7 @@ import {
   LoadingState,
   Alert,
 } from '../components/ui';
+import { useAuthStatus } from '../hooks';
 
 const THEMES = [
   { id: 'professional', name: 'Professional' },
@@ -26,7 +26,7 @@ interface VoiceProfile {
 }
 
 const SettingsPage: React.FC = () => {
-  const { user } = useAuth();
+  const { isAuthenticated, isLoading: authLoading, requireAuth, getAuthToken } = useAuthStatus();
   const { preferences, updatePreferences, loading: preferencesLoading } = useUserPreferences();
   const [integrationStatus, setIntegrationStatus] =
     useState<string>('Not Connected');
@@ -40,11 +40,13 @@ const SettingsPage: React.FC = () => {
   const currentThemeId = preferences?.themeId || 'professional';
 
   useEffect(() => {
-    if (user) {
+    if (isAuthenticated) {
       // Load integration status and voice profile from API
       const fetchUserData = async () => {
         try {
-          const token = user.token || 'fallback-token';
+          const token = getAuthToken();
+          if (!token) return;
+          
           const response = await fetch('/api/v1/user/settings', {
             headers: { Authorization: `Bearer ${token}` },
           });
@@ -73,15 +75,17 @@ const SettingsPage: React.FC = () => {
         }
       };
       fetchUserData();
-    } else {
+    } else if (!authLoading) {
       setLoading(false);
     }
-  }, [user]);
+  }, [isAuthenticated, authLoading, getAuthToken]);
 
   const handleConnect = async () => {
-    if (!user) return;
+    if (!requireAuth()) return;
     try {
-      const token = user.token || 'fallback-token';
+      const token = getAuthToken();
+      if (!token) return;
+      
       const response = await fetch('/api/v1/integrations/google/authorize', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -100,10 +104,15 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleDisconnect = async () => {
-    if (!user) return;
+    if (!requireAuth()) return;
     setIsDisconnecting(true);
     try {
-      const token = user.token || 'fallback-token';
+      const token = getAuthToken();
+      if (!token) {
+        setIsDisconnecting(false);
+        return;
+      }
+      
       await fetch('/api/v1/integrations/google/disconnect', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -117,11 +126,17 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleScanEmails = async () => {
-    if (!user) return;
+    if (!requireAuth()) return;
     setIsScanning(true);
     toast.loading('Scanning for new job opportunities...');
     try {
-      const token = user.token || 'fallback-token';
+      const token = getAuthToken();
+      if (!token) {
+        setIsScanning(false);
+        toast.dismiss();
+        return;
+      }
+      
       const response = await fetch('/api/v1/integrations/google/scan-emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -139,7 +154,7 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleThemeSelect = async (themeId: string) => {
-    if (!user) {
+    if (!requireAuth()) {
       toast.error('You must be logged in to change settings.');
       return;
     }
@@ -153,13 +168,18 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleGenerateVoiceProfile = async () => {
-    if (!user) {
+    if (!requireAuth()) {
       toast.error('You must be logged in.');
       return;
     }
     setIsGeneratingVoiceProfile(true);
     try {
-      const token = user.token || 'fallback-token';
+      const token = getAuthToken();
+      if (!token) {
+        setIsGeneratingVoiceProfile(false);
+        return;
+      }
+      
       const response = await fetch('/api/v1/profile/generate-voice-profile', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -180,7 +200,7 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  if (loading || preferencesLoading) return <LoadingState message="Loading settings..." />;
+  if (authLoading || loading || preferencesLoading) return <LoadingState message="Loading settings..." />;
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
