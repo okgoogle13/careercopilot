@@ -1,6 +1,6 @@
 import { Plus } from "lucide-react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
+import { Card } from "./ui/Card";
+import { Button } from "./ui/Button";
 
 interface CreateProfileCardProps {
   onCreate: () => void;
