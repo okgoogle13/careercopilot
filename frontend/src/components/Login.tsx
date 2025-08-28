@@ -38,7 +38,7 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
   const fillDemoCredentials = () => {
     setEmail('demo@careercopilot.com');
     setPassword('demo123');
-    toast.info('Demo credentials filled!');
+    toast.success('Demo credentials filled!');
   };
 
   return (

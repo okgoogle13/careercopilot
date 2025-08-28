@@ -97,7 +97,6 @@ const DocumentGenerationPage: React.FC = () => {
           <ATSAnalysisCard
             jobDescription={jobDescription}
             onNavigateToTemplates={handleNavigateToTemplates}
-            onSelectTemplate={handleSelectTemplate}
           />
         </div>
       ) : (

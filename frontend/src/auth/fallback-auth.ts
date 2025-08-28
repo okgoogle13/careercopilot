@@ -34,7 +34,7 @@ class FallbackAuth {
         const { user } = JSON.parse(stored);
         this.setState({ user, loading: false, error: null });
       }
-  } catch {
+  } catch (error) {
       console.warn('Failed to load persisted auth:', error);
     }
   }
@@ -51,7 +51,7 @@ class FallbackAuth {
       } else {
         localStorage.removeItem(this.storageKey);
       }
-  } catch {
+  } catch (error) {
       console.warn('Failed to persist auth:', error);
     }
   }
