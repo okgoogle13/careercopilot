@@ -244,7 +244,7 @@ const SettingsPage: React.FC = () => {
                 <Button
                   onClick={handleDisconnect}
                   disabled={isDisconnecting}
-                  variant="danger"
+                  variant="destructive"
                 >
                   {isDisconnecting ? 'Disconnecting...' : 'Disconnect'}
                 </Button>
