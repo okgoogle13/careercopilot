@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useUserPreferences } from '../../contexts/UserPreferencesContext';
 import { templateAssetService } from '../../services/templateAssetService';
 import { atsComplianceValidator } from '../../services/atsComplianceValidator';
 import './TemplateSelector.css';
@@ -25,7 +24,6 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   onTemplateSelect,
   jobDescription
 }) => {
-  const { preferences } = useUserPreferences();
   const [templates, setTemplates] = useState<Template[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');

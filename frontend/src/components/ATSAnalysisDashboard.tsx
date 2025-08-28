@@ -65,7 +65,7 @@ const mockAnalysisResult: AnalysisResult = {
 
 export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
   const [analysisResult] = useState<AnalysisResult>(mockAnalysisResult);
-  const [selectedProfile, setSelectedProfile] = useState("Community Support Worker - Nishant Dougall");
+  const [selectedProfile] = useState("Community Support Worker - Nishant Dougall");
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-green-400";
