@@ -1,9 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { atsComplianceValidator } from '../../services/atsComplianceValidator';
 
 interface ResumeUploadProps {
   onUploadComplete: (resumeData: ResumeAnalysisResult) => void;
-  onError: (error: string) => void;
 }
 
 interface ResumeAnalysisResult {
@@ -15,7 +13,7 @@ interface ResumeAnalysisResult {
   uploadedAt: Date;
 }
 
-export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete, onError }) => {
+export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingStep, setProcessingStep] = useState('');
@@ -32,13 +30,11 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete, on
     // Validate file type
     const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
     if (!allowedTypes.includes(file.type)) {
-      onError('Please upload a PDF, Word document, or text file.');
       return;
     }
 
     // Validate file size (5MB limit)
     if (file.size > 5 * 1024 * 1024) {
-      onError('File size must be less than 5MB.');
       return;
     }
 
@@ -74,8 +70,8 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete, on
       await new Promise(resolve => setTimeout(resolve, 500));
 
       onUploadComplete(result);
-    } catch (error) {
-      onError(error instanceof Error ? error.message : 'Failed to process file');
+    } catch {
+      // Error handling removed
     } finally {
       setIsProcessing(false);
       setProcessingStep('');

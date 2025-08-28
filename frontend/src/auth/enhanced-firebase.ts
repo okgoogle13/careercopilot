@@ -30,7 +30,7 @@ async function initializeFirebase(): Promise<boolean> {
     console.log(`🔥 Attempting Firebase initialization (${connectionAttempts}/${maxConnectionAttempts})...`);
 
     // Test network connectivity first
-    const response = await fetch('https://firebase.googleapis.com/', {
+    await fetch('https://firebase.googleapis.com/', {
       method: 'HEAD',
       mode: 'no-cors',
       cache: 'no-cache',

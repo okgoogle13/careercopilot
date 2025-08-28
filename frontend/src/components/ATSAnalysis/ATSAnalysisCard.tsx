@@ -1,17 +1,13 @@
 import React from 'react';
-import { Template } from '../DocumentGeneration/TemplateSelector';
-import { atsComplianceValidator } from '../../services/atsComplianceValidator';
 
 interface ATSAnalysisCardProps {
   jobDescription?: string;
   onNavigateToTemplates: () => void;
-  onSelectTemplate?: (template: Template) => void;
 }
 
 const ATSAnalysisCard: React.FC<ATSAnalysisCardProps> = ({
   jobDescription,
   onNavigateToTemplates,
-  onSelectTemplate
 }) => {
   const [isAnalyzing, setIsAnalyzing] = React.useState(false);
   const [analysisComplete, setAnalysisComplete] = React.useState(false);
