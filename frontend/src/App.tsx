@@ -15,6 +15,7 @@ const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const OpportunitiesPage = lazy(() => import('./pages/OpportunitiesPage'));
 const KscGeneratorPage = lazy(() => import('./pages/KscGeneratorPage'));
 const DocumentGenerationPage = lazy(() => import('./pages/DocumentGenerationPage'));
+const UITestPage = lazy(() => import('./pages/UITestPage'));
 
 const App: React.FC = () => {
   return (
@@ -85,6 +86,14 @@ const App: React.FC = () => {
                       element={
                         <ErrorBoundary>
                           <DocumentGenerationPage />
+                        </ErrorBoundary>
+                      }
+                    />
+                    <Route
+                      path="/ui-test"
+                      element={
+                        <ErrorBoundary>
+                          <UITestPage />
                         </ErrorBoundary>
                       }
                     />
