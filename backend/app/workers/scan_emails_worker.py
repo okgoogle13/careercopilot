@@ -1,8 +1,7 @@
-import asyncio
-from fastapi import BackgroundTasks
 import logging
 
 logger = logging.getLogger(__name__)
+
 
 async def process_scan_emails_task(user_id):
     try:

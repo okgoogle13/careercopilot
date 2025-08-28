@@ -1,6 +1,6 @@
-import pytest
 from unittest.mock import patch, Mock
 from app.genkit_flows.email_scanner import extract_job_details_from_email
+
 
 @patch("app.genkit_flows.email_scanner.gemini_pro")
 def test_extract_job_details_from_email_flow(mock_gemini):

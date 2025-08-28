@@ -7,7 +7,8 @@ from genkit.plugins.google_genai.models.gemini import GEMINI_2_0_FLASH
 # Initialize the Gemini model
 model = GEMINI_2_0_FLASH
 
-  # ...existing code...
+
+# ...existing code...
 async def generate_voice_profile(user_id: str) -> dict:
     """
     Analyzes all of a user's documents to create a voice profile.
@@ -58,6 +59,8 @@ async def generate_voice_profile(user_id: str) -> dict:
         return voice_profile_data
 
     except Exception as e:
-        print(f"An error occurred during voice profile generation for user {user_id}: {e}")
+        print(
+            f"An error occurred during voice profile generation for user {user_id}: {e}"
+        )
         # Re-raise the exception so the calling endpoint can handle it
         raise e
