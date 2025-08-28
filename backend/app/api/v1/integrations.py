@@ -19,9 +19,18 @@ REDIRECT_URI = os.getenv(
 )
 
 
-@router.post("/scan-emails", dependencies=[Depends(verify_google_oidc_token)])
+async def set_user_id_in_state(request: Request, user_id: str = Query(...)):
+    """Set user_id in request state for rate limiting"""
+    request.state.user_uid = user_id
+    return user_id
+
+@router.post("/scan-emails")
 @authenticated_limiter.limit("5/minute")
-async def trigger_scan(request: Request, user_id: str = Query(...)):
+async def trigger_scan(
+    request: Request, 
+    user_id: str = Depends(set_user_id_in_state),
+    _: dict = Depends(verify_google_oidc_token)
+):
     """
     Triggers an email scan for a specific user, protected by OIDC authentication.
     This endpoint is intended to be called by a trusted scheduler (e.g., Google Cloud Scheduler).

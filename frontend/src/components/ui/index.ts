@@ -28,3 +28,15 @@ export { FormField, Input, Textarea, Select, Checkbox } from './FormField';
 export { default as Modal } from './Modal';
 export { default as SkipLink } from './SkipLink';
 export { ScreenReaderOnly, LiveRegion } from './ScreenReaderOnly';
+
+// New Radix UI components
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './accordion';
+export { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from './alert-dialog';
+export { AspectRatio } from './aspect-ratio';
+export { Avatar, AvatarImage, AvatarFallback } from './avatar';
+export { Badge } from './badge';
+export { Progress } from './progress';
+export { Input } from './input';
+export { Textarea } from './textarea';
+export { Label } from './label';
+export { cn } from './utils';

@@ -5,8 +5,9 @@ from typing import List, Literal
 
 import docx
 import pdfplumber
-from app.core.dependencies import get_current_user, get_user_document_from_firestore
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
+from app.core.dependencies import get_current_user_with_state, get_user_document_from_firestore
+from app.core.limiter import authenticated_limiter
+from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile, status
 from google.api_core.exceptions import GoogleAPICallError
 from jinja2 import Environment, FileSystemLoader
 from starlette.responses import StreamingResponse
@@ -45,9 +46,11 @@ async def process_and_upload_file(file: UploadFile, uid: str, doc_type: str):
 
 
 @router.post("/upload")
+@authenticated_limiter.limit("20/minute")  # Allow more uploads but still rate limit
 async def upload_and_parse_files(
+    request: Request,
     files: List[UploadFile] = File(...),
-    user: dict = Depends(get_current_user),
+    user: dict = Depends(get_current_user_with_state),
     doc_type: str = "resume",
 ):
     # This is a placeholder for the actual implementation
