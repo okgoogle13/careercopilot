@@ -1,5 +1,5 @@
 import React from 'react';
-import WorkflowManager from '../components/WorkflowManager/WorkflowManager';
+import { WorkflowManager } from '../components/WorkflowManager/WorkflowManager';
 
 const CompleteWorkflowPage: React.FC = () => {
   return (

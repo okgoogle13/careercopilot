@@ -128,7 +128,7 @@ const Navbar: React.FC = () => {
                   </div>
 
                   {/* Logout Button */}
-                  <Button variant="danger" size="sm" onClick={handleLogout}>
+                  <Button variant="destructive" size="sm" onClick={handleLogout}>
                     Logout
                   </Button>
                 </>

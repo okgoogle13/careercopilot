@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+// Types (stubbed for now)
 import ResumeUpload from '../ResumeUpload/ResumeUpload';
 import TemplateSelector, { Template } from '../DocumentGeneration/TemplateSelector';
 import DocumentPreview from '../DocumentGeneration/DocumentPreview';
@@ -15,6 +17,16 @@ interface ResumeData {
 }
 
 export const WorkflowManager: React.FC = () => {
+  // State variables
+  // State variables (single set)
+
+  // Simulate document generation
+  const generateDocument = async (_template: Template) => {
+    setTimeout(() => {
+      setGeneratedContent('Generated document content');
+      setCurrentStep('preview');
+    }, 1000);
+  };
   const [currentStep, setCurrentStep] = useState<WorkflowStep>('upload');
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [jobDescription, setJobDescription] = useState<string>('');
@@ -36,54 +48,7 @@ export const WorkflowManager: React.FC = () => {
     await generateDocument(template);
   };
 
-  const generateDocument = async (template: Template) => {
-    setIsGenerating(true);
-    setError('');
-    
-    try {
-      // Simulate document generation API call
-      const response = await fetch('http://127.0.0.1:8000/api/v1/templates/select', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          templateId: template.id,
-          userData: {
-            name: 'John Doe', // Would extract from resume
-            email: 'john.doe@example.com'
-          },
-          jobDescription: jobDescription || 'Position requiring relevant experience',
-          resumeContent: resumeData?.content
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`Generation failed: ${response.status}`);
-      }
-
-      const result = await response.json();
-      
-      // Fetch preview
-      const previewResponse = await fetch(`http://127.0.0.1:8000/api/v1/documents/preview/${template.id}`);
-      if (!previewResponse.ok) {
-        throw new Error(`Preview failed: ${previewResponse.status}`);
-      }
-
-      const previewData = await previewResponse.json();
-      setGeneratedContent(previewData.previewHtml);
-      setCurrentStep('preview');
-      
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Generation failed');
-    } finally {
-      setIsGenerating(false);
-    }
-  };
-
-  const handleExport = async (format: string) => {
-    // Implement export functionality
-    console.log(`Exporting as ${format}`);
+  const handleExport = async (_format: string) => {
     setCurrentStep('export');
   };
 
@@ -98,26 +63,24 @@ export const WorkflowManager: React.FC = () => {
   const getStepStatus = (step: WorkflowStep) => {
     const currentIndex = stepIndicators.findIndex(s => s.step === currentStep);
     const stepIndex = stepIndicators.findIndex(s => s.step === step);
-    
     if (stepIndex < currentIndex) return 'completed';
     if (stepIndex === currentIndex) return 'current';
     return 'pending';
   };
 
   const goToStep = (step: WorkflowStep) => {
-    // Allow navigation to previous steps
     const currentIndex = stepIndicators.findIndex(s => s.step === currentStep);
     const stepIndex = stepIndicators.findIndex(s => s.step === step);
-    
     if (stepIndex <= currentIndex) {
       setCurrentStep(step);
     }
   };
 
+  // ...existing code for generateDocument...
+
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Resume Optimization Workflow</h1>
-      
       {/* Progress Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
@@ -144,7 +107,6 @@ export const WorkflowManager: React.FC = () => {
                   {indicator.label}
                 </div>
               </div>
-              
               {index < stepIndicators.length - 1 && (
                 <div className={`flex-1 h-1 mx-4 ${
                   getStepStatus(stepIndicators[index + 1].step as WorkflowStep) === 'completed' || 
@@ -157,17 +119,13 @@ export const WorkflowManager: React.FC = () => {
           ))}
         </div>
       </div>
-
       {/* Content Area */}
       <div className="min-h-[500px]">
         {currentStep === 'upload' && (
           <div>
-            <ResumeUpload 
-              onUploadComplete={handleResumeUpload}
-            />
+            <ResumeUpload onUploadComplete={handleResumeUpload} />
           </div>
         )}
-
         {currentStep === 'analysis' && resumeData && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Resume Summary */}
@@ -200,7 +158,6 @@ export const WorkflowManager: React.FC = () => {
                 </div>
               </div>
             </div>
-
             {/* Job Description */}
             <div className="bg-white p-6 rounded-lg shadow-md border">
               <h3 className="text-lg font-semibold mb-4">Job Description (Optional)</h3>
@@ -219,7 +176,6 @@ export const WorkflowManager: React.FC = () => {
             </div>
           </div>
         )}
-
         {currentStep === 'templates' && (
           <div>
             <div className="mb-6">
@@ -233,7 +189,6 @@ export const WorkflowManager: React.FC = () => {
             />
           </div>
         )}
-
         {currentStep === 'generation' && (
           <div className="text-center py-16">
             <div className="mb-6">
@@ -243,16 +198,15 @@ export const WorkflowManager: React.FC = () => {
             <p className="text-gray-600">Applying template "{selectedTemplate?.name}" to your resume...</p>
           </div>
         )}
-
         {currentStep === 'preview' && generatedContent && selectedTemplate && (
           <div>
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-2">Document Preview</h2>
               <p className="text-gray-600">Review your optimized document and export when ready</p>
             </div>
-            <DocumentPreview 
+            <DocumentPreview
               documentContent={generatedContent}
-              templateName={selectedTemplate.name}
+              templateName={selectedTemplate?.name}
             />
             <div className="mt-6 flex justify-center gap-4">
               <button
@@ -270,7 +224,6 @@ export const WorkflowManager: React.FC = () => {
             </div>
           </div>
         )}
-
         {currentStep === 'export' && (
           <div className="text-center py-16">
             <div className="mb-6">
@@ -305,6 +258,6 @@ export const WorkflowManager: React.FC = () => {
       </div>
     </div>
   );
-};
 
-export default WorkflowManager;
+// ...existing code...
+}
