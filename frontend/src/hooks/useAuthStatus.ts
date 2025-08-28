@@ -56,7 +56,8 @@ export const useAuthStatus = (): AuthStatusResult => {
     if (!user) {
       return null;
     }
-    return user.token || 'fallback-token';
+    // Always return the Firebase ID token for API calls
+    return user.token || null;
   }, [user]);
 
   return {
