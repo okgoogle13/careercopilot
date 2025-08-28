@@ -92,11 +92,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - name: Prepare Frontend for Deployment
+        uses: ./.github/actions/prepare-frontend-deploy
         with:
-          name: frontend-dist
-          path: frontend/dist
+          node-version: ${{ env.NODE_VERSION }}
+          artifact-name: frontend-dist
+          fallback-build: 'true'
 
       - name: Deploy Frontend to Staging
         id: deploy-frontend
@@ -219,11 +220,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
+      - name: Prepare Frontend for Deployment
+        uses: ./.github/actions/prepare-frontend-deploy
         with:
-          name: frontend-dist
-          path: frontend/dist
+          node-version: ${{ env.NODE_VERSION }}
+          artifact-name: frontend-dist
+          fallback-build: 'true'
 
       - name: Deploy Frontend to Production
         id: deploy-frontend

@@ -1,0 +1,22 @@
+# Shared configuration for CI/CD workflows
+# This file defines common environment variables and settings
+# used across multiple workflows to ensure consistency
+
+env:
+  NODE_VERSION: '22'
+  PYTHON_VERSION: '3.13'
+  FRONTEND_DIST_ARTIFACT: 'frontend-dist'
+  BUNDLE_ANALYSIS_ARTIFACT: 'bundle-analysis'
+  
+  # Timeout configurations (in minutes)
+  FRONTEND_BUILD_TIMEOUT: 5
+  FRONTEND_INSTALL_TIMEOUT: 5
+  FRONTEND_LINT_TIMEOUT: 3
+  FRONTEND_TYPECHECK_TIMEOUT: 3
+  FRONTEND_FORMAT_CHECK_TIMEOUT: 2
+  BUNDLE_ANALYSIS_TIMEOUT: 3
+  
+  # Health check configurations
+  HEALTH_CHECK_TIMEOUT: 30
+  HEALTH_CHECK_MAX_ATTEMPTS: 5
+  DEPLOYMENT_PROPAGATION_WAIT: 30

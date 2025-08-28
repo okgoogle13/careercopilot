@@ -13,6 +13,7 @@ interface User {
   uid: string;
   email: string | null;
   displayName?: string | null;
+  token?: string | null;
 }
 
 interface AuthContextType {

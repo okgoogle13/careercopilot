@@ -1,4 +1,5 @@
 import os
+import logging
 from typing import List, Optional
 
 import genkit
@@ -11,6 +12,19 @@ from .extract_job_requirements import JobRequirements, extractJobRequirements
 from .extract_resume_entities import ResumeEntities, extractResumeEntities
 from .keyword_placer import KeywordPlacementSuggestion, suggestKeywordPlacement
 
+# Import enhanced error handling
+from app.core.enhanced_ai_error_handling import (
+    enhanced_ai_handler,
+    AIServiceType,
+    AIOperationContext,
+    FallbackStrategy,
+    create_fallback_strategy,
+    create_detailed_error_message
+)
+from app.core.ai_error_handling import AIError, AIErrorType
+
+logger = logging.getLogger(__name__)
+
 # Load environment variables and initialize Genkit if needed
 load_dotenv()
 if not genkit.get_plugin("googleai"):
@@ -18,6 +32,81 @@ if not genkit.get_plugin("googleai"):
 gemini_pro = googleai.gemini_pro
 
 # --- Helper Functions for Scoring Logic ---
+
+
+async def _perform_semantic_analysis(resume_text: str, job_description: str) -> SemanticAnalysis:
+    """Perform semantic analysis with proper error handling"""
+    semantic_prompt = f"""
+    Compare the resume against the job description.
+    Provide a semantic similarity score from 0-100 and a brief explanation.
+    Resume: "{resume_text}"
+    Job Description: "{job_description}"
+    """
+    
+    semantic_response = await gemini_pro.generate(
+        prompt=semantic_prompt,
+        output_schema=SemanticAnalysis,
+        config=googleai.GenerationConfig(response_mime_type="application/json"),
+    )
+    
+    return semantic_response.output()
+
+
+def _generate_recommendations(
+    keyword_analysis: dict,
+    semantic_analysis: SemanticAnalysis,
+    formatting_score: float,
+    job_extraction_success: bool,
+    resume_extraction_success: bool,
+    semantic_analysis_success: bool
+) -> List[str]:
+    """Generate actionable recommendations with fallback handling"""
+    recommendations = []
+    
+    # Add extraction failure warnings first
+    if not job_extraction_success:
+        recommendations.append(
+            "⚠️ Job description analysis was partially unavailable. "
+            "Recommendations may be limited. Please try again later for full analysis."
+        )
+    
+    if not resume_extraction_success:
+        recommendations.append(
+            "⚠️ Resume parsing was partially unavailable. "
+            "Please ensure your resume has clear sections and try again."
+        )
+    
+    # Standard recommendations
+    if keyword_analysis["missingKeywords"] and len(keyword_analysis["missingKeywords"]) > 0:
+        recommendations.append(
+            "Incorporate missing keywords to better match the job requirements. "
+            "See suggestions below for how to add them."
+        )
+    
+    if semantic_analysis_success and semantic_analysis.similarityScore < 70:
+        recommendations.append(
+            f"Improve the alignment of your experience with the job description. "
+            f"The analysis noted: '{semantic_analysis.explanation}'"
+        )
+    elif not semantic_analysis_success:
+        recommendations.append(
+            "Semantic similarity analysis was unavailable. "
+            "Focus on matching your experience descriptions to the job requirements."
+        )
+    
+    if formatting_score < 100:
+        recommendations.append(
+            "Ensure your resume includes clear sections for Skills, Work Experience, and Education."
+        )
+    
+    # Add general improvement suggestions if no specific issues found
+    if not recommendations or all("⚠️" in rec for rec in recommendations):
+        recommendations.append(
+            "Your resume shows good alignment with the job requirements. "
+            "Consider customizing specific achievements to highlight relevant experience."
+        )
+    
+    return recommendations
 
 
 def _calculate_keyword_score(
@@ -110,36 +199,116 @@ class AtsResult(BaseModel):
 
 @genkit.flow(output_schema=AtsResult)
 async def atsScoring(
-    resumeText: str, jobDescription: str, profileKeywords: List[str] = None
+    resumeText: str, jobDescription: str, profileKeywords: List[str] = None, user_id: str = "anonymous"
 ) -> AtsResult:
     """
-    Performs a comprehensive ATS-style analysis of a resume against a job description.
+    Performs a comprehensive ATS-style analysis of a resume against a job description
+    with enhanced error handling and fallback mechanisms.
     """
-    # Step 1 & 2: Extract structured data from both inputs in parallel
-    job_reqs_future = extractJobRequirements.run(jobDescription=jobDescription)
-    resume_entities_future = extractResumeEntities.run(resumeText=resumeText)
-    job_reqs: JobRequirements = await job_reqs_future
-    resume_entities: ResumeEntities = await resume_entities_future
-
-    # Step 3: Perform Semantic Relevance analysis
-    semantic_prompt = f"""
-    Compare the resume against the job description.
-    Provide a semantic similarity score from 0-100 and a brief explanation.
-    Resume: "{resumeText}"
-    Job Description: "{jobDescription}"
-    """
-    semantic_response = await gemini_pro.generate(
-        prompt=semantic_prompt,
-        output_schema=SemanticAnalysis,
-        config=googleai.GenerationConfig(response_mime_type="application/json"),
+    logger.info(f"Starting comprehensive ATS scoring for user {user_id}")
+    
+    # Step 1 & 2: Extract structured data from both inputs with error handling
+    job_reqs_result = await enhanced_ai_handler.execute_ai_operation(
+        lambda: extractJobRequirements.run(jobDescription=jobDescription),
+        AIOperationContext(
+            operation_name="extract_job_requirements",
+            service_type=AIServiceType.GENKIT_FLOW,
+            user_id=user_id,
+            input_size=len(jobDescription)
+        ),
+        create_fallback_strategy(
+            enabled=True,
+            degraded_mode=True
+        )
     )
-    semantic_analysis: SemanticAnalysis = semantic_response.output()
+    
+    resume_entities_result = await enhanced_ai_handler.execute_ai_operation(
+        lambda: extractResumeEntities.run(resumeText=resumeText),
+        AIOperationContext(
+            operation_name="extract_resume_entities",
+            service_type=AIServiceType.GENKIT_FLOW,
+            user_id=user_id,
+            input_size=len(resumeText)
+        ),
+        create_fallback_strategy(
+            enabled=True,
+            degraded_mode=True
+        )
+    )
+    
+    # Check if extractions failed
+    if not job_reqs_result.success:
+        logger.error(f"Job requirements extraction failed: {job_reqs_result.error}")
+        # Use fallback job requirements
+        job_reqs = JobRequirements(
+            requiredSkills=[],
+            preferredSkills=[],
+            experienceLevel="",
+            educationLevel="",
+            responsibilities=[]
+        )
+    else:
+        job_reqs = job_reqs_result.data
+    
+    if not resume_entities_result.success:
+        logger.error(f"Resume entities extraction failed: {resume_entities_result.error}")
+        # Use fallback resume entities
+        resume_entities = ResumeEntities(
+            skills=[],
+            experience=[],
+            education=[]
+        )
+    else:
+        resume_entities = resume_entities_result.data
 
-    # Step 4: Perform Keyword Matching
-    keyword_analysis = _calculate_keyword_score(resume_entities.skills, job_reqs, profileKeywords)
+    # Step 3: Perform Semantic Relevance analysis with error handling
+    semantic_analysis_result = await enhanced_ai_handler.execute_ai_operation(
+        lambda: _perform_semantic_analysis(resumeText, jobDescription),
+        AIOperationContext(
+            operation_name="semantic_analysis",
+            service_type=AIServiceType.SEMANTIC_ANALYSIS,
+            user_id=user_id,
+            input_size=len(resumeText) + len(jobDescription)
+        ),
+        create_fallback_strategy(
+            enabled=True,
+            fallback_data=SemanticAnalysis(
+                similarityScore=50,
+                explanation="Semantic analysis temporarily unavailable. Score represents neutral match."
+            )
+        )
+    )
+    
+    semantic_analysis = semantic_analysis_result.data
 
-    # Step 5: Perform Formatting Compliance check
-    formatting_score = _calculate_formatting_score(resume_entities)
+    # Step 4: Perform Keyword Matching (local operation - always succeeds)
+    keyword_analysis_result = await enhanced_ai_handler.execute_ai_operation(
+        lambda: _calculate_keyword_score(resume_entities.skills, job_reqs, profileKeywords),
+        AIOperationContext(
+            operation_name="keyword_matching",
+            service_type=AIServiceType.KEYWORD_MATCHING,
+            user_id=user_id,
+            metadata={"resume_skills_count": len(resume_entities.skills)}
+        )
+    )
+    
+    keyword_analysis = keyword_analysis_result.data if keyword_analysis_result.success else {
+        "score": 25.0,
+        "matchedKeywords": [],
+        "missingKeywords": []
+    }
+
+    # Step 5: Perform Formatting Compliance check (local operation)
+    formatting_score_result = await enhanced_ai_handler.execute_ai_operation(
+        lambda: _calculate_formatting_score(resume_entities),
+        AIOperationContext(
+            operation_name="formatting_analysis",
+            service_type=AIServiceType.TEXT_PROCESSING,
+            user_id=user_id
+        )
+    )
+    
+    formatting_score = formatting_score_result.data if formatting_score_result.success else 50.0
 
     # Step 6: Combine scores using weighted average
     weights = {"keyword": 0.45, "semantic": 0.35, "formatting": 0.20}
@@ -149,32 +318,45 @@ async def atsScoring(
         + formatting_score * weights["formatting"]
     )
 
-    # Step 7: Get keyword placement suggestions if there are missing keywords
+    # Step 7: Get keyword placement suggestions with error handling
     placement_suggestions = None
     if keyword_analysis["missingKeywords"]:
-        placement_response = await suggestKeywordPlacement.run(
-            resumeText=resumeText,
-            list_of_missing_keywords=keyword_analysis["missingKeywords"],
+        placement_result = await enhanced_ai_handler.execute_ai_operation(
+            lambda: suggestKeywordPlacement.run(
+                resumeText=resumeText,
+                list_of_missing_keywords=keyword_analysis["missingKeywords"],
+            ),
+            AIOperationContext(
+                operation_name="keyword_placement",
+                service_type=AIServiceType.GENKIT_FLOW,
+                user_id=user_id,
+                metadata={"missing_keywords_count": len(keyword_analysis["missingKeywords"])}
+            ),
+            create_fallback_strategy(
+                enabled=True,
+                fallback_data=None  # Placement suggestions are optional
+            )
         )
-        if placement_response:
-            placement_suggestions = placement_response.suggestions
+        
+        if placement_result.success and placement_result.data:
+            placement_suggestions = placement_result.data.suggestions
 
     # Step 8: Generate actionable recommendations
-    recommendations = []
-    if keyword_analysis["missingKeywords"]:
-        recommendations.append(
-            "Incorporate missing keywords to better match the job requirements. "
-            "See suggestions below for how to add them."
-        )
-    if semantic_analysis.similarityScore < 70:
-        recommendations.append(
-            f"Improve the alignment of your experience with the job description. "
-            f"The analysis noted: '{semantic_analysis.explanation}'"
-        )
-    if formatting_score < 100:
-        recommendations.append(
-            "Ensure your resume includes clear sections for Skills, Work Experience, and Education."
-        )
+    recommendations = _generate_recommendations(
+        keyword_analysis, 
+        semantic_analysis, 
+        formatting_score,
+        job_reqs_result.success,
+        resume_entities_result.success,
+        semantic_analysis_result.success
+    )
+
+    # Log completion
+    logger.info(
+        f"ATS scoring completed for user {user_id}. "
+        f"Overall score: {overall_score:.2f}, "
+        f"Fallbacks used: {job_reqs_result.fallback_used or resume_entities_result.fallback_used or semantic_analysis_result.fallback_used}"
+    )
 
     # Construct the final output
     return AtsResult(
