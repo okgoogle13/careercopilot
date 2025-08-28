@@ -29,3 +29,4 @@ To enable the automated, hourly email scan, you need to configure a **Cloud Sche
 Once created and enabled, this Cloud Scheduler job will call your API endpoint every hour, which will then process all connected users, ensuring that their job opportunities are always up-to-date.
 
 ## CI/CD Pipeline Test - Staging
+# Test comment for CI trigger
