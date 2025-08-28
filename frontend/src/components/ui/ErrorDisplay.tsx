@@ -62,7 +62,6 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
                   variant="ghost"
                   size="sm"
                   onClick={onRetry}
-                  loading={isRetrying}
                   className="text-red-700 hover:text-red-800 hover:bg-red-100 border-red-300 hover:border-red-400"
                 >
                   {isRetrying ? 'Retrying...' : 'Try Again'}
