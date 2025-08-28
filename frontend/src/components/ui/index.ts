@@ -1,5 +1,5 @@
 // UI Component exports for design system
-export { default as Button } from './Button';
+export { Button, buttonVariants } from './button';
 export {
   default as Card,
   CardHeader,
@@ -24,7 +24,7 @@ export {
   AuthErrorDisplay,
   LoadingErrorDisplay,
 } from './ErrorDisplay';
-export { FormField, Input, Textarea, Select, Checkbox } from './FormField';
+export { FormField, Select, Checkbox } from './FormField';
 export { default as Modal } from './Modal';
 export { default as SkipLink } from './SkipLink';
 export { ScreenReaderOnly, LiveRegion } from './ScreenReaderOnly';
