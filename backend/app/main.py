@@ -46,6 +46,7 @@ async def app_lifespan(app: FastAPI):
 
     # Initialize database
     from app.core.database import init_database
+
     try:
         init_database()
     except Exception as e:
@@ -108,13 +109,19 @@ api_router.include_router(database.router, prefix="/database", tags=["database"]
 
 # Core Workflows (Phase 1+2 Implementation)
 api_router.include_router(workflows.router, prefix="/workflows", tags=["workflows"])
-api_router.include_router(intelligence.router, prefix="/intelligence", tags=["intelligence"])
+api_router.include_router(
+    intelligence.router, prefix="/intelligence", tags=["intelligence"]
+)
 
 # Legacy API endpoints
 api_router.include_router(documents.router, prefix="/documents", tags=["documents"])
 api_router.include_router(jobs.router, prefix="/jobs", tags=["jobs"])
-api_router.include_router(integrations.router, prefix="/integrations", tags=["integrations"])
-api_router.include_router(opportunities.router, prefix="/opportunities", tags=["opportunities"])
+api_router.include_router(
+    integrations.router, prefix="/integrations", tags=["integrations"]
+)
+api_router.include_router(
+    opportunities.router, prefix="/opportunities", tags=["opportunities"]
+)
 api_router.include_router(settings.router, prefix="/settings", tags=["settings"])
 api_router.include_router(ksc.router, prefix="/ksc", tags=["ksc"])
 api_router.include_router(analysis.router, prefix="/analysis", tags=["analysis"])
@@ -123,23 +130,27 @@ api_router.include_router(ai_services.router, prefix="/ai", tags=["ai-services"]
 
 
 # Placeholder for the document generation flow
-async def document_generation_flow(template_id: str, user_profile: dict, job_description: str, ats_requirements: dict):
+async def document_generation_flow(
+    template_id: str, user_profile: dict, job_description: str, ats_requirements: dict
+):
     # In a real implementation, this would call the Genkit workflow
-    return {"status": "success", "template_id": template_id, "message": "Document generated successfully"}
+    return {
+        "status": "success",
+        "template_id": template_id,
+        "message": "Document generated successfully",
+    }
+
 
 @app.post("/api/generate-document-with-template")
 async def generate_document_with_template(
-    template_id: str,
-    user_profile: dict,
-    job_description: str,
-    ats_analysis: dict
+    template_id: str, user_profile: dict, job_description: str, ats_analysis: dict
 ):
     # Connect to your existing Genkit document generation workflow
     result = await document_generation_flow(
         template_id=template_id,
         user_profile=user_profile,
         job_description=job_description,
-        ats_requirements=ats_analysis
+        ats_requirements=ats_analysis,
     )
     return result
 
@@ -151,7 +162,7 @@ app.include_router(api_router, prefix="/api/v1")
 async def health_check():
     """Enhanced health check with database and service status"""
     from app.core.database import check_database_health
-    
+
     try:
         db_health = check_database_health()
         return {
@@ -159,18 +170,10 @@ async def health_check():
             "version": "2.0.0",
             "features": ["production-infrastructure", "advanced-intelligence"],
             "database": db_health,
-            "services": {
-                "api": "healthy",
-                "ai_client": "healthy",
-                "cache": "healthy"
-            }
+            "services": {"api": "healthy", "ai_client": "healthy", "cache": "healthy"},
         }
     except Exception as e:
-        return {
-            "status": "unhealthy", 
-            "error": str(e),
-            "version": "2.0.0"
-        }
+        return {"status": "unhealthy", "error": str(e), "version": "2.0.0"}
 
 
 @app.get("/cache/health", tags=["Health"])

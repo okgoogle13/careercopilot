@@ -62,5 +62,5 @@ async def compare_resume(
         db=db,
         uid=uid,
         document_id=body.document_id,
-        job_description_text=body.job_description_text
+        job_description_text=body.job_description_text,
     )

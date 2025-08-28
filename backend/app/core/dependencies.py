@@ -29,13 +29,12 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
 
 
 def get_current_user_with_state(
-    request: Request, 
-    current_user: dict = Depends(get_current_user)
+    request: Request, current_user: dict = Depends(get_current_user)
 ) -> dict:
     """
     Enhanced authentication dependency that validates the user AND sets
     the user UID in request.state for use by rate limiters.
-    
+
     This dependency should be used in authenticated endpoints where rate limiting
     is applied, as it enables the rate limiter to use the user UID as the key
     without duplicating authentication logic.
@@ -44,7 +43,7 @@ def get_current_user_with_state(
     user_uid = current_user.get("uid")
     if user_uid:
         request.state.user_uid = user_uid
-    
+
     return current_user
 
 
@@ -55,7 +54,12 @@ async def get_user_document_from_firestore(
     Fetches a user-owned document from Firestore and handles not-found errors.
     """
     uid = current_user["uid"]
-    doc_ref = db.collection("users").document(uid).collection("documents").document(document_id)
+    doc_ref = (
+        db.collection("users")
+        .document(uid)
+        .collection("documents")
+        .document(document_id)
+    )
     doc = await doc_ref.get()
     if not doc.exists:
         raise HTTPException(status_code=404, detail="Document not found")
