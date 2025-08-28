@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "./ui/Button";
 import { ProfileCard } from "./ProfileCard";
 import { CreateProfileCard } from "./CreateProfileCard";
 import { Plus, User } from "lucide-react";
