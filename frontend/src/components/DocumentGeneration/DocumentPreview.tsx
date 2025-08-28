@@ -24,8 +24,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
       } else if (format === 'txt') {
         await downloadAsText();
       }
-    } catch (error) {
-      console.error(`Export as ${format} failed:`, error);
+    } catch {
       alert(`Failed to export as ${format}. Please try again.`);
     }
   };
@@ -59,7 +58,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
         printWindow.close();
       }, 250);
       
-    } catch (error) {
+  } catch {
       // Fallback: Create downloadable HTML
       downloadAsHTML();
     }

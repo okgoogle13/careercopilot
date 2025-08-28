@@ -1,7 +1,7 @@
 // Fixed Firebase Configuration with Error Handling for Polling Issues
 import { initializeApp } from 'firebase/app';
-import { getFirestore, Firestore, connectFirestoreEmulator } from 'firebase/firestore';
-import { getAuth, Auth, connectAuthEmulator } from 'firebase/auth';
+import { getFirestore, Firestore } from 'firebase/firestore';
+import { getAuth, Auth } from 'firebase/auth';
 
 // Enhanced Firebase configuration with error handling
 const firebaseConfig = {
@@ -38,9 +38,6 @@ try {
   auth = getAuth(app);
   
   // Configure auth settings to prevent polling issues
-  auth.settings = {
-    appVerificationDisabledForTesting: import.meta.env.DEV, // Disable app verification in development
-  };
 
   // Add auth state change listener with error handling
   auth.onAuthStateChanged(
@@ -68,7 +65,7 @@ try {
     (error) => {
       console.error('🚨 Token refresh error:', error);
       // Handle token refresh failures gracefully
-      if (error.code === 'auth/network-request-failed') {
+  if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'auth/network-request-failed') {
         console.warn('⚠️ Network issue detected, retrying...');
       }
     }

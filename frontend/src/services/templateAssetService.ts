@@ -170,7 +170,7 @@ class TemplateAssetService {
   /**
    * Download template as PDF
    */
-  async downloadTemplate(templateId: string, userData: any): Promise<Blob> {
+  async downloadTemplate(templateId: string, _userData: unknown): Promise<Blob> {
     await this.delay(2000); // Simulate PDF generation time
     
     // In a real implementation, this would call the backend API
@@ -279,7 +279,7 @@ startxref
   /**
    * Validate template compatibility
    */
-  async validateTemplateCompatibility(templateId: string, userProfile: any): Promise<{
+  async validateTemplateCompatibility(templateId: string, _userProfile: unknown): Promise<{
     isCompatible: boolean;
     warnings: string[];
     suggestions: string[];
@@ -297,10 +297,17 @@ startxref
 
     const warnings: string[] = [];
     const suggestions: string[] = [];
-    let isCompatible = true;
+    const isCompatible = true;
 
     // Example validation logic
-    if (template.category === 'creative' && userProfile?.experience > 10) {
+    if (
+      template.category === 'creative' &&
+      typeof _userProfile === 'object' &&
+      _userProfile !== null &&
+      'experience' in _userProfile &&
+      typeof (_userProfile as { experience: unknown }).experience === 'number' &&
+      (_userProfile as { experience: number }).experience > 10
+    ) {
       warnings.push('Creative templates may not be suitable for very senior positions');
       suggestions.push('Consider using a professional template for senior roles');
     }

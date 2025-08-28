@@ -34,7 +34,7 @@ class FallbackAuth {
         const { user } = JSON.parse(stored);
         this.setState({ user, loading: false, error: null });
       }
-    } catch (error) {
+  } catch {
       console.warn('Failed to load persisted auth:', error);
     }
   }
@@ -51,12 +51,12 @@ class FallbackAuth {
       } else {
         localStorage.removeItem(this.storageKey);
       }
-    } catch (error) {
+  } catch {
       console.warn('Failed to persist auth:', error);
     }
   }
 
-  async signIn(email: string, password: string): Promise<User> {
+  async signIn(email: string, _password: string): Promise<User> {
     this.setState({ loading: true, error: null });
 
     // Simulate authentication delay
@@ -82,7 +82,7 @@ class FallbackAuth {
     }
   }
 
-  async signUp(email: string, password: string): Promise<User> {
+  async signUp(email: string, _password: string): Promise<User> {
     this.setState({ loading: true, error: null });
 
     // Simulate registration delay
