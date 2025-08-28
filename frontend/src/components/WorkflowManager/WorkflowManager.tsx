@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import ResumeUpload from '../ResumeUpload/ResumeUpload';
-import ATSAnalysisCard from '../ATSAnalysis/ATSAnalysisCard';
 import TemplateSelector, { Template } from '../DocumentGeneration/TemplateSelector';
 import DocumentPreview from '../DocumentGeneration/DocumentPreview';
 
@@ -21,8 +20,6 @@ export const WorkflowManager: React.FC = () => {
   const [jobDescription, setJobDescription] = useState<string>('');
   const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
   const [generatedContent, setGeneratedContent] = useState<string>('');
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [error, setError] = useState<string>('');
 
   const handleResumeUpload = (uploadedData: ResumeData) => {
     setResumeData(uploadedData);
@@ -167,13 +164,7 @@ export const WorkflowManager: React.FC = () => {
           <div>
             <ResumeUpload 
               onUploadComplete={handleResumeUpload}
-              onError={setError}
             />
-            {error && (
-              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                {error}
-              </div>
-            )}
           </div>
         )}
 
@@ -250,17 +241,6 @@ export const WorkflowManager: React.FC = () => {
             </div>
             <h2 className="text-2xl font-semibold mb-2">Generating Your Document</h2>
             <p className="text-gray-600">Applying template "{selectedTemplate?.name}" to your resume...</p>
-            {error && (
-              <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800 max-w-md mx-auto">
-                {error}
-                <button 
-                  onClick={() => setCurrentStep('templates')}
-                  className="ml-2 text-blue-600 underline"
-                >
-                  Try again
-                </button>
-              </div>
-            )}
           </div>
         )}
 
