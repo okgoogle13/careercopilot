@@ -342,10 +342,13 @@ async def test_concurrent_operations():
             fallback_data={"concurrent": i, "fallback": True}
         ) if should_fail else None
         
+        # Pass the actual async function and its arguments, not a lambda
         task = handler.execute_ai_operation(
-            lambda d=i*0.1, fail=should_fail: mock_operation(d, fail),
+            mock_operation,
             context,
-            fallback_strategy
+            fallback_strategy,
+            i*0.1,
+            should_fail
         )
         tasks.append(task)
 
@@ -355,10 +358,11 @@ async def test_concurrent_operations():
     # Check that all operations completed (some with fallbacks)
     assert len(results) == 5
     successful_count = sum(1 for r in results if r.success)
-    fallback_count = sum(1 for r in results if r.fallback_used)
-    
+    fallback_count = sum(1 for r in results if getattr(r, "fallback_used", False))
+
+    # At least two operations should use fallback (since should_fail is True for even indices)
     assert successful_count == 5  # All should succeed (some via fallback)
-    assert fallback_count > 0   # Some should have used fallbacks
+    assert fallback_count >= 2   # Some should have used fallbacks
 
 
 if __name__ == "__main__":

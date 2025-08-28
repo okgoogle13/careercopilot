@@ -4,7 +4,8 @@ from app.core.security import verify_google_oidc_token
 
 # from app.genkit_flows.email_scanner import scan_user_emails  # Temporarily disabled for deployment
 from app.core.limiter import authenticated_limiter
-from fastapi import APIRouter, Depends, HTTPException, Query, Request
+from fastapi import APIRouter, Depends, HTTPException, Query, Request, BackgroundTasks
+from app.workers.scan_emails_worker import process_scan_emails_task
 
 router = APIRouter()
 
@@ -27,9 +28,10 @@ async def set_user_id_in_state(request: Request, user_id: str = Query(...)):
 @router.post("/scan-emails")
 @authenticated_limiter.limit("5/minute")
 async def trigger_scan(
-    request: Request, 
+    request: Request,
     user_id: str = Depends(set_user_id_in_state),
-    _: dict = Depends(verify_google_oidc_token)
+    _: dict = Depends(verify_google_oidc_token),
+    background_tasks: BackgroundTasks = None
 ):
     """
     Triggers an email scan for a specific user, protected by OIDC authentication.
@@ -45,11 +47,9 @@ async def trigger_scan(
     # The scheduler will need to be configured to call this endpoint for each user.
     # For example: POST /scan-emails?user_id=some_user_id_123
 
-    # asyncio.create_task(scan_user_emails(user_id))  # Temporarily disabled for deployment
-    raise HTTPException(
-        status_code=503, detail="AI features temporarily unavailable during deployment"
-    )
-    # return {"message": "Email scan triggered successfully"}
+    # Trigger background email scan task
+    background_tasks.add_task(process_scan_emails_task, user_id)
+    return {"status": "accepted", "detail": "Email scan started", "user_id": user_id}, 202
 
 
 # ... (rest of the file remains the same, including OAuth endpoints)

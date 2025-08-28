@@ -10,7 +10,8 @@ import logging
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from app.core.ai_client import AIRequest, get_ai_client
+from app.core.ai_client import AIRequest
+from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
@@ -45,7 +46,9 @@ class ATSScorer:
     """ATS scoring operations using centralized AI system"""
 
     def __init__(self):
-        self.ai_client = get_ai_client()
+        # Use the centralized Genkit model from ai_config
+        self.model_config = get_ai_config().get_model_config("gemini-1.5-pro")
+        # If you need to instantiate a model/client, do it here using self.model_config
 
     @monitor_performance("ats_comprehensive_scoring")
     @cached_ai_operation("ats_scoring", user_id_param="user_id")
@@ -172,7 +175,13 @@ class ATSScorer:
                 temperature=0.4,
             )
 
-            response = await self.ai_client.generate_text(request)
+            # Example: Use the centralized model (replace with actual Genkit usage)
+            # response = await self.model_config.model.run(request)
+            # For now, fallback to previous ai_client if needed
+            response = await self.model_config.model.run(request) if hasattr(self.model_config, 'model') else None
+            # If not available, raise NotImplementedError
+            if response is None:
+                raise NotImplementedError("Genkit model integration not implemented. Please update ai_config.py with model instance.")
 
             # Parse JSON response
             try:

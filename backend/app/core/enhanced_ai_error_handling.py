@@ -160,9 +160,10 @@ class EnhancedAIErrorHandler:
                 fallback_result = await self._execute_fallback(
                     context, fallback_strategy, ai_error, *args, **kwargs
                 )
-                if fallback_result.success:
+                # Mark fallback_used True if fallback was attempted, regardless of success
+                if fallback_result:
+                    fallback_result.fallback_used = True
                     result = fallback_result
-                    result.fallback_used = True
                     
         except Exception as e:
             # Unexpected error - wrap in AIError
