@@ -16,6 +16,8 @@ from starlette.middleware.base import BaseHTTPMiddleware
 
 from .personal_cache import get_ai_cache
 
+from .cache_deprecated import AICache
+
 logger = logging.getLogger(__name__)
 
 

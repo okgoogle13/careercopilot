@@ -1,33 +1,22 @@
 from unittest.mock import MagicMock, patch
 
-import pytest
-from httpx import AsyncClient
-
-
 # A pydantic model mock to simulate the output of the genkit flow
 class MockVoiceProfile(MagicMock):
     def dict(self):
         return {"tone": "professional", "style": "concise"}
 
-
-@pytest.mark.asyncio
-async def test_generate_and_save_voice_profile(client: AsyncClient, mock_db: MagicMock):
+def test_generate_and_save_voice_profile(client, mock_db):
     """Test the generate_and_save_voice_profile endpoint."""
-    # Mock the Genkit flow's run method
-    # with patch.object(generateVoiceProfile, "run") as mock_run:
-    with patch("app.api.v1.profile.generateVoiceProfile") as mock_flow:
-        # Configure the mock to return a future-like object with a result
-        mock_flow.run.return_value = MockVoiceProfile()
+    with patch("app.api.v1.profile.generate_voice_profile") as mock_flow:
+        mock_flow.return_value = {"tone": "professional", "style": "concise"}
+        # Attach mock_db to app for test compatibility
+        client.app.mock_db = mock_db
 
-        # Make the request to the endpoint
-        response = await client.post("/api/v1/profile/generate-voice-profile")
+        response = client.post("/api/v1/profile/generate-voice-profile")
 
-        # Assert the response
         assert response.status_code == 200
         assert response.json() == {"tone": "professional", "style": "concise"}
-
-        # Assert that the Genkit flow was called with the correct UID
-        mock_flow.run.assert_called_once_with("test_user_id")
+        mock_flow.assert_called_once_with("test_user_id")
 
         # Assert that the database was called to save the profile
         mock_db.collection.assert_called_with("users")

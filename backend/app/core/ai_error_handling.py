@@ -60,7 +60,7 @@ class AIOperationHandler:
         """Classify an error to determine retry strategy."""
         error_str = str(error).lower()
 
-        if "rate limit" in error_str or "quota" in error_str:
+        if "rate limit" in error_str or "quota" in error_str or "too many requests" in error_str:
             return AIErrorType.RATE_LIMIT
         elif "timeout" in error_str or "deadline" in error_str:
             return AIErrorType.TIMEOUT

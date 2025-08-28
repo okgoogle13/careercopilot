@@ -1,6 +1,7 @@
 from app.core.dependencies import get_current_user_with_state
 from app.core.limiter import limiter
 from fastapi import APIRouter, Body, Depends, HTTPException, Request
+from app.services.jobs_service import JobsService
 
 # from app.genkit_flows.job_analyzer import analyze_job_description  # Temporarily disabled for deployment
 # from app.genkit_flows.resume_analyzer import compare_resume_to_job  #
@@ -52,33 +53,14 @@ async def compare_resume(
     Orchestrates the analysis of a job description and comparison with a user's resume.
     """
 
-    # Temporarily disabled for deployment - genkit flows unavailable
-    raise HTTPException(
-        status_code=503, detail="AI features temporarily unavailable during deployment"
-    )
+    # Example Firestore and user ID extraction (replace with actual logic)
+    db = request.app.state.firestore_db
+    uid = current_user.get("uid")
 
-    # try:
-    #     # Step A: Analyze the job description
-    #     job_analysis_str = await analyze_job_description.run(body.job_description_text)
-    #     job_analysis_data = json.loads(job_analysis_str)
-    #
-    #     # Step B: Fetch the user's resume text from Firestore
-    #     doc_ref = db.collection("users").document(uid).collection("documents").document(body.document_id)
-    #     doc = await doc_ref.get()
-    #     if not doc.exists:
-    #         raise HTTPException(status_code=404, detail="Resume document not found")
-    #
-    #     resume_text = doc.to_dict().get("extractedText")
-    #     if not resume_text:
-    #         raise HTTPException(status_code=400, detail="Resume has no extracted text.")
-    #
-    #     # Step C: Compare the resume to the job analysis
-    #     comparison_result_str = await compare_resume_to_job.run(
-    #         resume_text=resume_text,
-    #         job_analysis_data=job_analysis_data
-    #     )
-    #     comparison_result = json.loads(comparison_result_str)
-    #
-    #     return comparison_result
-    # except Exception as e:
-    #     raise HTTPException(status_code=500, detail=f"An error occurred during comparison: {e}")
+    # Call the service layer for orchestration and error handling
+    return await JobsService.compare_resume_to_job_and_save(
+        db=db,
+        uid=uid,
+        document_id=body.document_id,
+        job_description_text=body.job_description_text
+    )
