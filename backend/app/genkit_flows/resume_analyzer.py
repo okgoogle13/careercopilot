@@ -42,19 +42,8 @@ class _DummyGeminiPro:
         )
 
 
-# Default to dummy; override if plugin available
-gemini_pro = _DummyGeminiPro()
-
-if googleai and genkit:
-    try:
-        if not genkit.get_plugin("googleai"):
-            if GEMINI_API_KEY:
-                genkit.init(plugins=[googleai.init(api_key=GEMINI_API_KEY)])
-        if genkit.get_plugin("googleai"):
-            gemini_pro = googleai.gemini_pro  # type: ignore[attr-defined]
-    except Exception:
-        # Keep dummy if initialization fails
-        pass
+from app.core.ai_config import get_ai_config
+gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
 
 @with_ai_error_handling()

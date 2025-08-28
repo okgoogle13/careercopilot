@@ -62,7 +62,6 @@ async def app_lifespan(app: FastAPI):
 
     # Shutdown
     await stop_system_monitoring()
-    await cache_lifespan(app).__aexit__(None, None, None)
 
 
 app = FastAPI(title="Careercopilot API", lifespan=app_lifespan)

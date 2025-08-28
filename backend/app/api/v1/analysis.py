@@ -3,6 +3,8 @@ import logging
 from typing import Optional
 
 from app.ai_operations.ats_scoring import ats_scorer
+from fastapi import BackgroundTasks
+from app.workers.ats_score_worker import process_ats_score_task
 from app.ai_operations.job_analyzer import job_analyzer
 from app.ai_operations.resume_analyzer import resume_analyzer
 from app.core.ai_error_handling import AIError
@@ -50,6 +52,7 @@ async def get_ats_score(
     request: AtsScoreRequest,
     document: dict = Depends(get_user_document_from_firestore),
     user: dict = Depends(get_current_user_with_state),
+    background_tasks: BackgroundTasks = None,
 ):
     """
     Accepts a resume document and a job description, runs them through the
@@ -67,88 +70,15 @@ async def get_ats_score(
             detail="The selected document has no text content to analyze.",
         )
 
-    # Perform comprehensive ATS analysis with enhanced error handling
-    ats_analysis_result = await enhanced_ai_handler.execute_ai_operation(
-        lambda: ats_scorer.comprehensive_ats_analysis(
-            user_id=user_id,
-            resume_text=resume_text,
-            job_description=request.job_description,
-        ),
-        AIOperationContext(
-            operation_name="comprehensive_ats_analysis",
-            service_type=AIServiceType.GENKIT_FLOW,
-            user_id=user_id,
-            input_size=len(resume_text) + len(request.job_description),
-            metadata={
-                "document_id": document_id,
-                "resume_length": len(resume_text),
-                "job_description_length": len(request.job_description)
-            }
-        ),
-        create_fallback_strategy(
-            enabled=True,
-            degraded_mode=True
-        )
+    # Trigger background ATS scoring task
+    background_tasks.add_task(
+        process_ats_score_task,
+        user_id,
+        document_id,
+        resume_text,
+        request.job_description
     )
-    
-    # Handle analysis result
-    if not ats_analysis_result.success:
-        error_message = create_detailed_error_message(
-            ats_analysis_result, 
-            "ATS scoring analysis"
-        )
-        logger.error(
-            f"ATS analysis failed for user {user_id}, document {document_id}: {error_message}"
-        )
-        
-        # Return error with appropriate status code based on error type
-        if ats_analysis_result.error:
-            if ats_analysis_result.error.error_type.value in ["rate_limit", "quota_exceeded"]:
-                raise HTTPException(
-                    status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-                    detail=error_message
-                )
-            elif ats_analysis_result.error.error_type.value in ["service_unavailable", "timeout"]:
-                raise HTTPException(
-                    status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                    detail=error_message
-                )
-            elif ats_analysis_result.error.error_type.value == "invalid_request":
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail=error_message
-                )
-        
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=error_message
-        )
-    
-    analysis_result = ats_analysis_result.data
-    
-    # Save the analysis result with enhanced metadata
-    try:
-        await _save_analysis_result(
-            user_id=user_id,
-            document_id=document_id,
-            analysis_type="ats_score",
-            request_data={"job_description": request.job_description},
-            result=analysis_result,
-            operation_result=ats_analysis_result
-        )
-    except Exception as save_error:
-        # Log save error but don't fail the request if analysis succeeded
-        logger.error(
-            f"Failed to save ATS analysis for user {user_id}, document {document_id}: {str(save_error)}"
-        )
-    
-    logger.info(
-        f"ATS score analysis completed for user {user_id}, document {document_id}. "
-        f"Score: {analysis_result.get('overallScore', 'N/A')}, "
-        f"Fallback used: {ats_analysis_result.fallback_used}"
-    )
-    
-    return analysis_result
+    return {"status": "accepted", "detail": "ATS scoring started", "document_id": document_id}, 202
 
 
 @router.post("/resume-analysis/{document_id}")

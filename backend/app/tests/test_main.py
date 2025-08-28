@@ -1,10 +1,6 @@
-import pytest
-from httpx import AsyncClient
 
-
-@pytest.mark.asyncio
-async def test_health_check(client: AsyncClient):
+def test_health_check(client):
     """Test the health check endpoint."""
-    response = await client.get("/health")
+    response = client.get("/api/v1/profile/health")
     assert response.status_code == 200
     assert response.json() == {"status": "ok"}

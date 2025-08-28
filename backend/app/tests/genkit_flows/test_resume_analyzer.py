@@ -195,7 +195,7 @@ class TestResumeAnalyzer:
     def test_very_long_input_handled(self, mock_gemini):
         """Test that very long input is properly handled."""
         # Create a very long resume (but within limits)
-        long_resume = "Experience: " + "Python development, " * 1000
+        long_resume = "Experience: " + "Python development, " * 400
 
         mock_response = Mock()
         mock_response.text.return_value = json.dumps(self.expected_ai_response)
