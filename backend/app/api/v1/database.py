@@ -4,11 +4,18 @@ Database API endpoints for production system management.
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from typing import List, Dict, Any
+from typing import List, Dict
 import logging
 
 from app.core.database import get_db, check_database_health, init_database
-from app.models.database import User, Job, Application, AIInteraction, AgentSession, MarketAnalysis
+from app.models.database import (
+    User,
+    Job,
+    Application,
+    AIInteraction,
+    AgentSession,
+    MarketAnalysis,
+)
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -43,7 +50,7 @@ class UserResponse(BaseModel):
     target_roles: List[str] = []
     salary_range: Dict[str, int] = {}
     created_at: datetime
-    
+
     class Config:
         from_attributes = True
 
@@ -64,7 +71,7 @@ async def initialize_database():
         logger.error(f"Database initialization failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Database initialization failed: {str(e)}"
+            detail=f"Database initialization failed: {str(e)}",
         )
 
 
@@ -77,24 +84,24 @@ async def create_user(user_data: UserCreate, db: Session = Depends(get_db)):
         if existing_user:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="User with this email already exists"
+                detail="User with this email already exists",
             )
-        
+
         # Create new user
         db_user = User(**user_data.dict())
         db.add(db_user)
         db.commit()
         db.refresh(db_user)
-        
+
         logger.info(f"Created new user: {db_user.email}")
         return db_user
-        
+
     except Exception as e:
         db.rollback()
         logger.error(f"Failed to create user: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to create user: {str(e)}"
+            detail=f"Failed to create user: {str(e)}",
         )
 
 
@@ -104,8 +111,7 @@ async def get_user(user_id: str, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
         )
     return user
 
@@ -116,47 +122,58 @@ async def get_user_jobs(user_id: str, limit: int = 50, db: Session = Depends(get
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
         )
-    
-    jobs = db.query(Job).filter(Job.user_id == user_id).order_by(Job.discovered_at.desc()).limit(limit).all()
+
+    jobs = (
+        db.query(Job)
+        .filter(Job.user_id == user_id)
+        .order_by(Job.discovered_at.desc())
+        .limit(limit)
+        .all()
+    )
     return jobs
 
 
 @router.get("/users/{user_id}/applications")
-async def get_user_applications(user_id: str, limit: int = 50, db: Session = Depends(get_db)):
+async def get_user_applications(
+    user_id: str, limit: int = 50, db: Session = Depends(get_db)
+):
     """Get applications for a specific user"""
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
         )
-    
-    applications = (db.query(Application)
-                   .filter(Application.user_id == user_id)
-                   .order_by(Application.last_updated.desc())
-                   .limit(limit)
-                   .all())
+
+    applications = (
+        db.query(Application)
+        .filter(Application.user_id == user_id)
+        .order_by(Application.last_updated.desc())
+        .limit(limit)
+        .all()
+    )
     return applications
 
 
 @router.get("/users/{user_id}/ai-interactions")
-async def get_user_ai_interactions(user_id: str, limit: int = 100, db: Session = Depends(get_db)):
+async def get_user_ai_interactions(
+    user_id: str, limit: int = 100, db: Session = Depends(get_db)
+):
     """Get AI interactions for a specific user"""
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
         )
-    
-    interactions = (db.query(AIInteraction)
-                   .filter(AIInteraction.user_id == user_id)
-                   .order_by(AIInteraction.created_at.desc())
-                   .limit(limit)
-                   .all())
+
+    interactions = (
+        db.query(AIInteraction)
+        .filter(AIInteraction.user_id == user_id)
+        .order_by(AIInteraction.created_at.desc())
+        .limit(limit)
+        .all()
+    )
     return interactions
 
 
@@ -170,25 +187,33 @@ async def get_database_stats(db: Session = Depends(get_db)):
             "applications": db.query(Application).count(),
             "ai_interactions": db.query(AIInteraction).count(),
             "agent_sessions": db.query(AgentSession).count(),
-            "market_analyses": db.query(MarketAnalysis).count()
+            "market_analyses": db.query(MarketAnalysis).count(),
         }
-        
+
         # Recent activity
         recent_users = db.query(User).order_by(User.created_at.desc()).limit(5).all()
-        recent_applications = (db.query(Application)
-                             .order_by(Application.last_updated.desc())
-                             .limit(5)
-                             .all())
-        
+        recent_applications = (
+            db.query(Application)
+            .order_by(Application.last_updated.desc())
+            .limit(5)
+            .all()
+        )
+
         return {
             "counts": stats,
-            "recent_users": [{"id": u.id, "email": u.email, "created_at": u.created_at} for u in recent_users],
-            "recent_applications": [{"id": a.id, "status": a.status, "last_updated": a.last_updated} for a in recent_applications]
+            "recent_users": [
+                {"id": u.id, "email": u.email, "created_at": u.created_at}
+                for u in recent_users
+            ],
+            "recent_applications": [
+                {"id": a.id, "status": a.status, "last_updated": a.last_updated}
+                for a in recent_applications
+            ],
         }
-        
+
     except Exception as e:
         logger.error(f"Failed to get database stats: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to get database stats: {str(e)}"
+            detail=f"Failed to get database stats: {str(e)}",
         )

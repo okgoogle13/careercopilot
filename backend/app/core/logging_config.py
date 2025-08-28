@@ -267,10 +267,14 @@ class LoggerMixin:
     @property
     def logger(self) -> logging.Logger:
         """Get logger instance for this class"""
-        return logging.getLogger(f"{self.__class__.__module__}.{self.__class__.__name__}")
+        return logging.getLogger(
+            f"{self.__class__.__module__}.{self.__class__.__name__}"
+        )
 
 
-def log_function_call(logger: Optional[logging.Logger] = None, level: int = logging.DEBUG):
+def log_function_call(
+    logger: Optional[logging.Logger] = None, level: int = logging.DEBUG
+):
     """
     Decorator to log function calls with parameters and results
 

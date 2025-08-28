@@ -4,18 +4,16 @@ Tests for enhanced AI error handling system
 
 import asyncio
 import pytest
-from unittest.mock import AsyncMock, Mock, patch
-from dataclasses import dataclass
+from unittest.mock import Mock
 
 from app.core.enhanced_ai_error_handling import (
     EnhancedAIErrorHandler,
     AIServiceType,
     AIOperationContext,
     AIOperationResult,
-    FallbackStrategy,
     create_fallback_strategy,
     create_detailed_error_message,
-    enhanced_ai_handler
+    enhanced_ai_handler,
 )
 from app.core.ai_error_handling import AIError, AIErrorType
 
@@ -30,21 +28,19 @@ class TestEnhancedAIErrorHandler:
             operation_name="test_operation",
             service_type=AIServiceType.GEMINI_ANALYSIS,
             user_id="test_user_123",
-            input_size=100
+            input_size=100,
         )
 
     @pytest.mark.asyncio
     async def test_successful_operation(self):
         """Test successful AI operation execution"""
+
         # Mock a successful operation
         async def mock_operation():
             await asyncio.sleep(0.1)  # Simulate processing time
             return {"result": "success", "data": "test_data"}
 
-        result = await self.handler.execute_ai_operation(
-            mock_operation,
-            self.context
-        )
+        result = await self.handler.execute_ai_operation(mock_operation, self.context)
 
         assert result.success is True
         assert result.data == {"result": "success", "data": "test_data"}
@@ -56,20 +52,18 @@ class TestEnhancedAIErrorHandler:
     async def test_operation_with_retry_success(self):
         """Test operation that fails initially but succeeds on retry"""
         call_count = 0
-        
+
         async def mock_failing_then_success():
             nonlocal call_count
             call_count += 1
             if call_count == 1:
                 raise AIError(
-                    message="Rate limit exceeded",
-                    error_type=AIErrorType.RATE_LIMIT
+                    message="Rate limit exceeded", error_type=AIErrorType.RATE_LIMIT
                 )
             return {"result": "success_after_retry"}
 
         result = await self.handler.execute_ai_operation(
-            mock_failing_then_success,
-            self.context
+            mock_failing_then_success, self.context
         )
 
         assert result.success is True
@@ -79,24 +73,22 @@ class TestEnhancedAIErrorHandler:
     @pytest.mark.asyncio
     async def test_operation_with_fallback_success(self):
         """Test operation that fails but succeeds with fallback"""
+
         async def mock_failing_operation():
             raise AIError(
                 message="Service unavailable",
-                error_type=AIErrorType.SERVICE_UNAVAILABLE
+                error_type=AIErrorType.SERVICE_UNAVAILABLE,
             )
 
         async def mock_fallback():
             return {"fallback": "data", "degraded": True}
 
         fallback_strategy = create_fallback_strategy(
-            enabled=True,
-            fallback_function=mock_fallback
+            enabled=True, fallback_function=mock_fallback
         )
 
         result = await self.handler.execute_ai_operation(
-            mock_failing_operation,
-            self.context,
-            fallback_strategy
+            mock_failing_operation, self.context, fallback_strategy
         )
 
         assert result.success is True
@@ -106,21 +98,16 @@ class TestEnhancedAIErrorHandler:
     @pytest.mark.asyncio
     async def test_operation_with_degraded_mode_fallback(self):
         """Test fallback to degraded mode"""
+
         async def mock_failing_operation():
             raise AIError(
-                message="Authentication failed",
-                error_type=AIErrorType.AUTHENTICATION
+                message="Authentication failed", error_type=AIErrorType.AUTHENTICATION
             )
 
-        fallback_strategy = create_fallback_strategy(
-            enabled=True,
-            degraded_mode=True
-        )
+        fallback_strategy = create_fallback_strategy(enabled=True, degraded_mode=True)
 
         result = await self.handler.execute_ai_operation(
-            mock_failing_operation,
-            self.context,
-            fallback_strategy
+            mock_failing_operation, self.context, fallback_strategy
         )
 
         assert result.success is True
@@ -131,15 +118,14 @@ class TestEnhancedAIErrorHandler:
     @pytest.mark.asyncio
     async def test_operation_complete_failure(self):
         """Test operation that fails completely (no fallback)"""
+
         async def mock_failing_operation():
             raise AIError(
-                message="Invalid request format",
-                error_type=AIErrorType.INVALID_REQUEST
+                message="Invalid request format", error_type=AIErrorType.INVALID_REQUEST
             )
 
         result = await self.handler.execute_ai_operation(
-            mock_failing_operation,
-            self.context
+            mock_failing_operation, self.context
         )
 
         assert result.success is False
@@ -153,9 +139,7 @@ class TestEnhancedAIErrorHandler:
         # Simulate multiple operations
         for i in range(5):
             result = AIOperationResult(
-                success=True,
-                execution_time=0.1 + i * 0.01,
-                context=self.context
+                success=True, execution_time=0.1 + i * 0.01, context=self.context
             )
             self.handler._record_operation_stats(result)
 
@@ -164,12 +148,12 @@ class TestEnhancedAIErrorHandler:
             success=False,
             execution_time=0.2,
             context=self.context,
-            error=AIError("Test error", AIErrorType.TIMEOUT)
+            error=AIError("Test error", AIErrorType.TIMEOUT),
         )
         self.handler._record_operation_stats(failed_result)
 
         health = self.handler.get_operation_health("test_operation")
-        
+
         assert health["status"] in ["healthy", "degraded", "unhealthy"]
         assert "success_rate" in health
         assert "avg_execution_time" in health
@@ -181,7 +165,7 @@ class TestEnhancedAIErrorHandler:
             enabled=True,
             fallback_data={"test": "data"},
             use_cached_result=True,
-            degraded_mode=False
+            degraded_mode=False,
         )
 
         assert strategy.enabled is True
@@ -199,9 +183,7 @@ class TestEnhancedAIErrorHandler:
         # Test rate limit error
         rate_limit_error = AIError("Rate limit", AIErrorType.RATE_LIMIT)
         error_result = AIOperationResult(
-            success=False,
-            error=rate_limit_error,
-            context=self.context
+            success=False, error=rate_limit_error, context=self.context
         )
         message = create_detailed_error_message(error_result, "test operation")
         assert "AI service is currently busy" in message
@@ -210,9 +192,7 @@ class TestEnhancedAIErrorHandler:
         # Test timeout error
         timeout_error = AIError("Timeout", AIErrorType.TIMEOUT)
         timeout_result = AIOperationResult(
-            success=False,
-            error=timeout_error,
-            context=self.context
+            success=False, error=timeout_error, context=self.context
         )
         message = create_detailed_error_message(timeout_result)
         assert "took too long" in message
@@ -222,7 +202,9 @@ class TestEnhancedAIErrorHandler:
         # Check that different service types have different retry configs
         gemini_handler = self.handler.operation_handlers[AIServiceType.GEMINI_ANALYSIS]
         scoring_handler = self.handler.operation_handlers[AIServiceType.GEMINI_SCORING]
-        keyword_handler = self.handler.operation_handlers[AIServiceType.KEYWORD_MATCHING]
+        keyword_handler = self.handler.operation_handlers[
+            AIServiceType.KEYWORD_MATCHING
+        ]
 
         assert gemini_handler.retry_config.max_attempts == 4
         assert scoring_handler.retry_config.max_attempts == 2
@@ -234,10 +216,10 @@ class TestEnhancedAIErrorHandler:
         scoring_context = AIOperationContext(
             operation_name="test",
             service_type=AIServiceType.GEMINI_SCORING,
-            user_id="test"
+            user_id="test",
         )
         result = self.handler._get_degraded_result(scoring_context)
-        
+
         assert "overall_score" in result
         assert result["overall_score"] == 50.0
         assert result["degraded_mode"] is True
@@ -246,10 +228,10 @@ class TestEnhancedAIErrorHandler:
         extraction_context = AIOperationContext(
             operation_name="test",
             service_type=AIServiceType.GEMINI_EXTRACTION,
-            user_id="test"
+            user_id="test",
         )
         result = self.handler._get_degraded_result(extraction_context)
-        
+
         assert "skills" in result
         assert "extracted" in result
         assert result["extracted"] is False
@@ -264,7 +246,7 @@ class TestIntegrationWithExistingCode:
         """Test ATS scoring with enhanced error handling (mock)"""
         # This would test the actual ats_scoring.py integration
         # For now, we'll test the pattern
-        
+
         async def mock_extract_job_requirements():
             return Mock(requiredSkills=["Python"], preferredSkills=["FastAPI"])
 
@@ -274,40 +256,39 @@ class TestIntegrationWithExistingCode:
         context = AIOperationContext(
             operation_name="test_ats_integration",
             service_type=AIServiceType.GENKIT_FLOW,
-            user_id="test_user"
+            user_id="test_user",
         )
 
         # Test successful extraction
         result = await enhanced_ai_handler.execute_ai_operation(
-            mock_extract_job_requirements,
-            context
+            mock_extract_job_requirements, context
         )
-        
+
         assert result.success is True
 
     @pytest.mark.asyncio
     async def test_api_endpoint_error_handling_pattern(self):
         """Test API endpoint error handling pattern"""
         # Simulate the pattern used in analysis.py
-        
+
         async def mock_ai_operation():
-            raise AIError("Service temporarily unavailable", AIErrorType.SERVICE_UNAVAILABLE)
+            raise AIError(
+                "Service temporarily unavailable", AIErrorType.SERVICE_UNAVAILABLE
+            )
 
         context = AIOperationContext(
             operation_name="api_test",
             service_type=AIServiceType.GEMINI_ANALYSIS,
-            user_id="test_user"
+            user_id="test_user",
         )
 
         fallback_strategy = create_fallback_strategy(
             enabled=True,
-            fallback_data={"degraded": True, "message": "Service unavailable"}
+            fallback_data={"degraded": True, "message": "Service unavailable"},
         )
 
         result = await enhanced_ai_handler.execute_ai_operation(
-            mock_ai_operation,
-            context,
-            fallback_strategy
+            mock_ai_operation, context, fallback_strategy
         )
 
         assert result.success is True
@@ -319,7 +300,7 @@ class TestIntegrationWithExistingCode:
 async def test_concurrent_operations():
     """Test concurrent AI operations with error handling"""
     handler = EnhancedAIErrorHandler()
-    
+
     async def mock_operation(delay: float, should_fail: bool = False):
         await asyncio.sleep(delay)
         if should_fail:
@@ -334,21 +315,20 @@ async def test_concurrent_operations():
             service_type=AIServiceType.GEMINI_ANALYSIS,
             user_id="concurrent_user",
         )
-        
+
         # Make some operations fail
         should_fail = i % 2 == 0
-        fallback_strategy = create_fallback_strategy(
-            enabled=True,
-            fallback_data={"concurrent": i, "fallback": True}
-        ) if should_fail else None
-        
+        fallback_strategy = (
+            create_fallback_strategy(
+                enabled=True, fallback_data={"concurrent": i, "fallback": True}
+            )
+            if should_fail
+            else None
+        )
+
         # Pass the actual async function and its arguments, not a lambda
         task = handler.execute_ai_operation(
-            mock_operation,
-            context,
-            fallback_strategy,
-            i*0.1,
-            should_fail
+            mock_operation, context, fallback_strategy, i * 0.1, should_fail
         )
         tasks.append(task)
 
@@ -362,7 +342,7 @@ async def test_concurrent_operations():
 
     # At least two operations should use fallback (since should_fail is True for even indices)
     assert successful_count == 5  # All should succeed (some via fallback)
-    assert fallback_count >= 2   # Some should have used fallbacks
+    assert fallback_count >= 2  # Some should have used fallbacks
 
 
 if __name__ == "__main__":

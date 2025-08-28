@@ -1,5 +1,5 @@
-import pytest
 from app.core.ai_config import get_ai_config, AIProvider, AIModelType
+
 
 def test_get_model_config_returns_model():
     config = get_ai_config()

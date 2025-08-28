@@ -100,7 +100,7 @@ class BaseAgent:
             "dependencies": self.dependencies,
             "duration_ms": duration,
             "error": self.error_message,
-            "has_results": bool(self.results)
+            "has_results": bool(self.results),
         }
 
 
@@ -111,7 +111,7 @@ class JobScoutAgent(BaseAgent):
         super().__init__(
             agent_id="job_scout",
             name="Job Scout",
-            description="Discovers and analyzes job opportunities"
+            description="Discovers and analyzes job opportunities",
         )
         self.priority = AgentPriority.HIGH
 
@@ -138,7 +138,7 @@ class JobScoutAgent(BaseAgent):
             "jobs_analyzed": len(analyzed_jobs),
             "top_matches": analyzed_jobs[:10],
             "all_jobs": analyzed_jobs,
-            "search_criteria": search_criteria
+            "search_criteria": search_criteria,
         }
 
     async def _discover_jobs(self, criteria: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -161,16 +161,18 @@ class JobScoutAgent(BaseAgent):
                 "salary_max": 80000 + (i * 2000),
                 "source": "seek" if i % 2 == 0 else "linkedin",
                 "posted_date": datetime.utcnow() - timedelta(days=i),
-                "application_deadline": datetime.utcnow() + timedelta(days=30 - i)
+                "application_deadline": datetime.utcnow() + timedelta(days=30 - i),
             }
             for i in range(1, 16)  # 15 mock jobs
         ]
 
         return mock_jobs
 
-    async def _analyze_job_relevance(self, job: Dict[str, Any], context: Dict[str, Any]) -> Dict[str, Any]:
+    async def _analyze_job_relevance(
+        self, job: Dict[str, Any], context: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Analyze job relevance using AI"""
-        user_profile = context.get("user_profile", {})
+        # user_profile = context.get("user_profile", {})  # Available for future AI analysis
 
         # Future: Use this prompt with actual AI analysis
         # analysis_prompt = f"""
@@ -186,13 +188,20 @@ class JobScoutAgent(BaseAgent):
         # """
 
         # Simulate AI analysis (in production, use actual AI)
-        match_score = 0.6 + (hash(job['job_id']) % 40) / 100  # 0.6-0.99
+        match_score = 0.6 + (hash(job["job_id"]) % 40) / 100  # 0.6-0.99
 
         return {
             "match_score": round(match_score, 2),
-            "key_requirements": ["Social work experience", "Case management", "Community engagement"],
-            "match_reasons": ["Strong community focus", "Transferable skills applicable"],
-            "concerns": ["May require specific social work qualification"]
+            "key_requirements": [
+                "Social work experience",
+                "Case management",
+                "Community engagement",
+            ],
+            "match_reasons": [
+                "Strong community focus",
+                "Transferable skills applicable",
+            ],
+            "concerns": ["May require specific social work qualification"],
         }
 
 
@@ -203,7 +212,7 @@ class MarketAnalystAgent(BaseAgent):
         super().__init__(
             agent_id="market_analyst",
             name="Market Analyst",
-            description="Analyzes job market trends and competition"
+            description="Analyzes job market trends and competition",
         )
         self.dependencies = ["job_scout"]  # Needs job data first
         self.priority = AgentPriority.MEDIUM
@@ -232,10 +241,12 @@ class MarketAnalystAgent(BaseAgent):
             "skill_trends": skills_analysis,
             "competition_level": competition_analysis,
             "market_insights": insights,
-            "analysis_date": datetime.utcnow().isoformat()
+            "analysis_date": datetime.utcnow().isoformat(),
         }
 
-    async def _analyze_salary_trends(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
+    async def _analyze_salary_trends(
+        self, job_data: Dict, context: Dict
+    ) -> Dict[str, Any]:
         """Analyze salary trends from job data"""
         jobs = job_data.get("all_jobs", [])
 
@@ -255,12 +266,14 @@ class MarketAnalystAgent(BaseAgent):
                 "max_salary": max(salaries),
                 "salary_range_confidence": "medium",
                 "trending_up": True,  # Mock trend
-                "sample_size": len(salaries)
+                "sample_size": len(salaries),
             }
 
         return {"error": "No salary data available"}
 
-    async def _analyze_skill_trends(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
+    async def _analyze_skill_trends(
+        self, job_data: Dict, context: Dict
+    ) -> Dict[str, Any]:
         """Analyze skill requirements trends"""
         # jobs = job_data.get("all_jobs", [])  # Available for future NLP analysis
 
@@ -270,17 +283,23 @@ class MarketAnalystAgent(BaseAgent):
             {"skill": "Community Engagement", "frequency": 72, "trend": "growing"},
             {"skill": "Documentation", "frequency": 68, "trend": "stable"},
             {"skill": "Crisis Intervention", "frequency": 55, "trend": "growing"},
-            {"skill": "Mental Health Support", "frequency": 48, "trend": "rapidly_growing"}
+            {
+                "skill": "Mental Health Support",
+                "frequency": 48,
+                "trend": "rapidly_growing",
+            },
         ]
 
         return {
             "top_skills": common_skills,
             "emerging_skills": ["Digital Literacy", "Trauma-Informed Care"],
             "declining_skills": ["Paper-based processes"],
-            "skills_gap_analysis": "Strong match for finance background in budgeting and analysis"
+            "skills_gap_analysis": "Strong match for finance background in budgeting and analysis",
         }
 
-    async def _analyze_competition(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
+    async def _analyze_competition(
+        self, job_data: Dict, context: Dict
+    ) -> Dict[str, Any]:
         """Analyze competition level in the market"""
         # jobs = job_data.get("all_jobs", [])  # Available for future competition analysis
 
@@ -292,23 +311,25 @@ class MarketAnalystAgent(BaseAgent):
             "success_factors": [
                 "Relevant volunteer experience",
                 "Transferable skills from finance",
-                "Local market knowledge"
+                "Local market knowledge",
             ],
             "competitive_advantages": [
                 "Strong analytical skills",
                 "Budget management experience",
-                "Stakeholder communication"
-            ]
+                "Stakeholder communication",
+            ],
         }
 
-    async def _generate_market_insights(self, salary_data, skills_data, competition_data, context) -> List[str]:
+    async def _generate_market_insights(
+        self, salary_data, skills_data, competition_data, context
+    ) -> List[str]:
         """Generate actionable market insights"""
         return [
             "Social work roles in Melbourne are experiencing 15% salary growth year-over-year",
             "Mental health support skills are in highest demand, showing 40% growth",
             "Your finance background provides competitive advantage in budget-focused roles",
             "Consider obtaining Certificate IV in Community Services to strengthen applications",
-            "Peak hiring season is February-April, plan applications accordingly"
+            "Peak hiring season is February-April, plan applications accordingly",
         ]
 
 
@@ -319,7 +340,7 @@ class ApplicationAgent(BaseAgent):
         super().__init__(
             agent_id="application_agent",
             name="Application Specialist",
-            description="Generates personalized application materials"
+            description="Generates personalized application materials",
         )
         self.dependencies = ["job_scout", "market_analyst"]
         self.priority = AgentPriority.HIGH
@@ -332,21 +353,27 @@ class ApplicationAgent(BaseAgent):
         generated_materials = []
 
         for job in target_jobs[:5]:  # Process top 5 jobs
-            materials = await self._generate_job_materials(job, user_profile, market_insights)
-            generated_materials.append({
-                "job_id": job.get("job_id"),
-                "job_title": job.get("title"),
-                "company": job.get("company"),
-                "materials": materials
-            })
+            materials = await self._generate_job_materials(
+                job, user_profile, market_insights
+            )
+            generated_materials.append(
+                {
+                    "job_id": job.get("job_id"),
+                    "job_title": job.get("title"),
+                    "company": job.get("company"),
+                    "materials": materials,
+                }
+            )
 
         return {
             "materials_generated": len(generated_materials),
             "job_applications": generated_materials,
-            "total_jobs_processed": len(target_jobs)
+            "total_jobs_processed": len(target_jobs),
         }
 
-    async def _generate_job_materials(self, job: Dict, profile: Dict, market_data: Dict) -> Dict[str, Any]:
+    async def _generate_job_materials(
+        self, job: Dict, profile: Dict, market_data: Dict
+    ) -> Dict[str, Any]:
         """Generate complete application package for a specific job"""
 
         # Generate cover letter
@@ -365,11 +392,13 @@ class ApplicationAgent(BaseAgent):
             "customization_notes": [
                 "Highlight finance background in budgeting section",
                 "Mention specific community engagement experience",
-                "Reference company's mission alignment"
-            ]
+                "Reference company's mission alignment",
+            ],
         }
 
-    async def _generate_cover_letter(self, job: Dict, profile: Dict, market_data: Dict) -> str:
+    async def _generate_cover_letter(
+        self, job: Dict, profile: Dict, market_data: Dict
+    ) -> str:
         """Generate personalized cover letter"""
         # Mock cover letter generation (use actual AI in production)
         return f"""
@@ -391,7 +420,9 @@ Sincerely,
 [Your Name]
         """.strip()
 
-    async def _generate_email_application(self, job: Dict, profile: Dict) -> Dict[str, str]:
+    async def _generate_email_application(
+        self, job: Dict, profile: Dict
+    ) -> Dict[str, str]:
         """Generate email application"""
         return {
             "subject": f"Application for {job['title']} - [Your Name]",
@@ -408,15 +439,17 @@ I look forward to hearing from you.
 
 Best regards,
 [Your Name]
-            """.strip()
+            """.strip(),
         }
 
-    async def _generate_follow_up_templates(self, job: Dict, profile: Dict) -> Dict[str, str]:
+    async def _generate_follow_up_templates(
+        self, job: Dict, profile: Dict
+    ) -> Dict[str, str]:
         """Generate follow-up email templates"""
         return {
             "one_week": "Professional follow-up after one week",
             "interview_thank_you": "Thank you note after interview",
-            "reference_request": "Template for requesting references"
+            "reference_request": "Template for requesting references",
         }
 
 
@@ -433,11 +466,13 @@ class AgentOrchestrator:
         return {
             "job_scout": JobScoutAgent(),
             "market_analyst": MarketAnalystAgent(),
-            "application_agent": ApplicationAgent()
+            "application_agent": ApplicationAgent(),
             # Add more agents as needed
         }
 
-    async def run_workflow(self, workflow_type: str, context: Dict[str, Any]) -> Dict[str, Any]:
+    async def run_workflow(
+        self, workflow_type: str, context: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Run a complete multi-agent workflow"""
         self.user_id = context.get("user_id")
         self.session_id = str(uuid.uuid4())
@@ -448,7 +483,7 @@ class AgentOrchestrator:
                 id=self.session_id,
                 user_id=self.user_id,
                 session_type=workflow_type,
-                input_data=context
+                input_data=context,
             )
             db.add(session)
 
@@ -464,12 +499,18 @@ class AgentOrchestrator:
             logger.error(f"Workflow {workflow_type} failed: {e}")
             # Update session status
             with get_db_session() as db:
-                session = db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
+                session = (
+                    db.query(AgentSession)
+                    .filter(AgentSession.id == self.session_id)
+                    .first()
+                )
                 if session:
                     session.status = "failed"
             raise
 
-    async def _run_daily_discovery_workflow(self, context: Dict[str, Any]) -> Dict[str, Any]:
+    async def _run_daily_discovery_workflow(
+        self, context: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Run daily job discovery workflow with multiple agents"""
         results = {}
         completed_agents = []
@@ -488,7 +529,9 @@ class AgentOrchestrator:
             # Prepare context with previous results
             agent_context = context.copy()
             for completed_agent in completed_agents:
-                agent_context[f"{completed_agent}_results"] = results.get(completed_agent, {})
+                agent_context[f"{completed_agent}_results"] = results.get(
+                    completed_agent, {}
+                )
 
             try:
                 # Run agent
@@ -499,7 +542,11 @@ class AgentOrchestrator:
 
                 # Update session with progress
                 with get_db_session() as db:
-                    session = db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
+                    session = (
+                        db.query(AgentSession)
+                        .filter(AgentSession.id == self.session_id)
+                        .first()
+                    )
                     if session:
                         session.completed_agents = completed_agents
                         session.agent_results = results
@@ -510,7 +557,11 @@ class AgentOrchestrator:
 
         # Finalize session
         with get_db_session() as db:
-            session = db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
+            session = (
+                db.query(AgentSession)
+                .filter(AgentSession.id == self.session_id)
+                .first()
+            )
             if session:
                 session.status = "completed"
                 session.completed_at = datetime.utcnow()
@@ -521,19 +572,22 @@ class AgentOrchestrator:
             "workflow_type": "daily_discovery",
             "agents_completed": completed_agents,
             "results": results,
-            "success": len(completed_agents) > 0
+            "success": len(completed_agents) > 0,
         }
 
-    async def _run_application_prep_workflow(self, context: Dict[str, Any]) -> Dict[str, Any]:
+    async def _run_application_prep_workflow(
+        self, context: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Run application preparation workflow"""
         # Similar to daily discovery but focused on application materials
         # Implementation would follow same pattern
-        pass
 
     def get_session_status(self, session_id: str) -> Dict[str, Any]:
         """Get detailed status of a workflow session"""
         with get_db_session() as db:
-            session = db.query(AgentSession).filter(AgentSession.id == session_id).first()
+            session = (
+                db.query(AgentSession).filter(AgentSession.id == session_id).first()
+            )
             if not session:
                 return {"error": "Session not found"}
 
@@ -545,7 +599,12 @@ class AgentOrchestrator:
                 "completed_at": session.completed_at,
                 "active_agents": session.active_agents,
                 "completed_agents": session.completed_agents,
-                "results_summary": {
-                    agent: bool(results) for agent, results in session.agent_results.items()
-                } if session.agent_results else {}
+                "results_summary": (
+                    {
+                        agent: bool(results)
+                        for agent, results in session.agent_results.items()
+                    }
+                    if session.agent_results
+                    else {}
+                ),
             }
