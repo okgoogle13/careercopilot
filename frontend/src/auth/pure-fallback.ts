@@ -5,6 +5,7 @@ interface User {
   uid: string;
   email: string | null;
   displayName?: string | null;
+  token?: string | null;
 }
 
 interface AuthState {
@@ -87,6 +88,7 @@ class PureFallbackAuth {
         uid: 'fallback-user-' + btoa(email).replace(/[^a-zA-Z0-9]/g, ''),
         email,
         displayName: email.split('@')[0],
+        token: 'fallback-token-' + btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
       };
 
       this.setState({ user, loading: false, error: null });
@@ -128,6 +130,7 @@ class PureFallbackAuth {
         uid: 'fallback-user-' + btoa(email).replace(/[^a-zA-Z0-9]/g, ''),
         email,
         displayName: email.split('@')[0],
+        token: 'fallback-token-' + btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
       };
 
       this.setState({ user, loading: false, error: null });

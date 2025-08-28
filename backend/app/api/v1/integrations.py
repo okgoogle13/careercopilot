@@ -3,7 +3,7 @@ import os
 from app.core.security import verify_google_oidc_token
 
 # from app.genkit_flows.email_scanner import scan_user_emails  # Temporarily disabled for deployment
-from app.core.limiter import strict_limiter
+from app.core.limiter import authenticated_limiter
 from fastapi import APIRouter, Depends, HTTPException, Query, Request
 
 router = APIRouter()
@@ -20,7 +20,7 @@ REDIRECT_URI = os.getenv(
 
 
 @router.post("/scan-emails", dependencies=[Depends(verify_google_oidc_token)])
-@strict_limiter.limit("5/minute")
+@authenticated_limiter.limit("5/minute")
 async def trigger_scan(request: Request, user_id: str = Query(...)):
     """
     Triggers an email scan for a specific user, protected by OIDC authentication.

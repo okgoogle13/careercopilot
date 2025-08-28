@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 import { useUserPreferences } from '../contexts/UserPreferencesContext';
+import { useAuthStatus } from '../hooks';
 
 interface DocumentType {
   id: string;
@@ -12,7 +12,7 @@ interface DocumentType {
 }
 
 const DocumentsPage: React.FC = () => {
-  const { user } = useAuth();
+  const { isAuthenticated, isLoading, error: authError, requireAuth, getAuthToken } = useAuthStatus();
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -20,11 +20,16 @@ const DocumentsPage: React.FC = () => {
   const userTheme = preferences?.themeId || 'professional';
 
   const fetchDocuments = async () => {
-    if (!user) return;
+    if (!requireAuth()) return;
     
     try {
       setLoading(true);
-      const token = user.token || 'fallback-token';
+      const token = getAuthToken();
+      if (!token) {
+        setError('Unable to get authentication token');
+        return;
+      }
+      
       const response = await fetch('/api/v1/documents', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -39,25 +44,30 @@ const DocumentsPage: React.FC = () => {
   };
 
   useEffect(() => {
-    if (user) {
+    if (isAuthenticated) {
       fetchDocuments();
-    } else {
+    } else if (!isLoading) {
       setLoading(false);
-      setError('You must be logged in to view this page.');
+      setError(authError);
     }
-  }, [user]);
+  }, [isAuthenticated, isLoading, authError]);
 
   const handleDownload = async (
     documentId: string,
     originalFilename: string
   ) => {
-    if (!user) {
+    if (!requireAuth()) {
       toast.error('You must be logged in to download files.');
       return;
     }
 
     try {
-      const token = user.token || 'fallback-token';
+      const token = getAuthToken();
+      if (!token) {
+        toast.error('Unable to get authentication token');
+        return;
+      }
+      
       // Append the user's selected theme to the download URL
       const downloadUrl = `/api/v1/documents/${documentId}/download-pdf?theme=${userTheme}`;
       const response = await fetch(downloadUrl, {
@@ -91,7 +101,7 @@ const DocumentsPage: React.FC = () => {
   };
 
   const renderContent = () => {
-    if (loading)
+    if (isLoading || loading)
       return <div className="p-4 text-center">Loading documents...</div>;
     if (error)
       return <div className="p-4 text-center text-red-500">{error}</div>;
