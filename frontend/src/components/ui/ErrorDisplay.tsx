@@ -1,6 +1,6 @@
 // Standardized error display component
 import React from 'react';
-import Button from './Button';
+import { Button } from './Button';
 
 interface ErrorDisplayProps {
   error: string | null;

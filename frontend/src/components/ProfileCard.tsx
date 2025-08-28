@@ -1,6 +1,6 @@
 import { Edit3, Trash2 } from "lucide-react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
+import { Card } from "./ui/Card";
+import { Button } from "./ui/Button";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 
 interface ProfileCardProps {
