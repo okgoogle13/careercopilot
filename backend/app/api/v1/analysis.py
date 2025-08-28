@@ -16,8 +16,9 @@ from app.core.enhanced_ai_error_handling import (
     AIOperationResult
 )
 from app.core.db import db
-from app.core.dependencies import get_current_user, get_user_document_from_firestore
-from fastapi import APIRouter, Depends, HTTPException, status
+from app.core.dependencies import get_current_user_with_state, get_user_document_from_firestore
+from app.core.limiter import authenticated_limiter
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from google.api_core.exceptions import GoogleAPICallError
 from google.cloud.firestore import SERVER_TIMESTAMP
 from pydantic import BaseModel, ValidationError
@@ -42,11 +43,13 @@ class JobAnalysisRequest(BaseModel):
 
 
 @router.post("/ats-score/{document_id}")
+@authenticated_limiter.limit("10/minute")
 async def get_ats_score(
+    http_request: Request,
     document_id: str,
     request: AtsScoreRequest,
     document: dict = Depends(get_user_document_from_firestore),
-    user: dict = Depends(get_current_user),
+    user: dict = Depends(get_current_user_with_state),
 ):
     """
     Accepts a resume document and a job description, runs them through the
@@ -149,11 +152,13 @@ async def get_ats_score(
 
 
 @router.post("/resume-analysis/{document_id}")
+@authenticated_limiter.limit("10/minute")
 async def analyze_resume(
+    http_request: Request,
     document_id: str,
     request: ResumeAnalysisRequest,
     document: dict = Depends(get_user_document_from_firestore),
-    user: dict = Depends(get_current_user),
+    user: dict = Depends(get_current_user_with_state),
 ):
     """
     Analyze a resume against a job description with enhanced error handling
@@ -289,8 +294,11 @@ async def analyze_resume(
 
 
 @router.post("/job-analysis")
+@authenticated_limiter.limit("10/minute")
 async def analyze_job_description(
-    request: JobAnalysisRequest, user: dict = Depends(get_current_user)
+    http_request: Request,
+    request: JobAnalysisRequest, 
+    user: dict = Depends(get_current_user_with_state)
 ):
     """
     Analyze a job description with enhanced error handling to extract requirements, skills, and key information.
