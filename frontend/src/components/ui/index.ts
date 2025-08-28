@@ -1,5 +1,5 @@
 // UI Component exports for design system
-export { Button, buttonVariants } from './button';
+export { Button, buttonVariants } from './Button';
 export {
   default as Card,
   CardHeader,
