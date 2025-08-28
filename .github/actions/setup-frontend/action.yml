@@ -38,25 +38,21 @@ runs:
     - name: Install dependencies
       shell: bash
       run: npm ci --prefix frontend
-      timeout-minutes: 5
 
     - name: Type check
       if: inputs.run-checks == 'true'
       shell: bash
       run: npm run type-check --prefix frontend
-      timeout-minutes: 3
 
     - name: Lint
       if: inputs.run-checks == 'true'
       shell: bash
       run: npm run lint --prefix frontend
-      timeout-minutes: 3
 
     - name: Format check
       if: inputs.run-checks == 'true'
       shell: bash
       run: npm run format:check --prefix frontend
-      timeout-minutes: 2
 
     - name: Build
       id: build
@@ -65,13 +61,11 @@ runs:
       run: |
         npm run build --prefix frontend
         echo "success=true" >> $GITHUB_OUTPUT
-      timeout-minutes: 5
 
     - name: Bundle analysis
       if: inputs.run-checks == 'true' && inputs.skip-build != 'true'
       shell: bash
       run: npm run bundle-analysis --prefix frontend
-      timeout-minutes: 3
 
     - name: Upload bundle analysis
       if: inputs.upload-artifacts == 'true' && inputs.run-checks == 'true'
