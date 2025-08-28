@@ -1,6 +1,5 @@
-import os
-
 from app.core.ai_config import get_ai_config
+
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
 

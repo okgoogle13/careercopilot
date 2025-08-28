@@ -5,7 +5,10 @@ from typing import List, Literal
 
 import docx
 import pdfplumber
-from app.core.dependencies import get_current_user_with_state, get_user_document_from_firestore
+from app.core.dependencies import (
+    get_current_user_with_state,
+    get_user_document_from_firestore,
+)
 from app.core.limiter import authenticated_limiter
 from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile, status
 from google.api_core.exceptions import GoogleAPICallError
@@ -84,7 +87,9 @@ async def download_document_as_pdf(
             stylesheets=[stylesheet]
         )
 
-        response = StreamingResponse(io.BytesIO(pdf_bytes), media_type="application/pdf")
+        response = StreamingResponse(
+            io.BytesIO(pdf_bytes), media_type="application/pdf"
+        )
         original_filename = document.get("originalFilename", "document").split(".")[0]
         response.headers["Content-Disposition"] = (
             f"attachment; filename={original_filename}_{theme}.pdf"

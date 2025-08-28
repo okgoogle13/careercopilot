@@ -61,10 +61,14 @@ class KSCGenerator:
         try:
             # Input validation
             if not user_profile_data or not isinstance(user_profile_data, dict):
-                raise InputValidationError("User profile data is required and must be a dictionary")
+                raise InputValidationError(
+                    "User profile data is required and must be a dictionary"
+                )
 
             if not ksc_statement or not isinstance(ksc_statement, str):
-                raise InputValidationError("KSC statement is required and must be a string")
+                raise InputValidationError(
+                    "KSC statement is required and must be a string"
+                )
 
             # Sanitize inputs
             sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile_data)
@@ -211,7 +215,9 @@ class KSCGenerator:
             # Validate STAR components
             star_components = ["situation", "task", "action", "result"]
             star_response = parsed_result.get("star_response", {})
-            missing_components = [comp for comp in star_components if comp not in star_response]
+            missing_components = [
+                comp for comp in star_components if comp not in star_response
+            ]
 
             if missing_components:
                 raise AIError(
@@ -238,9 +244,9 @@ class KSCGenerator:
                     "model_used": response.model_used,
                     "response_length": response_length,
                     "cached": response.cached,
-                    "relevance_score": parsed_result.get("experience_selection", {}).get(
-                        "relevance_score", 0
-                    ),
+                    "relevance_score": parsed_result.get(
+                        "experience_selection", {}
+                    ).get("relevance_score", 0),
                 },
             )
 
@@ -280,17 +286,22 @@ class KSCGenerator:
                 raise InputValidationError("At least one KSC statement is required")
 
             if len(ksc_statements) > 10:
-                raise InputValidationError("Maximum 10 KSC statements can be processed at once")
+                raise InputValidationError(
+                    "Maximum 10 KSC statements can be processed at once"
+                )
 
             sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile_data)
             sanitized_kscs = [
-                InputSanitizer.sanitize_text_input(ksc).sanitized_content for ksc in ksc_statements
+                InputSanitizer.sanitize_text_input(ksc).sanitized_content
+                for ksc in ksc_statements
             ]
 
             preferences_context = ""
             if response_preferences:
                 prefs = InputSanitizer.sanitize_dict_input(response_preferences)
-                preferences_context = f"\\n\\nResponse Preferences: {json.dumps(prefs, indent=2)}"
+                preferences_context = (
+                    f"\\n\\nResponse Preferences: {json.dumps(prefs, indent=2)}"
+                )
 
             system_prompt = (
                 "You are an expert career coach specializing in comprehensive KSC "
@@ -380,7 +391,9 @@ Respond with ONLY the JSON object:"""
             return parsed_result
 
         except Exception as e:
-            logger.error(f"Error in multiple KSC generation for user {user_id}: {str(e)}")
+            logger.error(
+                f"Error in multiple KSC generation for user {user_id}: {str(e)}"
+            )
             raise AIError(
                 message=f"Multiple KSC generation failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
@@ -417,7 +430,9 @@ Respond with ONLY the JSON object:"""
                     InputSanitizer.sanitize_text_input(area).sanitized_content
                     for area in feedback_areas
                 ]
-                feedback_context = f"\\n\\nFocus improvement on: {', '.join(sanitized_feedback)}"
+                feedback_context = (
+                    f"\\n\\nFocus improvement on: {', '.join(sanitized_feedback)}"
+                )
 
             system_prompt = (
                 "You are a STAR response optimization expert who can identify "
@@ -500,9 +515,9 @@ Respond with ONLY the JSON object:"""
                 extra={
                     "user_id": user_id,
                     "feedback_areas": feedback_areas,
-                    "improvement_score": parsed_result.get("enhancement_metrics", {}).get(
-                        "overall_improvement_score", 0
-                    ),
+                    "improvement_score": parsed_result.get(
+                        "enhancement_metrics", {}
+                    ).get("overall_improvement_score", 0),
                 },
             )
 

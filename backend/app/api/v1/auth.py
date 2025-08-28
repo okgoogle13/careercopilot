@@ -8,7 +8,13 @@ from typing import Dict, Any
 import logging
 
 from app.core.database import get_db
-from app.core.auth import auth_manager, session_manager, get_current_user, create_user_token, rate_limiter
+from app.core.auth import (
+    auth_manager,
+    session_manager,
+    get_current_user,
+    create_user_token,
+    rate_limiter,
+)
 from app.models.database import User
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
@@ -47,27 +53,26 @@ class UserProfile(BaseModel):
     target_roles: list = []
     salary_range: dict = {}
     created_at: datetime
-    
+
     class Config:
         from_attributes = True
 
 
 @router.post("/register", response_model=TokenResponse)
-async def register_user(
-    user_data: UserRegistration,
-    db: Session = Depends(get_db)
-):
+async def register_user(user_data: UserRegistration, db: Session = Depends(get_db)):
     """
     Register a new user account and return access token.
     """
     try:
         # Rate limiting
-        if not rate_limiter.check_rate_limit(f"register:{user_data.email}", limit=5, window=3600):
+        if not rate_limiter.check_rate_limit(
+            f"register:{user_data.email}", limit=5, window=3600
+        ):
             raise HTTPException(
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-                detail="Too many registration attempts. Please try again later."
+                detail="Too many registration attempts. Please try again later.",
             )
-        
+
         # Create user
         user = auth_manager.create_user(
             db=db,
@@ -76,17 +81,17 @@ async def register_user(
             password=user_data.password,
             career_transition_from=user_data.career_transition_from,
             career_transition_to=user_data.career_transition_to,
-            location=user_data.location
+            location=user_data.location,
         )
-        
+
         # Create access token
         access_token = create_user_token(user)
-        
+
         # Create session
         session_manager.create_session(user.id, access_token)
-        
+
         logger.info(f"User registered successfully: {user.email}")
-        
+
         return TokenResponse(
             access_token=access_token,
             token_type="bearer",
@@ -96,57 +101,53 @@ async def register_user(
                 "name": user.name,
                 "career_transition_from": user.career_transition_from,
                 "career_transition_to": user.career_transition_to,
-                "location": user.location
-            }
+                "location": user.location,
+            },
         )
-        
+
     except ValueError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e)
-        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
         logger.error(f"User registration failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Registration failed. Please try again."
+            detail="Registration failed. Please try again.",
         )
 
 
 @router.post("/login", response_model=TokenResponse)
-async def login_user(
-    login_data: UserLogin,
-    db: Session = Depends(get_db)
-):
+async def login_user(login_data: UserLogin, db: Session = Depends(get_db)):
     """
     Authenticate user and return access token.
     """
     try:
         # Rate limiting
-        if not rate_limiter.check_rate_limit(f"login:{login_data.email}", limit=10, window=3600):
+        if not rate_limiter.check_rate_limit(
+            f"login:{login_data.email}", limit=10, window=3600
+        ):
             raise HTTPException(
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-                detail="Too many login attempts. Please try again later."
+                detail="Too many login attempts. Please try again later.",
             )
-        
+
         # Authenticate user
         user = auth_manager.authenticate_user(db, login_data.email, login_data.password)
-        
+
         if not user:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Invalid email or password",
                 headers={"WWW-Authenticate": "Bearer"},
             )
-        
+
         # Create access token
         access_token = create_user_token(user)
-        
+
         # Create/update session
         session_manager.create_session(user.id, access_token)
-        
+
         logger.info(f"User logged in successfully: {user.email}")
-        
+
         return TokenResponse(
             access_token=access_token,
             token_type="bearer",
@@ -158,17 +159,17 @@ async def login_user(
                 "career_transition_to": user.career_transition_to,
                 "location": user.location,
                 "target_roles": user.target_roles,
-                "salary_range": user.salary_range
-            }
+                "salary_range": user.salary_range,
+            },
         )
-        
+
     except HTTPException:
         raise
     except Exception as e:
         logger.error(f"User login failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Login failed. Please try again."
+            detail="Login failed. Please try again.",
         )
 
 
@@ -184,7 +185,7 @@ async def get_user_profile(current_user: User = Depends(get_current_user)):
 async def update_user_profile(
     profile_updates: Dict[str, Any],
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Update user profile information.
@@ -192,28 +193,32 @@ async def update_user_profile(
     try:
         # Update allowed fields
         updatable_fields = [
-            'name', 'career_transition_from', 'career_transition_to', 
-            'location', 'target_roles', 'salary_range'
+            "name",
+            "career_transition_from",
+            "career_transition_to",
+            "location",
+            "target_roles",
+            "salary_range",
         ]
-        
+
         for field, value in profile_updates.items():
             if field in updatable_fields and hasattr(current_user, field):
                 setattr(current_user, field, value)
-        
+
         current_user.updated_at = datetime.utcnow()
         db.commit()
         db.refresh(current_user)
-        
+
         logger.info(f"User profile updated: {current_user.email}")
-        
+
         return current_user
-        
+
     except Exception as e:
         db.rollback()
         logger.error(f"Profile update failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Profile update failed. Please try again."
+            detail="Profile update failed. Please try again.",
         )
 
 
@@ -225,19 +230,16 @@ async def logout_user(current_user: User = Depends(get_current_user)):
     try:
         # In a real implementation, you'd extract the token and invalidate it
         # For now, we'll just return success
-        
+
         logger.info(f"User logged out: {current_user.email}")
-        
-        return {
-            "success": True,
-            "message": "Logged out successfully"
-        }
-        
+
+        return {"success": True, "message": "Logged out successfully"}
+
     except Exception as e:
         logger.error(f"Logout failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Logout failed. Please try again."
+            detail="Logout failed. Please try again.",
         )
 
 
@@ -251,8 +253,11 @@ async def get_session_status(current_user: User = Depends(get_current_user)):
         "user_id": current_user.id,
         "user_email": current_user.email,
         "session_active": True,
-        "permissions": ["read", "write"],  # Could be expanded with role-based permissions
-        "last_activity": datetime.utcnow().isoformat()
+        "permissions": [
+            "read",
+            "write",
+        ],  # Could be expanded with role-based permissions
+        "last_activity": datetime.utcnow().isoformat(),
     }
 
 
@@ -264,23 +269,23 @@ async def refresh_access_token(current_user: User = Depends(get_current_user)):
     try:
         # Create new access token
         new_token = create_user_token(current_user)
-        
+
         # Update session
         session_manager.create_session(current_user.id, new_token)
-        
+
         logger.info(f"Token refreshed for user: {current_user.email}")
-        
+
         return {
             "access_token": new_token,
             "token_type": "bearer",
-            "message": "Token refreshed successfully"
+            "message": "Token refreshed successfully",
         }
-        
+
     except Exception as e:
         logger.error(f"Token refresh failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Token refresh failed. Please try again."
+            detail="Token refresh failed. Please try again.",
         )
 
 
@@ -288,7 +293,7 @@ async def refresh_access_token(current_user: User = Depends(get_current_user)):
 async def get_user_by_id(
     user_id: str,
     current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
 ):
     """
     Get user information by ID (admin or self only).
@@ -298,16 +303,15 @@ async def get_user_by_id(
         # In production, add admin role check here
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Access denied. You can only access your own profile."
+            detail="Access denied. You can only access your own profile.",
         )
-    
+
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
         )
-    
+
     return {
         "id": user.id,
         "email": user.email,
@@ -316,14 +320,13 @@ async def get_user_by_id(
         "career_transition_to": user.career_transition_to,
         "location": user.location,
         "target_roles": user.target_roles,
-        "created_at": user.created_at
+        "created_at": user.created_at,
     }
 
 
 @router.delete("/account")
 async def delete_user_account(
-    current_user: User = Depends(get_current_user),
-    db: Session = Depends(get_db)
+    current_user: User = Depends(get_current_user), db: Session = Depends(get_db)
 ):
     """
     Delete user account (soft delete - mark as inactive).
@@ -331,23 +334,23 @@ async def delete_user_account(
     try:
         # In production, implement soft delete by adding 'is_active' field
         # For now, we'll just log the request
-        
+
         logger.warning(f"Account deletion requested for user: {current_user.email}")
-        
+
         # Could implement:
         # current_user.is_active = False
         # current_user.deleted_at = datetime.utcnow()
         # db.commit()
-        
+
         return {
             "success": True,
             "message": "Account deletion requested. Contact support to complete the process.",
-            "user_id": current_user.id
+            "user_id": current_user.id,
         }
-        
+
     except Exception as e:
         logger.error(f"Account deletion failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Account deletion failed. Please contact support."
+            detail="Account deletion failed. Please contact support.",
         )

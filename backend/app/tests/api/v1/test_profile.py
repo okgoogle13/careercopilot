@@ -1,9 +1,11 @@
 from unittest.mock import MagicMock, patch
 
+
 # A pydantic model mock to simulate the output of the genkit flow
 class MockVoiceProfile(MagicMock):
     def dict(self):
         return {"tone": "professional", "style": "concise"}
+
 
 def test_generate_and_save_voice_profile(client, mock_db):
     """Test the generate_and_save_voice_profile endpoint."""

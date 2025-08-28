@@ -39,9 +39,13 @@ class CoverLetterGenerator:
         """
         try:
             if not base_profile_data or not isinstance(base_profile_data, dict):
-                raise InputValidationError("Base profile data is required and must be a dictionary")
+                raise InputValidationError(
+                    "Base profile data is required and must be a dictionary"
+                )
             if not job_analysis_data or not isinstance(job_analysis_data, dict):
-                raise InputValidationError("Job analysis data is required and must be a dictionary")
+                raise InputValidationError(
+                    "Job analysis data is required and must be a dictionary"
+                )
 
             sanitized_profile = InputSanitizer.sanitize_dict_input(base_profile_data)
             sanitized_job_data = InputSanitizer.sanitize_dict_input(job_analysis_data)
@@ -50,7 +54,9 @@ class CoverLetterGenerator:
             voice_section = ""
             if voice_profile:
                 sanitized_voice = InputSanitizer.sanitize_dict_input(voice_profile)
-                common_phrases = ", ".join(sanitized_voice.get("common_phrases", [])[:10])
+                common_phrases = ", ".join(
+                    sanitized_voice.get("common_phrases", [])[:10]
+                )
                 professional_vocab = ", ".join(
                     sanitized_voice.get("professional_vocabulary", [])[:15]
                 )
@@ -209,7 +215,9 @@ class CoverLetterGenerator:
                 extra={
                     "user_id": user_id,
                     "model_used": response.model_used,
-                    "word_count": parsed_result.get("letter_analysis", {}).get("word_count", 0),
+                    "word_count": parsed_result.get("letter_analysis", {}).get(
+                        "word_count", 0
+                    ),
                     "cached": response.cached,
                     "voice_profile_used": bool(voice_profile),
                     "company": job_analysis_data.get("company_name", "Unknown"),
@@ -219,7 +227,9 @@ class CoverLetterGenerator:
             return parsed_result
 
         except Exception as e:
-            logger.error(f"Error in cover letter generation for user {user_id}: {str(e)}")
+            logger.error(
+                f"Error in cover letter generation for user {user_id}: {str(e)}"
+            )
             raise AIError(
                 message=f"Cover letter generation failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
@@ -248,7 +258,9 @@ class CoverLetterGenerator:
                     InputSanitizer.sanitize_text_input(goal).sanitized_content
                     for goal in optimization_goals
                 ]
-                goals_section = f"\\n\\nOptimization Focus Areas: {', '.join(sanitized_goals)}"
+                goals_section = (
+                    f"\\n\\nOptimization Focus Areas: {', '.join(sanitized_goals)}"
+                )
 
             system_prompt = (
                 "You are a cover letter optimization specialist with expertise in "
@@ -332,7 +344,9 @@ class CoverLetterGenerator:
             return parsed_result
 
         except Exception as e:
-            logger.error(f"Error in cover letter optimization for user {user_id}: {str(e)}")
+            logger.error(
+                f"Error in cover letter optimization for user {user_id}: {str(e)}"
+            )
             raise AIError(
                 message=f"Cover letter optimization failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
