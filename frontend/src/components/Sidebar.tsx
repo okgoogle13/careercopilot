@@ -1,5 +1,5 @@
 import { BarChart3, FileText, Plus } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "./ui/Button";
 import { CareerCopilotLogo } from "./CareerCopilotLogo";
 
 interface SidebarProps {
