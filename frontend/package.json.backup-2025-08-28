@@ -1,7 +1,7 @@
 {
-  "name": "careercopilot-frontend",
-  "version": "1.0.0",
-  "description": "CareerCopilot Frontend - React 19, Vite, TypeScript, E2E/CI ready",
+  "name": "frontend",
+  "version": "0.0.0",
+  "description": "CareerCopilot Frontend - React-based user interface",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,6 +13,7 @@
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "bundle-analysis": "vite build --mode analyze && node scripts/bundle-analyzer.js",
     "test": "npx jest --runInBand --colors",
     "test:e2e": "npx playwright test",
     "test:all": "npm run test && npm run test:e2e",
@@ -52,9 +53,7 @@
     "clsx": "*",
     "cmdk": "^1.1.1",
     "embla-carousel-react": "^8.6.0",
-    "firebase": "^12.1.0",
     "framer-motion": "12.23.12",
-    "globals": "^16.3.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.487.0",
     "next-themes": "^0.4.6",
@@ -100,9 +99,7 @@
     "react",
     "vite",
     "typescript",
-    "frontend",
-    "e2e",
-    "ci"
+    "frontend"
   ],
   "author": "CareerCopilot Team",
   "license": "UNLICENSED"

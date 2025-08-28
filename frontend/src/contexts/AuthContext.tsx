@@ -7,13 +7,15 @@ import React, {
   useMemo,
   ReactNode,
 } from 'react';
-import { pureFallbackAuth } from '../auth/pure-fallback';
+import { authService } from '../auth/enhanced-firebase';
+import { User as FirebaseUser } from 'firebase/auth';
 
 interface User {
   uid: string;
   email: string | null;
   displayName?: string | null;
   token?: string | null;
+  getIdToken?: () => Promise<string>;
 }
 
 interface AuthContextType {
@@ -29,6 +31,9 @@ interface AuthContextType {
     mode: string;
   };
   error: string | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  setError: React.Dispatch<React.SetStateAction<string | null>>;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -54,9 +59,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     console.log('🔧 AuthProvider: Setting up pure fallback auth listener');
     
-    const unsubscribe = pureFallbackAuth.onAuthStateChanged((authUser) => {
-      console.log('🔧 AuthProvider: Auth state changed', authUser ? authUser.email : 'signed out');
-      setUser(authUser);
+    const unsubscribe = authService.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // Get Firebase ID token for API calls
+        authUser.getIdToken?.().then((token: string) => {
+          setUser({
+            uid: authUser.uid,
+            email: authUser.email,
+            displayName: authUser.displayName,
+            token,
+          });
+        });
+      } else {
+        setUser(null);
+      }
       setLoading(false);
     });
 
@@ -69,15 +85,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = useCallback(async (email: string, password: string): Promise<User> => {
     setLoading(true);
     setError(null);
-    
     try {
-      console.log('🔧 AuthProvider: Attempting login for', email);
-      const user = await pureFallbackAuth.signIn(email, password);
-      console.log('✅ AuthProvider: Login successful');
+      const firebaseUser = await authService.signIn(email, password);
+      const token = typeof firebaseUser.getIdToken === 'function'
+        ? await firebaseUser.getIdToken()
+        : '';
+      const user: User = {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName,
+        token,
+        getIdToken: firebaseUser.getIdToken?.bind(firebaseUser),
+      };
+      setUser(user);
       return user;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Login failed';
-      console.error('❌ AuthProvider: Login failed', errorMessage);
       setError(errorMessage);
       throw err;
     } finally {
@@ -88,15 +111,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = useCallback(async (email: string, password: string): Promise<User> => {
     setLoading(true);
     setError(null);
-    
     try {
-      console.log('🔧 AuthProvider: Attempting registration for', email);
-      const user = await pureFallbackAuth.signUp(email, password);
-      console.log('✅ AuthProvider: Registration successful');
+      const firebaseUser = await authService.signUp(email, password);
+      const token = typeof firebaseUser.getIdToken === 'function'
+        ? await firebaseUser.getIdToken()
+        : '';
+      const user: User = {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName,
+        token,
+        getIdToken: firebaseUser.getIdToken?.bind(firebaseUser),
+      };
+      setUser(user);
       return user;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Registration failed';
-      console.error('❌ AuthProvider: Registration failed', errorMessage);
       setError(errorMessage);
       throw err;
     } finally {
@@ -107,14 +137,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = useCallback(async () => {
     setLoading(true);
     setError(null);
-    
     try {
-      console.log('🔧 AuthProvider: Attempting logout');
-      await pureFallbackAuth.signOut();
-      console.log('✅ AuthProvider: Logout successful');
+      await authService.signOut();
+      setUser(null);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Logout failed';
-      console.error('❌ AuthProvider: Logout failed', errorMessage);
       setError(errorMessage);
       throw err;
     } finally {
@@ -122,9 +149,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const connectionStatus = useMemo(() => {
-    return pureFallbackAuth.getConnectionStatus();
-  }, []);
+    const connectionStatus = useMemo(() => {
+      const status = authService.getConnectionStatus();
+      return {
+        ...status,
+        mode: import.meta.env.MODE || 'unknown',
+      };
+    }, []);
 
   const value = useMemo(
     () => ({
@@ -135,8 +166,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       register,
       connectionStatus,
       error,
+      setUser,
+      setError,
+      setLoading,
     }),
-    [user, loading, logout, login, register, connectionStatus, error]
+    [user, loading, logout, login, register, connectionStatus, error, setUser, setError, setLoading]
   );
 
   // Show debug info in development
