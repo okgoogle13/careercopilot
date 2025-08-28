@@ -1,4 +1,4 @@
-from app.core.dependencies import get_current_user
+from app.core.dependencies import get_current_user_with_state
 from app.core.limiter import limiter
 from fastapi import APIRouter, Body, Depends, HTTPException, Request
 
@@ -15,24 +15,11 @@ class ResumeComparisonRequest(BaseModel):
     job_description_text: str
 
 
-def get_user_uid_for_limiter(request: Request) -> str:
-    """
-    Custom key function for slowapi to use the authenticated user's UID.
-    This assumes the get_current_user dependency has already been resolved
-    and the uid is available in the request state, which is a common pattern.
-    We'll ensure our dependency does this.
-    """
-    # This is a bit of a workaround to get the uid into the key function.
-    # A more robust solution might involve a custom dependency that sets request.state.user
-    # For now, we assume the dependency adds it.
-    # Let's adjust the main dependency to do this.
-    return request.state.user_uid
-
-
 @router.post("/analyze")
 async def analyze_job(
-    uid: str = Depends(get_current_user),
+    request: Request,
     job_description: str = Body(..., embed=True),
+    current_user: dict = Depends(get_current_user_with_state),
 ):
     """
     Analyzes a job description using a Genkit flow.
@@ -57,9 +44,9 @@ async def analyze_job(
 @router.post("/compare-resume")
 @limiter.limit("5/minute")
 async def compare_resume(
-    request: Request,  # Add Request to access its state
+    request: Request,
     body: ResumeComparisonRequest,
-    uid: str = Depends(get_current_user),
+    current_user: dict = Depends(get_current_user_with_state),
 ):
     """
     Orchestrates the analysis of a job description and comparison with a user's resume.
