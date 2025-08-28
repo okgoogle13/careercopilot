@@ -2,13 +2,12 @@ import json
 
 from app.core.db import db
 from genkit import ai
-from genkit.plugins.google_genai import gemini15_flash
+from genkit.plugins.google_genai.models.gemini import GEMINI_2_0_FLASH
 
 # Initialize the Gemini model
-model = gemini15_flash
+model = GEMINI_2_0_FLASH
 
-
-@ai.flow()
+  # ...existing code...
 async def generate_voice_profile(user_id: str) -> dict:
     """
     Analyzes all of a user's documents to create a voice profile.

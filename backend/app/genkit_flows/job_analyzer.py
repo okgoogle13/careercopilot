@@ -1,17 +1,7 @@
 import os
 
-import genkit
-from dotenv import load_dotenv
-from genkit.plugins import googleai
-
-# Load environment variables from .env file
-load_dotenv()
-
-# Initialize the Google AI plugin
-genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-# Define the Gemini Pro model
-gemini_pro = googleai.gemini_pro
+from app.core.ai_config import get_ai_config
+gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
 
 # Define the Job Analyzer Genkit flow

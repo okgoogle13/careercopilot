@@ -15,10 +15,8 @@ from googleapiclient.errors import HttpError
 from .calendar_manager import createCalendarEvent
 from .notifier import sendNewOpportunityNotification
 
-# Initialize Genkit and the Gemini Pro model
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-gemini_pro = googleai.gemini_pro
+from app.core.ai_config import get_ai_config
+gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
 
 def get_gmail_service(user_id: str):
