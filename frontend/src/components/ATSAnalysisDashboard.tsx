@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
+import { Card } from "./ui/Card";
+import { Button } from "./ui/Button";
 import { Badge } from "./ui/badge";
 import { Progress } from "./ui/progress";
 import { ArrowLeft, Upload, CheckCircle, AlertTriangle, XCircle, Eye, Download } from "lucide-react";
