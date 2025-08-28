@@ -23,11 +23,9 @@ from app.core.cache_middleware import (
     cache_lifespan,
 )
 from app.core.limiter import (
-    NotAuthenticatedException,
-    _not_authenticated_handler,
     _rate_limit_exceeded_handler,
     limiter,
-    strict_limiter,
+    authenticated_limiter,
 )
 from app.core.logging_config import setup_logging
 from app.core.monitoring import start_system_monitoring, stop_system_monitoring
@@ -89,9 +87,8 @@ app.add_middleware(
 )
 
 app.state.limiter = limiter
-app.state.strict_limiter = strict_limiter
+app.state.authenticated_limiter = authenticated_limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-app.add_exception_handler(NotAuthenticatedException, _not_authenticated_handler)
 
 # Add cache middleware
 add_cache_middleware(app)

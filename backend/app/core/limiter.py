@@ -1,19 +1,9 @@
-import firebase_admin
-from firebase_admin import auth, credentials
 from slowapi import Limiter
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from starlette.requests import Request
 from starlette.responses import JSONResponse
-from starlette.status import HTTP_401_UNAUTHORIZED
-
-
-class NotAuthenticatedException(Exception):
-    pass
-
-
-def _not_authenticated_handler(request: Request, exc: NotAuthenticatedException) -> JSONResponse:
-    return JSONResponse(status_code=HTTP_401_UNAUTHORIZED, content={"detail": "Not authenticated"})
+from fastapi import HTTPException, status
 
 
 def _rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
@@ -23,66 +13,48 @@ def _rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JS
     return JSONResponse(status_code=429, content={"detail": f"Rate limit exceeded: {exc.detail}"})
 
 
-def key_func_by_user(request: Request) -> str:
+def get_user_rate_limit_key(request: Request) -> str:
     """
-    Custom key function for slowapi to use the authenticated user's UID.
-    It extracts the token from the Authorization header and verifies it.
-    If the token is missing or invalid, it falls back to the remote IP address.
+    Centralized rate limit key function that uses the authenticated user's UID
+    when available, otherwise falls back to IP address.
+    
+    This function assumes that the get_current_user dependency has been resolved
+    and the user information is available in request.state.user_uid.
+    If user_uid is not available, it falls back to IP-based limiting.
+    
+    This approach eliminates duplicate authentication logic by relying on
+    the primary get_current_user dependency to handle token validation.
     """
-    # Initialize Firebase Admin SDK if not already done, as this runs before app startup logic
-    if not firebase_admin._apps:
-        try:
-            cred = credentials.ApplicationDefault()
-            firebase_admin.initialize_app(cred)
-        except Exception:
-            # Fallback to IP if Firebase init fails
-            return get_remote_address(request)
-
-    auth_header = request.headers.get("authorization")
-
-    # The endpoint's own security dependency will handle the final rejection.
-    if not auth_header or not auth_header.startswith("Bearer "):
-        return get_remote_address(request)
-
-    try:
-        token = auth_header.split(" ")[1]
-        decoded_token = auth.verify_id_token(token)
-        # Return the UID if available, otherwise fallback to IP
-        return decoded_token.get("uid") or get_remote_address(request)
-    except Exception:
-        # If token is invalid/expired, fallback to IP. The endpoint dependency will raise 401.
-        return get_remote_address(request)
+    # Check if user UID is available in request state (set by authenticated endpoints)
+    if hasattr(request.state, 'user_uid') and request.state.user_uid:
+        return f"user:{request.state.user_uid}"
+    
+    # Fall back to IP-based limiting for unauthenticated requests
+    return f"ip:{get_remote_address(request)}"
 
 
-def key_func_by_authenticated_user_only(request: Request) -> str:
+def get_authenticated_user_key(request: Request) -> str:
     """
-    Strict key function for slowapi that requires an authenticated user's UID.
-    It extracts the token from the Authorization header and verifies it.
-    If the token is missing or invalid, it raises NotAuthenticatedException.
-    This should be used for critical endpoints.
+    Strict rate limit key function that requires an authenticated user's UID.
+    
+    This function expects that the get_current_user dependency has been resolved
+    and the user information is available in request.state.user_uid.
+    If user_uid is not available, it raises an HTTP 401 error.
+    
+    This should be used for endpoints that require authentication.
     """
-    if not firebase_admin._apps:
-        try:
-            cred = credentials.ApplicationDefault()
-            firebase_admin.initialize_app(cred)
-        except Exception as e:
-            raise NotAuthenticatedException() from e
-
-    auth_header = request.headers.get("authorization")
-
-    if not auth_header or not auth_header.startswith("Bearer "):
-        raise NotAuthenticatedException()
-
-    try:
-        token = auth_header.split(" ")[1]
-        decoded_token = auth.verify_id_token(token)
-        uid = decoded_token.get("uid")
-        if not uid:
-            raise NotAuthenticatedException()
-        return uid
-    except Exception as e:
-        raise NotAuthenticatedException() from e
+    # Check if user UID is available in request state
+    if hasattr(request.state, 'user_uid') and request.state.user_uid:
+        return f"user:{request.state.user_uid}"
+    
+    # If no authenticated user, raise 401 (this shouldn't happen if dependencies are set up correctly)
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Authentication required for rate limiting",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
 
 
-limiter = Limiter(key_func=key_func_by_user)
-strict_limiter = Limiter(key_func=key_func_by_authenticated_user_only)
+# Create limiter instances with the centralized key functions
+limiter = Limiter(key_func=get_user_rate_limit_key)
+authenticated_limiter = Limiter(key_func=get_authenticated_user_key)
