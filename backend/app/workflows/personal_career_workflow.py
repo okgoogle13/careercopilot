@@ -7,7 +7,7 @@ import asyncio
 import json
 from typing import Any, Dict, List
 
-from app.core.ai_client import get_ai_client, AIRequest
+from app.core.ai_client import get_ai_client
 from app.core.config import get_personal_config
 from app.core.cache_decorators import cached_ai_operation
 from app.services.web_search import web_search
@@ -27,7 +27,6 @@ class PersonalCareerWorkflow:
         self.ai_prompt_builder = get_ai_prompt_builder()
         self.template_service = get_template_service()
         self.cached_profile = None  # Placeholder for profile data
-
 
     @cached_ai_operation("salary_intelligence")
     async def salary_intelligence(self, job_title: str, company: str, location: str) -> Dict[str, Any]:
@@ -49,7 +48,7 @@ class PersonalCareerWorkflow:
             f'Social Work award rates Australia {job_title}',
         ]
         search_results = await asyncio.gather(*[web_search(q) for q in search_queries])
-        
+
         # 2. Check for government pay scales (if applicable)
         govt_pay_scale_info = "No specific government pay scale found in initial search."
         if "social work" in job_title.lower():
@@ -73,13 +72,13 @@ class PersonalCareerWorkflow:
         strengths from a finance background transitioning into social work, and a market comparison summary.
         Format the output as a JSON object with keys: 'salary_range', 'negotiation_tips', 'market_comparison'.
         """
-        
+
         # Use unified AI prompt builder with proper context
         context = PromptContext(
             job_context={"title": job_title, "company": company, "location": location},
             custom_data={"search_results": search_results, "govt_pay_scale": govt_pay_scale_info}
         )
-        
+
         ai_response_str = await self.ai_prompt_builder.generate_ai_response(
             PromptType.SALARY_ANALYSIS, prompt, context
         )
@@ -97,10 +96,10 @@ class PersonalCareerWorkflow:
             A dictionary with top skills, trending skills, and a development plan.
         """
         descriptions = [job.get('description', '') for job in job_listings]
-        
+
         prompt = f"""
         Analyze the following {len(descriptions)} job descriptions for the '{self.config.career_transition_to}' field.
-        
+
         Job Descriptions:
         {descriptions}
 
@@ -110,7 +109,7 @@ class PersonalCareerWorkflow:
         or experiences.
         Format the output as a JSON object with keys: 'top_skills', 'trending_skills', 'development_plan'.
         """
-        
+
         # Use unified AI prompt builder with skills analysis context
         context = PromptContext(
             custom_data={
@@ -119,7 +118,7 @@ class PersonalCareerWorkflow:
                 "description_count": len(descriptions)
             }
         )
-        
+
         ai_response_str = await self.ai_prompt_builder.generate_ai_response(
             PromptType.SKILLS_ANALYSIS, prompt, context
         )
@@ -155,14 +154,14 @@ class PersonalCareerWorkflow:
 
         Format the output as a JSON object with keys: 'questions', 'suggested_answers', 'candidate_questions'.
         """
-        
+
         # Use unified AI prompt builder with interview context
         context = PromptContext(
             job_context={"description": job_description},
             company_context=company_research,
             custom_data={"prep_type": "behavioral_interview"}
         )
-        
+
         ai_response_str = await self.ai_prompt_builder.generate_ai_response(
             PromptType.INTERVIEW_PREP, prompt, context
         )
@@ -188,7 +187,7 @@ class PersonalCareerWorkflow:
                     "url": "https://example.com/job1"
                 },
                 {
-                    "job_id": "job_002", 
+                    "job_id": "job_002",
                     "title": "Case Manager",
                     "company": "Family Services Victoria",
                     "description": "Case management position supporting vulnerable families",
@@ -199,14 +198,14 @@ class PersonalCareerWorkflow:
                     "url": "https://example.com/job2"
                 }
             ]
-            
+
             # Filter promising matches (>0.7 score and acceptable salary)
             promising_jobs = [
-                job for job in mock_jobs 
-                if job.get("match_score", 0) > 0.7 and
-                job.get("salary_min", 0) >= self.config.salary_range["min"]
+                job for job in mock_jobs
+                if job.get("match_score", 0) > 0.7
+                and job.get("salary_min", 0) >= self.config.salary_range["min"]
             ]
-            
+
             return {
                 "success": True,
                 "total_jobs_found": len(mock_jobs),
@@ -214,7 +213,7 @@ class PersonalCareerWorkflow:
                 "jobs": promising_jobs,
                 "materials_prepared": min(3, len(promising_jobs))  # Top 3
             }
-            
+
         except Exception as e:
             return {"success": False, "error": str(e)}
 
@@ -223,18 +222,18 @@ class PersonalCareerWorkflow:
         Complete application process for a specific job with template generation
         """
         try:
-            # 1. Company research 
+            # 1. Company research
             company_research = await self.quick_company_research(job_url)
-            
+
             if not company_research.get("success"):
                 return {"success": False, "error": "Company research failed"}
-            
+
             # 2. Extract job details
             job_details = company_research.get("job_details", {})
             job_title = job_details.get("title", "Unknown Role")
             company_name = job_details.get("company", "Unknown Company")
             job_description = job_details.get("description", "")
-            
+
             # 3. Generate complete application materials package
             application_materials = await self.template_service.generate_application_materials(
                 job_title=job_title,
@@ -242,18 +241,18 @@ class PersonalCareerWorkflow:
                 job_description=job_description,
                 company_research=company_research.get("talking_points")
             )
-            
+
             # 4. Generate interview prep materials
             interview_materials = await self.generate_interview_prep(
                 job_description, company_research.get("talking_points", {})
             )
-            
+
             return {
                 "success": True,
                 "job_title": job_title,
                 "company": company_name,
                 "job_url": job_url,
-                
+
                 # Generated application materials
                 "application_materials": {
                     "email_application": {
@@ -276,20 +275,20 @@ class PersonalCareerWorkflow:
                         "placeholders": getattr(application_materials.get("interview_thank_you"), "placeholders", {})
                     }
                 },
-                
+
                 # Interview preparation
                 "interview_prep": interview_materials,
-                
+
                 # Company research
                 "company_research": company_research.get("talking_points", ""),
-                
+
                 # Status flags
                 "materials_generated": len(application_materials) > 0,
                 "research_completed": True,
                 "interview_prep_completed": interview_materials.get("success", False),
                 "application_tracked": True
             }
-            
+
         except Exception as e:
             return {"success": False, "error": str(e)}
 
@@ -300,7 +299,7 @@ class PersonalCareerWorkflow:
         try:
             # Extract company from URL (simplified)
             company_name = job_url.split('//')[-1].split('/')[0].replace('.com', '').replace('www.', '')
-            
+
             # Mock job details extraction
             job_details = {
                 "title": "Community Services Worker",
@@ -309,43 +308,43 @@ class PersonalCareerWorkflow:
                 "salary": "65000-80000 AUD",
                 "location": self.config.location
             }
-            
+
             # Generate talking points using AI
             talking_points_prompt = f"""
             Generate 5 specific talking points for applying to {job_details['company']} for a {job_details['title']} role.
             Focus on transitioning from {self.config.career_transition_from} to {self.config.career_transition_to}.
             Include: motivation, transferable skills, value proposition, questions to ask.
             """
-            
+
             # Use unified AI prompt builder for company research
             company_context = PromptContext(
                 job_context=job_details,
                 company_context={"name": job_details['company']},
                 custom_data={"research_type": "application_strategy"}
             )
-            
+
             talking_points = await self.ai_prompt_builder.generate_ai_response(
                 PromptType.COMPANY_RESEARCH, talking_points_prompt, company_context
             )
-            
+
             # Generate application strategy
             strategy_prompt = f"""
             Create an application strategy for someone transitioning from finance to social work.
             Job: {job_details['title']} at {job_details['company']}
             Include: key cover letter messages, how to position career change as strength, concerns to address.
             """
-            
+
             application_strategy = await self.ai_prompt_builder.generate_ai_response(
                 PromptType.COMPANY_RESEARCH, strategy_prompt, company_context
             )
-            
+
             return {
                 "success": True,
                 "job_details": job_details,
                 "talking_points": talking_points,
                 "application_strategy": application_strategy
             }
-            
+
         except Exception as e:
             return {"success": False, "error": str(e)}
 
@@ -357,7 +356,7 @@ class PersonalCareerWorkflow:
             # Mock progress data
             mock_applications = 3  # Applications this week
             mock_responses = 1     # Email responses received
-            
+
             # Generate AI-powered progress analysis
             analysis_prompt = f"""
             Generate a weekly progress review for someone who:
@@ -365,10 +364,10 @@ class PersonalCareerWorkflow:
             - Received {mock_responses} responses
             - Is transitioning from {self.config.career_transition_from} to {self.config.career_transition_to}
             - Target roles: {', '.join(self.config.target_roles)}
-            
+
             Provide encouraging summary with 3 focus areas for next week.
             """
-            
+
             # Use unified AI prompt builder for weekly review
             review_context = PromptContext(
                 custom_data={
@@ -377,11 +376,11 @@ class PersonalCareerWorkflow:
                     "review_type": "weekly_progress"
                 }
             )
-            
+
             summary = await self.ai_prompt_builder.generate_ai_response(
                 PromptType.WEEKLY_REVIEW, analysis_prompt, review_context
             )
-            
+
             return {
                 "success": True,
                 "applications_reviewed": mock_applications,
@@ -392,27 +391,29 @@ class PersonalCareerWorkflow:
                     "responses_count": mock_responses,
                     "recommendations": [
                         "Continue targeting social work roles in community services",
-                        "Highlight finance transferable skills in applications", 
+                        "Highlight finance transferable skills in applications",
                         "Follow up on pending applications from last week",
                         "Consider networking opportunities in social work field"
                     ]
                 }
             }
-            
+
         except Exception as e:
             return {"success": False, "error": str(e)}
-    
-    async def generate_email_template(self, template_type: str, job_title: str = None, 
-                                    company_name: str = None, contact_name: str = None) -> Dict[str, Any]:
+
+    async def generate_email_template(self, template_type: str,
+                                      job_title: str = None,
+                                      company_name: str = None,
+                                      contact_name: str = None) -> Dict[str, Any]:
         """
         Generate specific email template for job applications
-        
+
         Args:
             template_type: Type of email (application, follow_up, networking, thank_you, reference)
             job_title: Job title if applicable
             company_name: Company name if applicable
             contact_name: Contact person name if applicable
-            
+
         Returns:
             Generated email template with subject, content, and placeholders
         """
@@ -425,21 +426,21 @@ class PersonalCareerWorkflow:
                 "thank_you": TemplateType.INTERVIEW_THANK_YOU,
                 "reference": TemplateType.REFERENCE_REQUEST
             }
-            
+
             template_enum = template_map.get(template_type.lower())
             if not template_enum:
                 return {"success": False, "error": f"Unknown template type: {template_type}"}
-            
+
             # Create context
             context = TemplateContext(
                 company_name=company_name,
                 job_title=job_title,
                 contact_name=contact_name
             )
-            
+
             # Generate template
             template = await self.template_service.generate_template(template_enum, context)
-            
+
             return {
                 "success": True,
                 "template_type": template_type,
@@ -449,15 +450,16 @@ class PersonalCareerWorkflow:
                 "customization_tips": template.customization_tips,
                 "generated_at": template.generated_at
             }
-            
+
         except Exception as e:
             return {"success": False, "error": str(e)}
-    
-    async def generate_cover_letter_template(self, job_title: str = None, 
-                                           company_name: str = None) -> Dict[str, Any]:
+
+    async def generate_cover_letter_template(self,
+                                             job_title: str = None,
+                                             company_name: str = None) -> Dict[str, Any]:
         """
         Generate cover letter template with career transition context
-        
+
         Returns:
             Generated cover letter template with placeholders and tips
         """
@@ -466,11 +468,11 @@ class PersonalCareerWorkflow:
                 company_name=company_name,
                 job_title=job_title
             )
-            
+
             template = await self.template_service.generate_template(
                 TemplateType.COVER_LETTER, context
             )
-            
+
             return {
                 "success": True,
                 "template_type": "cover_letter",
@@ -479,6 +481,6 @@ class PersonalCareerWorkflow:
                 "customization_tips": template.customization_tips,
                 "generated_at": template.generated_at
             }
-            
+
         except Exception as e:
             return {"success": False, "error": str(e)}
