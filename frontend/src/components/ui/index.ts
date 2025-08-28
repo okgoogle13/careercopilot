@@ -1,10 +1,13 @@
 // UI Component exports for design system
 export { Button, buttonVariants } from './Button';
 export {
-  default as Card,
+  Card,
   CardHeader,
   CardTitle,
   CardDescription,
+  CardContent,
+  CardFooter,
+  CardAction,
 } from './Card';
 export {
   default as LoadingSpinner,
