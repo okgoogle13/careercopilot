@@ -135,9 +135,7 @@ async def register_user(user_data: UserRegistration, db: Session = Depends(get_d
     """
     try:
         # Rate limiting
-        if not rate_limiter.check_rate_limit(
-            f"register:{user_data.email}", limit=5, window=3600
-        ):
+        if not rate_limiter.check_rate_limit(f"register:{user_data.email}", limit=5, window=3600):
             raise HTTPException(
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
                 detail="Too many registration attempts. Please try again later.",
@@ -192,9 +190,7 @@ async def login_user(login_data: UserLogin, db: Session = Depends(get_db)):
     """
     try:
         # Rate limiting
-        if not rate_limiter.check_rate_limit(
-            f"login:{login_data.email}", limit=10, window=3600
-        ):
+        if not rate_limiter.check_rate_limit(f"login:{login_data.email}", limit=10, window=3600):
             raise HTTPException(
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
                 detail="Too many login attempts. Please try again later.",
@@ -378,9 +374,7 @@ async def get_user_by_id(
 
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     return {
         "id": user.id,

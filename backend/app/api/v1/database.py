@@ -110,9 +110,7 @@ async def get_user(user_id: str, db: Session = Depends(get_db)):
     """Get user by ID"""
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
     return user
 
 
@@ -121,9 +119,7 @@ async def get_user_jobs(user_id: str, limit: int = 50, db: Session = Depends(get
     """Get jobs for a specific user"""
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     jobs = (
         db.query(Job)
@@ -136,15 +132,11 @@ async def get_user_jobs(user_id: str, limit: int = 50, db: Session = Depends(get
 
 
 @router.get("/users/{user_id}/applications")
-async def get_user_applications(
-    user_id: str, limit: int = 50, db: Session = Depends(get_db)
-):
+async def get_user_applications(user_id: str, limit: int = 50, db: Session = Depends(get_db)):
     """Get applications for a specific user"""
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     applications = (
         db.query(Application)
@@ -157,15 +149,11 @@ async def get_user_applications(
 
 
 @router.get("/users/{user_id}/ai-interactions")
-async def get_user_ai_interactions(
-    user_id: str, limit: int = 100, db: Session = Depends(get_db)
-):
+async def get_user_ai_interactions(user_id: str, limit: int = 100, db: Session = Depends(get_db)):
     """Get AI interactions for a specific user"""
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     interactions = (
         db.query(AIInteraction)
@@ -193,17 +181,13 @@ async def get_database_stats(db: Session = Depends(get_db)):
         # Recent activity
         recent_users = db.query(User).order_by(User.created_at.desc()).limit(5).all()
         recent_applications = (
-            db.query(Application)
-            .order_by(Application.last_updated.desc())
-            .limit(5)
-            .all()
+            db.query(Application).order_by(Application.last_updated.desc()).limit(5).all()
         )
 
         return {
             "counts": stats,
             "recent_users": [
-                {"id": u.id, "email": u.email, "created_at": u.created_at}
-                for u in recent_users
+                {"id": u.id, "email": u.email, "created_at": u.created_at} for u in recent_users
             ],
             "recent_applications": [
                 {"id": a.id, "status": a.status, "last_updated": a.last_updated}

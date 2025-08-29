@@ -131,9 +131,7 @@ class EnhancedAIErrorHandler:
             )
 
             # Execute with retry logic
-            operation_result = await handler.execute_with_retry(
-                operation, *args, **kwargs
-            )
+            operation_result = await handler.execute_with_retry(operation, *args, **kwargs)
 
             # Validate result
             if operation_result is None:
@@ -238,9 +236,7 @@ class EnhancedAIErrorHandler:
             if result.success:
                 logger.info(f"Fallback succeeded for {context.operation_name}")
             else:
-                logger.warning(
-                    f"All fallback attempts failed for {context.operation_name}"
-                )
+                logger.warning(f"All fallback attempts failed for {context.operation_name}")
 
         except Exception as e:
             logger.error(f"Fallback execution failed: {str(e)}", exc_info=True)
@@ -275,9 +271,7 @@ class EnhancedAIErrorHandler:
                 },
                 "matched_keywords": [],
                 "missing_keywords": [],
-                "recommendations": [
-                    "Analysis temporarily unavailable. Please try again later."
-                ],
+                "recommendations": ["Analysis temporarily unavailable. Please try again later."],
                 "degraded_mode": True,
             }
         elif service_type == AIServiceType.GEMINI_EXTRACTION:
@@ -310,24 +304,18 @@ class EnhancedAIErrorHandler:
 
         # Keep only recent results (last 100)
         if len(self.operation_stats[operation_name]) > 100:
-            self.operation_stats[operation_name] = self.operation_stats[operation_name][
-                -100:
-            ]
+            self.operation_stats[operation_name] = self.operation_stats[operation_name][-100:]
 
     def get_operation_health(self, operation_name: str) -> Dict[str, Any]:
         """Get health metrics for an operation"""
         if operation_name not in self.operation_stats:
             return {"status": "no_data"}
 
-        recent_results = self.operation_stats[operation_name][
-            -10:
-        ]  # Last 10 operations
+        recent_results = self.operation_stats[operation_name][-10:]  # Last 10 operations
 
         success_count = sum(1 for r in recent_results if r.success)
         fallback_count = sum(1 for r in recent_results if r.fallback_used)
-        avg_execution_time = sum(r.execution_time for r in recent_results) / len(
-            recent_results
-        )
+        avg_execution_time = sum(r.execution_time for r in recent_results) / len(recent_results)
 
         return {
             "status": (
@@ -409,9 +397,7 @@ def create_fallback_strategy(
     )
 
 
-def create_detailed_error_message(
-    result: AIOperationResult, operation_context: str = ""
-) -> str:
+def create_detailed_error_message(result: AIOperationResult, operation_context: str = "") -> str:
     """Create detailed, user-friendly error message"""
     if result.success:
         return "Operation completed successfully"
@@ -422,14 +408,14 @@ def create_detailed_error_message(
     error = result.error
     context = result.context
 
-    base_message = f"Error in {operation_context or context.operation_name if context else 'AI operation'}"
+    base_message = (
+        f"Error in {operation_context or context.operation_name if context else 'AI operation'}"
+    )
 
     if error.error_type == AIErrorType.RATE_LIMIT:
         return f"{base_message}: AI service is currently busy. Please try again in a few minutes."
     elif error.error_type == AIErrorType.TIMEOUT:
-        return (
-            f"{base_message}: The request took too long to complete. Please try again."
-        )
+        return f"{base_message}: The request took too long to complete. Please try again."
     elif error.error_type == AIErrorType.QUOTA_EXCEEDED:
         return f"{base_message}: Service quota exceeded. Please try again later."
     elif error.error_type == AIErrorType.INVALID_REQUEST:

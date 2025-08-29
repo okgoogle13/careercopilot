@@ -60,9 +60,7 @@ async def daily_job_discovery(
         # Verify user exists
         user = db.query(User).filter(User.id == request.user_id).first()
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         # Create agent session for tracking
         session = AgentSession(
@@ -89,9 +87,7 @@ async def daily_job_discovery(
                 # Check if job already exists
                 existing_job = (
                     db.query(Job)
-                    .filter(
-                        Job.user_id == request.user_id, Job.url == job_data.get("url")
-                    )
+                    .filter(Job.user_id == request.user_id, Job.url == job_data.get("url"))
                     .first()
                 )
 
@@ -153,17 +149,13 @@ async def daily_job_discovery(
 
 
 @router.post("/salary-analysis")
-async def salary_analysis(
-    request: SalaryAnalysisRequest, db: Session = Depends(get_db)
-):
+async def salary_analysis(request: SalaryAnalysisRequest, db: Session = Depends(get_db)):
     """Enhanced salary intelligence with database tracking"""
     try:
         # Verify user exists
         user = db.query(User).filter(User.id == request.user_id).first()
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         workflow = PersonalCareerWorkflow()
 
@@ -221,17 +213,13 @@ async def salary_analysis(
 
 
 @router.post("/skills-analysis")
-async def skills_analysis(
-    request: SkillsAnalysisRequest, db: Session = Depends(get_db)
-):
+async def skills_analysis(request: SkillsAnalysisRequest, db: Session = Depends(get_db)):
     """Enhanced skills trend analysis with database tracking"""
     try:
         # Verify user exists
         user = db.query(User).filter(User.id == request.user_id).first()
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         workflow = PersonalCareerWorkflow()
 
@@ -296,9 +284,7 @@ async def apply_to_job(
         # Verify user exists
         user = db.query(User).filter(User.id == request.user_id).first()
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         # Create agent session for tracking
         session = AgentSession(
@@ -369,9 +355,7 @@ async def apply_to_job(
             )
             db.commit()
 
-            logger.info(
-                f"Application prepared for user {request.user_id}, job {job.id}"
-            )
+            logger.info(f"Application prepared for user {request.user_id}, job {job.id}")
 
             return {
                 "success": True,
@@ -409,9 +393,7 @@ async def get_user_sessions(
     # Verify user exists
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-        )
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
     query = db.query(AgentSession).filter(AgentSession.user_id == user_id)
 
@@ -435,32 +417,24 @@ async def weekly_review(user_id: str, db: Session = Depends(get_db)):
         # Verify user exists
         user = db.query(User).filter(User.id == user_id).first()
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         # Get week's data from database
         week_ago = datetime.utcnow() - timedelta(days=7)
 
         applications_this_week = (
             db.query(Application)
-            .filter(
-                Application.user_id == user_id, Application.last_updated >= week_ago
-            )
+            .filter(Application.user_id == user_id, Application.last_updated >= week_ago)
             .count()
         )
 
         jobs_discovered = (
-            db.query(Job)
-            .filter(Job.user_id == user_id, Job.discovered_at >= week_ago)
-            .count()
+            db.query(Job).filter(Job.user_id == user_id, Job.discovered_at >= week_ago).count()
         )
 
         ai_interactions = (
             db.query(AIInteraction)
-            .filter(
-                AIInteraction.user_id == user_id, AIInteraction.created_at >= week_ago
-            )
+            .filter(AIInteraction.user_id == user_id, AIInteraction.created_at >= week_ago)
             .count()
         )
 
@@ -483,9 +457,7 @@ async def weekly_review(user_id: str, db: Session = Depends(get_db)):
             "review_period": "last_7_days",
             "workflow_analysis": result.get("analysis", {}),
             "database_insights": database_insights,
-            "combined_recommendations": result.get("analysis", {}).get(
-                "recommendations", []
-            ),
+            "combined_recommendations": result.get("analysis", {}).get("recommendations", []),
         }
 
     except Exception as e:
