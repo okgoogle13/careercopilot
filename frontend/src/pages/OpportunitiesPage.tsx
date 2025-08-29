@@ -47,7 +47,7 @@ const StatsIcon = () => (
 );
 
 const OpportunitiesPage: React.FC = () => {
-  const { isAuthenticated, isLoading, error: authError, requireAuth, getAuthToken } = useAuthStatus();
+  const { isAuthenticated, isLoading, requireAuth, getAuthToken } = useAuthStatus();
   const [opportunities, setOpportunities] = useState<OpportunityType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
