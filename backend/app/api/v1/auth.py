@@ -2,10 +2,13 @@
 Authentication API endpoints for user registration, login, and session management.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
+import os
+from fastapi import APIRouter, Depends, HTTPException, status, Request
 from sqlalchemy.orm import Session
 from typing import Dict, Any
 import logging
+import firebase_admin
+from firebase_admin import auth as firebase_auth, credentials
 
 from app.core.database import get_db
 from app.core.auth import (
@@ -19,8 +22,75 @@ from app.models.database import User
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
+
+# Initialize Firebase Admin SDK if not already initialized
+if not firebase_admin._apps:
+    cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+    if not cred_path or not os.path.exists(cred_path):
+        raise RuntimeError(f"Service account file not found at path: {cred_path}")
+    cred = credentials.Certificate(cred_path)
+    firebase_admin.initialize_app(cred)
+
 logger = logging.getLogger(__name__)
 router = APIRouter()
+
+
+class FirebaseTokenRequest(BaseModel):
+    token: str
+
+
+class FirebaseUserProfile(BaseModel):
+    uid: str
+    email: str = None
+    name: str = None
+    picture: str = None
+
+
+# Endpoint: POST /auth/verify-token
+@router.post("/verify-token")
+async def verify_firebase_token(data: FirebaseTokenRequest):
+    """
+    Verify Firebase ID token and return user info.
+    """
+    try:
+        decoded = firebase_auth.verify_id_token(data.token)
+        return {"uid": decoded["uid"], "email": decoded.get("email")}
+    except Exception as e:
+        logger.error(f"Firebase token verification failed: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired Firebase token",
+        )
+
+
+# Endpoint: GET /auth/user-profile
+@router.get("/user-profile", response_model=FirebaseUserProfile)
+async def get_firebase_user_profile(request: Request):
+    """
+    Get Firebase user profile from Authorization Bearer token.
+    """
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Missing Authorization header",
+        )
+    token = auth_header.split(" ", 1)[1]
+    try:
+        decoded = firebase_auth.verify_id_token(token)
+        user = firebase_auth.get_user(decoded["uid"])
+        return FirebaseUserProfile(
+            uid=user.uid,
+            email=user.email,
+            name=user.display_name,
+            picture=user.photo_url,
+        )
+    except Exception as e:
+        logger.error(f"Failed to get Firebase user profile: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired Firebase token",
+        )
 
 
 class UserRegistration(BaseModel):

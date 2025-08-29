@@ -7,7 +7,7 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
 
-@genkit.flow()
+## Removed @genkit.flow()
 async def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
     """
     Creates a Google Calendar event for a job application deadline.

@@ -86,16 +86,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const firebaseUser = await authService.signIn(email, password);
-      const token = typeof firebaseUser.getIdToken === 'function'
-        ? await firebaseUser.getIdToken()
-        : '';
+      const firebaseUser = await authService.signIn(email, password) as FirebaseUser;
+      const token = await firebaseUser.getIdToken();
       const user: User = {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
         displayName: firebaseUser.displayName,
         token,
-        getIdToken: firebaseUser.getIdToken?.bind(firebaseUser),
+        getIdToken: () => firebaseUser.getIdToken(),
       };
       setUser(user);
       return user;
@@ -112,16 +110,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const firebaseUser = await authService.signUp(email, password);
-      const token = typeof firebaseUser.getIdToken === 'function'
-        ? await firebaseUser.getIdToken()
-        : '';
+      const firebaseUser = await authService.signUp(email, password) as FirebaseUser;
+      const token = await firebaseUser.getIdToken();
       const user: User = {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
         displayName: firebaseUser.displayName,
         token,
-        getIdToken: firebaseUser.getIdToken?.bind(firebaseUser),
+        getIdToken: () => firebaseUser.getIdToken(),
       };
       setUser(user);
       return user;
