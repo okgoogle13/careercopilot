@@ -1,5 +1,6 @@
 import base64
 import json
+from datetime import datetime
 
 import genkit
 from app.core.db import db
@@ -57,6 +58,26 @@ def extract_job_details_from_email(email_content: str) -> dict:
 
 
 ## Removed @genkit.flow()
+async def scanEmailsForJobOpportunities(user_id: str) -> dict:
+    """
+    Enhanced version of email scanning that returns structured results.
+    """
+    try:
+        opportunities = await scanUserEmails(user_id)
+        return {
+            "success": True,
+            "opportunities_found": len(opportunities),
+            "opportunities": opportunities,
+            "scan_timestamp": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "opportunities_found": 0,
+            "opportunities": []
+        }
+
 async def scanUserEmails(user_id: str) -> list:
     """
     Scans a user's unread emails for jobs, saves them, creates calendar events, and sends notifications.
