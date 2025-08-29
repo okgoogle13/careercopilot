@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo, memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../contexts';
-import { Button } from './ui';
+import { Button, ThemeToggle } from './ui';
 import SkipLink from './ui/SkipLink';
 import toast from 'react-hot-toast';
 
@@ -19,21 +19,22 @@ const NavItem = memo<NavItemProps>(
     <NavLink
       to={to}
       className={({ isActive }: { isActive: boolean }) => `
-              flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200
+              flex items-center space-x-3 px-4 py-2.5 rounded-xl text-sm font-medium 
+              transition-all duration-200 group hover-lift animate-fade-in
               ${
                 isPrimary
                   ? isActive
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                    ? 'bg-primary text-primary-foreground shadow-glow'
+                    : 'bg-primary/90 hover:bg-primary text-primary-foreground hover:shadow-glow'
                   : isActive
-                    ? 'bg-gray-700 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white'
+                    ? 'bg-card text-card-foreground shadow-md border border-border'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
               }
           `}
       onClick={onMobileMenuClose}
     >
-      <span className="text-lg">{icon}</span>
-      <span>{label}</span>
+      <span className="text-lg group-hover:scale-110 transition-transform duration-200">{icon}</span>
+      <span className="font-medium">{label}</span>
     </NavLink>
   )
 );
@@ -73,27 +74,27 @@ const Navbar: React.FC = () => {
     <>
       <SkipLink href="#main-content">Skip to main content</SkipLink>
       <nav
-        className="bg-gray-800 shadow-lg"
+        className="bg-card/80 backdrop-blur-md shadow-lg border-b border-border sticky top-0 z-50"
         role="navigation"
         aria-label="Main navigation"
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-6">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <NavLink
               to="/"
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-3 group hover-lift"
               aria-label="CareerCopilot home"
             >
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-glow">
                 <span
-                  className="text-white font-bold text-lg"
+                  className="text-white font-bold text-xl"
                   aria-hidden="true"
                 >
                   C
                 </span>
               </div>
-              <span className="text-white font-bold text-xl">
+              <span className="gradient-text font-bold text-2xl tracking-tight">
                 CareerCopilot
               </span>
             </NavLink>
@@ -111,24 +112,38 @@ const Navbar: React.FC = () => {
 
             {/* User Menu */}
             <div className="flex items-center space-x-4">
+              {/* Theme Toggle */}
+              <ThemeToggle />
+              
               {user && (
                 <>
                   {/* User Info */}
-                  <div className="hidden sm:flex items-center space-x-3 text-gray-300">
-                    <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">
-                      <span className="text-sm font-medium">
+                  <div className="hidden sm:flex items-center space-x-3 text-muted-foreground">
+                    <div className="w-10 h-10 bg-gradient-to-br from-secondary to-secondary/80 rounded-full flex items-center justify-center shadow-md hover-lift">
+                      <span className="text-sm font-semibold text-foreground">
                         {(user.displayName || user.email || 'U')
                           .charAt(0)
                           .toUpperCase()}
                       </span>
                     </div>
-                    <span className="text-sm">
-                      {user.displayName || user.email}
-                    </span>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium text-foreground">
+                        {user.displayName || 'User'}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {user.email}
+                      </span>
+                    </div>
                   </div>
 
                   {/* Logout Button */}
-                  <Button variant="destructive" size="sm" onClick={handleLogout}>
+                  <Button 
+                    variant="destructive" 
+                    size="sm" 
+                    onClick={handleLogout}
+                    className="hover-lift animate-fade-in"
+                  >
+                    <span className="mr-2">👋</span>
                     Logout
                   </Button>
                 </>

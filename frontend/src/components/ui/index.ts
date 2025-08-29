@@ -31,6 +31,7 @@ export { FormField, Select, Checkbox } from './FormField';
 export { default as Modal } from './Modal';
 export { default as SkipLink } from './SkipLink';
 export { ScreenReaderOnly, LiveRegion } from './ScreenReaderOnly';
+export { default as ThemeToggle } from './ThemeToggle';
 
 // New Radix UI components
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './accordion';
