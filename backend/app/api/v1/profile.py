@@ -2,7 +2,7 @@ from app.core.dependencies import get_current_user_with_state
 from app.core.limiter import authenticated_limiter
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
+from typing import List
 
 from app.genkit_flows.voice_profiler import generate_voice_profile
 
