@@ -1,0 +1,17 @@
+{
+  "key": "test_operation_test_user_880c9769b41ea7ae",
+  "value": {
+    "result": {
+      "processed": "different input",
+      "timestamp": "2025-08-29T02:25:33.409855+00:00"
+    },
+    "operation_type": "test_operation",
+    "input_hash": "880c9769b41ea7ae",
+    "user_id": "test_user",
+    "cached_at": "2025-08-29T12:25:33.409922"
+  },
+  "timestamp": "2025-08-29T12:25:33.409959",
+  "expires_at": "2025-09-01T12:25:33.409959",
+  "ttl_hours": 72.0,
+  "category": "ai_operations"
+}

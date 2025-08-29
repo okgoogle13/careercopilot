@@ -5,7 +5,7 @@ Supports PostgreSQL (production) and SQLite (development/testing).
 
 import os
 import logging
-from sqlalchemy import create_engine, event
+from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.pool import StaticPool
 from contextlib import contextmanager
@@ -148,7 +148,7 @@ def check_database_health() -> dict:
     try:
         with get_db_session() as db:
             # Simple query to test connection
-            db.execute("SELECT 1")
+            db.execute(text("SELECT 1"))
             return {
                 "status": "healthy",
                 "database_type": "sqlite" if db_config.is_sqlite else "postgresql",

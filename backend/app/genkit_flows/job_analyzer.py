@@ -1,10 +1,35 @@
+import os
 from app.core.ai_config import get_ai_config
+from dotenv import load_dotenv
+
+try:
+    import genkit  # type: ignore
+    from genkit.plugins import googleai  # type: ignore
+except Exception:  # pragma: no cover - makes module import-safe without genkit
+    genkit = None  # type: ignore
+    googleai = None  # type: ignore
+
+
+def _noop_flow(*args, **kwargs):
+    def _decorator(fn):
+        return fn
+
+    return _decorator
+
+
+# Use real genkit.flow if available; otherwise a no-op
+genkit_flow = getattr(genkit, "flow", _noop_flow)
+
+# Load environment variables and initialize Genkit if needed
+load_dotenv()
+if genkit and not genkit.get_plugin("googleai"):
+    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
 
 # Define the Job Analyzer Genkit flow
-@genkit.flow()
+@genkit_flow()
 def analyze_job_description(job_description: str) -> dict:
     """
     Analyzes a job description to extract key information.

@@ -57,7 +57,7 @@ class BaseAgent(ABC):
         correlation_id = f"{self.agent_name}_{start_time.strftime('%Y%m%d_%H%M%S')}"
 
         self.logger.info(
-            f"Agent execution started",
+            "Agent execution started",
             extra={
                 "agent": self.agent_name,
                 "correlation_id": correlation_id,
@@ -92,7 +92,7 @@ class BaseAgent(ABC):
             execution_time = (datetime.now() - start_time).total_seconds()
 
             self.logger.info(
-                f"Agent execution completed successfully",
+                "Agent execution completed successfully",
                 extra={
                     "agent": self.agent_name,
                     "correlation_id": correlation_id,
@@ -106,7 +106,7 @@ class BaseAgent(ABC):
             execution_time = (datetime.now() - start_time).total_seconds()
 
             self.logger.error(
-                f"Agent execution failed",
+                "Agent execution failed",
                 extra={
                     "agent": self.agent_name,
                     "correlation_id": correlation_id,
@@ -351,7 +351,7 @@ class PersonalizedAgent(BaseAgent):
             recent_patterns = success_patterns[-3:]  # Last 3 successes
             success_context = "\n".join(
                 [
-                    f"Successful approach {i+1}: {pattern['result'].get('summary', 'Success achieved')}"
+                    f"Successful approach {i + 1}: {pattern['result'].get('summary', 'Success achieved')}"
                     for i, pattern in enumerate(recent_patterns)
                 ]
             )

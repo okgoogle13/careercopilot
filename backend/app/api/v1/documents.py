@@ -1,7 +1,9 @@
 import io
 import json
 from pathlib import Path
-from typing import List, Literal
+from typing import List, Literal, Optional, Dict, Any
+from datetime import datetime
+from pydantic import BaseModel
 
 import docx
 import pdfplumber
@@ -20,6 +22,19 @@ from weasyprint import CSS, HTML
 # extract_resume_entities  # Temporarily disabled for deployment
 
 router = APIRouter()
+
+
+class Document(BaseModel):
+    id: str
+    name: str
+    type: str  # 'resume', 'cover_letter', etc.
+    size: int
+    created_at: str
+    updated_at: str
+    content_preview: Optional[str] = None
+    status: str = "active"
+    metadata: Optional[Dict[str, Any]] = None
+
 
 # --- Template Configuration Loading ---
 config_path = Path(__file__).parent.parent.parent.parent / "config" / "themes.json"
@@ -58,6 +73,51 @@ async def upload_and_parse_files(
 ):
     # This is a placeholder for the actual implementation
     pass
+
+
+@router.get("")
+@authenticated_limiter.limit("30/minute")
+async def list_documents(
+    request: Request,
+    user: dict = Depends(get_current_user_with_state),
+    doc_type: Optional[str] = None,
+) -> List[Document]:
+    """List all documents for the current user"""
+    user_id = user.get("uid") or user.get("id")
+    if not user_id:
+        raise HTTPException(status_code=400, detail="User ID not found")
+
+    # Mock data for now - in production this would come from database/Firestore
+    mock_documents = [
+        Document(
+            id="doc1",
+            name="Software Engineer Resume.pdf",
+            type="resume",
+            size=245760,  # ~240KB
+            created_at="2024-01-15T10:30:00Z",
+            updated_at="2024-01-15T10:30:00Z",
+            content_preview="Experienced Software Engineer with 5+ years...",
+            status="active",
+            metadata={"pages": 2, "format": "pdf"},
+        ),
+        Document(
+            id="doc2",
+            name="Cover Letter - Tech Company.docx",
+            type="cover_letter",
+            size=51200,  # ~50KB
+            created_at="2024-01-20T14:15:00Z",
+            updated_at="2024-01-20T14:15:00Z",
+            content_preview="Dear Hiring Manager, I am excited to apply...",
+            status="active",
+            metadata={"pages": 1, "format": "docx"},
+        ),
+    ]
+
+    # Filter by document type if specified
+    if doc_type:
+        mock_documents = [doc for doc in mock_documents if doc.type == doc_type]
+
+    return mock_documents
 
 
 @router.get("/{document_id}/download-pdf")

@@ -8,6 +8,7 @@ from app.core.ai_error_handling import (
     with_ai_error_handling,
 )
 from app.core.input_validation import InputSanitizer, InputValidationError
+from app.core.ai_config import get_ai_config
 from dotenv import load_dotenv
 
 try:
@@ -41,8 +42,6 @@ class _DummyGeminiPro:
             "Tests should patch 'gemini_pro'."
         )
 
-
-from app.core.ai_config import get_ai_config
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 

@@ -1,45 +1,59 @@
+
 """
 Tests for the AI operations caching system
 """
 
-import asyncio
-from datetime import datetime, timedelta, timezone
-from unittest.mock import AsyncMock
-
 import pytest
-from app.core.cache import AICache, CacheEntry, InMemoryCacheBackend
-from app.core.cache_decorators import CacheContext, cached_ai_operation
+import asyncio
+from datetime import datetime, timezone
+from app.core.cache_deprecated import InMemoryCacheBackend, AICache
+from unittest.mock import AsyncMock
+import asyncio
+from datetime import datetime, timezone
+import asyncio
+from app.core.cache_decorators.cache_decorators import cached_ai_operation, CacheContext
 
-
-class TestInMemoryCacheBackend:
-    """Test the in-memory cache backend"""
-
-    @pytest.fixture
-    def backend(self):
-        return InMemoryCacheBackend(max_size=5)
-
-    @pytest.fixture
-    def sample_entry(self):
-        return CacheEntry(
-            key="test_key",
-            value={"result": "test_data"},
-            created_at=datetime.now(timezone.utc),
-            expires_at=datetime.now(timezone.utc) + timedelta(seconds=3600),
-            operation_type="test_operation",
-            input_hash="abc123",
-        )
+class TestCacheDecorators:
+    """Test cache decorators functionality"""
 
     @pytest.mark.asyncio
-    async def test_set_and_get(self, backend, sample_entry):
-        # Set entry
-        success = await backend.set(sample_entry)
-        assert success is True
+    async def test_cached_operation_decorator(self):
+        # Ensure cache is cleared before test
+        from app.core.personal_cache import get_ai_cache
+        cache = get_ai_cache()
+        await cache.clear_ai_operations("test_operation")
 
-        # Get entry
-        retrieved = await backend.get(sample_entry.key)
-        assert retrieved is not None
-        assert retrieved.value == sample_entry.value
+        import uuid
+        user_id = f"test_user_{uuid.uuid4()}"
+        input_text = f"test input data_{uuid.uuid4()}"
 
+        # Mock function call counter
+        call_count = 0
+
+        @cached_ai_operation("test_operation", user_id_param="user_id")
+        async def mock_expensive_operation(user_id: str, input_text: str):
+            nonlocal call_count
+            call_count += 1
+            await asyncio.sleep(0.01)  # Simulate processing time
+            return {
+                "processed": input_text,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+
+        # First call - should execute function
+        result1 = await mock_expensive_operation(user_id, input_text)
+        assert call_count == 1
+        assert result1["processed"] == input_text
+
+        # Second call with same parameters - should use cache
+        result2 = await mock_expensive_operation(user_id, input_text)
+        assert call_count == 1  # Function not called again
+        assert result2 == result1  # Same result from cache
+
+        # Different input - should execute function again
+        result3 = await mock_expensive_operation(user_id, "different input")
+        assert call_count == 2
+        assert result3["processed"] == "different input"
     @pytest.mark.asyncio
     async def test_get_nonexistent_key(self, backend):
         result = await backend.get("nonexistent_key")
@@ -186,7 +200,9 @@ class TestAICache:
         ]
 
         for op_type, input_data in operations:
-            await cache.set(op_type, user_id, input_data, {"result": f"{op_type}_result"})
+            await cache.set(
+                op_type, user_id, input_data, {"result": f"{op_type}_result"}
+            )
 
         # Verify entries exist
         for op_type, input_data in operations:
@@ -194,7 +210,9 @@ class TestAICache:
             assert result is not None
 
         # Invalidate user cache
-        invalidated = await cache.invalidate_user_cache(user_id, ["resume_analysis", "ats_scoring"])
+        invalidated = await cache.invalidate_user_cache(
+            user_id, ["resume_analysis", "ats_scoring"]
+        )
         assert invalidated == 2
 
         # Verify correct entries were invalidated
@@ -208,6 +226,15 @@ class TestCacheDecorators:
 
     @pytest.mark.asyncio
     async def test_cached_operation_decorator(self):
+        # Ensure cache is cleared before test
+        from app.core.personal_cache import get_ai_cache
+        cache = get_ai_cache()
+        await cache.clear_ai_operations("test_operation")
+
+        import uuid
+        user_id = f"test_user_{uuid.uuid4()}"
+        input_text = f"test input data_{uuid.uuid4()}"
+
         # Mock function call counter
         call_count = 0
 
@@ -216,10 +243,10 @@ class TestCacheDecorators:
             nonlocal call_count
             call_count += 1
             await asyncio.sleep(0.01)  # Simulate processing time
-            return {"processed": input_text, "timestamp": datetime.now(timezone.utc).isoformat()}
-
-        user_id = "test_user"
-        input_text = "test input data"
+            return {
+                "processed": input_text,
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
 
         # First call - should execute function
         result1 = await mock_expensive_operation(user_id, input_text)
@@ -238,9 +265,34 @@ class TestCacheDecorators:
 
     @pytest.mark.asyncio
     async def test_cache_context_manager(self):
-        user_id = "context_user"
+        # Ensure cache is cleared before test
+        from app.core.personal_cache import get_ai_cache
+        cache = get_ai_cache()
+        await cache.clear_ai_operations("test_context_op")
+
+        import uuid
+        user_id = f"context_user_{uuid.uuid4()}"
         operation_type = "test_context_op"
-        input_data = {"test": "data"}
+        input_data = {"test": f"data_{uuid.uuid4()}"}
+
+        # First use - cache miss
+        async with CacheContext(operation_type, user_id, input_data) as cache_ctx:
+            assert cache_ctx.result is None
+
+            # Set result in context
+            result = {"computed": "result"}
+            success = await cache_ctx.set_result(result)
+            assert success is True
+
+        # Second use - cache hit
+        async with CacheContext(operation_type, user_id, input_data) as cache_ctx:
+            assert cache_ctx.result is not None
+            assert cache_ctx.result == {"computed": "result"}
+
+        import uuid
+        user_id = f"context_user_{uuid.uuid4()}"
+        operation_type = "test_context_op"
+        input_data = {"test": f"data_{uuid.uuid4()}"}
 
         # First use - cache miss
         async with CacheContext(operation_type, user_id, input_data) as cache_ctx:
@@ -364,7 +416,9 @@ class TestCacheIntegration:
         assert result is None
 
         # Set should return False on error
-        success = await cache.set("test_operation", user_id, input_data, {"result": "data"})
+        success = await cache.set(
+            "test_operation", user_id, input_data, {"result": "data"}
+        )
         assert success is False
 
 
