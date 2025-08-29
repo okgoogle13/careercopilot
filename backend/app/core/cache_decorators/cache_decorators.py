@@ -68,7 +68,9 @@ def cached_ai_operation(
                 )
 
                 # Try to get from cache
-                cached_result = await cache.get_ai_compatible(operation_type, user_id, cache_input)
+                cached_result = await cache.get_ai_compatible(
+                    operation_type, user_id, cache_input
+                )
                 if cached_result is not None:
                     return cached_result
 
@@ -76,7 +78,9 @@ def cached_ai_operation(
                 result = await func(*args, **kwargs)
 
                 # Cache the result
-                await cache.set_ai_compatible(operation_type, user_id, cache_input, result)
+                await cache.set_ai_compatible(
+                    operation_type, user_id, cache_input, result
+                )
 
                 return result
 

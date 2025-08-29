@@ -29,7 +29,7 @@ def get_gmail_service(user_id: str):
     return build("gmail", "v1", credentials=credentials)
 
 
-## Removed @genkit.flow()
+# Removed @genkit.flow()
 def extract_job_details_from_email(email_content: str) -> dict:
     """Uses an AI model to extract structured job details from email text."""
     # This flow remains the same
@@ -55,7 +55,7 @@ def extract_job_details_from_email(email_content: str) -> dict:
         return {}
 
 
-## Removed @genkit.flow()
+# Removed @genkit.flow()
 async def scanEmailsForJobOpportunities(user_id: str) -> dict:
     """
     Enhanced version of email scanning that returns structured results.

@@ -15,7 +15,7 @@ if not genkit.get_plugin("googleai"):
 gemini_pro = googleai.gemini_pro
 
 
-## Removed @genkit.flow()
+# Removed @genkit.flow()
 def generate_tailored_resume(base_profile_data: dict, comparison_analysis: dict) -> str:
     """
     Acts as an expert resume writer to generate a tailored resume.

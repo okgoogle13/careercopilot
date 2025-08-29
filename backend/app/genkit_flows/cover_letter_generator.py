@@ -13,7 +13,7 @@ if not genkit.get_plugin("googleai"):
 gemini_pro = googleai.gemini_pro
 
 
-## Removed @genkit.flow()
+# Removed @genkit.flow()
 def generate_tailored_cover_letter(
     base_profile_data: dict,
     job_analysis_data: dict,
