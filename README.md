@@ -30,3 +30,15 @@ Once created and enabled, this Cloud Scheduler job will call your API endpoint e
 
 ## CI/CD Pipeline Test - Staging
 # Test comment for CI trigger
+
+## Dependency Management with Renovate
+
+This repository uses [Renovate](https://github.com/renovatebot/renovate) to automate dependency updates. The configuration is located in the `renovate.json` file.
+
+### Setup
+
+To enable Renovate, you need to install the Renovate GitHub App on your repository.
+
+1.  Go to the [Renovate GitHub App page](https://github.com/apps/renovate).
+2.  Click "Install" and select the repository you want to enable Renovate for.
+3.  Once installed, Renovate will automatically open a pull request to onboard itself. After that, it will start creating pull requests for dependency updates based on the configuration in `renovate.json`.

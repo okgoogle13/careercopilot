@@ -1,6 +1,47 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    ":docker"
+  ],
+  "automerge": true,
+  "automergeType": "pr",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["*eslint*"],
+      "groupName": "eslint"
+    },
+    {
+      "matchPackagePatterns": ["*@testing-library*"],
+      "groupName": "testing-library"
+    },
+    {
+      "matchPackagePatterns": ["*@radix-ui*"],
+      "groupName": "radix-ui"
+    },
+    {
+      "matchPackagePatterns": ["firebase", "firebase-admin", "firebase-functions"],
+      "groupName": "firebase"
+    },
+    {
+      "matchPackagePatterns": ["*@typescript-eslint*"],
+      "groupName": "typescript-eslint"
+    },
+    {
+        "matchPackagePatterns": ["*@playwright*"],
+        "groupName": "playwright"
+    },
+    {
+        "matchPackagePatterns": ["postcss", "tailwindcss"],
+        "groupName": "css-tooling"
+    }
   ]
 }
