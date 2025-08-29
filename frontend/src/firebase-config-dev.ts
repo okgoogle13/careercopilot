@@ -54,7 +54,7 @@ class MockAuth {
     return Promise.resolve();
   }
   
-  onAuthStateChanged(callback: Function) {
+  onAuthStateChanged(callback: (user: any) => void) {
     // Simulate logged out state
     callback(null);
     return () => {}; // unsubscribe function

@@ -47,7 +47,7 @@ runs:
     - name: Lint
       if: inputs.run-checks == 'true'
       shell: bash
-      run: npm run lint --prefix frontend
+      run: npm run lint:ci --prefix frontend
 
     - name: Format check
       if: inputs.run-checks == 'true'

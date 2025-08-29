@@ -9,7 +9,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies for ML and database
+# Install system dependencies for ML, database, and PDF generation
 RUN apt-get update && apt-get install -y \
     gcc \
     g++ \
@@ -17,6 +17,13 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     libpq-dev \
     curl \
+    libglib2.0-0 \
+    libgobject-2.0-0 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libcairo2 \
+    libgdk-pixbuf-2.0-0 \
+    fontconfig \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements file into the container
