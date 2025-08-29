@@ -2,10 +2,8 @@ import base64
 import json
 from datetime import datetime
 
-import genkit
 from app.core.db import db
 from app.core.secrets import get_user_secret
-from genkit.plugins.google_genai.google import GoogleAI
 from google.cloud.firestore import SERVER_TIMESTAMP
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -68,15 +66,16 @@ async def scanEmailsForJobOpportunities(user_id: str) -> dict:
             "success": True,
             "opportunities_found": len(opportunities),
             "opportunities": opportunities,
-            "scan_timestamp": datetime.now().isoformat()
+            "scan_timestamp": datetime.now().isoformat(),
         }
     except Exception as e:
         return {
             "success": False,
             "error": str(e),
             "opportunities_found": 0,
-            "opportunities": []
+            "opportunities": [],
         }
+
 
 async def scanUserEmails(user_id: str) -> list:
     """
