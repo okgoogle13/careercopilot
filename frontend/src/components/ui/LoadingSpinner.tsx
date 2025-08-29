@@ -17,10 +17,10 @@ const LoadingSpinner = memo<LoadingSpinnerProps>(
     };
 
     const colorClasses = {
-      primary: 'text-blue-600',
-      secondary: 'text-gray-600',
+      primary: 'text-primary',
+      secondary: 'text-secondary-foreground',
       white: 'text-white',
-      gray: 'text-gray-400',
+      gray: 'text-muted-foreground',
     };
 
     return (
@@ -73,7 +73,7 @@ export const LoadingState = memo<LoadingStateProps>(
     const variantClasses = {
       default: 'py-12',
       minimal: 'py-6',
-      card: 'py-8 px-6 bg-white rounded-lg shadow-sm border',
+      card: 'py-8 px-6 bg-card rounded-lg shadow-md border animate-fade-in hover-lift',
     };
 
     return (
@@ -83,7 +83,7 @@ export const LoadingState = memo<LoadingStateProps>(
         aria-live="polite"
       >
         <LoadingSpinner size={size} className="mb-4" />
-        <p className="text-gray-600 text-center text-sm">{message}</p>
+        <p className="text-muted-foreground text-center text-sm animate-fade-in">{message}</p>
       </div>
     );
   }
@@ -99,13 +99,13 @@ interface PageLoadingProps {
 export const PageLoading = memo<PageLoadingProps>(
   ({ message = 'Loading page...', className = '' }) => (
     <div
-      className={`min-h-screen bg-gray-50 flex items-center justify-center ${className}`}
+      className={`min-h-screen bg-background flex items-center justify-center ${className}`}
       role="status"
       aria-live="polite"
     >
-      <div className="text-center">
+      <div className="text-center animate-fade-in">
         <LoadingSpinner size="xl" className="mb-6 mx-auto" />
-        <p className="text-gray-600 text-lg">{message}</p>
+        <p className="text-muted-foreground text-lg">{message}</p>
       </div>
     </div>
   )
@@ -127,7 +127,7 @@ export const InlineLoading = memo<InlineLoadingProps>(
       aria-live="polite"
     >
       <LoadingSpinner size="sm" />
-      {message && <span className="text-sm text-gray-600">{message}</span>}
+      {message && <span className="text-sm text-muted-foreground">{message}</span>}
     </div>
   )
 );
@@ -151,12 +151,12 @@ export const TableLoading = memo<TableLoadingProps>(
       {Array.from({ length: rows }).map((_, rowIndex) => (
         <div
           key={rowIndex}
-          className="flex space-x-4 py-3 border-b border-gray-100"
+          className="flex space-x-4 py-3 border-b border-border"
         >
           {Array.from({ length: columns }).map((_, colIndex) => (
             <div
               key={colIndex}
-              className="h-4 bg-gray-200 rounded flex-1"
+              className="h-4 bg-muted rounded flex-1"
               style={{ width: `${Math.random() * 40 + 60}%` }}
             />
           ))}
@@ -177,25 +177,25 @@ interface CardLoadingProps {
 export const CardLoading = memo<CardLoadingProps>(
   ({ className = '', variant = 'default' }) => (
     <div
-      className={`animate-pulse p-6 bg-white rounded-lg shadow-sm border ${className}`}
+      className={`animate-pulse p-6 bg-card rounded-lg shadow-md border hover-lift ${className}`}
       role="status"
       aria-label="Loading card content"
     >
       <div className="space-y-4">
         {variant === 'default' && (
           <>
-            <div className="h-4 bg-gray-200 rounded w-3/4" />
-            <div className="h-4 bg-gray-200 rounded w-1/2" />
+            <div className="h-4 bg-muted rounded w-3/4" />
+            <div className="h-4 bg-muted rounded w-1/2" />
             <div className="space-y-2">
-              <div className="h-3 bg-gray-200 rounded" />
-              <div className="h-3 bg-gray-200 rounded w-5/6" />
+              <div className="h-3 bg-muted rounded" />
+              <div className="h-3 bg-muted rounded w-5/6" />
             </div>
           </>
         )}
         {variant === 'compact' && (
           <>
-            <div className="h-4 bg-gray-200 rounded w-2/3" />
-            <div className="h-3 bg-gray-200 rounded w-1/2" />
+            <div className="h-4 bg-muted rounded w-2/3" />
+            <div className="h-3 bg-muted rounded w-1/2" />
           </>
         )}
       </div>
