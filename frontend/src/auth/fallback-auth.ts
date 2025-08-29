@@ -5,6 +5,7 @@ interface User {
   uid: string;
   email: string;
   displayName?: string;
+  getIdToken: () => Promise<string>;
 }
 
 interface AuthState {
@@ -32,6 +33,12 @@ class FallbackAuth {
       const stored = localStorage.getItem(this.storageKey);
       if (stored) {
         const { user } = JSON.parse(stored);
+        // Restore the getIdToken function
+        if (user) {
+          user.getIdToken = async () => {
+            return `fallback-token-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+          };
+        }
         this.setState({ user, loading: false, error: null });
       }
   } catch (error) {
@@ -47,7 +54,9 @@ class FallbackAuth {
   private persistAuth(user: User | null) {
     try {
       if (user) {
-        localStorage.setItem(this.storageKey, JSON.stringify({ user }));
+        // Don't persist the getIdToken function, just the basic user data
+        const { getIdToken, ...persistableUser } = user;
+        localStorage.setItem(this.storageKey, JSON.stringify({ user: persistableUser }));
       } else {
         localStorage.removeItem(this.storageKey);
       }
@@ -68,6 +77,10 @@ class FallbackAuth {
         uid: 'dev-user-' + Date.now(),
         email,
         displayName: email.split('@')[0],
+        getIdToken: async () => {
+          // Generate a mock JWT token for fallback auth
+          return `fallback-token-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        }
       };
 
       this.setState({ user, loading: false, error: null });
@@ -93,6 +106,10 @@ class FallbackAuth {
         uid: 'dev-user-' + Date.now(),
         email,
         displayName: email.split('@')[0],
+        getIdToken: async () => {
+          // Generate a mock JWT token for fallback auth
+          return `fallback-token-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        }
       };
 
       this.setState({ user, loading: false, error: null });
