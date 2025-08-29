@@ -35,9 +35,7 @@ class WorkflowRequest(BaseModel):
 
 
 @router.post("/market-analysis")
-async def analyze_market_trends(
-    request: MarketAnalysisRequest, db: Session = Depends(get_db)
-):
+async def analyze_market_trends(request: MarketAnalysisRequest, db: Session = Depends(get_db)):
     """
     ML-powered comprehensive market trend analysis.
     Analyzes salary trends, skill demands, competition levels, and forecasts.
@@ -45,9 +43,7 @@ async def analyze_market_trends(
     try:
         analyzer = JobMarketAnalyzer()
 
-        logger.info(
-            f"Starting market analysis for {request.field} in {request.location}"
-        )
+        logger.info(f"Starting market analysis for {request.field} in {request.location}")
 
         analysis = await analyzer.analyze_market_trends(
             field=request.field,
@@ -61,9 +57,7 @@ async def analyze_market_trends(
             "metadata": {
                 "analysis_type": "comprehensive_market_trends",
                 "ml_powered": True,
-                "data_sources": analysis.get("summary", {}).get(
-                    "total_jobs_analyzed", 0
-                ),
+                "data_sources": analysis.get("summary", {}).get("total_jobs_analyzed", 0),
             },
         }
 
@@ -84,9 +78,7 @@ async def calculate_job_match(request: JobMatchRequest, db: Session = Depends(ge
         # Get user profile
         user = db.query(User).filter(User.id == request.user_id).first()
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         # Build user profile for matching
         user_profile = {
@@ -123,9 +115,7 @@ async def calculate_job_match(request: JobMatchRequest, db: Session = Depends(ge
 
 
 @router.post("/multi-agent-workflow")
-async def run_multi_agent_workflow(
-    request: WorkflowRequest, db: Session = Depends(get_db)
-):
+async def run_multi_agent_workflow(request: WorkflowRequest, db: Session = Depends(get_db)):
     """
     Execute multi-agent workflow for advanced intelligence gathering.
     """
@@ -133,9 +123,7 @@ async def run_multi_agent_workflow(
         # Verify user exists
         user = db.query(User).filter(User.id == request.user_id).first()
         if not user:
-            raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND, detail="User not found"
-            )
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
         # Prepare workflow context
         workflow_context = {
@@ -153,9 +141,7 @@ async def run_multi_agent_workflow(
         # Initialize orchestrator and run workflow
         orchestrator = AgentOrchestrator()
 
-        logger.info(
-            f"Starting {request.workflow_type} workflow for user {request.user_id}"
-        )
+        logger.info(f"Starting {request.workflow_type} workflow for user {request.user_id}")
 
         results = await orchestrator.run_workflow(
             workflow_type=request.workflow_type, context=workflow_context
@@ -262,9 +248,7 @@ async def get_market_insights(
             "historical_trend": {
                 "analyses_available": len(recent_analyses),
                 "trend_direction": "stable",  # Could calculate actual trend
-                "market_growth": (
-                    "steady" if latest_analysis.total_jobs_found > 20 else "limited"
-                ),
+                "market_growth": ("steady" if latest_analysis.total_jobs_found > 20 else "limited"),
             },
         }
 
@@ -322,9 +306,7 @@ async def analyze_skill_trends(
 
                 # Get skill frequency from skill_frequency dict
                 frequency = (
-                    analysis.skill_frequency.get(skill, 0)
-                    if analysis.skill_frequency
-                    else 0
+                    analysis.skill_frequency.get(skill, 0) if analysis.skill_frequency else 0
                 )
                 skill_evolution[skill].append(
                     {

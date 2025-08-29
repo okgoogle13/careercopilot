@@ -57,20 +57,14 @@ def cached_ai_operation(
                             user_id = args[param_index]
 
                 if not user_id:
-                    logger.warning(
-                        f"Could not extract user_id for caching {operation_type}"
-                    )
+                    logger.warning(f"Could not extract user_id for caching {operation_type}")
                     return await func(*args, **kwargs)
 
                 # Prepare cache input data
-                cache_input = _prepare_cache_input(
-                    args, kwargs, cache_key_params, exclude_params
-                )
+                cache_input = _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
 
                 # Try to get from cache
-                cached_result = await cache.get_ai_compatible(
-                    operation_type, user_id, cache_input
-                )
+                cached_result = await cache.get_ai_compatible(operation_type, user_id, cache_input)
                 if cached_result is not None:
                     return cached_result
 
@@ -78,9 +72,7 @@ def cached_ai_operation(
                 result = await func(*args, **kwargs)
 
                 # Cache the result
-                await cache.set_ai_compatible(
-                    operation_type, user_id, cache_input, result
-                )
+                await cache.set_ai_compatible(operation_type, user_id, cache_input, result)
 
                 return result
 

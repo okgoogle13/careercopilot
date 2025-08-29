@@ -84,9 +84,7 @@ class CachedAIOperations:
         await asyncio.sleep(0.2)  # Simulate processing
 
         # Create a deterministic score based on content for testing
-        content_hash = hashlib.md5(
-            f"{resume_text}{job_description}".encode()
-        ).hexdigest()
+        content_hash = hashlib.md5(f"{resume_text}{job_description}".encode()).hexdigest()
         score = (int(content_hash[:4], 16) % 40) + 60  # Score between 60-100
 
         return {
@@ -106,9 +104,7 @@ class CachedAIOperations:
 
     @staticmethod
     @cached_ai_operation("voice_profile", user_id_param="user_id")
-    async def generate_voice_profile_cached(
-        user_id: str, document_texts: list
-    ) -> Dict[str, Any]:
+    async def generate_voice_profile_cached(user_id: str, document_texts: list) -> Dict[str, Any]:
         """Cached version of voice profile generation"""
 
         logger.info(f"Generating voice profile for user {user_id} (not cached)")

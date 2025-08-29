@@ -86,9 +86,7 @@ async def create_calendar_event(
         event_id = await createCalendarEvent(uid, opportunity_data)
 
         # Update the opportunity document with calendar event ID
-        opportunity_ref = db.collection("opportunities").document(
-            request.opportunity_id
-        )
+        opportunity_ref = db.collection("opportunities").document(request.opportunity_id)
         opportunity_ref.update({"calendarEventId": event_id, "calendar_synced": True})
 
         return {
@@ -97,9 +95,7 @@ async def create_calendar_event(
             "message": "Calendar event created successfully",
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Calendar event creation failed: {e}"
-        )
+        raise HTTPException(status_code=500, detail=f"Calendar event creation failed: {e}")
 
 
 @router.get("/stats")
@@ -115,9 +111,7 @@ async def get_opportunity_stats(uid: str = Depends(get_current_user)):
         total_opportunities = len(docs)
 
         # Count opportunities with calendar events
-        calendar_synced = sum(
-            1 for doc in docs if doc.to_dict().get("calendar_synced", False)
-        )
+        calendar_synced = sum(1 for doc in docs if doc.to_dict().get("calendar_synced", False))
 
         # Count opportunities from last 7 days
         from datetime import datetime, timedelta
@@ -134,9 +128,7 @@ async def get_opportunity_stats(uid: str = Depends(get_current_user)):
             "calendar_synced": calendar_synced,
             "recent_opportunities": recent_opportunities,
             "sync_percentage": (
-                (calendar_synced / total_opportunities * 100)
-                if total_opportunities > 0
-                else 0
+                (calendar_synced / total_opportunities * 100) if total_opportunities > 0 else 0
             ),
         }
     except Exception as e:

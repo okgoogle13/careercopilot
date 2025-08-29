@@ -70,9 +70,7 @@ class TestMetricsCollector:
     def test_record_performance(self, collector):
         # Test performance metrics recording
         collector.record_performance("test_operation", 0.5, success=True)
-        collector.record_performance(
-            "test_operation", 0.7, success=False, error="Test error"
-        )
+        collector.record_performance("test_operation", 0.7, success=False, error="Test error")
 
         metrics = collector.performance_metrics["test_operation"]
         assert metrics.count == 2
@@ -335,12 +333,8 @@ class TestSystemMonitoring:
 
         # Mock system data
         mock_cpu.return_value = 25.5
-        mock_memory.return_value = MagicMock(
-            percent=45.2, available=8589934592, used=4294967296
-        )
-        mock_disk.return_value = MagicMock(
-            percent=68.1, free=107374182400, used=42949672960
-        )
+        mock_memory.return_value = MagicMock(percent=45.2, available=8589934592, used=4294967296)
+        mock_disk.return_value = MagicMock(percent=68.1, free=107374182400, used=42949672960)
 
         monitor = SystemMonitor(collection_interval=0.1)
 

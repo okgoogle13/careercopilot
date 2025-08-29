@@ -129,9 +129,7 @@ class AIInteraction(Base):
     user_id = Column(String, ForeignKey("users.id"), nullable=True)
 
     # Interaction details
-    operation_type = Column(
-        String(100), nullable=False
-    )  # salary_intelligence, skills_trends, etc.
+    operation_type = Column(String(100), nullable=False)  # salary_intelligence, skills_trends, etc.
     prompt = Column(Text, nullable=False)
     response = Column(Text, nullable=False)
 

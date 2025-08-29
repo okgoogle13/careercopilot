@@ -148,9 +148,7 @@ async def update_user_settings(
         if settings_update.notifications is not None:
             update_data["settings.notifications"] = settings_update.notifications
         if settings_update.email_notifications is not None:
-            update_data["settings.email_notifications"] = (
-                settings_update.email_notifications
-            )
+            update_data["settings.email_notifications"] = settings_update.email_notifications
         if settings_update.privacy_level is not None:
             update_data["settings.privacy_level"] = settings_update.privacy_level
         if settings_update.language is not None:
