@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from firebase_admin import auth
 from google.cloud.firestore import SERVER_TIMESTAMP
 from pydantic import BaseModel
-from typing import Optional, Dict, Any
+from typing import Optional
 
 router = APIRouter()
 

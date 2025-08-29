@@ -2,7 +2,6 @@ import io
 import json
 from pathlib import Path
 from typing import List, Literal, Optional, Dict, Any
-from datetime import datetime
 from pydantic import BaseModel
 
 import docx
