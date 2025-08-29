@@ -322,9 +322,7 @@ async def download_document_pdf(document_id: str):
     return Response(
         content=pdf_content,
         media_type="application/pdf",
-        headers={
-            "Content-Disposition": f"attachment; filename=document_{document_id}.pdf"
-        },
+        headers={"Content-Disposition": f"attachment; filename=document_{document_id}.pdf"},
     )
 
 

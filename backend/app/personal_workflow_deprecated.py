@@ -37,9 +37,7 @@ class DocumentGenerationAgent(PersonalizedAgent):
         Focus on transferable skills and career transition story.
         """
 
-        content = await self.generate_with_success_context(
-            content_prompt, doc_type, user_profile
-        )
+        content = await self.generate_with_success_context(content_prompt, doc_type, user_profile)
 
         return {
             "content": content,
@@ -53,9 +51,7 @@ class DocumentGenerationAgent(PersonalizedAgent):
             "generated_with_cache": True,
         }
 
-    async def generate_custom_content(
-        self, prompt: str, context: Optional[Dict] = None
-    ) -> str:
+    async def generate_custom_content(self, prompt: str, context: Optional[Dict] = None) -> str:
         """Generate custom content using AI with caching"""
         return await self.generate_ai_response_with_cache(prompt, context)
 
@@ -212,9 +208,7 @@ class ApplicationTrackingAgent(BaseAgent):
             logger.error(f"Application tracking failed: {e}")
             return {"success": False, "error": str(e)}
 
-    async def get_applications_since(
-        self, task_data: Dict[str, Any]
-    ) -> List[Dict[str, Any]]:
+    async def get_applications_since(self, task_data: Dict[str, Any]) -> List[Dict[str, Any]]:
         """Get applications since a specific date"""
         # Mock implementation - would retrieve from database
         return []
@@ -345,9 +339,7 @@ class PersonalCareerWorkflow:
                 job
                 for job in all_jobs
                 if job.get("match_score", 0) > 0.7
-                and self._is_salary_acceptable(
-                    job.get("salary_min"), job.get("salary_max")
-                )
+                and self._is_salary_acceptable(job.get("salary_min"), job.get("salary_max"))
             ]
 
             logger.info(f"Found {len(all_jobs)} jobs, {len(promising_jobs)} promising")
@@ -360,15 +352,11 @@ class PersonalCareerWorkflow:
                     application_materials.append(materials)
                     await self._cache_job_opportunity(job, materials)
                 except Exception as e:
-                    logger.error(
-                        f"Failed to prepare materials for {job.get('job_id')}: {e}"
-                    )
+                    logger.error(f"Failed to prepare materials for {job.get('job_id')}: {e}")
 
             # Send daily summary email if enabled
             if self.config.email_notifications:
-                await self._send_daily_summary_email(
-                    promising_jobs, application_materials
-                )
+                await self._send_daily_summary_email(promising_jobs, application_materials)
 
             return {
                 "success": True,
@@ -460,9 +448,7 @@ class PersonalCareerWorkflow:
             company_name = job_url.split("//")[-1].split("/")[
                 0
             ]  # Extract domain as company identifier
-            cached_research = await self.cache.get_company_research(
-                company_name, job_url
-            )
+            cached_research = await self.cache.get_company_research(company_name, job_url)
 
             if cached_research:
                 logger.info(f"Using cached company research for {company_name}")
@@ -494,10 +480,8 @@ class PersonalCareerWorkflow:
             Keep responses specific and authentic to my career journey.
             """
 
-            talking_points = (
-                await self.document_generation_agent.generate_custom_content(
-                    talking_points_prompt
-                )
+            talking_points = await self.document_generation_agent.generate_custom_content(
+                talking_points_prompt
             )
 
             # Generate application strategy
@@ -519,10 +503,8 @@ class PersonalCareerWorkflow:
             Focus on standing out as career changer with unique value.
             """
 
-            application_strategy = (
-                await self.document_generation_agent.generate_custom_content(
-                    strategy_prompt
-                )
+            application_strategy = await self.document_generation_agent.generate_custom_content(
+                strategy_prompt
             )
 
             research_data = {
@@ -569,9 +551,7 @@ class PersonalCareerWorkflow:
             )
 
             # Analyze progress and generate insights
-            progress_analysis = await self._analyze_weekly_progress(
-                applications, email_updates
-            )
+            progress_analysis = await self._analyze_weekly_progress(applications, email_updates)
 
             # Send weekly review email if enabled
             if self.config.email_notifications:
@@ -588,9 +568,7 @@ class PersonalCareerWorkflow:
             logger.error(f"Weekly review failed: {e}")
             return {"success": False, "error": str(e)}
 
-    async def _prepare_application_materials(
-        self, job: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    async def _prepare_application_materials(self, job: Dict[str, Any]) -> Dict[str, Any]:
         """Prepare resume and cover letter for specific job"""
         job_description = job.get("description", "")
 
@@ -613,18 +591,14 @@ class PersonalCareerWorkflow:
             }
         )
 
-        resume_result, cover_letter_result = await asyncio.gather(
-            resume_task, cover_letter_task
-        )
+        resume_result, cover_letter_result = await asyncio.gather(resume_task, cover_letter_task)
 
         # Optimize resume for ATS if resume generation succeeded
         optimized_resume = resume_result
         if resume_result.get("success"):
             ats_result = await self.ats_optimization_agent.execute_with_monitoring(
                 {
-                    "document_content": resume_result.get("data", {}).get(
-                        "content", ""
-                    ),
+                    "document_content": resume_result.get("data", {}).get("content", ""),
                     "job_description": job_description,
                     "optimization_level": "standard",
                 }
@@ -642,9 +616,7 @@ class PersonalCareerWorkflow:
             "generated_at": datetime.now().isoformat(),
         }
 
-    def _is_salary_acceptable(
-        self, salary_min: Optional[int], salary_max: Optional[int]
-    ) -> bool:
+    def _is_salary_acceptable(self, salary_min: Optional[int], salary_max: Optional[int]) -> bool:
         """Check if salary meets personal requirements"""
         if not salary_min and not salary_max:
             return True
@@ -659,9 +631,7 @@ class PersonalCareerWorkflow:
 
         return True
 
-    async def _cache_job_opportunity(
-        self, job: Dict[str, Any], materials: Dict[str, Any]
-    ) -> None:
+    async def _cache_job_opportunity(self, job: Dict[str, Any], materials: Dict[str, Any]) -> None:
         """Cache job opportunity with materials"""
         cache_key = f"opportunity_{job.get('job_id')}"
         job_record = {
@@ -671,9 +641,7 @@ class PersonalCareerWorkflow:
         }
         await self.cache.set("job_opportunity", "personal_user", cache_key, job_record)
 
-    async def _send_daily_summary_email(
-        self, jobs: List[Dict], materials: List[Dict]
-    ) -> None:
+    async def _send_daily_summary_email(self, jobs: List[Dict], materials: List[Dict]) -> None:
         """Send daily job discovery summary email"""
         subject = f"🎯 Daily Career Brief - {len(jobs)} Opportunities Found"
 
@@ -766,9 +734,7 @@ Your CareerCopilot AI
         Keep personal and actionable.
         """
 
-        summary = await self.document_generation_agent.generate_custom_content(
-            analysis_prompt
-        )
+        summary = await self.document_generation_agent.generate_custom_content(analysis_prompt)
 
         return {
             "applications_count": len(applications),
