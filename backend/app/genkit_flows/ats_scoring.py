@@ -41,9 +41,7 @@ gemini_pro = googleai.gemini_pro
 # --- Helper Functions for Scoring Logic ---
 
 
-async def _perform_semantic_analysis(
-    resume_text: str, job_description: str
-) -> SemanticAnalysis:
+async def _perform_semantic_analysis(resume_text: str, job_description: str) -> SemanticAnalysis:
     """Perform semantic analysis with proper error handling"""
     semantic_prompt = f"""
     Compare the resume against the job description.
@@ -86,10 +84,7 @@ def _generate_recommendations(
         )
 
     # Standard recommendations
-    if (
-        keyword_analysis["missingKeywords"]
-        and len(keyword_analysis["missingKeywords"]) > 0
-    ):
+    if keyword_analysis["missingKeywords"] and len(keyword_analysis["missingKeywords"]) > 0:
         recommendations.append(
             "Incorporate missing keywords to better match the job requirements. "
             "See suggestions below for how to add them."
@@ -251,9 +246,7 @@ async def atsScoring(
         job_reqs = job_reqs_result.data
 
     if not resume_entities_result.success:
-        logger.error(
-            f"Resume entities extraction failed: {resume_entities_result.error}"
-        )
+        logger.error(f"Resume entities extraction failed: {resume_entities_result.error}")
         # Use fallback resume entities
         resume_entities = ResumeEntities(skills=[], experience=[], education=[])
     else:
@@ -281,9 +274,7 @@ async def atsScoring(
 
     # Step 4: Perform Keyword Matching (local operation - always succeeds)
     keyword_analysis_result = await enhanced_ai_handler.execute_ai_operation(
-        lambda: _calculate_keyword_score(
-            resume_entities.skills, job_reqs, profileKeywords
-        ),
+        lambda: _calculate_keyword_score(resume_entities.skills, job_reqs, profileKeywords),
         AIOperationContext(
             operation_name="keyword_matching",
             service_type=AIServiceType.KEYWORD_MATCHING,
@@ -308,9 +299,7 @@ async def atsScoring(
         ),
     )
 
-    formatting_score = (
-        formatting_score_result.data if formatting_score_result.success else 50.0
-    )
+    formatting_score = formatting_score_result.data if formatting_score_result.success else 50.0
 
     # Step 6: Combine scores using weighted average
     weights = {"keyword": 0.45, "semantic": 0.35, "formatting": 0.20}
@@ -332,9 +321,7 @@ async def atsScoring(
                 operation_name="keyword_placement",
                 service_type=AIServiceType.GENKIT_FLOW,
                 user_id=user_id,
-                metadata={
-                    "missing_keywords_count": len(keyword_analysis["missingKeywords"])
-                },
+                metadata={"missing_keywords_count": len(keyword_analysis["missingKeywords"])},
             ),
             create_fallback_strategy(
                 enabled=True, fallback_data=None  # Placement suggestions are optional

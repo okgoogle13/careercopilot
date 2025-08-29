@@ -75,14 +75,10 @@ class ATSScorer:
         try:
             # Input validation
             if not resume_text or not isinstance(resume_text, str):
-                raise InputValidationError(
-                    "Resume text is required and must be a string"
-                )
+                raise InputValidationError("Resume text is required and must be a string")
 
             if not job_description or not isinstance(job_description, str):
-                raise InputValidationError(
-                    "Job description is required and must be a string"
-                )
+                raise InputValidationError("Job description is required and must be a string")
 
             # Sanitize inputs
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
@@ -96,8 +92,7 @@ class ATSScorer:
                     for kw in profile_keywords
                 ]
                 keywords_context = (
-                    "\n\nAdditional Profile Keywords: "
-                    f"{', '.join(sanitized_keywords)}"
+                    "\n\nAdditional Profile Keywords: " f"{', '.join(sanitized_keywords)}"
                 )
 
             system_prompt = (
@@ -239,9 +234,7 @@ class ATSScorer:
                 extra={
                     "user_id": user_id,
                     "model_used": response.model_used,
-                    "final_score": parsed_result.get("overall_scoring", {}).get(
-                        "final_score", 0
-                    ),
+                    "final_score": parsed_result.get("overall_scoring", {}).get("final_score", 0),
                     "cached": response.cached,
                     "keywords_count": len(profile_keywords) if profile_keywords else 0,
                 },
@@ -281,13 +274,14 @@ class ATSScorer:
         try:
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
             sanitized_keywords = [
-                InputSanitizer.sanitize_text_input(kw).sanitized_content
-                for kw in target_keywords
+                InputSanitizer.sanitize_text_input(kw).sanitized_content for kw in target_keywords
             ]
 
             focus_instruction = ""
             if focus_sections:
-                focus_instruction = f"\\nFocus optimization on these sections: {', '.join(focus_sections)}"
+                focus_instruction = (
+                    f"\\nFocus optimization on these sections: {', '.join(focus_sections)}"
+                )
 
             system_prompt = (
                 "You are a keyword optimization specialist with expertise in ATS "
@@ -385,9 +379,7 @@ Respond with ONLY the JSON object:"""
             )
 
     @monitor_performance("ats_formatting_analysis")
-    async def analyze_formatting_compliance(
-        self, user_id: str, resume_text: str
-    ) -> Dict[str, Any]:
+    async def analyze_formatting_compliance(self, user_id: str, resume_text: str) -> Dict[str, Any]:
         """
         Analyze resume formatting for ATS compliance.
 

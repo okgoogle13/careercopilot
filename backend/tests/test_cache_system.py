@@ -1,4 +1,3 @@
-
 """
 Tests for the AI operations caching system
 """
@@ -10,10 +9,12 @@ from app.core.cache_deprecated import InMemoryCacheBackend, AICache, CacheEntry
 from unittest.mock import AsyncMock
 from app.core.cache_decorators.cache_decorators import cached_ai_operation, CacheContext
 
+
 @pytest.fixture
 async def backend():
     """Provide a fresh backend instance for each test."""
     return InMemoryCacheBackend(max_size=5)
+
 
 @pytest.fixture
 async def sample_entry():
@@ -27,6 +28,7 @@ async def sample_entry():
         input_hash="sample_hash",
     )
 
+
 class TestCacheDecorators:
     """Test cache decorators functionality"""
 
@@ -34,10 +36,12 @@ class TestCacheDecorators:
     async def test_cached_operation_decorator(self):
         # Ensure cache is cleared before test
         from app.core.personal_cache import get_ai_cache
+
         cache = get_ai_cache()
         await cache.clear_ai_operations("test_operation")
 
         import uuid
+
         user_id = f"test_user_{uuid.uuid4()}"
         input_text = f"test input data_{uuid.uuid4()}"
 
@@ -68,6 +72,7 @@ class TestCacheDecorators:
         result3 = await mock_expensive_operation(user_id, "different input")
         assert call_count == 2
         assert result3["processed"] == "different input"
+
     @pytest.mark.asyncio
     async def test_get_nonexistent_key(self, backend):
         result = await backend.get("nonexistent_key")
@@ -214,9 +219,7 @@ class TestAICache:
         ]
 
         for op_type, input_data in operations:
-            await cache.set(
-                op_type, user_id, input_data, {"result": f"{op_type}_result"}
-            )
+            await cache.set(op_type, user_id, input_data, {"result": f"{op_type}_result"})
 
         # Verify entries exist
         for op_type, input_data in operations:
@@ -224,9 +227,7 @@ class TestAICache:
             assert result is not None
 
         # Invalidate user cache
-        invalidated = await cache.invalidate_user_cache(
-            user_id, ["resume_analysis", "ats_scoring"]
-        )
+        invalidated = await cache.invalidate_user_cache(user_id, ["resume_analysis", "ats_scoring"])
         assert invalidated == 2
 
         # Verify correct entries were invalidated
@@ -342,9 +343,7 @@ class TestCacheIntegration:
         assert result is None
 
         # Set should return False on error
-        success = await cache.set(
-            "test_operation", user_id, input_data, {"result": "data"}
-        )
+        success = await cache.set("test_operation", user_id, input_data, {"result": "data"})
         assert success is False
 
 

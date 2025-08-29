@@ -58,16 +58,12 @@ async def get_ats_score(
     ATS scoring flow with enhanced error handling, saves the result, and returns the analysis.
     """
     user_id = user["uid"]
-    logger.info(
-        f"Starting ATS score analysis for user {user_id}, document {document_id}"
-    )
+    logger.info(f"Starting ATS score analysis for user {user_id}, document {document_id}")
 
     # Validate document content
     resume_text = document.get("content") or document.get("extractedText")
     if not resume_text:
-        logger.warning(
-            f"No text content found in document {document_id} for user {user_id}"
-        )
+        logger.warning(f"No text content found in document {document_id} for user {user_id}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="The selected document has no text content to analyze.",
@@ -107,9 +103,7 @@ async def analyze_resume(
     # Validate document content
     resume_text = document.get("content") or document.get("extractedText")
     if not resume_text:
-        logger.warning(
-            f"No text content found in document {document_id} for user {user_id}"
-        )
+        logger.warning(f"No text content found in document {document_id} for user {user_id}")
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="The selected document has no text content to analyze.",
@@ -190,9 +184,7 @@ async def analyze_resume(
             resume_analysis_result, "resume comparison analysis"
         )
         logger.error(f"Resume analysis failed for user {user_id}: {error_message}")
-        raise _create_http_exception_from_ai_result(
-            resume_analysis_result, error_message
-        )
+        raise _create_http_exception_from_ai_result(resume_analysis_result, error_message)
 
     resume_analysis = resume_analysis_result.data
 
@@ -306,9 +298,7 @@ async def analyze_job_description(
         }
         await analysis_ref.set(analysis_data)
     except Exception as save_error:
-        logger.error(
-            f"Failed to save job analysis for user {user_id}: {str(save_error)}"
-        )
+        logger.error(f"Failed to save job analysis for user {user_id}: {str(save_error)}")
 
     logger.info(
         f"Job description analysis completed for user {user_id}. "
@@ -331,12 +321,7 @@ async def _save_analysis_result(
     additional_metadata: dict = None,
 ) -> None:
     """Save analysis result with enhanced metadata"""
-    doc_ref = (
-        db.collection("users")
-        .document(user_id)
-        .collection("documents")
-        .document(document_id)
-    )
+    doc_ref = db.collection("users").document(user_id).collection("documents").document(document_id)
     analysis_id = str(uuid.uuid4())
     analysis_ref = doc_ref.collection("analyses").document(analysis_id)
 
@@ -345,9 +330,7 @@ async def _save_analysis_result(
         "fallback_used": operation_result.fallback_used,
         "execution_time": operation_result.execution_time,
         "service_type": (
-            operation_result.context.service_type.value
-            if operation_result.context
-            else "unknown"
+            operation_result.context.service_type.value if operation_result.context else "unknown"
         ),
         "success": operation_result.success,
         "timestamp": SERVER_TIMESTAMP,
@@ -384,21 +367,13 @@ def _create_http_exception_from_ai_result(
     error_type = ai_result.error.error_type.value
 
     if error_type in ["rate_limit", "quota_exceeded"]:
-        return HTTPException(
-            status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=error_message
-        )
+        return HTTPException(status_code=status.HTTP_429_TOO_MANY_REQUESTS, detail=error_message)
     elif error_type in ["service_unavailable", "timeout"]:
-        return HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=error_message
-        )
+        return HTTPException(status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=error_message)
     elif error_type == "invalid_request":
-        return HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=error_message
-        )
+        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=error_message)
     elif error_type == "authentication":
-        return HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED, detail=error_message
-        )
+        return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=error_message)
     else:
         return HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=error_message

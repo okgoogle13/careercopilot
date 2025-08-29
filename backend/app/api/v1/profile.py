@@ -84,9 +84,7 @@ async def create_profile_variation(
 
 
 @router.post("/generate-voice-profile")
-@authenticated_limiter.limit(
-    "5/minute"
-)  # Lower limit for AI-intensive profile generation
+@authenticated_limiter.limit("5/minute")  # Lower limit for AI-intensive profile generation
 async def generate_and_save_voice_profile(
     request: Request, user: dict = Depends(get_current_user_with_state)
 ):
@@ -102,9 +100,7 @@ async def generate_and_save_voice_profile(
     try:
         voice_profile_data = await generate_voice_profile(user_id)
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Voice profile generation failed: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Voice profile generation failed: {str(e)}")
 
     # Save to Firestore (for test compatibility)
     # This block is only executed in test mode with a mock_db

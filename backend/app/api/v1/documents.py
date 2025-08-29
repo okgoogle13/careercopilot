@@ -146,9 +146,7 @@ async def download_document_as_pdf(
             stylesheets=[stylesheet]
         )
 
-        response = StreamingResponse(
-            io.BytesIO(pdf_bytes), media_type="application/pdf"
-        )
+        response = StreamingResponse(io.BytesIO(pdf_bytes), media_type="application/pdf")
         original_filename = document.get("originalFilename", "document").split(".")[0]
         response.headers["Content-Disposition"] = (
             f"attachment; filename={original_filename}_{theme}.pdf"
