@@ -5,7 +5,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
 
-@genkit.flow()
+## Removed @genkit.flow()
 def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> None:
     """
     Sends an email notification to the user about a new job opportunity.

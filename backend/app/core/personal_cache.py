@@ -354,7 +354,7 @@ class PersonalCache:
 
     # AICache compatibility methods for backwards compatibility with cache decorators
 
-    async def get(
+    async def get_ai_compatible(
         self, operation_type: str, user_id: str, input_data: Any, **kwargs
     ) -> Optional[Any]:
         """
@@ -363,7 +363,7 @@ class PersonalCache:
         """
         return await self.get_ai_operation(operation_type, input_data, user_id)
 
-    async def set(
+    async def set_ai_compatible(
         self, operation_type: str, user_id: str, input_data: Any, result: Any, **kwargs
     ) -> bool:
         """

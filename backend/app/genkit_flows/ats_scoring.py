@@ -22,6 +22,16 @@ from app.core.enhanced_ai_error_handling import (
 
 logger = logging.getLogger(__name__)
 
+
+class SemanticAnalysis(BaseModel):
+    """Structured output for semantic analysis."""
+
+    similarityScore: int = Field(
+        description="A score from 0-100 representing how semantically similar the resume is to the job description."
+    )
+    explanation: str = Field(description="A brief explanation for the given score.")
+
+
 # Load environment variables and initialize Genkit if needed
 load_dotenv()
 if not genkit.get_plugin("googleai"):
@@ -170,15 +180,6 @@ def _calculate_formatting_score(resume_entities: ResumeEntities):
     if resume_entities.education:
         score += 33.4
     return min(score, 100)
-
-
-class SemanticAnalysis(BaseModel):
-    """Structured output for semantic analysis."""
-
-    similarityScore: int = Field(
-        description="A score from 0-100 representing how semantically similar the resume is to the job description."
-    )
-    explanation: str = Field(description="A brief explanation for the given score.")
 
 
 # --- Main Flow Output Schema ---

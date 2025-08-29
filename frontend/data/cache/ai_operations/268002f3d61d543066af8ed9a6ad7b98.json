@@ -1,0 +1,16 @@
+{
+  "key": "test_context_op_context_user_6edd0053-a492-4e79-a5ba-999ec51276dd_656c180939eadc03",
+  "value": {
+    "result": {
+      "computed": "result"
+    },
+    "operation_type": "test_context_op",
+    "input_hash": "656c180939eadc03",
+    "user_id": "context_user_6edd0053-a492-4e79-a5ba-999ec51276dd",
+    "cached_at": "2025-08-29T12:35:24.948979"
+  },
+  "timestamp": "2025-08-29T12:35:24.948992",
+  "expires_at": "2025-09-01T12:35:24.948992",
+  "ttl_hours": 72.0,
+  "category": "ai_operations"
+}
