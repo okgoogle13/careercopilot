@@ -21,6 +21,16 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
             "name": "Development User",
         }
 
+    # Fallback auth bypass - for development with frontend fallback auth
+    if os.getenv("ENV", "development") == "development" and token.startswith(
+        "fallback-token-"
+    ):
+        return {
+            "uid": "dev-user-123",
+            "email": "developer@example.com",
+            "name": "Development User",
+        }
+
     try:
         # Initialize Firebase Admin SDK
         if not firebase_admin._apps:

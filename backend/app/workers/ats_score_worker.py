@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 async def process_ats_score_task(user_id, document_id, resume_text, job_description):
     try:
+
         async def ai_operation():
             return await ats_scorer.comprehensive_ats_analysis(
                 user_id=user_id,
