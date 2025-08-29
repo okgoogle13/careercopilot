@@ -1,0 +1,17 @@
+{
+  "key": "test_operation_test_user_96876327-9ec7-4468-9b7a-392dbf7e403b_cd259907b1a658bd",
+  "value": {
+    "result": {
+      "processed": "different input",
+      "timestamp": "2025-08-29T17:57:50.224449+00:00"
+    },
+    "operation_type": "test_operation",
+    "input_hash": "cd259907b1a658bd",
+    "user_id": "test_user_96876327-9ec7-4468-9b7a-392dbf7e403b",
+    "cached_at": "2025-08-30T03:57:50.224533"
+  },
+  "timestamp": "2025-08-30T03:57:50.224571",
+  "expires_at": "2025-09-02T03:57:50.224571",
+  "ttl_hours": 72.0,
+  "category": "ai_operations"
+}

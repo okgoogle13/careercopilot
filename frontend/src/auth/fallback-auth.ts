@@ -55,6 +55,7 @@ class FallbackAuth {
     try {
       if (user) {
         // Don't persist the getIdToken function, just the basic user data
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { getIdToken, ...persistableUser } = user;
         localStorage.setItem(this.storageKey, JSON.stringify({ user: persistableUser }));
       } else {
@@ -88,7 +89,7 @@ class FallbackAuth {
       
       console.log('🔐 Fallback auth: User signed in:', email);
       return user;
-    } catch (error) {
+    } catch {
       const errorMessage = 'Authentication failed';
       this.setState({ loading: false, error: errorMessage });
       throw new Error(errorMessage);
@@ -117,7 +118,7 @@ class FallbackAuth {
       
       console.log('🔐 Fallback auth: User registered:', email);
       return user;
-    } catch (error) {
+    } catch {
       const errorMessage = 'Registration failed';
       this.setState({ loading: false, error: errorMessage });
       throw new Error(errorMessage);

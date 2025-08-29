@@ -1,0 +1,32 @@
+{
+  "key": "resume_analysis_integration_user_42a2d4bfb9b5d526",
+  "value": {
+    "result": {
+      "analysis_type": "comprehensive",
+      "skills_extracted": [
+        "Python",
+        "FastAPI",
+        "React"
+      ],
+      "experience_years": 5,
+      "education_level": "Bachelor",
+      "strengths": [
+        "Technical expertise",
+        "Full-stack development"
+      ],
+      "suggestions": [
+        "Add more quantified achievements"
+      ],
+      "score": 85,
+      "processed_at": "2025-08-29T17:51:06.387391+00:00"
+    },
+    "operation_type": "resume_analysis",
+    "input_hash": "42a2d4bfb9b5d526",
+    "user_id": "integration_user",
+    "cached_at": "2025-08-30T03:51:06.387451"
+  },
+  "timestamp": "2025-08-30T03:51:06.387476",
+  "expires_at": "2025-09-02T03:51:06.387476",
+  "ttl_hours": 72.0,
+  "category": "ai_operations"
+}
