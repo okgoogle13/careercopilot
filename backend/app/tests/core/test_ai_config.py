@@ -26,5 +26,6 @@ def test_validate_configuration_no_errors():
 
 def test_reload_ai_config_does_not_crash():
     from app.core.ai_config import reload_ai_config
+
     reloaded = reload_ai_config()
     assert reloaded is not None

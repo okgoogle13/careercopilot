@@ -1,13 +1,12 @@
 from datetime import datetime, timedelta
 
-import genkit
 from app.core.db import db
 from app.core.secrets import get_user_secret
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
 
-## Removed @genkit.flow()
+# Removed @genkit.flow()
 async def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
     """
     Creates a Google Calendar event for a job application deadline.
