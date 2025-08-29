@@ -27,7 +27,7 @@ const App: React.FC = () => {
             <Navbar />
             <main
               id="main-content"
-              className="bg-gray-100 min-h-screen"
+              className="bg-background min-h-screen"
               role="main"
             >
               <div className="container mx-auto">
