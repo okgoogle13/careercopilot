@@ -1,10 +1,9 @@
-// Import development bootstrap FIRST to prevent Firebase initialization
-import './dev-bootstrap';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css'; // Assuming you have a CSS file for global styles
+import './firebase-connectivity-test'; // Importing Firebase connectivity test
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
