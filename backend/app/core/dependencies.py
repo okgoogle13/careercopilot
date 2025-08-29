@@ -1,3 +1,4 @@
+import os
 import firebase_admin
 from app.core.db import db
 from fastapi import Depends, HTTPException, status, Request
@@ -12,6 +13,14 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     Validates the authentication token and returns the decoded user information.
     This is the primary authentication dependency used by all authenticated endpoints.
     """
+    # Development bypass - for testing and development
+    if os.getenv("ENV", "development") == "development" and token == "dev-token":
+        return {
+            "uid": "dev-user-123",
+            "email": "developer@example.com",
+            "name": "Development User",
+        }
+
     try:
         # Initialize Firebase Admin SDK
         if not firebase_admin._apps:

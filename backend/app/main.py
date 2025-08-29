@@ -103,6 +103,7 @@ api_router = APIRouter()
 api_router.include_router(auth.router, prefix="/auth", tags=["authentication"])
 api_router.include_router(profile.router, prefix="/profile", tags=["profile"])
 api_router.include_router(users.router, prefix="/users", tags=["users"])
+api_router.include_router(users.router, prefix="/user", tags=["user"])
 
 # Database Management
 api_router.include_router(database.router, prefix="/database", tags=["database"])

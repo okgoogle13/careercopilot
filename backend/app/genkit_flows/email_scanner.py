@@ -4,7 +4,7 @@ import json
 import genkit
 from app.core.db import db
 from app.core.secrets import get_user_secret
-from genkit.plugins import googleai
+from genkit.plugins.google_genai.google import GoogleAI
 from google.cloud.firestore import SERVER_TIMESTAMP
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -30,7 +30,7 @@ def get_gmail_service(user_id: str):
     return build("gmail", "v1", credentials=credentials)
 
 
-@genkit.flow()
+## Removed @genkit.flow()
 def extract_job_details_from_email(email_content: str) -> dict:
     """Uses an AI model to extract structured job details from email text."""
     # This flow remains the same
@@ -48,7 +48,7 @@ def extract_job_details_from_email(email_content: str) -> dict:
     """
     response = gemini_pro.generate(
         prompt=prompt,
-        config=googleai.GenerationConfig(response_mime_type="application/json"),
+        response_mime_type="application/json",
     )
     try:
         return json.loads(response.text())
@@ -56,7 +56,7 @@ def extract_job_details_from_email(email_content: str) -> dict:
         return {}
 
 
-@genkit.flow()
+## Removed @genkit.flow()
 async def scanUserEmails(user_id: str) -> list:
     """
     Scans a user's unread emails for jobs, saves them, creates calendar events, and sends notifications.

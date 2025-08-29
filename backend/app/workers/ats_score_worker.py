@@ -13,12 +13,15 @@ logger = logging.getLogger(__name__)
 
 async def process_ats_score_task(user_id, document_id, resume_text, job_description):
     try:
-        ats_analysis_result = await enhanced_ai_handler.execute_ai_operation(
-            lambda: ats_scorer.comprehensive_ats_analysis(
+        async def ai_operation():
+            return await ats_scorer.comprehensive_ats_analysis(
                 user_id=user_id,
                 resume_text=resume_text,
                 job_description=job_description,
-            ),
+            )
+
+        ats_analysis_result = await enhanced_ai_handler.execute_ai_operation(
+            ai_operation,
             AIOperationContext(
                 operation_name="comprehensive_ats_analysis",
                 service_type=AIServiceType.GENKIT_FLOW,
@@ -39,7 +42,10 @@ async def process_ats_score_task(user_id, document_id, resume_text, job_descript
             .collection("documents")
             .document(document_id)
         )
-        await doc_ref.set({"ats_score_result": ats_analysis_result.data}, merge=True)
+        result = doc_ref.set({"ats_score_result": ats_analysis_result.data}, merge=True)
+        # Await if set is a coroutine (for AsyncMock in tests), else just call
+        if hasattr(result, "__await__"):
+            await result
         logger.info(
             f"ATS score analysis completed for user {user_id}, document {document_id}"
         )
