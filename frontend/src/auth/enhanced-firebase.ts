@@ -20,7 +20,7 @@ let connectionAttempts = 0;
 const maxConnectionAttempts = 3;
 
 // Initialize Firebase with network detection
-let app: any = null;
+let app: FirebaseApp | null = null;
 let auth: Auth | null = null;
 let db: Firestore | null = null;
 
@@ -77,11 +77,12 @@ export class AuthService {
         const result = await signInWithEmailAndPassword(auth, email, password);
         console.log('🔥 Firebase sign-in successful');
         return result.user;
-      } catch (error: any) {
-        console.warn('🔥 Firebase sign-in failed, trying fallback:', error.message);
+      } catch (error: unknown) {
+        const firebaseError = error as { code?: string; message?: string };
+        console.warn('🔥 Firebase sign-in failed, trying fallback:', firebaseError.message);
         
         // Fall back to local auth
-        if (error.code === 'auth/network-request-failed' || error.message.includes('connection')) {
+        if (firebaseError.code === 'auth/network-request-failed' || firebaseError.message?.includes('connection')) {
           isFirebaseAvailable = false;
           return await fallbackAuth.signIn(email, password);
         }
@@ -99,11 +100,12 @@ export class AuthService {
         const result = await createUserWithEmailAndPassword(auth, email, password);
         console.log('🔥 Firebase sign-up successful');
         return result.user;
-      } catch (error: any) {
-        console.warn('🔥 Firebase sign-up failed, trying fallback:', error.message);
+      } catch (error: unknown) {
+        const firebaseError = error as { code?: string; message?: string };
+        console.warn('🔥 Firebase sign-up failed, trying fallback:', firebaseError.message);
         
         // Fall back to local auth
-        if (error.code === 'auth/network-request-failed' || error.message.includes('connection')) {
+        if (firebaseError.code === 'auth/network-request-failed' || firebaseError.message?.includes('connection')) {
           isFirebaseAvailable = false;
           return await fallbackAuth.signUp(email, password);
         }
@@ -129,7 +131,7 @@ export class AuthService {
     await fallbackAuth.signOut();
   }
 
-  onAuthStateChanged(callback: (user: any) => void) {
+  onAuthStateChanged(callback: (user: User | null) => void) {
     if (isFirebaseAvailable && auth) {
       // Use Firebase auth state
       return onAuthStateChanged(auth, callback);
