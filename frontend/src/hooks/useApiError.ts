@@ -23,7 +23,7 @@ interface UseApiErrorReturn {
   setError: (error: string | null) => void;
 }
 
-export const useApiError = (): UseApiErrorReturn => {
+const useApiError = (): UseApiErrorReturn => {
   const [error, setError] = useState<string | null>(null);
   const [isRetrying, setIsRetrying] = useState(false);
 
@@ -93,7 +93,7 @@ export const useApiError = (): UseApiErrorReturn => {
 
 // Specialized hooks for common use cases
 
-export const useApiOperation = () => {
+const useApiOperation = () => {
   const [loading, setLoading] = useState(false);
   const { error, handleApiError, clearError } = useApiError();
 

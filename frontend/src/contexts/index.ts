@@ -2,5 +2,5 @@
 export { AuthProvider, useAuth } from './AuthContext';
 export {
   UserPreferencesProvider,
-  useUserPreferences,
 } from './UserPreferencesContext';
+export { ThemeProvider, useTheme } from './ThemeProvider';

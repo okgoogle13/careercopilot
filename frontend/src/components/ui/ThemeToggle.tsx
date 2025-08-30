@@ -1,26 +1,30 @@
 import React from 'react';
 import { Button } from './Button';
+import { useTheme } from '../../contexts';
 
 const ThemeToggle: React.FC = () => {
-  const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
-    }
-    return 'dark';
-  });
-
-  React.useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+    if (theme === 'system') {
+      setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
+    } else {
+      setTheme(theme === 'light' ? 'dark' : 'light');
+    }
+  };
+
+  const getIcon = () => {
+    if (theme === 'system') {
+      return resolvedTheme === 'dark' ? '🌙' : '☀️';
+    }
+    return theme === 'light' ? '🌙' : '☀️';
+  };
+
+  const getLabel = () => {
+    if (theme === 'system') {
+      return `Switch from system (${resolvedTheme}) theme`;
+    }
+    return `Switch to ${theme === 'light' ? 'dark' : 'light'} mode`;
   };
 
   return (
@@ -29,10 +33,10 @@ const ThemeToggle: React.FC = () => {
       size="sm"
       onClick={toggleTheme}
       className="w-10 h-10 p-0 hover-lift animate-fade-in"
-      aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+      aria-label={getLabel()}
     >
       <span className="text-lg transition-transform duration-200 hover:scale-110">
-        {theme === 'light' ? '🌙' : '☀️'}
+        {getIcon()}
       </span>
     </Button>
   );

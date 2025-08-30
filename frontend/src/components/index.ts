@@ -9,7 +9,4 @@ export { default as LoadingSpinner } from './ui/LoadingSpinner';
 export { Dashboard } from './Dashboard';
 export { ATSAnalysisDashboard } from './ATSAnalysisDashboard';
 export { ResumeBuilder } from './ResumeBuilder';
-export { ProfileCard } from './ProfileCard';
-export { CreateProfileCard } from './CreateProfileCard';
 export { Sidebar } from './Sidebar';
-export { CareerCopilotLogo } from './CareerCopilotLogo';

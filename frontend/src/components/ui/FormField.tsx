@@ -1,7 +1,7 @@
 // Form field components with validation display and accessibility
 import React, { forwardRef, ReactNode, useId } from 'react';
 
-export interface FormFieldProps {
+interface FormFieldProps {
   children: ReactNode;
   label?: string;
   error?: string | null;
@@ -12,7 +12,7 @@ export interface FormFieldProps {
   id?: string;
 }
 
-export const FormField: React.FC<FormFieldProps> = ({
+const FormField: React.FC<FormFieldProps> = ({
   children,
   label,
   error,
@@ -104,7 +104,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   touched?: boolean;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ error, touched, className = '', ...props }, ref) => {
     const hasError = touched && error;
 
@@ -136,7 +136,7 @@ interface TextareaProps
   touched?: boolean;
 }
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ error, touched, className = '', ...props }, ref) => {
     const hasError = touched && error;
 
@@ -168,7 +168,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   placeholder?: string;
 }
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
     { error, touched, className = '', placeholder, children, ...props },
     ref
@@ -210,7 +210,7 @@ interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {
   touched?: boolean;
 }
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ label, error, touched, className = '', ...props }, ref) => {
     const hasError = touched && error;
 
