@@ -1,6 +1,6 @@
 // Enhanced Firebase Configuration with Network Fallback
-import { initializeApp } from 'firebase/app';
-import { getAuth, Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { initializeApp, FirebaseApp } from 'firebase/app';
+import { getAuth, Auth, User, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, Firestore } from 'firebase/firestore';
 import { fallbackAuth } from './fallback-auth';
 

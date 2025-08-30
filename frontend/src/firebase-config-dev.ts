@@ -1,7 +1,7 @@
 // Development Firebase Configuration with Error Handling
-import { initializeApp } from 'firebase/app';
+import { initializeApp, FirebaseApp } from 'firebase/app';
 import { getFirestore, Firestore } from 'firebase/firestore';
-import { getAuth, Auth } from 'firebase/auth';
+import { getAuth, Auth, User } from 'firebase/auth';
 
 // Check if Firebase should be disabled for development
 const DISABLE_FIREBASE = import.meta.env.VITE_DISABLE_FIREBASE === 'true';

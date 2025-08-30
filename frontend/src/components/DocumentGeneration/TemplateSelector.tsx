@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { templateAssetService } from '../../services/templateAssetService';
 import { atsComplianceValidator } from '../../services/atsComplianceValidator';
 import './TemplateSelector.css';
@@ -51,7 +51,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     }
   };
 
-  const analyzeAtsCompliance = async () => {
+  const analyzeAtsCompliance = useCallback(async () => {
     if (!jobDescription) return;
     
     const analysis: Record<string, number> = {};
@@ -65,7 +65,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
       }
     }
     setAtsAnalysis(analysis);
-  };
+  }, [jobDescription, templates]);
 
   const getFilteredTemplates = () => {
     if (selectedCategory === 'all') return templates;
