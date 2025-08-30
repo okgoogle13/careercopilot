@@ -8,8 +8,7 @@ describe('Checkbox', () => {
     const handleChange = jest.fn();
     render(<Checkbox checked={false} onCheckedChange={handleChange} />);
     const checkbox = screen.getByRole('checkbox');
-  // @ts-expect-error jest-dom matcher not recognized by TS
-  expect(checkbox).not.toBeChecked();
+    expect(checkbox).not.toBeChecked();
     fireEvent.click(checkbox);
   expect(handleChange).toHaveBeenCalledWith(true);
   });
@@ -17,7 +16,6 @@ describe('Checkbox', () => {
   it('renders as checked', () => {
     render(<Checkbox checked={true} onCheckedChange={() => {}} />);
     const checkbox = screen.getByRole('checkbox');
-  // @ts-expect-error jest-dom matcher not recognized by TS
-  expect(checkbox).toBeChecked();
+    expect(checkbox).toBeChecked();
   });
 });
