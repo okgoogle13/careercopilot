@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 
 export const GoogleSignInButton: React.FC = () => {
   const { setUser, setError, setLoading } = useAuth() as {
-    setUser: (user: any) => void;
+    setUser: (user: unknown) => void;
     setError: (error: Error | null) => void;
     setLoading: (loading: boolean) => void;
   };

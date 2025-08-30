@@ -4,6 +4,7 @@ import React, {
   useState,
   useEffect,
   useMemo,
+  useCallback,
   ReactNode,
 } from 'react';
 import { useAuth } from './AuthContext';
@@ -73,7 +74,7 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
   }, [user, storageKey]);
 
   // Save preferences to localStorage
-  const updatePreferences = (newPrefs: Partial<UserPreferences>) => {
+  const updatePreferences = useCallback((newPrefs: Partial<UserPreferences>) => {
     console.log('🔧 UserPreferences: Updating preferences:', newPrefs);
     
     const updatedPrefs = { ...preferences, ...newPrefs };
@@ -87,7 +88,7 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
       console.error('❌ UserPreferences: Failed to save preferences:', error);
       toast.error('Failed to save preferences');
     }
-  };
+  }, [preferences]);
 
   const value = useMemo(
     () => ({
