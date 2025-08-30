@@ -19,7 +19,7 @@ interface TemplateSelectorProps {
   jobDescription?: string;
 }
 
-export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
+const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   selectedTemplate,
   onTemplateSelect,
   jobDescription,

@@ -98,7 +98,7 @@ interface PageLoadingProps {
   className?: string;
 }
 
-export const PageLoading = memo<PageLoadingProps>(
+const PageLoading = memo<PageLoadingProps>(
   ({ message = 'Loading page...', className = '' }) => (
     <div
       className={`min-h-screen bg-background flex items-center justify-center ${className}`}
@@ -121,7 +121,7 @@ interface InlineLoadingProps {
   className?: string;
 }
 
-export const InlineLoading = memo<InlineLoadingProps>(
+const InlineLoading = memo<InlineLoadingProps>(
   ({ message = 'Loading...', className = '' }) => (
     <div
       className={`flex items-center space-x-2 ${className}`}
@@ -145,7 +145,7 @@ interface TableLoadingProps {
   className?: string;
 }
 
-export const TableLoading = memo<TableLoadingProps>(
+const TableLoading = memo<TableLoadingProps>(
   ({ rows = 5, columns = 4, className = '' }) => (
     <div
       className={`animate-pulse ${className}`}
@@ -178,7 +178,7 @@ interface CardLoadingProps {
   variant?: 'default' | 'compact';
 }
 
-export const CardLoading = memo<CardLoadingProps>(
+const CardLoading = memo<CardLoadingProps>(
   ({ className = '', variant = 'default' }) => (
     <div
       className={`animate-pulse p-6 bg-card rounded-lg shadow-md border hover-lift ${className}`}
