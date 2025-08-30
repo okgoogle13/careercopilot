@@ -6,8 +6,7 @@ import { Button } from '../Button';
 describe('Button', () => {
   it('renders with text', () => {
     render(<Button>Click Me</Button>);
-  // @ts-expect-error jest-dom matcher not recognized by TS
-  expect(screen.getByText('Click Me')).toBeInTheDocument();
+    expect(screen.getByText('Click Me')).toBeInTheDocument();
   });
 
   it('calls onClick when clicked', () => {
