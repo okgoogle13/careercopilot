@@ -88,7 +88,7 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
       console.error('❌ UserPreferences: Failed to save preferences:', error);
       toast.error('Failed to save preferences');
     }
-  }, [preferences]);
+  }, [preferences, storageKey]);
 
   const value = useMemo(
     () => ({
