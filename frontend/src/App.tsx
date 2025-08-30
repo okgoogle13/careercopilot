@@ -4,8 +4,8 @@ import { Toaster } from 'react-hot-toast';
 
 // Component imports
 import { Navbar, ProtectedRoute, LoadingSpinner } from './components';
-import { ErrorBoundary } from './components/ui';
-import { AuthProvider, UserPreferencesProvider } from './contexts';
+import { ErrorBoundary, SkipLink } from './components/ui';
+import { AuthProvider, UserPreferencesProvider, ThemeProvider } from './contexts';
 
 // Lazy load page components
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -22,10 +22,15 @@ const UITestPage = lazy(() => import('./pages/UITestPage'));
 const App: React.FC = () => {
   return (
     <Router>
-      <AuthProvider>
-        <UserPreferencesProvider>
-          <Toaster position="top-center" reverseOrder={false} />
-          <ProtectedRoute>
+      <ThemeProvider defaultTheme="system">
+        <AuthProvider>
+          <UserPreferencesProvider>
+            {/* Accessibility skip links */}
+            <SkipLink href="#main-content">Skip to main content</SkipLink>
+            <SkipLink href="#navigation">Skip to navigation</SkipLink>
+            
+            <Toaster position="top-center" reverseOrder={false} />
+            <ProtectedRoute>
             <Navbar />
             <main
               id="main-content"
@@ -106,6 +111,7 @@ const App: React.FC = () => {
           </ProtectedRoute>
         </UserPreferencesProvider>
       </AuthProvider>
+      </ThemeProvider>
     </Router>
   );
 };

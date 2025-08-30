@@ -7,4 +7,4 @@ function AspectRatio({
   return <AspectRatioPrimitive.Root data-slot="aspect-ratio" {...props} />;
 }
 
-export { AspectRatio };
+

@@ -73,7 +73,7 @@ async function initializeFirebase(): Promise<boolean> {
 }
 
 // Enhanced authentication service
-export class AuthService {
+class AuthService {
   constructor() {
     // Start Firebase initialization
     this.initWithRetry();
@@ -191,11 +191,8 @@ export class AuthService {
 // Create singleton instance
 export const authService = new AuthService();
 
-// Export Firebase instances (may be null)
-export { auth, db };
-
 // Debug information
-export const debugInfo = {
+const debugInfo = {
   environment: import.meta.env.MODE,
   firebaseConfig: firebaseConfig.projectId ? 'configured' : 'missing',
   getStatus: () => authService.getConnectionStatus(),
