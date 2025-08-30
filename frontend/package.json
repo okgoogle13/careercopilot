@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
@@ -14,7 +14,7 @@
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "test": "npx jest --runInBand --colors",
+    "test": "npx jest --runInBand --colors --config jest.config.cjs",
     "test:e2e": "npx playwright test",
     "test:all": "npm run test && npm run test:e2e",
     "clean": "rm -rf dist node_modules/.vite"
@@ -95,7 +95,7 @@
     "tailwindcss": "^3.3.6",
     "tailwindcss-animate": "^1.0.7",
     "ts-jest": "^29.4.1",
-    "typescript": "^5.3.3",
+    "typescript": "5.3.3",
     "vite": "6.3.5"
   },
   "keywords": [
