@@ -26,8 +26,17 @@ interface VoiceProfile {
 }
 
 const SettingsPage: React.FC = () => {
-  const { isAuthenticated, isLoading: authLoading, requireAuth, getAuthToken } = useAuthStatus();
-  const { preferences, updatePreferences, loading: preferencesLoading } = useUserPreferences();
+  const {
+    isAuthenticated,
+    isLoading: authLoading,
+    requireAuth,
+    getAuthToken,
+  } = useAuthStatus();
+  const {
+    preferences,
+    updatePreferences,
+    loading: preferencesLoading,
+  } = useUserPreferences();
   const [integrationStatus, setIntegrationStatus] =
     useState<string>('Not Connected');
   const [voiceProfile, setVoiceProfile] = useState<VoiceProfile | null>(null);
@@ -46,28 +55,28 @@ const SettingsPage: React.FC = () => {
         try {
           const token = getAuthToken();
           if (!token) return;
-          
+
           const response = await fetch('/api/v1/user/settings', {
             headers: { Authorization: `Bearer ${token}` },
           });
-              const contentType = response.headers.get('content-type') || '';
-              if (response.ok && contentType.includes('application/json')) {
-                const data = await response.json();
-                setIntegrationStatus(
-                  data.integrations?.google_gmail?.connected
-                    ? 'Connected'
-                    : 'Not Connected'
-                );
-                setVoiceProfile(data.voice_profile || null);
-              } else {
-                // non-JSON or unexpected response (often HTML from an error page)
-                const text = await response.text();
-                console.error(
-                  'Unexpected response when fetching user settings:',
-                  response.status,
-                  text
-                );
-              }
+          const contentType = response.headers.get('content-type') || '';
+          if (response.ok && contentType.includes('application/json')) {
+            const data = await response.json();
+            setIntegrationStatus(
+              data.integrations?.google_gmail?.connected
+                ? 'Connected'
+                : 'Not Connected'
+            );
+            setVoiceProfile(data.voice_profile || null);
+          } else {
+            // non-JSON or unexpected response (often HTML from an error page)
+            const text = await response.text();
+            console.error(
+              'Unexpected response when fetching user settings:',
+              response.status,
+              text
+            );
+          }
         } catch (error) {
           console.error('Failed to fetch user settings:', error);
         } finally {
@@ -85,7 +94,7 @@ const SettingsPage: React.FC = () => {
     try {
       const token = getAuthToken();
       if (!token) return;
-      
+
       const response = await fetch('/api/v1/integrations/google/authorize', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -98,7 +107,10 @@ const SettingsPage: React.FC = () => {
         window.location.href = data.authorization_url;
       }
     } catch (error: unknown) {
-      const message = error instanceof Error ? error.message : 'Could not initiate connection with Google.';
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Could not initiate connection with Google.';
       toast.error(message);
     }
   };
@@ -112,7 +124,7 @@ const SettingsPage: React.FC = () => {
         setIsDisconnecting(false);
         return;
       }
-      
+
       await fetch('/api/v1/integrations/google/disconnect', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -136,7 +148,7 @@ const SettingsPage: React.FC = () => {
         toast.dismiss();
         return;
       }
-      
+
       const response = await fetch('/api/v1/integrations/google/scan-emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -158,7 +170,7 @@ const SettingsPage: React.FC = () => {
       toast.error('You must be logged in to change settings.');
       return;
     }
-    
+
     try {
       updatePreferences({ themeId });
       toast.success('Theme preference saved!');
@@ -179,7 +191,7 @@ const SettingsPage: React.FC = () => {
         setIsGeneratingVoiceProfile(false);
         return;
       }
-      
+
       const response = await fetch('/api/v1/profile/generate-voice-profile', {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
@@ -200,7 +212,8 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  if (authLoading || loading || preferencesLoading) return <LoadingState message="Loading settings..." />;
+  if (authLoading || loading || preferencesLoading)
+    return <LoadingState message="Loading settings..." />;
 
   return (
     <div className="p-8 max-w-6xl mx-auto">

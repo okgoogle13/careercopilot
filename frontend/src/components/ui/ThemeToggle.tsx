@@ -4,7 +4,7 @@ import { Button } from './Button';
 const ThemeToggle: React.FC = () => {
   const [theme, setTheme] = React.useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') as 'light' | 'dark' || 'dark';
+      return (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
     }
     return 'dark';
   });
@@ -20,7 +20,7 @@ const ThemeToggle: React.FC = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
 
   return (

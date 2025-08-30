@@ -33,7 +33,9 @@ const NavItem = memo<NavItemProps>(
           `}
       onClick={onMobileMenuClose}
     >
-      <span className="text-lg group-hover:scale-110 transition-transform duration-200">{icon}</span>
+      <span className="text-lg group-hover:scale-110 transition-transform duration-200">
+        {icon}
+      </span>
       <span className="font-medium">{label}</span>
     </NavLink>
   )
@@ -114,7 +116,7 @@ const Navbar: React.FC = () => {
             <div className="flex items-center space-x-4">
               {/* Theme Toggle */}
               <ThemeToggle />
-              
+
               {user && (
                 <>
                   {/* User Info */}
@@ -137,9 +139,9 @@ const Navbar: React.FC = () => {
                   </div>
 
                   {/* Logout Button */}
-                  <Button 
-                    variant="destructive" 
-                    size="sm" 
+                  <Button
+                    variant="destructive"
+                    size="sm"
                     onClick={handleLogout}
                     className="hover-lift animate-fade-in"
                   >

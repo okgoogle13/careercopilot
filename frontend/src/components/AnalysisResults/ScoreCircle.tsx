@@ -8,20 +8,20 @@ interface ScoreCircleProps {
 /**
  * Displays a circular progress indicator for overall ATS scores
  */
-export const ScoreCircle: React.FC<ScoreCircleProps> = ({ 
-  score, 
-  size = 'lg' 
+export const ScoreCircle: React.FC<ScoreCircleProps> = ({
+  score,
+  size = 'lg',
 }) => {
   const sizeClasses = {
     sm: 'w-24 h-24',
     md: 'w-36 h-36',
-    lg: 'w-48 h-48'
+    lg: 'w-48 h-48',
   };
 
   const textSizeClasses = {
     sm: 'text-xl',
     md: 'text-3xl',
-    lg: 'text-4xl'
+    lg: 'text-4xl',
   };
 
   return (

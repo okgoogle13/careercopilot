@@ -34,8 +34,23 @@ export { ScreenReaderOnly, LiveRegion } from './ScreenReaderOnly';
 export { default as ThemeToggle } from './ThemeToggle';
 
 // New Radix UI components
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './accordion';
-export { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter, AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel } from './alert-dialog';
+export {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from './accordion';
+export {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from './alert-dialog';
 export { AspectRatio } from './aspect-ratio';
 export { Avatar, AvatarImage, AvatarFallback } from './avatar';
 export { Badge } from './badge';

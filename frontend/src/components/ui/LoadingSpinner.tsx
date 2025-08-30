@@ -83,7 +83,9 @@ export const LoadingState = memo<LoadingStateProps>(
         aria-live="polite"
       >
         <LoadingSpinner size={size} className="mb-4" />
-        <p className="text-muted-foreground text-center text-sm animate-fade-in">{message}</p>
+        <p className="text-muted-foreground text-center text-sm animate-fade-in">
+          {message}
+        </p>
       </div>
     );
   }
@@ -127,7 +129,9 @@ export const InlineLoading = memo<InlineLoadingProps>(
       aria-live="polite"
     >
       <LoadingSpinner size="sm" />
-      {message && <span className="text-sm text-muted-foreground">{message}</span>}
+      {message && (
+        <span className="text-sm text-muted-foreground">{message}</span>
+      )}
     </div>
   )
 );

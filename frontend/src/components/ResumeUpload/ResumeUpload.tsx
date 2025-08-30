@@ -13,7 +13,9 @@ interface ResumeAnalysisResult {
   uploadedAt: Date;
 }
 
-export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) => {
+export const ResumeUpload: React.FC<ResumeUploadProps> = ({
+  onUploadComplete,
+}) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingStep, setProcessingStep] = useState('');
@@ -28,7 +30,12 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
     if (!file) return;
 
     // Validate file type
-    const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'text/plain',
+    ];
     if (!allowedTypes.includes(file.type)) {
       return;
     }
@@ -39,7 +46,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
     }
 
     setIsProcessing(true);
-    
+
     try {
       // Step 1: Read file content
       setProcessingStep('Reading file content...');
@@ -63,7 +70,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
         atsScore,
         recommendations,
         fileSize: file.size,
-        uploadedAt: new Date()
+        uploadedAt: new Date(),
       };
 
       setProcessingStep('Analysis complete!');
@@ -81,7 +88,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
   const readFileContent = async (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onload = (e) => {
+      reader.onload = e => {
         const content = e.target?.result as string;
         if (file.type === 'text/plain') {
           resolve(content);
@@ -98,37 +105,58 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
 
   const simulateATSAnalysis = async (content: string): Promise<number> => {
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     // Simple scoring based on content keywords
     let score = 60; // Base score
-    
-    const keywords = ['react', 'javascript', 'typescript', 'node', 'experience', 'skills', 'education', 'work'];
+
+    const keywords = [
+      'react',
+      'javascript',
+      'typescript',
+      'node',
+      'experience',
+      'skills',
+      'education',
+      'work',
+    ];
     const contentLower = content.toLowerCase();
-    
+
     keywords.forEach(keyword => {
       if (contentLower.includes(keyword)) score += 5;
     });
-    
+
     return Math.min(Math.max(score, 45), 95);
   };
 
-  const generateRecommendations = (score: number, content: string): string[] => {
+  const generateRecommendations = (
+    score: number,
+    content: string
+  ): string[] => {
     const recommendations: string[] = [];
-    
+
     if (score < 70) {
-      recommendations.push('Consider adding more relevant keywords from the job description');
+      recommendations.push(
+        'Consider adding more relevant keywords from the job description'
+      );
       recommendations.push('Ensure all section headers are clear and standard');
     }
-    
+
     if (score < 80) {
       recommendations.push('Add more quantifiable achievements and metrics');
-      recommendations.push('Use a professional template for better ATS compatibility');
+      recommendations.push(
+        'Use a professional template for better ATS compatibility'
+      );
     }
-    
-    if (!content.toLowerCase().includes('contact') && !content.toLowerCase().includes('email')) {
-      recommendations.push('Make sure your contact information is clearly visible');
+
+    if (
+      !content.toLowerCase().includes('contact') &&
+      !content.toLowerCase().includes('email')
+    ) {
+      recommendations.push(
+        'Make sure your contact information is clearly visible'
+      );
     }
-    
+
     return recommendations;
   };
 
@@ -155,12 +183,12 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
       <h3 className="text-lg font-semibold mb-4">Upload Your Resume</h3>
-      
+
       {!isProcessing ? (
         <div
           className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all ${
-            isDragOver 
-              ? 'border-blue-500 bg-blue-50' 
+            isDragOver
+              ? 'border-blue-500 bg-blue-50'
               : 'border-gray-300 hover:border-blue-400 hover:bg-gray-50'
           }`}
           onDragOver={handleDragOver}
@@ -169,16 +197,21 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
           onClick={handleClick}
         >
           <div className="mb-4">
-            <svg 
+            <svg
               className="mx-auto h-12 w-12 text-gray-400"
-              stroke="currentColor" 
-              fill="none" 
+              stroke="currentColor"
+              fill="none"
               viewBox="0 0 48 48"
             >
-              <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </div>
-          
+
           <div className="mb-2">
             <p className="text-lg font-medium text-gray-900">
               Drop your resume here, or click to browse
@@ -187,7 +220,7 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
               Supports PDF, Word, and text files up to 5MB
             </p>
           </div>
-          
+
           <div className="flex justify-center mt-4">
             <span className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
               Select File
@@ -199,29 +232,37 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) 
           <div className="mb-4">
             <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mx-auto"></div>
           </div>
-          <h4 className="text-lg font-medium text-gray-900 mb-2">Processing Your Resume</h4>
+          <h4 className="text-lg font-medium text-gray-900 mb-2">
+            Processing Your Resume
+          </h4>
           <p className="text-sm text-gray-600">{processingStep}</p>
           <div className="mt-4 bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-blue-500 h-2 rounded-full transition-all duration-300"
               style={{
-                width: processingStep.includes('Reading') ? '25%' :
-                       processingStep.includes('Extracting') ? '50%' :
-                       processingStep.includes('Running') ? '75%' :
-                       processingStep.includes('Generating') ? '90%' :
-                       processingStep.includes('complete') ? '100%' : '10%'
+                width: processingStep.includes('Reading')
+                  ? '25%'
+                  : processingStep.includes('Extracting')
+                    ? '50%'
+                    : processingStep.includes('Running')
+                      ? '75%'
+                      : processingStep.includes('Generating')
+                        ? '90%'
+                        : processingStep.includes('complete')
+                          ? '100%'
+                          : '10%',
               }}
             ></div>
           </div>
         </div>
       )}
-      
+
       <input
         ref={fileInputRef}
         type="file"
         className="hidden"
         accept=".pdf,.doc,.docx,.txt"
-        onChange={(e) => handleFileSelect(e.target.files)}
+        onChange={e => handleFileSelect(e.target.files)}
       />
     </div>
   );

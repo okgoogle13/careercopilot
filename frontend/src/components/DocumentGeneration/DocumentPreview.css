@@ -65,14 +65,14 @@
   .preview-stats {
     display: none !important;
   }
-  
+
   .preview-content-wrapper {
     padding: 0;
     background: white;
     max-height: none;
     overflow: visible;
   }
-  
+
   .preview-paper {
     box-shadow: none;
     margin: 0;

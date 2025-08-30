@@ -11,16 +11,32 @@ interface ScoreBreakdownProps {
 /**
  * Displays the detailed breakdown of ATS scores by category
  */
-export const ScoreBreakdown: React.FC<ScoreBreakdownProps> = ({ breakdown }) => {
+export const ScoreBreakdown: React.FC<ScoreBreakdownProps> = ({
+  breakdown,
+}) => {
   const scoreItems = [
-    { label: 'Keyword Match', value: breakdown.keywordScore, color: 'text-blue-600' },
-    { label: 'Semantic Relevance', value: breakdown.semanticScore, color: 'text-green-600' },
-    { label: 'Formatting Compliance', value: breakdown.formattingScore, color: 'text-purple-600' },
+    {
+      label: 'Keyword Match',
+      value: breakdown.keywordScore,
+      color: 'text-blue-600',
+    },
+    {
+      label: 'Semantic Relevance',
+      value: breakdown.semanticScore,
+      color: 'text-green-600',
+    },
+    {
+      label: 'Formatting Compliance',
+      value: breakdown.formattingScore,
+      color: 'text-purple-600',
+    },
   ];
 
   return (
     <div>
-      <h3 className="text-xl font-semibold mb-3 text-gray-900">Score Breakdown</h3>
+      <h3 className="text-xl font-semibold mb-3 text-gray-900">
+        Score Breakdown
+      </h3>
       <ul className="space-y-3">
         {scoreItems.map((item, index) => (
           <li key={index} className="flex justify-between items-center">
