@@ -5,8 +5,12 @@ import { Card } from '../Card';
 
 describe('Card', () => {
   it('renders children', () => {
-  render(<Card><div>Card Content</div></Card>);
-  expect(screen.getByText('Card Content')).toBeInTheDocument();
+    render(
+      <Card>
+        <div>Card Content</div>
+      </Card>
+    );
+    expect(screen.getByText('Card Content')).toBeInTheDocument();
   });
 
   it('applies custom className', () => {

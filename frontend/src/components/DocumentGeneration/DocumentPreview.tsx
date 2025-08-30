@@ -6,16 +6,16 @@ interface DocumentPreviewProps {
   templateName?: string;
 }
 
-const DocumentPreview: React.FC<DocumentPreviewProps> = ({ 
-  documentContent, 
-  templateName 
+const DocumentPreview: React.FC<DocumentPreviewProps> = ({
+  documentContent,
+  templateName,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showExportOptions, setShowExportOptions] = useState(false);
 
   const handleDownload = async (format: string) => {
     setShowExportOptions(false);
-    
+
     try {
       if (format === 'pdf') {
         await downloadAsPDF();
@@ -34,7 +34,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
       // Method 1: Use browser's print functionality for PDF
       const printWindow = window.open('', '_blank');
       if (!printWindow) throw new Error('Popup blocked');
-      
+
       printWindow.document.write(`
         <!DOCTYPE html>
         <html>
@@ -52,13 +52,12 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
       `);
       printWindow.document.close();
       printWindow.focus();
-      
+
       setTimeout(() => {
         printWindow.print();
         printWindow.close();
       }, 250);
-      
-  } catch {
+    } catch {
       // Fallback: Create downloadable HTML
       downloadAsHTML();
     }
@@ -83,7 +82,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
         </body>
       </html>
     `;
-    
+
     const blob = new Blob([wordContent], { type: 'application/msword' });
     downloadBlob(blob, `${templateName || 'document'}.doc`);
   };
@@ -93,7 +92,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = documentContent;
     const textContent = tempDiv.textContent || tempDiv.innerText || '';
-    
+
     const blob = new Blob([textContent], { type: 'text/plain' });
     downloadBlob(blob, `${templateName || 'document'}.txt`);
   };
@@ -124,7 +123,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
         </body>
       </html>
     `;
-    
+
     const blob = new Blob([htmlContent], { type: 'text/html' });
     downloadBlob(blob, `${templateName || 'document'}.html`);
   };
@@ -155,7 +154,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           <h2 className="text-xl font-semibold">
             Preview{templateName && `: ${templateName}`}
           </h2>
-          
+
           <div className="flex items-center gap-2">
             {/* Export Options */}
             <div className="relative">
@@ -165,7 +164,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
               >
                 Export ↓
               </button>
-              
+
               {showExportOptions && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
                   <button
@@ -211,9 +210,9 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
 
       <div className="preview-content-wrapper">
         <div className="preview-paper">
-          <div 
-            className="preview-content" 
-            dangerouslySetInnerHTML={{ __html: documentContent }} 
+          <div
+            className="preview-content"
+            dangerouslySetInnerHTML={{ __html: documentContent }}
           />
         </div>
       </div>

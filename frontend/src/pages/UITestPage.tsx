@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Dashboard, ATSAnalysisDashboard, ResumeBuilder, Sidebar } from '../components';
+import {
+  Dashboard,
+  ATSAnalysisDashboard,
+  ResumeBuilder,
+  Sidebar,
+} from '../components';
 
 const UITestPage: React.FC = () => {
   const [currentView, setCurrentView] = useState<string>('dashboard');
@@ -31,16 +36,19 @@ const UITestPage: React.FC = () => {
         return <ResumeBuilder onBack={handleBack} />;
       case 'dashboard':
       default:
-        return <Dashboard onCreateProfile={handleCreateProfile} onEditProfile={handleEditProfile} />;
+        return (
+          <Dashboard
+            onCreateProfile={handleCreateProfile}
+            onEditProfile={handleEditProfile}
+          />
+        );
     }
   };
 
   return (
     <div className="h-screen bg-background text-foreground flex dark">
       <Sidebar activeTab={activeTab} onTabChange={handleTabChange} />
-      <div className="flex-1">
-        {renderContent()}
-      </div>
+      <div className="flex-1">{renderContent()}</div>
     </div>
   );
 };

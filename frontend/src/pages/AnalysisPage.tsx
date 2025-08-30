@@ -37,7 +37,7 @@ const AnalysisPage: React.FC = () => {
   // --- Handlers ---
   const handleAnalysis = async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!selectedDocumentId || !jobDescription.trim()) {
       toast.error('Please select a resume and paste a job description.');
       return;
@@ -83,7 +83,9 @@ const AnalysisPage: React.FC = () => {
 
           {/* Recommendations */}
           <div>
-            <RecommendationsList recommendations={analysisResult.recommendations} />
+            <RecommendationsList
+              recommendations={analysisResult.recommendations}
+            />
           </div>
         </div>
 
@@ -146,9 +148,9 @@ const AnalysisPage: React.FC = () => {
           ATS Resume Analysis
         </h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          Get an instant ATS compatibility score and actionable feedback to optimize 
-          your resume for any job posting. Our AI analyzes keyword matching, semantic 
-          relevance, and formatting compliance.
+          Get an instant ATS compatibility score and actionable feedback to
+          optimize your resume for any job posting. Our AI analyzes keyword
+          matching, semantic relevance, and formatting compliance.
         </p>
       </div>
 
@@ -174,11 +176,11 @@ const AnalysisPage: React.FC = () => {
               <select
                 id="resume-select"
                 value={selectedDocumentId}
-                onChange={(e) => setSelectedDocumentId(e.target.value)}
+                onChange={e => setSelectedDocumentId(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
-                {documents.map((doc) => (
+                {documents.map(doc => (
                   <option key={doc.id} value={doc.id}>
                     {doc.originalFilename}
                   </option>
@@ -199,13 +201,14 @@ const AnalysisPage: React.FC = () => {
               id="job-description"
               rows={12}
               value={jobDescription}
-              onChange={(e) => setJobDescription(e.target.value)}
+              onChange={e => setJobDescription(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
               placeholder="Paste the complete job description here. Include responsibilities, requirements, qualifications, and any specific skills mentioned..."
               required
             />
             <p className="text-xs text-gray-500 mt-2">
-              💡 Tip: Include the complete job posting for the most accurate analysis.
+              💡 Tip: Include the complete job posting for the most accurate
+              analysis.
             </p>
           </div>
 
@@ -228,10 +231,11 @@ const AnalysisPage: React.FC = () => {
                 </>
               )}
             </button>
-            
+
             {isAnalyzing && (
               <p className="text-sm text-gray-600 mt-3">
-                This may take 30-60 seconds. We're analyzing your resume against the job requirements...
+                This may take 30-60 seconds. We're analyzing your resume against
+                the job requirements...
               </p>
             )}
           </div>
@@ -251,22 +255,22 @@ const AnalysisPage: React.FC = () => {
             <div className="flex items-start space-x-2">
               <span className="text-blue-500">1️⃣</span>
               <div>
-                <strong>Keyword Analysis:</strong> We compare your resume's keywords 
-                against the job requirements.
+                <strong>Keyword Analysis:</strong> We compare your resume's
+                keywords against the job requirements.
               </div>
             </div>
             <div className="flex items-start space-x-2">
               <span className="text-blue-500">2️⃣</span>
               <div>
-                <strong>Semantic Matching:</strong> Our AI understands context and 
-                related skills beyond exact matches.
+                <strong>Semantic Matching:</strong> Our AI understands context
+                and related skills beyond exact matches.
               </div>
             </div>
             <div className="flex items-start space-x-2">
               <span className="text-blue-500">3️⃣</span>
               <div>
-                <strong>ATS Compliance:</strong> We check formatting and structure 
-                for ATS-friendly design.
+                <strong>ATS Compliance:</strong> We check formatting and
+                structure for ATS-friendly design.
               </div>
             </div>
           </div>

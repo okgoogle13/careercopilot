@@ -28,7 +28,7 @@ const DashboardPage: React.FC = () => {
 
   const fetchProfiles = useCallback(async () => {
     if (!user) return;
-    
+
     try {
       setLoading(true);
       const token = user.token || 'fallback-token';
@@ -78,7 +78,7 @@ const DashboardPage: React.FC = () => {
     ) {
       return;
     }
-    
+
     if (!user) return;
 
     try {

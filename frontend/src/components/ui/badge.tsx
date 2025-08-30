@@ -1,18 +1,18 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { type VariantProps } from "class-variance-authority";
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { type VariantProps } from 'class-variance-authority';
 
-import { cn } from "./utils";
-import { badgeVariants } from "./badge-utils";
+import { cn } from './utils';
+import { badgeVariants } from './badge-utils';
 
 function Badge({
   className,
   variant,
   asChild = false,
   ...props
-}: React.ComponentProps<"span"> &
+}: React.ComponentProps<'span'> &
   VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : "span";
+  const Comp = asChild ? Slot : 'span';
 
   return (
     <Comp

@@ -7,7 +7,7 @@ console.log('🔧 Development Bootstrap: Initializing Firebase-free environment'
 if (typeof window !== 'undefined') {
   // Prevent Firebase auto-initialization
   (window as Record<string, unknown>).__FIREBASE_DEFAULTS__ = undefined;
-  
+
   // Mock Firebase SDK if it gets loaded
   (window as Record<string, unknown>).firebase = {
     apps: [],
@@ -18,9 +18,9 @@ if (typeof window !== 'undefined') {
     app: () => {
       console.warn('🚫 Firebase app() blocked - using fallback auth');
       return null;
-    }
+    },
   };
-  
+
   console.log('✅ Development Bootstrap: Firebase globals mocked');
 }
 
@@ -36,12 +36,12 @@ console.log('🔧 Development Mode Active:', {
   firebaseDisabled: true,
   authMethod: 'pure-fallback',
   persistentSessions: true,
-  demoCredentials: 'demo@careercopilot.com / demo123'
+  demoCredentials: 'demo@careercopilot.com / demo123',
 });
 
 export const devConfig = {
   firebaseDisabled: true,
   authMethod: 'pure-fallback',
   debugMode: true,
-  environment: 'development'
+  environment: 'development',
 };

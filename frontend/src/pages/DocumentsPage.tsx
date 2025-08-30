@@ -12,7 +12,13 @@ interface DocumentType {
 }
 
 const DocumentsPage: React.FC = () => {
-  const { isAuthenticated, isLoading, error: authError, requireAuth, getAuthToken } = useAuthStatus();
+  const {
+    isAuthenticated,
+    isLoading,
+    error: authError,
+    requireAuth,
+    getAuthToken,
+  } = useAuthStatus();
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +27,7 @@ const DocumentsPage: React.FC = () => {
 
   const fetchDocuments = useCallback(async () => {
     if (!requireAuth()) return;
-    
+
     try {
       setLoading(true);
       const token = getAuthToken();
@@ -29,7 +35,7 @@ const DocumentsPage: React.FC = () => {
         setError('Unable to get authentication token');
         return;
       }
-      
+
       const response = await fetch('/api/v1/documents', {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -67,7 +73,7 @@ const DocumentsPage: React.FC = () => {
         toast.error('Unable to get authentication token');
         return;
       }
-      
+
       // Append the user's selected theme to the download URL
       const downloadUrl = `/api/v1/documents/${documentId}/download-pdf?theme=${userTheme}`;
       const response = await fetch(downloadUrl, {

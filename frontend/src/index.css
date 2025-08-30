@@ -4,12 +4,12 @@
 
 :root {
   --font-size: 14px;
-  
+
   /* Dark Theme Colors */
   --background: #0a0a0a; /* dark.bg */
   --surface: #1a1a1a; /* dark.surface */
   --border: #2a2a2a; /* dark.border */
-  
+
   --text-primary: #ffffff; /* dark.text.primary */
   --text-secondary: #a1a1aa; /* dark.text.secondary */
   --text-muted: #71717a; /* dark.text.muted */
@@ -60,18 +60,18 @@
   --input-background: var(--gray-900);
   --switch-background: var(--gray-700);
   --ring: var(--primary-500);
-  
+
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --radius: 0.5rem;
-  
+
   /* Chart colors using primary palette */
   --chart-1: var(--primary-600);
   --chart-2: var(--primary-500);
   --chart-3: var(--primary-400);
   --chart-4: var(--primary-300);
   --chart-5: var(--primary-200);
-  
+
   /* Sidebar colors */
   --sidebar: var(--surface);
   --sidebar-foreground: var(--text-primary);
@@ -81,19 +81,22 @@
   --sidebar-accent-foreground: var(--text-secondary);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--primary-500);
-  
+
   /* Fonts */
   --font-family-sans: 'Inter', 'system-ui', 'sans-serif';
   --font-family-mono: 'JetBrains Mono', 'monospace';
-  
+
   /* Animation variables */
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 250ms ease-in-out;
   --transition-slow: 350ms ease-in-out;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .light {
@@ -135,15 +138,18 @@
   --sidebar-accent-foreground: #0f172a;
   --sidebar-border: #e2e8f0;
   --sidebar-ring: #6366f1;
-  
+
   /* Animation variables */
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 250ms ease-in-out;
   --transition-slow: 350ms ease-in-out;
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 .dark {
@@ -228,9 +234,10 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    transition: background-color var(--transition-normal), 
-                color var(--transition-normal), 
-                border-color var(--transition-normal);
+    transition:
+      background-color var(--transition-normal),
+      color var(--transition-normal),
+      border-color var(--transition-normal);
   }
 
   body {
@@ -242,14 +249,23 @@
   }
 
   /* Enhanced typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 600;
     line-height: 1.25;
     margin-bottom: 0.5rem;
   }
 
   /* Smooth transitions for interactive elements */
-  button, a, input, textarea, select {
+  button,
+  a,
+  input,
+  textarea,
+  select {
     transition: all var(--transition-fast);
   }
 
@@ -284,7 +300,7 @@
  * Base typography. This is not applied to elements which have an ancestor with a Tailwind text class.
  */
 @layer base {
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
     h1 {
       font-size: var(--text-2xl);
       font-weight: var(--font-weight-medium);
@@ -495,36 +511,50 @@ nav {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 @keyframes scaleIn {
-  from { 
-    opacity: 0; 
-    transform: scale(0.95); 
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
 @keyframes bounceSubtle {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-3px); }
-  60% { transform: translateY(-2px); }
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-3px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
 }
 
 /* Modern Card Styles */
@@ -541,7 +571,9 @@ nav {
 
 /* Hover Effects */
 .hover-lift {
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .hover-lift:hover {
@@ -555,8 +587,12 @@ nav {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Gradient Text */

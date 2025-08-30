@@ -10,7 +10,7 @@ describe('Checkbox', () => {
     const checkbox = screen.getByRole('checkbox');
     expect(checkbox).not.toBeChecked();
     fireEvent.click(checkbox);
-  expect(handleChange).toHaveBeenCalledWith(true);
+    expect(handleChange).toHaveBeenCalledWith(true);
   });
 
   it('renders as checked', () => {
