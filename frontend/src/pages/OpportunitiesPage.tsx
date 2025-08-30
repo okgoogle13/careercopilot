@@ -195,7 +195,7 @@ const OpportunitiesPage: React.FC = () => {
       fetchOpportunities();
       fetchStats();
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, fetchOpportunities, fetchStats]);
 
   if (isLoading) {
     return (

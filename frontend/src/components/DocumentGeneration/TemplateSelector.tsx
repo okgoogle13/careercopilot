@@ -37,7 +37,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     if (jobDescription && templates.length > 0) {
       analyzeAtsCompliance();
     }
-  }, [jobDescription, templates]);
+  }, [jobDescription, templates, analyzeAtsCompliance]);
 
   const loadTemplates = async () => {
     try {

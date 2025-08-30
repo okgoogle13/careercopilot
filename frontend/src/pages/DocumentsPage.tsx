@@ -50,7 +50,7 @@ const DocumentsPage: React.FC = () => {
       setLoading(false);
       setError(authError);
     }
-  }, [isAuthenticated, isLoading, authError]);
+  }, [isAuthenticated, isLoading, authError, fetchDocuments]);
 
   const handleDownload = async (
     documentId: string,
