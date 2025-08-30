@@ -122,7 +122,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const connectionStatus = useMemo(() => {
     return authService.getConnectionStatus();
-  }, [user]); // Re-compute when user changes (indicates connection might have changed)
+  }, []); // Connection status is static
 
   const value = useMemo(
     () => ({
