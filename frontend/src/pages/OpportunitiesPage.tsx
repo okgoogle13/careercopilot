@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useAuthStatus } from '../hooks';
 import { Button, Card, CardHeader, CardTitle, CardContent, LoadingSpinner } from '../components/ui';
 import toast from 'react-hot-toast';
@@ -55,7 +55,7 @@ const OpportunitiesPage: React.FC = () => {
   const [discovering, setDiscovering] = useState<boolean>(false);
   const [creatingEvent, setCreatingEvent] = useState<string | null>(null);
 
-  const fetchOpportunities = async () => {
+  const fetchOpportunities = useCallback(async () => {
     if (!requireAuth()) return;
     
     try {
@@ -82,9 +82,9 @@ const OpportunitiesPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [requireAuth, getAuthToken]);
 
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async () => {
     if (!requireAuth()) return;
     
     try {
@@ -102,7 +102,7 @@ const OpportunitiesPage: React.FC = () => {
     } catch (err) {
       console.error('Failed to fetch stats:', err);
     }
-  };
+  }, [requireAuth, getAuthToken]);
 
   const discoverOpportunities = async () => {
     if (!requireAuth()) return;

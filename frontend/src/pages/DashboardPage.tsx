@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect, useCallback, FormEvent } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 import { LoadingState, ErrorDisplay } from '../components/ui';
@@ -26,7 +26,7 @@ const DashboardPage: React.FC = () => {
   const [profileSkills, setProfileSkills] = useState<string>('');
   const [nameError, setNameError] = useState<string>('');
 
-  const fetchProfiles = async () => {
+  const fetchProfiles = useCallback(async () => {
     if (!user) return;
     
     try {
@@ -43,7 +43,7 @@ const DashboardPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     if (user) {

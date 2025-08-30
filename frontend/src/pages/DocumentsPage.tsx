@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import { useUserPreferences } from '../contexts/UserPreferencesContext';
 import { useAuthStatus } from '../hooks';
@@ -19,7 +19,7 @@ const DocumentsPage: React.FC = () => {
   const { preferences } = useUserPreferences();
   const userTheme = preferences?.themeId || 'professional';
 
-  const fetchDocuments = async () => {
+  const fetchDocuments = useCallback(async () => {
     if (!requireAuth()) return;
     
     try {
@@ -41,7 +41,7 @@ const DocumentsPage: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [requireAuth, getAuthToken]);
 
   useEffect(() => {
     if (isAuthenticated) {
