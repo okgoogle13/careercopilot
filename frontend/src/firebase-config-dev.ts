@@ -54,7 +54,7 @@ class MockAuth {
     return Promise.resolve();
   }
   
-  onAuthStateChanged(callback: (user: any) => void) {
+  onAuthStateChanged(callback: (user: User | null) => void) {
     // Simulate logged out state
     callback(null);
     return () => {}; // unsubscribe function
@@ -62,14 +62,14 @@ class MockAuth {
 }
 
 // Initialize Firebase with proper error handling
-let app: any;
+let app: FirebaseApp;
 export let db: Firestore | MockFirestore;
 export let auth: Auth | MockAuth;
 
 if (DISABLE_FIREBASE) {
   console.log('🔧 Development Mode: Firebase disabled, using mock services');
-  db = new MockFirestore() as any;
-  auth = new MockAuth() as any;
+  db = new MockFirestore() as MockFirestore;
+  auth = new MockAuth() as MockAuth;
 } else {
   try {
     app = initializeApp(firebaseConfig);
@@ -81,8 +81,8 @@ if (DISABLE_FIREBASE) {
     console.error('Firebase error:', error);
     
     // Fallback to mock services
-    db = new MockFirestore() as any;
-    auth = new MockAuth() as any;
+    db = new MockFirestore() as MockFirestore;
+    auth = new MockAuth() as MockAuth;
   }
 }
 

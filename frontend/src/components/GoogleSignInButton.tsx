@@ -3,7 +3,11 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuth } from '../contexts/AuthContext';
 
 export const GoogleSignInButton: React.FC = () => {
-  const { setUser, setError, setLoading } = useAuth() as any;
+  const { setUser, setError, setLoading } = useAuth() as {
+    setUser: (user: any) => void;
+    setError: (error: Error | null) => void;
+    setLoading: (loading: boolean) => void;
+  };
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
