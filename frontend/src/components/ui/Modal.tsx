@@ -1,5 +1,6 @@
 // Accessible modal component with focus management
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useFocusTrap, useEscapeKey } from '../../hooks/useFocusTrap';
 
 interface ModalProps {
@@ -23,7 +24,11 @@ const Modal: React.FC<ModalProps> = ({
   closeOnBackdropClick = true,
   closeOnEscape = true,
 }) => {
-  const focusTrapRef = useFocusTrap({ active: isOpen });
+  const focusTrapRef = useFocusTrap({ 
+    active: isOpen,
+    initialFocus: true,
+    restoreFocus: true
+  });
 
   // Handle escape key
   useEscapeKey(onClose, closeOnEscape && isOpen);
@@ -31,9 +36,10 @@ const Modal: React.FC<ModalProps> = ({
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (isOpen) {
+      const originalStyle = window.getComputedStyle(document.body).overflow;
       document.body.style.overflow = 'hidden';
       return () => {
-        document.body.style.overflow = 'unset';
+        document.body.style.overflow = originalStyle;
       };
     }
   }, [isOpen]);
@@ -53,7 +59,7 @@ const Modal: React.FC<ModalProps> = ({
     }
   };
 
-  return (
+  const modalContent = (
     <div
       className="fixed inset-0 z-50 overflow-y-auto"
       role="dialog"
@@ -66,7 +72,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         {/* Backdrop */}
         <div
-          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          className="fixed inset-0 bg-background/80 backdrop-blur-sm transition-all duration-300"
           aria-hidden="true"
         />
 
@@ -75,7 +81,8 @@ const Modal: React.FC<ModalProps> = ({
           ref={focusTrapRef}
           className={`
             relative inline-block w-full ${sizeClasses[size]} transform rounded-lg 
-            bg-white px-6 py-6 text-left shadow-xl transition-all
+            bg-card border border-border px-6 py-6 text-left shadow-lg transition-all
+            animate-scale-in
             ${className}
           `}
           role="document"
@@ -84,7 +91,7 @@ const Modal: React.FC<ModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-4 top-4 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-md p-1"
+            className="absolute right-4 top-4 text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-card rounded-md p-1 transition-colors"
             aria-label="Close modal"
           >
             <svg
@@ -107,18 +114,20 @@ const Modal: React.FC<ModalProps> = ({
           {title && (
             <h2
               id="modal-title"
-              className="text-lg font-medium leading-6 text-gray-900 mb-4 pr-8"
+              className="text-lg font-medium leading-6 text-card-foreground mb-4 pr-8"
             >
               {title}
             </h2>
           )}
 
           {/* Content */}
-          <div className="modal-content">{children}</div>
+          <div className="modal-content text-card-foreground">{children}</div>
         </div>
       </div>
     </div>
   );
+
+  return createPortal(modalContent, document.body);
 };
 
 export default Modal;

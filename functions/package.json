@@ -17,11 +17,9 @@
     "clean": "rm -rf node_modules .firebase"
   },
   "dependencies": {
-    "@genkit-ai/firebase": "1.17.1",
     "firebase-admin": "12.7.0",
     "firebase-functions": "6.0.0"
   },
-  "devDependencies": {},
   "keywords": [
     "firebase",
     "cloud-functions",
@@ -29,5 +27,8 @@
     "backend"
   ],
   "author": "CareerCopilot Team",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "firebase-tools": "^14.15.1"
+  }
 }
