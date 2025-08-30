@@ -2,12 +2,21 @@ import React from 'react';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useAuth } from '../contexts/AuthContext';
 
+interface UserData {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  token: string;
+}
+
+interface AuthContextType {
+  setUser: (user: UserData) => void;
+  setError: (error: string | null) => void;
+  setLoading: (loading: boolean) => void;
+}
+
 export const GoogleSignInButton: React.FC = () => {
-  const { setUser, setError, setLoading } = useAuth() as {
-    setUser: (user: unknown) => void;
-    setError: (error: Error | null) => void;
-    setLoading: (loading: boolean) => void;
-  };
+  const { setUser, setError, setLoading } = useAuth() as AuthContextType;
 
   const handleGoogleSignIn = async () => {
     setLoading(true);
