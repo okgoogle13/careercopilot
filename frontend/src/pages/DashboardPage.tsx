@@ -52,7 +52,7 @@ const DashboardPage: React.FC = () => {
       setLoading(false);
       setError('You must be logged in to view this page.');
     }
-  }, [user]);
+  }, [user, fetchProfiles]);
 
   const openModalForCreate = () => {
     setCurrentProfile(null);

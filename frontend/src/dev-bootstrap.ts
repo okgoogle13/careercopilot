@@ -6,10 +6,10 @@ console.log('🔧 Development Bootstrap: Initializing Firebase-free environment'
 // Override any global Firebase references
 if (typeof window !== 'undefined') {
   // Prevent Firebase auto-initialization
-  (window as any).__FIREBASE_DEFAULTS__ = undefined;
+  (window as Record<string, unknown>).__FIREBASE_DEFAULTS__ = undefined;
   
   // Mock Firebase SDK if it gets loaded
-  (window as any).firebase = {
+  (window as Record<string, unknown>).firebase = {
     apps: [],
     initializeApp: () => {
       console.warn('🚫 Firebase initializeApp blocked - using fallback auth');

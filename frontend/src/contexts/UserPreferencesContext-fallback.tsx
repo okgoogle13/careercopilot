@@ -95,7 +95,7 @@ export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = (
       updatePreferences,
       loading,
     }),
-    [preferences, loading]
+    [preferences, loading, updatePreferences]
   );
 
   // Debug logging in development
