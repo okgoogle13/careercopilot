@@ -58,8 +58,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     console.log('🔧 AuthProvider: Setting up pure fallback auth listener');
-    
-    const unsubscribe = authService.onAuthStateChanged((authUser) => {
+
+    const unsubscribe = authService.onAuthStateChanged(authUser => {
       if (authUser) {
         // Get Firebase ID token for API calls
         authUser.getIdToken?.().then((token: string) => {
@@ -82,53 +82,67 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
   }, []);
 
-  const login = useCallback(async (email: string, password: string): Promise<User> => {
-    setLoading(true);
-    setError(null);
-    try {
-      const firebaseUser = await authService.signIn(email, password) as FirebaseUser;
-      const token = await firebaseUser.getIdToken();
-      const user: User = {
-        uid: firebaseUser.uid,
-        email: firebaseUser.email,
-        displayName: firebaseUser.displayName,
-        token,
-        getIdToken: () => firebaseUser.getIdToken(),
-      };
-      setUser(user);
-      return user;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Login failed';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const login = useCallback(
+    async (email: string, password: string): Promise<User> => {
+      setLoading(true);
+      setError(null);
+      try {
+        const firebaseUser = (await authService.signIn(
+          email,
+          password
+        )) as FirebaseUser;
+        const token = await firebaseUser.getIdToken();
+        const user: User = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName,
+          token,
+          getIdToken: () => firebaseUser.getIdToken(),
+        };
+        setUser(user);
+        return user;
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : 'Login failed';
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
 
-  const register = useCallback(async (email: string, password: string): Promise<User> => {
-    setLoading(true);
-    setError(null);
-    try {
-      const firebaseUser = await authService.signUp(email, password) as FirebaseUser;
-      const token = await firebaseUser.getIdToken();
-      const user: User = {
-        uid: firebaseUser.uid,
-        email: firebaseUser.email,
-        displayName: firebaseUser.displayName,
-        token,
-        getIdToken: () => firebaseUser.getIdToken(),
-      };
-      setUser(user);
-      return user;
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Registration failed';
-      setError(errorMessage);
-      throw err;
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const register = useCallback(
+    async (email: string, password: string): Promise<User> => {
+      setLoading(true);
+      setError(null);
+      try {
+        const firebaseUser = (await authService.signUp(
+          email,
+          password
+        )) as FirebaseUser;
+        const token = await firebaseUser.getIdToken();
+        const user: User = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName,
+          token,
+          getIdToken: () => firebaseUser.getIdToken(),
+        };
+        setUser(user);
+        return user;
+      } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : 'Registration failed';
+        setError(errorMessage);
+        throw err;
+      } finally {
+        setLoading(false);
+      }
+    },
+    []
+  );
 
   const logout = useCallback(async () => {
     setLoading(true);
@@ -145,13 +159,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-    const connectionStatus = useMemo(() => {
-      const status = authService.getConnectionStatus();
-      return {
-        ...status,
-        mode: import.meta.env.MODE || 'unknown',
-      };
-    }, []);
+  const connectionStatus = useMemo(() => {
+    const status = authService.getConnectionStatus();
+    return {
+      ...status,
+      mode: import.meta.env.MODE || 'unknown',
+    };
+  }, []);
 
   const value = useMemo(
     () => ({
@@ -166,7 +180,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setError,
       setLoading,
     }),
-    [user, loading, logout, login, register, connectionStatus, error, setUser, setError, setLoading]
+    [
+      user,
+      loading,
+      logout,
+      login,
+      register,
+      connectionStatus,
+      error,
+      setUser,
+      setError,
+      setLoading,
+    ]
   );
 
   // Show debug info in development

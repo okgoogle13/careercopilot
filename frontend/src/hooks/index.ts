@@ -15,4 +15,8 @@ export {
 } from './useKeyboardNavigation';
 export { useAuthStatus } from './useAuthStatus';
 export { useAnalysisData } from './useAnalysisData';
-export type { AtsResult, DocumentType, KeywordPlacementSuggestion } from './useAnalysisData';
+export type {
+  AtsResult,
+  DocumentType,
+  KeywordPlacementSuggestion,
+} from './useAnalysisData';

@@ -2,10 +2,18 @@ import React, { useState } from 'react';
 
 // Types (stubbed for now)
 import ResumeUpload from '../ResumeUpload/ResumeUpload';
-import TemplateSelector, { Template } from '../DocumentGeneration/TemplateSelector';
+import TemplateSelector, {
+  Template,
+} from '../DocumentGeneration/TemplateSelector';
 import DocumentPreview from '../DocumentGeneration/DocumentPreview';
 
-type WorkflowStep = 'upload' | 'analysis' | 'templates' | 'generation' | 'preview' | 'export';
+type WorkflowStep =
+  | 'upload'
+  | 'analysis'
+  | 'templates'
+  | 'generation'
+  | 'preview'
+  | 'export';
 
 interface ResumeData {
   fileName: string;
@@ -30,7 +38,9 @@ export const WorkflowManager: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<WorkflowStep>('upload');
   const [resumeData, setResumeData] = useState<ResumeData | null>(null);
   const [jobDescription, setJobDescription] = useState<string>('');
-  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<Template | null>(
+    null
+  );
   const [generatedContent, setGeneratedContent] = useState<string>('');
 
   const handleResumeUpload = (uploadedData: ResumeData) => {
@@ -57,7 +67,7 @@ export const WorkflowManager: React.FC = () => {
     { step: 'analysis', label: 'ATS Analysis', icon: '🔍' },
     { step: 'templates', label: 'Select Template', icon: '🎨' },
     { step: 'generation', label: 'Generate Document', icon: '⚙️' },
-    { step: 'preview', label: 'Preview & Export', icon: '👁️' }
+    { step: 'preview', label: 'Preview & Export', icon: '👁️' },
   ];
 
   const getStepStatus = (step: WorkflowStep) => {
@@ -80,7 +90,9 @@ export const WorkflowManager: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">Resume Optimization Workflow</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">
+        Resume Optimization Workflow
+      </h1>
       {/* Progress Indicator */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
@@ -90,15 +102,25 @@ export const WorkflowManager: React.FC = () => {
                 className={`relative flex items-center justify-center w-12 h-12 rounded-full cursor-pointer transition-all ${
                   getStepStatus(indicator.step as WorkflowStep) === 'completed'
                     ? 'bg-green-500 text-white'
-                    : getStepStatus(indicator.step as WorkflowStep) === 'current'
-                    ? 'bg-blue-500 text-white ring-4 ring-blue-200'
-                    : 'bg-gray-200 text-gray-600'
+                    : getStepStatus(indicator.step as WorkflowStep) ===
+                        'current'
+                      ? 'bg-blue-500 text-white ring-4 ring-blue-200'
+                      : 'bg-gray-200 text-gray-600'
                 }`}
                 onClick={() => goToStep(indicator.step as WorkflowStep)}
               >
-                {getStepStatus(indicator.step as WorkflowStep) === 'completed' ? (
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                {getStepStatus(indicator.step as WorkflowStep) ===
+                'completed' ? (
+                  <svg
+                    className="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 ) : (
                   <span className="text-xl">{indicator.icon}</span>
@@ -108,12 +130,18 @@ export const WorkflowManager: React.FC = () => {
                 </div>
               </div>
               {index < stepIndicators.length - 1 && (
-                <div className={`flex-1 h-1 mx-4 ${
-                  getStepStatus(stepIndicators[index + 1].step as WorkflowStep) === 'completed' || 
-                  getStepStatus(stepIndicators[index + 1].step as WorkflowStep) === 'current'
-                    ? 'bg-green-500' 
-                    : 'bg-gray-200'
-                }`} />
+                <div
+                  className={`flex-1 h-1 mx-4 ${
+                    getStepStatus(
+                      stepIndicators[index + 1].step as WorkflowStep
+                    ) === 'completed' ||
+                    getStepStatus(
+                      stepIndicators[index + 1].step as WorkflowStep
+                    ) === 'current'
+                      ? 'bg-green-500'
+                      : 'bg-gray-200'
+                  }`}
+                />
               )}
             </div>
           ))}
@@ -130,7 +158,9 @@ export const WorkflowManager: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Resume Summary */}
             <div className="bg-white p-6 rounded-lg shadow-md border">
-              <h3 className="text-lg font-semibold mb-4">Resume Analysis Results</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                Resume Analysis Results
+              </h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span>File:</span>
@@ -138,10 +168,15 @@ export const WorkflowManager: React.FC = () => {
                 </div>
                 <div className="flex justify-between">
                   <span>ATS Score:</span>
-                  <span className={`font-bold ${
-                    resumeData.atsScore >= 80 ? 'text-green-600' : 
-                    resumeData.atsScore >= 60 ? 'text-yellow-600' : 'text-red-600'
-                  }`}>
+                  <span
+                    className={`font-bold ${
+                      resumeData.atsScore >= 80
+                        ? 'text-green-600'
+                        : resumeData.atsScore >= 60
+                          ? 'text-yellow-600'
+                          : 'text-red-600'
+                    }`}
+                  >
                     {resumeData.atsScore}%
                   </span>
                 </div>
@@ -160,10 +195,12 @@ export const WorkflowManager: React.FC = () => {
             </div>
             {/* Job Description */}
             <div className="bg-white p-6 rounded-lg shadow-md border">
-              <h3 className="text-lg font-semibold mb-4">Job Description (Optional)</h3>
+              <h3 className="text-lg font-semibold mb-4">
+                Job Description (Optional)
+              </h3>
               <textarea
                 value={jobDescription}
-                onChange={(e) => setJobDescription(e.target.value)}
+                onChange={e => setJobDescription(e.target.value)}
                 placeholder="Paste the job description here for better template matching..."
                 className="w-full h-32 p-3 border rounded-lg resize-none"
               />
@@ -179,8 +216,13 @@ export const WorkflowManager: React.FC = () => {
         {currentStep === 'templates' && (
           <div>
             <div className="mb-6">
-              <h2 className="text-2xl font-semibold mb-2">Select Your Template</h2>
-              <p className="text-gray-600">Choose a template optimized for your ATS score and job requirements</p>
+              <h2 className="text-2xl font-semibold mb-2">
+                Select Your Template
+              </h2>
+              <p className="text-gray-600">
+                Choose a template optimized for your ATS score and job
+                requirements
+              </p>
             </div>
             <TemplateSelector
               selectedTemplate={selectedTemplate}
@@ -194,15 +236,21 @@ export const WorkflowManager: React.FC = () => {
             <div className="mb-6">
               <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-500 border-t-transparent mx-auto"></div>
             </div>
-            <h2 className="text-2xl font-semibold mb-2">Generating Your Document</h2>
-            <p className="text-gray-600">Applying template "{selectedTemplate?.name}" to your resume...</p>
+            <h2 className="text-2xl font-semibold mb-2">
+              Generating Your Document
+            </h2>
+            <p className="text-gray-600">
+              Applying template "{selectedTemplate?.name}" to your resume...
+            </p>
           </div>
         )}
         {currentStep === 'preview' && generatedContent && selectedTemplate && (
           <div>
             <div className="mb-6">
               <h2 className="text-2xl font-semibold mb-2">Document Preview</h2>
-              <p className="text-gray-600">Review your optimized document and export when ready</p>
+              <p className="text-gray-600">
+                Review your optimized document and export when ready
+              </p>
             </div>
             <DocumentPreview
               documentContent={generatedContent}
@@ -227,12 +275,22 @@ export const WorkflowManager: React.FC = () => {
         {currentStep === 'export' && (
           <div className="text-center py-16">
             <div className="mb-6">
-              <svg className="w-16 h-16 text-green-500 mx-auto" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              <svg
+                className="w-16 h-16 text-green-500 mx-auto"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                  clipRule="evenodd"
+                />
               </svg>
             </div>
             <h2 className="text-2xl font-semibold mb-2">Export Complete!</h2>
-            <p className="text-gray-600 mb-6">Your optimized resume has been prepared for download.</p>
+            <p className="text-gray-600 mb-6">
+              Your optimized resume has been prepared for download.
+            </p>
             <div className="flex justify-center gap-4">
               <button
                 onClick={() => setCurrentStep('preview')}
@@ -259,5 +317,5 @@ export const WorkflowManager: React.FC = () => {
     </div>
   );
 
-// ...existing code...
-}
+  // ...existing code...
+};

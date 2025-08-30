@@ -28,86 +28,121 @@ class TemplateAssetService {
       id: 'executive-professional',
       name: 'Executive Professional',
       category: 'professional',
-      description: 'Clean, traditional layout perfect for executive and senior-level positions',
-      features: ['ATS Optimized', 'Clean Layout', 'Professional Typography', 'Header Focus'],
+      description:
+        'Clean, traditional layout perfect for executive and senior-level positions',
+      features: [
+        'ATS Optimized',
+        'Clean Layout',
+        'Professional Typography',
+        'Header Focus',
+      ],
       atsScore: 95,
       isRecommended: true,
       assets: [],
       previewImages: {
         thumbnail: 'https://picsum.photos/200/260?random=1',
-        fullSize: 'https://picsum.photos/400/520?random=1'
-      }
+        fullSize: 'https://picsum.photos/400/520?random=1',
+      },
     },
     {
       id: 'modern-minimalist',
       name: 'Modern Minimalist',
       category: 'modern',
       description: 'Contemporary design with clean lines and modern typography',
-      features: ['Modern Design', 'Minimalist Layout', 'Color Accents', 'Icon Integration'],
+      features: [
+        'Modern Design',
+        'Minimalist Layout',
+        'Color Accents',
+        'Icon Integration',
+      ],
       atsScore: 88,
       isRecommended: true,
       assets: [],
       previewImages: {
         thumbnail: 'https://picsum.photos/200/260?random=2',
-        fullSize: 'https://picsum.photos/400/520?random=2'
-      }
+        fullSize: 'https://picsum.photos/400/520?random=2',
+      },
     },
     {
       id: 'creative-portfolio',
       name: 'Creative Portfolio',
       category: 'creative',
-      description: 'Bold design for creative professionals and portfolio showcases',
-      features: ['Creative Layout', 'Visual Elements', 'Portfolio Focus', 'Brand Integration'],
+      description:
+        'Bold design for creative professionals and portfolio showcases',
+      features: [
+        'Creative Layout',
+        'Visual Elements',
+        'Portfolio Focus',
+        'Brand Integration',
+      ],
       atsScore: 75,
       isRecommended: false,
       assets: [],
       previewImages: {
         thumbnail: 'https://picsum.photos/200/260?random=3',
-        fullSize: 'https://picsum.photos/400/520?random=3'
-      }
+        fullSize: 'https://picsum.photos/400/520?random=3',
+      },
     },
     {
       id: 'tech-specialist',
       name: 'Tech Specialist',
       category: 'professional',
-      description: 'Technical resume template optimized for IT and engineering roles',
-      features: ['Technical Focus', 'Skills Highlighting', 'Project Showcase', 'ATS Optimized'],
+      description:
+        'Technical resume template optimized for IT and engineering roles',
+      features: [
+        'Technical Focus',
+        'Skills Highlighting',
+        'Project Showcase',
+        'ATS Optimized',
+      ],
       atsScore: 92,
       isRecommended: true,
       assets: [],
       previewImages: {
         thumbnail: 'https://picsum.photos/200/260?random=4',
-        fullSize: 'https://picsum.photos/400/520?random=4'
-      }
+        fullSize: 'https://picsum.photos/400/520?random=4',
+      },
     },
     {
       id: 'startup-ready',
       name: 'Startup Ready',
       category: 'modern',
-      description: 'Dynamic template perfect for startup environments and fast-paced roles',
-      features: ['Dynamic Layout', 'Growth Focus', 'Innovation Highlight', 'Modern Typography'],
+      description:
+        'Dynamic template perfect for startup environments and fast-paced roles',
+      features: [
+        'Dynamic Layout',
+        'Growth Focus',
+        'Innovation Highlight',
+        'Modern Typography',
+      ],
       atsScore: 82,
       isRecommended: false,
       assets: [],
       previewImages: {
         thumbnail: 'https://picsum.photos/200/260?random=5',
-        fullSize: 'https://picsum.photos/400/520?random=5'
-      }
+        fullSize: 'https://picsum.photos/400/520?random=5',
+      },
     },
     {
       id: 'design-focused',
       name: 'Design Focused',
       category: 'creative',
-      description: 'Visual-first template for designers and creative professionals',
-      features: ['Visual Design', 'Portfolio Integration', 'Creative Typography', 'Brand Expression'],
+      description:
+        'Visual-first template for designers and creative professionals',
+      features: [
+        'Visual Design',
+        'Portfolio Integration',
+        'Creative Typography',
+        'Brand Expression',
+      ],
       atsScore: 70,
       isRecommended: false,
       assets: [],
       previewImages: {
         thumbnail: 'https://picsum.photos/200/260?random=6',
-        fullSize: 'https://picsum.photos/400/520?random=6'
-      }
-    }
+        fullSize: 'https://picsum.photos/400/520?random=6',
+      },
+    },
   ];
 
   /**
@@ -116,7 +151,7 @@ class TemplateAssetService {
   async getAvailableTemplates(): Promise<Template[]> {
     // Simulate API delay
     await this.delay(500);
-    
+
     return this.templates.map(template => ({
       id: template.id,
       name: template.name,
@@ -124,7 +159,7 @@ class TemplateAssetService {
       preview: template.previewImages.thumbnail,
       atsScore: template.atsScore,
       features: template.features,
-      isRecommended: template.isRecommended
+      isRecommended: template.isRecommended,
     }));
   }
 
@@ -133,7 +168,7 @@ class TemplateAssetService {
    */
   async getTemplate(id: string): Promise<TemplateMetadata | null> {
     await this.delay(200);
-    
+
     const template = this.templates.find(t => t.id === id);
     return template || null;
   }
@@ -141,9 +176,11 @@ class TemplateAssetService {
   /**
    * Get templates by category
    */
-  async getTemplatesByCategory(category: 'professional' | 'modern' | 'creative'): Promise<Template[]> {
+  async getTemplatesByCategory(
+    category: 'professional' | 'modern' | 'creative'
+  ): Promise<Template[]> {
     await this.delay(300);
-    
+
     return this.templates
       .filter(template => template.category === category)
       .map(template => ({
@@ -153,7 +190,7 @@ class TemplateAssetService {
         preview: template.previewImages.thumbnail,
         atsScore: template.atsScore,
         features: template.features,
-        isRecommended: template.isRecommended
+        isRecommended: template.isRecommended,
       }));
   }
 
@@ -162,7 +199,7 @@ class TemplateAssetService {
    */
   async getTemplateAssets(templateId: string): Promise<TemplateAsset[]> {
     await this.delay(200);
-    
+
     const template = this.templates.find(t => t.id === templateId);
     return template?.assets || [];
   }
@@ -170,9 +207,12 @@ class TemplateAssetService {
   /**
    * Download template as PDF
    */
-  async downloadTemplate(templateId: string, _userData: unknown): Promise<Blob> {
+  async downloadTemplate(
+    templateId: string,
+    _userData: unknown
+  ): Promise<Blob> {
     await this.delay(2000); // Simulate PDF generation time
-    
+
     // In a real implementation, this would call the backend API
     // For now, return a mock PDF blob
     const mockPdfContent = `%PDF-1.4
@@ -233,7 +273,7 @@ startxref
    */
   async getRecommendedTemplates(jobDescription: string): Promise<Template[]> {
     await this.delay(800);
-    
+
     // Simple keyword-based recommendation logic
     const jobKeywords = jobDescription.toLowerCase();
     let recommendedTemplates = [...this.templates];
@@ -241,21 +281,36 @@ startxref
     // Score templates based on job description
     recommendedTemplates = recommendedTemplates.map(template => {
       let score = template.atsScore;
-      
+
       // Boost scores based on job keywords
-      if (jobKeywords.includes('executive') || jobKeywords.includes('senior') || jobKeywords.includes('director')) {
+      if (
+        jobKeywords.includes('executive') ||
+        jobKeywords.includes('senior') ||
+        jobKeywords.includes('director')
+      ) {
         if (template.id === 'executive-professional') score += 10;
       }
-      
-      if (jobKeywords.includes('tech') || jobKeywords.includes('engineer') || jobKeywords.includes('developer')) {
+
+      if (
+        jobKeywords.includes('tech') ||
+        jobKeywords.includes('engineer') ||
+        jobKeywords.includes('developer')
+      ) {
         if (template.id === 'tech-specialist') score += 10;
       }
-      
-      if (jobKeywords.includes('startup') || jobKeywords.includes('fast-paced')) {
+
+      if (
+        jobKeywords.includes('startup') ||
+        jobKeywords.includes('fast-paced')
+      ) {
         if (template.id === 'startup-ready') score += 10;
       }
-      
-      if (jobKeywords.includes('creative') || jobKeywords.includes('design') || jobKeywords.includes('portfolio')) {
+
+      if (
+        jobKeywords.includes('creative') ||
+        jobKeywords.includes('design') ||
+        jobKeywords.includes('portfolio')
+      ) {
         if (template.category === 'creative') score += 10;
       }
 
@@ -264,7 +319,7 @@ startxref
 
     // Sort by score and return top templates
     recommendedTemplates.sort((a, b) => b.atsScore - a.atsScore);
-    
+
     return recommendedTemplates.slice(0, 3).map(template => ({
       id: template.id,
       name: template.name,
@@ -272,26 +327,29 @@ startxref
       preview: template.previewImages.thumbnail,
       atsScore: template.atsScore,
       features: template.features,
-      isRecommended: true
+      isRecommended: true,
     }));
   }
 
   /**
    * Validate template compatibility
    */
-  async validateTemplateCompatibility(templateId: string, _userProfile: unknown): Promise<{
+  async validateTemplateCompatibility(
+    templateId: string,
+    _userProfile: unknown
+  ): Promise<{
     isCompatible: boolean;
     warnings: string[];
     suggestions: string[];
   }> {
     await this.delay(400);
-    
+
     const template = this.templates.find(t => t.id === templateId);
     if (!template) {
       return {
         isCompatible: false,
         warnings: ['Template not found'],
-        suggestions: ['Please select a valid template']
+        suggestions: ['Please select a valid template'],
       };
     }
 
@@ -305,22 +363,29 @@ startxref
       typeof _userProfile === 'object' &&
       _userProfile !== null &&
       'experience' in _userProfile &&
-      typeof (_userProfile as { experience: unknown }).experience === 'number' &&
+      typeof (_userProfile as { experience: unknown }).experience ===
+        'number' &&
       (_userProfile as { experience: number }).experience > 10
     ) {
-      warnings.push('Creative templates may not be suitable for very senior positions');
-      suggestions.push('Consider using a professional template for senior roles');
+      warnings.push(
+        'Creative templates may not be suitable for very senior positions'
+      );
+      suggestions.push(
+        'Consider using a professional template for senior roles'
+      );
     }
 
     if (template.atsScore < 80) {
       warnings.push('This template has a lower ATS compatibility score');
-      suggestions.push('Consider using a more ATS-optimized template for better visibility');
+      suggestions.push(
+        'Consider using a more ATS-optimized template for better visibility'
+      );
     }
 
     return {
       isCompatible,
       warnings,
-      suggestions
+      suggestions,
     };
   }
 
@@ -340,18 +405,23 @@ startxref
     averageAtsScore: number;
   }> {
     await this.delay(200);
-    
-    const byCategory = this.templates.reduce((acc, template) => {
-      acc[template.category] = (acc[template.category] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
 
-    const averageAtsScore = this.templates.reduce((sum, t) => sum + t.atsScore, 0) / this.templates.length;
+    const byCategory = this.templates.reduce(
+      (acc, template) => {
+        acc[template.category] = (acc[template.category] || 0) + 1;
+        return acc;
+      },
+      {} as Record<string, number>
+    );
+
+    const averageAtsScore =
+      this.templates.reduce((sum, t) => sum + t.atsScore, 0) /
+      this.templates.length;
 
     return {
       totalTemplates: this.templates.length,
       byCategory,
-      averageAtsScore: Math.round(averageAtsScore)
+      averageAtsScore: Math.round(averageAtsScore),
     };
   }
 }

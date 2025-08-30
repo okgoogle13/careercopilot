@@ -9,24 +9,24 @@ interface KeywordsListProps {
 /**
  * Displays a list of keywords with appropriate styling based on match status
  */
-export const KeywordsList: React.FC<KeywordsListProps> = ({ 
-  title, 
-  keywords, 
-  variant 
+export const KeywordsList: React.FC<KeywordsListProps> = ({
+  title,
+  keywords,
+  variant,
 }) => {
   const variantStyles = {
     matched: {
       container: 'bg-green-50 border-green-200',
       badge: 'bg-green-100 text-green-800',
       icon: '✓',
-      iconColor: 'text-green-600'
+      iconColor: 'text-green-600',
     },
     missing: {
       container: 'bg-red-50 border-red-200',
       badge: 'bg-red-100 text-red-800',
       icon: '✗',
-      iconColor: 'text-red-600'
-    }
+      iconColor: 'text-red-600',
+    },
   };
 
   const styles = variantStyles[variant];
@@ -39,8 +39,8 @@ export const KeywordsList: React.FC<KeywordsListProps> = ({
           {title}
         </h3>
         <p className="text-sm text-gray-600">
-          {variant === 'matched' 
-            ? 'No specific keywords were identified as matches.' 
+          {variant === 'matched'
+            ? 'No specific keywords were identified as matches.'
             : 'No missing keywords identified - great job!'}
         </p>
       </div>

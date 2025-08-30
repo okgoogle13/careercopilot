@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Button } from "./ui/Button";
-import { ProfileCard } from "./ProfileCard";
-import { CreateProfileCard } from "./CreateProfileCard";
-import { Plus, User } from "lucide-react";
+import { useState } from 'react';
+import { Button } from './ui/Button';
+import { ProfileCard } from './ProfileCard';
+import { CreateProfileCard } from './CreateProfileCard';
+import { Plus, User } from 'lucide-react';
 
 interface Profile {
   id: string;
@@ -16,22 +16,22 @@ interface Profile {
 
 const mockProfiles: Profile[] = [
   {
-    id: "1",
-    name: "Nishant Dougall",
-    role: "Community Support Worker",
+    id: '1',
+    name: 'Nishant Dougall',
+    role: 'Community Support Worker',
     activeApplications: 8,
     atsScore: 87,
-    lastUpdated: "2 days ago",
-    avatarColor: "#e2b8ff",
+    lastUpdated: '2 days ago',
+    avatarColor: '#e2b8ff',
   },
   {
-    id: "2",
-    name: "Nishant Dougall",
-    role: "Peer Worker",
+    id: '2',
+    name: 'Nishant Dougall',
+    role: 'Peer Worker',
     activeApplications: 5,
     atsScore: 92,
-    lastUpdated: "1 week ago",
-    avatarColor: "#d4fb7f",
+    lastUpdated: '1 week ago',
+    avatarColor: '#d4fb7f',
   },
 ];
 
@@ -51,14 +51,16 @@ export function Dashboard({ onCreateProfile, onEditProfile }: DashboardProps) {
     <div className="flex-1 p-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-foreground mb-2">Your Job Seeker Profiles</h1>
+          <h1 className="text-2xl font-bold text-foreground mb-2">
+            Your Job Seeker Profiles
+          </h1>
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span>Dashboard</span>
             <span>ATS Analysis</span>
           </div>
-          <Button 
+          <Button
             onClick={onCreateProfile}
             className="bg-primary hover:bg-primary/90 text-primary-foreground"
           >
@@ -72,7 +74,7 @@ export function Dashboard({ onCreateProfile, onEditProfile }: DashboardProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {profiles.map((profile) => (
+        {profiles.map(profile => (
           <ProfileCard
             key={profile.id}
             name={profile.name}

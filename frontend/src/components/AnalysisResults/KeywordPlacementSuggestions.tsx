@@ -13,9 +13,9 @@ interface KeywordPlacementSuggestionsProps {
 /**
  * Displays detailed suggestions for where and how to place missing keywords
  */
-export const KeywordPlacementSuggestions: React.FC<KeywordPlacementSuggestionsProps> = ({ 
-  suggestions 
-}) => {
+export const KeywordPlacementSuggestions: React.FC<
+  KeywordPlacementSuggestionsProps
+> = ({ suggestions }) => {
   if (!suggestions || suggestions.length === 0) {
     return null;
   }
@@ -27,9 +27,10 @@ export const KeywordPlacementSuggestions: React.FC<KeywordPlacementSuggestionsPr
         Keyword Placement Suggestions
       </h3>
       <p className="text-sm text-gray-600 mb-6">
-        Here are specific recommendations for incorporating missing keywords into your resume:
+        Here are specific recommendations for incorporating missing keywords
+        into your resume:
       </p>
-      
+
       <div className="space-y-4">
         {suggestions.map((suggestion, index) => (
           <div
@@ -42,7 +43,7 @@ export const KeywordPlacementSuggestions: React.FC<KeywordPlacementSuggestionsPr
                 {suggestion.keyword}
               </span>
             </div>
-            
+
             <div className="mb-3">
               <span className="font-semibold text-gray-700 text-sm">
                 💼 Suggested Location:
@@ -51,7 +52,7 @@ export const KeywordPlacementSuggestions: React.FC<KeywordPlacementSuggestionsPr
                 {suggestion.suggested_location}
               </p>
             </div>
-            
+
             <div className="bg-white p-4 rounded-md border-l-4 border-blue-400">
               <span className="font-semibold text-gray-700 text-sm flex items-center mb-2">
                 <span className="mr-1">📝</span>
@@ -64,12 +65,13 @@ export const KeywordPlacementSuggestions: React.FC<KeywordPlacementSuggestionsPr
           </div>
         ))}
       </div>
-      
+
       <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
         <p className="text-sm text-yellow-800">
-          <strong>💡 Pro Tip:</strong> When incorporating these keywords, make sure they fit naturally 
-          within the context of your experience. Avoid keyword stuffing and focus on authentic 
-          descriptions of your skills and accomplishments.
+          <strong>💡 Pro Tip:</strong> When incorporating these keywords, make
+          sure they fit naturally within the context of your experience. Avoid
+          keyword stuffing and focus on authentic descriptions of your skills
+          and accomplishments.
         </p>
       </div>
     </div>
