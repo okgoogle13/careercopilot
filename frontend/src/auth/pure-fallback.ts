@@ -20,12 +20,14 @@ class PureFallbackAuth {
     loading: false,
     error: null,
   };
-  
+
   private listeners: Array<(user: User | null) => void> = [];
   private storageKey = 'careercopilot-pure-auth';
 
   constructor() {
-    console.log('🔧 PureFallbackAuth: Initializing pure fallback authentication');
+    console.log(
+      '🔧 PureFallbackAuth: Initializing pure fallback authentication'
+    );
     this.loadPersistedAuth();
   }
 
@@ -40,14 +42,17 @@ class PureFallbackAuth {
         console.log('🔧 PureFallbackAuth: No persisted user found');
       }
     } catch (error) {
-      console.warn('⚠️ PureFallbackAuth: Failed to load persisted auth:', error);
+      console.warn(
+        '⚠️ PureFallbackAuth: Failed to load persisted auth:',
+        error
+      );
     }
   }
 
   private setState(newState: Partial<AuthState>) {
     this.state = { ...this.state, ...newState };
     console.log('🔧 PureFallbackAuth: State updated:', this.state);
-    
+
     // Notify listeners
     this.listeners.forEach(listener => listener(this.state.user));
   }
@@ -88,16 +93,19 @@ class PureFallbackAuth {
         uid: 'fallback-user-' + btoa(email).replace(/[^a-zA-Z0-9]/g, ''),
         email,
         displayName: email.split('@')[0],
-        token: 'fallback-token-' + btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
+        token:
+          'fallback-token-' +
+          btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
       };
 
       this.setState({ user, loading: false, error: null });
       this.persistAuth(user);
-      
+
       console.log('✅ PureFallbackAuth: Sign-in successful for:', email);
       return user;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Authentication failed';
       console.error('❌ PureFallbackAuth: Sign-in failed:', errorMessage);
       this.setState({ loading: false, error: errorMessage });
       throw new Error(errorMessage);
@@ -130,16 +138,19 @@ class PureFallbackAuth {
         uid: 'fallback-user-' + btoa(email).replace(/[^a-zA-Z0-9]/g, ''),
         email,
         displayName: email.split('@')[0],
-        token: 'fallback-token-' + btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
+        token:
+          'fallback-token-' +
+          btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
       };
 
       this.setState({ user, loading: false, error: null });
       this.persistAuth(user);
-      
+
       console.log('✅ PureFallbackAuth: Sign-up successful for:', email);
       return user;
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Registration failed';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Registration failed';
       console.error('❌ PureFallbackAuth: Sign-up failed:', errorMessage);
       this.setState({ loading: false, error: errorMessage });
       throw new Error(errorMessage);
@@ -164,10 +175,10 @@ class PureFallbackAuth {
   onAuthStateChanged(callback: (user: User | null) => void): () => void {
     console.log('🔧 PureFallbackAuth: Adding auth state listener');
     this.listeners.push(callback);
-    
+
     // Immediately call with current state
     callback(this.state.user);
-    
+
     // Return unsubscribe function
     return () => {
       const index = this.listeners.indexOf(callback);
@@ -184,7 +195,7 @@ class PureFallbackAuth {
       firebaseAvailable: false,
       usingFallback: true,
       connectionAttempts: 0,
-      mode: 'pure-fallback'
+      mode: 'pure-fallback',
     };
   }
 }
@@ -199,4 +210,7 @@ export const demoUsers = [
   { email: 'dev@local.com', password: 'dev123', name: 'Developer' },
 ];
 
-console.log('🔧 Pure Fallback Auth initialized. Demo users available:', demoUsers.map(u => u.email));
+console.log(
+  '🔧 Pure Fallback Auth initialized. Demo users available:',
+  demoUsers.map(u => u.email)
+);

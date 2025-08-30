@@ -1,6 +1,6 @@
-import { BarChart3, FileText, Plus } from "lucide-react";
-import { Button } from "./ui/Button";
-import { CareerCopilotLogo } from "./CareerCopilotLogo";
+import { BarChart3, FileText, Plus } from 'lucide-react';
+import { Button } from './ui/Button';
+import { CareerCopilotLogo } from './CareerCopilotLogo';
 
 interface SidebarProps {
   activeTab: string;
@@ -9,8 +9,8 @@ interface SidebarProps {
 
 export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
   const menuItems = [
-    { id: "dashboard", label: "Dashboard", icon: BarChart3 },
-    { id: "ats-analysis", label: "ATS Analysis", icon: FileText },
+    { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+    { id: 'ats-analysis', label: 'ATS Analysis', icon: FileText },
   ];
 
   return (
@@ -20,20 +20,22 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
             <CareerCopilotLogo className="text-primary-foreground" size={20} />
           </div>
-          <span className="font-bold text-sidebar-foreground">Career Copilot</span>
+          <span className="font-bold text-sidebar-foreground">
+            Career Copilot
+          </span>
         </div>
       </div>
-      
+
       <nav className="flex-1 px-4">
         <ul className="space-y-2">
-          {menuItems.map((item) => (
+          {menuItems.map(item => (
             <li key={item.id}>
               <Button
                 variant="ghost"
                 className={`w-full justify-start gap-3 h-12 text-left ${
                   activeTab === item.id
-                    ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                    : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    ? 'bg-sidebar-accent text-sidebar-accent-foreground'
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                 }`}
                 onClick={() => onTabChange(item.id)}
               >

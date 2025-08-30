@@ -8,12 +8,15 @@ const DISABLE_FIREBASE = import.meta.env.VITE_DISABLE_FIREBASE === 'true';
 
 // Development Firebase configuration
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "demo-key",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "demo.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "demo-project",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "demo.appspot.com",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "123456789",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "demo-app-id",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || 'demo-key',
+  authDomain:
+    import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || 'demo.firebaseapp.com',
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || 'demo-project',
+  storageBucket:
+    import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || 'demo.appspot.com',
+  messagingSenderId:
+    import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || '123456789',
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || 'demo-app-id',
 };
 
 // Mock Firebase services for development
@@ -37,23 +40,23 @@ class MockFirestore {
 
 class MockAuth {
   currentUser = null;
-  
+
   signInWithEmailAndPassword() {
     return Promise.resolve({
-      user: { uid: 'mock-user-id', email: 'dev@example.com' }
+      user: { uid: 'mock-user-id', email: 'dev@example.com' },
     });
   }
-  
+
   createUserWithEmailAndPassword() {
     return Promise.resolve({
-      user: { uid: 'mock-user-id', email: 'dev@example.com' }
+      user: { uid: 'mock-user-id', email: 'dev@example.com' },
     });
   }
-  
+
   signOut() {
     return Promise.resolve();
   }
-  
+
   onAuthStateChanged(callback: (user: User | null) => void) {
     // Simulate logged out state
     callback(null);
@@ -77,9 +80,11 @@ if (DISABLE_FIREBASE) {
     auth = getAuth(app);
     console.log('🔥 Firebase initialized successfully');
   } catch (error) {
-    console.warn('⚠️ Firebase initialization failed, falling back to mock services');
+    console.warn(
+      '⚠️ Firebase initialization failed, falling back to mock services'
+    );
     console.error('Firebase error:', error);
-    
+
     // Fallback to mock services
     db = new MockFirestore() as MockFirestore;
     auth = new MockAuth() as MockAuth;

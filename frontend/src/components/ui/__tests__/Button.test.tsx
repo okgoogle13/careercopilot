@@ -13,6 +13,6 @@ describe('Button', () => {
     const handleClick = jest.fn();
     render(<Button onClick={handleClick}>Click</Button>);
     screen.getByText('Click').click();
-  expect(handleClick).toHaveBeenCalled();
+    expect(handleClick).toHaveBeenCalled();
   });
 });

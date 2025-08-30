@@ -29,60 +29,77 @@ class ATSComplianceValidator {
       name: 'Simple Formatting',
       description: 'Template uses simple, ATS-friendly formatting',
       weight: 25,
-      check: (template) => {
+      check: template => {
         // Professional and modern templates typically have better ATS compatibility
-        return template.category === 'professional' || template.category === 'modern';
+        return (
+          template.category === 'professional' || template.category === 'modern'
+        );
       },
-      recommendation: 'Use professional or modern templates for better ATS compatibility'
+      recommendation:
+        'Use professional or modern templates for better ATS compatibility',
     },
     {
       id: 'readable-fonts',
       name: 'Readable Fonts',
       description: 'Template uses standard, readable fonts',
       weight: 15,
-      check: (template) => {
+      check: template => {
         // Assume professional templates use standard fonts
-        return template.features.includes('Professional Typography') || template.features.includes('Clean Layout');
+        return (
+          template.features.includes('Professional Typography') ||
+          template.features.includes('Clean Layout')
+        );
       },
-      recommendation: 'Choose templates with standard, readable typography'
+      recommendation: 'Choose templates with standard, readable typography',
     },
     {
       id: 'clear-sections',
       name: 'Clear Section Headers',
       description: 'Template has clear, well-defined sections',
       weight: 20,
-      check: (template) => {
-        return template.features.includes('Header Focus') || template.features.includes('Clean Layout');
+      check: template => {
+        return (
+          template.features.includes('Header Focus') ||
+          template.features.includes('Clean Layout')
+        );
       },
-      recommendation: 'Ensure your template has clearly defined section headers'
+      recommendation:
+        'Ensure your template has clearly defined section headers',
     },
     {
       id: 'keyword-friendly',
       name: 'Keyword Optimization',
       description: 'Template layout supports keyword optimization',
       weight: 25,
-      check: (template) => {
-        return template.features.includes('ATS Optimized') || template.features.includes('Skills Highlighting');
+      check: template => {
+        return (
+          template.features.includes('ATS Optimized') ||
+          template.features.includes('Skills Highlighting')
+        );
       },
-      recommendation: 'Select templates that are specifically ATS-optimized'
+      recommendation: 'Select templates that are specifically ATS-optimized',
     },
     {
       id: 'standard-structure',
       name: 'Standard Structure',
       description: 'Template follows standard resume structure',
       weight: 15,
-      check: (template) => {
+      check: template => {
         // All templates should follow standard structure, but creative ones might not
         return template.category !== 'creative';
       },
-      recommendation: 'Avoid overly creative layouts that might confuse ATS systems'
-    }
+      recommendation:
+        'Avoid overly creative layouts that might confuse ATS systems',
+    },
   ];
 
   /**
    * Analyze template ATS compliance
    */
-  async analyzeTemplate(template: Template, jobDescription?: string): Promise<number> {
+  async analyzeTemplate(
+    template: Template,
+    jobDescription?: string
+  ): Promise<number> {
     // Simulate analysis delay
     await this.delay(300);
 
@@ -113,31 +130,37 @@ class ATSComplianceValidator {
   /**
    * Get detailed ATS analysis
    */
-  async getDetailedAnalysis(template: Template, jobDescription?: string): Promise<ATSAnalysisResult> {
+  async getDetailedAnalysis(
+    template: Template,
+    jobDescription?: string
+  ): Promise<ATSAnalysisResult> {
     await this.delay(500);
 
     const score = await this.analyzeTemplate(template, jobDescription);
     const factors = await this.analyzeFactors(template, jobDescription);
-    
+
     return {
       score,
       category: this.getScoreCategory(score),
       factors,
       recommendations: this.generateRecommendations(template, jobDescription),
-      warnings: this.generateWarnings(template, score)
+      warnings: this.generateWarnings(template, score),
     };
   }
 
   /**
    * Validate multiple templates and return rankings
    */
-  async rankTemplates(templates: Template[], jobDescription?: string): Promise<Array<Template & { atsScore: number }>> {
+  async rankTemplates(
+    templates: Template[],
+    jobDescription?: string
+  ): Promise<Array<Template & { atsScore: number }>> {
     await this.delay(800);
 
     const analyzed = await Promise.all(
-      templates.map(async (template) => ({
+      templates.map(async template => ({
         ...template,
-        atsScore: await this.analyzeTemplate(template, jobDescription)
+        atsScore: await this.analyzeTemplate(template, jobDescription),
       }))
     );
 
@@ -160,7 +183,7 @@ class ATSComplianceValidator {
 
     // Check critical rules (high weight)
     const criticalRules = this.rules.filter(rule => rule.weight >= 20);
-    
+
     for (const rule of criticalRules) {
       if (!rule.check(template)) {
         failedRules.push(rule.name);
@@ -171,14 +194,17 @@ class ATSComplianceValidator {
     return {
       meets: failedRules.length === 0,
       failedRules,
-      criticalIssues
+      criticalIssues,
     };
   }
 
   /**
    * Get ATS optimization suggestions
    */
-  async getOptimizationSuggestions(template: Template, jobDescription?: string): Promise<{
+  async getOptimizationSuggestions(
+    template: Template,
+    jobDescription?: string
+  ): Promise<{
     immediate: string[];
     recommended: string[];
     advanced: string[];
@@ -204,29 +230,38 @@ class ATSComplianceValidator {
 
     // Add job-specific suggestions if job description provided
     if (jobDescription) {
-      const jobSuggestions = this.getJobSpecificSuggestions(template, jobDescription);
+      const jobSuggestions = this.getJobSpecificSuggestions(
+        template,
+        jobDescription
+      );
       recommended.push(...jobSuggestions);
     }
 
     return {
       immediate,
       recommended,
-      advanced
+      advanced,
     };
   }
 
   /**
    * Calculate job match bonus
    */
-  private calculateJobMatchBonus(template: Template, jobDescription: string): number {
+  private calculateJobMatchBonus(
+    template: Template,
+    jobDescription: string
+  ): number {
     const jobKeywords = jobDescription.toLowerCase();
     let bonus = 0;
 
     // Industry-specific bonuses
-    if (jobKeywords.includes('executive') && template.id === 'executive-professional') {
+    if (
+      jobKeywords.includes('executive') &&
+      template.id === 'executive-professional'
+    ) {
       bonus += 5;
     }
-    
+
     if (jobKeywords.includes('tech') || jobKeywords.includes('engineer')) {
       if (template.id === 'tech-specialist') bonus += 5;
       if (template.features.includes('Technical Focus')) bonus += 3;
@@ -246,58 +281,67 @@ class ATSComplianceValidator {
   /**
    * Analyze individual factors
    */
-  private async analyzeFactors(template: Template, jobDescription?: string): Promise<ATSAnalysisResult['factors']> {
+  private async analyzeFactors(
+    template: Template,
+    jobDescription?: string
+  ): Promise<ATSAnalysisResult['factors']> {
     return {
       readability: this.analyzeReadability(template),
-      keywordOptimization: this.analyzeKeywordOptimization(template, jobDescription),
+      keywordOptimization: this.analyzeKeywordOptimization(
+        template,
+        jobDescription
+      ),
       formatting: this.analyzeFormatting(template),
-      structure: this.analyzeStructure(template)
+      structure: this.analyzeStructure(template),
     };
   }
 
   private analyzeReadability(template: Template): number {
     let score = 70; // Base score
-    
+
     if (template.features.includes('Professional Typography')) score += 15;
     if (template.features.includes('Clean Layout')) score += 10;
     if (template.category === 'creative') score -= 10; // Creative templates might be less readable to ATS
-    
+
     return Math.min(score, 100);
   }
 
-  private analyzeKeywordOptimization(template: Template, jobDescription?: string): number {
+  private analyzeKeywordOptimization(
+    template: Template,
+    jobDescription?: string
+  ): number {
     let score = 60; // Base score
-    
+
     if (template.features.includes('ATS Optimized')) score += 20;
     if (template.features.includes('Skills Highlighting')) score += 15;
     if (template.features.includes('Technical Focus')) score += 10;
-    
+
     if (jobDescription) {
       score += 5; // Bonus for having job description to optimize against
     }
-    
+
     return Math.min(score, 100);
   }
 
   private analyzeFormatting(template: Template): number {
     let score = 75; // Base score
-    
+
     if (template.category === 'professional') score += 15;
     if (template.category === 'modern') score += 10;
     if (template.category === 'creative') score -= 15;
-    
+
     if (template.features.includes('Clean Layout')) score += 10;
-    
+
     return Math.min(Math.max(score, 0), 100);
   }
 
   private analyzeStructure(template: Template): number {
     let score = 80; // Base score
-    
+
     if (template.features.includes('Header Focus')) score += 10;
     if (template.features.includes('Project Showcase')) score += 5;
     if (template.category === 'creative') score -= 10;
-    
+
     return Math.min(score, 100);
   }
 
@@ -314,31 +358,45 @@ class ATSComplianceValidator {
   /**
    * Generate recommendations
    */
-  private generateRecommendations(template: Template, jobDescription?: string): string[] {
+  private generateRecommendations(
+    template: Template,
+    jobDescription?: string
+  ): string[] {
     const recommendations: string[] = [];
-    
+
     // Base recommendations by category
     if (template.category === 'creative') {
-      recommendations.push('Consider using a more traditional template for better ATS compatibility');
+      recommendations.push(
+        'Consider using a more traditional template for better ATS compatibility'
+      );
     }
-    
+
     if (!template.features.includes('ATS Optimized')) {
-      recommendations.push('Look for templates specifically marked as ATS-optimized');
+      recommendations.push(
+        'Look for templates specifically marked as ATS-optimized'
+      );
     }
-    
+
     // Job-specific recommendations
     if (jobDescription) {
       const jobKeywords = jobDescription.toLowerCase();
-      
+
       if (jobKeywords.includes('senior') || jobKeywords.includes('executive')) {
-        recommendations.push('Use a professional template that conveys executive presence');
+        recommendations.push(
+          'Use a professional template that conveys executive presence'
+        );
       }
-      
-      if (jobKeywords.includes('tech') && !template.features.includes('Technical Focus')) {
-        recommendations.push('Consider a template that highlights technical skills and projects');
+
+      if (
+        jobKeywords.includes('tech') &&
+        !template.features.includes('Technical Focus')
+      ) {
+        recommendations.push(
+          'Consider a template that highlights technical skills and projects'
+        );
       }
     }
-    
+
     return recommendations;
   }
 
@@ -347,41 +405,55 @@ class ATSComplianceValidator {
    */
   private generateWarnings(template: Template, score: number): string[] {
     const warnings: string[] = [];
-    
+
     if (score < 70) {
       warnings.push('This template may have low ATS compatibility');
     }
-    
+
     if (template.category === 'creative' && score < 80) {
-      warnings.push('Creative templates can sometimes be difficult for ATS systems to parse');
+      warnings.push(
+        'Creative templates can sometimes be difficult for ATS systems to parse'
+      );
     }
-    
+
     if (!template.features.includes('ATS Optimized') && score < 85) {
       warnings.push('Template is not specifically optimized for ATS systems');
     }
-    
+
     return warnings;
   }
 
   /**
    * Get job-specific suggestions
    */
-  private getJobSpecificSuggestions(template: Template, jobDescription: string): string[] {
+  private getJobSpecificSuggestions(
+    template: Template,
+    jobDescription: string
+  ): string[] {
     const suggestions: string[] = [];
     const jobKeywords = jobDescription.toLowerCase();
-    
+
     if (jobKeywords.includes('remote') || jobKeywords.includes('distributed')) {
-      suggestions.push('Highlight remote work experience and digital collaboration skills');
+      suggestions.push(
+        'Highlight remote work experience and digital collaboration skills'
+      );
     }
-    
-    if (jobKeywords.includes('leadership') || jobKeywords.includes('management')) {
-      suggestions.push('Emphasize leadership experience and team management skills');
+
+    if (
+      jobKeywords.includes('leadership') ||
+      jobKeywords.includes('management')
+    ) {
+      suggestions.push(
+        'Emphasize leadership experience and team management skills'
+      );
     }
-    
+
     if (jobKeywords.includes('agile') || jobKeywords.includes('scrum')) {
-      suggestions.push('Include agile methodology experience and certifications');
+      suggestions.push(
+        'Include agile methodology experience and certifications'
+      );
     }
-    
+
     return suggestions;
   }
 
@@ -395,16 +467,19 @@ class ATSComplianceValidator {
   /**
    * Batch analyze multiple templates
    */
-  async batchAnalyze(templates: Template[], jobDescription?: string): Promise<Map<string, ATSAnalysisResult>> {
+  async batchAnalyze(
+    templates: Template[],
+    jobDescription?: string
+  ): Promise<Map<string, ATSAnalysisResult>> {
     await this.delay(1000);
-    
+
     const results = new Map<string, ATSAnalysisResult>();
-    
+
     for (const template of templates) {
       const analysis = await this.getDetailedAnalysis(template, jobDescription);
       results.set(template.id, analysis);
     }
-    
+
     return results;
   }
 
@@ -419,27 +494,27 @@ class ATSComplianceValidator {
     averageScore: number;
   }> {
     await this.delay(400);
-    
+
     let totalScore = 0;
     let highCompliance = 0;
     let mediumCompliance = 0;
     let lowCompliance = 0;
-    
+
     for (const template of templates) {
       const score = await this.analyzeTemplate(template);
       totalScore += score;
-      
+
       if (score >= 80) highCompliance++;
       else if (score >= 60) mediumCompliance++;
       else lowCompliance++;
     }
-    
+
     return {
       totalTemplates: templates.length,
       highCompliance,
       mediumCompliance,
       lowCompliance,
-      averageScore: Math.round(totalScore / templates.length)
+      averageScore: Math.round(totalScore / templates.length),
     };
   }
 }

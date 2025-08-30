@@ -14,7 +14,9 @@ const AnalysisPage = lazy(() => import('./pages/AnalysisPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const OpportunitiesPage = lazy(() => import('./pages/OpportunitiesPage'));
 const KscGeneratorPage = lazy(() => import('./pages/KscGeneratorPage'));
-const DocumentGenerationPage = lazy(() => import('./pages/DocumentGenerationPage'));
+const DocumentGenerationPage = lazy(
+  () => import('./pages/DocumentGenerationPage')
+);
 const UITestPage = lazy(() => import('./pages/UITestPage'));
 
 const App: React.FC = () => {

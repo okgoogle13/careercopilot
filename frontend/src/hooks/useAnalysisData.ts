@@ -32,14 +32,17 @@ interface UseAnalysisDataReturn {
   documents: DocumentType[];
   documentsLoading: boolean;
   documentsError: string | null;
-  
+
   // Analysis data
   analysisResult: AtsResult | null;
   isAnalyzing: boolean;
   analysisError: string | null;
-  
+
   // Actions
-  performAnalysis: (documentId: string, jobDescription: string) => Promise<void>;
+  performAnalysis: (
+    documentId: string,
+    jobDescription: string
+  ) => Promise<void>;
   clearAnalysis: () => void;
 }
 
@@ -48,13 +51,17 @@ interface UseAnalysisDataReturn {
  * Encapsulates document fetching, ATS analysis, and error handling.
  */
 export const useAnalysisData = (): UseAnalysisDataReturn => {
-  const { isAuthenticated, isLoading: authLoading, getAuthToken } = useAuthStatus();
-  
+  const {
+    isAuthenticated,
+    isLoading: authLoading,
+    getAuthToken,
+  } = useAuthStatus();
+
   // Documents state
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [documentsLoading, setDocumentsLoading] = useState<boolean>(true);
   const [documentsError, setDocumentsError] = useState<string | null>(null);
-  
+
   // Analysis state
   const [analysisResult, setAnalysisResult] = useState<AtsResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
@@ -65,28 +72,29 @@ export const useAnalysisData = (): UseAnalysisDataReturn => {
    */
   const fetchDocuments = useCallback(async () => {
     if (!isAuthenticated || authLoading) return;
-    
+
     try {
       setDocumentsLoading(true);
       setDocumentsError(null);
-      
+
       const token = getAuthToken();
       if (!token) {
         throw new Error('Unable to get authentication token');
       }
-      
+
       const response = await fetch('/api/v1/documents', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       if (!response.ok) {
         throw new Error('Failed to fetch documents');
       }
-      
+
       const data = await response.json();
       setDocuments(data);
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Failed to load documents';
+      const errorMessage =
+        error instanceof Error ? error.message : 'Failed to load documents';
       setDocumentsError(errorMessage);
       toast.error(errorMessage);
     } finally {
@@ -97,54 +105,61 @@ export const useAnalysisData = (): UseAnalysisDataReturn => {
   /**
    * Perform ATS analysis on selected document and job description
    */
-  const performAnalysis = useCallback(async (documentId: string, jobDescription: string) => {
-    if (!documentId || !jobDescription) {
-      toast.error('Please select a resume and paste a job description.');
-      return;
-    }
-
-    if (!isAuthenticated) {
-      toast.error('You must be logged in to perform analysis.');
-      return;
-    }
-
-    setIsAnalyzing(true);
-    setAnalysisResult(null);
-    setAnalysisError(null);
-
-    try {
-      const token = getAuthToken();
-      if (!token) {
-        throw new Error('Unable to get authentication token');
+  const performAnalysis = useCallback(
+    async (documentId: string, jobDescription: string) => {
+      if (!documentId || !jobDescription) {
+        toast.error('Please select a resume and paste a job description.');
+        return;
       }
 
-      const response = await fetch(`/api/v1/analysis/ats-score/${documentId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          job_description: jobDescription,
-        }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Analysis request failed');
+      if (!isAuthenticated) {
+        toast.error('You must be logged in to perform analysis.');
+        return;
       }
 
-      const result: AtsResult = await response.json();
-      setAnalysisResult(result);
-      toast.success('Analysis complete!');
-    } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : 'Analysis failed';
-      setAnalysisError(errorMessage);
-      toast.error(`Analysis failed: ${errorMessage}`);
-    } finally {
-      setIsAnalyzing(false);
-    }
-  }, [isAuthenticated, getAuthToken]);
+      setIsAnalyzing(true);
+      setAnalysisResult(null);
+      setAnalysisError(null);
+
+      try {
+        const token = getAuthToken();
+        if (!token) {
+          throw new Error('Unable to get authentication token');
+        }
+
+        const response = await fetch(
+          `/api/v1/analysis/ats-score/${documentId}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({
+              job_description: jobDescription,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.detail || 'Analysis request failed');
+        }
+
+        const result: AtsResult = await response.json();
+        setAnalysisResult(result);
+        toast.success('Analysis complete!');
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error ? error.message : 'Analysis failed';
+        setAnalysisError(errorMessage);
+        toast.error(`Analysis failed: ${errorMessage}`);
+      } finally {
+        setIsAnalyzing(false);
+      }
+    },
+    [isAuthenticated, getAuthToken]
+  );
 
   /**
    * Clear current analysis results
@@ -169,12 +184,12 @@ export const useAnalysisData = (): UseAnalysisDataReturn => {
     documents,
     documentsLoading,
     documentsError,
-    
+
     // Analysis data
     analysisResult,
     isAnalyzing,
     analysisError,
-    
+
     // Actions
     performAnalysis,
     clearAnalysis,

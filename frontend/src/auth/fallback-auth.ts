@@ -20,7 +20,7 @@ class FallbackAuth {
     loading: false,
     error: null,
   };
-  
+
   private listeners: Array<(state: AuthState) => void> = [];
   private storageKey = 'careercopilot-auth-fallback';
 
@@ -41,7 +41,7 @@ class FallbackAuth {
         }
         this.setState({ user, loading: false, error: null });
       }
-  } catch (error) {
+    } catch (error) {
       console.warn('Failed to load persisted auth:', error);
     }
   }
@@ -57,11 +57,14 @@ class FallbackAuth {
         // Don't persist the getIdToken function, just the basic user data
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { getIdToken, ...persistableUser } = user;
-        localStorage.setItem(this.storageKey, JSON.stringify({ user: persistableUser }));
+        localStorage.setItem(
+          this.storageKey,
+          JSON.stringify({ user: persistableUser })
+        );
       } else {
         localStorage.removeItem(this.storageKey);
       }
-  } catch (error) {
+    } catch (error) {
       console.warn('Failed to persist auth:', error);
     }
   }
@@ -81,12 +84,12 @@ class FallbackAuth {
         getIdToken: async () => {
           // Generate a mock JWT token for fallback auth
           return `fallback-token-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-        }
+        },
       };
 
       this.setState({ user, loading: false, error: null });
       this.persistAuth(user);
-      
+
       console.log('🔐 Fallback auth: User signed in:', email);
       return user;
     } catch {
@@ -110,12 +113,12 @@ class FallbackAuth {
         getIdToken: async () => {
           // Generate a mock JWT token for fallback auth
           return `fallback-token-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-        }
+        },
       };
 
       this.setState({ user, loading: false, error: null });
       this.persistAuth(user);
-      
+
       console.log('🔐 Fallback auth: User registered:', email);
       return user;
     } catch {
@@ -141,10 +144,10 @@ class FallbackAuth {
 
   onAuthStateChanged(callback: (state: AuthState) => void): () => void {
     this.listeners.push(callback);
-    
+
     // Immediately call with current state
     callback(this.state);
-    
+
     // Return unsubscribe function
     return () => {
       const index = this.listeners.indexOf(callback);

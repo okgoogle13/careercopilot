@@ -15,11 +15,15 @@ const firebaseConfig = {
 
 // Validate configuration
 const requiredFields = ['apiKey', 'authDomain', 'projectId'];
-const missingFields = requiredFields.filter(field => !firebaseConfig[field as keyof typeof firebaseConfig]);
+const missingFields = requiredFields.filter(
+  field => !firebaseConfig[field as keyof typeof firebaseConfig]
+);
 
 if (missingFields.length > 0) {
   console.error('Missing Firebase configuration fields:', missingFields);
-  throw new Error(`Missing Firebase configuration: ${missingFields.join(', ')}`);
+  throw new Error(
+    `Missing Firebase configuration: ${missingFields.join(', ')}`
+  );
 }
 
 // Initialize Firebase
@@ -36,7 +40,7 @@ try {
 export let auth: Auth;
 try {
   auth = getAuth(app);
-  
+
   // Configure auth settings to prevent polling issues
   // auth.settings = {
   //   appVerificationDisabledForTesting: import.meta.env.DEV, // Disable app verification in development
@@ -44,14 +48,14 @@ try {
 
   // Add auth state change listener with error handling
   auth.onAuthStateChanged(
-    (user) => {
+    user => {
       if (user) {
         console.log('🔐 User authenticated:', user.email);
       } else {
         console.log('👤 User signed out');
       }
     },
-    (error) => {
+    error => {
       console.error('🚨 Auth state change error:', error);
       // Don't throw here, just log the error
     }
@@ -59,16 +63,21 @@ try {
 
   // Handle token refresh errors
   auth.onIdTokenChanged(
-    (user) => {
+    user => {
       if (user) {
         // Token refreshed successfully
         console.log('🔄 Token refreshed for:', user.email);
       }
     },
-    (error) => {
+    error => {
       console.error('🚨 Token refresh error:', error);
       // Handle token refresh failures gracefully
-  if (typeof error === 'object' && error !== null && 'code' in error && (error as { code: string }).code === 'auth/network-request-failed') {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'code' in error &&
+        (error as { code: string }).code === 'auth/network-request-failed'
+      ) {
         console.warn('⚠️ Network issue detected, retrying...');
       }
     }
@@ -94,7 +103,7 @@ try {
 if (import.meta.env.DEV) {
   // Add development-specific configurations
   console.log('🛠️ Development mode detected');
-  
+
   // You can add emulator connections here if needed
   // connectAuthEmulator(auth, 'http://localhost:9099');
   // connectFirestoreEmulator(db, 'localhost', 8080);
@@ -110,13 +119,16 @@ export const debugInfo = {
 };
 
 // Global error handler for unhandled Firebase errors
-window.addEventListener('unhandledrejection', (event) => {
-  if (event.reason?.message?.includes('firebase') || event.reason?.code?.startsWith('auth/')) {
+window.addEventListener('unhandledrejection', event => {
+  if (
+    event.reason?.message?.includes('firebase') ||
+    event.reason?.code?.startsWith('auth/')
+  ) {
     console.error('🚨 Unhandled Firebase error:', event.reason);
-    
+
     // Prevent the error from crashing the app
     event.preventDefault();
-    
+
     // You can show a user-friendly message here
     console.warn('⚠️ Firebase error handled gracefully');
   }

@@ -22,7 +22,7 @@ interface TemplateSelectorProps {
 export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   selectedTemplate,
   onTemplateSelect,
-  jobDescription
+  jobDescription,
 }) => {
   const [templates, setTemplates] = useState<Template[]>([]);
   const [loading, setLoading] = useState(true);
@@ -53,11 +53,14 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 
   const analyzeAtsCompliance = useCallback(async () => {
     if (!jobDescription) return;
-    
+
     const analysis: Record<string, number> = {};
     for (const template of templates) {
       try {
-        const score = await atsComplianceValidator.analyzeTemplate(template, jobDescription);
+        const score = await atsComplianceValidator.analyzeTemplate(
+          template,
+          jobDescription
+        );
         analysis[template.id] = score;
       } catch (error) {
         console.error(`Failed to analyze template ${template.id}:`, error);
@@ -94,7 +97,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     <div className="template-selector">
       <div className="template-selector-header">
         <h3 className="text-lg font-semibold mb-4">Choose Your Template</h3>
-        
+
         {/* Category Filter */}
         <div className="category-filter mb-6">
           <div className="flex space-x-2">
@@ -118,7 +121,9 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
         {jobDescription && (
           <div className="ats-notice mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
             <p className="text-sm text-blue-800">
-              <span className="font-medium">ATS Analysis Active:</span> Templates are scored based on your job description for better compatibility.
+              <span className="font-medium">ATS Analysis Active:</span>{' '}
+              Templates are scored based on your job description for better
+              compatibility.
             </p>
           </div>
         )}
@@ -146,11 +151,11 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
 
               {/* Template Preview */}
               <div className="template-preview">
-                <img 
-                  src={template.preview} 
+                <img
+                  src={template.preview}
                   alt={`${template.name} template preview`}
                   className="preview-image"
-                  onError={(e) => {
+                  onError={e => {
                     // Fallback to placeholder if image fails to load
                     const target = e.target as HTMLImageElement;
                     target.src = '/placeholder-template.png';
@@ -163,7 +168,9 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
                 <div className="template-header">
                   <h4 className="template-name">{template.name}</h4>
                   <div className={`ats-score ${getScoreColor(atsScore)}`}>
-                    <span className="text-xs font-medium">ATS: {atsScore}%</span>
+                    <span className="text-xs font-medium">
+                      ATS: {atsScore}%
+                    </span>
                   </div>
                 </div>
 
@@ -189,8 +196,16 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
               {/* Selection Indicator */}
               {isSelected && (
                 <div className="selection-indicator">
-                  <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
                   </svg>
                 </div>
               )}
@@ -215,7 +230,10 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({
             <div>
               <h4 className="font-medium">{selectedTemplate.name}</h4>
               <p className="text-sm text-gray-600">
-                ATS Score: <span className={getScoreColor(getAtsScore(selectedTemplate))}>{getAtsScore(selectedTemplate)}%</span>
+                ATS Score:{' '}
+                <span className={getScoreColor(getAtsScore(selectedTemplate))}>
+                  {getAtsScore(selectedTemplate)}%
+                </span>
               </p>
             </div>
             <div className="flex space-x-2">
