@@ -22,7 +22,7 @@ const UITestPage = lazy(() => import('./pages/UITestPage'));
 const App: React.FC = () => {
   return (
     <Router>
-      <ThemeProvider defaultTheme="system">
+      <ThemeProvider>
         <AuthProvider>
           <UserPreferencesProvider>
             {/* Accessibility skip links */}

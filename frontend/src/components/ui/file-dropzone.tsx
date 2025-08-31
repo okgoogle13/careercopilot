@@ -353,7 +353,7 @@ export function FileDropzone({
                       e.stopPropagation();
                       handleRemoveFile(file);
                     }}
-                    disabled={disabled || (progress && progress.status === 'uploading')}
+                    disabled={disabled || (progress?.status === 'uploading')}
                     className="h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive"
                   >
                     <X className="h-4 w-4" />

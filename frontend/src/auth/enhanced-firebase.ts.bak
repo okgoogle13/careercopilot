@@ -1,4 +1,4 @@
-/ Enhanced Firebase Configuration with Network Fallback
+// Enhanced Firebase Configuration with Network Fallback
 import { initializeApp, FirebaseApp } from 'firebase/app';
 import {
   getAuth,
@@ -32,7 +32,7 @@ const maxConnectionAttempts = 3;
 // Initialize Firebase with network detection
 let app: FirebaseApp | null = null;
 let auth: Auth | null = null;
-export let db: Firestore | null = null;
+let db: Firestore | null = null;
 
 async function initializeFirebase(): Promise<boolean> {
   try {
@@ -40,6 +40,13 @@ async function initializeFirebase(): Promise<boolean> {
     console.log(
       `🔥 Attempting Firebase initialization (${connectionAttempts}/${maxConnectionAttempts})...`
     );
+
+    // Test network connectivity first
+    await fetch('https://firebase.googleapis.com/', {
+      method: 'HEAD',
+      mode: 'no-cors',
+      cache: 'no-cache',
+    });
 
     // If we get here without throwing, network is available
     app = initializeApp(firebaseConfig);
