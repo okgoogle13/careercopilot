@@ -241,7 +241,6 @@ export const getDB = () => {
 };
 
 // For compatibility, also export db directly (but may be null initially)
-export { db };
 
 // Debug information
 const debugInfo = {
