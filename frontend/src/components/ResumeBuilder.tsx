@@ -1,4 +1,8 @@
 import { useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
+import { db } from '../auth/enhanced-firebase';
+import { collection, addDoc } from 'firebase/firestore';
+import toast from 'react-hot-toast';
 import { Button } from './ui/Button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
@@ -36,6 +40,8 @@ interface ResumeData {
 }
 
 export function ResumeBuilder({ onBack, profileName }: ResumeBuilderProps) {
+  const { user } = useAuth();
+  const [isSaving, setIsSaving] = useState(false);
   const [resumeData, setResumeData] = useState<ResumeData>({
     personalInfo: {
       fullName: profileName || '',
@@ -65,6 +71,39 @@ export function ResumeBuilder({ onBack, profileName }: ResumeBuilderProps) {
   });
 
   const [newSkill, setNewSkill] = useState('');
+
+  const handleSaveResume = async () => {
+    if (!user?.uid) {
+      toast.error('You must be logged in to save resumes.');
+      return;
+    }
+
+    if (!resumeData.personalInfo.fullName.trim()) {
+      toast.error('Please enter your full name before saving.');
+      return;
+    }
+
+    setIsSaving(true);
+
+    try {
+      const resumeDocument = {
+        ...resumeData,
+        type: 'resume',
+        profileName: profileName || 'Default Profile',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      await addDoc(collection(db, `users/${user.uid}/documents`), resumeDocument);
+      
+      toast.success('Resume saved successfully!');
+    } catch (error) {
+      console.error('Error saving resume:', error);
+      toast.error('Failed to save resume. Please try again.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const addExperience = () => {
     setResumeData(prev => ({
@@ -137,9 +176,13 @@ export function ResumeBuilder({ onBack, profileName }: ResumeBuilderProps) {
             <Download className="w-4 h-4 mr-2" />
             Export PDF
           </Button>
-          <Button className="bg-primary hover:bg-primary/90">
+          <Button 
+            className="bg-primary hover:bg-primary/90" 
+            onClick={handleSaveResume}
+            disabled={isSaving}
+          >
             <Save className="w-4 h-4 mr-2" />
-            Save Resume
+            {isSaving ? 'Saving...' : 'Save Resume'}
           </Button>
         </div>
       </div>
