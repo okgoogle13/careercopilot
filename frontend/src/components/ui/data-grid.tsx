@@ -40,7 +40,7 @@ export interface DataGridProps<T = any> {
   onRowSelect?: (selectedRows: T[]) => void;
   selectable?: boolean;
   selectedRows?: T[];
-  keyExtractor?: (row: T) => string | number;
+  keyExtractor?: (row: T, index: number) => string | number;
   sortable?: boolean;
   filterable?: boolean;
   searchable?: boolean;
@@ -78,7 +78,7 @@ export function DataGrid<T = any>({
   onRowSelect,
   selectable = false,
   selectedRows = [],
-  keyExtractor = (row: T, index: number) => index.toString(),
+  keyExtractor = (_, index: number) => index.toString(),
   sortable = true,
   filterable = true,
   searchable = true,
@@ -290,8 +290,7 @@ export function DataGrid<T = any>({
                         placeholder={column.filter?.placeholder || `Filter ${column.title}`}
                         value={filters[column.id] || ''}
                         onChange={(e) => handleColumnFilter(column.id, e.target.value)}
-                        className="pl-8 w-32"
-                        size="sm"
+                        className="pl-8 w-32 h-8"
                       />
                     </div>
                   )}
@@ -321,8 +320,8 @@ export function DataGrid<T = any>({
                       checked={isAllSelected}
                       onCheckedChange={handleSelectAll}
                       ref={(el) => {
-                        if (el) {
-                          el.indeterminate = isSomeSelected;
+                        if (el && 'indeterminate' in el) {
+                          (el as HTMLInputElement).indeterminate = isSomeSelected;
                         }
                       }}
                     />

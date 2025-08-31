@@ -36,7 +36,7 @@ export function SearchInput({
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const debounceRef = useRef<NodeJS.Timeout>();
   const inputRef = useRef<HTMLInputElement>(null);
-  const id = React.useId();
+  const id = React.useId?.() || Math.random().toString(36);
   const suggestionsRef = useRef<HTMLDivElement>(null);
 
   // Sync external value with internal state

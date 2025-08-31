@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback, FormEvent } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
-import { LoadingState, ErrorDisplay } from '../components/ui';
+import { ErrorDisplay, ProfileCardSkeleton } from '../components/ui';
+import { db } from '../auth/enhanced-firebase';
+import { collection, onSnapshot, doc, addDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 interface ProfileVariation {
   id: string;
@@ -26,33 +28,43 @@ const DashboardPage: React.FC = () => {
   const [profileSkills, setProfileSkills] = useState<string>('');
   const [nameError, setNameError] = useState<string>('');
 
-  const fetchProfiles = useCallback(async () => {
-    if (!user) return;
-
-    try {
-      setLoading(true);
-      const token = user.token || 'fallback-token';
-      const response = await fetch('/api/v1/profile/variations', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!response.ok) throw new Error('Failed to fetch profile variations');
-      const data = await response.json();
-      setProfiles(data);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setLoading(false);
-    }
-  }, [user]);
 
   useEffect(() => {
-    if (user) {
-      fetchProfiles();
-    } else {
+    if (!user?.uid) {
       setLoading(false);
       setError('You must be logged in to view this page.');
+      return;
     }
-  }, [user, fetchProfiles]);
+
+    setLoading(true);
+    setError(null);
+
+    // Set up real-time listener for profiles
+    const profilesRef = collection(db, `users/${user.uid}/profiles`);
+    
+    const unsubscribe = onSnapshot(
+      profilesRef,
+      (snapshot) => {
+        const profilesData: ProfileVariation[] = [];
+        snapshot.forEach((doc) => {
+          profilesData.push({
+            id: doc.id,
+            ...doc.data(),
+          } as ProfileVariation);
+        });
+        setProfiles(profilesData);
+        setLoading(false);
+      },
+      (error) => {
+        console.error('Error fetching profiles:', error);
+        setError('Failed to load profiles. Please try again.');
+        setLoading(false);
+      }
+    );
+
+    // Cleanup listener on unmount
+    return () => unsubscribe();
+  }, [user]);
 
   const openModalForCreate = () => {
     setCurrentProfile(null);
@@ -79,17 +91,13 @@ const DashboardPage: React.FC = () => {
       return;
     }
 
-    if (!user) return;
+    if (!user?.uid) return;
 
     try {
-      const token = user.token || 'fallback-token';
-      await fetch(`/api/v1/profile/variations/${profileId}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setProfiles(profiles.filter(p => p.id !== profileId));
+      await deleteDoc(doc(db, `users/${user.uid}/profiles`, profileId));
       toast.success('Profile variation deleted.');
-    } catch {
+    } catch (error) {
+      console.error('Error deleting profile:', error);
       toast.error('Failed to delete profile.');
     }
   };
@@ -102,9 +110,8 @@ const DashboardPage: React.FC = () => {
       return;
     }
 
-    if (!user) return;
+    if (!user?.uid) return;
 
-    const token = user.token || 'fallback-token';
     const keywords = profileKeywords
       .split(',')
       .map(k => k.trim())
@@ -113,44 +120,31 @@ const DashboardPage: React.FC = () => {
       .split(',')
       .map(s => s.trim())
       .filter(s => s);
-    const body = JSON.stringify({ name: profileName, keywords, skills });
-
-    const url = currentProfile
-      ? `/api/v1/profile/variations/${currentProfile.id}`
-      : '/api/v1/profile/variations';
-
-    const method = currentProfile ? 'PUT' : 'POST';
+    
+    const profileData = {
+      name: profileName,
+      keywords,
+      skills,
+      updatedAt: new Date(),
+    };
 
     try {
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.detail || 'Failed to save profile.');
-      }
-
-      const savedProfile = await response.json();
       if (currentProfile) {
-        setProfiles(
-          profiles.map(p => (p.id === savedProfile.id ? savedProfile : p))
-        );
+        // Update existing profile
+        await updateDoc(doc(db, `users/${user.uid}/profiles`, currentProfile.id), profileData);
         toast.success('Profile updated successfully!');
       } else {
-        setProfiles([...profiles, savedProfile]);
+        // Create new profile
+        await addDoc(collection(db, `users/${user.uid}/profiles`), {
+          ...profileData,
+          createdAt: new Date(),
+        });
         toast.success('Profile created successfully!');
       }
       setIsModalOpen(false);
-    } catch (err: unknown) {
-      toast.error(
-        err instanceof Error ? err.message : 'Failed to save profile.'
-      );
+    } catch (error) {
+      console.error('Error saving profile:', error);
+      toast.error('Failed to save profile.');
     }
   };
 
@@ -162,8 +156,16 @@ const DashboardPage: React.FC = () => {
   };
 
   const renderContent = () => {
-    if (loading)
-      return <LoadingState message="Loading your profile variations..." />;
+    if (loading) {
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <ProfileCardSkeleton key={index} />
+          ))}
+        </div>
+      );
+    }
+    
     if (error)
       return (
         <ErrorDisplay
@@ -172,34 +174,50 @@ const DashboardPage: React.FC = () => {
           onDismiss={() => setError(null)}
         />
       );
+      
     if (profiles.length === 0) {
       return (
         <div className="text-center p-10 border-2 border-dashed rounded-lg">
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             You haven't created any profile variations yet. Get started by
             clicking the 'Create New Profile Variation' button!
           </p>
         </div>
       );
     }
+    
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {profiles.map(profile => (
           <div
             key={profile.id}
-            className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between"
+            className="bg-card border rounded-lg p-4 flex flex-col justify-between"
           >
-            <h2 className="text-xl font-semibold mb-2">{profile.name}</h2>
+            <h2 className="text-xl font-semibold mb-2 text-card-foreground">{profile.name}</h2>
+            <div className="space-y-2 mb-4">
+              {profile.keywords && profile.keywords.length > 0 && (
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Keywords:</p>
+                  <p className="text-sm text-card-foreground">{profile.keywords.join(', ')}</p>
+                </div>
+              )}
+              {profile.skills && profile.skills.length > 0 && (
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Skills:</p>
+                  <p className="text-sm text-card-foreground">{profile.skills.join(', ')}</p>
+                </div>
+              )}
+            </div>
             <div className="flex justify-end gap-2">
               <button
                 onClick={() => openModalForEdit(profile)}
-                className="text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-3 rounded"
+                className="text-sm bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold py-1 px-3 rounded"
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDelete(profile.id)}
-                className="text-sm bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded"
+                className="text-sm bg-destructive hover:bg-destructive/80 text-destructive-foreground font-semibold py-1 px-3 rounded"
               >
                 Delete
               </button>

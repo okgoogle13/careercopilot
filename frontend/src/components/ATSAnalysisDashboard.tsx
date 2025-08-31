@@ -3,6 +3,9 @@ import { Card } from './ui/Card';
 import { Button } from './ui/Button';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
+import { Textarea } from './ui/textarea';
+import { AnalysisCardSkeleton } from './ui/LoadingStates';
+import toast from 'react-hot-toast';
 import {
   ArrowLeft,
   Upload,
@@ -30,6 +33,89 @@ interface AnalysisResult {
     missing: string[];
   };
   formatIssues: string[];
+}
+
+async function getATSAnalysis(jobDescription: string, userProfile: any): Promise<AnalysisResult> {
+  try {
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    
+    if (!apiKey) {
+      throw new Error('Gemini API key not configured');
+    }
+
+    const prompt = `
+Analyze the following resume/profile against this job description for ATS compatibility.
+
+Job Description:
+${jobDescription}
+
+User Profile:
+${JSON.stringify(userProfile, null, 2)}
+
+Provide a detailed ATS analysis in the following JSON format:
+{
+  "overallScore": (number 0-100),
+  "categories": [
+    {
+      "name": "Keyword Optimization",
+      "score": (number 0-100),
+      "status": "good" | "warning" | "poor",
+      "suggestions": ["suggestion1", "suggestion2"]
+    },
+    {
+      "name": "Format & Structure", 
+      "score": (number 0-100),
+      "status": "good" | "warning" | "poor",
+      "suggestions": ["suggestion1", "suggestion2"]
+    }
+  ],
+  "keywordMatches": {
+    "matched": ["keyword1", "keyword2"],
+    "missing": ["keyword3", "keyword4"]
+  },
+  "formatIssues": ["issue1", "issue2"]
+}
+
+Focus on ATS compatibility, keyword matching, and formatting suggestions.`;
+
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: prompt
+          }]
+        }]
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    
+    if (!responseText) {
+      throw new Error('No response from Gemini API');
+    }
+
+    // Extract JSON from the response
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      throw new Error('Invalid response format from Gemini API');
+    }
+
+    const analysisResult = JSON.parse(jsonMatch[0]);
+    return analysisResult;
+    
+  } catch (error) {
+    console.error('Error getting ATS analysis:', error);
+    throw error;
+  }
 }
 
 const mockAnalysisResult: AnalysisResult = {
@@ -97,10 +183,40 @@ const mockAnalysisResult: AnalysisResult = {
 };
 
 export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
-  const [analysisResult] = useState<AnalysisResult>(mockAnalysisResult);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [jobDescription, setJobDescription] = useState('');
   const [selectedProfile] = useState(
     'Community Support Worker - Nishant Dougall'
   );
+
+  const handleAnalyze = async () => {
+    if (!jobDescription.trim()) {
+      toast.error('Please enter a job description first.');
+      return;
+    }
+
+    setIsLoading(true);
+    
+    try {
+      // Mock user profile data - in a real app this would come from props or context
+      const userProfile = {
+        name: selectedProfile,
+        experience: ['Community Support', 'Case Management', 'Crisis Intervention'],
+        skills: ['Mental Health', 'Client Advocacy', 'Team Collaboration'],
+        education: 'Bachelor\'s in Social Work'
+      };
+      
+      const result = await getATSAnalysis(jobDescription, userProfile);
+      setAnalysisResult(result);
+      toast.success('Analysis completed successfully!');
+    } catch (error) {
+      console.error('Analysis failed:', error);
+      toast.error('Failed to analyze resume. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-400';
@@ -151,7 +267,34 @@ export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Job Description Input */}
+      <Card className="p-6 mb-6">
+        <h2 className="text-lg font-semibold mb-4">Job Description</h2>
+        <Textarea
+          placeholder="Paste the job description here to analyze your resume compatibility..."
+          value={jobDescription}
+          onChange={(e) => setJobDescription(e.target.value)}
+          rows={6}
+          className="mb-4"
+        />
+        <Button 
+          onClick={handleAnalyze}
+          disabled={isLoading || !jobDescription.trim()}
+          className="bg-primary hover:bg-primary/90"
+        >
+          {isLoading ? 'Analyzing...' : 'Analyze Resume'}
+        </Button>
+      </Card>
+
+      {/* Analysis Results */}
+      {isLoading ? (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 3 }).map((_, index) => (
+            <AnalysisCardSkeleton key={index} />
+          ))}
+        </div>
+      ) : analysisResult ? (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Profile Selection & Overall Score */}
         <div className="lg:col-span-1 space-y-6">
           <Card className="p-6">
@@ -339,7 +482,14 @@ export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
             </div>
           </Card>
         </div>
-      </div>
+        </div>
+      ) : (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground text-lg">
+            Enter a job description above and click "Analyze Resume" to get started.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
