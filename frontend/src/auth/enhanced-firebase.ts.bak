@@ -27,49 +27,49 @@ const firebaseConfig = {
 // Network connectivity state
 let isFirebaseAvailable = false;
 let connectionAttempts = 0;
-const maxConnectionAttempts = 3;
+const maxConnectionAttempts = 3; // Max attempts for initial Firebase connection
 
 // Initialize Firebase with network detection
 let app: FirebaseApp | null = null;
 let auth: Auth | null = null;
-let db: Firestore | null = null;
+export let db: Firestore | null = null;
+
+/**
+ * Helper function for consistent error logging.
+ * @param context - A string indicating where the error occurred (e.g., "Firebase Initialization", "AuthService.signIn").
+ * @param error - The error object.
+ * @param message - An optional custom message.
+ */
+function logError(context: string, error: unknown, message?: string) {
+  const firebaseError = error as { code?: string; message?: string };
+  const errorMessage = message || firebaseError.message || 'An unknown error occurred.';
+  const errorCode = firebaseError.code ? ` (Code: ${firebaseError.code})` : '';
+  console.error(`❌ ${context} Error${errorCode}: ${errorMessage}`, error);
+}
 
 async function initializeFirebase(): Promise<boolean> {
+  if (app) {
+    console.log('✅ Firebase already initialized.');
+    return true;
+  }
+
+  connectionAttempts++;
+  console.log(
+    `🔥 Attempting Firebase initialization (${connectionAttempts}/${maxConnectionAttempts})...`
+  );
+
   try {
-    connectionAttempts++;
-    console.log(
-      `🔥 Attempting Firebase initialization (${connectionAttempts}/${maxConnectionAttempts})...`
-    );
-
-    // Test network connectivity first
-    await fetch('https://firebase.googleapis.com/', {
-      method: 'HEAD',
-      mode: 'no-cors',
-      cache: 'no-cache',
-    });
-
-    // If we get here without throwing, network is available
     app = initializeApp(firebaseConfig);
     auth = getAuth(app);
     db = getFirestore(app);
 
     isFirebaseAvailable = true;
-    console.log('✅ Firebase initialized successfully');
+    console.log('✅ Firebase initialized successfully. Using live authentication service.');
     return true;
   } catch (error) {
-    console.warn(
-      `⚠️ Firebase initialization failed (attempt ${connectionAttempts}):`,
-      error
-    );
-
-    if (connectionAttempts < maxConnectionAttempts) {
-      // Retry after delay
-      setTimeout(() => initializeFirebase(), 2000);
-    } else {
-      console.warn('❌ Firebase unavailable, using fallback authentication');
-      isFirebaseAvailable = false;
-    }
-
+    logError('Firebase Initialization', error, 'Failed to connect to Firebase.');
+    isFirebaseAvailable = false; // Ensure this is set to false on failure
+    console.warn('⚠️ Firebase unavailable. Operations will use fallback authentication.');
     return false;
   }
 }
@@ -77,72 +77,79 @@ async function initializeFirebase(): Promise<boolean> {
 // Enhanced authentication service
 class AuthService {
   constructor() {
-    // Start Firebase initialization
-    this.initWithRetry();
+    // Attempt to initialize Firebase on service creation.
+    // Subsequent calls to auth methods will check isFirebaseAvailable.
+    initializeFirebase().catch(err => {
+      logError('AuthService Constructor', err, 'Initial Firebase connection failed.');
+    });
   }
 
-  private async initWithRetry() {
-    await initializeFirebase();
+  private async ensureFirebaseInitialized(): Promise<boolean> {
+    if (!app && connectionAttempts < maxConnectionAttempts) {
+      // Only try to re-initialize if not already initialized and within attempt limits
+      return await initializeFirebase();
+    }
+    return isFirebaseAvailable;
   }
 
   async signIn(email: string, password: string) {
-    if (isFirebaseAvailable && auth) {
+    const firebaseReady = await this.ensureFirebaseInitialized();
+
+    if (firebaseReady && auth) {
       try {
         const result = await signInWithEmailAndPassword(auth, email, password);
-        console.log('🔥 Firebase sign-in successful');
+        console.log('🔥 Firebase sign-in successful.');
         return result.user;
       } catch (error: unknown) {
+        logError('AuthService.signIn', error, 'Firebase sign-in failed, attempting fallback.');
         const firebaseError = error as { code?: string; message?: string };
-        console.warn(
-          '🔥 Firebase sign-in failed, trying fallback:',
-          firebaseError.message
-        );
 
-        // Fall back to local auth
+        // Fall back to local auth if network issue or Firebase is generally unavailable
         if (
           firebaseError.code === 'auth/network-request-failed' ||
-          firebaseError.message?.includes('connection')
+          !isFirebaseAvailable // If Firebase became unavailable during the operation
         ) {
-          isFirebaseAvailable = false;
+          isFirebaseAvailable = false; // Confirm Firebase is considered unavailable
+          console.log('🔧 Falling back to local authentication for sign-in.');
           return await fallbackAuth.signIn(email, password);
         }
-        throw error;
+        throw error; // Re-throw non-network Firebase errors
       }
     } else {
-      console.log('🔧 Using fallback authentication');
+      console.log('🔧 Using fallback authentication for sign-in.');
       return await fallbackAuth.signIn(email, password);
     }
   }
 
   async signUp(email: string, password: string) {
-    if (isFirebaseAvailable && auth) {
+    const firebaseReady = await this.ensureFirebaseInitialized();
+
+    if (firebaseReady && auth) {
       try {
         const result = await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
-        console.log('🔥 Firebase sign-up successful');
+        console.log('🔥 Firebase sign-up successful.');
         return result.user;
       } catch (error: unknown) {
+        logError('AuthService.signUp', error, 'Firebase sign-up failed, attempting fallback.');
         const firebaseError = error as { code?: string; message?: string };
-        console.warn(
-          '🔥 Firebase sign-up failed, trying fallback:',
-          firebaseError.message
-        );
 
-        // Fall back to local auth
+        // Fall back to local auth if network issue or Firebase is generally unavailable
         if (
           firebaseError.code === 'auth/network-request-failed' ||
-          firebaseError.message?.includes('connection')
+          !isFirebaseAvailable // If Firebase became unavailable during the operation
         ) {
-          isFirebaseAvailable = false;
+          isFirebaseAvailable = false; // Confirm Firebase is considered unavailable
+          console.log('🔧 Falling back to local authentication for sign-up.');
           return await fallbackAuth.signUp(email, password);
         }
-        throw error;
+        throw error; // Re-throw non-network Firebase errors
       }
     } else {
-      console.log('🔧 Using fallback authentication');
+      console.log('🔧 Using fallback authentication for sign-up.');
       return await fallbackAuth.signUp(email, password);
     }
   }
@@ -151,10 +158,13 @@ class AuthService {
     if (isFirebaseAvailable && auth) {
       try {
         await signOut(auth);
-        console.log('🔥 Firebase sign-out successful');
+        console.log('🔥 Firebase sign-out successful.');
       } catch (error) {
-        console.warn('🔥 Firebase sign-out failed:', error);
+        logError('AuthService.signOut', error, 'Firebase sign-out failed.');
+        // Even if Firebase sign-out fails, proceed with fallback sign-out
       }
+    } else {
+      console.log('🔧 Firebase not available, proceeding with fallback sign-out only.');
     }
 
     // Always sign out from fallback as well
@@ -162,34 +172,40 @@ class AuthService {
   }
 
   async signInWithGoogle() {
-    if (isFirebaseAvailable && auth) {
+    const firebaseReady = await this.ensureFirebaseInitialized();
+
+    if (firebaseReady && auth) {
       try {
         const provider = new GoogleAuthProvider();
         provider.addScope('email');
         provider.addScope('profile');
         
         const result = await signInWithPopup(auth, provider);
-        console.log('🔥 Google sign-in successful');
+        console.log('🔥 Google sign-in successful.');
         return result.user;
       } catch (error: unknown) {
-        const firebaseError = error as { code?: string; message?: string };
-        console.warn('🔥 Google sign-in failed:', firebaseError.message);
-        
+        logError('AuthService.signInWithGoogle', error, 'Google sign-in failed.');
         // For Google sign-in, we don't fall back to local auth
         // since it requires OAuth which fallback can't provide
         throw error;
       }
     } else {
+      logError(
+        'AuthService.signInWithGoogle',
+        new Error('Firebase not available'),
+        'Google sign-in requires Firebase to be available.'
+      );
       throw new Error('Google sign-in requires Firebase to be available');
     }
   }
 
   onAuthStateChanged(callback: (user: User | null) => void) {
+    // Always check current Firebase availability before setting up listener
     if (isFirebaseAvailable && auth) {
-      // Use Firebase auth state
+      console.log('🔥 Using Firebase auth state listener.');
       return onAuthStateChanged(auth, callback);
     } else {
-      // Use fallback auth state
+      console.log('🔧 Using fallback auth state listener.');
       return fallbackAuth.onAuthStateChanged(state => {
         callback(state.user);
       });
@@ -234,7 +250,6 @@ const debugInfo = {
   getStatus: () => authService.getConnectionStatus(),
 };
 
-// Initialize Firebase when module loads
-initializeFirebase().catch(err => {
-  console.warn('Failed to initialize Firebase on module load:', err);
-});
+// Initial Firebase connection attempt when the module loads.
+// Errors are handled internally by initializeFirebase and logged.
+initializeFirebase().catch(() => { /* errors are already logged */ });
