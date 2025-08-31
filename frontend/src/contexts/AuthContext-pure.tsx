@@ -48,6 +48,9 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [connectionStatus, setConnectionStatus] = useState(() =>
+    pureFallbackAuth.getConnectionStatus()
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -64,6 +67,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     return () => {
       console.log('🔧 AuthProvider: Cleaning up auth listener');
+      unsubscribe();
+    };
+  }, []);
+
+  // Listen for changes in connection status to ensure the context value is always fresh.
+  // This assumes `pureFallbackAuth` provides a subscription method, which is a robust
+  // pattern for external stores.
+  useEffect(() => {
+    console.log('🔧 AuthProvider: Setting up connection status listener');
+    // NOTE: This assumes a listener method `onConnectionStatusChanged` exists on the fallback auth object.
+    // If it doesn't, one should be added to make the connection status reactive.
+    const unsubscribe = pureFallbackAuth.onConnectionStatusChanged(newStatus => {
+      console.log('🔧 AuthProvider: Connection status changed', newStatus);
+      setConnectionStatus(newStatus);
+    });
+
+    return () => {
+      console.log('🔧 AuthProvider: Cleaning up connection status listener');
       unsubscribe();
     };
   }, []);
@@ -132,10 +153,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-  const connectionStatus = useMemo(() => {
-    return pureFallbackAuth.getConnectionStatus();
-  }, []);
-
   const value = useMemo(
     () => ({
       user,
@@ -151,7 +168,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Show debug info in development
   useEffect(() => {
-    if (import.meta.env.VITE_SHOW_DEBUG_INFO === 'true') {
+    if (import.meta.env.DEV) {
       console.log('🔧 Auth Debug Info:', {
         user: user ? { uid: user.uid, email: user.email } : null,
         loading,

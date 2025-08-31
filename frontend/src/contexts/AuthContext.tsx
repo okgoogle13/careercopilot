@@ -24,6 +24,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   login: (email: string, password: string) => Promise<User>;
   register: (email: string, password: string) => Promise<User>;
+  signInWithGoogle: () => Promise<User>;
   connectionStatus: {
     firebaseAvailable: boolean;
     usingFallback: boolean;
@@ -144,6 +145,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     []
   );
 
+  const signInWithGoogle = useCallback(async (): Promise<User> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const firebaseUser = (await authService.signInWithGoogle()) as FirebaseUser;
+      const token = await firebaseUser.getIdToken();
+      const user: User = {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName,
+        token,
+        getIdToken: () => firebaseUser.getIdToken(),
+      };
+      setUser(user);
+      return user;
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Google sign-in failed';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
   const logout = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -174,6 +200,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       logout,
       login,
       register,
+      signInWithGoogle,
       connectionStatus,
       error,
       setUser,
@@ -186,6 +213,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       logout,
       login,
       register,
+      signInWithGoogle,
       connectionStatus,
       error,
       setUser,
