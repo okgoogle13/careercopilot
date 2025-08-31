@@ -11,7 +11,7 @@ export interface PaginationProps {
   showPrevNext?: boolean;
   showPageNumbers?: boolean;
   maxVisiblePages?: number;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'default' | 'lg';
   className?: string;
   disabled?: boolean;
 }
@@ -24,7 +24,7 @@ export function Pagination({
   showPrevNext = true,
   showPageNumbers = true,
   maxVisiblePages = 7,
-  size = 'md',
+  size = 'default',
   className,
   disabled = false,
 }: PaginationProps) {
@@ -81,7 +81,7 @@ export function Pagination({
 
   const buttonSizes = {
     sm: 'h-8 w-8 text-sm',
-    md: 'h-9 w-9',
+    default: 'h-9 w-9',
     lg: 'h-10 w-10 text-lg',
   };
 

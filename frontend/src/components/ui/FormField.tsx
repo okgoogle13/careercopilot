@@ -242,3 +242,5 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 );
 
 Checkbox.displayName = 'Checkbox';
+
+export { FormField, Input, Textarea, Select, Checkbox };

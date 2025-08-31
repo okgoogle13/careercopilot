@@ -17,7 +17,7 @@ export interface PasswordStrength {
   };
 }
 
-export interface PasswordInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export interface PasswordInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   value?: string;
   onChange?: (value: string) => void;
   showStrength?: boolean;

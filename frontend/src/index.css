@@ -5,155 +5,7 @@
 :root {
   --font-size: 14px;
 
-  /* Dark Theme Colors */
-  --background: #0a0a0a; /* dark.bg */
-  --surface: #1a1a1a; /* dark.surface */
-  --border: #2a2a2a; /* dark.border */
-
-  --text-primary: #ffffff; /* dark.text.primary */
-  --text-secondary: #a1a1aa; /* dark.text.secondary */
-  --text-muted: #71717a; /* dark.text.muted */
-
-  /* Primary Color Ramp */
-  --primary-50: #f5f3ff;
-  --primary-100: #ede9fe;
-  --primary-200: #ddd6fe;
-  --primary-300: #c4b5fd;
-  --primary-400: #a78bfa;
-  --primary-500: #8b5cf6;
-  --primary-600: #7c3aed;
-  --primary-700: #6d28d9;
-  --primary-800: #5b21b6;
-  --primary-900: #4c1d95;
-  --primary-950: #2e1065;
-
-  /* Gray Color Ramp */
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-  --gray-950: #030712;
-
-  /* Mapped Variables for components */
-  --foreground: var(--text-primary);
-  --card: var(--surface);
-  --card-foreground: var(--text-primary);
-  --popover: var(--surface);
-  --popover-foreground: var(--text-primary);
-  --primary: var(--primary-600);
-  --primary-foreground: #ffffff;
-  --secondary: var(--gray-800);
-  --secondary-foreground: var(--text-secondary);
-  --muted: var(--gray-700);
-  --muted-foreground: var(--text-muted);
-  --accent: var(--primary-500);
-  --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --input: var(--gray-900);
-  --input-background: var(--gray-900);
-  --switch-background: var(--gray-700);
-  --ring: var(--primary-500);
-
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --radius: 0.5rem;
-
-  /* Chart colors using primary palette */
-  --chart-1: var(--primary-600);
-  --chart-2: var(--primary-500);
-  --chart-3: var(--primary-400);
-  --chart-4: var(--primary-300);
-  --chart-5: var(--primary-200);
-
-  /* Sidebar colors */
-  --sidebar: var(--surface);
-  --sidebar-foreground: var(--text-primary);
-  --sidebar-primary: var(--primary-600);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: var(--gray-800);
-  --sidebar-accent-foreground: var(--text-secondary);
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--primary-500);
-
-  /* Fonts */
-  --font-family-sans: 'Inter', 'system-ui', 'sans-serif';
-  --font-family-mono: 'JetBrains Mono', 'monospace';
-
-  /* Animation variables */
-  --transition-fast: 150ms ease-in-out;
-  --transition-normal: 250ms ease-in-out;
-  --transition-slow: 350ms ease-in-out;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.light {
-  /* Light mode colors */
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
-  --primary: #6366f1;
-  --primary-foreground: #ffffff;
-  --secondary: #f1f5f9;
-  --secondary-foreground: #0f172a;
-  --muted: #f8fafc;
-  --muted-foreground: #64748b;
-  --accent: #f1f5f9;
-  --accent-foreground: #0f172a;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #e2e8f0;
-  --input: #ffffff;
-  --input-background: #ffffff;
-  --switch-background: #e2e8f0;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
-  --ring: #6366f1;
-  --chart-1: #6366f1;
-  --chart-2: #8b5cf6;
-  --chart-3: #06b6d4;
-  --chart-4: #10b981;
-  --chart-5: #f59e0b;
-  --radius: 0.5rem;
-  --sidebar: #f8fafc;
-  --sidebar-foreground: #0f172a;
-  --sidebar-primary: #6366f1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f1f5f9;
-  --sidebar-accent-foreground: #0f172a;
-  --sidebar-border: #e2e8f0;
-  --sidebar-ring: #6366f1;
-
-  /* Animation variables */
-  --transition-fast: 150ms ease-in-out;
-  --transition-normal: 250ms ease-in-out;
-  --transition-slow: 350ms ease-in-out;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md:
-    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-xl:
-    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-
-.dark {
-  /* Dark mode colors (same as default) */
+  /* Universal Dark Theme - Applied to all pages */
   --background: #0f172a;
   --foreground: #f8fafc;
   --card: #1e293b;
@@ -175,11 +27,15 @@
   --input-background: #1e293b;
   --switch-background: #334155;
   --ring: #6366f1;
+
+  /* Chart colors */
   --chart-1: #6366f1;
   --chart-2: #8b5cf6;
   --chart-3: #06b6d4;
   --chart-4: #10b981;
   --chart-5: #f59e0b;
+
+  /* Sidebar colors */
   --sidebar: #1e293b;
   --sidebar-foreground: #f8fafc;
   --sidebar-primary: #6366f1;
@@ -188,7 +44,28 @@
   --sidebar-accent-foreground: #f8fafc;
   --sidebar-border: #334155;
   --sidebar-ring: #6366f1;
+
+  /* Typography */
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --font-family-sans: 'Inter', 'system-ui', 'sans-serif';
+  --font-family-mono: 'JetBrains Mono', 'monospace';
+
+  /* Layout */
+  --radius: 0.5rem;
+
+  /* Animation variables */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+  
+  /* Dark theme shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
+
 
 @theme inline {
   --color-background: var(--background);
@@ -559,13 +436,8 @@ nav {
 
 /* Modern Card Styles */
 .glass-effect {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.dark .glass-effect {
   background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -606,9 +478,5 @@ nav {
 
 /* Enhanced Shadows */
 .shadow-glow {
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
-}
-
-.dark .shadow-glow {
   box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
 }

@@ -366,7 +366,7 @@ export function AsyncAutoComplete({
   ...props
 }: AsyncAutoCompleteProps) {
   const [cache, setCache] = useState<Map<string, AutoCompleteOption[]>>(new Map());
-  const abortControllerRef = useRef<AbortController>();
+  const abortControllerRef = useRef<AbortController | null>(null);
 
   const handleSearch = useCallback(async (query: string): Promise<AutoCompleteOption[]> => {
     // Cancel previous request

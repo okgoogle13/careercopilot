@@ -20,7 +20,7 @@ export { default as ThemeToggle } from './ThemeToggle';
 export { default as Modal } from './Modal';
 export { default as SkipLink } from './SkipLink';
 export { default as EmptyState } from './EmptyState';
-export { default as FormField } from './FormField';
+export { FormField } from './FormField';
 export {
   Form,
   FormItem,
@@ -31,8 +31,9 @@ export {
   FormField as FormFieldController,
   useFormField,
 } from './Form';
-export { default as OptimizedImage } from './OptimizedImage';
-export { default as ScreenReaderOnly } from './ScreenReaderOnly';
+export { OptimizedImage } from './OptimizedImage';
+export { ScreenReaderOnly } from './ScreenReaderOnly';
+export { ProfileCardSkeleton, DocumentCardSkeleton, AnalysisCardSkeleton } from './LoadingStates';
 export { default as FileUpload } from './FileUpload';
 export { default as PDFPreview } from './PDFPreview';
 export { default as ATSScoreDisplay } from './ATSScoreDisplay';
@@ -52,11 +53,23 @@ export { Combobox, GroupedCombobox } from './combobox';
 export type { ComboboxProps, ComboboxOption, ComboboxGroup } from './combobox';
 export { TagInput, SkillsTagInput } from './tag-input';
 export type { TagInputProps, Tag } from './tag-input';
+export { AutoComplete, AsyncAutoComplete } from './autocomplete';
+export type { AutoCompleteProps, AutoCompleteOption } from './autocomplete';
+export { RichTextEditor, SimpleRichTextEditor } from './rich-text-editor';
+export type { RichTextEditorProps } from './rich-text-editor';
+export { FormWizard, Stepper } from './form-wizard';
+export type { FormWizardProps, WizardStep, StepperProps } from './form-wizard';
 
 // Data display components
 export { Timeline, ApplicationTimeline } from './timeline';
 export type { TimelineItem } from './timeline';
 export { StatusCard, MetricCard, StatusCardGrid } from './status-card';
+export { DataGrid } from './data-grid';
+export type { DataGridProps, DataGridColumn } from './data-grid';
+export { FileDropzone, ImageDropzone, DocumentDropzone } from './file-dropzone';
+export type { FileDropzoneProps, FileWithPreview, FileValidation, UploadProgress } from './file-dropzone';
+export { Sidebar, ResponsiveSidebar, SidebarTrigger, useSidebar } from './sidebar';
+export type { SidebarProps, SidebarItem, SidebarSection } from './sidebar';
 
 // Navigation components
 export { Pagination, CompactPagination, PaginationWithPageSize } from './pagination';
@@ -101,11 +114,11 @@ export {
   CarouselPrevious,
 } from './carousel';
 export {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from './chart';
+export type { ChartConfig } from './chart';
 export { Checkbox } from './checkbox';
 export {
   Collapsible,
@@ -147,6 +160,23 @@ export {
   DialogTitle,
   DialogTrigger,
 } from './dialog';
+export {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuGroup,
+  DropdownMenuPortal,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuRadioGroup,
+} from './dropdown-menu';
 export {
   Drawer,
   DrawerClose,
