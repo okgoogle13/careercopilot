@@ -77,7 +77,7 @@ export function NumberInput({
     if (!input.trim()) return undefined;
     
     // Remove currency symbols, percentage signs, and locale-specific formatting
-    let cleanValue = input
+    const cleanValue = input
       .replace(/[$€£¥₹]/g, '')  // Common currency symbols
       .replace(/%/g, '')        // Percentage sign
       .replace(/,/g, '')        // Thousands separators
