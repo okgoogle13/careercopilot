@@ -51,7 +51,7 @@ function calculatePasswordStrength(
   const totalRequirements = Object.values(requirements).length;
   
   let score = 0;
-  let feedback: string[] = [];
+  const feedback: string[] = [];
 
   // Base score from meeting requirements
   score = (metRequirements / totalRequirements) * 60;
