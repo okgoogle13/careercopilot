@@ -20,6 +20,8 @@ class PersonalCache:
     def __init__(self, cache_dir: str = "data/cache"):
         self.cache_dir = Path(cache_dir)
         self.default_ttl = timedelta(hours=24)
+        self.backend = self  # For compatibility with cache middleware
+        self.CACHE_CONFIGS = {}  # For compatibility with cache middleware
 
         # Create cache directory if it doesn't exist
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -397,6 +399,30 @@ class PersonalCache:
 
         logger.info(f"Invalidated {cleared_count} cache entries for user {user_id}")
         return cleared_count
+
+    async def health_check(self) -> bool:
+        """Health check method for cache middleware compatibility"""
+        try:
+            # Test basic cache operations
+            test_key = "health_check"
+            test_data = {"status": "test", "timestamp": datetime.now().isoformat()}
+            
+            # Try to set and get
+            set_success = await self.set(test_key, test_data)
+            if not set_success:
+                return False
+                
+            retrieved_data = await self.get(test_key)
+            if retrieved_data is None:
+                return False
+                
+            # Clean up test data
+            await self.delete(test_key)
+            return True
+            
+        except Exception as e:
+            logger.error(f"PersonalCache health check failed: {e}")
+            return False
 
 
 # Global instance

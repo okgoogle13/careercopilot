@@ -8,6 +8,8 @@ import {
   KeywordsList,
   KeywordPlacementSuggestions,
 } from '../components/AnalysisResults';
+import { ATSFeedbackLoop } from '../components/analysis/ATSFeedbackLoop';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 
 const AnalysisPage: React.FC = () => {
   // --- State ---
@@ -243,7 +245,28 @@ const AnalysisPage: React.FC = () => {
       </div>
 
       {/* Results */}
-      {renderResults()}
+      {analysisResult && (
+        <Tabs defaultValue="classic" className="mt-8">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="classic">Classic Analysis</TabsTrigger>
+            <TabsTrigger value="feedback">AI Feedback Loop</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="classic" className="mt-6">
+            {renderResults()}
+          </TabsContent>
+          
+          <TabsContent value="feedback" className="mt-6">
+            <ATSFeedbackLoop 
+              documentId={selectedDocumentId}
+              jobDescription={jobDescription}
+              onOptimizationComplete={(newScore) => {
+                toast.success(`Resume optimized! New ATS score: ${newScore}`);
+              }}
+            />
+          </TabsContent>
+        </Tabs>
+      )}
 
       {/* Help Section */}
       {!analysisResult && (

@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect } from 'react';
 
 type Theme = 'dark';
 
@@ -17,6 +17,14 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
+  // Apply dark theme class to HTML element on mount
+  useEffect(() => {
+    document.documentElement.classList.add('dark');
+    return () => {
+      document.documentElement.classList.remove('dark');
+    };
+  }, []);
+
   // Dark theme is now universal and fixed
   const contextValue: ThemeProviderContext = {
     theme: 'dark',

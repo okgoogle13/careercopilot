@@ -449,7 +449,7 @@ class HealthCheckMiddleware(BaseHTTPMiddleware):
 
             # Simple test - get a non-existent document (should not raise error)
             test_doc = db.collection("health_check").document("test")
-            await test_doc.get()
+            test_doc.get()  # Firestore get() is synchronous, not async
 
             return {"healthy": True, "service": "firestore"}
         except Exception as e:
