@@ -1,4 +1,4 @@
-import { BarChart3, FileText, Plus, X, Target, Briefcase } from 'lucide-react';
+import { BarChart3, FileText, Plus, X, Target, Briefcase, Sparkles } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from './ui/Button';
 import { CareerCopilotLogo } from './CareerCopilotLogo';
@@ -20,6 +20,7 @@ export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }:
     { id: 'documents', label: 'Documents', icon: FileText, path: '/documents' },
     { id: 'applications', label: 'Applications', icon: Briefcase, path: '/applications' },
     { id: 'analysis', label: 'ATS Analysis', icon: Target, path: '/analysis' },
+    { id: 'ai-services', label: 'AI Services', icon: Sparkles, path: '/ai-services' },
   ];
 
   const handleNavigation = (item: typeof menuItems[0]) => {

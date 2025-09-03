@@ -9,11 +9,11 @@ import asyncio
 import logging
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
+from datetime import datetime
 from enum import Enum
 from typing import Any, Callable, Dict, List, Optional
-from datetime import datetime
 
-from .ai_error_handling import AIError, AIErrorType, RetryConfig, AIOperationHandler
+from .ai_error_handling import AIError, AIErrorType, AIOperationHandler, RetryConfig
 
 logger = logging.getLogger(__name__)
 
@@ -321,7 +321,9 @@ class EnhancedAIErrorHandler:
             "status": (
                 "healthy"
                 if success_count >= 8
-                else "degraded" if success_count >= 5 else "unhealthy"
+                else "degraded"
+                if success_count >= 5
+                else "unhealthy"
             ),
             "success_rate": success_count / len(recent_results),
             "fallback_rate": fallback_count / len(recent_results),

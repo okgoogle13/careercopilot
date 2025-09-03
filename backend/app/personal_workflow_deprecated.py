@@ -6,11 +6,11 @@ Coordinates all agents for 6-agent CareerCopilot system
 import asyncio
 import logging
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Any
+from typing import Any, Dict, List, Optional
 
-from app.core.personal_cache import get_personal_cache
 from app.core.base_agent import BaseAgent, PersonalizedAgent
 from app.core.config import get_personal_config
+from app.core.personal_cache import get_personal_cache
 
 logger = logging.getLogger(__name__)
 

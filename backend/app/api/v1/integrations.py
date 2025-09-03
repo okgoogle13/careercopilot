@@ -1,11 +1,10 @@
 import os
 
-from app.core.security import verify_google_oidc_token
-
 # from app.genkit_flows.email_scanner import scan_user_emails  # Temporarily disabled for deployment
 from app.core.limiter import authenticated_limiter
-from fastapi import APIRouter, Depends, Query, Request, BackgroundTasks
+from app.core.security import verify_google_oidc_token
 from app.workers.scan_emails_worker import process_scan_emails_task
+from fastapi import APIRouter, BackgroundTasks, Depends, Query, Request
 
 router = APIRouter()
 

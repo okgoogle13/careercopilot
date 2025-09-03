@@ -2,6 +2,7 @@ import base64
 import json
 from datetime import datetime
 
+from app.core.ai_config import get_ai_config
 from app.core.db import db
 from app.core.secrets import get_user_secret
 from google.cloud.firestore import SERVER_TIMESTAMP
@@ -12,8 +13,6 @@ from googleapiclient.errors import HttpError
 # Import the new flows
 from .calendar_manager import createCalendarEvent
 from .notifier import sendNewOpportunityNotification
-
-from app.core.ai_config import get_ai_config
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 

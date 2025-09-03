@@ -8,15 +8,11 @@ import json
 import logging
 from abc import ABC, abstractmethod
 from datetime import datetime, timedelta
-from typing import Dict, Any, Optional, List
+from typing import Any, Dict, List, Optional
 
 from app.core.ai_client import get_ai_client
 from app.core.personal_cache import get_personal_cache
-from app.services.ai_prompt_builder import (
-    get_ai_prompt_builder,
-    PromptType,
-    PromptContext,
-)
+from app.services.ai_prompt_builder import PromptContext, PromptType, get_ai_prompt_builder
 
 logger = logging.getLogger(__name__)
 

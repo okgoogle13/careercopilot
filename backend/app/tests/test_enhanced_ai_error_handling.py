@@ -3,19 +3,19 @@ Tests for enhanced AI error handling system
 """
 
 import asyncio
-import pytest
 from unittest.mock import Mock
 
+import pytest
+from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.enhanced_ai_error_handling import (
-    EnhancedAIErrorHandler,
-    AIServiceType,
     AIOperationContext,
     AIOperationResult,
-    create_fallback_strategy,
+    AIServiceType,
+    EnhancedAIErrorHandler,
     create_detailed_error_message,
+    create_fallback_strategy,
     enhanced_ai_handler,
 )
-from app.core.ai_error_handling import AIError, AIErrorType
 
 
 class TestEnhancedAIErrorHandler:

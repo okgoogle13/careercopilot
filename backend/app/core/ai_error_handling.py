@@ -4,8 +4,8 @@ Provides consistent error handling across all Genkit flows.
 """
 
 import asyncio
-import time
 import logging
+import time
 from dataclasses import dataclass
 from enum import Enum
 from functools import wraps
@@ -23,6 +23,7 @@ class AIErrorType(Enum):
     INVALID_REQUEST = "invalid_request"
     SERVICE_UNAVAILABLE = "service_unavailable"
     AUTHENTICATION = "authentication"
+    GENERATION_FAILED = "generation_failed"
     UNKNOWN = "unknown"
 
 

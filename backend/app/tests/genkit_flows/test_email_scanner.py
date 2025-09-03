@@ -1,4 +1,5 @@
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
+
 from app.genkit_flows.email_scanner import extract_job_details_from_email
 
 

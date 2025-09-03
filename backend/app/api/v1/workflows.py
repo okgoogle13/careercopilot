@@ -3,16 +3,16 @@ Enhanced workflow API endpoints with database integration.
 Provides production-ready endpoints for all CareerCopilot operations.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
-from sqlalchemy.orm import Session
-from typing import List, Dict, Any, Optional
 import logging
 from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
 
 from app.core.database import get_db
-from app.models.database import User, Job, Application, AIInteraction, AgentSession
+from app.models.database import AgentSession, AIInteraction, Application, Job, User
 from app.workflows.personal_career_workflow import PersonalCareerWorkflow
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, status
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

@@ -2,26 +2,26 @@
 Authentication API endpoints for user registration, login, and session management.
 """
 
-import os
-from fastapi import APIRouter, Depends, HTTPException, status, Request
-from sqlalchemy.orm import Session
-from typing import Dict, Any
 import logging
-import firebase_admin
-from firebase_admin import auth as firebase_auth, credentials
+import os
+from datetime import datetime
+from typing import Any, Dict
 
-from app.core.database import get_db
+import firebase_admin
 from app.core.auth import (
     auth_manager,
-    session_manager,
-    get_current_user,
     create_user_token,
+    get_current_user,
     rate_limiter,
+    session_manager,
 )
+from app.core.database import get_db
 from app.models.database import User
+from fastapi import APIRouter, Depends, HTTPException, Request, status
+from firebase_admin import auth as firebase_auth
+from firebase_admin import credentials
 from pydantic import BaseModel, EmailStr
-from datetime import datetime
-
+from sqlalchemy.orm import Session
 
 # Initialize Firebase Admin SDK if not already initialized
 if not firebase_admin._apps:

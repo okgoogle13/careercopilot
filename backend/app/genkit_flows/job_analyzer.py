@@ -1,4 +1,5 @@
 import os
+
 from app.core.ai_config import get_ai_config
 from dotenv import load_dotenv
 

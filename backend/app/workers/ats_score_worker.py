@@ -1,12 +1,13 @@
-from app.ai_operations.ats_scoring import ats_scorer
-from app.core.enhanced_ai_error_handling import (
-    enhanced_ai_handler,
-    AIServiceType,
-    AIOperationContext,
-    create_fallback_strategy,
-)
-from app.core.db import db
 import logging
+
+from app.ai_operations.ats_scoring import ats_scorer
+from app.core.db import db
+from app.core.enhanced_ai_error_handling import (
+    AIOperationContext,
+    AIServiceType,
+    create_fallback_strategy,
+    enhanced_ai_handler,
+)
 
 logger = logging.getLogger(__name__)
 
