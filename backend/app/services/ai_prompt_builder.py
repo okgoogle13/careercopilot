@@ -8,10 +8,10 @@ and consistent formatting across the entire application.
 import json
 import logging
 from dataclasses import dataclass, field
-from typing import Any, Dict, Optional
 from enum import Enum
+from typing import Any, Dict, Optional
 
-from app.core.ai_client import get_ai_client, AIRequest
+from app.core.ai_client import AIRequest, get_ai_client
 from app.core.config import get_personal_config
 from app.core.personal_cache import get_personal_cache
 

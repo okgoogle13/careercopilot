@@ -3,6 +3,7 @@ Simplified main.py for development - focuses on core functionality
 """
 
 import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 

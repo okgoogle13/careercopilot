@@ -1,10 +1,10 @@
-from app.core.dependencies import get_current_user_with_state
-from app.core.limiter import authenticated_limiter
-from fastapi import APIRouter, Depends, HTTPException, Request
-from pydantic import BaseModel
 from typing import List
 
+from app.core.dependencies import get_current_user_with_state
+from app.core.limiter import authenticated_limiter
 from app.genkit_flows.voice_profiler import generate_voice_profile
+from fastapi import APIRouter, Depends, HTTPException, Request
+from pydantic import BaseModel
 
 router = APIRouter()
 
@@ -66,8 +66,8 @@ async def create_profile_variation(
         raise HTTPException(status_code=400, detail="User ID not found")
 
     # In production, save to database
-    from datetime import datetime
     import uuid
+    from datetime import datetime
 
     new_variation = ProfileVariation(
         id=str(uuid.uuid4()),

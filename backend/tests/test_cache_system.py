@@ -2,12 +2,13 @@
 Tests for the AI operations caching system
 """
 
-import pytest
 import asyncio
-from datetime import datetime, timezone, timedelta
-from app.core.cache_deprecated import InMemoryCacheBackend, AICache, CacheEntry
+from datetime import datetime, timedelta, timezone
 from unittest.mock import AsyncMock
-from app.core.cache_decorators.cache_decorators import cached_ai_operation, CacheContext
+
+import pytest
+from app.core.cache_decorators.cache_decorators import CacheContext, cached_ai_operation
+from app.core.cache_deprecated import AICache, CacheEntry, InMemoryCacheBackend
 
 
 @pytest.fixture

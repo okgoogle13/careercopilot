@@ -1,4 +1,5 @@
-from unittest.mock import patch, Mock
+from unittest.mock import Mock, patch
+
 from app.genkit_flows.job_analyzer import analyze_job_description
 
 

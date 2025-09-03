@@ -1,5 +1,4 @@
 {
-  // === AUTO-FORMATTING SETTINGS ===
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.formatOnType": false,
@@ -12,7 +11,6 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
 
-  // Auto-fix on save
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit",
@@ -20,7 +18,6 @@
     "source.fixAll.stylelint": true
   },
 
-  // === TYPESCRIPT/JAVASCRIPT SETTINGS ===
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
@@ -29,6 +26,7 @@
       "source.organizeImports": "explicit"
     }
   },
+
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
@@ -37,16 +35,18 @@
       "source.organizeImports": "explicit"
     }
   },
+
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
 
-  // === PYTHON SETTINGS ===
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
@@ -55,188 +55,120 @@
     }
   },
 
-  // Python Black formatter settings
-  "black-formatter.args": [
-    "--line-length=100"
-  ],
+  "black-formatter.args": ["--line-length=100"],
   "black-formatter.importStrategy": "useBundled",
 
-  // Python import sorting (isort)
-  "isort.args": [
-    "--profile=black",
-    "--line-length=100"
-  ],
+  "isort.args": ["--profile=black", "--line-length=100"],
   "isort.importStrategy": "useBundled",
 
-  // Python linting with flake8
   "flake8.args": [
     "--max-line-length=100",
     "--extend-ignore=E203,W503,E501"
   ],
   "flake8.importStrategy": "useBundled",
 
-  // Python path configuration
   "python.defaultInterpreterPath": "./backend/.venv/bin/python",
   "python.terminal.activateEnvironment": true,
 
-  // === TYPESCRIPT/JAVASCRIPT SETTINGS ===
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true
-  },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-  // === ESLINT SETTINGS ===
-  "eslint.enable": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on"
+  },
+
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": [
-    "frontend"
-  ],
-  "eslint.options": {
-    "extensions": [".js", ".jsx", ".ts", ".tsx"]
-  },
+
+  "eslint.packageManager": "npm",
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
+  "eslint.format.enable": true,
 
-  // === PRETTIER SETTINGS ===
-  "prettier.enable": true,
-  "prettier.requireConfig": true,
-  "prettier.useEditorConfig": false,
+  "prettier.singleQuote": true,
+  "prettier.semi": false,
+  "prettier.trailingComma": "es5",
+  "prettier.printWidth": 100,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
 
-  // === CSS/STYLING ===
-  "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[scss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "editor.rulers": [100],
+  "editor.wordWrap": "on",
+  "editor.renderWhitespace": "selection",
+  "editor.renderLineHighlight": "all",
+  "editor.minimap.enabled": false,
+  "workbench.colorTheme": "Default Dark+",
 
-  // Tailwind CSS IntelliSense
-  "tailwindCSS.includeLanguages": {
-    "typescript": "typescript",
-    "typescriptreact": "typescriptreact"
-  },
-  "tailwindCSS.experimental.classRegex": [
-    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
-    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"],
-    ["cn\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ],
-
-  // === MARKDOWN SETTINGS ===
-  "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.wordWrap": "on",
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    }
-  },
-
-  // === YAML SETTINGS ===
-  "[yaml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2
-  },
-  "[yml]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.insertSpaces": true,
-    "editor.tabSize": 2
-  },
-
-  // === GENERAL EDITOR SETTINGS ===
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": true,
-  "editor.trimAutoWhitespace": true,
-
-  // File associations
-  "files.associations": {
-    "*.env.*": "properties",
-    ".env.*": "properties",
-    "*.config.js": "javascript",
-    "*.config.ts": "typescript"
-  },
-
-  // Auto save
-  "files.autoSave": "onFocusChange",
-
-  // Trim trailing whitespace
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
-
-  // === SEARCH SETTINGS ===
   "search.exclude": {
     "**/node_modules": true,
-    "**/dist": true,
-    "**/build": true,
-    "**/coverage": true,
+    "**/bower_components": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
     "**/__pycache__": true,
-    "**/*.pyc": true,
-    "**/venv": true,
-    "**/.venv": true,
-    "**/env": true,
-    "**/.env": true,
-    "**/migrations": true,
-    "**/.next": true,
-    "**/.cache": true,
-    "**/tmp": true,
-    "**/temp": true
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.venv": true
   },
 
   "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
     "**/__pycache__": true,
-    "**/*.pyc": true,
-    "**/node_modules": true
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.venv": true
   },
 
-  // === EXTENSIONS SETTINGS ===
-  "extensions.ignoreRecommendations": false,
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/bower_components/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/.next/**": true,
+    "**/.nuxt/**": true,
+    "**/.cache/**": true,
+    "**/.sass-cache/**": true,
+    "**/coverage/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.mypy_cache/**": true,
+    "**/.venv/**": true
+  },
 
-  // Git settings
-  "git.autofetch": true,
-  "git.enableSmartCommit": true,
-  "git.confirmSync": false,
-
-  // Terminal settings
-  "terminal.integrated.defaultProfile.osx": "zsh",
-  "terminal.integrated.fontSize": 13,
-
-  // Breadcrumbs
-  "breadcrumbs.enabled": true,
-
-  // IntelliSense settings
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.suggest.autoImports": true,
-  "javascript.suggest.autoImports": true,
-
-  // Error lens (if installed)
-  "errorLens.enabledDiagnosticLevels": ["error", "warning"],
-
-  // Disable telemetry
-  "telemetry.telemetryLevel": "off"
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "terminal.integrated.confirmOnExit": "hasChildProcesses",
+  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreviewFromQuickOpen": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "workbench.list.openMode": "doubleClick",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.showTabs": true,
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.wrapTabs": true,
+  "workbench.editor.limit.enabled": true,
+  "workbench.editor.limit.value": 10,
+  "workbench.editor.limit.perEditorGroup": true,
+  "workbench.editor.limit.excludeDirty": false,
+  "workbench.editor.limit.excludePinned": false,
+  "workbench.editor.limit.excludePreview": true,
+  "workbench.editor.limit.excludeFromEditorHistory": true
 }

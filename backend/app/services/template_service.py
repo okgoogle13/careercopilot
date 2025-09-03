@@ -13,11 +13,7 @@ from enum import Enum
 from typing import Any, Dict, List, Optional
 
 from app.core.config import get_personal_config
-from app.services.ai_prompt_builder import (
-    get_ai_prompt_builder,
-    PromptType,
-    PromptContext,
-)
+from app.services.ai_prompt_builder import PromptContext, PromptType, get_ai_prompt_builder
 
 logger = logging.getLogger(__name__)
 

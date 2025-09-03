@@ -2,22 +2,15 @@
 Database API endpoints for production system management.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
-from typing import List, Dict
 import logging
-
-from app.core.database import get_db, check_database_health, init_database
-from app.models.database import (
-    User,
-    Job,
-    Application,
-    AIInteraction,
-    AgentSession,
-    MarketAnalysis,
-)
-from pydantic import BaseModel
 from datetime import datetime
+from typing import Dict, List
+
+from app.core.database import check_database_health, get_db, init_database
+from app.models.database import AgentSession, AIInteraction, Application, Job, MarketAnalysis, User
+from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

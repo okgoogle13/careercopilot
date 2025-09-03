@@ -1,5 +1,6 @@
-import pytest
 from unittest.mock import AsyncMock, patch
+
+import pytest
 from app.workers.ats_score_worker import process_ats_score_task
 
 
