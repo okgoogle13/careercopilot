@@ -54,7 +54,7 @@ add_role() {
     local member="$2"
     local role="$3"
     local description="$4"
-    
+
     echo -n "  Adding $description... "
     if gcloud projects add-iam-policy-binding "$project" \
         --member="serviceAccount:$member" \
@@ -181,7 +181,7 @@ Next steps:
 
 Required APIs (enable if needed):
 - Cloud Run API
-- Cloud Build API  
+- Cloud Build API
 - Artifact Registry API
 - Firebase Hosting API
 ${NC}"

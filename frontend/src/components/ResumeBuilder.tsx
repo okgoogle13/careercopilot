@@ -95,7 +95,7 @@ export function ResumeBuilder({ onBack, profileName }: ResumeBuilderProps) {
       };
 
       await addDoc(collection(db, `users/${user.uid}/documents`), resumeDocument);
-      
+
       toast.success('Resume saved successfully!');
     } catch (error) {
       console.error('Error saving resume:', error);
@@ -176,8 +176,8 @@ export function ResumeBuilder({ onBack, profileName }: ResumeBuilderProps) {
             <Download className="w-4 h-4 mr-2" />
             Export PDF
           </Button>
-          <Button 
-            className="bg-primary hover:bg-primary/90" 
+          <Button
+            className="bg-primary hover:bg-primary/90"
             onClick={handleSaveResume}
             disabled={isSaving}
           >

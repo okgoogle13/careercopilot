@@ -70,7 +70,7 @@ const DashboardPage: React.FC = () => {
     if (field === 'name') setProfileName(value);
     else if (field === 'keywords') setProfileKeywords(value);
     else if (field === 'skills') setProfileSkills(value);
-    
+
     // Clear error when user starts typing
     if (value.trim() && formErrors[field]) {
       setFormErrors(prev => ({
@@ -82,7 +82,7 @@ const DashboardPage: React.FC = () => {
 
   const handleDelete = useCallback(async (id: string) => {
     if (!user?.uid || !db) return;
-    
+
     if (window.confirm('Are you sure you want to delete this profile?')) {
       try {
         await deleteDoc(doc(db, `users/${user.uid}/profiles`, id));
@@ -96,14 +96,14 @@ const DashboardPage: React.FC = () => {
 
   const handleSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault();
-    
+
     if (!user?.uid || !db) {
       toast.error('You must be logged in to save profiles');
       return;
     }
 
     setIsSubmitting(true);
-    
+
     try {
       // Validate form data
       const result = profileSchema.safeParse({
@@ -124,7 +124,7 @@ const DashboardPage: React.FC = () => {
       }
 
       const { name, keywords, skills } = result.data;
-      
+
       const profileData = {
         name,
         keywords: keywords || [],
@@ -144,7 +144,7 @@ const DashboardPage: React.FC = () => {
         });
         toast.success('Profile created successfully');
       }
-      
+
       // Reset form
       setFormErrors({});
       setIsModalOpen(false);
@@ -175,7 +175,7 @@ const DashboardPage: React.FC = () => {
     try {
       // Set up real-time listener for profiles
       const profilesRef = collection(db, `users/${user.uid}/profiles`);
-      
+
       const unsubscribe = onSnapshot(
         profilesRef,
         (snapshot) => {
@@ -246,7 +246,7 @@ const DashboardPage: React.FC = () => {
         </div>
       );
     }
-    
+
     return (
       <PageContainer>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -259,7 +259,7 @@ const DashboardPage: React.FC = () => {
                 <div className="flex justify-between items-start mb-4">
                   <h3 className="text-lg font-semibold text-foreground">{profile.name}</h3>
                 </div>
-                
+
                 <div className="space-y-3">
                   {profile.keywords && profile.keywords.length > 0 && (
                     <div>
@@ -278,7 +278,7 @@ const DashboardPage: React.FC = () => {
                       </div>
                     </div>
                   )}
-                  
+
                   {profile.skills && profile.skills.length > 0 && (
                     <div>
                       <p className="text-sm font-medium text-muted-foreground mb-1">Skills</p>
@@ -298,7 +298,7 @@ const DashboardPage: React.FC = () => {
                   )}
                 </div>
               </div>
-              
+
               <div className="mt-6 flex justify-end gap-2">
                 <Button
                   variant="outline"

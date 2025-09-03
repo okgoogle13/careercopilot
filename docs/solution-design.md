@@ -52,7 +52,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 **Implementation:**
 - **Firebase Function:** `createUserProfile`
 - **Genkit Flow:** `profileStructure.flow.js`
-- **API Endpoints:** 
+- **API Endpoints:**
   - `POST /api/profiles` - Create new profile
   - `PUT /api/profiles/{id}` - Update profile
   - `GET /api/profiles` - List user profiles
@@ -64,7 +64,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 4. Profile data stored in Firestore under `/users/{uid}/profiles/{profileId}`
 5. AI processes profile to extract key skills and competencies
 
-#### Story 1.2: Document Upload and Parsing  
+#### Story 1.2: Document Upload and Parsing
 **Implementation:**
 - **Firebase Function:** `parseUploadedDocument`
 - **Genkit Flow:** `documentParser.flow.js`
@@ -115,7 +115,7 @@ Gmail API  Calendar API  │        AI Services          │              │
    - Role-specific language and terminology
 5. Formatted PDF generated with selected theme
 
-#### Story 2.2: Tailored Cover Letter Generation  
+#### Story 2.2: Tailored Cover Letter Generation
 **Implementation:**
 - **Genkit Flow:** `coverLetter.flow.js`
 - **API Endpoint:** `POST /api/cover-letters/generate`
@@ -131,7 +131,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 
 #### Story 2.3: Key Selection Criteria (KSC) Response
 **Implementation:**
-- **Genkit Flow:** `kscResponse.flow.js` 
+- **Genkit Flow:** `kscResponse.flow.js`
 - **API Endpoint:** `POST /api/ksc/generate`
 
 **Workflow:**
@@ -168,7 +168,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 1. User uploads resume and job description
 2. System performs multi-factor analysis:
    - Keyword density and matching (45% weight)
-   - Semantic similarity using embeddings (35% weight)  
+   - Semantic similarity using embeddings (35% weight)
    - Formatting and structure (20% weight)
 3. Composite score calculated with pass/fail threshold
 4. Detailed breakdown provided to user
@@ -260,7 +260,7 @@ Gmail API  Calendar API  │        AI Services          │              │
    - `createUserOnSignup` - Initialize user profile
    - `validateUserSession` - Session validation
 
-2. **Profile Management**  
+2. **Profile Management**
    - `createUserProfile` - Profile creation
    - `updateUserProfile` - Profile updates
    - `parseUploadedDocument` - Document processing
@@ -290,7 +290,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 
 2. **Generation Flows**
    - `tailoredResume.flow.js` - Resume generation
-   - `coverLetter.flow.js` - Cover letter generation  
+   - `coverLetter.flow.js` - Cover letter generation
    - `kscResponse.flow.js` - KSC response generation
    - `resumeVariations.flow.js` - Template variations
 
@@ -375,7 +375,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 - JWT token validation on all API endpoints
 - Session management with automatic refresh
 
-### Data Protection  
+### Data Protection
 - All user data encrypted at rest in Firestore
 - Temporary files in Cloud Storage automatically deleted after 24 hours
 - API access restricted to authenticated users only

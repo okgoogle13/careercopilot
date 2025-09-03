@@ -30,7 +30,7 @@ For **PRODUCTION SECURITY**, use separate Firebase projects for each environment
 - Use development-specific API keys
 - Less restrictive security rules for testing
 
-#### Staging Environment  
+#### Staging Environment
 - Project: `careercopilot-staging`
 - Use staging-specific API keys
 - Production-like security rules
@@ -81,7 +81,7 @@ service cloud.firestore {
     match /users/{userId}/{document=**} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
     }
-    
+
     // Deny all other access by default
     match /{document=**} {
       allow read, write: if false;
@@ -157,7 +157,7 @@ npm run dev
 
 If you need help with Firebase setup or security configuration:
 1. Check Firebase Documentation
-2. Review Firebase Security Rules guide  
+2. Review Firebase Security Rules guide
 3. Test security rules in Firebase Console simulator
 
 ---

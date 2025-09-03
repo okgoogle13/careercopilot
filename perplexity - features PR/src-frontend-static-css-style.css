@@ -162,7 +162,7 @@
     --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
     --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
     --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
-    
+
     /* Semantic Color Tokens (Dark Mode) */
     --color-background: var(--color-charcoal-700);
     --color-surface: var(--color-charcoal-800);
@@ -222,7 +222,7 @@
   --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
   --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
   --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
-  
+
   /* Semantic Color Tokens (Dark Mode) */
   --color-background: var(--color-charcoal-700);
   --color-surface: var(--color-charcoal-800);
@@ -268,7 +268,7 @@
   --color-brown-600-rgb: 94, 82, 64;
   --color-teal-500-rgb: 33, 128, 141;
   --color-slate-900-rgb: 19, 52, 59;
-  
+
   /* Semantic Color Tokens (Light Mode) */
   --color-background: var(--color-cream-50);
   --color-surface: var(--color-cream-100);
@@ -1326,63 +1326,63 @@ body {
     .container {
         padding: var(--space-16);
     }
-    
+
     .header {
         padding: var(--space-24);
     }
-    
+
     .header h1 {
         font-size: var(--font-size-3xl);
     }
-    
+
     .nav-tabs {
         overflow-x: auto;
         white-space: nowrap;
         gap: var(--space-8);
     }
-    
+
     .nav-tab {
         padding: var(--space-12) var(--space-16);
         font-size: var(--font-size-sm);
     }
-    
+
     .dashboard-grid {
         grid-template-columns: 1fr;
         gap: var(--space-16);
     }
-    
+
     .card {
         padding: var(--space-16);
     }
-    
+
     .job-filters {
         flex-direction: column;
     }
-    
+
     .search-input {
         min-width: 100%;
     }
-    
+
     .section-header {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--space-16);
     }
-    
+
     .job-actions,
     .application-actions {
         flex-direction: column;
     }
-    
+
     .action-buttons {
         gap: var(--space-8);
     }
-    
+
     .stats {
         grid-template-columns: repeat(2, 1fr);
         gap: var(--space-12);
     }
-    
+
     .toast {
         bottom: var(--space-16);
         right: var(--space-16);
@@ -1394,34 +1394,34 @@ body {
     .container {
         padding: var(--space-16);
     }
-    
+
     .header h1 {
         font-size: var(--font-size-3xl);
     }
-    
+
     .nav-tabs {
         overflow-x: auto;
         white-space: nowrap;
     }
-    
+
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .job-filters {
         flex-direction: column;
     }
-    
+
     .search-input {
         min-width: 100%;
     }
-    
+
     .section-header {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--space-16);
     }
-    
+
     .job-actions,
     .application-actions {
         flex-direction: column;

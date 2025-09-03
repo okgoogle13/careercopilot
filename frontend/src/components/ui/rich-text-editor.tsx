@@ -47,7 +47,7 @@ export function RichTextEditor({
 
   const executeCommand = useCallback((command: string, value?: string) => {
     if (disabled) return;
-    
+
     document.execCommand(command, false, value);
     handleContentChange();
     editorRef.current?.focus();
@@ -91,14 +91,14 @@ export function RichTextEditor({
         link.textContent = linkText;
         link.target = '_blank';
         link.rel = 'noopener noreferrer';
-        
+
         range.deleteContents();
         range.insertNode(link);
-        
+
         // Clear selection
         selection.removeAllRanges();
       }
-      
+
       setShowLinkDialog(false);
       setLinkUrl('');
       setLinkText('');
@@ -365,9 +365,9 @@ export function RichTextEditor({
           disabled && 'opacity-50 cursor-not-allowed',
           editorClassName
         )}
-        style={{ 
-          minHeight: `${minHeight}px`, 
-          maxHeight: `${maxHeight}px` 
+        style={{
+          minHeight: `${minHeight}px`,
+          maxHeight: `${maxHeight}px`
         }}
         data-placeholder={placeholder}
         suppressContentEditableWarning={true}

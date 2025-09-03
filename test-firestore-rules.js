@@ -1,6 +1,6 @@
 /**
  * Firestore Security Rules Test Script
- * 
+ *
  * This script tests the refactored Firestore security rules to ensure
  * proper user ownership validation and access controls.
  */
@@ -18,15 +18,15 @@ const TEST_SCENARIOS = {
     operation: 'read',
     expected: true
   },
-  
+
   INVALID_USER_ACCESS: {
     description: 'Authenticated user accessing another user\'s data',
-    uid: 'user123', 
+    uid: 'user123',
     path: '/users/user456',
     operation: 'read',
     expected: false
   },
-  
+
   UNAUTHENTICATED_ACCESS: {
     description: 'Unauthenticated user trying to access data',
     uid: null,
@@ -147,7 +147,7 @@ async function runSecurityRulesTests() {
 
       try {
         // Create test context with authentication
-        const context = scenario.uid 
+        const context = scenario.uid
           ? testEnv.authenticatedContext(scenario.uid)
           : testEnv.unauthenticatedContext();
 
@@ -204,7 +204,7 @@ async function runSecurityRulesTests() {
   console.log(`Passed: ${passedTests}`);
   console.log(`Failed: ${totalTests - passedTests}`);
   console.log(`Success rate: ${((passedTests / totalTests) * 100).toFixed(1)}%`);
-  
+
   if (passedTests === totalTests) {
     console.log('\n🎉 All tests passed! Security rules are working correctly.');
   } else {
@@ -229,7 +229,7 @@ function validateRulesFunctions() {
   ];
 
   console.log('📋 Checking for reusable functions:');
-  
+
   expectedFunctions.forEach(func => {
     if (rulesContent.includes(func)) {
       console.log(`   ✅ Found: ${func}`);
@@ -240,7 +240,7 @@ function validateRulesFunctions() {
 
   // Check for usage of functions
   console.log('\n📋 Checking function usage:');
-  
+
   const functionUsages = [
     { func: 'isOwner(userId)', count: (rulesContent.match(/isOwner\(userId\)/g) || []).length },
     { func: 'isAuthenticated()', count: (rulesContent.match(/isAuthenticated\(\)/g) || []).length },
@@ -255,7 +255,7 @@ function validateRulesFunctions() {
   // Calculate code reduction
   const originalPattern = 'request.auth != null && request.auth.uid == userId';
   const originalCount = (rulesContent.match(/request\.auth != null && request\.auth\.uid ==/g) || []).length;
-  
+
   console.log(`\n📊 Code Reduction Analysis:`);
   console.log(`   Original pattern occurrences: ${originalCount}`);
   console.log(`   Replaced with reusable functions: ${originalCount === 0 ? '✅ All replaced' : '⚠️  Some remain'}`);

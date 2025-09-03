@@ -47,7 +47,7 @@ export const HelpTooltip: React.FC<HelpTooltipProps> = ({
     const updatePosition = () => {
       const anchorRect = options.anchor!.getBoundingClientRect();
       const tooltipRect = tooltipRef.current?.getBoundingClientRect();
-      
+
       if (!tooltipRect) return;
 
       let top = 0;
@@ -133,7 +133,7 @@ export const HelpTooltip: React.FC<HelpTooltipProps> = ({
 
   const getArrowClasses = () => {
     const baseClasses = 'absolute w-3 h-3 transform rotate-45 bg-gray-900';
-    
+
     switch (tooltipPosition) {
       case 'top':
         return `${baseClasses} -bottom-1.5 left-1/2 -translate-x-1/2`;
@@ -159,7 +159,7 @@ export const HelpTooltip: React.FC<HelpTooltipProps> = ({
     >
       {/* Arrow */}
       <div className={getArrowClasses()} />
-      
+
       {/* Header */}
       <div className="flex items-start justify-between mb-2">
         <h3 id="tooltip-title" className="font-medium text-white pr-4">

@@ -44,7 +44,7 @@ echo -e "${BLUE}2. Frontend Environment Configuration${NC}"
 if [ -f "frontend/.env" ]; then
     FRONTEND_PROJECT=$(grep "VITE_FIREBASE_PROJECT_ID" frontend/.env | cut -d'=' -f2 | tr -d '"' 2>/dev/null || echo "not-found")
     FRONTEND_ENVIRONMENT=$(grep "VITE_ENVIRONMENT" frontend/.env | cut -d'=' -f2 | tr -d '"' 2>/dev/null || echo "not-specified")
-    
+
     if [ "$FRONTEND_PROJECT" == "not-found" ]; then
         echo -e "${RED}❌ Frontend Firebase project ID not configured${NC}"
         ERRORS=$((ERRORS + 1))
@@ -64,7 +64,7 @@ echo -e "${BLUE}3. Backend Environment Configuration${NC}"
 if [ -f "backend/.env" ]; then
     BACKEND_PROJECT=$(grep "GCP_PROJECT_ID" backend/.env | cut -d'=' -f2 | tr -d '"' 2>/dev/null || echo "not-found")
     BACKEND_CREDS=$(grep "GOOGLE_APPLICATION_CREDENTIALS" backend/.env | cut -d'=' -f2 | tr -d '"' 2>/dev/null || echo "not-found")
-    
+
     if [ "$BACKEND_PROJECT" == "not-found" ]; then
         echo -e "${RED}❌ Backend GCP project ID not configured${NC}"
         ERRORS=$((ERRORS + 1))
@@ -72,7 +72,7 @@ if [ -f "backend/.env" ]; then
     else
         echo -e "${GREEN}✅ Backend project: $BACKEND_PROJECT${NC}"
     fi
-    
+
     if [ "$BACKEND_CREDS" == "not-found" ]; then
         echo -e "${RED}❌ Backend credentials path not configured${NC}"
         ERRORS=$((ERRORS + 1))

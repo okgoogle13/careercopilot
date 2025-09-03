@@ -19,7 +19,7 @@ const OUTPUT_FILE = path.join(DIST_PATH, 'bundle-analysis.json');
 const SIZE_LIMITS = {
   // Main JS bundle should be under 2MB (Firebase SDK is large)
   javascript: 2 * 1024 * 1024,
-  // CSS should be under 500KB  
+  // CSS should be under 500KB
   css: 500 * 1024,
   // Total assets under 10MB
   total: 10 * 1024 * 1024
@@ -43,7 +43,7 @@ function formatBytes(bytes) {
 
 function analyzeBundle() {
   console.log('🔍 Analyzing bundle...');
-  
+
   if (!fs.existsSync(DIST_PATH)) {
     console.error('❌ Dist directory not found. Run build first.');
     process.exit(1);
@@ -59,18 +59,18 @@ function analyzeBundle() {
 
   function walkDirectory(dir) {
     const files = fs.readdirSync(dir);
-    
+
     files.forEach(file => {
       const filePath = path.join(dir, file);
       const stat = fs.statSync(filePath);
-      
+
       if (stat.isDirectory()) {
         walkDirectory(filePath);
       } else {
         const size = stat.size;
         const relativePath = path.relative(DIST_PATH, filePath);
         totalSize += size;
-        
+
         const asset = {
           name: relativePath,
           size: size,

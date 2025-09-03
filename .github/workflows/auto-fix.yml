@@ -1,0 +1,227 @@
+name: Auto Fix Linting Issues
+
+on:
+  push:
+    branches: [develop, main]
+    paths:
+      - 'frontend/src/**'
+      - 'backend/**'
+      - '!backend/migrations/**'
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - 'frontend/src/**'
+      - 'backend/**'
+      - '!backend/migrations/**'
+  workflow_dispatch:
+    inputs:
+      force_fix:
+        description: 'Force auto-fix even without file changes'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-fix:
+    name: Auto Fix Code Issues
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    # Skip auto-fix for bot commits to avoid loops
+    if: ${{ !contains(github.event.head_commit.message, '[skip auto-fix]') && !contains(github.event.head_commit.message, '🤖 Auto-fix') }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install Python formatting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install black==23.12.1 isort==5.13.2 flake8==7.0.0
+
+      - name: Install Node dependencies
+        run: |
+          cd frontend
+          npm ci --prefer-offline --no-audit
+
+      - name: Check for changes needed
+        id: changes
+        run: |
+          echo "Checking if auto-fixes are needed..."
+
+          # Check Python files
+          python_changes=false
+          if ! black --check backend/ --line-length=100 --quiet; then
+            echo "Python formatting changes needed"
+            python_changes=true
+          fi
+
+          if ! isort --check-only backend/ --profile=black --line-length=100 --quiet; then
+            echo "Python import sorting changes needed"
+            python_changes=true
+          fi
+
+          # Check frontend files
+          frontend_changes=false
+          cd frontend
+          if ! npx eslint src/ --ext .js,.jsx,.ts,.tsx --max-warnings 50 --quiet; then
+            echo "ESLint fixes needed"
+            frontend_changes=true
+          fi
+
+          if ! npx prettier --check "src/**/*.{js,jsx,ts,tsx,json,css,md}" --quiet; then
+            echo "Prettier formatting needed"
+            frontend_changes=true
+          fi
+          cd ..
+
+          echo "python_changes=$python_changes" >> $GITHUB_OUTPUT
+          echo "frontend_changes=$frontend_changes" >> $GITHUB_OUTPUT
+
+          if [[ "$python_changes" == "true" || "$frontend_changes" == "true" ]]; then
+            echo "changes_needed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes_needed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Apply Python formatting fixes
+        if: steps.changes.outputs.python_changes == 'true'
+        run: |
+          echo "🐍 Applying Python formatting fixes..."
+
+          # Apply Black formatting
+          black backend/ --line-length=100
+
+          # Apply isort import sorting
+          isort backend/ --profile=black --line-length=100
+
+          echo "✅ Python formatting complete"
+
+      - name: Apply Frontend formatting fixes
+        if: steps.changes.outputs.frontend_changes == 'true'
+        run: |
+          echo "⚛️ Applying Frontend formatting fixes..."
+          cd frontend
+
+          # Apply ESLint fixes
+          npx eslint src/ --ext .js,.jsx,.ts,.tsx --fix --max-warnings 100 || true
+
+          # Apply Prettier formatting
+          npx prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,md}"
+
+          echo "✅ Frontend formatting complete"
+
+      - name: Check if changes were made
+        id: git-check
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Auto-Fix"
+
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "changes_made=true" >> $GITHUB_OUTPUT
+            echo "📝 Changes detected:"
+            git status --short
+          else
+            echo "changes_made=false" >> $GITHUB_OUTPUT
+            echo "✨ No changes needed - code is already properly formatted!"
+          fi
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changes_made == 'true'
+        run: |
+          # Add all changes
+          git add -A
+
+          # Create detailed commit message
+          echo "🤖 Auto-fix linting and formatting issues" > commit_msg.txt
+          echo "" >> commit_msg.txt
+          echo "Applied automatic fixes for:" >> commit_msg.txt
+
+          # Check what was fixed
+          if [[ "${{ steps.changes.outputs.python_changes }}" == "true" ]]; then
+            echo "- 🐍 Python: Black formatting and import sorting" >> commit_msg.txt
+          fi
+
+          if [[ "${{ steps.changes.outputs.frontend_changes }}" == "true" ]]; then
+            echo "- ⚛️ Frontend: ESLint fixes and Prettier formatting" >> commit_msg.txt
+          fi
+
+          echo "" >> commit_msg.txt
+          echo "Files changed:" >> commit_msg.txt
+          git diff --cached --name-only | sed 's/^/- /' >> commit_msg.txt
+          echo "" >> commit_msg.txt
+          echo "[skip auto-fix] to prevent infinite loops" >> commit_msg.txt
+          echo "" >> commit_msg.txt
+          echo "🤖 Generated with [Claude Code](https://claude.ai/code)" >> commit_msg.txt
+
+          # Commit with detailed message
+          git commit -F commit_msg.txt
+
+          # Push changes
+          git push
+
+      - name: Summary
+        if: always()
+        run: |
+          if [[ "${{ steps.git-check.outputs.changes_made }}" == "true" ]]; then
+            echo "✅ **Auto-fix completed successfully!**"
+            echo ""
+            echo "🔧 **Applied fixes:**"
+            if [[ "${{ steps.changes.outputs.python_changes }}" == "true" ]]; then
+              echo "- Python: Black formatting & import sorting"
+            fi
+            if [[ "${{ steps.changes.outputs.frontend_changes }}" == "true" ]]; then
+              echo "- Frontend: ESLint fixes & Prettier formatting"
+            fi
+            echo ""
+            echo "📝 Changes have been committed and pushed to the branch."
+          else
+            echo "✨ **No fixes needed - your code is already properly formatted!**"
+          fi
+
+      - name: Comment on PR (if applicable)
+        if: github.event_name == 'pull_request' && steps.git-check.outputs.changes_made == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pythonChanges = '${{ steps.changes.outputs.python_changes }}' === 'true';
+            const frontendChanges = '${{ steps.changes.outputs.frontend_changes }}' === 'true';
+
+            let body = '🤖 **Auto-fix applied!**\n\n';
+            body += 'I automatically fixed the following linting and formatting issues:\n\n';
+
+            if (pythonChanges) {
+              body += '- 🐍 **Python**: Applied Black formatting and import sorting\n';
+            }
+            if (frontendChanges) {
+              body += '- ⚛️ **Frontend**: Fixed ESLint issues and applied Prettier formatting\n';
+            }
+
+            body += '\n✅ Your code is now properly formatted and should pass CI checks!';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });

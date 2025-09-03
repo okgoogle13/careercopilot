@@ -29,7 +29,7 @@ const App: React.FC = () => {
             {/* Accessibility skip links */}
             <SkipLink href="#main-content">Skip to main content</SkipLink>
             <SkipLink href="#navigation">Skip to navigation</SkipLink>
-            
+
             <ProtectedRoute>
               <MainLayout>
                 <Suspense fallback={<LoadingSpinner fullScreen />}>

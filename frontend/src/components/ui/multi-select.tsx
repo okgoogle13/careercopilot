@@ -152,7 +152,7 @@ export function MultiSelect({
                 ))
               ) : (
                 <span className="text-sm">
-                  {selectedOptions.slice(0, maxDisplay).map(option => option.label).join(', ')} 
+                  {selectedOptions.slice(0, maxDisplay).map(option => option.label).join(', ')}
                   <Badge variant="secondary" className="ml-1 text-xs">
                     +{selectedOptions.length - maxDisplay}
                   </Badge>
@@ -197,7 +197,7 @@ export function MultiSelect({
               />
             </div>
           )}
-          
+
           <ScrollArea style={{ maxHeight }}>
             <div className="p-1">
               {filteredOptions.length === 0 && !shouldShowCreateOption ? (
@@ -216,7 +216,7 @@ export function MultiSelect({
                       Create "{searchQuery}"
                     </button>
                   )}
-                  
+
                   {filteredOptions.map((option) => {
                     const isSelected = value.includes(option.value);
                     return (
@@ -233,8 +233,8 @@ export function MultiSelect({
                       >
                         <div className={cn(
                           'flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                          isSelected 
-                            ? 'bg-primary text-primary-foreground' 
+                          isSelected
+                            ? 'bg-primary text-primary-foreground'
                             : 'opacity-50 [&_svg]:invisible'
                         )}>
                           <Check className="h-3 w-3" />
@@ -247,7 +247,7 @@ export function MultiSelect({
               )}
             </div>
           </ScrollArea>
-          
+
           {selectedOptions.length > 0 && (
             <div className="flex items-center justify-between border-t px-3 py-2 text-sm">
               <span className="text-muted-foreground">

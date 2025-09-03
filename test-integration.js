@@ -2,7 +2,7 @@ const { chromium } = require('@playwright/test');
 
 (async () => {
   console.log('🚀 Starting integration test...');
-  
+
   const browser = await chromium.launch({ headless: false });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -48,7 +48,7 @@ const { chromium } = require('@playwright/test');
     // Check if TemplateSelector is loaded
     console.log('🔍 Checking if TemplateSelector is loaded...');
     const templateSelector = await page.locator('[data-testid="template-selector"], .template-selector, .templates-grid').first();
-    
+
     if (await templateSelector.isVisible({ timeout: 5000 })) {
       console.log('✅ TemplateSelector component is visible');
     } else {
@@ -60,7 +60,7 @@ const { chromium } = require('@playwright/test');
     await page.waitForTimeout(3000);
     const images = await page.locator('img').all();
     let firebaseImages = 0;
-    
+
     for (const img of images) {
       const src = await img.getAttribute('src');
       if (src && src.includes('firebase')) {
@@ -68,7 +68,7 @@ const { chromium } = require('@playwright/test');
         console.log(`✅ Firebase image found: ${src.substring(0, 80)}...`);
       }
     }
-    
+
     if (firebaseImages === 0) {
       console.log('⚠️  No Firebase images found');
     } else {
@@ -78,7 +78,7 @@ const { chromium } = require('@playwright/test');
     // Try to find and click a template
     console.log('🖱️  Testing template selection...');
     const templates = await page.locator('.template-item, [data-testid="template-item"], button').all();
-    
+
     if (templates.length > 0) {
       console.log(`📋 Found ${templates.length} potential template elements`);
       // Click the first template

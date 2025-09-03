@@ -49,7 +49,7 @@ export function FormWizard({
 
   const handleStepChange = useCallback(async (newStep: number) => {
     if (newStep === activeStep) return;
-    
+
     setLoading(true);
     setErrors({});
 
@@ -159,7 +159,7 @@ export function FormWizard({
           const isActive = index === activeStep;
           const isCompleted = isStepCompleted(index);
           const isAccessible = isStepAccessible(index);
-          
+
           return (
             <div
               key={step.id}
@@ -345,7 +345,7 @@ export function Stepper({
         const isActive = index === currentStep;
         const isCompleted = isStepCompleted(index);
         const isAccessible = isStepAccessible(index);
-        
+
         return (
           <div
             key={step.id}

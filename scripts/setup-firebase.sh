@@ -42,9 +42,9 @@ log "Setting up Firebase projects..."
 setup_project() {
     local project_id="$1"
     local display_name="$2"
-    
+
     log "Setting up project: $project_id"
-    
+
     # Check if project exists
     if firebase projects:list | grep -q "$project_id"; then
         info "Project $project_id already exists"
@@ -52,44 +52,44 @@ setup_project() {
         log "Creating project $project_id..."
         firebase projects:create "$project_id" --display-name "$display_name"
     fi
-    
+
     # Set as active project
     firebase use "$project_id"
-    
+
     # Initialize if needed
     if [ ! -f "firebase.json" ]; then
         log "Initializing Firebase in project..."
         firebase init --project "$project_id"
     fi
-    
+
     log "Enabling required services for $project_id..."
-    
+
     # Enable Authentication
     info "🔐 Setting up Authentication..."
     echo "Go to: https://console.firebase.google.com/project/$project_id/authentication/providers"
     echo "1. Enable Email/Password sign-in method"
     echo "2. Enable Google sign-in method (optional)"
     echo "3. Add authorized domains for your app"
-    
+
     # Enable Firestore
     info "🗄️  Setting up Firestore..."
     echo "Go to: https://console.firebase.google.com/project/$project_id/firestore"
     echo "1. Create database in production mode"
     echo "2. Choose region: australia-southeast1"
-    
+
     # Enable Storage
     info "📁 Setting up Storage..."
     echo "Go to: https://console.firebase.google.com/project/$project_id/storage"
     echo "1. Get started with Cloud Storage"
     echo "2. Start in production mode"
     echo "3. Choose region: australia-southeast1"
-    
+
     # Enable Hosting
     info "🌐 Setting up Hosting..."
     echo "Go to: https://console.firebase.google.com/project/$project_id/hosting"
     echo "1. Get started with Firebase Hosting"
     echo "2. Note the hosting URL for later"
-    
+
     echo
     warning "After setting up in console, generate service account:"
     echo "1. Go to: https://console.firebase.google.com/project/$project_id/settings/serviceaccounts/adminsdk"
@@ -104,7 +104,7 @@ setup_project "careercopilot-staging" "CareerCopilot Staging"
 echo
 read -p "Press Enter after setting up staging project in console..."
 
-# Set up production project  
+# Set up production project
 setup_project "careercopilot-prod" "CareerCopilot Production"
 
 echo
@@ -119,7 +119,7 @@ log "Deploying Firestore security rules..."
 firebase use staging
 firebase deploy --only firestore:rules
 
-firebase use production  
+firebase use production
 firebase deploy --only firestore:rules
 
 echo -e "${GREEN}
@@ -135,6 +135,6 @@ Next steps:
    git push origin develop
 
 Project URLs:
-📊 Staging: https://console.firebase.google.com/project/careercopilot-staging  
+📊 Staging: https://console.firebase.google.com/project/careercopilot-staging
 🚀 Production: https://console.firebase.google.com/project/careercopilot-prod
 ${NC}"

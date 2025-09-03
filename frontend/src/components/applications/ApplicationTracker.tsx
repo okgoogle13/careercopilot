@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, Button, Modal, LoadingSpinner } from '../ui';
-import { 
-  Plus, Calendar, MapPin, Building, Clock, ExternalLink, 
+import {
+  Plus, Calendar, MapPin, Building, Clock, ExternalLink,
   CheckCircle, AlertCircle, XCircle, Eye, Edit, Trash2,
   Filter, Search, MoreHorizontal, Bell, Target, Users, FileText
 } from 'lucide-react';
@@ -88,12 +88,12 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'date' | 'company' | 'status' | 'priority'>('date');
-  
+
   // Bulk operations state
   const [selectedApplications, setSelectedApplications] = useState<Set<string>>(new Set());
   const [bulkActionMode, setBulkActionMode] = useState(false);
   const [showBulkActionsModal, setShowBulkActionsModal] = useState(false);
-  
+
   // Mock data for development
   useEffect(() => {
     const mockApplications: JobApplication[] = [
@@ -199,7 +199,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
           return priorityOrder[b.priority] - priorityOrder[a.priority];
         case 'date':
         default:
-          return (b.appliedDate?.getTime() || b.createdAt.getTime()) - 
+          return (b.appliedDate?.getTime() || b.createdAt.getTime()) -
                  (a.appliedDate?.getTime() || a.createdAt.getTime());
       }
     });
@@ -211,9 +211,9 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
 
   const handleStatusChange = async (appId: string, newStatus: JobApplication['status']) => {
     try {
-      setApplications(prev => prev.map(app => 
-        app.id === appId ? { 
-          ...app, 
+      setApplications(prev => prev.map(app =>
+        app.id === appId ? {
+          ...app,
           status: newStatus,
           updatedAt: new Date()
         } : app
@@ -226,7 +226,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
 
   const handleDelete = async (appId: string) => {
     if (!window.confirm('Are you sure you want to delete this application?')) return;
-    
+
     try {
       setApplications(prev => prev.filter(app => app.id !== appId));
       toast.success('Application deleted');
@@ -283,14 +283,14 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
   const handleBulkStatusUpdate = async (newStatus: JobApplication['status']) => {
     try {
       const selectedIds = Array.from(selectedApplications);
-      setApplications(prev => prev.map(app => 
+      setApplications(prev => prev.map(app =>
         selectedIds.includes(app.id) ? {
           ...app,
           status: newStatus,
           updatedAt: new Date()
         } : app
       ));
-      
+
       toast.success(`Updated ${selectedIds.length} application(s) to ${newStatus}`);
       setSelectedApplications(new Set());
       setShowBulkActionsModal(false);
@@ -307,7 +307,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
     try {
       const selectedIds = Array.from(selectedApplications);
       setApplications(prev => prev.filter(app => !selectedIds.includes(app.id)));
-      
+
       toast.success(`Deleted ${selectedIds.length} application(s)`);
       setSelectedApplications(new Set());
       setShowBulkActionsModal(false);
@@ -323,7 +323,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
   };
 
   const exportApplications = () => {
-    const selectedApps = applications.filter(app => 
+    const selectedApps = applications.filter(app =>
       selectedApplications.size === 0 || selectedApplications.has(app.id)
     );
 
@@ -403,7 +403,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
               <ul className="mt-2 space-y-1">
                 {upcomingDeadlines.map(app => (
                   <li key={app.id} className="text-sm text-orange-800">
-                    <strong>{app.jobTitle}</strong> at {app.company} - 
+                    <strong>{app.jobTitle}</strong> at {app.company} -
                     {app.deadline && format(app.deadline, 'MMM d, yyyy')}
                   </li>
                 ))}
@@ -425,7 +425,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
             className="w-full pl-10 pr-4 py-2 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
           />
         </div>
-        
+
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
@@ -457,30 +457,30 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
             onClick={toggleBulkMode}
             className="flex items-center gap-2"
           >
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               checked={bulkActionMode}
               onChange={() => {}}
               className="w-4 h-4"
             />
             {bulkActionMode ? 'Exit Bulk Mode' : 'Bulk Actions'}
           </Button>
-          
+
           {bulkActionMode && (
             <>
               <span className="text-sm text-muted-foreground">
                 {selectedApplications.size} selected
               </span>
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="sm"
                 onClick={selectAllApplications}
                 disabled={filteredApplications.length === selectedApplications.size}
               >
                 Select All ({filteredApplications.length})
               </Button>
-              <Button 
-                variant="ghost" 
+              <Button
+                variant="ghost"
                 size="sm"
                 onClick={clearSelection}
                 disabled={selectedApplications.size === 0}
@@ -499,7 +499,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
           >
             📊 Export CSV
           </Button>
-          
+
           {bulkActionMode && selectedApplications.size > 0 && (
             <Button
               onClick={() => setShowBulkActionsModal(true)}
@@ -518,7 +518,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
             <Target className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-lg font-medium mb-2">No applications found</h3>
             <p className="text-muted-foreground mb-4">
-              {searchTerm || statusFilter !== 'all' 
+              {searchTerm || statusFilter !== 'all'
                 ? 'Try adjusting your search or filters'
                 : 'Start tracking your job applications to stay organized'
               }
@@ -552,7 +552,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
           isOpen={isDetailsModalOpen}
           onClose={() => setIsDetailsModalOpen(false)}
           onUpdate={(updated) => {
-            setApplications(prev => prev.map(app => 
+            setApplications(prev => prev.map(app =>
               app.id === updated.id ? updated : app
             ));
             setSelectedApp(updated);
@@ -651,12 +651,12 @@ const ApplicationCard: React.FC<{
   const [isDragging, setIsDragging] = useState(false);
   const [showActions, setShowActions] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  
+
   const statusInfo = statusConfig[application.status];
   const priorityInfo = priorityConfig[application.priority];
   const StatusIcon = statusInfo.icon;
 
-  const daysUntilDeadline = application.deadline 
+  const daysUntilDeadline = application.deadline
     ? Math.ceil((application.deadline.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
     : null;
 
@@ -670,12 +670,12 @@ const ApplicationCard: React.FC<{
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging || bulkMode) return;
-    
+
     const touch = e.touches[0];
     const startX = parseFloat(cardRef.current?.getAttribute('data-start-x') || '0');
     const currentX = touch.clientX;
     const diffX = currentX - startX;
-    
+
     // Limit swipe to left only and max 150px
     const clampedX = Math.max(Math.min(diffX, 0), -150);
     setSwipeX(clampedX);
@@ -683,7 +683,7 @@ const ApplicationCard: React.FC<{
 
   const handleTouchEnd = () => {
     setIsDragging(false);
-    
+
     // If swiped more than 75px, show actions
     if (swipeX < -75) {
       setSwipeX(-120);
@@ -735,12 +735,12 @@ const ApplicationCard: React.FC<{
       )}
 
       {/* Main Card */}
-      <Card 
+      <Card
         ref={cardRef}
         className={`transition-transform duration-200 ${
           selected ? 'ring-2 ring-blue-500 bg-blue-50' : ''
         } ${isDragging ? 'transition-none' : ''}`}
-        style={{ 
+        style={{
           transform: `translateX(${swipeX}px)`,
           // Mobile-first responsive padding
           padding: window.innerWidth < 768 ? '1rem' : '1.5rem'
@@ -761,7 +761,7 @@ const ApplicationCard: React.FC<{
               />
             </div>
           )}
-          
+
           <div className="flex-1 min-w-0">
             {/* Mobile-optimized header */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
@@ -777,7 +777,7 @@ const ApplicationCard: React.FC<{
                 </span>
               </div>
             </div>
-            
+
             {/* Mobile-optimized company info */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 text-sm text-muted-foreground mb-3">
               <div className="flex items-center gap-1">
@@ -807,7 +807,7 @@ const ApplicationCard: React.FC<{
             <div className={`text-sm font-medium ${
               daysUntilDeadline <= 3 ? 'text-red-600' : daysUntilDeadline <= 7 ? 'text-orange-600' : 'text-muted-foreground'
             }`}>
-              {daysUntilDeadline === 0 ? 'Deadline today' : 
+              {daysUntilDeadline === 0 ? 'Deadline today' :
                daysUntilDeadline === 1 ? 'Deadline tomorrow' :
                daysUntilDeadline > 0 ? `${daysUntilDeadline} days until deadline` :
                'Deadline passed'}
@@ -825,7 +825,7 @@ const ApplicationCard: React.FC<{
               <ExternalLink className="w-4 h-4" />
             </Button>
           )}
-          
+
           <select
             value={application.status}
             onChange={(e) => onStatusChange(e.target.value as JobApplication['status'])}
@@ -839,14 +839,14 @@ const ApplicationCard: React.FC<{
               <Button variant="ghost" size="sm" onClick={onViewDetails}>
                 <Eye className="w-4 h-4" />
               </Button>
-              
-              <Button 
-                variant="ghost" 
-                size="sm" 
+
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   onDelete();
-                }} 
+                }}
                 className="text-red-500 hover:text-red-700"
               >
                 <Trash2 className="w-4 h-4" />
@@ -954,7 +954,7 @@ const ApplicationDetailsModal: React.FC<{
                 <p className="text-muted-foreground">{application.company} • {application.location}</p>
               </div>
             )}
-            
+
             <div className="flex items-center gap-3 mt-3">
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${statusInfo.color}`}>
                 {statusInfo.label}
@@ -969,7 +969,7 @@ const ApplicationDetailsModal: React.FC<{
               )}
             </div>
           </div>
-          
+
           <div className="flex gap-2">
             {isEditing ? (
               <>
@@ -1022,7 +1022,7 @@ const ApplicationDetailsModal: React.FC<{
                 <Card className="p-4">
                   <div className="text-sm text-muted-foreground">Days Since Applied</div>
                   <div className="text-lg font-semibold">
-                    {application.appliedDate 
+                    {application.appliedDate
                       ? Math.ceil((new Date().getTime() - application.appliedDate.getTime()) / (1000 * 60 * 60 * 24))
                       : 'N/A'
                     }
@@ -1041,7 +1041,7 @@ const ApplicationDetailsModal: React.FC<{
                   {application.jobUrl && (
                     <div>
                       <span className="font-medium">Job Posting:</span>{' '}
-                      <a href={application.jobUrl} target="_blank" rel="noopener noreferrer" 
+                      <a href={application.jobUrl} target="_blank" rel="noopener noreferrer"
                          className="text-primary hover:underline">
                         View Original Posting <ExternalLink className="w-3 h-3 inline ml-1" />
                       </a>
@@ -1130,7 +1130,7 @@ const ApplicationDetailsModal: React.FC<{
                   </Button>
                 </div>
               </div>
-              
+
               <div className="space-y-4">
                 {application.timeline
                   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -1171,7 +1171,7 @@ const ApplicationDetailsModal: React.FC<{
                 <h3 className="font-semibold">Contacts</h3>
                 <ContactForm onAdd={addContact} />
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {application.contacts.map((contact, index) => (
                   <Card key={index} className="p-4">
@@ -1192,7 +1192,7 @@ const ApplicationDetailsModal: React.FC<{
                     </div>
                   </Card>
                 ))}
-                
+
                 {application.contacts.length === 0 && (
                   <div className="col-span-2 text-center py-8 text-muted-foreground">
                     <Users className="w-12 h-12 mx-auto mb-2 opacity-50" />
@@ -1206,7 +1206,7 @@ const ApplicationDetailsModal: React.FC<{
           {activeTab === 'documents' && (
             <div className="space-y-4">
               <h3 className="font-semibold">Related Documents</h3>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {application.documents.resumeId && (
                   <Card className="p-4">
@@ -1222,7 +1222,7 @@ const ApplicationDetailsModal: React.FC<{
                     </div>
                   </Card>
                 )}
-                
+
                 {application.documents.coverLetterId && (
                   <Card className="p-4">
                     <div className="flex items-center gap-3">
@@ -1237,7 +1237,7 @@ const ApplicationDetailsModal: React.FC<{
                     </div>
                   </Card>
                 )}
-                
+
                 {application.documents.customDocuments?.map((docId, index) => (
                   <Card key={index} className="p-4">
                     <div className="flex items-center gap-3">
@@ -1252,8 +1252,8 @@ const ApplicationDetailsModal: React.FC<{
                     </div>
                   </Card>
                 ))}
-                
-                {!application.documents.resumeId && !application.documents.coverLetterId && 
+
+                {!application.documents.resumeId && !application.documents.coverLetterId &&
                  (!application.documents.customDocuments || application.documents.customDocuments.length === 0) && (
                   <div className="col-span-2 text-center py-8 text-muted-foreground">
                     <FileText className="w-12 h-12 mx-auto mb-2 opacity-50" />
@@ -1293,15 +1293,15 @@ const AddApplicationModal: React.FC<{
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.jobTitle.trim()) {
       newErrors.jobTitle = 'Job title is required';
     }
-    
+
     if (!formData.company.trim()) {
       newErrors.company = 'Company name is required';
     }
-    
+
     if (!formData.location.trim()) {
       newErrors.location = 'Location is required';
     }
@@ -1337,12 +1337,12 @@ const AddApplicationModal: React.FC<{
 
   const parseJobUrl = async (url: string) => {
     if (!isValidUrl(url)) return;
-    
+
     setIsParsingUrl(true);
     try {
       // Simulate URL parsing - in real app, this would call an API
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       // Mock parsed data based on common job sites
       if (url.includes('linkedin.com')) {
         setFormData(prev => ({
@@ -1359,7 +1359,7 @@ const AddApplicationModal: React.FC<{
           location: prev.location || 'Remote'
         }));
       }
-      
+
       toast.success('Job details extracted from URL');
     } catch (error) {
       toast.error('Failed to parse job URL');
@@ -1370,7 +1370,7 @@ const AddApplicationModal: React.FC<{
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       toast.error('Please fix the form errors');
       return;
@@ -1693,7 +1693,7 @@ const ContactForm: React.FC<{
     <Card className="p-4 border-2 border-dashed border-gray-300">
       <form onSubmit={handleSubmit} className="space-y-4">
         <h4 className="font-medium">Add New Contact</h4>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -1708,7 +1708,7 @@ const ContactForm: React.FC<{
               placeholder="John Smith"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Role/Title
@@ -1721,7 +1721,7 @@ const ContactForm: React.FC<{
               placeholder="Hiring Manager"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Email
@@ -1734,7 +1734,7 @@ const ContactForm: React.FC<{
               placeholder="john@company.com"
             />
           </div>
-          
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Phone
@@ -1748,7 +1748,7 @@ const ContactForm: React.FC<{
             />
           </div>
         </div>
-        
+
         <div className="flex justify-end gap-2">
           <Button type="button" variant="outline" onClick={handleCancel}>
             Cancel

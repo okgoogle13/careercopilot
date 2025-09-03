@@ -179,7 +179,7 @@ class AuthService {
         const provider = new GoogleAuthProvider();
         provider.addScope('email');
         provider.addScope('profile');
-        
+
         const result = await signInWithPopup(auth, provider);
         console.log('🔥 Google sign-in successful.');
         return result.user;

@@ -14,7 +14,7 @@ interface SidebarProps {
 export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, path: '/' },
     { id: 'documents', label: 'Documents', icon: FileText, path: '/documents' },
@@ -32,14 +32,14 @@ export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }:
     <>
       {/* Mobile overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={onClose}
           aria-hidden="true"
         />
       )}
-      
-      <div 
+
+      <div
         className={cn(
           'fixed lg:sticky top-0 left-0 z-50 w-64 h-screen bg-sidebar border-r border-sidebar-border flex flex-col transition-transform duration-300 ease-in-out transform',
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',

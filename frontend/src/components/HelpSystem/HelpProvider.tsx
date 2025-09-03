@@ -96,7 +96,7 @@ export const HelpProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }}
     >
       {children}
-      
+
       {/* Render help components */}
       {currentHelp && (
         <>
@@ -134,7 +134,7 @@ export const helpContent = {
     type: 'tooltip' as const,
     category: 'feature' as const,
   },
-  
+
   'profile-variations': {
     id: 'profile-variations',
     title: 'Profile Variations',
@@ -212,7 +212,7 @@ export const helpContent = {
 // Hook for easy access to specific help content
 export const useHelpContent = () => {
   const { showHelp } = useHelp();
-  
+
   const showHelpFor = useCallback((contentId: keyof typeof helpContent, options?: HelpOptions) => {
     const content = helpContent[contentId];
     if (content) {

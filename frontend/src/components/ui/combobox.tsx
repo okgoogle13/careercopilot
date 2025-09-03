@@ -49,7 +49,7 @@ export function Combobox({
 
   const filteredOptions = React.useMemo(() => {
     if (!searchable || !searchQuery) return options;
-    
+
     const query = searchQuery.toLowerCase();
     return options.filter(option =>
       option.label.toLowerCase().includes(query) ||
@@ -87,12 +87,12 @@ export function Combobox({
       setOpen(false);
       triggerRef.current?.focus();
     }
-    
+
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
       // Focus management would go here for keyboard navigation
     }
-    
+
     if (e.key === 'Enter') {
       e.preventDefault();
       if (filteredOptions.length > 0 && !filteredOptions[0].disabled) {
@@ -130,8 +130,8 @@ export function Combobox({
           </div>
         </Button>
       </PopoverTrigger>
-      
-      <PopoverContent 
+
+      <PopoverContent
         className={cn('w-[--radix-popover-trigger-width] p-0', popoverClassName)}
         align="start"
       >
@@ -148,7 +148,7 @@ export function Combobox({
               />
             </div>
           )}
-          
+
           <div className="max-h-60 overflow-auto p-1">
             {filteredOptions.length === 0 ? (
               <div className="py-6 text-center text-sm text-muted-foreground">
@@ -178,7 +178,7 @@ export function Combobox({
                       </div>
                     )}
                   </div>
-                  
+
                   {value === option.value && (
                     <Check className="ml-2 h-4 w-4 shrink-0" />
                   )}
@@ -220,7 +220,7 @@ export function GroupedCombobox({
   const [searchQuery, setSearchQuery] = useState('');
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const allOptions = React.useMemo(() => 
+  const allOptions = React.useMemo(() =>
     groups.flatMap(group => group.options),
     [groups]
   );
@@ -229,7 +229,7 @@ export function GroupedCombobox({
 
   const filteredGroups = React.useMemo(() => {
     if (!searchable || !searchQuery) return groups;
-    
+
     const query = searchQuery.toLowerCase();
     return groups
       .map(group => ({
@@ -296,8 +296,8 @@ export function GroupedCombobox({
           </div>
         </Button>
       </PopoverTrigger>
-      
-      <PopoverContent 
+
+      <PopoverContent
         className={cn('w-[--radix-popover-trigger-width] p-0', popoverClassName)}
         align="start"
       >
@@ -313,7 +313,7 @@ export function GroupedCombobox({
               />
             </div>
           )}
-          
+
           <div className="max-h-60 overflow-auto p-1">
             {filteredGroups.length === 0 ? (
               <div className="py-6 text-center text-sm text-muted-foreground">
@@ -349,7 +349,7 @@ export function GroupedCombobox({
                           </div>
                         )}
                       </div>
-                      
+
                       {value === option.value && (
                         <Check className="ml-2 h-4 w-4 shrink-0" />
                       )}

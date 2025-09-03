@@ -57,7 +57,7 @@ Created `shared-config.yml` with centralized configuration:
   uses: actions/setup-node@v4
   # ... 15+ more steps
 
-# After  
+# After
 - name: Setup and Build Frontend
   uses: ./.github/actions/setup-frontend
   with:
@@ -92,7 +92,7 @@ Created `shared-config.yml` with centralized configuration:
 - **Centralized version management** through environment variables
 - **Single source of truth** for version updates
 
-### 2. Dependency Installation Consistency  
+### 2. Dependency Installation Consistency
 - **All workflows use `npm ci`** instead of mixed npm commands
 - **Consistent caching strategy** across all Node.js setups
 - **Standardized timeout configurations**
@@ -123,7 +123,7 @@ Created `shared-config.yml` with centralized configuration:
 
 All refactored workflow files have been validated for:
 - ✅ **YAML syntax correctness**
-- ✅ **Action input/output consistency** 
+- ✅ **Action input/output consistency**
 - ✅ **Environment variable usage**
 - ✅ **Workflow dependencies**
 

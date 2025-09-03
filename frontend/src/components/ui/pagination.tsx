@@ -286,7 +286,7 @@ export function PaginationWithPageSize({
         <span>
           Showing {startItem} to {endItem} of {totalItems} results
         </span>
-        
+
         {showPageSizeSelector && (
           <div className="flex items-center gap-2">
             <span>Show</span>

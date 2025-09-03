@@ -19,7 +19,7 @@ const NavItem = memo<NavItemProps>(
     <NavLink
       to={to}
       className={({ isActive }: { isActive: boolean }) => `
-              flex items-center space-x-3 px-4 py-2.5 rounded-xl text-sm font-medium 
+              flex items-center space-x-3 px-4 py-2.5 rounded-xl text-sm font-medium
               transition-all duration-200 group hover-lift animate-fade-in
               ${
                 isPrimary

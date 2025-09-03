@@ -16,7 +16,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
   color = 'blue',
 }) => {
   const percentage = Math.min(Math.max((value / max) * 100, 0), 100);
-  
+
   const colorClasses = {
     blue: 'bg-blue-500',
     green: 'bg-green-500',

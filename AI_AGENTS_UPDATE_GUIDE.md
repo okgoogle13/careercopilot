@@ -4,7 +4,7 @@
 
 ### 🚨 IMMEDIATE Issues (FIXED)
 1. **✅ Firestore Rules** - Replaced `if false` with proper user authentication rules
-2. **✅ Syntax Error** - Fixed indentation error in `dependencies.py:1` 
+2. **✅ Syntax Error** - Fixed indentation error in `dependencies.py:1`
 3. **✅ Missing Dependency** - Added `slowapi` to requirements.txt
 4. **✅ Input Sanitization** - Created comprehensive validation system
 5. **✅ Error Handling** - Implemented retry logic and structured error handling
@@ -70,32 +70,32 @@ def your_agent_function(user_input: str, context_data: dict) -> dict:
         # 1. Input validation
         if not user_input or not isinstance(user_input, str):
             raise InputValidationError("Input is required and must be a string")
-        
+
         # 2. Sanitize inputs
         sanitized_input = InputSanitizer.sanitize_text_input(user_input)
         sanitized_context = InputSanitizer.sanitize_dict_input(context_data)
-        
+
         # 3. Create safe prompt
         safe_prompt = InputSanitizer.create_safe_prompt(
             your_template,
             user_data=sanitized_input.sanitized_content,
             context=sanitized_context
         )
-        
+
         # 4. Make AI request
         response = your_ai_model.generate(safe_prompt)
-        
+
         # 5. Validate response
         validated_response = validate_ai_response(response)
         response_text = validated_response.text()
-        
+
         # 6. Parse and validate result
         if expected_json:
             result = json.loads(response_text)
             # Add field validation here
-        
+
         return result
-        
+
     except InputValidationError as e:
         raise AIError(
             message=f"Input validation failed: {str(e)}",

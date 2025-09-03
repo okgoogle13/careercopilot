@@ -45,7 +45,7 @@ interface AnalysisResult {
 async function getATSAnalysis(jobDescription: string, userProfile: UserProfile): Promise<AnalysisResult> {
   try {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    
+
     if (!apiKey) {
       throw new Error('Gemini API key not configured');
     }
@@ -70,7 +70,7 @@ Provide a detailed ATS analysis in the following JSON format:
       "suggestions": ["suggestion1", "suggestion2"]
     },
     {
-      "name": "Format & Structure", 
+      "name": "Format & Structure",
       "score": (number 0-100),
       "status": "good" | "warning" | "poor",
       "suggestions": ["suggestion1", "suggestion2"]
@@ -105,7 +105,7 @@ Focus on ATS compatibility, keyword matching, and formatting suggestions.`;
 
     const data = await response.json();
     const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
-    
+
     if (!responseText) {
       throw new Error('No response from Gemini API');
     }
@@ -118,7 +118,7 @@ Focus on ATS compatibility, keyword matching, and formatting suggestions.`;
 
     const analysisResult = JSON.parse(jsonMatch[0]);
     return analysisResult;
-    
+
   } catch (error) {
     console.error('Error getting ATS analysis:', error);
     throw error;
@@ -141,7 +141,7 @@ export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
     }
 
     setIsLoading(true);
-    
+
     try {
       // Mock user profile data - in a real app this would come from props or context
       const userProfile = {
@@ -150,7 +150,7 @@ export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
         skills: ['Mental Health', 'Client Advocacy', 'Team Collaboration'],
         education: 'Bachelor\'s in Social Work'
       };
-      
+
       const result = await getATSAnalysis(jobDescription, userProfile);
       setAnalysisResult(result);
       toast.success('Analysis completed successfully!');
@@ -221,7 +221,7 @@ export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
           rows={6}
           className="mb-4"
         />
-        <Button 
+        <Button
           onClick={handleAnalyze}
           disabled={isLoading || !jobDescription.trim()}
           className="bg-primary hover:bg-primary/90"

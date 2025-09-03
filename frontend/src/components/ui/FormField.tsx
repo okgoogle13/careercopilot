@@ -112,7 +112,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         className={`
-          block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset 
+          block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset
           ${
             hasError
               ? 'ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600'
@@ -144,7 +144,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       <textarea
         ref={ref}
         className={`
-          block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset 
+          block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset
           ${
             hasError
               ? 'ring-red-300 placeholder:text-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600'
@@ -179,7 +179,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <select
         ref={ref}
         className={`
-          block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset 
+          block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset
           ${
             hasError
               ? 'ring-red-300 focus:ring-2 focus:ring-inset focus:ring-red-600'
@@ -221,7 +221,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             ref={ref}
             type="checkbox"
             className={`
-              h-4 w-4 rounded border-gray-300 
+              h-4 w-4 rounded border-gray-300
               ${hasError ? 'text-red-600 focus:ring-red-600' : 'text-blue-600 focus:ring-blue-600'}
               focus:ring-2 focus:ring-offset-2
               ${className}
