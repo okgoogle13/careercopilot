@@ -1,12 +1,18 @@
 // Fallback Authentication System
 // Provides local authentication when Firebase is unavailable
 
-interface User {
-  uid: string;
-  email: string;
-  displayName?: string;
-  getIdToken: () => Promise<string>;
-}
+import type { User as FirebaseUser } from 'firebase/auth';
+
+// Create a type that has the properties of our fallback user
+// and is also compatible with the FirebaseUser type.
+// This avoids type errors when using the fallback user where a FirebaseUser is expected.
+type User = Pick<FirebaseUser, 'uid' | 'email' | 'displayName' | 'getIdToken'> & {
+  // Add any other properties from FirebaseUser that you might need, making them optional.
+  photoURL?: string | null;
+  emailVerified?: boolean;
+  isAnonymous?: boolean;
+  // You can add more properties here as needed.
+};
 
 interface AuthState {
   user: User | null;

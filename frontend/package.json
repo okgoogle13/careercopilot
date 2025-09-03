@@ -56,6 +56,7 @@
     "react-datepicker": "^8.7.0",
     "react-day-picker": "^9.9.0",
     "react-dom": "19.1.1",
+    "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.62.0",
     "react-hot-toast": "2.5.2",
     "react-pdf": "^10.1.0",
@@ -74,6 +75,9 @@
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.10.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@types/react-dropzone": "^4.2.2",
     "@types/testing-library__jest-dom": "^5.14.9",
     "@typescript-eslint/eslint-plugin": "^8.41.0",
     "@typescript-eslint/parser": "^8.41.0",
@@ -91,7 +95,7 @@
     "tailwindcss-animate": "^1.0.7",
     "terser": "^5.27.0",
     "ts-jest": "^29.4.1",
-    "typescript": "5.3.3",
+    "typescript": "^5.9.2",
     "vite": "6.3.5"
   },
   "keywords": [

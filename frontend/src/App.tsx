@@ -1,11 +1,11 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 // Component imports
-import { Navbar, ProtectedRoute, LoadingSpinner } from './components';
+import { ProtectedRoute, LoadingSpinner } from './components';
 import { ErrorBoundary, SkipLink } from './components/ui';
 import { AuthProvider, UserPreferencesProvider, ThemeProvider } from './contexts';
+import { MainLayout } from './components/layout';
 
 // Lazy load page components
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -13,6 +13,7 @@ const DocumentsPage = lazy(() => import('./pages/DocumentsPage'));
 const AnalysisPage = lazy(() => import('./pages/AnalysisPage'));
 const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const OpportunitiesPage = lazy(() => import('./pages/OpportunitiesPage'));
+const ApplicationsPage = lazy(() => import('./pages/ApplicationsPage'));
 const KscGeneratorPage = lazy(() => import('./pages/KscGeneratorPage'));
 const DocumentGenerationPage = lazy(
   () => import('./pages/DocumentGenerationPage')
@@ -29,16 +30,9 @@ const App: React.FC = () => {
             <SkipLink href="#main-content">Skip to main content</SkipLink>
             <SkipLink href="#navigation">Skip to navigation</SkipLink>
             
-            <Toaster position="top-center" reverseOrder={false} />
             <ProtectedRoute>
-            <Navbar />
-            <main
-              id="main-content"
-              className="bg-background min-h-screen"
-              role="main"
-            >
-              <div className="container mx-auto">
-                <Suspense fallback={<LoadingSpinner />}>
+              <MainLayout>
+                <Suspense fallback={<LoadingSpinner fullScreen />}>
                   <Routes>
                     <Route
                       path="/"
@@ -81,6 +75,14 @@ const App: React.FC = () => {
                       }
                     />
                     <Route
+                      path="/applications"
+                      element={
+                        <ErrorBoundary>
+                          <ApplicationsPage />
+                        </ErrorBoundary>
+                      }
+                    />
+                    <Route
                       path="/ksc-generator"
                       element={
                         <ErrorBoundary>
@@ -106,8 +108,7 @@ const App: React.FC = () => {
                     />
                   </Routes>
                 </Suspense>
-              </div>
-            </main>
+              </MainLayout>
           </ProtectedRoute>
         </UserPreferencesProvider>
       </AuthProvider>
