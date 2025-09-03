@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal, ProgressBar, LoadingSpinner } from '../ui';
-import { 
-  CheckCircle, ArrowRight, ArrowLeft, X, Clock, AlertCircle, 
+import {
+  CheckCircle, ArrowRight, ArrowLeft, X, Clock, AlertCircle,
   FileText, Target, Sparkles, RefreshCw,
-  Download, Share2, Eye, Plus, Briefcase, GraduationCap, 
+  Download, Share2, Eye, Plus, Briefcase, GraduationCap,
   Trash2, Award
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -289,7 +289,7 @@ const WorkflowStepRenderer: React.FC<{
         </div>
         <h3 className="text-2xl font-bold text-gray-900 mb-2">{step.title}</h3>
         <p className="text-gray-600 max-w-2xl mx-auto">{step.description}</p>
-        
+
         {step.estimatedTime > 0 && (
           <div className="flex items-center justify-center gap-1 mt-2 text-sm text-gray-500">
             <Clock className="w-4 h-4" />
@@ -330,7 +330,7 @@ const WorkflowStepRenderer: React.FC<{
           {step.required && (
             <span className="text-sm text-gray-500">* Required step</span>
           )}
-          
+
           <Button
             onClick={onNext}
             disabled={processing}
@@ -343,10 +343,10 @@ const WorkflowStepRenderer: React.FC<{
             ) : (
               <ArrowRight className="w-4 h-4" />
             )}
-            {processing 
-              ? 'Processing...' 
-              : stepIndex === workflow.steps.length - 1 
-              ? 'Complete Workflow' 
+            {processing
+              ? 'Processing...'
+              : stepIndex === workflow.steps.length - 1
+              ? 'Complete Workflow'
               : 'Continue'
             }
           </Button>
@@ -527,7 +527,7 @@ const getWorkflowDefinition = (workflowId: string): Workflow => {
   if (!workflow) {
     throw new Error(`Workflow ${workflowId} not found`);
   }
-  
+
   return workflow;
 };
 
@@ -634,10 +634,10 @@ const ProfileSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange 
   return (
     <div className="space-y-4">
       <p className="text-gray-600 mb-4">
-        Select the profile that best matches the job you're applying for. This will be used as the 
+        Select the profile that best matches the job you're applying for. This will be used as the
         foundation for generating your tailored resume and cover letter.
       </p>
-      
+
       {profiles.map((profile) => (
         <Card
           key={profile.id}
@@ -775,7 +775,7 @@ const WorkExperienceStep: React.FC<WorkflowStepProps> = ({ data, onDataChange })
   };
 
   const updateExperience = (id: number, updates: any) => {
-    const updated = experiences.map((exp: any) => 
+    const updated = experiences.map((exp: any) =>
       exp.id === id ? { ...exp, ...updates } : exp
     );
     onDataChange({ experiences: updated });
@@ -807,9 +807,9 @@ const WorkExperienceStep: React.FC<WorkflowStepProps> = ({ data, onDataChange })
         <Card key={exp.id} className="p-6">
           <div className="flex justify-between items-start mb-4">
             <h4 className="font-medium">Experience #{index + 1}</h4>
-            <Button 
+            <Button
               onClick={() => removeExperience(exp.id)}
-              variant="ghost" 
+              variant="ghost"
               size="sm"
               className="text-red-500 hover:text-red-700"
             >
@@ -871,7 +871,7 @@ const WorkExperienceStep: React.FC<WorkflowStepProps> = ({ data, onDataChange })
                 <input
                   type="checkbox"
                   checked={exp.current}
-                  onChange={(e) => updateExperience(exp.id, { 
+                  onChange={(e) => updateExperience(exp.id, {
                     current: e.target.checked,
                     endDate: e.target.checked ? '' : exp.endDate
                   })}
@@ -918,7 +918,7 @@ const EducationStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   };
 
   const updateEducation = (id: number, updates: any) => {
-    const updated = education.map((ed: any) => 
+    const updated = education.map((ed: any) =>
       ed.id === id ? { ...ed, ...updates } : ed
     );
     onDataChange({ education: updated });
@@ -950,9 +950,9 @@ const EducationStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
         <Card key={ed.id} className="p-6">
           <div className="flex justify-between items-start mb-4">
             <h4 className="font-medium">Education #{index + 1}</h4>
-            <Button 
+            <Button
               onClick={() => removeEducation(ed.id)}
-              variant="ghost" 
+              variant="ghost"
               size="sm"
               className="text-red-500 hover:text-red-700"
             >
@@ -1110,25 +1110,25 @@ const SkillsStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
 
   return (
     <div className="space-y-6">
-      <SkillSection 
-        title="Technical Skills" 
-        category="technical" 
-        placeholder="e.g., JavaScript, Python, React" 
+      <SkillSection
+        title="Technical Skills"
+        category="technical"
+        placeholder="e.g., JavaScript, Python, React"
       />
-      <SkillSection 
-        title="Soft Skills" 
-        category="soft" 
-        placeholder="e.g., Leadership, Communication, Problem Solving" 
+      <SkillSection
+        title="Soft Skills"
+        category="soft"
+        placeholder="e.g., Leadership, Communication, Problem Solving"
       />
-      <SkillSection 
-        title="Languages" 
-        category="languages" 
-        placeholder="e.g., English (Native), Spanish (Fluent)" 
+      <SkillSection
+        title="Languages"
+        category="languages"
+        placeholder="e.g., English (Native), Spanish (Fluent)"
       />
-      <SkillSection 
-        title="Certifications" 
-        category="certifications" 
-        placeholder="e.g., AWS Certified Developer, PMP" 
+      <SkillSection
+        title="Certifications"
+        category="certifications"
+        placeholder="e.g., AWS Certified Developer, PMP"
       />
     </div>
   );
@@ -1190,7 +1190,7 @@ const CustomizationStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) 
           Based on the job description, here are our AI-powered suggestions for optimizing your profile:
         </p>
       </div>
-      
+
       <div className="space-y-4">
         <div className="p-4 border border-gray-200 rounded-lg">
           <h4 className="font-medium text-gray-900 mb-2">Skills to Emphasize</h4>
@@ -1242,7 +1242,7 @@ const TemplateSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange
       <p className="text-gray-600 mb-6">
         Choose a template that matches the company culture and industry standards.
       </p>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {templates.map((template) => (
           <Card

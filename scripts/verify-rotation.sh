@@ -55,7 +55,7 @@ VERIFICATION_PASSED=true
 # Compromised keys to check for (partial matches for security)
 COMPROMISED_PATTERNS=(
     "AIzaSyDtSTUen"        # Gemini/Firebase key
-    "sk-proj-dU-hIGOA"     # OpenAI key  
+    "sk-proj-dU-hIGOA"     # OpenAI key
     "sk-ant-api03-3_b3PD3I" # Anthropic key
     "pplx-XuT0D9Qci"       # Perplexity key
     "pcsk_2CmZ6W_"         # Pinecone key
@@ -95,7 +95,7 @@ if [ ! -f "frontend/.env" ]; then
     VERIFICATION_PASSED=false
 else
     success ".env file exists"
-    
+
     # Check for required environment variables
     REQUIRED_VARS=(
         "VITE_FIREBASE_API_KEY"
@@ -110,9 +110,9 @@ else
         "PERPLEXITY_API_KEY"
         "PINECONE_API_KEY"
     )
-    
+
     log "Checking required environment variables..."
-    
+
     for var in "${REQUIRED_VARS[@]}"; do
         if grep -q "^$var=" frontend/.env; then
             value=$(grep "^$var=" frontend/.env | cut -d'=' -f2)
@@ -177,7 +177,7 @@ echo -e "${YELLOW}============================================${NC}"
 
 if [ -f "frontend/.env" ]; then
     log "Validating API key formats..."
-    
+
     # Validate Firebase API key format
     firebase_key=$(grep "^VITE_FIREBASE_API_KEY=" frontend/.env | cut -d'=' -f2)
     if [[ "$firebase_key" =~ ^AIzaSy ]] && [ ${#firebase_key} -gt 35 ]; then
@@ -185,7 +185,7 @@ if [ -f "frontend/.env" ]; then
     else
         warning "Firebase API key format appears invalid"
     fi
-    
+
     # Validate OpenAI API key format
     openai_key=$(grep "^OPENAI_API_KEY=" frontend/.env | cut -d'=' -f2)
     if [[ "$openai_key" =~ ^sk- ]] && [ ${#openai_key} -gt 40 ]; then
@@ -193,7 +193,7 @@ if [ -f "frontend/.env" ]; then
     else
         warning "OpenAI API key format appears invalid"
     fi
-    
+
     # Validate Anthropic API key format
     anthropic_key=$(grep "^ANTHROPIC_API_KEY=" frontend/.env | cut -d'=' -f2)
     if [[ "$anthropic_key" =~ ^sk-ant- ]]; then
@@ -213,7 +213,7 @@ log "Testing API connectivity (basic checks only)..."
 # Test Firebase configuration
 if [ -f "frontend/.env" ] && command -v node >/dev/null 2>&1; then
     info "Testing Firebase configuration..."
-    
+
     # Create a simple test script
     cat > /tmp/firebase_test.js << 'EOF'
 require('dotenv').config({ path: './frontend/.env' });
@@ -242,7 +242,7 @@ EOF
     else
         warning "Firebase configuration test failed"
     fi
-    
+
     rm -f /tmp/firebase_test.js
 else
     info "Skipping API tests (Node.js not available)"
@@ -283,12 +283,12 @@ if [ "$VERIFICATION_PASSED" = true ]; then
 Your API key rotation appears to be successful.
 All old keys are removed and new configuration looks good.
 ${NC}"
-    
+
     log "Next steps:"
     echo "  1. Test your application thoroughly"
     echo "  2. Monitor API usage for 24-48 hours"
     echo "  3. Run security audit: ./scripts/security-audit.sh"
-    
+
     exit 0
 else
     echo -e "${RED}
@@ -297,7 +297,7 @@ else
 Issues were found that need attention.
 Please review the warnings and errors above.
 ${NC}"
-    
+
     error "Verification failed. Please fix the issues above before proceeding."
     exit 1
 fi

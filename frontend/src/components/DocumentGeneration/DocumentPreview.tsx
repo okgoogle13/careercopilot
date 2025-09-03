@@ -105,16 +105,16 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
           <meta charset="utf-8">
           <title>${templateName || 'Document'}</title>
           <style>
-            body { 
-              font-family: 'Times New Roman', serif; 
-              max-width: 8.5in; 
-              margin: 0 auto; 
-              padding: 40px; 
-              line-height: 1.6; 
+            body {
+              font-family: 'Times New Roman', serif;
+              max-width: 8.5in;
+              margin: 0 auto;
+              padding: 40px;
+              line-height: 1.6;
               background: white;
             }
-            @media print { 
-              body { padding: 0; margin: 0; } 
+            @media print {
+              body { padding: 0; margin: 0; }
             }
           </style>
         </head>

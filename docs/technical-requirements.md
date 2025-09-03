@@ -16,7 +16,7 @@
 - **REQ-1.2.4**: System shall apply consistent branding themes across all generated documents
 - **REQ-1.2.5**: System shall export all documents as professionally formatted PDFs
 
-### 1.3 ATS Analysis & Optimization  
+### 1.3 ATS Analysis & Optimization
 - **REQ-1.3.1**: System shall score resumes against job descriptions using ATS algorithms
 - **REQ-1.3.2**: System shall provide keyword analysis with matched/missing terms
 - **REQ-1.3.3**: System shall generate actionable recommendations for document improvement
@@ -49,7 +49,7 @@
 - **REQ-2.2.3**: File storage shall accommodate 1TB of user documents
 - **REQ-2.2.4**: System shall maintain performance with 50% user growth annually
 
-### 2.3 Reliability Requirements  
+### 2.3 Reliability Requirements
 - **REQ-2.3.1**: System uptime shall be minimum 99.5%
 - **REQ-2.3.2**: Data backup shall occur automatically every 24 hours
 - **REQ-2.3.3**: Service recovery shall complete within 15 minutes of failure
@@ -84,7 +84,7 @@
 - **Uvicorn** as ASGI server
 - **Google Cloud Client Libraries** for GCP services
 
-### 3.3 AI/ML Technology  
+### 3.3 AI/ML Technology
 - **Firebase Genkit** for AI workflow orchestration
 - **Google Gemini API** for content generation
 - **Google LangExtract** for structured information extraction
@@ -95,7 +95,7 @@
 ### 3.4 Infrastructure Technology
 - **Google Cloud Platform** as primary cloud provider
 - **Firebase Hosting** for web application deployment
-- **Cloud Run** for containerized backend deployment  
+- **Cloud Run** for containerized backend deployment
 - **Cloud Firestore** as primary database
 - **Cloud Storage** for file storage
 - **Cloud Scheduler** for automated tasks
@@ -124,7 +124,7 @@ POST /api/profiles
   Response: Profile
 
 PUT /api/profiles/{profileId}
-  Body: UpdateProfileRequest  
+  Body: UpdateProfileRequest
   Response: Profile
 
 POST /api/documents/upload
@@ -351,7 +351,7 @@ POST /api/jobs/apply
 
 ### 6.1 Google Services Integration
 - **Gmail API**: Read access for job opportunity detection
-- **Google Calendar API**: Create and manage application reminders  
+- **Google Calendar API**: Create and manage application reminders
 - **Google Drive API**: Optional backup of generated documents
 - **Google Cloud Translation API**: Multi-language support (future)
 

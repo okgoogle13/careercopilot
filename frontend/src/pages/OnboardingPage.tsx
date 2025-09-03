@@ -84,7 +84,7 @@ const OnboardingPage: React.FC = () => {
     try {
       // Save onboarding completion
       localStorage.setItem(`onboarding_completed_${user?.uid}`, 'true');
-      
+
       // Save onboarding data to backend
       if (Object.keys(onboardingData).length > 0) {
         await fetch('/api/v1/users/onboarding', {
@@ -221,7 +221,7 @@ const OnboardingPage: React.FC = () => {
                 Skip for now
               </Button>
             </div>
-            
+
             <Button
               onClick={handleNext}
               className="flex items-center gap-2"
@@ -517,7 +517,7 @@ const DocumentUploadStep: React.FC<{ onNext: () => void; onComplete: (data: any)
               </p>
             </div>
           </div>
-          
+
           {canSkip && (
             <div className="pt-4">
               <p className="text-gray-600 mb-3">

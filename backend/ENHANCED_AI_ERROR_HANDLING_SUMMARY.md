@@ -47,7 +47,7 @@ This document summarizes the comprehensive enhancement of AI flow error handling
 
 ```python
 AIServiceType.GEMINI_EXTRACTION    # 3 retries, 1-30s delay
-AIServiceType.GEMINI_ANALYSIS      # 4 retries, 2-60s delay  
+AIServiceType.GEMINI_ANALYSIS      # 4 retries, 2-60s delay
 AIServiceType.GEMINI_SCORING       # 2 retries, 0.5-15s delay
 AIServiceType.GENKIT_FLOW          # 3 retries, 1.5-45s delay
 AIServiceType.KEYWORD_MATCHING     # 1 retry, 0.1-1s delay

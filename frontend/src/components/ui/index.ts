@@ -38,7 +38,7 @@ export { default as FileUpload } from './FileUpload';
 export { default as PDFPreview } from './PDFPreview';
 export { default as ATSScoreDisplay } from './ATSScoreDisplay';
 
-// New form components  
+// New form components
 export { DatePicker, DateRangePicker } from './date-picker';
 export { SearchInput, FilterSearch } from './search-input';
 export { MultiSelect, SkillsMultiSelect } from './multi-select';

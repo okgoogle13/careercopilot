@@ -11,12 +11,12 @@ echo "🔧 Adding remaining CareerCopilot secrets..."
 add_secret_prompt() {
     local secret_name="$1"
     local description="$2"
-    
+
     echo
     echo "📝 $description"
     echo -n "Enter $secret_name (or press Enter to skip): "
     read -r secret_value
-    
+
     if [ -n "$secret_value" ]; then
         echo -n "Adding $secret_name... "
         if gh secret set "$secret_name" --body "$secret_value" --repo "$REPO" &> /dev/null; then

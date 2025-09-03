@@ -28,7 +28,7 @@ const DocumentsPage: React.FC = () => {
     requireAuth,
     getAuthToken,
   } = useAuthStatus();
-  
+
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -36,28 +36,28 @@ const DocumentsPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
   const [isUploading, setIsUploading] = useState(false);
-  
+
   const { preferences } = useUserPreferences();
   const userTheme = preferences?.themeId || 'professional';
 
   // Filter documents based on search query and active tab
   useEffect(() => {
     let result = [...documents];
-    
+
     // Apply search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(doc => 
+      result = result.filter(doc =>
         doc.originalFilename.toLowerCase().includes(query) ||
         doc.fileType.toLowerCase().includes(query)
       );
     }
-    
+
     // Apply tab filter
     if (activeTab !== 'all') {
       result = result.filter(doc => doc.fileType === activeTab);
     }
-    
+
     setFilteredDocuments(result);
   }, [documents, searchQuery, activeTab]);
 
@@ -75,9 +75,9 @@ const DocumentsPage: React.FC = () => {
       const response = await fetch('/api/v1/documents', {
         headers: { Authorization: `Bearer ${token}` },
       });
-      
+
       if (!response.ok) throw new Error('Failed to fetch documents');
-      
+
       const data = await response.json();
       setDocuments(data);
       setError(null);
@@ -118,7 +118,7 @@ const DocumentsPage: React.FC = () => {
 
       const response = await fetch(`/api/v1/documents/${documentId}`, {
         method: 'DELETE',
-        headers: { 
+        headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
@@ -219,7 +219,7 @@ const DocumentsPage: React.FC = () => {
               Manage your uploaded documents and track their status
             </p>
           </div>
-          <DocumentUpload 
+          <DocumentUpload
             onUpload={fetchDocuments}
             className="w-full md:w-auto"
             disabled={isUploading}
@@ -238,9 +238,9 @@ const DocumentsPage: React.FC = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
-          
-          <Tabs 
-            value={activeTab} 
+
+          <Tabs
+            value={activeTab}
             onValueChange={setActiveTab}
             className="w-full md:w-auto"
           >
@@ -273,7 +273,7 @@ const DocumentsPage: React.FC = () => {
               <FileText className="h-12 w-12 text-muted-foreground mb-4" />
               <h3 className="text-lg font-medium mb-1">No documents found</h3>
               <p className="text-sm text-muted-foreground text-center max-w-md px-4">
-                {searchQuery 
+                {searchQuery
                   ? 'No documents match your search. Try a different term.'
                   : activeTab !== 'all'
                     ? `You don't have any ${activeTab.replace('-', ' ')}. Upload one to get started.`
@@ -281,8 +281,8 @@ const DocumentsPage: React.FC = () => {
                 }
               </p>
               {!searchQuery && activeTab === 'all' && (
-                <Button 
-                  className="mt-4" 
+                <Button
+                  className="mt-4"
                   variant="outline"
                   onClick={() => {
                     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;

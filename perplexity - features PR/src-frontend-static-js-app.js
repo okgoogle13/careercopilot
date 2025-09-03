@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function initializeApp() {
     // Set initial tab
     showTab('dashboard');
-    
+
     // Load initial data
     loadDashboardData();
-    
+
     // Set up periodic updates
     setInterval(checkForUpdates, 300000); // Check every 5 minutes
 }
@@ -28,27 +28,27 @@ function showTab(tabName) {
     tabContents.forEach(tab => {
         tab.classList.remove('active');
     });
-    
+
     // Remove active class from all nav tabs
     const navTabs = document.querySelectorAll('.nav-tab');
     navTabs.forEach(tab => {
         tab.classList.remove('active');
     });
-    
+
     // Show selected tab content
     const selectedTab = document.getElementById(tabName);
     if (selectedTab) {
         selectedTab.classList.add('active');
     }
-    
+
     // Set active nav tab
     const selectedNavTab = document.querySelector(`[onclick="showTab('${tabName}')"]`);
     if (selectedNavTab) {
         selectedNavTab.classList.add('active');
     }
-    
+
     currentTab = tabName;
-    
+
     // Load data for specific tabs
     if (tabName === 'jobs') {
         loadJobsData();
@@ -62,7 +62,7 @@ async function loadDashboardData() {
     try {
         const response = await fetch('/api/status');
         const data = await response.json();
-        
+
         if (data.status === 'success') {
             updateDashboardUI(data.data);
         }
@@ -78,7 +78,7 @@ function updateDashboardUI(data) {
         statsElements[0].textContent = data.activity?.applications_this_week || '0';
         statsElements[1].textContent = '15%'; // Response rate - would come from data
     }
-    
+
     // Update automation status
     const automationStatus = document.querySelector('.automation-status');
     if (automationStatus && data.automation) {
@@ -93,19 +93,19 @@ function updateDashboardUI(data) {
 // Job Discovery Functions
 async function triggerDailyScan() {
     if (isLoading) return;
-    
+
     showLoading('Scanning job boards for new opportunities...');
-    
+
     try {
         const response = await fetch('/api/daily-scan', {
             method: 'POST'
         });
-        
+
         const result = await response.json();
-        
+
         if (response.ok) {
             showToast('Daily job scan started! You\'ll receive an email summary shortly.', 'success');
-            
+
             // Refresh jobs data after a delay
             setTimeout(() => {
                 if (currentTab === 'jobs') {
@@ -139,9 +139,9 @@ async function loadJobsData() {
 
 async function applyToJob(jobUrl) {
     if (isLoading) return;
-    
+
     showLoading('Preparing your application materials...');
-    
+
     try {
         const response = await fetch('/api/apply', {
             method: 'POST',
@@ -153,9 +153,9 @@ async function applyToJob(jobUrl) {
                 custom_message: null
             })
         });
-        
+
         const result = await response.json();
-        
+
         if (response.ok) {
             showToast('Application preparation started! Check your email for materials.', 'success');
         } else {
@@ -172,9 +172,9 @@ async function applyToJob(jobUrl) {
 // Company Research Functions
 async function researchCompany(jobUrl) {
     if (isLoading) return;
-    
+
     showLoading('Researching company information...');
-    
+
     try {
         const response = await fetch('/api/research', {
             method: 'POST',
@@ -185,9 +185,9 @@ async function researchCompany(jobUrl) {
                 job_url: jobUrl
             })
         });
-        
+
         const result = await response.json();
-        
+
         if (response.ok) {
             displayResearchResults(result.data);
             showTab('research');
@@ -206,43 +206,43 @@ async function researchCompany(jobUrl) {
 function researchCompanyFromForm() {
     const jobUrlInput = document.getElementById('job-url');
     const jobUrl = jobUrlInput.value.trim();
-    
+
     if (!jobUrl) {
         showToast('Please enter a job URL', 'error');
         return;
     }
-    
+
     if (!isValidUrl(jobUrl)) {
         showToast('Please enter a valid URL', 'error');
         return;
     }
-    
+
     researchCompany(jobUrl);
 }
 
 function displayResearchResults(researchData) {
     const resultsContainer = document.getElementById('research-results');
-    
+
     if (!resultsContainer || !researchData) return;
-    
+
     const html = `
         <div class="research-content">
             <h3>🏢 ${researchData.company}</h3>
-            
+
             <div class="research-section">
                 <h4>💬 Key Talking Points</h4>
                 <div class="talking-points">
                     ${researchData.talking_points || 'Research in progress...'}
                 </div>
             </div>
-            
+
             <div class="research-section">
                 <h4>🎯 Application Strategy</h4>
                 <div class="application-strategy">
                     ${researchData.application_strategy || 'Strategy being generated...'}
                 </div>
             </div>
-            
+
             <div class="research-actions">
                 <button class="btn btn-primary" onclick="applyToJob('${researchData.job_url}')">
                     📄 Prepare Application
@@ -250,7 +250,7 @@ function displayResearchResults(researchData) {
             </div>
         </div>
     `;
-    
+
     resultsContainer.innerHTML = html;
     resultsContainer.style.display = 'block';
 }
@@ -260,7 +260,7 @@ async function loadApplicationsData() {
     try {
         const response = await fetch('/api/applications?limit=20');
         const data = await response.json();
-        
+
         if (data.status === 'success') {
             displayApplications(data.data);
         }
@@ -271,9 +271,9 @@ async function loadApplicationsData() {
 
 function displayApplications(applications) {
     const applicationsList = document.getElementById('applications-list');
-    
+
     if (!applicationsList) return;
-    
+
     if (applications.length === 0) {
         applicationsList.innerHTML = `
             <div class="empty-state">
@@ -283,7 +283,7 @@ function displayApplications(applications) {
         `;
         return;
     }
-    
+
     const html = applications.map(app => `
         <div class="application-card">
             <div class="application-header">
@@ -305,22 +305,22 @@ function displayApplications(applications) {
             </div>
         </div>
     `).join('');
-    
+
     applicationsList.innerHTML = html;
 }
 
 async function triggerWeeklyReview() {
     if (isLoading) return;
-    
+
     showLoading('Generating your weekly job search review...');
-    
+
     try {
         const response = await fetch('/api/weekly-review', {
             method: 'POST'
         });
-        
+
         const result = await response.json();
-        
+
         if (response.ok) {
             showToast('Weekly review started! You\'ll receive an email summary shortly.', 'success');
         } else {
@@ -337,20 +337,20 @@ async function triggerWeeklyReview() {
 // Settings Functions
 async function saveSettings() {
     if (isLoading) return;
-    
+
     const dailyScan = document.getElementById('daily-scan').checked;
     const emailNotifications = document.getElementById('email-notifications').checked;
     const targetRolesText = document.getElementById('target-roles').value;
     const targetRoles = targetRolesText.split('\n').map(role => role.trim()).filter(role => role);
-    
+
     const settings = {
         daily_job_scan: dailyScan,
         email_notifications: emailNotifications,
         target_roles: targetRoles
     };
-    
+
     showLoading('Saving your settings...');
-    
+
     try {
         const response = await fetch('/api/config', {
             method: 'PUT',
@@ -359,9 +359,9 @@ async function saveSettings() {
             },
             body: JSON.stringify(settings)
         });
-        
+
         const result = await response.json();
-        
+
         if (response.ok) {
             showToast('Settings saved successfully!', 'success');
         } else {
@@ -380,11 +380,11 @@ function showLoading(message = 'Processing...') {
     isLoading = true;
     const modal = document.getElementById('loading-modal');
     const messageEl = document.getElementById('loading-message');
-    
+
     if (messageEl) {
         messageEl.textContent = message;
     }
-    
+
     if (modal) {
         modal.style.display = 'flex';
     }
@@ -393,7 +393,7 @@ function showLoading(message = 'Processing...') {
 function hideLoading() {
     isLoading = false;
     const modal = document.getElementById('loading-modal');
-    
+
     if (modal) {
         modal.style.display = 'none';
     }
@@ -402,20 +402,20 @@ function hideLoading() {
 function showToast(message, type = 'info') {
     const toast = document.getElementById('notification-toast');
     const messageEl = document.getElementById('toast-message');
-    
+
     if (!toast || !messageEl) return;
-    
+
     messageEl.textContent = message;
     toast.className = `toast ${type}`;
     toast.style.display = 'flex';
-    
+
     // Auto hide after 5 seconds
     setTimeout(hideToast, 5000);
 }
 
 function hideToast() {
     const toast = document.getElementById('notification-toast');
-    
+
     if (toast) {
         toast.style.display = 'none';
     }
@@ -440,7 +440,7 @@ function formatStatus(status) {
         'rejected': 'Rejected',
         'withdrawn': 'Withdrawn'
     };
-    
+
     return statusMap[status] || status;
 }
 
@@ -458,7 +458,7 @@ async function checkForUpdates() {
     try {
         const response = await fetch('/api/status');
         const data = await response.json();
-        
+
         if (data.status === 'success' && currentTab === 'dashboard') {
             updateDashboardUI(data.data);
         }
@@ -488,12 +488,12 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
         const tabs = ['dashboard', 'jobs', 'applications', 'research', 'settings'];
         const tabIndex = parseInt(event.key) - 1;
-        
+
         if (tabs[tabIndex]) {
             showTab(tabs[tabIndex]);
         }
     }
-    
+
     // Escape key to close modals
     if (event.key === 'Escape') {
         hideLoading();

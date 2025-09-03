@@ -16,10 +16,10 @@ while true; do
     # Check if server is responding
     HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$APP_URL" 2>/dev/null)
     TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
-    
+
     if [ "$HTTP_CODE" = "200" ]; then
         echo "[$TIMESTAMP] ✅ Server OK (HTTP $HTTP_CODE)" >> "$LOGFILE"
-        
+
         # Check if specific routes are accessible
         ROUTES=("/documents" "/analysis" "/applications")
         for route in "${ROUTES[@]}"; do
@@ -33,16 +33,16 @@ while true; do
     else
         echo "[$TIMESTAMP] ❌ Server error (HTTP $HTTP_CODE)" >> "$LOGFILE"
     fi
-    
+
     # Check for any npm processes
     NPM_PROCESSES=$(ps aux | grep "[n]pm run dev" | wc -l)
     echo "[$TIMESTAMP] 📊 NPM processes: $NPM_PROCESSES" >> "$LOGFILE"
-    
+
     # Show recent log tail if there are issues
     if [ "$HTTP_CODE" != "200" ] || [ "$NPM_PROCESSES" -eq "0" ]; then
         echo "[$TIMESTAMP] 📝 Recent dev server logs:" >> "$LOGFILE"
         tail -5 /Applications/careercopilot/frontend/logs/dev-server.log >> "$LOGFILE" 2>/dev/null
     fi
-    
+
     sleep "$CHECK_INTERVAL"
 done

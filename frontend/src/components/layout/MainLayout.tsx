@@ -31,14 +31,14 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, className = ''
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar onMenuClick={toggleSidebar} />
       <div className="flex flex-1 overflow-hidden">
-        <Sidebar 
-          isOpen={isSidebarOpen} 
+        <Sidebar
+          isOpen={isSidebarOpen}
           onClose={closeSidebar}
           activeTab={activeTab}
           onTabChange={handleTabChange}
         />
-        <main 
-          id="main-content" 
+        <main
+          id="main-content"
           className={`flex-1 overflow-y-auto focus:outline-none transition-all duration-300 ${
             isSidebarOpen ? 'lg:ml-64' : ''
           } ${className}`}

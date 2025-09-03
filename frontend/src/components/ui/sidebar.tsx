@@ -252,7 +252,7 @@ interface SidebarItemProps {
 function SidebarItem({ item, level = 0 }: SidebarItemProps) {
   const { collapsed, mobile, setOpen } = useSidebar();
   const [expanded, setExpanded] = useState(false);
-  
+
   const hasChildren = item.children && item.children.length > 0;
   const paddingLeft = collapsed ? 0 : level * 12;
 
@@ -387,9 +387,9 @@ interface ResponsiveSidebarProps extends Omit<SidebarProps, 'mobile' | 'open' | 
   breakpoint?: number; // px
 }
 
-export function ResponsiveSidebar({ 
-  breakpoint = 1024, 
-  ...props 
+export function ResponsiveSidebar({
+  breakpoint = 1024,
+  ...props
 }: ResponsiveSidebarProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);

@@ -46,15 +46,15 @@ console = Console()
 
 class PersonalAutomationCLI:
     """CLI interface for personal career automation"""
-    
+
     def __init__(self):
         self.workflow = PersonalCareerWorkflow()
         self.cache = get_personal_cache()
-        
+
     async def morning_routine(self) -> None:
         """Execute morning job discovery routine"""
         console.print("\n[bold blue]🌅 Starting Morning Job Discovery Routine[/bold blue]")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
@@ -62,43 +62,43 @@ class PersonalAutomationCLI:
             TimeRemainingColumn(),
             console=console
         ) as progress:
-            
+
             # Task setup
             discovery_task = progress.add_task("Discovering job opportunities...", total=4)
-            
+
             try:
                 # Step 1: Initialize workflow
                 progress.update(discovery_task, description="Initializing workflow...")
                 await asyncio.sleep(0.5)  # Brief pause for visual feedback
                 progress.advance(discovery_task)
-                
+
                 # Step 2: Execute job discovery
                 progress.update(discovery_task, description="Finding job matches...")
                 result = await self.workflow.daily_job_discovery()
                 progress.advance(discovery_task)
-                
+
                 # Step 3: Process results
                 progress.update(discovery_task, description="Processing opportunities...")
                 await asyncio.sleep(0.5)
                 progress.advance(discovery_task)
-                
+
                 # Step 4: Display summary
                 progress.update(discovery_task, description="Preparing summary...")
                 progress.advance(discovery_task)
-                
+
                 # Display results
                 await self._display_morning_results(result)
-                
+
             except Exception as e:
                 progress.stop()
                 console.print(f"[bold red]❌ Morning routine failed: {e}[/bold red]")
                 logger.error(f"Morning routine failed: {e}")
-    
+
     async def apply_to_job(self, job_url: str) -> None:
         """Apply to specific job with full workflow"""
         console.print(f"\n[bold green]📋 Starting Application Process[/bold green]")
         console.print(f"Job URL: [cyan]{job_url}[/cyan]")
-        
+
         # Confirm before proceeding (interactive mode only)
         try:
             if not Confirm.ask("\nProceed with application preparation?"):
@@ -107,7 +107,7 @@ class PersonalAutomationCLI:
         except EOFError:
             # Non-interactive mode - proceed without confirmation
             console.print("[dim]Running in non-interactive mode - proceeding with application preparation[/dim]")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
@@ -115,51 +115,51 @@ class PersonalAutomationCLI:
             TimeRemainingColumn(),
             console=console
         ) as progress:
-            
+
             apply_task = progress.add_task("Preparing application...", total=5)
-            
+
             try:
                 # Step 1: Company research
                 progress.update(apply_task, description="Researching company...")
                 research_result = await self.workflow.quick_company_research(job_url)
                 progress.advance(apply_task)
-                
+
                 if not research_result.get("success"):
                     progress.stop()
                     console.print(f"[bold red]❌ Company research failed: {research_result.get('error')}[/bold red]")
                     return
-                
+
                 # Step 2: Generate materials
                 progress.update(apply_task, description="Generating application materials...")
                 await asyncio.sleep(0.5)
                 progress.advance(apply_task)
-                
+
                 # Step 3: Complete application workflow
                 progress.update(apply_task, description="Processing application...")
                 result = await self.workflow.apply_to_job(job_url)
                 progress.advance(apply_task)
-                
+
                 # Step 4: Track application
                 progress.update(apply_task, description="Tracking application...")
                 await asyncio.sleep(0.3)
                 progress.advance(apply_task)
-                
+
                 # Step 5: Finalize
                 progress.update(apply_task, description="Finalizing...")
                 progress.advance(apply_task)
-                
+
                 # Display results
                 await self._display_application_results(result, research_result)
-                
+
             except Exception as e:
                 progress.stop()
                 console.print(f"[bold red]❌ Application process failed: {e}[/bold red]")
                 logger.error(f"Application process failed: {e}")
-    
+
     async def weekly_review(self) -> None:
         """Execute weekly progress review"""
         console.print("\n[bold purple]📊 Starting Weekly Progress Review[/bold purple]")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
@@ -167,57 +167,57 @@ class PersonalAutomationCLI:
             TimeRemainingColumn(),
             console=console
         ) as progress:
-            
+
             review_task = progress.add_task("Analyzing progress...", total=4)
-            
+
             try:
                 # Step 1: Gather data
                 progress.update(review_task, description="Gathering application data...")
                 await asyncio.sleep(0.5)
                 progress.advance(review_task)
-                
+
                 # Step 2: Execute review
                 progress.update(review_task, description="Analyzing performance...")
                 result = await self.workflow.weekly_review()
                 progress.advance(review_task)
-                
+
                 # Step 3: Generate insights
                 progress.update(review_task, description="Generating insights...")
                 await asyncio.sleep(0.5)
                 progress.advance(review_task)
-                
+
                 # Step 4: Prepare report
                 progress.update(review_task, description="Preparing report...")
                 progress.advance(review_task)
-                
+
                 # Display results
                 await self._display_review_results(result)
-                
+
             except Exception as e:
                 progress.stop()
                 console.print(f"[bold red]❌ Weekly review failed: {e}[/bold red]")
                 logger.error(f"Weekly review failed: {e}")
-    
+
     async def cache_stats(self) -> None:
         """Display cache statistics"""
         console.print("\n[bold cyan]💾 Cache Statistics[/bold cyan]")
-        
+
         try:
             stats = await self.cache.get_cache_stats()
-            
+
             # Create stats table
             table = Table(title="Cache Performance")
             table.add_column("Category", style="cyan", no_wrap=True)
             table.add_column("Files", justify="right", style="green")
             table.add_column("Size (MB)", justify="right", style="yellow")
-            
+
             for category, info in stats.get("categories", {}).items():
                 table.add_row(
                     category.replace("_", " ").title(),
                     str(info["files"]),
                     f"{info['size_mb']:.2f}"
                 )
-            
+
             # Add totals
             table.add_section()
             table.add_row(
@@ -225,9 +225,9 @@ class PersonalAutomationCLI:
                 f"[bold]{stats.get('total_files', 0)}[/bold]",
                 f"[bold]{stats.get('total_size_mb', 0):.2f}[/bold]"
             )
-            
+
             console.print(table)
-            
+
             # Cache cleanup option (only in interactive mode)
             if stats.get('total_files', 0) > 0:
                 try:
@@ -238,7 +238,7 @@ class PersonalAutomationCLI:
                 except EOFError:
                     # Non-interactive mode - skip cleanup prompt
                     console.print("[dim]Cache cleanup available in interactive mode[/dim]")
-        
+
         except Exception as e:
             console.print(f"[bold red]❌ Failed to get cache stats: {e}[/bold red]")
             logger.error(f"Cache stats failed: {e}")
@@ -250,27 +250,27 @@ class PersonalAutomationCLI:
         console.print(f"Company: [cyan]{company}[/cyan]")
         if location:
             console.print(f"Location: [cyan]{location}[/cyan]")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             console=console
         ) as progress:
-            
+
             salary_task = progress.add_task("Researching salary data...", total=None)
-            
+
             try:
                 # Use workflow config location if not provided
                 if not location:
                     location = self.workflow.config.location
-                    
+
                 progress.update(salary_task, description="Analyzing market data...")
                 result = await self.workflow.salary_intelligence(job_title, company, location)
                 progress.stop()
-                
+
                 # Display results
                 await self._display_salary_results(result, job_title, company, location)
-                
+
             except Exception as e:
                 progress.stop()
                 console.print(f"[bold red]❌ Salary analysis failed: {e}[/bold red]")
@@ -279,15 +279,15 @@ class PersonalAutomationCLI:
     async def skills_analysis(self, job_listings_file: str = None) -> None:
         """Analyze skills trends from job listings"""
         console.print(f"\n[bold blue]🎯 Skills Trends Analysis[/bold blue]")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             console=console
         ) as progress:
-            
+
             skills_task = progress.add_task("Analyzing skills trends...", total=None)
-            
+
             try:
                 # For this demo, we'll use sample job listings
                 # In a real implementation, this would load from a file or recent job searches
@@ -296,14 +296,14 @@ class PersonalAutomationCLI:
                     {"description": "Community development role needing stakeholder engagement, program evaluation, and budget management. Social work degree required."},
                     {"description": "Mental health support worker with counseling skills, group facilitation, and documentation abilities. Must have active listening skills."}
                 ]
-                
+
                 progress.update(skills_task, description="Processing job requirements...")
                 result = await self.workflow.analyze_skills_trends(sample_listings)
                 progress.stop()
-                
+
                 # Display results
                 await self._display_skills_results(result)
-                
+
             except Exception as e:
                 progress.stop()
                 console.print(f"[bold red]❌ Skills analysis failed: {e}[/bold red]")
@@ -313,19 +313,19 @@ class PersonalAutomationCLI:
         """Generate interview preparation materials for a specific job"""
         console.print(f"\n[bold purple]🎤 Interview Preparation[/bold purple]")
         console.print(f"Job URL: [cyan]{job_url}[/cyan]")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             console=console
         ) as progress:
-            
+
             prep_task = progress.add_task("Preparing interview materials...", total=None)
-            
+
             try:
                 # First get job description and company research
                 progress.update(prep_task, description="Researching job and company...")
-                
+
                 # For demo purposes, using sample data
                 # In real implementation, this would scrape the job URL
                 job_description = "Social Worker position focusing on case management and client support"
@@ -334,25 +334,25 @@ class PersonalAutomationCLI:
                     "mission": "Supporting vulnerable community members",
                     "values": ["Compassion", "Integrity", "Excellence"]
                 }
-                
+
                 progress.update(prep_task, description="Generating interview questions...")
                 result = await self.workflow.generate_interview_prep(job_description, company_research)
                 progress.stop()
-                
+
                 # Display results
                 await self._display_interview_results(result, job_url)
-                
+
             except Exception as e:
                 progress.stop()
                 console.print(f"[bold red]❌ Interview prep failed: {e}[/bold red]")
                 logger.error(f"Interview prep failed: {e}")
-    
+
     async def _display_morning_results(self, result: Dict[str, Any]) -> None:
         """Display morning routine results"""
         if not result.get("success"):
             console.print(f"[bold red]❌ Job discovery failed: {result.get('error')}[/bold red]")
             return
-        
+
         # Summary panel
         summary_text = f"""
 [bold green]✅ Job Discovery Complete[/bold green]
@@ -362,9 +362,9 @@ class PersonalAutomationCLI:
 • Promising opportunities: [yellow]{result.get('promising_jobs', 0)}[/yellow]
 • Application materials prepared: [cyan]{result.get('materials_prepared', 0)}[/cyan]
         """
-        
+
         console.print(Panel(summary_text, title="🌅 Morning Routine Summary", border_style="blue"))
-        
+
         # Job opportunities table
         jobs = result.get("jobs", [])[:5]  # Show top 5
         if jobs:
@@ -373,7 +373,7 @@ class PersonalAutomationCLI:
             table.add_column("Role", style="green")
             table.add_column("Match", justify="right", style="yellow")
             table.add_column("Location", style="white")
-            
+
             for job in jobs:
                 match_score = job.get("match_score", 0)
                 match_percent = f"{match_score:.1%}"
@@ -383,17 +383,17 @@ class PersonalAutomationCLI:
                     match_percent,
                     job.get("location", "Remote")
                 )
-            
+
             console.print(table)
-        
+
         console.print("\n[dim]💌 Email summary sent to your inbox[/dim]")
-    
+
     async def _display_application_results(self, result: Dict[str, Any], research: Dict[str, Any]) -> None:
         """Display application process results"""
         if not result.get("success"):
             console.print(f"[bold red]❌ Application failed: {result.get('error')}[/bold red]")
             return
-        
+
         # Success summary
         summary_text = f"""
 [bold green]✅ Application Materials Ready[/bold green]
@@ -407,25 +407,25 @@ class PersonalAutomationCLI:
 • ✅ Company research completed
 • ✅ Application tracked
         """
-        
+
         console.print(Panel(summary_text, title="📋 Application Status", border_style="green"))
-        
+
         # Research preview
         if research.get("talking_points"):
             research_preview = research["talking_points"][:200] + "..."
             console.print(f"\n[bold]🎯 Key Talking Points Preview:[/bold]\n[italic]{research_preview}[/italic]")
-        
+
         console.print("\n[dim]📧 Confirmation email sent with full materials[/dim]")
         console.print("[bold blue]📁 Access full materials in your dashboard[/bold blue]")
-    
+
     async def _display_review_results(self, result: Dict[str, Any]) -> None:
         """Display weekly review results"""
         if not result.get("success"):
             console.print(f"[bold red]❌ Weekly review failed: {result.get('error')}[/bold red]")
             return
-        
+
         analysis = result.get("analysis", {})
-        
+
         # Weekly summary
         summary_text = f"""
 [bold purple]📊 Weekly Progress Review[/bold purple]
@@ -437,20 +437,20 @@ class PersonalAutomationCLI:
 💡 [bold]Insights:[/bold]
 {analysis.get('summary', 'Keep up the great work!')}
         """
-        
+
         console.print(Panel(summary_text, title="📊 Weekly Review", border_style="purple"))
-        
+
         # Recommendations
         recommendations = analysis.get("recommendations", [])
         if recommendations:
             rec_table = Table(title="🎯 Recommendations for Next Week")
             rec_table.add_column("Focus Area", style="cyan")
-            
+
             for rec in recommendations:
                 rec_table.add_row(f"• {rec}")
-            
+
             console.print(rec_table)
-        
+
         console.print("\n[dim]📧 Weekly review email sent[/dim]")
 
     async def _display_salary_results(self, result: Dict[str, Any], job_title: str, company: str, location: str) -> None:
@@ -464,20 +464,20 @@ class PersonalAutomationCLI:
 📍 [bold]Location:[/bold] {location}
 💵 [bold]Salary Range:[/bold] {salary_range}
         """
-        
+
         console.print(Panel(summary_text, title="💰 Salary Analysis", border_style="green"))
-        
+
         # Negotiation tips
         negotiation_tips = result.get('negotiation_tips', [])
         if negotiation_tips:
             tips_table = Table(title="🎯 Negotiation Strategy")
             tips_table.add_column("Talking Point", style="cyan")
-            
+
             for tip in negotiation_tips:
                 tips_table.add_row(f"• {tip}")
-            
+
             console.print(tips_table)
-        
+
         # Market comparison
         market_comparison = result.get('market_comparison', '')
         if market_comparison:
@@ -491,15 +491,15 @@ class PersonalAutomationCLI:
             skills_table = Table(title="🔥 Most In-Demand Skills")
             skills_table.add_column("Skill", style="cyan")
             skills_table.add_column("Frequency", justify="right", style="yellow")
-            
+
             for skill in top_skills[:10]:  # Show top 10
                 if isinstance(skill, dict):
                     skills_table.add_row(skill.get('name', 'Unknown'), str(skill.get('count', 0)))
                 else:
                     skills_table.add_row(str(skill), "N/A")
-            
+
             console.print(skills_table)
-        
+
         # Trending skills
         trending_skills = result.get('trending_skills', [])
         if trending_skills:
@@ -509,17 +509,17 @@ class PersonalAutomationCLI:
 {', '.join(trending_skills)}
             """
             console.print(Panel(trending_text, title="📈 Future Skills", border_style="blue"))
-        
+
         # Development plan
         development_plan = result.get('development_plan', [])
         if development_plan:
             plan_table = Table(title="🎓 6-Month Development Roadmap")
             plan_table.add_column("Month", style="cyan")
             plan_table.add_column("Focus Area", style="green")
-            
+
             for i, item in enumerate(development_plan[:6], 1):
                 plan_table.add_row(f"Month {i}", str(item))
-            
+
             console.print(plan_table)
 
     async def _display_interview_results(self, result: Dict[str, Any], job_url: str) -> None:
@@ -534,36 +534,36 @@ class PersonalAutomationCLI:
 • ✅ STAR method answers
 • ✅ Questions to ask interviewer
         """
-        
+
         console.print(Panel(summary_text, title="🎤 Interview Prep", border_style="purple"))
-        
+
         # Interview questions
         questions = result.get('questions', [])
         if questions:
             q_table = Table(title="📋 Potential Interview Questions")
             q_table.add_column("Question", style="cyan")
-            
+
             for question in questions[:7]:  # Show up to 7 questions
                 q_table.add_row(str(question))
-            
+
             console.print(q_table)
-        
+
         # Sample answers preview
         suggested_answers = result.get('suggested_answers', [])
         if suggested_answers:
             console.print(f"\n[bold]💡 STAR Method Answer Examples:[/bold]")
             for i, answer in enumerate(suggested_answers[:2], 1):  # Show first 2
                 console.print(f"\n[yellow]{i}.[/yellow] {str(answer)[:200]}...")
-        
+
         # Questions to ask
         candidate_questions = result.get('candidate_questions', [])
         if candidate_questions:
             cq_table = Table(title="❓ Questions You Should Ask")
             cq_table.add_column("Thoughtful Questions", style="green")
-            
+
             for question in candidate_questions:
                 cq_table.add_row(str(question))
-            
+
             console.print(cq_table)
 
     async def generate_email_template(self, template_type: str, job_title: str = None,
@@ -571,31 +571,31 @@ class PersonalAutomationCLI:
         """Generate email template with rich formatting"""
         console.print(f"\n[bold blue]✉️ Email Template Generation[/bold blue]")
         console.print(f"Template Type: {template_type.replace('_', ' ').title()}")
-        
+
         if job_title:
             console.print(f"Job Title: {job_title}")
         if company_name:
             console.print(f"Company: {company_name}")
         if contact_name:
             console.print(f"Contact: {contact_name}")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             console=console
         ) as progress:
             task = progress.add_task("Generating email template...", total=1)
-            
+
             # Generate template
             result = await self.workflow.generate_email_template(
                 template_type, job_title, company_name, contact_name
             )
             progress.advance(task)
-        
+
         if not result.get("success"):
             console.print(f"[bold red]❌ Template generation failed: {result.get('error', 'Unknown error')}[/bold red]")
             return
-        
+
         # Display template
         template_panel = Panel(
             f"[bold green]✉️ {template_type.replace('_', ' ').title()} Email Template[/bold green]\n\n"
@@ -603,16 +603,16 @@ class PersonalAutomationCLI:
             title="Template Details"
         )
         console.print(template_panel)
-        
+
         # Subject line
         if result.get("subject_line"):
             console.print(f"\n[bold blue]📧 Subject Line:[/bold blue]")
             console.print(Panel(result["subject_line"], style="blue"))
-        
+
         # Email content
         console.print(f"\n[bold blue]📝 Email Content:[/bold blue]")
         console.print(Panel(result.get("content", ""), style="green"))
-        
+
         # Placeholders
         placeholders = result.get("placeholders", {})
         if placeholders:
@@ -620,12 +620,12 @@ class PersonalAutomationCLI:
             placeholder_table = Table(title="Template Placeholders")
             placeholder_table.add_column("Placeholder", style="cyan")
             placeholder_table.add_column("Description", style="yellow")
-            
+
             for placeholder, description in placeholders.items():
                 placeholder_table.add_row(placeholder, description)
-            
+
             console.print(placeholder_table)
-        
+
         # Customization tips
         tips = result.get("customization_tips", [])
         if tips:
@@ -633,33 +633,33 @@ class PersonalAutomationCLI:
             for i, tip in enumerate(tips, 1):
                 console.print(f"  {i}. {tip}")
 
-    async def generate_cover_letter_template(self, job_title: str = None, 
+    async def generate_cover_letter_template(self, job_title: str = None,
                                            company_name: str = None) -> None:
         """Generate cover letter template with rich formatting"""
         console.print(f"\n[bold blue]📄 Cover Letter Template Generation[/bold blue]")
-        
+
         if job_title:
             console.print(f"Job Title: {job_title}")
         if company_name:
             console.print(f"Company: {company_name}")
-        
+
         with Progress(
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             console=console
         ) as progress:
             task = progress.add_task("Generating cover letter template...", total=1)
-            
+
             # Generate template
             result = await self.workflow.generate_cover_letter_template(
                 job_title, company_name
             )
             progress.advance(task)
-        
+
         if not result.get("success"):
             console.print(f"[bold red]❌ Template generation failed: {result.get('error', 'Unknown error')}[/bold red]")
             return
-        
+
         # Display template
         template_panel = Panel(
             f"[bold green]📄 Cover Letter Template[/bold green]\n\n"
@@ -667,11 +667,11 @@ class PersonalAutomationCLI:
             title="Template Details"
         )
         console.print(template_panel)
-        
+
         # Cover letter content
         console.print(f"\n[bold blue]📝 Cover Letter Content:[/bold blue]")
         console.print(Panel(result.get("content", ""), style="green"))
-        
+
         # Placeholders
         placeholders = result.get("placeholders", {})
         if placeholders:
@@ -679,12 +679,12 @@ class PersonalAutomationCLI:
             placeholder_table = Table(title="Template Placeholders")
             placeholder_table.add_column("Placeholder", style="cyan")
             placeholder_table.add_column("Description", style="yellow")
-            
+
             for placeholder, description in placeholders.items():
                 placeholder_table.add_row(placeholder, description)
-            
+
             console.print(placeholder_table)
-        
+
         # Customization tips
         tips = result.get("customization_tips", [])
         if tips:
@@ -711,15 +711,15 @@ Examples:
   python personal_automation.py template cover --company "XYZ Services" --job-title "Case Manager"
         """
     )
-    
+
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
-    
+
     # Morning routine command
     morning_parser = subparsers.add_parser(
         "morning",
         help="Execute morning job discovery routine"
     )
-    
+
     # Apply to job command
     apply_parser = subparsers.add_parser(
         "apply",
@@ -733,19 +733,19 @@ Examples:
         "--message",
         help="Optional custom message for application"
     )
-    
+
     # Weekly review command
     review_parser = subparsers.add_parser(
         "review",
         help="Execute weekly progress review"
     )
-    
+
     # Cache stats command
     cache_parser = subparsers.add_parser(
         "cache",
         help="Display cache statistics and management"
     )
-    
+
     # Salary intelligence command
     salary_parser = subparsers.add_parser(
         "salary",
@@ -763,7 +763,7 @@ Examples:
         "--location",
         help="Job location (uses config default if not provided)"
     )
-    
+
     # Skills analysis command
     skills_parser = subparsers.add_parser(
         "skills",
@@ -773,7 +773,7 @@ Examples:
         "--file",
         help="Optional file containing job listings JSON"
     )
-    
+
     # Interview prep command
     interview_parser = subparsers.add_parser(
         "interview",
@@ -783,14 +783,14 @@ Examples:
         "job_url",
         help="URL of the job to prepare for"
     )
-    
+
     # Template commands
     template_parser = subparsers.add_parser(
         "template",
         help="Generate email and document templates"
     )
     template_subparsers = template_parser.add_subparsers(dest="template_command", help="Template types")
-    
+
     # Email template command
     email_parser = template_subparsers.add_parser(
         "email",
@@ -813,7 +813,7 @@ Examples:
         "--contact",
         help="Contact person name (optional)"
     )
-    
+
     # Cover letter template command
     cover_parser = template_subparsers.add_parser(
         "cover",
@@ -824,80 +824,80 @@ Examples:
         help="Job title (optional)"
     )
     cover_parser.add_argument(
-        "--company", 
+        "--company",
         help="Company name (optional)"
     )
-    
+
     return parser
 
 async def main():
     """Main CLI entry point"""
     parser = create_parser()
     args = parser.parse_args()
-    
+
     if not args.command:
         parser.print_help()
         return
-    
+
     # Welcome message
     console.print(f"\n[bold blue]🚀 CareerCopilot Personal Automation[/bold blue]")
     console.print(f"[dim]Started at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}[/dim]\n")
-    
+
     cli = PersonalAutomationCLI()
-    
+
     try:
         if args.command == "morning":
             await cli.morning_routine()
-        
+
         elif args.command == "apply":
             if not args.job_url:
                 console.print("[bold red]❌ Job URL is required for apply command[/bold red]")
                 parser.print_help()
                 return
-            
+
             # Validate URL format
             if not (args.job_url.startswith("http://") or args.job_url.startswith("https://")):
                 console.print("[bold red]❌ Please provide a valid job URL (starting with http:// or https://)[/bold red]")
                 return
-            
+
             await cli.apply_to_job(args.job_url)
-        
+
         elif args.command == "review":
             await cli.weekly_review()
-        
+
         elif args.command == "cache":
             await cli.cache_stats()
-        
+
         elif args.command == "salary":
             if not args.job_title or not args.company:
                 console.print("[bold red]❌ Job title and company are required for salary command[/bold red]")
                 parser.print_help()
                 return
-            
+
             await cli.salary_intelligence(args.job_title, args.company, args.location)
-        
+
         elif args.command == "skills":
             await cli.skills_analysis(args.file)
-        
+
         elif args.command == "interview":
             if not args.job_url:
                 console.print("[bold red]❌ Job URL is required for interview command[/bold red]")
                 parser.print_help()
                 return
-            
+
             # Validate URL format
             if not (args.job_url.startswith("http://") or args.job_url.startswith("https://")):
                 console.print("[bold red]❌ Please provide a valid job URL (starting with http:// or https://)[/bold red]")
                 return
-            
+
             await cli.interview_prep(args.job_url)
-        
+
         elif args.command == "template":
             if not hasattr(args, 'template_command') or not args.template_command:
                 console.print("[bold red]❌ Template subcommand is required[/bold red]")
                 console.print("[dim]Available: template email <type> [options], template cover [options][/dim]")
                 return
-            
+
             if args.template_command == "email":
                 await cli.generate_email_template(
                     args.template_type,
@@ -913,19 +913,19 @@ async def main():
             else:
                 console.print(f"[bold red]❌ Unknown template command: {args.template_command}[/bold red]")
                 console.print("[dim]Available: email, cover[/dim]")
-        
+
         else:
             console.print(f"[bold red]❌ Unknown command: {args.command}[/bold red]")
             parser.print_help()
-    
+
     except KeyboardInterrupt:
         console.print("\n[yellow]⚠️ Operation cancelled by user[/yellow]")
-    
+
     except Exception as e:
         console.print(f"\n[bold red]❌ Unexpected error: {e}[/bold red]")
         logger.error(f"CLI error: {e}")
         console.print("[dim]Check logs/personal_automation.log for details[/dim]")
-    
+
     finally:
         console.print(f"\n[dim]Completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}[/dim]")
 

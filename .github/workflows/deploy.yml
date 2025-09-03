@@ -135,7 +135,7 @@ jobs:
             --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=staging,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
-          
+
           # Extract service URL for health checks
           echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
         timeout-minutes: 10
@@ -149,7 +149,7 @@ jobs:
           echo "🏥 Checking frontend health..."
           max_attempts=5
           attempt=1
-          
+
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "https://careercopilot-staging.web.app" > /dev/null; then
@@ -174,11 +174,11 @@ jobs:
           echo "🏥 Checking backend health..."
           max_attempts=5
           attempt=1
-          
+
           # Use the service URL from deployment output
           backend_url="${{ steps.deploy-backend.outputs.service_url }}"
           echo "Backend URL: $backend_url"
-          
+
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "$backend_url/health" > /dev/null; then
@@ -263,7 +263,7 @@ jobs:
             --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=production,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
-          
+
           # Extract service URL for health checks
           echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
         timeout-minutes: 12
@@ -277,7 +277,7 @@ jobs:
           echo "🏥 Checking frontend health..."
           max_attempts=6
           attempt=1
-          
+
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "https://careercopilot-prod.web.app" > /dev/null; then
@@ -302,11 +302,11 @@ jobs:
           echo "🏥 Checking backend health..."
           max_attempts=6
           attempt=1
-          
+
           # Use the service URL from deployment output
           backend_url="${{ steps.deploy-backend.outputs.service_url }}"
           echo "Backend URL: $backend_url"
-          
+
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "$backend_url/health" > /dev/null; then
@@ -366,15 +366,15 @@ jobs:
           release_name: Production Release v${{ github.run_number }}
           body: |
             🚀 **Production Deployment Successful**
-            
+
             **Changes in this release:**
             - Commit: ${{ github.sha }}
             - Branch: ${{ github.ref_name }}
-            
+
             **Deployment URLs:**
             - Frontend: https://careercopilot-prod.web.app
             - Backend: Cloud Run (us-central1)
-            
+
             **Health Check Status:** ✅ All systems operational
           draft: false
           prerelease: false
@@ -403,5 +403,5 @@ jobs:
             echo "✅ Staging: Deployed successfully"
           fi
           if [[ "${{ needs.deploy-production.result }}" == "success" ]]; then
-            echo "✅ Production: Deployed successfully" 
+            echo "✅ Production: Deployed successfully"
           fi

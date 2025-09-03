@@ -91,7 +91,7 @@ gh secret set GOOGLE_OAUTH_CLIENT_ID_PROD \
 
 Enable these APIs in both projects:
 - OAuth2 API (`oauth2.googleapis.com`)
-- Google+ API (`plus.googleapis.com`) 
+- Google+ API (`plus.googleapis.com`)
 - People API (`people.googleapis.com`)
 
 ## 🧪 **Testing OAuth Setup**

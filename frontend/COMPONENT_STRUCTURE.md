@@ -164,13 +164,13 @@ import KscGeneratorPage from './pages/KscGeneratorPage';
 
 ### After Optimization
 ```typescript
-import { 
-  DashboardPage, 
-  DocumentsPage, 
-  AnalysisPage, 
-  SettingsPage, 
-  OpportunitiesPage, 
-  KscGeneratorPage 
+import {
+  DashboardPage,
+  DocumentsPage,
+  AnalysisPage,
+  SettingsPage,
+  OpportunitiesPage,
+  KscGeneratorPage
 } from './pages';
 ```
 

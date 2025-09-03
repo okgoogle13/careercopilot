@@ -49,14 +49,14 @@ export function TagInput({
 
   const filteredSuggestions = React.useMemo(() => {
     if (!inputValue || !suggestions.length) return [];
-    
+
     const query = inputValue.toLowerCase().trim();
     if (!query) return [];
 
     return suggestions
-      .filter(suggestion => 
+      .filter(suggestion =>
         suggestion.toLowerCase().includes(query) &&
-        (allowDuplicates || !tags.some(tag => 
+        (allowDuplicates || !tags.some(tag =>
           tag.label.toLowerCase() === suggestion.toLowerCase()
         ))
       )
@@ -225,7 +225,7 @@ export function TagInput({
             renderTag ? renderTag(tag, () => removeTag(tag.id)) :
             defaultRenderTag(tag, () => removeTag(tag.id))
           )}
-          
+
           {canAddMoreTags && (
             <Input
               ref={inputRef}
@@ -298,7 +298,7 @@ export function SkillsTagInput({
   ...props
 }: SkillsTagInputProps) {
   const allSuggestions = React.useMemo(() => {
-    const categorySuggestions = skillCategories 
+    const categorySuggestions = skillCategories
       ? Object.values(skillCategories).flat()
       : [];
     return [...new Set([...suggestions, ...categorySuggestions])];
@@ -312,7 +312,7 @@ export function SkillsTagInput({
     let category: string | undefined;
     if (skillCategories) {
       for (const [cat, skillList] of Object.entries(skillCategories)) {
-        if (skillList.some(skill => 
+        if (skillList.some(skill =>
           skill.toLowerCase() === trimmedValue.toLowerCase()
         )) {
           category = cat;

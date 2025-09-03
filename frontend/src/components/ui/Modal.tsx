@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   closeOnBackdropClick = true,
   closeOnEscape = true,
 }) => {
-  const focusTrapRef = useFocusTrap({ 
+  const focusTrapRef = useFocusTrap({
     active: isOpen,
     initialFocus: true,
     restoreFocus: true
@@ -80,7 +80,7 @@ const Modal: React.FC<ModalProps> = ({
         <div
           ref={focusTrapRef}
           className={`
-            relative inline-block w-full ${sizeClasses[size]} transform rounded-lg 
+            relative inline-block w-full ${sizeClasses[size]} transform rounded-lg
             bg-card border border-border px-6 py-6 text-left shadow-lg transition-all
             animate-scale-in
             ${className}

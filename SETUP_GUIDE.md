@@ -53,7 +53,7 @@ Complete configuration guide for setting up CareerCopilot in staging and product
 # Create staging project
 firebase projects:create careercopilot-staging
 
-# Create production project  
+# Create production project
 firebase projects:create careercopilot-prod
 ```
 
@@ -190,7 +190,7 @@ gh secret set GCP_SA_KEY --body "$(cat prod-key.json)" --repo $REPO
 
 # Add AI service keys (replace with your actual keys)
 gh secret set GEMINI_API_KEY --body "YOUR_GEMINI_KEY" --repo $REPO
-gh secret set OPENAI_API_KEY --body "YOUR_OPENAI_KEY" --repo $REPO  
+gh secret set OPENAI_API_KEY --body "YOUR_OPENAI_KEY" --repo $REPO
 gh secret set ANTHROPIC_API_KEY --body "YOUR_ANTHROPIC_KEY" --repo $REPO
 gh secret set PERPLEXITY_API_KEY --body "YOUR_PERPLEXITY_KEY" --repo $REPO
 
@@ -200,7 +200,7 @@ gh secret set PINECONE_ENVIRONMENT --body "YOUR_PINECONE_ENV" --repo $REPO
 gh secret set PINECONE_INDEX_NAME --body "careercopilot-index" --repo $REPO
 gh secret set SENDGRID_API_KEY --body "YOUR_SENDGRID_KEY" --repo $REPO
 
-# Add OAuth secrets  
+# Add OAuth secrets
 gh secret set GOOGLE_OAUTH_CLIENT_ID_STAGING --body "YOUR_STAGING_OAUTH_ID" --repo $REPO
 gh secret set GOOGLE_OAUTH_CLIENT_SECRET_STAGING --body "YOUR_STAGING_OAUTH_SECRET" --repo $REPO
 gh secret set GOOGLE_OAUTH_CLIENT_ID_PROD --body "YOUR_PROD_OAUTH_ID" --repo $REPO
