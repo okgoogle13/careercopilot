@@ -9,17 +9,15 @@ import logging
 from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
-from app.core.ai_error_handling import AIError, AIErrorType
+from app.core.ai_error_handling import AIError
 from app.core.dependencies import get_current_user
 from app.core.limiter import limiter
 
 # Import Genkit flows
 from app.genkit_flows.advanced_job_matching import (
-    CandidateProfile,
     JobMatchAnalysis,
     JobOpportunityRanking,
     MarketPositioningAnalysis,
-    analyze_job_batch,
     analyze_job_match_detailed,
     analyze_market_positioning,
     rank_job_opportunities,
@@ -54,7 +52,7 @@ from app.genkit_flows.smart_cover_letter_system import (
     optimize_existing_cover_letter,
     research_company_for_application,
 )
-from fastapi import APIRouter, Body, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)

@@ -6,7 +6,6 @@ import { Badge } from '../ui/badge';
 import { aiServices, ContentOptimizationRequest, ContentOptimizationResult } from '../../services/aiServices';
 import toast from 'react-hot-toast';
 import {
-  FileText,
   TrendingUp,
   Target,
   CheckCircle,
@@ -71,7 +70,7 @@ export const ContentOptimizationComponent: React.FC<ContentOptimizationComponent
     try {
       await navigator.clipboard.writeText(text);
       toast.success('Copied to clipboard!');
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy to clipboard');
     }
   };
@@ -193,12 +192,12 @@ export const ContentOptimizationComponent: React.FC<ContentOptimizationComponent
                   <label key={key} className="flex items-center space-x-2">
                     <input
                       type="checkbox"
-                      checked={optimizationSettings.optimization_goals.includes(key as any)}
+                      checked={optimizationSettings.optimization_goals.includes(key as keyof typeof optimizationGoalLabels)}
                       onChange={(e) => {
                         if (e.target.checked) {
                           setOptimizationSettings(prev => ({
                             ...prev,
-                            optimization_goals: [...prev.optimization_goals, key as any]
+                            optimization_goals: [...prev.optimization_goals, key as keyof typeof optimizationGoalLabels]
                           }));
                         } else {
                           setOptimizationSettings(prev => ({
