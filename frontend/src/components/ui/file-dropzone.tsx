@@ -180,10 +180,10 @@ export function FileDropzone({
 
   const handleFileInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
-    
+
     const selectedFiles = Array.from(e.target.files);
     addFiles(selectedFiles);
-    
+
     // Reset input
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -290,7 +290,7 @@ export function FileDropzone({
           <div className="grid grid-cols-1 gap-2">
             {files.map((file) => {
               const progress = getFileProgress(file);
-              
+
               return (
                 <div
                   key={file.id}
@@ -332,12 +332,12 @@ export function FileDropzone({
                     <p className="text-xs text-muted-foreground">
                       {formatFileSize(file.size)}
                     </p>
-                    
+
                     {/* Progress Bar */}
                     {progress && progress.status === 'uploading' && (
                       <Progress value={progress.progress} className="mt-1 h-1" />
                     )}
-                    
+
                     {/* Error Message */}
                     {progress && progress.status === 'error' && progress.error && (
                       <p className="text-xs text-destructive mt-1">{progress.error}</p>

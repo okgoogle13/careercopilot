@@ -55,30 +55,30 @@ services:
       DB_NAME: careercopilot_dev
       DB_USER: dev_user
       DB_PASSWORD: dev_password
-      
+
       # Redis configuration
       REDIS_URL: redis://redis:6379/0
-      
+
       # Development settings
       ENVIRONMENT: development
       DEBUG: true
       LOG_LEVEL: DEBUG
-      
+
       # Authentication (development keys)
       JWT_SECRET_KEY: development-secret-key-not-for-production
       ACCESS_TOKEN_EXPIRE_MINUTES: 60
-      
+
       # AI Services (use your keys)
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
-      
+
       # Caching (shorter TTL for development)
       CACHE_TTL_HOURS: 1
       ENABLE_CACHE: true
-      
+
       # Rate limiting (more lenient)
       RATE_LIMIT_ENABLED: false
-      
+
     ports:
       - "8001:8000"  # Different port for development
     volumes:

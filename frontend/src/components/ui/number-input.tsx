@@ -58,7 +58,7 @@ export function NumberInput({
         maximumFractionDigits: prec,
       }).format(num);
     }
-    
+
     if (fmt === 'percentage') {
       return new Intl.NumberFormat(loc, {
         style: 'percent',
@@ -66,7 +66,7 @@ export function NumberInput({
         maximumFractionDigits: prec,
       }).format(num / 100);
     }
-    
+
     return new Intl.NumberFormat(loc, {
       minimumFractionDigits: prec,
       maximumFractionDigits: prec,
@@ -75,38 +75,38 @@ export function NumberInput({
 
   function parseInputValue(input: string): number | undefined {
     if (!input.trim()) return undefined;
-    
+
     // Remove currency symbols, percentage signs, and locale-specific formatting
     const cleanValue = input
       .replace(/[$€£¥₹]/g, '')  // Common currency symbols
       .replace(/%/g, '')        // Percentage sign
       .replace(/,/g, '')        // Thousands separators
       .trim();
-    
+
     const parsed = parseFloat(cleanValue);
     if (isNaN(parsed)) return undefined;
-    
+
     // Convert percentage back to decimal
     if (format === 'percentage' && input.includes('%')) {
       return parsed;
     }
-    
+
     return parsed;
   }
 
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setInputValue(newValue);
-    
+
     const parsed = parseInputValue(newValue);
-    
+
     // Validate range
     if (parsed !== undefined) {
       if (min !== undefined && parsed < min) return;
       if (max !== undefined && parsed > max) return;
       if (!allowNegative && parsed < 0) return;
     }
-    
+
     onChange?.(parsed);
   }, [onChange, min, max, allowNegative, format]);
 
@@ -129,12 +129,12 @@ export function NumberInput({
     const currentValue = value ?? 0;
     const stepValue = direction === 'up' ? step : -step;
     const newValue = currentValue + stepValue;
-    
+
     // Validate range
     if (min !== undefined && newValue < min) return;
     if (max !== undefined && newValue > max) return;
     if (!allowNegative && newValue < 0) return;
-    
+
     onChange?.(newValue);
   }, [value, step, min, max, allowNegative, onChange]);
 
@@ -162,7 +162,7 @@ export function NumberInput({
           className
         )}
       />
-      
+
       {showStepper && !disabled && (
         <div className="absolute right-1 top-1 bottom-1 flex flex-col">
           <Button
@@ -196,10 +196,10 @@ interface CurrencyInputProps extends Omit<NumberInputProps, 'format' | 'currency
   currency?: string;
 }
 
-export function CurrencyInput({ 
+export function CurrencyInput({
   currency = 'USD',
   precision = 2,
-  ...props 
+  ...props
 }: CurrencyInputProps) {
   return (
     <NumberInput
@@ -216,11 +216,11 @@ interface PercentageInputProps extends Omit<NumberInputProps, 'format' | 'min' |
   max?: number;
 }
 
-export function PercentageInput({ 
+export function PercentageInput({
   precision = 1,
   min = 0,
   max = 100,
-  ...props 
+  ...props
 }: PercentageInputProps) {
   return (
     <NumberInput

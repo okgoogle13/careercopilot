@@ -34,7 +34,7 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: any[]) => {
       setError(null);
-      
+
       // Handle rejected files
       if (fileRejections.length > 0) {
         const rejection = fileRejections[0];
@@ -74,7 +74,7 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
 
   const handleUpload = async () => {
     if (files.length === 0) return;
-    
+
     try {
       setIsUploading(true);
       setError(null);

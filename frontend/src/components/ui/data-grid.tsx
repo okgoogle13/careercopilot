@@ -119,13 +119,13 @@ export function DataGrid<T = any>({
     // Apply column filters
     Object.entries(filters).forEach(([columnId, filterValue]) => {
       if (!filterValue) return;
-      
+
       const column = columns.find(col => col.id === columnId);
       if (!column) return;
 
       filtered = filtered.filter(row => {
         const value = getCellValue(row, column);
-        
+
         if (column.filter?.type === 'select') {
           return value === filterValue;
         } else if (column.filter?.type === 'boolean') {
@@ -142,7 +142,7 @@ export function DataGrid<T = any>({
     // Apply global search
     if (globalFilter) {
       const searchTerm = globalFilter.toLowerCase();
-      filtered = filtered.filter(row => 
+      filtered = filtered.filter(row =>
         columns.some(column => {
           const value = getCellValue(row, column);
           return String(value || '').toLowerCase().includes(searchTerm);
@@ -167,7 +167,7 @@ export function DataGrid<T = any>({
       const bValue = getCellValue(b, column);
 
       if (aValue === bValue) return 0;
-      
+
       let comparison = 0;
       if (aValue == null) comparison = -1;
       else if (bValue == null) comparison = 1;
@@ -207,19 +207,19 @@ export function DataGrid<T = any>({
   const handleRowSelection = useCallback((row: T, selected: boolean) => {
     const rowKey = getRowKey(row, 0);
     const newSelectedKeys = new Set(selectedRowKeys);
-    
+
     if (selected) {
       newSelectedKeys.add(rowKey);
     } else {
       newSelectedKeys.delete(rowKey);
     }
-    
+
     setSelectedRowKeys(newSelectedKeys);
-    
-    const selectedRowsData = sortedData.filter(dataRow => 
+
+    const selectedRowsData = sortedData.filter(dataRow =>
       newSelectedKeys.has(getRowKey(dataRow, 0))
     );
-    
+
     onRowSelect?.(selectedRowsData);
   }, [selectedRowKeys, sortedData, getRowKey, onRowSelect]);
 
@@ -265,7 +265,7 @@ export function DataGrid<T = any>({
               </div>
             </div>
           )}
-          
+
           {filterable && (
             <div className="flex items-center gap-2">
               {visibleColumns.filter(col => col.filterable).map(column => (
@@ -302,7 +302,7 @@ export function DataGrid<T = any>({
       )}
 
       {/* Table */}
-      <div 
+      <div
         className="border rounded-lg overflow-hidden"
         style={virtualScrolling ? { height } : undefined}
       >
@@ -327,7 +327,7 @@ export function DataGrid<T = any>({
                     />
                   </th>
                 )}
-                
+
                 {visibleColumns.map((column) => (
                   <th
                     key={column.id}
@@ -351,7 +351,7 @@ export function DataGrid<T = any>({
                           <ChevronUp className={cn(
                             'h-3 w-3',
                             sortState.columnId === column.id && sortState.direction === 'asc'
-                              ? 'text-primary' 
+                              ? 'text-primary'
                               : 'text-muted-foreground'
                           )} />
                           <ChevronDown className={cn(
@@ -365,7 +365,7 @@ export function DataGrid<T = any>({
                     </div>
                   </th>
                 ))}
-                
+
                 {showRowActions && rowActions.length > 0 && (
                   <th className="w-10 p-3 text-right">Actions</th>
                 )}
@@ -390,8 +390,8 @@ export function DataGrid<T = any>({
                 <tr>
                   <td
                     colSpan={
-                      visibleColumns.length + 
-                      (selectable ? 1 : 0) + 
+                      visibleColumns.length +
+                      (selectable ? 1 : 0) +
                       (showRowActions ? 1 : 0)
                     }
                     className="p-8 text-center text-muted-foreground"
@@ -403,8 +403,8 @@ export function DataGrid<T = any>({
                 sortedData.map((row, index) => {
                   const rowKey = getRowKey(row, index);
                   const isSelected = selectedRowKeys.has(rowKey);
-                  const rowClassNameValue = typeof rowClassName === 'function' 
-                    ? rowClassName(row, index) 
+                  const rowClassNameValue = typeof rowClassName === 'function'
+                    ? rowClassName(row, index)
                     : rowClassName;
 
                   return (
@@ -426,10 +426,10 @@ export function DataGrid<T = any>({
                           />
                         </td>
                       )}
-                      
+
                       {visibleColumns.map((column) => {
                         const value = getCellValue(row, column);
-                        
+
                         return (
                           <td
                             key={column.id}
@@ -445,7 +445,7 @@ export function DataGrid<T = any>({
                           </td>
                         );
                       })}
-                      
+
                       {showRowActions && rowActions.length > 0 && (
                         <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
                           <DropdownMenu>

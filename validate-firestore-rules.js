@@ -1,6 +1,6 @@
 /**
  * Simple Firestore Security Rules Validation Script
- * 
+ *
  * This script validates the refactored Firestore security rules
  * by analyzing the code structure and function usage.
  */
@@ -24,7 +24,7 @@ function validateRulesFunctions() {
   ];
 
   console.log('📋 Checking for reusable functions:');
-  
+
   let allFunctionsPresent = true;
   expectedFunctions.forEach(func => {
     if (func.pattern.test(rulesContent)) {
@@ -37,7 +37,7 @@ function validateRulesFunctions() {
 
   // Check for function usage
   console.log('\n📋 Checking function usage patterns:');
-  
+
   const functionUsages = [
     { func: 'isOwner(userId)', pattern: /isOwner\(userId\)/g, expectedMin: 6 },
     { func: 'isAuthenticated()', pattern: /isAuthenticated\(\)/g, expectedMin: 2 },
@@ -51,7 +51,7 @@ function validateRulesFunctions() {
     const count = matches.length;
     const status = count >= usage.expectedMin ? '✅' : '⚠️';
     console.log(`   ${status} ${usage.func}: used ${count} times (expected: ≥${usage.expectedMin})`);
-    
+
     if (count < usage.expectedMin) {
       functionsUsedCorrectly = false;
     }
@@ -59,10 +59,10 @@ function validateRulesFunctions() {
 
   // Check for code duplication reduction
   console.log('\n📊 Code Duplication Analysis:');
-  
+
   const duplicatedPatterns = [
-    { 
-      pattern: /request\.auth != null && request\.auth\.uid ==/g, 
+    {
+      pattern: /request\.auth != null && request\.auth\.uid ==/g,
       description: 'Direct auth + uid comparisons',
       shouldBe: 'Replaced with reusable functions'
     }
@@ -71,7 +71,7 @@ function validateRulesFunctions() {
   duplicatedPatterns.forEach(dup => {
     const matches = rulesContent.match(dup.pattern) || [];
     const count = matches.length;
-    
+
     // We expect some occurrences within the function definitions themselves
     if (count <= 4) { // Functions definitions contain the pattern
       console.log(`   ✅ ${dup.description}: ${count} occurrences (within function definitions)`);
@@ -82,7 +82,7 @@ function validateRulesFunctions() {
 
   // Check collection coverage
   console.log('\n📋 Collection Coverage:');
-  
+
   const expectedCollections = [
     { name: '/users/{userId}', pattern: /match \/users\/\{userId\}/ },
     { name: '/documents/{documentId}', pattern: /match \/documents\/\{documentId\}/ },
@@ -98,9 +98,9 @@ function validateRulesFunctions() {
     }
   });
 
-  // Check subcollection coverage  
+  // Check subcollection coverage
   console.log('\n📋 Subcollection Coverage:');
-  
+
   const expectedSubcollections = [
     'match /documents/{documentId}',
     'match /profiles/{profileId}',
@@ -121,7 +121,7 @@ function validateRulesFunctions() {
 
   // Security best practices check
   console.log('\n🔒 Security Best Practices:');
-  
+
   const securityChecks = [
     {
       name: 'Default Deny Rule',
@@ -152,10 +152,10 @@ function validateRulesFunctions() {
   console.log('\n' + '='.repeat(60));
   console.log('📊 VALIDATION SUMMARY');
   console.log('='.repeat(60));
-  
+
   const overallStatus = allFunctionsPresent && functionsUsedCorrectly ? '✅ PASS' : '⚠️  NEEDS ATTENTION';
   console.log(`Overall Status: ${overallStatus}`);
-  
+
   if (allFunctionsPresent && functionsUsedCorrectly) {
     console.log('🎉 All reusable functions are properly implemented and used!');
     console.log('✨ Code duplication has been successfully reduced.');
@@ -170,7 +170,7 @@ function validateRulesFunctions() {
   }
 
   console.log('\n✅ Rules validation completed');
-  
+
   return allFunctionsPresent && functionsUsedCorrectly;
 }
 
@@ -180,13 +180,13 @@ function validateRulesFunctions() {
 function generateTestScenarios() {
   console.log('\n🧪 SECURITY TEST SCENARIOS');
   console.log('='.repeat(60));
-  
+
   const scenarios = [
     {
       category: 'User Ownership',
       tests: [
         '✅ User can read/write their own /users/{userId} document',
-        '❌ User cannot read/write another user\'s /users/{userId} document', 
+        '❌ User cannot read/write another user\'s /users/{userId} document',
         '❌ Unauthenticated requests are denied'
       ]
     },
@@ -237,23 +237,23 @@ function generateTestScenarios() {
 function showImprovementMetrics() {
   console.log('\n📈 IMPROVEMENT METRICS');
   console.log('='.repeat(60));
-  
+
   const rulesContent = fs.readFileSync('firestore.rules', 'utf8');
   const lines = rulesContent.split('\n').length;
-  
+
   console.log('📊 Before Refactoring:');
   console.log('   • Duplicated auth pattern: 5+ times');
   console.log('   • No reusable functions');
   console.log('   • Basic collection coverage');
   console.log('   • Manual auth validation everywhere');
-  
+
   console.log('\n📊 After Refactoring:');
   console.log(`   • Total lines of code: ${lines}`);
   console.log('   • Reusable functions: 4 functions');
   console.log('   • DRY principle: Applied throughout');
   console.log('   • Enhanced collection coverage');
   console.log('   • Centralized security logic');
-  
+
   console.log('\n🎯 Benefits Achieved:');
   console.log('   ✅ Reduced code duplication by ~70%');
   console.log('   ✅ Improved maintainability');
@@ -269,7 +269,7 @@ try {
   const validationPassed = validateRulesFunctions();
   generateTestScenarios();
   showImprovementMetrics();
-  
+
   console.log('\n' + '='.repeat(60));
   if (validationPassed) {
     console.log('🎉 SUCCESS: Firestore rules refactoring completed successfully!');

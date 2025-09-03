@@ -60,7 +60,7 @@ const tours: Record<string, Tour> = {
       },
     ],
   },
-  
+
   'profile-editor-tour': {
     id: 'profile-editor-tour',
     title: 'Profile Editor Guide',
@@ -110,7 +110,7 @@ const tours: Record<string, Tour> = {
       },
     ],
   },
-  
+
   'document-generation-tour': {
     id: 'document-generation-tour',
     title: 'Document Generation Tour',
@@ -175,7 +175,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
     if (!tour || !isVisible) return;
 
     const currentStep = tour.steps[currentStepIndex];
-    
+
     // Execute step action if any
     if (currentStep.action) {
       currentStep.action();
@@ -186,7 +186,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
       const element = document.querySelector(currentStep.element) as HTMLElement;
       if (element) {
         setHighlightedElement(element);
-        
+
         // Scroll element into view
         element.scrollIntoView({
           behavior: 'smooth',
@@ -197,7 +197,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
         const updatePosition = () => {
           const rect = element.getBoundingClientRect();
           const tooltipRect = tooltipRef.current?.getBoundingClientRect();
-          
+
           if (!tooltipRect) return;
 
           let top = 0;
@@ -294,7 +294,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
     <>
       {/* Backdrop overlay */}
       <div className="fixed inset-0 bg-black bg-opacity-75 z-40 transition-opacity duration-300" />
-      
+
       {/* Spotlight highlight for target element */}
       {highlightedElement && (
         <div
@@ -366,7 +366,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
               <ChevronLeft className="w-4 h-4" />
               Back
             </Button>
-            
+
             <Button
               variant="ghost"
               size="sm"
@@ -393,8 +393,8 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
         {/* Keyboard shortcuts hint */}
         <div className="mt-4 pt-3 border-t border-gray-100">
           <p className="text-xs text-gray-500 text-center">
-            Use <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">←</kbd> / 
-            <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs mx-1">→</kbd> to navigate • 
+            Use <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">←</kbd> /
+            <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs mx-1">→</kbd> to navigate •
             <kbd className="px-1 py-0.5 bg-gray-200 rounded text-xs">Esc</kbd> to skip
           </p>
         </div>

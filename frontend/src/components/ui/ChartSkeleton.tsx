@@ -18,7 +18,7 @@ export function ChartSkeleton({
 }: ChartSkeletonProps) {
   return (
     <div className={cn('space-y-4', className)}>
-      <div 
+      <div
         className="relative overflow-hidden rounded-lg bg-muted/30"
         style={{ width, height }}
         aria-busy="true"
@@ -31,7 +31,7 @@ export function ChartSkeleton({
           </div>
         </div>
       </div>
-      
+
       {showLegend && (
         <div className="flex flex-wrap items-center justify-center gap-4">
           {Array.from({ length: legendItems }).map((_, i) => (

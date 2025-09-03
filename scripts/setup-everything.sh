@@ -118,7 +118,7 @@ if [ "$SECURITY_ISSUES" = true ]; then
     echo
     warning "Found security issues that should be addressed:"
     echo "  1. Remove any .env files with real API keys"
-    echo "  2. Add .env files to .gitignore" 
+    echo "  2. Add .env files to .gitignore"
     echo "  3. Remove hardcoded API keys from source code"
     echo "  4. Use environment variables or GitHub secrets instead"
     echo "  5. Consider running: git filter-branch to clean history"
@@ -172,7 +172,7 @@ add_role() {
     local member="$2"
     local role="$3"
     local description="$4"
-    
+
     echo -n "  Adding $description... "
     if gcloud projects add-iam-policy-binding "$project" \
         --member="serviceAccount:$member" \
@@ -409,7 +409,7 @@ echo
 info "🚀 DEPLOYMENT READINESS:"
 echo "  ✅ Critical secrets configured - deployment should work"
 echo "  ✅ Firebase service accounts ready"
-echo "  ✅ GCP permissions configured" 
+echo "  ✅ GCP permissions configured"
 echo "  ✅ Security scanning completed"
 
 echo

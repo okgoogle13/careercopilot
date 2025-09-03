@@ -82,13 +82,13 @@ import { UserPreferencesProvider } from './contexts/UserPreferencesContext';
 
 **After:**
 ```typescript
-import { 
-  DashboardPage, 
-  DocumentsPage, 
-  AnalysisPage, 
-  SettingsPage, 
-  OpportunitiesPage, 
-  KscGeneratorPage 
+import {
+  DashboardPage,
+  DocumentsPage,
+  AnalysisPage,
+  SettingsPage,
+  OpportunitiesPage,
+  KscGeneratorPage
 } from './pages';
 import { AuthProvider, UserPreferencesProvider } from './contexts';
 ```

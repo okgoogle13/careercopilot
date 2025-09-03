@@ -90,7 +90,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             )}
           </div>
         </div>
-        
+
         {actions && actions.length > 0 && (
         <div className="flex items-center space-x-2">
           {actions.map((action, index) => (

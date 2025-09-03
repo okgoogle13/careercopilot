@@ -81,9 +81,9 @@ interface TableSkeletonProps {
   columns?: number;
 }
 
-const TableSkeleton: React.FC<TableSkeletonProps> = ({ 
-  rows = 5, 
-  columns = 4 
+const TableSkeleton: React.FC<TableSkeletonProps> = ({
+  rows = 5,
+  columns = 4
 }) => (
   <div className="space-y-3">
     {/* Table Header */}
@@ -96,12 +96,12 @@ const TableSkeleton: React.FC<TableSkeletonProps> = ({
     {Array.from({ length: rows }).map((_, rowIndex) => (
       <div key={rowIndex} className="flex gap-4 py-2">
         {Array.from({ length: columns }).map((_, colIndex) => (
-          <Skeleton 
-            key={colIndex} 
+          <Skeleton
+            key={colIndex}
             className={cn(
               'h-4',
               colIndex === 0 ? 'w-32' : 'w-20'
-            )} 
+            )}
           />
         ))}
       </div>
@@ -110,8 +110,8 @@ const TableSkeleton: React.FC<TableSkeletonProps> = ({
 );
 
 // Page Loading Skeleton
-const PageLoadingSkeleton: React.FC<{ type?: 'dashboard' | 'profile' | 'applications' }> = ({ 
-  type = 'dashboard' 
+const PageLoadingSkeleton: React.FC<{ type?: 'dashboard' | 'profile' | 'applications' }> = ({
+  type = 'dashboard'
 }) => {
   if (type === 'dashboard') {
     return (
@@ -134,7 +134,7 @@ const PageLoadingSkeleton: React.FC<{ type?: 'dashboard' | 'profile' | 'applicat
       </div>
     );
   }
-  
+
   if (type === 'profile') {
     return (
       <div className="space-y-8 p-6">
@@ -160,7 +160,7 @@ const PageLoadingSkeleton: React.FC<{ type?: 'dashboard' | 'profile' | 'applicat
       </div>
     );
   }
-  
+
   if (type === 'applications') {
     return (
       <div className="space-y-6 p-6">
@@ -168,14 +168,14 @@ const PageLoadingSkeleton: React.FC<{ type?: 'dashboard' | 'profile' | 'applicat
           <Skeleton className="h-8 w-56" />
           <Skeleton className="h-10 w-36 rounded-lg" />
         </div>
-        
+
         {/* Filters */}
         <div className="flex gap-4">
           <Skeleton className="h-10 w-64 rounded-lg" />
           <Skeleton className="h-10 w-32 rounded-lg" />
           <Skeleton className="h-10 w-36 rounded-lg" />
         </div>
-        
+
         {/* Applications */}
         <div className="space-y-4">
           {[1, 2, 3, 4, 5].map((i) => (
@@ -185,7 +185,7 @@ const PageLoadingSkeleton: React.FC<{ type?: 'dashboard' | 'profile' | 'applicat
       </div>
     );
   }
-  
+
   return <DashboardStatsSkeleton />;
 };
 
@@ -198,12 +198,12 @@ const LoadingDots: React.FC<{ className?: string }> = ({ className }) => (
   </div>
 );
 
-export { 
-  Skeleton, 
-  ApplicationCardSkeleton, 
-  ProfileSectionSkeleton, 
-  DashboardStatsSkeleton, 
-  TableSkeleton, 
-  PageLoadingSkeleton, 
-  LoadingDots 
+export {
+  Skeleton,
+  ApplicationCardSkeleton,
+  ProfileSectionSkeleton,
+  DashboardStatsSkeleton,
+  TableSkeleton,
+  PageLoadingSkeleton,
+  LoadingDots
 };

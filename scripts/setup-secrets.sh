@@ -73,12 +73,12 @@ add_secret() {
     local secret_name="$1"
     local secret_value="$2"
     local description="$3"
-    
+
     if [ -z "$secret_value" ] || [ "$secret_value" = "YOUR_KEY_HERE" ] || [ "$secret_value" = "" ]; then
         warning "Skipping $secret_name - no value provided"
         return
     fi
-    
+
     echo -n "Adding $secret_name... "
     if gh secret set "$secret_name" --body "$secret_value" --repo "$REPO" &> /dev/null; then
         echo -e "${GREEN}✅${NC}"
@@ -93,12 +93,12 @@ add_secret_from_file() {
     local secret_name="$1"
     local file_path="$2"
     local description="$3"
-    
+
     if [ ! -f "$file_path" ]; then
         warning "Skipping $secret_name - file not found: $file_path"
         return
     fi
-    
+
     echo -n "Adding $secret_name from file... "
     if gh secret set "$secret_name" --body "$(cat "$file_path")" --repo "$REPO" &> /dev/null; then
         echo -e "${GREEN}✅${NC}"
@@ -113,7 +113,7 @@ prompt_for_secret() {
     local secret_name="$1"
     local description="$2"
     local example="$3"
-    
+
     echo
     info "$description"
     if [ -n "$example" ]; then
@@ -121,7 +121,7 @@ prompt_for_secret() {
     fi
     echo -n "Enter $secret_name (or press Enter to skip): "
     read -r secret_value
-    
+
     if [ -n "$secret_value" ]; then
         add_secret "$secret_name" "$secret_value" "$description"
     else

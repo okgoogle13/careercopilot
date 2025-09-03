@@ -424,7 +424,7 @@ for provider, is_healthy in health_status.items():
    ```bash
    # Check service configuration
    curl "/api/v1/ai/services" | jq '.services[] | select(.service_name=="resume_analysis")'
-   
+
    # Validate configuration
    curl -X POST "/api/v1/ai/admin/validate-config"
    ```
@@ -433,7 +433,7 @@ for provider, is_healthy in health_status.items():
    ```bash
    # Check provider health
    curl "/api/v1/ai/providers"
-   
+
    # Verify credentials
    echo $OPENAI_API_KEY | head -c 10
    ```

@@ -251,13 +251,13 @@ const AnalysisPage: React.FC = () => {
             <TabsTrigger value="classic">Classic Analysis</TabsTrigger>
             <TabsTrigger value="feedback">AI Feedback Loop</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="classic" className="mt-6">
             {renderResults()}
           </TabsContent>
-          
+
           <TabsContent value="feedback" className="mt-6">
-            <ATSFeedbackLoop 
+            <ATSFeedbackLoop
               documentId={selectedDocumentId}
               jobDescription={jobDescription}
               onOptimizationComplete={(newScore) => {

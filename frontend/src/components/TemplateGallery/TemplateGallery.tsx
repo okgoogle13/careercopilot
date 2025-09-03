@@ -288,7 +288,7 @@ const TemplateGallery: React.FC<TemplateGalleryProps> = ({
 
   const getRecommendedTemplates = () => {
     if (!userProfile) return [];
-    
+
     return templates
       .filter(template => {
         if (userProfile.industry && template.industry.includes(userProfile.industry)) return true;
@@ -308,7 +308,7 @@ const TemplateGallery: React.FC<TemplateGalleryProps> = ({
   ];
 
   const industries = [
-    'all', 'technology', 'finance', 'healthcare', 'consulting', 'design', 
+    'all', 'technology', 'finance', 'healthcare', 'consulting', 'design',
     'marketing', 'engineering', 'law', 'management', 'education'
   ];
 
@@ -559,7 +559,7 @@ const TemplateCard: React.FC<{
             (e.target as HTMLImageElement).src = '/api/placeholder/300/400';
           }}
         />
-        
+
         {/* Overlay with actions */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all flex items-center justify-center">
           <div className="opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
@@ -667,7 +667,7 @@ const TemplateListItem: React.FC<{
                 </div>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2">
               {template.isPremium && (
                 <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded font-medium">
@@ -737,7 +737,7 @@ const TemplatePreviewModal: React.FC<{
               </div>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-2">
             {template.isPremium && (
               <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full font-medium">

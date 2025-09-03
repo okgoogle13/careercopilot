@@ -116,7 +116,7 @@ export function SearchInput({
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedIndex(prev => 
+        setSelectedIndex(prev =>
           prev < suggestions.length - 1 ? prev + 1 : prev
         );
         break;
@@ -164,7 +164,7 @@ export function SearchInput({
             <Search className="h-4 w-4 text-muted-foreground" />
           )}
         </div>
-        
+
         <Input
           ref={inputRef}
           type="text"
@@ -195,7 +195,7 @@ export function SearchInput({
               <X className="h-3 w-3" />
             </Button>
           )}
-          
+
           {showSearchButton && (
             <Button
               type="button"

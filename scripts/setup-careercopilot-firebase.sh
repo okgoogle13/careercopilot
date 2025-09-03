@@ -129,7 +129,7 @@ add_role() {
     local member="$2"
     local role="$3"
     local description="$4"
-    
+
     echo -n "  Adding $description... "
     if gcloud projects add-iam-policy-binding "$project" \
         --member="serviceAccount:$member" \

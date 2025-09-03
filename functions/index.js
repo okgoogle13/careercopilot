@@ -12,7 +12,7 @@ const storage = admin.storage();
  */
 exports.cleanupUserData = functions.auth.user().onDelete(async (user) => {
   const { uid } = user;
-  
+
   functions.logger.log(`Starting cleanup for user: ${uid}`);
 
   // 1. Delete the user's document from Firestore.
@@ -31,7 +31,7 @@ exports.cleanupUserData = functions.auth.user().onDelete(async (user) => {
   // 2. Delete all files from the user's directory in Cloud Storage.
   const bucket = storage.bucket();
   const userStoragePath = `users/${uid}/`;
-  
+
   try {
     await bucket.deleteFiles({
       prefix: userStoragePath,

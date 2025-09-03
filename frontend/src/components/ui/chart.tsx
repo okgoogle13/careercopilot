@@ -154,23 +154,23 @@ type ChartTooltipContentProps = Omit<RechartsPrimitive.TooltipProps<number, stri
   label?: string | number;
 }
 
-function ChartTooltipContent({ 
-  active, 
-  payload, 
-  className, 
-  indicator = 'dot', 
-  hideLabel = false, 
-  hideIndicator = false, 
-  label, 
-  labelFormatter, 
-  labelClassName, 
-  formatter, 
-  nameKey, 
-  labelKey, 
+function ChartTooltipContent({
+  active,
+  payload,
+  className,
+  indicator = 'dot',
+  hideLabel = false,
+  hideIndicator = false,
+  label,
+  labelFormatter,
+  labelClassName,
+  formatter,
+  nameKey,
+  labelKey,
   color,
   'aria-live': ariaLive = 'polite',
   'aria-atomic': ariaAtomic = true,
-  ...props 
+  ...props
 }: ChartTooltipContentProps & React.HTMLAttributes<HTMLDivElement>) {
   const { config } = useChart();
 
@@ -331,14 +331,14 @@ type ChartLegendContentProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'conte
   nameKey?: string;
 };
 
-function ChartLegendContent({ 
-  className, 
-  hideIcon = false, 
-  payload, 
-  verticalAlign = 'bottom', 
+function ChartLegendContent({
+  className,
+  hideIcon = false,
+  payload,
+  verticalAlign = 'bottom',
   nameKey,
   'aria-label': ariaLabel = 'Chart Legend',
-  ...props 
+  ...props
 }: ChartLegendContentProps & React.HTMLAttributes<HTMLDivElement>) {
   const { config } = useChart();
 
@@ -357,7 +357,7 @@ function ChartLegendContent({
       }}
       {...props}
     >
-      <div 
+      <div
         className={cn(
           'mx-auto flex min-w-min items-center justify-start gap-4 px-4',
           verticalAlign === 'top' ? 'pb-1' : 'pt-1',

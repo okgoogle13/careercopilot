@@ -96,16 +96,16 @@ success "Prerequisites check passed"
 enable_apis() {
     local project="$1"
     local env_name="$2"
-    
+
     log "Enabling required APIs for $env_name..."
     gcloud config set project "$project" --quiet
-    
+
     local apis=(
         "oauth2.googleapis.com"
         "plus.googleapis.com"
         "people.googleapis.com"
     )
-    
+
     for api in "${apis[@]}"; do
         echo -n "  Enabling $api... "
         if gcloud services enable "$api" --quiet &> /dev/null; then
@@ -120,10 +120,10 @@ enable_apis() {
 setup_consent_screen() {
     local project="$1"
     local env_name="$2"
-    
+
     log "Setting up OAuth consent screen for $env_name..."
     gcloud config set project "$project" --quiet
-    
+
     # Check if consent screen exists
     if gcloud alpha iap oauth-brands list --format="value(name)" 2>/dev/null | grep -q .; then
         info "OAuth consent screen already exists for $env_name"
@@ -150,30 +150,30 @@ create_oauth_client() {
     local env_name="$2"
     local origins=("${!3}")
     local redirects=("${!4}")
-    
+
     log "Creating OAuth client for $env_name..."
     gcloud config set project "$project" --quiet
-    
+
     # Prepare origins string
     local origins_str=""
     for origin in "${origins[@]}"; do
         origins_str="$origins_str --authorized-uris=$origin"
     done
-    
+
     # Prepare redirects string
     local redirects_str=""
     for redirect in "${redirects[@]}"; do
         redirects_str="$redirects_str --authorized-redirect-uris=$redirect"
     done
-    
+
     # Create OAuth client
     local client_name="careercopilot-${env_name,,}-oauth"
-    
+
     echo "Creating OAuth client: $client_name"
-    
+
     # Check if client already exists
     local existing_client=$(gcloud auth application-default oauth-clients list --format="value(name)" 2>/dev/null | grep "$client_name" || true)
-    
+
     if [ -n "$existing_client" ]; then
         info "OAuth client already exists: $client_name"
         # Get existing client ID
@@ -193,7 +193,7 @@ create_oauth_client() {
   }
 }
 EOF
-        
+
         warning "OAuth client creation requires manual setup"
         echo
         info "Please create OAuth client manually for $env_name:"
@@ -214,14 +214,14 @@ EOF
         echo
         echo -n "Enter the Client ID when created: "
         read -r client_id
-        
+
         rm "$temp_file"
     fi
-    
+
     if [ -n "$client_id" ]; then
         success "OAuth client configured for $env_name"
         echo "  Client ID: $client_id"
-        
+
         # Store client ID for GitHub secrets
         if [ "$env_name" = "Staging" ]; then
             STAGING_CLIENT_ID="$client_id"

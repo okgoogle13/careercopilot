@@ -49,7 +49,7 @@ function createTemplateImage(templateName, color, width = 300, height = 400) {
   ctx.fillStyle = '#333333';
   ctx.font = '12px Arial';
   ctx.textAlign = 'left';
-  
+
   // Name section
   ctx.fillStyle = color;
   ctx.fillRect(20, 100, width - 40, 2);
@@ -65,14 +65,14 @@ function createTemplateImage(templateName, color, width = 300, height = 400) {
   ctx.fillStyle = '#333333';
   ctx.font = 'bold 12px Arial';
   ctx.fillText('EXPERIENCE', 20, 180);
-  
+
   // Mock experience entries
   ctx.font = '10px Arial';
   ctx.fillStyle = '#333333';
   ctx.fillText('Senior Developer (2020-2024)', 20, 200);
   ctx.fillText('• Led development of web applications', 20, 215);
   ctx.fillText('• Managed team of 5 developers', 20, 230);
-  
+
   ctx.fillText('Frontend Developer (2018-2020)', 20, 250);
   ctx.fillText('• Built responsive user interfaces', 20, 265);
   ctx.fillText('• Optimized application performance', 20, 280);
@@ -83,7 +83,7 @@ function createTemplateImage(templateName, color, width = 300, height = 400) {
   ctx.fillStyle = '#333333';
   ctx.font = 'bold 12px Arial';
   ctx.fillText('SKILLS', 20, 320);
-  
+
   ctx.font = '10px Arial';
   ctx.fillText('JavaScript • React • Node.js • Python', 20, 340);
   ctx.fillText('AWS • Docker • Git • Agile', 20, 355);
@@ -106,25 +106,25 @@ async function uploadImage(imageBuffer, fileName) {
 
 async function main() {
   console.log('🚀 Starting template image upload to Firebase Storage...');
-  
+
   try {
     for (const template of templates) {
       console.log(`\n📸 Creating images for ${template.name}...`);
-      
+
       // Create thumbnail (smaller version)
       const thumbnailBuffer = createTemplateImage(template.name, template.color, 200, 260);
       const thumbnailFileName = `${template.id}-thumb.png`;
       await uploadImage(thumbnailBuffer, thumbnailFileName);
-      
+
       // Create full-size version
       const fullSizeBuffer = createTemplateImage(template.name, template.color, 400, 520);
       const fullSizeFileName = `${template.id}-full.png`;
       await uploadImage(fullSizeBuffer, fullSizeFileName);
     }
-    
+
     console.log('\n🎉 All template images uploaded successfully!');
     console.log('\nYou can now test the templates at: http://localhost:5173/document-generation');
-    
+
   } catch (error) {
     console.error('\n❌ Upload failed:', error.message);
     process.exit(1);

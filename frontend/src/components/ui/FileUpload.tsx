@@ -40,7 +40,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       const acceptedTypes = accept.split(',').map(type => type.trim());
       const fileType = file.type;
       const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
-      
+
       const isAccepted = acceptedTypes.some(type => {
         if (type.startsWith('.')) {
           return type.toLowerCase() === fileExtension;
@@ -58,7 +58,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   const handleFiles = useCallback((files: FileList) => {
     setError(null);
-    
+
     const fileArray = Array.from(files);
     const totalFiles = value.length + fileArray.length;
 
@@ -114,9 +114,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
+
     if (disabled) return;
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       handleFiles(e.dataTransfer.files);
     }
@@ -154,8 +154,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
       <div
         className={cn(
           'relative rounded-lg border-2 border-dashed transition-colors',
-          dragActive 
-            ? 'border-primary bg-primary/5' 
+          dragActive
+            ? 'border-primary bg-primary/5'
             : 'border-border hover:border-primary/50',
           disabled && 'opacity-50 cursor-not-allowed',
           error && 'border-destructive'
@@ -174,7 +174,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
           onChange={handleInputChange}
           disabled={disabled}
         />
-        
+
         <div className="flex flex-col items-center justify-center px-6 py-10 text-center">
           {children ? (
             children

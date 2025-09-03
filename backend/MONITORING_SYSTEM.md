@@ -7,7 +7,7 @@ The CareerCopilot monitoring system provides comprehensive observability into ap
 ## Key Features
 
 - **📊 Performance Monitoring**: Request/response times, throughput, error rates
-- **📈 Business Metrics**: User actions, AI usage, cost tracking  
+- **📈 Business Metrics**: User actions, AI usage, cost tracking
 - **🖥️ System Health**: CPU, memory, disk, network monitoring
 - **📝 Structured Logging**: JSON logs with context and correlation
 - **🚨 Intelligent Alerts**: Configurable thresholds with severity levels
@@ -20,7 +20,7 @@ The CareerCopilot monitoring system provides comprehensive observability into ap
 
 1. **Logging System** (`logging_config.py`)
    - Environment-specific configurations
-   - Structured JSON logging 
+   - Structured JSON logging
    - Request correlation tracking
    - Performance and debug logging
 
@@ -104,7 +104,7 @@ with RequestContextLogger(request_id='req_123', user_id='user_456'):
 - `http_requests_errors_total` - HTTP errors by type
 - `operation_duration_seconds` - Custom operation timing
 
-#### Business Metrics  
+#### Business Metrics
 - `user_action_*` - User actions (document_upload, analysis_request, etc.)
 - `ai_operation_total` - AI operations by type
 - `ai_operation_cached_total` - Cached AI operations
@@ -112,7 +112,7 @@ with RequestContextLogger(request_id='req_123', user_id='user_456'):
 
 #### System Metrics
 - `system_cpu_percent` - CPU usage percentage
-- `system_memory_percent` - Memory usage percentage  
+- `system_memory_percent` - Memory usage percentage
 - `system_disk_percent` - Disk usage percentage
 - `process_memory_rss_bytes` - Process memory usage
 
@@ -168,7 +168,7 @@ collector.set_gauge('active_users', current_user_count)
 
 ### Admin Endpoints (Authentication Required)
 
-| Endpoint | Description | 
+| Endpoint | Description |
 |----------|-------------|
 | `GET /api/v1/monitoring/admin/logs` | Recent log entries |
 | `POST /api/v1/monitoring/admin/clear-metrics` | Reset all metrics |
@@ -211,7 +211,7 @@ collector.set_gauge('active_users', current_user_count)
   "alerts": [
     {
       "type": "response_time",
-      "severity": "warning", 
+      "severity": "warning",
       "message": "Slow response time: 2100ms",
       "threshold": "2000ms",
       "current_value": "2100ms"
@@ -245,7 +245,7 @@ collector.set_gauge('active_users', current_user_count)
 
 1. **Application Overview**
    - Request volume and response times
-   - Error rates and success rates  
+   - Error rates and success rates
    - Active users and sessions
 
 2. **AI Operations Dashboard**
@@ -277,7 +277,7 @@ dashboard:
       targets:
         - expr: 'rate(http_requests_total[5m])'
     - title: "Error Rate"
-      type: "singlestat" 
+      type: "singlestat"
       targets:
         - expr: 'rate(http_requests_errors_total[5m]) / rate(http_requests_total[5m])'
     - title: "Response Time P95"
@@ -295,7 +295,7 @@ dashboard:
 ENV=production
 LOG_LEVEL=WARNING
 
-# Monitoring settings  
+# Monitoring settings
 METRICS_ENABLED=true
 SYSTEM_MONITORING_INTERVAL=60
 ENABLE_ALERTING=true
@@ -375,7 +375,7 @@ spec:
 
 ### Resource Usage
 - **Memory**: ~10-20MB additional for metrics collection
-- **CPU**: <1% overhead for monitoring middleware  
+- **CPU**: <1% overhead for monitoring middleware
 - **Disk**: Log rotation prevents unbounded growth
 - **Network**: Minimal impact for metrics export
 
@@ -393,7 +393,7 @@ spec:
    ```bash
    # Check metrics collection size
    curl http://localhost:8080/api/v1/monitoring/metrics/summary
-   
+
    # Clear metrics if needed (dev only)
    curl -X POST http://localhost:8080/api/v1/monitoring/admin/clear-metrics
    ```
@@ -417,7 +417,7 @@ spec:
    ```bash
    # Install psutil if missing
    pip install psutil
-   
+
    # Check system monitor status
    curl http://localhost:8080/api/v1/monitoring/health/detailed
    ```
@@ -437,7 +437,7 @@ logging.getLogger('app.core.monitoring').setLevel(logging.DEBUG)
 
 ### Data Privacy
 - **Log Sanitization**: PII automatically redacted from logs
-- **Metric Labels**: No sensitive data in metric labels  
+- **Metric Labels**: No sensitive data in metric labels
 - **Admin Endpoints**: Authentication required for sensitive operations
 - **Log Retention**: Configurable retention periods
 
@@ -450,7 +450,7 @@ logging.getLogger('app.core.monitoring').setLevel(logging.DEBUG)
 
 ### Planned Features
 - **Distributed Tracing**: OpenTelemetry integration for request tracing
-- **Log Aggregation**: ELK stack or similar for centralized log management  
+- **Log Aggregation**: ELK stack or similar for centralized log management
 - **Advanced Alerting**: Integration with PagerDuty, Slack, email
 - **ML-Based Anomaly Detection**: Automatic anomaly detection in metrics
 - **Custom Dashboard Builder**: UI for creating custom monitoring dashboards

@@ -61,7 +61,7 @@ export const HelpButton: React.FC<HelpButtonProps> = ({
 
   const getButtonClass = () => {
     const baseClass = 'inline-flex items-center gap-1 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded';
-    
+
     switch (variant) {
       case 'text':
         return `${baseClass} text-blue-600 hover:text-blue-800 text-sm font-medium px-2 py-1 hover:bg-blue-50 ${className}`;
