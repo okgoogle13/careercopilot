@@ -43,7 +43,11 @@ const NavItem = memo<NavItemProps>(
 
 NavItem.displayName = 'NavItem';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  onMenuClick?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
   const { user, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 

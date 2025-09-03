@@ -10,7 +10,12 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-.env.*
+.env.production
+.env.staging
+backend/.env
+backend/.env.*
+frontend/.env.production
+frontend/.env.staging
 
 # Firebase service account keys (CRITICAL: NEVER commit these)
 *-service-account-key.json
