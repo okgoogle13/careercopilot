@@ -1,8 +1,8 @@
 import React from 'react';
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  Minus, 
+import {
+  TrendingUp,
+  TrendingDown,
+  Minus,
   Activity,
   FileText,
   CheckCircle,
@@ -122,7 +122,7 @@ export function StatusCard({
 }: StatusCardProps) {
   const Icon = icon || getDefaultIcon(type);
   const TrendIcon = trend ? getTrendIcon(trend.direction) : null;
-  
+
   const formatValue = (val: string | number) => {
     if (typeof val === 'number' && val >= 1000) {
       return `${(val / 1000).toFixed(1)}k`;
@@ -131,7 +131,7 @@ export function StatusCard({
   };
 
   return (
-    <Card 
+    <Card
       className={cn(
         'transition-colors duration-200',
         getVariantStyles(variant),
@@ -153,7 +153,7 @@ export function StatusCard({
           <Icon className="h-4 w-4 text-muted-foreground" />
         </div>
       </CardHeader>
-      
+
       <CardContent>
         <div className="space-y-3">
           {/* Main Value */}
@@ -165,7 +165,7 @@ export function StatusCard({
                 {formatValue(value)}
               </div>
             )}
-            
+
             {/* Trend Indicator */}
             {trend && TrendIcon && !loading && (
               <div className={cn('flex items-center text-xs', getTrendColor(trend.direction))}>
@@ -181,9 +181,9 @@ export function StatusCard({
           {/* Progress Bar */}
           {progress && !loading && (
             <div className="space-y-2">
-              <Progress 
-                value={progress.value} 
-                max={progress.max || 100} 
+              <Progress
+                value={progress.value}
+                max={progress.max || 100}
                 className="h-2"
               />
               {progress.label && (
@@ -261,7 +261,7 @@ export function MetricCard({ metric, ...props }: MetricCardProps) {
   };
 
   const config = getMetricConfig();
-  
+
   return (
     <StatusCard
       type={config.type}
@@ -280,11 +280,11 @@ interface StatusCardGridProps {
   className?: string;
 }
 
-export function StatusCardGrid({ 
-  cards, 
-  columns = 3, 
-  gap = 'md', 
-  className 
+export function StatusCardGrid({
+  cards,
+  columns = 3,
+  gap = 'md',
+  className
 }: StatusCardGridProps) {
   const getGridCols = () => {
     switch (columns) {

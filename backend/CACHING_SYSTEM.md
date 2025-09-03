@@ -83,7 +83,7 @@ from app.core.cache_decorators import CacheContext
 async with CacheContext("job_analysis", user_id, input_data) as cached:
     if cached is not None:
         return cached
-    
+
     result = await expensive_operation()
     await cached.set_result(result)
     return result
@@ -260,7 +260,7 @@ logging.getLogger('app.core.cache').setLevel(logging.DEBUG)
    # Before
    async def analyze_resume(user_id: str, resume_text: str):
        return await ai_service.analyze(resume_text)
-   
+
    # After
    @cached_ai_operation('resume_analysis', user_id_param='user_id')
    async def analyze_resume(user_id: str, resume_text: str):

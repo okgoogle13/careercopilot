@@ -133,7 +133,7 @@ export function DateRangePicker({
   const getDateRangePresets = (): DateRangePreset[] => {
     const now = new Date();
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    
+
     return [
       {
         label: 'Today',
@@ -143,7 +143,7 @@ export function DateRangePicker({
       {
         label: 'Yesterday',
         shortcut: 'Y',
-        range: { 
+        range: {
           from: new Date(today.getTime() - 24 * 60 * 60 * 1000),
           to: new Date(today.getTime() - 24 * 60 * 60 * 1000)
         }
@@ -222,17 +222,17 @@ export function DateRangePicker({
   const formatDateRange = (range?: DateRange) => {
     if (!range?.from) return placeholder;
     if (!range.to) return format(range.from, 'PPP');
-    
+
     // Check if it matches a preset
-    const matchedPreset = presets.find(preset => 
-      preset.range.from?.getTime() === range.from?.getTime() && 
+    const matchedPreset = presets.find(preset =>
+      preset.range.from?.getTime() === range.from?.getTime() &&
       preset.range.to?.getTime() === range.to?.getTime()
     );
-    
+
     if (matchedPreset) {
       return matchedPreset.label;
     }
-    
+
     return `${format(range.from, 'MMM d, yyyy')} - ${format(range.to, 'MMM d, yyyy')}`;
   };
 
@@ -240,7 +240,7 @@ export function DateRangePicker({
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!open || e.ctrlKey || e.metaKey || e.altKey) return;
-      
+
       const preset = presets.find(p => p.shortcut?.toLowerCase() === e.key.toLowerCase());
       if (preset) {
         e.preventDefault();
@@ -301,7 +301,7 @@ export function DateRangePicker({
                 </button>
               ))}
             </div>
-            
+
             <div className="mt-4 pt-3 border-t border-gray-200">
               <div className="text-xs text-gray-500">
                 Tip: Use keyboard shortcuts

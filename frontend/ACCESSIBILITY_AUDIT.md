@@ -77,7 +77,7 @@ Based on codebase analysis, key color combinations identified:
 #### 1. Gray-500 Text (⚠️ Review Needed)
 - **Locations**: Icon text, subtle descriptions
 - **Current contrast**: ~5.4:1
-- **Recommendation**: 
+- **Recommendation**:
   - Replace with text-gray-600 (7.0:1) for better accessibility
   - Reserve gray-500 only for decorative elements
 
@@ -97,7 +97,7 @@ Based on codebase analysis, key color combinations identified:
 ```css
 /* Recommended primary text colors on white backgrounds */
 .text-primary { color: #111827; }      /* gray-900, 21:1 contrast */
-.text-secondary { color: #374151; }    /* gray-700, 9.0:1 contrast */  
+.text-secondary { color: #374151; }    /* gray-700, 9.0:1 contrast */
 .text-muted { color: #4B5563; }        /* gray-600, 7.0:1 contrast */
 
 /* Use sparingly for non-critical text only */

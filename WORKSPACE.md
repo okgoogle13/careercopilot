@@ -7,7 +7,7 @@ This project uses npm workspaces to manage dependencies across multiple packages
 ```
 careercopilot/
 ├── package.json          # Root workspace configuration
-├── frontend/             # React frontend application  
+├── frontend/             # React frontend application
 │   └── package.json      # Frontend-specific dependencies
 ├── functions/            # Firebase Cloud Functions
 │   └── package.json      # Functions-specific dependencies
@@ -57,7 +57,7 @@ npm run dev --workspace=frontend
 npm run build --workspace=frontend
 npm run lint --workspace=frontend
 
-# Functions workspace  
+# Functions workspace
 npm run serve --workspace=functions
 npm run deploy --workspace=functions
 npm run logs --workspace=functions
@@ -73,7 +73,7 @@ All JavaScript dependencies are managed at the root level with exact version pin
 - **Shared dependencies** are hoisted to the root
 - **Workspace-specific** dependencies remain in individual package.json files
 
-### Python Dependencies  
+### Python Dependencies
 
 Backend Python dependencies are managed in `backend/requirements.txt` with exact versions:
 
@@ -134,7 +134,7 @@ npm install package-name@1.2.3 --workspace=frontend
 All dependencies are pinned to exact versions to ensure:
 
 - **Reproducible builds** across different environments
-- **Consistent behavior** for all team members  
+- **Consistent behavior** for all team members
 - **Predictable deployments** without surprise updates
 - **Security** by avoiding automatic updates to potentially vulnerable versions
 
@@ -177,7 +177,7 @@ pip install -r requirements.txt
 ## Benefits of This Structure
 
 1. **Centralized dependency management** - easier to maintain
-2. **Exact version control** - reproducible across environments  
+2. **Exact version control** - reproducible across environments
 3. **Shared tooling** - ESLint, Prettier, TypeScript configs shared
 4. **Simplified CI/CD** - single install step for all JS dependencies
 5. **Better caching** - npm can optimize installs across workspaces

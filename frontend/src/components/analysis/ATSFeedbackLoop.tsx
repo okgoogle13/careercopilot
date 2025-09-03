@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, LoadingSpinner } from '../ui';
 import ProgressBar from '../ui/ProgressBar';
-import { 
-  Target, AlertTriangle, CheckCircle, 
+import {
+  Target, AlertTriangle, CheckCircle,
   RefreshCw, Lightbulb, Zap, Eye, Clock
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -79,30 +79,30 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // Mock analysis result
       const mockResult: ATSAnalysisResult = {
         score: 72,
         maxScore: 100,
         breakdown: {
-          keywordMatch: { 
-            score: 18, 
-            maxScore: 25, 
+          keywordMatch: {
+            score: 18,
+            maxScore: 25,
             details: ['Missing 7 key technical terms', 'Good industry keyword coverage', 'Role-specific terms need improvement']
           },
-          formatting: { 
-            score: 23, 
-            maxScore: 25, 
+          formatting: {
+            score: 23,
+            maxScore: 25,
             details: ['Clean, ATS-friendly format', 'Proper section headers', 'Good use of bullet points']
           },
-          content: { 
-            score: 20, 
-            maxScore: 25, 
+          content: {
+            score: 20,
+            maxScore: 25,
             details: ['Strong achievement statements', 'Quantified results present', 'Could use more specific metrics']
           },
-          sections: { 
-            score: 11, 
-            maxScore: 25, 
+          sections: {
+            score: 11,
+            maxScore: 25,
             details: ['Missing skills section', 'Education section could be enhanced', 'Contact info complete']
           }
         },
@@ -205,7 +205,7 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
       // Simulate optimization process
       await new Promise(resolve => setTimeout(resolve, 3000));
 
-      const selectedRecs = analysisResult.recommendations.filter(rec => 
+      const selectedRecs = analysisResult.recommendations.filter(rec =>
         selectedRecommendations.has(rec.id)
       );
 
@@ -216,7 +216,7 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
       }, 0);
 
       const newScore = Math.min(100, analysisResult.score + scoreImprovement);
-      
+
       // Update optimization history
       setOptimizationHistory(prev => [{
         timestamp: new Date(),
@@ -229,8 +229,8 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
       setAnalysisResult(prev => prev ? {
         ...prev,
         score: newScore,
-        recommendations: prev.recommendations.map(rec => 
-          selectedRecommendations.has(rec.id) 
+        recommendations: prev.recommendations.map(rec =>
+          selectedRecommendations.has(rec.id)
             ? { ...rec, implemented: true }
             : rec
         )
@@ -238,7 +238,7 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
 
       setSelectedRecommendations(new Set());
       toast.success(`Document optimized! Score improved from ${analysisResult.score} to ${newScore}`);
-      
+
       if (onOptimizationComplete) {
         onOptimizationComplete(newScore);
       }
@@ -342,11 +342,11 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
             </div>
           </div>
         </div>
-        <ProgressBar 
-          value={(analysisResult.score / analysisResult.maxScore) * 100} 
+        <ProgressBar
+          value={(analysisResult.score / analysisResult.maxScore) * 100}
           className="h-3"
         />
-        
+
         {analysisResult.competitorAnalysis && (
           <div className="mt-4 p-4 bg-muted rounded-lg">
             <h4 className="font-medium mb-2">Competitive Analysis</h4>
@@ -541,7 +541,7 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
               <div key={index} className="p-4 border rounded-lg">
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-medium">
-                    Score improved from {entry.scoreBefore} to {entry.scoreAfter} 
+                    Score improved from {entry.scoreBefore} to {entry.scoreAfter}
                     <span className="text-green-600 ml-2">
                       (+{entry.scoreAfter - entry.scoreBefore} points)
                     </span>
@@ -598,7 +598,7 @@ const RecommendationCard: React.FC<{
           onChange={onToggle}
           className="mt-1"
         />
-        
+
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             {getTypeIcon(recommendation.type)}
@@ -614,7 +614,7 @@ const RecommendationCard: React.FC<{
               {recommendation.impact} impact
             </span>
           </div>
-          
+
           <p className="text-sm text-muted-foreground mb-3">
             {recommendation.description}
           </p>

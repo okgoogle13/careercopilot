@@ -11,16 +11,16 @@ interface ScreenReaderOnlyProps {
  * Component that renders content visible only to screen readers
  * Uses absolute positioning to hide content visually while keeping it accessible
  */
-const ScreenReaderOnly: React.FC<ScreenReaderOnlyProps> = ({ 
-  children, 
+const ScreenReaderOnly: React.FC<ScreenReaderOnlyProps> = ({
+  children,
   as: Component = 'span',
-  className = '' 
+  className = ''
 }) => {
   return (
-    <Component 
+    <Component
       className={`
-        sr-only absolute -m-px h-px w-px overflow-hidden 
-        whitespace-nowrap border-0 p-0 
+        sr-only absolute -m-px h-px w-px overflow-hidden
+        whitespace-nowrap border-0 p-0
         ${className}
       `.trim()}
     >

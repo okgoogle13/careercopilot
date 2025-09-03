@@ -67,31 +67,31 @@ prompt_for_key() {
     local service_name=$1
     local env_var_name=$2
     local validation_pattern=$3
-    
+
     echo ""
     echo -e "${BLUE}============================================${NC}"
     echo -e "${BLUE} $service_name API Key Rotation${NC}"
     echo -e "${BLUE}============================================${NC}"
-    
+
     while true; do
         echo -n "Enter your new $service_name API key: "
         read -s new_key
         echo
-        
+
         if [[ -z "$new_key" ]]; then
             warning "API key cannot be empty. Please try again."
             continue
         fi
-        
+
         if [[ -n "$validation_pattern" ]] && ! [[ "$new_key" =~ $validation_pattern ]]; then
             warning "Invalid API key format. Please check and try again."
             continue
         fi
-        
+
         echo -n "Confirm the API key (type again): "
         read -s confirm_key
         echo
-        
+
         if [ "$new_key" = "$confirm_key" ]; then
             echo "$env_var_name=$new_key" >> frontend/.env.tmp
             log "✅ $service_name API key added successfully"

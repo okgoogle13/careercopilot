@@ -1,8 +1,9 @@
-import React, { useState, useRef, useCallback, useMemo } from 'react';
-import { Search, X, Loader2, Check } from 'lucide-react';
+import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react';
+import { Search, X, Loader2, Check, AlertCircle } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Input } from './input';
 import { Button } from './Button';
+import { useId } from '@radix-ui/react-id';
 
 export interface AutoCompleteOption {
   value: string;
@@ -35,7 +36,7 @@ export interface AutoCompleteProps {
 
 function defaultFilterOptions(options: AutoCompleteOption[], query: string): AutoCompleteOption[] {
   const lowerQuery = query.toLowerCase();
-  return options.filter(option => 
+  return options.filter(option =>
     option.label.toLowerCase().includes(lowerQuery) ||
     option.value.toLowerCase().includes(lowerQuery) ||
     option.description?.toLowerCase().includes(lowerQuery)
@@ -68,16 +69,21 @@ export function AutoComplete({
   const [searchResults, setSearchResults] = useState<AutoCompleteOption[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [error, setError] = useState<string | null>(null);
-  
+  const [isMounted, setIsMounted] = useState(false);
+  const [activeDescendant, setActiveDescendant] = useState<string | null>(null);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const debounceRef = useRef<number | null>(null);
+  const listboxId = useId('listbox');
+  const errorId = useId('error');
+  const descriptionId = useId('description');
 
   // Memoized filtered options for static data
   const filteredOptions = useMemo(() => {
     if (onSearch) return searchResults; // Use search results for async
     if (!query || query.length < minSearchLength) return [];
-    
+
     const filtered = filterOptions(options, query);
     return filtered.slice(0, maxResults);
   }, [options, query, minSearchLength, maxResults, filterOptions, onSearch, searchResults]);
@@ -127,17 +133,18 @@ export function AutoComplete({
     setQuery(option.label);
     setIsOpen(false);
     setSelectedIndex(-1);
-    
+
     onChange?.(option.label);
     onSelect?.(option);
-    
+
     inputRef.current?.blur();
   }, [onChange, onSelect]);
 
   // Handle keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!isOpen || filteredOptions.length === 0) {
-      if (e.key === 'ArrowDown') {
+    if (!isOpen) {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
         setIsOpen(true);
         performSearch(query);
       }
@@ -147,16 +154,16 @@ export function AutoComplete({
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedIndex(prev => 
+        setSelectedIndex(prev =>
           prev < filteredOptions.length - 1 ? prev + 1 : prev
         );
         break;
-        
+
       case 'ArrowUp':
         e.preventDefault();
         setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
         break;
-        
+
       case 'Enter':
         e.preventDefault();
         if (selectedIndex >= 0) {
@@ -170,7 +177,7 @@ export function AutoComplete({
           handleOptionSelect(customOption);
         }
         break;
-        
+
       case 'Escape':
         setIsOpen(false);
         setSelectedIndex(-1);
@@ -188,12 +195,19 @@ export function AutoComplete({
   }, [query, minSearchLength, performSearch]);
 
   // Handle input blur
-  const handleInputBlur = useCallback(() => {
-    // Delay to allow option clicks to register
-    setTimeout(() => {
-      setIsOpen(false);
-      setSelectedIndex(-1);
-    }, 150);
+  const handleInputBlur = useCallback((e: React.FocusEvent) => {
+    // Check if the blur is due to clicking on an option
+    const relatedTarget = e.relatedTarget as HTMLElement;
+    const clickedOnOption = relatedTarget?.getAttribute('role') === 'option';
+
+    if (!clickedOnOption) {
+      // Delay to allow option clicks to register
+      setTimeout(() => {
+        setIsOpen(false);
+        setSelectedIndex(-1);
+        setActiveDescendant(null);
+      }, 150);
+    }
   }, []);
 
   // Handle clear
@@ -203,25 +217,39 @@ export function AutoComplete({
     setSearchResults([]);
     setSelectedIndex(-1);
     setIsOpen(false);
-    
+
     onChange?.('');
     inputRef.current?.focus();
   }, [onChange]);
 
-  // Scroll selected item into view
-  React.useEffect(() => {
+  // Scroll selected item into view and update active descendant
+  useEffect(() => {
     if (selectedIndex >= 0 && listRef.current) {
       const selectedElement = listRef.current.children[selectedIndex] as HTMLElement;
       if (selectedElement) {
         selectedElement.scrollIntoView({
           block: 'nearest',
         });
+        setActiveDescendant(selectedElement.id);
       }
+    } else {
+      setActiveDescendant(null);
     }
   }, [selectedIndex]);
 
+  // Set mounted state to handle SSR
+  useEffect(() => {
+    setIsMounted(true);
+    return () => setIsMounted(false);
+  }, []);
+
+  // Generate unique IDs for options
+  const getOptionId = useCallback((index: number) => {
+    return `${listboxId}-option-${index}`;
+  }, [listboxId]);
+
   // Sync external value changes
-  React.useEffect(() => {
+  useEffect(() => {
     setQuery(value);
   }, [value]);
 
@@ -235,11 +263,23 @@ export function AutoComplete({
   }, []);
 
   const shouldShowDropdown = isOpen && (
-    filteredOptions.length > 0 || 
-    isLoading || 
-    error || 
+    filteredOptions.length > 0 ||
+    isLoading ||
+    error ||
     (query.length >= minSearchLength && !isLoading && filteredOptions.length === 0)
   );
+
+  // Accessibility attributes
+  const inputProps = {
+    'aria-autocomplete': 'list' as const,
+    'aria-expanded': isOpen,
+    'aria-haspopup': 'listbox' as const,
+    'aria-owns': listboxId,
+    'aria-activedescendant': activeDescendant || undefined,
+    'aria-describedby': error ? errorId : undefined,
+    'aria-invalid': error ? 'true' : 'false',
+    role: 'combobox',
+  };
 
   return (
     <div className={cn('relative', className)}>
@@ -251,7 +291,7 @@ export function AutoComplete({
             <Search className="h-4 w-4 text-muted-foreground" />
           )}
         </div>
-        
+
         <Input
           ref={inputRef}
           type="text"
@@ -265,13 +305,11 @@ export function AutoComplete({
           className={cn(
             'pl-10',
             clearable && query && 'pr-10',
+            error && 'border-destructive focus-visible:ring-destructive/50',
             inputClassName
           )}
           autoComplete="off"
-          role="combobox"
-          aria-expanded={isOpen}
-          aria-haspopup="listbox"
-          aria-autocomplete="list"
+          {...inputProps}
         />
 
         {clearable && query && !disabled && (
@@ -289,38 +327,60 @@ export function AutoComplete({
       </div>
 
       {/* Dropdown */}
-      {shouldShowDropdown && (
-        <div className="absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover shadow-md animate-in fade-in-0 zoom-in-95">
+      {isMounted && shouldShowDropdown && (
+        <div
+          id={listboxId}
+          role="listbox"
+          ref={listRef}
+          className="absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95"
+          aria-labelledby={inputProps['aria-labelledby']}
+          aria-multiselectable="false"
+        >
           {error && (
-            <div className="p-3 text-sm text-destructive">
-              {error}
+            <div
+              id={errorId}
+              className="p-3 text-sm text-destructive flex items-start gap-2"
+              role="alert"
+              aria-live="assertive"
+            >
+              <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+              <span>{error}</span>
             </div>
           )}
-          
+
           {isLoading && (
             <div className="p-3 text-sm text-muted-foreground flex items-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin" />
               {loadingText}
             </div>
           )}
-          
+
           {!isLoading && !error && filteredOptions.length === 0 && (
             <div className="p-3 text-sm text-muted-foreground text-center">
               {emptyText}
             </div>
           )}
-          
+
           {!isLoading && !error && filteredOptions.length > 0 && (
-            <div ref={listRef} role="listbox">
+            <>
+              <div
+                id={descriptionId}
+                className="sr-only"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {`${filteredOptions.length} ${filteredOptions.length === 1 ? 'option' : 'options'} available`}
+              </div>
               {filteredOptions.map((option, index) => (
                 <button
                   key={`${option.value}-${index}`}
+                  id={getOptionId(index)}
                   type="button"
                   onClick={() => !option.disabled && handleOptionSelect(option)}
                   className={cn(
                     'w-full px-3 py-2 text-left text-sm transition-colors',
                     'hover:bg-accent hover:text-accent-foreground',
-                    'focus:bg-accent focus:text-accent-foreground focus:outline-none',
+                    'focus:outline-none focus:bg-accent focus:text-accent-foreground',
                     'disabled:pointer-events-none disabled:opacity-50',
                     selectedIndex === index && 'bg-accent text-accent-foreground',
                     option.disabled && 'pointer-events-none opacity-50',
@@ -329,6 +389,10 @@ export function AutoComplete({
                   disabled={option.disabled}
                   role="option"
                   aria-selected={selectedIndex === index}
+                  aria-disabled={option.disabled}
+                  aria-setsize={filteredOptions.length}
+                  aria-posinset={index + 1}
+                  tabIndex={-1}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex-1 min-w-0">
@@ -339,14 +403,14 @@ export function AutoComplete({
                         </div>
                       )}
                     </div>
-                    
+
                     {value === option.value && (
                       <Check className="ml-2 h-4 w-4 shrink-0" />
                     )}
                   </div>
                 </button>
               ))}
-            </div>
+            </>
           )}
         </div>
       )}
@@ -384,12 +448,12 @@ export function AsyncAutoComplete({
 
     try {
       const results = await searchFunction(query, abortControllerRef.current.signal);
-      
+
       // Cache results
       if (cacheResults) {
         setCache(prev => new Map(prev).set(query, results));
       }
-      
+
       return results;
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {

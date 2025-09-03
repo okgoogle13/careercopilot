@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal, LoadingSpinner, ProgressBar } from '../ui';
 import { HelpButton } from '../HelpSystem';
-import { 
+import {
   Mic, Volume2, RefreshCw, Save, Wand2, FileText,
-  MessageSquare, Lightbulb, TrendingUp, User, BookOpen, 
+  MessageSquare, Lightbulb, TrendingUp, User, BookOpen,
   CheckCircle, AlertCircle, Sparkles
 } from 'lucide-react';
 import toast from 'react-hot-toast';
@@ -137,7 +137,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
       if (response.ok) {
         const analysisResult = await response.json();
         setAnalysis(analysisResult);
-        
+
         // Update profile with analysis results
         if (profile) {
           setProfile({
@@ -157,7 +157,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
             updated: new Date(),
           });
         }
-        
+
         toast.success('Text analysis completed!');
         setActiveTab('analysis');
       } else {
@@ -215,7 +215,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
       const response = await fetch('/api/v1/voice-profiles/generate-sample', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           profile,
           contentType,
           jobTitle: 'Software Engineer',
@@ -293,7 +293,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
               placeholder="e.g., Professional Writing Style"
             />
           </div>
-          
+
           <div className="text-right">
             <div className="text-sm text-gray-600">Confidence Score</div>
             <div className="flex items-center gap-2">
@@ -337,26 +337,26 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
         {activeTab === 'setup' && (
           <ProfileSetupTab profile={profile} onUpdate={updateProfile} />
         )}
-        
+
         {activeTab === 'samples' && (
-          <SamplesTab 
-            profile={profile} 
+          <SamplesTab
+            profile={profile}
             onUpdate={updateProfile}
             onAnalyze={analyzeText}
             analyzing={analyzing}
           />
         )}
-        
+
         {activeTab === 'analysis' && (
-          <AnalysisTab 
+          <AnalysisTab
             profile={profile}
             analysis={analysis}
             onGenerateSample={generateSampleContent}
           />
         )}
-        
+
         {activeTab === 'preview' && (
-          <PreviewTab 
+          <PreviewTab
             profile={profile}
             onGenerateSample={generateSampleContent}
           />
@@ -401,7 +401,7 @@ const ProfileSetupTab: React.FC<{
             <Volume2 className="w-5 h-5 text-blue-500" />
             Writing Tone
           </h3>
-          
+
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -572,7 +572,7 @@ const ProfileSetupTab: React.FC<{
               <label className="block text-sm font-medium text-gray-700">
                 Writing Preferences
               </label>
-              
+
               {[
                 { key: 'useOfNumbers', label: 'Use numbers and metrics' },
                 { key: 'useOfBulletPoints', label: 'Prefer bullet points' },
@@ -624,7 +624,7 @@ const ProfileSetupTab: React.FC<{
                 </span>
               ))}
             </div>
-            
+
             <div className="flex gap-2">
               <input
                 type="text"
@@ -641,7 +641,7 @@ const ProfileSetupTab: React.FC<{
                 }}
               />
             </div>
-            
+
             <p className="text-xs text-gray-500">
               Press Enter to add phrases you commonly use in professional writing
             </p>
@@ -670,7 +670,7 @@ const SamplesTab: React.FC<{
           <FileText className="w-5 h-5 text-blue-500" />
           Add Writing Sample
         </h3>
-        
+
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -723,7 +723,7 @@ const SamplesTab: React.FC<{
       {profile.sampleTexts.length > 0 && (
         <Card className="p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Previous Samples</h3>
-          
+
           <div className="space-y-4">
             {profile.sampleTexts.map((sample, index) => (
               <div key={index} className="p-4 border border-gray-200 rounded-lg">
@@ -806,7 +806,7 @@ const AnalysisTab: React.FC<{
       {/* Detailed Analysis */}
       <Card className="p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Voice Analysis Results</h3>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <h4 className="font-medium text-gray-900 mb-3">Writing Characteristics</h4>
@@ -846,7 +846,7 @@ const AnalysisTab: React.FC<{
       {analysis.suggestions.length > 0 && (
         <Card className="p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">AI Recommendations</h3>
-          
+
           <div className="space-y-3">
             {analysis.suggestions.map((suggestion, index) => (
               <div
@@ -883,7 +883,7 @@ const AnalysisTab: React.FC<{
         <p className="text-gray-600 mb-4">
           Generate sample content using your voice profile to see how it sounds.
         </p>
-        
+
         <div className="flex flex-wrap gap-3">
           <Button
             onClick={() => onGenerateSample('resume')}
@@ -924,18 +924,18 @@ const PreviewTab: React.FC<{
     <div className="space-y-6">
       <Card className="p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Voice Profile Summary</h3>
-        
+
         <div className="prose max-w-none">
           <p className="text-gray-700 mb-4">
             Based on your settings and analyzed writing samples, here's your voice profile:
           </p>
-          
+
           <div className="bg-gray-50 rounded-lg p-4 mb-4">
             <p className="text-sm text-gray-800">
-              <strong>Your writing style is {profile.tone}</strong> with a formality level of {profile.formality}/10. 
-              You tend to write with {profile.confidence >= 7 ? 'high' : profile.confidence >= 5 ? 'moderate' : 'low'} confidence 
-              and {profile.enthusiasm >= 7 ? 'high' : profile.enthusiasm >= 5 ? 'moderate' : 'low'} enthusiasm. 
-              Your vocabulary is typically {profile.vocabulary}, 
+              <strong>Your writing style is {profile.tone}</strong> with a formality level of {profile.formality}/10.
+              You tend to write with {profile.confidence >= 7 ? 'high' : profile.confidence >= 5 ? 'moderate' : 'low'} confidence
+              and {profile.enthusiasm >= 7 ? 'high' : profile.enthusiasm >= 5 ? 'moderate' : 'low'} enthusiasm.
+              Your vocabulary is typically {profile.vocabulary},
               and you prefer {profile.sentenceStructure} sentences.
             </p>
           </div>
@@ -972,7 +972,7 @@ const PreviewTab: React.FC<{
         <p className="text-gray-600 mb-4">
           Test how your voice profile affects generated content across different document types.
         </p>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Button
             onClick={() => onGenerateSample('resume')}
@@ -984,7 +984,7 @@ const PreviewTab: React.FC<{
               <div className="text-xs opacity-90">Professional summary</div>
             </div>
           </Button>
-          
+
           <Button
             onClick={() => onGenerateSample('cover_letter')}
             variant="outline"
@@ -996,7 +996,7 @@ const PreviewTab: React.FC<{
               <div className="text-xs opacity-75">Opening paragraph</div>
             </div>
           </Button>
-          
+
           <Button
             onClick={() => onGenerateSample('email')}
             variant="outline"

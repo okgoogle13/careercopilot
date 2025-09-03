@@ -79,7 +79,7 @@ export const HelpModal: React.FC<HelpModalProps> = ({
           </li>
         );
       }
-      
+
       // Handle headers (lines ending with ':')
       if (line.endsWith(':') && line.length < 50) {
         return (
@@ -88,7 +88,7 @@ export const HelpModal: React.FC<HelpModalProps> = ({
           </h4>
         );
       }
-      
+
       // Regular paragraphs
       if (line.trim()) {
         return (
@@ -97,7 +97,7 @@ export const HelpModal: React.FC<HelpModalProps> = ({
           </p>
         );
       }
-      
+
       // Empty lines
       return <div key={index} className="h-2" />;
     });
@@ -180,7 +180,7 @@ export const HelpModal: React.FC<HelpModalProps> = ({
               </Button>
             ))}
           </div>
-          
+
           <div className="flex gap-2">
             <Button variant="outline" onClick={onDismiss}>
               Got it
@@ -201,7 +201,7 @@ export const HelpModal: React.FC<HelpModalProps> = ({
         {/* Footer hint */}
         <div className="mt-4 pt-3 border-t border-gray-100">
           <p className="text-xs text-gray-500 text-center">
-            Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-xs">Esc</kbd> to close • 
+            Press <kbd className="px-1.5 py-0.5 bg-gray-200 rounded text-xs">Esc</kbd> to close •
             You can disable help tooltips in Settings
           </p>
         </div>

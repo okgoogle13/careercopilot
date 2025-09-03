@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { Card, Button, Modal, LoadingSpinner } from '../components/ui';
 import { HelpButton } from '../components/HelpSystem';
-import { 
-  Save, Undo, Redo, Download, Share2, ArrowLeft, Eye, EyeOff, 
+import {
+  Save, Undo, Redo, Download, Share2, ArrowLeft, Eye, EyeOff,
   Maximize2, Minimize2, RefreshCw, Zap, FileText, Settings,
   Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
   List, ListOrdered, ChevronDown, Type, Palette, Move3D
@@ -69,7 +69,7 @@ const DocumentEditorPage: React.FC = () => {
   const { documentId } = useParams<{ documentId: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const [document, setDocument] = useState<DocumentData | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -82,7 +82,7 @@ const DocumentEditorPage: React.FC = () => {
   const [showFormatting, setShowFormatting] = useState(true);
   const [splitRatio, setSplitRatio] = useState(0.5); // 50-50 split
   const [isDragging, setIsDragging] = useState(false);
-  
+
   const editorRef = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
@@ -145,7 +145,7 @@ const DocumentEditorPage: React.FC = () => {
               'Authorization': `Bearer ${await user.getIdToken()}`,
             },
           });
-          
+
           if (response.ok) {
             const docData = await response.json();
             setDocument(docData);
@@ -267,7 +267,7 @@ const DocumentEditorPage: React.FC = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging) return;
-      
+
       const container = resizeRef.current?.parentElement;
       if (!container) return;
 
@@ -428,7 +428,7 @@ const DocumentEditorPage: React.FC = () => {
                   Back
                 </Button>
               )}
-              
+
               <div>
                 <input
                   type="text"
@@ -464,7 +464,7 @@ const DocumentEditorPage: React.FC = () => {
               >
                 <Undo className="w-4 h-4" />
               </Button>
-              
+
               <Button
                 variant="ghost"
                 size="sm"
@@ -660,7 +660,7 @@ const SectionEditor: React.FC<{
             className="text-lg font-semibold text-gray-900 bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500 px-2 py-1 rounded"
             placeholder="Section Title"
           />
-          
+
           {(showActions || isSelected) && (
             <div className="flex items-center gap-2">
               <Button
@@ -671,9 +671,9 @@ const SectionEditor: React.FC<{
               >
                 <Eye className="w-4 h-4" />
               </Button>
-              
+
               <AddSectionDropdown onAddSection={onAddAfter} size="sm" />
-              
+
               <Button
                 size="sm"
                 variant="ghost"
@@ -771,7 +771,7 @@ const FormattingSidebar: React.FC<{
   onFormatDocument: (formatting: FormattingOptions) => void;
   onFormatSection: (sectionId: string, formatting: SectionFormatting) => void;
 }> = ({ document, selectedSectionId, onFormatDocument, onFormatSection }) => {
-  const selectedSection = selectedSectionId 
+  const selectedSection = selectedSectionId
     ? document.content.find(s => s.id === selectedSectionId)
     : null;
 
@@ -786,7 +786,7 @@ const FormattingSidebar: React.FC<{
         {/* Document-level formatting */}
         <Card className="p-4">
           <h4 className="font-medium text-gray-900 mb-3">Document Style</h4>
-          
+
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -889,7 +889,7 @@ const FormattingSidebar: React.FC<{
             <h4 className="font-medium text-gray-900 mb-3">
               Section: {selectedSection.title}
             </h4>
-            
+
             <div className="space-y-4">
               {/* Text Formatting */}
               <div className="flex items-center gap-2">

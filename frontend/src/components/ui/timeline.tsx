@@ -1,9 +1,9 @@
 import React from 'react';
-import { 
-  CheckCircle, 
-  Clock, 
-  AlertCircle, 
-  XCircle, 
+import {
+  CheckCircle,
+  Clock,
+  AlertCircle,
+  XCircle,
   Circle,
   Calendar,
   FileText,
@@ -164,7 +164,7 @@ export function Timeline({
             </div>
 
             {/* Timeline content */}
-            <div 
+            <div
               className={cn(
                 'ml-4 pb-8 flex-1 min-w-0',
                 interactive && 'cursor-pointer',
@@ -188,7 +188,7 @@ export function Timeline({
                     )}
                   </div>
                 </div>
-                
+
                 {showTime && (
                   <Badge variant={getTimeBadgeVariant(item.timestamp)} className="text-xs whitespace-nowrap">
                     {formatTime(item.timestamp)}
@@ -319,7 +319,7 @@ export function ApplicationTimeline({
     };
 
     const eventData = getEventData();
-    
+
     return {
       id: event.id,
       timestamp: event.timestamp,

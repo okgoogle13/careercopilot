@@ -103,7 +103,7 @@ const ATSScoreDisplay: React.FC<ATSScoreDisplayProps> = ({
                 {getTrendIcon(data.improvement.trend)}
                 <span className={cn(
                   'font-medium',
-                  data.improvement.trend === 'up' ? 'text-green-600' : 
+                  data.improvement.trend === 'up' ? 'text-green-600' :
                   data.improvement.trend === 'down' ? 'text-red-600' : 'text-muted-foreground'
                 )}>
                   {data.improvement.trend === 'up' ? '+' : data.improvement.trend === 'down' ? '-' : ''}
@@ -112,8 +112,8 @@ const ATSScoreDisplay: React.FC<ATSScoreDisplayProps> = ({
               </div>
             )}
           </div>
-          <Progress 
-            value={data.overallScore} 
+          <Progress
+            value={data.overallScore}
             className="w-full max-w-md mx-auto"
           />
         </CardContent>

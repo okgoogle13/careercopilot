@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, LoadingSpinner, ProgressBar } from '../components/ui';
 import { HelpButton } from '../components/HelpSystem';
-import { 
-  TrendingUp, FileText, Target, Award, Clock, 
+import {
+  TrendingUp, FileText, Target, Award, Clock,
   Activity, Zap, AlertTriangle,
   ArrowUp, ArrowDown, Download,
   RefreshCw, Eye, Users, Globe
@@ -80,7 +80,7 @@ const InsightsDashboard: React.FC = () => {
     try {
       // Mock data - in reality this would come from API
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       const mockData: DashboardData = {
         overview: {
           totalProfiles: 5,
@@ -180,7 +180,7 @@ const InsightsDashboard: React.FC = () => {
           },
         ],
       };
-      
+
       setData(mockData);
     } catch (error) {
       console.error('Error loading dashboard data:', error);
@@ -197,13 +197,13 @@ const InsightsDashboard: React.FC = () => {
 
   const exportData = () => {
     if (!data) return;
-    
+
     const exportData = {
       overview: data.overview,
       timeRange,
       exportedAt: new Date().toISOString(),
     };
-    
+
     const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -248,10 +248,10 @@ const InsightsDashboard: React.FC = () => {
                 <p className="text-gray-600">Track your progress and optimize your job search strategy</p>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-3">
               <HelpButton helpId="insights-dashboard" size="sm" />
-              
+
               <select
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value as any)}
@@ -262,7 +262,7 @@ const InsightsDashboard: React.FC = () => {
                 <option value="90d">Last 90 days</option>
                 <option value="1y">Last year</option>
               </select>
-              
+
               <Button
                 variant="outline"
                 onClick={handleRefresh}
@@ -272,7 +272,7 @@ const InsightsDashboard: React.FC = () => {
                 <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
-              
+
               <Button
                 variant="outline"
                 onClick={exportData}
@@ -344,7 +344,7 @@ const InsightsDashboard: React.FC = () => {
                 </select>
               </div>
             </div>
-            
+
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={data.activityTrend}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -365,7 +365,7 @@ const InsightsDashboard: React.FC = () => {
           {/* Quick Stats */}
           <Card className="col-span-12 lg:col-span-4 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
-            
+
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -376,7 +376,7 @@ const InsightsDashboard: React.FC = () => {
                   {Math.round(data.timeSpentAnalysis.reduce((acc, item) => acc + item.minutes, 0) / 60)}h
                 </span>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Zap className="w-4 h-4 text-gray-500" />
@@ -384,7 +384,7 @@ const InsightsDashboard: React.FC = () => {
                 </div>
                 <span className="font-medium">Monday</span>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Globe className="w-4 h-4 text-gray-500" />
@@ -392,7 +392,7 @@ const InsightsDashboard: React.FC = () => {
                 </div>
                 <span className="font-medium">Technology</span>
               </div>
-              
+
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Eye className="w-4 h-4 text-gray-500" />
@@ -409,7 +409,7 @@ const InsightsDashboard: React.FC = () => {
           {/* Document Types */}
           <Card className="col-span-12 md:col-span-6 lg:col-span-4 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Document Types</h3>
-            
+
             <ResponsiveContainer width="100%" height={200}>
               <RechartsPieChart>
                 <Pie
@@ -427,7 +427,7 @@ const InsightsDashboard: React.FC = () => {
                 <Tooltip />
               </RechartsPieChart>
             </ResponsiveContainer>
-            
+
             <div className="mt-4 space-y-2">
               {data.documentTypes.map((type, index) => (
                 <div key={type.type} className="flex items-center justify-between text-sm">
@@ -447,7 +447,7 @@ const InsightsDashboard: React.FC = () => {
           {/* ATS Score Distribution */}
           <Card className="col-span-12 md:col-span-6 lg:col-span-4 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">ATS Score Distribution</h3>
-            
+
             <ResponsiveContainer width="100%" height={200}>
               <BarChart data={data.atsScoreDistribution}>
                 <CartesianGrid strokeDasharray="3 3" />
@@ -462,7 +462,7 @@ const InsightsDashboard: React.FC = () => {
           {/* Skills Analysis */}
           <Card className="col-span-12 lg:col-span-4 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Skills Impact</h3>
-            
+
             <div className="space-y-3">
               {data.skillsAnalysis.slice(0, 5).map((skill) => (
                 <div key={skill.skill} className="space-y-1">
@@ -470,8 +470,8 @@ const InsightsDashboard: React.FC = () => {
                     <span className="font-medium">{skill.skill}</span>
                     <span className="text-gray-500">{skill.impact}%</span>
                   </div>
-                  <ProgressBar 
-                    value={skill.impact} 
+                  <ProgressBar
+                    value={skill.impact}
                     className="h-2"
                     color={skill.impact >= 85 ? 'green' : skill.impact >= 70 ? 'blue' : 'yellow'}
                   />
@@ -486,12 +486,12 @@ const InsightsDashboard: React.FC = () => {
           {/* Recent Achievements */}
           <Card className="col-span-12 lg:col-span-6 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Achievements</h3>
-            
+
             <div className="space-y-4">
               {data.recentAchievements.map((achievement) => (
                 <div key={achievement.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    achievement.type === 'milestone' 
+                    achievement.type === 'milestone'
                       ? 'bg-yellow-100 text-yellow-600'
                       : achievement.type === 'improvement'
                       ? 'bg-green-100 text-green-600'
@@ -501,7 +501,7 @@ const InsightsDashboard: React.FC = () => {
                     {achievement.type === 'improvement' && <TrendingUp className="w-4 h-4" />}
                     {achievement.type === 'goal' && <Target className="w-4 h-4" />}
                   </div>
-                  
+
                   <div className="flex-1">
                     <h4 className="font-medium text-gray-900">{achievement.title}</h4>
                     <p className="text-sm text-gray-600">{achievement.description}</p>
@@ -524,7 +524,7 @@ const InsightsDashboard: React.FC = () => {
           {/* AI Recommendations */}
           <Card className="col-span-12 lg:col-span-6 p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">AI Recommendations</h3>
-            
+
             <div className="space-y-4">
               {data.recommendations.map((rec) => (
                 <div
@@ -556,7 +556,7 @@ const InsightsDashboard: React.FC = () => {
                       <p className="text-sm text-gray-600 mb-2">{rec.description}</p>
                       <span className="text-xs text-gray-500 capitalize">{rec.category}</span>
                     </div>
-                    
+
                     {rec.actionUrl && (
                       <Button size="sm" variant="outline">
                         Take Action

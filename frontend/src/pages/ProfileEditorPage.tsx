@@ -63,7 +63,7 @@ const ProfileEditorPage: React.FC = () => {
   const { profileId } = useParams<{ profileId: string }>();
   const { user } = useAuth();
   const navigate = useNavigate();
-  
+
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -75,7 +75,7 @@ const ProfileEditorPage: React.FC = () => {
   // Auto-save functionality
   const autoSave = useCallback(async (profileData: ProfileData) => {
     if (!user?.uid || !profileData.id) return;
-    
+
     try {
       const profileRef = doc(db, `users/${user.uid}/profiles`, profileData.id);
       await updateDoc(profileRef, {
@@ -266,7 +266,7 @@ const ProfileEditorPage: React.FC = () => {
                 {previewMode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 {previewMode ? 'Edit Mode' : 'Preview'}
               </Button>
-              
+
               {profile.id && (
                 <Button
                   variant="destructive"
@@ -543,7 +543,7 @@ const ExperienceSection: React.FC<{
   const saveExperience = (experience: ExperienceItem) => {
     const existingIndex = profile.experience.findIndex(exp => exp.id === experience.id);
     let newExperience;
-    
+
     if (existingIndex >= 0) {
       newExperience = [...profile.experience];
       newExperience[existingIndex] = experience;
@@ -853,8 +853,8 @@ const ProfilePreview: React.FC<{ profile: ProfileData }> = ({ profile }) => {
         )}
 
         {/* Skills */}
-        {(profile.skills.technical.length > 0 || 
-          profile.skills.soft.length > 0 || 
+        {(profile.skills.technical.length > 0 ||
+          profile.skills.soft.length > 0 ||
           profile.skills.certifications.length > 0) && (
           <div className="mb-8">
             <h2 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b">
@@ -1095,7 +1095,7 @@ const EducationSection: React.FC<{
   const saveEducation = (education: EducationItem) => {
     const existingIndex = profile.education.findIndex(edu => edu.id === education.id);
     let newEducation;
-    
+
     if (existingIndex >= 0) {
       newEducation = [...profile.education];
       newEducation[existingIndex] = education;
@@ -1178,7 +1178,7 @@ const EducationSection: React.FC<{
             <h3 className="text-lg font-semibold mb-6">
               {editingEducation.degree ? 'Edit Education' : 'Add Education'}
             </h3>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -1274,7 +1274,7 @@ const TargetingSection: React.FC<{
 
   const addRole = () => {
     if (!newRole.trim()) return;
-    
+
     onUpdate({
       targetRoles: [...profile.targetRoles, newRole.trim()],
     });
@@ -1289,7 +1289,7 @@ const TargetingSection: React.FC<{
 
   const addKeyword = () => {
     if (!newKeyword.trim()) return;
-    
+
     onUpdate({
       keywords: [...profile.keywords, newKeyword.trim()],
     });
@@ -1447,7 +1447,7 @@ const ProfileCompletionGuide: React.FC<{
         description: 'At least one work experience entry',
         actionText: 'Add experience'
       },
-      
+
       // Important items (should have)
       {
         id: 'skills',
@@ -1476,7 +1476,7 @@ const ProfileCompletionGuide: React.FC<{
         description: 'Educational background',
         actionText: 'Add education'
       },
-      
+
       // Optional items (nice to have)
       {
         id: 'linkedin',
@@ -1538,16 +1538,16 @@ const ProfileCompletionGuide: React.FC<{
   };
 
   const completionItems = getCompletionItems();
-  
+
   // Calculate overall completion percentage
   const criticalItems = completionItems.filter(item => item.priority === 'critical');
   const importantItems = completionItems.filter(item => item.priority === 'important');
   const optionalItems = completionItems.filter(item => item.priority === 'optional');
-  
+
   const criticalCompleted = criticalItems.filter(item => item.completed).length;
   const importantCompleted = importantItems.filter(item => item.completed).length;
   const optionalCompleted = optionalItems.filter(item => item.completed).length;
-  
+
   // Weighted completion: Critical (50%), Important (35%), Optional (15%)
   const completionPercentage = Math.round(
     (criticalCompleted / criticalItems.length) * 50 +
@@ -1590,9 +1590,9 @@ const ProfileCompletionGuide: React.FC<{
             {completionPercentage}%
           </span>
         </div>
-        
+
         <div className="w-full bg-gray-200 rounded-full h-3 mb-2">
-          <div 
+          <div
             className={`h-3 rounded-full transition-all duration-500 ${
               completionPercentage >= 80 ? 'bg-green-500' :
               completionPercentage >= 60 ? 'bg-yellow-500' : 'bg-red-500'
@@ -1600,7 +1600,7 @@ const ProfileCompletionGuide: React.FC<{
             style={{ width: `${completionPercentage}%` }}
           />
         </div>
-        
+
         <p className="text-xs text-gray-500">
           {completionPercentage >= 80 ? '✅ Excellent! Your profile is job-ready.' :
            completionPercentage >= 60 ? '⚠️ Good progress. A few more details will help.' :
@@ -1684,7 +1684,7 @@ const ProfileCompletionGuide: React.FC<{
       <div className="pt-3 border-t">
         <div className="grid grid-cols-2 gap-2">
           <Button
-            size="sm" 
+            size="sm"
             variant="outline"
             onClick={() => onNavigate('summary')}
             className="text-xs"
@@ -1693,7 +1693,7 @@ const ProfileCompletionGuide: React.FC<{
           </Button>
           <Button
             size="sm"
-            variant="outline" 
+            variant="outline"
             onClick={() => onNavigate('targeting')}
             className="text-xs"
           >

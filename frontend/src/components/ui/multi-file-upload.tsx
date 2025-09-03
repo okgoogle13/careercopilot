@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { Card, Button } from './';
-import { 
-  Upload, X, FileText, Image as ImageIcon, File, 
+import {
+  Upload, X, FileText, Image as ImageIcon, File,
   Check, AlertCircle, Download, Eye, RotateCcw,
   Camera, FolderOpen
 } from 'lucide-react';
@@ -81,18 +81,18 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
     }
 
     const newFiles: UploadedFile[] = [];
-    
+
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
       const validation = validateFile(file);
-      
+
       if (validation) {
         toast.error(`${file.name}: ${validation}`);
         continue;
       }
 
       const preview = await createFilePreview(file);
-      
+
       const uploadedFile: UploadedFile = {
         id: `${Date.now()}-${i}`,
         file,
@@ -122,14 +122,14 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
     let progress = 0;
     const interval = setInterval(() => {
       progress += Math.random() * 30;
-      
-      setFiles(prev => prev.map(f => 
+
+      setFiles(prev => prev.map(f =>
         f.id === fileId ? { ...f, progress: Math.min(progress, 100) } : f
       ));
 
       if (progress >= 100) {
         clearInterval(interval);
-        setFiles(prev => prev.map(f => 
+        setFiles(prev => prev.map(f =>
           f.id === fileId ? { ...f, status: 'success', progress: 100 } : f
         ));
         toast.success(`${files.find(f => f.id === fileId)?.name} uploaded successfully`);
@@ -141,7 +141,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
     const updatedFiles = files.filter(f => f.id !== fileId);
     setFiles(updatedFiles);
     onFilesChange?.(updatedFiles);
-    
+
     const removedFile = files.find(f => f.id === fileId);
     if (removedFile) {
       toast.success(`${removedFile.name} removed`);
@@ -149,7 +149,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
   };
 
   const retryUpload = (fileId: string) => {
-    setFiles(prev => prev.map(f => 
+    setFiles(prev => prev.map(f =>
       f.id === fileId ? { ...f, status: 'uploading', progress: 0, error: undefined } : f
     ));
     simulateUpload(fileId);
@@ -173,9 +173,9 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
-    
+
     if (disabled) return;
-    
+
     const droppedFiles = e.dataTransfer.files;
     if (droppedFiles.length > 0) {
       processFiles(droppedFiles);
@@ -226,7 +226,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
               isDragging ? 'text-blue-500' : 'text-gray-400'
             )} />
           </div>
-          
+
           <div className="space-y-2">
             <h3 className="text-lg font-medium text-gray-900">
               {isDragging ? 'Drop files here' : 'Upload files'}
@@ -235,7 +235,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
               Drag and drop files here, or click to select files
             </p>
             <p className="text-xs text-gray-500">
-              Supports: {allowedExtensions.map(ext => `.${ext}`).join(', ')} 
+              Supports: {allowedExtensions.map(ext => `.${ext}`).join(', ')}
               (Max {maxFiles} files, {maxSize}MB each)
             </p>
           </div>
@@ -254,7 +254,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
               <FolderOpen className="w-4 h-4 mr-2" />
               Browse Files
             </Button>
-            
+
             <Button
               type="button"
               variant="outline"
@@ -281,7 +281,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
         onChange={handleFileSelect}
         className="hidden"
       />
-      
+
       <input
         ref={cameraInputRef}
         type="file"
@@ -315,7 +315,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {files.map((file) => {
               const FileIcon = getFileIcon(file);
-              
+
               return (
                 <Card key={file.id} className="p-4">
                   <div className="space-y-3">
@@ -332,7 +332,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
                           <FileIcon className="w-12 h-12 text-gray-400" />
                         </div>
                       )}
-                      
+
                       {/* Status Overlay */}
                       <div className="absolute top-2 right-2">
                         {file.status === 'success' && (
@@ -367,7 +367,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
                             <span>{Math.round(file.progress)}%</span>
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
+                            <div
                               className="bg-blue-600 h-2 rounded-full transition-all duration-300"
                               style={{ width: `${file.progress}%` }}
                             />
@@ -395,7 +395,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
                             <Eye className="w-3 h-3" />
                           </Button>
                         )}
-                        
+
                         {file.status === 'success' && (
                           <Button
                             variant="ghost"
@@ -414,7 +414,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
                             <Download className="w-3 h-3" />
                           </Button>
                         )}
-                        
+
                         {file.status === 'error' && (
                           <Button
                             variant="ghost"

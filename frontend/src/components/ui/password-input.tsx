@@ -49,7 +49,7 @@ function calculatePasswordStrength(
 
   const metRequirements = Object.values(requirements).filter(Boolean).length;
   const totalRequirements = Object.values(requirements).length;
-  
+
   let score = 0;
   const feedback: string[] = [];
 
@@ -123,7 +123,7 @@ export function PasswordInput({
   const [isVisible, setIsVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
-  const strength = useMemo(() => 
+  const strength = useMemo(() =>
     calculatePasswordStrength(
       value,
       minLength,
@@ -176,7 +176,7 @@ export function PasswordInput({
             className
           )}
         />
-        
+
         {showToggle && (
           <Button
             type="button"
@@ -210,7 +210,7 @@ export function PasswordInput({
               {getStrengthText(strength.score)}
             </span>
           </div>
-          
+
           {strength.feedback.length > 0 && (
             <div className="flex items-start gap-2">
               <AlertCircle className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />

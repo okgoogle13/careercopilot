@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal } from '../ui';
-import { 
-  Bell, X, Check, AlertTriangle, Info, CheckCircle, 
+import {
+  Bell, X, Check, AlertTriangle, Info, CheckCircle,
   Clock, FileText, User, Briefcase, Settings,
   Archive, Trash2, Filter, Search
 } from 'lucide-react';
@@ -112,21 +112,21 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
     // Filter by read status
     if (filter === 'unread' && notification.read) return false;
     if (filter === 'today' && !isToday(notification.timestamp)) return false;
-    
+
     // Filter by category
     if (categoryFilter !== 'all' && notification.category !== categoryFilter) return false;
-    
+
     // Filter by search term
-    if (searchTerm && !notification.title.toLowerCase().includes(searchTerm.toLowerCase()) && 
+    if (searchTerm && !notification.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
         !notification.message.toLowerCase().includes(searchTerm.toLowerCase())) {
       return false;
     }
-    
+
     return true;
   });
 
   const markAsRead = (notificationId: string) => {
-    setNotifications(prev => prev.map(n => 
+    setNotifications(prev => prev.map(n =>
       n.id === notificationId ? { ...n, read: true } : n
     ));
   };
@@ -286,10 +286,10 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
               filteredNotifications.map(notification => {
                 const IconComponent = getNotificationIcon(notification.type);
                 const CategoryIcon = getCategoryIcon(notification.category);
-                
+
                 return (
-                  <Card 
-                    key={notification.id} 
+                  <Card
+                    key={notification.id}
                     className={cn(
                       'p-4 border transition-colors hover:bg-gray-50',
                       !notification.read ? 'bg-blue-50/30 border-l-4 border-l-blue-500' : 'border-gray-200',
@@ -319,12 +319,12 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
                             <p className="text-sm text-gray-600 mt-1">
                               {notification.message}
                             </p>
-                            
+
                             <div className="flex items-center gap-4 mt-2">
                               <span className="text-xs text-gray-500">
                                 {formatTimestamp(notification.timestamp)}
                               </span>
-                              
+
                               {notification.actionUrl && (
                                 <Button
                                   variant="ghost"
@@ -353,7 +353,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
                                 <Check className="w-3 h-3" />
                               </Button>
                             )}
-                            
+
                             <Button
                               variant="ghost"
                               size="sm"
@@ -363,7 +363,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
                             >
                               <Archive className="w-3 h-3" />
                             </Button>
-                            
+
                             <Button
                               variant="ghost"
                               size="sm"
