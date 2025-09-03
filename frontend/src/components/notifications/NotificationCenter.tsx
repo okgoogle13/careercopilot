@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal } from '../ui';
 import { 
   Bell, X, Check, AlertTriangle, Info, CheckCircle, 
-  Clock, Calendar, FileText, User, Briefcase, Settings,
+  Clock, FileText, User, Briefcase, Settings,
   Archive, Trash2, Filter, Search
 } from 'lucide-react';
 import { format, isToday, isYesterday } from 'date-fns';

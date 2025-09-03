@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, LoadingSpinner } from '../ui';
 import ProgressBar from '../ui/ProgressBar';
 import { 
-  FileText, Target, TrendingUp, AlertTriangle, CheckCircle, 
-  ArrowRight, RefreshCw, Lightbulb, Zap, Eye, Download,
-  BarChart3, PieChart, Users, Clock, Star, Award
+  Target, AlertTriangle, CheckCircle, 
+  RefreshCw, Lightbulb, Zap, Eye, Clock
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -243,7 +242,7 @@ export const ATSFeedbackLoop: React.FC<ATSFeedbackLoopProps> = ({
       if (onOptimizationComplete) {
         onOptimizationComplete(newScore);
       }
-    } catch (error) {
+    } catch {
       toast.error('Optimization failed. Please try again.');
     } finally {
       setOptimizing(false);

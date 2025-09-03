@@ -14,7 +14,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, className = ''
   const location = useLocation();
   const activeTab = location.pathname === '/' ? 'dashboard' : 'ats-analysis';
 
-  const handleTabChange = useCallback((tab: string) => {
+  const handleTabChange = useCallback((_tab: string) => {
     // Handle navigation here if needed
     setIsSidebarOpen(false);
   }, []);
