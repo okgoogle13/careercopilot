@@ -1,14 +1,20 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { AppError, ErrorType } from '../../types/errors';
+import { errorHandler } from '../../utils/errorHandler';
+import ErrorDisplay from './ErrorDisplay';
+import { Button } from './Button';
 
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
-  onError?: (error: Error, errorInfo: ErrorInfo) => void;
+  onError?: (error: AppError) => void;
+  componentName?: string;
+  showActionableSuggestions?: boolean;
 }
 
 interface State {
   hasError: boolean;
-  error?: Error;
+  appError?: AppError;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -18,23 +24,45 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+    return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    // Log error details
-    console.error('ErrorBoundary caught an error:', error, errorInfo);
+    const appError = errorHandler.handleError(error, {
+      component: this.props.componentName || 'ErrorBoundary',
+      additionalData: {
+        componentStack: errorInfo.componentStack,
+        errorBoundary: true
+      }
+    });
 
-    // Call onError prop if provided
-    this.props.onError?.(error, errorInfo);
+    this.setState({ appError });
+    this.props.onError?.(appError);
   }
 
   private handleRetry = () => {
-    this.setState({ hasError: false, error: undefined });
+    this.setState({ hasError: false, appError: undefined });
   };
 
-  private handleReload = () => {
-    window.location.reload();
+  private handleAction = async (actionType: string, actionData?: any) => {
+    switch (actionType) {
+      case 'retry':
+        this.handleRetry();
+        break;
+      case 'refresh':
+        window.location.reload();
+        break;
+      case 'navigate':
+        if (actionData?.path) {
+          window.location.href = actionData.path;
+        }
+        break;
+      case 'contact':
+        window.open('mailto:support@careercopilot.com', '_blank');
+        break;
+      default:
+        break;
+    }
   };
 
   render() {
@@ -44,11 +72,13 @@ class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
-      // Default error UI
+      const { appError } = this.state;
+
+      // Enhanced error UI with actionable suggestions
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-md w-full space-y-8 text-center">
-            <div>
+          <div className="max-w-2xl w-full space-y-8">
+            <div className="text-center">
               <div className="mx-auto h-16 w-16 text-red-500">
                 <svg
                   fill="none"
@@ -68,43 +98,77 @@ class ErrorBoundary extends Component<Props, State> {
                 Oops! Something went wrong
               </h2>
               <p className="mt-2 text-sm text-gray-600">
-                We encountered an unexpected error. Please try refreshing the
-                page or contact support if the problem persists.
+                {appError?.userMessage || "We encountered an unexpected error."}
               </p>
-
-              {import.meta.env.DEV && this.state.error && (
-                <details className="mt-4 p-4 bg-red-50 rounded-lg text-left">
-                  <summary className="cursor-pointer font-medium text-red-800 mb-2">
-                    Error Details (Development Only)
-                  </summary>
-                  <pre className="text-xs text-red-700 whitespace-pre-wrap">
-                    {this.state.error.stack}
-                  </pre>
-                </details>
-              )}
             </div>
 
-            <div className="space-y-3">
-              <button
-                onClick={this.handleRetry}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
-              >
-                Try Again
-              </button>
+            {/* Actionable Suggestions */}
+            {appError && this.props.showActionableSuggestions !== false && (
+              <div className="bg-white p-6 rounded-lg shadow-sm border">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">What you can do:</h3>
+                <div className="space-y-3">
+                  {appError.suggestions.slice(0, 3).map((suggestion) => (
+                    <div key={suggestion.id} className="flex items-start space-x-3">
+                      <div className="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mt-0.5">
+                        <span className="text-xs font-medium text-blue-600">
+                          {suggestion.priority}
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-sm font-medium text-gray-900">
+                          {suggestion.title}
+                        </h4>
+                        <p className="text-sm text-gray-600 mt-1">
+                          {suggestion.description}
+                        </p>
+                        {suggestion.actionType !== 'dismiss' && (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="mt-2"
+                            onClick={() => this.handleAction(suggestion.actionType, suggestion.actionData)}
+                          >
+                            {suggestion.title}
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
-              <button
-                onClick={this.handleReload}
-                className="w-full flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            {/* Development Error Details */}
+            {import.meta.env.DEV && appError?.technicalDetails && (
+              <details className="bg-red-50 p-4 rounded-lg border border-red-200">
+                <summary className="cursor-pointer font-medium text-red-800 mb-2">
+                  Technical Details (Development Only)
+                </summary>
+                <pre className="text-xs text-red-700 whitespace-pre-wrap overflow-auto max-h-40">
+                  {appError.technicalDetails}
+                </pre>
+              </details>
+            )}
+
+            {/* Default Actions */}
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button onClick={this.handleRetry} className="w-full sm:w-auto">
+                Try Again
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => window.location.reload()}
+                className="w-full sm:w-auto"
               >
                 Reload Page
-              </button>
-
-              <button
+              </Button>
+              <Button
+                variant="ghost"
                 onClick={() => (window.location.href = '/')}
-                className="w-full flex justify-center py-2 px-4 border-transparent text-sm font-medium text-blue-600 hover:text-blue-500 transition-colors duration-200"
+                className="w-full sm:w-auto"
               >
                 Go to Dashboard
-              </button>
+              </Button>
             </div>
           </div>
         </div>

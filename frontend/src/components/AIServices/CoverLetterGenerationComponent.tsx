@@ -100,7 +100,7 @@ export const CoverLetterGenerationComponent: React.FC<CoverLetterGenerationCompo
     try {
       await navigator.clipboard.writeText(text);
       toast.success('Copied to clipboard!');
-    } catch (error) {
+    } catch {
       toast.error('Failed to copy to clipboard');
     }
   };

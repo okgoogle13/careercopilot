@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ProtectedRoute, LoadingSpinner } from './components';
 import { ErrorBoundary, SkipLink } from './components/ui';
 import { AuthProvider, UserPreferencesProvider, ThemeProvider } from './contexts';
+import { ErrorProvider } from './contexts/ErrorContext';
 import { MainLayout } from './components/layout';
+import ErrorToastContainer from './components/ui/ErrorToastContainer';
 
 // Lazy load page components
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -25,8 +27,9 @@ const App: React.FC = () => {
   return (
     <Router>
       <ThemeProvider>
-        <AuthProvider>
-          <UserPreferencesProvider>
+        <ErrorProvider>
+          <AuthProvider>
+            <UserPreferencesProvider>
             {/* Accessibility skip links */}
             <SkipLink href="#main-content">Skip to main content</SkipLink>
             <SkipLink href="#navigation">Skip to navigation</SkipLink>
@@ -118,9 +121,13 @@ const App: React.FC = () => {
                   </Routes>
                 </Suspense>
               </MainLayout>
-          </ProtectedRoute>
-        </UserPreferencesProvider>
-      </AuthProvider>
+              
+              {/* Global error toast notifications */}
+              <ErrorToastContainer position="top-right" />
+            </ProtectedRoute>
+            </UserPreferencesProvider>
+          </AuthProvider>
+        </ErrorProvider>
       </ThemeProvider>
     </Router>
   );

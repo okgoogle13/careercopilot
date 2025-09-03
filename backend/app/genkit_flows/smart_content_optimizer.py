@@ -8,7 +8,7 @@ with AI-powered suggestions and ATS optimization.
 import json
 import os
 from enum import Enum
-from typing import Dict, List, Optional, Union
+from typing import Dict, List, Optional
 
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling

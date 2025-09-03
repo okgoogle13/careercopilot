@@ -5,7 +5,7 @@ import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { Badge } from '../ui/badge';
 import { aiServices, JobMatchingRequest, JobMatchingResult } from '../../services/aiServices';
 import toast from 'react-hot-toast';
-import { AlertCircle, Briefcase, MapPin, DollarSign, TrendingUp, CheckCircle, XCircle } from 'lucide-react';
+import { AlertCircle, Briefcase, MapPin, DollarSign, TrendingUp, CheckCircle } from 'lucide-react';
 
 interface JobMatchingComponentProps {
   resumeDocumentId?: string;
