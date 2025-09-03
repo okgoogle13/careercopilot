@@ -62,24 +62,18 @@ function ChartContainer({
 }: ChartContainerProps) {
   const uniqueId = React.useId();
   const chartId = `chart-${id || uniqueId.replace(/:/g, '')}`;
-  const titleId = `${chartId}-title`;
-  const descId = describedBy || `${chartId}-desc`;
 
-  const renderContent = () => {
-    if (isLoading) {
-      return <ChartSkeleton {...skeletonProps} />;
-    }
+  if (isLoading) {
+    return <ChartSkeleton {...skeletonProps} />;
+  }
 
-    if (error) {
-      return (
-        <ChartErrorBoundary onRetry={onRetry}>
-          <div style={{ display: 'none' }}>{children}</div>
-        </ChartErrorBoundary>
-      );
-    }
-
-    return children;
-  };
+  if (error) {
+    return (
+      <ChartErrorBoundary onRetry={onRetry}>
+        <div style={{ display: 'none' }}>{children}</div>
+      </ChartErrorBoundary>
+    );
+  }
 
   return (
     <ChartContext.Provider value={{ config }}>

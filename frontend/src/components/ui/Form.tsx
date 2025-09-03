@@ -192,7 +192,7 @@ const FormItemContext = React.createContext<FormItemContextValue>(
   {} as FormItemContextValue
 );
 
-const useFormItem = () => {
+export const useFormItem = () => {
   const context = React.useContext(FormItemContext);
 
   if (!context) {
