@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, LoadingSpinner, ProgressBar } from '../components/ui';
 import { HelpButton } from '../components/HelpSystem';
 import { 
-  TrendingUp, Calendar, FileText, Target, Award, Clock, 
-  BarChart3, PieChart, Activity, Zap, AlertTriangle,
-  CheckCircle, ArrowUp, ArrowDown, Download, Share2,
-  RefreshCw, Filter, Eye, Users, Globe
+  TrendingUp, FileText, Target, Award, Clock, 
+  Activity, Zap, AlertTriangle,
+  ArrowUp, ArrowDown, Download,
+  RefreshCw, Eye, Users, Globe
 } from 'lucide-react';
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart as RechartsPieChart, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { LineChart, Line, BarChart, Bar, PieChart as RechartsPieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 interface DashboardData {
   overview: {

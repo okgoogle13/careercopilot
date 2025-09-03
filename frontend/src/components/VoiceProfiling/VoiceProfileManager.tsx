@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal, LoadingSpinner, ProgressBar } from '../ui';
 import { HelpButton } from '../HelpSystem';
 import { 
-  Mic, VolumeX, Volume2, RefreshCw, Save, Wand2, FileText,
+  Mic, Volume2, RefreshCw, Save, Wand2, FileText,
   MessageSquare, Lightbulb, TrendingUp, User, BookOpen, 
-  RotateCcw, CheckCircle, AlertCircle, Sparkles
+  CheckCircle, AlertCircle, Sparkles
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -113,7 +113,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
       } else {
         toast.error('Failed to load voice profile');
       }
-    } catch (error) {
+    } catch {
       toast.error('Error loading voice profile');
     } finally {
       setLoading(false);
@@ -142,12 +142,12 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
         if (profile) {
           setProfile({
             ...profile,
-            tone: analysisResult.tone as any,
+            tone: analysisResult.tone as 'professional' | 'conversational' | 'formal' | 'friendly' | 'authoritative' | 'creative',
             formality: analysisResult.formality,
             confidence: analysisResult.confidence,
             enthusiasm: analysisResult.enthusiasm,
-            vocabulary: analysisResult.vocabulary as any,
-            sentenceStructure: analysisResult.sentenceStructure as any,
+            vocabulary: analysisResult.vocabulary as 'simple' | 'technical' | 'business' | 'academic' | 'mixed',
+            sentenceStructure: analysisResult.sentenceStructure as 'short' | 'medium' | 'long' | 'varied',
             commonPhrases: [...profile.commonPhrases, ...analysisResult.keyPhrases.slice(0, 5)],
             sampleTexts: [
               ...profile.sampleTexts,
@@ -163,7 +163,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
       } else {
         toast.error('Failed to analyze text');
       }
-    } catch (error) {
+    } catch {
       toast.error('Error analyzing text');
     } finally {
       setAnalyzing(false);
@@ -195,7 +195,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
       } else {
         toast.error('Failed to save voice profile');
       }
-    } catch (error) {
+    } catch {
       toast.error('Error saving voice profile');
     } finally {
       setSaving(false);
@@ -230,7 +230,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
       } else {
         toast.error('Failed to generate sample content');
       }
-    } catch (error) {
+    } catch {
       toast.error('Error generating sample content');
     }
   };
@@ -317,7 +317,7 @@ const VoiceProfileManager: React.FC<VoiceProfileManagerProps> = ({
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => setActiveTab(tab.id as 'setup' | 'samples' | 'analysis' | 'preview')}
                 className={`flex items-center gap-2 px-4 py-3 border-b-2 font-medium transition-colors ${
                   activeTab === tab.id
                     ? 'border-blue-500 text-blue-600'
@@ -409,7 +409,7 @@ const ProfileSetupTab: React.FC<{
               </label>
               <select
                 value={profile.tone}
-                onChange={(e) => onUpdate({ tone: e.target.value as any })}
+                onChange={(e) => onUpdate({ tone: e.target.value as 'professional' | 'conversational' | 'formal' | 'friendly' | 'authoritative' | 'creative' })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="professional">Professional</option>
@@ -490,7 +490,7 @@ const ProfileSetupTab: React.FC<{
               </label>
               <select
                 value={profile.vocabulary}
-                onChange={(e) => onUpdate({ vocabulary: e.target.value as any })}
+                onChange={(e) => onUpdate({ vocabulary: e.target.value as 'simple' | 'technical' | 'business' | 'academic' | 'mixed' })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="simple">Simple & Clear</option>
@@ -507,7 +507,7 @@ const ProfileSetupTab: React.FC<{
               </label>
               <select
                 value={profile.sentenceStructure}
-                onChange={(e) => onUpdate({ sentenceStructure: e.target.value as any })}
+                onChange={(e) => onUpdate({ sentenceStructure: e.target.value as 'short' | 'medium' | 'long' | 'varied' })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="short">Short & Punchy</option>
@@ -557,7 +557,7 @@ const ProfileSetupTab: React.FC<{
                 onChange={(e) => onUpdate({
                   writingPatterns: {
                     ...profile.writingPatterns,
-                    paragraphLength: e.target.value as any,
+                    paragraphLength: e.target.value as 'short' | 'medium' | 'long',
                   }
                 })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -678,7 +678,7 @@ const SamplesTab: React.FC<{
             </label>
             <select
               value={selectedType}
-              onChange={(e) => setSelectedType(e.target.value as any)}
+              onChange={(e) => setSelectedType(e.target.value as 'resume' | 'cover_letter' | 'email' | 'social')}
               className="w-full max-w-xs px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
             >
               <option value="resume">Resume/CV Content</option>

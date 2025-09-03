@@ -406,20 +406,16 @@ class PersonalCache:
             # Test basic cache operations
             test_key = "health_check"
             test_data = {"status": "test", "timestamp": datetime.now().isoformat()}
-            
             # Try to set and get
             set_success = await self.set(test_key, test_data)
             if not set_success:
                 return False
-                
             retrieved_data = await self.get(test_key)
             if retrieved_data is None:
                 return False
-                
             # Clean up test data
             await self.delete(test_key)
             return True
-            
         except Exception as e:
             logger.error(f"PersonalCache health check failed: {e}")
             return False
