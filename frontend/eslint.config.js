@@ -46,4 +46,15 @@ export default [
       'no-var': 'error',
     },
   },
+  {
+    files: ['**/*.test.{ts,tsx}', '**/__tests__/**/*.{ts,tsx}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+        NodeListOf: 'readonly',
+        RequestInit: 'readonly',
+      },
+    },
+  },
 ]

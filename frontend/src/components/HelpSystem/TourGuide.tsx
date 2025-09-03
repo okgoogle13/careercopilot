@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { ChevronLeft, ChevronRight, X, SkipForward } from 'lucide-react';
 import { Button } from '../ui';
@@ -244,32 +244,32 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
     }
   }, [tour, currentStepIndex, isVisible]);
 
-  const nextStep = () => {
+  const completeTour = useCallback(() => {
+    const tourCompletedKey = `tour_completed_${tourId}`;
+    localStorage.setItem(tourCompletedKey, new Date().toISOString());
+    setIsVisible(false);
+    setTimeout(onComplete, 300);
+  }, [tourId, onComplete]);
+
+  const nextStep = useCallback(() => {
     if (currentStepIndex < tour.steps.length - 1) {
       setCurrentStepIndex(currentStepIndex + 1);
     } else {
       completeTour();
     }
-  };
+  }, [currentStepIndex, tour.steps.length, completeTour]);
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     if (currentStepIndex > 0) {
       setCurrentStepIndex(currentStepIndex - 1);
     }
-  };
+  }, [currentStepIndex]);
 
-  const skipTour = () => {
+  const skipTour = useCallback(() => {
     const tourSkippedKey = `tour_skipped_${tourId}`;
     localStorage.setItem(tourSkippedKey, new Date().toISOString());
     completeTour();
-  };
-
-  const completeTour = () => {
-    const tourCompletedKey = `tour_completed_${tourId}`;
-    localStorage.setItem(tourCompletedKey, new Date().toISOString());
-    setIsVisible(false);
-    setTimeout(onComplete, 300);
-  };
+  }, [tourId, completeTour]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

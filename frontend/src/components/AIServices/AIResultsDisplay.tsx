@@ -221,7 +221,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
       try {
         await navigator.clipboard.writeText(copyText);
         toast.success('Copied to clipboard!');
-      } catch (error) {
+      } catch {
         toast.error('Failed to copy to clipboard');
       }
     }
