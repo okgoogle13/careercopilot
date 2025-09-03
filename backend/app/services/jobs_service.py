@@ -1,8 +1,8 @@
 import json
-from fastapi import HTTPException
 
 from app.genkit_flows.job_analyzer import analyze_job_description
 from app.genkit_flows.resume_analyzer import compare_resume_to_job
+from fastapi import HTTPException
 
 
 class JobsService:

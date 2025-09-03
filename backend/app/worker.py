@@ -1,5 +1,6 @@
-from celery import Celery
 import os
+
+from celery import Celery
 
 # Create Celery instance
 celery_app = Celery("careercopilot")

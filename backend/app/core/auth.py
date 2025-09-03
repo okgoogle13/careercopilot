@@ -3,18 +3,18 @@ Authentication and authorization system for CareerCopilot.
 Supports JWT tokens, user registration, and session management.
 """
 
-import os
 import logging
+import os
 from datetime import datetime, timedelta
-from typing import Optional, Dict, Any
-from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from jose import JWTError, jwt
-from passlib.context import CryptContext
-from sqlalchemy.orm import Session
+from typing import Any, Dict, Optional
 
 from app.core.database import get_db
 from app.models.database import User
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from jose import JWTError, jwt
+from passlib.context import CryptContext
+from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 

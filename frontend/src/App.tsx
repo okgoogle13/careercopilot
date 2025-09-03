@@ -19,6 +19,7 @@ const DocumentGenerationPage = lazy(
   () => import('./pages/DocumentGenerationPage')
 );
 const UITestPage = lazy(() => import('./pages/UITestPage'));
+const AIServicesPage = lazy(() => import('./pages/AIServicesPage'));
 
 const App: React.FC = () => {
   return (
@@ -95,6 +96,14 @@ const App: React.FC = () => {
                       element={
                         <ErrorBoundary>
                           <DocumentGenerationPage />
+                        </ErrorBoundary>
+                      }
+                    />
+                    <Route
+                      path="/ai-services"
+                      element={
+                        <ErrorBoundary>
+                          <AIServicesPage />
                         </ErrorBoundary>
                       }
                     />

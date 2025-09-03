@@ -1,8 +1,16 @@
-import os
 import logging
+import os
 from typing import List, Optional
 
 import genkit
+
+# Import enhanced error handling
+from app.core.enhanced_ai_error_handling import (
+    AIOperationContext,
+    AIServiceType,
+    create_fallback_strategy,
+    enhanced_ai_handler,
+)
 from dotenv import load_dotenv
 from genkit.plugins import googleai
 from pydantic import BaseModel, Field
@@ -11,14 +19,6 @@ from pydantic import BaseModel, Field
 from .extract_job_requirements import JobRequirements, extractJobRequirements
 from .extract_resume_entities import ResumeEntities, extractResumeEntities
 from .keyword_placer import KeywordPlacementSuggestion, suggestKeywordPlacement
-
-# Import enhanced error handling
-from app.core.enhanced_ai_error_handling import (
-    enhanced_ai_handler,
-    AIServiceType,
-    AIOperationContext,
-    create_fallback_strategy,
-)
 
 logger = logging.getLogger(__name__)
 

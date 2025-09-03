@@ -3,15 +3,15 @@ Database configuration and connection management.
 Supports PostgreSQL (production) and SQLite (development/testing).
 """
 
-import os
 import logging
-from sqlalchemy import create_engine, event, text
-from sqlalchemy.orm import sessionmaker, Session
-from sqlalchemy.pool import StaticPool
+import os
 from contextlib import contextmanager
 from typing import Generator
 
 from app.models.database import Base
+from sqlalchemy import create_engine, event, text
+from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.pool import StaticPool
 
 logger = logging.getLogger(__name__)
 

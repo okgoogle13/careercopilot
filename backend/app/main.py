@@ -1,6 +1,7 @@
 import os
 
 from app.api.v1 import (
+    ai_powered_career_services,
     ai_services,
     analysis,
     auth,
@@ -17,16 +18,8 @@ from app.api.v1 import (
     users,
     workflows,
 )
-from app.core.cache_middleware import (
-    add_cache_middleware,
-    cache_health_check,
-    cache_lifespan,
-)
-from app.core.limiter import (
-    _rate_limit_exceeded_handler,
-    limiter,
-    authenticated_limiter,
-)
+from app.core.cache_middleware import add_cache_middleware, cache_health_check, cache_lifespan
+from app.core.limiter import _rate_limit_exceeded_handler, authenticated_limiter, limiter
 from app.core.logging_config import setup_logging
 from app.core.monitoring import start_system_monitoring, stop_system_monitoring
 from app.core.monitoring_middleware import add_monitoring_middleware
@@ -123,6 +116,11 @@ api_router.include_router(ksc.router, prefix="/ksc", tags=["ksc"])
 api_router.include_router(analysis.router, prefix="/analysis", tags=["analysis"])
 api_router.include_router(monitoring.router, prefix="/monitoring", tags=["monitoring"])
 api_router.include_router(ai_services.router, prefix="/ai", tags=["ai-services"])
+
+# Advanced AI-Powered Career Services
+api_router.include_router(
+    ai_powered_career_services.router, prefix="/ai-career", tags=["ai-career-services"]
+)
 
 
 # Placeholder for the document generation flow

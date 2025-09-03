@@ -1,11 +1,12 @@
 import os
+from typing import Optional
+
 from app.core.db import db
 from app.core.dependencies import get_current_user
 from fastapi import APIRouter, Depends, HTTPException
 from firebase_admin import auth
 from google.cloud.firestore import SERVER_TIMESTAMP
 from pydantic import BaseModel
-from typing import Optional
 
 router = APIRouter()
 

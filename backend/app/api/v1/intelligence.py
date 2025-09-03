@@ -2,16 +2,16 @@
 Advanced Intelligence API endpoints with ML-powered market analysis.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status, Query
-from sqlalchemy.orm import Session
-from typing import Dict, Any
 import logging
+from typing import Any, Dict
 
-from app.core.database import get_db
-from app.models.database import User, MarketAnalysis
-from app.ml.market_intelligence import JobMarketAnalyzer, SkillMatchingEngine
 from app.agents.orchestrator import AgentOrchestrator
+from app.core.database import get_db
+from app.ml.market_intelligence import JobMarketAnalyzer, SkillMatchingEngine
+from app.models.database import MarketAnalysis, User
+from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

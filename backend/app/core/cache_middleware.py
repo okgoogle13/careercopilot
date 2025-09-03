@@ -14,9 +14,8 @@ from typing import Any, Dict, Optional
 from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from .personal_cache import get_ai_cache
-
 from .cache_deprecated import AICache
+from .personal_cache import get_ai_cache
 
 logger = logging.getLogger(__name__)
 
@@ -124,7 +123,6 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
             request.method in ["POST", "PUT", "PATCH", "DELETE"]
             and 200 <= response.status_code < 300
         ):
-
             await self._handle_invalidation(request)
 
         return response

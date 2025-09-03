@@ -8,19 +8,11 @@ import json
 from typing import Any, Dict, List
 
 from app.core.ai_client import get_ai_client
-from app.core.config import get_personal_config
 from app.core.cache_decorators import cached_ai_operation
+from app.core.config import get_personal_config
+from app.services.ai_prompt_builder import PromptContext, PromptType, get_ai_prompt_builder
+from app.services.template_service import TemplateContext, TemplateType, get_template_service
 from app.services.web_search import web_search
-from app.services.ai_prompt_builder import (
-    get_ai_prompt_builder,
-    PromptType,
-    PromptContext,
-)
-from app.services.template_service import (
-    get_template_service,
-    TemplateContext,
-    TemplateType,
-)
 
 
 class PersonalCareerWorkflow:

@@ -5,7 +5,7 @@ Provides web search functionality for salary research and job market analysis
 
 import asyncio
 import logging
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
 
 logger = logging.getLogger(__name__)
 

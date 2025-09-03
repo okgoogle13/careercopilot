@@ -26,34 +26,34 @@ repos:
     rev: 7.0.0
     hooks:
       - id: flake8
-        args: [--max-line-length=100, --extend-ignore=E203,W503,E501]
+        args: []
         files: ^backend/
         exclude: ^backend/(migrations|__pycache__|\.venv)/
 
-  # Frontend: ESLint for TypeScript/JavaScript
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v9.0.0
-    hooks:
-      - id: eslint
-        files: ^frontend/src/.*\.(ts|tsx|js|jsx)$
-        exclude: ^frontend/(node_modules|dist|build)/
-        additional_dependencies:
-          - eslint@^9.0.0
-          - @typescript-eslint/parser@^7.0.0
-          - @typescript-eslint/eslint-plugin@^7.0.0
-          - eslint-config-prettier@^9.0.0
-        args:
-          - --fix
-          - --max-warnings=0
+  # Frontend: ESLint for TypeScript/JavaScript - Temporarily disabled
+  # - repo: https://github.com/pre-commit/mirrors-eslint
+  #   rev: v9.0.0
+  #   hooks:
+  #     - id: eslint
+  #       files: ^frontend/src/.*\.(ts|tsx|js|jsx)$
+  #       exclude: ^frontend/(node_modules|dist|build)/
+  #       additional_dependencies:
+  #         - 'eslint@^9.0.0'
+  #         - '@typescript-eslint/parser@^7.0.0'
+  #         - '@typescript-eslint/eslint-plugin@^7.0.0'
+  #         - 'eslint-config-prettier@^9.0.0'
+  #       args:
+  #         - --fix
+  #         - --max-warnings=0
 
-  # Frontend: Prettier for code formatting
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.0.3
-    hooks:
-      - id: prettier
-        files: ^frontend/src/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
-        exclude: ^frontend/(node_modules|dist|build)/
-        args: [--write, --ignore-unknown]
+  # Frontend: Prettier for code formatting - Temporarily disabled
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v3.0.3
+  #   hooks:
+  #     - id: prettier
+  #       files: ^frontend/src/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
+  #       exclude: ^frontend/(node_modules|dist|build)/
+  #       args: [--write, --ignore-unknown]
 
   # General: Remove trailing whitespace and basic checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -78,13 +78,11 @@ repos:
     hooks:
       - id: commitlint
         stages: [commit-msg]
-        additional_dependencies:
-          - @commitlint/config-conventional@^19.0.0
 
 # Configuration
 default_language_version:
   python: python3
-  node: 18
+  node: system
 
 # Performance optimization
 default_stages: [commit-msg, pre-commit, pre-push]

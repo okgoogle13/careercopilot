@@ -1,10 +1,11 @@
+from typing import Optional
+
 from app.core.db import db
 from app.core.dependencies import get_current_user
 from app.genkit_flows.calendar_manager import createCalendarEvent
 from app.genkit_flows.email_scanner import scanEmailsForJobOpportunities
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
-from typing import Optional
 
 router = APIRouter()
 
