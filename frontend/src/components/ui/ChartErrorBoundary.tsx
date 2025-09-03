@@ -59,4 +59,3 @@ export class ChartErrorBoundary extends Component<ChartErrorBoundaryProps, Chart
     return this.props.children;
   }
 }
-

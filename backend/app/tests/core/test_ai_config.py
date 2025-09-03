@@ -1,4 +1,4 @@
-from app.core.ai_config import get_ai_config, AIProvider, AIModelType
+from app.core.ai_config import AIModelType, AIProvider, get_ai_config
 
 
 def test_get_model_config_returns_model():

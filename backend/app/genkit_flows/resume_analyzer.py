@@ -1,6 +1,7 @@
 import json
 import os
 
+from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import (
     AIError,
     AIErrorType,
@@ -8,7 +9,6 @@ from app.core.ai_error_handling import (
     with_ai_error_handling,
 )
 from app.core.input_validation import InputSanitizer, InputValidationError
-from app.core.ai_config import get_ai_config
 from dotenv import load_dotenv
 
 try:

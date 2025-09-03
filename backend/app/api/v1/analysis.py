@@ -1,26 +1,22 @@
-import uuid
 import logging
+import uuid
 from typing import Optional
 
-from fastapi import BackgroundTasks
-from app.workers.ats_score_worker import process_ats_score_task
 from app.ai_operations.job_analyzer import job_analyzer
 from app.ai_operations.resume_analyzer import resume_analyzer
-from app.core.enhanced_ai_error_handling import (
-    enhanced_ai_handler,
-    AIServiceType,
-    AIOperationContext,
-    create_fallback_strategy,
-    create_detailed_error_message,
-    AIOperationResult,
-)
 from app.core.db import db
-from app.core.dependencies import (
-    get_current_user_with_state,
-    get_user_document_from_firestore,
+from app.core.dependencies import get_current_user_with_state, get_user_document_from_firestore
+from app.core.enhanced_ai_error_handling import (
+    AIOperationContext,
+    AIOperationResult,
+    AIServiceType,
+    create_detailed_error_message,
+    create_fallback_strategy,
+    enhanced_ai_handler,
 )
 from app.core.limiter import authenticated_limiter
-from fastapi import APIRouter, Depends, HTTPException, Request, status
+from app.workers.ats_score_worker import process_ats_score_task
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status
 from google.cloud.firestore import SERVER_TIMESTAMP
 from pydantic import BaseModel
 

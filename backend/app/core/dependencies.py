@@ -1,7 +1,8 @@
 import os
+
 import firebase_admin
 from app.core.db import db
-from fastapi import Depends, HTTPException, status, Request
+from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from firebase_admin import auth, credentials
 
