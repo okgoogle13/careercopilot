@@ -70,6 +70,7 @@ app = FastAPI(title="Careercopilot API", lifespan=app_lifespan)
 # Add CORS middleware
 origins = [
     "http://localhost:3000",
+    "http://localhost:5173",
     "http://localhost:8080",
 ]
 

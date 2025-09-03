@@ -47,7 +47,7 @@ const UITestPage: React.FC = () => {
 
   return (
     <div className="h-screen bg-background text-foreground flex dark">
-      <Sidebar activeTab={activeTab} onTabChange={handleTabChange} />
+      <Sidebar isOpen={true} onClose={() => {}} activeTab={activeTab} onTabChange={handleTabChange} />
       <div className="flex-1">{renderContent()}</div>
     </div>
   );

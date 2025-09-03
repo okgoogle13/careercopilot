@@ -4,10 +4,18 @@ interface LoadingSpinnerProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   className?: string;
   color?: 'primary' | 'secondary' | 'white' | 'gray';
+  fullScreen?: boolean;
 }
 
 const LoadingSpinner = memo<LoadingSpinnerProps>(
-  ({ size = 'md', className = '', color = 'primary' }) => {
+  ({ size = 'md', className = '', color = 'primary', fullScreen = false }) => {
+    if (fullScreen) {
+      return (
+        <div className="fixed inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-50">
+          <LoadingSpinner size="lg" />
+        </div>
+      );
+    }
     const sizeClasses = {
       xs: 'h-3 w-3',
       sm: 'h-4 w-4',

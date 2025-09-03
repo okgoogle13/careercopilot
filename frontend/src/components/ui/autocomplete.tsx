@@ -71,7 +71,7 @@ export function AutoComplete({
   
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
 
   // Memoized filtered options for static data
   const filteredOptions = useMemo(() => {

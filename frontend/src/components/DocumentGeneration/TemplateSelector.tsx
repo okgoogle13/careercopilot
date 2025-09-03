@@ -29,15 +29,21 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [atsAnalysis, setAtsAnalysis] = useState<Record<string, number>>({});
 
-  useEffect(() => {
-    loadTemplates();
-  }, []);
+  const analyzeAtsCompliance = useCallback(async () => {
+    if (!jobDescription) return;
 
-  useEffect(() => {
-    if (jobDescription && templates.length > 0) {
-      analyzeAtsCompliance();
+    const analysis: Record<string, number> = {};
+    for (const template of templates) {
+      try {
+        const score = await atsComplianceValidator.analyzeTemplate(template, jobDescription);
+        analysis[template.id] = score;
+      } catch (error) {
+        console.error(`Failed to analyze template ${template.id}:`, error);
+        analysis[template.id] = template.atsScore || 0;
+      }
     }
-  }, [jobDescription, templates, analyzeAtsCompliance]);
+    setAtsAnalysis(analysis);
+  }, [jobDescription, templates]);
 
   const loadTemplates = async () => {
     try {
@@ -51,24 +57,15 @@ const TemplateSelector: React.FC<TemplateSelectorProps> = ({
     }
   };
 
-  const analyzeAtsCompliance = useCallback(async () => {
-    if (!jobDescription) return;
+  useEffect(() => {
+    loadTemplates();
+  }, []);
 
-    const analysis: Record<string, number> = {};
-    for (const template of templates) {
-      try {
-        const score = await atsComplianceValidator.analyzeTemplate(
-          template,
-          jobDescription
-        );
-        analysis[template.id] = score;
-      } catch (error) {
-        console.error(`Failed to analyze template ${template.id}:`, error);
-        analysis[template.id] = template.atsScore;
-      }
+  useEffect(() => {
+    if (jobDescription && templates.length > 0) {
+      analyzeAtsCompliance();
     }
-    setAtsAnalysis(analysis);
-  }, [jobDescription, templates]);
+  }, [jobDescription, templates, analyzeAtsCompliance]);
 
   const getFilteredTemplates = () => {
     if (selectedCategory === 'all') return templates;

@@ -34,7 +34,7 @@ export function SearchInput({
   const [internalValue, setInternalValue] = useState(value);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const debounceRef = useRef<NodeJS.Timeout>();
+  const debounceRef = useRef<NodeJS.Timeout | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const id = React.useId?.() || Math.random().toString(36);
   const suggestionsRef = useRef<HTMLDivElement>(null);
