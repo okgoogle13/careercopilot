@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { ChevronUp, ChevronDown, Filter, Search, MoreHorizontal, Eye, Edit, Trash2 } from 'lucide-react';
+import { ChevronUp, ChevronDown, Filter, Search, MoreHorizontal } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Button } from './Button';
 import { Input } from './input';

@@ -159,7 +159,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
     }
   };
 
-  const getNotificationColor = (type: Notification['type'], priority: Notification['priority']) => {
+  const getNotificationColor = (type: Notification['type'], _priority: Notification['priority']) => {
     const baseColors = {
       info: 'bg-blue-50 text-blue-700 border-blue-200',
       warning: 'bg-yellow-50 text-yellow-700 border-yellow-200',
