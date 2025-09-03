@@ -787,13 +787,14 @@ const ApplicationCard: React.FC<{
               <div className="flex items-center gap-1">
                 <MapPin className="w-4 h-4 flex-shrink-0" />
                 <span className="truncate">{application.location}</span>
-            </div>
-            {application.appliedDate && (
-              <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                Applied {format(application.appliedDate, 'MMM d')}
               </div>
-            )}
+              {application.appliedDate && (
+                <div className="flex items-center gap-1">
+                  <Calendar className="w-4 h-4" />
+                  Applied {format(application.appliedDate, 'MMM d')}
+                </div>
+              )}
+            </div>
           </div>
 
           {application.salary && (
@@ -851,7 +852,6 @@ const ApplicationCard: React.FC<{
                 <Trash2 className="w-4 h-4" />
               </Button>
             </div>
-          </div>
         </div>
 
         {/* Mobile swipe hint */}
@@ -1398,7 +1398,8 @@ const AddApplicationModal: React.FC<{
         id: Date.now().toString(),
         date: new Date(),
         event: 'Application Created',
-        description: 'Application added to tracker'
+        description: 'Application added to tracker',
+        type: 'note'
       }]
     };
 

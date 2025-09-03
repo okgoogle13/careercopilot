@@ -284,7 +284,7 @@ export const TourGuide: React.FC<TourGuideProps> = ({ tourId, onComplete }) => {
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [currentStepIndex]);
+  }, [currentStepIndex, nextStep, prevStep, skipTour]);
 
   if (!tour || !isVisible) return null;
 

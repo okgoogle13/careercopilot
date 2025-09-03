@@ -20,6 +20,13 @@ interface ATSAnalysisDashboardProps {
   onBack: () => void;
 }
 
+interface UserProfile {
+  name: string;
+  experience: string[];
+  skills: string[];
+  education: string;
+}
+
 interface AnalysisResult {
   overallScore: number;
   categories: {
@@ -35,7 +42,7 @@ interface AnalysisResult {
   formatIssues: string[];
 }
 
-async function getATSAnalysis(jobDescription: string, userProfile: any): Promise<AnalysisResult> {
+async function getATSAnalysis(jobDescription: string, userProfile: UserProfile): Promise<AnalysisResult> {
   try {
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     
@@ -118,69 +125,6 @@ Focus on ATS compatibility, keyword matching, and formatting suggestions.`;
   }
 }
 
-const mockAnalysisResult: AnalysisResult = {
-  overallScore: 87,
-  categories: [
-    {
-      name: 'Keyword Optimization',
-      score: 89,
-      status: 'good',
-      suggestions: [
-        'Add more social services terminology',
-        'Include community outreach keywords',
-      ],
-    },
-    {
-      name: 'Format & Structure',
-      score: 95,
-      status: 'good',
-      suggestions: ['Excellent formatting consistency'],
-    },
-    {
-      name: 'Content Quality',
-      score: 82,
-      status: 'good',
-      suggestions: [
-        'Quantify client impact with numbers',
-        'Add more action verbs',
-        'Include recent volunteer work',
-      ],
-    },
-    {
-      name: 'ATS Compatibility',
-      score: 83,
-      status: 'good',
-      suggestions: [
-        'Use standard section headers',
-        'Reduce special characters',
-        'Add more relevant certifications',
-      ],
-    },
-  ],
-  keywordMatches: {
-    matched: [
-      'Community Support',
-      'Case Management',
-      'Crisis Intervention',
-      'Mental Health',
-      'Client Advocacy',
-      'Team Collaboration',
-    ],
-    missing: [
-      'Peer Support',
-      'Recovery Programs',
-      'Group Facilitation',
-      'Documentation',
-      'Risk Assessment',
-      'Cultural Competency',
-    ],
-  },
-  formatIssues: [
-    'Consider adding volunteer experience section',
-    'Include relevant certifications prominently',
-    'Ensure consistent date formatting',
-  ],
-};
 
 export function ATSAnalysisDashboard({ onBack }: ATSAnalysisDashboardProps) {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);

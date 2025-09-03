@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
-import { Upload, FileUp, X, FileText } from 'lucide-react';
+import { Upload, X, FileText } from 'lucide-react';
 import { Button } from '../ui/Button';
-// @ts-ignore - Temporary workaround for type issues
+// @ts-expect-error - Temporary workaround for type issues
 import Dropzone from 'react-dropzone';
 import { cn } from '../ui/utils';
 

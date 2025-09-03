@@ -15,10 +15,6 @@ interface FileUploadProps {
   value?: File[];
 }
 
-interface FileWithPreview extends File {
-  preview?: string;
-  id: string;
-}
 
 const FileUpload: React.FC<FileUploadProps> = ({
   onFileSelect,
