@@ -14,12 +14,6 @@ on:
       - 'backend/**'
       - '!backend/migrations/**'
   workflow_dispatch:
-    inputs:
-      force_fix:
-        description: 'Force auto-fix even without file changes'
-        required: false
-        default: 'false'
-        type: boolean
 
 permissions:
   contents: write
