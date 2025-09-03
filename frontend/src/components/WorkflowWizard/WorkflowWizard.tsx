@@ -74,7 +74,7 @@ const WorkflowWizard: React.FC<WorkflowWizardProps> = ({
         const workflowDef = getWorkflowDefinition(workflowId);
         setWorkflow(workflowDef);
         setStartTime(new Date());
-      } catch (error) {
+      } catch {
         toast.error('Failed to load workflow');
         onClose();
       } finally {
@@ -1271,7 +1271,7 @@ const TemplateSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange
   );
 };
 
-const ReviewStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
+const ReviewStep: React.FC<WorkflowStepProps> = ({ data, onDataChange: _onDataChange }) => {
   return (
     <div className="space-y-6">
       <div className="bg-green-50 rounded-lg p-4">
@@ -1329,7 +1329,7 @@ const ReviewStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   );
 };
 
-const CompletionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
+const CompletionStep: React.FC<WorkflowStepProps> = ({ data: _data, onDataChange: _onDataChange }) => {
   return (
     <div className="text-center space-y-6">
       <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">

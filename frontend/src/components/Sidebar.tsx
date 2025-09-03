@@ -11,7 +11,7 @@ interface SidebarProps {
   onTabChange?: (tab: string) => void;
 }
 
-export function Sidebar({ isOpen, onClose, activeTab, onTabChange }: SidebarProps) {
+export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();
   

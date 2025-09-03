@@ -33,7 +33,7 @@ interface HelpModalProps {
 
 export const HelpModal: React.FC<HelpModalProps> = ({
   content,
-  options,
+  options: _options,
   onDismiss,
 }) => {
   useEffect(() => {

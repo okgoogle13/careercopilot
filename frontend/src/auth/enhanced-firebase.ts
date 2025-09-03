@@ -242,12 +242,6 @@ export const getDB = () => {
 
 // For compatibility, also export db directly (but may be null initially)
 
-// Debug information
-const debugInfo = {
-  environment: import.meta.env.MODE,
-  firebaseConfig: firebaseConfig.projectId ? 'configured' : 'missing',
-  getStatus: () => authService.getConnectionStatus(),
-};
 
 // Initial Firebase connection attempt when the module loads.
 // Errors are handled internally by initializeFirebase and logged.
