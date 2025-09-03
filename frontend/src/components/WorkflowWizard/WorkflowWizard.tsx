@@ -17,13 +17,13 @@ interface WorkflowStep {
   estimatedTime: number; // minutes
   icon: React.ComponentType<{ className?: string }>;
   component: React.ComponentType<WorkflowStepProps>;
-  validation?: (data: any) => string | null;
+  validation?: (data: Record<string, unknown>) => string | null;
   dependencies?: string[]; // step IDs that must be completed first
 }
 
 interface WorkflowStepProps {
-  data: any;
-  onDataChange: (updates: any) => void;
+  data: Record<string, unknown>;
+  onDataChange: (updates: Record<string, unknown>) => void;
   onNext: () => void;
   onPrevious: () => void;
   isFirst: boolean;
