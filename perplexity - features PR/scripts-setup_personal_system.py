@@ -12,10 +12,11 @@ from pathlib import Path
 from typing import Dict, Any
 
 # Add project root to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from config.personal_config import PersonalCareerConfig, update_personal_config
 from src.backend.utils.firebase_client import FirebaseClient
+
 
 class PersonalSystemSetup:
     """Setup and configuration for personal CareerCopilot system"""
@@ -28,13 +29,13 @@ class PersonalSystemSetup:
         """Create necessary directories"""
 
         directories = [
-            'logs',
-            'data/templates',
-            'data/user_profiles',
-            'src/frontend/static/css',
-            'src/frontend/static/js',
-            'src/frontend/templates',
-            'tests/fixtures'
+            "logs",
+            "data/templates",
+            "data/user_profiles",
+            "src/frontend/static/css",
+            "src/frontend/static/js",
+            "src/frontend/templates",
+            "tests/fixtures",
         ]
 
         print("📁 Creating directory structure...")
@@ -45,7 +46,7 @@ class PersonalSystemSetup:
             print(f"  ✅ {directory}")
 
         # Create .gitkeep files for empty directories
-        (self.project_root / 'logs' / '.gitkeep').touch()
+        (self.project_root / "logs" / ".gitkeep").touch()
 
         print("✅ Directory structure created")
 
@@ -55,15 +56,15 @@ class PersonalSystemSetup:
         print("\n⚙️ Setting up environment configuration...")
 
         # Check if .env exists
-        env_file = self.project_root / '.env'
-        env_example = self.project_root / '.env.example'
+        env_file = self.project_root / ".env"
+        env_example = self.project_root / ".env.example"
 
         if not env_file.exists() and env_example.exists():
             # Copy .env.example to .env
-            with open(env_example, 'r') as f:
+            with open(env_example, "r") as f:
                 env_content = f.read()
 
-            with open(env_file, 'w') as f:
+            with open(env_file, "w") as f:
                 f.write(env_content)
 
             print("  ✅ Created .env file from template")
@@ -75,23 +76,40 @@ class PersonalSystemSetup:
         """Collect personal information from user"""
 
         print("\n👤 Personal Information Setup")
-        print("Please provide the following information for your personalized job search:")
+        print(
+            "Please provide the following information for your personalized job search:"
+        )
         print()
 
         name = input("Full Name [Your Name]: ").strip() or "Your Name"
-        email = input("Email [nishantdougall@gmail.com]: ").strip() or "nishantdougall@gmail.com"
-        location = input("Location [Northcote, VIC, Australia]: ").strip() or "Northcote, VIC, Australia"
+        email = (
+            input("Email [nishantdougall@gmail.com]: ").strip()
+            or "nishantdougall@gmail.com"
+        )
+        location = (
+            input("Location [Northcote, VIC, Australia]: ").strip()
+            or "Northcote, VIC, Australia"
+        )
 
         print("\n📈 Career Transition Details:")
-        career_from = input("Career transitioning FROM [Finance]: ").strip() or "Finance"
-        career_to = input("Career transitioning TO [Social Work/Community Services]: ").strip() or "Social Work/Community Services"
+        career_from = (
+            input("Career transitioning FROM [Finance]: ").strip() or "Finance"
+        )
+        career_to = (
+            input("Career transitioning TO [Social Work/Community Services]: ").strip()
+            or "Social Work/Community Services"
+        )
 
         print("\n🎯 Job Search Preferences:")
         print("Target roles (comma-separated):")
-        roles_input = input("  [Social Worker, Case Manager, Community Services Worker]: ").strip()
-        target_roles = [role.strip() for role in roles_input.split(',')] if roles_input else [
-            "Social Worker", "Case Manager", "Community Services Worker"
-        ]
+        roles_input = input(
+            "  [Social Worker, Case Manager, Community Services Worker]: "
+        ).strip()
+        target_roles = (
+            [role.strip() for role in roles_input.split(",")]
+            if roles_input
+            else ["Social Worker", "Case Manager", "Community Services Worker"]
+        )
 
         print("\n💰 Salary Expectations (AUD):")
         try:
@@ -101,8 +119,12 @@ class PersonalSystemSetup:
             salary_min, salary_max = 60000, 85000
 
         print("\n🤖 Automation Preferences:")
-        daily_scan = input("Enable daily job scanning? [Y/n]: ").strip().lower() not in ['n', 'no']
-        email_notifications = input("Enable email notifications? [Y/n]: ").strip().lower() not in ['n', 'no']
+        daily_scan = input(
+            "Enable daily job scanning? [Y/n]: "
+        ).strip().lower() not in ["n", "no"]
+        email_notifications = input(
+            "Enable email notifications? [Y/n]: "
+        ).strip().lower() not in ["n", "no"]
 
         return {
             "name": name,
@@ -113,7 +135,7 @@ class PersonalSystemSetup:
             "target_roles": target_roles,
             "salary_range": {"min": salary_min, "max": salary_max, "currency": "AUD"},
             "daily_job_scan": daily_scan,
-            "email_notifications": email_notifications
+            "email_notifications": email_notifications,
         }
 
     def create_personal_profile(self, personal_info: Dict[str, Any]):
@@ -136,7 +158,7 @@ class PersonalSystemSetup:
                     "background": f"Experienced {personal_info['career_transition_from'].lower()} professional transitioning to {personal_info['career_transition_to'].lower()}",
                     "motivation": "Driven by desire to make direct positive impact in communities",
                     "unique_value": f"Brings analytical skills and professional experience from {personal_info['career_transition_from'].lower()} to social work practice",
-                }
+                },
             },
             "experience": [
                 {
@@ -148,39 +170,47 @@ class PersonalSystemSetup:
                     "achievements": [
                         "Developed strong analytical and problem-solving capabilities",
                         "Built excellent client relationship and communication skills",
-                        "Gained experience in project management and stakeholder coordination"
-                    ]
+                        "Gained experience in project management and stakeholder coordination",
+                    ],
                 }
             ],
             "skills": [
-                "Analytical Thinking", "Problem Solving", "Communication",
-                "Client Relations", "Project Management", "Data Analysis",
-                "Cultural Competency", "Empathy", "Active Listening"
+                "Analytical Thinking",
+                "Problem Solving",
+                "Communication",
+                "Client Relations",
+                "Project Management",
+                "Data Analysis",
+                "Cultural Competency",
+                "Empathy",
+                "Active Listening",
             ],
             "education": [
                 {
                     "institution": "University",
                     "degree": f"Degree in {personal_info['career_transition_from']}",
                     "graduation_year": "2019",
-                    "relevant_coursework": []
+                    "relevant_coursework": [],
                 }
             ],
             "preferences": {
                 "target_roles": personal_info["target_roles"],
                 "locations": [personal_info["location"], "Remote", "Hybrid"],
                 "salary_range": personal_info["salary_range"],
-                "work_types": ["full_time", "part_time"]
+                "work_types": ["full_time", "part_time"],
             },
             "automation_settings": {
                 "daily_job_scan": personal_info["daily_job_scan"],
                 "email_notifications": personal_info["email_notifications"],
-                "morning_scan_time": "09:00"
-            }
+                "morning_scan_time": "09:00",
+            },
         }
 
         # Save profile
-        profile_file = self.project_root / 'data' / 'user_profiles' / 'personal_profile.json'
-        with open(profile_file, 'w') as f:
+        profile_file = (
+            self.project_root / "data" / "user_profiles" / "personal_profile.json"
+        )
+        with open(profile_file, "w") as f:
             json.dump(profile_data, f, indent=2)
 
         print("  ✅ Personal profile created")
@@ -253,12 +283,12 @@ Sincerely,
         """
 
         # Save templates
-        templates_dir = self.project_root / 'data' / 'templates'
+        templates_dir = self.project_root / "data" / "templates"
 
-        with open(templates_dir / 'resume_template.txt', 'w') as f:
+        with open(templates_dir / "resume_template.txt", "w") as f:
             f.write(resume_template)
 
-        with open(templates_dir / 'cover_letter_template.txt', 'w') as f:
+        with open(templates_dir / "cover_letter_template.txt", "w") as f:
             f.write(cover_letter_template)
 
         print("  ✅ Document templates created")
@@ -272,10 +302,7 @@ Sincerely,
             firebase_client = FirebaseClient()
 
             # Create initial user profile in Firestore
-            await firebase_client.save_user_profile(
-                "personal_user",
-                personal_info
-            )
+            await firebase_client.save_user_profile("personal_user", personal_info)
 
             print("  ✅ Firebase profile created")
 
@@ -374,8 +401,8 @@ htmlcov/
 .python-version
         """
 
-        gitignore_file = self.project_root / '.gitignore'
-        with open(gitignore_file, 'w') as f:
+        gitignore_file = self.project_root / ".gitignore"
+        with open(gitignore_file, "w") as f:
             f.write(gitignore_content.strip())
 
         print("✅ .gitignore created")
@@ -415,9 +442,13 @@ htmlcov/
             print("1. Edit .env with your API keys (Gemini, Firebase, Gmail)")
             print("2. Test the system: python scripts/daily_job_scan.py")
             print("3. Start the web interface: python src/backend/main.py")
-            print("4. Set up daily automation: python scripts/daily_job_scan.py --setup-cron")
+            print(
+                "4. Set up daily automation: python scripts/daily_job_scan.py --setup-cron"
+            )
             print()
-            print("📚 Documentation: Check docs/ folder for detailed setup instructions")
+            print(
+                "📚 Documentation: Check docs/ folder for detailed setup instructions"
+            )
             print("🆘 Support: Review README.md for troubleshooting")
 
         except KeyboardInterrupt:
@@ -427,11 +458,13 @@ htmlcov/
             print(f"\n❌ Setup failed: {str(e)}")
             raise
 
+
 async def main():
     """Main setup entry point"""
 
     setup = PersonalSystemSetup()
     await setup.run_setup()
+
 
 if __name__ == "__main__":
     asyncio.run(main())

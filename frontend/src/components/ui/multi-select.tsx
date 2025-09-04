@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Check, ChevronDown, X, Plus } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Badge } from './badge';
@@ -95,7 +95,7 @@ export function MultiSelect({
   };
 
   // Display logic for selected items
-  const getDisplayText = () => {
+  const getDisplayText = () => { // eslint-disable-line @typescript-eslint/no-unused-vars
     if (selectedOptions.length === 0) {
       return placeholder;
     }
@@ -274,7 +274,7 @@ interface SkillsMultiSelectProps
 export function SkillsMultiSelect({
   availableSkills,
   onAddSkill,
-  categories,
+  categories, // eslint-disable-line @typescript-eslint/no-unused-vars
   ...props
 }: SkillsMultiSelectProps) {
   const options: MultiSelectOption[] = availableSkills.map(skill => ({

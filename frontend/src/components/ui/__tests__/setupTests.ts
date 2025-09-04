@@ -1,7 +1,18 @@
 import '@testing-library/jest-dom';
 
+// Define global for testing environment
+declare const global: {
+  import: {
+    meta: {
+      env: Record<string, string | boolean>;
+    };
+  };
+  TextEncoder: typeof TextEncoder;
+  TextDecoder: typeof TextDecoder;
+};
+
 // Mock import.meta for Jest
-Object.defineProperty(global, 'import', {
+Object.defineProperty(globalThis, 'import', {
   value: {
     meta: {
       env: {
@@ -13,10 +24,12 @@ Object.defineProperty(global, 'import', {
 });
 
 // Add TextEncoder/TextDecoder polyfills
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+globalThis.TextEncoder = TextEncoder;
+globalThis.TextDecoder = TextDecoder;
 
 // Add jest global for tests
 declare global {
-  const jest: any;
+  const jest: {
+    fn: (implementation?: (...args: unknown[]) => unknown) => unknown;
+  };
 }

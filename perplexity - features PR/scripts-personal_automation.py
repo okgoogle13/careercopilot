@@ -16,13 +16,14 @@ from rich.panel import Panel
 from rich.progress import Progress, TaskID
 
 # Add project root to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from src.backend.personal_workflow import PersonalCareerWorkflow
 from config.personal_config import get_personal_config
 
 console = Console()
 logger = logging.getLogger(__name__)
+
 
 class PersonalAutomation:
     """Personal automation interface for CareerCopilot"""
@@ -34,10 +35,9 @@ class PersonalAutomation:
     async def morning_routine(self) -> None:
         """Run the complete morning job discovery routine"""
 
-        console.print(Panel.fit(
-            "🌅 Starting Morning Career Routine",
-            style="bold blue"
-        ))
+        console.print(
+            Panel.fit("🌅 Starting Morning Career Routine", style="bold blue")
+        )
 
         try:
             with Progress() as progress:
@@ -69,10 +69,9 @@ class PersonalAutomation:
     async def apply_to_job(self, job_url: str, message: str = None) -> None:
         """Apply to a specific job with full automation"""
 
-        console.print(Panel.fit(
-            f"📝 Preparing Application\n{job_url}",
-            style="bold green"
-        ))
+        console.print(
+            Panel.fit(f"📝 Preparing Application\n{job_url}", style="bold green")
+        )
 
         try:
             with Progress() as progress:
@@ -97,20 +96,21 @@ class PersonalAutomation:
             self._display_application_results(results)
 
         except Exception as e:
-            console.print(f"❌ Application preparation failed: {str(e)}", style="bold red")
+            console.print(
+                f"❌ Application preparation failed: {str(e)}", style="bold red"
+            )
             logger.error(f"Application error: {e}")
 
     async def weekly_review(self) -> None:
         """Run weekly application review and progress summary"""
 
-        console.print(Panel.fit(
-            "📊 Weekly Career Review",
-            style="bold magenta"
-        ))
+        console.print(Panel.fit("📊 Weekly Career Review", style="bold magenta"))
 
         try:
             with Progress() as progress:
-                task = progress.add_task("[magenta]Reviewing applications...", total=100)
+                task = progress.add_task(
+                    "[magenta]Reviewing applications...", total=100
+                )
 
                 progress.update(task, advance=33)
                 console.print("📧 Checking email for responses...")
@@ -134,10 +134,9 @@ class PersonalAutomation:
     async def quick_research(self, job_url: str) -> None:
         """Quick company research for a job URL"""
 
-        console.print(Panel.fit(
-            f"🏢 Quick Company Research\n{job_url}",
-            style="bold cyan"
-        ))
+        console.print(
+            Panel.fit(f"🏢 Quick Company Research\n{job_url}", style="bold cyan")
+        )
 
         try:
             with Progress() as progress:
@@ -173,17 +172,17 @@ class PersonalAutomation:
         console.print(table)
 
         if results.get("summary"):
-            console.print(Panel(
-                results["summary"],
-                title="📋 Daily Summary",
-                style="green"
-            ))
+            console.print(
+                Panel(results["summary"], title="📋 Daily Summary", style="green")
+            )
 
         if results.get("jobs"):
             console.print("\n🎯 Top Opportunities:")
             for i, job in enumerate(results["jobs"][:5], 1):
-                console.print(f"{i}. {job['title']} at {job['company']} "
-                            f"(Match: {job['match_score']:.1%})")
+                console.print(
+                    f"{i}. {job['title']} at {job['company']} "
+                    f"(Match: {job['match_score']:.1%})"
+                )
 
     def _display_application_results(self, results: dict) -> None:
         """Display application preparation results"""
@@ -197,12 +196,23 @@ class PersonalAutomation:
 
             table.add_row("Job Title", results["job_title"])
             table.add_row("Company", results["company"])
-            table.add_row("Materials Generated", "✅ Yes" if results["materials_generated"] else "❌ No")
-            table.add_row("Research Completed", "✅ Yes" if results["research_completed"] else "❌ No")
-            table.add_row("Application Tracked", "✅ Yes" if results["application_tracked"] else "❌ No")
+            table.add_row(
+                "Materials Generated",
+                "✅ Yes" if results["materials_generated"] else "❌ No",
+            )
+            table.add_row(
+                "Research Completed",
+                "✅ Yes" if results["research_completed"] else "❌ No",
+            )
+            table.add_row(
+                "Application Tracked",
+                "✅ Yes" if results["application_tracked"] else "❌ No",
+            )
 
             console.print(table)
-            console.print("\n📧 Check your email for detailed materials and talking points!")
+            console.print(
+                "\n📧 Check your email for detailed materials and talking points!"
+            )
         else:
             console.print("❌ Application preparation failed", style="bold red")
 
@@ -219,18 +229,18 @@ class PersonalAutomation:
         console.print(table)
 
         if results.get("summary"):
-            console.print(Panel(
-                results["summary"],
-                title="📈 Weekly Insights",
-                style="magenta"
-            ))
+            console.print(
+                Panel(results["summary"], title="📈 Weekly Insights", style="magenta")
+            )
 
         if results.get("skills_analysis"):
-            console.print(Panel(
-                results["skills_analysis"]["recommendations"],
-                title="🎯 Skills Development Focus",
-                style="yellow"
-            ))
+            console.print(
+                Panel(
+                    results["skills_analysis"]["recommendations"],
+                    title="🎯 Skills Development Focus",
+                    style="yellow",
+                )
+            )
 
     def _display_research_results(self, research: dict) -> None:
         """Display company research results"""
@@ -238,20 +248,25 @@ class PersonalAutomation:
         console.print(f"\n🏢 **{research['company']}**", style="bold blue")
 
         if research.get("talking_points"):
-            console.print(Panel(
-                research["talking_points"][:500] + "...",
-                title="💬 Key Talking Points",
-                style="green"
-            ))
+            console.print(
+                Panel(
+                    research["talking_points"][:500] + "...",
+                    title="💬 Key Talking Points",
+                    style="green",
+                )
+            )
 
         if research.get("application_strategy"):
-            console.print(Panel(
-                research["application_strategy"][:500] + "...",
-                title="🎯 Application Strategy",
-                style="cyan"
-            ))
+            console.print(
+                Panel(
+                    research["application_strategy"][:500] + "...",
+                    title="🎯 Application Strategy",
+                    style="cyan",
+                )
+            )
 
         console.print("\n📝 Full research details saved to your dashboard!")
+
 
 def create_parser() -> argparse.ArgumentParser:
     """Create command line argument parser"""
@@ -265,7 +280,7 @@ Examples:
   %(prog)s apply "https://job.com"    # Apply to specific job
   %(prog)s review                     # Weekly review
   %(prog)s research "https://job.com" # Research company
-        """
+        """,
     )
 
     subparsers = parser.add_subparsers(dest="command", help="Available commands")
@@ -282,7 +297,9 @@ Examples:
     review_parser = subparsers.add_parser("review", help="Run weekly review")
 
     # Company research
-    research_parser = subparsers.add_parser("research", help="Research company from job URL")
+    research_parser = subparsers.add_parser(
+        "research", help="Research company from job URL"
+    )
     research_parser.add_argument("url", help="Job URL to research")
 
     # Configuration
@@ -293,6 +310,7 @@ Examples:
 
     return parser
 
+
 async def main():
     """Main entry point for personal automation"""
 
@@ -301,14 +319,10 @@ async def main():
 
     # Setup logging
     log_level = logging.DEBUG if args.verbose else logging.INFO
-    log_format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    log_format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 
     if args.log_file:
-        logging.basicConfig(
-            level=log_level,
-            format=log_format,
-            filename=args.log_file
-        )
+        logging.basicConfig(level=log_level, format=log_format, filename=args.log_file)
     else:
         logging.basicConfig(level=log_level, format=log_format)
 
@@ -335,10 +349,7 @@ async def main():
         elif args.command == "config":
             config = get_personal_config()
 
-            console.print(Panel.fit(
-                "⚙️ Personal Configuration",
-                style="bold blue"
-            ))
+            console.print(Panel.fit("⚙️ Personal Configuration", style="bold blue"))
 
             table = Table(title="Current Settings")
             table.add_column("Setting", style="cyan")
@@ -347,9 +358,15 @@ async def main():
             table.add_row("Name", config.name)
             table.add_row("Email", config.email)
             table.add_row("Location", config.location)
-            table.add_row("Career Transition", f"{config.career_transition_from} → {config.career_transition_to}")
+            table.add_row(
+                "Career Transition",
+                f"{config.career_transition_from} → {config.career_transition_to}",
+            )
             table.add_row("Target Roles", ", ".join(config.target_roles[:3]) + "...")
-            table.add_row("Daily Automation", "✅ Enabled" if config.daily_job_scan else "❌ Disabled")
+            table.add_row(
+                "Daily Automation",
+                "✅ Enabled" if config.daily_job_scan else "❌ Disabled",
+            )
 
             console.print(table)
 
@@ -361,6 +378,7 @@ async def main():
         if args.verbose:
             console.print_exception()
         sys.exit(1)
+
 
 if __name__ == "__main__":
     # Run the async main function

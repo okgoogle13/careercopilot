@@ -4,13 +4,7 @@ import { cn } from '../../lib/utils';
 import { Button } from './Button';
 import { Input } from './input';
 import { Checkbox } from './checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from './dropdown-menu';
-import { Badge } from './badge';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu';
 import { Skeleton } from './skeleton';
 
 export interface DataGridColumn<T = any> {
@@ -82,7 +76,7 @@ export function DataGrid<T = any>({
   onRowClick,
   onRowSelect,
   selectable = false,
-  selectedRows = [],
+  selectedRows = [], // eslint-disable-line @typescript-eslint/no-unused-vars
   keyExtractor = (_, index: number) => index.toString(),
   sortable = true,
   filterable = true,

@@ -13,11 +13,13 @@ from typing import Dict, Any, List, Optional
 try:
     import firebase_admin
     from firebase_admin import credentials, firestore, storage
+
     FIREBASE_AVAILABLE = True
 except ImportError:
     FIREBASE_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
+
 
 class FirebaseClient:
     """Simplified Firebase client for personal use"""
@@ -30,28 +32,35 @@ class FirebaseClient:
         if FIREBASE_AVAILABLE:
             self._initialize_firebase()
         else:
-            logger.warning("Firebase SDK not available. Install with: pip install firebase-admin")
+            logger.warning(
+                "Firebase SDK not available. Install with: pip install firebase-admin"
+            )
 
     def _initialize_firebase(self):
         """Initialize Firebase connection"""
 
         try:
             # Get credentials path
-            credentials_path = os.getenv('FIREBASE_CREDENTIALS_PATH')
-            project_id = os.getenv('FIREBASE_PROJECT_ID')
+            credentials_path = os.getenv("FIREBASE_CREDENTIALS_PATH")
+            project_id = os.getenv("FIREBASE_PROJECT_ID")
 
             if not credentials_path or not project_id:
-                logger.warning("Firebase credentials not configured. Set FIREBASE_CREDENTIALS_PATH and FIREBASE_PROJECT_ID")
+                logger.warning(
+                    "Firebase credentials not configured. Set FIREBASE_CREDENTIALS_PATH and FIREBASE_PROJECT_ID"
+                )
                 return
 
             # Check if already initialized
             if not firebase_admin._apps:
                 # Initialize Firebase
                 cred = credentials.Certificate(credentials_path)
-                firebase_admin.initialize_app(cred, {
-                    'projectId': project_id,
-                    'storageBucket': f'{project_id}.appspot.com'
-                })
+                firebase_admin.initialize_app(
+                    cred,
+                    {
+                        "projectId": project_id,
+                        "storageBucket": f"{project_id}.appspot.com",
+                    },
+                )
 
             # Get Firestore client
             self.db = firestore.client()
@@ -70,7 +79,9 @@ class FirebaseClient:
         """Check if Firebase is properly initialized"""
 
         if not self.initialized:
-            raise RuntimeError("Firebase not initialized. Check credentials and configuration.")
+            raise RuntimeError(
+                "Firebase not initialized. Check credentials and configuration."
+            )
 
     # User Profile Operations
 
@@ -82,7 +93,7 @@ class FirebaseClient:
             return None
 
         try:
-            doc_ref = self.db.collection('users').document(user_id)
+            doc_ref = self.db.collection("users").document(user_id)
             doc = doc_ref.get()
 
             if doc.exists:
@@ -97,7 +108,9 @@ class FirebaseClient:
             logger.error(f"Failed to get user profile: {e}")
             return None
 
-    async def save_user_profile(self, user_id: str, profile_data: Dict[str, Any]) -> bool:
+    async def save_user_profile(
+        self, user_id: str, profile_data: Dict[str, Any]
+    ) -> bool:
         """Save user profile to Firestore"""
 
         if not self.initialized:
@@ -105,13 +118,15 @@ class FirebaseClient:
             return await self._save_profile_locally(user_id, profile_data)
 
         try:
-            doc_ref = self.db.collection('users').document(user_id)
+            doc_ref = self.db.collection("users").document(user_id)
 
             # Add metadata
-            profile_data.update({
-                'last_updated': datetime.now().isoformat(),
-                'updated_by': 'personal_system'
-            })
+            profile_data.update(
+                {
+                    "last_updated": datetime.now().isoformat(),
+                    "updated_by": "personal_system",
+                }
+            )
 
             doc_ref.set(profile_data, merge=True)
             logger.info(f"User profile saved for {user_id}")
@@ -121,18 +136,20 @@ class FirebaseClient:
             logger.error(f"Failed to save user profile: {e}")
             return False
 
-    async def _save_profile_locally(self, user_id: str, profile_data: Dict[str, Any]) -> bool:
+    async def _save_profile_locally(
+        self, user_id: str, profile_data: Dict[str, Any]
+    ) -> bool:
         """Fallback: save profile to local file"""
 
         try:
             from pathlib import Path
 
-            profiles_dir = Path('data/user_profiles')
+            profiles_dir = Path("data/user_profiles")
             profiles_dir.mkdir(exist_ok=True)
 
-            profile_file = profiles_dir / f'{user_id}_profile.json'
+            profile_file = profiles_dir / f"{user_id}_profile.json"
 
-            with open(profile_file, 'w') as f:
+            with open(profile_file, "w") as f:
                 json.dump(profile_data, f, indent=2, default=str)
 
             logger.info(f"User profile saved locally for {user_id}")
@@ -144,19 +161,25 @@ class FirebaseClient:
 
     # Job and Application Operations
 
-    async def save_job_opportunity(self, user_id: str, job_data: Dict[str, Any]) -> bool:
+    async def save_job_opportunity(
+        self, user_id: str, job_data: Dict[str, Any]
+    ) -> bool:
         """Save job opportunity to Firestore"""
 
         if not self.initialized:
             return True  # Graceful degradation
 
         try:
-            doc_ref = self.db.collection('users').document(user_id).collection('jobs').document()
+            doc_ref = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("jobs")
+                .document()
+            )
 
-            job_data.update({
-                'created_at': datetime.now().isoformat(),
-                'user_id': user_id
-            })
+            job_data.update(
+                {"created_at": datetime.now().isoformat(), "user_id": user_id}
+            )
 
             doc_ref.set(job_data)
             logger.info(f"Job opportunity saved: {job_data.get('title', 'Unknown')}")
@@ -166,25 +189,29 @@ class FirebaseClient:
             logger.error(f"Failed to save job opportunity: {e}")
             return False
 
-    async def get_job_opportunities(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+    async def get_job_opportunities(
+        self, user_id: str, limit: int = 50
+    ) -> List[Dict[str, Any]]:
         """Get job opportunities for user"""
 
         if not self.initialized:
             return []
 
         try:
-            query = (self.db.collection('users')
-                    .document(user_id)
-                    .collection('jobs')
-                    .order_by('created_at', direction=firestore.Query.DESCENDING)
-                    .limit(limit))
+            query = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("jobs")
+                .order_by("created_at", direction=firestore.Query.DESCENDING)
+                .limit(limit)
+            )
 
             docs = query.stream()
 
             jobs = []
             for doc in docs:
                 job_data = doc.to_dict()
-                job_data['id'] = doc.id
+                job_data["id"] = doc.id
                 jobs.append(job_data)
 
             logger.info(f"Retrieved {len(jobs)} job opportunities for {user_id}")
@@ -194,48 +221,63 @@ class FirebaseClient:
             logger.error(f"Failed to get job opportunities: {e}")
             return []
 
-    async def save_application(self, user_id: str, application_data: Dict[str, Any]) -> bool:
+    async def save_application(
+        self, user_id: str, application_data: Dict[str, Any]
+    ) -> bool:
         """Save job application to Firestore"""
 
         if not self.initialized:
             return True
 
         try:
-            doc_ref = self.db.collection('users').document(user_id).collection('applications').document()
+            doc_ref = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("applications")
+                .document()
+            )
 
-            application_data.update({
-                'created_at': datetime.now().isoformat(),
-                'user_id': user_id,
-                'last_updated': datetime.now().isoformat()
-            })
+            application_data.update(
+                {
+                    "created_at": datetime.now().isoformat(),
+                    "user_id": user_id,
+                    "last_updated": datetime.now().isoformat(),
+                }
+            )
 
             doc_ref.set(application_data)
-            logger.info(f"Application saved: {application_data.get('job_title', 'Unknown')}")
+            logger.info(
+                f"Application saved: {application_data.get('job_title', 'Unknown')}"
+            )
             return True
 
         except Exception as e:
             logger.error(f"Failed to save application: {e}")
             return False
 
-    async def get_applications(self, user_id: str, limit: int = 50) -> List[Dict[str, Any]]:
+    async def get_applications(
+        self, user_id: str, limit: int = 50
+    ) -> List[Dict[str, Any]]:
         """Get applications for user"""
 
         if not self.initialized:
             return []
 
         try:
-            query = (self.db.collection('users')
-                    .document(user_id)
-                    .collection('applications')
-                    .order_by('created_at', direction=firestore.Query.DESCENDING)
-                    .limit(limit))
+            query = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("applications")
+                .order_by("created_at", direction=firestore.Query.DESCENDING)
+                .limit(limit)
+            )
 
             docs = query.stream()
 
             applications = []
             for doc in docs:
                 app_data = doc.to_dict()
-                app_data['id'] = doc.id
+                app_data["id"] = doc.id
                 applications.append(app_data)
 
             logger.info(f"Retrieved {len(applications)} applications for {user_id}")
@@ -247,23 +289,29 @@ class FirebaseClient:
 
     # Company Research Operations
 
-    async def save_company_research(self, user_id: str, company_name: str, research_data: Dict[str, Any]) -> bool:
+    async def save_company_research(
+        self, user_id: str, company_name: str, research_data: Dict[str, Any]
+    ) -> bool:
         """Save company research data"""
 
         if not self.initialized:
             return True
 
         try:
-            doc_ref = (self.db.collection('users')
-                      .document(user_id)
-                      .collection('company_research')
-                      .document(company_name.lower().replace(' ', '_')))
+            doc_ref = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("company_research")
+                .document(company_name.lower().replace(" ", "_"))
+            )
 
-            research_data.update({
-                'created_at': datetime.now().isoformat(),
-                'user_id': user_id,
-                'company_name': company_name
-            })
+            research_data.update(
+                {
+                    "created_at": datetime.now().isoformat(),
+                    "user_id": user_id,
+                    "company_name": company_name,
+                }
+            )
 
             doc_ref.set(research_data, merge=True)
             logger.info(f"Company research saved: {company_name}")
@@ -273,17 +321,21 @@ class FirebaseClient:
             logger.error(f"Failed to save company research: {e}")
             return False
 
-    async def get_company_research(self, user_id: str, company_name: str) -> Optional[Dict[str, Any]]:
+    async def get_company_research(
+        self, user_id: str, company_name: str
+    ) -> Optional[Dict[str, Any]]:
         """Get company research data"""
 
         if not self.initialized:
             return None
 
         try:
-            doc_ref = (self.db.collection('users')
-                      .document(user_id)
-                      .collection('company_research')
-                      .document(company_name.lower().replace(' ', '_')))
+            doc_ref = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("company_research")
+                .document(company_name.lower().replace(" ", "_"))
+            )
 
             doc = doc_ref.get()
 
@@ -300,23 +352,29 @@ class FirebaseClient:
 
     # Learning and Analytics Operations
 
-    async def save_learning_data(self, user_id: str, agent_name: str, learning_data: Dict[str, Any]) -> bool:
+    async def save_learning_data(
+        self, user_id: str, agent_name: str, learning_data: Dict[str, Any]
+    ) -> bool:
         """Save agent learning data"""
 
         if not self.initialized:
             return True
 
         try:
-            doc_ref = (self.db.collection('users')
-                      .document(user_id)
-                      .collection('agent_learning')
-                      .document(agent_name))
+            doc_ref = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("agent_learning")
+                .document(agent_name)
+            )
 
-            learning_data.update({
-                'last_updated': datetime.now().isoformat(),
-                'user_id': user_id,
-                'agent_name': agent_name
-            })
+            learning_data.update(
+                {
+                    "last_updated": datetime.now().isoformat(),
+                    "user_id": user_id,
+                    "agent_name": agent_name,
+                }
+            )
 
             doc_ref.set(learning_data, merge=True)
             logger.info(f"Learning data saved for agent: {agent_name}")
@@ -326,17 +384,21 @@ class FirebaseClient:
             logger.error(f"Failed to save learning data: {e}")
             return False
 
-    async def get_learning_data(self, user_id: str, agent_name: str) -> Optional[Dict[str, Any]]:
+    async def get_learning_data(
+        self, user_id: str, agent_name: str
+    ) -> Optional[Dict[str, Any]]:
         """Get agent learning data"""
 
         if not self.initialized:
             return None
 
         try:
-            doc_ref = (self.db.collection('users')
-                      .document(user_id)
-                      .collection('agent_learning')
-                      .document(agent_name))
+            doc_ref = (
+                self.db.collection("users")
+                .document(user_id)
+                .collection("agent_learning")
+                .document(agent_name)
+            )
 
             doc = doc_ref.get()
 
@@ -351,8 +413,9 @@ class FirebaseClient:
 
     # Document Storage Operations
 
-    async def upload_document(self, user_id: str, document_content: str,
-                            filename: str) -> Optional[str]:
+    async def upload_document(
+        self, user_id: str, document_content: str, filename: str
+    ) -> Optional[str]:
         """Upload document to Firebase Storage"""
 
         if not self.initialized or not self.bucket:
@@ -362,10 +425,7 @@ class FirebaseClient:
             blob_path = f"users/{user_id}/documents/{filename}"
             blob = self.bucket.blob(blob_path)
 
-            blob.upload_from_string(
-                document_content,
-                content_type='text/plain'
-            )
+            blob.upload_from_string(document_content, content_type="text/plain")
 
             # Make blob publicly readable (optional)
             blob.make_public()
@@ -414,7 +474,7 @@ class FirebaseClient:
             return {
                 "jobs_discovered": jobs_count,
                 "applications_submitted": apps_count,
-                "last_updated": datetime.now().isoformat()
+                "last_updated": datetime.now().isoformat(),
             }
 
         except Exception as e:

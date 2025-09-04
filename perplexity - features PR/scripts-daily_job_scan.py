@@ -13,7 +13,7 @@ from datetime import datetime
 from typing import List, Dict, Any
 
 # Add project root to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 
 from src.backend.personal_workflow import PersonalCareerWorkflow
 from config.personal_config import get_personal_config
@@ -21,14 +21,12 @@ from config.personal_config import get_personal_config
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('logs/daily_job_scan.log'),
-        logging.StreamHandler()
-    ]
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler("logs/daily_job_scan.log"), logging.StreamHandler()],
 )
 
 logger = logging.getLogger(__name__)
+
 
 class DailyJobScanner:
     """Personal daily job scanning system"""
@@ -77,11 +75,12 @@ class DailyJobScanner:
 
             email_agent = EmailIntegrationAgent()
 
-            await email_agent.send({
-                "action": "send",
-                "recipient": self.config.email,
-                "subject": "❌ Daily Job Scan Failed",
-                "body": f"""
+            await email_agent.send(
+                {
+                    "action": "send",
+                    "recipient": self.config.email,
+                    "subject": "❌ Daily Job Scan Failed",
+                    "body": f"""
 Hi {self.config.name},
 
 Your daily job scan encountered an error:
@@ -94,8 +93,9 @@ python scripts/daily_job_scan.py
 
 Best regards,
 CareerCopilot System
-                """
-            })
+                """,
+                }
+            )
 
         except Exception as e:
             logger.error(f"Failed to send error notification: {e}")
@@ -103,9 +103,9 @@ CareerCopilot System
     def print_summary(self, results: Dict[str, Any]) -> None:
         """Print human-readable summary to console"""
 
-        print("\n" + "="*50)
+        print("\n" + "=" * 50)
         print("📊 DAILY JOB SCAN SUMMARY")
-        print("="*50)
+        print("=" * 50)
 
         print(f"📅 Date: {datetime.now().strftime('%A, %B %d, %Y')}")
         print(f"👤 User: {self.config.name}")
@@ -116,19 +116,22 @@ CareerCopilot System
         print(f"  Promising Matches: {results['promising_jobs']}")
         print(f"  Application Materials Prepared: {results['materials_prepared']}")
 
-        if results.get('jobs'):
+        if results.get("jobs"):
             print(f"\n🎯 TOP OPPORTUNITIES:")
-            for i, job in enumerate(results['jobs'][:5], 1):
-                match_score = job.get('match_score', 0)
+            for i, job in enumerate(results["jobs"][:5], 1):
+                match_score = job.get("match_score", 0)
                 print(f"  {i}. {job['title']}")
                 print(f"     Company: {job['company']}")
                 print(f"     Match: {match_score:.1%}")
                 print(f"     Location: {job.get('location', 'Not specified')}")
                 print()
 
-        print(f"📧 Email Summary: {'Sent' if self.config.email_notifications else 'Disabled'}")
+        print(
+            f"📧 Email Summary: {'Sent' if self.config.email_notifications else 'Disabled'}"
+        )
         print(f"📝 Logs: logs/daily_job_scan.log")
-        print("="*50)
+        print("=" * 50)
+
 
 async def main():
     """Main entry point for daily job scan"""
@@ -155,18 +158,21 @@ async def main():
         logger.error(f"Daily scan failed: {e}")
         sys.exit(1)
 
+
 def setup_cron_job():
     """Helper function to set up cron job for daily scanning"""
 
     config = get_personal_config()
     scan_time = config.morning_scan_time  # e.g., "09:00"
-    hour, minute = scan_time.split(':')
+    hour, minute = scan_time.split(":")
 
     script_path = os.path.abspath(__file__)
     python_path = sys.executable
-    log_file = os.path.join(os.path.dirname(script_path), '..', 'logs', 'cron.log')
+    log_file = os.path.join(os.path.dirname(script_path), "..", "logs", "cron.log")
 
-    cron_command = f"{minute} {hour} * * * {python_path} {script_path} >> {log_file} 2>&1"
+    cron_command = (
+        f"{minute} {hour} * * * {python_path} {script_path} >> {log_file} 2>&1"
+    )
 
     print("To set up automated daily scanning, add this to your crontab:")
     print(f"(Run 'crontab -e' and add the following line)")
@@ -174,6 +180,7 @@ def setup_cron_job():
     print(cron_command)
     print()
     print(f"This will run daily at {scan_time} and log to {log_file}")
+
 
 if __name__ == "__main__":
     # Check if user wants to see cron setup
