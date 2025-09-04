@@ -17,6 +17,7 @@ from src.backend.utils.firebase_client import FirebaseClient
 
 logger = logging.getLogger(__name__)
 
+
 class BaseAgent(ABC):
     """Base class for all CareerCopilot agents"""
 
@@ -39,10 +40,12 @@ class BaseAgent(ABC):
             "target_roles": self.config.target_roles,
             "personal_story": self.config.personal_story,
             "transferable_skills": self.config.transferable_skills[:5],  # Top 5 skills
-            "organization_values": self.config.organization_values[:3]   # Top 3 values
+            "organization_values": self.config.organization_values[:3],  # Top 3 values
         }
 
-    async def execute_with_monitoring(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
+    async def execute_with_monitoring(
+        self, task_data: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Execute agent task with monitoring and error handling"""
 
         start_time = datetime.now()
@@ -53,8 +56,8 @@ class BaseAgent(ABC):
             extra={
                 "agent": self.agent_name,
                 "correlation_id": correlation_id,
-                "task_type": task_data.get("task_type", "unknown")
-            }
+                "task_type": task_data.get("task_type", "unknown"),
+            },
         )
 
         try:
@@ -70,11 +73,14 @@ class BaseAgent(ABC):
             result = await self._execute_core_logic(task_data)
 
             # Cache result for future use
-            await self.cache.set(cache_key, {
-                "data": result,
-                "timestamp": datetime.now().isoformat(),
-                "agent": self.agent_name
-            })
+            await self.cache.set(
+                cache_key,
+                {
+                    "data": result,
+                    "timestamp": datetime.now().isoformat(),
+                    "agent": self.agent_name,
+                },
+            )
 
             execution_time = (datetime.now() - start_time).total_seconds()
 
@@ -83,8 +89,8 @@ class BaseAgent(ABC):
                 extra={
                     "agent": self.agent_name,
                     "correlation_id": correlation_id,
-                    "execution_time": execution_time
-                }
+                    "execution_time": execution_time,
+                },
             )
 
             return self._format_success_response(result)
@@ -98,8 +104,8 @@ class BaseAgent(ABC):
                     "agent": self.agent_name,
                     "correlation_id": correlation_id,
                     "error": str(e),
-                    "execution_time": execution_time
-                }
+                    "execution_time": execution_time,
+                },
             )
 
             return self._format_error_response(str(e))
@@ -113,16 +119,22 @@ class BaseAgent(ABC):
         """Generate cache key for task data"""
         # Create a hash of relevant task data for caching
         import hashlib
+
         task_str = json.dumps(task_data, sort_keys=True)
         return f"{self.agent_name}_{hashlib.md5(task_str.encode()).hexdigest()[:10]}"
 
-    def _is_cache_valid(self, cached_result: Dict[str, Any], ttl_hours: int = 24) -> bool:
+    def _is_cache_valid(
+        self, cached_result: Dict[str, Any], ttl_hours: int = 24
+    ) -> bool:
         """Check if cached result is still valid"""
         from dateutil.parser import parse
+
         cached_time = parse(cached_result["timestamp"])
         now = datetime.now()
 
-        return (now - cached_time.replace(tzinfo=None)).total_seconds() < (ttl_hours * 3600)
+        return (now - cached_time.replace(tzinfo=None)).total_seconds() < (
+            ttl_hours * 3600
+        )
 
     def _format_success_response(self, result: Dict[str, Any]) -> Dict[str, Any]:
         """Format successful response with metadata"""
@@ -130,7 +142,7 @@ class BaseAgent(ABC):
             "success": True,
             "agent": self.agent_name,
             "timestamp": datetime.now().isoformat(),
-            "data": result
+            "data": result,
         }
 
     def _format_error_response(self, error_message: str) -> Dict[str, Any]:
@@ -140,11 +152,12 @@ class BaseAgent(ABC):
             "agent": self.agent_name,
             "timestamp": datetime.now().isoformat(),
             "error": error_message,
-            "retry_after": 300  # 5 minutes
+            "retry_after": 300,  # 5 minutes
         }
 
-    async def generate_ai_response(self, prompt: str, model: str = "gemini-1.5-pro",
-                                 temperature: float = 0.7) -> str:
+    async def generate_ai_response(
+        self, prompt: str, model: str = "gemini-1.5-pro", temperature: float = 0.7
+    ) -> str:
         """Generate AI response with personal context"""
 
         # Add personal context to prompt
@@ -167,10 +180,7 @@ class BaseAgent(ABC):
             response = await ai.generate(
                 model=model,
                 prompt=enhanced_prompt,
-                config={
-                    "temperature": temperature,
-                    "maxOutputTokens": 4096
-                }
+                config={"temperature": temperature, "maxOutputTokens": 4096},
             )
 
             return response.text()
@@ -179,8 +189,9 @@ class BaseAgent(ABC):
             self.logger.error(f"AI generation failed: {e}")
             raise
 
-    async def generate_structured_ai_response(self, prompt: str, schema: Dict[str, Any],
-                                            model: str = "gemini-1.5-pro") -> Dict[str, Any]:
+    async def generate_structured_ai_response(
+        self, prompt: str, schema: Dict[str, Any], model: str = "gemini-1.5-pro"
+    ) -> Dict[str, Any]:
         """Generate structured AI response with JSON output"""
 
         structured_prompt = f"""
@@ -199,7 +210,8 @@ class BaseAgent(ABC):
         except json.JSONDecodeError:
             # Try to extract JSON from response
             import re
-            json_match = re.search(r'```json\s*(\{.*?\})\s*```', response, re.DOTALL)
+
+            json_match = re.search(r"```json\s*(\{.*?\})\s*```", response, re.DOTALL)
             if json_match:
                 return json.loads(json_match.group(1))
             else:
@@ -221,6 +233,7 @@ class BaseAgent(ABC):
         and highlight how their finance background adds unique value to social work.
         """
 
+
 class PersonalizedAgent(BaseAgent):
     """Enhanced base class with additional personal optimizations"""
 
@@ -229,26 +242,28 @@ class PersonalizedAgent(BaseAgent):
         self.personal_templates = {}
         self.success_patterns = {}
 
-    async def learn_from_success(self, task_type: str, successful_result: Dict[str, Any]) -> None:
+    async def learn_from_success(
+        self, task_type: str, successful_result: Dict[str, Any]
+    ) -> None:
         """Learn from successful applications for future improvements"""
 
         if task_type not in self.success_patterns:
             self.success_patterns[task_type] = []
 
-        self.success_patterns[task_type].append({
-            "result": successful_result,
-            "timestamp": datetime.now().isoformat(),
-            "context": self.user_context
-        })
+        self.success_patterns[task_type].append(
+            {
+                "result": successful_result,
+                "timestamp": datetime.now().isoformat(),
+                "context": self.user_context,
+            }
+        )
 
         # Keep only the last 10 successful patterns
         self.success_patterns[task_type] = self.success_patterns[task_type][-10:]
 
         # Save to Firebase for persistence
         await self.firebase.save_learning_data(
-            self.config.user_id,
-            self.agent_name,
-            self.success_patterns
+            self.config.user_id, self.agent_name, self.success_patterns
         )
 
     async def get_success_patterns(self, task_type: str) -> List[Dict[str, Any]]:
@@ -257,8 +272,7 @@ class PersonalizedAgent(BaseAgent):
         if task_type not in self.success_patterns:
             # Load from Firebase
             saved_patterns = await self.firebase.get_learning_data(
-                self.config.user_id,
-                self.agent_name
+                self.config.user_id, self.agent_name
             )
             self.success_patterns = saved_patterns or {}
 
@@ -270,10 +284,14 @@ class PersonalizedAgent(BaseAgent):
         success_patterns = await self.get_success_patterns(task_type)
 
         if success_patterns:
-            success_context = "\n".join([
-                f"Successful example {i+1}: {pattern['result'].get('summary', '')}"
-                for i, pattern in enumerate(success_patterns[-3:])  # Last 3 successes
-            ])
+            success_context = "\n".join(
+                [
+                    f"Successful example {i+1}: {pattern['result'].get('summary', '')}"
+                    for i, pattern in enumerate(
+                        success_patterns[-3:]
+                    )  # Last 3 successes
+                ]
+            )
 
             enhanced_prompt = f"""
             Previous Successful Approaches:

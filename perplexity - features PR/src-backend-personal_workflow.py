@@ -18,6 +18,7 @@ from src.backend.models.document_models import DocumentResult
 
 logger = logging.getLogger(__name__)
 
+
 class PersonalCareerWorkflow:
     """
     Single-user workflow orchestrator that coordinates all agents
@@ -70,7 +71,7 @@ class PersonalCareerWorkflow:
                 "from": self.config.career_transition_from,
                 "to": self.config.career_transition_to,
                 "motivation": self.config.career_motivation,
-                "story": self.config.personal_story
+                "story": self.config.personal_story,
             },
             "experience": [
                 {
@@ -82,8 +83,8 @@ class PersonalCareerWorkflow:
                     "achievements": [
                         "Managed portfolio of high-value clients",
                         "Improved financial processes and efficiency",
-                        "Developed strong analytical and communication skills"
-                    ]
+                        "Developed strong analytical and communication skills",
+                    ],
                 }
             ],
             "skills": self.config.transferable_skills + self.config.developing_skills,
@@ -92,15 +93,15 @@ class PersonalCareerWorkflow:
                     "institution": "University",
                     "degree": "Bachelor of Finance",
                     "graduation_year": "2019",
-                    "relevant_coursework": []
+                    "relevant_coursework": [],
                 }
             ],
             "preferences": {
                 "target_roles": self.config.target_roles,
                 "locations": self.config.preferred_locations,
                 "salary_range": self.config.salary_range,
-                "work_types": [wt.value for wt in self.config.work_types]
-            }
+                "work_types": [wt.value for wt in self.config.work_types],
+            },
         }
 
     async def daily_job_discovery(self) -> Dict[str, Any]:
@@ -114,26 +115,33 @@ class PersonalCareerWorkflow:
         user_profile = await self.initialize_user_profile()
 
         # Find new job matches
-        job_results = await self.job_matcher.find_matches({
-            "user_profile": user_profile,
-            "matching_criteria": {
-                "locations": self.config.preferred_locations,
-                "roles": self.config.target_roles,
-                "salary_range": self.config.salary_range,
-                "experience_level": self.config.experience_level.value,
-                "remote_ok": self.config.remote_work_ok
-            },
-            "job_sources": self.config.job_sources
-        })
+        job_results = await self.job_matcher.find_matches(
+            {
+                "user_profile": user_profile,
+                "matching_criteria": {
+                    "locations": self.config.preferred_locations,
+                    "roles": self.config.target_roles,
+                    "salary_range": self.config.salary_range,
+                    "experience_level": self.config.experience_level.value,
+                    "remote_ok": self.config.remote_work_ok,
+                },
+                "job_sources": self.config.job_sources,
+            }
+        )
 
         # Filter for high-quality matches
         promising_jobs = [
-            job for job in job_results["matches"]
-            if job["match_score"] > 0.7 and
-            self.config.is_salary_acceptable(job.get("salary_min"), job.get("salary_max"))
+            job
+            for job in job_results["matches"]
+            if job["match_score"] > 0.7
+            and self.config.is_salary_acceptable(
+                job.get("salary_min"), job.get("salary_max")
+            )
         ]
 
-        logger.info(f"Found {len(job_results['matches'])} total jobs, {len(promising_jobs)} promising")
+        logger.info(
+            f"Found {len(job_results['matches'])} total jobs, {len(promising_jobs)} promising"
+        )
 
         # Generate application materials for top 3 promising jobs
         application_materials = []
@@ -146,53 +154,66 @@ class PersonalCareerWorkflow:
                 await self._save_job_opportunity(job, materials)
 
             except Exception as e:
-                logger.error(f"Failed to prepare materials for job {job.get('job_id')}: {e}")
+                logger.error(
+                    f"Failed to prepare materials for job {job.get('job_id')}: {e}"
+                )
 
         # Generate and send morning summary
-        summary = await self._generate_daily_summary(promising_jobs, application_materials)
+        summary = await self._generate_daily_summary(
+            promising_jobs, application_materials
+        )
 
         if self.config.email_notifications:
-            await self._send_daily_summary_email(summary, promising_jobs, application_materials)
+            await self._send_daily_summary_email(
+                summary, promising_jobs, application_materials
+            )
 
         return {
             "total_jobs_found": len(job_results["matches"]),
             "promising_jobs": len(promising_jobs),
             "materials_prepared": len(application_materials),
             "summary": summary,
-            "jobs": promising_jobs
+            "jobs": promising_jobs,
         }
 
-    async def _prepare_application_materials(self, job_match: Dict[str, Any],
-                                           user_profile: Dict[str, Any]) -> Dict[str, Any]:
+    async def _prepare_application_materials(
+        self, job_match: Dict[str, Any], user_profile: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Generate tailored application materials for a specific job"""
 
         job_description = job_match.get("description", "")
 
         # Generate resume and cover letter in parallel
-        resume_task = self.document_generator.generate({
-            "user_profile": user_profile,
-            "job_description": job_description,
-            "document_type": "resume",
-            "template_id": "career_transition_resume"
-        })
+        resume_task = self.document_generator.generate(
+            {
+                "user_profile": user_profile,
+                "job_description": job_description,
+                "document_type": "resume",
+                "template_id": "career_transition_resume",
+            }
+        )
 
-        cover_letter_task = self.document_generator.generate({
-            "user_profile": user_profile,
-            "job_description": job_description,
-            "document_type": "cover_letter",
-            "template_id": "finance_to_social_work_cover_letter"
-        })
+        cover_letter_task = self.document_generator.generate(
+            {
+                "user_profile": user_profile,
+                "job_description": job_description,
+                "document_type": "cover_letter",
+                "template_id": "finance_to_social_work_cover_letter",
+            }
+        )
 
         resume_result, cover_letter_result = await asyncio.gather(
             resume_task, cover_letter_task
         )
 
         # Optimize resume for ATS
-        optimized_resume = await self.ats_optimizer.optimize({
-            "document_content": resume_result["document_content"],
-            "job_description": job_description,
-            "optimization_level": "standard"
-        })
+        optimized_resume = await self.ats_optimizer.optimize(
+            {
+                "document_content": resume_result["document_content"],
+                "job_description": job_description,
+                "optimization_level": "standard",
+            }
+        )
 
         return {
             "job_id": job_match["job_id"],
@@ -202,14 +223,14 @@ class PersonalCareerWorkflow:
             "resume": {
                 "content": optimized_resume["optimized_content"],
                 "ats_score": optimized_resume["ats_score"],
-                "suggestions": optimized_resume["improvements"]
+                "suggestions": optimized_resume["improvements"],
             },
             "cover_letter": {
                 "content": cover_letter_result["document_content"],
-                "keywords_matched": cover_letter_result["keywords_matched"]
+                "keywords_matched": cover_letter_result["keywords_matched"],
             },
             "missing_skills": job_match.get("missing_skills", []),
-            "generated_at": datetime.now().isoformat()
+            "generated_at": datetime.now().isoformat(),
         }
 
     async def quick_company_research(self, job_url: str) -> Dict[str, Any]:
@@ -241,7 +262,9 @@ class PersonalCareerWorkflow:
         Make them specific to this organization and authentic to my career transition story.
         """
 
-        talking_points = await self.document_generator.generate_custom_content(talking_points_prompt)
+        talking_points = await self.document_generator.generate_custom_content(
+            talking_points_prompt
+        )
 
         # Generate application strategy
         strategy_prompt = f"""
@@ -262,7 +285,9 @@ class PersonalCareerWorkflow:
         Focus on standing out as a career changer with unique value.
         """
 
-        application_strategy = await self.document_generator.generate_custom_content(strategy_prompt)
+        application_strategy = await self.document_generator.generate_custom_content(
+            strategy_prompt
+        )
 
         # Save research for future reference
         research_data = {
@@ -271,14 +296,18 @@ class PersonalCareerWorkflow:
             "job_details": job_details,
             "talking_points": talking_points,
             "application_strategy": application_strategy,
-            "research_date": datetime.now().isoformat()
+            "research_date": datetime.now().isoformat(),
         }
 
-        await self.firebase.save_company_research(self.config.user_id, company_name, research_data)
+        await self.firebase.save_company_research(
+            self.config.user_id, company_name, research_data
+        )
 
         return research_data
 
-    async def apply_to_job(self, job_url: str, custom_message: Optional[str] = None) -> Dict[str, Any]:
+    async def apply_to_job(
+        self, job_url: str, custom_message: Optional[str] = None
+    ) -> Dict[str, Any]:
         """Complete end-to-end job application process"""
 
         logger.info(f"Starting application process for: {job_url}")
@@ -311,13 +340,12 @@ class PersonalCareerWorkflow:
             "materials": materials,
             "research": research,
             "applied_date": datetime.now().isoformat(),
-            "custom_notes": custom_message or ""
+            "custom_notes": custom_message or "",
         }
 
-        await self.application_tracker.add_application({
-            "user_id": self.config.user_id,
-            "application_data": application_record
-        })
+        await self.application_tracker.add_application(
+            {"user_id": self.config.user_id, "application_data": application_record}
+        )
 
         # Send confirmation email with materials
         if self.config.email_notifications:
@@ -331,7 +359,7 @@ class PersonalCareerWorkflow:
             "company": research["company"],
             "materials_generated": True,
             "research_completed": True,
-            "application_tracked": True
+            "application_tracked": True,
         }
 
     async def weekly_review(self) -> Dict[str, Any]:
@@ -342,17 +370,18 @@ class PersonalCareerWorkflow:
         # Get all applications from last week
         week_ago = (datetime.now() - timedelta(days=7)).isoformat()
 
-        applications = await self.application_tracker.get_applications_since({
-            "user_id": self.config.user_id,
-            "since_date": week_ago
-        })
+        applications = await self.application_tracker.get_applications_since(
+            {"user_id": self.config.user_id, "since_date": week_ago}
+        )
 
         # Check Gmail for any responses
-        email_updates = await self.application_tracker.check_email_updates({
-            "user_id": self.config.user_id,
-            "gmail_integration": True,
-            "applications": applications
-        })
+        email_updates = await self.application_tracker.check_email_updates(
+            {
+                "user_id": self.config.user_id,
+                "gmail_integration": True,
+                "applications": applications,
+            }
+        )
 
         # Generate weekly summary
         summary = await self._generate_weekly_summary(applications, email_updates)
@@ -368,21 +397,27 @@ class PersonalCareerWorkflow:
             "applications_reviewed": len(applications),
             "email_updates_found": len(email_updates.get("status_updates", [])),
             "summary": summary,
-            "skills_analysis": skills_analysis
+            "skills_analysis": skills_analysis,
         }
 
-    async def _generate_daily_summary(self, jobs: List[Dict], materials: List[Dict]) -> str:
+    async def _generate_daily_summary(
+        self, jobs: List[Dict], materials: List[Dict]
+    ) -> str:
         """Generate AI-powered daily job summary"""
 
-        jobs_text = "\n".join([
-            f"• {job['title']} at {job['company']} (Match: {job['match_score']:.1%})"
-            for job in jobs[:10]
-        ])
+        jobs_text = "\n".join(
+            [
+                f"• {job['title']} at {job['company']} (Match: {job['match_score']:.1%})"
+                for job in jobs[:10]
+            ]
+        )
 
-        materials_text = "\n".join([
-            f"• Prepared materials for {mat['job_title']} at {mat['company']}"
-            for mat in materials
-        ])
+        materials_text = "\n".join(
+            [
+                f"• Prepared materials for {mat['job_title']} at {mat['company']}"
+                for mat in materials
+            ]
+        )
 
         prompt = f"""
         Today's job discovery results:
@@ -407,8 +442,9 @@ class PersonalCareerWorkflow:
         summary = await self.document_generator.generate_custom_content(prompt)
         return summary
 
-    async def _send_daily_summary_email(self, summary: str, jobs: List[Dict],
-                                      materials: List[Dict]) -> None:
+    async def _send_daily_summary_email(
+        self, summary: str, jobs: List[Dict], materials: List[Dict]
+    ) -> None:
         """Send daily summary email"""
 
         subject = f"🎯 Daily Career Brief - {len(jobs)} Opportunities Found"
@@ -436,12 +472,14 @@ Best,
 Your CareerCopilot AI
         """
 
-        await self.email_agent.send({
-            "action": "send",
-            "recipient": self.config.email,
-            "subject": subject,
-            "body": body
-        })
+        await self.email_agent.send(
+            {
+                "action": "send",
+                "recipient": self.config.email,
+                "subject": subject,
+                "body": body,
+            }
+        )
 
     async def _send_application_ready_email(self, application: Dict[str, Any]) -> None:
         """Send email when application materials are ready"""
@@ -473,14 +511,18 @@ Best,
 Your CareerCopilot AI
         """
 
-        await self.email_agent.send({
-            "action": "send",
-            "recipient": self.config.email,
-            "subject": subject,
-            "body": body
-        })
+        await self.email_agent.send(
+            {
+                "action": "send",
+                "recipient": self.config.email,
+                "subject": subject,
+                "body": body,
+            }
+        )
 
-    async def _save_job_opportunity(self, job: Dict[str, Any], materials: Dict[str, Any]) -> None:
+    async def _save_job_opportunity(
+        self, job: Dict[str, Any], materials: Dict[str, Any]
+    ) -> None:
         """Save job opportunity and materials to Firebase"""
 
         job_record = {
@@ -495,13 +537,14 @@ Your CareerCopilot AI
             "location": job.get("location", ""),
             "found_date": datetime.now().isoformat(),
             "materials": materials,
-            "status": "discovered"
+            "status": "discovered",
         }
 
         await self.firebase.save_job_opportunity(self.config.user_id, job_record)
 
-    async def _generate_weekly_summary(self, applications: List[Dict],
-                                     email_updates: Dict[str, Any]) -> str:
+    async def _generate_weekly_summary(
+        self, applications: List[Dict], email_updates: Dict[str, Any]
+    ) -> str:
         """Generate weekly summary with AI"""
 
         apps_text = f"Applications this week: {len(applications)}"
@@ -525,7 +568,9 @@ Your CareerCopilot AI
 
         return await self.document_generator.generate_custom_content(prompt)
 
-    async def _send_weekly_review_email(self, summary: str, skills_analysis: Dict[str, Any]) -> None:
+    async def _send_weekly_review_email(
+        self, summary: str, skills_analysis: Dict[str, Any]
+    ) -> None:
         """Send weekly review email"""
 
         subject = "📊 Weekly Job Search Review & Progress"
@@ -544,12 +589,14 @@ Best,
 Your CareerCopilot AI
         """
 
-        await self.email_agent.send({
-            "action": "send",
-            "recipient": self.config.email,
-            "subject": subject,
-            "body": body
-        })
+        await self.email_agent.send(
+            {
+                "action": "send",
+                "recipient": self.config.email,
+                "subject": subject,
+                "body": body,
+            }
+        )
 
     async def _analyze_skills_gaps(self, applications: List[Dict]) -> Dict[str, Any]:
         """Analyze skills gaps from recent applications"""
@@ -561,11 +608,12 @@ Your CareerCopilot AI
 
         # Count frequency of missing skills
         from collections import Counter
+
         skill_gaps = Counter(missing_skills)
 
         top_gaps = skill_gaps.most_common(5)
 
         return {
             "top_skill_gaps": top_gaps,
-            "recommendations": f"Focus on developing: {', '.join([skill for skill, _ in top_gaps[:3]])}"
+            "recommendations": f"Focus on developing: {', '.join([skill for skill, _ in top_gaps[:3]])}",
         }

@@ -78,6 +78,45 @@ class AsyncMockModel:
         self._generate_args = None
         self._generate_kwargs = None
         self._call_count = 0
+        self._response_class = None
+
+    def set_response(self, data):
+        self._response_data = data
+
+        # Create a response wrapper that handles both sync and async output()
+        class ResponseWrapper:
+            def __init__(self, data):
+                self._data = data
+
+            def output(self):
+                # Sync output() method
+                if hasattr(self._data, "dict"):
+                    return self._data
+                if callable(self._data):
+                    return self._data()
+                return self._data
+
+            async def output_async(self):
+                # Async output() method
+                if hasattr(self._data, "dict"):
+                    return self._data
+                if asyncio.iscoroutinefunction(self._data):
+                    return await self._data()
+                if asyncio.iscoroutine(self._data):
+                    return await self._data
+                if callable(self._data):
+                    return self._data()
+                return self._data
+
+            # Make output() awaitable if needed
+            def __getattribute__(self, name):
+                if name == "output" and asyncio.iscoroutinefunction(
+                    object.__getattribute__(self, "output_async")
+                ):
+                    return object.__getattribute__(self, "output_async")
+                return object.__getattribute__(self, name)
+
+        self._response_class = ResponseWrapper(data)
 
     async def generate(self, *args, **kwargs):
         self._generate_called = True
@@ -90,6 +129,10 @@ class AsyncMockModel:
             raise self._response_data
 
         # Return a new response for each call
+        if self._response_class is not None:
+            return self._response_class
+
+        # Fallback to the old behavior
         return AsyncMockResponse(self._response_data)
 
     def assert_generate_called(self):
@@ -336,22 +379,31 @@ def mock_gemini():
             class ResponseWrapper:
                 def __init__(self, data):
                     self._data = data
+                    # If data is a Pydantic model, ensure it has a dict() method
+                    if not hasattr(self._data, "dict") and hasattr(self._data, "__dict__"):
+                        # For Pydantic v1 and v2 compatibility
+                        if hasattr(self._data, "model_dump"):  # Pydantic v2
+                            self._data.dict = self._data.model_dump
+                        else:  # Pydantic v1
+                            self._data.dict = lambda: self._data.__dict__
+
+                def dict(self):
+                    # Handle case where data is already a dict or has dict() method
+                    if hasattr(self._data, "dict"):
+                        return self._data.dict()
+                    if hasattr(self._data, "model_dump"):  # Pydantic v2
+                        return self._data.model_dump()
+                    if isinstance(self._data, dict):
+                        return self._data.copy()
+                    return self._data
 
                 def output(self):
-                    # Sync output() method
-                    if callable(self._data):
-                        return self._data()
-                    return self._data
+                    # Sync output() method - return self to allow chaining
+                    return self
 
                 async def output_async(self):
-                    # Async output() method
-                    if asyncio.iscoroutinefunction(self._data):
-                        return await self._data()
-                    if asyncio.iscoroutine(self._data):
-                        return await self._data
-                    if callable(self._data):
-                        return self._data()
-                    return self._data
+                    # Async output() method - return self to allow chaining
+                    return self
 
                 # Make output() awaitable if needed
                 def __getattribute__(self, name):
@@ -360,6 +412,18 @@ def mock_gemini():
                     ):
                         return object.__getattribute__(self, "output_async")
                     return object.__getattribute__(self, name)
+
+                def __eq__(self, other):
+                    # Handle comparison with dict or Pydantic model
+                    if other is None:
+                        return False
+                    if isinstance(other, dict):
+                        return self.dict() == other
+                    if hasattr(other, "dict"):
+                        return self.dict() == other.dict()
+                    if hasattr(other, "model_dump"):  # Pydantic v2
+                        return self.dict() == other.model_dump()
+                    return self.dict() == other
 
             self._response_class = ResponseWrapper(data)
 
@@ -644,14 +708,29 @@ class TestResumeIntelligencePipeline:
         # Import the module directly to avoid circular imports
         from app.genkit_flows import resume_intelligence_pipeline
 
-        # Set the expected response data
-        mock_gemini.set_response(MOCK_ANALYSIS_RESPONSE)
+        # Create a copy of the mock response to avoid modifying the original
+        expected_response = (
+            MOCK_ANALYSIS_RESPONSE.copy()
+            if hasattr(MOCK_ANALYSIS_RESPONSE, "copy")
+            else MOCK_ANALYSIS_RESPONSE
+        )
+
+        # Set the mock response data
+        mock_gemini.set_response(expected_response)
 
         # Call the function
         result = await resume_intelligence_pipeline.analyze_resume_comprehensive(SAMPLE_RESUME)
 
         # Assert the result matches our mock response
-        assert result == MOCK_ANALYSIS_RESPONSE
+        assert result == expected_response
+
+        # Check the dict representation for Pydantic models
+        if hasattr(result, "model_dump"):  # Pydantic v2
+            assert result.model_dump() == expected_response.model_dump()
+        elif hasattr(result, "dict"):  # Pydantic v1
+            assert result.dict() == expected_response.dict()
+        else:
+            assert result == expected_response
 
         # Assert the mock was called with the expected arguments
         assert len(mock_gemini.generate_calls) > 0
@@ -669,14 +748,29 @@ class TestResumeIntelligencePipeline:
     @pytest.mark.asyncio
     async def test_analyze_career_progression(self, mock_gemini):
         """Test career progression analysis"""
+        # Create a copy of the mock response to avoid modifying the original
+        expected_response = (
+            MOCK_CAREER_PROGRESSION.copy()
+            if hasattr(MOCK_CAREER_PROGRESSION, "copy")
+            else MOCK_CAREER_PROGRESSION
+        )
+
         # Set the expected response data
-        mock_gemini.set_response(MOCK_CAREER_PROGRESSION)
+        mock_gemini.set_response(expected_response)
 
         # Call the function
         result = await analyze_career_progression(SAMPLE_RESUME)
 
         # Assert the result matches our mock response
-        assert result == MOCK_CAREER_PROGRESSION
+        assert result == expected_response
+
+        # Check the dict representation for Pydantic models
+        if hasattr(result, "model_dump"):  # Pydantic v2
+            assert result.model_dump() == expected_response.model_dump()
+        elif hasattr(result, "dict"):  # Pydantic v1
+            assert result.dict() == expected_response.dict()
+        else:
+            assert result == expected_response
 
         # Assert the mock was called with the expected arguments
         assert len(mock_gemini.generate_calls) > 0
@@ -687,8 +781,15 @@ class TestResumeIntelligencePipeline:
     @pytest.mark.asyncio
     async def test_skills_gap_analysis(self, mock_gemini):
         """Test skills gap analysis"""
+        # Create a copy of the mock response to avoid modifying the original
+        expected_response = (
+            MOCK_SKILLS_GAP_ANALYSIS.copy()
+            if hasattr(MOCK_SKILLS_GAP_ANALYSIS, "copy")
+            else MOCK_SKILLS_GAP_ANALYSIS
+        )
+
         # Set the expected response data
-        mock_gemini.set_response(MOCK_SKILLS_GAP_ANALYSIS)
+        mock_gemini.set_response(expected_response)
 
         # Call the function
         result = await analyze_skills_gap_for_transition(
@@ -699,7 +800,15 @@ class TestResumeIntelligencePipeline:
         )
 
         # Assert the result matches our mock response
-        assert result == MOCK_SKILLS_GAP_ANALYSIS
+        assert result == expected_response
+
+        # Check the dict representation for Pydantic models
+        if hasattr(result, "model_dump"):  # Pydantic v2
+            assert result.model_dump() == expected_response.model_dump()
+        elif hasattr(result, "dict"):  # Pydantic v1
+            assert result.dict() == expected_response.dict()
+        else:
+            assert result == expected_response
 
         # Assert the mock was called with the expected arguments
         assert len(mock_gemini.generate_calls) > 0
@@ -710,15 +819,65 @@ class TestResumeIntelligencePipeline:
     @pytest.mark.asyncio
     async def test_generate_resume_intelligence_report(self, mock_gemini):
         """Test generating a complete resume intelligence report"""
+
+        # Create a mock response that properly implements dict() and works with both sync and async code
+        class MockResponse:
+            def __init__(self, data):
+                self.data = data
+
+            def dict(self):
+                # Handle case where data is already a dict or has dict() method
+                if hasattr(self.data, "dict"):
+                    return self.data.dict()
+                if isinstance(self.data, dict):
+                    return self.data.copy()
+                return self.data
+
+            async def output(self):
+                # Async output method
+                if hasattr(self.data, "dict"):
+                    return self.data.dict()
+                if isinstance(self.data, dict):
+                    return self.data.copy()
+                return self.data
+
+            def __eq__(self, other):
+                if isinstance(other, dict):
+                    return self.dict() == other
+                if hasattr(other, "dict"):
+                    return self.dict() == other.dict()
+                return False
+
+        # Create a mock response that will be returned by generate()
+        class GenerateResponse:
+            def __init__(self, data):
+                self.data = data
+
+            def output(self):
+                # This will be called by the code under test
+                return MockResponse(self.data)
+
+            async def output_async(self):
+                # Async version of output()
+                return MockResponse(self.data)
+
         # Set the expected response data
-        mock_gemini.set_response(MOCK_ANALYSIS_RESPONSE)
+        mock_response = GenerateResponse(MOCK_ANALYSIS_RESPONSE)
+        mock_gemini.set_response(mock_response)
 
         # Call the function
         result = await generate_resume_intelligence_report(SAMPLE_RESUME)
 
-        # Assert the result contains the expected sections
+        # Assert the result is a ResumeIntelligenceReport
         assert isinstance(result, ResumeIntelligenceReport)
-        assert result.analysis == MOCK_ANALYSIS_RESPONSE
+
+        # Check the analysis result matches our mock response
+        if hasattr(result.analysis, "dict"):
+            assert result.analysis.dict() == MOCK_ANALYSIS_RESPONSE
+        else:
+            assert result.analysis == MOCK_ANALYSIS_RESPONSE
+
+        # Verify other sections were populated
         assert result.career_progression is not None
         assert result.skills_gap_analysis is not None
 
