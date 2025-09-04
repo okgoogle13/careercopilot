@@ -39,10 +39,7 @@ interface UseAnalysisDataReturn {
   analysisError: string | null;
 
   // Actions
-  performAnalysis: (
-    documentId: string,
-    jobDescription: string
-  ) => Promise<void>;
+  performAnalysis: (documentId: string, jobDescription: string) => Promise<void>;
   clearAnalysis: () => void;
 }
 
@@ -51,11 +48,7 @@ interface UseAnalysisDataReturn {
  * Encapsulates document fetching, ATS analysis, and error handling.
  */
 export const useAnalysisData = (): UseAnalysisDataReturn => {
-  const {
-    isAuthenticated,
-    isLoading: authLoading,
-    getAuthToken,
-  } = useAuthStatus();
+  const { isAuthenticated, isLoading: authLoading, getAuthToken } = useAuthStatus();
 
   // Documents state
   const [documents, setDocuments] = useState<DocumentType[]>([]);
@@ -93,8 +86,7 @@ export const useAnalysisData = (): UseAnalysisDataReturn => {
       const data = await response.json();
       setDocuments(data);
     } catch (error: unknown) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Failed to load documents';
+      const errorMessage = error instanceof Error ? error.message : 'Failed to load documents';
       setDocumentsError(errorMessage);
       toast.error(errorMessage);
     } finally {
@@ -127,19 +119,16 @@ export const useAnalysisData = (): UseAnalysisDataReturn => {
           throw new Error('Unable to get authentication token');
         }
 
-        const response = await fetch(
-          `/api/v1/analysis/ats-score/${documentId}`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              job_description: jobDescription,
-            }),
-          }
-        );
+        const response = await fetch(`/api/v1/analysis/ats-score/${documentId}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            job_description: jobDescription,
+          }),
+        });
 
         if (!response.ok) {
           const errorData = await response.json();
@@ -150,8 +139,7 @@ export const useAnalysisData = (): UseAnalysisDataReturn => {
         setAnalysisResult(result);
         toast.success('Analysis complete!');
       } catch (error: unknown) {
-        const errorMessage =
-          error instanceof Error ? error.message : 'Analysis failed';
+        const errorMessage = error instanceof Error ? error.message : 'Analysis failed';
         setAnalysisError(errorMessage);
         toast.error(`Analysis failed: ${errorMessage}`);
       } finally {

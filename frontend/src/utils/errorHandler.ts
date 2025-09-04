@@ -1,4 +1,10 @@
-import { AppError, ErrorType, ErrorSeverity, ActionableSuggestion, ErrorContext } from '../types/errors';
+import {
+  AppError,
+  ErrorType,
+  ErrorSeverity,
+  ActionableSuggestion,
+  ErrorContext,
+} from '../types/errors';
 import { v4 as uuidv4 } from 'uuid';
 
 class ErrorHandler {
@@ -32,18 +38,20 @@ class ErrorHandler {
       userMessage,
       technicalDetails: originalError?.stack || originalError?.message,
       timestamp: new Date(),
-      context: context ? {
-        ...context,
-        timestamp: new Date(),
-        userAgent: navigator.userAgent,
-        route: window.location.pathname
-      } : undefined,
+      context: context
+        ? {
+            ...context,
+            timestamp: new Date(),
+            userAgent: navigator.userAgent,
+            route: window.location.pathname,
+          }
+        : undefined,
       suggestions,
       isRetryable: this.isRetryable(type),
       retryCount: 0,
       maxRetries: this.getMaxRetries(type),
       originalError,
-      component: context?.component
+      component: context?.component,
     };
   }
 
@@ -138,7 +146,7 @@ class ErrorHandler {
         return "We're having trouble connecting to our servers. Please check your internet connection.";
 
       case ErrorType.AUTHENTICATION:
-        return "Your session has expired. Please sign in again to continue.";
+        return 'Your session has expired. Please sign in again to continue.';
 
       case ErrorType.AUTHORIZATION:
         return "You don't have permission to access this resource. Please contact support if you believe this is an error.";
@@ -151,25 +159,28 @@ class ErrorHandler {
         return "The file you're trying to upload doesn't meet our requirements. Please try a different file.";
 
       case ErrorType.TIMEOUT:
-        return "The request is taking longer than expected. Please try again.";
+        return 'The request is taking longer than expected. Please try again.';
 
       case ErrorType.RESOURCE_NOT_FOUND:
-        return "The requested resource could not be found. It may have been moved or deleted.";
+        return 'The requested resource could not be found. It may have been moved or deleted.';
 
       case ErrorType.QUOTA_EXCEEDED:
         return "You've reached your usage limit. Please upgrade your plan or try again later.";
 
       case ErrorType.AI_SERVICE:
-        return "Our AI service is temporarily unavailable. Please try again in a moment.";
+        return 'Our AI service is temporarily unavailable. Please try again in a moment.';
 
       case ErrorType.STORAGE:
         return "We're having trouble saving your data. Please ensure you have enough storage space.";
 
       case ErrorType.RENDER:
-        return "There was a problem displaying this content. Please refresh the page.";
+        return 'There was a problem displaying this content. Please refresh the page.';
 
       default:
-        return message || "An unexpected error occurred. Please try again or contact support if the problem persists.";
+        return (
+          message ||
+          'An unexpected error occurred. Please try again or contact support if the problem persists.'
+        );
     }
   }
 
@@ -184,21 +195,21 @@ class ErrorHandler {
             title: 'Check Internet Connection',
             description: 'Verify that your device is connected to the internet',
             actionType: 'custom',
-            priority: 1
+            priority: 1,
           },
           {
             id: 'retry-request',
             title: 'Try Again',
             description: 'Retry the failed request',
             actionType: 'retry',
-            priority: 2
+            priority: 2,
           },
           {
             id: 'refresh-page',
             title: 'Refresh Page',
             description: 'Reload the page to reset the connection',
             actionType: 'refresh',
-            priority: 3
+            priority: 3,
           }
         );
         break;
@@ -211,14 +222,14 @@ class ErrorHandler {
             description: 'Sign in to your account again',
             actionType: 'navigate',
             actionData: { path: '/login' },
-            priority: 1
+            priority: 1,
           },
           {
             id: 'clear-cache',
             title: 'Clear Browser Cache',
             description: 'Clear your browser cache and cookies',
             actionType: 'custom',
-            priority: 2
+            priority: 2,
           }
         );
         break;
@@ -230,7 +241,7 @@ class ErrorHandler {
             title: 'Contact Support',
             description: 'Get help from our support team',
             actionType: 'contact',
-            priority: 1
+            priority: 1,
           },
           {
             id: 'check-permissions',
@@ -238,7 +249,7 @@ class ErrorHandler {
             description: 'Verify your account has the necessary permissions',
             actionType: 'navigate',
             actionData: { path: '/profile' },
-            priority: 2
+            priority: 2,
           }
         );
         break;
@@ -251,14 +262,14 @@ class ErrorHandler {
             title: 'Review Your Input',
             description: 'Check all required fields are filled correctly',
             actionType: 'dismiss',
-            priority: 1
+            priority: 1,
           },
           {
             id: 'clear-form',
             title: 'Reset Form',
             description: 'Clear the form and start over',
             actionType: 'custom',
-            priority: 2
+            priority: 2,
           }
         );
         break;
@@ -270,21 +281,21 @@ class ErrorHandler {
             title: 'Check File Type',
             description: 'Ensure your file is in a supported format (PDF, DOC, DOCX)',
             actionType: 'dismiss',
-            priority: 1
+            priority: 1,
           },
           {
             id: 'check-file-size',
             title: 'Check File Size',
             description: 'Make sure your file is under the size limit (10MB)',
             actionType: 'dismiss',
-            priority: 2
+            priority: 2,
           },
           {
             id: 'try-different-file',
             title: 'Try Different File',
             description: 'Select a different file to upload',
             actionType: 'custom',
-            priority: 3
+            priority: 3,
           }
         );
         break;
@@ -296,14 +307,14 @@ class ErrorHandler {
             title: 'Try Again',
             description: 'Retry the request',
             actionType: 'retry',
-            priority: 1
+            priority: 1,
           },
           {
             id: 'check-connection',
             title: 'Check Connection Speed',
             description: 'Ensure you have a stable internet connection',
             actionType: 'custom',
-            priority: 2
+            priority: 2,
           }
         );
         break;
@@ -316,14 +327,14 @@ class ErrorHandler {
             description: 'Upgrade to a higher plan for more resources',
             actionType: 'navigate',
             actionData: { path: '/pricing' },
-            priority: 1
+            priority: 1,
           },
           {
             id: 'wait-and-retry',
             title: 'Wait and Try Again',
             description: 'Your quota may reset soon, try again later',
             actionType: 'custom',
-            priority: 2
+            priority: 2,
           }
         );
         break;
@@ -335,14 +346,14 @@ class ErrorHandler {
             title: 'Refresh Page',
             description: 'Reload the page to fix display issues',
             actionType: 'refresh',
-            priority: 1
+            priority: 1,
           },
           {
             id: 'clear-browser-cache',
             title: 'Clear Browser Cache',
             description: 'Clear your browser cache to fix rendering issues',
             actionType: 'custom',
-            priority: 2
+            priority: 2,
           }
         );
         break;
@@ -354,14 +365,14 @@ class ErrorHandler {
             title: 'Try Again',
             description: 'Retry the action',
             actionType: 'retry',
-            priority: 1
+            priority: 1,
           },
           {
             id: 'contact-support',
             title: 'Contact Support',
             description: 'Get help from our support team',
             actionType: 'contact',
-            priority: 2
+            priority: 2,
           }
         );
     }
@@ -375,7 +386,7 @@ class ErrorHandler {
       ErrorType.TIMEOUT,
       ErrorType.API_SERVER_ERROR,
       ErrorType.EXTERNAL_SERVICE,
-      ErrorType.AI_SERVICE
+      ErrorType.AI_SERVICE,
     ];
     return retryableTypes.includes(type);
   }
@@ -406,7 +417,7 @@ class ErrorHandler {
       timestamp: error.timestamp,
       context: error.context,
       component: error.component,
-      technicalDetails: error.technicalDetails
+      technicalDetails: error.technicalDetails,
     };
 
     if (error.severity === ErrorSeverity.CRITICAL || error.severity === ErrorSeverity.HIGH) {

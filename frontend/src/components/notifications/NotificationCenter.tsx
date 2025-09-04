@@ -1,9 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal } from '../ui';
 import {
-  Bell, X, Check, AlertTriangle, Info, CheckCircle,
-  Clock, FileText, User, Briefcase, Settings,
-  Archive, Trash2, Filter, Search
+  Bell,
+  X,
+  Check,
+  AlertTriangle,
+  Info,
+  CheckCircle,
+  Clock,
+  FileText,
+  User,
+  Briefcase,
+  Settings,
+  Archive,
+  Trash2,
+  Filter,
+  Search,
 } from 'lucide-react';
 import { format, isToday, isYesterday } from 'date-fns';
 import { cn } from '../../lib/utils';
@@ -48,7 +60,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
         priority: 'high',
         category: 'application',
         actionUrl: '/applications/1',
-        actionText: 'View Application'
+        actionText: 'View Application',
       },
       {
         id: '2',
@@ -60,7 +72,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
         priority: 'medium',
         category: 'profile',
         actionUrl: '/profile',
-        actionText: 'View Profile'
+        actionText: 'View Profile',
       },
       {
         id: '3',
@@ -72,7 +84,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
         priority: 'low',
         category: 'document',
         actionUrl: '/documents',
-        actionText: 'Browse Templates'
+        actionText: 'Browse Templates',
       },
       {
         id: '4',
@@ -84,7 +96,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
         priority: 'medium',
         category: 'document',
         actionUrl: '/documents/resume/analyze',
-        actionText: 'View Analysis'
+        actionText: 'View Analysis',
       },
       {
         id: '5',
@@ -96,8 +108,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
         priority: 'low',
         category: 'system',
         actionUrl: '/insights',
-        actionText: 'View Summary'
-      }
+        actionText: 'View Summary',
+      },
     ];
 
     setTimeout(() => {
@@ -117,8 +129,11 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
     if (categoryFilter !== 'all' && notification.category !== categoryFilter) return false;
 
     // Filter by search term
-    if (searchTerm && !notification.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        !notification.message.toLowerCase().includes(searchTerm.toLowerCase())) {
+    if (
+      searchTerm &&
+      !notification.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !notification.message.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
       return false;
     }
 
@@ -126,9 +141,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
   });
 
   const markAsRead = (notificationId: string) => {
-    setNotifications(prev => prev.map(n =>
-      n.id === notificationId ? { ...n, read: true } : n
-    ));
+    setNotifications(prev => prev.map(n => (n.id === notificationId ? { ...n, read: true } : n)));
   };
 
   const markAllAsRead = () => {
@@ -148,18 +161,29 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
 
   const getNotificationIcon = (type: Notification['type']) => {
     switch (type) {
-      case 'info': return Info;
-      case 'warning': return AlertTriangle;
-      case 'success': return CheckCircle;
-      case 'error': return X;
-      case 'reminder': return Clock;
-      case 'achievement': return CheckCircle;
-      case 'system': return Settings;
-      default: return Bell;
+      case 'info':
+        return Info;
+      case 'warning':
+        return AlertTriangle;
+      case 'success':
+        return CheckCircle;
+      case 'error':
+        return X;
+      case 'reminder':
+        return Clock;
+      case 'achievement':
+        return CheckCircle;
+      case 'system':
+        return Settings;
+      default:
+        return Bell;
     }
   };
 
-  const getNotificationColor = (type: Notification['type'], _priority: Notification['priority']) => {
+  const getNotificationColor = (
+    type: Notification['type'],
+    _priority: Notification['priority']
+  ) => {
     const baseColors = {
       info: 'bg-blue-50 text-blue-700 border-blue-200',
       warning: 'bg-yellow-50 text-yellow-700 border-yellow-200',
@@ -167,7 +191,7 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
       error: 'bg-red-50 text-red-700 border-red-200',
       reminder: 'bg-orange-50 text-orange-700 border-orange-200',
       achievement: 'bg-purple-50 text-purple-700 border-purple-200',
-      system: 'bg-gray-50 text-gray-700 border-gray-200'
+      system: 'bg-gray-50 text-gray-700 border-gray-200',
     };
 
     return baseColors[type];
@@ -175,12 +199,18 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'application': return Briefcase;
-      case 'document': return FileText;
-      case 'profile': return User;
-      case 'system': return Settings;
-      case 'reminder': return Clock;
-      default: return Bell;
+      case 'application':
+        return Briefcase;
+      case 'document':
+        return FileText;
+      case 'profile':
+        return User;
+      case 'system':
+        return Settings;
+      case 'reminder':
+        return Clock;
+      default:
+        return Bell;
     }
   };
 
@@ -198,89 +228,89 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
     <div className={cn('relative', className)}>
       {/* Notification Bell */}
       <Button
-        variant="ghost"
+        variant='ghost'
         onClick={() => setIsOpen(true)}
-        className="relative p-2 hover:bg-gray-100"
+        className='relative p-2 hover:bg-gray-100'
       >
-        <Bell className="w-5 h-5" />
+        <Bell className='w-5 h-5' />
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+          <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center'>
             {unreadCount > 9 ? '9+' : unreadCount}
           </span>
         )}
       </Button>
 
       {/* Notification Center Modal */}
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} size="lg" title="Notifications">
-        <div className="space-y-4">
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} size='lg' title='Notifications'>
+        <div className='space-y-4'>
           {/* Header Controls */}
-          <div className="flex items-center justify-between pb-4 border-b">
-            <div className="flex items-center gap-2">
-              <h2 className="text-lg font-semibold">Notifications</h2>
+          <div className='flex items-center justify-between pb-4 border-b'>
+            <div className='flex items-center gap-2'>
+              <h2 className='text-lg font-semibold'>Notifications</h2>
               {unreadCount > 0 && (
-                <span className="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">
+                <span className='bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full'>
                   {unreadCount} new
                 </span>
               )}
             </div>
-            <Button variant="outline" size="sm" onClick={markAllAsRead}>
-              <Check className="w-4 h-4 mr-2" />
+            <Button variant='outline' size='sm' onClick={markAllAsRead}>
+              <Check className='w-4 h-4 mr-2' />
               Mark All Read
             </Button>
           </div>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-3">
-            <div className="flex items-center gap-2">
-              <Filter className="w-4 h-4 text-gray-500" />
+          <div className='flex flex-wrap gap-3'>
+            <div className='flex items-center gap-2'>
+              <Filter className='w-4 h-4 text-gray-500' />
               <select
                 value={filter}
-                onChange={(e) => setFilter(e.target.value as any)}
-                className="text-sm border border-gray-300 rounded px-2 py-1"
+                onChange={e => setFilter(e.target.value as any)}
+                className='text-sm border border-gray-300 rounded px-2 py-1'
               >
-                <option value="all">All</option>
-                <option value="unread">Unread</option>
-                <option value="today">Today</option>
+                <option value='all'>All</option>
+                <option value='unread'>Unread</option>
+                <option value='today'>Today</option>
               </select>
             </div>
 
             <select
               value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-              className="text-sm border border-gray-300 rounded px-2 py-1"
+              onChange={e => setCategoryFilter(e.target.value)}
+              className='text-sm border border-gray-300 rounded px-2 py-1'
             >
-              <option value="all">All Categories</option>
-              <option value="application">Applications</option>
-              <option value="document">Documents</option>
-              <option value="profile">Profile</option>
-              <option value="system">System</option>
-              <option value="reminder">Reminders</option>
+              <option value='all'>All Categories</option>
+              <option value='application'>Applications</option>
+              <option value='document'>Documents</option>
+              <option value='profile'>Profile</option>
+              <option value='system'>System</option>
+              <option value='reminder'>Reminders</option>
             </select>
 
-            <div className="flex-1 min-w-0">
-              <div className="relative">
-                <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <div className='flex-1 min-w-0'>
+              <div className='relative'>
+                <Search className='absolute left-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400' />
                 <input
-                  type="text"
-                  placeholder="Search notifications..."
+                  type='text'
+                  placeholder='Search notifications...'
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-8 pr-3 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className='w-full pl-8 pr-3 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500'
                 />
               </div>
             </div>
           </div>
 
           {/* Notifications List */}
-          <div className="space-y-3 max-h-96 overflow-y-auto">
+          <div className='space-y-3 max-h-96 overflow-y-auto'>
             {loading ? (
-              <div className="flex items-center justify-center py-8">
-                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
+              <div className='flex items-center justify-center py-8'>
+                <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600'></div>
               </div>
             ) : filteredNotifications.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <Bell className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p className="text-sm">No notifications found</p>
+              <div className='text-center py-8 text-gray-500'>
+                <Bell className='w-12 h-12 mx-auto mb-3 opacity-50' />
+                <p className='text-sm'>No notifications found</p>
               </div>
             ) : (
               filteredNotifications.map(notification => {
@@ -292,48 +322,54 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
                     key={notification.id}
                     className={cn(
                       'p-4 border transition-colors hover:bg-gray-50',
-                      !notification.read ? 'bg-blue-50/30 border-l-4 border-l-blue-500' : 'border-gray-200',
-                      notification.priority === 'high' && !notification.read ? 'border-l-red-500' : ''
+                      !notification.read
+                        ? 'bg-blue-50/30 border-l-4 border-l-blue-500'
+                        : 'border-gray-200',
+                      notification.priority === 'high' && !notification.read
+                        ? 'border-l-red-500'
+                        : ''
                     )}
                   >
-                    <div className="flex items-start gap-3">
-                      <div className={cn(
-                        'p-2 rounded-full flex-shrink-0',
-                        getNotificationColor(notification.type, notification.priority)
-                      )}>
-                        <IconComponent className="w-4 h-4" />
+                    <div className='flex items-start gap-3'>
+                      <div
+                        className={cn(
+                          'p-2 rounded-full flex-shrink-0',
+                          getNotificationColor(notification.type, notification.priority)
+                        )}
+                      >
+                        <IconComponent className='w-4 h-4' />
                       </div>
 
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2">
-                              <h4 className={cn(
-                                'font-medium text-sm',
-                                !notification.read ? 'text-gray-900' : 'text-gray-700'
-                              )}>
+                      <div className='flex-1 min-w-0'>
+                        <div className='flex items-start justify-between gap-2'>
+                          <div className='flex-1'>
+                            <div className='flex items-center gap-2'>
+                              <h4
+                                className={cn(
+                                  'font-medium text-sm',
+                                  !notification.read ? 'text-gray-900' : 'text-gray-700'
+                                )}
+                              >
                                 {notification.title}
                               </h4>
-                              <CategoryIcon className="w-3 h-3 text-gray-400" />
+                              <CategoryIcon className='w-3 h-3 text-gray-400' />
                             </div>
-                            <p className="text-sm text-gray-600 mt-1">
-                              {notification.message}
-                            </p>
+                            <p className='text-sm text-gray-600 mt-1'>{notification.message}</p>
 
-                            <div className="flex items-center gap-4 mt-2">
-                              <span className="text-xs text-gray-500">
+                            <div className='flex items-center gap-4 mt-2'>
+                              <span className='text-xs text-gray-500'>
                                 {formatTimestamp(notification.timestamp)}
                               </span>
 
                               {notification.actionUrl && (
                                 <Button
-                                  variant="ghost"
-                                  size="sm"
+                                  variant='ghost'
+                                  size='sm'
                                   onClick={() => {
                                     markAsRead(notification.id);
                                     window.location.href = notification.actionUrl!;
                                   }}
-                                  className="text-xs h-6 px-2"
+                                  className='text-xs h-6 px-2'
                                 >
                                   {notification.actionText}
                                 </Button>
@@ -341,37 +377,37 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-1">
+                          <div className='flex items-center gap-1'>
                             {!notification.read && (
                               <Button
-                                variant="ghost"
-                                size="sm"
+                                variant='ghost'
+                                size='sm'
                                 onClick={() => markAsRead(notification.id)}
-                                className="h-6 w-6 p-0"
-                                title="Mark as read"
+                                className='h-6 w-6 p-0'
+                                title='Mark as read'
                               >
-                                <Check className="w-3 h-3" />
+                                <Check className='w-3 h-3' />
                               </Button>
                             )}
 
                             <Button
-                              variant="ghost"
-                              size="sm"
+                              variant='ghost'
+                              size='sm'
                               onClick={() => archiveNotification(notification.id)}
-                              className="h-6 w-6 p-0"
-                              title="Archive"
+                              className='h-6 w-6 p-0'
+                              title='Archive'
                             >
-                              <Archive className="w-3 h-3" />
+                              <Archive className='w-3 h-3' />
                             </Button>
 
                             <Button
-                              variant="ghost"
-                              size="sm"
+                              variant='ghost'
+                              size='sm'
                               onClick={() => deleteNotification(notification.id)}
-                              className="h-6 w-6 p-0 text-red-500 hover:text-red-700"
-                              title="Delete"
+                              className='h-6 w-6 p-0 text-red-500 hover:text-red-700'
+                              title='Delete'
                             >
-                              <Trash2 className="w-3 h-3" />
+                              <Trash2 className='w-3 h-3' />
                             </Button>
                           </div>
                         </div>
@@ -384,8 +420,8 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ className }) =>
           </div>
 
           {/* Footer */}
-          <div className="pt-4 border-t text-center">
-            <Button variant="ghost" size="sm" className="text-sm text-gray-600">
+          <div className='pt-4 border-t text-center'>
+            <Button variant='ghost' size='sm' className='text-sm text-gray-600'>
               View All Notifications
             </Button>
           </div>

@@ -1,9 +1,7 @@
 // Disabled Firebase Configuration
 // This file prevents any Firebase initialization
 
-console.log(
-  '🚫 Firebase completely disabled - using pure fallback authentication'
-);
+console.log('🚫 Firebase completely disabled - using pure fallback authentication');
 
 // Mock Firebase exports to prevent errors
 export const auth = null;

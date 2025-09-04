@@ -33,14 +33,14 @@ export enum ErrorType {
   FILE_SERVICE = 'FILE_SERVICE',
 
   // Unknown/Generic
-  UNKNOWN = 'UNKNOWN'
+  UNKNOWN = 'UNKNOWN',
 }
 
 export enum ErrorSeverity {
   LOW = 'LOW',
   MEDIUM = 'MEDIUM',
   HIGH = 'HIGH',
-  CRITICAL = 'CRITICAL'
+  CRITICAL = 'CRITICAL',
 }
 
 export interface ActionableSuggestion {

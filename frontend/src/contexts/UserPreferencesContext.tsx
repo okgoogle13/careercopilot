@@ -20,17 +20,13 @@ interface UserPreferencesContextType {
   loading: boolean;
 }
 
-const UserPreferencesContext = createContext<UserPreferencesContextType | null>(
-  null
-);
+const UserPreferencesContext = createContext<UserPreferencesContextType | null>(null);
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useUserPreferences = () => {
   const context = useContext(UserPreferencesContext);
   if (!context) {
-    throw new Error(
-      'useUserPreferences must be used within a UserPreferencesProvider'
-    );
+    throw new Error('useUserPreferences must be used within a UserPreferencesProvider');
   }
   return context;
 };
@@ -39,9 +35,7 @@ interface UserPreferencesProviderProps {
   children: ReactNode;
 }
 
-export const UserPreferencesProvider: React.FC<
-  UserPreferencesProviderProps
-> = ({ children }) => {
+export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = ({ children }) => {
   const { user } = useAuth();
   const [preferences, setPreferences] = useState<UserPreferences>({
     themeId: 'professional',
@@ -56,10 +50,7 @@ export const UserPreferencesProvider: React.FC<
   // Load preferences from localStorage
   useEffect(() => {
     if (user) {
-      console.log(
-        '🔧 UserPreferences: Loading preferences for user:',
-        user.email
-      );
+      console.log('🔧 UserPreferences: Loading preferences for user:', user.email);
       setLoading(true);
 
       try {
@@ -67,14 +58,9 @@ export const UserPreferencesProvider: React.FC<
         if (stored) {
           const parsedPrefs = JSON.parse(stored);
           setPreferences(parsedPrefs);
-          console.log(
-            '✅ UserPreferences: Loaded from localStorage:',
-            parsedPrefs
-          );
+          console.log('✅ UserPreferences: Loaded from localStorage:', parsedPrefs);
         } else {
-          console.log(
-            '🔧 UserPreferences: No stored preferences, using defaults'
-          );
+          console.log('🔧 UserPreferences: No stored preferences, using defaults');
         }
       } catch (error) {
         console.warn('⚠️ UserPreferences: Failed to load preferences:', error);
@@ -131,8 +117,6 @@ export const UserPreferencesProvider: React.FC<
   }, [user, preferences, storageKey, loading]);
 
   return (
-    <UserPreferencesContext.Provider value={value}>
-      {children}
-    </UserPreferencesContext.Provider>
+    <UserPreferencesContext.Provider value={value}>{children}</UserPreferencesContext.Provider>
   );
 };

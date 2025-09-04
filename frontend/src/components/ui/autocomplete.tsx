@@ -36,10 +36,11 @@ export interface AutoCompleteProps {
 
 function defaultFilterOptions(options: AutoCompleteOption[], query: string): AutoCompleteOption[] {
   const lowerQuery = query.toLowerCase();
-  return options.filter(option =>
-    option.label.toLowerCase().includes(lowerQuery) ||
-    option.value.toLowerCase().includes(lowerQuery) ||
-    option.description?.toLowerCase().includes(lowerQuery)
+  return options.filter(
+    option =>
+      option.label.toLowerCase().includes(lowerQuery) ||
+      option.value.toLowerCase().includes(lowerQuery) ||
+      option.description?.toLowerCase().includes(lowerQuery)
   );
 }
 
@@ -89,102 +90,120 @@ export function AutoComplete({
   }, [options, query, minSearchLength, maxResults, filterOptions, onSearch, searchResults]);
 
   // Debounced search function
-  const performSearch = useCallback(async (searchQuery: string) => {
-    if (!onSearch || searchQuery.length < minSearchLength) {
-      setSearchResults([]);
-      return;
-    }
+  const performSearch = useCallback(
+    async (searchQuery: string) => {
+      if (!onSearch || searchQuery.length < minSearchLength) {
+        setSearchResults([]);
+        return;
+      }
 
-    setIsLoading(true);
-    setError(null);
+      setIsLoading(true);
+      setError(null);
 
-    try {
-      const results = await onSearch(searchQuery);
-      setSearchResults(Array.isArray(results) ? results.slice(0, maxResults) : []);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Search failed');
-      setSearchResults([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [onSearch, minSearchLength, maxResults]);
+      try {
+        const results = await onSearch(searchQuery);
+        setSearchResults(Array.isArray(results) ? results.slice(0, maxResults) : []);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Search failed');
+        setSearchResults([]);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [onSearch, minSearchLength, maxResults]
+  );
 
   // Handle input changes with debouncing
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuery = e.target.value;
-    setQuery(newQuery);
-    setSelectedIndex(-1);
-    setIsOpen(true);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newQuery = e.target.value;
+      setQuery(newQuery);
+      setSelectedIndex(-1);
+      setIsOpen(true);
 
-    onChange?.(newQuery);
+      onChange?.(newQuery);
 
-    // Debounce search
-    if (debounceRef.current) {
-      clearTimeout(debounceRef.current);
-    }
+      // Debounce search
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
 
-    debounceRef.current = setTimeout(() => {
-      performSearch(newQuery);
-    }, debounceMs);
-  }, [onChange, performSearch, debounceMs]);
+      debounceRef.current = setTimeout(() => {
+        performSearch(newQuery);
+      }, debounceMs);
+    },
+    [onChange, performSearch, debounceMs]
+  );
 
   // Handle option selection
-  const handleOptionSelect = useCallback((option: AutoCompleteOption) => {
-    setQuery(option.label);
-    setIsOpen(false);
-    setSelectedIndex(-1);
+  const handleOptionSelect = useCallback(
+    (option: AutoCompleteOption) => {
+      setQuery(option.label);
+      setIsOpen(false);
+      setSelectedIndex(-1);
 
-    onChange?.(option.label);
-    onSelect?.(option);
+      onChange?.(option.label);
+      onSelect?.(option);
 
-    inputRef.current?.blur();
-  }, [onChange, onSelect]);
+      inputRef.current?.blur();
+    },
+    [onChange, onSelect]
+  );
 
   // Handle keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!isOpen) {
-      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        e.preventDefault();
-        setIsOpen(true);
-        performSearch(query);
-      }
-      return;
-    }
-
-    switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setSelectedIndex(prev =>
-          prev < filteredOptions.length - 1 ? prev + 1 : prev
-        );
-        break;
-
-      case 'ArrowUp':
-        e.preventDefault();
-        setSelectedIndex(prev => prev > 0 ? prev - 1 : -1);
-        break;
-
-      case 'Enter':
-        e.preventDefault();
-        if (selectedIndex >= 0) {
-          handleOptionSelect(filteredOptions[selectedIndex]);
-        } else if (allowCustomValue && query.trim()) {
-          // Handle custom value
-          const customOption: AutoCompleteOption = {
-            value: query.trim(),
-            label: query.trim(),
-          };
-          handleOptionSelect(customOption);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (!isOpen) {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          setIsOpen(true);
+          performSearch(query);
         }
-        break;
+        return;
+      }
 
-      case 'Escape':
-        setIsOpen(false);
-        setSelectedIndex(-1);
-        inputRef.current?.blur();
-        break;
-    }
-  }, [isOpen, filteredOptions, selectedIndex, handleOptionSelect, allowCustomValue, query, performSearch]);
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          setSelectedIndex(prev => (prev < filteredOptions.length - 1 ? prev + 1 : prev));
+          break;
+
+        case 'ArrowUp':
+          e.preventDefault();
+          setSelectedIndex(prev => (prev > 0 ? prev - 1 : -1));
+          break;
+
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0) {
+            handleOptionSelect(filteredOptions[selectedIndex]);
+          } else if (allowCustomValue && query.trim()) {
+            // Handle custom value
+            const customOption: AutoCompleteOption = {
+              value: query.trim(),
+              label: query.trim(),
+            };
+            handleOptionSelect(customOption);
+          }
+          break;
+
+        case 'Escape':
+          setIsOpen(false);
+          setSelectedIndex(-1);
+          inputRef.current?.blur();
+          break;
+      }
+    },
+    [
+      isOpen,
+      filteredOptions,
+      selectedIndex,
+      handleOptionSelect,
+      allowCustomValue,
+      query,
+      performSearch,
+    ]
+  );
 
   // Handle input focus
   const handleInputFocus = useCallback(() => {
@@ -211,16 +230,19 @@ export function AutoComplete({
   }, []);
 
   // Handle clear
-  const handleClear = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setQuery('');
-    setSearchResults([]);
-    setSelectedIndex(-1);
-    setIsOpen(false);
+  const handleClear = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setQuery('');
+      setSearchResults([]);
+      setSelectedIndex(-1);
+      setIsOpen(false);
 
-    onChange?.('');
-    inputRef.current?.focus();
-  }, [onChange]);
+      onChange?.('');
+      inputRef.current?.focus();
+    },
+    [onChange]
+  );
 
   // Scroll selected item into view and update active descendant
   useEffect(() => {
@@ -244,9 +266,12 @@ export function AutoComplete({
   }, []);
 
   // Generate unique IDs for options
-  const getOptionId = useCallback((index: number) => {
-    return `${listboxId}-option-${index}`;
-  }, [listboxId]);
+  const getOptionId = useCallback(
+    (index: number) => {
+      return `${listboxId}-option-${index}`;
+    },
+    [listboxId]
+  );
 
   // Sync external value changes
   useEffect(() => {
@@ -262,12 +287,12 @@ export function AutoComplete({
     };
   }, []);
 
-  const shouldShowDropdown = isOpen && (
-    filteredOptions.length > 0 ||
-    isLoading ||
-    error ||
-    (query.length >= minSearchLength && !isLoading && filteredOptions.length === 0)
-  );
+  const shouldShowDropdown =
+    isOpen &&
+    (filteredOptions.length > 0 ||
+      isLoading ||
+      error ||
+      (query.length >= minSearchLength && !isLoading && filteredOptions.length === 0));
 
   // Accessibility attributes
   const inputProps = {
@@ -283,18 +308,18 @@ export function AutoComplete({
 
   return (
     <div className={cn('relative', className)}>
-      <div className="relative">
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+      <div className='relative'>
+        <div className='absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none'>
           {isLoading ? (
-            <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+            <Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
           ) : (
-            <Search className="h-4 w-4 text-muted-foreground" />
+            <Search className='h-4 w-4 text-muted-foreground' />
           )}
         </div>
 
         <Input
           ref={inputRef}
-          type="text"
+          type='text'
           value={query}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -308,20 +333,20 @@ export function AutoComplete({
             error && 'border-destructive focus-visible:ring-destructive/50',
             inputClassName
           )}
-          autoComplete="off"
+          autoComplete='off'
           {...inputProps}
         />
 
         {clearable && query && !disabled && (
           <Button
-            type="button"
-            variant="ghost"
-            size="sm"
+            type='button'
+            variant='ghost'
+            size='sm'
             onClick={handleClear}
-            className="absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6 p-0 hover:bg-destructive/10 hover:text-destructive"
+            className='absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6 p-0 hover:bg-destructive/10 hover:text-destructive'
             tabIndex={-1}
           >
-            <X className="h-3 w-3" />
+            <X className='h-3 w-3' />
           </Button>
         )}
       </div>
@@ -330,52 +355,45 @@ export function AutoComplete({
       {isMounted && shouldShowDropdown && (
         <div
           id={listboxId}
-          role="listbox"
+          role='listbox'
           ref={listRef}
-          className="absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95"
+          className='absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover text-popover-foreground shadow-md animate-in fade-in-0 zoom-in-95'
           aria-labelledby={inputProps['aria-labelledby']}
-          aria-multiselectable="false"
+          aria-multiselectable='false'
         >
           {error && (
             <div
               id={errorId}
-              className="p-3 text-sm text-destructive flex items-start gap-2"
-              role="alert"
-              aria-live="assertive"
+              className='p-3 text-sm text-destructive flex items-start gap-2'
+              role='alert'
+              aria-live='assertive'
             >
-              <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+              <AlertCircle className='h-4 w-4 mt-0.5 flex-shrink-0' />
               <span>{error}</span>
             </div>
           )}
 
           {isLoading && (
-            <div className="p-3 text-sm text-muted-foreground flex items-center gap-2">
-              <Loader2 className="h-4 w-4 animate-spin" />
+            <div className='p-3 text-sm text-muted-foreground flex items-center gap-2'>
+              <Loader2 className='h-4 w-4 animate-spin' />
               {loadingText}
             </div>
           )}
 
           {!isLoading && !error && filteredOptions.length === 0 && (
-            <div className="p-3 text-sm text-muted-foreground text-center">
-              {emptyText}
-            </div>
+            <div className='p-3 text-sm text-muted-foreground text-center'>{emptyText}</div>
           )}
 
           {!isLoading && !error && filteredOptions.length > 0 && (
             <>
-              <div
-                id={descriptionId}
-                className="sr-only"
-                aria-live="polite"
-                aria-atomic="true"
-              >
+              <div id={descriptionId} className='sr-only' aria-live='polite' aria-atomic='true'>
                 {`${filteredOptions.length} ${filteredOptions.length === 1 ? 'option' : 'options'} available`}
               </div>
               {filteredOptions.map((option, index) => (
                 <button
                   key={`${option.value}-${index}`}
                   id={getOptionId(index)}
-                  type="button"
+                  type='button'
                   onClick={() => !option.disabled && handleOptionSelect(option)}
                   className={cn(
                     'w-full px-3 py-2 text-left text-sm transition-colors',
@@ -387,26 +405,24 @@ export function AutoComplete({
                     optionClassName
                   )}
                   disabled={option.disabled}
-                  role="option"
+                  role='option'
                   aria-selected={selectedIndex === index}
                   aria-disabled={option.disabled}
                   aria-setsize={filteredOptions.length}
                   aria-posinset={index + 1}
                   tabIndex={-1}
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1 min-w-0">
-                      <div className="font-medium">{option.label}</div>
+                  <div className='flex items-center justify-between'>
+                    <div className='flex-1 min-w-0'>
+                      <div className='font-medium'>{option.label}</div>
                       {option.description && (
-                        <div className="text-xs text-muted-foreground truncate">
+                        <div className='text-xs text-muted-foreground truncate'>
                           {option.description}
                         </div>
                       )}
                     </div>
 
-                    {value === option.value && (
-                      <Check className="ml-2 h-4 w-4 shrink-0" />
-                    )}
+                    {value === option.value && <Check className='ml-2 h-4 w-4 shrink-0' />}
                   </div>
                 </button>
               ))}
@@ -432,42 +448,40 @@ export function AsyncAutoComplete({
   const [cache, setCache] = useState<Map<string, AutoCompleteOption[]>>(new Map());
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  const handleSearch = useCallback(async (query: string): Promise<AutoCompleteOption[]> => {
-    // Cancel previous request
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-
-    // Check cache
-    if (cacheResults && cache.has(query)) {
-      return cache.get(query)!;
-    }
-
-    // Create new abort controller
-    abortControllerRef.current = new AbortController();
-
-    try {
-      const results = await searchFunction(query, abortControllerRef.current.signal);
-
-      // Cache results
-      if (cacheResults) {
-        setCache(prev => new Map(prev).set(query, results));
+  const handleSearch = useCallback(
+    async (query: string): Promise<AutoCompleteOption[]> => {
+      // Cancel previous request
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort();
       }
 
-      return results;
-    } catch (error) {
-      if (error instanceof Error && error.name === 'AbortError') {
-        // Request was aborted, return empty array
-        return [];
+      // Check cache
+      if (cacheResults && cache.has(query)) {
+        return cache.get(query)!;
       }
-      throw error;
-    }
-  }, [searchFunction, cacheResults, cache]);
 
-  return (
-    <AutoComplete
-      {...props}
-      onSearch={handleSearch}
-    />
+      // Create new abort controller
+      abortControllerRef.current = new AbortController();
+
+      try {
+        const results = await searchFunction(query, abortControllerRef.current.signal);
+
+        // Cache results
+        if (cacheResults) {
+          setCache(prev => new Map(prev).set(query, results));
+        }
+
+        return results;
+      } catch (error) {
+        if (error instanceof Error && error.name === 'AbortError') {
+          // Request was aborted, return empty array
+          return [];
+        }
+        throw error;
+      }
+    },
+    [searchFunction, cacheResults, cache]
   );
+
+  return <AutoComplete {...props} onSearch={handleSearch} />;
 }

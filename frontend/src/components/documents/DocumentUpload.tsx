@@ -55,7 +55,7 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
         return;
       }
 
-      setFiles((prev) => [...prev, ...acceptedFiles]);
+      setFiles(prev => [...prev, ...acceptedFiles]);
     },
     [files, maxFiles, maxSize]
   );
@@ -69,7 +69,7 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
   };
 
   const removeFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
+    setFiles(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleUpload = async () => {
@@ -91,7 +91,11 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
   return (
     <div className={cn('space-y-4', className)}>
       <Dropzone {...dropzoneConfig}>
-        {({ getRootProps, getInputProps, isDragActive }: {
+        {({
+          getRootProps,
+          getInputProps,
+          isDragActive,
+        }: {
           getRootProps: () => any;
           getInputProps: () => any;
           isDragActive: boolean;
@@ -108,14 +112,14 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
             )}
           >
             <input {...getInputProps()} />
-            <div className="flex flex-col items-center justify-center space-y-2">
-              <Upload className="h-8 w-8 text-gray-400" />
+            <div className='flex flex-col items-center justify-center space-y-2'>
+              <Upload className='h-8 w-8 text-gray-400' />
               {isDragActive ? (
-                <p className="font-medium">Drop the files here</p>
+                <p className='font-medium'>Drop the files here</p>
               ) : (
                 <>
-                  <p className="font-medium">Drag and drop files here, or click to select</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className='font-medium'>Drag and drop files here, or click to select</p>
+                  <p className='text-sm text-gray-500 dark:text-gray-400'>
                     Supported formats: PDF, DOC, DOCX, TXT (max {maxSize / (1024 * 1024)}MB)
                   </p>
                 </>
@@ -126,39 +130,39 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
       </Dropzone>
 
       {error && (
-        <div className="text-sm text-destructive flex items-center gap-2">
-          <X className="w-4 h-4" />
+        <div className='text-sm text-destructive flex items-center gap-2'>
+          <X className='w-4 h-4' />
           {error}
         </div>
       )}
 
       {files.length > 0 && (
-        <div className="space-y-2">
-          <h4 className="text-sm font-medium text-foreground">Files to upload</h4>
-          <div className="space-y-2 max-h-48 overflow-y-auto">
+        <div className='space-y-2'>
+          <h4 className='text-sm font-medium text-foreground'>Files to upload</h4>
+          <div className='space-y-2 max-h-48 overflow-y-auto'>
             {files.map((file, index) => (
               <div
                 key={`${file.name}-${index}`}
-                className="flex items-center justify-between p-2 bg-muted/30 rounded-md"
+                className='flex items-center justify-between p-2 bg-muted/30 rounded-md'
               >
-                <div className="flex items-center gap-2 min-w-0">
-                  <FileText className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                  <span className="text-sm truncate">{file.name}</span>
-                  <span className="text-xs text-muted-foreground">
+                <div className='flex items-center gap-2 min-w-0'>
+                  <FileText className='w-4 h-4 text-muted-foreground flex-shrink-0' />
+                  <span className='text-sm truncate'>{file.name}</span>
+                  <span className='text-xs text-muted-foreground'>
                     {(file.size / 1024).toFixed(1)} KB
                   </span>
                 </div>
                 <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6"
-                  onClick={(e) => {
+                  variant='ghost'
+                  size='icon'
+                  className='h-6 w-6'
+                  onClick={e => {
                     e.stopPropagation();
                     removeFile(index);
                   }}
                   aria-label={`Remove ${file.name}`}
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X className='w-3.5 h-3.5' />
                 </Button>
               </div>
             ))}
@@ -166,9 +170,11 @@ export const DocumentUpload: React.FC<DocumentUploadProps> = ({
           <Button
             onClick={handleUpload}
             disabled={isUploading || files.length === 0}
-            className="w-full mt-2"
+            className='w-full mt-2'
           >
-            {isUploading ? 'Uploading...' : `Upload ${files.length} file${files.length !== 1 ? 's' : ''}`}
+            {isUploading
+              ? 'Uploading...'
+              : `Upload ${files.length} file${files.length !== 1 ? 's' : ''}`}
           </Button>
         </div>
       )}

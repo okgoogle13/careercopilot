@@ -12,7 +12,7 @@ import {
   ImprovementItem,
   ActionButtons,
   ProgressIndicator,
-  FeedbackSection
+  FeedbackSection,
 } from './AIResultsDisplay';
 import { Target } from 'lucide-react';
 
@@ -30,8 +30,8 @@ type Story = StoryObj;
 export const JobMatchingDefault: Story = {
   render: () => (
     <JobMatchingComponent
-      resumeDocumentId="sample-resume-123"
-      onJobSelected={(jobId) => console.log('Selected job:', jobId)}
+      resumeDocumentId='sample-resume-123'
+      onJobSelected={jobId => console.log('Selected job:', jobId)}
     />
   ),
 };
@@ -44,8 +44,8 @@ export const ContentOptimizationDefault: Story = {
 export const ContentOptimizationWithContent: Story = {
   render: () => (
     <ContentOptimizationComponent
-      initialContent="John Doe\nSoftware Engineer\nExperienced in React and TypeScript"
-      contentType="resume"
+      initialContent='John Doe\nSoftware Engineer\nExperienced in React and TypeScript'
+      contentType='resume'
     />
   ),
 };
@@ -72,9 +72,9 @@ export const ContentOptimizationSkeletonStory: Story = {
 export const LoadingState: Story = {
   render: () => (
     <AILoadingState
-      message="Analyzing your resume..."
+      message='Analyzing your resume...'
       estimatedTime={30}
-      currentStep="Processing content"
+      currentStep='Processing content'
       steps={['Upload', 'Process', 'Analyze', 'Generate']}
     />
   ),
@@ -84,30 +84,24 @@ export const LoadingState: Story = {
 export const SuccessHeader: Story = {
   render: () => (
     <AISuccessHeader
-      title="Job Matching Complete!"
-      subtitle="Found 15 relevant opportunities for you"
-      icon={<Target className="h-6 w-6" />}
-      className="mb-4"
+      title='Job Matching Complete!'
+      subtitle='Found 15 relevant opportunities for you'
+      icon={<Target className='h-6 w-6' />}
+      className='mb-4'
     />
   ),
 };
 
 export const ScoreDisplayExample: Story = {
-  render: () => (
-    <ScoreDisplay
-      score={85}
-      label="Match Score"
-      color="green"
-    />
-  ),
+  render: () => <ScoreDisplay score={85} label='Match Score' color='green' />,
 };
 
 export const SkillTagsExample: Story = {
   render: () => (
-    <div className="flex flex-wrap gap-2">
-      <SkillTag skill="React" level="expert" />
-      <SkillTag skill="TypeScript" level="advanced" />
-      <SkillTag skill="Node.js" level="intermediate" />
+    <div className='flex flex-wrap gap-2'>
+      <SkillTag skill='React' level='expert' />
+      <SkillTag skill='TypeScript' level='advanced' />
+      <SkillTag skill='Node.js' level='intermediate' />
     </div>
   ),
 };
@@ -115,10 +109,10 @@ export const SkillTagsExample: Story = {
 export const ImprovementItemExample: Story = {
   render: () => (
     <ImprovementItem
-      title="Add more quantified achievements"
-      description="Include specific numbers and metrics to demonstrate your impact"
-      impact="high"
-      category="content"
+      title='Add more quantified achievements'
+      description='Include specific numbers and metrics to demonstrate your impact'
+      impact='high'
+      category='content'
     />
   ),
 };
@@ -135,18 +129,12 @@ export const ActionButtonsExample: Story = {
 
 export const ProgressIndicatorExample: Story = {
   render: () => (
-    <ProgressIndicator
-      current={2}
-      total={4}
-      steps={['Upload', 'Process', 'Analyze', 'Generate']}
-    />
+    <ProgressIndicator current={2} total={4} steps={['Upload', 'Process', 'Analyze', 'Generate']} />
   ),
 };
 
 export const FeedbackSectionExample: Story = {
   render: () => (
-    <FeedbackSection
-      onFeedback={(rating, comment) => console.log('Feedback:', rating, comment)}
-    />
+    <FeedbackSection onFeedback={(rating, comment) => console.log('Feedback:', rating, comment)} />
   ),
 };

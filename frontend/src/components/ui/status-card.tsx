@@ -13,7 +13,7 @@ import {
   Calendar,
   DollarSign,
   Briefcase,
-  Award
+  Award,
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './Card';
@@ -22,7 +22,14 @@ import { Progress } from './progress';
 
 export type TrendDirection = 'up' | 'down' | 'neutral';
 export type StatusCardVariant = 'default' | 'success' | 'warning' | 'danger' | 'info';
-export type MetricType = 'applications' | 'interviews' | 'responses' | 'offers' | 'ats-score' | 'documents' | 'custom';
+export type MetricType =
+  | 'applications'
+  | 'interviews'
+  | 'responses'
+  | 'offers'
+  | 'ats-score'
+  | 'documents'
+  | 'custom';
 
 interface StatusCardProps {
   title: string;
@@ -140,39 +147,38 @@ export function StatusCard({
       )}
       onClick={onClick}
     >
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
-          {title}
-        </CardTitle>
-        <div className="flex items-center gap-2">
+      <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+        <CardTitle className='text-sm font-medium text-muted-foreground'>{title}</CardTitle>
+        <div className='flex items-center gap-2'>
           {badge && (
-            <Badge variant={badge.variant || 'default'} className="text-xs">
+            <Badge variant={badge.variant || 'default'} className='text-xs'>
               {badge.text}
             </Badge>
           )}
-          <Icon className="h-4 w-4 text-muted-foreground" />
+          <Icon className='h-4 w-4 text-muted-foreground' />
         </div>
       </CardHeader>
 
       <CardContent>
-        <div className="space-y-3">
+        <div className='space-y-3'>
           {/* Main Value */}
-          <div className="flex items-baseline gap-2">
+          <div className='flex items-baseline gap-2'>
             {loading ? (
-              <div className="h-8 w-20 bg-muted animate-pulse rounded" />
+              <div className='h-8 w-20 bg-muted animate-pulse rounded' />
             ) : (
-              <div className="text-2xl font-bold">
-                {formatValue(value)}
-              </div>
+              <div className='text-2xl font-bold'>{formatValue(value)}</div>
             )}
 
             {/* Trend Indicator */}
             {trend && TrendIcon && !loading && (
               <div className={cn('flex items-center text-xs', getTrendColor(trend.direction))}>
-                <TrendIcon className="h-3 w-3 mr-1" />
-                <span>{trend.direction === 'neutral' ? '±' : ''}{trend.value}</span>
+                <TrendIcon className='h-3 w-3 mr-1' />
+                <span>
+                  {trend.direction === 'neutral' ? '±' : ''}
+                  {trend.value}
+                </span>
                 {trend.period && (
-                  <span className="text-muted-foreground ml-1">vs {trend.period}</span>
+                  <span className='text-muted-foreground ml-1'>vs {trend.period}</span>
                 )}
               </div>
             )}
@@ -180,27 +186,22 @@ export function StatusCard({
 
           {/* Progress Bar */}
           {progress && !loading && (
-            <div className="space-y-2">
-              <Progress
-                value={progress.value}
-                max={progress.max || 100}
-                className="h-2"
-              />
+            <div className='space-y-2'>
+              <Progress value={progress.value} max={progress.max || 100} className='h-2' />
               {progress.label && (
-                <div className="flex justify-between text-xs text-muted-foreground">
+                <div className='flex justify-between text-xs text-muted-foreground'>
                   <span>{progress.label}</span>
-                  <span>{progress.value}{progress.max ? `/${progress.max}` : '%'}</span>
+                  <span>
+                    {progress.value}
+                    {progress.max ? `/${progress.max}` : '%'}
+                  </span>
                 </div>
               )}
             </div>
           )}
 
           {/* Description */}
-          {description && (
-            <CardDescription className="text-xs">
-              {description}
-            </CardDescription>
-          )}
+          {description && <CardDescription className='text-xs'>{description}</CardDescription>}
         </div>
       </CardContent>
     </Card>
@@ -209,7 +210,13 @@ export function StatusCard({
 
 // Specialized metric cards for Career Copilot dashboard
 interface MetricCardProps extends Omit<StatusCardProps, 'type' | 'icon'> {
-  metric: 'total-applications' | 'pending-responses' | 'interviews-scheduled' | 'offers-received' | 'avg-ats-score' | 'documents-generated';
+  metric:
+    | 'total-applications'
+    | 'pending-responses'
+    | 'interviews-scheduled'
+    | 'offers-received'
+    | 'avg-ats-score'
+    | 'documents-generated';
 }
 
 export function MetricCard({ metric, ...props }: MetricCardProps) {
@@ -262,14 +269,7 @@ export function MetricCard({ metric, ...props }: MetricCardProps) {
 
   const config = getMetricConfig();
 
-  return (
-    <StatusCard
-      type={config.type}
-      icon={config.icon}
-      variant={config.variant}
-      {...props}
-    />
-  );
+  return <StatusCard type={config.type} icon={config.icon} variant={config.variant} {...props} />;
 }
 
 // Grid layout for multiple status cards
@@ -280,28 +280,32 @@ interface StatusCardGridProps {
   className?: string;
 }
 
-export function StatusCardGrid({
-  cards,
-  columns = 3,
-  gap = 'md',
-  className
-}: StatusCardGridProps) {
+export function StatusCardGrid({ cards, columns = 3, gap = 'md', className }: StatusCardGridProps) {
   const getGridCols = () => {
     switch (columns) {
-      case 1: return 'grid-cols-1';
-      case 2: return 'grid-cols-1 md:grid-cols-2';
-      case 3: return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
-      case 4: return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4';
-      default: return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+      case 1:
+        return 'grid-cols-1';
+      case 2:
+        return 'grid-cols-1 md:grid-cols-2';
+      case 3:
+        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+      case 4:
+        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4';
+      default:
+        return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
     }
   };
 
   const getGapSize = () => {
     switch (gap) {
-      case 'sm': return 'gap-3';
-      case 'md': return 'gap-4';
-      case 'lg': return 'gap-6';
-      default: return 'gap-4';
+      case 'sm':
+        return 'gap-3';
+      case 'md':
+        return 'gap-4';
+      case 'lg':
+        return 'gap-6';
+      default:
+        return 'gap-4';
     }
   };
 

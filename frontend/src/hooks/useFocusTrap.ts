@@ -37,11 +37,7 @@ export const useFocusTrap = (options: FocusTrapOptions) => {
       return Array.from(container.querySelectorAll(focusableSelectors)).filter(
         (element: Element) => {
           const htmlElement = element as HTMLElement;
-          return (
-            htmlElement.offsetWidth > 0 &&
-            htmlElement.offsetHeight > 0 &&
-            !htmlElement.hidden
-          );
+          return htmlElement.offsetWidth > 0 && htmlElement.offsetHeight > 0 && !htmlElement.hidden;
         }
       ) as HTMLElement[];
     };
@@ -59,19 +55,13 @@ export const useFocusTrap = (options: FocusTrapOptions) => {
 
       if (event.shiftKey) {
         // Shift + Tab: moving backwards
-        if (
-          activeElement === firstElement ||
-          !container.contains(activeElement)
-        ) {
+        if (activeElement === firstElement || !container.contains(activeElement)) {
           event.preventDefault();
           lastElement.focus();
         }
       } else {
         // Tab: moving forwards
-        if (
-          activeElement === lastElement ||
-          !container.contains(activeElement)
-        ) {
+        if (activeElement === lastElement || !container.contains(activeElement)) {
           event.preventDefault();
           firstElement.focus();
         }

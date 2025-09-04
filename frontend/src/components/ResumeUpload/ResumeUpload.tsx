@@ -13,9 +13,7 @@ interface ResumeAnalysisResult {
   uploadedAt: Date;
 }
 
-export const ResumeUpload: React.FC<ResumeUploadProps> = ({
-  onUploadComplete,
-}) => {
+export const ResumeUpload: React.FC<ResumeUploadProps> = ({ onUploadComplete }) => {
   const [isDragOver, setIsDragOver] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingStep, setProcessingStep] = useState('');
@@ -128,33 +126,21 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
     return Math.min(Math.max(score, 45), 95);
   };
 
-  const generateRecommendations = (
-    score: number,
-    content: string
-  ): string[] => {
+  const generateRecommendations = (score: number, content: string): string[] => {
     const recommendations: string[] = [];
 
     if (score < 70) {
-      recommendations.push(
-        'Consider adding more relevant keywords from the job description'
-      );
+      recommendations.push('Consider adding more relevant keywords from the job description');
       recommendations.push('Ensure all section headers are clear and standard');
     }
 
     if (score < 80) {
       recommendations.push('Add more quantifiable achievements and metrics');
-      recommendations.push(
-        'Use a professional template for better ATS compatibility'
-      );
+      recommendations.push('Use a professional template for better ATS compatibility');
     }
 
-    if (
-      !content.toLowerCase().includes('contact') &&
-      !content.toLowerCase().includes('email')
-    ) {
-      recommendations.push(
-        'Make sure your contact information is clearly visible'
-      );
+    if (!content.toLowerCase().includes('contact') && !content.toLowerCase().includes('email')) {
+      recommendations.push('Make sure your contact information is clearly visible');
     }
 
     return recommendations;
@@ -181,8 +167,8 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-      <h3 className="text-lg font-semibold mb-4">Upload Your Resume</h3>
+    <div className='bg-white p-6 rounded-lg shadow-md border border-gray-200'>
+      <h3 className='text-lg font-semibold mb-4'>Upload Your Resume</h3>
 
       {!isProcessing ? (
         <div
@@ -196,49 +182,47 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
           onDrop={handleDrop}
           onClick={handleClick}
         >
-          <div className="mb-4">
+          <div className='mb-4'>
             <svg
-              className="mx-auto h-12 w-12 text-gray-400"
-              stroke="currentColor"
-              fill="none"
-              viewBox="0 0 48 48"
+              className='mx-auto h-12 w-12 text-gray-400'
+              stroke='currentColor'
+              fill='none'
+              viewBox='0 0 48 48'
             >
               <path
-                d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                d='M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02'
                 strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                strokeLinecap='round'
+                strokeLinejoin='round'
               />
             </svg>
           </div>
 
-          <div className="mb-2">
-            <p className="text-lg font-medium text-gray-900">
+          <div className='mb-2'>
+            <p className='text-lg font-medium text-gray-900'>
               Drop your resume here, or click to browse
             </p>
-            <p className="text-sm text-gray-600 mt-2">
+            <p className='text-sm text-gray-600 mt-2'>
               Supports PDF, Word, and text files up to 5MB
             </p>
           </div>
 
-          <div className="flex justify-center mt-4">
-            <span className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <div className='flex justify-center mt-4'>
+            <span className='inline-flex items-center px-4 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50'>
               Select File
             </span>
           </div>
         </div>
       ) : (
-        <div className="border rounded-lg p-8 text-center">
-          <div className="mb-4">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mx-auto"></div>
+        <div className='border rounded-lg p-8 text-center'>
+          <div className='mb-4'>
+            <div className='animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mx-auto'></div>
           </div>
-          <h4 className="text-lg font-medium text-gray-900 mb-2">
-            Processing Your Resume
-          </h4>
-          <p className="text-sm text-gray-600">{processingStep}</p>
-          <div className="mt-4 bg-gray-200 rounded-full h-2">
+          <h4 className='text-lg font-medium text-gray-900 mb-2'>Processing Your Resume</h4>
+          <p className='text-sm text-gray-600'>{processingStep}</p>
+          <div className='mt-4 bg-gray-200 rounded-full h-2'>
             <div
-              className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+              className='bg-blue-500 h-2 rounded-full transition-all duration-300'
               style={{
                 width: processingStep.includes('Reading')
                   ? '25%'
@@ -259,9 +243,9 @@ export const ResumeUpload: React.FC<ResumeUploadProps> = ({
 
       <input
         ref={fileInputRef}
-        type="file"
-        className="hidden"
-        accept=".pdf,.doc,.docx,.txt"
+        type='file'
+        className='hidden'
+        accept='.pdf,.doc,.docx,.txt'
         onChange={e => handleFileSelect(e.target.files)}
       />
     </div>

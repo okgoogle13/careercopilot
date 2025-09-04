@@ -8,9 +8,7 @@ interface ThemeProviderContext {
   resolvedTheme: 'dark';
 }
 
-const ThemeProviderContext = createContext<ThemeProviderContext | undefined>(
-  undefined
-);
+const ThemeProviderContext = createContext<ThemeProviderContext | undefined>(undefined);
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -33,17 +31,14 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   };
 
   return (
-    <ThemeProviderContext.Provider value={contextValue}>
-      {children}
-    </ThemeProviderContext.Provider>
+    <ThemeProviderContext.Provider value={contextValue}>{children}</ThemeProviderContext.Provider>
   );
 }
 
 export const useTheme = (): ThemeProviderContext => {
   const context = useContext(ThemeProviderContext);
 
-  if (context === undefined)
-    throw new Error('useTheme must be used within a ThemeProvider');
+  if (context === undefined) throw new Error('useTheme must be used within a ThemeProvider');
 
   return context;
 };

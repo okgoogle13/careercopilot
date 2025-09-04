@@ -25,9 +25,7 @@ class PureFallbackAuth {
   private storageKey = 'careercopilot-pure-auth';
 
   constructor() {
-    console.log(
-      '🔧 PureFallbackAuth: Initializing pure fallback authentication'
-    );
+    console.log('🔧 PureFallbackAuth: Initializing pure fallback authentication');
     this.loadPersistedAuth();
   }
 
@@ -42,10 +40,7 @@ class PureFallbackAuth {
         console.log('🔧 PureFallbackAuth: No persisted user found');
       }
     } catch (error) {
-      console.warn(
-        '⚠️ PureFallbackAuth: Failed to load persisted auth:',
-        error
-      );
+      console.warn('⚠️ PureFallbackAuth: Failed to load persisted auth:', error);
     }
   }
 
@@ -93,9 +88,7 @@ class PureFallbackAuth {
         uid: 'fallback-user-' + btoa(email).replace(/[^a-zA-Z0-9]/g, ''),
         email,
         displayName: email.split('@')[0],
-        token:
-          'fallback-token-' +
-          btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
+        token: 'fallback-token-' + btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
       };
 
       this.setState({ user, loading: false, error: null });
@@ -104,8 +97,7 @@ class PureFallbackAuth {
       console.log('✅ PureFallbackAuth: Sign-in successful for:', email);
       return user;
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Authentication failed';
+      const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
       console.error('❌ PureFallbackAuth: Sign-in failed:', errorMessage);
       this.setState({ loading: false, error: errorMessage });
       throw new Error(errorMessage);
@@ -138,9 +130,7 @@ class PureFallbackAuth {
         uid: 'fallback-user-' + btoa(email).replace(/[^a-zA-Z0-9]/g, ''),
         email,
         displayName: email.split('@')[0],
-        token:
-          'fallback-token-' +
-          btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
+        token: 'fallback-token-' + btoa(email + Date.now()).replace(/[^a-zA-Z0-9]/g, ''),
       };
 
       this.setState({ user, loading: false, error: null });
@@ -149,8 +139,7 @@ class PureFallbackAuth {
       console.log('✅ PureFallbackAuth: Sign-up successful for:', email);
       return user;
     } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : 'Registration failed';
+      const errorMessage = error instanceof Error ? error.message : 'Registration failed';
       console.error('❌ PureFallbackAuth: Sign-up failed:', errorMessage);
       this.setState({ loading: false, error: errorMessage });
       throw new Error(errorMessage);

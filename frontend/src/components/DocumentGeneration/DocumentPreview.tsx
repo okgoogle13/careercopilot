@@ -6,10 +6,7 @@ interface DocumentPreviewProps {
   templateName?: string;
 }
 
-const DocumentPreview: React.FC<DocumentPreviewProps> = ({
-  documentContent,
-  templateName,
-}) => {
+const DocumentPreview: React.FC<DocumentPreviewProps> = ({ documentContent, templateName }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showExportOptions, setShowExportOptions] = useState(false);
 
@@ -149,39 +146,37 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
 
   return (
     <div className={`document-preview ${isFullscreen ? 'fullscreen' : ''}`}>
-      <div className="preview-header">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">
-            Preview{templateName && `: ${templateName}`}
-          </h2>
+      <div className='preview-header'>
+        <div className='flex items-center justify-between'>
+          <h2 className='text-xl font-semibold'>Preview{templateName && `: ${templateName}`}</h2>
 
-          <div className="flex items-center gap-2">
+          <div className='flex items-center gap-2'>
             {/* Export Options */}
-            <div className="relative">
+            <div className='relative'>
               <button
                 onClick={() => setShowExportOptions(!showExportOptions)}
-                className="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors"
+                className='px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors'
               >
                 Export ↓
               </button>
 
               {showExportOptions && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                <div className='absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10'>
                   <button
                     onClick={() => handleDownload('pdf')}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm border-b border-gray-100"
+                    className='w-full text-left px-4 py-2 hover:bg-gray-50 text-sm border-b border-gray-100'
                   >
                     📄 Download as PDF
                   </button>
                   <button
                     onClick={() => handleDownload('docx')}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm border-b border-gray-100"
+                    className='w-full text-left px-4 py-2 hover:bg-gray-50 text-sm border-b border-gray-100'
                   >
                     📝 Download as Word
                   </button>
                   <button
                     onClick={() => handleDownload('txt')}
-                    className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm"
+                    className='w-full text-left px-4 py-2 hover:bg-gray-50 text-sm'
                   >
                     📃 Download as Text
                   </button>
@@ -192,7 +187,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             {/* Print Button */}
             <button
               onClick={handlePrint}
-              className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-colors"
+              className='px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-colors'
             >
               🖨️ Print
             </button>
@@ -200,7 +195,7 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
             {/* Fullscreen Toggle */}
             <button
               onClick={toggleFullscreen}
-              className="px-3 py-1 bg-gray-500 text-white text-sm rounded hover:bg-gray-600 transition-colors"
+              className='px-3 py-1 bg-gray-500 text-white text-sm rounded hover:bg-gray-600 transition-colors'
             >
               {isFullscreen ? '📉 Exit' : '📈 Fullscreen'}
             </button>
@@ -208,18 +203,15 @@ const DocumentPreview: React.FC<DocumentPreviewProps> = ({
         </div>
       </div>
 
-      <div className="preview-content-wrapper">
-        <div className="preview-paper">
-          <div
-            className="preview-content"
-            dangerouslySetInnerHTML={{ __html: documentContent }}
-          />
+      <div className='preview-content-wrapper'>
+        <div className='preview-paper'>
+          <div className='preview-content' dangerouslySetInnerHTML={{ __html: documentContent }} />
         </div>
       </div>
 
       {/* Document Stats */}
-      <div className="preview-stats">
-        <div className="flex items-center justify-between text-sm text-gray-600">
+      <div className='preview-stats'>
+        <div className='flex items-center justify-between text-sm text-gray-600'>
           <span>Ready to export</span>
           <span>ATS-optimized format</span>
         </div>

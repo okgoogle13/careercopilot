@@ -48,32 +48,30 @@ export function Dashboard({ onCreateProfile, onEditProfile }: DashboardProps) {
   };
 
   return (
-    <div className="flex-1 p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className='flex-1 p-8'>
+      <div className='flex items-center justify-between mb-8'>
         <div>
-          <h1 className="text-2xl font-bold text-foreground mb-2">
-            Your Job Seeker Profiles
-          </h1>
+          <h1 className='text-2xl font-bold text-foreground mb-2'>Your Job Seeker Profiles</h1>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <div className='flex items-center gap-4'>
+          <div className='flex items-center gap-2 text-sm text-muted-foreground'>
             <span>Dashboard</span>
             <span>ATS Analysis</span>
           </div>
           <Button
             onClick={onCreateProfile}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            className='bg-primary hover:bg-primary/90 text-primary-foreground'
           >
-            <Plus className="w-4 h-4 mr-2" />
+            <Plus className='w-4 h-4 mr-2' />
             Create Profile
           </Button>
-          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-            <User className="w-4 h-4 text-black" />
+          <div className='w-8 h-8 bg-white rounded-full flex items-center justify-center'>
+            <User className='w-4 h-4 text-black' />
           </div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {profiles.map(profile => (
           <ProfileCard
             key={profile.id}
