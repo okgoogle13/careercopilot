@@ -23,7 +23,7 @@ class ErrorHandler {
     const severity = this.determineSeverity(type, originalError);
     const userMessage = this.generateUserMessage(type, message);
     const suggestions = this.generateSuggestions(type, originalError);
-    
+
     return {
       id,
       type,
@@ -59,7 +59,7 @@ class ErrorHandler {
 
     this.logError(appError);
     this.notifyListeners(appError);
-    
+
     if (appError.severity === ErrorSeverity.CRITICAL) {
       this.handleCriticalError(appError);
     }
@@ -75,32 +75,32 @@ class ErrorHandler {
     if (message.includes('network') || message.includes('fetch') || name.includes('networkerror')) {
       return ErrorType.NETWORK;
     }
-    
+
     // Timeout errors
     if (message.includes('timeout') || name.includes('timeout')) {
       return ErrorType.TIMEOUT;
     }
-    
+
     // Authentication errors
     if (message.includes('unauthorized') || message.includes('401')) {
       return ErrorType.AUTHENTICATION;
     }
-    
+
     // Authorization errors
     if (message.includes('forbidden') || message.includes('403')) {
       return ErrorType.AUTHORIZATION;
     }
-    
+
     // Validation errors
     if (message.includes('validation') || message.includes('invalid')) {
       return ErrorType.VALIDATION;
     }
-    
+
     // Render errors
     if (name.includes('react') || message.includes('render')) {
       return ErrorType.RENDER;
     }
-    
+
     // Storage errors
     if (message.includes('storage') || message.includes('quota')) {
       return ErrorType.STORAGE;
@@ -109,24 +109,24 @@ class ErrorHandler {
     return ErrorType.UNKNOWN;
   }
 
-  private determineSeverity(type: ErrorType, error?: Error): ErrorSeverity {
+  private determineSeverity(type: ErrorType, _error?: Error): ErrorSeverity {
     switch (type) {
       case ErrorType.AUTHENTICATION:
       case ErrorType.AUTHORIZATION:
       case ErrorType.SYSTEM:
       case ErrorType.MEMORY:
         return ErrorSeverity.CRITICAL;
-      
+
       case ErrorType.API_SERVER_ERROR:
       case ErrorType.EXTERNAL_SERVICE:
       case ErrorType.RENDER:
         return ErrorSeverity.HIGH;
-      
+
       case ErrorType.NETWORK:
       case ErrorType.TIMEOUT:
       case ErrorType.RESOURCE_NOT_FOUND:
         return ErrorSeverity.MEDIUM;
-      
+
       default:
         return ErrorSeverity.LOW;
     }
@@ -136,44 +136,44 @@ class ErrorHandler {
     switch (type) {
       case ErrorType.NETWORK:
         return "We're having trouble connecting to our servers. Please check your internet connection.";
-      
+
       case ErrorType.AUTHENTICATION:
         return "Your session has expired. Please sign in again to continue.";
-      
+
       case ErrorType.AUTHORIZATION:
         return "You don't have permission to access this resource. Please contact support if you believe this is an error.";
-      
+
       case ErrorType.VALIDATION:
       case ErrorType.FORM_VALIDATION:
         return "Please check the information you've entered and try again.";
-      
+
       case ErrorType.FILE_VALIDATION:
         return "The file you're trying to upload doesn't meet our requirements. Please try a different file.";
-      
+
       case ErrorType.TIMEOUT:
         return "The request is taking longer than expected. Please try again.";
-      
+
       case ErrorType.RESOURCE_NOT_FOUND:
         return "The requested resource could not be found. It may have been moved or deleted.";
-      
+
       case ErrorType.QUOTA_EXCEEDED:
         return "You've reached your usage limit. Please upgrade your plan or try again later.";
-      
+
       case ErrorType.AI_SERVICE:
         return "Our AI service is temporarily unavailable. Please try again in a moment.";
-      
+
       case ErrorType.STORAGE:
         return "We're having trouble saving your data. Please ensure you have enough storage space.";
-      
+
       case ErrorType.RENDER:
         return "There was a problem displaying this content. Please refresh the page.";
-      
+
       default:
         return message || "An unexpected error occurred. Please try again or contact support if the problem persists.";
     }
   }
 
-  private generateSuggestions(type: ErrorType, error?: Error): ActionableSuggestion[] {
+  private generateSuggestions(type: ErrorType, _error?: Error): ActionableSuggestion[] {
     const suggestions: ActionableSuggestion[] = [];
 
     switch (type) {
@@ -393,7 +393,7 @@ class ErrorHandler {
     }
   }
 
-  private isAppError(error: any): error is AppError {
+  private isAppError(error: unknown): error is AppError {
     return error && typeof error === 'object' && 'type' in error && 'severity' in error;
   }
 
@@ -453,7 +453,7 @@ class ErrorHandler {
     }
 
     error.retryCount = (error.retryCount ?? 0) + 1;
-    
+
     const retryStrategy = this.retryStrategies.get(error.type);
     if (retryStrategy) {
       try {

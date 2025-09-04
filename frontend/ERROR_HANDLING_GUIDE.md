@@ -83,7 +83,7 @@ import ErrorBoundary from '../components/ui/ErrorBoundary';
 
 function PageComponent() {
   return (
-    <ErrorBoundary 
+    <ErrorBoundary
       componentName="PageComponent"
       showActionableSuggestions={true}
     >
@@ -226,7 +226,7 @@ import ErrorDisplay from '../components/ui/ErrorDisplay';
 ```tsx
 import ErrorToastContainer from '../components/ui/ErrorToastContainer';
 
-<ErrorToastContainer 
+<ErrorToastContainer
   position="top-right"  // top-right|top-left|bottom-right|etc.
 />
 ```
@@ -356,7 +356,7 @@ import { createError } from '../utils/errorSystem';
 
 test('should create network error with suggestions', () => {
   const error = createError.network('Connection failed');
-  
+
   expect(error.type).toBe('NETWORK');
   expect(error.suggestions).toHaveLength(3);
   expect(error.suggestions[0].actionType).toBe('retry');
@@ -395,7 +395,7 @@ const mockRecoveryStrategy = {
 ### Common Issues
 
 1. **Errors not appearing** - Ensure `ErrorProvider` wraps your app
-2. **Suggestions not working** - Check `onAction` handler implementation  
+2. **Suggestions not working** - Check `onAction` handler implementation
 3. **Recovery failing** - Verify recovery strategies are registered
 4. **Logging not working** - Check environment variables and network
 
@@ -423,8 +423,8 @@ try {
 }
 
 // New way
-const result = await handleAsync(() => apiCall(), { 
-  component: 'MyComponent' 
+const result = await handleAsync(() => apiCall(), {
+  component: 'MyComponent'
 });
 ```
 
@@ -437,7 +437,7 @@ const result = await handleAsync(() => apiCall(), {
 </ErrorBoundary>
 
 // New way
-<ErrorBoundary 
+<ErrorBoundary
   componentName="MyComponent"
   showActionableSuggestions={true}
 >

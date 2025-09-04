@@ -42,7 +42,7 @@ class ErrorLogger {
   private static instance: ErrorLogger;
   private config: LoggingConfig;
   private logQueue: LogEntry[] = [];
-  private flushTimer?: NodeJS.Timeout;
+  private flushTimer?: number;
   private sessionId: string;
 
   constructor(config?: Partial<LoggingConfig>) {
@@ -55,7 +55,7 @@ class ErrorLogger {
       enablePerformanceMetrics: true,
       ...config
     };
-    
+
     this.sessionId = this.generateSessionId();
     this.startFlushTimer();
   }
@@ -91,7 +91,7 @@ class ErrorLogger {
     // Remote logging
     if (this.config.enableRemote) {
       this.logQueue.push(logEntry);
-      
+
       if (this.logQueue.length >= this.config.batchSize) {
         await this.flush();
       }
@@ -101,23 +101,23 @@ class ErrorLogger {
   private sanitizeError(error: AppError): AppError {
     // Remove sensitive information before logging
     const sanitized = { ...error };
-    
+
     if (sanitized.context?.additionalData) {
       const { additionalData } = sanitized.context;
-      const sanitizedData: any = {};
-      
+      const sanitizedData: Record<string, unknown> = {};
+
       // Only include non-sensitive data
       for (const [key, value] of Object.entries(additionalData)) {
         if (!this.isSensitiveKey(key) && !this.containsSensitiveData(value)) {
           sanitizedData[key] = value;
         }
       }
-      
+
       sanitized.context.additionalData = sanitizedData;
     }
 
     // Remove potentially sensitive technical details in production
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.PROD) {
       sanitized.technicalDetails = undefined;
     }
 
@@ -129,15 +129,15 @@ class ErrorLogger {
       'password', 'token', 'key', 'secret', 'auth', 'credential',
       'ssn', 'social', 'credit', 'card', 'email', 'phone'
     ];
-    
-    return sensitiveKeys.some(sensitiveKey => 
+
+    return sensitiveKeys.some(sensitiveKey =>
       key.toLowerCase().includes(sensitiveKey.toLowerCase())
     );
   }
 
-  private containsSensitiveData(value: any): boolean {
+  private containsSensitiveData(value: unknown): boolean {
     if (typeof value !== 'string') return false;
-    
+
     // Basic patterns for sensitive data
     const patterns = [
       /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/, // Email
@@ -145,14 +145,14 @@ class ErrorLogger {
       /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/, // Credit card
       /^[a-zA-Z0-9+/]*={0,2}$/ // Base64 (potential tokens)
     ];
-    
+
     return patterns.some(pattern => pattern.test(value));
   }
 
   private logToConsole(logEntry: LogEntry): void {
     const { error } = logEntry;
     const logMethod = this.getConsoleMethod(error.severity);
-    
+
     logMethod(`[${error.severity}] ${error.type}: ${error.message}`, {
       id: error.id,
       component: error.component,
@@ -180,11 +180,13 @@ class ErrorLogger {
 
     // Memory usage (if available)
     if ('memory' in performance) {
-      const memory = (performance as any).memory;
-      metrics.memory = {
-        used: memory.usedJSHeapSize,
-        total: memory.totalJSHeapSize
-      };
+      const memory = (performance as { memory?: { usedJSHeapSize: number; totalJSHeapSize: number } }).memory;
+      if (memory) {
+        metrics.memory = {
+          used: memory.usedJSHeapSize,
+          total: memory.totalJSHeapSize
+        };
+      }
     }
 
     // Timing metrics
@@ -198,12 +200,14 @@ class ErrorLogger {
 
     // Network information (if available)
     if ('connection' in navigator) {
-      const connection = (navigator as any).connection;
-      metrics.networkInfo = {
-        effectiveType: connection.effectiveType || 'unknown',
-        downlink: connection.downlink || 0,
-        rtt: connection.rtt || 0
-      };
+      const connection = (navigator as { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }).connection;
+      if (connection) {
+        metrics.networkInfo = {
+          effectiveType: connection.effectiveType || 'unknown',
+          downlink: connection.downlink || 0,
+          rtt: connection.rtt || 0
+        };
+      }
     }
 
     return metrics;
@@ -255,7 +259,7 @@ class ErrorLogger {
 
   updateConfig(newConfig: Partial<LoggingConfig>): void {
     this.config = { ...this.config, ...newConfig };
-    
+
     if (this.flushTimer) {
       clearInterval(this.flushTimer);
     }
@@ -280,10 +284,10 @@ class ErrorLogger {
 
 // Create and export singleton instance
 export const errorLogger = ErrorLogger.getInstance({
-  enableConsole: process.env.NODE_ENV === 'development',
-  enableRemote: process.env.NODE_ENV === 'production',
-  remoteEndpoint: process.env.REACT_APP_ERROR_LOGGING_ENDPOINT,
-  apiKey: process.env.REACT_APP_ERROR_LOGGING_API_KEY,
+  enableConsole: import.meta.env.DEV,
+  enableRemote: import.meta.env.PROD,
+  remoteEndpoint: import.meta.env.VITE_ERROR_LOGGING_ENDPOINT,
+  apiKey: import.meta.env.VITE_ERROR_LOGGING_API_KEY,
 });
 
 // Export class for custom instances

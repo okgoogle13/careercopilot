@@ -64,22 +64,22 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
 
     const currentStep = steps[currentIndex];
     const remainingInCurrentStep = Math.max(0, currentStep.estimatedDuration - elapsedTime);
-    
+
     const remainingSteps = steps.slice(currentIndex + 1);
     const remainingStepsTime = remainingSteps.reduce((acc, step) => acc + step.estimatedDuration, 0);
-    
+
     return remainingInCurrentStep + remainingStepsTime;
   };
 
   const getTotalProgress = () => {
     const completedSteps = steps.filter(step => step.status === 'completed').length;
     const currentStepIndex = getCurrentStepIndex();
-    
+
     if (currentStepIndex === -1) return 0;
-    
+
     const currentStepProgress = Math.min(elapsedTime / steps[currentStepIndex].estimatedDuration, 1);
     const totalProgress = (completedSteps + currentStepProgress) / steps.length * 100;
-    
+
     return Math.min(totalProgress, 100);
   };
 
@@ -138,14 +138,14 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
               )}
             </div>
           </div>
-          
+
           {allowCancel && onCancel && (
             <Button variant="ghost" size="sm" onClick={onCancel}>
               <X className="h-4 w-4" />
             </Button>
           )}
         </div>
-        
+
         <div className="mt-3">
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div
@@ -168,7 +168,7 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
             Analyzing your information with advanced AI models
           </p>
         </div>
-        
+
         {allowCancel && onCancel && (
           <Button variant="outline" size="sm" onClick={onCancel}>
             <Pause className="h-4 w-4 mr-2" />
@@ -190,7 +190,7 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
             </span>
           )}
         </div>
-        
+
         <div className="w-full bg-gray-200 rounded-full h-3">
           <div
             className="bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-500 relative overflow-hidden"
@@ -207,7 +207,7 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
           const isActive = step.id === currentStepId;
           const isCompleted = step.status === 'completed';
           const hasError = step.status === 'error';
-          
+
           return (
             <div
               key={step.id}
@@ -222,14 +222,14 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
               <div className="flex-shrink-0 mt-0.5">
                 {getStepIcon(step)}
               </div>
-              
+
               {/* Step Content */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
                   <h4 className={`text-sm font-medium ${getStepStatusColor(step)}`}>
                     {step.label}
                   </h4>
-                  
+
                   {isActive && showTimeRemaining && (
                     <div className="text-xs text-gray-500 flex items-center">
                       <Clock className="h-3 w-3 mr-1" />
@@ -237,13 +237,13 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
                     </div>
                   )}
                 </div>
-                
+
                 {step.description && (
                   <p className="text-xs text-gray-600 mt-1">
                     {step.description}
                   </p>
                 )}
-                
+
                 {/* Error Message */}
                 {hasError && step.errorMessage && (
                   <div className="mt-2 p-2 bg-red-100 border border-red-200 rounded text-xs">
@@ -262,7 +262,7 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
                     </div>
                   </div>
                 )}
-                
+
                 {/* Progress Bar for Current Step */}
                 {isActive && (
                   <div className="mt-2">
@@ -309,16 +309,16 @@ export const useAIProgress = (initialSteps: Omit<AIProgressStep, 'status'>[]) =>
   };
 
   const completeStep = (stepId: string) => {
-    setSteps(prev => prev.map(step => 
+    setSteps(prev => prev.map(step =>
       step.id === stepId ? { ...step, status: 'completed' as const } : step
     ));
-    
+
     const currentIndex = steps.findIndex(step => step.id === stepId);
     const nextStep = steps[currentIndex + 1];
-    
+
     if (nextStep) {
       setCurrentStepId(nextStep.id);
-      setSteps(prev => prev.map(step => 
+      setSteps(prev => prev.map(step =>
         step.id === nextStep.id ? { ...step, status: 'in_progress' as const } : step
       ));
     } else {
@@ -327,18 +327,18 @@ export const useAIProgress = (initialSteps: Omit<AIProgressStep, 'status'>[]) =>
   };
 
   const failStep = (stepId: string, errorMessage: string) => {
-    setSteps(prev => prev.map(step => 
-      step.id === stepId 
-        ? { ...step, status: 'error' as const, errorMessage } 
+    setSteps(prev => prev.map(step =>
+      step.id === stepId
+        ? { ...step, status: 'error' as const, errorMessage }
         : step
     ));
     setIsProcessing(false);
   };
 
   const retryStep = (stepId: string) => {
-    setSteps(prev => prev.map(step => 
-      step.id === stepId 
-        ? { ...step, status: 'in_progress' as const, errorMessage: undefined } 
+    setSteps(prev => prev.map(step =>
+      step.id === stepId
+        ? { ...step, status: 'in_progress' as const, errorMessage: undefined }
         : step
     ));
     setCurrentStepId(stepId);

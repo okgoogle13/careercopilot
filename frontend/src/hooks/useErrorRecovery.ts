@@ -69,7 +69,7 @@ const defaultRecoveryStrategies: ErrorRecoveryStrategy[] = [
             keysToRemove.push(key);
           }
         }
-        
+
         keysToRemove.forEach(key => localStorage.removeItem(key));
         return keysToRemove.length > 0;
       } catch {
@@ -133,22 +133,22 @@ export function useErrorRecovery(options: UseErrorRecoveryOptions = {}): UseErro
     } else {
       strategiesRef.current.push(strategy);
     }
-    
+
     // Sort by priority
     strategiesRef.current.sort((a, b) => a.priority - b.priority);
   }, []);
 
   const getRecoveryOptions = useCallback((error: AppError): ErrorRecoveryStrategy[] => {
     return strategiesRef.current
-      .filter(strategy => 
-        strategy.errorTypes.includes(error.type) && 
+      .filter(strategy =>
+        strategy.errorTypes.includes(error.type) &&
         strategy.canRecover(error)
       )
       .sort((a, b) => a.priority - b.priority);
   }, []);
 
   const recoverFromError = useCallback(async (
-    error: AppError, 
+    error: AppError,
     strategyId?: string
   ): Promise<boolean> => {
     if (isRecovering) return false;
@@ -195,7 +195,7 @@ export function useErrorRecovery(options: UseErrorRecoveryOptions = {}): UseErro
 
         } catch (recoveryError) {
           console.error('Recovery strategy failed:', recoveryError);
-          
+
           const recoveryAttempt: RecoveryAttempt = {
             errorId: error.id,
             strategy: strategy.id,
@@ -247,7 +247,7 @@ export const recoveryStrategies = {
     recover: async (error) => {
       const delay = customDelay ?? (1000 * ((error.retryCount ?? 0) + 1));
       await new Promise(resolve => setTimeout(resolve, delay));
-      
+
       // Attempt to re-run the original request
       // This would need to be customized based on your specific needs
       return Math.random() > 0.3;

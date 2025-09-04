@@ -32,27 +32,40 @@ async def generate_cover_letter(request: Request):
             full_prompt = f"Generate a professional cover letter based on the following resume and job description.\nResume: {resume}\nJob Description: {job}"
 
         if stream:
+
             def stream_gen():
                 try:
                     for chunk in system.model.generate_content(
                         full_prompt,
-                        generation_config=system.model.GenerationConfig(**(generation_config or {})),
-                        stream=True
+                        generation_config=system.model.GenerationConfig(
+                            **(generation_config or {})
+                        ),
+                        stream=True,
                     ):
                         yield chunk.text
                 except Exception as e:
                     logger.error(f"Streaming error in /generate-cover-letter: {e}")
                     yield f"Error: {e}"
+
             return StreamingResponse(stream_gen(), media_type="text/plain")
         else:
             result = system.model.generate_content(
                 full_prompt,
-                generation_config=system.model.GenerationConfig(**(generation_config or {}))
+                generation_config=system.model.GenerationConfig(
+                    **(generation_config or {})
+                ),
             )
-            return JSONResponse({"cover_letter": result.text if hasattr(result, 'text') else str(result)})
+            return JSONResponse(
+                {
+                    "cover_letter": (
+                        result.text if hasattr(result, "text") else str(result)
+                    )
+                }
+            )
     except Exception as e:
         logger.error(f"Error in /generate-cover-letter: {e}")
         return JSONResponse({"error": str(e)}, status_code=500)
+
 
 # Resume Review
 @router.post("/review-resume")
@@ -71,27 +84,36 @@ async def review_resume(request: Request):
             full_prompt = f"Review the following resume and provide constructive feedback, strengths, and areas for improvement.\nResume: {resume}"
 
         if stream:
+
             def stream_gen():
                 try:
                     for chunk in system.model.generate_content(
                         full_prompt,
-                        generation_config=system.model.GenerationConfig(**(generation_config or {})),
-                        stream=True
+                        generation_config=system.model.GenerationConfig(
+                            **(generation_config or {})
+                        ),
+                        stream=True,
                     ):
                         yield chunk.text
                 except Exception as e:
                     logger.error(f"Streaming error in /review-resume: {e}")
                     yield f"Error: {e}"
+
             return StreamingResponse(stream_gen(), media_type="text/plain")
         else:
             result = system.model.generate_content(
                 full_prompt,
-                generation_config=system.model.GenerationConfig(**(generation_config or {}))
+                generation_config=system.model.GenerationConfig(
+                    **(generation_config or {})
+                ),
             )
-            return JSONResponse({"review": result.text if hasattr(result, 'text') else str(result)})
+            return JSONResponse(
+                {"review": result.text if hasattr(result, "text") else str(result)}
+            )
     except Exception as e:
         logger.error(f"Error in /review-resume: {e}")
         return JSONResponse({"error": str(e)}, status_code=500)
+
 
 # Interview Q&A
 @router.post("/interview-qa")
@@ -111,27 +133,40 @@ async def interview_qa(request: Request):
             full_prompt = f"Generate a list of interview questions and sample answers for the following job description and resume.\nResume: {resume}\nJob Description: {job}"
 
         if stream:
+
             def stream_gen():
                 try:
                     for chunk in system.model.generate_content(
                         full_prompt,
-                        generation_config=system.model.GenerationConfig(**(generation_config or {})),
-                        stream=True
+                        generation_config=system.model.GenerationConfig(
+                            **(generation_config or {})
+                        ),
+                        stream=True,
                     ):
                         yield chunk.text
                 except Exception as e:
                     logger.error(f"Streaming error in /interview-qa: {e}")
                     yield f"Error: {e}"
+
             return StreamingResponse(stream_gen(), media_type="text/plain")
         else:
             result = system.model.generate_content(
                 full_prompt,
-                generation_config=system.model.GenerationConfig(**(generation_config or {}))
+                generation_config=system.model.GenerationConfig(
+                    **(generation_config or {})
+                ),
             )
-            return JSONResponse({"interview_qa": result.text if hasattr(result, 'text') else str(result)})
+            return JSONResponse(
+                {
+                    "interview_qa": (
+                        result.text if hasattr(result, "text") else str(result)
+                    )
+                }
+            )
     except Exception as e:
         logger.error(f"Error in /interview-qa: {e}")
         return JSONResponse({"error": str(e)}, status_code=500)
+
 
 # Job Matching
 @router.post("/job-matching")
@@ -152,27 +187,36 @@ async def job_matching(request: Request):
             full_prompt = f"Given the following resume and job descriptions, suggest the best job matches and explain why.\nResume: {resume}\nJob Descriptions: {jobs_text}"
 
         if stream:
+
             def stream_gen():
                 try:
                     for chunk in system.model.generate_content(
                         full_prompt,
-                        generation_config=system.model.GenerationConfig(**(generation_config or {})),
-                        stream=True
+                        generation_config=system.model.GenerationConfig(
+                            **(generation_config or {})
+                        ),
+                        stream=True,
                     ):
                         yield chunk.text
                 except Exception as e:
                     logger.error(f"Streaming error in /job-matching: {e}")
                     yield f"Error: {e}"
+
             return StreamingResponse(stream_gen(), media_type="text/plain")
         else:
             result = system.model.generate_content(
                 full_prompt,
-                generation_config=system.model.GenerationConfig(**(generation_config or {}))
+                generation_config=system.model.GenerationConfig(
+                    **(generation_config or {})
+                ),
             )
-            return JSONResponse({"job_matches": result.text if hasattr(result, 'text') else str(result)})
+            return JSONResponse(
+                {"job_matches": result.text if hasattr(result, "text") else str(result)}
+            )
     except Exception as e:
         logger.error(f"Error in /job-matching: {e}")
         return JSONResponse({"error": str(e)}, status_code=500)
+
 
 app.include_router(router)
 
