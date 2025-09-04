@@ -189,12 +189,5 @@ const CardLoading = memo<CardLoadingProps>(({ className = '', variant = 'default
 
 CardLoading.displayName = 'CardLoading';
 
-export {
-  LoadingSpinner,
-  LoadingState,
-  PageLoading,
-  InlineLoading,
-  TableLoading,
-  CardLoading
-};
+export { LoadingSpinner, LoadingState, PageLoading, InlineLoading, TableLoading, CardLoading };
 export default LoadingSpinner;

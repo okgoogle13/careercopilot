@@ -16,7 +16,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Set up auth state persistence and check initial auth state
   React.useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async firebaseUser => {
       try {
         if (firebaseUser) {
           // Get the ID token result to check if it's expired
@@ -141,7 +141,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         if (err.message.includes('popup_closed_by_user')) {
           errorMessage = 'Sign-in was cancelled';
         } else if (err.message.includes('account-exists-with-different-credential')) {
-          errorMessage = 'An account already exists with the same email but different sign-in credentials';
+          errorMessage =
+            'An account already exists with the same email but different sign-in credentials';
         } else if (err.message.includes('auth/network-request-failed')) {
           errorMessage = 'Network error. Please check your internet connection.';
         } else if (err.message.includes('auth/popup-blocked')) {
@@ -218,11 +219,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setError,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthContextType => {

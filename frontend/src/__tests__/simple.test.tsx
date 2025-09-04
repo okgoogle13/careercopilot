@@ -5,7 +5,7 @@ import '@testing-library/jest-dom';
 describe('Simple Test', () => {
   it('renders a div with text', () => {
     // Arrange
-    render(<div data-testid="test-div">Test Content</div>);
+    render(<div data-testid='test-div'>Test Content</div>);
 
     // Act
     const element = screen.getByTestId('test-div');
