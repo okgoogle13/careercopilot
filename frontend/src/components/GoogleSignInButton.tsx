@@ -65,9 +65,11 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
 
   // Default fallback content if no fallback prop is provided
   const defaultFallback = (
-    <div className="p-4 text-yellow-700 bg-yellow-100 rounded-md dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300">
-      <p className="font-medium">Google Sign-In Unavailable</p>
-      <p className="text-sm">Please try a different sign-in method or check your browser settings.</p>
+    <div className='p-4 text-yellow-700 bg-yellow-100 rounded-md dark:bg-yellow-900 dark:bg-opacity-30 dark:text-yellow-300'>
+      <p className='font-medium'>Google Sign-In Unavailable</p>
+      <p className='text-sm'>
+        Please try a different sign-in method or check your browser settings.
+      </p>
     </div>
   );
 
@@ -77,9 +79,9 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
   }
 
   return (
-    <div className="space-y-2">
+    <div className='space-y-2'>
       <button
-        type="button"
+        type='button'
         onClick={handleGoogleSignIn}
         disabled={isLoading}
         className={`flex items-center justify-center w-full px-4 py-2 space-x-2 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-gray-900 ${className} ${isLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
@@ -93,15 +95,15 @@ export const GoogleSignInButton: React.FC<GoogleSignInButtonProps> = ({
           gap: 8,
         }}
       >
-        <FcGoogle className="w-5 h-5" />
+        <FcGoogle className='w-5 h-5' />
         <span>{isLoading ? 'Signing in...' : 'Continue with Google'}</span>
       </button>
 
       {error && (
-        <div className="p-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 dark:bg-opacity-30 rounded-md">
+        <div className='p-2 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 dark:bg-opacity-30 rounded-md'>
           {error.message}
           {isMobile && (
-            <div className="mt-1 text-xs text-red-700 dark:text-red-300">
+            <div className='mt-1 text-xs text-red-700 dark:text-red-300'>
               Tip: Try using a desktop browser if you're having issues.
             </div>
           )}
