@@ -95,7 +95,8 @@ export function MultiSelect({
   };
 
   // Display logic for selected items
-  const getDisplayText = () => { // eslint-disable-line @typescript-eslint/no-unused-vars
+  const getDisplayText = () => {
+    // eslint-disable-line @typescript-eslint/no-unused-vars
     if (selectedOptions.length === 0) {
       return placeholder;
     }
