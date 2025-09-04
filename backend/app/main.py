@@ -19,6 +19,7 @@ from app.api.v1 import (
     workflows,
 )
 from app.core.cache_middleware import add_cache_middleware, cache_health_check, cache_lifespan
+from app.core.genkit_init import check_genkit_health, init_genkit
 from app.core.limiter import _rate_limit_exceeded_handler, authenticated_limiter, limiter
 from app.core.logging_config import setup_logging
 from app.core.monitoring import start_system_monitoring, stop_system_monitoring
@@ -51,6 +52,12 @@ async def app_lifespan(app: FastAPI):
 
     ai_config = setup_ai_config()
     setup_ai_client(ai_config)
+
+    # Initialize Genkit if enabled
+    try:
+        init_genkit()
+    except Exception as e:
+        print(f"Genkit initialization failed: {e}")
 
     yield
 
@@ -159,11 +166,16 @@ async def health_check():
 
     try:
         db_health = check_database_health()
+        cache_status = cache_health_check()
+        genkit_health = check_genkit_health()
+
         return {
             "status": "healthy",
             "version": "2.0.0",
-            "features": ["production-infrastructure", "advanced-intelligence"],
+            "features": ["production-infrastructure", "advanced-intelligence", "genkit-ai-flows"],
             "database": db_health,
+            "cache": cache_status,
+            "genkit": genkit_health,
             "services": {"api": "healthy", "ai_client": "healthy", "cache": "healthy"},
         }
     except Exception as e:

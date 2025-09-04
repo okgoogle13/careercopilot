@@ -7,7 +7,9 @@ from typing import Any, Dict
 
 from app.agents.orchestrator import AgentOrchestrator
 from app.core.database import get_db
-from app.ml.market_intelligence import JobMarketAnalyzer, SkillMatchingEngine
+
+# Temporarily disabled for AI deployment without ML dependencies
+# from app.ml.market_intelligence import JobMarketAnalyzer, SkillMatchingEngine
 from app.models.database import MarketAnalysis, User
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel
@@ -41,26 +43,11 @@ async def analyze_market_trends(request: MarketAnalysisRequest, db: Session = De
     Analyzes salary trends, skill demands, competition levels, and forecasts.
     """
     try:
-        analyzer = JobMarketAnalyzer()
-
-        logger.info(f"Starting market analysis for {request.field} in {request.location}")
-
-        analysis = await analyzer.analyze_market_trends(
-            field=request.field,
-            location=request.location,
-            refresh_data=request.refresh_data,
+        # Temporarily disabled - requires ML dependencies
+        raise HTTPException(
+            status_code=501,
+            detail="Market analysis temporarily unavailable - ML dependencies disabled for deployment",
         )
-
-        return {
-            "success": True,
-            "analysis": analysis,
-            "metadata": {
-                "analysis_type": "comprehensive_market_trends",
-                "ml_powered": True,
-                "data_sources": analysis.get("summary", {}).get("total_jobs_analyzed", 0),
-            },
-        }
-
     except Exception as e:
         logger.error(f"Market analysis failed: {e}")
         raise HTTPException(
@@ -89,22 +76,28 @@ async def calculate_job_match(request: JobMatchRequest, db: Session = Depends(ge
             "target_roles": user.target_roles or [],
         }
 
-        # Perform ML-based matching
-        matching_engine = SkillMatchingEngine()
-        match_analysis = await matching_engine.calculate_job_match_score(
-            user_profile=user_profile, job_description=request.job_description
+        # Temporarily disabled - requires ML dependencies
+        raise HTTPException(
+            status_code=501,
+            detail="Job match analysis temporarily unavailable - ML dependencies disabled for deployment",
         )
 
-        return {
-            "success": True,
-            "user_id": request.user_id,
-            "match_analysis": match_analysis,
-            "metadata": {
-                "analysis_type": "ml_job_matching",
-                "confidence": match_analysis.get("confidence", "medium"),
-                "analysis_dimensions": ["skills", "experience", "background"],
-            },
-        }
+        # # Perform ML-based matching
+        # matching_engine = SkillMatchingEngine()
+        # match_analysis = await matching_engine.calculate_job_match_score(
+        #     user_profile=user_profile, job_description=request.job_description
+        # )
+
+        # return {
+        #     "success": True,
+        #     "user_id": request.user_id,
+        #     "match_analysis": match_analysis,
+        #     "metadata": {
+        #         "analysis_type": "ml_job_matching",
+        #         "confidence": match_analysis.get("confidence", "medium"),
+        #         "analysis_dimensions": ["skills", "experience", "background"],
+        #     },
+        # }
 
     except Exception as e:
         logger.error(f"Job match analysis failed: {e}")

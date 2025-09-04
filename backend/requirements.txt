@@ -2,58 +2,25 @@
 fastapi==0.116.1
 uvicorn[standard]==0.35.0
 python-dotenv==1.1.1
-slowapi==0.1.9
-python-multipart==0.0.20
 pydantic==2.11.7
 pydantic-settings==2.10.1
-email-validator==2.1.1
 
-# Firebase and Google Cloud
+# Firebase and Google Cloud essentials
 firebase-admin==6.5.0
 google-api-python-client==2.179.0
-google-cloud-secret-manager==2.24.0
-
-# Document processing
-python-docx==1.2.0
-pdfplumber==0.11.7
-weasyprint==66.0
-jinja2==3.1.4
-
-# External services
-sendgrid==6.12.4
-redis==5.0.8
-httpx[http2]==0.28.1
-
-# System utilities
-psutil==7.0.0
+google-cloud-secret-manager==2.20.2
 
 # Database support
 sqlalchemy==2.0.31
 psycopg2-binary==2.9.10
 alembic==1.13.1
 
-# Testing
-pytest==8.1.1
-pytest-asyncio==0.23.5
-pytest-cov==4.0.0
-pytest-mock==3.12.0
-pytest-xdist==3.5.0
+# Core AI Integration - Essential only
+openai==1.67.0
+anthropic==0.40.0
 
-# Machine Learning and Data Analysis (optional - install if needed)
-# Uncomment below lines if ML features are required
-# scikit-learn==1.7.1
-# numpy==2.3.2
-# pandas==2.3.2
-# matplotlib==3.10.5
-# seaborn==0.13.2
-
-# Background task processing
-celery[redis]==5.4.0
-aioredis==2.0.1
-
-# Authentication and Security
-python-jose[cryptography]==3.5.0
-passlib[bcrypt]==1.7.4
-
-# Type checking and development
-types-psutil==7.0.0.20250822
+# System utilities
+psutil==7.0.0
+redis==5.0.8
+httpx[http2]==0.28.1
+slowapi==0.1.9

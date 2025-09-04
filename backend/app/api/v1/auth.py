@@ -25,11 +25,24 @@ from sqlalchemy.orm import Session
 
 # Initialize Firebase Admin SDK if not already initialized
 if not firebase_admin._apps:
-    cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-    if not cred_path or not os.path.exists(cred_path):
-        raise RuntimeError(f"Service account file not found at path: {cred_path}")
-    cred = credentials.Certificate(cred_path)
-    firebase_admin.initialize_app(cred)
+    # Try to use JSON credentials from environment variable first
+    cred_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
+    if cred_json:
+        import json
+
+        try:
+            cred_dict = json.loads(cred_json)
+            cred = credentials.Certificate(cred_dict)
+            firebase_admin.initialize_app(cred)
+        except (json.JSONDecodeError, ValueError) as e:
+            raise RuntimeError(f"Invalid JSON in GOOGLE_APPLICATION_CREDENTIALS_JSON: {e}")
+    else:
+        # Fallback to file path
+        cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+        if not cred_path or not os.path.exists(cred_path):
+            raise RuntimeError(f"Service account file not found at path: {cred_path}")
+        cred = credentials.Certificate(cred_path)
+        firebase_admin.initialize_app(cred)
 
 logger = logging.getLogger(__name__)
 router = APIRouter()

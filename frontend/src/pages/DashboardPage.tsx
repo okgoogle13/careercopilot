@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, FormEvent } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import { ErrorDisplay, LoadingSpinner, Button } from '../components/ui';
 import { db } from '../auth/enhanced-firebase';
