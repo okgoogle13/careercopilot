@@ -35,10 +35,14 @@ class AIUser(HttpUser):
     def on_start(self):
         """Login and get auth token"""
         response = self.client.post(
-            "/api/auth/login", json={"email": "test@example.com", "password": "testpassword"}
+            "/api/auth/login",
+            json={"email": "test@example.com", "password": "testpassword"},
         )
         self.token = response.json().get("access_token")
-        self.headers = {"Authorization": f"Bearer {self.token}", "Content-Type": "application/json"}
+        self.headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json",
+        }
 
     @task
     def analyze_resume(self):

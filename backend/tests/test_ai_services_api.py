@@ -83,7 +83,10 @@ class TestAIEndpoints:
             response = client.post(
                 "/api/v1/ai/cover-letter/generate",
                 json={
-                    "candidate_profile": {"name": "John Doe", "email": "john@example.com"},
+                    "candidate_profile": {
+                        "name": "John Doe",
+                        "email": "john@example.com",
+                    },
                     "job_description": SAMPLE_JOB_DESCRIPTION,
                     "style": "professional",
                 },

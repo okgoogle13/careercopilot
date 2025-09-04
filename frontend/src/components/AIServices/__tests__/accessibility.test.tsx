@@ -5,7 +5,7 @@ import { JobMatchingComponent } from '../JobMatchingComponent';
 import { ContentOptimizationComponent } from '../ContentOptimizationComponent';
 import { ResumeIntelligenceComponent } from '../ResumeIntelligenceComponent';
 import { CoverLetterGenerationComponent } from '../CoverLetterGenerationComponent';
-import { mockJobMatchingResult, mockContentOptimizationResult } from '../../../utils/mockData';
+import { mockJobMatchingResult } from '../../../utils/mockData';
 import { aiServices } from '../../../services/aiServices';
 
 // Extend Jest matchers

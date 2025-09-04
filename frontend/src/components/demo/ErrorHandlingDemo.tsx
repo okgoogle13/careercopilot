@@ -3,14 +3,13 @@ import { Button } from '../ui/Button';
 import ErrorDisplay from '../ui/ErrorDisplay';
 import { useError, useErrorHandler } from '../../contexts/ErrorContext';
 import { useErrorRecovery } from '../../hooks/useErrorRecovery';
-import { createError, withErrorHandling } from '../../utils/errorSystem';
-import { ErrorType } from '../../types/errors';
+import { createError, withErrorHandling, AppError } from '../../utils/errorSystem';
 
 const ErrorHandlingDemo: React.FC = () => {
   const { errors, clearErrors } = useError();
   const { handleAsync, addError } = useErrorHandler();
   const { recoverFromError, isRecovering, recoveryAttempts } = useErrorRecovery();
-  const [currentError, setCurrentError] = useState<any>(null);
+  const [currentError, setCurrentError] = useState<AppError | null>(null);
 
   const simulateNetworkError = () => {
     const error = createError.network(
@@ -52,8 +51,8 @@ const ErrorHandlingDemo: React.FC = () => {
   const simulateFileError = () => {
     const error = createError.fileUpload(
       'File is too large or in an unsupported format',
-      { 
-        component: 'ErrorHandlingDemo', 
+      {
+        component: 'ErrorHandlingDemo',
         fileName: 'resume.pdf',
         fileSize: '15MB',
         maxSize: '10MB'
@@ -76,11 +75,11 @@ const ErrorHandlingDemo: React.FC = () => {
     const result = await handleAsync(async () => {
       // Simulate an async operation that might fail
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       if (Math.random() > 0.5) {
         throw new Error('Random async operation failed');
       }
-      
+
       return 'Success!';
     }, { component: 'ErrorHandlingDemo', operation: 'async-demo' });
 
@@ -172,15 +171,15 @@ const ErrorHandlingDemo: React.FC = () => {
         <div className="bg-white p-6 rounded-lg border space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-semibold">Current Error</h3>
-            <Button 
-              onClick={attemptRecovery} 
+            <Button
+              onClick={attemptRecovery}
               disabled={isRecovering}
               size="sm"
             >
               {isRecovering ? 'Recovering...' : 'Attempt Recovery'}
             </Button>
           </div>
-          <ErrorDisplay 
+          <ErrorDisplay
             error={currentError}
             variant="card"
             showSuggestions={true}
@@ -225,7 +224,7 @@ const ErrorHandlingDemo: React.FC = () => {
             </Button>
           )}
         </div>
-        
+
         {errors.length === 0 ? (
           <p className="text-gray-500 text-sm">No active errors</p>
         ) : (
@@ -235,7 +234,7 @@ const ErrorHandlingDemo: React.FC = () => {
                 <div className="font-medium">{error.type}</div>
                 <div className="text-gray-600">{error.userMessage}</div>
                 <div className="text-xs text-gray-500 mt-1">
-                  Component: {error.component} | 
+                  Component: {error.component} |
                   Severity: {error.severity} |
                   Time: {error.timestamp.toLocaleTimeString()}
                 </div>

@@ -1,7 +1,6 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { AppError, ErrorType } from '../../types/errors';
+import { AppError } from '../../types/errors';
 import { errorHandler } from '../../utils/errorHandler';
-import ErrorDisplay from './ErrorDisplay';
 import { Button } from './Button';
 
 interface Props {
@@ -23,7 +22,7 @@ class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): State {
+  static getDerivedStateFromError(_error: Error): State {
     return { hasError: true };
   }
 
@@ -44,7 +43,7 @@ class ErrorBoundary extends Component<Props, State> {
     this.setState({ hasError: false, appError: undefined });
   };
 
-  private handleAction = async (actionType: string, actionData?: any) => {
+  private handleAction = async (actionType: string, actionData?: unknown) => {
     switch (actionType) {
       case 'retry':
         this.handleRetry();
@@ -155,8 +154,8 @@ class ErrorBoundary extends Component<Props, State> {
               <Button onClick={this.handleRetry} className="w-full sm:w-auto">
                 Try Again
               </Button>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={() => window.location.reload()}
                 className="w-full sm:w-auto"
               >

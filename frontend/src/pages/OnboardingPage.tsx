@@ -257,7 +257,7 @@ const OnboardingPage: React.FC = () => {
 
 // Individual Step Components
 const WelcomeStep: React.FC<{ onNext: () => void; onComplete: (data: any) => void }> = ({
-  onNext,
+  _onNext,
   onComplete,
 }) => {
   return (
@@ -467,7 +467,7 @@ const DocumentUploadStep: React.FC<{ onNext: () => void; onComplete: (data: any)
       setUploadedFile(file);
       toast.success('Resume uploaded successfully!');
       onComplete({ uploadedFile: file.name, hasResume: true });
-    } catch (error) {
+    } catch {
       toast.error('Failed to upload file. Please try again.');
     } finally {
       setIsUploading(false);

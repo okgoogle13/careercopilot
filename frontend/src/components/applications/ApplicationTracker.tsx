@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, Button, Modal, LoadingSpinner } from '../ui';
 import {
-  Plus, Calendar, MapPin, Building, Clock, ExternalLink,
+  Plus, Calendar, MapPin, Building, ExternalLink,
   CheckCircle, AlertCircle, XCircle, Eye, Edit, Trash2,
-  Filter, Search, MoreHorizontal, Bell, Target, Users, FileText
+  Search, MoreHorizontal, Bell, Target, Users, FileText
 } from 'lucide-react';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
@@ -194,9 +194,10 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
           return a.company.localeCompare(b.company);
         case 'status':
           return a.status.localeCompare(b.status);
-        case 'priority':
+        case 'priority': {
           const priorityOrder = { high: 3, medium: 2, low: 1 };
           return priorityOrder[b.priority] - priorityOrder[a.priority];
+        }
         case 'date':
         default:
           return (b.appliedDate?.getTime() || b.createdAt.getTime()) -
@@ -219,7 +220,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
         } : app
       ));
       toast.success('Application status updated');
-    } catch (error) {
+    } catch {
       toast.error('Failed to update status');
     }
   };
@@ -230,7 +231,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
     try {
       setApplications(prev => prev.filter(app => app.id !== appId));
       toast.success('Application deleted');
-    } catch (error) {
+    } catch {
       toast.error('Failed to delete application');
     }
   };
@@ -294,7 +295,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
       toast.success(`Updated ${selectedIds.length} application(s) to ${newStatus}`);
       setSelectedApplications(new Set());
       setShowBulkActionsModal(false);
-    } catch (error) {
+    } catch {
       toast.error('Failed to update applications');
     }
   };
@@ -311,7 +312,7 @@ export const ApplicationTracker: React.FC<ApplicationTrackerProps> = ({ classNam
       toast.success(`Deleted ${selectedIds.length} application(s)`);
       setSelectedApplications(new Set());
       setShowBulkActionsModal(false);
-    } catch (error) {
+    } catch {
       toast.error('Failed to delete applications');
     }
   };
@@ -654,7 +655,6 @@ const ApplicationCard: React.FC<{
 
   const statusInfo = statusConfig[application.status];
   const priorityInfo = priorityConfig[application.priority];
-  const StatusIcon = statusInfo.icon;
 
   const daysUntilDeadline = application.deadline
     ? Math.ceil((application.deadline.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
@@ -737,9 +737,7 @@ const ApplicationCard: React.FC<{
       {/* Main Card */}
       <Card
         ref={cardRef}
-        className={`transition-transform duration-200 ${
-          selected ? 'ring-2 ring-blue-500 bg-blue-50' : ''
-        } ${isDragging ? 'transition-none' : ''}`}
+        className={`transition-transform duration-200 ${selected ? 'ring-2 ring-blue-500 bg-blue-50' : ''} ${isDragging ? 'transition-none' : ''}`}
         style={{
           transform: `translateX(${swipeX}px)`,
           // Mobile-first responsive padding
@@ -836,22 +834,23 @@ const ApplicationCard: React.FC<{
             ))}
           </select>
 
-              <Button variant="ghost" size="sm" onClick={onViewDetails}>
-                <Eye className="w-4 h-4" />
-              </Button>
+          <div className="flex items-center gap-1">
+            <Button variant="ghost" size="sm" onClick={onViewDetails}>
+              <Eye className="w-4 h-4" />
+            </Button>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDelete();
-                }}
-                className="text-red-500 hover:text-red-700"
-              >
-                <Trash2 className="w-4 h-4" />
-              </Button>
-            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete();
+              }}
+              className="text-red-500 hover:text-red-700"
+            >
+              <Trash2 className="w-4 h-4" />
+            </Button>
+          </div>
         </div>
 
         {/* Mobile swipe hint */}
@@ -1330,7 +1329,7 @@ const AddApplicationModal: React.FC<{
     try {
       new URL(string);
       return true;
-    } catch (_) {
+    } catch {
       return false;
     }
   };
@@ -1361,7 +1360,7 @@ const AddApplicationModal: React.FC<{
       }
 
       toast.success('Job details extracted from URL');
-    } catch (error) {
+    } catch {
       toast.error('Failed to parse job URL');
     } finally {
       setIsParsingUrl(false);

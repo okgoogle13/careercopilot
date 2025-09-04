@@ -15,7 +15,7 @@
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit",
     "source.sortImports": "explicit",
-    "source.fixAll.stylelint": true
+    "source.fixAll.stylelint": "explicit"
   },
 
   "[typescript]": {
@@ -161,7 +161,7 @@
   "workbench.startupEditor": "newUntitledFile",
   "workbench.list.openMode": "doubleClick",
   "workbench.editor.highlightModifiedTabs": true,
-  "workbench.editor.showTabs": true,
+  "workbench.editor.showTabs": "multiple",
   "workbench.editor.tabSizing": "shrink",
   "workbench.editor.wrapTabs": true,
   "workbench.editor.limit.enabled": true,

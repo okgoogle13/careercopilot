@@ -181,7 +181,9 @@ Respond with valid JSON matching the ContentOptimizationResult schema.
         response = gemini_pro.generate(
             prompt,
             config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3, max_output_tokens=4000
+                response_mime_type="application/json",
+                temperature=0.3,
+                max_output_tokens=4000,
             ),
             output_schema=ContentOptimizationResult,
         )
@@ -199,7 +201,9 @@ Respond with valid JSON matching the ContentOptimizationResult schema.
 @genkit_flow(output_schema=PersonalBrandingAnalysis)
 @with_ai_error_handling()
 def analyze_personal_branding(
-    resume: str, linkedin_profile: Optional[str] = None, career_goals: Optional[str] = None
+    resume: str,
+    linkedin_profile: Optional[str] = None,
+    career_goals: Optional[str] = None,
 ) -> PersonalBrandingAnalysis:
     """
     Analyzes personal branding consistency and strength across career materials.
@@ -225,8 +229,8 @@ def analyze_personal_branding(
 
         content_sections = {
             "resume": sanitized_resume.sanitized_content,
-            "linkedin": sanitized_linkedin.sanitized_content if sanitized_linkedin else None,
-            "career_goals": sanitized_goals.sanitized_content if sanitized_goals else None,
+            "linkedin": (sanitized_linkedin.sanitized_content if sanitized_linkedin else None),
+            "career_goals": (sanitized_goals.sanitized_content if sanitized_goals else None),
         }
 
         prompt = f"""
@@ -292,7 +296,10 @@ class LinkedInOptimizationResult(BaseModel):
 @genkit_flow(output_schema=LinkedInOptimizationResult)
 @with_ai_error_handling()
 def optimize_linkedin_profile(
-    current_profile: str, target_roles: List[str], industry_focus: str, career_stage: str
+    current_profile: str,
+    target_roles: List[str],
+    industry_focus: str,
+    career_stage: str,
 ) -> LinkedInOptimizationResult:
     """
     Optimizes LinkedIn profile for maximum visibility and engagement.
@@ -437,7 +444,9 @@ Respond with valid JSON matching the MultiChannelOptimizationResult schema.
         response = gemini_pro.generate(
             prompt,
             config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3, max_output_tokens=4000
+                response_mime_type="application/json",
+                temperature=0.3,
+                max_output_tokens=4000,
             ),
             output_schema=MultiChannelOptimizationResult,
         )
