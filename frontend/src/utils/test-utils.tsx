@@ -1,38 +1,79 @@
-import React from 'react';
+import React, { ReactNode, createContext, useContext } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from '../contexts/ThemeProvider';
-import { AuthProvider } from '../contexts/AuthProvider';
+import { Toaster } from 'react-hot-toast';
 
-// Jest mock function types
-type MockFunction = {
-  mockReturnValue: (value: unknown) => MockFunction;
-} & ((...args: unknown[]) => unknown);
-
-// Jest type declaration for test utilities
-declare const jest: {
-  fn: (implementation?: (...args: unknown[]) => unknown) => MockFunction;
+// Mock user data
+export const mockUser = {
+  id: 'test-user-123',
+  email: 'test@example.com',
+  name: 'Test User',
+  role: 'user',
+  token: 'mock-jwt-token',
 };
 
-// Mock auth context for testing
-const MockAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const mockAuthValue = {
-    user: {
-      id: 'test-user-123',
-      email: 'test@example.com',
-      name: 'Test User',
-      token: 'mock-jwt-token',
-    },
+// Create AuthContext for testing
+const AuthContext = createContext<any>(null);
+
+export const useAuth = () => useContext(AuthContext);
+
+// Mock AuthProvider component
+export const MockAuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const authValue = {
+    user: mockUser,
     isAuthenticated: true,
     isLoading: false,
     login: jest.fn(),
     logout: jest.fn(),
+    register: jest.fn(),
     getAuthToken: jest.fn(() => 'mock-jwt-token'),
+    error: null,
   };
 
-  return <AuthProvider value={mockAuthValue}>{children}</AuthProvider>;
+  return (
+    <AuthContext.Provider value={authValue}>
+      <div data-testid="mock-auth-provider">
+        {children}
+      </div>
+    </AuthContext.Provider>
+  );
 };
+
+// Set up mock for AuthProvider
+const mockAuthModule = {
+  useAuth,
+  AuthProvider: MockAuthProvider,
+};
+
+// Mock the actual AuthProvider
+jest.mock('../contexts/AuthProvider', () => ({
+  ...jest.requireActual('../contexts/AuthProvider'),
+  useAuth: jest.fn(() => ({
+    user: mockUser,
+    isAuthenticated: true,
+    isLoading: false,
+    login: jest.fn(),
+    logout: jest.fn(),
+    register: jest.fn(),
+    getAuthToken: jest.fn(() => 'mock-jwt-token'),
+    error: null,
+  })),
+  AuthProvider: MockAuthProvider,
+}));
+
+// Extend Jest types
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace jest {
+    interface Mock<T = any> {
+      mockReturnValue: (value: unknown) => Mock<T>;
+      mockImplementation: (fn: (...args: unknown[]) => unknown) => Mock<T>;
+      mockResolvedValue: (value: unknown) => Mock<T>;
+      mockRejectedValue: (value: unknown) => Mock<T>;
+    }
+  }
+}
 
 // Custom wrapper for testing AI components
 const AllTheProviders: React.FC<{ children: React.ReactNode }> = ({ children }) => {

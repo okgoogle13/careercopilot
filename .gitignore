@@ -65,3 +65,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 careercopilot/frontend/.env
+
+# Generated frontend assets
+public/assets/

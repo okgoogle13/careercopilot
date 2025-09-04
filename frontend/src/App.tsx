@@ -1,5 +1,8 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+
+// Styles
+import '../src/styles/theme.css';
 
 // Component imports
 import { ProtectedRoute, LoadingSpinner } from './components';
@@ -8,6 +11,17 @@ import { AuthProvider, UserPreferencesProvider, ThemeProvider } from './contexts
 import { ErrorProvider } from './contexts/ErrorContext';
 import { MainLayout } from './components/layout';
 import ErrorToastContainer from './components/ui/ErrorToastContainer';
+
+// Add smooth scrolling for anchor links
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 // Lazy load page components
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -22,12 +36,27 @@ const UITestPage = lazy(() => import('./pages/UITestPage'));
 const AIServicesPage = lazy(() => import('./pages/AIServicesPage'));
 
 const App: React.FC = () => {
+  // Add keyboard navigation class for focus styles
+  useEffect(() => {
+    const handleFirstTab = (e: KeyboardEvent) => {
+      if (e.key === 'Tab') {
+        document.body.classList.add('user-is-tabbing');
+        window.removeEventListener('keydown', handleFirstTab);
+      }
+    };
+
+    window.addEventListener('keydown', handleFirstTab);
+    return () => window.removeEventListener('keydown', handleFirstTab);
+  }, []);
+
   return (
     <Router>
       <ThemeProvider>
         <ErrorProvider>
           <AuthProvider>
             <UserPreferencesProvider>
+              <ScrollToTop />
+              <SkipLink />
               {/* Accessibility skip links */}
               <SkipLink href='#main-content'>Skip to main content</SkipLink>
               <SkipLink href='#navigation'>Skip to navigation</SkipLink>

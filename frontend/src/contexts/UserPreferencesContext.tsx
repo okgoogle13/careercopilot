@@ -7,7 +7,7 @@ import React, {
   useCallback,
   ReactNode,
 } from 'react';
-import { useAuth } from './AuthContext';
+import { useAuth } from './AuthProvider';
 import toast from 'react-hot-toast';
 
 interface UserPreferences {

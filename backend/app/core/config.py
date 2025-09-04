@@ -1,19 +1,70 @@
-try:
-    from pydantic_settings import BaseSettings
-except ImportError:
-    from pydantic import BaseSettings
+"""
+Application configuration with secure secret management.
 
+This module provides a centralized way to access configuration values,
+with support for loading secrets from Google Cloud Secret Manager.
+"""
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Any, Dict, List, Optional, Union
+
+from pydantic import BaseSettings, Field, validator
+
+# Import the secure settings
+from .secure_config import settings as secure_settings
 
 
+# For backward compatibility
 class Settings(BaseSettings):
+    """Legacy settings class for backward compatibility."""
+
     # Core application settings
-    debug: bool = False
-    environment: str = "development"
+    debug: bool = secure_settings.DEBUG
+    environment: str = secure_settings.ENV
+    log_level: str = secure_settings.LOG_LEVEL
+
+    # Application settings
+    enable_ai_features: bool = secure_settings.ENABLE_AI_FEATURES
+    enable_multi_agent: bool = secure_settings.ENABLE_MULTI_AGENT
+    enable_ml_analysis: bool = secure_settings.ENABLE_ML_ANALYSIS
+    enable_web_search: bool = secure_settings.ENABLE_WEB_SEARCH
+    enable_email_notifications: bool = secure_settings.ENABLE_EMAIL_NOTIFICATIONS
+    enable_hot_reload: bool = secure_settings.ENABLE_HOT_RELOAD
+    show_debug_info: bool = secure_settings.SHOW_DEBUG_INFO
+
+    # AI Settings
+    ai_model: str = "gemini-1.5-pro"
+    ai_max_tokens: int = 2000
+    ai_temperature: float = 0.2
+
+    # Performance settings
+    max_workers: int = secure_settings.MAX_WORKERS
+    db_pool_size: int = secure_settings.DB_POOL_SIZE
+
+    # API Keys (from secure settings)
+    openai_api_key: str = secure_settings.OPENAI_API_KEY or ""
+    anthropic_api_key: str = secure_settings.ANTHROPIC_API_KEY or ""
+    gemini_api_key: str = secure_settings.GEMINI_API_KEY or ""
+
+    # Firebase/Google Cloud settings
+    google_application_credentials: str = ""
+    gcp_project_id: str = secure_settings.GCP_PROJECT_ID or ""
+    google_cloud_project: str = secure_settings.GOOGLE_CLOUD_PROJECT or ""
+    firebase_project_id: str = secure_settings.FIREBASE_PROJECT_ID or ""
+
+    # Database settings
+    database_url: str = secure_settings.DATABASE_URL or ""
+
+    # Authentication
+    secret_key: str = secure_settings.SECRET_KEY
+    algorithm: str = secure_settings.ALGORITHM
+
+    # Redis
+    redis_url: str = secure_settings.REDIS_URL
 
     class Config:
         env_file = ".env"
+        env_file_encoding = "utf-8"
+        case_sensitive = False
 
 
 @dataclass

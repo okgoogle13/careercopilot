@@ -50,6 +50,19 @@ export default [
     files: ['**/*.test.{ts,tsx}', '**/__tests__/**/*.{ts,tsx}'],
     languageOptions: {
       globals: {
+        ...globals.jest,
+        ...globals.jsdom,
+        ...globals.node,
+      },
+    },
+    rules: {
+      'no-console': 'off',
+      'import/no-extraneous-dependencies': 'off',
+      '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+    languageOptions: {
+      globals: {
         ...globals.browser,
         ...globals.jest,
         NodeListOf: 'readonly',

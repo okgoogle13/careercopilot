@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthProvider';
 import { Card, Button, Modal, LoadingSpinner } from '../components/ui';
 import {
   Save,

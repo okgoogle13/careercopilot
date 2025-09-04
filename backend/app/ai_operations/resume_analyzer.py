@@ -7,22 +7,161 @@ with comprehensive security, monitoring, and caching.
 
 import json
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional, Union
 
+from app.ai.resume_service import Education, Experience, ResumeAnalysisResult, ResumeAnalysisService
 from app.core.ai_client import AIRequest, get_ai_client
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.cache_decorators import cached_ai_operation
+from app.core.config import settings
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.monitoring import monitor_performance
+from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 
 
 class ResumeAnalyzer:
-    """Resume analysis operations using centralized AI system"""
+    """Resume analysis operations using centralized AI system
+
+    This class provides resume analysis capabilities using both the legacy AI client
+    and the new Genkit-based AI service.
+    """
 
     def __init__(self):
+        """Initialize the ResumeAnalyzer with AI client and services."""
         self.ai_client = get_ai_client()
+        self.resume_service = ResumeAnalysisService(
+            {
+                "enabled": settings.enable_ai_features,
+                "model": settings.ai_model,
+                "max_tokens": settings.ai_max_tokens,
+                "temperature": settings.ai_temperature,
+            }
+        )
+
+    @monitor_performance("resume_analysis")
+    @cached_ai_operation(
+        operation_type="resume_analysis", user_id_param="user_id", cache_key_params=["resume_text"]
+    )
+    async def analyze_resume_enhanced(
+        self, resume_text: str, user_id: Optional[str] = None, **kwargs
+    ) -> Dict[str, Any]:
+        """
+        Analyze a resume using the enhanced AI service with comprehensive error handling.
+
+        This method provides a robust interface for resume analysis with:
+        - Input validation and sanitization
+        - Performance monitoring
+        - Caching for improved performance
+        - Fallback to legacy analysis if needed
+        - Detailed error reporting
+
+        Args:
+            resume_text: The text content of the resume to analyze
+            user_id: Optional user ID for tracking and personalization
+            **kwargs: Additional parameters for the analysis
+
+        Returns:
+            Dict containing the analysis results with the following structure:
+            {
+                "skills": List[str],
+                "experience": List[Dict],
+                "education": List[Dict],
+                "summary": str,
+                "metadata": Dict[str, Any]
+            }
+
+        Raises:
+            AIError: If the analysis fails and no fallback is available
+            ValueError: If input validation fails
+        """
+        # Input validation
+        if not resume_text or not isinstance(resume_text, str):
+            raise ValueError("Resume text must be a non-empty string")
+
+        try:
+            # Sanitize input
+            sanitizer = InputSanitizer()
+            clean_text = sanitizer.sanitize_text(resume_text)
+
+            # Check if enhanced features are enabled
+            if not settings.ENABLE_AI_FEATURES:
+                logger.warning("Enhanced AI features are disabled. Using basic analysis.")
+                return await self._basic_analyze_resume(clean_text)
+
+            # Use the enhanced resume service for analysis
+            analysis_result = await self.resume_service.analyze_resume(clean_text)
+
+            # Format the result for consistent API response
+            return self._format_analysis_result(analysis_result, user_id=user_id)
+
+        except Exception as e:
+            error_msg = f"Error in enhanced resume analysis: {str(e)}"
+            logger.error(error_msg, exc_info=True)
+
+            # Fall back to legacy analysis if available
+            if hasattr(self, "legacy_analyze_resume"):
+                logger.warning("Falling back to legacy resume analysis")
+                try:
+                    return await self.legacy_analyze_resume(clean_text, user_id, **kwargs)
+                except Exception as legacy_error:
+                    logger.error(f"Legacy analysis also failed: {str(legacy_error)}")
+
+            # If we get here, all fallbacks have failed
+            raise AIError(
+                error_type=AIErrorType.ANALYSIS_ERROR,
+                message="Failed to analyze resume with all available methods",
+                details={
+                    "error": str(e),
+                    "user_id": user_id,
+                    "resume_length": len(resume_text) if resume_text else 0,
+                },
+            )
+
+    def _format_analysis_result(
+        self, result: ResumeAnalysisResult, user_id: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Format the analysis result into a consistent API response format.
+
+        Args:
+            result: The ResumeAnalysisResult to format
+            user_id: Optional user ID for tracking
+
+        Returns:
+            Formatted analysis result as a dictionary
+        """
+        return {
+            "skills": result.skills or [],
+            "experience": [
+                {
+                    "title": exp.title or "",
+                    "company": exp.company or "",
+                    "start_date": exp.start_date or "",
+                    "end_date": exp.end_date or "",
+                    "current": exp.current or False,
+                    "description": exp.description or "",
+                }
+                for exp in (result.experience or [])
+            ],
+            "education": [
+                {
+                    "degree": edu.degree or "",
+                    "field": edu.field or "",
+                    "institution": edu.institution or "",
+                    "year": edu.year or "",
+                }
+                for edu in (result.education or [])
+            ],
+            "summary": result.summary or "",
+            "metadata": {
+                "analysis_version": "2.0",
+                "model": self.resume_service.config.get("model", "unknown"),
+                "source": "genkit_enhanced",
+            },
+            "raw_data": result.raw_data or {},
+        }
 
     @monitor_performance("resume_comparison")
     @cached_ai_operation("resume_analysis", user_id_param="user_id")

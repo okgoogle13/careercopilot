@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthProvider';
 import { db } from '../auth/enhanced-firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import toast from 'react-hot-toast';
