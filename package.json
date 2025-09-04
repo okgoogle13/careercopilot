@@ -67,5 +67,8 @@
   "bugs": {
     "url": "https://github.com/careercopilot/careercopilot/issues"
   },
-  "homepage": "https://github.com/careercopilot/careercopilot#readme"
+  "homepage": "https://github.com/careercopilot/careercopilot#readme",
+  "dependencies": {
+    "react-device-detect": "^2.2.3"
+  }
 }
