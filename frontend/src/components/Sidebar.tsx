@@ -23,7 +23,7 @@ export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }:
     { id: 'ai-services', label: 'AI Services', icon: Sparkles, path: '/ai-services' },
   ];
 
-  const handleNavigation = (item: typeof menuItems[0]) => {
+  const handleNavigation = (item: (typeof menuItems)[0]) => {
     navigate(item.path);
     onTabChange?.(item.id);
     onClose();
@@ -34,9 +34,9 @@ export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }:
       {/* Mobile overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          className='fixed inset-0 bg-black/50 z-40 lg:hidden'
           onClick={onClose}
-          aria-hidden="true"
+          aria-hidden='true'
         />
       )}
 
@@ -50,28 +50,26 @@ export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }:
         {/* Mobile close button */}
         <button
           onClick={onClose}
-          className="lg:hidden absolute top-4 right-4 p-1.5 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
-          aria-label="Close menu"
+          className='lg:hidden absolute top-4 right-4 p-1.5 rounded-md text-muted-foreground hover:bg-accent hover:text-foreground transition-colors'
+          aria-label='Close menu'
         >
-          <X className="h-5 w-5" />
+          <X className='h-5 w-5' />
         </button>
-        <div className="p-6">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <CareerCopilotLogo className="text-primary-foreground" size={20} />
+        <div className='p-6'>
+          <div className='flex items-center gap-2'>
+            <div className='w-8 h-8 bg-primary rounded-lg flex items-center justify-center'>
+              <CareerCopilotLogo className='text-primary-foreground' size={20} />
             </div>
-            <span className="font-bold text-sidebar-foreground">
-              Career Copilot
-            </span>
+            <span className='font-bold text-sidebar-foreground'>Career Copilot</span>
           </div>
         </div>
 
-        <nav className="flex-1 px-4">
-          <ul className="space-y-2">
+        <nav className='flex-1 px-4'>
+          <ul className='space-y-2'>
             {menuItems.map(item => (
               <li key={item.id}>
                 <Button
-                  variant="ghost"
+                  variant='ghost'
                   className={`w-full justify-start gap-3 h-12 text-left ${
                     location.pathname === item.path
                       ? 'bg-sidebar-accent text-sidebar-accent-foreground'
@@ -79,7 +77,7 @@ export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }:
                   }`}
                   onClick={() => handleNavigation(item)}
                 >
-                  <item.icon className="w-5 h-5" />
+                  <item.icon className='w-5 h-5' />
                   {item.label}
                 </Button>
               </li>
@@ -87,9 +85,9 @@ export function Sidebar({ isOpen, onClose, activeTab: _activeTab, onTabChange }:
           </ul>
         </nav>
 
-        <div className="p-4">
-          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Plus className="w-4 h-4 mr-2" />
+        <div className='p-4'>
+          <Button className='w-full bg-primary hover:bg-primary/90 text-primary-foreground'>
+            <Plus className='w-4 h-4 mr-2' />
             New Application
           </Button>
         </div>

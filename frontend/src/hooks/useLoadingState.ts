@@ -12,10 +12,7 @@ export interface UseLoadingStateReturn {
   stopLoading: () => void;
   setLoading: (loading: boolean, message?: string) => void;
   loadingMessage: string;
-  withLoading: <T>(
-    operation: () => Promise<T>,
-    message?: string
-  ) => Promise<T | null>;
+  withLoading: <T>(operation: () => Promise<T>, message?: string) => Promise<T | null>;
 }
 
 export const useLoadingState = (
@@ -30,9 +27,7 @@ export const useLoadingState = (
 
   const startTimeRef = useRef<number | null>(null);
   const delayTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const minDurationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
-    null
-  );
+  const minDurationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Clean up timeouts on unmount
   useEffect(() => {
@@ -73,9 +68,7 @@ export const useLoadingState = (
   );
 
   const stopLoading = useCallback(() => {
-    const elapsed = startTimeRef.current
-      ? Date.now() - startTimeRef.current
-      : 0;
+    const elapsed = startTimeRef.current ? Date.now() - startTimeRef.current : 0;
     const remaining = Math.max(0, minDuration - elapsed);
 
     // Clear delay timeout if still pending
@@ -110,10 +103,7 @@ export const useLoadingState = (
   );
 
   const withLoading = useCallback(
-    async <T>(
-      operation: () => Promise<T>,
-      message?: string
-    ): Promise<T | null> => {
+    async <T>(operation: () => Promise<T>, message?: string): Promise<T | null> => {
       startLoading(message);
       try {
         const result = await operation();
@@ -151,9 +141,7 @@ export const useAsyncOperation = () => {
       try {
         return await loading.withLoading(operation, loadingMessage);
       } catch (err) {
-        const message =
-          errorMessage ||
-          (err instanceof Error ? err.message : 'Operation failed');
+        const message = errorMessage || (err instanceof Error ? err.message : 'Operation failed');
         setError(message);
         return null;
       }

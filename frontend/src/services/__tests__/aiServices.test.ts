@@ -9,7 +9,7 @@ import type {
   ResumeIntelligenceRequest,
   ResumeIntelligenceResult,
   SmartCoverLetterRequest,
-  SmartCoverLetterResult
+  SmartCoverLetterResult,
 } from '../aiServices';
 
 // Mock the apiClient
@@ -30,8 +30,8 @@ describe('AI Services', () => {
           experience_level: 'mid-level',
           remote_preference: 'hybrid',
           location_preference: 'San Francisco, CA',
-          salary_range: { min: 100000, max: 150000 }
-        }
+          salary_range: { min: 100000, max: 150000 },
+        },
       };
 
       const mockResponse: JobMatchingResult = {
@@ -46,16 +46,16 @@ describe('AI Services', () => {
             salary_range: { min: 120000, max: 160000 },
             required_skills: ['React', 'TypeScript', 'Node.js'],
             missing_skills: ['GraphQL'],
-            job_description: 'We are looking for a senior software engineer...'
-          }
+            job_description: 'We are looking for a senior software engineer...',
+          },
         ],
         analysis: {
           total_jobs_analyzed: 150,
           avg_match_score: 72.5,
           top_skills_in_demand: ['React', 'Python', 'AWS'],
           skill_gaps: ['Machine Learning', 'Docker'],
-          recommendations: ['Consider learning GraphQL', 'Enhance cloud skills']
-        }
+          recommendations: ['Consider learning GraphQL', 'Enhance cloud skills'],
+        },
       };
 
       mockedApiClient.post.mockResolvedValue(mockResponse);
@@ -68,7 +68,7 @@ describe('AI Services', () => {
 
     it('should handle job matching API errors', async () => {
       const mockRequest: JobMatchingRequest = {
-        document_id: 'test-resume-123'
+        document_id: 'test-resume-123',
       };
 
       const errorMessage = 'Failed to process job matching request';
@@ -86,7 +86,7 @@ describe('AI Services', () => {
         content_type: 'resume',
         target_role: 'Senior Software Engineer',
         target_company: 'Google',
-        optimization_goals: ['ats_optimization', 'keyword_enhancement']
+        optimization_goals: ['ats_optimization', 'keyword_enhancement'],
       };
 
       const mockResponse: ContentOptimizationResult = {
@@ -97,30 +97,30 @@ describe('AI Services', () => {
             original: 'Software Engineer',
             improved: 'Senior Software Engineer',
             reason: 'Better matches target role level',
-            impact_score: 8
-          }
+            impact_score: 8,
+          },
         ],
         metrics: {
           readability_score: 85,
           ats_score: 92,
           keyword_density: {
-            'software': 0.05,
-            'engineer': 0.04,
-            'react': 0.03
+            software: 0.05,
+            engineer: 0.04,
+            react: 0.03,
           },
-          impact_score: 88
+          impact_score: 88,
         },
-        suggestions: [
-          'Add more quantified achievements',
-          'Include relevant technical keywords'
-        ]
+        suggestions: ['Add more quantified achievements', 'Include relevant technical keywords'],
       };
 
       mockedApiClient.post.mockResolvedValue(mockResponse);
 
       const result = await aiServices.optimizeContent(mockRequest);
 
-      expect(mockedApiClient.post).toHaveBeenCalledWith('/ai-career/content-optimization', mockRequest);
+      expect(mockedApiClient.post).toHaveBeenCalledWith(
+        '/ai-career/content-optimization',
+        mockRequest
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -130,7 +130,7 @@ describe('AI Services', () => {
       const mockRequest: ResumeIntelligenceRequest = {
         document_id: 'test-resume-123',
         target_roles: ['Senior Software Engineer', 'Tech Lead'],
-        career_goals: 'Transition to technical leadership role'
+        career_goals: 'Transition to technical leadership role',
       };
 
       const mockResponse: ResumeIntelligenceResult = {
@@ -138,7 +138,7 @@ describe('AI Services', () => {
           current_level: 'Mid-Level Software Engineer',
           suggested_next_roles: ['Senior Software Engineer', 'Tech Lead'],
           timeline_projection: '12-18 months with focused skill development',
-          required_skills_for_growth: ['Team Leadership', 'System Architecture', 'Mentoring']
+          required_skills_for_growth: ['Team Leadership', 'System Architecture', 'Mentoring'],
         },
         skills_analysis: {
           technical_skills: [
@@ -146,43 +146,52 @@ describe('AI Services', () => {
               skill: 'React',
               proficiency_level: 'Advanced',
               market_demand: 'High',
-              improvement_suggestions: ['Learn React 18 features', 'Master performance optimization']
-            }
+              improvement_suggestions: [
+                'Learn React 18 features',
+                'Master performance optimization',
+              ],
+            },
           ],
           soft_skills: [
             {
               skill: 'Communication',
               evidence_strength: 'Strong',
-              improvement_suggestions: ['Seek presentation opportunities', 'Write technical blogs']
-            }
+              improvement_suggestions: ['Seek presentation opportunities', 'Write technical blogs'],
+            },
           ],
           skill_gaps: [
             {
               skill: 'System Design',
               importance: 'High',
-              learning_resources: ['System Design Interview book', 'Online courses']
-            }
-          ]
+              learning_resources: ['System Design Interview book', 'Online courses'],
+            },
+          ],
         },
         experience_insights: {
           achievements_impact: ['Led successful product launch with 40% user growth'],
           quantification_opportunities: ['Add metrics to project descriptions'],
           experience_narrative: 'Strong technical contributor with growing leadership potential',
-          missing_experience_areas: ['Cross-functional team leadership', 'Budget management']
+          missing_experience_areas: ['Cross-functional team leadership', 'Budget management'],
         },
         market_positioning: {
           unique_value_proposition: 'Full-stack developer with strong product sense and user focus',
           competitive_advantages: ['Rare combination of technical and product skills'],
           market_fit_score: 82,
-          positioning_recommendations: ['Emphasize product impact', 'Highlight cross-functional collaboration']
-        }
+          positioning_recommendations: [
+            'Emphasize product impact',
+            'Highlight cross-functional collaboration',
+          ],
+        },
       };
 
       mockedApiClient.post.mockResolvedValue(mockResponse);
 
       const result = await aiServices.getResumeIntelligence(mockRequest);
 
-      expect(mockedApiClient.post).toHaveBeenCalledWith('/ai-career/resume-intelligence', mockRequest);
+      expect(mockedApiClient.post).toHaveBeenCalledWith(
+        '/ai-career/resume-intelligence',
+        mockRequest
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -198,37 +207,47 @@ describe('AI Services', () => {
           name: 'John Doe',
           current_role: 'Software Engineer',
           years_experience: 5,
-          key_achievements: ['Led team of 3 developers', 'Increased performance by 40%']
+          key_achievements: ['Led team of 3 developers', 'Increased performance by 40%'],
         },
         tone: 'professional',
-        length: 'standard'
+        length: 'standard',
       };
 
       const mockResponse: SmartCoverLetterResult = {
-        cover_letter: 'Dear Hiring Manager,\n\nI am excited to apply for the Senior Software Engineer position at Google...',
+        cover_letter:
+          'Dear Hiring Manager,\n\nI am excited to apply for the Senior Software Engineer position at Google...',
         company_research: {
           company_info: 'Google is a leading technology company known for innovation...',
           recent_news: ['Launched new AI product', 'Expanded cloud services'],
           company_culture: 'Data-driven, collaborative, innovation-focused culture',
-          values_alignment: ['Innovation', 'User Focus', 'Technical Excellence']
+          values_alignment: ['Innovation', 'User Focus', 'Technical Excellence'],
         },
         personalization: {
-          role_specific_highlights: ['5 years of software development experience', 'Team leadership skills'],
-          company_specific_connections: ['Passion for Google\'s mission', 'Experience with Google Cloud'],
-          value_proposition: 'Strong technical skills with proven leadership ability'
+          role_specific_highlights: [
+            '5 years of software development experience',
+            'Team leadership skills',
+          ],
+          company_specific_connections: [
+            "Passion for Google's mission",
+            'Experience with Google Cloud',
+          ],
+          value_proposition: 'Strong technical skills with proven leadership ability',
         },
         optimization_notes: [
           'Emphasized quantified achievements',
           'Connected experience to company values',
-          'Highlighted relevant technical skills'
-        ]
+          'Highlighted relevant technical skills',
+        ],
       };
 
       mockedApiClient.post.mockResolvedValue(mockResponse);
 
       const result = await aiServices.generateCoverLetter(mockRequest);
 
-      expect(mockedApiClient.post).toHaveBeenCalledWith('/ai-career/cover-letter-generation', mockRequest);
+      expect(mockedApiClient.post).toHaveBeenCalledWith(
+        '/ai-career/cover-letter-generation',
+        mockRequest
+      );
       expect(result).toEqual(mockResponse);
     });
   });
@@ -238,7 +257,7 @@ describe('AI Services', () => {
       const mockRequest = {
         current_role: 'Software Engineer',
         target_role: 'Product Manager',
-        document_id: 'test-resume-123'
+        document_id: 'test-resume-123',
       };
 
       const mockResponse = {
@@ -246,16 +265,22 @@ describe('AI Services', () => {
         required_skills: ['Product Strategy', 'Data Analysis'],
         recommended_experience: ['Cross-functional collaboration', 'Customer research'],
         timeline_estimate: '6-12 months with focused preparation',
-        transition_strategy: ['Take on product-focused projects', 'Build stakeholder relationships'],
+        transition_strategy: [
+          'Take on product-focused projects',
+          'Build stakeholder relationships',
+        ],
         potential_challenges: ['Technical background may be questioned'],
-        success_factors: ['Leverage technical expertise', 'Develop business acumen']
+        success_factors: ['Leverage technical expertise', 'Develop business acumen'],
       };
 
       mockedApiClient.post.mockResolvedValue(mockResponse);
 
       const result = await aiServices.getCareerTransitionAnalysis(mockRequest);
 
-      expect(mockedApiClient.post).toHaveBeenCalledWith('/ai-career/career-transition', mockRequest);
+      expect(mockedApiClient.post).toHaveBeenCalledWith(
+        '/ai-career/career-transition',
+        mockRequest
+      );
       expect(result).toEqual(mockResponse);
     });
 
@@ -264,22 +289,22 @@ describe('AI Services', () => {
         role: 'Software Engineer',
         location: 'San Francisco, CA',
         experience_level: 'Senior',
-        skills: ['React', 'Node.js', 'TypeScript']
+        skills: ['React', 'Node.js', 'TypeScript'],
       };
 
       const mockResponse = {
         salary_range: {
           min: 140000,
           max: 180000,
-          median: 160000
+          median: 160000,
         },
         market_positioning: 'Competitive salary range for senior-level position',
         negotiation_points: ['Highlight React expertise', 'Emphasize full-stack capabilities'],
         skill_premiums: [
           { skill: 'React', premium_percentage: 15 },
-          { skill: 'TypeScript', premium_percentage: 10 }
+          { skill: 'TypeScript', premium_percentage: 10 },
         ],
-        recommendations: ['Consider negotiating for equity', 'Highlight leadership experience']
+        recommendations: ['Consider negotiating for equity', 'Highlight leadership experience'],
       };
 
       mockedApiClient.post.mockResolvedValue(mockResponse);

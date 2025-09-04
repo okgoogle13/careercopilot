@@ -28,14 +28,8 @@ class TemplateAssetService {
       id: 'executive-professional',
       name: 'Executive Professional',
       category: 'professional',
-      description:
-        'Clean, traditional layout perfect for executive and senior-level positions',
-      features: [
-        'ATS Optimized',
-        'Clean Layout',
-        'Professional Typography',
-        'Header Focus',
-      ],
+      description: 'Clean, traditional layout perfect for executive and senior-level positions',
+      features: ['ATS Optimized', 'Clean Layout', 'Professional Typography', 'Header Focus'],
       atsScore: 95,
       isRecommended: true,
       assets: [],
@@ -49,12 +43,7 @@ class TemplateAssetService {
       name: 'Modern Minimalist',
       category: 'modern',
       description: 'Contemporary design with clean lines and modern typography',
-      features: [
-        'Modern Design',
-        'Minimalist Layout',
-        'Color Accents',
-        'Icon Integration',
-      ],
+      features: ['Modern Design', 'Minimalist Layout', 'Color Accents', 'Icon Integration'],
       atsScore: 88,
       isRecommended: true,
       assets: [],
@@ -67,14 +56,8 @@ class TemplateAssetService {
       id: 'creative-portfolio',
       name: 'Creative Portfolio',
       category: 'creative',
-      description:
-        'Bold design for creative professionals and portfolio showcases',
-      features: [
-        'Creative Layout',
-        'Visual Elements',
-        'Portfolio Focus',
-        'Brand Integration',
-      ],
+      description: 'Bold design for creative professionals and portfolio showcases',
+      features: ['Creative Layout', 'Visual Elements', 'Portfolio Focus', 'Brand Integration'],
       atsScore: 75,
       isRecommended: false,
       assets: [],
@@ -87,14 +70,8 @@ class TemplateAssetService {
       id: 'tech-specialist',
       name: 'Tech Specialist',
       category: 'professional',
-      description:
-        'Technical resume template optimized for IT and engineering roles',
-      features: [
-        'Technical Focus',
-        'Skills Highlighting',
-        'Project Showcase',
-        'ATS Optimized',
-      ],
+      description: 'Technical resume template optimized for IT and engineering roles',
+      features: ['Technical Focus', 'Skills Highlighting', 'Project Showcase', 'ATS Optimized'],
       atsScore: 92,
       isRecommended: true,
       assets: [],
@@ -107,14 +84,8 @@ class TemplateAssetService {
       id: 'startup-ready',
       name: 'Startup Ready',
       category: 'modern',
-      description:
-        'Dynamic template perfect for startup environments and fast-paced roles',
-      features: [
-        'Dynamic Layout',
-        'Growth Focus',
-        'Innovation Highlight',
-        'Modern Typography',
-      ],
+      description: 'Dynamic template perfect for startup environments and fast-paced roles',
+      features: ['Dynamic Layout', 'Growth Focus', 'Innovation Highlight', 'Modern Typography'],
       atsScore: 82,
       isRecommended: false,
       assets: [],
@@ -127,8 +98,7 @@ class TemplateAssetService {
       id: 'design-focused',
       name: 'Design Focused',
       category: 'creative',
-      description:
-        'Visual-first template for designers and creative professionals',
+      description: 'Visual-first template for designers and creative professionals',
       features: [
         'Visual Design',
         'Portfolio Integration',
@@ -207,10 +177,7 @@ class TemplateAssetService {
   /**
    * Download template as PDF
    */
-  async downloadTemplate(
-    templateId: string,
-    _userData: unknown
-  ): Promise<Blob> {
+  async downloadTemplate(templateId: string, _userData: unknown): Promise<Blob> {
     await this.delay(2000); // Simulate PDF generation time
 
     // In a real implementation, this would call the backend API
@@ -299,10 +266,7 @@ startxref
         if (template.id === 'tech-specialist') score += 10;
       }
 
-      if (
-        jobKeywords.includes('startup') ||
-        jobKeywords.includes('fast-paced')
-      ) {
+      if (jobKeywords.includes('startup') || jobKeywords.includes('fast-paced')) {
         if (template.id === 'startup-ready') score += 10;
       }
 
@@ -363,23 +327,16 @@ startxref
       typeof _userProfile === 'object' &&
       _userProfile !== null &&
       'experience' in _userProfile &&
-      typeof (_userProfile as { experience: unknown }).experience ===
-        'number' &&
+      typeof (_userProfile as { experience: unknown }).experience === 'number' &&
       (_userProfile as { experience: number }).experience > 10
     ) {
-      warnings.push(
-        'Creative templates may not be suitable for very senior positions'
-      );
-      suggestions.push(
-        'Consider using a professional template for senior roles'
-      );
+      warnings.push('Creative templates may not be suitable for very senior positions');
+      suggestions.push('Consider using a professional template for senior roles');
     }
 
     if (template.atsScore < 80) {
       warnings.push('This template has a lower ATS compatibility score');
-      suggestions.push(
-        'Consider using a more ATS-optimized template for better visibility'
-      );
+      suggestions.push('Consider using a more ATS-optimized template for better visibility');
     }
 
     return {
@@ -415,8 +372,7 @@ startxref
     );
 
     const averageAtsScore =
-      this.templates.reduce((sum, t) => sum + t.atsScore, 0) /
-      this.templates.length;
+      this.templates.reduce((sum, t) => sum + t.atsScore, 0) / this.templates.length;
 
     return {
       totalTemplates: this.templates.length,

@@ -22,7 +22,9 @@ describe('ContentOptimizationComponent', () => {
     render(<ContentOptimizationComponent />);
 
     expect(screen.getByText('AI Content Optimization')).toBeInTheDocument();
-    expect(screen.getByText('Optimize your resume, cover letter, and professional content with AI')).toBeInTheDocument();
+    expect(
+      screen.getByText('Optimize your resume, cover letter, and professional content with AI')
+    ).toBeInTheDocument();
     expect(screen.getByRole('tab', { name: /input & settings/i })).toBeInTheDocument();
   });
 
@@ -67,7 +69,7 @@ describe('ContentOptimizationComponent', () => {
     // Fill in content
     const textarea = screen.getByPlaceholderText(/paste your resume, cover letter/i);
     fireEvent.change(textarea, {
-      target: { value: 'John Doe\nSoftware Engineer\nExperienced developer...' }
+      target: { value: 'John Doe\nSoftware Engineer\nExperienced developer...' },
     });
 
     // Set target role
@@ -92,7 +94,7 @@ describe('ContentOptimizationComponent', () => {
       target_role: 'Senior Software Engineer',
       target_company: undefined,
       target_industry: undefined,
-      optimization_goals: ['ats_optimization', 'keyword_enhancement']
+      optimization_goals: ['ats_optimization', 'keyword_enhancement'],
     });
   });
 
@@ -232,7 +234,9 @@ describe('ContentOptimizationComponent', () => {
     fireEvent.click(optimizeButton);
 
     await waitFor(() => {
-      expect(mockedToast.error).toHaveBeenCalledWith('Failed to optimize content. Please try again.');
+      expect(mockedToast.error).toHaveBeenCalledWith(
+        'Failed to optimize content. Please try again.'
+      );
     });
   });
 
@@ -258,10 +262,7 @@ describe('ContentOptimizationComponent', () => {
   it('initializes with props correctly', () => {
     const initialContent = 'Initial resume content';
     render(
-      <ContentOptimizationComponent
-        initialContent={initialContent}
-        contentType="cover_letter"
-      />
+      <ContentOptimizationComponent initialContent={initialContent} contentType='cover_letter' />
     );
 
     const textarea = screen.getByDisplayValue(initialContent);

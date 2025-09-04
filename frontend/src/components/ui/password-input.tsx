@@ -17,7 +17,8 @@ export interface PasswordStrength {
   };
 }
 
-export interface PasswordInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
+export interface PasswordInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   value?: string;
   onChange?: (value: string) => void;
   showStrength?: boolean;
@@ -68,7 +69,12 @@ function calculatePasswordStrength(
 
   // Bonus for mixed case and special patterns
   if (/[a-z].*[A-Z]|[A-Z].*[a-z]/.test(password)) score += 5;
-  if (/\d.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]|[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?].*\d/.test(password)) score += 5;
+  if (
+    /\d.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]|[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?].*\d/.test(
+      password
+    )
+  )
+    score += 5;
 
   // Generate feedback
   if (!requirements.length) {
@@ -123,15 +129,16 @@ export function PasswordInput({
   const [isVisible, setIsVisible] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
-  const strength = useMemo(() =>
-    calculatePasswordStrength(
-      value,
-      minLength,
-      requireLowercase,
-      requireUppercase,
-      requireNumbers,
-      requireSpecialChars
-    ),
+  const strength = useMemo(
+    () =>
+      calculatePasswordStrength(
+        value,
+        minLength,
+        requireLowercase,
+        requireUppercase,
+        requireNumbers,
+        requireSpecialChars
+      ),
     [value, minLength, requireLowercase, requireUppercase, requireNumbers, requireSpecialChars]
   );
 
@@ -163,7 +170,7 @@ export function PasswordInput({
 
   return (
     <div className={cn('space-y-2', className)}>
-      <div className="relative">
+      <div className='relative'>
         <Input
           {...props}
           type={isVisible ? 'text' : 'password'}
@@ -171,88 +178,73 @@ export function PasswordInput({
           onChange={handleChange}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          className={cn(
-            showToggle && 'pr-10',
-            className
-          )}
+          className={cn(showToggle && 'pr-10', className)}
         />
 
         {showToggle && (
           <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+            type='button'
+            variant='ghost'
+            size='sm'
+            className='absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent'
             onClick={toggleVisibility}
             tabIndex={-1}
           >
             {isVisible ? (
-              <EyeOff className="h-4 w-4 text-muted-foreground" />
+              <EyeOff className='h-4 w-4 text-muted-foreground' />
             ) : (
-              <Eye className="h-4 w-4 text-muted-foreground" />
+              <Eye className='h-4 w-4 text-muted-foreground' />
             )}
           </Button>
         )}
       </div>
 
       {shouldShowStrengthIndicator && (
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Progress value={strength.score} className="flex-1 h-2" />
-            <span className={cn(
-              'text-sm font-medium min-w-[60px]',
-              strength.score >= 80 && 'text-green-600',
-              strength.score >= 60 && strength.score < 80 && 'text-yellow-600',
-              strength.score >= 40 && strength.score < 60 && 'text-orange-600',
-              strength.score < 40 && strength.score > 0 && 'text-red-600',
-              strength.score === 0 && 'text-muted-foreground'
-            )}>
+        <div className='space-y-2'>
+          <div className='flex items-center gap-2'>
+            <Progress value={strength.score} className='flex-1 h-2' />
+            <span
+              className={cn(
+                'text-sm font-medium min-w-[60px]',
+                strength.score >= 80 && 'text-green-600',
+                strength.score >= 60 && strength.score < 80 && 'text-yellow-600',
+                strength.score >= 40 && strength.score < 60 && 'text-orange-600',
+                strength.score < 40 && strength.score > 0 && 'text-red-600',
+                strength.score === 0 && 'text-muted-foreground'
+              )}
+            >
               {getStrengthText(strength.score)}
             </span>
           </div>
 
           {strength.feedback.length > 0 && (
-            <div className="flex items-start gap-2">
-              <AlertCircle className="h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-muted-foreground">
-                {strength.feedback.join('. ')}
-              </div>
+            <div className='flex items-start gap-2'>
+              <AlertCircle className='h-4 w-4 text-muted-foreground mt-0.5 flex-shrink-0' />
+              <div className='text-sm text-muted-foreground'>{strength.feedback.join('. ')}</div>
             </div>
           )}
         </div>
       )}
 
       {shouldShowRequirementsList && (
-        <div className="space-y-1">
-          <div className="text-sm font-medium text-muted-foreground">Password requirements:</div>
-          <div className="space-y-1">
+        <div className='space-y-1'>
+          <div className='text-sm font-medium text-muted-foreground'>Password requirements:</div>
+          <div className='space-y-1'>
             <RequirementItem
               met={strength.requirements.length}
               text={`At least ${minLength} characters`}
             />
             {requireLowercase && (
-              <RequirementItem
-                met={strength.requirements.lowercase}
-                text="One lowercase letter"
-              />
+              <RequirementItem met={strength.requirements.lowercase} text='One lowercase letter' />
             )}
             {requireUppercase && (
-              <RequirementItem
-                met={strength.requirements.uppercase}
-                text="One uppercase letter"
-              />
+              <RequirementItem met={strength.requirements.uppercase} text='One uppercase letter' />
             )}
             {requireNumbers && (
-              <RequirementItem
-                met={strength.requirements.number}
-                text="One number"
-              />
+              <RequirementItem met={strength.requirements.number} text='One number' />
             )}
             {requireSpecialChars && (
-              <RequirementItem
-                met={strength.requirements.special}
-                text="One special character"
-              />
+              <RequirementItem met={strength.requirements.special} text='One special character' />
             )}
           </div>
         </div>
@@ -268,17 +260,13 @@ interface RequirementItemProps {
 
 function RequirementItem({ met, text }: RequirementItemProps) {
   return (
-    <div className="flex items-center gap-2 text-sm">
+    <div className='flex items-center gap-2 text-sm'>
       {met ? (
-        <Check className="h-4 w-4 text-green-500" />
+        <Check className='h-4 w-4 text-green-500' />
       ) : (
-        <X className="h-4 w-4 text-muted-foreground" />
+        <X className='h-4 w-4 text-muted-foreground' />
       )}
-      <span className={cn(
-        met ? 'text-green-700' : 'text-muted-foreground'
-      )}>
-        {text}
-      </span>
+      <span className={cn(met ? 'text-green-700' : 'text-muted-foreground')}>{text}</span>
     </div>
   );
 }

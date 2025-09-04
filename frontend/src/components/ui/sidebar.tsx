@@ -110,7 +110,7 @@ export function Sidebar({
       {/* Mobile Overlay */}
       {mobile && isOpen && (
         <div
-          className="fixed inset-0 bg-black/20 z-40 lg:hidden"
+          className='fixed inset-0 bg-black/20 z-40 lg:hidden'
           onClick={() => handleOpenChange(false)}
         />
       )}
@@ -127,33 +127,30 @@ export function Sidebar({
         )}
         style={{ width: sidebarWidth }}
       >
-        <div className="flex flex-col h-full">
+        <div className='flex flex-col h-full'>
           {/* Header */}
           {header && (
-            <div className={cn(
-              'p-4 border-b border-border',
-              isCollapsed && 'px-2'
-            )}>
-              {header}
-            </div>
+            <div className={cn('p-4 border-b border-border', isCollapsed && 'px-2')}>{header}</div>
           )}
 
           {/* Toggle Button */}
           {showToggle && !mobile && (
-            <div className={cn(
-              'flex justify-end p-2 border-b border-border',
-              isCollapsed && 'justify-center'
-            )}>
+            <div
+              className={cn(
+                'flex justify-end p-2 border-b border-border',
+                isCollapsed && 'justify-center'
+              )}
+            >
               <Button
-                variant="ghost"
-                size="sm"
+                variant='ghost'
+                size='sm'
                 onClick={() => handleCollapsedChange(!isCollapsed)}
-                className="h-8 w-8 p-0"
+                className='h-8 w-8 p-0'
               >
                 {isCollapsed ? (
-                  <ChevronRight className="h-4 w-4" />
+                  <ChevronRight className='h-4 w-4' />
                 ) : (
-                  <ChevronLeft className="h-4 w-4" />
+                  <ChevronLeft className='h-4 w-4' />
                 )}
               </Button>
             </div>
@@ -161,22 +158,22 @@ export function Sidebar({
 
           {/* Mobile Close Button */}
           {mobile && (
-            <div className="flex justify-between items-center p-4 border-b border-border lg:hidden">
-              <span className="font-medium">Menu</span>
+            <div className='flex justify-between items-center p-4 border-b border-border lg:hidden'>
+              <span className='font-medium'>Menu</span>
               <Button
-                variant="ghost"
-                size="sm"
+                variant='ghost'
+                size='sm'
                 onClick={() => handleOpenChange(false)}
-                className="h-8 w-8 p-0"
+                className='h-8 w-8 p-0'
               >
-                <X className="h-4 w-4" />
+                <X className='h-4 w-4' />
               </Button>
             </div>
           )}
 
           {/* Content */}
-          <ScrollArea className="flex-1">
-            <nav className="p-2">
+          <ScrollArea className='flex-1'>
+            <nav className='p-2'>
               {sections.map((section, index) => (
                 <SidebarSection key={section.id} section={section} />
               ))}
@@ -185,12 +182,7 @@ export function Sidebar({
 
           {/* Footer */}
           {footer && (
-            <div className={cn(
-              'p-4 border-t border-border',
-              isCollapsed && 'px-2'
-            )}>
-              {footer}
-            </div>
+            <div className={cn('p-4 border-t border-border', isCollapsed && 'px-2')}>{footer}</div>
           )}
         </div>
       </aside>
@@ -208,23 +200,22 @@ function SidebarSection({ section }: SidebarSectionProps) {
   const [expanded, setExpanded] = useState(section.defaultExpanded ?? true);
 
   return (
-    <div className="mb-4">
+    <div className='mb-4'>
       {/* Section Title */}
       {section.title && !collapsed && (
-        <div className="px-3 mb-2">
+        <div className='px-3 mb-2'>
           {section.collapsible ? (
             <button
               onClick={() => setExpanded(!expanded)}
-              className="flex items-center justify-between w-full text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors"
+              className='flex items-center justify-between w-full text-xs font-semibold text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors'
             >
               <span>{section.title}</span>
-              <ChevronRight className={cn(
-                "h-3 w-3 transition-transform",
-                expanded && "rotate-90"
-              )} />
+              <ChevronRight
+                className={cn('h-3 w-3 transition-transform', expanded && 'rotate-90')}
+              />
             </button>
           ) : (
-            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            <h3 className='text-xs font-semibold text-muted-foreground uppercase tracking-wider'>
               {section.title}
             </h3>
           )}
@@ -233,8 +224,8 @@ function SidebarSection({ section }: SidebarSectionProps) {
 
       {/* Section Items */}
       {(expanded || collapsed) && (
-        <div className="space-y-1">
-          {section.items.map((item) => (
+        <div className='space-y-1'>
+          {section.items.map(item => (
             <SidebarItem key={item.id} item={item} />
           ))}
         </div>
@@ -273,26 +264,23 @@ function SidebarItem({ item, level = 0 }: SidebarItemProps) {
     <>
       {/* Icon */}
       {item.icon && (
-        <div className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
-          {item.icon}
-        </div>
+        <div className='flex-shrink-0 w-5 h-5 flex items-center justify-center'>{item.icon}</div>
       )}
 
       {/* Label and Badge */}
       {!collapsed && (
-        <div className="flex items-center justify-between flex-1 min-w-0">
-          <span className="truncate">{item.label}</span>
-          <div className="flex items-center gap-2">
+        <div className='flex items-center justify-between flex-1 min-w-0'>
+          <span className='truncate'>{item.label}</span>
+          <div className='flex items-center gap-2'>
             {item.badge && (
-              <span className="bg-primary/10 text-primary text-xs px-1.5 py-0.5 rounded-full font-medium">
+              <span className='bg-primary/10 text-primary text-xs px-1.5 py-0.5 rounded-full font-medium'>
                 {item.badge}
               </span>
             )}
             {hasChildren && (
-              <ChevronRight className={cn(
-                "h-3 w-3 transition-transform",
-                expanded && "rotate-90"
-              )} />
+              <ChevronRight
+                className={cn('h-3 w-3 transition-transform', expanded && 'rotate-90')}
+              />
             )}
           </div>
         </div>
@@ -305,7 +293,7 @@ function SidebarItem({ item, level = 0 }: SidebarItemProps) {
       {item.href ? (
         <a
           href={item.href}
-          onClick={(e) => {
+          onClick={e => {
             if (item.onClick) {
               e.preventDefault();
               handleClick();
@@ -346,17 +334,15 @@ function SidebarItem({ item, level = 0 }: SidebarItemProps) {
 
       {/* Children */}
       {hasChildren && !collapsed && expanded && (
-        <div className="mt-1 space-y-1">
-          {item.children!.map((child) => (
+        <div className='mt-1 space-y-1'>
+          {item.children!.map(child => (
             <SidebarItem key={child.id} item={child} level={level + 1} />
           ))}
         </div>
       )}
 
       {/* Tooltip for collapsed state */}
-      {collapsed && item.icon && (
-        <div className="sr-only">{item.label}</div>
-      )}
+      {collapsed && item.icon && <div className='sr-only'>{item.label}</div>}
     </div>
   );
 }
@@ -367,14 +353,14 @@ export function SidebarTrigger({ className, ...props }: React.ComponentProps<'bu
 
   return (
     <Button
-      variant="ghost"
-      size="sm"
+      variant='ghost'
+      size='sm'
       className={cn('lg:hidden', className)}
       onClick={() => sidebar.setOpen(true)}
       {...props}
     >
-      <Menu className="h-5 w-5" />
-      <span className="sr-only">Toggle Sidebar</span>
+      <Menu className='h-5 w-5' />
+      <span className='sr-only'>Toggle Sidebar</span>
     </Button>
   );
 }
@@ -387,10 +373,7 @@ interface ResponsiveSidebarProps extends Omit<SidebarProps, 'mobile' | 'open' | 
   breakpoint?: number; // px
 }
 
-export function ResponsiveSidebar({
-  breakpoint = 1024,
-  ...props
-}: ResponsiveSidebarProps) {
+export function ResponsiveSidebar({ breakpoint = 1024, ...props }: ResponsiveSidebarProps) {
   const [isMobile, setIsMobile] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -404,12 +387,5 @@ export function ResponsiveSidebar({
     return () => window.removeEventListener('resize', checkMobile);
   }, [breakpoint]);
 
-  return (
-    <Sidebar
-      {...props}
-      mobile={isMobile}
-      open={open}
-      onOpenChange={setOpen}
-    />
-  );
+  return <Sidebar {...props} mobile={isMobile} open={open} onOpenChange={setOpen} />;
 }

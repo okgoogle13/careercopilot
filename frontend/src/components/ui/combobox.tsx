@@ -51,10 +51,11 @@ export function Combobox({
     if (!searchable || !searchQuery) return options;
 
     const query = searchQuery.toLowerCase();
-    return options.filter(option =>
-      option.label.toLowerCase().includes(query) ||
-      option.description?.toLowerCase().includes(query) ||
-      option.value.toLowerCase().includes(query)
+    return options.filter(
+      option =>
+        option.label.toLowerCase().includes(query) ||
+        option.description?.toLowerCase().includes(query) ||
+        option.value.toLowerCase().includes(query)
     );
   }, [options, searchQuery, searchable]);
 
@@ -106,8 +107,8 @@ export function Combobox({
       <PopoverTrigger asChild>
         <Button
           ref={triggerRef}
-          variant="outline"
-          role="combobox"
+          variant='outline'
+          role='combobox'
           aria-expanded={open}
           className={cn(
             'w-full justify-between font-normal',
@@ -116,46 +117,42 @@ export function Combobox({
           )}
           disabled={disabled}
         >
-          <span className="truncate">
-            {selectedOption ? selectedOption.label : placeholder}
-          </span>
-          <div className="flex items-center gap-2">
+          <span className='truncate'>{selectedOption ? selectedOption.label : placeholder}</span>
+          <div className='flex items-center gap-2'>
             {clearable && value && !disabled && (
               <X
-                className="h-4 w-4 opacity-50 hover:opacity-100 transition-opacity"
+                className='h-4 w-4 opacity-50 hover:opacity-100 transition-opacity'
                 onClick={handleClear}
               />
             )}
-            <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown className='h-4 w-4 shrink-0 opacity-50' />
           </div>
         </Button>
       </PopoverTrigger>
 
       <PopoverContent
         className={cn('w-[--radix-popover-trigger-width] p-0', popoverClassName)}
-        align="start"
+        align='start'
       >
-        <div className="max-h-80 overflow-hidden">
+        <div className='max-h-80 overflow-hidden'>
           {searchable && (
-            <div className="flex items-center border-b px-3">
-              <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+            <div className='flex items-center border-b px-3'>
+              <Search className='mr-2 h-4 w-4 shrink-0 opacity-50' />
               <Input
                 placeholder={searchPlaceholder}
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
                 onKeyDown={handleSearchKeyDown}
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                className='border-0 focus-visible:ring-0 focus-visible:ring-offset-0'
               />
             </div>
           )}
 
-          <div className="max-h-60 overflow-auto p-1">
+          <div className='max-h-60 overflow-auto p-1'>
             {filteredOptions.length === 0 ? (
-              <div className="py-6 text-center text-sm text-muted-foreground">
-                {emptyText}
-              </div>
+              <div className='py-6 text-center text-sm text-muted-foreground'>{emptyText}</div>
             ) : (
-              filteredOptions.map((option) => (
+              filteredOptions.map(option => (
                 <button
                   key={option.value}
                   onClick={() => !option.disabled && handleSelect(option.value)}
@@ -170,18 +167,14 @@ export function Combobox({
                   )}
                   disabled={option.disabled}
                 >
-                  <div className="flex-1 text-left">
-                    <div className="font-medium">{option.label}</div>
+                  <div className='flex-1 text-left'>
+                    <div className='font-medium'>{option.label}</div>
                     {option.description && (
-                      <div className="text-xs text-muted-foreground">
-                        {option.description}
-                      </div>
+                      <div className='text-xs text-muted-foreground'>{option.description}</div>
                     )}
                   </div>
 
-                  {value === option.value && (
-                    <Check className="ml-2 h-4 w-4 shrink-0" />
-                  )}
+                  {value === option.value && <Check className='ml-2 h-4 w-4 shrink-0' />}
                 </button>
               ))
             )}
@@ -220,10 +213,7 @@ export function GroupedCombobox({
   const [searchQuery, setSearchQuery] = useState('');
   const triggerRef = useRef<HTMLButtonElement>(null);
 
-  const allOptions = React.useMemo(() =>
-    groups.flatMap(group => group.options),
-    [groups]
-  );
+  const allOptions = React.useMemo(() => groups.flatMap(group => group.options), [groups]);
 
   const selectedOption = allOptions.find(option => option.value === value);
 
@@ -234,11 +224,12 @@ export function GroupedCombobox({
     return groups
       .map(group => ({
         ...group,
-        options: group.options.filter(option =>
-          option.label.toLowerCase().includes(query) ||
-          option.description?.toLowerCase().includes(query) ||
-          option.value.toLowerCase().includes(query)
-        )
+        options: group.options.filter(
+          option =>
+            option.label.toLowerCase().includes(query) ||
+            option.description?.toLowerCase().includes(query) ||
+            option.value.toLowerCase().includes(query)
+        ),
       }))
       .filter(group => group.options.length > 0);
   }, [groups, searchQuery, searchable]);
@@ -272,8 +263,8 @@ export function GroupedCombobox({
       <PopoverTrigger asChild>
         <Button
           ref={triggerRef}
-          variant="outline"
-          role="combobox"
+          variant='outline'
+          role='combobox'
           aria-expanded={open}
           className={cn(
             'w-full justify-between font-normal',
@@ -282,51 +273,47 @@ export function GroupedCombobox({
           )}
           disabled={disabled}
         >
-          <span className="truncate">
-            {selectedOption ? selectedOption.label : placeholder}
-          </span>
-          <div className="flex items-center gap-2">
+          <span className='truncate'>{selectedOption ? selectedOption.label : placeholder}</span>
+          <div className='flex items-center gap-2'>
             {clearable && value && !disabled && (
               <X
-                className="h-4 w-4 opacity-50 hover:opacity-100 transition-opacity"
+                className='h-4 w-4 opacity-50 hover:opacity-100 transition-opacity'
                 onClick={handleClear}
               />
             )}
-            <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown className='h-4 w-4 shrink-0 opacity-50' />
           </div>
         </Button>
       </PopoverTrigger>
 
       <PopoverContent
         className={cn('w-[--radix-popover-trigger-width] p-0', popoverClassName)}
-        align="start"
+        align='start'
       >
-        <div className="max-h-80 overflow-hidden">
+        <div className='max-h-80 overflow-hidden'>
           {searchable && (
-            <div className="flex items-center border-b px-3">
-              <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+            <div className='flex items-center border-b px-3'>
+              <Search className='mr-2 h-4 w-4 shrink-0 opacity-50' />
               <Input
                 placeholder={searchPlaceholder}
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+                onChange={e => setSearchQuery(e.target.value)}
+                className='border-0 focus-visible:ring-0 focus-visible:ring-offset-0'
               />
             </div>
           )}
 
-          <div className="max-h-60 overflow-auto p-1">
+          <div className='max-h-60 overflow-auto p-1'>
             {filteredGroups.length === 0 ? (
-              <div className="py-6 text-center text-sm text-muted-foreground">
-                {emptyText}
-              </div>
+              <div className='py-6 text-center text-sm text-muted-foreground'>{emptyText}</div>
             ) : (
               filteredGroups.map((group, groupIndex) => (
                 <div key={group.label}>
-                  {groupIndex > 0 && <div className="h-px bg-border my-1" />}
-                  <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
+                  {groupIndex > 0 && <div className='h-px bg-border my-1' />}
+                  <div className='px-2 py-1.5 text-xs font-semibold text-muted-foreground'>
                     {group.label}
                   </div>
-                  {group.options.map((option) => (
+                  {group.options.map(option => (
                     <button
                       key={option.value}
                       onClick={() => !option.disabled && handleSelect(option.value)}
@@ -341,18 +328,14 @@ export function GroupedCombobox({
                       )}
                       disabled={option.disabled}
                     >
-                      <div className="flex-1 text-left pl-4">
-                        <div className="font-medium">{option.label}</div>
+                      <div className='flex-1 text-left pl-4'>
+                        <div className='font-medium'>{option.label}</div>
                         {option.description && (
-                          <div className="text-xs text-muted-foreground">
-                            {option.description}
-                          </div>
+                          <div className='text-xs text-muted-foreground'>{option.description}</div>
                         )}
                       </div>
 
-                      {value === option.value && (
-                        <Check className="ml-2 h-4 w-4 shrink-0" />
-                      )}
+                      {value === option.value && <Check className='ml-2 h-4 w-4 shrink-0' />}
                     </button>
                   ))}
                 </div>

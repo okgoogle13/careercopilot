@@ -19,16 +19,18 @@ describe('JobMatchingComponent', () => {
   });
 
   it('renders job matching form correctly', () => {
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     expect(screen.getByText('AI-Powered Job Matching')).toBeInTheDocument();
-    expect(screen.getByText('Find jobs that perfectly match your skills and experience')).toBeInTheDocument();
+    expect(
+      screen.getByText('Find jobs that perfectly match your skills and experience')
+    ).toBeInTheDocument();
     expect(screen.getByText('Job Preferences')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /find job matches/i })).toBeInTheDocument();
   });
 
   it('renders preference form fields', () => {
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     expect(screen.getByLabelText(/job type/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/experience level/i)).toBeInTheDocument();
@@ -54,7 +56,7 @@ describe('JobMatchingComponent', () => {
   it('handles successful job matching', async () => {
     mockedAiServices.getJobMatching.mockResolvedValue(mockJobMatchingResult);
 
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     // Fill in some preferences
     const jobTypeSelect = screen.getByLabelText(/job type/i);
@@ -82,8 +84,8 @@ describe('JobMatchingComponent', () => {
       document_id: 'test-resume-123',
       preferences: {
         job_type: 'full-time',
-        salary_range: undefined
-      }
+        salary_range: undefined,
+      },
     });
   });
 
@@ -91,20 +93,22 @@ describe('JobMatchingComponent', () => {
     const errorMessage = 'Failed to fetch job matches';
     mockedAiServices.getJobMatching.mockRejectedValue(new Error(errorMessage));
 
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     const findMatchesButton = screen.getByRole('button', { name: /find job matches/i });
     fireEvent.click(findMatchesButton);
 
     await waitFor(() => {
-      expect(mockedToast.error).toHaveBeenCalledWith('Failed to find job matches. Please try again.');
+      expect(mockedToast.error).toHaveBeenCalledWith(
+        'Failed to find job matches. Please try again.'
+      );
     });
 
     expect(screen.queryByText('Analysis Summary')).not.toBeInTheDocument();
   });
 
   it('updates preferences correctly', () => {
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     const experienceLevelSelect = screen.getByLabelText(/experience level/i);
     fireEvent.change(experienceLevelSelect, { target: { value: 'senior-level' } });
@@ -125,10 +129,7 @@ describe('JobMatchingComponent', () => {
     mockedAiServices.getJobMatching.mockResolvedValue(mockJobMatchingResult);
 
     render(
-      <JobMatchingComponent
-        resumeDocumentId="test-resume-123"
-        onJobSelected={mockOnJobSelected}
-      />
+      <JobMatchingComponent resumeDocumentId='test-resume-123' onJobSelected={mockOnJobSelected} />
     );
 
     const findMatchesButton = screen.getByRole('button', { name: /find job matches/i });
@@ -147,7 +148,7 @@ describe('JobMatchingComponent', () => {
   it('displays match score with correct styling', async () => {
     mockedAiServices.getJobMatching.mockResolvedValue(mockJobMatchingResult);
 
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     const findMatchesButton = screen.getByRole('button', { name: /find job matches/i });
     fireEvent.click(findMatchesButton);
@@ -170,7 +171,7 @@ describe('JobMatchingComponent', () => {
   it('displays skills correctly', async () => {
     mockedAiServices.getJobMatching.mockResolvedValue(mockJobMatchingResult);
 
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     const findMatchesButton = screen.getByRole('button', { name: /find job matches/i });
     fireEvent.click(findMatchesButton);
@@ -188,7 +189,7 @@ describe('JobMatchingComponent', () => {
   });
 
   it('has accessible form elements', () => {
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     // Check that form elements have proper labels
     const jobTypeSelect = screen.getByLabelText(/job type/i);
@@ -207,11 +208,11 @@ describe('JobMatchingComponent', () => {
 
   it('disables button when loading', async () => {
     // Mock a slow response
-    mockedAiServices.getJobMatching.mockImplementation(() =>
-      new Promise(resolve => setTimeout(() => resolve(mockJobMatchingResult), 1000))
+    mockedAiServices.getJobMatching.mockImplementation(
+      () => new Promise(resolve => setTimeout(() => resolve(mockJobMatchingResult), 1000))
     );
 
-    render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+    render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
     const findMatchesButton = screen.getByRole('button', { name: /find job matches/i });
     fireEvent.click(findMatchesButton);

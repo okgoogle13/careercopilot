@@ -54,11 +54,11 @@ export function TagInput({
     if (!query) return [];
 
     return suggestions
-      .filter(suggestion =>
-        suggestion.toLowerCase().includes(query) &&
-        (allowDuplicates || !tags.some(tag =>
-          tag.label.toLowerCase() === suggestion.toLowerCase()
-        ))
+      .filter(
+        suggestion =>
+          suggestion.toLowerCase().includes(query) &&
+          (allowDuplicates ||
+            !tags.some(tag => tag.label.toLowerCase() === suggestion.toLowerCase()))
       )
       .slice(0, 10); // Limit suggestions
   }, [inputValue, suggestions, tags, allowDuplicates]);
@@ -87,7 +87,10 @@ export function TagInput({
     if (!newTag) return;
 
     // Check for duplicates
-    if (!allowDuplicates && tags.some(tag => tag.label.toLowerCase() === newTag.label.toLowerCase())) {
+    if (
+      !allowDuplicates &&
+      tags.some(tag => tag.label.toLowerCase() === newTag.label.toLowerCase())
+    ) {
       return;
     }
 
@@ -153,7 +156,7 @@ export function TagInput({
       case 'ArrowUp':
         e.preventDefault();
         if (showSuggestions) {
-          setSelectedSuggestionIndex(prev => prev > 0 ? prev - 1 : -1);
+          setSelectedSuggestionIndex(prev => (prev > 0 ? prev - 1 : -1));
         }
         break;
 
@@ -192,44 +195,44 @@ export function TagInput({
   const defaultRenderTag = (tag: Tag, onRemove: () => void) => (
     <Badge
       key={tag.id}
-      variant="secondary"
-      className={cn(
-        'flex items-center gap-1 pr-1',
-        tagClassName
-      )}
+      variant='secondary'
+      className={cn('flex items-center gap-1 pr-1', tagClassName)}
     >
       <span>{tag.label}</span>
       <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        className="h-4 w-4 p-0 hover:bg-destructive/20 hover:text-destructive"
+        type='button'
+        variant='ghost'
+        size='sm'
+        className='h-4 w-4 p-0 hover:bg-destructive/20 hover:text-destructive'
         onClick={onRemove}
         disabled={disabled}
       >
-        <X className="h-3 w-3" />
+        <X className='h-3 w-3' />
       </Button>
     </Badge>
   );
 
   return (
     <div className={cn('relative', className)}>
-      <div className={cn(
-        'min-h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm',
-        'ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
-        'disabled:cursor-not-allowed disabled:opacity-50',
-        disabled && 'cursor-not-allowed opacity-50'
-      )}>
-        <div className="flex flex-wrap items-center gap-2">
+      <div
+        className={cn(
+          'min-h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm',
+          'ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2',
+          'disabled:cursor-not-allowed disabled:opacity-50',
+          disabled && 'cursor-not-allowed opacity-50'
+        )}
+      >
+        <div className='flex flex-wrap items-center gap-2'>
           {tags.map(tag =>
-            renderTag ? renderTag(tag, () => removeTag(tag.id)) :
-            defaultRenderTag(tag, () => removeTag(tag.id))
+            renderTag
+              ? renderTag(tag, () => removeTag(tag.id))
+              : defaultRenderTag(tag, () => removeTag(tag.id))
           )}
 
           {canAddMoreTags && (
             <Input
               ref={inputRef}
-              type="text"
+              type='text'
               value={inputValue}
               onChange={handleInputChange}
               onKeyDown={handleInputKeyDown}
@@ -248,11 +251,11 @@ export function TagInput({
       </div>
 
       {showSuggestions && filteredSuggestions.length > 0 && (
-        <div className="absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover p-1 shadow-md animate-in fade-in-0 zoom-in-95">
+        <div className='absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover p-1 shadow-md animate-in fade-in-0 zoom-in-95'>
           {filteredSuggestions.map((suggestion, index) => (
             <button
               key={suggestion}
-              type="button"
+              type='button'
               onClick={() => handleSuggestionClick(suggestion)}
               className={cn(
                 'w-full px-3 py-2 text-sm text-left rounded-sm transition-colors',
@@ -268,7 +271,7 @@ export function TagInput({
       )}
 
       {maxTags && (
-        <div className="mt-1 text-xs text-muted-foreground">
+        <div className='mt-1 text-xs text-muted-foreground'>
           {tags.length}/{maxTags} tags
         </div>
       )}
@@ -282,7 +285,8 @@ interface SkillTag extends Tag {
   category?: string;
 }
 
-interface SkillsTagInputProps extends Omit<TagInputProps, 'tags' | 'onTagsChange' | 'onCreateTag' | 'renderTag'> {
+interface SkillsTagInputProps
+  extends Omit<TagInputProps, 'tags' | 'onTagsChange' | 'onCreateTag' | 'renderTag'> {
   skills: SkillTag[];
   onSkillsChange: (skills: SkillTag[]) => void;
   showLevels?: boolean;
@@ -298,9 +302,7 @@ export function SkillsTagInput({
   ...props
 }: SkillsTagInputProps) {
   const allSuggestions = React.useMemo(() => {
-    const categorySuggestions = skillCategories
-      ? Object.values(skillCategories).flat()
-      : [];
+    const categorySuggestions = skillCategories ? Object.values(skillCategories).flat() : [];
     return [...new Set([...suggestions, ...categorySuggestions])];
   }, [suggestions, skillCategories]);
 
@@ -312,9 +314,7 @@ export function SkillsTagInput({
     let category: string | undefined;
     if (skillCategories) {
       for (const [cat, skillList] of Object.entries(skillCategories)) {
-        if (skillList.some(skill =>
-          skill.toLowerCase() === trimmedValue.toLowerCase()
-        )) {
+        if (skillList.some(skill => skill.toLowerCase() === trimmedValue.toLowerCase())) {
           category = cat;
           break;
         }
@@ -331,27 +331,21 @@ export function SkillsTagInput({
   };
 
   const renderSkillTag = (skill: SkillTag, onRemove: () => void) => (
-    <Badge
-      key={skill.id}
-      variant="secondary"
-      className="flex items-center gap-2 pr-1"
-    >
-      <div className="flex flex-col">
-        <span className="text-xs">{skill.label}</span>
+    <Badge key={skill.id} variant='secondary' className='flex items-center gap-2 pr-1'>
+      <div className='flex flex-col'>
+        <span className='text-xs'>{skill.label}</span>
         {showLevels && skill.level && (
-          <span className="text-xs text-muted-foreground capitalize">
-            {skill.level}
-          </span>
+          <span className='text-xs text-muted-foreground capitalize'>{skill.level}</span>
         )}
       </div>
       <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        className="h-4 w-4 p-0 hover:bg-destructive/20 hover:text-destructive"
+        type='button'
+        variant='ghost'
+        size='sm'
+        className='h-4 w-4 p-0 hover:bg-destructive/20 hover:text-destructive'
         onClick={onRemove}
       >
-        <X className="h-3 w-3" />
+        <X className='h-3 w-3' />
       </Button>
     </Badge>
   );
@@ -364,7 +358,7 @@ export function SkillsTagInput({
       suggestions={allSuggestions}
       onCreateTag={createSkillTag}
       renderTag={renderSkillTag}
-      placeholder="Add skills..."
+      placeholder='Add skills...'
     />
   );
 }

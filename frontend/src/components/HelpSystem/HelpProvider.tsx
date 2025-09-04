@@ -54,36 +54,45 @@ export const HelpProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.getItem('help_enabled') !== 'false'
   );
 
-  const showHelp = useCallback((content: HelpContent, options: HelpOptions = {}) => {
-    if (!isHelpEnabled) return;
+  const showHelp = useCallback(
+    (content: HelpContent, options: HelpOptions = {}) => {
+      if (!isHelpEnabled) return;
 
-    // Check if this help should only be shown once
-    if (options.showOnce) {
-      const shownKey = `help_shown_${content.id}`;
-      if (localStorage.getItem(shownKey)) return;
-      localStorage.setItem(shownKey, 'true');
-    }
+      // Check if this help should only be shown once
+      if (options.showOnce) {
+        const shownKey = `help_shown_${content.id}`;
+        if (localStorage.getItem(shownKey)) return;
+        localStorage.setItem(shownKey, 'true');
+      }
 
-    setCurrentHelp({ content, options });
-  }, [isHelpEnabled]);
+      setCurrentHelp({ content, options });
+    },
+    [isHelpEnabled]
+  );
 
-  const showTour = useCallback((tourId: string) => {
-    if (!isHelpEnabled) return;
-    setActiveTour(tourId);
-  }, [isHelpEnabled]);
+  const showTour = useCallback(
+    (tourId: string) => {
+      if (!isHelpEnabled) return;
+      setActiveTour(tourId);
+    },
+    [isHelpEnabled]
+  );
 
   const dismissHelp = useCallback(() => {
     setCurrentHelp(null);
     setActiveTour(null);
   }, []);
 
-  const setHelpEnabledState = useCallback((enabled: boolean) => {
-    setIsHelpEnabled(enabled);
-    localStorage.setItem('help_enabled', enabled.toString());
-    if (!enabled) {
-      dismissHelp();
-    }
-  }, [dismissHelp]);
+  const setHelpEnabledState = useCallback(
+    (enabled: boolean) => {
+      setIsHelpEnabled(enabled);
+      localStorage.setItem('help_enabled', enabled.toString());
+      if (!enabled) {
+        dismissHelp();
+      }
+    },
+    [dismissHelp]
+  );
 
   return (
     <HelpContext.Provider
@@ -117,9 +126,7 @@ export const HelpProvider: React.FC<{ children: React.ReactNode }> = ({ children
         </>
       )}
 
-      {activeTour && (
-        <TourGuide tourId={activeTour} onComplete={dismissHelp} />
-      )}
+      {activeTour && <TourGuide tourId={activeTour} onComplete={dismissHelp} />}
     </HelpContext.Provider>
   );
 };
@@ -130,7 +137,8 @@ export const helpContent = {
   'dashboard-overview': {
     id: 'dashboard-overview',
     title: 'Dashboard Overview',
-    description: 'Your dashboard shows all your profile variations. Each profile can be tailored for different types of jobs or industries.',
+    description:
+      'Your dashboard shows all your profile variations. Each profile can be tailored for different types of jobs or industries.',
     type: 'tooltip' as const,
     category: 'feature' as const,
   },
@@ -138,7 +146,8 @@ export const helpContent = {
   'profile-variations': {
     id: 'profile-variations',
     title: 'Profile Variations',
-    description: 'Create different versions of your profile optimized for specific roles. For example, you might have one profile for "Software Engineer" positions and another for "Data Analyst" roles.',
+    description:
+      'Create different versions of your profile optimized for specific roles. For example, you might have one profile for "Software Engineer" positions and another for "Data Analyst" roles.',
     type: 'modal' as const,
     category: 'guide' as const,
     relatedLinks: [
@@ -151,7 +160,8 @@ export const helpContent = {
   'profile-editor-sections': {
     id: 'profile-editor-sections',
     title: 'Profile Sections',
-    description: 'Each section serves a specific purpose:\n\n• Personal Info: Contact details and basic information\n• Summary: Your professional elevator pitch\n• Experience: Work history with achievements\n• Education: Academic background\n• Skills: Technical and soft skills\n• Targeting: Keywords and target roles for optimization',
+    description:
+      'Each section serves a specific purpose:\n\n• Personal Info: Contact details and basic information\n• Summary: Your professional elevator pitch\n• Experience: Work history with achievements\n• Education: Academic background\n• Skills: Technical and soft skills\n• Targeting: Keywords and target roles for optimization',
     type: 'modal' as const,
     category: 'guide' as const,
   },
@@ -159,7 +169,8 @@ export const helpContent = {
   'auto-save': {
     id: 'auto-save',
     title: 'Auto-Save Feature',
-    description: 'Your changes are automatically saved every 2 seconds. Look for the "Unsaved changes" indicator to see when changes are pending.',
+    description:
+      'Your changes are automatically saved every 2 seconds. Look for the "Unsaved changes" indicator to see when changes are pending.',
     type: 'tooltip' as const,
     category: 'feature' as const,
   },
@@ -168,7 +179,8 @@ export const helpContent = {
   'ats-analysis': {
     id: 'ats-analysis',
     title: 'ATS Analysis Explained',
-    description: 'ATS (Applicant Tracking System) analysis checks how well your resume matches job requirements. Our AI analyzes:\n\n• Keyword matching (40%)\n• Semantic similarity (35%)\n• Format compatibility (25%)\n\nA score above 70% indicates good ATS compatibility.',
+    description:
+      'ATS (Applicant Tracking System) analysis checks how well your resume matches job requirements. Our AI analyzes:\n\n• Keyword matching (40%)\n• Semantic similarity (35%)\n• Format compatibility (25%)\n\nA score above 70% indicates good ATS compatibility.',
     type: 'modal' as const,
     category: 'guide' as const,
   },
@@ -176,7 +188,8 @@ export const helpContent = {
   'keyword-optimization': {
     id: 'keyword-optimization',
     title: 'Keyword Optimization',
-    description: 'Keywords are crucial for ATS systems. Include relevant keywords from job postings in your resume, but avoid keyword stuffing. Use them naturally in context.',
+    description:
+      'Keywords are crucial for ATS systems. Include relevant keywords from job postings in your resume, but avoid keyword stuffing. Use them naturally in context.',
     type: 'tooltip' as const,
     category: 'guide' as const,
   },
@@ -185,7 +198,8 @@ export const helpContent = {
   'template-selection': {
     id: 'template-selection',
     title: 'Choosing the Right Template',
-    description: 'Different templates work better for different industries:\n\n• Professional: Traditional industries (finance, law, healthcare)\n• Modern: Tech, startups, creative agencies\n• Creative: Design, marketing, entertainment\n\nConsider your industry and company culture when choosing.',
+    description:
+      'Different templates work better for different industries:\n\n• Professional: Traditional industries (finance, law, healthcare)\n• Modern: Tech, startups, creative agencies\n• Creative: Design, marketing, entertainment\n\nConsider your industry and company culture when choosing.',
     type: 'modal' as const,
     category: 'guide' as const,
   },
@@ -194,7 +208,8 @@ export const helpContent = {
   'upload-issues': {
     id: 'upload-issues',
     title: 'File Upload Issues',
-    description: 'If you\'re having trouble uploading files:\n\n• Check file size (max 10MB)\n• Ensure file format is supported (PDF, DOC, DOCX)\n• Try refreshing the page\n• Clear browser cache if problems persist',
+    description:
+      "If you're having trouble uploading files:\n\n• Check file size (max 10MB)\n• Ensure file format is supported (PDF, DOC, DOCX)\n• Try refreshing the page\n• Clear browser cache if problems persist",
     type: 'modal' as const,
     category: 'troubleshooting' as const,
     actions: [
@@ -213,12 +228,15 @@ export const helpContent = {
 export const useHelpContent = () => {
   const { showHelp } = useHelp();
 
-  const showHelpFor = useCallback((contentId: keyof typeof helpContent, options?: HelpOptions) => {
-    const content = helpContent[contentId];
-    if (content) {
-      showHelp(content, options);
-    }
-  }, [showHelp]);
+  const showHelpFor = useCallback(
+    (contentId: keyof typeof helpContent, options?: HelpOptions) => {
+      const content = helpContent[contentId];
+      if (content) {
+        showHelp(content, options);
+      }
+    },
+    [showHelp]
+  );
 
   return { showHelpFor, helpContent };
 };

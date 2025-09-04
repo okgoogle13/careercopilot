@@ -2,10 +2,8 @@ import os
 import sys
 from logging.config import fileConfig
 
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
-
 from alembic import context
+from sqlalchemy import engine_from_config, pool
 
 # Add the parent directory to sys.path so we can import our models
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
@@ -19,9 +17,10 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
+from app.core.database import db_config
+
 # Import our models and database configuration
 from app.models.database import Base
-from app.core.database import db_config
 
 # Set the database URL from our configuration
 config.set_main_option("sqlalchemy.url", db_config.database_url)

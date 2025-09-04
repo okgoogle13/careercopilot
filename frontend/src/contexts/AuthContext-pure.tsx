@@ -57,10 +57,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     console.log('🔧 AuthProvider: Setting up pure fallback auth listener');
 
     const unsubscribe = pureFallbackAuth.onAuthStateChanged(authUser => {
-      console.log(
-        '🔧 AuthProvider: Auth state changed',
-        authUser ? authUser.email : 'signed out'
-      );
+      console.log('🔧 AuthProvider: Auth state changed', authUser ? authUser.email : 'signed out');
       setUser(authUser);
       setLoading(false);
     });
@@ -89,51 +86,43 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
   }, []);
 
-  const login = useCallback(
-    async (email: string, password: string): Promise<User> => {
-      setLoading(true);
-      setError(null);
+  const login = useCallback(async (email: string, password: string): Promise<User> => {
+    setLoading(true);
+    setError(null);
 
-      try {
-        console.log('🔧 AuthProvider: Attempting login for', email);
-        const user = await pureFallbackAuth.signIn(email, password);
-        console.log('✅ AuthProvider: Login successful');
-        return user;
-      } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Login failed';
-        console.error('❌ AuthProvider: Login failed', errorMessage);
-        setError(errorMessage);
-        throw err;
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
+    try {
+      console.log('🔧 AuthProvider: Attempting login for', email);
+      const user = await pureFallbackAuth.signIn(email, password);
+      console.log('✅ AuthProvider: Login successful');
+      return user;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Login failed';
+      console.error('❌ AuthProvider: Login failed', errorMessage);
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  const register = useCallback(
-    async (email: string, password: string): Promise<User> => {
-      setLoading(true);
-      setError(null);
+  const register = useCallback(async (email: string, password: string): Promise<User> => {
+    setLoading(true);
+    setError(null);
 
-      try {
-        console.log('🔧 AuthProvider: Attempting registration for', email);
-        const user = await pureFallbackAuth.signUp(email, password);
-        console.log('✅ AuthProvider: Registration successful');
-        return user;
-      } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Registration failed';
-        console.error('❌ AuthProvider: Registration failed', errorMessage);
-        setError(errorMessage);
-        throw err;
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
+    try {
+      console.log('🔧 AuthProvider: Attempting registration for', email);
+      const user = await pureFallbackAuth.signUp(email, password);
+      console.log('✅ AuthProvider: Registration successful');
+      return user;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed';
+      console.error('❌ AuthProvider: Registration failed', errorMessage);
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   const logout = useCallback(async () => {
     setLoading(true);

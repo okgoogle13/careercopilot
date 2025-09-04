@@ -11,9 +11,7 @@ interface ScoreBreakdownProps {
 /**
  * Displays the detailed breakdown of ATS scores by category
  */
-export const ScoreBreakdown: React.FC<ScoreBreakdownProps> = ({
-  breakdown,
-}) => {
+export const ScoreBreakdown: React.FC<ScoreBreakdownProps> = ({ breakdown }) => {
   const scoreItems = [
     {
       label: 'Keyword Match',
@@ -34,15 +32,13 @@ export const ScoreBreakdown: React.FC<ScoreBreakdownProps> = ({
 
   return (
     <div>
-      <h3 className="text-xl font-semibold mb-3 text-gray-900">
-        Score Breakdown
-      </h3>
-      <ul className="space-y-3">
+      <h3 className='text-xl font-semibold mb-3 text-gray-900'>Score Breakdown</h3>
+      <ul className='space-y-3'>
         {scoreItems.map((item, index) => (
-          <li key={index} className="flex justify-between items-center">
-            <span className="text-gray-700">{item.label}:</span>
-            <div className="flex items-center space-x-2">
-              <div className="w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <li key={index} className='flex justify-between items-center'>
+            <span className='text-gray-700'>{item.label}:</span>
+            <div className='flex items-center space-x-2'>
+              <div className='w-16 h-2 bg-gray-200 rounded-full overflow-hidden'>
                 <div
                   className={`h-full bg-current ${item.color} transition-all duration-1000 ease-out`}
                   style={{ width: `${item.value}%` }}

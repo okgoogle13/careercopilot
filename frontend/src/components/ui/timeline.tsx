@@ -9,7 +9,7 @@ import {
   FileText,
   Send,
   MessageSquare,
-  Star
+  Star,
 } from 'lucide-react';
 import { format, isToday, isPast, isFuture } from 'date-fns';
 import { cn } from '../../lib/utils';
@@ -144,7 +144,7 @@ export function Timeline({
         const isLast = index === sortedItems.length - 1;
 
         return (
-          <div key={item.id} className="relative flex group">
+          <div key={item.id} className='relative flex group'>
             {/* Timeline connector line */}
             {!isLast && (
               <div
@@ -156,11 +156,13 @@ export function Timeline({
             )}
 
             {/* Timeline icon */}
-            <div className={cn(
-              'relative flex items-center justify-center w-8 h-8 rounded-full border-2 flex-shrink-0 z-10',
-              getStatusColor(item.status)
-            )}>
-              <StatusIcon className="w-4 h-4" />
+            <div
+              className={cn(
+                'relative flex items-center justify-center w-8 h-8 rounded-full border-2 flex-shrink-0 z-10',
+                getStatusColor(item.status)
+              )}
+            >
+              <StatusIcon className='w-4 h-4' />
             </div>
 
             {/* Timeline content */}
@@ -173,15 +175,13 @@ export function Timeline({
               onClick={() => interactive && onItemClick?.(item)}
             >
               {/* Header with title and timestamp */}
-              <div className="flex items-start justify-between gap-4 mb-2">
-                <div className="flex items-start gap-2 min-w-0 flex-1">
-                  <TypeIcon className="w-4 h-4 mt-0.5 text-muted-foreground flex-shrink-0" />
-                  <div className="min-w-0 flex-1">
-                    <h4 className="font-medium text-sm leading-5 truncate">
-                      {item.title}
-                    </h4>
+              <div className='flex items-start justify-between gap-4 mb-2'>
+                <div className='flex items-start gap-2 min-w-0 flex-1'>
+                  <TypeIcon className='w-4 h-4 mt-0.5 text-muted-foreground flex-shrink-0' />
+                  <div className='min-w-0 flex-1'>
+                    <h4 className='font-medium text-sm leading-5 truncate'>{item.title}</h4>
                     {item.metadata?.company && (
-                      <p className="text-xs text-muted-foreground">
+                      <p className='text-xs text-muted-foreground'>
                         {item.metadata.company}
                         {item.metadata.position && ` • ${item.metadata.position}`}
                       </p>
@@ -190,7 +190,10 @@ export function Timeline({
                 </div>
 
                 {showTime && (
-                  <Badge variant={getTimeBadgeVariant(item.timestamp)} className="text-xs whitespace-nowrap">
+                  <Badge
+                    variant={getTimeBadgeVariant(item.timestamp)}
+                    className='text-xs whitespace-nowrap'
+                  >
                     {formatTime(item.timestamp)}
                   </Badge>
                 )}
@@ -198,35 +201,31 @@ export function Timeline({
 
               {/* Description */}
               {item.description && (
-                <p className="text-sm text-muted-foreground mb-2 leading-relaxed">
+                <p className='text-sm text-muted-foreground mb-2 leading-relaxed'>
                   {item.description}
                 </p>
               )}
 
               {/* Metadata */}
               {showMetadata && item.metadata && (
-                <div className="space-y-1">
+                <div className='space-y-1'>
                   {item.metadata.location && (
-                    <p className="text-xs text-muted-foreground">
-                      📍 {item.metadata.location}
-                    </p>
+                    <p className='text-xs text-muted-foreground'>📍 {item.metadata.location}</p>
                   )}
                   {item.metadata.interviewer && (
-                    <p className="text-xs text-muted-foreground">
-                      👤 {item.metadata.interviewer}
-                    </p>
+                    <p className='text-xs text-muted-foreground'>👤 {item.metadata.interviewer}</p>
                   )}
                   {item.metadata.documents && item.metadata.documents.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
+                    <div className='flex flex-wrap gap-1'>
                       {item.metadata.documents.map((doc, idx) => (
-                        <Badge key={idx} variant="outline" className="text-xs">
+                        <Badge key={idx} variant='outline' className='text-xs'>
                           {doc}
                         </Badge>
                       ))}
                     </div>
                   )}
                   {item.metadata.notes && (
-                    <p className="text-xs text-muted-foreground italic bg-muted/30 p-2 rounded">
+                    <p className='text-xs text-muted-foreground italic bg-muted/30 p-2 rounded'>
                       💭 {item.metadata.notes}
                     </p>
                   )}
@@ -245,17 +244,20 @@ interface ApplicationTimelineProps extends Omit<TimelineProps, 'items'> {
   applicationId: string;
   events: Array<{
     id: string;
-    type: 'applied' | 'viewed' | 'interview-scheduled' | 'interview-completed' | 'follow-up' | 'rejected' | 'offered';
+    type:
+      | 'applied'
+      | 'viewed'
+      | 'interview-scheduled'
+      | 'interview-completed'
+      | 'follow-up'
+      | 'rejected'
+      | 'offered';
     timestamp: Date;
     details?: any;
   }>;
 }
 
-export function ApplicationTimeline({
-  applicationId,
-  events,
-  ...props
-}: ApplicationTimelineProps) {
+export function ApplicationTimeline({ applicationId, events, ...props }: ApplicationTimelineProps) {
   const timelineItems: TimelineItem[] = events.map(event => {
     const getEventData = () => {
       switch (event.type) {

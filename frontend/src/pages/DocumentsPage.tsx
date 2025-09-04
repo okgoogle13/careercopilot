@@ -47,9 +47,10 @@ const DocumentsPage: React.FC = () => {
     // Apply search filter
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(doc =>
-        doc.originalFilename.toLowerCase().includes(query) ||
-        doc.fileType.toLowerCase().includes(query)
+      result = result.filter(
+        doc =>
+          doc.originalFilename.toLowerCase().includes(query) ||
+          doc.fileType.toLowerCase().includes(query)
       );
     }
 
@@ -119,8 +120,8 @@ const DocumentsPage: React.FC = () => {
       const response = await fetch(`/api/v1/documents/${documentId}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
       });
 
@@ -136,10 +137,7 @@ const DocumentsPage: React.FC = () => {
     }
   };
 
-  const handleDownload = async (
-    documentId: string,
-    originalFilename: string
-  ) => {
+  const handleDownload = async (documentId: string, originalFilename: string) => {
     if (!requireAuth()) {
       toast.error('You must be logged in to download files.');
       return;
@@ -173,9 +171,7 @@ const DocumentsPage: React.FC = () => {
       window.URL.revokeObjectURL(url);
       toast.success('PDF download started!');
     } catch (err: unknown) {
-      toast.error(
-        err instanceof Error ? err.message : 'Failed to download PDF.'
-      );
+      toast.error(err instanceof Error ? err.message : 'Failed to download PDF.');
     }
   };
 
@@ -188,9 +184,9 @@ const DocumentsPage: React.FC = () => {
 
   if (isAuthLoading || loading) {
     return (
-      <div className="flex items-center justify-center min-h-[50vh]">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+      <div className='flex items-center justify-center min-h-[50vh]'>
+        <div className='text-center'>
+          <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4'></div>
           <p>Loading your documents...</p>
         </div>
       </div>
@@ -199,69 +195,65 @@ const DocumentsPage: React.FC = () => {
 
   if (authError) {
     return (
-      <div className="container mx-auto p-6">
-        <div className="bg-destructive/10 border border-destructive/30 text-destructive p-4 rounded-lg">
-          <h3 className="font-medium">Authentication Error</h3>
-          <p className="text-sm">{authError}</p>
+      <div className='container mx-auto p-6'>
+        <div className='bg-destructive/10 border border-destructive/30 text-destructive p-4 rounded-lg'>
+          <h3 className='font-medium'>Authentication Error</h3>
+          <p className='text-sm'>{authError}</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto p-4 md:p-6">
-      <div className="flex flex-col space-y-6">
+    <div className='container mx-auto p-4 md:p-6'>
+      <div className='flex flex-col space-y-6'>
         {/* Header and Actions */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
           <div>
-            <h1 className="text-2xl font-bold">My Documents</h1>
-            <p className="text-muted-foreground text-sm">
+            <h1 className='text-2xl font-bold'>My Documents</h1>
+            <p className='text-muted-foreground text-sm'>
               Manage your uploaded documents and track their status
             </p>
           </div>
           <DocumentUpload
             onUpload={fetchDocuments}
-            className="w-full md:w-auto"
+            className='w-full md:w-auto'
             disabled={isUploading}
           />
         </div>
 
         {/* Search and Filters */}
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <div className='flex flex-col md:flex-row gap-4'>
+          <div className='relative flex-1'>
+            <Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
             <Input
-              type="search"
-              placeholder="Search documents..."
-              className="pl-10 w-full"
+              type='search'
+              placeholder='Search documents...'
+              className='pl-10 w-full'
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={e => setSearchQuery(e.target.value)}
             />
           </div>
 
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full md:w-auto"
-          >
-            <TabsList className="grid grid-cols-3 md:flex w-full">
-              <TabsTrigger value="all">All</TabsTrigger>
-              <TabsTrigger value="resume">Resumes</TabsTrigger>
-              <TabsTrigger value="cover-letter">Cover Letters</TabsTrigger>
+          <Tabs value={activeTab} onValueChange={setActiveTab} className='w-full md:w-auto'>
+            <TabsList className='grid grid-cols-3 md:flex w-full'>
+              <TabsTrigger value='all'>All</TabsTrigger>
+              <TabsTrigger value='resume'>Resumes</TabsTrigger>
+              <TabsTrigger value='cover-letter'>Cover Letters</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
 
         {/* Document List */}
-        <div className="grid gap-4">
+        <div className='grid gap-4'>
           {filteredDocuments.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredDocuments.map((doc) => (
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+              {filteredDocuments.map(doc => (
                 <DocumentCard
                   key={doc.id}
                   document={{
                     ...doc,
-                    createdAt: getDocumentDate(doc)
+                    createdAt: getDocumentDate(doc),
                   }}
                   onDownload={() => handleDownload(doc.id, doc.originalFilename)}
                   onDelete={() => handleDelete(doc.id)}
@@ -269,29 +261,30 @@ const DocumentsPage: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center py-12 border-2 border-dashed rounded-lg">
-              <FileText className="h-12 w-12 text-muted-foreground mb-4" />
-              <h3 className="text-lg font-medium mb-1">No documents found</h3>
-              <p className="text-sm text-muted-foreground text-center max-w-md px-4">
+            <div className='flex flex-col items-center justify-center py-12 border-2 border-dashed rounded-lg'>
+              <FileText className='h-12 w-12 text-muted-foreground mb-4' />
+              <h3 className='text-lg font-medium mb-1'>No documents found</h3>
+              <p className='text-sm text-muted-foreground text-center max-w-md px-4'>
                 {searchQuery
                   ? 'No documents match your search. Try a different term.'
                   : activeTab !== 'all'
                     ? `You don't have any ${activeTab.replace('-', ' ')}. Upload one to get started.`
-                    : 'Upload your first document to get started.'
-                }
+                    : 'Upload your first document to get started.'}
               </p>
               {!searchQuery && activeTab === 'all' && (
                 <Button
-                  className="mt-4"
-                  variant="outline"
+                  className='mt-4'
+                  variant='outline'
                   onClick={() => {
-                    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+                    const fileInput = document.querySelector(
+                      'input[type="file"]'
+                    ) as HTMLInputElement;
                     if (fileInput) {
                       fileInput.click();
                     }
                   }}
                 >
-                  <Upload className="mr-2 h-4 w-4" />
+                  <Upload className='mr-2 h-4 w-4' />
                   Upload Document
                 </Button>
               )}

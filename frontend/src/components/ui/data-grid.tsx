@@ -4,7 +4,12 @@ import { cn } from '../../lib/utils';
 import { Button } from './Button';
 import { Input } from './input';
 import { Checkbox } from './checkbox';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './dropdown-menu';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from './dropdown-menu';
 import { Badge } from './badge';
 import { Skeleton } from './skeleton';
 
@@ -97,9 +102,12 @@ export function DataGrid<T = any>({
   const [selectedRowKeys, setSelectedRowKeys] = useState<Set<string | number>>(new Set());
 
   // Get row key
-  const getRowKey = useCallback((row: T, index: number) => {
-    return keyExtractor(row, index);
-  }, [keyExtractor]);
+  const getRowKey = useCallback(
+    (row: T, index: number) => {
+      return keyExtractor(row, index);
+    },
+    [keyExtractor]
+  );
 
   // Get cell value
   const getCellValue = useCallback((row: T, column: DataGridColumn<T>) => {
@@ -134,7 +142,9 @@ export function DataGrid<T = any>({
           return Number(value) === Number(filterValue);
         } else {
           // Default text filter
-          return String(value || '').toLowerCase().includes(String(filterValue).toLowerCase());
+          return String(value || '')
+            .toLowerCase()
+            .includes(String(filterValue).toLowerCase());
         }
       });
     });
@@ -145,7 +155,9 @@ export function DataGrid<T = any>({
       filtered = filtered.filter(row =>
         columns.some(column => {
           const value = getCellValue(row, column);
-          return String(value || '').toLowerCase().includes(searchTerm);
+          return String(value || '')
+            .toLowerCase()
+            .includes(searchTerm);
         })
       );
     }
@@ -182,18 +194,21 @@ export function DataGrid<T = any>({
   }, [filteredData, sortState, columns, getCellValue]);
 
   // Handle sorting
-  const handleSort = useCallback((columnId: string) => {
-    const column = columns.find(col => col.id === columnId);
-    if (!column?.sortable && !sortable) return;
+  const handleSort = useCallback(
+    (columnId: string) => {
+      const column = columns.find(col => col.id === columnId);
+      if (!column?.sortable && !sortable) return;
 
-    setSortState(prev => {
-      if (prev.columnId === columnId) {
-        if (prev.direction === 'asc') return { columnId, direction: 'desc' };
-        if (prev.direction === 'desc') return { columnId: null, direction: null };
-      }
-      return { columnId, direction: 'asc' };
-    });
-  }, [columns, sortable]);
+      setSortState(prev => {
+        if (prev.columnId === columnId) {
+          if (prev.direction === 'asc') return { columnId, direction: 'desc' };
+          if (prev.direction === 'desc') return { columnId: null, direction: null };
+        }
+        return { columnId, direction: 'asc' };
+      });
+    },
+    [columns, sortable]
+  );
 
   // Handle column filter
   const handleColumnFilter = useCallback((columnId: string, value: any) => {
@@ -204,36 +219,42 @@ export function DataGrid<T = any>({
   }, []);
 
   // Handle row selection
-  const handleRowSelection = useCallback((row: T, selected: boolean) => {
-    const rowKey = getRowKey(row, 0);
-    const newSelectedKeys = new Set(selectedRowKeys);
+  const handleRowSelection = useCallback(
+    (row: T, selected: boolean) => {
+      const rowKey = getRowKey(row, 0);
+      const newSelectedKeys = new Set(selectedRowKeys);
 
-    if (selected) {
-      newSelectedKeys.add(rowKey);
-    } else {
-      newSelectedKeys.delete(rowKey);
-    }
+      if (selected) {
+        newSelectedKeys.add(rowKey);
+      } else {
+        newSelectedKeys.delete(rowKey);
+      }
 
-    setSelectedRowKeys(newSelectedKeys);
+      setSelectedRowKeys(newSelectedKeys);
 
-    const selectedRowsData = sortedData.filter(dataRow =>
-      newSelectedKeys.has(getRowKey(dataRow, 0))
-    );
+      const selectedRowsData = sortedData.filter(dataRow =>
+        newSelectedKeys.has(getRowKey(dataRow, 0))
+      );
 
-    onRowSelect?.(selectedRowsData);
-  }, [selectedRowKeys, sortedData, getRowKey, onRowSelect]);
+      onRowSelect?.(selectedRowsData);
+    },
+    [selectedRowKeys, sortedData, getRowKey, onRowSelect]
+  );
 
   // Handle select all
-  const handleSelectAll = useCallback((selected: boolean) => {
-    if (selected) {
-      const allKeys = new Set(sortedData.map((row, index) => getRowKey(row, index)));
-      setSelectedRowKeys(allKeys);
-      onRowSelect?.(sortedData);
-    } else {
-      setSelectedRowKeys(new Set());
-      onRowSelect?.([]);
-    }
-  }, [sortedData, getRowKey, onRowSelect]);
+  const handleSelectAll = useCallback(
+    (selected: boolean) => {
+      if (selected) {
+        const allKeys = new Set(sortedData.map((row, index) => getRowKey(row, index)));
+        setSelectedRowKeys(allKeys);
+        onRowSelect?.(sortedData);
+      } else {
+        setSelectedRowKeys(new Set());
+        onRowSelect?.([]);
+      }
+    },
+    [sortedData, getRowKey, onRowSelect]
+  );
 
   const visibleColumns = columns.filter(col => !col.hidden);
   const isAllSelected = selectedRowKeys.size > 0 && selectedRowKeys.size === sortedData.length;
@@ -241,7 +262,7 @@ export function DataGrid<T = any>({
 
   if (error) {
     return (
-      <div className="text-center py-8 text-destructive">
+      <div className='text-center py-8 text-destructive'>
         <p>Error: {error}</p>
       </div>
     );
@@ -251,51 +272,55 @@ export function DataGrid<T = any>({
     <div className={cn('w-full', className)}>
       {/* Toolbar */}
       {(searchable || filterable) && (
-        <div className="flex items-center gap-4 mb-4 p-4 border rounded-lg bg-muted/5">
+        <div className='flex items-center gap-4 mb-4 p-4 border rounded-lg bg-muted/5'>
           {searchable && (
-            <div className="flex-1 max-w-sm">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <div className='flex-1 max-w-sm'>
+              <div className='relative'>
+                <Search className='absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground' />
                 <Input
                   placeholder={searchPlaceholder}
                   value={globalFilter}
-                  onChange={(e) => setGlobalFilter(e.target.value)}
-                  className="pl-10"
+                  onChange={e => setGlobalFilter(e.target.value)}
+                  className='pl-10'
                 />
               </div>
             </div>
           )}
 
           {filterable && (
-            <div className="flex items-center gap-2">
-              {visibleColumns.filter(col => col.filterable).map(column => (
-                <div key={column.id} className="relative">
-                  {column.filter?.type === 'select' ? (
-                    <select
-                      value={filters[column.id] || ''}
-                      onChange={(e) => handleColumnFilter(column.id, e.target.value)}
-                      className="border rounded px-3 py-1 text-sm bg-background"
-                    >
-                      <option value="">{column.filter.placeholder || `Filter ${column.title}`}</option>
-                      {column.filter.options?.map(option => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  ) : (
-                    <div className="relative">
-                      <Filter className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
-                      <Input
-                        placeholder={column.filter?.placeholder || `Filter ${column.title}`}
+            <div className='flex items-center gap-2'>
+              {visibleColumns
+                .filter(col => col.filterable)
+                .map(column => (
+                  <div key={column.id} className='relative'>
+                    {column.filter?.type === 'select' ? (
+                      <select
                         value={filters[column.id] || ''}
-                        onChange={(e) => handleColumnFilter(column.id, e.target.value)}
-                        className="pl-8 w-32 h-8"
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
+                        onChange={e => handleColumnFilter(column.id, e.target.value)}
+                        className='border rounded px-3 py-1 text-sm bg-background'
+                      >
+                        <option value=''>
+                          {column.filter.placeholder || `Filter ${column.title}`}
+                        </option>
+                        {column.filter.options?.map(option => (
+                          <option key={option.value} value={option.value}>
+                            {option.label}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <div className='relative'>
+                        <Filter className='absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground' />
+                        <Input
+                          placeholder={column.filter?.placeholder || `Filter ${column.title}`}
+                          value={filters[column.id] || ''}
+                          onChange={e => handleColumnFilter(column.id, e.target.value)}
+                          className='pl-8 w-32 h-8'
+                        />
+                      </div>
+                    )}
+                  </div>
+                ))}
             </div>
           )}
         </div>
@@ -303,23 +328,20 @@ export function DataGrid<T = any>({
 
       {/* Table */}
       <div
-        className="border rounded-lg overflow-hidden"
+        className='border rounded-lg overflow-hidden'
         style={virtualScrolling ? { height } : undefined}
       >
         <div className={cn('overflow-auto', virtualScrolling && 'h-full')}>
-          <table className="w-full">
+          <table className='w-full'>
             {/* Header */}
-            <thead className={cn(
-              'bg-muted/50',
-              stickyHeader && 'sticky top-0 z-10'
-            )}>
+            <thead className={cn('bg-muted/50', stickyHeader && 'sticky top-0 z-10')}>
               <tr>
                 {selectable && (
-                  <th className="w-10 p-3 text-left">
+                  <th className='w-10 p-3 text-left'>
                     <Checkbox
                       checked={isAllSelected}
                       onCheckedChange={handleSelectAll}
-                      ref={(el) => {
+                      ref={el => {
                         if (el && 'indeterminate' in el) {
                           (el as HTMLInputElement).indeterminate = isSomeSelected;
                         }
@@ -328,7 +350,7 @@ export function DataGrid<T = any>({
                   </th>
                 )}
 
-                {visibleColumns.map((column) => (
+                {visibleColumns.map(column => (
                   <th
                     key={column.id}
                     className={cn(
@@ -344,22 +366,26 @@ export function DataGrid<T = any>({
                     }}
                     onClick={() => handleSort(column.id)}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className='flex items-center gap-2'>
                       <span>{column.title}</span>
                       {column.sortable !== false && sortable && (
-                        <div className="flex flex-col">
-                          <ChevronUp className={cn(
-                            'h-3 w-3',
-                            sortState.columnId === column.id && sortState.direction === 'asc'
-                              ? 'text-primary'
-                              : 'text-muted-foreground'
-                          )} />
-                          <ChevronDown className={cn(
-                            'h-3 w-3 -mt-1',
-                            sortState.columnId === column.id && sortState.direction === 'desc'
-                              ? 'text-primary'
-                              : 'text-muted-foreground'
-                          )} />
+                        <div className='flex flex-col'>
+                          <ChevronUp
+                            className={cn(
+                              'h-3 w-3',
+                              sortState.columnId === column.id && sortState.direction === 'asc'
+                                ? 'text-primary'
+                                : 'text-muted-foreground'
+                            )}
+                          />
+                          <ChevronDown
+                            className={cn(
+                              'h-3 w-3 -mt-1',
+                              sortState.columnId === column.id && sortState.direction === 'desc'
+                                ? 'text-primary'
+                                : 'text-muted-foreground'
+                            )}
+                          />
                         </div>
                       )}
                     </div>
@@ -367,7 +393,7 @@ export function DataGrid<T = any>({
                 ))}
 
                 {showRowActions && rowActions.length > 0 && (
-                  <th className="w-10 p-3 text-right">Actions</th>
+                  <th className='w-10 p-3 text-right'>Actions</th>
                 )}
               </tr>
             </thead>
@@ -377,24 +403,30 @@ export function DataGrid<T = any>({
               {loading ? (
                 Array.from({ length: pageSize || 10 }).map((_, index) => (
                   <tr key={index}>
-                    {selectable && <td className="p-3"><Skeleton className="h-4 w-4" /></td>}
+                    {selectable && (
+                      <td className='p-3'>
+                        <Skeleton className='h-4 w-4' />
+                      </td>
+                    )}
                     {visibleColumns.map(column => (
-                      <td key={column.id} className="p-3">
-                        <Skeleton className="h-4 w-full" />
+                      <td key={column.id} className='p-3'>
+                        <Skeleton className='h-4 w-full' />
                       </td>
                     ))}
-                    {showRowActions && <td className="p-3"><Skeleton className="h-4 w-8" /></td>}
+                    {showRowActions && (
+                      <td className='p-3'>
+                        <Skeleton className='h-4 w-8' />
+                      </td>
+                    )}
                   </tr>
                 ))
               ) : sortedData.length === 0 ? (
                 <tr>
                   <td
                     colSpan={
-                      visibleColumns.length +
-                      (selectable ? 1 : 0) +
-                      (showRowActions ? 1 : 0)
+                      visibleColumns.length + (selectable ? 1 : 0) + (showRowActions ? 1 : 0)
                     }
-                    className="p-8 text-center text-muted-foreground"
+                    className='p-8 text-center text-muted-foreground'
                   >
                     {emptyStateText}
                   </td>
@@ -403,9 +435,8 @@ export function DataGrid<T = any>({
                 sortedData.map((row, index) => {
                   const rowKey = getRowKey(row, index);
                   const isSelected = selectedRowKeys.has(rowKey);
-                  const rowClassNameValue = typeof rowClassName === 'function'
-                    ? rowClassName(row, index)
-                    : rowClassName;
+                  const rowClassNameValue =
+                    typeof rowClassName === 'function' ? rowClassName(row, index) : rowClassName;
 
                   return (
                     <tr
@@ -419,15 +450,15 @@ export function DataGrid<T = any>({
                       onClick={() => onRowClick?.(row, index)}
                     >
                       {selectable && (
-                        <td className="p-3" onClick={(e) => e.stopPropagation()}>
+                        <td className='p-3' onClick={e => e.stopPropagation()}>
                           <Checkbox
                             checked={isSelected}
-                            onCheckedChange={(checked) => handleRowSelection(row, checked as boolean)}
+                            onCheckedChange={checked => handleRowSelection(row, checked as boolean)}
                           />
                         </td>
                       )}
 
-                      {visibleColumns.map((column) => {
+                      {visibleColumns.map(column => {
                         const value = getCellValue(row, column);
 
                         return (
@@ -439,32 +470,35 @@ export function DataGrid<T = any>({
                               column.align === 'right' && 'text-right'
                             )}
                           >
-                            {column.render ? column.render(value, row, index) : (
-                              <span className="truncate">{String(value || '')}</span>
+                            {column.render ? (
+                              column.render(value, row, index)
+                            ) : (
+                              <span className='truncate'>{String(value || '')}</span>
                             )}
                           </td>
                         );
                       })}
 
                       {showRowActions && rowActions.length > 0 && (
-                        <td className="p-3 text-right" onClick={(e) => e.stopPropagation()}>
+                        <td className='p-3 text-right' onClick={e => e.stopPropagation()}>
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                                <MoreHorizontal className="h-4 w-4" />
+                              <Button variant='ghost' size='sm' className='h-8 w-8 p-0'>
+                                <MoreHorizontal className='h-4 w-4' />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
+                            <DropdownMenuContent align='end'>
                               {rowActions.map((action, actionIndex) => (
                                 <DropdownMenuItem
                                   key={actionIndex}
                                   onClick={() => action.onClick(row)}
                                   disabled={action.disabled?.(row)}
                                   className={cn(
-                                    action.variant === 'destructive' && 'text-destructive focus:text-destructive'
+                                    action.variant === 'destructive' &&
+                                      'text-destructive focus:text-destructive'
                                   )}
                                 >
-                                  {action.icon && <span className="mr-2">{action.icon}</span>}
+                                  {action.icon && <span className='mr-2'>{action.icon}</span>}
                                   {action.label}
                                 </DropdownMenuItem>
                               ))}
@@ -483,7 +517,7 @@ export function DataGrid<T = any>({
 
       {/* Footer */}
       {sortedData.length > 0 && (
-        <div className="flex items-center justify-between px-4 py-2 text-sm text-muted-foreground">
+        <div className='flex items-center justify-between px-4 py-2 text-sm text-muted-foreground'>
           <span>
             Showing {sortedData.length} of {data.length} rows
             {selectedRowKeys.size > 0 && ` (${selectedRowKeys.size} selected)`}

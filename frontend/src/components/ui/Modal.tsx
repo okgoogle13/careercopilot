@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({
   const focusTrapRef = useFocusTrap({
     active: isOpen,
     initialFocus: true,
-    restoreFocus: true
+    restoreFocus: true,
   });
 
   // Handle escape key
@@ -61,19 +61,19 @@ const Modal: React.FC<ModalProps> = ({
 
   const modalContent = (
     <div
-      className="fixed inset-0 z-50 overflow-y-auto"
-      role="dialog"
-      aria-modal="true"
+      className='fixed inset-0 z-50 overflow-y-auto'
+      role='dialog'
+      aria-modal='true'
       aria-labelledby={title ? 'modal-title' : undefined}
     >
       <div
-        className="flex min-h-screen items-center justify-center p-4 text-center"
+        className='flex min-h-screen items-center justify-center p-4 text-center'
         onClick={handleBackdropClick}
       >
         {/* Backdrop */}
         <div
-          className="fixed inset-0 bg-background/80 backdrop-blur-sm transition-all duration-300"
-          aria-hidden="true"
+          className='fixed inset-0 bg-background/80 backdrop-blur-sm transition-all duration-300'
+          aria-hidden='true'
         />
 
         {/* Modal Content */}
@@ -85,43 +85,39 @@ const Modal: React.FC<ModalProps> = ({
             animate-scale-in
             ${className}
           `}
-          role="document"
+          role='document'
         >
           {/* Close Button */}
           <button
-            type="button"
+            type='button'
             onClick={onClose}
-            className="absolute right-4 top-4 text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-card rounded-md p-1 transition-colors"
-            aria-label="Close modal"
+            className='absolute right-4 top-4 text-muted-foreground hover:text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-card rounded-md p-1 transition-colors'
+            aria-label='Close modal'
           >
             <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              aria-hidden="true"
+              className='h-6 w-6'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth='1.5'
+              stroke='currentColor'
+              aria-hidden='true'
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
+              <path strokeLinecap='round' strokeLinejoin='round' d='M6 18L18 6M6 6l12 12' />
             </svg>
           </button>
 
           {/* Title */}
           {title && (
             <h2
-              id="modal-title"
-              className="text-lg font-medium leading-6 text-card-foreground mb-4 pr-8"
+              id='modal-title'
+              className='text-lg font-medium leading-6 text-card-foreground mb-4 pr-8'
             >
               {title}
             </h2>
           )}
 
           {/* Content */}
-          <div className="modal-content text-card-foreground">{children}</div>
+          <div className='modal-content text-card-foreground'>{children}</div>
         </div>
       </div>
     </div>

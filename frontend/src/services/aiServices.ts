@@ -47,7 +47,9 @@ export interface ContentOptimizationRequest {
   target_role?: string;
   target_company?: string;
   target_industry?: string;
-  optimization_goals: Array<'ats_optimization' | 'keyword_enhancement' | 'readability' | 'impact_statements' | 'structure'>;
+  optimization_goals: Array<
+    'ats_optimization' | 'keyword_enhancement' | 'readability' | 'impact_statements' | 'structure'
+  >;
 }
 
 export interface ContentOptimizationResult {
@@ -166,7 +168,9 @@ class AIServicesClient {
   /**
    * Get advanced resume intelligence and career insights
    */
-  async getResumeIntelligence(request: ResumeIntelligenceRequest): Promise<ResumeIntelligenceResult> {
+  async getResumeIntelligence(
+    request: ResumeIntelligenceRequest
+  ): Promise<ResumeIntelligenceResult> {
     return apiClient.post(`${this.baseEndpoint}/resume-intelligence`, request);
   }
 

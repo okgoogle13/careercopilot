@@ -1,10 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Modal, ProgressBar, LoadingSpinner } from '../ui';
 import {
-  CheckCircle, ArrowRight, ArrowLeft, X, Clock, AlertCircle,
-  FileText, Target, Sparkles, RefreshCw,
-  Download, Share2, Eye, Plus, Briefcase, GraduationCap,
-  Trash2, Award
+  CheckCircle,
+  ArrowRight,
+  ArrowLeft,
+  X,
+  Clock,
+  AlertCircle,
+  FileText,
+  Target,
+  Sparkles,
+  RefreshCw,
+  Download,
+  Share2,
+  Eye,
+  Plus,
+  Briefcase,
+  GraduationCap,
+  Trash2,
+  Award,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -175,9 +189,9 @@ const WorkflowWizard: React.FC<WorkflowWizardProps> = ({
 
   if (loading) {
     return (
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
-        <div className="flex items-center justify-center h-64">
-          <LoadingSpinner size="lg" />
+      <Modal isOpen={isOpen} onClose={onClose} size='lg'>
+        <div className='flex items-center justify-center h-64'>
+          <LoadingSpinner size='lg' />
         </div>
       </Modal>
     );
@@ -189,47 +203,49 @@ const WorkflowWizard: React.FC<WorkflowWizardProps> = ({
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={handleClose} size="xl" closeOnBackdropClick={false}>
-        <div className="max-h-screen overflow-auto">
+      <Modal isOpen={isOpen} onClose={handleClose} size='xl' closeOnBackdropClick={false}>
+        <div className='max-h-screen overflow-auto'>
           {/* Header */}
-          <div className="sticky top-0 bg-white border-b border-gray-200 p-6 z-10">
-            <div className="flex items-start justify-between">
+          <div className='sticky top-0 bg-white border-b border-gray-200 p-6 z-10'>
+            <div className='flex items-start justify-between'>
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">{workflow.title}</h2>
-                <p className="text-gray-600 mt-1">{workflow.description}</p>
-                <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-4 h-4" />
+                <h2 className='text-2xl font-bold text-gray-900'>{workflow.title}</h2>
+                <p className='text-gray-600 mt-1'>{workflow.description}</p>
+                <div className='flex items-center gap-4 mt-2 text-sm text-gray-500'>
+                  <span className='flex items-center gap-1'>
+                    <Clock className='w-4 h-4' />
                     {workflow.estimatedTime} min
                   </span>
-                  <span className="capitalize">{workflow.difficulty}</span>
-                  <span>Step {currentStepIndex + 1} of {workflow.steps.length}</span>
+                  <span className='capitalize'>{workflow.difficulty}</span>
+                  <span>
+                    Step {currentStepIndex + 1} of {workflow.steps.length}
+                  </span>
                 </div>
               </div>
-              <Button variant="ghost" onClick={handleClose}>
-                <X className="w-5 h-5" />
+              <Button variant='ghost' onClick={handleClose}>
+                <X className='w-5 h-5' />
               </Button>
             </div>
 
             {/* Progress */}
-            <div className="mt-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700">Progress</span>
-                <span className="text-sm text-gray-500">{Math.round(progress)}% complete</span>
+            <div className='mt-4'>
+              <div className='flex items-center justify-between mb-2'>
+                <span className='text-sm font-medium text-gray-700'>Progress</span>
+                <span className='text-sm text-gray-500'>{Math.round(progress)}% complete</span>
               </div>
               <ProgressBar value={progress} />
             </div>
           </div>
 
           {/* Step Content */}
-          <div className="p-6">
+          <div className='p-6'>
             {currentStep && (
               <WorkflowStepRenderer
                 step={currentStep}
                 workflow={workflow}
                 stepIndex={currentStepIndex}
                 data={stepData[currentStep.id] || {}}
-                onDataChange={(updates) => handleStepDataChange(currentStep.id, updates)}
+                onDataChange={updates => handleStepDataChange(currentStep.id, updates)}
                 onNext={handleNext}
                 onPrevious={handlePrevious}
                 processing={processing}
@@ -241,20 +257,20 @@ const WorkflowWizard: React.FC<WorkflowWizardProps> = ({
 
       {/* Exit Confirmation */}
       <Modal isOpen={showConfirmExit} onClose={() => setShowConfirmExit(false)}>
-        <div className="p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <AlertCircle className="w-6 h-6 text-amber-500" />
-            <h3 className="text-lg font-semibold text-gray-900">Exit Workflow?</h3>
+        <div className='p-6'>
+          <div className='flex items-center gap-3 mb-4'>
+            <AlertCircle className='w-6 h-6 text-amber-500' />
+            <h3 className='text-lg font-semibold text-gray-900'>Exit Workflow?</h3>
           </div>
-          <p className="text-gray-600 mb-6">
-            You have unsaved progress in this workflow. Are you sure you want to exit?
-            Your progress will be lost.
+          <p className='text-gray-600 mb-6'>
+            You have unsaved progress in this workflow. Are you sure you want to exit? Your progress
+            will be lost.
           </p>
-          <div className="flex gap-3 justify-end">
-            <Button variant="outline" onClick={() => setShowConfirmExit(false)}>
+          <div className='flex gap-3 justify-end'>
+            <Button variant='outline' onClick={() => setShowConfirmExit(false)}>
               Continue Working
             </Button>
-            <Button onClick={confirmExit} className="bg-red-500 hover:bg-red-600">
+            <Button onClick={confirmExit} className='bg-red-500 hover:bg-red-600'>
               Exit Without Saving
             </Button>
           </div>
@@ -279,27 +295,27 @@ const WorkflowStepRenderer: React.FC<{
   const StepComponent = step.component;
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className='max-w-4xl mx-auto'>
       {/* Step Header */}
-      <div className="text-center mb-8">
-        <div className="flex items-center justify-center mb-4">
-          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-            <StepIcon className="w-8 h-8 text-blue-600" />
+      <div className='text-center mb-8'>
+        <div className='flex items-center justify-center mb-4'>
+          <div className='w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center'>
+            <StepIcon className='w-8 h-8 text-blue-600' />
           </div>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-2">{step.title}</h3>
-        <p className="text-gray-600 max-w-2xl mx-auto">{step.description}</p>
+        <h3 className='text-2xl font-bold text-gray-900 mb-2'>{step.title}</h3>
+        <p className='text-gray-600 max-w-2xl mx-auto'>{step.description}</p>
 
         {step.estimatedTime > 0 && (
-          <div className="flex items-center justify-center gap-1 mt-2 text-sm text-gray-500">
-            <Clock className="w-4 h-4" />
+          <div className='flex items-center justify-center gap-1 mt-2 text-sm text-gray-500'>
+            <Clock className='w-4 h-4' />
             Estimated time: {step.estimatedTime} minutes
           </div>
         )}
       </div>
 
       {/* Step Component */}
-      <Card className="p-8 mb-8">
+      <Card className='p-8 mb-8'>
         <StepComponent
           data={data}
           onDataChange={onDataChange}
@@ -311,44 +327,37 @@ const WorkflowStepRenderer: React.FC<{
       </Card>
 
       {/* Navigation */}
-      <div className="flex items-center justify-between">
+      <div className='flex items-center justify-between'>
         <div>
           {stepIndex > 0 && (
             <Button
-              variant="outline"
+              variant='outline'
               onClick={onPrevious}
               disabled={processing}
-              className="flex items-center gap-2"
+              className='flex items-center gap-2'
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className='w-4 h-4' />
               Previous
             </Button>
           )}
         </div>
 
-        <div className="flex items-center gap-3">
-          {step.required && (
-            <span className="text-sm text-gray-500">* Required step</span>
-          )}
+        <div className='flex items-center gap-3'>
+          {step.required && <span className='text-sm text-gray-500'>* Required step</span>}
 
-          <Button
-            onClick={onNext}
-            disabled={processing}
-            className="flex items-center gap-2"
-          >
+          <Button onClick={onNext} disabled={processing} className='flex items-center gap-2'>
             {processing ? (
-              <RefreshCw className="w-4 h-4 animate-spin" />
+              <RefreshCw className='w-4 h-4 animate-spin' />
             ) : stepIndex === workflow.steps.length - 1 ? (
-              <CheckCircle className="w-4 h-4" />
+              <CheckCircle className='w-4 h-4' />
             ) : (
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className='w-4 h-4' />
             )}
             {processing
               ? 'Processing...'
               : stepIndex === workflow.steps.length - 1
-              ? 'Complete Workflow'
-              : 'Continue'
-            }
+                ? 'Complete Workflow'
+                : 'Continue'}
           </Button>
         </div>
       </div>
@@ -370,19 +379,19 @@ const getWorkflowDefinition = (workflowId: string): Workflow => {
         'Tailored resume optimized for the job',
         'Personalized cover letter',
         'ATS compatibility analysis',
-        'Application tracking setup'
+        'Application tracking setup',
       ],
       steps: [
         {
           id: 'job-details',
           title: 'Enter Job Details',
-          description: 'Provide information about the job you\'re applying for',
+          description: "Provide information about the job you're applying for",
           type: 'form',
           required: true,
           estimatedTime: 3,
           icon: Target,
           component: JobDetailsStep,
-          validation: (data) => {
+          validation: data => {
             if (!data.jobTitle) return 'Job title is required';
             if (!data.company) return 'Company name is required';
             if (!data.jobDescription) return 'Job description is required';
@@ -398,7 +407,7 @@ const getWorkflowDefinition = (workflowId: string): Workflow => {
           estimatedTime: 2,
           icon: FileText,
           component: ProfileSelectionStep,
-          validation: (data) => {
+          validation: data => {
             if (!data.selectedProfile) return 'Please select a profile';
             return null;
           },
@@ -422,7 +431,7 @@ const getWorkflowDefinition = (workflowId: string): Workflow => {
           estimatedTime: 3,
           icon: Eye,
           component: TemplateSelectionStep,
-          validation: (data) => {
+          validation: data => {
             if (!data.selectedTemplate) return 'Please select a template';
             return null;
           },
@@ -461,7 +470,7 @@ const getWorkflowDefinition = (workflowId: string): Workflow => {
         'Complete professional profile',
         'Optimized skill keywords',
         'Professional summary',
-        'Ready for document generation'
+        'Ready for document generation',
       ],
       steps: [
         {
@@ -473,7 +482,7 @@ const getWorkflowDefinition = (workflowId: string): Workflow => {
           estimatedTime: 5,
           icon: FileText,
           component: BasicInfoStep,
-          validation: (data) => {
+          validation: data => {
             if (!data.fullName) return 'Full name is required';
             if (!data.email) return 'Email is required';
             return null;
@@ -534,73 +543,65 @@ const getWorkflowDefinition = (workflowId: string): Workflow => {
 // Individual Step Components
 const JobDetailsStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Job Title *
-        </label>
+        <label className='block text-sm font-medium text-gray-700 mb-2'>Job Title *</label>
         <input
-          type="text"
+          type='text'
           value={data.jobTitle || ''}
-          onChange={(e) => onDataChange({ jobTitle: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-          placeholder="e.g., Senior Software Engineer"
+          onChange={e => onDataChange({ jobTitle: e.target.value })}
+          className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+          placeholder='e.g., Senior Software Engineer'
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Company Name *
-          </label>
+          <label className='block text-sm font-medium text-gray-700 mb-2'>Company Name *</label>
           <input
-            type="text"
+            type='text'
             value={data.company || ''}
-            onChange={(e) => onDataChange({ company: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="e.g., Tech Corp"
+            onChange={e => onDataChange({ company: e.target.value })}
+            className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+            placeholder='e.g., Tech Corp'
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className='block text-sm font-medium text-gray-700 mb-2'>
             Application Deadline
           </label>
           <input
-            type="date"
+            type='date'
             value={data.deadline || ''}
-            onChange={(e) => onDataChange({ deadline: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+            onChange={e => onDataChange({ deadline: e.target.value })}
+            className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Job Description *
-        </label>
+        <label className='block text-sm font-medium text-gray-700 mb-2'>Job Description *</label>
         <textarea
           value={data.jobDescription || ''}
-          onChange={(e) => onDataChange({ jobDescription: e.target.value })}
+          onChange={e => onDataChange({ jobDescription: e.target.value })}
           rows={12}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-vertical"
-          placeholder="Paste the complete job description here..."
+          className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-vertical'
+          placeholder='Paste the complete job description here...'
         />
-        <p className="text-xs text-gray-500 mt-2">
+        <p className='text-xs text-gray-500 mt-2'>
           💡 Tip: Include the full job posting for better keyword matching and ATS optimization.
         </p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Job URL (Optional)
-        </label>
+        <label className='block text-sm font-medium text-gray-700 mb-2'>Job URL (Optional)</label>
         <input
-          type="url"
+          type='url'
           value={data.jobUrl || ''}
-          onChange={(e) => onDataChange({ jobUrl: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-          placeholder="https://company.com/jobs/123"
+          onChange={e => onDataChange({ jobUrl: e.target.value })}
+          className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+          placeholder='https://company.com/jobs/123'
         />
       </div>
     </div>
@@ -625,20 +626,20 @@ const ProfileSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange 
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-32">
+      <div className='flex items-center justify-center h-32'>
         <LoadingSpinner />
       </div>
     );
   }
 
   return (
-    <div className="space-y-4">
-      <p className="text-gray-600 mb-4">
+    <div className='space-y-4'>
+      <p className='text-gray-600 mb-4'>
         Select the profile that best matches the job you're applying for. This will be used as the
         foundation for generating your tailored resume and cover letter.
       </p>
 
-      {profiles.map((profile) => (
+      {profiles.map(profile => (
         <Card
           key={profile.id}
           className={`p-4 cursor-pointer transition-all border-2 ${
@@ -648,20 +649,20 @@ const ProfileSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange 
           }`}
           onClick={() => onDataChange({ selectedProfile: profile.id })}
         >
-          <div className="flex items-center justify-between">
+          <div className='flex items-center justify-between'>
             <div>
-              <h3 className="font-semibold text-gray-900">{profile.name}</h3>
-              <p className="text-sm text-gray-600">
+              <h3 className='font-semibold text-gray-900'>{profile.name}</h3>
+              <p className='text-sm text-gray-600'>
                 Last updated: {new Date(profile.lastUpdated).toLocaleDateString()}
               </p>
             </div>
-            <div className="text-right">
-              <div className="text-sm font-medium text-gray-900">
+            <div className='text-right'>
+              <div className='text-sm font-medium text-gray-900'>
                 {profile.completeness}% complete
               </div>
-              <div className="w-16 bg-gray-200 rounded-full h-2 mt-1">
+              <div className='w-16 bg-gray-200 rounded-full h-2 mt-1'>
                 <div
-                  className="bg-green-500 h-2 rounded-full"
+                  className='bg-green-500 h-2 rounded-full'
                   style={{ width: `${profile.completeness}%` }}
                 />
               </div>
@@ -671,10 +672,10 @@ const ProfileSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange 
       ))}
 
       {profiles.length === 0 && (
-        <div className="text-center py-8">
-          <FileText className="w-12 h-12 text-gray-300 mx-auto mb-3" />
-          <p className="text-gray-600">No profiles found. Create a profile first to continue.</p>
-          <Button className="mt-4">Create New Profile</Button>
+        <div className='text-center py-8'>
+          <FileText className='w-12 h-12 text-gray-300 mx-auto mb-3' />
+          <p className='text-gray-600'>No profiles found. Create a profile first to continue.</p>
+          <Button className='mt-4'>Create New Profile</Button>
         </div>
       )}
     </div>
@@ -684,73 +685,63 @@ const ProfileSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange 
 // Missing step components implementation
 const BasicInfoStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className='space-y-6'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Full Name *
-          </label>
+          <label className='block text-sm font-medium text-gray-700 mb-2'>Full Name *</label>
           <input
-            type="text"
+            type='text'
             required
             value={data.fullName || ''}
-            onChange={(e) => onDataChange({ fullName: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="John Doe"
+            onChange={e => onDataChange({ fullName: e.target.value })}
+            className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+            placeholder='John Doe'
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Email Address *
-          </label>
+          <label className='block text-sm font-medium text-gray-700 mb-2'>Email Address *</label>
           <input
-            type="email"
+            type='email'
             required
             value={data.email || ''}
-            onChange={(e) => onDataChange({ email: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="john@example.com"
+            onChange={e => onDataChange({ email: e.target.value })}
+            className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+            placeholder='john@example.com'
           />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Phone Number
-          </label>
+          <label className='block text-sm font-medium text-gray-700 mb-2'>Phone Number</label>
           <input
-            type="tel"
+            type='tel'
             value={data.phone || ''}
-            onChange={(e) => onDataChange({ phone: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="(555) 123-4567"
+            onChange={e => onDataChange({ phone: e.target.value })}
+            className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+            placeholder='(555) 123-4567'
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Location
-          </label>
+          <label className='block text-sm font-medium text-gray-700 mb-2'>Location</label>
           <input
-            type="text"
+            type='text'
             value={data.location || ''}
-            onChange={(e) => onDataChange({ location: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            placeholder="City, State"
+            onChange={e => onDataChange({ location: e.target.value })}
+            className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+            placeholder='City, State'
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          LinkedIn Profile
-        </label>
+        <label className='block text-sm font-medium text-gray-700 mb-2'>LinkedIn Profile</label>
         <input
-          type="url"
+          type='url'
           value={data.linkedin || ''}
-          onChange={(e) => onDataChange({ linkedin: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-          placeholder="https://linkedin.com/in/yourprofile"
+          onChange={e => onDataChange({ linkedin: e.target.value })}
+          className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+          placeholder='https://linkedin.com/in/yourprofile'
         />
       </div>
     </div>
@@ -769,15 +760,13 @@ const WorkExperienceStep: React.FC<WorkflowStepProps> = ({ data, onDataChange })
       endDate: '',
       current: false,
       description: '',
-      achievements: ['']
+      achievements: [''],
     };
     onDataChange({ experiences: [...experiences, newExp] });
   };
 
   const updateExperience = (id: number, updates: any) => {
-    const updated = experiences.map((exp: any) =>
-      exp.id === id ? { ...exp, ...updates } : exp
-    );
+    const updated = experiences.map((exp: any) => (exp.id === id ? { ...exp, ...updates } : exp));
     onDataChange({ experiences: updated });
   };
 
@@ -787,111 +776,103 @@ const WorkExperienceStep: React.FC<WorkflowStepProps> = ({ data, onDataChange })
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-medium">Work Experience</h3>
-        <Button onClick={addExperience} variant="outline" size="sm">
-          <Plus className="w-4 h-4 mr-2" />
+    <div className='space-y-6'>
+      <div className='flex justify-between items-center'>
+        <h3 className='text-lg font-medium'>Work Experience</h3>
+        <Button onClick={addExperience} variant='outline' size='sm'>
+          <Plus className='w-4 h-4 mr-2' />
           Add Experience
         </Button>
       </div>
 
       {experiences.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          <Briefcase className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+        <div className='text-center py-8 text-gray-500'>
+          <Briefcase className='w-12 h-12 mx-auto mb-2 text-gray-300' />
           <p>No work experience added yet. Click "Add Experience" to get started.</p>
         </div>
       )}
 
       {experiences.map((exp: any, index: number) => (
-        <Card key={exp.id} className="p-6">
-          <div className="flex justify-between items-start mb-4">
-            <h4 className="font-medium">Experience #{index + 1}</h4>
+        <Card key={exp.id} className='p-6'>
+          <div className='flex justify-between items-start mb-4'>
+            <h4 className='font-medium'>Experience #{index + 1}</h4>
             <Button
               onClick={() => removeExperience(exp.id)}
-              variant="ghost"
-              size="sm"
-              className="text-red-500 hover:text-red-700"
+              variant='ghost'
+              size='sm'
+              className='text-red-500 hover:text-red-700'
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className='w-4 h-4' />
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Company *
-              </label>
+              <label className='block text-sm font-medium text-gray-700 mb-2'>Company *</label>
               <input
-                type="text"
+                type='text'
                 value={exp.company}
-                onChange={(e) => updateExperience(exp.id, { company: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                placeholder="Company Name"
+                onChange={e => updateExperience(exp.id, { company: e.target.value })}
+                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+                placeholder='Company Name'
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Position *
-              </label>
+              <label className='block text-sm font-medium text-gray-700 mb-2'>Position *</label>
               <input
-                type="text"
+                type='text'
                 value={exp.position}
-                onChange={(e) => updateExperience(exp.id, { position: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                placeholder="Job Title"
+                onChange={e => updateExperience(exp.id, { position: e.target.value })}
+                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+                placeholder='Job Title'
               />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Start Date *
-              </label>
+              <label className='block text-sm font-medium text-gray-700 mb-2'>Start Date *</label>
               <input
-                type="month"
+                type='month'
                 value={exp.startDate}
-                onChange={(e) => updateExperience(exp.id, { startDate: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                onChange={e => updateExperience(exp.id, { startDate: e.target.value })}
+                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                End Date
-              </label>
+              <label className='block text-sm font-medium text-gray-700 mb-2'>End Date</label>
               <input
-                type="month"
+                type='month'
                 value={exp.endDate}
-                onChange={(e) => updateExperience(exp.id, { endDate: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                onChange={e => updateExperience(exp.id, { endDate: e.target.value })}
+                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
                 disabled={exp.current}
               />
-              <label className="flex items-center mt-2">
+              <label className='flex items-center mt-2'>
                 <input
-                  type="checkbox"
+                  type='checkbox'
                   checked={exp.current}
-                  onChange={(e) => updateExperience(exp.id, {
-                    current: e.target.checked,
-                    endDate: e.target.checked ? '' : exp.endDate
-                  })}
-                  className="mr-2"
+                  onChange={e =>
+                    updateExperience(exp.id, {
+                      current: e.target.checked,
+                      endDate: e.target.checked ? '' : exp.endDate,
+                    })
+                  }
+                  className='mr-2'
                 />
-                <span className="text-sm text-gray-600">Current position</span>
+                <span className='text-sm text-gray-600'>Current position</span>
               </label>
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Job Description
-            </label>
+            <label className='block text-sm font-medium text-gray-700 mb-2'>Job Description</label>
             <textarea
               value={exp.description}
-              onChange={(e) => updateExperience(exp.id, { description: e.target.value })}
+              onChange={e => updateExperience(exp.id, { description: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-              placeholder="Describe your role and responsibilities..."
+              className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+              placeholder='Describe your role and responsibilities...'
             />
           </div>
         </Card>
@@ -912,15 +893,13 @@ const EducationStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
       startDate: '',
       endDate: '',
       gpa: '',
-      honors: ''
+      honors: '',
     };
     onDataChange({ education: [...education, newEd] });
   };
 
   const updateEducation = (id: number, updates: any) => {
-    const updated = education.map((ed: any) =>
-      ed.id === id ? { ...ed, ...updates } : ed
-    );
+    const updated = education.map((ed: any) => (ed.id === id ? { ...ed, ...updates } : ed));
     onDataChange({ education: updated });
   };
 
@@ -930,116 +909,108 @@ const EducationStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-medium">Education</h3>
-        <Button onClick={addEducation} variant="outline" size="sm">
-          <Plus className="w-4 h-4 mr-2" />
+    <div className='space-y-6'>
+      <div className='flex justify-between items-center'>
+        <h3 className='text-lg font-medium'>Education</h3>
+        <Button onClick={addEducation} variant='outline' size='sm'>
+          <Plus className='w-4 h-4 mr-2' />
           Add Education
         </Button>
       </div>
 
       {education.length === 0 && (
-        <div className="text-center py-8 text-gray-500">
-          <GraduationCap className="w-12 h-12 mx-auto mb-2 text-gray-300" />
+        <div className='text-center py-8 text-gray-500'>
+          <GraduationCap className='w-12 h-12 mx-auto mb-2 text-gray-300' />
           <p>No education added yet. Click "Add Education" to get started.</p>
         </div>
       )}
 
       {education.map((ed: any, index: number) => (
-        <Card key={ed.id} className="p-6">
-          <div className="flex justify-between items-start mb-4">
-            <h4 className="font-medium">Education #{index + 1}</h4>
+        <Card key={ed.id} className='p-6'>
+          <div className='flex justify-between items-start mb-4'>
+            <h4 className='font-medium'>Education #{index + 1}</h4>
             <Button
               onClick={() => removeEducation(ed.id)}
-              variant="ghost"
-              size="sm"
-              className="text-red-500 hover:text-red-700"
+              variant='ghost'
+              size='sm'
+              className='text-red-500 hover:text-red-700'
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className='w-4 h-4' />
             </Button>
           </div>
 
-          <div className="space-y-4">
+          <div className='space-y-4'>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Institution *
-              </label>
+              <label className='block text-sm font-medium text-gray-700 mb-2'>Institution *</label>
               <input
-                type="text"
+                type='text'
                 value={ed.institution}
-                onChange={(e) => updateEducation(ed.id, { institution: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                placeholder="University Name"
+                onChange={e => updateEducation(ed.id, { institution: e.target.value })}
+                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+                placeholder='University Name'
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Degree *
-                </label>
+                <label className='block text-sm font-medium text-gray-700 mb-2'>Degree *</label>
                 <select
                   value={ed.degree}
-                  onChange={(e) => updateEducation(ed.id, { degree: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  onChange={e => updateEducation(ed.id, { degree: e.target.value })}
+                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
                 >
-                  <option value="">Select degree</option>
-                  <option value="High School">High School Diploma</option>
-                  <option value="Associate">Associate Degree</option>
-                  <option value="Bachelor">Bachelor's Degree</option>
-                  <option value="Master">Master's Degree</option>
-                  <option value="Doctorate">Doctorate</option>
-                  <option value="Certificate">Certificate</option>
+                  <option value=''>Select degree</option>
+                  <option value='High School'>High School Diploma</option>
+                  <option value='Associate'>Associate Degree</option>
+                  <option value='Bachelor'>Bachelor's Degree</option>
+                  <option value='Master'>Master's Degree</option>
+                  <option value='Doctorate'>Doctorate</option>
+                  <option value='Certificate'>Certificate</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className='block text-sm font-medium text-gray-700 mb-2'>
                   Field of Study
                 </label>
                 <input
-                  type="text"
+                  type='text'
                   value={ed.field}
-                  onChange={(e) => updateEducation(ed.id, { field: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                  placeholder="Computer Science"
+                  onChange={e => updateEducation(ed.id, { field: e.target.value })}
+                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+                  placeholder='Computer Science'
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Start Date
-                </label>
+                <label className='block text-sm font-medium text-gray-700 mb-2'>Start Date</label>
                 <input
-                  type="month"
+                  type='month'
                   value={ed.startDate}
-                  onChange={(e) => updateEducation(ed.id, { startDate: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  onChange={e => updateEducation(ed.id, { startDate: e.target.value })}
+                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  End Date
-                </label>
+                <label className='block text-sm font-medium text-gray-700 mb-2'>End Date</label>
                 <input
-                  type="month"
+                  type='month'
                   value={ed.endDate}
-                  onChange={(e) => updateEducation(ed.id, { endDate: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                  onChange={e => updateEducation(ed.id, { endDate: e.target.value })}
+                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className='block text-sm font-medium text-gray-700 mb-2'>
                   GPA (optional)
                 </label>
                 <input
-                  type="text"
+                  type='text'
                   value={ed.gpa}
-                  onChange={(e) => updateEducation(ed.id, { gpa: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                  placeholder="3.8"
+                  onChange={e => updateEducation(ed.id, { gpa: e.target.value })}
+                  className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
+                  placeholder='3.8'
                 />
               </div>
             </div>
@@ -1071,36 +1042,44 @@ const SkillsStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
     onDataChange({ skills: newSkills });
   };
 
-  const SkillSection = ({ title, category, placeholder }: { title: string, category: string, placeholder: string }) => (
-    <Card className="p-4">
-      <div className="flex justify-between items-center mb-3">
-        <h4 className="font-medium">{title}</h4>
-        <Button onClick={() => addSkill(category)} variant="outline" size="sm">
-          <Plus className="w-4 h-4" />
+  const SkillSection = ({
+    title,
+    category,
+    placeholder,
+  }: {
+    title: string;
+    category: string;
+    placeholder: string;
+  }) => (
+    <Card className='p-4'>
+      <div className='flex justify-between items-center mb-3'>
+        <h4 className='font-medium'>{title}</h4>
+        <Button onClick={() => addSkill(category)} variant='outline' size='sm'>
+          <Plus className='w-4 h-4' />
         </Button>
       </div>
-      <div className="space-y-2">
+      <div className='space-y-2'>
         {(skills[category] || []).map((skill: string, index: number) => (
-          <div key={index} className="flex gap-2">
+          <div key={index} className='flex gap-2'>
             <input
-              type="text"
+              type='text'
               value={skill}
-              onChange={(e) => updateSkill(category, index, e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              onChange={e => updateSkill(category, index, e.target.value)}
+              className='flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
               placeholder={placeholder}
             />
             <Button
               onClick={() => removeSkill(category, index)}
-              variant="ghost"
-              size="sm"
-              className="text-red-500 hover:text-red-700"
+              variant='ghost'
+              size='sm'
+              className='text-red-500 hover:text-red-700'
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className='w-4 h-4' />
             </Button>
           </div>
         ))}
         {(skills[category] || []).length === 0 && (
-          <p className="text-sm text-gray-500 text-center py-4">
+          <p className='text-sm text-gray-500 text-center py-4'>
             No {title.toLowerCase()} added yet.
           </p>
         )}
@@ -1109,26 +1088,26 @@ const SkillsStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   );
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       <SkillSection
-        title="Technical Skills"
-        category="technical"
-        placeholder="e.g., JavaScript, Python, React"
+        title='Technical Skills'
+        category='technical'
+        placeholder='e.g., JavaScript, Python, React'
       />
       <SkillSection
-        title="Soft Skills"
-        category="soft"
-        placeholder="e.g., Leadership, Communication, Problem Solving"
+        title='Soft Skills'
+        category='soft'
+        placeholder='e.g., Leadership, Communication, Problem Solving'
       />
       <SkillSection
-        title="Languages"
-        category="languages"
-        placeholder="e.g., English (Native), Spanish (Fluent)"
+        title='Languages'
+        category='languages'
+        placeholder='e.g., English (Native), Spanish (Fluent)'
       />
       <SkillSection
-        title="Certifications"
-        category="certifications"
-        placeholder="e.g., AWS Certified Developer, PMP"
+        title='Certifications'
+        category='certifications'
+        placeholder='e.g., AWS Certified Developer, PMP'
       />
     </div>
   );
@@ -1136,45 +1115,46 @@ const SkillsStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
 
 const SummaryStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   return (
-    <div className="space-y-6">
-      <div className="bg-blue-50 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 mb-2">Professional Summary</h3>
-        <p className="text-blue-800 text-sm">
-          Write a compelling 2-3 sentence summary that highlights your key strengths, experience, and career goals.
+    <div className='space-y-6'>
+      <div className='bg-blue-50 rounded-lg p-4'>
+        <h3 className='font-semibold text-blue-900 mb-2'>Professional Summary</h3>
+        <p className='text-blue-800 text-sm'>
+          Write a compelling 2-3 sentence summary that highlights your key strengths, experience,
+          and career goals.
         </p>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className='block text-sm font-medium text-gray-700 mb-2'>
           Professional Summary *
         </label>
         <textarea
           value={data.summary || ''}
-          onChange={(e) => onDataChange({ summary: e.target.value })}
+          onChange={e => onDataChange({ summary: e.target.value })}
           rows={6}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-vertical"
-          placeholder="Experienced software engineer with 5+ years developing scalable web applications. Proven track record of leading cross-functional teams and delivering high-quality solutions. Passionate about leveraging technology to solve complex business problems."
+          className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-vertical'
+          placeholder='Experienced software engineer with 5+ years developing scalable web applications. Proven track record of leading cross-functional teams and delivering high-quality solutions. Passionate about leveraging technology to solve complex business problems.'
         />
-        <div className="flex justify-between items-center mt-2">
-          <p className="text-xs text-gray-500">
+        <div className='flex justify-between items-center mt-2'>
+          <p className='text-xs text-gray-500'>
             Aim for 50-150 words that capture your professional identity.
           </p>
-          <span className="text-xs text-gray-400">
+          <span className='text-xs text-gray-400'>
             {data.summary ? data.summary.split(' ').length : 0} words
           </span>
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className='block text-sm font-medium text-gray-700 mb-2'>
           Career Objective (optional)
         </label>
         <textarea
           value={data.objective || ''}
-          onChange={(e) => onDataChange({ objective: e.target.value })}
+          onChange={e => onDataChange({ objective: e.target.value })}
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-vertical"
-          placeholder="Seeking a senior software engineering role where I can apply my expertise in full-stack development to build innovative solutions..."
+          className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 resize-vertical'
+          placeholder='Seeking a senior software engineering role where I can apply my expertise in full-stack development to build innovative solutions...'
         />
       </div>
     </div>
@@ -1183,31 +1163,38 @@ const SummaryStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
 
 const CustomizationStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) => {
   return (
-    <div className="space-y-6">
-      <div className="bg-blue-50 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 mb-2">AI Customization Suggestions</h3>
-        <p className="text-blue-800 text-sm">
-          Based on the job description, here are our AI-powered suggestions for optimizing your profile:
+    <div className='space-y-6'>
+      <div className='bg-blue-50 rounded-lg p-4'>
+        <h3 className='font-semibold text-blue-900 mb-2'>AI Customization Suggestions</h3>
+        <p className='text-blue-800 text-sm'>
+          Based on the job description, here are our AI-powered suggestions for optimizing your
+          profile:
         </p>
       </div>
 
-      <div className="space-y-4">
-        <div className="p-4 border border-gray-200 rounded-lg">
-          <h4 className="font-medium text-gray-900 mb-2">Skills to Emphasize</h4>
-          <div className="flex flex-wrap gap-2">
-            {['React', 'TypeScript', 'Node.js', 'AWS'].map((skill) => (
-              <span key={skill} className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+      <div className='space-y-4'>
+        <div className='p-4 border border-gray-200 rounded-lg'>
+          <h4 className='font-medium text-gray-900 mb-2'>Skills to Emphasize</h4>
+          <div className='flex flex-wrap gap-2'>
+            {['React', 'TypeScript', 'Node.js', 'AWS'].map(skill => (
+              <span
+                key={skill}
+                className='px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm'
+              >
                 {skill}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="p-4 border border-gray-200 rounded-lg">
-          <h4 className="font-medium text-gray-900 mb-2">Keywords to Include</h4>
-          <div className="flex flex-wrap gap-2">
-            {['Agile', 'Scrum', 'DevOps', 'Microservices'].map((keyword) => (
-              <span key={keyword} className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+        <div className='p-4 border border-gray-200 rounded-lg'>
+          <h4 className='font-medium text-gray-900 mb-2'>Keywords to Include</h4>
+          <div className='flex flex-wrap gap-2'>
+            {['Agile', 'Scrum', 'DevOps', 'Microservices'].map(keyword => (
+              <span
+                key={keyword}
+                className='px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm'
+              >
                 {keyword}
               </span>
             ))}
@@ -1216,14 +1203,14 @@ const CustomizationStep: React.FC<WorkflowStepProps> = ({ data, onDataChange }) 
       </div>
 
       <div>
-        <label className="flex items-center gap-2">
+        <label className='flex items-center gap-2'>
           <input
-            type="checkbox"
+            type='checkbox'
             checked={data.applyAiSuggestions ?? true}
-            onChange={(e) => onDataChange({ applyAiSuggestions: e.target.checked })}
-            className="w-4 h-4 text-blue-600"
+            onChange={e => onDataChange({ applyAiSuggestions: e.target.checked })}
+            className='w-4 h-4 text-blue-600'
           />
-          <span className="text-sm text-gray-700">Apply AI suggestions automatically</span>
+          <span className='text-sm text-gray-700'>Apply AI suggestions automatically</span>
         </label>
       </div>
     </div>
@@ -1239,12 +1226,12 @@ const TemplateSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange
 
   return (
     <div>
-      <p className="text-gray-600 mb-6">
+      <p className='text-gray-600 mb-6'>
         Choose a template that matches the company culture and industry standards.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {templates.map((template) => (
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+        {templates.map(template => (
           <Card
             key={template.id}
             className={`cursor-pointer transition-all border-2 ${
@@ -1254,15 +1241,15 @@ const TemplateSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange
             }`}
             onClick={() => onDataChange({ selectedTemplate: template.id })}
           >
-            <div className="p-4">
-              <div className="aspect-[4/5] bg-gray-100 rounded mb-3 overflow-hidden">
+            <div className='p-4'>
+              <div className='aspect-[4/5] bg-gray-100 rounded mb-3 overflow-hidden'>
                 <img
                   src={template.preview}
                   alt={template.name}
-                  className="w-full h-full object-cover"
+                  className='w-full h-full object-cover'
                 />
               </div>
-              <h3 className="font-semibold text-center">{template.name}</h3>
+              <h3 className='font-semibold text-center'>{template.name}</h3>
             </div>
           </Card>
         ))}
@@ -1273,52 +1260,57 @@ const TemplateSelectionStep: React.FC<WorkflowStepProps> = ({ data, onDataChange
 
 const ReviewStep: React.FC<WorkflowStepProps> = ({ data, onDataChange: _onDataChange }) => {
   return (
-    <div className="space-y-6">
-      <div className="bg-green-50 rounded-lg p-4">
-        <div className="flex items-center gap-2 mb-2">
-          <CheckCircle className="w-5 h-5 text-green-500" />
-          <h3 className="font-semibold text-green-900">Ready to Generate</h3>
+    <div className='space-y-6'>
+      <div className='bg-green-50 rounded-lg p-4'>
+        <div className='flex items-center gap-2 mb-2'>
+          <CheckCircle className='w-5 h-5 text-green-500' />
+          <h3 className='font-semibold text-green-900'>Ready to Generate</h3>
         </div>
-        <p className="text-green-800 text-sm">
-          All required information has been collected. Review the summary below and click "Complete Workflow" to generate your documents.
+        <p className='text-green-800 text-sm'>
+          All required information has been collected. Review the summary below and click "Complete
+          Workflow" to generate your documents.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="p-4">
-          <h4 className="font-semibold text-gray-900 mb-3">Job Details</h4>
-          <dl className="space-y-2 text-sm">
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+        <Card className='p-4'>
+          <h4 className='font-semibold text-gray-900 mb-3'>Job Details</h4>
+          <dl className='space-y-2 text-sm'>
             <div>
-              <dt className="font-medium text-gray-700">Position:</dt>
-              <dd className="text-gray-600">{data.jobDetails?.jobTitle}</dd>
+              <dt className='font-medium text-gray-700'>Position:</dt>
+              <dd className='text-gray-600'>{data.jobDetails?.jobTitle}</dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Company:</dt>
-              <dd className="text-gray-600">{data.jobDetails?.company}</dd>
+              <dt className='font-medium text-gray-700'>Company:</dt>
+              <dd className='text-gray-600'>{data.jobDetails?.company}</dd>
             </div>
             {data.jobDetails?.deadline && (
               <div>
-                <dt className="font-medium text-gray-700">Deadline:</dt>
-                <dd className="text-gray-600">{new Date(data.jobDetails.deadline).toLocaleDateString()}</dd>
+                <dt className='font-medium text-gray-700'>Deadline:</dt>
+                <dd className='text-gray-600'>
+                  {new Date(data.jobDetails.deadline).toLocaleDateString()}
+                </dd>
               </div>
             )}
           </dl>
         </Card>
 
-        <Card className="p-4">
-          <h4 className="font-semibold text-gray-900 mb-3">Generation Settings</h4>
-          <dl className="space-y-2 text-sm">
+        <Card className='p-4'>
+          <h4 className='font-semibold text-gray-900 mb-3'>Generation Settings</h4>
+          <dl className='space-y-2 text-sm'>
             <div>
-              <dt className="font-medium text-gray-700">Profile:</dt>
-              <dd className="text-gray-600">Software Engineer Profile</dd>
+              <dt className='font-medium text-gray-700'>Profile:</dt>
+              <dd className='text-gray-600'>Software Engineer Profile</dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">Template:</dt>
-              <dd className="text-gray-600 capitalize">{data.templateSelection?.selectedTemplate}</dd>
+              <dt className='font-medium text-gray-700'>Template:</dt>
+              <dd className='text-gray-600 capitalize'>
+                {data.templateSelection?.selectedTemplate}
+              </dd>
             </div>
             <div>
-              <dt className="font-medium text-gray-700">AI Optimization:</dt>
-              <dd className="text-gray-600">
+              <dt className='font-medium text-gray-700'>AI Optimization:</dt>
+              <dd className='text-gray-600'>
                 {data.customization?.applyAiSuggestions ? 'Enabled' : 'Disabled'}
               </dd>
             </div>
@@ -1329,38 +1321,43 @@ const ReviewStep: React.FC<WorkflowStepProps> = ({ data, onDataChange: _onDataCh
   );
 };
 
-const CompletionStep: React.FC<WorkflowStepProps> = ({ data: _data, onDataChange: _onDataChange }) => {
+const CompletionStep: React.FC<WorkflowStepProps> = ({
+  data: _data,
+  onDataChange: _onDataChange,
+}) => {
   return (
-    <div className="text-center space-y-6">
-      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto">
-        <CheckCircle className="w-8 h-8 text-green-500" />
+    <div className='text-center space-y-6'>
+      <div className='w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto'>
+        <CheckCircle className='w-8 h-8 text-green-500' />
       </div>
 
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">Documents Generated Successfully!</h3>
-        <p className="text-gray-600">
+        <h3 className='text-xl font-semibold text-gray-900 mb-2'>
+          Documents Generated Successfully!
+        </h3>
+        <p className='text-gray-600'>
           Your tailored resume and cover letter have been generated and are ready for download.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md mx-auto">
-        <Button className="flex items-center justify-center gap-2">
-          <Download className="w-4 h-4" />
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4 max-w-md mx-auto'>
+        <Button className='flex items-center justify-center gap-2'>
+          <Download className='w-4 h-4' />
           Download Resume
         </Button>
-        <Button variant="outline" className="flex items-center justify-center gap-2">
-          <Download className="w-4 h-4" />
+        <Button variant='outline' className='flex items-center justify-center gap-2'>
+          <Download className='w-4 h-4' />
           Download Cover Letter
         </Button>
       </div>
 
-      <div className="flex items-center justify-center gap-4 pt-4 border-t">
-        <Button variant="ghost" size="sm" className="flex items-center gap-2">
-          <Share2 className="w-4 h-4" />
+      <div className='flex items-center justify-center gap-4 pt-4 border-t'>
+        <Button variant='ghost' size='sm' className='flex items-center gap-2'>
+          <Share2 className='w-4 h-4' />
           Share
         </Button>
-        <Button variant="ghost" size="sm" className="flex items-center gap-2">
-          <Eye className="w-4 h-4" />
+        <Button variant='ghost' size='sm' className='flex items-center gap-2'>
+          <Eye className='w-4 h-4' />
           Preview
         </Button>
       </div>

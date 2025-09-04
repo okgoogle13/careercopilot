@@ -121,9 +121,7 @@ export const useRovingTabIndex = (
       const container = containerRef.current;
       if (!container) return;
 
-      const items = container.querySelectorAll(
-        itemSelector
-      ) as NodeListOf<HTMLElement>;
+      const items = container.querySelectorAll(itemSelector) as NodeListOf<HTMLElement>;
 
       items.forEach((item, i) => {
         item.tabIndex = i === index ? 0 : -1;
@@ -139,9 +137,7 @@ export const useRovingTabIndex = (
     const container = containerRef.current;
     if (!container) return 0;
 
-    const items = container.querySelectorAll(
-      itemSelector
-    ) as NodeListOf<HTMLElement>;
+    const items = container.querySelectorAll(itemSelector) as NodeListOf<HTMLElement>;
     return Array.from(items).findIndex(item => item.tabIndex === 0);
   }, [containerRef, itemSelector]);
 
@@ -149,9 +145,7 @@ export const useRovingTabIndex = (
     const container = containerRef.current;
     if (!container) return;
 
-    const items = container.querySelectorAll(
-      itemSelector
-    ) as NodeListOf<HTMLElement>;
+    const items = container.querySelectorAll(itemSelector) as NodeListOf<HTMLElement>;
     const currentIndex = getActiveIndex();
     const nextIndex = (currentIndex + 1) % items.length;
     setActiveItem(nextIndex);
@@ -161,12 +155,9 @@ export const useRovingTabIndex = (
     const container = containerRef.current;
     if (!container) return;
 
-    const items = container.querySelectorAll(
-      itemSelector
-    ) as NodeListOf<HTMLElement>;
+    const items = container.querySelectorAll(itemSelector) as NodeListOf<HTMLElement>;
     const currentIndex = getActiveIndex();
-    const previousIndex =
-      currentIndex === 0 ? items.length - 1 : currentIndex - 1;
+    const previousIndex = currentIndex === 0 ? items.length - 1 : currentIndex - 1;
     setActiveItem(previousIndex);
   }, [containerRef, itemSelector, getActiveIndex, setActiveItem]);
 
@@ -178,9 +169,7 @@ export const useRovingTabIndex = (
     const container = containerRef.current;
     if (!container) return;
 
-    const items = container.querySelectorAll(
-      itemSelector
-    ) as NodeListOf<HTMLElement>;
+    const items = container.querySelectorAll(itemSelector) as NodeListOf<HTMLElement>;
     setActiveItem(items.length - 1);
   }, [containerRef, itemSelector, setActiveItem]);
 
