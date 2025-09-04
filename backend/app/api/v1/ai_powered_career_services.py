@@ -159,7 +159,8 @@ async def analyze_job_match(
         logger.info(f"Job match analysis requested by user: {current_user}")
 
         result = analyze_job_match_detailed(
-            job_description=request.job_description, candidate_profile=request.candidate_profile
+            job_description=request.job_description,
+            candidate_profile=request.candidate_profile,
         )
 
         logger.info(f"Job match analysis completed - Score: {result.overall_match_score}")
@@ -197,7 +198,8 @@ async def rank_job_opportunities_endpoint(
         )
 
         result = rank_job_opportunities(
-            candidate_profile=request.candidate_profile, job_opportunities=request.job_opportunities
+            candidate_profile=request.candidate_profile,
+            job_opportunities=request.job_opportunities,
         )
 
         return result
@@ -374,7 +376,8 @@ async def analyze_resume_endpoint(
         logger.info(f"Resume analysis requested by user: {current_user}")
 
         result = analyze_resume_comprehensive(
-            resume_content=request.resume_content, target_industry=request.target_industry
+            resume_content=request.resume_content,
+            target_industry=request.target_industry,
         )
 
         logger.info(f"Resume analysis completed - Score: {result.overall_score}")
@@ -477,7 +480,11 @@ async def analyze_skills_gap_endpoint(
 
 
 # Smart Cover Letter Endpoints
-@router.post("/cover-letters/generate", response_model=SmartCoverLetter, tags=["AI Cover Letters"])
+@router.post(
+    "/cover-letters/generate",
+    response_model=SmartCoverLetter,
+    tags=["AI Cover Letters"],
+)
 @limiter.limit("10/minute")
 async def generate_cover_letter_endpoint(
     request: CoverLetterRequest, current_user: str = Depends(get_current_user)
@@ -543,7 +550,8 @@ async def research_company_endpoint(
 )
 @limiter.limit("5/minute")
 async def optimize_cover_letter_endpoint(
-    request: CoverLetterOptimizationRequest, current_user: str = Depends(get_current_user)
+    request: CoverLetterOptimizationRequest,
+    current_user: str = Depends(get_current_user),
 ):
     """
     Optimize an existing cover letter for better impact and job alignment.

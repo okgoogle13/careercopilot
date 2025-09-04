@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from './Button';
-import { AppError, ActionableSuggestion } from '../../types/errors';
-import { CheckCircle, XCircle, AlertCircle, Info, ExternalLink } from 'lucide-react';
+import { AppError } from '../../types/errors';
+import { XCircle, AlertCircle, Info, ExternalLink } from 'lucide-react';
 
 interface ErrorDisplayProps {
   error: string | AppError | null;
@@ -11,7 +11,7 @@ interface ErrorDisplayProps {
   maxSuggestions?: number;
   onRetry?: () => void;
   onDismiss?: () => void;
-  onAction?: (actionType: string, actionData?: any) => void;
+  onAction?: (actionType: string, actionData?: unknown) => void;
   isRetrying?: boolean;
   className?: string;
 }
@@ -29,7 +29,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
   className = '',
 }) => {
   const [expandedSuggestion, setExpandedSuggestion] = useState<string | null>(null);
-  
+
   if (!error) return null;
 
   const isAppError = (err: string | AppError): err is AppError => {
@@ -41,7 +41,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
 
   const getSeverityIcon = () => {
     if (!appError) return <XCircle className="h-5 w-5 text-red-400" />;
-    
+
     switch (appError.severity) {
       case 'CRITICAL':
         return <XCircle className="h-5 w-5 text-red-600" />;
@@ -56,7 +56,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
 
   const getSeverityStyles = () => {
     if (!appError) return 'border-red-200 bg-red-50';
-    
+
     switch (appError.severity) {
       case 'CRITICAL':
         return 'border-red-300 bg-red-50';
@@ -71,7 +71,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
 
   const getVariantStyles = () => {
     const severityStyles = getSeverityStyles();
-    
+
     switch (variant) {
       case 'banner':
         return `rounded-none border-l-4 border-r-0 border-t-0 border-b-0 px-4 py-3 ${severityStyles}`;
@@ -84,7 +84,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
     }
   };
 
-  const handleAction = (actionType: string, actionData?: any) => {
+  const handleAction = (actionType: string, actionData?: unknown) => {
     if (onAction) {
       onAction(actionType, actionData);
     } else {
@@ -119,7 +119,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
             <p className={`text-sm font-medium ${
               appError?.severity === 'CRITICAL' ? 'text-red-800' :
               appError?.severity === 'HIGH' ? 'text-orange-800' :
-              appError?.severity === 'MEDIUM' ? 'text-yellow-800' : 
+              appError?.severity === 'MEDIUM' ? 'text-yellow-800' :
               'text-blue-800'
             }`}>
               {errorMessage}
@@ -133,8 +133,8 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
                 </h4>
                 <div className="space-y-2">
                   {appError.suggestions.slice(0, maxSuggestions).map((suggestion) => (
-                    <div 
-                      key={suggestion.id} 
+                    <div
+                      key={suggestion.id}
                       className="flex items-start justify-between p-2 rounded-md bg-white bg-opacity-50"
                     >
                       <div className="flex-1">
@@ -154,7 +154,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
                             <ExternalLink className="h-3 w-3 text-gray-400" />
                           )}
                         </div>
-                        
+
                         {expandedSuggestion === suggestion.id && (
                           <div className="mt-2 pl-7">
                             <p className="text-xs text-gray-600 mb-2">
@@ -173,7 +173,7 @@ const ErrorDisplay: React.FC<ErrorDisplayProps> = ({
                           </div>
                         )}
                       </div>
-                      
+
                       {suggestion.actionType !== 'dismiss' && (
                         <Button
                           variant="ghost"

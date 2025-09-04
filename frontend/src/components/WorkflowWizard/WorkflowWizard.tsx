@@ -46,8 +46,8 @@ interface WorkflowWizardProps {
   workflowId: string;
   isOpen: boolean;
   onClose: () => void;
-  onComplete: (result: any) => void;
-  initialData?: any;
+  onComplete: (result: Record<string, unknown>) => void;
+  initialData?: Record<string, unknown>;
 }
 
 const WorkflowWizard: React.FC<WorkflowWizardProps> = ({
@@ -59,7 +59,7 @@ const WorkflowWizard: React.FC<WorkflowWizardProps> = ({
 }) => {
   const [workflow, setWorkflow] = useState<Workflow | null>(null);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const [stepData, setStepData] = useState<Record<string, any>>(initialData);
+  const [stepData, setStepData] = useState<Record<string, unknown>>(initialData || {});
   const [completedSteps, setCompletedSteps] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);

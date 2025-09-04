@@ -36,7 +36,7 @@ export const JobMatchingDefault: Story = {
   ),
 };
 
-// Content Optimization Stories  
+// Content Optimization Stories
 export const ContentOptimizationDefault: Story = {
   render: () => <ContentOptimizationComponent />,
 };

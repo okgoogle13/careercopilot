@@ -6,8 +6,8 @@ import { useAuthStatus } from '../hooks';
 import { DocumentUpload } from '../components/documents/DocumentUpload';
 import { DocumentCard } from '../components/documents/DocumentCard';
 // Importing components from the UI barrel file for consistency
-import { Button, Input, Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui';
-import { Plus, Search, FileText, Upload } from 'lucide-react';
+import { Button, Input, Tabs, TabsList, TabsTrigger } from '../components/ui';
+import { Search, FileText, Upload } from 'lucide-react';
 
 export interface DocumentType {
   id: string;
@@ -20,7 +20,7 @@ export interface DocumentType {
 }
 
 const DocumentsPage: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     isAuthenticated,
     isLoading: isAuthLoading,
@@ -32,10 +32,10 @@ const DocumentsPage: React.FC = () => {
   const [documents, setDocuments] = useState<DocumentType[]>([]);
   const [filteredDocuments, setFilteredDocuments] = useState<DocumentType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [_error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('all');
-  const [isUploading, setIsUploading] = useState(false);
+  const [_isUploading, setIsUploading] = useState(false);
 
   const { preferences } = useUserPreferences();
   const userTheme = preferences?.themeId || 'professional';

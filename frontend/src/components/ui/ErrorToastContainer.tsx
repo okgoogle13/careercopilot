@@ -1,7 +1,6 @@
 import React from 'react';
 import { useError } from '../../contexts/ErrorContext';
 import ErrorDisplay from './ErrorDisplay';
-import { X } from 'lucide-react';
 
 interface ErrorToastContainerProps {
   position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center';
@@ -33,7 +32,7 @@ const ErrorToastContainer: React.FC<ErrorToastContainerProps> = ({
     }
   };
 
-  const handleAction = async (actionType: string, actionData?: any, errorId?: string) => {
+  const handleAction = async (actionType: string, actionData?: unknown, errorId?: string) => {
     if (actionType === 'retry' && errorId) {
       await retryError(errorId);
     }
@@ -48,7 +47,7 @@ const ErrorToastContainer: React.FC<ErrorToastContainerProps> = ({
     <div className={`fixed z-50 pointer-events-none ${getPositionStyles()} ${className}`}>
       <div className="space-y-2 max-w-md">
         {errors.map((error) => (
-          <div 
+          <div
             key={error.id}
             className="pointer-events-auto transform transition-all duration-300 ease-in-out"
             style={{
@@ -67,7 +66,7 @@ const ErrorToastContainer: React.FC<ErrorToastContainerProps> = ({
           </div>
         ))}
       </div>
-      
+
       <style jsx>{`
         @keyframes slideIn {
           from {
