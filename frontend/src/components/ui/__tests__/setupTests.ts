@@ -6,10 +6,10 @@ Object.defineProperty(global, 'import', {
     meta: {
       env: {
         DEV: false,
-        NODE_ENV: 'test'
-      }
-    }
-  }
+        NODE_ENV: 'test',
+      },
+    },
+  },
 });
 
 // Add TextEncoder/TextDecoder polyfills

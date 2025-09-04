@@ -31,11 +31,7 @@ const MockAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children })
     getAuthToken: jest.fn(() => 'mock-jwt-token'),
   };
 
-  return (
-    <AuthProvider value={mockAuthValue}>
-      {children}
-    </AuthProvider>
-  );
+  return <AuthProvider value={mockAuthValue}>{children}</AuthProvider>;
 };
 
 // Custom wrapper for testing AI components
@@ -62,7 +58,7 @@ export { customRender as render };
 
 // Test utilities for AI services
 export const mockApiResponse = <T,>(data: T, delay = 100) => {
-  return new Promise<T>((resolve) => {
+  return new Promise<T>(resolve => {
     setTimeout(() => resolve(data), delay);
   });
 };
@@ -91,7 +87,7 @@ export const mockIntersectionObserver = () => {
   mockIntersectionObserver.mockReturnValue({
     observe: () => null,
     unobserve: () => null,
-    disconnect: () => null
+    disconnect: () => null,
   });
   window.IntersectionObserver = mockIntersectionObserver;
 };
@@ -108,8 +104,10 @@ export const mockClipboard = () => {
 
 // Accessibility testing helpers
 export const getByLabelText = (container: HTMLElement, text: string) => {
-  return container.querySelector(`[aria-label="${text}"]`) ||
-         container.querySelector(`label:contains("${text}")`);
+  return (
+    container.querySelector(`[aria-label="${text}"]`) ||
+    container.querySelector(`label:contains("${text}")`)
+  );
 };
 
 export const hasAriaLabel = (element: HTMLElement, label: string) => {

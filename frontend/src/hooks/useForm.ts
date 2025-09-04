@@ -1,10 +1,6 @@
 // Comprehensive form management hook with validation
 import { useState, useCallback, useMemo } from 'react';
-import {
-  ValidationRule,
-  FormValidationResult,
-  validateForm,
-} from '../utils/validation';
+import { ValidationRule, FormValidationResult, validateForm } from '../utils/validation';
 
 export interface FormField<T = unknown> {
   value: T;
@@ -109,10 +105,7 @@ export const useForm = <T extends Record<string, unknown>>(
     if (!validationSchema || Object.keys(validationSchema).length === 0) {
       return { isValid: true, errors: {} };
     }
-    return validateForm(
-      values,
-      validationSchema as Record<keyof T, ValidationRule<unknown>[]>
-    );
+    return validateForm(values, validationSchema as Record<keyof T, ValidationRule<unknown>[]>);
   }, [values, validationSchema]);
 
   // Set field value with optional validation

@@ -14,7 +14,7 @@ interface ScreenReaderOnlyProps {
 const ScreenReaderOnly: React.FC<ScreenReaderOnlyProps> = ({
   children,
   as: Component = 'span',
-  className = ''
+  className = '',
 }) => {
   return (
     <Component

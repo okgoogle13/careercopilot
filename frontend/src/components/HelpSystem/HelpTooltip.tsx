@@ -32,11 +32,7 @@ interface HelpTooltipProps {
   onDismiss: () => void;
 }
 
-export const HelpTooltip: React.FC<HelpTooltipProps> = ({
-  content,
-  options,
-  onDismiss,
-}) => {
+export const HelpTooltip: React.FC<HelpTooltipProps> = ({ content, options, onDismiss }) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [tooltipPosition, setTooltipPosition] = useState(options.position || 'top');
   const tooltipRef = useRef<HTMLDivElement>(null);
@@ -151,33 +147,33 @@ export const HelpTooltip: React.FC<HelpTooltipProps> = ({
   const tooltipContent = (
     <div
       ref={tooltipRef}
-      className="fixed z-50 max-w-sm bg-gray-900 text-white rounded-lg shadow-xl p-4 animate-fade-in"
+      className='fixed z-50 max-w-sm bg-gray-900 text-white rounded-lg shadow-xl p-4 animate-fade-in'
       style={{ top: position.top, left: position.left }}
-      role="tooltip"
-      aria-labelledby="tooltip-title"
-      aria-describedby="tooltip-description"
+      role='tooltip'
+      aria-labelledby='tooltip-title'
+      aria-describedby='tooltip-description'
     >
       {/* Arrow */}
       <div className={getArrowClasses()} />
 
       {/* Header */}
-      <div className="flex items-start justify-between mb-2">
-        <h3 id="tooltip-title" className="font-medium text-white pr-4">
+      <div className='flex items-start justify-between mb-2'>
+        <h3 id='tooltip-title' className='font-medium text-white pr-4'>
           {content.title}
         </h3>
         {!options.persistent && (
           <button
             onClick={onDismiss}
-            className="text-gray-400 hover:text-white transition-colors"
-            aria-label="Dismiss help"
+            className='text-gray-400 hover:text-white transition-colors'
+            aria-label='Dismiss help'
           >
-            <X className="w-4 h-4" />
+            <X className='w-4 h-4' />
           </button>
         )}
       </div>
 
       {/* Content */}
-      <div id="tooltip-description" className="text-gray-200 text-sm leading-relaxed mb-3">
+      <div id='tooltip-description' className='text-gray-200 text-sm leading-relaxed mb-3'>
         {content.description.split('\n').map((line, index) => (
           <React.Fragment key={index}>
             {line}
@@ -188,18 +184,18 @@ export const HelpTooltip: React.FC<HelpTooltipProps> = ({
 
       {/* Related Links */}
       {content.relatedLinks && content.relatedLinks.length > 0 && (
-        <div className="mb-3">
-          <p className="text-xs text-gray-400 mb-2">Related:</p>
-          <div className="space-y-1">
+        <div className='mb-3'>
+          <p className='text-xs text-gray-400 mb-2'>Related:</p>
+          <div className='space-y-1'>
             {content.relatedLinks.map((link, index) => (
               <a
                 key={index}
                 href={link.url}
-                className="flex items-center gap-1 text-xs text-blue-300 hover:text-blue-200 transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
+                className='flex items-center gap-1 text-xs text-blue-300 hover:text-blue-200 transition-colors'
+                target='_blank'
+                rel='noopener noreferrer'
               >
-                <ExternalLink className="w-3 h-3" />
+                <ExternalLink className='w-3 h-3' />
                 {link.title}
               </a>
             ))}
@@ -209,17 +205,17 @@ export const HelpTooltip: React.FC<HelpTooltipProps> = ({
 
       {/* Actions */}
       {content.actions && content.actions.length > 0 && (
-        <div className="flex gap-2 pt-2 border-t border-gray-700">
+        <div className='flex gap-2 pt-2 border-t border-gray-700'>
           {content.actions.map((action, index) => (
             <Button
               key={index}
-              size="sm"
-              variant="outline"
+              size='sm'
+              variant='outline'
               onClick={() => {
                 action.action();
                 onDismiss();
               }}
-              className="text-xs bg-transparent border-gray-600 text-gray-200 hover:bg-gray-800 hover:border-gray-500"
+              className='text-xs bg-transparent border-gray-600 text-gray-200 hover:bg-gray-800 hover:border-gray-500'
             >
               {action.label}
             </Button>
@@ -229,21 +225,17 @@ export const HelpTooltip: React.FC<HelpTooltipProps> = ({
 
       {/* Category indicator */}
       {content.category && (
-        <div className="absolute -top-2 -right-2">
+        <div className='absolute -top-2 -right-2'>
           <div
             className={`w-4 h-4 rounded-full text-xs flex items-center justify-center font-bold ${
               content.category === 'feature'
                 ? 'bg-blue-500 text-white'
                 : content.category === 'guide'
-                ? 'bg-green-500 text-white'
-                : 'bg-amber-500 text-white'
+                  ? 'bg-green-500 text-white'
+                  : 'bg-amber-500 text-white'
             }`}
           >
-            {content.category === 'feature'
-              ? '?'
-              : content.category === 'guide'
-              ? 'i'
-              : '!'}
+            {content.category === 'feature' ? '?' : content.category === 'guide' ? 'i' : '!'}
           </div>
         </div>
       )}

@@ -42,7 +42,7 @@ export const GoogleSignInButton: React.FC = () => {
 
   return (
     <button
-      type="button"
+      type='button'
       onClick={handleGoogleSignIn}
       style={{
         background: '#fff',
@@ -58,8 +58,8 @@ export const GoogleSignInButton: React.FC = () => {
       }}
     >
       <img
-        src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-        alt="Google"
+        src='https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg'
+        alt='Google'
         style={{ width: 20, height: 20 }}
       />
       Sign in with Google

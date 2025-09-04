@@ -24,16 +24,14 @@ describe('AI Services Accessibility Tests', () => {
 
   describe('JobMatchingComponent Accessibility', () => {
     it('should not have any accessibility violations in initial state', async () => {
-      const { container } = render(
-        <JobMatchingComponent resumeDocumentId="test-resume-123" />
-      );
+      const { container } = render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       const results = await axe(container);
       expect(results).toHaveNoViolations();
     });
 
     it('should have proper form labels and ARIA attributes', () => {
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Check that all form inputs have accessible labels
       expect(screen.getByLabelText(/job type/i)).toBeInTheDocument();
@@ -50,7 +48,7 @@ describe('AI Services Accessibility Tests', () => {
     });
 
     it('should have proper heading structure', () => {
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Main heading
       const mainHeading = screen.getByRole('heading', { level: 2 });
@@ -64,9 +62,7 @@ describe('AI Services Accessibility Tests', () => {
     it('should maintain accessibility with results displayed', async () => {
       mockedAiServices.getJobMatching.mockResolvedValue(mockJobMatchingResult);
 
-      const { container } = render(
-        <JobMatchingComponent resumeDocumentId="test-resume-123" />
-      );
+      const { container } = render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Simulate successful job matching (would normally be triggered by user action)
       // For this test, we'll manually set the component to show results
@@ -77,7 +73,7 @@ describe('AI Services Accessibility Tests', () => {
     });
 
     it('should have keyboard navigation support', () => {
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       const formElements = [
         screen.getByLabelText(/job type/i),
@@ -158,7 +154,7 @@ describe('AI Services Accessibility Tests', () => {
   describe('ResumeIntelligenceComponent Accessibility', () => {
     it('should not have accessibility violations', async () => {
       const { container } = render(
-        <ResumeIntelligenceComponent resumeDocumentId="test-resume-123" />
+        <ResumeIntelligenceComponent resumeDocumentId='test-resume-123' />
       );
 
       const results = await axe(container);
@@ -166,7 +162,7 @@ describe('AI Services Accessibility Tests', () => {
     });
 
     it('should have proper form structure for settings', () => {
-      render(<ResumeIntelligenceComponent resumeDocumentId="test-resume-123" />);
+      render(<ResumeIntelligenceComponent resumeDocumentId='test-resume-123' />);
 
       // Main form elements
       expect(screen.getByLabelText(/target roles/i)).toBeInTheDocument();
@@ -178,7 +174,7 @@ describe('AI Services Accessibility Tests', () => {
     });
 
     it('should handle dynamic form elements accessibly', () => {
-      render(<ResumeIntelligenceComponent resumeDocumentId="test-resume-123" />);
+      render(<ResumeIntelligenceComponent resumeDocumentId='test-resume-123' />);
 
       // Add target role button should be accessible
       const addButton = screen.getByRole('button', { name: /add target role/i });
@@ -240,7 +236,7 @@ describe('AI Services Accessibility Tests', () => {
 
   describe('Loading States Accessibility', () => {
     it('should announce loading states to screen readers', () => {
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Submit button should change to loading state accessibly
       const button = screen.getByRole('button', { name: /find job matches/i });
@@ -263,7 +259,7 @@ describe('AI Services Accessibility Tests', () => {
     it('should maintain proper color contrast ratios', () => {
       // This test would use tools like jest-axe to check color contrast
       // For now, we ensure important elements are present
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Important interactive elements should be present
       expect(screen.getByRole('button', { name: /find job matches/i })).toBeInTheDocument();
@@ -271,7 +267,7 @@ describe('AI Services Accessibility Tests', () => {
     });
 
     it('should not rely solely on color to convey information', () => {
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Form validation should use more than just color
       // Required fields should be marked with asterisks or "required" text
@@ -281,7 +277,7 @@ describe('AI Services Accessibility Tests', () => {
 
   describe('Mobile Accessibility', () => {
     it('should have appropriate touch targets', () => {
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Buttons should be large enough for touch interaction
       const submitButton = screen.getByRole('button', { name: /find job matches/i });
@@ -293,7 +289,7 @@ describe('AI Services Accessibility Tests', () => {
 
   describe('Screen Reader Navigation', () => {
     it('should have proper landmarks and regions', () => {
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Main content should be properly structured
       const mainHeading = screen.getByRole('heading', { level: 2 });

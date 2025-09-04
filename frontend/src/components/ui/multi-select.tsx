@@ -50,17 +50,13 @@ export function MultiSelect({
   // Filter options based on search query
   const filteredOptions = React.useMemo(() => {
     if (!searchQuery) return options;
-    return options.filter(option =>
-      option.label.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    return options.filter(option => option.label.toLowerCase().includes(searchQuery.toLowerCase()));
   }, [options, searchQuery]);
 
   // Check if a create option should be shown
   const shouldShowCreateOption = React.useMemo(() => {
     if (!creatable || !searchQuery.trim()) return false;
-    const exists = options.some(
-      option => option.label.toLowerCase() === searchQuery.toLowerCase()
-    );
+    const exists = options.some(option => option.label.toLowerCase() === searchQuery.toLowerCase());
     return !exists;
   }, [creatable, searchQuery, options]);
 
@@ -117,8 +113,8 @@ export function MultiSelect({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
-          role="combobox"
+          variant='outline'
+          role='combobox'
           aria-expanded={open}
           className={cn(
             'w-full justify-between text-left font-normal min-h-10 h-auto p-2',
@@ -127,33 +123,32 @@ export function MultiSelect({
           )}
           disabled={disabled}
         >
-          <div className="flex flex-wrap gap-1 flex-1 mr-2">
+          <div className='flex flex-wrap gap-1 flex-1 mr-2'>
             {selectedOptions.length > 0 ? (
               selectedOptions.length <= maxDisplay ? (
-                selectedOptions.map((option) => (
-                  <Badge
-                    key={option.value}
-                    variant="secondary"
-                    className="text-xs h-6 px-2 gap-1"
-                  >
+                selectedOptions.map(option => (
+                  <Badge key={option.value} variant='secondary' className='text-xs h-6 px-2 gap-1'>
                     {option.label}
                     <button
-                      type="button"
-                      onClick={(e) => {
+                      type='button'
+                      onClick={e => {
                         e.preventDefault();
                         e.stopPropagation();
                         handleRemove(option.value);
                       }}
-                      className="ml-1 hover:bg-secondary-foreground/20 rounded-full p-0.5"
+                      className='ml-1 hover:bg-secondary-foreground/20 rounded-full p-0.5'
                     >
-                      <X className="h-2.5 w-2.5" />
+                      <X className='h-2.5 w-2.5' />
                     </button>
                   </Badge>
                 ))
               ) : (
-                <span className="text-sm">
-                  {selectedOptions.slice(0, maxDisplay).map(option => option.label).join(', ')}
-                  <Badge variant="secondary" className="ml-1 text-xs">
+                <span className='text-sm'>
+                  {selectedOptions
+                    .slice(0, maxDisplay)
+                    .map(option => option.label)
+                    .join(', ')}
+                  <Badge variant='secondary' className='ml-1 text-xs'>
                     +{selectedOptions.length - maxDisplay}
                   </Badge>
                 </span>
@@ -162,67 +157,65 @@ export function MultiSelect({
               <span>{placeholder}</span>
             )}
           </div>
-          <div className="flex items-center gap-1">
+          <div className='flex items-center gap-1'>
             {selectedOptions.length > 0 && (
               <button
-                type="button"
-                onClick={(e) => {
+                type='button'
+                onClick={e => {
                   e.preventDefault();
                   e.stopPropagation();
                   handleClearAll();
                 }}
-                className="hover:bg-secondary-foreground/20 rounded-full p-1"
+                className='hover:bg-secondary-foreground/20 rounded-full p-1'
               >
-                <X className="h-3 w-3" />
+                <X className='h-3 w-3' />
               </button>
             )}
-            <ChevronDown className="h-4 w-4 opacity-50" />
+            <ChevronDown className='h-4 w-4 opacity-50' />
           </div>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0" align="start">
-        <div className="flex flex-col">
+      <PopoverContent className='w-full p-0' align='start'>
+        <div className='flex flex-col'>
           {searchable && (
-            <div className="flex items-center border-b px-3 py-2">
+            <div className='flex items-center border-b px-3 py-2'>
               <Input
                 ref={inputRef}
-                placeholder="Search options..."
+                placeholder='Search options...'
                 value={inputValue}
-                onChange={(e) => {
+                onChange={e => {
                   setInputValue(e.target.value);
                   setSearchQuery(e.target.value);
                 }}
                 onKeyDown={handleKeyDown}
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 h-6"
+                className='border-0 focus-visible:ring-0 focus-visible:ring-offset-0 p-0 h-6'
               />
             </div>
           )}
 
           <ScrollArea style={{ maxHeight }}>
-            <div className="p-1">
+            <div className='p-1'>
               {filteredOptions.length === 0 && !shouldShowCreateOption ? (
-                <div className="py-6 text-center text-sm text-muted-foreground">
-                  {emptyMessage}
-                </div>
+                <div className='py-6 text-center text-sm text-muted-foreground'>{emptyMessage}</div>
               ) : (
                 <>
                   {shouldShowCreateOption && (
                     <button
-                      type="button"
+                      type='button'
                       onClick={handleCreate}
-                      className="flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground gap-2"
+                      className='flex w-full items-center rounded-sm px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground gap-2'
                     >
-                      <Plus className="h-4 w-4" />
+                      <Plus className='h-4 w-4' />
                       Create "{searchQuery}"
                     </button>
                   )}
 
-                  {filteredOptions.map((option) => {
+                  {filteredOptions.map(option => {
                     const isSelected = value.includes(option.value);
                     return (
                       <button
                         key={option.value}
-                        type="button"
+                        type='button'
                         onClick={() => handleSelect(option.value)}
                         disabled={option.disabled}
                         className={cn(
@@ -231,15 +224,17 @@ export function MultiSelect({
                           option.disabled && 'opacity-50 cursor-not-allowed'
                         )}
                       >
-                        <div className={cn(
-                          'flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                          isSelected
-                            ? 'bg-primary text-primary-foreground'
-                            : 'opacity-50 [&_svg]:invisible'
-                        )}>
-                          <Check className="h-3 w-3" />
+                        <div
+                          className={cn(
+                            'flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                            isSelected
+                              ? 'bg-primary text-primary-foreground'
+                              : 'opacity-50 [&_svg]:invisible'
+                          )}
+                        >
+                          <Check className='h-3 w-3' />
                         </div>
-                        <span className="flex-1 text-left">{option.label}</span>
+                        <span className='flex-1 text-left'>{option.label}</span>
                       </button>
                     );
                   })}
@@ -249,16 +244,14 @@ export function MultiSelect({
           </ScrollArea>
 
           {selectedOptions.length > 0 && (
-            <div className="flex items-center justify-between border-t px-3 py-2 text-sm">
-              <span className="text-muted-foreground">
-                {selectedOptions.length} selected
-              </span>
+            <div className='flex items-center justify-between border-t px-3 py-2 text-sm'>
+              <span className='text-muted-foreground'>{selectedOptions.length} selected</span>
               <Button
-                type="button"
-                variant="ghost"
-                size="sm"
+                type='button'
+                variant='ghost'
+                size='sm'
                 onClick={handleClearAll}
-                className="h-6 px-2"
+                className='h-6 px-2'
               >
                 Clear all
               </Button>
@@ -271,7 +264,8 @@ export function MultiSelect({
 }
 
 // Specialized skills multi-select for Career Copilot
-interface SkillsMultiSelectProps extends Omit<MultiSelectProps, 'options' | 'creatable' | 'onCreateOption'> {
+interface SkillsMultiSelectProps
+  extends Omit<MultiSelectProps, 'options' | 'creatable' | 'onCreateOption'> {
   availableSkills: string[];
   onAddSkill?: (skill: string) => void;
   categories?: { [category: string]: string[] };
@@ -285,7 +279,7 @@ export function SkillsMultiSelect({
 }: SkillsMultiSelectProps) {
   const options: MultiSelectOption[] = availableSkills.map(skill => ({
     value: skill,
-    label: skill
+    label: skill,
   }));
 
   return (
@@ -293,8 +287,8 @@ export function SkillsMultiSelect({
       options={options}
       creatable={!!onAddSkill}
       onCreateOption={onAddSkill}
-      placeholder="Select skills..."
-      emptyMessage="No skills found. Type to create a new skill."
+      placeholder='Select skills...'
+      emptyMessage='No skills found. Type to create a new skill.'
       {...props}
     />
   );

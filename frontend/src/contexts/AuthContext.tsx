@@ -83,67 +83,53 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
   }, []);
 
-  const login = useCallback(
-    async (email: string, password: string): Promise<User> => {
-      setLoading(true);
-      setError(null);
-      try {
-        const firebaseUser = (await authService.signIn(
-          email,
-          password
-        )) as FirebaseUser;
-        const token = await firebaseUser.getIdToken();
-        const user: User = {
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          displayName: firebaseUser.displayName,
-          token,
-          getIdToken: () => firebaseUser.getIdToken(),
-        };
-        setUser(user);
-        return user;
-      } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Login failed';
-        setError(errorMessage);
-        throw err;
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
+  const login = useCallback(async (email: string, password: string): Promise<User> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const firebaseUser = (await authService.signIn(email, password)) as FirebaseUser;
+      const token = await firebaseUser.getIdToken();
+      const user: User = {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName,
+        token,
+        getIdToken: () => firebaseUser.getIdToken(),
+      };
+      setUser(user);
+      return user;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Login failed';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  const register = useCallback(
-    async (email: string, password: string): Promise<User> => {
-      setLoading(true);
-      setError(null);
-      try {
-        const firebaseUser = (await authService.signUp(
-          email,
-          password
-        )) as FirebaseUser;
-        const token = await firebaseUser.getIdToken();
-        const user: User = {
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          displayName: firebaseUser.displayName,
-          token,
-          getIdToken: () => firebaseUser.getIdToken(),
-        };
-        setUser(user);
-        return user;
-      } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Registration failed';
-        setError(errorMessage);
-        throw err;
-      } finally {
-        setLoading(false);
-      }
-    },
-    []
-  );
+  const register = useCallback(async (email: string, password: string): Promise<User> => {
+    setLoading(true);
+    setError(null);
+    try {
+      const firebaseUser = (await authService.signUp(email, password)) as FirebaseUser;
+      const token = await firebaseUser.getIdToken();
+      const user: User = {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName,
+        token,
+        getIdToken: () => firebaseUser.getIdToken(),
+      };
+      setUser(user);
+      return user;
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Registration failed';
+      setError(errorMessage);
+      throw err;
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   const signInWithGoogle = useCallback(async (): Promise<User> => {
     setLoading(true);
@@ -161,8 +147,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setUser(user);
       return user;
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Google sign-in failed';
+      const errorMessage = err instanceof Error ? err.message : 'Google sign-in failed';
       setError(errorMessage);
       throw err;
     } finally {

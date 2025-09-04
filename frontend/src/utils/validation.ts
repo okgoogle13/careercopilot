@@ -21,9 +21,7 @@ export const validationRules = {
     },
 
   email:
-    (
-      message: string = 'Please enter a valid email address'
-    ): ValidationRule<string> =>
+    (message: string = 'Please enter a valid email address'): ValidationRule<string> =>
     value => {
       if (!value) return null; // Let required rule handle empty values
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,8 +32,7 @@ export const validationRules = {
     (min: number, message?: string): ValidationRule<string> =>
     value => {
       if (!value) return null; // Let required rule handle empty values
-      const actualMessage =
-        message || `Must be at least ${min} characters long`;
+      const actualMessage = message || `Must be at least ${min} characters long`;
       return value.length >= min ? null : actualMessage;
     },
 
@@ -43,8 +40,7 @@ export const validationRules = {
     (max: number, message?: string): ValidationRule<string> =>
     value => {
       if (!value) return null; // Let required rule handle empty values
-      const actualMessage =
-        message || `Must be no more than ${max} characters long`;
+      const actualMessage = message || `Must be no more than ${max} characters long`;
       return value.length <= max ? null : actualMessage;
     },
 
@@ -60,13 +56,7 @@ export const validationRules = {
       const hasNumber = /\d/.test(value);
       const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value);
 
-      if (
-        hasMinLength &&
-        hasUppercase &&
-        hasLowercase &&
-        hasNumber &&
-        hasSpecialChar
-      ) {
+      if (hasMinLength && hasUppercase && hasLowercase && hasNumber && hasSpecialChar) {
         return null;
       }
       return message;
@@ -85,9 +75,7 @@ export const validationRules = {
     },
 
   phoneNumber:
-    (
-      message: string = 'Please enter a valid phone number'
-    ): ValidationRule<string> =>
+    (message: string = 'Please enter a valid phone number'): ValidationRule<string> =>
     value => {
       if (!value) return null;
       const phoneRegex = /^[+]?[1-9][\d]{0,15}$/;
@@ -95,9 +83,7 @@ export const validationRules = {
     },
 
   numeric:
-    (
-      message: string = 'Please enter a valid number'
-    ): ValidationRule<string | number> =>
+    (message: string = 'Please enter a valid number'): ValidationRule<string | number> =>
     value => {
       if (!value) return null;
       const num = typeof value === 'string' ? parseFloat(value) : value;
@@ -130,10 +116,7 @@ export const validationRules = {
     },
 
   custom:
-    <T>(
-      validationFn: (value: T) => boolean,
-      message: string
-    ): ValidationRule<T> =>
+    <T>(validationFn: (value: T) => boolean, message: string): ValidationRule<T> =>
     value => {
       if (!value) return null;
       return validationFn(value) ? null : message;

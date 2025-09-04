@@ -21,9 +21,7 @@ const missingFields = requiredFields.filter(
 
 if (missingFields.length > 0) {
   console.error('Missing Firebase configuration fields:', missingFields);
-  throw new Error(
-    `Missing Firebase configuration: ${missingFields.join(', ')}`
-  );
+  throw new Error(`Missing Firebase configuration: ${missingFields.join(', ')}`);
 }
 
 // Initialize Firebase
@@ -117,10 +115,7 @@ export const debugInfo = {
 
 // Global error handler for unhandled Firebase errors
 window.addEventListener('unhandledrejection', event => {
-  if (
-    event.reason?.message?.includes('firebase') ||
-    event.reason?.code?.startsWith('auth/')
-  ) {
+  if (event.reason?.message?.includes('firebase') || event.reason?.code?.startsWith('auth/')) {
     console.error('🚨 Unhandled Firebase error:', event.reason);
 
     // Prevent the error from crashing the app

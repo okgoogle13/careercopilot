@@ -126,11 +126,7 @@ class AuthService {
 
     if (firebaseReady && auth) {
       try {
-        const result = await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+        const result = await createUserWithEmailAndPassword(auth, email, password);
         console.log('🔥 Firebase sign-up successful.');
         return result.user;
       } catch (error: unknown) {
@@ -242,7 +238,8 @@ export const getDB = () => {
 
 // For compatibility, also export db directly (but may be null initially)
 
-
 // Initial Firebase connection attempt when the module loads.
 // Errors are handled internally by initializeFirebase and logged.
-initializeFirebase().catch(() => { /* errors are already logged */ });
+initializeFirebase().catch(() => {
+  /* errors are already logged */
+});

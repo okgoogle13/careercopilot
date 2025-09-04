@@ -28,9 +28,9 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, className = ''
   }, []);
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className='min-h-screen bg-background flex flex-col'>
       <Navbar onMenuClick={toggleSidebar} />
-      <div className="flex flex-1 overflow-hidden">
+      <div className='flex flex-1 overflow-hidden'>
         <Sidebar
           isOpen={isSidebarOpen}
           onClose={closeSidebar}
@@ -38,20 +38,18 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children, className = ''
           onTabChange={handleTabChange}
         />
         <main
-          id="main-content"
+          id='main-content'
           className={`flex-1 overflow-y-auto focus:outline-none transition-all duration-300 ${
             isSidebarOpen ? 'lg:ml-64' : ''
           } ${className}`}
-          role="main"
+          role='main'
           tabIndex={0}
           onClick={() => isSidebarOpen && closeSidebar()}
         >
-          <div className="container mx-auto px-4 py-6">
-            {children}
-          </div>
+          <div className='container mx-auto px-4 py-6'>{children}</div>
         </main>
       </div>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position='top-center' reverseOrder={false} />
     </div>
   );
 };

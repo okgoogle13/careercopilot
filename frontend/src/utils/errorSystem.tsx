@@ -26,12 +26,11 @@ export const createError = {
     errorHandler.createError(ErrorType.AUTHORIZATION, message, undefined, context),
 
   api: (message: string, statusCode?: number, context?: Record<string, unknown>) => {
-    const errorType = statusCode && statusCode >= 500
-      ? ErrorType.API_SERVER_ERROR
-      : ErrorType.API_CLIENT_ERROR;
+    const errorType =
+      statusCode && statusCode >= 500 ? ErrorType.API_SERVER_ERROR : ErrorType.API_CLIENT_ERROR;
     return errorHandler.createError(errorType, message, undefined, {
       ...context,
-      statusCode
+      statusCode,
     });
   },
 
@@ -39,7 +38,7 @@ export const createError = {
     errorHandler.createError(ErrorType.FILE_VALIDATION, message, undefined, context),
 
   ai: (message: string, context?: Record<string, unknown>) =>
-    errorHandler.createError(ErrorType.AI_SERVICE, message, undefined, context)
+    errorHandler.createError(ErrorType.AI_SERVICE, message, undefined, context),
 };
 
 // Higher-order component for error boundaries
@@ -71,9 +70,8 @@ export const withErrorHandling = async <T,>(
     return await apiCall();
   } catch (error) {
     if (error instanceof Response) {
-      const errorType = error.status >= 500
-        ? ErrorType.API_SERVER_ERROR
-        : ErrorType.API_CLIENT_ERROR;
+      const errorType =
+        error.status >= 500 ? ErrorType.API_SERVER_ERROR : ErrorType.API_CLIENT_ERROR;
 
       let message = 'An API error occurred';
       try {
@@ -88,7 +86,7 @@ export const withErrorHandling = async <T,>(
         ...context,
         statusCode: error.status,
         url: error.url,
-        errorType
+        errorType,
       });
     } else {
       errorHandler.handleError(error as Error, context);
@@ -101,12 +99,7 @@ export const withErrorHandling = async <T,>(
 export const handleValidationErrors = (errors: Record<string, string[]>) => {
   Object.entries(errors).forEach(([field, fieldErrors]) => {
     fieldErrors.forEach(errorMessage => {
-      errorHandler.createError(
-        ErrorType.FORM_VALIDATION,
-        errorMessage,
-        undefined,
-        { field }
-      );
+      errorHandler.createError(ErrorType.FORM_VALIDATION, errorMessage, undefined, { field });
     });
   });
 };

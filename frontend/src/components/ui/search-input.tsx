@@ -116,13 +116,11 @@ export function SearchInput({
     switch (e.key) {
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedIndex(prev =>
-          prev < suggestions.length - 1 ? prev + 1 : prev
-        );
+        setSelectedIndex(prev => (prev < suggestions.length - 1 ? prev + 1 : prev));
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setSelectedIndex(prev => prev > -1 ? prev - 1 : prev);
+        setSelectedIndex(prev => (prev > -1 ? prev - 1 : prev));
         break;
       case 'Enter':
         e.preventDefault();
@@ -156,18 +154,18 @@ export function SearchInput({
 
   return (
     <div className={cn('relative', className)}>
-      <div className="relative flex items-center">
-        <div className="absolute left-3 flex items-center pointer-events-none">
+      <div className='relative flex items-center'>
+        <div className='absolute left-3 flex items-center pointer-events-none'>
           {loading ? (
-            <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+            <Loader2 className='h-4 w-4 animate-spin text-muted-foreground' />
           ) : (
-            <Search className="h-4 w-4 text-muted-foreground" />
+            <Search className='h-4 w-4 text-muted-foreground' />
           )}
         </div>
 
         <Input
           ref={inputRef}
-          type="text"
+          type='text'
           value={internalValue}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
@@ -182,30 +180,30 @@ export function SearchInput({
           {...props}
         />
 
-        <div className="absolute right-2 flex items-center gap-1">
+        <div className='absolute right-2 flex items-center gap-1'>
           {internalValue && (
             <Button
-              type="button"
-              variant="ghost"
-              size="sm"
+              type='button'
+              variant='ghost'
+              size='sm'
               onClick={handleClear}
-              className="h-6 w-6 p-0 hover:bg-destructive/10 hover:text-destructive"
+              className='h-6 w-6 p-0 hover:bg-destructive/10 hover:text-destructive'
               tabIndex={-1}
             >
-              <X className="h-3 w-3" />
+              <X className='h-3 w-3' />
             </Button>
           )}
 
           {showSearchButton && (
             <Button
-              type="button"
-              variant="ghost"
-              size="sm"
+              type='button'
+              variant='ghost'
+              size='sm'
               onClick={handleSearchClick}
-              className="h-6 w-6 p-0"
+              className='h-6 w-6 p-0'
               disabled={loading || !internalValue.trim()}
             >
-              <Search className="h-3 w-3" />
+              <Search className='h-3 w-3' />
             </Button>
           )}
         </div>
@@ -215,12 +213,12 @@ export function SearchInput({
       {showSuggestions && (
         <div
           ref={suggestionsRef}
-          className="absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover p-1 shadow-md animate-in fade-in-0 zoom-in-95"
+          className='absolute top-full left-0 right-0 z-50 mt-1 max-h-60 overflow-auto rounded-md border bg-popover p-1 shadow-md animate-in fade-in-0 zoom-in-95'
         >
           {suggestions.map((suggestion, index) => (
             <button
               key={`${suggestion}-${index}`}
-              type="button"
+              type='button'
               onClick={() => handleSuggestionClick(suggestion)}
               className={cn(
                 'w-full px-3 py-2 text-sm text-left rounded-sm transition-colors',
@@ -262,11 +260,11 @@ export function FilterSearch({
         value={filterText}
         onChange={onFilterChange}
         placeholder={placeholder}
-        className="flex-1"
+        className='flex-1'
         {...props}
       />
       {showResultCount && resultCount !== undefined && (
-        <span className="text-sm text-muted-foreground whitespace-nowrap">
+        <span className='text-sm text-muted-foreground whitespace-nowrap'>
           {resultCount} result{resultCount !== 1 ? 's' : ''}
         </span>
       )}

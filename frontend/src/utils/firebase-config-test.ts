@@ -35,14 +35,7 @@ export function testFirebaseConfig(): ConfigTestResult {
     }
 
     // Check for demo/placeholder values
-    const demoPatterns = [
-      'demo',
-      'test',
-      'placeholder',
-      'your-',
-      'default',
-      'example',
-    ];
+    const demoPatterns = ['demo', 'test', 'placeholder', 'your-', 'default', 'example'];
     const invalidVars = requiredVars.filter(varName => {
       const value = config[varName]?.toLowerCase() || '';
       return demoPatterns.some(pattern => value.includes(pattern));
@@ -76,8 +69,7 @@ export function testFirebaseConfig(): ConfigTestResult {
         success: false,
         message: 'Invalid project ID format',
         details: {
-          projectIdFormat:
-            'Should contain only lowercase letters, numbers, and hyphens',
+          projectIdFormat: 'Should contain only lowercase letters, numbers, and hyphens',
           currentValue: projectId,
         },
       };

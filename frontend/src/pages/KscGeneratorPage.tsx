@@ -11,9 +11,7 @@ interface ProfileVariation {
 
 const KscGeneratorPage: React.FC = () => {
   const { user } = useAuth();
-  const [profileVariations, setProfileVariations] = useState<
-    ProfileVariation[]
-  >([]);
+  const [profileVariations, setProfileVariations] = useState<ProfileVariation[]>([]);
   const [selectedProfileId, setSelectedProfileId] = useState<string>('');
   const [kscStatements, setKscStatements] = useState<string[]>(['']);
   const [loading, setLoading] = useState<boolean>(true);
@@ -34,19 +32,14 @@ const KscGeneratorPage: React.FC = () => {
         const response = await fetch('/api/v1/profile/variations', {
           headers: { Authorization: `Bearer ${token}` },
         });
-        if (!response.ok)
-          throw new Error('Failed to fetch profile variations.');
+        if (!response.ok) throw new Error('Failed to fetch profile variations.');
         const data = await response.json();
         setProfileVariations(data);
         if (data.length > 0) {
           setSelectedProfileId(data[0].id); // Default to the first profile
         }
       } catch (error: unknown) {
-        toast.error(
-          error instanceof Error
-            ? error.message
-            : 'Could not load profile data.'
-        );
+        toast.error(error instanceof Error ? error.message : 'Could not load profile data.');
       } finally {
         setLoading(false);
       }
@@ -113,9 +106,7 @@ const KscGeneratorPage: React.FC = () => {
         throw new Error(errorData.detail || 'Failed to generate responses.');
       }
 
-      toast.success(
-        "Success! Your KSC responses have been generated and saved to 'My Documents'."
-      );
+      toast.success("Success! Your KSC responses have been generated and saved to 'My Documents'.");
       navigate('/documents');
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : 'Unknown error');
@@ -124,27 +115,21 @@ const KscGeneratorPage: React.FC = () => {
     }
   };
 
-  if (loading) return <div className="p-8">Loading...</div>;
+  if (loading) return <div className='p-8'>Loading...</div>;
 
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">KSC Response Generator</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="space-y-6 bg-white shadow-md rounded-lg p-6"
-      >
+    <div className='p-8 max-w-4xl mx-auto'>
+      <h1 className='text-3xl font-bold mb-6'>KSC Response Generator</h1>
+      <form onSubmit={handleSubmit} className='space-y-6 bg-white shadow-md rounded-lg p-6'>
         <div>
-          <label
-            htmlFor="profile-select"
-            className="block text-lg font-medium text-gray-700 mb-2"
-          >
+          <label htmlFor='profile-select' className='block text-lg font-medium text-gray-700 mb-2'>
             1. Select Base Profile Variation
           </label>
           <select
-            id="profile-select"
+            id='profile-select'
             value={selectedProfileId}
             onChange={e => setSelectedProfileId(e.target.value)}
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+            className='mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md'
             disabled={profileVariations.length === 0}
           >
             {profileVariations.length > 0 ? (
@@ -160,24 +145,24 @@ const KscGeneratorPage: React.FC = () => {
         </div>
 
         <div>
-          <label className="block text-lg font-medium text-gray-700 mb-2">
+          <label className='block text-lg font-medium text-gray-700 mb-2'>
             2. Enter Key Selection Criteria
           </label>
-          <div className="space-y-3">
+          <div className='space-y-3'>
             {kscStatements.map((statement, index) => (
-              <div key={index} className="flex items-center space-x-2">
+              <div key={index} className='flex items-center space-x-2'>
                 <input
-                  type="text"
+                  type='text'
                   value={statement}
                   onChange={e => handleStatementChange(index, e.target.value)}
                   placeholder={`Criterion ${index + 1}`}
-                  className="flex-grow block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  className='flex-grow block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                 />
                 {kscStatements.length > 1 && (
                   <button
-                    type="button"
+                    type='button'
                     onClick={() => removeStatement(index)}
-                    className="text-red-500 hover:text-red-700 font-semibold"
+                    className='text-red-500 hover:text-red-700 font-semibold'
                   >
                     Remove
                   </button>
@@ -186,19 +171,19 @@ const KscGeneratorPage: React.FC = () => {
             ))}
           </div>
           <button
-            type="button"
+            type='button'
             onClick={addStatement}
-            className="mt-4 text-blue-600 hover:text-blue-800 font-medium"
+            className='mt-4 text-blue-600 hover:text-blue-800 font-medium'
           >
             + Add Criterion
           </button>
         </div>
 
-        <div className="pt-4 border-t">
+        <div className='pt-4 border-t'>
           <button
-            type="submit"
+            type='submit'
             disabled={submitting || loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400'
           >
             {submitting ? 'Generating...' : 'Generate KSC Responses'}
           </button>

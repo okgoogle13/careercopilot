@@ -1,11 +1,7 @@
 // Custom hook for standardized API error handling
 import { useState, useCallback } from 'react';
 import toast from 'react-hot-toast';
-import {
-  extractErrorMessage,
-  getErrorMessage,
-  reportError,
-} from '../utils/errors';
+import { extractErrorMessage, getErrorMessage, reportError } from '../utils/errors';
 
 interface ApiErrorOptions {
   showToast?: boolean;
@@ -27,34 +23,30 @@ const useApiError = (): UseApiErrorReturn => {
   const [error, setError] = useState<string | null>(null);
   const [isRetrying, setIsRetrying] = useState(false);
 
-  const handleApiError = useCallback(
-    (error: unknown, options: ApiErrorOptions = {}) => {
-      const {
-        showToast = true,
-        showInline = false,
-        fallbackMessage = 'An unexpected error occurred',
-        context,
-      } = options;
+  const handleApiError = useCallback((error: unknown, options: ApiErrorOptions = {}) => {
+    const {
+      showToast = true,
+      showInline = false,
+      fallbackMessage = 'An unexpected error occurred',
+      context,
+    } = options;
 
-      // Report error for debugging/monitoring
-      reportError(error, context);
+    // Report error for debugging/monitoring
+    reportError(error, context);
 
-      // Get user-friendly error message
-      const errorMessage =
-        getErrorMessage(error) || extractErrorMessage(error, fallbackMessage);
+    // Get user-friendly error message
+    const errorMessage = getErrorMessage(error) || extractErrorMessage(error, fallbackMessage);
 
-      // Show toast notification
-      if (showToast) {
-        toast.error(errorMessage);
-      }
+    // Show toast notification
+    if (showToast) {
+      toast.error(errorMessage);
+    }
 
-      // Set inline error
-      if (showInline) {
-        setError(errorMessage);
-      }
-    },
-    []
-  );
+    // Set inline error
+    if (showInline) {
+      setError(errorMessage);
+    }
+  }, []);
 
   const retry = useCallback(
     async (retryFn: () => Promise<void>) => {
@@ -98,10 +90,7 @@ const useApiOperation = () => {
   const { error, handleApiError, clearError } = useApiError();
 
   const execute = useCallback(
-    async <T>(
-      operation: () => Promise<T>,
-      options?: ApiErrorOptions
-    ): Promise<T | null> => {
+    async <T>(operation: () => Promise<T>, options?: ApiErrorOptions): Promise<T | null> => {
       setLoading(true);
       clearError();
 

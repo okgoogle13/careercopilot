@@ -14,14 +14,19 @@ type ErrorAction =
   | { type: 'REMOVE_ERROR'; payload: string }
   | { type: 'CLEAR_ERRORS' }
   | { type: 'UPDATE_ERROR'; payload: { id: string; updates: Partial<AppError> } }
-  | { type: 'SET_CONFIG'; payload: Partial<Pick<ErrorState, 'maxErrors' | 'autoHideDelay' | 'enableNotifications'>> };
+  | {
+      type: 'SET_CONFIG';
+      payload: Partial<Pick<ErrorState, 'maxErrors' | 'autoHideDelay' | 'enableNotifications'>>;
+    };
 
 interface ErrorContextType extends ErrorState {
   addError: (error: Error | AppError, context?: any) => AppError;
   removeError: (id: string) => void;
   clearErrors: () => void;
   retryError: (id: string) => Promise<boolean>;
-  updateConfig: (config: Partial<Pick<ErrorState, 'maxErrors' | 'autoHideDelay' | 'enableNotifications'>>) => void;
+  updateConfig: (
+    config: Partial<Pick<ErrorState, 'maxErrors' | 'autoHideDelay' | 'enableNotifications'>>
+  ) => void;
 }
 
 const initialState: ErrorState = {
@@ -40,7 +45,7 @@ function errorReducer(state: ErrorState, action: ErrorAction): ErrorState {
     case 'REMOVE_ERROR':
       return {
         ...state,
-        errors: state.errors.filter(error => error.id !== action.payload)
+        errors: state.errors.filter(error => error.id !== action.payload),
       };
 
     case 'CLEAR_ERRORS':
@@ -50,10 +55,8 @@ function errorReducer(state: ErrorState, action: ErrorAction): ErrorState {
       return {
         ...state,
         errors: state.errors.map(error =>
-          error.id === action.payload.id
-            ? { ...error, ...action.payload.updates }
-            : error
-        )
+          error.id === action.payload.id ? { ...error, ...action.payload.updates } : error
+        ),
       };
 
     case 'SET_CONFIG':
@@ -77,54 +80,61 @@ export function ErrorProvider({
   children,
   maxErrors = 5,
   autoHideDelay = 5000,
-  enableNotifications = true
+  enableNotifications = true,
 }: ErrorProviderProps) {
   const [state, dispatch] = useReducer(errorReducer, {
     ...initialState,
     maxErrors,
     autoHideDelay,
-    enableNotifications
+    enableNotifications,
   });
 
-  const addError = useCallback((error: Error | AppError, context?: any): AppError => {
-    let appError: AppError;
+  const addError = useCallback(
+    (error: Error | AppError, context?: any): AppError => {
+      let appError: AppError;
 
-    if ('type' in error && 'severity' in error) {
-      appError = error;
-    } else {
-      appError = errorHandler.handleError(error, context);
-    }
-
-    dispatch({ type: 'ADD_ERROR', payload: appError });
-
-    // Auto-hide non-critical errors
-    if (appError.severity !== 'CRITICAL' && state.autoHideDelay > 0) {
-      setTimeout(() => {
-        dispatch({ type: 'REMOVE_ERROR', payload: appError.id });
-      }, state.autoHideDelay);
-    }
-
-    // Browser notification for critical errors
-    if (state.enableNotifications && appError.severity === 'CRITICAL' && 'Notification' in window) {
-      if (Notification.permission === 'granted') {
-        new Notification('Critical Error - CareerCopilot', {
-          body: appError.userMessage,
-          icon: '/favicon.ico'
-        });
-      } else if (Notification.permission !== 'denied') {
-        Notification.requestPermission().then(permission => {
-          if (permission === 'granted') {
-            new Notification('Critical Error - CareerCopilot', {
-              body: appError.userMessage,
-              icon: '/favicon.ico'
-            });
-          }
-        });
+      if ('type' in error && 'severity' in error) {
+        appError = error;
+      } else {
+        appError = errorHandler.handleError(error, context);
       }
-    }
 
-    return appError;
-  }, [state.autoHideDelay, state.enableNotifications]);
+      dispatch({ type: 'ADD_ERROR', payload: appError });
+
+      // Auto-hide non-critical errors
+      if (appError.severity !== 'CRITICAL' && state.autoHideDelay > 0) {
+        setTimeout(() => {
+          dispatch({ type: 'REMOVE_ERROR', payload: appError.id });
+        }, state.autoHideDelay);
+      }
+
+      // Browser notification for critical errors
+      if (
+        state.enableNotifications &&
+        appError.severity === 'CRITICAL' &&
+        'Notification' in window
+      ) {
+        if (Notification.permission === 'granted') {
+          new Notification('Critical Error - CareerCopilot', {
+            body: appError.userMessage,
+            icon: '/favicon.ico',
+          });
+        } else if (Notification.permission !== 'denied') {
+          Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+              new Notification('Critical Error - CareerCopilot', {
+                body: appError.userMessage,
+                icon: '/favicon.ico',
+              });
+            }
+          });
+        }
+      }
+
+      return appError;
+    },
+    [state.autoHideDelay, state.enableNotifications]
+  );
 
   const removeError = useCallback((id: string) => {
     dispatch({ type: 'REMOVE_ERROR', payload: id });
@@ -134,29 +144,35 @@ export function ErrorProvider({
     dispatch({ type: 'CLEAR_ERRORS' });
   }, []);
 
-  const retryError = useCallback(async (id: string): Promise<boolean> => {
-    const error = state.errors.find(e => e.id === id);
-    if (!error) return false;
+  const retryError = useCallback(
+    async (id: string): Promise<boolean> => {
+      const error = state.errors.find(e => e.id === id);
+      if (!error) return false;
 
-    const success = await errorHandler.retry(error);
-    if (success) {
-      removeError(id);
-    } else {
-      dispatch({
-        type: 'UPDATE_ERROR',
-        payload: {
-          id,
-          updates: { retryCount: error.retryCount }
-        }
-      });
-    }
+      const success = await errorHandler.retry(error);
+      if (success) {
+        removeError(id);
+      } else {
+        dispatch({
+          type: 'UPDATE_ERROR',
+          payload: {
+            id,
+            updates: { retryCount: error.retryCount },
+          },
+        });
+      }
 
-    return success;
-  }, [state.errors, removeError]);
+      return success;
+    },
+    [state.errors, removeError]
+  );
 
-  const updateConfig = useCallback((config: Partial<Pick<ErrorState, 'maxErrors' | 'autoHideDelay' | 'enableNotifications'>>) => {
-    dispatch({ type: 'SET_CONFIG', payload: config });
-  }, []);
+  const updateConfig = useCallback(
+    (config: Partial<Pick<ErrorState, 'maxErrors' | 'autoHideDelay' | 'enableNotifications'>>) => {
+      dispatch({ type: 'SET_CONFIG', payload: config });
+    },
+    []
+  );
 
   // Set up global error handler
   useEffect(() => {
@@ -166,21 +182,18 @@ export function ErrorProvider({
         additionalData: {
           filename: event.filename,
           lineno: event.lineno,
-          colno: event.colno
-        }
+          colno: event.colno,
+        },
       });
     };
 
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
-      addError(
-        event.reason instanceof Error ? event.reason : new Error(String(event.reason)),
-        {
-          component: 'Global',
-          additionalData: {
-            type: 'unhandledrejection'
-          }
-        }
-      );
+      addError(event.reason instanceof Error ? event.reason : new Error(String(event.reason)), {
+        component: 'Global',
+        additionalData: {
+          type: 'unhandledrejection',
+        },
+      });
     };
 
     window.addEventListener('error', handleGlobalError);
@@ -198,14 +211,10 @@ export function ErrorProvider({
     removeError,
     clearErrors,
     retryError,
-    updateConfig
+    updateConfig,
   };
 
-  return (
-    <ErrorContext.Provider value={value}>
-      {children}
-    </ErrorContext.Provider>
-  );
+  return <ErrorContext.Provider value={value}>{children}</ErrorContext.Provider>;
 }
 
 export function useError(): ErrorContextType {
@@ -220,38 +229,38 @@ export function useError(): ErrorContextType {
 export function useErrorHandler() {
   const { addError } = useError();
 
-  const handleAsync = useCallback(async <T,>(
-    asyncFn: () => Promise<T>,
-    context?: Record<string, unknown>
-  ): Promise<T | null> => {
-    try {
-      return await asyncFn();
-    } catch (error) {
-      addError(error as Error, context);
-      return null;
-    }
-  }, [addError]);
-
-  const wrapFunction = useCallback(<T extends (...args: any[]) => any>(
-    fn: T,
-    context?: any
-  ): T => {
-    return ((...args: any[]) => {
+  const handleAsync = useCallback(
+    async <T,>(asyncFn: () => Promise<T>, context?: Record<string, unknown>): Promise<T | null> => {
       try {
-        const result = fn(...args);
-        if (result instanceof Promise) {
-          return result.catch((error: Error) => {
-            addError(error, context);
-            throw error;
-          });
-        }
-        return result;
+        return await asyncFn();
       } catch (error) {
         addError(error as Error, context);
-        throw error;
+        return null;
       }
-    }) as T;
-  }, [addError]);
+    },
+    [addError]
+  );
+
+  const wrapFunction = useCallback(
+    <T extends (...args: any[]) => any>(fn: T, context?: any): T => {
+      return ((...args: any[]) => {
+        try {
+          const result = fn(...args);
+          if (result instanceof Promise) {
+            return result.catch((error: Error) => {
+              addError(error, context);
+              throw error;
+            });
+          }
+          return result;
+        } catch (error) {
+          addError(error as Error, context);
+          throw error;
+        }
+      }) as T;
+    },
+    [addError]
+  );
 
   return { handleAsync, wrapFunction, addError };
 }

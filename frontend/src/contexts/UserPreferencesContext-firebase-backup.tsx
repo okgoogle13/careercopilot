@@ -1,11 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useMemo,
-  ReactNode,
-} from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { db } from '../firebase-config';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -26,9 +19,7 @@ interface UserPreferencesProviderProps {
   children: ReactNode;
 }
 
-export const UserPreferencesProvider: React.FC<
-  UserPreferencesProviderProps
-> = ({ children }) => {
+export const UserPreferencesProvider: React.FC<UserPreferencesProviderProps> = ({ children }) => {
   const [preferences, setPreferences] = useState<UserPreferences>({
     themeId: 'professional',
   });
@@ -66,8 +57,6 @@ export const UserPreferencesProvider: React.FC<
   const value = useMemo(() => preferences, [preferences]);
 
   return (
-    <UserPreferencesContext.Provider value={value}>
-      {children}
-    </UserPreferencesContext.Provider>
+    <UserPreferencesContext.Provider value={value}>{children}</UserPreferencesContext.Provider>
   );
 };

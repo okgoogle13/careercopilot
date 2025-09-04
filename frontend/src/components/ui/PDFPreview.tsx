@@ -30,21 +30,27 @@ const PDFPreview: React.FC<PDFPreviewProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onDocumentLoadSuccess = useCallback((pdf: any) => {
-    setNumPages(pdf.numPages);
-    setPageNumber(1);
-    setError(null);
-    setLoading(false);
-    onLoadSuccess?.(pdf);
-  }, [onLoadSuccess]);
+  const onDocumentLoadSuccess = useCallback(
+    (pdf: any) => {
+      setNumPages(pdf.numPages);
+      setPageNumber(1);
+      setError(null);
+      setLoading(false);
+      onLoadSuccess?.(pdf);
+    },
+    [onLoadSuccess]
+  );
 
-  const onDocumentLoadError = useCallback((error: Error) => {
-    setError(error.message);
-    setLoading(false);
-    setNumPages(0);
-    setPageNumber(1);
-    onLoadError?.(error);
-  }, [onLoadError]);
+  const onDocumentLoadError = useCallback(
+    (error: Error) => {
+      setError(error.message);
+      setLoading(false);
+      setNumPages(0);
+      setPageNumber(1);
+      onLoadError?.(error);
+    },
+    [onLoadError]
+  );
 
   const onPageLoadStart = useCallback(() => {
     setLoading(true);
@@ -99,13 +105,15 @@ const PDFPreview: React.FC<PDFPreviewProps> = ({
 
   if (!file) {
     return (
-      <div className={cn(
-        'flex items-center justify-center h-96 border-2 border-dashed border-border rounded-lg',
-        className
-      )}>
-        <div className="text-center">
-          <FileX className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <p className="text-sm text-muted-foreground">No PDF file provided</p>
+      <div
+        className={cn(
+          'flex items-center justify-center h-96 border-2 border-dashed border-border rounded-lg',
+          className
+        )}
+      >
+        <div className='text-center'>
+          <FileX className='h-12 w-12 text-muted-foreground mx-auto mb-4' />
+          <p className='text-sm text-muted-foreground'>No PDF file provided</p>
         </div>
       </div>
     );
@@ -114,76 +122,64 @@ const PDFPreview: React.FC<PDFPreviewProps> = ({
   return (
     <div className={cn('flex flex-col h-full', className)}>
       {showControls && (
-        <div className="flex items-center justify-between p-4 border-b bg-muted/30">
-          <div className="flex items-center gap-2">
+        <div className='flex items-center justify-between p-4 border-b bg-muted/30'>
+          <div className='flex items-center gap-2'>
             <Button
-              variant="outline"
-              size="sm"
+              variant='outline'
+              size='sm'
               onClick={goToPrevPage}
               disabled={pageNumber <= 1 || loading}
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className='h-4 w-4' />
             </Button>
-            <span className="text-sm font-medium px-2">
+            <span className='text-sm font-medium px-2'>
               {pageNumber} / {numPages}
             </span>
             <Button
-              variant="outline"
-              size="sm"
+              variant='outline'
+              size='sm'
               onClick={goToNextPage}
               disabled={pageNumber >= numPages || loading}
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className='h-4 w-4' />
             </Button>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className='flex items-center gap-2'>
             <Button
-              variant="outline"
-              size="sm"
+              variant='outline'
+              size='sm'
               onClick={zoomOut}
               disabled={scale <= 0.5 || loading}
             >
-              <ZoomOut className="h-4 w-4" />
+              <ZoomOut className='h-4 w-4' />
             </Button>
-            <span className="text-sm font-medium px-2">
-              {Math.round(scale * 100)}%
-            </span>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={zoomIn}
-              disabled={scale >= 3 || loading}
-            >
-              <ZoomIn className="h-4 w-4" />
+            <span className='text-sm font-medium px-2'>{Math.round(scale * 100)}%</span>
+            <Button variant='outline' size='sm' onClick={zoomIn} disabled={scale >= 3 || loading}>
+              <ZoomIn className='h-4 w-4' />
             </Button>
           </div>
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={downloadPDF}
-            disabled={loading}
-          >
-            <Download className="h-4 w-4" />
+          <Button variant='outline' size='sm' onClick={downloadPDF} disabled={loading}>
+            <Download className='h-4 w-4' />
           </Button>
         </div>
       )}
 
-      <div className="flex-1 overflow-auto bg-muted/10">
-        <div className="flex items-center justify-center min-h-full p-4">
+      <div className='flex-1 overflow-auto bg-muted/10'>
+        <div className='flex items-center justify-center min-h-full p-4'>
           {loading && (
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              <span className="text-sm">Loading PDF...</span>
+            <div className='flex items-center gap-2 text-muted-foreground'>
+              <Loader2 className='h-4 w-4 animate-spin' />
+              <span className='text-sm'>Loading PDF...</span>
             </div>
           )}
 
           {error && (
-            <div className="text-center">
-              <FileX className="h-12 w-12 text-destructive mx-auto mb-4" />
-              <p className="text-sm text-destructive mb-2">Failed to load PDF</p>
-              <p className="text-xs text-muted-foreground">{error}</p>
+            <div className='text-center'>
+              <FileX className='h-12 w-12 text-destructive mx-auto mb-4' />
+              <p className='text-sm text-destructive mb-2'>Failed to load PDF</p>
+              <p className='text-xs text-muted-foreground'>{error}</p>
             </div>
           )}
 
@@ -194,7 +190,7 @@ const PDFPreview: React.FC<PDFPreviewProps> = ({
               onLoadError={onDocumentLoadError}
               loading={null}
               error={null}
-              className="flex items-center justify-center"
+              className='flex items-center justify-center'
             >
               <Page
                 pageNumber={pageNumber}
@@ -204,7 +200,7 @@ const PDFPreview: React.FC<PDFPreviewProps> = ({
                 onLoadError={onPageLoadError}
                 loading={null}
                 error={null}
-                className="shadow-lg"
+                className='shadow-lg'
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
               />

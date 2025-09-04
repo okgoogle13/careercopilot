@@ -98,52 +98,55 @@ export function FileDropzone({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dragCounterRef = useRef(0);
 
-  const addFiles = useCallback((newFiles: File[]) => {
-    const processedFiles: FileWithPreview[] = [];
-    const newErrors: string[] = [];
+  const addFiles = useCallback(
+    (newFiles: File[]) => {
+      const processedFiles: FileWithPreview[] = [];
+      const newErrors: string[] = [];
 
-    newFiles.forEach((file, index) => {
-      // Validate file
-      const error = validateFile(file, validation);
-      if (error) {
-        newErrors.push(`${file.name}: ${error}`);
-        return;
-      }
+      newFiles.forEach((file, index) => {
+        // Validate file
+        const error = validateFile(file, validation);
+        if (error) {
+          newErrors.push(`${file.name}: ${error}`);
+          return;
+        }
 
-      // Check max files limit
-      if (validation?.maxFiles && files.length + processedFiles.length >= validation.maxFiles) {
-        newErrors.push(`Maximum ${validation.maxFiles} files allowed`);
-        return;
-      }
+        // Check max files limit
+        if (validation?.maxFiles && files.length + processedFiles.length >= validation.maxFiles) {
+          newErrors.push(`Maximum ${validation.maxFiles} files allowed`);
+          return;
+        }
 
-      // Create file with preview
-      const fileWithPreview: FileWithPreview = {
-        ...file,
-        id: `file-${Date.now()}-${index}`,
-      };
-
-      // Generate preview for images
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          fileWithPreview.preview = e.target?.result as string;
-          // Trigger re-render if needed
-          onFilesChange?.(files.map(f => f.id === fileWithPreview.id ? fileWithPreview : f));
+        // Create file with preview
+        const fileWithPreview: FileWithPreview = {
+          ...file,
+          id: `file-${Date.now()}-${index}`,
         };
-        reader.readAsDataURL(file);
+
+        // Generate preview for images
+        if (file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            fileWithPreview.preview = e.target?.result as string;
+            // Trigger re-render if needed
+            onFilesChange?.(files.map(f => (f.id === fileWithPreview.id ? fileWithPreview : f)));
+          };
+          reader.readAsDataURL(file);
+        }
+
+        processedFiles.push(fileWithPreview);
+      });
+
+      setErrors(newErrors);
+
+      if (processedFiles.length > 0) {
+        const updatedFiles = multiple ? [...files, ...processedFiles] : processedFiles;
+        onFilesChange?.(updatedFiles);
+        onFilesAdded?.(processedFiles);
       }
-
-      processedFiles.push(fileWithPreview);
-    });
-
-    setErrors(newErrors);
-
-    if (processedFiles.length > 0) {
-      const updatedFiles = multiple ? [...files, ...processedFiles] : processedFiles;
-      onFilesChange?.(updatedFiles);
-      onFilesAdded?.(processedFiles);
-    }
-  }, [files, validation, multiple, onFilesChange, onFilesAdded]);
+    },
+    [files, validation, multiple, onFilesChange, onFilesAdded]
+  );
 
   const handleDragEnter = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -166,35 +169,44 @@ export function FileDropzone({
     e.stopPropagation();
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragOver(false);
-    dragCounterRef.current = 0;
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragOver(false);
+      dragCounterRef.current = 0;
 
-    if (disabled) return;
+      if (disabled) return;
 
-    const droppedFiles = Array.from(e.dataTransfer.files);
-    addFiles(droppedFiles);
-  }, [disabled, addFiles]);
+      const droppedFiles = Array.from(e.dataTransfer.files);
+      addFiles(droppedFiles);
+    },
+    [disabled, addFiles]
+  );
 
-  const handleFileInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
+  const handleFileInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.files) return;
 
-    const selectedFiles = Array.from(e.target.files);
-    addFiles(selectedFiles);
+      const selectedFiles = Array.from(e.target.files);
+      addFiles(selectedFiles);
 
-    // Reset input
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  }, [addFiles]);
+      // Reset input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    },
+    [addFiles]
+  );
 
-  const handleRemoveFile = useCallback((fileToRemove: FileWithPreview) => {
-    const updatedFiles = files.filter(file => file.id !== fileToRemove.id);
-    onFilesChange?.(updatedFiles);
-    onFileRemove?.(fileToRemove);
-  }, [files, onFilesChange, onFileRemove]);
+  const handleRemoveFile = useCallback(
+    (fileToRemove: FileWithPreview) => {
+      const updatedFiles = files.filter(file => file.id !== fileToRemove.id);
+      onFilesChange?.(updatedFiles);
+      onFileRemove?.(fileToRemove);
+    },
+    [files, onFilesChange, onFileRemove]
+  );
 
   const handleBrowseClick = useCallback(() => {
     if (!disabled && fileInputRef.current) {
@@ -202,9 +214,12 @@ export function FileDropzone({
     }
   }, [disabled]);
 
-  const getFileProgress = useCallback((file: FileWithPreview): UploadProgress | null => {
-    return uploadProgress.find(progress => progress.file.name === file.name) || null;
-  }, [uploadProgress]);
+  const getFileProgress = useCallback(
+    (file: FileWithPreview): UploadProgress | null => {
+      return uploadProgress.find(progress => progress.file.name === file.name) || null;
+    },
+    [uploadProgress]
+  );
 
   const acceptString = validation?.accept?.join(',');
 
@@ -227,27 +242,29 @@ export function FileDropzone({
       >
         <input
           ref={fileInputRef}
-          type="file"
+          type='file'
           multiple={multiple}
           accept={acceptString}
           onChange={handleFileInputChange}
           disabled={disabled}
-          className="sr-only"
+          className='sr-only'
         />
 
-        <div className="flex flex-col items-center gap-4">
-          <div className={cn(
-            'flex items-center justify-center w-12 h-12 rounded-full',
-            isDragOver ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
-          )}>
-            <Upload className="w-6 h-6" />
+        <div className='flex flex-col items-center gap-4'>
+          <div
+            className={cn(
+              'flex items-center justify-center w-12 h-12 rounded-full',
+              isDragOver ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+            )}
+          >
+            <Upload className='w-6 h-6' />
           </div>
 
-          <div className="space-y-2">
-            <p className="text-sm font-medium">
+          <div className='space-y-2'>
+            <p className='text-sm font-medium'>
               {isDragOver ? 'Drop files here' : 'Drag and drop files here, or click to browse'}
             </p>
-            <p className="text-xs text-muted-foreground">
+            <p className='text-xs text-muted-foreground'>
               {validation?.accept && `Accepted formats: ${validation.accept.join(', ')}`}
               {validation?.maxSize && ` • Max size: ${formatFileSize(validation.maxSize)}`}
               {validation?.maxFiles && ` • Max files: ${validation.maxFiles}`}
@@ -258,12 +275,12 @@ export function FileDropzone({
 
       {/* Errors */}
       {errors.length > 0 && (
-        <div className="mt-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md">
-          <div className="flex items-center gap-2 mb-2">
-            <AlertCircle className="w-4 h-4 text-destructive" />
-            <span className="text-sm font-medium text-destructive">Upload Errors</span>
+        <div className='mt-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md'>
+          <div className='flex items-center gap-2 mb-2'>
+            <AlertCircle className='w-4 h-4 text-destructive' />
+            <span className='text-sm font-medium text-destructive'>Upload Errors</span>
           </div>
-          <ul className="text-sm text-destructive space-y-1">
+          <ul className='text-sm text-destructive space-y-1'>
             {errors.map((error, index) => (
               <li key={index}>• {error}</li>
             ))}
@@ -274,12 +291,12 @@ export function FileDropzone({
       {/* File List */}
       {files.length > 0 && showPreview && (
         <div className={cn('mt-4 space-y-2', previewClassName)}>
-          <div className="flex items-center justify-between">
-            <h4 className="text-sm font-medium">Selected Files ({files.length})</h4>
+          <div className='flex items-center justify-between'>
+            <h4 className='text-sm font-medium'>Selected Files ({files.length})</h4>
             {onUpload && (
               <Button
                 onClick={() => onUpload(files)}
-                size="sm"
+                size='sm'
                 disabled={disabled || files.length === 0}
               >
                 Upload Files
@@ -287,76 +304,74 @@ export function FileDropzone({
             )}
           </div>
 
-          <div className="grid grid-cols-1 gap-2">
-            {files.map((file) => {
+          <div className='grid grid-cols-1 gap-2'>
+            {files.map(file => {
               const progress = getFileProgress(file);
 
               return (
                 <div
                   key={file.id}
-                  className="flex items-center gap-3 p-3 border rounded-md bg-card"
+                  className='flex items-center gap-3 p-3 border rounded-md bg-card'
                 >
                   {/* File Icon/Preview */}
-                  <div className="flex-shrink-0">
+                  <div className='flex-shrink-0'>
                     {file.preview ? (
                       <img
                         src={file.preview}
                         alt={file.name}
-                        className="w-10 h-10 object-cover rounded"
+                        className='w-10 h-10 object-cover rounded'
                       />
                     ) : (
-                      <div className="w-10 h-10 bg-muted rounded flex items-center justify-center">
-                        <File className="w-5 h-5 text-muted-foreground" />
+                      <div className='w-10 h-10 bg-muted rounded flex items-center justify-center'>
+                        <File className='w-5 h-5 text-muted-foreground' />
                       </div>
                     )}
                   </div>
 
                   {/* File Info */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm font-medium truncate">{file.name}</p>
+                  <div className='flex-1 min-w-0'>
+                    <div className='flex items-center gap-2'>
+                      <p className='text-sm font-medium truncate'>{file.name}</p>
                       {progress && (
                         <>
                           {progress.status === 'uploading' && (
-                            <Loader2 className="w-4 h-4 animate-spin text-blue-500" />
+                            <Loader2 className='w-4 h-4 animate-spin text-blue-500' />
                           )}
                           {progress.status === 'success' && (
-                            <Check className="w-4 h-4 text-green-500" />
+                            <Check className='w-4 h-4 text-green-500' />
                           )}
                           {progress.status === 'error' && (
-                            <AlertCircle className="w-4 h-4 text-destructive" />
+                            <AlertCircle className='w-4 h-4 text-destructive' />
                           )}
                         </>
                       )}
                     </div>
-                    <p className="text-xs text-muted-foreground">
-                      {formatFileSize(file.size)}
-                    </p>
+                    <p className='text-xs text-muted-foreground'>{formatFileSize(file.size)}</p>
 
                     {/* Progress Bar */}
                     {progress && progress.status === 'uploading' && (
-                      <Progress value={progress.progress} className="mt-1 h-1" />
+                      <Progress value={progress.progress} className='mt-1 h-1' />
                     )}
 
                     {/* Error Message */}
                     {progress && progress.status === 'error' && progress.error && (
-                      <p className="text-xs text-destructive mt-1">{progress.error}</p>
+                      <p className='text-xs text-destructive mt-1'>{progress.error}</p>
                     )}
                   </div>
 
                   {/* Remove Button */}
                   <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={(e) => {
+                    type='button'
+                    variant='ghost'
+                    size='sm'
+                    onClick={e => {
                       e.stopPropagation();
                       handleRemoveFile(file);
                     }}
-                    disabled={disabled || (progress?.status === 'uploading')}
-                    className="h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive"
+                    disabled={disabled || progress?.status === 'uploading'}
+                    className='h-8 w-8 p-0 hover:bg-destructive/10 hover:text-destructive'
                   >
-                    <X className="h-4 w-4" />
+                    <X className='h-4 w-4' />
                   </Button>
                 </div>
               );
@@ -407,7 +422,7 @@ export function DocumentDropzone({
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
     '.pdf',
     '.doc',
-    '.docx'
+    '.docx',
   ],
   ...props
 }: DocumentDropzoneProps) {
