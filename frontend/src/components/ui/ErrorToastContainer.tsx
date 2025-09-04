@@ -3,13 +3,19 @@ import { useError } from '../../contexts/ErrorContext';
 import ErrorDisplay from './ErrorDisplay';
 
 interface ErrorToastContainerProps {
-  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center';
+  position?:
+    | 'top-right'
+    | 'top-left'
+    | 'bottom-right'
+    | 'bottom-left'
+    | 'top-center'
+    | 'bottom-center';
   className?: string;
 }
 
 const ErrorToastContainer: React.FC<ErrorToastContainerProps> = ({
   position = 'top-right',
-  className = ''
+  className = '',
 }) => {
   const { errors, removeError, retryError } = useError();
 
@@ -45,23 +51,23 @@ const ErrorToastContainer: React.FC<ErrorToastContainerProps> = ({
 
   return (
     <div className={`fixed z-50 pointer-events-none ${getPositionStyles()} ${className}`}>
-      <div className="space-y-2 max-w-md">
-        {errors.map((error) => (
+      <div className='space-y-2 max-w-md'>
+        {errors.map(error => (
           <div
             key={error.id}
-            className="pointer-events-auto transform transition-all duration-300 ease-in-out"
+            className='pointer-events-auto transform transition-all duration-300 ease-in-out'
             style={{
-              animation: 'slideIn 0.3s ease-out'
+              animation: 'slideIn 0.3s ease-out',
             }}
           >
             <ErrorDisplay
               error={error}
-              variant="toast"
+              variant='toast'
               showSuggestions={true}
               maxSuggestions={2}
               onDismiss={() => removeError(error.id)}
               onAction={(actionType, actionData) => handleAction(actionType, actionData, error.id)}
-              className="shadow-lg border-l-4"
+              className='shadow-lg border-l-4'
             />
           </div>
         ))}

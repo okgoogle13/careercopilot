@@ -9,11 +9,7 @@ interface KeywordsListProps {
 /**
  * Displays a list of keywords with appropriate styling based on match status
  */
-export const KeywordsList: React.FC<KeywordsListProps> = ({
-  title,
-  keywords,
-  variant,
-}) => {
+export const KeywordsList: React.FC<KeywordsListProps> = ({ title, keywords, variant }) => {
   const variantStyles = {
     matched: {
       container: 'bg-green-50 border-green-200',
@@ -34,11 +30,11 @@ export const KeywordsList: React.FC<KeywordsListProps> = ({
   if (!keywords || keywords.length === 0) {
     return (
       <div className={`p-4 rounded-lg border ${styles.container}`}>
-        <h3 className="text-xl font-semibold mb-3 text-gray-900 flex items-center">
+        <h3 className='text-xl font-semibold mb-3 text-gray-900 flex items-center'>
           <span className={`mr-2 ${styles.iconColor}`}>{styles.icon}</span>
           {title}
         </h3>
-        <p className="text-sm text-gray-600">
+        <p className='text-sm text-gray-600'>
           {variant === 'matched'
             ? 'No specific keywords were identified as matches.'
             : 'No missing keywords identified - great job!'}
@@ -49,14 +45,12 @@ export const KeywordsList: React.FC<KeywordsListProps> = ({
 
   return (
     <div className={`p-4 rounded-lg border ${styles.container}`}>
-      <h3 className="text-xl font-semibold mb-3 text-gray-900 flex items-center">
+      <h3 className='text-xl font-semibold mb-3 text-gray-900 flex items-center'>
         <span className={`mr-2 ${styles.iconColor}`}>{styles.icon}</span>
         {title}
-        <span className="ml-2 text-sm font-normal text-gray-600">
-          ({keywords.length})
-        </span>
+        <span className='ml-2 text-sm font-normal text-gray-600'>({keywords.length})</span>
       </h3>
-      <div className="flex flex-wrap gap-2">
+      <div className='flex flex-wrap gap-2'>
         {keywords.map((keyword, index) => (
           <span
             key={index}

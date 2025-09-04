@@ -14,12 +14,12 @@ describe('Card', () => {
   });
 
   it('applies custom className', () => {
-    const { container } = render(<Card className="custom-class">Test</Card>);
+    const { container } = render(<Card className='custom-class'>Test</Card>);
     expect(container.firstChild).toHaveClass('custom-class');
   });
 
   it('applies custom styles', () => {
-    const { container } = render(<Card className="test-class">Styled</Card>);
+    const { container } = render(<Card className='test-class'>Styled</Card>);
     expect(container.firstChild).toHaveClass('test-class');
   });
 

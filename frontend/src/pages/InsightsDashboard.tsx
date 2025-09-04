@@ -2,12 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { Card, Button, LoadingSpinner, ProgressBar } from '../components/ui';
 import { HelpButton } from '../components/HelpSystem';
 import {
-  TrendingUp, FileText, Target, Award, Clock,
-  Activity, Zap, AlertTriangle,
-  ArrowUp, ArrowDown, Download,
-  RefreshCw, Eye, Users, Globe
+  TrendingUp,
+  FileText,
+  Target,
+  Award,
+  Clock,
+  Activity,
+  Zap,
+  AlertTriangle,
+  ArrowUp,
+  ArrowDown,
+  Download,
+  RefreshCw,
+  Eye,
+  Users,
+  Globe,
 } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, PieChart as RechartsPieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  PieChart as RechartsPieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 interface DashboardData {
   overview: {
@@ -68,7 +92,9 @@ const InsightsDashboard: React.FC = () => {
   const [data, setData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [timeRange, setTimeRange] = useState<'7d' | '30d' | '90d' | '1y'>('30d');
-  const [selectedMetric, setSelectedMetric] = useState<'documents' | 'applications' | 'atsScore'>('documents');
+  const [selectedMetric, setSelectedMetric] = useState<'documents' | 'applications' | 'atsScore'>(
+    'documents'
+  );
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
@@ -158,7 +184,8 @@ const InsightsDashboard: React.FC = () => {
           {
             id: '1',
             title: 'Optimize Healthcare Keywords',
-            description: 'Add more industry-specific keywords for healthcare positions to improve ATS scores.',
+            description:
+              'Add more industry-specific keywords for healthcare positions to improve ATS scores.',
             priority: 'high',
             category: 'optimization',
             actionUrl: '/profile/editor',
@@ -166,7 +193,8 @@ const InsightsDashboard: React.FC = () => {
           {
             id: '2',
             title: 'Update Professional Summary',
-            description: 'Your summary could be more impactful. Consider highlighting recent achievements.',
+            description:
+              'Your summary could be more impactful. Consider highlighting recent achievements.',
             priority: 'medium',
             category: 'content',
             actionUrl: '/profile/editor#summary',
@@ -215,18 +243,18 @@ const InsightsDashboard: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <LoadingSpinner size="lg" />
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
+        <LoadingSpinner size='lg' />
       </div>
     );
   }
 
   if (!data) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <AlertTriangle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Failed to Load Data</h2>
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
+        <div className='text-center'>
+          <AlertTriangle className='w-12 h-12 text-red-500 mx-auto mb-4' />
+          <h2 className='text-xl font-semibold text-gray-900 mb-2'>Failed to Load Data</h2>
           <Button onClick={loadDashboardData}>Retry</Button>
         </div>
       </div>
@@ -236,49 +264,47 @@ const InsightsDashboard: React.FC = () => {
   const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className='min-h-screen bg-gray-50'>
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <TrendingUp className="w-8 h-8 text-blue-500" />
+      <div className='bg-white shadow-sm border-b'>
+        <div className='max-w-7xl mx-auto px-4 py-6'>
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-3'>
+              <TrendingUp className='w-8 h-8 text-blue-500' />
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Career Insights</h1>
-                <p className="text-gray-600">Track your progress and optimize your job search strategy</p>
+                <h1 className='text-2xl font-bold text-gray-900'>Career Insights</h1>
+                <p className='text-gray-600'>
+                  Track your progress and optimize your job search strategy
+                </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <HelpButton helpId="insights-dashboard" size="sm" />
+            <div className='flex items-center gap-3'>
+              <HelpButton helpId='insights-dashboard' size='sm' />
 
               <select
                 value={timeRange}
-                onChange={(e) => setTimeRange(e.target.value as any)}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                onChange={e => setTimeRange(e.target.value as any)}
+                className='px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
               >
-                <option value="7d">Last 7 days</option>
-                <option value="30d">Last 30 days</option>
-                <option value="90d">Last 90 days</option>
-                <option value="1y">Last year</option>
+                <option value='7d'>Last 7 days</option>
+                <option value='30d'>Last 30 days</option>
+                <option value='90d'>Last 90 days</option>
+                <option value='1y'>Last year</option>
               </select>
 
               <Button
-                variant="outline"
+                variant='outline'
                 onClick={handleRefresh}
                 disabled={refreshing}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
                 <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
 
-              <Button
-                variant="outline"
-                onClick={exportData}
-                className="flex items-center gap-2"
-              >
-                <Download className="w-4 h-4" />
+              <Button variant='outline' onClick={exportData} className='flex items-center gap-2'>
+                <Download className='w-4 h-4' />
                 Export
               </Button>
             </div>
@@ -286,75 +312,75 @@ const InsightsDashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6">
+      <div className='max-w-7xl mx-auto px-4 py-6'>
         {/* Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8'>
           <OverviewCard
-            title="Profiles Created"
+            title='Profiles Created'
             value={data.overview.totalProfiles}
             icon={Users}
             trend={+2}
-            color="blue"
+            color='blue'
           />
           <OverviewCard
-            title="Documents Generated"
+            title='Documents Generated'
             value={data.overview.documentsGenerated}
             icon={FileText}
             trend={+12}
-            color="green"
+            color='green'
           />
           <OverviewCard
-            title="Average ATS Score"
+            title='Average ATS Score'
             value={`${data.overview.averageAtsScore}%`}
             icon={Target}
             trend={+5}
-            color="purple"
+            color='purple'
           />
           <OverviewCard
-            title="Applications Tracked"
+            title='Applications Tracked'
             value={data.overview.applicationsTracked}
             icon={Activity}
             trend={+8}
-            color="orange"
+            color='orange'
           />
           <OverviewCard
-            title="Success Rate"
+            title='Success Rate'
             value={`${data.overview.successRate}%`}
             icon={Award}
             trend={+2.1}
-            color="emerald"
+            color='emerald'
           />
         </div>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-12 gap-6 mb-8">
+        <div className='grid grid-cols-12 gap-6 mb-8'>
           {/* Activity Trend Chart */}
-          <Card className="col-span-12 lg:col-span-8 p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Activity Trend</h3>
-              <div className="flex items-center gap-2">
+          <Card className='col-span-12 lg:col-span-8 p-6'>
+            <div className='flex items-center justify-between mb-4'>
+              <h3 className='text-lg font-semibold text-gray-900'>Activity Trend</h3>
+              <div className='flex items-center gap-2'>
                 <select
                   value={selectedMetric}
-                  onChange={(e) => setSelectedMetric(e.target.value as any)}
-                  className="text-sm px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                  onChange={e => setSelectedMetric(e.target.value as any)}
+                  className='text-sm px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500'
                 >
-                  <option value="documents">Documents</option>
-                  <option value="applications">Applications</option>
-                  <option value="atsScore">ATS Score</option>
+                  <option value='documents'>Documents</option>
+                  <option value='applications'>Applications</option>
+                  <option value='atsScore'>ATS Score</option>
                 </select>
               </div>
             </div>
 
-            <ResponsiveContainer width="100%" height={300}>
+            <ResponsiveContainer width='100%' height={300}>
               <LineChart data={data.activityTrend}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
+                <CartesianGrid strokeDasharray='3 3' />
+                <XAxis dataKey='date' />
                 <YAxis />
                 <Tooltip />
                 <Line
-                  type="monotone"
+                  type='monotone'
                   dataKey={selectedMetric}
-                  stroke="#3b82f6"
+                  stroke='#3b82f6'
                   strokeWidth={2}
                   dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
                 />
@@ -363,62 +389,65 @@ const InsightsDashboard: React.FC = () => {
           </Card>
 
           {/* Quick Stats */}
-          <Card className="col-span-12 lg:col-span-4 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Stats</h3>
+          <Card className='col-span-12 lg:col-span-4 p-6'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>Quick Stats</h3>
 
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-gray-500" />
-                  <span className="text-sm text-gray-600">Total Time Spent</span>
+            <div className='space-y-4'>
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-2'>
+                  <Clock className='w-4 h-4 text-gray-500' />
+                  <span className='text-sm text-gray-600'>Total Time Spent</span>
                 </div>
-                <span className="font-medium">
-                  {Math.round(data.timeSpentAnalysis.reduce((acc, item) => acc + item.minutes, 0) / 60)}h
+                <span className='font-medium'>
+                  {Math.round(
+                    data.timeSpentAnalysis.reduce((acc, item) => acc + item.minutes, 0) / 60
+                  )}
+                  h
                 </span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-gray-500" />
-                  <span className="text-sm text-gray-600">Most Active Day</span>
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-2'>
+                  <Zap className='w-4 h-4 text-gray-500' />
+                  <span className='text-sm text-gray-600'>Most Active Day</span>
                 </div>
-                <span className="font-medium">Monday</span>
+                <span className='font-medium'>Monday</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Globe className="w-4 h-4 text-gray-500" />
-                  <span className="text-sm text-gray-600">Top Industry</span>
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-2'>
+                  <Globe className='w-4 h-4 text-gray-500' />
+                  <span className='text-sm text-gray-600'>Top Industry</span>
                 </div>
-                <span className="font-medium">Technology</span>
+                <span className='font-medium'>Technology</span>
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Eye className="w-4 h-4 text-gray-500" />
-                  <span className="text-sm text-gray-600">Profile Views</span>
+              <div className='flex items-center justify-between'>
+                <div className='flex items-center gap-2'>
+                  <Eye className='w-4 h-4 text-gray-500' />
+                  <span className='text-sm text-gray-600'>Profile Views</span>
                 </div>
-                <span className="font-medium">247</span>
+                <span className='font-medium'>247</span>
               </div>
             </div>
           </Card>
         </div>
 
         {/* Secondary Charts Row */}
-        <div className="grid grid-cols-12 gap-6 mb-8">
+        <div className='grid grid-cols-12 gap-6 mb-8'>
           {/* Document Types */}
-          <Card className="col-span-12 md:col-span-6 lg:col-span-4 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Document Types</h3>
+          <Card className='col-span-12 md:col-span-6 lg:col-span-4 p-6'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>Document Types</h3>
 
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width='100%' height={200}>
               <RechartsPieChart>
                 <Pie
                   data={data.documentTypes}
-                  cx="50%"
-                  cy="50%"
+                  cx='50%'
+                  cy='50%'
                   innerRadius={40}
                   outerRadius={80}
-                  dataKey="count"
+                  dataKey='count'
                 >
                   {data.documentTypes.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -428,51 +457,51 @@ const InsightsDashboard: React.FC = () => {
               </RechartsPieChart>
             </ResponsiveContainer>
 
-            <div className="mt-4 space-y-2">
+            <div className='mt-4 space-y-2'>
               {data.documentTypes.map((type, index) => (
-                <div key={type.type} className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
+                <div key={type.type} className='flex items-center justify-between text-sm'>
+                  <div className='flex items-center gap-2'>
                     <div
-                      className="w-3 h-3 rounded"
+                      className='w-3 h-3 rounded'
                       style={{ backgroundColor: COLORS[index % COLORS.length] }}
                     />
                     <span>{type.type}</span>
                   </div>
-                  <span className="font-medium">{type.count}</span>
+                  <span className='font-medium'>{type.count}</span>
                 </div>
               ))}
             </div>
           </Card>
 
           {/* ATS Score Distribution */}
-          <Card className="col-span-12 md:col-span-6 lg:col-span-4 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">ATS Score Distribution</h3>
+          <Card className='col-span-12 md:col-span-6 lg:col-span-4 p-6'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>ATS Score Distribution</h3>
 
-            <ResponsiveContainer width="100%" height={200}>
+            <ResponsiveContainer width='100%' height={200}>
               <BarChart data={data.atsScoreDistribution}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="range" />
+                <CartesianGrid strokeDasharray='3 3' />
+                <XAxis dataKey='range' />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="count" fill="#10b981" />
+                <Bar dataKey='count' fill='#10b981' />
               </BarChart>
             </ResponsiveContainer>
           </Card>
 
           {/* Skills Analysis */}
-          <Card className="col-span-12 lg:col-span-4 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Top Skills Impact</h3>
+          <Card className='col-span-12 lg:col-span-4 p-6'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>Top Skills Impact</h3>
 
-            <div className="space-y-3">
-              {data.skillsAnalysis.slice(0, 5).map((skill) => (
-                <div key={skill.skill} className="space-y-1">
-                  <div className="flex justify-between text-sm">
-                    <span className="font-medium">{skill.skill}</span>
-                    <span className="text-gray-500">{skill.impact}%</span>
+            <div className='space-y-3'>
+              {data.skillsAnalysis.slice(0, 5).map(skill => (
+                <div key={skill.skill} className='space-y-1'>
+                  <div className='flex justify-between text-sm'>
+                    <span className='font-medium'>{skill.skill}</span>
+                    <span className='text-gray-500'>{skill.impact}%</span>
                   </div>
                   <ProgressBar
                     value={skill.impact}
-                    className="h-2"
+                    className='h-2'
                     color={skill.impact >= 85 ? 'green' : skill.impact >= 70 ? 'blue' : 'yellow'}
                   />
                 </div>
@@ -482,36 +511,44 @@ const InsightsDashboard: React.FC = () => {
         </div>
 
         {/* Bottom Row */}
-        <div className="grid grid-cols-12 gap-6">
+        <div className='grid grid-cols-12 gap-6'>
           {/* Recent Achievements */}
-          <Card className="col-span-12 lg:col-span-6 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Recent Achievements</h3>
+          <Card className='col-span-12 lg:col-span-6 p-6'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>Recent Achievements</h3>
 
-            <div className="space-y-4">
-              {data.recentAchievements.map((achievement) => (
-                <div key={achievement.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    achievement.type === 'milestone'
-                      ? 'bg-yellow-100 text-yellow-600'
-                      : achievement.type === 'improvement'
-                      ? 'bg-green-100 text-green-600'
-                      : 'bg-blue-100 text-blue-600'
-                  }`}>
-                    {achievement.type === 'milestone' && <Award className="w-4 h-4" />}
-                    {achievement.type === 'improvement' && <TrendingUp className="w-4 h-4" />}
-                    {achievement.type === 'goal' && <Target className="w-4 h-4" />}
+            <div className='space-y-4'>
+              {data.recentAchievements.map(achievement => (
+                <div
+                  key={achievement.id}
+                  className='flex items-start gap-3 p-3 rounded-lg bg-gray-50'
+                >
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      achievement.type === 'milestone'
+                        ? 'bg-yellow-100 text-yellow-600'
+                        : achievement.type === 'improvement'
+                          ? 'bg-green-100 text-green-600'
+                          : 'bg-blue-100 text-blue-600'
+                    }`}
+                  >
+                    {achievement.type === 'milestone' && <Award className='w-4 h-4' />}
+                    {achievement.type === 'improvement' && <TrendingUp className='w-4 h-4' />}
+                    {achievement.type === 'goal' && <Target className='w-4 h-4' />}
                   </div>
 
-                  <div className="flex-1">
-                    <h4 className="font-medium text-gray-900">{achievement.title}</h4>
-                    <p className="text-sm text-gray-600">{achievement.description}</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs text-gray-500">
+                  <div className='flex-1'>
+                    <h4 className='font-medium text-gray-900'>{achievement.title}</h4>
+                    <p className='text-sm text-gray-600'>{achievement.description}</p>
+                    <div className='flex items-center gap-2 mt-1'>
+                      <span className='text-xs text-gray-500'>
                         {new Date(achievement.date).toLocaleDateString()}
                       </span>
                       {achievement.value && (
-                        <span className="text-xs font-medium text-green-600">
-                          +{achievement.value}{achievement.type === 'milestone' && achievement.title.includes('Score') ? '%' : ''}
+                        <span className='text-xs font-medium text-green-600'>
+                          +{achievement.value}
+                          {achievement.type === 'milestone' && achievement.title.includes('Score')
+                            ? '%'
+                            : ''}
                         </span>
                       )}
                     </div>
@@ -522,43 +559,43 @@ const InsightsDashboard: React.FC = () => {
           </Card>
 
           {/* AI Recommendations */}
-          <Card className="col-span-12 lg:col-span-6 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">AI Recommendations</h3>
+          <Card className='col-span-12 lg:col-span-6 p-6'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>AI Recommendations</h3>
 
-            <div className="space-y-4">
-              {data.recommendations.map((rec) => (
+            <div className='space-y-4'>
+              {data.recommendations.map(rec => (
                 <div
                   key={rec.id}
                   className={`p-4 rounded-lg border-l-4 ${
                     rec.priority === 'high'
                       ? 'bg-red-50 border-red-400'
                       : rec.priority === 'medium'
-                      ? 'bg-yellow-50 border-yellow-400'
-                      : 'bg-blue-50 border-blue-400'
+                        ? 'bg-yellow-50 border-yellow-400'
+                        : 'bg-blue-50 border-blue-400'
                   }`}
                 >
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-medium text-gray-900">{rec.title}</h4>
+                  <div className='flex items-start justify-between'>
+                    <div className='flex-1'>
+                      <div className='flex items-center gap-2 mb-1'>
+                        <h4 className='font-medium text-gray-900'>{rec.title}</h4>
                         <span
                           className={`px-2 py-1 text-xs rounded-full ${
                             rec.priority === 'high'
                               ? 'bg-red-100 text-red-700'
                               : rec.priority === 'medium'
-                              ? 'bg-yellow-100 text-yellow-700'
-                              : 'bg-blue-100 text-blue-700'
+                                ? 'bg-yellow-100 text-yellow-700'
+                                : 'bg-blue-100 text-blue-700'
                           }`}
                         >
                           {rec.priority}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600 mb-2">{rec.description}</p>
-                      <span className="text-xs text-gray-500 capitalize">{rec.category}</span>
+                      <p className='text-sm text-gray-600 mb-2'>{rec.description}</p>
+                      <span className='text-xs text-gray-500 capitalize'>{rec.category}</span>
                     </div>
 
                     {rec.actionUrl && (
-                      <Button size="sm" variant="outline">
+                      <Button size='sm' variant='outline'>
                         Take Action
                       </Button>
                     )}
@@ -590,20 +627,25 @@ const OverviewCard: React.FC<{
   };
 
   return (
-    <Card className="p-6">
-      <div className="flex items-center justify-between mb-2">
-        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${colorClasses[color]}`}>
-          <Icon className="w-5 h-5" />
+    <Card className='p-6'>
+      <div className='flex items-center justify-between mb-2'>
+        <div
+          className={`w-10 h-10 rounded-lg flex items-center justify-center ${colorClasses[color]}`}
+        >
+          <Icon className='w-5 h-5' />
         </div>
-        <div className={`flex items-center gap-1 text-sm ${
-          trend >= 0 ? 'text-green-600' : 'text-red-600'
-        }`}>
-          {trend >= 0 ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
-          {Math.abs(trend)}{typeof trend === 'number' && trend % 1 !== 0 ? '' : ''}
+        <div
+          className={`flex items-center gap-1 text-sm ${
+            trend >= 0 ? 'text-green-600' : 'text-red-600'
+          }`}
+        >
+          {trend >= 0 ? <ArrowUp className='w-3 h-3' /> : <ArrowDown className='w-3 h-3' />}
+          {Math.abs(trend)}
+          {typeof trend === 'number' && trend % 1 !== 0 ? '' : ''}
         </div>
       </div>
-      <div className="text-2xl font-bold text-gray-900 mb-1">{value}</div>
-      <div className="text-sm text-gray-600">{title}</div>
+      <div className='text-2xl font-bold text-gray-900 mb-1'>{value}</div>
+      <div className='text-sm text-gray-600'>{title}</div>
     </Card>
   );
 };

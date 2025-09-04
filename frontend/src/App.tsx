@@ -17,9 +17,7 @@ const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const OpportunitiesPage = lazy(() => import('./pages/OpportunitiesPage'));
 const ApplicationsPage = lazy(() => import('./pages/ApplicationsPage'));
 const KscGeneratorPage = lazy(() => import('./pages/KscGeneratorPage'));
-const DocumentGenerationPage = lazy(
-  () => import('./pages/DocumentGenerationPage')
-);
+const DocumentGenerationPage = lazy(() => import('./pages/DocumentGenerationPage'));
 const UITestPage = lazy(() => import('./pages/UITestPage'));
 const AIServicesPage = lazy(() => import('./pages/AIServicesPage'));
 
@@ -30,101 +28,101 @@ const App: React.FC = () => {
         <ErrorProvider>
           <AuthProvider>
             <UserPreferencesProvider>
-            {/* Accessibility skip links */}
-            <SkipLink href="#main-content">Skip to main content</SkipLink>
-            <SkipLink href="#navigation">Skip to navigation</SkipLink>
+              {/* Accessibility skip links */}
+              <SkipLink href='#main-content'>Skip to main content</SkipLink>
+              <SkipLink href='#navigation'>Skip to navigation</SkipLink>
 
-            <ProtectedRoute>
-              <MainLayout>
-                <Suspense fallback={<LoadingSpinner fullScreen />}>
-                  <Routes>
-                    <Route
-                      path="/"
-                      element={
-                        <ErrorBoundary>
-                          <DashboardPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/documents"
-                      element={
-                        <ErrorBoundary>
-                          <DocumentsPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/analysis"
-                      element={
-                        <ErrorBoundary>
-                          <AnalysisPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/settings"
-                      element={
-                        <ErrorBoundary>
-                          <SettingsPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/opportunities"
-                      element={
-                        <ErrorBoundary>
-                          <OpportunitiesPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/applications"
-                      element={
-                        <ErrorBoundary>
-                          <ApplicationsPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/ksc-generator"
-                      element={
-                        <ErrorBoundary>
-                          <KscGeneratorPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/document-generation"
-                      element={
-                        <ErrorBoundary>
-                          <DocumentGenerationPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/ai-services"
-                      element={
-                        <ErrorBoundary>
-                          <AIServicesPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                    <Route
-                      path="/ui-test"
-                      element={
-                        <ErrorBoundary>
-                          <UITestPage />
-                        </ErrorBoundary>
-                      }
-                    />
-                  </Routes>
-                </Suspense>
-              </MainLayout>
+              <ProtectedRoute>
+                <MainLayout>
+                  <Suspense fallback={<LoadingSpinner fullScreen />}>
+                    <Routes>
+                      <Route
+                        path='/'
+                        element={
+                          <ErrorBoundary>
+                            <DashboardPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/documents'
+                        element={
+                          <ErrorBoundary>
+                            <DocumentsPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/analysis'
+                        element={
+                          <ErrorBoundary>
+                            <AnalysisPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/settings'
+                        element={
+                          <ErrorBoundary>
+                            <SettingsPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/opportunities'
+                        element={
+                          <ErrorBoundary>
+                            <OpportunitiesPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/applications'
+                        element={
+                          <ErrorBoundary>
+                            <ApplicationsPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/ksc-generator'
+                        element={
+                          <ErrorBoundary>
+                            <KscGeneratorPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/document-generation'
+                        element={
+                          <ErrorBoundary>
+                            <DocumentGenerationPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/ai-services'
+                        element={
+                          <ErrorBoundary>
+                            <AIServicesPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                      <Route
+                        path='/ui-test'
+                        element={
+                          <ErrorBoundary>
+                            <UITestPage />
+                          </ErrorBoundary>
+                        }
+                      />
+                    </Routes>
+                  </Suspense>
+                </MainLayout>
 
-              {/* Global error toast notifications */}
-              <ErrorToastContainer position="top-right" />
-            </ProtectedRoute>
+                {/* Global error toast notifications */}
+                <ErrorToastContainer position='top-right' />
+              </ProtectedRoute>
             </UserPreferencesProvider>
           </AuthProvider>
         </ErrorProvider>

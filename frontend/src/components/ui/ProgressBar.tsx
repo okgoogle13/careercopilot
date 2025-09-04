@@ -27,11 +27,11 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
 
   return (
     <div className={`w-full ${className}`}>
-      <div className="w-full bg-gray-200 rounded-full overflow-hidden">
+      <div className='w-full bg-gray-200 rounded-full overflow-hidden'>
         <div
           className={`h-full transition-all duration-300 ease-out ${colorClasses[color]}`}
           style={{ width: `${percentage}%` }}
-          role="progressbar"
+          role='progressbar'
           aria-valuenow={value}
           aria-valuemin={0}
           aria-valuemax={max}
@@ -39,9 +39,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         />
       </div>
       {showLabel && (
-        <div className="mt-1 text-sm text-gray-600 text-center">
-          {percentage.toFixed(1)}%
-        </div>
+        <div className='mt-1 text-sm text-gray-600 text-center'>{percentage.toFixed(1)}%</div>
       )}
     </div>
   );

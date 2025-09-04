@@ -93,36 +93,36 @@ export function Pagination({
 
   return (
     <nav
-      role="navigation"
-      aria-label="Pagination Navigation"
+      role='navigation'
+      aria-label='Pagination Navigation'
       className={cn('flex items-center justify-center space-x-1', className)}
     >
       {/* First Page Button */}
       {showFirstLast && (
         <Button
-          variant="outline"
+          variant='outline'
           size={size}
           onClick={() => onPageChange(1)}
           disabled={disabled || currentPage === 1}
           className={cn(buttonSize, 'hidden sm:inline-flex')}
-          aria-label="Go to first page"
+          aria-label='Go to first page'
         >
-          <ChevronLeft className="h-4 w-4" />
-          <ChevronLeft className="h-4 w-4 -ml-2" />
+          <ChevronLeft className='h-4 w-4' />
+          <ChevronLeft className='h-4 w-4 -ml-2' />
         </Button>
       )}
 
       {/* Previous Page Button */}
       {showPrevNext && (
         <Button
-          variant="outline"
+          variant='outline'
           size={size}
           onClick={() => onPageChange(currentPage - 1)}
           disabled={disabled || currentPage === 1}
           className={buttonSize}
-          aria-label="Go to previous page"
+          aria-label='Go to previous page'
         >
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className='h-4 w-4' />
         </Button>
       )}
 
@@ -139,9 +139,9 @@ export function Pagination({
                     buttonSize,
                     'text-muted-foreground'
                   )}
-                  aria-hidden="true"
+                  aria-hidden='true'
                 >
-                  <MoreHorizontal className="h-4 w-4" />
+                  <MoreHorizontal className='h-4 w-4' />
                 </span>
               );
             }
@@ -155,10 +155,7 @@ export function Pagination({
                 size={size}
                 onClick={() => onPageChange(page)}
                 disabled={disabled}
-                className={cn(
-                  buttonSize,
-                  isCurrentPage && 'pointer-events-none'
-                )}
+                className={cn(buttonSize, isCurrentPage && 'pointer-events-none')}
                 aria-label={`Go to page ${page}`}
                 aria-current={isCurrentPage ? 'page' : undefined}
               >
@@ -172,29 +169,29 @@ export function Pagination({
       {/* Next Page Button */}
       {showPrevNext && (
         <Button
-          variant="outline"
+          variant='outline'
           size={size}
           onClick={() => onPageChange(currentPage + 1)}
           disabled={disabled || currentPage === totalPages}
           className={buttonSize}
-          aria-label="Go to next page"
+          aria-label='Go to next page'
         >
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className='h-4 w-4' />
         </Button>
       )}
 
       {/* Last Page Button */}
       {showFirstLast && (
         <Button
-          variant="outline"
+          variant='outline'
           size={size}
           onClick={() => onPageChange(totalPages)}
           disabled={disabled || currentPage === totalPages}
           className={cn(buttonSize, 'hidden sm:inline-flex')}
-          aria-label="Go to last page"
+          aria-label='Go to last page'
         >
-          <ChevronRight className="h-4 w-4" />
-          <ChevronRight className="h-4 w-4 -ml-2" />
+          <ChevronRight className='h-4 w-4' />
+          <ChevronRight className='h-4 w-4 -ml-2' />
         </Button>
       )}
     </nav>
@@ -223,34 +220,34 @@ export function CompactPagination({
 
   return (
     <nav
-      role="navigation"
-      aria-label="Compact Pagination Navigation"
+      role='navigation'
+      aria-label='Compact Pagination Navigation'
       className={cn('flex items-center justify-between', className)}
     >
       <Button
-        variant="outline"
-        size="sm"
+        variant='outline'
+        size='sm'
         onClick={() => onPageChange(currentPage - 1)}
         disabled={disabled || currentPage === 1}
-        className="flex items-center gap-2"
+        className='flex items-center gap-2'
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className='h-4 w-4' />
         Previous
       </Button>
 
-      <span className="text-sm text-muted-foreground">
+      <span className='text-sm text-muted-foreground'>
         Page {currentPage} of {totalPages}
       </span>
 
       <Button
-        variant="outline"
-        size="sm"
+        variant='outline'
+        size='sm'
         onClick={() => onPageChange(currentPage + 1)}
         disabled={disabled || currentPage === totalPages}
-        className="flex items-center gap-2"
+        className='flex items-center gap-2'
       >
         Next
-        <ChevronRight className="h-4 w-4" />
+        <ChevronRight className='h-4 w-4' />
       </Button>
     </nav>
   );
@@ -282,20 +279,20 @@ export function PaginationWithPageSize({
 
   return (
     <div className={cn('flex flex-col sm:flex-row items-center justify-between gap-4', className)}>
-      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+      <div className='flex items-center gap-4 text-sm text-muted-foreground'>
         <span>
           Showing {startItem} to {endItem} of {totalItems} results
         </span>
 
         {showPageSizeSelector && (
-          <div className="flex items-center gap-2">
+          <div className='flex items-center gap-2'>
             <span>Show</span>
             <select
               value={pageSize}
-              onChange={(e) => onPageSizeChange(Number(e.target.value))}
-              className="border border-input bg-background px-2 py-1 rounded text-sm"
+              onChange={e => onPageSizeChange(Number(e.target.value))}
+              className='border border-input bg-background px-2 py-1 rounded text-sm'
             >
-              {pageSizeOptions.map((size) => (
+              {pageSizeOptions.map(size => (
                 <option key={size} value={size}>
                   {size}
                 </option>

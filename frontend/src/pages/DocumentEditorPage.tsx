@@ -4,10 +4,32 @@ import { useAuth } from '../contexts/AuthContext';
 import { Card, Button, Modal, LoadingSpinner } from '../components/ui';
 import { HelpButton } from '../components/HelpSystem';
 import {
-  Save, Undo, Redo, Download, Share2, ArrowLeft, Eye, EyeOff,
-  Maximize2, Minimize2, RefreshCw, Zap, FileText, Settings,
-  Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight,
-  List, ListOrdered, ChevronDown, Type, Palette, Move3D
+  Save,
+  Undo,
+  Redo,
+  Download,
+  Share2,
+  ArrowLeft,
+  Eye,
+  EyeOff,
+  Maximize2,
+  Minimize2,
+  RefreshCw,
+  Zap,
+  FileText,
+  Settings,
+  Bold,
+  Italic,
+  Underline,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  List,
+  ListOrdered,
+  ChevronDown,
+  Type,
+  Palette,
+  Move3D,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -142,7 +164,7 @@ const DocumentEditorPage: React.FC = () => {
           // Load existing document
           const response = await fetch(`/api/v1/documents/${documentId}`, {
             headers: {
-              'Authorization': `Bearer ${await user.getIdToken()}`,
+              Authorization: `Bearer ${await user.getIdToken()}`,
             },
           });
 
@@ -171,7 +193,8 @@ const DocumentEditorPage: React.FC = () => {
     setEditorHistory(prev => {
       const newHistory = prev.slice(0, historyIndex + 1);
       newHistory.push(doc);
-      if (newHistory.length > 50) { // Limit history to 50 items
+      if (newHistory.length > 50) {
+        // Limit history to 50 items
         newHistory.shift();
       }
       return newHistory;
@@ -205,7 +228,7 @@ const DocumentEditorPage: React.FC = () => {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${await user?.getIdToken()}`,
+              Authorization: `Bearer ${await user?.getIdToken()}`,
             },
             body: JSON.stringify({
               ...document,
@@ -272,7 +295,10 @@ const DocumentEditorPage: React.FC = () => {
       if (!container) return;
 
       const containerRect = container.getBoundingClientRect();
-      const newRatio = Math.min(Math.max((e.clientX - containerRect.left) / containerRect.width, 0.2), 0.8);
+      const newRatio = Math.min(
+        Math.max((e.clientX - containerRect.left) / containerRect.width, 0.2),
+        0.8
+      );
       setSplitRatio(newRatio);
     };
 
@@ -303,7 +329,7 @@ const DocumentEditorPage: React.FC = () => {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${await user.getIdToken()}`,
+          Authorization: `Bearer ${await user.getIdToken()}`,
         },
         body: JSON.stringify({
           ...document,
@@ -394,17 +420,17 @@ const DocumentEditorPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <LoadingSpinner size="lg" />
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
+        <LoadingSpinner size='lg' />
       </div>
     );
   }
 
   if (!document) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Document not found</h2>
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
+        <div className='text-center'>
+          <h2 className='text-xl font-semibold text-gray-900 mb-2'>Document not found</h2>
           <Button onClick={() => navigate('/documents')}>Return to Documents</Button>
         </div>
       </div>
@@ -414,106 +440,106 @@ const DocumentEditorPage: React.FC = () => {
   return (
     <div className={`${isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'min-h-screen bg-gray-50'}`}>
       {/* Header */}
-      <div className="bg-white shadow-sm border-b sticky top-0 z-40">
-        <div className="max-w-full px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+      <div className='bg-white shadow-sm border-b sticky top-0 z-40'>
+        <div className='max-w-full px-6 py-4'>
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center gap-4'>
               {!isFullscreen && (
                 <Button
-                  variant="ghost"
+                  variant='ghost'
                   onClick={() => navigate('/documents')}
-                  className="flex items-center gap-2"
+                  className='flex items-center gap-2'
                 >
-                  <ArrowLeft className="w-4 h-4" />
+                  <ArrowLeft className='w-4 h-4' />
                   Back
                 </Button>
               )}
 
               <div>
                 <input
-                  type="text"
+                  type='text'
                   value={document.title}
-                  onChange={(e) => {
-                    setDocument(prev => prev ? { ...prev, title: e.target.value } : null);
+                  onChange={e => {
+                    setDocument(prev => (prev ? { ...prev, title: e.target.value } : null));
                     setUnsavedChanges(true);
                   }}
-                  className="text-xl font-bold text-gray-900 bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500 px-2 py-1 rounded"
-                  placeholder="Document Title"
+                  className='text-xl font-bold text-gray-900 bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500 px-2 py-1 rounded'
+                  placeholder='Document Title'
                 />
-                <div className="flex items-center gap-4 text-sm text-gray-500">
+                <div className='flex items-center gap-4 text-sm text-gray-500'>
                   <span>{document.type.replace('_', ' ').toUpperCase()}</span>
                   {unsavedChanges && (
-                    <span className="flex items-center gap-1 text-amber-600">
-                      <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse" />
+                    <span className='flex items-center gap-1 text-amber-600'>
+                      <div className='w-2 h-2 bg-amber-500 rounded-full animate-pulse' />
                       Unsaved changes
                     </span>
                   )}
-                  {saving && <span className="text-blue-600">Saving...</span>}
+                  {saving && <span className='text-blue-600'>Saving...</span>}
                 </div>
               </div>
             </div>
 
             {/* Toolbar */}
-            <div className="flex items-center gap-2">
+            <div className='flex items-center gap-2'>
               <Button
-                variant="ghost"
-                size="sm"
+                variant='ghost'
+                size='sm'
                 onClick={undo}
                 disabled={historyIndex <= 0}
-                title="Undo (Ctrl+Z)"
+                title='Undo (Ctrl+Z)'
               >
-                <Undo className="w-4 h-4" />
+                <Undo className='w-4 h-4' />
               </Button>
 
               <Button
-                variant="ghost"
-                size="sm"
+                variant='ghost'
+                size='sm'
                 onClick={redo}
                 disabled={historyIndex >= editorHistory.length - 1}
-                title="Redo (Ctrl+Y)"
+                title='Redo (Ctrl+Y)'
               >
-                <Redo className="w-4 h-4" />
+                <Redo className='w-4 h-4' />
               </Button>
 
-              <div className="w-px h-6 bg-gray-300" />
+              <div className='w-px h-6 bg-gray-300' />
 
               <Button
-                variant="ghost"
-                size="sm"
+                variant='ghost'
+                size='sm'
                 onClick={() => setPreviewMode(!previewMode)}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                {previewMode ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {previewMode ? <EyeOff className='w-4 h-4' /> : <Eye className='w-4 h-4' />}
                 {previewMode ? 'Edit' : 'Preview'}
               </Button>
 
               <Button
-                variant="ghost"
-                size="sm"
+                variant='ghost'
+                size='sm'
                 onClick={() => setIsFullscreen(!isFullscreen)}
-                title="Toggle Fullscreen (F11)"
+                title='Toggle Fullscreen (F11)'
               >
-                {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
+                {isFullscreen ? (
+                  <Minimize2 className='w-4 h-4' />
+                ) : (
+                  <Maximize2 className='w-4 h-4' />
+                )}
               </Button>
 
-              <div className="w-px h-6 bg-gray-300" />
+              <div className='w-px h-6 bg-gray-300' />
 
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowFormatting(!showFormatting)}
-              >
-                <Settings className="w-4 h-4" />
+              <Button variant='ghost' size='sm' onClick={() => setShowFormatting(!showFormatting)}>
+                <Settings className='w-4 h-4' />
               </Button>
 
-              <HelpButton helpId="profile-editor-sections" size="sm" />
+              <HelpButton helpId='profile-editor-sections' size='sm' />
 
               <Button
                 onClick={handleSave}
                 disabled={saving || !unsavedChanges}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                <Save className="w-4 h-4" />
+                <Save className='w-4 h-4' />
                 {saving ? 'Saving...' : 'Save'}
               </Button>
             </div>
@@ -522,14 +548,14 @@ const DocumentEditorPage: React.FC = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex h-full">
+      <div className='flex h-full'>
         {/* Formatting Sidebar */}
         {showFormatting && (
           <FormattingSidebar
             document={document}
             selectedSectionId={selectedSectionId}
-            onFormatDocument={(formatting) => {
-              setDocument(prev => prev ? { ...prev, formatting } : null);
+            onFormatDocument={formatting => {
+              setDocument(prev => (prev ? { ...prev, formatting } : null));
               setUnsavedChanges(true);
             }}
             onFormatSection={applySectionFormatting}
@@ -537,12 +563,9 @@ const DocumentEditorPage: React.FC = () => {
         )}
 
         {/* Split Editor/Preview */}
-        <div className="flex-1 flex">
+        <div className='flex-1 flex'>
           {/* Editor Pane */}
-          <div
-            className="bg-white border-r"
-            style={{ width: `${splitRatio * 100}%` }}
-          >
+          <div className='bg-white border-r' style={{ width: `${splitRatio * 100}%` }}>
             <DocumentEditor
               ref={editorRef}
               document={document}
@@ -558,23 +581,16 @@ const DocumentEditorPage: React.FC = () => {
           {/* Resize Handle */}
           <div
             ref={resizeRef}
-            className="w-1 bg-gray-300 cursor-col-resize hover:bg-gray-400 transition-colors relative group"
+            className='w-1 bg-gray-300 cursor-col-resize hover:bg-gray-400 transition-colors relative group'
             onMouseDown={() => setIsDragging(true)}
           >
-            <div className="absolute inset-y-0 -inset-x-1 group-hover:bg-blue-500 group-hover:bg-opacity-20 transition-colors" />
-            <Move3D className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className='absolute inset-y-0 -inset-x-1 group-hover:bg-blue-500 group-hover:bg-opacity-20 transition-colors' />
+            <Move3D className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity' />
           </div>
 
           {/* Preview Pane */}
-          <div
-            className="bg-gray-50 overflow-auto"
-            style={{ width: `${(1 - splitRatio) * 100}%` }}
-          >
-            <DocumentPreview
-              ref={previewRef}
-              document={document}
-              className="p-8"
-            />
+          <div className='bg-gray-50 overflow-auto' style={{ width: `${(1 - splitRatio) * 100}%` }}>
+            <DocumentPreview ref={previewRef} document={document} className='p-8' />
           </div>
         </div>
       </div>
@@ -583,52 +599,60 @@ const DocumentEditorPage: React.FC = () => {
 };
 
 // Document Editor Component
-const DocumentEditor = React.forwardRef<HTMLDivElement, {
-  document: DocumentData;
-  selectedSectionId: string | null;
-  onSelectSection: (id: string | null) => void;
-  onUpdateSection: (id: string, updates: Partial<DocumentSection>) => void;
-  onAddSection: (type: DocumentSection['type'], afterId?: string) => void;
-  onDeleteSection: (id: string) => void;
-  previewMode: boolean;
-}>(({
-  document,
-  selectedSectionId,
-  onSelectSection,
-  onUpdateSection,
-  onAddSection,
-  onDeleteSection,
-  previewMode,
-}, ref) => {
-  if (previewMode) {
-    return <DocumentPreview document={document} />;
+const DocumentEditor = React.forwardRef<
+  HTMLDivElement,
+  {
+    document: DocumentData;
+    selectedSectionId: string | null;
+    onSelectSection: (id: string | null) => void;
+    onUpdateSection: (id: string, updates: Partial<DocumentSection>) => void;
+    onAddSection: (type: DocumentSection['type'], afterId?: string) => void;
+    onDeleteSection: (id: string) => void;
+    previewMode: boolean;
   }
+>(
+  (
+    {
+      document,
+      selectedSectionId,
+      onSelectSection,
+      onUpdateSection,
+      onAddSection,
+      onDeleteSection,
+      previewMode,
+    },
+    ref
+  ) => {
+    if (previewMode) {
+      return <DocumentPreview document={document} />;
+    }
 
-  return (
-    <div ref={ref} className="h-full overflow-auto p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
-        {document.content
-          .sort((a, b) => a.order - b.order)
-          .map((section) => (
-            <SectionEditor
-              key={section.id}
-              section={section}
-              isSelected={selectedSectionId === section.id}
-              onSelect={() => onSelectSection(section.id)}
-              onUpdate={(updates) => onUpdateSection(section.id, updates)}
-              onAddAfter={(type) => onAddSection(type, section.id)}
-              onDelete={() => onDeleteSection(section.id)}
-            />
-          ))}
+    return (
+      <div ref={ref} className='h-full overflow-auto p-6'>
+        <div className='max-w-4xl mx-auto space-y-6'>
+          {document.content
+            .sort((a, b) => a.order - b.order)
+            .map(section => (
+              <SectionEditor
+                key={section.id}
+                section={section}
+                isSelected={selectedSectionId === section.id}
+                onSelect={() => onSelectSection(section.id)}
+                onUpdate={updates => onUpdateSection(section.id, updates)}
+                onAddAfter={type => onAddSection(type, section.id)}
+                onDelete={() => onDeleteSection(section.id)}
+              />
+            ))}
 
-        {/* Add Section Button */}
-        <div className="text-center py-8">
-          <AddSectionDropdown onAddSection={(type) => onAddSection(type)} />
+          {/* Add Section Button */}
+          <div className='text-center py-8'>
+            <AddSectionDropdown onAddSection={type => onAddSection(type)} />
+          </div>
         </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 // Section Editor Component
 const SectionEditor: React.FC<{
@@ -650,37 +674,37 @@ const SectionEditor: React.FC<{
       onMouseLeave={() => setShowActions(false)}
       onClick={onSelect}
     >
-      <div className="p-6">
+      <div className='p-6'>
         {/* Section Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className='flex items-center justify-between mb-4'>
           <input
-            type="text"
+            type='text'
             value={section.title}
-            onChange={(e) => onUpdate({ title: e.target.value })}
-            className="text-lg font-semibold text-gray-900 bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500 px-2 py-1 rounded"
-            placeholder="Section Title"
+            onChange={e => onUpdate({ title: e.target.value })}
+            className='text-lg font-semibold text-gray-900 bg-transparent border-none outline-none focus:ring-2 focus:ring-blue-500 px-2 py-1 rounded'
+            placeholder='Section Title'
           />
 
           {(showActions || isSelected) && (
-            <div className="flex items-center gap-2">
+            <div className='flex items-center gap-2'>
               <Button
-                size="sm"
-                variant="ghost"
+                size='sm'
+                variant='ghost'
                 onClick={() => onUpdate({ visible: !section.visible })}
                 className={section.visible ? 'text-green-600' : 'text-gray-400'}
               >
-                <Eye className="w-4 h-4" />
+                <Eye className='w-4 h-4' />
               </Button>
 
-              <AddSectionDropdown onAddSection={onAddAfter} size="sm" />
+              <AddSectionDropdown onAddSection={onAddAfter} size='sm' />
 
               <Button
-                size="sm"
-                variant="ghost"
+                size='sm'
+                variant='ghost'
                 onClick={onDelete}
-                className="text-red-500 hover:text-red-700"
+                className='text-red-500 hover:text-red-700'
               >
-                <FileText className="w-4 h-4" />
+                <FileText className='w-4 h-4' />
               </Button>
             </div>
           )}
@@ -689,8 +713,8 @@ const SectionEditor: React.FC<{
         {/* Section Content */}
         <textarea
           value={section.content}
-          onChange={(e) => onUpdate({ content: e.target.value })}
-          className="w-full min-h-32 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
+          onChange={e => onUpdate({ content: e.target.value })}
+          className='w-full min-h-32 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical'
           placeholder={`Enter ${section.type} content...`}
           style={{
             fontFamily: section.formatting?.bold ? 'bold' : 'normal',
@@ -713,7 +737,11 @@ const AddSectionDropdown: React.FC<{
 }> = ({ onAddSection, size = 'md' }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const sectionTypes: Array<{ type: DocumentSection['type']; label: string; icon: React.ComponentType<{ className?: string }> }> = [
+  const sectionTypes: Array<{
+    type: DocumentSection['type'];
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+  }> = [
     { type: 'header', label: 'Personal Information', icon: FileText },
     { type: 'summary', label: 'Professional Summary', icon: FileText },
     { type: 'experience', label: 'Work Experience', icon: FileText },
@@ -723,26 +751,23 @@ const AddSectionDropdown: React.FC<{
   ];
 
   return (
-    <div className="relative">
+    <div className='relative'>
       <Button
         size={size}
-        variant="outline"
+        variant='outline'
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2"
+        className='flex items-center gap-2'
       >
-        <FileText className="w-4 h-4" />
+        <FileText className='w-4 h-4' />
         Add Section
-        <ChevronDown className="w-3 h-3" />
+        <ChevronDown className='w-3 h-3' />
       </Button>
 
       {isOpen && (
         <>
-          <div
-            className="fixed inset-0 z-10"
-            onClick={() => setIsOpen(false)}
-          />
-          <div className="absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20">
-            <div className="py-1">
+          <div className='fixed inset-0 z-10' onClick={() => setIsOpen(false)} />
+          <div className='absolute top-full left-0 mt-1 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20'>
+            <div className='py-1'>
               {sectionTypes.map(({ type, label, icon: Icon }) => (
                 <button
                   key={type}
@@ -750,9 +775,9 @@ const AddSectionDropdown: React.FC<{
                     onAddSection(type);
                     setIsOpen(false);
                   }}
-                  className="flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+                  className='flex items-center gap-2 w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors'
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className='w-4 h-4' />
                   {label}
                 </button>
               ))}
@@ -776,106 +801,112 @@ const FormattingSidebar: React.FC<{
     : null;
 
   return (
-    <div className="w-80 bg-white border-r border-gray-200 overflow-auto">
-      <div className="p-4 space-y-6">
-        <div className="flex items-center gap-2">
-          <Palette className="w-5 h-5 text-blue-500" />
-          <h3 className="font-semibold text-gray-900">Formatting</h3>
+    <div className='w-80 bg-white border-r border-gray-200 overflow-auto'>
+      <div className='p-4 space-y-6'>
+        <div className='flex items-center gap-2'>
+          <Palette className='w-5 h-5 text-blue-500' />
+          <h3 className='font-semibold text-gray-900'>Formatting</h3>
         </div>
 
         {/* Document-level formatting */}
-        <Card className="p-4">
-          <h4 className="font-medium text-gray-900 mb-3">Document Style</h4>
+        <Card className='p-4'>
+          <h4 className='font-medium text-gray-900 mb-3'>Document Style</h4>
 
-          <div className="space-y-4">
+          <div className='space-y-4'>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Font Family
-              </label>
+              <label className='block text-sm font-medium text-gray-700 mb-1'>Font Family</label>
               <select
                 value={document.formatting.fontFamily}
-                onChange={(e) => onFormatDocument({
-                  ...document.formatting,
-                  fontFamily: e.target.value,
-                })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                onChange={e =>
+                  onFormatDocument({
+                    ...document.formatting,
+                    fontFamily: e.target.value,
+                  })
+                }
+                className='w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500'
               >
-                <option value="Inter">Inter</option>
-                <option value="Arial">Arial</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Helvetica">Helvetica</option>
+                <option value='Inter'>Inter</option>
+                <option value='Arial'>Arial</option>
+                <option value='Times New Roman'>Times New Roman</option>
+                <option value='Georgia'>Georgia</option>
+                <option value='Helvetica'>Helvetica</option>
               </select>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className='block text-sm font-medium text-gray-700 mb-1'>
                 Font Size: {document.formatting.fontSize}pt
               </label>
               <input
-                type="range"
-                min="8"
-                max="16"
+                type='range'
+                min='8'
+                max='16'
                 value={document.formatting.fontSize}
-                onChange={(e) => onFormatDocument({
-                  ...document.formatting,
-                  fontSize: parseInt(e.target.value),
-                })}
-                className="w-full"
+                onChange={e =>
+                  onFormatDocument({
+                    ...document.formatting,
+                    fontSize: parseInt(e.target.value),
+                  })
+                }
+                className='w-full'
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className='block text-sm font-medium text-gray-700 mb-1'>
                 Line Height: {document.formatting.lineHeight}
               </label>
               <input
-                type="range"
-                min="1"
-                max="2"
-                step="0.1"
+                type='range'
+                min='1'
+                max='2'
+                step='0.1'
                 value={document.formatting.lineHeight}
-                onChange={(e) => onFormatDocument({
-                  ...document.formatting,
-                  lineHeight: parseFloat(e.target.value),
-                })}
-                className="w-full"
+                onChange={e =>
+                  onFormatDocument({
+                    ...document.formatting,
+                    lineHeight: parseFloat(e.target.value),
+                  })
+                }
+                className='w-full'
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Colors
-              </label>
-              <div className="grid grid-cols-2 gap-2">
+              <label className='block text-sm font-medium text-gray-700 mb-2'>Colors</label>
+              <div className='grid grid-cols-2 gap-2'>
                 <div>
-                  <label className="block text-xs text-gray-600 mb-1">Primary</label>
+                  <label className='block text-xs text-gray-600 mb-1'>Primary</label>
                   <input
-                    type="color"
+                    type='color'
                     value={document.formatting.colors.primary}
-                    onChange={(e) => onFormatDocument({
-                      ...document.formatting,
-                      colors: {
-                        ...document.formatting.colors,
-                        primary: e.target.value,
-                      },
-                    })}
-                    className="w-full h-8 border border-gray-300 rounded"
+                    onChange={e =>
+                      onFormatDocument({
+                        ...document.formatting,
+                        colors: {
+                          ...document.formatting.colors,
+                          primary: e.target.value,
+                        },
+                      })
+                    }
+                    className='w-full h-8 border border-gray-300 rounded'
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-gray-600 mb-1">Text</label>
+                  <label className='block text-xs text-gray-600 mb-1'>Text</label>
                   <input
-                    type="color"
+                    type='color'
                     value={document.formatting.colors.text}
-                    onChange={(e) => onFormatDocument({
-                      ...document.formatting,
-                      colors: {
-                        ...document.formatting.colors,
-                        text: e.target.value,
-                      },
-                    })}
-                    className="w-full h-8 border border-gray-300 rounded"
+                    onChange={e =>
+                      onFormatDocument({
+                        ...document.formatting,
+                        colors: {
+                          ...document.formatting.colors,
+                          text: e.target.value,
+                        },
+                      })
+                    }
+                    className='w-full h-8 border border-gray-300 rounded'
                   />
                 </div>
               </div>
@@ -885,111 +916,127 @@ const FormattingSidebar: React.FC<{
 
         {/* Section-level formatting */}
         {selectedSection && (
-          <Card className="p-4">
-            <h4 className="font-medium text-gray-900 mb-3">
-              Section: {selectedSection.title}
-            </h4>
+          <Card className='p-4'>
+            <h4 className='font-medium text-gray-900 mb-3'>Section: {selectedSection.title}</h4>
 
-            <div className="space-y-4">
+            <div className='space-y-4'>
               {/* Text Formatting */}
-              <div className="flex items-center gap-2">
+              <div className='flex items-center gap-2'>
                 <Button
-                  size="sm"
+                  size='sm'
                   variant={selectedSection.formatting?.bold ? 'default' : 'outline'}
-                  onClick={() => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    bold: !selectedSection.formatting?.bold,
-                  })}
+                  onClick={() =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      bold: !selectedSection.formatting?.bold,
+                    })
+                  }
                 >
-                  <Bold className="w-3 h-3" />
+                  <Bold className='w-3 h-3' />
                 </Button>
                 <Button
-                  size="sm"
+                  size='sm'
                   variant={selectedSection.formatting?.italic ? 'default' : 'outline'}
-                  onClick={() => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    italic: !selectedSection.formatting?.italic,
-                  })}
+                  onClick={() =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      italic: !selectedSection.formatting?.italic,
+                    })
+                  }
                 >
-                  <Italic className="w-3 h-3" />
+                  <Italic className='w-3 h-3' />
                 </Button>
                 <Button
-                  size="sm"
+                  size='sm'
                   variant={selectedSection.formatting?.underline ? 'default' : 'outline'}
-                  onClick={() => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    underline: !selectedSection.formatting?.underline,
-                  })}
+                  onClick={() =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      underline: !selectedSection.formatting?.underline,
+                    })
+                  }
                 >
-                  <Underline className="w-3 h-3" />
+                  <Underline className='w-3 h-3' />
                 </Button>
               </div>
 
               {/* Alignment */}
-              <div className="flex items-center gap-2">
+              <div className='flex items-center gap-2'>
                 <Button
-                  size="sm"
+                  size='sm'
                   variant={selectedSection.formatting?.alignment === 'left' ? 'default' : 'outline'}
-                  onClick={() => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    alignment: 'left',
-                  })}
+                  onClick={() =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      alignment: 'left',
+                    })
+                  }
                 >
-                  <AlignLeft className="w-3 h-3" />
+                  <AlignLeft className='w-3 h-3' />
                 </Button>
                 <Button
-                  size="sm"
-                  variant={selectedSection.formatting?.alignment === 'center' ? 'default' : 'outline'}
-                  onClick={() => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    alignment: 'center',
-                  })}
+                  size='sm'
+                  variant={
+                    selectedSection.formatting?.alignment === 'center' ? 'default' : 'outline'
+                  }
+                  onClick={() =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      alignment: 'center',
+                    })
+                  }
                 >
-                  <AlignCenter className="w-3 h-3" />
+                  <AlignCenter className='w-3 h-3' />
                 </Button>
                 <Button
-                  size="sm"
-                  variant={selectedSection.formatting?.alignment === 'right' ? 'default' : 'outline'}
-                  onClick={() => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    alignment: 'right',
-                  })}
+                  size='sm'
+                  variant={
+                    selectedSection.formatting?.alignment === 'right' ? 'default' : 'outline'
+                  }
+                  onClick={() =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      alignment: 'right',
+                    })
+                  }
                 >
-                  <AlignRight className="w-3 h-3" />
+                  <AlignRight className='w-3 h-3' />
                 </Button>
               </div>
 
               {/* Font Size */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className='block text-sm font-medium text-gray-700 mb-1'>
                   Font Size: {selectedSection.formatting?.fontSize || 'Default'}
                 </label>
                 <input
-                  type="range"
-                  min="8"
-                  max="24"
+                  type='range'
+                  min='8'
+                  max='24'
                   value={selectedSection.formatting?.fontSize || document.formatting.fontSize}
-                  onChange={(e) => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    fontSize: parseInt(e.target.value),
-                  })}
-                  className="w-full"
+                  onChange={e =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      fontSize: parseInt(e.target.value),
+                    })
+                  }
+                  className='w-full'
                 />
               </div>
 
               {/* Color */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Text Color
-                </label>
+                <label className='block text-sm font-medium text-gray-700 mb-1'>Text Color</label>
                 <input
-                  type="color"
+                  type='color'
                   value={selectedSection.formatting?.color || document.formatting.colors.text}
-                  onChange={(e) => onFormatSection(selectedSection.id, {
-                    ...selectedSection.formatting,
-                    color: e.target.value,
-                  })}
-                  className="w-full h-8 border border-gray-300 rounded"
+                  onChange={e =>
+                    onFormatSection(selectedSection.id, {
+                      ...selectedSection.formatting,
+                      color: e.target.value,
+                    })
+                  }
+                  className='w-full h-8 border border-gray-300 rounded'
                 />
               </div>
             </div>
@@ -1001,10 +1048,13 @@ const FormattingSidebar: React.FC<{
 };
 
 // Document Preview Component
-const DocumentPreview = React.forwardRef<HTMLDivElement, {
-  document: DocumentData;
-  className?: string;
-}>(({ document, className = '' }, ref) => {
+const DocumentPreview = React.forwardRef<
+  HTMLDivElement,
+  {
+    document: DocumentData;
+    className?: string;
+  }
+>(({ document, className = '' }, ref) => {
   const previewStyles = {
     fontFamily: document.formatting.fontFamily,
     fontSize: `${document.formatting.fontSize}pt`,
@@ -1015,17 +1065,17 @@ const DocumentPreview = React.forwardRef<HTMLDivElement, {
 
   return (
     <div ref={ref} className={`bg-white shadow-lg max-w-[8.5in] mx-auto ${className}`}>
-      <div style={previewStyles} className="min-h-[11in]">
+      <div style={previewStyles} className='min-h-[11in]'>
         {document.content
           .filter(section => section.visible)
           .sort((a, b) => a.order - b.order)
-          .map((section) => (
-            <div key={section.id} className="mb-4">
+          .map(section => (
+            <div key={section.id} className='mb-4'>
               <h3
-                className="font-semibold mb-2"
+                className='font-semibold mb-2'
                 style={{
                   color: document.formatting.colors.primary,
-                  fontSize: `${(document.formatting.fontSize + 2)}pt`,
+                  fontSize: `${document.formatting.fontSize + 2}pt`,
                   fontWeight: section.formatting?.bold ? 'bold' : 'semibold',
                   fontStyle: section.formatting?.italic ? 'italic' : 'normal',
                   textDecoration: section.formatting?.underline ? 'underline' : 'none',
@@ -1035,13 +1085,15 @@ const DocumentPreview = React.forwardRef<HTMLDivElement, {
                 {section.title}
               </h3>
               <div
-                className="whitespace-pre-wrap"
+                className='whitespace-pre-wrap'
                 style={{
                   fontWeight: section.formatting?.bold ? 'bold' : 'normal',
                   fontStyle: section.formatting?.italic ? 'italic' : 'normal',
                   textDecoration: section.formatting?.underline ? 'underline' : 'none',
                   textAlign: section.formatting?.alignment || 'left',
-                  fontSize: section.formatting?.fontSize ? `${section.formatting.fontSize}pt` : 'inherit',
+                  fontSize: section.formatting?.fontSize
+                    ? `${section.formatting.fontSize}pt`
+                    : 'inherit',
                   color: section.formatting?.color || 'inherit',
                 }}
               >

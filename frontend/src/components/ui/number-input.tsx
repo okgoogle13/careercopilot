@@ -4,7 +4,8 @@ import { cn } from '../../lib/utils';
 import { Input } from './input';
 import { Button } from './Button';
 
-export interface NumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'> {
+export interface NumberInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange' | 'type'> {
   value?: number;
   onChange?: (value: number | undefined) => void;
   min?: number;
@@ -78,9 +79,9 @@ export function NumberInput({
 
     // Remove currency symbols, percentage signs, and locale-specific formatting
     const cleanValue = input
-      .replace(/[$€£¥₹]/g, '')  // Common currency symbols
-      .replace(/%/g, '')        // Percentage sign
-      .replace(/,/g, '')        // Thousands separators
+      .replace(/[$€£¥₹]/g, '') // Common currency symbols
+      .replace(/%/g, '') // Percentage sign
+      .replace(/,/g, '') // Thousands separators
       .trim();
 
     const parsed = parseFloat(cleanValue);
@@ -94,21 +95,24 @@ export function NumberInput({
     return parsed;
   }
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setInputValue(newValue);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
+      setInputValue(newValue);
 
-    const parsed = parseInputValue(newValue);
+      const parsed = parseInputValue(newValue);
 
-    // Validate range
-    if (parsed !== undefined) {
-      if (min !== undefined && parsed < min) return;
-      if (max !== undefined && parsed > max) return;
-      if (!allowNegative && parsed < 0) return;
-    }
+      // Validate range
+      if (parsed !== undefined) {
+        if (min !== undefined && parsed < min) return;
+        if (max !== undefined && parsed > max) return;
+        if (!allowNegative && parsed < 0) return;
+      }
 
-    onChange?.(parsed);
-  }, [onChange, min, max, allowNegative, format]);
+      onChange?.(parsed);
+    },
+    [onChange, min, max, allowNegative, format]
+  );
 
   const handleBlur = useCallback(() => {
     setIsFocused(false);
@@ -125,18 +129,21 @@ export function NumberInput({
     }
   }, [value]);
 
-  const handleStep = useCallback((direction: 'up' | 'down') => {
-    const currentValue = value ?? 0;
-    const stepValue = direction === 'up' ? step : -step;
-    const newValue = currentValue + stepValue;
+  const handleStep = useCallback(
+    (direction: 'up' | 'down') => {
+      const currentValue = value ?? 0;
+      const stepValue = direction === 'up' ? step : -step;
+      const newValue = currentValue + stepValue;
 
-    // Validate range
-    if (min !== undefined && newValue < min) return;
-    if (max !== undefined && newValue > max) return;
-    if (!allowNegative && newValue < 0) return;
+      // Validate range
+      if (min !== undefined && newValue < min) return;
+      if (max !== undefined && newValue > max) return;
+      if (!allowNegative && newValue < 0) return;
 
-    onChange?.(newValue);
-  }, [value, step, min, max, allowNegative, onChange]);
+      onChange?.(newValue);
+    },
+    [value, step, min, max, allowNegative, onChange]
+  );
 
   React.useEffect(() => {
     if (!isFocused && value !== undefined) {
@@ -150,40 +157,37 @@ export function NumberInput({
     <div className={cn('relative', className)}>
       <Input
         {...props}
-        type="text"
+        type='text'
         value={displayValue}
         onChange={handleInputChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         disabled={disabled}
         placeholder={placeholder}
-        className={cn(
-          showStepper && 'pr-16',
-          className
-        )}
+        className={cn(showStepper && 'pr-16', className)}
       />
 
       {showStepper && !disabled && (
-        <div className="absolute right-1 top-1 bottom-1 flex flex-col">
+        <div className='absolute right-1 top-1 bottom-1 flex flex-col'>
           <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="h-1/2 w-8 p-0 rounded-b-none border-b"
+            type='button'
+            variant='ghost'
+            size='sm'
+            className='h-1/2 w-8 p-0 rounded-b-none border-b'
             onClick={() => handleStep('up')}
             disabled={max !== undefined && value !== undefined && value >= max}
           >
-            <Plus className="h-3 w-3" />
+            <Plus className='h-3 w-3' />
           </Button>
           <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            className="h-1/2 w-8 p-0 rounded-t-none"
+            type='button'
+            variant='ghost'
+            size='sm'
+            className='h-1/2 w-8 p-0 rounded-t-none'
             onClick={() => handleStep('down')}
             disabled={min !== undefined && value !== undefined && value <= min}
           >
-            <Minus className="h-3 w-3" />
+            <Minus className='h-3 w-3' />
           </Button>
         </div>
       )}
@@ -196,19 +200,8 @@ interface CurrencyInputProps extends Omit<NumberInputProps, 'format' | 'currency
   currency?: string;
 }
 
-export function CurrencyInput({
-  currency = 'USD',
-  precision = 2,
-  ...props
-}: CurrencyInputProps) {
-  return (
-    <NumberInput
-      {...props}
-      format="currency"
-      currency={currency}
-      precision={precision}
-    />
-  );
+export function CurrencyInput({ currency = 'USD', precision = 2, ...props }: CurrencyInputProps) {
+  return <NumberInput {...props} format='currency' currency={currency} precision={precision} />;
 }
 
 interface PercentageInputProps extends Omit<NumberInputProps, 'format' | 'min' | 'max'> {
@@ -222,13 +215,5 @@ export function PercentageInput({
   max = 100,
   ...props
 }: PercentageInputProps) {
-  return (
-    <NumberInput
-      {...props}
-      format="percentage"
-      precision={precision}
-      min={min}
-      max={max}
-    />
-  );
+  return <NumberInput {...props} format='percentage' precision={precision} min={min} max={max} />;
 }

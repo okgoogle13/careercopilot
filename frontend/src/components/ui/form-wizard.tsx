@@ -47,45 +47,48 @@ export function FormWizard({
   const activeStep = onStepChange ? currentStep : internalCurrentStep;
   const currentStepData = steps[activeStep];
 
-  const handleStepChange = useCallback(async (newStep: number) => {
-    if (newStep === activeStep) return;
+  const handleStepChange = useCallback(
+    async (newStep: number) => {
+      if (newStep === activeStep) return;
 
-    setLoading(true);
-    setErrors({});
+      setLoading(true);
+      setErrors({});
 
-    try {
-      // Validate current step if moving forward
-      if (newStep > activeStep && currentStepData.validation) {
-        const isValid = await currentStepData.validation();
-        if (!isValid) {
-          setErrors({ [activeStep]: 'Please complete all required fields in this step' });
-          return;
+      try {
+        // Validate current step if moving forward
+        if (newStep > activeStep && currentStepData.validation) {
+          const isValid = await currentStepData.validation();
+          if (!isValid) {
+            setErrors({ [activeStep]: 'Please complete all required fields in this step' });
+            return;
+          }
         }
-      }
 
-      // Call onLeave for current step
-      if (currentStepData.onLeave) {
-        await currentStepData.onLeave();
-      }
+        // Call onLeave for current step
+        if (currentStepData.onLeave) {
+          await currentStepData.onLeave();
+        }
 
-      // Update step
-      if (onStepChange) {
-        onStepChange(newStep);
-      } else {
-        setInternalCurrentStep(newStep);
-      }
+        // Update step
+        if (onStepChange) {
+          onStepChange(newStep);
+        } else {
+          setInternalCurrentStep(newStep);
+        }
 
-      // Call onEnter for new step
-      const newStepData = steps[newStep];
-      if (newStepData.onEnter) {
-        await newStepData.onEnter();
+        // Call onEnter for new step
+        const newStepData = steps[newStep];
+        if (newStepData.onEnter) {
+          await newStepData.onEnter();
+        }
+      } catch (error) {
+        setErrors({ [activeStep]: error instanceof Error ? error.message : 'An error occurred' });
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setErrors({ [activeStep]: error instanceof Error ? error.message : 'An error occurred' });
-    } finally {
-      setLoading(false);
-    }
-  }, [activeStep, currentStepData, onStepChange, steps]);
+    },
+    [activeStep, currentStepData, onStepChange, steps]
+  );
 
   const handleNext = useCallback(async () => {
     if (activeStep < steps.length - 1) {
@@ -116,19 +119,28 @@ export function FormWizard({
     }
   }, [activeStep, handleStepChange]);
 
-  const handleStepClick = useCallback((stepIndex: number) => {
-    if (allowStepNavigation || stepIndex <= Math.max(...completedSteps, activeStep)) {
-      handleStepChange(stepIndex);
-    }
-  }, [allowStepNavigation, completedSteps, activeStep, handleStepChange]);
+  const handleStepClick = useCallback(
+    (stepIndex: number) => {
+      if (allowStepNavigation || stepIndex <= Math.max(...completedSteps, activeStep)) {
+        handleStepChange(stepIndex);
+      }
+    },
+    [allowStepNavigation, completedSteps, activeStep, handleStepChange]
+  );
 
-  const isStepCompleted = useCallback((stepIndex: number) => {
-    return completedSteps.includes(stepIndex) || stepIndex < activeStep;
-  }, [completedSteps, activeStep]);
+  const isStepCompleted = useCallback(
+    (stepIndex: number) => {
+      return completedSteps.includes(stepIndex) || stepIndex < activeStep;
+    },
+    [completedSteps, activeStep]
+  );
 
-  const isStepAccessible = useCallback((stepIndex: number) => {
-    return allowStepNavigation || stepIndex <= Math.max(...completedSteps, activeStep);
-  }, [allowStepNavigation, completedSteps, activeStep]);
+  const isStepAccessible = useCallback(
+    (stepIndex: number) => {
+      return allowStepNavigation || stepIndex <= Math.max(...completedSteps, activeStep);
+    },
+    [allowStepNavigation, completedSteps, activeStep]
+  );
 
   const progress = ((activeStep + 1) / steps.length) * 100;
 
@@ -136,14 +148,16 @@ export function FormWizard({
     <div className={cn('w-full', className)}>
       {/* Progress Bar */}
       {showProgress && (
-        <div className="mb-8">
-          <div className="flex justify-between text-sm text-muted-foreground mb-2">
-            <span>Step {activeStep + 1} of {steps.length}</span>
+        <div className='mb-8'>
+          <div className='flex justify-between text-sm text-muted-foreground mb-2'>
+            <span>
+              Step {activeStep + 1} of {steps.length}
+            </span>
             <span>{Math.round(progress)}% complete</span>
           </div>
-          <div className="w-full bg-secondary rounded-full h-2">
+          <div className='w-full bg-secondary rounded-full h-2'>
             <div
-              className="bg-primary h-2 rounded-full transition-all duration-300"
+              className='bg-primary h-2 rounded-full transition-all duration-300'
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -151,10 +165,14 @@ export function FormWizard({
       )}
 
       {/* Step Navigation */}
-      <div className={cn(
-        'mb-8',
-        orientation === 'horizontal' ? 'flex items-center justify-center space-x-4 overflow-x-auto' : 'space-y-2'
-      )}>
+      <div
+        className={cn(
+          'mb-8',
+          orientation === 'horizontal'
+            ? 'flex items-center justify-center space-x-4 overflow-x-auto'
+            : 'space-y-2'
+        )}
+      >
         {steps.map((step, index) => {
           const isActive = index === activeStep;
           const isCompleted = isStepCompleted(index);
@@ -183,50 +201,53 @@ export function FormWizard({
                 )}
               >
                 {/* Step Icon */}
-                <div className={cn(
-                  'flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all',
-                  isCompleted && 'bg-primary text-primary-foreground',
-                  isActive && !isCompleted && 'bg-primary text-primary-foreground',
-                  !isActive && !isCompleted && 'bg-muted text-muted-foreground border-2 border-muted-foreground'
-                )}>
+                <div
+                  className={cn(
+                    'flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all',
+                    isCompleted && 'bg-primary text-primary-foreground',
+                    isActive && !isCompleted && 'bg-primary text-primary-foreground',
+                    !isActive &&
+                      !isCompleted &&
+                      'bg-muted text-muted-foreground border-2 border-muted-foreground'
+                  )}
+                >
                   {isCompleted ? (
-                    <Check className="w-4 h-4" />
+                    <Check className='w-4 h-4' />
                   ) : showStepNumbers ? (
                     index + 1
                   ) : (
-                    <Circle className="w-4 h-4" />
+                    <Circle className='w-4 h-4' />
                   )}
                 </div>
 
                 {/* Step Content */}
-                <div className={cn(
-                  'min-w-0',
-                  orientation === 'horizontal' && 'hidden sm:block'
-                )}>
-                  <div className={cn(
-                    'font-medium text-sm',
-                    isActive && 'text-primary',
-                    !isActive && 'text-foreground'
-                  )}>
+                <div className={cn('min-w-0', orientation === 'horizontal' && 'hidden sm:block')}>
+                  <div
+                    className={cn(
+                      'font-medium text-sm',
+                      isActive && 'text-primary',
+                      !isActive && 'text-foreground'
+                    )}
+                  >
                     {step.title}
                     {step.optional && (
-                      <span className="text-xs text-muted-foreground ml-1">(Optional)</span>
+                      <span className='text-xs text-muted-foreground ml-1'>(Optional)</span>
                     )}
                   </div>
                   {step.description && (
-                    <div className="text-xs text-muted-foreground mt-1">
-                      {step.description}
-                    </div>
+                    <div className='text-xs text-muted-foreground mt-1'>{step.description}</div>
                   )}
                 </div>
               </button>
 
               {/* Connector Line */}
               {orientation === 'horizontal' && index < steps.length - 1 && (
-                <div className={cn(
-                  'h-px flex-1 mx-2 transition-all',
-                  isCompleted ? 'bg-primary' : 'bg-border'
-                )} />
+                <div
+                  className={cn(
+                    'h-px flex-1 mx-2 transition-all',
+                    isCompleted ? 'bg-primary' : 'bg-border'
+                  )}
+                />
               )}
             </div>
           );
@@ -236,61 +257,49 @@ export function FormWizard({
       {/* Step Content */}
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className='flex items-center gap-2'>
             {currentStepData.title}
             {currentStepData.optional && (
-              <span className="text-sm font-normal text-muted-foreground">(Optional)</span>
+              <span className='text-sm font-normal text-muted-foreground'>(Optional)</span>
             )}
           </CardTitle>
           {currentStepData.description && (
-            <p className="text-sm text-muted-foreground">
-              {currentStepData.description}
-            </p>
+            <p className='text-sm text-muted-foreground'>{currentStepData.description}</p>
           )}
         </CardHeader>
         <CardContent>
           {/* Error Display */}
           {errors[activeStep] && (
-            <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md">
-              <p className="text-sm text-destructive">{errors[activeStep]}</p>
+            <div className='mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md'>
+              <p className='text-sm text-destructive'>{errors[activeStep]}</p>
             </div>
           )}
 
           {/* Step Content */}
-          <div className="mb-6">
-            {currentStepData.content}
-          </div>
+          <div className='mb-6'>{currentStepData.content}</div>
 
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-between">
+          <div className='flex items-center justify-between'>
             <Button
-              variant="outline"
+              variant='outline'
               onClick={handlePrevious}
               disabled={activeStep === 0 || loading}
-              className="flex items-center gap-2"
+              className='flex items-center gap-2'
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className='w-4 h-4' />
               Previous
             </Button>
 
-            <div className="flex items-center gap-2">
+            <div className='flex items-center gap-2'>
               {activeStep < steps.length - 1 ? (
-                <Button
-                  onClick={handleNext}
-                  disabled={loading}
-                  className="flex items-center gap-2"
-                >
+                <Button onClick={handleNext} disabled={loading} className='flex items-center gap-2'>
                   {loading ? 'Validating...' : 'Next'}
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight className='w-4 h-4' />
                 </Button>
               ) : (
-                <Button
-                  onClick={handleNext}
-                  disabled={loading}
-                  className="flex items-center gap-2"
-                >
+                <Button onClick={handleNext} disabled={loading} className='flex items-center gap-2'>
                   {loading ? 'Completing...' : 'Complete'}
-                  <Check className="w-4 h-4" />
+                  <Check className='w-4 h-4' />
                 </Button>
               )}
             </div>
@@ -337,10 +346,12 @@ export function Stepper({
   };
 
   return (
-    <div className={cn(
-      orientation === 'horizontal' ? 'flex items-center justify-center space-x-4' : 'space-y-2',
-      className
-    )}>
+    <div
+      className={cn(
+        orientation === 'horizontal' ? 'flex items-center justify-center space-x-4' : 'space-y-2',
+        className
+      )}
+    >
       {steps.map((step, index) => {
         const isActive = index === currentStep;
         const isCompleted = isStepCompleted(index);
@@ -349,10 +360,7 @@ export function Stepper({
         return (
           <div
             key={step.id}
-            className={cn(
-              'flex items-center',
-              orientation === 'vertical' && 'w-full'
-            )}
+            className={cn('flex items-center', orientation === 'vertical' && 'w-full')}
           >
             <button
               onClick={() => onStepClick?.(index)}
@@ -367,46 +375,40 @@ export function Stepper({
               )}
             >
               {/* Step Icon */}
-              <div className={cn(
-                'flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium',
-                isCompleted && 'bg-primary text-primary-foreground',
-                isActive && !isCompleted && 'bg-primary text-primary-foreground',
-                !isActive && !isCompleted && 'bg-muted text-muted-foreground'
-              )}>
+              <div
+                className={cn(
+                  'flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium',
+                  isCompleted && 'bg-primary text-primary-foreground',
+                  isActive && !isCompleted && 'bg-primary text-primary-foreground',
+                  !isActive && !isCompleted && 'bg-muted text-muted-foreground'
+                )}
+              >
                 {isCompleted ? (
-                  <Check className="w-3 h-3" />
+                  <Check className='w-3 h-3' />
                 ) : showNumbers ? (
                   index + 1
                 ) : (
-                  <Circle className="w-3 h-3" />
+                  <Circle className='w-3 h-3' />
                 )}
               </div>
 
               {/* Step Content */}
-              <div className="min-w-0">
-                <div className={cn(
-                  'font-medium text-sm',
-                  isActive && 'text-primary'
-                )}>
+              <div className='min-w-0'>
+                <div className={cn('font-medium text-sm', isActive && 'text-primary')}>
                   {step.title}
                   {step.optional && (
-                    <span className="text-xs text-muted-foreground ml-1">(Optional)</span>
+                    <span className='text-xs text-muted-foreground ml-1'>(Optional)</span>
                   )}
                 </div>
                 {step.description && (
-                  <div className="text-xs text-muted-foreground mt-1">
-                    {step.description}
-                  </div>
+                  <div className='text-xs text-muted-foreground mt-1'>{step.description}</div>
                 )}
               </div>
             </button>
 
             {/* Connector Line */}
             {orientation === 'horizontal' && index < steps.length - 1 && (
-              <div className={cn(
-                'h-px w-8 mx-2',
-                isCompleted ? 'bg-primary' : 'bg-border'
-              )} />
+              <div className={cn('h-px w-8 mx-2', isCompleted ? 'bg-primary' : 'bg-border')} />
             )}
           </div>
         );

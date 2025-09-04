@@ -53,7 +53,7 @@ class ErrorLogger {
       flushInterval: 30000, // 30 seconds
       enableUserTracking: true,
       enablePerformanceMetrics: true,
-      ...config
+      ...config,
     };
 
     this.sessionId = this.generateSessionId();
@@ -126,8 +126,18 @@ class ErrorLogger {
 
   private isSensitiveKey(key: string): boolean {
     const sensitiveKeys = [
-      'password', 'token', 'key', 'secret', 'auth', 'credential',
-      'ssn', 'social', 'credit', 'card', 'email', 'phone'
+      'password',
+      'token',
+      'key',
+      'secret',
+      'auth',
+      'credential',
+      'ssn',
+      'social',
+      'credit',
+      'card',
+      'email',
+      'phone',
     ];
 
     return sensitiveKeys.some(sensitiveKey =>
@@ -143,7 +153,7 @@ class ErrorLogger {
       /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/, // Email
       /\b\d{3}-?\d{2}-?\d{4}\b/, // SSN
       /\b\d{4}[\s-]?\d{4}[\s-]?\d{4}[\s-]?\d{4}\b/, // Credit card
-      /^[a-zA-Z0-9+/]*={0,2}$/ // Base64 (potential tokens)
+      /^[a-zA-Z0-9+/]*={0,2}$/, // Base64 (potential tokens)
     ];
 
     return patterns.some(pattern => pattern.test(value));
@@ -158,7 +168,7 @@ class ErrorLogger {
       component: error.component,
       timestamp: logEntry.timestamp,
       context: error.context,
-      suggestions: error.suggestions.map(s => s.title)
+      suggestions: error.suggestions.map(s => s.title),
     });
   }
 
@@ -180,11 +190,13 @@ class ErrorLogger {
 
     // Memory usage (if available)
     if ('memory' in performance) {
-      const memory = (performance as { memory?: { usedJSHeapSize: number; totalJSHeapSize: number } }).memory;
+      const memory = (
+        performance as { memory?: { usedJSHeapSize: number; totalJSHeapSize: number } }
+      ).memory;
       if (memory) {
         metrics.memory = {
           used: memory.usedJSHeapSize,
-          total: memory.totalJSHeapSize
+          total: memory.totalJSHeapSize,
         };
       }
     }
@@ -194,18 +206,20 @@ class ErrorLogger {
       const timing = performance.timing;
       metrics.timing = {
         domContentLoaded: timing.domContentLoadedEventEnd - timing.navigationStart,
-        loadComplete: timing.loadEventEnd - timing.navigationStart
+        loadComplete: timing.loadEventEnd - timing.navigationStart,
       };
     }
 
     // Network information (if available)
     if ('connection' in navigator) {
-      const connection = (navigator as { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }).connection;
+      const connection = (
+        navigator as { connection?: { effectiveType?: string; downlink?: number; rtt?: number } }
+      ).connection;
       if (connection) {
         metrics.networkInfo = {
           effectiveType: connection.effectiveType || 'unknown',
           downlink: connection.downlink || 0,
-          rtt: connection.rtt || 0
+          rtt: connection.rtt || 0,
         };
       }
     }
@@ -226,13 +240,13 @@ class ErrorLogger {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          ...(this.config.apiKey && { 'Authorization': `Bearer ${this.config.apiKey}` })
+          ...(this.config.apiKey && { Authorization: `Bearer ${this.config.apiKey}` }),
         },
         body: JSON.stringify({
           timestamp: new Date().toISOString(),
           sessionId: this.sessionId,
-          errors: batch
-        })
+          errors: batch,
+        }),
       });
 
       if (!response.ok) {

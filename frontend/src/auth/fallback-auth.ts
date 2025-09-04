@@ -63,10 +63,7 @@ class FallbackAuth {
         // Don't persist the getIdToken function, just the basic user data
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { getIdToken, ...persistableUser } = user;
-        localStorage.setItem(
-          this.storageKey,
-          JSON.stringify({ user: persistableUser })
-        );
+        localStorage.setItem(this.storageKey, JSON.stringify({ user: persistableUser }));
       } else {
         localStorage.removeItem(this.storageKey);
       }

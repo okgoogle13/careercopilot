@@ -8,11 +8,7 @@ interface SkipLinkProps {
   className?: string;
 }
 
-const SkipLink: React.FC<SkipLinkProps> = ({
-  href,
-  children,
-  className,
-}) => {
+const SkipLink: React.FC<SkipLinkProps> = ({ href, children, className }) => {
   return (
     <a
       href={href}

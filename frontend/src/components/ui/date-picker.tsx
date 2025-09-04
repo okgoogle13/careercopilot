@@ -29,7 +29,7 @@ export function DatePicker({
 }: DatePickerProps) {
   const [open, setOpen] = React.useState(false);
 
-  const handleSelect: SelectSingleEventHandler = (selectedDate) => {
+  const handleSelect: SelectSingleEventHandler = selectedDate => {
     onDateChange?.(selectedDate);
     setOpen(false);
   };
@@ -38,7 +38,7 @@ export function DatePicker({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          variant='outline'
           className={cn(
             'w-full justify-start text-left font-normal',
             !date && 'text-muted-foreground',
@@ -46,19 +46,19 @@ export function DatePicker({
           )}
           disabled={disabled}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarIcon className='mr-2 h-4 w-4' />
           {date ? format(date, 'PPP') : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
+      <PopoverContent className='w-auto p-0' align='start'>
         <DayPicker
-          mode="single"
+          mode='single'
           selected={date}
           onSelect={handleSelect}
           disabled={disabled}
           fromDate={fromDate}
           toDate={toDate}
-          className="p-3"
+          className='p-3'
           classNames={{
             months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
             month: 'space-y-4',
@@ -83,9 +83,11 @@ export function DatePicker({
             ),
             day_range_start: 'day-range-start',
             day_range_end: 'day-range-end',
-            day_selected: 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground',
+            day_selected:
+              'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground',
             day_today: 'bg-accent text-accent-foreground',
-            day_outside: 'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
+            day_outside:
+              'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
             day_disabled: 'text-muted-foreground opacity-50',
             day_range_middle: 'aria-selected:bg-accent aria-selected:text-accent-foreground',
             day_hidden: 'invisible',
@@ -138,70 +140,70 @@ export function DateRangePicker({
       {
         label: 'Today',
         shortcut: 'T',
-        range: { from: today, to: today }
+        range: { from: today, to: today },
       },
       {
         label: 'Yesterday',
         shortcut: 'Y',
         range: {
           from: new Date(today.getTime() - 24 * 60 * 60 * 1000),
-          to: new Date(today.getTime() - 24 * 60 * 60 * 1000)
-        }
+          to: new Date(today.getTime() - 24 * 60 * 60 * 1000),
+        },
       },
       {
         label: 'This Week',
         shortcut: 'W',
         range: {
-          from: new Date(today.getTime() - (today.getDay() * 24 * 60 * 60 * 1000)),
-          to: today
-        }
+          from: new Date(today.getTime() - today.getDay() * 24 * 60 * 60 * 1000),
+          to: today,
+        },
       },
       {
         label: 'Last Week',
         range: {
-          from: new Date(today.getTime() - ((today.getDay() + 7) * 24 * 60 * 60 * 1000)),
-          to: new Date(today.getTime() - (today.getDay() * 24 * 60 * 60 * 1000) - 1)
-        }
+          from: new Date(today.getTime() - (today.getDay() + 7) * 24 * 60 * 60 * 1000),
+          to: new Date(today.getTime() - today.getDay() * 24 * 60 * 60 * 1000 - 1),
+        },
       },
       {
         label: 'This Month',
         shortcut: 'M',
         range: {
           from: new Date(today.getFullYear(), today.getMonth(), 1),
-          to: today
-        }
+          to: today,
+        },
       },
       {
         label: 'Last Month',
         range: {
           from: new Date(today.getFullYear(), today.getMonth() - 1, 1),
-          to: new Date(today.getFullYear(), today.getMonth(), 0)
-        }
+          to: new Date(today.getFullYear(), today.getMonth(), 0),
+        },
       },
       {
         label: 'This Quarter',
         shortcut: 'Q',
         range: {
           from: new Date(today.getFullYear(), Math.floor(today.getMonth() / 3) * 3, 1),
-          to: today
-        }
+          to: today,
+        },
       },
       {
         label: 'Last 30 Days',
         shortcut: '3',
         range: {
-          from: new Date(today.getTime() - (30 * 24 * 60 * 60 * 1000)),
-          to: today
-        }
+          from: new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000),
+          to: today,
+        },
       },
       {
         label: 'Last 90 Days',
         shortcut: '9',
         range: {
-          from: new Date(today.getTime() - (90 * 24 * 60 * 60 * 1000)),
-          to: today
-        }
-      }
+          from: new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000),
+          to: today,
+        },
+      },
     ];
   };
 
@@ -224,9 +226,10 @@ export function DateRangePicker({
     if (!range.to) return format(range.from, 'PPP');
 
     // Check if it matches a preset
-    const matchedPreset = presets.find(preset =>
-      preset.range.from?.getTime() === range.from?.getTime() &&
-      preset.range.to?.getTime() === range.to?.getTime()
+    const matchedPreset = presets.find(
+      preset =>
+        preset.range.from?.getTime() === range.from?.getTime() &&
+        preset.range.to?.getTime() === range.to?.getTime()
     );
 
     if (matchedPreset) {
@@ -256,7 +259,7 @@ export function DateRangePicker({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="outline"
+          variant='outline'
           className={cn(
             'w-full justify-start text-left font-normal',
             !dateRange?.from && 'text-muted-foreground',
@@ -264,18 +267,18 @@ export function DateRangePicker({
           )}
           disabled={disabled}
         >
-          <CalendarIcon className="mr-2 h-4 w-4" />
+          <CalendarIcon className='mr-2 h-4 w-4' />
           <span>{formatDateRange(dateRange)}</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <div className="flex">
+      <PopoverContent className='w-auto p-0' align='start'>
+        <div className='flex'>
           {/* Presets Sidebar */}
-          <div className="border-r border-gray-200 p-3 w-40">
-            <div className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide">
+          <div className='border-r border-gray-200 p-3 w-40'>
+            <div className='text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide'>
               Quick Select
             </div>
-            <div className="space-y-1">
+            <div className='space-y-1'>
               {presets.map((preset, index) => (
                 <button
                   key={index}
@@ -285,40 +288,36 @@ export function DateRangePicker({
                     'hover:bg-gray-100 focus:bg-gray-100',
                     // Check if current range matches this preset
                     dateRange?.from?.getTime() === preset.range.from?.getTime() &&
-                    dateRange?.to?.getTime() === preset.range.to?.getTime()
+                      dateRange?.to?.getTime() === preset.range.to?.getTime()
                       ? 'bg-primary text-primary-foreground'
                       : 'text-gray-700'
                   )}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className='flex items-center justify-between'>
                     <span>{preset.label}</span>
                     {preset.shortcut && (
-                      <span className="text-xs opacity-50 font-mono">
-                        {preset.shortcut}
-                      </span>
+                      <span className='text-xs opacity-50 font-mono'>{preset.shortcut}</span>
                     )}
                   </div>
                 </button>
               ))}
             </div>
 
-            <div className="mt-4 pt-3 border-t border-gray-200">
-              <div className="text-xs text-gray-500">
-                Tip: Use keyboard shortcuts
-              </div>
+            <div className='mt-4 pt-3 border-t border-gray-200'>
+              <div className='text-xs text-gray-500'>Tip: Use keyboard shortcuts</div>
             </div>
           </div>
 
           {/* Calendar */}
           <div>
             <DayPicker
-              mode="range"
+              mode='range'
               selected={dateRange}
               onSelect={handleSelect}
               disabled={disabled}
               fromDate={fromDate}
               toDate={toDate}
-              className="p-3"
+              className='p-3'
               numberOfMonths={2}
               classNames={{
                 months: 'flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0',
@@ -344,9 +343,11 @@ export function DateRangePicker({
                 ),
                 day_range_start: 'day-range-start',
                 day_range_end: 'day-range-end',
-                day_selected: 'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground',
+                day_selected:
+                  'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground focus:bg-primary focus:text-primary-foreground',
                 day_today: 'bg-accent text-accent-foreground',
-                day_outside: 'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
+                day_outside:
+                  'day-outside text-muted-foreground opacity-50 aria-selected:bg-accent/50 aria-selected:text-muted-foreground aria-selected:opacity-30',
                 day_disabled: 'text-muted-foreground opacity-50',
                 day_range_middle: 'aria-selected:bg-accent aria-selected:text-accent-foreground',
                 day_hidden: 'invisible',

@@ -78,7 +78,7 @@ describe('AI Services Integration Tests', () => {
     it('should complete a full job matching workflow', async () => {
       mockedApiClient.post.mockResolvedValue(mockJobMatchingResult);
 
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Fill in job preferences
       const jobTypeSelect = screen.getByLabelText(/job type/i);
@@ -110,9 +110,9 @@ describe('AI Services Integration Tests', () => {
             location_preference: 'San Francisco, CA',
             salary_range: {
               min: 120000,
-              max: 180000
-            }
-          }
+              max: 180000,
+            },
+          },
         });
       });
 
@@ -145,7 +145,7 @@ describe('AI Services Integration Tests', () => {
     it('should handle job matching API errors', async () => {
       mockedApiClient.post.mockRejectedValue(new Error('API Error: Rate limit exceeded'));
 
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       const submitButton = screen.getByRole('button', { name: /find job matches/i });
       fireEvent.click(submitButton);
@@ -163,11 +163,12 @@ describe('AI Services Integration Tests', () => {
     it('should complete a full content optimization workflow', async () => {
       mockedApiClient.post.mockResolvedValue(mockContentOptimizationResult);
 
-      render(<ContentOptimizationComponent contentType="resume" />);
+      render(<ContentOptimizationComponent contentType='resume' />);
 
       // Fill in content and settings
       const contentTextarea = screen.getByPlaceholderText(/paste your resume, cover letter/i);
-      const resumeContent = 'John Doe\nSoftware Engineer\nExperienced developer with React skills...';
+      const resumeContent =
+        'John Doe\nSoftware Engineer\nExperienced developer with React skills...';
       fireEvent.change(contentTextarea, { target: { value: resumeContent } });
 
       const targetRoleInput = screen.getByLabelText(/target role/i);
@@ -179,7 +180,9 @@ describe('AI Services Integration Tests', () => {
       // Select optimization goals
       const atsCheckbox = screen.getByRole('checkbox', { name: /ats optimization/i });
       const keywordCheckbox = screen.getByRole('checkbox', { name: /keyword enhancement/i });
-      const readabilityCheckbox = screen.getByRole('checkbox', { name: /readability improvement/i });
+      const readabilityCheckbox = screen.getByRole('checkbox', {
+        name: /readability improvement/i,
+      });
 
       expect(atsCheckbox).toBeChecked(); // should be checked by default
       expect(keywordCheckbox).toBeChecked(); // should be checked by default
@@ -198,7 +201,7 @@ describe('AI Services Integration Tests', () => {
           target_role: 'Senior Software Engineer',
           target_company: 'Google',
           target_industry: undefined,
-          optimization_goals: ['ats_optimization', 'keyword_enhancement', 'readability']
+          optimization_goals: ['ats_optimization', 'keyword_enhancement', 'readability'],
         });
       });
 
@@ -259,7 +262,7 @@ describe('AI Services Integration Tests', () => {
     it('should handle network errors gracefully', async () => {
       mockedApiClient.post.mockRejectedValue(new Error('Network Error'));
 
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       const submitButton = screen.getByRole('button', { name: /find job matches/i });
       fireEvent.click(submitButton);
@@ -297,7 +300,7 @@ describe('AI Services Integration Tests', () => {
     it('should handle invalid response format', async () => {
       mockedApiClient.post.mockResolvedValue({ invalid: 'response' });
 
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       const submitButton = screen.getByRole('button', { name: /find job matches/i });
       fireEvent.click(submitButton);
@@ -318,7 +321,7 @@ describe('AI Services Integration Tests', () => {
         () => new Promise(resolve => setTimeout(() => resolve(mockJobMatchingResult), 1000))
       );
 
-      render(<JobMatchingComponent resumeDocumentId="test-resume-123" />);
+      render(<JobMatchingComponent resumeDocumentId='test-resume-123' />);
 
       // Fill in form
       const jobTypeSelect = screen.getByLabelText(/job type/i);

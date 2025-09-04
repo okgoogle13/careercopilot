@@ -60,7 +60,8 @@ export const HelpButton: React.FC<HelpButtonProps> = ({
   };
 
   const getButtonClass = () => {
-    const baseClass = 'inline-flex items-center gap-1 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded';
+    const baseClass =
+      'inline-flex items-center gap-1 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 rounded';
 
     switch (variant) {
       case 'text':
@@ -78,13 +79,11 @@ export const HelpButton: React.FC<HelpButtonProps> = ({
       className={getButtonClass()}
       title={`Get help: ${content.title}`}
       aria-label={`Show help for ${content.title}`}
-      type="button"
+      type='button'
     >
       {getIcon()}
-      {children && <span className="text-sm">{children}</span>}
-      {variant === 'text' && !children && (
-        <span className="text-sm">Help</span>
-      )}
+      {children && <span className='text-sm'>{children}</span>}
+      {variant === 'text' && !children && <span className='text-sm'>Help</span>}
     </button>
   );
 };

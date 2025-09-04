@@ -66,7 +66,10 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
     const remainingInCurrentStep = Math.max(0, currentStep.estimatedDuration - elapsedTime);
 
     const remainingSteps = steps.slice(currentIndex + 1);
-    const remainingStepsTime = remainingSteps.reduce((acc, step) => acc + step.estimatedDuration, 0);
+    const remainingStepsTime = remainingSteps.reduce(
+      (acc, step) => acc + step.estimatedDuration,
+      0
+    );
 
     return remainingInCurrentStep + remainingStepsTime;
   };
@@ -77,8 +80,11 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
 
     if (currentStepIndex === -1) return 0;
 
-    const currentStepProgress = Math.min(elapsedTime / steps[currentStepIndex].estimatedDuration, 1);
-    const totalProgress = (completedSteps + currentStepProgress) / steps.length * 100;
+    const currentStepProgress = Math.min(
+      elapsedTime / steps[currentStepIndex].estimatedDuration,
+      1
+    );
+    const totalProgress = ((completedSteps + currentStepProgress) / steps.length) * 100;
 
     return Math.min(totalProgress, 100);
   };
@@ -95,13 +101,13 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
   const getStepIcon = (step: AIProgressStep) => {
     switch (step.status) {
       case 'completed':
-        return <CheckCircle className="h-4 w-4 text-green-600" />;
+        return <CheckCircle className='h-4 w-4 text-green-600' />;
       case 'error':
-        return <AlertCircle className="h-4 w-4 text-red-600" />;
+        return <AlertCircle className='h-4 w-4 text-red-600' />;
       case 'in_progress':
-        return <Clock className="h-4 w-4 text-blue-600 animate-pulse" />;
+        return <Clock className='h-4 w-4 text-blue-600 animate-pulse' />;
       default:
-        return <div className="h-4 w-4 rounded-full border-2 border-gray-300" />;
+        return <div className='h-4 w-4 rounded-full border-2 border-gray-300' />;
     }
   };
 
@@ -120,19 +126,19 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
 
   if (compact) {
     return (
-      <Card className="p-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="relative">
-              <Clock className="h-5 w-5 text-blue-600" />
-              <div className="absolute -inset-1 border-2 border-blue-200 rounded-full animate-spin border-t-blue-600"></div>
+      <Card className='p-4'>
+        <div className='flex items-center justify-between'>
+          <div className='flex items-center space-x-3'>
+            <div className='relative'>
+              <Clock className='h-5 w-5 text-blue-600' />
+              <div className='absolute -inset-1 border-2 border-blue-200 rounded-full animate-spin border-t-blue-600'></div>
             </div>
             <div>
-              <div className="text-sm font-medium text-gray-900">
+              <div className='text-sm font-medium text-gray-900'>
                 Processing... ({Math.round(getTotalProgress())}%)
               </div>
               {showTimeRemaining && (
-                <div className="text-xs text-gray-500">
+                <div className='text-xs text-gray-500'>
                   ~{formatTime(getTimeRemaining())} remaining
                 </div>
               )}
@@ -140,16 +146,16 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
           </div>
 
           {allowCancel && onCancel && (
-            <Button variant="ghost" size="sm" onClick={onCancel}>
-              <X className="h-4 w-4" />
+            <Button variant='ghost' size='sm' onClick={onCancel}>
+              <X className='h-4 w-4' />
             </Button>
           )}
         </div>
 
-        <div className="mt-3">
-          <div className="w-full bg-gray-200 rounded-full h-2">
+        <div className='mt-3'>
+          <div className='w-full bg-gray-200 rounded-full h-2'>
             <div
-              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              className='bg-blue-600 h-2 rounded-full transition-all duration-300'
               style={{ width: `${getTotalProgress()}%` }}
             />
           </div>
@@ -159,50 +165,49 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
   }
 
   return (
-    <Card className="p-6">
+    <Card className='p-6'>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className='flex items-center justify-between mb-6'>
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">AI Processing</h3>
-          <p className="text-sm text-gray-600 mt-1">
+          <h3 className='text-lg font-semibold text-gray-900'>AI Processing</h3>
+          <p className='text-sm text-gray-600 mt-1'>
             Analyzing your information with advanced AI models
           </p>
         </div>
 
         {allowCancel && onCancel && (
-          <Button variant="outline" size="sm" onClick={onCancel}>
-            <Pause className="h-4 w-4 mr-2" />
+          <Button variant='outline' size='sm' onClick={onCancel}>
+            <Pause className='h-4 w-4 mr-2' />
             Cancel
           </Button>
         )}
       </div>
 
       {/* Progress Overview */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between text-sm mb-2">
-          <span className="font-medium text-gray-700">
+      <div className='mb-6'>
+        <div className='flex items-center justify-between text-sm mb-2'>
+          <span className='font-medium text-gray-700'>
             Overall Progress ({Math.round(getTotalProgress())}%)
           </span>
           {showTimeRemaining && (
-            <span className="text-gray-500 flex items-center">
-              <Clock className="h-3 w-3 mr-1" />
-              ~{formatTime(getTimeRemaining())} remaining
+            <span className='text-gray-500 flex items-center'>
+              <Clock className='h-3 w-3 mr-1' />~{formatTime(getTimeRemaining())} remaining
             </span>
           )}
         </div>
 
-        <div className="w-full bg-gray-200 rounded-full h-3">
+        <div className='w-full bg-gray-200 rounded-full h-3'>
           <div
-            className="bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-500 relative overflow-hidden"
+            className='bg-gradient-to-r from-blue-600 to-purple-600 h-3 rounded-full transition-all duration-500 relative overflow-hidden'
             style={{ width: `${getTotalProgress()}%` }}
           >
-            <div className="absolute inset-0 bg-white opacity-20 animate-pulse"></div>
+            <div className='absolute inset-0 bg-white opacity-20 animate-pulse'></div>
           </div>
         </div>
       </div>
 
       {/* Detailed Steps */}
-      <div className="space-y-4">
+      <div className='space-y-4'>
         {steps.map((step, _index) => {
           const isActive = step.id === currentStepId;
           const isCompleted = step.status === 'completed';
@@ -219,42 +224,38 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
               `}
             >
               {/* Step Icon */}
-              <div className="flex-shrink-0 mt-0.5">
-                {getStepIcon(step)}
-              </div>
+              <div className='flex-shrink-0 mt-0.5'>{getStepIcon(step)}</div>
 
               {/* Step Content */}
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between">
+              <div className='flex-1 min-w-0'>
+                <div className='flex items-center justify-between'>
                   <h4 className={`text-sm font-medium ${getStepStatusColor(step)}`}>
                     {step.label}
                   </h4>
 
                   {isActive && showTimeRemaining && (
-                    <div className="text-xs text-gray-500 flex items-center">
-                      <Clock className="h-3 w-3 mr-1" />
+                    <div className='text-xs text-gray-500 flex items-center'>
+                      <Clock className='h-3 w-3 mr-1' />
                       {formatTime(Math.max(0, step.estimatedDuration - elapsedTime))}
                     </div>
                   )}
                 </div>
 
                 {step.description && (
-                  <p className="text-xs text-gray-600 mt-1">
-                    {step.description}
-                  </p>
+                  <p className='text-xs text-gray-600 mt-1'>{step.description}</p>
                 )}
 
                 {/* Error Message */}
                 {hasError && step.errorMessage && (
-                  <div className="mt-2 p-2 bg-red-100 border border-red-200 rounded text-xs">
-                    <div className="flex items-start justify-between">
-                      <span className="text-red-800">{step.errorMessage}</span>
+                  <div className='mt-2 p-2 bg-red-100 border border-red-200 rounded text-xs'>
+                    <div className='flex items-start justify-between'>
+                      <span className='text-red-800'>{step.errorMessage}</span>
                       {onRetry && (
                         <Button
-                          variant="ghost"
-                          size="sm"
+                          variant='ghost'
+                          size='sm'
                           onClick={() => onRetry(step.id)}
-                          className="text-red-600 hover:text-red-700 h-auto p-1 ml-2"
+                          className='text-red-600 hover:text-red-700 h-auto p-1 ml-2'
                         >
                           Retry
                         </Button>
@@ -265,12 +266,12 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
 
                 {/* Progress Bar for Current Step */}
                 {isActive && (
-                  <div className="mt-2">
-                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                  <div className='mt-2'>
+                    <div className='w-full bg-gray-200 rounded-full h-1.5'>
                       <div
-                        className="bg-blue-600 h-1.5 rounded-full transition-all duration-300"
+                        className='bg-blue-600 h-1.5 rounded-full transition-all duration-300'
                         style={{
-                          width: `${Math.min(elapsedTime / step.estimatedDuration * 100, 100)}%`
+                          width: `${Math.min((elapsedTime / step.estimatedDuration) * 100, 100)}%`,
                         }}
                       />
                     </div>
@@ -283,9 +284,9 @@ export const AIProgressIndicator: React.FC<AIProgressIndicatorProps> = ({
       </div>
 
       {/* Status Messages */}
-      <div className="mt-6 pt-4 border-t border-gray-200">
-        <div className="flex items-center justify-center text-xs text-gray-500">
-          <AlertCircle className="h-3 w-3 mr-1" />
+      <div className='mt-6 pt-4 border-t border-gray-200'>
+        <div className='flex items-center justify-center text-xs text-gray-500'>
+          <AlertCircle className='h-3 w-3 mr-1' />
           Please keep this tab open while processing...
         </div>
       </div>
@@ -309,38 +310,42 @@ export const useAIProgress = (initialSteps: Omit<AIProgressStep, 'status'>[]) =>
   };
 
   const completeStep = (stepId: string) => {
-    setSteps(prev => prev.map(step =>
-      step.id === stepId ? { ...step, status: 'completed' as const } : step
-    ));
+    setSteps(prev =>
+      prev.map(step => (step.id === stepId ? { ...step, status: 'completed' as const } : step))
+    );
 
     const currentIndex = steps.findIndex(step => step.id === stepId);
     const nextStep = steps[currentIndex + 1];
 
     if (nextStep) {
       setCurrentStepId(nextStep.id);
-      setSteps(prev => prev.map(step =>
-        step.id === nextStep.id ? { ...step, status: 'in_progress' as const } : step
-      ));
+      setSteps(prev =>
+        prev.map(step =>
+          step.id === nextStep.id ? { ...step, status: 'in_progress' as const } : step
+        )
+      );
     } else {
       setIsProcessing(false);
     }
   };
 
   const failStep = (stepId: string, errorMessage: string) => {
-    setSteps(prev => prev.map(step =>
-      step.id === stepId
-        ? { ...step, status: 'error' as const, errorMessage }
-        : step
-    ));
+    setSteps(prev =>
+      prev.map(step =>
+        step.id === stepId ? { ...step, status: 'error' as const, errorMessage } : step
+      )
+    );
     setIsProcessing(false);
   };
 
   const retryStep = (stepId: string) => {
-    setSteps(prev => prev.map(step =>
-      step.id === stepId
-        ? { ...step, status: 'in_progress' as const, errorMessage: undefined }
-        : step
-    ));
+    setSteps(prev =>
+      prev.map(step =>
+        step.id === stepId
+          ? { ...step, status: 'in_progress' as const, errorMessage: undefined }
+          : step
+      )
+    );
     setCurrentStepId(stepId);
     setIsProcessing(true);
   };

@@ -15,7 +15,6 @@ interface FileUploadProps {
   value?: File[];
 }
 
-
 const FileUpload: React.FC<FileUploadProps> = ({
   onFileSelect,
   onFileRemove,
@@ -56,40 +55,43 @@ const FileUpload: React.FC<FileUploadProps> = ({
     return null;
   };
 
-  const handleFiles = useCallback((files: FileList) => {
-    setError(null);
+  const handleFiles = useCallback(
+    (files: FileList) => {
+      setError(null);
 
-    const fileArray = Array.from(files);
-    const totalFiles = value.length + fileArray.length;
+      const fileArray = Array.from(files);
+      const totalFiles = value.length + fileArray.length;
 
-    if (totalFiles > maxFiles) {
-      setError(`Maximum ${maxFiles} files allowed`);
-      return;
-    }
-
-    const validFiles: File[] = [];
-    let validationError: string | null = null;
-
-    for (const file of fileArray) {
-      const error = validateFile(file);
-      if (error) {
-        validationError = error;
-        break;
+      if (totalFiles > maxFiles) {
+        setError(`Maximum ${maxFiles} files allowed`);
+        return;
       }
-      validFiles.push(file);
-    }
 
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
+      const validFiles: File[] = [];
+      let validationError: string | null = null;
 
-    if (multiple) {
-      onFileSelect([...value, ...validFiles]);
-    } else {
-      onFileSelect(validFiles);
-    }
-  }, [value, multiple, maxFiles, maxSize, accept, onFileSelect]);
+      for (const file of fileArray) {
+        const error = validateFile(file);
+        if (error) {
+          validationError = error;
+          break;
+        }
+        validFiles.push(file);
+      }
+
+      if (validationError) {
+        setError(validationError);
+        return;
+      }
+
+      if (multiple) {
+        onFileSelect([...value, ...validFiles]);
+      } else {
+        onFileSelect(validFiles);
+      }
+    },
+    [value, multiple, maxFiles, maxSize, accept, onFileSelect]
+  );
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -110,34 +112,43 @@ const FileUpload: React.FC<FileUploadProps> = ({
     setDragActive(false);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
 
-    if (disabled) return;
+      if (disabled) return;
 
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      handleFiles(e.dataTransfer.files);
-    }
-  }, [disabled, handleFiles]);
+      if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+        handleFiles(e.dataTransfer.files);
+      }
+    },
+    [disabled, handleFiles]
+  );
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      handleFiles(e.target.files);
-    }
-    // Reset input value to allow selecting the same file again
-    e.target.value = '';
-  }, [handleFiles]);
+  const handleInputChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files.length > 0) {
+        handleFiles(e.target.files);
+      }
+      // Reset input value to allow selecting the same file again
+      e.target.value = '';
+    },
+    [handleFiles]
+  );
 
-  const removeFile = useCallback((index: number) => {
-    if (onFileRemove) {
-      onFileRemove(index);
-    } else {
-      const newFiles = value.filter((_, i) => i !== index);
-      onFileSelect(newFiles);
-    }
-  }, [value, onFileRemove, onFileSelect]);
+  const removeFile = useCallback(
+    (index: number) => {
+      if (onFileRemove) {
+        onFileRemove(index);
+      } else {
+        const newFiles = value.filter((_, i) => i !== index);
+        onFileSelect(newFiles);
+      }
+    },
+    [value, onFileRemove, onFileSelect]
+  );
 
   const formatFileSize = (bytes: number): string => {
     if (bytes === 0) return '0 Bytes';
@@ -154,9 +165,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
       <div
         className={cn(
           'relative rounded-lg border-2 border-dashed transition-colors',
-          dragActive
-            ? 'border-primary bg-primary/5'
-            : 'border-border hover:border-primary/50',
+          dragActive ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50',
           disabled && 'opacity-50 cursor-not-allowed',
           error && 'border-destructive'
         )}
@@ -167,27 +176,29 @@ const FileUpload: React.FC<FileUploadProps> = ({
       >
         <input
           id={inputId}
-          type="file"
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed"
+          type='file'
+          className='absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed'
           accept={accept}
           multiple={multiple}
           onChange={handleInputChange}
           disabled={disabled}
         />
 
-        <div className="flex flex-col items-center justify-center px-6 py-10 text-center">
+        <div className='flex flex-col items-center justify-center px-6 py-10 text-center'>
           {children ? (
             children
           ) : (
             <>
-              <Upload className={cn(
-                'h-10 w-10 mb-4',
-                dragActive ? 'text-primary' : 'text-muted-foreground'
-              )} />
-              <p className="mb-2 text-sm text-foreground">
-                <span className="font-semibold">Click to upload</span> or drag and drop
+              <Upload
+                className={cn(
+                  'h-10 w-10 mb-4',
+                  dragActive ? 'text-primary' : 'text-muted-foreground'
+                )}
+              />
+              <p className='mb-2 text-sm text-foreground'>
+                <span className='font-semibold'>Click to upload</span> or drag and drop
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className='text-xs text-muted-foreground'>
                 {accept ? `Accepted formats: ${accept}` : 'Any file format'}
                 {maxSize && ` • Max size: ${Math.round(maxSize / 1024 / 1024)}MB`}
                 {multiple && ` • Max files: ${maxFiles}`}
@@ -198,35 +209,33 @@ const FileUpload: React.FC<FileUploadProps> = ({
       </div>
 
       {error && (
-        <div className="flex items-center gap-2 mt-2 text-sm text-destructive">
-          <AlertCircle className="h-4 w-4" />
+        <div className='flex items-center gap-2 mt-2 text-sm text-destructive'>
+          <AlertCircle className='h-4 w-4' />
           {error}
         </div>
       )}
 
       {value.length > 0 && (
-        <div className="mt-4 space-y-2">
-          <p className="text-sm font-medium">Selected files:</p>
+        <div className='mt-4 space-y-2'>
+          <p className='text-sm font-medium'>Selected files:</p>
           {value.map((file, index) => (
             <div
               key={`${file.name}-${index}`}
-              className="flex items-center justify-between p-2 bg-muted rounded-md"
+              className='flex items-center justify-between p-2 bg-muted rounded-md'
             >
-              <div className="flex items-center gap-2 min-w-0 flex-1">
-                <File className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-                <span className="text-sm truncate">{file.name}</span>
-                <span className="text-xs text-muted-foreground">
-                  {formatFileSize(file.size)}
-                </span>
+              <div className='flex items-center gap-2 min-w-0 flex-1'>
+                <File className='h-4 w-4 text-muted-foreground flex-shrink-0' />
+                <span className='text-sm truncate'>{file.name}</span>
+                <span className='text-xs text-muted-foreground'>{formatFileSize(file.size)}</span>
               </div>
               {!disabled && (
                 <button
-                  type="button"
+                  type='button'
                   onClick={() => removeFile(index)}
-                  className="ml-2 p-1 hover:bg-destructive/10 rounded-md transition-colors"
+                  className='ml-2 p-1 hover:bg-destructive/10 rounded-md transition-colors'
                   aria-label={`Remove ${file.name}`}
                 >
-                  <X className="h-4 w-4 text-muted-foreground hover:text-destructive" />
+                  <X className='h-4 w-4 text-muted-foreground hover:text-destructive' />
                 </button>
               )}
             </div>

@@ -30,29 +30,29 @@ const defaultRecoveryStrategies: ErrorRecoveryStrategy[] = [
     id: 'network-retry',
     errorTypes: [ErrorType.NETWORK, ErrorType.TIMEOUT],
     priority: 1,
-    canRecover: (error) => (error.retryCount ?? 0) < (error.maxRetries ?? 3),
-    recover: async (error) => {
+    canRecover: error => (error.retryCount ?? 0) < (error.maxRetries ?? 3),
+    recover: async error => {
       await new Promise(resolve => setTimeout(resolve, 1000 * (error.retryCount ?? 0 + 1)));
       return Math.random() > 0.3; // Simulate 70% success rate
-    }
+    },
   },
   {
     id: 'auth-refresh',
     errorTypes: [ErrorType.AUTHENTICATION],
     priority: 1,
     canRecover: () => true,
-    recover: async (error) => {
+    recover: async error => {
       try {
         // Attempt to refresh authentication
         const response = await fetch('/api/auth/refresh', {
           method: 'POST',
-          credentials: 'include'
+          credentials: 'include',
         });
         return response.ok;
       } catch {
         return false;
       }
-    }
+    },
   },
   {
     id: 'storage-cleanup',
@@ -75,7 +75,7 @@ const defaultRecoveryStrategies: ErrorRecoveryStrategy[] = [
       } catch {
         return false;
       }
-    }
+    },
   },
   {
     id: 'component-remount',
@@ -88,7 +88,7 @@ const defaultRecoveryStrategies: ErrorRecoveryStrategy[] = [
     },
     fallback: () => {
       window.location.reload();
-    }
+    },
   },
   {
     id: 'cache-clear',
@@ -99,16 +99,14 @@ const defaultRecoveryStrategies: ErrorRecoveryStrategy[] = [
       try {
         if ('caches' in window) {
           const cacheNames = await caches.keys();
-          await Promise.all(
-            cacheNames.map(cacheName => caches.delete(cacheName))
-          );
+          await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
         }
         return true;
       } catch {
         return false;
       }
-    }
-  }
+    },
+  },
 ];
 
 export function useErrorRecovery(options: UseErrorRecoveryOptions = {}): UseErrorRecoveryReturn {
@@ -116,14 +114,14 @@ export function useErrorRecovery(options: UseErrorRecoveryOptions = {}): UseErro
     maxRetryAttempts = 3,
     retryDelay = 1000,
     enableAutoRecovery = false,
-    customStrategies = []
+    customStrategies = [],
   } = options;
 
   const [isRecovering, setIsRecovering] = useState(false);
   const [recoveryAttempts, setRecoveryAttempts] = useState<RecoveryAttempt[]>([]);
   const strategiesRef = useRef<ErrorRecoveryStrategy[]>([
     ...defaultRecoveryStrategies,
-    ...customStrategies
+    ...customStrategies,
   ]);
 
   const registerRecoveryStrategy = useCallback((strategy: ErrorRecoveryStrategy) => {
@@ -140,85 +138,80 @@ export function useErrorRecovery(options: UseErrorRecoveryOptions = {}): UseErro
 
   const getRecoveryOptions = useCallback((error: AppError): ErrorRecoveryStrategy[] => {
     return strategiesRef.current
-      .filter(strategy =>
-        strategy.errorTypes.includes(error.type) &&
-        strategy.canRecover(error)
-      )
+      .filter(strategy => strategy.errorTypes.includes(error.type) && strategy.canRecover(error))
       .sort((a, b) => a.priority - b.priority);
   }, []);
 
-  const recoverFromError = useCallback(async (
-    error: AppError,
-    strategyId?: string
-  ): Promise<boolean> => {
-    if (isRecovering) return false;
+  const recoverFromError = useCallback(
+    async (error: AppError, strategyId?: string): Promise<boolean> => {
+      if (isRecovering) return false;
 
-    setIsRecovering(true);
+      setIsRecovering(true);
 
-    try {
-      let strategy: ErrorRecoveryStrategy | undefined;
+      try {
+        let strategy: ErrorRecoveryStrategy | undefined;
 
-      if (strategyId) {
-        strategy = strategiesRef.current.find(s => s.id === strategyId);
-      } else {
-        const availableStrategies = getRecoveryOptions(error);
-        strategy = availableStrategies[0]; // Use highest priority strategy
-      }
-
-      if (!strategy) {
-        console.warn('No recovery strategy found for error:', error);
-        return false;
-      }
-
-      console.log(`Attempting recovery with strategy: ${strategy.id}`);
-
-      let success = false;
-      let attempt = 0;
-
-      while (attempt < maxRetryAttempts && !success) {
-        try {
-          if (attempt > 0) {
-            await new Promise(resolve => setTimeout(resolve, retryDelay * attempt));
-          }
-
-          success = await strategy.recover(error);
-          attempt++;
-
-          const recoveryAttempt: RecoveryAttempt = {
-            errorId: error.id,
-            strategy: strategy.id,
-            timestamp: new Date(),
-            success
-          };
-
-          setRecoveryAttempts(prev => [recoveryAttempt, ...prev.slice(0, 9)]); // Keep last 10 attempts
-
-        } catch (recoveryError) {
-          console.error('Recovery strategy failed:', recoveryError);
-
-          const recoveryAttempt: RecoveryAttempt = {
-            errorId: error.id,
-            strategy: strategy.id,
-            timestamp: new Date(),
-            success: false
-          };
-
-          setRecoveryAttempts(prev => [recoveryAttempt, ...prev.slice(0, 9)]);
-          attempt++;
+        if (strategyId) {
+          strategy = strategiesRef.current.find(s => s.id === strategyId);
+        } else {
+          const availableStrategies = getRecoveryOptions(error);
+          strategy = availableStrategies[0]; // Use highest priority strategy
         }
+
+        if (!strategy) {
+          console.warn('No recovery strategy found for error:', error);
+          return false;
+        }
+
+        console.log(`Attempting recovery with strategy: ${strategy.id}`);
+
+        let success = false;
+        let attempt = 0;
+
+        while (attempt < maxRetryAttempts && !success) {
+          try {
+            if (attempt > 0) {
+              await new Promise(resolve => setTimeout(resolve, retryDelay * attempt));
+            }
+
+            success = await strategy.recover(error);
+            attempt++;
+
+            const recoveryAttempt: RecoveryAttempt = {
+              errorId: error.id,
+              strategy: strategy.id,
+              timestamp: new Date(),
+              success,
+            };
+
+            setRecoveryAttempts(prev => [recoveryAttempt, ...prev.slice(0, 9)]); // Keep last 10 attempts
+          } catch (recoveryError) {
+            console.error('Recovery strategy failed:', recoveryError);
+
+            const recoveryAttempt: RecoveryAttempt = {
+              errorId: error.id,
+              strategy: strategy.id,
+              timestamp: new Date(),
+              success: false,
+            };
+
+            setRecoveryAttempts(prev => [recoveryAttempt, ...prev.slice(0, 9)]);
+            attempt++;
+          }
+        }
+
+        if (!success && strategy.fallback) {
+          console.log('Primary recovery failed, executing fallback');
+          strategy.fallback();
+        }
+
+        return success;
+      } finally {
+        setIsRecovering(false);
       }
-
-      if (!success && strategy.fallback) {
-        console.log('Primary recovery failed, executing fallback');
-        strategy.fallback();
-      }
-
-      return success;
-
-    } finally {
-      setIsRecovering(false);
-    }
-  }, [isRecovering, getRecoveryOptions, maxRetryAttempts, retryDelay]);
+    },
+    [isRecovering, getRecoveryOptions, maxRetryAttempts, retryDelay]
+  );
 
   const clearRecoveryHistory = useCallback(() => {
     setRecoveryAttempts([]);
@@ -233,7 +226,7 @@ export function useErrorRecovery(options: UseErrorRecoveryOptions = {}): UseErro
     recoverFromError,
     registerRecoveryStrategy,
     getRecoveryOptions,
-    clearRecoveryHistory
+    clearRecoveryHistory,
   };
 }
 
@@ -243,15 +236,15 @@ export const recoveryStrategies = {
     id: 'custom-network-retry',
     errorTypes: [ErrorType.NETWORK, ErrorType.TIMEOUT],
     priority: 1,
-    canRecover: (error) => (error.retryCount ?? 0) < 3,
-    recover: async (error) => {
-      const delay = customDelay ?? (1000 * ((error.retryCount ?? 0) + 1));
+    canRecover: error => (error.retryCount ?? 0) < 3,
+    recover: async error => {
+      const delay = customDelay ?? 1000 * ((error.retryCount ?? 0) + 1);
       await new Promise(resolve => setTimeout(resolve, delay));
 
       // Attempt to re-run the original request
       // This would need to be customized based on your specific needs
       return Math.random() > 0.3;
-    }
+    },
   }),
 
   forceRefresh: (): ErrorRecoveryStrategy => ({
@@ -262,7 +255,7 @@ export const recoveryStrategies = {
     recover: async () => {
       window.location.reload();
       return true; // Always succeeds since we're reloading
-    }
+    },
   }),
 
   redirectToSafePage: (safePath: string = '/'): ErrorRecoveryStrategy => ({
@@ -273,6 +266,6 @@ export const recoveryStrategies = {
     recover: async () => {
       window.location.href = safePath;
       return true;
-    }
-  })
+    },
+  }),
 };

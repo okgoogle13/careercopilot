@@ -31,12 +31,9 @@ class ATSComplianceValidator {
       weight: 25,
       check: template => {
         // Professional and modern templates typically have better ATS compatibility
-        return (
-          template.category === 'professional' || template.category === 'modern'
-        );
+        return template.category === 'professional' || template.category === 'modern';
       },
-      recommendation:
-        'Use professional or modern templates for better ATS compatibility',
+      recommendation: 'Use professional or modern templates for better ATS compatibility',
     },
     {
       id: 'readable-fonts',
@@ -59,12 +56,10 @@ class ATSComplianceValidator {
       weight: 20,
       check: template => {
         return (
-          template.features.includes('Header Focus') ||
-          template.features.includes('Clean Layout')
+          template.features.includes('Header Focus') || template.features.includes('Clean Layout')
         );
       },
-      recommendation:
-        'Ensure your template has clearly defined section headers',
+      recommendation: 'Ensure your template has clearly defined section headers',
     },
     {
       id: 'keyword-friendly',
@@ -88,18 +83,14 @@ class ATSComplianceValidator {
         // All templates should follow standard structure, but creative ones might not
         return template.category !== 'creative';
       },
-      recommendation:
-        'Avoid overly creative layouts that might confuse ATS systems',
+      recommendation: 'Avoid overly creative layouts that might confuse ATS systems',
     },
   ];
 
   /**
    * Analyze template ATS compliance
    */
-  async analyzeTemplate(
-    template: Template,
-    jobDescription?: string
-  ): Promise<number> {
+  async analyzeTemplate(template: Template, jobDescription?: string): Promise<number> {
     // Simulate analysis delay
     await this.delay(300);
 
@@ -230,10 +221,7 @@ class ATSComplianceValidator {
 
     // Add job-specific suggestions if job description provided
     if (jobDescription) {
-      const jobSuggestions = this.getJobSpecificSuggestions(
-        template,
-        jobDescription
-      );
+      const jobSuggestions = this.getJobSpecificSuggestions(template, jobDescription);
       recommended.push(...jobSuggestions);
     }
 
@@ -247,18 +235,12 @@ class ATSComplianceValidator {
   /**
    * Calculate job match bonus
    */
-  private calculateJobMatchBonus(
-    template: Template,
-    jobDescription: string
-  ): number {
+  private calculateJobMatchBonus(template: Template, jobDescription: string): number {
     const jobKeywords = jobDescription.toLowerCase();
     let bonus = 0;
 
     // Industry-specific bonuses
-    if (
-      jobKeywords.includes('executive') &&
-      template.id === 'executive-professional'
-    ) {
+    if (jobKeywords.includes('executive') && template.id === 'executive-professional') {
       bonus += 5;
     }
 
@@ -287,10 +269,7 @@ class ATSComplianceValidator {
   ): Promise<ATSAnalysisResult['factors']> {
     return {
       readability: this.analyzeReadability(template),
-      keywordOptimization: this.analyzeKeywordOptimization(
-        template,
-        jobDescription
-      ),
+      keywordOptimization: this.analyzeKeywordOptimization(template, jobDescription),
       formatting: this.analyzeFormatting(template),
       structure: this.analyzeStructure(template),
     };
@@ -306,10 +285,7 @@ class ATSComplianceValidator {
     return Math.min(score, 100);
   }
 
-  private analyzeKeywordOptimization(
-    template: Template,
-    jobDescription?: string
-  ): number {
+  private analyzeKeywordOptimization(template: Template, jobDescription?: string): number {
     let score = 60; // Base score
 
     if (template.features.includes('ATS Optimized')) score += 20;
@@ -358,10 +334,7 @@ class ATSComplianceValidator {
   /**
    * Generate recommendations
    */
-  private generateRecommendations(
-    template: Template,
-    jobDescription?: string
-  ): string[] {
+  private generateRecommendations(template: Template, jobDescription?: string): string[] {
     const recommendations: string[] = [];
 
     // Base recommendations by category
@@ -372,9 +345,7 @@ class ATSComplianceValidator {
     }
 
     if (!template.features.includes('ATS Optimized')) {
-      recommendations.push(
-        'Look for templates specifically marked as ATS-optimized'
-      );
+      recommendations.push('Look for templates specifically marked as ATS-optimized');
     }
 
     // Job-specific recommendations
@@ -382,18 +353,11 @@ class ATSComplianceValidator {
       const jobKeywords = jobDescription.toLowerCase();
 
       if (jobKeywords.includes('senior') || jobKeywords.includes('executive')) {
-        recommendations.push(
-          'Use a professional template that conveys executive presence'
-        );
+        recommendations.push('Use a professional template that conveys executive presence');
       }
 
-      if (
-        jobKeywords.includes('tech') &&
-        !template.features.includes('Technical Focus')
-      ) {
-        recommendations.push(
-          'Consider a template that highlights technical skills and projects'
-        );
+      if (jobKeywords.includes('tech') && !template.features.includes('Technical Focus')) {
+        recommendations.push('Consider a template that highlights technical skills and projects');
       }
     }
 
@@ -411,9 +375,7 @@ class ATSComplianceValidator {
     }
 
     if (template.category === 'creative' && score < 80) {
-      warnings.push(
-        'Creative templates can sometimes be difficult for ATS systems to parse'
-      );
+      warnings.push('Creative templates can sometimes be difficult for ATS systems to parse');
     }
 
     if (!template.features.includes('ATS Optimized') && score < 85) {
@@ -426,32 +388,20 @@ class ATSComplianceValidator {
   /**
    * Get job-specific suggestions
    */
-  private getJobSpecificSuggestions(
-    template: Template,
-    jobDescription: string
-  ): string[] {
+  private getJobSpecificSuggestions(template: Template, jobDescription: string): string[] {
     const suggestions: string[] = [];
     const jobKeywords = jobDescription.toLowerCase();
 
     if (jobKeywords.includes('remote') || jobKeywords.includes('distributed')) {
-      suggestions.push(
-        'Highlight remote work experience and digital collaboration skills'
-      );
+      suggestions.push('Highlight remote work experience and digital collaboration skills');
     }
 
-    if (
-      jobKeywords.includes('leadership') ||
-      jobKeywords.includes('management')
-    ) {
-      suggestions.push(
-        'Emphasize leadership experience and team management skills'
-      );
+    if (jobKeywords.includes('leadership') || jobKeywords.includes('management')) {
+      suggestions.push('Emphasize leadership experience and team management skills');
     }
 
     if (jobKeywords.includes('agile') || jobKeywords.includes('scrum')) {
-      suggestions.push(
-        'Include agile methodology experience and certifications'
-      );
+      suggestions.push('Include agile methodology experience and certifications');
     }
 
     return suggestions;

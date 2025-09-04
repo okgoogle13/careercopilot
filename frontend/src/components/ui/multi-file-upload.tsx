@@ -1,9 +1,18 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { Card, Button } from './';
 import {
-  Upload, X, FileText, Image as ImageIcon, File,
-  Check, AlertCircle, Download, Eye, RotateCcw,
-  Camera, FolderOpen
+  Upload,
+  X,
+  FileText,
+  Image as ImageIcon,
+  File,
+  Check,
+  AlertCircle,
+  Download,
+  Eye,
+  RotateCcw,
+  Camera,
+  FolderOpen,
 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import toast from 'react-hot-toast';
@@ -39,7 +48,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
   allowedExtensions = ['pdf', 'doc', 'docx', 'txt', 'jpg', 'jpeg', 'png', 'gif'],
   showPreview = true,
   className,
-  disabled = false
+  disabled = false,
 }) => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -62,10 +71,10 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
   };
 
   const createFilePreview = (file: File): Promise<string | undefined> => {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       if (file.type.startsWith('image/')) {
         const reader = new FileReader();
-        reader.onload = (e) => resolve(e.target?.result as string);
+        reader.onload = e => resolve(e.target?.result as string);
         reader.onerror = () => resolve(undefined);
         reader.readAsDataURL(file);
       } else {
@@ -101,7 +110,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
         type: file.type,
         preview,
         status: 'uploading',
-        progress: 0
+        progress: 0,
       };
 
       newFiles.push(uploadedFile);
@@ -111,7 +120,7 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
     setFiles(updatedFiles);
 
     // Simulate upload progress
-    newFiles.forEach((uploadedFile) => {
+    newFiles.forEach(uploadedFile => {
       simulateUpload(uploadedFile.id);
     });
 
@@ -123,15 +132,15 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
     const interval = setInterval(() => {
       progress += Math.random() * 30;
 
-      setFiles(prev => prev.map(f =>
-        f.id === fileId ? { ...f, progress: Math.min(progress, 100) } : f
-      ));
+      setFiles(prev =>
+        prev.map(f => (f.id === fileId ? { ...f, progress: Math.min(progress, 100) } : f))
+      );
 
       if (progress >= 100) {
         clearInterval(interval);
-        setFiles(prev => prev.map(f =>
-          f.id === fileId ? { ...f, status: 'success', progress: 100 } : f
-        ));
+        setFiles(prev =>
+          prev.map(f => (f.id === fileId ? { ...f, status: 'success', progress: 100 } : f))
+        );
         toast.success(`${files.find(f => f.id === fileId)?.name} uploaded successfully`);
       }
     }, 200);
@@ -149,19 +158,24 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
   };
 
   const retryUpload = (fileId: string) => {
-    setFiles(prev => prev.map(f =>
-      f.id === fileId ? { ...f, status: 'uploading', progress: 0, error: undefined } : f
-    ));
+    setFiles(prev =>
+      prev.map(f =>
+        f.id === fileId ? { ...f, status: 'uploading', progress: 0, error: undefined } : f
+      )
+    );
     simulateUpload(fileId);
   };
 
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (!disabled) {
-      setIsDragging(true);
-    }
-  }, [disabled]);
+  const handleDragOver = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (!disabled) {
+        setIsDragging(true);
+      }
+    },
+    [disabled]
+  );
 
   const handleDragLeave = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -169,18 +183,21 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
     setIsDragging(false);
   }, []);
 
-  const handleDrop = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setIsDragging(false);
 
-    if (disabled) return;
+      if (disabled) return;
 
-    const droppedFiles = e.dataTransfer.files;
-    if (droppedFiles.length > 0) {
-      processFiles(droppedFiles);
-    }
-  }, [disabled, files, maxFiles]);
+      const droppedFiles = e.dataTransfer.files;
+      if (droppedFiles.length > 0) {
+        processFiles(droppedFiles);
+      }
+    },
+    [disabled, files, maxFiles]
+  );
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = e.target.files;
@@ -219,53 +236,52 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
         onDrop={handleDrop}
         onClick={() => !disabled && fileInputRef.current?.click()}
       >
-        <div className="p-8 text-center">
-          <div className="mb-4">
-            <Upload className={cn(
-              'mx-auto w-12 h-12',
-              isDragging ? 'text-blue-500' : 'text-gray-400'
-            )} />
+        <div className='p-8 text-center'>
+          <div className='mb-4'>
+            <Upload
+              className={cn('mx-auto w-12 h-12', isDragging ? 'text-blue-500' : 'text-gray-400')}
+            />
           </div>
 
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium text-gray-900">
+          <div className='space-y-2'>
+            <h3 className='text-lg font-medium text-gray-900'>
               {isDragging ? 'Drop files here' : 'Upload files'}
             </h3>
-            <p className="text-sm text-gray-600">
+            <p className='text-sm text-gray-600'>
               Drag and drop files here, or click to select files
             </p>
-            <p className="text-xs text-gray-500">
+            <p className='text-xs text-gray-500'>
               Supports: {allowedExtensions.map(ext => `.${ext}`).join(', ')}
               (Max {maxFiles} files, {maxSize}MB each)
             </p>
           </div>
 
-          <div className="flex justify-center gap-3 mt-6">
+          <div className='flex justify-center gap-3 mt-6'>
             <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={(e) => {
+              type='button'
+              variant='outline'
+              size='sm'
+              onClick={e => {
                 e.stopPropagation();
                 fileInputRef.current?.click();
               }}
               disabled={disabled}
             >
-              <FolderOpen className="w-4 h-4 mr-2" />
+              <FolderOpen className='w-4 h-4 mr-2' />
               Browse Files
             </Button>
 
             <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={(e) => {
+              type='button'
+              variant='outline'
+              size='sm'
+              onClick={e => {
                 e.stopPropagation();
                 cameraInputRef.current?.click();
               }}
               disabled={disabled}
             >
-              <Camera className="w-4 h-4 mr-2" />
+              <Camera className='w-4 h-4 mr-2' />
               Take Photo
             </Button>
           </div>
@@ -275,100 +291,98 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
       {/* Hidden file inputs */}
       <input
         ref={fileInputRef}
-        type="file"
+        type='file'
         multiple
         accept={acceptedTypes.join(',')}
         onChange={handleFileSelect}
-        className="hidden"
+        className='hidden'
       />
 
       <input
         ref={cameraInputRef}
-        type="file"
-        accept="image/*"
-        capture="environment"
+        type='file'
+        accept='image/*'
+        capture='environment'
         onChange={handleFileSelect}
-        className="hidden"
+        className='hidden'
       />
 
       {/* File Preview Grid */}
       {files.length > 0 && showPreview && (
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h4 className="font-medium text-gray-900">
+        <div className='space-y-3'>
+          <div className='flex items-center justify-between'>
+            <h4 className='font-medium text-gray-900'>
               Uploaded Files ({files.length}/{maxFiles})
             </h4>
             <Button
-              variant="ghost"
-              size="sm"
+              variant='ghost'
+              size='sm'
               onClick={() => {
                 setFiles([]);
                 onFilesChange?.([]);
               }}
-              className="text-red-600 hover:text-red-700"
+              className='text-red-600 hover:text-red-700'
             >
-              <X className="w-4 h-4 mr-1" />
+              <X className='w-4 h-4 mr-1' />
               Clear All
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {files.map((file) => {
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            {files.map(file => {
               const FileIcon = getFileIcon(file);
 
               return (
-                <Card key={file.id} className="p-4">
-                  <div className="space-y-3">
+                <Card key={file.id} className='p-4'>
+                  <div className='space-y-3'>
                     {/* File Preview/Icon */}
-                    <div className="relative">
+                    <div className='relative'>
                       {file.preview ? (
                         <img
                           src={file.preview}
                           alt={file.name}
-                          className="w-full h-32 object-cover rounded-lg"
+                          className='w-full h-32 object-cover rounded-lg'
                         />
                       ) : (
-                        <div className="w-full h-32 bg-gray-100 rounded-lg flex items-center justify-center">
-                          <FileIcon className="w-12 h-12 text-gray-400" />
+                        <div className='w-full h-32 bg-gray-100 rounded-lg flex items-center justify-center'>
+                          <FileIcon className='w-12 h-12 text-gray-400' />
                         </div>
                       )}
 
                       {/* Status Overlay */}
-                      <div className="absolute top-2 right-2">
+                      <div className='absolute top-2 right-2'>
                         {file.status === 'success' && (
-                          <div className="bg-green-500 text-white rounded-full p-1">
-                            <Check className="w-4 h-4" />
+                          <div className='bg-green-500 text-white rounded-full p-1'>
+                            <Check className='w-4 h-4' />
                           </div>
                         )}
                         {file.status === 'error' && (
-                          <div className="bg-red-500 text-white rounded-full p-1">
-                            <AlertCircle className="w-4 h-4" />
+                          <div className='bg-red-500 text-white rounded-full p-1'>
+                            <AlertCircle className='w-4 h-4' />
                           </div>
                         )}
                       </div>
                     </div>
 
                     {/* File Info */}
-                    <div className="space-y-2">
+                    <div className='space-y-2'>
                       <div>
-                        <p className="font-medium text-sm text-gray-900 truncate" title={file.name}>
+                        <p className='font-medium text-sm text-gray-900 truncate' title={file.name}>
                           {file.name}
                         </p>
-                        <p className="text-xs text-gray-500">
-                          {formatFileSize(file.size)}
-                        </p>
+                        <p className='text-xs text-gray-500'>{formatFileSize(file.size)}</p>
                       </div>
 
                       {/* Progress Bar */}
                       {file.status === 'uploading' && (
-                        <div className="space-y-1">
-                          <div className="flex justify-between text-xs">
+                        <div className='space-y-1'>
+                          <div className='flex justify-between text-xs'>
                             <span>Uploading...</span>
                             <span>{Math.round(file.progress)}%</span>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div className='w-full bg-gray-200 rounded-full h-2'>
                             <div
-                              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                              className='bg-blue-600 h-2 rounded-full transition-all duration-300'
                               style={{ width: `${file.progress}%` }}
                             />
                           </div>
@@ -377,29 +391,29 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
 
                       {/* Error Message */}
                       {file.status === 'error' && file.error && (
-                        <p className="text-xs text-red-600">{file.error}</p>
+                        <p className='text-xs text-red-600'>{file.error}</p>
                       )}
                     </div>
 
                     {/* Actions */}
-                    <div className="flex justify-between items-center">
-                      <div className="flex gap-1">
+                    <div className='flex justify-between items-center'>
+                      <div className='flex gap-1'>
                         {file.preview && (
                           <Button
-                            variant="ghost"
-                            size="sm"
+                            variant='ghost'
+                            size='sm'
                             onClick={() => window.open(file.preview, '_blank')}
-                            className="h-7 w-7 p-0"
-                            title="Preview"
+                            className='h-7 w-7 p-0'
+                            title='Preview'
                           >
-                            <Eye className="w-3 h-3" />
+                            <Eye className='w-3 h-3' />
                           </Button>
                         )}
 
                         {file.status === 'success' && (
                           <Button
-                            variant="ghost"
-                            size="sm"
+                            variant='ghost'
+                            size='sm'
                             onClick={() => {
                               const url = URL.createObjectURL(file.file);
                               const a = document.createElement('a');
@@ -408,34 +422,34 @@ const MultiFileUpload: React.FC<MultiFileUploadProps> = ({
                               a.click();
                               URL.revokeObjectURL(url);
                             }}
-                            className="h-7 w-7 p-0"
-                            title="Download"
+                            className='h-7 w-7 p-0'
+                            title='Download'
                           >
-                            <Download className="w-3 h-3" />
+                            <Download className='w-3 h-3' />
                           </Button>
                         )}
 
                         {file.status === 'error' && (
                           <Button
-                            variant="ghost"
-                            size="sm"
+                            variant='ghost'
+                            size='sm'
                             onClick={() => retryUpload(file.id)}
-                            className="h-7 w-7 p-0"
-                            title="Retry"
+                            className='h-7 w-7 p-0'
+                            title='Retry'
                           >
-                            <RotateCcw className="w-3 h-3" />
+                            <RotateCcw className='w-3 h-3' />
                           </Button>
                         )}
                       </div>
 
                       <Button
-                        variant="ghost"
-                        size="sm"
+                        variant='ghost'
+                        size='sm'
                         onClick={() => removeFile(file.id)}
-                        className="h-7 w-7 p-0 text-red-500 hover:text-red-700"
-                        title="Remove"
+                        className='h-7 w-7 p-0 text-red-500 hover:text-red-700'
+                        title='Remove'
                       >
-                        <X className="w-3 h-3" />
+                        <X className='w-3 h-3' />
                       </Button>
                     </div>
                   </div>
