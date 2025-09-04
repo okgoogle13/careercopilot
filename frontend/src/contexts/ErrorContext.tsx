@@ -36,16 +36,16 @@ function errorReducer(state: ErrorState, action: ErrorAction): ErrorState {
     case 'ADD_ERROR':
       const newErrors = [action.payload, ...state.errors.slice(0, state.maxErrors - 1)];
       return { ...state, errors: newErrors };
-    
+
     case 'REMOVE_ERROR':
       return {
         ...state,
         errors: state.errors.filter(error => error.id !== action.payload)
       };
-    
+
     case 'CLEAR_ERRORS':
       return { ...state, errors: [] };
-    
+
     case 'UPDATE_ERROR':
       return {
         ...state,
@@ -55,10 +55,10 @@ function errorReducer(state: ErrorState, action: ErrorAction): ErrorState {
             : error
         )
       };
-    
+
     case 'SET_CONFIG':
       return { ...state, ...action.payload };
-    
+
     default:
       return state;
   }
@@ -73,11 +73,11 @@ interface ErrorProviderProps {
   enableNotifications?: boolean;
 }
 
-export function ErrorProvider({ 
-  children, 
-  maxErrors = 5, 
+export function ErrorProvider({
+  children,
+  maxErrors = 5,
   autoHideDelay = 5000,
-  enableNotifications = true 
+  enableNotifications = true
 }: ErrorProviderProps) {
   const [state, dispatch] = useReducer(errorReducer, {
     ...initialState,
@@ -88,7 +88,7 @@ export function ErrorProvider({
 
   const addError = useCallback((error: Error | AppError, context?: any): AppError => {
     let appError: AppError;
-    
+
     if ('type' in error && 'severity' in error) {
       appError = error;
     } else {
@@ -220,9 +220,9 @@ export function useError(): ErrorContextType {
 export function useErrorHandler() {
   const { addError } = useError();
 
-  const handleAsync = useCallback(async <T>(
+  const handleAsync = useCallback(async <T,>(
     asyncFn: () => Promise<T>,
-    context?: any
+    context?: Record<string, unknown>
   ): Promise<T | null> => {
     try {
       return await asyncFn();

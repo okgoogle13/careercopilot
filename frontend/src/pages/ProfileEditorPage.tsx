@@ -5,7 +5,7 @@ import { Card, Button, Modal, LoadingSpinner } from '../components/ui';
 import { Save, Plus, Trash2, Edit3, Award, Briefcase, GraduationCap, User, FileText, Target, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { db } from '../auth/enhanced-firebase';
-import { doc, getDoc, updateDoc, collection, addDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
+import { doc, updateDoc, collection, addDoc, deleteDoc, onSnapshot } from 'firebase/firestore';
 
 interface ProfileData {
   id?: string;

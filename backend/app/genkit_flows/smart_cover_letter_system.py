@@ -206,7 +206,9 @@ Respond with valid JSON matching the SmartCoverLetter schema.
         response = gemini_pro.generate(
             prompt,
             config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.4, max_output_tokens=3500
+                response_mime_type="application/json",
+                temperature=0.4,
+                max_output_tokens=3500,
             ),
             output_schema=SmartCoverLetter,
         )
@@ -224,7 +226,10 @@ Respond with valid JSON matching the SmartCoverLetter schema.
 @genkit_flow(output_schema=CompanyResearchInsights)
 @with_ai_error_handling()
 def research_company_for_application(
-    company_name: str, industry: str, job_role: str, additional_context: Optional[str] = None
+    company_name: str,
+    industry: str,
+    job_role: str,
+    additional_context: Optional[str] = None,
 ) -> CompanyResearchInsights:
     """
     Generates company research insights to inform personalized cover letters.
@@ -426,7 +431,9 @@ Respond with valid JSON matching the CoverLetterOptimizationResult schema.
         response = gemini_pro.generate(
             prompt,
             config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3, max_output_tokens=3000
+                response_mime_type="application/json",
+                temperature=0.3,
+                max_output_tokens=3000,
             ),
             output_schema=CoverLetterOptimizationResult,
         )
@@ -456,7 +463,9 @@ class MultiFormatCoverLetterSuite(BaseModel):
 @genkit_flow(output_schema=MultiFormatCoverLetterSuite)
 @with_ai_error_handling()
 def create_multi_format_cover_letter_suite(
-    candidate_profile: Dict, job_description: str, company_insights: Optional[Dict] = None
+    candidate_profile: Dict,
+    job_description: str,
+    company_insights: Optional[Dict] = None,
 ) -> MultiFormatCoverLetterSuite:
     """
     Creates a complete suite of application materials in different formats.
@@ -536,7 +545,9 @@ Respond with valid JSON matching the MultiFormatCoverLetterSuite schema.
         response = gemini_pro.generate(
             prompt,
             config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.4, max_output_tokens=4000
+                response_mime_type="application/json",
+                temperature=0.4,
+                max_output_tokens=4000,
             ),
             output_schema=MultiFormatCoverLetterSuite,
         )

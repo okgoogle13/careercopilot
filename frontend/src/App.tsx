@@ -121,7 +121,7 @@ const App: React.FC = () => {
                   </Routes>
                 </Suspense>
               </MainLayout>
-              
+
               {/* Global error toast notifications */}
               <ErrorToastContainer position="top-right" />
             </ProtectedRoute>

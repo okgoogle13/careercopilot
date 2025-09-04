@@ -221,7 +221,9 @@ Respond with valid JSON matching the ResumeAnalysisResult schema.
         response = gemini_pro.generate(
             prompt,
             config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.2, max_output_tokens=3000
+                response_mime_type="application/json",
+                temperature=0.2,
+                max_output_tokens=3000,
             ),
             output_schema=ResumeAnalysisResult,
         )
@@ -457,7 +459,10 @@ class SkillsGapAnalysis(BaseModel):
 @genkit_flow(output_schema=SkillsGapAnalysis)
 @with_ai_error_handling()
 def analyze_skills_gap_for_transition(
-    resume_content: str, target_role_description: str, current_industry: str, target_industry: str
+    resume_content: str,
+    target_role_description: str,
+    current_industry: str,
+    target_industry: str,
 ) -> SkillsGapAnalysis:
     """
     Analyzes skill gaps for career transition and provides development roadmap.

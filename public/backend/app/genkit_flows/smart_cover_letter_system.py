@@ -12,14 +12,128 @@ except ImportError:
     GenerativeModel = None
     GenerationConfig = None
 
+
 class SmartCoverLetterSystem:
+    def review_resume(
+        self,
+        resume_text: str,
+        stream: bool = False,
+        generation_config: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Reviews a resume and provides feedback."""
+        prompt = f"Review the following resume and provide constructive feedback, strengths, and areas for improvement.\nResume: {resume_text}"
+        if generation_config is None:
+            generation_config = {
+                "max_output_tokens": 1024,
+                "temperature": 0.7,
+                "top_p": 1.0,
+            }
+        try:
+            if stream:
+                response_stream = self.model.generate_content(
+                    prompt,
+                    generation_config=GenerationConfig(**generation_config),
+                    stream=True,
+                )
+                full_response = ""
+                for chunk in response_stream:
+                    full_response += chunk.text
+                    print(chunk.text, end="")
+                return full_response
+            else:
+                response = self.model.generate_content(
+                    prompt, generation_config=GenerationConfig(**generation_config)
+                )
+                return response.text if hasattr(response, "text") else str(response)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return ""
+
+    def interview_qa(
+        self,
+        resume_text: str,
+        job_description: str,
+        stream: bool = False,
+        generation_config: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Generates interview questions and sample answers."""
+        prompt = f"Generate a list of interview questions and sample answers for the following job description and resume.\nResume: {resume_text}\nJob Description: {job_description}"
+        if generation_config is None:
+            generation_config = {
+                "max_output_tokens": 1024,
+                "temperature": 0.7,
+                "top_p": 1.0,
+            }
+        try:
+            if stream:
+                response_stream = self.model.generate_content(
+                    prompt,
+                    generation_config=GenerationConfig(**generation_config),
+                    stream=True,
+                )
+                full_response = ""
+                for chunk in response_stream:
+                    full_response += chunk.text
+                    print(chunk.text, end="")
+                return full_response
+            else:
+                response = self.model.generate_content(
+                    prompt, generation_config=GenerationConfig(**generation_config)
+                )
+                return response.text if hasattr(response, "text") else str(response)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return ""
+
+    def job_matching(
+        self,
+        resume_text: str,
+        jobs: list,
+        stream: bool = False,
+        generation_config: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """Suggests best job matches based on resume and job descriptions."""
+        jobs_text = "\n\n".join(jobs) if isinstance(jobs, list) else str(jobs)
+        prompt = f"Given the following resume and job descriptions, suggest the best job matches and explain why.\nResume: {resume_text}\nJob Descriptions: {jobs_text}"
+        if generation_config is None:
+            generation_config = {
+                "max_output_tokens": 1024,
+                "temperature": 0.7,
+                "top_p": 1.0,
+            }
+        try:
+            if stream:
+                response_stream = self.model.generate_content(
+                    prompt,
+                    generation_config=GenerationConfig(**generation_config),
+                    stream=True,
+                )
+                full_response = ""
+                for chunk in response_stream:
+                    full_response += chunk.text
+                    print(chunk.text, end="")
+                return full_response
+            else:
+                response = self.model.generate_content(
+                    prompt, generation_config=GenerationConfig(**generation_config)
+                )
+                return response.text if hasattr(response, "text") else str(response)
+        except Exception as e:
+            print(f"An error occurred: {e}")
+            return ""
+
     """A system to generate cover letters using Google's Generative AI.
 
     This class uses the Vertex AI SDK to interact with a generative model (e.g., Gemini)
     to create a cover letter tailored to a specific job description based on a resume.
     """
 
-    def __init__(self, project_id: Optional[str] = None, location: str = "us-central1", model_name: str = "gemini-1.5-pro-001"):
+    def __init__(
+        self,
+        project_id: Optional[str] = None,
+        location: str = "us-central1",
+        model_name: str = "gemini-1.5-pro-001",
+    ):
         """Initializes the SmartCoverLetterSystem.
 
         Args:
@@ -32,7 +146,9 @@ class SmartCoverLetterSystem:
         self.model_name = model_name
 
         if GenerativeModel is None:
-            raise ImportError("google-cloud-aiplatform is not installed. Run 'pip install google-cloud-aiplatform'.")
+            raise ImportError(
+                "google-cloud-aiplatform is not installed. Run 'pip install google-cloud-aiplatform'."
+            )
 
         vertexai.init(project=self.project_id, location=self.location)
         self.model = GenerativeModel(self.model_name)
@@ -42,7 +158,7 @@ class SmartCoverLetterSystem:
         resume_text: str,
         job_description: str,
         stream: bool = False,
-        generation_config: Optional[Dict[str, Any]] = None
+        generation_config: Optional[Dict[str, Any]] = None,
     ) -> str:
         """Generates a cover letter.
 
@@ -69,7 +185,7 @@ class SmartCoverLetterSystem:
                 response_stream = self.model.generate_content(
                     prompt,
                     generation_config=GenerationConfig(**generation_config),
-                    stream=True
+                    stream=True,
                 )
                 full_response = ""
                 for chunk in response_stream:
@@ -78,10 +194,9 @@ class SmartCoverLetterSystem:
                 return full_response
             else:
                 response = self.model.generate_content(
-                    prompt,
-                    generation_config=GenerationConfig(**generation_config)
+                    prompt, generation_config=GenerationConfig(**generation_config)
                 )
-                return response.text if hasattr(response, 'text') else str(response)
+                return response.text if hasattr(response, "text") else str(response)
         except Exception as e:
             print(f"An error occurred: {e}")
             return ""

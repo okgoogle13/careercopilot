@@ -5,6 +5,16 @@ import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from '../contexts/ThemeProvider';
 import { AuthProvider } from '../contexts/AuthProvider';
 
+// Jest mock function types
+type MockFunction = {
+  mockReturnValue: (value: unknown) => MockFunction;
+} & ((...args: unknown[]) => unknown);
+
+// Jest type declaration for test utilities
+declare const jest: {
+  fn: (implementation?: (...args: unknown[]) => unknown) => MockFunction;
+};
+
 // Mock auth context for testing
 const MockAuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const mockAuthValue = {
@@ -51,7 +61,7 @@ export * from '@testing-library/react';
 export { customRender as render };
 
 // Test utilities for AI services
-export const mockApiResponse = <T>(data: T, delay = 100) => {
+export const mockApiResponse = <T,>(data: T, delay = 100) => {
   return new Promise<T>((resolve) => {
     setTimeout(() => resolve(data), delay);
   });
