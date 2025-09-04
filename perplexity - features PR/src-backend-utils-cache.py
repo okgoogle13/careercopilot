@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 from pathlib import Path
 
+
 class PersonalCache:
     """Simple file-based cache for personal use"""
 
@@ -33,36 +34,38 @@ class PersonalCache:
             return None
 
         try:
-            with open(cache_file, 'r') as f:
+            with open(cache_file, "r") as f:
                 cache_data = json.load(f)
 
             # Check if expired
-            cached_time = datetime.fromisoformat(cache_data['timestamp'])
+            cached_time = datetime.fromisoformat(cache_data["timestamp"])
             if datetime.now() - cached_time > self.default_ttl:
                 # Remove expired cache
                 cache_file.unlink()
                 return None
 
-            return cache_data['data']
+            return cache_data["data"]
 
         except (json.JSONDecodeError, KeyError, ValueError):
             # Invalid cache file, remove it
             cache_file.unlink()
             return None
 
-    async def set(self, key: str, value: Dict[str, Any], ttl: Optional[timedelta] = None) -> None:
+    async def set(
+        self, key: str, value: Dict[str, Any], ttl: Optional[timedelta] = None
+    ) -> None:
         """Set value in cache"""
 
         cache_file = self._get_cache_file(key)
 
         cache_data = {
-            'key': key,
-            'data': value,
-            'timestamp': datetime.now().isoformat(),
-            'ttl_hours': (ttl or self.default_ttl).total_seconds() / 3600
+            "key": key,
+            "data": value,
+            "timestamp": datetime.now().isoformat(),
+            "ttl_hours": (ttl or self.default_ttl).total_seconds() / 3600,
         }
 
-        with open(cache_file, 'w') as f:
+        with open(cache_file, "w") as f:
             json.dump(cache_data, f, indent=2, default=str)
 
     async def delete(self, key: str) -> bool:
@@ -94,11 +97,11 @@ class PersonalCache:
 
         for cache_file in self.cache_dir.glob("*.json"):
             try:
-                with open(cache_file, 'r') as f:
+                with open(cache_file, "r") as f:
                     cache_data = json.load(f)
 
-                cached_time = datetime.fromisoformat(cache_data['timestamp'])
-                ttl = timedelta(hours=cache_data.get('ttl_hours', 24))
+                cached_time = datetime.fromisoformat(cache_data["timestamp"])
+                ttl = timedelta(hours=cache_data.get("ttl_hours", 24))
 
                 if now - cached_time > ttl:
                     cache_file.unlink()
@@ -118,8 +121,8 @@ class PersonalCache:
         total_size = sum(f.stat().st_size for f in cache_files)
 
         return {
-            'total_entries': len(cache_files),
-            'total_size_bytes': total_size,
-            'total_size_mb': round(total_size / (1024 * 1024), 2),
-            'cache_directory': str(self.cache_dir)
+            "total_entries": len(cache_files),
+            "total_size_bytes": total_size,
+            "total_size_mb": round(total_size / (1024 * 1024), 2),
+            "cache_directory": str(self.cache_dir),
         }
