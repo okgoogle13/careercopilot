@@ -1,6 +1,6 @@
 import logging
 import uuid
-from typing import Optional
+from typing import Any, Dict, List, Optional
 
 from app.ai_operations.job_analyzer import job_analyzer
 from app.ai_operations.resume_analyzer import resume_analyzer
@@ -18,7 +18,7 @@ from app.core.limiter import authenticated_limiter
 from app.workers.ats_score_worker import process_ats_score_task
 from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request, status
 from google.cloud.firestore import SERVER_TIMESTAMP
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +37,21 @@ class ResumeAnalysisRequest(BaseModel):
 class JobAnalysisRequest(BaseModel):
     job_description: str
     company_info: Optional[str] = None
+
+
+class EnhancedResumeAnalysisRequest(BaseModel):
+    """Request model for enhanced resume analysis."""
+
+    resume_text: str = Field(..., description="The text content of the resume to analyze")
+    include_skills: bool = Field(
+        True, description="Whether to include skills extraction in the analysis"
+    )
+    include_experience: bool = Field(True, description="Whether to include experience analysis")
+    include_education: bool = Field(True, description="Whether to include education analysis")
+    generate_summary: bool = Field(True, description="Whether to generate a professional summary")
+    metadata: Optional[dict] = Field(
+        default_factory=dict, description="Additional metadata for the analysis"
+    )
 
 
 @router.post("/ats-score/{document_id}")
@@ -302,6 +317,93 @@ async def analyze_job_description(
     )
 
     return job_analysis
+
+
+@router.post("/resume/enhanced", response_model=Dict[str, Any], tags=["Resume Analysis"])
+async def enhanced_resume_analysis(
+    request: EnhancedResumeAnalysisRequest,
+    user: dict = Depends(get_current_user_with_state),
+) -> Dict[str, Any]:
+    """
+    Analyze a resume using enhanced AI capabilities.
+
+    This endpoint provides advanced resume analysis with detailed insights
+    into skills, experience, education, and more using the latest AI models.
+
+    Features:
+    - Skills extraction and categorization
+    - Experience analysis with role and company insights
+    - Education verification and analysis
+    - Professional summary generation
+    - Contextual understanding of career progression
+
+    Returns a comprehensive analysis of the provided resume text.
+    """
+    # Prepare metadata with default values
+    metadata = {
+        "include_skills": request.include_skills,
+        "include_experience": request.include_experience,
+        "include_education": request.include_education,
+        "generate_summary": request.generate_summary,
+    }
+
+    # Add any additional metadata if provided
+    if request.metadata and isinstance(request.metadata, dict):
+        metadata.update(request.metadata)
+
+    # Create operation context with all required parameters
+    operation_context = AIOperationContext(
+        operation_name="enhanced_resume_analysis",
+        service_type=AIServiceType.TEXT_PROCESSING,
+        user_id=user.get("uid") or "anonymous",
+        input_size=len(request.resume_text),
+        metadata=metadata,
+    )
+
+    # Define the analysis function
+    async def _perform_analysis():
+        # Perform the analysis using our enhanced resume analyzer
+        result = await resume_analyzer.analyze_resume_enhanced(
+            resume_text=request.resume_text, user_id=user.get("uid")
+        )
+
+        # Save the analysis result directly (synchronously)
+        await _save_analysis_result(
+            user_id=user.get("uid"),
+            document_id=str(uuid.uuid4()),
+            analysis_type="enhanced_resume_analysis",
+            request_data=request.dict(),
+            result=result,
+            operation_result=AIOperationResult(
+                success=True, operation_id=operation_context.operation_id
+            ),
+            additional_metadata={"analysis_version": "2.0", "source": "genkit_enhanced"},
+        )
+
+        return result
+
+    # Use the enhanced AI handler for better error management
+    @enhanced_ai_handler(operation_context)
+    async def _execute_with_handler():
+        try:
+            return await _perform_analysis()
+        except Exception as e:
+            logger.error(f"Error in enhanced resume analysis: {str(e)}", exc_info=True)
+            raise
+
+    try:
+        return await _execute_with_handler()
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Unexpected error in enhanced resume analysis: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=create_detailed_error_message(
+                "An unexpected error occurred during resume analysis",
+                operation_context.operation_id,
+            ),
+        )
 
 
 # --- Helper Functions ---

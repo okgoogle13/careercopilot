@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthProvider';
 import { Card, Button, ProgressBar, Modal } from '../components/ui';
 import { CheckCircle, ArrowRight, ArrowLeft, Upload, Target, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';

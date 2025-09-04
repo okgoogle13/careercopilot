@@ -66,6 +66,24 @@ services:
       # AI Services
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+
+      # Genkit Configuration
+      GENKIT_ENV: ${GENKIT_ENV:-prod}
+      GENKIT_LOG_LEVEL: ${GENKIT_LOG_LEVEL:-INFO}
+      ENABLE_GENKIT_FLOWS: ${ENABLE_GENKIT_FLOWS:-true}
+
+      # AI Model Configuration
+      DEFAULT_AI_MODEL: ${DEFAULT_AI_MODEL:-gemini-1.5-pro}
+      BACKUP_AI_MODEL: ${BACKUP_AI_MODEL:-gpt-4o}
+      AI_TEMPERATURE: ${AI_TEMPERATURE:-0.7}
+      MAX_TOKENS: ${MAX_TOKENS:-4096}
+
+      # Google Cloud & Firebase
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
+      GOOGLE_CLOUD_PROJECT: ${GOOGLE_CLOUD_PROJECT}
+      VERTEX_AI_PROJECT_ID: ${VERTEX_AI_PROJECT_ID}
+      VERTEX_AI_LOCATION: ${VERTEX_AI_LOCATION:-us-central1}
 
       # Application settings
       ENVIRONMENT: production
@@ -106,7 +124,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: careercopilot-worker
-    command: celery -A app.worker worker --loglevel=info --concurrency=4
+    command: python -m celery -A app.worker worker --loglevel=info --concurrency=4
     env_file:
       - .env.production
     environment:
@@ -135,7 +153,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: careercopilot-scheduler
-    command: celery -A app.worker beat --loglevel=info
+    command: python -m celery -A app.worker beat --loglevel=info
     env_file:
       - .env.production
     environment:

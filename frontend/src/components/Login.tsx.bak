@@ -1,0 +1,302 @@
+import * as React from 'react';
+import { useAuth } from '../contexts/AuthProvider';
+import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
+import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+
+// Extend Window interface for Google OAuth
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
+// We'll use React.createElement directly to avoid JSX type issues
+
+interface LoginFormData {
+  email: string;
+  password: string;
+  name?: string;
+  rememberMe?: boolean;
+}
+
+interface LoginProps {
+  onSuccess?: () => void;
+}
+
+type HTMLFormField = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
+
+const Login = ({ onSuccess }: LoginProps): React.ReactElement => {
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const { login, register: authRegister, signInWithGoogle, loading, error } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors }
+  } = useForm<LoginFormData>();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      if (isSignUp) {
+        await authRegister(data.email, data.password);
+        toast.success('Registration successful!');
+      } else {
+        await login(data.email, data.password);
+        toast.success('Login successful!');
+      }
+      onSuccess?.();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Authentication failed';
+      toast.error(errorMessage);
+    }
+  };
+
+  const toggleAuthMode = () => {
+    setIsSignUp(prev => !prev);
+  };
+
+  // Demo credential helper
+  const fillDemoCredentials = () => {
+    setValue('email', 'demo@careercopilot.com');
+    setValue('password', 'demo123');
+    toast.success('Demo credentials filled!');
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      toast.success('Google sign-in successful!');
+      onSuccess?.();
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Google sign-in failed';
+      toast.error(errorMessage);
+    }
+  };
+
+  return React.createElement('div', {
+    className: 'min-h-screen flex items-center justify-center bg-bg p-4 sm:p-6 lg:p-8'
+  },
+    React.createElement('div', { className: 'max-w-md w-full space-y-8' },
+      React.createElement('div', { className: 'text-center' },
+        React.createElement('h1', { className: 'text-3xl font-bold tracking-tight text-text' },
+          isSignUp ? 'Create your account' : 'Welcome back'
+        ),
+        React.createElement('p', { className: 'mt-2 text-sm text-text-muted' },
+          isSignUp ? 'Already have an account? ' : "Don't have an account? ",
+          React.createElement('button', {
+            type: 'button',
+            onClick: toggleAuthMode,
+            className: 'font-medium text-primary hover:text-primary-hover focus-visible:outline-none'
+          },
+            isSignUp ? 'Sign in' : 'Sign up'
+          )
+        )
+      ),
+
+      React.createElement('div', { className: 'bg-bg-secondary p-8 rounded-lg shadow-sm border border-border' },
+        React.createElement('button', {
+          type: 'button',
+          onClick: handleGoogleSignIn,
+          disabled: loading,
+          className: 'group relative w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 dark:focus:ring-offset-gray-900 transition-colors duration-200'
+        },
+          React.createElement('img', {
+            src: 'https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg',
+            alt: 'Google',
+            className: 'w-5 h-5 mr-2'
+          }),
+          'Sign in with Google'
+        ),
+            className='group relative w-full flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 dark:focus:ring-offset-gray-900 transition-colors duration-200'
+          >
+            <img
+              src='https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg'
+              alt='Google'
+              className='w-5 h-5 mr-2'
+            />
+            Sign in with Google
+          </button>
+
+          <div className='relative my-6'>
+            <div className='absolute inset-0 flex items-center'>
+              <div className='w-full border-t border-border' />
+            </div>
+            <div className='relative flex justify-center text-sm'>
+              <span className='px-2 bg-bg-secondary text-text-muted'>
+                Or continue with email
+              </span>
+            </div>
+          </div>
+
+          <form className='space-y-5' onSubmit={handleSubmit(onSubmit)}>
+            {isSignUp && (
+              <div>
+                <label htmlFor='name' className='block text-sm font-medium text-text mb-1'>
+                  Full Name
+                </label>
+                <div className='mt-1'>
+                  <input
+                    id='name'
+                    type='text'
+                    autoComplete='name'
+                    {...register('name', {
+                      required: isSignUp ? 'Name is required' : false,
+                    })}
+                    className='form-input'
+                  />
+                  {errors.name && (
+                    <p className='mt-1 text-sm text-error'>{errors.name.message}</p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div>
+              <label htmlFor='email' className='block text-sm font-medium text-text mb-1'>
+                Email address
+              </label>
+              <div className='mt-1'>
+                <input
+                  id='email'
+                  type='email'
+                  autoComplete='email'
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'Invalid email address',
+                    },
+                  })}
+                  className='form-input'
+                />
+                {errors.email && (
+                  <p className='mt-1 text-sm text-error'>{errors.email.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <div className='flex items-center justify-between mb-1'>
+                <label htmlFor='password' className='block text-sm font-medium text-text'>
+                  Password
+                </label>
+                {!isSignUp && (
+                  <a
+                    href='#'
+                    className='text-xs font-medium text-primary hover:text-primary-hover'
+                  >
+                    Forgot password?
+                  </a>
+                )}
+              </div>
+              <div className='relative mt-1'>
+                <input
+                  id='password'
+                  type={showPassword ? 'text' : 'password'}
+                  autoComplete={isSignUp ? 'new-password' : 'current-password'}
+                  {...register('password', {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 6,
+                      message: 'Password must be at least 6 characters',
+                    },
+                  })}
+                  className='form-input pr-10'
+                />
+                <button
+                  type='button'
+                  onClick={() => setShowPassword(!showPassword)}
+                  className='absolute right-3 top-1/2 -translate-y-1/2 text-text-muted hover:text-text'
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? (
+                    <EyeOffIcon className='h-5 w-5' />
+                  ) : (
+                    <EyeIcon className='h-5 w-5' />
+                  )}
+                </button>
+              </div>
+              {errors.password && (
+                <p className='mt-1 text-sm text-error'>{errors.password.message}</p>
+              )}
+            </div>
+
+            {!isSignUp && (
+              <div className='flex items-center'>
+                <input
+                  id='remember-me'
+                  type='checkbox'
+                  {...register('rememberMe')}
+                  className='h-4 w-4 rounded border-border text-primary focus:ring-primary/50'
+                />
+                <label htmlFor='remember-me' className='ml-2 block text-sm text-text'>
+                  Remember me
+                </label>
+              </div>
+            )}
+
+            <div className='pt-2'>
+              <button
+                type='submit'
+                disabled={isSubmitting}
+                className='w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-colors duration-200'
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className='animate-spin -ml-1 mr-2 h-4 w-4 text-white'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                    >
+                      <circle
+                        className='opacity-25'
+                        cx='12'
+                        cy='12'
+                        r='10'
+                        stroke='currentColor'
+                        strokeWidth='4'
+                      ></circle>
+                      <path
+                        className='opacity-75'
+                        fill='currentColor'
+                        d='M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z'
+                      ></path>
+                    </svg>
+                    {isSignUp ? 'Creating account...' : 'Signing in...'}
+                  </>
+                ) : isSignUp ? (
+                  'Create account'
+                ) : (
+                  'Sign in'
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+
+        {/* Development Info */}
+        {import.meta.env.DEV && (
+          <div className='bg-bg-secondary p-4 rounded-lg border border-border'>
+            <h3 className='text-sm font-medium text-text mb-2'>Development Mode</h3>
+            <div className='text-xs text-text-muted space-y-1'>
+              <p>• Any email/password combination works</p>
+              <p>• Password must be 6+ characters</p>
+              <p>• Sessions persist in localStorage</p>
+              <p>• <button type="button" onClick={fillDemoCredentials} className="text-primary hover:underline">Use demo credentials</button></p>
+            </div>
+          </div>
+        )}
+    </div>
+  );
+};
+
+export default Login;

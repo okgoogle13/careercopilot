@@ -69,7 +69,7 @@ interface LoadingStateProps {
   variant?: 'default' | 'minimal' | 'card';
 }
 
-export const LoadingState = memo<LoadingStateProps>(
+const LoadingState = memo<LoadingStateProps>(
   ({ message = 'Loading...', className = '', size = 'lg', variant = 'default' }) => {
     const baseClasses = 'flex flex-col items-center justify-center';
 
@@ -189,4 +189,12 @@ const CardLoading = memo<CardLoadingProps>(({ className = '', variant = 'default
 
 CardLoading.displayName = 'CardLoading';
 
+export {
+  LoadingSpinner,
+  LoadingState,
+  PageLoading,
+  InlineLoading,
+  TableLoading,
+  CardLoading
+};
 export default LoadingSpinner;
