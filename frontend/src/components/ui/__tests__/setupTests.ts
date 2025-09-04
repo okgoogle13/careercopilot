@@ -4,9 +4,8 @@ import { TextEncoder, TextDecoder } from 'util';
 
 // Extend the global type to include our custom properties
 declare global {
-  // eslint-disable-next-line no-var
   var TextEncoder: typeof import('util').TextEncoder;
-  // eslint-disable-next-line no-var
+
   var TextDecoder: typeof import('util').TextDecoder;
 }
 
