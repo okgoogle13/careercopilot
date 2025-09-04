@@ -33,9 +33,7 @@ export const MockAuthProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   return (
     <AuthContext.Provider value={authValue}>
-      <div data-testid="mock-auth-provider">
-        {children}
-      </div>
+      <div data-testid='mock-auth-provider'>{children}</div>
     </AuthContext.Provider>
   );
 };

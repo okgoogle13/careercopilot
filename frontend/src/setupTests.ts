@@ -19,8 +19,6 @@ Object.defineProperty(window, 'matchMedia', {
 // Mock window.scrollTo
 window.scrollTo = jest.fn();
 
-
-
 // Add cleanup after each test
 afterEach(() => {
   jest.clearAllMocks();
