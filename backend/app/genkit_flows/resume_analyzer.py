@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 try:
     import genkit  # type: ignore
-    from genkit.plugins import googleai  # type: ignore
+    from genkit.plugins import google_genai  # type: ignore
 except Exception:  # pragma: no cover - makes module import-safe without genkit
     genkit = None  # type: ignore
     googleai = None  # type: ignore

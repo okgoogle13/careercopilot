@@ -2,15 +2,15 @@ import json
 from typing import Optional
 
 import genkit
-from genkit.plugins import googleai
+from genkit.plugins import google_genai
 
 # Initialize Genkit and the Google AI plugin.
 # By not passing an explicit API key, the plugin will automatically
 # use the Application Default Credentials (ADC) of the service account.
 if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init()])
+    genkit.init(plugins=[google_genai.init()])
 
-gemini_pro = googleai.gemini_pro
+gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
 
 
 # Removed @genkit.flow()

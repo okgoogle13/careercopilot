@@ -46,7 +46,7 @@ def extract_job_details_from_email(email_content: str) -> dict:
     """
     response = gemini_pro.generate(
         prompt=prompt,
-        response_mime_type="application/json",
+        config={"response_mime_type": "application/json"},
     )
     try:
         return json.loads(response.text())

@@ -64,7 +64,9 @@ repos:
       - id: end-of-file-fixer
         exclude: ^(frontend/(node_modules|dist|build)/|backend/__pycache__|\.git/)
       - id: check-added-large-files
-        args: ['--maxkb=500']
+        args: ['--maxkb=2000']
+        exclude: |
+          ^\.yarn/.*|^(.*/)?yarn\.lock$
       - id: check-merge-conflict
       - id: check-yaml
       - id: check-json

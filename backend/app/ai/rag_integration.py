@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from app.ai.document_processor import DocumentProcessor
 from app.ai.rag_service import RAGService
-from app.ai.vector_store import VectorStore
+from app.ai.vector_store import vector_store  # Import the singleton instance
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.config import settings
 
@@ -29,13 +29,8 @@ class RAGIntegration:
             }
         )
 
-        self.vector_store = VectorStore(
-            {
-                "collection_name": settings.rag_vector_collection,
-                "index_endpoint": settings.vertex_ai_index_endpoint,
-                "dimension": settings.embedding_dimension,
-            }
-        )
+        # Use the imported singleton vector_store instance
+        self.vector_store = vector_store
 
         self.rag_service = RAGService(
             {
@@ -103,10 +98,11 @@ class RAGIntegration:
                     }
                 )
 
-            # Add to vector store
-            doc_ids = await self.vector_store.add_documents(
-                documents=documents, embeddings=embeddings
-            )
+            # Add to vector store using add_vectors
+            doc_ids = []
+            if embeddings and documents:
+                await self.vector_store.add_vectors(vectors=embeddings, metadatas=documents)
+                doc_ids = [doc["id"] for doc in documents]  # Assuming IDs are in metadata
 
             logger.info(f"Indexed {len(doc_ids)} document chunks")
             return doc_ids
@@ -152,10 +148,20 @@ class RAGIntegration:
                     "Failed to generate query embedding", error_type=AIErrorType.EMBEDDING_ERROR
                 )
 
-            # Search for similar documents
-            search_results = await self.vector_store.similarity_search(
-                query_embedding=query_embedding[0], k=top_k, filters=filters
+            # Search for similar documents using search_vectors
+            # Pass query_embedding[0] as search_vectors expects a single vector
+            search_results_raw = await self.vector_store.search_vectors(
+                query_vector=query_embedding[0], k=top_k
             )
+
+            # Format results to match RAGQueryResponse expectation
+            search_results = []
+            for res in search_results_raw:
+                metadata = res["metadata"]
+                # Apply filters here if user_id is present and not handled by vector store
+                if user_id and metadata.get("user_id") != user_id:
+                    continue
+                search_results.append((metadata, res["distance"]))  # (doc, score)
 
             # Extract relevant context
             context = "\n\n".join(

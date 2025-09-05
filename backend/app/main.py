@@ -87,7 +87,9 @@ async def app_lifespan(app: FastAPI):
     if os.getenv("ENABLE_RAG", "true").lower() == "true":
         try:
             # This will initialize the RAG integration with default settings
-            pass
+            from app.core.vector_store import vector_store
+
+            await vector_store.load_or_create_index()
 
             print("RAG services initialized successfully")
         except Exception as e:

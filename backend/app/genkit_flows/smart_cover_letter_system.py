@@ -18,7 +18,7 @@ from pydantic import BaseModel, Field
 
 try:
     import genkit
-    from genkit.plugins import googleai
+    from genkit.plugins import google_genai
 except Exception:
     genkit = None
     googleai = None
@@ -36,7 +36,7 @@ genkit_flow = getattr(genkit, "flow", _noop_flow) if genkit else _noop_flow
 # Load environment variables
 load_dotenv()
 if genkit and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
@@ -205,11 +205,11 @@ Respond with valid JSON matching the SmartCoverLetter schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.4,
-                max_output_tokens=3500,
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.4,
+                "max_output_tokens": 3500,
+            },
             output_schema=SmartCoverLetter,
         )
 
@@ -312,9 +312,10 @@ Respond with valid JSON matching the CompanyResearchInsights schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+            },
             output_schema=CompanyResearchInsights,
         )
 
@@ -430,11 +431,11 @@ Respond with valid JSON matching the CoverLetterOptimizationResult schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.3,
-                max_output_tokens=3000,
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+                "max_output_tokens": 3000,
+            },
             output_schema=CoverLetterOptimizationResult,
         )
 
@@ -544,11 +545,11 @@ Respond with valid JSON matching the MultiFormatCoverLetterSuite schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.4,
-                max_output_tokens=4000,
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.4,
+                "max_output_tokens": 4000,
+            },
             output_schema=MultiFormatCoverLetterSuite,
         )
 
