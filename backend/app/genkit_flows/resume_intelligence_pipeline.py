@@ -20,7 +20,7 @@ from pydantic import BaseModel, Field
 try:
     import genkit
     from genkit import ai
-    from genkit.plugins import googleai
+    from genkit.plugins import google_genai
 except Exception:
     genkit = None
     googleai = None
@@ -220,11 +220,11 @@ Respond with valid JSON matching the ResumeAnalysisResult schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.2,
-                max_output_tokens=3000,
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.2,
+                "max_output_tokens": 3000,
+            },
             output_schema=ResumeAnalysisResult,
         )
 
@@ -303,9 +303,10 @@ Respond with valid JSON matching the CareerProgressionAnalysis schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+            },
             output_schema=CareerProgressionAnalysis,
         )
 
@@ -390,9 +391,10 @@ Respond with valid JSON matching the ResumeIntelligenceReport schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.2
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.2,
+            },
             output_schema=ResumeIntelligenceReport,
         )
 
@@ -501,9 +503,10 @@ Respond with valid JSON matching the SkillsGapAnalysis schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+            },
             output_schema=SkillsGapAnalysis,
         )
 

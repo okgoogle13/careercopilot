@@ -1,104 +1,194 @@
-# CareerPilot Application
+# CareerCopilot
 
-... (existing README content) ...
+> AI-powered career management platform built with modern web technologies
 
-## Dependency Management
+## 🏗️ Architecture
 
-This project uses a combination of tools to manage dependencies effectively and keep them up-to-date.
+**Frontend**: React 19 + TypeScript + Vite + Tailwind CSS
+**Backend**: Python + FastAPI + SQLAlchemy + Alembic
+**Functions**: Firebase Functions v2 + TypeScript
+**Database**: PostgreSQL + Firebase Firestore
+**AI/ML**: Google AI Platform + Anthropic Claude + OpenAI
+**Infrastructure**: Google Cloud Platform + Firebase
 
-### Python Dependencies
+## 📁 Project Structure
 
-Python dependencies are managed using `pip-tools` with the following files:
-- `requirements.in` - Main dependencies
-- `requirements-dev.in` - Development dependencies
-- `requirements.txt` - Pinned production dependencies (generated)
-- `requirements-dev.txt` - Pinned development dependencies (generated)
+```
+careercopilot/
+├── 📱 frontend/           # React TypeScript SPA
+│   ├── src/
+│   │   ├── components/    # Reusable UI components
+│   │   ├── pages/         # Route components
+│   │   ├── hooks/         # Custom React hooks
+│   │   ├── contexts/      # React contexts
+│   │   ├── services/      # API clients
+│   │   └── utils/         # Utility functions
+│   ├── public/           # Static assets
+│   └── tests/            # Frontend tests
+├── 🐍 backend/           # Python FastAPI backend
+│   ├── app/
+│   │   ├── api/          # API endpoints
+│   │   ├── core/         # Core utilities
+│   │   ├── models/       # Database models
+│   │   ├── services/     # Business logic
+│   │   └── tests/        # Backend tests
+│   ├── migrations/       # Database migrations
+│   └── requirements.in   # Python dependencies
+├── ⚡ functions/         # Firebase Functions
+│   └── src/              # TypeScript functions
+├── 📚 docs/              # Documentation
+│   ├── setup/           # Setup guides
+│   ├── deployment/      # Deployment docs
+│   └── development/     # Development docs
+└── 🛠️ scripts/           # Utility scripts
+```
 
-#### Updating Python Dependencies
+## 🚀 Quick Start
 
-1. Edit the appropriate `.in` file to update package versions
-2. Regenerate the `.txt` files:
+### Prerequisites
+
+- Node.js 18+ & Yarn 4+
+- Python 3.12+ & pip
+- Firebase CLI
+- Google Cloud SDK
+
+### Development Setup
+
+1. **Clone and install dependencies:**
    ```bash
-   cd backend
-   pip-compile requirements.in
-   pip-compile requirements-dev.in
+   git clone <repo-url>
+   cd careercopilot
+   yarn install
+   cd backend && pip install -r requirements.txt
    ```
-3. Install the updated dependencies:
+
+2. **Start development servers:**
    ```bash
-   pip install -r requirements.txt -r requirements-dev.txt
+   # Frontend (React)
+   yarn dev
+
+   # Backend (FastAPI)
+   cd backend && uvicorn app.main:app --reload
+
+   # Functions (Firebase)
+   yarn dev:functions
    ```
 
-### Node.js Dependencies
+3. **Access applications:**
+   - Frontend: http://localhost:5173
+   - Backend API: http://localhost:8000
+   - Functions: http://localhost:5001
 
-Node.js dependencies are managed using `npm` with `npm-check-updates` for updates.
+## 📋 Available Scripts
 
-#### Updating Node.js Dependencies
+### Root Level
+```bash
+yarn dev              # Start frontend development
+yarn build            # Build all workspaces
+yarn lint             # Lint all code
+yarn test             # Run tests
+yarn clean            # Clean build artifacts
+```
 
-1. Check for outdated packages:
-   ```bash
-   cd frontend
-   npx npm-check-updates
-   ```
+### Frontend
+```bash
+yarn dev              # Start dev server
+yarn build            # Build for production
+yarn test             # Run Jest tests
+yarn lint             # ESLint check
+yarn type-check       # TypeScript check
+```
 
-2. Update packages:
-   ```bash
-   npx npm-check-updates -u
-   npm install
-   ```
+### Functions
+```bash
+yarn serve            # Start emulator
+yarn build            # Compile TypeScript
+yarn deploy           # Deploy to Firebase
+yarn lint             # ESLint check
+```
 
-### Automated Dependency Updates with Renovate
+### Backend
+```bash
+uvicorn app.main:app --reload    # Start dev server
+alembic upgrade head             # Run migrations
+pytest                          # Run tests
+```
 
-This project uses [Renovate](https://docs.renovatebot.com/) to automatically:
-- Create pull requests for dependency updates
-- Group related updates
-- Run tests before merging
-- Follow semantic versioning rules
+## 🔧 Configuration
 
-#### Renovate Configuration
+### Environment Variables
 
-- Updates minor and patch versions automatically
-- Requires manual approval for major version updates
-- Runs updates weekly (Monday mornings AEST)
-- Groups development dependencies separately
+**Frontend** (`.env`):
+```bash
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_API_BASE_URL=http://localhost:8000
+```
 
-### Useful Scripts
+**Backend** (`.env`):
+```bash
+DATABASE_URL=postgresql://user:pass@localhost/db
+FIREBASE_PROJECT_ID=your_project_id
+GOOGLE_APPLICATION_CREDENTIALS=path/to/key.json
+```
 
-- `scripts/check-updates.sh` - Check for outdated dependencies
-- `scripts/update-dependencies.sh` - Update all dependencies (interactive)
+**Functions** (Firebase Secrets):
+```bash
+firebase functions:secrets:set API_KEY
+firebase functions:secrets:set DATABASE_URL
+```
 
-### Security Scanning
+## 🏗️ Build & Deploy
 
-Dependencies are automatically scanned for vulnerabilities using:
-- `npm audit` for Node.js packages
-- `safety check` for Python packages
+### Development
+```bash
+yarn dev              # Start all services
+```
+
+### Production
+```bash
+yarn build            # Build frontend & functions
+cd backend && pip install -r requirements.txt
+# Deploy using your preferred method
+```
+
+## 📖 Documentation
+
+- [Setup Guide](docs/setup/) - Complete setup instructions
+- [API Documentation](docs/api/) - Backend API reference
+- [Deployment Guide](docs/deployment/) - Production deployment
+- [Contributing](docs/contributing/) - Development guidelines
+
+## 🛠️ Tech Stack Details
+
+### Frontend Dependencies
+- **UI Framework**: React 19 with hooks & concurrent features
+- **Styling**: Tailwind CSS + Radix UI components
+- **Build Tool**: Vite for fast development & optimal builds
+- **Routing**: React Router v7
+- **Forms**: React Hook Form + Zod validation
+- **State**: React Context + Custom hooks
+- **Testing**: Jest + Testing Library + Playwright
+
+### Backend Dependencies
+- **Framework**: FastAPI with automatic OpenAPI docs
+- **Database**: PostgreSQL with SQLAlchemy ORM
+- **Migrations**: Alembic for schema management
+- **AI/ML**: Google AI Platform + Anthropic + OpenAI
+- **Auth**: Firebase Authentication integration
+- **Validation**: Pydantic models
+- **Testing**: Pytest with fixtures
+
+### Functions Dependencies
+- **Runtime**: Firebase Functions v2 (Node.js 20)
+- **Language**: TypeScript with strict mode
+- **Secrets**: Firebase Secret Manager integration
+- **Params**: Modern params subpackage for configuration
+
+## 📄 License
+
+UNLICENSED - Private project
 
 ---
 
-## Proactive Job Management Setup
-
-The application includes a feature to proactively scan connected user Gmail accounts for new job opportunities. This is handled by a scheduled job that triggers a protected API endpoint.
-
-### Setting up the Scheduled Job
-
-To enable the automated, hourly email scan, you need to configure a **Cloud Scheduler** job in your Google Cloud project.
-
-1.  **Navigate to Cloud Scheduler:** In the Google Cloud Console, go to the Cloud Scheduler section.
-2.  **Create a New Job:**
-    *   **Name:** `hourly-email-scan`
-    *   **Description:** Triggers the global email scan for all connected users every hour.
-    *   **Frequency:** `0 * * * *` (This is a cron expression for "at minute 0 of every hour").
-    *   **Timezone:** Select your preferred timezone.
-3.  **Configure the Execution:**
-    *   **Target type:** `HTTP`
-    *   **URL:** `https://<YOUR_APP_URL>/api/v1/integrations/trigger-global-scan` (Replace `<YOUR_APP_URL>` with your deployed application's URL).
-    *   **HTTP method:** `POST`
-    *   **Headers:**
-        *   Add a new header.
-        *   **Header name:** `X-Scheduler-Secret`
-        *   **Header value:** The value you have set for the `SCHEDULER_SECRET` environment variable in your backend configuration.
-    *   **Auth header:** For an internal service, you might also configure IAP or a service account for authentication. For this implementation, the secret key provides the primary layer of protec[...]
-
-Once created and enabled, this Cloud Scheduler job will call your API endpoint every hour, which will then process all connected users, ensuring that their job opportunities are always up-to-date.
-
-## CI/CD Pipeline Test - Staging
-# Test comment for CI trigger
+> Built with ❤️ by the CareerCopilot Team

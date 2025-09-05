@@ -2,7 +2,7 @@ import os
 
 import genkit
 from dotenv import load_dotenv
-from genkit.plugins import googleai
+from genkit.plugins import google_genai
 from pydantic import BaseModel
 
 # Load environment variables from .env file
@@ -10,10 +10,10 @@ load_dotenv()
 
 # Initialize the Google AI plugin if not already initialized
 if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 # Define the Gemini Pro model
-gemini_pro = googleai.gemini_pro
+gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
 
 
 # Define the structured output model using Pydantic
@@ -54,9 +54,9 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
     # Generate the response using the Gemini model, ensuring JSON output
     response = gemini_pro.generate(
         prompt=prompt,
-        config=googleai.GenerationConfig(
-            response_mime_type="application/json",
-        ),
+        config={
+            "response_mime_type": "application/json",
+        },
     )
 
     return response.output()

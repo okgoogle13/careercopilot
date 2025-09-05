@@ -47,3 +47,5 @@ httpx[http2]
 slowapi
 sendgrid
 genkit[googleai]
+opencensus
+opencensus-ext-stackdriver

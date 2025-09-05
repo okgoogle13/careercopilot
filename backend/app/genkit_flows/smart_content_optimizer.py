@@ -18,7 +18,7 @@ from pydantic import BaseModel, Field
 
 try:
     import genkit
-    from genkit.plugins import googleai
+    from genkit.plugins import google_genai
 except Exception:
     genkit = None
     googleai = None
@@ -36,7 +36,7 @@ genkit_flow = getattr(genkit, "flow", _noop_flow)
 # Load environment variables
 load_dotenv()
 if genkit and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
@@ -180,11 +180,11 @@ Respond with valid JSON matching the ContentOptimizationResult schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.3,
-                max_output_tokens=4000,
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+                "max_output_tokens": 4000,
+            },
             output_schema=ContentOptimizationResult,
         )
 
@@ -266,9 +266,10 @@ Respond with valid JSON matching the PersonalBrandingAnalysis schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+            },
             output_schema=PersonalBrandingAnalysis,
         )
 
@@ -357,9 +358,10 @@ Respond with valid JSON matching the LinkedInOptimizationResult schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.4
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.4,
+            },
             output_schema=LinkedInOptimizationResult,
         )
 
@@ -443,11 +445,11 @@ Respond with valid JSON matching the MultiChannelOptimizationResult schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.3,
-                max_output_tokens=4000,
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+                "max_output_tokens": 4000,
+            },
             output_schema=MultiChannelOptimizationResult,
         )
 
