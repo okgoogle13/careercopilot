@@ -1,5 +1,18 @@
 # Project Commands and Notes
 
+## Configuration Management
+- **Setup Script**: `./setup-api-keys.sh` - Interactive configuration setup
+- **Production Secrets**: `python3 scripts/setup-production-secrets.py` - Set up Google Cloud secrets
+- **Firebase Config**: `python3 scripts/setup-firebase-config.py` - Configure Firebase integration
+- **Test Configuration**: `python3 scripts/test-configuration.py` - Validate all configurations
+
+## Configuration Files
+- `.env.local` - Local development environment variables (not committed)
+- `.env.production` - Production environment template
+- `backend/app/core/config.py` - Centralized configuration management
+- `backend/app/core/secure_config.py` - Secure settings with Secret Manager integration
+- `backend/app/core/secret_manager.py` - Google Cloud Secret Manager integration
+
 ## Linting Commands
 - Frontend: `yarn lint:fix` (uses yarn)
 - Functions: `npm run lint:fix` (uses npm)

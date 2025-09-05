@@ -27,7 +27,12 @@ def _get_client():
     return _client if _client is not False else None
 
 
-def get_secret(secret_id: str, project_id: Optional[str] = None, version: str = "latest") -> str:
+def get_secret(
+    secret_id: str,
+    project_id: Optional[str] = None,
+    version: str = "latest",
+    default: Optional[str] = None,
+) -> str:
     """
     Retrieve a secret from Google Cloud Secret Manager or fall back to environment variables.
 
@@ -35,6 +40,7 @@ def get_secret(secret_id: str, project_id: Optional[str] = None, version: str = 
         secret_id: The ID of the secret to retrieve
         project_id: GCP project ID (defaults to GOOGLE_CLOUD_PROJECT environment variable)
         version: Version of the secret (defaults to "latest")
+        default: Default value if secret not found
 
     Returns:
         The secret value as a string
@@ -63,6 +69,8 @@ def get_secret(secret_id: str, project_id: Optional[str] = None, version: str = 
         env_var = os.getenv(f"DEFAULT_{secret_id}")
         if env_var:
             return env_var
+        if default is not None:
+            return default
         raise RuntimeError(
             f"Secret Manager not available and no environment fallback for {secret_id}"
         )
@@ -76,10 +84,14 @@ def get_secret(secret_id: str, project_id: Optional[str] = None, version: str = 
         env_var = os.getenv(f"DEFAULT_{secret_id}")
         if env_var:
             return env_var
+        if default is not None:
+            return default
         raise RuntimeError(
             f"Secret {secret_id} not found in Secret Manager and no default provided"
         )
     except Exception as e:
+        if default is not None:
+            return default
         raise RuntimeError(f"Failed to access secret {secret_id}: {str(e)}")
 
 
@@ -131,13 +143,56 @@ def get_firebase_config() -> dict:
     Returns:
         dict: Firebase configuration
     """
-    config = {
-        "project_id": get_secret("FIREBASE_PROJECT_ID"),
-        "storage_bucket": get_secret("FIREBASE_STORAGE_BUCKET"),
-        "database_url": get_secret("FIREBASE_DATABASE_URL"),
-        "use_emulator": get_secret("FIREBASE_EMULATOR", "false").lower() == "true",
-        "auth_emulator_host": get_secret("FIREBASE_AUTH_EMULATOR_HOST", ""),
-        "storage_emulator_host": get_secret("FIREBASE_STORAGE_EMULATOR_HOST", ""),
-        "database_emulator_host": get_secret("FIREBASE_DATABASE_EMULATOR_HOST", ""),
-    }
-    return config
+    try:
+        config = {
+            "project_id": get_secret(
+                "FIREBASE_PROJECT_ID", default=os.getenv("GCP_PROJECT_ID", "")
+            ),
+            "storage_bucket": get_secret("FIREBASE_STORAGE_BUCKET", default=""),
+            "database_url": get_secret("FIREBASE_DATABASE_URL", default=""),
+            "use_emulator": get_secret("FIREBASE_EMULATOR", default="false").lower() == "true",
+            "auth_emulator_host": get_secret("FIREBASE_AUTH_EMULATOR_HOST", default=""),
+            "storage_emulator_host": get_secret("FIREBASE_STORAGE_EMULATOR_HOST", default=""),
+            "database_emulator_host": get_secret("FIREBASE_DATABASE_EMULATOR_HOST", default=""),
+        }
+        return config
+    except Exception as e:
+        # Fallback to environment variables
+        return {
+            "project_id": os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
+            "storage_bucket": os.getenv("FIREBASE_STORAGE_BUCKET", ""),
+            "database_url": os.getenv("FIREBASE_DATABASE_URL", ""),
+            "use_emulator": os.getenv("FIREBASE_EMULATOR", "false").lower() == "true",
+            "auth_emulator_host": os.getenv("FIREBASE_AUTH_EMULATOR_HOST", ""),
+            "storage_emulator_host": os.getenv("FIREBASE_STORAGE_EMULATOR_HOST", ""),
+            "database_emulator_host": os.getenv("FIREBASE_DATABASE_EMULATOR_HOST", ""),
+        }
+
+
+def get_app_secret(secret_name: str, default: str = None) -> str:
+    """
+    Get an application secret with the modern naming convention.
+
+    This function is compatible with the secrets.py module and provides
+    a consistent interface for accessing secrets with fallbacks.
+
+    Args:
+        secret_name: Name of the secret (e.g., 'openai-api-key')
+        default: Default value if secret not found
+
+    Returns:
+        Secret value as string
+
+    Raises:
+        RuntimeError: If secret not found and no default provided
+    """
+    try:
+        return get_secret(secret_name.upper().replace("-", "_"))
+    except RuntimeError:
+        # Try with the original format
+        try:
+            return get_secret(secret_name)
+        except RuntimeError:
+            if default is not None:
+                return default
+            raise RuntimeError(f"Secret {secret_name} not found")
