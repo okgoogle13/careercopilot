@@ -1,0 +1,50 @@
+-r requirements.txt
+
+# Testing
+pytest
+pytest-cov
+pytest-asyncio
+pytest-mock
+pytest-httpx
+pytest-env
+
+# Linting and Formatting
+black
+isort
+flake8
+mypy
+types-requests
+types-python-dateutil
+pylint
+
+# Documentation
+mkdocs
+mkdocs-material
+mkdocstrings[python]
+pdoc3
+
+# Development Tools
+ipython
+jupyter
+jupyterlab
+pre-commit
+python-dotenv
+
+# Security
+safety
+bandit
+
+# Debugging
+pdbpp
+ipdb
+
+# API Testing
+httpie
+
+# Database Tools
+sqlalchemy-utils
+
+# Type checking
+mypy
+mypy-extensions
+typing-extensions

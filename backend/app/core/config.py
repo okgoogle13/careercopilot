@@ -4,10 +4,11 @@ Application configuration with secure secret management.
 This module provides a centralized way to access configuration values,
 with support for loading secrets from Google Cloud Secret Manager.
 """
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Union
 
-from pydantic import BaseSettings, Field, validator
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional
+
+from pydantic_settings import BaseSettings
 
 # Import the secure settings
 from .secure_config import settings as secure_settings
@@ -35,6 +36,22 @@ class Settings(BaseSettings):
     ai_model: str = "gemini-1.5-pro"
     ai_max_tokens: int = 2000
     ai_temperature: float = 0.2
+
+    # RAG Settings
+    enable_rag: bool = True
+    rag_chunk_size: int = 1000
+    rag_chunk_overlap: int = 200
+    rag_vector_collection: str = "document_chunks"
+    embedding_model: str = "all-MiniLM-L6-v2"
+    embedding_dimension: int = 384
+    vertex_ai_index_endpoint: Optional[str] = None
+    vertex_ai_region: str = "us-central1"
+
+    # Document processing
+    max_document_size_mb: int = 10
+    allowed_document_types: List[str] = field(
+        default_factory=lambda: ["application/pdf", "text/plain", "text/markdown"]
+    )
 
     # Performance settings
     max_workers: int = secure_settings.MAX_WORKERS

@@ -7,12 +7,43 @@ for all AI-powered features in CareerCopilot.
 
 import logging
 import os
-from typing import Optional
+from typing import Any, Dict, Optional
+
+from opencensus.ext.stackdriver import trace_exporter as stackdriver_exporter
+from opencensus.trace import execution_context
+from opencensus.trace import tracer as trace_module
 
 logger = logging.getLogger(__name__)
 
 # Global flag to track initialization
 _genkit_initialized = False
+_tracer = None
+
+
+def init_telemetry() -> None:
+    """Initialize OpenCensus tracing for GenKit."""
+    global _tracer
+    try:
+        if not _tracer and os.getenv("GOOGLE_CLOUD_PROJECT"):
+            exporter = stackdriver_exporter.StackdriverExporter(
+                project_id=os.getenv("GOOGLE_CLOUD_PROJECT")
+            )
+            _tracer = trace_module.Tracer(exporter=exporter)
+            execution_context.set_opencensus_tracer(_tracer)
+            logger.info("Initialized OpenCensus tracing for GenKit")
+    except Exception as e:
+        logger.warning(f"Failed to initialize telemetry: {e}")
+
+
+def get_genkit_config() -> Dict[str, Any]:
+    """Get GenKit configuration from environment."""
+    return {
+        "project_id": os.getenv("GOOGLE_CLOUD_PROJECT"),
+        "location": os.getenv("GOOGLE_CLOUD_REGION", "us-central1"),
+        "enable_telemetry": os.getenv("ENABLE_TELEMETRY", "true").lower() == "true",
+        "log_level": os.getenv("GENKIT_LOG_LEVEL", "INFO"),
+        "environment": os.getenv("GENKIT_ENV", "development"),
+    }
 
 
 def init_genkit() -> bool:
@@ -30,7 +61,14 @@ def init_genkit() -> bool:
 
     try:
         import genkit
-        from genkit.plugins import googleai
+        from genkit.plugins.google_ai import googleai  # Updated import path
+
+        # Get configuration
+        config = get_genkit_config()
+
+        # Initialize telemetry if enabled
+        if config["enable_telemetry"]:
+            init_telemetry()
 
         # Check if we have the required API key
         api_key = os.getenv("GEMINI_API_KEY")
@@ -38,12 +76,21 @@ def init_genkit() -> bool:
             logger.warning("GEMINI_API_KEY not found - Genkit flows will not work")
             return False
 
-        # Initialize Genkit with Google AI plugin if not already done
-        if not genkit.get_plugin("googleai"):
-            genkit.init(
-                plugins=[googleai.init(api_key=api_key)],
-                log_level=os.getenv("GENKIT_LOG_LEVEL", "INFO"),
-            )
+        # Configure Genkit
+        genkit.configure(
+            project_id=config["project_id"],
+            location=config["location"],
+            environment=config["environment"],
+            log_level=config["log_level"],
+            enable_telemetry=config["enable_telemetry"],
+        )
+
+        # Initialize Google AI plugin
+        googleai.init(
+            api_key=api_key,
+            default_model=os.getenv("DEFAULT_AI_MODEL", "gemini-1.5-pro"),
+            enable_safety_settings=True,
+        )
 
         _genkit_initialized = True
         logger.info("Genkit initialized successfully with Google AI plugin")
@@ -53,7 +100,7 @@ def init_genkit() -> bool:
         logger.warning(f"Genkit not available: {e}")
         return False
     except Exception as e:
-        logger.error(f"Failed to initialize Genkit: {e}")
+        logger.error(f"Failed to initialize Genkit: {e}", exc_info=True)
         return False
 
 

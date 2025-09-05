@@ -2,9 +2,8 @@
 Integration tests for AI-Powered Career Services API endpoints
 """
 
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
-import pytest
 from app.core.dependencies import get_current_user
 from app.main import app
 from fastapi.testclient import TestClient

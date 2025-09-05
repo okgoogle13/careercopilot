@@ -3,8 +3,9 @@ Base AI Service
 
 Provides common functionality and configuration for all AI services.
 """
+
 import logging
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar
+from typing import Any, Dict, List, Optional, TypeVar
 
 from pydantic import BaseModel
 

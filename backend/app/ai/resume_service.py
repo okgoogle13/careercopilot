@@ -10,13 +10,12 @@ This module provides AI-powered analysis of resumes with support for:
 import json
 import logging
 import re
-from datetime import datetime
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 
 from app.core.ai_client import AIRequest, get_ai_client
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.config import settings
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 
 from .base_service import BaseAIService
 
@@ -86,15 +85,21 @@ class ResumeAnalysisService(BaseAIService):
         super().__init__(config or {})
         self.config = {
             "model": config.get("model", settings.ai_model) if config else settings.ai_model,
-            "max_tokens": config.get("max_tokens", settings.ai_max_tokens)
-            if config
-            else settings.ai_max_tokens,
-            "temperature": config.get("temperature", settings.ai_temperature)
-            if config
-            else settings.ai_temperature,
-            "enabled": config.get("enabled", settings.enable_ai_features)
-            if config
-            else settings.enable_ai_features,
+            "max_tokens": (
+                config.get("max_tokens", settings.ai_max_tokens)
+                if config
+                else settings.ai_max_tokens
+            ),
+            "temperature": (
+                config.get("temperature", settings.ai_temperature)
+                if config
+                else settings.ai_temperature
+            ),
+            "enabled": (
+                config.get("enabled", settings.enable_ai_features)
+                if config
+                else settings.enable_ai_features
+            ),
             "cache_enabled": True,
             "cache_ttl": 3600,  # 1 hour cache TTL
         }
@@ -271,9 +276,9 @@ Format your response as a JSON object with the following structure:
             summary="",
             raw_data={
                 "error": "Analysis not available",
-                "input_sample": resume_text[:200] + "..."
-                if len(resume_text) > 200
-                else resume_text,
+                "input_sample": (
+                    resume_text[:200] + "..." if len(resume_text) > 200 else resume_text
+                ),
             },
         )
 

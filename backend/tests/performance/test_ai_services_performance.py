@@ -3,16 +3,12 @@ Performance testing for AI services
 """
 
 import json
-import statistics
-import time
-from typing import Any, Dict, List
 
 import gevent
-import pytest
 from locust import HttpUser, between, task
 from locust.env import Environment
 from locust.log import setup_logging
-from locust.stats import stats_history, stats_printer
+from locust.stats import stats_printer
 
 # Test data
 SAMPLE_RESUME = """
