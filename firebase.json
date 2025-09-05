@@ -1,15 +1,28 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "frontend/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/src/**",
+      "**/*.md"
     ],
     "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "/static/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public,max-age=31536000,immutable"
+          }
+        ]
       }
     ]
   },
@@ -21,25 +34,14 @@
         "node_modules",
         ".git",
         "firebase-debug.log",
-        "firebase-debug.*.log"
-      ],
-      "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" ci"
-      ]
-    },
-    {
-      "source": "careercopilot-staging",
-      "codebase": "careercopilot-staging",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
         "firebase-debug.*.log",
-        "*.local"
+        "*.local",
+        "lib"
       ],
+      "runtime": "nodejs20",
       "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint",
-        "npm --prefix \"$RESOURCE_DIR\" run build"
+        "yarn --cwd \"$RESOURCE_DIR\" install",
+        "yarn --cwd \"$RESOURCE_DIR\" run build"
       ]
     }
   ],

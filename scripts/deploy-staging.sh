@@ -22,31 +22,44 @@ fi
 echo -e "${BLUE}1. Switching to staging environment...${NC}"
 ./scripts/switch-to-development.sh
 
-echo -e "${BLUE}2. Building frontend for staging...${NC}"
-cd frontend
-npm run build
+echo -e "${BLUE}2. Installing dependencies...${NC}"
+yarn install
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Dependency installation failed${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}3. Building frontend for staging...${NC}"
+yarn build:frontend
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ Frontend build completed${NC}"
 else
     echo -e "${RED}❌ Frontend build failed${NC}"
     exit 1
 fi
-cd ..
 
-echo -e "${BLUE}3. Running tests...${NC}"
-# Add test commands here when available
-echo -e "${YELLOW}⚠️  Test suite not yet implemented${NC}"
+echo -e "${BLUE}4. Running linting...${NC}"
+yarn lint
+if [ $? -ne 0 ]; then
+    echo -e "${YELLOW}⚠️  Linting issues found (continuing with deployment)${NC}"
+fi
 
-echo -e "${BLUE}4. Deploying to Firebase Hosting (Staging)...${NC}"
-firebase deploy --only hosting
+echo -e "${BLUE}5. Running tests...${NC}"
+yarn test --passWithNoTests
+if [ $? -ne 0 ]; then
+    echo -e "${YELLOW}⚠️  Some tests failed (continuing with staging deployment)${NC}"
+fi
+
+echo -e "${BLUE}6. Deploying to Firebase (Staging)...${NC}"
+firebase deploy --only hosting,functions
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ Frontend deployed to staging${NC}"
+    echo -e "${GREEN}✅ Application deployed to staging${NC}"
 else
     echo -e "${RED}❌ Deployment failed${NC}"
     exit 1
 fi
 
-echo -e "${BLUE}5. Deployment summary...${NC}"
+echo -e "${BLUE}7. Deployment summary...${NC}"
 echo "Environment: Staging"
 echo "Frontend URL: https://careercopilot-staging.web.app"
 echo "Firebase Project: careercopilot-staging"

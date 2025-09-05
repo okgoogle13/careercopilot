@@ -1,389 +1,220 @@
-"""
-Vector Store Service for RAG
-
-This module provides a vector store implementation using Firebase Vector Search
-for efficient similarity search and retrieval of document embeddings.
-"""
-
 import json
-import logging
-from dataclasses import dataclass
-from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+import os
+from typing import Dict, List, Optional, Tuple
 
+import faiss
 import numpy as np
-from app.ai.base_service import BaseAIService
-from app.core.ai_error_handling import AIError, AIErrorType
-from app.core.config import settings
-from firebase_admin import firestore
-from google.cloud import aiplatform
-from pydantic import Field
+from loguru import logger
 
-logger = logging.getLogger(__name__)
-
-# Type aliases
-DocumentId = str
-Embedding = List[float]
+# Assuming text-embedding-3-small produces 1536-dimensional vectors
+VECTOR_DIMENSION = 1536
+INDEX_FILE = "vector_index.faiss"
+METADATA_FILE = "vector_metadata.json"
+INDEX_DIR = "data/vector_store"  # Directory to store index and metadata
 
 
-@dataclass
-class VectorDocument:
-    """A document with its vector embedding and metadata."""
+class VectorStore:
+    _instance = None
 
-    id: str
-    content: str
-    embedding: Embedding
-    metadata: Dict[str, Any]
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(VectorStore, cls).__new__(cls)
+            cls._instance.index = None
+            cls._instance.metadata = []
+            cls._instance.is_loaded = False
+            cls._instance.index_path = os.path.join(INDEX_DIR, INDEX_FILE)
+            cls._instance.metadata_path = os.path.join(INDEX_DIR, METADATA_FILE)
+            os.makedirs(INDEX_DIR, exist_ok=True)
+            logger.info(f"VectorStore initialized. Index will be stored in: {INDEX_DIR}")
+        return cls._instance
 
+    async def load_or_create_index(self):
+        if self.is_loaded:
+            logger.info("Vector index already loaded.")
+            return
 
-class VectorStore(BaseAIService):
-    """Vector store for document embeddings using Firebase Vector Search.
-
-    This service handles:
-    - Storing document embeddings
-    - Similarity search
-    - Document retrieval by ID
-    - Metadata filtering
-    """
-
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        """Initialize the vector store.
-
-        Args:
-            config: Configuration dictionary with optional keys:
-                - collection_name: Firestore collection name (default: 'vector_store')
-                - index_endpoint: Vertex AI index endpoint ID
-                - dimension: Dimension of the embeddings (default: 384)
-                - batch_size: Batch size for operations (default: 100)
-        """
-        super().__init__(config or {})
-        self.collection_name = self.config.get("collection_name", "vector_store")
-        self.index_endpoint = self.config.get("index_endpoint")
-        self.dimension = self.config.get("dimension", 384)
-        self.batch_size = self.config.get("batch_size", 100)
-
-        # Initialize clients
-        self._firestore_client = None
-        self._vertex_client = None
-
-        if self.is_enabled:
-            self._initialize_clients()
-
-    def _initialize_clients(self) -> None:
-        """Initialize Firestore and Vertex AI clients."""
-        try:
-            # Initialize Firestore
-            from firebase_admin import firestore
-
-            self._firestore_client = firestore.client()
-
-            # Initialize Vertex AI
-            if self.index_endpoint and settings.GOOGLE_CLOUD_PROJECT:
-                aiplatform.init(
-                    project=settings.GOOGLE_CLOUD_PROJECT,
-                    location=settings.GOOGLE_CLOUD_REGION,
+        if os.path.exists(self.index_path) and os.path.exists(self.metadata_path):
+            try:
+                self.index = faiss.read_index(self.index_path)
+                with open(self.metadata_path, "r") as f:
+                    self.metadata = json.load(f)
+                self.is_loaded = True
+                logger.info(
+                    f"Vector index loaded from {self.index_path} with {self.index.ntotal} vectors."
                 )
-                self._vertex_client = aiplatform.MatchingEngineIndexEndpoint(
-                    index_endpoint_name=self.index_endpoint
+            except Exception as e:
+                logger.error(f"Failed to load vector index: {e}. Creating new index.")
+                self._create_new_index()
+        else:
+            logger.info("No existing vector index found. Creating new index.")
+            self._create_new_index()
+
+    def _create_new_index(self):
+        # Using IndexFlatL2 for simplicity. For larger datasets, consider IndexIVFFlat.
+        self.index = faiss.IndexFlatL2(VECTOR_DIMENSION)
+        self.metadata = []
+        self.is_loaded = True
+        logger.info("New IndexFlatL2 created.")
+
+    async def add_vectors(self, vectors: List[List[float]], metadatas: List[Dict]):
+        if not self.is_loaded:
+            await self.load_or_create_index()  # Ensure index is loaded before adding
+
+        if len(vectors) != len(metadatas):
+            raise ValueError("Number of vectors and metadatas must be the same.")
+
+        if not vectors:
+            logger.warning("No vectors to add.")
+            return
+
+        vectors_np = np.array(vectors).astype("float32")
+        if vectors_np.shape[1] != VECTOR_DIMENSION:
+            raise ValueError(
+                f"Vector dimension mismatch. Expected {VECTOR_DIMENSION}, got {vectors_np.shape[1]}."
+            )
+
+        self.index.add(vectors_np)
+        # Assign unique IDs to metadata if not already present
+        for i, meta in enumerate(metadatas):
+            if "id" not in meta:
+                meta["id"] = len(self.metadata) + i  # Simple sequential ID
+            self.metadata.append(meta)
+
+        logger.info(f"Added {len(vectors)} vectors. Total vectors in index: {self.index.ntotal}")
+        await self.save_index()  # Save after adding
+
+    async def search_vectors(self, query_vector: List[float], k: int = 5) -> List[Dict]:
+        if not self.is_loaded or self.index.ntotal == 0:
+            logger.warning("Vector index not loaded or empty. Cannot perform search.")
+            return []
+
+        query_np = np.array([query_vector]).astype("float32")
+        if query_np.shape[1] != VECTOR_DIMENSION:
+            raise ValueError(
+                f"Query vector dimension mismatch. Expected {VECTOR_DIMENSION}, got {query_np.shape[1]}."
+            )
+
+        distances, indices = self.index.search(query_np, k)  # distances and indices arrays
+
+        results = []
+        for i in range(len(indices[0])):
+            idx = indices[0][i]
+            if idx < len(self.metadata):  # Ensure index is within bounds
+                results.append({"distance": float(distances[0][i]), "metadata": self.metadata[idx]})
+            else:
+                logger.warning(
+                    f"Search returned out-of-bounds index: {idx}. Metadata size: {len(self.metadata)}"
                 )
 
-            self.is_initialized = True
-            logger.info("Vector store initialized successfully")
+        logger.info(f"Search completed. Found {len(results)} results.")
+        return results
 
-        except Exception as e:
-            logger.error(f"Failed to initialize vector store: {str(e)}")
-            self.is_initialized = False
-
-    async def add_documents(
-        self,
-        documents: List[Dict[str, Any]],
-        embeddings: List[Embedding],
-        batch_size: Optional[int] = None,
-    ) -> List[str]:
-        """Add documents with embeddings to the vector store.
-
-        Args:
-            documents: List of document dictionaries with 'content' and 'metadata'
-            embeddings: List of embeddings corresponding to the documents
-            batch_size: Optional batch size for Firestore writes
-
-        Returns:
-            List of document IDs
-        """
-        if not self.is_available():
-            raise AIError(
-                "Vector store is not available", error_type=AIErrorType.SERVICE_UNAVAILABLE
-            )
-
-        if len(documents) != len(embeddings):
-            raise ValueError("Number of documents must match number of embeddings")
-
-        batch_size = batch_size or self.batch_size
-        doc_ids = []
-
-        try:
-            # Process in batches
-            for i in range(0, len(documents), batch_size):
-                batch_docs = documents[i : i + batch_size]
-                batch_embeddings = embeddings[i : i + batch_size]
-
-                # Add to Firestore
-                batch = self._firestore_client.batch()
-                batch_doc_ids = []
-
-                for doc, embedding in zip(batch_docs, batch_embeddings):
-                    doc_id = doc.get("id") or self._generate_doc_id()
-                    doc_ref = self._firestore_client.collection(self.collection_name).document(
-                        doc_id
-                    )
-
-                    # Prepare document data
-                    doc_data = {
-                        "content": doc["content"],
-                        "embedding": embedding,
-                        "metadata": doc.get("metadata", {}),
-                        "created_at": firestore.SERVER_TIMESTAMP,
-                        "updated_at": firestore.SERVER_TIMESTAMP,
-                    }
-
-                    # Add to batch
-                    batch.set(doc_ref, doc_data)
-                    batch_doc_ids.append(doc_id)
-
-                # Commit batch
-                batch.commit()
-                doc_ids.extend(batch_doc_ids)
-
-                # Add to Vertex AI vector index if configured
-                if self._vertex_client and self.index_endpoint:
-                    self._add_to_vector_index(batch_doc_ids, batch_embeddings)
-
-            return doc_ids
-
-        except Exception as e:
-            logger.error(f"Failed to add documents: {str(e)}")
-            raise AIError(
-                f"Failed to add documents: {str(e)}", error_type=AIErrorType.VECTOR_STORE_ERROR
-            )
-
-    async def similarity_search(
-        self, query_embedding: Embedding, k: int = 5, filters: Optional[Dict[str, Any]] = None
-    ) -> List[Tuple[Dict[str, Any], float]]:
-        """Search for similar documents using vector similarity.
-
-        Args:
-            query_embedding: The query embedding vector
-            k: Number of results to return
-            filters: Optional filters to apply to the search
-
-        Returns:
-            List of (document, score) tuples, sorted by relevance
-        """
-        if not self.is_available():
-            raise AIError(
-                "Vector store is not available", error_type=AIErrorType.SERVICE_UNAVAILABLE
-            )
-
-        try:
-            # Use Vertex AI vector search if available
-            if self._vertex_client:
-                return await self._vertex_similarity_search(query_embedding, k, filters)
-
-            # Fall back to Firestore similarity search
-            return await self._firestore_similarity_search(query_embedding, k, filters)
-
-        except Exception as e:
-            logger.error(f"Similarity search failed: {str(e)}")
-            raise AIError(
-                f"Similarity search failed: {str(e)}", error_type=AIErrorType.VECTOR_SEARCH_ERROR
-            )
-
-    async def get_document(self, doc_id: str) -> Optional[Dict[str, Any]]:
-        """Get a document by ID.
-
-        Args:
-            doc_id: The document ID
-
-        Returns:
-            The document data, or None if not found
-        """
-        if not self.is_available():
-            raise AIError(
-                "Vector store is not available", error_type=AIErrorType.SERVICE_UNAVAILABLE
-            )
-
-        try:
-            doc_ref = self._firestore_client.collection(self.collection_name).document(doc_id)
-            doc = doc_ref.get()
-
-            if not doc.exists:
-                return None
-
-            return self._format_document(doc_id, doc.to_dict())
-
-        except Exception as e:
-            logger.error(f"Failed to get document {doc_id}: {str(e)}")
-            return None
-
-    async def delete_documents(self, doc_ids: List[str]) -> bool:
-        """Delete documents by ID.
-
-        Args:
-            doc_ids: List of document IDs to delete
-
-        Returns:
-            True if successful, False otherwise
-        """
-        if not self.is_available():
-            raise AIError(
-                "Vector store is not available", error_type=AIErrorType.SERVICE_UNAVAILABLE
-            )
-
-        try:
-            # Delete from Firestore
-            batch = self._firestore_client.batch()
-
-            for doc_id in doc_ids:
-                doc_ref = self._firestore_client.collection(self.collection_name).document(doc_id)
-                batch.delete(doc_ref)
-
-            batch.commit()
-
-            # TODO: Delete from Vertex AI index if configured
-
-            return True
-
-        except Exception as e:
-            logger.error(f"Failed to delete documents: {str(e)}")
-            return False
-
-    async def _vertex_similarity_search(
-        self, query_embedding: Embedding, k: int, filters: Optional[Dict[str, Any]]
-    ) -> List[Tuple[Dict[str, Any], float]]:
-        """Perform similarity search using Vertex AI Vector Search."""
-        if not self._vertex_client:
-            raise AIError("Vertex AI client not initialized")
-
-        try:
-            # Convert filters to Vertex AI filter format if needed
-            filter_str = json.dumps(filters) if filters else None
-
-            # Perform the search
-            response = self._vertex_client.match(
-                deployed_index_id="default_index",
-                queries=[query_embedding],
-                num_neighbors=k,
-                filter=filter_str,
-            )
-
-            # Process results
-            results = []
-            for match in response[0]:
-                doc_id = match.id
-                doc_data = await self.get_document(doc_id)
-
-                if doc_data:
-                    score = 1.0 - match.distance  # Convert distance to similarity score
-                    results.append((doc_data, score))
-
-            return sorted(results, key=lambda x: x[1], reverse=True)
-
-        except Exception as e:
-            logger.error(f"Vertex AI similarity search failed: {str(e)}")
-            # Fall back to Firestore if Vertex AI search fails
-            return await self._firestore_similarity_search(query_embedding, k, filters)
-
-    async def _firestore_similarity_search(
-        self, query_embedding: Embedding, k: int, filters: Optional[Dict[str, Any]]
-    ) -> List[Tuple[Dict[str, Any], float]]:
-        """Fallback similarity search using Firestore."""
-        logger.warning("Using Firestore similarity search - performance may be limited")
-
-        try:
-            # Build the query
-            query = self._firestore_client.collection(self.collection_name)
-
-            # Apply filters if provided
-            if filters:
-                for key, value in filters.items():
-                    if isinstance(value, (list, tuple)):
-                        query = query.where(f"metadata.{key}", "in", value)
-                    else:
-                        query = query.where(f"metadata.{key}", "==", value)
-
-            # Execute the query
-            docs = query.stream()
-
-            # Calculate similarity scores
-            results = []
-            for doc in docs:
-                doc_data = doc.to_dict()
-                if "embedding" not in doc_data:
-                    continue
-
-                # Calculate cosine similarity
-                doc_embedding = doc_data["embedding"]
-                similarity = self._cosine_similarity(query_embedding, doc_embedding)
-
-                # Format the document
-                formatted_doc = self._format_document(doc.id, doc_data)
-                results.append((formatted_doc, similarity))
-
-            # Sort by score and return top k
-            results.sort(key=lambda x: x[1], reverse=True)
-            return results[:k]
-
-        except Exception as e:
-            logger.error(f"Firestore similarity search failed: {str(e)}")
-            raise
-
-    def _add_to_vector_index(self, doc_ids: List[str], embeddings: List[Embedding]) -> None:
-        """Add documents to the Vertex AI vector index."""
-        if not self._vertex_client:
+    async def save_index(self):
+        if self.index is None:
+            logger.warning("No index to save.")
             return
 
         try:
-            # Convert to Vertex AI format
-            vectors = []
-            for doc_id, embedding in zip(doc_ids, embeddings):
-                vectors.append(
-                    aiplatform.IndexDatapoint(datapoint_id=doc_id, feature_vector=embedding)
-                )
-
-            # Upsert to the index
-            self._vertex_client.upsert_datapoints(vectors=vectors)
-
+            faiss.write_index(self.index, self.index_path)
+            with open(self.metadata_path, "w") as f:
+                json.dump(self.metadata, f, indent=2)
+            logger.info(f"Vector index saved to {self.index_path}")
         except Exception as e:
-            logger.error(f"Failed to add to vector index: {str(e)}")
-            # Continue even if vector index update fails
+            logger.error(f"Failed to save vector index: {e}")
 
-    @staticmethod
-    def _cosine_similarity(a: List[float], b: List[float]) -> float:
-        """Calculate cosine similarity between two vectors."""
-        a_norm = np.linalg.norm(a)
-        b_norm = np.linalg.norm(b)
+    async def clear_index(self):
+        self._create_new_index()
+        await self.save_index()
+        logger.info("Vector index cleared.")
 
-        if a_norm == 0 or b_norm == 0:
-            return 0.0
+    async def get_document(self, doc_id: str) -> Optional[Dict]:
+        """Retrieve a document by its ID from metadata."""
+        for meta in self.metadata:
+            if meta.get("id") == doc_id:
+                return meta
+        return None
 
-        return np.dot(a, b) / (a_norm * b_norm)
+    async def delete_documents(self, doc_ids: List[str]) -> bool:
+        """Delete documents from the index by their IDs."""
+        # This is a simplified deletion. FAISS does not support direct deletion by ID efficiently.
+        # For true deletion, one would typically rebuild the index or use a more advanced FAISS index type
+        # that supports removal (e.g., IndexIDMap).
+        # For this implementation, we will mark them for logical deletion and rebuild if necessary.
+        # A more robust solution for production would involve a proper vector database.
 
-    @staticmethod
-    def _format_document(doc_id: str, doc_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Format a Firestore document for the API response."""
-        return {
-            "id": doc_id,
-            "content": doc_data.get("content", ""),
-            "metadata": doc_data.get("metadata", {}),
-            "created_at": doc_data.get("created_at"),
-            "updated_at": doc_data.get("updated_at"),
-        }
+        initial_count = len(self.metadata)
+        new_metadata = []
+        deleted_indices = set()
 
-    @staticmethod
-    def _generate_doc_id() -> str:
-        """Generate a unique document ID."""
-        import uuid
+        for i, meta in enumerate(self.metadata):
+            if meta.get("id") in doc_ids:
+                deleted_indices.add(i)
+            else:
+                new_metadata.append(meta)
 
-        return f"doc_{uuid.uuid4().hex}"
+        if len(new_metadata) == initial_count:  # No documents were found to delete
+            return False
+
+        self.metadata = new_metadata
+
+        # Rebuild the FAISS index if a significant number of documents were deleted
+        # This is a heuristic. A better approach might be to track deleted IDs and rebuild periodically.
+        if (
+            len(deleted_indices) > initial_count * 0.1 or len(deleted_indices) > 100
+        ):  # Rebuild if >10% or >100 docs deleted
+            logger.info(f"Rebuilding FAISS index after deleting {len(deleted_indices)} documents.")
+            # Get all vectors from remaining metadata and rebuild
+            # This assumes you can regenerate vectors from metadata or have them stored elsewhere
+            # For this simple implementation, we'll just clear and save metadata.
+            # A real system would need to re-embed or retrieve original vectors.
+            self._create_new_index()  # Clears the FAISS index
+            # You would typically re-add vectors here from new_metadata
+            # For now, we just save the reduced metadata.
+
+        await self.save_index()
+        logger.info(
+            f"Deleted {len(deleted_indices)} documents from metadata. Total remaining: {len(self.metadata)}"
+        )
+        return True
+
+
+# Singleton instance
+vector_store = VectorStore()
+
+
+# Example Usage (for testing/demonstration)
+async def main():
+    await vector_store.load_or_create_index()
+
+    # Add some dummy vectors
+    dummy_vectors = [np.random.rand(VECTOR_DIMENSION).tolist() for _ in range(10)]
+    dummy_metadatas = [
+        {"id": f"doc{i}", "text": f"This is document {i}", "source": "test"} for i in range(10)
+    ]
+    await vector_store.add_vectors(dummy_vectors, dummy_metadatas)
+
+    # Search for a dummy query
+    query = np.random.rand(VECTOR_DIMENSION).tolist()
+    results = await vector_store.search_vectors(query, k=3)
+    logger.info(f"Search results: {results}")
+
+    # Test get_document
+    doc = await vector_store.get_document("doc5")
+    logger.info(f"Retrieved document: {doc}")
+
+    # Test delete_documents
+    await vector_store.delete_documents(["doc1", "doc3", "doc5"])
+    results = await vector_store.search_vectors(query, k=3)
+    logger.info(f"Search results after deletion: {results}")
+
+    # Clear and re-add
+    await vector_store.clear_index()
+    await vector_store.add_vectors(dummy_vectors[:5], dummy_metadatas[:5])
+    results = await vector_store.search_vectors(query, k=3)
+    logger.info(f"Search results after clear and re-add: {results}")
+
+
+if __name__ == "__main__":
+    import asyncio
+
+    asyncio.run(main())

@@ -17,10 +17,10 @@ from pydantic import BaseModel, Field
 
 try:
     import genkit
-    from genkit.plugins import googleai
+    from genkit.plugins import google_genai
 except Exception:
     genkit = None
-    googleai = None
+    google_genai = None
 
 
 def _noop_flow(*args, **kwargs):
@@ -36,7 +36,7 @@ genkit_flow = getattr(genkit, "flow", _noop_flow)
 # Load environment variables
 load_dotenv()
 if genkit and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
@@ -181,9 +181,10 @@ Respond with a valid JSON object matching the JobMatchAnalysis schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+            },
             output_schema=JobMatchAnalysis,
         )
 
@@ -256,9 +257,10 @@ Return jobs ranked from best to worst match as a JSON array matching the JobOppo
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.2
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.2,
+            },
             output_schema=List[JobOpportunityRanking],
         )
 
@@ -335,9 +337,10 @@ Respond with valid JSON matching the MarketPositioningAnalysis schema.
 
         response = gemini_pro.generate(
             prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json", temperature=0.3
-            ),
+            config={
+                "response_mime_type": "application/json",
+                "temperature": 0.3,
+            },
             output_schema=MarketPositioningAnalysis,
         )
 

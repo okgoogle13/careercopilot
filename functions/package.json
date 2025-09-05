@@ -1,34 +1,39 @@
 {
   "name": "functions",
-  "version": "1.0.0",
-  "description": "Cloud Functions for Firebase - CareerCopilot backend services",
-  "private": true,
-  "main": "index.js",
-  "engines": {
-    "node": "20"
+  "packageManager": "yarn@4.9.1",
+  "dependencies": {
+    "@google-cloud/secret-manager": "6.1.0",
+    "firebase-admin": "^13.5.0",
+    "firebase-functions": "^6.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.19.2",
+    "@typescript-eslint/eslint-plugin": "5.13.0",
+    "@typescript-eslint/parser": "5.13.0",
+    "eslint": "8.10.0",
+    "firebase-tools": "^14.15.2",
+    "typescript": "4.9.5"
   },
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
-    "start": "npm run shell",
-    "deploy": "firebase deploy --only functions",
-    "build": "echo 'Functions build completed'",
+    "start": "yarn shell",
+    "deploy": "yarn build && npx firebase deploy --only functions --force",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "lint": "eslint --ext .js,.ts .",
+    "lint:fix": "eslint --ext .js,.ts --fix .",
     "logs": "firebase functions:log",
-    "clean": "rm -rf node_modules .firebase"
+    "clean": "rm -rf node_modules .firebase lib"
   },
-  "dependencies": {
-    "firebase-admin": "12.7.0",
-    "firebase-functions": "6.0.0"
+  "version": "1.0.0",
+  "description": "This directory contains the Cloud Functions for Firebase that power the CareerCopilot backend services.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
   },
-  "keywords": [
-    "firebase",
-    "cloud-functions",
-    "serverless",
-    "backend"
-  ],
-  "author": "CareerCopilot Team",
-  "license": "UNLICENSED",
-  "devDependencies": {
-    "firebase-tools": "^14.15.1"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
 }
