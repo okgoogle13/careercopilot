@@ -173,7 +173,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const connectionStatus = useMemo(() => {
     const status = authService.getConnectionStatus();
     return {
-      ...status,
+      ...(status || {}),
       mode: import.meta.env.MODE || 'unknown',
     };
   }, []);

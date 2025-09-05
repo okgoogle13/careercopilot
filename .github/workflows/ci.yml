@@ -5,6 +5,7 @@ on:
     branches: [develop, main]
   push:
     branches: [develop, main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,6 +17,11 @@ permissions:
 env:
   NODE_VERSION: '22'
   PYTHON_VERSION: '3.13'
+  # Performance optimizations
+  PYTHONUNBUFFERED: '1'
+  PYTHONDONTWRITEBYTECODE: '1'
+  PIP_NO_CACHE_DIR: '1'
+  PIP_DISABLE_PIP_VERSION_CHECK: '1'
 
 jobs:
   # CodeQL Security Analysis - Native GitHub solution
@@ -70,71 +76,91 @@ jobs:
     name: Backend Tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        test-group: [lint, format, security, tests]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Setup Backend Environment
+        uses: ./.github/actions/setup-backend
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          cache: 'pip'
-          cache-dependency-path: |
-            backend/requirements.txt
-            backend/requirements-dev.txt
+          install-mode: 'full'
+          cache-prefix: ${{ matrix.test-group }}
 
-      - name: Install dependencies
+      - name: Lint with flake8
+        if: matrix.test-group == 'lint'
         run: |
-          python -m pip install --upgrade pip
-          pip install -r backend/requirements.txt
-          pip install -r backend/requirements-dev.txt
-        timeout-minutes: 10
-
-      - name: Lint (flake8)
-        run: cd backend && flake8 app/
+          cd backend
+          echo "🔍 Running flake8 linting..."
+          flake8 app/ --show-source --statistics --format=github
+          echo "✅ Linting completed"
         timeout-minutes: 3
 
-      - name: Format check (black)
-        run: black --check backend/ --line-length=100
+      - name: Format check with black
+        if: matrix.test-group == 'format'
+        run: |
+          echo "✨ Checking code formatting with black..."
+          black --check backend/ --line-length=100 --diff
+          echo "✅ Format check completed"
         timeout-minutes: 3
 
-      - name: Type check (mypy)
-        run: mypy backend/ --ignore-missing-imports
-        timeout-minutes: 5
-        continue-on-error: true
-
-      - name: Security scan (bandit)
-        run: bandit -r backend/ -f json -o bandit-report.json
-        timeout-minutes: 3
-        continue-on-error: true
+      - name: Security scan with bandit
+        if: matrix.test-group == 'security'
+        run: |
+          echo "🔒 Running security scan..."
+          bandit -r backend/ -f json -o bandit-report.json || true
+          bandit -r backend/ -f txt || true
+        timeout-minutes: 4
 
       - name: Upload bandit report
+        if: matrix.test-group == 'security'
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: bandit-security-report
           path: bandit-report.json
           retention-days: 30
+          if-no-files-found: warn
 
-      - name: Add bandit results to summary
-        if: always()
+      - name: Type check with mypy
+        if: matrix.test-group == 'tests'
+        continue-on-error: true
         run: |
-          echo "### 🔍 Bandit Security Scan" >> $GITHUB_STEP_SUMMARY
-          if [ -f bandit-report.json ]; then
-            ISSUES=$(jq '.results | length' bandit-report.json 2>/dev/null || echo "0")
-            echo "**Found $ISSUES security issues**" >> $GITHUB_STEP_SUMMARY
-            echo "📁 [Download detailed report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "✅ **No security issues found**" >> $GITHUB_STEP_SUMMARY
-          fi
+          echo "🔧 Running type checks..."
+          mypy backend/ --ignore-missing-imports --show-error-codes
+        timeout-minutes: 4
 
       - name: Run tests
+        if: matrix.test-group == 'tests'
         run: |
           cd backend
-          python -m pytest tests/ -v --tb=short --maxfail=1
-        timeout-minutes: 10
+          echo "🧪 Running test suite..."
+          python -m pytest tests/ -v --tb=short --maxfail=3 --disable-warnings
+        timeout-minutes: 8
         env:
           ENVIRONMENT: test
+          # Disable external service calls during tests
+          ENABLE_RAG: false
+          ENABLE_GENKIT: false
+
+      - name: Add test results to summary
+        if: always() && matrix.test-group == 'security'
+        run: |
+          echo "### 🔍 Backend Security Scan Results" >> $GITHUB_STEP_SUMMARY
+          if [ -f bandit-report.json ]; then
+            ISSUES=$(jq '.results | length' bandit-report.json 2>/dev/null || echo "0")
+            if [ "$ISSUES" = "0" ]; then
+              echo "✅ **No security issues found**" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "⚠️ **Found $ISSUES security issues**" >> $GITHUB_STEP_SUMMARY
+              echo "📁 [Download detailed report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "❓ **Could not generate security report**" >> $GITHUB_STEP_SUMMARY
+          fi
 
   # Quality Gate
   quality-gate:

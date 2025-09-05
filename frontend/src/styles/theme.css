@@ -3,44 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* Light Theme (default) */
-    --color-primary: 79 70 229; /* indigo-600 */
-    --color-primary-hover: 67 56 202; /* indigo-700 */
-    --color-secondary: 99 102 241; /* indigo-500 */
-    --color-text: 17 24 39; /* gray-900 */
-    --color-text-muted: 75 85 99; /* gray-600 */
-    --color-bg: 255 255 255; /* white */
-    --color-bg-secondary: 249 250 251; /* gray-50 */
-    --color-border: 209 213 219; /* gray-300 */
-    --color-error: 220 38 38; /* red-600 */
-    --color-success: 22 163 74; /* green-600 */
-    --color-warning: 234 179 8; /* yellow-500 */
-    --color-info: 37 99 235; /* blue-600 */
-  }
-
-  .dark {
-    --color-primary: 99 102 241; /* indigo-500 */
-    --color-primary-hover: 129 140 248; /* indigo-400 */
-    --color-secondary: 79 70 229; /* indigo-600 */
-    --color-text: 243 244 246; /* gray-100 */
-    --color-text-muted: 156 163 175; /* gray-400 */
-    --color-bg: 17 24 39; /* gray-900 */
-    --color-bg-secondary: 31 41 55; /* gray-800 */
-    --color-border: 55 65 81; /* gray-700 */
-    --color-error: 239 68 68; /* red-500 */
-    --color-success: 34 197 94; /* green-500 */
-    --color-warning: 250 204 21; /* yellow-400 */
-    --color-info: 59 130 246; /* blue-500 */
-  }
-
   /* Base styles */
   html {
     @apply scroll-smooth antialiased;
   }
 
   body {
-    @apply bg-bg text-text transition-colors duration-200 min-h-screen;
+    @apply bg-background text-foreground transition-colors duration-200 min-h-screen;
   }
 
   /* Custom Scrollbar */
@@ -49,7 +18,7 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-bg-secondary/50;
+    @apply bg-muted/50;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -58,7 +27,7 @@
 
   /* Focus Styles */
   *:focus-visible {
-    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-bg rounded;
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background rounded;
   }
 
   /* Buttons */
@@ -67,23 +36,23 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-primary-hover focus-visible:ring-primary/50;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-primary/50;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-white hover:bg-primary-hover focus-visible:ring-secondary/50;
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 focus-visible:ring-secondary/50;
   }
 
   .btn-outline {
-    @apply border border-border bg-transparent hover:bg-bg-secondary focus-visible:ring-border;
+    @apply border border-border bg-transparent hover:bg-muted focus-visible:ring-border;
   }
 
   .btn-ghost {
-    @apply hover:bg-bg-secondary focus-visible:ring-bg-secondary;
+    @apply hover:bg-muted focus-visible:ring-muted/50;
   }
 
   .btn-danger {
-    @apply bg-error text-white hover:bg-opacity-90 focus-visible:ring-error/50;
+    @apply bg-destructive text-destructive-foreground hover:bg-destructive/90 focus-visible:ring-destructive/50;
   }
 
   /* Form Elements */
@@ -103,7 +72,7 @@
   textarea,
   select,
   select[multiple] {
-    @apply w-full rounded-md border border-border bg-bg px-3 py-2 text-text shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent sm:text-sm transition-colors duration-200;
+    @apply w-full rounded-md border border-border bg-background px-3 py-2 text-foreground shadow-sm focus:ring-2 focus:ring-primary focus:border-transparent sm:text-sm transition-colors duration-200;
   }
 
   /* Typography */
@@ -132,7 +101,7 @@
   }
 
   p {
-    @apply text-base leading-relaxed text-text/90;
+    @apply text-base leading-relaxed text-foreground/90;
   }
 
   /* Animations */

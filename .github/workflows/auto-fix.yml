@@ -14,6 +14,12 @@ on:
       - 'backend/**'
       - '!backend/migrations/**'
   workflow_dispatch:
+    inputs:
+      force_fix:
+        description: 'Force apply fixes even if no changes detected'
+        required: false
+        default: 'false'
+        type: boolean
 
 permissions:
   contents: write
@@ -49,7 +55,7 @@ jobs:
       - name: Install Python formatting tools
         run: |
           python -m pip install --upgrade pip
-          pip install black==23.12.1 isort==5.13.2 flake8==7.0.0
+          pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
 
       - name: Install Node dependencies
         run: |
@@ -107,7 +113,29 @@ jobs:
           # Apply isort import sorting
           isort backend/ --profile=black --line-length=100
 
+          # Apply autoflake to remove unused imports
+          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
+
           echo "✅ Python formatting complete"
+
+      - name: Apply Python linting fixes
+        if: steps.changes.outputs.python_changes == 'true'
+        run: |
+          echo "🔧 Applying automated Python linting fixes..."
+
+          # Fix common flake8 issues automatically where possible
+          cd backend
+
+          # Fix bare except statements
+          find app/ -name "*.py" -exec sed -i 's/except:/except Exception:/g' {} \;
+
+          # Fix f-string placeholders (add empty placeholder where missing)
+          find app/ -name "*.py" -exec sed -i 's/f"([^{}"]*)"/"\\1"/g' {} \;
+
+          # Remove trailing whitespace
+          find app/ -name "*.py" -exec sed -i 's/[[:space:]]*$//' {} \;
+
+          echo "✅ Python linting fixes complete"
 
       - name: Apply Frontend formatting fixes
         if: steps.changes.outputs.frontend_changes == 'true'

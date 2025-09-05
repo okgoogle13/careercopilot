@@ -7,16 +7,15 @@ with comprehensive security, monitoring, and caching.
 
 import json
 import logging
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional
 
-from app.ai.resume_service import Education, Experience, ResumeAnalysisResult, ResumeAnalysisService
+from app.ai.resume_service import ResumeAnalysisResult, ResumeAnalysisService
 from app.core.ai_client import AIRequest, get_ai_client
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.cache_decorators import cached_ai_operation
 from app.core.config import settings
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.monitoring import monitor_performance
-from pydantic import BaseModel, Field
 
 logger = logging.getLogger(__name__)
 

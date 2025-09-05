@@ -4,17 +4,12 @@ Tests for the Resume Intelligence Pipeline
 
 import asyncio
 import functools
-import json
 import os
 import sys
-from datetime import date, datetime
-from typing import Any, Awaitable, Callable, Dict, List, Optional, Union
-from unittest import mock
-from unittest.mock import ANY, AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 from app.core.ai_error_handling import AIError, AIErrorType
-from app.core.input_validation import InputValidationError
 
 # Add the project root to the Python path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -26,13 +21,9 @@ import app.genkit_flows.resume_intelligence_pipeline as rip
 from app.genkit_flows.resume_intelligence_pipeline import (
     CareerProgressionAnalysis,
     ResumeAnalysisResult,
-    ResumeIntelligenceReport,
-    SkillAssessment,
     SkillsGapAnalysis,
     analyze_career_progression,
-    analyze_resume_comprehensive,
     analyze_skills_gap_for_transition,
-    generate_resume_intelligence_report,
 )
 
 # Test data
@@ -546,7 +537,7 @@ def mock_googleai(monkeypatch, mock_gemini):
         mock_get_ai_config,
     ):
         # Import the module to apply patches
-        import importlib
+        pass
 
         # Remove the module from sys.modules to force a reload
         if "app.genkit_flows.resume_intelligence_pipeline" in sys.modules:
@@ -632,8 +623,6 @@ def setup_mocks(
 ):
     """Set up mocks for the resume intelligence pipeline"""
     # Import the module first to ensure it's in sys.modules
-    import importlib
-    import sys
 
     # Store original imports and functions
     original_gemini = getattr(rip, "gemini_pro", None)
@@ -867,7 +856,7 @@ class TestResumeIntelligencePipeline:
     @pytest.mark.asyncio
     async def test_error_handling(self, mock_gemini):
         """Test error handling in the pipeline"""
-        from app.core.ai_error_handling import AIError, AIErrorType
+        from app.core.ai_error_handling import AIError
         from app.genkit_flows import resume_intelligence_pipeline
 
         # Configure the mock to raise an exception
