@@ -82,6 +82,10 @@ class Settings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = False
+        # Allow extra environment variables that are not explicitly declared as fields
+        # This prevents errors like 'Extra inputs are not permitted' when .env contains
+        # additional keys unrelated to this settings model.
+        extra = "ignore"
 
 
 @dataclass
