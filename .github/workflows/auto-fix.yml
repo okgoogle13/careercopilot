@@ -60,7 +60,7 @@ jobs:
       - name: Install Node dependencies
         run: |
           cd frontend
-          npm ci --prefer-offline --no-audit
+          yarn install --frozen-lockfile
 
       - name: Check for changes needed
         id: changes
@@ -82,12 +82,12 @@ jobs:
           # Check frontend files
           frontend_changes=false
           cd frontend
-          if ! npx eslint src/ --ext .js,.jsx,.ts,.tsx --max-warnings 50 --quiet; then
+          if ! yarn eslint src/ --ext .js,.jsx,.ts,.tsx --max-warnings 50 --quiet; then
             echo "ESLint fixes needed"
             frontend_changes=true
           fi
 
-          if ! npx prettier --check "src/**/*.{js,jsx,ts,tsx,json,css,md}" --quiet; then
+          if ! yarn prettier --check "src/**/*.{js,jsx,ts,tsx,json,css,md}" --quiet; then
             echo "Prettier formatting needed"
             frontend_changes=true
           fi
@@ -144,10 +144,10 @@ jobs:
           cd frontend
 
           # Apply ESLint fixes
-          npx eslint src/ --ext .js,.jsx,.ts,.tsx --fix --max-warnings 100 || true
+          yarn eslint src/ --ext .js,.jsx,.ts,.tsx --fix --max-warnings 100 || true
 
           # Apply Prettier formatting
-          npx prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,md}"
+          yarn prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,md}"
 
           echo "✅ Frontend formatting complete"
 

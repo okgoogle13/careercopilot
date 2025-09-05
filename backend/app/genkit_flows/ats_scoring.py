@@ -12,7 +12,7 @@ from app.core.enhanced_ai_error_handling import (
     enhanced_ai_handler,
 )
 from dotenv import load_dotenv
-from genkit.plugins import googleai
+from genkit.plugins import google_genai
 from pydantic import BaseModel, Field
 
 # Import the supporting flows
@@ -35,8 +35,8 @@ class SemanticAnalysis(BaseModel):
 # Load environment variables and initialize Genkit if needed
 load_dotenv()
 if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-gemini_pro = googleai.gemini_pro
+    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
 
 # --- Helper Functions for Scoring Logic ---
 
@@ -53,7 +53,7 @@ async def _perform_semantic_analysis(resume_text: str, job_description: str) -> 
     semantic_response = await gemini_pro.generate(
         prompt=semantic_prompt,
         output_schema=SemanticAnalysis,
-        config=googleai.GenerationConfig(response_mime_type="application/json"),
+        config={"response_mime_type": "application/json"},
     )
 
     return semantic_response.output()

@@ -39,39 +39,53 @@ fi
 echo -e "${BLUE}1. Switching to production environment...${NC}"
 ./scripts/switch-to-production.sh
 
-echo -e "${BLUE}2. Building frontend for production...${NC}"
-cd frontend
-NODE_ENV=production npm run build
+echo -e "${BLUE}2. Installing dependencies...${NC}"
+yarn install
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Dependency installation failed${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}3. Building frontend for production...${NC}"
+yarn build:frontend
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ Frontend production build completed${NC}"
 else
     echo -e "${RED}❌ Frontend build failed${NC}"
     exit 1
 fi
-cd ..
 
-echo -e "${BLUE}3. Running comprehensive tests...${NC}"
-# Add comprehensive test suite here
-echo -e "${YELLOW}⚠️  Comprehensive test suite not yet implemented${NC}"
-echo -e "${YELLOW}⚠️  Proceeding without automated testing${NC}"
+echo -e "${BLUE}4. Running linting and type checks...${NC}"
+yarn lint
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Linting failed${NC}"
+    exit 1
+fi
 
-echo -e "${BLUE}4. Final confirmation before deployment...${NC}"
+echo -e "${BLUE}5. Running tests...${NC}"
+yarn test --passWithNoTests
+if [ $? -ne 0 ]; then
+    echo -e "${RED}❌ Tests failed${NC}"
+    exit 1
+fi
+
+echo -e "${BLUE}6. Final confirmation before deployment...${NC}"
 read -p "Last chance to cancel. Deploy to PRODUCTION now? (yes/no): " final_confirm
 if [ "$final_confirm" != "yes" ]; then
     echo -e "${BLUE}Deployment cancelled.${NC}"
     exit 0
 fi
 
-echo -e "${BLUE}5. Deploying to Firebase Hosting (Production)...${NC}"
-firebase deploy --only hosting
+echo -e "${BLUE}7. Deploying to Firebase (Production)...${NC}"
+firebase deploy --only hosting,functions
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✅ Frontend deployed to production${NC}"
+    echo -e "${GREEN}✅ Application deployed to production${NC}"
 else
     echo -e "${RED}❌ Production deployment failed${NC}"
     exit 1
 fi
 
-echo -e "${BLUE}6. Deployment summary...${NC}"
+echo -e "${BLUE}8. Deployment summary...${NC}"
 echo "Environment: Production"
 echo "Frontend URL: https://careercopilot-468811.web.app"
 echo "Firebase Project: careercopilot-468811"

@@ -35,7 +35,7 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: npm install --prefix frontend
+      run: yarn install
 
     - name: Type check
       if: inputs.run-checks == 'true'
@@ -45,25 +45,25 @@ runs:
     - name: Lint
       if: inputs.run-checks == 'true'
       shell: bash
-      run: npm run lint:ci --prefix frontend
+      run: yarn workspace careercopilot-frontend run lint:ci
 
     - name: Format check
       if: inputs.run-checks == 'true'
       shell: bash
-      run: npm run format:check --prefix frontend
+      run: yarn workspace careercopilot-frontend run format:check
 
     - name: Build
       id: build
       if: inputs.skip-build != 'true'
       shell: bash
       run: |
-        cd frontend && npm run build
+        yarn build:frontend
         echo "success=true" >> $GITHUB_OUTPUT
 
     - name: Bundle analysis
       if: inputs.run-checks == 'true' && inputs.skip-build != 'true'
       shell: bash
-      run: npm run bundle-analysis --prefix frontend
+      run: yarn workspace careercopilot-frontend run bundle-analysis
 
     - name: Upload bundle analysis
       if: inputs.upload-artifacts == 'true' && inputs.run-checks == 'true'

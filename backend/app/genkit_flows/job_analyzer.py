@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 try:
     import genkit  # type: ignore
-    from genkit.plugins import googleai  # type: ignore
+    from genkit.plugins import google_genai  # type: ignore
 except Exception:  # pragma: no cover - makes module import-safe without genkit
     genkit = None  # type: ignore
     googleai = None  # type: ignore
@@ -24,7 +24,7 @@ genkit_flow = getattr(genkit, "flow", _noop_flow)
 # Load environment variables and initialize Genkit if needed
 load_dotenv()
 if genkit and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
+    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 

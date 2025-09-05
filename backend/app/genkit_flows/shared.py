@@ -2,15 +2,33 @@ import os
 from typing import Callable, Type
 
 import genkit
-from genkit.plugins import googleai
+from genkit.plugins import google_genai
 from pydantic import BaseModel
 
-# Initialize Google AI plugin if needed
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[googleai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
-# Define the model to use
-gemini_pro = googleai.gemini_pro
+# Initialize Google AI plugin if needed
+def initialize_google_ai():
+    """Initialize Google AI plugin with error handling"""
+    try:
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            raise ValueError("GEMINI_API_KEY not found in environment")
+
+        # Initialize the GoogleAI plugin
+        google_ai_plugin = google_genai.GoogleAI()
+        google_ai_plugin.initialize(api_key=api_key)
+
+        return True
+    except Exception as e:
+        print(f"Warning: Failed to initialize Google AI plugin: {e}")
+        return False
+
+
+# Initialize on import
+_google_ai_initialized = initialize_google_ai()
+
+# Get the Gemini 1.5 Pro model constant
+gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
 
 
 def create_extraction_flow(
@@ -38,9 +56,9 @@ def create_extraction_flow(
 
         response = gemini_pro.generate(
             prompt=prompt,
-            config=googleai.GenerationConfig(
-                response_mime_type="application/json",
-            ),
+            config={
+                "response_mime_type": "application/json",
+            },
             output_schema=output_schema,
         )
 
