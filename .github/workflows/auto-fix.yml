@@ -6,12 +6,14 @@ on:
     paths:
       - 'frontend/src/**'
       - 'backend/**'
+      - 'functions/src/**'
       - '!backend/migrations/**'
   pull_request:
     branches: [develop, main]
     paths:
       - 'frontend/src/**'
       - 'backend/**'
+      - 'functions/src/**'
       - '!backend/migrations/**'
   workflow_dispatch:
     inputs:
@@ -59,8 +61,8 @@ jobs:
 
       - name: Install Node dependencies
         run: |
-          cd frontend
           yarn install --frozen-lockfile
+          cd functions && npm install
 
       - name: Check for changes needed
         id: changes
@@ -93,10 +95,20 @@ jobs:
           fi
           cd ..
 
+          # Check functions files
+          functions_changes=false
+          cd functions
+          if ! npm run lint --silent; then
+            echo "Functions linting fixes needed"
+            functions_changes=true
+          fi
+          cd ..
+
           echo "python_changes=$python_changes" >> $GITHUB_OUTPUT
           echo "frontend_changes=$frontend_changes" >> $GITHUB_OUTPUT
+          echo "functions_changes=$functions_changes" >> $GITHUB_OUTPUT
 
-          if [[ "$python_changes" == "true" || "$frontend_changes" == "true" ]]; then
+          if [[ "$python_changes" == "true" || "$frontend_changes" == "true" || "$functions_changes" == "true" ]]; then
             echo "changes_needed=true" >> $GITHUB_OUTPUT
           else
             echo "changes_needed=false" >> $GITHUB_OUTPUT
@@ -151,6 +163,17 @@ jobs:
 
           echo "✅ Frontend formatting complete"
 
+      - name: Apply Functions linting fixes
+        if: steps.changes.outputs.functions_changes == 'true'
+        run: |
+          echo "🔧 Applying Functions linting fixes..."
+          cd functions
+
+          # Apply ESLint fixes
+          npm run lint:fix || true
+
+          echo "✅ Functions linting fixes complete"
+
       - name: Check if changes were made
         id: git-check
         run: |
@@ -186,6 +209,10 @@ jobs:
             echo "- ⚛️ Frontend: ESLint fixes and Prettier formatting" >> commit_msg.txt
           fi
 
+          if [[ "${{ steps.changes.outputs.functions_changes }}" == "true" ]]; then
+            echo "- 🔧 Functions: ESLint fixes and formatting" >> commit_msg.txt
+          fi
+
           echo "" >> commit_msg.txt
           echo "Files changed:" >> commit_msg.txt
           git diff --cached --name-only | sed 's/^/- /' >> commit_msg.txt
@@ -213,6 +240,9 @@ jobs:
             if [[ "${{ steps.changes.outputs.frontend_changes }}" == "true" ]]; then
               echo "- Frontend: ESLint fixes & Prettier formatting"
             fi
+            if [[ "${{ steps.changes.outputs.functions_changes }}" == "true" ]]; then
+              echo "- Functions: ESLint fixes & formatting"
+            fi
             echo ""
             echo "📝 Changes have been committed and pushed to the branch."
           else
@@ -226,6 +256,7 @@ jobs:
           script: |
             const pythonChanges = '${{ steps.changes.outputs.python_changes }}' === 'true';
             const frontendChanges = '${{ steps.changes.outputs.frontend_changes }}' === 'true';
+            const functionsChanges = '${{ steps.changes.outputs.functions_changes }}' === 'true';
 
             let body = '🤖 **Auto-fix applied!**\n\n';
             body += 'I automatically fixed the following linting and formatting issues:\n\n';
@@ -235,6 +266,9 @@ jobs:
             }
             if (frontendChanges) {
               body += '- ⚛️ **Frontend**: Fixed ESLint issues and applied Prettier formatting\n';
+            }
+            if (functionsChanges) {
+              body += '- 🔧 **Functions**: Fixed ESLint issues and formatting\n';
             }
 
             body += '\n✅ Your code is now properly formatted and should pass CI checks!';

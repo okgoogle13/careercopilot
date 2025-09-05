@@ -60,6 +60,14 @@ runs:
         run-checks: 'false'
         upload-artifacts: 'false'
 
+    - name: Build Functions
+      if: steps.fallback.outputs.built == 'true'
+      shell: bash
+      run: |
+        echo "🔧 Building Firebase Functions..."
+        cd functions && npm install && npm run build
+        echo "✅ Functions build completed"
+
     - name: Verify frontend is ready
       shell: bash
       run: |
