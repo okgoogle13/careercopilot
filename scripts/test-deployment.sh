@@ -30,7 +30,7 @@ else
 fi
 
 echo -e "${BLUE}2. Testing linting...${NC}"
-yarn lint || {
+yarn lint:ci || {
     echo -e "${YELLOW}⚠️  Linting issues found (continuing with test)${NC}"
 }
 
