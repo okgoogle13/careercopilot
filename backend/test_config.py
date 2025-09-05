@@ -2,7 +2,6 @@
 """
 Test script to verify secure configuration is working.
 """
-import os
 
 from app.core.secure_config import settings
 

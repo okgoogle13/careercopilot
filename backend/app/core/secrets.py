@@ -23,11 +23,18 @@ def _get_secret_manager_client():
             credentials = service_account.Credentials.from_service_account_info(credentials_dict)
             return secretmanager.SecretManagerServiceClient(credentials=credentials)
         else:
-            # Fall back to default application credentials
-            return secretmanager.SecretManagerServiceClient()
+            # Check if credentials file exists before trying default
+            cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+            if cred_path and os.path.exists(cred_path):
+                return secretmanager.SecretManagerServiceClient()
+            else:
+                logger.warning(
+                    "No valid Google Cloud credentials found - Secret Manager unavailable"
+                )
+                return None
     except Exception as e:
-        logger.error(f"Failed to initialize Secret Manager client: {e}")
-        return secretmanager.SecretManagerServiceClient()
+        logger.warning(f"Secret Manager client initialization failed: {e}")
+        return None
 
 
 client = _get_secret_manager_client()
@@ -116,21 +123,25 @@ def get_app_secret(secret_name: str, version: str = "latest") -> str:
         logger.warning("GCP_PROJECT_ID not set, falling back to environment variables")
         return os.getenv(secret_name.upper().replace("-", "_"))
 
-    try:
-        secret_path = f"projects/{GCP_PROJECT_ID}/secrets/{secret_name}/versions/{version}"
-        response = client.access_secret_version(request={"name": secret_path})
-        secret_value = response.payload.data.decode("UTF-8")
-        logger.info(f"Successfully retrieved secret: {secret_name}")
-        return secret_value
-    except Exception as e:
-        logger.warning(f"Failed to retrieve secret {secret_name}: {e}")
-        # Fallback to environment variable
-        fallback_value = os.getenv(secret_name.upper().replace("-", "_"))
-        if fallback_value:
-            logger.info(f"Using environment fallback for {secret_name}")
-            return fallback_value
-        else:
-            raise Exception(f"Secret {secret_name} not found in Secret Manager or environment")
+    if client:
+        try:
+            secret_path = f"projects/{GCP_PROJECT_ID}/secrets/{secret_name}/versions/{version}"
+            response = client.access_secret_version(request={"name": secret_path})
+            secret_value = response.payload.data.decode("UTF-8")
+            logger.info(f"Successfully retrieved secret: {secret_name}")
+            return secret_value
+        except Exception as e:
+            logger.warning(f"Failed to retrieve secret {secret_name}: {e}")
+    else:
+        logger.debug(f"Secret Manager client not available for {secret_name}")
+
+    # Fallback to environment variable
+    fallback_value = os.getenv(secret_name.upper().replace("-", "_"))
+    if fallback_value:
+        logger.info(f"Using environment fallback for {secret_name}")
+        return fallback_value
+    else:
+        raise Exception(f"Secret {secret_name} not found in Secret Manager or environment")
 
 
 def get_database_config() -> dict:
@@ -159,9 +170,9 @@ def get_ai_api_keys() -> dict:
         "openai": get_app_secret("openai-api-key"),
         "anthropic": get_app_secret("anthropic-api-key"),
         "gemini": get_app_secret("gemini-api-key"),
-        "perplexity": get_app_secret("perplexity-api-key")
-        if _secret_exists("perplexity-api-key")
-        else None,
+        "perplexity": (
+            get_app_secret("perplexity-api-key") if _secret_exists("perplexity-api-key") else None
+        ),
     }
 
 

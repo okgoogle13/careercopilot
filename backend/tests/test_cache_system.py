@@ -7,7 +7,7 @@ from datetime import datetime, timedelta, timezone
 from unittest.mock import AsyncMock
 
 import pytest
-from app.core.cache_decorators.cache_decorators import CacheContext, cached_ai_operation
+from app.core.cache_decorators.cache_decorators import cached_ai_operation
 from app.core.cache_deprecated import AICache, CacheEntry, InMemoryCacheBackend
 
 

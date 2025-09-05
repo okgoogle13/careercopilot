@@ -3,11 +3,10 @@
 Interactive script to set up secrets in Google Cloud Secret Manager.
 """
 import json
-import os
 import sys
 from getpass import getpass
 
-from google.api_core.exceptions import AlreadyExists, NotFound
+from google.api_core.exceptions import AlreadyExists
 from google.cloud import secretmanager
 
 

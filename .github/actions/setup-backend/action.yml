@@ -1,0 +1,137 @@
+name: 'Setup Backend Environment'
+description: 'Sets up Python environment with optimized dependency installation for CI/CD'
+
+inputs:
+  python-version:
+    description: 'Python version to use'
+    required: false
+    default: '3.13'
+  install-mode:
+    description: 'Installation mode: fast, full, or dev'
+    required: false
+    default: 'full'
+  cache-prefix:
+    description: 'Additional cache key prefix'
+    required: false
+    default: ''
+
+outputs:
+  cache-hit:
+    description: 'Whether dependencies were restored from cache'
+    value: ${{ steps.cache-deps.outputs.cache-hit }}
+  python-path:
+    description: 'Path to Python executable'
+    value: ${{ steps.setup-python.outputs.python-path }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Python
+      id: setup-python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+        cache: 'pip'
+        cache-dependency-path: |
+          backend/requirements*.txt
+
+    - name: Cache dependencies
+      id: cache-deps
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/pip
+          backend/.venv
+        key: ${{ runner.os }}-python-${{ inputs.python-version }}-${{ inputs.cache-prefix }}-${{ hashFiles('backend/requirements*.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-python-${{ inputs.python-version }}-${{ inputs.cache-prefix }}-
+          ${{ runner.os }}-python-${{ inputs.python-version }}-
+
+    - name: Upgrade pip and install build tools
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install pip-tools
+      env:
+        PIP_NO_CACHE_DIR: '1'
+        PIP_DISABLE_PIP_VERSION_CHECK: '1'
+
+    - name: Install dependencies (fast mode)
+      if: inputs.install-mode == 'fast'
+      shell: bash
+      run: |
+        echo "🚀 Installing dependencies in fast mode..."
+        cd backend
+
+        # Use CI-optimized requirements
+        if [ -f "requirements-ci.txt" ]; then
+          pip install -r requirements-ci.txt
+        else
+          pip install -r requirements.txt
+        fi
+      timeout-minutes: 5
+
+    - name: Install dependencies (full mode)
+      if: inputs.install-mode == 'full'
+      shell: bash
+      run: |
+        echo "📦 Installing dependencies in full mode..."
+        cd backend
+
+        # Install production requirements first
+        pip install -r requirements.txt
+
+        # Handle problematic dependencies separately
+        echo "🔧 Resolving dependency conflicts..."
+        pip install "safety==3.2.7" "filelock==3.12.4" --force-reinstall
+
+        # Install development requirements
+        pip install -r requirements-dev.txt
+      timeout-minutes: 8
+
+    - name: Install dependencies (dev mode)
+      if: inputs.install-mode == 'dev'
+      shell: bash
+      run: |
+        echo "🛠️ Installing dependencies in development mode..."
+        cd backend
+
+        # Create virtual environment for dev
+        python -m venv .venv
+        source .venv/bin/activate
+
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
+
+        # Install additional dev tools
+        pip install pre-commit pip-tools
+      timeout-minutes: 10
+
+    - name: Verify installation
+      shell: bash
+      run: |
+        echo "✅ Verifying Python environment..."
+        python --version
+        pip --version
+
+        echo "📋 Installed packages:"
+        pip list --format=columns | head -20
+
+        echo "🔍 Critical dependencies check:"
+        python -c "import fastapi; print(f'FastAPI: {fastapi.__version__}')" || echo "❌ FastAPI not found"
+        python -c "import pydantic; print(f'Pydantic: {pydantic.__version__}')" || echo "❌ Pydantic not found"
+        python -c "import sqlalchemy; print(f'SQLAlchemy: {sqlalchemy.__version__}')" || echo "❌ SQLAlchemy not found"
+
+    - name: Summary
+      shell: bash
+      run: |
+        echo "## 🐍 Backend Environment Setup Summary" >> $GITHUB_STEP_SUMMARY
+        echo "- Python version: ${{ inputs.python-version }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Install mode: ${{ inputs.install-mode }}" >> $GITHUB_STEP_SUMMARY
+        echo "- Cache hit: ${{ steps.cache-deps.outputs.cache-hit }}" >> $GITHUB_STEP_SUMMARY
+
+        if [ "${{ steps.cache-deps.outputs.cache-hit }}" == "true" ]; then
+          echo "- Dependencies restored from cache ⚡" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "- Dependencies installed from scratch 📦" >> $GITHUB_STEP_SUMMARY
+        fi

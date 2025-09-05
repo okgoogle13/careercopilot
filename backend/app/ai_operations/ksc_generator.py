@@ -298,6 +298,53 @@ class KSCGenerator:
                 "avoid repetition while maximizing the impact of each response."
             )
 
+            json_structure = """{
+"strategy_analysis": {
+    "experience_mapping": {
+        "<ksc_1>": "<experience selected for KSC 1>",
+        "<ksc_2>": "<experience selected for KSC 2>"
+    },
+    "diversity_score": "<0-100 score for experience diversity>",
+    "coverage_analysis": "<how well the responses cover user's full experience range>",
+    "narrative_coherence": "<how responses work together to tell a complete story>"
+},
+"ksc_responses": [
+    {
+        "ksc_statement": "<KSC statement>",
+        "ksc_priority": "<high/medium/low based on common importance>",
+        "experience_selection": {
+            "chosen_experience": "<selected experience>",
+            "relevance_score": "<0-100>",
+            "uniqueness_factor": "<what makes this experience unique among responses>"
+        },
+        "star_response": {
+            "situation": "<situation details>",
+            "task": "<task details>",
+            "action": "<action details>",
+            "result": "<result details>",
+            "full_response": "<complete narrative response>"
+        },
+        "response_analysis": {
+            "key_competencies_shown": ["<competencies demonstrated>"],
+            "quantified_achievements": ["<numbers and metrics>"],
+            "differentiating_factors": ["<what makes this response stand out>"]
+        }
+    }
+],
+"cross_response_analysis": {
+    "experience_overlap_check": ["<any concerning overlaps between responses>"],
+    "competency_coverage": ["<full range of competencies covered>"],
+    "narrative_gaps": ["<any important experiences not utilized>"],
+    "strengthening_opportunities": ["<ways to enhance the overall set>"]
+},
+"presentation_strategy": {
+    "response_ordering": ["<recommended order for presenting responses>"],
+    "transition_strategies": ["<how to connect responses in interviews>"],
+    "backup_experiences": ["<alternative experiences to mention if asked>"],
+    "interview_flow_tips": ["<tips for smooth interview delivery>"]
+}
+}"""
+
             prompt = f"""Generate STAR methodology responses for multiple Key Selection Criteria,
                 ensuring diverse experience selection and avoiding repetition across responses.
 
@@ -309,43 +356,7 @@ STRATEGIC REQUIREMENTS:
 - Prioritize strongest, most quantifiable examples
 
 Required JSON structure:
-{"strategy_analysis": {"experience_mapping": {"<ksc_1>": "<experience selected for KSC 1>",
-            "<ksc_2>": "<experience selected for KSC 2>"
-        } ,
-        "diversity_score": <0-100 score for experience diversity>,
-        "coverage_analysis": "<how well the responses cover user's full experience range>",
-        "narrative_coherence": "<how responses work together to tell a complete story>"
-    } ,
-    "ksc_responses": [
-        {"ksc_statement": "<KSC statement>",
-            "ksc_priority": "<high/medium/low based on common importance>",
-            "experience_selection": {"chosen_experience": "<selected experience>",
-                "relevance_score": <0-100>,
-                "uniqueness_factor": "<what makes this experience unique among responses>"
-            } ,
-            "star_response": {"situation": "<situation details>",
-                "task": "<task details>",
-                "action": "<action details>",
-                "result": "<result details>",
-                "full_response": "<complete narrative response>"
-            } ,
-            "response_analysis": {"key_competencies_shown": [<competencies demonstrated>],
-                "quantified_achievements": [<numbers and metrics>],
-                "differentiating_factors": [<what makes this response stand out>]
-            }
-        }
-    ],
-    "cross_response_analysis": {"experience_overlap_check": [<any concerning overlaps between responses>],
-        "competency_coverage": [<full range of competencies covered>],
-        "narrative_gaps": [<any important experiences not utilized>],
-        "strengthening_opportunities": [<ways to enhance the overall set>]
-    } ,
-    "presentation_strategy": {"response_ordering": [<recommended order for presenting responses>],
-        "transition_strategies": [<how to connect responses in interviews>],
-        "backup_experiences": [<alternative experiences to mention if asked>],
-        "interview_flow_tips": [<tips for smooth interview delivery>]
-    }}
-}} {preferences_context}
+{json_structure}{preferences_context}
 
 KSC Statements:
 {json.dumps(sanitized_kscs, indent=2)}

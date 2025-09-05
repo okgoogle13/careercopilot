@@ -4,10 +4,12 @@ Secure configuration management using Google Cloud Secret Manager.
 This module provides a centralized way to access configuration values,
 falling back to environment variables when not in production.
 """
-import os
-from typing import Any, Dict, Optional, Union
 
-from pydantic import BaseSettings, Field, validator
+import os
+from typing import Optional
+
+from pydantic import validator
+from pydantic_settings import BaseSettings
 
 # Try to import the secret manager, but don't fail if not available
 try:
@@ -23,6 +25,7 @@ class SecureSettings(BaseSettings):
 
     # Environment
     ENV: str = "development"
+    ENVIRONMENT: str = "development"  # Alias for ENV
     DEBUG: bool = True
     LOG_LEVEL: str = "INFO"
     PORT: int = 8000
@@ -30,23 +33,67 @@ class SecureSettings(BaseSettings):
 
     # Database
     DATABASE_URL: str = "sqlite:///data/careercopilot-dev.db"
+    DB_PASSWORD: Optional[str] = None
+    DB_HOST: str = "localhost"
+    DB_PORT: int = 5432
+    DB_NAME: str = "careercopilot"
+    DB_USER: str = "careercopilot"
+
+    # Redis
     REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_PASSWORD: Optional[str] = None
 
     # Authentication
     SECRET_KEY: str = "insecure-default-secret-key"
+    JWT_SECRET_KEY: str = "insecure-default-secret-key"  # Alias for SECRET_KEY
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
+
+    # Firebase Configuration
+    FIREBASE_PROJECT_ID: Optional[str] = None
+    FIREBASE_STORAGE_BUCKET: str = ""
+    FIREBASE_DATABASE_URL: str = ""
+    FIREBASE_AUTH_EMULATOR_HOST: Optional[str] = None
+    FIREBASE_STORAGE_EMULATOR_HOST: Optional[str] = None
+    FIREBASE_DATABASE_EMULATOR_HOST: Optional[str] = None
+    FIREBASE_EMULATOR: bool = False
+
+    # Firebase Admin SDK Credentials (JSON string)
+    FIREBASE_CREDENTIALS_JSON: Optional[str] = None
+
+    @validator("FIREBASE_CREDENTIALS_JSON", pre=True)
+    def validate_firebase_creds(cls, v, values):
+        if not v and values.get("FIREBASE_PROJECT_ID"):
+            # Try to load from Google Cloud's default credentials
+            try:
+                import google.auth
+
+                credentials, project = google.auth.default()
+                if project == values.get("FIREBASE_PROJECT_ID"):
+                    return None  # Will use default credentials
+            except Exception:
+                pass
+        return v
 
     # Google Cloud
     GOOGLE_CLOUD_PROJECT: Optional[str] = None
     GCP_PROJECT_ID: Optional[str] = None
-    FIREBASE_PROJECT_ID: Optional[str] = None
+    GOOGLE_APPLICATION_CREDENTIALS: Optional[str] = None
+    GOOGLE_APPLICATION_CREDENTIALS_JSON: Optional[str] = None
 
     # AI Services
     GEMINI_API_KEY: Optional[str] = None
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_ORG_ID: Optional[str] = None
     ANTHROPIC_API_KEY: Optional[str] = None
+
+    # RAG Configuration
+    RAG_CHUNK_SIZE: int = 1000
+    RAG_CHUNK_OVERLAP: int = 200
+    RAG_VECTOR_COLLECTION: str = "careercopilot_docs"
+    VERTEX_AI_INDEX_ENDPOINT: Optional[str] = None
+    EMBEDDING_DIMENSION: int = 768
+    EMBEDDING_MODEL: str = "text-embedding-004"
 
     # Email
     SENDGRID_API_KEY: Optional[str] = None
@@ -70,6 +117,7 @@ class SecureSettings(BaseSettings):
         env_file = ".env"
         env_file_encoding = "utf-8"
         case_sensitive = True
+        extra = "allow"  # Allow extra fields from environment
 
         @classmethod
         def customise_sources(

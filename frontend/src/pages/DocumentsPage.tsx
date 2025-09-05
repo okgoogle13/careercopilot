@@ -175,6 +175,59 @@ const DocumentsPage: React.FC = () => {
     }
   };
 
+  const handleUpload = async (files: File[]) => {
+    if (!requireAuth()) {
+      toast.error('You must be logged in to upload files.');
+      return;
+    }
+
+    setIsUploading(true);
+    const token = getAuthToken();
+    if (!token) {
+      toast.error('Authentication error. Please log in again.');
+      setIsUploading(false);
+      return;
+    }
+
+    const uploadPromises = files.map(file => {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      // Note: This sends to the new RAG endpoint
+      return fetch('/api/rag/documents/upload', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+    });
+
+    try {
+      const responses = await Promise.all(uploadPromises);
+
+      const successfulUploads = responses.filter(res => res.ok).length;
+      const failedUploads = files.length - successfulUploads;
+
+      if (successfulUploads > 0) {
+        toast.success(`${successfulUploads} file(s) uploaded successfully!`);
+        // Refresh the document list to show the new files
+        await fetchDocuments();
+      }
+
+      if (failedUploads > 0) {
+        // In a real app, you might want to parse the response body for specific errors
+        throw new Error(`${failedUploads} file(s) failed to upload.`);
+      }
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'An unknown error occurred during upload.';
+      setError(message);
+      toast.error(message);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const getDocumentDate = (doc: DocumentType): Date => {
     if (doc.createdAt instanceof Date) {
       return doc.createdAt;
@@ -216,9 +269,9 @@ const DocumentsPage: React.FC = () => {
             </p>
           </div>
           <DocumentUpload
-            onUpload={fetchDocuments}
+            onUpload={handleUpload}
             className='w-full md:w-auto'
-            disabled={isUploading}
+            disabled={_isUploading}
           />
         </div>
 
