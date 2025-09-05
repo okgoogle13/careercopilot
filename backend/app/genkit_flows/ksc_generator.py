@@ -9,7 +9,7 @@ from pydantic import BaseModel
 load_dotenv()
 
 # Initialize the Google AI plugin if not already initialized
-if not genkit.get_plugin("googleai"):
+if getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
     genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 # Define the Gemini Pro model
