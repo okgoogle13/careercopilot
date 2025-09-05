@@ -69,7 +69,6 @@ runs:
         else
           pip install -r requirements.txt
         fi
-      timeout-minutes: 5
 
     - name: Install dependencies (full mode)
       if: inputs.install-mode == 'full'
@@ -87,7 +86,6 @@ runs:
 
         # Install development requirements
         pip install -r requirements-dev.txt
-      timeout-minutes: 8
 
     - name: Install dependencies (dev mode)
       if: inputs.install-mode == 'dev'
@@ -105,7 +103,6 @@ runs:
 
         # Install additional dev tools
         pip install pre-commit pip-tools
-      timeout-minutes: 10
 
     - name: Verify installation
       shell: bash
