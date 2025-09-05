@@ -40,7 +40,7 @@ console.log('Transpiling TypeScript files (without type checking)...');
 try {
   execSync('npx tsc --project tsconfig.json --noEmit false --skipLibCheck --skipDefaultLibCheck', {stdio: 'inherit'});
   console.log('TypeScript transpilation completed successfully');
-} catch (error) {
+} catch {
   console.error('TypeScript transpilation failed, but continuing with build...');
 }
 
