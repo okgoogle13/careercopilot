@@ -321,9 +321,7 @@ class EnhancedAIErrorHandler:
             "status": (
                 "healthy"
                 if success_count >= 8
-                else "degraded"
-                if success_count >= 5
-                else "unhealthy"
+                else "degraded" if success_count >= 5 else "unhealthy"
             ),
             "success_rate": success_count / len(recent_results),
             "fallback_rate": fallback_count / len(recent_results),
