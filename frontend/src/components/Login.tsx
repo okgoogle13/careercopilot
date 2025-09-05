@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAuth } from '../contexts/AuthProvider';
 import toast from 'react-hot-toast';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { EyeIcon, EyeOffIcon } from '@heroicons/react/outline';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 // Type definitions
 interface LoginFormData {
@@ -168,7 +168,7 @@ const Login: React.FC<LoginProps> = ({ onSuccess }) => {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? (
-                    <EyeOffIcon className='h-5 w-5' aria-hidden='true' />
+                    <EyeSlashIcon className='h-5 w-5' aria-hidden='true' />
                   ) : (
                     <EyeIcon className='h-5 w-5' aria-hidden='true' />
                   )}

@@ -5,7 +5,6 @@ Script to set up secrets in Google Cloud Secret Manager.
 This script helps you create and update secrets in Google Cloud Secret Manager.
 """
 import json
-import os
 import sys
 
 from google.api_core.exceptions import AlreadyExists

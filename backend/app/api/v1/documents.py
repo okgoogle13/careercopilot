@@ -12,7 +12,15 @@ from google.api_core.exceptions import GoogleAPICallError
 from jinja2 import Environment, FileSystemLoader
 from pydantic import BaseModel
 from starlette.responses import StreamingResponse
-from weasyprint import CSS, HTML
+
+# Temporarily disabled weasyprint import due to missing system dependencies
+# try:
+#     from weasyprint import CSS, HTML
+#     WEASYPRINT_AVAILABLE = True
+# except ImportError:
+WEASYPRINT_AVAILABLE = False
+CSS = None
+HTML = None
 
 # from app.genkit_flows.extract_resume_entities import
 # extract_resume_entities  # Temporarily disabled for deployment
@@ -135,6 +143,12 @@ async def download_document_as_pdf(
         template_path = theme_details["template"]
         css_path = str(template_root_dir / theme_details["css"])
         base_url_path = str(template_root_dir / theme)
+
+        if not WEASYPRINT_AVAILABLE:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="PDF generation temporarily unavailable - weasyprint dependencies missing",
+            )
 
         template = env.get_template(template_path)
         html_content = template.render(content=content)

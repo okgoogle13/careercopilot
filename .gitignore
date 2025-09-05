@@ -68,3 +68,5 @@ careercopilot/frontend/.env
 
 # Generated frontend assets
 public/assets/
+/Applications/careercopilot/backend/firebase-prod-key.json
+.env.production

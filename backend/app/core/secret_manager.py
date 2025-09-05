@@ -4,14 +4,27 @@ Secret Manager integration for secure configuration management.
 This module provides functions to access secrets stored in Google Cloud Secret Manager
 in a way that falls back to environment variables for local development.
 """
+
 import os
 from typing import Optional
 
 from google.api_core.exceptions import NotFound
 from google.cloud import secretmanager
 
-# Initialize the Secret Manager client
-client = secretmanager.SecretManagerServiceClient()
+# Lazy initialization of Secret Manager client
+_client = None
+
+
+def _get_client():
+    """Get or initialize the Secret Manager client."""
+    global _client
+    if _client is None:
+        try:
+            _client = secretmanager.SecretManagerServiceClient()
+        except Exception as e:
+            print(f"Warning: Could not initialize Secret Manager client: {e}")
+            _client = False  # Use False to indicate failed initialization
+    return _client if _client is not False else None
 
 
 def get_secret(secret_id: str, project_id: Optional[str] = None, version: str = "latest") -> str:
@@ -42,6 +55,17 @@ def get_secret(secret_id: str, project_id: Optional[str] = None, version: str = 
 
     # Build the secret version name
     name = f"projects/{project_id}/secrets/{secret_id}/versions/{version}"
+
+    # Get the client, return environment fallback if not available
+    client = _get_client()
+    if not client:
+        # Secret Manager not available, try environment variable fallback
+        env_var = os.getenv(f"DEFAULT_{secret_id}")
+        if env_var:
+            return env_var
+        raise RuntimeError(
+            f"Secret Manager not available and no environment fallback for {secret_id}"
+        )
 
     try:
         # Access the secret version
@@ -80,3 +104,40 @@ def get_redis_url() -> str:
 def get_secret_key() -> str:
     """Get the secret key for JWT tokens."""
     return get_secret("SECRET_KEY")
+
+
+def get_firebase_credentials() -> Optional[dict]:
+    """
+    Get Firebase Admin SDK credentials from Secret Manager.
+
+    Returns:
+        dict: Parsed JSON credentials or None if not found
+    """
+    try:
+        creds_json = get_secret("FIREBASE_CREDENTIALS_JSON")
+        if creds_json:
+            import json
+
+            return json.loads(creds_json)
+    except Exception as e:
+        print(f"Warning: Could not load Firebase credentials: {e}")
+    return None
+
+
+def get_firebase_config() -> dict:
+    """
+    Get Firebase configuration from Secret Manager or environment variables.
+
+    Returns:
+        dict: Firebase configuration
+    """
+    config = {
+        "project_id": get_secret("FIREBASE_PROJECT_ID"),
+        "storage_bucket": get_secret("FIREBASE_STORAGE_BUCKET"),
+        "database_url": get_secret("FIREBASE_DATABASE_URL"),
+        "use_emulator": get_secret("FIREBASE_EMULATOR", "false").lower() == "true",
+        "auth_emulator_host": get_secret("FIREBASE_AUTH_EMULATOR_HOST", ""),
+        "storage_emulator_host": get_secret("FIREBASE_STORAGE_EMULATOR_HOST", ""),
+        "database_emulator_host": get_secret("FIREBASE_DATABASE_EMULATOR_HOST", ""),
+    }
+    return config

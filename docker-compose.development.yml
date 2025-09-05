@@ -45,7 +45,8 @@ services:
   backend-dev:
     build:
       context: ./backend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
+      target: development
     container_name: careercopilot-dev-backend
     environment:
       # Database configuration
@@ -100,7 +101,7 @@ services:
   frontend-dev:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     container_name: careercopilot-dev-frontend
     environment:
       - REACT_APP_API_URL=http://localhost:8001

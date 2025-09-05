@@ -2,10 +2,13 @@ import json
 
 from app.core.db import db
 from genkit import ai
-from genkit.plugins.google_genai.models.gemini import GEMINI_2_0_FLASH
 
-# Initialize the Gemini model
-model = GEMINI_2_0_FLASH
+# Temporarily commented out due to genkit plugin issues
+# from genkit.plugins.google_genai.models.gemini import GEMINI_2_0_FLASH
+
+# Initialize the Gemini model (temporarily disabled)
+# model = GEMINI_2_0_FLASH
+model = None
 
 
 # ...existing code...
