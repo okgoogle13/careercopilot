@@ -5,8 +5,7 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "frontend",
-    "functions"
+    "frontend"
   ],
   "packageManager": "yarn@4.9.1",
   "engines": {
@@ -15,14 +14,15 @@
   },
   "scripts": {
     "dev": "yarn workspace careercopilot-frontend run dev",
-    "dev:functions": "yarn workspace functions run serve",
-    "build": "yarn workspace careercopilot-frontend run build && yarn workspace functions run build",
+    "dev:functions": "cd functions && npm run serve",
+    "build": "yarn workspace careercopilot-frontend run build && cd functions && npm run build",
     "build:frontend": "yarn workspace careercopilot-frontend run build",
-    "build:functions": "yarn workspace functions run deploy",
-    "lint": "yarn workspace careercopilot-frontend run lint && yarn workspace functions run lint",
-    "lint:fix": "yarn workspace careercopilot-frontend run lint:fix && yarn workspace functions run lint:fix",
+    "build:functions": "cd functions && npm run build",
+    "lint": "yarn workspace careercopilot-frontend run lint && cd functions && npm run lint",
+    "lint:ci": "yarn workspace careercopilot-frontend run lint:ci && cd functions && npm run lint",
+    "lint:fix": "yarn workspace careercopilot-frontend run lint:fix && cd functions && npm run lint:fix",
     "test": "yarn workspace careercopilot-frontend run test",
-    "clean": "yarn workspace careercopilot-frontend run clean && yarn workspace functions run clean",
+    "clean": "yarn workspace careercopilot-frontend run clean && cd functions && npm run clean",
     "start": "yarn workspace careercopilot-frontend run preview"
   },
   "devDependencies": {
@@ -47,5 +47,8 @@
   "bugs": {
     "url": "https://github.com/careercopilot/careercopilot/issues"
   },
-  "homepage": "https://github.com/careercopilot/careercopilot#readme"
+  "homepage": "https://github.com/careercopilot/careercopilot#readme",
+  "dependencies": {
+    "eslint": "^9.35.0"
+  }
 }

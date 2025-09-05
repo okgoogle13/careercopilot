@@ -14,8 +14,7 @@ from typing import Any, Dict, Optional
 from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
-from .cache_deprecated import AICache
-from .personal_cache import get_ai_cache
+from .personal_cache import PersonalCache, get_ai_cache
 
 logger = logging.getLogger(__name__)
 
@@ -174,7 +173,7 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
         return path.rstrip("/").split("?")[0]
 
 
-async def setup_cache_backend() -> AICache:
+async def setup_cache_backend() -> PersonalCache:
     """Setup cache backend based on environment"""
     redis_url = os.getenv("REDIS_URL")
 

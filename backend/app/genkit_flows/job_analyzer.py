@@ -23,7 +23,7 @@ genkit_flow = getattr(genkit, "flow", _noop_flow)
 
 # Load environment variables and initialize Genkit if needed
 load_dotenv()
-if genkit and not genkit.get_plugin("googleai"):
+if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
     genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")

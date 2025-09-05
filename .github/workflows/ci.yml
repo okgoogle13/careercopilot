@@ -162,11 +162,46 @@ jobs:
             echo "❓ **Could not generate security report**" >> $GITHUB_STEP_SUMMARY
           fi
 
+  # Functions Testing
+  functions:
+    name: Functions Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          yarn install
+          cd functions && npm install
+
+      - name: Lint functions
+        run: |
+          cd functions && npm run lint
+
+      - name: Build functions
+        run: |
+          cd functions && npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "functions/lib" ] || [ ! "$(ls -A functions/lib)" ]; then
+            echo "❌ Functions build failed - no lib directory found"
+            exit 1
+          fi
+          echo "✅ Functions build completed successfully"
+
   # Quality Gate
   quality-gate:
     name: Quality Gate
     runs-on: ubuntu-latest
-    needs: [codeql, frontend, backend]
+    needs: [codeql, frontend, backend, functions]
     timeout-minutes: 5
     if: always()
     steps:
@@ -182,6 +217,10 @@ jobs:
           fi
           if [[ "${{ needs.backend.result }}" == "failure" ]]; then
             echo "❌ Backend tests failed"
+            exit 1
+          fi
+          if [[ "${{ needs.functions.result }}" == "failure" ]]; then
+            echo "❌ Functions tests failed"
             exit 1
           fi
           echo "✅ All quality checks passed!"

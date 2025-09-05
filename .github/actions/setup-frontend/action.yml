@@ -35,7 +35,9 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: yarn install
+      run: |
+        yarn install
+        cd functions && npm install
 
     - name: Type check
       if: inputs.run-checks == 'true'
@@ -45,7 +47,7 @@ runs:
     - name: Lint
       if: inputs.run-checks == 'true'
       shell: bash
-      run: yarn workspace careercopilot-frontend run lint:ci
+      run: yarn lint:ci
 
     - name: Format check
       if: inputs.run-checks == 'true'
