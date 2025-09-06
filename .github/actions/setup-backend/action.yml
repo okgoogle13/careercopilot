@@ -109,9 +109,6 @@ runs:
         python --version
         pip --version
 
-        echo "📋 Installed packages:"
-        pip list --format=columns | head -20
-
         echo "🔍 Critical dependencies check:"
         python -c "import fastapi; print(f'FastAPI: {fastapi.__version__}')" || echo "❌ FastAPI not found"
         python -c "import pydantic; print(f'Pydantic: {pydantic.__version__}')" || echo "❌ Pydantic not found"
