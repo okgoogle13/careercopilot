@@ -33,6 +33,12 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
+    - name: Enable Corepack for Yarn 4+
+      shell: bash
+      run: |
+        corepack enable
+        corepack prepare yarn@4.9.1 --activate
+
     - name: Install dependencies
       shell: bash
       run: |
