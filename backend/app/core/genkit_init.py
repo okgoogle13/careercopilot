@@ -67,6 +67,7 @@ def init_genkit() -> bool:
 
     try:
         import genkit
+        from genkit.plugins import googleai
 
         # Get configuration
         config = get_genkit_config()
@@ -75,14 +76,19 @@ def init_genkit() -> bool:
         if config["enable_telemetry"]:
             init_telemetry()
 
-        # For now, just mark as initialized since we have the API key
-        # The actual plugin initialization may need to be done differently
-        # based on the Genkit version and plugin structure
+        # Configure genkit with the new API
+        genkit.configure(
+            plugins=[
+                googleai.GoogleAIPlugin(
+                    api_key=api_key,
+                )
+            ],
+            log_level=config["log_level"],
+            environment=config["environment"]
+        )
 
         _genkit_initialized = True
-        logger.info(
-            "Genkit core initialized successfully (plugin initialization may be handled by flows)"
-        )
+        logger.info("Genkit initialized successfully with Google AI plugin")
         logger.info(f"Configuration: project={config['project_id']}, region={config['location']}")
         return True
 
@@ -152,11 +158,8 @@ def check_genkit_health() -> dict:
 
     try:
         health_status["genkit_available"] = is_genkit_available()
-
-        if health_status["genkit_available"]:
-            import genkit
-
-            health_status["google_ai_configured"] = bool(genkit.get_plugin("googleai"))
+        # For now, assume Google AI is configured if Genkit is available and we have an API key
+        health_status["google_ai_configured"] = health_status["genkit_available"] and health_status["api_key_present"]
 
     except Exception as e:
         health_status["errors"].append(f"Health check failed: {str(e)}")
