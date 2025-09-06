@@ -31,7 +31,6 @@ from app.api.v1 import (
 )
 from app.core.cache_middleware import add_cache_middleware, cache_health_check, cache_lifespan
 from app.core.firebase import initialize_firebase
-
 from app.core.genkit_init import check_genkit_health, init_genkit
 from app.core.limiter import _rate_limit_exceeded_handler, authenticated_limiter, limiter
 from app.core.logging_config import setup_logging
@@ -232,8 +231,7 @@ async def health_check():
     try:
         db_health = check_database_health()
         cache_status = cache_health_check()
-        # genkit_health = check_genkit_health()  # Temporarily disabled
-        genkit_health = {"status": "disabled", "reason": "temporarily disabled"}
+        genkit_health = check_genkit_health()
 
         return {
             "status": "healthy",
