@@ -80,12 +80,12 @@ runs:
         # Install production requirements first
         pip install -r requirements.txt
 
-        # Handle problematic dependencies separately
-        echo "🔧 Resolving dependency conflicts..."
-        pip install "safety==3.2.7" "filelock==3.12.4" --force-reinstall
+        # Install development tools for testing and linting
+        pip install pytest pytest-asyncio black flake8 mypy bandit
 
-        # Install development requirements
-        pip install -r requirements-dev.txt
+        # Handle problematic dependencies separately if they exist
+        echo "🔧 Resolving any dependency conflicts..."
+        pip install "safety==3.2.7" --force-reinstall || echo "Safety not needed for this build"
 
     - name: Install dependencies (dev mode)
       if: inputs.install-mode == 'dev'
@@ -99,10 +99,9 @@ runs:
         source .venv/bin/activate
 
         pip install -r requirements.txt
-        pip install -r requirements-dev.txt
 
-        # Install additional dev tools
-        pip install pre-commit pip-tools
+        # Install development tools
+        pip install pytest pytest-asyncio black flake8 mypy bandit pre-commit pip-tools
 
     - name: Verify installation
       shell: bash
