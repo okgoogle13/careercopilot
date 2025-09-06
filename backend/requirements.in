@@ -20,6 +20,10 @@ alembic
 openai
 anthropic
 
+# Genkit AI framework
+genkit
+genkit-plugin-google-genai
+
 # Authentication
 python-jose[cryptography]
 passlib[bcrypt]
@@ -38,7 +42,7 @@ weasyprint
 google-cloud-aiplatform
 numpy
 # h5py  # Temporarily disabled
-# faiss-cpu  # Temporarily disabled due to dependencies
+faiss-cpu
 
 # System utilities
 psutil
@@ -46,6 +50,6 @@ redis
 httpx[http2]
 slowapi
 sendgrid
-genkit[googleai]
+loguru
 opencensus
 opencensus-ext-stackdriver
