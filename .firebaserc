@@ -1,9 +1,27 @@
 {
   "projects": {
-    "default": "careercopilot-staging"
+    "default": "careercopilot-staging",
+    "staging": "careercopilot-staging",
+    "production": "careercopilot-468811"
   },
   "targets": {
     "careercopilot-staging": {
+      "firestore": {
+        "databases": [
+          {
+            "target": "default",
+            "location": "us-central1"
+          }
+        ]
+      },
+      "functions": {
+        "source": "functions",
+        "codebase": "default",
+        "predeploy": [
+          "npm --prefix \"$RESOURCE_DIR\" run build"
+        ],
+        "regions": ["us-central1"]
+      },
       "hosting": {
         "careercopilot-staging-frontend": [
           "careercopilot-staging"
@@ -11,6 +29,22 @@
       }
     },
     "careercopilot-468811": {
+      "firestore": {
+        "databases": [
+          {
+            "target": "default",
+            "location": "us-central1"
+          }
+        ]
+      },
+      "functions": {
+        "source": "functions",
+        "codebase": "default",
+        "predeploy": [
+          "npm --prefix \"$RESOURCE_DIR\" run build"
+        ],
+        "regions": ["us-central1"]
+      },
       "hosting": {
         "careercopilot-prod-frontend": [
           "careercopilot-468811"

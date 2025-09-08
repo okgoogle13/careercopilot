@@ -114,7 +114,7 @@ class ResumeAnalysisService(BaseAIService):
 
         This is the main entry point for resume analysis. It performs:
         1. Input validation and sanitization
-        2. AI-powered analysis of the resume content
+        2. AI-powered analysis of the resume content using generic document processing
         3. Structured extraction of skills, experience, and education
         4. Generation of a professional summary
 
@@ -134,21 +134,24 @@ class ResumeAnalysisService(BaseAIService):
         if len(resume_text) < 20:  # Minimum reasonable length for a resume
             raise ValueError("Resume text is too short for meaningful analysis")
 
-        # Sanitize input
-        clean_text = self._sanitize_resume_text(resume_text)
-
         # Check if service is enabled
         if not self.config.get("enabled", True):
             logger.warning("Resume analysis service is disabled")
             return self._get_default_result()
 
         try:
-            # Create and send AI prompt
-            prompt = self._create_analysis_prompt(clean_text)
-            response = await self._make_ai_request(prompt)
+            # Sanitize input
+            clean_text = self._sanitize_resume_text(resume_text)
 
-            # Parse and validate response
-            result = self._parse_ai_response(response)
+            # Use generic document processing
+            from app.core.document_processing import process_document, PromptTemplates
+            
+            result = await process_document(
+                file_content=clean_text,
+                prompt_template=PromptTemplates.RESUME_ANALYSIS,
+                response_model=ResumeAnalysisResult,
+                processor_config=self.config,
+            )
             return result
 
         except Exception as e:
@@ -157,6 +160,7 @@ class ResumeAnalysisService(BaseAIService):
 
             # Return a default result with error information
             result = self._get_default_result(resume_text)
+            result.raw_data = result.raw_data or {}
             result.raw_data["error"] = str(e)
             return result
 
@@ -167,105 +171,12 @@ class ResumeAnalysisService(BaseAIService):
         text = re.sub(r"\s+", " ", text).strip()  # Normalize whitespace
         return text
 
-    def _create_analysis_prompt(self, resume_text: str) -> str:
-        """Create a structured prompt for resume analysis.
-
-        Args:
-            resume_text: The text content of the resume to analyze
-
-        Returns:
-            str: Formatted prompt for the AI model
-        """
-        return f"""
-Analyze the following resume and extract structured information.
-
-RESUME:
-{resume_text}
-
-Please provide a detailed analysis including:
-1. Skills: List all technical and soft skills mentioned
-2. Experience: Analyze work experience with company names, titles, and durations
-3. Education: Extract education history with degrees and institutions
-4. Summary: Generate a professional summary
-
-Format your response as a JSON object with the following structure:
-{{
-    "skills": ["skill1", "skill2", ...],
-    "experience": [
-        {{
-            "company": "Company Name",
-            "title": "Job Title",
-            "duration": "Start Date - End Date",
-            "description": "Job description"
-        }}
-    ],
-    "education": [
-        {{
-            "degree": "Degree Name",
-            "field": "Field of Study",
-            "institution": "School/University Name",
-            "year": graduation_year
-        }}
-    ],
-    "summary": "Professional summary"
-}}
-"""
-
-    async def _make_ai_request(self, prompt: str) -> Dict[str, Any]:
-        """Make an AI request with proper error handling."""
-        try:
-            request = AIRequest(
-                prompt=prompt,
-                model=self.config.get("model"),
-                max_tokens=self.config.get("max_tokens"),
-                temperature=self.config.get("temperature"),
-                stream=False,
-            )
-
-            response = await self.ai_client.generate(request)
-            return response.choices[0].message.content
-
-        except Exception as e:
-            logger.error(f"AI request failed: {str(e)}", exc_info=True)
-            raise AIError(
-                error_type=AIErrorType.API_ERROR,
-                message="Failed to process resume analysis request",
-                details={"error": str(e)},
-            )
-
-    def _parse_ai_response(self, response: str) -> ResumeAnalysisResult:
-        """Parse the AI response into a structured result."""
-        try:
-            # Parse the JSON response
-            data = json.loads(response)
-
-            # Convert to Pydantic models
-            experience = [Experience(**exp) for exp in data.get("experience", [])]
-
-            education = [Education(**edu) for edu in data.get("education", [])]
-
-            return ResumeAnalysisResult(
-                skills=data.get("skills", []),
-                experience=experience,
-                education=education,
-                summary=data.get("summary", ""),
-                raw_data={"response": data},
-            )
-
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to parse AI response: {str(e)}")
-            raise AIError(
-                error_type=AIErrorType.PARSE_ERROR,
-                message="Failed to parse AI response",
-                details={"error": str(e), "response": response[:500]},
-            )
-        except Exception as e:
-            logger.error(f"Error processing AI response: {str(e)}", exc_info=True)
-            raise AIError(
-                error_type=AIErrorType.PROCESSING_ERROR,
-                message="Error processing analysis results",
-                details={"error": str(e)},
-            )
+    # NOTE: The following methods are now handled by the generic document processor:
+    # - _create_analysis_prompt: Use PromptTemplates.RESUME_ANALYSIS
+    # - _make_ai_request: Handled by process_document function
+    # - _parse_ai_response: Handled by process_document function
+    
+    # These methods are kept for backward compatibility if needed elsewhere
 
     def _get_default_result(self, resume_text: str) -> ResumeAnalysisResult:
         """Return a default result when analysis cannot be performed."""

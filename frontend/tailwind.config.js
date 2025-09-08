@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: "media", // Use system preference, but dark theme is now universal
+  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -9,6 +9,35 @@ export default {
   ],
   prefix: "",
   theme: {
+    extend: {
+      colors: {
+        background: 'rgb(15, 23, 42)',
+        foreground: '#f8fafc',
+        card: 'rgb(30, 41, 59)',
+        'card-foreground': '#f8fafc',
+        primary: 'rgb(79, 70, 229)',
+        'primary-foreground': '#ffffff',
+        secondary: 'rgb(51, 65, 85)',
+        'secondary-foreground': '#f8fafc',
+        muted: 'rgb(30, 41, 59)',
+        'muted-foreground': 'rgb(148, 163, 184)',
+        accent: 'rgb(51, 65, 85)',
+        'accent-foreground': '#f8fafc',
+        destructive: 'rgb(239, 68, 68)',
+        'destructive-foreground': '#ffffff',
+        border: 'rgb(51, 65, 85)',
+        input: 'rgb(30, 41, 59)',
+        ring: 'rgb(79, 70, 229)',
+      },
+      borderRadius: {
+        lg: '0.75rem',
+        md: '0.5rem',
+        sm: '0.25rem',
+      },
+      boxShadow: {
+        card: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+      },
+    },
     container: {
       center: true,
       padding: "2rem",

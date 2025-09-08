@@ -1,0 +1,147 @@
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+const {auth, db, storage} = require('./firebase');
+
+/** @typedef {{ delete: () => Promise<[unknown]>, name: string }} StorageFile */
+
+/**
+ * @typedef {Object} CleanupRequest
+ * @property {{ uid: string }} data
+ * @property {{ uid: string, token: { admin?: boolean } }} [auth]
+ */
+
+/**
+ * Callable function to cleanup user data when a user account is deleted.
+ * This should be called from the client after user deletion.
+ */
+exports.cleanupUserData = functions.https.onCall(
+  {
+    region: 'us-central1',
+    timeoutSeconds: 60,
+    memory: '256MiB',
+  },
+  /** @type {CleanupRequest} */
+  async (request) => {
+    const {uid} = request.data;
+    const {auth} = request;
+
+    // Verify the request is authenticated and from the same user or admin
+    if (!auth || (auth.uid !== uid && !auth.token.admin)) {
+      throw new Error('Unauthorized: Cannot cleanup data for different user');
+    }
+
+    console.log(`Starting cleanup for user: ${uid}`);
+
+    try {
+      // 1. Delete the user's document from Firestore
+      const userDocRef = db.collection('users').doc(uid);
+      await db.recursiveDelete(userDocRef);
+      console.log(`Successfully deleted Firestore data for user: ${uid}`);
+
+      // 2. Delete user's files from Storage
+      const bucket = storage.bucket();
+      const [files] = await bucket.getFiles({
+        prefix: `users/${uid}/`
+      });
+
+      const deletePromises = files.map((file: StorageFile) => {
+        console.log(`Deleting file: ${file.name}`);
+        return file.delete();
+      });
+
+      await Promise.all(deletePromises);
+      console.log(`Successfully deleted ${files.length} storage files for user: ${uid}`);
+
+      return {
+        success: true,
+        message: `Successfully cleaned up data for user ${uid}`,
+        deletedFiles: files.length
+      };
+
+    } catch (error) {
+      console.error(`Error cleaning up user data for ${uid}:`, error);
+      throw error; // Re-throw to mark the function as failed
+    }
+  }
+);
+
+/**
+ * @typedef {Object} AdminRequest
+ * @property {string} method
+ * @property {{ uid: string, adminKey: string }} body
+ */
+
+/**
+ * @typedef {Object} Response
+ * @property {(code: number) => ({ json: (data: any) => void, send: (data: string) => void })} status
+ * @property {(data: string) => void} send
+ */
+
+/**
+ * HTTP endpoint for admin user cleanup operations
+ */
+exports.adminCleanupUser = functions.https.onRequest(
+  {
+    region: 'us-central1',
+    timeoutSeconds: 60,
+    memory: '256MiB',
+  },
+  /** @type {AdminRequest} */
+  /** @type {Response} */
+  async (request, response) => {
+    try {
+      // Only allow POST requests
+      if (request.method !== 'POST') {
+        response.status(405).json({error: 'Method not allowed'});
+        return;
+      }
+
+      const {uid, adminKey} = request.body;
+
+      // Verify admin key (in production, use proper authentication)
+      if (!adminKey || adminKey !== process.env.ADMIN_CLEANUP_KEY) {
+        response.status(401).json({error: 'Unauthorized'});
+        return;
+      }
+
+      if (!uid) {
+        response.status(400).json({error: 'Missing uid parameter'});
+        return;
+      }
+
+      console.log(`Admin cleanup requested for user: ${uid}`);
+
+      // 1. Delete the user's document from Firestore
+      const userDocRef = db.collection('users').doc(uid);
+      await db.recursiveDelete(userDocRef);
+      console.log(`Successfully deleted Firestore data for user: ${uid}`);
+
+      // 2. Delete user's files from Storage
+      const bucket = storage.bucket();
+      const [files] = await bucket.getFiles({
+        prefix: `users/${uid}/`
+      });
+
+      const deletePromises = files.map((file: StorageFile) => {
+        console.log(`Deleting file: ${file.name}`);
+        return file.delete();
+      });
+
+      await Promise.all(deletePromises);
+      console.log(`Successfully deleted ${files.length} storage files for user: ${uid}`);
+
+      response.status(200).json({
+        success: true,
+        message: `Successfully cleaned up data for user ${uid}`,
+        deletedFiles: files.length
+      });
+
+    } catch (error) {
+      console.error('Error in admin cleanup:', error);
+      response.status(500).json({
+        error: 'Internal server error',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
+  }
+);
