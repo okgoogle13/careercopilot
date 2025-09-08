@@ -75,14 +75,14 @@ setup_project() {
     info "🗄️  Setting up Firestore..."
     echo "Go to: https://console.firebase.google.com/project/$project_id/firestore"
     echo "1. Create database in production mode"
-    echo "2. Choose region: australia-southeast1"
+    echo "2. Choose region: us-central1"
 
     # Enable Storage
     info "📁 Setting up Storage..."
     echo "Go to: https://console.firebase.google.com/project/$project_id/storage"
     echo "1. Get started with Cloud Storage"
     echo "2. Start in production mode"
-    echo "3. Choose region: australia-southeast1"
+    echo "3. Choose region: us-central1"
 
     # Enable Hosting
     info "🌐 Setting up Hosting..."

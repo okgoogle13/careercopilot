@@ -36,6 +36,7 @@ from app.core.limiter import _rate_limit_exceeded_handler, authenticated_limiter
 from app.core.logging_config import setup_logging
 from app.core.monitoring import start_system_monitoring, stop_system_monitoring
 from app.core.monitoring_middleware import add_monitoring_middleware
+from app.monitoring.nlp_metrics_service import start_nlp_metrics_service, stop_nlp_metrics_service
 
 # Import API routers
 from fastapi import APIRouter
@@ -49,7 +50,7 @@ async def app_lifespan(app: FastAPI):
     # Startup
     await cache_lifespan(app).__aenter__()
     await start_system_monitoring()
-
+    start_nlp_metrics_service()
     # Initialize Firebase
     try:
         firebase_app = initialize_firebase()
@@ -93,65 +94,70 @@ async def app_lifespan(app: FastAPI):
         except Exception as e:
             print(f"RAG services initialization failed: {e}")
 
+    # Preload NLP models for optimized performance
+    if os.getenv("ENABLE_NLP_PRELOAD", "true").lower() == "true":
+        try:
+            from app.core.nlp_model_manager import preload_models
+
+            logger.info("Preloading NLP models for optimal performance...")
+            preload_models()
+            logger.info("NLP models preloaded successfully")
+        except ImportError:
+            logger.warning(
+                "spaCy not installed. NLP model preloading skipped. "
+                "To enable resume parsing optimization, install with: pip install spacy && "
+                "python -m spacy download en_core_web_sm"
+            )
+        except Exception as e:
+            logger.error(f"NLP model preloading failed: {e}")
+
+    # Add monitoring middleware
+    add_monitoring_middleware(app)
+
+    # Add cache middleware
+    add_cache_middleware(app)
+
+    # Add rate limiting middleware
+    app.state.limiter = limiter
+
+    # Add CORS middleware
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+
+    # Add exception handlers
+    app.add_exception_handler(FirebaseAuthError, firebase_auth_exception_handler)
+
+    # Add rate limiting exception handler
+    app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+    # Add request logging middleware
+    @app.middleware("http")
+    async def log_requests(request: Request, call_next):
+        response = await call_next(request)
+        request_id = request.headers.get("X-Request-ID", "none")
+        logger.info(
+            f"Request: {request.method} {request.url.path} - "
+            f"Status: {response.status_code} - "
+            f"Request ID: {request_id}"
+        )
+        return response
+
     yield
 
     # Shutdown
-    await stop_system_monitoring()
+    await cache_lifespan(app).__aexit__(None, None, None)
+    stop_system_monitoring()
+    stop_nlp_metrics_service()
 
 
 app = FastAPI(title="Careercopilot API", lifespan=app_lifespan)
 
-# Add CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with specific origins
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-# Add exception handlers
-@app.exception_handler(FirebaseAuthError)
-async def firebase_auth_exception_handler(request: Request, exc: FirebaseAuthError):
-    return JSONResponse(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        content={"detail": str(exc)},
-    )
-
-
-# Add rate limiting exception handler
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-origins = [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "http://localhost:8080",
-]
-
-# Add the frontend URL from environment variables if it exists
-frontend_url = os.environ.get("FRONTEND_URL")
-if frontend_url:
-    origins.append(frontend_url)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-app.state.limiter = limiter
-app.state.authenticated_limiter = authenticated_limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-# Add cache middleware
-add_cache_middleware(app)
-
-# Add monitoring middleware
-add_monitoring_middleware(app)
-
-
+# Include API routers
 api_router = APIRouter()
 
 # Authentication & User Management
@@ -225,6 +231,65 @@ if os.getenv("ENABLE_RAG", "true").lower() == "true":
 
 @app.get("/health", tags=["Health"])
 async def health_check():
+    """Health check endpoint"""
+    return {"status": "healthy"}
+
+
+@app.get("/health/cache")
+async def cache_health():
+    """Cache health check"""
+    return await cache_health_check()
+
+
+# Metrics endpoint (for Prometheus)
+if os.getenv("ENABLE_METRICS", "false").lower() == "true":
+    from prometheus_client import CONTENT_TYPE_LATEST, generate_latest
+
+    @app.get("/metrics")
+    async def metrics():
+        """Prometheus metrics endpoint"""
+        import prometheus_client
+        from prometheus_client import multiprocess
+
+        registry = prometheus_client.CollectorRegistry()
+        multiprocess.MultiProcessCollector(registry)
+
+        data = generate_latest(registry)
+        return Response(
+            content=data, media_type=CONTENT_TYPE_LATEST, headers={"Content-Length": str(len(data))}
+        )
+
+
+@app.get("/nlp/health", tags=["Health"])
+async def nlp_health():
+    """Health check for NLP models"""
+    if os.getenv("ENABLE_NLP_PRELOAD", "true").lower() != "true":
+        return {"status": "disabled", "message": "NLP preloading is disabled"}
+
+    try:
+        from app.core.nlp_model_manager import health_check_models, nlp_model_manager
+
+        health_status = health_check_models()
+        memory_usage = nlp_model_manager.get_memory_usage()
+        loaded_models = nlp_model_manager.list_loaded_models()
+
+        return {
+            "health": health_status,
+            "memory_usage": memory_usage,
+            "loaded_models": loaded_models,
+        }
+
+    except ImportError:
+        return {
+            "status": "error",
+            "message": "spaCy not installed. Install with: pip install spacy && python -m spacy download en_core_web_sm",
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+
+@app.get("/health", tags=["Health"])
+async def health_check():
     """Enhanced health check with database and service status"""
     from app.core.database import check_database_health
 
@@ -233,6 +298,18 @@ async def health_check():
         cache_status = cache_health_check()
         genkit_health = check_genkit_health()
 
+        # Check NLP models health if enabled
+        nlp_health = {"status": "disabled"}
+        if os.getenv("ENABLE_NLP_PRELOAD", "true").lower() == "true":
+            try:
+                from app.core.nlp_model_manager import health_check_models
+
+                nlp_health = health_check_models()
+            except ImportError:
+                nlp_health = {"status": "not_installed", "message": "spaCy not installed"}
+            except Exception as e:
+                nlp_health = {"status": "error", "error": str(e)}
+
         return {
             "status": "healthy",
             "version": "2.0.0",
@@ -240,15 +317,32 @@ async def health_check():
             "database": db_health,
             "cache": cache_status,
             "genkit": genkit_health,
+            "nlp_models": nlp_health,
             "services": {"api": "healthy", "ai_client": "healthy", "cache": "healthy"},
         }
     except Exception as e:
         return {"status": "unhealthy", "error": str(e), "version": "2.0.0"}
 
+    try:
+        from app.core.nlp_model_manager import health_check_models, nlp_model_manager
 
-@app.get("/cache/health", tags=["Health"])
-async def cache_health():
-    return await cache_health_check()
+        health_status = health_check_models()
+        memory_usage = nlp_model_manager.get_memory_usage()
+        loaded_models = nlp_model_manager.list_loaded_models()
+
+        return {
+            "health": health_status,
+            "memory_usage": memory_usage,
+            "loaded_models": loaded_models,
+        }
+
+    except ImportError:
+        return {
+            "status": "error",
+            "message": "spaCy not installed. Install with: pip install spacy && python -m spacy download en_core_web_sm",
+        }
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
 
 
 if __name__ == "__main__":

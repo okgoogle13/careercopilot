@@ -1,5 +1,8 @@
-// Export all functions
-export * from './example';
+// Import all functions
+const { cleanupUserData, adminCleanupUser } = require('./auth.functions');
 
-// Import and export other function files here
-// export * from './otherFunctions';
+// Export all functions
+module.exports = {
+  cleanupUserData,
+  adminCleanupUser
+};

@@ -12,6 +12,7 @@ from app.ai.rag_integration import rag_integration
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.auth import get_current_user
 from app.core.config import settings
+from app.core.file_upload_decorators import require_valid_document_upload
 from app.models.database import User
 from fastapi import APIRouter, Depends, File, HTTPException, UploadFile, status
 from pydantic import BaseModel, Field
@@ -59,6 +60,10 @@ class DocumentDeleteRequest(BaseModel):
     Supported formats: PDF, TXT, Markdown
     """,
 )
+@require_valid_document_upload(
+    allowed_types={'.pdf', '.txt', '.md'},
+    max_size_mb=getattr(settings, 'max_document_size_mb', 10)
+)
 async def upload_document(
     file: UploadFile = File(...), current_user: User = Depends(get_current_user)
 ):
@@ -68,30 +73,11 @@ async def upload_document(
             status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="RAG functionality is not enabled"
         )
 
-    # Validate file type
-    content_type = file.content_type or "application/octet-stream"
-    if content_type not in settings.allowed_document_types:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Unsupported file type: {content_type}"
-        )
-
-    # Validate file size
-    try:
-        file.file.seek(0, 2)  # Seek to end of file
-        file_size = file.file.tell()
-        file.file.seek(0)  # Reset file pointer
-
-        max_size = settings.max_document_size_mb * 1024 * 1024
-        if file_size > max_size:
-            raise HTTPException(
-                status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
-                detail=f"File too large. Max size: {settings.max_document_size_mb}MB",
-            )
-    except Exception as e:
-        logger.error(f"Error checking file size: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail="Failed to process file"
-        )
+    # File validation is now handled by the decorator
+    # The following validation code has been removed:
+    # - File type validation
+    # - File size validation
+    # - Filename validation
 
     try:
         # Save the file temporarily

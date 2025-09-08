@@ -71,11 +71,16 @@ else
 fi
 
 echo -e "${BLUE}5. Testing Firebase configuration...${NC}"
-if firebase use --add 2>/dev/null; then
-    echo -e "${GREEN}✅ Firebase configuration is valid${NC}"
+if command -v firebase >/dev/null 2>&1; then
+    if firebase projects:list --json >/dev/null 2>&1; then
+        echo -e "${GREEN}✅ Firebase CLI installed and authenticated${NC}"
+    else
+        echo -e "${YELLOW}⚠️  Firebase CLI installed but not authenticated (skipping interactive setup)${NC}"
+        echo -e "${YELLOW}    Run: firebase login && firebase use --add${NC}"
+    fi
 else
-    echo -e "${YELLOW}⚠️  Firebase configuration needs setup${NC}"
-    echo -e "${YELLOW}    Run: firebase login && firebase use --add${NC}"
+    echo -e "${YELLOW}⚠️  Firebase CLI not found (skipping Firebase config check)${NC}"
+    echo -e "${YELLOW}    Install: npm i -g firebase-tools${NC}"
 fi
 
 echo -e "${BLUE}6. Testing deployment script permissions...${NC}"

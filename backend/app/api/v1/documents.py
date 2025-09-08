@@ -1,11 +1,13 @@
 import io
 import json
+import logging
 from pathlib import Path
 from typing import Any, Dict, List, Literal, Optional
 
 import docx
 import pdfplumber
 from app.core.dependencies import get_current_user_with_state, get_user_document_from_firestore
+from app.core.file_upload_decorators import require_valid_resume_upload, require_valid_document_upload
 from app.core.limiter import authenticated_limiter
 from fastapi import APIRouter, Depends, File, HTTPException, Request, UploadFile, status
 from google.api_core.exceptions import GoogleAPICallError
@@ -26,6 +28,7 @@ HTML = None
 # extract_resume_entities  # Temporarily disabled for deployment
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
 
 
 class Document(BaseModel):
@@ -69,14 +72,48 @@ async def process_and_upload_file(file: UploadFile, uid: str, doc_type: str):
 
 @router.post("/upload")
 @authenticated_limiter.limit("20/minute")  # Allow more uploads but still rate limit
+@require_valid_document_upload(max_files=5)  # Allow up to 5 documents, validate each
 async def upload_and_parse_files(
     request: Request,
     files: List[UploadFile] = File(...),
     user: dict = Depends(get_current_user_with_state),
     doc_type: str = "resume",
 ):
-    # This is a placeholder for the actual implementation
-    pass
+    """Upload and parse multiple documents with validation.
+    
+    This endpoint now uses the file upload validation decorator to:
+    - Validate file types and extensions
+    - Check file sizes
+    - Ensure filenames are safe
+    - Limit the number of files
+    """
+    # Files are already validated by the decorator
+    uploaded_documents = []
+    
+    for file in files:
+        try:
+            # Process each validated file
+            result = await process_and_upload_file(file, user["uid"], doc_type)
+            uploaded_documents.append({
+                "filename": file.filename,
+                "status": "success",
+                "result": result
+            })
+        except Exception as e:
+            logger.error(f"Failed to process file {file.filename}: {str(e)}")
+            uploaded_documents.append({
+                "filename": file.filename,
+                "status": "error",
+                "error": str(e)
+            })
+    
+    return {
+        "message": f"Processed {len(files)} files",
+        "results": uploaded_documents,
+        "total_files": len(files),
+        "successful": len([r for r in uploaded_documents if r["status"] == "success"]),
+        "failed": len([r for r in uploaded_documents if r["status"] == "error"])
+    }
 
 
 @router.get("")

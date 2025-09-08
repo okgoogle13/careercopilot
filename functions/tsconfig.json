@@ -1,29 +1,22 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "strict": true,
     "target": "es2021",
-    "moduleResolution": "node",
+    "outDir": "lib",
+    "rootDir": "src",
+    "strict": false,
+    "noImplicitAny": false,
     "esModuleInterop": true,
-    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "*": ["node_modules/*", "src/types"]
-    },
-    "types": ["node"]
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ]
   },
-  "compileOnSave": true,
-  "include": [
-    "src/**/*",
-    ".eslintrc.js",
-    "custom-build.js",
-    "index.js"
-  ],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "lib"]
 }

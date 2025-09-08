@@ -38,11 +38,18 @@ beautifulsoup4
 jinja2
 weasyprint
 
+# NLP processing (optional - for resume parsing optimization)
+spacy
+
 # Vector search and embeddings - simplified
 google-cloud-aiplatform
 numpy
 # h5py  # Temporarily disabled
 faiss-cpu
+
+# Monitoring and Metrics
+prometheus-client
+psutil
 
 # System utilities
 psutil

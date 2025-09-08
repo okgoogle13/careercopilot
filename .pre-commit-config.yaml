@@ -30,30 +30,35 @@ repos:
         files: ^backend/
         exclude: ^backend/(migrations|__pycache__|\.venv)/
 
-  # Frontend: ESLint for TypeScript/JavaScript - Temporarily disabled
-  # - repo: https://github.com/pre-commit/mirrors-eslint
-  #   rev: v9.0.0
-  #   hooks:
-  #     - id: eslint
-  #       files: ^frontend/src/.*\.(ts|tsx|js|jsx)$
-  #       exclude: ^frontend/(node_modules|dist|build)/
-  #       additional_dependencies:
-  #         - 'eslint@^9.0.0'
-  #         - '@typescript-eslint/parser@^7.0.0'
-  #         - '@typescript-eslint/eslint-plugin@^7.0.0'
-  #         - 'eslint-config-prettier@^9.0.0'
-  #       args:
-  #         - --fix
-  #         - --max-warnings=0
+  # Frontend: ESLint for TypeScript/JavaScript
+  - repo: local
+    hooks:
+      - id: eslint-frontend
+        name: ESLint (Frontend)
+        entry: bash -c 'cd frontend && yarn lint:fix'
+        language: system
+        files: ^frontend/.*\.(ts|tsx|js|jsx)$
+        exclude: ^frontend/(node_modules|dist|build)/
+        pass_filenames: false
 
-  # Frontend: Prettier for code formatting - Temporarily disabled
-  # - repo: https://github.com/pre-commit/mirrors-prettier
-  #   rev: v3.0.3
-  #   hooks:
-  #     - id: prettier
-  #       files: ^frontend/src/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
-  #       exclude: ^frontend/(node_modules|dist|build)/
-  #       args: [--write, --ignore-unknown]
+      - id: eslint-functions
+        name: ESLint (Functions)
+        entry: bash -c 'cd functions && npm run lint:fix'
+        language: system
+        files: ^functions/.*\.(ts|js)$
+        exclude: ^functions/(node_modules|lib)/
+        pass_filenames: false
+
+  # Frontend: Prettier for code formatting
+  - repo: local
+    hooks:
+      - id: prettier-frontend
+        name: Prettier (Frontend)
+        entry: bash -c 'cd frontend && yarn format'
+        language: system
+        files: ^frontend/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
+        exclude: ^frontend/(node_modules|dist|build)/
+        pass_filenames: false
 
   # General: Remove trailing whitespace and basic checks
   - repo: https://github.com/pre-commit/pre-commit-hooks

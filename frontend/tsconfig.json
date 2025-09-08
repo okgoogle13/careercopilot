@@ -3,7 +3,7 @@
     "target": "ES2020",
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "moduleResolution": "node16",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -33,6 +33,11 @@
     "node_modules",
     "dist",
     "build",
-    "**/node_modules"
+    "**/node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/__tests__/**",
+    "__mocks__/**",
+    "src/setupTests.ts"
   ]
 }

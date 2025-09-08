@@ -3,24 +3,27 @@
   "packageManager": "yarn@4.9.1",
   "dependencies": {
     "@google-cloud/secret-manager": "^6.1.0",
-    "firebase-admin": "^13.5.0",
-    "firebase-functions": "^6.4.0"
+    "firebase-admin": "^13.0.1",
+    "firebase-functions": "^6.1.1"
   },
   "devDependencies": {
-    "@types/node": "18.19.2",
-    "@typescript-eslint/eslint-plugin": "5.13.0",
-    "@typescript-eslint/parser": "5.13.0",
-    "eslint": "8.10.0",
-    "firebase-tools": "^14.15.2",
-    "typescript": "4.9.5"
+    "@types/node": "20",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^9.35.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.27.5",
+    "firebase-functions-test": "^3.4.1",
+    "firebase-tools": "^13.27.0",
+    "typescript": "^5.0.0"
   },
   "scripts": {
     "serve": "firebase emulators:start --only functions",
     "shell": "firebase functions:shell",
     "start": "yarn shell",
     "deploy": "yarn build && npx firebase deploy --only functions --force",
-    "build": "npx tsc",
-    "build:watch": "npx tsc --watch",
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "tsc -p tsconfig.build.json --watch",
     "lint": "eslint --ext .js,.ts . --max-warnings 10",
     "lint:fix": "eslint --ext .js,.ts --fix . --max-warnings 50",
     "logs": "firebase functions:log",
@@ -28,7 +31,7 @@
   },
   "version": "1.0.0",
   "description": "This directory contains the Cloud Functions for Firebase that power the CareerCopilot backend services.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib"
   },
