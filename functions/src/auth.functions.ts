@@ -1,8 +1,11 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
-const {auth, db, storage} = require('./firebase');
+import * as functions from 'firebase-functions';
+import {db, storage} from './firebase';
 
-/** @typedef {{ delete: () => Promise<[unknown]>, name: string }} StorageFile */
+/**
+ * @typedef {Object} StorageFile
+ * @property {() => Promise<[unknown]>} delete
+ * @property {string} name
+ */
 
 /**
  * @typedef {Object} CleanupRequest
@@ -14,7 +17,7 @@ const {auth, db, storage} = require('./firebase');
  * Callable function to cleanup user data when a user account is deleted.
  * This should be called from the client after user deletion.
  */
-exports.cleanupUserData = functions.https.onCall(
+export const cleanupUserData = functions.https.onCall(
   {
     region: 'us-central1',
     timeoutSeconds: 60,
@@ -44,7 +47,7 @@ exports.cleanupUserData = functions.https.onCall(
         prefix: `users/${uid}/`
       });
 
-      const deletePromises = files.map((file: StorageFile) => {
+      const deletePromises = files.map((/** @type {StorageFile} */ file) => {
         console.log(`Deleting file: ${file.name}`);
         return file.delete();
       });
@@ -68,6 +71,8 @@ exports.cleanupUserData = functions.https.onCall(
 /**
  * @typedef {Object} AdminRequest
  * @property {string} method
+ * @property {Object} headers
+ * @property {string} [headers.authorization]
  * @property {{ uid: string, adminKey: string }} body
  */
 
@@ -80,11 +85,12 @@ exports.cleanupUserData = functions.https.onCall(
 /**
  * HTTP endpoint for admin user cleanup operations
  */
-exports.adminCleanupUser = functions.https.onRequest(
+export const adminCleanupUser = functions.https.onRequest(
   {
     region: 'us-central1',
     timeoutSeconds: 60,
     memory: '256MiB',
+    invoker: 'public', // Allow unauthenticated requests (we'll handle auth in the function)
   },
   /** @type {AdminRequest} */
   /** @type {Response} */
@@ -93,6 +99,22 @@ exports.adminCleanupUser = functions.https.onRequest(
       // Only allow POST requests
       if (request.method !== 'POST') {
         response.status(405).json({error: 'Method not allowed'});
+        return;
+      }
+
+      // Check for Authorization header
+      const authHeader = request.headers.authorization;
+      if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        response.status(401).json({error: 'Unauthorized: Missing or invalid Authorization header'});
+        return;
+      }
+
+      const token = authHeader.split('Bearer ')[1];
+      // In a real implementation, verify the token here
+      // For now, we'll just check if it matches the expected admin key
+      const expectedAdminKey = process.env.ADMIN_CLEANUP_KEY || 'default-admin-key';
+      if (token !== expectedAdminKey) {
+        response.status(403).json({error: 'Forbidden: Invalid admin key'});
         return;
       }
 
@@ -122,7 +144,7 @@ exports.adminCleanupUser = functions.https.onRequest(
         prefix: `users/${uid}/`
       });
 
-      const deletePromises = files.map((file: StorageFile) => {
+      const deletePromises = files.map((/** @type {StorageFile} */ file) => {
         console.log(`Deleting file: ${file.name}`);
         return file.delete();
       });
