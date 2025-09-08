@@ -5,7 +5,8 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "frontend"
+    "frontend",
+    "functions"
   ],
   "packageManager": "yarn@4.9.1",
   "engines": {
@@ -21,12 +22,14 @@
     "lint": "yarn workspace careercopilot-frontend run lint && cd functions && npm run lint",
     "lint:ci": "yarn workspace careercopilot-frontend run lint:ci && cd functions && npm run lint",
     "lint:fix": "yarn workspace careercopilot-frontend run lint:fix && cd functions && npm run lint:fix",
+    "lint:autofix": "./scripts/lint-autofix.sh",
     "test": "yarn workspace careercopilot-frontend run test",
     "clean": "yarn workspace careercopilot-frontend run clean && cd functions && npm run clean",
     "start": "yarn workspace careercopilot-frontend run preview"
   },
   "devDependencies": {
     "@playwright/test": "1.55.0",
+    "@types/node": "20",
     "knip": "^5.63.0",
     "typescript": "^5.9.2"
   },

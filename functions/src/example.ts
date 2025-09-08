@@ -1,4 +1,4 @@
-import {logger} from 'firebase-functions';
+import {logger} from 'firebase-functions/v2';
 import {onRequest} from 'firebase-functions/v2/https';
 import {setGlobalOptions} from 'firebase-functions/v2/options';
 import {defineString, defineSecret} from 'firebase-functions/params';

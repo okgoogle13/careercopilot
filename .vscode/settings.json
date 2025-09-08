@@ -93,7 +93,10 @@
     "typescript",
     "typescriptreact"
   ],
-
+  "eslint.workingDirectories": [
+    "./frontend",
+    "./functions"
+  ],
   "eslint.packageManager": "npm",
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
