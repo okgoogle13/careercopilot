@@ -101,7 +101,7 @@ def test_without_optimization():
             duration = (end_time - start_time) * 1000
             times.append(duration)
 
-            print(f"  Run {i+1}: {duration:.2f}ms ({tokens} tokens, {len(entities)} entities)")
+            print(f"  Run {i + 1}: {duration:.2f}ms ({tokens} tokens, {len(entities)} entities)")
 
         except ImportError:
             print(
@@ -150,7 +150,7 @@ def test_with_optimization():
             times.append(duration)
 
             print(
-                f"  Run {i+1}: {duration:.2f}ms ({result.word_count} words, {len(result.skills)} skills)"
+                f"  Run {i + 1}: {duration:.2f}ms ({result.word_count} words, {len(result.skills)} skills)"
             )
 
         avg_time = sum(times) / len(times)

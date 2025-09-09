@@ -2,16 +2,7 @@
 
 import * as React from "react";
 import { cn } from "../utils";
-
-const FormItemContext = React.createContext<{ id: string } | null>(null);
-
-export const useFormItem = () => {
-  const context = React.useContext(FormItemContext);
-  if (!context) {
-    throw new Error("useFormItem must be used within a <FormItem>");
-  }
-  return context;
-};
+import { FormItemContext } from "./form-item-context";
 
 const FormItem = React.forwardRef<
   HTMLDivElement,

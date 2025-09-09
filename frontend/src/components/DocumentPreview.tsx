@@ -1,49 +1,551 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { ArrowLeft, Download, Share2, Edit3, ZoomIn, ZoomOut, RotateCcw, Printer } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { ScrollArea } from "./ui/scroll-area";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { Textarea } from "./ui/textarea";
+import { Separator } from "./ui/separator";
+import { Progress } from "./ui/progress";
+import { Input } from "./ui/input";
+import {
+  ArrowLeft, Download, Share2, Edit3, ZoomIn, ZoomOut, RotateCcw, Printer,
+  MessageSquare, Users, Clock, Check, X, MoreVertical, Copy, History, GitBranch,
+  FileText, Star, Eye, Lightbulb, AlertTriangle, CheckCircle, XCircle, RefreshCw,
+  Settings, Filter, ChevronDown, ChevronUp, Bookmark, Play, Pause
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
-interface DocumentPreviewProps {
-  onBack: () => void;
-  onEdit: () => void;
-  documentType: 'resume' | 'cover-letter';
-  templateName: string;
+type DocumentType = 'resume' | 'cover-letter' | 'portfolio' | 'selection-criteria' | 'other';
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  role: 'owner' | 'editor' | 'viewer';
+  lastActive?: string;
+}
+
+interface Comment {
+  id: string;
+  userId: string;
+  content: string;
+  createdAt: string;
+  resolved: boolean;
+  position?: { x: number; y: number };
+  replies?: Array<{
+    id: string;
+    userId: string;
+    content: string;
+    createdAt: string;
+  }>;
+}
+
+interface Version {
+  id: string;
+  version: string;
+  timestamp: string;
+  user: Pick<User, 'id' | 'name' | 'avatar'>;
+  changes: string[];
+}
+
+interface ATSIssue {
+  id: string;
+  type: 'keyword' | 'format' | 'length' | 'contact' | 'other';
+  message: string;
+  severity: 'low' | 'medium' | 'high';
+  location?: string;
+  suggestion?: string;
+  autoFixable: boolean;
 }
 
 interface DocumentData {
+  id: string;
   title: string;
-  type: 'resume' | 'cover-letter';
+  type: DocumentType;
   lastModified: string;
   pages: number;
   templateName: string;
+  wordCount: number;
+  characterCount: number;
+  atsScore: number;
+  atsIssues: ATSIssue[];
+  sharedWith: User[];
+  versions: Version[];
+  comments: Comment[];
+  content: string;
+  isShared: boolean;
+  isTemplate: boolean;
+  tags: string[];
+  size: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
+interface DocumentPreviewProps {
+  documentId: string;
+  onBack: () => void;
+  onEdit: () => void;
+  documentType: DocumentType;
+  templateName: string;
+  onExport?: (format: string) => void;
+  onShare?: (documentId: string) => void;
+  onCommentAdd?: (comment: Omit<Comment, 'id' | 'createdAt' | 'resolved' | 'replies'>) => void;
+  onCommentResolve?: (commentId: string) => void;
+  onCommentReply?: (commentId: string, content: string) => void;
+  onVersionRestore?: (versionId: string) => void;
+}
+
+// Mock data
 const mockDocument: DocumentData = {
+  id: 'doc_123',
   title: "Nishant Dougall - Community Support Worker Resume",
   type: "resume",
-  lastModified: "2 hours ago",
+  lastModified: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
   pages: 1,
-  templateName: "Modern Minimal"
+  templateName: "Modern Minimal",
+  wordCount: 478,
+  characterCount: 2875,
+  atsScore: 87,
+  isShared: true,
+  isTemplate: false,
+  tags: ['resume', 'ats-optimized', 'professional'],
+  size: 24576, // bytes
+  createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+  updatedAt: new Date().toISOString(),
+  content: "...",
+  atsIssues: [
+    {
+      id: 'issue_1',
+      type: 'keyword',
+      message: 'Missing common industry keywords',
+      severity: 'medium',
+      suggestion: 'Add keywords: trauma-informed, crisis intervention, case management',
+      autoFixable: true
+    },
+    {
+      id: 'issue_2',
+      type: 'length',
+      message: 'Resume is longer than recommended 2 pages',
+      severity: 'low',
+      suggestion: 'Consider condensing to 1-2 pages',
+      autoFixable: false
+    }
+  ],
+  sharedWith: [
+    {
+      id: 'user_1',
+      name: 'Alex Johnson',
+      email: 'alex@example.com',
+      role: 'editor',
+      lastActive: '2 minutes ago',
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex'
+    },
+    {
+      id: 'user_2',
+      name: 'Taylor Smith',
+      email: 'taylor@example.com',
+      role: 'viewer',
+      lastActive: '1 hour ago',
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Taylor'
+    }
+  ],
+  versions: [
+    {
+      id: 'v3',
+      version: 'v3',
+      timestamp: new Date().toISOString(),
+      user: { id: 'user_1', name: 'Alex Johnson', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Alex' },
+      changes: ['Updated work experience', 'Fixed typos']
+    },
+    {
+      id: 'v2',
+      version: 'v2',
+      timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+      user: { id: 'user_3', name: 'Nishant Dougall', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Nishant' },
+      changes: ['Added skills section', 'Updated contact information']
+    }
+  ],
+  comments: [
+    {
+      id: 'comment_1',
+      userId: 'user_1',
+      content: 'Consider adding more metrics to quantify your achievements',
+      createdAt: new Date(Date.now() - 3600000).toISOString(),
+      resolved: false,
+      position: { x: 120, y: 450 },
+      replies: [
+        {
+          id: 'reply_1',
+          userId: 'user_3',
+          content: 'Good suggestion! I\'ll add some metrics.',
+          createdAt: new Date(Date.now() - 1800000).toISOString()
+        }
+      ]
+    }
+  ]
 };
 
-export function DocumentPreview({ onBack, onEdit, documentType, templateName }: DocumentPreviewProps) {
+export function DocumentPreview({
+  documentId,
+  onBack,
+  onEdit,
+  documentType,
+  templateName,
+  onExport = () => {},
+  onShare = () => {},
+  onCommentAdd = () => {},
+  onCommentResolve = () => {},
+  onCommentReply = () => {},
+  onVersionRestore = () => {}
+}: DocumentPreviewProps) {
+  // State management
   const [zoomLevel, setZoomLevel] = useState(100);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeTab, setActiveTab] = useState('preview');
+  const [isCommenting, setIsCommenting] = useState(false);
+  const [commentContent, setCommentContent] = useState('');
+  const [activeComment, setActiveComment] = useState<string | null>(null);
+  const [replyContent, setReplyContent] = useState('');
+  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [shareEmail, setShareEmail] = useState('');
+  const [shareRole, setShareRole] = useState<'editor' | 'viewer'>('viewer');
+  const [selectedVersion, setSelectedVersion] = useState<string | null>(null);
+  const [isComparing, setIsComparing] = useState(false);
+  const [compareVersion, setCompareVersion] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Enhanced features
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showAIAssistant, setShowAIAssistant] = useState(false);
+  const [aiSuggestions, setAISuggestions] = useState<string[]>([]);
+  const [readingMode, setReadingMode] = useState(false);
+  const [showAnalytics, setShowAnalytics] = useState(false);
+  const [trackingTime, setTrackingTime] = useState(0);
+  const [isTracking, setIsTracking] = useState(false);
+  const [annotations, setAnnotations] = useState<Array<{id: string, text: string, position: {x: number, y: number}}>>([]);
+  const [selectedText, setSelectedText] = useState<string>('');
+  const [showTextAnalysis, setShowTextAnalysis] = useState(false);
+
+  // Refs
+  const documentContainerRef = useRef<HTMLDivElement>(null);
+  const commentInputRef = useRef<HTMLTextAreaElement>(null);
+  const replyInputRef = useRef<HTMLTextAreaElement>(null);
+
+  // Document data - in a real app, this would come from an API
+  const [document, setDocument] = useState<DocumentData>(mockDocument);
+
+  // Time tracking effect
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isTracking) {
+      interval = setInterval(() => {
+        setTrackingTime(prev => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isTracking]);
+
+  // Auto-start tracking when component mounts
+  useEffect(() => {
+    setIsTracking(true);
+    return () => setIsTracking(false);
+  }, []);
+
+  // Handle zoom controls
   const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 25, 200));
   const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 25, 50));
   const handleResetZoom = () => setZoomLevel(100);
+  const handleFitToWidth = () => setZoomLevel(85);
+
+  // Enhanced view controls
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+    if (!isFullscreen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  };
+
+  const toggleReadingMode = () => {
+    setReadingMode(!readingMode);
+    if (!readingMode) {
+      setZoomLevel(120);
+    } else {
+      setZoomLevel(100);
+    }
+  };
+
+  // AI Assistant functions
+  const generateAISuggestions = () => {
+    setShowAIAssistant(true);
+    // Simulate AI suggestions
+    const suggestions = [
+      "Consider adding quantifiable achievements to your work experience",
+      "Your skills section could benefit from industry-specific keywords",
+      "The summary could be more impactful with a stronger opening statement",
+      "Consider adding relevant certifications to strengthen your profile"
+    ];
+    setAISuggestions(suggestions);
+  };
+
+  // Text analysis functions
+  const analyzeSelectedText = (text: string) => {
+    setSelectedText(text);
+    setShowTextAnalysis(true);
+  };
+
+  // Format time display
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  };
+
+  // Handle document navigation
+  const handlePreviousPage = () => setCurrentPage(prev => Math.max(1, prev - 1));
+  const handleNextPage = () => setCurrentPage(prev => Math.min(document.pages, prev + 1));
+
+  // Handle comments
+  const handleAddComment = () => {
+    if (commentContent.trim()) {
+      onCommentAdd({
+        userId: 'current_user_id', // In a real app, this would come from auth context
+        content: commentContent,
+        position: { x: 100, y: 100 } // In a real app, this would be the click position
+      });
+      setCommentContent('');
+      setIsCommenting(false);
+    }
+  };
+
+  const handleResolveComment = (commentId: string) => {
+    onCommentResolve(commentId);
+  };
+
+  const handleAddReply = (commentId: string) => {
+    if (replyContent.trim()) {
+      onCommentReply(commentId, replyContent);
+      setReplyContent('');
+      setActiveComment(null);
+    }
+  };
+
+  // Handle sharing
+  const handleShareDocument = () => {
+    if (shareEmail) {
+      // In a real app, this would call an API to share the document
+      setDocument(prev => ({
+        ...prev,
+        sharedWith: [
+          ...prev.sharedWith,
+          {
+            id: `user_${Date.now()}`,
+            name: shareEmail.split('@')[0],
+            email: shareEmail,
+            role: shareRole,
+            lastActive: 'Just now'
+          }
+        ]
+      }));
+      setShareEmail('');
+      setShowShareDialog(false);
+    }
+  };
+
+  // Handle version control
+  const handleRestoreVersion = (versionId: string) => {
+    if (window.confirm('Are you sure you want to restore this version? Any unsaved changes will be lost.')) {
+      onVersionRestore(versionId);
+      setSelectedVersion(null);
+    }
+  };
+
+  // Handle export
+  const handleExport = (format: string) => {
+    onExport(format);
+    // In a real app, this would trigger a download or open a save dialog
+    console.log(`Exporting document as ${format}`);
+  };
+
+  // Format file size
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  };
+
+  // Format date
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(date);
+  };
+
+  // Get user initials
+  const getUserInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(part => part[0])
+      .join('')
+      .toUpperCase();
+  };
+
+  // Get ATS score color
+  const getAtsScoreColor = (score: number) => {
+    if (score >= 80) return 'text-green-500';
+    if (score >= 60) return 'text-yellow-500';
+    return 'text-red-500';
+  };
+
+  // Get ATS score label
+  const getAtsScoreLabel = (score: number) => {
+    if (score >= 90) return 'Excellent';
+    if (score >= 80) return 'Very Good';
+    if (score >= 70) return 'Good';
+    if (score >= 60) return 'Fair';
+    return 'Needs Improvement';
+  };
+
+  // Get severity color
+  const getSeverityColor = (severity: 'low' | 'medium' | 'high') => {
+    return {
+      low: 'bg-blue-100 text-blue-800',
+      medium: 'bg-yellow-100 text-yellow-800',
+      high: 'bg-red-100 text-red-800'
+    }[severity];
+  };
+
+  // Get file icon based on export format
+  const getFileIcon = (format: string) => {
+    const icons: Record<string, React.ReactNode> = {
+      pdf: <FileTextIcon className="w-4 h-4" />,
+      docx: <FileType className="w-4 h-4" />,
+      txt: <FileCode className="w-4 h-4" />,
+      jpg: <FileImage className="w-4 h-4" />,
+      png: <FileImage className="w-4 h-4" />,
+      zip: <FileArchive className="w-4 h-4" />
+    };
+    return icons[format] || <FileTextIcon className="w-4 h-4" />;
+  };
 
   return (
-    <div className="flex-1 p-8">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="text-muted-foreground hover:text-foreground"
-          >
+    <TooltipProvider>
+      <div className={cn("flex flex-col bg-gray-50 transition-all duration-300",
+        isFullscreen ? "h-screen fixed inset-0 z-50" : "h-screen")}>
+        {/* Enhanced Header */}
+        <header className="bg-white border-b border-gray-200 px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={onBack}
+                className="text-gray-500 hover:bg-gray-100 rounded-full"
+              >
+                <ArrowLeft className="h-5 w-5" />
+                <span className="sr-only">Back</span>
+              </Button>
+              <div>
+                <h1 className="text-lg font-semibold text-gray-900">{document.title}</h1>
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                  <span>Last modified: {formatDate(document.updatedAt)}</span>
+                  <span>•</span>
+                  <span>{formatFileSize(document.size)}</span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="w-3 h-3" />
+                    {formatTime(trackingTime)} reading time
+                  </span>
+                  {isTracking && (
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Enhanced Action Buttons */}
+            <div className="flex items-center space-x-2">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={generateAISuggestions}
+                    className="flex items-center space-x-1.5"
+                  >
+                    <Lightbulb className="h-4 w-4" />
+                    <span>AI Assist</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Get AI-powered suggestions for improvement</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={toggleReadingMode}
+                    className={cn("flex items-center space-x-1.5",
+                      readingMode && "bg-blue-50 border-blue-200")}
+                  >
+                    <Eye className="h-4 w-4" />
+                    <span>Reading</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Toggle reading mode for better focus</TooltipContent>
+              </Tooltip>
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowShareDialog(true)}
+                className="flex items-center space-x-1.5"
+              >
+                <Share2 className="h-4 w-4" />
+                <span>Share</span>
+              </Button>
+
+              <Button
+                variant="default"
+                size="sm"
+                onClick={onEdit}
+                className="flex items-center space-x-1.5"
+              >
+                <Edit3 className="h-4 w-4" />
+                <span>Edit Document</span>
+              </Button>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleFullscreen}
+                  >
+                    {isFullscreen ? <X className="h-4 w-4" /> : <Settings className="h-4 w-4" />}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  {isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </div>
+        </header>
+
+      <div className="flex flex-1 overflow-hidden">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Templates
           </Button>
@@ -174,9 +676,9 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
 
             {/* Document Preview Container */}
             <div className="bg-gray-100 p-8 rounded-lg flex justify-center overflow-auto">
-              <div 
+              <div
                 className="bg-white shadow-lg transition-transform duration-200 max-w-[8.5in]"
-                style={{ 
+                style={{
                   transform: `scale(${zoomLevel / 100})`,
                   transformOrigin: 'top center',
                   minHeight: '11in',
@@ -201,7 +703,7 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
                         Professional Summary
                       </h2>
                       <p className="text-gray-700 leading-relaxed">
-                        Dedicated Community Support Worker with 3+ years of experience providing client-centered care and advocacy. 
+                        Dedicated Community Support Worker with 3+ years of experience providing client-centered care and advocacy.
                         Proven track record in crisis intervention, case management, and supporting individuals with mental health challenges and addiction recovery.
                       </p>
                     </div>

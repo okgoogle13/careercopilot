@@ -61,8 +61,7 @@ class DocumentDeleteRequest(BaseModel):
     """,
 )
 @require_valid_document_upload(
-    allowed_types={'.pdf', '.txt', '.md'},
-    max_size_mb=getattr(settings, 'max_document_size_mb', 10)
+    allowed_types={".pdf", ".txt", ".md"}, max_size_mb=getattr(settings, "max_document_size_mb", 10)
 )
 async def upload_document(
     file: UploadFile = File(...), current_user: User = Depends(get_current_user)
@@ -92,7 +91,7 @@ async def upload_document(
         # Process and index the document
         metadata = {
             "filename": file.filename,
-            "content_type": content_type,
+            "content_type": file.content_type,
             "user_id": str(current_user.id),
             "source": "api_upload",
         }
