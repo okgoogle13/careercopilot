@@ -48,17 +48,8 @@ interface CareerGrowthHubProps {
   onUpdateGoal?: (goalId: string, updates: Partial<Goal>) => void;
 }
 
-export function CareerGrowthHub({
-  onNavigate,
-  onBack,
-  userGoals = mockGoals,
-  userSkills = mockSkills,
-  onAddGoal = () => {},
-  onUpdateGoal = () => {}
-}: CareerGrowthHubProps) {
-
-  // Mock data
-  const mockGoals: Goal[] = [
+// Mock data
+const mockGoals: Goal[] = [
     {
       id: '1',
       title: 'Master React Advanced Patterns',
@@ -105,7 +96,7 @@ export function CareerGrowthHub({
     }
   ];
 
-  const mockSkills: Skill[] = [
+const mockSkills: Skill[] = [
     {
       id: '1',
       name: 'React.js',
@@ -189,6 +180,15 @@ export function CareerGrowthHub({
       ]
     }
   ];
+
+export function CareerGrowthHub({
+  onNavigate,
+  onBack,
+  userGoals = mockGoals,
+  userSkills = mockSkills,
+  onAddGoal = () => {},
+  onUpdateGoal = () => {}
+}: CareerGrowthHubProps) {
 
   const getCategoryIcon = (category: Goal['category']) => {
     const icons = {
@@ -349,83 +349,87 @@ export function CareerGrowthHub({
               </div>
             </TabsContent>
 
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-          {features.map((feature) => {
-            const Icon = feature.icon;
-            return (
-              <Card
-                key={feature.id}
-                className={`p-8 border-2 ${feature.borderColor} hover:border-primary cursor-pointer transition-all duration-300 hover:shadow-xl group relative overflow-hidden`}
-                onClick={() => onNavigate(feature.id)}
-              >
-                {/* Gemini AI Badge */}
-                <div className="absolute top-4 right-4">
-                  <Badge className="bg-primary/10 text-primary border-primary/30">
-                    <Sparkles className="w-3 h-3 mr-1" />
-                    AI Powered
-                  </Badge>
-                </div>
+            <TabsContent value="ai-tools" className="space-y-8">
+              {/* Feature Cards */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                {features.map((feature) => {
+                  const Icon = feature.icon;
+                  return (
+                    <Card
+                      key={feature.id}
+                      className={`p-8 border-2 ${feature.borderColor} hover:border-primary cursor-pointer transition-all duration-300 hover:shadow-xl group relative overflow-hidden`}
+                      onClick={() => onNavigate(feature.id)}
+                    >
+                      {/* Gemini AI Badge */}
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-primary/10 text-primary border-primary/30">
+                          <Sparkles className="w-3 h-3 mr-1" />
+                          AI Powered
+                        </Badge>
+                      </div>
 
-                <div className="space-y-6">
-                  <div className={`p-4 ${feature.bgColor} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}>
-                    <Icon className={`w-8 h-8 ${feature.color}`} />
-                  </div>
+                      <div className="space-y-6">
+                        <div className={`p-4 ${feature.bgColor} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}>
+                          <Icon className={`w-8 h-8 ${feature.color}`} />
+                        </div>
 
-                  <div>
-                    <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </div>
+                        <div>
+                          <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
+                          <p className="text-muted-foreground leading-relaxed">
+                            {feature.description}
+                          </p>
+                        </div>
 
-                  <div className="space-y-2">
-                    <h4 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
-                      Key Features
-                    </h4>
-                    <ul className="space-y-1">
-                      {feature.benefits.map((benefit, index) => (
-                        <li key={index} className="text-sm flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                          {benefit}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                        <div className="space-y-2">
+                          <h4 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                            Key Features
+                          </h4>
+                          <ul className="space-y-1">
+                            {feature.benefits.map((benefit, index) => (
+                              <li key={index} className="text-sm flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                                {benefit}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
 
-                  <Button
-                    className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90"
-                    size="lg"
-                  >
-                    Explore {feature.title}
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </div>
-              </Card>
-            );
-          })}
-        </div>
+                        <Button
+                          className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90"
+                          size="lg"
+                        >
+                          Explore {feature.title}
+                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </div>
+                    </Card>
+                  );
+                })}
+              </div>
+            </TabsContent>
+        </Tabs>
 
         {/* Additional Info */}
-        <Card className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border-primary/20">
-          <div className="text-center space-y-4">
-            <div className="flex items-center justify-center gap-2">
-              <Sparkles className="w-6 h-6 text-primary" />
-              <h3 className="text-xl font-semibold">Powered by Advanced AI</h3>
+        <Card className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border-primary/20 mt-8">
+            <div className="text-center space-y-4">
+              <div className="flex items-center justify-center gap-2">
+                <Sparkles className="w-6 h-6 text-primary" />
+                <h3 className="text-xl font-semibold">Powered by Advanced AI</h3>
+              </div>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Our career growth tools are powered by cutting-edge AI technology that analyzes market trends,
+                job requirements, and your unique profile to provide personalized career guidance.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3 pt-4">
+                <Badge variant="secondary">Machine Learning</Badge>
+                <Badge variant="secondary">Natural Language Processing</Badge>
+                <Badge variant="secondary">Real-time Data Analysis</Badge>
+                <Badge variant="secondary">Personalized Recommendations</Badge>
+              </div>
             </div>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our career growth tools are powered by cutting-edge AI technology that analyzes market trends,
-              job requirements, and your unique profile to provide personalized career guidance.
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 pt-4">
-              <Badge variant="secondary">Machine Learning</Badge>
-              <Badge variant="secondary">Natural Language Processing</Badge>
-              <Badge variant="secondary">Real-time Data Analysis</Badge>
-              <Badge variant="secondary">Personalized Recommendations</Badge>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        </div>
       </div>
-    </div>
+    </TooltipProvider>
   );
 }

@@ -54,7 +54,7 @@ class TestAIEndpoints:
             }
 
             response = client.post(
-                "/api/v1/ai/resume/analyze",
+                "/api/ai/resume/analyze",
                 json={"resume_content": SAMPLE_RESUME, "target_industry": "Technology"},
             )
 
@@ -80,7 +80,7 @@ class TestAIEndpoints:
             }
 
             response = client.post(
-                "/api/v1/ai/cover-letter/generate",
+                "/api/ai/cover-letter/generate",
                 json={
                     "candidate_profile": {
                         "name": "John Doe",
@@ -109,7 +109,7 @@ class TestAIEndpoints:
             }
 
             response = client.post(
-                "/api/v1/ai/skills-gap/analyze",
+                "/api/ai/skills-gap/analyze",
                 json={
                     "resume_content": SAMPLE_RESUME,
                     "target_role_description": "Data Scientist",
@@ -128,9 +128,7 @@ class TestAIEndpoints:
         """Test rate limiting on API endpoints"""
         # This test assumes the rate limit is set to 100 requests per minute
         for _ in range(105):  # Exceed rate limit
-            response = client.post(
-                "/api/v1/ai/resume/analyze", json={"resume_content": SAMPLE_RESUME}
-            )
+            response = client.post("/api/ai/resume/analyze", json={"resume_content": SAMPLE_RESUME})
 
             if response.status_code == 429:  # Rate limit exceeded
                 break

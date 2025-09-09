@@ -1,6 +1,6 @@
 # backend/app/api/v1/analysis.py (Revised)
 
-from app.api.dependencies import User, get_current_user
+from app.core.dependencies import User, get_current_user
 
 # Import the flow's output model AND the frontend's expected response model
 from app.genkit_flows.ats_scoring import AtsResult, atsScoring

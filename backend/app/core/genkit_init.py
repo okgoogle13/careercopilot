@@ -1,109 +1,163 @@
 """
-genkit_init.py (Refactored)
+genkit_init.py
 
 Initializes and configures the Genkit framework for the CareerCopilot application.
-This module provides a single point of initialization, exports configured AI models,
-and includes a health check function for robust production monitoring.
+Handles AI model initialization, flow registration, and provides health monitoring.
 """
 import logging
 import os
+from typing import Any, Callable, Dict, Optional
 
-import genkit
-from genkit.genkit_flow import ModelReference
-from genkit.plugins import dotprompt, gemini
+try:
+    from genkit.ai import Genkit
+    from genkit.plugins.google_genai import GoogleAI
+
+    GENKIT_AVAILABLE = True
+except ImportError as e:
+    GENKIT_AVAILABLE = False
+    Genkit = None
+    GoogleAI = None
 
 # Setup logger for this module
 logger = logging.getLogger(__name__)
 
-# --- Exported Models ---
-# These will be populated by init_genkit() and can be imported by flows.
-gemini_pro: ModelReference = None
-gemini_15_pro: ModelReference = None
+# --- Global State ---
+initialized = False
+genkit_instance = None
+registered_flows: Dict[str, Any] = {}
 
 # --- Core Initialization ---
 
 
-def init_genkit():
+def init_genkit() -> bool:
     """
-    Initializes the Genkit framework with required plugins.
-    This function is idempotent and safe to call multiple times.
-    """
-    global gemini_pro, gemini_15_pro
-
-    if genkit.is_initialized():
-        logger.info("Genkit already initialized. Skipping.")
-        return
-
-    # RETAINED: Configuration from environment variables
-    api_key = os.getenv("GEMINI_API_KEY")
-    if not api_key:
-        logger.warning(
-            "GEMINI_API_KEY environment variable not set. " "Genkit flows will not be functional."
-        )
-        # We don't return here, allowing the app to run without AI features if needed.
-
-    try:
-        # REFACTOR: Use the standard genkit.init() call for simplicity and clarity.
-        genkit.init(
-            plugins=[
-                gemini.init(api_key=api_key),
-                dotprompt.init(),
-            ],
-            log_level=os.getenv("GENKIT_LOG_LEVEL", "INFO"),
-            enable_tracing=os.getenv("ENABLE_TELEMETRY", "true").lower() == "true",
-        )
-
-        # REFACTOR: Populate exported model variables directly after init.
-        # This is cleaner than a getter function.
-        gemini_pro = gemini.gemini_pro
-        gemini_15_pro = gemini.gemini_1_5_pro
-
-        logger.info("Genkit framework initialized successfully with Gemini plugin.")
-
-    except Exception as e:
-        logger.error(f"A critical error occurred during Genkit initialization: {e}", exc_info=True)
-        # Re-raise the exception to prevent the application from starting
-        # in a broken state if Genkit is essential.
-        raise
-
-
-# --- Health Check ---
-
-
-def check_genkit_health() -> dict:
-    """
-    RETAINED: Performs a health check for Genkit services.
+    Initialize the Genkit framework with required plugins and models.
 
     Returns:
-        A dictionary containing the health status of Genkit.
+        bool: True if initialization was successful, False otherwise
+    """
+    global initialized, genkit_instance
+
+    if initialized:
+        logger.info("Genkit already initialized")
+        return True
+
+    if not GENKIT_AVAILABLE:
+        logger.error("Genkit is not available. Please install genkit package.")
+        return False
+
+    try:
+        # Configure API key from environment
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            logger.warning("GEMINI_API_KEY not set. Some AI features will be disabled.")
+            return False
+
+        # Initialize Genkit with Google AI plugin
+        genkit_instance = Genkit(
+            plugins=[GoogleAI(api_key=api_key)],
+            model="googleai/gemini-1.5-pro",
+        )
+
+        logger.info("Genkit initialized successfully")
+        initialized = True
+        return True
+
+    except Exception as e:
+        logger.error(f"Failed to initialize Genkit: {str(e)}", exc_info=True)
+        return False
+
+
+def get_model():
+    """
+    Get the initialized Genkit instance for model operations.
+
+    Returns:
+        The Genkit instance, or None if not initialized
+    """
+    if not initialized:
+        init_genkit()
+    return genkit_instance
+
+
+def is_genkit_enabled() -> bool:
+    """
+    Check if Genkit flows are enabled via environment variable.
+
+    Returns:
+        bool: True if Genkit flows are enabled
+    """
+    return os.getenv("ENABLE_GENKIT_FLOWS", "false").lower() == "true"
+
+
+def check_genkit_health() -> Dict[str, Any]:
+    """
+    Check the health of the Genkit framework and registered flows.
+
+    Returns:
+        Dict containing health status information
     """
     api_key_present = bool(os.getenv("GEMINI_API_KEY"))
     health_status = {
-        "genkit_initialized": genkit.is_initialized(),
+        "available": GENKIT_AVAILABLE,
+        "initialized": initialized,
         "gemini_api_key_present": api_key_present,
-        "flows_enabled": os.getenv("ENABLE_GENKIT_FLOWS", "false").lower() == "true",
+        "enabled": is_genkit_enabled(),
+        "flows_registered": len(registered_flows),
+        "model_available": bool(genkit_instance),
         "errors": [],
     }
 
-    if not health_status["genkit_initialized"]:
-        health_status["errors"].append("Genkit failed to initialize.")
-    if not health_status["gemini_api_key_present"]:
-        health_status["errors"].append("GEMINI_API_KEY is not set.")
+    if not GENKIT_AVAILABLE:
+        health_status["errors"].append("Genkit package not available")
+    elif health_status["enabled"]:
+        if not health_status["initialized"]:
+            health_status["errors"].append("Genkit failed to initialize")
+        if not health_status["gemini_api_key_present"]:
+            health_status["errors"].append("GEMINI_API_KEY is not set")
+        if not health_status["model_available"]:
+            health_status["errors"].append("Gemini model not available")
 
     return health_status
 
 
-# --- Application Startup Integration ---
-
-
-def startup_genkit():
+def startup_genkit() -> None:
     """
-    A wrapper to be called during FastAPI application startup.
-    Honors the ENABLE_GENKIT_FLOWS feature flag.
+    Initialize Genkit during application startup.
+    Honors the ENABLE_GENKIT_FLOWS environment variable.
     """
-    if os.getenv("ENABLE_GENKIT_FLOWS", "false").lower() == "true":
-        init_genkit()
+    if is_genkit_enabled():
+        logger.info("Genkit flows are enabled, initializing...")
+        if init_genkit():
+            logger.info("Genkit startup completed successfully")
+        else:
+            logger.warning("Genkit startup completed with warnings")
     else:
-        logger.warning(
-            "Genkit initialization skipped because ENABLE_GENKIT_FLOWS is not set to 'true'."
-        )
+        logger.info("Genkit initialization skipped (ENABLE_GENKIT_FLOWS is not 'true')")
+
+
+def register_flow_function(func: Callable, name: Optional[str] = None) -> Callable:
+    """
+    Register a flow function for tracking purposes.
+
+    Args:
+        func: The flow function to register
+        name: Optional name for the flow
+
+    Returns:
+        The original function
+    """
+    flow_name = name or func.__name__
+    registered_flows[flow_name] = func
+    logger.debug(f"Registered flow function: {flow_name}")
+    return func
+
+
+def get_registered_flows() -> Dict[str, Any]:
+    """
+    Get all registered flow functions.
+
+    Returns:
+        Dictionary of registered flows
+    """
+    return registered_flows.copy()

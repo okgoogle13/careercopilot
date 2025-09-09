@@ -1,40 +1,38 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Editor } from "@/components/ui/editor"; // Assuming a custom rich text editor component
+import { Editor } from "@/components/ui/editor";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { generateTailoredResume } from "@/api/aiServices";
 import React, { useState } from 'react';
 
-export const TailoredResumeGenerator: React.FC = () => {
+interface TailoredResumeGeneratorProps {
+  userProfileId?: string;
+}
+
+export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = ({
+  userProfileId = 'current-user-id'
+}) => {
   const [jobDescription, setJobDescription] = useState<string>('');
   const [generatedResume, setGeneratedResume] = useState<string>('');
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const handleGenerateResume = async () => {
     setIsGenerating(true);
+    setError('');
+
     try {
-      // Mock API call - replace with actual API
-      const mockResumeGeneration = () => {
-        return `
-        <h1>Jane Doe</h1>
-        <p>Professional Social Worker | Community Services Specialist</p>
+      const resumeData = await generateTailoredResume(jobDescription, userProfileId);
 
-        <h2>Professional Summary</h2>
-        <p>Dedicated social worker with ${jobDescription.split(' ').slice(0, 10).join(' ')}...</p>
+      // Extract resume content from the response
+      // The actual structure will depend on your backend API response
+      const resumeContent = resumeData.resume_content || resumeData.content || JSON.stringify(resumeData, null, 2);
+      setGeneratedResume(resumeContent);
 
-        <h2>Professional Experience</h2>
-        <h3>Senior Support Coordinator | Community Care Solutions</h3>
-        <ul>
-          <li>Developed and implemented client-centered support strategies</li>
-          <li>Collaborated with multidisciplinary teams to enhance service delivery</li>
-        </ul>
-        `;
-      };
-
-      const generatedContent = mockResumeGeneration();
-      setGeneratedResume(generatedContent);
     } catch (error) {
-      console.error('Resume generation failed', error);
+      console.error('Resume generation failed:', error);
+      setError(error instanceof Error ? error.message : 'Failed to generate tailored resume');
     } finally {
       setIsGenerating(false);
     }
@@ -43,33 +41,20 @@ export const TailoredResumeGenerator: React.FC = () => {
   return (
     <div
       className={cn(
-        "container mx-auto p-semantic-space-inset-lg",
-        "bg-semantic-color-bg-canvas",
+        "container mx-auto p-8",
+        "bg-background",
         "min-h-screen"
       )}
     >
       <div
         className={cn(
-          "grid md:grid-cols-2 gap-semantic-space-stack-lg",
+          "grid md:grid-cols-2 gap-8",
           "max-w-6xl mx-auto"
         )}
       >
         {/* Left Panel: Job Description */}
-        <Card
-          className={cn(
-            "bg-semantic-color-bg-surface",
-            "border-semantic-color-border-subtle",
-            "rounded-semantic-radius-lg",
-            "p-semantic-space-inset-lg",
-            "space-y-semantic-space-stack-md"
-          )}
-        >
-          <h2
-            className={cn(
-              "text-semantic-typography-heading-md",
-              "text-semantic-color-text-primary"
-            )}
-          >
+        <Card className="p-6 space-y-6">
+          <h2 className="text-2xl font-semibold text-foreground">
             Job Description
           </h2>
 
@@ -77,43 +62,27 @@ export const TailoredResumeGenerator: React.FC = () => {
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
             placeholder="Paste the job description here to generate a tailored resume..."
-            className={cn(
-              "min-h-[500px]",
-              "text-semantic-typography-body-md",
-              "text-semantic-color-text-primary"
-            )}
+            className="min-h-[500px]"
           />
 
           <Button
             onClick={handleGenerateResume}
             disabled={!jobDescription || isGenerating}
-            className={cn(
-              "w-full",
-              "bg-semantic-color-action-primary-default",
-              "hover:bg-semantic-color-action-primary-hover",
-              "text-semantic-color-text-primary"
-            )}
+            className="w-full"
           >
             {isGenerating ? 'Generating Resume...' : 'Generate Tailored Resume'}
           </Button>
+
+          {error && (
+            <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-md text-destructive">
+              {error}
+            </div>
+          )}
         </Card>
 
         {/* Right Panel: Generated Resume */}
-        <Card
-          className={cn(
-            "bg-semantic-color-bg-surface",
-            "border-semantic-color-border-subtle",
-            "rounded-semantic-radius-lg",
-            "p-semantic-space-inset-lg",
-            "space-y-semantic-space-stack-md"
-          )}
-        >
-          <h2
-            className={cn(
-              "text-semantic-typography-heading-md",
-              "text-semantic-color-text-primary"
-            )}
-          >
+        <Card className="p-6 space-y-6">
+          <h2 className="text-2xl font-semibold text-foreground">
             Tailored Resume
           </h2>
 
@@ -121,32 +90,14 @@ export const TailoredResumeGenerator: React.FC = () => {
             value={generatedResume}
             onChange={setGeneratedResume}
             placeholder="Your tailored resume will appear here..."
-            className={cn(
-              "min-h-[500px]",
-              "text-semantic-typography-body-md",
-              "text-semantic-color-text-primary"
-            )}
+            className="min-h-[500px]"
           />
 
-          <div className="flex gap-semantic-space-stack-sm">
-            <Button
-              variant="secondary"
-              className={cn(
-                "flex-1",
-                "bg-semantic-color-bg-elevated",
-                "text-semantic-color-text-primary"
-              )}
-            >
+          <div className="flex gap-4">
+            <Button variant="secondary" className="flex-1">
               Download PDF
             </Button>
-            <Button
-              className={cn(
-                "flex-1",
-                "bg-semantic-color-action-primary-default",
-                "hover:bg-semantic-color-action-primary-hover",
-                "text-semantic-color-text-primary"
-              )}
-            >
+            <Button className="flex-1">
               Save Version
             </Button>
           </div>

@@ -44,13 +44,17 @@ export const Editor: React.FC<EditorProps> = ({
   };
 
   return (
-    <div className={cn("border rounded-lg", className)}>
+    <div className={cn("border border-border rounded-lg bg-card", className)}>
       {/* Toolbar */}
-      <div className="flex items-center gap-1 p-2 border-b bg-gray-50">
+      <div className="flex items-center gap-1 p-2 border-b border-border bg-muted/50">
         <button
           type="button"
           onClick={() => formatText('bold')}
-          className="p-1 rounded hover:bg-gray-200 text-sm font-bold"
+          className={cn(
+            "p-2 rounded-md text-sm font-bold transition-colors",
+            "text-foreground hover:bg-accent hover:text-accent-foreground",
+            "disabled:opacity-50 disabled:pointer-events-none"
+          )}
           disabled={disabled}
         >
           B
@@ -58,7 +62,11 @@ export const Editor: React.FC<EditorProps> = ({
         <button
           type="button"
           onClick={() => formatText('italic')}
-          className="p-1 rounded hover:bg-gray-200 text-sm italic"
+          className={cn(
+            "p-2 rounded-md text-sm italic transition-colors",
+            "text-foreground hover:bg-accent hover:text-accent-foreground",
+            "disabled:opacity-50 disabled:pointer-events-none"
+          )}
           disabled={disabled}
         >
           I
@@ -66,16 +74,24 @@ export const Editor: React.FC<EditorProps> = ({
         <button
           type="button"
           onClick={() => formatText('underline')}
-          className="p-1 rounded hover:bg-gray-200 text-sm underline"
+          className={cn(
+            "p-2 rounded-md text-sm underline transition-colors",
+            "text-foreground hover:bg-accent hover:text-accent-foreground",
+            "disabled:opacity-50 disabled:pointer-events-none"
+          )}
           disabled={disabled}
         >
           U
         </button>
-        <div className="w-px h-4 bg-gray-300 mx-1" />
+        <div className="w-px h-4 bg-border mx-2" />
         <button
           type="button"
           onClick={() => formatText('insertUnorderedList')}
-          className="p-1 rounded hover:bg-gray-200 text-sm"
+          className={cn(
+            "p-2 rounded-md text-sm transition-colors",
+            "text-foreground hover:bg-accent hover:text-accent-foreground",
+            "disabled:opacity-50 disabled:pointer-events-none"
+          )}
           disabled={disabled}
         >
           •
@@ -83,7 +99,11 @@ export const Editor: React.FC<EditorProps> = ({
         <button
           type="button"
           onClick={() => formatText('insertOrderedList')}
-          className="p-1 rounded hover:bg-gray-200 text-sm"
+          className={cn(
+            "p-2 rounded-md text-sm transition-colors",
+            "text-foreground hover:bg-accent hover:text-accent-foreground",
+            "disabled:opacity-50 disabled:pointer-events-none"
+          )}
           disabled={disabled}
         >
           1.
@@ -99,10 +119,11 @@ export const Editor: React.FC<EditorProps> = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={cn(
-          "p-4 min-h-[200px] focus:outline-none",
-          "text-semantic-typography-body-md text-semantic-color-text-primary",
+          "p-4 min-h-[200px] focus:outline-none relative",
+          "text-sm text-foreground bg-card",
+          "transition-colors duration-200",
           disabled && "cursor-not-allowed opacity-50",
-          isFocused && "ring-2 ring-blue-500/20"
+          isFocused && "ring-2 ring-ring/50"
         )}
         dangerouslySetInnerHTML={{ __html: value }}
         data-placeholder={placeholder}
@@ -115,7 +136,7 @@ export const Editor: React.FC<EditorProps> = ({
       {/* Placeholder when empty */}
       {!value && !isFocused && (
         <div className="absolute inset-0 pointer-events-none">
-          <div className="p-4 pt-16 text-gray-400 text-semantic-typography-body-md">
+          <div className="p-4 pt-16 text-muted-foreground text-sm">
             {placeholder}
           </div>
         </div>

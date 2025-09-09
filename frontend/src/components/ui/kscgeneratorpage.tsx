@@ -2,60 +2,56 @@ import { KscCriterionCard } from "@/components/KSC/KscCriterionCard";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { generateKscResponses, generateSingleKscResponse } from "@/api/aiServices";
 import React, { useState } from 'react';
-
-const mockDetectKsc = async (jobDescription: string): Promise<string[]> => {
-  // Simulating KSC detection
-  return [
-    "Demonstrated ability to develop and maintain effective working relationships",
-    "Experience in delivering high-quality client-centered services",
-    "Strong communication and interpersonal skills"
-  ];
-};
-
-const mockGenerateResponse = async (criterion: string): Promise<string> => {
-  // Simulating AI generation
-  return `In my previous role as a support coordinator, I consistently demonstrated ${criterion.toLowerCase()} by:
-1. Building rapport with diverse client groups
-2. Actively listening and responding to individual needs
-3. Collaborating effectively with multi-disciplinary teams`;
-};
 
 export const KscGeneratorPage: React.FC = () => {
   const [jobDescription, setJobDescription] = useState<string>('');
   const [detectedKsc, setDetectedKsc] = useState<string[]>([]);
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const handleAnalyze = async () => {
     setIsAnalyzing(true);
+    setError('');
     try {
-      const kscList = await mockDetectKsc(jobDescription);
-      setDetectedKsc(kscList);
+      const kscResponses = await generateKscResponses(jobDescription);
+      setDetectedKsc(kscResponses);
     } catch (error) {
-      console.error('KSC Detection failed', error);
+      console.error('KSC Generation failed:', error);
+      setError(error instanceof Error ? error.message : 'Failed to generate KSC responses');
     } finally {
       setIsAnalyzing(false);
+    }
+  };
+
+  const handleGenerateResponse = async (criterion: string): Promise<string> => {
+    try {
+      return await generateSingleKscResponse(criterion, jobDescription);
+    } catch (error) {
+      console.error('Single KSC generation failed:', error);
+      throw error;
     }
   };
 
   return (
     <div
       className={cn(
-        "container mx-auto p-semantic-space-inset-lg",
-        "bg-semantic-color-bg-canvas",
+        "container mx-auto p-8",
+        "bg-background",
         "min-h-screen"
       )}
     >
       <div
         className={cn(
           "max-w-4xl mx-auto",
-          "space-y-semantic-space-stack-lg"
+          "space-y-8"
         )}
       >
         <h1
           className={cn(
-            "text-semantic-typography-display-md",
-            "text-semantic-color-text-primary",
+            "text-3xl font-semibold",
+            "text-foreground",
             "text-center"
           )}
         >
@@ -66,52 +62,63 @@ export const KscGeneratorPage: React.FC = () => {
           value={jobDescription}
           onChange={(e) => setJobDescription(e.target.value)}
           placeholder="Paste your job description here to detect Key Selection Criteria..."
-          className={cn(
-            "min-h-[200px]",
-            "text-semantic-typography-body-lg",
-            "text-semantic-color-text-primary"
-          )}
+          className="min-h-[200px]"
         />
 
         <Button
           onClick={handleAnalyze}
           disabled={!jobDescription || isAnalyzing}
-          className={cn(
-            "w-full",
-            "bg-semantic-color-action-primary-default",
-            "hover:bg-semantic-color-action-primary-hover",
-            "text-semantic-color-text-primary"
-          )}
+          className="w-full"
         >
-          {isAnalyzing ? 'Analyzing...' : 'Detect Key Selection Criteria'}
+          {isAnalyzing ? 'Generating KSC Responses...' : 'Generate Key Selection Criteria Responses'}
         </Button>
 
-        {detectedKsc.length > 0 && (
+        {error && (
           <div
             className={cn(
-              "space-y-semantic-space-stack-md"
+              "p-4",
+              "bg-destructive/10",
+              "border border-destructive/20",
+              "rounded-md",
+              "text-destructive"
             )}
           >
+            {error}
+          </div>
+        )}
+
+        {detectedKsc.length > 0 && (
+          <div className="space-y-6">
             <h2
               className={cn(
-                "text-semantic-typography-heading-lg",
-                "text-semantic-color-text-primary"
+                "text-2xl font-semibold",
+                "text-foreground"
               )}
             >
-              Detected Key Selection Criteria
+              Generated KSC Responses
             </h2>
 
-            <div
-              className={cn(
-                "grid md:grid-cols-2 gap-semantic-space-stack-md"
-              )}
-            >
-              {detectedKsc.map((criterion, index) => (
-                <KscCriterionCard
+            <div className="space-y-4">
+              {detectedKsc.map((response, index) => (
+                <div
                   key={index}
-                  criterion={criterion}
-                  onGenerate={mockGenerateResponse}
-                />
+                  className={cn(
+                    "p-4",
+                    "bg-card",
+                    "border border-border",
+                    "rounded-md"
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "text-sm",
+                      "text-foreground",
+                      "whitespace-pre-wrap"
+                    )}
+                  >
+                    {response}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
