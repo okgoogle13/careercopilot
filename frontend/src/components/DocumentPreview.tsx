@@ -546,16 +546,20 @@ export function DocumentPreview({
         </header>
 
       <div className="flex flex-1 overflow-hidden">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Templates
-          </Button>
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">Document Preview</h1>
-            <p className="text-sm text-muted-foreground mt-1">
-              {mockDocument.title} • Template: {templateName}
-            </p>
+        {/* Main Content Area */}
+        <div className="flex-1 p-6">
+          <div className="flex items-center justify-between mb-6">
+            <Button variant="ghost" onClick={onBack} className="hover:bg-gray-100">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Templates
+            </Button>
+            <div>
+              <h1 className="text-2xl font-bold text-foreground">Document Preview</h1>
+              <p className="text-sm text-muted-foreground mt-1">
+                {mockDocument.title} • Template: {templateName}
+              </p>
+            </div>
           </div>
-        </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={onEdit}>
             <Edit3 className="w-4 h-4 mr-2" />
@@ -784,6 +788,8 @@ export function DocumentPreview({
           </Card>
         </div>
       </div>
-    </div>
+        </div>
+      </div>
+    </TooltipProvider>
   );
 }
