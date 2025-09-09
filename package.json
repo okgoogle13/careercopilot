@@ -30,6 +30,7 @@
   "devDependencies": {
     "@playwright/test": "1.55.0",
     "@types/node": "20",
+    "genkit": "^1.18.0",
     "knip": "^5.63.0",
     "typescript": "^5.9.2"
   },

@@ -30,6 +30,8 @@ from app.monitoring.nlp_metrics import (
     track_tokens_processed,
 )
 
+from ..monitoring.nlp_metrics import NLP_REQUEST_DURATION
+
 logger = logging.getLogger(__name__)
 
 
@@ -41,10 +43,10 @@ class NLPModelManager:
     on every request by caching them in memory at application startup.
     """
 
-    _instance: Optional['NLPModelManager'] = None
+    _instance: Optional["NLPModelManager"] = None
     _lock = threading.Lock()
 
-    def __new__(cls) -> 'NLPModelManager':
+    def __new__(cls) -> "NLPModelManager":
         """Ensure only one instance exists (Singleton pattern)."""
         if cls._instance is None:
             with cls._lock:
@@ -55,7 +57,7 @@ class NLPModelManager:
 
     def __init__(self):
         """Initialize the model manager (called only once)."""
-        if hasattr(self, '_initialized') and self._initialized:
+        if hasattr(self, "_initialized") and self._initialized:
             return
 
         self._models: Dict[str, Any] = {}
@@ -67,34 +69,40 @@ class NLPModelManager:
 
     def track_nlp_operation(self, endpoint: str, model_name: str = "default"):
         """Decorator to track NLP operations with metrics"""
+
         def decorator(func):
             @wraps(func)
             def wrapper(*args, **kwargs):
                 start_time = time.time()
-                status = 'success'
+                status = "success"
 
                 try:
                     result = func(*args, **kwargs)
                     return result
                 except Exception as e:
-                    status = 'error'
+                    status = "error"
                     logger.error(f"Error in {endpoint}: {str(e)}")
                     raise
                 finally:
                     duration = time.time() - start_time
                     track_nlp_request(endpoint, model_name, status)
-                    NLP_REQUEST_DURENCY.labels(endpoint=endpoint, model=model_name).observe(duration)
+                    NLP_REQUEST_DURATION.labels(endpoint=endpoint, model=model_name).observe(
+                        duration
+                    )
 
                     # Track tokens if available in the result
-                    if 'result' in locals() and hasattr(result, 'get'):
-                        tokens = result.get('tokens_processed', 0)
+                    if "result" in locals() and hasattr(result, "get"):
+                        tokens = result.get("tokens_processed", 0)
                         if tokens > 0:
                             track_tokens_processed(model_name, endpoint, tokens)
 
             return wrapper
+
         return decorator
 
-    def load_model(self, model_name: str, model_type: str = "spacy", force_reload: bool = False) -> Any:
+    def load_model(
+        self, model_name: str, model_type: str = "spacy", force_reload: bool = False
+    ) -> Any:
         """
         Load an NLP model with caching and thread safety.
 
@@ -112,7 +120,7 @@ class NLPModelManager:
             if cache_key in self._models and not force_reload:
                 # Update last accessed time
                 if cache_key in self._model_info:
-                    self._model_info[cache_key]['last_accessed'] = time.time()
+                    self._model_info[cache_key]["last_accessed"] = time.time()
                 return self._models[cache_key]
 
             try:
@@ -121,15 +129,19 @@ class NLPModelManager:
 
                 if model_type == "spacy":
                     import spacy
+
                     model = spacy.load(model_name)
                 elif model_type == "transformers":
                     from transformers import pipeline
+
                     model = pipeline("text-classification", model=model_name)
                 else:
                     raise ValueError(f"Unsupported model type: {model_type}")
 
                 load_time = time.time() - start_time
-                logger.info(f"Successfully loaded {model_type} model {model_name} in {load_time:.2f}s")
+                logger.info(
+                    f"Successfully loaded {model_type} model {model_name} in {load_time:.2f}s"
+                )
 
                 # Track model metrics
                 process = psutil.Process(os.getpid())
@@ -139,24 +151,22 @@ class NLPModelManager:
 
                 self._models[cache_key] = model
                 self._model_info[cache_key] = {
-                    'type': model_type,
-                    'name': model_name,
-                    'load_time': load_time,
-                    'memory_usage': memory_usage,
-                    'last_accessed': time.time()
+                    "type": model_type,
+                    "name": model_name,
+                    "load_time": load_time,
+                    "memory_usage": memory_usage,
+                    "last_accessed": time.time(),
                 }
 
                 return model
 
             except Exception as e:
                 logger.error(f"Failed to load {model_type} model {model_name}: {str(e)}")
-                track_nlp_request('load_model', model_name, 'error')
+                track_nlp_request("load_model", model_name, "error")
                 raise
 
     def load_spacy_model(
-        self,
-        model_name: str = "en_core_web_sm",
-        force_reload: bool = False
+        self, model_name: str = "en_core_web_sm", force_reload: bool = False
     ) -> Any:
         """
         Load and cache a spaCy model.
@@ -227,18 +237,14 @@ class NLPModelManager:
 
     def get_memory_usage(self) -> Dict[str, Any]:
         """Get estimated memory usage of all cached models."""
-        total_mb = sum(
-            info.get("memory_usage", 0)
-            for info in self._model_info.values()
-        )
+        total_mb = sum(info.get("memory_usage", 0) for info in self._model_info.values())
 
         return {
             "total_models": len(self._models),
             "total_memory_mb": total_mb,
             "models": {
-                name: info.get("memory_usage", 0)
-                for name, info in self._model_info.items()
-            }
+                name: info.get("memory_usage", 0) for name, info in self._model_info.items()
+            },
         }
 
     def health_check(self) -> Dict[str, Any]:
@@ -247,18 +253,18 @@ class NLPModelManager:
             "status": "healthy",
             "models_loaded": len(self._models),
             "models": {},
-            "issues": []
+            "issues": [],
         }
 
         for model_name, model in self._models.items():
             try:
                 # Test the model with a simple operation
-                if hasattr(model, '__call__'):
+                if hasattr(model, "__call__"):
                     # For spaCy models, test with a simple sentence
                     test_doc = model("Test sentence.")
                     status["models"][model_name] = {
                         "status": "healthy",
-                        "tokens_processed": len(test_doc)
+                        "tokens_processed": len(test_doc),
                     }
                 else:
                     status["models"][model_name] = {"status": "unknown"}
@@ -266,10 +272,7 @@ class NLPModelManager:
             except Exception as e:
                 issue = f"Model '{model_name}' health check failed: {str(e)}"
                 status["issues"].append(issue)
-                status["models"][model_name] = {
-                    "status": "unhealthy",
-                    "error": str(e)
-                }
+                status["models"][model_name] = {"status": "unhealthy", "error": str(e)}
 
         if status["issues"]:
             status["status"] = "degraded"
@@ -286,7 +289,7 @@ class NLPModelManager:
             size_bytes = sys.getsizeof(model)
 
             # For spaCy models, also account for vocab size
-            if hasattr(model, 'vocab'):
+            if hasattr(model, "vocab"):
                 size_bytes += sys.getsizeof(model.vocab)
 
             return round(size_bytes / (1024 * 1024), 2)
@@ -331,13 +334,13 @@ def preload_models() -> None:
 
     for model_name, model_type in models_to_load:
         try:
-            with track_nlp_duration('preload_models', model_name):
+            with track_nlp_duration("preload_models", model_name):
                 manager.load_model(model_name, model_type)
                 logger.info(f"Preloaded {model_type} model: {model_name}")
-                track_nlp_request('preload_models', model_name, 'success')
+                track_nlp_request("preload_models", model_name, "success")
         except Exception as e:
             logger.error(f"Failed to preload {model_type} model {model_name}: {str(e)}")
-            track_nlp_request('preload_models', model_name, 'error')
+            track_nlp_request("preload_models", model_name, "error")
             # Continue with other models even if one fails
 
     # Log memory usage
@@ -346,9 +349,6 @@ def preload_models() -> None:
         f"Total models loaded: {memory_info['total_models']}, "
         f"Memory usage: {memory_info['total_memory_mb']:.2f} MB"
     )
-    except Exception as e:
-        logger.error(f"Failed to preload models: {str(e)}")
-        raise
 
 
 def health_check_models() -> Dict[str, Any]:
