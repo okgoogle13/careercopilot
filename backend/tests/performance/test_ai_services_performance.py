@@ -44,7 +44,7 @@ class AIUser(HttpUser):
     def analyze_resume(self):
         """Test resume analysis endpoint"""
         payload = {"resume_content": SAMPLE_RESUME, "target_industry": "Technology"}
-        self.client.post("/api/v1/ai/resume/analyze", json=payload, headers=self.headers)
+        self.client.post("/api/ai/resume/analyze", json=payload, headers=self.headers)
 
     @task(2)  # Higher weight = more frequent execution
     def generate_cover_letter(self):
@@ -54,7 +54,7 @@ class AIUser(HttpUser):
             "job_description": SAMPLE_JOB_DESCRIPTION,
             "style": "professional",
         }
-        self.client.post("/api/v1/ai/cover-letter/generate", json=payload, headers=self.headers)
+        self.client.post("/api/ai/cover-letter/generate", json=payload, headers=self.headers)
 
 
 def run_performance_test(users: int = 10, spawn_rate: int = 1, duration: int = 60):

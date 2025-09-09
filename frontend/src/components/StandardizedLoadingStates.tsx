@@ -312,17 +312,6 @@ export const LoadingState = ({
   );
 };
 
-// Export all loading components
-export {
-  SpinnerLoading,
-  PulseLoading,
-  DotsLoading,
-  BarsLoading,
-  ProgressLoading,
-  SkeletonLoading,
-  ShimmerLoading,
-  AIProcessingLoading,
-  SuccessLoading
-};
+// All components are already exported individually above
 
 export default LoadingState;

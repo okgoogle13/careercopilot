@@ -1,19 +1,16 @@
 import os
 
-import genkit
-from dotenv import load_dotenv
-from genkit.plugins import google_genai
+from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
 from pydantic import BaseModel
 
-# Load environment variables from .env file
-load_dotenv()
+# Try to import Genkit for decorators, with fallback
+try:
+    import genkit
 
-# Initialize the Google AI plugin if not already initialized
-if getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-
-# Define the Gemini Pro model
-gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
+    GENKIT_AVAILABLE = True
+except ImportError:
+    genkit = None
+    GENKIT_AVAILABLE = False
 
 
 # Define the structured output model using Pydantic
@@ -24,8 +21,7 @@ class STAR_Response(BaseModel):
     result: str
 
 
-@genkit.flow(output_schema=STAR_Response)
-def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Response:
+def _generate_ksc_response_impl(user_profile_data: dict, ksc_statement: str) -> STAR_Response:
     """
     Acts as an expert career coach to generate a STAR response for a KSC statement.
     """
@@ -51,8 +47,12 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
     Now, generate the STAR response based on the user's experience.
     """
 
-    # Generate the response using the Gemini model, ensuring JSON output
-    response = gemini_pro.generate(
+    # Generate the response using the centralized model
+    model = get_model()
+    if not model:
+        raise RuntimeError("Genkit model not available for KSC generation")
+
+    response = model.generate(
         prompt=prompt,
         config={
             "response_mime_type": "application/json",
@@ -60,3 +60,13 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
     )
 
     return response.output()
+
+
+# Register the flow with conditional decorator
+if GENKIT_AVAILABLE and is_genkit_enabled():
+    generateKscResponse = genkit.flow(output_schema=STAR_Response)(_generate_ksc_response_impl)
+else:
+    generateKscResponse = _generate_ksc_response_impl
+
+# Register the flow for tracking
+register_flow_function(generateKscResponse, "generateKscResponse")

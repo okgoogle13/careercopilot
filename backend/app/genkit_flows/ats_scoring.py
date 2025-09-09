@@ -2,8 +2,6 @@ import logging
 import os
 from typing import List, Optional
 
-import genkit
-
 # Import enhanced error handling
 from app.core.enhanced_ai_error_handling import (
     AIOperationContext,
@@ -11,14 +9,22 @@ from app.core.enhanced_ai_error_handling import (
     create_fallback_strategy,
     enhanced_ai_handler,
 )
-from dotenv import load_dotenv
-from genkit.plugins import google_genai
+from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
 from pydantic import BaseModel, Field
 
 # Import the supporting flows
 from .extract_job_requirements import JobRequirements, extractJobRequirements
 from .extract_resume_entities import ResumeEntities, extractResumeEntities
 from .keyword_placer import KeywordPlacementSuggestion, suggestKeywordPlacement
+
+# Try to import Genkit for decorators, with fallback
+try:
+    import genkit
+
+    GENKIT_AVAILABLE = True
+except ImportError:
+    genkit = None
+    GENKIT_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -32,17 +38,15 @@ class SemanticAnalysis(BaseModel):
     explanation: str = Field(description="A brief explanation for the given score.")
 
 
-# Load environment variables and initialize Genkit if needed
-load_dotenv()
-if getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
-
 # --- Helper Functions for Scoring Logic ---
 
 
 async def _perform_semantic_analysis(resume_text: str, job_description: str) -> SemanticAnalysis:
     """Perform semantic analysis with proper error handling"""
+    model = get_model()
+    if not model:
+        raise RuntimeError("Genkit model not available for semantic analysis")
+
     semantic_prompt = f"""
     Compare the resume against the job description.
     Provide a semantic similarity score from 0-100 and a brief explanation.
@@ -50,7 +54,7 @@ async def _perform_semantic_analysis(resume_text: str, job_description: str) -> 
     Job Description: "{job_description}"
     """
 
-    semantic_response = await gemini_pro.generate(
+    semantic_response = await model.generate(
         prompt=semantic_prompt,
         output_schema=SemanticAnalysis,
         config={"response_mime_type": "application/json"},
@@ -195,8 +199,8 @@ class AtsResult(BaseModel):
     keyword_placement_suggestions: Optional[List[KeywordPlacementSuggestion]] = None
 
 
-@genkit.flow(output_schema=AtsResult)
-async def atsScoring(
+# Flow decorator with conditional application
+def _ats_scoring_impl(
     resumeText: str,
     jobDescription: str,
     profileKeywords: List[str] = None,
@@ -361,3 +365,13 @@ async def atsScoring(
         recommendations=recommendations,
         keyword_placement_suggestions=placement_suggestions,
     )
+
+
+# Register the flow with conditional decorator
+if GENKIT_AVAILABLE and is_genkit_enabled():
+    atsScoring = genkit.flow(output_schema=AtsResult)(_ats_scoring_impl)
+else:
+    atsScoring = _ats_scoring_impl
+
+# Register the flow for tracking
+register_flow_function(atsScoring, "atsScoring")

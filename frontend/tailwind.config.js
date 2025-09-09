@@ -1,3 +1,119 @@
+import fs from 'fs';
+import path from 'path';
+
+// Function to read and parse design tokens from figma-design-tokens.json
+function getDesignTokens() {
+  try {
+    const tokensPath = path.resolve('../figma-design-tokens.json');
+    const tokensData = JSON.parse(fs.readFileSync(tokensPath, 'utf8'));
+    return tokensData;
+  } catch (error) {
+    console.warn('Could not load design tokens:', error.message);
+    return {};
+  }
+}
+
+// Function to flatten nested tokens and convert to kebab-case
+function flattenTokens(obj, prefix = '', result = {}) {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const kebabKey = key.replace(/([A-Z])/g, '-$1').toLowerCase();
+      const newPrefix = prefix ? `${prefix}-${kebabKey}` : kebabKey;
+
+      if (obj[key] && typeof obj[key] === 'object' && obj[key].value) {
+        // This is a token with a value
+        result[newPrefix] = obj[key].value;
+      } else if (obj[key] && typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+        // This is a nested object, continue flattening
+        flattenTokens(obj[key], newPrefix, result);
+      }
+    }
+  }
+  return result;
+}
+
+// Function to resolve token references (e.g., "{core.color.blue.500}")
+function resolveTokenReferences(tokens) {
+  const resolved = { ...tokens };
+
+  for (const key in resolved) {
+    let value = resolved[key];
+
+    if (typeof value === 'string' && value.includes('{') && value.includes('}')) {
+      // Extract the reference path
+      const matches = value.match(/\{([^}]+)\}/g);
+      if (matches) {
+        matches.forEach(match => {
+          const refPath = match.slice(1, -1); // Remove { and }
+          const refKey = refPath.replace(/\./g, '-');
+
+          if (tokens[refKey]) {
+            value = value.replace(match, tokens[refKey]);
+          }
+        });
+        resolved[key] = value;
+      }
+    }
+  }
+
+  return resolved;
+}
+
+// Generate design tokens
+function generateDesignTokens() {
+  const tokens = getDesignTokens();
+
+  // Flatten semantic and core tokens
+  const flattenedTokens = {
+    ...flattenTokens(tokens.core || {}),
+    ...flattenTokens(tokens.semantic || {}),
+    ...flattenTokens(tokens.component || {})
+  };
+
+  // Resolve token references
+  const resolvedTokens = resolveTokenReferences(flattenedTokens);
+
+  // Extract colors, spacing, typography, etc.
+  const colors = {};
+  const spacing = {};
+  const borderRadius = {};
+  const fontSize = {};
+  const fontFamily = {};
+  const fontWeight = {};
+  const lineHeight = {};
+
+  for (const [key, value] of Object.entries(resolvedTokens)) {
+    if (key.includes('color')) {
+      colors[key] = value;
+    } else if (key.includes('space') || key.includes('dimension')) {
+      spacing[key] = value;
+    } else if (key.includes('radius')) {
+      borderRadius[key] = value;
+    } else if (key.includes('font-size')) {
+      fontSize[key] = value;
+    } else if (key.includes('font-family')) {
+      fontFamily[key] = value;
+    } else if (key.includes('font-weight')) {
+      fontWeight[key] = value;
+    } else if (key.includes('line-height')) {
+      lineHeight[key] = value;
+    }
+  }
+
+  return {
+    colors,
+    spacing,
+    borderRadius,
+    fontSize,
+    fontFamily,
+    fontWeight,
+    lineHeight
+  };
+}
+
+// Generate tokens
+const designTokens = generateDesignTokens();
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class", '[data-theme="dark"]'],
@@ -21,6 +137,8 @@ export default {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'bounce-slow': 'bounce 3s infinite',
         'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
       keyframes: {
         fadeIn: {
@@ -57,6 +175,14 @@ export default {
           '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
           '40%, 60%': { transform: 'translate3d(4px, 0, 0)' },
         },
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
       },
       transitionProperty: {
         'height': 'height',
@@ -73,6 +199,7 @@ export default {
         'in': 'cubic-bezier(0.4, 0, 1, 1)',
       },
       colors: {
+        // Existing colors
         background: 'rgb(15, 23, 42)',
         foreground: '#f8fafc',
         card: 'rgb(30, 41, 59)',
@@ -96,42 +223,8 @@ export default {
         border: 'rgb(51, 65, 85)',
         input: 'rgb(30, 41, 59)',
         ring: 'rgb(99, 102, 241)',
-      },
-      borderRadius: {
-        lg: '0.75rem',
-        md: '0.5rem',
-        sm: '0.375rem',
-        xs: '0.25rem',
-      },
-      boxShadow: {
-        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
-        md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-        lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
-        xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
-        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
-        none: 'none',
-      },
-      zIndex: {
-        '0': '0',
-        '10': '10',
-        '20': '20',
-        '30': '30',
-        '40': '40',
-        '50': '50',
-        'auto': 'auto',
-      },
-    },
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
-    extend: {
-      colors: {
+
+        // Shadcn/ui colors
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -182,25 +275,67 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+
+        // Generated design token colors (kebab-cased)
+        ...designTokens.colors,
+      },
+      spacing: {
+        // Generated design token spacing (kebab-cased)
+        ...designTokens.spacing,
       },
       borderRadius: {
+        lg: '0.75rem',
+        md: '0.5rem',
+        sm: '0.375rem',
+        xs: '0.25rem',
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+
+        // Generated design token border radius (kebab-cased)
+        ...designTokens.borderRadius,
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
+      fontSize: {
+        // Generated design token font sizes (kebab-cased)
+        ...designTokens.fontSize,
       },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      fontFamily: {
+        // Generated design token font families (kebab-cased)
+        ...designTokens.fontFamily,
+      },
+      fontWeight: {
+        // Generated design token font weights (kebab-cased)
+        ...designTokens.fontWeight,
+      },
+      lineHeight: {
+        // Generated design token line heights (kebab-cased)
+        ...designTokens.lineHeight,
+      },
+      boxShadow: {
+        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
+        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+        md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+        lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+        xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+        inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
+        none: 'none',
+      },
+      zIndex: {
+        '0': '0',
+        '10': '10',
+        '20': '20',
+        '30': '30',
+        '40': '40',
+        '50': '50',
+        'auto': 'auto',
+      },
+    },
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
       },
     },
   },

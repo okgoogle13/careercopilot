@@ -274,8 +274,7 @@ export function OneClickApplyButton({
         variant={getButtonVariant()}
         className={cn(
           'flex items-center gap-2 transition-all duration-200',
-          stage === 'completed' && 'bg-green-600 hover:bg-green-700',
-          stage === 'error' && 'bg-red-600 hover:bg-red-700',
+          stage === 'completed' && 'bg-brand-green hover:bg-brand-green/90 text-white',
           className
         )}
       >

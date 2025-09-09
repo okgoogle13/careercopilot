@@ -1,16 +1,16 @@
 import json
 from typing import Optional
 
-import genkit
-from genkit.plugins import google_genai
+from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
 
-# Initialize Genkit and the Google AI plugin.
-# By not passing an explicit API key, the plugin will automatically
-# use the Application Default Credentials (ADC) of the service account.
-if not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init()])
+# Try to import Genkit for decorators, with fallback
+try:
+    import genkit
 
-gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
+    GENKIT_AVAILABLE = True
+except ImportError:
+    genkit = None
+    GENKIT_AVAILABLE = False
 
 
 # Removed @genkit.flow()
@@ -65,6 +65,14 @@ def generate_tailored_cover_letter(
     prompt += "\\n\\nNow, write the cover letter. The output should be only the full text of the letter itself."
 
     # Generate the cover letter using the AI model
-    response = gemini_pro.generate(prompt)
+    model = get_model()
+    if not model:
+        raise RuntimeError("Genkit model not available for cover letter generation")
+
+    response = model.generate(prompt)
 
     return response.text()
+
+
+# Register the flow for tracking
+register_flow_function(generate_tailored_cover_letter, "generate_tailored_cover_letter")

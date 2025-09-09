@@ -116,8 +116,8 @@ export function DocumentReviewModal({
   };
 
   const matchScore = document.metadata.matchScore || 0;
-  const matchScoreColor = matchScore >= 80 ? 'text-green-600' :
-                         matchScore >= 60 ? 'text-yellow-600' : 'text-red-600';
+  const matchScoreColor = matchScore >= 80 ? 'text-brand-green' :
+                         matchScore >= 60 ? 'text-brand-yellow' : 'text-destructive';
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -138,7 +138,7 @@ export function DocumentReviewModal({
               <div className="space-y-2">
                 <h3 className="font-semibold text-lg">{document.title}</h3>
                 {document.metadata.targetJob && (
-                  <div className="flex items-center gap-4 text-sm text-gray-600">
+                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
                       <Building className="w-4 h-4" />
                       {document.metadata.targetJob.company}
@@ -153,7 +153,7 @@ export function DocumentReviewModal({
                     </div>
                   </div>
                 )}
-                <div className="flex items-center gap-4 text-sm text-gray-500">
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
                   {document.metadata.wordCount && (
                     <span>{document.metadata.wordCount} words</span>
                   )}
@@ -168,7 +168,7 @@ export function DocumentReviewModal({
 
               <div className="text-right">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-sm text-gray-600">Match Score:</span>
+                  <span className="text-sm text-muted-foreground">Match Score:</span>
                   <span className={cn('font-bold text-lg', matchScoreColor)}>
                     {matchScore}%
                   </span>
@@ -183,13 +183,13 @@ export function DocumentReviewModal({
                 {document.issues.map((issue, index) => (
                   <div key={index} className={cn(
                     'flex items-start gap-2 p-2 rounded text-sm',
-                    issue.type === 'error' && 'bg-red-50 text-red-800',
-                    issue.type === 'warning' && 'bg-yellow-50 text-yellow-800',
-                    issue.type === 'suggestion' && 'bg-blue-50 text-blue-800'
+                    issue.type === 'error' && 'bg-destructive/10 text-destructive border border-destructive/20',
+                    issue.type === 'warning' && 'bg-brand-yellow/10 text-brand-yellow border border-brand-yellow/20',
+                    issue.type === 'suggestion' && 'bg-primary/10 text-primary border border-primary/20'
                   )}>
-                    {issue.type === 'error' && <AlertTriangle className="w-4 h-4 mt-0.5 text-red-500" />}
-                    {issue.type === 'warning' && <AlertTriangle className="w-4 h-4 mt-0.5 text-yellow-500" />}
-                    {issue.type === 'suggestion' && <CheckCircle className="w-4 h-4 mt-0.5 text-blue-500" />}
+                    {issue.type === 'error' && <AlertTriangle className="w-4 h-4 mt-0.5 text-destructive" />}
+                    {issue.type === 'warning' && <AlertTriangle className="w-4 h-4 mt-0.5 text-brand-yellow" />}
+                    {issue.type === 'suggestion' && <CheckCircle className="w-4 h-4 mt-0.5 text-primary" />}
                     <span>{issue.message}</span>
                   </div>
                 ))}
