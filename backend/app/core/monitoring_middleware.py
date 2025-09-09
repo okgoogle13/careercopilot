@@ -288,15 +288,24 @@ class RequestMonitoringMiddleware(BaseHTTPMiddleware):
 
         # Map endpoints to user actions
         action_mapping = {
-            ("POST", "/api/v1/documents/upload"): "document_upload",
+            # Updated paths for new API structure - all modules now working!
+            (
+                "POST",
+                "/api/v1/documents/upload",
+            ): "document_upload",  # Restored - documents module fixed
             ("GET", "/api/v1/documents"): "documents_view",
+            (
+                "POST",
+                "/api/v1/document-analysis/upload",
+            ): "document_upload_analysis",  # Additional endpoint
+            ("GET", "/api/v1/document-analysis"): "documents_analysis_view",
             ("POST", "/api/v1/analysis/ats-score"): "ats_analysis",
             ("POST", "/api/v1/jobs/analyze"): "job_analysis",
             ("POST", "/api/v1/jobs/compare-resume"): "resume_comparison",
             (
                 "POST",
                 "/api/v1/profile/generate-voice-profile",
-            ): "voice_profile_generation",
+            ): "voice_profile_generation",  # Restored - profile module fixed
             ("POST", "/api/v1/ksc/generate"): "ksc_generation",
             ("GET", "/api/v1/opportunities"): "opportunities_view",
             ("GET", "/api/v1/settings"): "settings_view",

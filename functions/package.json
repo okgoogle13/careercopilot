@@ -2,6 +2,9 @@
   "name": "functions",
   "packageManager": "yarn@4.9.1",
   "dependencies": {
+    "@genkit-ai/core": "^1.18.0",
+    "@genkit-ai/firebase": "^1.18.0",
+    "@genkit-ai/googleai": "^1.18.0",
     "@google-cloud/secret-manager": "^6.1.0",
     "firebase-admin": "^13.0.1",
     "firebase-functions": "^6.1.1"
@@ -15,6 +18,7 @@
     "eslint-plugin-import": "^2.27.5",
     "firebase-functions-test": "^3.4.1",
     "firebase-tools": "^13.27.0",
+    "tsx": "^4.20.5",
     "typescript": "^5.0.0"
   },
   "scripts": {
@@ -27,7 +31,10 @@
     "lint": "eslint . --max-warnings 10",
     "lint:fix": "eslint . --fix --max-warnings 50",
     "logs": "firebase functions:log",
-    "clean": "rm -rf node_modules .firebase lib"
+    "clean": "rm -rf node_modules .firebase lib",
+    "genkit:init": "node src/genkit-setup.js",
+    "genkit:dev": "npx genkit ui:start",
+    "genkit:flow": "npx genkit flow:run"
   },
   "version": "1.0.0",
   "description": "This directory contains the Cloud Functions for Firebase that power the CareerCopilot backend services.",

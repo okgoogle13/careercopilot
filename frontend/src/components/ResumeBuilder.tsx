@@ -4,12 +4,23 @@ import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Card } from "./ui/card";
 import { Label } from "./ui/label";
-import { ArrowLeft, Save, Eye, Download } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { Badge } from "./ui/badge";
+import { ArrowLeft, Save, Eye, Download, Layout, Palette } from "lucide-react";
 
 interface ResumeBuilderProps {
   onBack: () => void;
   onNext?: () => void;
   profileName?: string;
+}
+
+interface ResumeTemplate {
+  id: string;
+  name: string;
+  description: string;
+  category: 'modern' | 'traditional' | 'creative' | 'ats-friendly';
+  preview: string;
+  features: string[];
 }
 
 interface ResumeData {
@@ -37,6 +48,43 @@ interface ResumeData {
 }
 
 export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProps) {
+  const [selectedTemplate, setSelectedTemplate] = useState<string>("modern-1");
+
+  const resumeTemplates: ResumeTemplate[] = [
+    {
+      id: "modern-1",
+      name: "Modern Professional",
+      description: "Clean, contemporary design with subtle colors",
+      category: "modern",
+      preview: "A sleek design with a sidebar for skills and contact info",
+      features: ["ATS-friendly", "Color accents", "Skills sidebar", "Modern typography"]
+    },
+    {
+      id: "traditional-1",
+      name: "Classic Executive",
+      description: "Traditional format perfect for corporate roles",
+      category: "traditional",
+      preview: "Conservative layout with emphasis on experience",
+      features: ["Corporate-friendly", "Chronological format", "Clean sections", "Professional"]
+    },
+    {
+      id: "creative-1",
+      name: "Creative Designer",
+      description: "Bold design for creative professionals",
+      category: "creative",
+      preview: "Eye-catching layout with visual elements",
+      features: ["Visual design", "Color scheme", "Portfolio section", "Creative layout"]
+    },
+    {
+      id: "ats-1",
+      name: "ATS Optimized",
+      description: "Designed to pass Applicant Tracking Systems",
+      category: "ats-friendly",
+      preview: "Simple, clean format optimized for ATS parsing",
+      features: ["ATS-optimized", "Standard format", "Keyword friendly", "Machine readable"]
+    }
+  ];
+
   const [resumeData, setResumeData] = useState<ResumeData>({
     personalInfo: {
       fullName: profileName || "",
@@ -115,6 +163,18 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
     }));
   };
 
+  const getCurrentTemplate = () => resumeTemplates.find(t => t.id === selectedTemplate) || resumeTemplates[0];
+
+  const getCategoryColor = (category: string) => {
+    const colors = {
+      'modern': 'bg-blue-100 text-blue-800 border-blue-200',
+      'traditional': 'bg-gray-100 text-gray-800 border-gray-200',
+      'creative': 'bg-purple-100 text-purple-800 border-purple-200',
+      'ats-friendly': 'bg-green-100 text-green-800 border-green-200'
+    };
+    return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
+  };
+
   return (
     <div className="flex-1 p-8">
       <div className="flex items-center justify-between mb-8">
@@ -144,6 +204,65 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
           </Button>
         </div>
       </div>
+
+      {/* Template Selection Section */}
+      <Card className="mb-8 p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <Layout className="w-5 h-5 text-blue-600" />
+          <h3 className="text-lg font-medium">Choose Resume Template</h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          {resumeTemplates.map((template) => (
+            <Card
+              key={template.id}
+              className={`p-4 cursor-pointer transition-all border-2 ${
+                selectedTemplate === template.id
+                  ? 'border-blue-500 bg-blue-50'
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+              onClick={() => setSelectedTemplate(template.id)}
+            >
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-medium text-sm">{template.name}</h4>
+                  <Badge className={getCategoryColor(template.category)}>
+                    {template.category}
+                  </Badge>
+                </div>
+                <p className="text-xs text-gray-600">{template.description}</p>
+                <div className="h-20 bg-gray-100 rounded border flex items-center justify-center text-xs text-gray-500">
+                  Template Preview
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {template.features.slice(0, 2).map((feature, idx) => (
+                    <Badge key={idx} variant="outline" className="text-xs">
+                      {feature}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <div className="flex items-start gap-3">
+            <Palette className="w-4 h-4 text-gray-600 mt-0.5" />
+            <div>
+              <h5 className="font-medium text-sm">Selected: {getCurrentTemplate().name}</h5>
+              <p className="text-xs text-gray-600 mb-2">{getCurrentTemplate().preview}</p>
+              <div className="flex flex-wrap gap-1">
+                {getCurrentTemplate().features.map((feature, idx) => (
+                  <Badge key={idx} variant="outline" className="text-xs">
+                    {feature}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="space-y-6">
@@ -386,14 +505,14 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   {resumeData.personalInfo.email} | {resumeData.personalInfo.phone} | {resumeData.personalInfo.location}
                 </p>
               </div>
-              
+
               {resumeData.personalInfo.summary && (
                 <div className="mb-4">
                   <h3 className="font-bold mb-2">Professional Summary</h3>
                   <p className="text-gray-700">{resumeData.personalInfo.summary}</p>
                 </div>
               )}
-              
+
               {resumeData.experience.some(exp => exp.title || exp.company) && (
                 <div className="mb-4">
                   <h3 className="font-bold mb-2">Work Experience</h3>
@@ -413,7 +532,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   ))}
                 </div>
               )}
-              
+
               {resumeData.skills.length > 0 && (
                 <div className="mb-4">
                   <h3 className="font-bold mb-2">Skills</h3>

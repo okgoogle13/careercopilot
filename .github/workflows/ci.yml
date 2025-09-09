@@ -1,11 +1,3 @@
-Here's how you should integrate Testcontainers Cloud into your current advanced workflow, given all the custom jobs and environment handling. I see that you already have a conditional step for Testcontainers Cloud in your `backend` job, which is correct.
-
-You requested to change the Node.js version from 22 to 20.
-I will also update the global environment variable for `NODE_VERSION` to `'20'`, and ensure all usages reference this.
-
-Below is the **updated workflow** with these changes:
-
-```yaml name=.github/workflows/ci.yml
 name: CI - Build and Test
 
 on:
@@ -269,10 +261,3 @@ jobs:
               repo: context.repo.repo,
               body: '✅ **All Quality Checks Passed!**\n\nReady for review and merge.'
             })
-```
-
-**Summary of changes:**
-- Updated `NODE_VERSION` to `'20'` for all Node.js jobs.
-- Testcontainers Cloud is already properly integrated in the `backend` job under the `tests` group.
-
-If you want me to generate a pull request or have further adjustments, let me know!
