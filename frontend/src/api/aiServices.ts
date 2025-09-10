@@ -459,5 +459,183 @@ export async function scanInboxForOpportunities(): Promise<EmailScanResponse> {
   }
 }
 
+// New Genkit Flow API Services
+
+// Job Matching Types
+export interface JobMatchingRequest {
+  candidate_profile: Record<string, unknown>;
+  job_description: string;
+  matching_preferences?: Record<string, unknown>;
+}
+
+export interface JobMatchingResult {
+  compatibility_score: number;
+  strength_areas: string[];
+  improvement_areas: string[];
+  match_breakdown: Record<string, number>;
+  recommendations: string[];
+}
+
+// Content Optimization Types
+export interface ContentOptimizationRequest {
+  content: string;
+  target_role: string;
+  optimization_goals?: string[];
+}
+
+export interface ContentOptimizationResult {
+  optimized_content: string;
+  improvement_summary: string[];
+  keyword_density_analysis: Record<string, number>;
+  readability_score: number;
+  suggestions: string[];
+}
+
+// Resume Intelligence Types
+export interface ResumeIntelligenceRequest {
+  resume_content: string;
+  target_industry?: string;
+  career_goals?: string;
+  experience_level?: string;
+}
+
+export interface ResumeIntelligenceResult {
+  market_readiness: number;
+  competitive_analysis: Record<string, unknown>;
+  optimization_recommendations: string[];
+  skill_gap_analysis: Record<string, unknown>;
+  career_progression_insights: string[];
+}
+
+// Application Package Types
+export interface ApplicationPackageRequest {
+  job_description: string;
+  user_profile: Record<string, unknown>;
+}
+
+export interface ApplicationPackageResult {
+  success: boolean;
+  tailored_resume: Record<string, unknown>;
+  cover_letter: Record<string, unknown>;
+  ksc_responses?: Record<string, unknown>[];
+  application_strategy: Record<string, unknown>;
+  processing_time_seconds: number;
+  components_generated: string[];
+  error_details?: string[];
+}
+
+/**
+ * Analyze job compatibility using advanced multi-dimensional matching
+ */
+export async function analyzeJobCompatibility(
+  candidateProfile: Record<string, unknown>,
+  jobDescription: string,
+  matchingPreferences: Record<string, unknown> = {}
+): Promise<JobMatchingResult> {
+  try {
+    const requestBody: JobMatchingRequest = {
+      candidate_profile: candidateProfile,
+      job_description: jobDescription,
+      matching_preferences: matchingPreferences,
+    };
+
+    const response = await apiClient.post<JobMatchingResult>('/analysis/job-matching', requestBody);
+
+    return response;
+  } catch (error) {
+    console.error('Job Matching Error:', error);
+    throw new Error(
+      `Failed to analyze job compatibility: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+  }
+}
+
+/**
+ * Optimize content for target roles using AI-powered enhancement
+ */
+export async function optimizeContentForTarget(
+  content: string,
+  targetRole: string,
+  optimizationGoals: string[] = []
+): Promise<ContentOptimizationResult> {
+  try {
+    const requestBody: ContentOptimizationRequest = {
+      content,
+      target_role: targetRole,
+      optimization_goals: optimizationGoals,
+    };
+
+    const response = await apiClient.post<ContentOptimizationResult>(
+      '/analysis/content-optimization',
+      requestBody
+    );
+
+    return response;
+  } catch (error) {
+    console.error('Content Optimization Error:', error);
+    throw new Error(
+      `Failed to optimize content: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+  }
+}
+
+/**
+ * Generate comprehensive resume intelligence report
+ */
+export async function generateResumeIntelligenceReport(
+  resumeContent: string,
+  targetIndustry?: string,
+  careerGoals?: string,
+  experienceLevel: string = 'mid_level'
+): Promise<ResumeIntelligenceResult> {
+  try {
+    const requestBody: ResumeIntelligenceRequest = {
+      resume_content: resumeContent,
+      target_industry: targetIndustry,
+      career_goals: careerGoals,
+      experience_level: experienceLevel,
+    };
+
+    const response = await apiClient.post<ResumeIntelligenceResult>(
+      '/analysis/resume-intelligence',
+      requestBody
+    );
+
+    return response;
+  } catch (error) {
+    console.error('Resume Intelligence Error:', error);
+    throw new Error(
+      `Failed to generate resume intelligence: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+  }
+}
+
+/**
+ * Generate complete application package using workflow orchestration
+ */
+export async function generateApplicationPackage(
+  jobDescription: string,
+  userProfile: Record<string, unknown>
+): Promise<ApplicationPackageResult> {
+  try {
+    const requestBody: ApplicationPackageRequest = {
+      job_description: jobDescription,
+      user_profile: userProfile,
+    };
+
+    const response = await apiClient.post<{ data: ApplicationPackageResult }>(
+      '/workflows/generate-application',
+      requestBody
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Application Package Generation Error:', error);
+    throw new Error(
+      `Failed to generate application package: ${error instanceof Error ? error.message : 'Unknown error'}`
+    );
+  }
+}
+
 // Export the API client for use in other modules
 export { apiClient };
