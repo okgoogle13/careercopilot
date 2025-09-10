@@ -1,7 +1,7 @@
-import { Edit3, Trash2 } from "lucide-react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback } from "./ui/avatar";
+import { Edit3, Trash2 } from 'lucide-react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Avatar, AvatarFallback } from './ui/avatar';
 
 interface ProfileCardProps {
   name: string;
@@ -27,17 +27,17 @@ export function ProfileCard({
   isSelected = false,
 }: ProfileCardProps) {
   return (
-    <Card 
-      variant={isSelected ? "selected" : "interactive"}
-      className="p-6 space-y-4"
-    >
+    <Card variant={isSelected ? 'selected' : 'interactive'} className="p-6 space-y-4">
       <div className="flex items-center gap-3">
         <Avatar className="w-12 h-12">
-          <AvatarFallback 
+          <AvatarFallback
             className="text-black font-medium"
             style={{ backgroundColor: avatarColor }}
           >
-            {name.split(' ').map(n => n[0]).join('')}
+            {name
+              .split(' ')
+              .map((n) => n[0])
+              .join('')}
           </AvatarFallback>
         </Avatar>
         <div>
@@ -51,12 +51,12 @@ export function ProfileCard({
           <span className="text-sm text-muted-foreground">Active Applications:</span>
           <span className="font-medium text-card-foreground">{activeApplications}</span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-sm text-muted-foreground">ATS Score Average:</span>
           <span className="font-medium text-primary">{atsScore}%</span>
         </div>
-        
+
         <div className="flex justify-between items-center">
           <span className="text-sm text-muted-foreground">Last Updated:</span>
           <span className="text-sm text-muted-foreground">{lastUpdated}</span>

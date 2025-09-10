@@ -1,20 +1,18 @@
-import * as React from "react";
-import { useFormContext } from "react-hook-form";
+import * as React from 'react';
+import { useFormContext } from 'react-hook-form';
 
 type FormFieldContextValue = {
   name: string;
 };
 
-export const FormFieldContext = React.createContext<FormFieldContextValue | null>(
-  null
-);
+export const FormFieldContext = React.createContext<FormFieldContextValue | null>(null);
 
 export const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext);
   const { getFieldState, formState } = useFormContext();
 
   if (!fieldContext) {
-    throw new Error("useFormField must be used within a <FormField>");
+    throw new Error('useFormField must be used within a <FormField>');
   }
 
   const fieldState = getFieldState(fieldContext.name, formState);

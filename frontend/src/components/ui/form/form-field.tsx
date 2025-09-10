@@ -1,12 +1,17 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { Controller, type ControllerProps, type FieldPath, type FieldValues } from "react-hook-form";
-import { FormFieldContext } from "./form-field-context";
+import * as React from 'react';
+import {
+  Controller,
+  type ControllerProps,
+  type FieldPath,
+  type FieldValues,
+} from 'react-hook-form';
+import { FormFieldContext } from './form-field-context';
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
@@ -17,7 +22,7 @@ const FormField = <
   );
 };
 
-FormField.displayName = "FormField";
+FormField.displayName = 'FormField';
 
 export { FormField };
 export type { ControllerProps, FieldPath, FieldValues };

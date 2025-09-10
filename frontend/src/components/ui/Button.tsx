@@ -1,13 +1,11 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { Loader2 } from "lucide-react";
+import * as React from 'react';
+import { Slot } from '@radix-ui/react-slot';
+import { Loader2 } from 'lucide-react';
 
-import { cn } from "./utils";
-import { buttonVariants, type ButtonVariants } from "./button-variants";
+import { cn } from './utils';
+import { buttonVariants, type ButtonVariants } from './button-variants';
 
-interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    ButtonVariants {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonVariants {
   asChild?: boolean;
   isLoading?: boolean;
   loadingText?: string;
@@ -28,7 +26,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const Comp = asChild ? Slot : "button";
+    const Comp = asChild ? Slot : 'button';
     const isDisabled = disabled || isLoading;
 
     return (
@@ -37,8 +35,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-loading={isLoading}
         className={cn(
           buttonVariants({ variant, size, className }),
-          "relative overflow-hidden",
-          isLoading && "cursor-wait"
+          'relative overflow-hidden',
+          isLoading && 'cursor-wait'
         )}
         disabled={isDisabled}
         ref={ref}
@@ -50,15 +48,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {loadingText && <span className="ml-2">{loadingText}</span>}
           </span>
         )}
-        <span className={cn("flex items-center gap-2", isLoading && "invisible")}>
-          {children}
-        </span>
+        <span className={cn('flex items-center gap-2', isLoading && 'invisible')}>{children}</span>
       </Comp>
     );
   }
 );
 
-Button.displayName = "Button";
+Button.displayName = 'Button';
 
 export { Button, buttonVariants };
 export type { ButtonProps };

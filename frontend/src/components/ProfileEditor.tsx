@@ -1,27 +1,54 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Textarea } from "./ui/textarea";
-import { Input } from "./ui/input";
-import { Badge } from "./ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Switch } from "./ui/switch";
-import { Slider } from "./ui/slider";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
-import { Progress } from "./ui/progress";
-import { Separator } from "./ui/separator";
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { Textarea } from './ui/textarea';
+import { Input } from './ui/input';
+import { Badge } from './ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Switch } from './ui/switch';
+import { Slider } from './ui/slider';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { Progress } from './ui/progress';
+import { Separator } from './ui/separator';
 import {
-  Sparkles, User, Briefcase, GraduationCap, Award, X, Plus,
-  MapPin, Globe, Linkedin, Github, Twitter, Calendar, Phone, Mail,
-  Edit, Upload, Camera, Palette, Settings, Target, TrendingUp,
-  Languages, Code, Heart, Loader2, CheckCircle, AlertCircle, Star
-} from "lucide-react";
-import { KeywordTag, KeywordTagGroup } from "./library/KeywordTag";
-import { AnimatedCard, AnimatedButton, AnimatedProgress } from "./AnimatedComponents";
-import { AIProcessingLoading } from "./StandardizedLoadingStates";
+  Sparkles,
+  ArrowLeft,
+  Eye,
+  User,
+  Briefcase,
+  GraduationCap,
+  Award,
+  X,
+  Plus,
+  MapPin,
+  Globe,
+  Linkedin,
+  Github,
+  Twitter,
+  Calendar,
+  Phone,
+  Mail,
+  Edit,
+  Upload,
+  Camera,
+  Palette,
+  Settings,
+  Target,
+  TrendingUp,
+  Languages,
+  Code,
+  Heart,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+  Star,
+} from 'lucide-react';
+import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
+import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';
+import { AIProcessingLoading } from './StandardizedLoadingStates';
 
 interface SocialLink {
   platform: 'linkedin' | 'github' | 'twitter' | 'website' | 'portfolio';
@@ -72,37 +99,57 @@ interface ProfileEditorProps {
 export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProps) {
   // Basic Profile State
   const [personalInfo, setPersonalInfo] = useState({
-    fullName: "Nishant Dougall",
-    email: "nishant.dougall@email.com",
-    phone: "+61 4XX XXX XXX",
-    location: "Vancouver, BC",
-    title: "Community Support Worker",
-    avatarUrl: "",
-    tagline: "Empowering communities through compassionate support"
+    fullName: 'Nishant Dougall',
+    email: 'nishant.dougall@email.com',
+    phone: '+61 4XX XXX XXX',
+    location: 'Vancouver, BC',
+    title: 'Community Support Worker',
+    avatarUrl: '',
+    tagline: 'Empowering communities through compassionate support',
   });
 
-  const [summary, setSummary] = useState("");
+  const [summary, setSummary] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
 
   // Enhanced Skills with levels and categories
-  const [skills, setSkills] = useState<Array<{
-    keyword: string;
-    status: 'matched' | 'missing' | 'suggested';
-    level: number; // 1-10
-    category: 'technical' | 'soft' | 'industry' | 'language';
-    yearsOfExperience?: number;
-    certifications?: string[];
-  }>>([
-    { keyword: "Crisis Intervention", status: "matched", level: 9, category: "industry", yearsOfExperience: 5 },
-    { keyword: "Case Management", status: "matched", level: 8, category: "industry", yearsOfExperience: 4 },
-    { keyword: "Active Listening", status: "matched", level: 9, category: "soft", yearsOfExperience: 6 },
-    { keyword: "Mental Health First Aid", status: "suggested", level: 7, category: "industry" },
+  const [skills, setSkills] = useState<
+    Array<{
+      keyword: string;
+      status: 'matched' | 'missing' | 'suggested';
+      level: number; // 1-10
+      category: 'technical' | 'soft' | 'industry' | 'language';
+      yearsOfExperience?: number;
+      certifications?: string[];
+    }>
+  >([
+    {
+      keyword: 'Crisis Intervention',
+      status: 'matched',
+      level: 9,
+      category: 'industry',
+      yearsOfExperience: 5,
+    },
+    {
+      keyword: 'Case Management',
+      status: 'matched',
+      level: 8,
+      category: 'industry',
+      yearsOfExperience: 4,
+    },
+    {
+      keyword: 'Active Listening',
+      status: 'matched',
+      level: 9,
+      category: 'soft',
+      yearsOfExperience: 6,
+    },
+    { keyword: 'Mental Health First Aid', status: 'suggested', level: 7, category: 'industry' },
   ]);
 
   // Social Links
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([
     { platform: 'linkedin', url: 'https://linkedin.com/in/nishant-dougall', verified: true },
-    { platform: 'github', url: '', verified: false }
+    { platform: 'github', url: '', verified: false },
   ]);
 
   // Experience & Education
@@ -115,14 +162,15 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       startDate: '2019-03',
       endDate: '',
       current: true,
-      description: 'Providing comprehensive support to individuals with diverse needs in community settings.',
+      description:
+        'Providing comprehensive support to individuals with diverse needs in community settings.',
       achievements: [
         'Supported 25+ clients with mental health and addiction challenges',
         'Reduced client crisis incidents by 40% through proactive intervention',
-        'Developed individualized care plans improving client satisfaction by 30%'
+        'Developed individualized care plans improving client satisfaction by 30%',
       ],
-      skills: ['Crisis Intervention', 'Case Management', 'Client Support']
-    }
+      skills: ['Crisis Intervention', 'Case Management', 'Client Support'],
+    },
   ]);
 
   const [education, setEducation] = useState<Education[]>([
@@ -133,8 +181,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       location: 'Brisbane, QLD',
       startDate: '2016-02',
       endDate: '2017-06',
-      honors: ['Dean\'s List', 'Outstanding Student Award']
-    }
+      honors: ["Dean's List", 'Outstanding Student Award'],
+    },
   ]);
 
   // Profile Settings
@@ -144,13 +192,13 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     showLocation: true,
     openToOpportunities: true,
     preferredJobTypes: ['Full-time', 'Contract'],
-    workArrangement: 'hybrid'
+    workArrangement: 'hybrid',
   });
 
   // UI State
   const [activeTab, setActiveTab] = useState('basic');
   const [profileStrength, setProfileStrength] = useState(75);
-  const [newSkill, setNewSkill] = useState("");
+  const [newSkill, setNewSkill] = useState('');
   const [editingExperience, setEditingExperience] = useState<string | null>(null);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
 
@@ -158,31 +206,34 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
   const handleGenerateSummary = async () => {
     setIsGenerating(true);
     setTimeout(() => {
-      setSummary("Dedicated and compassionate Community Support Worker with over 5 years of experience in providing client-centered care. Skilled in crisis intervention, case management, and developing support plans that empower individuals to achieve their goals.");
+      setSummary(
+        'Dedicated and compassionate Community Support Worker with over 5 years of experience in providing client-centered care. Skilled in crisis intervention, case management, and developing support plans that empower individuals to achieve their goals.'
+      );
       setIsGenerating(false);
     }, 2000);
   };
 
   const addSkill = () => {
     if (newSkill.trim()) {
-      setSkills([...skills, {
-        keyword: newSkill.trim(),
-        status: 'matched',
-        level: 5,
-        category: 'industry'
-      }]);
+      setSkills([
+        ...skills,
+        {
+          keyword: newSkill.trim(),
+          status: 'matched',
+          level: 5,
+          category: 'industry',
+        },
+      ]);
       setNewSkill('');
     }
   };
 
   const removeSkill = (keyword: string) => {
-    setSkills(skills.filter(skill => skill.keyword !== keyword));
+    setSkills(skills.filter((skill) => skill.keyword !== keyword));
   };
 
   const updateSkillLevel = (keyword: string, level: number) => {
-    setSkills(skills.map(skill =>
-      skill.keyword === keyword ? { ...skill, level } : skill
-    ));
+    setSkills(skills.map((skill) => (skill.keyword === keyword ? { ...skill, level } : skill)));
   };
 
   const getSocialIcon = (platform: string) => {
@@ -191,7 +242,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       github: Github,
       twitter: Twitter,
       website: Globe,
-      portfolio: Code
+      portfolio: Code,
     };
     return icons[platform as keyof typeof icons] || Globe;
   };
@@ -201,7 +252,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       technical: 'bg-blue-100 text-blue-800 border-blue-200',
       soft: 'bg-green-100 text-green-800 border-green-200',
       industry: 'bg-purple-100 text-purple-800 border-purple-200',
-      language: 'bg-amber-100 text-amber-800 border-amber-200'
+      language: 'bg-amber-100 text-amber-800 border-amber-200',
     };
     return colors[category as keyof typeof colors] || 'bg-gray-100 text-gray-800 border-gray-200';
   };
@@ -216,7 +267,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     if (skills.length >= 5) strength += 15;
     if (experiences.length >= 1) strength += 15;
     if (education.length >= 1) strength += 10;
-    if (socialLinks.some(link => link.url)) strength += 10;
+    if (socialLinks.some((link) => link.url)) strength += 10;
     return Math.min(100, strength);
   };
 
@@ -231,7 +282,10 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 <Avatar className="h-20 w-20 border-4 border-white shadow-lg">
                   <AvatarImage src={personalInfo.avatarUrl} />
                   <AvatarFallback className="text-lg font-semibold bg-gradient-to-br from-blue-500 to-purple-600 text-white">
-                    {personalInfo.fullName.split(' ').map(n => n[0]).join('')}
+                    {personalInfo.fullName
+                      .split(' ')
+                      .map((n) => n[0])
+                      .join('')}
                   </AvatarFallback>
                 </Avatar>
                 <Button
@@ -256,18 +310,17 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             <Card className="p-4 mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium">Profile Strength</span>
-                <Badge variant={calculateProfileStrength() >= 80 ? "default" : "secondary"}>
+                <Badge variant={calculateProfileStrength() >= 80 ? 'default' : 'secondary'}>
                   {calculateProfileStrength()}% Complete
                 </Badge>
               </div>
               <AnimatedProgress value={calculateProfileStrength()} max={100} />
               <p className="text-xs text-muted-foreground mt-2">
                 {calculateProfileStrength() >= 90
-                  ? "Excellent! Your profile is highly optimized."
+                  ? 'Excellent! Your profile is highly optimized.'
                   : calculateProfileStrength() >= 70
-                  ? "Good progress! Add more details to stand out."
-                  : "Keep building! A strong profile increases your opportunities."
-                }
+                    ? 'Good progress! Add more details to stand out.'
+                    : 'Keep building! A strong profile increases your opportunities.'}
               </p>
             </Card>
           </div>
@@ -315,7 +368,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <label className="text-sm font-medium mb-2 block">Full Name *</label>
                         <Input
                           value={personalInfo.fullName}
-                          onChange={(e) => setPersonalInfo({...personalInfo, fullName: e.target.value})}
+                          onChange={(e) =>
+                            setPersonalInfo({ ...personalInfo, fullName: e.target.value })
+                          }
                           placeholder="Enter full name"
                         />
                       </div>
@@ -323,7 +378,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <label className="text-sm font-medium mb-2 block">Professional Title</label>
                         <Input
                           value={personalInfo.title}
-                          onChange={(e) => setPersonalInfo({...personalInfo, title: e.target.value})}
+                          onChange={(e) =>
+                            setPersonalInfo({ ...personalInfo, title: e.target.value })
+                          }
                           placeholder="e.g., Senior Developer"
                         />
                       </div>
@@ -333,7 +390,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <label className="text-sm font-medium mb-2 block">Professional Tagline</label>
                       <Input
                         value={personalInfo.tagline}
-                        onChange={(e) => setPersonalInfo({...personalInfo, tagline: e.target.value})}
+                        onChange={(e) =>
+                          setPersonalInfo({ ...personalInfo, tagline: e.target.value })
+                        }
                         placeholder="A brief, compelling description"
                       />
                     </div>
@@ -344,7 +403,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <Input
                           type="email"
                           value={personalInfo.email}
-                          onChange={(e) => setPersonalInfo({...personalInfo, email: e.target.value})}
+                          onChange={(e) =>
+                            setPersonalInfo({ ...personalInfo, email: e.target.value })
+                          }
                           placeholder="professional@email.com"
                         />
                       </div>
@@ -352,7 +413,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <label className="text-sm font-medium mb-2 block">Phone</label>
                         <Input
                           value={personalInfo.phone}
-                          onChange={(e) => setPersonalInfo({...personalInfo, phone: e.target.value})}
+                          onChange={(e) =>
+                            setPersonalInfo({ ...personalInfo, phone: e.target.value })
+                          }
                           placeholder="+1 (555) 123-4567"
                         />
                       </div>
@@ -362,7 +425,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <label className="text-sm font-medium mb-2 block">Location</label>
                       <Input
                         value={personalInfo.location}
-                        onChange={(e) => setPersonalInfo({...personalInfo, location: e.target.value})}
+                        onChange={(e) =>
+                          setPersonalInfo({ ...personalInfo, location: e.target.value })
+                        }
                         placeholder="City, State/Province, Country"
                       />
                     </div>
@@ -417,11 +482,18 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       {summary.length > 0 && (
                         <div className="mt-1 flex gap-4">
                           <span>Readability: Good</span>
-                          <span>Keywords: {summary.split(' ').filter(word =>
-                            ['experience', 'skilled', 'professional', 'expertise'].some(keyword =>
-                              word.toLowerCase().includes(keyword.toLowerCase())
-                            )).length
-                          }</span>
+                          <span>
+                            Keywords:{' '}
+                            {
+                              summary
+                                .split(' ')
+                                .filter((word) =>
+                                  ['experience', 'skilled', 'professional', 'expertise'].some(
+                                    (keyword) => word.toLowerCase().includes(keyword.toLowerCase())
+                                  )
+                                ).length
+                            }
+                          </span>
                         </div>
                       )}
                     </div>
@@ -478,8 +550,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                 {/* Skills Grid */}
                 <div className="space-y-6">
-                  {['technical', 'soft', 'industry', 'language'].map(category => {
-                    const categorySkills = skills.filter(skill => skill.category === category);
+                  {['technical', 'soft', 'industry', 'language'].map((category) => {
+                    const categorySkills = skills.filter((skill) => skill.category === category);
                     if (categorySkills.length === 0) return null;
 
                     return (
@@ -502,7 +574,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                                   )}
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <span className="text-xs text-muted-foreground">Level {skill.level}/10</span>
+                                  <span className="text-xs text-muted-foreground">
+                                    Level {skill.level}/10
+                                  </span>
                                   <Button
                                     variant="ghost"
                                     size="icon"
@@ -516,10 +590,14 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                               <div className="space-y-2">
                                 <div className="flex items-center gap-2">
-                                  <span className="text-xs text-muted-foreground w-16">Proficiency:</span>
+                                  <span className="text-xs text-muted-foreground w-16">
+                                    Proficiency:
+                                  </span>
                                   <Slider
                                     value={[skill.level]}
-                                    onValueChange={(value) => updateSkillLevel(skill.keyword, value[0])}
+                                    onValueChange={(value) =>
+                                      updateSkillLevel(skill.keyword, value[0])
+                                    }
                                     max={10}
                                     step={1}
                                     className="flex-1"
@@ -542,7 +620,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <h4 className="font-medium text-blue-900">AI Skill Suggestions</h4>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {['Team Leadership', 'Data Analysis', 'Customer Service', 'Problem Solving'].map((suggestion) => (
+                    {[
+                      'Team Leadership',
+                      'Data Analysis',
+                      'Customer Service',
+                      'Problem Solving',
+                    ].map((suggestion) => (
                       <Button
                         key={suggestion}
                         variant="outline"
@@ -604,7 +687,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   <Button
                     variant="outline"
                     className="w-full"
-                    onClick={() => setSocialLinks([...socialLinks, { platform: 'website', url: '', verified: false }])}
+                    onClick={() =>
+                      setSocialLinks([
+                        ...socialLinks,
+                        { platform: 'website', url: '', verified: false },
+                      ])
+                    }
                   >
                     <Plus className="w-4 h-4 mr-2" />
                     Add Social Link
@@ -627,9 +715,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   {/* Profile Visibility */}
                   <div className="space-y-3">
                     <label className="text-sm font-medium">Profile Visibility</label>
-                    <Select value={profileSettings.privacy} onValueChange={(value: any) =>
-                      setProfileSettings({...profileSettings, privacy: value})
-                    }>
+                    <Select
+                      value={profileSettings.privacy}
+                      onValueChange={(value: any) =>
+                        setProfileSettings({ ...profileSettings, privacy: value })
+                      }
+                    >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
@@ -649,12 +740,14 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium text-sm">Open to Opportunities</p>
-                        <p className="text-xs text-muted-foreground">Let recruiters know you're available</p>
+                        <p className="text-xs text-muted-foreground">
+                          Let recruiters know you're available
+                        </p>
                       </div>
                       <Switch
                         checked={profileSettings.openToOpportunities}
                         onCheckedChange={(checked) =>
-                          setProfileSettings({...profileSettings, openToOpportunities: checked})
+                          setProfileSettings({ ...profileSettings, openToOpportunities: checked })
                         }
                       />
                     </div>
@@ -662,12 +755,14 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <div className="flex items-center justify-between">
                       <div>
                         <p className="font-medium text-sm">Show Location</p>
-                        <p className="text-xs text-muted-foreground">Display your location publicly</p>
+                        <p className="text-xs text-muted-foreground">
+                          Display your location publicly
+                        </p>
                       </div>
                       <Switch
                         checked={profileSettings.showLocation}
                         onCheckedChange={(checked) =>
-                          setProfileSettings({...profileSettings, showLocation: checked})
+                          setProfileSettings({ ...profileSettings, showLocation: checked })
                         }
                       />
                     </div>
@@ -695,7 +790,11 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 <Eye className="w-4 h-4 mr-2" />
                 Preview
               </Button>
-              <Button onClick={onNext} size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+              <Button
+                onClick={onNext}
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+              >
                 <Star className="w-4 h-4 mr-2" />
                 Save Profile & Continue
               </Button>

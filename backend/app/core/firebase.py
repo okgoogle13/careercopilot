@@ -69,7 +69,7 @@ def initialize_firebase() -> Optional[App]:
                 {
                     "project_id": firebase_config["project_id"],
                     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIBVgIBADANBgkqhkiG9w0BAQEFAASCAUAwggE8AgEAAkEAt+Qy8KvF1n1pKvJk\n...",
-                    "client_email": f'firebase-adminsdk-{firebase_config["project_id"]}@appspot.gserviceaccount.com',
+                    "client_email": 'firebase-adminsdk-{firebase_config["project_id"]}@appspot.gserviceaccount.com',
                 }
             )
         else:

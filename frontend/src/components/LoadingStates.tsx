@@ -1,10 +1,10 @@
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Skeleton } from "./ui/skeleton";
-import { Progress } from "./ui/progress";
-import { ArrowLeft, Upload, FileText, Loader2, CheckCircle } from "lucide-react";
-import { Logo } from "./Logo";
-import { useState, useEffect } from "react";
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Skeleton } from './ui/skeleton';
+import { Progress } from './ui/progress';
+import { ArrowLeft, Upload, FileText, Loader2, CheckCircle } from 'lucide-react';
+import { Logo } from './Logo';
+import { useState, useEffect } from 'react';
 
 interface LoadingStatesProps {
   onBack: () => void;
@@ -18,8 +18,8 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
   // Simulate progress animations
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => (prev + 1) % 101);
-      setUploadProgress(prev => (prev + 2) % 101);
+      setProgress((prev) => (prev + 1) % 101);
+      setUploadProgress((prev) => (prev + 2) % 101);
     }, 100);
 
     return () => clearInterval(interval);
@@ -27,17 +27,17 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAnalysisStep(prev => (prev + 1) % 4);
+      setAnalysisStep((prev) => (prev + 1) % 4);
     }, 2000);
 
     return () => clearInterval(interval);
   }, []);
 
   const analysisSteps = [
-    { label: "Parsing document structure", completed: analysisStep > 0 },
-    { label: "Extracting keywords", completed: analysisStep > 1 },
-    { label: "Running ATS analysis", completed: analysisStep > 2 },
-    { label: "Generating recommendations", completed: analysisStep > 3 }
+    { label: 'Parsing document structure', completed: analysisStep > 0 },
+    { label: 'Extracting keywords', completed: analysisStep > 1 },
+    { label: 'Running ATS analysis', completed: analysisStep > 2 },
+    { label: 'Generating recommendations', completed: analysisStep > 3 },
   ];
 
   return (
@@ -102,7 +102,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
                 <p className="text-sm text-muted-foreground">This may take a few moments</p>
               </div>
             </div>
-            
+
             <div className="space-y-3">
               {analysisSteps.map((step, index) => (
                 <div key={index} className="flex items-center gap-3">
@@ -113,7 +113,9 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
                   ) : (
                     <div className="w-4 h-4 border-2 border-muted rounded-full" />
                   )}
-                  <span className={`text-sm ${step.completed ? 'text-green-400' : index === analysisStep ? 'text-primary' : 'text-muted-foreground'}`}>
+                  <span
+                    className={`text-sm ${step.completed ? 'text-green-400' : index === analysisStep ? 'text-primary' : 'text-muted-foreground'}`}
+                  >
                     {step.label}
                   </span>
                 </div>
@@ -144,7 +146,9 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
                 <Logo className="text-primary" size={32} />
               </div>
               <p className="font-medium mb-2">Generating your resume</p>
-              <p className="text-sm text-muted-foreground mb-4">Applying Modern Minimal template...</p>
+              <p className="text-sm text-muted-foreground mb-4">
+                Applying Modern Minimal template...
+              </p>
               <Progress value={progress} className="w-full mb-2" />
               <p className="text-xs text-muted-foreground">Processing content and formatting</p>
             </div>
@@ -187,17 +191,26 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
               <Loader2 className="w-6 h-6 text-primary animate-spin" />
               <div className="text-sm text-muted-foreground">Default spinner</div>
             </div>
-            
+
             <div className="flex items-center gap-4 justify-center">
               <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
               <div className="text-sm text-muted-foreground">Border spinner</div>
             </div>
-            
+
             <div className="flex items-center gap-4 justify-center">
               <div className="flex gap-1">
-                <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <div
+                  className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                  style={{ animationDelay: '0ms' }}
+                />
+                <div
+                  className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                  style={{ animationDelay: '150ms' }}
+                />
+                <div
+                  className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                  style={{ animationDelay: '300ms' }}
+                />
               </div>
               <div className="text-sm text-muted-foreground">Dot animation</div>
             </div>

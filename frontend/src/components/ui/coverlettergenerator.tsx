@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { cn } from "@/lib/utils";
-import { Editor } from "@/components/ui/editor";
-import { generateCoverLetter } from "@/api/aiServices";
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import { Card } from '@/components/ui/card';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { cn } from '@/lib/utils';
+import { Editor } from '@/components/ui/editor';
+import { generateCoverLetter } from '@/api/aiServices';
 
 type ToneSetting = 'Formal' | 'Casual' | 'Enthusiastic';
 
@@ -32,24 +38,11 @@ export const CoverLetterGenerator: React.FC = () => {
   };
 
   return (
-    <div
-      className={cn(
-        "container mx-auto p-8",
-        "bg-background",
-        "min-h-screen"
-      )}
-    >
-      <div
-        className={cn(
-          "grid md:grid-cols-2 gap-8",
-          "max-w-6xl mx-auto"
-        )}
-      >
+    <div className={cn('container mx-auto p-8', 'bg-background', 'min-h-screen')}>
+      <div className={cn('grid md:grid-cols-2 gap-8', 'max-w-6xl mx-auto')}>
         {/* Left Panel: Job Description */}
         <Card className="p-6 space-y-6">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Job Description
-          </h2>
+          <h2 className="text-2xl font-semibold text-foreground">Job Description</h2>
 
           <Textarea
             value={jobDescription}
@@ -59,9 +52,7 @@ export const CoverLetterGenerator: React.FC = () => {
           />
 
           <div className="flex items-center gap-4">
-            <label className="text-sm text-muted-foreground">
-              Tone:
-            </label>
+            <label className="text-sm text-muted-foreground">Tone:</label>
             <Select value={tone} onValueChange={(val: ToneSetting) => setTone(val)}>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Select tone" />
@@ -93,9 +84,7 @@ export const CoverLetterGenerator: React.FC = () => {
 
         {/* Right Panel: Generated Cover Letter */}
         <Card className="p-6 space-y-6">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Tailored Cover Letter
-          </h2>
+          <h2 className="text-2xl font-semibold text-foreground">Tailored Cover Letter</h2>
 
           <Editor
             value={generatedCoverLetter}
@@ -108,9 +97,7 @@ export const CoverLetterGenerator: React.FC = () => {
             <Button variant="secondary" className="flex-1">
               Download PDF
             </Button>
-            <Button className="flex-1">
-              Save Version
-            </Button>
+            <Button className="flex-1">Save Version</Button>
           </div>
         </Card>
       </div>

@@ -16,24 +16,24 @@ export const SkillTag: React.FC<SkillTagProps> = ({
   status = 'suggested',
   onAccept,
   onReject,
-  className
+  className,
 }) => {
   const statusConfig = {
     suggested: {
       bgClass: 'bg-brand-primary/10 border-brand-primary/30 text-brand-primary border-dashed',
       textClass: 'text-brand-primary',
-      icon: null
+      icon: null,
     },
     accepted: {
       bgClass: 'bg-accent-green/10 border-accent-green/30 text-accent-green',
       textClass: 'text-accent-green',
-      icon: <Check className="w-4 h-4" />
+      icon: <Check className="w-4 h-4" />,
     },
     rejected: {
       bgClass: 'bg-accent-red/10 border-accent-red/30 text-accent-red',
       textClass: 'text-accent-red',
-      icon: <X className="w-4 h-4" />
-    }
+      icon: <X className="w-4 h-4" />,
+    },
   };
 
   const config = statusConfig[status];
@@ -49,11 +49,7 @@ export const SkillTag: React.FC<SkillTagProps> = ({
         className
       )}
     >
-      {config.icon && (
-        <span className="shrink-0">
-          {config.icon}
-        </span>
-      )}
+      {config.icon && <span className="shrink-0">{config.icon}</span>}
 
       <span className="truncate">{text}</span>
 

@@ -1,16 +1,6 @@
-import os
-
-from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
+from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.core.genkit_init import get_model
 from pydantic import BaseModel
-
-# Try to import Genkit for decorators, with fallback
-try:
-    import genkit
-
-    GENKIT_AVAILABLE = True
-except ImportError:
-    genkit = None
-    GENKIT_AVAILABLE = False
 
 
 # Define the structured output model using Pydantic
@@ -21,7 +11,8 @@ class STAR_Response(BaseModel):
     result: str
 
 
-def _generate_ksc_response_impl(user_profile_data: dict, ksc_statement: str) -> STAR_Response:
+@simple_genkit_flow(output_schema=STAR_Response)
+def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Response:
     """
     Acts as an expert career coach to generate a STAR response for a KSC statement.
     """
@@ -48,10 +39,9 @@ def _generate_ksc_response_impl(user_profile_data: dict, ksc_statement: str) -> 
     """
 
     # Generate the response using the centralized model
+    # Model availability is guaranteed by the decorator
     model = get_model()
-    if not model:
-        raise RuntimeError("Genkit model not available for KSC generation")
-
+    
     response = model.generate(
         prompt=prompt,
         config={
@@ -62,11 +52,4 @@ def _generate_ksc_response_impl(user_profile_data: dict, ksc_statement: str) -> 
     return response.output()
 
 
-# Register the flow with conditional decorator
-if GENKIT_AVAILABLE and is_genkit_enabled():
-    generateKscResponse = genkit.flow(output_schema=STAR_Response)(_generate_ksc_response_impl)
-else:
-    generateKscResponse = _generate_ksc_response_impl
-
-# Register the flow for tracking
-register_flow_function(generateKscResponse, "generateKscResponse")
+# Flow is automatically registered by the @simple_genkit_flow decorator

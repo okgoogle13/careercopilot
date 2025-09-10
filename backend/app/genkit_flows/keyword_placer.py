@@ -1,16 +1,8 @@
-import os
 from typing import List
 
-import genkit
-from dotenv import load_dotenv
-from genkit.plugins import google_genai
+from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.core.genkit_init import get_model
 from pydantic import BaseModel, Field
-
-# Load environment variables and initialize Genkit if needed
-load_dotenv()
-if getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
-gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
 
 # --- Pydantic Schemas for Structured Output ---
 
@@ -38,7 +30,7 @@ class KeywordPlacementResponse(BaseModel):
 # --- Genkit Flow ---
 
 
-@genkit.flow(output_schema=KeywordPlacementResponse)
+@simple_genkit_flow(output_schema=KeywordPlacementResponse)
 def suggestKeywordPlacement(
     resumeText: str, list_of_missing_keywords: List[str]
 ) -> KeywordPlacementResponse:
@@ -73,7 +65,10 @@ def suggestKeywordPlacement(
     Generate the suggestions now.
     """
 
-    response = gemini_pro.generate(
+    # Model availability is guaranteed by the decorator
+    model = get_model()
+    
+    response = model.generate(
         prompt=prompt,
         output_schema=KeywordPlacementResponse,
         config={"response_mime_type": "application/json"},

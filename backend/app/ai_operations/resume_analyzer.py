@@ -1,19 +1,14 @@
 """
 Resume Analysis Operations
 
-Modern implementation using the centralized AI configuration system
-with comprehensive security, monitoring, and caching.
+Service layer for resume analysis that delegates to genkit flow implementation
+while providing a clean API interface with caching and monitoring.
 """
 
-import json
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
-from app.ai.resume_service import ResumeAnalysisResult, ResumeAnalysisService
-from app.core.ai_client import AIRequest, get_ai_client
-from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.cache_decorators import cached_ai_operation
-from app.core.config import settings
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.monitoring import monitor_performance
 
@@ -21,510 +16,129 @@ logger = logging.getLogger(__name__)
 
 
 class ResumeAnalyzer:
-    """Resume analysis operations using centralized AI system
-
-    This class provides resume analysis capabilities using both the legacy AI client
-    and the new Genkit-based AI service.
-    """
+    """Service layer for resume analysis that delegates to genkit flow"""
 
     def __init__(self):
-        """Initialize the ResumeAnalyzer with AI client and services."""
-        self.ai_client = get_ai_client()
-        self.resume_service = ResumeAnalysisService(
-            {
-                "enabled": settings.enable_ai_features,
-                "model": settings.ai_model,
-                "max_tokens": settings.ai_max_tokens,
-                "temperature": settings.ai_temperature,
-            }
-        )
+        # Import the working genkit flow
+        from app.genkit_flows.resume_analyzer import compare_resume_to_job
+        self.compare_flow = compare_resume_to_job
 
     @monitor_performance("resume_analysis")
-    @cached_ai_operation(
-        operation_type="resume_analysis", user_id_param="user_id", cache_key_params=["resume_text"]
-    )
-    async def analyze_resume_enhanced(
-        self, resume_text: str, user_id: Optional[str] = None, **kwargs
-    ) -> Dict[str, Any]:
-        """
-        Analyze a resume using the enhanced AI service with comprehensive error handling.
-
-        This method provides a robust interface for resume analysis with:
-        - Input validation and sanitization
-        - Performance monitoring
-        - Caching for improved performance
-        - Fallback to legacy analysis if needed
-        - Detailed error reporting
-
-        Args:
-            resume_text: The text content of the resume to analyze
-            user_id: Optional user ID for tracking and personalization
-            **kwargs: Additional parameters for the analysis
-
-        Returns:
-            Dict containing the analysis results with the following structure:
-            {
-                "skills": List[str],
-                "experience": List[Dict],
-                "education": List[Dict],
-                "summary": str,
-                "metadata": Dict[str, Any]
-            }
-
-        Raises:
-            AIError: If the analysis fails and no fallback is available
-            ValueError: If input validation fails
-        """
-        # Input validation
-        if not resume_text or not isinstance(resume_text, str):
-            raise ValueError("Resume text must be a non-empty string")
-
-        try:
-            # Sanitize input
-            sanitizer = InputSanitizer()
-            clean_text = sanitizer.sanitize_text(resume_text)
-
-            # Check if enhanced features are enabled
-            if not settings.ENABLE_AI_FEATURES:
-                logger.warning("Enhanced AI features are disabled. Using basic analysis.")
-                return await self._basic_analyze_resume(clean_text)
-
-            # Use the enhanced resume service for analysis
-            analysis_result = await self.resume_service.analyze_resume(clean_text)
-
-            # Format the result for consistent API response
-            return self._format_analysis_result(analysis_result, user_id=user_id)
-
-        except Exception as e:
-            error_msg = f"Error in enhanced resume analysis: {str(e)}"
-            logger.error(error_msg, exc_info=True)
-
-            # Fall back to legacy analysis if available
-            if hasattr(self, "legacy_analyze_resume"):
-                logger.warning("Falling back to legacy resume analysis")
-                try:
-                    return await self.legacy_analyze_resume(clean_text, user_id, **kwargs)
-                except Exception as legacy_error:
-                    logger.error(f"Legacy analysis also failed: {str(legacy_error)}")
-
-            # If we get here, all fallbacks have failed
-            raise AIError(
-                error_type=AIErrorType.ANALYSIS_ERROR,
-                message="Failed to analyze resume with all available methods",
-                details={
-                    "error": str(e),
-                    "user_id": user_id,
-                    "resume_length": len(resume_text) if resume_text else 0,
-                },
-            )
-
-    def _format_analysis_result(
-        self, result: ResumeAnalysisResult, user_id: Optional[str] = None
-    ) -> Dict[str, Any]:
-        """
-        Format the analysis result into a consistent API response format.
-
-        Args:
-            result: The ResumeAnalysisResult to format
-            user_id: Optional user ID for tracking
-
-        Returns:
-            Formatted analysis result as a dictionary
-        """
-        return {
-            "skills": result.skills or [],
-            "experience": [
-                {
-                    "title": exp.title or "",
-                    "company": exp.company or "",
-                    "start_date": exp.start_date or "",
-                    "end_date": exp.end_date or "",
-                    "current": exp.current or False,
-                    "description": exp.description or "",
-                }
-                for exp in (result.experience or [])
-            ],
-            "education": [
-                {
-                    "degree": edu.degree or "",
-                    "field": edu.field or "",
-                    "institution": edu.institution or "",
-                    "year": edu.year or "",
-                }
-                for edu in (result.education or [])
-            ],
-            "summary": result.summary or "",
-            "metadata": {
-                "analysis_version": "2.0",
-                "model": self.resume_service.config.get("model", "unknown"),
-                "source": "genkit_enhanced",
-            },
-            "raw_data": result.raw_data or {},
-        }
-
-    @monitor_performance("resume_comparison")
     @cached_ai_operation("resume_analysis", user_id_param="user_id")
-    async def compare_resume_to_job(
-        self, user_id: str, resume_text: str, job_analysis_data: Dict[str, Any]
+    async def analyze_resume(
+        self, 
+        user_id: str, 
+        resume_text: str, 
+        job_analysis_data: Optional[Dict[str, Any]] = None
     ) -> Dict[str, Any]:
         """
-        Compare a resume to job analysis data with expert career coaching insights.
+        Analyze a resume, optionally comparing it to job requirements.
 
         Args:
             user_id: User identifier for tracking and caching
-            resume_text: Raw resume content from user
-            job_analysis_data: Structured job analysis data
+            resume_text: Raw resume content
+            job_analysis_data: Optional job analysis data for comparison
 
         Returns:
-            dict: Structured analysis with match score and recommendations
-
-        Raises:
-            InputValidationError: If input validation fails
-            AIError: If AI operation fails
+            dict: Structured resume analysis data
         """
         try:
-            # Input validation and sanitization
+            # Input validation
             if not resume_text or not isinstance(resume_text, str):
                 raise InputValidationError("Resume text is required and must be a string")
 
-            if not job_analysis_data or not isinstance(job_analysis_data, dict):
-                raise InputValidationError("Job analysis data is required and must be a dictionary")
-
-            # Sanitize inputs to prevent prompt injection
+            # Sanitize inputs
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
-            sanitized_job_data = InputSanitizer.sanitize_dict_input(job_analysis_data)
-
-            # Log warnings if any suspicious content was detected
-            if sanitized_resume.warnings:
-                logger.warning(
-                    f"Resume sanitization warnings for user {user_id}: "
-                    f"{sanitized_resume.warnings}"
-                )
-
-            # Create comprehensive analysis prompt
-            system_prompt = (
-                "You are an expert career coach with 15+ years of experience in "
-                "resume analysis and job matching. Your expertise includes ATS "
-                "optimization, industry-specific requirements, and career "
-                "development strategies."
+            
+            # Use comparison flow (can handle empty job data)
+            result = self.compare_flow(
+                resume_text=sanitized_resume.sanitized_content,
+                job_analysis_data=job_analysis_data or {}
             )
-
-            prompt = (
-                f"""Analyze the provided resume against the structured job analysis "
-                f"data and provide a comprehensive comparison.
-
-REQUIREMENTS:
-- Respond ONLY with a valid JSON object (no additional text)
-- Provide actionable, specific feedback
-- Consider both technical and soft skills
-- Include ATS optimization recommendations
-
-Required JSON structure:
-{{
-    "match_score": <integer 0-100>,
-    "matching_skills": [<list of skills found in both resume and job requirements>],
-    "missing_skills": [<list of key job skills not found in resume>],
-    "improvement_suggestions": [<list of specific, actionable recommendations>],
-    "strengths": [<list of resume strengths relevant to the job>],
-    "ats_optimization": [<list of ATS-specific recommendations>],
-    "experience_match": {{
-        "level": "<entry/mid/senior/executive>",
-        "years_gap": <integer, negative if over-qualified, positive if under-qualified>,
-        "relevant_experience": [<list of relevant experience highlights>]
-    }},
-    "industry_alignment": {{
-        "score": <integer 0-100>,
-        "transferable_skills": [<list of skills that transfer across industries>],
-        "industry_specific_gaps": [<list of industry-specific knowledge gaps>]
-    }}
-}}
-
-Resume Text:
----
-{sanitized_resume.sanitized_content}
----
-
-Job Analysis Data:
----
-{json.dumps(sanitized_job_data, indent=2)}
----
-
-Respond with ONLY the JSON object:"""
-                # Create AI request
-            )
-            request = AIRequest(
-                prompt=prompt,
-                service_name="resume_analysis",
-                user_id=user_id,
-                system_prompt=system_prompt,
-                max_tokens=2000,
-                temperature=0.7,
-            )
-
-            # Generate response using AI client
-            response = await self.ai_client.generate_text(request)
+            
+            # Convert result to dict if needed
+            if isinstance(result, str):
+                try:
+                    import json
+                    result_dict = json.loads(result)
+                except json.JSONDecodeError:
+                    result_dict = {"analysis": result, "raw_output": True}
+            else:
+                result_dict = result if isinstance(result, dict) else {"analysis": str(result)}
 
             logger.info(
                 f"Resume analysis completed for user {user_id}",
                 extra={
                     "user_id": user_id,
-                    "model_used": response.model_used,
-                    "tokens_used": response.tokens_used,
-                    "response_time_ms": response.response_time_ms,
-                    "cached": response.cached,
-                    "cost_estimate": response.cost_estimate,
+                    "job_comparison": bool(job_analysis_data),
+                    "analysis_type": "comparison" if job_analysis_data else "standalone",
                 },
             )
 
-            # Parse and validate JSON response
-            try:
-                parsed_result = json.loads(response.content.strip())
-            except json.JSONDecodeError as e:
-                raise AIError(
-                    message=f"AI returned invalid JSON: {str(e)}",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                    original_error=e,
-                )
+            return result_dict
 
-            # Validate required fields in response
-            required_fields = [
-                "match_score",
-                "matching_skills",
-                "missing_skills",
-                "improvement_suggestions",
-                "strengths",
-                "ats_optimization",
-                "experience_match",
-                "industry_alignment",
-            ]
-            missing_fields = [field for field in required_fields if field not in parsed_result]
-
-            if missing_fields:
-                raise AIError(
-                    message=f"AI response missing required fields: {missing_fields}",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                )
-
-            # Validate field types and ranges
-            if not isinstance(parsed_result["match_score"], int) or not (
-                0 <= parsed_result["match_score"] <= 100
-            ):
-                raise AIError(
-                    message="Match score must be an integer between 0 and 100",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                )
-
-            # Validate list fields
-            list_fields = [
-                "matching_skills",
-                "missing_skills",
-                "improvement_suggestions",
-                "strengths",
-                "ats_optimization",
-            ]
-            for field in list_fields:
-                if not isinstance(parsed_result[field], list):
-                    raise AIError(
-                        message=f"Field '{field}' must be a list",
-                        error_type=AIErrorType.INVALID_REQUEST,
-                    )
-
-            # Validate nested objects
-            if not isinstance(parsed_result["experience_match"], dict):
-                raise AIError(
-                    message="Field 'experience_match' must be an object",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                )
-
-            if not isinstance(parsed_result["industry_alignment"], dict):
-                raise AIError(
-                    message="Field 'industry_alignment' must be an object",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                )
-
-            # Add metadata
-            parsed_result["metadata"] = {
-                "model_used": response.model_used,
-                "provider": response.provider,
-                "tokens_used": response.tokens_used,
-                "response_time_ms": response.response_time_ms,
-                "cached": response.cached,
-                "cost_estimate": response.cost_estimate,
-                "analysis_timestamp": response.request_id,
-            }
-
-            return parsed_result
-
-        except InputValidationError as e:
-            logger.error(f"Input validation failed for user {user_id}: {str(e)}")
-            raise AIError(
-                message=f"Input validation failed: {str(e)}",
-                error_type=AIErrorType.INVALID_REQUEST,
-                original_error=e,
-            )
-
-        except AIError:
-            # Re-raise AI errors as-is with logging
-            logger.error(f"AI error in resume analysis for user {user_id}")
+        except Exception as e:
+            logger.error(f"Error in resume analysis for user {user_id}: {str(e)}")
             raise
 
-        except Exception as e:
-            logger.error(f"Unexpected error in resume analysis for user {user_id}: {str(e)}")
-            raise AIError(
-                message=f"Unexpected error in resume analysis: {str(e)}",
-                error_type=AIErrorType.UNKNOWN,
-                original_error=e,
-            )
-
-    @monitor_performance("resume_skills_extraction")
-    @cached_ai_operation("document_extraction", user_id_param="user_id")
-    async def extract_resume_skills(
-        self, user_id: str, resume_text: str, job_context: Optional[str] = None
+    @monitor_performance("resume_comparison")
+    @cached_ai_operation("resume_comparison", user_id_param="user_id")
+    async def compare_to_job(
+        self,
+        user_id: str,
+        resume_text: str,
+        job_analysis_data: Dict[str, Any],
     ) -> Dict[str, Any]:
         """
-        Extract skills, experience, and key information from a resume.
+        Compare resume to specific job requirements.
 
         Args:
-            user_id: User identifier for tracking and caching
-            resume_text: Raw resume content
-            job_context: Optional job context for targeted extraction
+            user_id: User identifier
+            resume_text: Resume content
+            job_analysis_data: Job requirements and analysis
 
         Returns:
-            dict: Extracted skills, experience, education, and contact info
+            dict: Comparison analysis
         """
         try:
-            # Sanitize input
+            if not resume_text or not isinstance(resume_text, str):
+                raise InputValidationError("Resume text is required and must be a string")
+            
+            if not job_analysis_data or not isinstance(job_analysis_data, dict):
+                raise InputValidationError("Job analysis data is required and must be a dictionary")
+
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
-
-            system_prompt = (
-                "You are an expert resume parser with deep knowledge of industry "
-                "skills, technologies, and career progression patterns. Extract "
-                "comprehensive information with high accuracy."
+            
+            # Use the comparison flow directly
+            result = self.compare_flow(
+                resume_text=sanitized_resume.sanitized_content,
+                job_analysis_data=job_analysis_data
             )
 
-            context_section = (
-                f"\\n\\nJob Context (for targeted extraction):\\n{job_context}"
-                if job_context
-                else ""
-            )
-
-            prompt = f"""Extract comprehensive information from the resume below. Focus on accuracy and completeness.
-
-Required JSON structure:
-{{
-    "contact_info": {{
-        "name": "<full name>",
-        "email": "<email address>",
-        "phone": "<phone number>",
-        "location": "<city, state/country>",
-        "linkedin": "<LinkedIn URL>",
-        "portfolio": "<portfolio/website URL>"
-    }},
-    "professional_summary": "<2-3 sentence professional summary>",
-    "technical_skills": {{
-        "programming_languages": [<list of programming languages>],
-        "frameworks": [<list of frameworks and libraries>],
-        "databases": [<list of database technologies>],
-        "cloud_platforms": [<list of cloud platforms>],
-        "tools": [<list of development tools and software>],
-        "methodologies": [<list of methodologies like Agile, DevOps>]
-    }},
-    "soft_skills": [<list of soft skills and interpersonal abilities>],
-    "experience": [
-        {{
-            "title": "<job title>",
-            "company": "<company name>",
-            "duration": "<start date - end date>",
-            "description": "<job description>",
-            "achievements": [<list of key achievements>],
-            "technologies": [<list of technologies used>]
-        }}
-    ],
-    "education": [
-        {{
-            "degree": "<degree type>",
-            "field": "<field of study>",
-            "institution": "<school name>",
-            "graduation_year": "<year>",
-            "gpa": "<GPA if mentioned>",
-            "honors": [<list of academic honors>]
-        }}
-    ],
-    "certifications": [
-        {{
-            "name": "<certification name>",
-            "issuer": "<issuing organization>",
-            "date": "<issue date>",
-            "expiry": "<expiry date if applicable>"
-        }}
-    ],
-    "projects": [
-        {{
-            "name": "<project name>",
-            "description": "<project description>",
-            "technologies": [<list of technologies used>],
-            "url": "<project URL if available>"
-        }}
-    ],
-    "languages": [<list of spoken languages with proficiency levels>],
-    "years_of_experience": <total years of professional experience>,
-    "career_level": "<entry/junior/mid/senior/lead/executive>"
-}} {context_section}
-
-Resume Text:
----
-{sanitized_resume.sanitized_content}
----
-
-Respond with ONLY the JSON object:"""
-
-            request = AIRequest(
-                prompt=prompt,
-                service_name="document_extraction",
-                user_id=user_id,
-                system_prompt=system_prompt,
-                max_tokens=2500,
-                temperature=0.3,  # Lower temperature for extraction accuracy
-            )
-
-            response = await self.ai_client.generate_text(request)
-
-            # Parse JSON response
-            parsed_result = json.loads(response.content.strip())
-
-            # Add metadata
-            parsed_result["metadata"] = {
-                "model_used": response.model_used,
-                "provider": response.provider,
-                "tokens_used": response.tokens_used,
-                "response_time_ms": response.response_time_ms,
-                "cached": response.cached,
-                "extraction_timestamp": response.request_id,
-            }
+            # Convert result to dict if needed  
+            if isinstance(result, str):
+                try:
+                    import json
+                    result_dict = json.loads(result)
+                except json.JSONDecodeError:
+                    result_dict = {"comparison": result, "raw_output": True}
+            else:
+                result_dict = result if isinstance(result, dict) else {"comparison": str(result)}
 
             logger.info(
-                f"Skills extraction completed for user {user_id}",
+                f"Resume comparison completed for user {user_id}",
                 extra={
                     "user_id": user_id,
-                    "model_used": response.model_used,
-                    "cached": response.cached,
-                    "skills_count": len(
-                        parsed_result.get("technical_skills", {}).get("programming_languages", [])
-                    )
-                    + len(parsed_result.get("soft_skills", [])),
+                    "job_title": job_analysis_data.get("job_title", "Unknown"),
                 },
             )
 
-            return parsed_result
+            return result_dict
 
         except Exception as e:
-            logger.error(f"Error in skills extraction for user {user_id}: {str(e)}")
-            raise AIError(
-                message=f"Skills extraction failed: {str(e)}",
-                error_type=AIErrorType.UNKNOWN,
-                original_error=e,
-            )
+            logger.error(f"Error in resume comparison for user {user_id}: {str(e)}")
+            raise
 
 
-# Global instance for easy import
+# Global instance
 resume_analyzer = ResumeAnalyzer()
