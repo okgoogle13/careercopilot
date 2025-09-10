@@ -38,7 +38,7 @@ class FileUploadConfig:
         """Initialize file upload configuration.
 
         Args:
-            allowed_extensions: Set of allowed file extensions (e.g., {'.pdf', '.docx'})
+            allowed_extensions: Set of allowed file extensions (e.g., {'.pd', '.docx'})
             allowed_content_types: Set of allowed MIME types
             max_file_size_mb: Maximum file size in megabytes
             max_files: Maximum number of files allowed
@@ -48,26 +48,31 @@ class FileUploadConfig:
         """
         # Default values from settings or reasonable defaults
         self.allowed_extensions = allowed_extensions or {
-            '.pdf', '.doc', '.docx', '.txt', '.md', '.rtf'
+            ".pd",
+            ".doc",
+            ".docx",
+            ".txt",
+            ".md",
+            ".rtf",
         }
         self.allowed_content_types = allowed_content_types or {
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'text/plain',
-            'text/markdown',
-            'application/rtf',
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "text/plain",
+            "text/markdown",
+            "application/rtf",
         }
-        self.max_file_size_mb = max_file_size_mb or getattr(settings, 'max_file_size_mb', 10)
+        self.max_file_size_mb = max_file_size_mb or getattr(settings, "max_file_size_mb", 10)
         self.max_files = max_files
         self.require_filename = require_filename
         self.allowed_filename_patterns = allowed_filename_patterns or []
         self.forbidden_filename_patterns = forbidden_filename_patterns or [
             r'.*[<>:"|?*].*',  # Windows forbidden characters
-            r'^\.',           # Hidden files
-            r'.*\.exe$',      # Executable files
-            r'.*\.bat$',      # Batch files
-            r'.*\.sh$',       # Shell scripts (for security)
+            r"^\.",  # Hidden files
+            r".*\.exe$",  # Executable files
+            r".*\.bat$",  # Batch files
+            r".*\.sh$",  # Shell scripts (for security)
         ]
 
 
@@ -94,7 +99,7 @@ def validate_file_upload(
     if file.filename:
         # Check filename patterns
         import re
-        
+
         # Check forbidden patterns
         for pattern in config.forbidden_filename_patterns:
             if re.match(pattern, file.filename, re.IGNORECASE):
@@ -113,7 +118,7 @@ def validate_file_upload(
         if config.allowed_extensions:
             file_ext = os.path.splitext(file.filename.lower())[1]
             if file_ext not in config.allowed_extensions:
-                allowed_exts = ', '.join(config.allowed_extensions)
+                allowed_exts = ", ".join(config.allowed_extensions)
                 raise FileValidationError(
                     f"File extension '{file_ext}' not allowed. "
                     f"Allowed extensions: {allowed_exts}"
@@ -122,14 +127,14 @@ def validate_file_upload(
     # Check content type
     if config.allowed_content_types and file.content_type:
         if file.content_type not in config.allowed_content_types:
-            allowed_types = ', '.join(config.allowed_content_types)
+            allowed_types = ", ".join(config.allowed_content_types)
             raise FileValidationError(
                 f"Content type '{file.content_type}' not allowed. "
                 f"Allowed types: {allowed_types}"
             )
 
     # Check file size
-    if config.max_file_size_mb and hasattr(file, 'file'):
+    if config.max_file_size_mb and hasattr(file, "file"):
         try:
             # Get file size
             file.file.seek(0, 2)  # Seek to end
@@ -164,8 +169,7 @@ def validate_multiple_files(
 
     if len(files) > config.max_files:
         raise FileValidationError(
-            f"Too many files. Maximum allowed: {config.max_files}, "
-            f"received: {len(files)}"
+            f"Too many files. Maximum allowed: {config.max_files}, " f"received: {len(files)}"
         )
 
     # Validate each file
@@ -218,8 +222,8 @@ def require_valid_file_upload(
                 files_param = None
 
                 # Look for common file parameter names
-                file_param_names = ['file', 'upload_file', 'document', 'attachment']
-                files_param_names = ['files', 'upload_files', 'documents', 'attachments']
+                file_param_names = ["file", "upload_file", "document", "attachment"]
+                files_param_names = ["files", "upload_files", "documents", "attachments"]
 
                 for name in file_param_names:
                     if name in kwargs and isinstance(kwargs[name], UploadFile):
@@ -236,14 +240,14 @@ def require_valid_file_upload(
                     if file_param is None:
                         raise HTTPException(
                             status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="No file parameter found in request"
+                            detail="No file parameter found in request",
                         )
                     validate_file_upload(file_param, config)
                 else:
                     if files_param is None:
                         raise HTTPException(
                             status_code=status.HTTP_400_BAD_REQUEST,
-                            detail="No files parameter found in request"
+                            detail="No files parameter found in request",
                         )
                     validate_multiple_files(files_param, config)
 
@@ -252,10 +256,7 @@ def require_valid_file_upload(
 
             except FileValidationError as e:
                 logger.warning(f"File validation failed: {str(e)}")
-                raise HTTPException(
-                    status_code=status.HTTP_400_BAD_REQUEST,
-                    detail=str(e)
-                )
+                raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
             except HTTPException:
                 # Re-raise HTTP exceptions
                 raise
@@ -263,10 +264,11 @@ def require_valid_file_upload(
                 logger.error(f"Unexpected error in file validation: {str(e)}", exc_info=True)
                 raise HTTPException(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                    detail="Internal server error during file validation"
+                    detail="Internal server error during file validation",
                 )
 
         return wrapper
+
     return decorator
 
 
@@ -281,12 +283,12 @@ def require_valid_resume_upload(max_size_mb: int = 10) -> Callable:
         Decorator function
     """
     config = FileUploadConfig(
-        allowed_extensions={'.pdf', '.doc', '.docx', '.txt'},
+        allowed_extensions={".pd", ".doc", ".docx", ".txt"},
         allowed_content_types={
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'text/plain',
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "text/plain",
         },
         max_file_size_mb=max_size_mb,
         max_files=1,
@@ -305,13 +307,13 @@ def require_valid_job_description_upload(max_size_mb: int = 5) -> Callable:
         Decorator function
     """
     config = FileUploadConfig(
-        allowed_extensions={'.pdf', '.doc', '.docx', '.txt', '.md'},
+        allowed_extensions={".pd", ".doc", ".docx", ".txt", ".md"},
         allowed_content_types={
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'text/plain',
-            'text/markdown',
+            "application/pdf",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "text/plain",
+            "text/markdown",
         },
         max_file_size_mb=max_size_mb,
         max_files=1,
@@ -320,9 +322,7 @@ def require_valid_job_description_upload(max_size_mb: int = 5) -> Callable:
 
 
 def require_valid_document_upload(
-    allowed_types: Optional[Set[str]] = None,
-    max_size_mb: int = 10,
-    max_files: int = 1
+    allowed_types: Optional[Set[str]] = None, max_size_mb: int = 10, max_files: int = 1
 ) -> Callable:
     """
     Flexible decorator for various document types.
@@ -336,21 +336,20 @@ def require_valid_document_upload(
         Decorator function
     """
     if allowed_types is None:
-        allowed_types = {'.pdf', '.doc', '.docx', '.txt', '.md', '.rtf'}
+        allowed_types = {".pd", ".doc", ".docx", ".txt", ".md", ".rtf"}
 
     # Map extensions to content types
     content_type_mapping = {
-        '.pdf': 'application/pdf',
-        '.doc': 'application/msword',
-        '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        '.txt': 'text/plain',
-        '.md': 'text/markdown',
-        '.rtf': 'application/rtf',
+        ".pd": "application/pdf",
+        ".doc": "application/msword",
+        ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ".txt": "text/plain",
+        ".md": "text/markdown",
+        ".rt": "application/rtf",
     }
 
     allowed_content_types = {
-        content_type_mapping[ext] for ext in allowed_types 
-        if ext in content_type_mapping
+        content_type_mapping[ext] for ext in allowed_types if ext in content_type_mapping
     }
 
     config = FileUploadConfig(
@@ -359,8 +358,5 @@ def require_valid_document_upload(
         max_file_size_mb=max_size_mb,
         max_files=max_files,
     )
-    
-    return require_valid_file_upload(
-        config=config, 
-        single_file=(max_files == 1)
-    )
+
+    return require_valid_file_upload(config=config, single_file=(max_files == 1))

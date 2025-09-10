@@ -1,9 +1,9 @@
-import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Separator } from "./ui/separator";
-import { ArrowLeft, Code, Palette, Layout, Zap, CheckCircle } from "lucide-react";
+import React from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Separator } from './ui/separator';
+import { ArrowLeft, Code, Palette, Layout, Zap, CheckCircle } from 'lucide-react';
 
 interface ComponentUsageGuideProps {
   onBack: () => void;
@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 function ProfileCard({ profile, isSelected, onClick }) {
   return (
-    <Card 
+    <Card
       variant={isSelected ? "selected" : "interactive"}
       onClick={onClick}
     >
@@ -38,12 +38,7 @@ function ProfileCard({ profile, isSelected, onClick }) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={onBack}
-              className="gap-2"
-            >
+            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Component Library
             </Button>
@@ -79,13 +74,15 @@ function ProfileCard({ profile, isSelected, onClick }) {
                 <div>
                   <h4 className="font-medium mb-2">2. Use Variants</h4>
                   <p className="text-muted-foreground text-sm">
-                    Most components include multiple variants for different use cases. Always specify the appropriate variant for your context.
+                    Most components include multiple variants for different use cases. Always
+                    specify the appropriate variant for your context.
                   </p>
                 </div>
                 <div>
                   <h4 className="font-medium mb-2">3. Follow Composition Patterns</h4>
                   <p className="text-muted-foreground text-sm">
-                    Use compound components (like Card + CardHeader + CardContent) to maintain consistent structure and styling.
+                    Use compound components (like Card + CardHeader + CardContent) to maintain
+                    consistent structure and styling.
                   </p>
                 </div>
               </div>
@@ -111,7 +108,8 @@ function ProfileCard({ profile, isSelected, onClick }) {
                     <div>
                       <h4 className="font-medium">Consistency</h4>
                       <p className="text-muted-foreground text-sm">
-                        Use the same component variants for similar interactions across the application
+                        Use the same component variants for similar interactions across the
+                        application
                       </p>
                     </div>
                   </div>
@@ -120,7 +118,8 @@ function ProfileCard({ profile, isSelected, onClick }) {
                     <div>
                       <h4 className="font-medium">Accessibility</h4>
                       <p className="text-muted-foreground text-sm">
-                        All components include proper ARIA labels, keyboard navigation, and color contrast
+                        All components include proper ARIA labels, keyboard navigation, and color
+                        contrast
                       </p>
                     </div>
                   </div>
@@ -166,20 +165,37 @@ function ProfileCard({ profile, isSelected, onClick }) {
                   <h4 className="font-medium mb-3">1. Card Components</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <Badge variant="secondary" className="mb-2">Default Cards</Badge>
-                      <p className="text-muted-foreground">Use for static information display, statistics, and non-interactive content sections.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        Default Cards
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Use for static information display, statistics, and non-interactive content
+                        sections.
+                      </p>
                     </div>
                     <div>
-                      <Badge variant="secondary" className="mb-2">Interactive Cards</Badge>
-                      <p className="text-muted-foreground">Use for clickable content, navigation elements, and user-selectable options.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        Interactive Cards
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Use for clickable content, navigation elements, and user-selectable options.
+                      </p>
                     </div>
                     <div>
-                      <Badge variant="secondary" className="mb-2">Selected Cards</Badge>
-                      <p className="text-muted-foreground">Use to indicate active selections, current choices, or featured content.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        Selected Cards
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Use to indicate active selections, current choices, or featured content.
+                      </p>
                     </div>
                     <div>
-                      <Badge variant="secondary" className="mb-2">State Cards</Badge>
-                      <p className="text-muted-foreground">Use Loading and Error variants for data fetching states and error handling.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        State Cards
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Use Loading and Error variants for data fetching states and error handling.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -190,12 +206,20 @@ function ProfileCard({ profile, isSelected, onClick }) {
                   <h4 className="font-medium mb-3">2. Form Components</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <Badge variant="secondary" className="mb-2">Input Controls</Badge>
-                      <p className="text-muted-foreground">Text inputs, textareas, and select dropdowns for data collection.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        Input Controls
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Text inputs, textareas, and select dropdowns for data collection.
+                      </p>
                     </div>
                     <div>
-                      <Badge variant="secondary" className="mb-2">Selection Controls</Badge>
-                      <p className="text-muted-foreground">Checkboxes, radio buttons, and switches for user choices.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        Selection Controls
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Checkboxes, radio buttons, and switches for user choices.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -206,12 +230,20 @@ function ProfileCard({ profile, isSelected, onClick }) {
                   <h4 className="font-medium mb-3">3. Feedback Components</h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                     <div>
-                      <Badge variant="secondary" className="mb-2">Alerts & Notifications</Badge>
-                      <p className="text-muted-foreground">Use alerts for important messages and status updates.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        Alerts & Notifications
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Use alerts for important messages and status updates.
+                      </p>
                     </div>
                     <div>
-                      <Badge variant="secondary" className="mb-2">Progress Indicators</Badge>
-                      <p className="text-muted-foreground">Progress bars and loading states for long-running operations.</p>
+                      <Badge variant="secondary" className="mb-2">
+                        Progress Indicators
+                      </Badge>
+                      <p className="text-muted-foreground">
+                        Progress bars and loading states for long-running operations.
+                      </p>
                     </div>
                   </div>
                 </div>

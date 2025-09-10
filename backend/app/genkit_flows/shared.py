@@ -1,34 +1,8 @@
-import os
 from typing import Callable, Type
 
-import genkit
-from genkit.plugins import google_genai
+from app.genkit_flows.flow_decorator import create_flow_wrapper
+from app.core.genkit_init import get_model
 from pydantic import BaseModel
-
-
-# Initialize Google AI plugin if needed
-def initialize_google_ai():
-    """Initialize Google AI plugin with error handling"""
-    try:
-        api_key = os.getenv("GEMINI_API_KEY")
-        if not api_key:
-            raise ValueError("GEMINI_API_KEY not found in environment")
-
-        # Initialize the GoogleAI plugin
-        google_ai_plugin = google_genai.GoogleAI()
-        google_ai_plugin.initialize(api_key=api_key)
-
-        return True
-    except Exception as e:
-        print(f"Warning: Failed to initialize Google AI plugin: {e}")
-        return False
-
-
-# Initialize on import
-_google_ai_initialized = initialize_google_ai()
-
-# Get the Gemini 1.5 Pro model constant
-gemini_pro = google_genai.models.gemini.GEMINI_1_5_PRO
 
 
 def create_extraction_flow(
@@ -36,6 +10,7 @@ def create_extraction_flow(
 ) -> Callable[[str], BaseModel]:
     """
     Creates a reusable Genkit flow for extracting structured data from text.
+    Now uses the standardized flow decorator system.
 
     Args:
         name: The name for the generated flow.
@@ -46,15 +21,17 @@ def create_extraction_flow(
     Returns:
         A Genkit flow function.
     """
-
-    @genkit.flow(name=name, output_schema=output_schema)
+    
     def extraction_flow(input_text: str) -> BaseModel:
         """
         A dynamically generated flow for entity extraction.
         """
         prompt = prompt_template.format(input_text=input_text)
-
-        response = gemini_pro.generate(
+        
+        # Model availability is guaranteed by the decorator
+        model = get_model()
+        
+        response = model.generate(
             prompt=prompt,
             config={
                 "response_mime_type": "application/json",
@@ -64,4 +41,9 @@ def create_extraction_flow(
 
         return response.output()
 
-    return extraction_flow
+    # Wrap with our standardized decorator
+    return create_flow_wrapper(
+        func=extraction_flow,
+        name=name,
+        output_schema=output_schema
+    )

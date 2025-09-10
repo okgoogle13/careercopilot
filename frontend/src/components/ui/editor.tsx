@@ -12,9 +12,9 @@ interface EditorProps {
 export const Editor: React.FC<EditorProps> = ({
   value,
   onChange,
-  placeholder = "Start typing...",
+  placeholder = 'Start typing...',
   className,
-  disabled = false
+  disabled = false,
 }) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -44,16 +44,16 @@ export const Editor: React.FC<EditorProps> = ({
   };
 
   return (
-    <div className={cn("border border-border rounded-lg bg-card", className)}>
+    <div className={cn('border border-border rounded-lg bg-card', className)}>
       {/* Toolbar */}
       <div className="flex items-center gap-1 p-2 border-b border-border bg-muted/50">
         <button
           type="button"
           onClick={() => formatText('bold')}
           className={cn(
-            "p-2 rounded-md text-sm font-bold transition-colors",
-            "text-foreground hover:bg-accent hover:text-accent-foreground",
-            "disabled:opacity-50 disabled:pointer-events-none"
+            'p-2 rounded-md text-sm font-bold transition-colors',
+            'text-foreground hover:bg-accent hover:text-accent-foreground',
+            'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
         >
@@ -63,9 +63,9 @@ export const Editor: React.FC<EditorProps> = ({
           type="button"
           onClick={() => formatText('italic')}
           className={cn(
-            "p-2 rounded-md text-sm italic transition-colors",
-            "text-foreground hover:bg-accent hover:text-accent-foreground",
-            "disabled:opacity-50 disabled:pointer-events-none"
+            'p-2 rounded-md text-sm italic transition-colors',
+            'text-foreground hover:bg-accent hover:text-accent-foreground',
+            'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
         >
@@ -75,9 +75,9 @@ export const Editor: React.FC<EditorProps> = ({
           type="button"
           onClick={() => formatText('underline')}
           className={cn(
-            "p-2 rounded-md text-sm underline transition-colors",
-            "text-foreground hover:bg-accent hover:text-accent-foreground",
-            "disabled:opacity-50 disabled:pointer-events-none"
+            'p-2 rounded-md text-sm underline transition-colors',
+            'text-foreground hover:bg-accent hover:text-accent-foreground',
+            'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
         >
@@ -88,9 +88,9 @@ export const Editor: React.FC<EditorProps> = ({
           type="button"
           onClick={() => formatText('insertUnorderedList')}
           className={cn(
-            "p-2 rounded-md text-sm transition-colors",
-            "text-foreground hover:bg-accent hover:text-accent-foreground",
-            "disabled:opacity-50 disabled:pointer-events-none"
+            'p-2 rounded-md text-sm transition-colors',
+            'text-foreground hover:bg-accent hover:text-accent-foreground',
+            'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
         >
@@ -100,9 +100,9 @@ export const Editor: React.FC<EditorProps> = ({
           type="button"
           onClick={() => formatText('insertOrderedList')}
           className={cn(
-            "p-2 rounded-md text-sm transition-colors",
-            "text-foreground hover:bg-accent hover:text-accent-foreground",
-            "disabled:opacity-50 disabled:pointer-events-none"
+            'p-2 rounded-md text-sm transition-colors',
+            'text-foreground hover:bg-accent hover:text-accent-foreground',
+            'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
         >
@@ -119,26 +119,24 @@ export const Editor: React.FC<EditorProps> = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         className={cn(
-          "p-4 min-h-[200px] focus:outline-none relative",
-          "text-sm text-foreground bg-card",
-          "transition-colors duration-200",
-          disabled && "cursor-not-allowed opacity-50",
-          isFocused && "ring-2 ring-ring/50"
+          'p-4 min-h-[200px] focus:outline-none relative',
+          'text-sm text-foreground bg-card',
+          'transition-colors duration-200',
+          disabled && 'cursor-not-allowed opacity-50',
+          isFocused && 'ring-2 ring-ring/50'
         )}
         dangerouslySetInnerHTML={{ __html: value }}
         data-placeholder={placeholder}
         style={{
           wordWrap: 'break-word',
-          whiteSpace: 'pre-wrap'
+          whiteSpace: 'pre-wrap',
         }}
       />
 
       {/* Placeholder when empty */}
       {!value && !isFocused && (
         <div className="absolute inset-0 pointer-events-none">
-          <div className="p-4 pt-16 text-muted-foreground text-sm">
-            {placeholder}
-          </div>
+          <div className="p-4 pt-16 text-muted-foreground text-sm">{placeholder}</div>
         </div>
       )}
     </div>

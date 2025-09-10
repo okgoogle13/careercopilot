@@ -15,6 +15,19 @@ from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.monitoring import monitor_performance
+from app.core.prompt_service import format_prompt, get_system_prompt, get_prompt_service
+
+# Import the new validation utilities
+from app.core.ai_response_validation import (
+    AIResponseValidator,
+    KSCResponseComplete,
+    STARResponse as ValidatedSTARResponse,
+    KSCAnalysis,
+    ExperienceSelection,
+    ValidationResult,
+    default_validator
+)
+from app.core.ai_flow_integration import extract_validated_data
 
 logger = logging.getLogger(__name__)
 
@@ -98,76 +111,20 @@ class KSCGenerator:
                 ),
             }
 
-            length_instruction = length_instructions.get(
-                response_length, length_instructions["comprehensive"]
-            )
+            # Get the length instruction from the prompt service
+            prompt_service = get_prompt_service()
+            length_instruction = prompt_service.get_length_instruction(response_length)
 
-            system_prompt = (
-                "You are an expert career coach specializing in the STAR "
-                "(Situation, Task, Action, Result) methodology for interview "
-                "responses and Key Selection Criteria. You excel at identifying "
-                "the most relevant experiences and crafting compelling, "
-                "evidence-based responses."
-            )
+            # Get the system prompt from the template
+            system_prompt = get_system_prompt("ksc_star_response")
 
-            prompt = (
-                "Generate a compelling STAR methodology response for the Key "
-                "Selection Criterion using the most relevant experience from the "
-                "user's profile.\n\n"
-                "STAR METHODOLOGY REQUIREMENTS:\n"
-                "- Situation: Set the context with specific details about the scenario\n"
-                "- Task: Clearly define what needed to be accomplished or the "
-                "challenge faced\n"
-                "- Action: Detail specific actions taken, focusing on individual "
-                "contributions\n"
-                "- Result: Quantify outcomes and impact, including lessons learned\n\n"
-                "RESPONSE QUALITY STANDARDS:\n"
-                "- Use specific, quantifiable examples wherever possible\n"
-                "- Focus on individual contributions rather than team achievements\n"
-                "- Include measurable outcomes and impact\n"
-                "- Demonstrate growth and learning\n"
-                f"- {length_instruction}\n\n"
-                "Required JSON structure:\n"
-                "{\n"
-                '  "ksc_analysis": {\n'
-                '    "ksc_interpretation": "<analysis of what the KSC is really asking for>",\n'
-                '    "key_competencies": [<key skills/competencies this KSC tests>],\n'
-                '    "success_factors": [<what makes a strong response to this KSC>],\n'
-                '    "common_pitfalls": [<common mistakes to avoid>]\n'
-                "  },\n"
-                '  "experience_selection": {\n'
-                '    "chosen_experience": "<brief description of selected experience>",\n'
-                '    "relevance_score": <0-100 score for how well this experience matches>,\n'
-                '    "selection_rationale": "<why this experience was chosen over others>",\n'
-                '    "alternative_experiences": [<other potential experiences that could work>]\n'
-                "  },\n"
-                '  "star_response": {\n'
-                '    "situation": "<detailed situation context>",\n'
-                '    "task": "<specific task or challenge>",\n'
-                '    "action": "<detailed actions taken>",\n'
-                '    "result": "<quantified results and outcomes>",\n'
-                '    "full_response": "<complete STAR response as a cohesive narrative>"\n'
-                "  },\n"
-                '  "response_enhancement": {\n'
-                '    "strength_indicators": [<elements that make this response strong>],\n'
-                '    "quantified_achievements": [<specific numbers/metrics mentioned>],\n'
-                '    "competency_demonstration": [<how this shows the required competencies>],\n'
-                '    "improvement_suggestions": [<optional minor improvements>]\n'
-                "  },\n"
-                '  "interview_preparation": {\n'
-                '    "follow_up_questions": [<likely follow-up questions interviewers might ask>],\n'
-                '    "key_points_to_emphasize": [<most important points to stress verbally>],\n'
-                '    "potential_variations": [<how to adapt this response for similar questions>],\n'
-                '    "supporting_evidence": [<additional evidence that could be mentioned if asked>]\n'
-                "  }\n"
-                "}\n\n"
-                + f"{achievements_context}\n\n"
-                + "Key Selection Criterion:\n"
-                + f'"{sanitized_ksc.sanitized_content}"\n\n'
-                + "User Profile Data:\n---\n"
-                + f"{json.dumps(sanitized_profile, indent=2)}\n"
-                + "---\n\n"
-                + "Respond with ONLY the JSON object:"
+            # Format the main prompt using the template
+            prompt = format_prompt(
+                "ksc_star_response",
+                ksc_statement=sanitized_ksc.sanitized_content,
+                user_profile=json.dumps(sanitized_profile, indent=2),
+                focus_achievements=achievements_context,
+                length_instruction=length_instruction
             )
             request = AIRequest(
                 prompt=prompt,
@@ -180,46 +137,54 @@ class KSCGenerator:
 
             response = await self.ai_client.generate_text(request)
 
-            # Parse JSON response
-            try:
-                parsed_result = json.loads(response.content.strip())
-            except json.JSONDecodeError as e:
+            # Use the new validation system instead of manual JSON parsing
+            fallback_data = {
+                "ksc_analysis": {
+                    "ksc_interpretation": "Analysis temporarily unavailable due to processing limitations.",
+                    "key_competencies": ["Communication", "Problem-solving", "Leadership"],
+                    "success_factors": ["Specific examples", "Quantifiable results", "Clear structure"]
+                },
+                "experience_selection": {
+                    "chosen_experience": "Unable to select specific experience from profile data.",
+                    "relevance_score": 50.0,
+                    "selection_rationale": "Selection process temporarily unavailable.",
+                    "alternative_experiences": []
+                },
+                "star_response": {
+                    "situation": "Unable to analyze specific situation due to processing limitations.",
+                    "task": "Could not identify specific task requirements from available data.",
+                    "action": "Unable to determine specific actions from the provided information.",
+                    "result": "Could not extract measurable results. Please provide more detailed information."
+                }
+            }
+            
+            # Validate AI response using the new validation utility
+            validation_result = default_validator.validate_response(
+                response.content.strip(),
+                "ksc_complete",
+                fallback_data
+            )
+            
+            if not validation_result.is_valid and not validation_result.parsed_data:
                 raise AIError(
-                    message=f"AI returned invalid JSON: {str(e)}",
+                    message=f"AI response validation failed: {validation_result.error_message}",
                     error_type=AIErrorType.INVALID_REQUEST,
-                    original_error=e,
+                    original_error=Exception(validation_result.error_message)
                 )
+            
+            # Extract validated data
+            validated_response = validation_result.parsed_data
+            
+            # Convert to dictionary format for backward compatibility
+            parsed_result = {
+                "ksc_analysis": validated_response.ksc_analysis.dict() if hasattr(validated_response.ksc_analysis, 'dict') else validated_response.ksc_analysis,
+                "experience_selection": validated_response.experience_selection.dict() if hasattr(validated_response.experience_selection, 'dict') else validated_response.experience_selection,
+                "star_response": validated_response.star_response.dict() if hasattr(validated_response.star_response, 'dict') else validated_response.star_response,
+                "response_enhancement": getattr(validated_response, 'response_enhancement', None),
+                "interview_preparation": getattr(validated_response, 'interview_preparation', None)
+            }
 
-            # Validate structure
-            required_sections = [
-                "ksc_analysis",
-                "experience_selection",
-                "star_response",
-                "response_enhancement",
-                "interview_preparation",
-            ]
-
-            missing_sections = [
-                section for section in required_sections if section not in parsed_result
-            ]
-            if missing_sections:
-                raise AIError(
-                    message=f"AI response missing required sections: {missing_sections}",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                )
-
-            # Validate STAR components
-            star_components = ["situation", "task", "action", "result"]
-            star_response = parsed_result.get("star_response", {})
-            missing_components = [comp for comp in star_components if comp not in star_response]
-
-            if missing_components:
-                raise AIError(
-                    message=f"STAR response missing components: {missing_components}",
-                    error_type=AIErrorType.INVALID_REQUEST,
-                )
-
-            # Add metadata
+            # Add metadata including validation info
             parsed_result["metadata"] = {
                 "model_used": response.model_used,
                 "provider": response.provider,
@@ -229,8 +194,19 @@ class KSCGenerator:
                 "generation_timestamp": response.request_id,
                 "response_length": response_length,
                 "ksc_statement": ksc_statement,
+                # Validation metadata
+                "validation_successful": validation_result.is_valid,
+                "validation_warnings": validation_result.validation_warnings,
+                "fallback_used": validation_result.metadata.get("fallback_used", False)
             }
 
+            # Extract relevance score safely from validated data
+            relevance_score = 0
+            if hasattr(validated_response.experience_selection, 'relevance_score'):
+                relevance_score = validated_response.experience_selection.relevance_score
+            elif isinstance(parsed_result.get("experience_selection"), dict):
+                relevance_score = parsed_result["experience_selection"].get("relevance_score", 0)
+            
             logger.info(
                 f"KSC STAR response generated for user {user_id}",
                 extra={
@@ -238,9 +214,9 @@ class KSCGenerator:
                     "model_used": response.model_used,
                     "response_length": response_length,
                     "cached": response.cached,
-                    "relevance_score": parsed_result.get("experience_selection", {}).get(
-                        "relevance_score", 0
-                    ),
+                    "relevance_score": relevance_score,
+                    "validation_successful": validation_result.is_valid,
+                    "fallback_used": validation_result.metadata.get("fallback_used", False)
                 },
             )
 
@@ -481,7 +457,7 @@ Respond with ONLY the JSON object:"""
                 "} "
                 + f"{feedback_context}\n\n"
                 + "KSC Statement:\n"
-                + f'"{sanitized_ksc.sanitized_content}"\n\n'
+                + '"{sanitized_ksc.sanitized_content}"\n\n'
                 + "Current STAR Response:\n---\n"
                 + f"{sanitized_response.sanitized_content}\n"
                 + "---\n\n"

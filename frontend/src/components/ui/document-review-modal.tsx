@@ -19,7 +19,7 @@ import {
   Clock,
   User,
   Building,
-  MapPin
+  MapPin,
 } from 'lucide-react';
 
 interface DocumentData {
@@ -67,26 +67,26 @@ export function DocumentReviewModal({
   onEdit,
   onDownload,
   trigger,
-  children
+  children,
 }: DocumentReviewModalProps) {
   const [activeTab, setActiveTab] = useState('preview');
   const [editedContent, setEditedContent] = useState(document.content);
   const [keywords, setKeywords] = useState(document.keywords || []);
 
   const handleKeywordAccept = (keyword: string) => {
-    setKeywords(prev => prev.map(k =>
-      k.keyword === keyword ? { ...k, status: 'accepted' as const } : k
-    ));
+    setKeywords((prev) =>
+      prev.map((k) => (k.keyword === keyword ? { ...k, status: 'accepted' as const } : k))
+    );
   };
 
   const handleKeywordReject = (keyword: string) => {
-    setKeywords(prev => prev.map(k =>
-      k.keyword === keyword ? { ...k, status: 'rejected' as const } : k
-    ));
+    setKeywords((prev) =>
+      prev.map((k) => (k.keyword === keyword ? { ...k, status: 'rejected' as const } : k))
+    );
   };
 
   const handleKeywordRemove = (keyword: string) => {
-    setKeywords(prev => prev.filter(k => k.keyword !== keyword));
+    setKeywords((prev) => prev.filter((k) => k.keyword !== keyword));
   };
 
   const getDocumentIcon = () => {
@@ -116,8 +116,12 @@ export function DocumentReviewModal({
   };
 
   const matchScore = document.metadata.matchScore || 0;
-  const matchScoreColor = matchScore >= 80 ? 'text-brand-green' :
-                         matchScore >= 60 ? 'text-brand-yellow' : 'text-destructive';
+  const matchScoreColor =
+    matchScore >= 80
+      ? 'text-brand-green'
+      : matchScore >= 60
+        ? 'text-brand-yellow'
+        : 'text-destructive';
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
@@ -154,9 +158,7 @@ export function DocumentReviewModal({
                   </div>
                 )}
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  {document.metadata.wordCount && (
-                    <span>{document.metadata.wordCount} words</span>
-                  )}
+                  {document.metadata.wordCount && <span>{document.metadata.wordCount} words</span>}
                   {document.metadata.lastModified && (
                     <div className="flex items-center gap-1">
                       <Clock className="w-3 h-3" />
@@ -169,9 +171,7 @@ export function DocumentReviewModal({
               <div className="text-right">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-sm text-muted-foreground">Match Score:</span>
-                  <span className={cn('font-bold text-lg', matchScoreColor)}>
-                    {matchScore}%
-                  </span>
+                  <span className={cn('font-bold text-lg', matchScoreColor)}>{matchScore}%</span>
                 </div>
                 <Progress value={matchScore} className="w-24 h-2" />
               </div>
@@ -181,15 +181,27 @@ export function DocumentReviewModal({
             {document.issues && document.issues.length > 0 && (
               <div className="mt-4 space-y-2">
                 {document.issues.map((issue, index) => (
-                  <div key={index} className={cn(
-                    'flex items-start gap-2 p-2 rounded text-sm',
-                    issue.type === 'error' && 'bg-destructive/10 text-destructive border border-destructive/20',
-                    issue.type === 'warning' && 'bg-brand-yellow/10 text-brand-yellow border border-brand-yellow/20',
-                    issue.type === 'suggestion' && 'bg-primary/10 text-primary border border-primary/20'
-                  )}>
-                    {issue.type === 'error' && <AlertTriangle className="w-4 h-4 mt-0.5 text-destructive" />}
-                    {issue.type === 'warning' && <AlertTriangle className="w-4 h-4 mt-0.5 text-brand-yellow" />}
-                    {issue.type === 'suggestion' && <CheckCircle className="w-4 h-4 mt-0.5 text-primary" />}
+                  <div
+                    key={index}
+                    className={cn(
+                      'flex items-start gap-2 p-2 rounded text-sm',
+                      issue.type === 'error' &&
+                        'bg-destructive/10 text-destructive border border-destructive/20',
+                      issue.type === 'warning' &&
+                        'bg-brand-yellow/10 text-brand-yellow border border-brand-yellow/20',
+                      issue.type === 'suggestion' &&
+                        'bg-primary/10 text-primary border border-primary/20'
+                    )}
+                  >
+                    {issue.type === 'error' && (
+                      <AlertTriangle className="w-4 h-4 mt-0.5 text-destructive" />
+                    )}
+                    {issue.type === 'warning' && (
+                      <AlertTriangle className="w-4 h-4 mt-0.5 text-brand-yellow" />
+                    )}
+                    {issue.type === 'suggestion' && (
+                      <CheckCircle className="w-4 h-4 mt-0.5 text-primary" />
+                    )}
                     <span>{issue.message}</span>
                   </div>
                 ))}
@@ -294,10 +306,7 @@ export function DocumentReviewModal({
             </div>
 
             <div className="flex gap-2">
-              <Button
-                variant="outline"
-                onClick={() => onOpenChange?.(false)}
-              >
+              <Button variant="outline" onClick={() => onOpenChange?.(false)}>
                 Cancel
               </Button>
               <Button

@@ -6,7 +6,7 @@ from app.core.dependencies import User, get_current_user
 from app.genkit_flows.ats_scoring import AtsResult, atsScoring
 from app.models import ATSScoreResponse, CategoryScore
 from fastapi import APIRouter, Body, Depends, HTTPException
-from genkit.flow import run_flow_async
+from app.genkit_flows.flow_decorator import run_flow_async
 from pydantic import BaseModel
 
 router = APIRouter()

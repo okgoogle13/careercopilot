@@ -212,8 +212,8 @@ class MetricsCollector:
                 ]
                 for bucket in buckets:
                     count = sum(1 for v in values if v <= bucket)
-                    output.append(f'{{{name}_bucket{{le="{bucket}"}}}} {count} {timestamp}')
-                output.append(f'{{{name}_bucket{{le="+Inf"}}}} {len(values)} {timestamp}')
+                    output.append('{{{name}_bucket{{le="{bucket}"}}}} {count} {timestamp}')
+                output.append('{{{name}_bucket{{le="+Inf"}}}} {len(values)} {timestamp}')
 
         return "\n".join(output)
 

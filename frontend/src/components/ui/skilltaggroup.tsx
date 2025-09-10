@@ -21,25 +21,21 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
   title,
   onSkillAccept,
   onSkillReject,
-  maxVisible = 10
+  maxVisible = 10,
 }) => {
   const [skillList, setSkillList] = useState<Skill[]>(skills);
 
   const handleAccept = (skill: string) => {
-    const updatedSkills = skillList.map(s =>
-      s.text === skill
-        ? { ...s, status: 'accepted' as const }
-        : s
+    const updatedSkills = skillList.map((s) =>
+      s.text === skill ? { ...s, status: 'accepted' as const } : s
     );
     setSkillList(updatedSkills);
     onSkillAccept?.(skill);
   };
 
   const handleReject = (skill: string) => {
-    const updatedSkills = skillList.map(s =>
-      s.text === skill
-        ? { ...s, status: 'rejected' as const }
-        : s
+    const updatedSkills = skillList.map((s) =>
+      s.text === skill ? { ...s, status: 'rejected' as const } : s
     );
     setSkillList(updatedSkills);
     onSkillReject?.(skill);
@@ -48,10 +44,13 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
   const visibleSkills = skillList.slice(0, maxVisible);
   const hiddenCount = Math.max(0, skillList.length - maxVisible);
 
-  const statusCounts = skillList.reduce((acc, { status }) => {
-    acc[status || 'suggested'] = (acc[status || 'suggested'] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const statusCounts = skillList.reduce(
+    (acc, { status }) => {
+      acc[status || 'suggested'] = (acc[status || 'suggested'] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>
+  );
 
   return (
     <div className="space-y-3">
@@ -70,10 +69,7 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
               </Badge>
             )}
             {statusCounts.rejected && (
-              <Badge
-                variant="outline"
-                className="border-accent-red/50 text-accent-red font-medium"
-              >
+              <Badge variant="outline" className="border-accent-red/50 text-accent-red font-medium">
                 {statusCounts.rejected} rejected
               </Badge>
             )}

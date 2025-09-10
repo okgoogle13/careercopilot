@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Editor } from "@/components/ui/editor";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
-import { generateTailoredResume } from "@/api/aiServices";
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Editor } from '@/components/ui/editor';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
+import { generateTailoredResume } from '@/api/aiServices';
 import React, { useState } from 'react';
 
 interface TailoredResumeGeneratorProps {
@@ -11,7 +11,7 @@ interface TailoredResumeGeneratorProps {
 }
 
 export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = ({
-  userProfileId = 'current-user-id'
+  userProfileId = 'current-user-id',
 }) => {
   const [jobDescription, setJobDescription] = useState<string>('');
   const [generatedResume, setGeneratedResume] = useState<string>('');
@@ -27,9 +27,9 @@ export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = (
 
       // Extract resume content from the response
       // The actual structure will depend on your backend API response
-      const resumeContent = resumeData.resume_content || resumeData.content || JSON.stringify(resumeData, null, 2);
+      const resumeContent =
+        resumeData.resume_content || resumeData.content || JSON.stringify(resumeData, null, 2);
       setGeneratedResume(resumeContent);
-
     } catch (error) {
       console.error('Resume generation failed:', error);
       setError(error instanceof Error ? error.message : 'Failed to generate tailored resume');
@@ -39,24 +39,11 @@ export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = (
   };
 
   return (
-    <div
-      className={cn(
-        "container mx-auto p-8",
-        "bg-background",
-        "min-h-screen"
-      )}
-    >
-      <div
-        className={cn(
-          "grid md:grid-cols-2 gap-8",
-          "max-w-6xl mx-auto"
-        )}
-      >
+    <div className={cn('container mx-auto p-8', 'bg-background', 'min-h-screen')}>
+      <div className={cn('grid md:grid-cols-2 gap-8', 'max-w-6xl mx-auto')}>
         {/* Left Panel: Job Description */}
         <Card className="p-6 space-y-6">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Job Description
-          </h2>
+          <h2 className="text-2xl font-semibold text-foreground">Job Description</h2>
 
           <Textarea
             value={jobDescription}
@@ -82,9 +69,7 @@ export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = (
 
         {/* Right Panel: Generated Resume */}
         <Card className="p-6 space-y-6">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Tailored Resume
-          </h2>
+          <h2 className="text-2xl font-semibold text-foreground">Tailored Resume</h2>
 
           <Editor
             value={generatedResume}
@@ -97,9 +82,7 @@ export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = (
             <Button variant="secondary" className="flex-1">
               Download PDF
             </Button>
-            <Button className="flex-1">
-              Save Version
-            </Button>
+            <Button className="flex-1">Save Version</Button>
           </div>
         </Card>
       </div>

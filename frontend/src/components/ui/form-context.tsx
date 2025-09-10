@@ -1,10 +1,16 @@
-import * as React from "react";
-import * as LabelPrimitive from "@radix-ui/react-label";
-import { Slot } from "@radix-ui/react-slot";
-import { Controller, FormProvider, useFormContext, type FieldValues, type FieldPath } from "react-hook-form";
+import * as React from 'react';
+import * as LabelPrimitive from '@radix-ui/react-label';
+import { Slot } from '@radix-ui/react-slot';
+import {
+  Controller,
+  FormProvider,
+  useFormContext,
+  type FieldValues,
+  type FieldPath,
+} from 'react-hook-form';
 
-import { cn } from "./utils";
-import { Label } from "./label";
+import { cn } from './utils';
+import { Label } from './label';
 
 const Form = FormProvider;
 
@@ -12,16 +18,9 @@ interface FormFieldContextValue {
   name: string;
 }
 
-const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
-);
+const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue);
 
-const FormField = ({
-  ...props
-}: {
-  name: string;
-  children: React.ReactNode;
-}) => {
+const FormField = ({ ...props }: { name: string; children: React.ReactNode }) => {
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
       {props.children}
@@ -37,7 +36,7 @@ const useFormField = () => {
   const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
-    throw new Error("useFormField should be used within <FormField>");
+    throw new Error('useFormField should be used within <FormField>');
   }
 
   const { id } = itemContext;

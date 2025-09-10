@@ -1,9 +1,18 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Progress } from "./ui/progress";
-import { ArrowLeft, Sparkles, MapPin, DollarSign, Clock, ExternalLink, Heart, Star } from "lucide-react";
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
+import {
+  ArrowLeft,
+  Sparkles,
+  MapPin,
+  DollarSign,
+  Clock,
+  ExternalLink,
+  Heart,
+  Star,
+} from 'lucide-react';
 
 interface JobMatchingProps {
   onBack: () => void;
@@ -30,53 +39,60 @@ export function JobMatching({ onBack }: JobMatchingProps) {
 
   const jobMatches: JobMatch[] = [
     {
-      id: "1",
-      title: "Senior Community Support Worker",
-      company: "Community Care Australia",
-      location: "Brisbane, QLD",
+      id: '1',
+      title: 'Senior Community Support Worker',
+      company: 'Community Care Australia',
+      location: 'Brisbane, QLD',
       matchPercentage: 94,
-      salaryRange: "$65,000 - $75,000",
-      postedDate: "2 days ago",
-      description: "Join our passionate team providing support to individuals with disabilities in community settings.",
-      keyRequirements: ["Certificate IV in Disability", "5+ years experience", "Valid driver's license"],
-      benefits: ["Professional development", "Health insurance", "Flexible hours"],
+      salaryRange: '$65,000 - $75,000',
+      postedDate: '2 days ago',
+      description:
+        'Join our passionate team providing support to individuals with disabilities in community settings.',
+      keyRequirements: [
+        'Certificate IV in Disability',
+        '5+ years experience',
+        "Valid driver's license",
+      ],
+      benefits: ['Professional development', 'Health insurance', 'Flexible hours'],
       isRemote: false,
-      isFavorited: false
+      isFavorited: false,
     },
     {
-      id: "2", 
-      title: "Mental Health Peer Worker",
-      company: "Queensland Health",
-      location: "Gold Coast, QLD",
+      id: '2',
+      title: 'Mental Health Peer Worker',
+      company: 'Queensland Health',
+      location: 'Gold Coast, QLD',
       matchPercentage: 87,
-      salaryRange: "$60,000 - $70,000",
-      postedDate: "5 days ago",
-      description: "Support individuals with lived experience of mental health challenges in their recovery journey.",
-      keyRequirements: ["Lived experience", "Peer work certification", "Communication skills"],
-      benefits: ["Government benefits", "Training opportunities", "Career progression"],
+      salaryRange: '$60,000 - $70,000',
+      postedDate: '5 days ago',
+      description:
+        'Support individuals with lived experience of mental health challenges in their recovery journey.',
+      keyRequirements: ['Lived experience', 'Peer work certification', 'Communication skills'],
+      benefits: ['Government benefits', 'Training opportunities', 'Career progression'],
       isRemote: true,
-      isFavorited: true
+      isFavorited: true,
     },
     {
-      id: "3",
-      title: "Community Outreach Coordinator",
-      company: "Mental Health Foundation",
-      location: "Sydney, NSW",
+      id: '3',
+      title: 'Community Outreach Coordinator',
+      company: 'Mental Health Foundation',
+      location: 'Sydney, NSW',
       matchPercentage: 82,
-      salaryRange: "$55,000 - $65,000",
-      postedDate: "1 week ago",
-      description: "Coordinate community programs and build partnerships to support mental health initiatives.",
-      keyRequirements: ["Bachelor's degree", "Community engagement", "Project management"],
-      benefits: ["Salary sacrifice", "Professional development", "Work-life balance"],
+      salaryRange: '$55,000 - $65,000',
+      postedDate: '1 week ago',
+      description:
+        'Coordinate community programs and build partnerships to support mental health initiatives.',
+      keyRequirements: ["Bachelor's degree", 'Community engagement', 'Project management'],
+      benefits: ['Salary sacrifice', 'Professional development', 'Work-life balance'],
       isRemote: false,
-      isFavorited: false
-    }
+      isFavorited: false,
+    },
   ];
 
   const handleGenerateInsights = async (jobId: string) => {
     setIsGeneratingInsights(true);
     setSelectedJob(jobId);
-    
+
     // Simulate AI analysis
     setTimeout(() => {
       setIsGeneratingInsights(false);
@@ -84,15 +100,15 @@ export function JobMatching({ onBack }: JobMatchingProps) {
   };
 
   const getMatchColor = (percentage: number) => {
-    if (percentage >= 90) return "text-green-500";
-    if (percentage >= 80) return "text-yellow-500";
-    return "text-orange-500";
+    if (percentage >= 90) return 'text-green-500';
+    if (percentage >= 80) return 'text-yellow-500';
+    return 'text-orange-500';
   };
 
   const getMatchBgColor = (percentage: number) => {
-    if (percentage >= 90) return "bg-green-500/10";
-    if (percentage >= 80) return "bg-yellow-500/10";
-    return "bg-orange-500/10";
+    if (percentage >= 90) return 'bg-green-500/10';
+    if (percentage >= 80) return 'bg-yellow-500/10';
+    return 'bg-orange-500/10';
   };
 
   return (
@@ -127,12 +143,10 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-xl font-semibold">{job.title}</h3>
-                        {job.isFavorited && (
-                          <Heart className="w-5 h-5 text-red-500 fill-current" />
-                        )}
+                        {job.isFavorited && <Heart className="w-5 h-5 text-red-500 fill-current" />}
                       </div>
                       <p className="text-lg text-muted-foreground">{job.company}</p>
-                      
+
                       <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
                         <div className="flex items-center gap-1">
                           <MapPin className="w-4 h-4" />
@@ -146,35 +160,37 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                           <Clock className="w-4 h-4" />
                           {job.postedDate}
                         </div>
-                        {job.isRemote && (
-                          <Badge variant="secondary">Remote Available</Badge>
-                        )}
+                        {job.isRemote && <Badge variant="secondary">Remote Available</Badge>}
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed">
-                    {job.description}
-                  </p>
+                  <p className="text-muted-foreground leading-relaxed">{job.description}</p>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <h4 className="font-medium mb-2">Key Requirements</h4>
                       <ul className="space-y-1">
                         {job.keyRequirements.map((req, index) => (
-                          <li key={index} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <li
+                            key={index}
+                            className="text-sm text-muted-foreground flex items-center gap-2"
+                          >
                             <div className="w-1.5 h-1.5 bg-primary rounded-full" />
                             {req}
                           </li>
                         ))}
                       </ul>
                     </div>
-                    
+
                     <div>
                       <h4 className="font-medium mb-2">Benefits</h4>
                       <ul className="space-y-1">
                         {job.benefits.map((benefit, index) => (
-                          <li key={index} className="text-sm text-muted-foreground flex items-center gap-2">
+                          <li
+                            key={index}
+                            className="text-sm text-muted-foreground flex items-center gap-2"
+                          >
                             <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
                             {benefit}
                           </li>
@@ -188,7 +204,9 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                 <div className="lg:w-80 space-y-4">
                   <Card className={`p-4 ${getMatchBgColor(job.matchPercentage)} border-0`}>
                     <div className="text-center">
-                      <div className={`text-3xl font-bold ${getMatchColor(job.matchPercentage)} mb-2`}>
+                      <div
+                        className={`text-3xl font-bold ${getMatchColor(job.matchPercentage)} mb-2`}
+                      >
                         {job.matchPercentage}%
                       </div>
                       <p className="text-sm font-medium mb-3">Match Score</p>
@@ -198,9 +216,9 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                           <Star
                             key={i}
                             className={`w-4 h-4 ${
-                              i < Math.floor(job.matchPercentage / 20) 
-                                ? "text-yellow-500 fill-current" 
-                                : "text-gray-300"
+                              i < Math.floor(job.matchPercentage / 20)
+                                ? 'text-yellow-500 fill-current'
+                                : 'text-gray-300'
                             }`}
                           />
                         ))}
@@ -226,14 +244,16 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                         </>
                       )}
                     </Button>
-                    
+
                     <Button variant="outline" className="w-full">
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View Full Job
                     </Button>
-                    
+
                     <Button variant="outline" className="w-full">
-                      <Heart className={`w-4 h-4 mr-2 ${job.isFavorited ? 'text-red-500 fill-current' : ''}`} />
+                      <Heart
+                        className={`w-4 h-4 mr-2 ${job.isFavorited ? 'text-red-500 fill-current' : ''}`}
+                      />
                       {job.isFavorited ? 'Saved' : 'Save Job'}
                     </Button>
                   </div>
@@ -248,10 +268,22 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                     <h4 className="font-medium text-primary">AI-Generated Insights</h4>
                   </div>
                   <div className="space-y-2 text-sm">
-                    <p>• <strong>Strong match:</strong> Your Community Support Worker experience aligns perfectly with this role</p>
-                    <p>• <strong>Salary competitive:</strong> This position offers 15% above market average for your experience level</p>
-                    <p>• <strong>Growth opportunity:</strong> Company has promoted 78% of CSWs to senior roles within 2 years</p>
-                    <p>• <strong>Recommendation:</strong> Highlight your crisis intervention skills and community engagement experience</p>
+                    <p>
+                      • <strong>Strong match:</strong> Your Community Support Worker experience
+                      aligns perfectly with this role
+                    </p>
+                    <p>
+                      • <strong>Salary competitive:</strong> This position offers 15% above market
+                      average for your experience level
+                    </p>
+                    <p>
+                      • <strong>Growth opportunity:</strong> Company has promoted 78% of CSWs to
+                      senior roles within 2 years
+                    </p>
+                    <p>
+                      • <strong>Recommendation:</strong> Highlight your crisis intervention skills
+                      and community engagement experience
+                    </p>
                   </div>
                 </div>
               )}

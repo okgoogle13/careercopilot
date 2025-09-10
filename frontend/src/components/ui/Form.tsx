@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import * as React from "react";
+import * as React from 'react';
 import {
   Controller,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
   FormProvider,
-} from "react-hook-form";
+} from 'react-hook-form';
 
-import { cn } from "./utils";
-import { FormFieldContext, useFormField } from "./use-form-field";
+import { cn } from './utils';
+import { FormFieldContext, useFormField } from './use-form-field';
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
@@ -25,14 +25,14 @@ const FormField = <
   );
 };
 
-FormField.displayName = "FormField";
+FormField.displayName = 'FormField';
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
   const { error, formMessageId } = useFormField();
-  const body = error ? String(error?.message ?? "") : children;
+  const body = error ? String(error?.message ?? '') : children;
 
   if (!body) {
     return null;
@@ -46,9 +46,9 @@ const FormMessage = React.forwardRef<
         data-slot="form-message"
         id={formMessageId}
         className={cn(
-          "text-destructive text-xs pl-3 py-1.5 animate-in fade-in-0 zoom-in-95",
-          "transition-all duration-200 ease-in-out",
-          "dark:text-destructive-foreground dark:bg-destructive/10 dark:px-2 dark:py-1.5 dark:rounded-md",
+          'text-destructive text-xs pl-3 py-1.5 animate-in fade-in-0 zoom-in-95',
+          'transition-all duration-200 ease-in-out',
+          'dark:text-destructive-foreground dark:bg-destructive/10 dark:px-2 dark:py-1.5 dark:rounded-md',
           className
         )}
         {...props}
@@ -59,6 +59,6 @@ const FormMessage = React.forwardRef<
   );
 });
 
-FormMessage.displayName = "FormMessage";
+FormMessage.displayName = 'FormMessage';
 
 export { FormProvider as Form, FormField, FormMessage };

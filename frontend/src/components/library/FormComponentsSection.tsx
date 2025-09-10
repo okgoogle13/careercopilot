@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Switch } from "../ui/switch";
-import { Checkbox } from "../ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Slider } from "../ui/slider";
-import { ComponentSection, ComponentDemo } from "./ComponentDemo";
+import React, { useState } from 'react';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Textarea } from '../ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Switch } from '../ui/switch';
+import { Checkbox } from '../ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+import { Slider } from '../ui/slider';
+import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function FormComponentsSection() {
   const [switchChecked, setSwitchChecked] = useState(false);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [sliderValue, setSliderValue] = useState([50]);
-  const [radioValue, setRadioValue] = useState("option1");
+  const [radioValue, setRadioValue] = useState('option1');
 
   return (
-    <ComponentSection 
-      title="Form Components" 
+    <ComponentSection
+      title="Form Components"
       description="Input controls and form elements for user data collection"
     >
       <ComponentDemo title="Input Controls">
@@ -53,18 +53,14 @@ export function FormComponentsSection() {
             <div className="space-y-2">
               <Label>Switch</Label>
               <div className="flex items-center space-x-2">
-                <Switch 
-                  id="switch" 
-                  checked={switchChecked}
-                  onCheckedChange={setSwitchChecked}
-                />
+                <Switch id="switch" checked={switchChecked} onCheckedChange={setSwitchChecked} />
                 <Label htmlFor="switch">Enable notifications</Label>
               </div>
             </div>
             <div className="space-y-2">
               <Label>Checkbox</Label>
               <div className="flex items-center space-x-2">
-                <Checkbox 
+                <Checkbox
                   id="checkbox"
                   checked={checkboxChecked}
                   onCheckedChange={setCheckboxChecked}

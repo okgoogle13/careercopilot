@@ -2,15 +2,7 @@ import React, { useState } from 'react';
 import { Button } from './button';
 import { DocumentReviewModal } from './document-review-modal';
 import { cn } from '@/lib/utils';
-import {
-  Send,
-  Loader2,
-  CheckCircle,
-  AlertTriangle,
-  FileText,
-  Clock,
-  Zap
-} from 'lucide-react';
+import { Send, Loader2, CheckCircle, AlertTriangle, FileText, Clock, Zap } from 'lucide-react';
 
 interface JobApplication {
   id: string;
@@ -70,7 +62,7 @@ export function OneClickApplyButton({
   onApplicationComplete,
   onApplicationError,
   className,
-  disabled = false
+  disabled = false,
 }: OneClickApplyButtonProps) {
   const [stage, setStage] = useState<ApplicationStage>('idle');
   const [generatedDocuments, setGeneratedDocuments] = useState<ApplicationDocument[]>([]);
@@ -93,20 +85,21 @@ export function OneClickApplyButton({
         targetJob: {
           title: job.jobTitle,
           company: job.company,
-          location: job.location
+          location: job.location,
         },
-        matchScore: Math.floor(Math.random() * 20) + 75 // 75-95% match
+        matchScore: Math.floor(Math.random() * 20) + 75, // 75-95% match
       },
-      keywords: job.requirements?.slice(0, 8).map((req, index) => ({
-        keyword: req,
-        status: Math.random() > 0.7 ? 'matched' : 'suggested' as const,
-        id: `keyword-${index}`
-      })) || [],
+      keywords:
+        job.requirements?.slice(0, 8).map((req, index) => ({
+          keyword: req,
+          status: Math.random() > 0.7 ? 'matched' : ('suggested' as const),
+          id: `keyword-${index}`,
+        })) || [],
       aiSuggestions: [
         'Consider adding specific metrics to quantify your achievements',
         'Include more industry-specific keywords',
-        'Highlight relevant certifications or training'
-      ]
+        'Highlight relevant certifications or training',
+      ],
     };
     documents.push(resume);
 
@@ -121,20 +114,21 @@ export function OneClickApplyButton({
         targetJob: {
           title: job.jobTitle,
           company: job.company,
-          location: job.location
+          location: job.location,
         },
-        matchScore: Math.floor(Math.random() * 15) + 80 // 80-95% match
+        matchScore: Math.floor(Math.random() * 15) + 80, // 80-95% match
       },
-      keywords: job.requirements?.slice(0, 5).map((req, index) => ({
-        keyword: req,
-        status: Math.random() > 0.6 ? 'matched' : 'suggested' as const,
-        id: `cl-keyword-${index}`
-      })) || [],
+      keywords:
+        job.requirements?.slice(0, 5).map((req, index) => ({
+          keyword: req,
+          status: Math.random() > 0.6 ? 'matched' : ('suggested' as const),
+          id: `cl-keyword-${index}`,
+        })) || [],
       aiSuggestions: [
         'Personalize the opening paragraph with specific company details',
         'Add a compelling call-to-action in the closing',
-        'Include specific examples of relevant achievements'
-      ]
+        'Include specific examples of relevant achievements',
+      ],
     };
     documents.push(coverLetter);
 
@@ -149,7 +143,7 @@ export function OneClickApplyButton({
 
       // Simulate document generation with progress updates
       setProgress(30);
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate AI processing time
+      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate AI processing time
 
       const documents = await mockGenerateDocuments(job);
       setGeneratedDocuments(documents);
@@ -157,7 +151,6 @@ export function OneClickApplyButton({
 
       setStage('reviewing');
       setProgress(70);
-
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to generate application documents');
       setStage('error');
@@ -185,7 +178,7 @@ export function OneClickApplyButton({
 
     try {
       // Simulate application submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setStage('completed');
       setProgress(100);
@@ -198,7 +191,6 @@ export function OneClickApplyButton({
         setCurrentDocumentIndex(0);
         setGeneratedDocuments([]);
       }, 3000);
-
     } catch (err) {
       setError('Failed to submit application');
       setStage('error');
@@ -323,7 +315,9 @@ export function OneClickApplyButton({
           <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
             <Clock className="w-3 h-3" />
             <span>
-              {stage === 'generating' ? 'Generating personalized documents...' : 'Submitting application...'}
+              {stage === 'generating'
+                ? 'Generating personalized documents...'
+                : 'Submitting application...'}
             </span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-1">

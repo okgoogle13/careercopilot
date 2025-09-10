@@ -9,7 +9,9 @@ from app.core.enhanced_ai_error_handling import (
     create_fallback_strategy,
     enhanced_ai_handler,
 )
-from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
+from app.genkit_flows.flow_decorator import async_genkit_flow
+from app.core.genkit_init import get_model
+from app.core.prompt_service import format_prompt
 from pydantic import BaseModel, Field
 
 # Import the supporting flows
@@ -17,14 +19,7 @@ from .extract_job_requirements import JobRequirements, extractJobRequirements
 from .extract_resume_entities import ResumeEntities, extractResumeEntities
 from .keyword_placer import KeywordPlacementSuggestion, suggestKeywordPlacement
 
-# Try to import Genkit for decorators, with fallback
-try:
-    import genkit
-
-    GENKIT_AVAILABLE = True
-except ImportError:
-    genkit = None
-    GENKIT_AVAILABLE = False
+# Genkit imports are handled by the flow_decorator module
 
 logger = logging.getLogger(__name__)
 
@@ -47,12 +42,11 @@ async def _perform_semantic_analysis(resume_text: str, job_description: str) -> 
     if not model:
         raise RuntimeError("Genkit model not available for semantic analysis")
 
-    semantic_prompt = f"""
-    Compare the resume against the job description.
-    Provide a semantic similarity score from 0-100 and a brief explanation.
-    Resume: "{resume_text}"
-    Job Description: "{job_description}"
-    """
+    semantic_prompt = format_prompt(
+        "semantic_analysis",
+        resume_text=resume_text,
+        job_description=job_description
+    )
 
     semantic_response = await model.generate(
         prompt=semantic_prompt,
@@ -199,8 +193,9 @@ class AtsResult(BaseModel):
     keyword_placement_suggestions: Optional[List[KeywordPlacementSuggestion]] = None
 
 
-# Flow decorator with conditional application
-def _ats_scoring_impl(
+# The decorator handles all the setup logic including model validation
+@async_genkit_flow(output_schema=AtsResult, require_model=False)
+async def atsScoring(
     resumeText: str,
     jobDescription: str,
     profileKeywords: List[str] = None,
@@ -367,11 +362,4 @@ def _ats_scoring_impl(
     )
 
 
-# Register the flow with conditional decorator
-if GENKIT_AVAILABLE and is_genkit_enabled():
-    atsScoring = genkit.flow(output_schema=AtsResult)(_ats_scoring_impl)
-else:
-    atsScoring = _ats_scoring_impl
-
-# Register the flow for tracking
-register_flow_function(atsScoring, "atsScoring")
+# Flow is automatically registered by the @async_genkit_flow decorator
