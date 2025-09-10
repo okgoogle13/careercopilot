@@ -9,11 +9,13 @@
     "clean": "rm -rf node_modules dist .vite",
     "lint": "eslint . --ignore-path .gitignore",
     "lint:fix": "eslint . --fix --ignore-path .gitignore",
+    "fix:imports": "node scripts/fix-imports.js",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "check:deploy": "bash -c 'chmod +x ../scripts/check-frontend-readiness.sh && ../scripts/check-frontend-readiness.sh'",
     "prepare": "husky install"
   },
   "lint-staged": {
