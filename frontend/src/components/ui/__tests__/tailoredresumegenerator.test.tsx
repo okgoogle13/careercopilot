@@ -74,7 +74,8 @@ describe('TailoredResumeGenerator', () => {
 
   it('shows loading state while generating resume', async () => {
     mockAiServices.generateTailoredResume.mockImplementation(
-      () => new Promise(resolve => setTimeout(() => resolve({ content: mockGeneratedResume }), 100))
+      () =>
+        new Promise((resolve) => setTimeout(() => resolve({ content: mockGeneratedResume }), 100))
     );
 
     render(<TailoredResumeGenerator />);
@@ -97,7 +98,7 @@ describe('TailoredResumeGenerator', () => {
 
   it('generates resume successfully with resume_content property', async () => {
     mockAiServices.generateTailoredResume.mockResolvedValue({
-      resume_content: mockGeneratedResume
+      resume_content: mockGeneratedResume,
     });
 
     render(<TailoredResumeGenerator />);
@@ -124,7 +125,7 @@ describe('TailoredResumeGenerator', () => {
 
   it('generates resume successfully with content property', async () => {
     mockAiServices.generateTailoredResume.mockResolvedValue({
-      content: mockGeneratedResume
+      content: mockGeneratedResume,
     });
 
     render(<TailoredResumeGenerator />);
@@ -145,7 +146,7 @@ describe('TailoredResumeGenerator', () => {
     const mockResponse = {
       data: 'some data',
       status: 'success',
-      resume: mockGeneratedResume
+      resume: mockGeneratedResume,
     };
     mockAiServices.generateTailoredResume.mockResolvedValue(mockResponse);
 
@@ -166,7 +167,7 @@ describe('TailoredResumeGenerator', () => {
   it('uses custom userProfileId when provided', async () => {
     const customUserId = 'custom-user-123';
     mockAiServices.generateTailoredResume.mockResolvedValue({
-      resume_content: mockGeneratedResume
+      resume_content: mockGeneratedResume,
     });
 
     render(<TailoredResumeGenerator userProfileId={customUserId} />);

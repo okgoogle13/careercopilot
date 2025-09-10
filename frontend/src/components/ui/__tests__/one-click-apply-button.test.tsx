@@ -22,7 +22,7 @@ describe('OneClickApplyButton', () => {
     company: 'Tech Corp',
     location: 'Remote',
     applicationUrl: 'https://example.com/apply',
-    requirements: ['React', 'TypeScript', 'Testing']
+    requirements: ['React', 'TypeScript', 'Testing'],
   };
 
   const mockDocuments = [
@@ -33,12 +33,12 @@ describe('OneClickApplyButton', () => {
       metadata: {
         wordCount: 500,
         lastModified: new Date(),
-        matchScore: 85
+        matchScore: 85,
       },
       keywords: [
         { keyword: 'React', status: 'matched' as const, id: '1' },
-        { keyword: 'TypeScript', status: 'matched' as const, id: '2' }
-      ]
+        { keyword: 'TypeScript', status: 'matched' as const, id: '2' },
+      ],
     },
     {
       type: 'cover_letter' as const,
@@ -47,9 +47,9 @@ describe('OneClickApplyButton', () => {
       metadata: {
         wordCount: 300,
         lastModified: new Date(),
-        matchScore: 90
-      }
-    }
+        matchScore: 90,
+      },
+    },
   ];
 
   beforeEach(() => {

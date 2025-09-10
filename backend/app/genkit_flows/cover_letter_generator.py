@@ -1,19 +1,12 @@
 import json
 from typing import Optional
 
-from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
-
-# Try to import Genkit for decorators, with fallback
-try:
-    import genkit
-
-    GENKIT_AVAILABLE = True
-except ImportError:
-    genkit = None
-    GENKIT_AVAILABLE = False
+from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.core.genkit_init import get_model
+from app.core.prompt_service import format_prompt
 
 
-# Removed @genkit.flow()
+@simple_genkit_flow()
 def generate_tailored_cover_letter(
     base_profile_data: dict,
     job_analysis_data: dict,
@@ -24,34 +17,10 @@ def generate_tailored_cover_letter(
     adapting to the user's unique writing style.
     """
 
-    # Construct the core prompt
-    prompt = f"""
-    As a professional career coach, your task is to write a compelling and professional cover letter
-    from a job applicant to a potential employer.
-
-    **Instructions:**
-    1.  **Use the Applicant's Profile:** Base the cover letter on the applicant's provided profile data.
-        Highlight 2-3 of their most relevant experiences and skills that align with the job.
-    2.  **Address the Job's Needs:** Directly reference the key requirements and skills mentioned in the
-        job analysis data. Show how the applicant is a strong match for this specific role.
-    3.  **Maintain Authenticity:** It is crucial that the cover letter sounds like it was written by the
-        applicant. Adapt your writing style to match the provided voice profile.
-
-    **Applicant's Base Profile:**
-    ---
-    {json.dumps(base_profile_data, indent=2)}
-    ---
-
-    **Analysis of the Target Job:**
-    ---
-    {json.dumps(job_analysis_data, indent=2)}
-    ---
-    """
-
-    # Append the voice profile to the prompt ONLY if it exists
+    # Build voice profile section if it exists
+    voice_profile_section = ""
     if voice_profile:
-        prompt += f"""
-    **Applicant's Voice Profile (for style matching):**
+        voice_profile_section = f"""**Applicant's Voice Profile (for style matching):**
     ---
     - **Tone:** {voice_profile.get('tone', 'N/A')}
     - **Common Phrases to consider using:**
@@ -61,18 +30,21 @@ def generate_tailored_cover_letter(
     ---
         """
 
-    # Final instruction to the model
-    prompt += "\\n\\nNow, write the cover letter. The output should be only the full text of the letter itself."
+    # Use the prompt service to format the template
+    prompt = format_prompt(
+        "tailored_cover_letter_simple",
+        base_profile_data=json.dumps(base_profile_data, indent=2),
+        job_analysis_data=json.dumps(job_analysis_data, indent=2),
+        voice_profile_section=voice_profile_section
+    )
 
     # Generate the cover letter using the AI model
+    # Model availability is guaranteed by the decorator
     model = get_model()
-    if not model:
-        raise RuntimeError("Genkit model not available for cover letter generation")
-
+    
     response = model.generate(prompt)
 
     return response.text()
 
 
-# Register the flow for tracking
-register_flow_function(generate_tailored_cover_letter, "generate_tailored_cover_letter")
+# Flow is automatically registered by the @simple_genkit_flow decorator

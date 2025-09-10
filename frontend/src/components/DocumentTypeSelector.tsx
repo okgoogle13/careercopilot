@@ -1,16 +1,34 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Input } from "./ui/input";
-import { Badge } from "./ui/badge";
-import { Tabs, TabsList, TabsTrigger } from "./ui/tabs";
-import { Skeleton } from "./ui/skeleton";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
-import { FileText, Mail, Award, ArrowLeft, Search, Clock, Star, Zap, History, TrendingUp, Lightbulb, BookOpen, Briefcase, Heart, Users, Target, BarChart3 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { AnimatedCard, StaggeredList } from "./AnimatedComponents";
-import { SkeletonLoading } from "./StandardizedLoadingStates";
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { Input } from './ui/input';
+import { Badge } from './ui/badge';
+import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
+import { Skeleton } from './ui/skeleton';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import {
+  FileText,
+  Mail,
+  Award,
+  ArrowLeft,
+  Search,
+  Clock,
+  Star,
+  Zap,
+  History,
+  TrendingUp,
+  Lightbulb,
+  BookOpen,
+  Briefcase,
+  Heart,
+  Users,
+  Target,
+  BarChart3,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { AnimatedCard, StaggeredList } from './AnimatedComponents';
+import { SkeletonLoading } from './StandardizedLoadingStates';
 
 type DocumentCategory = 'all' | 'resume' | 'cover-letter' | 'other';
 
@@ -45,13 +63,20 @@ interface DocumentTypeSelectorProps {
   };
 }
 
-export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [], userProfile }: DocumentTypeSelectorProps) {
+export function DocumentTypeSelector({
+  onSelectType,
+  onBack,
+  recentDocuments = [],
+  userProfile,
+}: DocumentTypeSelectorProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<DocumentCategory>('all');
   const [isLoading, setIsLoading] = useState(true);
   const [favorites, setFavorites] = useState<string[]>(userProfile?.favoriteTemplates || []);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState<'popular' | 'recent' | 'recommended' | 'difficulty'>('recommended');
+  const [sortBy, setSortBy] = useState<'popular' | 'recent' | 'recommended' | 'difficulty'>(
+    'recommended'
+  );
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   // Simulate loading
@@ -75,7 +100,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
       estimatedTime: 45,
       successRate: 94,
       recommendedFor: ['job seekers', 'career changers', 'recent graduates'],
-      aiPowered: true
+      aiPowered: true,
     },
     {
       id: 'cover-letter',
@@ -91,7 +116,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
       estimatedTime: 30,
       successRate: 89,
       recommendedFor: ['experienced professionals', 'specific applications'],
-      aiPowered: true
+      aiPowered: true,
     },
     {
       id: 'selection-criteria',
@@ -108,7 +133,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
       estimatedTime: 90,
       successRate: 78,
       recommendedFor: ['government roles', 'public sector'],
-      aiPowered: false
+      aiPowered: false,
     },
     {
       id: 'linkedin-profile',
@@ -125,7 +150,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
       estimatedTime: 25,
       successRate: 91,
       recommendedFor: ['all professionals', 'networking'],
-      aiPowered: true
+      aiPowered: true,
     },
     {
       id: 'portfolio',
@@ -141,7 +166,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
       estimatedTime: 120,
       successRate: 85,
       recommendedFor: ['creative roles', 'freelancers', 'designers'],
-      aiPowered: false
+      aiPowered: false,
     },
     {
       id: 'elevator-pitch',
@@ -157,8 +182,8 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
       estimatedTime: 15,
       successRate: 82,
       recommendedFor: ['networking events', 'interviews'],
-      aiPowered: true
-    }
+      aiPowered: true,
+    },
   ];
 
   const categories = [
@@ -170,10 +195,8 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
   ];
 
   const toggleFavorite = (templateId: string) => {
-    setFavorites(prev =>
-      prev.includes(templateId)
-        ? prev.filter(id => id !== templateId)
-        : [...prev, templateId]
+    setFavorites((prev) =>
+      prev.includes(templateId) ? prev.filter((id) => id !== templateId) : [...prev, templateId]
     );
   };
 
@@ -181,7 +204,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
     let score = 0;
 
     // Base popularity score
-    score += (doc.usageCount || 0) / 1000 * 30;
+    score += ((doc.usageCount || 0) / 1000) * 30;
 
     // Success rate bonus
     score += (doc.successRate || 0) * 0.4;
@@ -219,12 +242,14 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
   };
 
   const filteredDocuments = sortDocuments(
-    documentTypes.filter(doc => {
-      const matchesSearch = doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    documentTypes.filter((doc) => {
+      const matchesSearch =
+        doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doc.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doc.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        doc.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
 
-      const matchesCategory = selectedCategory === 'all' ||
+      const matchesCategory =
+        selectedCategory === 'all' ||
         doc.category === selectedCategory ||
         (selectedCategory === 'favorites' && favorites.includes(doc.id));
 
@@ -248,7 +273,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
     const colors = {
       beginner: 'bg-green-100 text-green-800',
       intermediate: 'bg-yellow-100 text-yellow-800',
-      advanced: 'bg-red-100 text-red-800'
+      advanced: 'bg-red-100 text-red-800',
     };
     return colors[difficulty as keyof typeof colors] || 'bg-gray-100 text-gray-800';
   };
@@ -279,124 +304,129 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
             role="button"
             tabIndex={0}
           >
-          {/* Recommendation Score Badge */}
-          {sortBy === 'recommended' && recommendationScore > 70 && (
-            <div className="absolute top-2 right-2 z-10">
-              <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs">
-                {Math.round(recommendationScore)}% match
-              </Badge>
-            </div>
-          )}
+            {/* Recommendation Score Badge */}
+            {sortBy === 'recommended' && recommendationScore > 70 && (
+              <div className="absolute top-2 right-2 z-10">
+                <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs">
+                  {Math.round(recommendationScore)}% match
+                </Badge>
+              </div>
+            )}
 
-          <div className="p-6 space-y-4">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-3 flex-1">
-                <div className={`p-3 ${doc.bgColor} rounded-xl relative`}>
-                  <Icon className={`w-6 h-6 ${doc.color}`} />
-                  {doc.aiPowered && (
-                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full flex items-center justify-center">
-                      <Zap className="w-2 h-2 text-white" />
+            <div className="p-6 space-y-4">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-3 flex-1">
+                  <div className={`p-3 ${doc.bgColor} rounded-xl relative`}>
+                    <Icon className={`w-6 h-6 ${doc.color}`} />
+                    {doc.aiPowered && (
+                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full flex items-center justify-center">
+                        <Zap className="w-2 h-2 text-white" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-foreground">{doc.title}</h3>
+                    <div className="flex items-center gap-2 mt-1">
+                      <Badge variant="outline" className={getDifficultyColor(doc.difficulty)}>
+                        {doc.difficulty}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {formatTime(doc.estimatedTime)}
+                      </span>
                     </div>
-                  )}
+                  </div>
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-foreground">{doc.title}</h3>
-                  <div className="flex items-center gap-2 mt-1">
-                    <Badge variant="outline" className={getDifficultyColor(doc.difficulty)}>
-                      {doc.difficulty}
-                    </Badge>
-                    <span className="text-xs text-muted-foreground flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {formatTime(doc.estimatedTime)}
-                    </span>
+                <div className="flex flex-col gap-2 items-end">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavorite(doc.id);
+                        }}
+                      >
+                        <Heart
+                          className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`}
+                        />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <div className="flex gap-1">
+                    {doc.isNew && (
+                      <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
+                        New
+                      </Badge>
+                    )}
+                    {doc.isPopular && (
+                      <Badge variant="secondary" className="bg-amber-100 text-amber-800 text-xs">
+                        Popular
+                      </Badge>
+                    )}
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-2 items-end">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleFavorite(doc.id);
-                      }}
-                    >
-                      <Heart className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`} />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-                  </TooltipContent>
-                </Tooltip>
 
-                <div className="flex gap-1">
-                  {doc.isNew && (
-                    <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
-                      New
-                    </Badge>
-                  )}
-                  {doc.isPopular && (
-                    <Badge variant="secondary" className="bg-amber-100 text-amber-800 text-xs">
-                      Popular
-                    </Badge>
-                  )}
+              <p className="text-sm text-muted-foreground">{doc.description}</p>
+
+              {/* Analytics */}
+              <div className="flex items-center justify-between text-xs text-muted-foreground">
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center gap-1">
+                    <Users className="w-3 h-3" />
+                    {doc.usageCount?.toLocaleString() || 0} users
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Target className="w-3 h-3" />
+                    {doc.successRate}% success
+                  </span>
                 </div>
+                {doc.aiPowered && (
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Badge
+                        variant="outline"
+                        className="bg-purple-50 text-purple-700 border-purple-200"
+                      >
+                        AI-Powered
+                      </Badge>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      This template includes AI assistance for content generation
+                    </TooltipContent>
+                  </Tooltip>
+                )}
               </div>
-            </div>
 
-            <p className="text-sm text-muted-foreground">{doc.description}</p>
-
-            {/* Analytics */}
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <div className="flex items-center gap-3">
-                <span className="flex items-center gap-1">
-                  <Users className="w-3 h-3" />
-                  {doc.usageCount?.toLocaleString() || 0} users
-                </span>
-                <span className="flex items-center gap-1">
-                  <Target className="w-3 h-3" />
-                  {doc.successRate}% success
-                </span>
+              <div className="flex flex-wrap gap-2 pt-2">
+                {doc.tags.slice(0, 3).map((tag, i) => (
+                  <Badge key={i} variant="outline" className="text-xs">
+                    {tag}
+                  </Badge>
+                ))}
+                {doc.tags.length > 3 && (
+                  <Badge variant="outline" className="text-xs">
+                    +{doc.tags.length - 3} more
+                  </Badge>
+                )}
               </div>
-              {doc.aiPowered && (
-                <Tooltip>
-                  <TooltipTrigger>
-                    <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
-                      AI-Powered
-                    </Badge>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    This template includes AI assistance for content generation
-                  </TooltipContent>
-                </Tooltip>
-              )}
-            </div>
 
-            <div className="flex flex-wrap gap-2 pt-2">
-              {doc.tags.slice(0, 3).map((tag, i) => (
-                <Badge key={i} variant="outline" className="text-xs">
-                  {tag}
-                </Badge>
-              ))}
-              {doc.tags.length > 3 && (
-                <Badge variant="outline" className="text-xs">
-                  +{doc.tags.length - 3} more
-                </Badge>
-              )}
+              <Button
+                className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
+                variant="outline"
+                size="sm"
+              >
+                Select Template
+              </Button>
             </div>
-
-            <Button
-              className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
-              variant="outline"
-              size="sm"
-            >
-              Select Template
-            </Button>
-          </div>
-        </Card>
+          </Card>
         </AnimatedCard>
       </TooltipProvider>
     );
@@ -423,12 +453,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div className="flex flex-col gap-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onBack}
-            className="w-fit"
-          >
+          <Button variant="ghost" size="sm" onClick={onBack} className="w-fit">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Dashboard
           </Button>
@@ -487,11 +512,12 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
             <TabsList className="w-full justify-start overflow-x-auto">
               {categories.map((category) => {
                 const Icon = category.icon;
-                const count = category.id === 'favorites'
-                  ? favorites.length
-                  : category.id === 'all'
-                    ? documentTypes.length
-                    : documentTypes.filter(d => d.category === category.id).length;
+                const count =
+                  category.id === 'favorites'
+                    ? favorites.length
+                    : category.id === 'all'
+                      ? documentTypes.length
+                      : documentTypes.filter((d) => d.category === category.id).length;
 
                 return (
                   <TabsTrigger
@@ -519,7 +545,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {recentDocuments.slice(0, 3).map((doc) => {
-                const template = documentTypes.find(t => t.id === doc.type);
+                const template = documentTypes.find((t) => t.id === doc.type);
                 if (!template) return null;
                 const Icon = template.icon;
 
@@ -576,9 +602,7 @@ export function DocumentTypeSelector({ onSelectType, onBack, recentDocuments = [
           <div className="text-center py-12 space-y-4">
             <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
             <h3 className="text-lg font-medium">No templates found</h3>
-            <p className="text-muted-foreground">
-              Try adjusting your search or filter criteria
-            </p>
+            <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
             <Button
               variant="outline"
               onClick={() => {

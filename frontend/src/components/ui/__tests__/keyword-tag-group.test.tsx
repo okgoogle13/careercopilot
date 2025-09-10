@@ -36,7 +36,7 @@ describe('KeywordTagGroup', () => {
   it('displays all keyword tags', () => {
     render(<KeywordTagGroup {...mockProps} />);
 
-    mockKeywords.forEach(keyword => {
+    mockKeywords.forEach((keyword) => {
       expect(screen.getByText(keyword.keyword)).toBeInTheDocument();
     });
   });
@@ -150,9 +150,16 @@ describe('KeywordTagGroup', () => {
     const rejectedKeyword = screen.getByText('Python');
 
     // Each should have different styling based on status
-    expect(reactKeyword.closest('[class*="matched"]') || reactKeyword.closest('[class*="green"]')).toBeTruthy();
-    expect(testingKeyword.closest('[class*="missing"]') || testingKeyword.closest('[class*="destructive"]')).toBeTruthy();
-    expect(rejectedKeyword.closest('[class*="rejected"]') || rejectedKeyword.closest('[class*="muted"]')).toBeTruthy();
+    expect(
+      reactKeyword.closest('[class*="matched"]') || reactKeyword.closest('[class*="green"]')
+    ).toBeTruthy();
+    expect(
+      testingKeyword.closest('[class*="missing"]') ||
+        testingKeyword.closest('[class*="destructive"]')
+    ).toBeTruthy();
+    expect(
+      rejectedKeyword.closest('[class*="rejected"]') || rejectedKeyword.closest('[class*="muted"]')
+    ).toBeTruthy();
   });
 
   it('handles keyboard navigation', async () => {
@@ -196,9 +203,7 @@ describe('KeywordTagGroup', () => {
 
     expect(screen.getByText('React')).toBeInTheDocument();
 
-    const newKeywords = [
-      { keyword: 'Vue.js', status: 'matched' as const, id: '6' },
-    ];
+    const newKeywords = [{ keyword: 'Vue.js', status: 'matched' as const, id: '6' }];
 
     rerender(<KeywordTagGroup {...mockProps} keywords={newKeywords} />);
 

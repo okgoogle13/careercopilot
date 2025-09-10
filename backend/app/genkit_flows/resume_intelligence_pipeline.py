@@ -14,6 +14,7 @@ from typing import Dict, List, Optional
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
+from app.core.prompt_service import format_prompt
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
@@ -167,56 +168,11 @@ def analyze_resume_comprehensive(
 
         sanitized_content = InputSanitizer.sanitize_text_input(resume_content)
 
-        prompt = f"""
-As an expert resume analyst and career strategist, perform a comprehensive analysis
-of this resume. Provide detailed scoring, insights, and actionable recommendations.
-
-RESUME CONTENT:
-{sanitized_content.sanitized_content}
-
-TARGET INDUSTRY: {target_industry or "General analysis"}
-
-COMPREHENSIVE ANALYSIS REQUIREMENTS:
-1. Overall Quality Scoring (0-100 scale):
-   - ATS compatibility and parsing friendliness
-   - Human readability and visual appeal
-   - Achievement impact and quantification
-
-2. Section-by-Section Analysis:
-   - Score each resume section (contact, summary, experience, education, skills)
-   - Identify strengths and improvement areas per section
-
-3. Experience Deep Dive:
-   - Analyze each role for impact and achievement
-   - Score responsibilities vs achievements balance
-   - Assess skill demonstration and career progression
-
-4. Skills Assessment:
-   - Categorize skills by proficiency level
-   - Evaluate market demand for each skill
-   - Identify skill gaps and growth opportunities
-
-5. Strategic Recommendations:
-   - Immediate quick-win improvements
-   - Long-term strategic positioning advice
-   - Industry alignment and competitive positioning
-
-6. Market Readiness:
-   - How competitive this resume is in current market
-   - Unique differentiators and value propositions
-   - Positioning advice for target roles
-
-SCORING CRITERIA:
-- 90-100: Exceptional, market-leading resume
-- 80-89: Strong, competitive resume
-- 70-79: Good foundation, some improvements needed
-- 60-69: Average, significant improvements required
-- 50-59: Below average, major restructuring needed
-- Below 50: Poor quality, comprehensive rewrite required
-
-Focus on actionable, specific feedback that leads to measurable improvements.
-Respond with valid JSON matching the ResumeAnalysisResult schema.
-"""
+        prompt = format_prompt(
+            "comprehensive_resume_analysis",
+            resume_content=sanitized_content.sanitized_content,
+            target_industry=target_industry or "General analysis"
+        )
 
         response = gemini_pro.generate(
             prompt,
@@ -257,49 +213,11 @@ def analyze_career_progression(
         sanitized_content = InputSanitizer.sanitize_text_input(resume_content)
         sanitized_goals = InputSanitizer.sanitize_text_input(career_goals) if career_goals else None
 
-        prompt = f"""
-As a senior career strategist, analyze the career progression patterns in this resume
-and provide strategic guidance for continued advancement.
-
-RESUME CONTENT:
-{sanitized_content.sanitized_content}
-
-CAREER GOALS: {sanitized_goals.sanitized_content if sanitized_goals else "Not specified"}
-
-CAREER PROGRESSION ANALYSIS:
-1. Trajectory Assessment:
-   - Analyze progression of roles, titles, and responsibilities
-   - Identify upward, lateral, or unclear progression patterns
-   - Score overall career growth trajectory (0-100)
-
-2. Skill Evolution Analysis:
-   - Track how skills developed across roles
-   - Identify skill-building patterns and strategic development
-   - Map skills growth to career advancement
-
-3. Gap and Opportunity Identification:
-   - Identify career gaps or inconsistencies
-   - Spot opportunities for stronger positioning
-   - Highlight missing experiences for target advancement
-
-4. Growth Pattern Recognition:
-   - Identify patterns of professional development
-   - Recognize strategic career moves and decisions
-   - Analyze risk-taking and growth mindset evidence
-
-5. Future Trajectory Planning:
-   - Predict logical next career moves
-   - Identify roles that build on current foundation
-   - Suggest strategic skill development priorities
-
-6. Advancement Positioning:
-   - How to position for next-level opportunities
-   - Leverage current experience for advancement
-   - Bridge gaps between current role and aspirations
-
-Provide strategic, actionable guidance for continued career growth and positioning.
-Respond with valid JSON matching the CareerProgressionAnalysis schema.
-"""
+        prompt = format_prompt(
+            "career_progression_analysis",
+            resume_content=sanitized_content.sanitized_content,
+            career_goals=sanitized_goals.sanitized_content if sanitized_goals else "Not specified"
+        )
 
         response = gemini_pro.generate(
             prompt,

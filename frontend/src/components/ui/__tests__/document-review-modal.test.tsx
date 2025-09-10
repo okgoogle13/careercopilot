@@ -28,20 +28,20 @@ describe('DocumentReviewModal', () => {
         targetJob: {
           title: 'Frontend Developer',
           company: 'Tech Corp',
-          location: 'Remote'
+          location: 'Remote',
         },
-        matchScore: 85
+        matchScore: 85,
       },
       keywords: [
         { keyword: 'React', status: 'matched' as const, id: '1' },
         { keyword: 'TypeScript', status: 'suggested' as const, id: '2' },
-        { keyword: 'Testing', status: 'missing' as const, id: '3' }
+        { keyword: 'Testing', status: 'missing' as const, id: '3' },
       ],
       aiSuggestions: ['Add more details about React hooks', 'Include TypeScript projects'],
       issues: [
         { type: 'warning' as const, message: 'Consider adding more specific examples' },
-        { type: 'suggestion' as const, message: 'Include quantified achievements' }
-      ]
+        { type: 'suggestion' as const, message: 'Include quantified achievements' },
+      ],
     },
     {
       type: 'cover_letter' as const,
@@ -50,13 +50,13 @@ describe('DocumentReviewModal', () => {
       metadata: {
         wordCount: 300,
         lastModified: new Date('2024-01-01'),
-        matchScore: 90
+        matchScore: 90,
       },
       keywords: [
         { keyword: 'React', status: 'matched' as const, id: '4' },
-        { keyword: 'Leadership', status: 'suggested' as const, id: '5' }
-      ]
-    }
+        { keyword: 'Leadership', status: 'suggested' as const, id: '5' },
+      ],
+    },
   ];
 
   const mockOnApprove = jest.fn();
@@ -314,15 +314,17 @@ describe('DocumentReviewModal', () => {
   });
 
   it('handles documents without keywords', () => {
-    const documentsWithoutKeywords = [{
-      type: 'resume' as const,
-      title: 'Simple Resume',
-      content: 'Basic resume content',
-      metadata: {
-        wordCount: 200,
-        lastModified: new Date()
-      }
-    }];
+    const documentsWithoutKeywords = [
+      {
+        type: 'resume' as const,
+        title: 'Simple Resume',
+        content: 'Basic resume content',
+        metadata: {
+          wordCount: 200,
+          lastModified: new Date(),
+        },
+      },
+    ];
 
     render(
       <DocumentReviewModal

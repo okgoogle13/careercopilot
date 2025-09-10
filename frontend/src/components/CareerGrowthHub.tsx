@@ -1,10 +1,27 @@
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Progress } from "./ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
-import { ArrowLeft, Sparkles, Target, TrendingUp, MessageSquare, ArrowRight, BookOpen, Trophy, Clock, Users, CheckCircle, Plus, Star, BarChart3, Calendar, Zap } from "lucide-react";
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import {
+  ArrowLeft,
+  Sparkles,
+  Target,
+  TrendingUp,
+  MessageSquare,
+  ArrowRight,
+  BookOpen,
+  Trophy,
+  Clock,
+  Users,
+  CheckCircle,
+  Plus,
+  Star,
+  BarChart3,
+  Calendar,
+  Zap,
+} from 'lucide-react';
 
 interface Goal {
   id: string;
@@ -50,136 +67,129 @@ interface CareerGrowthHubProps {
 
 // Mock data
 const mockGoals: Goal[] = [
-    {
-      id: '1',
-      title: 'Master React Advanced Patterns',
-      description: 'Deep dive into advanced React patterns and state management',
-      category: 'skill',
-      progress: 65,
-      targetDate: '2025-03-01',
-      status: 'active',
-      milestones: [
-        { id: '1', title: 'Complete Context API course', completed: true },
-        { id: '2', title: 'Build Redux project', completed: true },
-        { id: '3', title: 'Learn React Query', completed: false, dueDate: '2025-01-15' },
-        { id: '4', title: 'Master Zustand', completed: false, dueDate: '2025-02-01' }
-      ]
-    },
-    {
-      id: '2',
-      title: 'Achieve Senior Developer Role',
-      description: 'Transition to senior developer position with leadership responsibilities',
-      category: 'career',
-      progress: 40,
-      targetDate: '2025-06-01',
-      status: 'active',
-      milestones: [
-        { id: '1', title: 'Complete technical leadership course', completed: false },
-        { id: '2', title: 'Mentor 2 junior developers', completed: false },
-        { id: '3', title: 'Lead a major project', completed: false }
-      ]
-    },
-    {
-      id: '3',
-      title: 'AWS Solutions Architect Certification',
-      description: 'Get certified as AWS Solutions Architect Associate',
-      category: 'certification',
-      progress: 20,
-      targetDate: '2025-04-01',
-      status: 'active',
-      milestones: [
-        { id: '1', title: 'Complete AWS fundamentals', completed: true },
-        { id: '2', title: 'Practice labs', completed: false },
-        { id: '3', title: 'Take practice exams', completed: false },
-        { id: '4', title: 'Schedule certification exam', completed: false }
-      ]
-    }
-  ];
+  {
+    id: '1',
+    title: 'Master React Advanced Patterns',
+    description: 'Deep dive into advanced React patterns and state management',
+    category: 'skill',
+    progress: 65,
+    targetDate: '2025-03-01',
+    status: 'active',
+    milestones: [
+      { id: '1', title: 'Complete Context API course', completed: true },
+      { id: '2', title: 'Build Redux project', completed: true },
+      { id: '3', title: 'Learn React Query', completed: false, dueDate: '2025-01-15' },
+      { id: '4', title: 'Master Zustand', completed: false, dueDate: '2025-02-01' },
+    ],
+  },
+  {
+    id: '2',
+    title: 'Achieve Senior Developer Role',
+    description: 'Transition to senior developer position with leadership responsibilities',
+    category: 'career',
+    progress: 40,
+    targetDate: '2025-06-01',
+    status: 'active',
+    milestones: [
+      { id: '1', title: 'Complete technical leadership course', completed: false },
+      { id: '2', title: 'Mentor 2 junior developers', completed: false },
+      { id: '3', title: 'Lead a major project', completed: false },
+    ],
+  },
+  {
+    id: '3',
+    title: 'AWS Solutions Architect Certification',
+    description: 'Get certified as AWS Solutions Architect Associate',
+    category: 'certification',
+    progress: 20,
+    targetDate: '2025-04-01',
+    status: 'active',
+    milestones: [
+      { id: '1', title: 'Complete AWS fundamentals', completed: true },
+      { id: '2', title: 'Practice labs', completed: false },
+      { id: '3', title: 'Take practice exams', completed: false },
+      { id: '4', title: 'Schedule certification exam', completed: false },
+    ],
+  },
+];
 
 const mockSkills: Skill[] = [
-    {
-      id: '1',
-      name: 'React.js',
-      category: 'technical',
-      currentLevel: 8,
-      targetLevel: 10,
-      demandScore: 95,
-      trending: true,
-      resources: [
-        { type: 'course', title: 'Advanced React Patterns', url: '#', duration: '12h', rating: 4.8 },
-        { type: 'article', title: 'React 18 New Features', url: '#', rating: 4.5 }
-      ]
-    },
-    {
-      id: '2',
-      name: 'Leadership',
-      category: 'soft',
-      currentLevel: 6,
-      targetLevel: 9,
-      demandScore: 88,
-      trending: false,
-      resources: [
-        { type: 'book', title: 'The Manager\'s Path', url: '#', rating: 4.7 },
-        { type: 'course', title: 'Technical Leadership', url: '#', duration: '8h', rating: 4.6 }
-      ]
-    },
-    {
-      id: '3',
-      name: 'TypeScript',
-      category: 'technical',
-      currentLevel: 7,
-      targetLevel: 9,
-      demandScore: 92,
-      trending: true,
-      resources: [
-        { type: 'course', title: 'TypeScript Deep Dive', url: '#', duration: '15h', rating: 4.9 }
-      ]
-    }
-  ];
-  const features = [
-    {
-      id: 'job-matching' as const,
-      title: 'AI Job Matching',
-      description: 'Find roles that perfectly match your skills and experience using advanced AI analysis.',
-      icon: Target,
-      color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10',
-      borderColor: 'border-blue-500/20',
-      benefits: [
-        'Personalized job recommendations',
-        'Skill gap analysis',
-        'Salary insights'
-      ]
-    },
-    {
-      id: 'career-intelligence' as const,
-      title: 'Career Intelligence',
-      description: 'Get data-driven insights about your career trajectory and growth opportunities.',
-      icon: TrendingUp,
-      color: 'text-green-500',
-      bgColor: 'bg-green-500/10',
-      borderColor: 'border-green-500/20',
-      benefits: [
-        'Career path analysis',
-        'Market trend insights',
-        'Skill demand forecasting'
-      ]
-    },
-    {
-      id: 'interview-prep' as const,
-      title: 'Interview Preparation',
-      description: 'Practice with AI-powered mock interviews tailored to your target roles.',
-      icon: MessageSquare,
-      color: 'text-purple-500',
-      bgColor: 'bg-purple-500/10',
-      borderColor: 'border-purple-500/20',
-      benefits: [
-        'Behavioral question practice',
-        'Industry-specific scenarios',
-        'Personalized feedback'
-      ]
-    }
-  ];
+  {
+    id: '1',
+    name: 'React.js',
+    category: 'technical',
+    currentLevel: 8,
+    targetLevel: 10,
+    demandScore: 95,
+    trending: true,
+    resources: [
+      { type: 'course', title: 'Advanced React Patterns', url: '#', duration: '12h', rating: 4.8 },
+      { type: 'article', title: 'React 18 New Features', url: '#', rating: 4.5 },
+    ],
+  },
+  {
+    id: '2',
+    name: 'Leadership',
+    category: 'soft',
+    currentLevel: 6,
+    targetLevel: 9,
+    demandScore: 88,
+    trending: false,
+    resources: [
+      { type: 'book', title: "The Manager's Path", url: '#', rating: 4.7 },
+      { type: 'course', title: 'Technical Leadership', url: '#', duration: '8h', rating: 4.6 },
+    ],
+  },
+  {
+    id: '3',
+    name: 'TypeScript',
+    category: 'technical',
+    currentLevel: 7,
+    targetLevel: 9,
+    demandScore: 92,
+    trending: true,
+    resources: [
+      { type: 'course', title: 'TypeScript Deep Dive', url: '#', duration: '15h', rating: 4.9 },
+    ],
+  },
+];
+const features = [
+  {
+    id: 'job-matching' as const,
+    title: 'AI Job Matching',
+    description:
+      'Find roles that perfectly match your skills and experience using advanced AI analysis.',
+    icon: Target,
+    color: 'text-blue-500',
+    bgColor: 'bg-blue-500/10',
+    borderColor: 'border-blue-500/20',
+    benefits: ['Personalized job recommendations', 'Skill gap analysis', 'Salary insights'],
+  },
+  {
+    id: 'career-intelligence' as const,
+    title: 'Career Intelligence',
+    description: 'Get data-driven insights about your career trajectory and growth opportunities.',
+    icon: TrendingUp,
+    color: 'text-green-500',
+    bgColor: 'bg-green-500/10',
+    borderColor: 'border-green-500/20',
+    benefits: ['Career path analysis', 'Market trend insights', 'Skill demand forecasting'],
+  },
+  {
+    id: 'interview-prep' as const,
+    title: 'Interview Preparation',
+    description: 'Practice with AI-powered mock interviews tailored to your target roles.',
+    icon: MessageSquare,
+    color: 'text-purple-500',
+    bgColor: 'bg-purple-500/10',
+    borderColor: 'border-purple-500/20',
+    benefits: [
+      'Behavioral question practice',
+      'Industry-specific scenarios',
+      'Personalized feedback',
+    ],
+  },
+];
 
 export function CareerGrowthHub({
   onNavigate,
@@ -187,15 +197,14 @@ export function CareerGrowthHub({
   userGoals = mockGoals,
   userSkills = mockSkills,
   onAddGoal = () => {},
-  onUpdateGoal = () => {}
+  onUpdateGoal = () => {},
 }: CareerGrowthHubProps) {
-
   const getCategoryIcon = (category: Goal['category']) => {
     const icons = {
       skill: BookOpen,
       career: TrendingUp,
       network: Users,
-      certification: Trophy
+      certification: Trophy,
     };
     return icons[category] || Target;
   };
@@ -204,7 +213,7 @@ export function CareerGrowthHub({
     const colors = {
       technical: 'text-blue-500 bg-blue-50',
       soft: 'text-green-500 bg-green-50',
-      industry: 'text-purple-500 bg-purple-50'
+      industry: 'text-purple-500 bg-purple-50',
     };
     return colors[category] || 'text-gray-500 bg-gray-50';
   };
@@ -264,7 +273,9 @@ export function CareerGrowthHub({
                   <div className="flex items-center justify-center mb-2">
                     <Target className="w-6 h-6 text-blue-500" />
                   </div>
-                  <div className="text-2xl font-bold text-blue-600">{userGoals.filter(g => g.status === 'active').length}</div>
+                  <div className="text-2xl font-bold text-blue-600">
+                    {userGoals.filter((g) => g.status === 'active').length}
+                  </div>
                   <div className="text-sm text-muted-foreground">Active Goals</div>
                 </Card>
                 <Card className="p-6 text-center">
@@ -278,7 +289,9 @@ export function CareerGrowthHub({
                   <div className="flex items-center justify-center mb-2">
                     <Trophy className="w-6 h-6 text-amber-500" />
                   </div>
-                  <div className="text-2xl font-bold text-amber-600">{userGoals.filter(g => g.status === 'completed').length}</div>
+                  <div className="text-2xl font-bold text-amber-600">
+                    {userGoals.filter((g) => g.status === 'completed').length}
+                  </div>
                   <div className="text-sm text-muted-foreground">Completed</div>
                 </Card>
                 <Card className="p-6 text-center">
@@ -286,7 +299,10 @@ export function CareerGrowthHub({
                     <TrendingUp className="w-6 h-6 text-purple-500" />
                   </div>
                   <div className="text-2xl font-bold text-purple-600">
-                    {Math.round(userGoals.reduce((acc, g) => acc + g.progress, 0) / userGoals.length)}%
+                    {Math.round(
+                      userGoals.reduce((acc, g) => acc + g.progress, 0) / userGoals.length
+                    )}
+                    %
                   </div>
                   <div className="text-sm text-muted-foreground">Avg Progress</div>
                 </Card>
@@ -301,13 +317,18 @@ export function CareerGrowthHub({
                   </h3>
                   <div className="space-y-3">
                     {userGoals.slice(0, 3).map((goal) => (
-                      <div key={goal.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                      <div
+                        key={goal.id}
+                        className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
+                      >
                         <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
                           <CheckCircle className="w-4 h-4 text-blue-600" />
                         </div>
                         <div className="flex-1">
                           <p className="font-medium text-sm">{goal.title}</p>
-                          <p className="text-xs text-muted-foreground">Progress: {goal.progress}%</p>
+                          <p className="text-xs text-muted-foreground">
+                            Progress: {goal.progress}%
+                          </p>
                         </div>
                         <Progress value={goal.progress} className="w-16 h-2" />
                       </div>
@@ -341,7 +362,10 @@ export function CareerGrowthHub({
                             {skill.currentLevel}/{skill.targetLevel}
                           </span>
                         </div>
-                        <Progress value={(skill.currentLevel / skill.targetLevel) * 100} className="h-2" />
+                        <Progress
+                          value={(skill.currentLevel / skill.targetLevel) * 100}
+                          className="h-2"
+                        />
                       </div>
                     ))}
                   </div>
@@ -369,7 +393,9 @@ export function CareerGrowthHub({
                       </div>
 
                       <div className="space-y-6">
-                        <div className={`p-4 ${feature.bgColor} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}>
+                        <div
+                          className={`p-4 ${feature.bgColor} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}
+                        >
                           <Icon className={`w-8 h-8 ${feature.color}`} />
                         </div>
 
@@ -407,18 +433,19 @@ export function CareerGrowthHub({
                 })}
               </div>
             </TabsContent>
-        </Tabs>
+          </Tabs>
 
-        {/* Additional Info */}
-        <Card className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border-primary/20 mt-8">
+          {/* Additional Info */}
+          <Card className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border-primary/20 mt-8">
             <div className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2">
                 <Sparkles className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-semibold">Powered by Advanced AI</h3>
               </div>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Our career growth tools are powered by cutting-edge AI technology that analyzes market trends,
-                job requirements, and your unique profile to provide personalized career guidance.
+                Our career growth tools are powered by cutting-edge AI technology that analyzes
+                market trends, job requirements, and your unique profile to provide personalized
+                career guidance.
               </p>
               <div className="flex flex-wrap justify-center gap-3 pt-4">
                 <Badge variant="secondary">Machine Learning</Badge>

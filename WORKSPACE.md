@@ -4,17 +4,6 @@ This project uses npm workspaces to manage dependencies across multiple packages
 
 ## Structure
 
-```
-careercopilot/
-├── package.json          # Root workspace configuration
-├── frontend/             # React frontend application
-│   └── package.json      # Frontend-specific dependencies
-├── functions/            # Firebase Cloud Functions
-│   └── package.json      # Functions-specific dependencies
-└── backend/              # Python FastAPI backend
-    └── requirements.txt  # Python dependencies (exact versions)
-```
-
 ## Available Commands
 
 ### Root Level Commands

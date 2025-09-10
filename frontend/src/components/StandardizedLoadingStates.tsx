@@ -1,10 +1,10 @@
-import React from "react";
-import { motion } from "motion/react";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Skeleton } from "./ui/skeleton";
-import { Progress } from "./ui/progress";
-import { Loader2, RefreshCw, Zap, CheckCircle } from "lucide-react";
+import React from 'react';
+import { motion } from 'motion/react';
+import { Card } from './ui/card';
+import { Badge } from './ui/badge';
+import { Skeleton } from './ui/skeleton';
+import { Progress } from './ui/progress';
+import { Loader2, RefreshCw, Zap, CheckCircle } from 'lucide-react';
 
 // Loading state variants
 export type LoadingVariant =
@@ -26,18 +26,18 @@ interface LoadingStateProps {
 }
 
 // Basic Spinner Loading
-export const SpinnerLoading = ({ size = 'md', message, className = "" }: LoadingStateProps) => {
+export const SpinnerLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
   const sizeClasses = {
     sm: 'w-4 h-4',
     md: 'w-6 h-6',
-    lg: 'w-8 h-8'
+    lg: 'w-8 h-8',
   };
 
   return (
     <div className={`flex items-center justify-center gap-2 ${className}`}>
       <motion.div
         animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
         <Loader2 className={`${sizeClasses[size]} text-primary`} />
       </motion.div>
@@ -47,11 +47,11 @@ export const SpinnerLoading = ({ size = 'md', message, className = "" }: Loading
 };
 
 // Pulse Loading
-export const PulseLoading = ({ size = 'md', message, className = "" }: LoadingStateProps) => {
+export const PulseLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
   const sizeClasses = {
     sm: 'w-3 h-3',
     md: 'w-4 h-4',
-    lg: 'w-6 h-6'
+    lg: 'w-6 h-6',
   };
 
   return (
@@ -67,11 +67,11 @@ export const PulseLoading = ({ size = 'md', message, className = "" }: LoadingSt
 };
 
 // Dots Loading
-export const DotsLoading = ({ size = 'md', message, className = "" }: LoadingStateProps) => {
+export const DotsLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
   const sizeClasses = {
     sm: 'w-1.5 h-4',
     md: 'w-2 h-6',
-    lg: 'w-3 h-8'
+    lg: 'w-3 h-8',
   };
 
   return (
@@ -84,7 +84,7 @@ export const DotsLoading = ({ size = 'md', message, className = "" }: LoadingSta
             transition={{
               duration: 0.6,
               repeat: Infinity,
-              delay: i * 0.1
+              delay: i * 0.1,
             }}
             className={`${sizeClasses[size]} bg-primary rounded-full`}
           />
@@ -96,11 +96,11 @@ export const DotsLoading = ({ size = 'md', message, className = "" }: LoadingSta
 };
 
 // Bars Loading
-export const BarsLoading = ({ size = 'md', message, className = "" }: LoadingStateProps) => {
+export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
   const sizeClasses = {
     sm: 'w-1 h-6',
     md: 'w-1.5 h-8',
-    lg: 'w-2 h-12'
+    lg: 'w-2 h-12',
   };
 
   return (
@@ -113,7 +113,7 @@ export const BarsLoading = ({ size = 'md', message, className = "" }: LoadingSta
             transition={{
               duration: 1,
               repeat: Infinity,
-              delay: i * 0.1
+              delay: i * 0.1,
             }}
             className={`${sizeClasses[size]} bg-primary rounded-sm origin-bottom`}
           />
@@ -125,7 +125,7 @@ export const BarsLoading = ({ size = 'md', message, className = "" }: LoadingSta
 };
 
 // Progress Loading
-export const ProgressLoading = ({ progress = 0, message, className = "" }: LoadingStateProps) => {
+export const ProgressLoading = ({ progress = 0, message, className = '' }: LoadingStateProps) => {
   return (
     <div className={`space-y-3 ${className}`}>
       <div className="flex items-center justify-between">
@@ -138,7 +138,10 @@ export const ProgressLoading = ({ progress = 0, message, className = "" }: Loadi
 };
 
 // Skeleton Loading
-export const SkeletonLoading = ({ variant = 'card', className = "" }: LoadingStateProps & { variant?: 'card' | 'list' | 'profile' }) => {
+export const SkeletonLoading = ({
+  variant = 'card',
+  className = '',
+}: LoadingStateProps & { variant?: 'card' | 'list' | 'profile' }) => {
   if (variant === 'card') {
     return (
       <Card className={`p-6 space-y-4 ${className}`}>
@@ -200,27 +203,30 @@ export const SkeletonLoading = ({ variant = 'card', className = "" }: LoadingSta
 };
 
 // Shimmer Loading Effect
-export const ShimmerLoading = ({ className = "" }: LoadingStateProps) => {
+export const ShimmerLoading = ({ className = '' }: LoadingStateProps) => {
   return (
     <div className={`relative overflow-hidden bg-gray-200 rounded ${className}`}>
       <motion.div
         className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
-        initial={{ x: "-100%" }}
-        animate={{ x: "100%" }}
-        transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+        initial={{ x: '-100%' }}
+        animate={{ x: '100%' }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
       />
     </div>
   );
 };
 
 // AI Processing Loading
-export const AIProcessingLoading = ({ message = "AI is processing...", className = "" }: LoadingStateProps) => {
+export const AIProcessingLoading = ({
+  message = 'AI is processing...',
+  className = '',
+}: LoadingStateProps) => {
   return (
     <div className={`flex flex-col items-center justify-center gap-4 p-6 ${className}`}>
       <div className="relative">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
           className="w-12 h-12 border-2 border-purple-200 border-t-purple-600 rounded-full"
         />
         <motion.div
@@ -241,7 +247,7 @@ export const AIProcessingLoading = ({ message = "AI is processing...", className
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
-                delay: i * 0.5
+                delay: i * 0.5,
               }}
               className="w-2 h-2 bg-purple-400 rounded-full"
             />
@@ -253,12 +259,12 @@ export const AIProcessingLoading = ({ message = "AI is processing...", className
 };
 
 // Success Loading (completion state)
-export const SuccessLoading = ({ message = "Complete!", className = "" }: LoadingStateProps) => {
+export const SuccessLoading = ({ message = 'Complete!', className = '' }: LoadingStateProps) => {
   return (
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
       className={`flex flex-col items-center justify-center gap-3 ${className}`}
     >
       <motion.div
@@ -287,7 +293,7 @@ export const LoadingState = ({
   size = 'md',
   message,
   progress,
-  className = ""
+  className = '',
 }: LoadingStateProps) => {
   const loadingComponents = {
     spinner: SpinnerLoading,
@@ -297,18 +303,13 @@ export const LoadingState = ({
     skeleton: SkeletonLoading,
     card: (props: any) => <SkeletonLoading {...props} variant="card" />,
     progress: ProgressLoading,
-    shimmer: ShimmerLoading
+    shimmer: ShimmerLoading,
   };
 
   const LoadingComponent = loadingComponents[variant];
 
   return (
-    <LoadingComponent
-      size={size}
-      message={message}
-      progress={progress}
-      className={className}
-    />
+    <LoadingComponent size={size} message={message} progress={progress} className={className} />
   );
 };
 

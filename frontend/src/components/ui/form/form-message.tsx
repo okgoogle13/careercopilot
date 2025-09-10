@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { cn } from "../utils";
-import { useFormField } from "./form-field";
+import * as React from 'react';
+import { cn } from '../utils';
+import { useFormField } from './form-field';
 
 const FormMessage = React.forwardRef<
   HTMLParagraphElement,
@@ -23,9 +23,9 @@ const FormMessage = React.forwardRef<
         data-slot="form-message"
         id={formMessageId}
         className={cn(
-          "text-destructive text-xs pl-3 py-1.5 animate-in fade-in-0 zoom-in-95",
-          "transition-all duration-200 ease-in-out",
-          "dark:text-destructive-foreground dark:bg-destructive/10 dark:px-2 dark:py-1.5 dark:rounded-md",
+          'text-destructive text-xs pl-3 py-1.5 animate-in fade-in-0 zoom-in-95',
+          'transition-all duration-200 ease-in-out',
+          'dark:text-destructive-foreground dark:bg-destructive/10 dark:px-2 dark:py-1.5 dark:rounded-md',
           className
         )}
         {...props}
@@ -36,6 +36,6 @@ const FormMessage = React.forwardRef<
   );
 });
 
-FormMessage.displayName = "FormMessage";
+FormMessage.displayName = 'FormMessage';
 
 export { FormMessage };

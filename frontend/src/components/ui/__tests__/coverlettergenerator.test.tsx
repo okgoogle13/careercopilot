@@ -70,7 +70,7 @@ describe('CoverLetterGenerator', () => {
 
   it('shows loading state while generating cover letter', async () => {
     mockAiServices.generateCoverLetter.mockImplementation(
-      () => new Promise(resolve => setTimeout(() => resolve(mockGeneratedCoverLetter), 100))
+      () => new Promise((resolve) => setTimeout(() => resolve(mockGeneratedCoverLetter), 100))
     );
 
     render(<CoverLetterGenerator />);

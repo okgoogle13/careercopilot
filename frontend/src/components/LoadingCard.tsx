@@ -1,5 +1,5 @@
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import { Skeleton } from "./ui/skeleton";
+import { Card, CardContent, CardFooter, CardHeader } from './ui/card';
+import { Skeleton } from './ui/skeleton';
 
 export function LoadingCard() {
   return (
@@ -19,12 +19,12 @@ export function LoadingCard() {
           <Skeleton className="h-3 w-24" />
           <Skeleton className="h-4 w-8" />
         </div>
-        
+
         <div className="flex justify-between items-center">
           <Skeleton className="h-3 w-28" />
           <Skeleton className="h-4 w-12" />
         </div>
-        
+
         <div className="flex justify-between items-center">
           <Skeleton className="h-3 w-20" />
           <Skeleton className="h-3 w-16" />

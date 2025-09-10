@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
 
 interface KscCriterionCardProps {
@@ -11,7 +11,7 @@ interface KscCriterionCardProps {
 
 export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
   criterion,
-  onGenerate = async () => "Sample generated response for: " + criterion
+  onGenerate = async () => 'Sample generated response for: ' + criterion,
 }) => {
   const [generatedText, setGeneratedText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -31,23 +31,16 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
   return (
     <Card
       className={cn(
-        "bg-semantic-color-bg-surface",
-        "border-semantic-color-border-subtle",
-        "rounded-semantic-radius-lg",
-        "p-semantic-space-inset-lg",
-        "shadow-sm"
+        'bg-semantic-color-bg-surface',
+        'border-semantic-color-border-subtle',
+        'rounded-semantic-radius-lg',
+        'p-semantic-space-inset-lg',
+        'shadow-sm'
       )}
     >
-      <CardHeader
-        className={cn(
-          "p-0 mb-semantic-space-stack-sm"
-        )}
-      >
+      <CardHeader className={cn('p-0 mb-semantic-space-stack-sm')}>
         <CardTitle
-          className={cn(
-            "text-semantic-typography-heading-md",
-            "text-semantic-color-text-primary"
-          )}
+          className={cn('text-semantic-typography-heading-md', 'text-semantic-color-text-primary')}
         >
           Key Selection Criterion
         </CardTitle>
@@ -56,11 +49,11 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
       <CardContent className="p-0 space-y-semantic-space-stack-sm">
         <div
           className={cn(
-            "bg-semantic-color-bg-elevated",
-            "p-semantic-space-inset-sm",
-            "rounded-semantic-radius-md",
-            "text-semantic-color-text-secondary",
-            "text-semantic-typography-body-md"
+            'bg-semantic-color-bg-elevated',
+            'p-semantic-space-inset-sm',
+            'rounded-semantic-radius-md',
+            'text-semantic-color-text-secondary',
+            'text-semantic-typography-body-md'
           )}
         >
           {criterion}
@@ -70,11 +63,11 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
           onClick={handleGenerate}
           disabled={isLoading}
           className={cn(
-            "w-full",
-            "bg-semantic-color-action-primary-default",
-            "hover:bg-semantic-color-action-primary-hover",
-            "text-semantic-color-text-primary",
-            "mb-semantic-space-stack-sm"
+            'w-full',
+            'bg-semantic-color-action-primary-default',
+            'hover:bg-semantic-color-action-primary-hover',
+            'text-semantic-color-text-primary',
+            'mb-semantic-space-stack-sm'
           )}
         >
           {isLoading ? 'Generating...' : 'Generate Response'}
@@ -85,9 +78,9 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
           onChange={(e) => setGeneratedText(e.target.value)}
           placeholder="Your generated response will appear here..."
           className={cn(
-            "min-h-[150px]",
-            "text-semantic-typography-body-md",
-            "text-semantic-color-text-primary"
+            'min-h-[150px]',
+            'text-semantic-typography-body-md',
+            'text-semantic-color-text-primary'
           )}
         />
       </CardContent>

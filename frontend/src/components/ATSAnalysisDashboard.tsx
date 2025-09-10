@@ -1,9 +1,19 @@
-import { useState } from "react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Progress } from "./ui/progress";
-import { ArrowLeft, Upload, CheckCircle, AlertTriangle, XCircle, Eye, Download, Check, X } from "lucide-react";
+import { useState } from 'react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
+import {
+  ArrowLeft,
+  Upload,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  Eye,
+  Download,
+  Check,
+  X,
+} from 'lucide-react';
 
 interface ATSAnalysisDashboardProps {
   onBack: () => void;
@@ -29,49 +39,73 @@ const mockAnalysisResult: AnalysisResult = {
   overallScore: 87,
   categories: [
     {
-      name: "Keyword Optimization",
+      name: 'Keyword Optimization',
       score: 89,
       status: 'good',
-      suggestions: ["Add more social services terminology", "Include community outreach keywords"]
+      suggestions: ['Add more social services terminology', 'Include community outreach keywords'],
     },
     {
-      name: "Format & Structure",
+      name: 'Format & Structure',
       score: 95,
       status: 'good',
-      suggestions: ["Excellent formatting consistency"]
+      suggestions: ['Excellent formatting consistency'],
     },
     {
-      name: "Content Quality",
+      name: 'Content Quality',
       score: 82,
       status: 'good',
-      suggestions: ["Quantify client impact with numbers", "Add more action verbs", "Include recent volunteer work"]
+      suggestions: [
+        'Quantify client impact with numbers',
+        'Add more action verbs',
+        'Include recent volunteer work',
+      ],
     },
     {
-      name: "ATS Compatibility",
+      name: 'ATS Compatibility',
       score: 83,
       status: 'good',
-      suggestions: ["Use standard section headers", "Reduce special characters", "Add more relevant certifications"]
-    }
+      suggestions: [
+        'Use standard section headers',
+        'Reduce special characters',
+        'Add more relevant certifications',
+      ],
+    },
   ],
   keywordMatches: {
-    matched: ["Community Support", "Case Management", "Crisis Intervention", "Mental Health", "Client Advocacy", "Team Collaboration"],
-    missing: ["Peer Support", "Recovery Programs", "Group Facilitation", "Documentation", "Risk Assessment", "Cultural Competency"]
+    matched: [
+      'Community Support',
+      'Case Management',
+      'Crisis Intervention',
+      'Mental Health',
+      'Client Advocacy',
+      'Team Collaboration',
+    ],
+    missing: [
+      'Peer Support',
+      'Recovery Programs',
+      'Group Facilitation',
+      'Documentation',
+      'Risk Assessment',
+      'Cultural Competency',
+    ],
   },
   formatIssues: [
-    "Consider adding volunteer experience section",
-    "Include relevant certifications prominently",
-    "Ensure consistent date formatting"
-  ]
+    'Consider adding volunteer experience section',
+    'Include relevant certifications prominently',
+    'Ensure consistent date formatting',
+  ],
 };
 
 export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardProps) {
   const [analysisResult] = useState<AnalysisResult>(mockAnalysisResult);
-  const [selectedProfile, setSelectedProfile] = useState("Community Support Worker - Nishant Dougall");
+  const [selectedProfile, setSelectedProfile] = useState(
+    'Community Support Worker - Nishant Dougall'
+  );
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-green-400";
-    if (score >= 60) return "text-yellow-400";
-    return "text-red-400";
+    if (score >= 80) return 'text-green-400';
+    if (score >= 60) return 'text-yellow-400';
+    return 'text-red-400';
   };
 
   const getStatusIcon = (status: string) => {
@@ -115,10 +149,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
             Download Report
           </Button>
           {onNext && (
-            <Button 
-              className="bg-primary hover:bg-primary/90"
-              onClick={onNext}
-            >
+            <Button className="bg-primary hover:bg-primary/90" onClick={onNext}>
               Choose Template
             </Button>
           )}
@@ -144,9 +175,11 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
               </div>
               <Progress value={analysisResult.overallScore} className="w-full" />
               <div className="text-sm text-muted-foreground">
-                {analysisResult.overallScore >= 80 ? "Great! Your resume is well-optimized." :
-                 analysisResult.overallScore >= 60 ? "Good foundation, room for improvement." :
-                 "Needs significant optimization for ATS systems."}
+                {analysisResult.overallScore >= 80
+                  ? 'Great! Your resume is well-optimized.'
+                  : analysisResult.overallScore >= 60
+                    ? 'Good foundation, room for improvement.'
+                    : 'Needs significant optimization for ATS systems.'}
               </div>
             </div>
           </Card>
@@ -210,7 +243,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   </div>
                   <div className="space-y-2">
                     {analysisResult.keywordMatches.matched.map((keyword, index) => (
-                      <div key={index} className="flex items-center gap-2 p-2 rounded-lg bg-green-400/5 border border-green-400/10">
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 p-2 rounded-lg bg-green-400/5 border border-green-400/10"
+                      >
                         <Check className="w-3 h-3 text-green-400 flex-shrink-0" />
                         <span className="text-green-400 text-sm">{keyword}</span>
                       </div>
@@ -228,7 +264,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   </div>
                   <div className="space-y-2">
                     {analysisResult.keywordMatches.missing.map((keyword, index) => (
-                      <div key={index} className="flex items-center gap-2 p-2 rounded-lg bg-red-400/5 border border-red-400/10">
+                      <div
+                        key={index}
+                        className="flex items-center gap-2 p-2 rounded-lg bg-red-400/5 border border-red-400/10"
+                      >
                         <X className="w-3 h-3 text-red-400 flex-shrink-0" />
                         <span className="text-red-400 text-sm">{keyword}</span>
                       </div>
@@ -260,7 +299,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   <div>
                     <h4 className="font-medium text-primary">High Impact</h4>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Add "Peer Support" and "Recovery Programs" to your skills section as they appear frequently in community support job postings.
+                      Add "Peer Support" and "Recovery Programs" to your skills section as they
+                      appear frequently in community support job postings.
                     </p>
                   </div>
                 </div>
@@ -271,7 +311,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   <div>
                     <h4 className="font-medium text-yellow-400">Medium Impact</h4>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Quantify your client impact with specific numbers and outcomes to improve content quality score.
+                      Quantify your client impact with specific numbers and outcomes to improve
+                      content quality score.
                     </p>
                   </div>
                 </div>
@@ -282,7 +323,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   <div>
                     <h4 className="font-medium text-blue-400">Low Impact</h4>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Consider highlighting any mental health first aid or crisis intervention certifications more prominently.
+                      Consider highlighting any mental health first aid or crisis intervention
+                      certifications more prominently.
                     </p>
                   </div>
                 </div>
