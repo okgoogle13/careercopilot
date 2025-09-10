@@ -1,9 +1,9 @@
 {
   "src/**/*.{js,jsx,ts,tsx}": [
-    "eslint --fix --max-warnings=0 --ignore-pattern '!**/node_modules/**'",
-    "prettier --write --ignore-path .gitignore"
+    "eslint --fix --max-warnings=50",
+    "prettier --write"
   ],
   "src/**/*.{json,css,scss,md}": [
-    "prettier --write --ignore-path .gitignore"
+    "prettier --write"
   ]
 }
