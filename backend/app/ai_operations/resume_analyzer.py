@@ -6,7 +6,7 @@ while providing a clean API interface with caching and monitoring.
 """
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 from app.core.cache_decorators import cached_ai_operation
 from app.core.input_validation import InputSanitizer, InputValidationError
