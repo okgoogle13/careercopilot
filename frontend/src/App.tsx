@@ -95,7 +95,7 @@ export default function App() {
     name: string;
     type: 'resume' | 'cover-letter';
   } | null>(null);
-  const [selectedDocumentType, setSelectedDocumentType] = useState<
+  const [, setSelectedDocumentType] = useState<
     'resume' | 'cover-letter' | 'selection-criteria' | null
   >(null);
   const [showDemoNav, setShowDemoNav] = useState(true);
