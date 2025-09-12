@@ -1,194 +1,70 @@
-# CareerCopilot
 
-> AI-powered career management platform built with modern web technologies
-
+🚀 CareerCopilot
+> An AI-powered platform to help you manage your career search, built with a modern web stack.
+> 
 ## 🏗️ Architecture
-
-**Frontend**: React 19 + TypeScript + Vite + Tailwind CSS
-**Backend**: Python + FastAPI + SQLAlchemy + Alembic
-**Functions**: Firebase Functions v2 + TypeScript
-**Database**: PostgreSQL + Firebase Firestore
-**AI/ML**: Google AI Platform + Anthropic Claude + OpenAI
-**Infrastructure**: Google Cloud Platform + Firebase
-
+ * Frontend: React 19, TypeScript, Vite, Tailwind CSS
+ * Backend: Python, FastAPI, SQLAlchemy
+ * Database: PostgreSQL
+ * Cloud Functions: Firebase Functions
+ * AI/ML: Google AI Platform
+ * Infrastructure: Docker, Google Cloud Platform, Firebase
 ## 📁 Project Structure
-
-```
+The repository is organized as a monorepo with distinct packages for each part of the application.
 careercopilot/
-├── 📱 frontend/           # React TypeScript SPA
-│   ├── src/
-│   │   ├── components/    # Reusable UI components
-│   │   ├── pages/         # Route components
-│   │   ├── hooks/         # Custom React hooks
-│   │   ├── contexts/      # React contexts
-│   │   ├── services/      # API clients
-│   │   └── utils/         # Utility functions
-│   ├── public/           # Static assets
-│   └── tests/            # Frontend tests
-├── 🐍 backend/           # Python FastAPI backend
-│   ├── app/
-│   │   ├── api/          # API endpoints
-│   │   ├── core/         # Core utilities
-│   │   ├── models/       # Database models
-│   │   ├── services/     # Business logic
-│   │   └── tests/        # Backend tests
-│   ├── migrations/       # Database migrations
-│   └── requirements.in   # Python dependencies
-├── ⚡ functions/         # Firebase Functions
-│   └── src/              # TypeScript functions
-├── 📚 docs/              # Documentation
-│   ├── setup/           # Setup guides
-│   ├── deployment/      # Deployment docs
-│   └── development/     # Development docs
-└── 🛠️ scripts/           # Utility scripts
-```
+├── 📱 frontend/      # The React single-page application
+├── 🐍 backend/       # The Python FastAPI server and database logic
+├── ⚡ functions/     # Serverless functions for background tasks
+├── 📚 docs/          # Project documentation
+└── 🛠️ scripts/       # Helper scripts for development
 
 ## 🚀 Quick Start
+Prerequisites
+ * Node.js (v18+) & Yarn (v4+)
+ * Python (v3.12+) & Pip
+ * Docker & Docker Compose
+ * Firebase CLI & Google Cloud SDK
+Local Development Setup
+ * Clone the repository:
+   git clone <your-repo-url>
+cd careercopilot
 
-### Prerequisites
-
-- Node.js 18+ & Yarn 4+
-- Python 3.12+ & pip
-- Firebase CLI
-- Google Cloud SDK
-
-### Development Setup
-
-1. **Clone and install dependencies:**
-   ```bash
-   git clone <repo-url>
-   cd careercopilot
+ * Install all dependencies:
+   This command will install dependencies for the root, frontend, and functions packages.
    yarn install
-   cd backend && pip install -r requirements.txt
-   ```
 
-2. **Start development servers:**
-   ```bash
-   # Frontend (React)
-   yarn dev
+ * Install backend dependencies:
+   pip install -r backend/requirements.txt
 
-   # Backend (FastAPI)
-   cd backend && uvicorn app.main:app --reload
+ * Launch all services with Docker:
+   This is the simplest way to get everything running.
+   docker-compose up --build
 
-   # Functions (Firebase)
-   yarn dev:functions
-   ```
-
-3. **Access applications:**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:8000
-   - Functions: http://localhost:5001
-
-## 📋 Available Scripts
-
-### Root Level
-```bash
-yarn dev              # Start frontend development
-yarn build            # Build all workspaces
-yarn lint             # Lint all code
-yarn test             # Run tests
-yarn clean            # Clean build artifacts
-```
-
-### Frontend
-```bash
-yarn dev              # Start dev server
-yarn build            # Build for production
-yarn test             # Run Jest tests
-yarn lint             # ESLint check
-yarn type-check       # TypeScript check
-```
-
-### Functions
-```bash
-yarn serve            # Start emulator
-yarn build            # Compile TypeScript
-yarn deploy           # Deploy to Firebase
-yarn lint             # ESLint check
-```
-
-### Backend
-```bash
-uvicorn app.main:app --reload    # Start dev server
-alembic upgrade head             # Run migrations
-pytest                          # Run tests
-```
-
+ * Access the applications:
+   * Frontend: http://localhost:5173
+   * Backend API Docs: http://localhost:8000/docs
 ## 🔧 Configuration
-
-### Environment Variables
-
-**Frontend** (`.env`):
-```bash
-VITE_FIREBASE_API_KEY=your_api_key
-VITE_FIREBASE_PROJECT_ID=your_project_id
-VITE_API_BASE_URL=http://localhost:8000
-```
-
-**Backend** (`.env`):
-```bash
-DATABASE_URL=postgresql://user:pass@localhost/db
-FIREBASE_PROJECT_ID=your_project_id
-GOOGLE_APPLICATION_CREDENTIALS=path/to/key.json
-```
-
-**Functions** (Firebase Secrets):
-```bash
-firebase functions:secrets:set API_KEY
-firebase functions:secrets:set DATABASE_URL
-```
-
-## 🏗️ Build & Deploy
-
-### Development
-```bash
-yarn dev              # Start all services
-```
-
-### Production
-```bash
-yarn build            # Build frontend & functions
-cd backend && pip install -r requirements.txt
-# Deploy using your preferred method
-```
-
-## 📖 Documentation
-
-- [Setup Guide](docs/setup/) - Complete setup instructions
-- [API Documentation](docs/api/) - Backend API reference
-- [Deployment Guide](docs/deployment/) - Production deployment
-- [Contributing](docs/contributing/) - Development guidelines
-
-## 🛠️ Tech Stack Details
-
-### Frontend Dependencies
-- **UI Framework**: React 19 with hooks & concurrent features
-- **Styling**: Tailwind CSS + Radix UI components
-- **Build Tool**: Vite for fast development & optimal builds
-- **Routing**: React Router v7
-- **Forms**: React Hook Form + Zod validation
-- **State**: React Context + Custom hooks
-- **Testing**: Jest + Testing Library + Playwright
-
-### Backend Dependencies
-- **Framework**: FastAPI with automatic OpenAPI docs
-- **Database**: PostgreSQL with SQLAlchemy ORM
-- **Migrations**: Alembic for schema management
-- **AI/ML**: Google AI Platform + Anthropic + OpenAI
-- **Auth**: Firebase Authentication integration
-- **Validation**: Pydantic models
-- **Testing**: Pytest with fixtures
-
-### Functions Dependencies
-- **Runtime**: Firebase Functions v2 (Node.js 20)
-- **Language**: TypeScript with strict mode
-- **Secrets**: Firebase Secret Manager integration
-- **Params**: Modern params subpackage for configuration
-
+Copy the example environment files and fill in your local configuration details.
+ * Frontend: cp frontend/.env.example frontend/.env
+ * Backend: cp backend/.env.example backend/.env
+## 🛠️ Tech Stack & Key Libraries
+Frontend
+ * UI Framework: React 19
+ * Styling: Tailwind CSS with Radix UI for accessible components
+ * Build Tool: Vite
+ * Routing: React Router
+ * Forms: React Hook Form with Zod for validation
+ * Testing: Jest, React Testing Library & Playwright
+Backend
+ * Framework: FastAPI for high-performance APIs
+ * Database ORM: SQLAlchemy
+ * Schema Migrations: Alembic
+ * Authentication: Firebase Authentication
+ * Data Validation: Pydantic
+ * Testing: Pytest
+Cloud Functions
+ * Runtime: Firebase Functions v2 on Node.js 20
+ * Language: TypeScript
+ * Secrets Management: Firebase Secret Manager
 ## 📄 License
-
-UNLICENSED - Private project
-
----
-
-> Built with ❤️ by the CareerCopilot Team
+This is a private project and is not licensed for reuse or distribution.
