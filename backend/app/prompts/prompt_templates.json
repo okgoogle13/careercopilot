@@ -91,5 +91,65 @@
       "last_updated": "2024-09-11",
       "usage_count": 0
     }
+  },
+
+  "ksc_simple_response": {
+    "name": "KSC Simple Response Generation",
+    "description": "Generates simple STAR methodology responses for Key Selection Criteria",
+    "category": "ksc_generation",
+    "version": "1.0",
+    "template": "As an expert career coach and a master of the STAR interview technique, your task is to generate a response for a Key Selection Criterion (KSC).\n\n**Objective:**\n1. Analyze the following Key Selection Criterion: \"{ksc_statement}\".\n2. Search through the provided user profile data to find the most relevant real-world example of this skill or experience.\n3. Using that single, most relevant example, write a comprehensive response that is strictly formatted using the STAR methodology (Situation, Task, Action, Result).\n4. The final output must be a JSON object with four keys: \"situation\", \"task\", \"action\", and \"result\".\n\n**User Profile Data:**\n```json\n{user_profile_data}\n```\n\nNow, generate the STAR response based on the user's experience.",
+    "parameters": ["ksc_statement", "user_profile_data"],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+
+  "job_description_analysis": {
+    "name": "Job Description Analysis",
+    "description": "Analyzes job descriptions to extract key information and requirements",
+    "category": "job_analysis",
+    "version": "1.0",
+    "template": "Analyze the following job description and extract the key information in a structured JSON format.\nThe JSON object should include the following fields:\n- job_title (string)\n- key_skills (list of strings)\n- required_qualifications (list of strings)\n- company_culture_summary (string)\n\nJob Description:\n{job_description}",
+    "parameters": ["job_description"],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+
+  "resume_job_comparison": {
+    "name": "Resume to Job Comparison",
+    "description": "Compares a resume against job analysis data and provides detailed feedback",
+    "category": "resume_analysis",
+    "version": "1.0",
+    "template": "As an expert career coach, analyze the provided resume against the structured job analysis data. Your goal is to provide a detailed comparison and actionable feedback.\n\nIMPORTANT: You must respond ONLY with a valid JSON object. No additional text or explanations.\n\nThe output must be a valid JSON object with the following structure:\n- \"match_score\": An integer between 0 and 100 representing how well the resume matches the job.\n- \"matching_skills\": A list of skills found in both the resume and the job's key skills.\n- \"missing_skills\": A list of key skills required for the job that are not found in the resume.\n- \"improvement_suggestions\": A list of specific, actionable suggestions for the user to improve their resume for this job.\n\nResume Text:\n{resume_text}\n\nJob Analysis Data:\n{job_analysis_data}",
+    "parameters": ["resume_text", "job_analysis_data"],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
+  },
+
+  "email_job_extraction": {
+    "name": "Email Job Details Extraction",
+    "description": "Extracts structured job information from email content",
+    "category": "email_processing",
+    "version": "1.0",
+    "template": "Analyze the following email content and extract structured information about a job opportunity.\nThe output must be a valid JSON object with the fields: \"company\", \"title\", \"deadline\" (in YYYY-MM-DD format), and \"source_url\".\nIf any field is not present, use a value of null.\nIf no clear job opportunity is found, return an empty JSON object {}.\n\nEmail Content:\n---\n{email_content}\n---",
+    "parameters": ["email_content"],
+    "output_format": "structured_json",
+    "metadata": {
+      "created_at": "2024-09-11",
+      "last_updated": "2024-09-11",
+      "usage_count": 0
+    }
   }
 }
