@@ -1,8 +1,7 @@
-import { Button } from './ui/button';
+import { Award, FileText, Mail, Upload } from 'lucide-react';
 import { useCallback, useRef, useState } from 'react';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
-import { Upload, FileText, Mail, Award } from 'lucide-react';
 
 interface UploadResumeProps {
   onNext: () => void;
@@ -10,9 +9,9 @@ interface UploadResumeProps {
 }
 
 export function UploadResume({ onNext, onBack }: UploadResumeProps) {
-  const resumeInputRef = useRef<HTMLInputElement>(null);
-  const coverInputRef = useRef<HTMLInputElement>(null);
-  const criteriaInputRef = useRef<HTMLInputElement>(null);
+  const resumeInputRef = useRef<HTMLInputElement | null>(null);
+  const coverInputRef = useRef<HTMLInputElement | null>(null);
+  const criteriaInputRef = useRef<HTMLInputElement | null>(null);
 
   const [resumeFiles, setResumeFiles] = useState<File[]>([]);
   const [coverFiles, setCoverFiles] = useState<File[]>([]);
@@ -46,7 +45,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
     [addFiles]
   );
 
-  const onBrowse = (ref: React.RefObject<HTMLInputElement>) => ref.current?.click();
+  const onBrowse = (ref: React.RefObject<HTMLInputElement | null>) => ref.current?.click();
 
   const FileList = ({ files }: { files: File[] }) => (
     <ul className="mt-4 text-left space-y-2">
@@ -101,7 +100,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 Upload Files
               </Button>
               <input
-                ref={resumeInputRef}
+                ref={resumeInputRef as React.RefObject<HTMLInputElement>}
                 type="file"
                 accept=".pdf,.doc,.docx,.txt"
                 multiple
@@ -144,7 +143,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 Upload Files
               </Button>
               <input
-                ref={coverInputRef}
+                ref={coverInputRef as React.RefObject<HTMLInputElement>}
                 type="file"
                 accept=".pdf,.doc,.docx,.txt"
                 multiple
@@ -187,7 +186,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 Upload Files
               </Button>
               <input
-                ref={criteriaInputRef}
+                ref={criteriaInputRef as React.RefObject<HTMLInputElement>}
                 type="file"
                 accept=".pdf,.doc,.docx,.txt"
                 multiple

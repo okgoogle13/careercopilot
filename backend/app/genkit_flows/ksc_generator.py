@@ -1,6 +1,8 @@
 from app.genkit_flows.flow_decorator import simple_genkit_flow
 from app.core.genkit_init import get_model
+from app.core.prompt_service import format_prompt
 from pydantic import BaseModel
+import json
 
 
 # Define the structured output model using Pydantic
@@ -17,26 +19,12 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
     Acts as an expert career coach to generate a STAR response for a KSC statement.
     """
 
-    prompt = f"""
-    As an expert career coach and a master of the STAR interview technique,
-    your task is to generate a response for a Key Selection Criterion (KSC).
-
-    **Objective:**
-    1.  Analyze the following Key Selection Criterion: "{ksc_statement}".
-    2.  Search through the provided user profile data to find the most relevant
-        real-world example of this skill or experience.
-    3.  Using that single, most relevant example, write a comprehensive response
-        that is strictly formatted using the STAR methodology (Situation, Task, Action, Result).
-    4.  The final output must be a JSON object with four keys: "situation",
-        "task", "action", and "result".
-
-    **User Profile Data:**
-    ```json
-    {user_profile_data}
-    ```
-
-    Now, generate the STAR response based on the user's experience.
-    """
+    # Use the centralized prompt service
+    prompt = format_prompt(
+        "ksc_simple_response",
+        ksc_statement=ksc_statement,
+        user_profile_data=json.dumps(user_profile_data, indent=2)
+    )
 
     # Generate the response using the centralized model
     # Model availability is guaranteed by the decorator

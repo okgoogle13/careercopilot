@@ -1,3 +1,4 @@
+import asyncio
 import logging
 import os
 from typing import List, Optional
@@ -12,6 +13,7 @@ from app.core.enhanced_ai_error_handling import (
 from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
+from app.core.config import settings
 from pydantic import BaseModel, Field
 
 # Import the supporting flows
@@ -184,11 +186,24 @@ class ScoreBreakdown(BaseModel):
     formattingScore: float
 
 
+class CategoryAnalysis(BaseModel):
+    name: str
+    score: float
+    status: str  # 'good', 'warning', 'poor'
+    suggestions: List[str]
+
+
+class KeywordMatches(BaseModel):
+    matched: List[str]
+    missing: List[str]
+
+
 class AtsResult(BaseModel):
     overallScore: float
     breakdown: ScoreBreakdown
-    matchedKeywords: List[str]
-    missingKeywords: List[str]
+    categories: List[CategoryAnalysis]
+    keywordMatches: KeywordMatches
+    formatIssues: List[str]
     recommendations: List[str]
     keyword_placement_suggestions: Optional[List[KeywordPlacementSuggestion]] = None
 
@@ -207,8 +222,8 @@ async def atsScoring(
     """
     logger.info(f"Starting comprehensive ATS scoring for user {user_id}")
 
-    # Step 1 & 2: Extract structured data from both inputs with error handling
-    job_reqs_result = await enhanced_ai_handler.execute_ai_operation(
+    # Step 1 & 2: Extract structured data from both inputs in parallel with error handling
+    job_reqs_task = enhanced_ai_handler.execute_ai_operation(
         lambda: extractJobRequirements.run(jobDescription=jobDescription),
         AIOperationContext(
             operation_name="extract_job_requirements",
@@ -219,7 +234,7 @@ async def atsScoring(
         create_fallback_strategy(enabled=True, degraded_mode=True),
     )
 
-    resume_entities_result = await enhanced_ai_handler.execute_ai_operation(
+    resume_entities_task = enhanced_ai_handler.execute_ai_operation(
         lambda: extractResumeEntities.run(resumeText=resumeText),
         AIOperationContext(
             operation_name="extract_resume_entities",
@@ -228,6 +243,11 @@ async def atsScoring(
             input_size=len(resumeText),
         ),
         create_fallback_strategy(enabled=True, degraded_mode=True),
+    )
+
+    # Execute both extractions in parallel
+    job_reqs_result, resume_entities_result = await asyncio.gather(
+        job_reqs_task, resume_entities_task
     )
 
     # Check if extractions failed
@@ -300,8 +320,8 @@ async def atsScoring(
 
     formatting_score = formatting_score_result.data if formatting_score_result.success else 50.0
 
-    # Step 6: Combine scores using weighted average
-    weights = {"keyword": 0.45, "semantic": 0.35, "formatting": 0.20}
+    # Step 6: Combine scores using weighted average from configuration
+    weights = settings.ats_scoring_weights
     overall_score = (
         keyword_analysis["score"] * weights["keyword"]
         + semantic_analysis.similarityScore * weights["semantic"]
@@ -340,6 +360,47 @@ async def atsScoring(
         semantic_analysis_result.success,
     )
 
+    # Step 9: Create category breakdown
+    categories = [
+        CategoryAnalysis(
+            name="Keyword Optimization",
+            score=round(keyword_analysis["score"], 2),
+            status="good" if keyword_analysis["score"] >= 80 else "warning" if keyword_analysis["score"] >= 60 else "poor",
+            suggestions=[
+                f"Add missing keywords: {', '.join(keyword_analysis['missingKeywords'][:3])}" if keyword_analysis["missingKeywords"] else "Excellent keyword coverage",
+                "Consider using synonyms and variations of key terms",
+            ] if keyword_analysis["missingKeywords"] else ["Excellent keyword coverage"]
+        ),
+        CategoryAnalysis(
+            name="Content Quality",
+            score=semantic_analysis.similarityScore,
+            status="good" if semantic_analysis.similarityScore >= 80 else "warning" if semantic_analysis.similarityScore >= 60 else "poor",
+            suggestions=[semantic_analysis.explanation] if semantic_analysis.explanation else ["Content aligns well with job requirements"]
+        ),
+        CategoryAnalysis(
+            name="Format & Structure",
+            score=round(formatting_score, 2),
+            status="good" if formatting_score >= 80 else "warning" if formatting_score >= 60 else "poor",
+            suggestions=[
+                "Ensure clear sections for Skills, Experience, and Education" if formatting_score < 100 else "Excellent formatting structure",
+                "Use standard section headers for ATS compatibility",
+            ] if formatting_score < 100 else ["Excellent formatting structure"]
+        ),
+    ]
+
+    # Step 10: Identify format-specific issues
+    format_issues = []
+    if formatting_score < 100:
+        if not resume_entities.skills:
+            format_issues.append("Add a clear Skills section")
+        if not resume_entities.experience:
+            format_issues.append("Add detailed Work Experience section")
+        if not resume_entities.education:
+            format_issues.append("Include Education section")
+    
+    if not format_issues:
+        format_issues = ["No major formatting issues detected"]
+
     # Log completion
     logger.info(
         f"ATS scoring completed for user {user_id}. "
@@ -355,8 +416,12 @@ async def atsScoring(
             semanticScore=semantic_analysis.similarityScore,
             formattingScore=round(formatting_score, 2),
         ),
-        matchedKeywords=keyword_analysis["matchedKeywords"],
-        missingKeywords=keyword_analysis["missingKeywords"],
+        categories=categories,
+        keywordMatches=KeywordMatches(
+            matched=keyword_analysis["matchedKeywords"],
+            missing=keyword_analysis["missingKeywords"]
+        ),
+        formatIssues=format_issues,
         recommendations=recommendations,
         keyword_placement_suggestions=placement_suggestions,
     )
