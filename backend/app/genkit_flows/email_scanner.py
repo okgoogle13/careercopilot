@@ -2,7 +2,9 @@ import base64
 import json
 from datetime import datetime
 
-from app.core.ai_config import get_ai_config
+from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.core.genkit_init import get_model
+from app.core.prompt_service import format_prompt
 from app.core.db import db
 from app.core.secrets import get_user_secret
 from google.cloud.firestore import SERVER_TIMESTAMP
@@ -13,8 +15,6 @@ from googleapiclient.errors import HttpError
 # Import the new flows
 from .calendar_manager import createCalendarEvent
 from .notifier import sendNewOpportunityNotification
-
-gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 
 
 def get_gmail_service(user_id: str):
@@ -28,31 +28,29 @@ def get_gmail_service(user_id: str):
     return build("gmail", "v1", credentials=credentials)
 
 
-# Removed @genkit.flow()
+@simple_genkit_flow()
 def extract_job_details_from_email(email_content: str) -> dict:
     """Uses an AI model to extract structured job details from email text."""
-    # This flow remains the same
-    prompt = f"""
-    Analyze the following email content and extract structured information about a job opportunity.
-    The output must be a valid JSON object with the fields: "company", "title", "deadline" (in YYYY-MM-DD format),
-    and "source_url".
-    If any field is not present, use a value of null.
-    If no clear job opportunity is found, return an empty JSON object {{}}.
+    
+    # Use the centralized prompt service
+    prompt = format_prompt(
+        "email_job_extraction",
+        email_content=email_content
+    )
 
-    Email Content:
-    ---
-    {email_content}
-    ---
-    """
-    response = gemini_pro.generate(
+    # Generate the response using the centralized model
+    # Model availability is guaranteed by the decorator
+    model = get_model()
+    
+    response = model.generate(
         prompt=prompt,
         config={"response_mime_type": "application/json"},
     )
-    try:
-        return json.loads(response.text())
-    except (json.JSONDecodeError, TypeError):
-        return {}
+    
+    return response.output()
 
+
+# Flow is automatically registered by the @simple_genkit_flow decorator
 
 # Removed @genkit.flow()
 async def scanEmailsForJobOpportunities(user_id: str) -> dict:
