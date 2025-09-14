@@ -42,47 +42,47 @@ export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = (
     <div className={cn('container mx-auto p-8', 'bg-background', 'min-h-screen')}>
       <div className={cn('grid md:grid-cols-2 gap-8', 'max-w-6xl mx-auto')}>
         {/* Left Panel: Job Description */}
-        <Card className="p-6 space-y-6">
-          <h2 className="text-2xl font-semibold text-foreground">Job Description</h2>
+        <Card className='p-6 space-y-6'>
+          <h2 className='text-2xl font-semibold text-foreground'>Job Description</h2>
 
           <Textarea
             value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
-            placeholder="Paste the job description here to generate a tailored resume..."
-            className="min-h-[500px]"
+            onChange={e => setJobDescription(e.target.value)}
+            placeholder='Paste the job description here to generate a tailored resume...'
+            className='min-h-[500px]'
           />
 
           <Button
             onClick={handleGenerateResume}
             disabled={!jobDescription || isGenerating}
-            className="w-full"
+            className='w-full'
           >
             {isGenerating ? 'Generating Resume...' : 'Generate Tailored Resume'}
           </Button>
 
           {error && (
-            <div className="p-4 bg-destructive/10 border border-destructive/20 rounded-md text-destructive">
+            <div className='p-4 bg-destructive/10 border border-destructive/20 rounded-md text-destructive'>
               {error}
             </div>
           )}
         </Card>
 
         {/* Right Panel: Generated Resume */}
-        <Card className="p-6 space-y-6">
-          <h2 className="text-2xl font-semibold text-foreground">Tailored Resume</h2>
+        <Card className='p-6 space-y-6'>
+          <h2 className='text-2xl font-semibold text-foreground'>Tailored Resume</h2>
 
           <Editor
             value={generatedResume}
             onChange={setGeneratedResume}
-            placeholder="Your tailored resume will appear here..."
-            className="min-h-[500px]"
+            placeholder='Your tailored resume will appear here...'
+            className='min-h-[500px]'
           />
 
-          <div className="flex gap-4">
-            <Button variant="secondary" className="flex-1">
+          <div className='flex gap-4'>
+            <Button variant='secondary' className='flex-1'>
               Download PDF
             </Button>
-            <Button className="flex-1">Save Version</Button>
+            <Button className='flex-1'>Save Version</Button>
           </div>
         </Card>
       </div>

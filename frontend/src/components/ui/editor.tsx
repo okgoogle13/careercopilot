@@ -46,9 +46,9 @@ export const Editor: React.FC<EditorProps> = ({
   return (
     <div className={cn('border border-border rounded-lg bg-card', className)}>
       {/* Toolbar */}
-      <div className="flex items-center gap-1 p-2 border-b border-border bg-muted/50">
+      <div className='flex items-center gap-1 p-2 border-b border-border bg-muted/50'>
         <button
-          type="button"
+          type='button'
           onClick={() => formatText('bold')}
           className={cn(
             'p-2 rounded-md text-sm font-bold transition-colors',
@@ -60,7 +60,7 @@ export const Editor: React.FC<EditorProps> = ({
           B
         </button>
         <button
-          type="button"
+          type='button'
           onClick={() => formatText('italic')}
           className={cn(
             'p-2 rounded-md text-sm italic transition-colors',
@@ -72,7 +72,7 @@ export const Editor: React.FC<EditorProps> = ({
           I
         </button>
         <button
-          type="button"
+          type='button'
           onClick={() => formatText('underline')}
           className={cn(
             'p-2 rounded-md text-sm underline transition-colors',
@@ -83,9 +83,9 @@ export const Editor: React.FC<EditorProps> = ({
         >
           U
         </button>
-        <div className="w-px h-4 bg-border mx-2" />
+        <div className='w-px h-4 bg-border mx-2' />
         <button
-          type="button"
+          type='button'
           onClick={() => formatText('insertUnorderedList')}
           className={cn(
             'p-2 rounded-md text-sm transition-colors',
@@ -97,7 +97,7 @@ export const Editor: React.FC<EditorProps> = ({
           •
         </button>
         <button
-          type="button"
+          type='button'
           onClick={() => formatText('insertOrderedList')}
           className={cn(
             'p-2 rounded-md text-sm transition-colors',
@@ -135,8 +135,8 @@ export const Editor: React.FC<EditorProps> = ({
 
       {/* Placeholder when empty */}
       {!value && !isFocused && (
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="p-4 pt-16 text-muted-foreground text-sm">{placeholder}</div>
+        <div className='absolute inset-0 pointer-events-none'>
+          <div className='p-4 pt-16 text-muted-foreground text-sm'>{placeholder}</div>
         </div>
       )}
     </div>

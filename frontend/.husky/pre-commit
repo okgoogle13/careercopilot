@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx lint-staged --no-stash --concurrent false
+cd "$(dirname "$0")/.."  # Change to project root
+npx --no-install lint-staged --no-stash --concurrent false --config frontend/.lintstagedrc

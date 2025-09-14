@@ -282,7 +282,7 @@ export function DocumentPreview({
     let interval: NodeJS.Timeout;
     if (isTracking) {
       interval = setInterval(() => {
-        setTrackingTime((prev) => prev + 1);
+        setTrackingTime(prev => prev + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -295,8 +295,8 @@ export function DocumentPreview({
   }, []);
 
   // Handle zoom controls
-  const handleZoomIn = () => setZoomLevel((prev) => Math.min(prev + 25, 200));
-  const handleZoomOut = () => setZoomLevel((prev) => Math.max(prev - 25, 50));
+  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 25, 200));
+  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 25, 50));
   const handleResetZoom = () => setZoomLevel(100);
   const handleFitToWidth = () => setZoomLevel(85);
 
@@ -346,8 +346,8 @@ export function DocumentPreview({
   };
 
   // Handle document navigation
-  const handlePreviousPage = () => setCurrentPage((prev) => Math.max(1, prev - 1));
-  const handleNextPage = () => setCurrentPage((prev) => Math.min(document.pages, prev + 1));
+  const handlePreviousPage = () => setCurrentPage(prev => Math.max(1, prev - 1));
+  const handleNextPage = () => setCurrentPage(prev => Math.min(document.pages, prev + 1));
 
   // Handle comments
   const handleAddComment = () => {
@@ -378,7 +378,7 @@ export function DocumentPreview({
   const handleShareDocument = () => {
     if (shareEmail) {
       // In a real app, this would call an API to share the document
-      setDocument((prev) => ({
+      setDocument(prev => ({
         ...prev,
         sharedWith: [
           ...prev.sharedWith,
@@ -438,7 +438,7 @@ export function DocumentPreview({
   const getUserInitials = (name: string) => {
     return name
       .split(' ')
-      .map((part) => part[0])
+      .map(part => part[0])
       .join('')
       .toUpperCase();
   };
@@ -471,14 +471,14 @@ export function DocumentPreview({
   // Get file icon based on export format
   const getFileIcon = (format: string) => {
     const icons: Record<string, React.ReactNode> = {
-      pdf: <FileTextIcon className="w-4 h-4" />,
-      docx: <FileType className="w-4 h-4" />,
-      txt: <FileCode className="w-4 h-4" />,
-      jpg: <FileImage className="w-4 h-4" />,
-      png: <FileImage className="w-4 h-4" />,
-      zip: <FileArchive className="w-4 h-4" />,
+      pdf: <FileTextIcon className='w-4 h-4' />,
+      docx: <FileType className='w-4 h-4' />,
+      txt: <FileCode className='w-4 h-4' />,
+      jpg: <FileImage className='w-4 h-4' />,
+      png: <FileImage className='w-4 h-4' />,
+      zip: <FileArchive className='w-4 h-4' />,
     };
-    return icons[format] || <FileTextIcon className="w-4 h-4" />;
+    return icons[format] || <FileTextIcon className='w-4 h-4' />;
   };
 
   return (
@@ -490,47 +490,47 @@ export function DocumentPreview({
         )}
       >
         {/* Enhanced Header */}
-        <header className="bg-white border-b border-gray-200 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+        <header className='bg-white border-b border-gray-200 px-6 py-4'>
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center space-x-4'>
               <Button
-                variant="ghost"
-                size="icon"
+                variant='ghost'
+                size='icon'
                 onClick={onBack}
-                className="text-gray-500 hover:bg-gray-100 rounded-full"
+                className='text-gray-500 hover:bg-gray-100 rounded-full'
               >
-                <ArrowLeft className="h-5 w-5" />
-                <span className="sr-only">Back</span>
+                <ArrowLeft className='h-5 w-5' />
+                <span className='sr-only'>Back</span>
               </Button>
               <div>
-                <h1 className="text-lg font-semibold text-gray-900">{document.title}</h1>
-                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                <h1 className='text-lg font-semibold text-gray-900'>{document.title}</h1>
+                <div className='flex items-center space-x-2 text-sm text-gray-500'>
                   <span>Last modified: {formatDate(document.updatedAt)}</span>
                   <span>•</span>
                   <span>{formatFileSize(document.size)}</span>
                   <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
+                  <span className='flex items-center gap-1'>
+                    <Clock className='w-3 h-3' />
                     {formatTime(trackingTime)} reading time
                   </span>
                   {isTracking && (
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <div className='w-2 h-2 bg-green-500 rounded-full animate-pulse' />
                   )}
                 </div>
               </div>
             </div>
 
             {/* Enhanced Action Buttons */}
-            <div className="flex items-center space-x-2">
+            <div className='flex items-center space-x-2'>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="outline"
-                    size="sm"
+                    variant='outline'
+                    size='sm'
                     onClick={generateAISuggestions}
-                    className="flex items-center space-x-1.5"
+                    className='flex items-center space-x-1.5'
                   >
-                    <Lightbulb className="h-4 w-4" />
+                    <Lightbulb className='h-4 w-4' />
                     <span>AI Assist</span>
                   </Button>
                 </TooltipTrigger>
@@ -540,15 +540,15 @@ export function DocumentPreview({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="outline"
-                    size="sm"
+                    variant='outline'
+                    size='sm'
                     onClick={toggleReadingMode}
                     className={cn(
                       'flex items-center space-x-1.5',
                       readingMode && 'bg-blue-50 border-blue-200'
                     )}
                   >
-                    <Eye className="h-4 w-4" />
+                    <Eye className='h-4 w-4' />
                     <span>Reading</span>
                   </Button>
                 </TooltipTrigger>
@@ -556,29 +556,29 @@ export function DocumentPreview({
               </Tooltip>
 
               <Button
-                variant="outline"
-                size="sm"
+                variant='outline'
+                size='sm'
                 onClick={() => setShowShareDialog(true)}
-                className="flex items-center space-x-1.5"
+                className='flex items-center space-x-1.5'
               >
-                <Share2 className="h-4 w-4" />
+                <Share2 className='h-4 w-4' />
                 <span>Share</span>
               </Button>
 
               <Button
-                variant="default"
-                size="sm"
+                variant='default'
+                size='sm'
                 onClick={onEdit}
-                className="flex items-center space-x-1.5"
+                className='flex items-center space-x-1.5'
               >
-                <Edit3 className="h-4 w-4" />
+                <Edit3 className='h-4 w-4' />
                 <span>Edit Document</span>
               </Button>
 
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" onClick={toggleFullscreen}>
-                    {isFullscreen ? <X className="h-4 w-4" /> : <Settings className="h-4 w-4" />}
+                  <Button variant='ghost' size='icon' onClick={toggleFullscreen}>
+                    {isFullscreen ? <X className='h-4 w-4' /> : <Settings className='h-4 w-4' />}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -589,113 +589,113 @@ export function DocumentPreview({
           </div>
         </header>
 
-        <div className="flex flex-1 overflow-hidden">
+        <div className='flex flex-1 overflow-hidden'>
           {/* Main Content Area */}
-          <div className="flex-1 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <Button variant="ghost" onClick={onBack} className="hover:bg-gray-100">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+          <div className='flex-1 p-6'>
+            <div className='flex items-center justify-between mb-6'>
+              <Button variant='ghost' onClick={onBack} className='hover:bg-gray-100'>
+                <ArrowLeft className='w-4 h-4 mr-2' />
                 Back to Templates
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">Document Preview</h1>
-                <p className="text-sm text-muted-foreground mt-1">
+                <h1 className='text-2xl font-bold text-foreground'>Document Preview</h1>
+                <p className='text-sm text-muted-foreground mt-1'>
                   {mockDocument.title} • Template: {templateName}
                 </p>
               </div>
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={onEdit}>
-                <Edit3 className="w-4 h-4 mr-2" />
+            <div className='flex gap-2'>
+              <Button variant='outline' onClick={onEdit}>
+                <Edit3 className='w-4 h-4 mr-2' />
                 Edit Document
               </Button>
-              <Button variant="outline">
-                <Share2 className="w-4 h-4 mr-2" />
+              <Button variant='outline'>
+                <Share2 className='w-4 h-4 mr-2' />
                 Share
               </Button>
-              <Button variant="outline">
-                <Printer className="w-4 h-4 mr-2" />
+              <Button variant='outline'>
+                <Printer className='w-4 h-4 mr-2' />
                 Print
               </Button>
-              <Button className="bg-primary hover:bg-primary/90">
-                <Download className="w-4 h-4 mr-2" />
+              <Button className='bg-primary hover:bg-primary/90'>
+                <Download className='w-4 h-4 mr-2' />
                 Download PDF
               </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className='grid grid-cols-1 lg:grid-cols-4 gap-6'>
             {/* Document Info Sidebar */}
-            <div className="lg:col-span-1 space-y-4">
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">Document Info</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Type:</span>
-                    <Badge variant="secondary" className="capitalize">
+            <div className='lg:col-span-1 space-y-4'>
+              <Card className='p-4'>
+                <h3 className='font-medium mb-3'>Document Info</h3>
+                <div className='space-y-2 text-sm'>
+                  <div className='flex justify-between'>
+                    <span className='text-muted-foreground'>Type:</span>
+                    <Badge variant='secondary' className='capitalize'>
                       {documentType.replace('-', ' ')}
                     </Badge>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Template:</span>
-                    <span className="font-medium">{templateName}</span>
+                  <div className='flex justify-between'>
+                    <span className='text-muted-foreground'>Template:</span>
+                    <span className='font-medium'>{templateName}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Pages:</span>
-                    <span className="font-medium">{mockDocument.pages}</span>
+                  <div className='flex justify-between'>
+                    <span className='text-muted-foreground'>Pages:</span>
+                    <span className='font-medium'>{mockDocument.pages}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Modified:</span>
-                    <span className="font-medium">{mockDocument.lastModified}</span>
-                  </div>
-                </div>
-              </Card>
-
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">View Options</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Zoom Level</span>
-                    <span className="text-sm font-medium">{zoomLevel}%</span>
-                  </div>
-                  <div className="flex gap-1">
-                    <Button size="sm" variant="outline" onClick={handleZoomOut}>
-                      <ZoomOut className="w-3 h-3" />
-                    </Button>
-                    <Button size="sm" variant="outline" onClick={handleResetZoom}>
-                      <RotateCcw className="w-3 h-3" />
-                    </Button>
-                    <Button size="sm" variant="outline" onClick={handleZoomIn}>
-                      <ZoomIn className="w-3 h-3" />
-                    </Button>
+                  <div className='flex justify-between'>
+                    <span className='text-muted-foreground'>Modified:</span>
+                    <span className='font-medium'>{mockDocument.lastModified}</span>
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">Export Options</h3>
-                <div className="space-y-2">
-                  <Button variant="outline" size="sm" className="w-full justify-start">
-                    <Download className="w-3 h-3 mr-2" />
+              <Card className='p-4'>
+                <h3 className='font-medium mb-3'>View Options</h3>
+                <div className='space-y-3'>
+                  <div className='flex items-center justify-between'>
+                    <span className='text-sm text-muted-foreground'>Zoom Level</span>
+                    <span className='text-sm font-medium'>{zoomLevel}%</span>
+                  </div>
+                  <div className='flex gap-1'>
+                    <Button size='sm' variant='outline' onClick={handleZoomOut}>
+                      <ZoomOut className='w-3 h-3' />
+                    </Button>
+                    <Button size='sm' variant='outline' onClick={handleResetZoom}>
+                      <RotateCcw className='w-3 h-3' />
+                    </Button>
+                    <Button size='sm' variant='outline' onClick={handleZoomIn}>
+                      <ZoomIn className='w-3 h-3' />
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className='p-4'>
+                <h3 className='font-medium mb-3'>Export Options</h3>
+                <div className='space-y-2'>
+                  <Button variant='outline' size='sm' className='w-full justify-start'>
+                    <Download className='w-3 h-3 mr-2' />
                     PDF (Recommended)
                   </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-start">
-                    <Download className="w-3 h-3 mr-2" />
+                  <Button variant='outline' size='sm' className='w-full justify-start'>
+                    <Download className='w-3 h-3 mr-2' />
                     Word Document
                   </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-start">
-                    <Download className="w-3 h-3 mr-2" />
+                  <Button variant='outline' size='sm' className='w-full justify-start'>
+                    <Download className='w-3 h-3 mr-2' />
                     Plain Text
                   </Button>
                 </div>
               </Card>
 
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">ATS Score</h3>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400 mb-2">87%</div>
-                  <div className="text-sm text-muted-foreground">Excellent ATS compatibility</div>
-                  <Button variant="outline" size="sm" className="w-full mt-3">
+              <Card className='p-4'>
+                <h3 className='font-medium mb-3'>ATS Score</h3>
+                <div className='text-center'>
+                  <div className='text-2xl font-bold text-green-400 mb-2'>87%</div>
+                  <div className='text-sm text-muted-foreground'>Excellent ATS compatibility</div>
+                  <Button variant='outline' size='sm' className='w-full mt-3'>
                     View Details
                   </Button>
                 </div>
@@ -703,15 +703,15 @@ export function DocumentPreview({
             </div>
 
             {/* Document Preview */}
-            <div className="lg:col-span-3">
-              <Card className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-medium">Preview</h3>
+            <div className='lg:col-span-3'>
+              <Card className='p-6'>
+                <div className='flex items-center justify-between mb-4'>
+                  <h3 className='font-medium'>Preview</h3>
                   {mockDocument.pages > 1 && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <div className='flex items-center gap-2 text-sm text-muted-foreground'>
                       <Button
-                        size="sm"
-                        variant="outline"
+                        size='sm'
+                        variant='outline'
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                       >
                         Previous
@@ -720,8 +720,8 @@ export function DocumentPreview({
                         Page {currentPage} of {mockDocument.pages}
                       </span>
                       <Button
-                        size="sm"
-                        variant="outline"
+                        size='sm'
+                        variant='outline'
                         onClick={() =>
                           setCurrentPage(Math.min(mockDocument.pages, currentPage + 1))
                         }
@@ -733,9 +733,9 @@ export function DocumentPreview({
                 </div>
 
                 {/* Document Preview Container */}
-                <div className="bg-gray-100 p-8 rounded-lg flex justify-center overflow-auto">
+                <div className='bg-gray-100 p-8 rounded-lg flex justify-center overflow-auto'>
                   <div
-                    className="bg-white shadow-lg transition-transform duration-200 max-w-[8.5in]"
+                    className='bg-white shadow-lg transition-transform duration-200 max-w-[8.5in]'
                     style={{
                       transform: `scale(${zoomLevel / 100})`,
                       transformOrigin: 'top center',
@@ -744,12 +744,12 @@ export function DocumentPreview({
                     }}
                   >
                     {/* Mock Resume Content */}
-                    <div className="p-12 h-full">
-                      <div className="space-y-6">
+                    <div className='p-12 h-full'>
+                      <div className='space-y-6'>
                         {/* Header */}
-                        <div className="text-center border-b border-gray-300 pb-4">
-                          <h1 className="text-2xl font-bold text-gray-900 mb-2">Nishant Dougall</h1>
-                          <div className="text-gray-600 space-y-1">
+                        <div className='text-center border-b border-gray-300 pb-4'>
+                          <h1 className='text-2xl font-bold text-gray-900 mb-2'>Nishant Dougall</h1>
+                          <div className='text-gray-600 space-y-1'>
                             <p>nishant.dougall@email.com • (555) 123-4567</p>
                             <p>Vancouver, BC • linkedin.com/in/nishantdougall</p>
                           </div>
@@ -757,10 +757,10 @@ export function DocumentPreview({
 
                         {/* Professional Summary */}
                         <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                          <h2 className='text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1'>
                             Professional Summary
                           </h2>
-                          <p className="text-gray-700 leading-relaxed">
+                          <p className='text-gray-700 leading-relaxed'>
                             Dedicated Community Support Worker with 3+ years of experience providing
                             client-centered care and advocacy. Proven track record in crisis
                             intervention, case management, and supporting individuals with mental
@@ -770,21 +770,21 @@ export function DocumentPreview({
 
                         {/* Experience */}
                         <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
+                          <h2 className='text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1'>
                             Professional Experience
                           </h2>
-                          <div className="space-y-4">
+                          <div className='space-y-4'>
                             <div>
-                              <div className="flex justify-between items-start mb-2">
+                              <div className='flex justify-between items-start mb-2'>
                                 <div>
-                                  <h3 className="font-medium text-gray-900">
+                                  <h3 className='font-medium text-gray-900'>
                                     Community Support Worker
                                   </h3>
-                                  <p className="text-gray-600">Community Living BC</p>
+                                  <p className='text-gray-600'>Community Living BC</p>
                                 </div>
-                                <span className="text-gray-500 text-sm">2021 - Present</span>
+                                <span className='text-gray-500 text-sm'>2021 - Present</span>
                               </div>
-                              <ul className="text-gray-700 space-y-1 text-sm">
+                              <ul className='text-gray-700 space-y-1 text-sm'>
                                 <li>
                                   • Provide support to 25+ individuals with developmental
                                   disabilities and mental health challenges
@@ -805,16 +805,16 @@ export function DocumentPreview({
                             </div>
 
                             <div>
-                              <div className="flex justify-between items-start mb-2">
+                              <div className='flex justify-between items-start mb-2'>
                                 <div>
-                                  <h3 className="font-medium text-gray-900">
+                                  <h3 className='font-medium text-gray-900'>
                                     Mental Health Support Assistant
                                   </h3>
-                                  <p className="text-gray-600">Fraser Health Authority</p>
+                                  <p className='text-gray-600'>Fraser Health Authority</p>
                                 </div>
-                                <span className="text-gray-500 text-sm">2019 - 2021</span>
+                                <span className='text-gray-500 text-sm'>2019 - 2021</span>
                               </div>
-                              <ul className="text-gray-700 space-y-1 text-sm">
+                              <ul className='text-gray-700 space-y-1 text-sm'>
                                 <li>
                                   • Assisted mental health professionals in group therapy sessions
                                 </li>
@@ -829,10 +829,10 @@ export function DocumentPreview({
 
                         {/* Skills */}
                         <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                          <h2 className='text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1'>
                             Core Competencies
                           </h2>
-                          <div className="text-gray-700 text-sm">
+                          <div className='text-gray-700 text-sm'>
                             <p>
                               <strong>Clinical Skills:</strong> Crisis Intervention, Case
                               Management, Mental Health Support, Addiction Counseling
@@ -850,20 +850,20 @@ export function DocumentPreview({
 
                         {/* Education & Certifications */}
                         <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                          <h2 className='text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1'>
                             Education & Certifications
                           </h2>
-                          <div className="space-y-2">
-                            <div className="flex justify-between items-start">
+                          <div className='space-y-2'>
+                            <div className='flex justify-between items-start'>
                               <div>
-                                <h3 className="font-medium text-gray-900">
+                                <h3 className='font-medium text-gray-900'>
                                   Diploma in Community Support Work
                                 </h3>
-                                <p className="text-gray-600">Douglas College</p>
+                                <p className='text-gray-600'>Douglas College</p>
                               </div>
-                              <span className="text-gray-500 text-sm">2019</span>
+                              <span className='text-gray-500 text-sm'>2019</span>
                             </div>
-                            <div className="text-sm text-gray-700">
+                            <div className='text-sm text-gray-700'>
                               <p>
                                 <strong>Certifications:</strong> Mental Health First Aid, Crisis
                                 Prevention Institute (CPI), CPR/AED

@@ -102,14 +102,14 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
   const filteredTemplates = mockTemplates
-    .map((template) => ({
+    .map(template => ({
       ...template,
       template_name: template.name,
       ats_score: Math.floor(85 + Math.random() * 15), // Generate random ATS score between 85-99
       is_recommended: template.rating > 4.7,
       best_for_tags: template.features.slice(0, 3),
     }))
-    .filter((template) => {
+    .filter(template => {
       const typeMatch = template.type === selectedType;
       const categoryMatch = selectedCategory === 'all' || template.category === selectedCategory;
       return typeMatch && categoryMatch;
@@ -117,35 +117,33 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
 
   const categories = [
     'all',
-    ...Array.from(
-      new Set(mockTemplates.filter((t) => t.type === selectedType).map((t) => t.category))
-    ),
+    ...Array.from(new Set(mockTemplates.filter(t => t.type === selectedType).map(t => t.category))),
   ];
 
   return (
-    <div className="flex-1 p-8">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
+    <div className='flex-1 p-8'>
+      <div className='flex items-center justify-between mb-8'>
+        <div className='flex items-center gap-4'>
           <Button
-            variant="ghost"
+            variant='ghost'
             onClick={onBack}
-            className="text-muted-foreground hover:text-foreground"
+            className='text-muted-foreground hover:text-foreground'
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Dashboard
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">Choose Template</h1>
+          <h1 className='text-2xl font-bold text-foreground'>Choose Template</h1>
         </div>
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="bg-primary/10 text-primary">
+        <div className='flex items-center gap-2'>
+          <Badge variant='secondary' className='bg-primary/10 text-primary'>
             {filteredTemplates.length} templates available
           </Badge>
         </div>
       </div>
 
       {/* Type and Category Filters */}
-      <div className="mb-8 space-y-4">
-        <div className="flex gap-2">
+      <div className='mb-8 space-y-4'>
+        <div className='flex gap-2'>
           <Button
             variant={selectedType === 'resume' ? 'default' : 'outline'}
             className={selectedType === 'resume' ? 'bg-primary hover:bg-primary/90' : ''}
@@ -162,12 +160,12 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
           </Button>
         </div>
 
-        <div className="flex gap-2 flex-wrap">
-          {categories.map((category) => (
+        <div className='flex gap-2 flex-wrap'>
+          {categories.map(category => (
             <Button
               key={category}
               variant={selectedCategory === category ? 'default' : 'outline'}
-              size="sm"
+              size='sm'
               className={selectedCategory === category ? 'bg-primary hover:bg-primary/90' : ''}
               onClick={() => setSelectedCategory(category)}
             >
@@ -178,8 +176,8 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
       </div>
 
       {/* Template Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredTemplates.map((template) => (
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {filteredTemplates.map(template => (
           <TemplateCard
             key={template.id}
             template_name={template.name}
@@ -197,11 +195,11 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
       </div>
 
       {filteredTemplates.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-muted-foreground mb-4">
+        <div className='text-center py-12'>
+          <div className='text-muted-foreground mb-4'>
             No templates found for the selected filters
           </div>
-          <Button variant="outline" onClick={() => setSelectedCategory('all')}>
+          <Button variant='outline' onClick={() => setSelectedCategory('all')}>
             Clear Filters
           </Button>
         </div>

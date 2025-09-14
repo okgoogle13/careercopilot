@@ -1,23 +1,60 @@
-import { Slot } from '@radix-ui/react-slot';
-import { type VariantProps } from 'class-variance-authority';
 import * as React from 'react';
-import { buttonVariants } from './button-variants';
-import { cn } from './utils';
+import { Slot } from '@radix-ui/react-slot';
+import { Loader2 } from 'lucide-react';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+import { cn } from './utils';
+import { buttonVariants, type ButtonVariants } from './button-variants';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, ButtonVariants {
   asChild?: boolean;
+  isLoading?: boolean;
+  loadingText?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      disabled,
+      isLoading = false,
+      loadingText,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : 'button';
+    const isDisabled = disabled || isLoading;
+
     return (
-      <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp
+        data-slot='button'
+        data-loading={isLoading}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          'relative overflow-hidden',
+          isLoading && 'cursor-wait'
+        )}
+        disabled={isDisabled}
+        ref={ref}
+        {...props}
+      >
+        {isLoading && (
+          <span className='absolute inset-0 flex items-center justify-center bg-inherit'>
+            <Loader2 className='h-4 w-4 animate-spin' />
+            {loadingText && <span className='ml-2'>{loadingText}</span>}
+          </span>
+        )}
+        <span className={cn('flex items-center gap-2', isLoading && 'invisible')}>{children}</span>
+      </Comp>
     );
   }
 );
+
 Button.displayName = 'Button';
 
-export { Button };
+export { Button, buttonVariants };
+export type { ButtonProps };
