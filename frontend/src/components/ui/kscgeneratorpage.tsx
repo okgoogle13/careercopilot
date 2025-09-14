@@ -43,15 +43,15 @@ export const KscGeneratorPage: React.FC = () => {
 
         <Textarea
           value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
-          placeholder="Paste your job description here to detect Key Selection Criteria..."
-          className="min-h-[200px]"
+          onChange={e => setJobDescription(e.target.value)}
+          placeholder='Paste your job description here to detect Key Selection Criteria...'
+          className='min-h-[200px]'
         />
 
         <Button
           onClick={handleAnalyze}
           disabled={!jobDescription || isAnalyzing}
-          className="w-full"
+          className='w-full'
         >
           {isAnalyzing
             ? 'Generating KSC Responses...'
@@ -73,12 +73,12 @@ export const KscGeneratorPage: React.FC = () => {
         )}
 
         {detectedKsc.length > 0 && (
-          <div className="space-y-6">
+          <div className='space-y-6'>
             <h2 className={cn('text-2xl font-semibold', 'text-foreground')}>
               Generated KSC Responses
             </h2>
 
-            <div className="space-y-4">
+            <div className='space-y-4'>
               {detectedKsc.map((response, index) => (
                 <div
                   key={index}

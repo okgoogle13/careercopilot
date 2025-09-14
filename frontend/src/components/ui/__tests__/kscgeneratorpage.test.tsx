@@ -10,7 +10,7 @@ jest.mock('@/api/aiServices', () => ({
 
 // Mock the KscCriterionCard component since it might have complex dependencies
 jest.mock('@/components/KSC/KscCriterionCard', () => ({
-  KscCriterionCard: () => <div data-testid="ksc-criterion-card">Mock KSC Card</div>,
+  KscCriterionCard: () => <div data-testid='ksc-criterion-card'>Mock KSC Card</div>,
 }));
 
 describe('KscGeneratorPage', () => {

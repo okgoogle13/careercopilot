@@ -20,7 +20,7 @@ describe('Editor', () => {
   });
 
   it('renders without crashing', () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     // Should render the editor container
     expect(screen.getByRole('textbox', { hidden: true })).toBeInTheDocument();
@@ -28,13 +28,13 @@ describe('Editor', () => {
 
   it('displays placeholder text when empty', () => {
     const placeholderText = 'Enter your content here...';
-    render(<Editor value="" onChange={mockOnChange} placeholder={placeholderText} />);
+    render(<Editor value='' onChange={mockOnChange} placeholder={placeholderText} />);
 
     expect(screen.getByText(placeholderText)).toBeInTheDocument();
   });
 
   it('uses default placeholder when none provided', () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     expect(screen.getByText(/Start typing.../i)).toBeInTheDocument();
   });
@@ -48,7 +48,7 @@ describe('Editor', () => {
   });
 
   it('renders toolbar with formatting buttons', () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     // Should have bold, italic, underline buttons
     expect(screen.getByRole('button', { name: /B/i })).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe('Editor', () => {
   });
 
   it('calls onChange when content is modified', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const editor = screen.getByRole('textbox', { hidden: true });
 
@@ -71,7 +71,7 @@ describe('Editor', () => {
   });
 
   it('handles bold formatting correctly', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const boldButton = screen.getByRole('button', { name: /B/i });
     await user.click(boldButton);
@@ -80,7 +80,7 @@ describe('Editor', () => {
   });
 
   it('handles italic formatting correctly', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const italicButton = screen.getByRole('button', { name: /I/i });
     await user.click(italicButton);
@@ -89,7 +89,7 @@ describe('Editor', () => {
   });
 
   it('handles underline formatting correctly', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const underlineButton = screen.getByRole('button', { name: /U/i });
     await user.click(underlineButton);
@@ -98,7 +98,7 @@ describe('Editor', () => {
   });
 
   it('handles paste events correctly', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const editor = screen.getByRole('textbox', { hidden: true });
 
@@ -121,14 +121,14 @@ describe('Editor', () => {
 
   it('applies custom className correctly', () => {
     const customClass = 'custom-editor-class';
-    render(<Editor value="" onChange={mockOnChange} className={customClass} />);
+    render(<Editor value='' onChange={mockOnChange} className={customClass} />);
 
     const container = screen.getByRole('textbox', { hidden: true }).parentElement;
     expect(container).toHaveClass(customClass);
   });
 
   it('handles disabled state correctly', () => {
-    render(<Editor value="" onChange={mockOnChange} disabled />);
+    render(<Editor value='' onChange={mockOnChange} disabled />);
 
     const boldButton = screen.getByRole('button', { name: /B/i });
     const italicButton = screen.getByRole('button', { name: /I/i });
@@ -140,12 +140,12 @@ describe('Editor', () => {
   });
 
   it('updates content when value prop changes', async () => {
-    const { rerender } = render(<Editor value="Initial" onChange={mockOnChange} />);
+    const { rerender } = render(<Editor value='Initial' onChange={mockOnChange} />);
 
     const editor = screen.getByRole('textbox', { hidden: true });
     expect(editor).toHaveTextContent('Initial');
 
-    rerender(<Editor value="Updated" onChange={mockOnChange} />);
+    rerender(<Editor value='Updated' onChange={mockOnChange} />);
 
     await waitFor(() => {
       expect(editor).toHaveTextContent('Updated');
@@ -153,7 +153,7 @@ describe('Editor', () => {
   });
 
   it('focuses on editor after formatting', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const editor = screen.getByRole('textbox', { hidden: true });
     const boldButton = screen.getByRole('button', { name: /B/i });
@@ -166,7 +166,7 @@ describe('Editor', () => {
   });
 
   it('handles focus and blur events', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const editor = screen.getByRole('textbox', { hidden: true });
 
@@ -178,7 +178,7 @@ describe('Editor', () => {
   });
 
   it('prevents default behavior on paste', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    render(<Editor value='' onChange={mockOnChange} />);
 
     const editor = screen.getByRole('textbox', { hidden: true });
 
@@ -197,7 +197,7 @@ describe('Editor', () => {
   it('handles empty onChange gracefully', () => {
     // Test that the component doesn't crash if onChange is not provided
     expect(() => {
-      render(<Editor value="" onChange={() => {}} />);
+      render(<Editor value='' onChange={() => {}} />);
     }).not.toThrow();
   });
 });

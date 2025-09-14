@@ -6,7 +6,7 @@ import { OneClickApplyButton } from '../one-click-apply-button';
 // Mock the DocumentReviewModal component
 jest.mock('../document-review-modal', () => ({
   DocumentReviewModal: ({ documents, onApprove }: any) => (
-    <div data-testid="document-review-modal">
+    <div data-testid='document-review-modal'>
       <h3>Document Review Modal</h3>
       <button onClick={() => onApprove(documents)}>Approve Documents</button>
     </div>
@@ -196,7 +196,7 @@ describe('OneClickApplyButton', () => {
   });
 
   it('handles custom className prop', () => {
-    render(<OneClickApplyButton className="custom-class" />);
+    render(<OneClickApplyButton className='custom-class' />);
 
     const applyButton = screen.getByRole('button', { name: /One-Click Apply/i });
     expect(applyButton).toHaveClass('custom-class');

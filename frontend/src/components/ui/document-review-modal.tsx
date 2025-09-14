@@ -74,31 +74,31 @@ export function DocumentReviewModal({
   const [keywords, setKeywords] = useState(document.keywords || []);
 
   const handleKeywordAccept = (keyword: string) => {
-    setKeywords((prev) =>
-      prev.map((k) => (k.keyword === keyword ? { ...k, status: 'accepted' as const } : k))
+    setKeywords(prev =>
+      prev.map(k => (k.keyword === keyword ? { ...k, status: 'accepted' as const } : k))
     );
   };
 
   const handleKeywordReject = (keyword: string) => {
-    setKeywords((prev) =>
-      prev.map((k) => (k.keyword === keyword ? { ...k, status: 'rejected' as const } : k))
+    setKeywords(prev =>
+      prev.map(k => (k.keyword === keyword ? { ...k, status: 'rejected' as const } : k))
     );
   };
 
   const handleKeywordRemove = (keyword: string) => {
-    setKeywords((prev) => prev.filter((k) => k.keyword !== keyword));
+    setKeywords(prev => prev.filter(k => k.keyword !== keyword));
   };
 
   const getDocumentIcon = () => {
     switch (document.type) {
       case 'resume':
-        return <FileText className="w-5 h-5" />;
+        return <FileText className='w-5 h-5' />;
       case 'cover_letter':
-        return <FileText className="w-5 h-5" />;
+        return <FileText className='w-5 h-5' />;
       case 'ksc_response':
-        return <FileText className="w-5 h-5" />;
+        return <FileText className='w-5 h-5' />;
       default:
-        return <FileText className="w-5 h-5" />;
+        return <FileText className='w-5 h-5' />;
     }
   };
 
@@ -127,59 +127,59 @@ export function DocumentReviewModal({
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
 
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden">
+      <DialogContent className='max-w-4xl max-h-[90vh] overflow-hidden'>
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+          <DialogTitle className='flex items-center gap-2'>
             {getDocumentIcon()}
             Review and Confirm {getDocumentTypeLabel()}
           </DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-col h-full">
+        <div className='flex flex-col h-full'>
           {/* Document Metadata */}
-          <Card className="mb-4 p-4">
-            <div className="flex items-start justify-between">
-              <div className="space-y-2">
-                <h3 className="font-semibold text-lg">{document.title}</h3>
+          <Card className='mb-4 p-4'>
+            <div className='flex items-start justify-between'>
+              <div className='space-y-2'>
+                <h3 className='font-semibold text-lg'>{document.title}</h3>
                 {document.metadata.targetJob && (
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                    <div className="flex items-center gap-1">
-                      <Building className="w-4 h-4" />
+                  <div className='flex items-center gap-4 text-sm text-muted-foreground'>
+                    <div className='flex items-center gap-1'>
+                      <Building className='w-4 h-4' />
                       {document.metadata.targetJob.company}
                     </div>
-                    <div className="flex items-center gap-1">
-                      <User className="w-4 h-4" />
+                    <div className='flex items-center gap-1'>
+                      <User className='w-4 h-4' />
                       {document.metadata.targetJob.title}
                     </div>
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" />
+                    <div className='flex items-center gap-1'>
+                      <MapPin className='w-4 h-4' />
                       {document.metadata.targetJob.location}
                     </div>
                   </div>
                 )}
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <div className='flex items-center gap-4 text-sm text-muted-foreground'>
                   {document.metadata.wordCount && <span>{document.metadata.wordCount} words</span>}
                   {document.metadata.lastModified && (
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
+                    <div className='flex items-center gap-1'>
+                      <Clock className='w-3 h-3' />
                       {document.metadata.lastModified.toLocaleString()}
                     </div>
                   )}
                 </div>
               </div>
 
-              <div className="text-right">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-sm text-muted-foreground">Match Score:</span>
+              <div className='text-right'>
+                <div className='flex items-center gap-2 mb-2'>
+                  <span className='text-sm text-muted-foreground'>Match Score:</span>
                   <span className={cn('font-bold text-lg', matchScoreColor)}>{matchScore}%</span>
                 </div>
-                <Progress value={matchScore} className="w-24 h-2" />
+                <Progress value={matchScore} className='w-24 h-2' />
               </div>
             </div>
 
             {/* Issues */}
             {document.issues && document.issues.length > 0 && (
-              <div className="mt-4 space-y-2">
+              <div className='mt-4 space-y-2'>
                 {document.issues.map((issue, index) => (
                   <div
                     key={index}
@@ -194,13 +194,13 @@ export function DocumentReviewModal({
                     )}
                   >
                     {issue.type === 'error' && (
-                      <AlertTriangle className="w-4 h-4 mt-0.5 text-destructive" />
+                      <AlertTriangle className='w-4 h-4 mt-0.5 text-destructive' />
                     )}
                     {issue.type === 'warning' && (
-                      <AlertTriangle className="w-4 h-4 mt-0.5 text-brand-yellow" />
+                      <AlertTriangle className='w-4 h-4 mt-0.5 text-brand-yellow' />
                     )}
                     {issue.type === 'suggestion' && (
-                      <CheckCircle className="w-4 h-4 mt-0.5 text-primary" />
+                      <CheckCircle className='w-4 h-4 mt-0.5 text-primary' />
                     )}
                     <span>{issue.message}</span>
                   </div>
@@ -210,58 +210,58 @@ export function DocumentReviewModal({
           </Card>
 
           {/* Tabs */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="preview" className="flex items-center gap-2">
-                <Eye className="w-4 h-4" />
+          <Tabs value={activeTab} onValueChange={setActiveTab} className='flex-1 flex flex-col'>
+            <TabsList className='grid w-full grid-cols-3'>
+              <TabsTrigger value='preview' className='flex items-center gap-2'>
+                <Eye className='w-4 h-4' />
                 Preview
               </TabsTrigger>
-              <TabsTrigger value="keywords" className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4" />
+              <TabsTrigger value='keywords' className='flex items-center gap-2'>
+                <CheckCircle className='w-4 h-4' />
                 Keywords
               </TabsTrigger>
-              <TabsTrigger value="edit" className="flex items-center gap-2">
-                <Edit className="w-4 h-4" />
+              <TabsTrigger value='edit' className='flex items-center gap-2'>
+                <Edit className='w-4 h-4' />
                 Edit
               </TabsTrigger>
             </TabsList>
 
-            <div className="flex-1 mt-4">
-              <TabsContent value="preview" className="h-full">
-                <Card className="p-6 h-full overflow-y-auto">
+            <div className='flex-1 mt-4'>
+              <TabsContent value='preview' className='h-full'>
+                <Card className='p-6 h-full overflow-y-auto'>
                   <div
-                    className="prose max-w-none"
+                    className='prose max-w-none'
                     dangerouslySetInnerHTML={{ __html: document.content }}
                   />
                 </Card>
               </TabsContent>
 
-              <TabsContent value="keywords" className="h-full">
-                <div className="space-y-4 h-full overflow-y-auto">
+              <TabsContent value='keywords' className='h-full'>
+                <div className='space-y-4 h-full overflow-y-auto'>
                   {keywords.length > 0 ? (
                     <KeywordTagGroup
                       keywords={keywords}
-                      title="Job-Relevant Keywords"
-                      description="Review and manage keywords found in your document"
+                      title='Job-Relevant Keywords'
+                      description='Review and manage keywords found in your document'
                       onTagAccept={handleKeywordAccept}
                       onTagReject={handleKeywordReject}
                       onTagRemove={handleKeywordRemove}
                       showAcceptRejectAll={true}
                     />
                   ) : (
-                    <Card className="p-8 text-center text-gray-500">
-                      <FileText className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <Card className='p-8 text-center text-gray-500'>
+                      <FileText className='w-12 h-12 mx-auto mb-4 opacity-50' />
                       <p>No keywords detected in this document</p>
                     </Card>
                   )}
 
                   {document.aiSuggestions && document.aiSuggestions.length > 0 && (
-                    <Card className="p-4">
-                      <h4 className="font-semibold mb-3">AI Suggestions</h4>
-                      <ul className="space-y-2">
+                    <Card className='p-4'>
+                      <h4 className='font-semibold mb-3'>AI Suggestions</h4>
+                      <ul className='space-y-2'>
                         {document.aiSuggestions.map((suggestion, index) => (
-                          <li key={index} className="flex items-start gap-2 text-sm">
-                            <CheckCircle className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
+                          <li key={index} className='flex items-start gap-2 text-sm'>
+                            <CheckCircle className='w-4 h-4 text-blue-500 mt-0.5 shrink-0' />
                             {suggestion}
                           </li>
                         ))}
@@ -271,13 +271,13 @@ export function DocumentReviewModal({
                 </div>
               </TabsContent>
 
-              <TabsContent value="edit" className="h-full">
-                <Card className="p-4 h-full">
+              <TabsContent value='edit' className='h-full'>
+                <Card className='p-4 h-full'>
                   <Textarea
                     value={editedContent}
-                    onChange={(e) => setEditedContent(e.target.value)}
-                    className="h-full min-h-[400px] resize-none"
-                    placeholder="Edit your document content..."
+                    onChange={e => setEditedContent(e.target.value)}
+                    className='h-full min-h-[400px] resize-none'
+                    placeholder='Edit your document content...'
                   />
                 </Card>
               </TabsContent>
@@ -285,28 +285,28 @@ export function DocumentReviewModal({
           </Tabs>
 
           {/* Action Buttons */}
-          <div className="flex items-center justify-between gap-4 mt-4 pt-4 border-t">
-            <div className="flex gap-2">
+          <div className='flex items-center justify-between gap-4 mt-4 pt-4 border-t'>
+            <div className='flex gap-2'>
               <Button
-                variant="outline"
+                variant='outline'
                 onClick={() => onEdit?.({ ...document, content: editedContent })}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                <Edit className="w-4 h-4" />
+                <Edit className='w-4 h-4' />
                 Continue Editing
               </Button>
               <Button
-                variant="outline"
+                variant='outline'
                 onClick={() => onDownload?.(document)}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                <Download className="w-4 h-4" />
+                <Download className='w-4 h-4' />
                 Download
               </Button>
             </div>
 
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={() => onOpenChange?.(false)}>
+            <div className='flex gap-2'>
+              <Button variant='outline' onClick={() => onOpenChange?.(false)}>
                 Cancel
               </Button>
               <Button
@@ -314,9 +314,9 @@ export function DocumentReviewModal({
                   onConfirm?.({ ...document, content: editedContent, keywords });
                   onOpenChange?.(false);
                 }}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                <Send className="w-4 h-4" />
+                <Send className='w-4 h-4' />
                 Confirm & Submit
               </Button>
             </div>

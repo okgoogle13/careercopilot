@@ -56,17 +56,17 @@ export function ATSScoreCircle({
   const colors = colorConfig[scheme];
 
   return (
-    <div className="relative inline-flex items-center justify-center">
-      <svg width={config.width} height={config.height} className="transform -rotate-90">
+    <div className='relative inline-flex items-center justify-center'>
+      <svg width={config.width} height={config.height} className='transform -rotate-90'>
         {/* Background circle */}
         <circle
           cx={config.width / 2}
           cy={config.height / 2}
           r={radius}
-          stroke="currentColor"
+          stroke='currentColor'
           strokeWidth={config.strokeWidth}
-          fill="none"
-          className="text-surface-section opacity-30"
+          fill='none'
+          className='text-surface-section opacity-30'
         />
 
         {/* Progress circle */}
@@ -75,8 +75,8 @@ export function ATSScoreCircle({
           cy={config.height / 2}
           r={radius}
           strokeWidth={config.strokeWidth}
-          fill="none"
-          strokeLinecap="round"
+          fill='none'
+          strokeLinecap='round'
           className={`${colors.stroke} ${colors.glow}`}
           style={{
             strokeDasharray,
@@ -88,7 +88,7 @@ export function ATSScoreCircle({
       </svg>
 
       {/* Score text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
+      <div className='absolute inset-0 flex flex-col items-center justify-center'>
         <motion.span
           className={`font-bold ${config.fontSize} ${colors.text}`}
           initial={animated ? { opacity: 0, scale: 0.5 } : { opacity: 1, scale: 1 }}

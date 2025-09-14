@@ -46,7 +46,7 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
         </CardTitle>
       </CardHeader>
 
-      <CardContent className="p-0 space-y-semantic-space-stack-sm">
+      <CardContent className='p-0 space-y-semantic-space-stack-sm'>
         <div
           className={cn(
             'bg-semantic-color-bg-elevated',
@@ -75,8 +75,8 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
 
         <Textarea
           value={generatedText}
-          onChange={(e) => setGeneratedText(e.target.value)}
-          placeholder="Your generated response will appear here..."
+          onChange={e => setGeneratedText(e.target.value)}
+          placeholder='Your generated response will appear here...'
           className={cn(
             'min-h-[150px]',
             'text-semantic-typography-body-md',

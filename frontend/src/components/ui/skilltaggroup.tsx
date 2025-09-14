@@ -26,7 +26,7 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
   const [skillList, setSkillList] = useState<Skill[]>(skills);
 
   const handleAccept = (skill: string) => {
-    const updatedSkills = skillList.map((s) =>
+    const updatedSkills = skillList.map(s =>
       s.text === skill ? { ...s, status: 'accepted' as const } : s
     );
     setSkillList(updatedSkills);
@@ -34,7 +34,7 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
   };
 
   const handleReject = (skill: string) => {
-    const updatedSkills = skillList.map((s) =>
+    const updatedSkills = skillList.map(s =>
       s.text === skill ? { ...s, status: 'rejected' as const } : s
     );
     setSkillList(updatedSkills);
@@ -53,30 +53,30 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
   );
 
   return (
-    <div className="space-y-3">
+    <div className='space-y-3'>
       {title && (
-        <div className="flex items-center justify-between">
-          <h4 className="font-semibold text-semantic-color-text-primary text-semantic-typography-heading-md">
+        <div className='flex items-center justify-between'>
+          <h4 className='font-semibold text-semantic-color-text-primary text-semantic-typography-heading-md'>
             {title}
           </h4>
-          <div className="flex items-center gap-2 text-xs">
+          <div className='flex items-center gap-2 text-xs'>
             {statusCounts.accepted && (
               <Badge
-                variant="outline"
-                className="border-accent-green/50 text-accent-green font-medium"
+                variant='outline'
+                className='border-accent-green/50 text-accent-green font-medium'
               >
                 {statusCounts.accepted} accepted
               </Badge>
             )}
             {statusCounts.rejected && (
-              <Badge variant="outline" className="border-accent-red/50 text-accent-red font-medium">
+              <Badge variant='outline' className='border-accent-red/50 text-accent-red font-medium'>
                 {statusCounts.rejected} rejected
               </Badge>
             )}
             {statusCounts.suggested && (
               <Badge
-                variant="outline"
-                className="border-brand-primary/50 text-brand-light font-medium"
+                variant='outline'
+                className='border-brand-primary/50 text-brand-light font-medium'
               >
                 {statusCounts.suggested} suggested
               </Badge>
@@ -85,7 +85,7 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2">
+      <div className='flex flex-wrap gap-2'>
         {visibleSkills.map((skill, index) => (
           <SkillTag
             key={`${skill.text}-${index}`}
@@ -98,7 +98,7 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
 
         {hiddenCount > 0 && (
           <Badge
-            variant="outline"
+            variant='outline'
             className={cn(
               'border-semantic-color-border-subtle',
               'text-semantic-color-text-secondary',

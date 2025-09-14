@@ -36,7 +36,7 @@ describe('KeywordTagGroup', () => {
   it('displays all keyword tags', () => {
     render(<KeywordTagGroup {...mockProps} />);
 
-    mockKeywords.forEach((keyword) => {
+    mockKeywords.forEach(keyword => {
       expect(screen.getByText(keyword.keyword)).toBeInTheDocument();
     });
   });

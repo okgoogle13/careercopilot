@@ -27,14 +27,14 @@ import { ComponentSection, ComponentDemo } from './ComponentDemo';
 export function InteractiveComponentsSection() {
   return (
     <ComponentSection
-      title="Interactive Components"
-      description="Dialogs, popovers, and other interactive overlay components"
+      title='Interactive Components'
+      description='Dialogs, popovers, and other interactive overlay components'
     >
-      <ComponentDemo title="Dialogs & Modals">
-        <div className="flex flex-wrap gap-4">
+      <ComponentDemo title='Dialogs & Modals'>
+        <div className='flex flex-wrap gap-4'>
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline">Open Dialog</Button>
+              <Button variant='outline'>Open Dialog</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -43,11 +43,11 @@ export function InteractiveComponentsSection() {
                   This is a dialog description that explains what this dialog is for.
                 </DialogDescription>
               </DialogHeader>
-              <div className="py-4">
+              <div className='py-4'>
                 <p>Dialog content goes here.</p>
               </div>
               <DialogFooter>
-                <Button variant="outline">Cancel</Button>
+                <Button variant='outline'>Cancel</Button>
                 <Button>Confirm</Button>
               </DialogFooter>
             </DialogContent>
@@ -55,7 +55,7 @@ export function InteractiveComponentsSection() {
 
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">Delete Item</Button>
+              <Button variant='destructive'>Delete Item</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
@@ -73,21 +73,21 @@ export function InteractiveComponentsSection() {
         </div>
       </ComponentDemo>
 
-      <ComponentDemo title="Popovers & Tooltips">
-        <div className="flex flex-wrap gap-4">
+      <ComponentDemo title='Popovers & Tooltips'>
+        <div className='flex flex-wrap gap-4'>
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline">Open Popover</Button>
+              <Button variant='outline'>Open Popover</Button>
             </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="space-y-2">
-                <h4 className="font-medium">Popover Title</h4>
-                <p className="text-sm text-muted-foreground">
+            <PopoverContent className='w-80'>
+              <div className='space-y-2'>
+                <h4 className='font-medium'>Popover Title</h4>
+                <p className='text-sm text-muted-foreground'>
                   This is a popover with some content inside it.
                 </p>
-                <div className="flex gap-2">
-                  <Button size="sm">Action</Button>
-                  <Button variant="outline" size="sm">
+                <div className='flex gap-2'>
+                  <Button size='sm'>Action</Button>
+                  <Button variant='outline' size='sm'>
                     Cancel
                   </Button>
                 </div>
@@ -97,7 +97,7 @@ export function InteractiveComponentsSection() {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline">Hover for Tooltip</Button>
+              <Button variant='outline'>Hover for Tooltip</Button>
             </TooltipTrigger>
             <TooltipContent>
               <p>This is a helpful tooltip</p>

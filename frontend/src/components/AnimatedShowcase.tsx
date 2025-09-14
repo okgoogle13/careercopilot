@@ -55,21 +55,21 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
   const addNotification = (type: 'success' | 'error' | 'info' | 'warning', message: string) => {
     const id = Math.random().toString(36).substr(2, 9);
-    setNotifications((prev) => [...prev, { id, type, message }]);
+    setNotifications(prev => [...prev, { id, type, message }]);
     setTimeout(() => {
-      setNotifications((prev) => prev.filter((n) => n.id !== id));
+      setNotifications(prev => prev.filter(n => n.id !== id));
     }, 4000);
   };
 
   const removeNotification = (id: string) => {
-    setNotifications((prev) => prev.filter((n) => n.id !== id));
+    setNotifications(prev => prev.filter(n => n.id !== id));
   };
 
   const simulateProgress = () => {
     setProgress(0);
     setIsPlaying(true);
     const interval = setInterval(() => {
-      setProgress((prev) => {
+      setProgress(prev => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsPlaying(false);
@@ -81,22 +81,22 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   };
 
   const resetAnimations = () => {
-    setAnimationKey((prev) => prev + 1);
+    setAnimationKey(prev => prev + 1);
     setProgress(0);
     setIsPlaying(false);
   };
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: <Star className="w-4 h-4" /> },
-    { id: 'details', label: 'Details', icon: <FileText className="w-4 h-4" /> },
-    { id: 'settings', label: 'Settings', icon: <Settings className="w-4 h-4" /> },
+    { id: 'overview', label: 'Overview', icon: <Star className='w-4 h-4' /> },
+    { id: 'details', label: 'Details', icon: <FileText className='w-4 h-4' /> },
+    { id: 'settings', label: 'Settings', icon: <Settings className='w-4 h-4' /> },
   ];
 
   const dropdownItems = [
-    { label: 'Profile', value: 'profile', icon: <User className="w-4 h-4" /> },
-    { label: 'Settings', value: 'settings', icon: <Settings className="w-4 h-4" /> },
-    { label: 'Notifications', value: 'notifications', icon: <Bell className="w-4 h-4" /> },
-    { label: 'Security', value: 'security', icon: <Shield className="w-4 h-4" /> },
+    { label: 'Profile', value: 'profile', icon: <User className='w-4 h-4' /> },
+    { label: 'Settings', value: 'settings', icon: <Settings className='w-4 h-4' /> },
+    { label: 'Notifications', value: 'notifications', icon: <Bell className='w-4 h-4' /> },
+    { label: 'Security', value: 'security', icon: <Shield className='w-4 h-4' /> },
   ];
 
   const listItems = [
@@ -113,67 +113,67 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
       value: '12,345',
       change: '+12.5%',
       trend: 'up' as const,
-      icon: <User className="w-6 h-6 text-primary" />,
+      icon: <User className='w-6 h-6 text-primary' />,
     },
     {
       title: 'Revenue',
       value: '$89,432',
       change: '+23.1%',
       trend: 'up' as const,
-      icon: <TrendingUp className="w-6 h-6 text-primary" />,
+      icon: <TrendingUp className='w-6 h-6 text-primary' />,
     },
     {
       title: 'Conversions',
       value: '2,847',
       change: '-5.4%',
       trend: 'down' as const,
-      icon: <Target className="w-6 h-6 text-primary" />,
+      icon: <Target className='w-6 h-6 text-primary' />,
     },
     {
       title: 'Avg. Rating',
       value: '4.8',
       change: '0.0%',
       trend: 'neutral' as const,
-      icon: <Star className="w-6 h-6 text-primary" />,
+      icon: <Star className='w-6 h-6 text-primary' />,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className='min-h-screen bg-background p-6'>
+      <div className='max-w-7xl mx-auto'>
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
+        <div className='mb-8'>
+          <div className='flex items-center gap-4 mb-4'>
+            <Button variant='ghost' size='sm' onClick={onBack} className='gap-2'>
+              <ArrowLeft className='w-4 h-4' />
               Back to Component Library
             </Button>
           </div>
-          <div className="flex items-center justify-between">
+          <div className='flex items-center justify-between'>
             <div>
-              <h1 className="mb-2 flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-primary" />
+              <h1 className='mb-2 flex items-center gap-2'>
+                <Sparkles className='w-6 h-6 text-primary' />
                 Animated Components Showcase
               </h1>
-              <p className="text-muted-foreground">
+              <p className='text-muted-foreground'>
                 Interactive demonstrations of animated UI components with smooth transitions and
                 micro-interactions
               </p>
             </div>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={resetAnimations} className="gap-2">
-                <RotateCcw className="w-4 h-4" />
+            <div className='flex gap-2'>
+              <Button variant='outline' onClick={resetAnimations} className='gap-2'>
+                <RotateCcw className='w-4 h-4' />
                 Reset All
               </Button>
-              <Button onClick={simulateProgress} disabled={isPlaying} className="gap-2">
+              <Button onClick={simulateProgress} disabled={isPlaying} className='gap-2'>
                 {isPlaying ? (
                   <>
-                    <Pause className="w-4 h-4" />
+                    <Pause className='w-4 h-4' />
                     Running...
                   </>
                 ) : (
                   <>
-                    <Play className="w-4 h-4" />
+                    <Play className='w-4 h-4' />
                     Demo All
                   </>
                 )}
@@ -182,12 +182,12 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           </div>
         </div>
 
-        <div className="space-y-12">
+        <div className='space-y-12'>
           {/* Animated Statistics Cards */}
           <section>
-            <h2 className="mb-6">Animated Statistics Cards</h2>
+            <h2 className='mb-6'>Animated Statistics Cards</h2>
             <div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'
               key={`stats-${animationKey}`}
             >
               {statsData.map((stat, index) => (
@@ -205,8 +205,8 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Modal & Dropdown Demos */}
           <section>
-            <h2 className="mb-6">Interactive Overlays</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h2 className='mb-6'>Interactive Overlays</h2>
+            <div className='grid md:grid-cols-2 gap-6'>
               <Card>
                 <CardHeader>
                   <CardTitle>Animated Modal</CardTitle>
@@ -217,11 +217,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                   <AnimatedModal
                     isOpen={showModal}
                     onClose={() => setShowModal(false)}
-                    title="Animated Modal Example"
+                    title='Animated Modal Example'
                   >
                     <p>This modal demonstrates smooth spring animations for a natural feel.</p>
-                    <div className="mt-4 p-3 bg-muted rounded-lg">
-                      <p className="text-sm text-muted-foreground">
+                    <div className='mt-4 p-3 bg-muted rounded-lg'>
+                      <p className='text-sm text-muted-foreground'>
                         Features: Spring animations, backdrop blur, scale and opacity transitions
                       </p>
                     </div>
@@ -237,13 +237,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 <CardContent>
                   <AnimatedDropdown
                     trigger={
-                      <Button variant="outline" className="gap-2">
+                      <Button variant='outline' className='gap-2'>
                         Select Option
-                        <Sparkles className="w-4 h-4" />
+                        <Sparkles className='w-4 h-4' />
                       </Button>
                     }
                     items={dropdownItems}
-                    onSelect={(value) => addNotification('info', `Selected: ${value}`)}
+                    onSelect={value => addNotification('info', `Selected: ${value}`)}
                   />
                 </CardContent>
               </Card>
@@ -252,7 +252,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Tabs Demo */}
           <section>
-            <h2 className="mb-6">Animated Tabs</h2>
+            <h2 className='mb-6'>Animated Tabs</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Sliding Tab Indicator</CardTitle>
@@ -260,27 +260,27 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
               </CardHeader>
               <CardContent>
                 <AnimatedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab}>
-                  <div className="p-4 bg-muted rounded-lg">
+                  <div className='p-4 bg-muted rounded-lg'>
                     {activeTab === 'overview' && (
                       <div>
-                        <h3 className="font-medium mb-2">Overview Content</h3>
-                        <p className="text-muted-foreground">
+                        <h3 className='font-medium mb-2'>Overview Content</h3>
+                        <p className='text-muted-foreground'>
                           This is the overview tab content with smooth transitions.
                         </p>
                       </div>
                     )}
                     {activeTab === 'details' && (
                       <div>
-                        <h3 className="font-medium mb-2">Details Content</h3>
-                        <p className="text-muted-foreground">
+                        <h3 className='font-medium mb-2'>Details Content</h3>
+                        <p className='text-muted-foreground'>
                           Detailed information appears here with animated transitions.
                         </p>
                       </div>
                     )}
                     {activeTab === 'settings' && (
                       <div>
-                        <h3 className="font-medium mb-2">Settings Content</h3>
-                        <p className="text-muted-foreground">
+                        <h3 className='font-medium mb-2'>Settings Content</h3>
+                        <p className='text-muted-foreground'>
                           Configuration options are shown in this animated panel.
                         </p>
                       </div>
@@ -293,20 +293,20 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Progress & Loading */}
           <section>
-            <h2 className="mb-6">Progress & Loading Animations</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h2 className='mb-6'>Progress & Loading Animations</h2>
+            <div className='grid md:grid-cols-2 gap-6'>
               <Card>
                 <CardHeader>
                   <CardTitle>Animated Progress</CardTitle>
                   <CardDescription>Smooth progress bar with spring animations</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className='space-y-4'>
                   <AnimatedProgress value={progress} />
-                  <div className="flex gap-2">
-                    <Button size="sm" onClick={simulateProgress} disabled={isPlaying}>
+                  <div className='flex gap-2'>
+                    <Button size='sm' onClick={simulateProgress} disabled={isPlaying}>
                       Start Progress
                     </Button>
-                    <Button size="sm" variant="outline" onClick={() => setProgress(0)}>
+                    <Button size='sm' variant='outline' onClick={() => setProgress(0)}>
                       Reset
                     </Button>
                   </div>
@@ -327,7 +327,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Button Animations */}
           <section>
-            <h2 className="mb-6">Animated Buttons</h2>
+            <h2 className='mb-6'>Animated Buttons</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Button Interaction Animations</CardTitle>
@@ -336,24 +336,24 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="space-y-2">
+                <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+                  <div className='space-y-2'>
                     <Label>Scale Animation</Label>
-                    <AnimatedButton animation="scale">Hover Me</AnimatedButton>
+                    <AnimatedButton animation='scale'>Hover Me</AnimatedButton>
                   </div>
-                  <div className="space-y-2">
+                  <div className='space-y-2'>
                     <Label>Lift Animation</Label>
-                    <AnimatedButton animation="lift" variant="outline">
+                    <AnimatedButton animation='lift' variant='outline'>
                       Lift Effect
                     </AnimatedButton>
                   </div>
-                  <div className="space-y-2">
+                  <div className='space-y-2'>
                     <Label>Glow Animation</Label>
-                    <AnimatedButton animation="glow">Glow Effect</AnimatedButton>
+                    <AnimatedButton animation='glow'>Glow Effect</AnimatedButton>
                   </div>
-                  <div className="space-y-2">
+                  <div className='space-y-2'>
                     <Label>Shimmer Animation</Label>
-                    <AnimatedButton animation="shimmer" variant="outline">
+                    <AnimatedButton animation='shimmer' variant='outline'>
                       Shimmer
                     </AnimatedButton>
                   </div>
@@ -364,52 +364,52 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Expandable Cards */}
           <section>
-            <h2 className="mb-6">Expandable Content</h2>
-            <div className="space-y-4" key={`expandable-${animationKey}`}>
+            <h2 className='mb-6'>Expandable Content</h2>
+            <div className='space-y-4' key={`expandable-${animationKey}`}>
               <ExpandableCard
-                title="Project Management"
-                preview="Click to expand and see project details"
-                icon={<FileText className="w-5 h-5 text-primary" />}
+                title='Project Management'
+                preview='Click to expand and see project details'
+                icon={<FileText className='w-5 h-5 text-primary' />}
               >
-                <div className="space-y-4">
+                <div className='space-y-4'>
                   <p>
                     This expandable card demonstrates smooth height animations and content
                     transitions.
                   </p>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className='grid grid-cols-2 gap-4'>
                     <div>
                       <Label>Progress</Label>
                       <AnimatedProgress value={75} />
                     </div>
                     <div>
                       <Label>Team Size</Label>
-                      <p className="text-lg font-medium">8 members</p>
+                      <p className='text-lg font-medium'>8 members</p>
                     </div>
                   </div>
                 </div>
               </ExpandableCard>
 
               <ExpandableCard
-                title="Performance Metrics"
-                preview="View detailed performance analytics"
-                icon={<TrendingUp className="w-5 h-5 text-primary" />}
+                title='Performance Metrics'
+                preview='View detailed performance analytics'
+                icon={<TrendingUp className='w-5 h-5 text-primary' />}
               >
-                <div className="space-y-4">
+                <div className='space-y-4'>
                   <p>
                     Analytics and performance data with animated charts and progress indicators.
                   </p>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-green-500">94%</p>
-                      <p className="text-sm text-muted-foreground">Uptime</p>
+                  <div className='grid grid-cols-3 gap-4'>
+                    <div className='text-center'>
+                      <p className='text-2xl font-bold text-green-500'>94%</p>
+                      <p className='text-sm text-muted-foreground'>Uptime</p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-blue-500">1.2s</p>
-                      <p className="text-sm text-muted-foreground">Load Time</p>
+                    <div className='text-center'>
+                      <p className='text-2xl font-bold text-blue-500'>1.2s</p>
+                      <p className='text-sm text-muted-foreground'>Load Time</p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-purple-500">99.1%</p>
-                      <p className="text-sm text-muted-foreground">Success Rate</p>
+                    <div className='text-center'>
+                      <p className='text-2xl font-bold text-purple-500'>99.1%</p>
+                      <p className='text-sm text-muted-foreground'>Success Rate</p>
                     </div>
                   </div>
                 </div>
@@ -419,7 +419,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Staggered List */}
           <section>
-            <h2 className="mb-6">Staggered List Animation</h2>
+            <h2 className='mb-6'>Staggered List Animation</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Task List</CardTitle>
@@ -429,11 +429,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 <StaggeredList
                   key={`list-${animationKey}`}
                   items={listItems}
-                  className="space-y-3"
+                  className='space-y-3'
                   renderItem={(item, index) => (
-                    <div className="p-4 bg-muted rounded-lg">
-                      <h4 className="font-medium">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                    <div className='p-4 bg-muted rounded-lg'>
+                      <h4 className='font-medium'>{item.title}</h4>
+                      <p className='text-sm text-muted-foreground mt-1'>{item.description}</p>
                     </div>
                   )}
                 />
@@ -443,7 +443,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Notification Demo */}
           <section>
-            <h2 className="mb-6">Animated Notifications</h2>
+            <h2 className='mb-6'>Animated Notifications</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Toast Notifications</CardTitle>
@@ -452,9 +452,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                <div className='flex flex-wrap gap-2'>
                   <Button
-                    size="sm"
+                    size='sm'
                     onClick={() =>
                       addNotification('success', 'Success! Operation completed successfully.')
                     }
@@ -462,15 +462,15 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     Success Toast
                   </Button>
                   <Button
-                    size="sm"
-                    variant="destructive"
+                    size='sm'
+                    variant='destructive'
                     onClick={() => addNotification('error', 'Error! Something went wrong.')}
                   >
                     Error Toast
                   </Button>
                   <Button
-                    size="sm"
-                    variant="outline"
+                    size='sm'
+                    variant='outline'
                     onClick={() =>
                       addNotification('info', 'Info: Here is some helpful information.')
                     }
@@ -478,7 +478,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     Info Toast
                   </Button>
                   <Button
-                    size="sm"
+                    size='sm'
                     onClick={() =>
                       addNotification('warning', 'Warning: Please review your settings.')
                     }
@@ -492,7 +492,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Implementation Guidelines */}
           <section>
-            <h2 className="mb-6">Implementation Guidelines</h2>
+            <h2 className='mb-6'>Implementation Guidelines</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Animation Best Practices</CardTitle>
@@ -501,10 +501,10 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className='grid md:grid-cols-2 gap-6'>
                   <div>
-                    <h4 className="font-medium mb-3 text-green-600">✓ Best Practices</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 className='font-medium mb-3 text-green-600'>✓ Best Practices</h4>
+                    <ul className='space-y-2 text-sm text-muted-foreground'>
                       <li>• Use spring animations for natural movement</li>
                       <li>• Keep durations between 200-500ms for UI interactions</li>
                       <li>• Respect users' reduced motion preferences</li>
@@ -514,8 +514,8 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-3 text-red-600">✗ Common Pitfalls</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 className='font-medium mb-3 text-red-600'>✗ Common Pitfalls</h4>
+                    <ul className='space-y-2 text-sm text-muted-foreground'>
                       <li>• Overusing animations - less is more</li>
                       <li>• Making animations too slow (&gt;500ms)</li>
                       <li>• Ignoring accessibility preferences</li>
@@ -531,8 +531,8 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
         </div>
 
         {/* Notification Container */}
-        <div className="fixed top-4 right-4 z-50 space-y-2">
-          {notifications.map((notification) => (
+        <div className='fixed top-4 right-4 z-50 space-y-2'>
+          {notifications.map(notification => (
             <AnimatedNotification
               key={notification.id}
               type={notification.type}

@@ -11,7 +11,7 @@ const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
       <FormItemContext.Provider value={{ id }}>
         <div
           ref={ref}
-          data-slot="form-item"
+          data-slot='form-item'
           className={cn('grid gap-2 transition-all duration-200 ease-in-out', className)}
           {...props}
         />
