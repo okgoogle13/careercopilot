@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from './ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from './ui/card';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Label } from './ui/label';
+import { Input } from './ui/input';
 import {
+  Sparkles,
+  Zap,
+  ChevronDown,
   ChevronRight,
   CheckCircle2,
   XCircle,
   AlertCircle,
   RefreshCw,
+  Loader,
+  Bell,
+  Star,
+  Heart,
+  Bookmark,
+  Share2,
+  MoreHorizontal,
   TrendingUp,
   ArrowUp,
   ArrowDown,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 
 // Animated Modal Component
@@ -33,7 +50,7 @@ export function AnimatedModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-50"
+            className='fixed inset-0 bg-black/50 z-50'
             onClick={onClose}
           />
           <motion.div
@@ -41,15 +58,15 @@ export function AnimatedModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md"
+            className='fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md'
           >
             <Card>
               <CardHeader>
                 <CardTitle>{title}</CardTitle>
               </CardHeader>
               <CardContent>{children}</CardContent>
-              <CardFooter className="flex justify-end gap-2">
-                <Button variant="outline" onClick={onClose}>
+              <CardFooter className='flex justify-end gap-2'>
+                <Button variant='outline' onClick={onClose}>
                   Cancel
                 </Button>
                 <Button onClick={onClose}>Confirm</Button>
@@ -75,7 +92,7 @@ export function AnimatedDropdown({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div className='relative'>
       <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
       <AnimatePresence>
         {isOpen && (
@@ -84,16 +101,16 @@ export function AnimatedDropdown({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 mt-2 min-w-[200px] bg-card border border-border rounded-lg shadow-lg z-10"
+            className='absolute top-full left-0 mt-2 min-w-[200px] bg-card border border-border rounded-lg shadow-lg z-10'
           >
-            <div className="py-1">
+            <div className='py-1'>
               {items.map((item, index) => (
                 <motion.button
                   key={item.value}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="w-full px-3 py-2 text-left hover:bg-muted transition-colors flex items-center gap-2"
+                  className='w-full px-3 py-2 text-left hover:bg-muted transition-colors flex items-center gap-2'
                   onClick={() => {
                     onSelect(item.value);
                     setIsOpen(false);
@@ -124,10 +141,10 @@ export function AnimatedTabs({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full">
-      <div className="relative">
-        <div className="flex bg-muted rounded-lg p-1">
-          {tabs.map((tab) => (
+    <div className='w-full'>
+      <div className='relative'>
+        <div className='flex bg-muted rounded-lg p-1'>
+          {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
@@ -139,12 +156,12 @@ export function AnimatedTabs({
             >
               {activeTab === tab.id && (
                 <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-0 bg-card rounded-md shadow-sm"
+                  layoutId='activeTab'
+                  className='absolute inset-0 bg-card rounded-md shadow-sm'
                   transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                 />
               )}
-              <span className="relative z-10 flex items-center gap-2">
+              <span className='relative z-10 flex items-center gap-2'>
                 {tab.icon}
                 {tab.label}
               </span>
@@ -152,8 +169,8 @@ export function AnimatedTabs({
           ))}
         </div>
       </div>
-      <div className="mt-4">
-        <AnimatePresence mode="wait">
+      <div className='mt-4'>
+        <AnimatePresence mode='wait'>
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 10 }}
@@ -184,16 +201,16 @@ export function AnimatedProgress({
   const percentage = (value / max) * 100;
 
   return (
-    <div className="w-full">
+    <div className='w-full'>
       {showPercentage && (
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium">Progress</span>
-          <span className="text-sm text-muted-foreground">{Math.round(percentage)}%</span>
+        <div className='flex justify-between items-center mb-2'>
+          <span className='text-sm font-medium'>Progress</span>
+          <span className='text-sm text-muted-foreground'>{Math.round(percentage)}%</span>
         </div>
       )}
-      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+      <div className='w-full bg-muted rounded-full h-2 overflow-hidden'>
         <motion.div
-          className="h-full bg-primary rounded-full"
+          className='h-full bg-primary rounded-full'
           initial={animated ? { width: '0%' } : { width: `${percentage}%` }}
           animate={{ width: `${percentage}%` }}
           transition={animated ? { type: 'spring', damping: 30, stiffness: 100 } : { duration: 0 }}
@@ -237,10 +254,10 @@ export function AnimatedNotification({
       transition={{ type: 'spring', damping: 25, stiffness: 300 }}
       className={`flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg min-w-[300px] ${colors[type]}`}
     >
-      <Icon className="w-4 h-4" />
-      <span className="text-sm flex-1">{message}</span>
-      <button onClick={onClose} className="hover:opacity-70">
-        <XCircle className="w-4 h-4" />
+      <Icon className='w-4 h-4' />
+      <span className='text-sm flex-1'>{message}</span>
+      <button onClick={onClose} className='hover:opacity-70'>
+        <XCircle className='w-4 h-4' />
       </button>
     </motion.div>
   );
@@ -282,7 +299,7 @@ export function AnimatedButton({
   variant?: 'default' | 'outline' | 'ghost' | 'destructive';
   animation?: 'scale' | 'lift' | 'glow' | 'shimmer';
   className?: string;
-  [key: string]: unknown;
+  [key: string]: any;
 }) {
   const animations = {
     scale: {
@@ -304,15 +321,15 @@ export function AnimatedButton({
 
   const MotionButton =
     animation === 'shimmer'
-      ? ({ children, ...props }: React.ComponentProps<typeof motion.button>) => (
+      ? ({ children, ...props }: any) => (
           <Button className={`relative overflow-hidden group ${className}`} {...props}>
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              className='absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent'
               initial={{ x: '-100%' }}
               whileHover={{ x: '100%' }}
               transition={{ duration: 0.6 }}
             />
-            <span className="relative">{children}</span>
+            <span className='relative'>{children}</span>
           </Button>
         )
       : motion(Button);
@@ -345,20 +362,20 @@ export function ExpandableCard({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <motion.div layout className="border border-border rounded-lg overflow-hidden">
+    <motion.div layout className='border border-border rounded-lg overflow-hidden'>
       <motion.button
-        className="w-full p-4 text-left flex items-center justify-between hover:bg-muted transition-colors"
+        className='w-full p-4 text-left flex items-center justify-between hover:bg-muted transition-colors'
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="flex items-center gap-3">
+        <div className='flex items-center gap-3'>
           {icon}
           <div>
-            <h4 className="font-medium">{title}</h4>
-            <p className="text-sm text-muted-foreground">{preview}</p>
+            <h4 className='font-medium'>{title}</h4>
+            <p className='text-sm text-muted-foreground'>{preview}</p>
           </div>
         </div>
         <motion.div animate={{ rotate: isExpanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight className='w-4 h-4' />
         </motion.div>
       </motion.button>
       <AnimatePresence>
@@ -368,9 +385,9 @@ export function ExpandableCard({
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden"
+            className='overflow-hidden'
           >
-            <div className="p-4 pt-0 border-t border-border">{children}</div>
+            <div className='p-4 pt-0 border-t border-border'>{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -384,14 +401,14 @@ export function StaggeredList({
   renderItem,
   className = '',
 }: {
-  items: unknown[];
-  renderItem: (item: unknown, index: number) => React.ReactNode;
+  items: any[];
+  renderItem: (item: any, index: number) => React.ReactNode;
   className?: string;
 }) {
   return (
     <motion.div
-      initial="hidden"
-      animate="visible"
+      initial='hidden'
+      animate='visible'
       variants={{
         hidden: { opacity: 0 },
         visible: {
@@ -421,25 +438,25 @@ export function StaggeredList({
 // Loading Animations Component
 export function LoadingAnimations() {
   return (
-    <div className="flex gap-6 items-center">
+    <div className='flex gap-6 items-center'>
       {/* Spinning loader */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
-        <RefreshCw className="w-6 h-6 text-primary" />
+        <RefreshCw className='w-6 h-6 text-primary' />
       </motion.div>
 
       {/* Pulsing dot */}
       <motion.div
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 1, repeat: Infinity }}
-        className="w-6 h-6 bg-primary rounded-full"
+        className='w-6 h-6 bg-primary rounded-full'
       />
 
       {/* Bouncing dots */}
-      <div className="flex gap-1">
-        {[0, 1, 2].map((i) => (
+      <div className='flex gap-1'>
+        {[0, 1, 2].map(i => (
           <motion.div
             key={i}
             animate={{ y: [0, -10, 0] }}
@@ -448,7 +465,7 @@ export function LoadingAnimations() {
               repeat: Infinity,
               delay: i * 0.2,
             }}
-            className="w-2 h-6 bg-primary rounded-full"
+            className='w-2 h-6 bg-primary rounded-full'
           />
         ))}
       </div>
@@ -457,7 +474,7 @@ export function LoadingAnimations() {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-        className="w-6 h-6 rounded-full border-2 border-transparent border-t-primary border-r-primary"
+        className='w-6 h-6 rounded-full border-2 border-transparent border-t-primary border-r-primary'
       />
 
       {/* Morphing loader */}
@@ -467,7 +484,7 @@ export function LoadingAnimations() {
           scale: [1, 0.8, 1],
         }}
         transition={{ duration: 1.5, repeat: Infinity }}
-        className="w-6 h-6 bg-primary"
+        className='w-6 h-6 bg-primary'
       />
     </div>
   );
@@ -504,14 +521,14 @@ export function AnimatedStatsCard({
   return (
     <AnimatedCard>
       <Card>
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
+        <CardContent className='p-6'>
+          <div className='flex items-center justify-between'>
             <div>
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-sm text-muted-foreground"
+                className='text-sm text-muted-foreground'
               >
                 {title}
               </motion.p>
@@ -519,7 +536,7 @@ export function AnimatedStatsCard({
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring' }}
-                className="text-2xl font-bold"
+                className='text-2xl font-bold'
               >
                 {value}
               </motion.p>
@@ -529,7 +546,7 @@ export function AnimatedStatsCard({
                 transition={{ delay: 0.3 }}
                 className={`flex items-center gap-1 text-sm ${trendColors[trend]}`}
               >
-                <TrendIcon className="w-3 h-3" />
+                <TrendIcon className='w-3 h-3' />
                 {change}
               </motion.div>
             </div>
@@ -537,7 +554,7 @@ export function AnimatedStatsCard({
               initial={{ opacity: 0, rotate: -45 }}
               animate={{ opacity: 1, rotate: 0 }}
               transition={{ delay: 0.4 }}
-              className="p-3 bg-primary/10 rounded-lg"
+              className='p-3 bg-primary/10 rounded-lg'
             >
               {icon}
             </motion.div>

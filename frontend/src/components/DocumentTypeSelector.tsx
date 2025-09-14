@@ -195,8 +195,8 @@ export function DocumentTypeSelector({
   ];
 
   const toggleFavorite = (templateId: string) => {
-    setFavorites((prev) =>
-      prev.includes(templateId) ? prev.filter((id) => id !== templateId) : [...prev, templateId]
+    setFavorites(prev =>
+      prev.includes(templateId) ? prev.filter(id => id !== templateId) : [...prev, templateId]
     );
   };
 
@@ -242,11 +242,11 @@ export function DocumentTypeSelector({
   };
 
   const filteredDocuments = sortDocuments(
-    documentTypes.filter((doc) => {
+    documentTypes.filter(doc => {
       const matchesSearch =
         doc.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         doc.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        doc.tags.some((tag) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        doc.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchesCategory =
         selectedCategory === 'all' ||
@@ -295,56 +295,56 @@ export function DocumentTypeSelector({
         <AnimatedCard
           hover={true}
           tap={true}
-          className="group relative overflow-hidden border border-border rounded-lg cursor-pointer"
+          className='group relative overflow-hidden border border-border rounded-lg cursor-pointer'
         >
           <Card
-            className="border-0 shadow-none"
+            className='border-0 shadow-none'
             onClick={() => onSelectType(doc.id)}
-            onKeyDown={(e) => handleKeyDown(e, doc.id)}
-            role="button"
+            onKeyDown={e => handleKeyDown(e, doc.id)}
+            role='button'
             tabIndex={0}
           >
             {/* Recommendation Score Badge */}
             {sortBy === 'recommended' && recommendationScore > 70 && (
-              <div className="absolute top-2 right-2 z-10">
-                <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs">
+              <div className='absolute top-2 right-2 z-10'>
+                <Badge className='bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs'>
                   {Math.round(recommendationScore)}% match
                 </Badge>
               </div>
             )}
 
-            <div className="p-6 space-y-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3 flex-1">
+            <div className='p-6 space-y-4'>
+              <div className='flex items-start justify-between'>
+                <div className='flex items-center gap-3 flex-1'>
                   <div className={`p-3 ${doc.bgColor} rounded-xl relative`}>
                     <Icon className={`w-6 h-6 ${doc.color}`} />
                     {doc.aiPowered && (
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full flex items-center justify-center">
-                        <Zap className="w-2 h-2 text-white" />
+                      <div className='absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full flex items-center justify-center'>
+                        <Zap className='w-2 h-2 text-white' />
                       </div>
                     )}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-foreground">{doc.title}</h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <Badge variant="outline" className={getDifficultyColor(doc.difficulty)}>
+                  <div className='flex-1'>
+                    <h3 className='text-lg font-semibold text-foreground'>{doc.title}</h3>
+                    <div className='flex items-center gap-2 mt-1'>
+                      <Badge variant='outline' className={getDifficultyColor(doc.difficulty)}>
                         {doc.difficulty}
                       </Badge>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
+                      <span className='text-xs text-muted-foreground flex items-center gap-1'>
+                        <Clock className='w-3 h-3' />
                         {formatTime(doc.estimatedTime)}
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-2 items-end">
+                <div className='flex flex-col gap-2 items-end'>
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={(e) => {
+                        variant='ghost'
+                        size='icon'
+                        className='h-8 w-8'
+                        onClick={e => {
                           e.stopPropagation();
                           toggleFavorite(doc.id);
                         }}
@@ -359,14 +359,14 @@ export function DocumentTypeSelector({
                     </TooltipContent>
                   </Tooltip>
 
-                  <div className="flex gap-1">
+                  <div className='flex gap-1'>
                     {doc.isNew && (
-                      <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
+                      <Badge variant='secondary' className='bg-green-100 text-green-800 text-xs'>
                         New
                       </Badge>
                     )}
                     {doc.isPopular && (
-                      <Badge variant="secondary" className="bg-amber-100 text-amber-800 text-xs">
+                      <Badge variant='secondary' className='bg-amber-100 text-amber-800 text-xs'>
                         Popular
                       </Badge>
                     )}
@@ -374,17 +374,17 @@ export function DocumentTypeSelector({
                 </div>
               </div>
 
-              <p className="text-sm text-muted-foreground">{doc.description}</p>
+              <p className='text-sm text-muted-foreground'>{doc.description}</p>
 
               {/* Analytics */}
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1">
-                    <Users className="w-3 h-3" />
+              <div className='flex items-center justify-between text-xs text-muted-foreground'>
+                <div className='flex items-center gap-3'>
+                  <span className='flex items-center gap-1'>
+                    <Users className='w-3 h-3' />
                     {doc.usageCount?.toLocaleString() || 0} users
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Target className="w-3 h-3" />
+                  <span className='flex items-center gap-1'>
+                    <Target className='w-3 h-3' />
                     {doc.successRate}% success
                   </span>
                 </div>
@@ -392,8 +392,8 @@ export function DocumentTypeSelector({
                   <Tooltip>
                     <TooltipTrigger>
                       <Badge
-                        variant="outline"
-                        className="bg-purple-50 text-purple-700 border-purple-200"
+                        variant='outline'
+                        className='bg-purple-50 text-purple-700 border-purple-200'
                       >
                         AI-Powered
                       </Badge>
@@ -405,23 +405,23 @@ export function DocumentTypeSelector({
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-2">
+              <div className='flex flex-wrap gap-2 pt-2'>
                 {doc.tags.slice(0, 3).map((tag, i) => (
-                  <Badge key={i} variant="outline" className="text-xs">
+                  <Badge key={i} variant='outline' className='text-xs'>
                     {tag}
                   </Badge>
                 ))}
                 {doc.tags.length > 3 && (
-                  <Badge variant="outline" className="text-xs">
+                  <Badge variant='outline' className='text-xs'>
                     +{doc.tags.length - 3} more
                   </Badge>
                 )}
               </div>
 
               <Button
-                className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
-                variant="outline"
-                size="sm"
+                className='w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground'
+                variant='outline'
+                size='sm'
               >
                 Select Template
               </Button>
@@ -433,70 +433,70 @@ export function DocumentTypeSelector({
   };
 
   const renderSkeleton = () => (
-    <Card className="p-6 space-y-4">
-      <div className="flex items-center gap-3">
-        <Skeleton className="h-12 w-12 rounded-xl" />
-        <Skeleton className="h-6 w-32" />
+    <Card className='p-6 space-y-4'>
+      <div className='flex items-center gap-3'>
+        <Skeleton className='h-12 w-12 rounded-xl' />
+        <Skeleton className='h-6 w-32' />
       </div>
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-3/4" />
-      <div className="flex gap-2 pt-2">
-        <Skeleton className="h-6 w-16 rounded-full" />
-        <Skeleton className="h-6 w-20 rounded-full" />
+      <Skeleton className='h-4 w-full' />
+      <Skeleton className='h-4 w-3/4' />
+      <div className='flex gap-2 pt-2'>
+        <Skeleton className='h-6 w-16 rounded-full' />
+        <Skeleton className='h-6 w-20 rounded-full' />
       </div>
-      <Skeleton className="h-9 w-full mt-4" />
+      <Skeleton className='h-9 w-full mt-4' />
     </Card>
   );
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-6">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div className='min-h-screen bg-background p-4 md:p-6'>
+      <div className='max-w-6xl mx-auto space-y-8'>
         {/* Header */}
-        <div className="flex flex-col gap-4">
-          <Button variant="ghost" size="sm" onClick={onBack} className="w-fit">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+        <div className='flex flex-col gap-4'>
+          <Button variant='ghost' size='sm' onClick={onBack} className='w-fit'>
+            <ArrowLeft className='w-4 h-4 mr-2' />
             Back to Dashboard
           </Button>
 
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight">Create New Document</h1>
-            <p className="text-muted-foreground">
+          <div className='space-y-2'>
+            <h1 className='text-3xl font-bold tracking-tight'>Create New Document</h1>
+            <p className='text-muted-foreground'>
               Select a template to get started with your next career document
             </p>
           </div>
         </div>
 
         {/* Search and Filter */}
-        <div className="space-y-4">
-          <div className="flex gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <div className='space-y-4'>
+          <div className='flex gap-4'>
+            <div className='relative flex-1'>
+              <Search className='absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground' />
               <Input
                 ref={searchInputRef}
-                placeholder="Search templates..."
-                className="pl-10"
+                placeholder='Search templates...'
+                className='pl-10'
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={e => setSearchQuery(e.target.value)}
               />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">Sort by:</span>
-              <Tabs value={sortBy} onValueChange={(value) => setSortBy(value as any)}>
-                <TabsList className="grid grid-cols-4 w-[400px]">
-                  <TabsTrigger value="recommended" className="text-xs">
-                    <TrendingUp className="w-3 h-3 mr-1" />
+            <div className='flex items-center gap-2'>
+              <span className='text-sm text-muted-foreground'>Sort by:</span>
+              <Tabs value={sortBy} onValueChange={value => setSortBy(value as any)}>
+                <TabsList className='grid grid-cols-4 w-[400px]'>
+                  <TabsTrigger value='recommended' className='text-xs'>
+                    <TrendingUp className='w-3 h-3 mr-1' />
                     Recommended
                   </TabsTrigger>
-                  <TabsTrigger value="popular" className="text-xs">
-                    <BarChart3 className="w-3 h-3 mr-1" />
+                  <TabsTrigger value='popular' className='text-xs'>
+                    <BarChart3 className='w-3 h-3 mr-1' />
                     Popular
                   </TabsTrigger>
-                  <TabsTrigger value="recent" className="text-xs">
-                    <Clock className="w-3 h-3 mr-1" />
+                  <TabsTrigger value='recent' className='text-xs'>
+                    <Clock className='w-3 h-3 mr-1' />
                     Recent
                   </TabsTrigger>
-                  <TabsTrigger value="difficulty" className="text-xs">
-                    <Target className="w-3 h-3 mr-1" />
+                  <TabsTrigger value='difficulty' className='text-xs'>
+                    <Target className='w-3 h-3 mr-1' />
                     Difficulty
                   </TabsTrigger>
                 </TabsList>
@@ -506,28 +506,28 @@ export function DocumentTypeSelector({
 
           <Tabs
             value={selectedCategory}
-            onValueChange={(value) => setSelectedCategory(value as DocumentCategory | 'favorites')}
-            className="w-full"
+            onValueChange={value => setSelectedCategory(value as DocumentCategory | 'favorites')}
+            className='w-full'
           >
-            <TabsList className="w-full justify-start overflow-x-auto">
-              {categories.map((category) => {
+            <TabsList className='w-full justify-start overflow-x-auto'>
+              {categories.map(category => {
                 const Icon = category.icon;
                 const count =
                   category.id === 'favorites'
                     ? favorites.length
                     : category.id === 'all'
                       ? documentTypes.length
-                      : documentTypes.filter((d) => d.category === category.id).length;
+                      : documentTypes.filter(d => d.category === category.id).length;
 
                 return (
                   <TabsTrigger
                     key={category.id}
                     value={category.id}
-                    className="flex items-center gap-2"
+                    className='flex items-center gap-2'
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className='h-4 w-4' />
                     {category.label}
-                    <Badge variant="secondary" className="ml-1 text-xs">
+                    <Badge variant='secondary' className='ml-1 text-xs'>
                       {count}
                     </Badge>
                   </TabsTrigger>
@@ -538,30 +538,30 @@ export function DocumentTypeSelector({
         </div>
         {/* Recent Documents */}
         {recentDocuments.length > 0 && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <History className="h-5 w-5" />
-              <h2 className="font-medium">Recently Opened</h2>
+          <div className='space-y-4'>
+            <div className='flex items-center gap-2 text-muted-foreground'>
+              <History className='h-5 w-5' />
+              <h2 className='font-medium'>Recently Opened</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {recentDocuments.slice(0, 3).map((doc) => {
-                const template = documentTypes.find((t) => t.id === doc.type);
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+              {recentDocuments.slice(0, 3).map(doc => {
+                const template = documentTypes.find(t => t.id === doc.type);
                 if (!template) return null;
                 const Icon = template.icon;
 
                 return (
                   <Card
                     key={doc.id}
-                    className="p-4 hover:bg-muted/50 transition-colors cursor-pointer"
+                    className='p-4 hover:bg-muted/50 transition-colors cursor-pointer'
                     onClick={() => onSelectType(doc.type)}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className='flex items-center gap-3'>
                       <div className={`p-2 ${template.bgColor} rounded-lg`}>
                         <Icon className={`w-4 h-4 ${template.color}`} />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-medium truncate">{doc.title}</h3>
-                        <p className="text-xs text-muted-foreground truncate">
+                      <div className='flex-1 min-w-0'>
+                        <h3 className='font-medium truncate'>{doc.title}</h3>
+                        <p className='text-xs text-muted-foreground truncate'>
                           {new Date(doc.lastOpened).toLocaleDateString()}
                         </p>
                       </div>
@@ -576,7 +576,7 @@ export function DocumentTypeSelector({
         {/* Document Grid */}
         {isLoading ? (
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -588,28 +588,28 @@ export function DocumentTypeSelector({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
               >
-                <SkeletonLoading variant="card" />
+                <SkeletonLoading variant='card' />
               </motion.div>
             ))}
           </motion.div>
         ) : filteredDocuments.length > 0 ? (
           <StaggeredList
             items={filteredDocuments}
-            renderItem={(doc) => renderDocumentCard(doc)}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            renderItem={doc => renderDocumentCard(doc)}
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
           />
         ) : (
-          <div className="text-center py-12 space-y-4">
-            <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
-            <h3 className="text-lg font-medium">No templates found</h3>
-            <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
+          <div className='text-center py-12 space-y-4'>
+            <FileText className='mx-auto h-12 w-12 text-muted-foreground' />
+            <h3 className='text-lg font-medium'>No templates found</h3>
+            <p className='text-muted-foreground'>Try adjusting your search or filter criteria</p>
             <Button
-              variant="outline"
+              variant='outline'
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('all');
               }}
-              className="mt-4"
+              className='mt-4'
             >
               Clear filters
             </Button>

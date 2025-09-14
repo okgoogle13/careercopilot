@@ -39,7 +39,7 @@ class ApiClient {
     }
   }
 
-  async post<T>(endpoint: string, data: unknown): Promise<T> {
+  async post<T>(endpoint: string, data: any): Promise<T> {
     return this.request<T>(endpoint, {
       method: 'POST',
       body: JSON.stringify(data),
@@ -100,7 +100,7 @@ export async function generateKscResponses(jobDescription: string): Promise<stri
 
     // Extract response strings from the API response
     if (response.responses && Array.isArray(response.responses)) {
-      return response.responses.map((r) => r.response);
+      return response.responses.map(r => r.response);
     }
 
     // Fallback if response structure is different
@@ -161,7 +161,7 @@ export async function detectKscCriteria(jobDescription: string): Promise<KscCrit
 export async function generateSingleKscResponse(
   criterion: string,
   jobDescription: string,
-  userProfile?: Record<string, unknown>
+  userProfile?: any
 ): Promise<string> {
   try {
     if (!criterion || criterion.trim().length === 0) {
@@ -239,12 +239,12 @@ export async function generateCoverLetter(jobDescription: string, tone: string):
  *
  * @param jobDescription - The job description text to tailor the resume to
  * @param userProfileId - The user's profile ID for personalization
- * @returns Promise<Record<string, unknown>> - Generated resume data
+ * @returns Promise<any> - Generated resume data
  */
 export async function generateTailoredResume(
   jobDescription: string,
   userProfileId: string
-): Promise<Record<string, unknown>> {
+): Promise<any> {
   try {
     if (!jobDescription || jobDescription.trim().length === 0) {
       throw new Error('Job description is required');
@@ -259,10 +259,7 @@ export async function generateTailoredResume(
       userProfileId: userProfileId.trim(),
     };
 
-    const response = await apiClient.post<Record<string, unknown>>(
-      '/resumes/tailored',
-      requestBody
-    );
+    const response = await apiClient.post<any>('/resumes/tailored', requestBody);
 
     return response;
   } catch (error) {
@@ -277,19 +274,9 @@ export async function generateTailoredResume(
 }
 
 // Types for Application Package API
-export interface UserProfile {
-  resume_content: string;
-  skills: string[];
-  experience: string[];
-  education: string[];
-  target_industry: string;
-  career_goals: string;
-  experience_level: string;
-}
-
 export interface ApplicationPackageRequest {
   job_description: string;
-  user_profile: UserProfile;
+  user_profile: any;
 }
 
 export interface TailoredResumeResult {
@@ -312,7 +299,7 @@ export interface SmartCoverLetter {
 }
 
 export interface KSCResponsesResult {
-  generated_responses: Array<Record<string, unknown>>;
+  generated_responses: Array<Record<string, any>>;
   total_criteria_addressed: number;
   coverage_completeness: string;
   response_quality_score: number;
@@ -360,7 +347,7 @@ export async function prepareApplicationPackage(
     // Get current user profile (this would typically come from your auth/profile service)
     // For now, we'll create a basic profile structure - you may need to adapt this
     // to fetch from your actual user profile service
-    const userProfile: UserProfile = {
+    const userProfile = {
       resume_content: '', // This should be fetched from user's stored resume
       skills: [], // User's skills array
       experience: [], // User's experience array
@@ -456,184 +443,6 @@ export async function scanInboxForOpportunities(): Promise<EmailScanResponse> {
     }
 
     throw new Error('Failed to scan inbox for opportunities: Unknown error occurred');
-  }
-}
-
-// New Genkit Flow API Services
-
-// Job Matching Types
-export interface JobMatchingRequest {
-  candidate_profile: Record<string, unknown>;
-  job_description: string;
-  matching_preferences?: Record<string, unknown>;
-}
-
-export interface JobMatchingResult {
-  compatibility_score: number;
-  strength_areas: string[];
-  improvement_areas: string[];
-  match_breakdown: Record<string, number>;
-  recommendations: string[];
-}
-
-// Content Optimization Types
-export interface ContentOptimizationRequest {
-  content: string;
-  target_role: string;
-  optimization_goals?: string[];
-}
-
-export interface ContentOptimizationResult {
-  optimized_content: string;
-  improvement_summary: string[];
-  keyword_density_analysis: Record<string, number>;
-  readability_score: number;
-  suggestions: string[];
-}
-
-// Resume Intelligence Types
-export interface ResumeIntelligenceRequest {
-  resume_content: string;
-  target_industry?: string;
-  career_goals?: string;
-  experience_level?: string;
-}
-
-export interface ResumeIntelligenceResult {
-  market_readiness: number;
-  competitive_analysis: Record<string, unknown>;
-  optimization_recommendations: string[];
-  skill_gap_analysis: Record<string, unknown>;
-  career_progression_insights: string[];
-}
-
-// Application Package Types
-export interface ApplicationPackageRequest {
-  job_description: string;
-  user_profile: Record<string, unknown>;
-}
-
-export interface ApplicationPackageResult {
-  success: boolean;
-  tailored_resume: Record<string, unknown>;
-  cover_letter: Record<string, unknown>;
-  ksc_responses?: Record<string, unknown>[];
-  application_strategy: Record<string, unknown>;
-  processing_time_seconds: number;
-  components_generated: string[];
-  error_details?: string[];
-}
-
-/**
- * Analyze job compatibility using advanced multi-dimensional matching
- */
-export async function analyzeJobCompatibility(
-  candidateProfile: Record<string, unknown>,
-  jobDescription: string,
-  matchingPreferences: Record<string, unknown> = {}
-): Promise<JobMatchingResult> {
-  try {
-    const requestBody: JobMatchingRequest = {
-      candidate_profile: candidateProfile,
-      job_description: jobDescription,
-      matching_preferences: matchingPreferences,
-    };
-
-    const response = await apiClient.post<JobMatchingResult>('/analysis/job-matching', requestBody);
-
-    return response;
-  } catch (error) {
-    console.error('Job Matching Error:', error);
-    throw new Error(
-      `Failed to analyze job compatibility: ${error instanceof Error ? error.message : 'Unknown error'}`
-    );
-  }
-}
-
-/**
- * Optimize content for target roles using AI-powered enhancement
- */
-export async function optimizeContentForTarget(
-  content: string,
-  targetRole: string,
-  optimizationGoals: string[] = []
-): Promise<ContentOptimizationResult> {
-  try {
-    const requestBody: ContentOptimizationRequest = {
-      content,
-      target_role: targetRole,
-      optimization_goals: optimizationGoals,
-    };
-
-    const response = await apiClient.post<ContentOptimizationResult>(
-      '/analysis/content-optimization',
-      requestBody
-    );
-
-    return response;
-  } catch (error) {
-    console.error('Content Optimization Error:', error);
-    throw new Error(
-      `Failed to optimize content: ${error instanceof Error ? error.message : 'Unknown error'}`
-    );
-  }
-}
-
-/**
- * Generate comprehensive resume intelligence report
- */
-export async function generateResumeIntelligenceReport(
-  resumeContent: string,
-  targetIndustry?: string,
-  careerGoals?: string,
-  experienceLevel: string = 'mid_level'
-): Promise<ResumeIntelligenceResult> {
-  try {
-    const requestBody: ResumeIntelligenceRequest = {
-      resume_content: resumeContent,
-      target_industry: targetIndustry,
-      career_goals: careerGoals,
-      experience_level: experienceLevel,
-    };
-
-    const response = await apiClient.post<ResumeIntelligenceResult>(
-      '/analysis/resume-intelligence',
-      requestBody
-    );
-
-    return response;
-  } catch (error) {
-    console.error('Resume Intelligence Error:', error);
-    throw new Error(
-      `Failed to generate resume intelligence: ${error instanceof Error ? error.message : 'Unknown error'}`
-    );
-  }
-}
-
-/**
- * Generate complete application package using workflow orchestration
- */
-export async function generateApplicationPackage(
-  jobDescription: string,
-  userProfile: Record<string, unknown>
-): Promise<ApplicationPackageResult> {
-  try {
-    const requestBody: ApplicationPackageRequest = {
-      job_description: jobDescription,
-      user_profile: userProfile,
-    };
-
-    const response = await apiClient.post<{ data: ApplicationPackageResult }>(
-      '/workflows/generate-application',
-      requestBody
-    );
-
-    return response.data;
-  } catch (error) {
-    console.error('Application Package Generation Error:', error);
-    throw new Error(
-      `Failed to generate application package: ${error instanceof Error ? error.message : 'Unknown error'}`
-    );
   }
 }
 

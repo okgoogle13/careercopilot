@@ -27,12 +27,12 @@ export const SkillTag: React.FC<SkillTagProps> = ({
     accepted: {
       bgClass: 'bg-accent-green/10 border-accent-green/30 text-accent-green',
       textClass: 'text-accent-green',
-      icon: <Check className="w-4 h-4" />,
+      icon: <Check className='w-4 h-4' />,
     },
     rejected: {
       bgClass: 'bg-accent-red/10 border-accent-red/30 text-accent-red',
       textClass: 'text-accent-red',
-      icon: <X className="w-4 h-4" />,
+      icon: <X className='w-4 h-4' />,
     },
   };
 
@@ -49,45 +49,45 @@ export const SkillTag: React.FC<SkillTagProps> = ({
         className
       )}
     >
-      {config.icon && <span className="shrink-0">{config.icon}</span>}
+      {config.icon && <span className='shrink-0'>{config.icon}</span>}
 
-      <span className="truncate">{text}</span>
+      <span className='truncate'>{text}</span>
 
       {status === 'suggested' && (
-        <div className="flex items-center gap-1 ml-1">
+        <div className='flex items-center gap-1 ml-1'>
           {onAccept && (
             <Button
-              size="sm"
-              variant="ghost"
+              size='sm'
+              variant='ghost'
               className={cn(
                 'h-6 w-6 p-0',
                 'hover:bg-accent-green/20 text-accent-green hover:text-accent-green',
                 'opacity-0 group-hover:opacity-100 transition-opacity'
               )}
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 onAccept();
               }}
             >
-              <Check className="w-4 h-4" />
+              <Check className='w-4 h-4' />
             </Button>
           )}
 
           {onReject && (
             <Button
-              size="sm"
-              variant="ghost"
+              size='sm'
+              variant='ghost'
               className={cn(
                 'h-6 w-6 p-0',
                 'hover:bg-accent-red/20 text-accent-red hover:text-accent-red',
                 'opacity-0 group-hover:opacity-100 transition-opacity'
               )}
-              onClick={(e) => {
+              onClick={e => {
                 e.stopPropagation();
                 onReject();
               }}
             >
-              <X className="w-4 h-4" />
+              <X className='w-4 h-4' />
             </Button>
           )}
         </div>

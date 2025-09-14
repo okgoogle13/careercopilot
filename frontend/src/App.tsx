@@ -95,7 +95,7 @@ export default function App() {
     name: string;
     type: 'resume' | 'cover-letter';
   } | null>(null);
-  const [, setSelectedDocumentType] = useState<
+  const [selectedDocumentType, setSelectedDocumentType] = useState<
     'resume' | 'cover-letter' | 'selection-criteria' | null
   >(null);
   const [showDemoNav, setShowDemoNav] = useState(true);
@@ -376,7 +376,7 @@ export default function App() {
   };
 
   const getCurrentViewInfo = () => {
-    const currentViewData = demoViews.find((view) => view.id === currentView);
+    const currentViewData = demoViews.find(view => view.id === currentView);
     return currentViewData || demoViews[0];
   };
 
@@ -507,50 +507,50 @@ export default function App() {
     userState.isAuthenticated && !['auth', 'upload-resume', 'profile-editor'].includes(currentView);
 
   return (
-    <div className="h-screen bg-background text-foreground flex dark">
+    <div className='h-screen bg-background text-foreground flex dark'>
       {showSidebar && <Sidebar activeTab={activeTab} onTabChange={handleTabChange} />}
-      <div className="flex-1 relative">
+      <div className='flex-1 relative'>
         {renderContent()}
 
         {/* Enhanced Demo Navigation */}
         {showDemoNav && (
-          <div className="fixed bottom-4 right-4 z-50">
-            <Card className="bg-card border-border shadow-xl max-w-sm">
-              <div className="p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Navigation className="w-4 h-4 text-primary" />
-                    <h3 className="font-medium text-card-foreground">Wireframe Navigator</h3>
+          <div className='fixed bottom-4 right-4 z-50'>
+            <Card className='bg-card border-border shadow-xl max-w-sm'>
+              <div className='p-4'>
+                <div className='flex items-center justify-between mb-3'>
+                  <div className='flex items-center gap-2'>
+                    <Navigation className='w-4 h-4 text-primary' />
+                    <h3 className='font-medium text-card-foreground'>Wireframe Navigator</h3>
                   </div>
                   <Button
-                    variant="ghost"
-                    size="sm"
+                    variant='ghost'
+                    size='sm'
                     onClick={() => setShowDemoNav(false)}
-                    className="h-6 w-6 p-0 text-muted-foreground hover:text-foreground"
+                    className='h-6 w-6 p-0 text-muted-foreground hover:text-foreground'
                   >
                     ×
                   </Button>
                 </div>
 
-                <div className="space-y-2 mb-3">
-                  <div className="flex items-center gap-2 p-2 bg-primary/10 rounded-md">
-                    <CurrentViewIcon className="w-3 h-3 text-primary" />
+                <div className='space-y-2 mb-3'>
+                  <div className='flex items-center gap-2 p-2 bg-primary/10 rounded-md'>
+                    <CurrentViewIcon className='w-3 h-3 text-primary' />
                     <div>
-                      <p className="text-xs font-medium text-primary">{currentViewInfo.label}</p>
-                      <p className="text-xs text-muted-foreground">{currentViewInfo.description}</p>
+                      <p className='text-xs font-medium text-primary'>{currentViewInfo.label}</p>
+                      <p className='text-xs text-muted-foreground'>{currentViewInfo.description}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-1 max-h-80 overflow-y-auto">
-                  <p className="text-xs text-muted-foreground mb-2">Complete User Flow:</p>
-                  {demoViews.map((view) => {
+                <div className='space-y-1 max-h-80 overflow-y-auto'>
+                  <p className='text-xs text-muted-foreground mb-2'>Complete User Flow:</p>
+                  {demoViews.map(view => {
                     const ViewIcon = view.icon;
                     return (
                       <Button
                         key={view.id}
-                        variant="ghost"
-                        size="sm"
+                        variant='ghost'
+                        size='sm'
                         className={`w-full justify-start gap-2 h-8 text-xs ${
                           currentView === view.id
                             ? 'bg-primary/20 text-primary'
@@ -558,10 +558,10 @@ export default function App() {
                         }`}
                         onClick={() => handleDemoNavigation(view.id)}
                       >
-                        <ViewIcon className="w-3 h-3" />
+                        <ViewIcon className='w-3 h-3' />
                         {view.label}
                         {currentView === view.id && (
-                          <Badge variant="secondary" className="ml-auto h-4 px-1 text-xs">
+                          <Badge variant='secondary' className='ml-auto h-4 px-1 text-xs'>
                             Current
                           </Badge>
                         )}
@@ -570,8 +570,8 @@ export default function App() {
                   })}
                 </div>
 
-                <div className="mt-3 pt-3 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
+                <div className='mt-3 pt-3 border-t border-border'>
+                  <p className='text-xs text-muted-foreground'>
                     Explore the complete Career Copilot user journey from authentication to document
                     creation to career growth.
                   </p>
@@ -584,10 +584,10 @@ export default function App() {
         {/* Show Demo Nav Button when hidden */}
         {!showDemoNav && (
           <Button
-            className="fixed bottom-4 right-4 z-50 rounded-full h-12 w-12 p-0 bg-primary hover:bg-primary/90"
+            className='fixed bottom-4 right-4 z-50 rounded-full h-12 w-12 p-0 bg-primary hover:bg-primary/90'
             onClick={() => setShowDemoNav(true)}
           >
-            <Navigation className="w-5 h-5" />
+            <Navigation className='w-5 h-5' />
           </Button>
         )}
       </div>
