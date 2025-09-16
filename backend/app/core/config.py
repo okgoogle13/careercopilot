@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     show_debug_info: bool = secure_settings.SHOW_DEBUG_INFO
 
     # AI Settings
-    ai_model: str = "gemini-1.5-pro"
+    ai_model: str = "gemini-2.0-flash"
     ai_max_tokens: int = 2000
     ai_temperature: float = 0.2
 

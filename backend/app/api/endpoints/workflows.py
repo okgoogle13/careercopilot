@@ -272,7 +272,7 @@ async def workflow_health_check():
         try:
             from app.core.ai_config import get_ai_config
 
-            get_ai_config().get_model_config("gemini-1.5-pro")
+            get_ai_config().get_model_config("gemini-2.0-flash")
         except Exception as e:
             ai_available = False
 
