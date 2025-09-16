@@ -1,3 +1,17 @@
+#!/bin/bash
+
+# CareerCopilot M3-MUI Migration Setup Script
+echo "🚀 Starting CareerCopilot M3-MUI Migration..."
+
+# Install required dependencies
+echo "📦 Installing MUI and dependencies..."
+npm install @mui/material @emotion/react @emotion/styled @mui/icons-material @mui/system
+
+# Create theme directory
+mkdir -p src/theme
+
+# Generate MUI theme from M3 tokens
+cat > src/theme/theme.ts << 'EOF'
 import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
@@ -156,3 +170,7 @@ const createM3Theme = (mode: 'light' | 'dark') => {
 export const lightTheme = createM3Theme('light');
 export const darkTheme = createM3Theme('dark');
 export default lightTheme;
+EOF
+
+echo "✅ M3-MUI Migration Complete!"
+echo "Next: Use the VS Code Claude Code prompt to complete component migration"2

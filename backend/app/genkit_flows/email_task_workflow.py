@@ -38,7 +38,7 @@ except ImportError:
 
     genkit_flow = _noop_flow
 
-gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
+gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
 
 
 class OpportunityTaskResult(BaseModel):

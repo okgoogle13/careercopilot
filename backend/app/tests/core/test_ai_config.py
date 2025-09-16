@@ -3,9 +3,9 @@ from app.core.ai_config import AIModelType, AIProvider, get_ai_config
 
 def test_get_model_config_returns_model():
     config = get_ai_config()
-    model = config.get_model_config("gemini-1.5-pro")
+    model = config.get_model_config("gemini-2.0-flash")
     assert model is not None
-    assert model.name == "gemini-1.5-pro"
+    assert model.name == "gemini-2.0-flash"
     assert model.provider == AIProvider.GOOGLE_AI
     assert model.model_type == AIModelType.TEXT_GENERATION
 
