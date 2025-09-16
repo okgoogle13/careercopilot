@@ -3,17 +3,6 @@
 ## Task
 Convert all React components from Tailwind CSS to MUI with Material 3 tokens.
 
-## Files to Update
-Please include and update these files:
-- src/App.tsx
-- src/components/Navbar.tsx
-- src/pages/DashboardPage.tsx
-- src/pages/AnalysisPage.tsx
-- src/pages/DocumentsPage.tsx
-- src/pages/SettingsPage.tsx
-- src/pages/KscGeneratorPage.tsx
-- src/pages/OpportunitiesPage.tsx
-
 ## Requirements
 1. Replace ALL Tailwind classes with MUI components and sx props
 2. Use Material 3 design tokens from theme (primary, secondary, surface, etc.)
