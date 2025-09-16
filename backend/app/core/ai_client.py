@@ -11,7 +11,13 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
-from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig, get_ai_config
+from .ai_config import (
+    AIConfigManager,
+    AIModelType,
+    AIProvider,
+    ModelConfig,
+    get_ai_config,
+)
 from .monitoring import monitor_performance, track_ai_usage, track_error
 
 logger = logging.getLogger(__name__)

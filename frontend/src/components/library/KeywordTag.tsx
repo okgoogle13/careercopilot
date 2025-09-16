@@ -22,17 +22,17 @@ export function KeywordTag({
   const statusConfig = {
     matched: {
       bgClass: 'bg-accent-green/20 border-accent-green/50 text-accent-green',
-      icon: <Check className='w-3 h-3' />,
+      icon: <Check className="w-3 h-3" />,
       hoverClass: 'hover:bg-accent-green/30 hover:border-accent-green',
     },
     missing: {
       bgClass: 'bg-accent-red/20 border-accent-red/50 text-accent-red',
-      icon: <X className='w-3 h-3' />,
+      icon: <X className="w-3 h-3" />,
       hoverClass: 'hover:bg-accent-red/30 hover:border-accent-red',
     },
     suggested: {
       bgClass: 'bg-brand-primary/20 border-brand-primary/50 text-brand-light',
-      icon: <Plus className='w-3 h-3' />,
+      icon: <Plus className="w-3 h-3" />,
       hoverClass: 'hover:bg-brand-primary/30 hover:border-brand-primary',
     },
   };
@@ -45,38 +45,38 @@ export function KeywordTag({
       onClick={onClick}
     >
       {/* Status Icon */}
-      <span className='shrink-0'>{config.icon}</span>
+      <span className="shrink-0">{config.icon}</span>
 
       {/* Keyword Text */}
-      <span className='text-sm font-medium truncate'>{keyword}</span>
+      <span className="text-sm font-medium truncate">{keyword}</span>
 
       {/* Action Buttons */}
-      <div className='flex items-center gap-1 ml-1'>
+      <div className="flex items-center gap-1 ml-1">
         {status === 'suggested' && onAdd && (
           <Button
-            size='sm'
-            variant='ghost'
-            className='h-5 w-5 p-0 hover:bg-brand-primary/30 text-brand-light hover:text-brand-primary'
-            onClick={e => {
+            size="sm"
+            variant="ghost"
+            className="h-5 w-5 p-0 hover:bg-brand-primary/30 text-brand-light hover:text-brand-primary"
+            onClick={(e) => {
               e.stopPropagation();
               onAdd();
             }}
           >
-            <Plus className='w-3 h-3' />
+            <Plus className="w-3 h-3" />
           </Button>
         )}
 
         {removable && onRemove && (
           <Button
-            size='sm'
-            variant='ghost'
-            className='h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-accent-red/30 text-content-secondary hover:text-accent-red'
-            onClick={e => {
+            size="sm"
+            variant="ghost"
+            className="h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-accent-red/30 text-content-secondary hover:text-accent-red"
+            onClick={(e) => {
               e.stopPropagation();
               onRemove();
             }}
           >
-            <X className='w-3 h-3' />
+            <X className="w-3 h-3" />
           </Button>
         )}
       </div>
@@ -117,28 +117,28 @@ export function KeywordTagGroup({
   );
 
   return (
-    <div className='space-y-3'>
+    <div className="space-y-3">
       {title && (
-        <div className='flex items-center justify-between'>
-          <h4 className='font-semibold text-content-primary'>{title}</h4>
-          <div className='flex items-center gap-2 text-xs'>
+        <div className="flex items-center justify-between">
+          <h4 className="font-semibold text-content-primary">{title}</h4>
+          <div className="flex items-center gap-2 text-xs">
             {statusCounts.matched && (
               <Badge
-                variant='outline'
-                className='border-accent-green/50 text-accent-green font-medium'
+                variant="outline"
+                className="border-accent-green/50 text-accent-green font-medium"
               >
                 {statusCounts.matched} matched
               </Badge>
             )}
             {statusCounts.missing && (
-              <Badge variant='outline' className='border-accent-red/50 text-accent-red font-medium'>
+              <Badge variant="outline" className="border-accent-red/50 text-accent-red font-medium">
                 {statusCounts.missing} missing
               </Badge>
             )}
             {statusCounts.suggested && (
               <Badge
-                variant='outline'
-                className='border-brand-primary/50 text-brand-light font-medium'
+                variant="outline"
+                className="border-brand-primary/50 text-brand-light font-medium"
               >
                 {statusCounts.suggested} suggested
               </Badge>
@@ -147,7 +147,7 @@ export function KeywordTagGroup({
         </div>
       )}
 
-      <div className='flex flex-wrap gap-2'>
+      <div className="flex flex-wrap gap-2">
         {visibleKeywords.map(({ keyword, status, id }, index) => (
           <KeywordTag
             key={id || index}
@@ -162,8 +162,8 @@ export function KeywordTagGroup({
 
         {hiddenCount > 0 && (
           <Badge
-            variant='outline'
-            className='border-subtle text-content-secondary hover:border-brand-primary hover:text-brand-light cursor-pointer transition-colors font-medium'
+            variant="outline"
+            className="border-subtle text-content-secondary hover:border-brand-primary hover:text-brand-light cursor-pointer transition-colors font-medium"
           >
             +{hiddenCount} more
           </Badge>

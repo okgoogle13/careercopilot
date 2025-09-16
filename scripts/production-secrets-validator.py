@@ -31,7 +31,7 @@ class ProductionSecretsValidator:
         """Initialize the validator."""
         self.project_id = project_id
         self.client = None
-        
+
         if SECRET_MANAGER_AVAILABLE:
             try:
                 self.client = secretmanager.SecretManagerServiceClient()
@@ -47,14 +47,14 @@ class ProductionSecretsValidator:
                 "critical": True,
             },
             "anthropic-api-key": {
-                "description": "Anthropic Claude API Key", 
+                "description": "Anthropic Claude API Key",
                 "env_var": "ANTHROPIC_API_KEY",
                 "validation": lambda x: x.startswith("sk-ant-") and len(x) > 20,
                 "critical": True,
             },
             "gemini-api-key": {
                 "description": "Google Gemini API Key",
-                "env_var": "GEMINI_API_KEY", 
+                "env_var": "GEMINI_API_KEY",
                 "validation": lambda x: x.startswith("AIzaSy") and len(x) > 20,
                 "critical": True,
             },
@@ -114,13 +114,13 @@ class ProductionSecretsValidator:
     def get_secret_from_manager(self, secret_id: str) -> Tuple[str, bool, str]:
         """
         Get secret from Secret Manager.
-        
+
         Returns:
             Tuple of (value, success, error_message)
         """
         if not self.client:
             return "", False, "Secret Manager client not available"
-        
+
         try:
             secret_path = f"projects/{self.project_id}/secrets/{secret_id}/versions/latest"
             response = self.client.access_secret_version(name=secret_path)
@@ -144,7 +144,7 @@ class ProductionSecretsValidator:
             "valid": False,
             "error": None,
         }
-        
+
         # Try Secret Manager first
         if self.client:
             value, success, error = self.get_secret_from_manager(secret_id)
@@ -152,7 +152,7 @@ class ProductionSecretsValidator:
                 if config["validation"](value):
                     result.update({
                         "status": "valid",
-                        "source": "secret_manager", 
+                        "source": "secret_manager",
                         "valid": True,
                     })
                     return result
@@ -178,7 +178,7 @@ class ProductionSecretsValidator:
                 return result
             else:
                 result.update({
-                    "status": "invalid_format", 
+                    "status": "invalid_format",
                     "source": "environment",
                     "error": "Environment variable has invalid format",
                 })
@@ -202,12 +202,12 @@ class ProductionSecretsValidator:
         results = []
         critical_missing = 0
         optional_missing = 0
-        
+
         for secret_id, config in self.required_secrets.items():
             print(f"Checking {secret_id}...", end=" ")
             result = self.validate_secret(secret_id, config)
             results.append(result)
-            
+
             if result["valid"]:
                 source_icon = "🔐" if result["source"] == "secret_manager" else "🌍"
                 print(f"✅ {source_icon}")
@@ -225,7 +225,7 @@ class ProductionSecretsValidator:
         valid_secrets = sum(1 for r in results if r["valid"])
         critical_secrets = sum(1 for r in results if r["critical"])
         valid_critical = sum(1 for r in results if r["valid"] and r["critical"])
-        
+
         print("\n" + "=" * 50)
         print("📊 Validation Summary")
         print("=" * 50)
@@ -235,9 +235,9 @@ class ProductionSecretsValidator:
         print(f"Valid Critical:    {valid_critical}")
         print(f"Missing Critical:  {critical_missing}")
         print(f"Missing Optional:  {optional_missing}")
-        
+
         deployment_ready = critical_missing == 0
-        
+
         if deployment_ready:
             print("\n🎉 DEPLOYMENT READY")
             print("All critical secrets are properly configured!")
@@ -247,7 +247,7 @@ class ProductionSecretsValidator:
             print("\nTo fix:")
             print(f"1. Run: python scripts/setup-production-secrets.py")
             print(f"2. Or set missing environment variables")
-            
+
         return {
             "deployment_ready": deployment_ready,
             "total_secrets": total_secrets,
@@ -262,24 +262,24 @@ class ProductionSecretsValidator:
     def generate_deployment_checklist(self) -> str:
         """Generate a deployment checklist."""
         validation_result = self.validate_all_secrets()
-        
+
         checklist = """
 # 🚀 Production Deployment Checklist
 
 ## Secrets Configuration
 """
-        
+
         for result in validation_result["results"]:
             status_icon = "✅" if result["valid"] else "❌"
             priority = "CRITICAL" if result["critical"] else "OPTIONAL"
-            
+
             checklist += f"- [{status_icon}] {result['description']} ({priority})\n"
-            
+
             if not result["valid"]:
                 checklist += f"  - Error: {result['error']}\n"
                 if result["critical"]:
                     checklist += f"  - Action: Set {result['secret_id']} in Secret Manager or {self.required_secrets[result['secret_id']]['env_var']} environment variable\n"
-                
+
         checklist += f"""
 ## Environment Configuration
 - [ ] Set GCP_PROJECT_ID={self.project_id}
@@ -304,63 +304,63 @@ python scripts/test-configuration.py
 - Critical Secrets: {validation_result['valid_critical']}/{validation_result['critical_secrets']}
 - Total Secrets: {validation_result['valid_secrets']}/{validation_result['total_secrets']}
 """
-        
+
         return checklist
 
     def export_environment_template(self) -> str:
         """Export environment variable template."""
         template = "# CareerCopilot Production Environment Variables\n"
         template += "# Copy this file to .env.production and fill in the values\n\n"
-        
+
         template += "# Core Environment\n"
         template += f"GCP_PROJECT_ID={self.project_id}\n"
         template += "ENV=production\n"
         template += "USE_SECRET_MANAGER=true\n\n"
-        
+
         template += "# Optional: Environment Variable Overrides\n"
         template += "# (Secrets will be loaded from Secret Manager if not set here)\n\n"
-        
+
         for secret_id, config in self.required_secrets.items():
             priority = "CRITICAL" if config["critical"] else "OPTIONAL"
             template += f"# {config['description']} ({priority})\n"
             template += f"# {config['env_var']}=your-{secret_id.replace('-', '_')}_value\n\n"
-            
+
         return template
 
 
 def main():
     """Main function."""
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Validate production secrets for CareerCopilot")
     parser.add_argument("--project-id", default="careercopilot-468811",
                        help="GCP Project ID")
-    parser.add_argument("--checklist", action="store_true", 
+    parser.add_argument("--checklist", action="store_true",
                        help="Generate deployment checklist")
     parser.add_argument("--env-template", action="store_true",
                        help="Generate environment template")
     parser.add_argument("--json", action="store_true",
                        help="Output results as JSON")
-    
+
     args = parser.parse_args()
-    
+
     validator = ProductionSecretsValidator(project_id=args.project_id)
-    
+
     if args.checklist:
         checklist = validator.generate_deployment_checklist()
         print(checklist)
         return
-        
+
     if args.env_template:
         template = validator.export_environment_template()
         print(template)
         return
-    
+
     result = validator.validate_all_secrets()
-    
+
     if args.json:
         print(json.dumps(result, indent=2))
-    
+
     sys.exit(0 if result["deployment_ready"] else 1)
 
 

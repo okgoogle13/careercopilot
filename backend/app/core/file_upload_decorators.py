@@ -223,7 +223,12 @@ def require_valid_file_upload(
 
                 # Look for common file parameter names
                 file_param_names = ["file", "upload_file", "document", "attachment"]
-                files_param_names = ["files", "upload_files", "documents", "attachments"]
+                files_param_names = [
+                    "files",
+                    "upload_files",
+                    "documents",
+                    "attachments",
+                ]
 
                 for name in file_param_names:
                     if name in kwargs and isinstance(kwargs[name], UploadFile):

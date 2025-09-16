@@ -135,7 +135,10 @@ class RAGService(BaseAIService):
             for i in range(0, len(texts), self.batch_size):
                 batch = texts[i : i + self.batch_size]
                 batch_embeddings = self.embedding_model.encode(
-                    batch, convert_to_numpy=True, show_progress_bar=False, normalize_embeddings=True
+                    batch,
+                    convert_to_numpy=True,
+                    show_progress_bar=False,
+                    normalize_embeddings=True,
                 )
                 embeddings.extend(batch_embeddings.tolist())
 
@@ -144,7 +147,8 @@ class RAGService(BaseAIService):
         except Exception as e:
             logger.error(f"Error generating embeddings: {str(e)}")
             raise AIError(
-                f"Failed to generate embeddings: {str(e)}", error_type=AIErrorType.EMBEDDING_ERROR
+                f"Failed to generate embeddings: {str(e)}",
+                error_type=AIErrorType.EMBEDDING_ERROR,
             )
 
     async def search_similar(

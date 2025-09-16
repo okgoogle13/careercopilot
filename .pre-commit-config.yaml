@@ -4,7 +4,7 @@
 repos:
   # Python formatting with Black
   - repo: https://github.com/psf/black
-    rev: 23.12.1
+    rev: 25.1.0
     hooks:
       - id: black
         args: [--line-length=100]
@@ -14,7 +14,7 @@ repos:
 
   # Python import sorting with isort (compatible with Black)
   - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+    rev: 6.0.1
     hooks:
       - id: isort
         args: [--profile=black, --line-length=100]
@@ -23,7 +23,7 @@ repos:
 
   # Python linting with flake8
   - repo: https://github.com/pycqa/flake8
-    rev: 7.0.0
+    rev: 7.3.0
     hooks:
       - id: flake8
         args: []
@@ -62,7 +62,7 @@ repos:
 
   # General: Remove trailing whitespace and basic checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v6.0.0
     hooks:
       - id: trailing-whitespace
         exclude: ^(frontend/(node_modules|dist|build)/|backend/__pycache__|\.git/)
@@ -81,7 +81,7 @@ repos:
 
   # Commit message validation
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v4.0.0
+    rev: v9.22.0
     hooks:
       - id: commitlint
         stages: [commit-msg]

@@ -7,7 +7,7 @@
 ## Deployed Resources
 
 ### 1. Vector Search Index
-- **Name**: careercopilot-vector-index  
+- **Name**: careercopilot-vector-index
 - **ID**: `9209634738577342464`
 - **Full Resource Name**: `projects/867091085935/locations/us-central1/indexes/9209634738577342464`
 - **Status**: ✅ Created and Ready
@@ -19,7 +19,7 @@
 
 ### 2. Vector Search Endpoint
 - **Name**: careercopilot-vector-endpoint
-- **ID**: `4168804933782470656`  
+- **ID**: `4168804933782470656`
 - **Full Resource Name**: `projects/867091085935/locations/us-central1/indexEndpoints/4168804933782470656`
 - **Public Domain**: `1129581470.us-central1-867091085935.vdb.vertexai.goog`
 - **Status**: ✅ Created and Ready
@@ -42,7 +42,7 @@ GCP_PROJECT_ID=careercopilot-468811
 GOOGLE_CLOUD_PROJECT=careercopilot-468811
 GOOGLE_CLOUD_REGION=us-central1
 
-# Vector Search Configuration  
+# Vector Search Configuration
 VERTEX_AI_INDEX_ID=9209634738577342464
 VERTEX_AI_INDEX_ENDPOINT=projects/867091085935/locations/us-central1/indexEndpoints/4168804933782470656
 VERTEX_AI_DEPLOYED_INDEX_ID=default_index
@@ -62,7 +62,7 @@ GOOGLE_APPLICATION_CREDENTIALS=/Applications/careercopilot/backend/firebase-prod
 - Includes validation and testing steps
 - Can be reused for additional indexes or environments
 
-### 3. Test Script  
+### 3. Test Script
 **File**: `/Applications/careercopilot/scripts/test-vector-search.py`
 - Comprehensive testing of Vector Search functionality
 - Validates connectivity and basic operations
@@ -107,7 +107,7 @@ gcloud ai operations describe 6424261877760524288 --index-endpoint=4168804933782
 ### 3. Test with Real Data
 Once deployment completes:
 1. Add test documents to the vector store
-2. Verify similarity search functionality  
+2. Verify similarity search functionality
 3. Test performance and accuracy
 
 ### 4. Production Considerations
@@ -134,7 +134,7 @@ Once deployment completes:
 # Check index status
 gcloud ai indexes describe projects/867091085935/locations/us-central1/indexes/9209634738577342464 --region=us-central1
 
-# Check endpoint status  
+# Check endpoint status
 gcloud ai index-endpoints describe projects/867091085935/locations/us-central1/indexEndpoints/4168804933782470656 --region=us-central1
 
 # List all indexes
@@ -171,7 +171,7 @@ Once deployment is complete, update your VectorStore initialization in your appl
 ---
 
 **Deployment completed on**: 2025-09-05
-**Project**: careercopilot-468811  
+**Project**: careercopilot-468811
 **Region**: us-central1
 **Status**: ✅ Fully Deployed and Ready for Use
 

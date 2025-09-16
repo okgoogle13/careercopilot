@@ -227,11 +227,11 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
   };
 
   const removeSkill = (keyword: string) => {
-    setSkills(skills.filter(skill => skill.keyword !== keyword));
+    setSkills(skills.filter((skill) => skill.keyword !== keyword));
   };
 
   const updateSkillLevel = (keyword: string, level: number) => {
-    setSkills(skills.map(skill => (skill.keyword === keyword ? { ...skill, level } : skill)));
+    setSkills(skills.map((skill) => (skill.keyword === keyword ? { ...skill, level } : skill)));
   };
 
   const getSocialIcon = (platform: string) => {
@@ -265,55 +265,55 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     if (skills.length >= 5) strength += 15;
     if (experiences.length >= 1) strength += 15;
     if (education.length >= 1) strength += 10;
-    if (socialLinks.some(link => link.url)) strength += 10;
+    if (socialLinks.some((link) => link.url)) strength += 10;
     return Math.min(100, strength);
   };
 
   return (
     <TooltipProvider>
-      <div className='min-h-screen bg-background p-4'>
-        <div className='max-w-6xl mx-auto'>
+      <div className="min-h-screen bg-background p-4">
+        <div className="max-w-6xl mx-auto">
           {/* Enhanced Header */}
-          <div className='text-center mb-8'>
-            <div className='flex items-center justify-center gap-4 mb-6'>
-              <div className='relative'>
-                <Avatar className='h-20 w-20 border-4 border-white shadow-lg'>
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="relative">
+                <Avatar className="h-20 w-20 border-4 border-white shadow-lg">
                   <AvatarImage src={personalInfo.avatarUrl} />
-                  <AvatarFallback className='text-lg font-semibold bg-gradient-to-br from-blue-500 to-purple-600 text-white'>
+                  <AvatarFallback className="text-lg font-semibold bg-gradient-to-br from-blue-500 to-purple-600 text-white">
                     {personalInfo.fullName
                       .split(' ')
-                      .map(n => n[0])
+                      .map((n) => n[0])
                       .join('')}
                   </AvatarFallback>
                 </Avatar>
                 <Button
-                  size='icon'
-                  variant='outline'
-                  className='absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-white shadow-sm'
+                  size="icon"
+                  variant="outline"
+                  className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-white shadow-sm"
                 >
-                  <Camera className='h-4 w-4' />
+                  <Camera className="h-4 w-4" />
                 </Button>
               </div>
-              <div className='text-left'>
-                <h1 className='text-3xl font-bold text-foreground'>{personalInfo.fullName}</h1>
-                <p className='text-lg text-muted-foreground'>{personalInfo.title}</p>
-                <p className='text-sm text-muted-foreground flex items-center gap-1'>
-                  <MapPin className='h-3 w-3' />
+              <div className="text-left">
+                <h1 className="text-3xl font-bold text-foreground">{personalInfo.fullName}</h1>
+                <p className="text-lg text-muted-foreground">{personalInfo.title}</p>
+                <p className="text-sm text-muted-foreground flex items-center gap-1">
+                  <MapPin className="h-3 w-3" />
                   {personalInfo.location}
                 </p>
               </div>
             </div>
 
             {/* Profile Strength Indicator */}
-            <Card className='p-4 mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200'>
-              <div className='flex items-center justify-between mb-2'>
-                <span className='text-sm font-medium'>Profile Strength</span>
+            <Card className="p-4 mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium">Profile Strength</span>
                 <Badge variant={calculateProfileStrength() >= 80 ? 'default' : 'secondary'}>
                   {calculateProfileStrength()}% Complete
                 </Badge>
               </div>
               <AnimatedProgress value={calculateProfileStrength()} max={100} />
-              <p className='text-xs text-muted-foreground mt-2'>
+              <p className="text-xs text-muted-foreground mt-2">
                 {calculateProfileStrength() >= 90
                   ? 'Excellent! Your profile is highly optimized.'
                   : calculateProfileStrength() >= 70
@@ -324,142 +324,142 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           </div>
 
           {/* Enhanced Navigation */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className='w-full'>
-            <TabsList className='grid w-full grid-cols-5 mb-8'>
-              <TabsTrigger value='basic' className='flex items-center gap-2'>
-                <User className='h-4 w-4' />
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-5 mb-8">
+              <TabsTrigger value="basic" className="flex items-center gap-2">
+                <User className="h-4 w-4" />
                 Basic Info
               </TabsTrigger>
-              <TabsTrigger value='experience' className='flex items-center gap-2'>
-                <Briefcase className='h-4 w-4' />
+              <TabsTrigger value="experience" className="flex items-center gap-2">
+                <Briefcase className="h-4 w-4" />
                 Experience
               </TabsTrigger>
-              <TabsTrigger value='skills' className='flex items-center gap-2'>
-                <Award className='h-4 w-4' />
+              <TabsTrigger value="skills" className="flex items-center gap-2">
+                <Award className="h-4 w-4" />
                 Skills
               </TabsTrigger>
-              <TabsTrigger value='social' className='flex items-center gap-2'>
-                <Globe className='h-4 w-4' />
+              <TabsTrigger value="social" className="flex items-center gap-2">
+                <Globe className="h-4 w-4" />
                 Social & Links
               </TabsTrigger>
-              <TabsTrigger value='settings' className='flex items-center gap-2'>
-                <Settings className='h-4 w-4' />
+              <TabsTrigger value="settings" className="flex items-center gap-2">
+                <Settings className="h-4 w-4" />
                 Privacy
               </TabsTrigger>
             </TabsList>
 
             {/* Basic Information Tab */}
-            <TabsContent value='basic' className='space-y-6'>
-              <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
+            <TabsContent value="basic" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Personal Information */}
-                <Card className='p-6'>
-                  <div className='flex items-center gap-3 mb-6'>
-                    <div className='p-2 bg-blue-100 rounded-lg'>
-                      <User className='w-5 h-5 text-blue-600' />
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-blue-100 rounded-lg">
+                      <User className="w-5 h-5 text-blue-600" />
                     </div>
-                    <h3 className='font-semibold text-lg'>Personal Details</h3>
+                    <h3 className="font-semibold text-lg">Personal Details</h3>
                   </div>
 
-                  <div className='space-y-4'>
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className='text-sm font-medium mb-2 block'>Full Name *</label>
+                        <label className="text-sm font-medium mb-2 block">Full Name *</label>
                         <Input
                           value={personalInfo.fullName}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPersonalInfo({ ...personalInfo, fullName: e.target.value })
                           }
-                          placeholder='Enter full name'
+                          placeholder="Enter full name"
                         />
                       </div>
                       <div>
-                        <label className='text-sm font-medium mb-2 block'>Professional Title</label>
+                        <label className="text-sm font-medium mb-2 block">Professional Title</label>
                         <Input
                           value={personalInfo.title}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPersonalInfo({ ...personalInfo, title: e.target.value })
                           }
-                          placeholder='e.g., Senior Developer'
+                          placeholder="e.g., Senior Developer"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className='text-sm font-medium mb-2 block'>Professional Tagline</label>
+                      <label className="text-sm font-medium mb-2 block">Professional Tagline</label>
                       <Input
                         value={personalInfo.tagline}
-                        onChange={e =>
+                        onChange={(e) =>
                           setPersonalInfo({ ...personalInfo, tagline: e.target.value })
                         }
-                        placeholder='A brief, compelling description'
+                        placeholder="A brief, compelling description"
                       />
                     </div>
 
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className='text-sm font-medium mb-2 block'>Email *</label>
+                        <label className="text-sm font-medium mb-2 block">Email *</label>
                         <Input
-                          type='email'
+                          type="email"
                           value={personalInfo.email}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPersonalInfo({ ...personalInfo, email: e.target.value })
                           }
-                          placeholder='professional@email.com'
+                          placeholder="professional@email.com"
                         />
                       </div>
                       <div>
-                        <label className='text-sm font-medium mb-2 block'>Phone</label>
+                        <label className="text-sm font-medium mb-2 block">Phone</label>
                         <Input
                           value={personalInfo.phone}
-                          onChange={e =>
+                          onChange={(e) =>
                             setPersonalInfo({ ...personalInfo, phone: e.target.value })
                           }
-                          placeholder='+1 (555) 123-4567'
+                          placeholder="+1 (555) 123-4567"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className='text-sm font-medium mb-2 block'>Location</label>
+                      <label className="text-sm font-medium mb-2 block">Location</label>
                       <Input
                         value={personalInfo.location}
-                        onChange={e =>
+                        onChange={(e) =>
                           setPersonalInfo({ ...personalInfo, location: e.target.value })
                         }
-                        placeholder='City, State/Province, Country'
+                        placeholder="City, State/Province, Country"
                       />
                     </div>
                   </div>
                 </Card>
 
                 {/* Professional Summary */}
-                <Card className='p-6'>
-                  <div className='flex items-center gap-3 mb-6'>
-                    <div className='p-2 bg-green-100 rounded-lg'>
-                      <Briefcase className='w-5 h-5 text-green-600' />
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-green-100 rounded-lg">
+                      <Briefcase className="w-5 h-5 text-green-600" />
                     </div>
-                    <h3 className='font-semibold text-lg'>Professional Summary</h3>
+                    <h3 className="font-semibold text-lg">Professional Summary</h3>
                   </div>
 
-                  <div className='space-y-4'>
-                    <div className='flex gap-2'>
+                  <div className="space-y-4">
+                    <div className="flex gap-2">
                       {isGenerating ? (
-                        <AIProcessingLoading message='Generating AI summary...' />
+                        <AIProcessingLoading message="Generating AI summary..." />
                       ) : (
                         <AnimatedButton
-                          variant='outline'
-                          animation='shimmer'
-                          className='flex-1'
+                          variant="outline"
+                          animation="shimmer"
+                          className="flex-1"
                           onClick={handleGenerateSummary}
                         >
-                          <Sparkles className='mr-2 h-4 w-4' />
+                          <Sparkles className="mr-2 h-4 w-4" />
                           AI Generate
                         </AnimatedButton>
                       )}
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant='outline' size='icon'>
-                            <Target className='h-4 w-4' />
+                          <Button variant="outline" size="icon">
+                            <Target className="h-4 w-4" />
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>Get personalized tips for your summary</TooltipContent>
@@ -468,26 +468,26 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                     <Textarea
                       value={summary}
-                      onChange={e => setSummary(e.target.value)}
-                      placeholder='Write a compelling professional summary that highlights your key achievements, skills, and career objectives...'
-                      className='min-h-[150px] resize-none'
+                      onChange={(e) => setSummary(e.target.value)}
+                      placeholder="Write a compelling professional summary that highlights your key achievements, skills, and career objectives..."
+                      className="min-h-[150px] resize-none"
                     />
 
-                    <div className='text-xs text-muted-foreground'>
+                    <div className="text-xs text-muted-foreground">
                       <span className={summary.length > 300 ? 'text-amber-600' : ''}>
                         {summary.length}/300 characters
                       </span>
                       {summary.length > 0 && (
-                        <div className='mt-1 flex gap-4'>
+                        <div className="mt-1 flex gap-4">
                           <span>Readability: Good</span>
                           <span>
                             Keywords:{' '}
                             {
                               summary
                                 .split(' ')
-                                .filter(word =>
+                                .filter((word) =>
                                   ['experience', 'skilled', 'professional', 'expertise'].some(
-                                    keyword => word.toLowerCase().includes(keyword.toLowerCase())
+                                    (keyword) => word.toLowerCase().includes(keyword.toLowerCase())
                                   )
                                 ).length
                             }
@@ -501,107 +501,107 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Skills Tab */}
-            <TabsContent value='skills' className='space-y-6'>
-              <Card className='p-6'>
-                <div className='flex items-center justify-between mb-6'>
-                  <div className='flex items-center gap-3'>
-                    <div className='p-2 bg-purple-100 rounded-lg'>
-                      <Award className='w-5 h-5 text-purple-600' />
+            <TabsContent value="skills" className="space-y-6">
+              <Card className="p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-purple-100 rounded-lg">
+                      <Award className="w-5 h-5 text-purple-600" />
                     </div>
-                    <h3 className='font-semibold text-lg'>Skills & Expertise</h3>
+                    <h3 className="font-semibold text-lg">Skills & Expertise</h3>
                   </div>
-                  <Button variant='outline' size='sm'>
-                    <Plus className='w-4 h-4 mr-2' />
+                  <Button variant="outline" size="sm">
+                    <Plus className="w-4 h-4 mr-2" />
                     Import from Resume
                   </Button>
                 </div>
 
                 {/* Add New Skill */}
-                <div className='flex gap-2 mb-6'>
+                <div className="flex gap-2 mb-6">
                   <Input
-                    placeholder='Add a skill (e.g., JavaScript, Project Management)'
+                    placeholder="Add a skill (e.g., JavaScript, Project Management)"
                     value={newSkill}
-                    onChange={e => setNewSkill(e.target.value)}
-                    onKeyDown={e => {
+                    onChange={(e) => setNewSkill(e.target.value)}
+                    onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         e.preventDefault();
                         addSkill();
                       }
                     }}
-                    className='flex-1'
+                    className="flex-1"
                   />
                   <Select>
-                    <SelectTrigger className='w-32'>
-                      <SelectValue placeholder='Category' />
+                    <SelectTrigger className="w-32">
+                      <SelectValue placeholder="Category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value='technical'>Technical</SelectItem>
-                      <SelectItem value='soft'>Soft Skills</SelectItem>
-                      <SelectItem value='industry'>Industry</SelectItem>
-                      <SelectItem value='language'>Language</SelectItem>
+                      <SelectItem value="technical">Technical</SelectItem>
+                      <SelectItem value="soft">Soft Skills</SelectItem>
+                      <SelectItem value="industry">Industry</SelectItem>
+                      <SelectItem value="language">Language</SelectItem>
                     </SelectContent>
                   </Select>
                   <Button onClick={addSkill}>
-                    <Plus className='h-4 w-4' />
+                    <Plus className="h-4 w-4" />
                   </Button>
                 </div>
 
                 {/* Skills Grid */}
-                <div className='space-y-6'>
-                  {['technical', 'soft', 'industry', 'language'].map(category => {
-                    const categorySkills = skills.filter(skill => skill.category === category);
+                <div className="space-y-6">
+                  {['technical', 'soft', 'industry', 'language'].map((category) => {
+                    const categorySkills = skills.filter((skill) => skill.category === category);
                     if (categorySkills.length === 0) return null;
 
                     return (
                       <div key={category}>
-                        <h4 className='font-medium text-sm uppercase tracking-wide text-muted-foreground mb-3'>
+                        <h4 className="font-medium text-sm uppercase tracking-wide text-muted-foreground mb-3">
                           {category} Skills ({categorySkills.length})
                         </h4>
-                        <div className='grid gap-4'>
-                          {categorySkills.map(skill => (
-                            <Card key={skill.keyword} className='p-4 border border-gray-200'>
-                              <div className='flex items-center justify-between mb-3'>
-                                <div className='flex items-center gap-3'>
+                        <div className="grid gap-4">
+                          {categorySkills.map((skill) => (
+                            <Card key={skill.keyword} className="p-4 border border-gray-200">
+                              <div className="flex items-center justify-between mb-3">
+                                <div className="flex items-center gap-3">
                                   <Badge className={getCategoryColor(skill.category)}>
                                     {skill.keyword}
                                   </Badge>
                                   {skill.yearsOfExperience && (
-                                    <span className='text-xs text-muted-foreground'>
+                                    <span className="text-xs text-muted-foreground">
                                       {skill.yearsOfExperience}+ years
                                     </span>
                                   )}
                                 </div>
-                                <div className='flex items-center gap-2'>
-                                  <span className='text-xs text-muted-foreground'>
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs text-muted-foreground">
                                     Level {skill.level}/10
                                   </span>
                                   <Button
-                                    variant='ghost'
-                                    size='icon'
-                                    className='h-6 w-6'
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-6 w-6"
                                     onClick={() => removeSkill(skill.keyword)}
                                   >
-                                    <X className='h-3 w-3' />
+                                    <X className="h-3 w-3" />
                                   </Button>
                                 </div>
                               </div>
 
-                              <div className='space-y-2'>
-                                <div className='flex items-center gap-2'>
-                                  <span className='text-xs text-muted-foreground w-16'>
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-xs text-muted-foreground w-16">
                                     Proficiency:
                                   </span>
                                   <Slider
                                     value={[skill.level]}
-                                    onValueChange={value =>
+                                    onValueChange={(value) =>
                                       updateSkillLevel(skill.keyword, value[0])
                                     }
                                     max={10}
                                     step={1}
-                                    className='flex-1'
+                                    className="flex-1"
                                   />
                                 </div>
-                                <Progress value={skill.level * 10} className='h-2' />
+                                <Progress value={skill.level * 10} className="h-2" />
                               </div>
                             </Card>
                           ))}
@@ -612,26 +612,26 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 </div>
 
                 {/* Skill Suggestions */}
-                <Card className='p-4 bg-blue-50 border-blue-200'>
-                  <div className='flex items-center gap-2 mb-3'>
-                    <Sparkles className='w-4 h-4 text-blue-600' />
-                    <h4 className='font-medium text-blue-900'>AI Skill Suggestions</h4>
+                <Card className="p-4 bg-blue-50 border-blue-200">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-4 h-4 text-blue-600" />
+                    <h4 className="font-medium text-blue-900">AI Skill Suggestions</h4>
                   </div>
-                  <div className='flex flex-wrap gap-2'>
+                  <div className="flex flex-wrap gap-2">
                     {[
                       'Team Leadership',
                       'Data Analysis',
                       'Customer Service',
                       'Problem Solving',
-                    ].map(suggestion => (
+                    ].map((suggestion) => (
                       <Button
                         key={suggestion}
-                        variant='outline'
-                        size='sm'
-                        className='text-xs border-blue-300 hover:bg-blue-100'
+                        variant="outline"
+                        size="sm"
+                        className="text-xs border-blue-300 hover:bg-blue-100"
                         onClick={() => setNewSkill(suggestion)}
                       >
-                        <Plus className='w-3 h-3 mr-1' />
+                        <Plus className="w-3 h-3 mr-1" />
                         {suggestion}
                       </Button>
                     ))}
@@ -641,25 +641,25 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Social & Links Tab */}
-            <TabsContent value='social' className='space-y-6'>
-              <Card className='p-6'>
-                <div className='flex items-center gap-3 mb-6'>
-                  <div className='p-2 bg-indigo-100 rounded-lg'>
-                    <Globe className='w-5 h-5 text-indigo-600' />
+            <TabsContent value="social" className="space-y-6">
+              <Card className="p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-indigo-100 rounded-lg">
+                    <Globe className="w-5 h-5 text-indigo-600" />
                   </div>
-                  <h3 className='font-semibold text-lg'>Social Links & Online Presence</h3>
+                  <h3 className="font-semibold text-lg">Social Links & Online Presence</h3>
                 </div>
 
-                <div className='space-y-4'>
+                <div className="space-y-4">
                   {socialLinks.map((link, index) => {
                     const Icon = getSocialIcon(link.platform);
                     return (
-                      <div key={index} className='flex items-center gap-3 p-3 border rounded-lg'>
-                        <Icon className='w-5 h-5 text-muted-foreground' />
-                        <div className='flex-1'>
+                      <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
+                        <Icon className="w-5 h-5 text-muted-foreground" />
+                        <div className="flex-1">
                           <Input
                             value={link.url}
-                            onChange={e => {
+                            onChange={(e) => {
                               const newLinks = [...socialLinks];
                               newLinks[index].url = e.target.value;
                               setSocialLinks(newLinks);
@@ -670,21 +670,21 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         {link.verified && (
                           <Tooltip>
                             <TooltipTrigger>
-                              <CheckCircle className='w-5 h-5 text-green-500' />
+                              <CheckCircle className="w-5 h-5 text-green-500" />
                             </TooltipTrigger>
                             <TooltipContent>Verified profile</TooltipContent>
                           </Tooltip>
                         )}
-                        <Button variant='ghost' size='icon' className='text-red-500'>
-                          <X className='w-4 h-4' />
+                        <Button variant="ghost" size="icon" className="text-red-500">
+                          <X className="w-4 h-4" />
                         </Button>
                       </div>
                     );
                   })}
 
                   <Button
-                    variant='outline'
-                    className='w-full'
+                    variant="outline"
+                    className="w-full"
                     onClick={() =>
                       setSocialLinks([
                         ...socialLinks,
@@ -692,7 +692,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       ])
                     }
                   >
-                    <Plus className='w-4 h-4 mr-2' />
+                    <Plus className="w-4 h-4 mr-2" />
                     Add Social Link
                   </Button>
                 </div>
@@ -700,19 +700,19 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Privacy Settings Tab */}
-            <TabsContent value='settings' className='space-y-6'>
-              <Card className='p-6'>
-                <div className='flex items-center gap-3 mb-6'>
-                  <div className='p-2 bg-red-100 rounded-lg'>
-                    <Settings className='w-5 h-5 text-red-600' />
+            <TabsContent value="settings" className="space-y-6">
+              <Card className="p-6">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="p-2 bg-red-100 rounded-lg">
+                    <Settings className="w-5 h-5 text-red-600" />
                   </div>
-                  <h3 className='font-semibold text-lg'>Privacy & Preferences</h3>
+                  <h3 className="font-semibold text-lg">Privacy & Preferences</h3>
                 </div>
 
-                <div className='space-y-6'>
+                <div className="space-y-6">
                   {/* Profile Visibility */}
-                  <div className='space-y-3'>
-                    <label className='text-sm font-medium'>Profile Visibility</label>
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium">Profile Visibility</label>
                     <Select
                       value={profileSettings.privacy}
                       onValueChange={(value: any) =>
@@ -723,43 +723,43 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value='public'>Public - Visible to everyone</SelectItem>
-                        <SelectItem value='connections'>Connections Only</SelectItem>
-                        <SelectItem value='private'>Private - Only me</SelectItem>
+                        <SelectItem value="public">Public - Visible to everyone</SelectItem>
+                        <SelectItem value="connections">Connections Only</SelectItem>
+                        <SelectItem value="private">Private - Only me</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   {/* Work Preferences */}
                   <Separator />
-                  <div className='space-y-4'>
-                    <h4 className='font-medium'>Work Preferences</h4>
+                  <div className="space-y-4">
+                    <h4 className="font-medium">Work Preferences</h4>
 
-                    <div className='flex items-center justify-between'>
+                    <div className="flex items-center justify-between">
                       <div>
-                        <p className='font-medium text-sm'>Open to Opportunities</p>
-                        <p className='text-xs text-muted-foreground'>
+                        <p className="font-medium text-sm">Open to Opportunities</p>
+                        <p className="text-xs text-muted-foreground">
                           Let recruiters know you're available
                         </p>
                       </div>
                       <Switch
                         checked={profileSettings.openToOpportunities}
-                        onCheckedChange={checked =>
+                        onCheckedChange={(checked) =>
                           setProfileSettings({ ...profileSettings, openToOpportunities: checked })
                         }
                       />
                     </div>
 
-                    <div className='flex items-center justify-between'>
+                    <div className="flex items-center justify-between">
                       <div>
-                        <p className='font-medium text-sm'>Show Location</p>
-                        <p className='text-xs text-muted-foreground'>
+                        <p className="font-medium text-sm">Show Location</p>
+                        <p className="text-xs text-muted-foreground">
                           Display your location publicly
                         </p>
                       </div>
                       <Switch
                         checked={profileSettings.showLocation}
-                        onCheckedChange={checked =>
+                        onCheckedChange={(checked) =>
                           setProfileSettings({ ...profileSettings, showLocation: checked })
                         }
                       />
@@ -771,29 +771,29 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           </Tabs>
 
           {/* Enhanced Actions */}
-          <div className='flex justify-between items-center mt-8 pt-6 border-t'>
-            <div className='flex items-center gap-4'>
-              <Button variant='outline' onClick={onBack} size='lg'>
-                <ArrowLeft className='w-4 h-4 mr-2' />
+          <div className="flex justify-between items-center mt-8 pt-6 border-t">
+            <div className="flex items-center gap-4">
+              <Button variant="outline" onClick={onBack} size="lg">
+                <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
               </Button>
-              <div className='text-sm text-muted-foreground'>
-                <CheckCircle className='w-4 h-4 inline mr-1 text-green-500' />
+              <div className="text-sm text-muted-foreground">
+                <CheckCircle className="w-4 h-4 inline mr-1 text-green-500" />
                 Auto-saved 2 minutes ago
               </div>
             </div>
 
-            <div className='flex gap-2'>
-              <Button variant='outline' size='lg'>
-                <Eye className='w-4 h-4 mr-2' />
+            <div className="flex gap-2">
+              <Button variant="outline" size="lg">
+                <Eye className="w-4 h-4 mr-2" />
                 Preview
               </Button>
               <Button
                 onClick={onNext}
-                size='lg'
-                className='bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
-                <Star className='w-4 h-4 mr-2' />
+                <Star className="w-4 h-4 mr-2" />
                 Save Profile & Continue
               </Button>
             </div>

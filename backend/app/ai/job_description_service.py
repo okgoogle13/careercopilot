@@ -22,7 +22,7 @@ logger = logging.getLogger(__name__)
 
 class SalaryRange(BaseModel):
     """Salary range information."""
-    
+
     min: Optional[int] = None
     max: Optional[int] = None
     currency: str = "USD"
@@ -86,7 +86,7 @@ class JobDescriptionAnalysisService(BaseAIService):
         """
         super().__init__(config or {})
         self.config = {
-            "model": config.get("model", settings.ai_model) if config else settings.ai_model,
+            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
             "max_tokens": (
                 config.get("max_tokens", settings.ai_max_tokens)
                 if config
@@ -110,7 +110,9 @@ class JobDescriptionAnalysisService(BaseAIService):
         self.version = "2.0.0"
         self.required_params = ["job_description_text"]
 
-    async def analyze_job_description(self, job_description_text: str) -> JobDescriptionAnalysisResult:
+    async def analyze_job_description(
+        self, job_description_text: str
+    ) -> JobDescriptionAnalysisResult:
         """Analyze a job description and return structured results.
 
         This is the main entry point for job description analysis. It performs:
@@ -145,8 +147,8 @@ class JobDescriptionAnalysisService(BaseAIService):
             clean_text = self._sanitize_job_description_text(job_description_text)
 
             # Use generic document processing
-            from app.core.document_processing import process_document, PromptTemplates
-            
+            from app.core.document_processing import PromptTemplates, process_document
+
             result = await process_document(
                 file_content=clean_text,
                 prompt_template=PromptTemplates.JOB_DESCRIPTION_ANALYSIS,
@@ -191,7 +193,9 @@ class JobDescriptionAnalysisService(BaseAIService):
             raw_data={
                 "error": "Analysis not available",
                 "input_sample": (
-                    job_description_text[:200] + "..." if len(job_description_text) > 200 else job_description_text
+                    job_description_text[:200] + "..."
+                    if len(job_description_text) > 200
+                    else job_description_text
                 ),
             },
         )
@@ -244,20 +248,20 @@ if __name__ == "__main__":
         result = await service.analyze_job_description(
             """
             Senior Software Engineer - AI/ML Team
-            
+
             TechCorp Inc. is looking for a Senior Software Engineer to join our AI/ML team.
-            
+
             Requirements:
             - Bachelor's degree in Computer Science or related field
             - 5+ years of software development experience
             - Strong proficiency in Python and machine learning frameworks
             - Experience with cloud platforms (AWS, GCP, Azure)
-            
+
             Responsibilities:
             - Develop and maintain AI/ML models in production
             - Collaborate with cross-functional teams
             - Optimize model performance and scalability
-            
+
             Benefits:
             - Competitive salary: $120,000 - $160,000
             - Health, dental, and vision insurance

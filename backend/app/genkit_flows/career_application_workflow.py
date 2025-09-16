@@ -157,7 +157,7 @@ def generate_application_package(
         sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
         sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile)
 
-        print(f"Starting application package generation...")
+        print("Starting application package generation...")
 
         # Step 1: Resume Intelligence Analysis
         print("Step 1: Analyzing resume and generating intelligence report...")
@@ -276,7 +276,7 @@ def generate_application_package(
         result.success = len(result.components_generated) >= 2  # At least 2 components must succeed
         result.processing_time_seconds = (datetime.now() - start_time).total_seconds()
 
-        print(f"Application package generation completed:")
+        print("Application package generation completed:")
         print(f"- Success: {result.success}")
         print(f"- Components generated: {result.components_generated}")
         print(f"- Processing time: {result.processing_time_seconds:.2f}s")
@@ -293,7 +293,9 @@ def generate_application_package(
 
 
 def _generate_tailored_resume(
-    job_description: str, user_profile: Dict, resume_intelligence: ResumeIntelligenceReport
+    job_description: str,
+    user_profile: Dict,
+    resume_intelligence: ResumeIntelligenceReport,
 ) -> TailoredResumeResult:
     """Generate a tailored resume optimized for the specific job."""
 
@@ -382,9 +384,7 @@ def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCR
     coverage = (
         "full"
         if len(generated_responses) == total_criteria
-        else "partial"
-        if len(generated_responses) > 0
-        else "minimal"
+        else "partial" if len(generated_responses) > 0 else "minimal"
     )
 
     return KSCResponsesResult(

@@ -44,7 +44,7 @@ def test_genkit_init():
         # Import the init function
         sys.path.append('/Applications/careercopilot')
         from backend.app.core.genkit_init import init_genkit
-        
+
         # Test initialization
         result = init_genkit()
         if result:
@@ -52,7 +52,7 @@ def test_genkit_init():
         else:
             print("❌ Genkit initialization failed")
         return result
-        
+
     except Exception as e:
         print(f"❌ Genkit initialization test failed: {e}")
         return False
@@ -61,7 +61,7 @@ def test_environment():
     """Test environment variables"""
     required_vars = ['GEMINI_API_KEY', 'GOOGLE_CLOUD_PROJECT', 'ENABLE_GENKIT_FLOWS']
     all_good = True
-    
+
     for var in required_vars:
         value = os.getenv(var)
         if value:
@@ -72,35 +72,35 @@ def test_environment():
         else:
             print(f"❌ {var}: Not set")
             all_good = False
-    
+
     return all_good
 
 def main():
     print("🧪 Simple Genkit Test")
     print("=" * 30)
-    
+
     # Load environment
     load_env()
-    
+
     # Test environment
     print("\n📋 Environment Variables:")
     env_ok = test_environment()
-    
+
     # Test imports
     print("\n📦 Import Tests:")
     genkit_ok = test_genkit_import()
     plugin_ok = test_google_ai_plugin()
-    
+
     # Test initialization
     print("\n🔧 Initialization Test:")
     init_ok = test_genkit_init()
-    
+
     # Summary
     print("\n" + "=" * 30)
     all_tests = [env_ok, genkit_ok, plugin_ok, init_ok]
     passed = sum(all_tests)
     total = len(all_tests)
-    
+
     if passed == total:
         print(f"🎉 All tests passed! ({passed}/{total})")
         print("✅ Genkit is ready for use!")

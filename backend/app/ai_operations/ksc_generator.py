@@ -12,22 +12,24 @@ from typing import Any, Dict, List, Optional
 
 from app.core.ai_client import AIRequest, get_ai_client
 from app.core.ai_error_handling import AIError, AIErrorType
-from app.core.cache_decorators import cached_ai_operation
-from app.core.input_validation import InputSanitizer, InputValidationError
-from app.core.monitoring import monitor_performance
-from app.core.prompt_service import format_prompt, get_system_prompt, get_prompt_service
+from app.core.ai_flow_integration import extract_validated_data
 
 # Import the new validation utilities
 from app.core.ai_response_validation import (
     AIResponseValidator,
-    KSCResponseComplete,
-    STARResponse as ValidatedSTARResponse,
-    KSCAnalysis,
     ExperienceSelection,
-    ValidationResult,
-    default_validator
+    KSCAnalysis,
+    KSCResponseComplete,
 )
-from app.core.ai_flow_integration import extract_validated_data
+from app.core.ai_response_validation import STARResponse as ValidatedSTARResponse
+from app.core.ai_response_validation import (
+    ValidationResult,
+    default_validator,
+)
+from app.core.cache_decorators import cached_ai_operation
+from app.core.input_validation import InputSanitizer, InputValidationError
+from app.core.monitoring import monitor_performance
+from app.core.prompt_service import format_prompt, get_prompt_service, get_system_prompt
 
 logger = logging.getLogger(__name__)
 
@@ -124,7 +126,7 @@ class KSCGenerator:
                 ksc_statement=sanitized_ksc.sanitized_content,
                 user_profile=json.dumps(sanitized_profile, indent=2),
                 focus_achievements=achievements_context,
-                length_instruction=length_instruction
+                length_instruction=length_instruction,
             )
             request = AIRequest(
                 prompt=prompt,
@@ -141,47 +143,65 @@ class KSCGenerator:
             fallback_data = {
                 "ksc_analysis": {
                     "ksc_interpretation": "Analysis temporarily unavailable due to processing limitations.",
-                    "key_competencies": ["Communication", "Problem-solving", "Leadership"],
-                    "success_factors": ["Specific examples", "Quantifiable results", "Clear structure"]
+                    "key_competencies": [
+                        "Communication",
+                        "Problem-solving",
+                        "Leadership",
+                    ],
+                    "success_factors": [
+                        "Specific examples",
+                        "Quantifiable results",
+                        "Clear structure",
+                    ],
                 },
                 "experience_selection": {
                     "chosen_experience": "Unable to select specific experience from profile data.",
                     "relevance_score": 50.0,
                     "selection_rationale": "Selection process temporarily unavailable.",
-                    "alternative_experiences": []
+                    "alternative_experiences": [],
                 },
                 "star_response": {
                     "situation": "Unable to analyze specific situation due to processing limitations.",
                     "task": "Could not identify specific task requirements from available data.",
                     "action": "Unable to determine specific actions from the provided information.",
-                    "result": "Could not extract measurable results. Please provide more detailed information."
-                }
+                    "result": "Could not extract measurable results. Please provide more detailed information.",
+                },
             }
-            
+
             # Validate AI response using the new validation utility
             validation_result = default_validator.validate_response(
-                response.content.strip(),
-                "ksc_complete",
-                fallback_data
+                response.content.strip(), "ksc_complete", fallback_data
             )
-            
+
             if not validation_result.is_valid and not validation_result.parsed_data:
                 raise AIError(
                     message=f"AI response validation failed: {validation_result.error_message}",
                     error_type=AIErrorType.INVALID_REQUEST,
-                    original_error=Exception(validation_result.error_message)
+                    original_error=Exception(validation_result.error_message),
                 )
-            
+
             # Extract validated data
             validated_response = validation_result.parsed_data
-            
+
             # Convert to dictionary format for backward compatibility
             parsed_result = {
-                "ksc_analysis": validated_response.ksc_analysis.dict() if hasattr(validated_response.ksc_analysis, 'dict') else validated_response.ksc_analysis,
-                "experience_selection": validated_response.experience_selection.dict() if hasattr(validated_response.experience_selection, 'dict') else validated_response.experience_selection,
-                "star_response": validated_response.star_response.dict() if hasattr(validated_response.star_response, 'dict') else validated_response.star_response,
-                "response_enhancement": getattr(validated_response, 'response_enhancement', None),
-                "interview_preparation": getattr(validated_response, 'interview_preparation', None)
+                "ksc_analysis": (
+                    validated_response.ksc_analysis.dict()
+                    if hasattr(validated_response.ksc_analysis, "dict")
+                    else validated_response.ksc_analysis
+                ),
+                "experience_selection": (
+                    validated_response.experience_selection.dict()
+                    if hasattr(validated_response.experience_selection, "dict")
+                    else validated_response.experience_selection
+                ),
+                "star_response": (
+                    validated_response.star_response.dict()
+                    if hasattr(validated_response.star_response, "dict")
+                    else validated_response.star_response
+                ),
+                "response_enhancement": getattr(validated_response, "response_enhancement", None),
+                "interview_preparation": getattr(validated_response, "interview_preparation", None),
             }
 
             # Add metadata including validation info
@@ -197,16 +217,16 @@ class KSCGenerator:
                 # Validation metadata
                 "validation_successful": validation_result.is_valid,
                 "validation_warnings": validation_result.validation_warnings,
-                "fallback_used": validation_result.metadata.get("fallback_used", False)
+                "fallback_used": validation_result.metadata.get("fallback_used", False),
             }
 
             # Extract relevance score safely from validated data
             relevance_score = 0
-            if hasattr(validated_response.experience_selection, 'relevance_score'):
+            if hasattr(validated_response.experience_selection, "relevance_score"):
                 relevance_score = validated_response.experience_selection.relevance_score
             elif isinstance(parsed_result.get("experience_selection"), dict):
                 relevance_score = parsed_result["experience_selection"].get("relevance_score", 0)
-            
+
             logger.info(
                 f"KSC STAR response generated for user {user_id}",
                 extra={
@@ -216,7 +236,7 @@ class KSCGenerator:
                     "cached": response.cached,
                     "relevance_score": relevance_score,
                     "validation_successful": validation_result.is_valid,
-                    "fallback_used": validation_result.metadata.get("fallback_used", False)
+                    "fallback_used": validation_result.metadata.get("fallback_used", False),
                 },
             )
 

@@ -162,7 +162,8 @@ class DocumentProcessor(BaseAIService):
         except Exception as e:
             logger.error(f"PDF processing failed: {str(e)}")
             raise AIError(
-                f"Failed to process PDF: {str(e)}", error_type=AIErrorType.DOCUMENT_PROCESSING_ERROR
+                f"Failed to process PDF: {str(e)}",
+                error_type=AIErrorType.DOCUMENT_PROCESSING_ERROR,
             )
 
     async def _process_text(self, text: str, metadata: Dict[str, str]) -> List[DocumentChunk]:

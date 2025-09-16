@@ -171,7 +171,7 @@ def analyze_resume_comprehensive(
         prompt = format_prompt(
             "comprehensive_resume_analysis",
             resume_content=sanitized_content.sanitized_content,
-            target_industry=target_industry or "General analysis"
+            target_industry=target_industry or "General analysis",
         )
 
         response = gemini_pro.generate(
@@ -216,7 +216,9 @@ def analyze_career_progression(
         prompt = format_prompt(
             "career_progression_analysis",
             resume_content=sanitized_content.sanitized_content,
-            career_goals=sanitized_goals.sanitized_content if sanitized_goals else "Not specified"
+            career_goals=(
+                sanitized_goals.sanitized_content if sanitized_goals else "Not specified"
+            ),
         )
 
         response = gemini_pro.generate(

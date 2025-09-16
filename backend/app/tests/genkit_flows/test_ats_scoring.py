@@ -290,7 +290,10 @@ class TestAtsScoring:
             mock_ai_handler.execute_ai_operation.side_effect = [
                 mock_job_requirements,
                 mock_resume_entities,
-                Mock(similarityScore=90, explanation="Excellent match with profile keywords"),
+                Mock(
+                    similarityScore=90,
+                    explanation="Excellent match with profile keywords",
+                ),
                 [],
             ]
 

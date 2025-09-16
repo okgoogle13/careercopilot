@@ -10,14 +10,12 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
-
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "explicit",
     "source.sortImports": "explicit",
     "source.fixAll.stylelint": "explicit"
   },
-
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
@@ -26,7 +24,6 @@
       "source.organizeImports": "explicit"
     }
   },
-
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
@@ -35,18 +32,14 @@
       "source.organizeImports": "explicit"
     }
   },
-
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
-
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter",
     "editor.formatOnSave": true,
@@ -54,39 +47,35 @@
       "source.organizeImports": "explicit"
     }
   },
-
-  "black-formatter.args": ["--line-length=100"],
+  "black-formatter.args": [
+    "--line-length=100"
+  ],
   "black-formatter.importStrategy": "useBundled",
-
-  "isort.args": ["--profile=black", "--line-length=100"],
+  "isort.args": [
+    "--profile=black",
+    "--line-length=100"
+  ],
   "isort.importStrategy": "useBundled",
-
   "flake8.args": [
     "--max-line-length=100",
     "--extend-ignore=E203,W503,E501"
   ],
   "flake8.importStrategy": "useBundled",
-
   "python.defaultInterpreterPath": "./backend/.venv/bin/python",
   "python.terminal.activateEnvironment": true,
-
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
-
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.wordWrap": "on"
   },
-
   "[yaml]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -101,21 +90,20 @@
   "eslint.run": "onSave",
   "eslint.autoFixOnSave": true,
   "eslint.format.enable": true,
-
   "prettier.singleQuote": true,
   "prettier.semi": false,
   "prettier.trailingComma": "es5",
   "prettier.printWidth": 100,
   "prettier.tabWidth": 2,
   "prettier.useTabs": false,
-
-  "editor.rulers": [100],
+  "editor.rulers": [
+    100
+  ],
   "editor.wordWrap": "on",
   "editor.renderWhitespace": "selection",
   "editor.renderLineHighlight": "all",
   "editor.minimap.enabled": false,
   "workbench.colorTheme": "Default Dark+",
-
   "search.exclude": {
     "**/node_modules": true,
     "**/bower_components": true,
@@ -126,7 +114,6 @@
     "**/.mypy_cache": true,
     "**/.venv": true
   },
-
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -138,7 +125,6 @@
     "**/.mypy_cache": true,
     "**/.venv": true
   },
-
   "files.watcherExclude": {
     "**/node_modules/**": true,
     "**/.git/objects/**": true,
@@ -155,7 +141,6 @@
     "**/.mypy_cache/**": true,
     "**/.venv/**": true
   },
-
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "terminal.integrated.confirmOnExit": "hasChildProcesses",
@@ -173,5 +158,6 @@
   "workbench.editor.limit.excludeDirty": false,
   "workbench.editor.limit.excludePinned": false,
   "workbench.editor.limit.excludePreview": true,
-  "workbench.editor.limit.excludeFromEditorHistory": true
+  "workbench.editor.limit.excludeFromEditorHistory": true,
+  "git.ignoreLimitWarning": true
 }

@@ -31,7 +31,10 @@ class TestCoverLetterRobustness:
     def minimal_candidate_profile(self) -> Dict[str, Any]:
         """Minimal candidate profile for smart cover letter generation."""
         return {
-            "personal_info": {"name": "Test Candidate", "email": "candidate@example.com"},
+            "personal_info": {
+                "name": "Test Candidate",
+                "email": "candidate@example.com",
+            },
             "experience": [],
             "skills": [],
             "education": [],
@@ -48,12 +51,18 @@ class TestCoverLetterRobustness:
                 + "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. " * 100,
                 "very_long_nonsensical",
             ),
-            ("这是一个用中文写的工作描述。我们正在寻找一位优秀的软件工程师。", "chinese_language"),
+            (
+                "这是一个用中文写的工作描述。我们正在寻找一位优秀的软件工程师。",
+                "chinese_language",
+            ),
             (
                 "Ceci est une description de poste en français. Nous recherchons un ingénieur logiciel.",
                 "french_language",
             ),
-            ("これは日本語での求人情報です。ソフトウェアエンジニアを募集しています。", "japanese_language"),
+            (
+                "これは日本語での求人情報です。ソフトウェアエンジニアを募集しています。",
+                "japanese_language",
+            ),
             (
                 "Это описание работы на русском языке. Мы ищем инженера-программиста.",
                 "russian_language",
@@ -98,7 +107,8 @@ class TestCoverLetterRobustness:
             try:
                 # This should not raise an unhandled exception
                 result = generate_tailored_cover_letter(
-                    base_profile_data=minimal_profile_data, job_analysis_data=test_job_analysis
+                    base_profile_data=minimal_profile_data,
+                    job_analysis_data=test_job_analysis,
                 )
 
                 # Assert that we got some result (even if it's not perfect)
@@ -127,7 +137,10 @@ class TestCoverLetterRobustness:
         [
             ("", "empty_string"),
             ("   ", "whitespace_only"),
-            ("Lorem ipsum dolor sit amet consectetur adipiscing elit " * 200, "very_long_latin"),
+            (
+                "Lorem ipsum dolor sit amet consectetur adipiscing elit " * 200,
+                "very_long_latin",
+            ),
             (
                 "Software Engineer position requiring Python and machine learning experience. "
                 + "We are looking for someone with 5+ years of experience in data science. " * 50,
@@ -148,7 +161,10 @@ class TestCoverLetterRobustness:
         ],
     )
     def test_generate_smart_cover_letter_robustness(
-        self, job_description: str, scenario_name: str, minimal_candidate_profile: Dict[str, Any]
+        self,
+        job_description: str,
+        scenario_name: str,
+        minimal_candidate_profile: Dict[str, Any],
     ):
         """
         Test that generate_smart_cover_letter handles various edge cases robustly.
@@ -227,7 +243,8 @@ class TestCoverLetterRobustness:
 
             with pytest.raises(Exception) as exc_info:
                 generate_tailored_cover_letter(
-                    base_profile_data=minimal_profile_data, job_analysis_data=minimal_job_analysis
+                    base_profile_data=minimal_profile_data,
+                    job_analysis_data=minimal_job_analysis,
                 )
 
             # Verify the exception is not an unhandled crash
@@ -252,7 +269,8 @@ class TestCoverLetterRobustness:
 
             try:
                 result = generate_tailored_cover_letter(
-                    base_profile_data=minimal_profile_data, job_analysis_data=large_job_analysis
+                    base_profile_data=minimal_profile_data,
+                    job_analysis_data=large_job_analysis,
                 )
 
                 # Should handle large inputs without crashing
@@ -286,7 +304,8 @@ class TestCoverLetterRobustness:
             for test_case in unicode_test_cases:
                 try:
                     result = generate_smart_cover_letter(
-                        candidate_profile=minimal_candidate_profile, job_description=test_case
+                        candidate_profile=minimal_candidate_profile,
+                        job_description=test_case,
                     )
 
                     # Should handle Unicode correctly

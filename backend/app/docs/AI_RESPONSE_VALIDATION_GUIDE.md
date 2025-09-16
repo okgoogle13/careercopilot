@@ -103,8 +103,8 @@ from app.core.ai_flow_integration import migrate_json_parsing
 
 # With this:
 validation_result = migrate_json_parsing(
-    response.content.strip(), 
-    MySchema, 
+    response.content.strip(),
+    MySchema,
     fallback_data
 )
 parsed_result = extract_validated_data(validation_result)
@@ -153,7 +153,7 @@ fallback_data = {
 # This will use fallback if AI response is invalid
 result = default_validator.validate_response(
     invalid_or_empty_response,
-    "star_response", 
+    "star_response",
     fallback_data
 )
 
@@ -172,29 +172,29 @@ class MyAIOperation:
     async def generate_response(self, user_id: str, prompt: str) -> Dict[str, Any]:
         # Your existing AI call
         response = await self.ai_client.generate_text(request)
-        
+
         # Replace manual JSON parsing with validation
         # OLD CODE:
         # try:
         #     parsed_result = json.loads(response.content.strip())
         # except json.JSONDecodeError as e:
         #     raise AIError(f"Invalid JSON: {str(e)}")
-        
+
         # NEW CODE:
         validation_result = default_validator.validate_response(
             response.content.strip(),
             "star_response",
             fallback_data={
                 "situation": "Processing unavailable",
-                "task": "Analysis pending", 
+                "task": "Analysis pending",
                 "action": "Unable to determine",
                 "result": "Results pending"
             }
         )
-        
+
         if not validation_result.is_valid and not validation_result.parsed_data:
             raise AIError(f"Validation failed: {validation_result.error_message}")
-        
+
         # Convert validated data back to dict for compatibility
         validated_data = validation_result.parsed_data
         return {
@@ -310,8 +310,8 @@ python backend/app/tests/test_ai_response_validation.py
    ```python
    # Before
    parsed_result = json.loads(response.content.strip())
-   
-   # After  
+
+   # After
    validation_result = default_validator.validate_response(
        response.content.strip(),
        "appropriate_schema_name",
@@ -334,7 +334,7 @@ python backend/app/tests/test_ai_response_validation.py
    # Check if fallback was used
    if validation_result.metadata.get("fallback_used"):
        logger.warning("Using fallback data for AI response")
-   
+
    # Log validation warnings
    for warning in validation_result.validation_warnings:
        logger.warning(f"Validation warning: {warning}")

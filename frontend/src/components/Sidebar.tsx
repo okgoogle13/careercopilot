@@ -14,17 +14,17 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
   ];
 
   return (
-    <div className='w-64 bg-sidebar border-r border-sidebar-border h-full flex flex-col'>
-      <div className='p-6'>
+    <div className="w-64 bg-sidebar border-r border-sidebar-border h-full flex flex-col">
+      <div className="p-6">
         <Logo showText={true} />
       </div>
 
-      <nav className='flex-1 px-4'>
-        <ul className='space-y-2'>
-          {menuItems.map(item => (
+      <nav className="flex-1 px-4">
+        <ul className="space-y-2">
+          {menuItems.map((item) => (
             <li key={item.id}>
               <Button
-                variant='ghost'
+                variant="ghost"
                 className={`w-full justify-start gap-3 h-12 text-left ${
                   activeTab === item.id
                     ? 'bg-sidebar-accent text-sidebar-accent-foreground'
@@ -32,7 +32,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                 }`}
                 onClick={() => onTabChange(item.id)}
               >
-                <item.icon className='w-5 h-5' />
+                <item.icon className="w-5 h-5" />
                 {item.label}
               </Button>
             </li>
@@ -40,9 +40,9 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         </ul>
       </nav>
 
-      <div className='p-4'>
-        <Button className='w-full bg-primary hover:bg-primary/90 text-primary-foreground'>
-          <Plus className='w-4 h-4 mr-2' />
+      <div className="p-4">
+        <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Plus className="w-4 h-4 mr-2" />
           New Application
         </Button>
       </div>

@@ -19,15 +19,9 @@
       "@/*": ["src/*"]
     },
     "types": ["vite/client", "node"],
-    "typeRoots": [
-      "./node_modules/@types"
-    ]
+    "typeRoots": ["./node_modules/@types"]
   },
-  "include": [
-    "src",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "include": ["src", "**/*.ts", "**/*.tsx"],
   "exclude": [
     "node_modules",
     "dist",

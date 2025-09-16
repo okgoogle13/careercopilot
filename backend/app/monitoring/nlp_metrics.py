@@ -1,13 +1,16 @@
 """
 NLP Service Metrics for Prometheus monitoring
 """
+
 import time
 
 from prometheus_client import Counter, Gauge, Histogram, start_http_server
 
 # Initialize metrics
 NLP_REQUESTS_TOTAL = Counter(
-    "nlp_requests_total", "Total number of NLP requests", ["endpoint", "model", "status"]
+    "nlp_requests_total",
+    "Total number of NLP requests",
+    ["endpoint", "model", "status"],
 )
 
 NLP_REQUEST_DURATION = Histogram(
@@ -18,7 +21,9 @@ NLP_REQUEST_DURATION = Histogram(
 )
 
 NLP_TOKENS_PROCESSED = Counter(
-    "nlp_tokens_processed_total", "Total number of tokens processed", ["model", "operation"]
+    "nlp_tokens_processed_total",
+    "Total number of tokens processed",
+    ["model", "operation"],
 )
 
 NLP_MODEL_LOAD_TIME = Gauge(

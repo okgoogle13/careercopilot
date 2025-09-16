@@ -30,7 +30,9 @@ class VoiceProfileInput(BaseModel):
     documents: List[str]
 
 
-async def _analyze_and_create_voice_profile_impl(input_data: VoiceProfileInput) -> VoiceProfile:
+async def _analyze_and_create_voice_profile_impl(
+    input_data: VoiceProfileInput,
+) -> VoiceProfile:
     """
     Analyzes a user's documents to establish an 'authentic voice' for all future AI-generated content.
     Uses the existing voice_profiler logic but with provided documents instead of fetching from Firestore.

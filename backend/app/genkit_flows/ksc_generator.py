@@ -1,8 +1,9 @@
-from app.genkit_flows.flow_decorator import simple_genkit_flow
+import json
+
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
+from app.genkit_flows.flow_decorator import simple_genkit_flow
 from pydantic import BaseModel
-import json
 
 
 # Define the structured output model using Pydantic
@@ -23,13 +24,13 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
     prompt = format_prompt(
         "ksc_simple_response",
         ksc_statement=ksc_statement,
-        user_profile_data=json.dumps(user_profile_data, indent=2)
+        user_profile_data=json.dumps(user_profile_data, indent=2),
     )
 
     # Generate the response using the centralized model
     # Model availability is guaranteed by the decorator
     model = get_model()
-    
+
     response = model.generate(
         prompt=prompt,
         config={

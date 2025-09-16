@@ -3,6 +3,7 @@ Production Configuration for CareerCopilot
 
 This module contains production-specific settings and configurations.
 """
+
 import os
 from typing import Any, Dict
 

@@ -155,27 +155,27 @@ def get_personal_config() -> PersonalCareerConfig:
 def validate_required_api_keys() -> None:
     """
     Fail-fast validation of required API keys on application startup.
-    
+
     Raises:
         RuntimeError: If required API keys are missing and AI features are enabled.
     """
     missing_keys = []
-    
+
     # Only validate if AI features are enabled
     if not settings.enable_ai_features:
         return
-    
+
     # Check for required AI service API keys
     if not settings.gemini_api_key:
         missing_keys.append("GEMINI_API_KEY")
-    
+
     # Check for other optional but recommended keys
     warnings = []
     if not settings.openai_api_key:
         warnings.append("OPENAI_API_KEY (fallback AI service)")
     if not settings.anthropic_api_key:
         warnings.append("ANTHROPIC_API_KEY (fallback AI service)")
-    
+
     # Fail fast if critical keys are missing
     if missing_keys:
         missing_keys_str = ", ".join(missing_keys)
@@ -184,10 +184,13 @@ def validate_required_api_keys() -> None:
             f"AI features are enabled but required keys are not configured. "
             f"Please set these environment variables or disable AI features with ENABLE_AI_FEATURES=false."
         )
-    
+
     # Log warnings for missing optional keys
     if warnings:
         import logging
+
         logger = logging.getLogger(__name__)
         warnings_str = ", ".join(warnings)
-        logger.warning(f"Optional API keys are missing: {warnings_str}. This may limit fallback capabilities.")
+        logger.warning(
+            f"Optional API keys are missing: {warnings_str}. This may limit fallback capabilities."
+        )

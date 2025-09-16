@@ -7,6 +7,7 @@ the Pydantic schemas for easy importing throughout the application.
 Example:
 from app.models import UserProfile
 """
+
 from .schemas import (
     AIRecommendationsResponse,
     ATSScoreResponse,

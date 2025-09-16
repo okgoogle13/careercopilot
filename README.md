@@ -1,7 +1,7 @@
 
 🚀 CareerCopilot
 > An AI-powered platform to help you manage your career search, built with a modern web stack.
-> 
+>
 ## 🏗️ Architecture
  * Frontend: React 19, TypeScript, Vite, Tailwind CSS
  * Backend: Python, FastAPI, SQLAlchemy
