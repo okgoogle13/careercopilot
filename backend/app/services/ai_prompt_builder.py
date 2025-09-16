@@ -146,7 +146,7 @@ REQUIREMENTS:
         prompt_type: PromptType,
         task_prompt: str,
         context: Optional[PromptContext] = None,
-        model: str = "gemini-1.5-pro",
+        model: str = "gemini-2.0-flash",
         use_cache: bool = True,
     ) -> str:
         """

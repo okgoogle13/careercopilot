@@ -57,7 +57,7 @@ def init_genkit() -> bool:
         # Initialize Genkit with Google AI plugin
         genkit_instance = Genkit(
             plugins=[GoogleAI(api_key=api_key)],
-            model="googleai/gemini-1.5-pro",
+            model="googleai/gemini-2.0-flash",
         )
 
         logger.info("Genkit initialized successfully")

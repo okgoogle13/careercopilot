@@ -75,7 +75,7 @@ services:
       ENABLE_GENKIT_FLOWS: ${ENABLE_GENKIT_FLOWS:-true}
 
       # AI Model Configuration
-      DEFAULT_AI_MODEL: ${DEFAULT_AI_MODEL:-gemini-1.5-pro}
+      DEFAULT_AI_MODEL: ${DEFAULT_AI_MODEL:-gemini-2.0-flash}
       BACKUP_AI_MODEL: ${BACKUP_AI_MODEL:-gpt-4o}
       AI_TEMPERATURE: ${AI_TEMPERATURE:-0.7}
       MAX_TOKENS: ${MAX_TOKENS:-4096}
