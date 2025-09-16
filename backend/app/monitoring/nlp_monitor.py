@@ -4,6 +4,7 @@ NLP Monitoring Module
 This module provides monitoring capabilities for the NLP service,
 including metrics collection and health checks.
 """
+
 import logging
 import time
 from functools import wraps
@@ -57,7 +58,9 @@ class NLPMonitor:
                         {"operation": name, "model": model, "status": status},
                     )
                     self.record_metric(
-                        f"{name}_count", 1, {"operation": name, "model": model, "status": status}
+                        f"{name}_count",
+                        1,
+                        {"operation": name, "model": model, "status": status},
                     )
 
             return wrapper

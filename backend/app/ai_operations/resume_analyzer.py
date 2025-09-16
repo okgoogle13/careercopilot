@@ -21,15 +21,16 @@ class ResumeAnalyzer:
     def __init__(self):
         # Import the working genkit flow
         from app.genkit_flows.resume_analyzer import compare_resume_to_job
+
         self.compare_flow = compare_resume_to_job
 
     @monitor_performance("resume_analysis")
     @cached_ai_operation("resume_analysis", user_id_param="user_id")
     async def analyze_resume(
-        self, 
-        user_id: str, 
-        resume_text: str, 
-        job_analysis_data: Optional[Dict[str, Any]] = None
+        self,
+        user_id: str,
+        resume_text: str,
+        job_analysis_data: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Analyze a resume, optionally comparing it to job requirements.
@@ -49,17 +50,18 @@ class ResumeAnalyzer:
 
             # Sanitize inputs
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
-            
+
             # Use comparison flow (can handle empty job data)
             result = self.compare_flow(
                 resume_text=sanitized_resume.sanitized_content,
-                job_analysis_data=job_analysis_data or {}
+                job_analysis_data=job_analysis_data or {},
             )
-            
+
             # Convert result to dict if needed
             if isinstance(result, str):
                 try:
                     import json
+
                     result_dict = json.loads(result)
                 except json.JSONDecodeError:
                     result_dict = {"analysis": result, "raw_output": True}
@@ -71,7 +73,7 @@ class ResumeAnalyzer:
                 extra={
                     "user_id": user_id,
                     "job_comparison": bool(job_analysis_data),
-                    "analysis_type": "comparison" if job_analysis_data else "standalone",
+                    "analysis_type": ("comparison" if job_analysis_data else "standalone"),
                 },
             )
 
@@ -103,22 +105,23 @@ class ResumeAnalyzer:
         try:
             if not resume_text or not isinstance(resume_text, str):
                 raise InputValidationError("Resume text is required and must be a string")
-            
+
             if not job_analysis_data or not isinstance(job_analysis_data, dict):
                 raise InputValidationError("Job analysis data is required and must be a dictionary")
 
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
-            
+
             # Use the comparison flow directly
             result = self.compare_flow(
                 resume_text=sanitized_resume.sanitized_content,
-                job_analysis_data=job_analysis_data
+                job_analysis_data=job_analysis_data,
             )
 
-            # Convert result to dict if needed  
+            # Convert result to dict if needed
             if isinstance(result, str):
                 try:
                     import json
+
                     result_dict = json.loads(result)
                 except json.JSONDecodeError:
                     result_dict = {"comparison": result, "raw_output": True}

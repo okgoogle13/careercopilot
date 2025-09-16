@@ -4,9 +4,9 @@ from app.core.dependencies import User, get_current_user
 
 # Import the flow's output model AND the frontend's expected response model
 from app.genkit_flows.ats_scoring import AtsResult, atsScoring
+from app.genkit_flows.flow_decorator import run_flow_async
 from app.models import ATSScoreResponse, CategoryScore
 from fastapi import APIRouter, Body, Depends, HTTPException
-from app.genkit_flows.flow_decorator import run_flow_async
 from pydantic import BaseModel
 
 router = APIRouter()
@@ -51,40 +51,46 @@ async def create_ats_score_analysis(
                 CategoryScore(
                     name="Keyword Optimization",
                     score=int(flow_result.breakdown.keywordScore),
-                    status="good"
-                    if flow_result.breakdown.keywordScore >= 80
-                    else "warning"
-                    if flow_result.breakdown.keywordScore >= 60
-                    else "poor",
+                    status=(
+                        "good"
+                        if flow_result.breakdown.keywordScore >= 80
+                        else ("warning" if flow_result.breakdown.keywordScore >= 60 else "poor")
+                    ),
                     # We can use the main recommendations for each category or create more specific ones.
                     # For now, let's pass the main recommendations if the score is not 'good'.
-                    suggestions=flow_result.recommendations
-                    if flow_result.breakdown.keywordScore < 80
-                    else ["Keywords are well-optimized."],
+                    suggestions=(
+                        flow_result.recommendations
+                        if flow_result.breakdown.keywordScore < 80
+                        else ["Keywords are well-optimized."]
+                    ),
                 ),
                 CategoryScore(
                     name="Semantic Match",
                     score=int(flow_result.breakdown.semanticScore),
-                    status="good"
-                    if flow_result.breakdown.semanticScore >= 80
-                    else "warning"
-                    if flow_result.breakdown.semanticScore >= 60
-                    else "poor",
-                    suggestions=flow_result.recommendations
-                    if flow_result.breakdown.semanticScore < 80
-                    else ["Semantic content aligns well with the job."],
+                    status=(
+                        "good"
+                        if flow_result.breakdown.semanticScore >= 80
+                        else ("warning" if flow_result.breakdown.semanticScore >= 60 else "poor")
+                    ),
+                    suggestions=(
+                        flow_result.recommendations
+                        if flow_result.breakdown.semanticScore < 80
+                        else ["Semantic content aligns well with the job."]
+                    ),
                 ),
                 CategoryScore(
                     name="Formatting & Structure",
                     score=int(flow_result.breakdown.formattingScore),
-                    status="good"
-                    if flow_result.breakdown.formattingScore >= 80
-                    else "warning"
-                    if flow_result.breakdown.formattingScore >= 60
-                    else "poor",
-                    suggestions=flow_result.recommendations
-                    if flow_result.breakdown.formattingScore < 80
-                    else ["Resume format is ATS-friendly."],
+                    status=(
+                        "good"
+                        if flow_result.breakdown.formattingScore >= 80
+                        else ("warning" if flow_result.breakdown.formattingScore >= 60 else "poor")
+                    ),
+                    suggestions=(
+                        flow_result.recommendations
+                        if flow_result.breakdown.formattingScore < 80
+                        else ["Resume format is ATS-friendly."]
+                    ),
                 ),
             ],
             matched_keywords=flow_result.matchedKeywords,
@@ -96,15 +102,18 @@ async def create_ats_score_analysis(
     except Exception as e:
         print(f"API Error in /ats-score endpoint: {e}")
         raise HTTPException(
-            status_code=500, detail="An unexpected error occurred while running the ATS analysis."
+            status_code=500,
+            detail="An unexpected error occurred while running the ATS analysis.",
         )
 
 
 # Additional Genkit Flow Endpoints
 
 from app.genkit_flows.advanced_job_matching import analyze_job_compatibility
+from app.genkit_flows.resume_intelligence_pipeline import (
+    generate_resume_intelligence_report,
+)
 from app.genkit_flows.smart_content_optimizer import optimize_content_for_target
-from app.genkit_flows.resume_intelligence_pipeline import generate_resume_intelligence_report
 
 
 class JobMatchingRequest(BaseModel):
@@ -132,8 +141,8 @@ class ResumeIntelligenceRequest(BaseModel):
     tags=["Analysis"],
 )
 async def analyze_job_match(
-    request: JobMatchingRequest = Body(...), 
-    current_user: User = Depends(get_current_user)
+    request: JobMatchingRequest = Body(...),
+    current_user: User = Depends(get_current_user),
 ):
     """
     Analyze compatibility between candidate profile and job opportunity
@@ -151,10 +160,7 @@ async def analyze_job_match(
         return result
     except Exception as e:
         print(f"Job matching analysis error: {e}")
-        raise HTTPException(
-            status_code=500, 
-            detail="Failed to analyze job compatibility"
-        )
+        raise HTTPException(status_code=500, detail="Failed to analyze job compatibility")
 
 
 @router.post(
@@ -164,7 +170,7 @@ async def analyze_job_match(
 )
 async def optimize_content(
     request: ContentOptimizationRequest = Body(...),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     """
     Optimize resume/cover letter content for specific target roles
@@ -182,10 +188,7 @@ async def optimize_content(
         return result
     except Exception as e:
         print(f"Content optimization error: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Failed to optimize content"
-        )
+        raise HTTPException(status_code=500, detail="Failed to optimize content")
 
 
 @router.post(
@@ -195,10 +198,10 @@ async def optimize_content(
 )
 async def generate_resume_intelligence(
     request: ResumeIntelligenceRequest = Body(...),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_user),
 ):
     """
-    Generate comprehensive resume intelligence report with 
+    Generate comprehensive resume intelligence report with
     market readiness analysis and optimization recommendations.
     """
     try:
@@ -214,7 +217,4 @@ async def generate_resume_intelligence(
         return result
     except Exception as e:
         print(f"Resume intelligence error: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Failed to generate resume intelligence report"
-        )
+        raise HTTPException(status_code=500, detail="Failed to generate resume intelligence report")

@@ -13,7 +13,7 @@
       "usage_count": 0
     }
   },
-  
+
   "comprehensive_resume_analysis": {
     "name": "Comprehensive Resume Analysis",
     "description": "Performs detailed resume analysis with scoring and recommendations",
@@ -28,7 +28,7 @@
       "usage_count": 0
     }
   },
-  
+
   "career_progression_analysis": {
     "name": "Career Progression Analysis",
     "description": "Analyzes career trajectory and provides advancement strategy",
@@ -43,7 +43,7 @@
       "usage_count": 0
     }
   },
-  
+
   "ksc_star_response": {
     "name": "KSC STAR Response Generation",
     "description": "Generates STAR methodology responses for Key Selection Criteria",

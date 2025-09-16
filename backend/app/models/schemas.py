@@ -7,6 +7,7 @@ This module defines the data contracts between the FastAPI backend and the
 React frontend, ensuring type safety and clear data structures for all
 AI-powered features in the Careercopilot application.
 """
+
 from datetime import datetime  # Make sure datetime is imported
 from typing import Dict, List, Literal, Optional
 

@@ -19,15 +19,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={cn('relative w-full', containerClassName)}>
         {icon && (
           <div
-            className='absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground'
-            aria-hidden='true'
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+            aria-hidden="true"
           >
             {icon}
           </div>
         )}
         <input
           type={type}
-          data-slot='input'
+          data-slot="input"
           data-error={error ? 'true' : undefined}
           className={cn(
             'file:text-foreground placeholder:text-muted-foreground/70',

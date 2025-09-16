@@ -3,6 +3,7 @@ router.py
 
 Main API router that includes all endpoint modules.
 """
+
 from fastapi import APIRouter
 
 # Import endpoint modules

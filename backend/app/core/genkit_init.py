@@ -4,6 +4,7 @@ genkit_init.py
 Initializes and configures the Genkit framework for the CareerCopilot application.
 Handles AI model initialization, flow registration, and provides health monitoring.
 """
+
 import logging
 import os
 from typing import Any, Callable, Dict, Optional

@@ -11,10 +11,10 @@ jest.mock('@/api/aiServices', () => mockAiServices);
 jest.mock('@/components/ui/editor', () => ({
   Editor: ({ value, onChange }: { value: string; onChange: (value: string) => void }) => (
     <textarea
-      data-testid='editor'
+      data-testid="editor"
       value={value}
-      onChange={e => onChange(e.target.value)}
-      placeholder='Generated resume will appear here...'
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Generated resume will appear here..."
     />
   ),
 }));
@@ -74,7 +74,8 @@ describe('TailoredResumeGenerator', () => {
 
   it('shows loading state while generating resume', async () => {
     mockAiServices.generateTailoredResume.mockImplementation(
-      () => new Promise(resolve => setTimeout(() => resolve({ content: mockGeneratedResume }), 100))
+      () =>
+        new Promise((resolve) => setTimeout(() => resolve({ content: mockGeneratedResume }), 100))
     );
 
     render(<TailoredResumeGenerator />);

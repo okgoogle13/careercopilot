@@ -43,7 +43,9 @@ gemini_pro = get_ai_config().get_model_config("gemini-1.5-pro")
 from app.genkit_flows.ksc_generator import generateKscResponse
 
 # Import existing flow functions
-from app.genkit_flows.resume_intelligence_pipeline import generate_resume_intelligence_report
+from app.genkit_flows.resume_intelligence_pipeline import (
+    generate_resume_intelligence_report,
+)
 from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
 
 
@@ -226,7 +228,11 @@ def prepare_full_application(
                     )
                 except Exception as e:
                     ksc_responses.append(
-                        {"ksc_statement": criterion, "error": str(e), "generation_status": "failed"}
+                        {
+                            "ksc_statement": criterion,
+                            "error": str(e),
+                            "generation_status": "failed",
+                        }
                     )
 
         # Step 5: Generate application strategy and guidelines

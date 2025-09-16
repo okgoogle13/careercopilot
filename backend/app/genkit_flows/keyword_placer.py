@@ -1,7 +1,7 @@
 from typing import List
 
-from app.genkit_flows.flow_decorator import simple_genkit_flow
 from app.core.genkit_init import get_model
+from app.genkit_flows.flow_decorator import simple_genkit_flow
 from pydantic import BaseModel, Field
 
 # --- Pydantic Schemas for Structured Output ---
@@ -67,7 +67,7 @@ def suggestKeywordPlacement(
 
     # Model availability is guaranteed by the decorator
     model = get_model()
-    
+
     response = model.generate(
         prompt=prompt,
         output_schema=KeywordPlacementResponse,

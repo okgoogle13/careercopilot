@@ -5,7 +5,12 @@ Authentication endpoints for user registration, login, and session management.
 import logging
 from typing import Dict, List, Optional
 
-from app.core.auth import auth_manager, create_user_token, get_current_user, session_manager
+from app.core.auth import (
+    auth_manager,
+    create_user_token,
+    get_current_user,
+    session_manager,
+)
 from app.core.database import get_db
 from app.genkit_flows.onboarding_voice_workflow import (
     VoiceProfileInput,
@@ -225,12 +230,15 @@ async def refresh_token(current_token: str, db: Session = Depends(get_db)) -> To
     except Exception as e:
         logger.error(f"Token refresh failed: {e}")
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Token refresh failed"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Token refresh failed",
         )
 
 
 @router.get("/me", response_model=Dict[str, str])
-async def get_current_user_info(current_user: User = Depends(get_current_user)) -> Dict[str, str]:
+async def get_current_user_info(
+    current_user: User = Depends(get_current_user),
+) -> Dict[str, str]:
     """
     Get current authenticated user information.
     """
@@ -266,7 +274,10 @@ async def create_voice_profile(
 
         logger.info(f"Voice profile created successfully for user: {current_user.email}")
 
-        return {"message": "Voice profile created successfully", "user_id": current_user.id}
+        return {
+            "message": "Voice profile created successfully",
+            "user_id": current_user.id,
+        }
 
     except HTTPException:
         raise

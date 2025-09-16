@@ -47,22 +47,22 @@ All AI agents are implemented as Genkit workflows in `/src/backend/agents/`:
 # Use Claude for complex analysis tasks
 async def analyze_application_strategy(user_profile, job_market_data):
     """Use Claude for strategic career advice"""
-    
+
     analysis_prompt = f"""
     Analyze this career transition strategy:
-    
+
     User Profile: {user_profile}
     Market Data: {job_market_data}
-    
+
     Provide:
     • Strengths and gaps analysis
     • Recommended skill development priorities
     • Application strategy recommendations
     • Timeline for career transition
-    
+
     Focus on actionable insights for social work/community services sector.
     """
-    
+
     # Send to Claude API
     response = await claude_completion(analysis_prompt)
     return response
@@ -73,22 +73,22 @@ async def analyze_application_strategy(user_profile, job_market_data):
 # Use Claude to review AI-generated content
 async def review_generated_document(document_content, job_description):
     """Quality check using Claude's reasoning capabilities"""
-    
+
     review_prompt = f"""
     Review this AI-generated resume for quality and relevance:
-    
+
     Resume: {document_content}
     Job Description: {job_description}
-    
+
     Evaluate:
     • Relevance to job requirements
     • Professional tone and clarity
     • ATS compatibility concerns
     • Suggestions for improvement
-    
+
     Provide specific, actionable feedback.
     """
-    
+
     return await claude_completion(review_prompt)
 ```
 
@@ -97,22 +97,22 @@ async def review_generated_document(document_content, job_description):
 # Use Claude for multi-source research analysis
 async def synthesize_company_research(raw_research_data):
     """Synthesize complex research using Claude's reasoning"""
-    
+
     synthesis_prompt = f"""
     Synthesize this company research into actionable insights:
-    
+
     Data Sources: {raw_research_data}
-    
+
     Create:
     • Executive summary of key findings
     • Application strategy recommendations
     • Interview preparation insights
     • Potential red flags or concerns
     • Cultural fit assessment
-    
+
     Prioritize insights most relevant to job seekers.
     """
-    
+
     return await claude_completion(synthesis_prompt)
 ```
 
@@ -186,9 +186,9 @@ AI_USAGE_STRATEGY = {
 async def test_document_generation():
     test_profile = {...}
     test_job = {...}
-    
+
     result = await generate_document(test_profile, test_job)
-    
+
     assert result['ats_score'] >= 80
     assert len(result['keywords_matched']) >= 5
     assert 'error' not in result
@@ -200,12 +200,12 @@ async def test_document_generation():
 async def test_application_workflow():
     user_data = load_test_user()
     job_data = load_test_job()
-    
+
     # Test complete pipeline
     parsed_profile = await parse_resume(user_data['resume_url'])
     generated_doc = await generate_document(parsed_profile, job_data)
     optimized_doc = await optimize_for_ats(generated_doc, job_data)
-    
+
     assert optimized_doc['ats_score'] > generated_doc['ats_score']
 ```
 

@@ -44,13 +44,13 @@ class PromptTemplate(BaseModel):
             raise ValueError(f"Missing required template variables: {missing_vars}")
 
         formatted_prompt = self.template.format(**kwargs)
-        
+
         if self.instructions:
             formatted_prompt = f"{self.instructions}\n\n{formatted_prompt}"
-        
+
         if self.expected_format == "json":
             formatted_prompt += "\n\nPlease respond with valid JSON only."
-        
+
         return formatted_prompt
 
 
@@ -82,7 +82,7 @@ async def process_document(
     prompt_template: PromptTemplate,
     response_model: Type[T],
     processor_config: Optional[Dict[str, Any]] = None,
-    **template_variables
+    **template_variables,
 ) -> T:
     """
     Generic document processing function that encapsulates shared steps:
@@ -134,9 +134,7 @@ async def process_document(
         raise DocumentProcessingError(f"Failed to process document: {str(e)}") from e
 
 
-async def _make_ai_request(
-    prompt: str, model: str, max_tokens: int, temperature: float
-) -> str:
+async def _make_ai_request(prompt: str, model: str, max_tokens: int, temperature: float) -> str:
     """Make an AI request with proper error handling."""
     try:
         ai_client = get_ai_client()
@@ -165,16 +163,16 @@ def _parse_ai_response(response: str, response_model: Type[T]) -> T:
     try:
         # Clean the response - remove any non-JSON content
         response = response.strip()
-        
+
         # Find JSON content if wrapped in other text
-        if not response.startswith('{') and '{' in response:
-            start = response.find('{')
-            end = response.rfind('}') + 1
+        if not response.startswith("{") and "{" in response:
+            start = response.find("{")
+            end = response.rfind("}") + 1
             response = response[start:end]
 
         # Parse JSON
         data = json.loads(response)
-        
+
         # Convert to Pydantic model
         return response_model.model_validate(data)
 
@@ -224,14 +222,14 @@ class GenericDocumentProcessor(DocumentProcessor):
             prompt_template=self._prompt_template,
             response_model=self._response_model,
             processor_config=self.config,
-            **template_variables
+            **template_variables,
         )
 
 
 # Pre-defined prompt templates for common use cases
 class PromptTemplates:
     """Collection of common prompt templates."""
-    
+
     RESUME_ANALYSIS = PromptTemplate(
         template="""
 Analyze the following resume and extract structured information.
@@ -270,7 +268,7 @@ Format your response as a JSON object with the following structure:
 }}""",
         required_variables=["content"],
         instructions="You are an expert HR analyst. Analyze resumes accurately and comprehensively.",
-        expected_format="json"
+        expected_format="json",
     )
 
     JOB_DESCRIPTION_ANALYSIS = PromptTemplate(
@@ -306,7 +304,7 @@ Format your response as a JSON object with the following structure:
 }}""",
         required_variables=["content"],
         instructions="You are an expert recruiter. Analyze job descriptions thoroughly and accurately.",
-        expected_format="json"
+        expected_format="json",
     )
 
     DOCUMENT_COMPARISON = PromptTemplate(
@@ -338,7 +336,7 @@ Format your response as a JSON object with the following structure:
 }}""",
         required_variables=["resume_content", "job_description"],
         instructions="You are an expert career counselor. Provide accurate and helpful assessments.",
-        expected_format="json"
+        expected_format="json",
     )
 
 
@@ -346,7 +344,7 @@ Format your response as a JSON object with the following structure:
 async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
     """Process a resume using the standard resume analysis template."""
     from app.ai.resume_service import ResumeAnalysisResult
-    
+
     return await process_document(
         file_content=resume_text,
         prompt_template=PromptTemplates.RESUME_ANALYSIS,
@@ -355,10 +353,9 @@ async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = No
     )
 
 
-async def process_job_description(
-    job_text: str, config: Optional[Dict[str, Any]] = None
-) -> Any:
+async def process_job_description(job_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
     """Process a job description using the standard job analysis template."""
+
     # This would need a JobDescriptionResult model to be defined
     # For now, we'll return a generic dict
     class JobDescriptionResult(BaseModel):
@@ -367,7 +364,7 @@ async def process_job_description(
         location: str = ""
         summary: str = ""
         # Add more fields as needed
-    
+
     return await process_document(
         file_content=job_text,
         prompt_template=PromptTemplates.JOB_DESCRIPTION_ANALYSIS,
@@ -380,11 +377,12 @@ async def compare_resume_to_job(
     resume_text: str, job_description: str, config: Optional[Dict[str, Any]] = None
 ) -> Any:
     """Compare a resume to a job description."""
+
     class ComparisonResult(BaseModel):
         match_score: int = 0
         summary: str = ""
         # Add more fields as needed
-    
+
     return await process_document(
         file_content="",  # Not used in this template
         prompt_template=PromptTemplates.DOCUMENT_COMPARISON,

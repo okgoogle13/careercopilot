@@ -143,7 +143,7 @@ export function OneClickApplyButton({
 
       // Simulate document generation with progress updates
       setProgress(30);
-      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate AI processing time
+      await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate AI processing time
 
       const documents = await mockGenerateDocuments(job);
       setGeneratedDocuments(documents);
@@ -178,7 +178,7 @@ export function OneClickApplyButton({
 
     try {
       // Simulate application submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setStage('completed');
       setProgress(100);
@@ -203,42 +203,42 @@ export function OneClickApplyButton({
       case 'generating':
         return (
           <>
-            <Loader2 className='w-4 h-4 animate-spin' />
+            <Loader2 className="w-4 h-4 animate-spin" />
             Generating Documents... ({progress}%)
           </>
         );
       case 'reviewing':
         return (
           <>
-            <FileText className='w-4 h-4' />
+            <FileText className="w-4 h-4" />
             Review Documents ({currentDocumentIndex + 1}/{generatedDocuments.length})
           </>
         );
       case 'submitting':
         return (
           <>
-            <Loader2 className='w-4 h-4 animate-spin' />
+            <Loader2 className="w-4 h-4 animate-spin" />
             Submitting Application...
           </>
         );
       case 'completed':
         return (
           <>
-            <CheckCircle className='w-4 h-4' />
+            <CheckCircle className="w-4 h-4" />
             Application Submitted!
           </>
         );
       case 'error':
         return (
           <>
-            <AlertTriangle className='w-4 h-4' />
+            <AlertTriangle className="w-4 h-4" />
             Application Failed
           </>
         );
       default:
         return (
           <>
-            <Zap className='w-4 h-4' />
+            <Zap className="w-4 h-4" />
             Apply with AI
           </>
         );
@@ -278,7 +278,7 @@ export function OneClickApplyButton({
         <DocumentReviewModal
           document={generatedDocuments[currentDocumentIndex]}
           isOpen={stage === 'reviewing'}
-          onOpenChange={open => {
+          onOpenChange={(open) => {
             if (!open) {
               // User cancelled, reset state
               setStage('idle');
@@ -288,13 +288,13 @@ export function OneClickApplyButton({
             }
           }}
           onConfirm={handleDocumentConfirm}
-          onEdit={document => {
+          onEdit={(document) => {
             // Allow editing and return to review
             const updatedDocuments = [...generatedDocuments];
             updatedDocuments[currentDocumentIndex] = document;
             setGeneratedDocuments(updatedDocuments);
           }}
-          onDownload={document => {
+          onDownload={(document) => {
             // Trigger download
             const blob = new Blob([document.content], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
@@ -311,18 +311,18 @@ export function OneClickApplyButton({
 
       {/* Progress indicator */}
       {['generating', 'submitting'].includes(stage) && (
-        <div className='w-full mt-2'>
-          <div className='flex items-center gap-2 text-xs text-gray-600 mb-1'>
-            <Clock className='w-3 h-3' />
+        <div className="w-full mt-2">
+          <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
+            <Clock className="w-3 h-3" />
             <span>
               {stage === 'generating'
                 ? 'Generating personalized documents...'
                 : 'Submitting application...'}
             </span>
           </div>
-          <div className='w-full bg-gray-200 rounded-full h-1'>
+          <div className="w-full bg-gray-200 rounded-full h-1">
             <div
-              className='bg-blue-600 h-1 rounded-full transition-all duration-300'
+              className="bg-blue-600 h-1 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -331,7 +331,7 @@ export function OneClickApplyButton({
 
       {/* Error message */}
       {stage === 'error' && error && (
-        <div className='mt-2 p-2 bg-red-50 border border-red-200 rounded text-sm text-red-700'>
+        <div className="mt-2 p-2 bg-red-50 border border-red-200 rounded text-sm text-red-700">
           {error}
         </div>
       )}

@@ -20,7 +20,10 @@ class CoverLetterGenerator:
 
     def __init__(self):
         # Import the working genkit flow
-        from app.genkit_flows.cover_letter_generator import generate_tailored_cover_letter
+        from app.genkit_flows.cover_letter_generator import (
+            generate_tailored_cover_letter,
+        )
+
         self.cover_letter_flow = generate_tailored_cover_letter
 
     @monitor_performance("cover_letter_generation")
@@ -64,20 +67,21 @@ class CoverLetterGenerator:
             result = self.cover_letter_flow(
                 base_profile_data=sanitized_profile,
                 job_analysis_data=sanitized_job_data,
-                voice_profile=sanitized_voice
+                voice_profile=sanitized_voice,
             )
 
             # Convert result to dict if needed
             if isinstance(result, str):
                 try:
                     import json
+
                     result_dict = json.loads(result)
                 except json.JSONDecodeError:
                     # If not JSON, wrap the result
                     result_dict = {
                         "cover_letter": result,
                         "raw_output": True,
-                        "customization_applied": bool(customization_preferences)
+                        "customization_applied": bool(customization_preferences),
                     }
             else:
                 result_dict = result if isinstance(result, dict) else {"cover_letter": str(result)}

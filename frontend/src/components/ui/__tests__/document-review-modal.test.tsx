@@ -6,7 +6,7 @@ import { DocumentReviewModal } from '../document-review-modal';
 // Mock the KeywordTagGroup component
 jest.mock('../keyword-tag-group', () => ({
   KeywordTagGroup: ({ keywords, onAccept, onReject }: any) => (
-    <div data-testid='keyword-tag-group'>
+    <div data-testid="keyword-tag-group">
       <div>Keywords: {keywords?.length || 0}</div>
       <button onClick={() => onAccept?.('test-keyword')}>Accept Keyword</button>
       <button onClick={() => onReject?.('test-keyword')}>Reject Keyword</button>

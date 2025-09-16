@@ -16,11 +16,11 @@ const FormMessage = React.forwardRef<
   }
 
   return (
-    <div className='relative'>
-      <div className='absolute -left-1 top-0 h-full w-0.5 bg-destructive rounded-full' />
+    <div className="relative">
+      <div className="absolute -left-1 top-0 h-full w-0.5 bg-destructive rounded-full" />
       <p
         ref={ref}
-        data-slot='form-message'
+        data-slot="form-message"
         id={formMessageId}
         className={cn(
           'text-destructive text-xs pl-3 py-1.5 animate-in fade-in-0 zoom-in-95',

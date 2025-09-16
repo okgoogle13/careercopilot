@@ -21,6 +21,7 @@ class ATSScorer:
     def __init__(self):
         # Import the working genkit flow
         from app.genkit_flows.ats_scoring import atsScoring
+
         self.ats_flow = atsScoring
 
     @monitor_performance("ats_comprehensive_scoring")
@@ -55,7 +56,7 @@ class ATSScorer:
             # Sanitize inputs
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
             sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
-            
+
             # Sanitize profile keywords if provided
             sanitized_keywords = None
             if profile_keywords:
@@ -73,12 +74,12 @@ class ATSScorer:
             )
 
             # Convert Pydantic model to dict for consistency
-            if hasattr(result, 'model_dump'):
+            if hasattr(result, "model_dump"):
                 result_dict = result.model_dump()
-            elif hasattr(result, 'dict'):
+            elif hasattr(result, "dict"):
                 result_dict = result.dict()
             else:
-                result_dict = dict(result) if hasattr(result, '__dict__') else result
+                result_dict = dict(result) if hasattr(result, "__dict__") else result
 
             logger.info(
                 f"ATS analysis completed for user {user_id}",
@@ -94,7 +95,6 @@ class ATSScorer:
         except Exception as e:
             logger.error(f"Error in ATS analysis for user {user_id}: {str(e)}")
             raise
-
 
 
 # Global instance

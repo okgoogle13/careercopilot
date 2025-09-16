@@ -1,9 +1,9 @@
 import json
 from typing import Optional
 
-from app.genkit_flows.flow_decorator import simple_genkit_flow
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
+from app.genkit_flows.flow_decorator import simple_genkit_flow
 
 
 @simple_genkit_flow()
@@ -35,13 +35,13 @@ def generate_tailored_cover_letter(
         "tailored_cover_letter_simple",
         base_profile_data=json.dumps(base_profile_data, indent=2),
         job_analysis_data=json.dumps(job_analysis_data, indent=2),
-        voice_profile_section=voice_profile_section
+        voice_profile_section=voice_profile_section,
     )
 
     # Generate the cover letter using the AI model
     # Model availability is guaranteed by the decorator
     model = get_model()
-    
+
     response = model.generate(prompt)
 
     return response.text()

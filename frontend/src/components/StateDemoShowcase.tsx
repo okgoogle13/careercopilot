@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { LoadingProfileCard } from './LoadingCard';
-import { ErrorProfileCard } from './ErrorCard';
-import { ProfileCard } from './ProfileCard';
-import { CreateProfileCard } from './CreateProfileCard';
 import { ArrowLeft, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
+import { CreateProfileCard } from './CreateProfileCard';
+import { ErrorProfileCard } from './ErrorCard';
+import { LoadingProfileCard } from './LoadingCard';
+import { ProfileCard } from './ProfileCard';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 
 interface StateDemoShowcaseProps {
   onBack: () => void;
@@ -25,37 +25,36 @@ interface Profile {
 type DataState = 'loading' | 'loaded' | 'error' | 'empty';
 
 export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
-  const [dataState, setDataState] = useState<DataState>('loading');
   const [connectionStatus, setConnectionStatus] = useState<'online' | 'offline'>('online');
+  const [dataState, setDataState] = useState<DataState>('loading');
   const [profiles, setProfiles] = useState<Profile[]>([]);
 
-  const mockProfiles: Profile[] = [
-    {
-      id: '1',
-      name: 'Nishant Dougall',
-      role: 'Community Support Worker',
-      activeApplications: 8,
-      atsScore: 92,
-      lastUpdated: '2 hours ago',
-      avatarColor: '#7c3aed',
-    },
-    {
-      id: '2',
-      name: 'Nishant Dougall',
-      role: 'Peer Worker',
-      activeApplications: 5,
-      atsScore: 87,
-      lastUpdated: '1 day ago',
-      avatarColor: '#a855f7',
-    },
-  ];
+  const simulateDataLoad = useCallback((delay = 1000, shouldFail = false) => {
+    const mockProfiles: Profile[] = [
+      {
+        id: '1',
+        name: 'Alex Johnson',
+        role: 'Senior Frontend Developer',
+        activeApplications: 5,
+        atsScore: 92,
+        lastUpdated: '2 hours ago',
+        avatarColor: 'bg-blue-500',
+      },
+      {
+        id: '2',
+        name: 'Jamie Smith',
+        role: 'UX/UI Designer',
+        activeApplications: 3,
+        atsScore: 88,
+        lastUpdated: '1 hour ago',
+        avatarColor: 'bg-purple-500',
+      },
+    ];
 
-  // Simulate data loading
-  const simulateDataLoad = (delay: number = 2000, shouldFail: boolean = false) => {
     setDataState('loading');
 
     setTimeout(() => {
-      if (shouldFail || connectionStatus === 'offline') {
+      if (shouldFail) {
         setDataState('error');
         setProfiles([]);
       } else {
@@ -63,15 +62,19 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         setProfiles(mockProfiles);
       }
     }, delay);
-  };
+  }, []);
 
   useEffect(() => {
     simulateDataLoad();
-  }, []);
+  }, [simulateDataLoad]);
 
-  const handleRetryLoad = () => {
+  const handleRetryLoad = useCallback(() => {
+    if (connectionStatus === 'offline') {
+      setDataState('error');
+      return;
+    }
     simulateDataLoad(1500, false);
-  };
+  }, [connectionStatus, simulateDataLoad]);
 
   const handleToggleConnection = () => {
     const newStatus = connectionStatus === 'online' ? 'offline' : 'online';
@@ -97,7 +100,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
     switch (dataState) {
       case 'loading':
         return (
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
               <LoadingProfileCard key={index} />
             ))}
@@ -106,10 +109,10 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
       case 'error':
         return (
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <ErrorProfileCard
               onRetry={handleRetryLoad}
-              title='Connection Error'
+              title="Connection Error"
               message={
                 connectionStatus === 'offline'
                   ? "You're offline. Please check your internet connection."
@@ -118,7 +121,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
             />
             <ErrorProfileCard
               onRetry={handleRetryLoad}
-              title='Data Sync Failed'
+              title="Data Sync Failed"
               message="Profile data couldn't be synchronized. Some information may be outdated."
             />
           </div>
@@ -126,15 +129,22 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
       case 'empty':
         return (
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            <CreateProfileCard onCreate={() => alert('Creating new profile...')} />
+          <div className="space-y-4">
+            <div className="text-center p-8">
+              <p className="text-muted-foreground mb-4">No profiles found</p>
+              <Button onClick={handleRetryLoad} variant="outline" className="mr-2">
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Refresh
+              </Button>
+            </div>
+            <CreateProfileCard onCreate={() => console.log('Create new profile')} />
           </div>
         );
 
       case 'loaded':
         return (
-          <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3'>
-            {profiles.map(profile => (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {profiles.map((profile) => (
               <ProfileCard
                 key={profile.id}
                 name={profile.name}
@@ -157,66 +167,66 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
   };
 
   return (
-    <div className='min-h-screen bg-background p-6'>
-      <div className='max-w-7xl mx-auto'>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className='mb-8'>
-          <div className='flex items-center gap-4 mb-4'>
-            <Button variant='ghost' size='sm' onClick={onBack} className='gap-2'>
-              <ArrowLeft className='w-4 h-4' />
+        <div className="mb-8">
+          <div className="flex items-center gap-4 mb-4">
+            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
+              <ArrowLeft className="w-4 h-4" />
               Back to Component Library
             </Button>
           </div>
-          <h1 className='mb-2'>Interactive State Management Demo</h1>
-          <p className='text-muted-foreground'>
+          <h1 className="mb-2">Interactive State Management Demo</h1>
+          <p className="text-muted-foreground">
             Experience how the card variants work together in realistic loading, error, and data
             scenarios
           </p>
         </div>
 
         {/* Control Panel */}
-        <div className='mb-8'>
-          <Card variant='default'>
+        <div className="mb-8">
+          <Card variant="default">
             <CardHeader>
               <CardTitle>Simulation Controls</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className='flex flex-wrap gap-3'>
+              <div className="flex flex-wrap gap-3">
                 <Button
-                  variant='outline'
+                  variant="outline"
                   onClick={() => simulateDataLoad(2000, false)}
-                  className='gap-2'
+                  className="gap-2"
                 >
-                  <RefreshCw className='w-4 h-4' />
+                  <RefreshCw className="w-4 h-4" />
                   Simulate Loading
                 </Button>
 
-                <Button variant='outline' onClick={handleSimulateError} className='gap-2'>
+                <Button variant="outline" onClick={handleSimulateError} className="gap-2">
                   Simulate Error
                 </Button>
 
-                <Button variant='outline' onClick={handleResetToEmpty} className='gap-2'>
+                <Button variant="outline" onClick={handleResetToEmpty} className="gap-2">
                   Show Empty State
                 </Button>
 
-                <Button variant='outline' onClick={handleToggleConnection} className='gap-2'>
+                <Button variant="outline" onClick={handleToggleConnection} className="gap-2">
                   {connectionStatus === 'online' ? (
                     <>
-                      <WifiOff className='w-4 h-4' />
+                      <WifiOff className="w-4 h-4" />
                       Go Offline
                     </>
                   ) : (
                     <>
-                      <Wifi className='w-4 h-4' />
+                      <Wifi className="w-4 h-4" />
                       Go Online
                     </>
                   )}
                 </Button>
               </div>
 
-              <div className='mt-4 flex items-center gap-4'>
-                <div className='flex items-center gap-2'>
-                  <span className='text-muted-foreground'>Current State:</span>
+              <div className="mt-4 flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground">Current State:</span>
                   <Badge
                     variant={
                       dataState === 'loaded'
@@ -232,17 +242,17 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
                   </Badge>
                 </div>
 
-                <div className='flex items-center gap-2'>
-                  <span className='text-muted-foreground'>Connection:</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-muted-foreground">Connection:</span>
                   <Badge variant={connectionStatus === 'online' ? 'default' : 'destructive'}>
                     {connectionStatus === 'online' ? (
                       <>
-                        <Wifi className='w-3 h-3 mr-1' />
+                        <Wifi className="w-3 h-3 mr-1" />
                         Online
                       </>
                     ) : (
                       <>
-                        <WifiOff className='w-3 h-3 mr-1' />
+                        <WifiOff className="w-3 h-3 mr-1" />
                         Offline
                       </>
                     )}
@@ -254,10 +264,10 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         </div>
 
         {/* Profile Cards Display */}
-        <div className='space-y-6'>
-          <div className='flex items-center justify-between'>
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
             <h2>Job Application Profiles</h2>
-            <Badge variant='secondary'>
+            <Badge variant="secondary">
               {dataState === 'loaded' ? `${profiles.length} profiles` : dataState}
             </Badge>
           </div>
@@ -266,16 +276,16 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         </div>
 
         {/* Real-world Usage Examples */}
-        <div className='mt-12 space-y-6'>
+        <div className="mt-12 space-y-6">
           <h2>Real-world Implementation Patterns</h2>
 
-          <div className='grid md:grid-cols-2 gap-6'>
-            <Card variant='default'>
+          <div className="grid md:grid-cols-2 gap-6">
+            <Card variant="default">
               <CardHeader>
                 <CardTitle>Best Practices</CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className='space-y-2 text-muted-foreground'>
+                <ul className="space-y-2 text-muted-foreground">
                   <li>• Always show loading states for operations taking &gt;200ms</li>
                   <li>• Provide retry functionality for failed operations</li>
                   <li>• Use skeleton placeholders that match the final content layout</li>
@@ -285,12 +295,12 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
               </CardContent>
             </Card>
 
-            <Card variant='default'>
+            <Card variant="default">
               <CardHeader>
                 <CardTitle>Implementation Tips</CardTitle>
               </CardHeader>
               <CardContent>
-                <ul className='space-y-2 text-muted-foreground'>
+                <ul className="space-y-2 text-muted-foreground">
                   <li>• Use React.Suspense with ErrorBoundaries</li>
                   <li>• Implement exponential backoff for retries</li>
                   <li>• Cache successful responses to reduce loading states</li>

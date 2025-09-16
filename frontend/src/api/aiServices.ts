@@ -100,7 +100,7 @@ export async function generateKscResponses(jobDescription: string): Promise<stri
 
     // Extract response strings from the API response
     if (response.responses && Array.isArray(response.responses)) {
-      return response.responses.map(r => r.response);
+      return response.responses.map((r) => r.response);
     }
 
     // Fallback if response structure is different
@@ -443,6 +443,70 @@ export async function scanInboxForOpportunities(): Promise<EmailScanResponse> {
     }
 
     throw new Error('Failed to scan inbox for opportunities: Unknown error occurred');
+  }
+}
+
+/**
+ * Select a template and initiate document generation
+ *
+ * @param templateId - The ID of the selected template
+ * @param userData - Optional user data for personalization
+ * @param jobDescription - Optional job description for tailoring
+ * @returns Promise<any> - Template selection response with generation details
+ */
+export async function selectTemplate(
+  templateId: string,
+  userData?: any,
+  jobDescription?: string
+): Promise<any> {
+  try {
+    if (!templateId || templateId.trim().length === 0) {
+      throw new Error('Template ID is required');
+    }
+
+    const requestBody = {
+      templateId: templateId.trim(),
+      userData: userData || {},
+      jobDescription: jobDescription || '',
+    };
+
+    const response = await apiClient.post<any>('/templates/select', requestBody);
+
+    return response;
+  } catch (error) {
+    console.error('Template Selection Error:', error);
+
+    if (error instanceof Error) {
+      throw new Error(`Failed to select template: ${error.message}`);
+    }
+
+    throw new Error('Failed to select template: Unknown error occurred');
+  }
+}
+
+/**
+ * Get document preview for a template
+ *
+ * @param templateId - The ID of the template to preview
+ * @returns Promise<any> - Document preview data
+ */
+export async function getDocumentPreview(templateId: string): Promise<any> {
+  try {
+    if (!templateId || templateId.trim().length === 0) {
+      throw new Error('Template ID is required');
+    }
+
+    const response = await apiClient.get<any>(`/documents/preview/${templateId}`);
+
+    return response;
+  } catch (error) {
+    console.error('Document Preview Error:', error);
+
+    if (error instanceof Error) {
+      throw new Error(`Failed to get document preview: ${error.message}`);
+    }
+
+    throw new Error('Failed to get document preview: Unknown error occurred');
   }
 }
 

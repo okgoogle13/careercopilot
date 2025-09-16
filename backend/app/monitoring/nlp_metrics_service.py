@@ -3,6 +3,7 @@ NLP Metrics Service for Production
 
 This service handles the collection and export of NLP-related metrics in production.
 """
+
 import logging
 import os
 import threading
@@ -46,7 +47,9 @@ class NLPMetricsService:
     def _init_prometheus_metrics(self):
         """Initialize Prometheus metrics."""
         self.request_count = Counter(
-            "nlp_requests_total", "Total number of NLP requests", ["endpoint", "model", "status"]
+            "nlp_requests_total",
+            "Total number of NLP requests",
+            ["endpoint", "model", "status"],
         )
 
         self.request_duration = Histogram(
@@ -57,7 +60,9 @@ class NLPMetricsService:
         )
 
         self.tokens_processed = Counter(
-            "nlp_tokens_processed_total", "Total number of tokens processed", ["model", "operation"]
+            "nlp_tokens_processed_total",
+            "Total number of tokens processed",
+            ["model", "operation"],
         )
 
         self.model_load_time = Gauge(
@@ -65,7 +70,9 @@ class NLPMetricsService:
         )
 
         self.model_memory_usage = Gauge(
-            "nlp_model_memory_usage_bytes", "Memory usage of loaded NLP models", ["model"]
+            "nlp_model_memory_usage_bytes",
+            "Memory usage of loaded NLP models",
+            ["model"],
         )
 
     def start_metrics_server(self):

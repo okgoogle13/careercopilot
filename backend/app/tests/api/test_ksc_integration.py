@@ -245,7 +245,8 @@ class TestKscGenerationIntegration:
 
             for job_data in job_types:
                 response = await client.post(
-                    "/api/v1/ksc/generate", json={"job_description": job_data["job_description"]}
+                    "/api/v1/ksc/generate",
+                    json={"job_description": job_data["job_description"]},
                 )
 
                 assert response.status_code == 200, f"Failed for {job_data['type']} job type"

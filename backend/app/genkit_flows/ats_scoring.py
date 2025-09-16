@@ -3,6 +3,8 @@ import logging
 import os
 from typing import List, Optional
 
+from app.core.config import settings
+
 # Import enhanced error handling
 from app.core.enhanced_ai_error_handling import (
     AIOperationContext,
@@ -10,10 +12,9 @@ from app.core.enhanced_ai_error_handling import (
     create_fallback_strategy,
     enhanced_ai_handler,
 )
-from app.genkit_flows.flow_decorator import async_genkit_flow
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
-from app.core.config import settings
+from app.genkit_flows.flow_decorator import async_genkit_flow
 from pydantic import BaseModel, Field
 
 # Import the supporting flows
@@ -45,9 +46,7 @@ async def _perform_semantic_analysis(resume_text: str, job_description: str) -> 
         raise RuntimeError("Genkit model not available for semantic analysis")
 
     semantic_prompt = format_prompt(
-        "semantic_analysis",
-        resume_text=resume_text,
-        job_description=job_description
+        "semantic_analysis", resume_text=resume_text, job_description=job_description
     )
 
     semantic_response = await model.generate(
@@ -365,26 +364,58 @@ async def atsScoring(
         CategoryAnalysis(
             name="Keyword Optimization",
             score=round(keyword_analysis["score"], 2),
-            status="good" if keyword_analysis["score"] >= 80 else "warning" if keyword_analysis["score"] >= 60 else "poor",
-            suggestions=[
-                f"Add missing keywords: {', '.join(keyword_analysis['missingKeywords'][:3])}" if keyword_analysis["missingKeywords"] else "Excellent keyword coverage",
-                "Consider using synonyms and variations of key terms",
-            ] if keyword_analysis["missingKeywords"] else ["Excellent keyword coverage"]
+            status=(
+                "good"
+                if keyword_analysis["score"] >= 80
+                else "warning" if keyword_analysis["score"] >= 60 else "poor"
+            ),
+            suggestions=(
+                [
+                    (
+                        f"Add missing keywords: {', '.join(keyword_analysis['missingKeywords'][:3])}"
+                        if keyword_analysis["missingKeywords"]
+                        else "Excellent keyword coverage"
+                    ),
+                    "Consider using synonyms and variations of key terms",
+                ]
+                if keyword_analysis["missingKeywords"]
+                else ["Excellent keyword coverage"]
+            ),
         ),
         CategoryAnalysis(
             name="Content Quality",
             score=semantic_analysis.similarityScore,
-            status="good" if semantic_analysis.similarityScore >= 80 else "warning" if semantic_analysis.similarityScore >= 60 else "poor",
-            suggestions=[semantic_analysis.explanation] if semantic_analysis.explanation else ["Content aligns well with job requirements"]
+            status=(
+                "good"
+                if semantic_analysis.similarityScore >= 80
+                else "warning" if semantic_analysis.similarityScore >= 60 else "poor"
+            ),
+            suggestions=(
+                [semantic_analysis.explanation]
+                if semantic_analysis.explanation
+                else ["Content aligns well with job requirements"]
+            ),
         ),
         CategoryAnalysis(
             name="Format & Structure",
             score=round(formatting_score, 2),
-            status="good" if formatting_score >= 80 else "warning" if formatting_score >= 60 else "poor",
-            suggestions=[
-                "Ensure clear sections for Skills, Experience, and Education" if formatting_score < 100 else "Excellent formatting structure",
-                "Use standard section headers for ATS compatibility",
-            ] if formatting_score < 100 else ["Excellent formatting structure"]
+            status=(
+                "good"
+                if formatting_score >= 80
+                else "warning" if formatting_score >= 60 else "poor"
+            ),
+            suggestions=(
+                [
+                    (
+                        "Ensure clear sections for Skills, Experience, and Education"
+                        if formatting_score < 100
+                        else "Excellent formatting structure"
+                    ),
+                    "Use standard section headers for ATS compatibility",
+                ]
+                if formatting_score < 100
+                else ["Excellent formatting structure"]
+            ),
         ),
     ]
 
@@ -397,7 +428,7 @@ async def atsScoring(
             format_issues.append("Add detailed Work Experience section")
         if not resume_entities.education:
             format_issues.append("Include Education section")
-    
+
     if not format_issues:
         format_issues = ["No major formatting issues detected"]
 
@@ -419,7 +450,7 @@ async def atsScoring(
         categories=categories,
         keywordMatches=KeywordMatches(
             matched=keyword_analysis["matchedKeywords"],
-            missing=keyword_analysis["missingKeywords"]
+            missing=keyword_analysis["missingKeywords"],
         ),
         formatIssues=format_issues,
         recommendations=recommendations,

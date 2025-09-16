@@ -118,7 +118,6 @@ def get_firebase_app():
     Returns:
         The Firebase app instance or None if initialization failed.
     """
-    global _firebase_app
     if _firebase_app is None:
         initialize_firebase()
     return _firebase_app
