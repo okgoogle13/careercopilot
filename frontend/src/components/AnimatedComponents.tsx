@@ -1,33 +1,16 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from './ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from './ui/card';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { Label } from './ui/label';
-import { Input } from './ui/input';
 import {
-  Sparkles,
-  Zap,
-  ChevronDown,
   ChevronRight,
   CheckCircle2,
   XCircle,
   AlertCircle,
   RefreshCw,
-  Loader,
-  Bell,
-  Star,
-  Heart,
-  Bookmark,
-  Share2,
-  MoreHorizontal,
   TrendingUp,
   ArrowUp,
   ArrowDown,
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
 } from 'lucide-react';
 
 // Animated Modal Component

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
+
 import { Progress } from './ui/progress';
 import {
   ArrowLeft,
@@ -98,9 +98,7 @@ const mockAnalysisResult: AnalysisResult = {
 
 export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardProps) {
   const [analysisResult] = useState<AnalysisResult>(mockAnalysisResult);
-  const [selectedProfile, setSelectedProfile] = useState(
-    'Community Support Worker - Nishant Dougall'
-  );
+  const selectedProfile = 'Community Support Worker - Nishant Dougall';
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-400';

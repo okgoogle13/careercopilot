@@ -7,7 +7,6 @@ import {
   ArrowLeft,
   Sparkles,
   TrendingUp,
-  TrendingDown,
   Target,
   BookOpen,
   AlertCircle,

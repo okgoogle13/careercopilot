@@ -7,6 +7,7 @@
 - **Validate Secrets**: `python3 scripts/production-secrets-validator.py` - Validate all production secrets
 - **Deployment Checklist**: `python3 scripts/production-secrets-validator.py --checklist` - Generate deployment checklist
 - **Environment Template**: `python3 scripts/production-secrets-validator.py --env-template` - Generate .env template
+- **Firebase Config**: `python3 scripts/fetch-firebase-config.py` - Fetch Firebase config from Secret Manager for frontend builds
 
 ### Development Configuration
 - **Interactive Setup**: `./setup-api-keys.sh` - Interactive local development setup
@@ -25,6 +26,10 @@
 1. ./setup-api-keys.sh  # Interactive setup
 2. python3 scripts/test-configuration.py  # Validate setup
 3. ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py  # Test Genkit integration
+
+# Firebase Configuration from Secret Manager:
+# For production builds (requires GOOGLE_CLOUD_PROJECT environment variable):
+GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.py --output frontend/.env.production.local
 ```
 
 ## Configuration Files

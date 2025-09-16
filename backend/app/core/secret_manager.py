@@ -126,7 +126,7 @@ def get_firebase_credentials() -> Optional[dict]:
         dict: Parsed JSON credentials or None if not found
     """
     try:
-        creds_json = get_secret("FIREBASE_CREDENTIALS_JSON")
+        creds_json = get_secret("firebase-credentials-json")
         if creds_json:
             import json
 
@@ -146,14 +146,14 @@ def get_firebase_config() -> dict:
     try:
         config = {
             "project_id": get_secret(
-                "FIREBASE_PROJECT_ID", default=os.getenv("GCP_PROJECT_ID", "")
+                "firebase-project-id", default=os.getenv("GCP_PROJECT_ID", "")
             ),
-            "storage_bucket": get_secret("FIREBASE_STORAGE_BUCKET", default=""),
-            "database_url": get_secret("FIREBASE_DATABASE_URL", default=""),
-            "use_emulator": get_secret("FIREBASE_EMULATOR", default="false").lower() == "true",
-            "auth_emulator_host": get_secret("FIREBASE_AUTH_EMULATOR_HOST", default=""),
-            "storage_emulator_host": get_secret("FIREBASE_STORAGE_EMULATOR_HOST", default=""),
-            "database_emulator_host": get_secret("FIREBASE_DATABASE_EMULATOR_HOST", default=""),
+            "storage_bucket": get_secret("firebase-storage-bucket", default=""),
+            "database_url": get_secret("firebase-database-url", default=""),
+            "use_emulator": get_secret("firebase-emulator", default="false").lower() == "true",
+            "auth_emulator_host": get_secret("firebase-auth-emulator-host", default=""),
+            "storage_emulator_host": get_secret("firebase-storage-emulator-host", default=""),
+            "database_emulator_host": get_secret("firebase-database-emulator-host", default=""),
         }
         return config
     except Exception as e:
@@ -166,6 +166,37 @@ def get_firebase_config() -> dict:
             "auth_emulator_host": os.getenv("FIREBASE_AUTH_EMULATOR_HOST", ""),
             "storage_emulator_host": os.getenv("FIREBASE_STORAGE_EMULATOR_HOST", ""),
             "database_emulator_host": os.getenv("FIREBASE_DATABASE_EMULATOR_HOST", ""),
+        }
+
+
+def get_firebase_frontend_config() -> dict:
+    """
+    Get Firebase frontend configuration from Secret Manager or environment variables.
+
+    Returns:
+        dict: Firebase frontend configuration for VITE environment variables
+    """
+    try:
+        config = {
+            "api_key": get_secret("vite-firebase-api-key", default=""),
+            "auth_domain": get_secret("vite-firebase-auth-domain", default=""),
+            "project_id": get_secret(
+                "firebase-project-id", default=os.getenv("GCP_PROJECT_ID", "")
+            ),
+            "storage_bucket": get_secret("firebase-storage-bucket", default=""),
+            "messaging_sender_id": get_secret("vite-firebase-messaging-sender-id", default=""),
+            "app_id": get_secret("vite-firebase-app-id", default=""),
+        }
+        return config
+    except Exception as e:
+        # Fallback to environment variables
+        return {
+            "api_key": os.getenv("VITE_FIREBASE_API_KEY", ""),
+            "auth_domain": os.getenv("VITE_FIREBASE_AUTH_DOMAIN", ""),
+            "project_id": os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
+            "storage_bucket": os.getenv("FIREBASE_STORAGE_BUCKET", ""),
+            "messaging_sender_id": os.getenv("VITE_FIREBASE_MESSAGING_SENDER_ID", ""),
+            "app_id": os.getenv("VITE_FIREBASE_APP_ID", ""),
         }
 
 
