@@ -106,6 +106,41 @@ class ProductionSecretsManager:
                 "example": "careercopilot-468811.appspot.com",
                 "validation": lambda x: x.endswith(".appspot.com"),
             },
+            {
+                "id": "firebase-database-url",
+                "description": "Firebase Realtime Database URL (optional)",
+                "required": False,
+                "example": "https://careercopilot-468811.firebaseio.com",
+                "validation": lambda x: x.startswith("https://") and "firebaseio.com" in x,
+            },
+            {
+                "id": "vite-firebase-api-key",
+                "description": "Firebase Web API Key for frontend",
+                "required": True,
+                "example": "AIzaSyBmK1-hEy9x7Kq4z8F3lNvP2wRtGsHjMnO",
+                "validation": lambda x: x.startswith("AIzaSy") and len(x) > 30,
+            },
+            {
+                "id": "vite-firebase-auth-domain",
+                "description": "Firebase Auth Domain for frontend",
+                "required": True,
+                "example": "careercopilot-468811.firebaseapp.com",
+                "validation": lambda x: x.endswith(".firebaseapp.com"),
+            },
+            {
+                "id": "vite-firebase-messaging-sender-id",
+                "description": "Firebase Messaging Sender ID",
+                "required": True,
+                "example": "123456789012",
+                "validation": lambda x: x.isdigit() and len(x) >= 10,
+            },
+            {
+                "id": "vite-firebase-app-id",
+                "description": "Firebase App ID",
+                "required": True,
+                "example": "1:123456789012:web:abcdef1234567890abcdef",
+                "validation": lambda x: ":" in x and "web:" in x,
+            },
         ]
 
     def _get_secret_manager_client(self):
