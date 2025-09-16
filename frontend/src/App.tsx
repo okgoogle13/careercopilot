@@ -1,5 +1,31 @@
 import { useState } from 'react';
-import { ThemeContextProvider } from './theme/ThemeContext';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import {
+  Box,
+  Button,
+  Typography,
+  Paper,
+  Container,
+  Card,
+  CardContent,
+  Grid,
+  Stack,
+  Chip,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListItemButton
+} from '@mui/material';
+import theme from './theme/theme';
+
+// Import components (keeping existing imports)
 import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './components/Dashboard';
 import { ResumeBuilder } from './components/ResumeBuilder';
@@ -24,9 +50,6 @@ import { InterviewPrep } from './components/InterviewPrep';
 import { Settings } from './components/Settings';
 import { MUITest } from './components/MUITest';
 
-import { Button } from './components/ui/button';
-import { Card } from './components/ui/card';
-import { Badge } from './components/ui/badge';
 import {
   Navigation,
   Eye,
@@ -44,6 +67,7 @@ import {
   Upload,
   Target,
   LogIn,
+  Menu as MenuIcon,
 } from 'lucide-react';
 
 // Complete view types matching the wireframe
@@ -102,6 +126,7 @@ export default function App() {
     'resume' | 'cover-letter' | 'selection-criteria' | null
   >(null);
   const [showDemoNav, setShowDemoNav] = useState(true);
+  const [demoNavOpen, setDemoNavOpen] = useState(false);
 
   // User state to track onboarding progress
   const [userState, setUserState] = useState<UserState>({
@@ -377,6 +402,8 @@ export default function App() {
     } else if (viewId === 'dashboard' || viewId === 'dashboard-empty') {
       setActiveTab('dashboard');
     }
+
+    setDemoNavOpen(false);
   };
 
   const getCurrentViewInfo = () => {
@@ -398,73 +425,84 @@ export default function App() {
       case 'dashboard-empty':
         return (
           <Dashboard
-            onCreateProfile={handleCreateFirstDocument}
-            onEditProfile={handleEditProfile}
             isEmpty={true}
+            onCreateDocument={handleCreateFirstDocument}
+            onTabChange={handleTabChange}
+            activeTab={activeTab}
           />
         );
 
       case 'dashboard':
         return (
           <Dashboard
-            onCreateProfile={handleCreateNewDocument}
+            isEmpty={false}
+            onCreateDocument={handleCreateNewDocument}
             onEditProfile={handleEditProfile}
-            onNavigateToCareerGrowth={() => setCurrentView('career-growth-hub')}
-            onNavigateToSettings={() => setCurrentView('settings')}
+            onTabChange={handleTabChange}
+            activeTab={activeTab}
+            onCareerGrowthClick={() => setCurrentView('career-growth-hub')}
           />
         );
 
       case 'document-type-selector':
         return (
           <DocumentTypeSelector
-            onSelectType={handleDocumentTypeSelection}
+            onSelect={handleDocumentTypeSelection}
             onBack={handleBackToDashboard}
           />
         );
 
       case 'job-input':
-        return <JobInput onAnalyze={handleJobAnalysis} onBack={handleBackToDocumentType} />;
+        return (
+          <JobInput
+            documentType={selectedDocumentType!}
+            onAnalyze={handleJobAnalysis}
+            onBack={handleBackToDocumentType}
+          />
+        );
 
       case 'ats-analysis':
         return (
-          <ATSAnalysisDashboard onBack={handleBackToJobInput} onNext={handleATSAnalysisComplete} />
+          <ATSAnalysisDashboard
+            onContinue={handleATSAnalysisComplete}
+            onBack={handleBackToJobInput}
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+          />
         );
 
       case 'template-selector':
         return (
           <TemplateSelector
-            onBack={handleBackToDashboard}
-            onSelectTemplate={handleTemplateSelection}
+            documentType={selectedDocumentType === 'selection-criteria' ? 'resume' : selectedDocumentType!}
+            onSelect={handleTemplateSelection}
+            onBack={handleBackToJobInput}
           />
         );
 
       case 'resume-builder':
         return (
           <ResumeBuilder
-            onBack={selectedTemplate ? handleBackToTemplates : handleBackToDashboard}
-            onNext={handleDocumentComplete}
-            profileName={selectedProfile?.name}
+            template={selectedTemplate!}
+            onComplete={handleDocumentComplete}
+            onBack={handleBackToTemplates}
+            editingProfile={selectedProfile}
           />
         );
 
       case 'document-preview':
         return (
           <DocumentPreview
-            onBack={handleBackToTemplates}
+            onBack={() => setCurrentView('resume-builder')}
             onEdit={() => setCurrentView('resume-builder')}
             onSave={handleDocumentSaved}
             documentType={selectedTemplate?.type || 'resume'}
-            templateName={selectedTemplate?.name || 'Modern Minimal'}
+            templateName={selectedTemplate?.name || 'Unknown'}
           />
         );
 
       case 'career-growth-hub':
-        return (
-          <CareerGrowthHub
-            onNavigate={handleCareerGrowthNavigation}
-            onBack={handleBackToDashboard}
-          />
-        );
+        return <CareerGrowthHub onNavigate={handleCareerGrowthNavigation} onBack={handleBackToDashboard} />;
 
       case 'job-matching':
         return <JobMatching onBack={handleBackToCareerHub} />;
@@ -479,137 +517,147 @@ export default function App() {
         return <Settings onBack={handleBackToDashboard} />;
 
       case 'loading-states':
-        return <LoadingStates onBack={handleBackToDashboard} />;
+        return <LoadingStates />;
 
       case 'component-library':
-        return (
-          <ComponentLibrary
-            onBack={handleBackToDashboard}
-            onNavigateToAnimated={() => setCurrentView('animated-showcase')}
-          />
-        );
-
-      case 'animated-showcase':
-        return <AnimatedShowcase onBack={() => setCurrentView('component-library')} />;
+        return <ComponentLibrary />;
 
       case 'state-demo':
-        return <StateDemoShowcase onBack={() => setCurrentView('component-library')} />;
+        return <StateDemoShowcase />;
+
+      case 'animated-showcase':
+        return <AnimatedShowcase />;
 
       case 'mui-test':
-        return <MUITest onBack={handleBackToDashboard} />;
+        return <MUITest />;
 
       default:
-        return (
-          <Dashboard onCreateProfile={handleCreateNewDocument} onEditProfile={handleEditProfile} />
-        );
+        return <Dashboard isEmpty={false} onCreateDocument={handleCreateNewDocument} onTabChange={handleTabChange} activeTab={activeTab} />;
     }
   };
 
-  // Get current view info for display
   const currentViewInfo = getCurrentViewInfo();
-  const CurrentViewIcon = currentViewInfo.icon;
 
-  // Only show sidebar for authenticated views
-  const showSidebar =
-    userState.isAuthenticated && !['auth', 'upload-resume', 'profile-editor'].includes(currentView);
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ display: 'flex', height: '100vh', bgcolor: 'background.default' }}>
+        {/* Demo Navigation Drawer */}
+        <Drawer
+          open={demoNavOpen}
+          onClose={() => setDemoNavOpen(false)}
+          sx={{
+            width: 320,
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: 320,
+              boxSizing: 'border-box',
+              bgcolor: 'background.paper',
+            },
+          }}
+        >
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
+              Demo Navigation
+            </Typography>
+            <List>
+              {demoViews.map((view) => {
+                const Icon = view.icon;
+                return (
+                  <ListItem key={view.id} disablePadding>
+                    <ListItemButton
+                      selected={currentView === view.id}
+                      onClick={() => handleDemoNavigation(view.id)}
+                      sx={{
+                        borderRadius: 2,
+                        mb: 0.5,
+                        '&.Mui-selected': {
+                          bgcolor: 'primary.main',
+                          color: 'primary.contrastText',
+                          '&:hover': {
+                            bgcolor: 'primary.dark',
+                          },
+                        },
+                      }}
+                    >
+                      <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}>
+                        <Icon size={20} />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={view.label}
+                        secondary={view.description}
+                        secondaryTypographyProps={{
+                          sx: { color: 'text.secondary', fontSize: '0.75rem' }
+                        }}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Box>
+        </Drawer>
 
-  // Feature flag for MUI migration
-  const isMuiEnabled = process.env.REACT_APP_ENABLE_MUI === 'true';
+        {/* Main Content */}
+        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          {/* Top App Bar */}
+          {showDemoNav && (
+            <AppBar position="static" elevation={0} sx={{ bgcolor: 'background.paper', borderBottom: 1, borderColor: 'divider' }}>
+              <Toolbar>
+                <IconButton
+                  edge="start"
+                  onClick={() => setDemoNavOpen(true)}
+                  sx={{ mr: 2, color: 'text.primary' }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" sx={{ flexGrow: 1, color: 'text.primary' }}>
+                  {currentViewInfo.label}
+                </Typography>
+                <Chip
+                  label={currentViewInfo.description}
+                  size="small"
+                  sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
+                />
+                <Button
+                  onClick={() => setShowDemoNav(false)}
+                  size="small"
+                  sx={{ ml: 2 }}
+                >
+                  Hide Demo Nav
+                </Button>
+              </Toolbar>
+            </AppBar>
+          )}
 
-  const AppContent = () => (
-    <div className="h-screen bg-background text-foreground flex dark">
-      {showSidebar && <Sidebar activeTab={activeTab} onTabChange={handleTabChange} />}
-      <div className="flex-1 relative">
-        {renderContent()}
+          {/* Content Area */}
+          <Box sx={{ flex: 1, overflow: 'auto' }}>
+            {renderContent()}
+          </Box>
 
-        {/* Enhanced Demo Navigation */}
-        {showDemoNav && (
-          <div className="fixed bottom-4 right-4 z-50">
-            <Card className="bg-card border-border shadow-xl max-w-sm">
-              <div className="p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Navigation className="w-4 h-4 text-primary" />
-                    <h3 className="font-medium text-card-foreground">Wireframe Navigator</h3>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowDemoNav(false)}
-                    className="h-6 w-6 p-0 text-muted-foreground hover:text-foreground"
-                  >
-                    ×
-                  </Button>
-                </div>
-
-                <div className="space-y-2 mb-3">
-                  <div className="flex items-center gap-2 p-2 bg-primary/10 rounded-md">
-                    <CurrentViewIcon className="w-3 h-3 text-primary" />
-                    <div>
-                      <p className="text-xs font-medium text-primary">{currentViewInfo.label}</p>
-                      <p className="text-xs text-muted-foreground">{currentViewInfo.description}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-1 max-h-80 overflow-y-auto">
-                  <p className="text-xs text-muted-foreground mb-2">Complete User Flow:</p>
-                  {demoViews.map((view) => {
-                    const ViewIcon = view.icon;
-                    return (
-                      <Button
-                        key={view.id}
-                        variant="ghost"
-                        size="sm"
-                        className={`w-full justify-start gap-2 h-8 text-xs ${
-                          currentView === view.id
-                            ? 'bg-primary/20 text-primary'
-                            : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                        }`}
-                        onClick={() => handleDemoNavigation(view.id)}
-                      >
-                        <ViewIcon className="w-3 h-3" />
-                        {view.label}
-                        {currentView === view.id && (
-                          <Badge variant="secondary" className="ml-auto h-4 px-1 text-xs">
-                            Current
-                          </Badge>
-                        )}
-                      </Button>
-                    );
-                  })}
-                </div>
-
-                <div className="mt-3 pt-3 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
-                    Explore the complete Career Copilot user journey from authentication to document
-                    creation to career growth.
-                  </p>
-                </div>
-              </div>
-            </Card>
-          </div>
-        )}
-
-        {/* Show Demo Nav Button when hidden */}
-        {!showDemoNav && (
-          <Button
-            className="fixed bottom-4 right-4 z-50 rounded-full h-12 w-12 p-0 bg-primary hover:bg-primary/90"
-            onClick={() => setShowDemoNav(true)}
-          >
-            <Navigation className="w-5 h-5" />
-          </Button>
-        )}
-      </div>
-    </div>
-  );
-
-  return isMuiEnabled ? (
-    <ThemeContextProvider>
-      <AppContent />
-    </ThemeContextProvider>
-  ) : (
-    <AppContent />
+          {/* Show Demo Nav Button (when hidden) */}
+          {!showDemoNav && (
+            <Box sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1000 }}>
+              <Button
+                variant="contained"
+                onClick={() => setShowDemoNav(true)}
+                startIcon={<Navigation />}
+                sx={{
+                  borderRadius: 20,
+                  px: 3,
+                  py: 1,
+                  bgcolor: 'primary.main',
+                  '&:hover': {
+                    bgcolor: 'primary.dark',
+                  },
+                }}
+              >
+                Demo Navigation
+              </Button>
+            </Box>
+          )}
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
-// test
