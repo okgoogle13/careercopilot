@@ -13,14 +13,9 @@ import { Badge } from './ui/badge';
 import { LoadingCard, LoadingProfileCard } from './LoadingCard';
 import { ErrorCard, ErrorProfileCard } from './ErrorCard';
 import {
-  Settings,
   Star,
   Heart,
-  Bookmark,
-  Share2,
-  MoreHorizontal,
   User,
-  Calendar,
   Target,
   TrendingUp,
   FileText,

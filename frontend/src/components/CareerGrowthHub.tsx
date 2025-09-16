@@ -19,8 +19,6 @@ import {
   Plus,
   Star,
   BarChart3,
-  Calendar,
-  Zap,
 } from 'lucide-react';
 
 interface Goal {
@@ -196,18 +194,8 @@ export function CareerGrowthHub({
   onBack,
   userGoals = mockGoals,
   userSkills = mockSkills,
-  onAddGoal = () => {},
-  onUpdateGoal = () => {},
 }: CareerGrowthHubProps) {
-  const getCategoryIcon = (category: Goal['category']) => {
-    const icons = {
-      skill: BookOpen,
-      career: TrendingUp,
-      network: Users,
-      certification: Trophy,
-    };
-    return icons[category] || Target;
-  };
+  
 
   const getSkillCategoryColor = (category: Skill['category']) => {
     const colors = {

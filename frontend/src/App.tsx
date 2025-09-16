@@ -4,18 +4,10 @@ import {
   Box,
   Button,
   Typography,
-  Paper,
-  Container,
-  Card,
-  CardContent,
-  Grid,
-  Stack,
   Chip,
   AppBar,
   Toolbar,
   IconButton,
-  Menu,
-  MenuItem,
   Drawer,
   List,
   ListItem,
@@ -26,7 +18,6 @@ import {
 import theme from './theme/theme';
 
 // Import components (keeping existing imports)
-import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './components/Dashboard';
 import { ResumeBuilder } from './components/ResumeBuilder';
 import { ATSAnalysisDashboard } from './components/ATSAnalysisDashboard';

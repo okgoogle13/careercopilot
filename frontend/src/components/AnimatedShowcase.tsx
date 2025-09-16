@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 import { Label } from './ui/label';
-import { Separator } from './ui/separator';
 import { ArrowLeft, Sparkles, Play, Pause, RotateCcw } from 'lucide-react';
 import {
   AnimatedModal,
@@ -11,7 +9,6 @@ import {
   AnimatedTabs,
   AnimatedProgress,
   AnimatedNotification,
-  AnimatedCard,
   AnimatedButton,
   ExpandableCard,
   StaggeredList,
@@ -20,9 +17,6 @@ import {
 } from './AnimatedComponents';
 import {
   Star,
-  Heart,
-  Bookmark,
-  Share2,
   User,
   FileText,
   Target,
@@ -30,9 +24,6 @@ import {
   Settings,
   Bell,
   Shield,
-  Download,
-  Upload,
-  Search,
 } from 'lucide-react';
 
 interface AnimatedShowcaseProps {
@@ -430,7 +421,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                   key={`list-${animationKey}`}
                   items={listItems}
                   className="space-y-3"
-                  renderItem={(item, index) => (
+                  renderItem={(item, _index) => (
                     <div className="p-4 bg-muted rounded-lg">
                       <h4 className="font-medium">{item.title}</h4>
                       <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
