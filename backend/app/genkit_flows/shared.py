@@ -1,7 +1,7 @@
 from typing import Callable, Type
 
-from app.genkit_flows.flow_decorator import create_flow_wrapper
 from app.core.genkit_init import get_model
+from app.genkit_flows.flow_decorator import create_flow_wrapper
 from pydantic import BaseModel
 
 
@@ -21,16 +21,16 @@ def create_extraction_flow(
     Returns:
         A Genkit flow function.
     """
-    
+
     def extraction_flow(input_text: str) -> BaseModel:
         """
         A dynamically generated flow for entity extraction.
         """
         prompt = prompt_template.format(input_text=input_text)
-        
+
         # Model availability is guaranteed by the decorator
         model = get_model()
-        
+
         response = model.generate(
             prompt=prompt,
             config={
@@ -42,8 +42,4 @@ def create_extraction_flow(
         return response.output()
 
     # Wrap with our standardized decorator
-    return create_flow_wrapper(
-        func=extraction_flow,
-        name=name,
-        output_schema=output_schema
-    )
+    return create_flow_wrapper(func=extraction_flow, name=name, output_schema=output_schema)

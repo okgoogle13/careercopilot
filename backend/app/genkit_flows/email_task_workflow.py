@@ -153,7 +153,7 @@ def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
         workflow_result.success = True
         workflow_result.execution_time_seconds = (datetime.now() - start_time).total_seconds()
 
-        print(f"Workflow completed successfully:")
+        print("Workflow completed successfully:")
         print(f"- Opportunities found: {workflow_result.total_opportunities_found}")
         print(f"- High-scoring opportunities: {workflow_result.high_scoring_opportunities}")
         print(f"- Calendar tasks created: {workflow_result.tasks_created}")
@@ -208,7 +208,7 @@ async def _process_opportunity(
 
         # Step 3: Create calendar task if high-scoring (> 80)
         if opportunity_result.match_score > 80:
-            print(f"High-scoring opportunity detected! Creating calendar task...")
+            print("High-scoring opportunity detected! Creating calendar task...")
 
             # Only create calendar task if there's a deadline
             if opportunity.get("deadline"):

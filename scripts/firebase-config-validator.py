@@ -39,12 +39,12 @@ class FirebaseConfigValidator:
         """Initialize the Firebase validator."""
         self.project_id = project_id
         self.staging_project_id = "careercopilot-staging"
-        
+
         # Load Firebase configuration files
         self.root_path = Path(__file__).parent.parent
         self.firebase_json = self._load_firebase_json()
         self.firebaserc = self._load_firebaserc()
-        
+
         # Firebase service requirements
         self.required_services = {
             "authentication": {
@@ -182,7 +182,7 @@ class FirebaseConfigValidator:
                 "staging": self.staging_project_id,
                 "production": self.project_id,
             }
-            
+
             for env, expected_id in expected_projects.items():
                 if projects.get(env) != expected_id:
                     result["errors"].append(
@@ -244,14 +244,14 @@ class FirebaseConfigValidator:
             try:
                 with open(firestore_rules_path, 'r') as f:
                     rules_content = f.read()
-                
+
                 # Basic validation
                 if "rules_version = '2'" in rules_content:
                     result["firestore_rules"]["valid"] = True
-                
+
                 # Count rules (basic heuristic)
                 result["firestore_rules"]["rules_count"] = rules_content.count("match /")
-                
+
             except Exception as e:
                 result["errors"].append(f"Error reading Firestore rules: {e}")
 
@@ -262,14 +262,14 @@ class FirebaseConfigValidator:
             try:
                 with open(storage_rules_path, 'r') as f:
                     rules_content = f.read()
-                
+
                 # Basic validation
                 if "rules_version = '2'" in rules_content:
                     result["storage_rules"]["valid"] = True
-                
+
                 # Count rules (basic heuristic)
                 result["storage_rules"]["rules_count"] = rules_content.count("match /")
-                
+
             except Exception as e:
                 result["errors"].append(f"Error reading Storage rules: {e}")
 
@@ -291,11 +291,11 @@ class FirebaseConfigValidator:
             try:
                 with open(indexes_path, 'r') as f:
                     indexes_data = json.load(f)
-                
+
                 result["valid_format"] = True
                 result["indexes_count"] = len(indexes_data.get("indexes", []))
                 result["field_overrides_count"] = len(indexes_data.get("fieldOverrides", []))
-                
+
             except (json.JSONDecodeError, KeyError) as e:
                 result["errors"].append(f"Invalid indexes file format: {e}")
 
@@ -333,7 +333,7 @@ class FirebaseConfigValidator:
 
             # Try to initialize Firebase Admin SDK
             from backend.app.core.firebase import initialize_firebase, get_firestore, get_auth, get_storage
-            
+
             app = initialize_firebase()
             if app:
                 # Test Firestore connection
@@ -383,14 +383,14 @@ class FirebaseConfigValidator:
         # Check environment variables
         result["firebase_project_id"] = os.getenv("FIREBASE_PROJECT_ID") or os.getenv("GCP_PROJECT_ID")
         result["use_emulator"] = os.getenv("FIREBASE_EMULATOR", "false").lower() == "true"
-        
+
         # Check emulator configuration
         emulator_vars = [
             "FIREBASE_AUTH_EMULATOR_HOST",
-            "FIREBASE_STORAGE_EMULATOR_HOST", 
+            "FIREBASE_STORAGE_EMULATOR_HOST",
             "FIREBASE_DATABASE_EMULATOR_HOST",
         ]
-        
+
         for var in emulator_vars:
             value = os.getenv(var)
             if value:
@@ -402,7 +402,7 @@ class FirebaseConfigValidator:
             "FIREBASE_STORAGE_BUCKET",
             "FIREBASE_CREDENTIALS_JSON",
         ]
-        
+
         secrets_count = sum(1 for secret in firebase_secrets if os.getenv(secret))
         result["secrets_configured"] = secrets_count >= 2  # At least project_id and one other
 
@@ -434,12 +434,12 @@ class FirebaseConfigValidator:
         if cli_validation['current_user']:
             print(f"Current User: {cli_validation['current_user']}")
         print(f"Projects Accessible: {len(cli_validation['projects_accessible'])}")
-        
+
         print("\n🏗️ Project Configuration")
         print("-" * 30)
         print(f"firebase.json: {'✅' if project_validation['firebase_json_valid'] else '❌'}")
         print(f".firebaserc: {'✅' if project_validation['firebaserc_valid'] else '❌'}")
-        
+
         projects = project_validation['projects_configured']
         print(f"Default Project: {projects.get('default', 'Not set')}")
         print(f"Staging Project: {projects.get('staging', 'Not set')}")
@@ -475,7 +475,7 @@ class FirebaseConfigValidator:
 
         # Count errors
         total_errors = sum(len(validation.get('errors', [])) for validation in [
-            cli_validation, project_validation, rules_validation, 
+            cli_validation, project_validation, rules_validation,
             indexes_validation, admin_validation, env_validation
         ])
 
@@ -495,7 +495,7 @@ class FirebaseConfigValidator:
         print("=" * 50)
         print(f"Total Errors: {total_errors}")
         print(f"Critical Checks Passed: {sum(critical_checks)}/{len(critical_checks)}")
-        
+
         if deployment_ready:
             print("\n🎉 FIREBASE DEPLOYMENT READY")
             print("All critical Firebase services are properly configured!")
@@ -533,22 +533,22 @@ class FirebaseConfigValidator:
 def main():
     """Main function."""
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Validate Firebase configuration for CareerCopilot")
     parser.add_argument("--project-id", default="careercopilot-468811",
                        help="Firebase project ID for production")
     parser.add_argument("--json", action="store_true",
                        help="Output results as JSON")
-    
+
     args = parser.parse_args()
-    
+
     validator = FirebaseConfigValidator(project_id=args.project_id)
     report = validator.generate_deployment_report()
-    
+
     if args.json:
         print("\n" + "=" * 50)
         print(json.dumps(report, indent=2))
-    
+
     sys.exit(0 if report["deployment_ready"] else 1)
 
 

@@ -111,7 +111,8 @@ class RAGIntegration:
             logger.error(f"Failed to process and index document: {str(e)}")
             if not isinstance(e, AIError):
                 raise AIError(
-                    f"Document processing failed: {str(e)}", error_type=AIErrorType.PROCESSING_ERROR
+                    f"Document processing failed: {str(e)}",
+                    error_type=AIErrorType.PROCESSING_ERROR,
                 ) from e
             raise
 
@@ -145,7 +146,8 @@ class RAGIntegration:
             query_embedding = await self.rag_service.get_embeddings([query])
             if not query_embedding:
                 raise AIError(
-                    "Failed to generate query embedding", error_type=AIErrorType.EMBEDDING_ERROR
+                    "Failed to generate query embedding",
+                    error_type=AIErrorType.EMBEDDING_ERROR,
                 )
 
             # Search for similar documents using search_vectors
@@ -183,7 +185,8 @@ class RAGIntegration:
             logger.error(f"RAG query failed: {str(e)}")
             if not isinstance(e, AIError):
                 raise AIError(
-                    f"Query processing failed: {str(e)}", error_type=AIErrorType.QUERY_ERROR
+                    f"Query processing failed: {str(e)}",
+                    error_type=AIErrorType.QUERY_ERROR,
                 ) from e
             raise
 

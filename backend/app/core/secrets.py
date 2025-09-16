@@ -149,8 +149,8 @@ def get_database_config() -> dict:
     return {
         "host": get_app_secret("db-host") if _secret_exists("db-host") else "postgres",
         "port": int(get_app_secret("db-port") if _secret_exists("db-port") else "5432"),
-        "database": get_app_secret("db-name") if _secret_exists("db-name") else "careercopilot",
-        "username": get_app_secret("db-user") if _secret_exists("db-user") else "careercopilot",
+        "database": (get_app_secret("db-name") if _secret_exists("db-name") else "careercopilot"),
+        "username": (get_app_secret("db-user") if _secret_exists("db-user") else "careercopilot"),
         "password": get_app_secret("db-password"),
     }
 
@@ -160,7 +160,7 @@ def get_redis_config() -> dict:
     password = get_app_secret("redis-password") if _secret_exists("redis-password") else None
     return {
         "password": password,
-        "url": f"redis://:{password}@redis:6379/0" if password else "redis://redis:6379/0",
+        "url": (f"redis://:{password}@redis:6379/0" if password else "redis://redis:6379/0"),
     }
 
 

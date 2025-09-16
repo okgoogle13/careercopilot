@@ -21,6 +21,7 @@ class JobAnalyzer:
     def __init__(self):
         # Import the working genkit flow
         from app.genkit_flows.job_analyzer import analyze_job_description
+
         self.job_analysis_flow = analyze_job_description
 
     @monitor_performance("job_description_analysis")
@@ -46,16 +47,15 @@ class JobAnalyzer:
 
             # Sanitize inputs
             sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
-            
+
             # Delegate to the genkit flow implementation
-            result = self.job_analysis_flow(
-                job_description=sanitized_job_desc.sanitized_content
-            )
-            
+            result = self.job_analysis_flow(job_description=sanitized_job_desc.sanitized_content)
+
             # Convert result to dict if needed
             if isinstance(result, str):
                 try:
                     import json
+
                     result_dict = json.loads(result)
                 except json.JSONDecodeError:
                     # If not JSON, wrap in basic structure

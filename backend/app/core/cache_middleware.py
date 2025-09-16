@@ -116,7 +116,10 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
             "ats_scoring",
             "voice_profile",
         ],  # Additional endpoint
-        "/api/v1/profile": ["voice_profile", "resume_analysis"],  # Restored - profile module fixed
+        "/api/v1/profile": [
+            "voice_profile",
+            "resume_analysis",
+        ],  # Restored - profile module fixed
         "/api/v1/users": ["voice_profile", "resume_analysis", "ats_scoring"],
     }
 

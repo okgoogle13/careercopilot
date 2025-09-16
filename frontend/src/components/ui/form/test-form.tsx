@@ -42,15 +42,15 @@ export function TestForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name='username'
+          name="username"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder='shadcn' {...field} />
+                <Input placeholder="shadcn" {...field} />
               </FormControl>
               <FormDescription>This is your public display name.</FormDescription>
               <FormMessage />
@@ -59,19 +59,19 @@ export function TestForm() {
         />
         <FormField
           control={form.control}
-          name='email'
+          name="email"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder='your.email@example.com' {...field} />
+                <Input placeholder="your.email@example.com" {...field} />
               </FormControl>
               <FormDescription>We'll never share your email with anyone else.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </Form>
   );

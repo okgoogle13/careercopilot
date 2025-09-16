@@ -2,11 +2,11 @@ import base64
 import json
 from datetime import datetime
 
-from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.core.db import db
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
-from app.core.db import db
 from app.core.secrets import get_user_secret
+from app.genkit_flows.flow_decorator import simple_genkit_flow
 from google.cloud.firestore import SERVER_TIMESTAMP
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
@@ -31,26 +31,24 @@ def get_gmail_service(user_id: str):
 @simple_genkit_flow()
 def extract_job_details_from_email(email_content: str) -> dict:
     """Uses an AI model to extract structured job details from email text."""
-    
+
     # Use the centralized prompt service
-    prompt = format_prompt(
-        "email_job_extraction",
-        email_content=email_content
-    )
+    prompt = format_prompt("email_job_extraction", email_content=email_content)
 
     # Generate the response using the centralized model
     # Model availability is guaranteed by the decorator
     model = get_model()
-    
+
     response = model.generate(
         prompt=prompt,
         config={"response_mime_type": "application/json"},
     )
-    
+
     return response.output()
 
 
 # Flow is automatically registered by the @simple_genkit_flow decorator
+
 
 # Removed @genkit.flow()
 async def scanEmailsForJobOpportunities(user_id: str) -> dict:

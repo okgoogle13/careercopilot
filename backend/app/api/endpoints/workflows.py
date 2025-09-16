@@ -33,7 +33,8 @@ class GenerateApplicationRequest(BaseModel):
 
     job_description: str = Field(description="Complete job description/posting text", min_length=50)
     user_profile: Dict = Field(
-        description="Comprehensive user profile data including resume content", min_items=1
+        description="Comprehensive user profile data including resume content",
+        min_items=1,
     )
 
 
@@ -126,7 +127,7 @@ async def create_application_package(request: GenerateApplicationRequest):
             )
 
         # Generate application package
-        print(f"Starting application package generation...")
+        print("Starting application package generation...")
         result = await generate_application_package(
             job_description=request.job_description, user_profile=request.user_profile
         )
@@ -139,7 +140,7 @@ async def create_application_package(request: GenerateApplicationRequest):
                 message=f"Application package generated successfully with {len(result.components_generated)} components",
                 processing_time_seconds=result.processing_time_seconds,
             )
-            print(f"✓ Application package generated successfully")
+            print("✓ Application package generated successfully")
         else:
             response = GenerateApplicationResponse(
                 success=False,
@@ -147,7 +148,7 @@ async def create_application_package(request: GenerateApplicationRequest):
                 message=f"Partial generation completed. Errors: {'; '.join(result.error_details)}",
                 processing_time_seconds=result.processing_time_seconds,
             )
-            print(f"⚠ Partial application package generated with errors")
+            print("⚠ Partial application package generated with errors")
 
         return response
 
@@ -218,10 +219,12 @@ async def scan_email_for_opportunities(request: ScanEmailRequest):
                 data=result,
                 message=f"Email scan completed. Found {result.total_opportunities_found} opportunities, created {result.tasks_created} tasks",
             )
-            print(f"✓ Email scanning completed successfully")
+            print("✓ Email scanning completed successfully")
         else:
             response = ScanEmailResponse(
-                success=False, data=result, message=f"Email scanning failed: {result.error_message}"
+                success=False,
+                data=result,
+                message=f"Email scanning failed: {result.error_message}",
             )
             print(f"✗ Email scanning failed: {result.error_message}")
 
@@ -255,8 +258,12 @@ async def workflow_health_check():
         # Check if Genkit flows are available
         genkit_available = True
         try:
-            from app.genkit_flows.career_application_workflow import generate_application_package
-            from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
+            from app.genkit_flows.career_application_workflow import (
+                generate_application_package,
+            )
+            from app.genkit_flows.email_task_workflow import (
+                scan_inbox_for_opportunities,
+            )
         except Exception as e:
             genkit_available = False
 
@@ -287,7 +294,8 @@ async def workflow_health_check():
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_503_SERVICE_UNAVAILABLE, detail=f"Health check failed: {str(e)}"
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail=f"Health check failed: {str(e)}",
         )
 
 

@@ -303,7 +303,8 @@ class TestDRYPrinciples:
         )
 
         job_config = FileUploadConfig(
-            allowed_extensions={".pd", ".doc", ".docx", ".txt", ".md"}, max_file_size_mb=5
+            allowed_extensions={".pd", ".doc", ".docx", ".txt", ".md"},
+            max_file_size_mb=5,
         )
 
         # Both should have similar forbidden patterns

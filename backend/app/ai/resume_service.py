@@ -84,7 +84,7 @@ class ResumeAnalysisService(BaseAIService):
         """
         super().__init__(config or {})
         self.config = {
-            "model": config.get("model", settings.ai_model) if config else settings.ai_model,
+            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
             "max_tokens": (
                 config.get("max_tokens", settings.ai_max_tokens)
                 if config
@@ -144,8 +144,8 @@ class ResumeAnalysisService(BaseAIService):
             clean_text = self._sanitize_resume_text(resume_text)
 
             # Use generic document processing
-            from app.core.document_processing import process_document, PromptTemplates
-            
+            from app.core.document_processing import PromptTemplates, process_document
+
             result = await process_document(
                 file_content=clean_text,
                 prompt_template=PromptTemplates.RESUME_ANALYSIS,
@@ -175,7 +175,7 @@ class ResumeAnalysisService(BaseAIService):
     # - _create_analysis_prompt: Use PromptTemplates.RESUME_ANALYSIS
     # - _make_ai_request: Handled by process_document function
     # - _parse_ai_response: Handled by process_document function
-    
+
     # These methods are kept for backward compatibility if needed elsewhere
 
     def _get_default_result(self, resume_text: str) -> ResumeAnalysisResult:

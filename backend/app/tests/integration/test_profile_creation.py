@@ -53,7 +53,9 @@ class TestProfileCreation:
                 }
             )
             app = firebase_admin.initialize_app(
-                credential=cred, options={"projectId": "careercopilot-test"}, name="test-app"
+                credential=cred,
+                options={"projectId": "careercopilot-test"},
+                name="test-app",
             )
 
         # Store the app for cleanup

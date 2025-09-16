@@ -22,11 +22,12 @@ from .base_service import BaseAIService
 logger = logging.getLogger(__name__)
 
 # Type variable for Pydantic models
-T = TypeVar('T', bound=BaseModel)
+T = TypeVar("T", bound=BaseModel)
 
 
 class Education(BaseModel):
     """Education information model."""
+
     degree: str
     field: str
     institution: str
@@ -35,6 +36,7 @@ class Education(BaseModel):
 
 class Experience(BaseModel):
     """Work experience model."""
+
     title: str
     company: str
     start_date: str
@@ -45,6 +47,7 @@ class Experience(BaseModel):
 
 class SalaryRange(BaseModel):
     """Salary range information."""
+
     min: Optional[int] = None
     max: Optional[int] = None
     currency: str = "USD"
@@ -52,8 +55,11 @@ class SalaryRange(BaseModel):
 
 class ResumeAnalysisResult(BaseModel):
     """Result of resume analysis."""
+
     skills: List[str] = Field(default_factory=list, description="List of extracted skills")
-    experience: List[Experience] = Field(default_factory=list, description="Work experience entries")
+    experience: List[Experience] = Field(
+        default_factory=list, description="Work experience entries"
+    )
     education: List[Education] = Field(default_factory=list, description="Education history")
     summary: str = Field(default="", description="Professional summary")
     raw_data: Optional[Dict[str, Any]] = None
@@ -61,6 +67,7 @@ class ResumeAnalysisResult(BaseModel):
 
 class JobDescriptionAnalysisResult(BaseModel):
     """Result of job description analysis."""
+
     title: str = Field(default="", description="Job title")
     company: str = Field(default="", description="Company name")
     location: str = Field(default="", description="Job location")
@@ -90,13 +97,13 @@ class DocumentAnalysisService(BaseAIService):
         Args:
             config: Configuration dictionary with optional keys:
                 - model: The AI model to use (default: from settings)
-                - max_tokens: Maximum tokens for AI response 
+                - max_tokens: Maximum tokens for AI response
                 - temperature: Temperature for AI generation
                 - enabled: Whether the service is enabled
         """
         super().__init__(config or {})
         self.config = {
-            "model": config.get("model", settings.ai_model) if config else settings.ai_model,
+            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
             "max_tokens": (
                 config.get("max_tokens", settings.ai_max_tokens)
                 if config
@@ -120,7 +127,9 @@ class DocumentAnalysisService(BaseAIService):
         self.version = "3.0.0"
         self.prompt_service = get_prompt_service()
 
-    async def analyze_resume(self, resume_text: str, target_industry: str = "") -> ResumeAnalysisResult:
+    async def analyze_resume(
+        self, resume_text: str, target_industry: str = ""
+    ) -> ResumeAnalysisResult:
         """Analyze a resume and return structured results.
 
         Args:
@@ -156,21 +165,23 @@ class DocumentAnalysisService(BaseAIService):
                 response_model=ResumeAnalysisResult,
                 template_params={
                     "resume_content": clean_text,
-                    "target_industry": target_industry or "General"
-                }
+                    "target_industry": target_industry or "General",
+                },
             )
 
         except Exception as e:
             error_msg = f"Failed to analyze resume: {str(e)}"
             logger.error(error_msg, exc_info=True)
-            
+
             # Return a default result with error information
             result = self._get_default_resume_result()
             result.raw_data = result.raw_data or {}
             result.raw_data["error"] = str(e)
             return result
 
-    async def analyze_job_description(self, job_description_text: str) -> JobDescriptionAnalysisResult:
+    async def analyze_job_description(
+        self, job_description_text: str
+    ) -> JobDescriptionAnalysisResult:
         """Analyze a job description and return structured results.
 
         Args:
@@ -198,20 +209,18 @@ class DocumentAnalysisService(BaseAIService):
             # Sanitize input
             clean_text = self._sanitize_text(job_description_text)
 
-            # Use the centralized prompt service  
+            # Use the centralized prompt service
             return await self._analyze_document(
                 document_text=clean_text,
                 template_id="job_description_analysis",
                 response_model=JobDescriptionAnalysisResult,
-                template_params={
-                    "job_description": clean_text
-                }
+                template_params={"job_description": clean_text},
             )
 
         except Exception as e:
             error_msg = f"Failed to analyze job description: {str(e)}"
             logger.error(error_msg, exc_info=True)
-            
+
             # Return a default result with error information
             result = self._get_default_job_result()
             result.raw_data = result.raw_data or {}
@@ -219,11 +228,11 @@ class DocumentAnalysisService(BaseAIService):
             return result
 
     async def analyze_document_generic(
-        self, 
-        document_text: str, 
-        template_id: str, 
-        response_model: Type[T], 
-        **template_params
+        self,
+        document_text: str,
+        template_id: str,
+        response_model: Type[T],
+        **template_params,
     ) -> T:
         """Generic document analysis with custom template and response model.
 
@@ -249,10 +258,7 @@ class DocumentAnalysisService(BaseAIService):
         # Check if service is enabled
         if not self.config.get("enabled", True):
             logger.warning("Document analysis service is disabled")
-            raise AIError(
-                AIErrorType.SERVICE_UNAVAILABLE,
-                "Document analysis service is disabled"
-            )
+            raise AIError(AIErrorType.SERVICE_UNAVAILABLE, "Document analysis service is disabled")
 
         try:
             # Sanitize input
@@ -262,7 +268,7 @@ class DocumentAnalysisService(BaseAIService):
                 document_text=clean_text,
                 template_id=template_id,
                 response_model=response_model,
-                template_params=template_params
+                template_params=template_params,
             )
 
         except Exception as e:
@@ -275,7 +281,7 @@ class DocumentAnalysisService(BaseAIService):
         document_text: str,
         template_id: str,
         response_model: Type[T],
-        template_params: Dict[str, Any]
+        template_params: Dict[str, Any],
     ) -> T:
         """Internal method to perform document analysis using the unified architecture.
 
@@ -293,7 +299,7 @@ class DocumentAnalysisService(BaseAIService):
         if not model:
             raise AIError(
                 AIErrorType.MODEL_UNAVAILABLE,
-                "AI model not available for document analysis"
+                "AI model not available for document analysis",
             )
 
         # Format the prompt using the centralized prompt service
@@ -303,7 +309,7 @@ class DocumentAnalysisService(BaseAIService):
         except Exception as e:
             raise AIError(
                 AIErrorType.PROMPT_FORMATTING_ERROR,
-                f"Failed to format prompt template {template_id}: {str(e)}"
+                f"Failed to format prompt template {template_id}: {str(e)}",
             )
 
         # Generate response using the model
@@ -319,13 +325,13 @@ class DocumentAnalysisService(BaseAIService):
                     prompt=prompt,
                     system_prompt=system_prompt,
                     output_schema=response_model,
-                    config=generation_config
+                    config=generation_config,
                 )
             else:
                 response = await model.generate(
                     prompt=prompt,
                     output_schema=response_model,
-                    config=generation_config
+                    config=generation_config,
                 )
 
             return response.output()
@@ -333,7 +339,7 @@ class DocumentAnalysisService(BaseAIService):
         except Exception as e:
             raise AIError(
                 AIErrorType.GENERATION_ERROR,
-                f"Failed to generate analysis response: {str(e)}"
+                f"Failed to generate analysis response: {str(e)}",
             )
 
     def _sanitize_text(self, text: str) -> str:
@@ -350,7 +356,7 @@ class DocumentAnalysisService(BaseAIService):
             experience=[],
             education=[],
             summary="",
-            raw_data={"error": "Analysis not available"}
+            raw_data={"error": "Analysis not available"},
         )
 
     def _get_default_job_result(self) -> JobDescriptionAnalysisResult:
@@ -369,7 +375,7 @@ class DocumentAnalysisService(BaseAIService):
             benefits=[],
             company_description="",
             summary="",
-            raw_data={"error": "Analysis not available"}
+            raw_data={"error": "Analysis not available"},
         )
 
     async def extract_skills(self, document_text: str, document_type: str = "resume") -> List[str]:
@@ -394,14 +400,17 @@ class DocumentAnalysisService(BaseAIService):
                 return result.required_skills + result.preferred_skills
             else:
                 # Generic skill extraction
-                template_params = {"document_text": document_text, "document_type": document_type}
+                template_params = {
+                    "document_text": document_text,
+                    "document_type": document_type,
+                }
                 result = await self.analyze_document_generic(
                     document_text,
                     "skill_extraction",  # This template would need to be added
                     BaseModel,  # Simple response model for skills
-                    **template_params
+                    **template_params,
                 )
-                return getattr(result, 'skills', [])
+                return getattr(result, "skills", [])
         except Exception as e:
             logger.error(f"Failed to extract skills: {e}")
             return []
@@ -426,7 +435,9 @@ async def analyze_resume(resume_text: str, target_industry: str = "") -> ResumeA
     return await service.analyze_resume(resume_text, target_industry)
 
 
-async def analyze_job_description(job_description_text: str) -> JobDescriptionAnalysisResult:
+async def analyze_job_description(
+    job_description_text: str,
+) -> JobDescriptionAnalysisResult:
     """Convenience function to analyze a job description."""
     service = get_document_analysis_service()
     return await service.analyze_job_description(job_description_text)

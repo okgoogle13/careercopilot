@@ -21,6 +21,7 @@ class VoiceProfiler:
     def __init__(self):
         # Import the working genkit flow
         from app.genkit_flows.voice_profiler import generate_voice_profile
+
         self.voice_profile_flow = generate_voice_profile
 
     @monitor_performance("voice_profile_generation")
@@ -41,11 +42,12 @@ class VoiceProfiler:
 
             # Delegate to the genkit flow implementation
             result = await self.voice_profile_flow(user_id=user_id)
-            
+
             # Ensure result is a dictionary
             if isinstance(result, str):
                 try:
                     import json
+
                     result_dict = json.loads(result)
                 except json.JSONDecodeError:
                     result_dict = {"voice_profile": result, "raw_output": True}
@@ -70,11 +72,7 @@ class VoiceProfiler:
 
     @monitor_performance("voice_profile_analysis")
     @cached_ai_operation("voice_analysis", user_id_param="user_id")
-    async def analyze_document_voice(
-        self, 
-        user_id: str, 
-        document_text: str
-    ) -> Dict[str, Any]:
+    async def analyze_document_voice(self, user_id: str, document_text: str) -> Dict[str, Any]:
         """
         Analyze the voice/tone of a specific document.
 
@@ -91,13 +89,13 @@ class VoiceProfiler:
 
             # Sanitize input
             sanitized_text = InputSanitizer.sanitize_text_input(document_text)
-            
+
             # For single document analysis, we'd need to create a simplified version
             # This is a placeholder that demonstrates the pattern
             result = {
                 "document_analysis": "Single document voice analysis",
                 "text_length": len(sanitized_text.sanitized_content),
-                "analysis_note": "This would analyze voice patterns in the provided text"
+                "analysis_note": "This would analyze voice patterns in the provided text",
             }
 
             logger.info(

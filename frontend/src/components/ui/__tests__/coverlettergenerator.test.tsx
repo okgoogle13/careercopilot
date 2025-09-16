@@ -11,10 +11,10 @@ jest.mock('@/api/aiServices', () => mockAiServices);
 jest.mock('@/components/ui/editor', () => ({
   Editor: ({ value, onChange }: { value: string; onChange: (value: string) => void }) => (
     <textarea
-      data-testid='editor'
+      data-testid="editor"
       value={value}
-      onChange={e => onChange(e.target.value)}
-      placeholder='Generated cover letter will appear here...'
+      onChange={(e) => onChange(e.target.value)}
+      placeholder="Generated cover letter will appear here..."
     />
   ),
 }));
@@ -70,7 +70,7 @@ describe('CoverLetterGenerator', () => {
 
   it('shows loading state while generating cover letter', async () => {
     mockAiServices.generateCoverLetter.mockImplementation(
-      () => new Promise(resolve => setTimeout(() => resolve(mockGeneratedCoverLetter), 100))
+      () => new Promise((resolve) => setTimeout(() => resolve(mockGeneratedCoverLetter), 100))
     );
 
     render(<CoverLetterGenerator />);

@@ -3,6 +3,7 @@ dependencies.py (Refactore)
 
 FastAPI dependencies for authentication, authorization, and data access.
 """
+
 import os
 
 import firebase_admin

@@ -29,7 +29,7 @@
 npx tsc --noEmit src/backend/agents/document_generator.py
 npx tsc --noEmit src/components/DocumentGeneration/TemplateSelector.tsx
 
-# Format specific files  
+# Format specific files
 npx prettier --write src/backend/agents/*.py
 npx prettier --write src/components/**/*.tsx
 
@@ -107,7 +107,7 @@ Document Generation:
 - parse uploaded resume: `POST /api/documents/parse` with file upload
 
 AI Analysis:
-- ATS scoring: `POST /api/analysis/ats-score` with resume + job description  
+- ATS scoring: `POST /api/analysis/ats-score` with resume + job description
 - keyword analysis: `POST /api/analysis/keywords` for gap identification
 - get recommendations: `GET /api/analysis/recommendations` for improvements
 
@@ -144,7 +144,7 @@ Output format for all agents:
 
 Firestore collections:
 - `/users/{uid}/profiles/{profileId}` for user profiles
-- `/users/{uid}/documents/{docId}` for generated documents  
+- `/users/{uid}/documents/{docId}` for generated documents
 - `/users/{uid}/jobs/{jobId}` for job opportunities
 - `/templates/` for document templates (global)
 
@@ -223,7 +223,7 @@ Document generation:
 
 Target users are transitioning into:
 - social work roles
-- community services positions  
+- community services positions
 - government/public sector jobs
 - nonprofit organizations
 
@@ -251,7 +251,7 @@ Use Gemini 1.5 Pro for:
 
 AI agent response times:
 - document generation: < 30 seconds
-- ATS analysis: < 10 seconds  
+- ATS analysis: < 10 seconds
 - resume parsing: < 15 seconds
 - recommendations: < 5 seconds
 

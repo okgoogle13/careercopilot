@@ -62,7 +62,7 @@ def my_custom_flow(input_text: str) -> MyResponse:
 
 ### Utility Functions
 - `run_flow_async(flow_func, **kwargs)` - Async flow execution
-- `run_flow(flow_func, **kwargs)` - Sync flow execution  
+- `run_flow(flow_func, **kwargs)` - Sync flow execution
 - `create_flow_wrapper()` - Programmatic flow creation
 
 ## Refactored Flows
@@ -166,7 +166,7 @@ def create_dynamic_flow(schema):
     def flow_impl(data):
         # Dynamic logic
         pass
-    
+
     return create_flow_wrapper(
         func=flow_impl,
         name="dynamic_flow",
@@ -177,7 +177,7 @@ def create_dynamic_flow(schema):
 ## Testing
 All refactored flows have been tested for:
 - Import compatibility ✅
-- Flow registration ✅  
+- Flow registration ✅
 - API endpoint compatibility ✅
 - Error handling ✅
 - Backward compatibility ✅

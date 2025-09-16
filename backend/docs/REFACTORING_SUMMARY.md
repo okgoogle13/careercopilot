@@ -211,7 +211,7 @@ async def upload_resume(file: UploadFile):
    ```python
    # Old
    response = await self._make_ai_request(prompt)
-   
+
    # New
    result = await process_document(content, template, model)
    ```
@@ -221,7 +221,7 @@ async def upload_resume(file: UploadFile):
    # Old
    if not validate_file_manually(file):
        raise HTTPException(400, "Invalid file")
-   
+
    # New
    @require_valid_document_upload()
    async def endpoint(file: UploadFile):
@@ -232,7 +232,7 @@ async def upload_resume(file: UploadFile):
    ```python
    # Old
    prompt = f"Analyze this: {content}"
-   
+
    # New
    template = PromptTemplates.RESUME_ANALYSIS
    # Template handles formatting automatically

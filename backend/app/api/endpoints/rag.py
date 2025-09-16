@@ -61,7 +61,8 @@ class DocumentDeleteRequest(BaseModel):
     """,
 )
 @require_valid_document_upload(
-    allowed_types={".pdf", ".txt", ".md"}, max_size_mb=getattr(settings, "max_document_size_mb", 10)
+    allowed_types={".pdf", ".txt", ".md"},
+    max_size_mb=getattr(settings, "max_document_size_mb", 10),
 )
 async def upload_document(
     file: UploadFile = File(...), current_user: User = Depends(get_current_user)
@@ -69,7 +70,8 @@ async def upload_document(
     """Upload and process a document for RAG."""
     if not settings.enable_rag:
         raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="RAG functionality is not enabled"
+            status_code=status.HTTP_501_NOT_IMPLEMENTED,
+            detail="RAG functionality is not enabled",
         )
 
     # File validation is now handled by the decorator
@@ -138,7 +140,8 @@ async def query_rag(request: RAGQueryRequest, current_user: User = Depends(get_c
     """Query the RAG system for relevant information."""
     if not settings.enable_rag:
         raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="RAG functionality is not enabled"
+            status_code=status.HTTP_501_NOT_IMPLEMENTED,
+            detail="RAG functionality is not enabled",
         )
 
     try:
@@ -199,7 +202,8 @@ async def delete_documents(
     """Delete documents from the vector store."""
     if not settings.enable_rag:
         raise HTTPException(
-            status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="RAG functionality is not enabled"
+            status_code=status.HTTP_501_NOT_IMPLEMENTED,
+            detail="RAG functionality is not enabled",
         )
 
     if not request.document_ids:
@@ -226,5 +230,6 @@ async def delete_documents(
     except Exception as e:
         logger.error(f"Failed to delete documents: {str(e)}", exc_info=True)
         raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to delete documents"
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to delete documents",
         )

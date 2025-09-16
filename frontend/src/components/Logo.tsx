@@ -11,12 +11,12 @@ export function Logo({ className = '', size = 28, showText = false }: LogoProps)
     <div className={`flex items-center gap-2 ${className}`}>
       <img
         src={logoImage}
-        alt='Career Copilot Logo'
+        alt="Career Copilot Logo"
         width={size}
         height={size}
-        className='object-contain'
+        className="object-contain"
       />
-      {showText && <span className='font-bold text-sidebar-foreground'>FML Career Copilot</span>}
+      {showText && <span className="font-bold text-sidebar-foreground">FML Career Copilot</span>}
     </div>
   );
 }

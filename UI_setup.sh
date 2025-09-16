@@ -78,8 +78,8 @@ interface LogoProps {
 export function Logo({ className = "", size = 28, showText = false }: LogoProps) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
-      <img 
-        src={logoImage} 
+      <img
+        src={logoImage}
         alt="Career Copilot Logo"
         width={size}
         height={size}
