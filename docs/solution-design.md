@@ -7,6 +7,7 @@ Careercopilot is an AI-powered career application assistant designed for job see
 ## System Architecture Overview
 
 ### High-Level Architecture
+
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   React Web     │    │   FastAPI        │    │   Firebase      │
@@ -49,7 +50,9 @@ Gmail API  Calendar API  │        AI Services          │              │
 ### Epic 1: Profile & Master Resume Management
 
 #### Story 1.1: Professional Profile Creation
+
 **Implementation:**
+
 - **Firebase Function:** `createUserProfile`
 - **Genkit Flow:** `profileStructure.flow.js`
 - **API Endpoints:**
@@ -58,6 +61,7 @@ Gmail API  Calendar API  │        AI Services          │              │
   - `GET /api/profiles` - List user profiles
 
 **Workflow:**
+
 1. User completes profile form in React frontend
 2. Frontend validates and sends data to FastAPI backend
 3. Backend authenticates user via Firebase Auth
@@ -65,7 +69,9 @@ Gmail API  Calendar API  │        AI Services          │              │
 5. AI processes profile to extract key skills and competencies
 
 #### Story 1.2: Document Upload and Parsing
+
 **Implementation:**
+
 - **Firebase Function:** `parseUploadedDocument`
 - **Genkit Flow:** `documentParser.flow.js`
 - **API Endpoints:**
@@ -73,6 +79,7 @@ Gmail API  Calendar API  │        AI Services          │              │
   - `POST /api/documents/parse` - Parse existing document
 
 **Workflow:**
+
 1. User uploads PDF/DOCX via frontend
 2. File stored in Cloud Storage
 3. Langextract flow processes document to extract:
@@ -84,7 +91,9 @@ Gmail API  Calendar API  │        AI Services          │              │
 5. Original document archived with metadata
 
 #### Story 1.3: Resume Variations
+
 **Implementation:**
+
 - **Firebase Function:** `generateResumeVariation`
 - **Genkit Flow:** `resumeVariations.flow.js`
 - **API Endpoints:**
@@ -92,6 +101,7 @@ Gmail API  Calendar API  │        AI Services          │              │
   - `POST /api/resumes/generate-variation` - Create variation
 
 **Workflow:**
+
 1. User selects template type (peer worker, housing worker, etc.)
 2. System retrieves relevant skills/experience from master profile
 3. AI generates tailored content for selected role type
@@ -101,11 +111,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 ### Epic 2: Application Document Generation
 
 #### Story 2.1: Tailored Resume Generation
+
 **Implementation:**
+
 - **Genkit Flow:** `tailoredResume.flow.js`
 - **API Endpoint:** `POST /api/resumes/tailored`
 
 **Workflow:**
+
 1. User inputs job description and selects base profile
 2. Langextract analyzes job requirements
 3. AI matches user skills to job requirements
@@ -116,11 +129,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 5. Formatted PDF generated with selected theme
 
 #### Story 2.2: Tailored Cover Letter Generation
+
 **Implementation:**
+
 - **Genkit Flow:** `coverLetter.flow.js`
 - **API Endpoint:** `POST /api/cover-letters/generate`
 
 **Workflow:**
+
 1. System analyzes job posting for company culture and requirements
 2. AI generates personalized cover letter incorporating:
    - User's authentic voice (learned from previous documents)
@@ -130,11 +146,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 4. PDF generated with consistent branding
 
 #### Story 2.3: Key Selection Criteria (KSC) Response
+
 **Implementation:**
+
 - **Genkit Flow:** `kscResponse.flow.js`
 - **API Endpoint:** `POST /api/ksc/generate`
 
 **Workflow:**
+
 1. System extracts individual criteria from job posting
 2. For each criterion, AI:
    - Matches relevant experience from user profile
@@ -144,11 +163,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 4. Cross-checked for consistency and authenticity
 
 #### Story 2.4: Authentic Voice Generation
+
 **Implementation:**
+
 - **Genkit Flow:** `voiceProfile.flow.js`
 - **Background Process:** Continuous learning from user's documents
 
 **Workflow:**
+
 1. System analyzes user's existing documents for writing patterns
 2. AI creates voice profile capturing:
    - Tone and style preferences
@@ -160,11 +182,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 ### Epic 3: Resume Analysis & Scoring
 
 #### Story 3.1: ATS Scoring
+
 **Implementation:**
+
 - **Genkit Flow:** `atsScoring.flow.js`
 - **API Endpoint:** `POST /api/analysis/ats-score`
 
 **Workflow:**
+
 1. User uploads resume and job description
 2. System performs multi-factor analysis:
    - Keyword density and matching (45% weight)
@@ -174,11 +199,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 4. Detailed breakdown provided to user
 
 #### Story 3.2: Keyword Analysis
+
 **Implementation:**
+
 - **Genkit Flow:** `keywordAnalysis.flow.js`
 - **API Endpoint:** `POST /api/analysis/keywords`
 
 **Workflow:**
+
 1. Langextract identifies key terms from job description
 2. Resume analyzed for presence/absence of critical keywords
 3. System generates:
@@ -188,11 +216,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 4. Visual analysis provided via frontend dashboard
 
 #### Story 3.3: AI Recommendations
+
 **Implementation:**
+
 - **Genkit Flow:** `improvementRecommendations.flow.js`
 - **API Endpoint:** `GET /api/analysis/recommendations`
 
 **Workflow:**
+
 1. System analyzes scoring results and keyword gaps
 2. AI generates specific, actionable recommendations:
    - Content additions/modifications
@@ -204,7 +235,9 @@ Gmail API  Calendar API  │        AI Services          │              │
 ### Epic 4: Branding & Theming
 
 #### Story 4.1 & 4.2: Professional Themes and Consistency
+
 **Implementation:**
+
 - **Firebase Function:** `applyDocumentTheme`
 - **Template Engine:** Custom PDF generation service
 - **API Endpoints:**
@@ -212,6 +245,7 @@ Gmail API  Calendar API  │        AI Services          │              │
   - `POST /api/user/theme` - Set user theme preference
 
 **Workflow:**
+
 1. User selects from 8-10 predefined professional themes
 2. Theme preference stored in user profile
 3. All document generation applies consistent:
@@ -221,11 +255,14 @@ Gmail API  Calendar API  │        AI Services          │              │
 4. Theme applied automatically to all generated documents
 
 #### Story 4.3: PDF Generation
+
 **Implementation:**
+
 - **Service:** Dedicated PDF generation microservice
 - **Templates:** HTML/CSS templates with dynamic content injection
 
 **Workflow:**
+
 1. Generated content combined with selected theme template
 2. HTML rendered with dynamic data injection
 3. PDF created preserving all formatting and styling
@@ -235,7 +272,9 @@ Gmail API  Calendar API  │        AI Services          │              │
 ### Epic 5: Proactive Job Application Management
 
 #### Story 5.1: Gmail Monitoring and Calendar Integration
+
 **Implementation:**
+
 - **Firebase Function:** `monitorJobEmails` (triggered via Cloud Scheduler)
 - **Genkit Flow:** `jobOpportunityDetection.flow.js`
 - **API Endpoints:**
@@ -243,6 +282,7 @@ Gmail API  Calendar API  │        AI Services          │              │
   - `GET /api/jobs/opportunities` - List detected jobs
 
 **Workflow:**
+
 1. Scheduled function checks user's Gmail for job-related emails
 2. AI analyzes email content to identify legitimate opportunities
 3. For each opportunity:
@@ -307,6 +347,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 ## Data Models
 
 ### User Profile
+
 ```javascript
 {
   uid: string,
@@ -335,6 +376,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 ```
 
 ### Generated Document
+
 ```javascript
 {
   id: string,
@@ -352,6 +394,7 @@ Gmail API  Calendar API  │        AI Services          │              │
 ```
 
 ### Job Opportunity
+
 ```javascript
 {
   id: string,
@@ -371,17 +414,20 @@ Gmail API  Calendar API  │        AI Services          │              │
 ## Security & Privacy
 
 ### Authentication
+
 - Firebase Authentication with email/password
 - JWT token validation on all API endpoints
 - Session management with automatic refresh
 
 ### Data Protection
+
 - All user data encrypted at rest in Firestore
 - Temporary files in Cloud Storage automatically deleted after 24 hours
 - API access restricted to authenticated users only
 - No client-side Firestore access (API-only architecture)
 
 ### Privacy Controls
+
 - Users can delete all data at any time
 - Document processing happens in secure, isolated environments
 - No user data used for model training without explicit consent
@@ -390,18 +436,21 @@ Gmail API  Calendar API  │        AI Services          │              │
 ## Scalability & Performance
 
 ### Architecture Decisions
+
 - API-centric design allows independent scaling of frontend and backend
 - Stateless backend enables horizontal scaling
 - Document generation processed asynchronously
 - Caching implemented for frequently accessed templates and themes
 
 ### Performance Targets
+
 - Document generation: < 30 seconds for standard resume/cover letter
 - ATS scoring: < 10 seconds for analysis
 - API response times: < 2 seconds for most endpoints
 - PDF generation: < 15 seconds for formatted documents
 
 ### Monitoring
+
 - Cloud Monitoring for function performance and errors
 - Custom metrics for user engagement and satisfaction
 - Automated alerts for system health and performance degradation

@@ -7,11 +7,13 @@ This directory contains unit tests for Firebase Firestore security rules using t
 ### Prerequisites
 
 1. **Firebase CLI**: Install the Firebase CLI globally
+
    ```bash
    npm install -g firebase-tools
    ```
 
 2. **Java Runtime**: Firebase Emulator requires Java 11 or higher
+
    ```bash
    # Check if Java is installed
    java -version
@@ -23,6 +25,7 @@ This directory contains unit tests for Firebase Firestore security rules using t
 ### Installation
 
 1. Install test dependencies:
+
    ```bash
    cd tests
    npm install
@@ -48,11 +51,13 @@ npm test
 ### Method 2: Manual Emulator Management
 
 1. Start the Firestore emulator in a separate terminal:
+
    ```bash
    firebase emulators:start --only firestore --project careercopilot-test
    ```
 
 2. Run the tests:
+
    ```bash
    cd tests
    npm test
@@ -90,28 +95,34 @@ npm run emulators:kill
 ### Test Categories
 
 #### 1. User Profiles Rules (`/users/{userId}`)
+
 - ✅ Allow: User can read/write their own documents
 - ❌ Deny: User cannot access other users' documents
 - ❌ Deny: Unauthenticated users cannot access any user documents
 
 #### 2. User Subcollections
+
 - ✅ Allow: User can access their own subcollections (documents, profiles, settings, etc.)
 - ❌ Deny: User cannot access other users' subcollections
 
 #### 3. Global Collections
+
 - ✅ Allow: Authenticated users can read global opportunities, jobs, templates, configurations
 - ❌ Deny: Users cannot write to global collections (server-only)
 - ❌ Deny: Unauthenticated users cannot read global collections
 
 #### 4. Document Ownership Rules
+
 - ✅ Allow: Users can read/write documents they own (via `userId` field)
 - ❌ Deny: Users cannot access documents owned by others
 
 #### 5. System Security
+
 - ❌ Deny: All access to analytics collection
 - ❌ Deny: Access to undefined collections (catch-all rule)
 
 #### 6. Edge Cases
+
 - Security scenarios and impersonation attempts
 - Batch operations and performance tests
 - Complex nested document access
@@ -119,18 +130,20 @@ npm run emulators:kill
 ## Test Scenarios Explained
 
 ### Scenario 1: User Profile Access (ALLOW)
+
 ```javascript
 // User "user123" can read their own document at /users/user123
-const db = getAuthContext('user123').firestore();
-const userDoc = doc(db, 'users', 'user123');
+const db = getAuthContext("user123").firestore();
+const userDoc = doc(db, "users", "user123");
 await assertSucceeds(getDoc(userDoc)); // ✅ PASSES
 ```
 
 ### Scenario 2: Cross-User Access (DENY)
+
 ```javascript
 // User "user123" cannot read another user's document at /users/anotherUser456
-const db = getAuthContext('user123').firestore();
-const otherUserDoc = doc(db, 'users', 'anotherUser456');
+const db = getAuthContext("user123").firestore();
+const otherUserDoc = doc(db, "users", "anotherUser456");
 await assertFails(getDoc(otherUserDoc)); // ❌ FAILS (as expected)
 ```
 
@@ -148,21 +161,27 @@ The tests validate these custom functions from `firestore.rules`:
 ### Common Issues
 
 1. **Port already in use**
+
    ```
    Error: Port 8080 is already in use
    ```
+
    Solution: Kill existing emulator processes or use a different port
 
 2. **Java not found**
+
    ```
    Error: Firebase emulators require Java
    ```
+
    Solution: Install Java 11 or higher
 
 3. **Rules file not found**
+
    ```
    Error: Cannot read firestore.rules
    ```
+
    Solution: Ensure `firestore.rules` exists in the project root
 
 4. **Tests timeout**

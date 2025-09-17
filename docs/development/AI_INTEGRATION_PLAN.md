@@ -3,6 +3,7 @@
 ## Core AI Use Cases
 
 ### 1. Resume Analysis
+
 - **Purpose**: Extract and analyze resume content
 - **Features**:
   - Text extraction from various formats (PDF, DOCX)
@@ -15,6 +16,7 @@
   - Classification models
 
 ### 2. Job Matching
+
 - **Purpose**: Match candidates with relevant job postings
 - **Features**:
   - Semantic search
@@ -26,6 +28,7 @@
   - Classification models
 
 ### 3. Interview Preparation
+
 - **Purpose**: Generate personalized interview questions
 - **Features**:
   - Role-specific questions
@@ -39,6 +42,7 @@
 ## Technical Requirements
 
 ### Environment Variables
+
 ```env
 # Genkit Configuration
 GENKIT_ENV=development
@@ -50,6 +54,7 @@ AI_REQUEST_TIMEOUT=30000
 ```
 
 ### Service Layer Structure
+
 ```
 services/
   ai/
@@ -60,6 +65,7 @@ services/
 ```
 
 ### API Endpoints
+
 ```typescript
 // Resume Analysis
 POST /api/v1/ai/analyze-resume
@@ -74,21 +80,25 @@ GET /api/v1/ai/interview-prep?role=:role&level=:level
 ## Implementation Phases
 
 ### Phase 1: Foundation (Current)
+
 - [ ] Set up core backend structure
 - [ ] Implement basic API endpoints
 - [ ] Configure environment for future AI integration
 
 ### Phase 2: AI Integration
+
 - [ ] Set up Genkit configuration
 - [ ] Implement base AI service
 - [ ] Add feature flags
 
 ### Phase 3: Feature Implementation
+
 - [ ] Implement resume analysis
 - [ ] Build job matching service
 - [ ] Create interview preparation tools
 
 ## Monitoring & Maintenance
+
 - [ ] Set up AI service health checks
 - [ ] Implement usage metrics
 - [ ] Create error tracking for AI features

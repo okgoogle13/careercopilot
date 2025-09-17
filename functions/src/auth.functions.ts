@@ -1,5 +1,5 @@
-import * as functions from 'firebase-functions';
-import {db, storage} from './firebase';
+import * as functions from "firebase-functions";
+import { db, storage } from "./firebase";
 
 /**
  * @typedef {Object} StorageFile
@@ -19,32 +19,32 @@ import {db, storage} from './firebase';
  */
 export const cleanupUserData = functions.https.onCall(
   {
-    region: 'us-central1',
+    region: "us-central1",
     timeoutSeconds: 60,
-    memory: '256MiB',
+    memory: "256MiB",
   },
   /** @type {CleanupRequest} */
   async (request) => {
-    const {uid} = request.data;
-    const {auth} = request;
+    const { uid } = request.data;
+    const { auth } = request;
 
     // Verify the request is authenticated and from the same user or admin
     if (!auth || (auth.uid !== uid && !auth.token.admin)) {
-      throw new Error('Unauthorized: Cannot cleanup data for different user');
+      throw new Error("Unauthorized: Cannot cleanup data for different user");
     }
 
     console.log(`Starting cleanup for user: ${uid}`);
 
     try {
       // 1. Delete the user's document from Firestore
-      const userDocRef = db.collection('users').doc(uid);
+      const userDocRef = db.collection("users").doc(uid);
       await db.recursiveDelete(userDocRef);
       console.log(`Successfully deleted Firestore data for user: ${uid}`);
 
       // 2. Delete user's files from Storage
       const bucket = storage.bucket();
       const [files] = await bucket.getFiles({
-        prefix: `users/${uid}/`
+        prefix: `users/${uid}/`,
       });
 
       const deletePromises = files.map((/** @type {StorageFile} */ file) => {
@@ -58,14 +58,13 @@ export const cleanupUserData = functions.https.onCall(
       return {
         success: true,
         message: `Successfully cleaned up data for user ${uid}`,
-        deletedFiles: files.length
+        deletedFiles: files.length,
       };
-
     } catch (error) {
       console.error(`Error cleaning up user data for ${uid}:`, error);
       throw error; // Re-throw to mark the function as failed
     }
-  }
+  },
 );
 
 /**
@@ -87,61 +86,63 @@ export const cleanupUserData = functions.https.onCall(
  */
 export const adminCleanupUser = functions.https.onRequest(
   {
-    region: 'us-central1',
+    region: "us-central1",
     timeoutSeconds: 60,
-    memory: '256MiB',
-    invoker: 'public', // Allow unauthenticated requests (we'll handle auth in the function)
+    memory: "256MiB",
+    invoker: "public", // Allow unauthenticated requests (we'll handle auth in the function)
   },
   /** @type {AdminRequest} */
   /** @type {Response} */
   async (request, response) => {
     try {
       // Only allow POST requests
-      if (request.method !== 'POST') {
-        response.status(405).json({error: 'Method not allowed'});
+      if (request.method !== "POST") {
+        response.status(405).json({ error: "Method not allowed" });
         return;
       }
 
       // Check for Authorization header
       const authHeader = request.headers.authorization;
-      if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        response.status(401).json({error: 'Unauthorized: Missing or invalid Authorization header'});
+      if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        response
+          .status(401)
+          .json({ error: "Unauthorized: Missing or invalid Authorization header" });
         return;
       }
 
-      const token = authHeader.split('Bearer ')[1];
+      const token = authHeader.split("Bearer ")[1];
       // In a real implementation, verify the token here
       // For now, we'll just check if it matches the expected admin key
-      const expectedAdminKey = process.env.ADMIN_CLEANUP_KEY || 'default-admin-key';
+      const expectedAdminKey = process.env.ADMIN_CLEANUP_KEY || "default-admin-key";
       if (token !== expectedAdminKey) {
-        response.status(403).json({error: 'Forbidden: Invalid admin key'});
+        response.status(403).json({ error: "Forbidden: Invalid admin key" });
         return;
       }
 
-      const {uid, adminKey} = request.body;
+      const { uid, adminKey } = request.body;
 
       // Verify admin key (in production, use proper authentication)
       if (!adminKey || adminKey !== process.env.ADMIN_CLEANUP_KEY) {
-        response.status(401).json({error: 'Unauthorized'});
+        response.status(401).json({ error: "Unauthorized" });
         return;
       }
 
       if (!uid) {
-        response.status(400).json({error: 'Missing uid parameter'});
+        response.status(400).json({ error: "Missing uid parameter" });
         return;
       }
 
       console.log(`Admin cleanup requested for user: ${uid}`);
 
       // 1. Delete the user's document from Firestore
-      const userDocRef = db.collection('users').doc(uid);
+      const userDocRef = db.collection("users").doc(uid);
       await db.recursiveDelete(userDocRef);
       console.log(`Successfully deleted Firestore data for user: ${uid}`);
 
       // 2. Delete user's files from Storage
       const bucket = storage.bucket();
       const [files] = await bucket.getFiles({
-        prefix: `users/${uid}/`
+        prefix: `users/${uid}/`,
       });
 
       const deletePromises = files.map((/** @type {StorageFile} */ file) => {
@@ -155,15 +156,14 @@ export const adminCleanupUser = functions.https.onRequest(
       response.status(200).json({
         success: true,
         message: `Successfully cleaned up data for user ${uid}`,
-        deletedFiles: files.length
+        deletedFiles: files.length,
       });
-
     } catch (error) {
-      console.error('Error in admin cleanup:', error);
+      console.error("Error in admin cleanup:", error);
       response.status(500).json({
-        error: 'Internal server error',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        error: "Internal server error",
+        message: error instanceof Error ? error.message : "Unknown error",
       });
     }
-  }
+  },
 );

@@ -1,36 +1,7 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "moduleResolution": "bundler",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    },
-    "types": ["vite/client", "node"],
-    "typeRoots": ["./node_modules/@types"]
-  },
-  "include": ["src", "**/*.ts", "**/*.tsx"],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    "**/node_modules",
-    "**/*.test.ts",
-    "**/*.test.tsx",
-    "**/__tests__/**",
-    "__mocks__/**",
-    "src/setupTests.ts"
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
   ]
 }

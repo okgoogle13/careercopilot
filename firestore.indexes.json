@@ -4,42 +4,42 @@
       "collectionGroup": "users",
       "queryScope": "COLLECTION",
       "fields": [
-        {"fieldPath": "email", "order": "ASCENDING"},
-        {"fieldPath": "createdAt", "order": "DESCENDING"}
+        { "fieldPath": "email", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
     },
     {
       "collectionGroup": "jobs",
       "queryScope": "COLLECTION",
       "fields": [
-        {"fieldPath": "status", "order": "ASCENDING"},
-        {"fieldPath": "createdAt", "order": "DESCENDING"}
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
     },
     {
       "collectionGroup": "applications",
       "queryScope": "COLLECTION",
       "fields": [
-        {"fieldPath": "userId", "order": "ASCENDING"},
-        {"fieldPath": "status", "order": "ASCENDING"},
-        {"fieldPath": "appliedAt", "order": "DESCENDING"}
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "appliedAt", "order": "DESCENDING" }
       ]
     },
     {
       "collectionGroup": "notifications",
       "queryScope": "COLLECTION",
       "fields": [
-        {"fieldPath": "userId", "order": "ASCENDING"},
-        {"fieldPath": "read", "order": "ASCENDING"},
-        {"fieldPath": "createdAt", "order": "DESCENDING"}
+        { "fieldPath": "userId", "order": "ASCENDING" },
+        { "fieldPath": "read", "order": "ASCENDING" },
+        { "fieldPath": "createdAt", "order": "DESCENDING" }
       ]
     },
     {
       "collectionGroup": "conversations",
       "queryScope": "COLLECTION",
       "fields": [
-        {"fieldPath": "participants", "arrayConfig": "CONTAINS"},
-        {"fieldPath": "updatedAt", "order": "DESCENDING"}
+        { "fieldPath": "participants", "arrayConfig": "CONTAINS" },
+        { "fieldPath": "updatedAt", "order": "DESCENDING" }
       ]
     }
   ],
@@ -48,16 +48,14 @@
       "collectionGroup": "users",
       "fieldPath": "email",
       "indexes": [
-        {"order": "ASCENDING", "queryScope": "COLLECTION"},
-        {"order": "DESCENDING", "queryScope": "COLLECTION"}
+        { "order": "ASCENDING", "queryScope": "COLLECTION" },
+        { "order": "DESCENDING", "queryScope": "COLLECTION" }
       ]
     },
     {
       "collectionGroup": "jobs",
       "fieldPath": "companyId",
-      "indexes": [
-        {"order": "ASCENDING", "queryScope": "COLLECTION"}
-      ]
+      "indexes": [{ "order": "ASCENDING", "queryScope": "COLLECTION" }]
     }
   ]
 }

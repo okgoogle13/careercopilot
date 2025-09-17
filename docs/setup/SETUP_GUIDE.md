@@ -5,42 +5,47 @@ Complete configuration guide for setting up CareerCopilot in staging and product
 ## 📋 Required GitHub Secrets Checklist
 
 ### 🔥 Firebase Configuration
-| Secret Name | Description | Where to Find |
-|-------------|-------------|---------------|
-| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` | Firebase service account JSON for staging | Firebase Console > Project Settings > Service Accounts |
-| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT` | Firebase service account JSON for production | Firebase Console > Project Settings > Service Accounts |
+
+| Secret Name                                      | Description                                  | Where to Find                                          |
+| ------------------------------------------------ | -------------------------------------------- | ------------------------------------------------------ |
+| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` | Firebase service account JSON for staging    | Firebase Console > Project Settings > Service Accounts |
+| `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT`         | Firebase service account JSON for production | Firebase Console > Project Settings > Service Accounts |
 
 ### ☁️ Google Cloud Platform
-| Secret Name | Description | Where to Find |
-|-------------|-------------|---------------|
-| `GCP_STAGING_PROJECT_ID` | Google Cloud staging project ID | GCP Console > Project selector |
-| `GCP_PROJECT_ID` | Google Cloud production project ID | GCP Console > Project selector |
-| `GCP_STAGING_SA_KEY` | Staging service account key JSON | GCP Console > IAM > Service Accounts |
-| `GCP_SA_KEY` | Production service account key JSON | GCP Console > IAM > Service Accounts |
+
+| Secret Name              | Description                         | Where to Find                        |
+| ------------------------ | ----------------------------------- | ------------------------------------ |
+| `GCP_STAGING_PROJECT_ID` | Google Cloud staging project ID     | GCP Console > Project selector       |
+| `GCP_PROJECT_ID`         | Google Cloud production project ID  | GCP Console > Project selector       |
+| `GCP_STAGING_SA_KEY`     | Staging service account key JSON    | GCP Console > IAM > Service Accounts |
+| `GCP_SA_KEY`             | Production service account key JSON | GCP Console > IAM > Service Accounts |
 
 ### 🧠 AI Service API Keys
-| Secret Name | Description | Where to Get |
-|-------------|-------------|--------------|
-| `GEMINI_API_KEY` | Google Gemini API key | [Google AI Studio](https://makersuite.google.com/app/apikey) |
-| `OPENAI_API_KEY` | OpenAI API key | [OpenAI API Keys](https://platform.openai.com/api-keys) |
-| `ANTHROPIC_API_KEY` | Anthropic Claude API key | [Anthropic Console](https://console.anthropic.com/) |
-| `PERPLEXITY_API_KEY` | Perplexity API key | [Perplexity API](https://docs.perplexity.ai/) |
+
+| Secret Name          | Description              | Where to Get                                                 |
+| -------------------- | ------------------------ | ------------------------------------------------------------ |
+| `GEMINI_API_KEY`     | Google Gemini API key    | [Google AI Studio](https://makersuite.google.com/app/apikey) |
+| `OPENAI_API_KEY`     | OpenAI API key           | [OpenAI API Keys](https://platform.openai.com/api-keys)      |
+| `ANTHROPIC_API_KEY`  | Anthropic Claude API key | [Anthropic Console](https://console.anthropic.com/)          |
+| `PERPLEXITY_API_KEY` | Perplexity API key       | [Perplexity API](https://docs.perplexity.ai/)                |
 
 ### 📊 Vector Database & Services
-| Secret Name | Description | Where to Get |
-|-------------|-------------|--------------|
-| `PINECONE_API_KEY` | Pinecone vector database API key | [Pinecone Console](https://app.pinecone.io/) |
-| `PINECONE_ENVIRONMENT` | Pinecone environment name | Pinecone Console > Environment |
-| `PINECONE_INDEX_NAME` | Pinecone index name | `careercopilot-index` |
-| `SENDGRID_API_KEY` | SendGrid email service API key | [SendGrid API Keys](https://app.sendgrid.com/settings/api_keys) |
+
+| Secret Name            | Description                      | Where to Get                                                    |
+| ---------------------- | -------------------------------- | --------------------------------------------------------------- |
+| `PINECONE_API_KEY`     | Pinecone vector database API key | [Pinecone Console](https://app.pinecone.io/)                    |
+| `PINECONE_ENVIRONMENT` | Pinecone environment name        | Pinecone Console > Environment                                  |
+| `PINECONE_INDEX_NAME`  | Pinecone index name              | `careercopilot-index`                                           |
+| `SENDGRID_API_KEY`     | SendGrid email service API key   | [SendGrid API Keys](https://app.sendgrid.com/settings/api_keys) |
 
 ### 🔐 OAuth Configuration
-| Secret Name | Description | Where to Get |
-|-------------|-------------|--------------|
-| `GOOGLE_OAUTH_CLIENT_ID_STAGING` | Google OAuth client ID for staging | [Google Cloud Console > APIs & Services > Credentials](https://console.cloud.google.com/apis/credentials) |
-| `GOOGLE_OAUTH_CLIENT_SECRET_STAGING` | Google OAuth client secret for staging | Google Cloud Console > APIs & Services > Credentials |
-| `GOOGLE_OAUTH_CLIENT_ID_PROD` | Google OAuth client ID for production | Google Cloud Console > APIs & Services > Credentials |
-| `GOOGLE_OAUTH_CLIENT_SECRET_PROD` | Google OAuth client secret for production | Google Cloud Console > APIs & Services > Credentials |
+
+| Secret Name                          | Description                               | Where to Get                                                                                              |
+| ------------------------------------ | ----------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `GOOGLE_OAUTH_CLIENT_ID_STAGING`     | Google OAuth client ID for staging        | [Google Cloud Console > APIs & Services > Credentials](https://console.cloud.google.com/apis/credentials) |
+| `GOOGLE_OAUTH_CLIENT_SECRET_STAGING` | Google OAuth client secret for staging    | Google Cloud Console > APIs & Services > Credentials                                                      |
+| `GOOGLE_OAUTH_CLIENT_ID_PROD`        | Google OAuth client ID for production     | Google Cloud Console > APIs & Services > Credentials                                                      |
+| `GOOGLE_OAUTH_CLIENT_SECRET_PROD`    | Google OAuth client secret for production | Google Cloud Console > APIs & Services > Credentials                                                      |
 
 ---
 
@@ -49,6 +54,7 @@ Complete configuration guide for setting up CareerCopilot in staging and product
 ### 1. 🔥 Firebase Project Setup
 
 #### Create Projects
+
 ```bash
 # Create staging project
 firebase projects:create careercopilot-staging
@@ -58,12 +64,14 @@ firebase projects:create careercopilot-prod
 ```
 
 #### Configure Authentication
+
 1. Go to Firebase Console > Authentication > Sign-in method
 2. Enable **Email/Password** provider
 3. Enable **Google** provider (optional)
 4. Configure authorized domains
 
 #### Generate Service Account Keys
+
 ```bash
 # For staging
 firebase admin:generate-service-account-key --project careercopilot-staging
@@ -75,6 +83,7 @@ firebase admin:generate-service-account-key --project careercopilot-prod
 ### 2. ☁️ Google Cloud Setup
 
 #### Enable Required APIs
+
 ```bash
 # Set project
 gcloud config set project careercopilot-staging
@@ -87,6 +96,7 @@ gcloud services enable firestore.googleapis.com
 ```
 
 #### Create Service Accounts
+
 ```bash
 # Create staging service account
 gcloud iam service-accounts create careercopilot-staging \
@@ -100,6 +110,7 @@ gcloud iam service-accounts create careercopilot-prod \
 ```
 
 #### Grant Permissions
+
 ```bash
 # Staging permissions
 gcloud projects add-iam-policy-binding careercopilot-staging \
@@ -116,6 +127,7 @@ gcloud projects add-iam-policy-binding careercopilot-staging \
 ```
 
 #### Create Service Account Keys
+
 ```bash
 # Generate staging key
 gcloud iam service-accounts keys create staging-key.json \
@@ -129,21 +141,25 @@ gcloud iam service-accounts keys create prod-key.json \
 ### 3. 🧠 AI Services Setup
 
 #### Google Gemini
+
 1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Create new API key
 3. Copy the key (starts with `AIzaSy`)
 
 #### OpenAI
+
 1. Go to [OpenAI Platform](https://platform.openai.com/api-keys)
 2. Create new secret key
 3. Copy the key (starts with `sk-`)
 
 #### Anthropic Claude
+
 1. Go to [Anthropic Console](https://console.anthropic.com/)
 2. Create new API key
 3. Copy the key (starts with `sk-ant-`)
 
 #### Perplexity
+
 1. Go to [Perplexity API Docs](https://docs.perplexity.ai/)
 2. Sign up and create API key
 3. Copy the key
@@ -151,6 +167,7 @@ gcloud iam service-accounts keys create prod-key.json \
 ### 4. 📊 Vector Database Setup
 
 #### Pinecone
+
 1. Go to [Pinecone Console](https://app.pinecone.io/)
 2. Create new index named `careercopilot-index`
 3. Set dimensions: `1536` (for OpenAI embeddings)
@@ -160,6 +177,7 @@ gcloud iam service-accounts keys create prod-key.json \
 ### 5. 📧 Email Service Setup
 
 #### SendGrid
+
 1. Go to [SendGrid](https://app.sendgrid.com/)
 2. Create account and verify email
 3. Go to Settings > API Keys
@@ -240,16 +258,19 @@ echo "✅ All secrets added to GitHub repository!"
 ### Common Issues
 
 **Firebase deployment fails:**
+
 - Check service account permissions
 - Verify project IDs match
 - Ensure Firebase CLI is authenticated
 
 **Cloud Run deployment fails:**
+
 - Check service account has Cloud Run Admin role
 - Verify container registry permissions
 - Check resource quotas
 
 **API keys not working:**
+
 - Verify keys are correctly copied (no extra spaces)
 - Check API quotas and billing
 - Ensure services are enabled
@@ -263,4 +284,4 @@ echo "✅ All secrets added to GitHub repository!"
 
 ---
 
-*This guide will be updated as new services are added to CareerCopilot.*
+_This guide will be updated as new services are added to CareerCopilot._

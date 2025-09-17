@@ -1,6 +1,6 @@
 {
   "command": "rn dev --host",
-  "serverUrl": "http://localhost:3001/",
+  "serverUrl": "http://localhost:4173/",
   "authenticateProxy": false,
   "commitMode": "commits"
 }

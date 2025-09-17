@@ -46,11 +46,11 @@ The CareerCopilot monitoring system provides comprehensive observability into ap
 
 ### Environment-Based Setup
 
-| Environment | Log Level | Outputs | Format |
-|-------------|-----------|---------|---------|
-| **Development** | DEBUG | Console + File | Detailed text |
-| **Staging** | INFO | Console + Files | Structured JSON |
-| **Production** | WARNING | Console + Error File | Structured JSON |
+| Environment     | Log Level | Outputs              | Format          |
+| --------------- | --------- | -------------------- | --------------- |
+| **Development** | DEBUG     | Console + File       | Detailed text   |
+| **Staging**     | INFO      | Console + Files      | Structured JSON |
+| **Production**  | WARNING   | Console + Error File | Structured JSON |
 
 ### Log Structure
 
@@ -99,18 +99,21 @@ with RequestContextLogger(request_id='req_123', user_id='user_456'):
 ### Collected Metrics
 
 #### Performance Metrics
+
 - `http_requests_total` - Total HTTP requests by method/path/status
 - `http_request_duration_seconds` - Request response time histogram
 - `http_requests_errors_total` - HTTP errors by type
 - `operation_duration_seconds` - Custom operation timing
 
 #### Business Metrics
+
 - `user_action_*` - User actions (document_upload, analysis_request, etc.)
 - `ai_operation_total` - AI operations by type
 - `ai_operation_cached_total` - Cached AI operations
 - `ai_tokens_used_total` - Token consumption tracking
 
 #### System Metrics
+
 - `system_cpu_percent` - CPU usage percentage
 - `system_memory_percent` - Memory usage percentage
 - `system_disk_percent` - Disk usage percentage
@@ -156,26 +159,27 @@ collector.set_gauge('active_users', current_user_count)
 
 ### Core Monitoring Endpoints
 
-| Endpoint | Description | Auth Required |
-|----------|-------------|---------------|
-| `GET /metrics` | Prometheus metrics format | No |
-| `GET /health` | Basic health check | No |
-| `GET /api/v1/monitoring/health/detailed` | Detailed health status | No |
-| `GET /api/v1/monitoring/metrics/summary` | Human-readable metrics | No |
-| `GET /api/v1/monitoring/dashboard` | Dashboard data | No |
-| `GET /api/v1/monitoring/alerts` | Active alerts | No |
-| `GET /api/v1/monitoring/performance` | Performance metrics | No |
+| Endpoint                                 | Description               | Auth Required |
+| ---------------------------------------- | ------------------------- | ------------- |
+| `GET /metrics`                           | Prometheus metrics format | No            |
+| `GET /health`                            | Basic health check        | No            |
+| `GET /api/v1/monitoring/health/detailed` | Detailed health status    | No            |
+| `GET /api/v1/monitoring/metrics/summary` | Human-readable metrics    | No            |
+| `GET /api/v1/monitoring/dashboard`       | Dashboard data            | No            |
+| `GET /api/v1/monitoring/alerts`          | Active alerts             | No            |
+| `GET /api/v1/monitoring/performance`     | Performance metrics       | No            |
 
 ### Admin Endpoints (Authentication Required)
 
-| Endpoint | Description |
-|----------|-------------|
-| `GET /api/v1/monitoring/admin/logs` | Recent log entries |
-| `POST /api/v1/monitoring/admin/clear-metrics` | Reset all metrics |
+| Endpoint                                      | Description        |
+| --------------------------------------------- | ------------------ |
+| `GET /api/v1/monitoring/admin/logs`           | Recent log entries |
+| `POST /api/v1/monitoring/admin/clear-metrics` | Reset all metrics  |
 
 ### Example API Responses
 
 #### Dashboard Data
+
 ```json
 {
   "timestamp": "2025-01-15T10:30:00.000Z",
@@ -204,6 +208,7 @@ collector.set_gauge('active_users', current_user_count)
 ```
 
 #### Active Alerts
+
 ```json
 {
   "timestamp": "2025-01-15T10:30:00.000Z",
@@ -224,14 +229,14 @@ collector.set_gauge('active_users', current_user_count)
 
 ### Default Alert Thresholds
 
-| Metric | Warning | Critical |
-|--------|---------|----------|
-| Error Rate | >5% | >10% |
-| Response Time | >2s | >5s |
-| Memory Usage | >80% | >90% |
-| CPU Usage | >80% | >90% |
-| Disk Usage | >80% | >90% |
-| Cache Health | Degraded | Unavailable |
+| Metric        | Warning  | Critical    |
+| ------------- | -------- | ----------- |
+| Error Rate    | >5%      | >10%        |
+| Response Time | >2s      | >5s         |
+| Memory Usage  | >80%     | >90%        |
+| CPU Usage     | >80%     | >90%        |
+| Disk Usage    | >80%     | >90%        |
+| Cache Health  | Degraded | Unavailable |
 
 ### Alert Severity Levels
 
@@ -275,15 +280,15 @@ dashboard:
     - title: "Request Rate"
       type: "graph"
       targets:
-        - expr: 'rate(http_requests_total[5m])'
+        - expr: "rate(http_requests_total[5m])"
     - title: "Error Rate"
       type: "singlestat"
       targets:
-        - expr: 'rate(http_requests_errors_total[5m]) / rate(http_requests_total[5m])'
+        - expr: "rate(http_requests_errors_total[5m]) / rate(http_requests_total[5m])"
     - title: "Response Time P95"
       type: "graph"
       targets:
-        - expr: 'histogram_quantile(0.95, http_request_duration_seconds_bucket)'
+        - expr: "histogram_quantile(0.95, http_request_duration_seconds_bucket)"
 ```
 
 ## Production Deployment
@@ -348,38 +353,40 @@ spec:
   template:
     spec:
       containers:
-      - name: backend
-        image: careercopilot-backend:latest
-        ports:
-        - containerPort: 8080
-        env:
-        - name: ENV
-          value: "production"
-        - name: LOG_LEVEL
-          value: "WARNING"
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 30
-          periodSeconds: 10
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 5
+        - name: backend
+          image: careercopilot-backend:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ENV
+              value: "production"
+            - name: LOG_LEVEL
+              value: "WARNING"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
 ```
 
 ## Performance Impact
 
 ### Resource Usage
+
 - **Memory**: ~10-20MB additional for metrics collection
 - **CPU**: <1% overhead for monitoring middleware
 - **Disk**: Log rotation prevents unbounded growth
 - **Network**: Minimal impact for metrics export
 
 ### Optimization Features
+
 - **Sampling**: Request sampling for high-volume endpoints
 - **Batching**: Metric batching to reduce overhead
 - **Filtering**: Configurable exclusion of noisy endpoints
@@ -390,6 +397,7 @@ spec:
 ### Common Issues
 
 1. **High Memory Usage**
+
    ```bash
    # Check metrics collection size
    curl http://localhost:8080/api/v1/monitoring/metrics/summary
@@ -399,6 +407,7 @@ spec:
    ```
 
 2. **Missing Metrics**
+
    ```python
    # Verify metrics collector is working
    from app.core.monitoring import get_metrics_collector
@@ -407,6 +416,7 @@ spec:
    ```
 
 3. **Log File Permissions**
+
    ```bash
    # Ensure log directory is writable
    mkdir -p logs
@@ -414,6 +424,7 @@ spec:
    ```
 
 4. **System Monitoring Not Working**
+
    ```bash
    # Install psutil if missing
    pip install psutil
@@ -436,12 +447,14 @@ logging.getLogger('app.core.monitoring').setLevel(logging.DEBUG)
 ## Security Considerations
 
 ### Data Privacy
+
 - **Log Sanitization**: PII automatically redacted from logs
 - **Metric Labels**: No sensitive data in metric labels
 - **Admin Endpoints**: Authentication required for sensitive operations
 - **Log Retention**: Configurable retention periods
 
 ### Access Control
+
 - **Monitoring Endpoints**: Public health checks, protected admin functions
 - **Metrics Export**: Rate limited to prevent abuse
 - **Alert Data**: No sensitive information in alerts
@@ -449,6 +462,7 @@ logging.getLogger('app.core.monitoring').setLevel(logging.DEBUG)
 ## Future Enhancements
 
 ### Planned Features
+
 - **Distributed Tracing**: OpenTelemetry integration for request tracing
 - **Log Aggregation**: ELK stack or similar for centralized log management
 - **Advanced Alerting**: Integration with PagerDuty, Slack, email
@@ -456,6 +470,7 @@ logging.getLogger('app.core.monitoring').setLevel(logging.DEBUG)
 - **Custom Dashboard Builder**: UI for creating custom monitoring dashboards
 
 ### Integration Roadmap
+
 - **APM Tools**: New Relic, DataDog, or AppDynamics integration
 - **Error Tracking**: Sentry or Rollbar for enhanced error tracking
 - **Business Intelligence**: Integration with analytics platforms

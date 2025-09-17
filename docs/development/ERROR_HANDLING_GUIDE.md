@@ -21,8 +21,8 @@ The error handling system consists of several interconnected components:
 Wrap your app with the `ErrorProvider`:
 
 ```tsx
-import { ErrorProvider } from './contexts/ErrorContext';
-import ErrorToastContainer from './components/ui/ErrorToastContainer';
+import { ErrorProvider } from "./contexts/ErrorContext";
+import ErrorToastContainer from "./components/ui/ErrorToastContainer";
 
 function App() {
   return (
@@ -37,8 +37,8 @@ function App() {
 ### 2. Using Error Handling in Components
 
 ```tsx
-import { useError, useErrorHandler } from '../contexts/ErrorContext';
-import { createError } from '../utils/errorSystem';
+import { useError, useErrorHandler } from "../contexts/ErrorContext";
+import { createError } from "../utils/errorSystem";
 
 function MyComponent() {
   const { addError } = useError();
@@ -46,9 +46,12 @@ function MyComponent() {
 
   const handleSubmit = async () => {
     // Method 1: Using handleAsync wrapper
-    const result = await handleAsync(async () => {
-      return await api.submitForm(formData);
-    }, { component: 'MyComponent', operation: 'form-submit' });
+    const result = await handleAsync(
+      async () => {
+        return await api.submitForm(formData);
+      },
+      { component: "MyComponent", operation: "form-submit" },
+    );
 
     if (result) {
       // Success handling
@@ -58,15 +61,12 @@ function MyComponent() {
   const handleFileUpload = (file: File) => {
     // Method 2: Manual error creation
     if (file.size > 10 * 1024 * 1024) {
-      const error = createError.fileUpload(
-        'File is too large. Please select a file under 10MB.',
-        {
-          component: 'MyComponent',
-          fileName: file.name,
-          fileSize: file.size,
-          maxSize: 10 * 1024 * 1024
-        }
-      );
+      const error = createError.fileUpload("File is too large. Please select a file under 10MB.", {
+        component: "MyComponent",
+        fileName: file.name,
+        fileSize: file.size,
+        maxSize: 10 * 1024 * 1024,
+      });
       addError(error);
       return;
     }
@@ -79,14 +79,11 @@ function MyComponent() {
 ### 3. Error Boundaries
 
 ```tsx
-import ErrorBoundary from '../components/ui/ErrorBoundary';
+import ErrorBoundary from "../components/ui/ErrorBoundary";
 
 function PageComponent() {
   return (
-    <ErrorBoundary
-      componentName="PageComponent"
-      showActionableSuggestions={true}
-    >
+    <ErrorBoundary componentName="PageComponent" showActionableSuggestions={true}>
       <YourComponent />
     </ErrorBoundary>
   );
@@ -98,34 +95,40 @@ function PageComponent() {
 The system categorizes errors into the following types:
 
 ### Network & API Errors
+
 - `NETWORK` - Connection issues, network failures
 - `API_SERVER_ERROR` - 5xx server errors
 - `API_CLIENT_ERROR` - 4xx client errors
 - `TIMEOUT` - Request timeout errors
 
 ### Authentication & Authorization
+
 - `AUTHENTICATION` - Login failures, expired tokens
 - `AUTHORIZATION` - Permission denied, insufficient privileges
 - `SESSION_EXPIRED` - Session timeout
 
 ### Validation Errors
+
 - `VALIDATION` - General validation failures
 - `FORM_VALIDATION` - Form field validation errors
 - `FILE_VALIDATION` - File upload validation errors
 
 ### Business Logic Errors
+
 - `BUSINESS_LOGIC` - Business rule violations
 - `RESOURCE_NOT_FOUND` - Missing resources
 - `RESOURCE_CONFLICT` - Conflicting resources
 - `QUOTA_EXCEEDED` - Usage limits exceeded
 
 ### System & Runtime Errors
+
 - `SYSTEM` - System-level errors
 - `MEMORY` - Memory-related issues
 - `STORAGE` - Storage/localStorage issues
 - `RENDER` - React rendering errors
 
 ### External Service Errors
+
 - `EXTERNAL_SERVICE` - Third-party service failures
 - `AI_SERVICE` - AI/ML service issues
 - `FILE_SERVICE` - File processing service errors
@@ -142,21 +145,25 @@ The system categorizes errors into the following types:
 Each error automatically generates contextual suggestions:
 
 ### Network Errors
+
 - Check internet connection
 - Retry the request
 - Refresh the page
 
 ### Authentication Errors
+
 - Sign in again
 - Clear browser cache
 - Contact support
 
 ### Validation Errors
+
 - Review input fields
 - Check required fields
 - Clear and restart form
 
 ### File Upload Errors
+
 - Check file type (PDF, DOC, DOCX supported)
 - Verify file size (under 10MB)
 - Try a different file
@@ -176,7 +183,7 @@ The system includes automatic recovery strategies:
 ### Custom Recovery Strategies
 
 ```tsx
-import { useErrorRecovery, recoveryStrategies } from '../hooks/useErrorRecovery';
+import { useErrorRecovery, recoveryStrategies } from "../hooks/useErrorRecovery";
 
 function MyComponent() {
   const { registerRecoveryStrategy, recoverFromError } = useErrorRecovery();
@@ -184,14 +191,14 @@ function MyComponent() {
   useEffect(() => {
     // Register custom recovery strategy
     registerRecoveryStrategy({
-      id: 'custom-api-recovery',
+      id: "custom-api-recovery",
       errorTypes: [ErrorType.API_SERVER_ERROR],
       priority: 1,
-      canRecover: (error) => error.context?.endpoint === '/api/special',
+      canRecover: (error) => error.context?.endpoint === "/api/special",
       recover: async (error) => {
         // Custom recovery logic
         return await customRecoveryFunction();
-      }
+      },
     });
   }, []);
 
@@ -209,26 +216,26 @@ function MyComponent() {
 ### ErrorDisplay Component
 
 ```tsx
-import ErrorDisplay from '../components/ui/ErrorDisplay';
+import ErrorDisplay from "../components/ui/ErrorDisplay";
 
 <ErrorDisplay
-  error={error}                    // string or AppError object
-  variant="card"                   // inline|banner|card|toast
-  showSuggestions={true}          // Show actionable suggestions
-  maxSuggestions={3}              // Limit number of suggestions
-  onAction={handleAction}         // Handle suggestion actions
-  onDismiss={handleDismiss}       // Handle error dismissal
-/>
+  error={error} // string or AppError object
+  variant="card" // inline|banner|card|toast
+  showSuggestions={true} // Show actionable suggestions
+  maxSuggestions={3} // Limit number of suggestions
+  onAction={handleAction} // Handle suggestion actions
+  onDismiss={handleDismiss} // Handle error dismissal
+/>;
 ```
 
 ### ErrorToastContainer
 
 ```tsx
-import ErrorToastContainer from '../components/ui/ErrorToastContainer';
+import ErrorToastContainer from "../components/ui/ErrorToastContainer";
 
 <ErrorToastContainer
-  position="top-right"  // top-right|top-left|bottom-right|etc.
-/>
+  position="top-right" // top-right|top-left|bottom-right|etc.
+/>;
 ```
 
 ## Error Logging
@@ -238,16 +245,16 @@ The system includes comprehensive logging:
 ### Configuration
 
 ```tsx
-import { errorLogger } from '../utils/errorLogger';
+import { errorLogger } from "../utils/errorLogger";
 
 // Configure logging
 errorLogger.updateConfig({
   enableConsole: true,
   enableRemote: true,
-  remoteEndpoint: 'https://api.example.com/errors',
-  apiKey: 'your-api-key',
+  remoteEndpoint: "https://api.example.com/errors",
+  apiKey: "your-api-key",
   batchSize: 10,
-  flushInterval: 30000
+  flushInterval: 30000,
 });
 ```
 
@@ -263,21 +270,24 @@ REACT_APP_ERROR_LOGGING_API_KEY=your-api-key
 ### Error Wrapper for API Calls
 
 ```tsx
-import { withErrorHandling } from '../utils/errorSystem';
+import { withErrorHandling } from "../utils/errorSystem";
 
 const fetchUserData = async (userId: string) => {
-  return await withErrorHandling(async () => {
-    const response = await fetch(`/api/users/${userId}`);
-    if (!response.ok) throw response;
-    return response.json();
-  }, { component: 'UserProfile', userId });
+  return await withErrorHandling(
+    async () => {
+      const response = await fetch(`/api/users/${userId}`);
+      if (!response.ok) throw response;
+      return response.json();
+    },
+    { component: "UserProfile", userId },
+  );
 };
 ```
 
 ### Handling API Validation Errors
 
 ```tsx
-import { handleValidationErrors } from '../utils/errorSystem';
+import { handleValidationErrors } from "../utils/errorSystem";
 
 const submitForm = async (formData) => {
   try {
@@ -298,10 +308,10 @@ const submitForm = async (formData) => {
 ```tsx
 // Good
 addError(error, {
-  component: 'DocumentUpload',
-  operation: 'file-upload',
+  component: "DocumentUpload",
+  operation: "file-upload",
   fileName: file.name,
-  fileSize: file.size
+  fileSize: file.size,
 });
 
 // Bad
@@ -312,10 +322,10 @@ addError(error);
 
 ```tsx
 // Good - Specific error type
-const error = createError.fileUpload('File too large', context);
+const error = createError.fileUpload("File too large", context);
 
 // Less ideal - Generic error
-const error = createError.validation('File too large', context);
+const error = createError.validation("File too large", context);
 ```
 
 ### 3. Wrap Async Operations
@@ -352,14 +362,14 @@ try {
 
 ```tsx
 // Test error creation
-import { createError } from '../utils/errorSystem';
+import { createError } from "../utils/errorSystem";
 
-test('should create network error with suggestions', () => {
-  const error = createError.network('Connection failed');
+test("should create network error with suggestions", () => {
+  const error = createError.network("Connection failed");
 
-  expect(error.type).toBe('NETWORK');
+  expect(error.type).toBe("NETWORK");
   expect(error.suggestions).toHaveLength(3);
-  expect(error.suggestions[0].actionType).toBe('retry');
+  expect(error.suggestions[0].actionType).toBe("retry");
 });
 ```
 
@@ -368,11 +378,11 @@ test('should create network error with suggestions', () => {
 ```tsx
 // Mock recovery strategies for testing
 const mockRecoveryStrategy = {
-  id: 'test-recovery',
+  id: "test-recovery",
   errorTypes: [ErrorType.NETWORK],
   priority: 1,
   canRecover: () => true,
-  recover: jest.fn().mockResolvedValue(true)
+  recover: jest.fn().mockResolvedValue(true),
 };
 ```
 
@@ -405,7 +415,7 @@ Enable debug logging in development:
 
 ```tsx
 // In development, enable verbose logging
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === "development") {
   errorLogger.updateConfig({ enableConsole: true });
 }
 ```
@@ -424,7 +434,7 @@ try {
 
 // New way
 const result = await handleAsync(() => apiCall(), {
-  component: 'MyComponent'
+  component: "MyComponent",
 });
 ```
 

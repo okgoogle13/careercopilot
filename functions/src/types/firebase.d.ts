@@ -6,6 +6,6 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     ADMIN_CLEANUP_KEY?: string;
-    NODE_ENV?: 'production' | 'development' | 'test';
+    NODE_ENV?: "production" | "development" | "test";
   }
 }

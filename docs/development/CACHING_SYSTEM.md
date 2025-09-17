@@ -35,14 +35,14 @@ The AI Operations Caching System is designed to improve performance and reduce c
 
 ## Cache Configurations
 
-| Operation Type | TTL | Max Entries | Invalidate on Update |
-|---------------|-----|-------------|---------------------|
-| resume_analysis | 1 hour | 500 | ✅ Yes |
-| job_analysis | 2 hours | 200 | ❌ No |
-| ats_scoring | 30 min | 300 | ✅ Yes |
-| cover_letter | 15 min | 100 | ✅ Yes |
-| voice_profile | 24 hours | 50 | ✅ Yes |
-| ksc_response | 1 hour | 200 | ✅ Yes |
+| Operation Type  | TTL      | Max Entries | Invalidate on Update |
+| --------------- | -------- | ----------- | -------------------- |
+| resume_analysis | 1 hour   | 500         | ✅ Yes               |
+| job_analysis    | 2 hours  | 200         | ❌ No                |
+| ats_scoring     | 30 min   | 300         | ✅ Yes               |
+| cover_letter    | 15 min   | 100         | ✅ Yes               |
+| voice_profile   | 24 hours | 50          | ✅ Yes               |
+| ksc_response    | 1 hour   | 200         | ✅ Yes               |
 
 ## Usage Examples
 
@@ -92,12 +92,14 @@ async with CacheContext("job_analysis", user_id, input_data) as cached:
 ## Environment Configuration
 
 ### Development (In-Memory Cache)
+
 ```bash
 # No additional configuration needed
 # Uses in-memory cache automatically
 ```
 
 ### Production (Redis Cache)
+
 ```bash
 # Set Redis connection URL
 REDIS_URL=redis://localhost:6379
@@ -107,6 +109,7 @@ CACHE_CLEANUP_INTERVAL=3600
 ```
 
 ### Cloud Run with Redis (Recommended for Production)
+
 ```bash
 # Use Redis Cloud or Google Memory Store
 REDIS_URL=redis://your-redis-instance:6379
@@ -125,6 +128,7 @@ REDIS_URL=redis://username:password@host:port/db
 ### Cache Performance Headers (Development)
 
 In non-production environments, cache performance headers are added:
+
 ```
 X-Cache-Stats: hits:42,misses:8
 ```
@@ -132,6 +136,7 @@ X-Cache-Stats: hits:42,misses:8
 ### Logging
 
 Cache operations are logged with appropriate levels:
+
 - `INFO`: Cache hits, misses, and successful operations
 - `WARNING`: Cache configuration issues
 - `ERROR`: Cache failures (with fallback to direct operation)
@@ -163,6 +168,7 @@ await cache.invalidate_user_cache(user_id)
 ## Redis Backend Configuration
 
 ### Basic Redis Setup
+
 ```python
 from app.core.redis_cache import RedisCacheBackend
 from app.core.cache import setup_cache
@@ -177,6 +183,7 @@ cache = setup_cache(backend)
 ```
 
 ### Redis Cluster (High Availability)
+
 ```python
 from app.core.redis_cache import RedisClusterCacheBackend
 
@@ -192,16 +199,19 @@ backend = RedisClusterCacheBackend(cluster_nodes)
 ## Performance Considerations
 
 ### Cache Key Design
+
 - Keys include operation type, user ID, and input hash
 - Deterministic key generation ensures consistency
 - Short prefixes for efficient storage
 
 ### Memory Usage
+
 - In-memory cache uses LRU eviction
 - Redis backend leverages Redis TTL for automatic cleanup
 - Configurable max entries per operation type
 
 ### Compression
+
 - JSON serialization with optional gzip compression
 - Reduces memory usage for large AI responses
 - Configurable per backend
@@ -209,11 +219,13 @@ backend = RedisClusterCacheBackend(cluster_nodes)
 ## Security Considerations
 
 ### Data Privacy
+
 - Cache keys don't expose sensitive data
 - TTL ensures data doesn't persist indefinitely
 - User-specific caches prevent data leakage
 
 ### Access Control
+
 - Cache operations require user authentication
 - User can only access their own cached data
 - Automatic invalidation on data changes
@@ -223,17 +235,21 @@ backend = RedisClusterCacheBackend(cluster_nodes)
 ### Common Issues
 
 1. **Redis Connection Failures**
+
    ```
    ERROR: Redis health check failed
    ```
+
    - Check Redis URL and connectivity
    - Verify authentication credentials
    - Falls back to in-memory cache automatically
 
 2. **High Cache Miss Rate**
+
    ```
    X-Cache-Stats: hits:5,misses:95
    ```
+
    - Check if TTL is too short
    - Verify input data consistency
    - Monitor for frequent cache invalidations
@@ -246,6 +262,7 @@ backend = RedisClusterCacheBackend(cluster_nodes)
 ### Debug Mode
 
 Enable detailed cache logging:
+
 ```python
 import logging
 logging.getLogger('app.core.cache').setLevel(logging.DEBUG)
@@ -256,6 +273,7 @@ logging.getLogger('app.core.cache').setLevel(logging.DEBUG)
 ### From Non-Cached to Cached Operations
 
 1. **Add Cache Decorator**:
+
    ```python
    # Before
    async def analyze_resume(user_id: str, resume_text: str):
@@ -268,6 +286,7 @@ logging.getLogger('app.core.cache').setLevel(logging.DEBUG)
    ```
 
 2. **Update Cache Configuration** in `cache.py`:
+
    ```python
    CACHE_CONFIGS['your_operation'] = CacheConfig(
        ttl_seconds=3600,
@@ -284,12 +303,14 @@ logging.getLogger('app.core.cache').setLevel(logging.DEBUG)
 ## Future Enhancements
 
 ### Planned Features
+
 - **Distributed Cache Warming**: Pre-populate cache with common queries
 - **Cache Analytics**: Detailed performance metrics and optimization suggestions
 - **Smart TTL**: Dynamic TTL based on data staleness detection
 - **Multi-Level Caching**: L1 (in-memory) + L2 (Redis) cache hierarchy
 
 ### Integration Opportunities
+
 - **Background Job Processing**: Cache results from scheduled AI operations
 - **Real-time Updates**: WebSocket notifications for cache invalidations
 - **A/B Testing**: Cache different AI model responses for comparison
