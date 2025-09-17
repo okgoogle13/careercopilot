@@ -1,6 +1,7 @@
 # AGENTS.md
 
 ### Do
+
 - use Firebase v9 modular SDK format
 - use Google Genkit for all AI workflows and flows
 - use Gemini 1.5 Flash for high-volume tasks, Gemini 1.5 Pro for complex analysis
@@ -15,6 +16,7 @@
 - use environment variables for API keys and sensitive config
 
 ### Don't
+
 - do not use localStorage or sessionStorage in artifacts (not supported)
 - do not hard-code API keys or sensitive data
 - do not create monolithic AI agents - keep them focused
@@ -25,23 +27,29 @@
 - do not use direct Firestore access from frontend (API-only)
 
 ### Commands
+
 # Type check specific files
+
 npx tsc --noEmit src/backend/agents/document_generator.py
 npx tsc --noEmit src/components/DocumentGeneration/TemplateSelector.tsx
 
 # Format specific files
-npx prettier --write src/backend/agents/*.py
-npx prettier --write src/components/**/*.tsx
+
+npx prettier --write src/backend/agents/_.py
+npx prettier --write src/components/\*\*/_.tsx
 
 # Lint specific files
-npx eslint --fix src/components/**/*.tsx
-npx ruff check src/backend/agents/*.py
+
+npx eslint --fix src/components/\*_/_.tsx
+npx ruff check src/backend/agents/\*.py
 
 # Test specific agents
+
 pytest tests/agents/test_document_generator.py
 npm test src/components/DocumentGeneration/TemplateSelector.test.tsx
 
 # Firebase deployment
+
 firebase deploy --only functions:generateTailoredResume
 firebase deploy --only hosting
 
@@ -50,6 +58,7 @@ Note: Always test AI agents before deployment. Use single-file commands for fast
 ### Safety and permissions
 
 Allowed without prompt:
+
 - read files, list Firebase collections
 - type check, format, lint individual files
 - run unit tests for specific components/agents
@@ -58,6 +67,7 @@ Allowed without prompt:
 - generate documents with existing profiles
 
 Ask first:
+
 - npm install new dependencies
 - modify Firebase security rules
 - delete user data or documents
@@ -69,18 +79,21 @@ Ask first:
 ### Project structure
 
 Backend:
+
 - see `src/backend/main.py` for FastAPI setup and routes
 - see `src/backend/agents/` for all AI agents and Genkit flows
 - see `src/backend/services/` for Firebase integrations
 - see `firebase.json` for Firebase configuration
 
 Frontend:
+
 - see `src/App.tsx` for React app structure and routing
 - see `src/components/` for all React components
 - see `src/services/` for API clients and Firebase SDK usage
 - see `src/types/` for TypeScript interfaces
 
 AI Agents:
+
 - see `src/backend/agents/document_generator.py` for resume/cover letter generation
 - see `src/backend/agents/ats_optimizer.py` for ATS scoring and optimization
 - see `src/backend/agents/resume_parser.py` for document parsing with Langextract
@@ -88,6 +101,7 @@ AI Agents:
 ### Good and bad examples
 
 Good patterns:
+
 - copy `src/backend/agents/document_generator.py` for new AI agents
 - copy `src/components/DocumentGeneration/TemplateSelector.tsx` for complex UI components
 - forms: follow `src/components/ProfileForm.tsx` pattern
@@ -95,6 +109,7 @@ Good patterns:
 - Firebase auth: use `src/hooks/useAuth.ts` hook pattern
 
 Bad patterns:
+
 - avoid `src/legacy/` components - these use outdated patterns
 - avoid direct Firestore queries in React components
 - avoid synchronous operations in AI agents - use async/await
@@ -102,16 +117,19 @@ Bad patterns:
 ### API patterns
 
 Document Generation:
+
 - generate resume: `POST /api/resumes/tailored` using profile + job description
 - generate cover letter: `POST /api/cover-letters/generate` with company research
 - parse uploaded resume: `POST /api/documents/parse` with file upload
 
 AI Analysis:
+
 - ATS scoring: `POST /api/analysis/ats-score` with resume + job description
 - keyword analysis: `POST /api/analysis/keywords` for gap identification
 - get recommendations: `GET /api/analysis/recommendations` for improvements
 
 User Profile:
+
 - create profile: `POST /api/profiles` with structured user data
 - update profile: `PUT /api/profiles/{id}` for profile modifications
 - list profiles: `GET /api/profiles` for user's profile variations
@@ -119,6 +137,7 @@ User Profile:
 ### AI agent conventions
 
 Input format for all agents:
+
 ```python
 {
     "user_profile": dict,     # Always include full user context
@@ -129,6 +148,7 @@ Input format for all agents:
 ```
 
 Output format for all agents:
+
 ```python
 {
     "success": bool,
@@ -143,17 +163,20 @@ Output format for all agents:
 ### Firebase specific guidance
 
 Firestore collections:
+
 - `/users/{uid}/profiles/{profileId}` for user profiles
 - `/users/{uid}/documents/{docId}` for generated documents
 - `/users/{uid}/jobs/{jobId}` for job opportunities
 - `/templates/` for document templates (global)
 
 Cloud Storage structure:
+
 - `/users/{uid}/uploads/` for user-uploaded documents
 - `/users/{uid}/generated/` for AI-generated documents
 - `/templates/` for template assets and previews
 
 Security rules:
+
 - all user data requires authentication
 - users can only access their own data
 - templates are publicly readable but admin-writable
@@ -161,6 +184,7 @@ Security rules:
 ### Genkit flow patterns
 
 Standard flow structure:
+
 ```python
 @define_flow(name="agent_name")
 async def agent_flow(input_data: dict) -> dict:
@@ -171,6 +195,7 @@ async def agent_flow(input_data: dict) -> dict:
 ```
 
 Error handling:
+
 ```python
 try:
     result = await generate(model=gemini15Flash, prompt=prompt)
@@ -198,11 +223,13 @@ except Exception as e:
 ### Test-first mode for AI agents
 
 When adding new AI agents:
+
 - write test cases with sample inputs/outputs first
 - implement agent to pass tests
 - validate with real user data before deployment
 
 When fixing AI output quality:
+
 - add failing test that reproduces the issue
 - modify prompt or model configuration to fix
 - ensure all existing tests still pass
@@ -210,11 +237,13 @@ When fixing AI output quality:
 ### Document processing guidelines
 
 Resume parsing with Langextract:
+
 - always validate extracted data before saving to profile
 - handle parsing failures gracefully with partial data
 - preserve original document metadata for reference
 
 Document generation:
+
 - use consistent template structure across all document types
 - include ATS optimization in all generated documents
 - maintain user's authentic voice through voice profiling
@@ -222,12 +251,14 @@ Document generation:
 ### Community services domain knowledge
 
 Target users are transitioning into:
+
 - social work roles
 - community services positions
 - government/public sector jobs
 - nonprofit organizations
 
 Key document requirements:
+
 - Key Selection Criteria (KSC) responses for government jobs
 - mission-aligned language for nonprofit applications
 - STAR methodology for behavioral examples
@@ -236,12 +267,14 @@ Key document requirements:
 ### AI model usage patterns
 
 Use Gemini 1.5 Flash for:
+
 - document generation (resumes, cover letters)
 - ATS optimization and scoring
 - keyword extraction and matching
 - quick analysis tasks
 
 Use Gemini 1.5 Pro for:
+
 - complex reasoning (company research synthesis)
 - strategic analysis (career transition planning)
 - quality assurance of generated content
@@ -250,6 +283,7 @@ Use Gemini 1.5 Pro for:
 ### Performance targets
 
 AI agent response times:
+
 - document generation: < 30 seconds
 - ATS analysis: < 10 seconds
 - resume parsing: < 15 seconds

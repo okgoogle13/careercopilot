@@ -51,7 +51,12 @@
     "version": "1.0",
     "system_prompt": "You are an expert career coach specializing in the STAR (Situation, Task, Action, Result) methodology for interview responses and Key Selection Criteria. You excel at identifying the most relevant experiences and crafting compelling, evidence-based responses.",
     "template": "Generate a compelling STAR methodology response for the Key Selection Criterion using the most relevant experience from the user's profile.\n\nSTAR METHODOLOGY REQUIREMENTS:\n- Situation: Set the context with specific details about the scenario\n- Task: Clearly define what needed to be accomplished or the challenge faced\n- Action: Detail specific actions taken, focusing on individual contributions\n- Result: Quantify outcomes and impact, including lessons learned\n\nRESPONSE QUALITY STANDARDS:\n- Use specific, quantifiable examples wherever possible\n- Focus on individual contributions rather than team achievements\n- Include measurable outcomes and impact\n- Demonstrate growth and learning\n- {length_instruction}\n\nRequired JSON structure:\n{{\n  \"ksc_analysis\": {{\n    \"ksc_interpretation\": \"<analysis of what the KSC is really asking for>\",\n    \"key_competencies\": [<key skills/competencies this KSC tests>],\n    \"success_factors\": [<what makes a strong response to this KSC>],\n    \"common_pitfalls\": [<common mistakes to avoid>]\n  }},\n  \"experience_selection\": {{\n    \"chosen_experience\": \"<brief description of selected experience>\",\n    \"relevance_score\": <0-100 score for how well this experience matches>,\n    \"selection_rationale\": \"<why this experience was chosen over others>\",\n    \"alternative_experiences\": [<other potential experiences that could work>]\n  }},\n  \"star_response\": {{\n    \"situation\": \"<detailed situation context>\",\n    \"task\": \"<specific task or challenge>\",\n    \"action\": \"<detailed actions taken>\",\n    \"result\": \"<quantified results and outcomes>\",\n    \"full_response\": \"<complete STAR response as a cohesive narrative>\"\n  }},\n  \"optimization_suggestions\": {{\n    \"strength_areas\": [<what makes this response strong>],\n    \"improvement_areas\": [<specific areas that could be enhanced>],\n    \"alternative_approaches\": [<different ways to structure or present this response>]\n  }}\n}}\n\nKSC STATEMENT: {ksc_statement}\nUSER PROFILE: {user_profile}\nPRIORITIZE ACHIEVEMENTS: {focus_achievements}",
-    "parameters": ["ksc_statement", "user_profile", "focus_achievements", "length_instruction"],
+    "parameters": [
+      "ksc_statement",
+      "user_profile",
+      "focus_achievements",
+      "length_instruction"
+    ],
     "output_format": "structured_json",
     "has_system_prompt": true,
     "metadata": {
@@ -67,7 +72,11 @@
     "category": "cover_letter",
     "version": "1.0",
     "template": "As a professional career coach, your task is to write a compelling and professional cover letter\nfrom a job applicant to a potential employer.\n\n**Instructions:**\n1.  **Use the Applicant's Profile:** Base the cover letter on the applicant's provided profile data.\n    Highlight 2-3 of their most relevant experiences and skills that align with the job.\n2.  **Address the Job's Needs:** Directly reference the key requirements and skills mentioned in the\n    job analysis data. Show how the applicant is a strong match for this specific role.\n3.  **Maintain Authenticity:** It is crucial that the cover letter sounds like it was written by the\n    applicant. Adapt your writing style to match the provided voice profile.\n\n**Applicant's Base Profile:**\n---\n{base_profile_data}\n---\n\n**Analysis of the Target Job:**\n---\n{job_analysis_data}\n---\n\n{voice_profile_section}\n\nNow, write the cover letter. The output should be only the full text of the letter itself.",
-    "parameters": ["base_profile_data", "job_analysis_data", "voice_profile_section"],
+    "parameters": [
+      "base_profile_data",
+      "job_analysis_data",
+      "voice_profile_section"
+    ],
     "output_format": "text",
     "metadata": {
       "created_at": "2024-09-11",
@@ -83,7 +92,12 @@
     "version": "1.0",
     "system_prompt": "You are an expert career coach and professional writer with 15+ years of experience crafting compelling cover letters that land interviews. You understand how to match writing styles, highlight relevant experience, and create persuasive value propositions.",
     "template": "Create a compelling, tailored cover letter that showcases the applicant as an ideal candidate for the specific role. The letter must sound authentic to the applicant's voice and directly address the job requirements.\n\nREQUIREMENTS:\n- Write in the applicant's authentic voice and style\n- Address 2-3 most relevant experiences that align with job requirements\n- Include specific achievements and quantifiable results when possible\n- Reference the company and role specifically\n- Create a strong opening that captures attention\n- End with a compelling call to action\n- Maintain professional standards while matching the applicant's voice\n- Length should be 300-500 words unless specified otherwise\n\nSTRUCTURE:\n1. Professional header with contact information\n2. Compelling opening paragraph that hooks the reader\n3. 2-3 body paragraphs showcasing relevant experience and achievements\n4. Strong closing paragraph with call to action\n5. Professional sign-off\n\nReturn ONLY a JSON object with this structure:\n{{\n  \"cover_letter\": {{\n    \"header\": \"{{\\\"applicant_name\\\": \\\"<name from profile>\\\", \\n               \\\"contact_info\\\": \\\"<formatted contact information>\\\", \\n               \\\"date\\\": \\\"<current date>\\\", \\n               \\\"employer_info\\\": \\\"<hiring manager/company information>\\\" }}\",\n    \"opening_paragraph\": \"<compelling opening that references the role>\",\n    \"body_paragraphs\": [\n      \"<paragraph 1: most relevant experience/achievement>\",\n      \"<paragraph 2: additional relevant experience/skills>\",\n      \"<paragraph 3: value proposition and cultural fit (optional)>\"\n    ],\n    \"closing_paragraph\": \"<strong closing with call to action>\",\n    \"sign_off\": \"<professional sign-off with name>\",\n    \"full_letter\": \"<complete formatted cover letter>\"\n  }},\n  \"letter_analysis\": {{\n    \"word_count\": <number of words>,\n    \"key_strengths_highlighted\": [<list of key strengths emphasized>],\n    \"job_requirements_addressed\": [<list of job requirements directly addressed>],\n    \"achievements_mentioned\": [<list of specific achievements included>],\n    \"tone_assessment\": \"<assessment of letter tone and style>\",\n    \"improvement_suggestions\": [<optional minor improvements>]\n  }},\n  \"customization_details\": {{\n    \"voice_matching_elements\": [<elements that match the voice profile>],\n    \"job_specific_elements\": [<elements specifically tailored to this job>],\n    \"company_research_elements\": [<elements showing company knowledge>],\n    \"differentiating_factors\": [<what makes this letter stand out>]\n  }}\n}}\n\nApplicant's Profile Data:\n---\n{base_profile_data}\n---\n\nTarget Job Analysis:\n---\n{job_analysis_data}\n---{voice_section}{customization_section}\n\nGenerate the tailored cover letter as a JSON object:",
-    "parameters": ["base_profile_data", "job_analysis_data", "voice_section", "customization_section"],
+    "parameters": [
+      "base_profile_data",
+      "job_analysis_data",
+      "voice_section",
+      "customization_section"
+    ],
     "output_format": "structured_json",
     "has_system_prompt": true,
     "metadata": {

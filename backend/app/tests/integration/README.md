@@ -9,6 +9,7 @@ The profile creation tests (`test_profile_creation.py`) use the **Firestore Emul
 ### Prerequisites
 
 1. **Firestore Emulator**: Install the Google Cloud SDK and the Firestore emulator:
+
    ```bash
    # Install Google Cloud SDK
    curl https://sdk.cloud.google.com | bash
@@ -27,11 +28,13 @@ The profile creation tests (`test_profile_creation.py`) use the **Firestore Emul
 ### Running the Tests
 
 1. **Start the Firestore Emulator** (in a separate terminal):
+
    ```bash
    gcloud emulators firestore start --port=8080
    ```
 
 2. **Run the integration tests**:
+
    ```bash
    # From the backend directory
    cd backend
@@ -68,6 +71,7 @@ The `test_profile_creation.py` file contains comprehensive tests for:
 ### Environment Variables
 
 The tests automatically set these environment variables:
+
 - `FIRESTORE_EMULATOR_HOST=localhost:8080`
 - `GCLOUD_PROJECT=careercopilot-test`
 

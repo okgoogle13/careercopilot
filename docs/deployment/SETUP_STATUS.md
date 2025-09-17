@@ -3,12 +3,14 @@
 ## ✅ Completed Setup Tasks
 
 ### 🔑 GitHub Secrets Analysis
+
 - **Audited existing secrets** - Found most AI service keys already configured
 - **Added missing deployment secrets**:
   - `GCP_STAGING_PROJECT_ID` → `careercopilot-staging`
   - Updated `PINECONE_INDEX_NAME` → `careercopilot-index`
 
 ### 📚 Documentation & Automation
+
 - **Created comprehensive setup guide** (`SETUP_GUIDE.md`)
 - **Built automated setup scripts**:
   - `scripts/setup-secrets.sh` - Interactive secrets configuration
@@ -16,6 +18,7 @@
   - `scripts/setup-firebase.sh` - Firebase project automation
 
 ### 🚀 Deployment Pipeline Enhancement
+
 - **Optimized Cloud Run deployment** with direct gcloud commands
 - **Added deployment labels** for better tracking and management
 - **Enhanced health checks** with dynamic service URL extraction
@@ -26,22 +29,26 @@
 ## ✅ Already Configured (Verified)
 
 ### 🧠 AI Service Keys
+
 - ✅ `ANTHROPIC_API_KEY` (Claude)
 - ✅ `GEMINI_API_KEY` (Google AI)
 - ✅ `OPENAI_API_KEY` (GPT models)
 - ✅ `PERPLEXITY_API_KEY` (Perplexity AI)
 
 ### 📊 Vector Database
+
 - ✅ `PINECONE_API_KEY` (Vector database)
 - ✅ `PINECONE_ENVIRONMENT` (Environment config)
 - ✅ `PINECONE_INDEX_NAME` (Index configuration)
 
 ### ☁️ Core Infrastructure
+
 - ✅ `GCP_PROJECT_ID` (Production project)
 - ✅ `GCP_SA_KEY` (Production service account)
 - ✅ `GCP_STAGING_PROJECT_ID` (Staging project)
 
 ### 🔐 OAuth (Partial)
+
 - ✅ `GOOGLE_OAUTH_CLIENT_SECRET_STAGING` (exists)
 - ✅ `GOOGLE_OAUTH_CLIENT_SECRET_PROD` (exists)
 
@@ -50,6 +57,7 @@
 ## 🚧 Remaining Setup Tasks
 
 ### 🔥 Firebase Service Accounts (High Priority)
+
 These are **required for deployment** to work:
 
 ```bash
@@ -64,6 +72,7 @@ gh secret set FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT \
 ```
 
 ### ☁️ GCP Staging Service Account
+
 ```bash
 # Create and download staging service account key, then:
 gh secret set GCP_STAGING_SA_KEY \
@@ -72,6 +81,7 @@ gh secret set GCP_STAGING_SA_KEY \
 ```
 
 ### 🔐 OAuth Client IDs
+
 ```bash
 # From Google Cloud Console > APIs & Services > Credentials:
 gh secret set GOOGLE_OAUTH_CLIENT_ID_STAGING --body "xxxxx.apps.googleusercontent.com" --repo okgoogle13/careercopilot
@@ -79,6 +89,7 @@ gh secret set GOOGLE_OAUTH_CLIENT_ID_PROD --body "xxxxx.apps.googleusercontent.c
 ```
 
 ### 📧 Email Service (Optional but Recommended)
+
 ```bash
 # From SendGrid console:
 gh secret set SENDGRID_API_KEY --body "SG.xxxxx" --repo okgoogle13/careercopilot
@@ -89,6 +100,7 @@ gh secret set SENDGRID_API_KEY --body "SG.xxxxx" --repo okgoogle13/careercopilot
 ## 🚀 Quick Setup Commands
 
 ### Option 1: Use Automated Scripts
+
 ```bash
 # Run interactive setup (guides you through everything)
 ./scripts/setup-secrets.sh
@@ -101,6 +113,7 @@ gh secret set SENDGRID_API_KEY --body "SG.xxxxx" --repo okgoogle13/careercopilot
 ```
 
 ### Option 2: Manual Firebase Setup
+
 1. **Create Firebase Projects**:
    - Go to [Firebase Console](https://console.firebase.google.com/)
    - Create `careercopilot-staging` project
@@ -122,17 +135,20 @@ gh secret set SENDGRID_API_KEY --body "SG.xxxxx" --repo okgoogle13/careercopilot
 ## 🧪 Testing the Setup
 
 ### 1. Verify All Secrets
+
 ```bash
 gh secret list --repo okgoogle13/careercopilot
 ```
 
 ### 2. Test Deployment Pipeline
+
 ```bash
 # This will trigger CI, then deploy to staging (if CI passes)
 git push origin develop
 ```
 
 ### 3. Monitor Deployment
+
 - Check GitHub Actions: https://github.com/okgoogle13/careercopilot/actions
 - Watch for deployment logs and health checks
 

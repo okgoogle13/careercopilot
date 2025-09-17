@@ -74,11 +74,13 @@ pip install -r requirements.txt
 ## Development Workflow
 
 1. **Install all dependencies:**
+
    ```bash
    npm install
    ```
 
 2. **Start development:**
+
    ```bash
    npm run dev  # Frontend only
    # OR
@@ -96,11 +98,13 @@ pip install -r requirements.txt
 ### Adding JavaScript Dependencies
 
 For shared dependencies (used by multiple workspaces):
+
 ```bash
 npm install --save-dev exact-package-name@1.2.3
 ```
 
 For workspace-specific dependencies:
+
 ```bash
 npm install package-name@1.2.3 --workspace=frontend
 ```
@@ -108,6 +112,7 @@ npm install package-name@1.2.3 --workspace=frontend
 ### Adding Python Dependencies
 
 1. Install the package:
+
    ```bash
    cd backend
    pip install package-name==1.2.3

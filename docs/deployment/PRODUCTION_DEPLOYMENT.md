@@ -11,6 +11,7 @@
 ## 📋 Deployed Components
 
 ### ✅ **Frontend Application**
+
 - **Status**: LIVE ✅
 - **URL**: https://careercopilot-468811.web.app
 - **Hosting**: Firebase Hosting
@@ -18,6 +19,7 @@
 - **Build**: React 19 + Vite production build
 
 ### ✅ **Database Layer**
+
 - **PostgreSQL**: Running & Healthy ✅
 - **Port**: 5432
 - **Database**: careercopilot
@@ -25,12 +27,14 @@
 - **Container**: careercopilot-postgres
 
 ### ✅ **Caching Layer**
+
 - **Redis**: Running & Healthy ✅
 - **Port**: 6379
 - **Authentication**: Password protected
 - **Container**: careercopilot-redis
 
 ### ✅ **Monitoring Stack**
+
 - **Prometheus**: Running ✅
   - Port: 9090
   - URL: http://localhost:9090
@@ -42,6 +46,7 @@
   - Container: careercopilot-grafana
 
 ### ✅ **Firebase Services**
+
 - **Firestore**: Rules deployed ✅
 - **Authentication**: Ready ✅
 - **Storage**: Configured ✅
@@ -52,12 +57,14 @@
 ## 🔧 Configuration Details
 
 ### API Keys Configured
+
 - ✅ OpenAI API Key
 - ✅ Anthropic API Key
 - ✅ Gemini API Key
 - ✅ Firebase Service Account (JSON)
 
 ### Environment Files
+
 - **Frontend**: `.env.production`
 - **Backend**: `.env.production`
 - **Docker**: Environment variables passed to containers
@@ -67,22 +74,26 @@
 ## 🚀 Quick Start Commands
 
 ### Start All Services
+
 ```bash
 cd /Applications/careercopilot
 docker-compose -f docker-compose.production.yml --env-file .env.production up -d
 ```
 
 ### Stop All Services
+
 ```bash
 docker-compose -f docker-compose.production.yml down
 ```
 
 ### Check Service Status
+
 ```bash
 docker ps --format "table {{.Names}}\t{{.Status}}"
 ```
 
 ### View Logs
+
 ```bash
 # PostgreSQL
 docker logs careercopilot-postgres
@@ -102,23 +113,27 @@ docker logs careercopilot-grafana
 ## 🔍 Health Checks
 
 ### Frontend
+
 ```bash
 curl -I https://careercopilot-468811.web.app
 # Expected: HTTP/2 200
 ```
 
 ### Database
+
 ```bash
 docker exec careercopilot-postgres psql -U careercopilot -d careercopilot -c "SELECT COUNT(*) FROM users;"
 ```
 
 ### Redis
+
 ```bash
 docker exec careercopilot-redis redis-cli ping
 # Expected: Authentication required (normal with password)
 ```
 
 ### Monitoring
+
 ```bash
 # Prometheus
 curl http://localhost:9090/api/v1/targets
@@ -131,23 +146,25 @@ curl -u admin:mychemicalromance$ http://localhost:3000/api/health
 
 ## 📊 Access URLs
 
-| Service | URL | Credentials |
-|---------|-----|-------------|
-| **Frontend** | https://careercopilot-468811.web.app | Public |
-| **Grafana** | http://localhost:3000 | admin / mychemicalromance$ |
-| **Prometheus** | http://localhost:9090 | None |
+| Service        | URL                                  | Credentials                |
+| -------------- | ------------------------------------ | -------------------------- |
+| **Frontend**   | https://careercopilot-468811.web.app | Public                     |
+| **Grafana**    | http://localhost:3000                | admin / mychemicalromance$ |
+| **Prometheus** | http://localhost:9090                | None                       |
 
 ---
 
 ## ⚠️ Known Issues & Limitations
 
 ### Backend API
+
 - **Status**: ML intelligence module disabled for stable deployment
 - **Issue**: Backend container requires ML dependencies (pandas, scikit-learn)
 - **Resolution**: Will be addressed in future deployment iteration
 - **Impact**: Core frontend functionality works, advanced AI features temporarily disabled
 
 ### Worker Services
+
 - **Status**: Celery workers not fully deployed
 - **Issue**: Background task processing not active
 - **Impact**: Some async operations may not work until resolved
@@ -157,16 +174,19 @@ curl -u admin:mychemicalromance$ http://localhost:3000/api/health
 ## 🛠️ Maintenance Tasks
 
 ### Daily Monitoring
+
 1. Check service health: `docker ps`
 2. Monitor Grafana dashboards: http://localhost:3000
 3. Review Prometheus metrics: http://localhost:9090
 
 ### Weekly Tasks
+
 1. Database backup
 2. Log rotation and cleanup
 3. Security updates check
 
 ### Monthly Tasks
+
 1. SSL certificate renewal (if custom domain)
 2. Performance optimization review
 3. Capacity planning assessment
@@ -188,24 +208,28 @@ curl -u admin:mychemicalromance$ http://localhost:3000/api/health
 ### Common Issues
 
 #### Frontend Not Loading
+
 ```bash
 firebase hosting:channel:list
 firebase deploy --only hosting
 ```
 
 #### Database Connection Issues
+
 ```bash
 docker logs careercopilot-postgres
 docker exec careercopilot-postgres psql -U careercopilot -d careercopilot -c "\l"
 ```
 
 #### Container Not Starting
+
 ```bash
 docker logs [container-name]
 docker-compose -f docker-compose.production.yml restart [service-name]
 ```
 
 ### Emergency Contacts
+
 - **Firebase Console**: https://console.firebase.google.com/project/careercopilot-468811/overview
 - **Docker Status**: `docker ps -a`
 - **System Resources**: `docker stats`
