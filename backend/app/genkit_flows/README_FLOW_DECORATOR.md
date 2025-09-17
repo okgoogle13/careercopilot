@@ -1,10 +1,13 @@
 # Centralized Genkit Flow Decorator System
 
 ## Overview
+
 This document describes the centralized decorator system implemented to standardize and reduce boilerplate in all Genkit flow definitions across the CareerCopilot application.
 
 ## Problem Solved
+
 Previously, every Genkit flow had repetitive boilerplate code including:
+
 - Manual model initialization (`get_model()` calls)
 - Conditional Genkit registration based on environment
 - Error handling for model availability
@@ -12,12 +15,15 @@ Previously, every Genkit flow had repetitive boilerplate code including:
 - Try/catch blocks for genkit imports
 
 ## Solution: `flow_decorator.py`
+
 A centralized decorator system that encapsulates all common setup logic.
 
 ### Key Components
 
 #### 1. `@simple_genkit_flow()`
+
 The most common decorator for basic flows:
+
 ```python
 @simple_genkit_flow(output_schema=MyResponse)
 def my_flow(input_text: str) -> MyResponse:
@@ -28,7 +34,9 @@ def my_flow(input_text: str) -> MyResponse:
 ```
 
 #### 2. `@async_genkit_flow()`
+
 For asynchronous flows:
+
 ```python
 @async_genkit_flow(output_schema=MyResponse, require_model=False)
 async def my_async_flow(input_text: str) -> MyResponse:
@@ -38,7 +46,9 @@ async def my_async_flow(input_text: str) -> MyResponse:
 ```
 
 #### 3. `@genkit_flow()`
+
 Full-featured decorator with all options:
+
 ```python
 @genkit_flow(
     name="custom_name",
@@ -53,6 +63,7 @@ def my_custom_flow(input_text: str) -> MyResponse:
 ```
 
 ### Decorator Features
+
 - **Automatic Model Validation**: Ensures model availability before execution
 - **Conditional Genkit Registration**: Handles `GENKIT_AVAILABLE` and `is_genkit_enabled()` checks
 - **Auto Flow Registration**: Automatically registers flows for tracking
@@ -61,6 +72,7 @@ def my_custom_flow(input_text: str) -> MyResponse:
 - **Backward Compatibility**: Works with existing API code
 
 ### Utility Functions
+
 - `run_flow_async(flow_func, **kwargs)` - Async flow execution
 - `run_flow(flow_func, **kwargs)` - Sync flow execution
 - `create_flow_wrapper()` - Programmatic flow creation
@@ -70,6 +82,7 @@ def my_custom_flow(input_text: str) -> MyResponse:
 ### Before and After Examples
 
 #### KSC Generator (Before)
+
 ```python
 # Old boilerplate-heavy approach
 import os
@@ -97,6 +110,7 @@ register_flow_function(generateKscResponse, "generateKscResponse")
 ```
 
 #### KSC Generator (After)
+
 ```python
 # Clean, focused approach
 from app.genkit_flows.flow_decorator import simple_genkit_flow
@@ -111,9 +125,11 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
 ## Files Updated
 
 ### Core Decorator System
+
 - **`flow_decorator.py`** - New centralized decorator implementation
 
 ### Refactored Flows
+
 - **`ksc_generator.py`** - Uses `@simple_genkit_flow`
 - **`cover_letter_generator.py`** - Uses `@simple_genkit_flow`
 - **`ats_scoring.py`** - Uses `@async_genkit_flow` for complex async operations
@@ -121,6 +137,7 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
 - **`shared.py`** - Updated `create_extraction_flow()` to use new system
 
 ### API Compatibility
+
 - **`analysis.py`** - Updated to use `run_flow_async` from decorator module
 
 ## Benefits Achieved
@@ -137,7 +154,9 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
 ## Usage Guidelines
 
 ### For New Flows
+
 Use `@simple_genkit_flow()` for most cases:
+
 ```python
 @simple_genkit_flow(output_schema=MyResponse)
 def my_new_flow(input_data: str) -> MyResponse:
@@ -147,7 +166,9 @@ def my_new_flow(input_data: str) -> MyResponse:
 ```
 
 ### For Complex Flows
+
 Use `@async_genkit_flow()` or `@genkit_flow()` with custom options:
+
 ```python
 @async_genkit_flow(
     output_schema=ComplexResponse,
@@ -160,7 +181,9 @@ async def complex_async_flow(data: dict) -> ComplexResponse:
 ```
 
 ### For Dynamic Flows
+
 Use `create_flow_wrapper()` for programmatic creation:
+
 ```python
 def create_dynamic_flow(schema):
     def flow_impl(data):
@@ -175,7 +198,9 @@ def create_dynamic_flow(schema):
 ```
 
 ## Testing
+
 All refactored flows have been tested for:
+
 - Import compatibility ✅
 - Flow registration ✅
 - API endpoint compatibility ✅
@@ -183,6 +208,7 @@ All refactored flows have been tested for:
 - Backward compatibility ✅
 
 ## Future Enhancements
+
 - Add metrics collection in decorator
 - Implement flow caching capabilities
 - Add request/response validation

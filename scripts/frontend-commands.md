@@ -5,16 +5,19 @@ This document describes the deployment readiness commands for the CareerCopilot 
 ## Available Scripts
 
 ### 1. Frontend Deployment Readiness Check
+
 **Script:** `./scripts/frontend-deployment-readiness.sh`
 
 Comprehensive deployment readiness validation including TypeScript, build, testing, linting, and security checks.
 
 #### Usage
+
 ```bash
 ./scripts/frontend-deployment-readiness.sh [options]
 ```
 
 #### Options
+
 - `--skip-tests` - Skip running unit and E2E tests
 - `--skip-build` - Skip build validation
 - `--skip-lint` - Skip ESLint checks
@@ -22,6 +25,7 @@ Comprehensive deployment readiness validation including TypeScript, build, testi
 - `-h, --help` - Show help message
 
 #### What it checks
+
 - ✅ Node.js and package manager versions
 - ✅ Dependency installation and validation
 - ✅ TypeScript type checking
@@ -37,6 +41,7 @@ Comprehensive deployment readiness validation including TypeScript, build, testi
 - ✅ Performance optimization validation
 
 #### Examples
+
 ```bash
 # Full deployment readiness check
 ./scripts/frontend-deployment-readiness.sh
@@ -52,21 +57,25 @@ Comprehensive deployment readiness validation including TypeScript, build, testi
 ```
 
 ### 2. TypeScript Validation
+
 **Script:** `./scripts/typescript-check.sh`
 
 Dedicated TypeScript type checking and validation with detailed analysis.
 
 #### Usage
+
 ```bash
 ./scripts/typescript-check.sh [options]
 ```
 
 #### Options
+
 - `--verbose` - Enable verbose output with detailed errors
 - `--fix` - Attempt to fix auto-fixable TypeScript issues
 - `-h, --help` - Show help message
 
 #### What it checks
+
 - ✅ TypeScript configuration validation
 - ✅ Comprehensive type checking
 - ✅ Strict mode configuration
@@ -77,6 +86,7 @@ Dedicated TypeScript type checking and validation with detailed analysis.
 - ✅ Code quality metrics
 
 #### Examples
+
 ```bash
 # Standard TypeScript check
 ./scripts/typescript-check.sh
@@ -89,22 +99,26 @@ Dedicated TypeScript type checking and validation with detailed analysis.
 ```
 
 ### 3. Vite Bundle Analysis
+
 **Script:** `./scripts/vite-bundle-analyzer.sh`
 
 Advanced bundle analysis and optimization recommendations for Vite builds.
 
 #### Usage
+
 ```bash
 ./scripts/vite-bundle-analyzer.sh [options]
 ```
 
 #### Options
+
 - `--analyze-only` - Only analyze existing build, don't rebuild
 - `--no-report` - Don't generate HTML report
 - `--output-dir` - Specify custom output directory
 - `-h, --help` - Show help message
 
 #### What it analyzes
+
 - 📦 JavaScript bundle sizes and chunks
 - 🎨 CSS file analysis
 - 🖼️ Asset optimization opportunities
@@ -115,6 +129,7 @@ Advanced bundle analysis and optimization recommendations for Vite builds.
 - 💡 Optimization suggestions
 
 #### Examples
+
 ```bash
 # Full bundle analysis with rebuild
 ./scripts/vite-bundle-analyzer.sh
@@ -147,6 +162,7 @@ These scripts are integrated into the frontend package.json:
 ## Common Workflows
 
 ### Pre-deployment Validation
+
 ```bash
 # Complete deployment readiness check
 ./scripts/frontend-deployment-readiness.sh
@@ -156,6 +172,7 @@ These scripts are integrated into the frontend package.json:
 ```
 
 ### Bundle Optimization
+
 ```bash
 # Analyze current bundle
 ./scripts/vite-bundle-analyzer.sh --analyze-only
@@ -165,6 +182,7 @@ These scripts are integrated into the frontend package.json:
 ```
 
 ### CI/CD Integration
+
 ```bash
 # CI-friendly commands (non-interactive)
 ./scripts/frontend-deployment-readiness.sh --skip-tests
@@ -174,6 +192,7 @@ These scripts are integrated into the frontend package.json:
 ## Output Examples
 
 ### Successful Deployment Check
+
 ```
 [INFO] Starting Frontend Deployment Readiness Check...
 [SUCCESS] Dependencies are up to date
@@ -189,6 +208,7 @@ These scripts are integrated into the frontend package.json:
 ```
 
 ### Bundle Analysis Report
+
 ```
 === Bundle Analysis Report ===
 📦 JavaScript Bundles:
@@ -211,6 +231,7 @@ These scripts are integrated into the frontend package.json:
 ## Error Handling
 
 All scripts provide clear error messages and exit codes:
+
 - ✅ Exit code 0: Success
 - ❌ Exit code 1: Failure with detailed error information
 - ⚠️ Warnings are logged but don't cause script failure
@@ -218,6 +239,7 @@ All scripts provide clear error messages and exit codes:
 ## Integration with Existing Tools
 
 These scripts work with your existing toolchain:
+
 - **Vite**: Uses existing vite.config.ts
 - **TypeScript**: Uses existing tsconfig.json
 - **ESLint**: Uses existing ESLint configuration

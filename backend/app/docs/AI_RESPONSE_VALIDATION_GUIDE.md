@@ -44,6 +44,7 @@ else:
 The utility includes schemas for all common AI response types:
 
 #### STAR Response Schema
+
 ```python
 class STARResponse(BaseAIResponseSchema):
     situation: str = Field(..., min_length=10)
@@ -53,6 +54,7 @@ class STARResponse(BaseAIResponseSchema):
 ```
 
 #### KSC Complete Response Schema
+
 ```python
 class KSCResponseComplete(BaseAIResponseSchema):
     ksc_analysis: KSCAnalysis
@@ -63,6 +65,7 @@ class KSCResponseComplete(BaseAIResponseSchema):
 ```
 
 #### Semantic Analysis Schema
+
 ```python
 class SemanticAnalysis(BaseAIResponseSchema):
     similarity_score: float = Field(..., ge=0, le=100)
@@ -72,6 +75,7 @@ class SemanticAnalysis(BaseAIResponseSchema):
 ```
 
 #### ATS Result Schema
+
 ```python
 class ATSResult(BaseAIResponseSchema):
     overall_score: float = Field(..., ge=0, le=100)
@@ -84,6 +88,7 @@ class ATSResult(BaseAIResponseSchema):
 ### 3. Integration Helpers
 
 #### Flow Validation Decorator
+
 ```python
 from app.core.ai_flow_integration import validate_ai_flow_response
 
@@ -95,6 +100,7 @@ async def my_ai_flow_function(params) -> str:
 ```
 
 #### Migration Helper
+
 ```python
 from app.core.ai_flow_integration import migrate_json_parsing
 
@@ -301,12 +307,14 @@ python backend/app/tests/test_ai_response_validation.py
 ### For Existing AI Operations
 
 1. **Import the validation utilities**:
+
    ```python
    from app.core.ai_response_validation import default_validator
    from app.core.ai_flow_integration import extract_validated_data
    ```
 
 2. **Replace manual JSON parsing**:
+
    ```python
    # Before
    parsed_result = json.loads(response.content.strip())
@@ -321,6 +329,7 @@ python backend/app/tests/test_ai_response_validation.py
    ```
 
 3. **Add fallback data**:
+
    ```python
    fallback_data = {
        # Provide sensible defaults for your schema
@@ -330,6 +339,7 @@ python backend/app/tests/test_ai_response_validation.py
    ```
 
 4. **Update error handling**:
+
    ```python
    # Check if fallback was used
    if validation_result.metadata.get("fallback_used"):
@@ -421,6 +431,7 @@ When adding new AI operations:
 5. Update this documentation
 
 For schema changes:
+
 1. Maintain backward compatibility when possible
 2. Use field aliases for renamed fields
 3. Provide migration guides for breaking changes

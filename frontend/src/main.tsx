@@ -1,5 +1,29 @@
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
-import './styles/globals.css';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import App from './App';
 
-createRoot(document.getElementById('root')!).render(<App />);
+// Create a theme instance
+const theme = createTheme({
+  palette: {
+    mode: 'light', // or 'dark'
+    primary: {
+      main: '#1976d2',
+    },
+    secondary: {
+      main: '#dc004e',
+    },
+  },
+});
+
+const root = createRoot(document.getElementById('root')!);
+
+root.render(
+  <StrictMode>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
+  </StrictMode>
+);

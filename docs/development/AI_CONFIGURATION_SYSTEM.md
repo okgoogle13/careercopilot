@@ -122,16 +122,16 @@ AWS_DEFAULT_REGION=us-east-1
 
 ### Pre-configured Services
 
-| Service | Primary Model | Purpose | Cache TTL | Daily Budget |
-|---------|---------------|---------|-----------|--------------|
-| `resume_analysis` | gpt-4o-mini | Resume skills and experience analysis | 1h | $50 |
-| `job_analysis` | gpt-4o-mini | Job description requirement extraction | 2h | $25 |
-| `ats_scoring` | gpt-4o | Resume-job compatibility scoring | 30min | $75 |
-| `cover_letter_generation` | gpt-4o | Personalized cover letter creation | 15min | $60 |
-| `voice_profile` | gpt-4o | User writing style analysis | 24h | $30 |
-| `ksc_generation` | gpt-4o-mini | Knowledge/Skills/Competencies responses | 1h | $40 |
-| `document_extraction` | gpt-4o-mini | Structured data extraction | 2h | $35 |
-| `text_embedding` | text-embedding-3-small | Semantic search embeddings | 24h | $10 |
+| Service                   | Primary Model          | Purpose                                 | Cache TTL | Daily Budget |
+| ------------------------- | ---------------------- | --------------------------------------- | --------- | ------------ |
+| `resume_analysis`         | gpt-4o-mini            | Resume skills and experience analysis   | 1h        | $50          |
+| `job_analysis`            | gpt-4o-mini            | Job description requirement extraction  | 2h        | $25          |
+| `ats_scoring`             | gpt-4o                 | Resume-job compatibility scoring        | 30min     | $75          |
+| `cover_letter_generation` | gpt-4o                 | Personalized cover letter creation      | 15min     | $60          |
+| `voice_profile`           | gpt-4o                 | User writing style analysis             | 24h       | $30          |
+| `ksc_generation`          | gpt-4o-mini            | Knowledge/Skills/Competencies responses | 1h        | $40          |
+| `document_extraction`     | gpt-4o-mini            | Structured data extraction              | 2h        | $35          |
+| `text_embedding`          | text-embedding-3-small | Semantic search embeddings              | 24h       | $10          |
 
 ## Usage Examples
 
@@ -200,24 +200,24 @@ if validation['warnings']:
 
 ### Public Endpoints
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/v1/ai/status` | GET | Overall AI services status |
-| `/api/v1/ai/models` | GET | Available models with filtering |
-| `/api/v1/ai/services` | GET | AI services configuration |
-| `/api/v1/ai/providers` | GET | Provider status and health |
-| `/api/v1/ai/usage-metrics` | GET | Usage analytics and costs |
+| Endpoint                   | Method | Description                     |
+| -------------------------- | ------ | ------------------------------- |
+| `/api/v1/ai/status`        | GET    | Overall AI services status      |
+| `/api/v1/ai/models`        | GET    | Available models with filtering |
+| `/api/v1/ai/services`      | GET    | AI services configuration       |
+| `/api/v1/ai/providers`     | GET    | Provider status and health      |
+| `/api/v1/ai/usage-metrics` | GET    | Usage analytics and costs       |
 
 ### Admin Endpoints (Authentication Required)
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/v1/ai/admin/configuration` | GET | Complete configuration details |
-| `/api/v1/ai/admin/reload-config` | POST | Reload configuration from files |
-| `/api/v1/ai/admin/validate-config` | POST | Validate current configuration |
-| `/api/v1/ai/admin/service/{name}/enable` | PUT | Enable AI service |
-| `/api/v1/ai/admin/service/{name}/disable` | PUT | Disable AI service |
-| `/api/v1/ai/admin/cost-analysis` | GET | Detailed cost breakdown |
+| Endpoint                                  | Method | Description                     |
+| ----------------------------------------- | ------ | ------------------------------- |
+| `/api/v1/ai/admin/configuration`          | GET    | Complete configuration details  |
+| `/api/v1/ai/admin/reload-config`          | POST   | Reload configuration from files |
+| `/api/v1/ai/admin/validate-config`        | POST   | Validate current configuration  |
+| `/api/v1/ai/admin/service/{name}/enable`  | PUT    | Enable AI service               |
+| `/api/v1/ai/admin/service/{name}/disable` | PUT    | Disable AI service              |
+| `/api/v1/ai/admin/cost-analysis`          | GET    | Detailed cost breakdown         |
 
 ### Testing Endpoints
 
@@ -347,6 +347,7 @@ Services are configured with intelligent fallback strategies:
 ### Dynamic Model Selection
 
 The system automatically selects models based on:
+
 - **Service Requirements**: Quality thresholds and complexity
 - **Cost Constraints**: Budget availability and optimization
 - **Provider Health**: Real-time availability and performance
@@ -421,6 +422,7 @@ for provider, is_healthy in health_status.items():
 ### Common Issues
 
 1. **"Service not available"**
+
    ```bash
    # Check service configuration
    curl "/api/v1/ai/services" | jq '.services[] | select(.service_name=="resume_analysis")'
@@ -430,6 +432,7 @@ for provider, is_healthy in health_status.items():
    ```
 
 2. **"No models available"**
+
    ```bash
    # Check provider health
    curl "/api/v1/ai/providers"
@@ -439,6 +442,7 @@ for provider, is_healthy in health_status.items():
    ```
 
 3. **"Rate limit exceeded"**
+
    ```bash
    # Check usage metrics
    curl "/api/v1/ai/usage-metrics?time_window_hours=1"

@@ -9,6 +9,7 @@ The AI services frontend provides a comprehensive suite of tools to help users a
 ## Features
 
 ### 1. AI Job Matching (`JobMatchingComponent`)
+
 - **Location**: `/src/components/AIServices/JobMatchingComponent.tsx`
 - **Purpose**: Intelligent job matching based on skills, experience, and preferences
 - **Key Features**:
@@ -19,6 +20,7 @@ The AI services frontend provides a comprehensive suite of tools to help users a
   - Personalized job recommendations
 
 ### 2. Content Optimization (`ContentOptimizationComponent`)
+
 - **Location**: `/src/components/AIServices/ContentOptimizationComponent.tsx`
 - **Purpose**: AI-powered optimization of resumes, cover letters, and professional content
 - **Key Features**:
@@ -29,6 +31,7 @@ The AI services frontend provides a comprehensive suite of tools to help users a
   - Structure and formatting improvements
 
 ### 3. Resume Intelligence (`ResumeIntelligenceComponent`)
+
 - **Location**: `/src/components/AIServices/ResumeIntelligenceComponent.tsx`
 - **Purpose**: Deep career insights and market positioning analysis
 - **Key Features**:
@@ -39,6 +42,7 @@ The AI services frontend provides a comprehensive suite of tools to help users a
   - Growth recommendations
 
 ### 4. Smart Cover Letter Generation (`CoverLetterGenerationComponent`)
+
 - **Location**: `/src/components/AIServices/CoverLetterGenerationComponent.tsx`
 - **Purpose**: Personalized cover letter generation with company research
 - **Key Features**:
@@ -51,6 +55,7 @@ The AI services frontend provides a comprehensive suite of tools to help users a
 ## API Integration
 
 ### Service Client
+
 - **Location**: `/src/services/aiServices.ts`
 - **Purpose**: Centralized API client for all AI services
 - **Features**:
@@ -60,7 +65,9 @@ The AI services frontend provides a comprehensive suite of tools to help users a
   - Singleton pattern for consistent usage
 
 ### API Endpoints
+
 All AI services connect to the backend at `/api/v1/ai-career/` with the following endpoints:
+
 - `POST /job-matching` - Job matching analysis
 - `POST /content-optimization` - Content optimization
 - `POST /resume-intelligence` - Resume analysis
@@ -74,50 +81,41 @@ All AI services connect to the backend at `/api/v1/ai-career/` with the followin
 ## Usage Examples
 
 ### Basic Job Matching
-```tsx
-import { JobMatchingComponent } from '../components/AIServices';
 
-<JobMatchingComponent
-  resumeDocumentId="user-resume-id"
-  onJobSelected={(jobId) => handleJobSelection(jobId)}
-/>
+```tsx
+import { JobMatchingComponent } from "../components/AIServices";
+
+<JobMatchingComponent resumeDocumentId="user-resume-id" onJobSelected={(jobId) => handleJobSelection(jobId)} />;
 ```
 
 ### Content Optimization
-```tsx
-import { ContentOptimizationComponent } from '../components/AIServices';
 
-<ContentOptimizationComponent
-  initialContent="resume content"
-  contentType="resume"
-/>
+```tsx
+import { ContentOptimizationComponent } from "../components/AIServices";
+
+<ContentOptimizationComponent initialContent="resume content" contentType="resume" />;
 ```
 
 ### Resume Intelligence
-```tsx
-import { ResumeIntelligenceComponent } from '../components/AIServices';
 
-<ResumeIntelligenceComponent
-  resumeDocumentId="user-resume-id"
-  initialResumeContent="fallback content"
-/>
+```tsx
+import { ResumeIntelligenceComponent } from "../components/AIServices";
+
+<ResumeIntelligenceComponent resumeDocumentId="user-resume-id" initialResumeContent="fallback content" />;
 ```
 
 ### Smart Cover Letters
-```tsx
-import { CoverLetterGenerationComponent } from '../components/AIServices';
 
-<CoverLetterGenerationComponent
-  resumeDocumentId="user-resume-id"
-  initialJobDescription="job posting"
-  initialCompanyName="Target Company"
-  initialPositionTitle="Target Role"
-/>
+```tsx
+import { CoverLetterGenerationComponent } from "../components/AIServices";
+
+<CoverLetterGenerationComponent resumeDocumentId="user-resume-id" initialJobDescription="job posting" initialCompanyName="Target Company" initialPositionTitle="Target Role" />;
 ```
 
 ## Component Architecture
 
 ### Design Patterns
+
 1. **Tab-based Navigation**: Multi-step processes use tabbed interfaces
 2. **Progressive Disclosure**: Complex forms are broken into manageable sections
 3. **Real-time Feedback**: Loading states and progress indicators
@@ -125,12 +123,14 @@ import { CoverLetterGenerationComponent } from '../components/AIServices';
 5. **Responsive Design**: Mobile-first responsive layouts
 
 ### State Management
+
 - Local component state for form data and UI state
 - API state management with loading/error states
 - Toast notifications for user feedback
 - Clipboard integration for easy content copying
 
 ### Styling
+
 - Tailwind CSS for consistent styling
 - shadcn/ui component library integration
 - Responsive grid layouts
@@ -140,6 +140,7 @@ import { CoverLetterGenerationComponent } from '../components/AIServices';
 ## AI Services Page
 
 ### Main Interface
+
 - **Location**: `/src/pages/AIServicesPage.tsx`
 - **Purpose**: Unified interface for all AI services
 - **Features**:
@@ -149,6 +150,7 @@ import { CoverLetterGenerationComponent } from '../components/AIServices';
   - Quick start onboarding
 
 ### Navigation Structure
+
 ```
 AI Services Page
 ├── Overview (Service cards and benefits)
@@ -161,16 +163,19 @@ AI Services Page
 ## Integration Points
 
 ### Authentication
+
 - Uses existing auth system (`useAuthStatus` hook)
 - JWT token-based API authentication
 - Protected component access
 
 ### Document Management
+
 - Integrates with existing document upload system
 - Resume document ID passing between components
 - Content extraction from uploaded documents
 
 ### Error Handling
+
 - Centralized error reporting
 - User-friendly error messages
 - Retry mechanisms for failed requests
@@ -179,6 +184,7 @@ AI Services Page
 ## Performance Considerations
 
 ### Optimization Strategies
+
 1. **Code Splitting**: Components are lazily loaded
 2. **Memoization**: Expensive calculations are memoized
 3. **API Caching**: Duplicate requests are avoided
@@ -186,6 +192,7 @@ AI Services Page
 5. **Image Optimization**: Icons and graphics are optimized
 
 ### Loading States
+
 - Skeleton screens for content loading
 - Spinner components for actions
 - Progress indicators for multi-step processes
@@ -194,6 +201,7 @@ AI Services Page
 ## Accessibility Features
 
 ### WCAG Compliance
+
 - Keyboard navigation support
 - Screen reader compatibility
 - High contrast color schemes
@@ -201,6 +209,7 @@ AI Services Page
 - ARIA labels and descriptions
 
 ### User Experience
+
 - Clear visual hierarchy
 - Consistent interaction patterns
 - Helpful placeholder text and examples
@@ -210,12 +219,14 @@ AI Services Page
 ## Testing Strategy
 
 ### Component Testing
+
 - Unit tests for individual components
 - Integration tests for API interactions
 - Mock services for development testing
 - Error scenario testing
 
 ### User Testing
+
 - Usability testing for complex workflows
 - A/B testing for UI variations
 - Performance testing under load
@@ -224,6 +235,7 @@ AI Services Page
 ## Future Enhancements
 
 ### Planned Features
+
 1. **Real-time Collaboration**: Multi-user document editing
 2. **Advanced Analytics**: Detailed usage and success metrics
 3. **Integration Marketplace**: Third-party service connections
@@ -231,6 +243,7 @@ AI Services Page
 5. **Offline Mode**: Limited offline functionality
 
 ### Technical Improvements
+
 1. **WebSocket Integration**: Real-time updates and notifications
 2. **PWA Features**: Progressive web app capabilities
 3. **Advanced Caching**: Intelligent caching strategies
@@ -240,12 +253,14 @@ AI Services Page
 ## Deployment Notes
 
 ### Environment Configuration
+
 - API endpoints configured via environment variables
 - Feature flags for gradual rollouts
 - Analytics and monitoring integration
 - Error tracking and reporting
 
 ### Browser Support
+
 - Chrome 90+
 - Firefox 88+
 - Safari 14+
@@ -255,12 +270,14 @@ AI Services Page
 ## Support and Maintenance
 
 ### Monitoring
+
 - API response time monitoring
 - Error rate tracking
 - User engagement metrics
 - Performance metrics dashboard
 
 ### Updates
+
 - Regular dependency updates
 - Security patch management
 - Feature rollout coordination

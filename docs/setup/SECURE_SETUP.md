@@ -26,16 +26,19 @@ cp .env.example .env
 For **PRODUCTION SECURITY**, use separate Firebase projects for each environment:
 
 #### Development Environment
+
 - Project: `careercopilot-dev`
 - Use development-specific API keys
 - Less restrictive security rules for testing
 
 #### Staging Environment
+
 - Project: `careercopilot-staging`
 - Use staging-specific API keys
 - Production-like security rules
 
 #### Production Environment
+
 - Project: `careercopilot-prod`
 - Use production-specific API keys
 - Strict security rules
@@ -43,6 +46,7 @@ For **PRODUCTION SECURITY**, use separate Firebase projects for each environment
 ### 3. Firebase Configuration
 
 Get your Firebase configuration from:
+
 1. Go to [Firebase Console](https://console.firebase.google.com/)
 2. Select your project
 3. Project Settings → General → Your apps
@@ -64,12 +68,14 @@ VITE_FIREBASE_APP_ID=1:123456789012:web:abcdef123456
 ## 🔐 Security Best Practices
 
 ### Environment File Security
+
 - ✅ **NEVER** commit `.env` files to version control
 - ✅ Use different credentials for dev/staging/production
 - ✅ Regularly rotate API keys
 - ✅ Use least-privilege access principles
 
 ### Firebase Security Rules
+
 Review and update your Firestore security rules:
 
 ```javascript
@@ -91,6 +97,7 @@ service cloud.firestore {
 ```
 
 ### API Security
+
 - Enable Firebase App Check for API protection
 - Set up Firebase Security Rules monitoring
 - Implement rate limiting where appropriate
@@ -101,12 +108,14 @@ service cloud.firestore {
 If Firebase credentials were ever committed to version control:
 
 ### Immediate Actions:
+
 1. **Rotate all Firebase API keys immediately**
 2. **Review Firebase audit logs** for unauthorized access
 3. **Update security rules** to be more restrictive
 4. **Monitor for suspicious activity**
 
 ### Firebase Console → Project Settings → Service Accounts:
+
 - Generate new private keys
 - Delete old compromised keys
 - Update all deployment environments
@@ -114,6 +123,7 @@ If Firebase credentials were ever committed to version control:
 ## 📋 Security Checklist
 
 ### Before Deployment:
+
 - [ ] Environment variables configured correctly
 - [ ] No credentials in source code
 - [ ] Firebase security rules reviewed and tested
@@ -122,6 +132,7 @@ If Firebase credentials were ever committed to version control:
 - [ ] Firebase App Check enabled (recommended)
 
 ### After Deployment:
+
 - [ ] Monitor Firebase usage and billing
 - [ ] Set up Firebase alerts for unusual activity
 - [ ] Regular security rule audits
@@ -130,6 +141,7 @@ If Firebase credentials were ever committed to version control:
 ## 🔧 Development Workflow
 
 ### Local Development:
+
 ```bash
 # 1. Copy environment template
 cp frontend/.env.example frontend/.env
@@ -143,11 +155,13 @@ npm run dev
 ```
 
 ### Staging Deployment:
+
 - Use staging Firebase project
 - Staging-specific environment variables
 - Test security rules in staging environment
 
 ### Production Deployment:
+
 - Use production Firebase project
 - Production environment variables
 - Strict security rules
@@ -156,9 +170,11 @@ npm run dev
 ## 📞 Support
 
 If you need help with Firebase setup or security configuration:
+
 1. Check Firebase Documentation
 2. Review Firebase Security Rules guide
 3. Test security rules in Firebase Console simulator
 
 ---
+
 **Security is everyone's responsibility. Always follow secure coding practices.**

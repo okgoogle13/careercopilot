@@ -7,6 +7,7 @@
 ## Deployed Resources
 
 ### 1. Vector Search Index
+
 - **Name**: careercopilot-vector-index
 - **ID**: `9209634738577342464`
 - **Full Resource Name**: `projects/867091085935/locations/us-central1/indexes/9209634738577342464`
@@ -18,6 +19,7 @@
   - Shard Size: SHARD_SIZE_SMALL
 
 ### 2. Vector Search Endpoint
+
 - **Name**: careercopilot-vector-endpoint
 - **ID**: `4168804933782470656`
 - **Full Resource Name**: `projects/867091085935/locations/us-central1/indexEndpoints/4168804933782470656`
@@ -25,6 +27,7 @@
 - **Status**: ✅ Created and Ready
 
 ### 3. Index Deployment
+
 - **Deployed Index ID**: `default_index`
 - **Status**: ✅ Deployed and Ready
 - **Deployment Completed**: 2025-09-05 09:36 UTC
@@ -35,7 +38,9 @@
 ## Configuration Files Created
 
 ### 1. Environment Configuration
+
 **File**: `/Applications/careercopilot/backend/vertex-ai-config.env`
+
 ```env
 # Vertex AI Vector Search Configuration
 GCP_PROJECT_ID=careercopilot-468811
@@ -57,13 +62,17 @@ GOOGLE_APPLICATION_CREDENTIALS=/Applications/careercopilot/backend/firebase-prod
 ```
 
 ### 2. Deployment Script
+
 **File**: `/Applications/careercopilot/scripts/deploy-vector-search.sh`
+
 - Automated deployment script for future updates
 - Includes validation and testing steps
 - Can be reused for additional indexes or environments
 
 ### 3. Test Script
+
 **File**: `/Applications/careercopilot/scripts/test-vector-search.py`
+
 - Comprehensive testing of Vector Search functionality
 - Validates connectivity and basic operations
 - Can be used for health checks and monitoring
@@ -80,6 +89,7 @@ Your existing `VectorStore` class (`/Applications/careercopilot/backend/app/ai/v
 ## Next Steps
 
 ### 1. Update Application Configuration
+
 Add the environment variables from `vertex-ai-config.env` to your application startup:
 
 ```python
@@ -99,13 +109,17 @@ vector_store_config = {
 ```
 
 ### 2. Wait for Index Deployment
+
 Monitor deployment completion:
+
 ```bash
 gcloud ai operations describe 6424261877760524288 --index-endpoint=4168804933782470656 --region=us-central1
 ```
 
 ### 3. Test with Real Data
+
 Once deployment completes:
+
 1. Add test documents to the vector store
 2. Verify similarity search functionality
 3. Test performance and accuracy
@@ -113,16 +127,19 @@ Once deployment completes:
 ### 4. Production Considerations
 
 #### Monitoring
+
 - Set up monitoring for endpoint health
 - Track query latency and throughput
 - Monitor index utilization
 
 #### Scaling
+
 - Current setup supports 1-2 replicas
 - Scale up based on query volume
 - Consider multiple indexes for different document types
 
 #### Cost Optimization
+
 - Review pricing for index storage and queries
 - Implement query caching where appropriate
 - Consider batch operations for large ingestion
@@ -130,6 +147,7 @@ Once deployment completes:
 ## Useful Commands
 
 ### Check Deployment Status
+
 ```bash
 # Check index status
 gcloud ai indexes describe projects/867091085935/locations/us-central1/indexes/9209634738577342464 --region=us-central1
@@ -145,6 +163,7 @@ gcloud ai index-endpoints list --region=us-central1
 ```
 
 ### Test Connectivity
+
 ```bash
 # Run test script
 python3 scripts/test-vector-search.py
@@ -154,16 +173,19 @@ gcloud ai operations describe <operation-id> --index-endpoint=416880493378247065
 ```
 
 ### Update Vector Store Integration
+
 Once deployment is complete, update your VectorStore initialization in your application to use the deployed Vertex AI resources.
 
 ## Troubleshooting
 
 ### Common Issues
+
 1. **"No deployed indexes found"** - Index deployment still in progress
 2. **Authentication errors** - Check GOOGLE_APPLICATION_CREDENTIALS path
 3. **Permission errors** - Verify IAM roles for Vertex AI access
 
 ### Support Resources
+
 - [Vertex AI Vector Search Documentation](https://cloud.google.com/vertex-ai/docs/vector-search)
 - [Python Client Library](https://googleapis.dev/python/aiplatform/latest/)
 - [Pricing Information](https://cloud.google.com/vertex-ai/pricing#vector-search)

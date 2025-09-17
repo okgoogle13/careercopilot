@@ -13,14 +13,17 @@ This directory contains the Cloud Functions for Firebase that power the CareerCo
 ### Setup
 
 1. Install dependencies:
+
    ```bash
    yarn install
    ```
 
 2. Copy the example environment file and update with your values:
+
    ```bash
    cp .env.example .env
    ```
+
    Edit the `.env` file with your Firebase project details.
 
 3. Build the project:
@@ -33,6 +36,7 @@ This directory contains the Cloud Functions for Firebase that power the CareerCo
 ### Running Locally
 
 Start the Firebase emulator suite:
+
 ```bash
 yarn serve
 ```
@@ -42,6 +46,7 @@ This will start the Firebase emulator with your functions.
 ### Testing
 
 Run the linter:
+
 ```bash
 yarn lint
 ```
@@ -49,11 +54,13 @@ yarn lint
 ### Deployment
 
 Deploy all functions:
+
 ```bash
 npm run deploy
 ```
 
 Deploy a specific function:
+
 ```bash
 firebase deploy --only functions:functionName
 ```
@@ -69,15 +76,17 @@ firebase deploy --only functions:functionName
 Use Google Cloud Secret Manager for sensitive configuration:
 
 1. Add a new secret:
+
    ```bash
    firebase functions:secrets:set SECRET_NAME
    ```
 
 2. Access secrets in your code:
-   ```typescript
-   import { getSecret } from './utils/secretManager';
 
-   const apiKey = await getSecret('API_KEY');
+   ```typescript
+   import { getSecret } from "./utils/secretManager";
+
+   const apiKey = await getSecret("API_KEY");
    ```
 
 ## Project Structure
