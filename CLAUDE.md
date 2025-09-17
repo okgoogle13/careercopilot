@@ -246,7 +246,7 @@ Options:
 ### Test Configuration Files
 
 - `frontend/jest.config.js` - Jest configuration for React components
-- `frontend/playwright.config.ts` - Playwright E2E test configuration
+- `frontend/playwright.config.ts` - Playwright E2E test configuration 
 - `backend/app/tests/conftest.py` - pytest configuration and fixtures
 - `frontend/src/setupTests.ts` - Test environment setup
 
