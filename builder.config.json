@@ -1,6 +1,6 @@
 {
-  "command": "rn dev --host",
-  "serverUrl": "http://localhost:4173/",
+  "command": "yarn dev",
+  "serverUrl": "http://localhost:5173/",
   "authenticateProxy": false,
   "commitMode": "commits"
 }
