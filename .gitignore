@@ -48,6 +48,10 @@ logs/
 *.log
 
 # Coverage
+
+# Backup directories
+frontend-pre-migration-backup/
+frontend-broken/
 coverage/
 .nyc_output
 

@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-css-modules"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "selector-class-pattern": null,
+    "custom-property-pattern": null,
+    "value-keyword-case": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "shorthand-property-no-redundant-values": null,
+    "property-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null,
+    "selector-not-notation": null,
+    "no-descending-specificity": null,
+    "rule-empty-line-before": null,
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global", "local", "export", "import", "has", "where", "not"]
+      }
+    ]
+  }
+}
