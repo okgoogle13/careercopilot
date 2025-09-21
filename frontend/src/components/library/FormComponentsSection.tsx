@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Textarea } from '../ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Switch } from '../ui/switch';
 import { Checkbox } from '../ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
@@ -14,6 +14,7 @@ export function FormComponentsSection() {
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [sliderValue, setSliderValue] = useState([50]);
   const [radioValue, setRadioValue] = useState('option1');
+  const [selectValue, setSelectValue] = useState('');
 
   return (
     <ComponentSection
@@ -38,17 +39,18 @@ export function FormComponentsSection() {
           </div>
           <div className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="select">Select</Label>
-              <Select>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="option1">Option 1</SelectItem>
-                  <SelectItem value="option2">Option 2</SelectItem>
-                  <SelectItem value="option3">Option 3</SelectItem>
-                </SelectContent>
-              </Select>
+              <FormControl fullWidth>
+                <InputLabel>Select</InputLabel>
+                <Select
+                  value={selectValue}
+                  label="Select"
+                  onChange={(e) => setSelectValue(e.target.value)}
+                >
+                  <MenuItem value="option1">Option 1</MenuItem>
+                  <MenuItem value="option2">Option 2</MenuItem>
+                  <MenuItem value="option3">Option 3</MenuItem>
+                </Select>
+              </FormControl>
             </div>
             <div className="space-y-2">
               <Label>Switch</Label>

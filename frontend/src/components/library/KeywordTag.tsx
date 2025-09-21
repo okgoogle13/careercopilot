@@ -1,6 +1,6 @@
 import { X, Plus, Check } from 'lucide-react';
 import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
+import { Button, IconButton } from '@mui/material';
 
 interface KeywordTagProps {
   keyword: string;

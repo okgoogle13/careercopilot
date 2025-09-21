@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
 import { Label } from './ui/label';
 import { ArrowLeft, Sparkles, Play, Pause, RotateCcw } from 'lucide-react';
 import {
@@ -16,6 +14,16 @@ import {
   AnimatedStatsCard,
 } from './AnimatedComponents';
 import { Star, User, FileText, Target, TrendingUp, Settings, Bell, Shield } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface AnimatedShowcaseProps {
   onBack: () => void;
@@ -190,9 +198,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <h2 className="mb-6">Interactive Overlays</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Animated Modal</CardTitle>
-                  <CardDescription>Modal with smooth entrance and exit animations</CardDescription>
+                <CardHeader
+                  title={<Typography variant='h3'>Animated Modal</Typography>}
+                  subheader={<Typography variant='body2' color='text.secondary'>Modal with smooth entrance and exit animations</Typography>}>
+
+
                 </CardHeader>
                 <CardContent>
                   <Button onClick={() => setShowModal(true)}>Open Modal</Button>
@@ -212,9 +222,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
               </Card>
 
               <Card>
-                <CardHeader>
-                  <CardTitle>Animated Dropdown</CardTitle>
-                  <CardDescription>Dropdown with staggered item animations</CardDescription>
+                <CardHeader
+                  title={<Typography variant='h3'>Animated Dropdown</Typography>}
+                  subheader={<Typography variant='body2' color='text.secondary'>Dropdown with staggered item animations</Typography>}>
+
+
                 </CardHeader>
                 <CardContent>
                   <AnimatedDropdown
@@ -236,9 +248,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           <section>
             <h2 className="mb-6">Animated Tabs</h2>
             <Card>
-              <CardHeader>
-                <CardTitle>Sliding Tab Indicator</CardTitle>
-                <CardDescription>Tabs with smooth sliding indicator animation</CardDescription>
+              <CardHeader
+                title={<Typography variant='h3'>Sliding Tab Indicator</Typography>}
+                subheader={<Typography variant='body2' color='text.secondary'>Tabs with smooth sliding indicator animation</Typography>}>
+
+
               </CardHeader>
               <CardContent>
                 <AnimatedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab}>
@@ -278,9 +292,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <h2 className="mb-6">Progress & Loading Animations</h2>
             <div className="grid md:grid-cols-2 gap-6">
               <Card>
-                <CardHeader>
-                  <CardTitle>Animated Progress</CardTitle>
-                  <CardDescription>Smooth progress bar with spring animations</CardDescription>
+                <CardHeader
+                  title={<Typography variant='h3'>Animated Progress</Typography>}
+                  subheader={<Typography variant='body2' color='text.secondary'>Smooth progress bar with spring animations</Typography>}>
+
+
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <AnimatedProgress value={progress} />
@@ -296,9 +312,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
               </Card>
 
               <Card>
-                <CardHeader>
-                  <CardTitle>Loading Animations</CardTitle>
-                  <CardDescription>Various animated loading indicators</CardDescription>
+                <CardHeader
+                  title={<Typography variant='h3'>Loading Animations</Typography>}
+                  subheader={<Typography variant='body2' color='text.secondary'>Various animated loading indicators</Typography>}>
+
+
                 </CardHeader>
                 <CardContent>
                   <LoadingAnimations />
@@ -311,11 +329,12 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           <section>
             <h2 className="mb-6">Animated Buttons</h2>
             <Card>
-              <CardHeader>
-                <CardTitle>Button Interaction Animations</CardTitle>
-                <CardDescription>
-                  Different animation styles for button interactions
-                </CardDescription>
+              <CardHeader
+                title={<Typography variant='h3'>Button Interaction Animations</Typography>}
+                subheader={<Typography variant='body2' color='text.secondary'>Different animation styles for button interactions
+                                  </Typography>}>
+
+
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -403,9 +422,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           <section>
             <h2 className="mb-6">Staggered List Animation</h2>
             <Card>
-              <CardHeader>
-                <CardTitle>Task List</CardTitle>
-                <CardDescription>List items with staggered entrance animations</CardDescription>
+              <CardHeader
+                title={<Typography variant='h3'>Task List</Typography>}
+                subheader={<Typography variant='body2' color='text.secondary'>List items with staggered entrance animations</Typography>}>
+
+
               </CardHeader>
               <CardContent>
                 <StaggeredList
@@ -427,11 +448,12 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           <section>
             <h2 className="mb-6">Animated Notifications</h2>
             <Card>
-              <CardHeader>
-                <CardTitle>Toast Notifications</CardTitle>
-                <CardDescription>
-                  Notifications with smooth entrance and exit animations
-                </CardDescription>
+              <CardHeader
+                title={<Typography variant='h3'>Toast Notifications</Typography>}
+                subheader={<Typography variant='body2' color='text.secondary'>Notifications with smooth entrance and exit animations
+                                  </Typography>}>
+
+
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
@@ -476,11 +498,12 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           <section>
             <h2 className="mb-6">Implementation Guidelines</h2>
             <Card>
-              <CardHeader>
-                <CardTitle>Animation Best Practices</CardTitle>
-                <CardDescription>
-                  Guidelines for implementing smooth and performant animations
-                </CardDescription>
+              <CardHeader
+                title={<Typography variant='h3'>Animation Best Practices</Typography>}
+                subheader={<Typography variant='body2' color='text.secondary'>Guidelines for implementing smooth and performant animations
+                                  </Typography>}>
+
+
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">

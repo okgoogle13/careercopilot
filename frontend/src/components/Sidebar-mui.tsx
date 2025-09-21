@@ -13,7 +13,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { BarChart3, FileText, Plus } from 'lucide-react';
-import { Logo } from './Logo';
+import { CareerCopilotLogo } from './CareerCopilotLogo';
 
 interface SidebarProps {
   activeTab: string;
@@ -47,7 +47,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         {/* Logo Section */}
         <Box sx={{ p: 3 }}>
-          <Logo showText={true} />
+          <CareerCopilotLogo />
         </Box>
 
         {/* Navigation Section */}

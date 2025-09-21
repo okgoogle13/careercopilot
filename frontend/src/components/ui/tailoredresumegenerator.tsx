@@ -1,10 +1,18 @@
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import { Editor } from '@/components/ui/editor';
-import { Textarea } from '@/components/ui/textarea';
+import { TextField } from '@mui/material';
 import { cn } from '@/lib/utils';
 import { generateTailoredResume } from '@/api/aiServices';
 import React, { useState } from 'react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface TailoredResumeGeneratorProps {
   userProfileId?: string;
@@ -45,11 +53,15 @@ export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = (
         <Card className="p-6 space-y-6">
           <h2 className="text-2xl font-semibold text-foreground">Job Description</h2>
 
-          <Textarea
+          <TextField
+            fullWidth
+            multiline
+            minRows={6}
+            placeholder="Paste the job description here to generate a tailored resume..."
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
-            placeholder="Paste the job description here to generate a tailored resume..."
-            className="min-h-[500px]"
+            variant="outlined"
+            sx={{ mt: 2 }}
           />
 
           <Button
@@ -79,7 +91,7 @@ export const TailoredResumeGenerator: React.FC<TailoredResumeGeneratorProps> = (
           />
 
           <div className="flex gap-4">
-            <Button variant="secondary" className="flex-1">
+            <Button variant="outlined" className="flex-1">
               Download PDF
             </Button>
             <Button className="flex-1">Save Version</Button>

@@ -1,10 +1,9 @@
 import React from 'react';
 import { Chip, ChipProps, SxProps, Theme } from '@mui/material';
 
-interface BadgeProps extends Omit<ChipProps, 'variant' | 'children'> {
+interface BadgeProps extends Omit<ChipProps, 'variant'> {
   variant?: 'default' | 'secondary' | 'destructive' | 'outline';
   asChild?: boolean;
-  children?: React.ReactNode;
 }
 
 const getBadgeVariantSx = (variant: BadgeProps['variant'] = 'default'): SxProps<Theme> => {
@@ -68,18 +67,17 @@ const getBadgeVariantSx = (variant: BadgeProps['variant'] = 'default'): SxProps<
 };
 
 const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
-  ({ variant = 'default', sx, children, ...props }, ref) => {
+  ({ variant = 'default', sx, ...props }, ref) => {
     const variantSx = getBadgeVariantSx(variant);
 
     return (
       <Chip
         ref={ref}
         size="small"
-        label={children}
-        sx={[
-          variantSx,
-          ...(Array.isArray(sx) ? sx : [sx])
-        ]}
+        sx={{
+          ...variantSx,
+          ...sx,
+        }}
         {...props}
       />
     );

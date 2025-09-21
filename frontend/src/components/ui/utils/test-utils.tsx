@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { CssBaseline } from '@mui/material';
+
+// Create a theme instance for testing
+const theme = createTheme({
+  // Add your theme configuration here
+  palette: {
+    mode: 'light',
+  },
+});
 
 // Mock the AI services module
 export const mockAiServices = {
@@ -15,9 +25,20 @@ beforeEach(() => {
   jest.clearAllMocks();
 });
 
-// Custom render function that can be extended with providers if needed
-const customRender = (ui: React.ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
-  render(ui, { ...options });
+// Custom render function that wraps components with MUI providers
+const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
+  );
+};
+
+const customRender = (
+  ui: ReactElement,
+  options?: Omit<RenderOptions, 'wrapper'>
+) => render(ui, { wrapper: AllTheProviders, ...options });
 
 export * from '@testing-library/react';
 export { customRender as render };
@@ -68,3 +89,12 @@ SKILLS
 - Testing (Jest, React Testing Library)
 - Modern CSS and Styling
 `;
+
+export const mockJob = {
+  id: 'job-1',
+  jobTitle: 'Frontend Developer',
+  company: 'Tech Corp',
+  location: 'Remote',
+  applicationUrl: 'https://example.com/apply',
+  requirements: ['React', 'TypeScript', 'Testing'],
+};

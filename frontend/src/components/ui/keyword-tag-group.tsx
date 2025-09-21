@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { X, Plus, Check, Minus } from 'lucide-react';
 import { Badge } from './badge';
-import { buttonVariants } from './button-variants';
-import { Card } from './card';
-import { cn } from './utils';
+import { cn } from '@/lib/utils';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface KeywordTagProps {
   keyword: string;
@@ -67,10 +75,7 @@ export function KeywordTag({
         config.bgClass,
         config.hoverClass
       )}
-      onClick={(e) => {
-        e.stopPropagation();
-        onClick?.();
-      }}
+      onClick={onClick}
     >
       <span className="shrink-0">{config.icon}</span>
 
@@ -80,64 +85,60 @@ export function KeywordTag({
         {status === 'suggested' && (
           <>
             {onAccept && (
-              <button
-                className={cn(
-                  buttonVariants({ variant: 'ghost', size: 'sm' }),
-                  'h-5 w-5 p-0 hover:bg-brand-green/20 text-brand-green'
-                )}
+              <Button
+                size="sm"
+                variant="ghost"
+                className="h-5 w-5 p-0 hover:bg-brand-green/20 text-brand-green"
                 onClick={(e) => {
                   e.stopPropagation();
                   onAccept();
                 }}
               >
                 <Check className="w-3 h-3" />
-              </button>
+              </Button>
             )}
             {onReject && (
-              <button
-                className={cn(
-                  buttonVariants({ variant: 'ghost', size: 'sm' }),
-                  'h-5 w-5 p-0 hover:bg-destructive/20 text-destructive'
-                )}
+              <Button
+                size="sm"
+                variant="ghost"
+                className="h-5 w-5 p-0 hover:bg-destructive/20 text-destructive"
                 onClick={(e) => {
                   e.stopPropagation();
                   onReject();
                 }}
               >
                 <X className="w-3 h-3" />
-              </button>
+              </Button>
             )}
           </>
         )}
 
         {status === 'suggested' && onAdd && (
-          <button
-            className={cn(
-              buttonVariants({ variant: 'ghost', size: 'sm' }),
-              'h-5 w-5 p-0 hover:bg-primary/20 text-primary'
-            )}
+          <Button
+            size="sm"
+            variant="ghost"
+            className="h-5 w-5 p-0 hover:bg-primary/20 text-primary"
             onClick={(e) => {
               e.stopPropagation();
               onAdd();
             }}
           >
             <Plus className="w-3 h-3" />
-          </button>
+          </Button>
         )}
 
         {removable && onRemove && (
-          <button
-            className={cn(
-              buttonVariants({ variant: 'ghost', size: 'sm' }),
-              'h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20 text-muted-foreground hover:text-destructive'
-            )}
+          <Button
+            size="sm"
+            variant="ghost"
+            className="h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20 text-muted-foreground hover:text-destructive"
             onClick={(e) => {
               e.stopPropagation();
               onRemove();
             }}
           >
             <X className="w-3 h-3" />
-          </button>
+          </Button>
         )}
       </div>
     </div>
@@ -157,7 +158,6 @@ interface KeywordTagGroupProps {
   onTagAccept?: (keyword: string) => void;
   onTagReject?: (keyword: string) => void;
   onTagClick?: (keyword: string) => void;
-  onStatusChange?: (keyword: string, status: 'accepted' | 'rejected') => void;
   maxVisible?: number;
   showAcceptRejectAll?: boolean;
   className?: string;
@@ -172,7 +172,6 @@ export function KeywordTagGroup({
   onTagAccept,
   onTagReject,
   onTagClick,
-  onStatusChange,
   maxVisible,
   showAcceptRejectAll = false,
   className,
@@ -193,19 +192,11 @@ export function KeywordTagGroup({
   const suggestedKeywords = keywords.filter((k) => k.status === 'suggested');
 
   const handleAcceptAll = () => {
-    if (onStatusChange) {
-      suggestedKeywords.forEach((k) => onStatusChange(k.keyword, 'accepted'));
-    } else if (onTagAccept) {
-      suggestedKeywords.forEach((k) => onTagAccept(k.keyword));
-    }
+    suggestedKeywords.forEach((k) => onTagAccept?.(k.keyword));
   };
 
   const handleRejectAll = () => {
-    if (onStatusChange) {
-      suggestedKeywords.forEach((k) => onStatusChange(k.keyword, 'rejected'));
-    } else if (onTagReject) {
-      suggestedKeywords.forEach((k) => onTagReject(k.keyword));
-    }
+    suggestedKeywords.forEach((k) => onTagReject?.(k.keyword));
   };
 
   return (
@@ -260,26 +251,24 @@ export function KeywordTagGroup({
 
       {showAcceptRejectAll && suggestedKeywords.length > 0 && (
         <div className="flex items-center gap-2 pb-2 border-b border-border">
-          <button
-            className={cn(
-              buttonVariants({ variant: 'outline', size: 'sm' }),
-              'text-brand-green border-brand-green/30 hover:bg-brand-green/10 flex items-center'
-            )}
+          <Button
+            size="sm"
+            variant="outline"
             onClick={handleAcceptAll}
+            className="text-brand-green border-brand-green/30 hover:bg-brand-green/10"
           >
             <Check className="w-3 h-3 mr-1" />
             Accept All Suggested
-          </button>
-          <button
-            className={cn(
-              buttonVariants({ variant: 'outline', size: 'sm' }),
-              'text-destructive border-destructive/30 hover:bg-destructive/10 flex items-center'
-            )}
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
             onClick={handleRejectAll}
+            className="text-destructive border-destructive/30 hover:bg-destructive/10"
           >
             <X className="w-3 h-3 mr-1" />
             Reject All Suggested
-          </button>
+          </Button>
         </div>
       )}
 
@@ -299,15 +288,14 @@ export function KeywordTagGroup({
         ))}
 
         {hiddenCount > 0 && (
-          <button
-            className={cn(
-              buttonVariants({ variant: 'outline', size: 'sm' }),
-              'border-border text-muted-foreground hover:border-primary hover:text-primary font-medium'
-            )}
+          <Button
+            variant="outline"
+            size="sm"
             onClick={() => setShowAll(!showAll)}
+            className="border-border text-muted-foreground hover:border-primary hover:text-primary font-medium"
           >
             {showAll ? 'Show Less' : `+${hiddenCount} more`}
-          </button>
+          </Button>
         )}
       </div>
     </Card>

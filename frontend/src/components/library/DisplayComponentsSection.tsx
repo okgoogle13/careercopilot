@@ -2,7 +2,7 @@ import React from 'react';
 import { Badge } from '../ui/badge';
 import { Progress } from '../ui/progress';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Alert, AlertDescription, AlertTitle } from '../ui/Alert';
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import { Label } from '../ui/label';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 import { Info, AlertTriangle } from 'lucide-react';

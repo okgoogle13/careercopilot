@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button } from '../ui/button';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 import { Settings, Loader2, Download } from 'lucide-react';
+import { Button, IconButton } from '@mui/material';
 
 export function ButtonComponentsSection() {
   return (

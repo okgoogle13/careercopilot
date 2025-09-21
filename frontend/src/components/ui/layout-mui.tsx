@@ -1,14 +1,30 @@
-import { Container, Stack, Box, Grid } from '@mui/material';
+import React from 'react';
+import {
+  Box,
+  Container,
+  Stack,
+  SxProps,
+  Theme,
+  BoxProps,
+  ContainerProps,
+  StackProps,
+} from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
+import { Grid2Props } from '@mui/material/Unstable_Grid2';
 
-// Simple Layout Container Component
-export function LayoutContainer({ size = 'lg', children, ...props }: any) {
+// Layout Container Component
+interface LayoutContainerProps extends Omit<ContainerProps, 'maxWidth'> {
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
+}
+
+export function LayoutContainer({ size = 'lg', sx, children, ...props }: LayoutContainerProps) {
   return (
     <Container
       maxWidth={size}
       sx={{
         px: { xs: 2, sm: 3, md: 4 },
         py: { xs: 2, sm: 3 },
-        ...props.sx,
+        ...sx,
       }}
       {...props}
     >
@@ -17,8 +33,12 @@ export function LayoutContainer({ size = 'lg', children, ...props }: any) {
   );
 }
 
-// Simple Grid Layout Component
-export function LayoutGrid({ spacing = 3, children, ...props }: any) {
+// Grid Layout Components
+interface LayoutGridProps extends Grid2Props {
+  spacing?: number;
+}
+
+export function LayoutGrid({ spacing = 3, sx, children, ...props }: LayoutGridProps) {
   return (
     <Grid
       container
@@ -26,7 +46,7 @@ export function LayoutGrid({ spacing = 3, children, ...props }: any) {
       sx={{
         width: '100%',
         margin: 0,
-        ...props.sx,
+        ...sx,
       }}
       {...props}
     >
@@ -35,29 +55,73 @@ export function LayoutGrid({ spacing = 3, children, ...props }: any) {
   );
 }
 
-// Simple Grid Item Component
-export function LayoutGridItem({ xs = 12, children, ...props }: any) {
+interface LayoutGridItemProps extends Grid2Props {
+  xs?: number | 'auto';
+  sm?: number | 'auto';
+  md?: number | 'auto';
+  lg?: number | 'auto';
+  xl?: number | 'auto';
+}
+
+export function LayoutGridItem({
+  xs = 12,
+  sm,
+  md,
+  lg,
+  xl,
+  sx,
+  children,
+  ...props
+}: LayoutGridItemProps) {
   return (
-    <Grid item xs={xs} {...props}>
+    <Grid
+      xs={xs}
+      sm={sm}
+      md={md}
+      lg={lg}
+      xl={xl}
+      sx={{
+        ...sx,
+      }}
+      {...props}
+    >
       {children}
     </Grid>
   );
 }
 
-// Simple Stack Layout Component
+// Stack Layout Components
+interface LayoutStackProps extends StackProps {
+  spacing?: number;
+  direction?: 'row' | 'column';
+  align?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
+  justify?:
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
+}
+
 export function LayoutStack({
   spacing = 2,
   direction = 'column',
+  align,
+  justify,
+  sx,
   children,
   ...props
-}: any) {
+}: LayoutStackProps) {
   return (
     <Stack
-      spacing={spacing}
       direction={direction}
+      spacing={spacing}
+      alignItems={align}
+      justifyContent={justify}
       sx={{
         width: '100%',
-        ...props.sx,
+        ...sx,
       }}
       {...props}
     >
@@ -66,16 +130,31 @@ export function LayoutStack({
   );
 }
 
-// Simple Flex Layout Component
+// Flexbox Layout Component
+interface LayoutFlexProps extends BoxProps {
+  direction?: 'row' | 'column';
+  align?: 'flex-start' | 'center' | 'flex-end' | 'stretch' | 'baseline';
+  justify?:
+    | 'flex-start'
+    | 'center'
+    | 'flex-end'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
+  wrap?: boolean;
+  gap?: number;
+}
+
 export function LayoutFlex({
   direction = 'row',
   align = 'flex-start',
   justify = 'flex-start',
   wrap = false,
   gap = 0,
+  sx,
   children,
   ...props
-}: any) {
+}: LayoutFlexProps) {
   return (
     <Box
       sx={{
@@ -85,7 +164,7 @@ export function LayoutFlex({
         justifyContent: justify,
         flexWrap: wrap ? 'wrap' : 'nowrap',
         gap: gap,
-        ...props.sx,
+        ...sx,
       }}
       {...props}
     >
@@ -94,56 +173,30 @@ export function LayoutFlex({
   );
 }
 
-// Simple Section Component
+// Section Layout Component
+interface LayoutSectionProps extends BoxProps {
+  spacing?: number;
+  fullWidth?: boolean;
+  centered?: boolean;
+}
+
 export function LayoutSection({
   spacing = 4,
   fullWidth = false,
   centered = false,
+  sx,
   children,
   ...props
-}: any) {
+}: LayoutSectionProps) {
   return (
     <Box
       component="section"
       sx={{
-        width: '100%',
         py: spacing,
-        ...(centered && {
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-        }),
-        ...props.sx,
-      }}
-      {...props}
-    >
-      {fullWidth ? children : <Container maxWidth="lg">{children}</Container>}
-    </Box>
-  );
-}
-
-// Simple Card Component
-export function LayoutCard({
-  variant = 'default',
-  padding = 3,
-  children,
-  ...props
-}: any) {
-  return (
-    <Box
-      sx={{
-        bgcolor: 'background.paper',
-        borderRadius: 2,
-        p: padding,
-        ...(variant === 'outlined' && {
-          border: '1px solid',
-          borderColor: 'divider',
-        }),
-        ...(variant === 'elevated' && {
-          boxShadow: 3,
-        }),
-        ...props.sx,
+        width: fullWidth ? '100%' : 'auto',
+        maxWidth: fullWidth ? 'none' : '100%',
+        mx: centered ? 'auto' : 0,
+        ...sx,
       }}
       {...props}
     >
@@ -152,7 +205,57 @@ export function LayoutCard({
   );
 }
 
-// Simple breakpoints
+// Card Layout Component
+interface LayoutCardProps extends BoxProps {
+  variant?: 'default' | 'outlined' | 'elevated';
+  padding?: number;
+}
+
+export function LayoutCard({
+  variant = 'default',
+  padding = 3,
+  sx,
+  children,
+  ...props
+}: LayoutCardProps) {
+  const getVariantStyles = (): SxProps<Theme> => {
+    switch (variant) {
+      case 'outlined':
+        return {
+          border: 1,
+          borderColor: 'divider',
+        };
+      case 'elevated':
+        return {
+          boxShadow: 2,
+        };
+      case 'default':
+      default:
+        return {
+          border: 1,
+          borderColor: 'divider',
+          boxShadow: 1,
+        };
+    }
+  };
+
+  return (
+    <Box
+      sx={{
+        borderRadius: 2,
+        backgroundColor: 'background.paper',
+        p: padding,
+        ...getVariantStyles(),
+        ...sx,
+      }}
+      {...props}
+    >
+      {children}
+    </Box>
+  );
+}
+
+// Responsive utilities
 export const breakpoints = {
   xs: 0,
   sm: 600,
@@ -162,25 +265,6 @@ export const breakpoints = {
 };
 
 // Helper function for responsive values
-type ResponsiveValue<T> = {
-  xs?: T;
-  sm?: T;
-  md?: T;
-  lg?: T;
-  xl?: T;
-};
-
-export function responsive<T>(
-  values: ResponsiveValue<T>
-): Record<string, T> {
-  // Filter out undefined values and return the remaining as a record
-  const result: Record<string, T> = {};
-  
-  (Object.keys(values) as Array<keyof ResponsiveValue<T>>).forEach((key) => {
-    if (values[key] !== undefined) {
-      result[key] = values[key]!;
-    }
-  });
-  
-  return result;
+export function responsive<T>(values: { xs?: T; sm?: T; md?: T; lg?: T; xl?: T }): SxProps<Theme> {
+  return values as SxProps<Theme>;
 }

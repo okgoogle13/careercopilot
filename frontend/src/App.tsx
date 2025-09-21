@@ -1,23 +1,25 @@
 import { useState } from 'react';
-import { 
-  Box, 
-  IconButton, 
-  useTheme, 
-  CssBaseline, 
-  Button, 
-  Typography, 
-  Chip, 
-  AppBar, 
-  Toolbar, 
-  Drawer, 
-  List, 
-  ListItem, 
-  ListItemIcon, 
-  ListItemText, 
-  ListItemButton 
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Chip,
 } from '@mui/material';
-import { Brightness4, Brightness7 } from '@mui/icons-material';
-import { useColorMode } from './theme/ColorModeContext';
+// Advanced Sidebar System imports
+import {
+  SidebarProvider,
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarTrigger,
+  SidebarInset,
+} from './components/ui/sidebar';
+import { M3Button } from './components/ui/m3-button';
+import theme from './theme/theme';
 
 // Import components (keeping existing imports)
 import { Dashboard } from './components/Dashboard';
@@ -109,9 +111,7 @@ interface UserState {
   hasDocuments: boolean;
 }
 
-function App() {
-  const theme = useTheme();
-  const colorMode = useColorMode();
+export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [dashboardActiveTab, setDashboardActiveTab] = useState<DashboardTab>('documents');
   const [currentView, setCurrentView] = useState<View>('auth');
@@ -559,92 +559,69 @@ function App() {
   const currentViewInfo = getCurrentViewInfo();
 
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ position: 'fixed', bottom: 16, right: 16, zIndex: 9999 }}>
-        <IconButton 
-          onClick={colorMode.toggleColorMode} 
-          color="inherit"
-          sx={{ bgcolor: 'background.paper' }}
-        >
-          {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
-        </IconButton>
-      </Box>
-      <Box sx={{ display: 'flex', height: '100vh', bgcolor: 'background.default' }}>
-        {/* Demo Navigation Drawer */}
-        <Drawer
-          open={demoNavOpen}
-          onClose={() => setDemoNavOpen(false)}
-          sx={{
-            width: 320,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: 320,
-              boxSizing: 'border-box',
-              bgcolor: 'background.paper',
-            },
-          }}
-        >
-          <Box sx={{ p: 2 }}>
-            <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-              Demo Navigation
-            </Typography>
-            <List>
+      <SidebarProvider defaultOpen={showDemoNav}>
+        <Sidebar collapsible="icon" variant="sidebar">
+          <SidebarHeader>
+            <div className="flex items-center gap-2 px-4 py-2">
+              <Typography variant="h6" className="font-semibold">
+                Demo Navigation
+              </Typography>
+            </div>
+          </SidebarHeader>
+
+          <SidebarContent>
+            <SidebarMenu>
               {demoViews.map((view) => {
                 const Icon = view.icon;
                 return (
-                  <ListItem key={view.id} disablePadding>
-                    <ListItemButton
-                      selected={currentView === view.id}
+                  <SidebarMenuItem key={view.id}>
+                    <SidebarMenuButton
+                      isActive={currentView === view.id}
                       onClick={() => handleDemoNavigation(view.id)}
-                      sx={{
-                        borderRadius: 2,
-                        mb: 0.5,
-                        '&.Mui-selected': {
-                          bgcolor: 'primary.main',
-                          color: 'primary.contrastText',
-                          '&:hover': {
-                            bgcolor: 'primary.dark',
-                          },
-                        },
-                      }}
+                      tooltip={view.label}
                     >
-                      <ListItemIcon sx={{ color: 'inherit', minWidth: 40 }}>
-                        <Icon size={20} />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={view.label}
-                        secondary={view.description}
-                        secondaryTypographyProps={{
-                          sx: { color: 'text.secondary', fontSize: '0.75rem' },
-                        }}
-                      />
-                    </ListItemButton>
-                  </ListItem>
+                      <Icon className="w-5 h-5" />
+                      <span>{view.label}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
                 );
               })}
-            </List>
-          </Box>
-        </Drawer>
+            </SidebarMenu>
+          </SidebarContent>
 
-        {/* Main Content */}
-        <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          {/* Top App Bar */}
-          {showDemoNav && (
-            <AppBar
-              position="static"
-              elevation={0}
-              sx={{ bgcolor: 'background.paper', borderBottom: 1, borderColor: 'divider' }}
-            >
-              <Toolbar>
-                <IconButton
-                  edge="start"
-                  onClick={() => setDemoNavOpen(true)}
-                  sx={{ mr: 2, color: 'text.primary' }}
+          <SidebarFooter>
+            <div className="p-2">
+              {showDemoNav ? (
+                <M3Button
+                  variant="text"
+                  onClick={() => setShowDemoNav(false)}
+                  className="w-full justify-start"
                 >
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" sx={{ flexGrow: 1, color: 'text.primary' }}>
+                  Hide Navigation
+                </M3Button>
+              ) : (
+                <M3Button
+                  variant="filled"
+                  onClick={() => setShowDemoNav(true)}
+                  className="w-full justify-start"
+                  icon={<Navigation className="w-4 h-4" />}
+                >
+                  Show Navigation
+                </M3Button>
+              )}
+            </div>
+          </SidebarFooter>
+        </Sidebar>
+
+        <SidebarInset>
+          {/* Top Header Bar */}
+          {showDemoNav && (
+            <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+              <SidebarTrigger className="-ml-1" />
+              <div className="flex items-center gap-2 flex-1">
+                <Typography variant="h6" className="font-medium">
                   {currentViewInfo.label}
                 </Typography>
                 <Chip
@@ -652,41 +629,30 @@ function App() {
                   size="small"
                   sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
                 />
-                <Button onClick={() => setShowDemoNav(false)} size="small" sx={{ ml: 2 }}>
-                  Hide Demo Nav
-                </Button>
-              </Toolbar>
-            </AppBar>
+              </div>
+            </header>
           )}
 
           {/* Content Area */}
-          <Box sx={{ flex: 1, overflow: 'auto' }}>{renderContent()}</Box>
+          <div className="flex flex-1 flex-col gap-4 p-4">
+            {renderContent()}
+          </div>
 
           {/* Show Demo Nav Button (when hidden) */}
           {!showDemoNav && (
-            <Box sx={{ position: 'fixed', bottom: 24, right: 24, zIndex: 1000 }}>
-              <Button
-                variant="contained"
+            <div className="fixed bottom-6 right-6 z-50">
+              <M3Button
+                variant="aurora"
                 onClick={() => setShowDemoNav(true)}
-                startIcon={<Navigation />}
-                sx={{
-                  borderRadius: 20,
-                  px: 3,
-                  py: 1,
-                  bgcolor: 'primary.main',
-                  '&:hover': {
-                    bgcolor: 'primary.dark',
-                  },
-                }}
+                icon={<Navigation className="w-4 h-4" />}
+                className="rounded-full px-6 py-3"
               >
                 Demo Navigation
-              </Button>
-            </Box>
+              </M3Button>
+            </div>
           )}
-        </Box>
-      </Box>
-    </Box>
+        </SidebarInset>
+      </SidebarProvider>
+    </ThemeProvider>
   );
 }
-
-export default App;

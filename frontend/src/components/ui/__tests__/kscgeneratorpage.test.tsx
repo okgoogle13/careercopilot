@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { KscGeneratorPage } from '../kscgeneratorpage';
 
 // Mock the AI services
@@ -17,9 +18,9 @@ describe('KscGeneratorPage', () => {
   it('renders without crashing', () => {
     render(<KscGeneratorPage />);
 
-    // Check that the component renders by looking for a container
-    const container = document.querySelector('.container');
-    expect(container).toBeInTheDocument();
+    // Check that the component renders by looking for the main heading
+    const mainHeading = screen.getByText('Key Selection Criteria Generator');
+    expect(mainHeading).toBeInTheDocument();
   });
 
   it('displays the main heading "Key Selection Criteria Generator"', () => {
@@ -33,8 +34,8 @@ describe('KscGeneratorPage', () => {
   it('contains a Generate button', () => {
     render(<KscGeneratorPage />);
 
-    // Look for the generate button - it might have different text
-    const generateButton = screen.getByRole('button', { name: /generate|analyze/i });
+    // Look for the generate button with the new text
+    const generateButton = screen.getByRole('button', { name: /Generate Key Selection Criteria Responses/i });
     expect(generateButton).toBeInTheDocument();
   });
 
@@ -47,6 +48,6 @@ describe('KscGeneratorPage', () => {
     expect(screen.getByText('Key Selection Criteria Generator')).toBeInTheDocument();
 
     // 3. Contains Generate button
-    expect(screen.getByRole('button', { name: /generate|analyze/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Generate Key Selection Criteria Responses/i })).toBeInTheDocument();
   });
 });

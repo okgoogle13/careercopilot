@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { Card } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +8,16 @@ import {
 } from '../ui/dropdown-menu';
 import { Star, MoreVertical, Edit, Copy, Trash2, Calendar, Hash } from 'lucide-react';
 import { format } from 'date-fns';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface ProfileVariationCardProps {
   profile_name: string;
@@ -85,7 +93,7 @@ export function ProfileVariationCard({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuItem
-              onClick={(e: React.MouseEvent) => {
+              onClick={(e) => {
                 e.stopPropagation();
                 onEdit?.();
               }}
@@ -94,7 +102,7 @@ export function ProfileVariationCard({
               Edit Profile
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={(e: React.MouseEvent) => {
+              onClick={(e) => {
                 e.stopPropagation();
                 onDuplicate?.();
               }}
@@ -104,7 +112,7 @@ export function ProfileVariationCard({
             </DropdownMenuItem>
             {!is_default && (
               <DropdownMenuItem
-                onClick={(e: React.MouseEvent) => {
+                onClick={(e) => {
                   e.stopPropagation();
                   onSetDefault?.();
                 }}
@@ -115,7 +123,7 @@ export function ProfileVariationCard({
             )}
             {!is_default && (
               <DropdownMenuItem
-                onClick={(e: React.MouseEvent) => {
+                onClick={(e) => {
                   e.stopPropagation();
                   onDelete?.();
                 }}

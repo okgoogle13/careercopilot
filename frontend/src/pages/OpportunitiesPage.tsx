@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Box,
   Container,
+  Grid,
   Paper,
   Typography,
   Button,
@@ -40,7 +41,6 @@ import {
   Rating,
   Fab,
 } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import {
   Search,
   FilterList,
@@ -63,7 +63,7 @@ import {
   Edit,
   Delete,
   Visibility,
-  Send,
+  Send as Apply,
   CheckCircle,
   AccessTime,
   Warning,
@@ -77,6 +77,7 @@ import {
   Refresh,
   CloudUpload,
   Analytics,
+  Send,
   OpenInNew,
   Download,
   Flag,
@@ -456,7 +457,7 @@ export function OpportunitiesPage({
 
       {/* Stats Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid size={{ xs: 6, sm: 3 }}>
+        <Grid item xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="primary.main">
@@ -469,7 +470,7 @@ export function OpportunitiesPage({
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 6, sm: 3 }}>
+        <Grid item xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="warning.main">
@@ -482,7 +483,7 @@ export function OpportunitiesPage({
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 6, sm: 3 }}>
+        <Grid item xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="info.main">
@@ -495,7 +496,7 @@ export function OpportunitiesPage({
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 6, sm: 3 }}>
+        <Grid item xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="success.main">
@@ -602,7 +603,7 @@ export function OpportunitiesPage({
             ) : (
               <Grid container spacing={3}>
                 {currentJobs.map((job) => (
-                  <Grid size={{ xs: 12, md: 6 }} key={job.id}>
+                  <Grid item xs={12} md={6} key={job.id}>
                     <Card
                       elevation={0}
                       sx={{
@@ -833,7 +834,7 @@ export function OpportunitiesPage({
         <DialogContent>
           {selectedJob && (
             <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 8 }}>
+              <Grid item xs={12} md={8}>
                 <Typography variant="h6" gutterBottom>
                   Job Description
                 </Typography>
@@ -870,7 +871,7 @@ export function OpportunitiesPage({
                 </List>
               </Grid>
 
-              <Grid size={{ xs: 12, md: 4 }}>
+              <Grid item xs={12} md={4}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
@@ -955,17 +956,17 @@ export function OpportunitiesPage({
         <DialogTitle>Create Job Alert</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid size={12}>
+            <Grid item xs={12}>
               <TextField
                 fullWidth
                 label="Keywords"
                 placeholder="e.g., React, Product Manager, Designer"
               />
             </Grid>
-            <Grid size={12}>
+            <Grid item xs={12}>
               <TextField fullWidth label="Location" placeholder="e.g., San Francisco, Remote" />
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel>Job Type</InputLabel>
                 <Select label="Job Type">
@@ -976,13 +977,13 @@ export function OpportunitiesPage({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
+            <Grid item xs={12} sm={6}>
               <TextField fullWidth label="Min Salary" type="number" placeholder="50000" />
             </Grid>
-            <Grid size={12}>
+            <Grid item xs={12}>
               <FormControlLabel control={<Checkbox />} label="Include remote positions" />
             </Grid>
-            <Grid size={12}>
+            <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox />}
                 label="Email notifications for new matches"
