@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Card } from './ui/card';
+import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
 import { Badge } from './ui/badge';
 import { Skeleton } from './ui/skeleton';
 import { Progress } from './ui/progress';

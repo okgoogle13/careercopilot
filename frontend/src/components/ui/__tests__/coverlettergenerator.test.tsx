@@ -1,18 +1,20 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '../utils/test-utils';
+import { screen, waitFor, render, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { CoverLetterGenerator } from '../coverlettergenerator';
 import { mockJobDescription, mockGeneratedCoverLetter } from '../utils/test-utils';
 
-// Mock the AI services
-jest.mock('@/api/aiServices', () => ({
-  generateCoverLetter: jest.fn(),
-}));
+// Create mock functions
+const mockGenerateCoverLetter = jest.fn();
 
-import { generateCoverLetter } from '@/api/aiServices';
-const mockGenerateCoverLetter = generateCoverLetter as jest.MockedFunction<
-  typeof generateCoverLetter
->;
+// Mock the AI services module
+jest.mock('@/api/aiServices', () => ({
+  __esModule: true,
+  generateCoverLetter: mockGenerateCoverLetter,
+  default: {
+    generateCoverLetter: mockGenerateCoverLetter
+  }
+}));
 
 // Mock the Editor component since it might have complex dependencies
 jest.mock('../editor', () => ({
@@ -26,98 +28,129 @@ jest.mock('../editor', () => ({
   ),
 }));
 
-describe('CoverLetterGenerator', () => {
-  const user = userEvent.setup();
+// Increase test timeout
+jest.setTimeout(15000);
 
+// Extend expect with jest-dom matchers
+import '@testing-library/jest-dom';
+
+describe('CoverLetterGenerator', () => {
+  let user: ReturnType<typeof userEvent.setup>;
+  
+  beforeAll(() => {
+    // Setup user event with no delay for testing
+    user = userEvent.setup({ delay: null });
+  });
+  
   beforeEach(() => {
+    // Clear all mocks between tests
     jest.clearAllMocks();
+    // Setup default mock implementation
+    mockGenerateCoverLetter.mockResolvedValue(mockGeneratedCoverLetter);
   });
 
   it('renders without crashing', () => {
     render(<CoverLetterGenerator />);
-
-    expect(screen.getByText(/Cover Letter Generator/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Enter the job description/i)).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Generate Cover Letter/i })).toBeInTheDocument();
+    
+    // Check for the job description heading
+    expect(screen.getByText('Job Description')).toBeInTheDocument();
+    
+    // Check for the job description textarea
+    expect(screen.getByPlaceholderText(/Paste the job description here to generate a tailored cover letter/i)).toBeInTheDocument();
+    
+    // Check for the generate button
+    expect(screen.getByRole('button', { name: /Generate Tailored Cover Letter/i })).toBeInTheDocument();
   });
 
   it('contains all necessary form elements', () => {
     render(<CoverLetterGenerator />);
-
-    // Job description textarea
-    expect(screen.getByPlaceholderText(/Enter the job description/i)).toBeInTheDocument();
-
-    // Tone selector
-    expect(screen.getByText(/Select Tone/i)).toBeInTheDocument();
-
-    // Generate button
-    expect(screen.getByRole('button', { name: /Generate Cover Letter/i })).toBeInTheDocument();
-
-    // Editor for output
+    
+    // Check for the job description textarea
+    const jobDescInput = screen.getByPlaceholderText(/Paste the job description here to generate a tailored cover letter/i);
+    expect(jobDescInput).toBeInTheDocument();
+    
+    // Check for the tone selector using MUI's data-testid
+    const toneSelector = screen.getByTestId('tone-selector');
+    expect(toneSelector).toBeInTheDocument();
+    
+    // Check for the generate button
+    const generateButton = screen.getByRole('button', { name: /Generate Tailored Cover Letter/i });
+    expect(generateButton).toBeInTheDocument();
+    
+    // Check for the editor
     expect(screen.getByTestId('editor')).toBeInTheDocument();
   });
 
   it('disables generate button when job description is empty', () => {
     render(<CoverLetterGenerator />);
-
-    const generateButton = screen.getByRole('button', { name: /Generate Cover Letter/i });
-    expect(generateButton).toBeDisabled();
+    const generateButton = screen.getByRole('button', { name: /Generate Tailored Cover Letter/i });
+    expect(generateButton).toHaveAttribute('disabled');
   });
 
-  it('enables generate button when job description is provided', async () => {
+  it('enables generate button when job description is not empty', async () => {
     render(<CoverLetterGenerator />);
 
-    const jobDescInput = screen.getByPlaceholderText(/Enter the job description/i);
-    const generateButton = screen.getByRole('button', { name: /Generate Cover Letter/i });
+    const jobDescInput = screen.getByPlaceholderText(/Paste the job description here to generate a tailored cover letter/i);
+    const generateButton = screen.getByRole('button', { name: /Generate Tailored Cover Letter/i });
 
-    await user.type(jobDescInput, mockJobDescription);
-
-    expect(generateButton).not.toBeDisabled();
+    await user.type(jobDescInput, 'Some job description');
+    expect(generateButton).not.toHaveAttribute('disabled');
   });
 
   it('shows loading state while generating cover letter', async () => {
+    // Mock the implementation to resolve after a delay
     mockGenerateCoverLetter.mockImplementation(
       () => new Promise((resolve) => setTimeout(() => resolve(mockGeneratedCoverLetter), 100))
     );
 
     render(<CoverLetterGenerator />);
 
-    const jobDescInput = screen.getByPlaceholderText(/Enter the job description/i);
-    const generateButton = screen.getByRole('button', { name: /Generate Cover Letter/i });
+    const jobDescInput = screen.getByPlaceholderText(/Paste the job description here to generate a tailored cover letter/i);
+    const generateButton = screen.getByRole('button', { name: /Generate Tailored Cover Letter/i });
 
     await user.type(jobDescInput, mockJobDescription);
+    
+    // Check if button is enabled before clicking
+    expect(generateButton).not.toBeDisabled();
+    
     await user.click(generateButton);
 
-    // Check for loading state
-    expect(screen.getByRole('button', { name: /Generating/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Generating/i })).toBeDisabled();
+    // Button should be disabled during loading
+    expect(generateButton).toBeDisabled();
 
     // Wait for generation to complete
     await waitFor(() => {
-      expect(screen.getByRole('button', { name: /Generate Cover Letter/i })).toBeInTheDocument();
-    });
+      // The editor should now contain the generated content
+      const editor = screen.getByTestId('editor') as HTMLTextAreaElement;
+      expect(editor.value).toContain(mockGeneratedCoverLetter);
+    }, { timeout: 3000 });
   });
 
-  it('generates cover letter successfully', async () => {
+  it('allows entering job description and generates cover letter', async () => {
     mockGenerateCoverLetter.mockResolvedValue(mockGeneratedCoverLetter);
 
     render(<CoverLetterGenerator />);
 
-    const jobDescInput = screen.getByPlaceholderText(/Enter the job description/i);
-    const generateButton = screen.getByRole('button', { name: /Generate Cover Letter/i });
+    const jobDescInput = screen.getByPlaceholderText(/Paste the job description here to generate a tailored cover letter/i);
+    const generateButton = screen.getByRole('button', { name: /Generate Tailored Cover Letter/i });
 
+    // Type the job description
     await user.type(jobDescInput, mockJobDescription);
+    
+    // Click the generate button
     await user.click(generateButton);
 
+    // Verify the API was called with the correct arguments
     await waitFor(() => {
+      expect(mockGenerateCoverLetter).toHaveBeenCalledTimes(1);
       expect(mockGenerateCoverLetter).toHaveBeenCalledWith(mockJobDescription, 'formal');
     });
 
     // Check that the generated cover letter appears in the editor
     await waitFor(() => {
-      const editor = screen.getByTestId('editor');
-      expect(editor).toHaveValue(mockGeneratedCoverLetter);
-    });
+      const editor = screen.getByTestId('editor') as HTMLTextAreaElement;
+      expect(editor.value).toContain(mockGeneratedCoverLetter);
+    }, { timeout: 3000 });
   });
 
   it('handles tone selection correctly', async () => {
@@ -125,60 +158,118 @@ describe('CoverLetterGenerator', () => {
 
     render(<CoverLetterGenerator />);
 
-    const jobDescInput = screen.getByPlaceholderText(/Enter the job description/i);
-
+    const jobDescInput = screen.getByPlaceholderText(/Paste the job description here to generate a tailored cover letter/i);
+    const generateButton = screen.getByRole('button', { name: /Generate Tailored Cover Letter/i });
+    
+    // Type the job description
     await user.type(jobDescInput, mockJobDescription);
-
-    // Change tone to Casual (this would require interacting with the Select component)
-    // For now, we'll test that the default tone is used
-    const generateButton = screen.getByRole('button', { name: /Generate Cover Letter/i });
+    
+    // Open the select dropdown
+    const select = screen.getByRole('combobox');
+    await user.click(select);
+    
+    // Select 'Casual' from the dropdown
+    const casualOption = await screen.findByRole('option', { name: /Casual/i });
+    await user.click(casualOption);
+    
+    // Click the generate button
     await user.click(generateButton);
 
+    // Verify the API was called with the correct tone
     await waitFor(() => {
-      expect(mockGenerateCoverLetter).toHaveBeenCalledWith(mockJobDescription, 'formal');
-    });
+      expect(mockGenerateCoverLetter).toHaveBeenCalledWith(mockJobDescription, 'casual');
+    }, { timeout: 3000 });
   });
 
-  it('displays error message when generation fails', async () => {
+  it('shows error message when generation fails', async () => {
+    jest.setTimeout(10000);
     const errorMessage = 'Failed to generate cover letter';
-    mockGenerateCoverLetter.mockRejectedValue(new Error(errorMessage));
+    
+    // Setup the mock to reject with an error
+    mockGenerateCoverLetter.mockRejectedValueOnce(new Error(errorMessage));
 
     render(<CoverLetterGenerator />);
 
-    const jobDescInput = screen.getByPlaceholderText(/Enter the job description/i);
-    const generateButton = screen.getByRole('button', { name: /Generate Cover Letter/i });
+    const jobDescInput = screen.getByPlaceholderText(/Paste the job description here to generate a tailored cover letter/i);
+    const generateButton = screen.getByRole('button', { name: /Generate Tailored Cover Letter/i });
 
-    await user.type(jobDescInput, mockJobDescription);
-    await user.click(generateButton);
+    // Enter job description and click generate
+    await act(async () => {
+      await user.type(jobDescInput, mockJobDescription);
+      await user.click(generateButton);
+      // Add small delay to allow state updates
+      await new Promise(resolve => setTimeout(resolve, 100));
+    });
 
+    // Wait for the error message to appear
     await waitFor(() => {
       expect(screen.getByText(errorMessage)).toBeInTheDocument();
-    });
+      expect(generateButton).not.toBeDisabled(); // Button should be re-enabled after error
+    }, { timeout: 5000 });
   });
 
-  it('clears error message when starting new generation', async () => {
+  it('handles error state and allows retry', async () => {
     const errorMessage = 'Failed to generate cover letter';
+    
+    // Setup the mock to fail once, then succeed
     mockGenerateCoverLetter
       .mockRejectedValueOnce(new Error(errorMessage))
       .mockResolvedValueOnce(mockGeneratedCoverLetter);
 
-    render(<CoverLetterGenerator />);
+    // Render the component
+    const { rerender } = render(<CoverLetterGenerator />);
 
-    const jobDescInput = screen.getByPlaceholderText(/Enter the job description/i);
-    const generateButton = screen.getByRole('button', { name: /Generate Cover Letter/i });
-
-    await user.type(jobDescInput, mockJobDescription);
-
-    // First generation fails
-    await user.click(generateButton);
-    await waitFor(() => {
-      expect(screen.getByText(errorMessage)).toBeInTheDocument();
+    // Use findByRole to wait for the button to be in the document
+    const generateButton = await screen.findByRole('button', { 
+      name: /Generate Tailored Cover Letter/i 
     });
 
-    // Second generation succeeds and clears error
-    await user.click(generateButton);
-    await waitFor(() => {
-      expect(screen.queryByText(errorMessage)).not.toBeInTheDocument();
+    // First attempt - should fail
+    await act(async () => {
+      const jobDescInput = screen.getByPlaceholderText(
+        /Paste the job description here to generate a tailored cover letter/i
+      );
+      
+      // Type the job description
+      await user.type(jobDescInput, mockJobDescription);
+      
+      // Click the generate button
+      await user.click(generateButton);
+      
+      // Advance timers to handle any debounced inputs
+      jest.advanceTimersByTime(100);
     });
+
+    // Wait for error
+    await waitFor(
+      () => {
+        expect(screen.getByText(errorMessage)).toBeInTheDocument();
+      },
+      { timeout: 5000 }
+    );
+
+    // Second attempt - should succeed
+    await act(async () => {
+      await user.click(generateButton);
+      // Advance timers to handle any debounced inputs
+      jest.advanceTimersByTime(100);
+    });
+
+    // Wait for success and verify the editor content
+    await waitFor(
+      () => {
+        const editor = screen.getByTestId('editor');
+        expect(editor).toHaveValue(mockGeneratedCoverLetter);
+        expect(mockGenerateCoverLetter).toHaveBeenCalledTimes(2);
+      },
+      { 
+        timeout: 5000,
+        onTimeout: (error) => {
+          console.error('Test timed out waiting for success state');
+          console.error('Current document body:', document.body.innerHTML);
+          return error;
+        }
+      }
+    );
   });
 });

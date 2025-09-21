@@ -1,8 +1,16 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
+import { TextField } from '@mui/material';
 import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface KscCriterionCardProps {
   criterion: string;
@@ -38,14 +46,12 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
         'shadow-sm'
       )}
     >
-      <CardHeader className={cn('p-0 mb-semantic-space-stack-sm')}>
-        <CardTitle
-          className={cn('text-semantic-typography-heading-md', 'text-semantic-color-text-primary')}
-        >
-          Key Selection Criterion
-        </CardTitle>
-      </CardHeader>
+      <CardHeader
+        className={cn('p-0 mb-semantic-space-stack-sm')}
+        title={<Typography variant='h3'>Key Selection Criterion
+                  </Typography>}>
 
+      </CardHeader>
       <CardContent className="p-0 space-y-semantic-space-stack-sm">
         <div
           className={cn(
@@ -73,15 +79,15 @@ export const KscCriterionCard: React.FC<KscCriterionCardProps> = ({
           {isLoading ? 'Generating...' : 'Generate Response'}
         </Button>
 
-        <Textarea
+        <TextField
+          fullWidth
+          multiline
+          minRows={4}
+          placeholder="Your generated response will appear here..."
           value={generatedText}
           onChange={(e) => setGeneratedText(e.target.value)}
-          placeholder="Your generated response will appear here..."
-          className={cn(
-            'min-h-[150px]',
-            'text-semantic-typography-body-md',
-            'text-semantic-color-text-primary'
-          )}
+          variant="outlined"
+          sx={{ mt: 1 }}
         />
       </CardContent>
     </Card>

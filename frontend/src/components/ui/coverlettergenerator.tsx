@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card } from '@/components/ui/card';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { TextField } from '@mui/material';
 import { cn } from '@/lib/utils';
 import { Editor } from '@/components/ui/editor';
 import { generateCoverLetter } from '@/api/aiServices';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
 type ToneSetting = 'Formal' | 'Casual' | 'Enthusiastic';
 
@@ -44,27 +49,33 @@ export const CoverLetterGenerator: React.FC = () => {
         <Card className="p-6 space-y-6">
           <h2 className="text-2xl font-semibold text-foreground">Job Description</h2>
 
-          <Textarea
+          <TextField
+            fullWidth
+            multiline
+            minRows={6}
+            placeholder="Paste the job description here to generate a tailored cover letter..."
             value={jobDescription}
             onChange={(e) => setJobDescription(e.target.value)}
-            placeholder="Paste the job description here to generate a tailored cover letter..."
-            className="min-h-[450px]"
+            variant="outlined"
+            sx={{ mt: 2 }}
           />
 
           <div className="flex items-center gap-4">
-            <label className="text-sm text-muted-foreground">Tone:</label>
-            <Select value={tone} onValueChange={(val: ToneSetting) => setTone(val)}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select tone" />
-              </SelectTrigger>
-              <SelectContent>
+            <FormControl sx={{ width: 180 }}>
+              <InputLabel>Tone</InputLabel>
+              <Select
+                data-testid="tone-selector"
+                value={tone}
+                label="Tone"
+                onChange={(e) => setTone(e.target.value as ToneSetting)}
+              >
                 {['Formal', 'Casual', 'Enthusiastic'].map((toneOption) => (
-                  <SelectItem key={toneOption} value={toneOption}>
+                  <MenuItem key={toneOption} value={toneOption}>
                     {toneOption}
-                  </SelectItem>
+                  </MenuItem>
                 ))}
-              </SelectContent>
-            </Select>
+              </Select>
+            </FormControl>
           </div>
 
           <Button
@@ -94,7 +105,7 @@ export const CoverLetterGenerator: React.FC = () => {
           />
 
           <div className="flex gap-4">
-            <Button variant="secondary" className="flex-1">
+            <Button variant="outlined" className="flex-1">
               Download PDF
             </Button>
             <Button className="flex-1">Save Version</Button>

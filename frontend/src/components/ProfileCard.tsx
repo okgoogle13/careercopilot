@@ -1,7 +1,15 @@
 import { Edit3, Trash2 } from 'lucide-react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
 import { Avatar, AvatarFallback } from './ui/avatar';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface ProfileCardProps {
   name: string;

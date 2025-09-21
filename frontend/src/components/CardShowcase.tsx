@@ -1,14 +1,4 @@
 import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardAction,
-  CardFooter,
-} from './ui/card';
-import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { LoadingCard, LoadingProfileCard } from './LoadingCard';
 import { ErrorCard, ErrorProfileCard } from './ErrorCard';
@@ -25,6 +15,16 @@ import {
   Loader2,
   Play,
 } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface CardShowcaseProps {
   onBack: () => void;
@@ -69,11 +69,12 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
         {/* Card Variants Documentation */}
         <div className="grid gap-6 mb-8">
           <Card variant="default">
-            <CardHeader>
-              <CardTitle>Card Component Variants</CardTitle>
-              <CardDescription>
-                Five distinct states designed for different interaction patterns and data states
-              </CardDescription>
+            <CardHeader
+              title={<Typography variant='h3'>Card Component Variants</Typography>}
+              subheader={<Typography variant='body2' color='text.secondary'>Five distinct states designed for different interaction patterns and data states
+                              </Typography>}>
+
+
             </CardHeader>
             <CardContent>
               <div className="grid gap-4">
@@ -335,9 +336,11 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                 { name: 'Creative Portfolio', description: 'Design & Media' },
               ].map((template, index) => (
                 <Card key={index} variant="interactive">
-                  <CardHeader>
-                    <CardTitle>{template.name}</CardTitle>
-                    <CardDescription>{template.description}</CardDescription>
+                  <CardHeader
+                    title={<Typography variant='h3'>{template.name}</Typography>}
+                    subheader={<Typography variant='body2' color='text.secondary'>{template.description}</Typography>}>
+
+
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">

@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Check, X } from 'lucide-react';
 import React from 'react';
+import { Button, IconButton } from '@mui/material';
 
 interface SkillTagProps {
   text: string;

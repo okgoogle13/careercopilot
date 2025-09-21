@@ -1,9 +1,17 @@
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Separator } from './ui/separator';
 import { ArrowLeft, Code, Palette, Layout, Zap, CheckCircle } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface ComponentUsageGuideProps {
   onBack: () => void;
@@ -52,14 +60,14 @@ function ProfileCard({ profile, isSelected, onClick }) {
         <div className="space-y-8">
           {/* Getting Started */}
           <Card variant="default">
-            <CardHeader>
+            <CardHeader
+              subheader={<Typography variant='body2' color='text.secondary'>How to implement and use the component library in your applications
+                              </Typography>}>
               <div className="flex items-center gap-2">
                 <Zap className="w-5 h-5 text-primary" />
                 <CardTitle>Getting Started</CardTitle>
               </div>
-              <CardDescription>
-                How to implement and use the component library in your applications
-              </CardDescription>
+
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -91,14 +99,14 @@ function ProfileCard({ profile, isSelected, onClick }) {
 
           {/* Design Principles */}
           <Card variant="default">
-            <CardHeader>
+            <CardHeader
+              subheader={<Typography variant='body2' color='text.secondary'>Core principles that guide the Career Copilot design system
+                              </Typography>}>
               <div className="flex items-center gap-2">
                 <Palette className="w-5 h-5 text-primary" />
                 <CardTitle>Design Principles</CardTitle>
               </div>
-              <CardDescription>
-                Core principles that guide the Career Copilot design system
-              </CardDescription>
+
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-6">
@@ -150,14 +158,14 @@ function ProfileCard({ profile, isSelected, onClick }) {
 
           {/* Component Categories */}
           <Card variant="default">
-            <CardHeader>
+            <CardHeader
+              subheader={<Typography variant='body2' color='text.secondary'>Understanding when and how to use different component types
+                              </Typography>}>
               <div className="flex items-center gap-2">
                 <Layout className="w-5 h-5 text-primary" />
                 <CardTitle>Component Categories</CardTitle>
               </div>
-              <CardDescription>
-                Understanding when and how to use different component types
-              </CardDescription>
+
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -253,14 +261,14 @@ function ProfileCard({ profile, isSelected, onClick }) {
 
           {/* Code Example */}
           <Card variant="default">
-            <CardHeader>
+            <CardHeader
+              subheader={<Typography variant='body2' color='text.secondary'>A practical example of using card components with proper variant selection
+                              </Typography>}>
               <div className="flex items-center gap-2">
                 <Code className="w-5 h-5 text-primary" />
                 <CardTitle>Implementation Example</CardTitle>
               </div>
-              <CardDescription>
-                A practical example of using card components with proper variant selection
-              </CardDescription>
+
             </CardHeader>
             <CardContent>
               <div className="bg-muted p-4 rounded-lg overflow-x-auto">
@@ -273,8 +281,8 @@ function ProfileCard({ profile, isSelected, onClick }) {
 
           {/* Best Practices */}
           <Card variant="default">
-            <CardHeader>
-              <CardTitle>Best Practices & Guidelines</CardTitle>
+            <CardHeader title={<Typography variant='h3'>Best Practices & Guidelines</Typography>}>
+
             </CardHeader>
             <CardContent>
               <div className="space-y-4">

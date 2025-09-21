@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
 import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
@@ -29,6 +27,16 @@ import {
 import { cn } from '@/lib/utils';
 import { AnimatedCard, StaggeredList } from './AnimatedComponents';
 import { SkeletonLoading } from './StandardizedLoadingStates';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 type DocumentCategory = 'all' | 'resume' | 'cover-letter' | 'other';
 
@@ -72,7 +80,7 @@ export function DocumentTypeSelector({
   userProfile,
 }: DocumentTypeSelectorProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<DocumentCategory | 'favorites'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<DocumentCategory>('all');
   const [isLoading, setIsLoading] = useState(true);
   const [favorites, setFavorites] = useState<string[]>(userProfile?.favoriteTemplates || []);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -252,7 +260,7 @@ export function DocumentTypeSelector({
 
       const matchesCategory =
         selectedCategory === 'all' ||
-        (selectedCategory !== 'favorites' && doc.category === selectedCategory) ||
+        doc.category === selectedCategory ||
         (selectedCategory === 'favorites' && favorites.includes(doc.id));
 
       return matchesSearch && matchesCategory;
@@ -262,7 +270,7 @@ export function DocumentTypeSelector({
   const handleKeyDown = (e: React.KeyboardEvent, typeId: string) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      onSelectType?.(typeId);
+      onSelectType(typeId);
     }
   };
 
@@ -301,7 +309,7 @@ export function DocumentTypeSelector({
         >
           <Card
             className="border-0 shadow-none"
-            onClick={() => onSelectType?.(doc.id)}
+            onClick={() => onSelectType(doc.id)}
             onKeyDown={(e) => handleKeyDown(e, doc.id)}
             role="button"
             tabIndex={0}
@@ -508,7 +516,7 @@ export function DocumentTypeSelector({
 
           <Tabs
             value={selectedCategory}
-            onValueChange={(value: string) => setSelectedCategory(value as DocumentCategory | 'favorites')}
+            onValueChange={(value) => setSelectedCategory(value as DocumentCategory | 'favorites')}
             className="w-full"
           >
             <TabsList className="w-full justify-start overflow-x-auto">
@@ -555,7 +563,7 @@ export function DocumentTypeSelector({
                   <Card
                     key={doc.id}
                     className="p-4 hover:bg-muted/50 transition-colors cursor-pointer"
-                    onClick={() => onSelectType?.(doc.type)}
+                    onClick={() => onSelectType(doc.type)}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`p-2 ${template.bgColor} rounded-lg`}>

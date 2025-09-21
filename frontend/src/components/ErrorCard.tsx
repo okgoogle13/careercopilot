@@ -1,6 +1,14 @@
 import { AlertTriangle, RefreshCw } from 'lucide-react';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { Button } from './ui/button';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface ErrorCardProps {
   title?: string;

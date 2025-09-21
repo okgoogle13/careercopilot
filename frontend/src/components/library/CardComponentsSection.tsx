@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-  CardAction,
-  CardFooter,
-} from '../ui/card';
-import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { LoadingProfileCard } from '../LoadingCard';
 import { ErrorCard, ErrorProfileCard } from '../ErrorCard';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 import { Heart } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 export function CardComponentsSection() {
   const [selectedCard, setSelectedCard] = useState<string | null>('card-2');

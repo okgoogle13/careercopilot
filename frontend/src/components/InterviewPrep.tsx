@@ -1,9 +1,17 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Textarea } from './ui/textarea';
 import { ArrowLeft, Sparkles, MessageSquare, Play, Mic, MicOff, RotateCcw } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface InterviewPrepProps {
   onBack: () => void;
@@ -173,7 +181,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
 
         {!currentQuestion ? (
           /* Question Category Selection */
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          (<div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {questionCategories.map((category) => (
               <Card
                 key={category.id}
@@ -199,10 +207,10 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 </div>
               </Card>
             ))}
-          </div>
+          </div>)
         ) : (
           /* Interview Practice Interface */
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+          (<div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
             {/* Main Practice Area */}
             <div className="xl:col-span-2 space-y-6">
               {/* Question Card */}
@@ -336,7 +344,6 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 </Card>
               )}
             </div>
-
             {/* Tips Sidebar */}
             <div className="space-y-6">
               <Card className="p-6">
@@ -377,7 +384,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 Choose Different Category
               </Button>
             </div>
-          </div>
+          </div>)
         )}
       </div>
     </div>

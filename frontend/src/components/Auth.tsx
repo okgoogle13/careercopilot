@@ -1,7 +1,15 @@
-import { Button } from './ui/button';
 import { Input } from './ui/input';
-import { Card } from './ui/card';
-import { Logo } from './Logo';
+import { CareerCopilotLogo } from './CareerCopilotLogo';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface AuthProps {
   onLogin: () => void;
@@ -13,7 +21,7 @@ export function Auth({ onLogin }: AuthProps) {
       <div className="w-full max-w-md space-y-6">
         {/* Logo */}
         <div className="text-center">
-          <Logo className="mx-auto mb-4" />
+          <CareerCopilotLogo className="mx-auto mb-4" />
           <h1 className="text-2xl font-semibold">Welcome to FML Career Copilot</h1>
           <p className="text-muted-foreground mt-2">Your AI-powered job application assistant</p>
         </div>

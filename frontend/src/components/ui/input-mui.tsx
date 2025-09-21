@@ -1,106 +1,97 @@
-import React from 'react';
-import { TextField, TextFieldProps, InputAdornment, Box, SxProps, Theme } from '@mui/material';
+import React, { forwardRef, useState } from 'react';
+import { cn } from '../lib/utils';
 
-export interface InputProps extends Omit<TextFieldProps, 'variant' | 'error'> {
-  /** Whether the input has an error */
-  error?: boolean;
-  /** Optional icon to display inside the input */
-  icon?: React.ReactNode;
-  /** Additional class name for the input container */
-  containerClassName?: string;
-  /** Input container sx props */
-  containerSx?: SxProps<Theme>;
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+  helperText?: string;
+  variant?: 'standard' | 'enhanced';
 }
 
-/**
- * A customizable input component with support for icons and error states.
- */
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      error = false,
-      icon,
-      containerClassName,
-      containerSx,
-      sx,
-      placeholder,
-      disabled,
-      type = 'text',
-      ...props
-    },
-    ref
-  ) => {
-    const inputSx: SxProps<Theme> = {
-      width: '100%',
-      '& .MuiOutlinedInput-root': {
-        borderRadius: 2,
-        backgroundColor: (theme) =>
-          theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.02)' : 'rgba(255, 255, 255, 0.05)',
-        transition: 'all 0.2s ease-in-out',
-        '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: error ? 'error.main' : 'action.active',
-        },
-        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: error ? 'error.main' : 'primary.main',
-          borderWidth: '2px',
-        },
-        '&.Mui-disabled': {
-          backgroundColor: 'action.disabledBackground',
-          opacity: 0.5,
-        },
-      },
-      '& .MuiOutlinedInput-notchedOutline': {
-        borderColor: error ? 'error.main' : 'divider',
-      },
-      '& .MuiInputBase-input': {
-        fontSize: '0.875rem',
-        padding: '12px 16px',
-        '&::placeholder': {
-          color: 'text.secondary',
-          opacity: 0.7,
-        },
-        '&::selection': {
-          backgroundColor: 'primary.main',
-          color: 'primary.contrastText',
-        },
-      },
-      ...sx,
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, type, label, error, helperText, variant = 'enhanced', ...props }, ref) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const [hasValue, setHasValue] = useState(!!props.value || !!props.defaultValue);
+
+    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocused(true);
+      props.onFocus?.(e);
     };
 
-    return (
-      <Box
-        sx={{
-          position: 'relative',
-          width: '100%',
-          ...containerSx,
-        }}
-        className={containerClassName}
-      >
-        <TextField
-          ref={ref}
-          variant="outlined"
-          size="small"
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+      setIsFocused(false);
+      setHasValue(!!e.target.value);
+      props.onBlur?.(e);
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setHasValue(!!e.target.value);
+      props.onChange?.(e);
+    };
+
+    if (variant === 'standard') {
+      return (
+        <input
           type={type}
-          placeholder={placeholder}
-          disabled={disabled}
-          error={error}
-          sx={inputSx}
-          InputProps={{
-            startAdornment: icon ? (
-              <InputAdornment position="start">
-                <Box sx={{ color: 'text.secondary', display: 'flex', alignItems: 'center' }}>
-                  {icon}
-                </Box>
-              </InputAdornment>
-            ) : undefined,
-          }}
+          className={cn(
+            "flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          )}
+          ref={ref}
           {...props}
         />
-      </Box>
+      );
+    }
+
+    const shouldFloatLabel = isFocused || hasValue || type === 'date' || type === 'time';
+
+    return (
+      <div className="form-input-enhanced">
+        <input
+          type={type}
+          className={cn(
+            "peer w-full rounded-md border border-outline-variant bg-surface-container-high px-3 py-4 text-base text-on-surface transition-all duration-300 ease-out placeholder:text-transparent focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50",
+            error && "border-error focus:border-error focus:ring-error/20",
+            className
+          )}
+          ref={ref}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          placeholder=" " // Keep a space to enable the :placeholder-shown pseudo-selector
+          {...props}
+        />
+
+        {label && (
+          <label
+            className={cn(
+              "absolute left-3 top-4 origin-left cursor-text select-none bg-surface-container-high px-1 text-base text-on-surface-variant transition-all duration-250 ease-cubic-bezier",
+              shouldFloatLabel && "top-0 -translate-y-1/2 scale-85 text-xs font-medium text-primary",
+              error && shouldFloatLabel && "text-error",
+              isFocused && "text-primary",
+              error && isFocused && "text-error"
+            )}
+            style={{
+              transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+            }}
+          >
+            {label}
+          </label>
+        )}
+
+        {(error || helperText) && (
+          <div className={cn(
+            "mt-1 text-xs transition-colors duration-200",
+            error ? "text-error" : "text-muted-foreground"
+          )}>
+            {error || helperText}
+          </div>
+        )}
+      </div>
     );
   }
 );
 
-Input.displayName = 'Input';
+Input.displayName = "Input";
 
 export { Input };

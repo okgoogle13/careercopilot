@@ -1,5 +1,3 @@
-import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
@@ -20,6 +18,16 @@ import {
   Star,
   BarChart3,
 } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface Goal {
   id: string;

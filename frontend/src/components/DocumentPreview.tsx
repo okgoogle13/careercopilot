@@ -1,6 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
@@ -49,6 +47,16 @@ import {
   Code,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 type DocumentType = 'resume' | 'cover-letter' | 'portfolio' | 'selection-criteria' | 'other';
 

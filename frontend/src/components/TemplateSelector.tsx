@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { ArrowLeft } from 'lucide-react';
 import { TemplateCard } from './library/TemplateCard';
 import { selectTemplate, getDocumentPreview } from '../api/aiServices';
+import { Button, IconButton } from '@mui/material';
 
 interface TemplateSelectorProps {
   documentType?: 'resume' | 'cover-letter';
@@ -120,11 +120,11 @@ export function TemplateSelector({
       console.log('Template selection response:', response);
 
       // Call the parent handler to navigate to next step
-      onSelectTemplate?.(templateId, type);
+      onSelectTemplate(templateId, type);
     } catch (error) {
       console.error('Failed to select template:', error);
       // Still proceed with navigation even if API call fails
-      onSelectTemplate?.(templateId, type);
+      onSelectTemplate(templateId, type);
     } finally {
       setIsSelectingTemplate(false);
     }

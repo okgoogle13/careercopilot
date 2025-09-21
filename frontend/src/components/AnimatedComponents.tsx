@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Card, CardContent, CardHeader, CardTitle, CardFooter } from './ui/card';
-import { Button } from './ui/button';
 import {
   ChevronRight,
   CheckCircle2,
@@ -12,6 +10,16 @@ import {
   ArrowUp,
   ArrowDown,
 } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 // Animated Modal Component
 export function AnimatedModal({
@@ -44,8 +52,8 @@ export function AnimatedModal({
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md"
           >
             <Card>
-              <CardHeader>
-                <CardTitle>{title}</CardTitle>
+              <CardHeader title={<Typography variant='h3'>{title}</Typography>}>
+
               </CardHeader>
               <CardContent>{children}</CardContent>
               <CardFooter className="flex justify-end gap-2">

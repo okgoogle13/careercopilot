@@ -1,9 +1,9 @@
-import { KscCriterionCard } from '@/components/KSC/KscCriterionCard';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import { KscCriterionCard } from './ksccriterioncard';
+import { TextField } from '@mui/material';
 import { cn } from '@/lib/utils';
 import { generateKscResponses, generateSingleKscResponse } from '@/api/aiServices';
 import React, { useState } from 'react';
+import { Button, IconButton } from '@mui/material';
 
 export const KscGeneratorPage: React.FC = () => {
   const [jobDescription, setJobDescription] = useState<string>('');
@@ -41,11 +41,15 @@ export const KscGeneratorPage: React.FC = () => {
           Key Selection Criteria Generator
         </h1>
 
-        <Textarea
+        <TextField
+          fullWidth
+          multiline
+          minRows={6}
+          placeholder="Paste the job description here to detect Key Selection Criteria..."
           value={jobDescription}
           onChange={(e) => setJobDescription(e.target.value)}
-          placeholder="Paste your job description here to detect Key Selection Criteria..."
-          className="min-h-[200px]"
+          variant="outlined"
+          sx={{ mt: 2 }}
         />
 
         <Button

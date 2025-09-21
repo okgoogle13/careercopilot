@@ -3,7 +3,7 @@
     "target": "ES2020",
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -16,23 +16,10 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@radix-ui/*": ["node_modules/@radix-ui/*"],
-      "vaul": ["node_modules/vaul"],
-      "sonner": ["node_modules/sonner"],
-      "recharts": ["node_modules/recharts"],
-      "react-resizable-panels": ["node_modules/react-resizable-panels"],
-      "react-hook-form": ["node_modules/react-hook-form"],
-      "react-day-picker": ["node_modules/react-day-picker"],
-      "next-themes": ["node_modules/next-themes"],
-      "lucide-react": ["node_modules/lucide-react"],
-      "input-otp": ["node_modules/input-otp"],
-      "embla-carousel-react": ["node_modules/embla-carousel-react"],
-      "cmdk": ["node_modules/cmdk"],
-      "class-variance-authority": ["node_modules/class-variance-authority"]
+      "@/*": ["src/*"]
     }
   },
-  "include": ["src", "**/*.ts", "**/*.tsx"],
+  "include": ["src", "**/*.ts", "**/*.tsx", "src/types"],
   "exclude": [
     "node_modules",
     "dist",
@@ -41,6 +28,7 @@
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/__tests__/**",
+    "**/__mocks__/**",
     "__mocks__/**",
     "src/setupTests.ts"
   ]

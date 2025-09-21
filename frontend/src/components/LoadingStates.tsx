@@ -1,10 +1,18 @@
-import { Card } from './ui/card';
-import { Button } from './ui/button';
 import { Skeleton } from './ui/skeleton';
 import { Progress } from './ui/progress';
 import { ArrowLeft, Upload, FileText, Loader2, CheckCircle } from 'lucide-react';
-import { Logo } from './Logo';
+import { CareerCopilotLogo } from './CareerCopilotLogo';
 import { useState, useEffect } from 'react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface LoadingStatesProps {
   onBack: () => void;
@@ -143,7 +151,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
           <div className="space-y-4">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                <Logo className="text-primary" size={32} />
+                <CareerCopilotLogo className="text-primary" size={32} />
               </div>
               <p className="font-medium mb-2">Generating your resume</p>
               <p className="text-sm text-muted-foreground mb-4">
@@ -232,7 +240,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
             <div className="text-center">
               <div className="mb-3 animate-pulse">
-                <Logo className="text-primary mx-auto" size={32} />
+                <CareerCopilotLogo className="text-primary mx-auto" size={32} />
               </div>
               <p className="text-sm text-muted-foreground">Loading Career Copilot...</p>
             </div>

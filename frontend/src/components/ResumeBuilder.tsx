@@ -1,12 +1,19 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
-import { Card } from './ui/card';
 import { Label } from './ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Badge } from './ui/badge';
 import { ArrowLeft, Save, Eye, Download, Layout, Palette } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface ResumeBuilderProps {
   template?: { id: string; name: string; type: 'resume' | 'cover-letter' };

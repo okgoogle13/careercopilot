@@ -5,8 +5,16 @@ import { ErrorProfileCard } from './ErrorCard';
 import { LoadingProfileCard } from './LoadingCard';
 import { ProfileCard } from './ProfileCard';
 import { Badge } from './ui/badge';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface StateDemoShowcaseProps {
   onBack: () => void;
@@ -187,8 +195,8 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         {/* Control Panel */}
         <div className="mb-8">
           <Card variant="default">
-            <CardHeader>
-              <CardTitle>Simulation Controls</CardTitle>
+            <CardHeader title={<Typography variant='h3'>Simulation Controls</Typography>}>
+
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-3">
@@ -281,8 +289,8 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
           <div className="grid md:grid-cols-2 gap-6">
             <Card variant="default">
-              <CardHeader>
-                <CardTitle>Best Practices</CardTitle>
+              <CardHeader title={<Typography variant='h3'>Best Practices</Typography>}>
+
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
@@ -296,8 +304,8 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
             </Card>
 
             <Card variant="default">
-              <CardHeader>
-                <CardTitle>Implementation Tips</CardTitle>
+              <CardHeader title={<Typography variant='h3'>Implementation Tips</Typography>}>
+
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
