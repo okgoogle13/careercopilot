@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
+import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
 
 export const ComponentSection = ({
   title,
@@ -27,8 +27,8 @@ export const ComponentDemo = ({
   children: React.ReactNode;
 }) => (
   <Card variant="default">
-    <CardHeader>
-      <CardTitle className="text-lg">{title}</CardTitle>
+    <CardHeader title={<Typography variant='h3'>{title}</Typography>}>
+
     </CardHeader>
     <CardContent>
       <div className="space-y-4">{children}</div>

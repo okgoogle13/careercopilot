@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Box,
   Container,
+  Grid,
   Paper,
   Typography,
   Button,
@@ -38,7 +39,6 @@ import {
   Tooltip,
   LinearProgress,
 } from '@mui/material';
-import Grid from '@mui/material/Grid';
 import {
   Person,
   Security,
@@ -230,7 +230,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
       <Grid container spacing={4}>
         {/* Settings Navigation */}
-        <Grid size={{ xs: 12, md: 3 }}>
+        <Grid item xs={12} md={3}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Tabs
               orientation="vertical"
@@ -280,7 +280,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
         </Grid>
 
         {/* Settings Content */}
-        <Grid size={{ xs: 12, md: 9 }}>
+        <Grid item xs={12} md={9}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
             {/* Profile Tab */}
             <TabPanel value={tabValue} index={0}>
@@ -322,7 +322,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                 {/* Personal Information */}
                 <Grid container spacing={3}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label="First Name"
@@ -330,7 +330,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('firstName', e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label="Last Name"
@@ -338,7 +338,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('lastName', e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label="Email"
@@ -347,7 +347,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('email', e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label="Phone"
@@ -355,7 +355,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('phone', e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label="Location"
@@ -363,7 +363,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('location', e.target.value)}
                     />
                   </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label="Website"
@@ -371,7 +371,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('website', e.target.value)}
                     />
                   </Grid>
-                  <Grid size={12}>
+                  <Grid item xs={12}>
                     <TextField
                       fullWidth
                       label="Bio"
@@ -394,7 +394,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <Grid container spacing={3}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                       <InputLabel>Theme</InputLabel>
                       <Select
@@ -419,7 +419,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                       <InputLabel>Language</InputLabel>
                       <Select
@@ -436,7 +436,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                       <InputLabel>Timezone</InputLabel>
                       <Select
@@ -453,7 +453,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </Grid>
 
-                  <Grid size={{ xs: 12, sm: 6 }}>
+                  <Grid item xs={12} sm={6}>
                     <FormControl fullWidth>
                       <InputLabel>Date Format</InputLabel>
                       <Select
@@ -468,14 +468,14 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </Grid>
 
-                  <Grid size={12}>
+                  <Grid item xs={12}>
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="h6" gutterBottom>
                       Interface Options
                     </Typography>
                   </Grid>
 
-                  <Grid size={12}>
+                  <Grid item xs={12}>
                     <List>
                       <ListItem>
                         <ListItemIcon>
@@ -679,7 +679,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <Grid container spacing={3}>
-                  <Grid size={12}>
+                  <Grid item xs={12}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -739,7 +739,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </Grid>
 
-                  <Grid size={12}>
+                  <Grid item xs={12}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -827,7 +827,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <Grid container spacing={3}>
-                  <Grid size={{ xs: 12, md: 6 }}>
+                  <Grid item xs={12} md={6}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -860,7 +860,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </Grid>
 
-                  <Grid size={{ xs: 12, md: 6 }}>
+                  <Grid item xs={12} md={6}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -895,7 +895,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </Grid>
 
-                  <Grid size={12}>
+                  <Grid item xs={12}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'error.main' }}>
                       <CardContent>
                         <Typography variant="h6" color="error" gutterBottom>
@@ -933,7 +933,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <Grid container spacing={3}>
-                  <Grid size={{ xs: 12, md: 6 }}>
+                  <Grid item xs={12} md={6}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -958,7 +958,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </Grid>
 
-                  <Grid size={{ xs: 12, md: 6 }}>
+                  <Grid item xs={12} md={6}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>

@@ -93,7 +93,7 @@ function DialogTrigger({ children, onClick }: DialogTriggerProps) {
   );
 }
 
-function DialogContentComponent({ children, className, sx }: DialogContentProps) {
+function DialogContent({ children, className, sx }: DialogContentProps) {
   return (
     <DialogContent
       className={className}
@@ -209,7 +209,7 @@ function DialogClose({ onClick, className, sx }: DialogCloseProps) {
 export {
   Dialog,
   DialogTrigger,
-  DialogContentComponent as DialogContent,
+  DialogContent,
   DialogHeader,
   DialogTitleComponent as DialogTitle,
   DialogDescription,

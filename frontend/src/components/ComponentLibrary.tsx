@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from './ui/button';
 import { TooltipProvider } from './ui/tooltip';
 import { ArrowLeft } from 'lucide-react';
 import { CardComponentsSection } from './library/CardComponentsSection';
@@ -10,6 +9,7 @@ import { InteractiveComponentsSection } from './library/InteractiveComponentsSec
 import { LayoutComponentsSection } from './library/LayoutComponentsSection';
 import { UsageGuidelinesSection } from './library/UsageGuidelinesSection';
 import { DemoLinksSection } from './library/DemoLinksSection';
+import { Button, IconButton } from '@mui/material';
 
 interface ComponentLibraryProps {
   onBack: () => void;

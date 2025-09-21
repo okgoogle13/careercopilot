@@ -4,14 +4,8 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  publicDir: 'public',
-  server: {
-    port: 3000,
-    strictPort: true,
-    open: true,
-  },
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       'vaul@1.1.2': 'vaul',
       'sonner@2.0.3': 'sonner',
@@ -61,5 +55,9 @@ export default defineConfig({
   build: {
     target: 'esnext',
     outDir: 'build',
+  },
+  server: {
+    port: 3000,
+    open: true,
   },
 });

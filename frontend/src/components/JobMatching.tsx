@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Progress } from './ui/progress';
 import {
@@ -13,6 +11,16 @@ import {
   Heart,
   Star,
 } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface JobMatchingProps {
   onBack: () => void;

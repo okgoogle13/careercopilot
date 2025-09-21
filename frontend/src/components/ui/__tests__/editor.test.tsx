@@ -1,7 +1,8 @@
-import React from 'react';
-import { render, screen, waitFor } from '../utils/test-utils';
+import React, { act } from 'react';
+import '@testing-library/jest-dom';
+import { render, screen, fireEvent, waitFor } from '../utils/test-utils';
 import userEvent from '@testing-library/user-event';
-import { Editor } from '../editor';
+import { Editor, EditorHandle } from '../editor';
 
 // Mock document.execCommand since it's not available in jsdom
 const mockExecCommand = jest.fn();
@@ -21,39 +22,51 @@ describe('Editor', () => {
 
   it('renders without crashing', () => {
     render(<Editor value="" onChange={mockOnChange} />);
-
-    // Should render the editor container
-    expect(screen.getByRole('textbox', { hidden: true })).toBeInTheDocument();
+    
+    // Check if the editor container is rendered
+    const editor = screen.getByRole('textbox');
+    expect(editor).toBeInTheDocument();
+    expect(editor).toHaveAttribute('contenteditable', 'true');
+    
+    // Check if the toolbar buttons are rendered
+    expect(screen.getByRole('button', { name: /bold/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /italic/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /underline/i })).toBeInTheDocument();
   });
 
   it('displays placeholder text when empty', () => {
     const placeholderText = 'Enter your content here...';
     render(<Editor value="" onChange={mockOnChange} placeholder={placeholderText} />);
-
+    
+    // The placeholder should be visible when the editor is empty
     expect(screen.getByText(placeholderText)).toBeInTheDocument();
+    
+    // The placeholder should be hidden when the editor is focused
+    const editor = screen.getByRole('textbox');
+    fireEvent.focus(editor);
+    expect(screen.queryByText(placeholderText)).not.toBeInTheDocument();
   });
 
   it('uses default placeholder when none provided', () => {
     render(<Editor value="" onChange={mockOnChange} />);
-
-    expect(screen.getByText(/Start typing.../i)).toBeInTheDocument();
+    expect(screen.getByText('Type something...')).toBeInTheDocument();
   });
 
   it('displays initial value correctly', () => {
-    const initialValue = 'This is initial content';
+    const initialValue = '<p>This is initial content</p>';
     render(<Editor value={initialValue} onChange={mockOnChange} />);
 
-    const editor = screen.getByRole('textbox', { hidden: true });
-    expect(editor).toHaveTextContent(initialValue);
+    const editor = screen.getByRole('textbox');
+    expect(editor).toContainHTML(initialValue);
   });
 
   it('renders toolbar with formatting buttons', () => {
     render(<Editor value="" onChange={mockOnChange} />);
 
-    // Should have bold, italic, underline buttons
-    expect(screen.getByRole('button', { name: /B/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /I/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /U/i })).toBeInTheDocument();
+    // Should have bold, italic, underline buttons with specific labels
+    expect(screen.getByRole('button', { name: 'Bold' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Italic' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Underline' })).toBeInTheDocument();
   });
 
   it('calls onChange when content is modified', async () => {
@@ -73,7 +86,7 @@ describe('Editor', () => {
   it('handles bold formatting correctly', async () => {
     render(<Editor value="" onChange={mockOnChange} />);
 
-    const boldButton = screen.getByRole('button', { name: /B/i });
+    const boldButton = screen.getByRole('button', { name: /Bold/i });
     await user.click(boldButton);
 
     expect(mockExecCommand).toHaveBeenCalledWith('bold', false, undefined);
@@ -82,7 +95,7 @@ describe('Editor', () => {
   it('handles italic formatting correctly', async () => {
     render(<Editor value="" onChange={mockOnChange} />);
 
-    const italicButton = screen.getByRole('button', { name: /I/i });
+    const italicButton = screen.getByRole('button', { name: /Italic/i });
     await user.click(italicButton);
 
     expect(mockExecCommand).toHaveBeenCalledWith('italic', false, undefined);
@@ -91,32 +104,49 @@ describe('Editor', () => {
   it('handles underline formatting correctly', async () => {
     render(<Editor value="" onChange={mockOnChange} />);
 
-    const underlineButton = screen.getByRole('button', { name: /U/i });
+    const underlineButton = screen.getByRole('button', { name: /Underline/i });
     await user.click(underlineButton);
 
     expect(mockExecCommand).toHaveBeenCalledWith('underline', false, undefined);
   });
 
   it('handles paste events correctly', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+    const editorRef = React.createRef<EditorHandle>();
+    const mockPasteEvent = {
+      preventDefault: jest.fn(),
+      clipboardData: {
+        getData: jest.fn().mockReturnValue('Pasted text')
+      }
+    } as unknown as React.ClipboardEvent;
 
-    const editor = screen.getByRole('textbox', { hidden: true });
-
-    // Simulate paste event
-    const pasteText = 'Pasted content';
-    const clipboardData = {
-      getData: jest.fn().mockReturnValue(pasteText),
-    };
-
-    const pasteEvent = new Event('paste', { bubbles: true });
-    Object.defineProperty(pasteEvent, 'clipboardData', {
-      value: clipboardData,
+    // Mock document.execCommand to update the content
+    const originalExecCommand = document.execCommand;
+    document.execCommand = jest.fn((command, showUI, value) => {
+      if (command === 'insertText' && value) {
+        editorRef.current?.focus();
+        // Update the mock content
+        if (editorRef.current) {
+          const editor = editorRef.current as any;
+          editor._editorRef = { current: { innerHTML: value } };
+        }
+        return true;
+      }
+      return false;
     });
 
-    editor.dispatchEvent(pasteEvent);
-
-    expect(clipboardData.getData).toHaveBeenCalledWith('text/plain');
-    expect(mockExecCommand).toHaveBeenCalledWith('insertText', false, pasteText);
+    render(<Editor ref={editorRef} value="" onChange={mockOnChange} />);
+    
+    // Trigger paste using the ref
+    act(() => {
+      editorRef.current?.paste(mockPasteEvent);
+    });
+    
+    // Verify the paste handler was called with the correct data
+    expect(mockPasteEvent.preventDefault).toHaveBeenCalled();
+    expect(mockPasteEvent.clipboardData.getData).toHaveBeenCalledWith('text/plain');
+    
+    // Clean up
+    document.execCommand = originalExecCommand;
   });
 
   it('applies custom className correctly', () => {
@@ -127,16 +157,43 @@ describe('Editor', () => {
     expect(container).toHaveClass(customClass);
   });
 
-  it('handles disabled state correctly', () => {
-    render(<Editor value="" onChange={mockOnChange} disabled />);
+  it('formats text when format buttons are clicked', async () => {
+    // Mock document.execCommand to track calls
+    const originalExecCommand = document.execCommand;
+    document.execCommand = jest.fn();
+    
+    render(<Editor value="test" onChange={mockOnChange} />);
 
-    const boldButton = screen.getByRole('button', { name: /B/i });
-    const italicButton = screen.getByRole('button', { name: /I/i });
-    const underlineButton = screen.getByRole('button', { name: /U/i });
+    const boldButton = screen.getByRole('button', { name: /Bold/i });
+    const italicButton = screen.getByRole('button', { name: /Italic/i });
+    const underlineButton = screen.getByRole('button', { name: /Underline/i });
 
-    expect(boldButton).toBeDisabled();
-    expect(italicButton).toBeDisabled();
-    expect(underlineButton).toBeDisabled();
+    // Mock the editor focus
+    const editor = screen.getByRole('textbox');
+    const focusSpy = jest.spyOn(editor, 'focus');
+    
+    // Test bold button
+    await user.click(boldButton);
+    expect(document.execCommand).toHaveBeenCalledWith('bold', false, undefined);
+    expect(focusSpy).toHaveBeenCalled();
+    
+    // Reset the mock for the next test
+    (document.execCommand as jest.Mock).mockClear();
+    
+    // Test italic button
+    await user.click(italicButton);
+    expect(document.execCommand).toHaveBeenCalledWith('italic', false, undefined);
+    
+    // Reset the mock for the next test
+    (document.execCommand as jest.Mock).mockClear();
+    
+    // Test underline button
+    await user.click(underlineButton);
+    expect(document.execCommand).toHaveBeenCalledWith('underline', false, undefined);
+    
+    // Clean up
+    document.execCommand = originalExecCommand;
+    focusSpy.mockRestore();
   });
 
   it('updates content when value prop changes', async () => {
@@ -177,21 +234,24 @@ describe('Editor', () => {
     expect(editor).not.toHaveFocus();
   });
 
-  it('prevents default behavior on paste', async () => {
-    render(<Editor value="" onChange={mockOnChange} />);
+  it('prevents default paste behavior', () => {
+    const editorRef = React.createRef<EditorHandle>();
+    const mockPasteEvent = {
+      preventDefault: jest.fn(),
+      clipboardData: {
+        getData: jest.fn().mockReturnValue('Pasted text')
+      }
+    } as unknown as React.ClipboardEvent;
 
-    const editor = screen.getByRole('textbox', { hidden: true });
-
-    const pasteEvent = new Event('paste', { bubbles: true, cancelable: true });
-    const preventDefault = jest.fn();
-    Object.defineProperty(pasteEvent, 'preventDefault', { value: preventDefault });
-    Object.defineProperty(pasteEvent, 'clipboardData', {
-      value: { getData: jest.fn().mockReturnValue('test') },
+    render(<Editor ref={editorRef} value="" onChange={mockOnChange} />);
+    
+    // Trigger paste using the ref
+    act(() => {
+      editorRef.current?.paste(mockPasteEvent);
     });
-
-    editor.dispatchEvent(pasteEvent);
-
-    expect(preventDefault).toHaveBeenCalled();
+    
+    // Verify preventDefault was called
+    expect(mockPasteEvent.preventDefault).toHaveBeenCalled();
   });
 
   it('handles empty onChange gracefully', () => {

@@ -1,7 +1,7 @@
-import { Badge } from './badge';
-import { cn } from './utils';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
-import { SkillTag } from './skilltag';
+import { SkillTag } from './SkillTag';
 
 interface Skill {
   text: string;

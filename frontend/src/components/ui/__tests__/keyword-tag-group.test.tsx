@@ -16,8 +16,8 @@ describe('KeywordTagGroup', () => {
 
   const mockProps = {
     keywords: mockKeywords,
-    onAccept: jest.fn(),
-    onReject: jest.fn(),
+    onTagAccept: jest.fn(),
+    onTagReject: jest.fn(),
   };
 
   it('renders without crashing', () => {
@@ -33,23 +33,34 @@ describe('KeywordTagGroup', () => {
     });
   });
 
-  it('calls onAccept when accept button is clicked', async () => {
+  it('calls onTagAccept when accept button is clicked', async () => {
     render(<KeywordTagGroup {...mockProps} />);
 
-    // Find and click the accept button for the first keyword
-    const acceptButtons = screen.getAllByRole('button', { name: /accept/i });
-    await user.click(acceptButtons[0]);
-
-    expect(mockProps.onAccept).toHaveBeenCalledWith(mockKeywords[0].keyword);
+    // Find and click the accept button for the suggested keyword (TypeScript)
+    const typeScriptTag = screen.getByText('TypeScript').closest('div');
+    const acceptButton = typeScriptTag?.querySelector('button');
+    
+    if (acceptButton) {
+      await user.click(acceptButton);
+      expect(mockProps.onTagAccept).toHaveBeenCalledWith('TypeScript');
+    } else {
+      throw new Error('Accept button not found');
+    }
   });
 
-  it('calls onReject when reject button is clicked', async () => {
+  it('calls onTagReject when reject button is clicked', async () => {
     render(<KeywordTagGroup {...mockProps} />);
 
-    // Find and click the reject button for the first keyword
-    const rejectButtons = screen.getAllByRole('button', { name: /reject/i });
-    await user.click(rejectButtons[0]);
-
-    expect(mockProps.onReject).toHaveBeenCalledWith(mockKeywords[0].keyword);
+    // Find and click the reject button for the suggested keyword (TypeScript)
+    const typeScriptTag = screen.getByText('TypeScript').closest('div');
+    const buttons = typeScriptTag?.querySelectorAll('button');
+    const rejectButton = buttons?.[1]; // Second button is the reject button
+    
+    if (rejectButton) {
+      await user.click(rejectButton);
+      expect(mockProps.onTagReject).toHaveBeenCalledWith('TypeScript');
+    } else {
+      throw new Error('Reject button not found');
+    }
   });
 });

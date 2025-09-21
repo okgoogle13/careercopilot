@@ -1,6 +1,14 @@
-import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Upload, FileText, Mail, Award } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface UploadResumeProps {
   onNext: () => void;
@@ -40,7 +48,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="sm" variant="outline">
+              <Button size="small" variant="outlined">
                 Upload Files
               </Button>
             </div>
@@ -65,7 +73,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="sm" variant="outline">
+              <Button size="small" variant="outlined">
                 Upload Files
               </Button>
             </div>
@@ -90,7 +98,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="sm" variant="outline">
+              <Button size="small" variant="outlined">
                 Upload Files
               </Button>
             </div>

@@ -1,21 +1,28 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
-interface EditorProps {
+export interface EditorHandle {
+  focus: () => void;
+  blur: () => void;
+  paste: (e: React.ClipboardEvent) => void;
+  getContent: () => string;
+}
+
+export interface EditorProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-  className?: string;
   disabled?: boolean;
 }
 
-export const Editor: React.FC<EditorProps> = ({
+const Editor = React.forwardRef<EditorHandle, EditorProps>(({
   value,
   onChange,
-  placeholder = 'Start typing...',
+  placeholder = 'Type something...',
   className,
   disabled = false,
-}) => {
+  ...props
+}, ref) => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
 
@@ -33,9 +40,25 @@ export const Editor: React.FC<EditorProps> = ({
 
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
-    const text = e.clipboardData.getData('text/plain');
+    const text = e.clipboardData?.getData('text/plain') || '';
     document.execCommand('insertText', false, text);
   };
+  
+  // Expose handlers for testing
+  React.useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (editorRef.current) {
+        editorRef.current.focus();
+      }
+    },
+    blur: () => {
+      if (editorRef.current) {
+        editorRef.current.blur();
+      }
+    },
+    paste: handlePaste,
+    getContent: () => editorRef.current?.innerHTML || '',
+  }));
 
   const formatText = (command: string, value?: string) => {
     document.execCommand(command, false, value);
@@ -44,7 +67,7 @@ export const Editor: React.FC<EditorProps> = ({
   };
 
   return (
-    <div className={cn('border border-border rounded-lg bg-card', className)}>
+    <div className={cn('rounded-md border border-input bg-background', className)} {...props}>
       {/* Toolbar */}
       <div className="flex items-center gap-1 p-2 border-b border-border bg-muted/50">
         <button
@@ -56,6 +79,7 @@ export const Editor: React.FC<EditorProps> = ({
             'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
+          aria-label="Bold"
         >
           B
         </button>
@@ -68,6 +92,7 @@ export const Editor: React.FC<EditorProps> = ({
             'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
+          aria-label="Italic"
         >
           I
         </button>
@@ -80,6 +105,7 @@ export const Editor: React.FC<EditorProps> = ({
             'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
+          aria-label="Underline"
         >
           U
         </button>
@@ -93,6 +119,7 @@ export const Editor: React.FC<EditorProps> = ({
             'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
+          aria-label="Unordered List"
         >
           •
         </button>
@@ -105,6 +132,7 @@ export const Editor: React.FC<EditorProps> = ({
             'disabled:opacity-50 disabled:pointer-events-none'
           )}
           disabled={disabled}
+          aria-label="Ordered List"
         >
           1.
         </button>
@@ -113,18 +141,18 @@ export const Editor: React.FC<EditorProps> = ({
       {/* Editor Content */}
       <div
         ref={editorRef}
+        role="textbox"
+        aria-label="Editor"
+        aria-multiline="true"
+        className={cn(
+          'min-h-[200px] w-full p-4 focus-visible:outline-none',
+          isFocused && 'ring-2 ring-ring ring-offset-2',
+          disabled && 'cursor-not-allowed opacity-50'
+        )}
         contentEditable={!disabled}
         onInput={handleInput}
-        onPaste={handlePaste}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className={cn(
-          'p-4 min-h-[200px] focus:outline-none relative',
-          'text-sm text-foreground bg-card',
-          'transition-colors duration-200',
-          disabled && 'cursor-not-allowed opacity-50',
-          isFocused && 'ring-2 ring-ring/50'
-        )}
         dangerouslySetInnerHTML={{ __html: value }}
         data-placeholder={placeholder}
         style={{
@@ -141,4 +169,8 @@ export const Editor: React.FC<EditorProps> = ({
       )}
     </div>
   );
-};
+});
+
+Editor.displayName = 'Editor';
+
+export { Editor };

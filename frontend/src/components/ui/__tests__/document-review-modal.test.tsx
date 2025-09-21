@@ -3,6 +3,50 @@ import { render, screen, waitFor } from '../utils/test-utils';
 import userEvent from '@testing-library/user-event';
 import { DocumentReviewModal } from '../document-review-modal';
 
+// Mock the MUI components and icons
+jest.mock('@mui/material/Dialog', () => ({
+  __esModule: true,
+  default: ({ children, open, onClose, maxWidth, fullWidth }: any) => 
+    open ? (
+      <div data-testid="dialog">
+        <button onClick={onClose}>Close</button>
+        {children}
+      </div>
+    ) : null,
+}));
+
+jest.mock('@mui/material/DialogTitle', () => ({
+  __esModule: true,
+  default: ({ children }: any) => <h2 data-testid="dialog-title">{children}</h2>,
+}));
+
+jest.mock('@mui/material/DialogContent', () => ({
+  __esModule: true,
+  default: ({ children }: any) => <div data-testid="dialog-content">{children}</div>,
+}));
+
+jest.mock('@mui/material/Tabs', () => ({
+  __esModule: true,
+  default: ({ children, value, onChange }: any) => (
+    <div data-testid="tabs" data-value={value}>
+      {React.Children.map(children, (child, index) => (
+        <div onClick={() => onChange?.({}, index)}>{child}</div>
+      ))}
+    </div>
+  ),
+}));
+
+jest.mock('@mui/material/Tab', () => ({
+  __esModule: true,
+  default: ({ label, icon, iconPosition }: any) => (
+    <div data-testid="tab" data-icon-position={iconPosition}>
+      {iconPosition === 'start' && icon}
+      {label}
+      {iconPosition === 'end' && icon}
+    </div>
+  ),
+}));
+
 // Mock the KeywordTagGroup component
 jest.mock('../keyword-tag-group', () => ({
   KeywordTagGroup: ({ keywords, onAccept, onReject }: any) => (

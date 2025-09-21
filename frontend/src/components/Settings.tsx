@@ -1,9 +1,17 @@
 import { useState } from 'react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Input } from './ui/input';
 import { Switch } from './ui/switch';
 import { ArrowLeft, User, Bell, Shield, Trash2, Download, Upload } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+} from '@mui/material';
 
 interface SettingsProps {
   onBack: () => void;
@@ -170,7 +178,7 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <Switch
                     checked={notifications.emailAlerts}
-                    onCheckedChange={(checked: boolean) =>
+                    onCheckedChange={(checked) =>
                       setNotifications({ ...notifications, emailAlerts: checked })
                     }
                   />
@@ -185,7 +193,7 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <Switch
                     checked={notifications.jobMatches}
-                    onCheckedChange={(checked: boolean) =>
+                    onCheckedChange={(checked) =>
                       setNotifications({ ...notifications, jobMatches: checked })
                     }
                   />
@@ -200,7 +208,7 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <Switch
                     checked={notifications.applicationUpdates}
-                    onCheckedChange={(checked: boolean) =>
+                    onCheckedChange={(checked) =>
                       setNotifications({ ...notifications, applicationUpdates: checked })
                     }
                   />
@@ -213,7 +221,7 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <Switch
                     checked={notifications.weeklyDigest}
-                    onCheckedChange={(checked: boolean) =>
+                    onCheckedChange={(checked) =>
                       setNotifications({ ...notifications, weeklyDigest: checked })
                     }
                   />

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from '../ui/button';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,6 +22,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
+import { Button, IconButton } from '@mui/material';
 
 export function InteractiveComponentsSection() {
   return (

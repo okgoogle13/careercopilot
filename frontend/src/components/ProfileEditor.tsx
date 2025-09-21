@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
 import { Textarea } from './ui/textarea';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 import { Switch } from './ui/switch';
 import { Slider } from './ui/slider';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
@@ -43,12 +40,24 @@ import {
   CheckCircle,
   AlertCircle,
   Star,
-  ArrowLeft,
-  Eye,
 } from 'lucide-react';
 import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
 import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';
 import { AIProcessingLoading } from './StandardizedLoadingStates';
+import {
+  Button,
+  IconButton,
+  Card,
+  CardContent,
+  CardHeader,
+  CardActions,
+  Typography,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 
 interface SocialLink {
   platform: 'linkedin' | 'github' | 'twitter' | 'website' | 'portfolio';
@@ -199,6 +208,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
   const [activeTab, setActiveTab] = useState('basic');
   const [profileStrength, setProfileStrength] = useState(75);
   const [newSkill, setNewSkill] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<'technical' | 'soft' | 'industry' | 'language'>('technical');
   const [editingExperience, setEditingExperience] = useState<string | null>(null);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
 
@@ -221,7 +231,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           keyword: newSkill.trim(),
           status: 'matched',
           level: 5,
-          category: 'industry',
+          category: selectedCategory,
         },
       ]);
       setNewSkill('');
@@ -532,17 +542,19 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     }}
                     className="flex-1"
                   />
-                  <Select>
-                    <SelectTrigger className="w-32">
-                      <SelectValue placeholder="Category" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="technical">Technical</SelectItem>
-                      <SelectItem value="soft">Soft Skills</SelectItem>
-                      <SelectItem value="industry">Industry</SelectItem>
-                      <SelectItem value="language">Language</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <FormControl sx={{ width: 120 }}>
+                    <InputLabel>Category</InputLabel>
+                    <Select
+                      value={selectedCategory}
+                      label="Category"
+                      onChange={(e) => setSelectedCategory(e.target.value as 'technical' | 'soft' | 'industry' | 'language')}
+                    >
+                      <MenuItem value="technical">Technical</MenuItem>
+                      <MenuItem value="soft">Soft Skills</MenuItem>
+                      <MenuItem value="industry">Industry</MenuItem>
+                      <MenuItem value="language">Language</MenuItem>
+                    </Select>
+                  </FormControl>
                   <Button onClick={addSkill}>
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -595,7 +607,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                                   </span>
                                   <Slider
                                     value={[skill.level]}
-                                    onValueChange={(value: number[]) =>
+                                    onValueChange={(value) =>
                                       updateSkillLevel(skill.keyword, value[0])
                                     }
                                     max={10}
@@ -746,7 +758,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       </div>
                       <Switch
                         checked={profileSettings.openToOpportunities}
-                        onCheckedChange={(checked: boolean) =>
+                        onCheckedChange={(checked) =>
                           setProfileSettings({ ...profileSettings, openToOpportunities: checked })
                         }
                       />
@@ -761,7 +773,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       </div>
                       <Switch
                         checked={profileSettings.showLocation}
-                        onCheckedChange={(checked: boolean) =>
+                        onCheckedChange={(checked) =>
                           setProfileSettings({ ...profileSettings, showLocation: checked })
                         }
                       />

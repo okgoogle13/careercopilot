@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-css-modules"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-css-modules"],
   "rules": {
     "at-rule-no-unknown": null,
     "selector-class-pattern": null,
