@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback, type KeyboardEvent } from 'react';
-import { Button } from '@/components/ui/button';
 import { logUserAction } from '@/utils/logger';
 
 interface ApplicationCard {
@@ -251,7 +250,7 @@ function KanbanColumn({
 }
 
 export function KanbanBoard() {
-  const [data, setData] = useState<KanbanColumn[]>(INITIAL_DATA);
+  const [data] = useState<KanbanColumn[]>(INITIAL_DATA);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [dropTarget, setDropTarget] = useState<string | null>(null);
 
