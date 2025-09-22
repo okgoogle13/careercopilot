@@ -169,7 +169,7 @@ export function TemplateSelector({
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
           <Button
-            variant="ghost"
+            variant="text"
             onClick={onBack}
             className="text-muted-foreground hover:text-foreground"
           >
@@ -209,7 +209,7 @@ export function TemplateSelector({
             <Button
               key={category}
               variant={selectedCategory === category ? 'default' : 'outline'}
-              size="sm"
+              size="small"
               className={selectedCategory === category ? 'bg-primary hover:bg-primary/90' : ''}
               onClick={() => setSelectedCategory(category)}
             >
@@ -253,7 +253,7 @@ export function TemplateSelector({
           <div className="text-muted-foreground mb-4">
             No templates found for the selected filters
           </div>
-          <Button variant="outline" onClick={() => setSelectedCategory('all')}>
+          <Button variant="outlined" onClick={() => setSelectedCategory('all')}>
             Clear Filters
           </Button>
         </div>

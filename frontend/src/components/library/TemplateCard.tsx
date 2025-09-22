@@ -94,8 +94,8 @@ export function TemplateCard({
           }`}
         >
           <Button
-            variant="outline"
-            size="sm"
+            variant="outlined"
+            size="small"
             onClick={(e) => {
               e.stopPropagation();
               onPreview?.();
@@ -126,7 +126,7 @@ export function TemplateCard({
             {best_for_tags.slice(0, 3).map((tag, index) => (
               <Badge
                 key={index}
-                variant="outline"
+                variant="outlined"
                 className="text-xs border-brand-primary/30 text-content-secondary hover:border-brand-primary hover:text-brand-light transition-colors px-2 py-1"
               >
                 {tag}
@@ -134,7 +134,7 @@ export function TemplateCard({
             ))}
             {best_for_tags.length > 3 && (
               <Badge
-                variant="outline"
+                variant="outlined"
                 className="text-xs border-brand-primary/30 text-content-secondary px-2 py-1"
               >
                 +{best_for_tags.length - 3}

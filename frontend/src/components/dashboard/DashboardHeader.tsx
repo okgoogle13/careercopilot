@@ -41,7 +41,7 @@ export function DashboardHeader({
             {isEmpty ? 'Create Your First Document' : 'Create Document'}
           </Button>
         )}
-        <Button onClick={onNavigateToSettings} variant="ghost" size="sm">
+        <Button onClick={onNavigateToSettings} variant="text" size="small">
           <Settings className="w-4 h-4" />
         </Button>
         <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">

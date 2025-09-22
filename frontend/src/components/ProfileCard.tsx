@@ -73,16 +73,16 @@ export function ProfileCard({
 
       <div className="flex gap-2 pt-2">
         <Button
-          variant="ghost"
-          size="sm"
+          variant="text"
+          size="small"
           className="flex-1 text-muted-foreground hover:text-card-foreground"
           onClick={onEdit}
         >
           <Edit3 className="w-4 h-4" />
         </Button>
         <Button
-          variant="ghost"
-          size="sm"
+          variant="text"
+          size="small"
           className="flex-1 text-destructive hover:text-destructive"
           onClick={onDelete}
         >

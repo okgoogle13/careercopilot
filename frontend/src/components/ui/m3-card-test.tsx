@@ -9,7 +9,7 @@ export const M3CardTest = () => {
       <h2 className="col-span-full text-2xl font-bold mb-4">M3Card Test</h2>
 
       {/* Test M3 variants */}
-      <M3Card variant="default">
+      <M3Card variant="elevation">
         <M3CardHeader>
           <M3CardTitle>Default Card</M3CardTitle>
           <M3CardDescription>Standard M3 card with default styling</M3CardDescription>
@@ -22,7 +22,7 @@ export const M3CardTest = () => {
         </M3CardFooter>
       </M3Card>
 
-      <M3Card variant="interactive">
+      <M3Card variant="elevation">
         <M3CardHeader>
           <M3CardTitle>Interactive Card</M3CardTitle>
           <M3CardDescription>Card with hover effects</M3CardDescription>
@@ -32,7 +32,7 @@ export const M3CardTest = () => {
         </M3CardContent>
       </M3Card>
 
-      <M3Card variant="selected">
+      <M3Card variant="elevation">
         <M3CardHeader>
           <M3CardTitle>Selected Card</M3CardTitle>
           <M3CardDescription>Card in selected state</M3CardDescription>
@@ -77,7 +77,7 @@ export const M3CardTest = () => {
       </M3Card>
 
       {/* Test Legacy Card (should work the same) */}
-      <Card variant="interactive">
+      <Card variant="elevation">
         <CardHeader>
           <CardTitle>Legacy Card</CardTitle>
           <CardDescription>Legacy Card component alias</CardDescription>

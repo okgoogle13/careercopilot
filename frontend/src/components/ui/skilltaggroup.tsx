@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import React, { useState } from 'react';
-import { SkillTag } from './SkillTag';
+import { SkillTag } from './skilltag';
 
 interface Skill {
   text: string;
@@ -62,20 +62,20 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
           <div className="flex items-center gap-2 text-xs">
             {statusCounts.accepted && (
               <Badge
-                variant="outline"
+                variant="outlined"
                 className="border-accent-green/50 text-accent-green font-medium"
               >
                 {statusCounts.accepted} accepted
               </Badge>
             )}
             {statusCounts.rejected && (
-              <Badge variant="outline" className="border-accent-red/50 text-accent-red font-medium">
+              <Badge variant="outlined" className="border-accent-red/50 text-accent-red font-medium">
                 {statusCounts.rejected} rejected
               </Badge>
             )}
             {statusCounts.suggested && (
               <Badge
-                variant="outline"
+                variant="outlined"
                 className="border-brand-primary/50 text-brand-light font-medium"
               >
                 {statusCounts.suggested} suggested
@@ -98,7 +98,7 @@ export const SkillTagGroup: React.FC<SkillTagGroupProps> = ({
 
         {hiddenCount > 0 && (
           <Badge
-            variant="outline"
+            variant="outlined"
             className={cn(
               'border-semantic-color-border-subtle',
               'text-semantic-color-text-secondary',

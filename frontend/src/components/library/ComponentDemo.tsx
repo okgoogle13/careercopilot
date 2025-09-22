@@ -26,7 +26,7 @@ export const ComponentDemo = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <Card variant="default">
+  <Card variant="elevation">
     <CardHeader title={<Typography variant='h3'>{title}</Typography>}>
 
     </CardHeader>

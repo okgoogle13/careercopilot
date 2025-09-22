@@ -12,38 +12,52 @@
   --on-primary: var(--color-on-primary);
   --on-primary-container: var(--color-on-primary-container);
 
-  /* Material 3 Expressive Color Tokens - Secondary */
-  --color-secondary: #C9C3DC;
-  --color-secondary-container: #474459;
-  --color-on-secondary: #312E41;
-  --color-on-secondary-container: #E5DFF9;
+  /* Aurora Theme - Secondary Colors (Teal) */
+  --color-secondary: #14B8A6;
+  --color-secondary-container: #0D9488;
+  --color-on-secondary: #042F2E;
+  --color-on-secondary-container: #CCFBF1;
   --secondary: var(--color-secondary);
   --secondary-container: var(--color-secondary-container);
   --on-secondary: var(--color-on-secondary);
   --on-secondary-container: var(--color-on-secondary-container);
 
-  /* Aurora Theme - Tertiary/Accent Colors */
-  --color-tertiary: #F472B6;
-  --color-tertiary-container: #EC4899;
-  --color-on-tertiary: #831843;
-  --color-on-tertiary-container: #FDF2F8;
+  /* Aurora Theme - Tertiary/Accent Colors (Pink) */
+  --color-tertiary: #EC4899;
+  --color-tertiary-container: #DB2777;
+  --color-on-tertiary: #500724;
+  --color-on-tertiary-container: #FCE7F3;
   --tertiary: var(--color-tertiary);
   --tertiary-container: var(--color-tertiary-container);
   --on-tertiary: var(--color-on-tertiary);
   --on-tertiary-container: var(--color-on-tertiary-container);
 
+  /* Aurora Theme - Error & Success Colors */
+  --color-error: #EF4444;
+  --color-on-error: #FFFFFF;
+  --color-error-container: #FEE2E2;
+  --color-on-error-container: #B91C1C;
+  --color-success: #10B981;
+  --color-on-success: #FFFFFF;
+  --color-success-container: #D1FAE5;
+  --color-on-success-container: #047857;
+  --color-warning: #F59E0B;
+  --color-on-warning: #FFFFFF;
+  --color-warning-container: #FEF3C7;
+  --color-on-warning-container: #92400E;
+
   /* Aurora Theme - Background & Surface Colors */
   --color-background: #FAFCFF;
   --color-on-background: #1A1B23;
-  --color-surface: #FAFCFF;
+  --color-surface: #FFFFFF;
   --color-on-surface: #1A1B23;
-  --color-surface-variant: #F1F4F9;
+  --color-surface-variant: #F1F5F9;
   --color-on-surface-variant: #475569;
-  --color-surface-container-lowest: #FFFFFF;
-  --color-surface-container-low: #F8FAFC;
-  --color-surface-container: #F1F5F9;
-  --color-surface-container-high: #E2E8F0;
-  --color-surface-container-highest: #CBD5E1;
+  --color-surface-container-lowest: #F8FAFC;
+  --color-surface-container-low: #F1F5F9;
+  --color-surface-container: #E2E8F0;
+  --color-surface-container-high: #CBD5E1;
+  --color-surface-container-highest: #94A3B8;
   --color-surface-dim: #E2E8F0;
   --color-surface-bright: #FFFFFF;
   --background: var(--color-background);
@@ -61,10 +75,6 @@
   --surface-bright: var(--color-surface-bright);
 
   /* Material 3 Expressive Color Tokens - Error */
-  --color-error: #DC2626;
-  --color-error-container: #FEE2E2;
-  --color-on-error: #FFFFFF;
-  --color-on-error-container: #7F1D1D;
   --error: var(--color-error);
   --error-container: var(--color-error-container);
   --on-error: var(--color-on-error);
@@ -137,6 +147,43 @@
   --elevation-level4: 0px 2px 3px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
   --elevation-level5: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
 
+  /* Material 3 Motion Tokens */
+  /* Duration tokens */
+  --motion-duration-short1: 50ms;
+  --motion-duration-short2: 100ms;
+  --motion-duration-short3: 150ms;
+  --motion-duration-short4: 200ms;
+  --motion-duration-medium1: 250ms;
+  --motion-duration-medium2: 300ms;
+  --motion-duration-medium3: 350ms;
+  --motion-duration-medium4: 400ms;
+  --motion-duration-long1: 450ms;
+  --motion-duration-long2: 500ms;
+  --motion-duration-long3: 550ms;
+  --motion-duration-long4: 600ms;
+  --motion-duration-extra-long1: 700ms;
+  --motion-duration-extra-long2: 800ms;
+  --motion-duration-extra-long3: 900ms;
+  --motion-duration-extra-long4: 1000ms;
+
+  /* Easing tokens */
+  --motion-easing-linear: linear;
+  --motion-easing-standard: cubic-bezier(0.2, 0, 0, 1.0);
+  --motion-easing-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --motion-easing-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1.0);
+  --motion-easing-emphasized-accelerate: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --motion-easing-emphasized-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+  --motion-easing-legacy: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Animation tokens for common patterns */
+  --animation-fade-in: var(--motion-duration-short4) var(--motion-easing-standard);
+  --animation-fade-out: var(--motion-duration-short3) var(--motion-easing-standard);
+  --animation-slide-in: var(--motion-duration-medium2) var(--motion-easing-emphasized-decelerate);
+  --animation-slide-out: var(--motion-duration-medium1) var(--motion-easing-emphasized-accelerate);
+  --animation-scale-in: var(--motion-duration-medium2) var(--motion-easing-emphasized-decelerate);
+  --animation-scale-out: var(--motion-duration-short4) var(--motion-easing-emphasized-accelerate);
+
   /* Shape Tokens */
   --shape-corner-none: 0px;
   --shape-corner-extra-small: 4px;
@@ -195,7 +242,7 @@
     /* Aurora Theme - Dark Mode Primary Colors */
     --color-primary: #A78BFA;
     --color-primary-accent: #C084FC;
-    --color-primary-container: #7C3AED;
+    --color-primary-container: #5B21B6;
     --color-on-primary: #1E1B4B;
     --color-on-primary-container: #EDE9FE;
     --primary: var(--color-primary);
@@ -203,11 +250,11 @@
     --on-primary: var(--color-on-primary);
     --on-primary-container: var(--color-on-primary-container);
 
-    /* Material 3 Dark Mode Secondary Colors */
-    --color-secondary: #C9C3DC;
-    --color-secondary-container: #474459;
-    --color-on-secondary: #312E41;
-    --color-on-secondary-container: #E5DFF9;
+    /* Aurora Theme - Dark Mode Secondary Colors */
+    --color-secondary: #5EEAD4;
+    --color-secondary-container: #0D9488;
+    --color-on-secondary: #042F2E;
+    --color-on-secondary-container: #CCFBF1;
     --secondary: var(--color-secondary);
     --secondary-container: var(--color-secondary-container);
     --on-secondary: var(--color-on-secondary);
@@ -224,17 +271,19 @@
     --on-tertiary-container: var(--color-on-tertiary-container);
 
     /* Aurora Theme - Dark Mode Background & Surface Colors */
-    --color-background: #131318;
-    --color-on-background: #F8FAFC;
-    --color-surface: #131318;
-    --color-on-surface: #F8FAFC;
-    --color-surface-variant: #1F1F23;
-    --color-on-surface-variant: #E2E8F0;
-    --color-surface-container-lowest: #0F0F14;
-    --color-surface-container-low: #18181D;
-    --color-surface-container: #1E1E23;
-    --color-surface-container-high: #262629;
-    --color-surface-container-highest: #2E2E32;
+    --color-background: #0F172A;
+    --color-on-background: #E2E8F0;
+    --color-surface: #1E293B;
+    --color-on-surface: #F1F5F9;
+    --color-surface-variant: #334155;
+    --color-on-surface-variant: #94A3B8;
+    --color-surface-container-lowest: #0F172A;
+    --color-surface-container-low: #1E293B;
+    --color-surface-container: #334155;
+    --color-surface-container-high: #475569;
+    --color-surface-container-highest: #64748B;
+    --color-surface-dim: #0F172A;
+    --color-surface-bright: #1E293B;
     --color-surface-dim: #0F0F14;
     --color-surface-bright: #32323A;
     --background: var(--color-background);

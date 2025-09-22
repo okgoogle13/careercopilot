@@ -112,7 +112,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
               </div>
               <Button
                 variant={shareLink ? 'default' : 'outline'}
-                size="sm"
+                size="small"
                 onClick={handleCopyLink}
                 disabled={!shareLink}
                 className="h-8"
@@ -145,8 +145,8 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                 <span className="text-sm font-medium">Invite people</span>
               </div>
               <Button
-                variant="outline"
-                size="sm"
+                variant="outlined"
+                size="small"
                 onClick={() => setInviteSectionOpen(!inviteSectionOpen)}
                 className="h-8"
               >
@@ -221,7 +221,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                     </div>
                     <div className="flex items-center space-x-2">
                       {collab.status === 'pending' && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outlined" className="text-xs">
                           Pending
                         </Badge>
                       )}
@@ -235,8 +235,8 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                         <option value="edit">Can edit</option>
                       </select>
                       <Button
-                        variant="ghost"
-                        size="icon"
+                        variant="text"
+                        size="small"
                         className="h-8 w-8"
                         onClick={() => onRemoveCollaborator?.(collab.id)}
                       >

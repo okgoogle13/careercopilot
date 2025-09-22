@@ -62,7 +62,7 @@ export function Settings({ onBack }: SettingsProps) {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="sm" onClick={onBack}>
+          <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Dashboard
           </Button>
@@ -136,7 +136,7 @@ export function Settings({ onBack }: SettingsProps) {
                       Download all your data in JSON format
                     </p>
                   </div>
-                  <Button variant="outline" size="sm" onClick={handleExportData}>
+                  <Button variant="outlined" size="small" onClick={handleExportData}>
                     <Download className="w-4 h-4 mr-2" />
                     Export
                   </Button>
@@ -149,7 +149,7 @@ export function Settings({ onBack }: SettingsProps) {
                       Import data from another account
                     </p>
                   </div>
-                  <Button variant="outline" size="sm" onClick={handleImportData}>
+                  <Button variant="outlined" size="small" onClick={handleImportData}>
                     <Upload className="w-4 h-4 mr-2" />
                     Import
                   </Button>
@@ -247,7 +247,7 @@ export function Settings({ onBack }: SettingsProps) {
                   </p>
 
                   {!showDeleteConfirm ? (
-                    <Button variant="destructive" onClick={handleDeleteAccount} className="w-full">
+                    <Button variant="outlined" onClick={handleDeleteAccount} className="w-full">
                       <Trash2 className="w-4 h-4 mr-2" />
                       Delete Account
                     </Button>
@@ -258,14 +258,14 @@ export function Settings({ onBack }: SettingsProps) {
                       </p>
                       <div className="flex gap-3">
                         <Button
-                          variant="outline"
+                          variant="outlined"
                           onClick={() => setShowDeleteConfirm(false)}
                           className="flex-1"
                         >
                           Cancel
                         </Button>
                         <Button
-                          variant="destructive"
+                          variant="outlined"
                           onClick={handleDeleteAccount}
                           className="flex-1"
                         >

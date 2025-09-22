@@ -19,12 +19,12 @@ export const M3ButtonTest = () => {
 
       {/* Test legacy variants (should map correctly) */}
       <div className="space-x-2">
-        <Button variant="default">Default</Button>
-        <Button variant="destructive">Destructive</Button>
+        <Button variant="elevation">Default</Button>
+        <Button variant="outlined">Destructive</Button>
         <Button variant="secondary">Secondary</Button>
-        <Button variant="ghost">Ghost</Button>
+        <Button variant="text">Ghost</Button>
         <Button variant="link">Link</Button>
-        <Button variant="outline">Outline</Button>
+        <Button variant="outlined">Outline</Button>
       </div>
 
       {/* Test Aurora Button */}

@@ -318,33 +318,6 @@ const createM3Theme = (mode: 'light' | 'dark' = 'dark'): Theme => createTheme({
           transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
         },
       },
-      variants: [
-        {
-          props: { variant: 'interactive' },
-          style: {
-            cursor: 'pointer',
-            '&:hover': {
-              backgroundColor: colors.surfaceContainerHigh,
-              borderColor: colors.outline,
-              boxShadow: `var(--elevation-level2), 0 0 20px ${alpha(colors.ccPrimary, 0.1)}`,
-              transform: 'translateY(-1px)',
-            },
-            '&:active': {
-              transform: 'translateY(0)',
-              boxShadow: 'var(--elevation-level1)',
-            },
-          },
-        },
-        {
-          props: { variant: 'selected' },
-          style: {
-            backgroundColor: colors.primaryContainer,
-            borderColor: colors.ccPrimary,
-            borderWidth: '2px',
-            boxShadow: `0 0 0 1px ${alpha(colors.ccPrimary, 0.2)}`,
-          },
-        },
-      ],
     },
     MuiTextField: {
       styleOverrides: {

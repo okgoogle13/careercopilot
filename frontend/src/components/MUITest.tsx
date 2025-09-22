@@ -39,7 +39,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
   });
 
   return (
-    <LayoutContainer size="lg">
+    <LayoutContainer size="large">
       <LayoutStack spacing={4}>
         <Box>
           <Typography variant="h3" component="h1" gutterBottom>
@@ -51,13 +51,13 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
         </Box>
 
         <LayoutFlex justify="space-between" align="center" wrap gap={2}>
-          <Button variant="default" onClick={onBack}>
+          <Button variant="elevation" onClick={onBack}>
             Back to App
           </Button>
           <LayoutFlex gap={2}>
-            <Button variant="outline">Outlined Button</Button>
+            <Button variant="outlined">Outlined Button</Button>
             <Button variant="secondary">Secondary</Button>
-            <Button variant="default" onClick={() => setDialogOpen(true)}>
+            <Button variant="elevation" onClick={() => setDialogOpen(true)}>
               Open Dialog
             </Button>
           </LayoutFlex>
@@ -65,7 +65,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
 
         <LayoutGrid spacing={3}>
           <LayoutGridItem xs={12} md={4}>
-            <Card variant="default">
+            <Card variant="elevation">
               <CardHeader>
                 <CardTitle>Default Card</CardTitle>
               </CardHeader>
@@ -75,17 +75,17 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                   applied consistently.
                 </Typography>
                 <LayoutFlex gap={1} wrap sx={{ mt: 2 }}>
-                  <Badge variant="default">Default</Badge>
+                  <Badge variant="elevation">Default</Badge>
                   <Badge variant="secondary">Secondary</Badge>
-                  <Badge variant="outline">Outline</Badge>
-                  <Badge variant="destructive">Error</Badge>
+                  <Badge variant="outlined">Outline</Badge>
+                  <Badge variant="outlined">Error</Badge>
                 </LayoutFlex>
               </CardContent>
             </Card>
           </LayoutGridItem>
 
           <LayoutGridItem xs={12} md={4}>
-            <Card variant="interactive">
+            <Card variant="elevation">
               <CardHeader>
                 <CardTitle>Form Components</CardTitle>
               </CardHeader>
@@ -101,7 +101,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
           </LayoutGridItem>
 
           <LayoutGridItem xs={12} md={4}>
-            <Card variant="selected">
+            <Card variant="elevation">
               <CardHeader>
                 <CardTitle>Layout Showcase</CardTitle>
               </CardHeader>
@@ -112,7 +112,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                   </LayoutCard>
                   <LayoutFlex justify="space-between" align="center">
                     <Typography variant="body2">Flex Layout</Typography>
-                    <Button variant="ghost" size="sm">
+                    <Button variant="text" size="small">
                       Action
                     </Button>
                   </LayoutFlex>
@@ -204,10 +204,10 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
             </LayoutStack>
           </DialogContent>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDialogOpen(false)}>
+            <Button variant="outlined" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
-            <Button variant="default" onClick={() => setDialogOpen(false)}>
+            <Button variant="elevation" onClick={() => setDialogOpen(false)}>
               Send Message
             </Button>
           </DialogFooter>

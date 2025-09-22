@@ -1,6 +1,64 @@
 /* Additional utility classes to support the enhanced features */
 
-/* Easing functions for smooth animations */
+/* Material 3 Elevation System Utility Classes */
+.elevation-0 {
+  box-shadow: var(--elevation-level0);
+}
+
+.elevation-1 {
+  box-shadow: var(--elevation-level1);
+}
+
+.elevation-2 {
+  box-shadow: var(--elevation-level2);
+}
+
+.elevation-3 {
+  box-shadow: var(--elevation-level3);
+}
+
+.elevation-4 {
+  box-shadow: var(--elevation-level4);
+}
+
+.elevation-5 {
+  box-shadow: var(--elevation-level5);
+}
+
+/* Material 3 Motion Utility Classes */
+/* Duration utilities */
+.transition-short1 { transition-duration: var(--motion-duration-short1); }
+.transition-short2 { transition-duration: var(--motion-duration-short2); }
+.transition-short3 { transition-duration: var(--motion-duration-short3); }
+.transition-short4 { transition-duration: var(--motion-duration-short4); }
+.transition-medium1 { transition-duration: var(--motion-duration-medium1); }
+.transition-medium2 { transition-duration: var(--motion-duration-medium2); }
+.transition-medium3 { transition-duration: var(--motion-duration-medium3); }
+.transition-medium4 { transition-duration: var(--motion-duration-medium4); }
+.transition-long1 { transition-duration: var(--motion-duration-long1); }
+.transition-long2 { transition-duration: var(--motion-duration-long2); }
+.transition-long3 { transition-duration: var(--motion-duration-long3); }
+.transition-long4 { transition-duration: var(--motion-duration-long4); }
+
+/* Easing utilities */
+.ease-linear { transition-timing-function: var(--motion-easing-linear); }
+.ease-standard { transition-timing-function: var(--motion-easing-standard); }
+.ease-standard-accelerate { transition-timing-function: var(--motion-easing-standard-accelerate); }
+.ease-standard-decelerate { transition-timing-function: var(--motion-easing-standard-decelerate); }
+.ease-emphasized { transition-timing-function: var(--motion-easing-emphasized); }
+.ease-emphasized-accelerate { transition-timing-function: var(--motion-easing-emphasized-accelerate); }
+.ease-emphasized-decelerate { transition-timing-function: var(--motion-easing-emphasized-decelerate); }
+.ease-legacy { transition-timing-function: var(--motion-easing-legacy); }
+
+/* Combined animation utilities */
+.animate-fade-in { animation: var(--animation-fade-in); }
+.animate-fade-out { animation: var(--animation-fade-out); }
+.animate-slide-in { animation: var(--animation-slide-in); }
+.animate-slide-out { animation: var(--animation-slide-out); }
+.animate-scale-in { animation: var(--animation-scale-in); }
+.animate-scale-out { animation: var(--animation-scale-out); }
+
+/* Legacy easing functions (kept for compatibility) */
 .ease-cubic-bezier {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }

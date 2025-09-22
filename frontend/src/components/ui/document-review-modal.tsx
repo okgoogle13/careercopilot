@@ -296,7 +296,7 @@ export function DocumentReviewModal({
           <div className="flex items-center justify-between gap-4 mt-4 pt-4 border-t">
             <div className="flex gap-2">
               <Button
-                variant="outline"
+                variant="outlined"
                 onClick={() => onEdit?.({ ...document, content: editedContent })}
                 className="flex items-center gap-2"
               >
@@ -304,7 +304,7 @@ export function DocumentReviewModal({
                 Continue Editing
               </Button>
               <Button
-                variant="outline"
+                variant="outlined"
                 onClick={() => onDownload?.(document)}
                 className="flex items-center gap-2"
               >
@@ -314,7 +314,7 @@ export function DocumentReviewModal({
             </div>
 
             <div className="flex gap-2">
-              <Button variant="outline" onClick={() => onOpenChange?.(false)}>
+              <Button variant="outlined" onClick={() => onOpenChange?.(false)}>
                 Cancel
               </Button>
               <Button
