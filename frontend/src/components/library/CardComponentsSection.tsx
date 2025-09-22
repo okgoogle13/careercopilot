@@ -134,8 +134,8 @@ export function CardComponentsSection() {
                   </div>
                   <CardAction>
                     <Button
-                      variant="ghost"
-                      size="sm"
+                      variant="text"
+                      size="small"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleFavoriteToggle(profile.id);
@@ -187,7 +187,7 @@ export function CardComponentsSection() {
                     {profile.lastUpdated || 'Click to create'}
                   </span>
                   {selectedCard === profile.id && (
-                    <Badge variant="default" className="bg-primary">
+                    <Badge variant="elevation" className="bg-primary">
                       Selected
                     </Badge>
                   )}

@@ -71,7 +71,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button
-              variant="ghost"
+              variant="text"
               onClick={onBack}
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
             >
@@ -81,7 +81,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           </div>
           <div className="flex items-center gap-3">
             <Button
-              variant="default"
+              variant="elevation"
               onClick={onNext}
               className="flex items-center gap-2"
             >
@@ -343,7 +343,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
         {/* Action Buttons */}
         <div className="flex justify-between items-center pt-8 border-t border-border">
           <Button
-            variant="outline"
+            variant="outlined"
             onClick={onBack}
             className="flex items-center gap-2"
           >

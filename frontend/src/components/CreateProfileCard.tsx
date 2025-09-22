@@ -17,7 +17,7 @@ interface CreateProfileCardProps {
 export function CreateProfileCard({ onCreate }: CreateProfileCardProps) {
   return (
     <Card
-      variant="interactive"
+      variant="elevation"
       className="p-6 flex flex-col items-center justify-center text-center space-y-4 h-full"
     >
       <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center">

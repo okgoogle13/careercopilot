@@ -181,7 +181,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
             <h1 className="text-2xl font-bold text-foreground mb-2">Welcome to Career Copilot</h1>
           </div>
           <div className="flex items-center gap-4">
-            <Button onClick={onNavigateToSettings} variant="ghost" size="sm">
+            <Button onClick={onNavigateToSettings} variant="text" size="small">
               <Settings className="w-4 h-4" />
             </Button>
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
@@ -203,7 +203,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
           <Button
             onClick={() => onCreateProfile?.()}
             className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg"
-            size="lg"
+            size="large"
           >
             <Plus className="w-5 h-5 mr-2" />
             Create Your First Document
@@ -231,7 +231,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
             <Plus className="w-4 h-4 mr-2" />
             Create Document
           </Button>
-          <Button onClick={onNavigateToSettings} variant="ghost" size="sm">
+          <Button onClick={onNavigateToSettings} variant="text" size="small">
             <Settings className="w-4 h-4" />
           </Button>
           <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
@@ -384,7 +384,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
               <Button
                 onClick={onNavigateToCareerGrowth}
                 className="w-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20"
-                variant="outline"
+                variant="outlined"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
                 Explore Career Tools

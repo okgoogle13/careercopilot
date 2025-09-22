@@ -96,8 +96,8 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                 <div className="flex items-center space-x-1">
                   {onDownload && (
                     <Button
-                      variant="ghost"
-                      size="icon"
+                      variant="text"
+                      size="small"
                       onClick={() => onDownload(version)}
                       className="h-8 w-8"
                       title="Download this version"
@@ -108,8 +108,8 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   
                   {onRestore && !version.isCurrent && (
                     <Button
-                      variant="outline"
-                      size="sm"
+                      variant="outlined"
+                      size="small"
                       onClick={() => onRestore(version)}
                       className="h-8"
                     >
@@ -119,8 +119,8 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   
                   {onDelete && !version.isCurrent && (
                     <Button
-                      variant="ghost"
-                      size="icon"
+                      variant="text"
+                      size="small"
                       onClick={() => onDelete(version)}
                       className="h-8 w-8 text-destructive hover:text-destructive"
                       title="Delete this version"

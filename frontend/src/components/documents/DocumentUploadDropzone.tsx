@@ -264,15 +264,15 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
 
           <div className="flex justify-end space-x-2 pt-2">
             <Button
-              variant="outline"
-              size="sm"
+              variant="outlined"
+              size="small"
               onClick={() => setFiles([])}
               disabled={isUploading}
             >
               Cancel
             </Button>
             <Button
-              size="sm"
+              size="small"
               onClick={handleUpload}
               disabled={isUploading || files.length === 0}
             >

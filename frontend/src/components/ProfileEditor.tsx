@@ -299,8 +299,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   </AvatarFallback>
                 </Avatar>
                 <Button
-                  size="icon"
-                  variant="outline"
+                  size="small"
+                  variant="outlined"
                   className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-white shadow-sm"
                 >
                   <Camera className="h-4 w-4" />
@@ -459,7 +459,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <AIProcessingLoading message="Generating AI summary..." />
                       ) : (
                         <AnimatedButton
-                          variant="outline"
+                          variant="outlined"
                           animation="shimmer"
                           className="flex-1"
                           onClick={handleGenerateSummary}
@@ -470,7 +470,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       )}
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant="outline" size="icon">
+                          <Button variant="outlined" size="small">
                             <Target className="h-4 w-4" />
                           </Button>
                         </TooltipTrigger>
@@ -522,7 +522,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     </div>
                     <h3 className="font-semibold text-lg">Skills & Expertise</h3>
                   </div>
-                  <Button variant="outline" size="sm">
+                  <Button variant="outlined" size="small">
                     <Plus className="w-4 h-4 mr-2" />
                     Import from Resume
                   </Button>
@@ -590,8 +590,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                                     Level {skill.level}/10
                                   </span>
                                   <Button
-                                    variant="ghost"
-                                    size="icon"
+                                    variant="text"
+                                    size="small"
                                     className="h-6 w-6"
                                     onClick={() => removeSkill(skill.keyword)}
                                   >
@@ -640,8 +640,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     ].map((suggestion) => (
                       <Button
                         key={suggestion}
-                        variant="outline"
-                        size="sm"
+                        variant="outlined"
+                        size="small"
                         className="text-xs border-blue-300 hover:bg-blue-100"
                         onClick={() => setNewSkill(suggestion)}
                       >
@@ -689,7 +689,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                             <TooltipContent>Verified profile</TooltipContent>
                           </Tooltip>
                         )}
-                        <Button variant="ghost" size="icon" className="text-red-500">
+                        <Button variant="text" size="small" className="text-red-500">
                           <X className="w-4 h-4" />
                         </Button>
                       </div>
@@ -697,7 +697,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   })}
 
                   <Button
-                    variant="outline"
+                    variant="outlined"
                     className="w-full"
                     onClick={() =>
                       setSocialLinks([
@@ -787,7 +787,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           {/* Enhanced Actions */}
           <div className="flex justify-between items-center mt-8 pt-6 border-t">
             <div className="flex items-center gap-4">
-              <Button variant="outline" onClick={onBack} size="lg">
+              <Button variant="outlined" onClick={onBack} size="large">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
               </Button>
@@ -798,13 +798,13 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </div>
 
             <div className="flex gap-2">
-              <Button variant="outline" size="lg">
+              <Button variant="outlined" size="large">
                 <Eye className="w-4 h-4 mr-2" />
                 Preview
               </Button>
               <Button
                 onClick={onNext}
-                size="lg"
+                size="large"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
               >
                 <Star className="w-4 h-4 mr-2" />

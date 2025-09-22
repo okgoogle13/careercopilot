@@ -52,7 +52,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       <div className="max-w-3xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="sm" onClick={onBack}>
+          <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </Button>
@@ -132,7 +132,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               onClick={handleAnalyze}
               disabled={!isValidInput() || isAnalyzing}
               className="bg-primary hover:bg-primary/90 px-8 py-6 text-lg"
-              size="lg"
+              size="large"
             >
               {isAnalyzing ? (
                 <>

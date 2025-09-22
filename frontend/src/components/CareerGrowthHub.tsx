@@ -218,11 +218,11 @@ export function CareerGrowthHub({
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
-            <Button variant="ghost" size="sm" onClick={onBack}>
+            <Button variant="text" size="small" onClick={onBack}>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outlined" size="small">
               <Plus className="w-4 h-4 mr-2" />
               Add Goal
             </Button>
@@ -416,7 +416,7 @@ export function CareerGrowthHub({
 
                         <Button
                           className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90"
-                          size="lg"
+                          size="large"
                         >
                           Explore {feature.title}
                           <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

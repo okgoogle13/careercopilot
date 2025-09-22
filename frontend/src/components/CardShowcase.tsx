@@ -54,7 +54,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
+            <Button variant="text" size="small" onClick={onBack} className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Dashboard
             </Button>
@@ -68,7 +68,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
         {/* Card Variants Documentation */}
         <div className="grid gap-6 mb-8">
-          <Card variant="default">
+          <Card variant="elevation">
             <CardHeader
               title={<Typography variant='h3'>Card Component Variants</Typography>}
               subheader={<Typography variant='body2' color='text.secondary'>Five distinct states designed for different interaction patterns and data states
@@ -179,8 +179,8 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                       </div>
                       <CardAction>
                         <Button
-                          variant="ghost"
-                          size="sm"
+                          variant="text"
+                          size="small"
                           onClick={(e) => {
                             e.stopPropagation();
                             handleFavoriteToggle(profile.id);
@@ -232,7 +232,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                         {profile.lastUpdated || 'Click to create'}
                       </span>
                       {selectedCard === profile.id && (
-                        <Badge variant="default" className="bg-primary">
+                        <Badge variant="elevation" className="bg-primary">
                           Selected
                         </Badge>
                       )}
@@ -278,7 +278,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
               ].map((stat, index) => {
                 const IconComponent = stat.icon;
                 return (
-                  <Card key={index} variant="default">
+                  <Card key={index} variant="elevation">
                     <CardContent className="pt-6">
                       <div className="flex items-center gap-4">
                         <div className="p-2 bg-primary/10 rounded-lg">
@@ -304,14 +304,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               {/* Featured Template - Selected */}
-              <Card variant="selected">
+              <Card variant="elevation">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div>
                       <CardTitle>Modern Minimal</CardTitle>
                       <CardDescription>Professional & Clean</CardDescription>
                     </div>
-                    <Badge variant="default">Recommended</Badge>
+                    <Badge variant="elevation">Recommended</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -335,7 +335,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                 { name: 'Executive Pro', description: 'Corporate & Formal' },
                 { name: 'Creative Portfolio', description: 'Design & Media' },
               ].map((template, index) => (
-                <Card key={index} variant="interactive">
+                <Card key={index} variant="elevation">
                   <CardHeader
                     title={<Typography variant='h3'>{template.name}</Typography>}
                     subheader={<Typography variant='body2' color='text.secondary'>{template.description}</Typography>}>
@@ -354,7 +354,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outlined" className="w-full">
                       Select Template
                     </Button>
                   </CardFooter>
@@ -416,7 +416,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   <CheckCircle className="w-4 h-4 text-green-500" />
                   <h4 className="font-medium">2. Loaded</h4>
                 </div>
-                <Card variant="interactive" className="p-6 space-y-4">
+                <Card variant="elevation" className="p-6 space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
                       <span className="text-white font-medium">ND</span>
@@ -444,7 +444,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   <Star className="w-4 h-4 text-primary" />
                   <h4 className="font-medium">3. Selected</h4>
                 </div>
-                <Card variant="selected" className="p-6 space-y-4">
+                <Card variant="elevation" className="p-6 space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
                       <span className="text-white font-medium">ND</span>
@@ -464,7 +464,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                       <span className="text-primary">92%</span>
                     </div>
                   </div>
-                  <Badge variant="default" className="bg-primary">
+                  <Badge variant="elevation" className="bg-primary">
                     Selected
                   </Badge>
                 </Card>
@@ -487,7 +487,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
               Experience these card variants in action with realistic loading, error, and data
               scenarios.
             </p>
-            <Card variant="interactive">
+            <Card variant="elevation">
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -510,7 +510,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
           {/* Usage Guidelines */}
           <section>
             <h2 className="mb-4">Usage Guidelines</h2>
-            <Card variant="default">
+            <Card variant="elevation">
               <CardContent className="pt-6">
                 <div className="grid md:grid-cols-5 gap-6">
                   <div>

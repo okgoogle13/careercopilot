@@ -468,10 +468,8 @@ export default function App() {
       case 'ats-analysis':
         return (
           <ATSAnalysisDashboard
-            onContinue={handleATSAnalysisComplete}
+            onNext={handleATSAnalysisComplete}
             onBack={handleBackToJobInput}
-            activeTab={dashboardActiveTab}
-            onTabChange={handleDashboardTabChange}
           />
         );
 

@@ -8,7 +8,7 @@ export interface TextareaProps extends Omit<TextFieldProps, 'variant' | 'multili
   containerSx?: SxProps<Theme>;
 }
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+const Textarea = React.forwardRef<HTMLDivElement, TextareaProps>(
   (
     {
       containerClassName,

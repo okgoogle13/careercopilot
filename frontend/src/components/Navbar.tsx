@@ -246,19 +246,19 @@ export function Navbar({
           }}
         >
           <MenuItem onClick={handleMenuClose}>
-            <Person sx={{ mr: 1.5 }} />
+            <Person sx={{ marginInlineEnd: 1.5 }} />
             Profile
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
-            <Settings sx={{ mr: 1.5 }} />
+            <Settings sx={{ marginInlineEnd: 1.5 }} />
             Settings
           </MenuItem>
           <MenuItem onClick={handleMenuClose}>
-            <Help sx={{ mr: 1.5 }} />
+            <Help sx={{ marginInlineEnd: 1.5 }} />
             Help & Support
           </MenuItem>
           <MenuItem onClick={handleMenuClose} sx={{ color: 'error.main' }}>
-            <Logout sx={{ mr: 1.5 }} />
+            <Logout sx={{ marginInlineEnd: 1.5 }} />
             Sign Out
           </MenuItem>
         </Menu>

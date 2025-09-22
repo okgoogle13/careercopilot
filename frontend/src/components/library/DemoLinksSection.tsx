@@ -23,7 +23,7 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
       description="Explore advanced component functionality with interactive demonstrations."
     >
       <div className="grid md:grid-cols-2 gap-4">
-        <Card variant="interactive">
+        <Card variant="elevation">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -42,7 +42,7 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
           </CardContent>
         </Card>
 
-        <Card variant="interactive">
+        <Card variant="elevation">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">

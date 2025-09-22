@@ -56,12 +56,12 @@ export function AnimatedModal({
 
               </CardHeader>
               <CardContent>{children}</CardContent>
-              <CardFooter className="flex justify-end gap-2">
-                <Button variant="outline" onClick={onClose}>
+              <CardActions sx={{ justifyContent: 'flex-end', gap: 1 }}>
+                <Button variant="outlined" onClick={onClose}>
                   Cancel
                 </Button>
                 <Button onClick={onClose}>Confirm</Button>
-              </CardFooter>
+              </CardActions>
             </Card>
           </motion.div>
         </>
@@ -281,13 +281,13 @@ export function AnimatedCard({
 // Animated Button Component
 export function AnimatedButton({
   children,
-  variant = 'default',
+  variant = 'contained',
   animation = 'scale',
   className = '',
   ...props
 }: {
   children: React.ReactNode;
-  variant?: 'default' | 'outline' | 'ghost' | 'destructive';
+  variant?: 'contained' | 'outlined' | 'text';
   animation?: 'scale' | 'lift' | 'glow' | 'shimmer';
   className?: string;
   [key: string]: any;
