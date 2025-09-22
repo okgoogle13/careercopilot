@@ -1,5 +1,21 @@
 import { useState, useRef, type ChangeEvent, type DragEvent } from 'react';
-import { Button } from '@/components/ui/button';
+import {
+  Box,
+  Button,
+  Typography,
+  CircularProgress,
+  Alert,
+  AlertTitle,
+  Stack,
+  useTheme,
+  alpha,
+  Paper,
+} from '@mui/material';
+import {
+  CloudUpload,
+  Warning,
+  Error as ErrorIcon,
+} from '@mui/icons-material';
 import { logError, logUserAction, logInfo } from '@/utils/logger';
 
 interface UploadResumeProps {
@@ -36,6 +52,7 @@ const ALLOWED_FILE_TYPES = [
 const ALLOWED_EXTENSIONS = ['.pdf', '.docx', '.doc', '.txt'];
 
 export function UploadResume({ onUploadSuccess, onUploadError, className }: UploadResumeProps) {
+  const theme = useTheme();
   const [isProcessing, setIsProcessing] = useState(false);
   const [validationError, setValidationError] = useState<ValidationError | null>(null);
   const [uploadError, setUploadError] = useState<Error | null>(null);
@@ -209,24 +226,21 @@ export function UploadResume({ onUploadSuccess, onUploadError, className }: Uplo
   };
 
   return (
-    <div className={`w-full max-w-md mx-auto ${className}`}>
+    <Box sx={{ width: '100%', maxWidth: 448, mx: 'auto', ...className }}>
       {/* Hidden file input */}
-      <input
+      <Box
+        component="input"
         ref={fileInputRef}
         type="file"
         accept=".pdf,.docx,.doc,.txt"
         onChange={handleInputChange}
-        className="hidden"
+        sx={{ display: 'none' }}
         aria-label="Resume file upload"
       />
 
       {/* Upload area */}
-      <div
-        className={`
-          relative border-2 border-dashed rounded-lg p-8 text-center transition-colors
-          ${dragActive ? 'border-primary bg-primary/5' : 'border-muted-foreground/25'}
-          ${isProcessing ? 'pointer-events-none opacity-50' : 'cursor-pointer hover:border-primary hover:bg-primary/5'}
-        `}
+      <Paper
+        elevation={0}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
@@ -240,141 +254,164 @@ export function UploadResume({ onUploadSuccess, onUploadError, className }: Uplo
             openFileDialog();
           }
         }}
+        sx={{
+          position: 'relative',
+          border: `2px dashed ${
+            dragActive ? theme.palette.primary.main : alpha(theme.palette.text.secondary, 0.25)
+          }`,
+          borderRadius: 2,
+          p: 4,
+          textAlign: 'center',
+          transition: 'all 0.2s ease-in-out',
+          cursor: isProcessing ? 'default' : 'pointer',
+          pointerEvents: isProcessing ? 'none' : 'auto',
+          opacity: isProcessing ? 0.5 : 1,
+          bgcolor: dragActive
+            ? alpha(theme.palette.primary.main, 0.05)
+            : 'transparent',
+          '&:hover': !isProcessing ? {
+            borderColor: theme.palette.primary.main,
+            bgcolor: alpha(theme.palette.primary.main, 0.05),
+          } : {},
+          '&:focus-visible': {
+            outline: `2px solid ${theme.palette.primary.main}`,
+            outlineOffset: 2,
+          },
+        }}
       >
         {isProcessing ? (
-          <div className="space-y-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
-            <div>
-              <p className="text-sm font-medium">Processing your resume...</p>
-              <p className="text-xs text-muted-foreground mt-1">
+          <Stack spacing={2} alignItems="center">
+            <CircularProgress
+              size={32}
+              sx={{ color: theme.palette.primary.main }}
+            />
+            <Box>
+              <Typography variant="body2" fontWeight="500">
+                Processing your resume...
+              </Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ mt: 0.5, display: 'block' }}>
                 This may take a few moments
-              </p>
-            </div>
-          </div>
+              </Typography>
+            </Box>
+          </Stack>
         ) : (
-          <div className="space-y-4">
-            <svg
-              className="w-10 h-10 mx-auto text-muted-foreground"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-              />
-            </svg>
-            <div>
-              <p className="text-sm font-medium">
+          <Stack spacing={2} alignItems="center">
+            <CloudUpload
+              sx={{
+                fontSize: 40,
+                color: theme.palette.text.secondary
+              }}
+            />
+            <Box>
+              <Typography variant="body2" fontWeight="500">
                 Drop your resume here or click to browse
-              </p>
-              <p className="text-xs text-muted-foreground mt-1">
+              </Typography>
+              <Typography variant="caption" color="text.secondary" sx={{ mt: 0.5, display: 'block' }}>
                 PDF, DOCX, DOC, or TXT • Max 5MB
-              </p>
-            </div>
-          </div>
+              </Typography>
+            </Box>
+          </Stack>
         )}
-      </div>
+      </Paper>
 
       {/* Validation Error */}
       {validationError && (
-        <div className="mt-4 p-3 bg-destructive/15 border border-destructive/20 rounded-md">
-          <div className="flex items-start space-x-2">
-            <svg
-              className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+        <Alert
+          severity="error"
+          icon={<Warning />}
+          sx={{ mt: 2 }}
+          action={
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={clearError}
+              sx={{
+                height: 32,
+                borderColor: theme.palette.error.main,
+                color: theme.palette.error.main,
+                '&:hover': {
+                  borderColor: theme.palette.error.dark,
+                  bgcolor: alpha(theme.palette.error.main, 0.04),
+                }
+              }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
-              />
-            </svg>
-            <div>
-              <p className="text-sm font-medium text-destructive">
-                Upload Error
-              </p>
-              <p className="text-sm text-destructive/80 mt-1">
-                {validationError.message}
-              </p>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={clearError}
-                className="mt-2 h-8"
-              >
-                Try Another File
-              </Button>
-            </div>
-          </div>
-        </div>
+              Try Another File
+            </Button>
+          }
+        >
+          <AlertTitle>Upload Error</AlertTitle>
+          {validationError.message}
+        </Alert>
       )}
 
       {/* Upload Error with Retry */}
       {uploadError && (
-        <div className="mt-4 p-3 bg-destructive/15 border border-destructive/20 rounded-md">
-          <div className="flex items-start space-x-2">
-            <svg
-              className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <div className="flex-1">
-              <p className="text-sm font-medium text-destructive">
-                Processing Failed
-              </p>
-              <p className="text-sm text-destructive/80 mt-1">
-                {uploadError.message}
-              </p>
-              {retryCount > 0 && (
-                <p className="text-xs text-destructive/60 mt-1">
-                  Attempt {retryCount} of {maxRetries}
-                </p>
-              )}
-              <div className="flex gap-2 mt-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleRetry}
-                  className="h-8"
-                  disabled={isProcessing}
-                >
-                  {retryCount < maxRetries ? 'Try Again' : 'Choose Different File'}
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={clearError}
-                  className="h-8"
-                >
-                  Cancel
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Alert
+          severity="error"
+          icon={<ErrorIcon />}
+          sx={{ mt: 2 }}
+          action={
+            <Stack direction="row" spacing={1}>
+              <Button
+                variant="outlined"
+                size="small"
+                onClick={handleRetry}
+                disabled={isProcessing}
+                sx={{
+                  height: 32,
+                  borderColor: theme.palette.error.main,
+                  color: theme.palette.error.main,
+                  '&:hover': {
+                    borderColor: theme.palette.error.dark,
+                    bgcolor: alpha(theme.palette.error.main, 0.04),
+                  }
+                }}
+              >
+                {retryCount < maxRetries ? 'Try Again' : 'Choose Different File'}
+              </Button>
+              <Button
+                variant="text"
+                size="small"
+                onClick={clearError}
+                sx={{
+                  height: 32,
+                  color: theme.palette.error.main,
+                  '&:hover': {
+                    bgcolor: alpha(theme.palette.error.main, 0.04),
+                  }
+                }}
+              >
+                Cancel
+              </Button>
+            </Stack>
+          }
+        >
+          <AlertTitle>Processing Failed</AlertTitle>
+          <Typography variant="body2">
+            {uploadError.message}
+          </Typography>
+          {retryCount > 0 && (
+            <Typography variant="caption" sx={{ mt: 1, display: 'block', opacity: 0.8 }}>
+              Attempt {retryCount} of {maxRetries}
+            </Typography>
+          )}
+        </Alert>
       )}
 
       {/* Instructions */}
-      <div className="mt-4 text-xs text-muted-foreground space-y-1">
-        <p>• Supported formats: PDF, DOCX, DOC, TXT</p>
-        <p>• Maximum file size: 5MB</p>
-        <p>• Your resume will be analyzed for skills and experience</p>
-      </div>
-    </div>
+      <Box sx={{ mt: 2 }}>
+        <Stack spacing={0.5}>
+          <Typography variant="caption" color="text.secondary">
+            • Supported formats: PDF, DOCX, DOC, TXT
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            • Maximum file size: 5MB
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            • Your resume will be analyzed for skills and experience
+          </Typography>
+        </Stack>
+      </Box>
+    </Box>
   );
 }

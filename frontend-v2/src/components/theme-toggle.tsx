@@ -1,40 +1,108 @@
 'use client';
 
 import * as React from 'react';
-import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
-import { Button } from '@/components/ui/button';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+  IconButton,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  ListItemText,
+  useTheme as useMuiTheme,
+} from '@mui/material';
+import {
+  LightMode,
+  DarkMode,
+  SettingsBrightness,
+} from '@mui/icons-material';
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme();
+  const { setTheme, theme } = useTheme();
+  const muiTheme = useMuiTheme();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleThemeChange = (newTheme: string) => {
+    setTheme(newTheme);
+    handleClose();
+  };
+
+  const getCurrentIcon = () => {
+    switch (theme) {
+      case 'light':
+        return <LightMode />;
+      case 'dark':
+        return <DarkMode />;
+      default:
+        return <SettingsBrightness />;
+    }
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <IconButton
+        onClick={handleClick}
+        size="small"
+        aria-label="Toggle theme"
+        aria-controls={open ? 'theme-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : undefined}
+        sx={{
+          border: `1px solid ${muiTheme.palette.divider}`,
+          '&:hover': {
+            bgcolor: muiTheme.palette.action.hover,
+          },
+        }}
+      >
+        {getCurrentIcon()}
+      </IconButton>
+      <Menu
+        id="theme-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        sx={{
+          '& .MuiPaper-root': {
+            minWidth: 120,
+            mt: 1,
+          },
+        }}
+      >
+        <MenuItem onClick={() => handleThemeChange('light')}>
+          <ListItemIcon>
+            <LightMode fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Light</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={() => handleThemeChange('dark')}>
+          <ListItemIcon>
+            <DarkMode fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Dark</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={() => handleThemeChange('system')}>
+          <ListItemIcon>
+            <SettingsBrightness fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>System</ListItemText>
+        </MenuItem>
+      </Menu>
+    </>
   );
 }
