@@ -53,7 +53,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
           <Button
-            variant="ghost"
+            variant="text"
             onClick={onBack}
             className="text-muted-foreground hover:text-foreground"
           >

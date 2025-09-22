@@ -134,7 +134,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
+            <Button variant="text" size="small" onClick={onBack} className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Component Library
             </Button>
@@ -151,7 +151,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
               </p>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={resetAnimations} className="gap-2">
+              <Button variant="outlined" onClick={resetAnimations} className="gap-2">
                 <RotateCcw className="w-4 h-4" />
                 Reset All
               </Button>
@@ -231,7 +231,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 <CardContent>
                   <AnimatedDropdown
                     trigger={
-                      <Button variant="outline" className="gap-2">
+                      <Button variant="outlined" className="gap-2">
                         Select Option
                         <Sparkles className="w-4 h-4" />
                       </Button>
@@ -301,10 +301,10 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 <CardContent className="space-y-4">
                   <AnimatedProgress value={progress} />
                   <div className="flex gap-2">
-                    <Button size="sm" onClick={simulateProgress} disabled={isPlaying}>
+                    <Button size="small" onClick={simulateProgress} disabled={isPlaying}>
                       Start Progress
                     </Button>
-                    <Button size="sm" variant="outline" onClick={() => setProgress(0)}>
+                    <Button size="small" variant="outlined" onClick={() => setProgress(0)}>
                       Reset
                     </Button>
                   </div>
@@ -344,7 +344,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                   </div>
                   <div className="space-y-2">
                     <Label>Lift Animation</Label>
-                    <AnimatedButton animation="lift" variant="outline">
+                    <AnimatedButton animation="lift" variant="outlined">
                       Lift Effect
                     </AnimatedButton>
                   </div>
@@ -354,7 +354,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                   </div>
                   <div className="space-y-2">
                     <Label>Shimmer Animation</Label>
-                    <AnimatedButton animation="shimmer" variant="outline">
+                    <AnimatedButton animation="shimmer" variant="outlined">
                       Shimmer
                     </AnimatedButton>
                   </div>
@@ -458,7 +458,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   <Button
-                    size="sm"
+                    size="small"
                     onClick={() =>
                       addNotification('success', 'Success! Operation completed successfully.')
                     }
@@ -466,15 +466,15 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     Success Toast
                   </Button>
                   <Button
-                    size="sm"
-                    variant="destructive"
+                    size="small"
+                    variant="outlined"
                     onClick={() => addNotification('error', 'Error! Something went wrong.')}
                   >
                     Error Toast
                   </Button>
                   <Button
-                    size="sm"
-                    variant="outline"
+                    size="small"
+                    variant="outlined"
                     onClick={() =>
                       addNotification('info', 'Info: Here is some helpful information.')
                     }
@@ -482,7 +482,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     Info Toast
                   </Button>
                   <Button
-                    size="sm"
+                    size="small"
                     onClick={() =>
                       addNotification('warning', 'Warning: Please review your settings.')
                     }

@@ -54,8 +54,8 @@ export function KeywordTag({
       <div className="flex items-center gap-1 ml-1">
         {status === 'suggested' && onAdd && (
           <Button
-            size="sm"
-            variant="ghost"
+            size="small"
+            variant="text"
             className="h-5 w-5 p-0 hover:bg-brand-primary/30 text-brand-light hover:text-brand-primary"
             onClick={(e) => {
               e.stopPropagation();
@@ -68,8 +68,8 @@ export function KeywordTag({
 
         {removable && onRemove && (
           <Button
-            size="sm"
-            variant="ghost"
+            size="small"
+            variant="text"
             className="h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-accent-red/30 text-content-secondary hover:text-accent-red"
             onClick={(e) => {
               e.stopPropagation();
@@ -124,20 +124,20 @@ export function KeywordTagGroup({
           <div className="flex items-center gap-2 text-xs">
             {statusCounts.matched && (
               <Badge
-                variant="outline"
+                variant="outlined"
                 className="border-accent-green/50 text-accent-green font-medium"
               >
                 {statusCounts.matched} matched
               </Badge>
             )}
             {statusCounts.missing && (
-              <Badge variant="outline" className="border-accent-red/50 text-accent-red font-medium">
+              <Badge variant="outlined" className="border-accent-red/50 text-accent-red font-medium">
                 {statusCounts.missing} missing
               </Badge>
             )}
             {statusCounts.suggested && (
               <Badge
-                variant="outline"
+                variant="outlined"
                 className="border-brand-primary/50 text-brand-light font-medium"
               >
                 {statusCounts.suggested} suggested
@@ -162,7 +162,7 @@ export function KeywordTagGroup({
 
         {hiddenCount > 0 && (
           <Badge
-            variant="outline"
+            variant="outlined"
             className="border-subtle text-content-secondary hover:border-brand-primary hover:text-brand-light cursor-pointer transition-colors font-medium"
           >
             +{hiddenCount} more

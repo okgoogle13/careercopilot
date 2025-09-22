@@ -15,10 +15,10 @@ export function DisplayComponentsSection() {
     >
       <ComponentDemo title="Badges">
         <div className="flex flex-wrap gap-2">
-          <Badge variant="default">Default</Badge>
+          <Badge variant="elevation">Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
-          <Badge variant="destructive">Destructive</Badge>
-          <Badge variant="outline">Outline</Badge>
+          <Badge variant="outlined">Destructive</Badge>
+          <Badge variant="outlined">Outline</Badge>
           <Badge className="bg-green-500">Custom Green</Badge>
           <Badge className="bg-primary">Primary</Badge>
         </div>
@@ -72,7 +72,7 @@ export function DisplayComponentsSection() {
               This is an informational alert with additional details.
             </AlertDescription>
           </Alert>
-          <Alert variant="destructive">
+          <Alert variant="outlined">
             <AlertTriangle className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>Something went wrong. Please try again later.</AlertDescription>

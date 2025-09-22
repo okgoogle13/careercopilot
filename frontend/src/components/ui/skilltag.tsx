@@ -54,11 +54,11 @@ export const SkillTag: React.FC<SkillTagProps> = ({
       <span className="truncate">{text}</span>
 
       {status === 'suggested' && (
-        <div className="flex items-center gap-1 ml-1">
+        <div className="flex items-center gap-1 ms-1">
           {onAccept && (
             <Button
-              size="sm"
-              variant="ghost"
+              size="small"
+              variant="text"
               className={cn(
                 'h-6 w-6 p-0',
                 'hover:bg-accent-green/20 text-accent-green hover:text-accent-green',
@@ -75,8 +75,8 @@ export const SkillTag: React.FC<SkillTagProps> = ({
 
           {onReject && (
             <Button
-              size="sm"
-              variant="ghost"
+              size="small"
+              variant="text"
               className={cn(
                 'h-6 w-6 p-0',
                 'hover:bg-accent-red/20 text-accent-red hover:text-accent-red',

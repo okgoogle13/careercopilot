@@ -163,7 +163,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="sm" onClick={onBack}>
+          <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Career Hub
           </Button>
@@ -221,13 +221,13 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       {currentQuestion.type}
                     </Badge>
                     <Badge
-                      variant="outline"
+                      variant="outlined"
                       className={getDifficultyColor(currentQuestion.difficulty)}
                     >
                       {currentQuestion.difficulty}
                     </Badge>
                   </div>
-                  <Button variant="outline" size="sm" onClick={handleNewQuestion}>
+                  <Button variant="outlined" size="small" onClick={handleNewQuestion}>
                     <RotateCcw className="w-4 h-4 mr-2" />
                     New Question
                   </Button>
@@ -246,7 +246,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 <div className="flex items-center gap-4 mb-6 p-4 bg-card rounded-lg">
                   <Button
                     variant={isRecording ? 'destructive' : 'outline'}
-                    size="sm"
+                    size="small"
                     onClick={toggleRecording}
                   >
                     {isRecording ? (
@@ -298,7 +298,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       )}
                     </Button>
                     <Button
-                      variant="outline"
+                      variant="outlined"
                       onClick={() => setShowSampleAnswer(!showSampleAnswer)}
                     >
                       {showSampleAnswer ? 'Hide' : 'Show'} Sample Answer
@@ -380,7 +380,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 </div>
               </Card>
 
-              <Button variant="outline" className="w-full" onClick={() => setCurrentQuestion(null)}>
+              <Button variant="outlined" className="w-full" onClick={() => setCurrentQuestion(null)}>
                 Choose Different Category
               </Button>
             </div>

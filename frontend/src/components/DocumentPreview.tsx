@@ -507,8 +507,8 @@ export function DocumentPreview({
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button
-                variant="ghost"
-                size="icon"
+                variant="text"
+                size="small"
                 onClick={onBack}
                 className="text-gray-500 hover:bg-gray-100 rounded-full"
               >
@@ -538,8 +538,8 @@ export function DocumentPreview({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="outline"
-                    size="sm"
+                    variant="outlined"
+                    size="small"
                     onClick={generateAISuggestions}
                     className="flex items-center space-x-1.5"
                   >
@@ -553,8 +553,8 @@ export function DocumentPreview({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="outline"
-                    size="sm"
+                    variant="outlined"
+                    size="small"
                     onClick={toggleReadingMode}
                     className={cn(
                       'flex items-center space-x-1.5',
@@ -569,8 +569,8 @@ export function DocumentPreview({
               </Tooltip>
 
               <Button
-                variant="outline"
-                size="sm"
+                variant="outlined"
+                size="small"
                 onClick={() => setShowShareDialog(true)}
                 className="flex items-center space-x-1.5"
               >
@@ -579,8 +579,8 @@ export function DocumentPreview({
               </Button>
 
               <Button
-                variant="default"
-                size="sm"
+                variant="elevation"
+                size="small"
                 onClick={onEdit}
                 className="flex items-center space-x-1.5"
               >
@@ -590,7 +590,7 @@ export function DocumentPreview({
 
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" onClick={toggleFullscreen}>
+                  <Button variant="text" size="small" onClick={toggleFullscreen}>
                     {isFullscreen ? <X className="h-4 w-4" /> : <Settings className="h-4 w-4" />}
                   </Button>
                 </TooltipTrigger>
@@ -606,7 +606,7 @@ export function DocumentPreview({
           {/* Main Content Area */}
           <div className="flex-1 p-6">
             <div className="flex items-center justify-between mb-6">
-              <Button variant="ghost" onClick={onBack} className="hover:bg-gray-100">
+              <Button variant="text" onClick={onBack} className="hover:bg-gray-100">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Templates
               </Button>
@@ -618,15 +618,15 @@ export function DocumentPreview({
               </div>
             </div>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={onEdit}>
+              <Button variant="outlined" onClick={onEdit}>
                 <Edit3 className="w-4 h-4 mr-2" />
                 Edit Document
               </Button>
-              <Button variant="outline">
+              <Button variant="outlined">
                 <Share2 className="w-4 h-4 mr-2" />
                 Share
               </Button>
-              <Button variant="outline">
+              <Button variant="outlined">
                 <Printer className="w-4 h-4 mr-2" />
                 Print
               </Button>
@@ -672,13 +672,13 @@ export function DocumentPreview({
                     <span className="text-sm font-medium">{zoomLevel}%</span>
                   </div>
                   <div className="flex gap-1">
-                    <Button size="sm" variant="outline" onClick={handleZoomOut}>
+                    <Button size="small" variant="outlined" onClick={handleZoomOut}>
                       <ZoomOut className="w-3 h-3" />
                     </Button>
-                    <Button size="sm" variant="outline" onClick={handleResetZoom}>
+                    <Button size="small" variant="outlined" onClick={handleResetZoom}>
                       <RotateCcw className="w-3 h-3" />
                     </Button>
-                    <Button size="sm" variant="outline" onClick={handleZoomIn}>
+                    <Button size="small" variant="outlined" onClick={handleZoomIn}>
                       <ZoomIn className="w-3 h-3" />
                     </Button>
                   </div>
@@ -688,15 +688,15 @@ export function DocumentPreview({
               <Card className="p-4">
                 <h3 className="font-medium mb-3">Export Options</h3>
                 <div className="space-y-2">
-                  <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Button variant="outlined" size="small" className="w-full justify-start">
                     <Download className="w-3 h-3 mr-2" />
                     PDF (Recommended)
                   </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Button variant="outlined" size="small" className="w-full justify-start">
                     <Download className="w-3 h-3 mr-2" />
                     Word Document
                   </Button>
-                  <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Button variant="outlined" size="small" className="w-full justify-start">
                     <Download className="w-3 h-3 mr-2" />
                     Plain Text
                   </Button>
@@ -708,7 +708,7 @@ export function DocumentPreview({
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-400 mb-2">87%</div>
                   <div className="text-sm text-muted-foreground">Excellent ATS compatibility</div>
-                  <Button variant="outline" size="sm" className="w-full mt-3">
+                  <Button variant="outlined" size="small" className="w-full mt-3">
                     View Details
                   </Button>
                 </div>
@@ -723,8 +723,8 @@ export function DocumentPreview({
                   {mockDocument.pages > 1 && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Button
-                        size="sm"
-                        variant="outline"
+                        size="small"
+                        variant="outlined"
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                       >
                         Previous
@@ -733,8 +733,8 @@ export function DocumentPreview({
                         Page {currentPage} of {mockDocument.pages}
                       </span>
                       <Button
-                        size="sm"
-                        variant="outline"
+                        size="small"
+                        variant="outlined"
                         onClick={() =>
                           setCurrentPage(Math.min(mockDocument.pages, currentPage + 1))
                         }

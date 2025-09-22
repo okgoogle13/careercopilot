@@ -34,7 +34,7 @@ export function InteractiveComponentsSection() {
         <div className="flex flex-wrap gap-4">
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline">Open Dialog</Button>
+              <Button variant="outlined">Open Dialog</Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
@@ -47,7 +47,7 @@ export function InteractiveComponentsSection() {
                 <p>Dialog content goes here.</p>
               </div>
               <DialogFooter>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="outlined">Cancel</Button>
                 <Button>Confirm</Button>
               </DialogFooter>
             </DialogContent>
@@ -55,7 +55,7 @@ export function InteractiveComponentsSection() {
 
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">Delete Item</Button>
+              <Button variant="outlined">Delete Item</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
@@ -77,7 +77,7 @@ export function InteractiveComponentsSection() {
         <div className="flex flex-wrap gap-4">
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="outline">Open Popover</Button>
+              <Button variant="outlined">Open Popover</Button>
             </PopoverTrigger>
             <PopoverContent className="w-80">
               <div className="space-y-2">
@@ -86,8 +86,8 @@ export function InteractiveComponentsSection() {
                   This is a popover with some content inside it.
                 </p>
                 <div className="flex gap-2">
-                  <Button size="sm">Action</Button>
-                  <Button variant="outline" size="sm">
+                  <Button size="small">Action</Button>
+                  <Button variant="outlined" size="small">
                     Cancel
                   </Button>
                 </div>
@@ -97,7 +97,7 @@ export function InteractiveComponentsSection() {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <Button variant="outline">Hover for Tooltip</Button>
+              <Button variant="outlined">Hover for Tooltip</Button>
             </TooltipTrigger>
             <TooltipContent>
               <p>This is a helpful tooltip</p>

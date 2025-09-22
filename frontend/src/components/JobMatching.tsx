@@ -124,7 +124,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="sm" onClick={onBack}>
+          <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Career Hub
           </Button>
@@ -253,12 +253,12 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                       )}
                     </Button>
 
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outlined" className="w-full">
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View Full Job
                     </Button>
 
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outlined" className="w-full">
                       <Heart
                         className={`w-4 h-4 mr-2 ${job.isFavorited ? 'text-red-500 fill-current' : ''}`}
                       />
@@ -301,7 +301,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
 
         {/* Load More */}
         <div className="text-center mt-8">
-          <Button variant="outline" size="lg">
+          <Button variant="outlined" size="large">
             Load More Matches
           </Button>
         </div>

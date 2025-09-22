@@ -41,8 +41,8 @@ export function ErrorCard({
       {showRetryButton && (
         <CardFooter className="pt-2">
           <Button
-            variant="outline"
-            size="sm"
+            variant="outlined"
+            size="small"
             onClick={onRetry}
             className="w-full border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
           >

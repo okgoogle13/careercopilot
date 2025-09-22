@@ -198,7 +198,7 @@ export function ResumeBuilder({
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-4">
           <Button
-            variant="ghost"
+            variant="text"
             onClick={onBack}
             className="text-muted-foreground hover:text-foreground"
           >
@@ -208,11 +208,11 @@ export function ResumeBuilder({
           <h1 className="text-2xl font-bold text-foreground">Resume Builder</h1>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" onClick={onNext}>
+          <Button variant="outlined" onClick={onNext}>
             <Eye className="w-4 h-4 mr-2" />
             Preview
           </Button>
-          <Button variant="outline">
+          <Button variant="outlined">
             <Download className="w-4 h-4 mr-2" />
             Export PDF
           </Button>
@@ -252,7 +252,7 @@ export function ResumeBuilder({
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {template.features.slice(0, 2).map((feature, idx) => (
-                    <Badge key={idx} variant="outline" className="text-xs">
+                    <Badge key={idx} variant="outlined" className="text-xs">
                       {feature}
                     </Badge>
                   ))}
@@ -270,7 +270,7 @@ export function ResumeBuilder({
               <p className="text-xs text-gray-600 mb-2">{getCurrentTemplate().preview}</p>
               <div className="flex flex-wrap gap-1">
                 {getCurrentTemplate().features.map((feature, idx) => (
-                  <Badge key={idx} variant="outline" className="text-xs">
+                  <Badge key={idx} variant="outlined" className="text-xs">
                     {feature}
                   </Badge>
                 ))}
@@ -363,7 +363,7 @@ export function ResumeBuilder({
           <Card className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium">Work Experience</h3>
-              <Button onClick={addExperience} variant="outline" size="sm">
+              <Button onClick={addExperience} variant="outlined" size="small">
                 Add Experience
               </Button>
             </div>
@@ -431,7 +431,7 @@ export function ResumeBuilder({
           <Card className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium">Education</h3>
-              <Button onClick={addEducation} variant="outline" size="sm">
+              <Button onClick={addEducation} variant="outlined" size="small">
                 Add Education
               </Button>
             </div>
@@ -489,7 +489,7 @@ export function ResumeBuilder({
                   onChange={(e) => setNewSkill(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addSkill()}
                 />
-                <Button onClick={addSkill} variant="outline">
+                <Button onClick={addSkill} variant="outlined">
                   Add
                 </Button>
               </div>

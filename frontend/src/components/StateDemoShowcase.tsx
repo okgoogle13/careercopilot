@@ -140,7 +140,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
           <div className="space-y-4">
             <div className="text-center p-8">
               <p className="text-muted-foreground mb-4">No profiles found</p>
-              <Button onClick={handleRetryLoad} variant="outline" className="mr-2">
+              <Button onClick={handleRetryLoad} variant="outlined" className="mr-2">
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Refresh
               </Button>
@@ -180,7 +180,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
+            <Button variant="text" size="small" onClick={onBack} className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Component Library
             </Button>
@@ -194,14 +194,14 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
         {/* Control Panel */}
         <div className="mb-8">
-          <Card variant="default">
+          <Card variant="elevation">
             <CardHeader title={<Typography variant='h3'>Simulation Controls</Typography>}>
 
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-3">
                 <Button
-                  variant="outline"
+                  variant="outlined"
                   onClick={() => simulateDataLoad(2000, false)}
                   className="gap-2"
                 >
@@ -209,15 +209,15 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
                   Simulate Loading
                 </Button>
 
-                <Button variant="outline" onClick={handleSimulateError} className="gap-2">
+                <Button variant="outlined" onClick={handleSimulateError} className="gap-2">
                   Simulate Error
                 </Button>
 
-                <Button variant="outline" onClick={handleResetToEmpty} className="gap-2">
+                <Button variant="outlined" onClick={handleResetToEmpty} className="gap-2">
                   Show Empty State
                 </Button>
 
-                <Button variant="outline" onClick={handleToggleConnection} className="gap-2">
+                <Button variant="outlined" onClick={handleToggleConnection} className="gap-2">
                   {connectionStatus === 'online' ? (
                     <>
                       <WifiOff className="w-4 h-4" />
@@ -288,7 +288,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
           <h2>Real-world Implementation Patterns</h2>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <Card variant="default">
+            <Card variant="elevation">
               <CardHeader title={<Typography variant='h3'>Best Practices</Typography>}>
 
               </CardHeader>
@@ -303,7 +303,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
               </CardContent>
             </Card>
 
-            <Card variant="default">
+            <Card variant="elevation">
               <CardHeader title={<Typography variant='h3'>Implementation Tips</Typography>}>
 
               </CardHeader>

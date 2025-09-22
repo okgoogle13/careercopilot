@@ -32,8 +32,8 @@ const mapLegacySize = (size?: string) => {
     case 'default': return 'medium';
     case 'sm': return 'small';
     case 'lg': return 'large';
-    case 'icon': return 'small';
-    default: return size as 'small' | 'medium' | 'large';
+    case 'icon': return 'icon';
+    default: return size as 'small' | 'medium' | 'large' | 'icon';
   }
 };
 
@@ -73,6 +73,7 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
           mappedSize === 'small' && 'h-10 px-6 text-sm',
           mappedSize === 'medium' && 'h-12 px-6 text-base',
           mappedSize === 'large' && 'h-14 px-8 text-base',
+          mappedSize === 'icon' && 'h-10 w-10 p-0',
 
           // Loading state
           isLoading && 'cursor-wait relative overflow-hidden',
@@ -164,20 +165,30 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
         {isLoading && (
           <span className="absolute inset-0 flex items-center justify-center bg-inherit">
             <Loader2 className="h-4 w-4 animate-spin" />
-            {loadingText && <span className="ml-2">{loadingText}</span>}
+            {loadingText && <span className="ms-2">{loadingText}</span>}
           </span>
         )}
         <span className={cn('flex items-center gap-2', isLoading && 'invisible')}>
-          {icon && (
-            <span className="flex items-center justify-center w-4 h-4">
-              {icon}
+          {mappedSize === 'icon' ? (
+            // Icon-only mode: center the icon without text
+            <span className="flex items-center justify-center w-5 h-5">
+              {icon || children}
             </span>
-          )}
-          {children}
-          {trailingIcon && (
-            <span className="flex items-center justify-center w-4 h-4">
-              {trailingIcon}
-            </span>
+          ) : (
+            // Regular mode: show icon, text, and trailing icon
+            <>
+              {icon && (
+                <span className="flex items-center justify-center w-4 h-4">
+                  {icon}
+                </span>
+              )}
+              {children}
+              {trailingIcon && (
+                <span className="flex items-center justify-center w-4 h-4">
+                  {trailingIcon}
+                </span>
+              )}
+            </>
           )}
         </span>
       </Comp>

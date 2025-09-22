@@ -137,7 +137,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
-          <Button variant="ghost" size="sm" onClick={onBack}>
+          <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Career Hub
           </Button>
@@ -177,7 +177,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                     <div className="flex items-center justify-between mb-3">
                       <h4 className="font-medium">{gap.skill}</h4>
                       <div className="flex items-center gap-2">
-                        <Badge variant="outline" className={getImportanceColor(gap.importance)}>
+                        <Badge variant="outlined" className={getImportanceColor(gap.importance)}>
                           {gap.importance} Priority
                         </Badge>
                         <span className="text-sm text-muted-foreground">
@@ -332,7 +332,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                   </div>
                 </div>
 
-                <Button className="w-full mt-4" variant="outline">
+                <Button className="w-full mt-4" variant="outlined">
                   <BookOpen className="w-4 h-4 mr-2" />
                   View Full Learning Plan
                 </Button>

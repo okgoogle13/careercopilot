@@ -49,8 +49,8 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
               </div>
             )}
             <Button
-              variant="ghost"
-              size="icon"
+              variant="text"
+              size="small"
               onClick={onClose}
               className="ml-2"
               aria-label="Close"
@@ -78,23 +78,23 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
 
         <div className="flex justify-between items-center pt-4 border-t">
           <div className="space-x-2">
-            <Button variant="outline" size="sm" onClick={() => onEdit?.(document)}>
+            <Button variant="outlined" size="small" onClick={() => onEdit?.(document)}>
               <Edit className="h-4 w-4 mr-2" />
               Edit
             </Button>
-            <Button variant="outline" size="sm" onClick={() => onDownload?.(document)}>
+            <Button variant="outlined" size="small" onClick={() => onDownload?.(document)}>
               <Download className="h-4 w-4 mr-2" />
               Download
             </Button>
           </div>
           <div className="space-x-2">
-            <Button variant="ghost" size="sm" onClick={() => onShare?.(document)}>
+            <Button variant="text" size="small" onClick={() => onShare?.(document)}>
               <Share2 className="h-4 w-4 mr-2" />
               Share
             </Button>
             <Button
-              variant="ghost"
-              size="sm"
+              variant="text"
+              size="small"
               onClick={() => onDelete?.(document)}
               className="text-destructive hover:text-destructive"
             >

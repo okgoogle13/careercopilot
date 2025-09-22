@@ -46,7 +46,7 @@ function ProfileCard({ profile, isSelected, onClick }) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
+            <Button variant="text" size="small" onClick={onBack} className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Component Library
             </Button>
@@ -59,7 +59,7 @@ function ProfileCard({ profile, isSelected, onClick }) {
 
         <div className="space-y-8">
           {/* Getting Started */}
-          <Card variant="default">
+          <Card variant="elevation">
             <CardHeader
               subheader={<Typography variant='body2' color='text.secondary'>How to implement and use the component library in your applications
                               </Typography>}>
@@ -98,7 +98,7 @@ function ProfileCard({ profile, isSelected, onClick }) {
           </Card>
 
           {/* Design Principles */}
-          <Card variant="default">
+          <Card variant="elevation">
             <CardHeader
               subheader={<Typography variant='body2' color='text.secondary'>Core principles that guide the Career Copilot design system
                               </Typography>}>
@@ -157,7 +157,7 @@ function ProfileCard({ profile, isSelected, onClick }) {
           </Card>
 
           {/* Component Categories */}
-          <Card variant="default">
+          <Card variant="elevation">
             <CardHeader
               subheader={<Typography variant='body2' color='text.secondary'>Understanding when and how to use different component types
                               </Typography>}>
@@ -260,7 +260,7 @@ function ProfileCard({ profile, isSelected, onClick }) {
           </Card>
 
           {/* Code Example */}
-          <Card variant="default">
+          <Card variant="elevation">
             <CardHeader
               subheader={<Typography variant='body2' color='text.secondary'>A practical example of using card components with proper variant selection
                               </Typography>}>
@@ -280,7 +280,7 @@ function ProfileCard({ profile, isSelected, onClick }) {
           </Card>
 
           {/* Best Practices */}
-          <Card variant="default">
+          <Card variant="elevation">
             <CardHeader title={<Typography variant='h3'>Best Practices & Guidelines</Typography>}>
 
             </CardHeader>

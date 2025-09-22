@@ -81,8 +81,8 @@ export function ProfileVariationCard({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
-              variant="ghost"
-              size="sm"
+              variant="text"
+              size="small"
               className={`h-8 w-8 p-0 transition-opacity bg-surface-card/80 backdrop-blur-sm border border-subtle hover:bg-surface-section ${
                 isHovered ? 'opacity-100' : 'opacity-0'
               }`}
@@ -184,7 +184,7 @@ export function ProfileVariationCard({
 
         {/* Action Button */}
         <Button
-          variant="outline"
+          variant="outlined"
           className="w-full border-brand-primary/30 hover:border-brand-primary hover:bg-brand-primary/10 transition-all font-semibold rounded-3xl py-3"
           onClick={(e) => {
             e.stopPropagation();

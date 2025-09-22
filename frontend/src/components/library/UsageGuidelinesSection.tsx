@@ -8,7 +8,7 @@ export function UsageGuidelinesSection() {
       title="Usage Guidelines"
       description="Best practices and guidelines for using components effectively"
     >
-      <Card variant="default">
+      <Card variant="elevation">
         <CardContent className="pt-6">
           <div className="grid md:grid-cols-3 gap-6">
             <div>
