@@ -24,9 +24,9 @@ import theme from './theme/theme';
 // Import components (keeping existing imports)
 import { Dashboard } from './components/Dashboard';
 import { ResumeBuilder } from './components/ResumeBuilder';
-import { ATSAnalysisDashboard } from './components/ATSAnalysisDashboard';
+import { ATSAnalysisDashboard } from './components/features/analysis/ATSAnalysisDashboard';
 import { TemplateSelector } from './components/TemplateSelector';
-import { DocumentPreview } from './components/DocumentPreview';
+import { DocumentPreview } from './components/features/documents/DocumentPreview';
 import { LoadingStates } from './components/LoadingStates';
 import { ComponentLibrary } from './components/ComponentLibrary';
 import { StateDemoShowcase } from './components/StateDemoShowcase';

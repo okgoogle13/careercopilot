@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Typography, Stack } from '@mui/material';
 import { Search, Mail, User } from 'lucide-react';
-import { Button } from './ui/button-mui';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card-mui';
-import { Badge } from './ui/badge-mui';
-import { Input } from './ui/input-mui';
-import { Textarea } from './ui/textarea-mui';
+import { Button } from './ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
+import { Input } from './ui/input';
+import { Textarea } from './ui/textarea';
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from './ui/dialog-mui';
+} from './ui/dialog';
 import {
   LayoutContainer,
   LayoutGrid,
@@ -22,7 +22,7 @@ import {
   LayoutStack,
   LayoutFlex,
   LayoutCard,
-} from './ui/layout-mui';
+} from './ui/layout';
 import { useTheme as useMuiTheme } from '@mui/material/styles';
 
 interface MUITestProps {
