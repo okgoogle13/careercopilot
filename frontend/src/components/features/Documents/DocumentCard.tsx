@@ -1,7 +1,7 @@
 import React from 'react';
 import { Document } from './types';
 import { cn } from '../../lib/utils';
-import { ATSScoreCircle } from '../ATSScoreCircle';
+import { ATSScoreCircle } from '../analysis/ATSScoreCircle';
 
 export interface DocumentCardProps {
   document: Document;
