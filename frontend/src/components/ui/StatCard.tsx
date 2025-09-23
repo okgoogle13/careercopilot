@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown } from '@mui/icons-material';
 
 interface StatCardProps {
   title: string;
@@ -16,11 +16,26 @@ interface StatCardProps {
 }
 
 const variantStyles = {
-  default: 'border-gray-200',
-  primary: 'border-primary/20 bg-primary/5',
-  success: 'border-green-200 bg-green-50',
-  warning: 'border-orange-200 bg-orange-50',
-  error: 'border-red-200 bg-red-50'
+  default: {
+    border: '1px solid #e5e7eb',
+    backgroundColor: 'transparent'
+  },
+  primary: {
+    border: '1px solid rgba(var(--md-sys-color-primary), 0.2)',
+    backgroundColor: 'rgba(var(--md-sys-color-primary), 0.05)'
+  },
+  success: {
+    border: '1px solid #bbf7d0',
+    backgroundColor: '#f0fdf4'
+  },
+  warning: {
+    border: '1px solid #fed7aa',
+    backgroundColor: '#fffbeb'
+  },
+  error: {
+    border: '1px solid #fecaca',
+    backgroundColor: '#fef2f2'
+  }
 };
 
 export function StatCard({
@@ -32,27 +47,35 @@ export function StatCard({
   variant = 'default'
 }: StatCardProps) {
   return (
-    <Card className={`border ${variantStyles[variant]} hover:shadow-md transition-shadow`}>
-      <CardContent className="p-6">
+    <Card
+      sx={{
+        ...variantStyles[variant],
+        '&:hover': {
+          boxShadow: 2
+        },
+        transition: 'box-shadow 0.2s ease-in-out'
+      }}
+    >
+      <CardContent sx={{ p: 3 }}>
         {/* Header with Icon */}
-        <Box className="flex items-center justify-between mb-4">
-          <Typography variant="body2" color="text.secondary" className="font-medium">
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+          <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 500 }}>
             {title}
           </Typography>
           {icon && (
-            <Box className="p-2 bg-gray-100 rounded-lg">
+            <Box sx={{ p: 1, backgroundColor: 'grey.100', borderRadius: 1 }}>
               {icon}
             </Box>
           )}
         </Box>
 
         {/* Main Value */}
-        <Typography variant="h3" className="text-3xl font-bold mb-2">
+        <Typography variant="h3" sx={{ fontSize: '1.875rem', fontWeight: 700, mb: 1 }}>
           {value}
         </Typography>
 
         {/* Subtitle and Trend */}
-        <Box className="flex items-center justify-between">
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           {subtitle && (
             <Typography variant="body2" color="text.secondary">
               {subtitle}
@@ -60,15 +83,15 @@ export function StatCard({
           )}
 
           {trend && (
-            <Box className="flex items-center gap-1">
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
               {trend.isPositive ? (
-                <TrendingUp size={16} className="text-green-500" />
+                <TrendingUp fontSize="small" sx={{ color: 'success.main' }} />
               ) : (
-                <TrendingDown size={16} className="text-red-500" />
+                <TrendingDown fontSize="small" sx={{ color: 'error.main' }} />
               )}
               <Typography
                 variant="caption"
-                className={trend.isPositive ? 'text-green-500' : 'text-red-500'}
+                sx={{ color: trend.isPositive ? 'success.main' : 'error.main' }}
               >
                 {trend.value > 0 ? '+' : ''}{trend.value}%
                 {trend.label && ` ${trend.label}`}

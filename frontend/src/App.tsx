@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import {
   Box,
@@ -18,32 +18,32 @@ import {
   SidebarTrigger,
   SidebarInset,
 } from './components/ui/sidebar';
-import { M3Button } from './components/ui/m3-button';
+import { Button } from './components/ui/button';
 import theme from './theme/theme';
 
-// Import components (keeping existing imports)
-import { Dashboard } from './components/Dashboard';
-import { ResumeBuilder } from './components/ResumeBuilder';
-import { ATSAnalysisDashboard } from './components/features/analysis/ATSAnalysisDashboard';
-import { TemplateSelector } from './components/TemplateSelector';
-import { DocumentPreview } from './components/features/documents/DocumentPreview';
-import { LoadingStates } from './components/LoadingStates';
-import { ComponentLibrary } from './components/ComponentLibrary';
-import { StateDemoShowcase } from './components/StateDemoShowcase';
-import { AnimatedShowcase } from './components/AnimatedShowcase';
+// Lazy-loaded components for better performance - Updated paths after restructuring
+const Dashboard = lazy(() => import('./components/features/dashboard/Dashboard').then(module => ({ default: module.Dashboard })));
+const ResumeBuilder = lazy(() => import('./components/features/documents/ResumeBuilder').then(module => ({ default: module.ResumeBuilder })));
+const ATSAnalysisDashboard = lazy(() => import('./components/features/analysis/ATSAnalysisDashboard').then(module => ({ default: module.default })));
+const TemplateSelector = lazy(() => import('./components/features/documents/TemplateSelector').then(module => ({ default: module.TemplateSelector })));
+const DocumentPreview = lazy(() => import('./components/features/documents/DocumentPreview').then(module => ({ default: module.default })));
+const LoadingStates = lazy(() => import('./components/features/common/LoadingStates').then(module => ({ default: module.default })));
+const ComponentLibrary = lazy(() => import('./components/features/demo/ComponentLibrary').then(module => ({ default: module.ComponentLibrary })));
+const StateDemoShowcase = lazy(() => import('./components/features/demo/StateDemoShowcase').then(module => ({ default: module.default })));
+const AnimatedShowcase = lazy(() => import('./components/features/demo/AnimatedShowcase').then(module => ({ default: module.default })));
 
-// New components for the complete user flow
-import { Auth } from './components/Auth';
-import { UploadResume } from './components/UploadResume';
-import { ProfileEditor } from './components/ProfileEditor';
-import { DocumentTypeSelector } from './components/DocumentTypeSelector';
-import { JobInput } from './components/JobInput';
-import { CareerGrowthHub } from './components/CareerGrowthHub';
-import { JobMatching } from './components/JobMatching';
-import { CareerIntelligence } from './components/CareerIntelligence';
-import { InterviewPrep } from './components/InterviewPrep';
-import { Settings } from './components/Settings';
-import { MUITest } from './components/MUITest';
+// User flow components - lazy loaded - Updated paths
+const Auth = lazy(() => import('./components/features/auth/Auth').then(module => ({ default: module.Auth })));
+const UploadResume = lazy(() => import('./components/features/documents/UploadResume').then(module => ({ default: module.UploadResume })));
+const ProfileEditor = lazy(() => import('./components/features/profile/ProfileEditor').then(module => ({ default: module.ProfileEditor })));
+const DocumentTypeSelector = lazy(() => import('./components/features/documents/DocumentTypeSelector').then(module => ({ default: module.DocumentTypeSelector })));
+const JobInput = lazy(() => import('./components/features/opportunities/JobInput').then(module => ({ default: module.JobInput })));
+const CareerGrowthHub = lazy(() => import('./components/features/opportunities/CareerGrowthHub').then(module => ({ default: module.CareerGrowthHub })));
+const JobMatching = lazy(() => import('./components/features/opportunities/JobMatching').then(module => ({ default: module.JobMatching })));
+const CareerIntelligence = lazy(() => import('./components/features/opportunities/CareerIntelligence').then(module => ({ default: module.CareerIntelligence })));
+const InterviewPrep = lazy(() => import('./components/features/opportunities/InterviewPrep').then(module => ({ default: module.InterviewPrep })));
+const Settings = lazy(() => import('./components/features/dashboard/Settings').then(module => ({ default: module.Settings })));
+const MUITest = lazy(() => import('./components/features/demo/MUITest').then(module => ({ default: module.MUITest })));
 import { AppTab, DashboardTab, DocumentType, Profile as SharedProfile, Template } from './types';
 
 import {
@@ -592,22 +592,22 @@ export default function App() {
           <SidebarFooter>
             <div className="p-2">
               {showDemoNav ? (
-                <M3Button
-                  variant="text"
+                <Button
+                  variant="ghost"
                   onClick={() => setShowDemoNav(false)}
                   className="w-full justify-start"
                 >
                   Hide Navigation
-                </M3Button>
+                </Button>
               ) : (
-                <M3Button
-                  variant="filled"
+                <Button
+                  variant="default"
                   onClick={() => setShowDemoNav(true)}
                   className="w-full justify-start"
-                  icon={<Navigation className="w-4 h-4" />}
                 >
+                  <Navigation className="w-4 h-4 mr-2" />
                   Show Navigation
-                </M3Button>
+                </Button>
               )}
             </div>
           </SidebarFooter>
@@ -633,20 +633,31 @@ export default function App() {
 
           {/* Content Area */}
           <div className="flex flex-1 flex-col gap-4 p-4">
-            {renderContent()}
+            <Suspense fallback={
+              <div className="flex items-center justify-center h-64">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                  <Typography variant="body2" color="text.secondary">
+                    Loading...
+                  </Typography>
+                </div>
+              </div>
+            }>
+              {renderContent()}
+            </Suspense>
           </div>
 
           {/* Show Demo Nav Button (when hidden) */}
           {!showDemoNav && (
             <div className="fixed bottom-6 right-6 z-50">
-              <M3Button
-                variant="aurora"
+              <Button
+                variant="default"
                 onClick={() => setShowDemoNav(true)}
-                icon={<Navigation className="w-4 h-4" />}
                 className="rounded-full px-6 py-3"
               >
+                <Navigation className="w-4 h-4 mr-2" />
                 Demo Navigation
-              </M3Button>
+              </Button>
             </div>
           )}
         </SidebarInset>

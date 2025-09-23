@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DocumentReviewModal } from './document-review-modal';
 import { cn } from '@/lib/utils';
-import { Send, Loader2, CheckCircle, AlertTriangle, FileText, Clock, Zap } from 'lucide-react';
+import { Send, CircularProgress, CheckCircle, Warning, Description, Schedule, Flash } from '@mui/icons-material';
 import { Button, IconButton } from '@mui/material';
 
 interface JobApplication {
@@ -203,42 +203,42 @@ export function OneClickApplyButton({
       case 'generating':
         return (
           <>
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <CircularProgress size={16} />
             Generating Documents... ({progress}%)
           </>
         );
       case 'reviewing':
         return (
           <>
-            <FileText className="w-4 h-4" />
+            <Description fontSize="small" />
             Review Documents ({currentDocumentIndex + 1}/{generatedDocuments.length})
           </>
         );
       case 'submitting':
         return (
           <>
-            <Loader2 className="w-4 h-4 animate-spin" />
+            <CircularProgress size={16} />
             Submitting Application...
           </>
         );
       case 'completed':
         return (
           <>
-            <CheckCircle className="w-4 h-4" />
+            <CheckCircle fontSize="small" />
             Application Submitted!
           </>
         );
       case 'error':
         return (
           <>
-            <AlertTriangle className="w-4 h-4" />
+            <Warning fontSize="small" />
             Application Failed
           </>
         );
       default:
         return (
           <>
-            <Zap className="w-4 h-4" />
+            <Flash fontSize="small" />
             Apply with AI
           </>
         );
@@ -313,7 +313,7 @@ export function OneClickApplyButton({
       {['generating', 'submitting'].includes(stage) && (
         <div className="w-full mt-2">
           <div className="flex items-center gap-2 text-xs text-gray-600 mb-1">
-            <Clock className="w-3 h-3" />
+            <Schedule sx={{ fontSize: 12 }} />
             <span>
               {stage === 'generating'
                 ? 'Generating personalized documents...'

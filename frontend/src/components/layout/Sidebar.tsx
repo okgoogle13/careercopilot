@@ -12,8 +12,7 @@ import {
   Button as MuiButton,
   useTheme,
 } from '@mui/material';
-import { BarChart3, FileText, Plus } from 'lucide-react';
-import { CareerCopilotLogo } from './CareerCopilotLogo';
+import { BarChart as BarChart3, Description as FileText, Add as Plus } from '@mui/icons-material';
 
 interface SidebarProps {
   activeTab: string;
@@ -47,7 +46,15 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
         {/* Logo Section */}
         <Box sx={{ p: 3 }}>
-          <CareerCopilotLogo />
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: 600,
+              color: 'primary.main',
+            }}
+          >
+            CareerCopilot
+          </Typography>
         </Box>
 
         {/* Navigation Section */}
@@ -80,7 +87,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                         color: 'inherit',
                       }}
                     >
-                      <IconComponent size={20} />
+                      <IconComponent />
                     </ListItemIcon>
                     <ListItemText
                       primary={item.label}
@@ -103,7 +110,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
           <MuiButton
             variant="contained"
             fullWidth
-            startIcon={<Plus size={16} />}
+            startIcon={<Plus fontSize="small" />}
             sx={{
               py: 1.5,
               borderRadius: 2,
