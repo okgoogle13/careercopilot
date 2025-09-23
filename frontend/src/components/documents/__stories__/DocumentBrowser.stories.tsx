@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { DocumentBrowser } from '../DocumentBrowser';
+import { DocumentBrowser } from '../../features/documents/DocumentBrowser';
 import { Document } from '../types';
 
 // Generate sample documents

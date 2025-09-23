@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { X, Download, Edit, Share2, Trash2 } from 'lucide-react';
 import { Document } from './types';
-import { ATSScoreCircle } from '../ATSScoreCircle';
+import { ATSScoreCircle } from '../features/analysis/ATSScoreCircle';
 
 interface DocumentPreviewModalProps {
   document: Document | null;

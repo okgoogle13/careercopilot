@@ -9,7 +9,7 @@ import {
   IconButton,
   Typography
 } from '@mui/material';
-import { KanbanBoard } from './KanbanBoard';
+import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 import { TimelineView } from './TimelineView';
 import { Close, ArrowLeft } from 'lucide-react';
 

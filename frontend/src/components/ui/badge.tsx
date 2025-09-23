@@ -1,39 +1,90 @@
-import * as React from 'react';
-import { Slot } from '@radix-ui/react-slot';
-import { cva, type VariantProps } from 'class-variance-authority';
+import React from 'react';
+import { Chip, ChipProps, SxProps, Theme } from '@mui/material';
 
-import { cn } from './utils';
+interface BadgeProps extends Omit<ChipProps, 'variant'> {
+  variant?: 'default' | 'secondary' | 'destructive' | 'outline';
+  asChild?: boolean;
+}
 
-const badgeVariants = cva(
-  'inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden',
-  {
-    variants: {
-      variant: {
-        default: 'border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90',
-        secondary:
-          'border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90',
-        destructive:
-          'border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
-        outline: 'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
-      },
+const getBadgeVariantSx = (variant: BadgeProps['variant'] = 'default'): SxProps<Theme> => {
+  const baseSx: SxProps<Theme> = {
+    borderRadius: 1.5,
+    height: 'auto',
+    minHeight: '24px',
+    fontSize: '0.75rem',
+    fontWeight: 500,
+    border: 1,
+    '& .MuiChip-label': {
+      px: 1,
+      py: 0.25,
     },
-    defaultVariants: {
-      variant: 'default',
-    },
+  };
+
+  switch (variant) {
+    case 'default':
+      return {
+        ...baseSx,
+        borderColor: 'transparent',
+        backgroundColor: 'primary.main',
+        color: 'primary.contrastText',
+        '&:hover': {
+          backgroundColor: 'primary.dark',
+        },
+      };
+    case 'secondary':
+      return {
+        ...baseSx,
+        borderColor: 'transparent',
+        backgroundColor: 'grey.100',
+        color: 'text.primary',
+        '&:hover': {
+          backgroundColor: 'grey.200',
+        },
+      };
+    case 'destructive':
+      return {
+        ...baseSx,
+        borderColor: 'transparent',
+        backgroundColor: 'error.main',
+        color: 'error.contrastText',
+        '&:hover': {
+          backgroundColor: 'error.dark',
+        },
+      };
+    case 'outline':
+      return {
+        ...baseSx,
+        borderColor: 'divider',
+        backgroundColor: 'transparent',
+        color: 'text.primary',
+        '&:hover': {
+          backgroundColor: 'action.hover',
+        },
+      };
+    default:
+      return baseSx;
+  }
+};
+
+const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
+  ({ variant = 'default', sx, ...props }, ref) => {
+    const variantSx = getBadgeVariantSx(variant);
+
+    return (
+      <Chip
+        ref={ref}
+        size="small"
+        sx={{
+          ...variantSx,
+          ...sx,
+        }}
+        {...props}
+      />
+    );
   }
 );
 
-function Badge({
-  className,
-  variant,
-  asChild = false,
-  ...props
-}: React.ComponentProps<'span'> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {
-  const Comp = asChild ? Slot : 'span';
+Badge.displayName = 'Badge';
 
-  return (
-    <Comp data-slot="badge" className={cn(badgeVariants({ variant }), className)} {...props} />
-  );
-}
-
-export { Badge, badgeVariants };
+export { Badge };
+export type { BadgeProps };
