@@ -12,7 +12,7 @@ import {
   Theme,
   Backdrop,
 } from '@mui/material';
-import { X as XIcon } from 'lucide-react';
+import { Close } from '@mui/icons-material';
 
 interface DialogProps extends Omit<MuiDialogProps, 'children'> {
   children?: React.ReactNode;
@@ -25,37 +25,31 @@ interface DialogTriggerProps {
 
 interface DialogContentProps {
   children: React.ReactNode;
-  className?: string;
   sx?: SxProps<Theme>;
 }
 
 interface DialogHeaderProps {
   children: React.ReactNode;
-  className?: string;
   sx?: SxProps<Theme>;
 }
 
 interface DialogTitleProps {
   children: React.ReactNode;
-  className?: string;
   sx?: SxProps<Theme>;
 }
 
 interface DialogDescriptionProps {
   children: React.ReactNode;
-  className?: string;
   sx?: SxProps<Theme>;
 }
 
 interface DialogFooterProps {
   children: React.ReactNode;
-  className?: string;
   sx?: SxProps<Theme>;
 }
 
 interface DialogCloseProps {
   onClick?: () => void;
-  className?: string;
   sx?: SxProps<Theme>;
 }
 
@@ -93,10 +87,9 @@ function DialogTrigger({ children, onClick }: DialogTriggerProps) {
   );
 }
 
-function DialogContent({ children, className, sx }: DialogContentProps) {
+function DialogContent({ children, sx }: DialogContentProps) {
   return (
     <DialogContent
-      className={className}
       sx={{
         px: 3,
         py: 2,
@@ -111,10 +104,9 @@ function DialogContent({ children, className, sx }: DialogContentProps) {
   );
 }
 
-function DialogHeader({ children, className, sx }: DialogHeaderProps) {
+function DialogHeader({ children, sx }: DialogHeaderProps) {
   return (
     <Box
-      className={className}
       sx={{
         px: 3,
         pt: 3,
@@ -130,10 +122,9 @@ function DialogHeader({ children, className, sx }: DialogHeaderProps) {
   );
 }
 
-function DialogTitleComponent({ children, className, sx }: DialogTitleProps) {
+function DialogTitleComponent({ children, sx }: DialogTitleProps) {
   return (
     <DialogTitle
-      className={className}
       sx={{
         fontSize: '1.25rem',
         fontWeight: 600,
@@ -148,12 +139,11 @@ function DialogTitleComponent({ children, className, sx }: DialogTitleProps) {
   );
 }
 
-function DialogDescription({ children, className, sx }: DialogDescriptionProps) {
+function DialogDescription({ children, sx }: DialogDescriptionProps) {
   return (
     <Typography
       variant="body2"
       color="text.secondary"
-      className={className}
       sx={{
         lineHeight: 1.5,
         ...sx,
@@ -164,10 +154,9 @@ function DialogDescription({ children, className, sx }: DialogDescriptionProps) 
   );
 }
 
-function DialogFooter({ children, className, sx }: DialogFooterProps) {
+function DialogFooter({ children, sx }: DialogFooterProps) {
   return (
     <DialogActions
-      className={className}
       sx={{
         px: 3,
         pb: 3,
@@ -182,11 +171,10 @@ function DialogFooter({ children, className, sx }: DialogFooterProps) {
   );
 }
 
-function DialogClose({ onClick, className, sx }: DialogCloseProps) {
+function DialogClose({ onClick, sx }: DialogCloseProps) {
   return (
     <IconButton
       onClick={onClick}
-      className={className}
       sx={{
         position: 'absolute',
         right: 12,
@@ -200,7 +188,7 @@ function DialogClose({ onClick, className, sx }: DialogCloseProps) {
         ...sx,
       }}
     >
-      <XIcon size={16} />
+      <Close fontSize="small" />
     </IconButton>
   );
 }

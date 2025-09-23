@@ -24,15 +24,15 @@ import {
   Skeleton,
 } from '@mui/material';
 import {
-  MoreVertical,
+  MoreVert,
   Search,
-  Filter,
+  FilterList,
   Download,
-  Trash2,
-  Eye,
+  Delete,
+  Visibility,
   Edit,
-  ArrowUpDown,
-} from 'lucide-react';
+  UnfoldMore,
+} from '@mui/icons-material';
 
 // Column definition interface
 export interface Column<T = any> {
@@ -99,7 +99,6 @@ export interface DataTableProps<T = any> {
   isRowSelected?: (row: T) => boolean;
   onRowSelect?: (row: T, selected: boolean) => void;
   onSelectAll?: (selected: boolean) => void;
-  className?: string;
 }
 
 // Empty state component
@@ -164,7 +163,6 @@ export function DataTable<T extends Record<string, any>>({
   isRowSelected = () => false,
   onRowSelect,
   onSelectAll,
-  className,
 }: DataTableProps<T>) {
   // State
   const [page, setPage] = useState(0);
@@ -264,7 +262,6 @@ export function DataTable<T extends Record<string, any>>({
 
   return (
     <Paper
-      className={className}
       sx={{
         width: '100%',
         overflow: 'hidden',
@@ -319,7 +316,7 @@ export function DataTable<T extends Record<string, any>>({
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Search size={20} />
+                    <Search fontSize="small" />
                   </InputAdornment>
                 ),
               }}
@@ -345,7 +342,7 @@ export function DataTable<T extends Record<string, any>>({
           {filterable && selectedRows.length === 0 && (
             <Tooltip title="Filter">
               <IconButton>
-                <Filter size={20} />
+                <FilterList fontSize="small" />
               </IconButton>
             </Tooltip>
           )}
@@ -399,7 +396,7 @@ export function DataTable<T extends Record<string, any>>({
                       active={sortColumn === column.id}
                       direction={sortColumn === column.id ? sortDirection : 'asc'}
                       onClick={() => handleSort(column.id)}
-                      IconComponent={ArrowUpDown}
+                      IconComponent={UnfoldMore}
                     >
                       {column.label}
                     </TableSortLabel>
@@ -499,7 +496,7 @@ export function DataTable<T extends Record<string, any>>({
                               onClick={(e) => handleActionMenuOpen(e, row)}
                               aria-label="row actions"
                             >
-                              <MoreVertical size={16} />
+                              <MoreVert fontSize="small" />
                             </IconButton>
                           )}
                         </TableCell>

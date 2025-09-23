@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button } from '@mui/material';
-import { AlertCircle } from 'lucide-react';
+import { ErrorOutline } from '@mui/icons-material';
 
 interface ErrorStateProps {
   title: string;
@@ -10,25 +10,32 @@ interface ErrorStateProps {
 
 export function ErrorState({ title, message, onRetry }: ErrorStateProps) {
   return (
-    <Box className="flex flex-col items-center justify-center p-8 text-center">
-      <Box className="mb-4">
-        <Box className="p-4 bg-red-100 rounded-full">
-          <AlertCircle size={32} className="text-red-600" />
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 4, textAlign: 'center' }}>
+      <Box sx={{ mb: 2 }}>
+        <Box sx={{ p: 2, backgroundColor: 'error.lighter', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <ErrorOutline sx={{ fontSize: 32, color: 'error.main' }} />
         </Box>
       </Box>
 
-      <Typography variant="h6" className="font-semibold mb-2">
+      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
         {title}
       </Typography>
 
-      <Typography variant="body2" color="text.secondary" className="mb-6 max-w-md">
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 3, maxWidth: '28rem' }}>
         {message}
       </Typography>
 
       <Button
         variant="outlined"
         onClick={onRetry}
-        className="border-primary text-primary hover:bg-primary/10"
+        sx={{
+          borderColor: 'primary.main',
+          color: 'primary.main',
+          '&:hover': {
+            backgroundColor: 'primary.light',
+            opacity: 0.1
+          }
+        }}
       >
         Try Again
       </Button>

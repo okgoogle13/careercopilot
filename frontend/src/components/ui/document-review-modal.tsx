@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DOMPurify from 'dompurify';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './dialog';
 import { Badge } from './badge';
 import { Textarea } from './textarea';
@@ -239,7 +240,7 @@ export function DocumentReviewModal({
                 <Card className="p-6 h-full overflow-y-auto">
                   <div
                     className="prose max-w-none"
-                    dangerouslySetInnerHTML={{ __html: document.content }}
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(document.content) }}
                   />
                 </Card>
               </TabsContent>

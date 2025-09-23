@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box, Typography, CircularProgress } from '@mui/material';
-import { Loader2 } from 'lucide-react';
 
 interface LoadingStateProps {
   size?: 'sm' | 'md' | 'lg';
@@ -17,11 +16,11 @@ export function LoadingState({ size = 'md', label }: LoadingStateProps) {
   const iconSize = sizeMap[size];
 
   return (
-    <Box className="flex flex-col items-center justify-center p-8">
-      <Box className="mb-4">
-        <Loader2
+    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 4 }}>
+      <Box sx={{ mb: 2 }}>
+        <CircularProgress
           size={iconSize}
-          className="animate-spin text-primary"
+          sx={{ color: 'primary.main' }}
         />
       </Box>
 
@@ -29,7 +28,7 @@ export function LoadingState({ size = 'md', label }: LoadingStateProps) {
         <Typography
           variant="body2"
           color="text.secondary"
-          className="text-center"
+          sx={{ textAlign: 'center' }}
         >
           {label}
         </Typography>
