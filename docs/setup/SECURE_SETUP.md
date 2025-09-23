@@ -151,7 +151,7 @@ nano frontend/.env
 
 # 3. Start development server
 cd frontend/
-npm run dev
+yarn dev
 ```
 
 ### Staging Deployment:

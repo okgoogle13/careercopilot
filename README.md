@@ -15,7 +15,7 @@
 
 The repository is organized as a monorepo with distinct packages for each part of the application.
 careercopilot/
-├── 📱 frontend/ # The React single-page application
+├── 📱 frontend/ # The React single-page application (Vite + React 19)
 ├── 🐍 backend/ # The Python FastAPI server and database logic
 ├── ⚡ functions/ # Serverless functions for background tasks
 ├── 📚 docs/ # Project documentation
@@ -29,25 +29,45 @@ Prerequisites
 - Python (v3.12+) & Pip
 - Docker & Docker Compose
 - Firebase CLI & Google Cloud SDK
-  Local Development Setup
-- Clone the repository:
-  git clone <your-repo-url>
-  cd careercopilot
 
-- Install all dependencies:
-  This command will install dependencies for the root, frontend, and functions packages.
-  yarn install
+### Local Development Setup
 
-- Install backend dependencies:
-  pip install -r backend/requirements.txt
+1. **Clone the repository**:
+   ```bash
+   git clone <your-repo-url>
+   cd careercopilot
+   ```
 
-- Launch all services with Docker:
-  This is the simplest way to get everything running.
-  docker-compose up --build
+2. **Install frontend dependencies**:
+   ```bash
+   cd frontend-v2
+   yarn install
+   ```
 
-- Access the applications:
-  - Frontend: http://localhost:5173
-  - Backend API Docs: http://localhost:8000/docs
+3. **Install backend dependencies**:
+   ```bash
+   cd ../backend
+   pip install -r requirements.txt
+   ```
+
+4. **Set up environment variables**:
+   - Copy `.env.example` to `.env` in both frontend-v2 and backend directories
+   - Update the values as needed
+
+5. **Launch services**:
+   ```bash
+   # In one terminal (backend)
+   cd backend
+   uvicorn main:app --reload
+
+   # In another terminal (frontend)
+   cd frontend-v2
+   yarn dev
+   ```
+
+6. **Access the applications**:
+   - Frontend: http://localhost:5173
+   - Backend API Docs: http://localhost:8000/docs
 
 ## 🔧 Configuration
 
