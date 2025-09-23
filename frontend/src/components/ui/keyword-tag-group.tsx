@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { X, Plus, Check, Minus } from 'lucide-react';
-import { Badge } from './badge';
-import { cn } from '@/lib/utils';
 import {
   Button,
   IconButton,
@@ -11,7 +8,10 @@ import {
   CardActions,
   Typography,
   Box,
+  Chip,
+  Divider
 } from '@mui/material';
+import { Close, Add, Check, Remove } from '@mui/icons-material';
 
 interface KeywordTagProps {
   keyword: string;
@@ -36,112 +36,192 @@ export function KeywordTag({
 }: KeywordTagProps) {
   const statusConfig = {
     matched: {
-      bgClass:
-        'bg-brand-green/10 border-brand-green/20 text-brand-green dark:bg-brand-green/20 dark:border-brand-green/30',
-      icon: <Check className="w-3 h-3" />,
-      hoverClass: 'hover:bg-brand-green/20 dark:hover:bg-brand-green/30',
+      sx: {
+        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+        borderColor: 'rgba(76, 175, 80, 0.2)',
+        color: '#4caf50',
+        '&:hover': {
+          backgroundColor: 'rgba(76, 175, 80, 0.2)'
+        }
+      },
+      icon: <Check fontSize="small" />,
     },
     missing: {
-      bgClass:
-        'bg-destructive/10 border-destructive/20 text-destructive dark:bg-destructive/20 dark:border-destructive/30',
-      icon: <X className="w-3 h-3" />,
-      hoverClass: 'hover:bg-destructive/20 dark:hover:bg-destructive/30',
+      sx: {
+        backgroundColor: 'rgba(244, 67, 54, 0.1)',
+        borderColor: 'rgba(244, 67, 54, 0.2)',
+        color: '#f44336',
+        '&:hover': {
+          backgroundColor: 'rgba(244, 67, 54, 0.2)'
+        }
+      },
+      icon: <Close fontSize="small" />,
     },
     suggested: {
-      bgClass:
-        'bg-primary/10 border-primary/20 text-primary dark:bg-primary/20 dark:border-primary/30',
-      icon: <Plus className="w-3 h-3" />,
-      hoverClass: 'hover:bg-primary/20 dark:hover:bg-primary/30',
+      sx: {
+        backgroundColor: 'rgba(var(--md-sys-color-primary), 0.1)',
+        borderColor: 'rgba(var(--md-sys-color-primary), 0.2)',
+        color: 'primary.main',
+        '&:hover': {
+          backgroundColor: 'rgba(var(--md-sys-color-primary), 0.2)'
+        }
+      },
+      icon: <Add fontSize="small" />,
     },
     accepted: {
-      bgClass:
-        'bg-brand-green/10 border-brand-green/30 text-brand-green dark:bg-brand-green/20 dark:border-brand-green/40',
-      icon: <Check className="w-3 h-3" />,
-      hoverClass: 'hover:bg-brand-green/20 dark:hover:bg-brand-green/30',
+      sx: {
+        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+        borderColor: 'rgba(76, 175, 80, 0.3)',
+        color: '#4caf50',
+        '&:hover': {
+          backgroundColor: 'rgba(76, 175, 80, 0.2)'
+        }
+      },
+      icon: <Check fontSize="small" />,
     },
     rejected: {
-      bgClass: 'bg-muted border-muted-foreground/20 text-muted-foreground',
-      icon: <Minus className="w-3 h-3" />,
-      hoverClass: 'hover:bg-muted/80',
+      sx: {
+        backgroundColor: 'action.hover',
+        borderColor: 'divider',
+        color: 'text.secondary',
+        '&:hover': {
+          backgroundColor: 'action.selected'
+        }
+      },
+      icon: <Remove fontSize="small" />,
     },
   };
 
   const config = statusConfig[status];
 
   return (
-    <div
-      className={cn(
-        'inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-200 cursor-pointer group font-medium',
-        config.bgClass,
-        config.hoverClass
-      )}
+    <Box
       onClick={onClick}
+      sx={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 1.5,
+        px: 1.5,
+        py: 0.75,
+        borderRadius: '1rem',
+        border: '1px solid',
+        transition: 'all 0.2s ease-in-out',
+        cursor: 'pointer',
+        fontWeight: 500,
+        ...config.sx
+      }}
     >
-      <span className="shrink-0">{config.icon}</span>
+      <Box sx={{ display: 'flex', flexShrink: 0 }}>{config.icon}</Box>
 
-      <span className="text-sm font-medium truncate">{keyword}</span>
+      <Typography
+        variant="body2"
+        sx={{
+          fontSize: '0.875rem',
+          fontWeight: 500,
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap'
+        }}
+      >
+        {keyword}
+      </Typography>
 
-      <div className="flex items-center gap-1 ms-1">
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, ml: 0.5 }}>
         {status === 'suggested' && (
           <>
             {onAccept && (
-              <Button
+              <IconButton
                 size="small"
-                variant="text"
-                className="h-5 w-5 p-0 hover:bg-brand-green/20 text-brand-green"
+                sx={{
+                  width: 20,
+                  height: 20,
+                  p: 0,
+                  color: '#4caf50',
+                  '&:hover': {
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)'
+                  }
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   onAccept();
                 }}
               >
-                <Check className="w-3 h-3" />
-              </Button>
+                <Check sx={{ fontSize: 12 }} />
+              </IconButton>
             )}
             {onReject && (
-              <Button
+              <IconButton
                 size="small"
-                variant="text"
-                className="h-5 w-5 p-0 hover:bg-destructive/20 text-destructive"
+                sx={{
+                  width: 20,
+                  height: 20,
+                  p: 0,
+                  color: '#f44336',
+                  '&:hover': {
+                    backgroundColor: 'rgba(244, 67, 54, 0.2)'
+                  }
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   onReject();
                 }}
               >
-                <X className="w-3 h-3" />
-              </Button>
+                <Close sx={{ fontSize: 12 }} />
+              </IconButton>
             )}
           </>
         )}
 
         {status === 'suggested' && onAdd && (
-          <Button
+          <IconButton
             size="small"
-            variant="text"
-            className="h-5 w-5 p-0 hover:bg-primary/20 text-primary"
+            sx={{
+              width: 20,
+              height: 20,
+              p: 0,
+              color: 'primary.main',
+              '&:hover': {
+                backgroundColor: 'primary.light',
+                opacity: 0.2
+              }
+            }}
             onClick={(e) => {
               e.stopPropagation();
               onAdd();
             }}
           >
-            <Plus className="w-3 h-3" />
-          </Button>
+            <Add sx={{ fontSize: 12 }} />
+          </IconButton>
         )}
 
         {removable && onRemove && (
-          <Button
+          <IconButton
             size="small"
-            variant="text"
-            className="h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-destructive/20 text-muted-foreground hover:text-destructive"
+            sx={{
+              width: 20,
+              height: 20,
+              p: 0,
+              opacity: 0,
+              color: 'text.secondary',
+              transition: 'all 0.2s ease-in-out',
+              '.group:hover &': {
+                opacity: 1
+              },
+              '&:hover': {
+                backgroundColor: 'rgba(244, 67, 54, 0.2)',
+                color: '#f44336'
+              }
+            }}
             onClick={(e) => {
               e.stopPropagation();
               onRemove();
             }}
           >
-            <X className="w-3 h-3" />
-          </Button>
+            <Close sx={{ fontSize: 12 }} />
+          </IconButton>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
 
@@ -160,7 +240,6 @@ interface KeywordTagGroupProps {
   onTagClick?: (keyword: string) => void;
   maxVisible?: number;
   showAcceptRejectAll?: boolean;
-  className?: string;
 }
 
 export function KeywordTagGroup({
@@ -174,7 +253,6 @@ export function KeywordTagGroup({
   onTagClick,
   maxVisible,
   showAcceptRejectAll = false,
-  className,
 }: KeywordTagGroupProps) {
   const [showAll, setShowAll] = useState(false);
 
@@ -200,79 +278,128 @@ export function KeywordTagGroup({
   };
 
   return (
-    <Card className={cn('p-4 space-y-4', className)}>
+    <Card sx={{ p: 2 }}>
       {title && (
-        <div className="flex items-center justify-between">
-          <div>
-            <h4 className="font-semibold text-foreground">{title}</h4>
-            {description && <p className="text-sm text-muted-foreground mt-1">{description}</p>}
-          </div>
-          <div className="flex items-center gap-2 text-xs">
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+          <Box>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: 'text.primary' }}>
+              {title}
+            </Typography>
+            {description && (
+              <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                {description}
+              </Typography>
+            )}
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, fontSize: '0.75rem' }}>
             {statusCounts.matched > 0 && (
-              <Badge
+              <Chip
+                label={`${statusCounts.matched} matched`}
                 variant="outlined"
-                className="border-brand-green/30 text-brand-green font-medium"
-              >
-                {statusCounts.matched} matched
-              </Badge>
+                size="small"
+                sx={{
+                  borderColor: 'rgba(76, 175, 80, 0.3)',
+                  color: '#4caf50',
+                  fontWeight: 500,
+                  fontSize: '0.75rem'
+                }}
+              />
             )}
             {statusCounts.missing > 0 && (
-              <Badge
+              <Chip
+                label={`${statusCounts.missing} missing`}
                 variant="outlined"
-                className="border-destructive/30 text-destructive font-medium"
-              >
-                {statusCounts.missing} missing
-              </Badge>
+                size="small"
+                sx={{
+                  borderColor: 'rgba(244, 67, 54, 0.3)',
+                  color: '#f44336',
+                  fontWeight: 500,
+                  fontSize: '0.75rem'
+                }}
+              />
             )}
             {statusCounts.suggested > 0 && (
-              <Badge variant="outlined" className="border-primary/30 text-primary font-medium">
-                {statusCounts.suggested} suggested
-              </Badge>
+              <Chip
+                label={`${statusCounts.suggested} suggested`}
+                variant="outlined"
+                size="small"
+                sx={{
+                  borderColor: 'rgba(var(--md-sys-color-primary), 0.3)',
+                  color: 'primary.main',
+                  fontWeight: 500,
+                  fontSize: '0.75rem'
+                }}
+              />
             )}
             {statusCounts.accepted > 0 && (
-              <Badge
+              <Chip
+                label={`${statusCounts.accepted} accepted`}
                 variant="outlined"
-                className="border-brand-green/40 text-brand-green font-medium"
-              >
-                {statusCounts.accepted} accepted
-              </Badge>
+                size="small"
+                sx={{
+                  borderColor: 'rgba(76, 175, 80, 0.4)',
+                  color: '#4caf50',
+                  fontWeight: 500,
+                  fontSize: '0.75rem'
+                }}
+              />
             )}
             {statusCounts.rejected > 0 && (
-              <Badge
+              <Chip
+                label={`${statusCounts.rejected} rejected`}
                 variant="outlined"
-                className="border-muted-foreground/30 text-muted-foreground font-medium"
-              >
-                {statusCounts.rejected} rejected
-              </Badge>
+                size="small"
+                sx={{
+                  borderColor: 'rgba(158, 158, 158, 0.3)',
+                  color: 'text.secondary',
+                  fontWeight: 500,
+                  fontSize: '0.75rem'
+                }}
+              />
             )}
-          </div>
-        </div>
+          </Box>
+        </Box>
       )}
 
       {showAcceptRejectAll && suggestedKeywords.length > 0 && (
-        <div className="flex items-center gap-2 pb-2 border-b border-border">
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={handleAcceptAll}
-            className="text-brand-green border-brand-green/30 hover:bg-brand-green/10"
-          >
-            <Check className="w-3 h-3 me-1" />
-            Accept All Suggested
-          </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={handleRejectAll}
-            className="text-destructive border-destructive/30 hover:bg-destructive/10"
-          >
-            <X className="w-3 h-3 me-1" />
-            Reject All Suggested
-          </Button>
-        </div>
+        <Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, pb: 1, mb: 1 }}>
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={handleAcceptAll}
+              startIcon={<Check sx={{ fontSize: 12 }} />}
+              sx={{
+                color: '#4caf50',
+                borderColor: 'rgba(76, 175, 80, 0.3)',
+                '&:hover': {
+                  backgroundColor: 'rgba(76, 175, 80, 0.1)'
+                }
+              }}
+            >
+              Accept All Suggested
+            </Button>
+            <Button
+              size="small"
+              variant="outlined"
+              onClick={handleRejectAll}
+              startIcon={<Close sx={{ fontSize: 12 }} />}
+              sx={{
+                color: '#f44336',
+                borderColor: 'rgba(244, 67, 54, 0.3)',
+                '&:hover': {
+                  backgroundColor: 'rgba(244, 67, 54, 0.1)'
+                }
+              }}
+            >
+              Reject All Suggested
+            </Button>
+          </Box>
+          <Divider sx={{ mb: 2 }} />
+        </Box>
       )}
 
-      <div className="flex flex-wrap gap-2">
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
         {visibleKeywords.map(({ keyword, status, id }, index) => (
           <KeywordTag
             key={id || index}
@@ -292,12 +419,20 @@ export function KeywordTagGroup({
             variant="outlined"
             size="small"
             onClick={() => setShowAll(!showAll)}
-            className="border-border text-muted-foreground hover:border-primary hover:text-primary font-medium"
+            sx={{
+              borderColor: 'divider',
+              color: 'text.secondary',
+              fontWeight: 500,
+              '&:hover': {
+                borderColor: 'primary.main',
+                color: 'primary.main'
+              }
+            }}
           >
             {showAll ? 'Show Less' : `+${hiddenCount} more`}
           </Button>
         )}
-      </div>
+      </Box>
     </Card>
   );
 }

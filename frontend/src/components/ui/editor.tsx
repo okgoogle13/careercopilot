@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 import { cn } from '@/lib/utils';
 
 export interface EditorHandle {
@@ -153,7 +154,7 @@ const Editor = React.forwardRef<EditorHandle, EditorProps>(({
         onInput={handleInput}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        dangerouslySetInnerHTML={{ __html: value }}
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(value) }}
         data-placeholder={placeholder}
         style={{
           wordWrap: 'break-word',

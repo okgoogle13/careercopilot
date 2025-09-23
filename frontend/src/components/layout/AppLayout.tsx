@@ -21,17 +21,17 @@ import {
 import {
   Menu as MenuIcon,
   Dashboard,
-  FileText,
-  BarChart3,
-  Users,
+  Description as FileText,
+  BarChart as BarChart3,
+  People as Users,
   Settings,
   TrendingUp,
-  Target,
-  MessageSquare,
-  LogOut,
+  GpsFixed as Target,
+  Chat as MessageSquare,
+  Logout as LogOut,
   Palette,
   ChevronLeft,
-} from 'lucide-react';
+} from '@mui/icons-material';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -51,7 +51,7 @@ interface AppLayoutProps {
 interface NavigationItem {
   id: string;
   label: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType;
   description?: string;
   badge?: string | number;
   divider?: boolean;
@@ -183,7 +183,7 @@ export function AppLayout({
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button
             size="small"
-            startIcon={<Palette size={16} />}
+            startIcon={<Palette fontSize="small" />}
             onClick={onThemeToggle}
             sx={{ fontSize: '0.75rem' }}
           >
@@ -221,7 +221,7 @@ export function AppLayout({
                     }}
                   >
                     <ListItemIcon sx={{ minWidth: 40 }}>
-                      <Icon size={20} />
+                      <Icon fontSize="small" />
                     </ListItemIcon>
                     <ListItemText
                       primary={item.label}
@@ -273,7 +273,7 @@ export function AppLayout({
           }}
         >
           <ListItemIcon sx={{ minWidth: 40, color: 'inherit' }}>
-            <LogOut size={20} />
+            <LogOut fontSize="small" />
           </ListItemIcon>
           <ListItemText
             primary="Sign Out"
@@ -331,7 +331,7 @@ export function AppLayout({
             <Button
               color="inherit"
               onClick={onToggleDemoNav}
-              startIcon={<ChevronLeft size={16} />}
+              startIcon={<ChevronLeft fontSize="small" />}
               sx={{ fontSize: '0.75rem' }}
             >
               Hide Navigation
@@ -392,7 +392,7 @@ export function AppLayout({
           <Button
             variant="contained"
             onClick={onToggleDemoNav}
-            startIcon={<MenuIcon size={16} />}
+            startIcon={<MenuIcon fontSize="small" />}
             sx={{
               borderRadius: 20,
               px: 3,

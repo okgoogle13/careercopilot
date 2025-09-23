@@ -1,6 +1,6 @@
 import React from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { Loader2 } from 'lucide-react';
+import { CircularProgress } from '@mui/material';
 import { cn } from './utils';
 
 interface M3ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -164,7 +164,7 @@ const M3Button = React.forwardRef<HTMLButtonElement, M3ButtonProps>(
       >
         {isLoading && (
           <span className="absolute inset-0 flex items-center justify-center bg-inherit">
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <CircularProgress size={16} />
             {loadingText && <span className="ms-2">{loadingText}</span>}
           </span>
         )}

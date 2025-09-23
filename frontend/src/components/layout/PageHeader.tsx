@@ -14,16 +14,16 @@ import {
   Divider,
 } from '@mui/material';
 import {
-  ArrowLeft,
-  MoreVertical,
-  Share2,
-  Bookmark,
+  ArrowBack as ArrowLeft,
+  MoreVert as MoreVertical,
+  Share as Share2,
+  BookmarkBorder as Bookmark,
   Download,
   Edit,
-  Trash2,
+  Delete as Trash2,
   ChevronRight,
   Home,
-} from 'lucide-react';
+} from '@mui/icons-material';
 
 interface BreadcrumbItem {
   label: string;
@@ -34,7 +34,7 @@ interface BreadcrumbItem {
 interface ActionButton {
   id: string;
   label: string;
-  icon?: React.ComponentType<{ size?: number }>;
+  icon?: React.ComponentType;
   variant?: 'contained' | 'outlined' | 'text';
   color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
   onClick: () => void;
@@ -45,7 +45,7 @@ interface ActionButton {
 interface MenuAction {
   id: string;
   label: string;
-  icon?: React.ComponentType<{ size?: number }>;
+  icon?: React.ComponentType;
   onClick: () => void;
   disabled?: boolean;
   divider?: boolean;
@@ -123,7 +123,7 @@ export function PageHeader({
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <Breadcrumbs
-            separator={<ChevronRight size={14} />}
+            separator={<ChevronRight fontSize="small" />}
             sx={{ mb: 2 }}
             aria-label="breadcrumb"
           >
@@ -149,7 +149,7 @@ export function PageHeader({
                   },
                 }}
               >
-                {index === 0 && <Home size={14} />}
+                {index === 0 && <Home fontSize="small" />}
                 {crumb.label}
               </Link>
             ))}
@@ -169,7 +169,7 @@ export function PageHeader({
                   '&:hover': { color: 'primary.main' },
                 }}
               >
-                <ArrowLeft size={20} />
+                <ArrowLeft />
               </IconButton>
             </Tooltip>
           )}
@@ -274,7 +274,7 @@ export function PageHeader({
                   color={action.color || 'primary'}
                   onClick={action.onClick}
                   disabled={action.disabled}
-                  startIcon={Icon && <Icon size={16} />}
+                  startIcon={Icon && <Icon fontSize="small" />}
                   size={isCompact ? 'small' : 'medium'}
                   sx={{
                     whiteSpace: 'nowrap',
@@ -300,7 +300,7 @@ export function PageHeader({
                       color={action.color || 'default'}
                       sx={{ display: { xs: 'flex', sm: 'none' } }}
                     >
-                      <Icon size={20} />
+                      <Icon />
                     </IconButton>
                   </span>
                 </Tooltip>
@@ -315,7 +315,7 @@ export function PageHeader({
                   sx={{ color: 'text.secondary' }}
                   aria-label="more actions"
                 >
-                  <MoreVertical size={20} />
+                  <MoreVertical />
                 </IconButton>
                 <Menu
                   anchorEl={menuAnchorEl}
@@ -338,7 +338,7 @@ export function PageHeader({
                       >
                         {Icon && (
                           <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-                            <Icon size={16} />
+                            <Icon fontSize="small" />
                           </Box>
                         )}
                         {action.label}
@@ -366,7 +366,7 @@ export function PageHeader({
                         >
                           {Icon && (
                             <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-                              <Icon size={16} />
+                              <Icon fontSize="small" />
                             </Box>
                           )}
                           {action.label}

@@ -21,6 +21,22 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    minify: 'terser',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          mui: ['@mui/material', '@mui/icons-material'],
+          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage'],
+          utils: ['date-fns', 'tailwind-merge', 'class-variance-authority'],
+        },
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+        assetFileNames: 'assets/[name].[hash].[ext]',
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    assetsInlineLimit: 4096,
   },
   css: {
     postcss: {
