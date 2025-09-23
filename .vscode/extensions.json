@@ -15,7 +15,8 @@
     "github.vscode-pull-request-github",
     "yzhang.markdown-all-in-one",
     "redhat.vscode-yaml",
-    "pkief.material-icon-theme"
+    "pkief.material-icon-theme",
+    "google.geminicodeassist"
   ],
   "unwantedRecommendations": [
     "ms-python.autopep8",
