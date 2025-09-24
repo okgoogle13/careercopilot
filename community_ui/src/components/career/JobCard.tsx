@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
-import { 
-  Bookmark, 
-  BookmarkCheck, 
-  MapPin, 
-  Building, 
-  Clock, 
-  DollarSign, 
-  Users, 
+import React, { useState } from "react";
+import {
+  Bookmark,
+  BookmarkCheck,
+  MapPin,
+  Building,
+  Clock,
+  DollarSign,
+  Users,
   Zap,
   ExternalLink,
   Star,
   TrendingUp,
-  Shield
-} from 'lucide-react';
-import { M3Card, M3CardHeader, M3CardTitle, M3CardDescription, M3CardContent, M3CardFooter } from '../ui/m3-card';
-import { M3Button } from '../ui/m3-button';
-import { Badge } from '../ui/badge';
-import { cn, formatRelativeTime } from '../ui/utils';
+  Shield,
+} from "lucide-react";
+import {
+  M3Card,
+  M3CardHeader,
+  M3CardTitle,
+  M3CardDescription,
+  M3CardContent,
+  M3CardFooter,
+} from "../ui/m3-card";
+import { M3Button } from "../ui/m3-button";
+import { Badge } from "../ui/badge";
+import { cn, formatRelativeTime } from "../ui/utils";
 
 export interface JobCardProps {
   job: {
@@ -24,12 +31,12 @@ export interface JobCardProps {
     title: string;
     company: string;
     location: string;
-    type: 'full-time' | 'part-time' | 'contract' | 'remote' | 'hybrid';
+    type: "full-time" | "part-time" | "contract" | "remote" | "hybrid";
     salary?: {
       min: number;
       max: number;
       currency: string;
-      period: 'hourly' | 'annually';
+      period: "hourly" | "annually";
     };
     description: string;
     requirements: string[];
@@ -39,7 +46,7 @@ export interface JobCardProps {
     applicationDeadline?: Date | string;
     companySize?: string;
     industry?: string;
-    experienceLevel: 'entry' | 'mid' | 'senior' | 'executive';
+    experienceLevel: "entry" | "mid" | "senior" | "executive";
     remote: boolean;
     sponsored?: boolean;
     verified?: boolean;
@@ -49,7 +56,7 @@ export interface JobCardProps {
     };
     logoUrl?: string;
   };
-  variant?: 'default' | 'compact' | 'featured';
+  variant?: "default" | "compact" | "featured";
   saved?: boolean;
   applied?: boolean;
   onSave?: (jobId: string) => void;
@@ -60,13 +67,13 @@ export interface JobCardProps {
 
 export function JobCard({
   job,
-  variant = 'default',
+  variant = "default",
   saved = false,
   applied = false,
   onSave,
   onApply,
   onViewDetails,
-  className
+  className,
 }: JobCardProps) {
   const [isSaved, setIsSaved] = useState(saved);
   const [isHovered, setIsHovered] = useState(false);
@@ -89,8 +96,8 @@ export function JobCard({
   const formatSalary = () => {
     if (!job.salary) return null;
     const { min, max, currency, period } = job.salary;
-    const periodText = period === 'hourly' ? '/hr' : '/year';
-    
+    const periodText = period === "hourly" ? "/hr" : "/year";
+
     if (min === max) {
       return `${currency}${min.toLocaleString()}${periodText}`;
     }
@@ -99,31 +106,31 @@ export function JobCard({
 
   const getExperienceBadgeColor = () => {
     switch (job.experienceLevel) {
-      case 'entry':
-        return 'bg-green-500/10 text-green-600 border-green-500/20';
-      case 'mid':
-        return 'bg-blue-500/10 text-blue-600 border-blue-500/20';
-      case 'senior':
-        return 'bg-purple-500/10 text-purple-600 border-purple-500/20';
-      case 'executive':
-        return 'bg-orange-500/10 text-orange-600 border-orange-500/20';
+      case "entry":
+        return "bg-green-500/10 text-green-600 border-green-500/20";
+      case "mid":
+        return "bg-blue-500/10 text-blue-600 border-blue-500/20";
+      case "senior":
+        return "bg-purple-500/10 text-purple-600 border-purple-500/20";
+      case "executive":
+        return "bg-orange-500/10 text-orange-600 border-orange-500/20";
       default:
-        return 'bg-surface-container text-on-surface border-outline-variant';
+        return "bg-surface-container text-on-surface border-outline-variant";
     }
   };
 
   const getMatchScoreColor = (score: number) => {
-    if (score >= 90) return 'text-green-600 bg-green-500/10';
-    if (score >= 75) return 'text-blue-600 bg-blue-500/10';
-    if (score >= 60) return 'text-yellow-600 bg-yellow-500/10';
-    return 'text-red-600 bg-red-500/10';
+    if (score >= 90) return "text-green-600 bg-green-500/10";
+    if (score >= 75) return "text-blue-600 bg-blue-500/10";
+    if (score >= 60) return "text-yellow-600 bg-yellow-500/10";
+    return "text-red-600 bg-red-500/10";
   };
 
-  if (variant === 'compact') {
+  if (variant === "compact") {
     return (
       <M3Card
         variant="interactive"
-        className={cn('transition-all duration-300', className)}
+        className={cn("transition-all duration-300", className)}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={handleViewDetails}
@@ -133,9 +140,7 @@ export function JobCard({
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="font-medium text-foreground truncate">{job.title}</h3>
-                {job.verified && (
-                  <Shield className="w-4 h-4 text-blue-500" />
-                )}
+                {job.verified && <Shield className="w-4 h-4 text-blue-500" />}
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Building className="w-3 h-3" />
@@ -145,13 +150,15 @@ export function JobCard({
                 <span className="truncate">{job.location}</span>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2 ml-4">
               {job.aiMatch && (
-                <div className={cn(
-                  'text-xs font-medium px-2 py-1 rounded-full',
-                  getMatchScoreColor(job.aiMatch.score)
-                )}>
+                <div
+                  className={cn(
+                    "text-xs font-medium px-2 py-1 rounded-full",
+                    getMatchScoreColor(job.aiMatch.score),
+                  )}
+                >
                   {job.aiMatch.score}% match
                 </div>
               )}
@@ -159,10 +166,12 @@ export function JobCard({
                 variant="text"
                 size="small"
                 onClick={handleSave}
-                icon={isSaved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+                icon={
+                  isSaved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />
+                }
                 className={cn(
-                  'p-2',
-                  isSaved ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                  "p-2",
+                  isSaved ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
               />
             </div>
@@ -174,11 +183,11 @@ export function JobCard({
 
   return (
     <M3Card
-      variant={variant === 'featured' ? 'selected' : 'interactive'}
+      variant={variant === "featured" ? "selected" : "interactive"}
       className={cn(
-        'transition-all duration-300',
-        variant === 'featured' && 'ring-2 ring-primary/20',
-        className
+        "transition-all duration-300",
+        variant === "featured" && "ring-2 ring-primary/20",
+        className,
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -198,9 +207,7 @@ export function JobCard({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-muted-foreground">{job.company}</span>
-                {job.verified && (
-                  <Shield className="w-4 h-4 text-blue-500" />
-                )}
+                {job.verified && <Shield className="w-4 h-4 text-blue-500" />}
                 {job.sponsored && (
                   <Badge variant="secondary" className="text-xs bg-tertiary/10 text-tertiary">
                     Sponsored
@@ -217,46 +224,48 @@ export function JobCard({
           <div className="flex items-center gap-2">
             {job.aiMatch && (
               <div className="text-center">
-                <div className={cn(
-                  'text-lg font-semibold px-3 py-1 rounded-lg',
-                  getMatchScoreColor(job.aiMatch.score)
-                )}>
+                <div
+                  className={cn(
+                    "text-lg font-semibold px-3 py-1 rounded-lg",
+                    getMatchScoreColor(job.aiMatch.score),
+                  )}
+                >
                   {job.aiMatch.score}%
                 </div>
                 <div className="text-xs text-muted-foreground">AI Match</div>
               </div>
             )}
-            
+
             <M3Button
               variant="text"
               size="small"
               onClick={handleSave}
-              icon={isSaved ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />}
+              icon={
+                isSaved ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />
+              }
               className={cn(
-                'p-2',
-                isSaved ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+                "p-2",
+                isSaved ? "text-primary" : "text-muted-foreground hover:text-foreground",
               )}
             />
           </div>
         </div>
 
-        <M3CardTitle className="text-xl mb-2">
-          {job.title}
-        </M3CardTitle>
+        <M3CardTitle className="text-xl mb-2">{job.title}</M3CardTitle>
 
         <div className="flex flex-wrap items-center gap-4 mb-3 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
             <MapPin className="w-4 h-4" />
             <span>{job.location}</span>
           </div>
-          
+
           {job.salary && (
             <div className="flex items-center gap-1">
               <DollarSign className="w-4 h-4" />
               <span>{formatSalary()}</span>
             </div>
           )}
-          
+
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4" />
             <span>{formatRelativeTime(job.postedDate)}</span>
@@ -272,9 +281,9 @@ export function JobCard({
         {/* Job Type & Experience Level */}
         <div className="flex flex-wrap gap-2 mb-4">
           <Badge variant="outline" className="text-xs">
-            {job.type.replace('-', ' ').toUpperCase()}
+            {job.type.replace("-", " ").toUpperCase()}
           </Badge>
-          <Badge variant="outline" className={cn('text-xs border', getExperienceBadgeColor())}>
+          <Badge variant="outline" className={cn("text-xs border", getExperienceBadgeColor())}>
             {job.experienceLevel.toUpperCase()} LEVEL
           </Badge>
           {job.remote && (
@@ -351,7 +360,7 @@ export function JobCard({
             Apply Now
           </M3Button>
         )}
-        
+
         <M3Button
           variant="outlined"
           size="medium"

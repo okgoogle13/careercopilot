@@ -18,7 +18,12 @@ interface ComponentLibraryProps {
   onNavigateToM3Colors?: () => void;
 }
 
-export function ComponentLibrary({ onBack, onNavigateToAnimated, onNavigateToComplex, onNavigateToM3Colors }: ComponentLibraryProps) {
+export function ComponentLibrary({
+  onBack,
+  onNavigateToAnimated,
+  onNavigateToComplex,
+  onNavigateToM3Colors,
+}: ComponentLibraryProps) {
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-background p-6">
@@ -26,19 +31,15 @@ export function ComponentLibrary({ onBack, onNavigateToAnimated, onNavigateToCom
           {/* Header */}
           <div className="mb-8">
             <div className="flex items-center gap-4 mb-4">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={onBack}
-                className="gap-2"
-              >
+              <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
                 <ArrowLeft className="w-4 h-4" />
                 Back to Dashboard
               </Button>
             </div>
             <h1 className="mb-2">Career Copilot Component Library</h1>
             <p className="text-muted-foreground">
-              A comprehensive design system showcasing all reusable components used throughout the Career Copilot platform
+              A comprehensive design system showcasing all reusable components used throughout the
+              Career Copilot platform
             </p>
           </div>
 
@@ -49,8 +50,8 @@ export function ComponentLibrary({ onBack, onNavigateToAnimated, onNavigateToCom
             <DisplayComponentsSection />
             <InteractiveComponentsSection />
             <LayoutComponentsSection />
-            <DemoLinksSection 
-              onNavigateToAnimated={onNavigateToAnimated} 
+            <DemoLinksSection
+              onNavigateToAnimated={onNavigateToAnimated}
               onNavigateToComplex={onNavigateToComplex}
               onNavigateToM3Colors={onNavigateToM3Colors}
             />

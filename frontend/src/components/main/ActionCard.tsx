@@ -1,5 +1,14 @@
 import React from 'react';
-import { Card, CardContent, CardActions, Typography, Button, Box, LinearProgress, Chip } from '@mui/material';
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  Button,
+  Box,
+  LinearProgress,
+  Chip,
+} from '@mui/material';
 import { ArrowRight, AccessTime, CheckCircle, Error } from '@mui/icons-material';
 
 type ActionCardVariant = 'default' | 'featured' | 'urgent' | 'success';
@@ -27,21 +36,21 @@ const variantStyles = {
   default: 'border-gray-200',
   featured: 'border-primary bg-primary/5',
   urgent: 'border-orange-300 bg-orange-50',
-  success: 'border-green-300 bg-green-50'
+  success: 'border-green-300 bg-green-50',
 };
 
 const statusConfig = {
   pending: { color: 'text-gray-500', icon: AccessTime, bgColor: 'bg-gray-100' },
   'in-progress': { color: 'text-blue-500', icon: AccessTime, bgColor: 'bg-blue-100' },
   completed: { color: 'text-green-500', icon: CheckCircle, bgColor: 'bg-green-100' },
-  failed: { color: 'text-red-500', icon: Error, bgColor: 'bg-red-100' }
+  failed: { color: 'text-red-500', icon: Error, bgColor: 'bg-red-100' },
 };
 
 const priorityColors = {
   low: 'bg-gray-100 text-gray-800',
   medium: 'bg-blue-100 text-blue-800',
   high: 'bg-orange-100 text-orange-800',
-  critical: 'bg-red-100 text-red-800'
+  critical: 'bg-red-100 text-red-800',
 };
 
 export function ActionCard({
@@ -58,7 +67,7 @@ export function ActionCard({
   secondaryActionLabel,
   onSecondaryAction,
   icon,
-  tags = []
+  tags = [],
 }: ActionCardProps) {
   const StatusIcon = statusConfig[status].icon;
   const isCompleted = status === 'completed';
@@ -70,11 +79,7 @@ export function ActionCard({
         {/* Header with Icon and Status */}
         <Box className="flex items-start justify-between mb-4">
           <Box className="flex items-center gap-3">
-            {icon && (
-              <Box className="p-2 bg-primary/10 rounded-lg">
-                {icon}
-              </Box>
-            )}
+            {icon && <Box className="p-2 bg-primary/10 rounded-lg">{icon}</Box>}
             <Box>
               <Typography variant="h6" className="font-semibold mb-1">
                 {title}
@@ -89,11 +94,7 @@ export function ActionCard({
           </Box>
 
           {/* Priority Badge */}
-          <Chip
-            label={priority.toUpperCase()}
-            size="small"
-            className={priorityColors[priority]}
-          />
+          <Chip label={priority.toUpperCase()} size="small" className={priorityColors[priority]} />
         </Box>
 
         {/* Description */}
@@ -112,11 +113,7 @@ export function ActionCard({
                 {progress}%
               </Typography>
             </Box>
-            <LinearProgress
-              variant="determinate"
-              value={progress}
-              className="h-2 rounded-full"
-            />
+            <LinearProgress variant="determinate" value={progress} className="h-2 rounded-full" />
           </Box>
         )}
 
@@ -139,13 +136,7 @@ export function ActionCard({
         {tags.length > 0 && (
           <Box className="flex flex-wrap gap-1 mb-4">
             {tags.map((tag, index) => (
-              <Chip
-                key={index}
-                label={tag}
-                size="small"
-                variant="outlined"
-                className="text-xs"
-              />
+              <Chip key={index} label={tag} size="small" variant="outlined" className="text-xs" />
             ))}
           </Box>
         )}
@@ -167,11 +158,7 @@ export function ActionCard({
           )}
 
           {onSecondaryAction && secondaryActionLabel && (
-            <Button
-              variant="text"
-              onClick={onSecondaryAction}
-              disabled={isCompleted || isFailed}
-            >
+            <Button variant="text" onClick={onSecondaryAction} disabled={isCompleted || isFailed}>
               {secondaryActionLabel}
             </Button>
           )}

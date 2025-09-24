@@ -23,22 +23,10 @@ export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
       }
     };
 
-    const switchElement = (
-      <MuiSwitch
-        ref={ref}
-        {...props}
-        onChange={handleChange}
-      />
-    );
+    const switchElement = <MuiSwitch ref={ref} {...props} onChange={handleChange} />;
 
     if (label) {
-      return (
-        <FormControlLabel
-          control={switchElement}
-          label={label}
-          {...labelProps}
-        />
-      );
+      return <FormControlLabel control={switchElement} label={label} {...labelProps} />;
     }
 
     return switchElement;

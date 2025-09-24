@@ -2,13 +2,15 @@
 
 ## 1. mui-migration-prompt.md
 
-```markdown
+````markdown
 # MUI Migration Task
 
 ## Objective
+
 Migrate React component from Tailwind CSS to Material-UI using design tokens and theme system.
 
 ## Requirements
+
 - Replace ALL Tailwind classes with MUI components and sx props
 - Use theme tokens: theme.palette, theme.spacing, theme.typography
 - Preserve existing functionality, props, and TypeScript types
@@ -17,6 +19,7 @@ Migrate React component from Tailwind CSS to Material-UI using design tokens and
 - Update test file to work with MUI ThemeProvider
 
 ## MUI Components to Prefer
+
 - Layout: Box, Stack, Grid, Container
 - Surfaces: Paper, Card, Accordion
 - Navigation: AppBar, Drawer, BottomNavigation
@@ -25,20 +28,24 @@ Migrate React component from Tailwind CSS to Material-UI using design tokens and
 - Feedback: Alert, Snackbar, LinearProgress, CircularProgress
 
 ## Code Style
+
 - Use sx prop for styling, NOT makeStyles
 - Leverage semantic color tokens (primary.main, surface.main)
 - Use theme.breakpoints.up() for responsive design
 - Follow Material Design 3 elevation principles
 
 ## Theme Structure Reference
+
 ```typescript
-theme.palette.primary.main      // Purple #8B5CF6
-theme.palette.surface.main      // Dark surface
-theme.spacing(2)               // 16px
-theme.typography.h6            // Section headers
+theme.palette.primary.main; // Purple #8B5CF6
+theme.palette.surface.main; // Dark surface
+theme.spacing(2); // 16px
+theme.typography.h6; // Section headers
 ```
+````
 
 ## Validation Checklist
+
 - [ ] No Tailwind classes remain
 - [ ] All functionality preserved
 - [ ] TypeScript compiles without errors
@@ -47,11 +54,13 @@ theme.typography.h6            // Section headers
 - [ ] Accessibility maintained
 
 ## Files to Include
+
 - Target component file
 - Component test file
 - src/theme/theme.ts
 - Related TypeScript types
-```
+
+````
 
 ---
 
@@ -89,25 +98,29 @@ async def agent_flow(input_data: dict) -> dict:
         }
     except Exception as e:
         return {"success": False, "error": str(e)}
-```
+````
 
 ## Model Usage Guidelines
+
 - Document generation: gemini15Flash
-- ATS optimization: gemini15Flash  
+- ATS optimization: gemini15Flash
 - Complex analysis: gemini15Pro
 - Research synthesis: gemini15Pro
 
 ## Performance Targets
+
 - Document generation: <30 seconds
 - ATS analysis: <10 seconds
 - Response confidence: >80%
 
 ## Files to Include
+
 - Target agent file
 - Agent test file
 - Related type definitions
 - Backend configuration files
-```
+
+````
 
 ---
 
@@ -137,16 +150,17 @@ export const ComponentName: React.FC<ComponentProps> = ({
   // Props with defaults
 }) => {
   // Component logic
-  
+
   return (
     <Box sx={{ /* MUI styling */ }}>
       {/* Component content */}
     </Box>
   );
 };
-```
+````
 
 ## Design Patterns
+
 - Use theme tokens for all styling
 - Implement proper loading states with Skeleton
 - Include error states with Alert components
@@ -155,6 +169,7 @@ export const ComponentName: React.FC<ComponentProps> = ({
 - Include proper ARIA labels
 
 ## Testing Requirements
+
 - Unit tests for component behavior
 - Accessibility tests with jest-axe
 - Visual regression tests if complex
@@ -162,11 +177,13 @@ export const ComponentName: React.FC<ComponentProps> = ({
 - Mock external dependencies
 
 ## Files to Include
+
 - Design mockup or requirements
 - Related components for context
 - Theme configuration
 - Type definitions
-```
+
+````
 
 ---
 
@@ -180,7 +197,7 @@ Write or update tests for CareerCopilot components using Jest, React Testing Lib
 
 ## Testing Strategy
 - Unit tests: Component behavior and props
-- Integration tests: API interactions and workflows  
+- Integration tests: API interactions and workflows
 - E2E tests: Complete user journeys
 - Accessibility tests: WCAG compliance
 - Performance tests: Core Web Vitals
@@ -191,7 +208,7 @@ import { render, screen } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material';
 import { theme } from '../theme/theme';
 
-const renderWithTheme = (component: React.ReactElement) => 
+const renderWithTheme = (component: React.ReactElement) =>
   render(
     <ThemeProvider theme={theme}>
       {component}
@@ -204,30 +221,34 @@ describe('ComponentName', () => {
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
 });
-```
+````
 
 ## E2E Testing Patterns
+
 ```typescript
-test('complete user workflow', async ({ page }) => {
-  await page.goto('/dashboard');
+test("complete user workflow", async ({ page }) => {
+  await page.goto("/dashboard");
   await page.click('[data-testid="create-document"]');
-  await page.fill('[data-testid="job-input"]', 'job description');
+  await page.fill('[data-testid="job-input"]', "job description");
   await expect(page.locator('[data-testid="ats-score"]')).toBeVisible();
 });
 ```
 
 ## Test Coverage Requirements
+
 - Statements: >90%
 - Branches: >85%
 - Functions: >90%
 - Lines: >90%
 
 ## Files to Include
+
 - Component under test
 - Existing test files
 - Test utilities and mocks
 - Configuration files (jest.config.js)
-```
+
+````
 
 ---
 
@@ -274,7 +295,7 @@ Identify and fix bugs in CareerCopilot components or workflows.
 - Error logs or screenshots
 - Related test files
 - Configuration files if relevant
-```
+````
 
 ---
 
@@ -282,27 +303,32 @@ Identify and fix bugs in CareerCopilot components or workflows.
 
 ### File Selection by Task Type
 
-**MUI Migration**: 
+**MUI Migration**:
+
 ```
 mui-migration-prompt.md + component + test + theme.ts
 ```
 
 **AI Agent Work**:
+
 ```
 ai-agent-prompt.md + agent file + test + types
 ```
 
 **New Component**:
+
 ```
 component-prompt.md + design requirements + theme.ts + related components
 ```
 
 **Testing**:
+
 ```
 testing-prompt.md + component + existing tests + test config
 ```
 
 **Debugging**:
+
 ```
 debug-prompt.md + problematic file + error context + related files
 ```

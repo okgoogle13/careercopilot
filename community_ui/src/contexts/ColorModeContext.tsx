@@ -17,10 +17,10 @@ interface ColorModeProviderProps {
   storageKey?: string;
 }
 
-export function ColorModeProvider({ 
-  children, 
+export function ColorModeProvider({
+  children,
   defaultMode = "dark", // FML Career Copilot defaults to dark mode
-  storageKey = "fml-career-copilot-color-mode" 
+  storageKey = "fml-career-copilot-color-mode",
 }: ColorModeProviderProps) {
   const [colorMode, setColorModeState] = useState<ColorMode>(defaultMode);
   const [resolvedColorMode, setResolvedColorMode] = useState<"light" | "dark">("dark");
@@ -39,7 +39,7 @@ export function ColorModeProvider({
   // Resolve system preference
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    
+
     const handleChange = () => {
       if (colorMode === "system") {
         setResolvedColorMode(mediaQuery.matches ? "dark" : "light");
@@ -62,7 +62,7 @@ export function ColorModeProvider({
 
   const updateDocumentClass = (mode: "light" | "dark") => {
     const root = document.documentElement;
-    
+
     if (mode === "dark") {
       root.classList.add("dark");
       root.classList.remove("light");
@@ -74,10 +74,7 @@ export function ColorModeProvider({
     // Update meta theme-color for mobile browsers
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
-      metaThemeColor.setAttribute(
-        "content", 
-        mode === "dark" ? "#0f172a" : "#ffffff"
-      );
+      metaThemeColor.setAttribute("content", mode === "dark" ? "#0f172a" : "#ffffff");
     }
   };
 
@@ -112,11 +109,7 @@ export function ColorModeProvider({
     toggleColorMode,
   };
 
-  return (
-    <ColorModeContext.Provider value={value}>
-      {children}
-    </ColorModeContext.Provider>
-  );
+  return <ColorModeContext.Provider value={value}>{children}</ColorModeContext.Provider>;
 }
 
 export function useColorMode() {
@@ -144,37 +137,37 @@ interface ColorModeSwitcherProps {
   className?: string;
 }
 
-export function ColorModeSwitcher({ 
-  size = "md", 
+export function ColorModeSwitcher({
+  size = "md",
   showLabel = true,
-  className = "" 
+  className = "",
 }: ColorModeSwitcherProps) {
   const { colorMode, setColorMode, resolvedColorMode } = useColorMode();
-  
+
   const sizeClasses = {
     sm: "h-4 w-4",
     md: "h-5 w-5",
-    lg: "h-6 w-6"
+    lg: "h-6 w-6",
   };
 
   const modes = [
-    { 
-      value: "light" as ColorMode, 
-      label: "Light", 
+    {
+      value: "light" as ColorMode,
+      label: "Light",
       icon: "☀️",
-      description: "Light theme"
+      description: "Light theme",
     },
-    { 
-      value: "dark" as ColorMode, 
-      label: "Dark", 
+    {
+      value: "dark" as ColorMode,
+      label: "Dark",
       icon: "🌙",
-      description: "Dark theme (recommended)"
+      description: "Dark theme (recommended)",
     },
-    { 
-      value: "system" as ColorMode, 
-      label: "System", 
+    {
+      value: "system" as ColorMode,
+      label: "System",
       icon: "💻",
-      description: "Follow system preference"
+      description: "Follow system preference",
     },
   ];
 
@@ -188,9 +181,10 @@ export function ColorModeSwitcher({
             className={`
               flex items-center gap-2 px-3 py-2 rounded-md text-sm
               transition-all duration-200
-              ${colorMode === mode.value 
-                ? 'bg-primary text-primary-foreground shadow-sm' 
-                : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
+              ${
+                colorMode === mode.value
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground"
               }
               focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
             `}
@@ -201,7 +195,7 @@ export function ColorModeSwitcher({
           </button>
         ))}
       </div>
-      
+
       {showLabel && (
         <p className="text-xs text-muted-foreground mt-2">
           Current: {resolvedColorMode === "dark" ? "Dark" : "Light"} theme

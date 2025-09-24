@@ -15,7 +15,7 @@ import {
   Divider,
   Accordion,
   AccordionSummary,
-  AccordionDetails
+  AccordionDetails,
 } from '@mui/material';
 import { Search, Filter, X, ExpandMore } from '@mui/icons-material';
 
@@ -46,23 +46,17 @@ const defaultFilters: JobFilters = {
   company: [],
   skills: [],
   remote: false,
-  datePosted: 'any'
+  datePosted: 'any',
 };
 
-const jobTypeOptions = [
-  'Full-time',
-  'Part-time',
-  'Contract',
-  'Freelance',
-  'Internship'
-];
+const jobTypeOptions = ['Full-time', 'Part-time', 'Contract', 'Freelance', 'Internship'];
 
 const experienceLevelOptions = [
   'Entry Level',
   'Mid Level',
   'Senior Level',
   'Lead/Principal',
-  'Executive'
+  'Executive',
 ];
 
 const locationOptions = [
@@ -71,7 +65,7 @@ const locationOptions = [
   'Seattle, WA',
   'Austin, TX',
   'Chicago, IL',
-  'Remote'
+  'Remote',
 ];
 
 const companyOptions = [
@@ -84,7 +78,7 @@ const companyOptions = [
   'Tesla',
   'Uber',
   'Airbnb',
-  'Stripe'
+  'Stripe',
 ];
 
 const skillOptions = [
@@ -97,7 +91,7 @@ const skillOptions = [
   'AWS',
   'Docker',
   'Kubernetes',
-  'PostgreSQL'
+  'PostgreSQL',
 ];
 
 const datePostedOptions = [
@@ -105,7 +99,7 @@ const datePostedOptions = [
   { value: '1d', label: 'Past 24 hours' },
   { value: '3d', label: 'Past 3 days' },
   { value: '1w', label: 'Past week' },
-  { value: '1m', label: 'Past month' }
+  { value: '1m', label: 'Past month' },
 ];
 
 export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: FilterPanelProps) {
@@ -163,11 +157,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
               Filters
             </Typography>
             {getActiveFilterCount() > 0 && (
-              <Chip
-                label={getActiveFilterCount()}
-                size="small"
-                className="bg-primary text-white"
-              />
+              <Chip label={getActiveFilterCount()} size="small" className="bg-primary text-white" />
             )}
           </Box>
           <Button
@@ -194,7 +184,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             value={filters.searchQuery}
             onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
             InputProps={{
-              startAdornment: <Search sx={{ fontSize: 20 }} className="text-gray-400 mr-2" />
+              startAdornment: <Search sx={{ fontSize: 20 }} className="text-gray-400 mr-2" />,
             }}
             size="small"
             aria-label="Search jobs by keywords, skills, or companies"
@@ -215,20 +205,11 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             onChange={(_, value) => handleFilterChange('location', value)}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
-                <Chip
-                  {...getTagProps({ index })}
-                  key={option}
-                  label={option}
-                  size="small"
-                />
+                <Chip {...getTagProps({ index })} key={option} label={option} size="small" />
               ))
             }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder="Select locations"
-                size="small"
-              />
+              <TextField {...params} placeholder="Select locations" size="small" />
             )}
           />
         </Box>
@@ -251,7 +232,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
                       onChange={(e) => {
                         const newTypes = e.target.checked
                           ? [...filters.jobType, type]
-                          : filters.jobType.filter(t => t !== type);
+                          : filters.jobType.filter((t) => t !== type);
                         handleFilterChange('jobType', newTypes);
                       }}
                     />
@@ -281,7 +262,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
                       onChange={(e) => {
                         const newLevels = e.target.checked
                           ? [...filters.experienceLevel, level]
-                          : filters.experienceLevel.filter(l => l !== level);
+                          : filters.experienceLevel.filter((l) => l !== level);
                         handleFilterChange('experienceLevel', newLevels);
                       }}
                     />
@@ -340,20 +321,11 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             onChange={(_, value) => handleFilterChange('skills', value)}
             renderTags={(value, getTagProps) =>
               value.map((option, index) => (
-                <Chip
-                  {...getTagProps({ index })}
-                  key={option}
-                  label={option}
-                  size="small"
-                />
+                <Chip {...getTagProps({ index })} key={option} label={option} size="small" />
               ))
             }
             renderInput={(params) => (
-              <TextField
-                {...params}
-                placeholder="Select skills"
-                size="small"
-              />
+              <TextField {...params} placeholder="Select skills" size="small" />
             )}
           />
         </Box>

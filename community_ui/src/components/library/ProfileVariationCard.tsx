@@ -1,10 +1,15 @@
-import { useState } from 'react';
-import { Card } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { Star, MoreVertical, Edit, Copy, Trash2, Calendar, Hash } from 'lucide-react';
-import { format } from 'date-fns';
+import { useState } from "react";
+import { Card } from "../ui/card";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Star, MoreVertical, Edit, Copy, Trash2, Calendar, Hash } from "lucide-react";
+import { format } from "date-fns";
 
 interface ProfileVariationCardProps {
   profile_name: string;
@@ -27,27 +32,27 @@ export function ProfileVariationCard({
   onDuplicate,
   onDelete,
   onSetDefault,
-  onClick
+  onClick,
 }: ProfileVariationCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const formatDate = (date: Date) => {
     const now = new Date();
     const diffInHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
-    
+
     if (diffInHours < 24) {
-      return 'Today';
+      return "Today";
     } else if (diffInHours < 48) {
-      return 'Yesterday';
+      return "Yesterday";
     } else {
-      return format(date, 'MMM d');
+      return format(date, "MMM d");
     }
   };
 
   return (
-    <Card 
+    <Card
       className={`relative overflow-hidden transition-all duration-300 cursor-pointer group card-surface hover:border-brand-primary ${
-        is_default ? 'ring-2 ring-brand-primary/50 bg-brand-primary/5' : ''
+        is_default ? "ring-2 ring-brand-primary/50 bg-brand-primary/5" : ""
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -71,7 +76,7 @@ export function ProfileVariationCard({
               variant="ghost"
               size="sm"
               className={`h-8 w-8 p-0 transition-opacity bg-surface-card/80 backdrop-blur-sm border border-subtle hover:bg-surface-section ${
-                isHovered ? 'opacity-100' : 'opacity-0'
+                isHovered ? "opacity-100" : "opacity-0"
               }`}
               onClick={(e) => e.stopPropagation()}
             >
@@ -79,23 +84,41 @@ export function ProfileVariationCard({
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onEdit?.(); }}>
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                onEdit?.();
+              }}
+            >
               <Edit className="w-4 h-4 mr-2" />
               Edit Profile
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onDuplicate?.(); }}>
+            <DropdownMenuItem
+              onClick={(e) => {
+                e.stopPropagation();
+                onDuplicate?.();
+              }}
+            >
               <Copy className="w-4 h-4 mr-2" />
               Duplicate
             </DropdownMenuItem>
             {!is_default && (
-              <DropdownMenuItem onClick={(e) => { e.stopPropagation(); onSetDefault?.(); }}>
+              <DropdownMenuItem
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSetDefault?.();
+                }}
+              >
                 <Star className="w-4 h-4 mr-2" />
                 Set as Default
               </DropdownMenuItem>
             )}
             {!is_default && (
-              <DropdownMenuItem 
-                onClick={(e) => { e.stopPropagation(); onDelete?.(); }}
+              <DropdownMenuItem
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete?.();
+                }}
                 className="text-accent-red focus:text-accent-red focus:bg-accent-red/10"
               >
                 <Trash2 className="w-4 h-4 mr-2" />
@@ -127,7 +150,9 @@ export function ProfileVariationCard({
           <div className="flex items-center gap-2 text-content-secondary">
             <Calendar className="w-4 h-4 text-brand-primary/70" />
             <div>
-              <div className="text-sm font-semibold text-content-primary">{formatDate(last_modified)}</div>
+              <div className="text-sm font-semibold text-content-primary">
+                {formatDate(last_modified)}
+              </div>
               <div className="text-xs">Modified</div>
             </div>
           </div>
@@ -142,7 +167,7 @@ export function ProfileVariationCard({
             </span>
           </div>
           <div className="w-full bg-surface-section rounded-full h-2">
-            <div 
+            <div
               className="bg-gradient-to-r from-brand-primary to-brand-light h-2 rounded-full transition-all duration-500"
               style={{ width: `${Math.min(100, Math.round((keyword_count / 15) * 100))}%` }}
             />
@@ -150,8 +175,8 @@ export function ProfileVariationCard({
         </div>
 
         {/* Action Button */}
-        <Button 
-          variant="outline" 
+        <Button
+          variant="outline"
           className="w-full border-brand-primary/30 hover:border-brand-primary hover:bg-brand-primary/10 transition-all font-semibold rounded-3xl py-3"
           onClick={(e) => {
             e.stopPropagation();
@@ -164,9 +189,11 @@ export function ProfileVariationCard({
       </div>
 
       {/* Hover Effect Overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-r from-primary-purple/5 to-transparent transition-opacity duration-300 pointer-events-none ${
-        isHovered ? 'opacity-100' : 'opacity-0'
-      }`} />
+      <div
+        className={`absolute inset-0 bg-gradient-to-r from-primary-purple/5 to-transparent transition-opacity duration-300 pointer-events-none ${
+          isHovered ? "opacity-100" : "opacity-0"
+        }`}
+      />
     </Card>
   );
 }
@@ -194,7 +221,7 @@ export function ProfileVariationGrid({
   onProfileDelete,
   onProfileSetDefault,
   onProfileClick,
-  emptyState
+  emptyState,
 }: ProfileVariationGridProps) {
   if (profiles.length === 0 && emptyState) {
     return <>{emptyState}</>;

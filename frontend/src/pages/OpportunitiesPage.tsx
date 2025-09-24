@@ -706,7 +706,9 @@ export function OpportunitiesPage({
                               <Chip
                                 label={job.applicationStatus}
                                 size="small"
-                                color={getStatusColor(job.applicationStatus || 'not-applied') as any}
+                                color={
+                                  getStatusColor(job.applicationStatus || 'not-applied') as any
+                                }
                                 sx={{ textTransform: 'capitalize' }}
                               />
                             )}

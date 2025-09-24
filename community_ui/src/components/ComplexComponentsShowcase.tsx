@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { Separator } from './ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { 
+import React, { useState } from "react";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
+import { Separator } from "./ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import {
   ArrowLeft,
   Kanban,
   History,
@@ -18,56 +18,63 @@ import {
   TrendingUp,
   FileText,
   DollarSign,
-  CheckCircle
-} from 'lucide-react';
+  CheckCircle,
+} from "lucide-react";
 
 // Import the new components
-import { KanbanBoard } from './kanban/KanbanBoard';
-import { TimelineView } from './timeline/TimelineView';
-import { ActivityFeed } from './activity/ActivityFeed';
-import { FilterPanel } from './filter/FilterPanel';
-import { StatCard, CompactStatCard, DetailedStatCard, MinimalStatCard } from './cards/StatCard';
-import { FeatureCard, CompactFeatureCard, DetailedFeatureCard, MinimalFeatureCard } from './cards/FeatureCard';
+import { KanbanBoard } from "./kanban/KanbanBoard";
+import { TimelineView } from "./timeline/TimelineView";
+import { ActivityFeed } from "./activity/ActivityFeed";
+import { FilterPanel } from "./filter/FilterPanel";
+import { StatCard, CompactStatCard, DetailedStatCard, MinimalStatCard } from "./cards/StatCard";
+import {
+  FeatureCard,
+  CompactFeatureCard,
+  DetailedFeatureCard,
+  MinimalFeatureCard,
+} from "./cards/FeatureCard";
 
 interface ComplexComponentsShowcaseProps {
   onBack?: () => void;
 }
 
 export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps> = ({ onBack }) => {
-  const [activeDemo, setActiveDemo] = useState<'overview' | 'kanban' | 'timeline' | 'activity' | 'filter'>('overview');
+  const [activeDemo, setActiveDemo] = useState<
+    "overview" | "kanban" | "timeline" | "activity" | "filter"
+  >("overview");
   const [showFilterPanel, setShowFilterPanel] = useState(true);
 
   const componentSections = [
     {
-      id: 'overview',
-      title: 'Component Overview',
-      description: 'All new complex components at a glance',
-      icon: BarChart3
+      id: "overview",
+      title: "Component Overview",
+      description: "All new complex components at a glance",
+      icon: BarChart3,
     },
     {
-      id: 'kanban',
-      title: 'Kanban Board',
-      description: 'Application tracking with drag & drop',
-      icon: Kanban
+      id: "kanban",
+      title: "Kanban Board",
+      description: "Application tracking with drag & drop",
+      icon: Kanban,
     },
     {
-      id: 'timeline',
-      title: 'Timeline View',
-      description: 'Application history visualization',
-      icon: History
+      id: "timeline",
+      title: "Timeline View",
+      description: "Application history visualization",
+      icon: History,
     },
     {
-      id: 'activity',
-      title: 'Activity Feed',
-      description: 'Recent user activity tracking',
-      icon: Activity
+      id: "activity",
+      title: "Activity Feed",
+      description: "Recent user activity tracking",
+      icon: Activity,
     },
     {
-      id: 'filter',
-      title: 'Filter Panel',
-      description: 'Advanced filtering interface',
-      icon: Filter
-    }
+      id: "filter",
+      title: "Filter Panel",
+      description: "Advanced filtering interface",
+      icon: Filter,
+    },
   ];
 
   const renderOverview = () => (
@@ -82,7 +89,7 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
             icon={FileText}
             trend={{ value: 12, label: "this month", timeframe: "vs last month" }}
             status="positive"
-            onClick={() => console.log('Clicked total applications')}
+            onClick={() => console.log("Clicked total applications")}
           />
           <CompactStatCard
             title="ATS Score"
@@ -99,9 +106,7 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
             trend={{ value: -3, label: "interviews", timeframe: "last 30 days" }}
             status="warning"
           >
-            <div className="text-xs text-on-surface-variant">
-              Average response time: 5 days
-            </div>
+            <div className="text-xs text-on-surface-variant">Average response time: 5 days</div>
           </DetailedStatCard>
           <MinimalStatCard
             title="Salary Range"
@@ -122,12 +127,8 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
             icon={Sparkles}
             iconColor="text-brand-primary"
             status="available"
-            onClick={() => console.log('AI Resume Builder clicked')}
-            features={[
-              "Smart content suggestions",
-              "ATS optimization",
-              "Multiple templates"
-            ]}
+            onClick={() => console.log("AI Resume Builder clicked")}
+            features={["Smart content suggestions", "ATS optimization", "Multiple templates"]}
           />
           <CompactFeatureCard
             title="Interview Prep"
@@ -147,9 +148,9 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
               "Market salary analysis",
               "Negotiation scripts",
               "Success tracking",
-              "Industry benchmarks"
+              "Industry benchmarks",
             ]}
-            onLearnMore={() => console.log('Learn more clicked')}
+            onLearnMore={() => console.log("Learn more clicked")}
           />
           <MinimalFeatureCard
             title="Cover Letter AI"
@@ -179,11 +180,11 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
       <div>
         <h2 className="text-xl font-medium text-on-surface mb-4">Activity Feed (Compact)</h2>
         <Card className="p-4">
-          <ActivityFeed 
-            isCompact={true} 
-            maxItems={5} 
+          <ActivityFeed
+            isCompact={true}
+            maxItems={5}
             showHeader={false}
-            onViewAll={() => setActiveDemo('activity')}
+            onViewAll={() => setActiveDemo("activity")}
           />
         </Card>
       </div>
@@ -192,28 +193,19 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
       <div>
         <h2 className="text-xl font-medium text-on-surface mb-4">Loading & Error States</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard
-            title="Loading Example"
-            value="--"
-            loading={true}
-          />
+          <StatCard title="Loading Example" value="--" loading={true} />
           <StatCard
             title="Error Example"
             value="--"
             error={true}
-            onInfoClick={() => console.log('Error info clicked')}
+            onInfoClick={() => console.log("Error info clicked")}
           />
           <FeatureCard
             title="Loading Feature"
             description="This feature is being loaded..."
             loading={true}
           />
-          <StatCard
-            title="Disabled State"
-            value="N/A"
-            disabled={true}
-            icon={Clock}
-          />
+          <StatCard title="Disabled State" value="N/A" disabled={true} icon={Clock} />
         </div>
       </div>
     </div>
@@ -221,13 +213,13 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
 
   const renderComponentDemo = () => {
     switch (activeDemo) {
-      case 'kanban':
-        return <KanbanBoard onBack={() => setActiveDemo('overview')} />;
-      case 'timeline':
-        return <TimelineView onBack={() => setActiveDemo('overview')} />;
-      case 'activity':
+      case "kanban":
+        return <KanbanBoard onBack={() => setActiveDemo("overview")} />;
+      case "timeline":
+        return <TimelineView onBack={() => setActiveDemo("overview")} />;
+      case "activity":
         return <ActivityFeed className="p-6" />;
-      case 'filter':
+      case "filter":
         return (
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
@@ -237,15 +229,15 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
                   Interactive filtering interface for document library
                 </p>
               </div>
-              <Button variant="outline" onClick={() => setActiveDemo('overview')}>
+              <Button variant="outline" onClick={() => setActiveDemo("overview")}>
                 Back to Overview
               </Button>
             </div>
             <div className="flex gap-6">
-              <FilterPanel 
+              <FilterPanel
                 isOpen={showFilterPanel}
                 onClose={() => setShowFilterPanel(false)}
-                onFiltersChange={(filters) => console.log('Filters changed:', filters)}
+                onFiltersChange={(filters) => console.log("Filters changed:", filters)}
               />
               <div className="flex-1">
                 <Card className="p-8 text-center">
@@ -257,10 +249,7 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
                     This area would show filtered documents based on the selected criteria.
                   </p>
                   {!showFilterPanel && (
-                    <Button 
-                      variant="outline" 
-                      onClick={() => setShowFilterPanel(true)}
-                    >
+                    <Button variant="outline" onClick={() => setShowFilterPanel(true)}>
                       <Filter className="w-4 h-4 mr-2" />
                       Show Filters
                     </Button>
@@ -275,7 +264,7 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
     }
   };
 
-  if (activeDemo !== 'overview') {
+  if (activeDemo !== "overview") {
     return renderComponentDemo();
   }
 
@@ -311,7 +300,7 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
       {/* Navigation Tabs */}
       <div className="p-6">
         <div className="flex gap-2 mb-6">
-          {componentSections.map(section => {
+          {componentSections.map((section) => {
             const Icon = section.icon;
             return (
               <Button
@@ -333,33 +322,33 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
 
         {/* Component Features */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
-          {componentSections.map(section => {
+          {componentSections.map((section) => {
             const Icon = section.icon;
             return (
-              <Card 
+              <Card
                 key={section.id}
                 className={`
                   p-4 cursor-pointer transition-all duration-300
-                  ${activeDemo === section.id ? 'card-aurora' : 'card-surface hover:card-surface'}
+                  ${activeDemo === section.id ? "card-aurora" : "card-surface hover:card-surface"}
                 `}
                 onClick={() => setActiveDemo(section.id as any)}
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <Icon className={`
+                    <Icon
+                      className={`
                       w-6 h-6 
-                      ${activeDemo === section.id ? 'text-brand-primary' : 'text-on-surface-variant'}
-                    `} />
-                    {section.id !== 'overview' && (
+                      ${activeDemo === section.id ? "text-brand-primary" : "text-on-surface-variant"}
+                    `}
+                    />
+                    {section.id !== "overview" && (
                       <Badge variant="secondary" className="text-xs">
                         Interactive
                       </Badge>
                     )}
                   </div>
                   <div>
-                    <h3 className="font-medium text-on-surface mb-1">
-                      {section.title}
-                    </h3>
+                    <h3 className="font-medium text-on-surface mb-1">{section.title}</h3>
                     <p className="text-xs text-on-surface-variant leading-relaxed">
                       {section.description}
                     </p>

@@ -25,8 +25,8 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
             variant="h2"
             className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto"
           >
-            Create compelling applications, track your progress, and ace your interviews
-            with our AI-powered career copilot
+            Create compelling applications, track your progress, and ace your interviews with our
+            AI-powered career copilot
           </Typography>
 
           {/* CTA Buttons */}

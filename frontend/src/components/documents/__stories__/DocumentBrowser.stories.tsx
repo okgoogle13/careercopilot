@@ -87,12 +87,12 @@ export const WithCustomClass: Story = {
 export const WithSelection: Story = {
   render: (args) => {
     const [selectedDoc, setSelectedDoc] = React.useState<string | null>(null);
-    
+
     return (
       <div className="space-y-4">
         <DocumentBrowser
           {...args}
-          documents={args.documents.map(doc => ({
+          documents={args.documents.map((doc) => ({
             ...doc,
             isSelected: doc.id === selectedDoc,
           }))}
@@ -101,8 +101,12 @@ export const WithSelection: Story = {
         <div className="p-4 bg-surface-container-high rounded-lg">
           <h3 className="font-medium mb-2">Selected Document:</h3>
           <pre className="text-sm text-muted-foreground">
-            {selectedDoc 
-              ? JSON.stringify(args.documents.find(d => d.id === selectedDoc), null, 2)
+            {selectedDoc
+              ? JSON.stringify(
+                  args.documents.find((d) => d.id === selectedDoc),
+                  null,
+                  2
+                )
               : 'No document selected'}
           </pre>
         </div>

@@ -91,9 +91,20 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent>
                 <LayoutStack spacing={2}>
-                  <Input placeholder="Search with icon..." InputProps={{ startAdornment: <Search sx={{ fontSize: 16, mr: 1 }} /> }} />
-                  <Input placeholder="Email address" type="email" InputProps={{ startAdornment: <Mail sx={{ fontSize: 16, mr: 1 }} /> }} />
-                  <Input placeholder="Error state example" error={true} InputProps={{ startAdornment: <User sx={{ fontSize: 16, mr: 1 }} /> }} />
+                  <Input
+                    placeholder="Search with icon..."
+                    InputProps={{ startAdornment: <Search sx={{ fontSize: 16, mr: 1 }} /> }}
+                  />
+                  <Input
+                    placeholder="Email address"
+                    type="email"
+                    InputProps={{ startAdornment: <Mail sx={{ fontSize: 16, mr: 1 }} /> }}
+                  />
+                  <Input
+                    placeholder="Error state example"
+                    error={true}
+                    InputProps={{ startAdornment: <User sx={{ fontSize: 16, mr: 1 }} /> }}
+                  />
                   <Textarea placeholder="Write your message here..." rows={3} />
                 </LayoutStack>
               </CardContent>

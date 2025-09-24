@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Paper,
-  Badge,
-  Button,
-  Card,
-  CardContent
-} from '@mui/material';
+import { Box, Typography, Paper, Badge, Button, Card, CardContent } from '@mui/material';
 import { Add as Plus } from '@mui/icons-material';
 import { ApplicationCard } from './ApplicationCard';
 
@@ -47,32 +39,32 @@ const defaultColumns: Omit<KanbanColumn, 'applications'>[] = [
     id: 'applied',
     title: 'Applied',
     status: 'applied',
-    color: 'bg-blue-50 border-blue-200'
+    color: 'bg-blue-50 border-blue-200',
   },
   {
     id: 'screening',
     title: 'Screening',
     status: 'screening',
-    color: 'bg-yellow-50 border-yellow-200'
+    color: 'bg-yellow-50 border-yellow-200',
   },
   {
     id: 'interview',
     title: 'Interview',
     status: 'interview',
-    color: 'bg-purple-50 border-purple-200'
+    color: 'bg-purple-50 border-purple-200',
   },
   {
     id: 'offer',
     title: 'Offer',
     status: 'offer',
-    color: 'bg-green-50 border-green-200'
+    color: 'bg-green-50 border-green-200',
   },
   {
     id: 'rejected',
     title: 'Rejected',
     status: 'rejected',
-    color: 'bg-red-50 border-red-200'
-  }
+    color: 'bg-red-50 border-red-200',
+  },
 ];
 
 const sampleApplications: Application[] = [
@@ -87,8 +79,8 @@ const sampleApplications: Application[] = [
     progress: 20,
     nextEvent: {
       type: 'Phone Screening',
-      date: 'Tomorrow 2:00 PM'
-    }
+      date: 'Tomorrow 2:00 PM',
+    },
   },
   {
     id: '2',
@@ -101,8 +93,8 @@ const sampleApplications: Application[] = [
     progress: 40,
     nextEvent: {
       type: 'Technical Interview',
-      date: 'Friday 10:00 AM'
-    }
+      date: 'Friday 10:00 AM',
+    },
   },
   {
     id: '3',
@@ -115,8 +107,8 @@ const sampleApplications: Application[] = [
     progress: 60,
     nextEvent: {
       type: 'Final Interview',
-      date: 'Next Monday 3:00 PM'
-    }
+      date: 'Next Monday 3:00 PM',
+    },
   },
   {
     id: '4',
@@ -126,7 +118,7 @@ const sampleApplications: Application[] = [
     salary: '$130K - $180K',
     appliedDate: '2 weeks ago',
     status: 'offer',
-    progress: 90
+    progress: 90,
   },
   {
     id: '5',
@@ -136,22 +128,22 @@ const sampleApplications: Application[] = [
     salary: '$120K - $170K',
     appliedDate: '1 month ago',
     status: 'rejected',
-    progress: 30
-  }
+    progress: 30,
+  },
 ];
 
 export function KanbanBoard({
   applications = sampleApplications,
   onApplicationMove,
   onApplicationClick,
-  onAddApplication
+  onAddApplication,
 }: KanbanBoardProps) {
   const [draggedItem, setDraggedItem] = useState<string | null>(null);
 
   // Group applications by status
-  const columns: KanbanColumn[] = defaultColumns.map(col => ({
+  const columns: KanbanColumn[] = defaultColumns.map((col) => ({
     ...col,
-    applications: applications.filter(app => app.status === col.status)
+    applications: applications.filter((app) => app.status === col.status),
   }));
 
   const handleDragStart = (e: React.DragEvent, applicationId: string) => {

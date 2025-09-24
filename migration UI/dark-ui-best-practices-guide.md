@@ -9,32 +9,37 @@ Dark UI design has evolved from a trend to a fundamental design approach, offeri
 ## 🎯 Core Principles of Dark UI Design
 
 ### 1. **Avoid Pure Black (#000000)**
+
 - **Rule**: Never use pure black for backgrounds or surfaces
 - **Reason**: Pure black creates harsh contrast causing eye strain and prevents proper depth perception
 - **Solution**: Use dark grays (#121212, #1a1a1a, #222222) with subtle blue tints
 - **Material Design Recommendation**: #121212 as primary dark surface color
 
 ### 2. **Establish Proper Contrast Ratios**
+
 - **WCAG Standard**: Minimum 4.5:1 contrast ratio for normal text, 3:1 for large text
 - **Best Practice**: Test contrast across multiple devices and lighting conditions
 - **Tool**: Use accessibility checkers and color contrast analyzers
 - **Implementation**: Layer lighter surfaces over darker ones to create depth
 
 ### 3. **Use Desaturated Colors**
+
 - **Rule**: Avoid highly saturated colors in dark themes
 - **Reason**: Saturated colors cause optical vibrations and fail accessibility standards
 - **Solution**: Use colors in the 200-50 range, desaturate bright brand colors by 10-20%
 - **Example**: Bright blue #0066FF → Desaturated #4A90E2
 
 ### 4. **Never Invert Light Theme Directly**
+
 - **Rule**: Don't simply invert colors from light to dark mode
 - **Process**: Redesign each element specifically for dark environment
 - **Consideration**: Adjust brand colors, shadows, and visual hierarchy individually
 - **Result**: Cohesive dark experience rather than inverted light theme
 
 ### 5. **Create Systematic Color Palettes**
+
 - **Structure**: Define 3-5 core colors maximum (background, surface, accent, text)
-- **Generation**: Use color spaces like LCH for perceptually uniform results  
+- **Generation**: Use color spaces like LCH for perceptually uniform results
 - **Hierarchy**: Darkest colors for bottom elements, lighter for elevated surfaces
 - **Brand Adaptation**: Modify brand colors specifically for dark backgrounds
 
@@ -43,6 +48,7 @@ Dark UI design has evolved from a trend to a fundamental design approach, offeri
 ## 🎨 Visual Hierarchy & Design Elements
 
 ### Typography in Dark Mode
+
 - **Font Weight**: Use medium or bold weights for better readability
 - **Font Size**: Slightly increase size compared to light mode (10-15%)
 - **Line Height**: Increase to 1.5-1.6 for improved readability
@@ -50,18 +56,21 @@ Dark UI design has evolved from a trend to a fundamental design approach, offeri
 - **Color**: Use white or off-white (#F8F9FA, #EEEFF1) for primary text
 
 ### Shadows and Elevation
+
 - **Traditional Shadows**: Replace with subtle glows or light borders
 - **Depth Creation**: Use lighter background colors for elevated elements
 - **Glow Effects**: Implement colored glows (blue, purple) for interactive elements
 - **Layering**: Lighter elements appear "closer" to user in dark themes
 
 ### Images and Media
+
 - **Optimization**: Use dark-themed or transparent images when possible
 - **Overlays**: Apply subtle dark overlays to bright images
 - **Formats**: Prefer SVG, WebP, or PNG over JPG for transparency support
 - **Testing**: Ensure all visuals work well against dark backgrounds
 
 ### Negative Space Utilization
+
 - **Embrace Minimalism**: Dark themes amplify the importance of white space
 - **Breathing Room**: Increase padding and margins by 15-20%
 - **Content Density**: Reduce visual clutter more aggressively than light themes
@@ -72,6 +81,7 @@ Dark UI design has evolved from a trend to a fundamental design approach, offeri
 ## 🔧 Technical Implementation for React
 
 ### CSS Custom Properties Architecture
+
 ```css
 :root {
   /* Primitive tokens */
@@ -79,7 +89,7 @@ Dark UI design has evolved from a trend to a fundamental design approach, offeri
   --primitive-dark-800: #111117;
   --primitive-dark-700: #1a1a23;
   --primitive-dark-600: #2a2a3e;
-  
+
   /* Semantic tokens */
   --color-background-primary: var(--primitive-dark-900);
   --color-surface-elevated: var(--primitive-dark-600);
@@ -96,48 +106,44 @@ Dark UI design has evolved from a trend to a fundamental design approach, offeri
 ```
 
 ### React Theme Implementation
+
 ```jsx
 // Theme context for React applications
 export const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState('dark');
-  
+  const [theme, setTheme] = useState("dark");
+
   useEffect(() => {
     // Respect system preferences
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setTheme(mediaQuery.matches ? 'dark' : 'light');
-    
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setTheme(mediaQuery.matches ? "dark" : "light");
+
     // Save user preferences
-    localStorage.setItem('theme-preference', theme);
+    localStorage.setItem("theme-preference", theme);
   }, [theme]);
-  
+
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={`app-theme-${theme}`}>
-        {children}
-      </div>
+      <div className={`app-theme-${theme}`}>{children}</div>
     </ThemeContext.Provider>
   );
 };
 ```
 
 ### Component-Level Styling
+
 ```jsx
 // Styled components with theme awareness
 const Button = styled.button`
-  background: ${props => props.theme.colors.primary};
-  color: ${props => props.theme.colors.text};
-  border: 1px solid ${props => props.theme.colors.border};
-  
+  background: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.text};
+  border: 1px solid ${(props) => props.theme.colors.border};
+
   /* Dark mode specific adjustments */
-  box-shadow: ${props => props.theme.mode === 'dark' 
-    ? '0 0 20px rgba(96, 165, 250, 0.3)' 
-    : '0 2px 4px rgba(0, 0, 0, 0.1)'};
-    
+  box-shadow: ${(props) => (props.theme.mode === "dark" ? "0 0 20px rgba(96, 165, 250, 0.3)" : "0 2px 4px rgba(0, 0, 0, 0.1)")};
+
   &:hover {
     transform: translateY(-2px);
-    box-shadow: ${props => props.theme.mode === 'dark'
-      ? '0 0 30px rgba(96, 165, 250, 0.5)'
-      : '0 4px 8px rgba(0, 0, 0, 0.15)'};
+    box-shadow: ${(props) => (props.theme.mode === "dark" ? "0 0 30px rgba(96, 165, 250, 0.5)" : "0 4px 8px rgba(0, 0, 0, 0.15)")};
   }
 `;
 ```
@@ -147,6 +153,7 @@ const Button = styled.button`
 ## 🌟 User Experience Guidelines
 
 ### Theme Toggle Implementation
+
 - **Accessibility**: Provide clear visual indication of current mode
 - **Persistence**: Save user preference in localStorage or user profile
 - **Smooth Transitions**: Implement 300ms CSS transitions between modes
@@ -154,12 +161,14 @@ const Button = styled.button`
 - **Multiple Options**: Offer "System", "Light", "Dark" choices
 
 ### Loading States and Animations
+
 - **Skeleton Screens**: Use dark gray skeletons (#2a2a3e) with subtle shimmer
 - **Loading Indicators**: Bright accent colors against dark backgrounds
 - **Micro-animations**: Smooth, subtle transitions with cubic-bezier easing
 - **Performance**: Optimize for 60fps animations in dark themes
 
 ### Accessibility Considerations
+
 - **Screen Readers**: Ensure all content remains accessible in dark mode
 - **Focus States**: High-contrast focus indicators (white or bright accent)
 - **Color Independence**: Don't rely solely on color to convey information
@@ -170,6 +179,7 @@ const Button = styled.button`
 ## 📊 10 Exemplary Dark UI Websites
 
 ### 1. **Apple (apple.com)**
+
 - **Design Philosophy**: Sophisticated minimalism with premium materials aesthetic
 - **Key Strengths**: Perfect contrast ratios, seamless light/dark switching, consistent brand colors
 - **Technical Excellence**: System-level integration, automatic theme detection
@@ -177,6 +187,7 @@ const Button = styled.button`
 - **Color Palette**: Deep space grays (#1d1d1f) with strategic white space and accent colors
 
 ### 2. **Google (Material Design Dark Theme)**
+
 - **Design Philosophy**: Science-based design with elevated surfaces methodology
 - **Key Strengths**: Comprehensive design system, accessibility-first approach, elevation hierarchy
 - **Technical Excellence**: CSS custom properties, component theming, systematic color generation
@@ -184,6 +195,7 @@ const Button = styled.button`
 - **Innovation**: LCH color space usage, automatic high-contrast themes
 
 ### 3. **Linear (linear.app)**
+
 - **Design Philosophy**: Productivity-focused with customizable aesthetic
 - **Key Strengths**: Custom theme generator, perfect information density, smooth interactions
 - **Technical Excellence**: Advanced theme system, real-time color generation, workspace personalization
@@ -191,6 +203,7 @@ const Button = styled.button`
 - **Standout Feature**: Users can create unlimited custom themes with just 3 base colors
 
 ### 4. **Notion (notion.so)**
+
 - **Design Philosophy**: Clean productivity interface with gentle dark implementation
 - **Key Strengths**: Cross-platform consistency, easy theme switching, content-focused design
 - **Technical Excellence**: Keyboard shortcuts (⌘+Shift+L), system preference sync, mobile optimization
@@ -198,6 +211,7 @@ const Button = styled.button`
 - **User Experience**: Seamless switching between modes without jarring transitions
 
 ### 5. **Framer (framer.com)**
+
 - **Design Philosophy**: Creative tool aesthetic with interactive design focus
 - **Key Strengths**: Showcase-oriented dark theme, premium visual hierarchy, interactive elements
 - **Technical Excellence**: Advanced animations, component showcasing, template presentation
@@ -205,6 +219,7 @@ const Button = styled.button`
 - **Visual Appeal**: Dark backgrounds enhance colorful design template previews
 
 ### 6. **Figma (figma.com)**
+
 - **Design Philosophy**: Professional design tool with sophisticated dark implementation
 - **Key Strengths**: Designer-centric interface, perfect contrast for creative work, tool-focused UX
 - **Technical Excellence**: Canvas-optimized dark theme, UI control visibility, collaborative features
@@ -212,6 +227,7 @@ const Button = styled.button`
 - **Practical Focus**: Dark theme optimized for long design sessions and eye comfort
 
 ### 7. **Vercel (vercel.com)**
+
 - **Design Philosophy**: Developer-focused with terminal-inspired aesthetics
 - **Key Strengths**: Code-centric dark theme, technical sophistication, deployment-focused UX
 - **Technical Excellence**: Syntax highlighting optimization, dashboard design, CLI integration
@@ -219,6 +235,7 @@ const Button = styled.button`
 - **Developer Appeal**: Dark theme feels natural for development workflows
 
 ### 8. **Stripe (stripe.com)**
+
 - **Design Philosophy**: Financial technology with trustworthy, professional dark mode
 - **Key Strengths**: Data visualization excellence, dashboard optimization, fintech aesthetic
 - **Technical Excellence**: Chart readability in dark mode, financial data presentation, security focus
@@ -226,13 +243,15 @@ const Button = styled.button`
 - **Business Focus**: Dark theme enhances focus on financial metrics and analytics
 
 ### 9. **GitHub (github.com)**
+
 - **Design Philosophy**: Code repository platform with developer-centric dark theme
 - **Key Strengths**: Syntax highlighting excellence, code readability, developer productivity focus
 - **Technical Excellence**: Multiple dark themes, code editor integration, diff visualization
-- **React Elements**: Complex data tables, file browsers, collaborative interfaces  
+- **React Elements**: Complex data tables, file browsers, collaborative interfaces
 - **Code Focus**: Dark theme essential for developer comfort during long coding sessions
 
 ### 10. **Spotify (spotify.com/open.spotify.com)**
+
 - **Design Philosophy**: Entertainment platform with immersive dark aesthetic
 - **Key Strengths**: Media-focused design, album art enhancement, music discovery UX
 - **Technical Excellence**: Audio player integration, playlist visualization, social features
@@ -244,12 +263,14 @@ const Button = styled.button`
 ## 🚀 Implementation Checklist
 
 ### Pre-Design Phase
+
 - [ ] Analyze target audience and use cases for dark mode
-- [ ] Audit existing brand colors for dark theme compatibility  
+- [ ] Audit existing brand colors for dark theme compatibility
 - [ ] Define design system color palette with systematic approach
 - [ ] Plan user preference storage and theme switching mechanism
 
 ### Design Phase
+
 - [ ] Create dark gray foundation (#121212 base recommended)
 - [ ] Establish 3-5 color accent system with desaturated tones
 - [ ] Design elevation system using lighter surfaces for depth
@@ -257,6 +278,7 @@ const Button = styled.button`
 - [ ] Optimize images and media for dark backgrounds
 
 ### Development Phase
+
 - [ ] Implement CSS custom properties architecture
 - [ ] Create React theme provider with context API
 - [ ] Add system preference detection and user override
@@ -264,6 +286,7 @@ const Button = styled.button`
 - [ ] Implement localStorage persistence for user preferences
 
 ### Testing & Optimization Phase
+
 - [ ] Test accessibility with screen readers and keyboard navigation
 - [ ] Validate contrast ratios across different devices
 - [ ] Verify performance impact of theme switching
@@ -275,6 +298,7 @@ const Button = styled.button`
 ## 🎪 Advanced Techniques
 
 ### Dynamic Color Generation
+
 ```javascript
 // Advanced theme generation using LCH color space
 const generateTheme = (baseColor, accentColor, contrast = 0.87) => {
@@ -282,18 +306,20 @@ const generateTheme = (baseColor, accentColor, contrast = 0.87) => {
     background: adjustLCH(baseColor, { lightness: 8, chroma: 4 }),
     surface: adjustLCH(baseColor, { lightness: 14, chroma: 6 }),
     accent: desaturate(accentColor, contrast),
-    text: generateTextColor(baseColor, contrast)
+    text: generateTextColor(baseColor, contrast),
   };
 };
 ```
 
 ### Micro-interactions for Dark Themes
+
 - **Glow States**: Implement subtle glow effects on hover/focus
 - **Elevation Changes**: Animate surface lightness on interaction
 - **Color Transitions**: Smooth color shifts for state changes
 - **Loading Animations**: Dark-optimized skeleton screens and spinners
 
 ### Performance Optimizations
+
 - **CSS Variables**: Use custom properties for instant theme switching
 - **Component Memoization**: Prevent unnecessary re-renders during theme changes
 - **Lazy Loading**: Load theme-specific assets on demand

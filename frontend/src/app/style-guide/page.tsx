@@ -6,7 +6,11 @@ export default function StyleGuidePage() {
       title: 'Primary Colors',
       colors: [
         { name: 'Primary', value: 'var(--color-primary)', text: 'var(--color-on-primary)' },
-        { name: 'Primary Container', value: 'var(--color-primary-container)', text: 'var(--color-on-primary-container)' },
+        {
+          name: 'Primary Container',
+          value: 'var(--color-primary-container)',
+          text: 'var(--color-on-primary-container)',
+        },
         { name: 'Primary 10%', value: 'var(--color-primary-10)' },
         { name: 'Primary 20%', value: 'var(--color-primary-20)' },
         { name: 'Primary 30%', value: 'var(--color-primary-30)' },
@@ -16,21 +20,33 @@ export default function StyleGuidePage() {
       title: 'Secondary Colors',
       colors: [
         { name: 'Secondary', value: 'var(--color-secondary)', text: 'var(--color-on-secondary)' },
-        { name: 'Secondary Container', value: 'var(--color-secondary-container)', text: 'var(--color-on-secondary-container)' },
+        {
+          name: 'Secondary Container',
+          value: 'var(--color-secondary-container)',
+          text: 'var(--color-on-secondary-container)',
+        },
       ],
     },
     {
       title: 'Tertiary Colors',
       colors: [
         { name: 'Tertiary', value: 'var(--color-tertiary)', text: 'var(--color-on-tertiary)' },
-        { name: 'Tertiary Container', value: 'var(--color-tertiary-container)', text: 'var(--color-on-tertiary-container)' },
+        {
+          name: 'Tertiary Container',
+          value: 'var(--color-tertiary-container)',
+          text: 'var(--color-on-tertiary-container)',
+        },
       ],
     },
     {
       title: 'Semantic Colors',
       colors: [
         { name: 'Error', value: 'var(--color-error)', text: 'var(--color-on-error)' },
-        { name: 'Error Container', value: 'var(--color-error-container)', text: 'var(--color-on-error-container)' },
+        {
+          name: 'Error Container',
+          value: 'var(--color-error-container)',
+          text: 'var(--color-on-error-container)',
+        },
         { name: 'Success', value: 'var(--color-success)', text: 'var(--color-on-success)' },
         { name: 'Warning', value: 'var(--color-warning)', text: 'var(--color-on-warning)' },
       ],
@@ -38,9 +54,17 @@ export default function StyleGuidePage() {
     {
       title: 'Surface Colors',
       colors: [
-        { name: 'Background', value: 'var(--color-background)', text: 'var(--color-on-background)' },
+        {
+          name: 'Background',
+          value: 'var(--color-background)',
+          text: 'var(--color-on-background)',
+        },
         { name: 'Surface', value: 'var(--color-surface)', text: 'var(--color-on-surface)' },
-        { name: 'Surface Variant', value: 'var(--color-surface-variant)', text: 'var(--color-on-surface-variant)' },
+        {
+          name: 'Surface Variant',
+          value: 'var(--color-surface-variant)',
+          text: 'var(--color-on-surface-variant)',
+        },
       ],
     },
     {
@@ -117,10 +141,12 @@ export default function StyleGuidePage() {
           <h3 className="text-lg font-medium mb-4">Contrast Ratios</h3>
           <div className="space-y-2">
             <p>
-              <span className="font-medium">AA (Minimum):</span> 4.5:1 for normal text, 3:1 for large text
+              <span className="font-medium">AA (Minimum):</span> 4.5:1 for normal text, 3:1 for
+              large text
             </p>
             <p>
-              <span className="font-medium">AAA (Enhanced):</span> 7:1 for normal text, 4.5:1 for large text
+              <span className="font-medium">AAA (Enhanced):</span> 7:1 for normal text, 4.5:1 for
+              large text
             </p>
             <div className="mt-4 p-4 bg-destructive/10 text-destructive-foreground rounded">
               <p className="font-medium">Note:</p>

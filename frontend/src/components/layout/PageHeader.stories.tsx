@@ -10,7 +10,8 @@ const meta: Meta<typeof PageHeader> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'A flexible page header component with support for breadcrumbs, actions, avatars, and multiple variants.',
+        component:
+          'A flexible page header component with support for breadcrumbs, actions, avatars, and multiple variants.',
       },
     },
   },
@@ -38,9 +39,7 @@ const meta: Meta<typeof PageHeader> = {
       <Box sx={{ minHeight: '300px' }}>
         <Story />
         <Box sx={{ p: 3, bgcolor: 'background.default' }}>
-          <Typography variant="body1">
-            Page content would appear here...
-          </Typography>
+          <Typography variant="body1">Page content would appear here...</Typography>
         </Box>
       </Box>
     ),
@@ -107,7 +106,8 @@ export const Default: Story = {
   args: {
     title: 'Document Overview',
     subtitle: 'Senior Software Engineer Resume',
-    description: 'A comprehensive resume showcasing 8+ years of full-stack development experience with React, Node.js, and cloud technologies.',
+    description:
+      'A comprehensive resume showcasing 8+ years of full-stack development experience with React, Node.js, and cloud technologies.',
     breadcrumbs: sampleBreadcrumbs,
     actions: sampleActions.slice(0, 2),
     menuActions: sampleMenuActions,
@@ -131,7 +131,8 @@ export const Detailed: Story = {
     variant: 'detailed',
     title: 'Career Dashboard',
     subtitle: 'Track your job search progress',
-    description: 'Monitor application status, interview schedules, and career milestones all in one place. Get insights into your job search performance and optimize your strategy.',
+    description:
+      'Monitor application status, interview schedules, and career milestones all in one place. Get insights into your job search performance and optimize your strategy.',
     breadcrumbs: [{ label: 'Dashboard' }],
     actions: [sampleActions[2]], // Just the create button
   },
@@ -158,7 +159,8 @@ export const WithAvatar: Story = {
     },
     title: 'John Doe',
     subtitle: 'Senior Software Engineer',
-    description: 'Full-stack developer with expertise in React, TypeScript, and cloud architecture.',
+    description:
+      'Full-stack developer with expertise in React, TypeScript, and cloud architecture.',
   },
 };
 
@@ -229,17 +231,11 @@ export const DocumentPagePreset: Story = {
 };
 
 export const DashboardPagePreset: Story = {
-  args: PageHeaderPresets.dashboardPage(
-    'Career Dashboard',
-    'Track your job search progress'
-  ),
+  args: PageHeaderPresets.dashboardPage('Career Dashboard', 'Track your job search progress'),
 };
 
 export const SettingsPagePreset: Story = {
-  args: PageHeaderPresets.settingsPage(
-    'Account Settings',
-    () => console.log('Back to Dashboard')
-  ),
+  args: PageHeaderPresets.settingsPage('Account Settings', () => console.log('Back to Dashboard')),
 };
 
 export const Mobile: Story = {

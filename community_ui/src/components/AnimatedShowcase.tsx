@@ -16,23 +16,23 @@ import {
   ExpandableCard,
   StaggeredList,
   LoadingAnimations,
-  AnimatedStatsCard
+  AnimatedStatsCard,
 } from "./AnimatedComponents";
-import { 
-  Star, 
-  Heart, 
-  Bookmark, 
-  Share2, 
-  User, 
-  FileText, 
-  Target, 
+import {
+  Star,
+  Heart,
+  Bookmark,
+  Share2,
+  User,
+  FileText,
+  Target,
   TrendingUp,
   Settings,
   Bell,
   Shield,
   Download,
   Upload,
-  Search
+  Search,
 } from "lucide-react";
 
 interface AnimatedShowcaseProps {
@@ -43,31 +43,33 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   const [showModal, setShowModal] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
   const [progress, setProgress] = useState(0);
-  const [notifications, setNotifications] = useState<Array<{
-    id: string;
-    type: 'success' | 'error' | 'info' | 'warning';
-    message: string;
-  }>>([]);
+  const [notifications, setNotifications] = useState<
+    Array<{
+      id: string;
+      type: "success" | "error" | "info" | "warning";
+      message: string;
+    }>
+  >([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
 
-  const addNotification = (type: 'success' | 'error' | 'info' | 'warning', message: string) => {
+  const addNotification = (type: "success" | "error" | "info" | "warning", message: string) => {
     const id = Math.random().toString(36).substr(2, 9);
-    setNotifications(prev => [...prev, { id, type, message }]);
+    setNotifications((prev) => [...prev, { id, type, message }]);
     setTimeout(() => {
-      setNotifications(prev => prev.filter(n => n.id !== id));
+      setNotifications((prev) => prev.filter((n) => n.id !== id));
     }, 4000);
   };
 
   const removeNotification = (id: string) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
+    setNotifications((prev) => prev.filter((n) => n.id !== id));
   };
 
   const simulateProgress = () => {
     setProgress(0);
     setIsPlaying(true);
     const interval = setInterval(() => {
-      setProgress(prev => {
+      setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsPlaying(false);
@@ -79,7 +81,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   };
 
   const resetAnimations = () => {
-    setAnimationKey(prev => prev + 1);
+    setAnimationKey((prev) => prev + 1);
     setProgress(0);
     setIsPlaying(false);
   };
@@ -87,14 +89,14 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   const tabs = [
     { id: "overview", label: "Overview", icon: <Star className="w-4 h-4" /> },
     { id: "details", label: "Details", icon: <FileText className="w-4 h-4" /> },
-    { id: "settings", label: "Settings", icon: <Settings className="w-4 h-4" /> }
+    { id: "settings", label: "Settings", icon: <Settings className="w-4 h-4" /> },
   ];
 
   const dropdownItems = [
     { label: "Profile", value: "profile", icon: <User className="w-4 h-4" /> },
     { label: "Settings", value: "settings", icon: <Settings className="w-4 h-4" /> },
     { label: "Notifications", value: "notifications", icon: <Bell className="w-4 h-4" /> },
-    { label: "Security", value: "security", icon: <Shield className="w-4 h-4" /> }
+    { label: "Security", value: "security", icon: <Shield className="w-4 h-4" /> },
   ];
 
   const listItems = [
@@ -102,14 +104,38 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
     { title: "Design Review", description: "Weekly design system review meeting" },
     { title: "User Research", description: "Conduct user interviews for new features" },
     { title: "Performance Optimization", description: "Improve loading times and user experience" },
-    { title: "Documentation Update", description: "Update component library documentation" }
+    { title: "Documentation Update", description: "Update component library documentation" },
   ];
 
   const statsData = [
-    { title: "Total Users", value: "12,345", change: "+12.5%", trend: "up" as const, icon: <User className="w-6 h-6 text-primary" /> },
-    { title: "Revenue", value: "$89,432", change: "+23.1%", trend: "up" as const, icon: <TrendingUp className="w-6 h-6 text-primary" /> },
-    { title: "Conversions", value: "2,847", change: "-5.4%", trend: "down" as const, icon: <Target className="w-6 h-6 text-primary" /> },
-    { title: "Avg. Rating", value: "4.8", change: "0.0%", trend: "neutral" as const, icon: <Star className="w-6 h-6 text-primary" /> }
+    {
+      title: "Total Users",
+      value: "12,345",
+      change: "+12.5%",
+      trend: "up" as const,
+      icon: <User className="w-6 h-6 text-primary" />,
+    },
+    {
+      title: "Revenue",
+      value: "$89,432",
+      change: "+23.1%",
+      trend: "up" as const,
+      icon: <TrendingUp className="w-6 h-6 text-primary" />,
+    },
+    {
+      title: "Conversions",
+      value: "2,847",
+      change: "-5.4%",
+      trend: "down" as const,
+      icon: <Target className="w-6 h-6 text-primary" />,
+    },
+    {
+      title: "Avg. Rating",
+      value: "4.8",
+      change: "0.0%",
+      trend: "neutral" as const,
+      icon: <Star className="w-6 h-6 text-primary" />,
+    },
   ];
 
   return (
@@ -118,12 +144,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-4">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={onBack}
-              className="gap-2"
-            >
+            <Button variant="ghost" size="sm" onClick={onBack} className="gap-2">
               <ArrowLeft className="w-4 h-4" />
               Back to Component Library
             </Button>
@@ -135,23 +156,16 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 Animated Components Showcase
               </h1>
               <p className="text-muted-foreground">
-                Interactive demonstrations of animated UI components with smooth transitions and micro-interactions
+                Interactive demonstrations of animated UI components with smooth transitions and
+                micro-interactions
               </p>
             </div>
             <div className="flex gap-2">
-              <Button 
-                variant="outline" 
-                onClick={resetAnimations}
-                className="gap-2"
-              >
+              <Button variant="outline" onClick={resetAnimations} className="gap-2">
                 <RotateCcw className="w-4 h-4" />
                 Reset All
               </Button>
-              <Button 
-                onClick={simulateProgress}
-                disabled={isPlaying}
-                className="gap-2"
-              >
+              <Button onClick={simulateProgress} disabled={isPlaying} className="gap-2">
                 {isPlaying ? (
                   <>
                     <Pause className="w-4 h-4" />
@@ -172,7 +186,10 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           {/* Animated Statistics Cards */}
           <section>
             <h2 className="mb-6">Animated Statistics Cards</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" key={`stats-${animationKey}`}>
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              key={`stats-${animationKey}`}
+            >
               {statsData.map((stat, index) => (
                 <AnimatedStatsCard
                   key={index}
@@ -196,9 +213,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                   <CardDescription>Modal with smooth entrance and exit animations</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button onClick={() => setShowModal(true)}>
-                    Open Modal
-                  </Button>
+                  <Button onClick={() => setShowModal(true)}>Open Modal</Button>
                   <AnimatedModal
                     isOpen={showModal}
                     onClose={() => setShowModal(false)}
@@ -228,7 +243,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                       </Button>
                     }
                     items={dropdownItems}
-                    onSelect={(value) => addNotification('info', `Selected: ${value}`)}
+                    onSelect={(value) => addNotification("info", `Selected: ${value}`)}
                   />
                 </CardContent>
               </Card>
@@ -244,28 +259,30 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 <CardDescription>Tabs with smooth sliding indicator animation</CardDescription>
               </CardHeader>
               <CardContent>
-                <AnimatedTabs
-                  tabs={tabs}
-                  activeTab={activeTab}
-                  onTabChange={setActiveTab}
-                >
+                <AnimatedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab}>
                   <div className="p-4 bg-muted rounded-lg">
                     {activeTab === "overview" && (
                       <div>
                         <h3 className="font-medium mb-2">Overview Content</h3>
-                        <p className="text-muted-foreground">This is the overview tab content with smooth transitions.</p>
+                        <p className="text-muted-foreground">
+                          This is the overview tab content with smooth transitions.
+                        </p>
                       </div>
                     )}
                     {activeTab === "details" && (
                       <div>
                         <h3 className="font-medium mb-2">Details Content</h3>
-                        <p className="text-muted-foreground">Detailed information appears here with animated transitions.</p>
+                        <p className="text-muted-foreground">
+                          Detailed information appears here with animated transitions.
+                        </p>
                       </div>
                     )}
                     {activeTab === "settings" && (
                       <div>
                         <h3 className="font-medium mb-2">Settings Content</h3>
-                        <p className="text-muted-foreground">Configuration options are shown in this animated panel.</p>
+                        <p className="text-muted-foreground">
+                          Configuration options are shown in this animated panel.
+                        </p>
                       </div>
                     )}
                   </div>
@@ -314,15 +331,15 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <Card>
               <CardHeader>
                 <CardTitle>Button Interaction Animations</CardTitle>
-                <CardDescription>Different animation styles for button interactions</CardDescription>
+                <CardDescription>
+                  Different animation styles for button interactions
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="space-y-2">
                     <Label>Scale Animation</Label>
-                    <AnimatedButton animation="scale">
-                      Hover Me
-                    </AnimatedButton>
+                    <AnimatedButton animation="scale">Hover Me</AnimatedButton>
                   </div>
                   <div className="space-y-2">
                     <Label>Lift Animation</Label>
@@ -332,9 +349,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                   </div>
                   <div className="space-y-2">
                     <Label>Glow Animation</Label>
-                    <AnimatedButton animation="glow">
-                      Glow Effect
-                    </AnimatedButton>
+                    <AnimatedButton animation="glow">Glow Effect</AnimatedButton>
                   </div>
                   <div className="space-y-2">
                     <Label>Shimmer Animation</Label>
@@ -357,7 +372,10 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 icon={<FileText className="w-5 h-5 text-primary" />}
               >
                 <div className="space-y-4">
-                  <p>This expandable card demonstrates smooth height animations and content transitions.</p>
+                  <p>
+                    This expandable card demonstrates smooth height animations and content
+                    transitions.
+                  </p>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Label>Progress</Label>
@@ -377,7 +395,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 icon={<TrendingUp className="w-5 h-5 text-primary" />}
               >
                 <div className="space-y-4">
-                  <p>Analytics and performance data with animated charts and progress indicators.</p>
+                  <p>
+                    Analytics and performance data with animated charts and progress indicators.
+                  </p>
                   <div className="grid grid-cols-3 gap-4">
                     <div className="text-center">
                       <p className="text-2xl font-bold text-green-500">94%</p>
@@ -427,33 +447,41 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <Card>
               <CardHeader>
                 <CardTitle>Toast Notifications</CardTitle>
-                <CardDescription>Notifications with smooth entrance and exit animations</CardDescription>
+                <CardDescription>
+                  Notifications with smooth entrance and exit animations
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  <Button 
-                    size="sm" 
-                    onClick={() => addNotification('success', 'Success! Operation completed successfully.')}
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      addNotification("success", "Success! Operation completed successfully.")
+                    }
                   >
                     Success Toast
                   </Button>
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     variant="destructive"
-                    onClick={() => addNotification('error', 'Error! Something went wrong.')}
+                    onClick={() => addNotification("error", "Error! Something went wrong.")}
                   >
                     Error Toast
                   </Button>
-                  <Button 
-                    size="sm" 
+                  <Button
+                    size="sm"
                     variant="outline"
-                    onClick={() => addNotification('info', 'Info: Here is some helpful information.')}
+                    onClick={() =>
+                      addNotification("info", "Info: Here is some helpful information.")
+                    }
                   >
                     Info Toast
                   </Button>
-                  <Button 
-                    size="sm" 
-                    onClick={() => addNotification('warning', 'Warning: Please review your settings.')}
+                  <Button
+                    size="sm"
+                    onClick={() =>
+                      addNotification("warning", "Warning: Please review your settings.")
+                    }
                   >
                     Warning Toast
                   </Button>
@@ -468,7 +496,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <Card>
               <CardHeader>
                 <CardTitle>Animation Best Practices</CardTitle>
-                <CardDescription>Guidelines for implementing smooth and performant animations</CardDescription>
+                <CardDescription>
+                  Guidelines for implementing smooth and performant animations
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">

@@ -6,8 +6,8 @@ import { ComponentSection, ComponentDemo } from "./ComponentDemo";
 
 export function LayoutComponentsSection() {
   return (
-    <ComponentSection 
-      title="Layout Components" 
+    <ComponentSection
+      title="Layout Components"
       description="Structural components for organizing content and creating layouts"
     >
       <ComponentDemo title="Separators & Skeletons">

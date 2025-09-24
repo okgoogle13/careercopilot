@@ -49,7 +49,7 @@ export const ATSScoreCircle: React.FC<ATSScoreCircleProps> = ({
   const radius = (circleSize - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (score / 100) * circumference;
-  
+
   const getColorClass = (score: number) => {
     if (score >= 80) return 'text-green-500';
     if (score >= 60) return 'text-blue-500';
@@ -58,7 +58,7 @@ export const ATSScoreCircle: React.FC<ATSScoreCircleProps> = ({
   };
 
   return (
-    <div 
+    <div
       className={`relative inline-flex items-center justify-center ${className}`}
       style={{ width: circleSize, height: circleSize }}
     >
@@ -90,11 +90,7 @@ export const ATSScoreCircle: React.FC<ATSScoreCircleProps> = ({
           cy={circleSize / 2}
         />
       </svg>
-      {showScore && (
-        <span className={`absolute ${textSize} font-medium`}>
-          {Math.round(score)}
-        </span>
-      )}
+      {showScore && <span className={`absolute ${textSize} font-medium`}>{Math.round(score)}</span>}
     </div>
   );
 };

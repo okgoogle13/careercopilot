@@ -4,19 +4,19 @@ import { Card } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { 
-  Loader2, 
-  RefreshCw, 
-  Wifi, 
-  WifiOff, 
-  AlertCircle, 
+import {
+  Loader2,
+  RefreshCw,
+  Wifi,
+  WifiOff,
+  AlertCircle,
   CheckCircle2,
   XCircle,
   Clock,
   Upload,
   Download,
   Sparkles,
-  FileText
+  FileText,
 } from "lucide-react";
 
 // Base loading component with Material 3 design principles
@@ -28,36 +28,30 @@ interface BaseLoadingProps {
 }
 
 // Spinner Loading Component
-export function SpinnerLoading({ 
-  size = "md", 
-  className = "", 
+export function SpinnerLoading({
+  size = "md",
+  className = "",
   label = "Loading...",
-  showLabel = true 
+  showLabel = true,
 }: BaseLoadingProps) {
   const sizeClasses = {
     sm: "h-4 w-4",
-    md: "h-6 w-6", 
-    lg: "h-8 w-8"
+    md: "h-6 w-6",
+    lg: "h-8 w-8",
   };
 
   const textSizeClasses = {
     sm: "text-xs",
     md: "text-sm",
-    lg: "text-base"
+    lg: "text-base",
   };
 
   return (
-    <div className={cn(
-      "flex items-center justify-center gap-3",
-      "text-muted-foreground",
-      className
-    )}>
+    <div
+      className={cn("flex items-center justify-center gap-3", "text-muted-foreground", className)}
+    >
       <Loader2 className={cn(sizeClasses[size], "animate-spin text-primary")} />
-      {showLabel && (
-        <span className={cn(textSizeClasses[size], "font-medium")}>
-          {label}
-        </span>
-      )}
+      {showLabel && <span className={cn(textSizeClasses[size], "font-medium")}>{label}</span>}
     </div>
   );
 }
@@ -86,12 +80,12 @@ export function SkeletonCard({ className = "" }: { className?: string }) {
   );
 }
 
-export function SkeletonList({ 
-  count = 3, 
-  className = "" 
-}: { 
-  count?: number; 
-  className?: string; 
+export function SkeletonList({
+  count = 3,
+  className = "",
+}: {
+  count?: number;
+  className?: string;
 }) {
   return (
     <div className={cn("space-y-4", className)}>
@@ -109,13 +103,7 @@ export function SkeletonList({
   );
 }
 
-export function SkeletonTable({ 
-  rows = 5, 
-  className = "" 
-}: { 
-  rows?: number; 
-  className?: string; 
-}) {
+export function SkeletonTable({ rows = 5, className = "" }: { rows?: number; className?: string }) {
   return (
     <div className={cn("space-y-3", className)}>
       {/* Header */}
@@ -124,7 +112,7 @@ export function SkeletonTable({
           <Skeleton key={i} className="h-4 bg-muted" />
         ))}
       </div>
-      
+
       {/* Rows */}
       {Array.from({ length: rows }).map((_, i) => (
         <div key={i} className="grid grid-cols-4 gap-4 p-4 glass rounded-lg">
@@ -145,22 +133,20 @@ interface ProgressLoadingProps {
   className?: string;
 }
 
-export function ProgressLoading({ 
-  progress, 
-  label = "Loading...", 
+export function ProgressLoading({
+  progress,
+  label = "Loading...",
   showPercentage = true,
-  className = "" 
+  className = "",
 }: ProgressLoadingProps) {
   return (
     <div className={cn("space-y-2", className)}>
       <div className="flex justify-between items-center">
         <span className="text-sm font-medium text-foreground">{label}</span>
-        {showPercentage && (
-          <span className="text-sm text-muted-foreground">{progress}%</span>
-        )}
+        {showPercentage && <span className="text-sm text-muted-foreground">{progress}%</span>}
       </div>
       <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-        <div 
+        <div
           className="bg-primary h-full rounded-full transition-all duration-300 shimmer"
           style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
         />
@@ -177,12 +163,7 @@ interface StateLoadingProps {
   className?: string;
 }
 
-export function StateLoading({ 
-  state, 
-  message, 
-  onRetry, 
-  className = "" 
-}: StateLoadingProps) {
+export function StateLoading({ state, message, onRetry, className = "" }: StateLoadingProps) {
   const getStateConfig = () => {
     switch (state) {
       case "loading":
@@ -190,56 +171,56 @@ export function StateLoading({
           icon: <Loader2 className="h-6 w-6 animate-spin text-primary" />,
           title: "Loading",
           defaultMessage: "Please wait while we load your content...",
-          color: "text-primary"
+          color: "text-primary",
         };
       case "success":
         return {
           icon: <CheckCircle2 className="h-6 w-6 text-accent-green" />,
           title: "Success",
           defaultMessage: "Operation completed successfully!",
-          color: "text-accent-green"
+          color: "text-accent-green",
         };
       case "error":
         return {
           icon: <XCircle className="h-6 w-6 text-destructive" />,
           title: "Error",
           defaultMessage: "Something went wrong. Please try again.",
-          color: "text-destructive"
+          color: "text-destructive",
         };
       case "offline":
         return {
           icon: <WifiOff className="h-6 w-6 text-muted-foreground" />,
           title: "Offline",
           defaultMessage: "You're currently offline. Check your connection.",
-          color: "text-muted-foreground"
+          color: "text-muted-foreground",
         };
       case "processing":
         return {
           icon: <Sparkles className="h-6 w-6 animate-pulse text-brand-purple" />,
           title: "Processing",
           defaultMessage: "AI is processing your request...",
-          color: "text-brand-purple"
+          color: "text-brand-purple",
         };
       case "uploading":
         return {
           icon: <Upload className="h-6 w-6 animate-bounce text-primary" />,
           title: "Uploading",
           defaultMessage: "Uploading your files...",
-          color: "text-primary"
+          color: "text-primary",
         };
       case "downloading":
         return {
           icon: <Download className="h-6 w-6 animate-bounce text-primary" />,
           title: "Downloading",
           defaultMessage: "Preparing your download...",
-          color: "text-primary"
+          color: "text-primary",
         };
       default:
         return {
           icon: <Clock className="h-6 w-6 text-muted-foreground" />,
           title: "Please Wait",
           defaultMessage: "Processing...",
-          color: "text-muted-foreground"
+          color: "text-muted-foreground",
         };
     }
   };
@@ -247,34 +228,29 @@ export function StateLoading({
   const config = getStateConfig();
 
   return (
-    <div className={cn(
-      "flex flex-col items-center justify-center p-8 text-center space-y-4",
-      className
-    )}>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center p-8 text-center space-y-4",
+        className,
+      )}
+    >
       <div className="flex flex-col items-center space-y-3">
         {config.icon}
         <div className="space-y-1">
-          <h3 className={cn("font-semibold", config.color)}>
-            {config.title}
-          </h3>
+          <h3 className={cn("font-semibold", config.color)}>{config.title}</h3>
           <p className="text-sm text-muted-foreground max-w-md">
             {message || config.defaultMessage}
           </p>
         </div>
       </div>
-      
+
       {state === "error" && onRetry && (
-        <Button 
-          onClick={onRetry}
-          variant="outline"
-          size="sm"
-          className="mt-4 focus-glow"
-        >
+        <Button onClick={onRetry} variant="outline" size="sm" className="mt-4 focus-glow">
           <RefreshCw className="h-4 w-4 mr-2" />
           Try Again
         </Button>
       )}
-      
+
       {state === "offline" && (
         <Badge variant="secondary" className="mt-2">
           <WifiOff className="h-3 w-3 mr-1" />
@@ -297,38 +273,21 @@ interface EmptyStateProps {
   className?: string;
 }
 
-export function EmptyState({ 
-  icon, 
-  title, 
-  description, 
-  action, 
-  className = "" 
-}: EmptyStateProps) {
+export function EmptyState({ icon, title, description, action, className = "" }: EmptyStateProps) {
   return (
-    <div className={cn(
-      "flex flex-col items-center justify-center p-12 text-center space-y-4",
-      className
-    )}>
-      {icon && (
-        <div className="text-muted-foreground mb-2">
-          {icon}
-        </div>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center p-12 text-center space-y-4",
+        className,
       )}
+    >
+      {icon && <div className="text-muted-foreground mb-2">{icon}</div>}
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold text-foreground">
-          {title}
-        </h3>
-        {description && (
-          <p className="text-sm text-muted-foreground max-w-md">
-            {description}
-          </p>
-        )}
+        <h3 className="text-lg font-semibold text-foreground">{title}</h3>
+        {description && <p className="text-sm text-muted-foreground max-w-md">{description}</p>}
       </div>
       {action && (
-        <Button 
-          onClick={action.onClick}
-          className="mt-4 focus-glow"
-        >
+        <Button onClick={action.onClick} className="mt-4 focus-glow">
           {action.label}
         </Button>
       )}
@@ -345,18 +304,15 @@ interface LoadingScreenProps {
   className?: string;
 }
 
-export function LoadingScreen({ 
+export function LoadingScreen({
   title = "FML Career Copilot",
   subtitle = "Preparing your AI-powered career tools...",
   progress,
   showProgress = false,
-  className = "" 
+  className = "",
 }: LoadingScreenProps) {
   return (
-    <div className={cn(
-      "min-h-screen bg-background flex items-center justify-center",
-      className
-    )}>
+    <div className={cn("min-h-screen bg-background flex items-center justify-center", className)}>
       <div className="text-center space-y-6 max-w-md mx-auto px-6">
         {/* Logo with pulse animation */}
         <div className="flex justify-center mb-8">
@@ -376,30 +332,22 @@ export function LoadingScreen({
             </div>
           </div>
         </div>
-        
+
         <div className="space-y-2">
-          <h1 className="text-2xl font-semibold text-gradient-blue">
-            {title}
-          </h1>
-          <p className="text-muted-foreground">
-            {subtitle}
-          </p>
+          <h1 className="text-2xl font-semibold text-gradient-blue">{title}</h1>
+          <p className="text-muted-foreground">{subtitle}</p>
         </div>
-        
+
         <div className="flex justify-center">
           <SpinnerLoading size="md" showLabel={false} />
         </div>
-        
+
         {showProgress && typeof progress === "number" && (
           <div className="w-full max-w-xs mx-auto">
-            <ProgressLoading 
-              progress={progress} 
-              label="" 
-              showPercentage={true}
-            />
+            <ProgressLoading progress={progress} label="" showPercentage={true} />
           </div>
         )}
-        
+
         <div className="flex justify-center">
           <Badge variant="secondary" className="bg-brand-purple/10 text-brand-purple">
             <Sparkles className="h-3 w-3 mr-1" />

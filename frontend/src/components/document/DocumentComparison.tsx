@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Typography, Card, CardContent, Button, Divider, Chip } from '@mui/material';
-import { Description as FileText, Download, Visibility as Eye, Refresh as RotateCcw } from '@mui/icons-material';
+import {
+  Description as FileText,
+  Download,
+  Visibility as Eye,
+  Refresh as RotateCcw,
+} from '@mui/icons-material';
 
 interface Document {
   id: string;
@@ -33,11 +38,11 @@ const sampleDocuments: Document[] = [
       '• Improved application performance by 40%',
       '',
       'SKILLS',
-      'JavaScript, React, Node.js, Python, PostgreSQL'
+      'JavaScript, React, Node.js, Python, PostgreSQL',
     ],
     lastModified: '2024-01-15',
     type: 'resume',
-    wordCount: 85
+    wordCount: 85,
   },
   {
     id: '2',
@@ -54,19 +59,19 @@ const sampleDocuments: Document[] = [
       '• Implemented CI/CD pipeline reducing deployment time by 60%',
       '',
       'SKILLS',
-      'JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, AWS'
+      'JavaScript, TypeScript, React, Node.js, Python, PostgreSQL, AWS',
     ],
     lastModified: '2024-01-20',
     type: 'resume',
-    wordCount: 95
-  }
+    wordCount: 95,
+  },
 ];
 
 export function DocumentComparison({
   leftDocument = sampleDocuments[0],
   rightDocument = sampleDocuments[1],
   onDocumentSelect,
-  highlightDifferences = true
+  highlightDifferences = true,
 }: DocumentComparisonProps) {
   const [showFullContent, setShowFullContent] = useState(false);
 
@@ -84,7 +89,15 @@ export function DocumentComparison({
     });
   };
 
-  const DocumentPanel = ({ document, position, isLeft }: { document: Document; position: 'left' | 'right'; isLeft: boolean }) => (
+  const DocumentPanel = ({
+    document,
+    position,
+    isLeft,
+  }: {
+    document: Document;
+    position: 'left' | 'right';
+    isLeft: boolean;
+  }) => (
     <Card className="h-full">
       <CardContent className="p-4">
         {/* Header */}
@@ -95,32 +108,16 @@ export function DocumentComparison({
               {document.title}
             </Typography>
           </Box>
-          <Button
-            size="small"
-            variant="outlined"
-            onClick={() => onDocumentSelect?.(position)}
-          >
+          <Button size="small" variant="outlined" onClick={() => onDocumentSelect?.(position)}>
             Change
           </Button>
         </Box>
 
         {/* Metadata */}
         <Box className="flex flex-wrap gap-2 mb-4">
-          <Chip
-            label={document.type.replace('-', ' ')}
-            size="small"
-            variant="outlined"
-          />
-          <Chip
-            label={`${document.wordCount} words`}
-            size="small"
-            variant="outlined"
-          />
-          <Chip
-            label={`Modified: ${document.lastModified}`}
-            size="small"
-            variant="outlined"
-          />
+          <Chip label={document.type.replace('-', ' ')} size="small" variant="outlined" />
+          <Chip label={`${document.wordCount} words`} size="small" variant="outlined" />
+          <Chip label={`Modified: ${document.lastModified}`} size="small" variant="outlined" />
         </Box>
 
         {/* Content */}
@@ -145,18 +142,10 @@ export function DocumentComparison({
 
         {/* Actions */}
         <Box className="flex gap-2 mt-4">
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<Eye sx={{ fontSize: 16 }} />}
-          >
+          <Button size="small" variant="outlined" startIcon={<Eye sx={{ fontSize: 16 }} />}>
             Preview
           </Button>
-          <Button
-            size="small"
-            variant="outlined"
-            startIcon={<Download sx={{ fontSize: 16 }} />}
-          >
+          <Button size="small" variant="outlined" startIcon={<Download sx={{ fontSize: 16 }} />}>
             Download
           </Button>
         </Box>
@@ -185,10 +174,7 @@ export function DocumentComparison({
           >
             {showFullContent ? 'Compact View' : 'Full View'}
           </Button>
-          <Button
-            variant="contained"
-            className="bg-primary hover:bg-primary/90"
-          >
+          <Button variant="contained" className="bg-primary hover:bg-primary/90">
             Merge Changes
           </Button>
         </Box>

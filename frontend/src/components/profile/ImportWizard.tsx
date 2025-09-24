@@ -19,7 +19,7 @@ import {
   List,
   ListItem,
   ListItemText,
-  ListItemIcon
+  ListItemIcon,
 } from '@mui/material';
 import { LinkedIn, Check, Error, Person, Work, School } from '@mui/icons-material';
 
@@ -56,37 +56,37 @@ const sampleLinkedInData: LinkedInData = {
     name: 'John Doe',
     headline: 'Senior Software Engineer at TechCorp',
     location: 'San Francisco, CA',
-    summary: 'Experienced software engineer with 5+ years developing scalable web applications...'
+    summary: 'Experienced software engineer with 5+ years developing scalable web applications...',
   },
   experience: [
     {
       company: 'TechCorp',
       position: 'Senior Software Engineer',
       duration: '2021 - Present',
-      description: 'Led development of scalable web applications using React and Node.js...'
+      description: 'Led development of scalable web applications using React and Node.js...',
     },
     {
       company: 'StartupInc',
       position: 'Full Stack Developer',
       duration: '2019 - 2021',
-      description: 'Built MVP from scratch and implemented CI/CD pipeline...'
-    }
+      description: 'Built MVP from scratch and implemented CI/CD pipeline...',
+    },
   ],
   education: [
     {
       institution: 'University of Technology',
       degree: 'Bachelor of Science',
       field: 'Computer Science',
-      year: '2019'
-    }
+      year: '2019',
+    },
   ],
-  skills: ['JavaScript', 'React', 'Node.js', 'Python', 'PostgreSQL', 'AWS']
+  skills: ['JavaScript', 'React', 'Node.js', 'Python', 'PostgreSQL', 'AWS'],
 };
 
 const steps = [
   { label: 'Connect', description: 'Connect to LinkedIn' },
   { label: 'Preview Data', description: 'Review imported information' },
-  { label: 'Confirm Import', description: 'Confirm and import data' }
+  { label: 'Confirm Import', description: 'Confirm and import data' },
 ];
 
 export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardProps) {
@@ -98,7 +98,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
     profile: true,
     experience: true,
     education: true,
-    skills: true
+    skills: true,
   });
 
   const handleNext = () => {
@@ -126,7 +126,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
   const handleImportComplete = () => {
     const importData = {
       ...linkedInData,
-      selectedSections
+      selectedSections,
     };
     onImportComplete?.(importData);
     onClose();
@@ -137,9 +137,9 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
   };
 
   const handleSectionToggle = (section: keyof typeof selectedSections) => {
-    setSelectedSections(prev => ({
+    setSelectedSections((prev) => ({
       ...prev,
-      [section]: !prev[section]
+      [section]: !prev[section],
     }));
   };
 
@@ -159,7 +159,8 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
             </Typography>
 
             <Typography variant="body1" color="text.secondary" className="mb-6 max-w-md mx-auto">
-              We'll securely import your professional information from LinkedIn to help build your profile.
+              We'll securely import your professional information from LinkedIn to help build your
+              profile.
             </Typography>
 
             {isConnecting && (
@@ -216,9 +217,15 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                     />
                   </Box>
                   <Box className="space-y-2 text-sm">
-                    <Box><strong>Name:</strong> {linkedInData?.profile.name}</Box>
-                    <Box><strong>Headline:</strong> {linkedInData?.profile.headline}</Box>
-                    <Box><strong>Location:</strong> {linkedInData?.profile.location}</Box>
+                    <Box>
+                      <strong>Name:</strong> {linkedInData?.profile.name}
+                    </Box>
+                    <Box>
+                      <strong>Headline:</strong> {linkedInData?.profile.headline}
+                    </Box>
+                    <Box>
+                      <strong>Location:</strong> {linkedInData?.profile.location}
+                    </Box>
                   </Box>
                 </CardContent>
               </Card>
@@ -340,25 +347,37 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                 <List dense>
                   <ListItem>
                     <ListItemIcon>
-                      <Check sx={{ fontSize: 16 }} className={selectedSections.profile ? 'text-green-600' : 'text-gray-400'} />
+                      <Check
+                        sx={{ fontSize: 16 }}
+                        className={selectedSections.profile ? 'text-green-600' : 'text-gray-400'}
+                      />
                     </ListItemIcon>
                     <ListItemText primary="Profile Information" />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
-                      <Check sx={{ fontSize: 16 }} className={selectedSections.experience ? 'text-green-600' : 'text-gray-400'} />
+                      <Check
+                        sx={{ fontSize: 16 }}
+                        className={selectedSections.experience ? 'text-green-600' : 'text-gray-400'}
+                      />
                     </ListItemIcon>
                     <ListItemText primary="Work Experience" />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
-                      <Check sx={{ fontSize: 16 }} className={selectedSections.education ? 'text-green-600' : 'text-gray-400'} />
+                      <Check
+                        sx={{ fontSize: 16 }}
+                        className={selectedSections.education ? 'text-green-600' : 'text-gray-400'}
+                      />
                     </ListItemIcon>
                     <ListItemText primary="Education" />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
-                      <Check sx={{ fontSize: 16 }} className={selectedSections.skills ? 'text-green-600' : 'text-gray-400'} />
+                      <Check
+                        sx={{ fontSize: 16 }}
+                        className={selectedSections.skills ? 'text-green-600' : 'text-gray-400'}
+                      />
                     </ListItemIcon>
                     <ListItemText primary="Skills" />
                   </ListItem>
@@ -412,10 +431,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
         <Button onClick={onClose} disabled={isConnecting}>
           Cancel
         </Button>
-        <Button
-          onClick={handleBack}
-          disabled={activeStep === 0 || isConnecting}
-        >
+        <Button onClick={handleBack} disabled={activeStep === 0 || isConnecting}>
           Back
         </Button>
         <Button
@@ -427,10 +443,10 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
           {isConnecting
             ? 'Connecting...'
             : activeStep === steps.length - 1
-            ? 'Import Data'
-            : activeStep === 0 && !isConnected
-            ? 'Connect to LinkedIn'
-            : 'Next'}
+              ? 'Import Data'
+              : activeStep === 0 && !isConnected
+                ? 'Connect to LinkedIn'
+                : 'Next'}
         </Button>
       </DialogActions>
     </Dialog>

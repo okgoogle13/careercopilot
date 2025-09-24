@@ -17,15 +17,13 @@ const StyledCard = styled(MuiCard)(({ theme }) => ({
 
 export interface CardProps extends MuiCardProps {}
 
-export const Card = React.forwardRef<HTMLDivElement, CardProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <StyledCard ref={ref} {...props}>
-        {children}
-      </StyledCard>
-    );
-  }
-);
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(({ children, ...props }, ref) => {
+  return (
+    <StyledCard ref={ref} {...props}>
+      {children}
+    </StyledCard>
+  );
+});
 
 Card.displayName = 'Card';
 
@@ -37,14 +35,7 @@ export interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElemen
 export const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
   ({ children, title, description, ...props }, ref) => {
     if (title || description) {
-      return (
-        <MuiCardHeader
-          ref={ref}
-          title={title}
-          subheader={description}
-          {...props}
-        />
-      );
+      return <MuiCardHeader ref={ref} title={title} subheader={description} {...props} />;
     }
 
     return (
@@ -62,13 +53,7 @@ export interface CardTitleProps extends React.ComponentProps<typeof Typography> 
 export const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
   ({ children, ...props }, ref) => {
     return (
-      <Typography
-        ref={ref}
-        variant="h6"
-        component="h3"
-        fontWeight={600}
-        {...props}
-      >
+      <Typography ref={ref} variant="h6" component="h3" fontWeight={600} {...props}>
         {children}
       </Typography>
     );
@@ -82,12 +67,7 @@ export interface CardDescriptionProps extends React.ComponentProps<typeof Typogr
 export const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   ({ children, ...props }, ref) => {
     return (
-      <Typography
-        ref={ref}
-        variant="body2"
-        color="text.secondary"
-        {...props}
-      >
+      <Typography ref={ref} variant="body2" color="text.secondary" {...props}>
         {children}
       </Typography>
     );

@@ -58,15 +58,18 @@ function App() {
 ### Layout Components
 
 #### AppLayout
+
 The main application shell providing navigation, user management, and responsive layout.
 
 **Features:**
+
 - Responsive navigation drawer with user profile
 - Theme toggle functionality
 - Mobile-optimized interactions
 - Navigation state management
 
 **Usage:**
+
 ```tsx
 <AppLayout
   currentView="dashboard"
@@ -77,7 +80,7 @@ The main application shell providing navigation, user management, and responsive
   user={{
     name: 'Sarah Johnson',
     email: 'sarah.johnson@example.com',
-    avatar: '/path/to/avatar.jpg'
+    avatar: '/path/to/avatar.jpg',
   }}
 >
   {children}
@@ -85,20 +88,24 @@ The main application shell providing navigation, user management, and responsive
 ```
 
 #### PageHeader
+
 Flexible page header with breadcrumbs, actions, and multiple display variants.
 
 **Variants:**
+
 - `default`: Standard header with full features
 - `compact`: Minimal header for constrained spaces
 - `detailed`: Expanded header with description
 
 **Features:**
+
 - Breadcrumb navigation
 - Action buttons with overflow menu
 - Status indicators and avatars
 - Custom content slots
 
 **Usage:**
+
 ```tsx
 <PageHeader
   title="Document Overview"
@@ -107,7 +114,7 @@ Flexible page header with breadcrumbs, actions, and multiple display variants.
   breadcrumbs={[
     { label: 'Dashboard', href: '/dashboard' },
     { label: 'Documents', href: '/documents' },
-    { label: 'Resume.pdf' }
+    { label: 'Resume.pdf' },
   ]}
   actions={[
     {
@@ -115,12 +122,12 @@ Flexible page header with breadcrumbs, actions, and multiple display variants.
       label: 'Edit',
       icon: Edit,
       variant: 'outlined',
-      onClick: () => handleEdit()
-    }
+      onClick: () => handleEdit(),
+    },
   ]}
   status={{
     label: 'Published',
-    color: 'success'
+    color: 'success',
   }}
   onBack={() => navigate('/documents')}
 />
@@ -129,9 +136,11 @@ Flexible page header with breadcrumbs, actions, and multiple display variants.
 ### Data Components
 
 #### DataTable
+
 Comprehensive data table with sorting, filtering, pagination, and bulk operations.
 
 **Features:**
+
 - Column sorting and filtering
 - Row selection with bulk actions
 - Pagination with customizable page sizes
@@ -141,21 +150,22 @@ Comprehensive data table with sorting, filtering, pagination, and bulk operation
 - Loading and empty states
 
 **Usage:**
+
 ```tsx
 const columns = [
   {
     id: 'name',
     label: 'Document Name',
     sortable: true,
-    render: (value) => <Typography variant="body2">{value}</Typography>
+    render: (value) => <Typography variant="body2">{value}</Typography>,
   },
   {
     id: 'status',
     label: 'Status',
     filterable: true,
     filterOptions: ['Published', 'Draft'],
-    render: (value) => <Chip label={value} color="primary" />
-  }
+    render: (value) => <Chip label={value} color="primary" />,
+  },
 ];
 
 <DataTable
@@ -169,8 +179,8 @@ const columns = [
       id: 'edit',
       label: 'Edit',
       icon: Edit,
-      onClick: (row) => handleEdit(row)
-    }
+      onClick: (row) => handleEdit(row),
+    },
   ]}
   bulkActions={[
     {
@@ -178,10 +188,10 @@ const columns = [
       label: 'Delete Selected',
       icon: Trash2,
       color: 'error',
-      onClick: (rows) => handleBulkDelete(rows)
-    }
+      onClick: (rows) => handleBulkDelete(rows),
+    },
   ]}
-/>
+/>;
 ```
 
 ### UI Components
@@ -286,7 +296,8 @@ Career Copilot includes specialized animations for enhanced user experience:
 ```css
 /* ATS Score Pulse Animation */
 @keyframes pulse-score {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
     text-shadow: 0 0 10px rgba(167, 139, 250, 0.5);
   }
@@ -442,6 +453,7 @@ src/components/
 Components have been migrated from Tailwind CSS to Material-UI with M3 theming:
 
 **Before (Tailwind):**
+
 ```tsx
 <div className="bg-white rounded-lg shadow-md p-4 hover:shadow-lg">
   <h2 className="text-xl font-semibold text-gray-800">Title</h2>
@@ -449,9 +461,12 @@ Components have been migrated from Tailwind CSS to Material-UI with M3 theming:
 ```
 
 **After (Material-UI):**
+
 ```tsx
 <Card variant="interactive" sx={{ p: 2 }}>
-  <Typography variant="h6" color="text.primary">Title</Typography>
+  <Typography variant="h6" color="text.primary">
+    Title
+  </Typography>
 </Card>
 ```
 

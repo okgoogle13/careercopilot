@@ -1,13 +1,13 @@
 export const generateTailoredResume = jest.fn().mockResolvedValue({
   resume_content: '',
-  content: ''
+  content: '',
 });
 
 export const generateCoverLetter = jest.fn().mockResolvedValue('');
 
 const aiServices = {
   generateTailoredResume,
-  generateCoverLetter
+  generateCoverLetter,
 };
 
 export default aiServices;

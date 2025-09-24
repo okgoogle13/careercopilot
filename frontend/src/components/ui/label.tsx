@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  FormLabel,
-  FormLabelProps,
-} from '@mui/material';
+import { FormLabel, FormLabelProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledLabel = styled(FormLabel)(({ theme }) => ({

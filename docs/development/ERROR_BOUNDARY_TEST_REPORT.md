@@ -159,6 +159,7 @@ class ErrorBoundary extends Component<Props, State> {
    - ✅ **State**: Error isolated to affected component
 
 3. **Invalid JSX**:
+
    ```tsx
    // Missing closing tag or invalid structure
    return <div><span></div></span>;

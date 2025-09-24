@@ -51,27 +51,24 @@ const sampleProfiles: ProfileData[] = [
         highlights: [
           'Led development of scalable web applications',
           'Improved application performance by 40%',
-          'Mentored junior developers'
-        ]
+          'Mentored junior developers',
+        ],
       },
       {
         company: 'StartupInc',
         position: 'Full Stack Developer',
         duration: '2019-2021',
-        highlights: [
-          'Built MVP from scratch',
-          'Implemented CI/CD pipeline'
-        ]
-      }
+        highlights: ['Built MVP from scratch', 'Implemented CI/CD pipeline'],
+      },
     ],
     education: [
       {
         degree: 'B.S. Computer Science',
         institution: 'University of Technology',
-        year: '2019'
-      }
+        year: '2019',
+      },
     ],
-    certifications: ['AWS Certified Developer', 'React Professional']
+    certifications: ['AWS Certified Developer', 'React Professional'],
   },
   {
     id: '2',
@@ -81,7 +78,16 @@ const sampleProfiles: ProfileData[] = [
     atsScore: 92,
     lastUpdated: '2024-01-20',
     avatarColor: '#3B82F6',
-    skills: ['JavaScript', 'TypeScript', 'React', 'Node.js', 'Python', 'PostgreSQL', 'AWS', 'Docker'],
+    skills: [
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'Node.js',
+      'Python',
+      'PostgreSQL',
+      'AWS',
+      'Docker',
+    ],
     experience: [
       {
         company: 'TechCorp',
@@ -91,8 +97,8 @@ const sampleProfiles: ProfileData[] = [
           'Led cross-functional development of scalable web applications',
           'Improved application performance by 40% through optimization',
           'Mentored junior developers and conducted code reviews',
-          'Implemented CI/CD pipeline reducing deployment time by 60%'
-        ]
+          'Implemented CI/CD pipeline reducing deployment time by 60%',
+        ],
       },
       {
         company: 'StartupInc',
@@ -101,26 +107,26 @@ const sampleProfiles: ProfileData[] = [
         highlights: [
           'Built MVP from scratch using modern tech stack',
           'Implemented comprehensive CI/CD pipeline',
-          'Designed and developed RESTful APIs'
-        ]
-      }
+          'Designed and developed RESTful APIs',
+        ],
+      },
     ],
     education: [
       {
         degree: 'B.S. Computer Science',
         institution: 'University of Technology',
-        year: '2019'
-      }
+        year: '2019',
+      },
     ],
-    certifications: ['AWS Certified Developer', 'React Professional', 'Docker Certified Associate']
-  }
+    certifications: ['AWS Certified Developer', 'React Professional', 'Docker Certified Associate'],
+  },
 ];
 
 export function ProfileComparison({
   leftProfile = sampleProfiles[0],
   rightProfile = sampleProfiles[1],
   onProfileSelect,
-  onSwapProfiles
+  onSwapProfiles,
 }: ProfileComparisonProps) {
   const [selectedSection, setSelectedSection] = useState<string>('overview');
 
@@ -129,7 +135,7 @@ export function ProfileComparison({
     { id: 'skills', label: 'Skills' },
     { id: 'experience', label: 'Experience' },
     { id: 'education', label: 'Education' },
-    { id: 'certifications', label: 'Certifications' }
+    { id: 'certifications', label: 'Certifications' },
   ];
 
   const renderSkillsComparison = () => (
@@ -259,10 +265,7 @@ export function ProfileComparison({
           >
             Swap Profiles
           </Button>
-          <Button
-            variant="outlined"
-            startIcon={<Download sx={{ fontSize: 16 }} />}
-          >
+          <Button variant="outlined" startIcon={<Download sx={{ fontSize: 16 }} />}>
             Export Comparison
           </Button>
           <Button
@@ -282,11 +285,7 @@ export function ProfileComparison({
             <Typography variant="h6" className="font-semibold">
               Profile Version 1
             </Typography>
-            <Button
-              size="small"
-              variant="outlined"
-              onClick={() => onProfileSelect?.('left')}
-            >
+            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('left')}>
               Change Profile
             </Button>
           </Box>
@@ -307,11 +306,7 @@ export function ProfileComparison({
             <Typography variant="h6" className="font-semibold">
               Profile Version 2
             </Typography>
-            <Button
-              size="small"
-              variant="outlined"
-              onClick={() => onProfileSelect?.('right')}
-            >
+            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('right')}>
               Change Profile
             </Button>
           </Box>
@@ -356,7 +351,8 @@ export function ProfileComparison({
         {(selectedSection === 'education' || selectedSection === 'certifications') && (
           <Box className="text-center py-8">
             <Typography variant="h6" color="text.secondary">
-              {selectedSection.charAt(0).toUpperCase() + selectedSection.slice(1)} comparison coming soon
+              {selectedSection.charAt(0).toUpperCase() + selectedSection.slice(1)} comparison coming
+              soon
             </Typography>
           </Box>
         )}

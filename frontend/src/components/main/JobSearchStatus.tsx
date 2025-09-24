@@ -1,7 +1,14 @@
 import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { StatCard } from '../ui/StatCard';
-import { Send, CalendarMonth, EmojiEvents, GpsFixed, AccessTime, Visibility } from '@mui/icons-material';
+import {
+  Send,
+  CalendarMonth,
+  EmojiEvents,
+  GpsFixed,
+  AccessTime,
+  Visibility,
+} from '@mui/icons-material';
 
 interface JobSearchStatusProps {
   stats?: {
@@ -26,13 +33,13 @@ export function JobSearchStatus({
     offers: 2,
     responseRate: 25,
     avgResponseTime: 5,
-    profileViews: 145
+    profileViews: 145,
   },
   trends = {
     applicationsTrend: { value: 15, isPositive: true },
     interviewsTrend: { value: 50, isPositive: true },
-    offersTrend: { value: 100, isPositive: true }
-  }
+    offersTrend: { value: 100, isPositive: true },
+  },
 }: JobSearchStatusProps) {
   return (
     <Box className="w-full">

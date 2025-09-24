@@ -9,6 +9,7 @@ This plan outlines the steps to clean up unused files and refactor the frontend 
 Delete the following files and directories from the repository root and `src/` folder. They are backups, migration artifacts, or unused scripts.
 
 **Delete from root:**
+
 - `package.json.backup`
 - `bundle-analysis-report.html`
 - `MUI_MIGRATION_PROGRESS.md`
@@ -20,6 +21,7 @@ Delete the following files and directories from the repository root and `src/` f
 - `/scripts/` (the entire directory)
 
 **Delete from `src/`:**
+
 - `src/Career Copilot.zip` (and its unzipped contents if they exist)
 - `src/components/Dashboard-backup.tsx`
 - `src/cleanup-notes.md`

@@ -15,36 +15,40 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    quote: "CareerCopilot transformed my job search. The AI-generated cover letters were so personalized and compelling that I landed interviews at all my target companies.",
-    author: "Sarah Chen",
-    role: "Software Engineer",
-    company: "Google",
-    rating: 5
+    quote:
+      'CareerCopilot transformed my job search. The AI-generated cover letters were so personalized and compelling that I landed interviews at all my target companies.',
+    author: 'Sarah Chen',
+    role: 'Software Engineer',
+    company: 'Google',
+    rating: 5,
   },
   {
     id: 2,
-    quote: "The resume optimization feature is incredible. It helped me highlight my skills in ways I never thought of, and I got my dream job within two weeks.",
-    author: "Marcus Johnson",
-    role: "Product Manager",
-    company: "Microsoft",
-    rating: 5
+    quote:
+      'The resume optimization feature is incredible. It helped me highlight my skills in ways I never thought of, and I got my dream job within two weeks.',
+    author: 'Marcus Johnson',
+    role: 'Product Manager',
+    company: 'Microsoft',
+    rating: 5,
   },
   {
     id: 3,
-    quote: "I was struggling with interview prep until I found CareerCopilot. The AI feedback on my practice responses boosted my confidence tremendously.",
-    author: "Emily Rodriguez",
-    role: "UX Designer",
-    company: "Apple",
-    rating: 5
+    quote:
+      'I was struggling with interview prep until I found CareerCopilot. The AI feedback on my practice responses boosted my confidence tremendously.',
+    author: 'Emily Rodriguez',
+    role: 'UX Designer',
+    company: 'Apple',
+    rating: 5,
   },
   {
     id: 4,
-    quote: "The application tracking feature kept me organized throughout my job search. I could see exactly where I stood with each opportunity.",
-    author: "David Kim",
-    role: "Data Scientist",
-    company: "Netflix",
-    rating: 4
-  }
+    quote:
+      'The application tracking feature kept me organized throughout my job search. I could see exactly where I stood with each opportunity.',
+    author: 'David Kim',
+    role: 'Data Scientist',
+    company: 'Netflix',
+    rating: 4,
+  },
 ];
 
 export function TestimonialCarousel() {

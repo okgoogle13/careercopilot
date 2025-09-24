@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Avatar as MuiAvatar,
-  AvatarProps as MuiAvatarProps,
-} from '@mui/material';
+import { Avatar as MuiAvatar, AvatarProps as MuiAvatarProps } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledAvatar = styled(MuiAvatar)(({ theme }) => ({
@@ -31,7 +28,13 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
   ({ src, alt, ...props }, ref) => {
     return (
       <Avatar>
-        <img ref={ref} src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} {...props} />
+        <img
+          ref={ref}
+          src={src}
+          alt={alt}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          {...props}
+        />
       </Avatar>
     );
   }

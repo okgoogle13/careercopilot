@@ -41,15 +41,20 @@ export function ProfileCard({
   };
 
   return (
-    <Card className={`card-aurora glass p-6 space-y-4 transition-all duration-300 ${isSelected ? 'border-brand-primary/40' : ''}`}>
+    <Card
+      className={`card-aurora glass p-6 space-y-4 transition-all duration-300 ${isSelected ? "border-brand-primary/40" : ""}`}
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <Avatar className="w-12 h-12 ring-2 ring-primary/30 transition-transform duration-300 hover:scale-110">
-            <AvatarFallback 
+            <AvatarFallback
               className="text-black font-medium"
               style={{ backgroundColor: avatarColor }}
             >
-              {name.split(' ').map(n => n[0]).join('')}
+              {name
+                .split(" ")
+                .map((n) => n[0])
+                .join("")}
             </AvatarFallback>
           </Avatar>
           <div>
@@ -57,8 +62,10 @@ export function ProfileCard({
             <p className="text-sm text-muted-foreground">{role}</p>
           </div>
         </div>
-        
-        <Badge className={`${getScoreBadgeColor(atsScore)} border transition-transform duration-300 hover:scale-105`}>
+
+        <Badge
+          className={`${getScoreBadgeColor(atsScore)} border transition-transform duration-300 hover:scale-105`}
+        >
           {atsScore}%
         </Badge>
       </div>
@@ -71,7 +78,7 @@ export function ProfileCard({
           </div>
           <Progress value={atsScore} className="h-2" />
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <div className="text-center p-3 bg-primary/5 rounded-lg border border-primary/10">
             <div className="flex items-center justify-center gap-1 mb-1">
@@ -80,7 +87,7 @@ export function ProfileCard({
             </div>
             <p className="font-semibold text-brand-primary">{activeApplications}</p>
           </div>
-          
+
           <div className="text-center p-3 bg-secondary/5 rounded-lg border border-secondary/10">
             <div className="flex items-center justify-center gap-1 mb-1">
               <TrendingUp className="w-3 h-3 text-brand-secondary icon-interactive" />
@@ -89,7 +96,7 @@ export function ProfileCard({
             <p className="font-semibold text-brand-secondary">High</p>
           </div>
         </div>
-        
+
         <div className="text-center">
           <span className="text-xs text-muted-foreground">Updated {lastUpdated}</span>
         </div>

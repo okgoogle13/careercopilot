@@ -255,11 +255,7 @@ export function PageHeader({
             )}
 
             {/* Custom Content */}
-            {children && (
-              <Box sx={{ mt: isCompact ? 1 : 2 }}>
-                {children}
-              </Box>
-            )}
+            {children && <Box sx={{ mt: isCompact ? 1 : 2 }}>{children}</Box>}
           </Box>
 
           {/* Actions */}
@@ -347,9 +343,7 @@ export function PageHeader({
                   })}
 
                   {/* Divider if both types exist */}
-                  {actions.length > (isCompact ? 1 : 3) && menuActions.length > 0 && (
-                    <Divider />
-                  )}
+                  {actions.length > (isCompact ? 1 : 3) && menuActions.length > 0 && <Divider />}
 
                   {/* Menu actions */}
                   {menuActions.map((action) => {
@@ -360,8 +354,12 @@ export function PageHeader({
                           onClick={() => handleMenuAction(action)}
                           disabled={action.disabled}
                           sx={{
-                            color: action.color === 'error' ? 'error.main' :
-                                   action.color === 'warning' ? 'warning.main' : 'inherit',
+                            color:
+                              action.color === 'error'
+                                ? 'error.main'
+                                : action.color === 'warning'
+                                  ? 'warning.main'
+                                  : 'inherit',
                           }}
                         >
                           {Icon && (
