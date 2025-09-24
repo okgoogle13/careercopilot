@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button, Container } from '@mui/material';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, PlayArrow } from '@mui/icons-material';
 import { FeatureHighlights } from './FeatureHighlights';
 
 interface HeroBannerProps {
@@ -36,7 +36,7 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
               size="large"
               onClick={onGetStarted}
               className="bg-primary hover:bg-primary/90 px-8 py-3 text-lg"
-              endIcon={<ArrowRight size={20} />}
+              endIcon={<ArrowRight sx={{ fontSize: 20 }} />}
             >
               Get Started Free
             </Button>
@@ -46,7 +46,7 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
               size="large"
               onClick={onWatchDemo}
               className="border-primary text-primary hover:bg-primary/10 px-8 py-3 text-lg"
-              startIcon={<Play size={20} />}
+              startIcon={<PlayArrow sx={{ fontSize: 20 }} />}
             >
               Watch Demo
             </Button>

@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useRef } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Upload, File, X, Loader2 } from 'lucide-react';
+import { Upload, InsertDriveFile as File, Close as X, HourglassEmpty as Loader2 } from '@mui/icons-material';
 import { Button } from '../ui/button';
 import { Progress } from '../ui/progress';
 import { cn } from '../../lib/utils';
@@ -264,7 +264,7 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
 
           <div className="flex justify-end space-x-2 pt-2">
             <Button
-              variant="outlined"
+              variant="outline"
               size="small"
               onClick={() => setFiles([])}
               disabled={isUploading}

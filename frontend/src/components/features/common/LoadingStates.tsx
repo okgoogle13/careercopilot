@@ -1,6 +1,6 @@
-import { Skeleton } from './ui/skeleton';
-import { Progress } from './ui/progress';
-import { ArrowLeft, Upload, FileText, Loader2, CheckCircle } from 'lucide-react';
+import { Skeleton } from '../../ui/skeleton';
+import { Progress } from '../../ui/progress';
+import { ArrowLeft, Upload, Description, AutorenewRounded, CheckCircle } from '@mui/icons-material';
 import { CareerCopilotLogo } from './CareerCopilotLogo';
 import { useState, useEffect } from 'react';
 import {
@@ -103,7 +103,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
           <div className="space-y-4">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <Loader2 className="w-6 h-6 text-primary animate-spin" />
+                <AutorenewRounded className="w-6 h-6 text-primary animate-spin" />
               </div>
               <div>
                 <p className="font-medium">Analyzing your resume...</p>
@@ -117,7 +117,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
                   {step.completed ? (
                     <CheckCircle className="w-4 h-4 text-green-400" />
                   ) : index === analysisStep ? (
-                    <Loader2 className="w-4 h-4 text-primary animate-spin" />
+                    <AutorenewRounded className="w-4 h-4 text-primary animate-spin" />
                   ) : (
                     <div className="w-4 h-4 border-2 border-muted rounded-full" />
                   )}
@@ -151,7 +151,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
           <div className="space-y-4">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                <CareerCopilotLogo className="text-primary" size={32} />
+                <CareerCopilotLogo className="text-primary" sx={{ fontSize: 32 }} />
               </div>
               <p className="font-medium mb-2">Generating your resume</p>
               <p className="text-sm text-muted-foreground mb-4">
@@ -196,7 +196,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
           <h3 className="font-medium mb-4">Loading Spinners</h3>
           <div className="space-y-6">
             <div className="flex items-center gap-4 justify-center">
-              <Loader2 className="w-6 h-6 text-primary animate-spin" />
+              <AutorenewRounded className="w-6 h-6 text-primary animate-spin" />
               <div className="text-sm text-muted-foreground">Default spinner</div>
             </div>
 
@@ -240,7 +240,7 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
             <div className="text-center">
               <div className="mb-3 animate-pulse">
-                <CareerCopilotLogo className="text-primary mx-auto" size={32} />
+                <CareerCopilotLogo className="text-primary mx-auto" sx={{ fontSize: 32 }} />
               </div>
               <p className="text-sm text-muted-foreground">Loading Career Copilot...</p>
             </div>

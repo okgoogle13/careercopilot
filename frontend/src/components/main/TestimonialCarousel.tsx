@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Box, IconButton, Rating } from '@mui/material';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, FormatQuote } from '@mui/icons-material';
 
 interface Testimonial {
   id: number;
@@ -71,7 +71,7 @@ export function TestimonialCarousel() {
           <CardContent className="text-center">
             {/* Quote Icon */}
             <Box className="flex justify-center mb-6">
-              <Quote size={48} className="text-primary/30" />
+              <FormatQuote sx={{ fontSize: 48 }} className="text-primary/30" />
             </Box>
 
             {/* Testimonial Quote */}
@@ -106,7 +106,7 @@ export function TestimonialCarousel() {
             className="border border-gray-300 hover:bg-primary/10"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft sx={{ fontSize: 20 }} />
           </IconButton>
 
           {/* Dots Indicator */}
@@ -127,7 +127,7 @@ export function TestimonialCarousel() {
             className="border border-gray-300 hover:bg-primary/10"
             aria-label="Next testimonial"
           >
-            <ChevronRight size={20} />
+            <ChevronRight sx={{ fontSize: 20 }} />
           </IconButton>
         </Box>
       </Box>

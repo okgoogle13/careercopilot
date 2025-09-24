@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Textarea } from './ui/textarea';
-import { Input } from './ui/input';
-import { Badge } from './ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Switch } from './ui/switch';
-import { Slider } from './ui/slider';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
-import { Progress } from './ui/progress';
-import { Separator } from './ui/separator';
+import { Textarea } from '../../ui/textarea';
+import { Input } from '../../ui/input';
+import { Badge } from '../../ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
+import { Switch } from '../../ui/switch';
+import { Slider } from '../../ui/slider';
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
+import { Progress } from '../../ui/progress';
+import { Separator } from '../../ui/separator';
 import {
   Sparkles,
   User,
@@ -40,7 +40,7 @@ import {
   CheckCircle,
   AlertCircle,
   Star,
-} from 'lucide-react';
+} from '@mui/icons-material';
 import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
 import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';
 import { AIProcessingLoading } from './StandardizedLoadingStates';

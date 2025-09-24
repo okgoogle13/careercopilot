@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, User, Settings } from 'lucide-react';
+import { Add as Plus, Person as User, Settings } from '@mui/icons-material';
 import { Button } from '@mui/material';
 
 interface DashboardHeaderProps {

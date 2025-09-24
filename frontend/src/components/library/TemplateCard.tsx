@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Badge } from '../ui/badge';
-import { Check, Eye, Star } from 'lucide-react';
+import { Check, Visibility, Star } from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -81,7 +81,7 @@ export function TemplateCard({
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-surface-section to-surface-card">
             <div className="text-content-muted">
-              <Eye className="w-12 h-12 mx-auto mb-2 opacity-50" />
+              <Visibility className="w-12 h-12 mx-auto mb-2 opacity-50" />
               <p className="text-sm">Preview</p>
             </div>
           </div>
@@ -102,7 +102,7 @@ export function TemplateCard({
             }}
             className="border-brand-primary text-white hover:bg-brand-primary hover:text-white font-semibold"
           >
-            <Eye className="w-4 h-4 mr-2" />
+            <Visibility className="w-4 h-4 mr-2" />
             Preview
           </Button>
         </div>

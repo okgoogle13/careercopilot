@@ -1,19 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Input } from './ui/input';
-import { Badge } from './ui/badge';
-import { Tabs, TabsList, TabsTrigger } from './ui/tabs';
-import { Skeleton } from './ui/skeleton';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { Input } from '../../ui/input';
+import { Badge } from '../../ui/badge';
+import { Tabs, TabsList, TabsTrigger } from '../../ui/tabs';
+import { Skeleton } from '../../ui/skeleton';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import {
-  FileText,
+  Description as FileText,
   Mail,
-  Award,
+  EmojiEvents as Award,
   ArrowLeft,
   Search,
   Clock,
   Star,
-  Zap,
+  FlashOn as Zap,
   History,
   TrendingUp,
   Lightbulb,
@@ -23,7 +23,7 @@ import {
   Users,
   Target,
   BarChart3,
-} from 'lucide-react';
+} from '@mui/icons-material';
 import { cn } from '@/lib/utils';
 import { AnimatedCard, StaggeredList } from './AnimatedComponents';
 import { SkeletonLoading } from './StandardizedLoadingStates';

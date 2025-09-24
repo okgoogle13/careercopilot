@@ -1,44 +1,52 @@
 import React from 'react';
-import { Card, CardContent, Typography, Button, Box } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-interface EmptyStateProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  action?: {
-    label: string;
-    onClick: () => void;
-  };
+const StyledEmptyState = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: theme.spacing(6),
+  textAlign: 'center',
+  gap: theme.spacing(2),
+}));
+
+export interface EmptyStateProps {
+  title?: string;
+  description?: string;
+  actionLabel?: string;
+  onAction?: () => void;
+  icon?: React.ReactNode;
+  className?: string;
 }
 
-export function EmptyState({ icon, title, description, action }: EmptyStateProps) {
+export const EmptyState: React.FC<EmptyStateProps> = ({
+  title = 'No items found',
+  description = 'There are no items to display at the moment.',
+  actionLabel,
+  onAction,
+  icon,
+  className,
+}) => {
   return (
-    <Card className="p-8">
-      <CardContent className="text-center">
-        <Box className="flex justify-center mb-4">
-          <Box className="p-4 bg-gray-100 rounded-full">
-            {icon}
-          </Box>
+    <StyledEmptyState className={className}>
+      {icon && (
+        <Box sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }}>
+          {icon}
         </Box>
-
-        <Typography variant="h6" className="font-semibold mb-2">
-          {title}
-        </Typography>
-
-        <Typography variant="body2" color="text.secondary" className="mb-6">
-          {description}
-        </Typography>
-
-        {action && (
-          <Button
-            variant="contained"
-            onClick={action.onClick}
-            className="bg-primary hover:bg-primary/90"
-          >
-            {action.label}
-          </Button>
-        )}
-      </CardContent>
-    </Card>
+      )}
+      <Typography variant="h6" color="text.secondary">
+        {title}
+      </Typography>
+      <Typography variant="body2" color="text.disabled" sx={{ maxWidth: 400 }}>
+        {description}
+      </Typography>
+      {actionLabel && onAction && (
+        <Button variant="contained" onClick={onAction} sx={{ mt: 2 }}>
+          {actionLabel}
+        </Button>
+      )}
+    </StyledEmptyState>
   );
-}
+};

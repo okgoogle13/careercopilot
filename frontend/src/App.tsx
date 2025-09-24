@@ -19,18 +19,18 @@ import {
   SidebarInset,
 } from './components/ui/sidebar';
 import { Button } from './components/ui/button';
-import theme from './theme/theme';
+import { theme } from './theme/theme';
 
 // Lazy-loaded components for better performance - Updated paths after restructuring
 const Dashboard = lazy(() => import('./components/features/dashboard/Dashboard').then(module => ({ default: module.Dashboard })));
 const ResumeBuilder = lazy(() => import('./components/features/documents/ResumeBuilder').then(module => ({ default: module.ResumeBuilder })));
-const ATSAnalysisDashboard = lazy(() => import('./components/features/analysis/ATSAnalysisDashboard').then(module => ({ default: module.default })));
+const ATSAnalysisDashboard = lazy(() => import('./components/features/analysis/ATSAnalysisDashboard').then(module => ({ default: module.ATSAnalysisDashboard })));
 const TemplateSelector = lazy(() => import('./components/features/documents/TemplateSelector').then(module => ({ default: module.TemplateSelector })));
-const DocumentPreview = lazy(() => import('./components/features/documents/DocumentPreview').then(module => ({ default: module.default })));
-const LoadingStates = lazy(() => import('./components/features/common/LoadingStates').then(module => ({ default: module.default })));
+const DocumentPreview = lazy(() => import('./components/features/documents/DocumentPreview').then(module => ({ default: module.DocumentPreview })));
+const LoadingStates = lazy(() => import('./components/features/common/LoadingStates').then(module => ({ default: module.LoadingStates })));
 const ComponentLibrary = lazy(() => import('./components/features/demo/ComponentLibrary').then(module => ({ default: module.ComponentLibrary })));
-const StateDemoShowcase = lazy(() => import('./components/features/demo/StateDemoShowcase').then(module => ({ default: module.default })));
-const AnimatedShowcase = lazy(() => import('./components/features/demo/AnimatedShowcase').then(module => ({ default: module.default })));
+const StateDemoShowcase = lazy(() => import('./components/features/demo/StateDemoShowcase').then(module => ({ default: module.StateDemoShowcase })));
+const AnimatedShowcase = lazy(() => import('./components/features/demo/AnimatedShowcase').then(module => ({ default: module.AnimatedShowcase })));
 
 // User flow components - lazy loaded - Updated paths
 const Auth = lazy(() => import('./components/features/auth/Auth').then(module => ({ default: module.Auth })));
@@ -48,23 +48,23 @@ import { AppTab, DashboardTab, DocumentType, Profile as SharedProfile, Template 
 
 import {
   Navigation,
-  Eye,
-  FileText,
-  Loader2,
-  BarChart3,
-  Layout,
+  RemoveRedEye as Eye,
+  Description as FileText,
+  HourglassEmpty as Loader2,
+  BarChart as BarChart3,
+  Dashboard as Layout,
   Layers,
-  Play,
-  Sparkles,
+  PlayArrow as Play,
+  AutoAwesome as Sparkles,
   Settings as SettingsIcon,
-  Users,
+  People as Users,
   TrendingUp,
-  MessageSquare,
+  Chat as MessageSquare,
   Upload,
-  Target,
-  LogIn,
+  GpsFixed as Target,
+  Login as LogIn,
   Menu as MenuIcon,
-} from 'lucide-react';
+} from '@mui/icons-material';
 
 // Complete view types matching the wireframe
 type View =

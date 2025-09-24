@@ -14,6 +14,7 @@ export interface DocumentCardProps {
 const DOCUMENT_ICONS = {
   resume: '📄',
   'cover-letter': '✉️',
+  'selection-criteria': '📋',
   portfolio: '📁',
   other: '📎',
 } as const;

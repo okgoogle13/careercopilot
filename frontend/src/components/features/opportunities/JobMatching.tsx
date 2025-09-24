@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
+import { Badge } from '../../ui/badge';
+import { Progress } from '../../ui/progress';
 import {
   ArrowLeft,
   Sparkles,
@@ -10,7 +10,7 @@ import {
   ExternalLink,
   Heart,
   Star,
-} from 'lucide-react';
+} from '@mui/icons-material';
 import {
   Button,
   IconButton,

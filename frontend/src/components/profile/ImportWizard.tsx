@@ -21,7 +21,7 @@ import {
   ListItemText,
   ListItemIcon
 } from '@mui/material';
-import { Linkedin, Check, AlertCircle, User, Briefcase, GraduationCap } from 'lucide-react';
+import { LinkedIn, Check, Error, Person, Work, School } from '@mui/icons-material';
 
 interface ImportWizardProps {
   open: boolean;
@@ -150,7 +150,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
           <Box className="text-center py-8">
             <Box className="flex justify-center mb-6">
               <Box className="p-6 bg-blue-100 rounded-full">
-                <Linkedin size={48} className="text-blue-600" />
+                <LinkedIn sx={{ fontSize: 48 }} className="text-blue-600" />
               </Box>
             </Box>
 
@@ -200,7 +200,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                 <CardContent className="p-4">
                   <Box className="flex items-center justify-between mb-3">
                     <Box className="flex items-center gap-2">
-                      <User size={20} className="text-blue-600" />
+                      <Person sx={{ fontSize: 20 }} className="text-blue-600" />
                       <Typography variant="subtitle1" className="font-semibold">
                         Profile Information
                       </Typography>
@@ -228,7 +228,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                 <CardContent className="p-4">
                   <Box className="flex items-center justify-between mb-3">
                     <Box className="flex items-center gap-2">
-                      <Briefcase size={20} className="text-green-600" />
+                      <Work sx={{ fontSize: 20 }} className="text-green-600" />
                       <Typography variant="subtitle1" className="font-semibold">
                         Work Experience ({linkedInData?.experience.length} positions)
                       </Typography>
@@ -261,7 +261,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                 <CardContent className="p-4">
                   <Box className="flex items-center justify-between mb-3">
                     <Box className="flex items-center gap-2">
-                      <GraduationCap size={20} className="text-purple-600" />
+                      <School sx={{ fontSize: 20 }} className="text-purple-600" />
                       <Typography variant="subtitle1" className="font-semibold">
                         Education ({linkedInData?.education.length} entries)
                       </Typography>
@@ -320,7 +320,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
           <Box className="text-center py-8">
             <Box className="flex justify-center mb-6">
               <Box className="p-6 bg-green-100 rounded-full">
-                <Check size={48} className="text-green-600" />
+                <Check sx={{ fontSize: 48 }} className="text-green-600" />
               </Box>
             </Box>
 
@@ -340,25 +340,25 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                 <List dense>
                   <ListItem>
                     <ListItemIcon>
-                      <Check size={16} className={selectedSections.profile ? 'text-green-600' : 'text-gray-400'} />
+                      <Check sx={{ fontSize: 16 }} className={selectedSections.profile ? 'text-green-600' : 'text-gray-400'} />
                     </ListItemIcon>
                     <ListItemText primary="Profile Information" />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
-                      <Check size={16} className={selectedSections.experience ? 'text-green-600' : 'text-gray-400'} />
+                      <Check sx={{ fontSize: 16 }} className={selectedSections.experience ? 'text-green-600' : 'text-gray-400'} />
                     </ListItemIcon>
                     <ListItemText primary="Work Experience" />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
-                      <Check size={16} className={selectedSections.education ? 'text-green-600' : 'text-gray-400'} />
+                      <Check sx={{ fontSize: 16 }} className={selectedSections.education ? 'text-green-600' : 'text-gray-400'} />
                     </ListItemIcon>
                     <ListItemText primary="Education" />
                   </ListItem>
                   <ListItem>
                     <ListItemIcon>
-                      <Check size={16} className={selectedSections.skills ? 'text-green-600' : 'text-gray-400'} />
+                      <Check sx={{ fontSize: 16 }} className={selectedSections.skills ? 'text-green-600' : 'text-gray-400'} />
                     </ListItemIcon>
                     <ListItemText primary="Skills" />
                   </ListItem>

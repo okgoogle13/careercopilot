@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { ThemeProvider as MuiThemeProvider, CssBaseline, useMediaQuery } from '@mui/material';
-import { lightTheme, darkTheme } from './theme';
+import { theme as baseTheme } from './theme';
 import { ColorModeContext } from './ColorModeContext';
+import { createTheme } from '@mui/material/styles';
 
 export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -16,7 +17,15 @@ export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children
     [],
   );
 
-  const theme = useMemo(() => (mode === 'dark' ? darkTheme : lightTheme), [mode]);
+  const theme = useMemo(() => {
+    return createTheme({
+      ...baseTheme,
+      palette: {
+        ...baseTheme.palette,
+        mode: mode,
+      },
+    });
+  }, [mode]);
 
   return (
     <ColorModeContext.Provider value={colorMode}>

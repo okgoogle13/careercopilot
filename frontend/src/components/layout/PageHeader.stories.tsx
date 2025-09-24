@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { PageHeader, PageHeaderPresets } from './PageHeader';
 import { Box, Typography, Chip } from '@mui/material';
-import { Edit, Share2, Download, Bookmark, Trash2, Plus, Filter } from 'lucide-react';
+import { Edit, Share2, Download, Bookmark, Trash2, Plus, Filter } from '@mui/icons-material';
 
 const meta: Meta<typeof PageHeader> = {
   title: 'Layout/PageHeader',

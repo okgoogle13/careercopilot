@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   ChevronRight,
-  CheckCircle2,
-  XCircle,
-  AlertCircle,
-  RefreshCw,
+  CheckCircle as CheckCircle2,
+  Cancel as XCircle,
+  Error as AlertCircle,
+  Refresh as RefreshCw,
   TrendingUp,
-  ArrowUp,
-  ArrowDown,
-} from 'lucide-react';
+  KeyboardArrowUp as ArrowUp,
+  KeyboardArrowDown as ArrowDown,
+} from '@mui/icons-material';
 import {
   Button,
   IconButton,

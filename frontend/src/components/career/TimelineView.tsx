@@ -11,15 +11,15 @@ import {
   Divider
 } from '@mui/material';
 import {
-  Clock,
+  Schedule as Clock,
   CheckCircle,
-  AlertCircle,
-  FileText,
-  Calendar,
-  MessageCircle,
+  Error as AlertCircle,
+  Description as FileText,
+  CalendarToday as Calendar,
+  ChatBubble as MessageCircle,
   Edit,
-  ExternalLink
-} from 'lucide-react';
+  OpenInNew as ExternalLink
+} from '@mui/icons-material';
 
 interface TimelineEvent {
   id: string;
@@ -92,7 +92,7 @@ export function TimelineView({
           <Box className="flex items-start gap-4">
             {/* Event Icon */}
             <Avatar className={`w-10 h-10 ${eventColors[event.type]}`}>
-              <IconComponent size={20} />
+              <IconComponent sx={{ fontSize: 20 }} />
             </Avatar>
 
             {/* Event Content */}
@@ -106,7 +106,7 @@ export function TimelineView({
                     {event.description}
                   </Typography>
                   <Box className="flex items-center gap-2 text-sm text-gray-500">
-                    <Clock size={14} />
+                    <Clock sx={{ fontSize: 14 }} />
                     <span>{event.date}</span>
                   </Box>
                 </Box>
@@ -124,7 +124,7 @@ export function TimelineView({
                       onClick={() => onEventEdit(event.id)}
                       aria-label="Edit event"
                     >
-                      <Edit size={16} />
+                      <Edit sx={{ fontSize: 16 }} />
                     </IconButton>
                   )}
                 </Box>
@@ -169,7 +169,7 @@ export function TimelineView({
                             size="small"
                             variant="outlined"
                             onClick={() => onViewDocument?.(doc)}
-                            endIcon={<ExternalLink size={14} />}
+                            endIcon={<ExternalLink sx={{ fontSize: 14 }} />}
                           >
                             {doc}
                           </Button>
@@ -209,7 +209,7 @@ export function TimelineView({
                     size="small"
                     variant="outlined"
                     onClick={() => onAddNote(event.id)}
-                    startIcon={<MessageCircle size={16} />}
+                    startIcon={<MessageCircle sx={{ fontSize: 16 }} />}
                   >
                     Add Note
                   </Button>
@@ -266,7 +266,7 @@ export function TimelineView({
                 <Button
                   variant="outlined"
                   className="mt-3"
-                  startIcon={<Calendar size={16} />}
+                  startIcon={<Calendar sx={{ fontSize: 16 }} />}
                 >
                   Add Event
                 </Button>

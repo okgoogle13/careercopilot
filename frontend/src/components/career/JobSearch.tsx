@@ -16,15 +16,18 @@ import { FilterPanel, JobFilters } from '../features/opportunities/FilterPanel';
 import { JobCard } from '../features/opportunities/JobCard';
 import { LoadingState } from '../ui/LoadingState';
 import { EmptyState } from '../ui/EmptyState';
-import { Search, SlidersHorizontal, Grid3X3, List, Briefcase } from 'lucide-react';
+import { Search, Tune as SlidersHorizontal, GridView as Grid3X3, List, Work as Briefcase } from '@mui/icons-material';
+
+type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
+type ExperienceLevel = 'Entry Level' | 'Mid Level' | 'Senior Level' | 'Lead/Principal' | 'Executive';
 
 interface Job {
   id: string;
   title: string;
   company: string;
   location: string;
-  type: string;
-  experience: string;
+  type: JobType;
+  experience: ExperienceLevel;
   salary?: string;
   description: string;
   skills: string[];
@@ -210,7 +213,7 @@ export function JobSearch({
   const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
 
   if (isLoading) {
-    return <LoadingState size="lg" label="Searching for jobs..." />;
+    return <LoadingState message="Searching for jobs..." />;
   }
 
   return (
@@ -245,7 +248,7 @@ export function JobSearch({
                 <Button
                   variant="outlined"
                   onClick={() => setShowFilters(!showFilters)}
-                  startIcon={<SlidersHorizontal size={16} />}
+                  startIcon={<SlidersHorizontal sx={{ fontSize: 16 }} />}
                 >
                   {showFilters ? 'Hide' : 'Show'} Filters
                 </Button>
@@ -264,7 +267,7 @@ export function JobSearch({
                     className={`rounded-none ${viewMode === 'grid' ? 'bg-primary' : ''}`}
                     size="small"
                   >
-                    <Grid3X3 size={16} />
+                    <Grid3X3 sx={{ fontSize: 16 }} />
                   </Button>
                   <Button
                     variant={viewMode === 'list' ? 'contained' : 'outlined'}
@@ -272,7 +275,7 @@ export function JobSearch({
                     className={`rounded-none ${viewMode === 'list' ? 'bg-primary' : ''}`}
                     size="small"
                   >
-                    <List size={16} />
+                    <List sx={{ fontSize: 16 }} />
                   </Button>
                 </Box>
 
@@ -298,13 +301,11 @@ export function JobSearch({
           {/* Job Results */}
           {currentJobs.length === 0 ? (
             <EmptyState
-              icon={<Briefcase size={48} className="text-gray-400" />}
+              icon={<Briefcase sx={{ fontSize: 48 }} />}
               title="No jobs found"
               description="Try adjusting your filters or search criteria to find more opportunities."
-              action={{
-                label: "Clear Filters",
-                onClick: () => setFilters(null)
-              }}
+              actionLabel="Clear Filters"
+              onAction={() => setFilters(null)}
             />
           ) : (
             <>

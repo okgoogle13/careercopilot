@@ -1,10 +1,10 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
-import { Badge } from './ui/badge';
-import { Skeleton } from './ui/skeleton';
-import { Progress } from './ui/progress';
-import { Loader2, RefreshCw, Zap, CheckCircle } from 'lucide-react';
+import { Badge } from '../../ui/badge';
+import { Skeleton } from '../../ui/skeleton';
+import { Progress } from '../../ui/progress';
+import { AutorenewRounded, Refresh, FlashOn, CheckCircle } from '@mui/icons-material';
 
 // Loading state variants
 export type LoadingVariant =
@@ -39,7 +39,7 @@ export const SpinnerLoading = ({ size = 'md', message, className = '' }: Loading
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
-        <Loader2 className={`${sizeClasses[size]} text-primary`} />
+        <AutorenewRounded className={`${sizeClasses[size]} text-primary`} />
       </motion.div>
       {message && <span className="text-sm text-muted-foreground">{message}</span>}
     </div>
@@ -234,7 +234,7 @@ export const AIProcessingLoading = ({
           transition={{ duration: 1.5, repeat: Infinity }}
           className="absolute inset-0 flex items-center justify-center"
         >
-          <Zap className="w-5 h-5 text-purple-600" />
+          <FlashOn className="w-5 h-5 text-purple-600" />
         </motion.div>
       </div>
       <div className="text-center">

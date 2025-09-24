@@ -1,14 +1,13 @@
-import { AlertTriangle, RefreshCw } from 'lucide-react';
+import { Warning, Refresh } from '@mui/icons-material';
 import {
-  Button,
-  IconButton,
-  Card,
+  Card as MuiCard,
   CardContent,
   CardHeader,
-  CardActions,
   Typography,
   Box,
 } from '@mui/material';
+import { Button } from '../../ui/button';
+import { CardTitle, CardFooter } from '../../ui/card';
 
 interface ErrorCardProps {
   title?: string;
@@ -24,34 +23,44 @@ export function ErrorCard({
   showRetryButton = true,
 }: ErrorCardProps) {
   return (
-    <Card variant="error" className="p-6">
-      <CardHeader className="pb-4">
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-destructive/10 rounded-lg">
-            <AlertTriangle className="w-5 h-5 text-destructive" />
-          </div>
-          <CardTitle className="text-destructive">{title}</CardTitle>
-        </div>
+    <MuiCard sx={{ p: 3 }}>
+      <CardHeader>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+          <Box sx={{ p: 1, backgroundColor: 'error.light', borderRadius: 1 }}>
+            <Warning sx={{ fontSize: 20, color: 'error.main' }} />
+          </Box>
+          <CardTitle sx={{ color: 'error.main' }}>{title}</CardTitle>
+        </Box>
       </CardHeader>
 
-      <CardContent className="pb-4">
-        <p className="text-muted-foreground text-sm leading-relaxed">{message}</p>
+      <CardContent>
+        <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+          {message}
+        </Typography>
       </CardContent>
 
       {showRetryButton && (
-        <CardFooter className="pt-2">
+        <CardFooter>
           <Button
-            variant="outlined"
+            variant="outline"
             size="small"
             onClick={onRetry}
-            className="w-full border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
+            sx={{
+              width: '100%',
+              borderColor: 'error.light',
+              color: 'error.main',
+              '&:hover': {
+                backgroundColor: 'error.light',
+                opacity: 0.1
+              }
+            }}
           >
-            <RefreshCw className="w-4 h-4 mr-2" />
+            <Refresh sx={{ fontSize: 16, mr: 1 }} />
             Try Again
           </Button>
         </CardFooter>
       )}
-    </Card>
+    </MuiCard>
   );
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, Button, Card, CardContent, Divider, Chip } from '@mui/material';
-import { ProfileCard } from '../ProfileCard';
-import { SwapHorizontal, Download, Share2 } from 'lucide-react';
+import { ProfileCard } from '../features/profile/ProfileCard';
+import { SwapHoriz, Download, Share } from '@mui/icons-material';
 
 interface ProfileData {
   id: string;
@@ -255,20 +255,20 @@ export function ProfileComparison({
           <Button
             variant="outlined"
             onClick={onSwapProfiles}
-            startIcon={<SwapHorizontal size={16} />}
+            startIcon={<SwapHoriz sx={{ fontSize: 16 }} />}
           >
             Swap Profiles
           </Button>
           <Button
             variant="outlined"
-            startIcon={<Download size={16} />}
+            startIcon={<Download sx={{ fontSize: 16 }} />}
           >
             Export Comparison
           </Button>
           <Button
             variant="contained"
             className="bg-primary hover:bg-primary/90"
-            startIcon={<Share2 size={16} />}
+            startIcon={<Share sx={{ fontSize: 16 }} />}
           >
             Share
           </Button>
