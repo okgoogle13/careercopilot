@@ -7,17 +7,17 @@
 This phase establishes the new MUI design system and removes all conflicting Tailwind configurations.
 
 1. **Uninstall Tailwind & Install MUI**:
-   * **Uninstall** all Tailwind-related dev dependencies: tailwindcss, postcss, autoprefixer.
-   * **Install** all necessary MUI dependencies: @mui/material, @emotion/react, @emotion/styled.
+   - **Uninstall** all Tailwind-related dev dependencies: tailwindcss, postcss, autoprefixer.
+   - **Install** all necessary MUI dependencies: @mui/material, @emotion/react, @emotion/styled.
 2. **Purge Tailwind Configuration**:
-   * **Delete** the following configuration files from the project root:
-     * tailwind.config.js
-     * postcss.config.js
-   * **Clear src/index.css**: Remove all content, especially the @tailwind directives. Leave only the base body styles.
+   - **Delete** the following configuration files from the project root:
+     - tailwind.config.js
+     - postcss.config.js
+   - **Clear src/index.css**: Remove all content, especially the @tailwind directives. Leave only the base body styles.
 3. **Implement the MUI Theme**:
-   * Create a new file at src/theme.ts and use the provided theme configuration code.
-   * Modify src/main.tsx to wrap the \<App /\> component.
-   * Import and use MUI's \<ThemeProvider theme={theme}\> and \<CssBaseline /\>. CssBaseline is MUI's CSS reset and is critical for fixing layout issues.
+   - Create a new file at src/theme.ts and use the provided theme configuration code.
+   - Modify src/main.tsx to wrap the \<App /\> component.
+   - Import and use MUI's \<ThemeProvider theme={theme}\> and \<CssBaseline /\>. CssBaseline is MUI's CSS reset and is critical for fixing layout issues.
 
 ## **Phase 2: Component Refactoring (Iterative Process)**
 
@@ -25,10 +25,10 @@ Systematically convert each component from using Tailwind className to using MUI
 
 ### **Component Mapping Guide:**
 
-* **Layout**: Replace div className="flex..." with \<Stack\>, \<Grid\>, or \<Box\>.
-* **Typography**: Replace h1, p, etc., with \<Typography variant="..."\>.
-* **Cards**: Replace custom Card components with MUI's \<Card\> and \<CardContent\>.
-* **Buttons**: Replace button with MUI's \<Button variant="..."\>.
+- **Layout**: Replace div className="flex..." with \<Stack\>, \<Grid\>, or \<Box\>.
+- **Typography**: Replace h1, p, etc., with \<Typography variant="..."\>.
+- **Cards**: Replace custom Card components with MUI's \<Card\> and \<CardContent\>.
+- **Buttons**: Replace button with MUI's \<Button variant="..."\>.
 
 ### **High-Priority Components to Migrate First:**
 
@@ -40,13 +40,13 @@ Systematically convert each component from using Tailwind className to using MUI
 
 **Refactoring Pattern Example (CreateProfileCard.tsx)**:
 
-* **Before (Tailwind)**:
+- **Before (Tailwind)**:
   \<Card className="glass p-6 flex flex-col items-center ..."\>
-    \<h3 className="font-semibold text-foreground text-lg"\>Create New Document\</h3\>
-    \<Button className="btn-gradient px-6 py-2"\>Get Started\</Button\>
+  \<h3 className="font-semibold text-foreground text-lg"\>Create New Document\</h3\>
+  \<Button className="btn-gradient px-6 py-2"\>Get Started\</Button\>
   \</Card\>
 
-* **Target (MUI)**:
+- **Target (MUI)**:
   import { Card, Typography, Button } from '@mui/material';
 
   \<Card sx={{
@@ -59,13 +59,13 @@ Systematically convert each component from using Tailwind className to using MUI
       border: '2px dashed',
       borderColor: (theme) \=\> theme.palette.divider,
   }}\>
-    \<Typography variant="h6"\>Create New Document\</Typography\>
-    \<Button variant="contained" sx={{ mt: 2 }}\>Get Started\</Button\>
+  \<Typography variant="h6"\>Create New Document\</Typography\>
+  \<Button variant="contained" sx={{ mt: 2 }}\>Get Started\</Button\>
   \</Card\>
 
 ### **Remaining Components:**
 
-* Apply the same refactoring pattern to all other components in the src/components/ directory that use Tailwind classes.
+- Apply the same refactoring pattern to all other components in the src/components/ directory that use Tailwind classes.
 
 ## **Phase 3: Final Cleanup**
 

@@ -117,13 +117,7 @@ export interface DialogDescriptionProps extends React.ComponentProps<typeof Typo
 export const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
   ({ children, ...props }, ref) => {
     return (
-      <Typography
-        ref={ref}
-        variant="body2"
-        color="text.secondary"
-        sx={{ mt: 1 }}
-        {...props}
-      >
+      <Typography ref={ref} variant="body2" color="text.secondary" sx={{ mt: 1 }} {...props}>
         {children}
       </Typography>
     );

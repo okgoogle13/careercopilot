@@ -7,7 +7,7 @@ import {
   DialogContent,
   DialogActions,
   IconButton,
-  Typography
+  Typography,
 } from '@mui/material';
 import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 import { TimelineView } from './TimelineView';
@@ -62,8 +62,8 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       status: 'completed',
       metadata: {
         documents: ['Resume.pdf', 'Cover Letter.pdf'],
-        notes: 'Applied through LinkedIn job posting'
-      }
+        notes: 'Applied through LinkedIn job posting',
+      },
     },
     {
       id: 'ev2',
@@ -71,7 +71,7 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       title: 'Application Acknowledged',
       description: 'Received automated confirmation email',
       date: '2024-01-15 09:15 AM',
-      status: 'completed'
+      status: 'completed',
     },
     {
       id: 'ev3',
@@ -83,9 +83,9 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       metadata: {
         interviewer: 'Sarah Johnson (HR)',
         interviewType: 'Phone Screen',
-        nextSteps: 'Prepare for behavioral questions and company research'
-      }
-    }
+        nextSteps: 'Prepare for behavioral questions and company research',
+      },
+    },
   ],
   '2': [
     {
@@ -97,8 +97,8 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       status: 'completed',
       metadata: {
         documents: ['Resume.pdf', 'Portfolio Link'],
-        notes: 'Referred by current employee John Smith'
-      }
+        notes: 'Referred by current employee John Smith',
+      },
     },
     {
       id: 'ev5',
@@ -110,8 +110,8 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       metadata: {
         interviewer: 'Mike Chen (HR)',
         interviewType: 'Phone Screen',
-        notes: 'Went well, discussed role requirements and team structure'
-      }
+        notes: 'Went well, discussed role requirements and team structure',
+      },
     },
     {
       id: 'ev6',
@@ -123,18 +123,20 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       metadata: {
         interviewer: 'Alex Rodriguez, Jennifer Wang (Engineering)',
         interviewType: 'Technical Interview',
-        nextSteps: 'Review React concepts and prepare coding exercises'
-      }
-    }
-  ]
+        nextSteps: 'Review React concepts and prepare coding exercises',
+      },
+    },
+  ],
 };
 
 export function ApplicationTracker({ applications, onApplicationUpdate }: ApplicationTrackerProps) {
   const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null);
   const [showTimeline, setShowTimeline] = useState(false);
 
-  const selectedApplication = applications?.find(app => app.id === selectedApplicationId);
-  const timelineEvents = selectedApplicationId ? sampleTimelineEvents[selectedApplicationId] || [] : [];
+  const selectedApplication = applications?.find((app) => app.id === selectedApplicationId);
+  const timelineEvents = selectedApplicationId
+    ? sampleTimelineEvents[selectedApplicationId] || []
+    : [];
 
   const handleApplicationClick = (applicationId: string) => {
     setSelectedApplicationId(applicationId);
@@ -148,7 +150,7 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
 
   const handleApplicationMove = (applicationId: string, newStatus: Application['status']) => {
     if (applications && onApplicationUpdate) {
-      const application = applications.find(app => app.id === applicationId);
+      const application = applications.find((app) => app.id === applicationId);
       if (application) {
         const updatedApplication = { ...application, status: newStatus };
         onApplicationUpdate(updatedApplication);
@@ -190,7 +192,7 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
         maxWidth="lg"
         fullWidth
         PaperProps={{
-          className: 'max-h-screen'
+          className: 'max-h-screen',
         }}
       >
         <DialogTitle>
@@ -203,15 +205,9 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
               >
                 <ArrowLeft sx={{ fontSize: 20 }} />
               </IconButton>
-              <Typography variant="h6">
-                Application Timeline
-              </Typography>
+              <Typography variant="h6">Application Timeline</Typography>
             </Box>
-            <IconButton
-              onClick={handleCloseTimeline}
-              size="small"
-              aria-label="Close dialog"
-            >
+            <IconButton onClick={handleCloseTimeline} size="small" aria-label="Close dialog">
               <Close sx={{ fontSize: 20 }} />
             </IconButton>
           </Box>
@@ -234,13 +230,8 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={handleCloseTimeline}>
-            Close
-          </Button>
-          <Button
-            variant="contained"
-            className="bg-primary hover:bg-primary/90"
-          >
+          <Button onClick={handleCloseTimeline}>Close</Button>
+          <Button variant="contained" className="bg-primary hover:bg-primary/90">
             Add Event
           </Button>
         </DialogActions>

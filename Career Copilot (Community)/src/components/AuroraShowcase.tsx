@@ -4,17 +4,17 @@ import { Badge } from "./ui/badge";
 import { AuroraButton } from "./ui/button-aurora";
 import { aurora, auroraStyles } from "./ui/aurora-utils";
 import { M3Input } from "./ui/m3-input";
-import { 
-  Sparkles, 
-  Target, 
-  Brain, 
-  TrendingUp, 
-  BarChart3, 
-  CheckCircle, 
+import {
+  Sparkles,
+  Target,
+  Brain,
+  TrendingUp,
+  BarChart3,
+  CheckCircle,
   Plus,
   Eye,
   Download,
-  User
+  User,
 } from "lucide-react";
 
 interface AuroraShowcaseProps {
@@ -26,8 +26,12 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
     <div className="flex-1 p-8 space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className={aurora.text('aurora', 'text-4xl font-bold mb-2')}>Aurora Theme Showcase</h1>
-          <p className="text-muted-foreground">Experience the vibrant, glowing Aurora design system</p>
+          <h1 className={aurora.text("aurora", "text-4xl font-bold mb-2")}>
+            Aurora Theme Showcase
+          </h1>
+          <p className="text-muted-foreground">
+            Experience the vibrant, glowing Aurora design system
+          </p>
         </div>
         {onBack && (
           <Button onClick={onBack} variant="ghost">
@@ -38,7 +42,9 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Color Palette Section */}
       <Card className={aurora.card("p-6")}>
-        <h2 className={aurora.text('primary', 'text-2xl font-semibold mb-4')}>Aurora Color Palette</h2>
+        <h2 className={aurora.text("primary", "text-2xl font-semibold mb-4")}>
+          Aurora Color Palette
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="space-y-2">
             <div className="w-full h-20 bg-brand-primary rounded-lg shadow-glow-primary"></div>
@@ -65,7 +71,9 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Interactive Cards Section */}
       <Card className={aurora.card("p-6")}>
-        <h2 className={aurora.text('primary', 'text-2xl font-semibold mb-4')}>Interactive Aurora Cards</h2>
+        <h2 className={aurora.text("primary", "text-2xl font-semibold mb-4")}>
+          Interactive Aurora Cards
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="card-aurora glass p-6 space-y-4">
             <div className="flex items-center gap-3">
@@ -111,7 +119,9 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Buttons Section */}
       <Card className={aurora.card("p-6")}>
-        <h2 className={aurora.text('primary', 'text-2xl font-semibold mb-4')}>Aurora Button Variants</h2>
+        <h2 className={aurora.text("primary", "text-2xl font-semibold mb-4")}>
+          Aurora Button Variants
+        </h2>
         <div className="space-y-4">
           <div className="flex flex-wrap gap-4">
             <AuroraButton variant="aurora">
@@ -154,20 +164,16 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Typography Section */}
       <Card className={aurora.card("p-6")}>
-        <h2 className={aurora.text('primary', 'text-2xl font-semibold mb-4')}>Aurora Typography</h2>
+        <h2 className={aurora.text("primary", "text-2xl font-semibold mb-4")}>Aurora Typography</h2>
         <div className="space-y-4">
-          <h1 className={aurora.text('aurora', 'text-4xl font-bold')}>
-            Aurora Display Text
-          </h1>
-          <h2 className={aurora.text('primary', 'text-2xl font-semibold')}>
+          <h1 className={aurora.text("aurora", "text-4xl font-bold")}>Aurora Display Text</h1>
+          <h2 className={aurora.text("primary", "text-2xl font-semibold")}>
             Primary Gradient Heading
           </h2>
-          <h3 className={aurora.text('tertiary', 'text-xl font-medium')}>
-            Tertiary Accent Text
-          </h3>
+          <h3 className={aurora.text("tertiary", "text-xl font-medium")}>Tertiary Accent Text</h3>
           <p className="text-base text-on-surface">
-            This is regular body text with proper contrast for readability. 
-            The Aurora theme maintains accessibility while providing stunning visual appeal.
+            This is regular body text with proper contrast for readability. The Aurora theme
+            maintains accessibility while providing stunning visual appeal.
           </p>
           <p className="text-sm text-muted-foreground">
             Muted text for secondary information and descriptions.
@@ -177,29 +183,31 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Form Elements Section */}
       <Card className={aurora.card("p-6")}>
-        <h2 className={aurora.text('primary', 'text-2xl font-semibold mb-4')}>Aurora Form Elements</h2>
+        <h2 className={aurora.text("primary", "text-2xl font-semibold mb-4")}>
+          Aurora Form Elements
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <M3Input 
-              label="Enhanced Aurora Input" 
+            <M3Input
+              label="Enhanced Aurora Input"
               placeholder="Enter your text"
               helperText="This input uses Aurora theme enhancements"
             />
-            <M3Input 
+            <M3Input
               label="Email Address"
-              type="email" 
+              type="email"
               placeholder="user@example.com"
               leadingIcon={<User className="w-4 h-4" />}
             />
           </div>
           <div className="space-y-4">
-            <M3Input 
+            <M3Input
               label="Password"
-              type="password" 
+              type="password"
               placeholder="••••••••"
               trailingIcon={<Eye className="w-4 h-4" />}
             />
-            <M3Input 
+            <M3Input
               label="Error State"
               error
               errorText="This field is required"
@@ -211,9 +219,12 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Glass Morphism Section */}
       <Card className="glass-aurora p-6">
-        <h2 className={aurora.text('aurora', 'text-2xl font-semibold mb-4')}>Glass Aurora Effect</h2>
+        <h2 className={aurora.text("aurora", "text-2xl font-semibold mb-4")}>
+          Glass Aurora Effect
+        </h2>
         <p className="text-muted-foreground mb-4">
-          This card demonstrates the Aurora glass morphism effect with gradient borders and enhanced blur.
+          This card demonstrates the Aurora glass morphism effect with gradient borders and enhanced
+          blur.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="glass p-4 rounded-lg">
@@ -229,7 +240,7 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Animation Section */}
       <Card className={aurora.card("p-6")}>
-        <h2 className={aurora.text('primary', 'text-2xl font-semibold mb-4')}>Aurora Animations</h2>
+        <h2 className={aurora.text("primary", "text-2xl font-semibold mb-4")}>Aurora Animations</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="text-center space-y-4">
             <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto pulse-ai">
@@ -257,7 +268,9 @@ export function AuroraShowcase({ onBack }: AuroraShowcaseProps) {
 
       {/* Glow Effects Section */}
       <Card className={aurora.card("p-6")}>
-        <h2 className={aurora.text('primary', 'text-2xl font-semibold mb-4')}>Aurora Glow Effects</h2>
+        <h2 className={aurora.text("primary", "text-2xl font-semibold mb-4")}>
+          Aurora Glow Effects
+        </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="text-center space-y-2">
             <div className="w-12 h-12 bg-brand-primary rounded-lg shadow-glow-primary mx-auto"></div>

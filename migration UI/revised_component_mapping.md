@@ -7,34 +7,38 @@ After cross-referencing your current design against Material Design 3 principles
 ## Critical Gaps Identified
 
 ### 1. **Navigation Pattern Optimization**
+
 **Current Issue**: Basic AppBar usage doesn't leverage Material Design 3 navigation patterns
 **Solution**: Implement Material Design 3 navigation rail for desktop + bottom navigation for mobile
 
 ### 2. **Data Density Management**
+
 **Current Issue**: Resume/profile data presentation lacks optimal information hierarchy
 **Solution**: Utilize MUI's data display components (DataGrid, Accordion, Timeline) for better content organization
 
 ### 3. **Dark Theme Token Integration**
+
 **Current Issue**: Design tokens not fully aligned with Material Design 3 color roles
 **Solution**: Restructure color system to use Material Design 3 semantic color tokens
 
 ## Revised Component Priority Matrix
 
-| Priority | Current Component | Optimal MUI Mapping | Dark UI Enhancement | Implementation Complexity |
-|----------|-------------------|---------------------|-------------------|------------------------|
-| **Critical** | Navbar.tsx | `NavigationRail` + `BottomNavigation` | Dynamic color adaptation | High |
-| **Critical** | Dashboard Cards | `Card` + `CardActionArea` + `Skeleton` | Elevation system integration | Medium |
-| **Critical** | Forms (KSC Generator) | `Stepper` + `FormControl` + `Autocomplete` | Enhanced focus indicators | High |
-| **High** | Profile Builder | `Timeline` + `Accordion` + `Chip` | Progressive disclosure | Medium |
-| **High** | Document Preview | `Paper` + `Fab` + `SpeedDial` | Contextual actions | Medium |
-| **Medium** | ATS Analysis | `LinearProgress` + `Alert` + `Tooltip` | Data visualization | Low |
-| **Medium** | Settings Page | `List` + `Switch` + `Divider` | Preference persistence | Low |
+| Priority     | Current Component     | Optimal MUI Mapping                        | Dark UI Enhancement          | Implementation Complexity |
+| ------------ | --------------------- | ------------------------------------------ | ---------------------------- | ------------------------- |
+| **Critical** | Navbar.tsx            | `NavigationRail` + `BottomNavigation`      | Dynamic color adaptation     | High                      |
+| **Critical** | Dashboard Cards       | `Card` + `CardActionArea` + `Skeleton`     | Elevation system integration | Medium                    |
+| **Critical** | Forms (KSC Generator) | `Stepper` + `FormControl` + `Autocomplete` | Enhanced focus indicators    | High                      |
+| **High**     | Profile Builder       | `Timeline` + `Accordion` + `Chip`          | Progressive disclosure       | Medium                    |
+| **High**     | Document Preview      | `Paper` + `Fab` + `SpeedDial`              | Contextual actions           | Medium                    |
+| **Medium**   | ATS Analysis          | `LinearProgress` + `Alert` + `Tooltip`     | Data visualization           | Low                       |
+| **Medium**   | Settings Page         | `List` + `Switch` + `Divider`              | Preference persistence       | Low                       |
 
 ## Enhanced Component Specifications
 
 ### 1. **Navigation System Redesign**
 
 #### Desktop Navigation (NavigationRail)
+
 ```typescript
 // Optimal MUI Implementation
 import { NavigationRail, NavigationRailItem } from '@mui/material';
@@ -61,6 +65,7 @@ const NavigationSystem = () => (
 ```
 
 #### Mobile Navigation (BottomNavigation)
+
 ```typescript
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 
@@ -87,6 +92,7 @@ const MobileNavigation = () => (
 ### 2. **Enhanced Form Systems**
 
 #### Multi-Step Form with Material Design 3 Stepper
+
 ```typescript
 import { Stepper, Step, StepLabel, StepContent } from '@mui/material';
 
@@ -124,6 +130,7 @@ const KSCGeneratorStepper = () => (
 ### 3. **Data Display Optimization**
 
 #### Profile Timeline Component
+
 ```typescript
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@mui/lab';
 
@@ -159,6 +166,7 @@ const ExperienceTimeline = ({ experiences }) => (
 ### 4. **Advanced Data Visualization**
 
 #### ATS Score with Material Design 3 Progress
+
 ```typescript
 import { CircularProgress, Box, Typography, LinearProgress } from '@mui/material';
 
@@ -206,29 +214,32 @@ const ATSScoreVisualization = ({ score, breakdown }) => (
 
 ```typescript
 // Enhanced theme with Material Design 3 color roles
-const createEnhancedTheme = (mode: 'light' | 'dark') => {
-  const colorScheme = mode === 'dark' ? {
-    primary: { main: '#D0BCFF', contrastText: '#381E72' },
-    onPrimary: { main: '#381E72' },
-    primaryContainer: { main: '#4F378B', contrastText: '#EADDFF' },
-    onPrimaryContainer: { main: '#EADDFF' },
-    secondary: { main: '#CCC2DC', contrastText: '#332D41' },
-    secondaryContainer: { main: '#4A4458', contrastText: '#E8DEF8' },
-    tertiary: { main: '#EFB8C8', contrastText: '#492532' },
-    surface: { main: '#1C1B1F' },
-    onSurface: { main: '#E6E0E9' },
-    surfaceVariant: { main: '#49454F' },
-    onSurfaceVariant: { main: '#CAC4D0' },
-    outline: { main: '#938F99' },
-    outlineVariant: { main: '#49454F' }
-  } : {
-    // Light theme tokens
-  };
+const createEnhancedTheme = (mode: "light" | "dark") => {
+  const colorScheme =
+    mode === "dark"
+      ? {
+          primary: { main: "#D0BCFF", contrastText: "#381E72" },
+          onPrimary: { main: "#381E72" },
+          primaryContainer: { main: "#4F378B", contrastText: "#EADDFF" },
+          onPrimaryContainer: { main: "#EADDFF" },
+          secondary: { main: "#CCC2DC", contrastText: "#332D41" },
+          secondaryContainer: { main: "#4A4458", contrastText: "#E8DEF8" },
+          tertiary: { main: "#EFB8C8", contrastText: "#492532" },
+          surface: { main: "#1C1B1F" },
+          onSurface: { main: "#E6E0E9" },
+          surfaceVariant: { main: "#49454F" },
+          onSurfaceVariant: { main: "#CAC4D0" },
+          outline: { main: "#938F99" },
+          outlineVariant: { main: "#49454F" },
+        }
+      : {
+          // Light theme tokens
+        };
 
   return createTheme({
     palette: {
       mode,
-      ...colorScheme
+      ...colorScheme,
     },
     components: {
       MuiCard: {
@@ -237,14 +248,14 @@ const createEnhancedTheme = (mode: 'light' | 'dark') => {
             backgroundColor: colorScheme.surface.main,
             borderRadius: 12,
             border: `1px solid ${colorScheme.outlineVariant.main}`,
-            '&:hover': {
+            "&:hover": {
               backgroundColor: colorScheme.surfaceVariant.main,
-              borderColor: colorScheme.outline.main
-            }
-          }
-        }
-      }
-    }
+              borderColor: colorScheme.outline.main,
+            },
+          },
+        },
+      },
+    },
   });
 };
 ```
@@ -257,43 +268,47 @@ const elevationOverrides = {
   MuiPaper: {
     styleOverrides: {
       elevation1: {
-        backgroundColor: 'rgb(28, 27, 31)',
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))'
+        backgroundColor: "rgb(28, 27, 31)",
+        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05))",
       },
       elevation2: {
-        backgroundColor: 'rgb(28, 27, 31)',
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08))'
+        backgroundColor: "rgb(28, 27, 31)",
+        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08))",
       },
       elevation3: {
-        backgroundColor: 'rgb(28, 27, 31)',
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))'
-      }
-    }
-  }
+        backgroundColor: "rgb(28, 27, 31)",
+        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11))",
+      },
+    },
+  },
 };
 ```
 
 ## Implementation Roadmap
 
 ### Phase 1: Foundation (Week 1-2)
+
 • **Install MUI Lab**: `npm install @mui/lab` for Timeline, LoadingButton components
 • **Implement Material Design 3 color system** with proper semantic tokens
 • **Create enhanced theme provider** with elevation and state layer system
 • **Establish navigation architecture** with NavigationRail/BottomNavigation
 
 ### Phase 2: Core Components (Week 2-3)
+
 • **Migrate form systems** to Stepper + enhanced FormControl patterns
 • **Implement data display components** (Timeline, DataGrid for document lists)
 • **Create advanced card system** with proper elevation and interaction states
 • **Establish loading states** with Skeleton and enhanced progress indicators
 
 ### Phase 3: Advanced Features (Week 3-4)
+
 • **Implement data visualization** with enhanced progress components
 • **Create contextual actions** using Fab and SpeedDial for document editing
 • **Add advanced interaction patterns** (SwipeableDrawer, Autocomplete)
 • **Implement responsive behavior** with proper breakpoint usage
 
 ### Phase 4: Refinement (Week 4)
+
 • **Performance optimization** with proper lazy loading and memoization
 • **Accessibility enhancement** with proper ARIA labels and keyboard navigation
 • **Testing and validation** across devices and assistive technologies
@@ -302,6 +317,7 @@ const elevationOverrides = {
 ## Quality Assurance Enhancements
 
 ### 1. **Accessibility Improvements**
+
 ```typescript
 // Enhanced accessibility patterns
 const AccessibleCard = ({ title, content, actions }) => (
@@ -332,6 +348,7 @@ const AccessibleCard = ({ title, content, actions }) => (
 ```
 
 ### 2. **Performance Optimization**
+
 ```typescript
 // Proper component memoization for large lists
 const OptimizedDocumentList = memo(({ documents }) => (
@@ -348,6 +365,7 @@ const OptimizedDocumentList = memo(({ documents }) => (
 ## Component Testing Strategy
 
 ### 1. **Visual Regression Testing**
+
 ```typescript
 // Storybook stories for component variants
 export default {
@@ -364,6 +382,7 @@ export const Collapsed = () => <NavigationRail collapsed />;
 ```
 
 ### 2. **Accessibility Testing**
+
 ```typescript
 // jest-axe integration for accessibility testing
 import { axe, toHaveNoViolations } from 'jest-axe';
@@ -380,18 +399,21 @@ test('NavigationRail should be accessible', async () => {
 ## Migration Success Metrics
 
 ### Performance Targets
+
 • **Bundle size increase**: <15% from baseline
 • **First Contentful Paint**: <1.5s
 • **Largest Contentful Paint**: <2.5s
 • **Cumulative Layout Shift**: <0.1
 
 ### Quality Targets
+
 • **Accessibility score**: 100% (Lighthouse)
 • **Component test coverage**: >90%
 • **Visual regression tests**: 100% pass rate
 • **Cross-browser compatibility**: Chrome, Firefox, Safari, Edge
 
 ### User Experience Targets
+
 • **Navigation efficiency**: 50% reduction in clicks for common tasks
 • **Form completion rate**: 25% improvement in multi-step forms
 • **Error recovery**: Clear error states and recovery paths

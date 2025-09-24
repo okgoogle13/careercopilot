@@ -13,14 +13,14 @@ export function Settings({ onBack }: SettingsProps) {
   const [profile, setProfile] = useState({
     name: "Nishant Dougall",
     email: "nishant.dougall@email.com",
-    phone: "+61 4XX XXX XXX"
+    phone: "+61 4XX XXX XXX",
   });
 
   const [notifications, setNotifications] = useState({
     emailAlerts: true,
     jobMatches: true,
     applicationUpdates: false,
-    weeklyDigest: true
+    weeklyDigest: true,
   });
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -62,9 +62,7 @@ export function Settings({ onBack }: SettingsProps) {
 
         <div className="text-center mb-8">
           <h1 className="text-3xl font-semibold mb-2">Settings</h1>
-          <p className="text-muted-foreground">
-            Manage your account preferences and data
-          </p>
+          <p className="text-muted-foreground">Manage your account preferences and data</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -83,7 +81,7 @@ export function Settings({ onBack }: SettingsProps) {
                   <label className="text-sm font-medium mb-2 block">Full Name</label>
                   <Input
                     value={profile.name}
-                    onChange={(e) => setProfile({...profile, name: e.target.value})}
+                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
                   />
                 </div>
 
@@ -92,7 +90,7 @@ export function Settings({ onBack }: SettingsProps) {
                   <Input
                     type="email"
                     value={profile.email}
-                    onChange={(e) => setProfile({...profile, email: e.target.value})}
+                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                   />
                 </div>
 
@@ -100,11 +98,14 @@ export function Settings({ onBack }: SettingsProps) {
                   <label className="text-sm font-medium mb-2 block">Phone Number</label>
                   <Input
                     value={profile.phone}
-                    onChange={(e) => setProfile({...profile, phone: e.target.value})}
+                    onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                   />
                 </div>
 
-                <Button onClick={handleProfileUpdate} className="w-full bg-primary hover:bg-primary/90">
+                <Button
+                  onClick={handleProfileUpdate}
+                  className="w-full bg-primary hover:bg-primary/90"
+                >
                   Update Profile
                 </Button>
               </div>
@@ -169,8 +170,8 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <Switch
                     checked={notifications.emailAlerts}
-                    onCheckedChange={(checked) => 
-                      setNotifications({...notifications, emailAlerts: checked})
+                    onCheckedChange={(checked) =>
+                      setNotifications({ ...notifications, emailAlerts: checked })
                     }
                   />
                 </div>
@@ -184,8 +185,8 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <Switch
                     checked={notifications.jobMatches}
-                    onCheckedChange={(checked) => 
-                      setNotifications({...notifications, jobMatches: checked})
+                    onCheckedChange={(checked) =>
+                      setNotifications({ ...notifications, jobMatches: checked })
                     }
                   />
                 </div>
@@ -199,8 +200,8 @@ export function Settings({ onBack }: SettingsProps) {
                   </div>
                   <Switch
                     checked={notifications.applicationUpdates}
-                    onCheckedChange={(checked) => 
-                      setNotifications({...notifications, applicationUpdates: checked})
+                    onCheckedChange={(checked) =>
+                      setNotifications({ ...notifications, applicationUpdates: checked })
                     }
                   />
                 </div>
@@ -208,14 +209,12 @@ export function Settings({ onBack }: SettingsProps) {
                 <div className="flex items-center justify-between p-3 bg-card rounded-lg">
                   <div>
                     <h4 className="font-medium">Weekly Digest</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Weekly summary of your activity
-                    </p>
+                    <p className="text-sm text-muted-foreground">Weekly summary of your activity</p>
                   </div>
                   <Switch
                     checked={notifications.weeklyDigest}
-                    onCheckedChange={(checked) => 
-                      setNotifications({...notifications, weeklyDigest: checked})
+                    onCheckedChange={(checked) =>
+                      setNotifications({ ...notifications, weeklyDigest: checked })
                     }
                   />
                 </div>
@@ -235,15 +234,12 @@ export function Settings({ onBack }: SettingsProps) {
                 <div className="p-4 bg-background border border-destructive/30 rounded-lg">
                   <h4 className="font-medium text-destructive mb-2">Delete Account</h4>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Permanently delete your account and all associated data. This action cannot be undone.
+                    Permanently delete your account and all associated data. This action cannot be
+                    undone.
                   </p>
-                  
+
                   {!showDeleteConfirm ? (
-                    <Button
-                      variant="destructive"
-                      onClick={handleDeleteAccount}
-                      className="w-full"
-                    >
+                    <Button variant="destructive" onClick={handleDeleteAccount} className="w-full">
                       <Trash2 className="w-4 h-4 mr-2" />
                       Delete Account
                     </Button>

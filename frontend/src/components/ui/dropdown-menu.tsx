@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Menu,
-  MenuItem,
-  MenuProps,
-  MenuItemProps,
-  IconButton,
-  Divider,
-} from '@mui/material';
+import { Menu, MenuItem, MenuProps, MenuItemProps, IconButton, Divider } from '@mui/material';
 
 export interface DropdownMenuProps extends Omit<MenuProps, 'open'> {
   open: boolean;
@@ -15,10 +8,7 @@ export interface DropdownMenuProps extends Omit<MenuProps, 'open'> {
 export const DropdownMenu = React.forwardRef<HTMLDivElement, DropdownMenuProps>(
   ({ children, ...props }, ref) => {
     return (
-      <Menu
-        ref={ref}
-        {...props}
-      >
+      <Menu ref={ref} {...props}>
         {children}
       </Menu>
     );
@@ -38,10 +28,7 @@ export const DropdownMenuTrigger = React.forwardRef<HTMLButtonElement, DropdownM
     }
 
     return (
-      <IconButton
-        ref={ref}
-        {...(props as any)}
-      >
+      <IconButton ref={ref} {...(props as any)}>
         {children}
       </IconButton>
     );
@@ -55,10 +42,7 @@ export interface DropdownMenuContentProps extends MenuProps {}
 export const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContentProps>(
   ({ children, ...props }, ref) => {
     return (
-      <Menu
-        ref={ref}
-        {...props}
-      >
+      <Menu ref={ref} {...props}>
         {children}
       </Menu>
     );
@@ -72,10 +56,7 @@ export interface DropdownMenuItemProps extends MenuItemProps {}
 export const DropdownMenuItem = React.forwardRef<HTMLLIElement, DropdownMenuItemProps>(
   ({ children, ...props }, ref) => {
     return (
-      <MenuItem
-        ref={ref}
-        {...props}
-      >
+      <MenuItem ref={ref} {...props}>
         {children}
       </MenuItem>
     );
@@ -84,10 +65,11 @@ export const DropdownMenuItem = React.forwardRef<HTMLLIElement, DropdownMenuItem
 
 DropdownMenuItem.displayName = 'DropdownMenuItem';
 
-export const DropdownMenuSeparator = React.forwardRef<HTMLHRElement, React.HTMLAttributes<HTMLHRElement>>(
-  (props, ref) => {
-    return <Divider {...props} />;
-  }
-);
+export const DropdownMenuSeparator = React.forwardRef<
+  HTMLHRElement,
+  React.HTMLAttributes<HTMLHRElement>
+>((props, ref) => {
+  return <Divider {...props} />;
+});
 
 DropdownMenuSeparator.displayName = 'DropdownMenuSeparator';

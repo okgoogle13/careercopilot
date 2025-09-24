@@ -1,11 +1,5 @@
 import { Warning, Refresh } from '@mui/icons-material';
-import {
-  Card as MuiCard,
-  CardContent,
-  CardHeader,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Card as MuiCard, CardContent, CardHeader, Typography, Box } from '@mui/material';
 import { Button } from '../../ui/button';
 import { CardTitle, CardFooter } from '../../ui/card';
 
@@ -51,8 +45,8 @@ export function ErrorCard({
               color: 'error.main',
               '&:hover': {
                 backgroundColor: 'error.light',
-                opacity: 0.1
-              }
+                opacity: 0.1,
+              },
             }}
           >
             <Refresh sx={{ fontSize: 16, mr: 1 }} />

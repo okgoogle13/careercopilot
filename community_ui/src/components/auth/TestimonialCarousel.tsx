@@ -1,66 +1,71 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
-import { M3Card, M3CardContent } from '../ui/m3-card';
-import { M3Button } from '../ui/m3-button';
-import { Avatar } from '../ui/avatar';
-import { Badge } from '../ui/badge';
+import React, { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
+import { M3Card, M3CardContent } from "../ui/m3-card";
+import { M3Button } from "../ui/m3-button";
+import { Avatar } from "../ui/avatar";
+import { Badge } from "../ui/badge";
 
 const testimonials = [
   {
     id: 1,
-    content: "FML Career Copilot transformed my job search completely. The AI-powered resume optimization helped me get past ATS filters, and I landed 3 interviews in the first week!",
+    content:
+      "FML Career Copilot transformed my job search completely. The AI-powered resume optimization helped me get past ATS filters, and I landed 3 interviews in the first week!",
     author: "Sarah Chen",
     role: "Software Engineer",
     company: "Google",
     avatar: "SC",
     rating: 5,
     industry: "Tech",
-    color: "bg-blue-500"
+    color: "bg-blue-500",
   },
   {
     id: 2,
-    content: "The interview preparation feature was a game-changer. The AI-generated questions were spot-on for my industry, and I felt completely prepared for every interview.",
+    content:
+      "The interview preparation feature was a game-changer. The AI-generated questions were spot-on for my industry, and I felt completely prepared for every interview.",
     author: "Marcus Rodriguez",
     role: "Product Manager",
     company: "Microsoft",
     avatar: "MR",
     rating: 5,
     industry: "Product",
-    color: "bg-green-500"
+    color: "bg-green-500",
   },
   {
     id: 3,
-    content: "I was struggling to get responses to my applications. After using the ATS optimization tools, my response rate increased by 400%. Absolutely incredible!",
+    content:
+      "I was struggling to get responses to my applications. After using the ATS optimization tools, my response rate increased by 400%. Absolutely incredible!",
     author: "Priya Patel",
     role: "Data Scientist",
     company: "Netflix",
     avatar: "PP",
     rating: 5,
     industry: "Data",
-    color: "bg-purple-500"
+    color: "bg-purple-500",
   },
   {
     id: 4,
-    content: "The career intelligence insights helped me understand exactly what skills I needed to develop. I got promoted within 6 months of using the platform.",
+    content:
+      "The career intelligence insights helped me understand exactly what skills I needed to develop. I got promoted within 6 months of using the platform.",
     author: "Alex Thompson",
     role: "UX Designer",
     company: "Airbnb",
     avatar: "AT",
     rating: 5,
     industry: "Design",
-    color: "bg-pink-500"
+    color: "bg-pink-500",
   },
   {
     id: 5,
-    content: "As a career changer, I was lost. The personalized job matching and career coaching features gave me the confidence and direction I needed to land my dream role.",
+    content:
+      "As a career changer, I was lost. The personalized job matching and career coaching features gave me the confidence and direction I needed to land my dream role.",
     author: "Jennifer Kim",
     role: "Marketing Manager",
     company: "Spotify",
     avatar: "JK",
     rating: 5,
     industry: "Marketing",
-    color: "bg-yellow-500"
-  }
+    color: "bg-yellow-500",
+  },
 ];
 
 interface TestimonialCarouselProps {
@@ -69,10 +74,10 @@ interface TestimonialCarouselProps {
   interval?: number;
 }
 
-export function TestimonialCarousel({ 
-  className, 
-  autoPlay = true, 
-  interval = 5000 
+export function TestimonialCarousel({
+  className,
+  autoPlay = true,
+  interval = 5000,
 }: TestimonialCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -99,7 +104,7 @@ export function TestimonialCarousel({
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <div 
+    <div
       className={className}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -109,7 +114,8 @@ export function TestimonialCarousel({
           Loved by Professionals Worldwide
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          Join thousands of professionals who've accelerated their careers with our AI-powered platform.
+          Join thousands of professionals who've accelerated their careers with our AI-powered
+          platform.
         </p>
       </div>
 
@@ -138,16 +144,16 @@ export function TestimonialCarousel({
               {/* Author Info */}
               <div className="flex flex-col md:flex-row items-center gap-4">
                 <div className="flex items-center gap-4">
-                  <div className={`
+                  <div
+                    className={`
                     flex items-center justify-center w-12 h-12 rounded-full text-white font-semibold
                     ${currentTestimonial.color}
-                  `}>
+                  `}
+                  >
                     {currentTestimonial.avatar}
                   </div>
                   <div className="text-left">
-                    <div className="font-semibold text-foreground">
-                      {currentTestimonial.author}
-                    </div>
+                    <div className="font-semibold text-foreground">{currentTestimonial.author}</div>
                     <div className="text-muted-foreground text-sm">
                       {currentTestimonial.role} at {currentTestimonial.company}
                     </div>
@@ -180,9 +186,10 @@ export function TestimonialCarousel({
                 onClick={() => goToTestimonial(index)}
                 className={`
                   w-3 h-3 rounded-full transition-all duration-300
-                  ${index === currentIndex 
-                    ? 'bg-primary scale-125' 
-                    : 'bg-outline-variant hover:bg-outline'
+                  ${
+                    index === currentIndex
+                      ? "bg-primary scale-125"
+                      : "bg-outline-variant hover:bg-outline"
                   }
                 `}
                 aria-label={`Go to testimonial ${index + 1}`}
@@ -208,17 +215,20 @@ export function TestimonialCarousel({
               onClick={() => goToTestimonial(index)}
               className={`
                 p-4 rounded-lg border transition-all duration-300 text-left
-                ${index === currentIndex
-                  ? 'border-primary bg-primary/10'
-                  : 'border-outline-variant hover:border-outline hover:bg-surface-container-high'
+                ${
+                  index === currentIndex
+                    ? "border-primary bg-primary/10"
+                    : "border-outline-variant hover:border-outline hover:bg-surface-container-high"
                 }
               `}
             >
               <div className="flex items-center gap-3 mb-2">
-                <div className={`
+                <div
+                  className={`
                   flex items-center justify-center w-8 h-8 rounded-full text-white text-xs font-semibold
                   ${testimonial.color}
-                `}>
+                `}
+                >
                   {testimonial.avatar}
                 </div>
                 <div className="min-w-0 flex-1">
@@ -242,7 +252,7 @@ export function TestimonialCarousel({
       <div className="mt-16 text-center">
         <p className="text-sm text-muted-foreground mb-4">Trusted by professionals at</p>
         <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-          {['Google', 'Microsoft', 'Netflix', 'Airbnb', 'Spotify', 'Amazon'].map((company) => (
+          {["Google", "Microsoft", "Netflix", "Airbnb", "Spotify", "Amazon"].map((company) => (
             <div key={company} className="text-sm font-medium text-muted-foreground">
               {company}
             </div>

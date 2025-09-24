@@ -10,10 +10,7 @@ declare module '@/api/aiServices' {
     userId?: string
   ) => Promise<GenerateTailoredResumeResponse>;
 
-  export const generateCoverLetter: (
-    jobDescription: string,
-    tone?: string
-  ) => Promise<string>;
+  export const generateCoverLetter: (jobDescription: string, tone?: string) => Promise<string>;
 
   const aiServices: {
     generateTailoredResume: typeof generateTailoredResume;

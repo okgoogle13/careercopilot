@@ -9,11 +9,11 @@ interface ErrorCardProps {
   showRetryButton?: boolean;
 }
 
-export function ErrorCard({ 
+export function ErrorCard({
   title = "Failed to Load",
   message = "Unable to load profile data. Please check your connection and try again.",
   onRetry,
-  showRetryButton = true
+  showRetryButton = true,
 }: ErrorCardProps) {
   return (
     <Card variant="error" className="p-6">
@@ -25,17 +25,15 @@ export function ErrorCard({
           <CardTitle className="text-destructive">{title}</CardTitle>
         </div>
       </CardHeader>
-      
+
       <CardContent className="pb-4">
-        <p className="text-muted-foreground text-sm leading-relaxed">
-          {message}
-        </p>
+        <p className="text-muted-foreground text-sm leading-relaxed">{message}</p>
       </CardContent>
 
       {showRetryButton && (
         <CardFooter className="pt-2">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="sm"
             onClick={onRetry}
             className="w-full border-destructive/30 text-destructive hover:bg-destructive/10 hover:text-destructive"
@@ -51,7 +49,7 @@ export function ErrorCard({
 
 export function ErrorProfileCard(props: ErrorCardProps) {
   return (
-    <ErrorCard 
+    <ErrorCard
       title="Profile Load Error"
       message="Unable to load this profile. There may be a connection issue or the profile data is corrupted."
       {...props}

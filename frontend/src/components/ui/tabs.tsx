@@ -25,13 +25,7 @@ export const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
     };
 
     return (
-      <MuiTabs
-        ref={ref}
-        value={value}
-        onChange={handleChange}
-        orientation={orientation}
-        {...props}
-      >
+      <MuiTabs ref={ref} value={value} onChange={handleChange} orientation={orientation} {...props}>
         {children}
       </MuiTabs>
     );
@@ -60,14 +54,7 @@ export interface TabsTriggerProps extends MuiTabProps {
 
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
   ({ children, value, ...props }, ref) => {
-    return (
-      <MuiTab
-        ref={ref}
-        value={value}
-        label={children}
-        {...props}
-      />
-    );
+    return <MuiTab ref={ref} value={value} label={children} {...props} />;
   }
 );
 

@@ -65,11 +65,7 @@ export interface AlertDescriptionProps extends React.ComponentProps<typeof Typog
 export const AlertDescription = React.forwardRef<HTMLParagraphElement, AlertDescriptionProps>(
   ({ children, ...props }, ref) => {
     return (
-      <Typography
-        ref={ref}
-        variant="body2"
-        {...props}
-      >
+      <Typography ref={ref} variant="body2" {...props}>
         {children}
       </Typography>
     );

@@ -144,7 +144,7 @@ export function AppLayout({
   };
 
   const getCurrentViewInfo = () => {
-    return mainNavigation.find(item => item.id === currentView) || mainNavigation[0];
+    return mainNavigation.find((item) => item.id === currentView) || mainNavigation[0];
   };
 
   const currentViewInfo = getCurrentViewInfo();
@@ -164,7 +164,10 @@ export function AppLayout({
               fontWeight: 600,
             }}
           >
-            {user.name.split(' ').map(n => n[0]).join('')}
+            {user.name
+              .split(' ')
+              .map((n) => n[0])
+              .join('')}
           </Avatar>
           <Box sx={{ flex: 1, minWidth: 0 }}>
             <Typography variant="subtitle2" sx={{ fontWeight: 600 }}>
@@ -381,9 +384,7 @@ export function AppLayout({
         }}
       >
         <Toolbar />
-        <Box sx={{ height: 'calc(100vh - 64px)', overflow: 'auto' }}>
-          {children}
-        </Box>
+        <Box sx={{ height: 'calc(100vh - 64px)', overflow: 'auto' }}>{children}</Box>
       </Box>
 
       {/* Toggle Navigation Button (when hidden) */}

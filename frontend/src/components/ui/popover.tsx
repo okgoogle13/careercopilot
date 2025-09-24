@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  Popover as MuiPopover,
-  PopoverProps as MuiPopoverProps,
-} from '@mui/material';
+import { Popover as MuiPopover, PopoverProps as MuiPopoverProps } from '@mui/material';
 
 export interface PopoverProps extends Omit<MuiPopoverProps, 'open'> {
   open?: boolean;
@@ -21,12 +18,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
     };
 
     return (
-      <MuiPopover
-        ref={ref}
-        open={open}
-        onClose={handleClose}
-        {...props}
-      >
+      <MuiPopover ref={ref} open={open} onClose={handleClose} {...props}>
         {children}
       </MuiPopover>
     );

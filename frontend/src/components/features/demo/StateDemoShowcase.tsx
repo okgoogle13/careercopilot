@@ -195,9 +195,9 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         {/* Control Panel */}
         <div className="mb-8">
           <Card variant="elevation">
-            <CardHeader title={<Typography variant='h3'>Simulation Controls</Typography>}>
-
-            </CardHeader>
+            <CardHeader
+              title={<Typography variant="h3">Simulation Controls</Typography>}
+            ></CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-3">
                 <Button
@@ -289,9 +289,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
           <div className="grid md:grid-cols-2 gap-6">
             <Card variant="elevation">
-              <CardHeader title={<Typography variant='h3'>Best Practices</Typography>}>
-
-              </CardHeader>
+              <CardHeader title={<Typography variant="h3">Best Practices</Typography>}></CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>• Always show loading states for operations taking &gt;200ms</li>
@@ -304,9 +302,9 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
             </Card>
 
             <Card variant="elevation">
-              <CardHeader title={<Typography variant='h3'>Implementation Tips</Typography>}>
-
-              </CardHeader>
+              <CardHeader
+                title={<Typography variant="h3">Implementation Tips</Typography>}
+              ></CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
                   <li>• Use React.Suspense with ErrorBoundaries</li>

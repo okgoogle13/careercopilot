@@ -4,8 +4,8 @@ import { ComponentSection } from "./ComponentDemo";
 
 export function UsageGuidelinesSection() {
   return (
-    <ComponentSection 
-      title="Usage Guidelines" 
+    <ComponentSection
+      title="Usage Guidelines"
       description="Best practices and guidelines for using components effectively"
     >
       <Card variant="default">
@@ -31,10 +31,18 @@ export function UsageGuidelinesSection() {
             <div>
               <h4 className="mb-3 font-medium">Animation Guidelines</h4>
               <div className="space-y-2">
-                <div className="text-sm text-muted-foreground">• Duration: 200-300ms for micro-interactions</div>
-                <div className="text-sm text-muted-foreground">• Easing: Spring animations for natural feel</div>
-                <div className="text-sm text-muted-foreground">• Stagger delays: 50-100ms between items</div>
-                <div className="text-sm text-muted-foreground">• Reduce motion for accessibility preferences</div>
+                <div className="text-sm text-muted-foreground">
+                  • Duration: 200-300ms for micro-interactions
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  • Easing: Spring animations for natural feel
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  • Stagger delays: 50-100ms between items
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  • Reduce motion for accessibility preferences
+                </div>
               </div>
             </div>
             <div>

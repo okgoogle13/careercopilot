@@ -16,6 +16,7 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
 ### Components Using Tailwind
 
 #### High Priority (Frequently Used Components)
+
 1. **Sidebar.tsx**
    - Uses Tailwind for layout and styling
    - Needs migration to MUI `Drawer` and `List` components
@@ -33,6 +34,7 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
    - Should use MUI `Grid` and `Stack` components
 
 #### Medium Priority
+
 5. **KeywordTagGroup.tsx**
    - Currently being migrated
    - Uses `buttonVariants` utility
@@ -111,12 +113,13 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
 ### Material 3 Theme Implementation
 
 1. **Color System** ✅
+
    ```typescript
    // Light Theme
    primary: '#5E5791',
    onPrimary: '#FFFFFF',
    primaryContainer: '#E5DEFF',
-   
+
    // Dark Theme
    primary: '#C8BFFF',
    onPrimary: '#2E2A4F',
@@ -134,24 +137,25 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
    - Proper line heights and letter spacing
    - Accessible contrast ratios
 
-2. **Theme Implementation**
+4. **Theme Implementation**
+
    ```typescript
-   import { createTheme } from '@mui/material/styles';
+   import { createTheme } from "@mui/material/styles";
 
    const lightTheme = createTheme({
      palette: {
-       mode: 'light',
+       mode: "light",
        primary: {
-         main: '#5E5791',
-         light: '#8F88C3',
-         dark: '#2E2A4F',
-         contrastText: '#FFFFFF',
+         main: "#5E5791",
+         light: "#8F88C3",
+         dark: "#2E2A4F",
+         contrastText: "#FFFFFF",
        },
        secondary: {
-         main: '#5F5C71',
-         light: '#8E8B9F',
-         dark: '#333141',
-         contrastText: '#FFFFFF',
+         main: "#5F5C71",
+         light: "#8E8B9F",
+         dark: "#333141",
+         contrastText: "#FFFFFF",
        },
        // Additional colors from the theme
      },
@@ -164,11 +168,13 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
 ### Sidebar.tsx
 
 **Current:**
+
 ```tsx
 <div className="w-64 bg-sidebar border-r border-sidebar-border h-full flex flex-col">
 ```
 
 **Target with Material 3:**
+
 ```tsx
 <Drawer
   variant="permanent"
@@ -179,9 +185,9 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
       width: { xs: 240, sm: 280 },
       boxSizing: 'border-box',
       borderRight: 'none',
-      backgroundColor: (theme) => 
-        theme.palette.mode === 'light' 
-          ? theme.palette.background.paper 
+      backgroundColor: (theme) =>
+        theme.palette.mode === 'light'
+          ? theme.palette.background.paper
           : theme.palette.surfaceContainerLow.main,
       backgroundImage: 'none',
       boxShadow: (theme) => theme.shadows[1],
@@ -193,14 +199,16 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
 ### CreateProfileCard.tsx
 
 **Current:**
+
 ```tsx
 <div className="p-6 flex flex-col items-center justify-center text-center space-y-4 h-full">
 ```
 
 **Target:**
+
 ```tsx
-<Card 
-  sx={{ 
+<Card
+  sx={{
     p: 3,
     height: '100%',
     display: 'flex',
@@ -254,25 +262,27 @@ This document outlines the strategy and steps for migrating from Tailwind CSS to
 
 ```tsx
 // Using the theme in a component
-import { useTheme } from '@mui/material/styles';
-import { Box, Button } from '@mui/material';
+import { useTheme } from "@mui/material/styles";
+import { Box, Button } from "@mui/material";
 
 function MyComponent() {
   const theme = useTheme();
-  
+
   return (
-    <Box sx={{ 
-      p: 3,
-      backgroundColor: theme.palette.background.paper,
-      borderRadius: theme.shape.borderRadius,
-    }}>
-      <Button 
+    <Box
+      sx={{
+        p: 3,
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: theme.shape.borderRadius,
+      }}
+    >
+      <Button
         variant="contained"
-        sx={{ 
+        sx={{
           mt: 2,
           // Access theme values directly
           backgroundColor: theme.palette.primary.main,
-          '&:hover': {
+          "&:hover": {
             backgroundColor: theme.palette.primary.dark,
           },
         }}
@@ -289,19 +299,17 @@ function MyComponent() {
 The theme supports light and dark modes. To implement theme switching:
 
 ```tsx
-import { ThemeProvider } from '@mui/material/styles';
-import { lightTheme, darkTheme } from './theme';
+import { ThemeProvider } from "@mui/material/styles";
+import { lightTheme, darkTheme } from "./theme";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const theme = darkMode ? darkTheme : lightTheme;
-  
+
   return (
     <ThemeProvider theme={theme}>
       {/* Your app components */}
-      <Button onClick={() => setDarkMode(!darkMode)}>
-        Toggle {darkMode ? 'Light' : 'Dark'} Mode
-      </Button>
+      <Button onClick={() => setDarkMode(!darkMode)}>Toggle {darkMode ? "Light" : "Dark"} Mode</Button>
     </ThemeProvider>
   );
 }
@@ -325,6 +333,7 @@ function App() {
    - Theme updates are optimized for performance
 
 ### 4. Documentation
+
 - [Material 3 Design Guidelines](https://m3.material.io/)
 - [MUI Theming Documentation](https://mui.com/material-ui/customization/theming/)
 - [Theme Demo](http://localhost:3001/theme-viewer) (runs with the dev server)

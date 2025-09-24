@@ -14,7 +14,7 @@ export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children
         setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
       },
     }),
-    [],
+    []
   );
 
   const theme = useMemo(() => {

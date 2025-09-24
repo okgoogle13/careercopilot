@@ -31,11 +31,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   return (
     <StyledEmptyState className={className}>
-      {icon && (
-        <Box sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }}>
-          {icon}
-        </Box>
-      )}
+      {icon && <Box sx={{ fontSize: 48, color: 'text.disabled', mb: 1 }}>{icon}</Box>}
       <Typography variant="h6" color="text.secondary">
         {title}
       </Typography>

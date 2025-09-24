@@ -52,9 +52,7 @@ export function AnimatedModal({
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md"
           >
             <Card>
-              <CardHeader title={<Typography variant='h3'>{title}</Typography>}>
-
-              </CardHeader>
+              <CardHeader title={<Typography variant="h3">{title}</Typography>}></CardHeader>
               <CardContent>{children}</CardContent>
               <CardActions sx={{ justifyContent: 'flex-end', gap: 1 }}>
                 <Button variant="outlined" onClick={onClose}>

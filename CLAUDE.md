@@ -47,20 +47,30 @@ GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.
 
 ## Linting Commands
 
-- **Frontend**: `yarn lint` or `yarn lint:fix` (from frontend directory)
-- **Functions**: `npm run lint:fix` (uses npm)
-- **All projects**: `./scripts/lint-autofix.sh` - Auto-fix all linting errors across the entire project
-- **CI linting**: `lint:ci` scripts available with higher warning tolerance
-- **Pre-commit**: Hooks configured with `pre-commit install` for automatic linting on commit
-- **Workspace setup**: Functions uses npm while frontend uses yarn
+- **All Projects (Root)**:
+  - `yarn lint` - Run ESLint on frontend and functions
+  - `yarn lint:fystn- Auto-fix all linting errors across entire project
+  - `yarn lint:ci` - Run linting with CI-friendly settings
+  - `yarn lint:autofix` - Execute comprehensive auto-fix script
+- **Individual Projects**:
+  - **Functions**: `npm run lint` or `npm run lint:fix` (from functions directory)
+- **Formatting**:
+  - `yarn format` - Format all files with Prettier
+  - `yarn format:check` - Check formatting without changes
+- **Pre-commit**: Hooks configured with `husky` for automatic linting on commit
+- **Workspace Setup**: Yarn workspaces with functions using npm scripts
 
 ### Current Frontend Scripts
 
-- `yarn dev` - Start development server
-- `yarn build` - Build for production
-- `yarn clean` - Remove node_modules, dist, and .vite directories
-- `yarn lint` - Run ESLint checker
-- `yarn lint:fix` - Auto-fix ESLint issues
+- `yarn dev` - Start Vite development server
+- `yarn build` - TypeScript compilation + Vite build for production
+- `yarn preview` - Preview production build locally
+- `yarn test` - Run Jest unit tests
+- `yarn lint` - Run ESLint (max 0 warnings)
+- `yarn lint:fix` - Auto-fix ESLint issues (max 10 warnings)
+- `yarn lint:ci` - Run ESLint with CI settings (max 5 warnings)
+- `yarn storybook` - Start Storybook development server
+- `yarn build-storybook` - Build Storybook for production
 
 ## Frontend Deployment Readiness Commands
 
@@ -103,9 +113,13 @@ Options:
 
 ### Build Commands
 
-- **Frontend**: `yarn build` (from frontend directory) - Build frontend application
-- **Functions**: `yarn build:functions` - Build Firebase functions
-- **Cleanup**: `yarn clean` - Clean build artifacts
+- **Frontend**: `yarn build:frontend` (from root) - Build frontend application
+- **Functions**: `yarn build:functions` (from root) - Build Firebase functions
+- **All**: `yarn build` (from root) - Build both frontend and functions
+- **Development Servers**:
+  - `yarn dev` (from root) - Start frontend development server
+  - `yarn dev:functions` (from root) - Start Functions emulator
+- **Cleanup**: `yarn clean` (from root) - Clean all build artifacts
 - **Production Deployment**: `./scripts/deploy-production.sh` - Full production deployment
 - **Staging Deployment**: `./scripts/deploy-staging.sh` - Deploy to staging environment
 
@@ -245,10 +259,11 @@ Options:
 
 ### Test Configuration Files
 
-- `frontend/jest.config.js` - Jest configuration for React components
-- `frontend/playwright.config.ts` - Playwright E2E test configuration 
-- `backend/app/tests/conftest.py` - pytest configuration and fixtures
+- `frontend/package.json` - Jest configuration embedded for React components
+- `frontend/playwright.config.ts` - Playwright E2E test configuration
+- `functions/package.json` - Jest configuration for Functions testing
 - `frontend/src/setupTests.ts` - Test environment setup
+- `jest.config.js` files removed in favor of package.json configuration
 
 ## CI/CD Testing Pipeline
 
@@ -324,11 +339,42 @@ gh workflow run ci.yml \
 
 ## Current Project Status
 
-- **Frontend**: React + TypeScript + Vite with Tailwind CSS v3
-- **Component Library**: Radix UI components with custom styling
-- **API Integration**: All AI service endpoints implemented and connected
-- **Error Handling**: Comprehensive error handling across all components
-- **Build System**: Clean builds with proper TypeScript compilation
-- **Linting**: ESLint configured with auto-fix capabilities
-- **Testing**: Complete test suite with unit, integration, and E2E coverage
-- **Test Framework**: Jest, pytest, Playwright with comprehensive mocking strategies
+### Frontend Architecture
+
+- **Framework**: React 18.2.0 + TypeScript 5.0+ with Vite 5.0
+- **Styling**: Material-UI v5.18 with Emotion styling engine and Tailwind CSS utilities
+- **Component Structure**: Organized component library with comprehensive UI components
+  - `ui/` - Base UI components (29 components)
+  - `library/` - Reusable business components (15 components)
+  - `features/` - Feature-specific components
+  - `career/` - Career management components
+  - `documents/` - Document handling components
+- **State Management**: React Hook Form for forms, React Context for global state
+- **Testing**: Jest + React Testing Library with 15s timeout configuration
+- **Development Tools**: Storybook for component development and documentation
+
+### Backend & Functions
+
+- **Firebase Functions**: Node.js 20 runtime with TypeScript
+- **AI Framework**: Genkit 1.19.1 for AI flow orchestration
+- **Dependencies**:
+  - Firebase Admin SDK 13.5.0
+  - Google AI integration via @genkit-ai/googleai
+  - Google Cloud Secret Manager integration
+- **Build Process**: TypeScript compilation with separate tsconfig.build.json
+
+### Workspace Configuration
+
+- **Package Manager**: Yarn 4.10.2 with workspace support
+- **Workspaces**: Frontend and Functions as separate workspace packages
+- **Node Version**: >=18.0.0 required
+- **Linting**: Unified ESLint configuration across workspaces
+- **Pre-commit**: Husky + lint-staged for automated code quality checks
+
+### Testing Infrastructure
+
+- **Frontend**: Jest with jsdom, React Testing Library, Playwright for E2E
+- **Functions**: Jest with comprehensive test coverage
+- **CI/CD**: GitHub Actions with parallel test execution
+- **Coverage**: Integrated coverage reporting
+- memorize

@@ -1,5 +1,14 @@
 import React from 'react';
-import { Box, Container, Grid, Stack, BoxProps, ContainerProps, GridProps, StackProps } from '@mui/material';
+import {
+  Box,
+  Container,
+  Grid,
+  Stack,
+  BoxProps,
+  ContainerProps,
+  GridProps,
+  StackProps,
+} from '@mui/material';
 import { Card, CardProps } from './card';
 
 export interface LayoutContainerProps extends ContainerProps {}
@@ -60,7 +69,13 @@ LayoutStack.displayName = 'LayoutStack';
 
 export interface LayoutFlexProps extends BoxProps {
   gap?: number | string;
-  justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+  justify?:
+    | 'flex-start'
+    | 'flex-end'
+    | 'center'
+    | 'space-between'
+    | 'space-around'
+    | 'space-evenly';
   align?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline';
   wrap?: boolean;
 }

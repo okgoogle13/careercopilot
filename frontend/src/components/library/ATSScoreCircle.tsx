@@ -11,7 +11,7 @@ export function ATSScoreCircle({
   score,
   size = 'medium',
   className = '',
-  showLabel = false
+  showLabel = false,
 }: ATSScoreCircleProps) {
   // Size configurations
   const sizeConfig = {
@@ -19,20 +19,20 @@ export function ATSScoreCircle({
       diameter: 80,
       strokeWidth: 6,
       textSize: 'text-lg',
-      labelSize: 'text-xs'
+      labelSize: 'text-xs',
     },
     medium: {
       diameter: 120,
       strokeWidth: 8,
       textSize: 'text-2xl',
-      labelSize: 'text-sm'
+      labelSize: 'text-sm',
     },
     large: {
       diameter: 192, // 48 * 4 = 192px for w-48 h-48
       strokeWidth: 12,
       textSize: 'text-5xl',
-      labelSize: 'text-base'
-    }
+      labelSize: 'text-base',
+    },
   };
 
   const config = sizeConfig[size];
@@ -52,11 +52,7 @@ export function ATSScoreCircle({
 
   return (
     <div className={`relative inline-flex items-center justify-center ${className}`}>
-      <svg
-        width={config.diameter}
-        height={config.diameter}
-        className="transform -rotate-90"
-      >
+      <svg width={config.diameter} height={config.diameter} className="transform -rotate-90">
         {/* Background circle */}
         <circle
           cx={config.diameter / 2}
@@ -81,7 +77,7 @@ export function ATSScoreCircle({
           strokeLinecap="round"
           className="transition-all duration-1000 ease-out"
           style={{
-            filter: `drop-shadow(0 0 8px ${scoreColor}40)`
+            filter: `drop-shadow(0 0 8px ${scoreColor}40)`,
           }}
         />
 
@@ -99,7 +95,7 @@ export function ATSScoreCircle({
             strokeLinecap="round"
             className="transition-all duration-1000 ease-out opacity-30"
             style={{
-              filter: `blur(4px)`
+              filter: `blur(4px)`,
             }}
           />
         )}
@@ -113,9 +109,7 @@ export function ATSScoreCircle({
               {score}%
             </div>
             {showLabel && (
-              <div className={`text-muted-foreground ${config.labelSize}`}>
-                ATS Score
-              </div>
+              <div className={`text-muted-foreground ${config.labelSize}`}>ATS Score</div>
             )}
           </div>
         </div>

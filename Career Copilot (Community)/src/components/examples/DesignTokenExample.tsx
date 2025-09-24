@@ -1,29 +1,34 @@
-import React, { useState } from 'react';
-import { useDesignTokens, createTokenStyles, createGlassEffect, createAccessibleFocusStyle } from '../../hooks/useDesignTokens';
-import { careerCopilotTokenMapper } from '../../mappings/design-tokens.mapper';
-import { Card } from '../ui/card';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Progress } from '../ui/progress';
-import { Sparkles, Zap, Star } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  useDesignTokens,
+  createTokenStyles,
+  createGlassEffect,
+  createAccessibleFocusStyle,
+} from "../../hooks/useDesignTokens";
+import { careerCopilotTokenMapper } from "../../mappings/design-tokens.mapper";
+import { Card } from "../ui/card";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { Progress } from "../ui/progress";
+import { Sparkles, Zap, Star } from "lucide-react";
 
 // Example of creating styles with enhanced design tokens
 const tokenStyles = createTokenStyles((tokens) => ({
   container: {
     padding: tokens.spacing.lg,
     background: tokens.colors.backgroundGradient,
-    minHeight: '100vh',
-    position: 'relative',
+    minHeight: "100vh",
+    position: "relative",
   },
   header: {
-    fontSize: tokens.typography.size['2xl'],
+    fontSize: tokens.typography.size["2xl"],
     fontWeight: tokens.typography.weight.semibold,
     background: `linear-gradient(135deg, ${tokens.colors.accentBlue} 0%, ${tokens.colors.accentPurple} 100%)`,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
     marginBottom: tokens.spacing.md,
-    textShadow: '0 2px 4px rgba(96, 165, 250, 0.2)',
+    textShadow: "0 2px 4px rgba(96, 165, 250, 0.2)",
   },
   description: {
     fontSize: tokens.typography.size.base,
@@ -32,21 +37,21 @@ const tokenStyles = createTokenStyles((tokens) => ({
     marginBottom: tokens.spacing.lg,
   },
   tokenGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
     gap: tokens.spacing.lg,
   },
   glassCard: {
-    ...createGlassEffect('medium'),
+    ...createGlassEffect("medium"),
     borderRadius: tokens.radius.lg,
     padding: tokens.spacing.lg,
     transition: `all ${tokens.animation.durationNormal} ${tokens.animation.ease}`,
   },
   glassCardHover: {
-    ...createGlassEffect('strong'),
+    ...createGlassEffect("strong"),
     borderRadius: tokens.radius.lg,
     padding: tokens.spacing.lg,
-    transform: 'translateY(-4px)',
+    transform: "translateY(-4px)",
     boxShadow: tokens.shadow.glassHover,
   },
 }));
@@ -58,13 +63,13 @@ interface TokenDisplayProps {
 
 function TokenDisplay({ category, tokens }: TokenDisplayProps) {
   const { styles } = useDesignTokens();
-  
+
   return (
     <Card className="p-6">
       <h3 className="text-lg font-semibold mb-4 text-brand-blue">{category}</h3>
       <div className="space-y-2">
         {Object.entries(tokens).map(([name, value]) => (
-          <div 
+          <div
             key={name}
             className="flex items-center justify-between p-2 rounded border border-subtle hover:bg-surface-section transition-colors"
           >
@@ -81,19 +86,19 @@ function TokenDisplay({ category, tokens }: TokenDisplayProps) {
 
 function ColorSwatch({ colorName, colorValue }: { colorName: string; colorValue: string }) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   return (
-    <div 
+    <div
       className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-opacity-10 hover:bg-white"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div 
+      <div
         className="w-10 h-10 rounded-lg border transition-all duration-300"
-        style={{ 
+        style={{
           backgroundColor: colorValue,
-          borderColor: isHovered ? colorValue : 'rgba(255, 255, 255, 0.1)',
-          boxShadow: isHovered ? `0 0 16px ${colorValue}40` : 'none',
+          borderColor: isHovered ? colorValue : "rgba(255, 255, 255, 0.1)",
+          boxShadow: isHovered ? `0 0 16px ${colorValue}40` : "none",
         }}
       />
       <div>
@@ -104,11 +109,17 @@ function ColorSwatch({ colorName, colorValue }: { colorName: string; colorValue:
   );
 }
 
-function GlassExample({ title, intensity }: { title: string; intensity: 'light' | 'medium' | 'strong' }) {
+function GlassExample({
+  title,
+  intensity,
+}: {
+  title: string;
+  intensity: "light" | "medium" | "strong";
+}) {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   return (
-    <div 
+    <div
       style={isHovered ? tokenStyles.glassCardHover : tokenStyles.glassCard}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -123,14 +134,14 @@ function GlassExample({ title, intensity }: { title: string; intensity: 'light' 
 
 function AnimatedProgress() {
   const [progress, setProgress] = useState(0);
-  
+
   React.useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => (prev >= 100 ? 0 : prev + 1));
     }, 50);
     return () => clearInterval(timer);
   }, []);
-  
+
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
@@ -147,40 +158,46 @@ function AnimatedProgress() {
 
 export function DesignTokenExample() {
   const { tokens, color, spacing, typography, styles, glass, animation } = useDesignTokens();
-  
+
   // Example of using the token mapper
-  const mappedPrimary = careerCopilotTokenMapper('primary');
-  const mappedGlass = careerCopilotTokenMapper('glass-bg');
-  const mappedAnimation = careerCopilotTokenMapper('animation-duration-normal');
-  
+  const mappedPrimary = careerCopilotTokenMapper("primary");
+  const mappedGlass = careerCopilotTokenMapper("glass-bg");
+  const mappedAnimation = careerCopilotTokenMapper("animation-duration-normal");
+
   return (
     <div style={tokenStyles.container}>
       <div className="max-w-7xl mx-auto">
         <h1 style={tokenStyles.header}>Enhanced Design Token System</h1>
         <p style={tokenStyles.description}>
-          Explore our comprehensive design token system featuring glass morphism effects, 
-          responsive design patterns, and accessibility-first components with smooth animations.
+          Explore our comprehensive design token system featuring glass morphism effects, responsive
+          design patterns, and accessibility-first components with smooth animations.
         </p>
-      
+
         {/* Token Mapper Examples */}
         <div style={tokenStyles.glassCard} className="mb-8">
           <h2 className="text-xl font-semibold mb-4 text-gradient-blue">Enhanced Token Mapper</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
               <span className="text-sm font-medium text-foreground">Primary Color:</span>
-              <span className="font-mono text-xs bg-glass p-2 rounded border border-glass-border">{mappedPrimary}</span>
+              <span className="font-mono text-xs bg-glass p-2 rounded border border-glass-border">
+                {mappedPrimary}
+              </span>
             </div>
             <div className="space-y-2">
               <span className="text-sm font-medium text-foreground">Glass Background:</span>
-              <span className="font-mono text-xs bg-glass p-2 rounded border border-glass-border">{mappedGlass}</span>
+              <span className="font-mono text-xs bg-glass p-2 rounded border border-glass-border">
+                {mappedGlass}
+              </span>
             </div>
             <div className="space-y-2">
               <span className="text-sm font-medium text-foreground">Animation Duration:</span>
-              <span className="font-mono text-xs bg-glass p-2 rounded border border-glass-border">{mappedAnimation}</span>
+              <span className="font-mono text-xs bg-glass p-2 rounded border border-glass-border">
+                {mappedAnimation}
+              </span>
             </div>
           </div>
         </div>
-        
+
         {/* Enhanced Token Showcase */}
         <div style={tokenStyles.tokenGrid} className="mb-8">
           {/* Color Tokens */}
@@ -193,7 +210,10 @@ export function DesignTokenExample() {
               <ColorSwatch colorName="Primary Blue" colorValue={tokens.colors.primary} />
               <ColorSwatch colorName="Primary Light" colorValue={tokens.colors.primaryLight} />
               <ColorSwatch colorName="Accent Purple" colorValue={tokens.colors.accentPurple} />
-              <ColorSwatch colorName="Accent Purple Light" colorValue={tokens.colors.accentPurpleLight} />
+              <ColorSwatch
+                colorName="Accent Purple Light"
+                colorValue={tokens.colors.accentPurpleLight}
+              />
               <ColorSwatch colorName="Accent Green" colorValue={tokens.colors.accentGreen} />
               <ColorSwatch colorName="Accent Red" colorValue={tokens.colors.accentRed} />
             </div>
@@ -220,16 +240,18 @@ export function DesignTokenExample() {
             </h3>
             <div className="space-y-6">
               <AnimatedProgress />
-              
+
               <div className="space-y-3">
                 <h4 className="font-medium text-foreground">Badge Effects</h4>
                 <div className="flex gap-3 flex-wrap">
                   <Badge className="pulse-ai">AI Processing</Badge>
                   <Badge className="pulse-new">New Feature</Badge>
-                  <Badge variant="outline" className="glow-hover">Hover Me</Badge>
+                  <Badge variant="outline" className="glow-hover">
+                    Hover Me
+                  </Badge>
                 </div>
               </div>
-              
+
               <div className="space-y-3">
                 <h4 className="font-medium text-foreground">Gradient Text</h4>
                 <p className="text-gradient-blue text-lg font-semibold">Blue Gradient Text</p>
@@ -239,27 +261,20 @@ export function DesignTokenExample() {
           </div>
 
           {/* Animation Tokens */}
-          <TokenDisplay 
-            category="Animation System" 
-            tokens={tokens.animation} 
-          />
-          
+          <TokenDisplay category="Animation System" tokens={tokens.animation} />
+
           {/* Glass Tokens */}
-          <TokenDisplay 
-            category="Glass Morphism" 
-            tokens={tokens.glass} 
-          />
-          
+          <TokenDisplay category="Glass Morphism" tokens={tokens.glass} />
+
           {/* Responsive Breakpoints */}
-          <TokenDisplay 
-            category="Responsive Breakpoints" 
-            tokens={tokens.breakpoints} 
-          />
+          <TokenDisplay category="Responsive Breakpoints" tokens={tokens.breakpoints} />
         </div>
-      
+
         {/* Enhanced Style Examples */}
         <div style={tokenStyles.glassCard}>
-          <h3 className="text-xl font-semibold mb-6 text-gradient-purple">Pre-built Component Styles</h3>
+          <h3 className="text-xl font-semibold mb-6 text-gradient-purple">
+            Pre-built Component Styles
+          </h3>
           <div className="space-y-6">
             <div>
               <h4 className="font-medium mb-3 text-foreground">Glass Card Styles:</h4>
@@ -272,31 +287,31 @@ export function DesignTokenExample() {
                 </div>
               </div>
             </div>
-            
+
             <div>
               <h4 className="font-medium mb-3 text-foreground">Button Variations:</h4>
               <div className="flex gap-4 flex-wrap">
-                <button 
+                <button
                   style={styles.buttonPrimary}
                   className="px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:transform hover:scale-105"
                 >
                   Gradient Button
                 </button>
-                <button 
+                <button
                   style={styles.buttonGlass}
                   className="px-4 py-2 rounded-lg font-medium hover:bg-glass-bg-hover"
                 >
                   Glass Button
                 </button>
-                <Button 
-                  className="glow-hover focus-glow" 
-                  style={createAccessibleFocusStyle('primary')}
+                <Button
+                  className="glow-hover focus-glow"
+                  style={createAccessibleFocusStyle("primary")}
                 >
                   Accessible Button
                 </Button>
               </div>
             </div>
-            
+
             <div>
               <h4 className="font-medium mb-3 text-foreground">Typography Showcase:</h4>
               <div className="space-y-2">
@@ -308,7 +323,7 @@ export function DesignTokenExample() {
             </div>
           </div>
         </div>
-      
+
         {/* Enhanced Usage Examples */}
         <div style={tokenStyles.glassCard} className="mt-8">
           <h3 className="text-xl font-semibold mb-6 text-gradient-blue">Advanced Usage Patterns</h3>
@@ -329,7 +344,7 @@ style={createResponsiveStyles(mobileStyles, tabletStyles, desktopStyles)}
 style={createAccessibleFocusStyle('primary')}`}</pre>
               </div>
             </div>
-            
+
             <div>
               <h4 className="font-medium mb-3 text-foreground">CSS Class Usage:</h4>
               <div className="bg-glass p-4 rounded-lg font-mono text-sm overflow-x-auto border border-glass-border">
@@ -350,7 +365,7 @@ style={createAccessibleFocusStyle('primary')}`}</pre>
 <h2 className="text-gradient-purple">Purple gradient</h2>`}</pre>
               </div>
             </div>
-            
+
             <div>
               <h4 className="font-medium mb-3 text-foreground">Responsive & Accessibility:</h4>
               <div className="bg-glass p-4 rounded-lg font-mono text-sm overflow-x-auto border border-glass-border">

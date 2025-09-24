@@ -71,12 +71,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
         <div className="grid gap-6 mb-8">
           <Card>
             <CardHeader
-              title={<Typography variant='h3'>Card Component Variants</Typography>}
-              subheader={<Typography variant='body2' color='text.secondary'>Five distinct states designed for different interaction patterns and data states
-                              </Typography>}>
-
-
-            </CardHeader>
+              title={<Typography variant="h3">Card Component Variants</Typography>}
+              subheader={
+                <Typography variant="body2" color="text.secondary">
+                  Five distinct states designed for different interaction patterns and data states
+                </Typography>
+              }
+            ></CardHeader>
             <CardContent>
               <div className="grid gap-4">
                 <div className="flex items-center gap-3">
@@ -172,15 +173,17 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   onClick={() => handleCardClick(profile.id)}
                   sx={{
                     cursor: 'pointer',
-                    ...(selectedCard === profile.id ? {
-                      borderColor: 'primary.main',
-                      borderWidth: 2,
-                      boxShadow: theme => `0 0 0 2px ${theme.palette.primary.main}25`
-                    } : {
-                      '&:hover': {
-                        boxShadow: theme => `0 4px 12px ${theme.palette.primary.main}15`
-                      }
-                    })
+                    ...(selectedCard === profile.id
+                      ? {
+                          borderColor: 'primary.main',
+                          borderWidth: 2,
+                          boxShadow: (theme) => `0 0 0 2px ${theme.palette.primary.main}25`,
+                        }
+                      : {
+                          '&:hover': {
+                            boxShadow: (theme) => `0 4px 12px ${theme.palette.primary.main}15`,
+                          },
+                        }),
                   }}
                 >
                   <CardHeader>
@@ -244,7 +247,10 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                         {profile.lastUpdated || 'Click to create'}
                       </span>
                       {selectedCard === profile.id && (
-                        <Badge variant="default" sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}>
+                        <Badge
+                          variant="default"
+                          sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
+                        >
                           Selected
                         </Badge>
                       )}
@@ -349,11 +355,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
               ].map((template, index) => (
                 <Card key={index}>
                   <CardHeader
-                    title={<Typography variant='h3'>{template.name}</Typography>}
-                    subheader={<Typography variant='body2' color='text.secondary'>{template.description}</Typography>}>
-
-
-                  </CardHeader>
+                    title={<Typography variant="h3">{template.name}</Typography>}
+                    subheader={
+                      <Typography variant="body2" color="text.secondary">
+                        {template.description}
+                      </Typography>
+                    }
+                  ></CardHeader>
                   <CardContent>
                     <div className="space-y-3">
                       <div className="h-32 bg-muted rounded-lg flex items-center justify-center">
@@ -476,7 +484,10 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                       <span className="text-primary">92%</span>
                     </div>
                   </div>
-                  <Badge variant="default" sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}>
+                  <Badge
+                    variant="default"
+                    sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}
+                  >
                     Selected
                   </Badge>
                 </Card>

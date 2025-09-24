@@ -28,7 +28,7 @@ export default defineConfig({
           vendor: ['react', 'react-dom'],
           mui: ['@mui/material', '@mui/icons-material'],
           firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore', 'firebase/storage'],
-          utils: ['date-fns', 'tailwind-merge', 'class-variance-authority'],
+          utils: ['date-fns', 'class-variance-authority'],
         },
         chunkFileNames: 'assets/[name].[hash].js',
         entryFileNames: 'assets/[name].[hash].js',
@@ -37,14 +37,6 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000,
     assetsInlineLimit: 4096,
-  },
-  css: {
-    postcss: {
-      plugins: [
-        require('@tailwindcss/postcss7-compat'),
-        require('autoprefixer'),
-      ],
-    },
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],

@@ -8,7 +8,12 @@ interface CareerCopilotLogoProps {
   sx?: SxProps<Theme>;
 }
 
-export function CareerCopilotLogo({ className = "", size = 32, variant = 'full', sx }: CareerCopilotLogoProps) {
+export function CareerCopilotLogo({
+  className = '',
+  size = 32,
+  variant = 'full',
+  sx,
+}: CareerCopilotLogoProps) {
   return (
     <div className={`flex items-center ${className}`}>
       <img

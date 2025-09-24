@@ -1,4 +1,4 @@
-import { cn } from './utils';
+import { cn } from "./utils";
 
 /**
  * Aurora Theme Utility Classes
@@ -8,7 +8,7 @@ import { cn } from './utils';
 export const auroraStyles = {
   // Aurora gradient backgrounds
   bgAuroraFull: "bg-aurora-full",
-  bgAuroraPrimary: "bg-aurora-primary", 
+  bgAuroraPrimary: "bg-aurora-primary",
   bgAuroraSecondary: "bg-aurora-secondary",
   bgAuroraTertiary: "bg-aurora-tertiary",
   bgAuroraSubtle: "bg-aurora-subtle",
@@ -16,7 +16,7 @@ export const auroraStyles = {
   // Aurora text gradients
   textAurora: "text-gradient-aurora",
   textPrimary: "text-gradient-primary",
-  textSecondary: "text-gradient-secondary", 
+  textSecondary: "text-gradient-secondary",
   textTertiary: "text-gradient-tertiary",
 
   // Aurora glow effects
@@ -56,7 +56,7 @@ export const auroraStyles = {
   // Aurora motion
   transitionShort: "transition-short4",
   transitionMedium: "transition-medium2",
-  easeEmphasized: "ease-emphasized"
+  easeEmphasized: "ease-emphasized",
 };
 
 /**
@@ -66,17 +66,20 @@ export const aurora = {
   /**
    * Creates an Aurora-themed interactive card
    */
-  card: (additionalClasses?: string) => 
+  card: (additionalClasses?: string) =>
     cn("card-aurora glass transition-all duration-300 cursor-pointer group", additionalClasses),
 
   /**
    * Creates an Aurora-themed button with gradient and glow
    */
-  button: (variant: 'primary' | 'secondary' | 'tertiary' = 'primary', additionalClasses?: string) => {
+  button: (
+    variant: "primary" | "secondary" | "tertiary" = "primary",
+    additionalClasses?: string,
+  ) => {
     const variantClasses = {
       primary: "btn-gradient",
-      secondary: "btn-gradient-secondary", 
-      tertiary: "btn-gradient-tertiary"
+      secondary: "btn-gradient-secondary",
+      tertiary: "btn-gradient-tertiary",
     };
     return cn(variantClasses[variant], additionalClasses);
   },
@@ -84,12 +87,15 @@ export const aurora = {
   /**
    * Creates Aurora-themed gradient text
    */
-  text: (variant: 'aurora' | 'primary' | 'secondary' | 'tertiary' = 'aurora', additionalClasses?: string) => {
+  text: (
+    variant: "aurora" | "primary" | "secondary" | "tertiary" = "aurora",
+    additionalClasses?: string,
+  ) => {
     const variantClasses = {
       aurora: "text-gradient-aurora",
       primary: "text-gradient-primary",
       secondary: "text-gradient-secondary",
-      tertiary: "text-gradient-tertiary"
+      tertiary: "text-gradient-tertiary",
     };
     return cn(variantClasses[variant], additionalClasses);
   },
@@ -97,12 +103,15 @@ export const aurora = {
   /**
    * Creates Aurora-themed glow effects
    */
-  glow: (variant: 'aurora' | 'primary' | 'secondary' | 'tertiary' = 'aurora', additionalClasses?: string) => {
+  glow: (
+    variant: "aurora" | "primary" | "secondary" | "tertiary" = "aurora",
+    additionalClasses?: string,
+  ) => {
     const variantClasses = {
       aurora: "shadow-glow-aurora",
-      primary: "shadow-glow-primary", 
+      primary: "shadow-glow-primary",
       secondary: "shadow-glow-secondary",
-      tertiary: "shadow-glow-tertiary"
+      tertiary: "shadow-glow-tertiary",
     };
     return cn(variantClasses[variant], additionalClasses);
   },
@@ -110,13 +119,16 @@ export const aurora = {
   /**
    * Creates Aurora-themed background with gradient
    */
-  background: (variant: 'full' | 'primary' | 'secondary' | 'tertiary' | 'subtle' = 'full', additionalClasses?: string) => {
+  background: (
+    variant: "full" | "primary" | "secondary" | "tertiary" | "subtle" = "full",
+    additionalClasses?: string,
+  ) => {
     const variantClasses = {
       full: "bg-aurora-full",
       primary: "bg-aurora-primary",
-      secondary: "bg-aurora-secondary", 
+      secondary: "bg-aurora-secondary",
       tertiary: "bg-aurora-tertiary",
-      subtle: "bg-aurora-subtle"
+      subtle: "bg-aurora-subtle",
     };
     return cn(variantClasses[variant], additionalClasses);
   },
@@ -130,16 +142,15 @@ export const aurora = {
   /**
    * Creates Aurora-themed form input with enhanced floating label
    */
-  input: (additionalClasses?: string) =>
-    cn("form-input-enhanced", additionalClasses),
+  input: (additionalClasses?: string) => cn("form-input-enhanced", additionalClasses),
 
   /**
    * Creates Aurora-themed glass morphism effect
    */
-  glass: (variant: 'default' | 'aurora' = 'default', additionalClasses?: string) => {
+  glass: (variant: "default" | "aurora" = "default", additionalClasses?: string) => {
     const variantClasses = {
       default: "glass",
-      aurora: "glass-aurora"
+      aurora: "glass-aurora",
     };
     return cn(variantClasses[variant], additionalClasses);
   },
@@ -147,14 +158,14 @@ export const aurora = {
   /**
    * Creates Aurora-themed badge with pulse animation
    */
-  badge: (variant: 'ai' | 'tertiary' | 'new' = 'ai', additionalClasses?: string) => {
+  badge: (variant: "ai" | "tertiary" | "new" = "ai", additionalClasses?: string) => {
     const variantClasses = {
       ai: "pulse-ai",
       tertiary: "pulse-tertiary",
-      new: "pulse-new"
+      new: "pulse-new",
     };
     return cn(variantClasses[variant], additionalClasses);
-  }
+  },
 };
 
 /**
@@ -169,7 +180,7 @@ export const auroraColors = {
   surface: "var(--surface-container)",
   surfaceHigh: "var(--surface-container-high)",
   onSurface: "var(--on-surface)",
-  outline: "var(--outline-variant)"
+  outline: "var(--outline-variant)",
 };
 
 /**
@@ -177,10 +188,10 @@ export const auroraColors = {
  */
 export const auroraMotion = {
   durationShort: "var(--motion-duration-short4)",
-  durationMedium: "var(--motion-duration-medium2)", 
+  durationMedium: "var(--motion-duration-medium2)",
   durationLong: "var(--motion-duration-long2)",
   easeStandard: "var(--motion-easing-standard)",
   easeEmphasized: "var(--motion-easing-emphasized)",
   easeDecelerate: "var(--motion-easing-emphasized-decelerate)",
-  easeAccelerate: "var(--motion-easing-emphasized-accelerate)"
+  easeAccelerate: "var(--motion-easing-emphasized-accelerate)",
 };

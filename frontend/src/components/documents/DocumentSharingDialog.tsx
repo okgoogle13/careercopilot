@@ -4,7 +4,16 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Badge } from '../ui/badge';
-import { Close as X, ContentCopy as Copy, Check, Search, PersonAdd as UserPlus, Mail, Lock, Public as Globe } from '@mui/icons-material';
+import {
+  Close as X,
+  ContentCopy as Copy,
+  Check,
+  Search,
+  PersonAdd as UserPlus,
+  Mail,
+  Lock,
+  Public as Globe,
+} from '@mui/icons-material';
 import { cn } from '../../lib/utils';
 
 type PermissionLevel = 'view' | 'comment' | 'edit';
@@ -50,9 +59,9 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
   const handleInvite = () => {
     const emails = emailInput
       .split(',')
-      .map(e => e.trim())
-      .filter(e => e.includes('@'));
-      
+      .map((e) => e.trim())
+      .filter((e) => e.includes('@'));
+
     if (emails.length > 0) {
       onInvite(emails, selectedPermission);
       setEmailInput('');
@@ -62,36 +71,45 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
 
   const handleCopyLink = () => {
     if (!shareLink) return;
-    
+
     navigator.clipboard.writeText(shareLink);
     setCopied(true);
     onShareLinkCopy?.();
-    
+
     setTimeout(() => {
       setCopied(false);
     }, 2000);
   };
 
-  const filteredCollaborators = collaborators.filter(collab =>
-    collab.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    collab.email.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredCollaborators = collaborators.filter(
+    (collab) =>
+      collab.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      collab.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const getPermissionLabel = (permission: PermissionLevel) => {
     switch (permission) {
-      case 'view': return 'Can view';
-      case 'comment': return 'Can comment';
-      case 'edit': return 'Can edit';
-      default: return '';
+      case 'view':
+        return 'Can view';
+      case 'comment':
+        return 'Can comment';
+      case 'edit':
+        return 'Can edit';
+      default:
+        return '';
     }
   };
 
   const getPermissionColor = (permission: PermissionLevel) => {
     switch (permission) {
-      case 'view': return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
-      case 'comment': return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
-      case 'edit': return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300';
-      default: return '';
+      case 'view':
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
+      case 'comment':
+        return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
+      case 'edit':
+        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300';
+      default:
+        return '';
     }
   };
 
@@ -227,7 +245,9 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                       )}
                       <select
                         value={collab.permission}
-                        onChange={(e) => onUpdatePermission?.(collab.id, e.target.value as PermissionLevel)}
+                        onChange={(e) =>
+                          onUpdatePermission?.(collab.id, e.target.value as PermissionLevel)
+                        }
                         className="text-sm rounded-md border border-input bg-background px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary/50"
                       >
                         <option value="view">Can view</option>

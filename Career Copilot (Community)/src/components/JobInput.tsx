@@ -19,13 +19,13 @@ export function JobInput({ onAnalyze, onBack }: JobInputProps) {
 
   const handleAnalyze = async () => {
     setIsAnalyzing(true);
-    
+
     // Simulate analysis
     setTimeout(() => {
       setIsAnalyzing(false);
       onAnalyze({
         url: activeTab === "url" ? jobUrl : undefined,
-        description: activeTab === "text" ? jobDescription : undefined
+        description: activeTab === "text" ? jobDescription : undefined,
       });
     }, 2000);
   };
@@ -72,9 +72,7 @@ export function JobInput({ onAnalyze, onBack }: JobInputProps) {
 
             <TabsContent value="url" className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-2 block">
-                  Job Posting URL
-                </label>
+                <label className="text-sm font-medium mb-2 block">Job Posting URL</label>
                 <div className="relative">
                   <Input
                     type="url"
@@ -92,18 +90,14 @@ export function JobInput({ onAnalyze, onBack }: JobInputProps) {
 
               {jobUrl && (
                 <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                  <p className="text-sm text-primary">
-                    ✓ Valid job URL detected
-                  </p>
+                  <p className="text-sm text-primary">✓ Valid job URL detected</p>
                 </div>
               )}
             </TabsContent>
 
             <TabsContent value="text" className="space-y-4">
               <div>
-                <label className="text-sm font-medium mb-2 block">
-                  Job Description
-                </label>
+                <label className="text-sm font-medium mb-2 block">Job Description</label>
                 <Textarea
                   placeholder="Paste the complete job description here, including requirements, responsibilities, and qualifications..."
                   value={jobDescription}
@@ -117,9 +111,7 @@ export function JobInput({ onAnalyze, onBack }: JobInputProps) {
 
               {jobDescription.length >= 50 && (
                 <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                  <p className="text-sm text-primary">
-                    ✓ Job description looks good
-                  </p>
+                  <p className="text-sm text-primary">✓ Job description looks good</p>
                 </div>
               )}
             </TabsContent>
@@ -152,29 +144,23 @@ export function JobInput({ onAnalyze, onBack }: JobInputProps) {
               <FileText className="w-6 h-6 text-blue-500" />
             </div>
             <h3 className="font-medium mb-1">Keyword Extraction</h3>
-            <p className="text-sm text-muted-foreground">
-              Identify critical keywords and phrases
-            </p>
+            <p className="text-sm text-muted-foreground">Identify critical keywords and phrases</p>
           </div>
-          
+
           <div className="text-center p-4">
             <div className="w-12 h-12 bg-green-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
               <FileText className="w-6 h-6 text-green-500" />
             </div>
             <h3 className="font-medium mb-1">ATS Optimization</h3>
-            <p className="text-sm text-muted-foreground">
-              Ensure your document passes ATS systems
-            </p>
+            <p className="text-sm text-muted-foreground">Ensure your document passes ATS systems</p>
           </div>
-          
+
           <div className="text-center p-4">
             <div className="w-12 h-12 bg-purple-500/10 rounded-lg flex items-center justify-center mx-auto mb-3">
               <FileText className="w-6 h-6 text-purple-500" />
             </div>
             <h3 className="font-medium mb-1">Match Analysis</h3>
-            <p className="text-sm text-muted-foreground">
-              Calculate your compatibility score
-            </p>
+            <p className="text-sm text-muted-foreground">Calculate your compatibility score</p>
           </div>
         </div>
       </div>

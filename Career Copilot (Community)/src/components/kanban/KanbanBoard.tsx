@@ -1,21 +1,21 @@
-import React, { useState, useRef } from 'react';
-import { Card } from '../ui/card';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Avatar } from '../ui/avatar';
-import { 
-  Plus, 
-  Building2, 
-  Calendar, 
-  DollarSign, 
-  MapPin, 
+import React, { useState, useRef } from "react";
+import { Card } from "../ui/card";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { Avatar } from "../ui/avatar";
+import {
+  Plus,
+  Building2,
+  Calendar,
+  DollarSign,
+  MapPin,
   MoreVertical,
   Briefcase,
   Clock,
   CheckCircle,
   XCircle,
-  AlertCircle
-} from 'lucide-react';
+  AlertCircle,
+} from "lucide-react";
 
 interface ApplicationCard {
   id: string;
@@ -24,8 +24,8 @@ interface ApplicationCard {
   location: string;
   salary?: string;
   appliedDate: string;
-  status: 'applied' | 'interviewing' | 'offer' | 'rejected';
-  priority: 'low' | 'medium' | 'high';
+  status: "applied" | "interviewing" | "offer" | "rejected";
+  priority: "low" | "medium" | "high";
   logo?: string;
   notes?: string;
 }
@@ -33,7 +33,7 @@ interface ApplicationCard {
 interface KanbanColumn {
   id: string;
   title: string;
-  status: ApplicationCard['status'];
+  status: ApplicationCard["status"];
   cards: ApplicationCard[];
   color: string;
   icon: React.ComponentType<any>;
@@ -41,45 +41,45 @@ interface KanbanColumn {
 
 const mockApplications: ApplicationCard[] = [
   {
-    id: '1',
-    jobTitle: 'Senior Frontend Developer',
-    company: 'TechCorp',
-    location: 'San Francisco, CA',
-    salary: '$120k - $150k',
-    appliedDate: '2024-01-15',
-    status: 'applied',
-    priority: 'high'
+    id: "1",
+    jobTitle: "Senior Frontend Developer",
+    company: "TechCorp",
+    location: "San Francisco, CA",
+    salary: "$120k - $150k",
+    appliedDate: "2024-01-15",
+    status: "applied",
+    priority: "high",
   },
   {
-    id: '2',
-    jobTitle: 'Full Stack Engineer',
-    company: 'StartupXYZ',
-    location: 'Remote',
-    salary: '$100k - $130k',
-    appliedDate: '2024-01-12',
-    status: 'interviewing',
-    priority: 'high'
+    id: "2",
+    jobTitle: "Full Stack Engineer",
+    company: "StartupXYZ",
+    location: "Remote",
+    salary: "$100k - $130k",
+    appliedDate: "2024-01-12",
+    status: "interviewing",
+    priority: "high",
   },
   {
-    id: '3',
-    jobTitle: 'UI/UX Developer',
-    company: 'DesignCo',
-    location: 'New York, NY',
-    salary: '$90k - $110k',
-    appliedDate: '2024-01-10',
-    status: 'offer',
-    priority: 'medium'
+    id: "3",
+    jobTitle: "UI/UX Developer",
+    company: "DesignCo",
+    location: "New York, NY",
+    salary: "$90k - $110k",
+    appliedDate: "2024-01-10",
+    status: "offer",
+    priority: "medium",
   },
   {
-    id: '4',
-    jobTitle: 'React Developer',
-    company: 'WebAgency',
-    location: 'Austin, TX',
-    salary: '$85k - $105k',
-    appliedDate: '2024-01-08',
-    status: 'rejected',
-    priority: 'low'
-  }
+    id: "4",
+    jobTitle: "React Developer",
+    company: "WebAgency",
+    location: "Austin, TX",
+    salary: "$85k - $105k",
+    appliedDate: "2024-01-08",
+    status: "rejected",
+    priority: "low",
+  },
 ];
 
 const ApplicationCardComponent: React.FC<{
@@ -89,10 +89,14 @@ const ApplicationCardComponent: React.FC<{
 }> = ({ card, onDragStart, isDragging = false }) => {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'bg-brand-tertiary text-brand-on-tertiary';
-      case 'medium': return 'bg-brand-primary text-brand-on-primary';
-      case 'low': return 'bg-brand-secondary text-brand-on-secondary';
-      default: return 'bg-surface-container text-on-surface';
+      case "high":
+        return "bg-brand-tertiary text-brand-on-tertiary";
+      case "medium":
+        return "bg-brand-primary text-brand-on-primary";
+      case "low":
+        return "bg-brand-secondary text-brand-on-secondary";
+      default:
+        return "bg-surface-container text-on-surface";
     }
   };
 
@@ -101,11 +105,11 @@ const ApplicationCardComponent: React.FC<{
   };
 
   return (
-    <Card 
+    <Card
       className={`
         p-4 cursor-grab active:cursor-grabbing transition-all duration-300
         card-aurora hover:card-aurora
-        ${isDragging ? 'opacity-50 rotate-2 scale-105' : ''}
+        ${isDragging ? "opacity-50 rotate-2 scale-105" : ""}
       `}
       draggable
       onDragStart={(e) => onDragStart(e, card.id)}
@@ -120,9 +124,7 @@ const ApplicationCardComponent: React.FC<{
               </div>
             </Avatar>
             <div className="flex-1 min-w-0">
-              <h3 className="font-medium text-on-surface truncate mb-1">
-                {card.jobTitle}
-              </h3>
+              <h3 className="font-medium text-on-surface truncate mb-1">{card.jobTitle}</h3>
               <p className="text-sm text-on-surface-variant flex items-center gap-1">
                 <Building2 className="w-3 h-3" />
                 {card.company}
@@ -154,10 +156,7 @@ const ApplicationCardComponent: React.FC<{
 
         {/* Footer */}
         <div className="flex items-center justify-between pt-2">
-          <Badge 
-            variant="secondary" 
-            className={`text-xs ${getPriorityColor(card.priority)}`}
-          >
+          <Badge variant="secondary" className={`text-xs ${getPriorityColor(card.priority)}`}>
             {card.priority.toUpperCase()} PRIORITY
           </Badge>
           <div className="flex gap-1">
@@ -207,13 +206,13 @@ const KanbanColumn: React.FC<{
           <div>
             <h3 className="font-medium text-on-surface">{column.title}</h3>
             <p className="text-sm text-on-surface-variant">
-              {column.cards.length} application{column.cards.length !== 1 ? 's' : ''}
+              {column.cards.length} application{column.cards.length !== 1 ? "s" : ""}
             </p>
           </div>
         </div>
-        <Button 
-          variant="ghost" 
-          size="sm" 
+        <Button
+          variant="ghost"
+          size="sm"
           onClick={() => onAddCard(column.id)}
           className="h-8 w-8 p-0 hover:bg-surface-container-high"
         >
@@ -225,9 +224,10 @@ const KanbanColumn: React.FC<{
       <div
         className={`
           flex-1 p-2 rounded-lg border-2 border-dashed transition-all duration-200
-          ${isDragOver 
-            ? 'border-brand-primary bg-brand-primary/10' 
-            : 'border-outline-variant bg-surface-container-lowest/50'
+          ${
+            isDragOver
+              ? "border-brand-primary bg-brand-primary/10"
+              : "border-outline-variant bg-surface-container-lowest/50"
           }
         `}
         onDragOver={handleDragOver}
@@ -239,9 +239,9 @@ const KanbanColumn: React.FC<{
             <div className="flex flex-col items-center justify-center py-12 text-center">
               <IconComponent className="w-12 h-12 text-on-surface-variant/40 mb-3" />
               <p className="text-sm text-on-surface-variant mb-2">No applications</p>
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={() => onAddCard(column.id)}
                 className="btn-gradient text-xs"
               >
@@ -251,11 +251,11 @@ const KanbanColumn: React.FC<{
             </div>
           ) : (
             column.cards.map((card) => (
-              <ApplicationCardComponent 
-                key={card.id} 
-                card={card} 
+              <ApplicationCardComponent
+                key={card.id}
+                card={card}
                 onDragStart={(e, cardId) => {
-                  e.dataTransfer.setData('text/plain', cardId);
+                  e.dataTransfer.setData("text/plain", cardId);
                 }}
                 isDragging={draggedCard === card.id}
               />
@@ -272,59 +272,56 @@ interface KanbanBoardProps {
   className?: string;
 }
 
-export const KanbanBoard: React.FC<KanbanBoardProps> = ({ 
-  onBack, 
-  className = '' 
-}) => {
+export const KanbanBoard: React.FC<KanbanBoardProps> = ({ onBack, className = "" }) => {
   const [draggedCard, setDraggedCard] = useState<string | null>(null);
   const [columns, setColumns] = useState<KanbanColumn[]>([
     {
-      id: 'applied',
-      title: 'Applied',
-      status: 'applied',
-      cards: mockApplications.filter(app => app.status === 'applied'),
-      color: 'bg-brand-secondary',
-      icon: Briefcase
+      id: "applied",
+      title: "Applied",
+      status: "applied",
+      cards: mockApplications.filter((app) => app.status === "applied"),
+      color: "bg-brand-secondary",
+      icon: Briefcase,
     },
     {
-      id: 'interviewing',
-      title: 'Interviewing',
-      status: 'interviewing',
-      cards: mockApplications.filter(app => app.status === 'interviewing'),
-      color: 'bg-brand-primary',
-      icon: Clock
+      id: "interviewing",
+      title: "Interviewing",
+      status: "interviewing",
+      cards: mockApplications.filter((app) => app.status === "interviewing"),
+      color: "bg-brand-primary",
+      icon: Clock,
     },
     {
-      id: 'offer',
-      title: 'Offer',
-      status: 'offer',
-      cards: mockApplications.filter(app => app.status === 'offer'),
-      color: 'bg-aurora-tertiary',
-      icon: CheckCircle
+      id: "offer",
+      title: "Offer",
+      status: "offer",
+      cards: mockApplications.filter((app) => app.status === "offer"),
+      color: "bg-aurora-tertiary",
+      icon: CheckCircle,
     },
     {
-      id: 'rejected',
-      title: 'Rejected',
-      status: 'rejected',
-      cards: mockApplications.filter(app => app.status === 'rejected'),
-      color: 'bg-brand-error',
-      icon: XCircle
-    }
+      id: "rejected",
+      title: "Rejected",
+      status: "rejected",
+      cards: mockApplications.filter((app) => app.status === "rejected"),
+      color: "bg-brand-error",
+      icon: XCircle,
+    },
   ]);
 
   const handleCardDrop = (e: React.DragEvent, columnId: string) => {
     e.preventDefault();
-    const cardId = e.dataTransfer.getData('text/plain');
-    
+    const cardId = e.dataTransfer.getData("text/plain");
+
     if (!cardId) return;
 
-    setColumns(prev => {
+    setColumns((prev) => {
       const newColumns = [...prev];
-      
+
       // Find and remove card from source column
       let cardToMove: ApplicationCard | null = null;
-      newColumns.forEach(column => {
-        const cardIndex = column.cards.findIndex(card => card.id === cardId);
+      newColumns.forEach((column) => {
+        const cardIndex = column.cards.findIndex((card) => card.id === cardId);
         if (cardIndex !== -1) {
           cardToMove = column.cards.splice(cardIndex, 1)[0];
         }
@@ -332,7 +329,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
 
       // Add card to target column with updated status
       if (cardToMove) {
-        const targetColumn = newColumns.find(col => col.id === columnId);
+        const targetColumn = newColumns.find((col) => col.id === columnId);
         if (targetColumn) {
           cardToMove.status = targetColumn.status;
           targetColumn.cards.push(cardToMove);
@@ -363,9 +360,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
         <div className="p-6">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h1 className="text-2xl font-medium text-on-surface mb-2">
-                Application Tracker
-              </h1>
+              <h1 className="text-2xl font-medium text-on-surface mb-2">Application Tracker</h1>
               <p className="text-on-surface-variant">
                 Manage your job applications across different stages
               </p>
@@ -376,7 +371,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
               </Button>
             )}
           </div>
-          
+
           {/* Stats */}
           <div className="flex gap-4">
             <div className="flex items-center gap-2 text-sm">
@@ -388,7 +383,8 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
             <div className="flex items-center gap-2 text-sm">
               <AlertCircle className="w-3 h-3 text-brand-tertiary" />
               <span className="text-on-surface-variant">
-                {columns.find(col => col.id === 'interviewing')?.cards.length || 0} Active Interviews
+                {columns.find((col) => col.id === "interviewing")?.cards.length || 0} Active
+                Interviews
               </span>
             </div>
           </div>

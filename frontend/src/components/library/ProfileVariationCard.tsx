@@ -6,7 +6,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Star, MoreVert, Edit, ContentCopy as Copy, Delete, CalendarMonth, Tag } from '@mui/icons-material';
+import {
+  Star,
+  MoreVert,
+  Edit,
+  ContentCopy as Copy,
+  Delete,
+  CalendarMonth,
+  Tag,
+} from '@mui/icons-material';
 import { format } from 'date-fns';
 import {
   Button,

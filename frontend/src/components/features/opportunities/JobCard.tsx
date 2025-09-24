@@ -8,7 +8,7 @@ import {
   Box,
   Chip,
   Avatar,
-  IconButton
+  IconButton,
 } from '@mui/material';
 import {
   MapPin,
@@ -17,11 +17,16 @@ import {
   Bookmark,
   BookmarkCheck,
   ExternalLink,
-  Building2
+  Building2,
 } from '@mui/icons-material';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
-type ExperienceLevel = 'Entry Level' | 'Mid Level' | 'Senior Level' | 'Lead/Principal' | 'Executive';
+type ExperienceLevel =
+  | 'Entry Level'
+  | 'Mid Level'
+  | 'Senior Level'
+  | 'Lead/Principal'
+  | 'Executive';
 
 interface JobCardProps {
   id: string;
@@ -58,7 +63,7 @@ export function JobCard({
   isRemote = false,
   onBookmark,
   onApply,
-  onViewDetails
+  onViewDetails,
 }: JobCardProps) {
   const handleBookmark = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -75,28 +80,16 @@ export function JobCard({
         <Box className="flex items-start justify-between mb-4">
           <Box className="flex items-start gap-3 flex-1">
             {/* Company Logo */}
-            <Avatar
-              src={companyLogo}
-              className="w-12 h-12"
-              sx={{ bgcolor: 'primary.main' }}
-            >
+            <Avatar src={companyLogo} className="w-12 h-12" sx={{ bgcolor: 'primary.main' }}>
               <Building2 sx={{ fontSize: 20 }} />
             </Avatar>
 
             {/* Job Info */}
             <Box className="flex-1 min-w-0">
-              <Typography
-                variant="h6"
-                className="font-semibold mb-1 truncate"
-                title={title}
-              >
+              <Typography variant="h6" className="font-semibold mb-1 truncate" title={title}>
                 {title}
               </Typography>
-              <Typography
-                variant="body1"
-                color="text.secondary"
-                className="mb-2"
-              >
+              <Typography variant="body1" color="text.secondary" className="mb-2">
                 {company}
               </Typography>
 
@@ -106,7 +99,11 @@ export function JobCard({
                   <MapPin sx={{ fontSize: 14 }} />
                   <span>{location}</span>
                   {isRemote && (
-                    <Chip label="Remote" size="small" className="ml-1 bg-green-100 text-green-800" />
+                    <Chip
+                      label="Remote"
+                      size="small"
+                      className="ml-1 bg-green-100 text-green-800"
+                    />
                   )}
                 </Box>
                 <Box className="flex items-center gap-1">
@@ -127,7 +124,7 @@ export function JobCard({
           <IconButton
             onClick={handleBookmark}
             className="text-gray-400 hover:text-primary"
-            aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+            aria-label={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
           >
             {isBookmarked ? (
               <BookmarkCheck sx={{ fontSize: 20 }} className="text-primary" />
@@ -154,11 +151,7 @@ export function JobCard({
         </Box>
 
         {/* Description */}
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          className="mb-4 line-clamp-3"
-        >
+        <Typography variant="body2" color="text.secondary" className="mb-4 line-clamp-3">
           {description}
         </Typography>
 
@@ -169,12 +162,7 @@ export function JobCard({
           </Typography>
           <Box className="flex flex-wrap gap-1">
             {skills.slice(0, 5).map((skill, index) => (
-              <Chip
-                key={index}
-                label={skill}
-                size="small"
-                className="bg-gray-100 text-gray-800"
-              />
+              <Chip key={index} label={skill} size="small" className="bg-gray-100 text-gray-800" />
             ))}
             {skills.length > 5 && (
               <Chip

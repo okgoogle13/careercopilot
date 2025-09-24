@@ -16,7 +16,7 @@ import {
   Tabs,
   Tab,
   Grid,
-  IconButton
+  IconButton,
 } from '@mui/material';
 import {
   PlayArrow as Play,
@@ -29,7 +29,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Mic,
-  MicOff
+  MicOff,
 } from '@mui/icons-material';
 
 interface InterviewQuestion {
@@ -53,60 +53,63 @@ const sampleQuestions: InterviewQuestion[] = [
     id: '1',
     category: 'behavioral',
     difficulty: 'medium',
-    question: 'Tell me about a time when you had to work with a difficult team member. How did you handle the situation?',
+    question:
+      'Tell me about a time when you had to work with a difficult team member. How did you handle the situation?',
     tips: [
       'Use the STAR method (Situation, Task, Action, Result)',
       'Focus on your problem-solving approach',
       'Show empathy and professionalism',
-      'Highlight positive outcomes'
+      'Highlight positive outcomes',
     ],
     keyPoints: [
       'Communication skills',
       'Conflict resolution',
       'Team collaboration',
-      'Leadership potential'
+      'Leadership potential',
     ],
     followUpQuestions: [
       'What would you do differently next time?',
-      'How did this experience change your approach to teamwork?'
-    ]
+      'How did this experience change your approach to teamwork?',
+    ],
   },
   {
     id: '2',
     category: 'technical',
     difficulty: 'hard',
-    question: 'Explain the difference between SQL and NoSQL databases. When would you choose one over the other?',
+    question:
+      'Explain the difference between SQL and NoSQL databases. When would you choose one over the other?',
     tips: [
       'Start with basic definitions',
       'Give concrete examples of each type',
       'Discuss use cases and trade-offs',
-      'Mention scalability considerations'
+      'Mention scalability considerations',
     ],
     keyPoints: [
       'Database knowledge',
       'System design thinking',
       'Decision-making process',
-      'Understanding of trade-offs'
-    ]
+      'Understanding of trade-offs',
+    ],
   },
   {
     id: '3',
     category: 'situational',
     difficulty: 'medium',
-    question: 'If you were given a project with a tight deadline and limited resources, how would you prioritize tasks?',
+    question:
+      'If you were given a project with a tight deadline and limited resources, how would you prioritize tasks?',
     tips: [
       'Discuss your prioritization framework',
       'Mention stakeholder communication',
       'Show flexibility and adaptability',
-      'Highlight project management skills'
+      'Highlight project management skills',
     ],
     keyPoints: [
       'Time management',
       'Priority setting',
       'Resource allocation',
-      'Stakeholder management'
-    ]
-  }
+      'Stakeholder management',
+    ],
+  },
 ];
 
 const categories = [
@@ -114,20 +117,20 @@ const categories = [
   { value: 'behavioral', label: 'Behavioral' },
   { value: 'technical', label: 'Technical' },
   { value: 'situational', label: 'Situational' },
-  { value: 'company', label: 'Company-Specific' }
+  { value: 'company', label: 'Company-Specific' },
 ];
 
 const difficulties = [
   { value: 'all', label: 'All Levels' },
   { value: 'easy', label: 'Easy' },
   { value: 'medium', label: 'Medium' },
-  { value: 'hard', label: 'Hard' }
+  { value: 'hard', label: 'Hard' },
 ];
 
 export function InterviewPrep({
   jobTitle = 'Software Engineer',
   company = 'Tech Company',
-  interviewType = 'Technical Interview'
+  interviewType = 'Technical Interview',
 }: InterviewPrepProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -139,7 +142,7 @@ export function InterviewPrep({
   const [timer, setTimer] = useState(0);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  const filteredQuestions = sampleQuestions.filter(q => {
+  const filteredQuestions = sampleQuestions.filter((q) => {
     const categoryMatch = selectedCategory === 'all' || q.category === selectedCategory;
     const difficultyMatch = selectedDifficulty === 'all' || q.difficulty === selectedDifficulty;
     return categoryMatch && difficultyMatch;
@@ -152,7 +155,7 @@ export function InterviewPrep({
     let interval: NodeJS.Timeout;
     if (isTimerRunning) {
       interval = setInterval(() => {
-        setTimer(timer => timer + 1);
+        setTimer((timer) => timer + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -311,8 +314,8 @@ export function InterviewPrep({
                       currentQuestion.difficulty === 'easy'
                         ? 'bg-green-100 text-green-800'
                         : currentQuestion.difficulty === 'medium'
-                        ? 'bg-yellow-100 text-yellow-800'
-                        : 'bg-red-100 text-red-800'
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-red-100 text-red-800'
                     }
                   />
                 </Box>
@@ -350,9 +353,11 @@ export function InterviewPrep({
               <Box className="flex items-center justify-between mb-6">
                 <Box className="flex items-center gap-2">
                   <Button
-                    variant={isRecording ? "contained" : "outlined"}
+                    variant={isRecording ? 'contained' : 'outlined'}
                     onClick={isRecording ? handleStopRecording : handleStartRecording}
-                    startIcon={isRecording ? <MicOff sx={{ fontSize: 16 }} /> : <Mic sx={{ fontSize: 16 }} />}
+                    startIcon={
+                      isRecording ? <MicOff sx={{ fontSize: 16 }} /> : <Mic sx={{ fontSize: 16 }} />
+                    }
                     className={isRecording ? 'bg-red-500 hover:bg-red-600' : ''}
                   >
                     {isRecording ? 'Stop Recording' : 'Record Answer'}
@@ -392,8 +397,9 @@ export function InterviewPrep({
                     AI Feedback:
                   </Typography>
                   <Typography variant="body2" className="mb-2">
-                    Good structure using the STAR method! Your answer demonstrates strong problem-solving skills.
-                    Consider adding more specific metrics or outcomes to strengthen your response.
+                    Good structure using the STAR method! Your answer demonstrates strong
+                    problem-solving skills. Consider adding more specific metrics or outcomes to
+                    strengthen your response.
                   </Typography>
                   <Box className="flex items-center gap-1 mt-2">
                     <Star sx={{ fontSize: 16 }} className="text-yellow-500" />

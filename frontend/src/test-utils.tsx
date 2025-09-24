@@ -3,10 +3,7 @@ import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
 // Wrap render with act by default
-const customRender = (
-  ui: ReactElement,
-  options?: Omit<RenderOptions, 'queries'>
-): RenderResult => {
+const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'queries'>): RenderResult => {
   let result: RenderResult;
   act(() => {
     result = render(ui, options);
@@ -27,7 +24,7 @@ export const actAsync = async (callback: () => Promise<void> | void) => {
 };
 
 // Helper to wait for state updates
-const waitForNextTick = () => new Promise(resolve => setTimeout(resolve, 0));
+const waitForNextTick = () => new Promise((resolve) => setTimeout(resolve, 0));
 
 export const waitForStateUpdate = async (count = 1) => {
   for (let i = 0; i < count; i++) {

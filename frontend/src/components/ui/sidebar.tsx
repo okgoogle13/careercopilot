@@ -90,12 +90,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   const { open } = useContext(SidebarContext);
 
   return (
-    <StyledDrawer
-      variant="permanent"
-      open={open}
-      collapsible={collapsible}
-      className={className}
-    >
+    <StyledDrawer variant="permanent" open={open} collapsible={collapsible} className={className}>
       {children}
     </StyledDrawer>
   );
@@ -107,10 +102,7 @@ export interface SidebarHeaderProps {
   className?: string;
 }
 
-export const SidebarHeader: React.FC<SidebarHeaderProps> = ({
-  children,
-  className,
-}) => {
+export const SidebarHeader: React.FC<SidebarHeaderProps> = ({ children, className }) => {
   return (
     <Box
       className={className}
@@ -130,10 +122,7 @@ export interface SidebarContentProps {
   className?: string;
 }
 
-export const SidebarContent: React.FC<SidebarContentProps> = ({
-  children,
-  className,
-}) => {
+export const SidebarContent: React.FC<SidebarContentProps> = ({ children, className }) => {
   return <StyledSidebarContent className={className}>{children}</StyledSidebarContent>;
 };
 
@@ -143,10 +132,7 @@ export interface SidebarFooterProps {
   className?: string;
 }
 
-export const SidebarFooter: React.FC<SidebarFooterProps> = ({
-  children,
-  className,
-}) => {
+export const SidebarFooter: React.FC<SidebarFooterProps> = ({ children, className }) => {
   return (
     <Box
       className={className}
@@ -166,10 +152,7 @@ export interface SidebarMenuProps {
   className?: string;
 }
 
-export const SidebarMenu: React.FC<SidebarMenuProps> = ({
-  children,
-  className,
-}) => {
+export const SidebarMenu: React.FC<SidebarMenuProps> = ({ children, className }) => {
   return <List className={className}>{children}</List>;
 };
 
@@ -179,11 +162,12 @@ export interface SidebarMenuItemProps {
   className?: string;
 }
 
-export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
-  children,
-  className,
-}) => {
-  return <ListItem className={className} disablePadding>{children}</ListItem>;
+export const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({ children, className }) => {
+  return (
+    <ListItem className={className} disablePadding>
+      {children}
+    </ListItem>
+  );
 };
 
 // Sidebar Menu Button
@@ -231,19 +215,18 @@ export const SidebarMenuButton: React.FC<SidebarMenuButtonProps> = ({
           );
         } else {
           // Remaining children are text
-          return (
-            <ListItemText
-              primary={child}
-              sx={{ opacity: open ? 1 : 0 }}
-            />
-          );
+          return <ListItemText primary={child} sx={{ opacity: open ? 1 : 0 }} />;
         }
       })}
     </ListItemButton>
   );
 
   if (!open && tooltip) {
-    return <Tooltip title={tooltip} placement="right">{button}</Tooltip>;
+    return (
+      <Tooltip title={tooltip} placement="right">
+        {button}
+      </Tooltip>
+    );
   }
 
   return button;
@@ -254,17 +237,11 @@ export interface SidebarTriggerProps {
   className?: string;
 }
 
-export const SidebarTrigger: React.FC<SidebarTriggerProps> = ({
-  className,
-}) => {
+export const SidebarTrigger: React.FC<SidebarTriggerProps> = ({ className }) => {
   const { open, setOpen } = useContext(SidebarContext);
 
   return (
-    <IconButton
-      onClick={() => setOpen(!open)}
-      className={className}
-      size="small"
-    >
+    <IconButton onClick={() => setOpen(!open)} className={className} size="small">
       <MenuIcon />
     </IconButton>
   );
@@ -276,10 +253,7 @@ export interface SidebarInsetProps {
   className?: string;
 }
 
-export const SidebarInset: React.FC<SidebarInsetProps> = ({
-  children,
-  className,
-}) => {
+export const SidebarInset: React.FC<SidebarInsetProps> = ({ children, className }) => {
   const { open } = useContext(SidebarContext);
 
   return (

@@ -8,7 +8,7 @@ import {
   Avatar,
   IconButton,
   Button,
-  Divider
+  Divider,
 } from '@mui/material';
 import {
   Schedule as Clock,
@@ -18,7 +18,7 @@ import {
   CalendarToday as Calendar,
   ChatBubble as MessageCircle,
   Edit,
-  OpenInNew as ExternalLink
+  OpenInNew as ExternalLink,
 } from '@mui/icons-material';
 
 interface TimelineEvent {
@@ -53,7 +53,7 @@ const eventIcons = {
   response: MessageCircle,
   follow_up: Clock,
   offer: CheckCircle,
-  rejection: AlertCircle
+  rejection: AlertCircle,
 };
 
 const eventColors = {
@@ -62,14 +62,14 @@ const eventColors = {
   response: 'bg-green-100 text-green-600',
   follow_up: 'bg-orange-100 text-orange-600',
   offer: 'bg-green-100 text-green-600',
-  rejection: 'bg-red-100 text-red-600'
+  rejection: 'bg-red-100 text-red-600',
 };
 
 const statusColors = {
   completed: 'success',
   upcoming: 'primary',
   pending: 'warning',
-  cancelled: 'error'
+  cancelled: 'error',
 } as const;
 
 export function TimelineView({
@@ -79,9 +79,11 @@ export function TimelineView({
   events,
   onEventEdit,
   onAddNote,
-  onViewDocument
+  onViewDocument,
 }: TimelineViewProps) {
-  const sortedEvents = [...events].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  const sortedEvents = [...events].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
 
   const renderEventContent = (event: TimelineEvent) => {
     const IconComponent = eventIcons[event.type];
@@ -138,9 +140,7 @@ export function TimelineView({
                       <Typography variant="caption" color="text.secondary" className="block mb-1">
                         Interviewer:
                       </Typography>
-                      <Typography variant="body2">
-                        {event.metadata.interviewer}
-                      </Typography>
+                      <Typography variant="body2">{event.metadata.interviewer}</Typography>
                     </Box>
                   )}
 
@@ -149,11 +149,7 @@ export function TimelineView({
                       <Typography variant="caption" color="text.secondary" className="block mb-1">
                         Interview Type:
                       </Typography>
-                      <Chip
-                        label={event.metadata.interviewType}
-                        size="small"
-                        variant="outlined"
-                      />
+                      <Chip label={event.metadata.interviewType} size="small" variant="outlined" />
                     </Box>
                   )}
 
@@ -247,9 +243,7 @@ export function TimelineView({
               <Box className="absolute left-6 w-4 h-4 rounded-full bg-white border-4 border-primary z-10" />
 
               {/* Event Content */}
-              <Box className="ml-16">
-                {renderEventContent(event)}
-              </Box>
+              <Box className="ml-16">{renderEventContent(event)}</Box>
             </Box>
           ))}
         </Box>
@@ -285,7 +279,7 @@ export function TimelineView({
           <Box className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
             <Box>
               <Typography variant="h4" className="font-bold text-blue-600">
-                {events.filter(e => e.status === 'completed').length}
+                {events.filter((e) => e.status === 'completed').length}
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 Completed Events
@@ -293,7 +287,7 @@ export function TimelineView({
             </Box>
             <Box>
               <Typography variant="h4" className="font-bold text-orange-600">
-                {events.filter(e => e.status === 'upcoming').length}
+                {events.filter((e) => e.status === 'upcoming').length}
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 Upcoming Events
@@ -301,7 +295,10 @@ export function TimelineView({
             </Box>
             <Box>
               <Typography variant="h4" className="font-bold text-gray-600">
-                {Math.floor((Date.now() - new Date(events[0]?.date || Date.now()).getTime()) / (1000 * 60 * 60 * 24))}
+                {Math.floor(
+                  (Date.now() - new Date(events[0]?.date || Date.now()).getTime()) /
+                    (1000 * 60 * 60 * 24)
+                )}
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 Days Since Applied

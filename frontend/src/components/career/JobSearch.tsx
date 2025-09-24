@@ -10,16 +10,27 @@ import {
   InputLabel,
   Pagination,
   Paper,
-  Divider
+  Divider,
 } from '@mui/material';
 import { FilterPanel, JobFilters } from '../features/opportunities/FilterPanel';
 import { JobCard } from '../features/opportunities/JobCard';
 import { LoadingState } from '../ui/LoadingState';
 import { EmptyState } from '../ui/EmptyState';
-import { Search, Tune as SlidersHorizontal, GridView as Grid3X3, List, Work as Briefcase } from '@mui/icons-material';
+import {
+  Search,
+  Tune as SlidersHorizontal,
+  GridView as Grid3X3,
+  List,
+  Work as Briefcase,
+} from '@mui/icons-material';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
-type ExperienceLevel = 'Entry Level' | 'Mid Level' | 'Senior Level' | 'Lead/Principal' | 'Executive';
+type ExperienceLevel =
+  | 'Entry Level'
+  | 'Mid Level'
+  | 'Senior Level'
+  | 'Lead/Principal'
+  | 'Executive';
 
 interface Job {
   id: string;
@@ -54,11 +65,12 @@ const sampleJobs: Job[] = [
     type: 'Full-time',
     experience: 'Senior Level',
     salary: '$140K - $200K',
-    description: 'We are looking for a Senior Software Engineer to join our team and help build scalable web applications. You will work with cutting-edge technologies and collaborate with a diverse team of engineers.',
+    description:
+      'We are looking for a Senior Software Engineer to join our team and help build scalable web applications. You will work with cutting-edge technologies and collaborate with a diverse team of engineers.',
     skills: ['JavaScript', 'React', 'Node.js', 'Python', 'GCP'],
     postedDate: '2 days ago',
     isBookmarked: false,
-    isRemote: true
+    isRemote: true,
   },
   {
     id: '2',
@@ -68,11 +80,12 @@ const sampleJobs: Job[] = [
     type: 'Full-time',
     experience: 'Mid Level',
     salary: '$110K - $160K',
-    description: 'Join our frontend team to build amazing user experiences. We work with React, TypeScript, and modern web technologies to create products used by millions.',
+    description:
+      'Join our frontend team to build amazing user experiences. We work with React, TypeScript, and modern web technologies to create products used by millions.',
     skills: ['TypeScript', 'React', 'CSS', 'Azure', 'Jest'],
     postedDate: '1 day ago',
     isBookmarked: true,
-    isRemote: false
+    isRemote: false,
   },
   {
     id: '3',
@@ -82,11 +95,12 @@ const sampleJobs: Job[] = [
     type: 'Full-time',
     experience: 'Mid Level',
     salary: '$90K - $130K',
-    description: 'Be part of a fast-growing startup and help shape the future of our product. You will work across the entire stack and have significant impact on our technology decisions.',
+    description:
+      'Be part of a fast-growing startup and help shape the future of our product. You will work across the entire stack and have significant impact on our technology decisions.',
     skills: ['JavaScript', 'Node.js', 'PostgreSQL', 'Docker', 'AWS'],
     postedDate: '3 days ago',
     isBookmarked: false,
-    isRemote: true
+    isRemote: true,
   },
   {
     id: '4',
@@ -96,19 +110,20 @@ const sampleJobs: Job[] = [
     type: 'Full-time',
     experience: 'Senior Level',
     salary: '$130K - $180K',
-    description: 'Help us scale our infrastructure to serve millions of users worldwide. You will work with Kubernetes, AWS, and other modern DevOps tools.',
+    description:
+      'Help us scale our infrastructure to serve millions of users worldwide. You will work with Kubernetes, AWS, and other modern DevOps tools.',
     skills: ['Kubernetes', 'AWS', 'Docker', 'Python', 'Terraform'],
     postedDate: '1 week ago',
     isBookmarked: false,
-    isRemote: true
-  }
+    isRemote: true,
+  },
 ];
 
 const sortOptions = [
   { value: 'relevance', label: 'Most Relevant' },
   { value: 'date', label: 'Most Recent' },
   { value: 'salary', label: 'Highest Salary' },
-  { value: 'company', label: 'Company Name' }
+  { value: 'company', label: 'Company Name' },
 ];
 
 export function JobSearch({
@@ -116,7 +131,7 @@ export function JobSearch({
   isLoading = false,
   onJobApply,
   onJobBookmark,
-  onJobView
+  onJobView,
 }: JobSearchProps) {
   const [jobs, setJobs] = useState<Job[]>(initialJobs);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>(initialJobs);
@@ -140,39 +155,42 @@ export function JobSearch({
       // Apply search query filter
       if (filters.searchQuery) {
         const query = filters.searchQuery.toLowerCase();
-        filtered = filtered.filter(job =>
-          job.title.toLowerCase().includes(query) ||
-          job.company.toLowerCase().includes(query) ||
-          job.skills.some(skill => skill.toLowerCase().includes(query))
+        filtered = filtered.filter(
+          (job) =>
+            job.title.toLowerCase().includes(query) ||
+            job.company.toLowerCase().includes(query) ||
+            job.skills.some((skill) => skill.toLowerCase().includes(query))
         );
       }
 
       // Apply location filter
       if (filters.location.length > 0) {
-        filtered = filtered.filter(job =>
-          filters.location.some(loc => job.location.includes(loc) || (job.isRemote && loc === 'Remote'))
+        filtered = filtered.filter((job) =>
+          filters.location.some(
+            (loc) => job.location.includes(loc) || (job.isRemote && loc === 'Remote')
+          )
         );
       }
 
       // Apply job type filter
       if (filters.jobType.length > 0) {
-        filtered = filtered.filter(job => filters.jobType.includes(job.type));
+        filtered = filtered.filter((job) => filters.jobType.includes(job.type));
       }
 
       // Apply experience level filter
       if (filters.experienceLevel.length > 0) {
-        filtered = filtered.filter(job => filters.experienceLevel.includes(job.experience));
+        filtered = filtered.filter((job) => filters.experienceLevel.includes(job.experience));
       }
 
       // Apply remote filter
       if (filters.remote) {
-        filtered = filtered.filter(job => job.isRemote);
+        filtered = filtered.filter((job) => job.isRemote);
       }
 
       // Apply skills filter
       if (filters.skills.length > 0) {
-        filtered = filtered.filter(job =>
-          filters.skills.some(skill => job.skills.includes(skill))
+        filtered = filtered.filter((job) =>
+          filters.skills.some((skill) => job.skills.includes(skill))
         );
       }
     }
@@ -201,9 +219,9 @@ export function JobSearch({
   };
 
   const handleBookmark = (jobId: string) => {
-    setJobs(prev => prev.map(job =>
-      job.id === jobId ? { ...job, isBookmarked: !job.isBookmarked } : job
-    ));
+    setJobs((prev) =>
+      prev.map((job) => (job.id === jobId ? { ...job, isBookmarked: !job.isBookmarked } : job))
+    );
     onJobBookmark?.(jobId);
   };
 
@@ -232,10 +250,7 @@ export function JobSearch({
         {/* Filters Sidebar */}
         {showFilters && (
           <Grid item xs={12} md={3}>
-            <FilterPanel
-              onFiltersChange={handleFiltersChange}
-              onReset={() => setFilters(null)}
-            />
+            <FilterPanel onFiltersChange={handleFiltersChange} onReset={() => setFilters(null)} />
           </Grid>
         )}
 
