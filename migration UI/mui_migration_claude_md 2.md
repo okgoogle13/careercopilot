@@ -1,11 +1,13 @@
 # CareerCopilot MUI Migration Guide
 
 ## Project Overview
+
 Migrate CareerCopilot React frontend from Tailwind CSS to Material-UI (MUI) with consistent theme-based design system and dark mode support.
 
 ## Migration Strategy
 
 ### Acceptance Criteria
+
 • **Visual Consistency**: All components match Figma design tokens
 • **Functionality Preservation**: Zero regression in existing features
 • **Performance Budget**: Bundle size increase <10%, LCP <2.5s
@@ -13,6 +15,7 @@ Migrate CareerCopilot React frontend from Tailwind CSS to Material-UI (MUI) with
 • **Test Coverage**: All existing E2E tests pass
 
 ### Rollback Plan
+
 • **Git Strategy**: Feature branch with atomic commits per component
 • **Deployment**: Feature flag for MUI vs Tailwind rendering
 • **Validation**: Side-by-side visual regression testing
@@ -20,6 +23,7 @@ Migrate CareerCopilot React frontend from Tailwind CSS to Material-UI (MUI) with
 ## Phase 0: Foundation & Setup
 
 ### Task 0.1: Install Dependencies
+
 ```bash
 # Core MUI packages
 npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
@@ -32,65 +36,58 @@ npm audit && npm run type-check
 ```
 
 ### Task 0.2: Create Master Theme
+
 ```typescript
 // src/theme/theme.ts
-import { createTheme, ThemeOptions } from '@mui/material/styles';
-import { designTokens } from '../tokens/figma-design-tokens.json';
+import { createTheme, ThemeOptions } from "@mui/material/styles";
+import { designTokens } from "../tokens/figma-design-tokens.json";
 
 // Map Figma tokens to MUI theme structure
-const createSemanticPalette = (mode: 'light' | 'dark') => ({
+const createSemanticPalette = (mode: "light" | "dark") => ({
   primary: {
     main: designTokens.colors.action.primary,
     dark: designTokens.colors.action.primaryHover,
-    contrastText: designTokens.colors.text.inverse
+    contrastText: designTokens.colors.text.inverse,
   },
   secondary: {
     main: designTokens.colors.action.secondary,
-    dark: designTokens.colors.action.secondaryHover
+    dark: designTokens.colors.action.secondaryHover,
   },
   background: {
-    default: mode === 'light' 
-      ? designTokens.colors.bg.canvas 
-      : designTokens.colors.bg.canvasDark,
-    paper: mode === 'light'
-      ? designTokens.colors.bg.surface
-      : designTokens.colors.bg.surfaceDark
+    default: mode === "light" ? designTokens.colors.bg.canvas : designTokens.colors.bg.canvasDark,
+    paper: mode === "light" ? designTokens.colors.bg.surface : designTokens.colors.bg.surfaceDark,
   },
   text: {
-    primary: mode === 'light'
-      ? designTokens.colors.text.primary
-      : designTokens.colors.text.primaryDark,
-    secondary: mode === 'light'
-      ? designTokens.colors.text.secondary
-      : designTokens.colors.text.secondaryDark
-  }
+    primary: mode === "light" ? designTokens.colors.text.primary : designTokens.colors.text.primaryDark,
+    secondary: mode === "light" ? designTokens.colors.text.secondary : designTokens.colors.text.secondaryDark,
+  },
 });
 
-const typography: ThemeOptions['typography'] = {
+const typography: ThemeOptions["typography"] = {
   fontFamily: designTokens.typography.fontFamily.primary,
   h1: {
     fontSize: designTokens.typography.display.large.fontSize,
     fontWeight: designTokens.typography.display.large.fontWeight,
-    lineHeight: designTokens.typography.display.large.lineHeight
+    lineHeight: designTokens.typography.display.large.lineHeight,
   },
   h2: {
     fontSize: designTokens.typography.heading.large.fontSize,
-    fontWeight: designTokens.typography.heading.large.fontWeight
+    fontWeight: designTokens.typography.heading.large.fontWeight,
   },
   body1: {
     fontSize: designTokens.typography.body.medium.fontSize,
     fontWeight: designTokens.typography.body.medium.fontWeight,
-    lineHeight: designTokens.typography.body.medium.lineHeight
-  }
+    lineHeight: designTokens.typography.body.medium.lineHeight,
+  },
 };
 
 const spacing = (factor: number) => designTokens.spacing.base * factor;
 
-export const createCareerCopilotTheme = (mode: 'light' | 'dark') => 
+export const createCareerCopilotTheme = (mode: "light" | "dark") =>
   createTheme({
     palette: {
       mode,
-      ...createSemanticPalette(mode)
+      ...createSemanticPalette(mode),
     },
     typography,
     spacing,
@@ -99,33 +96,34 @@ export const createCareerCopilotTheme = (mode: 'light' | 'dark') =>
         styleOverrides: {
           root: {
             borderRadius: designTokens.borderRadius.medium,
-            textTransform: 'none',
-            fontWeight: designTokens.typography.body.medium.fontWeight
+            textTransform: "none",
+            fontWeight: designTokens.typography.body.medium.fontWeight,
           },
           contained: {
             boxShadow: designTokens.shadows.elevated,
-            '&:hover': {
-              boxShadow: designTokens.shadows.elevatedHover
-            }
-          }
-        }
+            "&:hover": {
+              boxShadow: designTokens.shadows.elevatedHover,
+            },
+          },
+        },
       },
       MuiCard: {
         styleOverrides: {
           root: {
             borderRadius: designTokens.borderRadius.large,
-            boxShadow: designTokens.shadows.card
-          }
-        }
-      }
-    }
+            boxShadow: designTokens.shadows.card,
+          },
+        },
+      },
+    },
   });
 
-export const lightTheme = createCareerCopilotTheme('light');
-export const darkTheme = createCareerCopilotTheme('dark');
+export const lightTheme = createCareerCopilotTheme("light");
+export const darkTheme = createCareerCopilotTheme("dark");
 ```
 
 ### Task 0.3: Wrap Application
+
 ```typescript
 // src/App.tsx
 import { ThemeProvider, CssBaseline } from '@mui/material';
@@ -136,7 +134,7 @@ import { useFeatureFlag } from './hooks/useFeatureFlag';
 function App() {
   const [darkMode, setDarkMode] = useState(false);
   const isMuiEnabled = useFeatureFlag('mui-migration');
-  
+
   const theme = darkMode ? darkTheme : lightTheme;
 
   return (
@@ -152,14 +150,14 @@ function App() {
 
 ### Migration Priority Matrix
 
-| Priority | Component | MUI Mapping | Complexity |
-|----------|-----------|-------------|------------|
-| **High** | `Navbar.tsx` | `AppBar`, `Toolbar`, `IconButton` | Medium |
-| **High** | Forms (`KscGeneratorPage.tsx`) | `FormControl`, `TextField`, `Button` | High |
-| **High** | Modal (`DashboardPage.tsx`) | `Dialog`, `DialogContent` | Medium |
-| **Medium** | Layout (`DashboardPage.tsx`) | `Grid`, `Stack`, `Box` | Low |
-| **Medium** | Notifications | `Snackbar`, `Alert` | Medium |
-| **Low** | Icons | `@mui/icons-material` | Low |
+| Priority   | Component                      | MUI Mapping                          | Complexity |
+| ---------- | ------------------------------ | ------------------------------------ | ---------- |
+| **High**   | `Navbar.tsx`                   | `AppBar`, `Toolbar`, `IconButton`    | Medium     |
+| **High**   | Forms (`KscGeneratorPage.tsx`) | `FormControl`, `TextField`, `Button` | High       |
+| **High**   | Modal (`DashboardPage.tsx`)    | `Dialog`, `DialogContent`            | Medium     |
+| **Medium** | Layout (`DashboardPage.tsx`)   | `Grid`, `Stack`, `Box`               | Low        |
+| **Medium** | Notifications                  | `Snackbar`, `Alert`                  | Medium     |
+| **Low**    | Icons                          | `@mui/icons-material`                | Low        |
 
 ### Master Migration Prompt Template
 
@@ -193,6 +191,7 @@ function App() {
 ### Specific Component Migrations
 
 #### Task 1.1: Migrate Navbar Component
+
 ```typescript
 // Before: Tailwind implementation
 <nav className="bg-white shadow-sm border-b border-gray-200">
@@ -209,10 +208,10 @@ function App() {
 import { AppBar, Toolbar, IconButton, Box } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 
-<AppBar 
-  position="static" 
+<AppBar
+  position="static"
   elevation={1}
-  sx={{ 
+  sx={{
     bgcolor: 'background.paper',
     borderBottom: 1,
     borderColor: 'divider'
@@ -234,10 +233,11 @@ import { Menu as MenuIcon } from '@mui/icons-material';
 ```
 
 #### Task 1.2: Migrate Form Components
+
 ```typescript
 // Before: Tailwind form
 <div className="space-y-4">
-  <input 
+  <input
     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
     placeholder="Enter text"
   />
@@ -272,6 +272,7 @@ import { Stack, TextField, Button } from '@mui/material';
 ```
 
 ### Task 1.3: Component Testing Updates
+
 ```typescript
 // src/components/__tests__/Navbar.test.tsx
 import { render, screen } from '@testing-library/react';
@@ -279,7 +280,7 @@ import { ThemeProvider } from '@mui/material';
 import { lightTheme } from '../../theme/theme';
 import { Navbar } from '../Navbar';
 
-const renderWithTheme = (component: React.ReactElement) => 
+const renderWithTheme = (component: React.ReactElement) =>
   render(
     <ThemeProvider theme={lightTheme}>
       {component}
@@ -289,7 +290,7 @@ const renderWithTheme = (component: React.ReactElement) =>
 describe('Navbar Component', () => {
   it('renders menu button with correct accessibility attributes', () => {
     renderWithTheme(<Navbar />);
-    
+
     const menuButton = screen.getByTestId('nav-menu-button');
     expect(menuButton).toBeInTheDocument();
     expect(menuButton).toHaveAttribute('aria-label', 'menu');
@@ -297,7 +298,7 @@ describe('Navbar Component', () => {
 
   it('applies theme colors correctly', () => {
     renderWithTheme(<Navbar />);
-    
+
     const appBar = screen.getByRole('banner');
     expect(appBar).toHaveStyle({
       backgroundColor: lightTheme.palette.background.paper
@@ -309,6 +310,7 @@ describe('Navbar Component', () => {
 ## Phase 2: Quality Assurance & Cleanup
 
 ### Task 2.1: Remove Tailwind Dependencies
+
 ```bash
 # Remove Tailwind packages
 npm uninstall tailwindcss postcss autoprefixer react-hot-toast
@@ -321,6 +323,7 @@ rm package-lock.json && npm install
 ```
 
 ### Task 2.2: Clean Global Styles
+
 ```css
 /* src/index.css - Remove all Tailwind directives */
 /* DELETE: @tailwind base; */
@@ -336,6 +339,7 @@ rm package-lock.json && npm install
 ```
 
 ### Task 2.3: Visual Regression Testing
+
 ```bash
 # Install visual testing tools
 npm install --save-dev @storybook/addon-visual-tests
@@ -348,13 +352,14 @@ npx playwright test --update-snapshots
 ```
 
 ### Task 2.4: Accessibility Validation
+
 ```bash
 # Automated accessibility testing
 npm run test:a11y
 
 # Manual testing checklist:
 # • Keyboard navigation works for all interactive elements
-# • Screen reader announces component states correctly  
+# • Screen reader announces component states correctly
 # • Color contrast meets WCAG AA standards (4.5:1)
 # • Focus indicators are visible and clear
 # • Form labels are properly associated
@@ -363,38 +368,41 @@ npm run test:a11y
 ## Development Workflow
 
 ### Code Quality Standards
+
 ```bash
 # Pre-migration checklist
 npm run lint:fix
 npm run type-check
 npm run test:unit
 
-# Post-migration validation  
+# Post-migration validation
 npm run build
 npm run test:e2e
 npm run bundle:analyze
 ```
 
 ### Feature Flag Implementation
+
 ```typescript
 // src/hooks/useFeatureFlag.ts
 export const useFeatureFlag = (flag: string): boolean => {
   const flags = {
-    'mui-migration': process.env.REACT_APP_ENABLE_MUI === 'true'
+    "mui-migration": process.env.REACT_APP_ENABLE_MUI === "true",
   };
-  
+
   return flags[flag] ?? false;
 };
 
 // Environment configuration
 // .env.development
-REACT_APP_ENABLE_MUI=true
+REACT_APP_ENABLE_MUI = true;
 
-// .env.production  
-REACT_APP_ENABLE_MUI=false
+// .env.production
+REACT_APP_ENABLE_MUI = false;
 ```
 
 ### Performance Monitoring
+
 ```bash
 # Bundle analysis before and after migration
 npm run build
@@ -407,6 +415,7 @@ npx lighthouse http://localhost:3000 --only-categories=performance
 ## Deployment Strategy
 
 ### Staging Deployment
+
 ```bash
 # Deploy with feature flag OFF
 ./scripts/deploy.sh staging --feature-flags="mui-migration:false"
@@ -416,6 +425,7 @@ npx lighthouse http://localhost:3000 --only-categories=performance
 ```
 
 ### Production Rollout
+
 ```bash
 # Phase 1: Deploy with flag OFF
 ./scripts/deploy.sh production
@@ -430,6 +440,7 @@ npx lighthouse http://localhost:3000 --only-categories=performance
 ## Troubleshooting
 
 ### Common Migration Issues
+
 • **Theme Provider**: Ensure all components are wrapped in ThemeProvider
 • **Type Errors**: Install @mui/types for enhanced TypeScript support
 • **Bundle Size**: Use tree shaking for @mui/icons-material imports
@@ -437,6 +448,7 @@ npx lighthouse http://localhost:3000 --only-categories=performance
 • **Responsive Breakpoints**: Use theme.breakpoints.up() instead of Tailwind responsive classes
 
 ### Debug Commands
+
 ```bash
 # Verify MUI installation
 npm ls @mui/material @emotion/react
@@ -449,6 +461,7 @@ npm run type-check -- --strict
 ```
 
 ### Performance Optimization
+
 ```bash
 # Optimize MUI imports
 npm install --save-dev babel-plugin-import

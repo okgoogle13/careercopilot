@@ -131,7 +131,10 @@ export function KeywordTagGroup({
               </Badge>
             )}
             {statusCounts.missing && (
-              <Badge variant="outlined" className="border-accent-red/50 text-accent-red font-medium">
+              <Badge
+                variant="outlined"
+                className="border-accent-red/50 text-accent-red font-medium"
+              >
                 {statusCounts.missing} missing
               </Badge>
             )}

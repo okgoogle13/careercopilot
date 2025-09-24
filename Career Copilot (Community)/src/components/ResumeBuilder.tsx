@@ -68,7 +68,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
   const [newSkill, setNewSkill] = useState("");
 
   const addExperience = () => {
-    setResumeData(prev => ({
+    setResumeData((prev) => ({
       ...prev,
       experience: [
         ...prev.experience,
@@ -84,7 +84,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
   };
 
   const addEducation = () => {
-    setResumeData(prev => ({
+    setResumeData((prev) => ({
       ...prev,
       education: [
         ...prev.education,
@@ -100,7 +100,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
 
   const addSkill = () => {
     if (newSkill.trim()) {
-      setResumeData(prev => ({
+      setResumeData((prev) => ({
         ...prev,
         skills: [...prev.skills, newSkill.trim()],
       }));
@@ -109,7 +109,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
   };
 
   const removeSkill = (index: number) => {
-    setResumeData(prev => ({
+    setResumeData((prev) => ({
       ...prev,
       skills: prev.skills.filter((_, i) => i !== index),
     }));
@@ -156,7 +156,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   id="fullName"
                   value={resumeData.personalInfo.fullName}
                   onChange={(e) =>
-                    setResumeData(prev => ({
+                    setResumeData((prev) => ({
                       ...prev,
                       personalInfo: { ...prev.personalInfo, fullName: e.target.value },
                     }))
@@ -171,7 +171,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   type="email"
                   value={resumeData.personalInfo.email}
                   onChange={(e) =>
-                    setResumeData(prev => ({
+                    setResumeData((prev) => ({
                       ...prev,
                       personalInfo: { ...prev.personalInfo, email: e.target.value },
                     }))
@@ -185,7 +185,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   id="phone"
                   value={resumeData.personalInfo.phone}
                   onChange={(e) =>
-                    setResumeData(prev => ({
+                    setResumeData((prev) => ({
                       ...prev,
                       personalInfo: { ...prev.personalInfo, phone: e.target.value },
                     }))
@@ -199,7 +199,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   id="location"
                   value={resumeData.personalInfo.location}
                   onChange={(e) =>
-                    setResumeData(prev => ({
+                    setResumeData((prev) => ({
                       ...prev,
                       personalInfo: { ...prev.personalInfo, location: e.target.value },
                     }))
@@ -213,7 +213,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   id="summary"
                   value={resumeData.personalInfo.summary}
                   onChange={(e) =>
-                    setResumeData(prev => ({
+                    setResumeData((prev) => ({
                       ...prev,
                       personalInfo: { ...prev.personalInfo, summary: e.target.value },
                     }))
@@ -240,10 +240,10 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                       placeholder="Job Title"
                       value={exp.title}
                       onChange={(e) =>
-                        setResumeData(prev => ({
+                        setResumeData((prev) => ({
                           ...prev,
                           experience: prev.experience.map((item, i) =>
-                            i === index ? { ...item, title: e.target.value } : item
+                            i === index ? { ...item, title: e.target.value } : item,
                           ),
                         }))
                       }
@@ -252,10 +252,10 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                       placeholder="Company"
                       value={exp.company}
                       onChange={(e) =>
-                        setResumeData(prev => ({
+                        setResumeData((prev) => ({
                           ...prev,
                           experience: prev.experience.map((item, i) =>
-                            i === index ? { ...item, company: e.target.value } : item
+                            i === index ? { ...item, company: e.target.value } : item,
                           ),
                         }))
                       }
@@ -265,10 +265,10 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                     placeholder="Duration (e.g., Jan 2020 - Present)"
                     value={exp.duration}
                     onChange={(e) =>
-                      setResumeData(prev => ({
+                      setResumeData((prev) => ({
                         ...prev,
                         experience: prev.experience.map((item, i) =>
-                          i === index ? { ...item, duration: e.target.value } : item
+                          i === index ? { ...item, duration: e.target.value } : item,
                         ),
                       }))
                     }
@@ -277,10 +277,10 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                     placeholder="Job description and achievements..."
                     value={exp.description}
                     onChange={(e) =>
-                      setResumeData(prev => ({
+                      setResumeData((prev) => ({
                         ...prev,
                         experience: prev.experience.map((item, i) =>
-                          i === index ? { ...item, description: e.target.value } : item
+                          i === index ? { ...item, description: e.target.value } : item,
                         ),
                       }))
                     }
@@ -307,10 +307,10 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                     placeholder="Degree"
                     value={edu.degree}
                     onChange={(e) =>
-                      setResumeData(prev => ({
+                      setResumeData((prev) => ({
                         ...prev,
                         education: prev.education.map((item, i) =>
-                          i === index ? { ...item, degree: e.target.value } : item
+                          i === index ? { ...item, degree: e.target.value } : item,
                         ),
                       }))
                     }
@@ -319,10 +319,10 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                     placeholder="School/University"
                     value={edu.school}
                     onChange={(e) =>
-                      setResumeData(prev => ({
+                      setResumeData((prev) => ({
                         ...prev,
                         education: prev.education.map((item, i) =>
-                          i === index ? { ...item, school: e.target.value } : item
+                          i === index ? { ...item, school: e.target.value } : item,
                         ),
                       }))
                     }
@@ -331,10 +331,10 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                     placeholder="Year"
                     value={edu.year}
                     onChange={(e) =>
-                      setResumeData(prev => ({
+                      setResumeData((prev) => ({
                         ...prev,
                         education: prev.education.map((item, i) =>
-                          i === index ? { ...item, year: e.target.value } : item
+                          i === index ? { ...item, year: e.target.value } : item,
                         ),
                       }))
                     }
@@ -352,7 +352,7 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                   placeholder="Add a skill"
                   value={newSkill}
                   onChange={(e) => setNewSkill(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && addSkill()}
+                  onKeyPress={(e) => e.key === "Enter" && addSkill()}
                 />
                 <Button onClick={addSkill} variant="outline">
                   Add
@@ -381,20 +381,23 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
             <h3 className="text-lg font-medium mb-4">Resume Preview</h3>
             <div className="bg-white text-black p-6 rounded-lg min-h-96 text-sm">
               <div className="mb-4">
-                <h2 className="text-xl font-bold">{resumeData.personalInfo.fullName || "Your Name"}</h2>
+                <h2 className="text-xl font-bold">
+                  {resumeData.personalInfo.fullName || "Your Name"}
+                </h2>
                 <p className="text-gray-600">
-                  {resumeData.personalInfo.email} | {resumeData.personalInfo.phone} | {resumeData.personalInfo.location}
+                  {resumeData.personalInfo.email} | {resumeData.personalInfo.phone} |{" "}
+                  {resumeData.personalInfo.location}
                 </p>
               </div>
-              
+
               {resumeData.personalInfo.summary && (
                 <div className="mb-4">
                   <h3 className="font-bold mb-2">Professional Summary</h3>
                   <p className="text-gray-700">{resumeData.personalInfo.summary}</p>
                 </div>
               )}
-              
-              {resumeData.experience.some(exp => exp.title || exp.company) && (
+
+              {resumeData.experience.some((exp) => exp.title || exp.company) && (
                 <div className="mb-4">
                   <h3 className="font-bold mb-2">Work Experience</h3>
                   {resumeData.experience.map((exp, index) => (
@@ -406,14 +409,16 @@ export function ResumeBuilder({ onBack, onNext, profileName }: ResumeBuilderProp
                             <span className="text-gray-600">{exp.duration}</span>
                           </div>
                           <div className="text-gray-600 mb-1">{exp.company}</div>
-                          {exp.description && <p className="text-gray-700 text-sm">{exp.description}</p>}
+                          {exp.description && (
+                            <p className="text-gray-700 text-sm">{exp.description}</p>
+                          )}
                         </div>
                       )}
                     </div>
                   ))}
                 </div>
               )}
-              
+
               {resumeData.skills.length > 0 && (
                 <div className="mb-4">
                   <h3 className="font-bold mb-2">Skills</h3>

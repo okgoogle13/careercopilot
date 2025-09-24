@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardAction, CardFooter } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  CardAction,
+  CardFooter,
+} from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import { LoadingProfileCard } from "../LoadingCard";
@@ -26,8 +34,8 @@ export function CardComponentsSection() {
   };
 
   return (
-    <ComponentSection 
-      title="Card Components" 
+    <ComponentSection
+      title="Card Components"
       description="Five distinct card variants designed for different interaction patterns and data states"
     >
       {/* Card Variants Overview */}
@@ -37,35 +45,45 @@ export function CardComponentsSection() {
             <div className="w-4 h-4 border border-border rounded bg-card"></div>
             <div>
               <p className="font-medium">Default Card</p>
-              <p className="text-muted-foreground">Standard card with subtle border for static content</p>
+              <p className="text-muted-foreground">
+                Standard card with subtle border for static content
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 border border-border rounded bg-card shadow-lg shadow-primary/10"></div>
             <div>
               <p className="font-medium">Interactive Card</p>
-              <p className="text-muted-foreground">Hover effects and cursor pointer for clickable content</p>
+              <p className="text-muted-foreground">
+                Hover effects and cursor pointer for clickable content
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 border-2 border-primary rounded bg-card shadow-lg shadow-primary/20"></div>
             <div>
               <p className="font-medium">Selected Card</p>
-              <p className="text-muted-foreground">Prominent purple border and glow for active/selected state</p>
+              <p className="text-muted-foreground">
+                Prominent purple border and glow for active/selected state
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 border border-border rounded bg-card animate-pulse"></div>
             <div>
               <p className="font-medium">Loading Card</p>
-              <p className="text-muted-foreground">Skeleton placeholders during data loading states</p>
+              <p className="text-muted-foreground">
+                Skeleton placeholders during data loading states
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 border border-destructive/50 rounded bg-destructive/5"></div>
             <div>
               <p className="font-medium">Error Card</p>
-              <p className="text-muted-foreground">Red-tinted border and background for error states</p>
+              <p className="text-muted-foreground">
+                Red-tinted border and background for error states
+              </p>
             </div>
           </div>
         </div>
@@ -82,16 +100,16 @@ export function CardComponentsSection() {
               applications: 8,
               atsScore: 92,
               lastUpdated: "2 hours ago",
-              status: "Active"
+              status: "Active",
             },
             {
-              id: "card-2", 
+              id: "card-2",
               name: "Nishant Dougall",
-              role: "Peer Worker", 
+              role: "Peer Worker",
               applications: 5,
               atsScore: 87,
               lastUpdated: "1 day ago",
-              status: "Draft"
+              status: "Draft",
             },
             {
               id: "card-3",
@@ -100,8 +118,8 @@ export function CardComponentsSection() {
               applications: 0,
               atsScore: 0,
               lastUpdated: "",
-              status: "New"
-            }
+              status: "New",
+            },
           ].map((profile) => (
             <Card
               key={profile.id}
@@ -124,12 +142,12 @@ export function CardComponentsSection() {
                       }}
                       className="p-1 h-8 w-8"
                     >
-                      <Heart 
+                      <Heart
                         className={`w-4 h-4 ${
-                          favoriteCards.has(profile.id) 
-                            ? "fill-red-500 text-red-500" 
+                          favoriteCards.has(profile.id)
+                            ? "fill-red-500 text-red-500"
                             : "text-muted-foreground"
-                        }`} 
+                        }`}
                       />
                     </Button>
                   </CardAction>
@@ -146,7 +164,7 @@ export function CardComponentsSection() {
                       <span className="text-muted-foreground">ATS Score</span>
                       <div className="flex items-center gap-2">
                         <div className="w-12 h-2 bg-muted rounded-full overflow-hidden">
-                          <div 
+                          <div
                             className="h-full bg-primary rounded-full"
                             style={{ width: `${profile.atsScore}%` }}
                           />
@@ -156,9 +174,7 @@ export function CardComponentsSection() {
                     </div>
                     <div className="flex items-center justify-between">
                       <span className="text-muted-foreground">Status</span>
-                      <Badge 
-                        variant={profile.status === "Active" ? "default" : "secondary"}
-                      >
+                      <Badge variant={profile.status === "Active" ? "default" : "secondary"}>
                         {profile.status}
                       </Badge>
                     </div>

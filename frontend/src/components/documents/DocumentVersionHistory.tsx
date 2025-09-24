@@ -1,8 +1,14 @@
 import React from 'react';
-import { Schedule, AccessTime, CheckCircle, Person, Download, Delete, MoreVert } from '@mui/icons-material';
-import { Button } from '../ui/button';
+import {
+  Schedule,
+  AccessTime,
+  Person,
+  Download,
+  Delete,
+} from '@mui/icons-material';
+import { Button, Stack, Box, Typography, Chip, IconButton } from '@mui/material';
 import { formatDistanceToNow } from 'date-fns';
-import { cn } from '../../lib/utils';
+import { styled } from '@mui/material/styles';
 
 export interface DocumentVersion {
   id: string;
@@ -23,6 +29,14 @@ interface DocumentVersionHistoryProps {
   className?: string;
 }
 
+const VersionCard = styled(Box)<{ isCurrent?: boolean }>(({ theme, isCurrent }) => ({
+  border: `1px solid ${isCurrent ? theme.palette.primary.main : theme.palette.divider}`,
+  backgroundColor: isCurrent ? theme.palette.primary.lighter : 'transparent',
+  borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(2),
+  transition: theme.transitions.create(['border-color', 'background-color']),
+}));
+
 export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
   versions,
   onRestore,
@@ -39,101 +53,72 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
   };
 
   return (
-    <div className={cn('space-y-4', className)}>
-      <div className="flex items-center space-x-2 text-muted-foreground">
-        <Schedule className="h-5 w-5" />
-        <h3 className="font-medium">Version History</h3>
-      </div>
+    <Stack spacing={2} className={className}>
+      <Stack direction="row" alignItems="center" spacing={1} color="text.secondary">
+        <Schedule fontSize="small" />
+        <Typography variant="h6" component="h3">Version History</Typography>
+      </Stack>
 
       {versions.length === 0 ? (
-        <div className="text-center py-8 border rounded-lg">
-          <AccessTime className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
-          <p className="text-muted-foreground">No version history available</p>
-        </div>
+        <Box sx={{ textAlign: 'center', py: 4, border: 1, borderColor: 'divider', borderRadius: 1 }}>
+          <AccessTime sx={{ fontSize: 32, color: 'text.secondary', mb: 1 }} />
+          <Typography color="text.secondary">No version history available</Typography>
+        </Box>
       ) : (
-        <div className="space-y-4">
+        <Stack spacing={2}>
           {versions.map((version) => (
-            <div
-              key={version.id}
-              className={cn(
-                'border rounded-lg p-4 transition-colors',
-                version.isCurrent ? 'border-primary/50 bg-primary/5' : 'border-border'
-              )}
-            >
-              <div className="flex justify-between items-start">
-                <div className="space-y-1">
-                  <div className="flex items-center space-x-2">
-                    <h4 className="font-medium">
+            <VersionCard key={version.id} isCurrent={version.isCurrent}>
+              <Stack direction="row" justifyContent="space-between" alignItems="flex-start">
+                <Stack spacing={0.5}>
+                  <Stack direction="row" alignItems="center" spacing={1}>
+                    <Typography variant="subtitle1" fontWeight="medium">
                       Version {version.version}
-                      {version.isCurrent && (
-                        <span className="ml-2 text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-                          Current
-                        </span>
-                      )}
-                    </h4>
-                  </div>
-                  
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <Person className="h-3.5 w-3.5 mr-1" />
-                    <span>{version.modifiedBy}</span>
-                    <span className="mx-2">•</span>
-                    <span>{formatDistanceToNow(version.createdAt, { addSuffix: true })}</span>
-                    <span className="mx-2">•</span>
-                    <span>{formatFileSize(version.size)}</span>
-                  </div>
+                    </Typography>
+                    {version.isCurrent && <Chip label="Current" color="primary" size="small" />}
+                  </Stack>
+
+                  <Stack direction="row" alignItems="center" color="text.secondary" spacing={1}>
+                    <Person sx={{ fontSize: 16 }} />
+                    <Typography variant="caption">{version.modifiedBy}</Typography>
+                    <Typography variant="caption">•</Typography>
+                    <Typography variant="caption">{formatDistanceToNow(version.createdAt, { addSuffix: true })}</Typography>
+                    <Typography variant="caption">•</Typography>
+                    <Typography variant="caption">{formatFileSize(version.size)}</Typography>
+                  </Stack>
 
                   {version.changes && version.changes.length > 0 && (
-                    <ul className="text-sm text-muted-foreground list-disc list-inside mt-1">
+                    <Box component="ul" sx={{ pl: 2.5, mt: 1, color: 'text.secondary' }}>
                       {version.changes.map((change, i) => (
-                        <li key={i} className="text-sm">
-                          {change}
-                        </li>
+                        <li key={i}><Typography variant="caption">{change}</Typography></li>
                       ))}
-                    </ul>
+                    </Box>
                   )}
-                </div>
+                </Stack>
 
-                <div className="flex items-center space-x-1">
+                <Stack direction="row" spacing={0.5}>
                   {onDownload && (
-                    <Button
-                      variant="link"
-                      size="small"
-                      onClick={() => onDownload(version)}
-                      className="h-8 w-8"
-                      title="Download this version"
-                    >
-                      <Download className="h-4 w-4" />
-                    </Button>
+                    <IconButton size="small" onClick={() => onDownload(version)} title="Download this version">
+                      <Download fontSize="small" />
+                    </IconButton>
                   )}
-                  
+
                   {onRestore && !version.isCurrent && (
-                    <Button
-                      variant="outline"
-                      size="small"
-                      onClick={() => onRestore(version)}
-                      className="h-8"
-                    >
+                    <Button size="small" variant="outlined" onClick={() => onRestore(version)}>
                       Restore
                     </Button>
                   )}
-                  
+
                   {onDelete && !version.isCurrent && (
-                    <Button
-                      variant="link"
-                      size="small"
-                      onClick={() => onDelete(version)}
-                      className="h-8 w-8 text-destructive hover:text-destructive"
-                      title="Delete this version"
-                    >
-                      <Delete className="h-4 w-4" />
-                    </Button>
+                    <IconButton size="small" onClick={() => onDelete(version)} title="Delete this version" color="error">
+                      <Delete fontSize="small" />
+                    </IconButton>
                   )}
-                </div>
-              </div>
-            </div>
+                </Stack>
+              </Stack>
+            </VersionCard>
           ))}
-        </div>
+        </Stack>
       )}
-    </div>
+    </Stack>
   );
 };

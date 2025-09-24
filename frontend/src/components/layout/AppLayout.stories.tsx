@@ -9,14 +9,24 @@ const meta: Meta<typeof AppLayout> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'The main application layout component that provides navigation, header, and content areas with responsive behavior.',
+        component:
+          'The main application layout component that provides navigation, header, and content areas with responsive behavior.',
       },
     },
   },
   argTypes: {
     currentView: {
       control: { type: 'select' },
-      options: ['dashboard', 'documents', 'ats-analysis', 'job-matching', 'career-intelligence', 'interview-prep', 'profile', 'settings'],
+      options: [
+        'dashboard',
+        'documents',
+        'ats-analysis',
+        'job-matching',
+        'career-intelligence',
+        'interview-prep',
+        'profile',
+        'settings',
+      ],
       description: 'The currently active navigation item',
     },
     showDemoNav: {
@@ -45,8 +55,8 @@ const SampleContent = ({ title }: { title: string }) => (
     <Card>
       <CardContent>
         <Typography variant="body1" paragraph>
-          This is sample content for the {title.toLowerCase()} page. The AppLayout component provides
-          a consistent navigation experience across all pages of the application.
+          This is sample content for the {title.toLowerCase()} page. The AppLayout component
+          provides a consistent navigation experience across all pages of the application.
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Features include:
@@ -116,7 +126,8 @@ export const WithAvatar: Story = {
     user: {
       name: 'Alex Chen',
       email: 'alex.chen@example.com',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
+      avatar:
+        'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
     },
   },
 };

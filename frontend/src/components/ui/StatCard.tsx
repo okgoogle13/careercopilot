@@ -48,11 +48,7 @@ export const StatCard: React.FC<StatCardProps> = ({
           <Typography variant="subtitle2" color="text.secondary">
             {title}
           </Typography>
-          {icon && (
-            <Box sx={{ color: 'primary.main' }}>
-              {icon}
-            </Box>
-          )}
+          {icon && <Box sx={{ color: 'primary.main' }}>{icon}</Box>}
         </Box>
 
         <Typography variant="h4" fontWeight={600} sx={{ mb: 0.5 }}>

@@ -13,14 +13,7 @@ export interface SeparatorProps extends DividerProps {
 
 export const Separator = React.forwardRef<HTMLHRElement, SeparatorProps>(
   ({ orientation = 'horizontal', className, ...props }, ref) => {
-    return (
-      <StyledDivider
-        ref={ref}
-        orientation={orientation}
-        className={className}
-        {...props}
-      />
-    );
+    return <StyledDivider ref={ref} orientation={orientation} className={className} {...props} />;
   }
 );
 

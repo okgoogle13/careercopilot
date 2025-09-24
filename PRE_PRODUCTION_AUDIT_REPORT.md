@@ -12,13 +12,13 @@
 
 **Findings:**
 
-*   **Colour Palette Adherence:** ⚠️ **Minor Deviations.** The application does successfully implement the target "Dark Scheme" color palette. A CSS token file (`frontend/src/styles/theme-tokens.css`) defines the correct hex codes for the muted lavender-blue primary color (`#A78BFA`), dark charcoal surfaces (`#1E293B`), and other accents when in dark mode. However, the file itself is extremely disorganized, with multiple, conflicting, and redundant variable definitions, indicating a chaotic implementation process rather than a clean, single source of truth.
+- **Colour Palette Adherence:** ⚠️ **Minor Deviations.** The application does successfully implement the target "Dark Scheme" color palette. A CSS token file (`frontend/src/styles/theme-tokens.css`) defines the correct hex codes for the muted lavender-blue primary color (`#A78BFA`), dark charcoal surfaces (`#1E293B`), and other accents when in dark mode. However, the file itself is extremely disorganized, with multiple, conflicting, and redundant variable definitions, indicating a chaotic implementation process rather than a clean, single source of truth.
 
-*   **Visual Fidelity:** ✅ **Flawless Migration.** The implemented theme, despite its architectural flaws, does visually align with the "Monstera Unique" aesthetic. The CSS token file correctly defines variables for soft shadows (`--elevation-level*`) and rounded corners (`--shape-corner-*`), which are then consumed by the Tailwind CSS configuration.
+- **Visual Fidelity:** ✅ **Flawless Migration.** The implemented theme, despite its architectural flaws, does visually align with the "Monstera Unique" aesthetic. The CSS token file correctly defines variables for soft shadows (`--elevation-level*`) and rounded corners (`--shape-corner-*`), which are then consumed by the Tailwind CSS configuration.
 
-*   **M3 Expressive Guidelines:** ❌ **Refactor Incomplete.** The application completely fails to follow the M3 guidelines *from an implementation standpoint*. The entire MUI theming system (`createTheme`, `ThemeProvider`) is absent. The M3 token names (e.g., `surface-container-low`) have been manually recreated in a CSS file and mapped to Tailwind classes, completely bypassing the intended MUI architecture.
+- **M3 Expressive Guidelines:** ❌ **Refactor Incomplete.** The application completely fails to follow the M3 guidelines _from an implementation standpoint_. The entire MUI theming system (`createTheme`, `ThemeProvider`) is absent. The M3 token names (e.g., `surface-container-low`) have been manually recreated in a CSS file and mapped to Tailwind classes, completely bypassing the intended MUI architecture.
 
-*   **Architectural Integrity:** ❌ **Refactor Incomplete.** This is the most critical failure. The application does **not** exclusively use `@mui/material`. The `package.json` confirms the presence of `@mui/material`, but also includes `tailwindcss`, `@radix-ui/*`, `lucide-react`, and other dependencies associated with a completely different design system (Shadcn/ui). This hybrid approach is the opposite of the refactor's goal to consolidate into a single, pure component library. It creates a confusing and unsustainable developer experience.
+- **Architectural Integrity:** ❌ **Refactor Incomplete.** This is the most critical failure. The application does **not** exclusively use `@mui/material`. The `package.json` confirms the presence of `@mui/material`, but also includes `tailwindcss`, `@radix-ui/*`, `lucide-react`, and other dependencies associated with a completely different design system (Shadcn/ui). This hybrid approach is the opposite of the refactor's goal to consolidate into a single, pure component library. It creates a confusing and unsustainable developer experience.
 
 ---
 
@@ -27,12 +27,12 @@
 **Status:** ⚠️ Minor Bugs Introduced (Assessed via Static Analysis)
 
 **Findings:**
-*Static analysis suggests that while the main pages may render, the introduction of two competing component and styling systems is highly likely to have introduced subtle bugs, style overrides, and inconsistent behavior that cannot be detected without a full manual testing run.*
+_Static analysis suggests that while the main pages may render, the introduction of two competing component and styling systems is highly likely to have introduced subtle bugs, style overrides, and inconsistent behavior that cannot be detected without a full manual testing run._
 
-*   **Onboarding Flow:** File-based analysis confirms that components for `Auth`, `Dashboard`, and `Profile` exist, but their internal composition is now a mix of different libraries, which may break event handling and state propagation.
-*   **Document Creation Flow:** Components for the core builder flow appear to exist, but it is impossible to verify that the complex state interactions required for the ATS analysis and builder have not been compromised by the component swap.
-*   **Career Tools:** The functionality of interactive tools like a Kanban board is at high risk of regression when the underlying component library is changed without a proper migration of state and event handlers.
-*   **Filtering:** The `FilterPanel`'s logic is likely intact, but its visual representation and interaction with other components may be broken.
+- **Onboarding Flow:** File-based analysis confirms that components for `Auth`, `Dashboard`, and `Profile` exist, but their internal composition is now a mix of different libraries, which may break event handling and state propagation.
+- **Document Creation Flow:** Components for the core builder flow appear to exist, but it is impossible to verify that the complex state interactions required for the ATS analysis and builder have not been compromised by the component swap.
+- **Career Tools:** The functionality of interactive tools like a Kanban board is at high risk of regression when the underlying component library is changed without a proper migration of state and event handlers.
+- **Filtering:** The `FilterPanel`'s logic is likely intact, but its visual representation and interaction with other components may be broken.
 
 ---
 
@@ -42,9 +42,9 @@
 
 **Findings:**
 
-*   **Component Architecture:** The architecture is the primary issue. Instead of consistently using base-themed MUI components, the application is a patchwork of MUI, Radix, and custom components styled with Tailwind CSS. This is a major architectural flaw that will make future development slow and bug-prone.
-*   **TypeScript Usage:** The lack of a central MUI theme means that prop typing for components cannot leverage theme variants (e.g., `color="primary"`). This leads to less specific and less robust component props.
-*   **Accessibility (ARIA & Keyboard):** While both MUI and Radix UI provide good accessibility out of the box, combining them can lead to conflicts in focus management, keyboard navigation, and ARIA attribute precedence. Without a unified system, accessibility is likely degraded.
+- **Component Architecture:** The architecture is the primary issue. Instead of consistently using base-themed MUI components, the application is a patchwork of MUI, Radix, and custom components styled with Tailwind CSS. This is a major architectural flaw that will make future development slow and bug-prone.
+- **TypeScript Usage:** The lack of a central MUI theme means that prop typing for components cannot leverage theme variants (e.g., `color="primary"`). This leads to less specific and less robust component props.
+- **Accessibility (ARIA & Keyboard):** While both MUI and Radix UI provide good accessibility out of the box, combining them can lead to conflicts in focus management, keyboard navigation, and ARIA attribute precedence. Without a unified system, accessibility is likely degraded.
 
 ---
 
@@ -54,8 +54,8 @@
 
 **Findings:**
 
-*   **Bundle Size:** The goal of removing a duplicate component library to reduce bundle size has been negated. While the original rogue library may be gone, it has been replaced by **two** libraries: MUI and the Radix/Tailwind stack. The final bundle is likely larger and less efficient than a pure implementation of either system.
-*   **Lazy Loading:** A static check of the routing configuration would be needed to confirm, but even if lazy loading is implemented, the duplicated component libraries increase the baseline bundle size for the entire application.
+- **Bundle Size:** The goal of removing a duplicate component library to reduce bundle size has been negated. While the original rogue library may be gone, it has been replaced by **two** libraries: MUI and the Radix/Tailwind stack. The final bundle is likely larger and less efficient than a pure implementation of either system.
+- **Lazy Loading:** A static check of the routing configuration would be needed to confirm, but even if lazy loading is implemented, the duplicated component libraries increase the baseline bundle size for the entire application.
 
 ---
 

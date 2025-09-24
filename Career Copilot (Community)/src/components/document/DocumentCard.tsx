@@ -1,32 +1,45 @@
-import React, { useState } from 'react';
-import { 
-  FileText, 
-  Download, 
-  Edit3, 
-  MoreHorizontal, 
-  Share2, 
-  Copy, 
+import React, { useState } from "react";
+import {
+  FileText,
+  Download,
+  Edit3,
+  MoreHorizontal,
+  Share2,
+  Copy,
   Trash2,
   Eye,
   Clock,
   Star,
   CheckCircle,
   AlertCircle,
-  Calendar
-} from 'lucide-react';
-import { M3Card, M3CardHeader, M3CardTitle, M3CardDescription, M3CardContent, M3CardFooter } from '../ui/m3-card';
-import { M3Button } from '../ui/m3-button';
-import { Badge } from '../ui/badge';
-import { Avatar } from '../ui/avatar';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { cn, formatDate, formatRelativeTime } from '../ui/utils';
+  Calendar,
+} from "lucide-react";
+import {
+  M3Card,
+  M3CardHeader,
+  M3CardTitle,
+  M3CardDescription,
+  M3CardContent,
+  M3CardFooter,
+} from "../ui/m3-card";
+import { M3Button } from "../ui/m3-button";
+import { Badge } from "../ui/badge";
+import { Avatar } from "../ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { cn, formatDate, formatRelativeTime } from "../ui/utils";
 
 export interface DocumentCardProps {
   document: {
     id: string;
     title: string;
-    type: 'resume' | 'cover-letter' | 'selection-criteria' | 'portfolio';
-    status: 'draft' | 'completed' | 'in-review' | 'published';
+    type: "resume" | "cover-letter" | "selection-criteria" | "portfolio";
+    status: "draft" | "completed" | "in-review" | "published";
     version: string;
     lastModified: Date | string;
     createdDate: Date | string;
@@ -39,7 +52,7 @@ export interface DocumentCardProps {
       id: string;
       name: string;
       avatar?: string;
-      role: 'viewer' | 'editor' | 'owner';
+      role: "viewer" | "editor" | "owner";
     }>;
     metrics?: {
       views: number;
@@ -49,7 +62,7 @@ export interface DocumentCardProps {
     template?: string;
     aiGenerated?: boolean;
   };
-  variant?: 'default' | 'compact' | 'grid';
+  variant?: "default" | "compact" | "grid";
   selected?: boolean;
   onSelect?: (documentId: string) => void;
   onEdit?: (documentId: string) => void;
@@ -63,7 +76,7 @@ export interface DocumentCardProps {
 
 export function DocumentCard({
   document,
-  variant = 'default',
+  variant = "default",
   selected = false,
   onSelect,
   onEdit,
@@ -72,33 +85,33 @@ export function DocumentCard({
   onShare,
   onDuplicate,
   onDelete,
-  className
+  className,
 }: DocumentCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const getStatusColor = () => {
     switch (document.status) {
-      case 'completed':
-        return 'bg-green-500/10 text-green-600 border-green-500/20';
-      case 'in-review':
-        return 'bg-yellow-500/10 text-yellow-600 border-yellow-500/20';
-      case 'published':
-        return 'bg-blue-500/10 text-blue-600 border-blue-500/20';
-      case 'draft':
+      case "completed":
+        return "bg-green-500/10 text-green-600 border-green-500/20";
+      case "in-review":
+        return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
+      case "published":
+        return "bg-blue-500/10 text-blue-600 border-blue-500/20";
+      case "draft":
       default:
-        return 'bg-outline-variant/10 text-muted-foreground border-outline-variant/20';
+        return "bg-outline-variant/10 text-muted-foreground border-outline-variant/20";
     }
   };
 
   const getStatusIcon = () => {
     switch (document.status) {
-      case 'completed':
+      case "completed":
         return <CheckCircle className="w-3 h-3" />;
-      case 'in-review':
+      case "in-review":
         return <Clock className="w-3 h-3" />;
-      case 'published':
+      case "published":
         return <Star className="w-3 h-3" />;
-      case 'draft':
+      case "draft":
       default:
         return <Edit3 className="w-3 h-3" />;
     }
@@ -106,13 +119,13 @@ export function DocumentCard({
 
   const getTypeIcon = () => {
     switch (document.type) {
-      case 'resume':
+      case "resume":
         return <FileText className="w-5 h-5" />;
-      case 'cover-letter':
+      case "cover-letter":
         return <FileText className="w-5 h-5" />;
-      case 'selection-criteria':
+      case "selection-criteria":
         return <FileText className="w-5 h-5" />;
-      case 'portfolio':
+      case "portfolio":
         return <FileText className="w-5 h-5" />;
       default:
         return <FileText className="w-5 h-5" />;
@@ -127,14 +140,11 @@ export function DocumentCard({
     }
   };
 
-  if (variant === 'compact') {
+  if (variant === "compact") {
     return (
       <M3Card
-        variant={selected ? 'selected' : 'interactive'}
-        className={cn(
-          'transition-all duration-300 cursor-pointer',
-          className
-        )}
+        variant={selected ? "selected" : "interactive"}
+        className={cn("transition-all duration-300 cursor-pointer", className)}
         onClick={handleCardClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -150,7 +160,7 @@ export function DocumentCard({
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="font-medium text-foreground truncate">{document.title}</h3>
-                <Badge variant="outline" className={cn('text-xs', getStatusColor())}>
+                <Badge variant="outline" className={cn("text-xs", getStatusColor())}>
                   {getStatusIcon()}
                   <span className="ml-1">{document.status}</span>
                 </Badge>
@@ -163,12 +173,16 @@ export function DocumentCard({
             {/* ATS Score */}
             {document.atsScore && (
               <div className="text-center">
-                <div className={cn(
-                  'text-lg font-semibold px-2 py-1 rounded-lg',
-                  document.atsScore >= 80 ? 'text-green-600 bg-green-500/10' :
-                  document.atsScore >= 60 ? 'text-yellow-600 bg-yellow-500/10' :
-                  'text-red-600 bg-red-500/10'
-                )}>
+                <div
+                  className={cn(
+                    "text-lg font-semibold px-2 py-1 rounded-lg",
+                    document.atsScore >= 80
+                      ? "text-green-600 bg-green-500/10"
+                      : document.atsScore >= 60
+                        ? "text-yellow-600 bg-yellow-500/10"
+                        : "text-red-600 bg-red-500/10",
+                  )}
+                >
                   {document.atsScore}
                 </div>
                 <div className="text-xs text-muted-foreground">ATS</div>
@@ -208,7 +222,10 @@ export function DocumentCard({
                   Duplicate
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => onDelete?.(document.id)} className="text-destructive">
+                <DropdownMenuItem
+                  onClick={() => onDelete?.(document.id)}
+                  className="text-destructive"
+                >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Delete
                 </DropdownMenuItem>
@@ -222,11 +239,11 @@ export function DocumentCard({
 
   return (
     <M3Card
-      variant={selected ? 'selected' : 'interactive'}
+      variant={selected ? "selected" : "interactive"}
       className={cn(
-        'card-aurora transition-all duration-300 cursor-pointer group',
-        variant === 'grid' && 'h-full',
-        className
+        "card-aurora transition-all duration-300 cursor-pointer group",
+        variant === "grid" && "h-full",
+        className,
       )}
       onClick={handleCardClick}
       onMouseEnter={() => setIsHovered(true)}
@@ -237,12 +254,13 @@ export function DocumentCard({
           {/* Document Type & AI Badge */}
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 transition-transform duration-300 hover:scale-110">
-              <div className="icon-interactive">
-                {getTypeIcon()}
-              </div>
+              <div className="icon-interactive">{getTypeIcon()}</div>
             </div>
             {document.aiGenerated && (
-              <Badge variant="secondary" className="bg-primary/10 text-primary text-xs transition-transform duration-300 hover:scale-105">
+              <Badge
+                variant="secondary"
+                className="bg-primary/10 text-primary text-xs transition-transform duration-300 hover:scale-105"
+              >
                 AI Generated
               </Badge>
             )}
@@ -281,7 +299,10 @@ export function DocumentCard({
                 Duplicate
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => onDelete?.(document.id)} className="text-destructive">
+              <DropdownMenuItem
+                onClick={() => onDelete?.(document.id)}
+                className="text-destructive"
+              >
                 <Trash2 className="w-4 h-4 mr-2" />
                 Delete
               </DropdownMenuItem>
@@ -289,16 +310,14 @@ export function DocumentCard({
           </DropdownMenu>
         </div>
 
-        <M3CardTitle className="text-lg mb-2">
-          {document.title}
-        </M3CardTitle>
+        <M3CardTitle className="text-lg mb-2">{document.title}</M3CardTitle>
 
         <div className="flex items-center gap-2 mb-3">
-          <Badge variant="outline" className={cn('text-xs', getStatusColor())}>
+          <Badge variant="outline" className={cn("text-xs", getStatusColor())}>
             {getStatusIcon()}
-            <span className="ml-1">{document.status.replace('-', ' ')}</span>
+            <span className="ml-1">{document.status.replace("-", " ")}</span>
           </Badge>
-          
+
           <Badge variant="secondary" className="text-xs">
             v{document.version}
           </Badge>
@@ -311,10 +330,9 @@ export function DocumentCard({
         </div>
 
         <M3CardDescription className="text-sm">
-          {document.type.replace('-', ' ').toUpperCase()} • 
-          Created {formatDate(document.createdDate)} • 
-          {document.fileSize && `${document.fileSize} • `}
-          {document.pageCount && `${document.pageCount} page${document.pageCount > 1 ? 's' : ''}`}
+          {document.type.replace("-", " ").toUpperCase()} • Created{" "}
+          {formatDate(document.createdDate)} •{document.fileSize && `${document.fileSize} • `}
+          {document.pageCount && `${document.pageCount} page${document.pageCount > 1 ? "s" : ""}`}
         </M3CardDescription>
       </M3CardHeader>
 
@@ -322,8 +340,8 @@ export function DocumentCard({
         {/* Document Thumbnail/Preview */}
         {document.thumbnail ? (
           <div className="aspect-[3/4] bg-surface-container-low rounded-lg mb-4 overflow-hidden">
-            <img 
-              src={document.thumbnail} 
+            <img
+              src={document.thumbnail}
               alt={document.title}
               className="w-full h-full object-cover"
             />
@@ -333,7 +351,7 @@ export function DocumentCard({
             <div className="text-center">
               {getTypeIcon()}
               <p className="text-sm text-muted-foreground mt-2">
-                {document.type.replace('-', ' ')}
+                {document.type.replace("-", " ")}
               </p>
             </div>
           </div>
@@ -343,12 +361,16 @@ export function DocumentCard({
         {document.atsScore && (
           <div className="flex items-center justify-between mb-4 p-3 bg-surface-container-low rounded-lg">
             <span className="text-sm font-medium text-foreground">ATS Score</span>
-            <div className={cn(
-              'text-lg font-semibold px-3 py-1 rounded-lg',
-              document.atsScore >= 80 ? 'text-green-600 bg-green-500/10' :
-              document.atsScore >= 60 ? 'text-yellow-600 bg-yellow-500/10' :
-              'text-red-600 bg-red-500/10'
-            )}>
+            <div
+              className={cn(
+                "text-lg font-semibold px-3 py-1 rounded-lg",
+                document.atsScore >= 80
+                  ? "text-green-600 bg-green-500/10"
+                  : document.atsScore >= 60
+                    ? "text-yellow-600 bg-yellow-500/10"
+                    : "text-red-600 bg-red-500/10",
+              )}
+            >
               {document.atsScore}%
             </div>
           </div>
@@ -379,7 +401,10 @@ export function DocumentCard({
               <span className="text-xs text-muted-foreground">Shared with:</span>
               <div className="flex -space-x-2">
                 {document.sharedWith.slice(0, 3).map((user, index) => (
-                  <div key={user.id} className="w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center border-2 border-background">
+                  <div
+                    key={user.id}
+                    className="w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center border-2 border-background"
+                  >
                     {user.name.charAt(0)}
                   </div>
                 ))}
@@ -425,7 +450,7 @@ export function DocumentCard({
         >
           Edit
         </M3Button>
-        
+
         <M3Button
           variant="filled"
           size="small"

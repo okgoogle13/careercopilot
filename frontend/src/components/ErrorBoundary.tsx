@@ -63,9 +63,7 @@ class ErrorBoundary extends Component<Props, State> {
           <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
             <div className="mb-6">
               <Warning className="w-16 h-16 mx-auto text-red-500 mb-4" />
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                Oops! Something went wrong
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h1>
               <p className="text-gray-600">
                 We're sorry, but something unexpected happened. Our team has been notified.
               </p>

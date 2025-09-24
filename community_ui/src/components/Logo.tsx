@@ -7,26 +7,26 @@ interface LogoProps {
   showText?: boolean;
 }
 
-export function Logo({ 
-  size = "md", 
+export function Logo({
+  size = "md",
   variant = "default",
   className = "",
-  showText = true 
+  showText = true,
 }: LogoProps) {
   const sizeClasses = {
     xs: "h-4 w-4",
-    sm: "h-6 w-6", 
+    sm: "h-6 w-6",
     md: "h-8 w-8",
     lg: "h-12 w-12",
-    xl: "h-16 w-16"
+    xl: "h-16 w-16",
   };
 
   const textSizeClasses = {
     xs: "text-xs",
-    sm: "text-sm", 
+    sm: "text-sm",
     md: "text-base",
     lg: "text-lg",
-    xl: "text-xl"
+    xl: "text-xl",
   };
 
   const SkullIcon = () => (
@@ -43,31 +43,20 @@ export function Logo({
       />
       <circle cx="9" cy="9" r="1" fill="currentColor" />
       <circle cx="15" cy="9" r="1" fill="currentColor" />
-      <path
-        d="M10 13h4v1h-4z"
-        fill="currentColor"
-        opacity="0.6"
-      />
-      <path
-        d="M11 20h2v2h-2z"
-        fill="currentColor"
-        opacity="0.4"
-      />
+      <path d="M10 13h4v1h-4z" fill="currentColor" opacity="0.6" />
+      <path d="M11 20h2v2h-2z" fill="currentColor" opacity="0.4" />
     </svg>
   );
 
   const FMLText = ({ size: textSize }: { size: keyof typeof textSizeClasses }) => (
     <div className="flex flex-col">
-      <span className={cn(
-        textSizeClasses[textSize],
-        "font-semibold text-gradient-blue leading-tight"
-      )}>
+      <span
+        className={cn(textSizeClasses[textSize], "font-semibold text-gradient-blue leading-tight")}
+      >
         FML
       </span>
       {size !== "xs" && size !== "sm" && (
-        <span className={cn(
-          "text-xs text-muted-foreground leading-tight -mt-1"
-        )}>
+        <span className={cn("text-xs text-muted-foreground leading-tight -mt-1")}>
           Career Copilot
         </span>
       )}
@@ -76,11 +65,13 @@ export function Logo({
 
   if (variant === "icon-only" || !showText) {
     return (
-      <div className={cn(
-        "flex items-center justify-center",
-        "hover:scale-105 transition-normal cursor-pointer",
-        className
-      )}>
+      <div
+        className={cn(
+          "flex items-center justify-center",
+          "hover:scale-105 transition-normal cursor-pointer",
+          className,
+        )}
+      >
         <SkullIcon />
       </div>
     );
@@ -88,28 +79,27 @@ export function Logo({
 
   if (variant === "minimal") {
     return (
-      <div className={cn(
-        "flex items-center gap-2",
-        "hover:scale-105 transition-normal cursor-pointer",
-        className
-      )}>
+      <div
+        className={cn(
+          "flex items-center gap-2",
+          "hover:scale-105 transition-normal cursor-pointer",
+          className,
+        )}
+      >
         <SkullIcon />
-        <span className={cn(
-          textSizeClasses[size],
-          "font-semibold text-gradient-blue"
-        )}>
-          FML
-        </span>
+        <span className={cn(textSizeClasses[size], "font-semibold text-gradient-blue")}>FML</span>
       </div>
     );
   }
 
   return (
-    <div className={cn(
-      "flex items-center gap-3",
-      "hover:scale-105 transition-normal cursor-pointer",
-      className
-    )}>
+    <div
+      className={cn(
+        "flex items-center gap-3",
+        "hover:scale-105 transition-normal cursor-pointer",
+        className,
+      )}
+    >
       <div className="relative">
         <SkullIcon />
         {/* Glow effect on hover */}
@@ -127,7 +117,10 @@ export function LogoMark({ size = "md", className = "" }: Pick<LogoProps, "size"
   return <Logo size={size} variant="icon-only" className={className} />;
 }
 
-export function LogoMinimal({ size = "md", className = "" }: Pick<LogoProps, "size" | "className">) {
+export function LogoMinimal({
+  size = "md",
+  className = "",
+}: Pick<LogoProps, "size" | "className">) {
   return <Logo size={size} variant="minimal" className={className} />;
 }
 
@@ -139,12 +132,12 @@ export function ResponsiveLogo({ className = "" }: { className?: string }) {
       <div className="block sm:hidden">
         <Logo size="sm" variant="icon-only" className={className} />
       </div>
-      
+
       {/* Tablet: Minimal */}
       <div className="hidden sm:block lg:hidden">
         <Logo size="sm" variant="minimal" className={className} />
       </div>
-      
+
       {/* Desktop: Full logo */}
       <div className="hidden lg:block">
         <Logo size="md" variant="default" className={className} />
@@ -156,12 +149,14 @@ export function ResponsiveLogo({ className = "" }: { className?: string }) {
 // Watermark version (for background use)
 export function LogoWatermark({ className = "" }: { className?: string }) {
   return (
-    <div className={cn(
-      "absolute inset-0 flex items-center justify-center",
-      "opacity-[0.02] pointer-events-none select-none",
-      "text-foreground",
-      className
-    )}>
+    <div
+      className={cn(
+        "absolute inset-0 flex items-center justify-center",
+        "opacity-[0.02] pointer-events-none select-none",
+        "text-foreground",
+        className,
+      )}
+    >
       <Logo size="xl" variant="icon-only" />
     </div>
   );

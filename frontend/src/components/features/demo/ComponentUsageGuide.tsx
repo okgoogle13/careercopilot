@@ -2,7 +2,14 @@ import React from 'react';
 import { Badge } from '../../ui/badge';
 import { Separator } from '../../ui/separator';
 import { CardTitle } from '../../ui/card';
-import { ArrowLeft, Code, Palette, ViewModule as Layout, FlashOn as Zap, CheckCircle } from '@mui/icons-material';
+import {
+  ArrowLeft,
+  Code,
+  Palette,
+  ViewModule as Layout,
+  FlashOn as Zap,
+  CheckCircle,
+} from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -62,13 +69,16 @@ function ProfileCard({ profile, isSelected, onClick }) {
           {/* Getting Started */}
           <Card variant="elevation">
             <CardHeader
-              subheader={<Typography variant='body2' color='text.secondary'>How to implement and use the component library in your applications
-                              </Typography>}>
+              subheader={
+                <Typography variant="body2" color="text.secondary">
+                  How to implement and use the component library in your applications
+                </Typography>
+              }
+            >
               <div className="flex items-center gap-2">
                 <Zap className="w-5 h-5 text-primary" />
                 <CardTitle>Getting Started</CardTitle>
               </div>
-
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
@@ -101,13 +111,16 @@ function ProfileCard({ profile, isSelected, onClick }) {
           {/* Design Principles */}
           <Card variant="elevation">
             <CardHeader
-              subheader={<Typography variant='body2' color='text.secondary'>Core principles that guide the Career Copilot design system
-                              </Typography>}>
+              subheader={
+                <Typography variant="body2" color="text.secondary">
+                  Core principles that guide the Career Copilot design system
+                </Typography>
+              }
+            >
               <div className="flex items-center gap-2">
                 <Palette className="w-5 h-5 text-primary" />
                 <CardTitle>Design Principles</CardTitle>
               </div>
-
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-6">
@@ -160,13 +173,16 @@ function ProfileCard({ profile, isSelected, onClick }) {
           {/* Component Categories */}
           <Card variant="elevation">
             <CardHeader
-              subheader={<Typography variant='body2' color='text.secondary'>Understanding when and how to use different component types
-                              </Typography>}>
+              subheader={
+                <Typography variant="body2" color="text.secondary">
+                  Understanding when and how to use different component types
+                </Typography>
+              }
+            >
               <div className="flex items-center gap-2">
                 <Layout className="w-5 h-5 text-primary" />
                 <CardTitle>Component Categories</CardTitle>
               </div>
-
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
@@ -263,13 +279,16 @@ function ProfileCard({ profile, isSelected, onClick }) {
           {/* Code Example */}
           <Card variant="elevation">
             <CardHeader
-              subheader={<Typography variant='body2' color='text.secondary'>A practical example of using card components with proper variant selection
-                              </Typography>}>
+              subheader={
+                <Typography variant="body2" color="text.secondary">
+                  A practical example of using card components with proper variant selection
+                </Typography>
+              }
+            >
               <div className="flex items-center gap-2">
                 <Code className="w-5 h-5 text-primary" />
                 <CardTitle>Implementation Example</CardTitle>
               </div>
-
             </CardHeader>
             <CardContent>
               <div className="bg-muted p-4 rounded-lg overflow-x-auto">
@@ -282,9 +301,9 @@ function ProfileCard({ profile, isSelected, onClick }) {
 
           {/* Best Practices */}
           <Card variant="elevation">
-            <CardHeader title={<Typography variant='h3'>Best Practices & Guidelines</Typography>}>
-
-            </CardHeader>
+            <CardHeader
+              title={<Typography variant="h3">Best Practices & Guidelines</Typography>}
+            ></CardHeader>
             <CardContent>
               <div className="space-y-4">
                 <div>

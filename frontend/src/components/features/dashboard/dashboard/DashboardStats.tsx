@@ -87,15 +87,17 @@ Calendar tasks created: ${response.data.tasks_created}`);
           </div>
 
           <p className="text-blue-700 text-sm">
-            Generate a complete application package including tailored resume, cover letter, and
-            KSC responses.
+            Generate a complete application package including tailored resume, cover letter, and KSC
+            responses.
           </p>
 
           <div className="space-y-3">
             <Textarea
               placeholder="Paste the job description here..."
               value={jobDescription}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setJobDescription(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setJobDescription(e.target.value)
+              }
               className="min-h-[100px] resize-y"
               disabled={isPreparingApplication}
             />

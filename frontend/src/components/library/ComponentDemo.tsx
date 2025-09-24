@@ -27,9 +27,7 @@ export const ComponentDemo = ({
   children: React.ReactNode;
 }) => (
   <Card variant="elevation">
-    <CardHeader title={<Typography variant='h3'>{title}</Typography>}>
-
-    </CardHeader>
+    <CardHeader title={<Typography variant="h3">{title}</Typography>}></CardHeader>
     <CardContent>
       <div className="space-y-4">{children}</div>
     </CardContent>

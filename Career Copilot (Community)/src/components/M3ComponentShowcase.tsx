@@ -1,45 +1,71 @@
-import React from 'react';
-import { ArrowLeft, Settings, Plus, Search, User, Mail, Phone, Star, Filter, Tag, Download, ChevronDown } from 'lucide-react';
-import { Button } from './ui/button';
-import { M3Button } from './ui/m3-button';
-import { M3Card, M3CardHeader, M3CardTitle, M3CardDescription, M3CardContent, M3CardFooter } from './ui/m3-card';
-import { M3Input } from './ui/m3-input';
-import { M3FAB } from './ui/m3-fab';
-import { M3Chip } from './ui/m3-chip';
-import { M3Select, M3SelectOption } from './ui/m3-select';
-import { M3Checkbox } from './ui/m3-checkbox';
+import React from "react";
+import {
+  ArrowLeft,
+  Settings,
+  Plus,
+  Search,
+  User,
+  Mail,
+  Phone,
+  Star,
+  Filter,
+  Tag,
+  Download,
+  ChevronDown,
+} from "lucide-react";
+import { Button } from "./ui/button";
+import { M3Button } from "./ui/m3-button";
+import {
+  M3Card,
+  M3CardHeader,
+  M3CardTitle,
+  M3CardDescription,
+  M3CardContent,
+  M3CardFooter,
+} from "./ui/m3-card";
+import { M3Input } from "./ui/m3-input";
+import { M3FAB } from "./ui/m3-fab";
+import { M3Chip } from "./ui/m3-chip";
+import { M3Select, M3SelectOption } from "./ui/m3-select";
+import { M3Checkbox } from "./ui/m3-checkbox";
 
 interface M3ComponentShowcaseProps {
   onBack?: () => void;
 }
 
 export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
-  const [selectedCard, setSelectedCard] = React.useState<string | null>('option2');
-  const [filterChips, setFilterChips] = React.useState<string[]>(['design', 'frontend']);
-  const [selectValue, setSelectValue] = React.useState<string>('medium');
+  const [selectedCard, setSelectedCard] = React.useState<string | null>("option2");
+  const [filterChips, setFilterChips] = React.useState<string[]>(["design", "frontend"]);
+  const [selectValue, setSelectValue] = React.useState<string>("medium");
   const [checkboxStates, setCheckboxStates] = React.useState({
     notifications: true,
     marketing: false,
-    analytics: true
+    analytics: true,
   });
 
   const selectOptions: M3SelectOption[] = [
-    { value: 'small', label: 'Small', icon: <div className="w-3 h-3 bg-blue-400 rounded-full" /> },
-    { value: 'medium', label: 'Medium', icon: <div className="w-3 h-3 bg-green-400 rounded-full" /> },
-    { value: 'large', label: 'Large', icon: <div className="w-3 h-3 bg-red-400 rounded-full" /> },
-    { value: 'xlarge', label: 'X-Large', icon: <div className="w-3 h-3 bg-purple-400 rounded-full" /> }
+    { value: "small", label: "Small", icon: <div className="w-3 h-3 bg-blue-400 rounded-full" /> },
+    {
+      value: "medium",
+      label: "Medium",
+      icon: <div className="w-3 h-3 bg-green-400 rounded-full" />,
+    },
+    { value: "large", label: "Large", icon: <div className="w-3 h-3 bg-red-400 rounded-full" /> },
+    {
+      value: "xlarge",
+      label: "X-Large",
+      icon: <div className="w-3 h-3 bg-purple-400 rounded-full" />,
+    },
   ];
 
   const toggleFilterChip = (chipValue: string) => {
-    setFilterChips(prev => 
-      prev.includes(chipValue) 
-        ? prev.filter(v => v !== chipValue)
-        : [...prev, chipValue]
+    setFilterChips((prev) =>
+      prev.includes(chipValue) ? prev.filter((v) => v !== chipValue) : [...prev, chipValue],
     );
   };
 
   const removeInputChip = (chipValue: string) => {
-    setFilterChips(prev => prev.filter(v => v !== chipValue));
+    setFilterChips((prev) => prev.filter((v) => v !== chipValue));
   };
 
   return (
@@ -48,12 +74,7 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
           {onBack && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onBack}
-              className="shrink-0"
-            >
+            <Button variant="ghost" size="icon" onClick={onBack} className="shrink-0">
               <ArrowLeft className="w-5 h-5" />
             </Button>
           )}
@@ -70,7 +91,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
         <div className="space-y-12">
           {/* Buttons Section */}
           <section>
-            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">Buttons</h2>
+            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">
+              Buttons
+            </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Button Variants */}
               <M3Card variant="default">
@@ -88,9 +111,7 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
                     <M3Button variant="outlined" icon={<Settings className="w-4 h-4" />}>
                       Settings
                     </M3Button>
-                    <M3Button variant="text">
-                      Learn More
-                    </M3Button>
+                    <M3Button variant="text">Learn More</M3Button>
                   </div>
                   <div className="flex flex-wrap gap-3">
                     <M3Button variant="elevated" icon={<Download className="w-4 h-4" />}>
@@ -113,34 +134,15 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
                 </M3CardHeader>
                 <M3CardContent className="space-y-6">
                   <div className="flex items-center gap-4">
-                    <M3FAB 
-                      variant="primary" 
-                      size="small" 
-                      icon={<Plus className="w-5 h-5" />}
-                    />
-                    <M3FAB 
-                      variant="primary" 
-                      size="medium" 
-                      icon={<Plus className="w-6 h-6" />}
-                    />
-                    <M3FAB 
-                      variant="primary" 
-                      size="large" 
-                      icon={<Plus className="w-7 h-7" />}
-                    />
+                    <M3FAB variant="primary" size="small" icon={<Plus className="w-5 h-5" />} />
+                    <M3FAB variant="primary" size="medium" icon={<Plus className="w-6 h-6" />} />
+                    <M3FAB variant="primary" size="large" icon={<Plus className="w-7 h-7" />} />
                   </div>
                   <div className="flex items-center gap-4">
-                    <M3FAB 
-                      variant="secondary" 
-                      extended 
-                      icon={<Mail className="w-5 h-5" />}
-                    >
+                    <M3FAB variant="secondary" extended icon={<Mail className="w-5 h-5" />}>
                       Compose
                     </M3FAB>
-                    <M3FAB 
-                      variant="surface" 
-                      icon={<Settings className="w-5 h-5" />}
-                    />
+                    <M3FAB variant="surface" icon={<Settings className="w-5 h-5" />} />
                   </div>
                 </M3CardContent>
               </M3Card>
@@ -149,7 +151,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
 
           {/* Cards Section */}
           <section>
-            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">Cards</h2>
+            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">
+              Cards
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Default Card */}
               <M3Card variant="default">
@@ -173,9 +177,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
               </M3Card>
 
               {/* Interactive Card */}
-              <M3Card 
+              <M3Card
                 variant="interactive"
-                onClick={() => setSelectedCard(selectedCard === 'option2' ? null : 'option2')}
+                onClick={() => setSelectedCard(selectedCard === "option2" ? null : "option2")}
               >
                 <M3CardHeader>
                   <M3CardTitle>Cover Letter Builder</M3CardTitle>
@@ -221,7 +225,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
 
           {/* Form Components Section */}
           <section>
-            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">Form Components</h2>
+            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">
+              Form Components
+            </h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Text Fields */}
               <M3Card variant="default">
@@ -257,9 +263,7 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
               <M3Card variant="default">
                 <M3CardHeader>
                   <M3CardTitle>Select & Checkboxes</M3CardTitle>
-                  <M3CardDescription>
-                    Dropdown selects and checkbox components
-                  </M3CardDescription>
+                  <M3CardDescription>Dropdown selects and checkbox components</M3CardDescription>
                 </M3CardHeader>
                 <M3CardContent className="space-y-6">
                   <M3Select
@@ -269,33 +273,39 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
                     onValueChange={setSelectValue}
                     helperText="Select your current experience level"
                   />
-                  
+
                   <div className="space-y-4">
                     <M3Checkbox
                       label="Email notifications"
                       checked={checkboxStates.notifications}
-                      onChange={(e) => setCheckboxStates(prev => ({
-                        ...prev,
-                        notifications: e.target.checked
-                      }))}
+                      onChange={(e) =>
+                        setCheckboxStates((prev) => ({
+                          ...prev,
+                          notifications: e.target.checked,
+                        }))
+                      }
                       helperText="Receive updates about new features"
                     />
                     <M3Checkbox
                       label="Marketing communications"
                       checked={checkboxStates.marketing}
-                      onChange={(e) => setCheckboxStates(prev => ({
-                        ...prev,
-                        marketing: e.target.checked
-                      }))}
+                      onChange={(e) =>
+                        setCheckboxStates((prev) => ({
+                          ...prev,
+                          marketing: e.target.checked,
+                        }))
+                      }
                     />
                     <M3Checkbox
                       label="Analytics and performance"
                       checked={checkboxStates.analytics}
                       indeterminate={checkboxStates.analytics}
-                      onChange={(e) => setCheckboxStates(prev => ({
-                        ...prev,
-                        analytics: e.target.checked
-                      }))}
+                      onChange={(e) =>
+                        setCheckboxStates((prev) => ({
+                          ...prev,
+                          analytics: e.target.checked,
+                        }))
+                      }
                     />
                   </div>
                 </M3CardContent>
@@ -305,7 +315,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
 
           {/* Chips Section */}
           <section>
-            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">Chips</h2>
+            <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">
+              Chips
+            </h2>
             <M3Card variant="default">
               <M3CardHeader>
                 <M3CardTitle>Chip Variants</M3CardTitle>
@@ -316,7 +328,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
               <M3CardContent className="space-y-6">
                 {/* Assist Chips */}
                 <div>
-                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">Assist Chips</h4>
+                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">
+                    Assist Chips
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     <M3Chip variant="assist" icon={<Search className="w-4 h-4" />}>
                       Search Jobs
@@ -329,9 +343,11 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
 
                 {/* Filter Chips */}
                 <div>
-                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">Filter Chips</h4>
+                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">
+                    Filter Chips
+                  </h4>
                   <div className="flex flex-wrap gap-2">
-                    {['design', 'frontend', 'backend', 'mobile'].map((skill) => (
+                    {["design", "frontend", "backend", "mobile"].map((skill) => (
                       <M3Chip
                         key={skill}
                         variant="filter"
@@ -346,7 +362,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
 
                 {/* Input Chips */}
                 <div>
-                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">Input Chips</h4>
+                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">
+                    Input Chips
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     {filterChips.map((skill) => (
                       <M3Chip
@@ -364,7 +382,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
 
                 {/* Suggestion Chips */}
                 <div>
-                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">Suggestion Chips</h4>
+                  <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">
+                    Suggestion Chips
+                  </h4>
                   <div className="flex flex-wrap gap-2">
                     <M3Chip variant="suggestion">React</M3Chip>
                     <M3Chip variant="suggestion">TypeScript</M3Chip>
@@ -387,7 +407,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
               <M3CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">Design Tokens</h4>
+                    <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">
+                      Design Tokens
+                    </h4>
                     <ul className="space-y-2 text-sm text-[var(--md-sys-color-on-surface-variant)]">
                       <li>• Uses exact CSS variable tokens from theme-tokens.css</li>
                       <li>• Follows Material 3 color semantics strictly</li>
@@ -396,7 +418,9 @@ export function M3ComponentShowcase({ onBack }: M3ComponentShowcaseProps) {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">Motion & Interaction</h4>
+                    <h4 className="font-medium mb-3 text-[var(--md-sys-color-on-surface)]">
+                      Motion & Interaction
+                    </h4>
                     <ul className="space-y-2 text-sm text-[var(--md-sys-color-on-surface-variant)]">
                       <li>• Material 3 duration and easing curves</li>
                       <li>• Proper elevation system (levels 0-5)</li>

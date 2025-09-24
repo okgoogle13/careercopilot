@@ -8,7 +8,7 @@ import {
   IconButton,
   Button,
   Avatar,
-  LinearProgress
+  LinearProgress,
 } from '@mui/material';
 import {
   Business as Building2,
@@ -17,7 +17,7 @@ import {
   LocationOn as MapPin,
   MoreHoriz as MoreHorizontal,
   Schedule as Clock,
-  Visibility as Eye
+  Visibility as Eye,
 } from '@mui/icons-material';
 
 type ApplicationStatus = 'applied' | 'screening' | 'interview' | 'offer' | 'rejected';
@@ -48,7 +48,7 @@ const statusConfig = {
   screening: { color: 'bg-yellow-100 text-yellow-800', label: 'Screening' },
   interview: { color: 'bg-purple-100 text-purple-800', label: 'Interview' },
   offer: { color: 'bg-green-100 text-green-800', label: 'Offer' },
-  rejected: { color: 'bg-red-100 text-red-800', label: 'Rejected' }
+  rejected: { color: 'bg-red-100 text-red-800', label: 'Rejected' },
 };
 
 export function ApplicationCard({
@@ -64,7 +64,7 @@ export function ApplicationCard({
   companyLogo,
   onViewTimeline,
   onEdit,
-  isDragging = false
+  isDragging = false,
 }: ApplicationCardProps) {
   const statusInfo = statusConfig[status];
 
@@ -78,11 +78,7 @@ export function ApplicationCard({
         {/* Header */}
         <Box className="flex items-start justify-between mb-3">
           <Box className="flex items-start gap-3 flex-1 min-w-0">
-            <Avatar
-              src={companyLogo}
-              className="w-10 h-10"
-              sx={{ bgcolor: 'primary.main' }}
-            >
+            <Avatar src={companyLogo} className="w-10 h-10" sx={{ bgcolor: 'primary.main' }}>
               <Building2 sx={{ fontSize: 16 }} />
             </Avatar>
             <Box className="flex-1 min-w-0">
@@ -104,22 +100,14 @@ export function ApplicationCard({
             </Box>
           </Box>
 
-          <IconButton
-            size="small"
-            onClick={() => onEdit?.(id)}
-            aria-label="More options"
-          >
+          <IconButton size="small" onClick={() => onEdit?.(id)} aria-label="More options">
             <MoreHorizontal sx={{ fontSize: 16 }} />
           </IconButton>
         </Box>
 
         {/* Status Badge */}
         <Box className="mb-3">
-          <Chip
-            label={statusInfo.label}
-            size="small"
-            className={statusInfo.color}
-          />
+          <Chip label={statusInfo.label} size="small" className={statusInfo.color} />
         </Box>
 
         {/* Job Details */}
@@ -152,11 +140,7 @@ export function ApplicationCard({
               {progress}%
             </Typography>
           </Box>
-          <LinearProgress
-            variant="determinate"
-            value={progress}
-            className="h-1.5 rounded-full"
-          />
+          <LinearProgress variant="determinate" value={progress} className="h-1.5 rounded-full" />
         </Box>
 
         {/* Next Event */}

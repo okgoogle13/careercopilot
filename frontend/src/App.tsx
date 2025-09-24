@@ -1,10 +1,6 @@
 import { useState, Suspense, lazy } from 'react';
 import { ThemeProvider, CssBaseline } from '@mui/material';
-import {
-  Box,
-  Typography,
-  Chip,
-} from '@mui/material';
+import { Box, Typography, Chip } from '@mui/material';
 // Advanced Sidebar System imports
 import {
   SidebarProvider,
@@ -22,28 +18,104 @@ import { Button } from './components/ui/button';
 import { theme } from './theme/theme';
 
 // Lazy-loaded components for better performance - Updated paths after restructuring
-const Dashboard = lazy(() => import('./components/features/dashboard/Dashboard').then(module => ({ default: module.Dashboard })));
-const ResumeBuilder = lazy(() => import('./components/features/documents/ResumeBuilder').then(module => ({ default: module.ResumeBuilder })));
-const ATSAnalysisDashboard = lazy(() => import('./components/features/analysis/ATSAnalysisDashboard').then(module => ({ default: module.ATSAnalysisDashboard })));
-const TemplateSelector = lazy(() => import('./components/features/documents/TemplateSelector').then(module => ({ default: module.TemplateSelector })));
-const DocumentPreview = lazy(() => import('./components/features/documents/DocumentPreview').then(module => ({ default: module.DocumentPreview })));
-const LoadingStates = lazy(() => import('./components/features/common/LoadingStates').then(module => ({ default: module.LoadingStates })));
-const ComponentLibrary = lazy(() => import('./components/features/demo/ComponentLibrary').then(module => ({ default: module.ComponentLibrary })));
-const StateDemoShowcase = lazy(() => import('./components/features/demo/StateDemoShowcase').then(module => ({ default: module.StateDemoShowcase })));
-const AnimatedShowcase = lazy(() => import('./components/features/demo/AnimatedShowcase').then(module => ({ default: module.AnimatedShowcase })));
+const Dashboard = lazy(() =>
+  import('./components/features/dashboard/Dashboard').then((module) => ({
+    default: module.Dashboard,
+  }))
+);
+const ResumeBuilder = lazy(() =>
+  import('./components/features/documents/ResumeBuilder').then((module) => ({
+    default: module.ResumeBuilder,
+  }))
+);
+const ATSAnalysisDashboard = lazy(() =>
+  import('./components/features/analysis/ATSAnalysisDashboard').then((module) => ({
+    default: module.ATSAnalysisDashboard,
+  }))
+);
+const TemplateSelector = lazy(() =>
+  import('./components/features/documents/TemplateSelector').then((module) => ({
+    default: module.TemplateSelector,
+  }))
+);
+const DocumentPreview = lazy(() =>
+  import('./components/features/documents/DocumentPreview').then((module) => ({
+    default: module.DocumentPreview,
+  }))
+);
+const LoadingStates = lazy(() =>
+  import('./components/features/common/LoadingStates').then((module) => ({
+    default: module.LoadingStates,
+  }))
+);
+const ComponentLibrary = lazy(() =>
+  import('./components/features/demo/ComponentLibrary').then((module) => ({
+    default: module.ComponentLibrary,
+  }))
+);
+const StateDemoShowcase = lazy(() =>
+  import('./components/features/demo/StateDemoShowcase').then((module) => ({
+    default: module.StateDemoShowcase,
+  }))
+);
+const AnimatedShowcase = lazy(() =>
+  import('./components/features/demo/AnimatedShowcase').then((module) => ({
+    default: module.AnimatedShowcase,
+  }))
+);
 
 // User flow components - lazy loaded - Updated paths
-const Auth = lazy(() => import('./components/features/auth/Auth').then(module => ({ default: module.Auth })));
-const UploadResume = lazy(() => import('./components/features/documents/UploadResume').then(module => ({ default: module.UploadResume })));
-const ProfileEditor = lazy(() => import('./components/features/profile/ProfileEditor').then(module => ({ default: module.ProfileEditor })));
-const DocumentTypeSelector = lazy(() => import('./components/features/documents/DocumentTypeSelector').then(module => ({ default: module.DocumentTypeSelector })));
-const JobInput = lazy(() => import('./components/features/opportunities/JobInput').then(module => ({ default: module.JobInput })));
-const CareerGrowthHub = lazy(() => import('./components/features/opportunities/CareerGrowthHub').then(module => ({ default: module.CareerGrowthHub })));
-const JobMatching = lazy(() => import('./components/features/opportunities/JobMatching').then(module => ({ default: module.JobMatching })));
-const CareerIntelligence = lazy(() => import('./components/features/opportunities/CareerIntelligence').then(module => ({ default: module.CareerIntelligence })));
-const InterviewPrep = lazy(() => import('./components/features/opportunities/InterviewPrep').then(module => ({ default: module.InterviewPrep })));
-const Settings = lazy(() => import('./components/features/dashboard/Settings').then(module => ({ default: module.Settings })));
-const MUITest = lazy(() => import('./components/features/demo/MUITest').then(module => ({ default: module.MUITest })));
+const Auth = lazy(() =>
+  import('./components/features/auth/Auth').then((module) => ({ default: module.Auth }))
+);
+const UploadResume = lazy(() =>
+  import('./components/features/documents/UploadResume').then((module) => ({
+    default: module.UploadResume,
+  }))
+);
+const ProfileEditor = lazy(() =>
+  import('./components/features/profile/ProfileEditor').then((module) => ({
+    default: module.ProfileEditor,
+  }))
+);
+const DocumentTypeSelector = lazy(() =>
+  import('./components/features/documents/DocumentTypeSelector').then((module) => ({
+    default: module.DocumentTypeSelector,
+  }))
+);
+const JobInput = lazy(() =>
+  import('./components/features/opportunities/JobInput').then((module) => ({
+    default: module.JobInput,
+  }))
+);
+const CareerGrowthHub = lazy(() =>
+  import('./components/features/opportunities/CareerGrowthHub').then((module) => ({
+    default: module.CareerGrowthHub,
+  }))
+);
+const JobMatching = lazy(() =>
+  import('./components/features/opportunities/JobMatching').then((module) => ({
+    default: module.JobMatching,
+  }))
+);
+const CareerIntelligence = lazy(() =>
+  import('./components/features/opportunities/CareerIntelligence').then((module) => ({
+    default: module.CareerIntelligence,
+  }))
+);
+const InterviewPrep = lazy(() =>
+  import('./components/features/opportunities/InterviewPrep').then((module) => ({
+    default: module.InterviewPrep,
+  }))
+);
+const Settings = lazy(() =>
+  import('./components/features/dashboard/Settings').then((module) => ({
+    default: module.Settings,
+  }))
+);
+const MUITest = lazy(() =>
+  import('./components/features/demo/MUITest').then((module) => ({ default: module.MUITest }))
+);
 import { AppTab, DashboardTab, DocumentType, Profile as SharedProfile, Template } from './types';
 
 import {
@@ -467,10 +539,7 @@ export default function App() {
 
       case 'ats-analysis':
         return (
-          <ATSAnalysisDashboard
-            onNext={handleATSAnalysisComplete}
-            onBack={handleBackToJobInput}
-          />
+          <ATSAnalysisDashboard onNext={handleATSAnalysisComplete} onBack={handleBackToJobInput} />
         );
 
       case 'template-selector':
@@ -633,16 +702,18 @@ export default function App() {
 
           {/* Content Area */}
           <div className="flex flex-1 flex-col gap-4 p-4">
-            <Suspense fallback={
-              <div className="flex items-center justify-center h-64">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                  <Typography variant="body2" color="text.secondary">
-                    Loading...
-                  </Typography>
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center h-64">
+                  <div className="flex flex-col items-center gap-4">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                    <Typography variant="body2" color="text.secondary">
+                      Loading...
+                    </Typography>
+                  </div>
                 </div>
-              </div>
-            }>
+              }
+            >
               {renderContent()}
             </Suspense>
           </div>

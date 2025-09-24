@@ -6,7 +6,7 @@ import { ArrowLeft, Eye, Star, Download } from "lucide-react";
 
 interface TemplateSelectorProps {
   onBack: () => void;
-  onSelectTemplate: (templateId: string, type: 'resume' | 'cover-letter') => void;
+  onSelectTemplate: (templateId: string, type: "resume" | "cover-letter") => void;
 }
 
 interface Template {
@@ -18,7 +18,7 @@ interface Template {
   downloads: number;
   preview: string;
   features: string[];
-  type: 'resume' | 'cover-letter';
+  type: "resume" | "cover-letter";
   isPremium: boolean;
 }
 
@@ -33,7 +33,7 @@ const mockTemplates: Template[] = [
     preview: "bg-gradient-to-br from-slate-100 to-slate-200",
     features: ["ATS-Friendly", "Single Page", "Contact Icons", "Skills Section"],
     type: "resume",
-    isPremium: false
+    isPremium: false,
   },
   {
     id: "executive-pro",
@@ -45,7 +45,7 @@ const mockTemplates: Template[] = [
     preview: "bg-gradient-to-br from-blue-100 to-indigo-200",
     features: ["Two Column", "Executive Summary", "Achievement Highlights", "References"],
     type: "resume",
-    isPremium: true
+    isPremium: true,
   },
   {
     id: "creative-portfolio",
@@ -57,7 +57,7 @@ const mockTemplates: Template[] = [
     preview: "bg-gradient-to-br from-purple-100 to-pink-200",
     features: ["Portfolio Section", "Color Accents", "Project Showcase", "Skills Visualization"],
     type: "resume",
-    isPremium: true
+    isPremium: true,
   },
   {
     id: "ats-optimized",
@@ -69,7 +69,7 @@ const mockTemplates: Template[] = [
     preview: "bg-gradient-to-br from-green-100 to-emerald-200",
     features: ["98% ATS Pass Rate", "Standard Fonts", "Simple Layout", "Keyword Optimized"],
     type: "resume",
-    isPremium: false
+    isPremium: false,
   },
   {
     id: "cover-professional",
@@ -81,7 +81,7 @@ const mockTemplates: Template[] = [
     preview: "bg-gradient-to-br from-gray-100 to-slate-200",
     features: ["Business Format", "Customizable", "Multiple Layouts", "Industry Agnostic"],
     type: "cover-letter",
-    isPremium: false
+    isPremium: false,
   },
   {
     id: "cover-modern",
@@ -93,21 +93,26 @@ const mockTemplates: Template[] = [
     preview: "bg-gradient-to-br from-teal-100 to-cyan-200",
     features: ["Modern Typography", "Color Accents", "Company Logo Space", "Social Links"],
     type: "cover-letter",
-    isPremium: true
-  }
+    isPremium: true,
+  },
 ];
 
 export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorProps) {
-  const [selectedType, setSelectedType] = useState<'resume' | 'cover-letter'>('resume');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedType, setSelectedType] = useState<"resume" | "cover-letter">("resume");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
-  const filteredTemplates = mockTemplates.filter(template => {
+  const filteredTemplates = mockTemplates.filter((template) => {
     const typeMatch = template.type === selectedType;
-    const categoryMatch = selectedCategory === 'all' || template.category === selectedCategory;
+    const categoryMatch = selectedCategory === "all" || template.category === selectedCategory;
     return typeMatch && categoryMatch;
   });
 
-  const categories = ['all', ...Array.from(new Set(mockTemplates.filter(t => t.type === selectedType).map(t => t.category)))];
+  const categories = [
+    "all",
+    ...Array.from(
+      new Set(mockTemplates.filter((t) => t.type === selectedType).map((t) => t.category)),
+    ),
+  ];
 
   return (
     <div className="flex-1 p-8">
@@ -134,16 +139,16 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
       <div className="mb-8 space-y-4">
         <div className="flex gap-2">
           <Button
-            variant={selectedType === 'resume' ? 'default' : 'outline'}
-            className={selectedType === 'resume' ? 'bg-primary hover:bg-primary/90' : ''}
-            onClick={() => setSelectedType('resume')}
+            variant={selectedType === "resume" ? "default" : "outline"}
+            className={selectedType === "resume" ? "bg-primary hover:bg-primary/90" : ""}
+            onClick={() => setSelectedType("resume")}
           >
             Resume Templates
           </Button>
           <Button
-            variant={selectedType === 'cover-letter' ? 'default' : 'outline'}
-            className={selectedType === 'cover-letter' ? 'bg-primary hover:bg-primary/90' : ''}
-            onClick={() => setSelectedType('cover-letter')}
+            variant={selectedType === "cover-letter" ? "default" : "outline"}
+            className={selectedType === "cover-letter" ? "bg-primary hover:bg-primary/90" : ""}
+            onClick={() => setSelectedType("cover-letter")}
           >
             Cover Letter Templates
           </Button>
@@ -153,12 +158,12 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
           {categories.map((category) => (
             <Button
               key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
+              variant={selectedCategory === category ? "default" : "outline"}
               size="sm"
-              className={selectedCategory === category ? 'bg-primary hover:bg-primary/90' : ''}
+              className={selectedCategory === category ? "bg-primary hover:bg-primary/90" : ""}
               onClick={() => setSelectedCategory(category)}
             >
-              {category === 'all' ? 'All Categories' : category}
+              {category === "all" ? "All Categories" : category}
             </Button>
           ))}
         </div>
@@ -182,9 +187,7 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
                 </div>
               </div>
               {template.isPremium && (
-                <Badge className="absolute top-2 right-2 bg-yellow-500 text-black">
-                  Premium
-                </Badge>
+                <Badge className="absolute top-2 right-2 bg-yellow-500 text-black">Premium</Badge>
               )}
             </div>
 
@@ -239,8 +242,10 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
 
       {filteredTemplates.length === 0 && (
         <div className="text-center py-12">
-          <div className="text-muted-foreground mb-4">No templates found for the selected filters</div>
-          <Button variant="outline" onClick={() => setSelectedCategory('all')}>
+          <div className="text-muted-foreground mb-4">
+            No templates found for the selected filters
+          </div>
+          <Button variant="outline" onClick={() => setSelectedCategory("all")}>
             Clear Filters
           </Button>
         </div>

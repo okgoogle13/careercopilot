@@ -9,8 +9,8 @@ import { Info, AlertTriangle } from "lucide-react";
 
 export function DisplayComponentsSection() {
   return (
-    <ComponentSection 
-      title="Display Components" 
+    <ComponentSection
+      title="Display Components"
       description="Components for displaying information, status, and visual elements"
     >
       <ComponentDemo title="Badges">
@@ -75,9 +75,7 @@ export function DisplayComponentsSection() {
           <Alert variant="destructive">
             <AlertTriangle className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
-              Something went wrong. Please try again later.
-            </AlertDescription>
+            <AlertDescription>Something went wrong. Please try again later.</AlertDescription>
           </Alert>
         </div>
       </ComponentDemo>

@@ -11,10 +11,10 @@ interface InterviewPrepProps {
 
 interface Question {
   id: string;
-  type: 'behavioral' | 'technical' | 'situational';
+  type: "behavioral" | "technical" | "situational";
   question: string;
   category: string;
-  difficulty: 'Easy' | 'Medium' | 'Hard';
+  difficulty: "Easy" | "Medium" | "Hard";
   sampleAnswer?: string;
   tips: string[];
 }
@@ -28,72 +28,77 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
 
   const questionCategories = [
     {
-      id: 'behavioral',
-      title: 'Behavioral Questions',
-      description: 'Questions about past experiences and how you handled situations',
-      color: 'bg-blue-500/10 text-blue-500 border-blue-500/20'
+      id: "behavioral",
+      title: "Behavioral Questions",
+      description: "Questions about past experiences and how you handled situations",
+      color: "bg-blue-500/10 text-blue-500 border-blue-500/20",
     },
     {
-      id: 'situational',
-      title: 'Situational Questions', 
-      description: 'Hypothetical scenarios to assess problem-solving skills',
-      color: 'bg-green-500/10 text-green-500 border-green-500/20'
+      id: "situational",
+      title: "Situational Questions",
+      description: "Hypothetical scenarios to assess problem-solving skills",
+      color: "bg-green-500/10 text-green-500 border-green-500/20",
     },
     {
-      id: 'technical',
-      title: 'Technical Questions',
-      description: 'Role-specific questions about skills and knowledge',
-      color: 'bg-purple-500/10 text-purple-500 border-purple-500/20'
-    }
+      id: "technical",
+      title: "Technical Questions",
+      description: "Role-specific questions about skills and knowledge",
+      color: "bg-purple-500/10 text-purple-500 border-purple-500/20",
+    },
   ];
 
   const sampleQuestions: Question[] = [
     {
-      id: '1',
-      type: 'behavioral',
-      question: "Tell me about a time when you had to deal with a difficult client or situation. How did you handle it?",
-      category: 'Conflict Resolution',
-      difficulty: 'Medium',
+      id: "1",
+      type: "behavioral",
+      question:
+        "Tell me about a time when you had to deal with a difficult client or situation. How did you handle it?",
+      category: "Conflict Resolution",
+      difficulty: "Medium",
       tips: [
         "Use the STAR method (Situation, Task, Action, Result)",
         "Focus on your problem-solving approach",
         "Highlight your communication skills",
-        "Show empathy and understanding"
+        "Show empathy and understanding",
       ],
-      sampleAnswer: "In my role as a Community Support Worker, I encountered a client who was resistant to participating in their support plan activities. I recognized that their behavior might be stemming from fear or past negative experiences. I took time to listen to their concerns, validated their feelings, and worked collaboratively to modify the plan to better suit their comfort level. As a result, they became more engaged and achieved their goals within the revised timeframe."
+      sampleAnswer:
+        "In my role as a Community Support Worker, I encountered a client who was resistant to participating in their support plan activities. I recognized that their behavior might be stemming from fear or past negative experiences. I took time to listen to their concerns, validated their feelings, and worked collaboratively to modify the plan to better suit their comfort level. As a result, they became more engaged and achieved their goals within the revised timeframe.",
     },
     {
-      id: '2',
-      type: 'situational',
-      question: "How would you approach working with a client who has multiple complex needs and limited support networks?",
-      category: 'Case Management',
-      difficulty: 'Hard',
+      id: "2",
+      type: "situational",
+      question:
+        "How would you approach working with a client who has multiple complex needs and limited support networks?",
+      category: "Case Management",
+      difficulty: "Hard",
       tips: [
         "Demonstrate holistic thinking",
         "Show understanding of person-centered care",
         "Mention collaboration with other services",
-        "Emphasize building trust and rapport"
-      ]
+        "Emphasize building trust and rapport",
+      ],
     },
     {
-      id: '3',
-      type: 'technical',
-      question: "What strategies would you use to support someone experiencing a mental health crisis?",
-      category: 'Crisis Intervention',
-      difficulty: 'Hard',
+      id: "3",
+      type: "technical",
+      question:
+        "What strategies would you use to support someone experiencing a mental health crisis?",
+      category: "Crisis Intervention",
+      difficulty: "Hard",
       tips: [
         "Mention de-escalation techniques",
         "Reference relevant frameworks or models",
         "Show understanding of safety protocols",
-        "Demonstrate knowledge of referral pathways"
-      ]
-    }
+        "Demonstrate knowledge of referral pathways",
+      ],
+    },
   ];
 
   const handleSelectCategory = (categoryId: string) => {
-    const questionsInCategory = sampleQuestions.filter(q => q.type === categoryId);
+    const questionsInCategory = sampleQuestions.filter((q) => q.type === categoryId);
     if (questionsInCategory.length > 0) {
-      const randomQuestion = questionsInCategory[Math.floor(Math.random() * questionsInCategory.length)];
+      const randomQuestion =
+        questionsInCategory[Math.floor(Math.random() * questionsInCategory.length)];
       setCurrentQuestion(randomQuestion);
       setUserAnswer("");
       setShowSampleAnswer(false);
@@ -121,19 +126,27 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Easy': return 'text-green-500';
-      case 'Medium': return 'text-yellow-500';
-      case 'Hard': return 'text-red-500';
-      default: return 'text-gray-500';
+      case "Easy":
+        return "text-green-500";
+      case "Medium":
+        return "text-yellow-500";
+      case "Hard":
+        return "text-red-500";
+      default:
+        return "text-gray-500";
     }
   };
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'behavioral': return 'bg-blue-500/10 text-blue-500';
-      case 'situational': return 'bg-green-500/10 text-green-500';
-      case 'technical': return 'bg-purple-500/10 text-purple-500';
-      default: return 'bg-gray-500/10 text-gray-500';
+      case "behavioral":
+        return "bg-blue-500/10 text-blue-500";
+      case "situational":
+        return "bg-green-500/10 text-green-500";
+      case "technical":
+        return "bg-purple-500/10 text-purple-500";
+      default:
+        return "bg-gray-500/10 text-gray-500";
     }
   };
 
@@ -171,14 +184,14 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                   <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-200">
                     <MessageSquare className="w-8 h-8 text-primary" />
                   </div>
-                  
+
                   <div>
                     <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {category.description}
                     </p>
                   </div>
-                  
+
                   <Button className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90">
                     <Play className="w-4 h-4 mr-2" />
                     Start Practice
@@ -199,15 +212,14 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     <Badge className={getTypeColor(currentQuestion.type)}>
                       {currentQuestion.type}
                     </Badge>
-                    <Badge variant="outline" className={getDifficultyColor(currentQuestion.difficulty)}>
+                    <Badge
+                      variant="outline"
+                      className={getDifficultyColor(currentQuestion.difficulty)}
+                    >
                       {currentQuestion.difficulty}
                     </Badge>
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleNewQuestion}
-                  >
+                  <Button variant="outline" size="sm" onClick={handleNewQuestion}>
                     <RotateCcw className="w-4 h-4 mr-2" />
                     New Question
                   </Button>
@@ -247,9 +259,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       <span className="text-sm">Recording...</span>
                     </div>
                   )}
-                  <span className="text-sm text-muted-foreground">
-                    Or type your answer below
-                  </span>
+                  <span className="text-sm text-muted-foreground">Or type your answer below</span>
                 </div>
 
                 {/* Answer Input */}
@@ -283,7 +293,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       variant="outline"
                       onClick={() => setShowSampleAnswer(!showSampleAnswer)}
                     >
-                      {showSampleAnswer ? 'Hide' : 'Show'} Sample Answer
+                      {showSampleAnswer ? "Hide" : "Show"} Sample Answer
                     </Button>
                   </div>
                 </div>
@@ -307,10 +317,21 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     <h3 className="font-semibold text-primary">AI Feedback</h3>
                   </div>
                   <div className="space-y-2 text-sm">
-                    <p>• <strong>Structure:</strong> Good use of STAR method, clear sequence of events</p>
-                    <p>• <strong>Impact:</strong> Consider quantifying the results more specifically</p>
-                    <p>• <strong>Skills demonstrated:</strong> Shows empathy, adaptability, and client-centered approach</p>
-                    <p>• <strong>Suggestion:</strong> Add more detail about the specific strategies you used</p>
+                    <p>
+                      • <strong>Structure:</strong> Good use of STAR method, clear sequence of
+                      events
+                    </p>
+                    <p>
+                      • <strong>Impact:</strong> Consider quantifying the results more specifically
+                    </p>
+                    <p>
+                      • <strong>Skills demonstrated:</strong> Shows empathy, adaptability, and
+                      client-centered approach
+                    </p>
+                    <p>
+                      • <strong>Suggestion:</strong> Add more detail about the specific strategies
+                      you used
+                    </p>
                   </div>
                 </Card>
               )}
@@ -352,11 +373,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 </div>
               </Card>
 
-              <Button
-                variant="outline"
-                className="w-full"
-                onClick={() => setCurrentQuestion(null)}
-              >
+              <Button variant="outline" className="w-full" onClick={() => setCurrentQuestion(null)}>
                 Choose Different Category
               </Button>
             </div>

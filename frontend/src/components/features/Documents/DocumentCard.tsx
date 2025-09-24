@@ -100,12 +100,12 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           </div>
         )}
       </div>
-      
+
       <h3 className="font-medium mb-1 truncate">{document.title}</h3>
       <p className="text-sm text-muted-foreground mb-3">
         {document.type} • {formattedDate}
       </p>
-      
+
       <div className="mt-auto pt-3 border-t border-outline-variant">
         <div className="flex justify-between items-center">
           <span className="text-xs text-muted-foreground">
@@ -126,15 +126,15 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
 
 function formatFileSize(bytes?: number): string {
   if (!bytes) return '0 B';
-  
+
   const units = ['B', 'KB', 'MB', 'GB'];
   let size = bytes;
   let unitIndex = 0;
-  
+
   while (size >= 1024 && unitIndex < units.length - 1) {
     size /= 1024;
     unitIndex++;
   }
-  
+
   return `${size.toFixed(1)} ${units[unitIndex]}`;
 }

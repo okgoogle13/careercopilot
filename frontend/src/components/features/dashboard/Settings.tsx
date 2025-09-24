@@ -1,7 +1,15 @@
 import { useState } from 'react';
 import { Input } from '../../ui/input';
 import { Switch } from '../../ui/switch';
-import { ArrowLeft, Person as User, Notifications as Bell, Shield, Delete as Trash2, Download, Upload } from '@mui/icons-material';
+import {
+  ArrowLeft,
+  Person as User,
+  Notifications as Bell,
+  Shield,
+  Delete as Trash2,
+  Download,
+  Upload,
+} from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -264,11 +272,7 @@ export function Settings({ onBack }: SettingsProps) {
                         >
                           Cancel
                         </Button>
-                        <Button
-                          variant="outlined"
-                          onClick={handleDeleteAccount}
-                          className="flex-1"
-                        >
+                        <Button variant="outlined" onClick={handleDeleteAccount} className="flex-1">
                           Yes, Delete Forever
                         </Button>
                       </div>

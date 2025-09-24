@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, GpsFixed, CheckCircle, Error, TrendingUp, Description, People, Lightbulb } from '@mui/icons-material';
+import {
+  ArrowLeft,
+  ArrowRight,
+  GpsFixed,
+  CheckCircle,
+  Error,
+  TrendingUp,
+  Description,
+  People,
+  Lightbulb,
+} from '@mui/icons-material';
 import { Button } from '../../ui/button';
 import { Card } from '../../ui/card';
 import { Badge } from '../../ui/badge';
@@ -22,34 +32,40 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       formatting: 92,
       keywords: 78,
       experience: 88,
-      skills: 85
+      skills: 85,
     },
     matchedKeywords: [
-      'Community Services', 'Case Management', 'Crisis Intervention',
-      'Mental Health Support', 'Program Coordination', 'Client Assessment',
-      'Documentation', 'Multidisciplinary Team', 'Advocacy', 'Resource Coordination',
-      'Trauma-Informed Care', 'Cultural Competency'
+      'Community Services',
+      'Case Management',
+      'Crisis Intervention',
+      'Mental Health Support',
+      'Program Coordination',
+      'Client Assessment',
+      'Documentation',
+      'Multidisciplinary Team',
+      'Advocacy',
+      'Resource Coordination',
+      'Trauma-Informed Care',
+      'Cultural Competency',
     ],
-    missingKeywords: [
-      'Data Management', 'Quality Assurance', 'Risk Assessment'
-    ],
+    missingKeywords: ['Data Management', 'Quality Assurance', 'Risk Assessment'],
     insights: [
       {
         type: 'strength' as const,
         title: 'Strong Experience Match',
-        description: 'Your community services experience aligns perfectly with job requirements'
+        description: 'Your community services experience aligns perfectly with job requirements',
       },
       {
         type: 'improvement' as const,
         title: 'Add Technical Skills',
-        description: 'Include specific database management and reporting software experience'
+        description: 'Include specific database management and reporting software experience',
       },
       {
         type: 'opportunity' as const,
         title: 'Highlight Leadership',
-        description: 'Emphasize your program coordination and team leadership experience'
-      }
-    ]
+        description: 'Emphasize your program coordination and team leadership experience',
+      },
+    ],
   };
 
   const getScoreColor = (score: number) => {
@@ -80,11 +96,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
             </Button>
           </div>
           <div className="flex items-center gap-3">
-            <Button
-              variant="default"
-              onClick={onNext}
-              className="flex items-center gap-2"
-            >
+            <Button variant="default" onClick={onNext} className="flex items-center gap-2">
               Continue to Templates
               <ArrowRight className="w-4 h-4" />
             </Button>
@@ -93,12 +105,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
 
         {/* Title Section */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-gradient-aurora">
-            ATS Compatibility Analysis
-          </h1>
+          <h1 className="text-4xl font-bold text-gradient-aurora">ATS Compatibility Analysis</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Your resume has been analyzed for compatibility with Applicant Tracking Systems.
-            Here's how well it matches the job requirements.
+            Your resume has been analyzed for compatibility with Applicant Tracking Systems. Here's
+            how well it matches the job requirements.
           </p>
         </div>
 
@@ -124,18 +134,20 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                     {/* Enhanced pulsing score text overlay */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
-                        <div className={`text-5xl font-bold pulsing-score-text ${getScoreColor(analysisData.overallScore)}`}>
+                        <div
+                          className={`text-5xl font-bold pulsing-score-text ${getScoreColor(analysisData.overallScore)}`}
+                        >
                           {analysisData.overallScore}%
                         </div>
-                        <div className="text-sm text-muted-foreground mt-1">
-                          ATS Compatible
-                        </div>
+                        <div className="text-sm text-muted-foreground mt-1">ATS Compatible</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${getScoreBgColor(analysisData.overallScore)}`}>
+                <div
+                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${getScoreBgColor(analysisData.overallScore)}`}
+                >
                   <CheckCircle className={`w-4 h-4 ${getScoreColor(analysisData.overallScore)}`} />
                   <span className={`font-medium ${getScoreColor(analysisData.overallScore)}`}>
                     Excellent Match
@@ -143,7 +155,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  Your resume is well-optimized for ATS systems and matches {analysisData.keywordMatches} of {analysisData.totalKeywords} key requirements.
+                  Your resume is well-optimized for ATS systems and matches{' '}
+                  {analysisData.keywordMatches} of {analysisData.totalKeywords} key requirements.
                 </p>
               </div>
             </Card>
@@ -164,15 +177,16 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                       <span className="text-sm font-medium capitalize">
                         {section.replace(/([A-Z])/g, ' $1').trim()}
                       </span>
-                      <span className={`text-sm font-bold ${getScoreColor(score)}`}>
-                        {score}%
-                      </span>
+                      <span className={`text-sm font-bold ${getScoreColor(score)}`}>{score}%</span>
                     </div>
                     <div className="w-full bg-muted rounded-full h-2">
                       <div
                         className={`h-2 rounded-full transition-all duration-1000 ${
-                          score >= 80 ? 'bg-green-500' :
-                          score >= 60 ? 'bg-yellow-500' : 'bg-red-500'
+                          score >= 80
+                            ? 'bg-green-500'
+                            : score >= 60
+                              ? 'bg-yellow-500'
+                              : 'bg-red-500'
                         }`}
                         style={{ width: `${score}%` }}
                       />
@@ -191,7 +205,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
             {[
               { id: 'overview', label: 'Overview', icon: Description },
               { id: 'keywords', label: 'Keywords', icon: GpsFixed },
-              { id: 'insights', label: 'Insights', icon: Lightbulb }
+              { id: 'insights', label: 'Insights', icon: Lightbulb },
             ].map((tab) => {
               const Icon = tab.icon;
               return (
@@ -224,21 +238,27 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Excellent Formatting</p>
-                      <p className="text-sm text-muted-foreground">Clean structure that ATS can easily parse</p>
+                      <p className="text-sm text-muted-foreground">
+                        Clean structure that ATS can easily parse
+                      </p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Strong Experience Match</p>
-                      <p className="text-sm text-muted-foreground">Your background aligns well with job requirements</p>
+                      <p className="text-sm text-muted-foreground">
+                        Your background aligns well with job requirements
+                      </p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Relevant Skills Listed</p>
-                      <p className="text-sm text-muted-foreground">Key competencies are clearly highlighted</p>
+                      <p className="text-sm text-muted-foreground">
+                        Key competencies are clearly highlighted
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -254,14 +274,18 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                     <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Missing Keywords</p>
-                      <p className="text-sm text-muted-foreground">3 important terms not found in your resume</p>
+                      <p className="text-sm text-muted-foreground">
+                        3 important terms not found in your resume
+                      </p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
                     <div>
                       <p className="font-medium">Technical Skills Section</p>
-                      <p className="text-sm text-muted-foreground">Could benefit from more specific software mentions</p>
+                      <p className="text-sm text-muted-foreground">
+                        Could benefit from more specific software mentions
+                      </p>
                     </div>
                   </li>
                 </ul>
@@ -273,7 +297,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
             <div className="space-y-6">
               {/* Keywords Section with Primary Color */}
               <Card className="card-surface p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--color-primary)' }}>
+                <h3
+                  className="text-lg font-semibold mb-4 flex items-center gap-2"
+                  style={{ color: 'var(--color-primary)' }}
+                >
                   <GpsFixed className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
                   Keyword Analysis
                 </h3>
@@ -285,7 +312,11 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {analysisData.matchedKeywords.map((keyword, index) => (
-                        <Badge key={index} variant="secondary" className="bg-green-500/10 text-green-600 border-green-500/20">
+                        <Badge
+                          key={index}
+                          variant="secondary"
+                          className="bg-green-500/10 text-green-600 border-green-500/20"
+                        >
                           {keyword}
                         </Badge>
                       ))}
@@ -298,7 +329,11 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {analysisData.missingKeywords.map((keyword, index) => (
-                        <Badge key={index} variant="secondary" className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20">
+                        <Badge
+                          key={index}
+                          variant="secondary"
+                          className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20"
+                        >
                           {keyword}
                         </Badge>
                       ))}
@@ -312,7 +347,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           {activeTab === 'insights' && (
             <div className="space-y-4">
               {/* Insights Section with Secondary Color */}
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--color-secondary)' }}>
+              <h3
+                className="text-lg font-semibold mb-4 flex items-center gap-2"
+                style={{ color: 'var(--color-secondary)' }}
+              >
                 <Lightbulb className="w-5 h-5" style={{ color: 'var(--color-secondary)' }} />
                 Actionable Insights
               </h3>
@@ -320,14 +358,24 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
               {analysisData.insights.map((insight, index) => (
                 <Card key={index} className="card-surface p-6">
                   <div className="flex items-start gap-4">
-                    <div className={`p-2 rounded-lg ${
-                      insight.type === 'strength' ? 'bg-green-500/10' :
-                      insight.type === 'improvement' ? 'bg-yellow-500/10' :
-                      'bg-blue-500/10'
-                    }`}>
-                      {insight.type === 'strength' && <CheckCircle className="w-5 h-5 text-green-500" />}
-                      {insight.type === 'improvement' && <Error className="w-5 h-5 text-yellow-500" />}
-                      {insight.type === 'opportunity' && <TrendingUp className="w-5 h-5 text-blue-500" />}
+                    <div
+                      className={`p-2 rounded-lg ${
+                        insight.type === 'strength'
+                          ? 'bg-green-500/10'
+                          : insight.type === 'improvement'
+                            ? 'bg-yellow-500/10'
+                            : 'bg-blue-500/10'
+                      }`}
+                    >
+                      {insight.type === 'strength' && (
+                        <CheckCircle className="w-5 h-5 text-green-500" />
+                      )}
+                      {insight.type === 'improvement' && (
+                        <Error className="w-5 h-5 text-yellow-500" />
+                      )}
+                      {insight.type === 'opportunity' && (
+                        <TrendingUp className="w-5 h-5 text-blue-500" />
+                      )}
                     </div>
                     <div>
                       <h4 className="font-semibold mb-2">{insight.title}</h4>
@@ -342,11 +390,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
 
         {/* Action Buttons */}
         <div className="flex justify-between items-center pt-8 border-t border-border">
-          <Button
-            variant="outline"
-            onClick={onBack}
-            className="flex items-center gap-2"
-          >
+          <Button variant="outline" onClick={onBack} className="flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
             Back to Job Analysis
           </Button>
@@ -355,10 +399,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
             <div className="text-sm text-muted-foreground">
               Ready to create an optimized resume?
             </div>
-            <Button
-              onClick={onNext}
-              className="flex items-center gap-2 btn-primary-cta"
-            >
+            <Button onClick={onNext} className="flex items-center gap-2 btn-primary-cta">
               Choose Template
               <ArrowRight className="w-4 h-4" />
             </Button>

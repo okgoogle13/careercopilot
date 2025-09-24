@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Card } from '../ui/card';
-import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
-import { Check, Eye, Star } from 'lucide-react';
+import { useState } from "react";
+import { Card } from "../ui/card";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { Check, Eye, Star } from "lucide-react";
 
 interface TemplateCardProps {
   template_name: string;
@@ -23,21 +23,21 @@ export function TemplateCard({
   is_selected = false,
   best_for_tags = [],
   onSelect,
-  onPreview
+  onPreview,
 }: TemplateCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   const getScoreColor = (score: number) => {
-    if (score >= 95) return 'text-accent-green';
-    if (score >= 90) return 'text-brand-light';
-    if (score >= 85) return 'text-accent-orange';
-    return 'text-content-muted';
+    if (score >= 95) return "text-accent-green";
+    if (score >= 90) return "text-brand-light";
+    if (score >= 85) return "text-accent-orange";
+    return "text-content-muted";
   };
 
   return (
-    <Card 
+    <Card
       className={`relative overflow-hidden transition-all duration-300 cursor-pointer group card-surface hover:border-brand-primary ${
-        is_selected ? 'ring-2 ring-brand-primary glow-primary' : ''
+        is_selected ? "ring-2 ring-brand-primary glow-primary" : ""
       }`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -65,8 +65,8 @@ export function TemplateCard({
       {/* Preview Image */}
       <div className="relative h-48 bg-surface-section overflow-hidden rounded-t-2xl">
         {preview_image ? (
-          <img 
-            src={preview_image} 
+          <img
+            src={preview_image}
             alt={`${template_name} preview`}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
@@ -78,13 +78,15 @@ export function TemplateCard({
             </div>
           </div>
         )}
-        
+
         {/* Hover Overlay */}
-        <div className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 flex items-center justify-center ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}>
-          <Button 
-            variant="outline" 
+        <div
+          className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 flex items-center justify-center ${
+            isHovered ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Button
+            variant="outline"
             size="sm"
             onClick={(e) => {
               e.stopPropagation();
@@ -105,9 +107,7 @@ export function TemplateCard({
             {template_name}
           </h3>
           <div className="text-right">
-            <div className={`text-xl font-bold ${getScoreColor(ats_score)}`}>
-              {ats_score}%
-            </div>
+            <div className={`text-xl font-bold ${getScoreColor(ats_score)}`}>{ats_score}%</div>
             <div className="text-xs text-content-secondary">ATS Score</div>
           </div>
         </div>
@@ -116,7 +116,7 @@ export function TemplateCard({
         {best_for_tags.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {best_for_tags.slice(0, 3).map((tag, index) => (
-              <Badge 
+              <Badge
                 key={index}
                 variant="outline"
                 className="text-xs border-brand-primary/30 text-content-secondary hover:border-brand-primary hover:text-brand-light transition-colors px-2 py-1"
@@ -125,7 +125,10 @@ export function TemplateCard({
               </Badge>
             ))}
             {best_for_tags.length > 3 && (
-              <Badge variant="outline" className="text-xs border-brand-primary/30 text-content-secondary px-2 py-1">
+              <Badge
+                variant="outline"
+                className="text-xs border-brand-primary/30 text-content-secondary px-2 py-1"
+              >
                 +{best_for_tags.length - 3}
               </Badge>
             )}
@@ -133,18 +136,18 @@ export function TemplateCard({
         )}
 
         {/* Action Button */}
-        <Button 
+        <Button
           className={`w-full transition-all duration-300 font-semibold rounded-3xl py-3 ${
-            is_selected 
-              ? 'btn-gradient' 
-              : 'border-2 border-brand-primary text-brand-primary hover:btn-gradient hover:text-white'
+            is_selected
+              ? "btn-gradient"
+              : "border-2 border-brand-primary text-brand-primary hover:btn-gradient hover:text-white"
           }`}
           onClick={(e) => {
             e.stopPropagation();
             onSelect?.();
           }}
         >
-          {is_selected ? 'Selected' : 'Select Template'}
+          {is_selected ? "Selected" : "Select Template"}
         </Button>
       </div>
     </Card>

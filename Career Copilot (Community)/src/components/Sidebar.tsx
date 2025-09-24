@@ -23,7 +23,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
           <span className="font-bold text-sidebar-foreground">FML Career Copilot</span>
         </div>
       </div>
-      
+
       <nav className="flex-1 px-4">
         <ul className="space-y-2">
           {menuItems.map((item) => (

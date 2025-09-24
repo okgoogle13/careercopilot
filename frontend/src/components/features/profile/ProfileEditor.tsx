@@ -208,7 +208,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
   const [activeTab, setActiveTab] = useState('basic');
   const [profileStrength, setProfileStrength] = useState(75);
   const [newSkill, setNewSkill] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<'technical' | 'soft' | 'industry' | 'language'>('technical');
+  const [selectedCategory, setSelectedCategory] = useState<
+    'technical' | 'soft' | 'industry' | 'language'
+  >('technical');
   const [editingExperience, setEditingExperience] = useState<string | null>(null);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
 
@@ -547,7 +549,11 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <Select
                       value={selectedCategory}
                       label="Category"
-                      onChange={(e) => setSelectedCategory(e.target.value as 'technical' | 'soft' | 'industry' | 'language')}
+                      onChange={(e) =>
+                        setSelectedCategory(
+                          e.target.value as 'technical' | 'soft' | 'industry' | 'language'
+                        )
+                      }
                     >
                       <MenuItem value="technical">Technical</MenuItem>
                       <MenuItem value="soft">Soft Skills</MenuItem>

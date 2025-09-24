@@ -13,10 +13,7 @@ export interface RadioGroupProps extends MuiRadioGroupProps {}
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   ({ children, ...props }, ref) => {
     return (
-      <MuiRadioGroup
-        ref={ref}
-        {...props}
-      >
+      <MuiRadioGroup ref={ref} {...props}>
         {children}
       </MuiRadioGroup>
     );
@@ -33,22 +30,11 @@ export interface RadioGroupItemProps extends RadioProps {
 
 export const RadioGroupItem = React.forwardRef<HTMLButtonElement, RadioGroupItemProps>(
   ({ value, label, labelProps, ...props }, ref) => {
-    const radioElement = (
-      <Radio
-        ref={ref}
-        value={value}
-        {...props}
-      />
-    );
+    const radioElement = <Radio ref={ref} value={value} {...props} />;
 
     if (label) {
       return (
-        <FormControlLabel
-          value={value}
-          control={radioElement}
-          label={label}
-          {...labelProps}
-        />
+        <FormControlLabel value={value} control={radioElement} label={label} {...labelProps} />
       );
     }
 

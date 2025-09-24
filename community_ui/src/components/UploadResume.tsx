@@ -34,7 +34,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 </p>
               </div>
             </div>
-            
+
             <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer">
               <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
               <p className="text-sm text-muted-foreground mb-3">
@@ -59,7 +59,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 </p>
               </div>
             </div>
-            
+
             <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer">
               <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
               <p className="text-sm text-muted-foreground mb-3">
@@ -84,7 +84,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 </p>
               </div>
             </div>
-            
+
             <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer">
               <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
               <p className="text-sm text-muted-foreground mb-3">

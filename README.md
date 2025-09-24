@@ -33,18 +33,21 @@ Prerequisites
 ### Local Development Setup
 
 1. **Clone the repository**:
+
    ```bash
    git clone <your-repo-url>
    cd careercopilot
    ```
 
 2. **Install frontend dependencies**:
+
    ```bash
    cd frontend-v2
    yarn install
    ```
 
 3. **Install backend dependencies**:
+
    ```bash
    cd ../backend
    pip install -r requirements.txt
@@ -55,6 +58,7 @@ Prerequisites
    - Update the values as needed
 
 5. **Launch services**:
+
    ```bash
    # In one terminal (backend)
    cd backend

@@ -25,12 +25,7 @@ export const AlertDialog = React.forwardRef<HTMLDivElement, AlertDialogProps>(
     };
 
     return (
-      <Dialog
-        ref={ref}
-        open={open}
-        onClose={handleClose}
-        {...props}
-      >
+      <Dialog ref={ref} open={open} onClose={handleClose} {...props}>
         {children}
       </Dialog>
     );
@@ -50,10 +45,7 @@ export const AlertDialogTrigger = React.forwardRef<HTMLButtonElement, AlertDialo
     }
 
     return (
-      <Button
-        ref={ref}
-        {...props}
-      >
+      <Button ref={ref} {...props}>
         {children}
       </Button>
     );
@@ -106,15 +98,16 @@ AlertDialogTitle.displayName = 'AlertDialogTitle';
 
 export interface AlertDialogDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
 
-export const AlertDialogDescription = React.forwardRef<HTMLParagraphElement, AlertDialogDescriptionProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <div ref={ref as React.Ref<HTMLDivElement>} {...props}>
-        {children}
-      </div>
-    );
-  }
-);
+export const AlertDialogDescription = React.forwardRef<
+  HTMLParagraphElement,
+  AlertDialogDescriptionProps
+>(({ children, ...props }, ref) => {
+  return (
+    <div ref={ref as React.Ref<HTMLDivElement>} {...props}>
+      {children}
+    </div>
+  );
+});
 
 AlertDialogDescription.displayName = 'AlertDialogDescription';
 

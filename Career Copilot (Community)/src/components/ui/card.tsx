@@ -11,8 +11,9 @@ export interface CardProps extends React.ComponentProps<"div"> {
 }
 
 const getCardVariantClasses = (variant: CardVariant = "default") => {
-  const baseClasses = "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border transition-all duration-200";
-  
+  const baseClasses =
+    "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border transition-all duration-200";
+
   switch (variant) {
     case "interactive":
       return `${baseClasses} border-border hover:border-border/80 hover:shadow-lg hover:shadow-primary/10 cursor-pointer`;
@@ -38,7 +39,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Card.displayName = "Card";
@@ -54,31 +55,22 @@ const CardHeader = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>
       )}
       {...props}
     />
-  )
+  ),
 );
 
 CardHeader.displayName = "CardHeader";
 
 const CardTitle = React.forwardRef<HTMLParagraphElement, React.ComponentProps<"h4">>(
   ({ className, ...props }, ref) => (
-    <h4
-      ref={ref}
-      data-slot="card-title"
-      className={cn("leading-none", className)}
-      {...props}
-    />
-  )
+    <h4 ref={ref} data-slot="card-title" className={cn("leading-none", className)} {...props} />
+  ),
 );
 
 CardTitle.displayName = "CardTitle";
 
 function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
   return (
-    <p
-      data-slot="card-description"
-      className={cn("text-muted-foreground", className)}
-      {...props}
-    />
+    <p data-slot="card-description" className={cn("text-muted-foreground", className)} {...props} />
   );
 }
 
@@ -86,10 +78,7 @@ function CardAction({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-action"
-      className={cn(
-        "col-start-2 row-span-2 row-start-1 self-start justify-self-end",
-        className,
-      )}
+      className={cn("col-start-2 row-span-2 row-start-1 self-start justify-self-end", className)}
       {...props}
     />
   );
@@ -103,7 +92,7 @@ const CardContent = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">
       className={cn("px-6 [&:last-child]:pb-6", className)}
       {...props}
     />
-  )
+  ),
 );
 
 CardContent.displayName = "CardContent";
@@ -118,12 +107,4 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-export {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardAction,
-  CardDescription,
-  CardContent,
-};
+export { Card, CardHeader, CardFooter, CardTitle, CardAction, CardDescription, CardContent };

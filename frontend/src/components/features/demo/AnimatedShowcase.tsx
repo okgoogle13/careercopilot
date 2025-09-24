@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Label } from '../../ui/label';
-import { ArrowLeft, AutoAwesome as Sparkles, PlayArrow as Play, Pause, RotateLeft as RotateCcw } from '@mui/icons-material';
+import {
+  ArrowLeft,
+  AutoAwesome as Sparkles,
+  PlayArrow as Play,
+  Pause,
+  RotateLeft as RotateCcw,
+} from '@mui/icons-material';
 import {
   AnimatedModal,
   AnimatedDropdown,
@@ -13,7 +19,16 @@ import {
   LoadingAnimations,
   AnimatedStatsCard,
 } from './AnimatedComponents';
-import { Star, Person as User, Description as FileText, MyLocation as Target, TrendingUp, Settings, Notifications as Bell, Shield } from '@mui/icons-material';
+import {
+  Star,
+  Person as User,
+  Description as FileText,
+  MyLocation as Target,
+  TrendingUp,
+  Settings,
+  Notifications as Bell,
+  Shield,
+} from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -199,11 +214,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <div className="grid md:grid-cols-2 gap-6">
               <Card>
                 <CardHeader
-                  title={<Typography variant='h3'>Animated Modal</Typography>}
-                  subheader={<Typography variant='body2' color='text.secondary'>Modal with smooth entrance and exit animations</Typography>}>
-
-
-                </CardHeader>
+                  title={<Typography variant="h3">Animated Modal</Typography>}
+                  subheader={
+                    <Typography variant="body2" color="text.secondary">
+                      Modal with smooth entrance and exit animations
+                    </Typography>
+                  }
+                ></CardHeader>
                 <CardContent>
                   <Button onClick={() => setShowModal(true)}>Open Modal</Button>
                   <AnimatedModal
@@ -223,11 +240,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
               <Card>
                 <CardHeader
-                  title={<Typography variant='h3'>Animated Dropdown</Typography>}
-                  subheader={<Typography variant='body2' color='text.secondary'>Dropdown with staggered item animations</Typography>}>
-
-
-                </CardHeader>
+                  title={<Typography variant="h3">Animated Dropdown</Typography>}
+                  subheader={
+                    <Typography variant="body2" color="text.secondary">
+                      Dropdown with staggered item animations
+                    </Typography>
+                  }
+                ></CardHeader>
                 <CardContent>
                   <AnimatedDropdown
                     trigger={
@@ -249,11 +268,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <h2 className="mb-6">Animated Tabs</h2>
             <Card>
               <CardHeader
-                title={<Typography variant='h3'>Sliding Tab Indicator</Typography>}
-                subheader={<Typography variant='body2' color='text.secondary'>Tabs with smooth sliding indicator animation</Typography>}>
-
-
-              </CardHeader>
+                title={<Typography variant="h3">Sliding Tab Indicator</Typography>}
+                subheader={
+                  <Typography variant="body2" color="text.secondary">
+                    Tabs with smooth sliding indicator animation
+                  </Typography>
+                }
+              ></CardHeader>
               <CardContent>
                 <AnimatedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab}>
                   <div className="p-4 bg-muted rounded-lg">
@@ -293,11 +314,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <div className="grid md:grid-cols-2 gap-6">
               <Card>
                 <CardHeader
-                  title={<Typography variant='h3'>Animated Progress</Typography>}
-                  subheader={<Typography variant='body2' color='text.secondary'>Smooth progress bar with spring animations</Typography>}>
-
-
-                </CardHeader>
+                  title={<Typography variant="h3">Animated Progress</Typography>}
+                  subheader={
+                    <Typography variant="body2" color="text.secondary">
+                      Smooth progress bar with spring animations
+                    </Typography>
+                  }
+                ></CardHeader>
                 <CardContent className="space-y-4">
                   <AnimatedProgress value={progress} />
                   <div className="flex gap-2">
@@ -313,11 +336,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
               <Card>
                 <CardHeader
-                  title={<Typography variant='h3'>Loading Animations</Typography>}
-                  subheader={<Typography variant='body2' color='text.secondary'>Various animated loading indicators</Typography>}>
-
-
-                </CardHeader>
+                  title={<Typography variant="h3">Loading Animations</Typography>}
+                  subheader={
+                    <Typography variant="body2" color="text.secondary">
+                      Various animated loading indicators
+                    </Typography>
+                  }
+                ></CardHeader>
                 <CardContent>
                   <LoadingAnimations />
                 </CardContent>
@@ -330,12 +355,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <h2 className="mb-6">Animated Buttons</h2>
             <Card>
               <CardHeader
-                title={<Typography variant='h3'>Button Interaction Animations</Typography>}
-                subheader={<Typography variant='body2' color='text.secondary'>Different animation styles for button interactions
-                                  </Typography>}>
-
-
-              </CardHeader>
+                title={<Typography variant="h3">Button Interaction Animations</Typography>}
+                subheader={
+                  <Typography variant="body2" color="text.secondary">
+                    Different animation styles for button interactions
+                  </Typography>
+                }
+              ></CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   <div className="space-y-2">
@@ -423,11 +449,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <h2 className="mb-6">Staggered List Animation</h2>
             <Card>
               <CardHeader
-                title={<Typography variant='h3'>Task List</Typography>}
-                subheader={<Typography variant='body2' color='text.secondary'>List items with staggered entrance animations</Typography>}>
-
-
-              </CardHeader>
+                title={<Typography variant="h3">Task List</Typography>}
+                subheader={
+                  <Typography variant="body2" color="text.secondary">
+                    List items with staggered entrance animations
+                  </Typography>
+                }
+              ></CardHeader>
               <CardContent>
                 <StaggeredList
                   key={`list-${animationKey}`}
@@ -449,12 +477,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <h2 className="mb-6">Animated Notifications</h2>
             <Card>
               <CardHeader
-                title={<Typography variant='h3'>Toast Notifications</Typography>}
-                subheader={<Typography variant='body2' color='text.secondary'>Notifications with smooth entrance and exit animations
-                                  </Typography>}>
-
-
-              </CardHeader>
+                title={<Typography variant="h3">Toast Notifications</Typography>}
+                subheader={
+                  <Typography variant="body2" color="text.secondary">
+                    Notifications with smooth entrance and exit animations
+                  </Typography>
+                }
+              ></CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
                   <Button
@@ -499,12 +528,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
             <h2 className="mb-6">Implementation Guidelines</h2>
             <Card>
               <CardHeader
-                title={<Typography variant='h3'>Animation Best Practices</Typography>}
-                subheader={<Typography variant='body2' color='text.secondary'>Guidelines for implementing smooth and performant animations
-                                  </Typography>}>
-
-
-              </CardHeader>
+                title={<Typography variant="h3">Animation Best Practices</Typography>}
+                subheader={
+                  <Typography variant="body2" color="text.secondary">
+                    Guidelines for implementing smooth and performant animations
+                  </Typography>
+                }
+              ></CardHeader>
               <CardContent>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
