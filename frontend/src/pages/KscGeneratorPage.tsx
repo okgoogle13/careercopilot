@@ -400,7 +400,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                       variant="contained"
                       startIcon={
                         extracting ? (
-                          <CircularProgress size={20} color="inherit" />
+                          <CircularProgress sx={{ fontSize: 20 }} color="inherit" />
                         ) : (
                           <AutoAwesome />
                         )
@@ -512,7 +512,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                                     size="small"
                                     startIcon={
                                       generating && selectedCriterion === criterion.id ? (
-                                        <CircularProgress size={16} color="inherit" />
+                                        <CircularProgress sx={{ fontSize: 16 }} color="inherit" />
                                       ) : (
                                         <SmartToy />
                                       )

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
-import { ArrowLeft, Sparkles, TrendingUp, Target, BookOpen, AlertCircle } from 'lucide-react';
+import { Badge } from '../../ui/badge';
+import { Progress } from '../../ui/progress';
+import { ArrowLeft, Sparkles, TrendingUp, Target, BookOpen, AlertCircle } from '@mui/icons-material';
 import {
   Button,
   IconButton,

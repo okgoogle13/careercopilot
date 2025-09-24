@@ -19,18 +19,18 @@ import {
   IconButton
 } from '@mui/material';
 import {
-  Play,
+  PlayArrow as Play,
   Square,
-  RotateCcw,
+  Refresh as RotateCcw,
   Lightbulb,
-  MessageSquare,
-  Clock,
+  ChatBubble as MessageSquare,
+  Schedule as Clock,
   Star,
   ChevronLeft,
   ChevronRight,
   Mic,
   MicOff
-} from 'lucide-react';
+} from '@mui/icons-material';
 
 interface InterviewQuestion {
   id: string;
@@ -319,7 +319,7 @@ export function InterviewPrep({
 
                 <Box className="flex items-center gap-2">
                   <Box className="flex items-center gap-1 text-sm text-gray-500">
-                    <Clock size={16} />
+                    <Clock sx={{ fontSize: 16 }} />
                     <span>{formatTime(timer)}</span>
                   </Box>
                 </Box>
@@ -352,7 +352,7 @@ export function InterviewPrep({
                   <Button
                     variant={isRecording ? "contained" : "outlined"}
                     onClick={isRecording ? handleStopRecording : handleStartRecording}
-                    startIcon={isRecording ? <MicOff size={16} /> : <Mic size={16} />}
+                    startIcon={isRecording ? <MicOff sx={{ fontSize: 16 }} /> : <Mic sx={{ fontSize: 16 }} />}
                     className={isRecording ? 'bg-red-500 hover:bg-red-600' : ''}
                   >
                     {isRecording ? 'Stop Recording' : 'Record Answer'}
@@ -369,7 +369,7 @@ export function InterviewPrep({
                   <Button
                     variant="outlined"
                     onClick={handleReset}
-                    startIcon={<RotateCcw size={16} />}
+                    startIcon={<RotateCcw sx={{ fontSize: 16 }} />}
                   >
                     Reset
                   </Button>
@@ -378,7 +378,7 @@ export function InterviewPrep({
                     onClick={handleGetFeedback}
                     disabled={!userAnswer.trim() && !isRecording}
                     className="bg-primary hover:bg-primary/90"
-                    startIcon={<MessageSquare size={16} />}
+                    startIcon={<MessageSquare sx={{ fontSize: 16 }} />}
                   >
                     Get AI Feedback
                   </Button>
@@ -396,11 +396,11 @@ export function InterviewPrep({
                     Consider adding more specific metrics or outcomes to strengthen your response.
                   </Typography>
                   <Box className="flex items-center gap-1 mt-2">
-                    <Star size={16} className="text-yellow-500" />
-                    <Star size={16} className="text-yellow-500" />
-                    <Star size={16} className="text-yellow-500" />
-                    <Star size={16} className="text-yellow-500" />
-                    <Star size={16} className="text-gray-300" />
+                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
+                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
+                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
+                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
+                    <Star sx={{ fontSize: 16 }} className="text-gray-300" />
                     <Typography variant="caption" className="ml-2">
                       4/5 - Strong answer with room for improvement
                     </Typography>
@@ -414,7 +414,7 @@ export function InterviewPrep({
                   variant="outlined"
                   onClick={handlePreviousQuestion}
                   disabled={currentQuestionIndex === 0}
-                  startIcon={<ChevronLeft size={16} />}
+                  startIcon={<ChevronLeft sx={{ fontSize: 16 }} />}
                 >
                   Previous
                 </Button>
@@ -423,7 +423,7 @@ export function InterviewPrep({
                   variant="contained"
                   onClick={handleNextQuestion}
                   disabled={currentQuestionIndex === filteredQuestions.length - 1}
-                  endIcon={<ChevronRight size={16} />}
+                  endIcon={<ChevronRight sx={{ fontSize: 16 }} />}
                   className="bg-primary hover:bg-primary/90"
                 >
                   Next Question
@@ -449,7 +449,7 @@ export function InterviewPrep({
               {activeTab === 0 && (
                 <Box>
                   <Box className="flex items-center gap-2 mb-4">
-                    <Lightbulb size={20} className="text-yellow-500" />
+                    <Lightbulb sx={{ fontSize: 20 }} className="text-yellow-500" />
                     <Typography variant="h6" className="font-semibold">
                       Interview Tips
                     </Typography>

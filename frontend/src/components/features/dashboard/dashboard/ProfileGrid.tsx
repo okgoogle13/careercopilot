@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Button } from '@mui/material';
-import { Plus, TrendingUp, Sparkles } from 'lucide-react';
-import { ProfileCard } from '../ProfileCard';
-import { CreateProfileCard } from '../CreateProfileCard';
-import { ProfileVariationGrid } from '../library/ProfileVariationCard';
+import { Add as Plus, TrendingUp, AutoAwesome as Sparkles } from '@mui/icons-material';
+import { ProfileCard } from '../../profile/ProfileCard';
+import { CreateProfileCard } from '../../profile/CreateProfileCard';
+import { ProfileVariationGrid } from '../../../library/ProfileVariationCard';
 
 interface Profile {
   id: string;

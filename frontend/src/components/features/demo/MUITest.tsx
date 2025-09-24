@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Typography, Stack } from '@mui/material';
-import { Search, Mail, User } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
-import { Badge } from './ui/badge';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
+import { Search, Mail, Person as User } from '@mui/icons-material';
+import { Button } from '../../ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
+import { Badge } from '../../ui/badge';
+import { Input } from '../../ui/input';
+import { Textarea } from '../../ui/textarea';
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
-} from './ui/dialog';
+} from '../../ui/dialog';
 import {
   LayoutContainer,
   LayoutGrid,
@@ -22,7 +22,7 @@ import {
   LayoutStack,
   LayoutFlex,
   LayoutCard,
-} from './ui/layout';
+} from '../../ui/layout';
 import { useTheme as useMuiTheme } from '@mui/material/styles';
 
 interface MUITestProps {
@@ -51,13 +51,13 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
         </Box>
 
         <LayoutFlex justify="space-between" align="center" wrap gap={2}>
-          <Button variant="elevation" onClick={onBack}>
+          <Button variant="contained" onClick={onBack}>
             Back to App
           </Button>
           <LayoutFlex gap={2}>
             <Button variant="outlined">Outlined Button</Button>
             <Button variant="secondary">Secondary</Button>
-            <Button variant="elevation" onClick={() => setDialogOpen(true)}>
+            <Button variant="contained" onClick={() => setDialogOpen(true)}>
               Open Dialog
             </Button>
           </LayoutFlex>
@@ -75,10 +75,10 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                   applied consistently.
                 </Typography>
                 <LayoutFlex gap={1} wrap sx={{ mt: 2 }}>
-                  <Badge variant="elevation">Default</Badge>
+                  <Badge variant="default">Default</Badge>
                   <Badge variant="secondary">Secondary</Badge>
-                  <Badge variant="outlined">Outline</Badge>
-                  <Badge variant="outlined">Error</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                  <Badge variant="outline">Error</Badge>
                 </LayoutFlex>
               </CardContent>
             </Card>
@@ -91,9 +91,9 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent>
                 <LayoutStack spacing={2}>
-                  <Input placeholder="Search with icon..." icon={<Search size={16} />} />
-                  <Input placeholder="Email address" type="email" icon={<Mail size={16} />} />
-                  <Input placeholder="Error state example" error={true} icon={<User size={16} />} />
+                  <Input placeholder="Search with icon..." InputProps={{ startAdornment: <Search sx={{ fontSize: 16, mr: 1 }} /> }} />
+                  <Input placeholder="Email address" type="email" InputProps={{ startAdornment: <Mail sx={{ fontSize: 16, mr: 1 }} /> }} />
+                  <Input placeholder="Error state example" error={true} InputProps={{ startAdornment: <User sx={{ fontSize: 16, mr: 1 }} /> }} />
                   <Textarea placeholder="Write your message here..." rows={3} />
                 </LayoutStack>
               </CardContent>
@@ -112,7 +112,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                   </LayoutCard>
                   <LayoutFlex justify="space-between" align="center">
                     <Typography variant="body2">Flex Layout</Typography>
-                    <Button variant="text" size="small">
+                    <Button variant="link" size="small">
                       Action
                     </Button>
                   </LayoutFlex>
@@ -186,14 +186,14 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                 placeholder="Your name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                icon={<User size={16} />}
+                icon={<User sx={{ fontSize: 16 }} />}
               />
               <Input
                 placeholder="your.email@example.com"
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                icon={<Mail size={16} />}
+                icon={<Mail sx={{ fontSize: 16 }} />}
               />
               <Textarea
                 placeholder="Your message..."
@@ -204,7 +204,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
             </LayoutStack>
           </DialogContent>
           <DialogFooter>
-            <Button variant="outlined" onClick={() => setDialogOpen(false)}>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
             <Button variant="elevation" onClick={() => setDialogOpen(false)}>

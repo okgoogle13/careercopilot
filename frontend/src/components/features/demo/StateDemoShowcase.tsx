@@ -1,10 +1,10 @@
-import { ArrowLeft, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { ArrowLeft, Refresh as RefreshCw, Wifi, WifiOff } from '@mui/icons-material';
 import { useCallback, useEffect, useState } from 'react';
-import { CreateProfileCard } from './CreateProfileCard';
-import { ErrorProfileCard } from './ErrorCard';
-import { LoadingProfileCard } from './LoadingCard';
-import { ProfileCard } from './ProfileCard';
-import { Badge } from './ui/badge';
+import { CreateProfileCard } from '../profile/CreateProfileCard';
+import { ErrorProfileCard } from '../common/ErrorCard';
+import { LoadingProfileCard } from '../common/LoadingCard';
+import { ProfileCard } from '../profile/ProfileCard';
+import { Badge } from '../../ui/badge';
 import {
   Button,
   IconButton,

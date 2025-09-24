@@ -1,83 +1,47 @@
 import React from 'react';
-import { Chip, ChipProps, SxProps, Theme } from '@mui/material';
+import { Chip, ChipProps } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-interface BadgeProps extends Omit<ChipProps, 'variant'> {
+const StyledChip = styled(Chip)(({ theme, variant }) => ({
+  borderRadius: theme.spacing(1),
+  fontSize: '0.75rem',
+  height: 'auto',
+  padding: theme.spacing(0.5, 1),
+  ...(variant === 'outlined' && {
+    backgroundColor: 'transparent',
+    border: `1px solid ${theme.palette.divider}`,
+  }),
+}));
+
+export interface BadgeProps extends Omit<ChipProps, 'variant' | 'children'> {
   variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-  asChild?: boolean;
+  children?: React.ReactNode;
 }
 
-const getBadgeVariantSx = (variant: BadgeProps['variant'] = 'default'): SxProps<Theme> => {
-  const baseSx: SxProps<Theme> = {
-    borderRadius: 1.5,
-    height: 'auto',
-    minHeight: '24px',
-    fontSize: '0.75rem',
-    fontWeight: 500,
-    border: 1,
-    '& .MuiChip-label': {
-      px: 1,
-      py: 0.25,
-    },
-  };
+export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
+  ({ variant = 'default', children, ...props }, ref) => {
+    const getColor = (variant: string): ChipProps['color'] => {
+      switch (variant) {
+        case 'destructive':
+          return 'error';
+        case 'secondary':
+          return 'secondary';
+        default:
+          return 'primary';
+      }
+    };
 
-  switch (variant) {
-    case 'default':
-      return {
-        ...baseSx,
-        borderColor: 'transparent',
-        backgroundColor: 'primary.main',
-        color: 'primary.contrastText',
-        '&:hover': {
-          backgroundColor: 'primary.dark',
-        },
-      };
-    case 'secondary':
-      return {
-        ...baseSx,
-        borderColor: 'transparent',
-        backgroundColor: 'grey.100',
-        color: 'text.primary',
-        '&:hover': {
-          backgroundColor: 'grey.200',
-        },
-      };
-    case 'destructive':
-      return {
-        ...baseSx,
-        borderColor: 'transparent',
-        backgroundColor: 'error.main',
-        color: 'error.contrastText',
-        '&:hover': {
-          backgroundColor: 'error.dark',
-        },
-      };
-    case 'outline':
-      return {
-        ...baseSx,
-        borderColor: 'divider',
-        backgroundColor: 'transparent',
-        color: 'text.primary',
-        '&:hover': {
-          backgroundColor: 'action.hover',
-        },
-      };
-    default:
-      return baseSx;
-  }
-};
-
-const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
-  ({ variant = 'default', sx, ...props }, ref) => {
-    const variantSx = getBadgeVariantSx(variant);
+    const getVariant = (variant: string): ChipProps['variant'] => {
+      return variant === 'outline' ? 'outlined' : 'filled';
+    };
 
     return (
-      <Chip
+      <StyledChip
         ref={ref}
+        variant={getVariant(variant)}
+        color={getColor(variant)}
+        label={children}
         size="small"
-        sx={{
-          ...variantSx,
-          ...sx,
-        }}
         {...props}
       />
     );
@@ -85,6 +49,3 @@ const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
 );
 
 Badge.displayName = 'Badge';
-
-export { Badge };
-export type { BadgeProps };

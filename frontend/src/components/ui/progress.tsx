@@ -1,28 +1,38 @@
-'use client';
+import React from 'react';
+import {
+  LinearProgress,
+  LinearProgressProps,
+  Box,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-import * as React from 'react';
-import * as ProgressPrimitive from '@radix-ui/react-progress';
+const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
+  height: 8,
+  borderRadius: theme.spacing(1),
+  backgroundColor: theme.palette.grey[200],
+  '& .MuiLinearProgress-bar': {
+    borderRadius: theme.spacing(1),
+    backgroundColor: theme.palette.primary.main,
+  },
+}));
 
-import { cn } from './utils';
-
-function Progress({
-  className,
-  value,
-  ...props
-}: React.ComponentProps<typeof ProgressPrimitive.Root>) {
-  return (
-    <ProgressPrimitive.Root
-      data-slot="progress"
-      className={cn('bg-primary/20 relative h-2 w-full overflow-hidden rounded-full', className)}
-      {...props}
-    >
-      <ProgressPrimitive.Indicator
-        data-slot="progress-indicator"
-        className="bg-primary h-full w-full flex-1 transition-all"
-        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-      />
-    </ProgressPrimitive.Root>
-  );
+export interface ProgressProps extends LinearProgressProps {
+  value?: number;
+  className?: string;
 }
 
-export { Progress };
+export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
+  ({ value, className, ...props }, ref) => {
+    return (
+      <Box ref={ref} className={className} sx={{ width: '100%' }}>
+        <StyledLinearProgress
+          variant="determinate"
+          value={value}
+          {...props}
+        />
+      </Box>
+    );
+  }
+);
+
+Progress.displayName = 'Progress';

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Input } from './ui/input';
-import { Textarea } from './ui/textarea';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { ArrowLeft, Link, FileText, Loader2, ExternalLink } from 'lucide-react';
+import { Input } from '../../ui/input';
+import { Textarea } from '../../ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
+import { ArrowLeft, Link, Description as FileText, AutorenewRounded as Loader2, ExternalLink } from '@mui/icons-material';
 import {
   Button,
   IconButton,

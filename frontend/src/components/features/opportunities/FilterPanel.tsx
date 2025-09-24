@@ -17,7 +17,7 @@ import {
   AccordionSummary,
   AccordionDetails
 } from '@mui/material';
-import { Search, Filter, X, ExpandMore } from 'lucide-react';
+import { Search, Filter, X, ExpandMore } from '@mui/icons-material';
 
 interface FilterPanelProps {
   onFiltersChange?: (filters: JobFilters) => void;
@@ -141,7 +141,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
     return (
       <Card className="p-4">
         <Box className="flex items-center gap-4">
-          <Filter size={20} className="text-gray-500" />
+          <Filter sx={{ fontSize: 20 }} className="text-gray-500" />
           <Typography variant="body2" color="text.secondary">
             {getActiveFilterCount()} filters active
           </Typography>
@@ -158,7 +158,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
       <CardHeader className="pb-4">
         <Box className="flex items-center justify-between">
           <Box className="flex items-center gap-2">
-            <Filter size={20} className="text-primary" />
+            <Filter sx={{ fontSize: 20 }} className="text-primary" />
             <Typography variant="h6" className="font-semibold">
               Filters
             </Typography>
@@ -174,7 +174,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             size="small"
             variant="text"
             onClick={handleReset}
-            startIcon={<X size={16} />}
+            startIcon={<X sx={{ fontSize: 16 }} />}
             aria-label="Clear all filters"
           >
             Clear
@@ -194,7 +194,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             value={filters.searchQuery}
             onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
             InputProps={{
-              startAdornment: <Search size={20} className="text-gray-400 mr-2" />
+              startAdornment: <Search sx={{ fontSize: 20 }} className="text-gray-400 mr-2" />
             }}
             size="small"
             aria-label="Search jobs by keywords, skills, or companies"

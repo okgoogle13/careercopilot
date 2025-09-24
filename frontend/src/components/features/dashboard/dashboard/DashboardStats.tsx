@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Card } from '@mui/material';
 import { Button } from '@mui/material';
-import { Textarea } from '../ui/textarea';
-import { Briefcase, Mail } from 'lucide-react';
-import { prepareApplicationPackage, scanInboxForOpportunities } from '../../api/aiServices';
+import { Textarea } from '../../../ui/textarea';
+import { BusinessCenter as Briefcase, Mail } from '@mui/icons-material';
+import { prepareApplicationPackage, scanInboxForOpportunities } from '../../../../api/aiServices';
 
 export function DashboardStats() {
   // State for Application Preparation
@@ -95,7 +95,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
             <Textarea
               placeholder="Paste the job description here..."
               value={jobDescription}
-              onChange={(e) => setJobDescription(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setJobDescription(e.target.value)}
               className="min-h-[100px] resize-y"
               disabled={isPreparingApplication}
             />

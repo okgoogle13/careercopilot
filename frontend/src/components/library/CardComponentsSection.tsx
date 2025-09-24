@@ -3,7 +3,7 @@ import { Badge } from '../ui/badge';
 import { LoadingProfileCard } from '../LoadingCard';
 import { ErrorCard, ErrorProfileCard } from '../ErrorCard';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
-import { Heart } from 'lucide-react';
+import { Heart } from '@mui/icons-material';
 import {
   Button,
   IconButton,

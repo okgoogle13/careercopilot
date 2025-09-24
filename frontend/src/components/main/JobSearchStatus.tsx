@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
 import { StatCard } from '../ui/StatCard';
-import { Send, Calendar, Award, Target, Clock, Eye } from 'lucide-react';
+import { Send, CalendarMonth, EmojiEvents, GpsFixed, AccessTime, Visibility } from '@mui/icons-material';
 
 interface JobSearchStatusProps {
   stats?: {
@@ -52,9 +52,9 @@ export function JobSearchStatus({
             title="Applications Sent"
             value={stats.applicationsSent}
             subtitle="This month"
-            icon={<Send size={20} className="text-blue-600" />}
-            trend={trends.applicationsTrend}
-            variant="primary"
+            icon={<Send sx={{ fontSize: 20 }} className="text-blue-600" />}
+            trend={trends.applicationsTrend?.isPositive ? 'up' : 'down'}
+            trendValue={`+${trends.applicationsTrend?.value}%`}
           />
         </Grid>
 
@@ -64,9 +64,9 @@ export function JobSearchStatus({
             title="Interviews"
             value={stats.interviews}
             subtitle="Scheduled & completed"
-            icon={<Calendar size={20} className="text-green-600" />}
-            trend={trends.interviewsTrend}
-            variant="success"
+            icon={<CalendarMonth sx={{ fontSize: 20 }} className="text-green-600" />}
+            trend={trends.interviewsTrend?.isPositive ? 'up' : 'down'}
+            trendValue={`+${trends.interviewsTrend?.value}%`}
           />
         </Grid>
 
@@ -76,9 +76,9 @@ export function JobSearchStatus({
             title="Offers Received"
             value={stats.offers}
             subtitle="Active offers"
-            icon={<Award size={20} className="text-orange-600" />}
-            trend={trends.offersTrend}
-            variant="warning"
+            icon={<EmojiEvents sx={{ fontSize: 20 }} className="text-orange-600" />}
+            trend={trends.offersTrend?.isPositive ? 'up' : 'down'}
+            trendValue={`+${trends.offersTrend?.value}%`}
           />
         </Grid>
 
@@ -88,7 +88,7 @@ export function JobSearchStatus({
             title="Response Rate"
             value={`${stats.responseRate}%`}
             subtitle="Interview invitations"
-            icon={<Target size={20} className="text-purple-600" />}
+            icon={<GpsFixed sx={{ fontSize: 20 }} className="text-purple-600" />}
           />
         </Grid>
 
@@ -98,7 +98,7 @@ export function JobSearchStatus({
             title="Avg Response Time"
             value={`${stats.avgResponseTime} days`}
             subtitle="From application"
-            icon={<Clock size={20} className="text-indigo-600" />}
+            icon={<AccessTime sx={{ fontSize: 20 }} className="text-indigo-600" />}
           />
         </Grid>
 
@@ -106,10 +106,11 @@ export function JobSearchStatus({
         <Grid item xs={12} sm={6} md={4}>
           <StatCard
             title="Profile Views"
-            value={stats.profileViews}
+            value={stats.profileViews || 0}
             subtitle="Last 30 days"
-            icon={<Eye size={20} className="text-gray-600" />}
-            trend={{ value: 12, isPositive: true, label: 'vs last month' }}
+            icon={<Visibility sx={{ fontSize: 20 }} className="text-gray-600" />}
+            trend="up"
+            trendValue="+12%"
           />
         </Grid>
       </Grid>

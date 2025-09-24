@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Label } from './ui/label';
-import { ArrowLeft, Sparkles, Play, Pause, RotateCcw } from 'lucide-react';
+import { Label } from '../../ui/label';
+import { ArrowLeft, AutoAwesome as Sparkles, PlayArrow as Play, Pause, RotateLeft as RotateCcw } from '@mui/icons-material';
 import {
   AnimatedModal,
   AnimatedDropdown,
@@ -13,7 +13,7 @@ import {
   LoadingAnimations,
   AnimatedStatsCard,
 } from './AnimatedComponents';
-import { Star, User, FileText, Target, TrendingUp, Settings, Bell, Shield } from 'lucide-react';
+import { Star, Person as User, Description as FileText, MyLocation as Target, TrendingUp, Settings, Notifications as Bell, Shield } from '@mui/icons-material';
 import {
   Button,
   IconButton,

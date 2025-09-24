@@ -1,135 +1,161 @@
-'use client';
+import React from 'react';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  DialogProps,
+  Button,
+} from '@mui/material';
 
-import * as React from 'react';
-import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
-
-import { cn } from './utils';
-import { Button, IconButton } from '@mui/material';
-
-function AlertDialog({ ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
-  return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />;
+export interface AlertDialogProps extends DialogProps {
+  open: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-function AlertDialogTrigger({
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Trigger>) {
-  return <AlertDialogPrimitive.Trigger data-slot="alert-dialog-trigger" {...props} />;
-}
+export const AlertDialog = React.forwardRef<HTMLDivElement, AlertDialogProps>(
+  ({ open, onOpenChange, children, onClose, ...props }, ref) => {
+    const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
+      if (onOpenChange) {
+        onOpenChange(false);
+      }
+      if (onClose) {
+        onClose(event, reason);
+      }
+    };
 
-function AlertDialogPortal({ ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Portal>) {
-  return <AlertDialogPrimitive.Portal data-slot="alert-dialog-portal" {...props} />;
-}
-
-function AlertDialogOverlay({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Overlay>) {
-  return (
-    <AlertDialogPrimitive.Overlay
-      data-slot="alert-dialog-overlay"
-      className={cn(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50',
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-function AlertDialogContent({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Content>) {
-  return (
-    <AlertDialogPortal>
-      <AlertDialogOverlay />
-      <AlertDialogPrimitive.Content
-        data-slot="alert-dialog-content"
-        className={cn(
-          'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg',
-          className
-        )}
+    return (
+      <Dialog
+        ref={ref}
+        open={open}
+        onClose={handleClose}
         {...props}
-      />
-    </AlertDialogPortal>
-  );
+      >
+        {children}
+      </Dialog>
+    );
+  }
+);
+
+AlertDialog.displayName = 'AlertDialog';
+
+export interface AlertDialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
+  asChild?: boolean;
 }
 
-function AlertDialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="alert-dialog-header"
-      className={cn('flex flex-col gap-2 text-center sm:text-left', className)}
-      {...props}
-    />
-  );
-}
+export const AlertDialogTrigger = React.forwardRef<HTMLButtonElement, AlertDialogTriggerProps>(
+  ({ children, asChild, ...props }, ref) => {
+    if (asChild && React.isValidElement(children)) {
+      return React.cloneElement(children, { ref, ...props });
+    }
 
-function AlertDialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="alert-dialog-footer"
-      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
-      {...props}
-    />
-  );
-}
+    return (
+      <Button
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </Button>
+    );
+  }
+);
 
-function AlertDialogTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Title>) {
-  return (
-    <AlertDialogPrimitive.Title
-      data-slot="alert-dialog-title"
-      className={cn('text-lg font-semibold', className)}
-      {...props}
-    />
-  );
-}
+AlertDialogTrigger.displayName = 'AlertDialogTrigger';
 
-function AlertDialogDescription({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Description>) {
-  return (
-    <AlertDialogPrimitive.Description
-      data-slot="alert-dialog-description"
-      className={cn('text-muted-foreground text-sm', className)}
-      {...props}
-    />
-  );
-}
+export interface AlertDialogContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-function AlertDialogAction({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Action>) {
-  return <AlertDialogPrimitive.Action className={cn(buttonVariants(), className)} {...props} />;
-}
+export const AlertDialogContent = React.forwardRef<HTMLDivElement, AlertDialogContentProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <DialogContent ref={ref} {...props}>
+        {children}
+      </DialogContent>
+    );
+  }
+);
 
-function AlertDialogCancel({
-  className,
-  ...props
-}: React.ComponentProps<typeof AlertDialogPrimitive.Cancel>) {
-  return (
-    <AlertDialogPrimitive.Cancel
-      className={cn(buttonVariants({ variant: 'outline' }), className)}
-      {...props}
-    />
-  );
-}
+AlertDialogContent.displayName = 'AlertDialogContent';
 
-export {
-  AlertDialog,
-  AlertDialogPortal,
-  AlertDialogOverlay,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogAction,
-  AlertDialogCancel,
-};
+export interface AlertDialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const AlertDialogHeader = React.forwardRef<HTMLDivElement, AlertDialogHeaderProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <DialogTitle ref={ref} {...props}>
+        {children}
+      </DialogTitle>
+    );
+  }
+);
+
+AlertDialogHeader.displayName = 'AlertDialogHeader';
+
+export interface AlertDialogTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {}
+
+export const AlertDialogTitle = React.forwardRef<HTMLHeadingElement, AlertDialogTitleProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <DialogTitle ref={ref as React.Ref<HTMLDivElement>} {...props}>
+        {children}
+      </DialogTitle>
+    );
+  }
+);
+
+AlertDialogTitle.displayName = 'AlertDialogTitle';
+
+export interface AlertDialogDescriptionProps extends React.HTMLAttributes<HTMLParagraphElement> {}
+
+export const AlertDialogDescription = React.forwardRef<HTMLParagraphElement, AlertDialogDescriptionProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <div ref={ref as React.Ref<HTMLDivElement>} {...props}>
+        {children}
+      </div>
+    );
+  }
+);
+
+AlertDialogDescription.displayName = 'AlertDialogDescription';
+
+export interface AlertDialogFooterProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const AlertDialogFooter = React.forwardRef<HTMLDivElement, AlertDialogFooterProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <DialogActions ref={ref} {...props}>
+        {children}
+      </DialogActions>
+    );
+  }
+);
+
+AlertDialogFooter.displayName = 'AlertDialogFooter';
+
+export interface AlertDialogActionProps extends React.ComponentProps<typeof Button> {}
+
+export const AlertDialogAction = React.forwardRef<HTMLButtonElement, AlertDialogActionProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Button ref={ref} {...props}>
+        {children}
+      </Button>
+    );
+  }
+);
+
+AlertDialogAction.displayName = 'AlertDialogAction';
+
+export interface AlertDialogCancelProps extends React.ComponentProps<typeof Button> {}
+
+export const AlertDialogCancel = React.forwardRef<HTMLButtonElement, AlertDialogCancelProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Button ref={ref} variant="outlined" {...props}>
+        {children}
+      </Button>
+    );
+  }
+);
+
+AlertDialogCancel.displayName = 'AlertDialogCancel';

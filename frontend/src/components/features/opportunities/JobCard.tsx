@@ -18,7 +18,7 @@ import {
   BookmarkCheck,
   ExternalLink,
   Building2
-} from 'lucide-react';
+} from '@mui/icons-material';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
 type ExperienceLevel = 'Entry Level' | 'Mid Level' | 'Senior Level' | 'Lead/Principal' | 'Executive';
@@ -80,7 +80,7 @@ export function JobCard({
               className="w-12 h-12"
               sx={{ bgcolor: 'primary.main' }}
             >
-              <Building2 size={20} />
+              <Building2 sx={{ fontSize: 20 }} />
             </Avatar>
 
             {/* Job Info */}
@@ -103,19 +103,19 @@ export function JobCard({
               {/* Job Meta */}
               <Box className="flex flex-wrap gap-3 text-sm text-gray-600">
                 <Box className="flex items-center gap-1">
-                  <MapPin size={14} />
+                  <MapPin sx={{ fontSize: 14 }} />
                   <span>{location}</span>
                   {isRemote && (
                     <Chip label="Remote" size="small" className="ml-1 bg-green-100 text-green-800" />
                   )}
                 </Box>
                 <Box className="flex items-center gap-1">
-                  <Clock size={14} />
+                  <Clock sx={{ fontSize: 14 }} />
                   <span>{postedDate}</span>
                 </Box>
                 {salary && (
                   <Box className="flex items-center gap-1">
-                    <DollarSign size={14} />
+                    <DollarSign sx={{ fontSize: 14 }} />
                     <span>{salary}</span>
                   </Box>
                 )}
@@ -130,9 +130,9 @@ export function JobCard({
             aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
           >
             {isBookmarked ? (
-              <BookmarkCheck size={20} className="text-primary" />
+              <BookmarkCheck sx={{ fontSize: 20 }} className="text-primary" />
             ) : (
-              <Bookmark size={20} />
+              <Bookmark sx={{ fontSize: 20 }} />
             )}
           </IconButton>
         </Box>
@@ -206,7 +206,7 @@ export function JobCard({
               e.stopPropagation();
               onViewDetails?.(id);
             }}
-            endIcon={<ExternalLink size={16} />}
+            endIcon={<ExternalLink sx={{ fontSize: 16 }} />}
           >
             View Details
           </Button>

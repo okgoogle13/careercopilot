@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Badge } from './ui/badge';
-import { Textarea } from './ui/textarea';
-import { ArrowLeft, Sparkles, MessageSquare, Play, Mic, MicOff, RotateCcw } from 'lucide-react';
+import { Badge } from '../../ui/badge';
+import { Textarea } from '../../ui/textarea';
+import { ArrowLeft, Sparkles, MessageSquare, Play, Mic, MicOff, RotateCcw } from '@mui/icons-material';
 import {
   Button,
   IconButton,

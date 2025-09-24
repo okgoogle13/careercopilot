@@ -311,7 +311,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
           </Typography>
           <Button
             variant="contained"
-            startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <Assessment />}
+            startIcon={loading ? <CircularProgress sx={{ fontSize: 20 }} color="inherit" /> : <Assessment />}
             onClick={handleRunAnalysis}
             disabled={loading}
             sx={{ borderRadius: 20 }}

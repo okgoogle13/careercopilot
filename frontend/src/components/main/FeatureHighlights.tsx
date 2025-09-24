@@ -1,25 +1,25 @@
 import React from 'react';
 import { Box, Typography, Grid } from '@mui/material';
-import { Zap, Target, TrendingUp, Award } from 'lucide-react';
+import { Bolt, GpsFixed, TrendingUp, EmojiEvents } from '@mui/icons-material';
 
 const features = [
   {
-    icon: <Zap size={24} />,
+    icon: <Bolt sx={{ fontSize: 24 }} />,
     title: 'AI-Powered Applications',
     description: 'Generate tailored resumes and cover letters in seconds'
   },
   {
-    icon: <Target size={24} />,
+    icon: <GpsFixed sx={{ fontSize: 24 }} />,
     title: 'Smart Job Matching',
     description: 'Find opportunities that match your skills and goals'
   },
   {
-    icon: <TrendingUp size={24} />,
+    icon: <TrendingUp sx={{ fontSize: 24 }} />,
     title: 'Track Progress',
     description: 'Monitor your application success with detailed analytics'
   },
   {
-    icon: <Award size={24} />,
+    icon: <EmojiEvents sx={{ fontSize: 24 }} />,
     title: 'Interview Prep',
     description: 'Practice with AI-generated questions and feedback'
   }

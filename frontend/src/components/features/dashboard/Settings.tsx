@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Input } from './ui/input';
-import { Switch } from './ui/switch';
-import { ArrowLeft, User, Bell, Shield, Trash2, Download, Upload } from 'lucide-react';
+import { Input } from '../../ui/input';
+import { Switch } from '../../ui/switch';
+import { ArrowLeft, Person as User, Notifications as Bell, Shield, Delete as Trash2, Download, Upload } from '@mui/icons-material';
 import {
   Button,
   IconButton,

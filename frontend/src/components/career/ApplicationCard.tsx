@@ -11,14 +11,14 @@ import {
   LinearProgress
 } from '@mui/material';
 import {
-  Building2,
-  Calendar,
-  DollarSign,
-  MapPin,
-  MoreHorizontal,
-  Clock,
-  Eye
-} from 'lucide-react';
+  Business as Building2,
+  CalendarToday as Calendar,
+  AttachMoney as DollarSign,
+  LocationOn as MapPin,
+  MoreHoriz as MoreHorizontal,
+  Schedule as Clock,
+  Visibility as Eye
+} from '@mui/icons-material';
 
 type ApplicationStatus = 'applied' | 'screening' | 'interview' | 'offer' | 'rejected';
 
@@ -83,7 +83,7 @@ export function ApplicationCard({
               className="w-10 h-10"
               sx={{ bgcolor: 'primary.main' }}
             >
-              <Building2 size={16} />
+              <Building2 sx={{ fontSize: 16 }} />
             </Avatar>
             <Box className="flex-1 min-w-0">
               <Typography
@@ -109,7 +109,7 @@ export function ApplicationCard({
             onClick={() => onEdit?.(id)}
             aria-label="More options"
           >
-            <MoreHorizontal size={16} />
+            <MoreHorizontal sx={{ fontSize: 16 }} />
           </IconButton>
         </Box>
 
@@ -125,19 +125,19 @@ export function ApplicationCard({
         {/* Job Details */}
         <Box className="space-y-2 mb-4 text-xs text-gray-600">
           <Box className="flex items-center gap-1">
-            <MapPin size={12} />
+            <MapPin sx={{ fontSize: 12 }} />
             <span className="truncate">{location}</span>
           </Box>
 
           {salary && (
             <Box className="flex items-center gap-1">
-              <DollarSign size={12} />
+              <DollarSign sx={{ fontSize: 12 }} />
               <span>{salary}</span>
             </Box>
           )}
 
           <Box className="flex items-center gap-1">
-            <Calendar size={12} />
+            <Calendar sx={{ fontSize: 12 }} />
             <span>Applied {appliedDate}</span>
           </Box>
         </Box>
@@ -163,7 +163,7 @@ export function ApplicationCard({
         {nextEvent && (
           <Box className="mb-4 p-2 bg-blue-50 rounded-lg">
             <Box className="flex items-center gap-1 text-xs text-blue-700">
-              <Clock size={12} />
+              <Clock sx={{ fontSize: 12 }} />
               <span className="font-medium">{nextEvent.type}</span>
             </Box>
             <Typography variant="caption" color="text.secondary">
@@ -178,7 +178,7 @@ export function ApplicationCard({
             size="small"
             variant="outlined"
             onClick={() => onViewTimeline?.(id)}
-            startIcon={<Eye size={14} />}
+            startIcon={<Eye sx={{ fontSize: 14 }} />}
             className="text-xs"
           >
             Timeline

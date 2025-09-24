@@ -1,7 +1,8 @@
 import React from 'react';
-import { Badge } from './ui/badge';
-import { Separator } from './ui/separator';
-import { ArrowLeft, Code, Palette, Layout, Zap, CheckCircle } from 'lucide-react';
+import { Badge } from '../../ui/badge';
+import { Separator } from '../../ui/separator';
+import { CardTitle } from '../../ui/card';
+import { ArrowLeft, Code, Palette, ViewModule as Layout, FlashOn as Zap, CheckCircle } from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -20,7 +21,7 @@ interface ComponentUsageGuideProps {
 export function ComponentUsageGuide({ onBack }: ComponentUsageGuideProps) {
   const codeExample = `
 // Example: Using Card Components
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 
 function ProfileCard({ profile, isSelected, onClick }) {
   return (

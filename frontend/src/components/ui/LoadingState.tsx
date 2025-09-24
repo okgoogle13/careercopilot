@@ -1,38 +1,33 @@
 import React from 'react';
 import { Box, Typography, CircularProgress } from '@mui/material';
 
-interface LoadingStateProps {
-  size?: 'sm' | 'md' | 'lg';
-  label?: string;
+export interface LoadingStateProps {
+  message?: string;
+  size?: number;
+  className?: string;
 }
 
-const sizeMap = {
-  sm: 20,
-  md: 32,
-  lg: 48,
-};
-
-export function LoadingState({ size = 'md', label }: LoadingStateProps) {
-  const iconSize = sizeMap[size];
-
+export const LoadingState: React.FC<LoadingStateProps> = ({
+  message = 'Loading...',
+  size = 40,
+  className,
+}) => {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 4 }}>
-      <Box sx={{ mb: 2 }}>
-        <CircularProgress
-          size={iconSize}
-          sx={{ color: 'primary.main' }}
-        />
-      </Box>
-
-      {label && (
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          sx={{ textAlign: 'center' }}
-        >
-          {label}
-        </Typography>
-      )}
+    <Box
+      className={className}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 2,
+        p: 4,
+      }}
+    >
+      <CircularProgress size={size} />
+      <Typography variant="body2" color="text.secondary">
+        {message}
+      </Typography>
     </Box>
   );
-}
+};

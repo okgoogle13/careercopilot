@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
-import { X, Download, Edit, Share2, Trash2 } from 'lucide-react';
+import { Close as X, Download, Edit, Share as Share2, Delete as Trash2 } from '@mui/icons-material';
 import { Document } from './types';
 import { ATSScoreCircle } from '../features/analysis/ATSScoreCircle';
 
@@ -49,7 +49,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
               </div>
             )}
             <Button
-              variant="text"
+              variant="link"
               size="small"
               onClick={onClose}
               className="ml-2"
@@ -78,22 +78,22 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
 
         <div className="flex justify-between items-center pt-4 border-t">
           <div className="space-x-2">
-            <Button variant="outlined" size="small" onClick={() => onEdit?.(document)}>
+            <Button variant="outline" size="small" onClick={() => onEdit?.(document)}>
               <Edit className="h-4 w-4 mr-2" />
               Edit
             </Button>
-            <Button variant="outlined" size="small" onClick={() => onDownload?.(document)}>
+            <Button variant="outline" size="small" onClick={() => onDownload?.(document)}>
               <Download className="h-4 w-4 mr-2" />
               Download
             </Button>
           </div>
           <div className="space-x-2">
-            <Button variant="text" size="small" onClick={() => onShare?.(document)}>
+            <Button variant="link" size="small" onClick={() => onShare?.(document)}>
               <Share2 className="h-4 w-4 mr-2" />
               Share
             </Button>
             <Button
-              variant="text"
+              variant="link"
               size="small"
               onClick={() => onDelete?.(document)}
               className="text-destructive hover:text-destructive"

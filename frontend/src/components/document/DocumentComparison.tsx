@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Typography, Card, CardContent, Button, Divider, Chip } from '@mui/material';
-import { FileText, Download, Eye, RotateCcw } from 'lucide-react';
+import { Description as FileText, Download, Visibility as Eye, Refresh as RotateCcw } from '@mui/icons-material';
 
 interface Document {
   id: string;
@@ -90,7 +90,7 @@ export function DocumentComparison({
         {/* Header */}
         <Box className="flex items-center justify-between mb-4">
           <Box className="flex items-center gap-2">
-            <FileText size={20} className="text-primary" />
+            <FileText sx={{ fontSize: 20 }} className="text-primary" />
             <Typography variant="h6" className="font-semibold truncate">
               {document.title}
             </Typography>
@@ -148,14 +148,14 @@ export function DocumentComparison({
           <Button
             size="small"
             variant="outlined"
-            startIcon={<Eye size={16} />}
+            startIcon={<Eye sx={{ fontSize: 16 }} />}
           >
             Preview
           </Button>
           <Button
             size="small"
             variant="outlined"
-            startIcon={<Download size={16} />}
+            startIcon={<Download sx={{ fontSize: 16 }} />}
           >
             Download
           </Button>
@@ -181,7 +181,7 @@ export function DocumentComparison({
           <Button
             variant="outlined"
             onClick={() => setShowFullContent(!showFullContent)}
-            startIcon={<RotateCcw size={16} />}
+            startIcon={<RotateCcw sx={{ fontSize: 16 }} />}
           >
             {showFullContent ? 'Compact View' : 'Full View'}
           </Button>

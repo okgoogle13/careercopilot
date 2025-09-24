@@ -1,88 +1,137 @@
 import React from 'react';
-import { cn } from './utils';
+import {
+  Card as MuiCard,
+  CardProps as MuiCardProps,
+  CardContent as MuiCardContent,
+  CardHeader as MuiCardHeader,
+  CardActions as MuiCardActions,
+  Typography,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-interface M3CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  variant?: 'default' | 'interactive' | 'selected' | 'loading' | 'error';
-  elevation?: 0 | 1 | 2 | 3 | 4 | 5;
-  aurora?: boolean;
-  children: React.ReactNode;
+const StyledCard = styled(MuiCard)(({ theme }) => ({
+  borderRadius: theme.spacing(2),
+  border: `1px solid ${theme.palette.divider}`,
+  boxShadow: 'none',
+}));
+
+export interface CardProps extends MuiCardProps {}
+
+export const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <StyledCard ref={ref} {...props}>
+        {children}
+      </StyledCard>
+    );
+  }
+);
+
+Card.displayName = 'Card';
+
+export interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
 }
 
-const M3Card = React.forwardRef<HTMLDivElement, M3CardProps>(
-  ({ className, variant = 'default', elevation = 1, aurora = false, children, ...props }, ref) => {
+export const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
+  ({ children, title, description, ...props }, ref) => {
+    if (title || description) {
+      return (
+        <MuiCardHeader
+          ref={ref}
+          title={title}
+          subheader={description}
+          {...props}
+        />
+      );
+    }
+
+    return (
+      <div ref={ref} {...props} style={{ padding: '16px 16px 0 16px' }}>
+        {children}
+      </div>
+    );
+  }
+);
+
+CardHeader.displayName = 'CardHeader';
+
+export interface CardTitleProps extends React.ComponentProps<typeof Typography> {}
+
+export const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Typography
+        ref={ref}
+        variant="h6"
+        component="h3"
+        fontWeight={600}
+        {...props}
+      >
+        {children}
+      </Typography>
+    );
+  }
+);
+
+CardTitle.displayName = 'CardTitle';
+
+export interface CardDescriptionProps extends React.ComponentProps<typeof Typography> {}
+
+export const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Typography
+        ref={ref}
+        variant="body2"
+        color="text.secondary"
+        {...props}
+      >
+        {children}
+      </Typography>
+    );
+  }
+);
+
+CardDescription.displayName = 'CardDescription';
+
+export interface CardContentProps extends React.ComponentProps<typeof MuiCardContent> {}
+
+export const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <MuiCardContent ref={ref} {...props}>
+        {children}
+      </MuiCardContent>
+    );
+  }
+);
+
+CardContent.displayName = 'CardContent';
+
+export interface CardFooterProps extends React.ComponentProps<typeof MuiCardActions> {}
+
+export const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <MuiCardActions ref={ref} {...props}>
+        {children}
+      </MuiCardActions>
+    );
+  }
+);
+
+CardFooter.displayName = 'CardFooter';
+
+export interface CardActionProps extends React.ComponentProps<'div'> {}
+
+export const CardAction = React.forwardRef<HTMLDivElement, CardActionProps>(
+  ({ children, className, ...props }, ref) => {
     return (
       <div
         ref={ref}
-        className={cn(
-          // Base Material 3 Card Styles
-          'rounded-2xl border transition-all',
-          'duration-[var(--motion-duration-medium2)] ease-[var(--motion-easing-standard)]',
-          
-          // Default variant
-          variant === 'default' && [
-            'bg-[var(--md-sys-color-surface-container)]',
-            'border-[var(--md-sys-color-outline-variant)]',
-            'text-[var(--md-sys-color-on-surface)]'
-          ],
-          
-          // Interactive variant
-          variant === 'interactive' && [
-            'bg-[var(--md-sys-color-surface-container)]',
-            'border-[var(--md-sys-color-outline-variant)]',
-            'text-[var(--md-sys-color-on-surface)]',
-            'cursor-pointer',
-            'hover:bg-[var(--md-sys-color-surface-container-high)]',
-            'hover:border-[var(--md-sys-color-outline)]',
-            'hover:shadow-[0px_4px_12px_4px_rgba(193,193,255,0.1)]',
-            'hover:duration-[var(--motion-duration-short4)]',
-            'hover:ease-[var(--motion-easing-emphasized-decelerate)]'
-          ],
-          
-          // Selected variant
-          variant === 'selected' && [
-            'bg-[var(--md-sys-color-primary-container)]',
-            'border-2 border-[var(--md-sys-color-primary)]',
-            'text-[var(--md-sys-color-on-primary-container)]'
-          ],
-
-          // Loading variant
-          variant === 'loading' && [
-            'bg-[var(--md-sys-color-surface-container)]',
-            'border-[var(--md-sys-color-outline-variant)]',
-            'text-[var(--md-sys-color-on-surface)]'
-          ],
-
-          // Error variant
-          variant === 'error' && [
-            'bg-[var(--md-sys-color-error-container)]',
-            'border-[var(--md-sys-color-error)]',
-            'text-[var(--md-sys-color-on-error-container)]'
-          ],
-          
-          // Elevation levels
-          elevation === 0 && 'shadow-none',
-          elevation === 1 && 'shadow-[var(--elevation-level1)]',
-          elevation === 2 && 'shadow-[var(--elevation-level2)]',
-          elevation === 3 && 'shadow-[var(--elevation-level3)]',
-          elevation === 4 && 'shadow-[var(--elevation-level4)]',
-          elevation === 5 && 'shadow-[var(--elevation-level5)]',
-
-          // Aurora variant - when aurora prop is true
-          aurora && [
-            'card-aurora',
-            'glass-aurora',
-            'border-2',
-            'border-gradient-aurora',
-            'shadow-glow-aurora',
-            'hover:shadow-glow-aurora',
-            'hover:transform',
-            'hover:-translate-y-1',
-            'transition-all',
-            'duration-300'
-          ],
-          
-          className
-        )}
+        className={`inline-flex items-center justify-center ${className || ''}`}
         {...props}
       >
         {children}
@@ -91,106 +140,4 @@ const M3Card = React.forwardRef<HTMLDivElement, M3CardProps>(
   }
 );
 
-M3Card.displayName = 'M3Card';
-
-const M3CardHeader = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('flex flex-col space-y-1.5 p-6', className)}
-    {...props}
-  />
-));
-M3CardHeader.displayName = 'M3CardHeader';
-
-const M3CardTitle = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLHeadingElement>
->(({ className, ...props }, ref) => (
-  <h3
-    ref={ref}
-    className={cn(
-      'text-2xl font-semibold leading-none tracking-tight',
-      'text-[var(--md-sys-color-on-surface)]',
-      className
-    )}
-    {...props}
-  />
-));
-M3CardTitle.displayName = 'M3CardTitle';
-
-const M3CardDescription = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, ...props }, ref) => (
-  <p
-    ref={ref}
-    className={cn(
-      'text-sm text-[var(--md-sys-color-on-surface-variant)]',
-      className
-    )}
-    {...props}
-  />
-));
-M3CardDescription.displayName = 'M3CardDescription';
-
-const M3CardContent = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn('p-6 pt-0', className)} {...props} />
-));
-M3CardContent.displayName = 'M3CardContent';
-
-const M3CardFooter = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn('flex items-center p-6 pt-0', className)}
-    {...props}
-  />
-));
-M3CardFooter.displayName = 'M3CardFooter';
-
-// Create aliases for legacy components
-const Card = M3Card;
-const CardHeader = M3CardHeader;
-const CardTitle = M3CardTitle;
-const CardDescription = M3CardDescription;
-const CardContent = M3CardContent;
-const CardFooter = M3CardFooter;
-
-// Legacy CardAction component
-const CardAction = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn('col-start-2 row-span-2 row-start-1 self-start justify-self-end', className)}
-      {...props}
-    />
-  )
-);
 CardAction.displayName = 'CardAction';
-
-export {
-  M3Card,
-  M3CardHeader,
-  M3CardFooter,
-  M3CardTitle,
-  M3CardDescription,
-  M3CardContent,
-  // Legacy aliases
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardAction,
-};
-
-export type { M3CardProps };

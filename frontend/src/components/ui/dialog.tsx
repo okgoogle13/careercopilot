@@ -1,206 +1,157 @@
 import React from 'react';
 import {
   Dialog as MuiDialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   DialogProps as MuiDialogProps,
+  DialogTitle as MuiDialogTitle,
+  DialogContent as MuiDialogContent,
+  DialogActions as MuiDialogActions,
+  Typography,
   IconButton,
   Box,
-  Typography,
-  SxProps,
-  Theme,
-  Backdrop,
 } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import CloseIcon from '@mui/icons-material/Close';
+import { styled } from '@mui/material/styles';
 
-interface DialogProps extends Omit<MuiDialogProps, 'children'> {
-  children?: React.ReactNode;
+const StyledDialog = styled(MuiDialog)(({ theme }) => ({
+  '& .MuiDialog-paper': {
+    borderRadius: theme.spacing(2),
+    minWidth: '400px',
+    maxWidth: '600px',
+  },
+}));
+
+const StyledDialogTitle = styled(MuiDialogTitle)(({ theme }) => ({
+  margin: 0,
+  padding: theme.spacing(2),
+  '& .MuiTypography-root': {
+    fontSize: '1.25rem',
+    fontWeight: 600,
+  },
+}));
+
+export interface DialogProps extends MuiDialogProps {
+  onOpenChange?: (open: boolean) => void;
 }
 
-interface DialogTriggerProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-}
+export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
+  ({ children, onClose, onOpenChange, ...props }, ref) => {
+    const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
+      if (onClose) {
+        onClose(event, reason);
+      }
+      if (onOpenChange) {
+        onOpenChange(false);
+      }
+    };
 
-interface DialogContentProps {
-  children: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
+    return (
+      <StyledDialog ref={ref} onClose={handleClose} {...props}>
+        {children}
+      </StyledDialog>
+    );
+  }
+);
 
-interface DialogHeaderProps {
-  children: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
+Dialog.displayName = 'Dialog';
 
-interface DialogTitleProps {
-  children: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
+export interface DialogContentProps extends React.ComponentProps<typeof MuiDialogContent> {}
 
-interface DialogDescriptionProps {
-  children: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
+export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <MuiDialogContent ref={ref} {...props}>
+        {children}
+      </MuiDialogContent>
+    );
+  }
+);
 
-interface DialogFooterProps {
-  children: React.ReactNode;
-  sx?: SxProps<Theme>;
-}
+DialogContent.displayName = 'DialogContent';
 
-interface DialogCloseProps {
-  onClick?: () => void;
-  sx?: SxProps<Theme>;
-}
+export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-function Dialog({ children, ...props }: DialogProps) {
-  return (
-    <MuiDialog
-      {...props}
-      PaperProps={{
-        sx: {
-          borderRadius: 3,
-          minWidth: '400px',
-          maxWidth: '600px',
-          position: 'relative',
-          ...props.PaperProps?.sx,
-        },
-        ...props.PaperProps,
-      }}
-      BackdropComponent={Backdrop}
-      BackdropProps={{
-        sx: {
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        },
-      }}
-    >
-      {children}
-    </MuiDialog>
-  );
-}
+export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Box ref={ref} {...props}>
+        {children}
+      </Box>
+    );
+  }
+);
 
-function DialogTrigger({ children, onClick }: DialogTriggerProps) {
-  return (
-    <Box component="span" onClick={onClick} sx={{ cursor: 'pointer' }}>
-      {children}
-    </Box>
-  );
-}
+DialogHeader.displayName = 'DialogHeader';
 
-function DialogContent({ children, sx }: DialogContentProps) {
-  return (
-    <DialogContent
-      sx={{
-        px: 3,
-        py: 2,
-        '&.MuiDialogContent-root': {
-          paddingTop: 2,
-        },
-        ...sx,
-      }}
-    >
-      {children}
-    </DialogContent>
-  );
-}
+export interface DialogTitleProps extends React.ComponentProps<typeof Typography> {}
 
-function DialogHeader({ children, sx }: DialogHeaderProps) {
-  return (
-    <Box
-      sx={{
-        px: 3,
-        pt: 3,
-        pb: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 1,
-        ...sx,
-      }}
-    >
-      {children}
-    </Box>
-  );
-}
+export const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <StyledDialogTitle>
+        <Typography ref={ref} component="h2" {...props}>
+          {children}
+        </Typography>
+      </StyledDialogTitle>
+    );
+  }
+);
 
-function DialogTitleComponent({ children, sx }: DialogTitleProps) {
-  return (
-    <DialogTitle
-      sx={{
-        fontSize: '1.25rem',
-        fontWeight: 600,
-        lineHeight: 1.2,
-        padding: 0,
-        color: 'text.primary',
-        ...sx,
-      }}
-    >
-      {children}
-    </DialogTitle>
-  );
-}
+DialogTitle.displayName = 'DialogTitle';
 
-function DialogDescription({ children, sx }: DialogDescriptionProps) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      sx={{
-        lineHeight: 1.5,
-        ...sx,
-      }}
-    >
-      {children}
-    </Typography>
-  );
-}
+export interface DialogFooterProps extends React.ComponentProps<typeof MuiDialogActions> {}
 
-function DialogFooter({ children, sx }: DialogFooterProps) {
-  return (
-    <DialogActions
-      sx={{
-        px: 3,
-        pb: 3,
-        pt: 2,
-        gap: 1,
-        justifyContent: 'flex-end',
-        ...sx,
-      }}
-    >
-      {children}
-    </DialogActions>
-  );
-}
+export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <MuiDialogActions ref={ref} {...props}>
+        {children}
+      </MuiDialogActions>
+    );
+  }
+);
 
-function DialogClose({ onClick, sx }: DialogCloseProps) {
-  return (
-    <IconButton
-      onClick={onClick}
-      sx={{
-        position: 'absolute',
-        right: 12,
-        top: 12,
-        color: 'text.secondary',
-        backgroundColor: 'transparent',
-        '&:hover': {
-          backgroundColor: 'action.hover',
-          color: 'text.primary',
-        },
-        ...sx,
-      }}
-    >
-      <Close fontSize="small" />
-    </IconButton>
-  );
-}
+DialogFooter.displayName = 'DialogFooter';
 
-// Export with proper naming
-export {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitleComponent as DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-};
+export interface DialogDescriptionProps extends React.ComponentProps<typeof Typography> {}
+
+export const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Typography
+        ref={ref}
+        variant="body2"
+        color="text.secondary"
+        sx={{ mt: 1 }}
+        {...props}
+      >
+        {children}
+      </Typography>
+    );
+  }
+);
+
+DialogDescription.displayName = 'DialogDescription';
+
+export interface DialogCloseProps extends React.ComponentProps<typeof IconButton> {}
+
+export const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps>(
+  ({ onClick, ...props }, ref) => {
+    return (
+      <IconButton
+        ref={ref}
+        onClick={onClick}
+        sx={{
+          position: 'absolute',
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500],
+        }}
+        {...props}
+      >
+        <CloseIcon />
+      </IconButton>
+    );
+  }
+);
+
+DialogClose.displayName = 'DialogClose';

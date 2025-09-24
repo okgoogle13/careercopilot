@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
-import { FileText, Plus } from 'lucide-react';
+import { Description as FileText, Add as Plus } from '@mui/icons-material';
 import { DashboardHeader } from './dashboard/DashboardHeader';
 import { DashboardStats } from './dashboard/DashboardStats';
 import { ProfileGrid } from './dashboard/ProfileGrid';
-import { DashboardTab } from '../types';
+import { DashboardTab } from '../../../types';
 
 interface Profile {
   id: string;
