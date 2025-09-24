@@ -6,7 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { Star, MoreVertical, Edit, Copy, Trash2, Calendar, Hash } from 'lucide-react';
+import { Star, MoreVert, Edit, ContentCopy as Copy, Delete, CalendarMonth, Tag } from '@mui/icons-material';
 import { format } from 'date-fns';
 import {
   Button,
@@ -88,7 +88,7 @@ export function ProfileVariationCard({
               }`}
               onClick={(e) => e.stopPropagation()}
             >
-              <MoreVertical className="w-4 h-4" />
+              <MoreVert className="w-4 h-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="w-48">
@@ -129,7 +129,7 @@ export function ProfileVariationCard({
                 }}
                 className="text-accent-red focus:text-accent-red focus:bg-accent-red/10"
               >
-                <Trash2 className="w-4 h-4 mr-2" />
+                <Delete className="w-4 h-4 mr-2" />
                 Delete
               </DropdownMenuItem>
             )}
@@ -149,14 +149,14 @@ export function ProfileVariationCard({
         {/* Stats */}
         <div className="grid grid-cols-2 gap-4">
           <div className="flex items-center gap-2 text-content-secondary">
-            <Hash className="w-4 h-4 text-brand-primary/70" />
+            <Tag className="w-4 h-4 text-brand-primary/70" />
             <div>
               <div className="text-sm font-semibold text-content-primary">{keyword_count}</div>
               <div className="text-xs">Keywords</div>
             </div>
           </div>
           <div className="flex items-center gap-2 text-content-secondary">
-            <Calendar className="w-4 h-4 text-brand-primary/70" />
+            <CalendarMonth className="w-4 h-4 text-brand-primary/70" />
             <div>
               <div className="text-sm font-semibold text-content-primary">
                 {formatDate(last_modified)}

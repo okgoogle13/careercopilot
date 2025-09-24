@@ -1,41 +1,54 @@
-'use client';
+import React from 'react';
+import {
+  Avatar as MuiAvatar,
+  AvatarProps as MuiAvatarProps,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-import * as React from 'react';
-import * as AvatarPrimitive from '@radix-ui/react-avatar';
+const StyledAvatar = styled(MuiAvatar)(({ theme }) => ({
+  width: 40,
+  height: 40,
+  fontSize: '1rem',
+}));
 
-import { cn } from './utils';
+export interface AvatarProps extends MuiAvatarProps {}
 
-function Avatar({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Root>) {
-  return (
-    <AvatarPrimitive.Root
-      data-slot="avatar"
-      className={cn('relative flex size-10 shrink-0 overflow-hidden rounded-full', className)}
-      {...props}
-    />
-  );
-}
+export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <StyledAvatar ref={ref} {...props}>
+        {children}
+      </StyledAvatar>
+    );
+  }
+);
 
-function AvatarImage({ className, ...props }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
-  return (
-    <AvatarPrimitive.Image
-      data-slot="avatar-image"
-      className={cn('aspect-square size-full', className)}
-      {...props}
-    />
-  );
-}
+Avatar.displayName = 'Avatar';
 
-function AvatarFallback({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
-  return (
-    <AvatarPrimitive.Fallback
-      data-slot="avatar-fallback"
-      className={cn('bg-muted flex size-full items-center justify-center rounded-full', className)}
-      {...props}
-    />
-  );
-}
+export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
 
-export { Avatar, AvatarImage, AvatarFallback };
+export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
+  ({ src, alt, ...props }, ref) => {
+    return (
+      <Avatar>
+        <img ref={ref} src={src} alt={alt} style={{ width: '100%', height: '100%', objectFit: 'cover' }} {...props} />
+      </Avatar>
+    );
+  }
+);
+
+AvatarImage.displayName = 'AvatarImage';
+
+export interface AvatarFallbackProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Avatar ref={ref} {...props}>
+        {children}
+      </Avatar>
+    );
+  }
+);
+
+AvatarFallback.displayName = 'AvatarFallback';

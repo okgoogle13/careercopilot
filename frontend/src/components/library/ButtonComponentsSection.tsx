@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
-import { Settings, Loader2, Download } from 'lucide-react';
+import { Settings, AutorenewRounded as Loader2, Download } from '@mui/icons-material';
 import { Button, IconButton } from '@mui/material';
 
 export function ButtonComponentsSection() {

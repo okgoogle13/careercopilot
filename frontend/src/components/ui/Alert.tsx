@@ -1,60 +1,79 @@
-import * as React from 'react';
-import { cva, type VariantProps } from 'class-variance-authority';
+import React from 'react';
+import {
+  Alert as MuiAlert,
+  AlertProps as MuiAlertProps,
+  AlertTitle as MuiAlertTitle,
+  Typography,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-import { cn } from './utils';
+const StyledAlert = styled(MuiAlert)(({ theme }) => ({
+  borderRadius: theme.spacing(1),
+  '& .MuiAlert-icon': {
+    marginRight: theme.spacing(1),
+  },
+}));
 
-const alertVariants = cva(
-  'relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current',
-  {
-    variants: {
-      variant: {
-        default: 'bg-card text-card-foreground',
-        destructive:
-          'text-destructive bg-card [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90',
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
+export interface AlertProps extends Omit<MuiAlertProps, 'variant'> {
+  variant?: 'default' | 'destructive';
+}
+
+export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
+  ({ children, variant = 'default', severity, ...props }, ref) => {
+    const getSeverity = (variant: string): MuiAlertProps['severity'] => {
+      switch (variant) {
+        case 'destructive':
+          return 'error';
+        default:
+          return severity || 'info';
+      }
+    };
+
+    return (
+      <StyledAlert ref={ref} severity={getSeverity(variant)} {...props}>
+        {children}
+      </StyledAlert>
+    );
   }
 );
 
-function Alert({
-  className,
-  variant,
-  ...props
-}: React.ComponentProps<'div'> & VariantProps<typeof alertVariants>) {
-  return (
-    <div
-      data-slot="alert"
-      role="alert"
-      className={cn(alertVariants({ variant }), className)}
-      {...props}
-    />
-  );
-}
+Alert.displayName = 'Alert';
 
-function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="alert-title"
-      className={cn('col-start-2 line-clamp-1 min-h-4 font-medium tracking-tight', className)}
-      {...props}
-    />
-  );
-}
+export interface AlertTitleProps extends React.ComponentProps<typeof Typography> {}
 
-function AlertDescription({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="alert-description"
-      className={cn(
-        'text-muted-foreground col-start-2 grid justify-items-start gap-1 text-sm [&_p]:leading-relaxed',
-        className
-      )}
-      {...props}
-    />
-  );
-}
+export const AlertTitle = React.forwardRef<HTMLHeadingElement, AlertTitleProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Typography
+        ref={ref}
+        component="h5"
+        variant="subtitle2"
+        fontWeight={600}
+        gutterBottom
+        {...props}
+      >
+        {children}
+      </Typography>
+    );
+  }
+);
 
-export { Alert, AlertTitle, AlertDescription };
+AlertTitle.displayName = 'AlertTitle';
+
+export interface AlertDescriptionProps extends React.ComponentProps<typeof Typography> {}
+
+export const AlertDescription = React.forwardRef<HTMLParagraphElement, AlertDescriptionProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <Typography
+        ref={ref}
+        variant="body2"
+        {...props}
+      >
+        {children}
+      </Typography>
+    );
+  }
+);
+
+AlertDescription.displayName = 'AlertDescription';

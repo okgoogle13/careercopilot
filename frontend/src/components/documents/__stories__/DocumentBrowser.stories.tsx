@@ -1,3 +1,4 @@
+import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { DocumentBrowser } from '../../features/documents/DocumentBrowser';
 import { Document } from '../types';

@@ -8,7 +8,7 @@ import {
   Card,
   CardContent
 } from '@mui/material';
-import { Plus } from 'lucide-react';
+import { Add as Plus } from '@mui/icons-material';
 import { ApplicationCard } from './ApplicationCard';
 
 interface Application {
@@ -191,7 +191,7 @@ export function KanbanBoard({
         <Button
           variant="contained"
           onClick={onAddApplication}
-          startIcon={<Plus size={16} />}
+          startIcon={<Plus sx={{ fontSize: 16 }} />}
           className="bg-primary hover:bg-primary/90"
           aria-label="Add new job application"
         >

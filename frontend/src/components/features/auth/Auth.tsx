@@ -1,5 +1,5 @@
-import { Input } from './ui/input';
-import { CareerCopilotLogo } from './CareerCopilotLogo';
+import { Input } from '../../ui/input';
+import { CareerCopilotLogo } from '../common/CareerCopilotLogo';
 import {
   Button,
   IconButton,

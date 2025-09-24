@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 import { Label } from '../ui/label';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
-import { Info, AlertTriangle } from 'lucide-react';
+import { Info, Warning as AlertTriangle } from '@mui/icons-material';
 
 export function DisplayComponentsSection() {
   return (

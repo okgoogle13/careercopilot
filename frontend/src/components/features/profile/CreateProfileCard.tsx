@@ -1,4 +1,4 @@
-import { Plus } from 'lucide-react';
+import { Add as Plus } from '@mui/icons-material';
 import {
   Button,
   IconButton,

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, Target, CheckCircle, AlertCircle, TrendingUp, FileText, Users, Lightbulb } from 'lucide-react';
-import { Button } from './ui/button';
-import { Card } from './ui/card';
-import { Badge } from './ui/badge';
-import { ATSScoreCircle } from './library/ATSScoreCircle';
+import { ArrowLeft, ArrowRight, GpsFixed, CheckCircle, Error, TrendingUp, Description, People, Lightbulb } from '@mui/icons-material';
+import { Button } from '../../ui/button';
+import { Card } from '../../ui/card';
+import { Badge } from '../../ui/badge';
+import { ATSScoreCircle } from '../../library/ATSScoreCircle';
 
 interface ATSAnalysisDashboardProps {
   onBack?: () => void;
@@ -71,7 +71,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button
-              variant="text"
+              variant="link"
               onClick={onBack}
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
             >
@@ -81,7 +81,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           </div>
           <div className="flex items-center gap-3">
             <Button
-              variant="elevation"
+              variant="default"
               onClick={onNext}
               className="flex items-center gap-2"
             >
@@ -109,7 +109,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
             <Card className="card-aurora p-8 text-center">
               <div className="space-y-6">
                 <div className="flex items-center justify-center gap-2 mb-4">
-                  <Target className="w-6 h-6 text-primary" />
+                  <GpsFixed className="w-6 h-6 text-primary" />
                   <h2 className="text-xl font-semibold">Overall ATS Score</h2>
                 </div>
 
@@ -189,8 +189,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           {/* Tab Navigation */}
           <div className="flex space-x-1 p-1 bg-muted rounded-lg w-fit">
             {[
-              { id: 'overview', label: 'Overview', icon: FileText },
-              { id: 'keywords', label: 'Keywords', icon: Target },
+              { id: 'overview', label: 'Overview', icon: Description },
+              { id: 'keywords', label: 'Keywords', icon: GpsFixed },
               { id: 'insights', label: 'Insights', icon: Lightbulb }
             ].map((tab) => {
               const Icon = tab.icon;
@@ -246,7 +246,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
 
               <Card className="card-surface p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <AlertCircle className="w-5 h-5 text-yellow-500" />
+                  <Error className="w-5 h-5 text-yellow-500" />
                   Areas for Improvement
                 </h3>
                 <ul className="space-y-3">
@@ -274,7 +274,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
               {/* Keywords Section with Primary Color */}
               <Card className="card-surface p-6">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--color-primary)' }}>
-                  <Target className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
+                  <GpsFixed className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
                   Keyword Analysis
                 </h3>
 
@@ -326,7 +326,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                       'bg-blue-500/10'
                     }`}>
                       {insight.type === 'strength' && <CheckCircle className="w-5 h-5 text-green-500" />}
-                      {insight.type === 'improvement' && <AlertCircle className="w-5 h-5 text-yellow-500" />}
+                      {insight.type === 'improvement' && <Error className="w-5 h-5 text-yellow-500" />}
                       {insight.type === 'opportunity' && <TrendingUp className="w-5 h-5 text-blue-500" />}
                     </div>
                     <div>
@@ -343,7 +343,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
         {/* Action Buttons */}
         <div className="flex justify-between items-center pt-8 border-t border-border">
           <Button
-            variant="outlined"
+            variant="outline"
             onClick={onBack}
             className="flex items-center gap-2"
           >

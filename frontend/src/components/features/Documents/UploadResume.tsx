@@ -1,4 +1,4 @@
-import { Upload, FileText, Mail, Award } from 'lucide-react';
+import { Upload, Description as FileText, Mail, Award } from '@mui/icons-material';
 import {
   Button,
   IconButton,

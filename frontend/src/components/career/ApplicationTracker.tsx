@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 import { TimelineView } from './TimelineView';
-import { Close, ArrowLeft } from 'lucide-react';
+import { Close, ArrowLeft } from '@mui/icons-material';
 
 interface Application {
   id: string;
@@ -201,7 +201,7 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
                 size="small"
                 aria-label="Back to kanban view"
               >
-                <ArrowLeft size={20} />
+                <ArrowLeft sx={{ fontSize: 20 }} />
               </IconButton>
               <Typography variant="h6">
                 Application Timeline
@@ -212,7 +212,7 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
               size="small"
               aria-label="Close dialog"
             >
-              <Close size={20} />
+              <Close sx={{ fontSize: 20 }} />
             </IconButton>
           </Box>
         </DialogTitle>

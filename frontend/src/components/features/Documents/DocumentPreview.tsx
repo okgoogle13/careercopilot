@@ -1,51 +1,51 @@
 import { useState, useRef, useEffect } from 'react';
-import { Badge } from './ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import { ScrollArea } from './ui/scroll-area';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
-import { Popover, PopoverContent, PopoverTrigger } from './ui/popover';
-import { Textarea } from './ui/textarea';
-import { Separator } from './ui/separator';
-import { Progress } from './ui/progress';
-import { Input } from './ui/input';
+import { Badge } from '../../ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
+import { ScrollArea } from '../../ui/scroll-area';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
+import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
+import { Textarea } from '../../ui/textarea';
+import { Separator } from '../../ui/separator';
+import { Progress } from '../../ui/progress';
+import { Input } from '../../ui/input';
 import {
   ArrowLeft,
   Download,
-  Share2,
-  Edit3,
+  Share,
+  Edit,
   ZoomIn,
   ZoomOut,
-  RotateCcw,
-  Printer,
-  MessageSquare,
-  Users,
-  Clock,
+  RotateLeft as RotateCcw,
+  Print as Printer,
+  Message as MessageSquare,
+  People as Users,
+  Schedule as Clock,
   Check,
-  X,
-  MoreVertical,
-  Copy,
+  Close as X,
+  MoreVert as MoreVertical,
+  ContentCopy as Copy,
   History,
-  GitBranch,
-  FileText,
+  AccountTree as GitBranch,
+  Description as FileText,
   Star,
-  Eye,
+  Visibility as Eye,
   Lightbulb,
-  AlertTriangle,
+  Warning as AlertTriangle,
   CheckCircle,
-  XCircle,
-  RefreshCw,
+  Cancel as XCircle,
+  Refresh as RefreshCw,
   Settings,
-  Filter,
-  ChevronDown,
-  ChevronUp,
+  FilterList as Filter,
+  ExpandMore as ChevronDown,
+  ExpandLess as ChevronUp,
   Bookmark,
-  Play,
+  PlayArrow as Play,
   Pause,
-  FileImage,
+  Image as FileImage,
   Archive,
   Code,
-} from 'lucide-react';
+} from '@mui/icons-material';
 import { cn } from '@/lib/utils';
 import {
   Button,
@@ -574,17 +574,17 @@ export function DocumentPreview({
                 onClick={() => setShowShareDialog(true)}
                 className="flex items-center space-x-1.5"
               >
-                <Share2 className="h-4 w-4" />
+                <Share className="h-4 w-4" />
                 <span>Share</span>
               </Button>
 
               <Button
-                variant="elevation"
+                variant="contained"
                 size="small"
                 onClick={onEdit}
                 className="flex items-center space-x-1.5"
               >
-                <Edit3 className="h-4 w-4" />
+                <Edit className="h-4 w-4" />
                 <span>Edit Document</span>
               </Button>
 
@@ -619,11 +619,11 @@ export function DocumentPreview({
             </div>
             <div className="flex gap-2">
               <Button variant="outlined" onClick={onEdit}>
-                <Edit3 className="w-4 h-4 mr-2" />
+                <Edit className="w-4 h-4 mr-2" />
                 Edit Document
               </Button>
               <Button variant="outlined">
-                <Share2 className="w-4 h-4 mr-2" />
+                <Share className="w-4 h-4 mr-2" />
                 Share
               </Button>
               <Button variant="outlined">

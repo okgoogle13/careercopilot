@@ -2,7 +2,7 @@
 
 export type AppTab = 'dashboard' | 'ats-analysis';
 
-export type DashboardTab = 'documents' | 'profiles' | 'analytics' | 'history';
+export type DashboardTab = 'documents' | 'profiles' | 'analytics' | 'history' | 'applications';
 
 export type DocumentType = 'resume' | 'cover-letter' | 'selection-criteria' | 'portfolio' | 'other';
 

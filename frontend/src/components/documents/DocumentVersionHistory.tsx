@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileClock, Clock, CheckCircle2, User, Download, Trash2, MoreVertical } from 'lucide-react';
+import { Schedule, AccessTime, CheckCircle, Person, Download, Delete, MoreVert } from '@mui/icons-material';
 import { Button } from '../ui/button';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '../../lib/utils';
@@ -41,13 +41,13 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
   return (
     <div className={cn('space-y-4', className)}>
       <div className="flex items-center space-x-2 text-muted-foreground">
-        <FileClock className="h-5 w-5" />
+        <Schedule className="h-5 w-5" />
         <h3 className="font-medium">Version History</h3>
       </div>
 
       {versions.length === 0 ? (
         <div className="text-center py-8 border rounded-lg">
-          <Clock className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
+          <AccessTime className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
           <p className="text-muted-foreground">No version history available</p>
         </div>
       ) : (
@@ -74,7 +74,7 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   </div>
                   
                   <div className="flex items-center text-sm text-muted-foreground">
-                    <User className="h-3.5 w-3.5 mr-1" />
+                    <Person className="h-3.5 w-3.5 mr-1" />
                     <span>{version.modifiedBy}</span>
                     <span className="mx-2">•</span>
                     <span>{formatDistanceToNow(version.createdAt, { addSuffix: true })}</span>
@@ -96,7 +96,7 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                 <div className="flex items-center space-x-1">
                   {onDownload && (
                     <Button
-                      variant="text"
+                      variant="link"
                       size="small"
                       onClick={() => onDownload(version)}
                       className="h-8 w-8"
@@ -108,7 +108,7 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   
                   {onRestore && !version.isCurrent && (
                     <Button
-                      variant="outlined"
+                      variant="outline"
                       size="small"
                       onClick={() => onRestore(version)}
                       className="h-8"
@@ -119,13 +119,13 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   
                   {onDelete && !version.isCurrent && (
                     <Button
-                      variant="text"
+                      variant="link"
                       size="small"
                       onClick={() => onDelete(version)}
                       className="h-8 w-8 text-destructive hover:text-destructive"
                       title="Delete this version"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Delete className="h-4 w-4" />
                     </Button>
                   )}
                 </div>

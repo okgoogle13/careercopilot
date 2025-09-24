@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
-import { Badge } from './ui/badge';
-import { LoadingCard, LoadingProfileCard } from './LoadingCard';
-import { ErrorCard, ErrorProfileCard } from './ErrorCard';
+import { Badge } from '../../ui/badge';
+import { LoadingCard, LoadingProfileCard } from '../common/LoadingCard';
+import { ErrorCard, ErrorProfileCard } from '../common/ErrorCard';
+import { CardTitle, CardDescription, CardFooter, CardAction } from '../../ui/card';
 import {
   Star,
-  Heart,
-  User,
-  Target,
+  Favorite as Heart,
+  Person as User,
+  MyLocation as Target,
   TrendingUp,
-  FileText,
+  Description as FileText,
   CheckCircle,
   ArrowLeft,
-  AlertTriangle,
-  Loader2,
-  Play,
-} from 'lucide-react';
+  Warning as AlertTriangle,
+  AutorenewRounded as Loader2,
+  PlayArrow as Play,
+} from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -68,7 +69,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
         {/* Card Variants Documentation */}
         <div className="grid gap-6 mb-8">
-          <Card variant="elevation">
+          <Card>
             <CardHeader
               title={<Typography variant='h3'>Card Component Variants</Typography>}
               subheader={<Typography variant='body2' color='text.secondary'>Five distinct states designed for different interaction patterns and data states
@@ -168,8 +169,19 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
               ].map((profile) => (
                 <Card
                   key={profile.id}
-                  variant={selectedCard === profile.id ? 'selected' : 'interactive'}
                   onClick={() => handleCardClick(profile.id)}
+                  sx={{
+                    cursor: 'pointer',
+                    ...(selectedCard === profile.id ? {
+                      borderColor: 'primary.main',
+                      borderWidth: 2,
+                      boxShadow: theme => `0 0 0 2px ${theme.palette.primary.main}25`
+                    } : {
+                      '&:hover': {
+                        boxShadow: theme => `0 4px 12px ${theme.palette.primary.main}15`
+                      }
+                    })
+                  }}
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between">
@@ -232,7 +244,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                         {profile.lastUpdated || 'Click to create'}
                       </span>
                       {selectedCard === profile.id && (
-                        <Badge variant="elevation" className="bg-primary">
+                        <Badge variant="default" sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}>
                           Selected
                         </Badge>
                       )}
@@ -278,7 +290,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
               ].map((stat, index) => {
                 const IconComponent = stat.icon;
                 return (
-                  <Card key={index} variant="elevation">
+                  <Card key={index}>
                     <CardContent className="pt-6">
                       <div className="flex items-center gap-4">
                         <div className="p-2 bg-primary/10 rounded-lg">
@@ -304,14 +316,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               {/* Featured Template - Selected */}
-              <Card variant="elevation">
+              <Card>
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div>
                       <CardTitle>Modern Minimal</CardTitle>
                       <CardDescription>Professional & Clean</CardDescription>
                     </div>
-                    <Badge variant="elevation">Recommended</Badge>
+                    <Badge variant="default">Recommended</Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -335,7 +347,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                 { name: 'Executive Pro', description: 'Corporate & Formal' },
                 { name: 'Creative Portfolio', description: 'Design & Media' },
               ].map((template, index) => (
-                <Card key={index} variant="elevation">
+                <Card key={index}>
                   <CardHeader
                     title={<Typography variant='h3'>{template.name}</Typography>}
                     subheader={<Typography variant='body2' color='text.secondary'>{template.description}</Typography>}>
@@ -416,7 +428,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   <CheckCircle className="w-4 h-4 text-green-500" />
                   <h4 className="font-medium">2. Loaded</h4>
                 </div>
-                <Card variant="elevation" className="p-6 space-y-4">
+                <Card sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
                       <span className="text-white font-medium">ND</span>
@@ -444,7 +456,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   <Star className="w-4 h-4 text-primary" />
                   <h4 className="font-medium">3. Selected</h4>
                 </div>
-                <Card variant="elevation" className="p-6 space-y-4">
+                <Card sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
                       <span className="text-white font-medium">ND</span>
@@ -464,7 +476,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                       <span className="text-primary">92%</span>
                     </div>
                   </div>
-                  <Badge variant="elevation" className="bg-primary">
+                  <Badge variant="default" sx={{ backgroundColor: 'primary.main', color: 'primary.contrastText' }}>
                     Selected
                   </Badge>
                 </Card>
@@ -487,7 +499,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
               Experience these card variants in action with realistic loading, error, and data
               scenarios.
             </p>
-            <Card variant="elevation">
+            <Card>
               <CardContent className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -510,7 +522,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
           {/* Usage Guidelines */}
           <section>
             <h2 className="mb-4">Usage Guidelines</h2>
-            <Card variant="elevation">
+            <Card>
               <CardContent className="pt-6">
                 <div className="grid md:grid-cols-5 gap-6">
                   <div>

@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
-import { Skeleton } from './ui/skeleton';
+import { Skeleton } from '../../ui/skeleton';
 
 export function LoadingCard() {
   return (
-    <Card variant="loading" className="p-6 space-y-4">
+    <Card sx={{ p: 3 }}>
       {/* Profile Header Section */}
       <div className="flex items-center gap-3">
         <Skeleton className="w-12 h-12 rounded-full" />

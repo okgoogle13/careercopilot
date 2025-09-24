@@ -1,4 +1,4 @@
-import { X, Plus, Check } from 'lucide-react';
+import { Close as X, Add as Plus, Check } from '@mui/icons-material';
 import { Badge } from '../ui/badge';
 import { Button, IconButton } from '@mui/material';
 

@@ -4,7 +4,7 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Badge } from '../ui/badge';
-import { X, Copy, Check, Search, UserPlus, Mail, Lock, Globe } from 'lucide-react';
+import { Close as X, ContentCopy as Copy, Check, Search, PersonAdd as UserPlus, Mail, Lock, Public as Globe } from '@mui/icons-material';
 import { cn } from '../../lib/utils';
 
 type PermissionLevel = 'view' | 'comment' | 'edit';
@@ -145,7 +145,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                 <span className="text-sm font-medium">Invite people</span>
               </div>
               <Button
-                variant="outlined"
+                variant="outline"
                 size="small"
                 onClick={() => setInviteSectionOpen(!inviteSectionOpen)}
                 className="h-8"
@@ -221,7 +221,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                     </div>
                     <div className="flex items-center space-x-2">
                       {collab.status === 'pending' && (
-                        <Badge variant="outlined" className="text-xs">
+                        <Badge variant="outline" className="text-xs">
                           Pending
                         </Badge>
                       )}
@@ -235,7 +235,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                         <option value="edit">Can edit</option>
                       </select>
                       <Button
-                        variant="text"
+                        variant="link"
                         size="small"
                         className="h-8 w-8"
                         onClick={() => onRemoveCollaborator?.(collab.id)}

@@ -1,13 +1,28 @@
-import { cn } from './utils';
+import React from 'react';
+import {
+  Skeleton as MuiSkeleton,
+  SkeletonProps as MuiSkeletonProps,
+} from '@mui/material';
+import { styled } from '@mui/material/styles';
 
-function Skeleton({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="skeleton"
-      className={cn('bg-accent animate-pulse rounded-md', className)}
-      {...props}
-    />
-  );
+const StyledSkeleton = styled(MuiSkeleton)(({ theme }) => ({
+  borderRadius: theme.spacing(1),
+}));
+
+export interface SkeletonProps extends MuiSkeletonProps {
+  className?: string;
 }
 
-export { Skeleton };
+export const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <StyledSkeleton
+        ref={ref}
+        className={className}
+        {...props}
+      />
+    );
+  }
+);
+
+Skeleton.displayName = 'Skeleton';

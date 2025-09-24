@@ -1,7 +1,7 @@
-import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
+import { Badge } from '../../ui/badge';
+import { Progress } from '../../ui/progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import {
   ArrowLeft,
   Sparkles,
@@ -17,7 +17,7 @@ import {
   Plus,
   Star,
   BarChart3,
-} from 'lucide-react';
+} from '@mui/icons-material';
 import {
   Button,
   IconButton,

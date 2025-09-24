@@ -1,5 +1,5 @@
-import { Edit3, Trash2 } from 'lucide-react';
-import { Avatar, AvatarFallback } from './ui/avatar';
+import { Edit3, Trash2 } from '@mui/icons-material';
+import { Avatar, AvatarFallback } from '../../ui/avatar';
 import {
   Button,
   IconButton,

@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import { lightTheme, darkTheme } from './theme';
+import { theme as baseTheme } from './theme';
+import { createTheme } from '@mui/material/styles';
 
 interface ThemeContextType {
   isDarkMode: boolean;
@@ -40,7 +41,13 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
     setIsDarkMode(!isDarkMode);
   };
 
-  const theme = isDarkMode ? darkTheme : lightTheme;
+  const theme = createTheme({
+    ...baseTheme,
+    palette: {
+      ...baseTheme.palette,
+      mode: isDarkMode ? 'dark' : 'light',
+    },
+  });
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, toggleTheme }}>

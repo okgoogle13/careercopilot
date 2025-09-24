@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardActions, Typography, Button, Box, LinearProgress, Chip } from '@mui/material';
-import { ArrowRight, Clock, CheckCircle, AlertCircle } from 'lucide-react';
+import { ArrowRight, AccessTime, CheckCircle, Error } from '@mui/icons-material';
 
 type ActionCardVariant = 'default' | 'featured' | 'urgent' | 'success';
 type ActionCardStatus = 'pending' | 'in-progress' | 'completed' | 'failed';
@@ -31,10 +31,10 @@ const variantStyles = {
 };
 
 const statusConfig = {
-  pending: { color: 'text-gray-500', icon: Clock, bgColor: 'bg-gray-100' },
-  'in-progress': { color: 'text-blue-500', icon: Clock, bgColor: 'bg-blue-100' },
+  pending: { color: 'text-gray-500', icon: AccessTime, bgColor: 'bg-gray-100' },
+  'in-progress': { color: 'text-blue-500', icon: AccessTime, bgColor: 'bg-blue-100' },
   completed: { color: 'text-green-500', icon: CheckCircle, bgColor: 'bg-green-100' },
-  failed: { color: 'text-red-500', icon: AlertCircle, bgColor: 'bg-red-100' }
+  failed: { color: 'text-red-500', icon: Error, bgColor: 'bg-red-100' }
 };
 
 const priorityColors = {
@@ -80,7 +80,7 @@ export function ActionCard({
                 {title}
               </Typography>
               <Box className="flex items-center gap-2">
-                <StatusIcon size={16} className={statusConfig[status].color} />
+                <StatusIcon sx={{ fontSize: 16 }} className={statusConfig[status].color} />
                 <Typography variant="caption" className={statusConfig[status].color}>
                   {status.replace('-', ' ').toUpperCase()}
                 </Typography>
@@ -124,7 +124,7 @@ export function ActionCard({
         <Box className="flex flex-wrap gap-4 mb-4 text-sm text-gray-500">
           {estimatedTime && (
             <Box className="flex items-center gap-1">
-              <Clock size={14} />
+              <AccessTime sx={{ fontSize: 14 }} />
               <span>{estimatedTime}</span>
             </Box>
           )}
@@ -159,7 +159,7 @@ export function ActionCard({
               variant={variant === 'featured' ? 'contained' : 'outlined'}
               onClick={onAction}
               disabled={isCompleted || isFailed}
-              endIcon={<ArrowRight size={16} />}
+              endIcon={<ArrowRight sx={{ fontSize: 16 }} />}
               className={variant === 'featured' ? 'bg-primary hover:bg-primary/90' : ''}
             >
               {actionLabel}
