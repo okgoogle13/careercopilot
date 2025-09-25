@@ -18,13 +18,12 @@ import {
   TrendingUp,
   Lightbulb,
   Book as BookOpen,
-  Briefcase,
-  Heart,
-  Users,
-  Target,
-  BarChart3,
+  Work as Briefcase,
+  Favorite as Heart,
+  People as Users,
+  GpsFixed as Target,
+  BarChart,
 } from '@mui/icons-material';
-import { cn } from '@/lib/utils';
 import { AnimatedCard, StaggeredList } from './AnimatedComponents';
 import { SkeletonLoading } from './StandardizedLoadingStates';
 import {
@@ -261,7 +260,7 @@ export function DocumentTypeSelector({
       const matchesCategory =
         selectedCategory === 'all' ||
         doc.category === selectedCategory ||
-        (selectedCategory === 'favorites' && favorites.includes(doc.id));
+        (selectedCategory === ('favorites' as any) && favorites.includes(doc.id));
 
       return matchesSearch && matchesCategory;
     })
@@ -498,7 +497,7 @@ export function DocumentTypeSelector({
                     Recommended
                   </TabsTrigger>
                   <TabsTrigger value="popular" className="text-xs">
-                    <BarChart3 className="w-3 h-3 mr-1" />
+                    <BarChart className="w-3 h-3 mr-1" />
                     Popular
                   </TabsTrigger>
                   <TabsTrigger value="recent" className="text-xs">

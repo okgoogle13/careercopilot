@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { PageHeader, PageHeaderPresets } from './PageHeader';
 import { Box, Typography, Chip } from '@mui/material';
-import { Edit, Share2, Download, Bookmark, Trash2, Plus, Filter } from '@mui/icons-material';
+import { Edit, Share, Download, Bookmark, Delete, Add, FilterList } from '@mui/icons-material';
 
 const meta: Meta<typeof PageHeader> = {
   title: 'Layout/PageHeader',
@@ -66,14 +66,14 @@ const sampleActions = [
   {
     id: 'share',
     label: 'Share',
-    icon: Share2,
+    icon: Share,
     variant: 'outlined' as const,
     onClick: () => console.log('Share'),
   },
   {
     id: 'create',
     label: 'Create New',
-    icon: Plus,
+    icon: Add,
     variant: 'contained' as const,
     onClick: () => console.log('Create'),
   },
@@ -96,7 +96,7 @@ const sampleMenuActions = [
   {
     id: 'delete',
     label: 'Delete',
-    icon: Trash2,
+    icon: Delete,
     onClick: () => console.log('Delete'),
     color: 'error' as const,
   },
@@ -172,7 +172,7 @@ export const ManyActions: Story = {
       {
         id: 'filter',
         label: 'Filter',
-        icon: Filter,
+        icon: FilterList,
         variant: 'outlined' as const,
         onClick: () => console.log('Filter'),
       },

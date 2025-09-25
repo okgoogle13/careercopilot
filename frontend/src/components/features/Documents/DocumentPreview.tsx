@@ -46,7 +46,6 @@ import {
   Archive,
   Code,
 } from '@mui/icons-material';
-import { cn } from '@/lib/utils';
 import {
   Button,
   IconButton,
@@ -496,11 +495,19 @@ export function DocumentPreview({
 
   return (
     <TooltipProvider>
-      <div
-        className={cn(
-          'flex flex-col bg-gray-50 transition-all duration-300',
-          isFullscreen ? 'h-screen fixed inset-0 z-50' : 'h-screen'
-        )}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: 'grey.50',
+          transition: 'all 300ms',
+          height: '100vh',
+          ...(isFullscreen && {
+            position: 'fixed',
+            inset: 0,
+            zIndex: 50
+          })
+        }}
       >
         {/* Enhanced Header */}
         <header className="bg-white border-b border-gray-200 px-6 py-4">
@@ -556,10 +563,15 @@ export function DocumentPreview({
                     variant="outlined"
                     size="small"
                     onClick={toggleReadingMode}
-                    className={cn(
-                      'flex items-center space-x-1.5',
-                      readingMode && 'bg-blue-50 border-blue-200'
-                    )}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1.5,
+                      ...(readingMode && {
+                        backgroundColor: 'blue.50',
+                        borderColor: 'blue.200'
+                      })
+                    }}
                   >
                     <Eye className="h-4 w-4" />
                     <span>Reading</span>
@@ -892,7 +904,7 @@ export function DocumentPreview({
             </div>
           </div>
         </div>
-      </div>
+      </Box>
     </TooltipProvider>
   );
 }

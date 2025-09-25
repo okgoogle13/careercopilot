@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Box, Button, Stack, Typography } from '@mui/material';
-import { DocumentBrowser } from '../../features/documents/DocumentBrowser';
-import { Document } from '../types';
+import { DocumentBrowser } from '../../features/Documents/DocumentBrowser';
+import { Document } from '../../features/Documents/types';
 
 type DocumentType = Document['type'];
 
 // Generate sample documents
 const generateDocuments = (count: number): Document[] => {
-  const types: DocumentType[] = ['resume', 'cover-letter', 'portfolio', 'other'];
+  const types: DocumentType[] = ['resume', 'cover-letter', 'selection-criteria', 'portfolio', 'other'];
   const tags = [
     ['frontend', 'react', 'typescript'],
     ['backend', 'node', 'python'],
@@ -29,11 +29,12 @@ const generateDocuments = (count: number): Document[] => {
         l.toUpperCase()
       ),
       type,
+      content: `Sample content for document ${i + 1}`,
+      createdAt: new Date(Date.now() - Math.floor(Math.random() * 60) * 24 * 60 * 60 * 1000),
+      updatedAt: new Date(Date.now() - Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000),
       lastModified: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
       atsScore: hasAtsScore ? Math.floor(Math.random() * 30) + 70 : undefined, // 70-100
       size: Math.floor(Math.random() * 5 + 1) * 1024 * 200, // 200KB - 1MB
-      tags: docTags,
-      url: `https://example.com/documents/doc-${i + 1}.pdf`,
     };
   });
 };
@@ -68,17 +69,6 @@ const meta: Meta<typeof DocumentBrowser> = {
         defaultValue: { summary: 'grid' },
       },
     },
-    loading: {
-      control: 'boolean',
-      description: 'Show loading state',
-      table: {
-        defaultValue: { summary: false },
-      },
-    },
-    error: {
-      control: 'text',
-      description: 'Error message to display',
-    },
     onSelect: {
       action: 'selected',
       description: 'Callback when a document is selected',
@@ -89,22 +79,6 @@ const meta: Meta<typeof DocumentBrowser> = {
     onDelete: {
       action: 'delete',
       description: 'Callback when a document is deleted',
-    },
-    onDownload: {
-      action: 'download',
-      description: 'Callback when a document is downloaded',
-    },
-    onViewChange: {
-      action: 'viewChange',
-      description: 'Callback when the view mode changes',
-    },
-    onSortChange: {
-      action: 'sortChange',
-      description: 'Callback when the sort option changes',
-    },
-    onFilterChange: {
-      action: 'filterChange',
-      description: 'Callback when filters are changed',
     },
   },
   args: {
@@ -161,34 +135,6 @@ export const ListView: Story = {
   },
 };
 
-// State Stories
-export const LoadingState: Story = {
-  args: {
-    documents: [],
-    loading: true,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Shows a loading skeleton while documents are being fetched.',
-      },
-    },
-  },
-};
-
-export const ErrorState: Story = {
-  args: {
-    documents: [],
-    error: 'Failed to load documents. Please try again later.',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Displays an error message when document loading fails.',
-      },
-    },
-  },
-};
 
 export const EmptyState: Story = {
   args: {
@@ -214,11 +160,6 @@ export const Interactive: Story = {
       action('onDelete')(doc);
     };
 
-    const handleDownload = (doc: Document) => {
-      action('onDownload')(doc);
-      // Simulate download
-      alert(`Downloading: ${doc.title}`);
-    };
 
     return (
       <Box sx={{ p: 3 }}>
@@ -232,10 +173,6 @@ export const Interactive: Story = {
               action('onSelect')(doc);
             }}
             onDelete={handleDelete}
-            onDownload={handleDownload}
-            onViewChange={action('onViewChange')}
-            onSortChange={action('onSortChange')}
-            onFilterChange={action('onFilterChange')}
           />
 
           {selectedDoc && (
@@ -256,9 +193,6 @@ export const Interactive: Story = {
                 {JSON.stringify(selectedDoc, null, 2)}
               </Box>
               <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
-                <Button variant="outlined" size="small" onClick={() => handleDownload(selectedDoc)}>
-                  Download
-                </Button>
                 <Button
                   variant="outlined"
                   color="error"

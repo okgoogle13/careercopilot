@@ -1,7 +1,8 @@
 import React from 'react';
 import { Document } from './types';
-import { cn } from '../../../lib/utils';
-import { ATSScoreCircle } from '../analysis/ATSScoreCircle';
+import { ATSScoreCircle } from '../Analysis/ATSScoreCircle';
+import { Box, Paper, Typography, IconButton } from '@mui/material';
+import { Delete } from '@mui/icons-material';
 
 export interface DocumentCardProps {
   document: Document;
@@ -44,83 +45,120 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
 
   if (view === 'list') {
     return (
-      <div
-        className={cn(
-          'flex items-center p-4 rounded-lg cursor-pointer transition-colors',
-          'hover:bg-surface-container-highest',
-          isSelected && 'ring-2 ring-primary/50 bg-surface-container-highest'
-        )}
+      <Paper
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          p: 2,
+          borderRadius: 2,
+          cursor: 'pointer',
+          transition: 'colors 200ms',
+          '&:hover': {
+            backgroundColor: 'action.hover'
+          },
+          ...(isSelected && {
+            outline: 2,
+            outlineColor: 'primary.main',
+            backgroundColor: 'action.selected'
+          })
+        }}
         onClick={handleClick}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => e.key === 'Enter' && handleClick()}
       >
-        <div className="flex-shrink-0 mr-4 text-2xl">{icon}</div>
-        <div className="flex-grow min-w-0">
-          <h3 className="font-medium truncate">{document.title}</h3>
-          <p className="text-sm text-muted-foreground">
+        <Box sx={{ flexShrink: 0, mr: 2, fontSize: '2rem' }}>{icon}</Box>
+        <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+          <Typography variant="subtitle1" sx={{ fontWeight: 500, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+            {document.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
             {document.type} • {formattedDate}
-          </p>
-        </div>
+          </Typography>
+        </Box>
         {document.atsScore !== undefined && (
-          <div className="ml-4">
+          <Box sx={{ ml: 2 }}>
             <ATSScoreCircle score={document.atsScore} size="small" />
-          </div>
+          </Box>
         )}
-        <button
+        <IconButton
           onClick={handleDelete}
-          className="ml-4 p-2 rounded-full hover:bg-surface-container-highest"
+          sx={{ ml: 2 }}
           aria-label="Delete document"
         >
-          🗑️
-        </button>
-      </div>
+          <Delete />
+        </IconButton>
+      </Paper>
     );
   }
 
   // Grid view
   return (
-    <div
-      className={cn(
-        'group relative p-4 rounded-xl border border-outline-variant',
-        'transition-all hover:shadow-md hover:border-primary/30',
-        'flex flex-col h-full',
-        isSelected && 'ring-2 ring-primary/50 bg-surface-container-high'
-      )}
+    <Paper
+      sx={{
+        position: 'relative',
+        p: 2,
+        borderRadius: 3,
+        border: 1,
+        borderColor: 'divider',
+        transition: 'all 200ms',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        cursor: 'pointer',
+        '&:hover': {
+          boxShadow: 2,
+          borderColor: 'primary.main',
+          borderOpacity: 0.3
+        },
+        ...(isSelected && {
+          outline: 2,
+          outlineColor: 'primary.main',
+          backgroundColor: 'action.selected'
+        })
+      }}
       onClick={handleClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
-      <div className="flex justify-between items-start mb-3">
-        <div className="text-4xl">{icon}</div>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1.5 }}>
+        <Box sx={{ fontSize: '2.5rem' }}>{icon}</Box>
         {document.atsScore !== undefined && (
-          <div className="-mt-2 -mr-2">
+          <Box sx={{ mt: -1, mr: -1 }}>
             <ATSScoreCircle score={document.atsScore} size="small" />
-          </div>
+          </Box>
         )}
-      </div>
+      </Box>
 
-      <h3 className="font-medium mb-1 truncate">{document.title}</h3>
-      <p className="text-sm text-muted-foreground mb-3">
+      <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 0.5, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+        {document.title}
+      </Typography>
+      <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
         {document.type} • {formattedDate}
-      </p>
+      </Typography>
 
-      <div className="mt-auto pt-3 border-t border-outline-variant">
-        <div className="flex justify-between items-center">
-          <span className="text-xs text-muted-foreground">
+      <Box sx={{ mt: 'auto', pt: 1.5, borderTop: 1, borderColor: 'divider' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="caption" color="text.secondary">
             {document.size ? formatFileSize(document.size) : 'Unknown size'}
-          </span>
-          <button
+          </Typography>
+          <IconButton
             onClick={handleDelete}
-            className="opacity-0 group-hover:opacity-100 p-1 rounded-full hover:bg-surface-container-highest"
+            size="small"
+            sx={{
+              opacity: 0,
+              '.MuiPaper-root:hover &': {
+                opacity: 1
+              }
+            }}
             aria-label="Delete document"
           >
-            🗑️
-          </button>
-        </div>
-      </div>
-    </div>
+            <Delete />
+          </IconButton>
+        </Box>
+      </Box>
+    </Paper>
   );
 };
 
