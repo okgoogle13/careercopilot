@@ -119,7 +119,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
     return (
       <Card
         className={`
-        p-4 animate-pulse 
+        p-4 animate-pulse
         ${variant === "compact" ? "p-3" : ""}
         ${className}
       `}

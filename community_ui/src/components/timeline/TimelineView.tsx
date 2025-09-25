@@ -195,7 +195,7 @@ const TimelineEventComponent: React.FC<{
       {/* Timeline Icon */}
       <div
         className={`
-        relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 
+        relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2
         ${getStatusColor(event.status)}
         ${isLatest ? "ring-4 ring-brand-primary/20 shadow-glow-primary" : ""}
         transition-all duration-300

@@ -325,8 +325,8 @@ class AIConfigManager:
                 supports_streaming=True,
                 supports_function_calling=True,
             ),
-            "gemini-2.0-flash": ModelConfig(
-                name="gemini-2.0-flash",
+            "gemini-2.0-flash-large-context": ModelConfig(
+                name="gemini-2.0-flash-large-context",
                 provider=AIProvider.GOOGLE_AI,
                 model_type=AIModelType.TEXT_GENERATION,
                 model_id="gemini-2.0-flash",

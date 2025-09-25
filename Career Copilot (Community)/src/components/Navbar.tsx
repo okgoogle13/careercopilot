@@ -56,7 +56,7 @@ export function Navbar({
   return (
     <nav
       className={`
-      w-full h-16 
+      w-full h-16
       bg-surface-card border-b border-subtle
       glass
       flex items-center justify-between px-4 lg:px-6
@@ -106,8 +106,8 @@ export function Navbar({
           <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
             <kbd
               className="
-              hidden sm:inline-flex h-5 select-none items-center gap-1 
-              rounded border border-border bg-muted px-1.5 
+              hidden sm:inline-flex h-5 select-none items-center gap-1
+              rounded border border-border bg-muted px-1.5
               font-mono text-[10px] font-medium text-muted-foreground
             "
             >
@@ -155,7 +155,7 @@ export function Navbar({
             <Badge
               variant="destructive"
               className="
-                absolute -top-1 -right-1 h-4 w-4 p-0 
+                absolute -top-1 -right-1 h-4 w-4 p-0
                 flex items-center justify-center text-xs
                 pulse-new
               "
@@ -181,7 +181,7 @@ export function Navbar({
             <Button
               variant="ghost"
               className="
-                h-9 w-9 p-0 rounded-full 
+                h-9 w-9 p-0 rounded-full
                 hover:bg-muted focus-glow
                 ring-2 ring-transparent hover:ring-primary/20
                 transition-normal
@@ -247,7 +247,7 @@ export function Navbar({
       {showSearch && (
         <div
           className="
-          absolute top-full left-0 right-0 z-50 
+          absolute top-full left-0 right-0 z-50
           bg-surface-card border-b border-border
           p-4 md:hidden
           glass
