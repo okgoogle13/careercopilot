@@ -111,10 +111,7 @@ export const Interactive = () => {
   return (
     <Stack spacing={2} maxWidth={300}>
       <Typography variant="h6">Click the button to see the action</Typography>
-      <Button 
-        onClick={action('Button clicked!')}
-        variant="contained"
-      >
+      <Button onClick={action('Button clicked!')} variant="contained">
         Click Me
       </Button>
     </Stack>
@@ -149,23 +146,29 @@ export const Documentation = () => (
   <Stack spacing={3}>
     <Typography variant="h4">Button Component</Typography>
     <Typography variant="body1">
-      The Button component is a customizable button that extends Material-UI's Button with additional features.
+      The Button component is a customizable button that extends Material-UI's Button with
+      additional features.
     </Typography>
-    
+
     <Typography variant="h5">When to Use</Typography>
     <ul>
       <li>To trigger an action or event, such as submitting a form or opening a dialog</li>
       <li>To navigate to another page or section</li>
       <li>To perform a specific action like save, cancel, or delete</li>
     </ul>
-    
+
     <Typography variant="h5">Props</Typography>
     <Typography variant="body2">
-      The Button component accepts all props from Material-UI's Button component, plus the following additional props:
+      The Button component accepts all props from Material-UI's Button component, plus the following
+      additional props:
     </Typography>
     <ul>
-      <li><strong>loading</strong> (boolean): Shows a loading indicator</li>
-      <li><strong>fullWidth</strong> (boolean): Makes the button take full width of its container</li>
+      <li>
+        <strong>loading</strong> (boolean): Shows a loading indicator
+      </li>
+      <li>
+        <strong>fullWidth</strong> (boolean): Makes the button take full width of its container
+      </li>
     </ul>
   </Stack>
 );
