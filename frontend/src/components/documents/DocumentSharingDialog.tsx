@@ -14,7 +14,6 @@ import {
   Lock,
   Public as Globe,
 } from '@mui/icons-material';
-import { cn } from '../../lib/utils';
 
 type PermissionLevel = 'view' | 'comment' | 'edit';
 

@@ -1,17 +1,8 @@
 import React, { useState } from 'react';
 import { DocumentCard } from './DocumentCard';
-import { DocumentView } from './types';
-import { cn } from '../../../lib/utils';
-
-export interface Document {
-  id: string;
-  title: string;
-  type: 'resume' | 'cover-letter' | 'portfolio' | 'other';
-  lastModified: Date;
-  atsScore?: number;
-  previewUrl?: string;
-  size?: number;
-}
+import { DocumentView, Document } from './types';
+import { Box, Typography, IconButton, Grid } from '@mui/material';
+import { GridView, ViewList } from '@mui/icons-material';
 
 interface DocumentBrowserProps {
   /**
@@ -22,7 +13,7 @@ interface DocumentBrowserProps {
    * Initial view mode (grid or list)
    * @default 'grid'
    */
-  defaultView?: DocumentView;
+  defaultView?: 'grid' | 'list';
   /**
    * Callback when a document is selected
    */
@@ -47,7 +38,7 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
   onDelete,
   className,
 }) => {
-  const [view, setView] = useState<DocumentView>(defaultView);
+  const [view, setView] = useState<'grid' | 'list'>(defaultView);
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
 
   const handleSelect = (doc: Document) => {
@@ -61,60 +52,75 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
   };
 
   return (
-    <div className={cn('w-full', className)}>
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">My Documents</h2>
-        <div className="flex space-x-2">
-          <button
+    <Box sx={{ width: '100%' }} className={className}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+        <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>My Documents</Typography>
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <IconButton
             onClick={() => setView('grid')}
-            className={cn(
-              'p-2 rounded-md',
-              view === 'grid' ? 'bg-primary/10 text-primary' : 'hover:bg-surface-container-highest'
-            )}
+            sx={{
+              p: 1,
+              borderRadius: 1.5,
+              ...(view === 'grid' && {
+                backgroundColor: 'primary.main',
+                color: 'primary.contrastText',
+                '&:hover': {
+                  backgroundColor: 'primary.dark'
+                }
+              })
+            }}
             aria-label="Grid view"
           >
-            <GridIcon />
-          </button>
-          <button
+            <GridView />
+          </IconButton>
+          <IconButton
             onClick={() => setView('list')}
-            className={cn(
-              'p-2 rounded-md',
-              view === 'list' ? 'bg-primary/10 text-primary' : 'hover:bg-surface-container-highest'
-            )}
+            sx={{
+              p: 1,
+              borderRadius: 1.5,
+              ...(view === 'list' && {
+                backgroundColor: 'primary.main',
+                color: 'primary.contrastText',
+                '&:hover': {
+                  backgroundColor: 'primary.dark'
+                }
+              })
+            }}
             aria-label="List view"
           >
-            <ListIcon />
-          </button>
-        </div>
-      </div>
+            <ViewList />
+          </IconButton>
+        </Box>
+      </Box>
 
       {documents.length === 0 ? (
-        <div className="text-center py-12 text-muted-foreground">
-          <p className="text-lg">No documents found</p>
-          <p className="text-sm mt-2">Upload your first document to get started</p>
-        </div>
+        <Box sx={{ textAlign: 'center', py: 6, color: 'text.secondary' }}>
+          <Typography variant="h6">No documents found</Typography>
+          <Typography variant="body2" sx={{ mt: 1 }}>Upload your first document to get started</Typography>
+        </Box>
       ) : (
-        <div
-          className={cn(
-            'grid gap-4',
-            view === 'grid'
-              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
-              : 'grid-cols-1'
-          )}
-        >
+        <Grid container spacing={2}>
           {documents.map((doc) => (
-            <DocumentCard
+            <Grid
+              item
               key={doc.id}
-              document={doc}
-              view={view}
-              isSelected={selectedDoc === doc.id}
-              onSelect={handleSelect}
-              onDelete={handleDelete}
-            />
+              xs={12}
+              sm={view === 'grid' ? 6 : 12}
+              md={view === 'grid' ? 4 : 12}
+              lg={view === 'grid' ? 3 : 12}
+            >
+              <DocumentCard
+                document={doc}
+                view={view}
+                isSelected={selectedDoc === doc.id}
+                onSelect={handleSelect}
+                onDelete={handleDelete}
+              />
+            </Grid>
           ))}
-        </div>
+        </Grid>
       )}
-    </div>
+    </Box>
   );
 };
 

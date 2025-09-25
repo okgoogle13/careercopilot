@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
 import { Button } from '../ui/button';
 import { Close as X, Download, Edit, Share as Share2, Delete as Trash2 } from '@mui/icons-material';
 import { Document } from './types';
-import { ATSScoreCircle } from '../features/analysis/ATSScoreCircle';
+import { ATSScoreCircle } from '../features/Analysis/ATSScoreCircle';
 
 interface DocumentPreviewModalProps {
   document: Document | null;
