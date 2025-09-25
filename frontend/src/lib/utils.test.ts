@@ -11,11 +11,11 @@ describe('Utils', () => {
     });
 
     it('should handle objects with boolean values', () => {
-      expect(cn({ 'class1': true, 'class2': false, 'class3': true })).toBe('class1 class3');
+      expect(cn({ class1: true, class2: false, class3: true })).toBe('class1 class3');
     });
 
     it('should handle mixed inputs', () => {
-      expect(cn('class1', { 'class2': true, 'class3': false }, 'class4')).toBe('class1 class2 class4');
+      expect(cn('class1', { class2: true, class3: false }, 'class4')).toBe('class1 class2 class4');
     });
 
     it('should handle empty input', () => {
@@ -69,16 +69,17 @@ describe('Utils', () => {
     beforeAll(() => {
       // Mock timezone to ensure consistent test results
       jest.spyOn(Intl, 'DateTimeFormat').mockImplementation(
-        () => ({
-          format: (date: Date) => {
-            const options: Intl.DateTimeFormatOptions = {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            };
-            return new Intl.DateTimeFormat('en-US', options).format(date);
-          },
-        }) as any
+        () =>
+          ({
+            format: (date: Date) => {
+              const options: Intl.DateTimeFormatOptions = {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              };
+              return new Intl.DateTimeFormat('en-US', options).format(date);
+            },
+          }) as any
       );
     });
 

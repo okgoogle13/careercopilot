@@ -20,20 +20,22 @@ interface DocumentUploadDropzoneProps {
   className?: string;
 }
 
-const DropzoneContainer = styled('div')<{ isDragActive: boolean; isUploading: boolean }>(({ theme, isDragActive, isUploading }) => ({
-  border: `2px dashed ${theme.palette.divider}`,
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(4),
-  textAlign: 'center',
-  transition: theme.transitions.create(['border-color', 'background-color']),
-  cursor: 'pointer',
-  backgroundColor: isDragActive ? theme.palette.action.hover : 'transparent',
-  opacity: isUploading ? 0.5 : 1,
-  pointerEvents: isUploading ? 'none' : 'auto',
-  '&:hover': {
-    borderColor: theme.palette.primary.main,
-  },
-}));
+const DropzoneContainer = styled('div')<{ isDragActive: boolean; isUploading: boolean }>(
+  ({ theme, isDragActive, isUploading }) => ({
+    border: `2px dashed ${theme.palette.divider}`,
+    borderRadius: theme.shape.borderRadius,
+    padding: theme.spacing(4),
+    textAlign: 'center',
+    transition: theme.transitions.create(['border-color', 'background-color']),
+    cursor: 'pointer',
+    backgroundColor: isDragActive ? theme.palette.action.hover : 'transparent',
+    opacity: isUploading ? 0.5 : 1,
+    pointerEvents: isUploading ? 'none' : 'auto',
+    '&:hover': {
+      borderColor: theme.palette.primary.main,
+    },
+  })
+);
 
 const PreviewImage = styled('img')({
   width: '100%',
@@ -74,13 +76,13 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
         console.error('Rejected files:', rejectedMessages.join('\n'));
       }
 
-      const newFiles = acceptedFiles.map(file => ({
+      const newFiles = acceptedFiles.map((file) => ({
         file,
         preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
         progress: 0,
       }));
 
-      setFiles(prevFiles => [...prevFiles, ...newFiles].slice(0, maxFiles));
+      setFiles((prevFiles) => [...prevFiles, ...newFiles].slice(0, maxFiles));
     },
     [maxFiles]
   );
@@ -94,7 +96,7 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
   });
 
   const removeFile = (index: number) => {
-    setFiles(prevFiles => {
+    setFiles((prevFiles) => {
       const newFiles = [...prevFiles];
       const removed = newFiles.splice(index, 1)[0];
       if (removed.preview) {
@@ -109,25 +111,25 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
     setIsUploading(true);
 
     try {
-      const filesWithProgress = files.map(file => ({ ...file, progress: 0 }));
+      const filesWithProgress = files.map((file) => ({ ...file, progress: 0 }));
       setFiles([...filesWithProgress]);
 
       const interval = setInterval(() => {
-        setFiles(prevFiles =>
-          prevFiles.map(f => ({ ...f, progress: Math.min(f.progress! + 10, 90) }))
+        setFiles((prevFiles) =>
+          prevFiles.map((f) => ({ ...f, progress: Math.min(f.progress! + 10, 90) }))
         );
       }, 200);
 
       await onUpload(files);
 
       clearInterval(interval);
-      setFiles(prevFiles => prevFiles.map(f => ({ ...f, progress: 100 })));
+      setFiles((prevFiles) => prevFiles.map((f) => ({ ...f, progress: 100 })));
 
       setTimeout(() => setFiles([]), 1000);
     } catch (error) {
       console.error('Upload failed:', error);
-      setFiles(prevFiles =>
-        prevFiles.map(f => ({ ...f, error: 'Upload failed. Please try again.' }))
+      setFiles((prevFiles) =>
+        prevFiles.map((f) => ({ ...f, error: 'Upload failed. Please try again.' }))
       );
     } finally {
       setIsUploading(false);
@@ -139,7 +141,14 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
       <DropzoneContainer {...getRootProps()} isDragActive={isDragActive} isUploading={isUploading}>
         <input {...getInputProps()} ref={fileInputRef} />
         <Stack alignItems="center" spacing={1}>
-          <Box sx={{ p: 2, borderRadius: '50%', backgroundColor: 'primary.light', color: 'primary.main' }}>
+          <Box
+            sx={{
+              p: 2,
+              borderRadius: '50%',
+              backgroundColor: 'primary.light',
+              color: 'primary.main',
+            }}
+          >
             <Upload />
           </Box>
           <Typography variant="body1" fontWeight="medium">
@@ -154,8 +163,16 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
       {files.length > 0 && (
         <Stack spacing={1.5}>
           {files.map((file, index) => (
-            <Box key={`${file.file.name}-${index}`} sx={{ border: 1, borderColor: 'divider', borderRadius: 1, p: 2 }}>
-              <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={2}>
+            <Box
+              key={`${file.file.name}-${index}`}
+              sx={{ border: 1, borderColor: 'divider', borderRadius: 1, p: 2 }}
+            >
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="flex-start"
+                spacing={2}
+              >
                 <Stack direction="row" alignItems="flex-start" spacing={1.5}>
                   <Box sx={{ p: 1, borderRadius: 1, backgroundColor: 'action.hover' }}>
                     <InsertDriveFile fontSize="small" color="action" />
@@ -180,9 +197,16 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
                     <Typography variant="caption" color="text.secondary">
                       {file.progress < 100 ? 'Uploading...' : 'Uploaded'}
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">{`${Math.round(file.progress)}%`}</Typography>
+                    <Typography
+                      variant="caption"
+                      color="text.secondary"
+                    >{`${Math.round(file.progress)}%`}</Typography>
                   </Stack>
-                  <LinearProgress variant="determinate" value={file.progress} sx={{ height: 6, borderRadius: 3 }} />
+                  <LinearProgress
+                    variant="determinate"
+                    value={file.progress}
+                    sx={{ height: 6, borderRadius: 3 }}
+                  />
                 </Box>
               )}
 
@@ -193,7 +217,15 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
               )}
 
               {showPreviews && file.preview && (
-                <Box sx={{ mt: 1.5, border: 1, borderColor: 'divider', borderRadius: 1, overflow: 'hidden' }}>
+                <Box
+                  sx={{
+                    mt: 1.5,
+                    border: 1,
+                    borderColor: 'divider',
+                    borderRadius: 1,
+                    overflow: 'hidden',
+                  }}
+                >
                   <PreviewImage src={file.preview} alt="Preview" />
                 </Box>
               )}
@@ -201,11 +233,23 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
           ))}
 
           <Stack direction="row" justifyContent="flex-end" spacing={1} pt={1}>
-            <Button variant="outlined" size="small" onClick={() => setFiles([])} disabled={isUploading}>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => setFiles([])}
+              disabled={isUploading}
+            >
               Cancel
             </Button>
-            <Button size="small" onClick={handleUpload} disabled={isUploading || files.length === 0} startIcon={isUploading ? <HourglassEmpty /> : null}>
-              {isUploading ? 'Uploading...' : `Upload ${files.length} file${files.length > 1 ? 's' : ''}`}
+            <Button
+              size="small"
+              onClick={handleUpload}
+              disabled={isUploading || files.length === 0}
+              startIcon={isUploading ? <HourglassEmpty /> : null}
+            >
+              {isUploading
+                ? 'Uploading...'
+                : `Upload ${files.length} file${files.length > 1 ? 's' : ''}`}
             </Button>
           </Stack>
         </Stack>

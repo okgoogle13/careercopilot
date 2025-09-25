@@ -22,10 +22,12 @@ const generateDocuments = (count: number): Document[] => {
     const type = types[Math.floor(Math.random() * types.length)];
     const hasAtsScore = Math.random() > 0.3; // 70% chance of having ATS score
     const docTags = Math.random() > 0.5 ? tags[Math.floor(Math.random() * tags.length)] : [];
-    
+
     return {
       id: `doc-${i + 1}`,
-      title: `Document ${i + 1} - ${type.replace('-', ' ')}`.replace(/\b\w/g, l => l.toUpperCase()),
+      title: `Document ${i + 1} - ${type.replace('-', ' ')}`.replace(/\b\w/g, (l) =>
+        l.toUpperCase()
+      ),
       type,
       lastModified: new Date(Date.now() - Math.floor(Math.random() * 30) * 24 * 60 * 60 * 1000),
       atsScore: hasAtsScore ? Math.floor(Math.random() * 30) + 70 : undefined, // 70-100
@@ -46,7 +48,8 @@ const meta: Meta<typeof DocumentBrowser> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'A document browser component that displays documents in either grid or list view with filtering and sorting capabilities.',
+        component:
+          'A document browser component that displays documents in either grid or list view with filtering and sorting capabilities.',
       },
     },
   },
@@ -76,7 +79,7 @@ const meta: Meta<typeof DocumentBrowser> = {
       control: 'text',
       description: 'Error message to display',
     },
-    onSelect: { 
+    onSelect: {
       action: 'selected',
       description: 'Callback when a document is selected',
       table: {
@@ -137,7 +140,8 @@ export const GridView: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Displays documents in a responsive grid layout. The grid adjusts based on screen size.',
+        story:
+          'Displays documents in a responsive grid layout. The grid adjusts based on screen size.',
       },
     },
   },
@@ -206,7 +210,7 @@ export const Interactive: Story = {
     const [documents, setDocuments] = useState<Document[]>(args.documents || []);
 
     const handleDelete = (doc: Document) => {
-      setDocuments(documents.filter(d => d.id !== doc.id));
+      setDocuments(documents.filter((d) => d.id !== doc.id));
       action('onDelete')(doc);
     };
 
@@ -233,30 +237,31 @@ export const Interactive: Story = {
             onSortChange={action('onSortChange')}
             onFilterChange={action('onFilterChange')}
           />
-          
+
           {selectedDoc && (
             <Box sx={{ mt: 4, p: 2, border: '1px solid', borderColor: 'divider', borderRadius: 1 }}>
-              <Typography variant="h6" gutterBottom>Selected Document:</Typography>
-              <Box component="pre" sx={{ 
-                p: 2, 
-                bgcolor: 'background.paper', 
-                borderRadius: 1,
-                maxHeight: 300,
-                overflow: 'auto'
-              }}>
+              <Typography variant="h6" gutterBottom>
+                Selected Document:
+              </Typography>
+              <Box
+                component="pre"
+                sx={{
+                  p: 2,
+                  bgcolor: 'background.paper',
+                  borderRadius: 1,
+                  maxHeight: 300,
+                  overflow: 'auto',
+                }}
+              >
                 {JSON.stringify(selectedDoc, null, 2)}
               </Box>
               <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
-                <Button 
-                  variant="outlined" 
-                  size="small"
-                  onClick={() => handleDownload(selectedDoc)}
-                >
+                <Button variant="outlined" size="small" onClick={() => handleDownload(selectedDoc)}>
                   Download
                 </Button>
-                <Button 
-                  variant="outlined" 
-                  color="error" 
+                <Button
+                  variant="outlined"
+                  color="error"
                   size="small"
                   onClick={() => handleDelete(selectedDoc)}
                 >

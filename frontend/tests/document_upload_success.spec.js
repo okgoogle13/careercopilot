@@ -26,7 +26,9 @@ test.describe('Document Upload Success Workflow', () => {
     expect(pageTitle).toMatch(/upload|document|resume/i);
 
     // Step 2: Locate the file upload area
-    const uploadArea = page.locator('[data-testid="upload-dropzone"], .dropzone, input[type="file"]').first();
+    const uploadArea = page
+      .locator('[data-testid="upload-dropzone"], .dropzone, input[type="file"]')
+      .first();
     await expect(uploadArea).toBeVisible();
 
     // Step 3: Create a test PDF file for upload (mock file)
@@ -34,34 +36,35 @@ test.describe('Document Upload Success Workflow', () => {
 
     // If using a file input, upload directly
     const fileInput = page.locator('input[type="file"]');
-    if (await fileInput.count() > 0) {
+    if ((await fileInput.count()) > 0) {
       // Create a temporary file for testing
-      await fileInput.setInputFiles([{
-        name: 'test-resume.pdf',
-        mimeType: 'application/pdf',
-        buffer: Buffer.from('Mock PDF content for testing')
-      }]);
+      await fileInput.setInputFiles([
+        {
+          name: 'test-resume.pdf',
+          mimeType: 'application/pdf',
+          buffer: Buffer.from('Mock PDF content for testing'),
+        },
+      ]);
     } else {
       // If using dropzone, simulate drag and drop
       const dropZone = page.locator('[data-testid="upload-dropzone"], .dropzone').first();
       await dropZone.click();
 
       // Handle file dialog if it appears
-      const [fileChooser] = await Promise.all([
-        page.waitForEvent('filechooser'),
-        dropZone.click()
-      ]);
+      const [fileChooser] = await Promise.all([page.waitForEvent('filechooser'), dropZone.click()]);
 
-      await fileChooser.setFiles([{
-        name: 'test-resume.pdf',
-        mimeType: 'application/pdf',
-        buffer: Buffer.from('Mock PDF content for testing')
-      }]);
+      await fileChooser.setFiles([
+        {
+          name: 'test-resume.pdf',
+          mimeType: 'application/pdf',
+          buffer: Buffer.from('Mock PDF content for testing'),
+        },
+      ]);
     }
 
     // Step 4: Wait for upload progress indicators
     const uploadingIndicator = page.locator('text=/uploading|processing|analyzing/i');
-    if (await uploadingIndicator.count() > 0) {
+    if ((await uploadingIndicator.count()) > 0) {
       await expect(uploadingIndicator).toBeVisible();
 
       // Wait for upload to complete
@@ -74,12 +77,12 @@ test.describe('Document Upload Success Workflow', () => {
         page.locator('text=/success|uploaded|complete/i'),
         page.locator('[data-testid="upload-success"]'),
         page.locator('.success-message'),
-        page.locator('text=/✓|checkmark|done/i')
+        page.locator('text=/✓|checkmark|done/i'),
       ];
 
       let found = false;
       for (const indicator of successIndicators) {
-        if (await indicator.count() > 0 && await indicator.isVisible()) {
+        if ((await indicator.count()) > 0 && (await indicator.isVisible())) {
           found = true;
           break;
         }
@@ -93,7 +96,7 @@ test.describe('Document Upload Success Workflow', () => {
 
     // Step 7: Check for next step button
     const nextButton = page.locator('button').filter({
-      hasText: /next|continue|proceed|done/i
+      hasText: /next|continue|proceed|done/i,
     });
     await expect(nextButton).toBeVisible();
     await expect(nextButton).toBeEnabled();
@@ -109,18 +112,18 @@ test.describe('Document Upload Success Workflow', () => {
     // Test uploading multiple files (resume + cover letter)
     const fileInput = page.locator('input[type="file"]');
 
-    if (await fileInput.count() > 0) {
+    if ((await fileInput.count()) > 0) {
       await fileInput.setInputFiles([
         {
           name: 'resume.pdf',
           mimeType: 'application/pdf',
-          buffer: Buffer.from('Mock resume PDF')
+          buffer: Buffer.from('Mock resume PDF'),
         },
         {
           name: 'cover-letter.docx',
           mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-          buffer: Buffer.from('Mock cover letter DOCX')
-        }
+          buffer: Buffer.from('Mock cover letter DOCX'),
+        },
       ]);
 
       // Verify both files appear
@@ -137,23 +140,25 @@ test.describe('Document Upload Success Workflow', () => {
     // Test upload with progress bar/percentage
     const fileInput = page.locator('input[type="file"]').first();
 
-    await fileInput.setInputFiles([{
-      name: 'large-resume.pdf',
-      mimeType: 'application/pdf',
-      buffer: Buffer.from('x'.repeat(1000)) // Larger mock file
-    }]);
+    await fileInput.setInputFiles([
+      {
+        name: 'large-resume.pdf',
+        mimeType: 'application/pdf',
+        buffer: Buffer.from('x'.repeat(1000)), // Larger mock file
+      },
+    ]);
 
     // Look for progress indicators
     const progressIndicators = [
       page.locator('[role="progressbar"]'),
       page.locator('.progress-bar'),
       page.locator('text=/%|percent|progress/i'),
-      page.locator('[data-testid*="progress"]')
+      page.locator('[data-testid*="progress"]'),
     ];
 
     let progressFound = false;
     for (const indicator of progressIndicators) {
-      if (await indicator.count() > 0) {
+      if ((await indicator.count()) > 0) {
         await expect(indicator).toBeVisible({ timeout: 3000 });
         progressFound = true;
         break;
@@ -168,11 +173,13 @@ test.describe('Document Upload Success Workflow', () => {
     // Test that shows file preview after successful upload
     const fileInput = page.locator('input[type="file"]').first();
 
-    await fileInput.setInputFiles([{
-      name: 'resume-with-preview.pdf',
-      mimeType: 'application/pdf',
-      buffer: Buffer.from('Mock PDF with preview')
-    }]);
+    await fileInput.setInputFiles([
+      {
+        name: 'resume-with-preview.pdf',
+        mimeType: 'application/pdf',
+        buffer: Buffer.from('Mock PDF with preview'),
+      },
+    ]);
 
     // Wait for upload success
     await expect(page.locator('text=/success|uploaded/i')).toBeVisible({ timeout: 8000 });
@@ -183,12 +190,12 @@ test.describe('Document Upload Success Workflow', () => {
       page.locator('.file-preview'),
       page.locator('img[alt*="preview"]'),
       page.locator('iframe'), // PDF preview
-      page.locator('.document-thumbnail')
+      page.locator('.document-thumbnail'),
     ];
 
     let previewFound = false;
     for (const element of previewElements) {
-      if (await element.count() > 0 && await element.isVisible()) {
+      if ((await element.count()) > 0 && (await element.isVisible())) {
         previewFound = true;
         break;
       }
@@ -204,11 +211,13 @@ test.describe('Document Upload Success Workflow', () => {
     // Test that displays file metadata after upload
     const fileInput = page.locator('input[type="file"]').first();
 
-    await fileInput.setInputFiles([{
-      name: 'detailed-resume.pdf',
-      mimeType: 'application/pdf',
-      buffer: Buffer.from('Mock PDF with metadata')
-    }]);
+    await fileInput.setInputFiles([
+      {
+        name: 'detailed-resume.pdf',
+        mimeType: 'application/pdf',
+        buffer: Buffer.from('Mock PDF with metadata'),
+      },
+    ]);
 
     // Wait for upload success
     await expect(page.locator('text=/success|uploaded/i')).toBeVisible({ timeout: 8000 });
@@ -218,11 +227,11 @@ test.describe('Document Upload Success Workflow', () => {
       page.locator('text=/file size|size:|bytes|kb|mb/i'),
       page.locator('text=/file type|type:|pdf|docx/i'),
       page.locator('text=/upload.*time|uploaded.*at/i'),
-      page.locator('[data-testid*="file-info"]')
+      page.locator('[data-testid*="file-info"]'),
     ];
 
     for (const element of metadataElements) {
-      if (await element.count() > 0 && await element.isVisible()) {
+      if ((await element.count()) > 0 && (await element.isVisible())) {
         console.log(`Found metadata element: ${await element.textContent()}`);
       }
     }
@@ -236,16 +245,18 @@ test.describe('Document Upload Success Workflow', () => {
 
     const fileInput = page.locator('input[type="file"]').first();
 
-    await fileInput.setInputFiles([{
-      name: 'retry-resume.pdf',
-      mimeType: 'application/pdf',
-      buffer: Buffer.from('Mock PDF for retry test')
-    }]);
+    await fileInput.setInputFiles([
+      {
+        name: 'retry-resume.pdf',
+        mimeType: 'application/pdf',
+        buffer: Buffer.from('Mock PDF for retry test'),
+      },
+    ]);
 
     // Look for retry mechanism if upload initially fails
     const retryButton = page.locator('button').filter({ hasText: /retry|try again/i });
 
-    if (await retryButton.count() > 0 && await retryButton.isVisible()) {
+    if ((await retryButton.count()) > 0 && (await retryButton.isVisible())) {
       await retryButton.click();
     }
 
@@ -259,23 +270,26 @@ test.describe('Document Upload Success Workflow', () => {
     const fileInput = page.locator('input[type="file"]').first();
 
     // Check that file input has proper labels
-    const inputLabel = await fileInput.getAttribute('aria-label') ||
-                       await page.locator('label').filter({ has: fileInput }).textContent();
+    const inputLabel =
+      (await fileInput.getAttribute('aria-label')) ||
+      (await page.locator('label').filter({ has: fileInput }).textContent());
 
     expect(inputLabel).toBeTruthy();
 
-    await fileInput.setInputFiles([{
-      name: 'accessible-resume.pdf',
-      mimeType: 'application/pdf',
-      buffer: Buffer.from('Mock PDF for accessibility test')
-    }]);
+    await fileInput.setInputFiles([
+      {
+        name: 'accessible-resume.pdf',
+        mimeType: 'application/pdf',
+        buffer: Buffer.from('Mock PDF for accessibility test'),
+      },
+    ]);
 
     // Wait for success
     await expect(page.locator('text=/success|uploaded/i')).toBeVisible({ timeout: 8000 });
 
     // Verify ARIA announcements or status updates
     const statusRegion = page.locator('[role="status"], [aria-live], [data-testid*="status"]');
-    if (await statusRegion.count() > 0) {
+    if ((await statusRegion.count()) > 0) {
       await expect(statusRegion).toBeVisible();
     }
 

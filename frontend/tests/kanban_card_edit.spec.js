@@ -20,7 +20,9 @@ test.describe('Kanban Card Edit Workflow', () => {
     await page.waitForLoadState('networkidle');
 
     // Wait for cards to be rendered
-    await expect(page.locator('.MuiCard-root, [data-testid*="card"], .card').first()).toBeVisible({ timeout: 10000 });
+    await expect(page.locator('.MuiCard-root, [data-testid*="card"], .card').first()).toBeVisible({
+      timeout: 10000,
+    });
   });
 
   test('edit profile card content', async ({ page }) => {
@@ -33,12 +35,12 @@ test.describe('Kanban Card Edit Workflow', () => {
       profileCard.locator('button').filter({ hasText: /edit/i }),
       profileCard.locator('[data-testid*="edit"]'),
       profileCard.locator('.edit-button'),
-      profileCard.locator('[title*="edit"]')
+      profileCard.locator('[title*="edit"]'),
     ];
 
     let editButton = null;
     for (const trigger of editTriggers) {
-      if (await trigger.count() > 0 && await trigger.isVisible()) {
+      if ((await trigger.count()) > 0 && (await trigger.isVisible())) {
         editButton = trigger;
         break;
       }
@@ -52,19 +54,23 @@ test.describe('Kanban Card Edit Workflow', () => {
       const editModal = page.locator('[role="dialog"], .modal, [data-testid*="edit-modal"]');
       const inlineEditor = page.locator('input, textarea, [contenteditable="true"]');
 
-      if (await editModal.count() > 0) {
+      if ((await editModal.count()) > 0) {
         // Modal-based editing
         await expect(editModal).toBeVisible();
 
         // Find editable fields in modal
-        const nameField = editModal.locator('input[name*="name"], input[placeholder*="name"]').first();
-        const titleField = editModal.locator('input[name*="title"], input[placeholder*="title"]').first();
+        const nameField = editModal
+          .locator('input[name*="name"], input[placeholder*="name"]')
+          .first();
+        const titleField = editModal
+          .locator('input[name*="title"], input[placeholder*="title"]')
+          .first();
 
-        if (await nameField.count() > 0) {
+        if ((await nameField.count()) > 0) {
           await nameField.fill('Updated Profile Name');
         }
 
-        if (await titleField.count() > 0) {
+        if ((await titleField.count()) > 0) {
           await titleField.fill('Senior Software Engineer');
         }
 
@@ -75,8 +81,7 @@ test.describe('Kanban Card Edit Workflow', () => {
 
         // Wait for modal to close
         await expect(editModal).not.toBeVisible({ timeout: 5000 });
-
-      } else if (await inlineEditor.count() > 0) {
+      } else if ((await inlineEditor.count()) > 0) {
         // Inline editing
         const firstEditor = inlineEditor.first();
         await firstEditor.clear();
@@ -84,7 +89,7 @@ test.describe('Kanban Card Edit Workflow', () => {
 
         // Look for save mechanism (button, enter key, or blur)
         const saveButton = page.locator('button').filter({ hasText: /save|confirm|✓/i });
-        if (await saveButton.count() > 0 && await saveButton.isVisible()) {
+        if ((await saveButton.count()) > 0 && (await saveButton.isVisible())) {
           await saveButton.click();
         } else {
           // Try pressing Enter or clicking outside
@@ -100,7 +105,7 @@ test.describe('Kanban Card Edit Workflow', () => {
 
       // Check if edit mode activated
       const editableElement = page.locator('input, textarea, [contenteditable="true"]');
-      if (await editableElement.count() > 0) {
+      if ((await editableElement.count()) > 0) {
         await editableElement.first().fill('Double-click Edit Test');
         await page.keyboard.press('Enter');
       }
@@ -117,28 +122,30 @@ test.describe('Kanban Card Edit Workflow', () => {
       cardWithStatus.locator('.MuiChip-root'),
       cardWithStatus.locator('[data-testid*="status"]'),
       cardWithStatus.locator('select, .status-dropdown'),
-      cardWithStatus.locator('button').filter({ hasText: /active|draft|published|pending/i })
+      cardWithStatus.locator('button').filter({ hasText: /active|draft|published|pending/i }),
     ];
 
     for (const statusElement of statusElements) {
-      if (await statusElement.count() > 0 && await statusElement.isVisible()) {
+      if ((await statusElement.count()) > 0 && (await statusElement.isVisible())) {
         // Click the status element
         await statusElement.click();
 
         // Look for dropdown or menu
         const dropdown = page.locator('[role="menu"], .dropdown-menu, .MuiMenu-root');
-        if (await dropdown.count() > 0) {
+        if ((await dropdown.count()) > 0) {
           await expect(dropdown).toBeVisible({ timeout: 3000 });
 
           // Select a different status
           const statusOptions = dropdown.locator('[role="menuitem"], .menu-item, li');
           const firstOption = statusOptions.first();
 
-          if (await firstOption.count() > 0) {
+          if ((await firstOption.count()) > 0) {
             await firstOption.click();
 
             // Verify status change
-            await expect(page.locator('text=/status.*updated|changed|saved/i')).toBeVisible({ timeout: 5000 });
+            await expect(page.locator('text=/status.*updated|changed|saved/i')).toBeVisible({
+              timeout: 5000,
+            });
           }
         }
         break;
@@ -167,7 +174,11 @@ test.describe('Kanban Card Edit Workflow', () => {
         // Step 4: Perform drag and drop
         await firstCard.hover();
         await page.mouse.down();
-        await page.mouse.move(secondCardBox.x + secondCardBox.width / 2, secondCardBox.y + secondCardBox.height / 2, { steps: 10 });
+        await page.mouse.move(
+          secondCardBox.x + secondCardBox.width / 2,
+          secondCardBox.y + secondCardBox.height / 2,
+          { steps: 10 }
+        );
         await page.mouse.up();
 
         // Step 5: Wait for reordering animation/update
@@ -186,28 +197,31 @@ test.describe('Kanban Card Edit Workflow', () => {
 
   test('bulk edit multiple cards', async ({ page }) => {
     // Step 1: Look for bulk selection capabilities
-    const selectAllCheckbox = page.locator('input[type="checkbox"]').filter({ hasText: /select all/i }).or(
-      page.locator('[data-testid*="select-all"]')
-    );
+    const selectAllCheckbox = page
+      .locator('input[type="checkbox"]')
+      .filter({ hasText: /select all/i })
+      .or(page.locator('[data-testid*="select-all"]'));
 
-    if (await selectAllCheckbox.count() > 0) {
+    if ((await selectAllCheckbox.count()) > 0) {
       // Step 2: Select all cards
       await selectAllCheckbox.check();
 
       // Step 3: Look for bulk edit options
-      const bulkEditButton = page.locator('button').filter({ hasText: /bulk.*edit|edit.*selected/i });
+      const bulkEditButton = page
+        .locator('button')
+        .filter({ hasText: /bulk.*edit|edit.*selected/i });
 
-      if (await bulkEditButton.count() > 0) {
+      if ((await bulkEditButton.count()) > 0) {
         await bulkEditButton.click();
 
         // Step 4: Perform bulk operations
         const bulkModal = page.locator('[role="dialog"]');
-        if (await bulkModal.count() > 0) {
+        if ((await bulkModal.count()) > 0) {
           await expect(bulkModal).toBeVisible();
 
           // Change status for all selected
           const statusSelect = bulkModal.locator('select, .dropdown');
-          if (await statusSelect.count() > 0) {
+          if ((await statusSelect.count()) > 0) {
             await statusSelect.selectOption({ index: 1 });
           }
 
@@ -216,7 +230,9 @@ test.describe('Kanban Card Edit Workflow', () => {
           await applyButton.click();
 
           // Verify bulk update
-          await expect(page.locator('text=/bulk.*updated|multiple.*updated/i')).toBeVisible({ timeout: 5000 });
+          await expect(page.locator('text=/bulk.*updated|multiple.*updated/i')).toBeVisible({
+            timeout: 5000,
+          });
         }
       }
     } else {
@@ -231,7 +247,7 @@ test.describe('Kanban Card Edit Workflow', () => {
 
         // Look for bulk action toolbar
         const bulkToolbar = page.locator('[data-testid*="bulk"], .bulk-actions');
-        if (await bulkToolbar.count() > 0) {
+        if ((await bulkToolbar.count()) > 0) {
           await expect(bulkToolbar).toBeVisible();
         }
       }
@@ -244,27 +260,34 @@ test.describe('Kanban Card Edit Workflow', () => {
     await expect(targetCard).toBeVisible();
 
     // Step 2: Look for delete button
-    const deleteButton = targetCard.locator('button').filter({ hasText: /delete|remove|×/i }).or(
-      targetCard.locator('[data-testid*="delete"]')
-    );
+    const deleteButton = targetCard
+      .locator('button')
+      .filter({ hasText: /delete|remove|×/i })
+      .or(targetCard.locator('[data-testid*="delete"]'));
 
-    if (await deleteButton.count() > 0) {
+    if ((await deleteButton.count()) > 0) {
       await deleteButton.click();
 
       // Step 3: Handle confirmation dialog
-      const confirmDialog = page.locator('[role="dialog"]').filter({ hasText: /delete|confirm|remove/i });
+      const confirmDialog = page
+        .locator('[role="dialog"]')
+        .filter({ hasText: /delete|confirm|remove/i });
 
-      if (await confirmDialog.count() > 0) {
+      if ((await confirmDialog.count()) > 0) {
         await expect(confirmDialog).toBeVisible();
 
-        const confirmButton = confirmDialog.locator('button').filter({ hasText: /delete|confirm|yes/i });
+        const confirmButton = confirmDialog
+          .locator('button')
+          .filter({ hasText: /delete|confirm|yes/i });
         await confirmButton.click();
 
         // Wait for deletion to complete
         await expect(confirmDialog).not.toBeVisible({ timeout: 5000 });
 
         // Verify deletion success message
-        await expect(page.locator('text=/deleted|removed|success/i')).toBeVisible({ timeout: 5000 });
+        await expect(page.locator('text=/deleted|removed|success/i')).toBeVisible({
+          timeout: 5000,
+        });
       } else {
         // Direct deletion without confirmation
         await expect(page.locator('text=/deleted|removed/i')).toBeVisible({ timeout: 5000 });
@@ -282,9 +305,11 @@ test.describe('Kanban Card Edit Workflow', () => {
     await page.waitForTimeout(500);
 
     // Check if edit mode activated
-    const editableField = page.locator('input:focus, textarea:focus, [contenteditable="true"]:focus');
+    const editableField = page.locator(
+      'input:focus, textarea:focus, [contenteditable="true"]:focus'
+    );
 
-    if (await editableField.count() > 0) {
+    if ((await editableField.count()) > 0) {
       await editableField.type('Keyboard Edit Test');
       await page.keyboard.press('Enter');
 
@@ -296,7 +321,7 @@ test.describe('Kanban Card Edit Workflow', () => {
       await page.waitForTimeout(500);
 
       const newEditableField = page.locator('input:focus, textarea:focus');
-      if (await newEditableField.count() > 0) {
+      if ((await newEditableField.count()) > 0) {
         await newEditableField.type('Enter Key Edit');
         await page.keyboard.press('Escape'); // Save and exit
       }
@@ -307,7 +332,7 @@ test.describe('Kanban Card Edit Workflow', () => {
     // Step 1: Use search/filter to find specific cards
     const searchInput = page.locator('input[placeholder*="search"], [data-testid*="search"]');
 
-    if (await searchInput.count() > 0) {
+    if ((await searchInput.count()) > 0) {
       await searchInput.fill('profile');
       await page.keyboard.press('Enter');
 
@@ -316,17 +341,17 @@ test.describe('Kanban Card Edit Workflow', () => {
 
       // Step 2: Edit a filtered card
       const filteredCard = page.locator('.MuiCard-root').first();
-      if (await filteredCard.count() > 0) {
+      if ((await filteredCard.count()) > 0) {
         await filteredCard.click();
 
         // Look for edit functionality
         const editButton = filteredCard.locator('button').filter({ hasText: /edit/i });
-        if (await editButton.count() > 0) {
+        if ((await editButton.count()) > 0) {
           await editButton.click();
 
           // Perform quick edit
           const editField = page.locator('input, textarea').first();
-          if (await editField.count() > 0) {
+          if ((await editField.count()) > 0) {
             await editField.fill('Filtered Card Edit');
             await page.keyboard.press('Enter');
           }
@@ -350,11 +375,11 @@ test.describe('Kanban Card Edit Workflow', () => {
     // Look for editable content
     const editButton = card.locator('button').filter({ hasText: /edit/i });
 
-    if (await editButton.count() > 0) {
+    if ((await editButton.count()) > 0) {
       await editButton.click();
 
       const editField = page.locator('input, textarea').first();
-      if (await editField.count() > 0) {
+      if ((await editField.count()) > 0) {
         const originalValue = await editField.inputValue();
         await editField.fill('Test Edit for Undo');
 

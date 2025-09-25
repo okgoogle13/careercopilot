@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Schedule,
-  AccessTime,
-  Person,
-  Download,
-  Delete,
-} from '@mui/icons-material';
+import { Schedule, AccessTime, Person, Download, Delete } from '@mui/icons-material';
 import { Button, Stack, Box, Typography, Chip, IconButton } from '@mui/material';
 import { formatDistanceToNow } from 'date-fns';
 import { styled } from '@mui/material/styles';
@@ -56,11 +50,15 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
     <Stack spacing={2} className={className}>
       <Stack direction="row" alignItems="center" spacing={1} color="text.secondary">
         <Schedule fontSize="small" />
-        <Typography variant="h6" component="h3">Version History</Typography>
+        <Typography variant="h6" component="h3">
+          Version History
+        </Typography>
       </Stack>
 
       {versions.length === 0 ? (
-        <Box sx={{ textAlign: 'center', py: 4, border: 1, borderColor: 'divider', borderRadius: 1 }}>
+        <Box
+          sx={{ textAlign: 'center', py: 4, border: 1, borderColor: 'divider', borderRadius: 1 }}
+        >
           <AccessTime sx={{ fontSize: 32, color: 'text.secondary', mb: 1 }} />
           <Typography color="text.secondary">No version history available</Typography>
         </Box>
@@ -81,7 +79,9 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                     <Person sx={{ fontSize: 16 }} />
                     <Typography variant="caption">{version.modifiedBy}</Typography>
                     <Typography variant="caption">•</Typography>
-                    <Typography variant="caption">{formatDistanceToNow(version.createdAt, { addSuffix: true })}</Typography>
+                    <Typography variant="caption">
+                      {formatDistanceToNow(version.createdAt, { addSuffix: true })}
+                    </Typography>
                     <Typography variant="caption">•</Typography>
                     <Typography variant="caption">{formatFileSize(version.size)}</Typography>
                   </Stack>
@@ -89,7 +89,9 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   {version.changes && version.changes.length > 0 && (
                     <Box component="ul" sx={{ pl: 2.5, mt: 1, color: 'text.secondary' }}>
                       {version.changes.map((change, i) => (
-                        <li key={i}><Typography variant="caption">{change}</Typography></li>
+                        <li key={i}>
+                          <Typography variant="caption">{change}</Typography>
+                        </li>
                       ))}
                     </Box>
                   )}
@@ -97,7 +99,11 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
 
                 <Stack direction="row" spacing={0.5}>
                   {onDownload && (
-                    <IconButton size="small" onClick={() => onDownload(version)} title="Download this version">
+                    <IconButton
+                      size="small"
+                      onClick={() => onDownload(version)}
+                      title="Download this version"
+                    >
                       <Download fontSize="small" />
                     </IconButton>
                   )}
@@ -109,7 +115,12 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   )}
 
                   {onDelete && !version.isCurrent && (
-                    <IconButton size="small" onClick={() => onDelete(version)} title="Delete this version" color="error">
+                    <IconButton
+                      size="small"
+                      onClick={() => onDelete(version)}
+                      title="Delete this version"
+                      color="error"
+                    >
                       <Delete fontSize="small" />
                     </IconButton>
                   )}
