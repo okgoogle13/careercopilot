@@ -155,7 +155,7 @@ describe('Auth Component', () => {
       const buttons = screen.getAllByRole('button');
       expect(buttons).toHaveLength(3); // Sign In, Continue with Google, Sign Up
 
-      buttons.forEach(button => {
+      buttons.forEach((button) => {
         expect(button).toBeVisible();
         expect(button).not.toBeDisabled();
       });
@@ -213,7 +213,13 @@ describe('Auth Component', () => {
 
       // Check main container has proper classes
       const container = screen.getByText('Welcome to FML Career Copilot').closest('.min-h-screen');
-      expect(container).toHaveClass('min-h-screen', 'bg-background', 'flex', 'items-center', 'justify-center');
+      expect(container).toHaveClass(
+        'min-h-screen',
+        'bg-background',
+        'flex',
+        'items-center',
+        'justify-center'
+      );
     });
 
     it('should render Google button with proper styling', () => {

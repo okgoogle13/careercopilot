@@ -1,7 +1,6 @@
 import type { Preview } from '@storybook/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import React from 'react';
 import { lightTheme, darkTheme } from '../src/theme/theme';
 
@@ -56,17 +55,6 @@ const customViewports = {
   },
 };
 
-// Custom decorator for MUI theme
-const withMuiTheme = withThemeFromJSXProvider({
-  themes: {
-    light: lightTheme,
-    dark: darkTheme,
-  },
-  defaultTheme: 'light',
-  Provider: ThemeProvider,
-  GlobalStyles: CssBaseline,
-});
-
 const preview: Preview = {
   parameters: {
     // Global parameters
@@ -112,6 +100,7 @@ const preview: Preview = {
           },
         ],
       },
+      test: 'todo',
     },
     // Performance
     options: {
@@ -123,73 +112,18 @@ const preview: Preview = {
   },
   // Global decorators
   decorators: [
-    withMuiTheme,
-    (Story) => (
-      <div style={{ margin: '1rem' }}>
-        <Story />
-      </div>
-    ),
+    (Story, context) => {
+      const theme = context.globals.theme === 'dark' ? darkTheme : lightTheme;
+
+      return React.createElement(
+        ThemeProvider,
+        { theme },
+        React.createElement(CssBaseline),
+        React.createElement(Story)
+      );
+    },
   ],
   // Global types
-  globalTypes: {
-    theme: {
-      name: 'Theme',
-      description: 'Global theme for components',
-      defaultValue: 'light',
-      toolbar: {
-        title: 'Theme',
-        icon: 'circlehollow',
-        items: [
-          { value: 'light', title: 'Light' },
-          { value: 'dark', title: 'Dark' },
-        ],
-        showName: true,
-        dynamicTitle: true,
-      },
-    },
-  },
-            width: '375px',
-            height: '667px',
-          },
-        },
-        mobile3: {
-          name: 'Mobile L',
-          styles: {
-            width: '414px',
-            height: '896px',
-          },
-        },
-        tablet: {
-          name: 'Tablet',
-          styles: {
-            width: '768px',
-            height: '1024px',
-          },
-        },
-        laptop: {
-          name: 'Laptop',
-          styles: {
-            width: '1024px',
-            height: '768px',
-          },
-        },
-        desktop: {
-          name: 'Desktop',
-          styles: {
-            width: '1440px',
-            height: '900px',
-          },
-        },
-      },
-    },
-
-    a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
-      test: 'todo',
-    },
-  },
   globalTypes: {
     theme: {
       description: 'Global theme for components',
@@ -205,18 +139,6 @@ const preview: Preview = {
       },
     },
   },
-  decorators: [
-    (Story, context) => {
-      const theme = context.globals.theme === 'dark' ? darkTheme : lightTheme;
-
-      return React.createElement(
-        ThemeProvider,
-        { theme },
-        React.createElement(CssBaseline),
-        React.createElement(Story)
-      );
-    },
-  ],
 };
 
 export default preview;

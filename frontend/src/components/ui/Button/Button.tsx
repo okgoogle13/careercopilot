@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button as MuiButton, ButtonProps as MuiButtonProps, CircularProgress } from '@mui/material';
+import {
+  Button as MuiButton,
+  ButtonProps as MuiButtonProps,
+  CircularProgress,
+} from '@mui/material';
 
 export interface ButtonProps extends Omit<MuiButtonProps, 'color' | 'size'> {
   /**
@@ -59,46 +63,51 @@ export interface ButtonProps extends Omit<MuiButtonProps, 'color' | 'size'> {
  * A customizable button component that extends Material-UI's Button with additional features.
  * It supports different variants, colors, sizes, and loading states.
  */
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
-  variant = 'contained',
-  color = 'primary',
-  size = 'medium',
-  fullWidth = false,
-  disabled = false,
-  loading = false,
-  type = 'button',
-  href,
-  children,
-  className = '',
-  onClick,
-  ...props
-}, ref) => {
-  const buttonProps = {
-    variant,
-    color: color as 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
-    size,
-    fullWidth,
-    disabled: disabled || loading,
-    type,
-    href,
-    className: `career-button ${className}`,
-    onClick,
-    ...props,
-  };
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      variant = 'contained',
+      color = 'primary',
+      size = 'medium',
+      fullWidth = false,
+      disabled = false,
+      loading = false,
+      type = 'button',
+      href,
+      children,
+      className = '',
+      onClick,
+      ...props
+    },
+    ref
+  ) => {
+    const buttonProps = {
+      variant,
+      color: color as 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
+      size,
+      fullWidth,
+      disabled: disabled || loading,
+      type,
+      href,
+      className: `career-button ${className}`,
+      onClick,
+      ...props,
+    };
 
-  return (
-    <MuiButton
-      ref={ref}
-      {...buttonProps}
-      startIcon={loading ? <CircularProgress size={16} color="inherit" /> : props.startIcon}
-    >
-      {loading && !props.startIcon ? (
-        <CircularProgress size={16} color="inherit" sx={{ mr: 1 }} />
-      ) : null}
-      {children}
-    </MuiButton>
-  );
-});
+    return (
+      <MuiButton
+        ref={ref}
+        {...buttonProps}
+        startIcon={loading ? <CircularProgress size={16} color="inherit" /> : props.startIcon}
+      >
+        {loading && !props.startIcon ? (
+          <CircularProgress size={16} color="inherit" sx={{ mr: 1 }} />
+        ) : null}
+        {children}
+      </MuiButton>
+    );
+  }
+);
 
 Button.displayName = 'Button';
 
