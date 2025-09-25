@@ -16,7 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 function ProfileCard({ profile, isSelected, onClick }) {
   return (
-    <Card 
+    <Card
       variant={isSelected ? "selected" : "interactive"}
       onClick={onClick}
     >

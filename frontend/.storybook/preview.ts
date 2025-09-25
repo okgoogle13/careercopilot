@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 import React from 'react';
 import { lightTheme, darkTheme } from '../src/theme/theme';
 
@@ -9,45 +10,144 @@ import '../src/styles/theme-tokens.css';
 import '../src/styles/enhanced-theme.css';
 import '../src/styles/theme-utility-classes.css';
 
+// Custom viewport configurations
+const customViewports = {
+  mobileS: {
+    name: 'Mobile S',
+    styles: {
+      width: '320px',
+      height: '568px',
+    },
+  },
+  mobileM: {
+    name: 'Mobile M',
+    styles: {
+      width: '375px',
+      height: '667px',
+    },
+  },
+  mobileL: {
+    name: 'Mobile L',
+    styles: {
+      width: '425px',
+      height: '812px',
+    },
+  },
+  tablet: {
+    name: 'Tablet',
+    styles: {
+      width: '768px',
+      height: '1024px',
+    },
+  },
+  laptop: {
+    name: 'Laptop',
+    styles: {
+      width: '1024px',
+      height: '768px',
+    },
+  },
+  desktop: {
+    name: 'Desktop',
+    styles: {
+      width: '1440px',
+      height: '1024px',
+    },
+  },
+};
+
+// Custom decorator for MUI theme
+const withMuiTheme = withThemeFromJSXProvider({
+  themes: {
+    light: lightTheme,
+    dark: darkTheme,
+  },
+  defaultTheme: 'light',
+  Provider: ThemeProvider,
+  GlobalStyles: CssBaseline,
+});
+
 const preview: Preview = {
   parameters: {
+    // Global parameters
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
+      expanded: true,
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i,
+        date: /Date$/,
       },
+      sort: 'requiredFirst',
     },
-
+    // Documentation
     docs: {
       toc: true,
+      source: {
+        state: 'open', // Default state for source code panel
+      },
     },
-
+    // Viewport
+    viewport: {
+      viewports: customViewports,
+      defaultViewport: 'responsive',
+    },
+    // Backgrounds
     backgrounds: {
       default: 'light',
       values: [
-        {
-          name: 'light',
-          value: '#FFFBFE',
-        },
-        {
-          name: 'dark',
-          value: '#1C1B1F',
-        },
+        { name: 'light', value: lightTheme.palette.background.default },
+        { name: 'dark', value: darkTheme.palette.background.default },
+        { name: 'paper', value: lightTheme.palette.background.paper },
       ],
     },
-
-    viewport: {
-      viewports: {
-        mobile1: {
-          name: 'Mobile S',
-          styles: {
-            width: '320px',
-            height: '568px',
+    // Layout
+    layout: 'centered',
+    // A11y
+    a11y: {
+      config: {
+        rules: [
+          {
+            id: 'color-contrast',
+            enabled: true,
           },
-        },
-        mobile2: {
-          name: 'Mobile M',
-          styles: {
+        ],
+      },
+    },
+    // Performance
+    options: {
+      storySort: {
+        order: ['Introduction', 'Documentation', 'Components', 'Pages', 'Features'],
+        method: 'alphabetical',
+      },
+    },
+  },
+  // Global decorators
+  decorators: [
+    withMuiTheme,
+    (Story) => (
+      <div style={{ margin: '1rem' }}>
+        <Story />
+      </div>
+    ),
+  ],
+  // Global types
+  globalTypes: {
+    theme: {
+      name: 'Theme',
+      description: 'Global theme for components',
+      defaultValue: 'light',
+      toolbar: {
+        title: 'Theme',
+        icon: 'circlehollow',
+        items: [
+          { value: 'light', title: 'Light' },
+          { value: 'dark', title: 'Dark' },
+        ],
+        showName: true,
+        dynamicTitle: true,
+      },
+    },
+  },
             width: '375px',
             height: '667px',
           },

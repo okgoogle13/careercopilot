@@ -337,7 +337,7 @@ export const ComplexComponentsShowcase: React.FC<ComplexComponentsShowcaseProps>
                   <div className="flex items-center justify-between">
                     <Icon
                       className={`
-                      w-6 h-6 
+                      w-6 h-6
                       ${activeDemo === section.id ? "text-brand-primary" : "text-on-surface-variant"}
                     `}
                     />

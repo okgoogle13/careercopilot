@@ -476,7 +476,7 @@ export function StyleGuideShowcase({ onBack }: StyleGuideShowcaseProps) {
   border: 1px solid var(--outline-variant);
   border-radius: var(--radius-lg);
   padding: var(--spacing-md);
-  transition: all var(--motion-duration-short4) 
+  transition: all var(--motion-duration-short4)
               var(--motion-easing-standard);
 }`}
                       </pre>
@@ -487,12 +487,12 @@ export function StyleGuideShowcase({ onBack }: StyleGuideShowcaseProps) {
                     <div className="bg-surface-container-high rounded-lg p-4">
                       <pre className="text-xs text-foreground overflow-x-auto">
                         {`<div className="
-  bg-surface-container 
-  text-on-surface 
-  border border-outline-variant 
-  rounded-lg 
-  p-6 
-  transition-short4 
+  bg-surface-container
+  text-on-surface
+  border border-outline-variant
+  rounded-lg
+  p-6
+  transition-short4
   ease-standard
 ">
   Content

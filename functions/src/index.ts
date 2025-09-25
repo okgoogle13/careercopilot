@@ -1,5 +1,5 @@
 // Import all functions
-import { cleanupUserData, adminCleanupUser } from "./auth.functions";
+import {cleanupUserData, adminCleanupUser} from "./auth.functions";
 
 // Export all functions
-export { cleanupUserData, adminCleanupUser };
+export {cleanupUserData, adminCleanupUser};

@@ -82,7 +82,7 @@ export const StatCard: React.FC<StatCardProps> = ({
     return (
       <Card
         className={`
-        p-4 animate-pulse 
+        p-4 animate-pulse
         ${variant === "compact" ? "p-3" : ""}
         ${className}
       `}

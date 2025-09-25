@@ -9,7 +9,7 @@
 ## Acceptance Criteria
 
 • **Visual Fidelity**: Components match Figma design tokens exactly
-• **Zero Regression**: All existing functionality preserved  
+• **Zero Regression**: All existing functionality preserved
 • **Performance**: Bundle size increase <10%, LCP <2.5s
 • **Accessibility**: WCAG 2.1 AA compliance maintained
 • **Testing**: All E2E tests pass, unit tests updated
@@ -107,7 +107,7 @@ function App() {
 #### Dashboard Components
 
 • **Profile Summary Card**: User info with completion percentage
-• **Document Library**: Generated documents with status indicators  
+• **Document Library**: Generated documents with status indicators
 • **Application Tracker**: Active applications with Gmail/Calendar integration
 • **ATS Score Widget**: Circular progress with score breakdown
 • **Quick Actions Panel**: Workflow shortcuts
@@ -218,7 +218,7 @@ npx lighthouse http://localhost:3000
 ### Common Issues
 
 • **Theme not applied**: Verify ThemeProvider wraps component
-• **TypeScript errors**: Install @mui/types, check sx prop usage  
+• **TypeScript errors**: Install @mui/types, check sx prop usage
 • **Styling conflicts**: Remove ALL Tailwind classes before adding MUI
 • **Bundle size increase**: Use selective imports from @mui/icons-material
 • **Responsive breakpoints**: Use theme.breakpoints.up() instead of Tailwind responsive classes
