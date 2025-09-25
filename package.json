@@ -42,7 +42,6 @@
     "@firebase/functions": "^0.13.0",
     "@firebase/storage": "^0.13.2",
     "@playwright/test": "1.55.0",
-    "@storybook/test": "^8.2.6",
     "@types/node": "20",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",

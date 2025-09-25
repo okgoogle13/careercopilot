@@ -82,8 +82,8 @@ export function FeatureHighlights({ className }: FeatureHighlightsProps) {
               <div className="flex items-start justify-between mb-4">
                 <div
                   className={`
-                  flex items-center justify-center w-12 h-12 rounded-xl 
-                  bg-gradient-to-br ${feature.gradient} 
+                  flex items-center justify-center w-12 h-12 rounded-xl
+                  bg-gradient-to-br ${feature.gradient}
                   text-white shadow-lg group-hover:shadow-xl
                   transition-all duration-300
                 `}

@@ -1,5 +1,5 @@
 import * as functions from "firebase-functions";
-import { db, storage } from "./firebase";
+import {db, storage} from "./firebase";
 
 /**
  * @typedef {Object} StorageFile
@@ -25,8 +25,8 @@ export const cleanupUserData = functions.https.onCall(
   },
   /** @type {CleanupRequest} */
   async (request) => {
-    const { uid } = request.data;
-    const { auth } = request;
+    const {uid} = request.data;
+    const {auth} = request;
 
     // Verify the request is authenticated and from the same user or admin
     if (!auth || (auth.uid !== uid && !auth.token.admin)) {
@@ -97,7 +97,7 @@ export const adminCleanupUser = functions.https.onRequest(
     try {
       // Only allow POST requests
       if (request.method !== "POST") {
-        response.status(405).json({ error: "Method not allowed" });
+        response.status(405).json({error: "Method not allowed"});
         return;
       }
 
@@ -106,7 +106,7 @@ export const adminCleanupUser = functions.https.onRequest(
       if (!authHeader || !authHeader.startsWith("Bearer ")) {
         response
           .status(401)
-          .json({ error: "Unauthorized: Missing or invalid Authorization header" });
+          .json({error: "Unauthorized: Missing or invalid Authorization header"});
         return;
       }
 
@@ -115,20 +115,20 @@ export const adminCleanupUser = functions.https.onRequest(
       // For now, we'll just check if it matches the expected admin key
       const expectedAdminKey = process.env.ADMIN_CLEANUP_KEY || "default-admin-key";
       if (token !== expectedAdminKey) {
-        response.status(403).json({ error: "Forbidden: Invalid admin key" });
+        response.status(403).json({error: "Forbidden: Invalid admin key"});
         return;
       }
 
-      const { uid, adminKey } = request.body;
+      const {uid, adminKey} = request.body;
 
       // Verify admin key (in production, use proper authentication)
       if (!adminKey || adminKey !== process.env.ADMIN_CLEANUP_KEY) {
-        response.status(401).json({ error: "Unauthorized" });
+        response.status(401).json({error: "Unauthorized"});
         return;
       }
 
       if (!uid) {
-        response.status(400).json({ error: "Missing uid parameter" });
+        response.status(400).json({error: "Missing uid parameter"});
         return;
       }
 

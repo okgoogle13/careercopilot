@@ -205,25 +205,25 @@ export default function StandardizedLoadingStatesDemo({
             <div className="space-y-3">
               <h4 className="font-medium text-foreground">React Component Usage</h4>
               <pre className="bg-muted p-3 rounded text-xs overflow-x-auto">
-                {`import { 
-  SpinnerLoading, 
-  ProgressLoading, 
-  StateLoading 
+                {`import {
+  SpinnerLoading,
+  ProgressLoading,
+  StateLoading
 } from './StandardizedLoadingStates';
 
 // Basic spinner
 <SpinnerLoading size="md" label="Loading..." />
 
 // Progress with percentage
-<ProgressLoading 
-  progress={75} 
-  label="Uploading..." 
+<ProgressLoading
+  progress={75}
+  label="Uploading..."
   showPercentage={true}
 />
 
 // State-based loading
-<StateLoading 
-  state="processing" 
+<StateLoading
+  state="processing"
   message="AI is analyzing your resume..."
   onRetry={handleRetry}
 />`}

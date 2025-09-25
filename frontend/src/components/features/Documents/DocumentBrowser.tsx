@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DocumentCard } from './DocumentCard';
 import { DocumentView } from './types';
-import { cn } from '../../lib/utils';
+import { cn } from '../../../lib/utils';
 
 export interface Document {
   id: string;

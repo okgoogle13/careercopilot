@@ -31,7 +31,7 @@ interface DocumentVersionHistoryProps {
 
 const VersionCard = styled(Box)<{ isCurrent?: boolean }>(({ theme, isCurrent }) => ({
   border: `1px solid ${isCurrent ? theme.palette.primary.main : theme.palette.divider}`,
-  backgroundColor: isCurrent ? theme.palette.primary.lighter : 'transparent',
+  backgroundColor: isCurrent ? theme.palette.primary.light : 'transparent',
   borderRadius: theme.shape.borderRadius,
   padding: theme.spacing(2),
   transition: theme.transitions.create(['border-color', 'background-color']),
