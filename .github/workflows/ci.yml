@@ -460,7 +460,7 @@ jobs:
         run: |
           cd frontend
           echo "🎭 Running Playwright E2E tests..."
-          npx playwright test tests/ksc-generation-workflow.spec.js --reporter=html,json
+          npx playwright test tests/ --reporter=html,json
         env:
           PLAYWRIGHT_BASE_URL: 'http://127.0.0.1:3000'
           API_BASE_URL: 'http://127.0.0.1:8080'
