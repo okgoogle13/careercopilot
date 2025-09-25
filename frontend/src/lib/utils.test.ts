@@ -1,31 +1,6 @@
-import { cn, formatFileSize, formatDate } from './utils';
+import { formatFileSize, formatDate } from './utils';
 
 describe('Utils', () => {
-  describe('cn', () => {
-    it('should combine class names correctly', () => {
-      expect(cn('class1', 'class2')).toBe('class1 class2');
-    });
-
-    it('should handle conditional classes', () => {
-      expect(cn('class1', false && 'class2', 'class3')).toBe('class1 class3');
-    });
-
-    it('should handle objects with boolean values', () => {
-      expect(cn({ class1: true, class2: false, class3: true })).toBe('class1 class3');
-    });
-
-    it('should handle mixed inputs', () => {
-      expect(cn('class1', { class2: true, class3: false }, 'class4')).toBe('class1 class2 class4');
-    });
-
-    it('should handle empty input', () => {
-      expect(cn()).toBe('');
-    });
-
-    it('should handle null and undefined', () => {
-      expect(cn(null, undefined, 'valid-class')).toBe('valid-class');
-    });
-  });
 
   describe('formatFileSize', () => {
     it('should format 0 bytes correctly', () => {
@@ -125,9 +100,6 @@ describe('Utils', () => {
   });
 
   describe('edge cases and error handling', () => {
-    it('cn should handle arrays', () => {
-      expect(cn(['class1', 'class2'])).toBe('class1 class2');
-    });
 
     it('formatFileSize should handle negative numbers', () => {
       expect(formatFileSize(-1024)).toBe('-1 KB');

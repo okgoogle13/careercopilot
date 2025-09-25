@@ -1,5 +1,5 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { Box, Typography, Paper } from '@mui/material';
 
 interface ColorSwatchProps {
   name: string;
@@ -35,42 +35,52 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
   const contrastText = contrast > 0.5 ? 'text-black' : 'text-white';
 
   return (
-    <div className={cn('rounded-lg overflow-hidden shadow-sm', className)}>
-      <div
-        className="h-24 flex items-center justify-center"
-        style={
-          color.startsWith('var(')
-            ? { backgroundColor: `var(${color})` }
-            : { backgroundColor: color }
-        }
+    <Paper sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 1 }} className={className}>
+      <Box
+        sx={{
+          height: 96,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: color.startsWith('var(') ? `var(${color})` : color
+        }}
       >
-        <span
-          className={cn(
-            'px-2 py-1 rounded-md text-sm font-medium',
-            textColor === 'auto' ? contrastText : textColor,
-            'bg-black/10 backdrop-blur-sm'
-          )}
+        <Typography
+          variant="body2"
+          sx={{
+            px: 1,
+            py: 0.5,
+            borderRadius: 1,
+            fontWeight: 500,
+            color: textColor === 'auto' ? (contrast > 0.5 ? 'black' : 'white') : 'inherit',
+            backgroundColor: 'rgba(0,0,0,0.1)',
+            backdropFilter: 'blur(2px)'
+          }}
         >
           {name}
-        </span>
-      </div>
-      <div className="p-3 bg-background">
-        <div className="flex justify-between items-center">
-          <code className="text-xs font-mono">{color}</code>
+        </Typography>
+      </Box>
+      <Box sx={{ p: 1.5, backgroundColor: 'background.paper' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="caption" component="code" sx={{ fontFamily: 'monospace' }}>
+            {color}
+          </Typography>
           {showContrast && contrast > 0 && (
-            <span
-              className={cn(
-                'text-xs px-2 py-1 rounded',
-                contrast > 4.5
-                  ? 'bg-success/20 text-success-foreground'
-                  : 'bg-warning/20 text-warning-foreground'
-              )}
+            <Typography
+              variant="caption"
+              sx={{
+                px: 1,
+                py: 0.5,
+                borderRadius: 0.5,
+                backgroundColor: contrast > 4.5 ? 'success.light' : 'warning.light',
+                color: contrast > 4.5 ? 'success.contrastText' : 'warning.contrastText'
+              }}
             >
               {contrast.toFixed(2)}:1
-            </span>
+            </Typography>
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Paper>
   );
 };

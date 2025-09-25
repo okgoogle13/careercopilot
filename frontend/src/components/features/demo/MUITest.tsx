@@ -39,7 +39,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
   });
 
   return (
-    <LayoutContainer size="large">
+    <LayoutContainer>
       <LayoutStack spacing={4}>
         <Box>
           <Typography variant="h3" component="h1" gutterBottom>
@@ -51,13 +51,13 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
         </Box>
 
         <LayoutFlex justify="space-between" align="center" wrap gap={2}>
-          <Button variant="contained" onClick={onBack}>
+          <Button variant="default" onClick={onBack}>
             Back to App
           </Button>
           <LayoutFlex gap={2}>
-            <Button variant="outlined">Outlined Button</Button>
+            <Button variant="outline">Outlined Button</Button>
             <Button variant="secondary">Secondary</Button>
-            <Button variant="contained" onClick={() => setDialogOpen(true)}>
+            <Button variant="default" onClick={() => setDialogOpen(true)}>
               Open Dialog
             </Button>
           </LayoutFlex>
@@ -118,8 +118,10 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent>
                 <LayoutStack spacing={2}>
-                  <LayoutCard variant="outlined" padding={2}>
-                    <Typography variant="body2">Layout Card Component</Typography>
+                  <LayoutCard variant="outlined">
+                    <Box sx={{ p: 2 }}>
+                      <Typography variant="body2">Layout Card Component</Typography>
+                    </Box>
                   </LayoutCard>
                   <LayoutFlex justify="space-between" align="center">
                     <Typography variant="body2">Flex Layout</Typography>
@@ -197,14 +199,14 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                 placeholder="Your name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                icon={<User sx={{ fontSize: 16 }} />}
+                InputProps={{ startAdornment: <User sx={{ fontSize: 16, mr: 1 }} /> }}
               />
               <Input
                 placeholder="your.email@example.com"
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                icon={<Mail sx={{ fontSize: 16 }} />}
+                InputProps={{ startAdornment: <Mail sx={{ fontSize: 16, mr: 1 }} /> }}
               />
               <Textarea
                 placeholder="Your message..."
@@ -218,7 +220,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
             <Button variant="outline" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
-            <Button variant="elevation" onClick={() => setDialogOpen(false)}>
+            <Button variant="default" onClick={() => setDialogOpen(false)}>
               Send Message
             </Button>
           </DialogFooter>
