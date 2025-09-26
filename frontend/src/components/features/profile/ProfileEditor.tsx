@@ -10,36 +10,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import { Progress } from '../../ui/progress';
 import { Separator } from '../../ui/separator';
-import {
-  Sparkles,
-  User,
-  Briefcase,
-  GraduationCap,
-  Award,
-  X,
-  Plus,
-  MapPin,
-  Globe,
-  Linkedin,
-  Github,
-  Twitter,
-  Calendar,
-  Phone,
-  Mail,
-  Edit,
-  Upload,
-  Camera,
-  Palette,
-  Settings,
-  Target,
-  TrendingUp,
-  Languages,
-  Code,
-  Heart,
-  Loader2,
-  CheckCircle,
-  AlertCircle,
-  Star,
+import { 
+  EmojiObjects as Sparkles, 
+  Person as User,
+  Work as Briefcase,
+  School as GraduationCap,
+  EmojiEvents as Award,
+  Add as Plus,
+  LocationOn as MapPin,
+  Public as Globe,
+  LinkedIn,
+  GitHub,
 } from '@mui/icons-material';
 import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
 import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';

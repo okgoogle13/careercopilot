@@ -6,17 +6,30 @@
  * from navigation to result verification.
  */
 
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
+
+// Helper function to check if the development server is running
+async function isServerRunning() {
+  try {
+    const response = await fetch('http://localhost:5173');
+    return response.status < 500;
+  } catch (error) {
+    return false;
+  }
+}
 
 test.describe('KSC Generation Workflow', () => {
   test.beforeEach(async ({ page }) => {
-    // Set up any necessary authentication or initial state
-    // For now, we'll assume no authentication is required
+    // Check if server is running before each test
+    const serverAvailable = await isServerRunning();
+    if (!serverAvailable) {
+      test.skip(true, 'Development server not running on localhost:5173. Start with: npm run dev');
+    }
   });
 
   test('happy path - complete KSC generation workflow', async ({ page }) => {
     // Step 1: Navigate to the KSC Generator page
-    await page.goto('/ksc-generator');
+    await page.goto('http://localhost:5173/ksc-generator');
 
     // Verify we're on the correct page
     await expect(page).toHaveTitle(/.*KSC.*|.*Key Selection Criteria.*/i);

@@ -149,3 +149,20 @@ export const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps>
 );
 
 DialogClose.displayName = 'DialogClose';
+
+// Add DialogTrigger component
+export interface DialogTriggerProps extends React.ComponentProps<'button'> {
+  children: React.ReactNode;
+}
+
+export const DialogTrigger = React.forwardRef<HTMLButtonElement, DialogTriggerProps>(
+  ({ children, ...props }, ref) => {
+    return (
+      <button ref={ref} {...props}>
+        {children}
+      </button>
+    );
+  }
+);
+
+DialogTrigger.displayName = 'DialogTrigger';

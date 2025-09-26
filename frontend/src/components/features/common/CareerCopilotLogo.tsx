@@ -1,4 +1,5 @@
-import logoImage from 'figma:asset/cb6eaf84aec85fc7699f0c2f9000a1cb19725dc5.png';
+import { Box, Typography } from '@mui/material';
+import { Work } from '@mui/icons-material';
 import { SxProps, Theme } from '@mui/material/styles';
 
 interface CareerCopilotLogoProps {
@@ -15,15 +16,29 @@ export function CareerCopilotLogo({
   sx,
 }: CareerCopilotLogoProps) {
   return (
-    <div className={`flex items-center ${className}`}>
-      <img
-        src={logoImage}
-        alt="FML Career Copilot Logo"
-        width={size}
-        height={size}
-        loading="lazy"
-        className="object-contain"
-      />
-    </div>
+    <Box
+      className={className}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 1,
+        ...sx,
+      }}
+    >
+      <Work sx={{ fontSize: size, color: 'primary.main' }} />
+      {variant === 'full' && (
+        <Typography
+          variant="h6"
+          component="span"
+          sx={{
+            fontWeight: 600,
+            color: 'primary.main',
+            fontSize: size / 2,
+          }}
+        >
+          Career Copilot
+        </Typography>
+      )}
+    </Box>
   );
 }
