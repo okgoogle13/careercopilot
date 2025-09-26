@@ -1,123 +1,77 @@
-import React from 'react';
-import {
-  Card as MuiCard,
-  CardProps as MuiCardProps,
-  CardContent as MuiCardContent,
-  CardHeader as MuiCardHeader,
-  CardActions as MuiCardActions,
-  Typography,
-} from '@mui/material';
+// Create file: src/components/ui/card.tsx
 import { styled } from '@mui/material/styles';
+import MuiCard, { CardProps as MuiCardProps } from '@mui/material/Card';
+import { forwardRef } from 'react';
 
-const StyledCard = styled(MuiCard)(({ theme }) => ({
-  borderRadius: theme.spacing(2),
-  border: `1px solid ${theme.palette.divider}`,
-  boxShadow: 'none',
+type CardVariant = 'elevation' | 'outlined' | 'selected' | 'interactive';
+
+interface CardProps extends Omit<MuiCardProps, 'variant'> {
+  variant?: CardVariant;
+  children?: React.ReactNode;
+}
+
+const StyledCard = styled(MuiCard, {
+  shouldForwardProp: (prop) => prop !== 'variant',
+})<{ variant?: CardVariant }>(({ theme, variant = 'elevation' }) => ({
+  transition: theme.transitions.create(['box-shadow', 'transform'], {
+    duration: theme.transitions.duration.standard,
+  }),
+  ...(variant === 'selected' && {
+    border: `2px solid ${theme.palette.primary.main}`,
+    boxShadow: theme.shadows[4],
+  }),
+  ...(variant === 'interactive' && {
+    cursor: 'pointer',
+    '&:hover': {
+      transform: 'translateY(-4px)',
+      boxShadow: theme.shadows[8],
+    },
+  }),
 }));
 
-export interface CardProps extends MuiCardProps {}
-
-export const Card = React.forwardRef<HTMLDivElement, CardProps>(({ children, ...props }, ref) => {
-  return (
-    <StyledCard ref={ref} {...props}>
-      {children}
-    </StyledCard>
-  );
-});
+export const Card = forwardRef<HTMLDivElement, CardProps>(({ variant, ...rest }, ref) => (
+  <StyledCard
+    ref={ref}
+    variant={variant === 'selected' || variant === 'interactive' ? 'elevation' : variant}
+    elevation={variant === 'interactive' ? 4 : undefined}
+    {...rest}
+  />
+));
 
 Card.displayName = 'Card';
 
-export interface CardHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
-  title?: React.ReactNode;
-  description?: React.ReactNode;
-}
+// Add missing card components
+import { CardContent as MuiCardContent } from '@mui/material';
+import { CardHeader as MuiCardHeader } from '@mui/material';
+import { CardActions as MuiCardActions } from '@mui/material';
+import { Typography } from '@mui/material';
 
-export const CardHeader = React.forwardRef<HTMLDivElement, CardHeaderProps>(
-  ({ children, title, description, ...props }, ref) => {
-    if (title || description) {
-      return <MuiCardHeader ref={ref} title={title} subheader={description} {...props} />;
-    }
-
-    return (
-      <div ref={ref} {...props} style={{ padding: '16px 16px 0 16px' }}>
-        {children}
-      </div>
-    );
-  }
+export const CardContent = forwardRef<HTMLDivElement, React.ComponentProps<typeof MuiCardContent>>(
+  (props, ref) => <MuiCardContent ref={ref} {...props} />
 );
-
-CardHeader.displayName = 'CardHeader';
-
-export interface CardTitleProps extends React.ComponentProps<typeof Typography> {}
-
-export const CardTitle = React.forwardRef<HTMLHeadingElement, CardTitleProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <Typography ref={ref} variant="h6" component="h3" fontWeight={600} {...props}>
-        {children}
-      </Typography>
-    );
-  }
-);
-
-CardTitle.displayName = 'CardTitle';
-
-export interface CardDescriptionProps extends React.ComponentProps<typeof Typography> {}
-
-export const CardDescription = React.forwardRef<HTMLParagraphElement, CardDescriptionProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <Typography ref={ref} variant="body2" color="text.secondary" {...props}>
-        {children}
-      </Typography>
-    );
-  }
-);
-
-CardDescription.displayName = 'CardDescription';
-
-export interface CardContentProps extends React.ComponentProps<typeof MuiCardContent> {}
-
-export const CardContent = React.forwardRef<HTMLDivElement, CardContentProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <MuiCardContent ref={ref} {...props}>
-        {children}
-      </MuiCardContent>
-    );
-  }
-);
-
 CardContent.displayName = 'CardContent';
 
-export interface CardFooterProps extends React.ComponentProps<typeof MuiCardActions> {}
-
-export const CardFooter = React.forwardRef<HTMLDivElement, CardFooterProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <MuiCardActions ref={ref} {...props}>
-        {children}
-      </MuiCardActions>
-    );
-  }
+export const CardHeader = forwardRef<HTMLDivElement, React.ComponentProps<typeof MuiCardHeader>>(
+  (props, ref) => <MuiCardHeader ref={ref} {...props} />
 );
+CardHeader.displayName = 'CardHeader';
 
+export const CardFooter = forwardRef<HTMLDivElement, React.ComponentProps<typeof MuiCardActions>>(
+  (props, ref) => <MuiCardActions ref={ref} {...props} />
+);
 CardFooter.displayName = 'CardFooter';
 
-export interface CardActionProps extends React.ComponentProps<'div'> {}
-
-export const CardAction = React.forwardRef<HTMLDivElement, CardActionProps>(
-  ({ children, className, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={`inline-flex items-center justify-center ${className || ''}`}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
+export const CardTitle = forwardRef<HTMLHeadingElement, React.ComponentProps<typeof Typography>>(
+  (props, ref) => <Typography ref={ref} variant="h6" component="h3" {...props} />
 );
+CardTitle.displayName = 'CardTitle';
 
+export const CardDescription = forwardRef<HTMLParagraphElement, React.ComponentProps<typeof Typography>>(
+  (props, ref) => <Typography ref={ref} variant="body2" color="text.secondary" {...props} />
+);
+CardDescription.displayName = 'CardDescription';
+
+export const CardAction = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  (props, ref) => <div ref={ref} {...props} />
+);
 CardAction.displayName = 'CardAction';

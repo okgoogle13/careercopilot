@@ -1,6 +1,7 @@
+import React from 'react';
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { Upload, FileText, Mail, Award } from "lucide-react";
+import { Upload, FileText, Mail, Trophy as Award } from "lucide-react";
 
 interface UploadResumeProps {
   onNext: () => void;

@@ -1,5 +1,4 @@
 import { useState, Suspense, lazy } from 'react';
-import { ThemeProvider, CssBaseline } from '@mui/material';
 import { Box, Typography, Chip } from '@mui/material';
 // Advanced Sidebar System imports
 import {
@@ -15,7 +14,6 @@ import {
   SidebarInset,
 } from './components/ui/sidebar';
 import { Button } from './components/ui/button';
-import { theme } from './theme/theme';
 
 // Lazy-loaded components for better performance - Updated paths after restructuring
 const Dashboard = lazy(() =>
@@ -626,9 +624,7 @@ export default function App() {
   const currentViewInfo = getCurrentViewInfo();
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <SidebarProvider defaultOpen={showDemoNav}>
+    <SidebarProvider defaultOpen={showDemoNav}>
         <Sidebar collapsible="icon" variant="sidebar">
           <SidebarHeader>
             <div className="flex items-center gap-2 px-4 py-2">
@@ -733,6 +729,5 @@ export default function App() {
           )}
         </SidebarInset>
       </SidebarProvider>
-    </ThemeProvider>
   );
 }
