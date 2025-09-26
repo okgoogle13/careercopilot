@@ -16,8 +16,10 @@
     "jsxImportSource": "react",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
-    }
+      "@/*": ["src/*"],
+      "storybook/test": ["./src/types/storybook"]
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"]
   },
   "include": ["src", "**/*.ts", "**/*.tsx", "src/types"],
   "exclude": [

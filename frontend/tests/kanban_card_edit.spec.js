@@ -9,7 +9,7 @@
  * - Status changes and updates
  */
 
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 
 test.describe('Kanban Card Edit Workflow', () => {
   test.beforeEach(async ({ page }) => {

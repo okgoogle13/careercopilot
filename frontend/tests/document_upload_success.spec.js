@@ -8,8 +8,8 @@
  * - Navigation to next steps
  */
 
-const { test, expect } = require('@playwright/test');
-const path = require('path');
+import { test, expect } from '@playwright/test';
+import path from 'path';
 
 test.describe('Document Upload Success Workflow', () => {
   test.beforeEach(async ({ page }) => {

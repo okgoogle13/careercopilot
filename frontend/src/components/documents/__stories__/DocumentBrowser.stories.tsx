@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from '@storybook/test';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { DocumentBrowser } from '../../features/Documents/DocumentBrowser';
 import { Document } from '../../features/Documents/types';
@@ -70,14 +70,12 @@ const meta: Meta<typeof DocumentBrowser> = {
       },
     },
     onSelect: {
-      action: 'selected',
       description: 'Callback when a document is selected',
       table: {
         type: { summary: '(document: Document) => void' },
       },
     },
     onDelete: {
-      action: 'delete',
       description: 'Callback when a document is deleted',
     },
   },
@@ -157,7 +155,7 @@ export const Interactive: Story = {
 
     const handleDelete = (doc: Document) => {
       setDocuments(documents.filter((d) => d.id !== doc.id));
-      action('onDelete')(doc);
+      fn()(doc);
     };
 
 
@@ -170,7 +168,7 @@ export const Interactive: Story = {
             documents={documents}
             onSelect={(doc: Document) => {
               setSelectedDoc(doc);
-              action('onSelect')(doc);
+              fn()(doc);
             }}
             onDelete={handleDelete}
           />
