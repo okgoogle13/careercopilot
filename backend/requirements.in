@@ -41,11 +41,9 @@ weasyprint
 # NLP processing (optional - for resume parsing optimization)
 spacy
 
-# Vector search and embeddings - simplified
+# AI Platform and ML utilities - keeping minimal set for Genkit
 google-cloud-aiplatform
 numpy
-# h5py  # Temporarily disabled
-faiss-cpu
 
 # Monitoring and Metrics
 prometheus-client

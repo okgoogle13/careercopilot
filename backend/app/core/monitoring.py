@@ -15,6 +15,16 @@ from functools import wraps
 from typing import Any, Callable, Dict, List, Optional
 
 import psutil
+from fastapi import FastAPI, Request, Response
+from prometheus_client import (
+    CONTENT_TYPE_LATEST,
+    REGISTRY,
+    Counter,
+    Gauge,
+    Histogram,
+    generate_latest,
+)
+from starlette.middleware.base import BaseHTTPMiddleware
 
 logger = logging.getLogger(__name__)
 
@@ -603,3 +613,125 @@ def track_error(
             "user_id": user_id,
         },
     )
+
+
+# =============================================================================
+# Prometheus Metrics Integration
+# =============================================================================
+
+# Define Prometheus metrics
+http_requests_total = Counter(
+    "http_requests_total",
+    "Total number of HTTP requests",
+    ["method", "endpoint", "status_code", "environment"],
+)
+
+http_request_duration_seconds = Histogram(
+    "http_request_duration_seconds",
+    "HTTP request duration in seconds",
+    ["method", "endpoint", "environment"],
+    buckets=[0.005, 0.01, 0.025, 0.05, 0.075, 0.1, 0.25, 0.5, 0.75, 1.0, 2.5, 5.0, 7.5, 10.0],
+)
+
+ai_requests_total = Counter(
+    "ai_requests_total",
+    "Total number of AI service requests",
+    ["ai_service", "operation", "status", "environment"],
+)
+
+ai_request_duration_seconds = Histogram(
+    "ai_request_duration_seconds",
+    "AI service request duration in seconds",
+    ["ai_service", "operation", "environment"],
+    buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 30.0, 60.0],
+)
+
+application_errors_total = Counter(
+    "application_errors_total",
+    "Total application errors",
+    ["error_type", "component", "severity", "environment"],
+)
+
+
+class PrometheusMiddleware(BaseHTTPMiddleware):
+    """FastAPI middleware for Prometheus metrics collection."""
+
+    def __init__(self, app: FastAPI, environment: str = "development"):
+        super().__init__(app)
+        self.environment = environment
+
+    async def dispatch(self, request: Request, call_next: Callable) -> Response:
+        """Process request and collect metrics."""
+        start_time = time.time()
+        method = request.method
+        endpoint = self._normalize_path(request.url.path)
+
+        try:
+            response = await call_next(request)
+            status_code = str(response.status_code)
+        except Exception as e:
+            application_errors_total.labels(
+                error_type=type(e).__name__,
+                component="middleware",
+                severity="high",
+                environment=self.environment,
+            ).inc()
+            status_code = "500"
+            raise
+        finally:
+            duration = time.time() - start_time
+
+            http_requests_total.labels(
+                method=method,
+                endpoint=endpoint,
+                status_code=status_code,
+                environment=self.environment,
+            ).inc()
+
+            http_request_duration_seconds.labels(
+                method=method,
+                endpoint=endpoint,
+                environment=self.environment,
+            ).observe(duration)
+
+        return response
+
+    def _normalize_path(self, path: str) -> str:
+        """Normalize path to reduce cardinality."""
+        if path.startswith("/api/v1/"):
+            parts = path.split("/")
+            normalized = []
+            for part in parts:
+                if part.isdigit() or len(part) == 36:  # UUID-like
+                    normalized.append("{id}")
+                else:
+                    normalized.append(part)
+            return "/".join(normalized)
+        return path
+
+
+def setup_prometheus_monitoring(app: FastAPI, environment: str = "development") -> None:
+    """Set up Prometheus monitoring for FastAPI application."""
+
+    # Add metrics middleware
+    app.add_middleware(PrometheusMiddleware, environment=environment)
+
+    # Add metrics endpoint
+    @app.get("/metrics", include_in_schema=False)
+    async def metrics():
+        """Prometheus metrics endpoint."""
+        return Response(
+            generate_latest(REGISTRY),
+            media_type=CONTENT_TYPE_LATEST,
+        )
+
+    # Add health check endpoints
+    @app.get("/health", include_in_schema=False)
+    async def health_check():
+        """Health check endpoint."""
+        return {"status": "healthy", "environment": environment}
+
+    @app.get("/ready", include_in_schema=False)
+    async def readiness_check():
+        """Readiness check endpoint."""
+        return {"status": "ready", "environment": environment}

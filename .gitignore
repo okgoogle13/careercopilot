@@ -75,3 +75,6 @@ careercopilot/frontend/.env
 public/assets/
 /Applications/careercopilot/backend/firebase-prod-key.json
 .env.production
+
+# Ignore backup directories created by cleanup script
+cleanup_backup_*
