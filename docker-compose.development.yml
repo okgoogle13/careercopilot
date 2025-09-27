@@ -1,0 +1,72 @@
+version: '3.8'
+
+networks:
+  careercopilot-dev-network:
+    driver: bridge
+
+services:
+  # Development PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: careercopilot-dev-postgres
+    environment:
+      POSTGRES_DB: careercopilot_dev
+      POSTGRES_USER: dev_user
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_HOST_AUTH_METHOD: md5
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dev_user -d careercopilot_dev"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Development Redis
+  redis:
+    image: redis:7-alpine
+    container_name: careercopilot-dev-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_dev_data:/data
+    ports:
+      - "6380:6379"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+  # Development Backend with hot reload
+  backend-dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    container_name: careercopilot-dev-backend
+    environment:
+      # Database configuration
+      DATABASE_URL: postgresql://dev_user:dev_password@postgres:5433/careercopilot_dev
+      # Other environment variables as needed
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"  # Different port to avoid conflicts
+    depends_on:
+      - postgres
+      - redis
+    networks:
+      - careercopilot-dev-network
+    restart: unless-stopped
+
+volumes:
+  postgres_dev_data:
+  redis_dev_data:

@@ -1,0 +1,78 @@
+name: 'Prepare Frontend for Deployment'
+description: 'Downloads or builds frontend artifacts for deployment'
+inputs:
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '22'
+  artifact-name:
+    description: 'Name of the frontend build artifact'
+    required: false
+    default: 'frontend-dist'
+  fallback-build:
+    description: 'Build frontend if artifact download fails'
+    required: false
+    default: 'true'
+outputs:
+  artifact-found:
+    description: 'Whether the artifact was successfully downloaded'
+    value: ${{ steps.download.outputs.found }}
+  build-required:
+    description: 'Whether a fallback build was performed'
+    value: ${{ steps.fallback.outputs.built }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Try to download build artifacts
+      id: download
+      uses: actions/download-artifact@v4
+      continue-on-error: true
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: frontend/dist
+
+    - name: Check artifact download
+      id: check
+      shell: bash
+      run: |
+        if [ -d "frontend/dist" ] && [ "$(ls -A frontend/dist)" ]; then
+          echo "found=true" >> $GITHUB_OUTPUT
+          echo "✅ Frontend artifacts downloaded successfully"
+        else
+          echo "found=false" >> $GITHUB_OUTPUT
+          echo "❌ Frontend artifacts not found or empty"
+        fi
+
+    - name: Fallback build
+      id: fallback
+      if: steps.check.outputs.found != 'true' && inputs.fallback-build == 'true'
+      shell: bash
+      run: |
+        echo "🔨 Performing fallback frontend build..."
+        echo "built=true" >> $GITHUB_OUTPUT
+
+    - name: Setup and Build Frontend (fallback)
+      if: steps.fallback.outputs.built == 'true'
+      uses: ./.github/actions/setup-frontend
+      with:
+        node-version: ${{ inputs.node-version }}
+        run-checks: 'false'
+        upload-artifacts: 'false'
+
+    - name: Build Functions
+      if: steps.fallback.outputs.built == 'true'
+      shell: bash
+      run: |
+        echo "🔧 Building Firebase Functions..."
+        cd functions && npm install && npm run build
+        echo "✅ Functions build completed"
+
+    - name: Verify frontend is ready
+      shell: bash
+      run: |
+        if [ ! -d "frontend/dist" ] || [ ! "$(ls -A frontend/dist)" ]; then
+          echo "💥 Frontend build failed - no dist directory found"
+          exit 1
+        fi
+        echo "✅ Frontend ready for deployment"

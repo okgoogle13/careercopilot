@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+lib/
+
+# Environment variables
+.env
+.env.local
+
+# Firebase
+.firebase/
+.firebaserc
+
+# Logs
+*.log
+
+# Editor directories and files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# Local development
+.local-*
+
+# Build files
+*.tsbuildinfo
