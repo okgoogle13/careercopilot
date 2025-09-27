@@ -1,28 +1,32 @@
-"""AI Services Module
+# backend/app/ai/__init__.py
 
-This module contains AI-related services and utilities for the application.
+"""
+AI services package for CareerCopilot.
+
+This package provides:
+- LLM caching layer for cost optimization
+- Smart model dispatcher for task-appropriate model selection
+- Cost estimation and monitoring for AI operations
 """
 
-# Import AI services here as they are implemented
-from .base_service import BaseAIService
-from .document_analysis_service import (
-    DocumentAnalysisService,
-    analyze_job_description,
-    analyze_resume,
-    get_document_analysis_service,
+from .llm_service import get_llm_response, clear_cache_pattern, get_cache_stats
+from .model_dispatcher import (
+    dispatch_llm_call,
+    estimate_cost,
+    get_model_recommendations,
+    generate_cover_letter,
+    optimize_resume,
+    extract_keywords
 )
-from .job_description_service import JobDescriptionAnalysisService
-
-# Legacy imports for backward compatibility
-from .resume_service import ResumeAnalysisService
 
 __all__ = [
-    "BaseAIService",
-    "DocumentAnalysisService",
-    "get_document_analysis_service",
-    "analyze_resume",
-    "analyze_job_description",
-    # Legacy exports (deprecated)
-    "ResumeAnalysisService",
-    "JobDescriptionAnalysisService",
+    "get_llm_response",
+    "clear_cache_pattern",
+    "get_cache_stats",
+    "dispatch_llm_call",
+    "estimate_cost",
+    "get_model_recommendations",
+    "generate_cover_letter",
+    "optimize_resume",
+    "extract_keywords"
 ]
