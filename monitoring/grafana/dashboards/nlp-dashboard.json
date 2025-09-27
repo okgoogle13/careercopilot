@@ -1,0 +1,48 @@
+{
+  "panels": [
+    {
+      "title": "NLP Request Duration (5m avg)",
+      "type": "timeseries",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "rate(nlp_request_duration_seconds_sum[5m]) / rate(nlp_request_duration_seconds_count[5m])",
+          "legendFormat": "{{endpoint}} - {{model}}"
+        }
+      ]
+    },
+    {
+      "title": "NLP Requests Rate (5m)",
+      "type": "timeseries",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "sum(rate(nlp_requests_total[5m])) by (endpoint, status)",
+          "legendFormat": "{{endpoint}} - {{status}}"
+        }
+      ]
+    },
+    {
+      "title": "Tokens Processed (5m rate)",
+      "type": "timeseries",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "rate(nlp_tokens_processed_total[5m])",
+          "legendFormat": "{{model}} - {{operation}}"
+        }
+      ]
+    },
+    {
+      "title": "Model Memory Usage (MB)",
+      "type": "timeseries",
+      "datasource": "Prometheus",
+      "targets": [
+        {
+          "expr": "nlp_model_memory_usage_bytes / (1024 * 1024)",
+          "legendFormat": "{{model}}"
+        }
+      ]
+    }
+  ]
+}
