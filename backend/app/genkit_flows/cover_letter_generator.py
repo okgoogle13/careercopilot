@@ -4,6 +4,7 @@ from typing import Optional
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.flow_decorator import simple_genkit_flow
+from app.ai.model_dispatcher import dispatch_llm_call
 
 
 @simple_genkit_flow()
@@ -38,13 +39,14 @@ def generate_tailored_cover_letter(
         voice_profile_section=voice_profile_section,
     )
 
-    # Generate the cover letter using the AI model
-    # Model availability is guaranteed by the decorator
-    model = get_model()
+    # Generate the cover letter using the AI dispatcher for cost optimization
+    response = dispatch_llm_call(
+        task_type="cover_letter_generation",
+        prompt=prompt,
+        temperature=0.7
+    )
 
-    response = model.generate(prompt)
-
-    return response.text()
+    return response.get("content", "")
 
 
 # Flow is automatically registered by the @simple_genkit_flow decorator
