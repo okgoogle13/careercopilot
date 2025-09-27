@@ -57,10 +57,14 @@ class TestEnhancedAIErrorHandler:
             nonlocal call_count
             call_count += 1
             if call_count == 1:
-                raise AIError(message="Rate limit exceeded", error_type=AIErrorType.RATE_LIMIT)
+                raise AIError(
+                    message="Rate limit exceeded", error_type=AIErrorType.RATE_LIMIT
+                )
             return {"result": "success_after_retry"}
 
-        result = await self.handler.execute_ai_operation(mock_failing_then_success, self.context)
+        result = await self.handler.execute_ai_operation(
+            mock_failing_then_success, self.context
+        )
 
         assert result.success is True
         assert result.data == {"result": "success_after_retry"}
@@ -79,7 +83,9 @@ class TestEnhancedAIErrorHandler:
         async def mock_fallback():
             return {"fallback": "data", "degraded": True}
 
-        fallback_strategy = create_fallback_strategy(enabled=True, fallback_function=mock_fallback)
+        fallback_strategy = create_fallback_strategy(
+            enabled=True, fallback_function=mock_fallback
+        )
 
         result = await self.handler.execute_ai_operation(
             mock_failing_operation, self.context, fallback_strategy
@@ -94,7 +100,9 @@ class TestEnhancedAIErrorHandler:
         """Test fallback to degraded mode"""
 
         async def mock_failing_operation():
-            raise AIError(message="Authentication failed", error_type=AIErrorType.AUTHENTICATION)
+            raise AIError(
+                message="Authentication failed", error_type=AIErrorType.AUTHENTICATION
+            )
 
         fallback_strategy = create_fallback_strategy(enabled=True, degraded_mode=True)
 
@@ -112,9 +120,13 @@ class TestEnhancedAIErrorHandler:
         """Test operation that fails completely (no fallback)"""
 
         async def mock_failing_operation():
-            raise AIError(message="Invalid request format", error_type=AIErrorType.INVALID_REQUEST)
+            raise AIError(
+                message="Invalid request format", error_type=AIErrorType.INVALID_REQUEST
+            )
 
-        result = await self.handler.execute_ai_operation(mock_failing_operation, self.context)
+        result = await self.handler.execute_ai_operation(
+            mock_failing_operation, self.context
+        )
 
         assert result.success is False
         assert result.data is None
@@ -179,7 +191,9 @@ class TestEnhancedAIErrorHandler:
 
         # Test timeout error
         timeout_error = AIError("Timeout", AIErrorType.TIMEOUT)
-        timeout_result = AIOperationResult(success=False, error=timeout_error, context=self.context)
+        timeout_result = AIOperationResult(
+            success=False, error=timeout_error, context=self.context
+        )
         message = create_detailed_error_message(timeout_result)
         assert "took too long" in message
 
@@ -188,7 +202,9 @@ class TestEnhancedAIErrorHandler:
         # Check that different service types have different retry configs
         gemini_handler = self.handler.operation_handlers[AIServiceType.GEMINI_ANALYSIS]
         scoring_handler = self.handler.operation_handlers[AIServiceType.GEMINI_SCORING]
-        keyword_handler = self.handler.operation_handlers[AIServiceType.KEYWORD_MATCHING]
+        keyword_handler = self.handler.operation_handlers[
+            AIServiceType.KEYWORD_MATCHING
+        ]
 
         assert gemini_handler.retry_config.max_attempts == 4
         assert scoring_handler.retry_config.max_attempts == 2
@@ -256,7 +272,9 @@ class TestIntegrationWithExistingCode:
         # Simulate the pattern used in analysis.py
 
         async def mock_ai_operation():
-            raise AIError("Service temporarily unavailable", AIErrorType.SERVICE_UNAVAILABLE)
+            raise AIError(
+                "Service temporarily unavailable", AIErrorType.SERVICE_UNAVAILABLE
+            )
 
         context = AIOperationContext(
             operation_name="api_test",

@@ -32,7 +32,9 @@ async def verify_google_oidc_token(request: Request):
             )
 
         # Verify the token
-        id_info = id_token.verify_oauth2_token(token, requests.Request(), audience=audience)
+        id_info = id_token.verify_oauth2_token(
+            token, requests.Request(), audience=audience
+        )
 
         # You can optionally add more checks here, e.g., on the issuer
         # or the email of the service account.

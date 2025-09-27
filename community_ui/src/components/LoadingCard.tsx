@@ -1,9 +1,15 @@
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import React from "react";
+import { Card } from "./ui/card";
 import { Skeleton } from "./ui/skeleton";
+import { cn } from "./ui/utils";
 
-export function LoadingCard() {
+interface LoadingCardProps extends React.HTMLAttributes<HTMLDivElement> {
+  className?: string;
+}
+
+export function LoadingCard({ className, ...props }: LoadingCardProps) {
   return (
-    <Card variant="loading" className="p-6 space-y-4">
+    <Card variant="loading" className={cn("p-6 space-y-4", className)} {...props}>
       {/* Profile Header Section */}
       <div className="flex items-center gap-3">
         <Skeleton className="w-12 h-12 rounded-full" />
@@ -40,6 +46,7 @@ export function LoadingCard() {
   );
 }
 
-export function LoadingProfileCard() {
-  return <LoadingCard />;
+export function LoadingProfileCard({ className, ...props }: LoadingCardProps) {
+  return <LoadingCard className={className} {...props} />;
 }
+

@@ -31,7 +31,9 @@ router = APIRouter()
 class GenerateApplicationRequest(BaseModel):
     """Request model for application package generation"""
 
-    job_description: str = Field(description="Complete job description/posting text", min_length=50)
+    job_description: str = Field(
+        description="Complete job description/posting text", min_length=50
+    )
     user_profile: Dict = Field(
         description="Comprehensive user profile data including resume content",
         min_items=1,
@@ -42,7 +44,9 @@ class GenerateApplicationResponse(BaseModel):
     """Response model for application package generation"""
 
     success: bool = Field(description="Whether the generation was successful")
-    data: Optional[ApplicationPackageResult] = Field(description="Generated application package")
+    data: Optional[ApplicationPackageResult] = Field(
+        description="Generated application package"
+    )
     message: str = Field(description="Success or error message")
     processing_time_seconds: float = Field(description="Total processing time")
 
@@ -258,13 +262,8 @@ async def workflow_health_check():
         # Check if Genkit flows are available
         genkit_available = True
         try:
-            from app.genkit_flows.career_application_workflow import (
-                generate_application_package,
-            )
-            from app.genkit_flows.email_task_workflow import (
-                scan_inbox_for_opportunities,
-            )
-        except Exception as e:
+            pass
+        except Exception:
             genkit_available = False
 
         # Check AI model availability
@@ -273,7 +272,7 @@ async def workflow_health_check():
             from app.core.ai_config import get_ai_config
 
             get_ai_config().get_model_config("gemini-2.0-flash")
-        except Exception as e:
+        except Exception:
             ai_available = False
 
         health_status = {

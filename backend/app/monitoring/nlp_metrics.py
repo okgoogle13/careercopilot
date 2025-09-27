@@ -2,8 +2,6 @@
 NLP Service Metrics for Prometheus monitoring
 """
 
-import time
-
 from prometheus_client import Counter, Gauge, Histogram, start_http_server
 
 # Initialize metrics

@@ -17,7 +17,7 @@ import os
 import threading
 import time
 from functools import lru_cache, wraps
-from typing import Any, Callable, Dict, Optional, Union
+from typing import Any, Dict, Optional
 
 import psutil
 
@@ -86,9 +86,9 @@ class NLPModelManager:
                 finally:
                     duration = time.time() - start_time
                     track_nlp_request(endpoint, model_name, status)
-                    NLP_REQUEST_DURATION.labels(endpoint=endpoint, model=model_name).observe(
-                        duration
-                    )
+                    NLP_REQUEST_DURATION.labels(
+                        endpoint=endpoint, model=model_name
+                    ).observe(duration)
 
                     # Track tokens if available in the result
                     if "result" in locals() and hasattr(result, "get"):
@@ -161,7 +161,9 @@ class NLPModelManager:
                 return model
 
             except Exception as e:
-                logger.error(f"Failed to load {model_type} model {model_name}: {str(e)}")
+                logger.error(
+                    f"Failed to load {model_type} model {model_name}: {str(e)}"
+                )
                 track_nlp_request("load_model", model_name, "error")
                 raise
 
@@ -237,13 +239,16 @@ class NLPModelManager:
 
     def get_memory_usage(self) -> Dict[str, Any]:
         """Get estimated memory usage of all cached models."""
-        total_mb = sum(info.get("memory_usage", 0) for info in self._model_info.values())
+        total_mb = sum(
+            info.get("memory_usage", 0) for info in self._model_info.values()
+        )
 
         return {
             "total_models": len(self._models),
             "total_memory_mb": total_mb,
             "models": {
-                name: info.get("memory_usage", 0) for name, info in self._model_info.items()
+                name: info.get("memory_usage", 0)
+                for name, info in self._model_info.items()
             },
         }
 
@@ -259,7 +264,7 @@ class NLPModelManager:
         for model_name, model in self._models.items():
             try:
                 # Test the model with a simple operation
-                if hasattr(model, "__call__"):
+                if callable(model):
                     # For spaCy models, test with a simple sentence
                     test_doc = model("Test sentence.")
                     status["models"][model_name] = {
@@ -303,7 +308,9 @@ nlp_model_manager = NLPModelManager()
 
 
 # Convenience functions for easier usage
-def load_spacy_model(model_name: str = "en_core_web_sm", force_reload: bool = False) -> Any:
+def load_spacy_model(
+    model_name: str = "en_core_web_sm", force_reload: bool = False
+) -> Any:
     """Convenience function to load a spaCy model."""
     return nlp_model_manager.load_spacy_model(model_name, force_reload)
 

@@ -195,7 +195,10 @@ if __name__ == "__main__":
     # Print all settings (without sensitive values)
     print("Current settings:")
     for field, value in settings.dict().items():
-        if any(sensitive in field.lower() for sensitive in ["key", "secret", "token", "password"]):
+        if any(
+            sensitive in field.lower()
+            for sensitive in ["key", "secret", "token", "password"]
+        ):
             print(f"{field}: {'*' * 8} (hidden)")
         else:
             print(f"{field}: {value}")

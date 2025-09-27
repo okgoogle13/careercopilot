@@ -79,7 +79,7 @@ class RAGIntegration:
 
             # Prepare documents for indexing
             documents = []
-            for chunk, embedding in zip(chunks, embeddings):
+            for chunk, _embedding in zip(chunks, embeddings):
                 doc_metadata = chunk.metadata.copy()
                 doc_metadata.update(
                     {
@@ -101,8 +101,12 @@ class RAGIntegration:
             # Add to vector store using add_vectors
             doc_ids = []
             if embeddings and documents:
-                await self.vector_store.add_vectors(vectors=embeddings, metadatas=documents)
-                doc_ids = [doc["id"] for doc in documents]  # Assuming IDs are in metadata
+                await self.vector_store.add_vectors(
+                    vectors=embeddings, metadatas=documents
+                )
+                doc_ids = [
+                    doc["id"] for doc in documents
+                ]  # Assuming IDs are in metadata
 
             logger.info(f"Indexed {len(doc_ids)} document chunks")
             return doc_ids
@@ -190,7 +194,9 @@ class RAGIntegration:
                 ) from e
             raise
 
-    async def delete_documents(self, doc_ids: List[str], user_id: Optional[str] = None) -> bool:
+    async def delete_documents(
+        self, doc_ids: List[str], user_id: Optional[str] = None
+    ) -> bool:
         """Delete documents from the vector store.
 
         Args:
@@ -210,7 +216,9 @@ class RAGIntegration:
                 for doc_id in doc_ids:
                     doc = await self.vector_store.get_document(doc_id)
                     if not doc or doc.get("metadata", {}).get("user_id") != user_id:
-                        logger.warning(f"User {user_id} not authorized to delete document {doc_id}")
+                        logger.warning(
+                            f"User {user_id} not authorized to delete document {doc_id}"
+                        )
                         return False
 
             # Delete the documents

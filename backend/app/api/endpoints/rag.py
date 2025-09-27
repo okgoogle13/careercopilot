@@ -35,7 +35,9 @@ class RAGQueryRequest(BaseModel):
 
     query: str
     top_k: int = Field(5, ge=1, le=20, description="Number of results to return")
-    filters: Optional[dict] = Field(None, description="Additional filters for the search")
+    filters: Optional[dict] = Field(
+        None, description="Additional filters for the search"
+    )
 
 
 class RAGQueryResponse(BaseModel):
@@ -136,7 +138,9 @@ async def upload_document(
     Query the RAG system to get relevant context and an augmented query.
     """,
 )
-async def query_rag(request: RAGQueryRequest, current_user: User = Depends(get_current_user)):
+async def query_rag(
+    request: RAGQueryRequest, current_user: User = Depends(get_current_user)
+):
     """Query the RAG system for relevant information."""
     if not settings.enable_rag:
         raise HTTPException(

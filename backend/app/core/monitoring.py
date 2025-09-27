@@ -62,28 +62,36 @@ class MetricsCollector:
 
     def __init__(self):
         self.metrics: Dict[str, List[MetricPoint]] = defaultdict(list)
-        self.performance_metrics: Dict[str, PerformanceMetrics] = defaultdict(PerformanceMetrics)
+        self.performance_metrics: Dict[str, PerformanceMetrics] = defaultdict(
+            PerformanceMetrics
+        )
         self.counters: Dict[str, int] = defaultdict(int)
         self.gauges: Dict[str, float] = {}
         self.histograms: Dict[str, List[float]] = defaultdict(list)
         self._lock = threading.Lock()
         self._start_time = datetime.now(timezone.utc)
 
-    def increment_counter(self, name: str, value: int = 1, labels: Optional[Dict[str, str]] = None):
+    def increment_counter(
+        self, name: str, value: int = 1, labels: Optional[Dict[str, str]] = None
+    ):
         """Increment a counter metric"""
         with self._lock:
             full_name = self._build_metric_name(name, labels)
             self.counters[full_name] += value
             self._add_metric_point(name, value, labels)
 
-    def set_gauge(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
+    def set_gauge(
+        self, name: str, value: float, labels: Optional[Dict[str, str]] = None
+    ):
         """Set a gauge metric value"""
         with self._lock:
             full_name = self._build_metric_name(name, labels)
             self.gauges[full_name] = value
             self._add_metric_point(name, value, labels)
 
-    def record_histogram(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
+    def record_histogram(
+        self, name: str, value: float, labels: Optional[Dict[str, str]] = None
+    ):
         """Record a value in a histogram"""
         with self._lock:
             full_name = self._build_metric_name(name, labels)
@@ -113,7 +121,9 @@ class MetricsCollector:
                 metrics.error_count += 1
                 metrics.last_error = error
 
-    def _build_metric_name(self, name: str, labels: Optional[Dict[str, str]] = None) -> str:
+    def _build_metric_name(
+        self, name: str, labels: Optional[Dict[str, str]] = None
+    ) -> str:
         """Build a full metric name including labels"""
         if not labels:
             return name
@@ -121,9 +131,13 @@ class MetricsCollector:
         label_str = ",".join(f"{k}={v}" for k, v in sorted(labels.items()))
         return f"{name}{{{label_str}}}"
 
-    def _add_metric_point(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
+    def _add_metric_point(
+        self, name: str, value: float, labels: Optional[Dict[str, str]] = None
+    ):
         """Add a metric point to the time series"""
-        point = MetricPoint(timestamp=datetime.now(timezone.utc), value=value, labels=labels or {})
+        point = MetricPoint(
+            timestamp=datetime.now(timezone.utc), value=value, labels=labels or {}
+        )
         self.metrics[name].append(point)
 
         # Keep only last 1000 points per metric
@@ -143,7 +157,9 @@ class MetricsCollector:
                     name: {
                         "count": pm.count,
                         "avg_time_ms": pm.avg_time * 1000,
-                        "min_time_ms": (pm.min_time * 1000 if pm.min_time != float("inf") else 0),
+                        "min_time_ms": (
+                            pm.min_time * 1000 if pm.min_time != float("inf") else 0
+                        ),
                         "max_time_ms": pm.max_time * 1000,
                         "p95_time_ms": pm.p95_time * 1000,
                         "error_count": pm.error_count,
@@ -212,8 +228,12 @@ class MetricsCollector:
                 ]
                 for bucket in buckets:
                     count = sum(1 for v in values if v <= bucket)
-                    output.append('{{{name}_bucket{{le="{bucket}"}}}} {count} {timestamp}')
-                output.append('{{{name}_bucket{{le="+Inf"}}}} {len(values)} {timestamp}')
+                    output.append(
+                        f'{{{name}_bucket{{le="{bucket}"}}}} {count} {timestamp}'
+                    )
+                output.append(
+                    '{{{name}_bucket{{le="+Inf"}}}} {len(values)} {timestamp}'
+                )
 
         return "\n".join(output)
 
@@ -230,7 +250,9 @@ def get_metrics_collector() -> MetricsCollector:
 # Decorators for automatic metrics collection
 
 
-def monitor_performance(operation_name: Optional[str] = None, record_args: bool = False):
+def monitor_performance(
+    operation_name: Optional[str] = None, record_args: bool = False
+):
     """
     Decorator to monitor function performance
 
@@ -250,7 +272,9 @@ def monitor_performance(operation_name: Optional[str] = None, record_args: bool 
             # Log function start
             extra_data = {"operation": op_name}
             if record_args:
-                extra_data.update({"args_count": len(args), "kwargs_keys": list(kwargs.keys())})
+                extra_data.update(
+                    {"args_count": len(args), "kwargs_keys": list(kwargs.keys())}
+                )
 
             logger.debug(f"Starting operation: {op_name}", extra=extra_data)
 
@@ -279,7 +303,9 @@ def monitor_performance(operation_name: Optional[str] = None, record_args: bool 
                 error_msg = str(e)
 
                 # Record failed operation
-                collector.record_performance(op_name, duration, success=False, error=error_msg)
+                collector.record_performance(
+                    op_name, duration, success=False, error=error_msg
+                )
                 collector.increment_counter(f"{op_name}_total")
                 collector.increment_counter(f"{op_name}_errors")
 
@@ -323,7 +349,9 @@ def monitor_performance(operation_name: Optional[str] = None, record_args: bool 
                 duration = time.time() - start_time
                 error_msg = str(e)
 
-                collector.record_performance(op_name, duration, success=False, error=error_msg)
+                collector.record_performance(
+                    op_name, duration, success=False, error=error_msg
+                )
                 collector.increment_counter(f"{op_name}_total")
                 collector.increment_counter(f"{op_name}_errors")
 
@@ -372,7 +400,9 @@ async def performance_context(operation_name: str):
         duration = time.time() - start_time
         error_msg = str(e)
 
-        collector.record_performance(operation_name, duration, success=False, error=error_msg)
+        collector.record_performance(
+            operation_name, duration, success=False, error=error_msg
+        )
         collector.increment_counter(f"{operation_name}_total")
         collector.increment_counter(f"{operation_name}_errors")
 
@@ -452,8 +482,12 @@ class SystemMonitor:
             # Network metrics (if available)
             try:
                 network = psutil.net_io_counters()
-                self.collector.set_gauge("system_network_bytes_sent", network.bytes_sent)
-                self.collector.set_gauge("system_network_bytes_recv", network.bytes_recv)
+                self.collector.set_gauge(
+                    "system_network_bytes_sent", network.bytes_sent
+                )
+                self.collector.set_gauge(
+                    "system_network_bytes_recv", network.bytes_recv
+                )
             except AttributeError:
                 # Network metrics not available on this system
                 pass
@@ -549,7 +583,9 @@ def track_ai_usage(
     )
 
 
-def track_error(error_type: str, component: str, error_message: str, user_id: Optional[str] = None):
+def track_error(
+    error_type: str, component: str, error_message: str, user_id: Optional[str] = None
+):
     """Track application errors for monitoring"""
     collector = get_metrics_collector()
 

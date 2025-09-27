@@ -5,9 +5,7 @@ Validates that prompts can be loaded, formatted, and used correctly.
 """
 
 import json
-import os
-from pathlib import Path
-from unittest.mock import mock_open, patch
+from unittest.mock import patch
 
 import pytest
 from app.core.prompt_service import (
@@ -30,7 +28,9 @@ class TestPromptService:
         # Create test config
         config_data = {
             "prompt_management": {"version": "1.0", "cache_prompts": True},
-            "categories": {"test_category": {"name": "Test Category", "default_temperature": 0.3}},
+            "categories": {
+                "test_category": {"name": "Test Category", "default_temperature": 0.3}
+            },
             "length_instructions": {
                 "concise": "Keep it short (100-200 words)",
                 "standard": "Standard length (300-400 words)",
@@ -152,7 +152,9 @@ class TestPromptService:
         assert len(errors) == 0
 
         # Missing parameters
-        errors = service.validate_template_parameters("test_template", {"name": "Alice"})
+        errors = service.validate_template_parameters(
+            "test_template", {"name": "Alice"}
+        )
         assert len(errors) == 1
         assert "Missing required parameters" in errors[0]
 
@@ -223,13 +225,17 @@ class TestConvenienceFunctions:
 
     def test_format_prompt_function(self, temp_prompts_dir):
         """Test the format_prompt convenience function"""
-        with patch("app.core.prompt_service._prompt_service", PromptService(temp_prompts_dir)):
+        with patch(
+            "app.core.prompt_service._prompt_service", PromptService(temp_prompts_dir)
+        ):
             result = format_prompt("test_template", name="Bob", param="data")
             assert result == "Hello Bob, this is a test with data."
 
     def test_get_system_prompt_function(self, temp_prompts_dir):
         """Test the get_system_prompt convenience function"""
-        with patch("app.core.prompt_service._prompt_service", PromptService(temp_prompts_dir)):
+        with patch(
+            "app.core.prompt_service._prompt_service", PromptService(temp_prompts_dir)
+        ):
             system_prompt = get_system_prompt("system_prompt_template")
             assert system_prompt == "You are a helpful assistant."
 

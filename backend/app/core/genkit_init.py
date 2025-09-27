@@ -14,7 +14,7 @@ try:
     from genkit.plugins.google_genai import GoogleAI
 
     GENKIT_AVAILABLE = True
-except ImportError as e:
+except ImportError:
     GENKIT_AVAILABLE = False
     Genkit = None
     GoogleAI = None

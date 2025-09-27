@@ -108,7 +108,9 @@ class DocumentProcessor(BaseAIService):
                 error_type=AIErrorType.DOCUMENT_PROCESSING_ERROR,
             )
 
-    async def _process_pdf(self, content: bytes, metadata: Dict[str, str]) -> List[DocumentChunk]:
+    async def _process_pdf(
+        self, content: bytes, metadata: Dict[str, str]
+    ) -> List[DocumentChunk]:
         """Process a PDF document into chunks."""
         chunks = []
 
@@ -166,7 +168,9 @@ class DocumentProcessor(BaseAIService):
                 error_type=AIErrorType.DOCUMENT_PROCESSING_ERROR,
             )
 
-    async def _process_text(self, text: str, metadata: Dict[str, str]) -> List[DocumentChunk]:
+    async def _process_text(
+        self, text: str, metadata: Dict[str, str]
+    ) -> List[DocumentChunk]:
         """Process plain text into chunks."""
         chunks = []
         text_chunks = self._chunk_text(text, metadata)
@@ -177,7 +181,9 @@ class DocumentProcessor(BaseAIService):
 
         return chunks
 
-    async def _process_html(self, content: bytes, metadata: Dict[str, str]) -> List[DocumentChunk]:
+    async def _process_html(
+        self, content: bytes, metadata: Dict[str, str]
+    ) -> List[DocumentChunk]:
         """Process HTML content into chunks."""
         try:
             soup = BeautifulSoup(content, "html.parser")
@@ -236,7 +242,9 @@ class DocumentProcessor(BaseAIService):
             chunk_metadata["chunk_number"] = str(chunk_num)
 
             chunks.append(
-                DocumentChunk(text=chunk_text, metadata=chunk_metadata, chunk_number=chunk_num)
+                DocumentChunk(
+                    text=chunk_text, metadata=chunk_metadata, chunk_number=chunk_num
+                )
             )
 
             # Move to the next chunk with overlap
