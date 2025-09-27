@@ -92,8 +92,7 @@ GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.
 
 **Complete Production Deployment Workflow:**
 ```bash
-# 1. Merge AI optimization features to main
-./scripts/finalize-git-merge.sh
+/
 
 # 2. Provision Redis infrastructure and secrets
 ./scripts/execute-infra-setup.sh
