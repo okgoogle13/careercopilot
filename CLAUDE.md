@@ -272,6 +272,11 @@ Options:
 - **Main Workflow**: `.github/workflows/ci.yml` - Comprehensive testing pipeline
 - **Test Triggers**: Pull requests, pushes to main/develop, manual dispatch
 - **Parallel Execution**: All test suites run in parallel for faster feedback
+  - Frontend tests (Jest), Backend tests (pytest), and E2E tests (Playwright) execute simultaneously
+  - Tool calls batched together for optimal performance (multiple bash commands, file operations)
+  - Independent test jobs reduce total CI/CD pipeline execution time
+  - Parallel dependency installation across workspaces (frontend, functions)
+  - Concurrent linting and type checking processes
 
 ### Test Jobs in CI Pipeline
 

@@ -1,7 +1,7 @@
 // Document types for the documents feature
 export type DocumentType = 'resume' | 'cover-letter' | 'selection-criteria' | 'portfolio' | 'other';
 
-export type DocumentView = 'grid' | 'list' | 'kanban';
+export type DocumentView = 'grid' | 'list';
 
 export interface Document {
   id: string;

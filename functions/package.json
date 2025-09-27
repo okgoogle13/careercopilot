@@ -32,6 +32,8 @@
     "deploy": "yarn build && npx firebase deploy --only functions --force",
     "build": "tsc -p tsconfig.build.json",
     "build:watch": "tsc -p tsconfig.build.json --watch",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch --passWithNoTests",
     "lint": "eslint . --max-warnings 10",
     "lint:fix": "eslint . --fix --max-warnings 50",
     "logs": "firebase functions:log",
