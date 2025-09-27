@@ -1,44 +1,173 @@
-## Consolidated Claude Code Master Prompt: Production Readiness & Technical Debt Fixes
+#!/bin/bash
 
-**Overall Instruction:** Execute all actions below across the repository. Prioritize security updates and the removal of deprecated features (Pinecone/Legacy UI) to stabilize the application for production launch.
+# A script to perform initial cleanup of the CareerCopilot repository.
+# It now includes a backup step before any files are moved or changed.
+#
+# WARNING: This script will MOVE files and directories. Review the lists
+# carefully. It is highly recommended to run this on a clean git branch
+# to ensure changes can be easily reverted.
 
----
+# --- Configuration ---
 
-### **1. Critical Security, Secrets Management, and Hardening**
+# Create a timestamped backup directory name to avoid overwriting past backups
+BACKUP_DIR="cleanup_backup_$(date +%Y%m%d_%H%M%S)"
 
-| File/Context | Instruction | Priority/Source |
-| :--- | :--- | :--- |
-| **`backend/app/core/config.py`** | Implement logic to fetch all production secrets at runtime from **Google Secret Manager**, replacing the insecure `.env` file strategy. Remove all hardcoded fallbacks (e.g., `change-in-production`). | **CRITICAL (Original Audit)** |
-| **`docker-compose.production.yml`** | Remove the exposed `ports` configuration for the **`postgres` and `redis`** services to restrict access to the internal container network only, eliminating host exposure. | **HIGH (Original Audit)** |
-| **`firestore.rules`** | Manually review and harden the rules to enforce the **principle of least privilege**. | **HIGH (Original Audit)** |
-| **All API Endpoints** | Integrate explicit **Input Sanitization and Validation** (leveraging Pydantic/FastAPI features) to mitigate XSS and SQL Injection vulnerabilities. | **HIGH (Original Audit)** |
-| **Pinecone/Vector Logic** | **Delete all Pinecone integration code, configurations, and setup scripts** (e.g., references in `scripts/rotate-api-keys.sh`, `scripts/setup-secrets.sh`, `docs/setup/SETUP_GUIDE.md`, and any unused API fetching logic). | **HIGH (Copilot Cleanup)** |
+# Files already cleaned up in previous commit - keeping for reference
+FILES_TO_MOVE=(
+    # These files were already cleaned up in the production readiness commit
+    # Keeping this array empty as cleanup was already completed
+)
 
----
+# Redundant/abandoned UI directories to be backed up before you manually delete them.
+REDUNDANT_UI_DIRS_TO_BACKUP=(
+    "community_ui"
+    # Note: Other UI directories were already cleaned up in production readiness commit
+)
 
-### **2. Code Health, Dependency Audit, and Frontend Optimization**
+# Large, unwanted artifacts to remove from Git history entirely
+LARGE_ARTIFACTS_TO_MOVE=(
+    "backend/data/careercopilot.db"
+    "data/careercopilot.db"
+    "frontend/test-results/e2e-report/index.html"
+    # Note: ZIP files were already cleaned up in production readiness commit
+)
 
-| File/Context | Instruction | Priority/Source |
-| :--- | :--- | :--- |
-| **Dependencies** | Perform a comprehensive audit and **upgrade all critical dependencies** with known vulnerabilities or major version updates (e.g., Firebase, React, FastAPI, `urllib3`). | **CRITICAL (Original Audit)** |
-| **Frontend Dependencies** | **Remove redundant/unused packages** in the frontend (e.g., duplicate Firebase packages, `styled-components` if fully migrated to MUI). | **HIGH (Original Audit)** |
-| **`README.md` (Frontend)** | **Update the documented React version to reflect `v18`** to resolve the code-documentation mismatch. | **MEDIUM (Original Audit)** |
-| **Legacy Component Files** | **Delete monolithic/legacy component files** identified in the cleanup notes, including redundant `ComponentLibrary.tsx` instances (e.g., in `Career Copilot (Community)/src/components/` and `frontend/src/components/features/demo/`). | **MEDIUM (Copilot Cleanup)** |
-| **Frontend Styles/Components** | **Remove all unused Tailwind/legacy CSS classes and components** leftover from the migration to Material-UI. Review and remove legacy props/navigation logic, including those detailed in `frontend/src/components/README.md`. | **MEDIUM (Copilot Cleanup)** |
-| **Storybook/Demo Files** | Review and **update or remove Storybook/demo files** (e.g., in `frontend/src/components/documents/__stories__/`) that reference deprecated props or components. | **LOW (Copilot Cleanup)** |
-| **`scripts/vite-bundle-analyzer.sh`** | Integrate a bundle analyzer tool into the CI pipeline and reference the report findings to address unnecessarily large dependencies. | **MEDIUM (Original Audit)** |
+# --- Script Execution ---
 
----
+echo "--- Meticulous Repository Cleanup Script (with Backup) ---"
+echo "This script will help with the initial cleanup of your repository."
+echo "It will back up specified files and directories before suggesting manual actions."
+echo ""
 
-### **3. DevOps Maturity, Observability, and Backend Cleanup**
+# --- Step 1: Create Backup Directory ---
+echo "Step 1: Creating backup directory..."
+mkdir -p "$BACKUP_DIR"
+if [ $? -ne 0 ]; then
+    echo "Error: Could not create backup directory '$BACKUP_DIR'. Aborting."
+    exit 1
+fi
+echo "Backup directory created at: ./$BACKUP_DIR"
+echo ""
 
-| File/Context | Instruction | Priority/Source |
-| :--- | :--- | :--- |
-| **`.github/workflows/deploy.yml`** | **Implement an Automated Rollback Strategy**: Add mandatory post-deployment health checks and configure the pipeline to automatically revert to the previously known good version if checks fail. | **HIGH (Original Audit)** |
-| **`backend/Dockerfile`** | **Optimize Docker layer caching** by moving `COPY requirements.txt .` and `pip install -r requirements.txt` before the full source code copy (`COPY . .`). | **MEDIUM (Original Audit)** |
-| **`backend/app/core/logging_config.py`** | Configure logging to produce **Structured, Centralized JSON-formatted logs** (e.g., using `loguru`). | **HIGH (Original Audit)** |
-| **`backend/app/core/monitoring.py`** & **`backend/app/main.py`** | **Instrument the FastAPI application** with a Prometheus client library to expose key application metrics (latency, error rates, AI flow execution time). Define critical alerts (high error rate, latency) in `monitoring/alerts.yml`. | **HIGH (Original Audit)** |
-| **`backend/app/ai/vector_store.py`** | **Remove the large test/demo `main()` function** and any unused/legacy vector operation methods. | **Copilot Cleanup** |
-| **`backend/app/core/config.py`** | **Remove unused legacy RAG settings** (e.g., `rag_chunk_overlap`, `rag_vector_collection`, etc.) and related code/scripts (`scripts/test-vector-search.py`). | **Copilot Cleanup** |
-| **Backend AI Flows** | Implement **Distributed Tracing** (e.g., using OpenTelemetry, if already available) across the FastAPI backend and Celery workers for complex AI workflows. | **MEDIUM (Original Audit)** |
-| **API Documentation** | Enable and configure **FastAPI's auto-generated OpenAPI (Swagger/ReDoc) documentation** as the single source of truth for the API contract. | **MEDIUM (Original Audit)** |
+# --- Step 2: Back Up and Move Clutter Files (e.g., Reports, Notes) ---
+echo "Step 2: Backing up and moving unnecessary root-level files..."
+for f in "${FILES_TO_MOVE[@]}"; do
+    if [ -f "$f" ]; then
+        # Extract filename for destination, preserving directory structure up to the filename
+        # This is a bit complex due to the unusual path structure, so we simplify the backup name
+        FILE_BASENAME=$(basename "$f")
+        echo "Moving: '$f' -> '$BACKUP_DIR/$FILE_BASENAME'"
+        mv "$f" "$BACKUP_DIR/"
+    else
+        echo "Skipping (not found): '$f'"
+    fi
+done
+echo "Root-level file backup and move complete."
+echo ""
+
+# --- Step 3: Back Up and Move Large Artifacts (Databases, Zips, HTML Reports) ---
+echo "Step 3: Backing up and moving large artifacts for externalization..."
+for f in "${LARGE_ARTIFACTS_TO_MOVE[@]}"; do
+    if [ -f "$f" ]; then
+        FILE_BASENAME=$(basename "$f")
+        echo "Moving LARGE ARTIFACT: '$f' -> '$BACKUP_DIR/$FILE_BASENAME'"
+        mv "$f" "$BACKUP_DIR/"
+    else
+        echo "Skipping (not found): '$f'"
+    fi
+done
+echo "Large artifact backup and move complete."
+echo ""
+
+
+# --- Step 4: Back Up Redundant Directories ---
+echo "Step 4: Backing up potentially redundant UI directories for manual review..."
+for d in "${REDUNDANT_UI_DIRS_TO_BACKUP[@]}"; do
+    if [ -d "$d" ]; then
+        DIR_BASENAME=$(basename "$d")
+        echo "Backing up directory: '$d' -> '$BACKUP_DIR/$DIR_BASENAME/'"
+        # Using 'cp -r' to copy the directory for backup, leaving the original for manual deletion.
+        cp -r "$d" "$BACKUP_DIR/"
+    else
+        echo "Skipping (not found): '$d'"
+    fi
+done
+echo "Directory backup complete. Please review these in '$BACKUP_DIR' before proceeding."
+echo ""
+
+# --- Step 5: Clean up Redundant Environment Variables ---
+echo "Step 5: Consolidating and cleaning redundant environment variable files..."
+ENV_FILES_TO_REMOVE=(
+    ".env.local.template"
+    ".env.production.example"
+    ".env.production.secure"
+    ".env.production.template"
+    ".env.template"
+    "backend/vertex-ai-config.env"
+    "frontend/.env.example"
+    "functions/.env.example"
+)
+
+for f in "${ENV_FILES_TO_REMOVE[@]}"; do
+    if [ -f "$f" ]; then
+        echo "Moving redundant environment file: '$f' -> '$BACKUP_DIR/'"
+        mv "$f" "$BACKUP_DIR/"
+    else
+        echo "Skipping (not found): '$f'"
+    fi
+done
+echo "Environment file cleanup complete. Consolidate your secrets into .env.development and .env.production."
+echo ""
+
+# --- Step 6: Update .gitignore ---
+echo "Step 6: Ensuring .gitignore is robust..."
+GITIGNORE_ENTRIES=(
+    ".env"
+    ".env.*"
+    "!.env.example"
+    "*.db"
+    "*.zip"
+    "*.html"
+    "node_modules/"
+    ".vscode/"
+    ".idea/"
+    "cleanup_backup_*/" # Ignore all generated backup directories
+    "/backend/data/" # Explicitly ignore local DB folder
+    "/frontend/test-results/" # Ignore large test reports folder
+)
+
+for entry in "${GITIGNORE_ENTRIES[@]}"; do
+    # Check if entry already exists before adding
+    if ! grep -qF -- "$entry" .gitignore; then
+        echo "Adding '$entry' to .gitignore"
+        echo "$entry" >> .gitignore
+    else
+        echo "'$entry' already in .gitignore"
+    fi
+done
+echo ".gitignore update complete."
+echo ""
+
+
+# --- Final Manual Action Required ---
+echo "--- Final Manual Review and Action Required! ---"
+echo "The script has completed its automated, safe tasks. Please follow these CRITICAL manual steps:"
+echo ""
+echo "1. **Delete Redundant UI Directories:**"
+echo "   The following directories were *copied* to the backup folder. You must **manually delete** the originals from the root to finalize the cleanup:"
+for d in "${REDUNDANT_UI_DIRS_TO_BACKUP[@]}"; do
+    if [ -d "$d" ]; then
+        echo "     - $d"
+    fi
+done
+echo "   *(e.g., run 'rm -rf community_ui' after verifying the backup is complete)*"
+echo ""
+echo "2. **Apply BFG/Git Filter-Repo:**"
+echo "   Since large artifacts (like the .db files and .zip archives) were moved, run a tool like **BFG Repo Cleaner** or **git filter-repo** to permanently remove these files from your git history. This is essential for proper bloat reduction."
+echo ""
+echo "3. **Code and Architecture Refactoring:**"
+echo "   Now that the clutter is gone, focus on the code structure and cost reduction plan from your AI audit:"
+echo "   - **Merge/Consolidate:** Review and merge duplicate utility files (e.g., multiple Genkit flows and AI core files)."
+echo "   - **Implement Caching:** Configure caching (e.g., Redis, in-memory) for high-frequency or expensive AI calls."
+echo "   - **Optimize Compute:** Review Cloud Functions/Cloud Run configuration for proper memory limits and CPU allocation, and implement asynchronous processing for long-running tasks."
+echo "--- Cleanup Automation Complete ---"
