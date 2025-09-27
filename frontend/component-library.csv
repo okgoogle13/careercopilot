@@ -77,7 +77,6 @@ JobInput,frontend/src/components/features/opportunities/JobInput.tsx,"onJobSubmi
 JobMatching,frontend/src/components/features/opportunities/JobMatching.tsx,"userProfile, onMatch",Custom,Component for AI-powered job matching and recommendations
 JobSearch,frontend/src/components/career/JobSearch.tsx,"onSearch, filters",Custom,Job search component with filtering and search functionality
 JobSearchStatus,frontend/src/components/main/JobSearchStatus.tsx,"applications, interviews, offers",Custom,Status component showing job search progress metrics
-KanbanBoard,frontend/src/components/features/opportunities/KanbanBoard.tsx,"columns, items, onItemMove",Custom,Kanban board for managing job applications by status
 KeywordTag,frontend/src/components/library/KeywordTag.tsx,"keyword, status, removable, onRemove, onAdd",Custom,Tag component for keywords with status indicators and actions
 KeywordTagGroup,frontend/src/components/library/KeywordTag.tsx,"keywords, title, onTagRemove, onTagAdd",Custom,Group component for managing multiple keyword tags
 Label,frontend/src/components/ui/label.tsx,"children",MUI-based,Label component for form fields
