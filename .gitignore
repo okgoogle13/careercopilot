@@ -78,6 +78,7 @@ public/assets/
 
 # Ignore backup directories created by cleanup script
 cleanup_backup_*
+backup_*
 !.env.example
 *.db
 *.zip
