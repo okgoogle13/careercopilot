@@ -1,7 +1,13 @@
 """
-router.py
+Main API Router for the CareerCopilot Backend.
 
-Main API router that includes all endpoint modules.
+This module aggregates all the individual API endpoint routers from the `endpoints`
+directory into a single `APIRouter` instance. This consolidated router is then
+included in the main FastAPI application, providing a modular and organized
+way to manage the application's various API endpoints.
+
+Each endpoint module is imported, and its router is included with a specific
+prefix and tag to structure the API logically.
 """
 
 from fastapi import APIRouter

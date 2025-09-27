@@ -1,31 +1,42 @@
 """
-dependencies.py (Refactore)
+FastAPI Dependencies.
 
-FastAPI dependencies for authentication, authorization, and data access.
+This module provides a set of reusable FastAPI dependencies for handling
+common concerns such as authentication, authorization, and data access
+in a structured and secure way.
 """
-
 import os
 
 import firebase_admin
-from app.core.db import db  # Assuming your Firestore client is here
-from app.models import User  # Import the new User model
+from app.core.db import db
+from app.models import User
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from firebase_admin import auth
 
-# Standard OAuth2 scheme pointing to a conceptual token URL
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     """
-    Validates the Firebase JWT token and returns the authenticated user model.
+    Validates a Firebase JWT and returns the corresponding User model.
+
     This is the primary authentication dependency for all protected endpoints.
+    It extracts the token from the Authorization header, verifies it with
+    Firebase Auth, and constructs a Pydantic `User` model. It also includes a
+    bypass for development environments to facilitate testing without a live token.
+
+    Args:
+        token: The OAuth2 bearer token extracted from the request header.
+
+    Returns:
+        A `User` object representing the authenticated user.
 
     Raises:
-        HTTPException(401): If the token is invalid, expired, or not provided.
+        HTTPException(500): If the Firebase Admin SDK is not initialized.
+        HTTPException(401): If the token is invalid, expired, malformed, or
+                            not provided.
     """
-    # RETAINED: Development bypass for easy local testing
     if os.getenv("ENV", "development") == "development" and token in [
         "dev-token",
         "fallback-token-dev",
@@ -34,16 +45,12 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
             uid="dev-user-123", email="developer@example.com", name="Development User"
         )
 
-    # CRITICAL FIX: Ensure Firebase app is initialized before verifying tokens.
-    # This check now assumes initialization happens at startup.
     if not firebase_admin._apps:
         raise HTTPException(
             status_code=500,
             detail="Firebase is not initialized on the server. Authentication is unavailable.",
         )
 
-    # CRITICAL FIX: Correctly handle authentication errors.
-    # Any exception here means the token is invalid and the user is unauthorized.
     try:
         decoded_token = auth.verify_id_token(token)
         return User(
@@ -52,8 +59,6 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
             name=decoded_token.get("name"),
         )
     except Exception as e:
-        # Instead of returning a fake user, we raise a 401 Unauthorized error.
-        # This is the secure and standard way to handle failed authentication.
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Invalid authentication credentials: {e}",
@@ -65,8 +70,20 @@ def get_current_user_with_state(
     request: Request, current_user: User = Depends(get_current_user)
 ) -> User:
     """
-    RETAINED & IMPROVED: Enhanced dependency that validates the user AND sets
-    the user UID in request.state for use by other dependencies like rate limiters.
+    Injects the current user's UID into the request state.
+
+    This dependency builds upon `get_current_user` by making the user's UID
+    available in `request.state.user_uid`. This is useful for other
+    dependencies or middleware (like rate limiters) that need access to a
+    unique user identifier without re-validating the token.
+
+    Args:
+        request: The incoming FastAPI `Request` object.
+        current_user: The authenticated `User` object, provided by the
+                      `get_current_user` dependency.
+
+    Returns:
+        The `User` object for the authenticated user.
     """
     request.state.user_uid = current_user.uid
     return current_user
@@ -76,8 +93,23 @@ async def get_user_document_from_firestore(
     document_id: str, current_user: User = Depends(get_current_user)
 ) -> dict:
     """
-    RETAINED & IMPROVED: Fetches a user-owned document from Firestore and handles
-    not-found errors, now using the Pydantic User model for type safety.
+    Fetches a specific document from Firestore owned by the current user.
+
+    This dependency ensures data isolation by fetching a document from a
+    sub-collection scoped to the authenticated user's UID. It acts as an
+    authorization layer, preventing one user from accessing another's data.
+
+    Args:
+        document_id: The ID of the Firestore document to retrieve.
+        current_user: The authenticated `User` object, provided by the
+                      `get_current_user` dependency.
+
+    Returns:
+        The document's data as a dictionary.
+
+    Raises:
+        HTTPException(404): If the document with the specified ID does not
+                            exist for the current user.
     """
     uid = current_user.uid
     doc_ref = (

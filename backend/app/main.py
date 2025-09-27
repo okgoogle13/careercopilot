@@ -49,9 +49,22 @@ app.include_router(api_router, prefix="/api")
 
 @app.get("/", tags=["Root"])
 async def read_root():
+    """A simple endpoint to confirm the API is running.
+
+    Returns:
+        dict: A dictionary with a single key "status" and value "ok".
+    """
     return {"status": "ok"}
 
 
 @app.get("/health", tags=["Health"])
 async def health_check():
+    """Performs a health check of the API and its services.
+
+    This endpoint checks the status of the core API and also verifies the
+    health of the integrated Genkit services.
+
+    Returns:
+        dict: A dictionary containing the API status and the Genkit status.
+    """
     return {"api_status": "ok", "genkit_status": check_genkit_health()}

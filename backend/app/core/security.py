@@ -1,3 +1,7 @@
+"""
+Security-related utilities, primarily for handling authentication and
+authorization for service-to-service communication within Google Cloud.
+"""
 import os
 
 from fastapi import HTTPException, Request, status
@@ -5,10 +9,31 @@ from google.auth.transport import requests
 from google.oauth2 import id_token
 
 
-async def verify_google_oidc_token(request: Request):
+async def verify_google_oidc_token(request: Request) -> dict:
     """
-    Verifies the OIDC token from a Google Cloud service.
-    This is used to secure endpoints called by services like Cloud Scheduler.
+    Verifies a Google-issued OIDC token from an Authorization header.
+
+    This function is designed to be used as a FastAPI dependency to secure
+    endpoints that are intended to be called by other Google Cloud services,
+    such as Cloud Scheduler, Cloud Tasks, or another Cloud Run service.
+
+    It checks for a 'Bearer' token in the 'Authorization' header, then uses
+    Google's authentication library to verify the token's signature, expiration,
+    and, most importantly, its 'audience' claim. The expected audience must be
+    set in the `APP_URL` environment variable.
+
+    Args:
+        request: The incoming FastAPI `Request` object.
+
+    Returns:
+        The decoded claims from the validated OIDC token as a dictionary.
+
+    Raises:
+        HTTPException(401): If the Authorization header is missing, malformed,
+                            or if the token is invalid for any reason (e.g.,
+                            bad signature, expired, wrong audience).
+        HTTPException(500): If the `APP_URL` environment variable, which is
+                            required for audience validation, is not set.
     """
     try:
         auth_header = request.headers.get("Authorization")
@@ -21,9 +46,6 @@ async def verify_google_oidc_token(request: Request):
 
         token = auth_header.split("Bearer ")[1]
 
-        # The 'audience' should be the URL of your deployed Cloud Run service
-        # or the URL you configured in your IAP.
-        # It's crucial this is set in your environment variables.
         audience = os.getenv("APP_URL")
         if not audience:
             raise HTTPException(
@@ -31,24 +53,17 @@ async def verify_google_oidc_token(request: Request):
                 detail="Application audience (APP_URL) not configured.",
             )
 
-        # Verify the token
         id_info = id_token.verify_oauth2_token(
             token, requests.Request(), audience=audience
         )
 
-        # You can optionally add more checks here, e.g., on the issuer
-        # or the email of the service account.
-        # For example:
-        # if id_info['iss'] != 'https://accounts.google.com':
-        #     raise HTTPException(...)
-
         return id_info
 
-    except HTTPException as e:
+    except HTTPException:
         # Re-raise HTTPException to ensure FastAPI handles it correctly
-        raise e
+        raise
     except Exception as e:
-        # Catch-all for any other validation errors
+        # Catch-all for any other validation errors from the Google library
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Invalid OIDC token: {e}",

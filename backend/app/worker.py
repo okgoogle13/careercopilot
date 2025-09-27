@@ -1,3 +1,14 @@
+"""
+Celery Worker Configuration for CareerCopilot.
+
+This module initializes and configures the Celery application instance, which is
+used to run background tasks asynchronously. It sets up the broker (Redis),
+result backend, and other important operational parameters.
+
+The `celery_app` instance created here is imported by other parts of the application
+to define and dispatch background tasks. Tasks are auto-discovered from the
+`app.workers` module.
+"""
 import os
 
 from celery import Celery
