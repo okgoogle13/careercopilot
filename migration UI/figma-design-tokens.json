@@ -1,0 +1,591 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/design-tokens-format.json",
+  "$description": "DeepMind Design System - Semantic token architecture with code mapping",
+
+  "core": {
+    "color": {
+      "neutral": {
+        "0": { "value": "#000000", "type": "color" },
+        "50": { "value": "#0a0a0a", "type": "color" },
+        "100": { "value": "#1a1a1a", "type": "color" },
+        "200": { "value": "#2a2a2a", "type": "color" },
+        "300": { "value": "#404040", "type": "color" },
+        "400": { "value": "#666666", "type": "color" },
+        "500": { "value": "#808080", "type": "color" },
+        "600": { "value": "#b0b0b0", "type": "color" },
+        "700": { "value": "#d0d0d0", "type": "color" },
+        "800": { "value": "#e0e0e0", "type": "color" },
+        "900": { "value": "#f0f0f0", "type": "color" },
+        "1000": { "value": "#ffffff", "type": "color" }
+      },
+      "blue": {
+        "400": { "value": "#8ab4f8", "type": "color" },
+        "500": { "value": "#4285f4", "type": "color" },
+        "600": { "value": "#1a73e8", "type": "color" }
+      },
+      "green": {
+        "500": { "value": "#34a853", "type": "color" },
+        "600": { "value": "#137333", "type": "color" }
+      },
+      "yellow": {
+        "400": { "value": "#fdd663", "type": "color" },
+        "500": { "value": "#fbbc04", "type": "color" }
+      },
+      "red": {
+        "500": { "value": "#ea4335", "type": "color" },
+        "600": { "value": "#d33b2c", "type": "color" }
+      }
+    },
+    "dimension": {
+      "scale": {
+        "0": { "value": "0", "type": "dimension" },
+        "25": { "value": "2px", "type": "dimension" },
+        "50": { "value": "4px", "type": "dimension" },
+        "100": { "value": "8px", "type": "dimension" },
+        "200": { "value": "16px", "type": "dimension" },
+        "300": { "value": "24px", "type": "dimension" },
+        "400": { "value": "32px", "type": "dimension" },
+        "500": { "value": "40px", "type": "dimension" },
+        "600": { "value": "48px", "type": "dimension" },
+        "800": { "value": "64px", "type": "dimension" },
+        "1200": { "value": "96px", "type": "dimension" }
+      }
+    },
+    "fontFamily": {
+      "sans": {
+        "value": [
+          "Google Sans",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif"
+        ],
+        "type": "fontFamily"
+      },
+      "mono": {
+        "value": [
+          "Google Sans Mono",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "monospace"
+        ],
+        "type": "fontFamily"
+      }
+    },
+    "fontSize": {
+      "50": { "value": "12px", "type": "dimension" },
+      "75": { "value": "14px", "type": "dimension" },
+      "100": { "value": "16px", "type": "dimension" },
+      "200": { "value": "18px", "type": "dimension" },
+      "300": { "value": "20px", "type": "dimension" },
+      "400": { "value": "24px", "type": "dimension" },
+      "500": { "value": "32px", "type": "dimension" },
+      "600": { "value": "40px", "type": "dimension" },
+      "700": { "value": "48px", "type": "dimension" },
+      "800": { "value": "64px", "type": "dimension" }
+    },
+    "fontWeight": {
+      "regular": { "value": "400", "type": "fontWeight" },
+      "medium": { "value": "500", "type": "fontWeight" },
+      "semibold": { "value": "600", "type": "fontWeight" }
+    },
+    "lineHeight": {
+      "tight": { "value": "1.2", "type": "number" },
+      "base": { "value": "1.5", "type": "number" },
+      "relaxed": { "value": "1.6", "type": "number" }
+    }
+  },
+
+  "semantic": {
+    "color": {
+      "bg": {
+        "canvas": {
+          "value": "{core.color.neutral.50}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-bg-canvas",
+              "js": "colors.bg.canvas",
+              "swift": "ColorTokens.bg.canvas"
+            }
+          }
+        },
+        "surface": {
+          "value": "{core.color.neutral.100}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-bg-surface",
+              "js": "colors.bg.surface"
+            }
+          }
+        },
+        "elevated": {
+          "value": "{core.color.neutral.200}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-bg-elevated",
+              "js": "colors.bg.elevated"
+            }
+          }
+        }
+      },
+      "text": {
+        "primary": {
+          "value": "{core.color.neutral.1000}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-text-primary",
+              "js": "colors.text.primary"
+            }
+          }
+        },
+        "secondary": {
+          "value": "{core.color.neutral.600}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-text-secondary",
+              "js": "colors.text.secondary"
+            }
+          }
+        },
+        "tertiary": {
+          "value": "{core.color.neutral.400}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-text-tertiary",
+              "js": "colors.text.tertiary"
+            }
+          }
+        }
+      },
+      "border": {
+        "default": {
+          "value": "{core.color.neutral.300}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-border-default",
+              "js": "colors.border.default"
+            }
+          }
+        },
+        "subtle": {
+          "value": "{core.color.neutral.200}",
+          "type": "color",
+          "$extensions": {
+            "codegen": {
+              "css": "--color-border-subtle",
+              "js": "colors.border.subtle"
+            }
+          }
+        }
+      },
+      "action": {
+        "primary": {
+          "default": {
+            "value": "{core.color.blue.500}",
+            "type": "color",
+            "$extensions": {
+              "codegen": {
+                "css": "--color-action-primary-default",
+                "js": "colors.action.primary.default"
+              }
+            }
+          },
+          "hover": {
+            "value": "{core.color.blue.600}",
+            "type": "color",
+            "$extensions": {
+              "codegen": {
+                "css": "--color-action-primary-hover",
+                "js": "colors.action.primary.hover"
+              }
+            }
+          }
+        }
+      }
+    },
+    "space": {
+      "inset": {
+        "xs": {
+          "value": "{core.dimension.scale.100}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-inset-xs",
+              "js": "space.inset.xs"
+            }
+          }
+        },
+        "sm": {
+          "value": "{core.dimension.scale.200}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-inset-sm",
+              "js": "space.inset.sm"
+            }
+          }
+        },
+        "md": {
+          "value": "{core.dimension.scale.300}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-inset-md",
+              "js": "space.inset.md"
+            }
+          }
+        },
+        "lg": {
+          "value": "{core.dimension.scale.400}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-inset-lg",
+              "js": "space.inset.lg"
+            }
+          }
+        }
+      },
+      "stack": {
+        "xs": {
+          "value": "{core.dimension.scale.100}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-stack-xs",
+              "js": "space.stack.xs"
+            }
+          }
+        },
+        "sm": {
+          "value": "{core.dimension.scale.200}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-stack-sm",
+              "js": "space.stack.sm"
+            }
+          }
+        },
+        "md": {
+          "value": "{core.dimension.scale.300}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-stack-md",
+              "js": "space.stack.md"
+            }
+          }
+        },
+        "lg": {
+          "value": "{core.dimension.scale.400}",
+          "type": "dimension",
+          "$extensions": {
+            "codegen": {
+              "css": "--space-stack-lg",
+              "js": "space.stack.lg"
+            }
+          }
+        }
+      }
+    },
+    "radius": {
+      "none": {
+        "value": "{core.dimension.scale.0}",
+        "type": "dimension",
+        "$extensions": {
+          "codegen": {
+            "css": "--radius-none",
+            "js": "radius.none"
+          }
+        }
+      },
+      "sm": {
+        "value": "{core.dimension.scale.50}",
+        "type": "dimension",
+        "$extensions": {
+          "codegen": {
+            "css": "--radius-sm",
+            "js": "radius.sm"
+          }
+        }
+      },
+      "md": {
+        "value": "{core.dimension.scale.100}",
+        "type": "dimension",
+        "$extensions": {
+          "codegen": {
+            "css": "--radius-md",
+            "js": "radius.md"
+          }
+        }
+      },
+      "lg": {
+        "value": "{core.dimension.scale.200}",
+        "type": "dimension",
+        "$extensions": {
+          "codegen": {
+            "css": "--radius-lg",
+            "js": "radius.lg"
+          }
+        }
+      }
+    },
+    "typography": {
+      "display": {
+        "lg": {
+          "fontFamily": {
+            "value": "{core.fontFamily.sans}",
+            "type": "fontFamily"
+          },
+          "fontSize": {
+            "value": "{core.fontSize.800}",
+            "type": "dimension"
+          },
+          "fontWeight": {
+            "value": "{core.fontWeight.semibold}",
+            "type": "fontWeight"
+          },
+          "lineHeight": {
+            "value": "{core.lineHeight.tight}",
+            "type": "number"
+          },
+          "$extensions": {
+            "codegen": {
+              "css": "--typography-display-lg",
+              "js": "typography.display.lg"
+            }
+          }
+        },
+        "md": {
+          "fontFamily": {
+            "value": "{core.fontFamily.sans}",
+            "type": "fontFamily"
+          },
+          "fontSize": {
+            "value": "{core.fontSize.700}",
+            "type": "dimension"
+          },
+          "fontWeight": {
+            "value": "{core.fontWeight.semibold}",
+            "type": "fontWeight"
+          },
+          "lineHeight": {
+            "value": "{core.lineHeight.tight}",
+            "type": "number"
+          },
+          "$extensions": {
+            "codegen": {
+              "css": "--typography-display-md",
+              "js": "typography.display.md"
+            }
+          }
+        }
+      },
+      "heading": {
+        "lg": {
+          "fontFamily": {
+            "value": "{core.fontFamily.sans}",
+            "type": "fontFamily"
+          },
+          "fontSize": {
+            "value": "{core.fontSize.500}",
+            "type": "dimension"
+          },
+          "fontWeight": {
+            "value": "{core.fontWeight.medium}",
+            "type": "fontWeight"
+          },
+          "lineHeight": {
+            "value": "{core.lineHeight.tight}",
+            "type": "number"
+          },
+          "$extensions": {
+            "codegen": {
+              "css": "--typography-heading-lg",
+              "js": "typography.heading.lg"
+            }
+          }
+        },
+        "md": {
+          "fontFamily": {
+            "value": "{core.fontFamily.sans}",
+            "type": "fontFamily"
+          },
+          "fontSize": {
+            "value": "{core.fontSize.400}",
+            "type": "dimension"
+          },
+          "fontWeight": {
+            "value": "{core.fontWeight.medium}",
+            "type": "fontWeight"
+          },
+          "lineHeight": {
+            "value": "{core.lineHeight.base}",
+            "type": "number"
+          },
+          "$extensions": {
+            "codegen": {
+              "css": "--typography-heading-md",
+              "js": "typography.heading.md"
+            }
+          }
+        }
+      },
+      "body": {
+        "lg": {
+          "fontFamily": {
+            "value": "{core.fontFamily.sans}",
+            "type": "fontFamily"
+          },
+          "fontSize": {
+            "value": "{core.fontSize.200}",
+            "type": "dimension"
+          },
+          "fontWeight": {
+            "value": "{core.fontWeight.regular}",
+            "type": "fontWeight"
+          },
+          "lineHeight": {
+            "value": "{core.lineHeight.relaxed}",
+            "type": "number"
+          },
+          "$extensions": {
+            "codegen": {
+              "css": "--typography-body-lg",
+              "js": "typography.body.lg"
+            }
+          }
+        },
+        "md": {
+          "fontFamily": {
+            "value": "{core.fontFamily.sans}",
+            "type": "fontFamily"
+          },
+          "fontSize": {
+            "value": "{core.fontSize.100}",
+            "type": "dimension"
+          },
+          "fontWeight": {
+            "value": "{core.fontWeight.regular}",
+            "type": "fontWeight"
+          },
+          "lineHeight": {
+            "value": "{core.lineHeight.base}",
+            "type": "number"
+          },
+          "$extensions": {
+            "codegen": {
+              "css": "--typography-body-md",
+              "js": "typography.body.md"
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "component": {
+    "button": {
+      "primary": {
+        "bg": {
+          "default": {
+            "value": "{semantic.color.action.primary.default}",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{semantic.color.action.primary.hover}",
+            "type": "color"
+          }
+        },
+        "text": {
+          "value": "{core.color.neutral.1000}",
+          "type": "color"
+        },
+        "padding": {
+          "value": "{semantic.space.inset.sm} {semantic.space.inset.md}",
+          "type": "dimension"
+        },
+        "radius": {
+          "value": "{semantic.radius.md}",
+          "type": "dimension"
+        },
+        "typography": {
+          "value": "{semantic.typography.body.md}",
+          "type": "typography"
+        },
+        "$extensions": {
+          "codegen": {
+            "css": ".btn-primary",
+            "js": "components.button.primary",
+            "react": "Button variant='primary'"
+          }
+        }
+      },
+      "secondary": {
+        "bg": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
+          "hover": {
+            "value": "{semantic.color.bg.surface}",
+            "type": "color"
+          }
+        },
+        "text": {
+          "value": "{semantic.color.text.primary}",
+          "type": "color"
+        },
+        "border": {
+          "value": "{semantic.color.border.default}",
+          "type": "color"
+        },
+        "$extensions": {
+          "codegen": {
+            "css": ".btn-secondary",
+            "js": "components.button.secondary",
+            "react": "Button variant='secondary'"
+          }
+        }
+      }
+    },
+    "card": {
+      "default": {
+        "bg": {
+          "value": "{semantic.color.bg.surface}",
+          "type": "color"
+        },
+        "border": {
+          "value": "{semantic.color.border.subtle}",
+          "type": "color"
+        },
+        "radius": {
+          "value": "{semantic.radius.lg}",
+          "type": "dimension"
+        },
+        "padding": {
+          "value": "{semantic.space.inset.lg}",
+          "type": "dimension"
+        },
+        "$extensions": {
+          "codegen": {
+            "css": ".card",
+            "js": "components.card.default",
+            "react": "Card"
+          }
+        }
+      }
+    }
+  }
+}

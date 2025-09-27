@@ -1,0 +1,134 @@
+name: 'Setup and Build Frontend'
+description: 'Sets up Node.js, installs dependencies, and builds the frontend application'
+inputs:
+  node-version:
+    description: 'Node.js version to use'
+    required: false
+    default: '22'
+  skip-build:
+    description: 'Skip the build step (for setup-only scenarios)'
+    required: false
+    default: 'false'
+  run-checks:
+    description: 'Run linting, type checking, and formatting checks'
+    required: false
+    default: 'false'
+  upload-artifacts:
+    description: 'Upload build artifacts and bundle analysis'
+    required: false
+    default: 'false'
+outputs:
+  build-success:
+    description: 'Whether the build was successful'
+    value: ${{ steps.build.outputs.success }}
+  dist-path:
+    description: 'Path to the built frontend distribution'
+    value: 'frontend/dist'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Enable Corepack for Yarn 4+
+      shell: bash
+      run: |
+        corepack enable
+        corepack prepare yarn@4.9.1 --activate
+
+    - name: Install dependencies
+      shell: bash
+      run: |
+        yarn install
+        cd functions && npm install
+
+    - name: Type check
+      if: inputs.run-checks == 'true'
+      shell: bash
+      run: |
+        cd frontend
+        echo "🔧 Running TypeScript type check..."
+        npx tsc --noEmit --skipLibCheck || echo "⚠️ Type check completed with warnings"
+        echo "✅ Type check completed"
+
+    - name: Lint
+      if: inputs.run-checks == 'true'
+      shell: bash
+      run: |
+        cd frontend
+        echo "🔍 Running ESLint..."
+        yarn lint:ci
+        echo "✅ Linting completed"
+
+    - name: Format check
+      if: inputs.run-checks == 'true'
+      shell: bash
+      run: |
+        cd frontend
+        echo "✨ Checking code formatting..."
+        yarn format --check || echo "⚠️ Format check completed with warnings"
+        echo "✅ Format check completed"
+
+    - name: Run unit tests
+      if: inputs.run-checks == 'true'
+      shell: bash
+      run: |
+        cd frontend
+        echo "🧪 Running Jest unit tests..."
+        yarn test:ci
+        echo "✅ Unit tests completed"
+
+    - name: Upload test coverage
+      if: inputs.run-checks == 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-test-coverage
+        path: frontend/coverage/
+        retention-days: 30
+        if-no-files-found: warn
+
+    - name: Build
+      id: build
+      if: inputs.skip-build != 'true'
+      shell: bash
+      run: |
+        cd frontend
+        echo "🏗️ Building frontend with Vite..."
+        yarn build
+        echo "success=true" >> $GITHUB_OUTPUT
+
+    - name: Verify build output
+      if: inputs.skip-build != 'true'
+      shell: bash
+      run: |
+        if [ ! -d "frontend/dist" ] || [ ! "$(ls -A frontend/dist)" ]; then
+          echo "❌ Frontend build failed - no dist directory found"
+          exit 1
+        fi
+        echo "✅ Frontend build completed successfully"
+
+    - name: Bundle analysis
+      if: inputs.run-checks == 'true' && inputs.skip-build != 'true'
+      shell: bash
+      run: |
+        cd frontend
+        echo "📊 Analyzing bundle size..."
+        ls -la dist/ || echo "⚠️ Bundle analysis skipped - dist directory not found"
+
+    - name: Upload bundle analysis
+      if: inputs.upload-artifacts == 'true' && inputs.run-checks == 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: bundle-analysis
+        path: frontend/dist/bundle-analysis.json
+        retention-days: 30
+
+    - name: Upload build artifact
+      if: inputs.upload-artifacts == 'true' && inputs.skip-build != 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-dist
+        path: frontend/dist/

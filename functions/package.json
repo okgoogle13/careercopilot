@@ -1,0 +1,55 @@
+{
+  "name": "functions",
+  "packageManager": "yarn@4.9.1",
+  "dependencies": {
+    "@genkit-ai/core": "^1.19.1",
+    "@genkit-ai/firebase": "^1.19.1",
+    "@genkit-ai/googleai": "^1.18.0",
+    "@google-cloud/secret-manager": "^6.1.0",
+    "firebase-admin": "^13.5.0",
+    "firebase-functions": "^6.1.1"
+  },
+  "devDependencies": {
+    "@google-cloud/firestore": "^7.11.3",
+    "@types/jest": "^30.0.0",
+    "@types/node": "20",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.27.5",
+    "firebase-functions-test": "^3.4.1",
+    "firebase-tools": "^13.27.0",
+    "genkit": "^1.19.1",
+    "jest": "^30.1.3",
+    "tsx": "^4.20.5",
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "yarn shell",
+    "deploy": "yarn build && npx firebase deploy --only functions --force",
+    "build": "tsc -p tsconfig.build.json",
+    "build:watch": "tsc -p tsconfig.build.json --watch",
+    "test": "jest --passWithNoTests",
+    "test:watch": "jest --watch --passWithNoTests",
+    "lint": "eslint . --max-warnings 10",
+    "lint:fix": "eslint . --fix --max-warnings 50",
+    "logs": "firebase functions:log",
+    "clean": "rm -rf node_modules .firebase lib",
+    "genkit:init": "node src/genkit-setup.js",
+    "genkit:dev": "npx genkit ui:start",
+    "genkit:flow": "npx genkit flow:run"
+  },
+  "version": "1.0.0",
+  "description": "This directory contains the Cloud Functions for Firebase that power the CareerCopilot backend services.",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

@@ -1,0 +1,1460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="35" failures="12" errors="0" time="15.01">
+  <testsuite name="Utils" errors="0" failures="8" skipped="0" timestamp="2025-09-27T07:01:40" time="9.043" tests="15">
+    <testcase classname="Utils formatFileSize should format 0 bytes correctly" name="Utils formatFileSize should format 0 bytes correctly" time="0.006">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format bytes correctly" name="Utils formatFileSize should format bytes correctly" time="0">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format KB correctly" name="Utils formatFileSize should format KB correctly" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format MB correctly" name="Utils formatFileSize should format MB correctly" time="0">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format GB correctly" name="Utils formatFileSize should format GB correctly" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatFileSize should handle decimal places correctly" name="Utils formatFileSize should handle decimal places correctly" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatFileSize should handle very large numbers" name="Utils formatFileSize should handle very large numbers" time="0.004">
+      <failure>Error: expect(received).toContain(expected) // indexOf
+
+Expected substring: &quot;GB&quot;
+Received string:    &quot;1 undefined&quot;
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/lib/utils.test.ts:39:43)
+    at Promise.then.completed (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="Utils formatDate should format date correctly" name="Utils formatDate should format date correctly" time="0.02">
+      <failure>RangeError: Maximum call stack size exceeded
+    at mockConstructor.&lt;anonymous&gt; (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:336:51)
+    at new mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:148:19)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:22)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)</failure>
+    </testcase>
+    <testcase classname="Utils formatDate should handle different months" name="Utils formatDate should handle different months" time="0.012">
+      <failure>RangeError: Maximum call stack size exceeded
+    at mockConstructor.&lt;anonymous&gt; (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:336:51)
+    at new mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:148:19)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:22)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)</failure>
+    </testcase>
+    <testcase classname="Utils formatDate should handle different years" name="Utils formatDate should handle different years" time="0.017">
+      <failure>RangeError: Maximum call stack size exceeded
+    at mockConstructor.&lt;anonymous&gt; (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:336:51)
+    at new mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:148:19)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:22)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)</failure>
+    </testcase>
+    <testcase classname="Utils formatDate should handle leap year dates" name="Utils formatDate should handle leap year dates" time="0.011">
+      <failure>RangeError: Maximum call stack size exceeded
+    at mockConstructor.&lt;anonymous&gt; (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:336:51)
+    at new mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:148:19)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:22)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)</failure>
+    </testcase>
+    <testcase classname="Utils formatDate should handle start of year" name="Utils formatDate should handle start of year" time="0.02">
+      <failure>RangeError: Maximum call stack size exceeded
+    at mockConstructor.&lt;anonymous&gt; (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:336:51)
+    at new mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:148:19)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:22)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)</failure>
+    </testcase>
+    <testcase classname="Utils formatDate should handle end of year" name="Utils formatDate should handle end of year" time="0.013">
+      <failure>RangeError: Maximum call stack size exceeded
+    at mockConstructor.&lt;anonymous&gt; (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:336:51)
+    at new mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:148:19)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:22)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)
+    at Object.format (/Applications/careercopilot/frontend/src/lib/utils.test.ts:55:64)</failure>
+    </testcase>
+    <testcase classname="Utils edge cases and error handling formatFileSize should handle negative numbers" name="Utils edge cases and error handling formatFileSize should handle negative numbers" time="0.004">
+      <failure>Error: expect(received).toBe(expected) // Object.is equality
+
+Expected: &quot;-1 KB&quot;
+Received: &quot;NaN undefined&quot;
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/lib/utils.test.ts:105:37)
+    at Promise.then.completed (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="Utils edge cases and error handling formatDate should handle invalid dates gracefully" name="Utils edge cases and error handling formatDate should handle invalid dates gracefully" time="0.021">
+    </testcase>
+  </testsuite>
+  <testsuite name="Auth Component" errors="0" failures="4" skipped="0" timestamp="2025-09-27T07:01:40" time="13.243" tests="20">
+    <testcase classname="Auth Component Rendering should render the auth form with all elements" name="Auth Component Rendering should render the auth form with all elements" time="0.085">
+      <failure>TestingLibraryElementError: Found multiple elements with the text: Sign In
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;h2
+  class=&quot;text-lg font-semibold text-center&quot;
+&gt;
+  Sign In
+&lt;/h2&gt;
+
+Ignored nodes: comments, script, style
+&lt;button
+  class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full bg-primary hover:bg-primary/90 css-1meppw0-MuiButtonBase-root-MuiButton-root&quot;
+  tabindex=&quot;0&quot;
+  type=&quot;button&quot;
+&gt;
+  Sign In
+&lt;/button&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-background flex items-center justify-center p-4&quot;
+    &gt;
+      &lt;div
+        class=&quot;w-full max-w-md space-y-6&quot;
+      &gt;
+        &lt;div
+          class=&quot;text-center&quot;
+        &gt;
+          &lt;div
+            class=&quot;mx-auto mb-4&quot;
+            data-testid=&quot;career-copilot-logo&quot;
+          &gt;
+            Career Copilot Logo
+          &lt;/div&gt;
+          &lt;h1
+            class=&quot;text-2xl font-semibold&quot;
+          &gt;
+            Welcome to FML Career Copilot
+          &lt;/h1&gt;
+          &lt;p
+            class=&quot;text-muted-foreground mt-2&quot;
+          &gt;
+            Your AI-powered job application assistant
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root p-6 css-1rb5dhb-MuiPaper-root-MuiCard-root&quot;
+          style=&quot;--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12); --Paper-overlay: linear-gradient(rgba(255, 255, 255, 0.051), rgba(255, 255, 255, 0.051));&quot;
+        &gt;
+          &lt;div
+            class=&quot;space-y-4&quot;
+          &gt;
+            &lt;h2
+              class=&quot;text-lg font-semibold text-center&quot;
+            &gt;
+              Sign In
+            &lt;/h2&gt;
+            &lt;div
+              class=&quot;space-y-3&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root w-full css-1lv27a4-MuiFormControl-root-MuiTextField-root&quot;
+              &gt;
+                &lt;div
+                  class=&quot;MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-aeljce-MuiInputBase-root-MuiOutlinedInput-root&quot;
+                &gt;
+                  &lt;input
+                    aria-invalid=&quot;false&quot;
+                    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+                    id=&quot;:r1:&quot;
+                    placeholder=&quot;you@example.com&quot;
+                    type=&quot;email&quot;
+                    value=&quot;&quot;
+                  /&gt;
+                  &lt;fieldset
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiOutlinedInput-notchedOutline css-vy4cj6-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline&quot;
+                  &gt;
+                    &lt;legend
+                      class=&quot;css-1nf2c5d-MuiNotchedOutlined-root&quot;
+                    &gt;
+                      &lt;span
+                        aria-hidden=&quot;true&quot;
+                        class=&quot;notranslate&quot;
+                      &gt;
+                        ​
+                      &lt;/span&gt;
+                    &lt;/legend&gt;
+                  &lt;/fieldset&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div
+                class=&quot;MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root w-full css-1lv27a4-MuiFormControl-root-MuiTextField-root&quot;
+              &gt;
+                &lt;div
+                  class=&quot;MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-aeljce-MuiInputBase-root-MuiOutlinedInput-root&quot;
+                &gt;
+                  &lt;input
+                    aria-invalid=&quot;false&quot;
+                    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+                    id=&quot;:r2:&quot;
+                    placeholder=&quot;••••••••&quot;
+                    type=&quot;password&quot;
+                    value=&quot;&quot;
+                  /&gt;
+                  &lt;fieldset
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiOutlinedInput-notchedOutline css-vy4cj6-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline&quot;
+                  &gt;
+                    &lt;legend
+                      class=&quot;css-1nf2c5d-MuiNotchedOutlined-root&quot;
+                    &gt;
+                      &lt;span
+                        aria-hidden=&quot;true&quot;
+                        class=&quot;notranslate&quot;
+                      &gt;
+                        ​
+                      &lt;/span&gt;
+                    &lt;/legend&gt;
+                  &lt;/fieldset&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full bg-primary hover:bg-primary/90 css-1meppw0-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              Sign In
+            &lt;/button&gt;
+            &lt;div
+              class=&quot;flex items-center text-sm text-muted-foreground&quot;
+            &gt;
+              &lt;hr
+                class=&quot;flex-1 border-border&quot;
+              /&gt;
+              &lt;span
+                class=&quot;px-3&quot;
+              &gt;
+                OR
+              &lt;/span&gt;
+              &lt;hr
+                class=&quot;flex-1 border-border&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary w-full bg-white text-black hover:bg-gray-50 css-1scs4ty-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              &lt;span
+                class=&quot;mr-2 text-lg&quot;
+              &gt;
+                G
+              &lt;/span&gt;
+              Continue with Google
+            &lt;/button&gt;
+            &lt;div
+              class=&quot;text-center text-sm text-muted-foreground&quot;
+            &gt;
+              &lt;p&gt;
+                Don&apos;t have an account?
+                 
+                &lt;button
+                  class=&quot;text-primary hover:underline&quot;
+                &gt;
+                  Sign Up
+                &lt;/button&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+    at getMultipleElementsFoundError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/features/auth/Auth.test.tsx:51:21)
+    at Promise.then.completed (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="Auth Component Rendering should render email input with correct type" name="Auth Component Rendering should render email input with correct type" time="0.014">
+    </testcase>
+    <testcase classname="Auth Component Rendering should render password input with correct type" name="Auth Component Rendering should render password input with correct type" time="0.012">
+    </testcase>
+    <testcase classname="Auth Component Rendering should display OR separator between sign-in methods" name="Auth Component Rendering should display OR separator between sign-in methods" time="0.012">
+    </testcase>
+    <testcase classname="Auth Component Rendering should display sign-up link text" name="Auth Component Rendering should display sign-up link text" time="0.013">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should call onLogin when Sign In button is clicked" name="Auth Component User Interactions should call onLogin when Sign In button is clicked" time="0.074">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should call onLogin when Google sign-in button is clicked" name="Auth Component User Interactions should call onLogin when Google sign-in button is clicked" time="0.271">
+      <failure>TestingLibraryElementError: Unable to find an accessible element with the role &quot;button&quot; and name &quot;Continue with Google&quot;
+
+Here are the accessible roles:
+
+  heading:
+
+  Name &quot;Welcome to FML Career Copilot&quot;:
+  &lt;h1
+    class=&quot;text-2xl font-semibold&quot;
+  /&gt;
+
+  Name &quot;Sign In&quot;:
+  &lt;h2
+    class=&quot;text-lg font-semibold text-center&quot;
+  /&gt;
+
+  --------------------------------------------------
+  paragraph:
+
+  Name &quot;&quot;:
+  &lt;p
+    class=&quot;text-muted-foreground mt-2&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;p /&gt;
+
+  --------------------------------------------------
+  textbox:
+
+  Name &quot;&quot;:
+  &lt;input
+    aria-invalid=&quot;false&quot;
+    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+    id=&quot;:rv:&quot;
+    placeholder=&quot;you@example.com&quot;
+    type=&quot;email&quot;
+    value=&quot;&quot;
+  /&gt;
+
+  --------------------------------------------------
+  button:
+
+  Name &quot;Sign In&quot;:
+  &lt;button
+    class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full bg-primary hover:bg-primary/90 css-1meppw0-MuiButtonBase-root-MuiButton-root&quot;
+    tabindex=&quot;0&quot;
+    type=&quot;button&quot;
+  /&gt;
+
+  Name &quot;G Continue with Google&quot;:
+  &lt;button
+    class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary w-full bg-white text-black hover:bg-gray-50 css-1scs4ty-MuiButtonBase-root-MuiButton-root&quot;
+    tabindex=&quot;0&quot;
+    type=&quot;button&quot;
+  /&gt;
+
+  Name &quot;Sign Up&quot;:
+  &lt;button
+    class=&quot;text-primary hover:underline&quot;
+  /&gt;
+
+  --------------------------------------------------
+  separator:
+
+  Name &quot;&quot;:
+  &lt;hr
+    class=&quot;flex-1 border-border&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;hr
+    class=&quot;flex-1 border-border&quot;
+  /&gt;
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-background flex items-center justify-center p-4&quot;
+    &gt;
+      &lt;div
+        class=&quot;w-full max-w-md space-y-6&quot;
+      &gt;
+        &lt;div
+          class=&quot;text-center&quot;
+        &gt;
+          &lt;div
+            class=&quot;mx-auto mb-4&quot;
+            data-testid=&quot;career-copilot-logo&quot;
+          &gt;
+            Career Copilot Logo
+          &lt;/div&gt;
+          &lt;h1
+            class=&quot;text-2xl font-semibold&quot;
+          &gt;
+            Welcome to FML Career Copilot
+          &lt;/h1&gt;
+          &lt;p
+            class=&quot;text-muted-foreground mt-2&quot;
+          &gt;
+            Your AI-powered job application assistant
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root p-6 css-1rb5dhb-MuiPaper-root-MuiCard-root&quot;
+          style=&quot;--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12); --Paper-overlay: linear-gradient(rgba(255, 255, 255, 0.051), rgba(255, 255, 255, 0.051));&quot;
+        &gt;
+          &lt;div
+            class=&quot;space-y-4&quot;
+          &gt;
+            &lt;h2
+              class=&quot;text-lg font-semibold text-center&quot;
+            &gt;
+              Sign In
+            &lt;/h2&gt;
+            &lt;div
+              class=&quot;space-y-3&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root w-full css-1lv27a4-MuiFormControl-root-MuiTextField-root&quot;
+              &gt;
+                &lt;div
+                  class=&quot;MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-aeljce-MuiInputBase-root-MuiOutlinedInput-root&quot;
+                &gt;
+                  &lt;input
+                    aria-invalid=&quot;false&quot;
+                    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+                    id=&quot;:rv:&quot;
+                    placeholder=&quot;you@example.com&quot;
+                    type=&quot;email&quot;
+                    value=&quot;&quot;
+                  /&gt;
+                  &lt;fieldset
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiOutlinedInput-notchedOutline css-vy4cj6-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline&quot;
+                  &gt;
+                    &lt;legend
+                      class=&quot;css-1nf2c5d-MuiNotchedOutlined-root&quot;
+                    &gt;
+                      &lt;span
+                        aria-hidden=&quot;true&quot;
+                        class=&quot;notranslate&quot;
+                      &gt;
+                        ​
+                      &lt;/span&gt;
+                    &lt;/legend&gt;
+                  &lt;/fieldset&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div
+                class=&quot;MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root w-full css-1lv27a4-MuiFormControl-root-MuiTextField-root&quot;
+              &gt;
+                &lt;div
+                  class=&quot;MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-aeljce-MuiInputBase-root-MuiOutlinedInput-root&quot;
+                &gt;
+                  &lt;input
+                    aria-invalid=&quot;false&quot;
+                    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+                    id=&quot;:r10:&quot;
+                    placeholder=&quot;••••••••&quot;
+                    type=&quot;password&quot;
+                    value=&quot;&quot;
+                  /&gt;
+                  &lt;fieldset
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiOutlinedInput-notchedOutline css-vy4cj6-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline&quot;
+                  &gt;
+                    &lt;legend
+                      class=&quot;css-1nf2c5d-MuiNotchedOutlined-root&quot;
+                    &gt;
+                      &lt;span
+                        aria-hidden=&quot;true&quot;
+                        class=&quot;notranslate&quot;
+                      &gt;
+                        ​
+                      &lt;/span&gt;
+                    &lt;/legend&gt;
+                  &lt;/fieldset&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full bg-primary hover:bg-primary/90 css-1meppw0-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              Sign In
+            &lt;/button&gt;
+            &lt;div
+              class=&quot;flex items-center text-sm text-muted-foreground&quot;
+            &gt;
+              &lt;hr
+                class=&quot;flex-1 border-border&quot;
+              /&gt;
+              &lt;span
+                class=&quot;px-3&quot;
+              &gt;
+                OR
+              &lt;/span&gt;
+              &lt;hr
+                class=&quot;flex-1 border-border&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary w-full bg-white text-black hover:bg-gray-50 css-1scs4ty-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              &lt;span
+                class=&quot;mr-2 text-lg&quot;
+              &gt;
+                G
+              &lt;/span&gt;
+              Continue with Google
+            &lt;/button&gt;
+            &lt;div
+              class=&quot;text-center text-sm text-muted-foreground&quot;
+            &gt;
+              &lt;p&gt;
+                Don&apos;t have an account?
+                 
+                &lt;button
+                  class=&quot;text-primary hover:underline&quot;
+                &gt;
+                  Sign Up
+                &lt;/button&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/features/auth/Auth.test.tsx:98:35)
+    at Promise.then.completed (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="Auth Component User Interactions should call onLogin when Sign Up link is clicked" name="Auth Component User Interactions should call onLogin when Sign Up link is clicked" time="0.028">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should allow typing in email input field" name="Auth Component User Interactions should allow typing in email input field" time="0.014">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should allow typing in password input field" name="Auth Component User Interactions should allow typing in password input field" time="0.016">
+    </testcase>
+    <testcase classname="Auth Component Accessibility should have proper form structure" name="Auth Component Accessibility should have proper form structure" time="0.142">
+    </testcase>
+    <testcase classname="Auth Component Accessibility should have accessible button roles" name="Auth Component Accessibility should have accessible button roles" time="0.051">
+    </testcase>
+    <testcase classname="Auth Component Accessibility should support keyboard navigation" name="Auth Component Accessibility should support keyboard navigation" time="0.069">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalledTimes(expected)
+
+Expected number of calls: 1
+Received number of calls: 0
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/features/auth/Auth.test.tsx:182:27)
+    at Promise.then.completed (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="Auth Component Form Validation Edge Cases should handle empty form submission" name="Auth Component Form Validation Edge Cases should handle empty form submission" time="0.03">
+    </testcase>
+    <testcase classname="Auth Component Form Validation Edge Cases should handle special characters in inputs" name="Auth Component Form Validation Edge Cases should handle special characters in inputs" time="0.015">
+    </testcase>
+    <testcase classname="Auth Component Component Layout should have proper CSS classes for styling" name="Auth Component Component Layout should have proper CSS classes for styling" time="0.011">
+    </testcase>
+    <testcase classname="Auth Component Component Layout should render Google button with proper styling" name="Auth Component Component Layout should render Google button with proper styling" time="0.193">
+      <failure>TestingLibraryElementError: Unable to find an accessible element with the role &quot;button&quot; and name &quot;Continue with Google&quot;
+
+Here are the accessible roles:
+
+  heading:
+
+  Name &quot;Welcome to FML Career Copilot&quot;:
+  &lt;h1
+    class=&quot;text-2xl font-semibold&quot;
+  /&gt;
+
+  Name &quot;Sign In&quot;:
+  &lt;h2
+    class=&quot;text-lg font-semibold text-center&quot;
+  /&gt;
+
+  --------------------------------------------------
+  paragraph:
+
+  Name &quot;&quot;:
+  &lt;p
+    class=&quot;text-muted-foreground mt-2&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;p /&gt;
+
+  --------------------------------------------------
+  textbox:
+
+  Name &quot;&quot;:
+  &lt;input
+    aria-invalid=&quot;false&quot;
+    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+    id=&quot;:r2h:&quot;
+    placeholder=&quot;you@example.com&quot;
+    type=&quot;email&quot;
+    value=&quot;&quot;
+  /&gt;
+
+  --------------------------------------------------
+  button:
+
+  Name &quot;Sign In&quot;:
+  &lt;button
+    class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full bg-primary hover:bg-primary/90 css-1meppw0-MuiButtonBase-root-MuiButton-root&quot;
+    tabindex=&quot;0&quot;
+    type=&quot;button&quot;
+  /&gt;
+
+  Name &quot;G Continue with Google&quot;:
+  &lt;button
+    class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary w-full bg-white text-black hover:bg-gray-50 css-1scs4ty-MuiButtonBase-root-MuiButton-root&quot;
+    tabindex=&quot;0&quot;
+    type=&quot;button&quot;
+  /&gt;
+
+  Name &quot;Sign Up&quot;:
+  &lt;button
+    class=&quot;text-primary hover:underline&quot;
+  /&gt;
+
+  --------------------------------------------------
+  separator:
+
+  Name &quot;&quot;:
+  &lt;hr
+    class=&quot;flex-1 border-border&quot;
+  /&gt;
+
+  Name &quot;&quot;:
+  &lt;hr
+    class=&quot;flex-1 border-border&quot;
+  /&gt;
+
+  --------------------------------------------------
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;min-h-screen bg-background flex items-center justify-center p-4&quot;
+    &gt;
+      &lt;div
+        class=&quot;w-full max-w-md space-y-6&quot;
+      &gt;
+        &lt;div
+          class=&quot;text-center&quot;
+        &gt;
+          &lt;div
+            class=&quot;mx-auto mb-4&quot;
+            data-testid=&quot;career-copilot-logo&quot;
+          &gt;
+            Career Copilot Logo
+          &lt;/div&gt;
+          &lt;h1
+            class=&quot;text-2xl font-semibold&quot;
+          &gt;
+            Welcome to FML Career Copilot
+          &lt;/h1&gt;
+          &lt;p
+            class=&quot;text-muted-foreground mt-2&quot;
+          &gt;
+            Your AI-powered job application assistant
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root p-6 css-1rb5dhb-MuiPaper-root-MuiCard-root&quot;
+          style=&quot;--Paper-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12); --Paper-overlay: linear-gradient(rgba(255, 255, 255, 0.051), rgba(255, 255, 255, 0.051));&quot;
+        &gt;
+          &lt;div
+            class=&quot;space-y-4&quot;
+          &gt;
+            &lt;h2
+              class=&quot;text-lg font-semibold text-center&quot;
+            &gt;
+              Sign In
+            &lt;/h2&gt;
+            &lt;div
+              class=&quot;space-y-3&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root w-full css-1lv27a4-MuiFormControl-root-MuiTextField-root&quot;
+              &gt;
+                &lt;div
+                  class=&quot;MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-aeljce-MuiInputBase-root-MuiOutlinedInput-root&quot;
+                &gt;
+                  &lt;input
+                    aria-invalid=&quot;false&quot;
+                    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+                    id=&quot;:r2h:&quot;
+                    placeholder=&quot;you@example.com&quot;
+                    type=&quot;email&quot;
+                    value=&quot;&quot;
+                  /&gt;
+                  &lt;fieldset
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiOutlinedInput-notchedOutline css-vy4cj6-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline&quot;
+                  &gt;
+                    &lt;legend
+                      class=&quot;css-1nf2c5d-MuiNotchedOutlined-root&quot;
+                    &gt;
+                      &lt;span
+                        aria-hidden=&quot;true&quot;
+                        class=&quot;notranslate&quot;
+                      &gt;
+                        ​
+                      &lt;/span&gt;
+                    &lt;/legend&gt;
+                  &lt;/fieldset&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+              &lt;div
+                class=&quot;MuiFormControl-root MuiFormControl-fullWidth MuiTextField-root w-full css-1lv27a4-MuiFormControl-root-MuiTextField-root&quot;
+              &gt;
+                &lt;div
+                  class=&quot;MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth MuiInputBase-formControl css-aeljce-MuiInputBase-root-MuiOutlinedInput-root&quot;
+                &gt;
+                  &lt;input
+                    aria-invalid=&quot;false&quot;
+                    class=&quot;MuiInputBase-input MuiOutlinedInput-input css-j3jqhj-MuiInputBase-input-MuiOutlinedInput-input&quot;
+                    id=&quot;:r2i:&quot;
+                    placeholder=&quot;••••••••&quot;
+                    type=&quot;password&quot;
+                    value=&quot;&quot;
+                  /&gt;
+                  &lt;fieldset
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiOutlinedInput-notchedOutline css-vy4cj6-MuiNotchedOutlined-root-MuiOutlinedInput-notchedOutline&quot;
+                  &gt;
+                    &lt;legend
+                      class=&quot;css-1nf2c5d-MuiNotchedOutlined-root&quot;
+                    &gt;
+                      &lt;span
+                        aria-hidden=&quot;true&quot;
+                        class=&quot;notranslate&quot;
+                      &gt;
+                        ​
+                      &lt;/span&gt;
+                    &lt;/legend&gt;
+                  &lt;/fieldset&gt;
+                &lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary w-full bg-primary hover:bg-primary/90 css-1meppw0-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              Sign In
+            &lt;/button&gt;
+            &lt;div
+              class=&quot;flex items-center text-sm text-muted-foreground&quot;
+            &gt;
+              &lt;hr
+                class=&quot;flex-1 border-border&quot;
+              /&gt;
+              &lt;span
+                class=&quot;px-3&quot;
+              &gt;
+                OR
+              &lt;/span&gt;
+              &lt;hr
+                class=&quot;flex-1 border-border&quot;
+              /&gt;
+            &lt;/div&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary w-full bg-white text-black hover:bg-gray-50 css-1scs4ty-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              &lt;span
+                class=&quot;mr-2 text-lg&quot;
+              &gt;
+                G
+              &lt;/span&gt;
+              Continue with Google
+            &lt;/button&gt;
+            &lt;div
+              class=&quot;text-center text-sm text-muted-foreground&quot;
+            &gt;
+              &lt;p&gt;
+                Don&apos;t have an account?
+                 
+                &lt;button
+                  class=&quot;text-primary hover:underline&quot;
+                &gt;
+                  Sign Up
+                &lt;/button&gt;
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/features/auth/Auth.test.tsx:227:35)
+    at Promise.then.completed (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="Auth Component Error Handling should not break when onLogin prop is undefined" name="Auth Component Error Handling should not break when onLogin prop is undefined" time="0.009">
+    </testcase>
+    <testcase classname="Auth Component Error Handling should handle multiple rapid clicks gracefully" name="Auth Component Error Handling should handle multiple rapid clicks gracefully" time="0.024">
+    </testcase>
+    <testcase classname="Auth Component Integration with Theme should apply theme styles correctly" name="Auth Component Integration with Theme should apply theme styles correctly" time="0.008">
+    </testcase>
+  </testsuite>
+</testsuites>
