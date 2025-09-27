@@ -107,7 +107,7 @@ def cleanup_repository(root_dir, dry_run=True):
             if not dry_run:
                  with open(original_path, "r") as f_in, open(consolidated_env_path, "a") as f_out:
                     f_out.write(f"\n# --- Contents from {relative_path}/.env.example ---\n")
-                    f_out.write(f.read())
+                    f_out.write(f_in.read())
 
     if not env_found:
         print("  -> No '.env.example' files found to consolidate.")
