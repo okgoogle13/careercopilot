@@ -7,7 +7,6 @@
 - **Audited existing secrets** - Found most AI service keys already configured
 - **Added missing deployment secrets**:
   - `GCP_STAGING_PROJECT_ID` → `careercopilot-staging`
-  - Updated `PINECONE_INDEX_NAME` → `careercopilot-index`
 
 ### 📚 Documentation & Automation
 
@@ -34,12 +33,6 @@
 - ✅ `GEMINI_API_KEY` (Google AI)
 - ✅ `OPENAI_API_KEY` (GPT models)
 - ✅ `PERPLEXITY_API_KEY` (Perplexity AI)
-
-### 📊 Vector Database
-
-- ✅ `PINECONE_API_KEY` (Vector database)
-- ✅ `PINECONE_ENVIRONMENT` (Environment config)
-- ✅ `PINECONE_INDEX_NAME` (Index configuration)
 
 ### ☁️ Core Infrastructure
 

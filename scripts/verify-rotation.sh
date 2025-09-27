@@ -108,7 +108,6 @@ else
         "ANTHROPIC_API_KEY"
         "GEMINI_API_KEY"
         "PERPLEXITY_API_KEY"
-        "PINECONE_API_KEY"
     )
 
     log "Checking required environment variables..."

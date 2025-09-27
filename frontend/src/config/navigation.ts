@@ -1,21 +1,20 @@
 import {
   Home,
-  Folder,
-  Upload,
+  FolderOpen,
+  CloudUpload,
   Description,
-  Drafts,
+  Mail,
   History,
-  Build,
-  EditDocument,
-  Search,
-  Handshake,
-  Mic,
+  Construction,
+  EditNote,
+  ManageSearch,
+  HandshakeOutlined,
+  RecordVoiceOver,
   TrendingUp,
   School,
   Psychology,
   Insights,
   Payments,
-  AccountCircle,
   Person,
   Settings,
   WorkspacePremium,
@@ -24,16 +23,15 @@ import {
   Pending,
   ErrorOutline,
   CheckCircle,
-  Bookmark,
+  BookmarkBorder,
   Event,
-  UploadFile,
-  Download,
+  FileUpload,
+  FileDownload,
   Edit,
   Delete,
   Share,
   Tune,
   Article,
-  Drafts as DraftsIcon,
   FolderShared,
 } from '@mui/icons-material';
 
@@ -54,12 +52,12 @@ export const mainNavigation: NavItem[] = [
   },
   {
     label: 'Documents',
-    icon: <Folder />,
+    icon: <FolderOpen />,
     path: '/documents',
     children: [
       {
         label: 'Upload New',
-        icon: <Upload />,
+        icon: <CloudUpload />,
         path: '/documents/upload',
       },
       {
@@ -69,7 +67,7 @@ export const mainNavigation: NavItem[] = [
       },
       {
         label: 'Cover Letters',
-        icon: <DraftsIcon />,
+        icon: <Mail />,
         path: '/documents/cover-letters',
       },
       {
@@ -81,27 +79,27 @@ export const mainNavigation: NavItem[] = [
   },
   {
     label: 'Career Tools',
-    icon: <Build />,
+    icon: <Construction />,
     path: '/career-tools',
     children: [
       {
         label: 'Resume Builder',
-        icon: <EditDocument />,
+        icon: <EditNote />,
         path: '/career-tools/resume-builder',
       },
       {
         label: 'ATS Analysis',
-        icon: <Search />,
+        icon: <ManageSearch />,
         path: '/career-tools/ats-analysis',
       },
       {
         label: 'Job Matching',
-        icon: <Handshake />,
+        icon: <HandshakeOutlined />,
         path: '/career-tools/job-matching',
       },
       {
         label: 'Interview Prep',
-        icon: <Mic />,
+        icon: <RecordVoiceOver />,
         path: '/career-tools/interview-prep',
       },
     ],
@@ -168,22 +166,22 @@ export const statusIcons = {
   inProgress: <Pending />,
   needsReview: <ErrorOutline />,
   completed: <CheckCircle />,
-  saved: <Bookmark />,
+  saved: <BookmarkBorder />,
   interviews: <Event />,
 };
 
 export const actionIcons = {
-  upload: <UploadFile />,
-  download: <Download />,
+  upload: <FileUpload />,
+  download: <FileDownload />,
   edit: <Edit />,
   delete: <Delete />,
   share: <Share />,
-  search: <Search />,
+  search: <ManageSearch />,
   filter: <Tune />,
 };
 
 export const documentIcons = {
   resume: <Article />,
-  coverLetter: <DraftsIcon />,
+  coverLetter: <Mail />,
   portfolio: <FolderShared />,
 };

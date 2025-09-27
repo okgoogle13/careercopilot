@@ -29,15 +29,6 @@ Complete configuration guide for setting up CareerCopilot in staging and product
 | `ANTHROPIC_API_KEY`  | Anthropic Claude API key | [Anthropic Console](https://console.anthropic.com/)          |
 | `PERPLEXITY_API_KEY` | Perplexity API key       | [Perplexity API](https://docs.perplexity.ai/)                |
 
-### 📊 Vector Database & Services
-
-| Secret Name            | Description                      | Where to Get                                                    |
-| ---------------------- | -------------------------------- | --------------------------------------------------------------- |
-| `PINECONE_API_KEY`     | Pinecone vector database API key | [Pinecone Console](https://app.pinecone.io/)                    |
-| `PINECONE_ENVIRONMENT` | Pinecone environment name        | Pinecone Console > Environment                                  |
-| `PINECONE_INDEX_NAME`  | Pinecone index name              | `careercopilot-index`                                           |
-| `SENDGRID_API_KEY`     | SendGrid email service API key   | [SendGrid API Keys](https://app.sendgrid.com/settings/api_keys) |
-
 ### 🔐 OAuth Configuration
 
 | Secret Name                          | Description                               | Where to Get                                                                                              |
@@ -213,9 +204,7 @@ gh secret set ANTHROPIC_API_KEY --body "YOUR_ANTHROPIC_KEY" --repo $REPO
 gh secret set PERPLEXITY_API_KEY --body "YOUR_PERPLEXITY_KEY" --repo $REPO
 
 # Add database and service keys
-gh secret set PINECONE_API_KEY --body "YOUR_PINECONE_KEY" --repo $REPO
-gh secret set PINECONE_ENVIRONMENT --body "YOUR_PINECONE_ENV" --repo $REPO
-gh secret set PINECONE_INDEX_NAME --body "careercopilot-index" --repo $REPO
+# NOTE: Pinecone configuration removed - using local FAISS and Vertex AI Vector Search instead
 gh secret set SENDGRID_API_KEY --body "YOUR_SENDGRID_KEY" --repo $REPO
 
 # Add OAuth secrets
@@ -236,7 +225,6 @@ echo "✅ All secrets added to GitHub repository!"
 - [ ] Google Cloud projects configured
 - [ ] Service accounts created with proper permissions
 - [ ] AI service API keys obtained
-- [ ] Pinecone index created and configured
 - [ ] SendGrid account set up
 - [ ] All GitHub secrets added
 - [ ] Deployment pipeline tested

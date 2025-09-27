@@ -37,16 +37,6 @@ class Settings(BaseSettings):
     ai_max_tokens: int = 2000
     ai_temperature: float = 0.2
 
-    # RAG Settings
-    enable_rag: bool = True
-    rag_chunk_size: int = 1000
-    rag_chunk_overlap: int = 200
-    rag_vector_collection: str = "document_chunks"
-    embedding_model: str = "all-MiniLM-L6-v2"
-    embedding_dimension: int = 384
-    vertex_ai_index_endpoint: Optional[str] = None
-    vertex_ai_region: str = "us-central1"
-
     # Document processing
     max_document_size_mb: int = 10
     allowed_document_types: List[str] = field(

@@ -1,4 +1,4 @@
-# backend/app/main.py (Revised)
+# backend/app/main.py (Production Ready)
 
 import json
 import os
@@ -6,8 +6,24 @@ import os
 import firebase_admin
 from app.api.router import api_router
 from app.core.genkit_init import check_genkit_health, startup_genkit
+from app.core.loguru_config import configure_loguru, get_logger, log_security_event
+from app.core.monitoring import setup_prometheus_monitoring
+from app.core.secure_config import SecureSettings
 from fastapi import FastAPI
 from firebase_admin import credentials
+
+# Initialize secure configuration
+settings = SecureSettings()
+
+# Configure structured logging
+configure_loguru(
+    environment=settings.ENV,
+    log_dir="logs",
+    service_name="careercopilot-api"
+)
+
+# Get application logger
+logger = get_logger(__name__)
 
 # Create the FastAPI app instance
 app = FastAPI(
@@ -16,31 +32,47 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# Set up Prometheus monitoring
+setup_prometheus_monitoring(app, environment=settings.ENV)
+
 
 @app.on_event("startup")
 def on_startup():
     """Initialize services when the application starts."""
+    logger.info("Starting CareerCopilot API application", environment=settings.ENV)
 
     # --- Firebase Initialization Logic ---
-    # MOVED HERE: This now runs only once on startup.
     try:
-        cred_json_str = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
+        cred_json_str = settings.GOOGLE_APPLICATION_CREDENTIALS_JSON
         if cred_json_str:
             cred_dict = json.loads(cred_json_str)
             cred = credentials.Certificate(cred_dict)
+            logger.info("Using Firebase credentials from Secret Manager")
         else:
             # Fallback for local dev using a file path
             cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-            cred = credentials.Certificate(cred_path)
+            if cred_path:
+                cred = credentials.Certificate(cred_path)
+                logger.info("Using Firebase credentials from file", path=cred_path)
+            else:
+                logger.warning("No Firebase credentials configured")
+                return
 
         firebase_admin.initialize_app(cred)
-        print("Firebase Admin SDK initialized successfully.")
+        logger.info("Firebase Admin SDK initialized successfully")
     except Exception as e:
-        print(f"CRITICAL: Failed to initialize Firebase Admin SDK: {e}")
-        # In a production app, you might want to prevent startup if Firebase is essential.
+        logger.critical("Failed to initialize Firebase Admin SDK", error=str(e), exc_info=True)
+        log_security_event("firebase_init_failure", error=str(e))
+        # In production, consider failing fast if Firebase is essential
+        if settings.ENV == "production":
+            raise
 
     # --- Genkit Initialization ---
-    startup_genkit()
+    try:
+        startup_genkit()
+        logger.info("Genkit AI framework initialized successfully")
+    except Exception as e:
+        logger.error("Failed to initialize Genkit", error=str(e), exc_info=True)
 
 
 # Include the main API router
