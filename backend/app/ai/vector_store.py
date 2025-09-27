@@ -1,6 +1,6 @@
 import json
 import os
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 import faiss
 import numpy as np
@@ -25,7 +25,9 @@ class VectorStore:
             cls._instance.index_path = os.path.join(INDEX_DIR, INDEX_FILE)
             cls._instance.metadata_path = os.path.join(INDEX_DIR, METADATA_FILE)
             os.makedirs(INDEX_DIR, exist_ok=True)
-            logger.info(f"VectorStore initialized. Index will be stored in: {INDEX_DIR}")
+            logger.info(
+                f"VectorStore initialized. Index will be stored in: {INDEX_DIR}"
+            )
         return cls._instance
 
     async def load_or_create_index(self):
@@ -80,7 +82,9 @@ class VectorStore:
                 meta["id"] = len(self.metadata) + i  # Simple sequential ID
             self.metadata.append(meta)
 
-        logger.info(f"Added {len(vectors)} vectors. Total vectors in index: {self.index.ntotal}")
+        logger.info(
+            f"Added {len(vectors)} vectors. Total vectors in index: {self.index.ntotal}"
+        )
         await self.save_index()  # Save after adding
 
     async def search_vectors(self, query_vector: List[float], k: int = 5) -> List[Dict]:
@@ -94,13 +98,17 @@ class VectorStore:
                 f"Query vector dimension mismatch. Expected {VECTOR_DIMENSION}, got {query_np.shape[1]}."
             )
 
-        distances, indices = self.index.search(query_np, k)  # distances and indices arrays
+        distances, indices = self.index.search(
+            query_np, k
+        )  # distances and indices arrays
 
         results = []
         for i in range(len(indices[0])):
             idx = indices[0][i]
             if idx < len(self.metadata):  # Ensure index is within bounds
-                results.append({"distance": float(distances[0][i]), "metadata": self.metadata[idx]})
+                results.append(
+                    {"distance": float(distances[0][i]), "metadata": self.metadata[idx]}
+                )
             else:
                 logger.warning(
                     f"Search returned out-of-bounds index: {idx}. Metadata size: {len(self.metadata)}"
@@ -162,7 +170,9 @@ class VectorStore:
         if (
             len(deleted_indices) > initial_count * 0.1 or len(deleted_indices) > 100
         ):  # Rebuild if >10% or >100 docs deleted
-            logger.info(f"Rebuilding FAISS index after deleting {len(deleted_indices)} documents.")
+            logger.info(
+                f"Rebuilding FAISS index after deleting {len(deleted_indices)} documents."
+            )
             # Get all vectors from remaining metadata and rebuild
             # This assumes you can regenerate vectors from metadata or have them stored elsewhere
             # For this simple implementation, we'll just clear and save metadata.
@@ -189,7 +199,8 @@ async def main():
     # Add some dummy vectors
     dummy_vectors = [np.random.rand(VECTOR_DIMENSION).tolist() for _ in range(10)]
     dummy_metadatas = [
-        {"id": f"doc{i}", "text": f"This is document {i}", "source": "test"} for i in range(10)
+        {"id": f"doc{i}", "text": f"This is document {i}", "source": "test"}
+        for i in range(10)
     ]
     await vector_store.add_vectors(dummy_vectors, dummy_metadatas)
 

@@ -32,7 +32,9 @@ class UserRegistrationRequest(BaseModel):
     email: EmailStr
     name: str
     password: str
-    documents: Optional[List[str]] = None  # Optional documents for voice profile analysis
+    documents: Optional[List[str]] = (
+        None  # Optional documents for voice profile analysis
+    )
 
 
 class UserRegistrationResponse(BaseModel):
@@ -102,10 +104,14 @@ async def register_user(
         voice_profile_created = False
         if request.documents and any(doc.strip() for doc in request.documents):
             try:
-                logger.info(f"Running voice profile analysis for new user: {user.email}")
+                logger.info(
+                    f"Running voice profile analysis for new user: {user.email}"
+                )
 
                 # Create voice profile input
-                voice_input = VoiceProfileInput(user_id=user.id, documents=request.documents)
+                voice_input = VoiceProfileInput(
+                    user_id=user.id, documents=request.documents
+                )
 
                 # Run the voice profile analysis flow
                 await analyze_and_create_voice_profile(voice_input)
@@ -114,14 +120,18 @@ async def register_user(
                 response.voice_profile_created = True
                 response.message = "Registration successful with voice profile created"
 
-                logger.info(f"Voice profile created successfully for user: {user.email}")
+                logger.info(
+                    f"Voice profile created successfully for user: {user.email}"
+                )
 
             except Exception as voice_error:
                 # Don't fail registration if voice profile creation fails
                 logger.warning(
                     f"Voice profile creation failed for user {user.email}: {voice_error}"
                 )
-                response.message = "Registration successful, but voice profile creation failed"
+                response.message = (
+                    "Registration successful, but voice profile creation failed"
+                )
 
         logger.info(
             f"User registered successfully: {user.email}, voice_profile: {voice_profile_created}"
@@ -140,13 +150,17 @@ async def register_user(
 
 
 @router.post("/login", response_model=UserLoginResponse)
-async def login_user(request: UserLoginRequest, db: Session = Depends(get_db)) -> UserLoginResponse:
+async def login_user(
+    request: UserLoginRequest, db: Session = Depends(get_db)
+) -> UserLoginResponse:
     """
     Authenticate user and return access token.
     """
     try:
         # Authenticate the user
-        user = auth_manager.authenticate_user(db=db, email=request.email, password=request.password)
+        user = auth_manager.authenticate_user(
+            db=db, email=request.email, password=request.password
+        )
 
         if not user:
             raise HTTPException(
@@ -199,7 +213,9 @@ async def logout_user(token: str) -> Dict[str, str]:
 
 
 @router.post("/refresh", response_model=TokenResponse)
-async def refresh_token(current_token: str, db: Session = Depends(get_db)) -> TokenResponse:
+async def refresh_token(
+    current_token: str, db: Session = Depends(get_db)
+) -> TokenResponse:
     """
     Refresh user access token.
     """
@@ -207,14 +223,18 @@ async def refresh_token(current_token: str, db: Session = Depends(get_db)) -> To
         # Verify current token
         payload = auth_manager.verify_token(current_token)
         if not payload:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token"
+            )
 
         # Get user from database
         user_id = payload.get("sub")
         user = db.query(User).filter(User.id == user_id).first()
 
         if not user:
-            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED, detail="User not found"
+            )
 
         # Generate new token
         new_access_token = create_user_token(user)
@@ -272,7 +292,9 @@ async def create_voice_profile(
         # Run the voice profile analysis flow
         await analyze_and_create_voice_profile(voice_input)
 
-        logger.info(f"Voice profile created successfully for user: {current_user.email}")
+        logger.info(
+            f"Voice profile created successfully for user: {current_user.email}"
+        )
 
         return {
             "message": "Voice profile created successfully",
@@ -282,7 +304,9 @@ async def create_voice_profile(
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Voice profile creation failed for user {current_user.email}: {e}")
+        logger.error(
+            f"Voice profile creation failed for user {current_user.email}: {e}"
+        )
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Voice profile creation failed",

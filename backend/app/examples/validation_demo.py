@@ -8,7 +8,6 @@ It shows how the utility handles valid responses, invalid responses, and provide
 import json
 import logging
 from datetime import datetime
-from typing import Any, Dict
 
 # Configure logging to see validation details
 logging.basicConfig(level=logging.INFO)
@@ -16,14 +15,10 @@ logger = logging.getLogger(__name__)
 
 try:
     from app.core.ai_flow_integration import (
-        create_fallback_response,
-        extract_validated_data,
         validate_ai_flow_response,
     )
     from app.core.ai_response_validation import (
         AIResponseValidator,
-        ATSResult,
-        SemanticAnalysis,
         STARResponse,
         default_validator,
     )
@@ -121,13 +116,17 @@ try:
         }
     )
 
-    result = default_validator.validate_response(legacy_semantic_response, "semantic_analysis")
+    result = default_validator.validate_response(
+        legacy_semantic_response, "semantic_analysis"
+    )
 
     if result.is_valid:
         print("✅ Legacy field support working!")
         semantic_data = result.parsed_data
         print(f"   Parsed similarity_score: {semantic_data.similarity_score}%")
-        print("   Legacy 'similarityScore' was automatically converted to 'similarity_score'")
+        print(
+            "   Legacy 'similarityScore' was automatically converted to 'similarity_score'"
+        )
     else:
         print(f"❌ Legacy field support failed: {result.error_message}")
 
@@ -164,7 +163,7 @@ try:
     print("-" * 40)
 
     from app.core.ai_response_validation import BaseAIResponseSchema
-    from pydantic import BaseModel, Field
+    from pydantic import Field
 
     class ProjectAnalysisResponse(BaseAIResponseSchema):
         project_name: str = Field(..., min_length=1)
@@ -286,7 +285,9 @@ try:
 
 except ImportError as e:
     print(f"❌ Import error: {e}")
-    print("Make sure you're running this from the backend directory with the proper Python path")
+    print(
+        "Make sure you're running this from the backend directory with the proper Python path"
+    )
 except Exception as e:
     print(f"❌ Demo error: {e}")
     logger.exception("Demo failed with exception")

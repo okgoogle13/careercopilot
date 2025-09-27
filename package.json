@@ -85,6 +85,9 @@
   },
   "homepage": "https://github.com/careercopilot/careercopilot#readme",
   "dependencies": {
-    "@emotion/styled": "^11.14.1"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "eslint": "^9.36.0",
+    "react": "^19.1.1"
   }
 }

@@ -5,11 +5,11 @@ This module contains parameterized pytest tests that verify the robustness
 of cover letter generation flows under various edge cases and stress conditions.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 from unittest.mock import MagicMock, patch
 
 import pytest
-from app.core.ai_error_handling import AIError, AIErrorType
+from app.core.ai_error_handling import AIError
 from app.genkit_flows.cover_letter_generator import generate_tailored_cover_letter
 from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
 
@@ -47,8 +47,10 @@ class TestCoverLetterRobustness:
             ("   ", "whitespace_only"),
             (
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " * 100
-                + "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " * 100
-                + "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. " * 100,
+                + "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+                * 100
+                + "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. "
+                * 100,
                 "very_long_nonsensical",
             ),
             (
@@ -115,7 +117,9 @@ class TestCoverLetterRobustness:
                 assert isinstance(
                     result, str
                 ), f"Expected string result for scenario: {scenario_name}"
-                assert len(result) > 0, f"Expected non-empty result for scenario: {scenario_name}"
+                assert (
+                    len(result) > 0
+                ), f"Expected non-empty result for scenario: {scenario_name}"
 
                 # Verify the model was called (robustness includes attempting generation)
                 mock_model.generate.assert_called_once()
@@ -143,7 +147,8 @@ class TestCoverLetterRobustness:
             ),
             (
                 "Software Engineer position requiring Python and machine learning experience. "
-                + "We are looking for someone with 5+ years of experience in data science. " * 50,
+                + "We are looking for someone with 5+ years of experience in data science. "
+                * 50,
                 "realistic_but_very_long",
             ),
             (
@@ -171,7 +176,9 @@ class TestCoverLetterRobustness:
 
         This tests the more advanced smart cover letter generation function.
         """
-        with patch("app.genkit_flows.smart_cover_letter_system.gemini_pro") as mock_model:
+        with patch(
+            "app.genkit_flows.smart_cover_letter_system.gemini_pro"
+        ) as mock_model:
             # Mock successful AI model response
             mock_response = MagicMock()
             mock_response.text.return_value = f"""
@@ -281,7 +288,9 @@ class TestCoverLetterRobustness:
                 # These are acceptable exceptions for extreme inputs
                 assert str(e)  # Just ensure there's an error message
             except Exception as e:
-                pytest.fail(f"Unhandled exception with large input: {type(e).__name__}: {e}")
+                pytest.fail(
+                    f"Unhandled exception with large input: {type(e).__name__}: {e}"
+                )
 
     def test_unicode_edge_cases(self, minimal_candidate_profile: Dict[str, Any]):
         """
@@ -296,7 +305,9 @@ class TestCoverLetterRobustness:
             "Normalization test: e\u0301 vs é",  # Combining vs precomposed
         ]
 
-        with patch("app.genkit_flows.smart_cover_letter_system.gemini_pro") as mock_model:
+        with patch(
+            "app.genkit_flows.smart_cover_letter_system.gemini_pro"
+        ) as mock_model:
             mock_response = MagicMock()
             mock_response.text.return_value = '{"letter_content": "Test response", "subject_line": null, "sections": [], "analysis": {"readability_score": 80, "personalization_score": 75, "compelling_score": 85, "keyword_alignment": 70, "strengths": [], "improvement_areas": [], "tone_assessment": "professional", "unique_elements": []}, "personalization_notes": [], "key_selling_points": [], "company_connections": [], "alternative_versions": {}, "follow_up_suggestions": []}'
             mock_model.generate.return_value = mock_response

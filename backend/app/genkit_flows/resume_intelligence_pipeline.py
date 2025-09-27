@@ -80,21 +80,31 @@ class SkillAssessment(BaseModel):
     evidence_count: int = Field(description="Number of supporting evidence points")
     years_experience: Optional[int] = Field(description="Estimated years of experience")
     market_demand: str = Field(description="Market demand: high, medium, low")
-    improvement_potential: str = Field(description="Potential for growth: high, medium, low")
+    improvement_potential: str = Field(
+        description="Potential for growth: high, medium, low"
+    )
 
 
 class ResumeAnalysisResult(BaseModel):
     overall_score: int = Field(description="Overall resume score (0-100)", ge=0, le=100)
-    ats_compatibility_score: int = Field(description="ATS parsing score (0-100)", ge=0, le=100)
+    ats_compatibility_score: int = Field(
+        description="ATS parsing score (0-100)", ge=0, le=100
+    )
     human_readability_score: int = Field(
         description="Human readability score (0-100)", ge=0, le=100
     )
-    impact_score: int = Field(description="Achievement impact score (0-100)", ge=0, le=100)
+    impact_score: int = Field(
+        description="Achievement impact score (0-100)", ge=0, le=100
+    )
 
     # Detailed breakdowns
     section_scores: Dict[str, int] = Field(description="Score by resume section")
-    experience_analysis: List[ExperienceEntry] = Field(description="Detailed experience analysis")
-    skills_assessment: List[SkillAssessment] = Field(description="Comprehensive skills evaluation")
+    experience_analysis: List[ExperienceEntry] = Field(
+        description="Detailed experience analysis"
+    )
+    skills_assessment: List[SkillAssessment] = Field(
+        description="Comprehensive skills evaluation"
+    )
 
     # Key insights
     strengths: List[str] = Field(description="Resume's strongest points")
@@ -103,33 +113,55 @@ class ResumeAnalysisResult(BaseModel):
 
     # Recommendations
     immediate_improvements: List[str] = Field(description="Quick wins for improvement")
-    strategic_recommendations: List[str] = Field(description="Long-term improvement strategy")
+    strategic_recommendations: List[str] = Field(
+        description="Long-term improvement strategy"
+    )
     industry_alignment: str = Field(description="How well aligned with target industry")
 
     # Competitive analysis
-    competitive_position: str = Field(description="strong, average, weak market position")
-    unique_differentiators: List[str] = Field(description="What makes this candidate unique")
-    market_positioning_advice: List[str] = Field(description="How to position competitively")
+    competitive_position: str = Field(
+        description="strong, average, weak market position"
+    )
+    unique_differentiators: List[str] = Field(
+        description="What makes this candidate unique"
+    )
+    market_positioning_advice: List[str] = Field(
+        description="How to position competitively"
+    )
 
 
 class CareerProgressionAnalysis(BaseModel):
-    career_trajectory: str = Field(description="upward, lateral, mixed, unclear progression")
-    progression_score: int = Field(description="Career growth score (0-100)", ge=0, le=100)
+    career_trajectory: str = Field(
+        description="upward, lateral, mixed, unclear progression"
+    )
+    progression_score: int = Field(
+        description="Career growth score (0-100)", ge=0, le=100
+    )
     title_progression: List[str] = Field(description="Sequence of job titles")
-    skill_evolution: Dict[str, List[str]] = Field(description="How skills developed over time")
+    skill_evolution: Dict[str, List[str]] = Field(
+        description="How skills developed over time"
+    )
     career_gaps: List[str] = Field(description="Identified gaps or inconsistencies")
-    growth_patterns: List[str] = Field(description="Patterns of professional development")
+    growth_patterns: List[str] = Field(
+        description="Patterns of professional development"
+    )
     future_trajectory: List[str] = Field(description="Likely next career moves")
-    positioning_for_advancement: List[str] = Field(description="How to position for next level")
+    positioning_for_advancement: List[str] = Field(
+        description="How to position for next level"
+    )
 
 
 class ResumeIntelligenceReport(BaseModel):
     analysis_timestamp: str = Field(description="When analysis was performed")
     resume_analysis: ResumeAnalysisResult = Field(description="Core resume analysis")
-    career_progression: CareerProgressionAnalysis = Field(description="Career trajectory analysis")
+    career_progression: CareerProgressionAnalysis = Field(
+        description="Career trajectory analysis"
+    )
 
     # Strategic insights
-    market_readiness: int = Field(description="Market readiness score (0-100)", ge=0, le=100)
+    market_readiness: int = Field(
+        description="Market readiness score (0-100)", ge=0, le=100
+    )
     interview_readiness: int = Field(
         description="Interview preparation score (0-100)", ge=0, le=100
     )
@@ -139,12 +171,16 @@ class ResumeIntelligenceReport(BaseModel):
 
     # Action plan
     thirty_day_action_items: List[str] = Field(description="Immediate actions to take")
-    ninety_day_strategic_plan: List[str] = Field(description="Medium-term improvement plan")
+    ninety_day_strategic_plan: List[str] = Field(
+        description="Medium-term improvement plan"
+    )
     success_metrics: List[str] = Field(description="How to measure improvement")
 
     # Industry-specific insights
     industry_fit_analysis: Dict[str, int] = Field(description="Fit scores by industry")
-    role_recommendations: List[str] = Field(description="Suitable roles based on profile")
+    role_recommendations: List[str] = Field(
+        description="Suitable roles based on profile"
+    )
 
 
 @genkit_flow(output_schema=ResumeAnalysisResult)
@@ -164,7 +200,9 @@ def analyze_resume_comprehensive(
     """
     try:
         if not resume_content or not isinstance(resume_content, str):
-            raise InputValidationError("Resume content is required and must be a string")
+            raise InputValidationError(
+                "Resume content is required and must be a string"
+            )
 
         sanitized_content = InputSanitizer.sanitize_text_input(resume_content)
 
@@ -211,13 +249,17 @@ def analyze_career_progression(
     """
     try:
         sanitized_content = InputSanitizer.sanitize_text_input(resume_content)
-        sanitized_goals = InputSanitizer.sanitize_text_input(career_goals) if career_goals else None
+        sanitized_goals = (
+            InputSanitizer.sanitize_text_input(career_goals) if career_goals else None
+        )
 
         prompt = format_prompt(
             "career_progression_analysis",
             resume_content=sanitized_content.sanitized_content,
             career_goals=(
-                sanitized_goals.sanitized_content if sanitized_goals else "Not specified"
+                sanitized_goals.sanitized_content
+                if sanitized_goals
+                else "Not specified"
             ),
         )
 
@@ -357,7 +399,9 @@ def analyze_resume_batch(
     for i, resume_content in enumerate(resume_contents):
         try:
             analysis = analyze_resume_comprehensive(resume_content, target_industry)
-            results.append({"resume_index": i, "analysis": analysis.dict(), "status": "success"})
+            results.append(
+                {"resume_index": i, "analysis": analysis.dict(), "status": "success"}
+            )
         except Exception as e:
             results.append({"resume_index": i, "error": str(e), "status": "failed"})
 
@@ -367,11 +411,15 @@ def analyze_resume_batch(
 # Skills gap analysis for career transition
 class SkillsGapAnalysis(BaseModel):
     current_skills: List[SkillAssessment] = Field(description="Current skill inventory")
-    target_role_requirements: List[str] = Field(description="Skills required for target role")
+    target_role_requirements: List[str] = Field(
+        description="Skills required for target role"
+    )
     skill_gaps: List[str] = Field(description="Missing skills for target role")
     transferable_skills: List[str] = Field(description="Skills that transfer well")
     development_priority: List[str] = Field(description="Skills to develop first")
-    learning_recommendations: List[str] = Field(description="How to acquire missing skills")
+    learning_recommendations: List[str] = Field(
+        description="How to acquire missing skills"
+    )
     timeline_estimate: str = Field(description="Estimated time to bridge gaps")
     feasibility_score: int = Field(
         description="Career transition feasibility (0-100)", ge=0, le=100
