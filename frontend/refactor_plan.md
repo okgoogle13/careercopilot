@@ -67,7 +67,7 @@ Move existing components from their current locations into the new structure.
     - `src/components/layout/PageHeader.tsx`
 
 2.  **Move to `src/components/features/opportunities/`:**
-    - `src/components/career/KanbanBoard.tsx`
+    - `src/components/features/opportunities/KanbanBoard.tsx.wip` (Note: This component is a work in progress and has been temporarily disabled in `ApplicationTracker.tsx`.)
     - `src/components/career/FilterPanel.tsx`
     - `src/components/career/JobCard.tsx`
 

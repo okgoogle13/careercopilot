@@ -9,7 +9,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import { KanbanBoard } from '../features/opportunities/KanbanBoard';
+// import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 import { TimelineView } from './TimelineView';
 import { Close, ArrowLeft } from '@mui/icons-material';
 
@@ -177,13 +177,13 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
 
   return (
     <Box className="w-full">
-      {/* Kanban Board View */}
-      <KanbanBoard
+      {/* Kanban Board View (WIP) */}
+      {/* <KanbanBoard
         applications={applications}
         onApplicationMove={handleApplicationMove}
         onApplicationClick={handleApplicationClick}
         onAddApplication={handleAddApplication}
-      />
+      /> */}
 
       {/* Timeline View Dialog */}
       <Dialog
