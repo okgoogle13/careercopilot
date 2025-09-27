@@ -1,132 +1,57 @@
-Phase 1: Verify & Commit Changes
-1. Generate .gitignore Update:
-Append the following rules to the root .gitignore file to ignore script backups and local environment files.
-code
-Diff
-# Ignore cleanup script backups
-+ backup_*
+Role: DevOps & QA Asset Generation AI.
+Objective: Generate the necessary configurations, test plans, and documentation to fully integrate, deploy, and monitor the cost-optimization code created in the clean-start branch.
+Phase 4: Integration & Infrastructure Plan
+1. Generate Pull Request Template:
+Create a Markdown template for a Pull Request to merge clean-start into main. The description must include a summary of changes and a checklist for the reviewer.
+2. Generate Infrastructure as Code (IaC):
+Produce a Terraform (.tf) file to provision a Google Cloud Memorystore for Redis instance. The configuration should be production-ready but minimal.
+Resource: google_redis_instance
+Tier: BASIC
+Memory: 1 GB
+Region: us-central1
+Outputs: The host and port of the Redis instance.
+3. Generate Secret Management Commands:
+Produce a shell script using gcloud CLI to create secrets in Google Secret Manager for the Redis host and port, ready for the application to consume.
+4. Generate Code Integration Guide:
+Create a Markdown file (REFACTORING_GUIDE.md) that provides clear instructions for a developer on how to integrate the new services. It must include:
+A "Find & Replace" section showing how to locate old direct LLM calls.
+A code snippet demonstrating the "new" way to call the dispatch_llm_call function.
+Instructions on how to correctly initialize the redis_client using environment variables.
+Phase 5: Testing & Validation Plan
+1. Generate Test Plan Document:
+Create a comprehensive TEST_PLAN.md document with the following sections:
+Functional Testing: A checklist of 5-7 key user stories to validate (e.g., "User successfully parses a resume and sees correct keyword extraction," "User receives relevant job matches").
+Cache Validation: A step-by-step procedure to confirm the Redis cache is working.
+Start the backend with logs visible.
+Make an API request for a complex task.
+Observe the "Cache MISS" log.
+Immediately repeat the exact same request.
+Assert that a "Cache HIT" log is observed and the response is faster.
+Cost Validation: Instructions on where in the Google Cloud Console to monitor API usage (Vertex AI -> Dashboard) to confirm a reduction in calls to expensive models.
+Phase 6: Deployment & Monitoring Plan
+1. Generate Deployment Checklist:
+Create a DEPLOYMENT_CHECKLIST.md for a production release. It must include:
 
-# Ignore local environment files
-+ .env
-+ .env.*
-+ !.env.example
-2. Generate Git Command Sequence:
-Produce a shell script to stage, commit, and push the automated cleanup.
-code
-Bash
-#!/bin/bash
-# Stages all changes, commits with a standard message, and pushes.
+clean-start branch has been merged into main.
 
-echo ">>> Staging all changes..."
-git add .
+Production Memorystore for Redis instance is provisioned and healthy.
 
-echo ">>> Committing consolidated files..."
-git commit -m "chore: automated repo cleanup and file consolidation"
+Production secrets (e.g., REDIS_HOST, REDIS_PORT) are populated in Secret Manager.
 
-echo ">>> Pushing to remote..."
-git push
+All tests in TEST_PLAN.md have passed in the staging environment.
 
-echo ">>> Phase 1 complete."
-Phase 2: Manual Refactoring & Consolidation
-1. Generate Package Manager Standardization Script:
-Create a shell script that allows the user to enforce a single package manager (NPM or Yarn) across the project.
-code
-Bash
-#!/bin/bash
-# Standardizes the package manager. Usage: ./standardize_pm.sh <npm|yarn>
-
-MANAGER=$1
-
-if [ "$MANAGER" == "yarn" ]; then
-  echo "Standardizing to Yarn..."
-  find . -name 'package-lock.json' -delete
-  yarn install && (cd frontend && yarn install) && (cd backend && yarn install)
-elif [ "$MANAGER" == "npm" ]; then
-  echo "Standardizing to NPM..."
-  find . -name 'yarn.lock' -delete
-  npm install && (cd frontend && npm install) && (cd backend && npm install)
-else
-  echo "Error: Please specify 'npm' or 'yarn'."
-  exit 1
-fi
-
-echo ">>> Package manager standardized to $MANAGER."
-2. Generate Environment Config Consolidation Script:
-Produce a shell script to finalize the use of the single root .env.example.
-code
-Bash
-#!/bin/bash
-# Finalizes the consolidation of .env.example files.
-
-echo ">>> Renaming consolidated environment file..."
-mv ./.env.example.consolidated ./.env.example
-
-echo ">>> Removing old frontend/backend environment examples..."
-rm -f ./frontend/.env.example
-rm -f ./backend/.env.example
-
-echo ">>> Environment config consolidated. Update README.md next."
-Phase 3: Cost Optimization (Code Implementation Plan)
-1. Generate Caching Layer for LLM Service:
-Create a Python code stub demonstrating how to add a Redis caching layer to the primary LLM service. Assume a file exists at backend/app/ai/llm_service.py.
-code
-Python
-# backend/app/ai/llm_service.py
-
-import redis
-import hashlib
-import json
-
-# Assume Redis client is configured elsewhere
-redis_client = redis.Redis(host='localhost', port=6379, db=0)
-
-def get_llm_response(prompt: str, model_params: dict) -> dict:
-    """
-    Gets a response from an LLM, using a cache to avoid redundant calls.
-    """
-    # Create a stable cache key
-    param_str = json.dumps(model_params, sort_keys=True)
-    key_material = (prompt + param_str).encode('utf-8')
-    cache_key = f"llm:{hashlib.sha256(key_material).hexdigest()}"
-
-    # 1. Check cache first
-    cached_result = redis_client.get(cache_key)
-    if cached_result:
-        print("--- Cache HIT ---")
-        return json.loads(cached_result)
-
-    # 2. If miss, call the actual LLM API and cache the result
-    print("--- Cache MISS ---")
-    # Replace with the actual vendor API call
-    # result = vendor.gemini.call(prompt, model_params)
-    result = {"response": f"This is the LLM response for: {prompt[:30]}..."} # Placeholder
-
-    redis_client.set(cache_key, json.dumps(result), ex=3600) # Cache for 1 hour
-
-    return result
-2. Generate Smart Model Dispatcher Logic:
-Create a Python code stub for a dispatcher function that selects a cost-effective model based on the task's complexity.
-code
-Python
-# backend/app/ai/model_dispatcher.py
-
-from .llm_service import get_llm_response
-
-# Define models by cost/capability
-MODEL_CHEAP = "gemini-1.0-pro"
-MODEL_EXPENSIVE = "gemini-1.5-pro"
-
-def dispatch_llm_call(task_type: str, prompt: str) -> dict:
-    """
-    Selects an appropriate LLM based on the task type to optimize cost.
-    """
-    model_selection = MODEL_CHEAP # Default to cheaper model
-
-    if task_type in ["complex_reasoning", "code_generation", "detailed_analysis"]:
-        model_selection = MODEL_EXPENSIVE
-
-    print(f"Dispatching to model: {model_selection} for task: {task_type}")
-
-    model_params = {"model": model_selection, "temperature": 0.5}
-
-    return get_llm_response(prompt, model_params)
+Final cost analysis of staging environment shows expected savings.
+2. Generate Monitoring Dashboard Blueprint:
+Create a Markdown section describing the widgets to add to a Google Cloud Monitoring Dashboard for this service.
+Widget 1: AI Cost Efficiency
+Type: Chart
+Metric: Vertex AI API Call Count, grouped by model_name.
+Goal: Visualize the shift from expensive to cheap models.
+Widget 2: Cache Performance
+Type: Chart
+Metric: Memorystore - CPU Utilization.
+Goal: Monitor the health and load of the Redis cache.
+Widget 3: Application Health
+Type: Chart
+Metric: Cloud Run - Request Count, grouped by response_code (especially 5xx errors).
+Goal: Ensure application stability has not been compromised.
