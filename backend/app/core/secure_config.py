@@ -54,6 +54,31 @@ class SecureSettings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Override with secure values for production
+        if SECRET_MANAGER_AVAILABLE and self.ENV in ["production", "staging"]:
+            try:
+                self.SECRET_KEY = get_secret_key()
+                self.JWT_SECRET_KEY = self.SECRET_KEY
+                self.DATABASE_URL = get_database_url()
+                self.REDIS_URL = get_redis_url()
+
+                # Load AI API keys from Secret Manager
+                self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
+                self.OPENAI_API_KEY = get_secret("OPENAI_API_KEY", default=self.OPENAI_API_KEY)
+                self.ANTHROPIC_API_KEY = get_secret("ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY)
+
+                # Load Firebase credentials
+                self.FIREBASE_PROJECT_ID = get_secret("FIREBASE_PROJECT_ID", default=self.FIREBASE_PROJECT_ID)
+                self.GOOGLE_APPLICATION_CREDENTIALS_JSON = get_secret("GOOGLE_APPLICATION_CREDENTIALS_JSON", default=self.GOOGLE_APPLICATION_CREDENTIALS_JSON)
+            except Exception as e:
+                raise RuntimeError(f"Failed to load production secrets: {e}")
+        elif self.ENV in ["production", "staging"]:
+            # Fail fast in production if secrets are not properly configured
+            if self.SECRET_KEY == "insecure-default-secret-key":
+                raise RuntimeError("Production environment requires secure secret configuration")
+
     # Firebase Configuration
     FIREBASE_PROJECT_ID: Optional[str] = None
     FIREBASE_STORAGE_BUCKET: str = ""
@@ -92,12 +117,8 @@ class SecureSettings(BaseSettings):
     OPENAI_ORG_ID: Optional[str] = None
     ANTHROPIC_API_KEY: Optional[str] = None
 
-    # RAG Configuration
-    RAG_CHUNK_SIZE: int = 1000
-    RAG_CHUNK_OVERLAP: int = 200
-    RAG_VECTOR_COLLECTION: str = "careercopilot_docs"
-    VERTEX_AI_INDEX_ENDPOINT: Optional[str] = None
-    EMBEDDING_DIMENSION: int = 768
+    # RAG Configuration - REMOVED: Vector search functionality simplified
+    # RAG features have been removed in favor of direct AI integration
     EMBEDDING_MODEL: str = "text-embedding-004"
 
     # Email

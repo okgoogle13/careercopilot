@@ -221,21 +221,11 @@ read -p "Press Enter when you've revoked the old key and are ready to enter the 
 
 prompt_for_key "Perplexity" "PERPLEXITY_API_KEY" "^pplx-"
 
-# 6. Pinecone
+# 6. Pinecone (REMOVED - No longer using Pinecone vector database)
 echo ""
-echo -e "${YELLOW}6. PINECONE API KEY ROTATION${NC}"
-echo "Opening Pinecone Console..."
-open_url "https://app.pinecone.io/"
-
-echo ""
-warning "Actions required in Pinecone Console:"
-echo "1. Delete the compromised key: pcsk_2CmZ6W_..."
-echo "2. Create a new API key"
-echo "3. Configure usage limits"
-echo ""
-read -p "Press Enter when you've revoked the old key and are ready to enter the new one..."
-
-prompt_for_key "Pinecone" "PINECONE_API_KEY" "^pcsk_"
+echo -e "${YELLOW}6. PINECONE - SKIPPED (No longer in use)${NC}"
+echo "Pinecone integration has been removed from the application."
+echo "Skipping Pinecone API key rotation."
 
 # Add optional environment variables
 echo ""

@@ -194,15 +194,8 @@ banner "════════════════════════
 
 log "Setting up database and service configurations..."
 
-prompt_for_secret "PINECONE_API_KEY" \
-    "Pinecone vector database API key from https://app.pinecone.io/" \
-    "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-
-prompt_for_secret "PINECONE_ENVIRONMENT" \
-    "Pinecone environment name (e.g., us-east1-gcp)" \
-    "us-east1-gcp"
-
-add_secret "PINECONE_INDEX_NAME" "careercopilot-index" "Pinecone index name"
+# PINECONE CONFIGURATION REMOVED - No longer using Pinecone vector database
+# Pinecone has been replaced with local FAISS and Vertex AI Vector Search
 
 prompt_for_secret "SENDGRID_API_KEY" \
     "SendGrid email service API key from https://app.sendgrid.com/settings/api_keys" \

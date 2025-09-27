@@ -57,7 +57,8 @@ RUN pip install --no-cache --no-index --find-links=/wheels /wheels/*
 # Create a non-root user for security
 RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
 
-# Copy application code
+# Copy requirements first for better caching (already handled in builder stage)
+# Copy application code last to maximize cache efficiency
 COPY . .
 
 # Create and set permissions for necessary directories

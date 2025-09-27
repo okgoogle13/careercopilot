@@ -20,20 +20,15 @@ import {
   Drawer,
   useTheme,
   useMediaQuery,
-  Button,
   InputBase,
 } from '@mui/material';
 import { mainNavigation, userNavigation } from '../../config/navigation';
 import { NavigationItem } from './NavigationItem';
 import {
   Menu as MenuIcon,
-  Notifications as NotificationsIcon,
+  NotificationsNone as NotificationsIcon,
   Close as CloseIcon,
   Search as SearchIcon,
-  Person as PersonIcon,
-  Settings as SettingsIcon,
-  HelpOutline as HelpOutlineIcon,
-  Logout as LogoutIcon,
 } from '@mui/icons-material';
 
 interface NavbarProps {
@@ -42,6 +37,7 @@ interface NavbarProps {
   userName?: string;
   userAvatar?: string;
   notificationCount?: number;
+  onSearch?: (query: string) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -50,6 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({
   userName = 'User',
   userAvatar,
   notificationCount = 0,
+  onSearch,
 }) => {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -58,6 +55,7 @@ const Navbar: React.FC<NavbarProps> = ({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [notificationsAnchorEl, setNotificationsAnchorEl] = useState<null | HTMLElement>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -84,6 +82,17 @@ const Navbar: React.FC<NavbarProps> = ({
     if (isMobile) {
       setMobileOpen(false);
     }
+  };
+
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (searchQuery.trim() && onSearch) {
+      onSearch(searchQuery.trim());
+    }
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
   };
 
   const drawer = (
@@ -164,11 +173,13 @@ const Navbar: React.FC<NavbarProps> = ({
           </Box>
 
           {/* Search Bar - Desktop */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, maxWidth: 600, mx: 4 }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, maxWidth: 600, mx: 3 }}>
             <Box
+              component="form"
+              onSubmit={handleSearch}
               sx={{
                 position: 'relative',
-                borderRadius: theme.shape.borderRadius,
+                borderRadius: 2,
                 backgroundColor: 'action.hover',
                 '&:hover': {
                   backgroundColor: 'action.selected',
@@ -191,13 +202,16 @@ const Navbar: React.FC<NavbarProps> = ({
                 <SearchIcon color="action" />
               </Box>
               <InputBase
-                placeholder="Search..."
+                placeholder="Search jobs, documents, tools..."
+                value={searchQuery}
+                onChange={handleSearchChange}
                 sx={{
                   color: 'inherit',
                   width: '100%',
                   '& .MuiInputBase-input': {
-                    padding: '8px 8px 8px 40px',
+                    padding: theme.spacing(1, 1, 1, 5),
                     width: '100%',
+                    transition: theme.transitions.create('width'),
                   },
                 }}
                 inputProps={{ 'aria-label': 'search' }}
@@ -206,7 +220,7 @@ const Navbar: React.FC<NavbarProps> = ({
           </Box>
 
           {/* Right side - Actions */}
-          <Stack direction="row" spacing={1} alignItems="center">
+          <Stack direction="row" spacing={2} alignItems="center">
             {/* Search Button - Mobile */}
             <IconButton
               size="large"
@@ -333,11 +347,11 @@ const Navbar: React.FC<NavbarProps> = ({
               </Typography>
             </Box>
             {notificationCount > 0 ? (
-              // Render notifications list here
-              <Box sx={{ p: 2, textAlign: 'center' }}>
+              <Box sx={{ p: 2 }}>
                 <Typography variant="body2" color="text.secondary">
-                  No new notifications
+                  You have {notificationCount} new notification{notificationCount > 1 ? 's' : ''}
                 </Typography>
+                {/* TODO: Render actual notifications list here */}
               </Box>
             ) : (
               <Box sx={{ p: 2, textAlign: 'center' }}>
@@ -362,7 +376,7 @@ const Navbar: React.FC<NavbarProps> = ({
           height: '100vh',
           zIndex: theme.zIndex.drawer,
           display: { xs: 'none', md: 'block' },
-          pt: '64px', // Height of the AppBar
+          pt: 8, // Height of the AppBar
         }}
       >
         {drawer}
@@ -374,34 +388,19 @@ const Navbar: React.FC<NavbarProps> = ({
         open={mobileOpen}
         onClose={handleDrawerToggle}
         ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
+          keepMounted: true,
         }}
         sx={{
           display: { xs: 'block', md: 'none' },
           '& .MuiDrawer-paper': {
             boxSizing: 'border-box',
             width: 280,
-            pt: '64px', // Height of the AppBar
+            pt: 8,
           },
         }}
       >
         {drawer}
       </Drawer>
-
-      {/* Main Content */}
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          ml: { md: '280px' },
-          mt: '64px', // Height of the AppBar
-          minHeight: 'calc(100vh - 64px)',
-          backgroundColor: 'background.default',
-        }}
-      >
-        {/* Page content will be rendered here */}
-      </Box>
     </>
   );
 };

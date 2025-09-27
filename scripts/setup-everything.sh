@@ -388,7 +388,7 @@ success "Local files cleaned up"
 echo
 log "Verifying GitHub secrets configuration..."
 echo
-gh secret list --repo "$REPO" | grep -E "(FIREBASE|GCP|OAUTH|SENDGRID|ANTHROPIC|GEMINI|OPENAI|PINECONE)" || true
+gh secret list --repo "$REPO" | grep -E "(FIREBASE|GCP|OAUTH|SENDGRID|ANTHROPIC|GEMINI|OPENAI)" || true
 
 echo
 banner "════════════════════════════════════════════════════════════════════════════════"

@@ -131,7 +131,7 @@ jobs:
             --memory 2Gi \
             --min-instances 0 \
             --max-instances 10 \
-            --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }},PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }},PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}" \
+            --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}" \
             --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=staging,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
@@ -259,7 +259,7 @@ jobs:
             --memory 4Gi \
             --min-instances 1 \
             --max-instances 100 \
-            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},PINECONE_API_KEY=${{ secrets.PINECONE_API_KEY }},PINECONE_ENVIRONMENT=${{ secrets.PINECONE_ENVIRONMENT }},PINECONE_INDEX_NAME=${{ secrets.PINECONE_INDEX_NAME }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}" \
+            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}" \
             --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=production,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
@@ -340,6 +340,79 @@ jobs:
           fi
         timeout-minutes: 3
         continue-on-error: true
+
+      - name: Automatic Rollback - Backend
+        if: failure() || (steps.backend-health.outputs.status == 'unhealthy' || steps.frontend-health.outputs.status == 'unhealthy')
+        run: |
+          echo "🔄 Initiating automatic rollback due to failed health checks..."
+
+          # Get the previous Cloud Run revision
+          echo "Getting previous Cloud Run revision..."
+          gcloud run services describe careercopilot-backend \
+            --region=us-central1 \
+            --project=careercopilot-468811 \
+            --format="value(status.traffic[0].revisionName)" > current_revision.txt
+
+          # Get all revisions and find the previous stable one
+          gcloud run revisions list \
+            --service=careercopilot-backend \
+            --region=us-central1 \
+            --project=careercopilot-468811 \
+            --limit=5 \
+            --format="value(metadata.name)" > all_revisions.txt
+
+          # Get the second revision (previous stable)
+          previous_revision=$(sed -n '2p' all_revisions.txt)
+
+          if [ ! -z "$previous_revision" ]; then
+            echo "Rolling back to previous revision: $previous_revision"
+
+            # Update traffic to route 100% to previous revision
+            gcloud run services update-traffic careercopilot-backend \
+              --region=us-central1 \
+              --project=careercopilot-468811 \
+              --to-revisions="$previous_revision=100"
+
+            echo "✅ Backend rolled back to: $previous_revision"
+
+            # Verify rollback health
+            sleep 30
+            backend_url="https://careercopilot-backend-[hash]-uc.a.run.app"
+            if curl -f -s -m 10 "$backend_url/health" > /dev/null; then
+              echo "✅ Rollback health check passed"
+            else
+              echo "❌ Rollback health check failed - manual intervention required"
+            fi
+          else
+            echo "❌ No previous revision found for rollback"
+          fi
+
+      - name: Automatic Rollback - Frontend
+        if: failure() || (steps.frontend-health.outputs.status == 'unhealthy')
+        run: |
+          echo "🔄 Rolling back frontend deployment..."
+
+          # Get the previous Firebase hosting release
+          firebase hosting:clone careercopilot-468811:production careercopilot-468811:production --except="current" || true
+
+          echo "⚠️ Frontend rollback may require manual intervention via Firebase Console"
+
+      - name: Rollback Notification
+        if: failure() || (steps.backend-health.outputs.status == 'unhealthy' || steps.frontend-health.outputs.status == 'unhealthy')
+        run: |
+          echo "🚨 DEPLOYMENT ROLLBACK EXECUTED"
+          echo "Reason: Health checks failed"
+          echo "Backend Health: ${{ steps.backend-health.outputs.status }}"
+          echo "Frontend Health: ${{ steps.frontend-health.outputs.status }}"
+          echo "Performance: ${{ steps.performance-check.outputs.status }}"
+          echo ""
+          echo "Actions taken:"
+          echo "- Backend service rolled back to previous revision"
+          echo "- Frontend rollback attempted"
+          echo "- Development team should be notified"
+
+          # Fail the deployment
+          exit 1
 
       - name: Post deployment notification
         if: always()

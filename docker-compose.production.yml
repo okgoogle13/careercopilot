@@ -10,8 +10,8 @@ services:
       POSTGRES_HOST_AUTH_METHOD: md5
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    # ports:
+      # - "5432:5432"  # SECURITY: Removed host port exposure - postgres only accessible within container network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U careercopilot -d careercopilot"]
       interval: 30s
@@ -28,8 +28,8 @@ services:
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-change-in-production}
     volumes:
       - redis_data:/data
-    ports:
-      - "6379:6379"
+    # ports:
+      # - "6379:6379"  # SECURITY: Removed host port exposure - redis only accessible within container network
     healthcheck:
       test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
       interval: 30s
