@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import Dict, List, Optional
 
 from app.core.ai_config import get_ai_config
-from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
+from app.core.ai_error_handling import with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
 from pydantic import BaseModel, Field
 
@@ -18,9 +18,7 @@ from .ksc_generator import STAR_Response, generateKscResponse
 
 # Import required flows
 from .resume_intelligence_pipeline import (
-    ResumeAnalysisResult,
     ResumeIntelligenceReport,
-    analyze_resume_comprehensive,
     generate_resume_intelligence_report,
 )
 from .smart_cover_letter_system import (
@@ -53,12 +51,20 @@ gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
 class TailoredResumeResult(BaseModel):
     """Result structure for tailored resume generation"""
 
-    tailored_content: str = Field(description="Tailored resume content optimized for the job")
-    original_score: int = Field(description="Original resume analysis score", ge=0, le=100)
-    tailored_score: int = Field(description="Improved score after tailoring", ge=0, le=100)
+    tailored_content: str = Field(
+        description="Tailored resume content optimized for the job"
+    )
+    original_score: int = Field(
+        description="Original resume analysis score", ge=0, le=100
+    )
+    tailored_score: int = Field(
+        description="Improved score after tailoring", ge=0, le=100
+    )
     improvements_made: List[str] = Field(description="Specific improvements applied")
     keyword_matches: List[str] = Field(description="Job keywords incorporated")
-    competitive_advantages: List[str] = Field(description="Highlighted competitive strengths")
+    competitive_advantages: List[str] = Field(
+        description="Highlighted competitive strengths"
+    )
 
 
 class KSCResponsesResult(BaseModel):
@@ -80,9 +86,15 @@ class ApplicationPackageResult(BaseModel):
     success: bool = Field(description="Whether package generation succeeded")
 
     # Core components
-    tailored_resume: Optional[TailoredResumeResult] = Field(description="Tailored resume result")
-    cover_letter: Optional[SmartCoverLetter] = Field(description="Generated cover letter")
-    ksc_responses: Optional[KSCResponsesResult] = Field(description="KSC responses if applicable")
+    tailored_resume: Optional[TailoredResumeResult] = Field(
+        description="Tailored resume result"
+    )
+    cover_letter: Optional[SmartCoverLetter] = Field(
+        description="Generated cover letter"
+    )
+    ksc_responses: Optional[KSCResponsesResult] = Field(
+        description="KSC responses if applicable"
+    )
 
     # Supporting analysis
     resume_intelligence: Optional[ResumeIntelligenceReport] = Field(
@@ -93,23 +105,37 @@ class ApplicationPackageResult(BaseModel):
     )
 
     # Package metadata
-    job_match_score: int = Field(description="Overall job match score (0-100)", ge=0, le=100)
-    application_strength: str = Field(description="excellent, strong, good, fair, or weak")
+    job_match_score: int = Field(
+        description="Overall job match score (0-100)", ge=0, le=100
+    )
+    application_strength: str = Field(
+        description="excellent, strong, good, fair, or weak"
+    )
     competitive_positioning: List[str] = Field(description="Key competitive advantages")
     success_probability: int = Field(
         description="Estimated application success probability", ge=0, le=100
     )
 
     # Recommendations
-    application_strategy: List[str] = Field(description="Strategic recommendations for application")
-    interview_prep_focus: List[str] = Field(description="Key areas for interview preparation")
-    follow_up_recommendations: List[str] = Field(description="Follow-up strategy recommendations")
+    application_strategy: List[str] = Field(
+        description="Strategic recommendations for application"
+    )
+    interview_prep_focus: List[str] = Field(
+        description="Key areas for interview preparation"
+    )
+    follow_up_recommendations: List[str] = Field(
+        description="Follow-up strategy recommendations"
+    )
 
     # Processing details
     generation_timestamp: str = Field(description="When package was generated")
     processing_time_seconds: float = Field(description="Total processing time")
-    components_generated: List[str] = Field(description="Successfully generated components")
-    error_details: List[str] = Field(default_factory=list, description="Any errors encountered")
+    components_generated: List[str] = Field(
+        description="Successfully generated components"
+    )
+    error_details: List[str] = Field(
+        default_factory=list, description="Any errors encountered"
+    )
 
 
 @genkit_flow(output_schema=ApplicationPackageResult)
@@ -148,10 +174,14 @@ def generate_application_package(
     try:
         # Input validation
         if not job_description or not isinstance(job_description, str):
-            raise InputValidationError("Job description is required and must be a string")
+            raise InputValidationError(
+                "Job description is required and must be a string"
+            )
 
         if not user_profile or not isinstance(user_profile, dict):
-            raise InputValidationError("User profile is required and must be a dictionary")
+            raise InputValidationError(
+                "User profile is required and must be a dictionary"
+            )
 
         # Sanitize inputs
         sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
@@ -178,12 +208,16 @@ def generate_application_package(
                     resume_content=resume_content,
                     target_industry=sanitized_profile.get("target_industry"),
                     career_goals=sanitized_profile.get("career_goals"),
-                    experience_level=sanitized_profile.get("experience_level", "mid_level"),
+                    experience_level=sanitized_profile.get(
+                        "experience_level", "mid_level"
+                    ),
                 )
                 result.components_generated.append("resume_intelligence")
                 print("✓ Resume intelligence analysis completed")
             else:
-                print("⚠ No resume content found in profile, skipping resume intelligence")
+                print(
+                    "⚠ No resume content found in profile, skipping resume intelligence"
+                )
 
         except Exception as e:
             result.error_details.append(f"Resume intelligence failed: {str(e)}")
@@ -230,7 +264,9 @@ def generate_application_package(
         # Step 4: Generate Smart Cover Letter
         print("Step 4: Generating smart cover letter...")
         try:
-            company_info = result.company_research.dict() if result.company_research else None
+            company_info = (
+                result.company_research.dict() if result.company_research else None
+            )
 
             result.cover_letter = generate_smart_cover_letter(
                 candidate_profile=sanitized_profile,
@@ -252,7 +288,9 @@ def generate_application_package(
             ksc_criteria = _detect_ksc_criteria(sanitized_job_desc.sanitized_content)
 
             if ksc_criteria:
-                result.ksc_responses = _generate_ksc_responses(ksc_criteria, sanitized_profile)
+                result.ksc_responses = _generate_ksc_responses(
+                    ksc_criteria, sanitized_profile
+                )
                 result.components_generated.append("ksc_responses")
                 print(f"✓ Generated {len(ksc_criteria)} KSC responses")
             else:
@@ -273,7 +311,9 @@ def generate_application_package(
             print(f"✗ Strategy generation failed: {str(e)}")
 
         # Determine overall success
-        result.success = len(result.components_generated) >= 2  # At least 2 components must succeed
+        result.success = (
+            len(result.components_generated) >= 2
+        )  # At least 2 components must succeed
         result.processing_time_seconds = (datetime.now() - start_time).total_seconds()
 
         print("Application package generation completed:")
@@ -368,7 +408,9 @@ Respond with valid JSON matching the structure expected for tailored resume resu
     )
 
 
-def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCResponsesResult:
+def _generate_ksc_responses(
+    ksc_criteria: List[str], user_profile: Dict
+) -> KSCResponsesResult:
     """Generate STAR responses for detected KSC criteria."""
 
     generated_responses = []
@@ -376,7 +418,9 @@ def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCR
 
     for criterion in ksc_criteria[:5]:  # Limit to 5 criteria to avoid timeout
         try:
-            response = generateKscResponse(user_profile_data=user_profile, ksc_statement=criterion)
+            response = generateKscResponse(
+                user_profile_data=user_profile, ksc_statement=criterion
+            )
             generated_responses.append({criterion: response})
         except Exception as e:
             print(f"Failed to generate KSC response for '{criterion}': {str(e)}")
@@ -395,7 +439,9 @@ def _generate_ksc_responses(ksc_criteria: List[str], user_profile: Dict) -> KSCR
     )
 
 
-def _generate_application_strategy(result: ApplicationPackageResult, job_description: str):
+def _generate_application_strategy(
+    result: ApplicationPackageResult, job_description: str
+):
     """Generate comprehensive application strategy and recommendations."""
 
     # Calculate overall match score based on available components
@@ -474,7 +520,10 @@ def _extract_company_name(job_description: str) -> Optional[str]:
     lines = job_description.split("\n")[:10]  # Check first 10 lines
 
     for line in lines:
-        if any(keyword in line.lower() for keyword in ["company:", "employer:", "organization:"]):
+        if any(
+            keyword in line.lower()
+            for keyword in ["company:", "employer:", "organization:"]
+        ):
             # Extract text after the keyword
             for keyword in ["company:", "employer:", "organization:"]:
                 if keyword in line.lower():
@@ -526,12 +575,15 @@ def _detect_ksc_criteria(job_description: str) -> List[str]:
                 continue
 
             # End of criteria section (empty line or new section)
-            if in_criteria_section and (not line or line.lower().startswith("desirable")):
+            if in_criteria_section and (
+                not line or line.lower().startswith("desirable")
+            ):
                 break
 
             # Extract criteria (numbered or bulleted items)
             if in_criteria_section and (
-                line.startswith(("1.", "2.", "3.", "4.", "5.", "•", "-", "*")) or line[0].isdigit()
+                line.startswith(("1.", "2.", "3.", "4.", "5.", "•", "-", "*"))
+                or line[0].isdigit()
             ):
                 criterion = line.lstrip("0123456789.-•* ").strip()
                 if len(criterion) > 20:  # Filter out very short items

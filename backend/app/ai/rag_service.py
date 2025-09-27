@@ -71,7 +71,9 @@ class RAGService(BaseAIService):
         self.embedding_model = None
         self.index_endpoint = None
         self.local_embeddings_enabled = SENTENCE_TRANSFORMERS_AVAILABLE
-        self.dimension = self.config.get("dimension", 384)  # Default for all-MiniLM-L6-v2
+        self.dimension = self.config.get(
+            "dimension", 384
+        )  # Default for all-MiniLM-L6-v2
         self.batch_size = self.config.get("batch_size", 32)
 
         if self.is_enabled:
@@ -91,7 +93,9 @@ class RAGService(BaseAIService):
 
             # Initialize Vertex AI
             if not settings.GOOGLE_APPLICATION_CREDENTIALS:
-                logger.warning("GOOGLE_APPLICATION_CREDENTIALS not set, RAG will be limited")
+                logger.warning(
+                    "GOOGLE_APPLICATION_CREDENTIALS not set, RAG will be limited"
+                )
                 self.is_initialized = False
                 return
 
@@ -173,7 +177,9 @@ class RAGService(BaseAIService):
             query_embedding = (await self.get_embeddings([query]))[0]
 
             # Query the vector index
-            client = aiplatform.MatchingEngineIndexEndpoint(index_endpoint_name=self.index_endpoint)
+            client = aiplatform.MatchingEngineIndexEndpoint(
+                index_endpoint_name=self.index_endpoint
+            )
 
             # Execute the search
             response = client.match(

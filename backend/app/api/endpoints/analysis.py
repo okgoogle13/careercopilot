@@ -1,10 +1,13 @@
 # backend/app/api/v1/analysis.py (Revised)
 
 from app.core.dependencies import User, get_current_user
-
-# Import the flow's output model AND the frontend's expected response model
+from app.genkit_flows.advanced_job_matching import analyze_job_compatibility
 from app.genkit_flows.ats_scoring import AtsResult, atsScoring
 from app.genkit_flows.flow_decorator import run_flow_async
+from app.genkit_flows.resume_intelligence_pipeline import (
+    generate_resume_intelligence_report,
+)
+from app.genkit_flows.smart_content_optimizer import optimize_content_for_target
 from app.models import ATSScoreResponse, CategoryScore
 from fastapi import APIRouter, Body, Depends, HTTPException
 from pydantic import BaseModel
@@ -54,7 +57,11 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.keywordScore >= 80
-                        else ("warning" if flow_result.breakdown.keywordScore >= 60 else "poor")
+                        else (
+                            "warning"
+                            if flow_result.breakdown.keywordScore >= 60
+                            else "poor"
+                        )
                     ),
                     # We can use the main recommendations for each category or create more specific ones.
                     # For now, let's pass the main recommendations if the score is not 'good'.
@@ -70,7 +77,11 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.semanticScore >= 80
-                        else ("warning" if flow_result.breakdown.semanticScore >= 60 else "poor")
+                        else (
+                            "warning"
+                            if flow_result.breakdown.semanticScore >= 60
+                            else "poor"
+                        )
                     ),
                     suggestions=(
                         flow_result.recommendations
@@ -84,7 +95,11 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.formattingScore >= 80
-                        else ("warning" if flow_result.breakdown.formattingScore >= 60 else "poor")
+                        else (
+                            "warning"
+                            if flow_result.breakdown.formattingScore >= 60
+                            else "poor"
+                        )
                     ),
                     suggestions=(
                         flow_result.recommendations
@@ -108,12 +123,6 @@ async def create_ats_score_analysis(
 
 
 # Additional Genkit Flow Endpoints
-
-from app.genkit_flows.advanced_job_matching import analyze_job_compatibility
-from app.genkit_flows.resume_intelligence_pipeline import (
-    generate_resume_intelligence_report,
-)
-from app.genkit_flows.smart_content_optimizer import optimize_content_for_target
 
 
 class JobMatchingRequest(BaseModel):
@@ -160,7 +169,9 @@ async def analyze_job_match(
         return result
     except Exception as e:
         print(f"Job matching analysis error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to analyze job compatibility")
+        raise HTTPException(
+            status_code=500, detail="Failed to analyze job compatibility"
+        )
 
 
 @router.post(
@@ -217,4 +228,6 @@ async def generate_resume_intelligence(
         return result
     except Exception as e:
         print(f"Resume intelligence error: {e}")
-        raise HTTPException(status_code=500, detail="Failed to generate resume intelligence report")
+        raise HTTPException(
+            status_code=500, detail="Failed to generate resume intelligence report"
+        )

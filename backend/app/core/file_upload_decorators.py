@@ -8,7 +8,7 @@ repeated validation logic across different endpoints.
 import logging
 import os
 from functools import wraps
-from typing import Any, Callable, List, Optional, Set
+from typing import Callable, List, Optional, Set
 
 from app.core.config import settings
 from fastapi import HTTPException, UploadFile, status
@@ -18,8 +18,6 @@ logger = logging.getLogger(__name__)
 
 class FileValidationError(Exception):
     """Custom exception for file validation errors."""
-
-    pass
 
 
 class FileUploadConfig:
@@ -63,7 +61,9 @@ class FileUploadConfig:
             "text/markdown",
             "application/rtf",
         }
-        self.max_file_size_mb = max_file_size_mb or getattr(settings, "max_file_size_mb", 10)
+        self.max_file_size_mb = max_file_size_mb or getattr(
+            settings, "max_file_size_mb", 10
+        )
         self.max_files = max_files
         self.require_filename = require_filename
         self.allowed_filename_patterns = allowed_filename_patterns or []
@@ -103,7 +103,9 @@ def validate_file_upload(
         # Check forbidden patterns
         for pattern in config.forbidden_filename_patterns:
             if re.match(pattern, file.filename, re.IGNORECASE):
-                raise FileValidationError(f"Filename contains forbidden pattern: {pattern}")
+                raise FileValidationError(
+                    f"Filename contains forbidden pattern: {pattern}"
+                )
 
         # Check allowed patterns (if specified)
         if config.allowed_filename_patterns:
@@ -169,7 +171,8 @@ def validate_multiple_files(
 
     if len(files) > config.max_files:
         raise FileValidationError(
-            f"Too many files. Maximum allowed: {config.max_files}, " f"received: {len(files)}"
+            f"Too many files. Maximum allowed: {config.max_files}, "
+            f"received: {len(files)}"
         )
 
     # Validate each file
@@ -261,12 +264,16 @@ def require_valid_file_upload(
 
             except FileValidationError as e:
                 logger.warning(f"File validation failed: {str(e)}")
-                raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST, detail=str(e)
+                )
             except HTTPException:
                 # Re-raise HTTP exceptions
                 raise
             except Exception as e:
-                logger.error(f"Unexpected error in file validation: {str(e)}", exc_info=True)
+                logger.error(
+                    f"Unexpected error in file validation: {str(e)}", exc_info=True
+                )
                 raise HTTPException(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                     detail="Internal server error during file validation",
@@ -354,7 +361,9 @@ def require_valid_document_upload(
     }
 
     allowed_content_types = {
-        content_type_mapping[ext] for ext in allowed_types if ext in content_type_mapping
+        content_type_mapping[ext]
+        for ext in allowed_types
+        if ext in content_type_mapping
     }
 
     config = FileUploadConfig(

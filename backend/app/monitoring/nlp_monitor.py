@@ -8,7 +8,7 @@ including metrics collection and health checks.
 import logging
 import time
 from functools import wraps
-from typing import Any, Callable, Dict, Optional
+from typing import Any, Dict, Optional
 
 import psutil
 
@@ -67,7 +67,9 @@ class NLPMonitor:
 
         return decorator
 
-    def record_metric(self, name: str, value: float, labels: Optional[Dict[str, str]] = None):
+    def record_metric(
+        self, name: str, value: float, labels: Optional[Dict[str, str]] = None
+    ):
         """Record a metric with optional labels."""
         if name not in self._metrics:
             self._metrics[name] = []

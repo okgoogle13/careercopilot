@@ -6,8 +6,6 @@ with various AI response formats and edge cases.
 """
 
 import json
-from typing import Any, Dict
-from unittest.mock import Mock, patch
 
 import pytest
 from app.core.ai_flow_integration import (
@@ -21,16 +19,12 @@ from app.core.ai_response_validation import (
     AIResponseValidator,
     ATSResult,
     ATSScoreBreakdown,
-    JobRequirements,
-    KSCResponseComplete,
     SemanticAnalysis,
     STARResponse,
     ValidationErrorType,
     ValidationResult,
     create_fallback_semantic_analysis,
     create_fallback_star_response,
-    default_validator,
-    validate_ai_response,
 )
 
 
@@ -86,7 +80,9 @@ class TestAIResponseValidator:
             "result": "Fallback result",
         }
 
-        result = self.validator.validate_response(invalid_response, "star_response", fallback_data)
+        result = self.validator.validate_response(
+            invalid_response, "star_response", fallback_data
+        )
 
         assert result.is_valid
         assert isinstance(result.parsed_data, STARResponse)
@@ -115,7 +111,9 @@ class TestAIResponseValidator:
         empty_responses = ["", "   ", None]
 
         for empty_response in empty_responses:
-            result = self.validator.validate_response(empty_response or "", "star_response")
+            result = self.validator.validate_response(
+                empty_response or "", "star_response"
+            )
             assert not result.is_valid
             assert result.error_type == ValidationErrorType.EMPTY_RESPONSE
 
@@ -179,7 +177,9 @@ class TestAIResponseValidator:
             }
         )
 
-        result = self.validator.validate_response(response_with_warnings, "star_response")
+        result = self.validator.validate_response(
+            response_with_warnings, "star_response"
+        )
 
         # This should fail validation due to empty required field
         assert not result.is_valid
@@ -283,7 +283,9 @@ class TestAIFlowIntegration:
         """Test extracting data from ValidationResult"""
         validation_result = ValidationResult(
             is_valid=True,
-            parsed_data=STARResponse(situation="Test", task="Test", action="Test", result="Test"),
+            parsed_data=STARResponse(
+                situation="Test", task="Test", action="Test", result="Test"
+            ),
         )
 
         extracted_data = extract_validated_data(validation_result)
@@ -398,7 +400,9 @@ class TestEdgeCases:
 
     def test_unknown_schema_error(self):
         """Test error for unknown schema"""
-        result = self.validator.validate_response('{"test": "data"}', "nonexistent_schema")
+        result = self.validator.validate_response(
+            '{"test": "data"}', "nonexistent_schema"
+        )
 
         assert not result.is_valid
         assert "Unknown schema" in result.error_message
@@ -484,7 +488,7 @@ class TestPerformanceAndMemory:
         )
 
         # Perform multiple validations
-        for i in range(100):
+        for _i in range(100):
             result = validator.validate_response(test_response, "star_response")
             assert result.is_valid
 
@@ -509,7 +513,7 @@ class TestRealAIIntegration:
 
 if __name__ == "__main__":
     # Run basic tests if script is executed directly
-    import asyncio
+    pass
 
     print("Running basic AI Response Validation tests...")
 
@@ -529,7 +533,9 @@ if __name__ == "__main__":
 
     if result.is_valid:
         print("✅ Basic validation test passed")
-        print(f"   Validated STAR response with {len(result.validation_warnings)} warnings")
+        print(
+            f"   Validated STAR response with {len(result.validation_warnings)} warnings"
+        )
     else:
         print("❌ Basic validation test failed")
         print(f"   Error: {result.error_message}")
@@ -543,7 +549,9 @@ if __name__ == "__main__":
         "result": "Fallback result",
     }
 
-    result = validator.validate_response(invalid_response, "star_response", fallback_data)
+    result = validator.validate_response(
+        invalid_response, "star_response", fallback_data
+    )
 
     if result.is_valid and result.metadata.get("fallback_used"):
         print("✅ Fallback test passed")

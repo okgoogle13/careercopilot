@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { ThemeWrapper } from "./components/ThemeWrapper";
 import { Navbar } from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
@@ -167,7 +167,6 @@ export default function App() {
   const [selectedDocumentType, setSelectedDocumentType] = useState<
     "resume" | "cover-letter" | "selection-criteria" | null
   >(null);
-  const [showDemoNav, setShowDemoNav] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // User state to track onboarding progress
@@ -598,89 +597,6 @@ export default function App() {
           )}
           <div className="flex-1 overflow-auto">{renderContent()}</div>
         </div>
-
-        {/* Enhanced Demo Navigation */}
-        {showDemoNav && (
-          <div className="fixed bottom-4 right-4 z-50">
-            <Card className="bg-card border-border shadow-xl max-w-sm">
-              <div className="p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <Navigation className="w-4 h-4 text-primary" />
-                    <h3 className="text-sm font-medium text-card-foreground">
-                      Wireframe Navigator
-                    </h3>
-                  </div>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowDemoNav(false)}
-                    className="h-6 w-6 p-0 text-muted-foreground hover:text-foreground"
-                  >
-                    ×
-                  </Button>
-                </div>
-
-                <div className="space-y-2 mb-3">
-                  <div className="flex items-center gap-2 p-2 bg-primary/10 rounded-md">
-                    <CurrentViewIcon className="w-3 h-3 text-primary" />
-                    <div>
-                      <p className="text-xs font-medium text-primary">{currentViewInfo.label}</p>
-                      <p className="text-xs text-muted-foreground">{currentViewInfo.description}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-1 max-h-60 overflow-y-auto">
-                  <p className="text-xs text-muted-foreground mb-2">Complete User Flow:</p>
-                  {demoViews.slice(0, 10).map((view) => {
-                    const ViewIcon = view.icon;
-                    return (
-                      <Button
-                        key={view.id}
-                        variant="ghost"
-                        size="sm"
-                        className={`w-full justify-start gap-2 h-8 text-xs ${
-                          currentView === view.id
-                            ? "bg-primary/20 text-primary"
-                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                        }`}
-                        onClick={() => handleDemoNavigation(view.id)}
-                      >
-                        <ViewIcon className="w-3 h-3" />
-                        {view.label}
-                        {currentView === view.id && (
-                          <Badge variant="secondary" className="ml-auto h-4 px-1 text-xs">
-                            Current
-                          </Badge>
-                        )}
-                      </Button>
-                    );
-                  })}
-                  {demoViews.length > 10 && (
-                    <div className="pt-2 border-t border-border">
-                      <p className="text-xs text-muted-foreground">More views available...</p>
-                    </div>
-                  )}
-                </div>
-
-                <div className="mt-3 pt-3 border-t border-border">
-                  <p className="text-xs text-muted-foreground">Career Copilot user journey demo</p>
-                </div>
-              </div>
-            </Card>
-          </div>
-        )}
-
-        {/* Show Demo Nav Button when hidden */}
-        {!showDemoNav && (
-          <Button
-            className="fixed bottom-4 right-4 z-50 rounded-full h-12 w-12 p-0 bg-primary hover:bg-primary/90"
-            onClick={() => setShowDemoNav(true)}
-          >
-            <Navigation className="w-5 h-5" />
-          </Button>
-        )}
       </div>
     </ThemeWrapper>
   );

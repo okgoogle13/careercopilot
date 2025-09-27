@@ -13,6 +13,11 @@ from typing import Dict, List, Optional
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
+from app.genkit_flows.ksc_generator import generateKscResponse
+from app.genkit_flows.resume_intelligence_pipeline import (
+    generate_resume_intelligence_report,
+)
+from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 
@@ -40,14 +45,6 @@ if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("goo
 
 gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
 
-from app.genkit_flows.ksc_generator import generateKscResponse
-
-# Import existing flow functions
-from app.genkit_flows.resume_intelligence_pipeline import (
-    generate_resume_intelligence_report,
-)
-from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
-
 
 # Data Models
 class ApplicationPackage(BaseModel):
@@ -57,7 +54,9 @@ class ApplicationPackage(BaseModel):
         description="Key Selection Criteria responses if applicable"
     )
 
-    application_strategy: Dict = Field(description="Strategic guidance for this application")
+    application_strategy: Dict = Field(
+        description="Strategic guidance for this application"
+    )
     submission_checklist: List[str] = Field(description="Final submission checklist")
     follow_up_plan: Dict = Field(description="Post-application follow-up strategy")
 
@@ -67,8 +66,12 @@ class ApplicationPackage(BaseModel):
 class KscDetectionResult(BaseModel):
     has_ksc_requirements: bool = Field(description="Whether KSC responses are required")
     detected_criteria: List[str] = Field(description="List of detected KSC statements")
-    confidence_score: int = Field(description="Confidence in KSC detection (0-100)", ge=0, le=100)
-    extraction_notes: List[str] = Field(description="Notes about the extraction process")
+    confidence_score: int = Field(
+        description="Confidence in KSC detection (0-100)", ge=0, le=100
+    )
+    extraction_notes: List[str] = Field(
+        description="Notes about the extraction process"
+    )
 
 
 @genkit_flow(output_schema=KscDetectionResult)
@@ -85,7 +88,9 @@ def detect_ksc_requirements(job_description: str) -> KscDetectionResult:
     """
     try:
         if not job_description or not isinstance(job_description, str):
-            raise InputValidationError("Job description is required and must be a string")
+            raise InputValidationError(
+                "Job description is required and must be a string"
+            )
 
         sanitized_job = InputSanitizer.sanitize_text_input(job_description)
 

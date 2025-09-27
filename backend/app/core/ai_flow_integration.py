@@ -5,10 +5,9 @@ Helper functions and decorators to integrate the AI response validation utility
 into existing flows with minimal code changes.
 """
 
-import json
 import logging
 from functools import wraps
-from typing import Any, Callable, Dict, Optional, Type, TypeVar, Union
+from typing import Any, Callable, Dict, Optional, Type, TypeVar
 
 from .ai_error_handling import AIError, AIErrorType
 from .ai_response_validation import (
@@ -79,7 +78,9 @@ def validate_ai_flow_response(
                         return ValidationResult(
                             is_valid=True,
                             parsed_data=fallback_instance,
-                            validation_warnings=["Using fallback data due to function error"],
+                            validation_warnings=[
+                                "Using fallback data due to function error"
+                            ],
                             metadata={"fallback_used": True, "original_error": str(e)},
                         )
                     except Exception:
@@ -198,7 +199,9 @@ def create_fallback_response(
 
             return schema_class(**required_fields)
         except Exception:
-            raise ValueError(f"Cannot create fallback for schema {schema_class.__name__}")
+            raise ValueError(
+                f"Cannot create fallback for schema {schema_class.__name__}"
+            )
 
 
 class AIFlowManager:
@@ -265,7 +268,9 @@ class AIFlowManager:
                     return ValidationResult(
                         is_valid=True,
                         parsed_data=fallback_instance,
-                        validation_warnings=["Using fallback data due to execution error"],
+                        validation_warnings=[
+                            "Using fallback data due to execution error"
+                        ],
                         metadata={"fallback_used": True, "original_error": str(e)},
                     )
                 except Exception:
@@ -340,7 +345,7 @@ def create_migration_wrapper(
                         parsed_data=validated_data,
                         metadata={"migration_wrapper": True},
                     )
-                except Exception as e:
+                except Exception:
                     if fallback_data:
                         fallback_instance = schema_class(**fallback_data)
                         return ValidationResult(
@@ -353,7 +358,9 @@ def create_migration_wrapper(
 
             # If result is a string, validate it
             elif isinstance(result, str):
-                return default_validator.validate_and_parse(result, schema_class, fallback_data)
+                return default_validator.validate_and_parse(
+                    result, schema_class, fallback_data
+                )
 
             else:
                 raise ValueError(f"Unexpected result type: {type(result)}")

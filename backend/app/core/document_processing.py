@@ -9,8 +9,7 @@ processing, and RAG document handling.
 import json
 import logging
 from abc import ABC, abstractmethod
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, List, Optional, Type, TypeVar
 
 from app.core.ai_client import AIRequest, get_ai_client
 from app.core.ai_error_handling import AIError, AIErrorType
@@ -25,8 +24,6 @@ T = TypeVar("T", bound=BaseModel)
 
 class DocumentProcessingError(Exception):
     """Custom exception for document processing errors."""
-
-    pass
 
 
 class PromptTemplate(BaseModel):
@@ -65,12 +62,10 @@ class DocumentProcessor(ABC):
     @abstractmethod
     def get_prompt_template(self) -> PromptTemplate:
         """Return the prompt template for this processor."""
-        pass
 
     @abstractmethod
     def parse_response(self, response: str) -> BaseModel:
         """Parse the AI response into a structured result."""
-        pass
 
     def validate_input(self, **kwargs) -> Dict[str, Any]:
         """Validate and sanitize input parameters."""
@@ -109,7 +104,9 @@ async def process_document(
         raise DocumentProcessingError("File content must be a non-empty string")
 
     if len(file_content.strip()) < 10:
-        raise DocumentProcessingError("File content is too short for meaningful processing")
+        raise DocumentProcessingError(
+            "File content is too short for meaningful processing"
+        )
 
     try:
         # Step 1: Format the prompt
@@ -134,7 +131,9 @@ async def process_document(
         raise DocumentProcessingError(f"Failed to process document: {str(e)}") from e
 
 
-async def _make_ai_request(prompt: str, model: str, max_tokens: int, temperature: float) -> str:
+async def _make_ai_request(
+    prompt: str, model: str, max_tokens: int, temperature: float
+) -> str:
     """Make an AI request with proper error handling."""
     try:
         ai_client = get_ai_client()
@@ -341,7 +340,9 @@ Format your response as a JSON object with the following structure:
 
 
 # Convenience functions for common operations
-async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
+async def process_resume(
+    resume_text: str, config: Optional[Dict[str, Any]] = None
+) -> Any:
     """Process a resume using the standard resume analysis template."""
     from app.ai.resume_service import ResumeAnalysisResult
 
@@ -353,7 +354,9 @@ async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = No
     )
 
 
-async def process_job_description(job_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
+async def process_job_description(
+    job_text: str, config: Optional[Dict[str, Any]] = None
+) -> Any:
     """Process a job description using the standard job analysis template."""
 
     # This would need a JobDescriptionResult model to be defined

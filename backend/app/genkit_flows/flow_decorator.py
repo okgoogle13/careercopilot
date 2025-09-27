@@ -7,7 +7,7 @@ Handles common setup logic including model initialization, error handling, and f
 
 import functools
 import logging
-from typing import Any, Callable, Optional, Type, TypeVar, Union
+from typing import Any, Callable, Optional, Type, TypeVar
 
 from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
 from pydantic import BaseModel
@@ -147,7 +147,9 @@ def async_genkit_flow(
             if require_model:
                 model = get_model()
                 if not model:
-                    error_msg = f"Genkit model not available for async flow: {flow_name}"
+                    error_msg = (
+                        f"Genkit model not available for async flow: {flow_name}"
+                    )
                     logger.error(error_msg)
                     raise RuntimeError(error_msg)
 
@@ -161,7 +163,9 @@ def async_genkit_flow(
 
             except Exception as e:
                 if enable_logging:
-                    logger.error(f"Async flow {flow_name} failed: {str(e)}", exc_info=True)
+                    logger.error(
+                        f"Async flow {flow_name} failed: {str(e)}", exc_info=True
+                    )
                 raise
 
         # Apply Genkit decorator if available and enabled
