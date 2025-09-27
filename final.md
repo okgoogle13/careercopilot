@@ -1,57 +1,147 @@
-Role: DevOps & QA Asset Generation AI.
-Objective: Generate the necessary configurations, test plans, and documentation to fully integrate, deploy, and monitor the cost-optimization code created in the clean-start branch.
-Phase 4: Integration & Infrastructure Plan
-1. Generate Pull Request Template:
-Create a Markdown template for a Pull Request to merge clean-start into main. The description must include a summary of changes and a checklist for the reviewer.
-2. Generate Infrastructure as Code (IaC):
-Produce a Terraform (.tf) file to provision a Google Cloud Memorystore for Redis instance. The configuration should be production-ready but minimal.
-Resource: google_redis_instance
-Tier: BASIC
-Memory: 1 GB
-Region: us-central1
-Outputs: The host and port of the Redis instance.
-3. Generate Secret Management Commands:
-Produce a shell script using gcloud CLI to create secrets in Google Secret Manager for the Redis host and port, ready for the application to consume.
-4. Generate Code Integration Guide:
-Create a Markdown file (REFACTORING_GUIDE.md) that provides clear instructions for a developer on how to integrate the new services. It must include:
-A "Find & Replace" section showing how to locate old direct LLM calls.
-A code snippet demonstrating the "new" way to call the dispatch_llm_call function.
-Instructions on how to correctly initialize the redis_client using environment variables.
-Phase 5: Testing & Validation Plan
-1. Generate Test Plan Document:
-Create a comprehensive TEST_PLAN.md document with the following sections:
-Functional Testing: A checklist of 5-7 key user stories to validate (e.g., "User successfully parses a resume and sees correct keyword extraction," "User receives relevant job matches").
-Cache Validation: A step-by-step procedure to confirm the Redis cache is working.
-Start the backend with logs visible.
-Make an API request for a complex task.
-Observe the "Cache MISS" log.
-Immediately repeat the exact same request.
-Assert that a "Cache HIT" log is observed and the response is faster.
-Cost Validation: Instructions on where in the Google Cloud Console to monitor API usage (Vertex AI -> Dashboard) to confirm a reduction in calls to expensive models.
-Phase 6: Deployment & Monitoring Plan
-1. Generate Deployment Checklist:
-Create a DEPLOYMENT_CHECKLIST.md for a production release. It must include:
+Phase 1: Finalize Git Merge
+Action: Generate the git commands to merge the feature branch into main, push the result, and remove the local and remote feature branch.
+code
+Bash
+#!/bin/bash
+# Merges the clean-start branch and cleans up.
 
-clean-start branch has been merged into main.
+git checkout main
+git pull origin main
+git merge --ff-only clean-start
+git push origin main
+git branch -d clean-start
+git push origin --delete clean-start
 
-Production Memorystore for Redis instance is provisioned and healthy.
+echo ">>> 'clean-start' branch successfully merged and cleaned up."
+Phase 2: Execute Infrastructure & Secrets Provisioning
+Action: Generate a single shell script execute_infra_setup.sh that applies the Terraform configuration and runs the secret setup script in the correct sequence.
+code
+Bash
+#!/bin/bash
+# Provisions Redis via Terraform and configures secrets.
 
-Production secrets (e.g., REDIS_HOST, REDIS_PORT) are populated in Secret Manager.
+echo ">>> Provisioning Infrastructure..."
+cd ./infrastructure/terraform/
+terraform init
+terraform apply -auto-approve
 
-All tests in TEST_PLAN.md have passed in the staging environment.
+echo ">>> Configuring Secrets..."
+cd ../../scripts/
+./setup-redis-secrets.sh
 
-Final cost analysis of staging environment shows expected savings.
-2. Generate Monitoring Dashboard Blueprint:
-Create a Markdown section describing the widgets to add to a Google Cloud Monitoring Dashboard for this service.
-Widget 1: AI Cost Efficiency
-Type: Chart
-Metric: Vertex AI API Call Count, grouped by model_name.
-Goal: Visualize the shift from expensive to cheap models.
-Widget 2: Cache Performance
-Type: Chart
-Metric: Memorystore - CPU Utilization.
-Goal: Monitor the health and load of the Redis cache.
-Widget 3: Application Health
-Type: Chart
-Metric: Cloud Run - Request Count, grouped by response_code (especially 5xx errors).
-Goal: Ensure application stability has not been compromised.
+echo ">>> Infrastructure and secrets are live."
+Phase 3: Automate Codebase Refactoring
+Action: Generate a shell script run_code_refactor.sh that uses sed to find all instances of the old, direct LLM calls and replace them with the new dispatch_llm_call function, based on the REFACTORING_GUIDE.md.
+code
+Bash
+#!/bin/bash
+# Finds and replaces direct LLM calls with the new dispatcher service.
+
+# This is a simplified pattern. A real implementation might need more complex regex.
+OLD_CALL_PATTERN="vendor.gemini.call("
+NEW_CALL_PATTERN="dispatch_llm_call(task_type=\"<REPLACE_WITH_TASK_TYPE>\", "
+
+echo ">>> Starting code refactoring..."
+
+# Use git grep to find files and sed to replace in-place
+git grep -l "$OLD_CALL_PATTERN" | while read -r file
+do
+  echo "Refactoring file: $file"
+  # Create a backup before modifying
+  sed -i.bak "s/$OLD_CALL_PATTERN/$NEW_CALL_PATTERN/g" "$file"
+done
+
+echo ">>> Refactoring complete. Manual review required to set 'task_type' and remove .bak files."
+Phase 4: Generate Validation Test Script
+Action: Generate a shell script run_validation_tests.sh that automates the cache validation steps from TEST_PLAN.md. It should make an API call, check logs for a "Cache MISS", make the same call again, and assert a "Cache HIT".
+code
+Bash
+#!/bin/bash
+# Simulates the cache validation test.
+
+API_ENDPOINT="http://localhost:8080/api/v1/generate-cover-letter"
+LOG_FILE="/var/log/app.log"
+PAYLOAD='{"job_id": "123", "user_id": "456"}'
+
+echo ">>> Running Cache Validation Test..."
+
+# Clear logs or start monitoring
+echo "--- Test Run Start ---" >> $LOG_FILE
+
+# 1. First call (should be a MISS)
+echo "Making first request..."
+curl -X POST -H "Content-Type: application/json" -d "$PAYLOAD" $API_ENDPOINT
+sleep 2 # Allow time for log flush
+
+# 2. Verify the MISS
+if ! grep -q "Cache MISS" "$LOG_FILE"; then
+  echo "FAIL: 'Cache MISS' not found in logs on first call."
+  exit 1
+fi
+
+# 3. Second call (should be a HIT)
+echo "Making second request..."
+curl -X POST -H "Content-Type: application/json" -d "$PAYLOAD" $API_ENDPOINT
+sleep 2
+
+# 4. Verify the HIT
+if ! grep -q "Cache HIT" "$LOG_FILE"; then
+  echo "FAIL: 'Cache HIT' not found in logs on second call."
+  exit 1
+fi
+
+echo "SUCCESS: Cache validation test passed."
+Phase 5: Generate Deployment & Monitoring Assets
+1. Action: Generate the final production deployment command.
+code
+Bash
+# Deploys the application to Google Cloud Run
+gcloud run deploy careercopilot-service \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --set-secrets="REDIS_HOST=REDIS_HOST:latest,REDIS_PORT=REDIS_PORT:latest"
+2. Action: Generate the dashboard.json file for a Google Cloud Monitoring dashboard based on the MONITORING_DASHBOARD.md blueprint.
+code
+JSON
+{
+  "displayName": "CareerCopilot - AI Cost & Performance",
+  "gridLayout": {
+    "columns": "2",
+    "widgets": [
+      {
+        "title": "AI API Calls by Model (Cost Proxy)",
+        "xyChart": {
+          "dataSets": [{
+            "timeSeriesQuery": {
+              "timeSeriesFilter": {
+                "filter": "metric.type=\\"serviceruntime.googleapis.com/api/request_count\\" resource.type=\\"consumed_api\\" resource.label.service=\\"vertexai.googleapis.com\\"",
+                "aggregation": { "alignmentPeriod": "3600s", "perSeriesAligner": "ALIGN_RATE" }
+              }
+            },
+            "plotType": "STACKED_BAR"
+          }],
+          "chartOptions": { "mode": "COLOR" }
+        }
+      },
+      {
+        "title": "Redis Cache - CPU Utilization",
+        "xyChart": {
+          "dataSets": [{
+            "timeSeriesQuery": { "timeSeriesFilter": { "filter": "metric.type=\\"redis.googleapis.com/instance/cpu/utilization\\" resource.type=\\"redis_instance\\"" }}
+          }]
+        }
+      },
+      {
+        "title": "Application Health - Server Errors (5xx)",
+        "xyChart": {
+          "dataSets": [{
+            "timeSeriesQuery": { "timeSeriesFilter": { "filter": "metric.type=\\"run.googleapis.com/request_count\\" resource.type=\\"cloud_run_revision\\" metric.label.response_code_class=\\"5xx\\"" }}
+          }]
+        }
+      }
+    ]
+  }
+}
+Use Arrow Up and Arrow Down to select a turn, Enter to jump to it, and Escape to return to the chat.
+Start typing a prompt
