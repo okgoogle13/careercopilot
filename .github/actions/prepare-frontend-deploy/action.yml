@@ -39,9 +39,11 @@ runs:
         if [ -d "frontend/dist" ] && [ "$(ls -A frontend/dist)" ]; then
           echo "found=true" >> $GITHUB_OUTPUT
           echo "✅ Frontend artifacts downloaded successfully"
+          ls -la frontend/dist/
         else
           echo "found=false" >> $GITHUB_OUTPUT
-          echo "❌ Frontend artifacts not found or empty"
+          echo "❌ Frontend artifacts not found or empty - will build from source"
+          echo "ℹ️  Note: Artifacts are only available from the same workflow run"
         fi
 
     - name: Fallback build
