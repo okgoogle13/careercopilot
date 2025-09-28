@@ -1,50 +1,121 @@
-# .github/workflows/firebase-ci.yml
+# .github/workflows/ci.yml
 
-name: Build and Test Firebase Project
+name: CI - Build and Test
 
-# This workflow runs on pushes to the main branch and any pull request targeting main.
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+      - develop
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
+      - develop
 
-# Enforces read-only permissions for the GITHUB_TOKEN to enhance security.
 permissions:
   contents: read
+  actions: read
+
+env:
+  NODE_VERSION: '22'
+  PYTHON_VERSION: '3.13'
 
 jobs:
-  build_and_test:
-    name: Build, Audit & Test
+  build-and-test:
+    name: Build, Lint, & Test Full Stack
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js v20
+      - name: Set up Node.js for Frontend
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'yarn'
 
-      - name: Get Yarn Cache Directory Path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Node Modules
-        uses: actions/cache@v4
-        id: yarn-cache
+      - name: Set up Python for Backend
+        uses: actions/setup-python@v5
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: 'pip'
+          cache-dependency-path: 'backend/requirements.txt'
 
-      - name: Install Dependencies
+      ## ----------------- FRONTEND VALIDATION -----------------
+      - name: 🧪 Install Frontend Dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Scan for Vulnerabilities
+      - name: 🧹 Lint Frontend Code
+        run: yarn lint
+
+      - name: 🛡️ Scan Frontend for Vulnerabilities
         run: yarn audit
 
-      - name: Run Tests
+      - name: 🔬 Run Frontend Tests
         run: yarn test
+
+      - name: 🏗️ Build Frontend Application
+        run: yarn build:frontend
+
+      - name: ✅ Verify Frontend Build
+        run: |
+          if [ ! -d "frontend/dist" ]; then
+            echo "❌ Frontend build failed - dist directory not found"
+            exit 1
+          fi
+          if [ ! -f "frontend/dist/index.html" ]; then
+            echo "❌ Frontend build failed - index.html not found"
+            exit 1
+          fi
+          echo "✅ Frontend build verification passed"
+
+      ## ----------------- BACKEND VALIDATION ------------------
+      - name: 🐍 Install Backend Dependencies
+        run: pip install -r requirements.txt
+        working-directory: ./backend
+
+      - name: 🧹 Lint Backend Code
+        run: |
+          pip install pylint
+          pylint $(git ls-files '*.py') || exit 0
+        working-directory: ./backend
+
+      - name: 🔬 Run Backend Tests
+        run: |
+          pip install pytest
+          pytest -v
+        working-directory: ./backend
+
+      - name: ✅ Verify Backend Structure
+        run: |
+          if [ ! -f "backend/main.py" ] && [ ! -f "backend/app/main.py" ]; then
+            echo "❌ Backend entry point not found"
+            exit 1
+          fi
+          echo "✅ Backend structure verification passed"
+
+      ## ----------------- ARTIFACT PACKAGING ------------------
+      - name: 📦 Upload Frontend Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: 📦 Upload Backend Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-source
+          path: backend/
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: 📊 Artifact Summary
+        run: |
+          echo "## 📦 Build Artifacts Created" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Frontend: Built and uploaded" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Backend: Source packaged and uploaded" >> $GITHUB_STEP_SUMMARY
+          echo "- 🕒 Retention: 7 days" >> $GITHUB_STEP_SUMMARY
