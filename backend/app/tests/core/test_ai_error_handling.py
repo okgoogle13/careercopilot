@@ -72,9 +72,7 @@ class TestAIOperationHandler:
 
     def test_calculate_delay(self):
         """Test delay calculation for retries."""
-        config = RetryConfig(
-            base_delay=1.0, exponential_base=2.0, max_delay=10.0, jitter=False
-        )
+        config = RetryConfig(base_delay=1.0, exponential_base=2.0, max_delay=10.0, jitter=False)
         handler = AIOperationHandler(config)
 
         # Test exponential backoff

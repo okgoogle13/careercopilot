@@ -7,9 +7,7 @@ from fastapi import HTTPException
 
 class JobsService:
     @staticmethod
-    async def compare_resume_to_job_and_save(
-        db, uid, document_id, job_description_text
-    ):
+    async def compare_resume_to_job_and_save(db, uid, document_id, job_description_text):
         try:
             # Step A: Analyze the job description
             job_analysis_str = await analyze_job_description.run(job_description_text)
@@ -17,10 +15,7 @@ class JobsService:
 
             # Step B: Fetch the user's resume text from Firestore
             doc_ref = (
-                db.collection("users")
-                .document(uid)
-                .collection("documents")
-                .document(document_id)
+                db.collection("users").document(uid).collection("documents").document(document_id)
             )
             doc = await doc_ref.get()
             if not doc.exists:
@@ -28,9 +23,7 @@ class JobsService:
 
             resume_text = doc.to_dict().get("extractedText")
             if not resume_text:
-                raise HTTPException(
-                    status_code=400, detail="Resume has no extracted text."
-                )
+                raise HTTPException(status_code=400, detail="Resume has no extracted text.")
 
             # Step C: Compare the resume to the job analysis
             comparison_result_str = await compare_resume_to_job.run(

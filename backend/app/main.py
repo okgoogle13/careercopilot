@@ -16,11 +16,7 @@ from firebase_admin import credentials
 settings = SecureSettings()
 
 # Configure structured logging
-configure_loguru(
-    environment=settings.ENV,
-    log_dir="logs",
-    service_name="careercopilot-api"
-)
+configure_loguru(environment=settings.ENV, log_dir="logs", service_name="careercopilot-api")
 
 # Get application logger
 logger = get_logger(__name__)

@@ -39,18 +39,13 @@ async def process_ats_score_task(user_id, document_id, resume_text, job_descript
         )
         # Save result to Firestore
         doc_ref = (
-            db.collection("users")
-            .document(user_id)
-            .collection("documents")
-            .document(document_id)
+            db.collection("users").document(user_id).collection("documents").document(document_id)
         )
         result = doc_ref.set({"ats_score_result": ats_analysis_result.data}, merge=True)
         # Await if set is a coroutine (for AsyncMock in tests), else just call
         if hasattr(result, "__await__"):
             await result
-        logger.info(
-            f"ATS score analysis completed for user {user_id}, document {document_id}"
-        )
+        logger.info(f"ATS score analysis completed for user {user_id}, document {document_id}")
     except Exception as e:
         logger.error(
             f"Background ATS score task failed for user {user_id}, document {document_id}: {e}"

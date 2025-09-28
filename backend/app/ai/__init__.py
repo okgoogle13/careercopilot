@@ -16,7 +16,7 @@ from .model_dispatcher import (
     get_model_recommendations,
     generate_cover_letter,
     optimize_resume,
-    extract_keywords
+    extract_keywords,
 )
 
 __all__ = [
@@ -28,5 +28,5 @@ __all__ = [
     "get_model_recommendations",
     "generate_cover_letter",
     "optimize_resume",
-    "extract_keywords"
+    "extract_keywords",
 ]

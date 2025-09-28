@@ -57,11 +57,7 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.keywordScore >= 80
-                        else (
-                            "warning"
-                            if flow_result.breakdown.keywordScore >= 60
-                            else "poor"
-                        )
+                        else ("warning" if flow_result.breakdown.keywordScore >= 60 else "poor")
                     ),
                     # We can use the main recommendations for each category or create more specific ones.
                     # For now, let's pass the main recommendations if the score is not 'good'.
@@ -77,11 +73,7 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.semanticScore >= 80
-                        else (
-                            "warning"
-                            if flow_result.breakdown.semanticScore >= 60
-                            else "poor"
-                        )
+                        else ("warning" if flow_result.breakdown.semanticScore >= 60 else "poor")
                     ),
                     suggestions=(
                         flow_result.recommendations
@@ -95,11 +87,7 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.formattingScore >= 80
-                        else (
-                            "warning"
-                            if flow_result.breakdown.formattingScore >= 60
-                            else "poor"
-                        )
+                        else ("warning" if flow_result.breakdown.formattingScore >= 60 else "poor")
                     ),
                     suggestions=(
                         flow_result.recommendations
@@ -169,9 +157,7 @@ async def analyze_job_match(
         return result
     except Exception as e:
         print(f"Job matching analysis error: {e}")
-        raise HTTPException(
-            status_code=500, detail="Failed to analyze job compatibility"
-        )
+        raise HTTPException(status_code=500, detail="Failed to analyze job compatibility")
 
 
 @router.post(
@@ -228,6 +214,4 @@ async def generate_resume_intelligence(
         return result
     except Exception as e:
         print(f"Resume intelligence error: {e}")
-        raise HTTPException(
-            status_code=500, detail="Failed to generate resume intelligence report"
-        )
+        raise HTTPException(status_code=500, detail="Failed to generate resume intelligence report")

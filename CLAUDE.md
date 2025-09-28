@@ -45,6 +45,51 @@ GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.
 - `backend/app/core/genkit_init.py` - Genkit AI framework initialization and flow management
 - `verify_genkit.py` - Genkit verification and health check script
 
+## Design Token System
+
+### Automated Design Token Extraction
+
+- **Extract Tokens**: `./scripts/token-extract.sh` - Extract design tokens from MUI theme
+- **CI/CD Integration**: Tokens automatically extracted during build process
+- **Output Location**: `frontend/dist/tokens/design-tokens.json`
+- **Configuration**: `lovable.config.json` - Token extraction configuration
+
+### Design Token Workflow
+
+```bash
+# Manual token extraction (local development):
+./scripts/token-extract.sh
+
+# Tokens are automatically extracted during CI/CD build process
+# Available as build artifacts: 'design-tokens'
+
+# Configuration includes:
+# - Colors (palette)
+# - Typography (fonts, sizes)
+# - Spacing (margins, padding)
+# - Shadows (elevation)
+# - Shape (border radius)
+```
+
+### Token Integration
+
+- **Automatic Extraction**: Integrated into GitHub Actions CI/CD pipeline
+- **Build Integration**: Tokens extracted before frontend build process
+- **Fallback System**: Node.js fallback when Lovable CLI unavailable
+- **Artifact Upload**: Tokens uploaded as CI/CD artifacts for download
+- **Theme Source**: Extracted from `frontend/src/theme/theme.ts`
+
+### Token Usage
+
+```typescript
+// Import generated tokens in your components
+import designTokens from '../dist/tokens/design-tokens.json';
+
+// Use tokens for consistent styling
+const primaryColor = designTokens.colors.primary.main;
+const headingFont = designTokens.typography.fontSize.h1;
+```
+
 ## Linting Commands
 
 - **All Projects (Root)**:
