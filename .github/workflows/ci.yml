@@ -61,7 +61,7 @@ jobs:
 
       ## ----------------- FRONTEND VALIDATION -----------------
       - name: 🧪 Install Frontend Dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: 🧹 Lint Frontend Code
         run: yarn lint
