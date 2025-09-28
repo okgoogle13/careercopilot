@@ -48,9 +48,7 @@ class TestInputSanitizer:
         result = InputSanitizer.sanitize_text_input(text)
 
         assert "<script>" not in result.sanitized_content
-        assert (
-            "alert('xss')" in result.sanitized_content
-        )  # Content preserved, tags removed
+        assert "alert('xss')" in result.sanitized_content  # Content preserved, tags removed
         assert "HTML tags removed" in result.warnings
 
     def test_sanitize_dangerous_patterns_detected(self):
@@ -65,9 +63,7 @@ class TestInputSanitizer:
         for dangerous_text in dangerous_texts:
             result = InputSanitizer.sanitize_text_input(dangerous_text)
             assert len(result.warnings) > 0
-            assert any(
-                "Suspicious pattern detected" in warning for warning in result.warnings
-            )
+            assert any("Suspicious pattern detected" in warning for warning in result.warnings)
             assert "[REDACTED]" in result.sanitized_content
 
     def test_sanitize_dict_input(self):

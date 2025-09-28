@@ -48,14 +48,10 @@ async def _analyze_and_create_voice_profile_impl(
 
         # Validate input documents
         if not documents or not any(doc.strip() for doc in documents):
-            raise ValueError(
-                "No valid document content provided for voice profile analysis"
-            )
+            raise ValueError("No valid document content provided for voice profile analysis")
 
         # Combine the text from all documents into a single string
-        combined_text = "\n\n---\n\n".join(
-            doc.strip() for doc in documents if doc.strip()
-        )
+        combined_text = "\n\n---\n\n".join(doc.strip() for doc in documents if doc.strip())
 
         # Create the prompt for voice analysis (same as voice_profiler.py)
         prompt = f"""
@@ -112,6 +108,4 @@ else:
     analyze_and_create_voice_profile = _analyze_and_create_voice_profile_impl
 
 # Register the flow for tracking
-register_flow_function(
-    analyze_and_create_voice_profile, "analyze_and_create_voice_profile"
-)
+register_flow_function(analyze_and_create_voice_profile, "analyze_and_create_voice_profile")
