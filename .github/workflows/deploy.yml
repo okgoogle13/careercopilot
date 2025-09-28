@@ -1,3 +1,5 @@
+# .github/workflows/deploy.yml
+
 name: CD - Deploy to Staging and Production
 
 on:
@@ -18,11 +20,15 @@ on:
         options:
           - staging
           - production
-      skip_artifact_download:
-        description: 'Skip artifact download and build frontend directly'
-        required: false
-        default: false
-        type: boolean
+
+permissions:
+  contents: read
+  deployments: write
+  actions: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   NODE_VERSION: '22'
@@ -38,9 +44,18 @@ jobs:
       should-deploy-staging: ${{ steps.check.outputs.staging }}
       should-deploy-production: ${{ steps.check.outputs.production }}
       commit-sha: ${{ steps.vars.outputs.commit_sha }}
+      run-id: ${{ steps.vars.outputs.run_id }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Validate inputs
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if [[ ! "${{ inputs.environment }}" =~ ^(staging|production)$ ]]; then
+            echo "❌ Invalid environment: ${{ inputs.environment }}"
+            exit 1
+          fi
 
       - name: Check deployment conditions
         id: check
@@ -72,21 +87,15 @@ jobs:
             echo "production=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Set commit SHA
+      - name: Set commit SHA and run ID
         id: vars
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "commit_sha=${{ github.sha }}" >> $GITHUB_OUTPUT
+            echo "run_id=${{ github.run_id }}" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
             echo "commit_sha=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Ensure CI passed
-        run: |
-          echo "🔍 Verifying latest CI status..."
-          # This ensures we don't deploy if CI is failing
-          if [[ "${{ github.event_name }}" == "push" ]]; then
-            echo "✅ Push triggered deployment - CI should have passed"
+            echo "run_id=${{ github.event.workflow_run.id }}" >> $GITHUB_OUTPUT
           fi
 
   deploy-staging:
@@ -100,12 +109,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Prepare Frontend for Deployment
-        uses: ./.github/actions/prepare-frontend-deploy
+      - name: Download Frontend Artifact
+        uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          artifact-name: frontend-dist
-          fallback-build: 'true'
+          name: frontend-dist
+          path: ./dist
+          run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download Backend Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-source
+          path: ./backend
+          run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate Downloaded Artifacts
+        run: |
+          echo "🔍 Validating downloaded artifacts..."
+          if [ ! -d "./dist" ] || [ -z "$(ls -A ./dist)" ]; then
+            echo "❌ Frontend artifact validation failed"
+            exit 1
+          fi
+          if [ ! -d "./backend" ] || [ -z "$(ls -A ./backend)" ]; then
+            echo "❌ Backend artifact validation failed"
+            exit 1
+          fi
+          echo "✅ Artifact validation passed"
 
       - name: Deploy Frontend to Staging
         id: deploy-frontend
@@ -115,6 +146,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'
           channelId: live
           projectId: careercopilot-staging
+          public: ./dist
         timeout-minutes: 10
 
       - name: Authenticate to Google Cloud (Staging)
@@ -138,12 +170,11 @@ jobs:
             --memory 2Gi \
             --min-instances 0 \
             --max-instances 10 \
-            --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_STAGING }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_STAGING }}" \
+            --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO" \
+            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_STAGING:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_STAGING:latest" \
             --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=staging,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
-
-          # Extract service URL for health checks
           echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
         timeout-minutes: 10
 
@@ -156,7 +187,6 @@ jobs:
           echo "🏥 Checking frontend health..."
           max_attempts=5
           attempt=1
-
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "https://careercopilot-staging.web.app" > /dev/null; then
@@ -181,11 +211,8 @@ jobs:
           echo "🏥 Checking backend health..."
           max_attempts=5
           attempt=1
-
-          # Use the service URL from deployment output
           backend_url="${{ steps.deploy-backend.outputs.service_url }}"
           echo "Backend URL: $backend_url"
-
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "$backend_url/health" > /dev/null; then
@@ -227,12 +254,34 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Prepare Frontend for Deployment
-        uses: ./.github/actions/prepare-frontend-deploy
+      - name: Download Frontend Artifact
+        uses: actions/download-artifact@v4
         with:
-          node-version: ${{ env.NODE_VERSION }}
-          artifact-name: frontend-dist
-          fallback-build: 'true'
+          name: frontend-dist
+          path: ./dist
+          run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download Backend Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-source
+          path: ./backend
+          run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate Downloaded Artifacts
+        run: |
+          echo "🔍 Validating downloaded artifacts..."
+          if [ ! -d "./dist" ] || [ -z "$(ls -A ./dist)" ]; then
+            echo "❌ Frontend artifact validation failed"
+            exit 1
+          fi
+          if [ ! -d "./backend" ] || [ -z "$(ls -A ./backend)" ]; then
+            echo "❌ Backend artifact validation failed"
+            exit 1
+          fi
+          echo "✅ Artifact validation passed"
 
       - name: Deploy Frontend to Production
         id: deploy-frontend
@@ -242,6 +291,7 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}'
           channelId: live
           projectId: careercopilot-468811
+          public: ./dist
         timeout-minutes: 12
 
       - name: Authenticate to Google Cloud (Production)
@@ -265,12 +315,11 @@ jobs:
             --memory 4Gi \
             --min-instances 1 \
             --max-instances 100 \
-            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }},REDIS_URL=${{ secrets.REDIS_URL }}" \
+            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING" \
+            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_PROD:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_PROD:latest,REDIS_URL=REDIS_URL:latest" \
             --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=production,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
-
-          # Extract service URL for health checks
           echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
         timeout-minutes: 12
 
@@ -283,7 +332,6 @@ jobs:
           echo "🏥 Checking frontend health..."
           max_attempts=6
           attempt=1
-
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "https://careercopilot-468811.web.app" > /dev/null; then
@@ -308,11 +356,8 @@ jobs:
           echo "🏥 Checking backend health..."
           max_attempts=6
           attempt=1
-
-          # Use the service URL from deployment output
           backend_url="${{ steps.deploy-backend.outputs.service_url }}"
           echo "Backend URL: $backend_url"
-
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
             if curl -f -s -m 30 "$backend_url/health" > /dev/null; then
@@ -335,7 +380,6 @@ jobs:
         id: performance-check
         run: |
           echo "⚡ Running performance check..."
-          # Basic performance test - you can enhance this with Lighthouse CI
           response_time=$(curl -o /dev/null -s -w '%{time_total}' https://careercopilot-468811.web.app)
           if (( $(echo "$response_time < 3.0" | bc -l) )); then
             echo "✅ Performance check passed (${response_time}s)"
@@ -351,37 +395,13 @@ jobs:
         if: failure() || (steps.backend-health.outputs.status == 'unhealthy' || steps.frontend-health.outputs.status == 'unhealthy')
         run: |
           echo "🔄 Initiating automatic rollback due to failed health checks..."
-
-          # Get the previous Cloud Run revision
-          echo "Getting previous Cloud Run revision..."
-          gcloud run services describe careercopilot-backend-production \
-            --region=us-central1 \
-            --project=careercopilot-468811 \
-            --format="value(status.traffic[0].revisionName)" > current_revision.txt
-
-          # Get all revisions and find the previous stable one
-          gcloud run revisions list \
-            --service=careercopilot-backend-production \
-            --region=us-central1 \
-            --project=careercopilot-468811 \
-            --limit=5 \
-            --format="value(metadata.name)" > all_revisions.txt
-
-          # Get the second revision (previous stable)
+          gcloud run services describe careercopilot-backend-production --region=us-central1 --project=careercopilot-468811 --format="value(status.traffic[0].revisionName)" > current_revision.txt
+          gcloud run revisions list --service=careercopilot-backend-production --region=us-central1 --project=careercopilot-468811 --limit=5 --format="value(metadata.name)" > all_revisions.txt
           previous_revision=$(sed -n '2p' all_revisions.txt)
-
           if [ ! -z "$previous_revision" ]; then
             echo "Rolling back to previous revision: $previous_revision"
-
-            # Update traffic to route 100% to previous revision
-            gcloud run services update-traffic careercopilot-backend-production \
-              --region=us-central1 \
-              --project=careercopilot-468811 \
-              --to-revisions="$previous_revision=100"
-
+            gcloud run services update-traffic careercopilot-backend-production --region=us-central1 --project=careercopilot-468811 --to-revisions="$previous_revision=100"
             echo "✅ Backend rolled back to: $previous_revision"
-
-            # Verify rollback health
             sleep 30
             backend_url="https://careercopilot-backend-[hash]-uc.a.run.app"
             if curl -f -s -m 10 "$backend_url/health" > /dev/null; then
@@ -397,10 +417,7 @@ jobs:
         if: failure() || (steps.frontend-health.outputs.status == 'unhealthy')
         run: |
           echo "🔄 Rolling back frontend deployment..."
-
-          # Get the previous Firebase hosting release
           firebase hosting:clone careercopilot-468811:production careercopilot-468811:production --except="current" || true
-
           echo "⚠️ Frontend rollback may require manual intervention via Firebase Console"
 
       - name: Rollback Notification
@@ -408,55 +425,28 @@ jobs:
         run: |
           echo "🚨 DEPLOYMENT ROLLBACK EXECUTED"
           echo "Reason: Health checks failed"
-          echo "Backend Health: ${{ steps.backend-health.outputs.status }}"
-          echo "Frontend Health: ${{ steps.frontend-health.outputs.status }}"
-          echo "Performance: ${{ steps.performance-check.outputs.status }}"
-          echo ""
-          echo "Actions taken:"
-          echo "- Backend service rolled back to previous revision"
-          echo "- Frontend rollback attempted"
-          echo "- Development team should be notified"
-
-          # Fail the deployment
           exit 1
 
       - name: Post deployment notification
-        if: always()
+        if: success()
         run: |
-          if [[ "${{ steps.frontend-health.outputs.status }}" == "healthy" && "${{ steps.backend-health.outputs.status }}" == "healthy" ]]; then
-            echo "🚀 Production deployment successful!"
-            echo "Frontend: https://careercopilot-468811.web.app"
-            echo "Backend: Deployed to Cloud Run"
-            if [[ "${{ steps.performance-check.outputs.status }}" == "slow" ]]; then
-              echo "⚠️ Note: Performance check indicated slower than expected response times"
-            fi
-          else
-            echo "💥 Production deployment failed health checks!"
-            exit 1
-          fi
+          echo "🚀 Production deployment successful!"
+          echo "Frontend: https://careercopilot-468811.web.app"
+          echo "Backend: Deployed to Cloud Run"
 
       - name: Create GitHub Release
-        if: success() && github.ref == 'refs/heads/main'
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: success() && github.event.workflow_run.head_branch == 'main'
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
-          release_name: Production Release v${{ github.run_number }}
+          name: Production Release v${{ github.run_number }}
           body: |
             🚀 **Production Deployment Successful**
-
-            **Changes in this release:**
-            - Commit: ${{ github.sha }}
-            - Branch: ${{ github.ref_name }}
-
-            **Deployment URLs:**
-            - Frontend: https://careercopilot-468811.web.app
-            - Backend: Cloud Run (us-central1)
-
-            **Health Check Status:** ✅ All systems operational
+            Commit: ${{ needs.pre-deploy-checks.outputs.commit-sha }}
           draft: false
           prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   post-deploy-monitoring:
     name: Post-Deployment Monitoring
@@ -465,19 +455,9 @@ jobs:
     if: always() && (needs.deploy-staging.result == 'success' || needs.deploy-production.result == 'success')
     timeout-minutes: 10
     steps:
-      - name: Set up monitoring alerts
-        run: |
-          echo "📊 Setting up post-deployment monitoring..."
-          # This is where you could integrate with monitoring services
-          # like DataDog, New Relic, or Google Cloud Monitoring
-          echo "✅ Monitoring alerts configured"
-
       - name: Deployment summary
         run: |
           echo "📋 **Deployment Summary**"
-          echo "Timestamp: $(date)"
-          echo "Commit: ${{ github.sha }}"
-          echo "Branch: ${{ github.ref_name }}"
           if [[ "${{ needs.deploy-staging.result }}" == "success" ]]; then
             echo "✅ Staging: Deployed successfully"
           fi
