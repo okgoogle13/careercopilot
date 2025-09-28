@@ -50,14 +50,10 @@ class TestKscGenerationIntegration:
     @pytest.fixture
     def minimal_job_description(self) -> Dict[str, Any]:
         """Provide minimal valid job description."""
-        return {
-            "job_description": "Python developer position requiring 2+ years experience."
-        }
+        return {"job_description": "Python developer position requiring 2+ years experience."}
 
     @pytest.mark.asyncio
-    async def test_ksc_generate_endpoint_success(
-        self, sample_job_description: Dict[str, Any]
-    ):
+    async def test_ksc_generate_endpoint_success(self, sample_job_description: Dict[str, Any]):
         """
         Test the POST /api/v1/ksc/generate endpoint with valid input.
 
@@ -68,9 +64,7 @@ class TestKscGenerationIntegration:
         """
         async with AsyncClient(app=app, base_url="http://test") as client:
             # Send POST request to KSC generation endpoint
-            response = await client.post(
-                "/api/v1/ksc/generate", json=sample_job_description
-            )
+            response = await client.post("/api/v1/ksc/generate", json=sample_job_description)
 
             # Assert 1: HTTP 200 OK status
             assert (
@@ -96,9 +90,7 @@ class TestKscGenerationIntegration:
             ), f"Expected list, got {type(generated_statements)}"
 
             # Assert 5: List is not empty
-            assert (
-                len(generated_statements) > 0
-            ), "generated_statements should not be empty"
+            assert len(generated_statements) > 0, "generated_statements should not be empty"
 
             # Assert 6: All items in list are strings (KSC statements)
             for i, statement in enumerate(generated_statements):
@@ -108,21 +100,15 @@ class TestKscGenerationIntegration:
                 assert len(statement.strip()) > 0, f"Statement {i} should not be empty"
 
                 # KSC statements should be reasonably substantial
-                assert (
-                    len(statement) > 20
-                ), f"Statement {i} seems too short: '{statement}'"
+                assert len(statement) > 20, f"Statement {i} seems too short: '{statement}'"
 
     @pytest.mark.asyncio
-    async def test_ksc_generate_with_minimal_input(
-        self, minimal_job_description: Dict[str, Any]
-    ):
+    async def test_ksc_generate_with_minimal_input(self, minimal_job_description: Dict[str, Any]):
         """
         Test KSC generation with minimal job description input.
         """
         async with AsyncClient(app=app, base_url="http://test") as client:
-            response = await client.post(
-                "/api/v1/ksc/generate", json=minimal_job_description
-            )
+            response = await client.post("/api/v1/ksc/generate", json=minimal_job_description)
 
             # Should still succeed with minimal input
             assert response.status_code == 200
@@ -134,9 +120,7 @@ class TestKscGenerationIntegration:
             assert isinstance(statements, list)
             assert len(statements) > 0
 
-    def test_ksc_generate_with_sync_client(
-        self, sample_job_description: Dict[str, Any]
-    ):
+    def test_ksc_generate_with_sync_client(self, sample_job_description: Dict[str, Any]):
         """
         Test KSC generation using synchronous TestClient for simpler testing.
         """
@@ -181,17 +165,13 @@ class TestKscGenerationIntegration:
             ], f"Expected 400/422 for invalid JSON, got {response.status_code}"
 
             # Test 3: Empty job description
-            response = await client.post(
-                "/api/v1/ksc/generate", json={"job_description": ""}
-            )
+            response = await client.post("/api/v1/ksc/generate", json={"job_description": ""})
             # Mock implementation will still return 200, but real implementation should handle this
             # For now, just verify it doesn't crash
             assert response.status_code in [200, 400, 422]
 
     @pytest.mark.asyncio
-    async def test_ksc_generate_response_timing(
-        self, sample_job_description: Dict[str, Any]
-    ):
+    async def test_ksc_generate_response_timing(self, sample_job_description: Dict[str, Any]):
         """
         Test that the KSC generation endpoint responds within reasonable time.
         """
@@ -199,9 +179,7 @@ class TestKscGenerationIntegration:
             import time
 
             start_time = time.time()
-            response = await client.post(
-                "/api/v1/ksc/generate", json=sample_job_description
-            )
+            response = await client.post("/api/v1/ksc/generate", json=sample_job_description)
             end_time = time.time()
 
             # Should respond within reasonable time (mock has 2s sleep)
@@ -217,9 +195,7 @@ class TestKscGenerationIntegration:
             assert "generated_statements" in data
 
     @pytest.mark.asyncio
-    async def test_ksc_generate_multiple_requests(
-        self, sample_job_description: Dict[str, Any]
-    ):
+    async def test_ksc_generate_multiple_requests(self, sample_job_description: Dict[str, Any]):
         """
         Test multiple concurrent requests to ensure endpoint stability.
         """
@@ -273,9 +249,7 @@ class TestKscGenerationIntegration:
                     json={"job_description": job_data["job_description"]},
                 )
 
-                assert (
-                    response.status_code == 200
-                ), f"Failed for {job_data['type']} job type"
+                assert response.status_code == 200, f"Failed for {job_data['type']} job type"
 
                 data = response.json()
                 assert "generated_statements" in data

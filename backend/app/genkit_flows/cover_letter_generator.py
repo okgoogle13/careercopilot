@@ -1,7 +1,6 @@
 import json
 from typing import Optional
 
-from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.flow_decorator import simple_genkit_flow
 from app.ai.model_dispatcher import dispatch_llm_call
@@ -41,9 +40,7 @@ def generate_tailored_cover_letter(
 
     # Generate the cover letter using the AI dispatcher for cost optimization
     response = dispatch_llm_call(
-        task_type="cover_letter_generation",
-        prompt=prompt,
-        temperature=0.7
+        task_type="cover_letter_generation", prompt=prompt, temperature=0.7
     )
 
     return response.get("content", "")

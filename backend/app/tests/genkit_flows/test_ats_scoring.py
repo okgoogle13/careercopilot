@@ -109,12 +109,8 @@ class TestAtsScoring:
         """
 
         # Mock the supporting flow functions
-        with patch(
-            "app.genkit_flows.ats_scoring.extractJobRequirements"
-        ) as mock_extract_job:
-            with patch(
-                "app.genkit_flows.ats_scoring.extractResumeEntities"
-            ) as mock_extract_resume:
+        with patch("app.genkit_flows.ats_scoring.extractJobRequirements") as mock_extract_job:
+            with patch("app.genkit_flows.ats_scoring.extractResumeEntities") as mock_extract_resume:
                 with patch(
                     "app.genkit_flows.ats_scoring.suggestKeywordPlacement"
                 ) as mock_keyword_placement:
@@ -122,12 +118,8 @@ class TestAtsScoring:
                         "app.genkit_flows.ats_scoring.enhanced_ai_handler"
                     ) as mock_ai_handler:
                         # Configure mock returns for supporting flows
-                        mock_extract_job.run = AsyncMock(
-                            return_value=mock_job_requirements
-                        )
-                        mock_extract_resume.run = AsyncMock(
-                            return_value=mock_resume_entities
-                        )
+                        mock_extract_job.run = AsyncMock(return_value=mock_job_requirements)
+                        mock_extract_resume.run = AsyncMock(return_value=mock_resume_entities)
                         mock_keyword_placement.run = AsyncMock(
                             return_value=mock_keyword_placement_suggestions
                         )
@@ -146,9 +138,7 @@ class TestAtsScoring:
                         ]
 
                         # Mock the gemini_pro model for any direct calls
-                        with patch(
-                            "app.genkit_flows.ats_scoring.gemini_pro"
-                        ) as mock_gemini:
+                        with patch("app.genkit_flows.ats_scoring.gemini_pro") as mock_gemini:
                             mock_response = Mock()
                             mock_response.text.return_value = "Mocked AI response"
                             mock_gemini.generate.return_value = mock_response
@@ -170,9 +160,7 @@ class TestAtsScoring:
                             assert hasattr(
                                 result, "overallScore"
                             ), "Result should have overallScore"
-                            assert hasattr(
-                                result, "breakdown"
-                            ), "Result should have breakdown"
+                            assert hasattr(result, "breakdown"), "Result should have breakdown"
                             assert hasattr(
                                 result, "matchedKeywords"
                             ), "Result should have matchedKeywords"
@@ -247,15 +235,9 @@ class TestAtsScoring:
         """
         Test atsScoring with minimal valid input to ensure robustness.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.extractJobRequirements"
-        ):
-            with patch(
-                "app.genkit_flows.ats_scoring.extractResumeEntities"
-            ):
-                with patch(
-                    "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-                ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.extractJobRequirements"):
+            with patch("app.genkit_flows.ats_scoring.extractResumeEntities"):
+                with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
                     # Minimal mock responses
                     minimal_job_reqs = JobRequirements(
                         hard_requirements=["Python"],
@@ -303,9 +285,7 @@ class TestAtsScoring:
         """
         Test atsScoring with additional profile keywords parameter.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-        ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
             mock_ai_handler.execute_ai_operation = AsyncMock()
             mock_ai_handler.execute_ai_operation.side_effect = [
                 mock_job_requirements,
@@ -337,18 +317,14 @@ class TestAtsScoring:
             # Verify some profile keywords appear in matched or missing
             all_keywords = result.matchedKeywords + result.missingKeywords
             common_keywords = set(profile_keywords).intersection(set(all_keywords))
-            assert (
-                len(common_keywords) > 0
-            ), "Some profile keywords should appear in results"
+            assert len(common_keywords) > 0, "Some profile keywords should appear in results"
 
     @pytest.mark.asyncio
     async def test_ats_scoring_error_handling(self):
         """
         Test that atsScoring handles errors gracefully and still returns a valid result.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-        ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
             # Simulate an error in one of the AI operations
             mock_ai_handler.execute_ai_operation = AsyncMock()
             mock_ai_handler.execute_ai_operation.side_effect = [
@@ -357,9 +333,7 @@ class TestAtsScoring:
 
             # The enhanced error handling should provide fallbacks
             with pytest.raises(Exception, match="AI service temporarily unavailable"):
-                await atsScoring(
-                    resumeText="Test resume", jobDescription="Test job description"
-                )
+                await atsScoring(resumeText="Test resume", jobDescription="Test job description")
 
             # Note: In a real implementation with proper error handling,
             # this might return a fallback result instead of raising an exception

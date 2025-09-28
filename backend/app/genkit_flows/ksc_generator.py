@@ -1,6 +1,5 @@
 import json
 
-from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.flow_decorator import simple_genkit_flow
 from app.ai.model_dispatcher import dispatch_llm_call
@@ -33,11 +32,12 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
         task_type="resume_optimization",  # KSC responses are medium complexity
         prompt=prompt,
         response_format="json",
-        temperature=0.5
+        temperature=0.5,
     )
 
     # Parse and return structured response
     import json
+
     content = response.get("content", "{}")
     try:
         parsed_data = json.loads(content)
@@ -48,7 +48,7 @@ def generateKscResponse(user_profile_data: dict, ksc_statement: str) -> STAR_Res
             situation="Error parsing response",
             task="Error parsing response",
             action="Error parsing response",
-            result="Error parsing response"
+            result="Error parsing response",
         )
 
 

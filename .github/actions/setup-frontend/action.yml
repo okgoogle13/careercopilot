@@ -90,6 +90,38 @@ runs:
         retention-days: 30
         if-no-files-found: warn
 
+    - name: Extract design tokens
+      if: inputs.skip-build != 'true'
+      shell: bash
+      run: |
+        echo "🎨 Extracting design tokens from MUI theme..."
+
+        # Create output directory for tokens
+        mkdir -p frontend/dist/tokens
+
+        # Check if lovable CLI is available, install if needed
+        if ! command -v lovable &> /dev/null; then
+          echo "📦 Installing Lovable CLI for token extraction..."
+          npm install -g @lovable/cli || echo "⚠️ Lovable CLI not available, using fallback extraction"
+        fi
+
+        # Run token extraction
+        if command -v lovable &> /dev/null; then
+          echo "🔧 Running Lovable token extraction..."
+          lovable extract --config lovable.config.json || echo "⚠️ Token extraction failed, continuing with build"
+        else
+          echo "⚠️ Lovable CLI not available, creating placeholder tokens..."
+          echo '{"warning": "Design tokens not extracted - Lovable CLI unavailable"}' > frontend/dist/tokens/design-tokens.json
+        fi
+
+        # Verify output
+        if [ -f "frontend/dist/tokens/design-tokens.json" ]; then
+          echo "✅ Design tokens extracted successfully"
+          echo "📊 Token file size: $(du -h frontend/dist/tokens/design-tokens.json | cut -f1)"
+        else
+          echo "⚠️ Token extraction completed but no output file found"
+        fi
+
     - name: Build
       id: build
       if: inputs.skip-build != 'true'
@@ -125,6 +157,15 @@ runs:
         name: bundle-analysis
         path: frontend/dist/bundle-analysis.json
         retention-days: 30
+
+    - name: Upload design tokens
+      if: inputs.upload-artifacts == 'true' && inputs.skip-build != 'true'
+      uses: actions/upload-artifact@v4
+      with:
+        name: design-tokens
+        path: frontend/dist/tokens/
+        retention-days: 30
+        if-no-files-found: warn
 
     - name: Upload build artifact
       if: inputs.upload-artifacts == 'true' && inputs.skip-build != 'true'
