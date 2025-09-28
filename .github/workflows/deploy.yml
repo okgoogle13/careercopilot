@@ -5,6 +5,9 @@ on:
     workflows: ["CI - Build and Test"]
     types:
       - completed
+    branches:
+      - main
+      - develop
   workflow_dispatch:
     inputs:
       environment:
@@ -15,6 +18,11 @@ on:
         options:
           - staging
           - production
+      skip_artifact_download:
+        description: 'Skip artifact download and build frontend directly'
+        required: false
+        default: false
+        type: boolean
 
 env:
   NODE_VERSION: '22'
@@ -107,7 +115,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'
           channelId: live
           projectId: careercopilot-staging
-          target: careercopilot-staging-frontend
         timeout-minutes: 10
 
       - name: Authenticate to Google Cloud (Staging)
@@ -235,7 +242,6 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}'
           channelId: live
           projectId: careercopilot-468811
-          target: careercopilot-prod-frontend
         timeout-minutes: 12
 
       - name: Authenticate to Google Cloud (Production)
@@ -249,7 +255,7 @@ jobs:
       - name: Deploy Backend to Cloud Run (Production)
         id: deploy-backend
         run: |
-          gcloud run deploy careercopilot-backend-prod \
+          gcloud run deploy careercopilot-backend-production \
             --source ./backend \
             --platform managed \
             --region us-central1 \
@@ -259,7 +265,7 @@ jobs:
             --memory 4Gi \
             --min-instances 1 \
             --max-instances 100 \
-            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }}" \
+            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING,GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }},SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }},GOOGLE_OAUTH_CLIENT_ID=${{ secrets.GOOGLE_OAUTH_CLIENT_ID_PROD }},GOOGLE_OAUTH_CLIENT_SECRET=${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET_PROD }},REDIS_URL=${{ secrets.REDIS_URL }}" \
             --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }},environment=production,deployed-at=$(date +%s)" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
@@ -280,7 +286,7 @@ jobs:
 
           while [ $attempt -le $max_attempts ]; do
             echo "Attempt $attempt/$max_attempts"
-            if curl -f -s -m 30 "https://careercopilot-prod.web.app" > /dev/null; then
+            if curl -f -s -m 30 "https://careercopilot-468811.web.app" > /dev/null; then
               echo "✅ Frontend health check passed"
               echo "status=healthy" >> $GITHUB_OUTPUT
               break
@@ -330,7 +336,7 @@ jobs:
         run: |
           echo "⚡ Running performance check..."
           # Basic performance test - you can enhance this with Lighthouse CI
-          response_time=$(curl -o /dev/null -s -w '%{time_total}' https://careercopilot-prod.web.app)
+          response_time=$(curl -o /dev/null -s -w '%{time_total}' https://careercopilot-468811.web.app)
           if (( $(echo "$response_time < 3.0" | bc -l) )); then
             echo "✅ Performance check passed (${response_time}s)"
             echo "status=good" >> $GITHUB_OUTPUT
@@ -348,14 +354,14 @@ jobs:
 
           # Get the previous Cloud Run revision
           echo "Getting previous Cloud Run revision..."
-          gcloud run services describe careercopilot-backend \
+          gcloud run services describe careercopilot-backend-production \
             --region=us-central1 \
             --project=careercopilot-468811 \
             --format="value(status.traffic[0].revisionName)" > current_revision.txt
 
           # Get all revisions and find the previous stable one
           gcloud run revisions list \
-            --service=careercopilot-backend \
+            --service=careercopilot-backend-production \
             --region=us-central1 \
             --project=careercopilot-468811 \
             --limit=5 \
@@ -368,7 +374,7 @@ jobs:
             echo "Rolling back to previous revision: $previous_revision"
 
             # Update traffic to route 100% to previous revision
-            gcloud run services update-traffic careercopilot-backend \
+            gcloud run services update-traffic careercopilot-backend-production \
               --region=us-central1 \
               --project=careercopilot-468811 \
               --to-revisions="$previous_revision=100"
@@ -419,7 +425,7 @@ jobs:
         run: |
           if [[ "${{ steps.frontend-health.outputs.status }}" == "healthy" && "${{ steps.backend-health.outputs.status }}" == "healthy" ]]; then
             echo "🚀 Production deployment successful!"
-            echo "Frontend: https://careercopilot-prod.web.app"
+            echo "Frontend: https://careercopilot-468811.web.app"
             echo "Backend: Deployed to Cloud Run"
             if [[ "${{ steps.performance-check.outputs.status }}" == "slow" ]]; then
               echo "⚠️ Note: Performance check indicated slower than expected response times"
@@ -445,7 +451,7 @@ jobs:
             - Branch: ${{ github.ref_name }}
 
             **Deployment URLs:**
-            - Frontend: https://careercopilot-prod.web.app
+            - Frontend: https://careercopilot-468811.web.app
             - Backend: Cloud Run (us-central1)
 
             **Health Check Status:** ✅ All systems operational
