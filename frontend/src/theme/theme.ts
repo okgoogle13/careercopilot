@@ -15,9 +15,16 @@ import { createTheme } from '@mui/material/styles';
  * - Enhanced typography with proper contrast
  */
 
-// Extend Card component props to include custom variants
+// Extend component props to include custom variants
 declare module '@mui/material/Card' {
   interface CardPropsVariantOverrides {
+    selected: true;
+    interactive: true;
+  }
+}
+
+declare module '@mui/material/Paper' {
+  interface PaperPropsVariantOverrides {
     selected: true;
     interactive: true;
   }
@@ -150,6 +157,27 @@ export const theme = createTheme({
     },
     // Enhanced Paper component for consistency
     MuiPaper: {
+      variants: [
+        {
+          props: { variant: 'selected' },
+          style: {
+            border: '2px solid',
+            borderColor: '#A855F7',
+            boxShadow: '0 0 12px rgba(168, 85, 247, 0.3)',
+          },
+        },
+        {
+          props: { variant: 'interactive' },
+          style: {
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              transform: 'translateY(-4px)',
+              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)',
+            },
+          },
+        },
+      ],
       styleOverrides: {
         root: {
           backgroundColor: '#1A1A1A',

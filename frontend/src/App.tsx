@@ -625,109 +625,109 @@ export default function App() {
 
   return (
     <SidebarProvider defaultOpen={showDemoNav}>
-        <Sidebar collapsible="icon" variant="sidebar">
-          <SidebarHeader>
-            <div className="flex items-center gap-2 px-4 py-2">
-              <Typography variant="h6" className="font-semibold">
-                Demo Navigation
-              </Typography>
-            </div>
-          </SidebarHeader>
-
-          <SidebarContent>
-            <SidebarMenu>
-              {demoViews.map((view) => {
-                const Icon = view.icon;
-                return (
-                  <SidebarMenuItem key={view.id}>
-                    <SidebarMenuButton
-                      isActive={currentView === view.id}
-                      onClick={() => handleDemoNavigation(view.id)}
-                      tooltip={view.label}
-                    >
-                      <Icon className="w-5 h-5" />
-                      <span>{view.label}</span>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                );
-              })}
-            </SidebarMenu>
-          </SidebarContent>
-
-          <SidebarFooter>
-            <div className="p-2">
-              {showDemoNav ? (
-                <Button
-                  variant="ghost"
-                  onClick={() => setShowDemoNav(false)}
-                  className="w-full justify-start"
-                >
-                  Hide Navigation
-                </Button>
-              ) : (
-                <Button
-                  variant="default"
-                  onClick={() => setShowDemoNav(true)}
-                  className="w-full justify-start"
-                >
-                  <Navigation className="w-4 h-4 mr-2" />
-                  Show Navigation
-                </Button>
-              )}
-            </div>
-          </SidebarFooter>
-        </Sidebar>
-
-        <SidebarInset>
-          {/* Top Header Bar */}
-          {showDemoNav && (
-            <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-              <SidebarTrigger className="-ml-1" />
-              <div className="flex items-center gap-2 flex-1">
-                <Typography variant="h6" className="font-medium">
-                  {currentViewInfo.label}
-                </Typography>
-                <Chip
-                  label={currentViewInfo.description}
-                  size="small"
-                  sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
-                />
-              </div>
-            </header>
-          )}
-
-          {/* Content Area */}
-          <div className="flex flex-1 flex-col gap-4 p-4">
-            <Suspense
-              fallback={
-                <div className="flex items-center justify-center h-64">
-                  <div className="flex flex-col items-center gap-4">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-                    <Typography variant="body2" color="text.secondary">
-                      Loading...
-                    </Typography>
-                  </div>
-                </div>
-              }
-            >
-              {renderContent()}
-            </Suspense>
+      <Sidebar collapsible="icon" variant="sidebar">
+        <SidebarHeader>
+          <div className="flex items-center gap-2 px-4 py-2">
+            <Typography variant="h6" className="font-semibold">
+              Demo Navigation
+            </Typography>
           </div>
+        </SidebarHeader>
 
-          {/* Show Demo Nav Button (when hidden) */}
-          {!showDemoNav && (
-            <div className="fixed bottom-6 right-6 z-50">
+        <SidebarContent>
+          <SidebarMenu>
+            {demoViews.map((view) => {
+              const Icon = view.icon;
+              return (
+                <SidebarMenuItem key={view.id}>
+                  <SidebarMenuButton
+                    isActive={currentView === view.id}
+                    onClick={() => handleDemoNavigation(view.id)}
+                    tooltip={view.label}
+                  >
+                    <Icon className="w-5 h-5" />
+                    <span>{view.label}</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
+          </SidebarMenu>
+        </SidebarContent>
+
+        <SidebarFooter>
+          <div className="p-2">
+            {showDemoNav ? (
+              <Button
+                variant="ghost"
+                onClick={() => setShowDemoNav(false)}
+                className="w-full justify-start"
+              >
+                Hide Navigation
+              </Button>
+            ) : (
               <Button
                 variant="default"
                 onClick={() => setShowDemoNav(true)}
-                className="rounded-full px-6 py-3"
+                className="w-full justify-start"
               >
                 <Navigation className="w-4 h-4 mr-2" />
-                Demo Navigation
+                Show Navigation
               </Button>
+            )}
+          </div>
+        </SidebarFooter>
+      </Sidebar>
+
+      <SidebarInset>
+        {/* Top Header Bar */}
+        {showDemoNav && (
+          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+            <SidebarTrigger className="-ml-1" />
+            <div className="flex items-center gap-2 flex-1">
+              <Typography variant="h6" className="font-medium">
+                {currentViewInfo.label}
+              </Typography>
+              <Chip
+                label={currentViewInfo.description}
+                size="small"
+                sx={{ bgcolor: 'primary.main', color: 'primary.contrastText' }}
+              />
             </div>
-          )}
-        </SidebarInset>
-      </SidebarProvider>
+          </header>
+        )}
+
+        {/* Content Area */}
+        <div className="flex flex-1 flex-col gap-4 p-4">
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-64">
+                <div className="flex flex-col items-center gap-4">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                  <Typography variant="body2" color="text.secondary">
+                    Loading...
+                  </Typography>
+                </div>
+              </div>
+            }
+          >
+            {renderContent()}
+          </Suspense>
+        </div>
+
+        {/* Show Demo Nav Button (when hidden) */}
+        {!showDemoNav && (
+          <div className="fixed bottom-6 right-6 z-50">
+            <Button
+              variant="default"
+              onClick={() => setShowDemoNav(true)}
+              className="rounded-full px-6 py-3"
+            >
+              <Navigation className="w-4 h-4 mr-2" />
+              Demo Navigation
+            </Button>
+          </div>
+        )}
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

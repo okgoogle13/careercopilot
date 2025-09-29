@@ -17,9 +17,9 @@ export interface DocumentVersion {
 
 interface DocumentVersionHistoryProps {
   versions: DocumentVersion[];
-  onRestore?: (version: DocumentVersion) => void;
-  onDownload?: (version: DocumentVersion) => void;
-  onDelete?: (version: DocumentVersion) => void;
+  onRestore?: (ver_ion: DocumentVersion) => void;
+  onDownload?: (ver_ion: DocumentVersion) => void;
+  onDelete?: (ver_ion: DocumentVersion) => void;
   className?: string;
 }
 

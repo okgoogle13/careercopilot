@@ -10,8 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import { Progress } from '../../ui/progress';
 import { Separator } from '../../ui/separator';
-import { 
-  EmojiObjects as Sparkles, 
+import {
+  EmojiObjects as Sparkles,
   Person as User,
   Work as Briefcase,
   School as GraduationCap,
@@ -761,7 +761,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <Switch
                         checked={profileSettings.showLocation}
                         onCheckedChange={(checked) =>
-                          setProfileSettings({ ...profileSettings, showLocation: checked })
+                          setProfileSettings({ ...profileSettings, _howLocation: checked })
                         }
                       />
                     </div>

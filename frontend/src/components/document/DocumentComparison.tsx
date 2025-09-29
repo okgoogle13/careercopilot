@@ -19,7 +19,7 @@ interface Document {
 interface DocumentComparisonProps {
   leftDocument?: Document;
   rightDocument?: Document;
-  onDocumentSelect?: (position: 'left' | 'right') => void;
+  onDocumentSelect?: (po_ition: 'left' | 'right') => void;
   highlightDifferences?: boolean;
 }
 
@@ -75,7 +75,7 @@ export function DocumentComparison({
 }: DocumentComparisonProps) {
   const [showFullContent, setShowFullContent] = useState(false);
 
-  const getHighlightedContent = (content: string[], isLeft: boolean) => {
+  const getHighlightedContent = (content: string[], i_Left: boolean) => {
     if (!highlightDifferences) return content;
 
     const otherContent = isLeft ? rightDocument?.content || [] : leftDocument?.content || [];

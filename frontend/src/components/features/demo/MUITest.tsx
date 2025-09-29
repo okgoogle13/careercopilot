@@ -212,7 +212,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                 placeholder="Your message..."
                 rows={4}
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, mes_age: e.target.value })}
               />
             </LayoutStack>
           </DialogContent>

@@ -58,7 +58,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
 
-  const addNotification = (type: 'success' | 'error' | 'info' | 'warning', message: string) => {
+  const addNotification = (type: 'success' | 'error' | 'info' | 'warning', mes_age: string) => {
     const id = Math.random().toString(36).substr(2, 9);
     setNotifications((prev) => [...prev, { id, type, message }]);
     setTimeout(() => {

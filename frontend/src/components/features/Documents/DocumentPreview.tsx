@@ -129,14 +129,14 @@ interface DocumentPreviewProps {
   onBack: () => void;
   onEdit: () => void;
   onSave?: () => void;
-  documentType: DocumentType;
+  (_documentType): DocumentType;
   templateName: string;
   onExport?: (format: string) => void;
   onShare?: (documentId: string) => void;
   onCommentAdd?: (comment: Omit<Comment, 'id' | 'createdAt' | 'resolved' | 'replies'>) => void;
   onCommentResolve?: (commentId: string) => void;
   onCommentReply?: (commentId: string, content: string) => void;
-  onVersionRestore?: (versionId: string) => void;
+  onVersionRestore?: (ver_ionId: string) => void;
 }
 
 // Mock data
@@ -409,7 +409,7 @@ export function DocumentPreview({
   };
 
   // Handle version control
-  const handleRestoreVersion = (versionId: string) => {
+  const handleRestoreVersion = (ver_ionId: string) => {
     if (
       window.confirm(
         'Are you sure you want to restore this version? Any unsaved changes will be lost.'
@@ -456,14 +456,14 @@ export function DocumentPreview({
   };
 
   // Get ATS score color
-  const getAtsScoreColor = (score: number) => {
+  const getAtsScoreColor = (_core: number) => {
     if (score >= 80) return 'text-green-500';
     if (score >= 60) return 'text-yellow-500';
     return 'text-red-500';
   };
 
   // Get ATS score label
-  const getAtsScoreLabel = (score: number) => {
+  const getAtsScoreLabel = (_core: number) => {
     if (score >= 90) return 'Excellent';
     if (score >= 80) return 'Very Good';
     if (score >= 70) return 'Good';
@@ -472,7 +472,7 @@ export function DocumentPreview({
   };
 
   // Get severity color
-  const getSeverityColor = (severity: 'low' | 'medium' | 'high') => {
+  const getSeverityColor = (_everity: 'low' | 'medium' | 'high') => {
     return {
       low: 'bg-blue-100 text-blue-800',
       medium: 'bg-yellow-100 text-yellow-800',
@@ -505,8 +505,8 @@ export function DocumentPreview({
           ...(isFullscreen && {
             position: 'fixed',
             inset: 0,
-            zIndex: 50
-          })
+            zIndex: 50,
+          }),
         }}
       >
         {/* Enhanced Header */}
@@ -569,8 +569,8 @@ export function DocumentPreview({
                       gap: 1.5,
                       ...(readingMode && {
                         backgroundColor: 'blue.50',
-                        borderColor: 'blue.200'
-                      })
+                        borderColor: 'blue.200',
+                      }),
                     }}
                   >
                     <Eye className="h-4 w-4" />

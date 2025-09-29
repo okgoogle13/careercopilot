@@ -137,7 +137,7 @@ export function DashboardPage({
     },
   ];
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (_tatus: string) => {
     switch (status) {
       case 'active':
         return 'success';
@@ -150,7 +150,7 @@ export function DashboardPage({
     }
   };
 
-  const getActivityIcon = (status: string) => {
+  const getActivityIcon = (_tatus: string) => {
     switch (status) {
       case 'completed':
         return <CheckCircle color="success" />;

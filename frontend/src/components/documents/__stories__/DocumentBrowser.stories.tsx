@@ -9,7 +9,13 @@ type DocumentType = Document['type'];
 
 // Generate sample documents
 const generateDocuments = (count: number): Document[] => {
-  const types: DocumentType[] = ['resume', 'cover-letter', 'selection-criteria', 'portfolio', 'other'];
+  const types: DocumentType[] = [
+    'resume',
+    'cover-letter',
+    'selection-criteria',
+    'portfolio',
+    'other',
+  ];
   const tags = [
     ['frontend', 'react', 'typescript'],
     ['backend', 'node', 'python'],
@@ -133,7 +139,6 @@ export const ListView: Story = {
   },
 };
 
-
 export const EmptyState: Story = {
   args: {
     documents: [],
@@ -157,7 +162,6 @@ export const Interactive: Story = {
       setDocuments(documents.filter((d) => d.id !== doc.id));
       fn()(doc);
     };
-
 
     return (
       <Box sx={{ p: 3 }}>
