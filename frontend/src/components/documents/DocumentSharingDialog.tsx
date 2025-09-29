@@ -86,18 +86,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
       collab.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const getPermissionLabel = (permis_ion: PermissionLevel) => {
-    switch (permission) {
-      case 'view':
-        return 'Can view';
-      case 'comment':
-        return 'Can comment';
-      case 'edit':
-        return 'Can edit';
-      default:
-        return '';
-    }
-  };
+
 
   const getPermissionColor = (permis_ion: PermissionLevel) => {
     switch (permission) {
