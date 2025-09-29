@@ -109,13 +109,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download Frontend Artifact
-        uses: actions/download-artifact@v4
+      - name: Prepare Frontend for Deployment
+        id: prepare-frontend
+        uses: ./.github/actions/prepare-frontend-deploy
         with:
-          name: frontend-dist
-          path: ./dist
-          run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: ${{ env.NODE_VERSION }}
+          artifact-name: frontend-dist
+          fallback-build: true
+          ci-run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
 
       - name: Download Backend Artifact
         uses: actions/download-artifact@v4
@@ -128,13 +129,18 @@ jobs:
       - name: Validate Downloaded Artifacts
         run: |
           echo "🔍 Validating downloaded artifacts..."
-          if [ ! -d "./dist" ] || [ -z "$(ls -A ./dist)" ]; then
+          if [ ! -d "./dist" ] && [ ! -d "./frontend/dist" ]; then
             echo "❌ Frontend artifact validation failed"
             exit 1
           fi
           if [ ! -d "./backend" ] || [ -z "$(ls -A ./backend)" ]; then
             echo "❌ Backend artifact validation failed"
             exit 1
+          fi
+          # Ensure dist directory exists for Firebase deployment
+          if [ -d "./frontend/dist" ] && [ ! -d "./dist" ]; then
+            echo "📁 Copying frontend/dist to ./dist for Firebase deployment"
+            cp -r ./frontend/dist ./dist
           fi
           echo "✅ Artifact validation passed"
 
@@ -254,13 +260,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download Frontend Artifact
-        uses: actions/download-artifact@v4
+      - name: Prepare Frontend for Deployment
+        id: prepare-frontend
+        uses: ./.github/actions/prepare-frontend-deploy
         with:
-          name: frontend-dist
-          path: ./dist
-          run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          node-version: ${{ env.NODE_VERSION }}
+          artifact-name: frontend-dist
+          fallback-build: true
+          ci-run-id: ${{ needs.pre-deploy-checks.outputs.run-id }}
 
       - name: Download Backend Artifact
         uses: actions/download-artifact@v4
@@ -273,13 +280,18 @@ jobs:
       - name: Validate Downloaded Artifacts
         run: |
           echo "🔍 Validating downloaded artifacts..."
-          if [ ! -d "./dist" ] || [ -z "$(ls -A ./dist)" ]; then
+          if [ ! -d "./dist" ] && [ ! -d "./frontend/dist" ]; then
             echo "❌ Frontend artifact validation failed"
             exit 1
           fi
           if [ ! -d "./backend" ] || [ -z "$(ls -A ./backend)" ]; then
             echo "❌ Backend artifact validation failed"
             exit 1
+          fi
+          # Ensure dist directory exists for Firebase deployment
+          if [ -d "./frontend/dist" ] && [ ! -d "./dist" ]; then
+            echo "📁 Copying frontend/dist to ./dist for Firebase deployment"
+            cp -r ./frontend/dist ./dist
           fi
           echo "✅ Artifact validation passed"
 
