@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DocumentCard } from './DocumentCard';
 import { DocumentView, Document } from './types';
-import { Box, Typography, IconButton, Grid } from '@mui/material';
+import { Box, Typography, IconButton, Grid  } from '@mui/material';
 import { GridView, ViewList } from '@mui/icons-material';
 
 interface DocumentBrowserProps {

@@ -282,7 +282,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   description: 'Generated this month',
                 },
                 {
-                  icon: Target,
+                  icon: GpsFixed as Target,
                   title: 'Applications',
                   value: '13',
                   description: 'Submitted applications',

@@ -24,8 +24,8 @@ import {
   GpsFixed as Target,
   BarChart,
 } from '@mui/icons-material';
-import { AnimatedCard, StaggeredList } from './AnimatedComponents';
-import { SkeletonLoading } from './StandardizedLoadingStates';
+import { AnimatedCard, StaggeredList } from '../demo/AnimatedComponents';
+// import { SkeletonLoading } from '../common/StandardizedLoadingStates';
 import {
   Button,
   IconButton,
@@ -131,7 +131,7 @@ export function DocumentTypeSelector({
       id: 'selection-criteria',
       title: 'Selection Criteria',
       description: 'Address key selection criteria with detailed examples',
-      icon: Award,
+      icon: EmojiEvents as Award,
       color: 'text-purple-500',
       bgColor: 'bg-purple-500/10',
       category: 'other',
@@ -165,7 +165,7 @@ export function DocumentTypeSelector({
       id: 'portfolio',
       title: 'Portfolio',
       description: 'Showcase your best work and projects',
-      icon: BookOpen,
+      icon: Book as BookOpen,
       color: 'text-amber-500',
       bgColor: 'bg-amber-500/10',
       category: 'other',
@@ -597,7 +597,7 @@ export function DocumentTypeSelector({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
               >
-                <SkeletonLoading variant="card" />
+                <div>Loading...</div>
               </motion.div>
             ))}
           </motion.div>

@@ -361,13 +361,13 @@ export default function App() {
     {
       id: 'dashboard-empty',
       label: 'Dashboard (Empty)',
-      icon: BarChart3,
+      icon: BarChart as BarChart3,
       description: 'First-time user dashboard',
     },
     {
       id: 'dashboard',
       label: 'Dashboard',
-      icon: BarChart3,
+      icon: BarChart as BarChart3,
       description: 'Profile management dashboard',
     },
     {
@@ -379,13 +379,13 @@ export default function App() {
     {
       id: 'job-input',
       label: 'Job Analysis',
-      icon: Target,
+      icon: GpsFixed as Target,
       description: 'Job URL or description input',
     },
     {
       id: 'ats-analysis',
       label: 'ATS Analysis',
-      icon: BarChart3,
+      icon: BarChart as BarChart3,
       description: 'AI-powered resume scoring',
     },
     {
@@ -415,7 +415,7 @@ export default function App() {
     {
       id: 'job-matching',
       label: 'Job Matching',
-      icon: Target,
+      icon: GpsFixed as Target,
       description: 'AI-powered job recommendations',
     },
     {
@@ -427,7 +427,7 @@ export default function App() {
     {
       id: 'interview-prep',
       label: 'Interview Prep',
-      icon: MessageSquare,
+      icon: ChatBubble as MessageSquare,
       description: 'AI interview practice',
     },
     {
@@ -451,11 +451,11 @@ export default function App() {
     {
       id: 'animated-showcase',
       label: 'Animated Components',
-      icon: Sparkles,
+      icon: AutoAwesome as Sparkles,
       description: 'Advanced animations',
     },
-    { id: 'state-demo', label: 'State Demo', icon: Play, description: 'Interactive demos' },
-    { id: 'mui-test', label: 'MUI Test', icon: Sparkles, description: 'MUI component showcase' },
+    { id: 'state-demo', label: 'State Demo', icon: PlayArrow as Play, description: 'Interactive demos' },
+    { id: 'mui-test', label: 'MUI Test', icon: AutoAwesome as Sparkles, description: 'MUI component showcase' },
   ];
 
   const handleDemoNavigation = (viewId: string) => {

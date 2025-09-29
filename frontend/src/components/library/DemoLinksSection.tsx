@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentSection } from './ComponentDemo';
-import { Sparkles, Play } from '@mui/icons-material';
+import { AutoAwesome as Sparkles, PlayArrow as Play } from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -28,7 +28,7 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary/10 rounded-lg">
-                  <Sparkles className="w-6 h-6 text-primary" />
+                  <AutoAwesome as Sparkles className="w-6 h-6 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Animated Components</h3>

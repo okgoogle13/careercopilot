@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
+import { Box, Typography, Grid  } from '@mui/material';
 import { Bolt, GpsFixed, TrendingUp, EmojiEvents } from '@mui/icons-material';
 
 const features = [

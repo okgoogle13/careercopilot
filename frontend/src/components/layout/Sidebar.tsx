@@ -23,7 +23,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
   const theme = useTheme();
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
+    { id: 'dashboard', label: 'Dashboard', icon: BarChart as BarChart3 },
     { id: 'ats-analysis', label: 'ATS Analysis', icon: FileText },
   ];
 

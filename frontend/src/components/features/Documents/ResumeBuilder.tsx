@@ -3,7 +3,7 @@ import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
 import { Label } from '../../ui/label';
 import { Badge } from '../../ui/badge';
-import { ArrowLeft, Save, Eye, Download, Layout, Palette } from '@mui/icons-material';
+import { ArrowLeft, Save, Visibility as Eye, Download, Dashboard as Layout, Palette } from '@mui/icons-material';
 import {
   Button,
   IconButton,

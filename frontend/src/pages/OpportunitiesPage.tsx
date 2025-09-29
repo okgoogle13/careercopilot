@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
+import { Box,
   Container,
   Grid,
   Paper,
@@ -40,7 +39,7 @@ import {
   LinearProgress,
   Rating,
   Fab,
-} from '@mui/material';
+ } from '@mui/material';
 import {
   Search,
   FilterList,

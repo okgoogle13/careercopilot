@@ -1,4 +1,4 @@
-import { Edit3, Trash2 } from '@mui/icons-material';
+import { Edit as Edit3, Delete as Trash2 } from '@mui/icons-material';
 import { Avatar, AvatarFallback } from '../../ui/avatar';
 import {
   Button,
