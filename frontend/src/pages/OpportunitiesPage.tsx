@@ -187,7 +187,7 @@ export function OpportunitiesPage({
 
   const handleBookmark = (jobId: string) => {
     setJobs((prev) =>
-      prev.map((job) => (job.id === jobId ? { ...job, isBookmarked: !job.isBookmarked } : job))
+      prev.map((job) => (job.id === jobId ? { ...job, i_Bookmarked: !job.isBookmarked } : job))
     );
     onBookmark?.(jobId);
   };
@@ -272,7 +272,7 @@ export function OpportunitiesPage({
     },
   ]);
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (_tatus: string) => {
     switch (status) {
       case 'applied':
         return 'info';
@@ -300,7 +300,7 @@ export function OpportunitiesPage({
     }
   };
 
-  const getMatchScoreColor = (score: number) => {
+  const getMatchScoreColor = (_core: number) => {
     if (score >= 90) return 'success';
     if (score >= 75) return 'warning';
     return 'error';

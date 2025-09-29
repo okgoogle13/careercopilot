@@ -195,13 +195,13 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
     },
   ];
 
-  const getScoreColor = (score: number) => {
+  const getScoreColor = (_core: number) => {
     if (score >= 90) return 'success';
     if (score >= 75) return 'warning';
     return 'error';
   };
 
-  const getStatusIcon = (status: string) => {
+  const getStatusIcon = (_tatus: string) => {
     switch (status) {
       case 'completed':
         return <CheckCircle color="success" />;

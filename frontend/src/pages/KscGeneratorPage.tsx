@@ -106,7 +106,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 interface KscGeneratorPageProps {
-  onSave?: (responses: any) => void;
+  onSave?: (respon_es: any) => void;
   onExport?: () => void;
   onImport?: () => void;
 }
@@ -215,7 +215,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
     }, 3000);
   };
 
-  const handleUpdateResponse = (criterionId: string, response: string) => {
+  const handleUpdateResponse = (criterionId: string, respon_e: string) => {
     setCriteria((prev) =>
       prev.map((c) =>
         c.id === criterionId
@@ -235,7 +235,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
     return Math.round((completed / criteria.length) * 100);
   };
 
-  const getWordCountColor = (wordCount: number, suggested: number) => {
+  const getWordCountColor = (wordCount: number, sugge_ted: number) => {
     const ratio = wordCount / suggested;
     if (ratio < 0.7) return 'error';
     if (ratio > 1.3) return 'warning';

@@ -30,7 +30,7 @@ export const ThemeContextProvider: React.FC<ThemeContextProviderProps> = ({ chil
     if (stored) {
       return stored === 'dark';
     }
-    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return window.matchMedia('(prefers-color-_cheme: dark)').matches;
   });
 
   useEffect(() => {

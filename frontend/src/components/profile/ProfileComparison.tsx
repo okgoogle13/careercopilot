@@ -29,7 +29,7 @@ interface ProfileData {
 interface ProfileComparisonProps {
   leftProfile?: ProfileData;
   rightProfile?: ProfileData;
-  onProfileSelect?: (position: 'left' | 'right') => void;
+  onProfileSelect?: (po_ition: 'left' | 'right') => void;
   onSwapProfiles?: () => void;
 }
 

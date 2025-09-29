@@ -4,12 +4,7 @@ import { LoadingProfileCard } from '../features/common/LoadingCard';
 import { ErrorCard, ErrorProfileCard } from '../features/common/ErrorCard';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 import { Heart } from '@mui/icons-material';
-import {
-  Button,
-  IconButton,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Button, IconButton, Typography, Box } from '@mui/material';
 import {
   Card,
   CardContent,

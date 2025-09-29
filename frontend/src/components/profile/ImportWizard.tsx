@@ -136,7 +136,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
     setLinkedInData(null);
   };
 
-  const handleSectionToggle = (section: keyof typeof selectedSections) => {
+  const handleSectionToggle = (_ection: keyof typeof selectedSections) => {
     setSelectedSections((prev) => ({
       ...prev,
       [section]: !prev[section],

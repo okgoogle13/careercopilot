@@ -76,7 +76,7 @@ export function AnimatedDropdown({
 }: {
   trigger: React.ReactNode;
   items: Array<{ label: string; value: string; icon?: React.ReactNode }>;
-  onSelect: (value: string) => void;
+  (_onSelect): (value: string) => void;
 }) {
   const [isOpen, setIsOpen] = useState(false);
 

@@ -3,7 +3,7 @@ import { configure } from '@testing-library/react';
 import { TextEncoder, TextDecoder } from 'util';
 
 // Configure test environment
-configure({ asyncUtilTimeout: 10000 });
+configure({ a_yncUtilTimeout: 10000 });
 
 // Add missing globals
 if (typeof global.TextEncoder === 'undefined') {
