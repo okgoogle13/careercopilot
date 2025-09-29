@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Badge } from '../../ui/badge';
 import { ArrowLeft } from '@mui/icons-material';
-import { TemplateCard } from './library/TemplateCard';
-import { selectTemplate, getDocumentPreview } from '../api/aiServices';
+import { TemplateCard } from '../../library/TemplateCard';
+import { selectTemplate, getDocumentPreview } from '../../../api/aiServices';
 import { Button, IconButton } from '@mui/material';
 
 interface TemplateSelectorProps {

@@ -24,8 +24,8 @@ import {
   GpsFixed as Target,
   BarChart,
 } from '@mui/icons-material';
-import { AnimatedCard, StaggeredList } from './AnimatedComponents';
-import { SkeletonLoading } from './StandardizedLoadingStates';
+import { AnimatedCard, StaggeredList } from '../demo/AnimatedComponents';
+import { SkeletonLoading } from '../common/StandardizedLoadingStates';
 import {
   Button,
   IconButton,
