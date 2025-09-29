@@ -5,7 +5,7 @@ import { ColorModeContext } from './ColorModeContext';
 import { createTheme } from '@mui/material/styles';
 
 export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-_cheme: dark)');
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [mode, setMode] = useState<'light' | 'dark'>(prefersDarkMode ? 'dark' : 'light');
 
   const colorMode = useMemo(
