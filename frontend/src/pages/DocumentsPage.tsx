@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
+import { Box,
   Container,
   Grid,
   Paper,
@@ -35,7 +34,7 @@ import {
   Toolbar,
   Tooltip,
   Badge,
-} from '@mui/material';
+ } from '@mui/material';
 import {
   Add,
   Search,

@@ -32,7 +32,7 @@ import {
   Tooltip,
   Badge,
 } from '@mui/material';
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material';
 import {
   Analytics,
   TrendingUp,
@@ -328,7 +328,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
 
       {/* Analysis Summary Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -344,7 +344,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
           </Card>
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -360,7 +360,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
           </Card>
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -376,7 +376,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
           </Card>
         </Grid>
 
-        <Grid xs={12} sm={6} md={3}>
+        <Grid item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -518,7 +518,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
         <TabPanel value={tabValue} index={1}>
           <Box sx={{ px: 3 }}>
             <Grid container spacing={3}>
-              <Grid xs={12} md={6}>
+              <Grid item xs={12} md={6}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
@@ -541,7 +541,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                 </Card>
               </Grid>
 
-              <Grid xs={12} md={6}>
+              <Grid item xs={12} md={6}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
@@ -571,7 +571,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
         <TabPanel value={tabValue} index={2}>
           <Box sx={{ px: 3 }}>
             <Grid container spacing={3}>
-              <Grid xs={12} md={8}>
+              <Grid item xs={12} md={8}>
                 <Stack spacing={2}>
                   <Alert severity="success" sx={{ borderRadius: 2 }}>
                     <Typography variant="subtitle2" fontWeight={600}>
@@ -605,7 +605,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                 </Stack>
               </Grid>
 
-              <Grid xs={12} md={4}>
+              <Grid item xs={12} md={4}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>

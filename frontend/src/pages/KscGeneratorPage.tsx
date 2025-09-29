@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Box,
+import { Box,
   Container,
   Grid,
   Paper,
@@ -36,7 +35,7 @@ import {
   Avatar,
   Tab,
   Tabs,
-} from '@mui/material';
+ } from '@mui/material';
 import {
   Add,
   Upload,

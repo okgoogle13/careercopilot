@@ -23,8 +23,8 @@ import {
   GitHub,
 } from '@mui/icons-material';
 import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
-import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';
-import { AIProcessingLoading } from './StandardizedLoadingStates';
+import { AnimatedCard, AnimatedButton, AnimatedProgress } from '../demo/AnimatedComponents';
+import { AIProcessingLoading } from '../common/StandardizedLoadingStates';
 import {
   Button,
   IconButton,
@@ -171,7 +171,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       location: 'Brisbane, QLD',
       startDate: '2016-02',
       endDate: '2017-06',
-      honors: ["Dean's List", 'Outstanding Student Award'],
+      honors: ["Dean's List", 'Outstanding Student EmojiEvents as Award'],
     },
   ]);
 
@@ -330,7 +330,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 Experience
               </TabsTrigger>
               <TabsTrigger value="skills" className="flex items-center gap-2">
-                <Award className="h-4 w-4" />
+                <EmojiEvents as Award className="h-4 w-4" />
                 Skills
               </TabsTrigger>
               <TabsTrigger value="social" className="flex items-center gap-2">
@@ -447,7 +447,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           className="flex-1"
                           onClick={handleGenerateSummary}
                         >
-                          <Sparkles className="mr-2 h-4 w-4" />
+                          <AutoAwesome as Sparkles className="mr-2 h-4 w-4" />
                           AI Generate
                         </AnimatedButton>
                       )}
@@ -501,7 +501,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-purple-100 rounded-lg">
-                      <Award className="w-5 h-5 text-purple-600" />
+                      <EmojiEvents as Award className="w-5 h-5 text-purple-600" />
                     </div>
                     <h3 className="font-semibold text-lg">Skills & Expertise</h3>
                   </div>
@@ -615,7 +615,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 {/* Skill Suggestions */}
                 <Card className="p-4 bg-blue-50 border-blue-200">
                   <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-4 h-4 text-blue-600" />
+                    <AutoAwesome as Sparkles className="w-4 h-4 text-blue-600" />
                     <h4 className="font-medium text-blue-900">AI Skill Suggestions</h4>
                   </div>
                   <div className="flex flex-wrap gap-2">

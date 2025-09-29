@@ -1,4 +1,4 @@
-import { Upload, Description as FileText, Mail, Award } from '@mui/icons-material';
+import { Upload, Description as FileText, Mail, EmojiEvents as Award } from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -83,7 +83,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
           <Card className="p-6">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Award className="w-5 h-5 text-primary" />
+                <EmojiEvents as Award className="w-5 h-5 text-primary" />
               </div>
               <div>
                 <h3 className="font-semibold">Selection Criteria Responses</h3>

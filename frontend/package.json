@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build --mode production",
     "preview": "vite preview",
     "test": "jest --config=jest.config.js",
     "test:watch": "jest --watch --config=jest.config.js",
@@ -92,6 +92,7 @@
     "prettier": "^3.2.5",
     "storybook": "^8.1.11",
     "styled-components": "^5.3.1",
+    "terser": "^5.44.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.3.3",
     "vite": "^5.1.4",

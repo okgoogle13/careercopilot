@@ -74,13 +74,13 @@ const mainNavigation: NavigationItem[] = [
   {
     id: 'ats-analysis',
     label: 'ATS Analysis',
-    icon: BarChart3,
+    icon: BarChart as BarChart3,
     description: 'Resume scoring and optimization',
   },
   {
     id: 'job-matching',
     label: 'Job Matching',
-    icon: Target,
+    icon: GpsFixed as Target,
     description: 'AI-powered job recommendations',
     divider: true,
   },
@@ -93,7 +93,7 @@ const mainNavigation: NavigationItem[] = [
   {
     id: 'interview-prep',
     label: 'Interview Prep',
-    icon: MessageSquare,
+    icon: ChatBubble as MessageSquare,
     description: 'Practice and feedback',
   },
   {
