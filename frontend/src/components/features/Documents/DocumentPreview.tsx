@@ -409,16 +409,7 @@ export function DocumentPreview({
   };
 
   // Handle version control
-  const handleRestoreVersion = (ver_ionId: string) => {
-    if (
-      window.confirm(
-        'Are you sure you want to restore this version? Any unsaved changes will be lost.'
-      )
-    ) {
-      onVersionRestore(versionId);
-      setSelectedVersion(null);
-    }
-  };
+
 
   // Handle export
   const handleExport = (format: string) => {
