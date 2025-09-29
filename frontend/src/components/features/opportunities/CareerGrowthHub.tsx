@@ -4,19 +4,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import {
   ArrowLeft,
-  Sparkles,
-  Target,
+  AutoAwesome as Sparkles,
+  GpsFixed as Target,
   TrendingUp,
-  MessageSquare,
+  ChatBubble as MessageSquare,
   ArrowRight,
-  BookOpen,
-  Trophy,
-  Clock,
+  Book as BookOpen,
+  EmojiEvents as Trophy,
+  Schedule as Clock,
   Users,
   CheckCircle,
-  Plus,
+  Add as Plus,
   Star,
-  BarChart3,
+  BarChart as BarChart3,
 } from '@mui/icons-material';
 import {
   Button,
@@ -165,7 +165,7 @@ const features = [
     title: 'AI Job Matching',
     description:
       'Find roles that perfectly match your skills and experience using advanced AI analysis.',
-    icon: Target,
+    icon: GpsFixed as Target,
     color: 'text-blue-500',
     bgColor: 'bg-blue-500/10',
     borderColor: 'border-blue-500/20',
@@ -185,7 +185,7 @@ const features = [
     id: 'interview-prep' as const,
     title: 'Interview Preparation',
     description: 'Practice with AI-powered mock interviews tailored to your target roles.',
-    icon: MessageSquare,
+    icon: ChatBubble as MessageSquare,
     color: 'text-purple-500',
     bgColor: 'bg-purple-500/10',
     borderColor: 'border-purple-500/20',
@@ -230,7 +230,7 @@ export function CareerGrowthHub({
 
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Sparkles className="w-8 h-8 text-primary" />
+              <AutoAwesome as Sparkles className="w-8 h-8 text-primary" />
               <h1 className="text-4xl font-semibold">Career Growth Hub</h1>
             </div>
             <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
@@ -242,7 +242,7 @@ export function CareerGrowthHub({
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-4 mb-8">
               <TabsTrigger value="overview" className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4" />
+                <BarChart as BarChart3 className="w-4 h-4" />
                 Overview
               </TabsTrigger>
               <TabsTrigger value="goals" className="flex items-center gap-2">
@@ -254,7 +254,7 @@ export function CareerGrowthHub({
                 Skills ({userSkills.length})
               </TabsTrigger>
               <TabsTrigger value="ai-tools" className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4" />
+                <AutoAwesome as Sparkles className="w-4 h-4" />
                 AI Tools
               </TabsTrigger>
             </TabsList>
@@ -381,7 +381,7 @@ export function CareerGrowthHub({
                       {/* Gemini AI Badge */}
                       <div className="absolute top-4 right-4">
                         <Badge className="bg-primary/10 text-primary border-primary/30">
-                          <Sparkles className="w-3 h-3 mr-1" />
+                          <AutoAwesome as Sparkles className="w-3 h-3 mr-1" />
                           AI Powered
                         </Badge>
                       </div>
@@ -433,7 +433,7 @@ export function CareerGrowthHub({
           <Card className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border-primary/20 mt-8">
             <div className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2">
-                <Sparkles className="w-6 h-6 text-primary" />
+                <AutoAwesome as Sparkles className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-semibold">Powered by Advanced AI</h3>
               </div>
               <p className="text-muted-foreground max-w-2xl mx-auto">

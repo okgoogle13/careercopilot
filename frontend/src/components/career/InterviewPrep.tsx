@@ -383,7 +383,7 @@ export function InterviewPrep({
                     onClick={handleGetFeedback}
                     disabled={!userAnswer.trim() && !isRecording}
                     className="bg-primary hover:bg-primary/90"
-                    startIcon={<MessageSquare sx={{ fontSize: 16 }} />}
+                    startIcon={<ChatBubble as MessageSquare sx={{ fontSize: 16 }} />}
                   >
                     Get AI Feedback
                   </Button>

@@ -12,11 +12,11 @@ import {
 } from '@mui/material';
 import {
   MapPin,
-  Clock,
+  Schedule as Clock,
   DollarSign,
   Bookmark,
   BookmarkCheck,
-  ExternalLink,
+  OpenInNew as ExternalLink,
   Building2,
 } from '@mui/icons-material';
 
@@ -194,7 +194,7 @@ export function JobCard({
               e.stopPropagation();
               onViewDetails?.(id);
             }}
-            endIcon={<ExternalLink sx={{ fontSize: 16 }} />}
+            endIcon={<OpenInNew as ExternalLink sx={{ fontSize: 16 }} />}
           >
             View Details
           </Button>

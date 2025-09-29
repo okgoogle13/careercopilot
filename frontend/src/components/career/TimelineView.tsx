@@ -51,7 +51,7 @@ const eventIcons = {
   application: FileText,
   interview: Calendar,
   response: MessageCircle,
-  follow_up: Clock,
+  follow_up: Schedule as Clock,
   offer: CheckCircle,
   rejection: AlertCircle,
 };
@@ -165,7 +165,7 @@ export function TimelineView({
                             size="small"
                             variant="outlined"
                             onClick={() => onViewDocument?.(doc)}
-                            endIcon={<ExternalLink sx={{ fontSize: 14 }} />}
+                            endIcon={<OpenInNew as ExternalLink sx={{ fontSize: 14 }} />}
                           >
                             {doc}
                           </Button>

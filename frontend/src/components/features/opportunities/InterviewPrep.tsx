@@ -3,12 +3,12 @@ import { Badge } from '../../ui/badge';
 import { Textarea } from '../../ui/textarea';
 import {
   ArrowLeft,
-  Sparkles,
-  MessageSquare,
-  Play,
+  AutoAwesome as Sparkles,
+  ChatBubble as MessageSquare,
+  PlayArrow as Play,
   Mic,
   MicOff,
-  RotateCcw,
+  Refresh as RotateCcw,
 } from '@mui/icons-material';
 import {
   Button,
@@ -179,7 +179,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
 
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-primary" />
+            <AutoAwesome as Sparkles className="w-8 h-8 text-primary" />
             <h1 className="text-3xl font-semibold">AI Interview Preparation</h1>
           </div>
           <p className="text-muted-foreground text-lg">
@@ -198,7 +198,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               >
                 <div className="text-center space-y-4">
                   <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-200">
-                    <MessageSquare className="w-8 h-8 text-primary" />
+                    <ChatBubble as MessageSquare className="w-8 h-8 text-primary" />
                   </div>
 
                   <div>
@@ -295,12 +295,12 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     >
                       {isGeneratingTips ? (
                         <>
-                          <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
+                          <AutoAwesome as Sparkles className="w-4 h-4 mr-2 animate-pulse" />
                           Analyzing...
                         </>
                       ) : (
                         <>
-                          <Sparkles className="w-4 h-4 mr-2" />
+                          <AutoAwesome as Sparkles className="w-4 h-4 mr-2" />
                           Get AI Feedback
                         </>
                       )}
@@ -329,7 +329,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               {isGeneratingTips && (
                 <Card className="p-6 bg-primary/5 border-primary/20">
                   <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-5 h-5 text-primary animate-pulse" />
+                    <AutoAwesome as Sparkles className="w-5 h-5 text-primary animate-pulse" />
                     <h3 className="font-semibold text-primary">AI Feedback</h3>
                   </div>
                   <div className="space-y-2 text-sm">

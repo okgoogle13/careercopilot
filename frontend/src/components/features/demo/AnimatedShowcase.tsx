@@ -18,7 +18,7 @@ import {
   StaggeredList,
   LoadingAnimations,
   AnimatedStatsCard,
-} from './AnimatedComponents';
+} from '../demo/AnimatedComponents';
 import {
   Star,
   Person as User,
@@ -157,7 +157,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="mb-2 flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-primary" />
+                <AutoAwesome as Sparkles className="w-6 h-6 text-primary" />
                 Animated Components Showcase
               </h1>
               <p className="text-muted-foreground">
@@ -252,7 +252,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     trigger={
                       <Button variant="outlined" className="gap-2">
                         Select Option
-                        <Sparkles className="w-4 h-4" />
+                        <AutoAwesome as Sparkles className="w-4 h-4" />
                       </Button>
                     }
                     items={dropdownItems}

@@ -1,21 +1,18 @@
 import { createTheme } from '@mui/material/styles';
+import type { Theme, ThemeOptions } from '@mui/material/styles';
 
-/**
- * Career Copilot Dark Theme
- *
- * Color Palette:
- * - Primary: Purple/Violet (#A855F7) - Main brand color
- * - Secondary: Warm Brown (#8B5A3C) - Accent color for cards
- * - Background: Very dark (#0F0F0F) with slightly lighter papers (#1A1A1A)
- * - Text: High contrast white (#FFFFFF) with light gray secondary (#B3B3B3)
- *
- * Features:
- * - Custom Card variants: 'selected' and 'interactive'
- * - Warm-toned card styles for accent elements
- * - Enhanced typography with proper contrast
- */
+// Extend the Theme interface
+declare module '@mui/material/styles' {
+  interface Theme {
+    // Add custom theme properties here if needed
+  }
+  
+  interface ThemeOptions {
+    // Add custom theme options here if needed
+  }
+}
 
-// Extend Card component props to include custom variants
+// Extend the Card component to include custom variants
 declare module '@mui/material/Card' {
   interface CardPropsVariantOverrides {
     selected: true;
@@ -23,100 +20,110 @@ declare module '@mui/material/Card' {
   }
 }
 
+// Extend the Paper component to include custom variants
+declare module '@mui/material/Paper' {
+  interface PaperPropsVariantOverrides {
+    selected: true;
+    interactive: true;
+  }
+}
+
+// Create the theme
 export const theme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#A855F7', // Purple/violet that matches your screenshots
-      light: '#C084FC',
+      main: '#A855F7', // Purple/violet
       dark: '#7C3AED',
+      light: '#C084FC',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#8B5A3C', // Warm brown/orange for accent cards
-      light: '#A67C5A',
+      main: '#8B5A3C', // Warm brown/orange
       dark: '#6B4423',
+      light: '#A67C5A',
       contrastText: '#FFFFFF',
     },
     background: {
-      default: '#0F0F0F', // Very dark background like in your screenshots
-      paper: '#1A1A1A', // Slightly lighter for cards/papers
+      default: '#0F0F0F',
+      paper: '#1A1A1A',
     },
     text: {
-      primary: '#FFFFFF', // Bright white for primary text
-      secondary: '#B3B3B3', // Light gray for secondary text
+      primary: '#FFFFFF',
+      secondary: '#B3B3B3',
+      disabled: '#666666',
     },
-    error: {
-      main: '#EF4444', // Red with good contrast on dark backgrounds
-      light: '#F87171',
-      dark: '#DC2626',
-      contrastText: '#FFFFFF',
+    divider: 'rgba(255, 255, 255, 0.12)',
+  },
+  typography: {
+    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    h1: {
+      fontWeight: 600,
+      fontSize: '2.5rem',
+      lineHeight: 1.2,
     },
-    warning: {
-      main: '#F59E0B', // Orange with good contrast
-      light: '#FCD34D',
-      dark: '#D97706',
-      contrastText: '#FFFFFF',
+    h2: {
+      fontWeight: 600,
+      fontSize: '2rem',
+      lineHeight: 1.2,
     },
-    success: {
-      main: '#10B981', // Same as secondary for consistency
-      light: '#34D399',
-      dark: '#047857',
-      contrastText: '#FFFFFF',
+    h3: {
+      fontWeight: 600,
+      fontSize: '1.75rem',
+      lineHeight: 1.2,
     },
-    info: {
-      main: '#3B82F6', // Blue with good contrast
-      light: '#60A5FA',
-      dark: '#1D4ED8',
-      contrastText: '#FFFFFF',
+    h4: {
+      fontWeight: 600,
+      fontSize: '1.5rem',
+      lineHeight: 1.2,
+    },
+    h5: {
+      fontWeight: 600,
+      fontSize: '1.25rem',
+      lineHeight: 1.2,
+    },
+    h6: {
+      fontWeight: 600,
+      fontSize: '1rem',
+      lineHeight: 1.2,
+    },
+    button: {
+      textTransform: 'none',
+      fontWeight: 500,
     },
   },
+  shape: {
+    borderRadius: 8,
+  },
   components: {
-    // Ensure buttons meet contrast requirements
     MuiButton: {
       styleOverrides: {
         root: {
-          fontWeight: 600, // Slightly bolder for better readability
+          borderRadius: 8,
+          padding: '8px 16px',
         },
-        containedPrimary: {
-          backgroundColor: '#A855F7',
-          color: '#FFFFFF',
+        contained: {
+          boxShadow: 'none',
           '&:hover': {
-            backgroundColor: '#9333EA',
-          },
-          '&:disabled': {
-            backgroundColor: '#64748B',
-            color: '#94A3B8',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
           },
         },
       },
     },
-    // Ensure form inputs have proper contrast
-    MuiTextField: {
+    MuiCard: {
       styleOverrides: {
         root: {
-          '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: '#64748B', // Better contrast for borders
-            },
-            '&:hover fieldset': {
-              borderColor: '#94A3B8',
-            },
-            '&.Mui-focused fieldset': {
-              borderColor: '#A855F7',
-            },
-          },
+          borderRadius: 12,
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+          transition: 'all 0.3s ease',
         },
       },
-    },
-    // Add Card component styles for warm-toned cards like in your screenshots
-    MuiCard: {
       variants: [
         {
           props: { variant: 'selected' },
           style: {
             border: '2px solid',
-            borderColor: '#A855F7', // Use new primary color
+            borderColor: 'primary.main',
             boxShadow: '0 0 12px rgba(168, 85, 247, 0.3)',
           },
         },
@@ -124,67 +131,36 @@ export const theme = createTheme({
           props: { variant: 'interactive' },
           style: {
             cursor: 'pointer',
-            transition: 'all 0.3s ease',
             '&:hover': {
               transform: 'translateY(-4px)',
-              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)',
+              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)',
             },
           },
         },
       ],
-      styleOverrides: {
-        root: {
-          backgroundColor: '#1A1A1A',
-          borderRadius: '12px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-          '&.warm-card': {
-            backgroundColor: '#2D1B12', // Warm brown background for accent cards
-            border: '1px solid #8B5A3C',
-          },
-          '&.purple-card': {
-            backgroundColor: '#1E1B3A', // Purple-tinted background
-            border: '1px solid #A855F7',
-          },
-        },
-      },
     },
-    // Enhanced Paper component for consistency
     MuiPaper: {
       styleOverrides: {
         root: {
-          backgroundColor: '#1A1A1A',
-          '&.warm-paper': {
-            backgroundColor: '#2D1B12',
-          },
+          backgroundImage: 'none',
         },
       },
     },
-    // Typography enhancements
-    MuiTypography: {
+    MuiTextField: {
       styleOverrides: {
-        h1: {
-          color: '#FFFFFF',
-          fontWeight: 700,
-        },
-        h2: {
-          color: '#FFFFFF',
-          fontWeight: 600,
-        },
-        h3: {
-          color: '#FFFFFF',
-          fontWeight: 600,
-        },
-        h4: {
-          color: '#FFFFFF',
-          fontWeight: 600,
-        },
-        h5: {
-          color: '#FFFFFF',
-          fontWeight: 500,
-        },
-        h6: {
-          color: '#FFFFFF',
-          fontWeight: 500,
+        root: {
+          '& .MuiOutlinedInput-root': {
+            borderRadius: 8,
+            '& fieldset': {
+              borderColor: 'rgba(255, 255, 255, 0.23)',
+            },
+            '&:hover fieldset': {
+              borderColor: 'rgba(255, 255, 255, 0.5)',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: 'primary.main',
+            },
+          },
         },
       },
     },
