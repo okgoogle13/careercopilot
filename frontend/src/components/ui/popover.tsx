@@ -8,7 +8,7 @@ export interface PopoverProps extends Omit<MuiPopoverProps, 'open'> {
 
 export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
   ({ open = false, onOpenChange, onClose, children, ...props }, ref) => {
-    const handleClose = (event: {}, rea_on: 'backdropClick' | 'escapeKeyDown') => {
+    const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
       if (onOpenChange) {
         onOpenChange(false);
       }
