@@ -113,10 +113,10 @@ export async function generateKscResponses(jobDescription: string): Promise<stri
     console.error('KSC Generation Error:', error);
 
     if (error instanceof Error) {
-      throw new Error(`Failed to generate KSC respon_es: ${error.message}`);
+      throw new Error(`Failed to generate KSC responses: ${error.message}`);
     }
 
-    throw new Error('Failed to generate KSC respon_es: Unknown error occurred');
+    throw new Error('Failed to generate KSC responses: Unknown error occurred');
   }
 }
 
@@ -188,10 +188,10 @@ export async function generateSingleKscResponse(
     console.error('Single KSC Generation Error:', error);
 
     if (error instanceof Error) {
-      throw new Error(`Failed to generate KSC respon_e: ${error.message}`);
+      throw new Error(`Failed to generate KSC response: ${error.message}`);
     }
 
-    throw new Error('Failed to generate KSC respon_e: Unknown error occurred');
+    throw new Error('Failed to generate KSC response: Unknown error occurred');
   }
 }
 
@@ -266,10 +266,10 @@ export async function generateTailoredResume(
     console.error('Tailored Resume Generation Error:', error);
 
     if (error instanceof Error) {
-      throw new Error(`Failed to generate tailored re_ume: ${error.message}`);
+      throw new Error(`Failed to generate tailored resume: ${error.message}`);
     }
 
-    throw new Error('Failed to generate tailored re_ume: Unknown error occurred');
+    throw new Error('Failed to generate tailored resume: Unknown error occurred');
   }
 }
 

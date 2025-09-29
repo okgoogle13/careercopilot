@@ -230,7 +230,7 @@ export function Settings({ onBack }: SettingsProps) {
                   <Switch
                     checked={notifications.weeklyDigest}
                     onCheckedChange={(checked) =>
-                      setNotifications({ ...notifications, weeklyDige_t: checked })
+                      setNotifications({ ...notifications, weeklyDigest: checked })
                     }
                   />
                 </div>
