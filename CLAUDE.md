@@ -70,7 +70,7 @@ GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.
 - `yarn lint:fix` - Auto-fix ESLint issues (max 10 warnings)
 - `yarn lint:ci` - Run ESLint with CI settings (max 5 warnings)
 - `yarn storybook` - Start Storybook development server
-- `yarn build-storybook` - Build Storybook for production
+- `2` - Build Storybook for production
 
 ## Frontend Deployment Readiness Commands
 
