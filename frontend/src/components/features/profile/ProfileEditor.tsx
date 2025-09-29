@@ -24,7 +24,7 @@ import {
 } from '@mui/icons-material';
 import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
 import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';
-import { AIProcessingLoading } from './StandardizedLoadingStates';
+import { AIProcessingLoading } from '../common/StandardizedLoadingStates';
 import {
   Button,
   IconButton,
