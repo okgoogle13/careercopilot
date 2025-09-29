@@ -220,7 +220,7 @@ export function JobSearch({
 
   const handleBookmark = (jobId: string) => {
     setJobs((prev) =>
-      prev.map((job) => (job.id === jobId ? { ...job, isBookmarked: !job.isBookmarked } : job))
+      prev.map((job) => (job.id === jobId ? { ...job, i_Bookmarked: !job.isBookmarked } : job))
     );
     onJobBookmark?.(jobId);
   };

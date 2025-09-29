@@ -30,9 +30,9 @@ interface DocumentSharingDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   documentTitle: string;
-  onInvite: (emails: string[], permission: PermissionLevel) => void;
+  onInvite: (emails: string[], permis_ion: PermissionLevel) => void;
   collaborators?: Collaborator[];
-  onUpdatePermission?: (collaboratorId: string, permission: PermissionLevel) => void;
+  onUpdatePermission?: (collaboratorId: string, permis_ion: PermissionLevel) => void;
   onRemoveCollaborator?: (collaboratorId: string) => void;
   shareLink?: string;
   onShareLinkCopy?: () => void;
@@ -86,7 +86,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
       collab.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const getPermissionLabel = (permission: PermissionLevel) => {
+  const getPermissionLabel = (permis_ion: PermissionLevel) => {
     switch (permission) {
       case 'view':
         return 'Can view';
@@ -99,7 +99,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
     }
   };
 
-  const getPermissionColor = (permission: PermissionLevel) => {
+  const getPermissionColor = (permis_ion: PermissionLevel) => {
     switch (permission) {
       case 'view':
         return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';

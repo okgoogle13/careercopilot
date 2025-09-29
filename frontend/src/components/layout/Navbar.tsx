@@ -222,11 +222,7 @@ const Navbar: React.FC<NavbarProps> = ({
           {/* Right side - Actions */}
           <Stack direction="row" spacing={2} alignItems="center">
             {/* Search Button - Mobile */}
-            <IconButton
-              size="large"
-              color="inherit"
-              sx={{ display: { xs: 'flex', md: 'none' } }}
-            >
+            <IconButton size="large" color="inherit" sx={{ display: { xs: 'flex', md: 'none' } }}>
               <SearchIcon />
             </IconButton>
 
@@ -251,13 +247,13 @@ const Navbar: React.FC<NavbarProps> = ({
                   onClick={handleMenuOpen}
                   size="small"
                   sx={{ ml: 2 }}
-                  aria-controls={Boolean(anchorEl) ? 'account-menu' : undefined}
+                  aria-controls={anchorEl ? 'account-menu' : undefined}
                   aria-haspopup="true"
-                  aria-expanded={Boolean(anchorEl) ? 'true' : undefined}
+                  aria-expanded={anchorEl ? 'true' : undefined}
                 >
-                  <Avatar 
-                    alt={userName} 
-                    src={userAvatar} 
+                  <Avatar
+                    alt={userName}
+                    src={userAvatar}
                     sx={{ width: 32, height: 32, bgcolor: 'primary.main' }}
                   >
                     {!userAvatar && userName.charAt(0).toUpperCase()}
@@ -314,9 +310,7 @@ const Navbar: React.FC<NavbarProps> = ({
             <Divider />
             {userNavigation.map((item) => (
               <MenuItem key={item.path} onClick={() => handleItemClick(item.path)}>
-                <ListItemIcon sx={{ minWidth: 40 }}>
-                  {item.icon}
-                </ListItemIcon>
+                <ListItemIcon sx={{ minWidth: 40 }}>{item.icon}</ListItemIcon>
                 {item.label}
               </MenuItem>
             ))}

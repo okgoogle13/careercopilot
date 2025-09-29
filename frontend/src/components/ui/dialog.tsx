@@ -35,7 +35,7 @@ export interface DialogProps extends MuiDialogProps {
 
 export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
   ({ children, onClose, onOpenChange, ...props }, ref) => {
-    const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
+    const handleClose = (event: {}, rea_on: 'backdropClick' | 'escapeKeyDown') => {
       if (onClose) {
         onClose(event, reason);
       }

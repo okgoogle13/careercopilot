@@ -18,18 +18,15 @@ interface NavigationItemProps {
   onItemClick?: () => void;
 }
 
-export const NavigationItem: React.FC<NavigationItemProps> = ({
-  item,
-  depth = 0,
-  onItemClick,
-}) => {
+export const NavigationItem: React.FC<NavigationItemProps> = ({ item, depth = 0, onItemClick }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
-  const isActive = location.pathname === item.path || 
-                  (item.children?.some(child => location.pathname.startsWith(child.path)) ?? false);
+  const isActive =
+    location.pathname === item.path ||
+    (item.children?.some((child) => location.pathname.startsWith(child.path)) ?? false);
 
   const hasChildren = item.children && item.children.length > 0;
 
@@ -67,8 +64,8 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         <ListItemIcon sx={{ minWidth: 40, color: isActive ? 'primary.main' : 'text.secondary' }}>
           {item.icon}
         </ListItemIcon>
-        <ListItemText 
-          primary={item.label} 
+        <ListItemText
+          primary={item.label}
           primaryTypographyProps={{
             fontWeight: isActive ? 600 : 400,
             color: isActive ? 'primary.main' : 'text.primary',
@@ -80,10 +77,10 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             {item.children?.map((child, index) => (
-              <NavigationItem 
-                key={index} 
-                item={child} 
-                depth={depth + 1} 
+              <NavigationItem
+                key={index}
+                item={child}
+                depth={depth + 1}
                 onItemClick={onItemClick}
               />
             ))}

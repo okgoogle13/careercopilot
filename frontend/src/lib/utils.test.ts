@@ -1,7 +1,6 @@
 import { formatFileSize, formatDate } from './utils';
 
 describe('Utils', () => {
-
   describe('formatFileSize', () => {
     it('should format 0 bytes correctly', () => {
       expect(formatFileSize(0)).toBe('0 Bytes');
@@ -100,7 +99,6 @@ describe('Utils', () => {
   });
 
   describe('edge cases and error handling', () => {
-
     it('formatFileSize should handle negative numbers', () => {
       expect(formatFileSize(-1024)).toBe('-1 KB');
     });

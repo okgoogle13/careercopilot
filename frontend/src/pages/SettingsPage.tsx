@@ -101,7 +101,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 interface SettingsPageProps {
-  onSave?: (settings: any) => void;
+  onSave?: (_ettings: any) => void;
   onExport?: () => void;
   onImport?: () => void;
 }

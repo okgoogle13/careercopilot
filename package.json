@@ -47,7 +47,7 @@
     "@firebase/functions": "^0.13.0",
     "@firebase/storage": "^0.13.2",
     "@playwright/test": "1.55.0",
-    "@types/node": "20",
+    "@types/node": "^24.5.2",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
     "esbuild": "^0.18.20",

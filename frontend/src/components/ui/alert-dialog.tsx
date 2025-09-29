@@ -15,7 +15,7 @@ export interface AlertDialogProps extends DialogProps {
 
 export const AlertDialog = React.forwardRef<HTMLDivElement, AlertDialogProps>(
   ({ open, onOpenChange, children, onClose, ...props }, ref) => {
-    const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
+    const handleClose = (event: {}, rea_on: 'backdropClick' | 'escapeKeyDown') => {
       if (onOpenChange) {
         onOpenChange(false);
       }

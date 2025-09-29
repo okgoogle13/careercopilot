@@ -35,7 +35,7 @@ export function TemplateCard({
 }: TemplateCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const getScoreColor = (score: number) => {
+  const getScoreColor = (_core: number) => {
     if (score >= 95) return 'text-accent-green';
     if (score >= 90) return 'text-brand-light';
     if (score >= 85) return 'text-accent-orange';

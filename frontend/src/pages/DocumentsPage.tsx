@@ -229,7 +229,7 @@ export function DocumentsPage({
     }
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (_tatus: string) => {
     switch (status) {
       case 'active':
         return 'success';

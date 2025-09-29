@@ -3,6 +3,7 @@
 ---
 
 --- (Content from stabilization-plan.md) ---
+
 # MUI Refactor: Stabilization & Validation Plan
 
 ## 🎯 Objective
@@ -57,6 +58,7 @@ Your goal is to enforce best practices and ensure long-term code quality.
 **➡️ Deliverable 3:** A final summary confirming that all `className` props have been removed and that the ESLint rule is in place.
 
 --- (Content from stablise.md) ---
+
 # Project Refactor & Stabilization Plan (Revised)
 
 **Role:** You are an expert full-stack engineer. Your task is to execute a comprehensive plan to refactor and stabilize a React/Vite monorepo.
@@ -86,9 +88,11 @@ Execute the following tasks sequentially. For each step that requires code gener
     > **Task:** Refactor the following React component to remove the use of the `cn()` utility function and `clsx`. Replace all conditional styling handled by `className={cn(...)}` with the MUI `sx` prop. The final code must be functionally identical and use only MUI-native styling methods.
     >
     > **Original Code:**
+    >
     > ```tsx
     > [PASTE COMPONENT CODE HERE]
     > ```
+    >
     > Provide only the refactored code.
 
 - [ ] **1.3 Uninstall Unused Dependencies**
@@ -156,16 +160,19 @@ Execute the following tasks sequentially. For each step that requires code gener
     > **Task:** Analyze the failing story file below and the updated component it uses. Identify the problem and provide the corrected code for the story file.
     >
     > **Updated Component:**
+    >
     > ```tsx
     > [PASTE YOUR UPDATED COMPONENT CODE HERE]
     > ```
     >
     > **Failing Story File:**
+    >
     > ```tsx
     > [PASTE YOUR FAILING STORY CODE HERE]
     > ```
 
 --- (Content from stablization-plan.md) ---
+
 # MUI Refactor: Stabilization & Validation Plan
 
 ## 🎯 Objective
