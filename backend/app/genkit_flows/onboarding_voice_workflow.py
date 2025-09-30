@@ -1,20 +1,15 @@
 import json
+import logging
 from typing import List
 
 from app.core.db import db
 from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
+from app.genkit_flows.flow_decorator import genkit_flow
 from pydantic import BaseModel
 
+logger = logging.getLogger(__name__)
+
 # Import the existing voice profiler logic
-
-# Try to import Genkit for decorators, with fallback
-try:
-    import genkit
-
-    GENKIT_AVAILABLE = True
-except ImportError:
-    genkit = None
-    GENKIT_AVAILABLE = False
 
 
 # Define the structured output model for voice profile
@@ -93,19 +88,21 @@ async def _analyze_and_create_voice_profile_impl(
         user_ref.set({"voice_profile": voice_profile.model_dump()}, merge=True)
 
         return voice_profile
-
+        
     except Exception as e:
-        print(f"Error in voice profile analysis for user {input_data.user_id}: {e}")
-        raise e
+        logger.error(f"Error creating voice profile: {str(e)}")
+        raise
 
-
-# Register the flow with conditional decorator
-if GENKIT_AVAILABLE and is_genkit_enabled():
-    analyze_and_create_voice_profile = genkit.flow(output_schema=VoiceProfile)(
-        _analyze_and_create_voice_profile_impl
-    )
-else:
-    analyze_and_create_voice_profile = _analyze_and_create_voice_profile_impl
-
-# Register the flow for tracking
-register_flow_function(analyze_and_create_voice_profile, "analyze_and_create_voice_profile")
+# Define the flow with our genkit_flow decorator
+@genkit_flow(output_schema=VoiceProfile, require_model=True)
+async def analyze_and_create_voice_profile(input_data: VoiceProfileInput) -> VoiceProfile:
+    """
+    Analyzes a user's documents to establish an 'authentic voice' for all future AI-generated content.
+    
+    Args:
+        input_data: Contains user_id and list of document texts
+        
+    Returns:
+        VoiceProfile: The analyzed voice profile
+    """
+    return await _analyze_and_create_voice_profile_impl(input_data)

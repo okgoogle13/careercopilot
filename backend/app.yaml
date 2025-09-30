@@ -1,0 +1,38 @@
+runtime: python311
+service: default
+instance_class: F4
+
+# Automatic scaling configuration
+automatic_scaling:
+  min_instances: 0
+  max_instances: 10
+  target_cpu_utilization: 0.65
+  target_throughput_utilization: 0.75
+
+# Environment variables
+env_variables:
+  ENVIRONMENT: "production"
+  ENABLE_AI_CACHE: "true"
+  ENABLE_GENKIT_FLOWS: "true"
+  PORT: "8080"
+  REDIS_HOST: "10.200.126.35"
+  REDIS_PORT: "6379"
+
+# Entrypoint - use our startup script
+entrypoint: /app/start.sh
+
+# Health check
+liveness_check:
+  path: "/health"
+  check_interval_sec: 30
+  timeout_sec: 10
+  failure_threshold: 3
+  success_threshold: 1
+
+readiness_check:
+  path: "/health"
+  check_interval_sec: 15
+  timeout_sec: 10
+  failure_threshold: 3
+  success_threshold: 1
+  app_start_timeout_sec: 300
