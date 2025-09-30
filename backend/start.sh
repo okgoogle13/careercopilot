@@ -43,7 +43,7 @@ except ImportError as e:
 
 echo "\n=== Starting Uvicorn ==="
 # Use exec to replace the shell process with uvicorn
-# No --workers flag means single process (no multiprocessing)
+# --no-reload disables the file watcher and multiprocessing
 # Cloud Run handles horizontal scaling, so we don't need worker processes
 cd /app
-exec python3 -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --log-level info
+exec python3 -m uvicorn app.main:app --host 0.0.0.0 --port $PORT --log-level info --no-reload
