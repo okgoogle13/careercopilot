@@ -246,16 +246,16 @@ export function JobSearch({
         </Typography>
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid2 container spacing={3}>
         {/* Filters Sidebar */}
         {showFilters && (
-          <Grid item xs={12} md={3}>
+          <Grid2 xs={12} md={3}>
             <FilterPanel onFiltersChange={handleFiltersChange} onReset={() => setFilters(null)} />
-          </Grid>
+          </Grid2>
         )}
 
         {/* Main Content */}
-        <Grid item xs={12} md={showFilters ? 9 : 12}>
+        <Grid2 xs={12} md={showFilters ? 9 : 12}>
           {/* Controls */}
           <Paper className="p-4 mb-6">
             <Box className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
@@ -324,10 +324,9 @@ export function JobSearch({
             />
           ) : (
             <>
-              <Grid container spacing={3}>
+              <Grid2 container spacing={3}>
                 {currentJobs.map((job) => (
-                  <Grid
-                    item
+                  <Grid2
                     xs={12}
                     md={viewMode === 'grid' ? 6 : 12}
                     lg={viewMode === 'grid' ? 4 : 12}
@@ -339,9 +338,9 @@ export function JobSearch({
                       onApply={onJobApply}
                       onViewDetails={onJobView}
                     />
-                  </Grid>
+                  </Grid2>
                 ))}
-              </Grid>
+              </Grid2>
 
               {/* Pagination */}
               {totalPages > 1 && (
@@ -357,8 +356,8 @@ export function JobSearch({
               )}
             </>
           )}
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </Box>
   );
 }

@@ -52,9 +52,9 @@ export function JobSearchStatus({
         </Typography>
       </Box>
 
-      <Grid container spacing={3}>
+      <Grid2 container spacing={3}>
         {/* Applications Sent */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid2 item xs={12} sm={6} md={4}>
           <StatCard
             title="Applications Sent"
             value={stats.applicationsSent}
@@ -63,10 +63,10 @@ export function JobSearchStatus({
             trend={trends.applicationsTrend?.isPositive ? 'up' : 'down'}
             trendValue={`+${trends.applicationsTrend?.value}%`}
           />
-        </Grid>
+        </Grid2>
 
         {/* Interviews */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid2 item xs={12} sm={6} md={4}>
           <StatCard
             title="Interviews"
             value={stats.interviews}
@@ -75,10 +75,10 @@ export function JobSearchStatus({
             trend={trends.interviewsTrend?.isPositive ? 'up' : 'down'}
             trendValue={`+${trends.interviewsTrend?.value}%`}
           />
-        </Grid>
+        </Grid2>
 
         {/* Offers */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid2 item xs={12} sm={6} md={4}>
           <StatCard
             title="Offers Received"
             value={stats.offers}
@@ -87,30 +87,30 @@ export function JobSearchStatus({
             trend={trends.offersTrend?.isPositive ? 'up' : 'down'}
             trendValue={`+${trends.offersTrend?.value}%`}
           />
-        </Grid>
+        </Grid2>
 
         {/* Response Rate */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid2 item xs={12} sm={6} md={4}>
           <StatCard
             title="Response Rate"
             value={`${stats.responseRate}%`}
             subtitle="Interview invitations"
             icon={<GpsFixed sx={{ fontSize: 20 }} className="text-purple-600" />}
           />
-        </Grid>
+        </Grid2>
 
         {/* Average Response Time */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid2 item xs={12} sm={6} md={4}>
           <StatCard
             title="Avg Response Time"
             value={`${stats.avgResponseTime} days`}
             subtitle="From application"
             icon={<AccessTime sx={{ fontSize: 20 }} className="text-indigo-600" />}
           />
-        </Grid>
+        </Grid2>
 
         {/* Profile Views */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid2 item xs={12} sm={6} md={4}>
           <StatCard
             title="Profile Views"
             value={stats.profileViews || 0}
@@ -119,8 +119,8 @@ export function JobSearchStatus({
             trend="up"
             trendValue="+12%"
           />
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </Box>
   );
 }

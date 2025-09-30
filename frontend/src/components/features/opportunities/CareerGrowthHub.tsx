@@ -230,7 +230,7 @@ export function CareerGrowthHub({
 
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <AutoAwesome as Sparkles className="w-8 h-8 text-primary" />
+              <Sparkles className="w-8 h-8 text-primary" />
               <h1 className="text-4xl font-semibold">Career Growth Hub</h1>
             </div>
             <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
@@ -254,7 +254,7 @@ export function CareerGrowthHub({
                 Skills ({userSkills.length})
               </TabsTrigger>
               <TabsTrigger value="ai-tools" className="flex items-center gap-2">
-                <AutoAwesome as Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
                 AI Tools
               </TabsTrigger>
             </TabsList>
@@ -381,7 +381,7 @@ export function CareerGrowthHub({
                       {/* Gemini AI Badge */}
                       <div className="absolute top-4 right-4">
                         <Badge className="bg-primary/10 text-primary border-primary/30">
-                          <AutoAwesome as Sparkles className="w-3 h-3 mr-1" />
+                          <Sparkles className="w-3 h-3 mr-1" />
                           AI Powered
                         </Badge>
                       </div>
@@ -433,7 +433,7 @@ export function CareerGrowthHub({
           <Card className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border-primary/20 mt-8">
             <div className="text-center space-y-4">
               <div className="flex items-center justify-center gap-2">
-                <AutoAwesome as Sparkles className="w-6 h-6 text-primary" />
+                <Sparkles className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-semibold">Powered by Advanced AI</h3>
               </div>
               <p className="text-muted-foreground max-w-2xl mx-auto">

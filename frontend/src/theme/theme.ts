@@ -3,10 +3,12 @@ import type { Theme, ThemeOptions } from '@mui/material/styles';
 
 // Extend the Theme interface
 declare module '@mui/material/styles' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface Theme {
     // Add custom theme properties here if needed
   }
-  
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface ThemeOptions {
     // Add custom theme options here if needed
   }
