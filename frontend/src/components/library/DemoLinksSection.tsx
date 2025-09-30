@@ -28,7 +28,7 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className="p-3 bg-primary/10 rounded-lg">
-                  <AutoAwesome as Sparkles className="w-6 h-6 text-primary" />
+                  <Sparkles className="w-6 h-6 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-medium mb-1">Animated Components</h3>

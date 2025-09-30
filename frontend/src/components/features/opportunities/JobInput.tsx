@@ -96,7 +96,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
                     onChange={(e) => setJobUrl(e.target.value)}
                     className="pr-10"
                   />
-                  <OpenInNew as ExternalLink className="w-4 h-4 text-muted-foreground absolute right-3 top-1/2 transform -translate-y-1/2" />
+                  <ExternalLink className="w-4 h-4 text-muted-foreground absolute right-3 top-1/2 transform -translate-y-1/2" />
                 </div>
                 <p className="text-sm text-muted-foreground mt-2">
                   We'll automatically extract the job requirements and qualifications

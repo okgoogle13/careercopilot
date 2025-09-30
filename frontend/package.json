@@ -11,6 +11,7 @@
     "test:coverage": "jest --coverage --config=jest.config.js",
     "test:update": "jest --updateSnapshot --config=jest.config.js",
     "test:ci": "jest --ci --runInBand --coverage --config=jest.config.js",
+    "type-check": "tsc --noEmit",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "lint:ci": "eslint src --max-warnings=5",

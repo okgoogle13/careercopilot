@@ -165,7 +165,7 @@ export function TimelineView({
                             size="small"
                             variant="outlined"
                             onClick={() => onViewDocument?.(doc)}
-                            endIcon={<OpenInNew as ExternalLink sx={{ fontSize: 14 }} />}
+                            endIcon={<ExternalLink sx={{ fontSize: 14 }} />}
                           >
                             {doc}
                           </Button>

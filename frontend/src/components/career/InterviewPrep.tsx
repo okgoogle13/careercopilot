@@ -15,9 +15,9 @@ import {
   Alert,
   Tabs,
   Tab,
-  Grid,
   IconButton,
 } from '@mui/material';
+import Grid2 from '@mui/material/Grid2';
 import {
   PlayArrow as Play,
   Square,
@@ -245,8 +245,8 @@ export function InterviewPrep({
       </Box>
 
       {/* Filters and Progress */}
-      <Grid container spacing={3} className="mb-6">
-        <Grid item xs={12} md={4}>
+      <Grid2 container spacing={3} className="mb-6">
+        <Grid2 xs={12} md={4}>
           <FormControl fullWidth size="small">
             <InputLabel>Category</InputLabel>
             <Select
@@ -261,9 +261,9 @@ export function InterviewPrep({
               ))}
             </Select>
           </FormControl>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} md={4}>
+        <Grid2 xs={12} md={4}>
           <FormControl fullWidth size="small">
             <InputLabel>Difficulty</InputLabel>
             <Select
@@ -278,9 +278,9 @@ export function InterviewPrep({
               ))}
             </Select>
           </FormControl>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} md={4}>
+        <Grid2 xs={12} md={4}>
           <Box className="flex items-center gap-2 h-full">
             <Typography variant="body2" color="text.secondary">
               Progress: {currentQuestionIndex + 1} of {filteredQuestions.length}
@@ -291,12 +291,12 @@ export function InterviewPrep({
               className="flex-1 h-2 rounded-full"
             />
           </Box>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
-      <Grid container spacing={6}>
+      <Grid2 container spacing={6}>
         {/* Question Panel */}
-        <Grid item xs={12} lg={8}>
+        <Grid2 xs={12} lg={8}>
           <Card className="h-full">
             <CardContent className="p-6">
               {/* Question Header */}
@@ -383,7 +383,7 @@ export function InterviewPrep({
                     onClick={handleGetFeedback}
                     disabled={!userAnswer.trim() && !isRecording}
                     className="bg-primary hover:bg-primary/90"
-                    startIcon={<ChatBubble as MessageSquare sx={{ fontSize: 16 }} />}
+                    startIcon={<MessageSquare sx={{ fontSize: 16 }} />}
                   >
                     Get AI Feedback
                   </Button>
@@ -437,10 +437,10 @@ export function InterviewPrep({
               </Box>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
         {/* Tips & Guidance Panel */}
-        <Grid item xs={12} lg={4}>
+        <Grid2 xs={12} lg={4}>
           <Card className="h-full">
             <CardContent className="p-6">
               <Tabs
@@ -513,8 +513,8 @@ export function InterviewPrep({
               )}
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
     </Box>
   );
 }

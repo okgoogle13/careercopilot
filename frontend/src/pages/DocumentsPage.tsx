@@ -390,8 +390,8 @@ export function DocumentsPage({
       </Box>
 
       {/* Stats and Search */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} sm={6} md={3}>
+      <Grid2 container spacing={3} sx={{ mb: 4 }}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -405,9 +405,9 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -421,9 +421,9 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -437,9 +437,9 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -453,8 +453,8 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
       {/* Search and Filters */}
       <Paper elevation={0} sx={{ p: 3, mb: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
@@ -553,9 +553,9 @@ export function DocumentsPage({
                 </Typography>
               </Box>
             ) : (
-              <Grid container spacing={3}>
+              <Grid2 container spacing={3}>
                 {currentDocuments.map((document) => (
-                  <Grid item xs={12} sm={6} md={4} lg={3} key={document.id}>
+                  <Grid2 xs={12} sm={6} md={4} lg={3} key={document.id}>
                     <Card
                       elevation={0}
                       sx={{
@@ -664,9 +664,9 @@ export function DocumentsPage({
                         </Box>
                       </CardContent>
                     </Card>
-                  </Grid>
+                  </Grid2>
                 ))}
-              </Grid>
+              </Grid2>
             )}
           </Box>
         </TabPanel>

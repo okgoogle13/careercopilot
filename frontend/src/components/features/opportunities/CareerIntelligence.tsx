@@ -152,7 +152,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
 
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <AutoAwesome as Sparkles className="w-8 h-8 text-primary" />
+            <Sparkles className="w-8 h-8 text-primary" />
             <h1 className="text-3xl font-semibold">Career Intelligence</h1>
           </div>
           <p className="text-muted-foreground text-lg">
@@ -173,7 +173,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                   <h3 className="text-xl font-semibold">Identified Skill Gaps</h3>
                 </div>
                 <Badge className="bg-primary/10 text-primary border-primary/30">
-                  <AutoAwesome as Sparkles className="w-3 h-3 mr-1" />
+                  <Sparkles className="w-3 h-3 mr-1" />
                   AI Analysis
                 </Badge>
               </div>
@@ -214,12 +214,12 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                 >
                   {isGeneratingPath ? (
                     <>
-                      <AutoAwesome as Sparkles className="w-4 h-4 mr-2 animate-pulse" />
+                      <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
                       Generating Learning Path...
                     </>
                   ) : (
                     <>
-                      <AutoAwesome as Sparkles className="w-4 h-4 mr-2" />
+                      <Sparkles className="w-4 h-4 mr-2" />
                       Generate Learning Path
                     </>
                   )}

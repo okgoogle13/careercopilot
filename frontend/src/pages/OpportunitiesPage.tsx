@@ -455,8 +455,8 @@ export function OpportunitiesPage({
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={6} sm={3}>
+      <Grid2 container spacing={3} sx={{ mb: 4 }}>
+        <Grid2 xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="primary.main">
@@ -467,9 +467,9 @@ export function OpportunitiesPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={6} sm={3}>
+        <Grid2 xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="warning.main">
@@ -480,9 +480,9 @@ export function OpportunitiesPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={6} sm={3}>
+        <Grid2 xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="info.main">
@@ -493,9 +493,9 @@ export function OpportunitiesPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={6} sm={3}>
+        <Grid2 xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="success.main">
@@ -506,8 +506,8 @@ export function OpportunitiesPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
       {/* Search and Filters */}
       <Paper elevation={0} sx={{ p: 3, mb: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
@@ -600,9 +600,9 @@ export function OpportunitiesPage({
                 </Typography>
               </Box>
             ) : (
-              <Grid container spacing={3}>
+              <Grid2 container spacing={3}>
                 {currentJobs.map((job) => (
-                  <Grid item xs={12} md={6} key={job.id}>
+                  <Grid2 xs={12} md={6} key={job.id}>
                     <Card
                       elevation={0}
                       sx={{
@@ -777,9 +777,9 @@ export function OpportunitiesPage({
                         )}
                       </CardActions>
                     </Card>
-                  </Grid>
+                  </Grid2>
                 ))}
-              </Grid>
+              </Grid2>
             )}
           </Box>
         </TabPanel>
@@ -834,8 +834,8 @@ export function OpportunitiesPage({
         </DialogTitle>
         <DialogContent>
           {selectedJob && (
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={8}>
+            <Grid2 container spacing={3}>
+              <Grid2 xs={12} md={8}>
                 <Typography variant="h6" gutterBottom>
                   Job Description
                 </Typography>
@@ -870,9 +870,9 @@ export function OpportunitiesPage({
                     </ListItem>
                   ))}
                 </List>
-              </Grid>
+              </Grid2>
 
-              <Grid item xs={12} md={4}>
+              <Grid2 xs={12} md={4}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
@@ -932,8 +932,8 @@ export function OpportunitiesPage({
                     </Box>
                   </CardContent>
                 </Card>
-              </Grid>
-            </Grid>
+              </Grid2>
+            </Grid2>
           )}
         </DialogContent>
         <DialogActions>
@@ -956,18 +956,18 @@ export function OpportunitiesPage({
       >
         <DialogTitle>Create Job Alert</DialogTitle>
         <DialogContent>
-          <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+          <Grid2 container spacing={2} sx={{ mt: 1 }}>
+            <Grid2 xs={12}>
               <TextField
                 fullWidth
                 label="Keywords"
                 placeholder="e.g., React, Product Manager, Designer"
               />
-            </Grid>
-            <Grid item xs={12}>
+            </Grid2>
+            <Grid2 xs={12}>
               <TextField fullWidth label="Location" placeholder="e.g., San Francisco, Remote" />
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            </Grid2>
+            <Grid2 xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel>Job Type</InputLabel>
                 <Select label="Job Type">
@@ -977,20 +977,20 @@ export function OpportunitiesPage({
                   <MenuItem value="internship">Internship</MenuItem>
                 </Select>
               </FormControl>
-            </Grid>
-            <Grid item xs={12} sm={6}>
+            </Grid2>
+            <Grid2 xs={12} sm={6}>
               <TextField fullWidth label="Min Salary" type="number" placeholder="50000" />
-            </Grid>
-            <Grid item xs={12}>
+            </Grid2>
+            <Grid2 xs={12}>
               <FormControlLabel control={<Checkbox />} label="Include remote positions" />
-            </Grid>
-            <Grid item xs={12}>
+            </Grid2>
+            <Grid2 xs={12}>
               <FormControlLabel
                 control={<Checkbox />}
                 label="Email notifications for new matches"
               />
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setAlertDialogOpen(false)}>Cancel</Button>

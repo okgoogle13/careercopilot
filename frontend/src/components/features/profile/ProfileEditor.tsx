@@ -330,7 +330,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 Experience
               </TabsTrigger>
               <TabsTrigger value="skills" className="flex items-center gap-2">
-                <EmojiEvents as Award className="h-4 w-4" />
+                <Award className="h-4 w-4" />
                 Skills
               </TabsTrigger>
               <TabsTrigger value="social" className="flex items-center gap-2">
@@ -447,7 +447,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           className="flex-1"
                           onClick={handleGenerateSummary}
                         >
-                          <AutoAwesome as Sparkles className="mr-2 h-4 w-4" />
+                          <Sparkles className="mr-2 h-4 w-4" />
                           AI Generate
                         </AnimatedButton>
                       )}
@@ -501,7 +501,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-purple-100 rounded-lg">
-                      <EmojiEvents as Award className="w-5 h-5 text-purple-600" />
+                      <Award className="w-5 h-5 text-purple-600" />
                     </div>
                     <h3 className="font-semibold text-lg">Skills & Expertise</h3>
                   </div>
@@ -615,7 +615,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 {/* Skill Suggestions */}
                 <Card className="p-4 bg-blue-50 border-blue-200">
                   <div className="flex items-center gap-2 mb-3">
-                    <AutoAwesome as Sparkles className="w-4 h-4 text-blue-600" />
+                    <Sparkles className="w-4 h-4 text-blue-600" />
                     <h4 className="font-medium text-blue-900">AI Skill Suggestions</h4>
                   </div>
                   <div className="flex flex-wrap gap-2">
