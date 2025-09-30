@@ -132,7 +132,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
 
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <AutoAwesome as Sparkles className="w-8 h-8 text-primary" />
+            <Sparkles className="w-8 h-8 text-primary" />
             <h1 className="text-3xl font-semibold">AI Job Matching</h1>
           </div>
           <p className="text-muted-foreground text-lg">
@@ -242,19 +242,19 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                     >
                       {isGeneratingInsights && selectedJob === job.id ? (
                         <>
-                          <AutoAwesome as Sparkles className="w-4 h-4 mr-2 animate-pulse" />
+                          <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
                           Generating Insights...
                         </>
                       ) : (
                         <>
-                          <AutoAwesome as Sparkles className="w-4 h-4 mr-2" />
+                          <Sparkles className="w-4 h-4 mr-2" />
                           Get AI Insights
                         </>
                       )}
                     </Button>
 
                     <Button variant="outlined" className="w-full">
-                      <OpenInNew as ExternalLink className="w-4 h-4 mr-2" />
+                      <ExternalLink className="w-4 h-4 mr-2" />
                       View Full Job
                     </Button>
 
@@ -272,7 +272,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
               {isGeneratingInsights && selectedJob === job.id && (
                 <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
                   <div className="flex items-center gap-2 mb-3">
-                    <AutoAwesome as Sparkles className="w-5 h-5 text-primary animate-pulse" />
+                    <Sparkles className="w-5 h-5 text-primary animate-pulse" />
                     <h4 className="font-medium text-primary">AI-Generated Insights</h4>
                   </div>
                   <div className="space-y-2 text-sm">

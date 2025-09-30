@@ -194,7 +194,7 @@ export function JobCard({
               e.stopPropagation();
               onViewDetails?.(id);
             }}
-            endIcon={<OpenInNew as ExternalLink sx={{ fontSize: 16 }} />}
+            endIcon={<ExternalLink sx={{ fontSize: 16 }} />}
           >
             View Details
           </Button>

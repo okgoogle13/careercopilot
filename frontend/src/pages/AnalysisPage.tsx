@@ -327,8 +327,8 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
       </Box>
 
       {/* Analysis Summary Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} sm={6} md={3}>
+      <Grid2 container spacing={3} sx={{ mb: 4 }}>
+        <Grid2 item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -342,9 +342,9 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -358,9 +358,9 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -374,9 +374,9 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -390,8 +390,8 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
       {/* Analysis Tabs */}
       <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
@@ -517,8 +517,8 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
         {/* Performance Trends Tab */}
         <TabPanel value={tabValue} index={1}>
           <Box sx={{ px: 3 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
+            <Grid2 container spacing={3}>
+              <Grid2 item xs={12} md={6}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
@@ -539,9 +539,9 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Grid2>
 
-              <Grid item xs={12} md={6}>
+              <Grid2 item xs={12} md={6}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
@@ -562,16 +562,16 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
-            </Grid>
+              </Grid2>
+            </Grid2>
           </Box>
         </TabPanel>
 
         {/* Insights Tab */}
         <TabPanel value={tabValue} index={2}>
           <Box sx={{ px: 3 }}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={8}>
+            <Grid2 container spacing={3}>
+              <Grid2 item xs={12} md={8}>
                 <Stack spacing={2}>
                   <Alert severity="success" sx={{ borderRadius: 2 }}>
                     <Typography variant="subtitle2" fontWeight={600}>
@@ -603,9 +603,9 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                     </Typography>
                   </Alert>
                 </Stack>
-              </Grid>
+              </Grid2>
 
-              <Grid item xs={12} md={4}>
+              <Grid2 item xs={12} md={4}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
@@ -639,8 +639,8 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                     </Stack>
                   </CardContent>
                 </Card>
-              </Grid>
-            </Grid>
+              </Grid2>
+            </Grid2>
           </Box>
         </TabPanel>
       </Paper>

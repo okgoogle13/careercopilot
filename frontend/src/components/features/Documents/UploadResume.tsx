@@ -83,7 +83,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
           <Card className="p-6">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <EmojiEvents as Award className="w-5 h-5 text-primary" />
+                <Award className="w-5 h-5 text-primary" />
               </div>
               <div>
                 <h3 className="font-semibold">Selection Criteria Responses</h3>

@@ -258,8 +258,8 @@ export function DashboardPage({
       </Box>
 
       {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={12} sm={6} md={3}>
+      <Grid2 container spacing={3} sx={{ mb: 4 }}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -273,9 +273,9 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -289,9 +289,9 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -305,9 +305,9 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
+        </Grid2>
 
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid2 xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -321,12 +321,12 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
-      <Grid container spacing={4}>
+      <Grid2 container spacing={4}>
         {/* Profiles Section */}
-        <Grid item xs={12} lg={8}>
+        <Grid2 xs={12} lg={8}>
           <Paper elevation={0} sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Box
               sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
@@ -339,9 +339,9 @@ export function DashboardPage({
               </Button>
             </Box>
 
-            <Grid container spacing={2}>
+            <Grid2 container spacing={2}>
               {profiles.map((profile) => (
-                <Grid item xs={12} md={6} key={profile.id}>
+                <Grid2 xs={12} md={6} key={profile.id}>
                   <Card
                     elevation={0}
                     sx={{
@@ -435,14 +435,14 @@ export function DashboardPage({
                       </Box>
                     </CardContent>
                   </Card>
-                </Grid>
+                </Grid2>
               ))}
-            </Grid>
+            </Grid2>
           </Paper>
-        </Grid>
+        </Grid2>
 
         {/* Recent Activity */}
-        <Grid item xs={12} lg={4}>
+        <Grid2 xs={12} lg={4}>
           <Paper elevation={0} sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
               Recent Activity
@@ -516,8 +516,8 @@ export function DashboardPage({
               </Button>
             </Stack>
           </Paper>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
       {/* Profile Menu */}
       <Menu

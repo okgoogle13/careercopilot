@@ -304,8 +304,8 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
             sx={{ height: 8, borderRadius: 4, mb: 2 }}
           />
 
-          <Grid container spacing={2}>
-            <Grid item xs={6} sm={3}>
+          <Grid2 container spacing={2}>
+            <Grid2 xs={6} sm={3}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="primary.main">
                   {criteria.length}
@@ -314,8 +314,8 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                   Total Criteria
                 </Typography>
               </Box>
-            </Grid>
-            <Grid item xs={6} sm={3}>
+            </Grid2>
+            <Grid2 xs={6} sm={3}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="success.main">
                   {criteria.filter((c) => c.isCompleted).length}
@@ -324,8 +324,8 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                   Completed
                 </Typography>
               </Box>
-            </Grid>
-            <Grid item xs={6} sm={3}>
+            </Grid2>
+            <Grid2 xs={6} sm={3}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="warning.main">
                   {criteria.filter((c) => c.category === 'essential').length}
@@ -334,8 +334,8 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                   Essential
                 </Typography>
               </Box>
-            </Grid>
-            <Grid item xs={6} sm={3}>
+            </Grid2>
+            <Grid2 xs={6} sm={3}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="info.main">
                   {criteria.filter((c) => c.category === 'desirable').length}
@@ -344,14 +344,14 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                   Desirable
                 </Typography>
               </Box>
-            </Grid>
-          </Grid>
+            </Grid2>
+          </Grid2>
         </CardContent>
       </Card>
 
-      <Grid container spacing={4}>
+      <Grid2 container spacing={4}>
         {/* Main Content */}
-        <Grid item xs={12} lg={8}>
+        <Grid2 xs={12} lg={8}>
           {/* Step Navigation */}
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2, mb: 4 }}>
             <Box sx={{ p: 3 }}>
@@ -493,9 +493,9 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                       </AccordionSummary>
 
                       <AccordionDetails>
-                        <Grid container spacing={3}>
+                        <Grid2 container spacing={3}>
                           {/* Response Editor */}
-                          <Grid item xs={12} md={8}>
+                          <Grid2 xs={12} md={8}>
                             <Box sx={{ mb: 2 }}>
                               <Box
                                 sx={{
@@ -563,10 +563,10 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                                 )}
                               </Box>
                             </Box>
-                          </Grid>
+                          </Grid2>
 
                           {/* Guidance and Examples */}
-                          <Grid item xs={12} md={4}>
+                          <Grid2 xs={12} md={4}>
                             <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                               <CardContent>
                                 <Typography variant="subtitle2" gutterBottom>
@@ -612,8 +612,8 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                                 )}
                               </CardContent>
                             </Card>
-                          </Grid>
-                        </Grid>
+                          </Grid2>
+                        </Grid2>
                       </AccordionDetails>
                     </Accordion>
                   ))}
@@ -670,10 +670,10 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
               </Box>
             </Paper>
           )}
-        </Grid>
+        </Grid2>
 
         {/* Sidebar */}
-        <Grid item xs={12} lg={4}>
+        <Grid2 xs={12} lg={4}>
           {/* Quick Stats */}
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider', mb: 3 }}>
             <CardContent>
@@ -767,8 +767,8 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
               </List>
             </CardContent>
           </Card>
-        </Grid>
-      </Grid>
+        </Grid2>
+      </Grid2>
 
       {/* Preview Dialog */}
       <Dialog
