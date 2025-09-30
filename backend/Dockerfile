@@ -29,7 +29,27 @@ COPY requirements.txt .
 RUN pip wheel --no-cache-dir --wheel-dir=/app/wheels -r requirements.txt
 
 
-# Stage 2: Production
+# Stage 2: Development
+# This stage is for local development with hot-reloading.
+FROM builder as development
+
+WORKDIR /app
+
+# Install development dependencies and application packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Switch to a non-root user
+RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
+USER appuser
+
+# Expose the application port
+EXPOSE 8000
+
+# Default command for development with hot-reloading
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+
+# Stage 3: Production (FINAL STAGE - used by Cloud Run)
 # This is the final, lean image for production.
 FROM python:3.11-slim as production
 
@@ -82,23 +102,3 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Default command to run the application in production
 # Use ENTRYPOINT to ensure the startup script is executed
 ENTRYPOINT ["/app/start.sh"]
-
-
-# Stage 3: Development
-# This stage is for local development with hot-reloading.
-FROM builder as development
-
-WORKDIR /app
-
-# Install development dependencies and application packages
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Switch to a non-root user
-RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
-USER appuser
-
-# Expose the application port
-EXPOSE 8000
-
-# Default command for development with hot-reloading
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
