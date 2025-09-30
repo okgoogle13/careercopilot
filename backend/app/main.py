@@ -1,7 +1,19 @@
 # backend/app/main.py (Production Ready)
 
+import sys
 import json
 import os
+
+# Fix Python path for Cloud Run deployment
+# Cloud Run may not respect PYTHONPATH environment variable correctly
+if '/app' not in sys.path:
+    sys.path.insert(0, '/app')
+if '/app/app' not in sys.path:
+    sys.path.insert(0, '/app/app')
+
+# Ensure PORT environment variable is set correctly
+if 'PORT' not in os.environ:
+    os.environ['PORT'] = '8080'
 
 import firebase_admin
 from app.api.router import api_router

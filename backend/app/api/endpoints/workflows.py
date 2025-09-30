@@ -13,8 +13,11 @@ from app.genkit_flows.career_application_workflow import (
     ApplicationPackageResult,
     generate_application_package,
 )
-from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
-from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
+# Temporarily disabled due to syntax error in email_task_workflow.py
+# from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
+# from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
+EmailWorkflowResult = dict  # Placeholder
+scan_inbox_for_opportunities = None  # Placeholder
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 

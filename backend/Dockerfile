@@ -36,7 +36,7 @@ FROM python:3.11-slim as production
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app
+    PYTHONPATH=/app:/app/app
 
 # Install only necessary runtime system dependencies
 RUN apt-get update && apt-get install -y \
@@ -61,22 +61,27 @@ RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
 # Copy application code last to maximize cache efficiency
 COPY . .
 
+# Ensure startup script is executable and owned by appuser
+RUN chmod +x /app/start.sh
+
 # Create and set permissions for necessary directories
 RUN mkdir -p data/cache/{ai_operations,ai_responses,general,jobs,profiles,research} logs migrations/versions && \
-    chown -R appuser:appuser /app
+    chown -R appuser:appuser /app && \
+    chown appuser:appuser /app/start.sh
 
 # Switch to the non-root user
 USER appuser
 
-# Expose the application port
-EXPOSE 8000
+# Expose the application port (Cloud Run uses PORT env variable)
+EXPOSE 8080
 
 # Health check for container orchestration
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+    CMD curl -f http://localhost:8080/health || exit 1
 
 # Default command to run the application in production
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]
+# Use ENTRYPOINT to ensure the startup script is executed
+ENTRYPOINT ["/app/start.sh"]
 
 
 # Stage 3: Development
