@@ -8,7 +8,7 @@ const StyledAvatar = styled(MuiAvatar)(({ theme }) => ({
   fontSize: '1rem',
 }));
 
-export interface AvatarProps extends MuiAvatarProps {}
+export type AvatarProps = MuiAvatarProps;
 
 export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
   ({ children, ...props }, ref) => {

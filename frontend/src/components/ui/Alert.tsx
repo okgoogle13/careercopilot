@@ -39,7 +39,7 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
 
 Alert.displayName = 'Alert';
 
-export interface AlertTitleProps extends React.ComponentProps<typeof Typography> {}
+export type AlertTitleProps = React.ComponentProps<typeof Typography>;
 
 export const AlertTitle = React.forwardRef<HTMLHeadingElement, AlertTitleProps>(
   ({ children, ...props }, ref) => {
@@ -60,7 +60,7 @@ export const AlertTitle = React.forwardRef<HTMLHeadingElement, AlertTitleProps>(
 
 AlertTitle.displayName = 'AlertTitle';
 
-export interface AlertDescriptionProps extends React.ComponentProps<typeof Typography> {}
+export type AlertDescriptionProps = React.ComponentProps<typeof Typography>;
 
 export const AlertDescription = React.forwardRef<HTMLParagraphElement, AlertDescriptionProps>(
   ({ children, ...props }, ref) => {

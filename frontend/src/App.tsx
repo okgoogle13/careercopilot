@@ -1,5 +1,5 @@
 import { useState, Suspense, lazy } from 'react';
-import { Box, Typography, Chip } from '@mui/material';
+import { Typography, Chip } from '@mui/material';
 // Advanced Sidebar System imports
 import {
   SidebarProvider,
@@ -114,7 +114,7 @@ const Settings = lazy(() =>
 const MUITest = lazy(() =>
   import('./components/features/demo/MUITest').then((module) => ({ default: module.MUITest }))
 );
-import { AppTab, DashboardTab, DocumentType, Profile as SharedProfile, Template } from './types';
+import { AppTab, DashboardTab } from './types';
 
 import {
   Navigation,
@@ -133,7 +133,6 @@ import {
   Upload,
   GpsFixed as Target,
   Login as LogIn,
-  Menu as MenuIcon,
 } from '@mui/icons-material';
 
 // Complete view types matching the wireframe
@@ -182,7 +181,6 @@ interface UserState {
 }
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<Tab>('dashboard');
   const [dashboardActiveTab, setDashboardActiveTab] = useState<DashboardTab>('documents');
   const [currentView, setCurrentView] = useState<View>('auth');
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
@@ -195,7 +193,6 @@ export default function App() {
     'resume' | 'cover-letter' | 'selection-criteria' | null
   >(null);
   const [showDemoNav, setShowDemoNav] = useState(true);
-  const [demoNavOpen, setDemoNavOpen] = useState(false);
 
   // User state to track onboarding progress
   const [userState, setUserState] = useState<UserState>({
@@ -269,15 +266,6 @@ export default function App() {
   };
 
   // Dashboard navigation
-  const handleTabChange = (tab: Tab) => {
-    setActiveTab(tab);
-    if (tab === 'ats-analysis') {
-      setCurrentView('ats-analysis');
-    } else {
-      setCurrentView('dashboard');
-    }
-  };
-
   const handleDashboardTabChange = (tab: DashboardTab) => {
     setDashboardActiveTab(tab);
   };
