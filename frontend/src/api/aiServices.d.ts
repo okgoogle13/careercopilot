@@ -6,7 +6,7 @@ declare module '@/api/aiServices' {
   ) => Promise<{
     resume_content?: string;
     content?: string;
-    [key: string]: any;
+    [key: string]: unknown;
   }>;
 
   export { generateCoverLetter, generateTailoredResume };
