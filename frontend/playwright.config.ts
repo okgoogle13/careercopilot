@@ -6,7 +6,7 @@ export default defineConfig({
   timeout: 30000,
   retries: 0,
   use: {
-    // baseURL: 'http://localhost:5173',
+    baseURL: 'http://localhost:5173',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -16,10 +16,11 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  // webServer: {
-  //   command: 'npm run dev',
-  //   port: 5173,
-  //   reuseExistingServer: !process.env.CI,
-  // },
-  reporter: [['list'], ['html', { outputFolder: 'test-results/e2e-report' }]],
+  webServer: {
+    command: 'npm run dev',
+    port: 5173,
+    reuseExistingServer: !process.env.CI,
+    timeout: 120000,
+  },
+  reporter: [['list'], ['html', { outputFolder: 'playwright-report' }]],
 });
