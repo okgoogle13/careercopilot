@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, InsertDriveFile, Close, HourglassEmpty } from '@mui/icons-material';
 import { Button, LinearProgress, Stack, Box, Typography, IconButton } from '@mui/material';
@@ -60,7 +60,6 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
 }) => {
   const [files, setFiles] = useState<UploadedFile[]>([]);
   const [isUploading, setIsUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: any[]) => {
@@ -139,7 +138,7 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
   return (
     <Stack spacing={2} className={className}>
       <DropzoneContainer {...getRootProps()} isDragActive={isDragActive} isUploading={isUploading}>
-        <input {...getInputProps()} ref={fileInputRef} />
+        <input {...getInputProps()} />
         <Stack alignItems="center" spacing={1}>
           <Box
             sx={{
