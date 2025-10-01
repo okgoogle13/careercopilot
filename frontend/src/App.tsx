@@ -159,9 +159,6 @@ type View =
   | 'animated-showcase'
   | 'mui-test';
 
-// Using shared types
-type Tab = AppTab;
-
 // Local Profile interface (different from shared one)
 interface Profile {
   id: string;
@@ -299,7 +296,6 @@ export default function App() {
   // Back navigation handlers
   const handleBackToDashboard = () => {
     setCurrentView(userState.hasDocuments ? 'dashboard' : 'dashboard-empty');
-    setActiveTab('dashboard');
     setSelectedProfile(null);
     setSelectedTemplate(null);
     setSelectedDocumentType(null);
@@ -457,14 +453,6 @@ export default function App() {
 
     setCurrentView(viewId as View);
 
-    // Set appropriate tab for certain views
-    if (viewId === 'ats-analysis') {
-      setActiveTab('ats-analysis');
-    } else if (viewId === 'dashboard' || viewId === 'dashboard-empty') {
-      setActiveTab('dashboard');
-    }
-
-    setDemoNavOpen(false);
   };
 
   const getCurrentViewInfo = () => {
