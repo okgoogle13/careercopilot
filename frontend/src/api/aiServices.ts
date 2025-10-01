@@ -161,7 +161,7 @@ export async function detectKscCriteria(jobDescription: string): Promise<KscCrit
 export async function generateSingleKscResponse(
   criterion: string,
   jobDescription: string,
-  userProfile?: any
+  userProfile?: Record<string, unknown>
 ): Promise<string> {
   try {
     if (!criterion || criterion.trim().length === 0) {
@@ -244,7 +244,7 @@ export async function generateCoverLetter(jobDescription: string, tone: string):
 export async function generateTailoredResume(
   jobDescription: string,
   userProfileId: string
-): Promise<any> {
+): Promise<{ resume_content?: string; content?: string; [key: string]: unknown }> {
   try {
     if (!jobDescription || jobDescription.trim().length === 0) {
       throw new Error('Job description is required');
@@ -259,7 +259,7 @@ export async function generateTailoredResume(
       userProfileId: userProfileId.trim(),
     };
 
-    const response = await apiClient.post<any>('/resumes/tailored', requestBody);
+    const response = await apiClient.post<{ resume_content?: string; content?: string; [key: string]: unknown }>('/resumes/tailored', requestBody);
 
     return response;
   } catch (error) {
@@ -276,7 +276,7 @@ export async function generateTailoredResume(
 // Types for Application Package API
 export interface ApplicationPackageRequest {
   job_description: string;
-  user_profile: any;
+  user_profile: Record<string, unknown>;
 }
 
 export interface TailoredResumeResult {
@@ -299,7 +299,7 @@ export interface SmartCoverLetter {
 }
 
 export interface KSCResponsesResult {
-  generated_responses: Array<Record<string, any>>;
+  generated_responses: Array<Record<string, unknown>>;
   total_criteria_addressed: number;
   coverage_completeness: string;
   response_quality_score: number;
