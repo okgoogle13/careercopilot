@@ -18,6 +18,9 @@ test.describe('Document Upload Success Workflow', () => {
 
     // Wait for the page to load completely
     await page.waitForLoadState('networkidle');
+
+    // Visual regression test - capture screenshot of upload page
+    await expect(page).toHaveScreenshot('document-upload-page.png');
   });
 
   test('successful document upload workflow - PDF resume', async ({ page }) => {
