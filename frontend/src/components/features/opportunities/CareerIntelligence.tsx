@@ -7,7 +7,7 @@ import {
   TrendingUp,
   GpsFixed as Target,
   MenuBook as BookOpen,
-  AlertCircle,
+  Error as AlertCircle,
 } from '@mui/icons-material';
 import {
   Button,

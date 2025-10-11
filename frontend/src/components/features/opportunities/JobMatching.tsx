@@ -3,9 +3,9 @@ import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import {
   ArrowLeft,
-  Sparkles,
-  MapPin,
-  DollarSign,
+  AutoAwesome as Sparkles,
+  LocationOn as MapPin,
+  AttachMoney as DollarSign,
   Clock,
   ExternalLink,
   Heart,

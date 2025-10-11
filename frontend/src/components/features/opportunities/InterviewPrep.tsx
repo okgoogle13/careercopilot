@@ -3,12 +3,12 @@ import { Badge } from '../../ui/badge';
 import { Textarea } from '../../ui/textarea';
 import {
   ArrowLeft,
-  Sparkles,
+  AutoAwesome as Sparkles,
   MessageSquare,
-  Play,
+  PlayArrow as Play,
   Mic,
   MicOff,
-  RotateCcw,
+  Replay as RotateCcw,
 } from '@mui/icons-material';
 import {
   Button,

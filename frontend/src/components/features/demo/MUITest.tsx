@@ -55,7 +55,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
             Back to App
           </Button>
           <LayoutFlex gap={2}>
-            <Button variant="outlined">Outlined Button</Button>
+            <Button variant="outline">Outlined Button</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="default" onClick={() => setDialogOpen(true)}>
               Open Dialog
@@ -77,8 +77,8 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                 <LayoutFlex gap={1} wrap sx={{ mt: 2 }}>
                   <Badge variant="default">Default</Badge>
                   <Badge variant="secondary">Secondary</Badge>
-                  <Badge variant="outlined">Outline</Badge>
-                  <Badge variant="outlined">Error</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                  <Badge variant="outline">Error</Badge>
                 </LayoutFlex>
               </CardContent>
             </Card>
@@ -118,7 +118,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent>
                 <LayoutStack spacing={2}>
-                  <LayoutCard variant="outlined">
+                  <LayoutCard variant="outline">
                     <Box sx={{ p: 2 }}>
                       <Typography variant="body2">Layout Card Component</Typography>
                     </Box>
@@ -217,7 +217,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
             </LayoutStack>
           </DialogContent>
           <DialogFooter>
-            <Button variant="outlined" onClick={() => setDialogOpen(false)}>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
             <Button variant="default" onClick={() => setDialogOpen(false)}>

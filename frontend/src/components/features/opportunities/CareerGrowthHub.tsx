@@ -14,7 +14,7 @@ import {
   Schedule as Clock,
   Group as Users,
   CheckCircle,
-  Plus,
+  Add as Plus,
   Star,
   BarChart,
 } from '@mui/icons-material';
