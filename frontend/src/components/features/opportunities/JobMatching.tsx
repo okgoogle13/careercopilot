@@ -253,12 +253,12 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                       )}
                     </Button>
 
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outlined" className="w-full">
                       <ExternalLink className="w-4 h-4 mr-2" />
                       View Full Job
                     </Button>
 
-                    <Button variant="outline" className="w-full">
+                    <Button variant="outlined" className="w-full">
                       <Heart
                         className={`w-4 h-4 mr-2 ${job.isFavorited ? 'text-red-500 fill-current' : ''}`}
                       />
@@ -301,7 +301,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
 
         {/* Load More */}
         <div className="text-center mt-8">
-          <Button variant="outline" size="large">
+          <Button variant="outlined" size="large">
             Load More Matches
           </Button>
         </div>

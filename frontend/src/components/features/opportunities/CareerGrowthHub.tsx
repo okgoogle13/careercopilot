@@ -222,7 +222,7 @@ export function CareerGrowthHub({
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
-            <Button variant="outline" size="small">
+            <Button variant="outlined" size="small">
               <Plus className="w-4 h-4 mr-2" />
               Add Goal
             </Button>

@@ -78,11 +78,11 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
 
         <div className="flex justify-between items-center pt-4 border-t">
           <div className="space-x-2">
-            <Button variant="outline" size="small" onClick={() => onEdit?.(document)}>
+            <Button variant="outlined" size="small" onClick={() => onEdit?.(document)}>
               <Edit className="h-4 w-4 mr-2" />
               Edit
             </Button>
-            <Button variant="outline" size="small" onClick={() => onDownload?.(document)}>
+            <Button variant="outlined" size="small" onClick={() => onDownload?.(document)}>
               <Download className="h-4 w-4 mr-2" />
               Download
             </Button>

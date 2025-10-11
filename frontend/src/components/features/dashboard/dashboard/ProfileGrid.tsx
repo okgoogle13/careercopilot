@@ -99,7 +99,7 @@ export function ProfileGrid({
               <Button
                 onClick={onNavigateToCareerGrowth}
                 className="w-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20"
-                variant="outline"
+                variant="outlined"
               >
                 <Sparkles className="w-4 h-4 mr-2" />
                 Explore Career Tools

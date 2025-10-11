@@ -336,7 +336,7 @@ export function DocumentTypeSelector({
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-foreground">{doc.title}</h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <Badge variant="outline" className={getDifficultyColor(doc.difficulty)}>
+                      <Badge variant="outlined" className={getDifficultyColor(doc.difficulty)}>
                         {doc.difficulty}
                       </Badge>
                       <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -401,7 +401,7 @@ export function DocumentTypeSelector({
                   <Tooltip>
                     <TooltipTrigger>
                       <Badge
-                        variant="outline"
+                        variant="outlined"
                         className="bg-purple-50 text-purple-700 border-purple-200"
                       >
                         AI-Powered
@@ -416,12 +416,12 @@ export function DocumentTypeSelector({
 
               <div className="flex flex-wrap gap-2 pt-2">
                 {doc.tags.slice(0, 3).map((tag, i) => (
-                  <Badge key={i} variant="outline" className="text-xs">
+                  <Badge key={i} variant="outlined" className="text-xs">
                     {tag}
                   </Badge>
                 ))}
                 {doc.tags.length > 3 && (
-                  <Badge variant="outline" className="text-xs">
+                  <Badge variant="outlined" className="text-xs">
                     +{doc.tags.length - 3} more
                   </Badge>
                 )}
@@ -429,7 +429,7 @@ export function DocumentTypeSelector({
 
               <Button
                 className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
-                variant="outline"
+                variant="outlined"
                 size="small"
               >
                 Select Template
@@ -613,7 +613,7 @@ export function DocumentTypeSelector({
             <h3 className="text-lg font-medium">No templates found</h3>
             <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
             <Button
-              variant="outline"
+              variant="outlined"
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('all');

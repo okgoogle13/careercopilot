@@ -270,7 +270,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
             KSC Generator
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button variant="outline" startIcon={<Upload />} onClick={onImport}>
+            <Button variant="outlined" startIcon={<Upload />} onClick={onImport}>
               Import
             </Button>
             <Button variant="contained" startIcon={<Download />} onClick={onExport}>
@@ -393,7 +393,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                   </Typography>
 
                   <Stack direction="row" spacing={2}>
-                    <Button variant="outline" startIcon={<Upload />}>
+                    <Button variant="outlined" startIcon={<Upload />}>
                       Upload File
                     </Button>
                     <Button
@@ -605,7 +605,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                                         key={idx}
                                         label={example}
                                         size="small"
-                                        variant="outline"
+                                        variant="outlined"
                                         sx={{ mr: 1, mb: 1 }}
                                       />
                                     ))}
@@ -647,7 +647,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
               <Box sx={{ p: 3, borderTop: 1, borderColor: 'divider' }}>
                 <Stack direction="row" justifyContent="space-between" alignItems="center">
                   <Button
-                    variant="outline"
+                    variant="outlined"
                     startIcon={<Visibility />}
                     onClick={() => setPreviewDialogOpen(true)}
                   >
@@ -655,7 +655,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                   </Button>
 
                   <Stack direction="row" spacing={2}>
-                    <Button variant="outline" startIcon={<Save />} onClick={onSave}>
+                    <Button variant="outlined" startIcon={<Save />} onClick={onSave}>
                       Save Draft
                     </Button>
                     <Button
@@ -721,13 +721,13 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
               </Typography>
 
               <Stack spacing={2}>
-                <Button fullWidth variant="outline" startIcon={<Psychology />} size="small">
+                <Button fullWidth variant="outlined" startIcon={<Psychology />} size="small">
                   Analyze All Criteria
                 </Button>
-                <Button fullWidth variant="outline" startIcon={<TipsAndUpdates />} size="small">
+                <Button fullWidth variant="outlined" startIcon={<TipsAndUpdates />} size="small">
                   Get Writing Tips
                 </Button>
-                <Button fullWidth variant="outline" startIcon={<Analytics />} size="small">
+                <Button fullWidth variant="outlined" startIcon={<Analytics />} size="small">
                   Check Quality
                 </Button>
               </Stack>

@@ -139,13 +139,13 @@ export function JobCard({
           <Chip
             label={type}
             size="small"
-            variant="outline"
+            variant="outlined"
             className="border-blue-300 text-blue-800"
           />
           <Chip
             label={experience}
             size="small"
-            variant="outline"
+            variant="outlined"
             className="border-purple-300 text-purple-800"
           />
         </Box>
@@ -189,7 +189,7 @@ export function JobCard({
             Apply Now
           </Button>
           <Button
-            variant="outline"
+            variant="outlined"
             onClick={(e) => {
               e.stopPropagation();
               onViewDetails?.(id);

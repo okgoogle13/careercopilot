@@ -48,7 +48,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="small" variant="outline">
+              <Button size="small" variant="outlined">
                 Upload Files
               </Button>
             </div>
@@ -73,7 +73,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="small" variant="outline">
+              <Button size="small" variant="outlined">
                 Upload Files
               </Button>
             </div>
@@ -98,7 +98,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="small" variant="outline">
+              <Button size="small" variant="outlined">
                 Upload Files
               </Button>
             </div>
@@ -107,7 +107,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
 
         {/* Actions */}
         <div className="flex justify-between mt-8">
-          <Button variant="outline" onClick={onBack}>
+          <Button variant="outlined" onClick={onBack}>
             Back
           </Button>
           <Button onClick={onNext} className="bg-primary hover:bg-primary/90">

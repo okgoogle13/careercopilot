@@ -55,7 +55,7 @@ export function AnimatedModal({
               <CardHeader title={<Typography variant="h3">{title}</Typography>}></CardHeader>
               <CardContent>{children}</CardContent>
               <CardActions sx={{ justifyContent: 'flex-end', gap: 1 }}>
-                <Button variant="outline" onClick={onClose}>
+                <Button variant="outlined" onClick={onClose}>
                   Cancel
                 </Button>
                 <Button onClick={onClose}>Confirm</Button>

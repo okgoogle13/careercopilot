@@ -259,13 +259,13 @@ export function ProfileComparison({
 
         <Box className="flex gap-2">
           <Button
-            variant="outline"
+            variant="outlined"
             onClick={onSwapProfiles}
             startIcon={<SwapHoriz sx={{ fontSize: 16 }} />}
           >
             Swap Profiles
           </Button>
-          <Button variant="outline" startIcon={<Download sx={{ fontSize: 16 }} />}>
+          <Button variant="outlined" startIcon={<Download sx={{ fontSize: 16 }} />}>
             Export Comparison
           </Button>
           <Button
@@ -285,7 +285,7 @@ export function ProfileComparison({
             <Typography variant="h6" className="font-semibold">
               Profile Version 1
             </Typography>
-            <Button size="small" variant="outline" onClick={() => onProfileSelect?.('left')}>
+            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('left')}>
               Change Profile
             </Button>
           </Box>
@@ -306,7 +306,7 @@ export function ProfileComparison({
             <Typography variant="h6" className="font-semibold">
               Profile Version 2
             </Typography>
-            <Button size="small" variant="outline" onClick={() => onProfileSelect?.('right')}>
+            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('right')}>
               Change Profile
             </Button>
           </Box>

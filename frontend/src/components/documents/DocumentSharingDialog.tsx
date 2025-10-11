@@ -151,7 +151,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                 <span className="text-sm font-medium">Invite people</span>
               </div>
               <Button
-                variant="outline"
+                variant="outlined"
                 size="small"
                 onClick={() => setInviteSectionOpen(!inviteSectionOpen)}
                 className="h-8"
@@ -227,7 +227,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                     </div>
                     <div className="flex items-center space-x-2">
                       {collab.status === 'pending' && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outlined" className="text-xs">
                           Pending
                         </Badge>
                       )}

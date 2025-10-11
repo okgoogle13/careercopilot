@@ -390,7 +390,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
 
         {/* Action Buttons */}
         <div className="flex justify-between items-center pt-8 border-t border-border">
-          <Button variant="outline" onClick={onBack} className="flex items-center gap-2">
+          <Button variant="outlined" onClick={onBack} className="flex items-center gap-2">
             <ArrowLeft className="w-4 h-4" />
             Back to Job Analysis
           </Button>

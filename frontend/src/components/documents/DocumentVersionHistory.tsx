@@ -109,7 +109,7 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
                   )}
 
                   {onRestore && !version.isCurrent && (
-                    <Button size="small" variant="outline" onClick={() => onRestore(version)}>
+                    <Button size="small" variant="outlined" onClick={() => onRestore(version)}>
                       Restore
                     </Button>
                   )}

@@ -218,7 +218,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
               <Button color="inherit" size="small" onClick={handleReset}>
                 Discard
               </Button>
-              <Button color="inherit" size="small" variant="outline" onClick={handleSave}>
+              <Button color="inherit" size="small" variant="outlined" onClick={handleSave}>
                 Save Changes
               </Button>
             </Stack>
@@ -308,7 +308,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                           Upload a photo to personalize your account
                         </Typography>
                         <Stack direction="row" spacing={2}>
-                          <Button variant="outline" startIcon={<CloudUpload />} size="small">
+                          <Button variant="outlined" startIcon={<CloudUpload />} size="small">
                             Upload Photo
                           </Button>
                           <Button variant="text" size="small" color="error">
@@ -696,7 +696,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                               secondary="Update your account password"
                             />
                             <ListItemSecondaryAction>
-                              <Button variant="outline" size="small">
+                              <Button variant="outlined" size="small">
                                 Change
                               </Button>
                             </ListItemSecondaryAction>
@@ -729,7 +729,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                               secondary="Manage your logged-in devices"
                             />
                             <ListItemSecondaryAction>
-                              <Button variant="outline" size="small">
+                              <Button variant="outlined" size="small">
                                 Manage
                               </Button>
                             </ListItemSecondaryAction>
@@ -870,7 +870,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                         <Stack spacing={2}>
                           <Button
                             fullWidth
-                            variant="outline"
+                            variant="outlined"
                             startIcon={<Download />}
                             onClick={() => setExportDialogOpen(true)}
                           >
@@ -878,16 +878,16 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                           </Button>
                           <Button
                             fullWidth
-                            variant="outline"
+                            variant="outlined"
                             startIcon={<CloudUpload />}
                             onClick={onImport}
                           >
                             Import Data
                           </Button>
-                          <Button fullWidth variant="outline" startIcon={<Backup />}>
+                          <Button fullWidth variant="outlined" startIcon={<Backup />}>
                             Create Backup
                           </Button>
-                          <Button fullWidth variant="outline" startIcon={<Refresh />}>
+                          <Button fullWidth variant="outlined" startIcon={<Refresh />}>
                             Clear Cache
                           </Button>
                         </Stack>
@@ -907,14 +907,14 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                         <Stack direction="row" spacing={2} sx={{ mt: 2 }}>
                           <Button
-                            variant="outline"
+                            variant="outlined"
                             color="error"
                             startIcon={<Delete />}
                             onClick={() => setDeleteDialogOpen(true)}
                           >
                             Delete Account
                           </Button>
-                          <Button variant="outline" color="warning" startIcon={<Warning />}>
+                          <Button variant="outlined" color="warning" startIcon={<Warning />}>
                             Reset All Settings
                           </Button>
                         </Stack>
@@ -941,16 +941,16 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                         </Typography>
 
                         <Stack spacing={2}>
-                          <Button fullWidth variant="outline" startIcon={<Help />}>
+                          <Button fullWidth variant="outlined" startIcon={<Help />}>
                             View Documentation
                           </Button>
-                          <Button fullWidth variant="outline" startIcon={<Email />}>
+                          <Button fullWidth variant="outlined" startIcon={<Email />}>
                             Contact Support
                           </Button>
-                          <Button fullWidth variant="outline" startIcon={<Info />}>
+                          <Button fullWidth variant="outlined" startIcon={<Info />}>
                             Report Bug
                           </Button>
-                          <Button fullWidth variant="outline" startIcon={<Analytics />}>
+                          <Button fullWidth variant="outlined" startIcon={<Analytics />}>
                             Feature Request
                           </Button>
                         </Stack>
@@ -998,7 +998,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
             {/* Save Button */}
             <Box sx={{ p: 4, borderTop: 1, borderColor: 'divider' }}>
               <Stack direction="row" spacing={2} justifyContent="flex-end">
-                <Button variant="outline" onClick={handleReset}>
+                <Button variant="outlined" onClick={handleReset}>
                   Reset
                 </Button>
                 <Button

@@ -253,7 +253,7 @@ export function TemplateSelector({
           <div className="text-muted-foreground mb-4">
             No templates found for the selected filters
           </div>
-          <Button variant="outline" onClick={() => setSelectedCategory('all')}>
+          <Button variant="outlined" onClick={() => setSelectedCategory('all')}>
             Clear Filters
           </Button>
         </div>

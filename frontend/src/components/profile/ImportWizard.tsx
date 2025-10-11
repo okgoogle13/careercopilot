@@ -197,7 +197,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
 
             <Box className="space-y-4">
               {/* Profile Section */}
-              <Card variant="outline">
+              <Card variant="outlined">
                 <CardContent className="p-4">
                   <Box className="flex items-center justify-between mb-3">
                     <Box className="flex items-center gap-2">
@@ -231,7 +231,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               </Card>
 
               {/* Experience Section */}
-              <Card variant="outline">
+              <Card variant="outlined">
                 <CardContent className="p-4">
                   <Box className="flex items-center justify-between mb-3">
                     <Box className="flex items-center gap-2">
@@ -264,7 +264,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               </Card>
 
               {/* Education Section */}
-              <Card variant="outline">
+              <Card variant="outlined">
                 <CardContent className="p-4">
                   <Box className="flex items-center justify-between mb-3">
                     <Box className="flex items-center gap-2">
@@ -297,7 +297,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               </Card>
 
               {/* Skills Section */}
-              <Card variant="outline">
+              <Card variant="outlined">
                 <CardContent className="p-4">
                   <Box className="flex items-center justify-between mb-3">
                     <Typography variant="subtitle1" className="font-semibold">
@@ -339,7 +339,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               We're ready to import your selected LinkedIn data to create your profile.
             </Typography>
 
-            <Card variant="outline" className="mb-6">
+            <Card variant="outlined" className="mb-6">
               <CardContent className="p-4">
                 <Typography variant="subtitle1" className="font-semibold mb-3">
                   Import Summary

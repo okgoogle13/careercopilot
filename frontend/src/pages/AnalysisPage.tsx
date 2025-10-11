@@ -614,7 +614,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                     <Stack spacing={2}>
                       <Button
                         fullWidth
-                        variant="outline"
+                        variant="outlined"
                         startIcon={<Refresh />}
                         sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
                       >
@@ -622,7 +622,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                       </Button>
                       <Button
                         fullWidth
-                        variant="outline"
+                        variant="outlined"
                         startIcon={<Download />}
                         sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
                       >
@@ -630,7 +630,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                       </Button>
                       <Button
                         fullWidth
-                        variant="outline"
+                        variant="outlined"
                         startIcon={<Share />}
                         sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
                       >

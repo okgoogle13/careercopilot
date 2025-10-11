@@ -219,7 +219,7 @@ export function InterviewPrep({
           No questions found for the selected filters.
         </Typography>
         <Button
-          variant="outline"
+          variant="outlined"
           onClick={() => {
             setSelectedCategory('all');
             setSelectedDifficulty('all');
@@ -345,7 +345,7 @@ export function InterviewPrep({
                   placeholder="Type your answer here or use the record button to practice speaking..."
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
-                  variant="outline"
+                  variant="outlined"
                 />
               </Box>
 
@@ -372,7 +372,7 @@ export function InterviewPrep({
 
                 <Box className="flex gap-2">
                   <Button
-                    variant="outline"
+                    variant="outlined"
                     onClick={handleReset}
                     startIcon={<RotateCcw sx={{ fontSize: 16 }} />}
                   >
@@ -417,7 +417,7 @@ export function InterviewPrep({
               {/* Navigation */}
               <Box className="flex justify-between">
                 <Button
-                  variant="outline"
+                  variant="outlined"
                   onClick={handlePreviousQuestion}
                   disabled={currentQuestionIndex === 0}
                   startIcon={<ChevronLeft sx={{ fontSize: 16 }} />}
@@ -484,7 +484,7 @@ export function InterviewPrep({
                         key={index}
                         label={point}
                         size="small"
-                        variant="outline"
+                        variant="outlined"
                         className="mr-2 mb-2"
                       />
                     ))}

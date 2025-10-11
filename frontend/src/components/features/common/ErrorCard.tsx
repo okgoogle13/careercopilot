@@ -36,7 +36,7 @@ export function ErrorCard({
       {showRetryButton && (
         <CardFooter>
           <Button
-            variant="outline"
+            variant="outlined"
             size="small"
             onClick={onRetry}
             sx={{

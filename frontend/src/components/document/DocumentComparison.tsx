@@ -108,16 +108,16 @@ export function DocumentComparison({
               {document.title}
             </Typography>
           </Box>
-          <Button size="small" variant="outline" onClick={() => onDocumentSelect?.(position)}>
+          <Button size="small" variant="outlined" onClick={() => onDocumentSelect?.(position)}>
             Change
           </Button>
         </Box>
 
         {/* Metadata */}
         <Box className="flex flex-wrap gap-2 mb-4">
-          <Chip label={document.type.replace('-', ' ')} size="small" variant="outline" />
-          <Chip label={`${document.wordCount} words`} size="small" variant="outline" />
-          <Chip label={`Modified: ${document.lastModified}`} size="small" variant="outline" />
+          <Chip label={document.type.replace('-', ' ')} size="small" variant="outlined" />
+          <Chip label={`${document.wordCount} words`} size="small" variant="outlined" />
+          <Chip label={`Modified: ${document.lastModified}`} size="small" variant="outlined" />
         </Box>
 
         {/* Content */}
@@ -142,10 +142,10 @@ export function DocumentComparison({
 
         {/* Actions */}
         <Box className="flex gap-2 mt-4">
-          <Button size="small" variant="outline" startIcon={<Eye sx={{ fontSize: 16 }} />}>
+          <Button size="small" variant="outlined" startIcon={<Eye sx={{ fontSize: 16 }} />}>
             Preview
           </Button>
-          <Button size="small" variant="outline" startIcon={<Download sx={{ fontSize: 16 }} />}>
+          <Button size="small" variant="outlined" startIcon={<Download sx={{ fontSize: 16 }} />}>
             Download
           </Button>
         </Box>
@@ -168,7 +168,7 @@ export function DocumentComparison({
 
         <Box className="flex gap-2">
           <Button
-            variant="outline"
+            variant="outlined"
             onClick={() => setShowFullContent(!showFullContent)}
             startIcon={<RotateCcw sx={{ fontSize: 16 }} />}
           >

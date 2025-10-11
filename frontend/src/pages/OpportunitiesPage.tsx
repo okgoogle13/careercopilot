@@ -396,7 +396,7 @@ export function OpportunitiesPage({
                 Search Jobs
               </Button>
               <Button
-                variant="outline"
+                variant="outlined"
                 size="large"
                 startIcon={<NotificationsActive />}
                 onClick={onCreateAlert}
@@ -439,7 +439,7 @@ export function OpportunitiesPage({
           </Typography>
           <Stack direction="row" spacing={2}>
             <Button
-              variant="outline"
+              variant="outlined"
               startIcon={<NotificationsActive />}
               onClick={() => setAlertDialogOpen(true)}
             >
@@ -528,14 +528,14 @@ export function OpportunitiesPage({
             size="small"
           />
           <Button
-            variant="outline"
+            variant="outlined"
             startIcon={<FilterList />}
             onClick={() => setFilterDialogOpen(true)}
             sx={{ borderRadius: 20 }}
           >
             Filters
           </Button>
-          <Button variant="outline" startIcon={<Sort />} sx={{ borderRadius: 20 }}>
+          <Button variant="outlined" startIcon={<Sort />} sx={{ borderRadius: 20 }}>
             Sort
           </Button>
         </Stack>
@@ -728,7 +728,7 @@ export function OpportunitiesPage({
                                 key={index}
                                 label={req}
                                 size="small"
-                                variant="outline"
+                                variant="outlined"
                                 sx={{ fontSize: '0.75rem' }}
                               />
                             ))}
@@ -736,7 +736,7 @@ export function OpportunitiesPage({
                               <Chip
                                 label={`+${job.requirements.length - 3}`}
                                 size="small"
-                                variant="outline"
+                                variant="outlined"
                                 sx={{ fontSize: '0.75rem' }}
                               />
                             )}
@@ -939,7 +939,7 @@ export function OpportunitiesPage({
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setJobDetailDialogOpen(false)}>Close</Button>
-          <Button variant="outline" startIcon={<Bookmark />}>
+          <Button variant="outlined" startIcon={<Bookmark />}>
             Bookmark
           </Button>
           <Button variant="contained" startIcon={<Send />}>

@@ -261,7 +261,7 @@ export function JobSearch({
             <Box className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
               <Box className="flex items-center gap-4">
                 <Button
-                  variant="outline"
+                  variant="outlined"
                   onClick={() => setShowFilters(!showFilters)}
                   startIcon={<SlidersHorizontal sx={{ fontSize: 16 }} />}
                 >

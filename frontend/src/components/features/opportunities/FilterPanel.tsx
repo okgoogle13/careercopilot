@@ -139,7 +139,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
           <Typography variant="body2" color="text.secondary">
             {getActiveFilterCount()} filters active
           </Typography>
-          <Button size="small" variant="outline" onClick={handleReset}>
+          <Button size="small" variant="outlined" onClick={handleReset}>
             Clear All
           </Button>
         </Box>

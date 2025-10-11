@@ -13,9 +13,9 @@ export function ButtonComponentsSection() {
         <div className="flex flex-wrap gap-4">
           <Button variant="elevation">Primary Button</Button>
           <Button variant="secondary">Secondary Button</Button>
-          <Button variant="outline">Outline Button</Button>
+          <Button variant="outlined">Outline Button</Button>
           <Button variant="text">Ghost Button</Button>
-          <Button variant="outline">Destructive Button</Button>
+          <Button variant="outlined">Destructive Button</Button>
           <Button variant="link">Link Button</Button>
         </div>
       </ComponentDemo>

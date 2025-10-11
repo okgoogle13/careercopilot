@@ -144,7 +144,7 @@ export interface AlertDialogCancelProps extends React.ComponentProps<typeof Butt
 export const AlertDialogCancel = React.forwardRef<HTMLButtonElement, AlertDialogCancelProps>(
   ({ children, ...props }, ref) => {
     return (
-      <Button ref={ref} variant="outline" {...props}>
+      <Button ref={ref} variant="outlined" {...props}>
         {children}
       </Button>
     );

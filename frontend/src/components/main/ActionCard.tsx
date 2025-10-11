@@ -136,7 +136,7 @@ export function ActionCard({
         {tags.length > 0 && (
           <Box className="flex flex-wrap gap-1 mb-4">
             {tags.map((tag, index) => (
-              <Chip key={index} label={tag} size="small" variant="outline" className="text-xs" />
+              <Chip key={index} label={tag} size="small" variant="outlined" className="text-xs" />
             ))}
           </Box>
         )}

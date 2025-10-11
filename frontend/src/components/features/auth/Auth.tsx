@@ -47,7 +47,7 @@ export function Auth({ onLogin }: AuthProps) {
             </div>
 
             <Button
-              variant="outline"
+              variant="outlined"
               className="w-full bg-white text-black hover:bg-gray-50"
               onClick={onLogin}
             >
