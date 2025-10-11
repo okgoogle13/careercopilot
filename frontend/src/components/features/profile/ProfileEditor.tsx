@@ -21,9 +21,20 @@ import {
   Public as Globe,
   LinkedIn,
   GitHub,
+  X as Twitter,
+  Code,
+  CameraAlt as Camera,
+  Settings,
+  GpsFixed as Target,
+  Close as CloseIcon,
+  Close as X,
+  CheckCircle,
+  ArrowLeft,
+  Visibility as Eye,
+  Star,
 } from '@mui/icons-material';
-import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
-import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';
+import { KeywordTag, KeywordTagGroup } from '../../library/KeywordTag';
+import { AnimatedCard, AnimatedButton, AnimatedProgress } from '../demo/AnimatedComponents';
 import { AIProcessingLoading } from '../common/StandardizedLoadingStates';
 import {
   Button,
@@ -231,8 +242,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
   const getSocialIcon = (platform: string) => {
     const icons = {
-      linkedin: Linkedin,
-      github: Github,
+      linkedin: LinkedIn,
+      github: GitHub,
       twitter: Twitter,
       website: Globe,
       portfolio: Code,
@@ -283,7 +294,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 </Avatar>
                 <Button
                   size="small"
-                  variant="outline"
+                  variant="outlined"
                   className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-white shadow-sm"
                 >
                   <Camera className="h-4 w-4" />
@@ -319,7 +330,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           </div>
 
           {/* Enhanced Navigation */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs value={activeTab} onChange={(_e, newValue) => setActiveTab(newValue as string)} className="w-full">
             <TabsList className="grid w-full grid-cols-5 mb-8">
               <TabsTrigger value="basic" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -344,7 +355,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsList>
 
             {/* Basic Information Tab */}
-            <TabsContent value="basic" className="space-y-6">
+            <TabsContent value="basic" currentValue={activeTab} className="space-y-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Personal Information */}
                 <Card className="p-6">
@@ -442,7 +453,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <AIProcessingLoading message="Generating AI summary..." />
                       ) : (
                         <AnimatedButton
-                          variant="outline"
+                          variant="outlined"
                           animation="shimmer"
                           className="flex-1"
                           onClick={handleGenerateSummary}
@@ -453,7 +464,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       )}
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant="outline" size="small">
+                          <Button variant="outlined" size="small">
                             <Target className="h-4 w-4" />
                           </Button>
                         </TooltipTrigger>
@@ -496,7 +507,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Skills Tab */}
-            <TabsContent value="skills" className="space-y-6">
+            <TabsContent value="skills" currentValue={activeTab} className="space-y-6">
               <Card className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
@@ -505,7 +516,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     </div>
                     <h3 className="font-semibold text-lg">Skills & Expertise</h3>
                   </div>
-                  <Button variant="outline" size="small">
+                  <Button variant="outlined" size="small">
                     <Plus className="w-4 h-4 mr-2" />
                     Import from Resume
                   </Button>
@@ -594,8 +605,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                                   </span>
                                   <Slider
                                     value={[skill.level]}
-                                    onValueChange={(value) =>
-                                      updateSkillLevel(skill.keyword, value[0])
+                                    onChange={(_event, value) =>
+                                      updateSkillLevel(skill.keyword, Array.isArray(value) ? value[0] : value)
                                     }
                                     max={10}
                                     step={1}
@@ -627,7 +638,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     ].map((suggestion) => (
                       <Button
                         key={suggestion}
-                        variant="outline"
+                        variant="outlined"
                         size="small"
                         className="text-xs border-blue-300 hover:bg-blue-100"
                         onClick={() => setNewSkill(suggestion)}
@@ -642,7 +653,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Social & Links Tab */}
-            <TabsContent value="social" className="space-y-6">
+            <TabsContent value="social" currentValue={activeTab} className="space-y-6">
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 bg-indigo-100 rounded-lg">
@@ -684,7 +695,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   })}
 
                   <Button
-                    variant="outline"
+                    variant="outlined"
                     className="w-full"
                     onClick={() =>
                       setSocialLinks([
@@ -701,7 +712,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Privacy Settings Tab */}
-            <TabsContent value="settings" className="space-y-6">
+            <TabsContent value="settings" currentValue={activeTab} className="space-y-6">
               <Card className="p-6">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="p-2 bg-red-100 rounded-lg">
@@ -716,18 +727,14 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <label className="text-sm font-medium">Profile Visibility</label>
                     <Select
                       value={profileSettings.privacy}
-                      onValueChange={(value: any) =>
-                        setProfileSettings({ ...profileSettings, privacy: value })
+                      onChange={(e) =>
+                        setProfileSettings({ ...profileSettings, privacy: e.target.value as 'public' | 'private' | 'connections' })
                       }
+                      fullWidth
                     >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="public">Public - Visible to everyone</SelectItem>
-                        <SelectItem value="connections">Connections Only</SelectItem>
-                        <SelectItem value="private">Private - Only me</SelectItem>
-                      </SelectContent>
+                      <MenuItem value="public">Public - Visible to everyone</MenuItem>
+                      <MenuItem value="connections">Connections Only</MenuItem>
+                      <MenuItem value="private">Private - Only me</MenuItem>
                     </Select>
                   </div>
 
@@ -761,7 +768,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <Switch
                         checked={profileSettings.showLocation}
                         onCheckedChange={(checked) =>
-                          setProfileSettings({ ...profileSettings, _howLocation: checked })
+                          setProfileSettings({ ...profileSettings, showLocation: checked })
                         }
                       />
                     </div>
@@ -774,7 +781,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           {/* Enhanced Actions */}
           <div className="flex justify-between items-center mt-8 pt-6 border-t">
             <div className="flex items-center gap-4">
-              <Button variant="outline" onClick={onBack} size="large">
+              <Button variant="outlined" onClick={onBack} size="large">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
               </Button>
@@ -785,7 +792,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </div>
 
             <div className="flex gap-2">
-              <Button variant="outline" size="large">
+              <Button variant="outlined" size="large">
                 <Eye className="w-4 h-4 mr-2" />
                 Preview
               </Button>
