@@ -29,7 +29,7 @@ export function FeatureHighlights() {
   return (
     <Grid container spacing={4} className="mt-8">
       {features.map((feature, index) => (
-        <Grid item xs={12} sm={6} md={3} key={index}>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
           <Box className="text-center">
             <Box className="flex justify-center mb-3">
               <Box className="p-3 bg-primary/10 rounded-full text-primary">{feature.icon}</Box>
