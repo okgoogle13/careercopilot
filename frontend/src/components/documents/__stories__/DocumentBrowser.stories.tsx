@@ -196,7 +196,7 @@ export const Interactive: Story = {
               </Box>
               <Box sx={{ mt: 2, display: 'flex', gap: 1 }}>
                 <Button
-                  variant="outlined"
+                  variant="outline"
                   color="error"
                   size="small"
                   onClick={() => handleDelete(selectedDoc)}

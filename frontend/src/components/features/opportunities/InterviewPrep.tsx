@@ -229,13 +229,13 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       {currentQuestion.type}
                     </Badge>
                     <Badge
-                      variant="outlined"
+                      variant="outline"
                       className={getDifficultyColor(currentQuestion.difficulty)}
                     >
                       {currentQuestion.difficulty}
                     </Badge>
                   </div>
-                  <Button variant="outlined" size="small" onClick={handleNewQuestion}>
+                  <Button variant="outline" size="small" onClick={handleNewQuestion}>
                     <RotateCcw className="w-4 h-4 mr-2" />
                     New Question
                   </Button>
@@ -306,7 +306,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       )}
                     </Button>
                     <Button
-                      variant="outlined"
+                      variant="outline"
                       onClick={() => setShowSampleAnswer(!showSampleAnswer)}
                     >
                       {showSampleAnswer ? 'Hide' : 'Show'} Sample Answer
@@ -389,7 +389,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               </Card>
 
               <Button
-                variant="outlined"
+                variant="outline"
                 className="w-full"
                 onClick={() => setCurrentQuestion(null)}
               >

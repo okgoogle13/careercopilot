@@ -325,7 +325,7 @@ export function DocumentsPage({
                 Create Document
               </Button>
               <Button
-                variant="outlined"
+                variant="outline"
                 size="large"
                 startIcon={<CloudUpload />}
                 onClick={onUploadDocument}
@@ -368,7 +368,7 @@ export function DocumentsPage({
           </Typography>
           <Stack direction="row" spacing={2}>
             <Button
-              variant="outlined"
+              variant="outline"
               startIcon={<CloudUpload />}
               onClick={() => setUploadDialogOpen(true)}
               sx={{ borderRadius: 20 }}
@@ -474,10 +474,10 @@ export function DocumentsPage({
             sx={{ flex: 1 }}
             size="small"
           />
-          <Button variant="outlined" startIcon={<FilterList />} sx={{ borderRadius: 20 }}>
+          <Button variant="outline" startIcon={<FilterList />} sx={{ borderRadius: 20 }}>
             Filter
           </Button>
-          <Button variant="outlined" startIcon={<Sort />} sx={{ borderRadius: 20 }}>
+          <Button variant="outline" startIcon={<Sort />} sx={{ borderRadius: 20 }}>
             Sort
           </Button>
         </Stack>
@@ -649,7 +649,7 @@ export function DocumentsPage({
                                 key={index}
                                 label={tag}
                                 size="small"
-                                variant="outlined"
+                                variant="outline"
                                 sx={{ fontSize: '0.75rem' }}
                               />
                             ))}
@@ -657,7 +657,7 @@ export function DocumentsPage({
                               <Chip
                                 label={`+${document.tags.length - 2}`}
                                 size="small"
-                                variant="outlined"
+                                variant="outline"
                                 sx={{ fontSize: '0.75rem' }}
                               />
                             )}

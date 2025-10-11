@@ -300,7 +300,7 @@ export function OpportunitiesPage({
     }
   };
 
-  const getMatchScoreColor = (_core: number) => {
+  const getMatchScoreColor = (score: number) => {
     if (score >= 90) return 'success';
     if (score >= 75) return 'warning';
     return 'error';
@@ -396,7 +396,7 @@ export function OpportunitiesPage({
                 Search Jobs
               </Button>
               <Button
-                variant="outlined"
+                variant="outline"
                 size="large"
                 startIcon={<NotificationsActive />}
                 onClick={onCreateAlert}
@@ -439,7 +439,7 @@ export function OpportunitiesPage({
           </Typography>
           <Stack direction="row" spacing={2}>
             <Button
-              variant="outlined"
+              variant="outline"
               startIcon={<NotificationsActive />}
               onClick={() => setAlertDialogOpen(true)}
             >
@@ -528,14 +528,14 @@ export function OpportunitiesPage({
             size="small"
           />
           <Button
-            variant="outlined"
+            variant="outline"
             startIcon={<FilterList />}
             onClick={() => setFilterDialogOpen(true)}
             sx={{ borderRadius: 20 }}
           >
             Filters
           </Button>
-          <Button variant="outlined" startIcon={<Sort />} sx={{ borderRadius: 20 }}>
+          <Button variant="outline" startIcon={<Sort />} sx={{ borderRadius: 20 }}>
             Sort
           </Button>
         </Stack>
@@ -728,7 +728,7 @@ export function OpportunitiesPage({
                                 key={index}
                                 label={req}
                                 size="small"
-                                variant="outlined"
+                                variant="outline"
                                 sx={{ fontSize: '0.75rem' }}
                               />
                             ))}
@@ -736,7 +736,7 @@ export function OpportunitiesPage({
                               <Chip
                                 label={`+${job.requirements.length - 3}`}
                                 size="small"
-                                variant="outlined"
+                                variant="outline"
                                 sx={{ fontSize: '0.75rem' }}
                               />
                             )}
@@ -939,7 +939,7 @@ export function OpportunitiesPage({
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setJobDetailDialogOpen(false)}>Close</Button>
-          <Button variant="outlined" startIcon={<Bookmark />}>
+          <Button variant="outline" startIcon={<Bookmark />}>
             Bookmark
           </Button>
           <Button variant="contained" startIcon={<Send />}>

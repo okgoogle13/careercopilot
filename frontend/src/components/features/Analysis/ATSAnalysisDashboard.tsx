@@ -68,13 +68,13 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
     ],
   };
 
-  const getScoreColor = (_core: number) => {
+  const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-500';
     if (score >= 60) return 'text-yellow-500';
     return 'text-red-500';
   };
 
-  const getScoreBgColor = (_core: number) => {
+  const getScoreBgColor = (score: number) => {
     if (score >= 80) return 'bg-green-500/10';
     if (score >= 60) return 'bg-yellow-500/10';
     return 'bg-red-500/10';

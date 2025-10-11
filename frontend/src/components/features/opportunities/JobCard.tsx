@@ -11,13 +11,13 @@ import {
   IconButton,
 } from '@mui/material';
 import {
-  MapPin,
-  Clock,
-  DollarSign,
-  Bookmark,
-  BookmarkCheck,
-  ExternalLink,
-  Building2,
+  LocationOn as MapPin,
+  Schedule as Clock,
+  AttachMoney as DollarSign,
+  BookmarkBorder as Bookmark,
+  Bookmark as BookmarkCheck,
+  OpenInNew as ExternalLink,
+  Business as Building2,
 } from '@mui/icons-material';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
@@ -139,13 +139,13 @@ export function JobCard({
           <Chip
             label={type}
             size="small"
-            variant="outlined"
+            variant="outline"
             className="border-blue-300 text-blue-800"
           />
           <Chip
             label={experience}
             size="small"
-            variant="outlined"
+            variant="outline"
             className="border-purple-300 text-purple-800"
           />
         </Box>
@@ -189,7 +189,7 @@ export function JobCard({
             Apply Now
           </Button>
           <Button
-            variant="outlined"
+            variant="outline"
             onClick={(e) => {
               e.stopPropagation();
               onViewDetails?.(id);

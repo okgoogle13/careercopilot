@@ -160,7 +160,7 @@ export function ApplicationCard({
         <Box className="flex gap-2">
           <Button
             size="small"
-            variant="outlined"
+            variant="outline"
             onClick={() => onViewTimeline?.(id)}
             startIcon={<Eye sx={{ fontSize: 14 }} />}
             className="text-xs"

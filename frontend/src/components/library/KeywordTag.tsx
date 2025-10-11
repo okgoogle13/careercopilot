@@ -124,7 +124,7 @@ export function KeywordTagGroup({
           <div className="flex items-center gap-2 text-xs">
             {statusCounts.matched && (
               <Badge
-                variant="outlined"
+                variant="outline"
                 className="border-accent-green/50 text-accent-green font-medium"
               >
                 {statusCounts.matched} matched
@@ -132,7 +132,7 @@ export function KeywordTagGroup({
             )}
             {statusCounts.missing && (
               <Badge
-                variant="outlined"
+                variant="outline"
                 className="border-accent-red/50 text-accent-red font-medium"
               >
                 {statusCounts.missing} missing
@@ -140,7 +140,7 @@ export function KeywordTagGroup({
             )}
             {statusCounts.suggested && (
               <Badge
-                variant="outlined"
+                variant="outline"
                 className="border-brand-primary/50 text-brand-light font-medium"
               >
                 {statusCounts.suggested} suggested
@@ -165,7 +165,7 @@ export function KeywordTagGroup({
 
         {hiddenCount > 0 && (
           <Badge
-            variant="outlined"
+            variant="outline"
             className="border-subtle text-content-secondary hover:border-brand-primary hover:text-brand-light cursor-pointer transition-colors font-medium"
           >
             +{hiddenCount} more

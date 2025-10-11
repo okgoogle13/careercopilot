@@ -42,7 +42,7 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
             </Button>
 
             <Button
-              variant="outlined"
+              variant="outline"
               size="large"
               onClick={onWatchDemo}
               className="border-primary text-primary hover:bg-primary/10 px-8 py-3 text-lg"

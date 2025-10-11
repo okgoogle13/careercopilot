@@ -1,4 +1,4 @@
-import { Upload, Description as FileText, Mail, Award } from '@mui/icons-material';
+import { Upload, Description as FileText, Mail, EmojiEvents } from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -48,7 +48,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="small" variant="outlined">
+              <Button size="small" variant="outline">
                 Upload Files
               </Button>
             </div>
@@ -73,7 +73,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="small" variant="outlined">
+              <Button size="small" variant="outline">
                 Upload Files
               </Button>
             </div>
@@ -83,7 +83,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
           <Card className="p-6">
             <div className="flex items-center gap-4 mb-4">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Award className="w-5 h-5 text-primary" />
+                <EmojiEvents className="w-5 h-5 text-primary" />
               </div>
               <div>
                 <h3 className="font-semibold">Selection Criteria Responses</h3>
@@ -98,7 +98,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
               <p className="text-sm text-muted-foreground mb-3">
                 Drag and drop files here or click to browse
               </p>
-              <Button size="small" variant="outlined">
+              <Button size="small" variant="outline">
                 Upload Files
               </Button>
             </div>
@@ -107,7 +107,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
 
         {/* Actions */}
         <div className="flex justify-between mt-8">
-          <Button variant="outlined" onClick={onBack}>
+          <Button variant="outline" onClick={onBack}>
             Back
           </Button>
           <Button onClick={onNext} className="bg-primary hover:bg-primary/90">

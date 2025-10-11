@@ -374,7 +374,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button variant="outlined" className="w-full">
+                    <Button variant="outline" className="w-full">
                       Select Template
                     </Button>
                   </CardFooter>

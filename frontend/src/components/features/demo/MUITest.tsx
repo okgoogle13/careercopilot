@@ -118,7 +118,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent>
                 <LayoutStack spacing={2}>
-                  <LayoutCard variant="outlined">
+                  <LayoutCard variant="outline">
                     <Box sx={{ p: 2 }}>
                       <Typography variant="body2">Layout Card Component</Typography>
                     </Box>

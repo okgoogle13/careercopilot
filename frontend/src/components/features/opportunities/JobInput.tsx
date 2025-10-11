@@ -7,7 +7,7 @@ import {
   Link,
   Description as FileText,
   AutorenewRounded as Loader2,
-  ExternalLink,
+  OpenInNew as ExternalLink,
 } from '@mui/icons-material';
 import {
   Button,

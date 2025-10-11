@@ -129,14 +129,14 @@ interface DocumentPreviewProps {
   onBack: () => void;
   onEdit: () => void;
   onSave?: () => void;
-  (_documentType): DocumentType;
+  documentType: DocumentType;
   templateName: string;
   onExport?: (format: string) => void;
   onShare?: (documentId: string) => void;
   onCommentAdd?: (comment: Omit<Comment, 'id' | 'createdAt' | 'resolved' | 'replies'>) => void;
   onCommentResolve?: (commentId: string) => void;
   onCommentReply?: (commentId: string, content: string) => void;
-  onVersionRestore?: (ver_ionId: string) => void;
+  onVersionRestore?: (versionId: string) => void;
 }
 
 // Mock data
@@ -447,14 +447,14 @@ export function DocumentPreview({
   };
 
   // Get ATS score color
-  const getAtsScoreColor = (_core: number) => {
+  const getAtsScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-500';
     if (score >= 60) return 'text-yellow-500';
     return 'text-red-500';
   };
 
   // Get ATS score label
-  const getAtsScoreLabel = (_core: number) => {
+  const getAtsScoreLabel = (score: number) => {
     if (score >= 90) return 'Excellent';
     if (score >= 80) return 'Very Good';
     if (score >= 70) return 'Good';
@@ -463,7 +463,7 @@ export function DocumentPreview({
   };
 
   // Get severity color
-  const getSeverityColor = (_everity: 'low' | 'medium' | 'high') => {
+  const getSeverityColor = (severity: 'low' | 'medium' | 'high') => {
     return {
       low: 'bg-blue-100 text-blue-800',
       medium: 'bg-yellow-100 text-yellow-800',
@@ -536,7 +536,7 @@ export function DocumentPreview({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="outlined"
+                    variant="outline"
                     size="small"
                     onClick={generateAISuggestions}
                     className="flex items-center space-x-1.5"
@@ -551,7 +551,7 @@ export function DocumentPreview({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant="outlined"
+                    variant="outline"
                     size="small"
                     onClick={toggleReadingMode}
                     sx={{
@@ -572,7 +572,7 @@ export function DocumentPreview({
               </Tooltip>
 
               <Button
-                variant="outlined"
+                variant="outline"
                 size="small"
                 onClick={() => setShowShareDialog(true)}
                 className="flex items-center space-x-1.5"
@@ -621,15 +621,15 @@ export function DocumentPreview({
               </div>
             </div>
             <div className="flex gap-2">
-              <Button variant="outlined" onClick={onEdit}>
+              <Button variant="outline" onClick={onEdit}>
                 <Edit className="w-4 h-4 mr-2" />
                 Edit Document
               </Button>
-              <Button variant="outlined">
+              <Button variant="outline">
                 <Share className="w-4 h-4 mr-2" />
                 Share
               </Button>
-              <Button variant="outlined">
+              <Button variant="outline">
                 <Printer className="w-4 h-4 mr-2" />
                 Print
               </Button>
@@ -675,13 +675,13 @@ export function DocumentPreview({
                     <span className="text-sm font-medium">{zoomLevel}%</span>
                   </div>
                   <div className="flex gap-1">
-                    <Button size="small" variant="outlined" onClick={handleZoomOut}>
+                    <Button size="small" variant="outline" onClick={handleZoomOut}>
                       <ZoomOut className="w-3 h-3" />
                     </Button>
-                    <Button size="small" variant="outlined" onClick={handleResetZoom}>
+                    <Button size="small" variant="outline" onClick={handleResetZoom}>
                       <RotateCcw className="w-3 h-3" />
                     </Button>
-                    <Button size="small" variant="outlined" onClick={handleZoomIn}>
+                    <Button size="small" variant="outline" onClick={handleZoomIn}>
                       <ZoomIn className="w-3 h-3" />
                     </Button>
                   </div>
@@ -691,15 +691,15 @@ export function DocumentPreview({
               <Card className="p-4">
                 <h3 className="font-medium mb-3">Export Options</h3>
                 <div className="space-y-2">
-                  <Button variant="outlined" size="small" className="w-full justify-start">
+                  <Button variant="outline" size="small" className="w-full justify-start">
                     <Download className="w-3 h-3 mr-2" />
                     PDF (Recommended)
                   </Button>
-                  <Button variant="outlined" size="small" className="w-full justify-start">
+                  <Button variant="outline" size="small" className="w-full justify-start">
                     <Download className="w-3 h-3 mr-2" />
                     Word Document
                   </Button>
-                  <Button variant="outlined" size="small" className="w-full justify-start">
+                  <Button variant="outline" size="small" className="w-full justify-start">
                     <Download className="w-3 h-3 mr-2" />
                     Plain Text
                   </Button>
@@ -711,7 +711,7 @@ export function DocumentPreview({
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-400 mb-2">87%</div>
                   <div className="text-sm text-muted-foreground">Excellent ATS compatibility</div>
-                  <Button variant="outlined" size="small" className="w-full mt-3">
+                  <Button variant="outline" size="small" className="w-full mt-3">
                     View Details
                   </Button>
                 </div>
@@ -727,7 +727,7 @@ export function DocumentPreview({
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Button
                         size="small"
-                        variant="outlined"
+                        variant="outline"
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                       >
                         Previous
@@ -737,7 +737,7 @@ export function DocumentPreview({
                       </span>
                       <Button
                         size="small"
-                        variant="outlined"
+                        variant="outline"
                         onClick={() =>
                           setCurrentPage(Math.min(mockDocument.pages, currentPage + 1))
                         }

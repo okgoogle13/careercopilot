@@ -475,7 +475,7 @@ export function DashboardPage({
               ))}
             </List>
 
-            <Button fullWidth variant="outlined" size="small" sx={{ mt: 2, borderRadius: 20 }}>
+            <Button fullWidth variant="outline" size="small" sx={{ mt: 2, borderRadius: 20 }}>
               View All Activity
             </Button>
           </Paper>
@@ -492,7 +492,7 @@ export function DashboardPage({
             <Stack spacing={2}>
               <Button
                 fullWidth
-                variant="outlined"
+                variant="outline"
                 startIcon={<Add />}
                 sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
                 onClick={onCreateDocument}
@@ -501,7 +501,7 @@ export function DashboardPage({
               </Button>
               <Button
                 fullWidth
-                variant="outlined"
+                variant="outline"
                 startIcon={<Analytics />}
                 sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
               >
@@ -509,7 +509,7 @@ export function DashboardPage({
               </Button>
               <Button
                 fullWidth
-                variant="outlined"
+                variant="outline"
                 startIcon={<Work />}
                 sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
               >

@@ -3,7 +3,7 @@ import { Input } from '../../ui/input';
 import { Textarea } from '../../ui/textarea';
 import { Label } from '../../ui/label';
 import { Badge } from '../../ui/badge';
-import { ArrowLeft, Save, Eye, Download, Layout, Palette } from '@mui/icons-material';
+import { ArrowLeft, Save, Visibility, Download, ViewModule, Palette } from '@mui/icons-material';
 import {
   Button,
   IconButton,
@@ -208,11 +208,11 @@ export function ResumeBuilder({
           <h1 className="text-2xl font-bold text-foreground">Resume Builder</h1>
         </div>
         <div className="flex gap-2">
-          <Button variant="outlined" onClick={onNext}>
-            <Eye className="w-4 h-4 mr-2" />
+          <Button variant="outline" onClick={onNext}>
+            <Visibility className="w-4 h-4 mr-2" />
             Preview
           </Button>
-          <Button variant="outlined">
+          <Button variant="outline">
             <Download className="w-4 h-4 mr-2" />
             Export PDF
           </Button>
@@ -226,7 +226,7 @@ export function ResumeBuilder({
       {/* Template Selection Section */}
       <Card className="mb-8 p-6">
         <div className="flex items-center gap-3 mb-4">
-          <Layout className="w-5 h-5 text-blue-600" />
+          <ViewModule className="w-5 h-5 text-blue-600" />
           <h3 className="text-lg font-medium">Choose Resume Template</h3>
         </div>
 
@@ -252,7 +252,7 @@ export function ResumeBuilder({
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {template.features.slice(0, 2).map((feature, idx) => (
-                    <Badge key={idx} variant="outlined" className="text-xs">
+                    <Badge key={idx} variant="outline" className="text-xs">
                       {feature}
                     </Badge>
                   ))}
@@ -270,7 +270,7 @@ export function ResumeBuilder({
               <p className="text-xs text-gray-600 mb-2">{getCurrentTemplate().preview}</p>
               <div className="flex flex-wrap gap-1">
                 {getCurrentTemplate().features.map((feature, idx) => (
-                  <Badge key={idx} variant="outlined" className="text-xs">
+                  <Badge key={idx} variant="outline" className="text-xs">
                     {feature}
                   </Badge>
                 ))}
@@ -363,7 +363,7 @@ export function ResumeBuilder({
           <Card className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium">Work Experience</h3>
-              <Button onClick={addExperience} variant="outlined" size="small">
+              <Button onClick={addExperience} variant="outline" size="small">
                 Add Experience
               </Button>
             </div>
@@ -431,7 +431,7 @@ export function ResumeBuilder({
           <Card className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-medium">Education</h3>
-              <Button onClick={addEducation} variant="outlined" size="small">
+              <Button onClick={addEducation} variant="outline" size="small">
                 Add Education
               </Button>
             </div>
@@ -489,7 +489,7 @@ export function ResumeBuilder({
                   onChange={(e) => setNewSkill(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addSkill()}
                 />
-                <Button onClick={addSkill} variant="outlined">
+                <Button onClick={addSkill} variant="outline">
                   Add
                 </Button>
               </div>

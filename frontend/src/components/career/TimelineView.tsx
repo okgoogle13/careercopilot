@@ -118,7 +118,7 @@ export function TimelineView({
                     label={event.status.replace('_', ' ')}
                     size="small"
                     color={statusColors[event.status]}
-                    variant="outlined"
+                    variant="outline"
                   />
                   {onEventEdit && (
                     <IconButton
@@ -149,7 +149,7 @@ export function TimelineView({
                       <Typography variant="caption" color="text.secondary" className="block mb-1">
                         Interview Type:
                       </Typography>
-                      <Chip label={event.metadata.interviewType} size="small" variant="outlined" />
+                      <Chip label={event.metadata.interviewType} size="small" variant="outline" />
                     </Box>
                   )}
 
@@ -163,7 +163,7 @@ export function TimelineView({
                           <Button
                             key={index}
                             size="small"
-                            variant="outlined"
+                            variant="outline"
                             onClick={() => onViewDocument?.(doc)}
                             endIcon={<ExternalLink sx={{ fontSize: 14 }} />}
                           >
@@ -203,7 +203,7 @@ export function TimelineView({
                 {onAddNote && (
                   <Button
                     size="small"
-                    variant="outlined"
+                    variant="outline"
                     onClick={() => onAddNote(event.id)}
                     startIcon={<MessageCircle sx={{ fontSize: 16 }} />}
                   >
@@ -258,7 +258,7 @@ export function TimelineView({
                   Add more events to track your progress
                 </Typography>
                 <Button
-                  variant="outlined"
+                  variant="outline"
                   className="mt-3"
                   startIcon={<Calendar sx={{ fontSize: 16 }} />}
                 >

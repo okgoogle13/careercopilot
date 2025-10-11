@@ -234,7 +234,7 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
 
           <Stack direction="row" justifyContent="flex-end" spacing={1} pt={1}>
             <Button
-              variant="outlined"
+              variant="outline"
               size="small"
               onClick={() => setFiles([])}
               disabled={isUploading}

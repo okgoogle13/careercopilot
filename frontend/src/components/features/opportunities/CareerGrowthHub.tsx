@@ -4,19 +4,19 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import {
   ArrowLeft,
-  Sparkles,
-  Target,
+  AutoAwesome as Sparkles,
+  GpsFixed as Target,
   TrendingUp,
-  MessageSquare,
+  MessageSharp as MessageSquare,
   ArrowRight,
-  BookOpen,
-  Trophy,
-  Clock,
-  Users,
+  MenuBook as BookOpen,
+  EmojiEvents as Trophy,
+  Schedule as Clock,
+  Group as Users,
   CheckCircle,
   Plus,
   Star,
-  BarChart3,
+  BarChart,
 } from '@mui/icons-material';
 import {
   Button,
@@ -222,7 +222,7 @@ export function CareerGrowthHub({
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
-            <Button variant="outlined" size="small">
+            <Button variant="outline" size="small">
               <Plus className="w-4 h-4 mr-2" />
               Add Goal
             </Button>
@@ -242,7 +242,7 @@ export function CareerGrowthHub({
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-4 mb-8">
               <TabsTrigger value="overview" className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4" />
+                <BarChart className="w-4 h-4" />
                 Overview
               </TabsTrigger>
               <TabsTrigger value="goals" className="flex items-center gap-2">

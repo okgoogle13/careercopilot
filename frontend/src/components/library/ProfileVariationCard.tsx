@@ -192,7 +192,7 @@ export function ProfileVariationCard({
 
         {/* Action Button */}
         <Button
-          variant="outlined"
+          variant="outline"
           className="w-full border-brand-primary/30 hover:border-brand-primary hover:bg-brand-primary/10 transition-all font-semibold rounded-3xl py-3"
           onClick={(e) => {
             e.stopPropagation();

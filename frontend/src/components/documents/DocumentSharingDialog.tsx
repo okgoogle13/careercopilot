@@ -88,7 +88,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
 
 
 
-  const getPermissionColor = (permis_ion: PermissionLevel) => {
+  const getPermissionColor = (permission: PermissionLevel) => {
     switch (permission) {
       case 'view':
         return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
