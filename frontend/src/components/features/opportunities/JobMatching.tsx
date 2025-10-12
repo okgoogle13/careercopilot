@@ -7,8 +7,8 @@ import {
   LocationOn as MapPin,
   AttachMoney as DollarSign,
   Clock,
-  ExternalLink,
-  Heart,
+  OpenInNew as ExternalLink,
+  Favorite as Heart,
   Star,
 } from '@mui/icons-material';
 import {
