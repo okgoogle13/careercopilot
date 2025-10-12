@@ -260,7 +260,7 @@ export function CareerGrowthHub({
             </TabsList>
 
             {/* Overview Tab */}
-            <TabsContent value="overview" className="space-y-8">
+            <TabsContent value="overview" currentValue="overview" className="space-y-8">
               {/* Quick Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <Card className="p-6 text-center">
@@ -367,7 +367,7 @@ export function CareerGrowthHub({
               </div>
             </TabsContent>
 
-            <TabsContent value="ai-tools" className="space-y-8">
+            <TabsContent value="ai-tools" currentValue="ai-tools" className="space-y-8">
               {/* Feature Cards */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                 {features.map((feature) => {

@@ -85,7 +85,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="url" className="space-y-4">
+            <TabsContent value="url" currentValue={activeTab} className="space-y-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Job Posting URL</label>
                 <div className="relative">
@@ -110,7 +110,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               )}
             </TabsContent>
 
-            <TabsContent value="text" className="space-y-4">
+            <TabsContent value="text" currentValue={activeTab} className="space-y-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Job Description</label>
                 <Textarea
