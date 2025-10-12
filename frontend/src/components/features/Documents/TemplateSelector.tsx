@@ -120,11 +120,11 @@ export function TemplateSelector({
       console.log('Template selection response:', response);
 
       // Call the parent handler to navigate to next step
-      onSelectTemplate(templateId, type);
+      onSelectTemplate?.(templateId, type);
     } catch (error) {
       console.error('Failed to select template:', error);
       // Still proceed with navigation even if API call fails
-      onSelectTemplate(templateId, type);
+      onSelectTemplate?.(templateId, type);
     } finally {
       setIsSelectingTemplate(false);
     }
@@ -189,14 +189,14 @@ export function TemplateSelector({
       <div className="mb-8 space-y-4">
         <div className="flex gap-2">
           <Button
-            variant={selectedType === 'resume' ? 'default' : 'outline'}
+            variant={selectedType === 'resume' ? 'contained' : 'outlined'}
             className={selectedType === 'resume' ? 'bg-primary hover:bg-primary/90' : ''}
             onClick={() => setSelectedType('resume')}
           >
             Resume Templates
           </Button>
           <Button
-            variant={selectedType === 'cover-letter' ? 'default' : 'outline'}
+            variant={selectedType === 'cover-letter' ? 'contained' : 'outlined'}
             className={selectedType === 'cover-letter' ? 'bg-primary hover:bg-primary/90' : ''}
             onClick={() => setSelectedType('cover-letter')}
           >
@@ -208,7 +208,7 @@ export function TemplateSelector({
           {categories.map((category) => (
             <Button
               key={category}
-              variant={selectedCategory === category ? 'default' : 'outline'}
+              variant={selectedCategory === category ? 'contained' : 'outlined'}
               size="small"
               className={selectedCategory === category ? 'bg-primary hover:bg-primary/90' : ''}
               onClick={() => setSelectedCategory(category)}
