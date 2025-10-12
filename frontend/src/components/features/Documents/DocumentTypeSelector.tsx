@@ -35,6 +35,7 @@ import {
   CardActions,
   Typography,
   Box,
+  Tooltip as MuiTooltip,
 } from '@mui/material';
 
 type DocumentCategory = 'all' | 'resume' | 'cover-letter' | 'other';
@@ -269,7 +270,7 @@ export function DocumentTypeSelector({
   const handleKeyDown = (e: React.KeyboardEvent, typeId: string) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      onSelectType(typeId);
+      onSelectType?.(typeId);
     }
   };
 
@@ -308,7 +309,7 @@ export function DocumentTypeSelector({
         >
           <Card
             className="border-0 shadow-none"
-            onClick={() => onSelectType(doc.id)}
+            onClick={() => onSelectType?.(doc.id)}
             onKeyDown={(e) => handleKeyDown(e, doc.id)}
             role="button"
             tabIndex={0}
@@ -336,7 +337,7 @@ export function DocumentTypeSelector({
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-foreground">{doc.title}</h3>
                     <div className="flex items-center gap-2 mt-1">
-                      <Badge variant="outlined" className={getDifficultyColor(doc.difficulty)}>
+                      <Badge variant="outline" className={getDifficultyColor(doc.difficulty)}>
                         {doc.difficulty}
                       </Badge>
                       <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -347,26 +348,21 @@ export function DocumentTypeSelector({
                   </div>
                 </div>
                 <div className="flex flex-col gap-2 items-end">
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="text"
-                        size="small"
-                        className="h-8 w-8"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleFavorite(doc.id);
-                        }}
-                      >
-                        <Heart
-                          className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`}
-                        />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-                    </TooltipContent>
-                  </Tooltip>
+                  <MuiTooltip title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}>
+                    <Button
+                      variant="text"
+                      size="small"
+                      className="h-8 w-8"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleFavorite(doc.id);
+                      }}
+                    >
+                      <Heart
+                        className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`}
+                      />
+                    </Button>
+                  </MuiTooltip>
 
                   <div className="flex gap-1">
                     {doc.isNew && (
@@ -398,30 +394,25 @@ export function DocumentTypeSelector({
                   </span>
                 </div>
                 {doc.aiPowered && (
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Badge
-                        variant="outlined"
-                        className="bg-purple-50 text-purple-700 border-purple-200"
-                      >
-                        AI-Powered
-                      </Badge>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      This template includes AI assistance for content generation
-                    </TooltipContent>
-                  </Tooltip>
+                  <MuiTooltip title="This template includes AI assistance for content generation">
+                    <Badge
+                      variant="outline"
+                      className="bg-purple-50 text-purple-700 border-purple-200"
+                    >
+                      AI-Powered
+                    </Badge>
+                  </MuiTooltip>
                 )}
               </div>
 
               <div className="flex flex-wrap gap-2 pt-2">
                 {doc.tags.slice(0, 3).map((tag, i) => (
-                  <Badge key={i} variant="outlined" className="text-xs">
+                  <Badge key={i} variant="outline" className="text-xs">
                     {tag}
                   </Badge>
                 ))}
                 {doc.tags.length > 3 && (
-                  <Badge variant="outlined" className="text-xs">
+                  <Badge variant="outline" className="text-xs">
                     +{doc.tags.length - 3} more
                   </Badge>
                 )}
@@ -429,7 +420,7 @@ export function DocumentTypeSelector({
 
               <Button
                 className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
-                variant="outlined"
+                variant="outline"
                 size="small"
               >
                 Select Template
@@ -490,7 +481,7 @@ export function DocumentTypeSelector({
             </div>
             <div className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">Sort by:</span>
-              <Tabs value={sortBy} onValueChange={(value) => setSortBy(value as any)}>
+              <Tabs value={sortBy} onChange={(_e, value) => setSortBy(value as any)}>
                 <TabsList className="grid grid-cols-4 w-[400px]">
                   <TabsTrigger value="recommended" className="text-xs">
                     <TrendingUp className="w-3 h-3 mr-1" />
@@ -515,7 +506,7 @@ export function DocumentTypeSelector({
 
           <Tabs
             value={selectedCategory}
-            onValueChange={(value) => setSelectedCategory(value as DocumentCategory | 'favorites')}
+            onChange={(_e, value) => setSelectedCategory(value as DocumentCategory | 'favorites')}
             className="w-full"
           >
             <TabsList className="w-full justify-start overflow-x-auto">
@@ -562,7 +553,7 @@ export function DocumentTypeSelector({
                   <Card
                     key={doc.id}
                     className="p-4 hover:bg-muted/50 transition-colors cursor-pointer"
-                    onClick={() => onSelectType(doc.type)}
+                    onClick={() => onSelectType?.(doc.type)}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`p-2 ${template.bgColor} rounded-lg`}>
@@ -613,7 +604,7 @@ export function DocumentTypeSelector({
             <h3 className="text-lg font-medium">No templates found</h3>
             <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
             <Button
-              variant="outlined"
+              variant="outline"
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('all');
