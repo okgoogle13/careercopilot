@@ -6,7 +6,7 @@ import {
   AutoAwesome as Sparkles,
   LocationOn as MapPin,
   AttachMoney as DollarSign,
-  Clock,
+  Schedule as Clock,
   OpenInNew as ExternalLink,
   Favorite as Heart,
   Star,

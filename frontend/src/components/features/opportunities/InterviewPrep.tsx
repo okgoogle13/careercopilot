@@ -4,7 +4,7 @@ import { Textarea } from '../../ui/textarea';
 import {
   ArrowLeft,
   AutoAwesome as Sparkles,
-  MessageSquare,
+  MessageSharp as MessageSquare,
   PlayArrow as Play,
   Mic,
   MicOff,
