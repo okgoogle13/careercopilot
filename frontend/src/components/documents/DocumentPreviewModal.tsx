@@ -47,7 +47,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
               <span className="ml-1 font-medium">{document.atsScore}</span>
             </div>
           )}
-          <Button variant="text" size="small" onClick={onClose} className="ml-2" aria-label="Close">
+          <Button variant="link" size="small" onClick={onClose} className="ml-2" aria-label="Close">
             <X className="h-5 w-5" />
           </Button>
         </div>
@@ -82,12 +82,12 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
             </Button>
           </div>
           <div className="space-x-2">
-            <Button variant="text" size="small" onClick={() => onShare?.(document)}>
+            <Button variant="link" size="small" onClick={() => onShare?.(document)}>
               <Share2 className="h-4 w-4 mr-2" />
               Share
             </Button>
             <Button
-              variant="text"
+              variant="link"
               size="small"
               onClick={() => onDelete?.(document)}
               className="text-destructive hover:text-destructive"

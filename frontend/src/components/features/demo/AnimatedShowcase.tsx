@@ -40,7 +40,6 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   const [notifications, setNotifications] = useState<
     Array<{
       id: string;
-      id: string;
       type: 'success' | 'error' | 'info' | 'warning';
       message: string;
     }>

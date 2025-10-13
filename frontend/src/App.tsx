@@ -557,7 +557,7 @@ export default function App() {
             template={selectedTemplate!}
             onNext={handleDocumentComplete}
             onBack={handleBackToTemplates}
-            editingProfile={selectedProfile}
+            profileName={selectedProfile}
           />
         );
 

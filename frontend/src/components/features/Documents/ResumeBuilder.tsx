@@ -235,7 +235,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {template.features.slice(0, 2).map((feature, idx) => (
-                    <Badge key={idx} variant="outlined" className="text-xs">
+                    <Badge key={idx} variant="outline" className="text-xs">
                       {feature}
                     </Badge>
                   ))}
@@ -253,7 +253,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
               <p className="text-xs text-gray-600 mb-2">{getCurrentTemplate().preview}</p>
               <div className="flex flex-wrap gap-1">
                 {getCurrentTemplate().features.map((feature, idx) => (
-                  <Badge key={idx} variant="outlined" className="text-xs">
+                  <Badge key={idx} variant="outline" className="text-xs">
                     {feature}
                   </Badge>
                 ))}

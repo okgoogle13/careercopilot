@@ -338,8 +338,8 @@ export function CareerGrowthHub({
                             </Badge>
                             {skill.trending && (
                               <Tooltip>
-                                <TooltipTrigger>
-                                  <TrendingUp className="w-3 h-3 text-green-500" />
+                                <TooltipTrigger asChild>
+                                  <span><TrendingUp className="w-3 h-3 text-green-500" /></span>
                                 </TooltipTrigger>
                                 <TooltipContent>Trending skill in high demand</TooltipContent>
                               </Tooltip>

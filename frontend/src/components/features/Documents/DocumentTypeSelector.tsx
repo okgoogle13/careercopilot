@@ -595,7 +595,7 @@ export function DocumentTypeSelector({
             <h3 className="text-lg font-medium">No templates found</h3>
             <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
             <Button
-              variant="outline"
+              variant="outlined"
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('all');

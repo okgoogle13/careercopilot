@@ -229,7 +229,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       {currentQuestion.type}
                     </Badge>
                     <Badge
-                      variant="outlined"
+                      variant="outline"
                       className={getDifficultyColor(currentQuestion.difficulty)}
                     >
                       {currentQuestion.difficulty}
