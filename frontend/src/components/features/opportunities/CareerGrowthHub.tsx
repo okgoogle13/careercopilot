@@ -361,7 +361,6 @@ export function CareerGrowthHub({
             </TabsContent>
 
             <TabsContent value="ai-tools" currentValue="ai-tools" className="space-y-8">
-              <>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                 {features.map((feature) => {
                   const Icon = feature.icon;
@@ -419,7 +418,7 @@ export function CareerGrowthHub({
                   );
                 })}
               </div>
-            </>
+            </TabsContent>
           </Tabs>
 
           {/* Additional Info */}
