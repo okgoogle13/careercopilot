@@ -20,9 +20,8 @@ import {
   DialogTrigger,
 } from '../ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
-import { Button, IconButton } from '@mui/material';
+import { Button, IconButton, Tooltip } from '@mui/material';
 
 export function InteractiveComponentsSection() {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
@@ -92,13 +91,8 @@ export function InteractiveComponentsSection() {
             </PopoverContent>
           </Popover>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outlined">Hover for Tooltip</Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>This is a helpful tooltip</p>
-            </TooltipContent>
+          <Tooltip title="This is a helpful tooltip">
+            <Button variant="outlined">Hover for Tooltip</Button>
           </Tooltip>
         </div>
       </ComponentDemo>

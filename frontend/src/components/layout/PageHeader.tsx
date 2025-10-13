@@ -123,7 +123,7 @@ export function PageHeader({
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <Breadcrumbs
-            separator={<ChevronRight sx={{ ...{}, fontSize: 20 }} />}
+            separator={<ChevronRight sx={{ fontSize: 20 }} />}
             sx={{ mb: 2 }}
             aria-label="breadcrumb"
           >
@@ -149,7 +149,7 @@ export function PageHeader({
                   },
                 }}
               >
-                {index === 0 && <Home sx={{ ...{}, fontSize: 20 }} />}
+                {index === 0 && <Home sx={{ fontSize: 20 }} />}
                 {crumb.label}
               </Link>
             ))}
@@ -270,7 +270,7 @@ export function PageHeader({
                   color={action.color || 'primary'}
                   onClick={action.onClick}
                   disabled={action.disabled}
-                  startIcon={Icon && <Icon sx={{ ...{}, fontSize: 20 }} />}
+                  startIcon={Icon && <Icon />}
                   size={isCompact ? 'small' : 'medium'}
                   sx={{
                     whiteSpace: 'nowrap',
@@ -333,8 +333,8 @@ export function PageHeader({
                         disabled={action.disabled}
                       >
                         {Icon && (
-                          <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-                            <Icon sx={{ ...{}, fontSize: 20 }} />
+                          <Box sx={{ mr: 1, display: 'flex', alignItems: 'center', fontSize: 20 }}>
+                            <Icon />
                           </Box>
                         )}
                         {action.label}
@@ -363,8 +363,8 @@ export function PageHeader({
                           }}
                         >
                           {Icon && (
-                            <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-                              <Icon sx={{ ...{}, fontSize: 20 }} />
+                            <Box sx={{ mr: 1, display: 'flex', alignItems: 'center', fontSize: 20 }}>
+                              <Icon />
                             </Box>
                           )}
                           {action.label}

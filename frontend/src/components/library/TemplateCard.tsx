@@ -94,7 +94,7 @@ export function TemplateCard({
           }`}
         >
           <Button
-            variant="outline"
+            variant="outlined"
             size="small"
             onClick={(e) => {
               e.stopPropagation();

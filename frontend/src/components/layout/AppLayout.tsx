@@ -186,7 +186,7 @@ export function AppLayout({
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button
             size="small"
-            startIcon={<Palette sx={{ ...{}, fontSize: 20 }} />}
+            startIcon={<Palette sx={{ fontSize: 20 }} />}
             onClick={onThemeToggle}
             sx={{ fontSize: '0.75rem' }}
           >
@@ -223,8 +223,8 @@ export function AppLayout({
                       },
                     }}
                   >
-                    <ListItemIcon sx={{ minWidth: 40 }}>
-                      <Icon sx={{ ...{}, fontSize: 20 }} />
+                    <ListItemIcon sx={{ minWidth: 40, fontSize: 20 }}>
+                      <Icon />
                     </ListItemIcon>
                     <ListItemText
                       primary={item.label}
@@ -275,8 +275,8 @@ export function AppLayout({
             },
           }}
         >
-          <ListItemIcon sx={{ minWidth: 40, color: 'inherit' }}>
-            <LogOut sx={{ ...{}, fontSize: 20 }} />
+          <ListItemIcon sx={{ minWidth: 40, color: 'inherit', fontSize: 20 }}>
+            <LogOut />
           </ListItemIcon>
           <ListItemText
             primary="Sign Out"
@@ -334,7 +334,7 @@ export function AppLayout({
             <Button
               color="inherit"
               onClick={onToggleDemoNav}
-              startIcon={<ChevronLeft sx={{ ...{}, fontSize: 20 }} />}
+              startIcon={<ChevronLeft sx={{ fontSize: 20 }} />}
               sx={{ fontSize: '0.75rem' }}
             >
               Hide Navigation

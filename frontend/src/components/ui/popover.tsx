@@ -34,7 +34,7 @@ export interface PopoverTriggerProps extends React.HTMLAttributes<HTMLElement> {
 export const PopoverTrigger = React.forwardRef<HTMLElement, PopoverTriggerProps>(
   ({ children, asChild, ...props }, ref) => {
     if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children, { ref, ...props });
+      return React.cloneElement(children, { ...props, ref } as any);
     }
 
     return (

@@ -339,7 +339,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                   </div>
                 </div>
 
-                <Button className="w-full mt-4" variant="outline">
+                <Button className="w-full mt-4" variant="outlined">
                   <BookOpen className="w-4 h-4 mr-2" />
                   View Full Learning Plan
                 </Button>

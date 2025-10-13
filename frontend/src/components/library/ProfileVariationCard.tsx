@@ -7,16 +7,10 @@ import {
   Star,
   Tag,
 } from '@mui/icons-material';
-import { Button, Card } from '@mui/material';
+import { Button, Card, IconButton, Menu, MenuItem } from '@mui/material';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import { Badge } from '../ui/badge';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
 
 interface ProfileVariationCardProps {
   profile_name: string;
@@ -42,7 +36,17 @@ export function ProfileVariationCard({
   onClick,
 }: ProfileVariationCardProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const formatDate = (date: Date) => {
     const now = new Date();
@@ -78,63 +82,80 @@ export function ProfileVariationCard({
 
       {/* Actions Menu */}
       <div className="absolute top-3 right-3 z-10">
-        <DropdownMenu open={open} onOpenChange={setOpen}>
-          <DropdownMenuTrigger asChild>
-            <Button
-              variant="text"
-              size="small"
-              className={`h-8 w-8 p-0 transition-opacity bg-surface-card/80 backdrop-blur-sm border border-subtle hover:bg-surface-section ${
-                isHovered ? 'opacity-100' : 'opacity-0'
-              }`}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <MoreVert className="w-4 h-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuItem
+        <IconButton
+          size="small"
+          className={`transition-opacity bg-surface-card/80 backdrop-blur-sm border border-subtle hover:bg-surface-section ${
+            isHovered ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={handleMenuClick}
+          sx={{
+            width: 32,
+            height: 32,
+            opacity: isHovered ? 1 : 0,
+          }}
+        >
+          <MoreVert sx={{ fontSize: 16 }} />
+        </IconButton>
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          sx={{ minWidth: 192 }}
+        >
+          <MenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMenuClose();
+              onEdit?.();
+            }}
+          >
+            <Edit sx={{ fontSize: 16, mr: 1 }} />
+            Edit Profile
+          </MenuItem>
+          <MenuItem
+            onClick={(e) => {
+              e.stopPropagation();
+              handleMenuClose();
+              onDuplicate?.();
+            }}
+          >
+            <Copy sx={{ fontSize: 16, mr: 1 }} />
+            Duplicate
+          </MenuItem>
+          {!is_default && (
+            <MenuItem
               onClick={(e) => {
                 e.stopPropagation();
-                onEdit?.();
+                handleMenuClose();
+                onSetDefault?.();
               }}
             >
-              <Edit className="w-4 h-4 mr-2" />
-              Edit Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem
+              <Star sx={{ fontSize: 16, mr: 1 }} />
+              Set as Default
+            </MenuItem>
+          )}
+          {!is_default && (
+            <MenuItem
               onClick={(e) => {
                 e.stopPropagation();
-                onDuplicate?.();
+                handleMenuClose();
+                onDelete?.();
               }}
+              sx={{ color: 'error.main' }}
             >
-              <Copy className="w-4 h-4 mr-2" />
-              Duplicate
-            </DropdownMenuItem>
-            {!is_default && (
-              <DropdownMenuItem
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSetDefault?.();
-                }}
-              >
-                <Star className="w-4 h-4 mr-2" />
-                Set as Default
-              </DropdownMenuItem>
-            )}
-            {!is_default && (
-              <DropdownMenuItem
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDelete?.();
-                }}
-                className="text-accent-red focus:text-accent-red focus:bg-accent-red/10"
-              >
-                <Delete className="w-4 h-4 mr-2" />
-                Delete
-              </DropdownMenuItem>
-            )}
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <Delete sx={{ fontSize: 16, mr: 1 }} />
+              Delete
+            </MenuItem>
+          )}
+        </Menu>
       </div>
 
       {/* Content */}

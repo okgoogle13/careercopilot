@@ -253,7 +253,8 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 {/* Recording Controls */}
                 <div className="flex items-center gap-4 mb-6 p-4 bg-card rounded-lg">
                   <Button
-                    variant={isRecording ? 'destructive' : 'outline'}
+                    variant={isRecording ? 'contained' : 'outlined'}
+                    color={isRecording ? 'error' : 'primary'}
                     size="small"
                     onClick={toggleRecording}
                   >
