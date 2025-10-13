@@ -55,7 +55,7 @@ export function FormComponentsSection() {
             <div className="space-y-2">
               <Label>Switch</Label>
               <div className="flex items-center space-x-2">
-                <Switch id="switch" checked={switchChecked} onCheckedChange={setSwitchChecked} />
+                <Switch id="switch" checked={switchChecked} onChange={setSwitchChecked} />
                 <Label htmlFor="switch">Enable notifications</Label>
               </div>
             </div>
@@ -65,7 +65,7 @@ export function FormComponentsSection() {
                 <Checkbox
                   id="checkbox"
                   checked={checkboxChecked}
-                  onCheckedChange={setCheckboxChecked}
+                  onChange={setCheckboxChecked}
                 />
                 <Label htmlFor="checkbox">I agree to the terms</Label>
               </div>
@@ -78,7 +78,7 @@ export function FormComponentsSection() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <Label>Radio Group</Label>
-            <RadioGroup value={radioValue} onValueChange={setRadioValue}>
+            <RadioGroup value={radioValue} onChange={setRadioValue}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="option1" id="option1" />
                 <Label htmlFor="option1">Option 1</Label>
@@ -97,7 +97,7 @@ export function FormComponentsSection() {
             <Label>Slider</Label>
             <Slider
               value={sliderValue}
-              onValueChange={setSliderValue}
+              onChange={setSliderValue}
               max={100}
               step={1}
               className="w-full"

@@ -1,25 +1,15 @@
+import { ArrowLeft, Download, Palette, Save, ViewModule, Visibility } from '@mui/icons-material';
+import { Button, Card } from '@mui/material';
 import { useState } from 'react';
-import { Input } from '../../ui/input';
-import { Textarea } from '../../ui/textarea';
-import { Label } from '../../ui/label';
 import { Badge } from '../../ui/badge';
-import { ArrowLeft, Save, Visibility, Download, ViewModule, Palette } from '@mui/icons-material';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Input } from '../../ui/input';
+import { Label } from '../../ui/label';
+import { Textarea } from '../../ui/textarea';
 
 interface ResumeBuilderProps {
   template?: { id: string; name: string; type: 'resume' | 'cover-letter' };
-  onComplete?: () => void;
-  editingProfile?: any;
   onBack: () => void;
+  onComplete?: () => void;
   onNext?: () => void;
   profileName?: string;
 }
@@ -57,14 +47,7 @@ interface ResumeData {
   skills: string[];
 }
 
-export function ResumeBuilder({
-  template,
-  onComplete,
-  editingProfile,
-  onBack,
-  onNext,
-  profileName,
-}: ResumeBuilderProps) {
+export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeBuilderProps) {
   const [selectedTemplate, setSelectedTemplate] = useState<string>('modern-1');
 
   const resumeTemplates: ResumeTemplate[] = [

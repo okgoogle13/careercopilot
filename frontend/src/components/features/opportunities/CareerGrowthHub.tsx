@@ -1,33 +1,26 @@
+import {
+  ArrowLeft,
+  ArrowRight,
+  BarChart,
+  MenuBook as BookOpen,
+  CheckCircle,
+  Schedule as Clock,
+  MessageSharp as MessageSquare,
+  Add as Plus,
+  AutoAwesome as Sparkles,
+  Star,
+  GpsFixed as Target,
+  TrendingUp,
+  EmojiEvents as Trophy
+} from '@mui/icons-material';
+import {
+  Button,
+  Card
+} from '@mui/material';
 import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
-import {
-  ArrowLeft,
-  AutoAwesome as Sparkles,
-  GpsFixed as Target,
-  TrendingUp,
-  MessageSharp as MessageSquare,
-  ArrowRight,
-  MenuBook as BookOpen,
-  EmojiEvents as Trophy,
-  Schedule as Clock,
-  Group as Users,
-  CheckCircle,
-  Add as Plus,
-  Star,
-  BarChart,
-} from '@mui/icons-material';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
 
 interface Goal {
   id: string;
@@ -368,7 +361,7 @@ export function CareerGrowthHub({
             </TabsContent>
 
             <TabsContent value="ai-tools" currentValue="ai-tools" className="space-y-8">
-              {/* Feature Cards */}
+              <>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                 {features.map((feature) => {
                   const Icon = feature.icon;
@@ -426,7 +419,7 @@ export function CareerGrowthHub({
                   );
                 })}
               </div>
-            </TabsContent>
+            </>
           </Tabs>
 
           {/* Additional Info */}

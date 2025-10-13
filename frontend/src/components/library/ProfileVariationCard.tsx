@@ -1,3 +1,14 @@
+import {
+  CalendarMonth,
+  ContentCopy as Copy,
+  Delete,
+  Edit,
+  MoreVert,
+  Star,
+  Tag,
+} from '@mui/icons-material';
+import { Button, Card } from '@mui/material';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import { Badge } from '../ui/badge';
 import {
@@ -6,26 +17,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import {
-  Star,
-  MoreVert,
-  Edit,
-  ContentCopy as Copy,
-  Delete,
-  CalendarMonth,
-  Tag,
-} from '@mui/icons-material';
-import { format } from 'date-fns';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
 
 interface ProfileVariationCardProps {
   profile_name: string;
@@ -51,6 +42,7 @@ export function ProfileVariationCard({
   onClick,
 }: ProfileVariationCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const formatDate = (date: Date) => {
     const now = new Date();
@@ -86,7 +78,7 @@ export function ProfileVariationCard({
 
       {/* Actions Menu */}
       <div className="absolute top-3 right-3 z-10">
-        <DropdownMenu>
+        <DropdownMenu open={open} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="text"
@@ -192,7 +184,7 @@ export function ProfileVariationCard({
 
         {/* Action Button */}
         <Button
-          variant="outline"
+          variant="outlined"
           className="w-full border-brand-primary/30 hover:border-brand-primary hover:bg-brand-primary/10 transition-all font-semibold rounded-3xl py-3"
           onClick={(e) => {
             e.stopPropagation();

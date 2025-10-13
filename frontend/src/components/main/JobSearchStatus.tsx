@@ -1,14 +1,13 @@
-import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
-import { StatCard } from '../ui/StatCard';
 import {
-  Send,
+  AccessTime,
   CalendarMonth,
   EmojiEvents,
   GpsFixed,
-  AccessTime,
+  Send,
   Visibility,
 } from '@mui/icons-material';
+import { Box, Grid, Typography } from '@mui/material';
+import { StatCard } from '../ui/StatCard';
 
 interface JobSearchStatusProps {
   stats?: {

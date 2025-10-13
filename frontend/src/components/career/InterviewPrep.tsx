@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
 import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Button,
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Chip,
-  LinearProgress,
-  Alert,
-  Tabs,
-  Tab,
-  Grid,
-  IconButton,
-} from '@mui/material';
-import {
-  PlayArrow as Play,
-  Square,
-  Refresh as RotateCcw,
-  Lightbulb,
-  ChatBubble as MessageSquare,
-  Schedule as Clock,
-  Star,
   ChevronLeft,
   ChevronRight,
+  Schedule as Clock,
+  Lightbulb,
+  ChatBubble as MessageSquare,
   Mic,
   MicOff,
+  Refresh as RotateCcw,
+  Star,
 } from '@mui/icons-material';
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  FormControl,
+  Grid,
+  InputLabel,
+  LinearProgress,
+  MenuItem,
+  Select,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
 
 interface InterviewQuestion {
   id: string;

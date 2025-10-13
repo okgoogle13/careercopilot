@@ -55,7 +55,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
             Back to App
           </Button>
           <LayoutFlex gap={2}>
-            <Button variant="outline">Outlined Button</Button>
+            <Button variant="outlined">Outlined Button</Button>
             <Button variant="secondary">Secondary</Button>
             <Button variant="default" onClick={() => setDialogOpen(true)}>
               Open Dialog
@@ -77,8 +77,8 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                 <LayoutFlex gap={1} wrap sx={{ mt: 2 }}>
                   <Badge variant="default">Default</Badge>
                   <Badge variant="secondary">Secondary</Badge>
-                  <Badge variant="outline">Outline</Badge>
-                  <Badge variant="outline">Error</Badge>
+                  <Badge variant="outlined">Outline</Badge>
+                  <Badge variant="outlined">Error</Badge>
                 </LayoutFlex>
               </CardContent>
             </Card>
@@ -118,7 +118,7 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
               </CardHeader>
               <CardContent>
                 <LayoutStack spacing={2}>
-                  <LayoutCard variant="outline">
+                  <LayoutCard variant="outlined">
                     <Box sx={{ p: 2 }}>
                       <Typography variant="body2">Layout Card Component</Typography>
                     </Box>
@@ -185,13 +185,13 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
         </Box>
         {/* Dialog Component Test */}
         <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-          <DialogClose onClick={() => setDialogOpen(false)} />
           <DialogHeader>
             <DialogTitle>MUI Dialog Component</DialogTitle>
             <DialogDescription>
               This is a test of the migrated MUI dialog component with proper theming and
               animations.
             </DialogDescription>
+            <DialogClose onClick={() => setDialogOpen(false)} />
           </DialogHeader>
           <DialogContent>
             <LayoutStack spacing={3}>
@@ -212,12 +212,12 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
                 placeholder="Your message..."
                 rows={4}
                 value={formData.message}
-                onChange={(e) => setFormData({ ...formData, mes_age: e.target.value })}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               />
             </LayoutStack>
           </DialogContent>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setDialogOpen(false)}>
+            <Button variant="outlined" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
             <Button variant="default" onClick={() => setDialogOpen(false)}>

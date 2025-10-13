@@ -1,11 +1,10 @@
-import React from 'react';
-import { Badge } from '../ui/badge';
-import { Progress } from '../ui/progress';
+import { Warning as AlertTriangle, Info } from '@mui/icons-material';
+import { Alert, AlertDescription, AlertTitle } from '../ui/Alert';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
+import { Badge } from '../ui/badge';
 import { Label } from '../ui/label';
-import { ComponentSection, ComponentDemo } from './ComponentDemo';
-import { Info, Warning as AlertTriangle } from '@mui/icons-material';
+import { Progress } from '../ui/progress';
+import { ComponentDemo, ComponentSection } from './ComponentDemo';
 
 export function DisplayComponentsSection() {
   return (
@@ -15,10 +14,10 @@ export function DisplayComponentsSection() {
     >
       <ComponentDemo title="Badges">
         <div className="flex flex-wrap gap-2">
-          <Badge variant="elevation">Default</Badge>
+          <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
-          <Badge variant="outline">Destructive</Badge>
-          <Badge variant="outline">Outline</Badge>
+          <Badge color="error">Destructive</Badge>
+          <Badge variant="outlined">Outline</Badge>
           <Badge className="bg-green-500">Custom Green</Badge>
           <Badge className="bg-primary">Primary</Badge>
         </div>
@@ -72,7 +71,7 @@ export function DisplayComponentsSection() {
               This is an informational alert with additional details.
             </AlertDescription>
           </Alert>
-          <Alert variant="outline">
+          <Alert variant="outlined">
             <AlertTriangle className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>Something went wrong. Please try again later.</AlertDescription>

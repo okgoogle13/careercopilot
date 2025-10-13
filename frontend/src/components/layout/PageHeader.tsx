@@ -1,29 +1,29 @@
-import React from 'react';
-import {
-  Box,
-  Typography,
-  Button,
-  IconButton,
-  Breadcrumbs,
-  Link,
-  Chip,
-  Avatar,
-  Tooltip,
-  Menu,
-  MenuItem,
-  Divider,
-} from '@mui/material';
 import {
   ArrowBack as ArrowLeft,
-  MoreVert as MoreVertical,
-  Share as Share2,
   BookmarkBorder as Bookmark,
+  ChevronRight,
   Download,
   Edit,
-  Delete as Trash2,
-  ChevronRight,
   Home,
+  MoreVert as MoreVertical,
+  Share as Share2,
+  Delete as Trash2,
 } from '@mui/icons-material';
+import {
+  Avatar,
+  Box,
+  Breadcrumbs,
+  Button,
+  Chip,
+  Divider,
+  IconButton,
+  Link,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
+} from '@mui/material';
+import React from 'react';
 
 interface BreadcrumbItem {
   label: string;
@@ -123,7 +123,7 @@ export function PageHeader({
         {/* Breadcrumbs */}
         {breadcrumbs && breadcrumbs.length > 0 && (
           <Breadcrumbs
-            separator={<ChevronRight fontSize="small" />}
+            separator={<ChevronRight sx={{ ...{}, fontSize: 20 }} />}
             sx={{ mb: 2 }}
             aria-label="breadcrumb"
           >
@@ -149,7 +149,7 @@ export function PageHeader({
                   },
                 }}
               >
-                {index === 0 && <Home fontSize="small" />}
+                {index === 0 && <Home sx={{ ...{}, fontSize: 20 }} />}
                 {crumb.label}
               </Link>
             ))}
@@ -270,7 +270,7 @@ export function PageHeader({
                   color={action.color || 'primary'}
                   onClick={action.onClick}
                   disabled={action.disabled}
-                  startIcon={Icon && <Icon fontSize="small" />}
+                  startIcon={Icon && <Icon sx={{ ...{}, fontSize: 20 }} />}
                   size={isCompact ? 'small' : 'medium'}
                   sx={{
                     whiteSpace: 'nowrap',
@@ -334,7 +334,7 @@ export function PageHeader({
                       >
                         {Icon && (
                           <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-                            <Icon fontSize="small" />
+                            <Icon sx={{ ...{}, fontSize: 20 }} />
                           </Box>
                         )}
                         {action.label}
@@ -364,7 +364,7 @@ export function PageHeader({
                         >
                           {Icon && (
                             <Box sx={{ mr: 1, display: 'flex', alignItems: 'center' }}>
-                              <Icon fontSize="small" />
+                              <Icon sx={{ ...{}, fontSize: 20 }} />
                             </Box>
                           )}
                           {action.label}

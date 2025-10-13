@@ -16,6 +16,7 @@ from app.genkit_flows.career_application_workflow import (
 from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
 from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
 from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 # Import middleware for authentication (if available)
@@ -305,15 +306,16 @@ async def workflow_health_check():
     description="Get the status of a running or completed workflow (future enhancement)",
 )
 async def get_workflow_status(workflow_id: str):
-    """
+    """Get the status of a workflow by ID.
+
     Get the status of a workflow by ID.
 
     This is a placeholder for future implementation of async workflow tracking.
     Currently returns a not implemented response.
     """
-    raise HTTPException(
+    return JSONResponse(
         status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="Workflow status tracking not yet implemented",
+        content={"detail": "Workflow status tracking not yet implemented"},
     )
 
 

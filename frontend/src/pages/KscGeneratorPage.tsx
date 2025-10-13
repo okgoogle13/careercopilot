@@ -1,75 +1,55 @@
-import React, { useState } from 'react';
+import Grid from '@/components/ui/GridCompat';
 import {
+  Analytics,
+  Assignment,
+  AutoAwesome,
+  CheckCircle,
+  ContentCopy,
+  Download,
+  Edit,
+  ExpandMore,
+  Lightbulb,
+  Psychology,
+  Save,
+  SmartToy,
+  TipsAndUpdates,
+  Upload,
+  Visibility,
+} from '@mui/icons-material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Alert,
   Box,
-  Container,
-  Grid,
-  Paper,
-  Typography,
   Button,
   Card,
   CardContent,
-  TextField,
   Chip,
-  Stack,
-  IconButton,
-  Divider,
-  Alert,
+  ChipProps,
   CircularProgress,
-  Stepper,
-  Step,
-  StepLabel,
-  StepContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  LinearProgress,
   List,
   ListItem,
-  ListItemText,
   ListItemIcon,
-  LinearProgress,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Tooltip,
-  Badge,
-  Avatar,
+  ListItemText,
+  Paper,
+  Stack,
+  Step,
+  StepLabel,
+  Stepper,
   Tab,
   Tabs,
+  TextField,
+  Typography,
 } from '@mui/material';
-import {
-  Add,
-  Upload,
-  Download,
-  Share,
-  Edit,
-  Delete,
-  Save,
-  Refresh,
-  CheckCircle,
-  Warning,
-  Info,
-  School,
-  Work,
-  Build,
-  Star,
-  AutoAwesome,
-  Psychology,
-  TipsAndUpdates,
-  Assignment,
-  AssignmentTurnedIn,
-  ExpandMore,
-  ContentCopy,
-  Visibility,
-  VisibilityOff,
-  SendTimeExtension,
-  Schedule,
-  Timer,
-  Analytics,
-  Lightbulb,
-  QuestionAnswer,
-  SmartToy,
-} from '@mui/icons-material';
+import React, { useState } from 'react';
 
 interface KscCriterion {
   id: string;
@@ -106,7 +86,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 interface KscGeneratorPageProps {
-  onSave?: (respon_es: any) => void;
+  onSave?: (responses: any) => void;
   onExport?: () => void;
   onImport?: () => void;
 }
@@ -235,7 +215,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
     return Math.round((completed / criteria.length) * 100);
   };
 
-  const getWordCountColor = (wordCount: number, suggested: number) => {
+  const getWordCountColor = (wordCount: number, suggested: number): ChipProps['color'] => {
     const ratio = wordCount / suggested;
     if (ratio < 0.7) return 'error';
     if (ratio > 1.3) return 'warning';
@@ -554,12 +534,10 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                                   <Chip
                                     size="small"
                                     label={`${criterion.wordCount} words`}
-                                    color={
-                                      getWordCountColor(
-                                        criterion.wordCount,
-                                        criterion.suggestedLength
-                                      ) as any
-                                    }
+                                    color={getWordCountColor(
+                                      criterion.wordCount,
+                                      criterion.suggestedLength
+                                    )}
                                   />
                                 )}
                               </Box>

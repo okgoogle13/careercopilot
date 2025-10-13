@@ -187,7 +187,7 @@ export function CardComponentsSection() {
                     {profile.lastUpdated || 'Click to create'}
                   </span>
                   {selectedCard === profile.id && (
-                    <Badge variant="elevation" className="bg-primary">
+                    <Badge variant="default" className="bg-primary">
                       Selected
                     </Badge>
                   )}

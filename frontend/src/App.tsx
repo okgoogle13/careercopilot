@@ -546,7 +546,7 @@ export default function App() {
             documentType={
               selectedDocumentType === 'selection-criteria' ? 'resume' : selectedDocumentType!
             }
-            onSelect={handleTemplateSelection}
+            onSelectTemplate={handleTemplateSelection}
             onBack={handleBackToJobInput}
           />
         );
@@ -555,7 +555,7 @@ export default function App() {
         return (
           <ResumeBuilder
             template={selectedTemplate!}
-            onComplete={handleDocumentComplete}
+            onNext={handleDocumentComplete}
             onBack={handleBackToTemplates}
             editingProfile={selectedProfile}
           />

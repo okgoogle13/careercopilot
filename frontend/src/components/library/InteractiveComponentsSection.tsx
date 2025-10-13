@@ -25,6 +25,9 @@ import { ComponentSection, ComponentDemo } from './ComponentDemo';
 import { Button, IconButton } from '@mui/material';
 
 export function InteractiveComponentsSection() {
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+  const [isAlertDialogOpen, setIsAlertDialogOpen] = React.useState(false);
+
   return (
     <ComponentSection
       title="Interactive Components"
@@ -32,43 +35,37 @@ export function InteractiveComponentsSection() {
     >
       <ComponentDemo title="Dialogs & Modals">
         <div className="flex flex-wrap gap-4">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outlined">Open Dialog</Button>
-            </DialogTrigger>
+          <Button variant="outlined" onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogHeader>
+              <DialogTitle>Dialog Title</DialogTitle>
+              <DialogDescription>
+                This is a dialog description that explains what this dialog is for.
+              </DialogDescription>
+            </DialogHeader>
             <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Dialog Title</DialogTitle>
-                <DialogDescription>
-                  This is a dialog description that explains what this dialog is for.
-                </DialogDescription>
-              </DialogHeader>
               <div className="py-4">
                 <p>Dialog content goes here.</p>
               </div>
-              <DialogFooter>
-                <Button variant="outlined">Cancel</Button>
-                <Button>Confirm</Button>
-              </DialogFooter>
             </DialogContent>
+            <DialogFooter>
+              <Button variant="outlined" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+              <Button onClick={() => setIsDialogOpen(false)}>Confirm</Button>
+            </DialogFooter>
           </Dialog>
 
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button variant="outlined">Delete Item</Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete the item.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction>Delete</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
+          <Button variant="outlined" onClick={() => setIsAlertDialogOpen(true)}>Delete Item</Button>
+          <AlertDialog open={isAlertDialogOpen} onOpenChange={setIsAlertDialogOpen}>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete the item.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={() => setIsAlertDialogOpen(false)}>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={() => setIsAlertDialogOpen(false)}>Delete</AlertDialogAction>
+            </AlertDialogFooter>
           </AlertDialog>
         </div>
       </ComponentDemo>

@@ -1,66 +1,54 @@
-import React, { useState } from 'react';
+import Grid from '@/components/ui/GridCompat';
 import {
+  Analytics,
+  Assessment,
+  BarChart,
+  CheckCircle,
+  Description,
+  DonutLarge,
+  Download,
+  Error,
+  Info,
+  MoreVert,
+  PieChart,
+  Refresh,
+  School,
+  Share,
+  ShowChart,
+  Speed,
+  Timeline,
+  TrendingUp,
+  Visibility,
+  Warning,
+  Work,
+} from '@mui/icons-material';
+import {
+  Alert,
   Box,
-  Container,
-  Paper,
-  Typography,
   Button,
   Card,
   CardContent,
-  Avatar,
-  LinearProgress,
   Chip,
-  Stack,
+  CircularProgress,
+  Container,
   IconButton,
+  LinearProgress,
+  LinearProgressProps,
   Menu,
   MenuItem,
-  Divider,
-  Alert,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Tabs,
+  Paper,
+  Stack,
   Tab,
-  CircularProgress,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Tooltip,
-  Badge,
+  Tabs,
+  Typography,
 } from '@mui/material';
-import { Grid } from '@mui/material';
-import {
-  Analytics,
-  TrendingUp,
-  Assessment,
-  Speed,
-  Description,
-  CheckCircle,
-  Warning,
-  Error,
-  Info,
-  Refresh,
-  Download,
-  Share,
-  MoreVert,
-  Timeline,
-  DonutLarge,
-  BarChart,
-  ShowChart,
-  PieChart,
-  InsertChart,
-  Visibility,
-  ThumbUp,
-  ThumbDown,
-  Star,
-  School,
-  Work,
-  Build,
-} from '@mui/icons-material';
+import React, { useState } from 'react';
 
 interface AnalysisReport {
   id: string;
@@ -195,14 +183,14 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
     },
   ];
 
-  const getScoreColor = (score: number) => {
+  const getScoreColor = (score: number): LinearProgressProps['color'] => {
     if (score >= 90) return 'success';
     if (score >= 75) return 'warning';
     return 'error';
   };
 
-  const getStatusIcon = (_tatus: string) => {
-    switch (status) {
+  const getStatusIcon = (reportStatus: AnalysisReport['status']) => {
+    switch (reportStatus) {
       case 'completed':
         return <CheckCircle color="success" />;
       case 'pending':
@@ -214,8 +202,8 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
     }
   };
 
-  const getTypeIcon = (type: string) => {
-    switch (type) {
+  const getTypeIcon = (reportType: AnalysisReport['type']) => {
+    switch (reportType) {
       case 'resume':
         return <Description color="primary" />;
       case 'cover-letter':
@@ -328,7 +316,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
 
       {/* Analysis Summary Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -344,7 +332,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -360,7 +348,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -376,7 +364,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
           </Card>
         </Grid>
 
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+        <Grid xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -467,7 +455,7 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
                             <LinearProgress
                               variant="determinate"
                               value={report.atsScore}
-                              color={getScoreColor(report.atsScore) as any}
+                              color={getScoreColor(report.atsScore)}
                               sx={{ height: 6, borderRadius: 3 }}
                             />
                           </Box>

@@ -475,7 +475,6 @@ export async function selectTemplate(
     return response;
   } catch (error) {
     console.error('Template Selection Error:', error);
-
     if (error instanceof Error) {
       throw new Error(`Failed to select template: ${error.message}`);
     }

@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { Badge } from '../../ui/badge';
 import { ArrowLeft } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { useState } from 'react';
+import { getDocumentPreview, selectTemplate } from '../../../api/aiServices';
 import { TemplateCard } from '../../library/TemplateCard';
-import { selectTemplate, getDocumentPreview } from '../../../api/aiServices';
-import { Button, IconButton } from '@mui/material';
+import { Badge } from '../../ui/badge';
 
 interface TemplateSelectorProps {
   documentType?: 'resume' | 'cover-letter';
-  onSelect?: (templateId: string, type: 'resume' | 'cover-letter') => void;
   onBack: () => void;
-  onSelectTemplate?: (templateId: string, type: 'resume' | 'cover-letter') => void;
+  onSelect?: (templateId: string, type: 'resume' | 'cover-letter') => void;
+  onSelectTemplate: (templateId: string, type: 'resume' | 'cover-letter') => void;
 }
 
 interface Template {
@@ -100,12 +100,7 @@ const mockTemplates: Template[] = [
   },
 ];
 
-export function TemplateSelector({
-  documentType,
-  onSelect,
-  onBack,
-  onSelectTemplate,
-}: TemplateSelectorProps) {
+export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorProps) {
   const [selectedType, setSelectedType] = useState<'resume' | 'cover-letter'>('resume');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [isSelectingTemplate, setIsSelectingTemplate] = useState(false);
@@ -122,7 +117,7 @@ export function TemplateSelector({
       // Call the parent handler to navigate to next step
       onSelectTemplate?.(templateId, type);
     } catch (error) {
-      console.error('Failed to select template:', error);
+      console.error('Template selection failed:', error);
       // Still proceed with navigation even if API call fails
       onSelectTemplate?.(templateId, type);
     } finally {
@@ -136,10 +131,10 @@ export function TemplateSelector({
       console.log('Template preview response:', previewResponse);
 
       // For now, just log the preview - you could show it in a modal
-      console.log(`Previewing template: ${templateName}`);
+      console.log(`Preview requested for template: ${templateName}`);
     } catch (error) {
       console.error('Failed to get template preview:', error);
-      console.log(`Previewing template: ${templateName} (offline mode)`);
+      console.log(`Preview for template ${templateName} failed or is unavailable (offline mode)`);
     }
   };
 

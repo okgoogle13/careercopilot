@@ -1,42 +1,31 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Input } from '../../ui/input';
-import { Badge } from '../../ui/badge';
-import { Tabs, TabsList, TabsTrigger } from '../../ui/tabs';
-import { Skeleton } from '../../ui/skeleton';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import {
-  Description as FileText,
-  Mail,
-  EmojiEvents as Award,
   ArrowLeft,
-  Search,
-  Schedule as Clock,
-  Star,
-  FlashOn as Zap,
-  History,
-  TrendingUp,
-  Lightbulb,
+  EmojiEvents as Award,
+  BarChart,
   Book as BookOpen,
   Work as Briefcase,
+  Schedule as Clock,
+  Description as FileText,
   Favorite as Heart,
-  People as Users,
+  History,
+  Lightbulb,
+  Mail,
+  Search,
   GpsFixed as Target,
-  BarChart,
+  TrendingUp,
+  People as Users,
+  FlashOn as Zap,
 } from '@mui/icons-material';
-import { AnimatedCard, StaggeredList } from '../demo/AnimatedComponents';
+import { Button, Card, Tooltip as MuiTooltip } from '@mui/material';
+import { motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { Badge } from '../../ui/badge';
+import { Input } from '../../ui/input';
+import { Skeleton } from '../../ui/skeleton';
+import { Tabs, TabsList, TabsTrigger } from '../../ui/tabs';
+import { TooltipProvider } from '../../ui/tooltip';
 import { SkeletonLoading } from '../common/StandardizedLoadingStates';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-  Tooltip as MuiTooltip,
-} from '@mui/material';
+import { AnimatedCard, StaggeredList } from '../demo/AnimatedComponents';
 
 type DocumentCategory = 'all' | 'resume' | 'cover-letter' | 'other';
 
@@ -72,6 +61,8 @@ interface DocumentTypeSelectorProps {
   };
 }
 
+type DocumentCategoryExtended = DocumentCategory | 'favorites';
+
 export function DocumentTypeSelector({
   onSelectType,
   onSelect,
@@ -80,7 +71,7 @@ export function DocumentTypeSelector({
   userProfile,
 }: DocumentTypeSelectorProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<DocumentCategory>('all');
+  const [selectedCategory, setSelectedCategory] = useState<DocumentCategoryExtended>('all');
   const [isLoading, setIsLoading] = useState(true);
   const [favorites, setFavorites] = useState<string[]>(userProfile?.favoriteTemplates || []);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -261,7 +252,7 @@ export function DocumentTypeSelector({
       const matchesCategory =
         selectedCategory === 'all' ||
         doc.category === selectedCategory ||
-        (selectedCategory === ('favorites' as any) && favorites.includes(doc.id));
+        (selectedCategory === 'favorites' && favorites.includes(doc.id));
 
       return matchesSearch && matchesCategory;
     })
@@ -506,7 +497,7 @@ export function DocumentTypeSelector({
 
           <Tabs
             value={selectedCategory}
-            onChange={(_e, value) => setSelectedCategory(value as DocumentCategory | 'favorites')}
+            onChange={(_e, value) => setSelectedCategory(value as DocumentCategoryExtended)}
             className="w-full"
           >
             <TabsList className="w-full justify-start overflow-x-auto">

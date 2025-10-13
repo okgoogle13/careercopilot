@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { Box, Button, Stack, Typography } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import { Box, Button, Stack, Typography } from '@mui/material';
+import { useState } from 'react';
 import { DocumentBrowser } from '../../features/Documents/DocumentBrowser';
 import { Document } from '../../features/Documents/types';
 
