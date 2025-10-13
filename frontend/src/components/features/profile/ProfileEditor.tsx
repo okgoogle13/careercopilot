@@ -454,13 +454,10 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                             AI Generate
                           </AnimatedButton>
                         )}
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <Button variant="outlined" size="small">
-                              <Target className="h-4 w-4" />
-                            </Button>
-                          </TooltipTrigger>
-                          <TooltipContent>Get personalized tips for your summary</TooltipContent>
+                        <Tooltip title="Get personalized tips for your summary">
+                          <Button variant="outlined" size="small">
+                            <Target className="h-4 w-4" />
+                          </Button>
                         </Tooltip>
                       </div>
 
@@ -680,11 +677,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                             />
                           </div>
                           {link.verified && (
-                            <Tooltip>
-                              <TooltipTrigger asChild>
-                                <span><CheckCircle className="w-5 h-5 text-green-500" /></span>
-                              </TooltipTrigger>
-                              <TooltipContent>Verified profile</TooltipContent>
+                            <Tooltip title="Verified profile">
+                              <span><CheckCircle className="w-5 h-5 text-green-500" /></span>
                             </Tooltip>
                           )}
                           <Button variant="text" size="small" className="text-red-500">

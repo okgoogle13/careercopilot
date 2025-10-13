@@ -337,11 +337,8 @@ export function CareerGrowthHub({
                               {skill.name}
                             </Badge>
                             {skill.trending && (
-                              <Tooltip>
-                                <TooltipTrigger asChild>
-                                  <span><TrendingUp className="w-3 h-3 text-green-500" /></span>
-                                </TooltipTrigger>
-                                <TooltipContent>Trending skill in high demand</TooltipContent>
+                              <Tooltip title="Trending skill in high demand">
+                                <span><TrendingUp className="w-3 h-3 text-green-500" /></span>
                               </Tooltip>
                             )}
                           </div>

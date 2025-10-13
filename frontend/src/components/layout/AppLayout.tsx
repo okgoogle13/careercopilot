@@ -362,7 +362,7 @@ export function AppLayout({
                 boxSizing: 'border-box',
                 width: DRAWER_WIDTH,
                 border: 'none',
-                background: theme.palette.background?.container || theme.palette.background.paper,
+                background: theme.palette.background.paper,
               },
             }}
           >
