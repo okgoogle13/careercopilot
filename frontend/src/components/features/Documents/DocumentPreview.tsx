@@ -498,45 +498,41 @@ export function DocumentPreview({
             {/* Enhanced Action Buttons */}
             <div className="flex items-center space-x-2">
               <Tooltip>
-                <>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      onClick={generateAISuggestions}
-                      className="flex items-center space-x-1.5"
-                    >
-                      <Lightbulb className="h-4 w-4" />
-                      <span>AI Assist</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Get AI-powered suggestions for improvement</TooltipContent>
-                </>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={generateAISuggestions}
+                    className="flex items-center space-x-1.5"
+                  >
+                    <Lightbulb className="h-4 w-4" />
+                    <span>AI Assist</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Get AI-powered suggestions for improvement</TooltipContent>
               </Tooltip>
 
               <Tooltip>
-                <>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      onClick={toggleReadingMode}
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 1.5,
-                        ...(readingMode && {
-                          backgroundColor: 'blue.50',
-                          borderColor: 'blue.200',
-                        }),
-                      }}
-                    >
-                      <Eye className="h-4 w-4" />
-                      <span>Reading</span>
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Toggle reading mode for better focus</TooltipContent>
-                </>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="outlined"
+                    size="small"
+                    onClick={toggleReadingMode}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1.5,
+                      ...(readingMode && {
+                        backgroundColor: 'blue.50',
+                        borderColor: 'blue.200',
+                      }),
+                    }}
+                  >
+                    <Eye className="h-4 w-4" />
+                    <span>Reading</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>Toggle reading mode for better focus</TooltipContent>
               </Tooltip>
 
               <Button

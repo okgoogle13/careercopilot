@@ -411,7 +411,7 @@ export function DocumentTypeSelector({
 
               <Button
                 className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
-                variant="outline"
+                variant="outlined"
                 size="small"
               >
                 Select Template
