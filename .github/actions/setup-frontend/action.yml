@@ -63,36 +63,32 @@ runs:
       if: inputs.run-checks == 'true'
       shell: bash
       run: |
-        cd frontend
         echo "🔧 Running TypeScript type check..."
-        npx tsc --noEmit --skipLibCheck || echo "⚠️ Type check completed with warnings"
+        yarn workspace careercopilot-frontend exec tsc --noEmit --skipLibCheck || echo "⚠️ Type check completed with warnings"
         echo "✅ Type check completed"
 
     - name: Lint
       if: inputs.run-checks == 'true'
       shell: bash
       run: |
-        cd frontend
         echo "🔍 Running ESLint..."
-        yarn lint:ci
+        yarn workspace careercopilot-frontend run lint:ci
         echo "✅ Linting completed"
 
     - name: Format check
       if: inputs.run-checks == 'true'
       shell: bash
       run: |
-        cd frontend
         echo "✨ Checking code formatting..."
-        yarn format --check || echo "⚠️ Format check completed with warnings"
+        yarn workspace careercopilot-frontend run format --check || echo "⚠️ Format check completed with warnings"
         echo "✅ Format check completed"
 
     - name: Run unit tests
       if: inputs.run-checks == 'true'
       shell: bash
       run: |
-        cd frontend
         echo "🧪 Running Jest unit tests..."
-        yarn test:ci
+        yarn workspace careercopilot-frontend run test:ci
         echo "✅ Unit tests completed"
 
     - name: Upload test coverage
@@ -109,9 +105,8 @@ runs:
       if: inputs.skip-build != 'true'
       shell: bash
       run: |
-        cd frontend
         echo "🏗️ Building frontend with Vite..."
-        yarn build
+        yarn workspace careercopilot-frontend run build
         echo "success=true" >> $GITHUB_OUTPUT
 
     - name: Verify build output
