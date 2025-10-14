@@ -44,55 +44,33 @@ gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
 # Pydantic models for structured outputs
 class SkillMatch(BaseModel):
     skill: str = Field(description="The skill name")
-    candidate_level: int = Field(
-        description="Candidate's skill level (1-10)", ge=1, le=10
-    )
+    candidate_level: int = Field(description="Candidate's skill level (1-10)", ge=1, le=10)
     required_level: int = Field(description="Required skill level (1-10)", ge=1, le=10)
     gap_score: int = Field(description="Skill gap score (0-10, 0=no gap)", ge=0, le=10)
-    importance: str = Field(
-        description="Skill importance: critical, important, nice-to-have"
-    )
+    importance: str = Field(description="Skill importance: critical, important, nice-to-have")
 
 
 class CareerTransitionAnalysis(BaseModel):
     transition_feasibility: int = Field(
         description="How feasible the transition is (0-100)", ge=0, le=100
     )
-    transferable_skills: List[str] = Field(
-        description="Skills that transfer from current field"
-    )
+    transferable_skills: List[str] = Field(description="Skills that transfer from current field")
     skill_gaps: List[str] = Field(description="Skills needed for successful transition")
     transition_timeline: str = Field(
         description="Estimated timeline: immediate, 3-6months, 6-12months, 1-2years"
     )
-    transition_strategy: List[str] = Field(
-        description="Recommended steps for transition"
-    )
+    transition_strategy: List[str] = Field(description="Recommended steps for transition")
 
 
 class JobMatchAnalysis(BaseModel):
-    overall_match_score: int = Field(
-        description="Overall job match score (0-100)", ge=0, le=100
-    )
-    skill_compatibility: int = Field(
-        description="Skills match score (0-100)", ge=0, le=100
-    )
-    experience_fit: int = Field(
-        description="Experience level fit (0-100)", ge=0, le=100
-    )
-    cultural_fit: int = Field(
-        description="Cultural and values fit (0-100)", ge=0, le=100
-    )
-    growth_potential: int = Field(
-        description="Career growth potential (0-100)", ge=0, le=100
-    )
+    overall_match_score: int = Field(description="Overall job match score (0-100)", ge=0, le=100)
+    skill_compatibility: int = Field(description="Skills match score (0-100)", ge=0, le=100)
+    experience_fit: int = Field(description="Experience level fit (0-100)", ge=0, le=100)
+    cultural_fit: int = Field(description="Cultural and values fit (0-100)", ge=0, le=100)
+    growth_potential: int = Field(description="Career growth potential (0-100)", ge=0, le=100)
 
-    skill_matches: List[SkillMatch] = Field(
-        description="Detailed skill-by-skill analysis"
-    )
-    critical_gaps: List[str] = Field(
-        description="Critical gaps that may prevent success"
-    )
+    skill_matches: List[SkillMatch] = Field(description="Detailed skill-by-skill analysis")
+    critical_gaps: List[str] = Field(description="Critical gaps that may prevent success")
     competitive_advantages: List[str] = Field(
         description="Candidate's unique strengths for this role"
     )
@@ -101,9 +79,7 @@ class JobMatchAnalysis(BaseModel):
         default=None, description="Career transition analysis if applicable"
     )
 
-    recommendations: List[str] = Field(
-        description="Actionable recommendations to improve match"
-    )
+    recommendations: List[str] = Field(description="Actionable recommendations to improve match")
     interview_prep_focus: List[str] = Field(
         description="Key areas to focus on for interview preparation"
     )
@@ -117,12 +93,8 @@ class JobOpportunityRanking(BaseModel):
     job_title: str = Field(description="Job title")
     company: str = Field(description="Company name")
     match_score: int = Field(description="Match score (0-100)", ge=0, le=100)
-    match_reasoning: str = Field(
-        description="Brief explanation of why this job matches well"
-    )
-    application_priority: str = Field(
-        description="high, medium, low priority for application"
-    )
+    match_reasoning: str = Field(description="Brief explanation of why this job matches well")
+    application_priority: str = Field(description="high, medium, low priority for application")
     estimated_success_probability: int = Field(
         description="Likelihood of success (0-100)", ge=0, le=100
     )
@@ -145,9 +117,7 @@ class CandidateProfile(BaseModel):
 
 @genkit_flow(output_schema=JobMatchAnalysis)
 @with_ai_error_handling()
-def analyze_job_match_detailed(
-    job_description: str, candidate_profile: Dict
-) -> JobMatchAnalysis:
+def analyze_job_match_detailed(job_description: str, candidate_profile: Dict) -> JobMatchAnalysis:
     """
     Performs comprehensive job matching analysis using multiple AI evaluation criteria.
 
@@ -161,14 +131,10 @@ def analyze_job_match_detailed(
     try:
         # Input validation
         if not job_description or not isinstance(job_description, str):
-            raise InputValidationError(
-                "Job description is required and must be a string"
-            )
+            raise InputValidationError("Job description is required and must be a string")
 
         if not candidate_profile or not isinstance(candidate_profile, dict):
-            raise InputValidationError(
-                "Candidate profile is required and must be a dictionary"
-            )
+            raise InputValidationError("Candidate profile is required and must be a dictionary")
 
         # Sanitize inputs
         sanitized_job = InputSanitizer.sanitize_text_input(job_description)
@@ -250,23 +216,17 @@ def rank_job_opportunities(
     try:
         # Input validation
         if not candidate_profile or not isinstance(candidate_profile, dict):
-            raise InputValidationError(
-                "Candidate profile is required and must be a dictionary"
-            )
+            raise InputValidationError("Candidate profile is required and must be a dictionary")
 
         if not job_opportunities or not isinstance(job_opportunities, list):
             raise InputValidationError("Job opportunities must be a non-empty list")
 
         if len(job_opportunities) > 10:
-            raise InputValidationError(
-                "Cannot rank more than 10 job opportunities at once"
-            )
+            raise InputValidationError("Cannot rank more than 10 job opportunities at once")
 
         # Sanitize inputs
         sanitized_profile = InputSanitizer.sanitize_dict_input(candidate_profile)
-        sanitized_jobs = [
-            InputSanitizer.sanitize_dict_input(job) for job in job_opportunities
-        ]
+        sanitized_jobs = [InputSanitizer.sanitize_dict_input(job) for job in job_opportunities]
 
         prompt = f"""
 As an expert career strategist, rank these job opportunities for the candidate from best to worst match.
@@ -315,26 +275,14 @@ Return jobs ranked from best to worst match as a JSON array matching the JobOppo
 
 
 class MarketPositioningAnalysis(BaseModel):
-    competitive_position: str = Field(
-        description="strong, moderate, weak competitive position"
-    )
+    competitive_position: str = Field(description="strong, moderate, weak competitive position")
     market_demand: int = Field(description="Market demand score (0-100)", ge=0, le=100)
-    salary_competitiveness: str = Field(
-        description="above_market, market_rate, below_market"
-    )
-    unique_value_proposition: List[str] = Field(
-        description="Candidate's unique strengths"
-    )
+    salary_competitiveness: str = Field(description="above_market, market_rate, below_market")
+    unique_value_proposition: List[str] = Field(description="Candidate's unique strengths")
     market_differentiators: List[str] = Field(description="What sets candidate apart")
-    positioning_recommendations: List[str] = Field(
-        description="How to position candidacy"
-    )
-    target_companies: List[str] = Field(
-        description="Companies that would value this profile"
-    )
-    negotiation_strengths: List[str] = Field(
-        description="Strengths for salary negotiation"
-    )
+    positioning_recommendations: List[str] = Field(description="How to position candidacy")
+    target_companies: List[str] = Field(description="Companies that would value this profile")
+    negotiation_strengths: List[str] = Field(description="Strengths for salary negotiation")
 
 
 @genkit_flow(output_schema=MarketPositioningAnalysis)
@@ -408,9 +356,7 @@ Respond with valid JSON matching the MarketPositioningAnalysis schema.
 
 # Helper function for batch job analysis
 @with_ai_error_handling()
-def analyze_job_batch(
-    candidate_profile: Dict, job_descriptions: List[str]
-) -> List[Dict]:
+def analyze_job_batch(candidate_profile: Dict, job_descriptions: List[str]) -> List[Dict]:
     """
     Analyzes multiple jobs for a candidate in batch for efficiency.
 
@@ -428,9 +374,7 @@ def analyze_job_batch(
     for i, job_desc in enumerate(job_descriptions):
         try:
             analysis = analyze_job_match_detailed(job_desc, candidate_profile)
-            results.append(
-                {"job_index": i, "analysis": analysis.dict(), "status": "success"}
-            )
+            results.append({"job_index": i, "analysis": analysis.dict(), "status": "success"})
         except Exception as e:
             results.append({"job_index": i, "error": str(e), "status": "failed"})
 

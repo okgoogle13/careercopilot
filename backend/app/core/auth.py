@@ -21,9 +21,7 @@ logger = logging.getLogger(__name__)
 # Security configuration
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "your-secret-key-change-in-production")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = int(
-    os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440")
-)  # 24 hours
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440"))  # 24 hours
 
 # Password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -71,9 +69,7 @@ class AuthManager:
             logger.warning(f"Token verification failed: {e}")
             return None
 
-    def authenticate_user(
-        self, db: Session, email: str, password: str
-    ) -> Optional[User]:
+    def authenticate_user(self, db: Session, email: str, password: str) -> Optional[User]:
         """Authenticate user with email and password"""
         user = db.query(User).filter(User.email == email).first()
 
@@ -88,9 +84,7 @@ class AuthManager:
         # Temporary: accept any password for existing users
         return user
 
-    def create_user(
-        self, db: Session, email: str, name: str, password: str, **kwargs
-    ) -> User:
+    def create_user(self, db: Session, email: str, name: str, password: str, **kwargs) -> User:
         """Create new user account"""
         # Check if user already exists
         existing_user = db.query(User).filter(User.email == email).first()
@@ -276,9 +270,7 @@ class RateLimiter:
     def __init__(self):
         self.requests = {}  # user_id -> [(timestamp, count), ...]
 
-    def check_rate_limit(
-        self, user_id: str, limit: int = 100, window: int = 3600
-    ) -> bool:
+    def check_rate_limit(self, user_id: str, limit: int = 100, window: int = 3600) -> bool:
         """
         Check if user has exceeded rate limit.
 
@@ -297,9 +289,7 @@ class RateLimiter:
             self.requests[user_id] = []
 
         # Clean old requests
-        self.requests[user_id] = [
-            req for req in self.requests[user_id] if req[0] > window_start
-        ]
+        self.requests[user_id] = [req for req in self.requests[user_id] if req[0] > window_start]
 
         # Check current count
         current_count = sum(req[1] for req in self.requests[user_id])

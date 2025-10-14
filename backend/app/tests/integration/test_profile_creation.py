@@ -193,9 +193,7 @@ class TestProfileCreation:
             assert firestore_data[key] == value
 
     @pytest.mark.asyncio
-    async def test_create_user_profile_minimal_data(
-        self, profile_service, firestore_client
-    ):
+    async def test_create_user_profile_minimal_data(self, profile_service, firestore_client):
         """
         Test user profile creation with minimal required data.
 
@@ -208,9 +206,7 @@ class TestProfileCreation:
         name = "Minimal User"
 
         # Act
-        result = await profile_service.create_user_profile(
-            user_id=user_id, email=email, name=name
-        )
+        result = await profile_service.create_user_profile(user_id=user_id, email=email, name=name)
 
         # Assert
         assert result["id"] == user_id
@@ -251,9 +247,7 @@ class TestProfileCreation:
             )
 
     @pytest.mark.asyncio
-    async def test_get_user_profile_after_creation(
-        self, profile_service, firestore_client
-    ):
+    async def test_get_user_profile_after_creation(self, profile_service, firestore_client):
         """
         Test retrieving a user profile after creation.
 
@@ -309,9 +303,7 @@ class TestProfileCreation:
 
         # Assert - Verify each user exists independently
         for i, user_data in enumerate(users_data):
-            user_ref = firestore_client.collection("users").document(
-                user_data["user_id"]
-            )
+            user_ref = firestore_client.collection("users").document(user_data["user_id"])
             doc = user_ref.get()
 
             assert doc.exists, f"User {user_data['user_id']} should exist"
@@ -342,9 +334,7 @@ class TestProfileCreation:
         before_creation = datetime.utcnow()
 
         # Act
-        result = await profile_service.create_user_profile(
-            user_id=user_id, email=email, name=name
-        )
+        result = await profile_service.create_user_profile(user_id=user_id, email=email, name=name)
 
         # Record time after creation
         after_creation = datetime.utcnow()

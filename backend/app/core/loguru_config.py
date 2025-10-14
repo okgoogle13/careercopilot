@@ -206,6 +206,7 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
         level: Logging level for the messages
         exclude_args: Whether to exclude function arguments from logs
     """
+
     def decorator(func):
         from functools import wraps
         import asyncio
@@ -216,10 +217,12 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
 
             log_data = {"function": func.__name__}
             if not exclude_args:
-                log_data.update({
-                    "args_count": len(args),
-                    "kwargs_keys": list(kwargs.keys()),
-                })
+                log_data.update(
+                    {
+                        "args_count": len(args),
+                        "kwargs_keys": list(kwargs.keys()),
+                    }
+                )
 
             func_logger.log(level, f"Calling {func.__name__}", **log_data)
 
@@ -247,10 +250,12 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
 
             log_data = {"function": func.__name__}
             if not exclude_args:
-                log_data.update({
-                    "args_count": len(args),
-                    "kwargs_keys": list(kwargs.keys()),
-                })
+                log_data.update(
+                    {
+                        "args_count": len(args),
+                        "kwargs_keys": list(kwargs.keys()),
+                    }
+                )
 
             func_logger.log(level, f"Calling async {func.__name__}", **log_data)
 
@@ -288,6 +293,7 @@ def log_performance(threshold_ms: float = 1000.0):
     Args:
         threshold_ms: Log if execution time exceeds this threshold in milliseconds
     """
+
     def decorator(func):
         from functools import wraps
         import time
