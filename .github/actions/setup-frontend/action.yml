@@ -74,7 +74,7 @@ runs:
       working-directory: frontend
       run: |
         echo "🔍 Running ESLint..."
-        yarn lint:ci
+        npm run lint:ci
         echo "✅ Linting completed"
 
     - name: Format check
@@ -83,7 +83,7 @@ runs:
       working-directory: frontend
       run: |
         echo "✨ Checking code formatting..."
-        yarn format --check || echo "⚠️ Format check completed with warnings"
+        npm run format -- --check || echo "⚠️ Format check completed with warnings"
         echo "✅ Format check completed"
 
     - name: Run unit tests
@@ -92,7 +92,7 @@ runs:
       working-directory: frontend
       run: |
         echo "🧪 Running Jest unit tests..."
-        yarn test:ci
+        npm run test:ci
         echo "✅ Unit tests completed"
 
     - name: Upload test coverage
@@ -111,7 +111,7 @@ runs:
       working-directory: frontend
       run: |
         echo "🏗️ Building frontend with Vite..."
-        yarn build
+        npm run build
         echo "success=true" >> $GITHUB_OUTPUT
 
     - name: Verify build output
