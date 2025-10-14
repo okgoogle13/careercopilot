@@ -10,7 +10,7 @@
     "test:watch": "jest --watch --config=jest.config.js",
     "test:coverage": "jest --coverage --config=jest.config.js",
     "test:update": "jest --updateSnapshot --config=jest.config.js",
-    "test:ci": "jest --ci --runInBand --config=jest.config.js",
+    "test:ci": "jest --ci --runInBand --no-cache --config=jest.config.js",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "lint:ci": "eslint src --max-warnings=350",
