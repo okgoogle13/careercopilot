@@ -417,15 +417,6 @@ export function DocumentPreview({
     return 'text-red-500';
   };
 
-  // Get ATS score label
-  const getAtsScoreLabel = (score: number) => {
-    if (score >= 90) return 'Excellent';
-    if (score >= 80) return 'Very Good';
-    if (score >= 70) return 'Good';
-    if (score >= 60) return 'Fair';
-    return 'Needs Improvement';
-  };
-
   // Get severity color
   const getSeverityColor = (severity: 'low' | 'medium' | 'high') => {
     return {
