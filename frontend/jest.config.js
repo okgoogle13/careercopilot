@@ -18,6 +18,7 @@ module.exports = {
         diagnostics: {
           warnOnly: true,
         },
+        sourceMap: false, // Disable source maps to avoid write-file-atomic errors
       },
     ],
     '^.+\\.(js|jsx)$': [
