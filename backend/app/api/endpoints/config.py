@@ -7,8 +7,9 @@ Provides secure access to configuration values for the frontend build process.
 import logging
 from typing import Dict
 
-from app.core.secret_manager import get_firebase_frontend_config
 from fastapi import APIRouter, HTTPException
+
+from app.core.secret_manager import get_firebase_frontend_config
 
 logger = logging.getLogger(__name__)
 
@@ -33,9 +34,7 @@ async def get_firebase_config():
         # Validate that we have the essential configuration
         if not config.get("project_id") or not config.get("api_key"):
             logger.warning("Firebase configuration incomplete")
-            raise HTTPException(
-                status_code=503, detail="Firebase configuration not available"
-            )
+            raise HTTPException(status_code=503, detail="Firebase configuration not available")
 
         return {
             "apiKey": config["api_key"],
@@ -48,6 +47,4 @@ async def get_firebase_config():
 
     except Exception as e:
         logger.error(f"Failed to get Firebase configuration: {e}")
-        raise HTTPException(
-            status_code=500, detail="Failed to retrieve Firebase configuration"
-        )
+        raise HTTPException(status_code=500, detail="Failed to retrieve Firebase configuration")
