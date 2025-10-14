@@ -28,6 +28,7 @@ module.exports = {
           ['@babel/preset-env', { targets: { node: 'current' } }],
           ['@babel/preset-react', { runtime: 'automatic' }],
         ],
+        sourceMaps: false, // Disable source maps to avoid write-file-atomic errors
       },
     ],
   },
