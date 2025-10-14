@@ -58,6 +58,7 @@ module.exports = {
   testTimeout: 15000,
   verbose: true,
   bail: false,
+  cache: false, // Disable cache to avoid write-file-atomic errors
   reporters: [
     'default',
     [
