@@ -1,6 +1,5 @@
 # backend/app/ai/model_dispatcher.py
 
-import os
 from typing import Dict, List, Optional
 
 from app.core.loguru_config import get_logger

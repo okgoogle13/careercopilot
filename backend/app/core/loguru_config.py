@@ -8,7 +8,7 @@ better performance, and simplified configuration compared to the standard loggin
 import os
 import sys
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 from loguru import logger
 
