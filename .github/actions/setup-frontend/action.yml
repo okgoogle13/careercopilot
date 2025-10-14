@@ -95,14 +95,6 @@ runs:
         npm run test:ci
         echo "✅ Unit tests completed"
 
-    - name: Upload test coverage
-      if: inputs.run-checks == 'true'
-      uses: actions/upload-artifact@v4
-      with:
-        name: frontend-test-coverage
-        path: frontend/coverage/
-        retention-days: 30
-        if-no-files-found: warn
 
     - name: Build
       id: build
