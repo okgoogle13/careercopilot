@@ -56,7 +56,7 @@ runs:
       shell: bash
       run: |
         # Install with explicit mode to ensure proper workspace resolution
-        yarn install --immutable --immutable-cache
+        yarn install --immutable
         cd functions && npm install
 
     - name: Type check
