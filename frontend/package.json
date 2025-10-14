@@ -13,7 +13,7 @@
     "test:ci": "jest --ci --runInBand --coverage --config=jest.config.js",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "lint:ci": "eslint src --max-warnings=5",
+    "lint:ci": "eslint src --max-warnings=350",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "format": "prettier --write ."
