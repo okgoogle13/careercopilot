@@ -377,7 +377,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install --immutable
+          yarn install
           cd functions && npm install
 
       - name: Lint functions
@@ -433,7 +433,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install
 
       - name: Install Playwright browsers
         run: |

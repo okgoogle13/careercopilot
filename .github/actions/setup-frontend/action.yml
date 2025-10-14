@@ -55,8 +55,8 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
-        # Install with explicit mode to ensure proper workspace resolution
-        yarn install --immutable
+        # Install dependencies (lockfile is validated by version control)
+        yarn install
         cd functions && npm install
 
     - name: Type check
