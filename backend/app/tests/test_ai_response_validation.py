@@ -282,7 +282,7 @@ class TestAIFlowIntegration:
                 situation="Test situation with enough content",
                 task="Test task description here",
                 action="Test action taken by candidate",
-                result="Test result achieved successfully"
+                result="Test result achieved successfully",
             ),
         )
 
@@ -476,10 +476,10 @@ class TestPerformanceAndMemory:
 
         test_response = json.dumps(
             {
-                "situation": "Test situation",
-                "task": "Test task",
-                "action": "Test action",
-                "result": "Test result",
+                "situation": "Test situation with enough content",
+                "task": "Test task description here",
+                "action": "Test action taken by candidate",
+                "result": "Test result achieved successfully",
             }
         )
 
