@@ -9,6 +9,7 @@ from typing import List
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
+from app.core.enhanced_ai_error_handling import AIOperationResult
 from app.genkit_flows.ats_scoring import AtsResult, ScoreBreakdown, atsScoring
 from app.genkit_flows.extract_job_requirements import JobRequirements
 from app.genkit_flows.extract_resume_entities import ResumeEntities
@@ -127,17 +128,28 @@ class TestAtsScoring:
                             return_value=mock_keyword_placement_suggestions
                         )
 
-                        # Mock the enhanced AI handler to return expected results
+                        # Mock the enhanced AI handler to return AIOperationResult objects
                         mock_ai_handler.execute_ai_operation = AsyncMock()
+                        mock_semantic_result = Mock(
+                            similarityScore=85,
+                            explanation="Strong match based on skills and experience",
+                        )
+                        mock_placement_result = Mock(suggestions=mock_keyword_placement_suggestions)
+
                         mock_ai_handler.execute_ai_operation.side_effect = [
-                            mock_job_requirements,  # First call for job requirements
-                            mock_resume_entities,  # Second call for resume entities
-                            # Mock semantic analysis result
-                            Mock(
-                                similarityScore=85,
-                                explanation="Strong match based on skills and experience",
+                            AIOperationResult(success=True, data=mock_job_requirements, fallback_used=False),
+                            AIOperationResult(success=True, data=mock_resume_entities, fallback_used=False),
+                            AIOperationResult(success=True, data=mock_semantic_result, fallback_used=False),
+                            # Keyword matching (local operation)
+                            AIOperationResult(
+                                success=True,
+                                data={"score": 75.0, "matchedKeywords": ["Python", "React", "AWS", "Docker"], "missingKeywords": ["Leadership"]},
+                                fallback_used=False
                             ),
-                            mock_keyword_placement_suggestions,  # Keyword placement suggestions
+                            # Formatting score (local operation)
+                            AIOperationResult(success=True, data=100.0, fallback_used=False),
+                            # Keyword placement suggestions
+                            AIOperationResult(success=True, data=mock_placement_result, fallback_used=False),
                         ]
 
                         # Mock the gemini_pro model for any direct calls
@@ -165,11 +177,8 @@ class TestAtsScoring:
                             ), "Result should have overallScore"
                             assert hasattr(result, "breakdown"), "Result should have breakdown"
                             assert hasattr(
-                                result, "matchedKeywords"
-                            ), "Result should have matchedKeywords"
-                            assert hasattr(
-                                result, "missingKeywords"
-                            ), "Result should have missingKeywords"
+                                result, "keywordMatches"
+                            ), "Result should have keywordMatches"
                             assert hasattr(
                                 result, "recommendations"
                             ), "Result should have recommendations"
@@ -187,11 +196,8 @@ class TestAtsScoring:
                                 result.breakdown, ScoreBreakdown
                             ), "breakdown should be ScoreBreakdown instance"
                             assert hasattr(
-                                result.breakdown, "keywordMatch"
-                            ), "breakdown should have keywordMatch"
-                            assert hasattr(
-                                result.breakdown, "experienceMatch"
-                            ), "breakdown should have experienceMatch"
+                                result.breakdown, "keywordScore"
+                            ), "breakdown should have keywordScore"
                             assert hasattr(
                                 result.breakdown, "semanticScore"
                             ), "breakdown should have semanticScore"
@@ -201,21 +207,21 @@ class TestAtsScoring:
 
                             # Assert keywords are lists of strings
                             assert isinstance(
-                                result.matchedKeywords, list
-                            ), "matchedKeywords should be a list"
+                                result.keywordMatches.matched, list
+                            ), "keywordMatches.matched should be a list"
                             assert isinstance(
-                                result.missingKeywords, list
-                            ), "missingKeywords should be a list"
+                                result.keywordMatches.missing, list
+                            ), "keywordMatches.missing should be a list"
 
-                            for keyword in result.matchedKeywords:
+                            for keyword in result.keywordMatches.matched:
                                 assert isinstance(
                                     keyword, str
-                                ), f"matchedKeywords should contain strings, got {type(keyword)}"
+                                ), f"matched keywords should contain strings, got {type(keyword)}"
 
-                            for keyword in result.missingKeywords:
+                            for keyword in result.keywordMatches.missing:
                                 assert isinstance(
                                     keyword, str
-                                ), f"missingKeywords should contain strings, got {type(keyword)}"
+                                ), f"missing keywords should contain strings, got {type(keyword)}"
 
                             # Assert recommendations is a list of strings
                             assert isinstance(
@@ -255,11 +261,21 @@ class TestAtsScoring:
                     )
 
                     mock_ai_handler.execute_ai_operation = AsyncMock()
+                    mock_semantic_result = Mock(similarityScore=60, explanation="Basic match")
+
                     mock_ai_handler.execute_ai_operation.side_effect = [
-                        minimal_job_reqs,
-                        minimal_resume_entities,
-                        Mock(similarityScore=60, explanation="Basic match"),
-                        [],  # No keyword placement suggestions
+                        AIOperationResult(success=True, data=minimal_job_reqs, fallback_used=False),
+                        AIOperationResult(success=True, data=minimal_resume_entities, fallback_used=False),
+                        AIOperationResult(success=True, data=mock_semantic_result, fallback_used=False),
+                        # Keyword matching
+                        AIOperationResult(
+                            success=True,
+                            data={"score": 80.0, "matchedKeywords": ["Python"], "missingKeywords": []},
+                            fallback_used=False
+                        ),
+                        # Formatting score
+                        AIOperationResult(success=True, data=100.0, fallback_used=False),
+                        # Keyword placement (no missing keywords, so skipped)
                     ]
 
                     result = await atsScoring(
@@ -285,14 +301,29 @@ class TestAtsScoring:
         """
         with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
             mock_ai_handler.execute_ai_operation = AsyncMock()
+            mock_semantic_result = Mock(
+                similarityScore=90,
+                explanation="Excellent match with profile keywords",
+            )
+
             mock_ai_handler.execute_ai_operation.side_effect = [
-                mock_job_requirements,
-                mock_resume_entities,
-                Mock(
-                    similarityScore=90,
-                    explanation="Excellent match with profile keywords",
+                AIOperationResult(success=True, data=mock_job_requirements, fallback_used=False),
+                AIOperationResult(success=True, data=mock_resume_entities, fallback_used=False),
+                AIOperationResult(success=True, data=mock_semantic_result, fallback_used=False),
+                # Keyword matching with profile keywords
+                AIOperationResult(
+                    success=True,
+                    data={"score": 85.0, "matchedKeywords": ["Python", "React", "AWS"], "missingKeywords": ["Machine Learning"]},
+                    fallback_used=False
                 ),
-                [],
+                # Formatting score
+                AIOperationResult(success=True, data=100.0, fallback_used=False),
+                # Keyword placement for missing ML keyword
+                AIOperationResult(
+                    success=True,
+                    data=Mock(suggestions=[]),
+                    fallback_used=False
+                ),
             ]
 
             profile_keywords = ["Python", "React", "Machine Learning", "AWS"]
@@ -309,11 +340,11 @@ class TestAtsScoring:
             assert result.overallScore >= 0
 
             # Profile keywords should influence matching
-            matched_keywords = result.matchedKeywords
+            matched_keywords = result.keywordMatches.matched
             assert len(matched_keywords) >= 0  # Should have some matches
 
             # Verify some profile keywords appear in matched or missing
-            all_keywords = result.matchedKeywords + result.missingKeywords
+            all_keywords = result.keywordMatches.matched + result.keywordMatches.missing
             common_keywords = set(profile_keywords).intersection(set(all_keywords))
             assert len(common_keywords) > 0, "Some profile keywords should appear in results"
 
