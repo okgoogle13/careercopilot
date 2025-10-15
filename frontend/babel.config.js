@@ -1,10 +1,8 @@
+// Simplified Babel config for Jest with only essential presets
+// Note: Vite handles compilation for the actual build, this is only for Jest
 module.exports = {
   presets: [
-    ['next/babel', { 'preset-react': { runtime: 'automatic' } }],
-    '@babel/preset-typescript',
-  ],
-  plugins: [
-    ['@babel/plugin-proposal-decorators', { legacy: true }],
-    '@babel/plugin-transform-runtime',
+    ['@babel/preset-env', { targets: { node: 'current' } }],
+    ['@babel/preset-react', { runtime: 'automatic' }],
   ],
 };
