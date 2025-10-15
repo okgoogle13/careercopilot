@@ -177,9 +177,7 @@ class TestAtsScoring:
                         ), f"Expected AtsResult, got {type(result)}"
 
                         # Assert required fields are present
-                        assert hasattr(
-                            result, "overallScore"
-                        ), "Result should have overallScore"
+                        assert hasattr(result, "overallScore"), "Result should have overallScore"
                         assert hasattr(result, "breakdown"), "Result should have breakdown"
                         assert hasattr(
                             result, "keywordMatches"
