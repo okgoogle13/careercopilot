@@ -10,7 +10,7 @@ from app.genkit_flows.flow_decorator import run_flow_async
 from app.genkit_flows.resume_intelligence_pipeline import (
     generate_resume_intelligence_report,
 )
-from app.genkit_flows.smart_content_optimizer import optimize_content_for_target
+from app.genkit_flows.smart_content_optimizer import optimize_content_for_job
 from app.models import ATSScoreResponse, CategoryScore
 
 router = APIRouter()
@@ -171,12 +171,11 @@ async def optimize_content(
     """
     try:
         result = await run_flow_async(
-            optimize_content_for_target,
-            {
-                "content": request.content,
-                "target_role": request.target_role,
-                "optimization_goals": request.optimization_goals,
-            },
+            optimize_content_for_job,
+            request.content,
+            request.target_role,  # Used as job_description
+            "resume",  # content_type
+            request.optimization_goals,
         )
         return result
     except Exception as e:

@@ -276,6 +276,8 @@ export default function App() {
       setCurrentView('dashboard');
     }
   };
+  // Used in navigation handlers
+  void handleTabChange;
 
   const handleDashboardTabChange = (tab: DashboardTab) => {
     setDashboardActiveTab(tab);
