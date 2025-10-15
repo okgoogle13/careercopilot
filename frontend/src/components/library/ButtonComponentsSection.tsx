@@ -11,19 +11,19 @@ export function ButtonComponentsSection() {
     >
       <ComponentDemo title="Button Variants">
         <div className="flex flex-wrap gap-4">
-          <Button variant="elevation">Primary Button</Button>
-          <Button variant="secondary">Secondary Button</Button>
+          <Button variant="contained">Primary Button</Button>
+          <Button variant="contained" color="secondary">Secondary Button</Button>
           <Button variant="outlined">Outline Button</Button>
           <Button variant="text">Ghost Button</Button>
-          <Button variant="outlined">Destructive Button</Button>
-          <Button variant="link">Link Button</Button>
+          <Button variant="outlined" color="error">Destructive Button</Button>
+          <Button variant="text">Link Button</Button>
         </div>
       </ComponentDemo>
 
       <ComponentDemo title="Button Sizes">
         <div className="flex flex-wrap items-center gap-4">
           <Button size="small">Small</Button>
-          <Button size="default">Default</Button>
+          <Button size="medium">Default</Button>
           <Button size="large">Large</Button>
           <Button size="small">
             <Settings className="w-4 h-4" />

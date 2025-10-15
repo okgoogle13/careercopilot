@@ -1,33 +1,26 @@
+import {
+  ArrowLeft,
+  ArrowRight,
+  BarChart,
+  MenuBook as BookOpen,
+  CheckCircle,
+  Schedule as Clock,
+  MessageSharp as MessageSquare,
+  Add as Plus,
+  AutoAwesome as Sparkles,
+  Star,
+  GpsFixed as Target,
+  TrendingUp,
+  EmojiEvents as Trophy
+} from '@mui/icons-material';
+import {
+  Button,
+  Card
+} from '@mui/material';
 import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
-import {
-  ArrowLeft,
-  Sparkles,
-  Target,
-  TrendingUp,
-  MessageSquare,
-  ArrowRight,
-  BookOpen,
-  Trophy,
-  Clock,
-  Users,
-  CheckCircle,
-  Plus,
-  Star,
-  BarChart3,
-} from '@mui/icons-material';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
 
 interface Goal {
   id: string;
@@ -242,7 +235,7 @@ export function CareerGrowthHub({
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="grid w-full grid-cols-4 mb-8">
               <TabsTrigger value="overview" className="flex items-center gap-2">
-                <BarChart3 className="w-4 h-4" />
+                <BarChart className="w-4 h-4" />
                 Overview
               </TabsTrigger>
               <TabsTrigger value="goals" className="flex items-center gap-2">
@@ -260,7 +253,7 @@ export function CareerGrowthHub({
             </TabsList>
 
             {/* Overview Tab */}
-            <TabsContent value="overview" className="space-y-8">
+            <TabsContent value="overview" currentValue="overview" className="space-y-8">
               {/* Quick Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <Card className="p-6 text-center">
@@ -344,11 +337,8 @@ export function CareerGrowthHub({
                               {skill.name}
                             </Badge>
                             {skill.trending && (
-                              <Tooltip>
-                                <TooltipTrigger>
-                                  <TrendingUp className="w-3 h-3 text-green-500" />
-                                </TooltipTrigger>
-                                <TooltipContent>Trending skill in high demand</TooltipContent>
+                              <Tooltip title="Trending skill in high demand">
+                                <span><TrendingUp className="w-3 h-3 text-green-500" /></span>
                               </Tooltip>
                             )}
                           </div>
@@ -367,8 +357,7 @@ export function CareerGrowthHub({
               </div>
             </TabsContent>
 
-            <TabsContent value="ai-tools" className="space-y-8">
-              {/* Feature Cards */}
+            <TabsContent value="ai-tools" currentValue="ai-tools" className="space-y-8">
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
                 {features.map((feature) => {
                   const Icon = feature.icon;

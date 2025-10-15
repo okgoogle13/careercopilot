@@ -4,7 +4,7 @@ import redis
 import hashlib
 import json
 import os
-from typing import Dict, Optional
+from typing import Dict
 from app.core.loguru_config import get_logger
 
 logger = get_logger(__name__)
@@ -22,6 +22,7 @@ except (redis.ConnectionError, redis.TimeoutError) as e:
     logger.warning("Redis cache unavailable, falling back to no caching", error=str(e))
     redis_client = None
 
+
 def get_llm_response(prompt: str, model_params: dict) -> dict:
     """
     Gets a response from an LLM, using a cache to avoid redundant calls.
@@ -35,7 +36,7 @@ def get_llm_response(prompt: str, model_params: dict) -> dict:
     """
     # Create a stable cache key
     param_str = json.dumps(model_params, sort_keys=True)
-    key_material = (prompt + param_str).encode('utf-8')
+    key_material = (prompt + param_str).encode("utf-8")
     cache_key = f"llm:{hashlib.sha256(key_material).hexdigest()[:16]}"
 
     # 1. Check cache first (if Redis is available)
@@ -49,7 +50,9 @@ def get_llm_response(prompt: str, model_params: dict) -> dict:
             logger.error("Cache read error", error=str(e))
 
     # 2. If miss, call the actual LLM API and cache the result
-    logger.info("Cache MISS - calling LLM API", cache_key=cache_key, model=model_params.get("model"))
+    logger.info(
+        "Cache MISS - calling LLM API", cache_key=cache_key, model=model_params.get("model")
+    )
 
     # This would be replaced with actual Genkit AI API call
     # For now, using placeholder response
@@ -57,7 +60,7 @@ def get_llm_response(prompt: str, model_params: dict) -> dict:
         "response": f"LLM response for prompt: {prompt[:50]}...",
         "model": model_params.get("model", "unknown"),
         "tokens_used": len(prompt.split()) * 1.3,  # Rough estimate
-        "cached": False
+        "cached": False,
     }
 
     # Cache the result (if Redis is available)
@@ -70,6 +73,7 @@ def get_llm_response(prompt: str, model_params: dict) -> dict:
             logger.error("Cache write error", error=str(e))
 
     return result
+
 
 def clear_cache_pattern(pattern: str = "llm:*") -> int:
     """
@@ -96,6 +100,7 @@ def clear_cache_pattern(pattern: str = "llm:*") -> int:
         logger.error("Cache clear error", error=str(e), pattern=pattern)
         return 0
 
+
 def get_cache_stats() -> Dict[str, int]:
     """
     Get cache statistics.
@@ -114,7 +119,7 @@ def get_cache_stats() -> Dict[str, int]:
             "status": "connected",
             "total_keys": info.get("db0", {}).get("keys", 0),
             "llm_keys": llm_keys,
-            "memory_usage": redis_client.info("memory")["used_memory_human"]
+            "memory_usage": redis_client.info("memory")["used_memory_human"],
         }
     except Exception as e:
         logger.error("Cache stats error", error=str(e))

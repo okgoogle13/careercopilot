@@ -104,9 +104,7 @@ async def process_document(
         raise DocumentProcessingError("File content must be a non-empty string")
 
     if len(file_content.strip()) < 10:
-        raise DocumentProcessingError(
-            "File content is too short for meaningful processing"
-        )
+        raise DocumentProcessingError("File content is too short for meaningful processing")
 
     try:
         # Step 1: Format the prompt
@@ -131,9 +129,7 @@ async def process_document(
         raise DocumentProcessingError(f"Failed to process document: {str(e)}") from e
 
 
-async def _make_ai_request(
-    prompt: str, model: str, max_tokens: int, temperature: float
-) -> str:
+async def _make_ai_request(prompt: str, model: str, max_tokens: int, temperature: float) -> str:
     """Make an AI request with proper error handling."""
     try:
         ai_client = get_ai_client()
@@ -340,9 +336,7 @@ Format your response as a JSON object with the following structure:
 
 
 # Convenience functions for common operations
-async def process_resume(
-    resume_text: str, config: Optional[Dict[str, Any]] = None
-) -> Any:
+async def process_resume(resume_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
     """Process a resume using the standard resume analysis template."""
     from app.ai.resume_service import ResumeAnalysisResult
 
@@ -354,9 +348,7 @@ async def process_resume(
     )
 
 
-async def process_job_description(
-    job_text: str, config: Optional[Dict[str, Any]] = None
-) -> Any:
+async def process_job_description(job_text: str, config: Optional[Dict[str, Any]] = None) -> Any:
     """Process a job description using the standard job analysis template."""
 
     # This would need a JobDescriptionResult model to be defined

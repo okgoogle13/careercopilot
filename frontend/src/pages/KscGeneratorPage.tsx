@@ -1,75 +1,55 @@
-import React, { useState } from 'react';
+import Grid from '@/components/ui/GridCompat';
 import {
+  Analytics,
+  Assignment,
+  AutoAwesome,
+  CheckCircle,
+  ContentCopy,
+  Download,
+  Edit,
+  ExpandMore,
+  Lightbulb,
+  Psychology,
+  Save,
+  SmartToy,
+  TipsAndUpdates,
+  Upload,
+  Visibility,
+} from '@mui/icons-material';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Alert,
   Box,
-  Container,
-  Grid,
-  Paper,
-  Typography,
   Button,
   Card,
   CardContent,
-  TextField,
   Chip,
-  Stack,
-  IconButton,
-  Divider,
-  Alert,
+  ChipProps,
   CircularProgress,
-  Stepper,
-  Step,
-  StepLabel,
-  StepContent,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  LinearProgress,
   List,
   ListItem,
-  ListItemText,
   ListItemIcon,
-  LinearProgress,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Tooltip,
-  Badge,
-  Avatar,
+  ListItemText,
+  Paper,
+  Stack,
+  Step,
+  StepLabel,
+  Stepper,
   Tab,
   Tabs,
+  TextField,
+  Typography,
 } from '@mui/material';
-import {
-  Add,
-  Upload,
-  Download,
-  Share,
-  Edit,
-  Delete,
-  Save,
-  Refresh,
-  CheckCircle,
-  Warning,
-  Info,
-  School,
-  Work,
-  Build,
-  Star,
-  AutoAwesome,
-  Psychology,
-  TipsAndUpdates,
-  Assignment,
-  AssignmentTurnedIn,
-  ExpandMore,
-  ContentCopy,
-  Visibility,
-  VisibilityOff,
-  SendTimeExtension,
-  Schedule,
-  Timer,
-  Analytics,
-  Lightbulb,
-  QuestionAnswer,
-  SmartToy,
-} from '@mui/icons-material';
+import React, { useState } from 'react';
 
 interface KscCriterion {
   id: string;
@@ -106,7 +86,7 @@ function TabPanel(props: TabPanelProps) {
 }
 
 interface KscGeneratorPageProps {
-  onSave?: (respon_es: any) => void;
+  onSave?: (responses: any) => void;
   onExport?: () => void;
   onImport?: () => void;
 }
@@ -215,7 +195,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
     }, 3000);
   };
 
-  const handleUpdateResponse = (criterionId: string, respon_e: string) => {
+  const handleUpdateResponse = (criterionId: string, response: string) => {
     setCriteria((prev) =>
       prev.map((c) =>
         c.id === criterionId
@@ -235,7 +215,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
     return Math.round((completed / criteria.length) * 100);
   };
 
-  const getWordCountColor = (wordCount: number, sugge_ted: number) => {
+  const getWordCountColor = (wordCount: number, suggested: number): ChipProps['color'] => {
     const ratio = wordCount / suggested;
     if (ratio < 0.7) return 'error';
     if (ratio > 1.3) return 'warning';
@@ -306,7 +286,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
           />
 
           <Grid container spacing={2}>
-            <Grid item xs={6} sm={3}>
+            <Grid size={{ xs: 6, sm: 3 }}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="primary.main">
                   {criteria.length}
@@ -316,7 +296,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid size={{ xs: 6, sm: 3 }}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="success.main">
                   {criteria.filter((c) => c.isCompleted).length}
@@ -326,7 +306,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid size={{ xs: 6, sm: 3 }}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="warning.main">
                   {criteria.filter((c) => c.category === 'essential').length}
@@ -336,7 +316,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                 </Typography>
               </Box>
             </Grid>
-            <Grid item xs={6} sm={3}>
+            <Grid size={{ xs: 6, sm: 3 }}>
               <Box sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" fontWeight={600} color="info.main">
                   {criteria.filter((c) => c.category === 'desirable').length}
@@ -352,7 +332,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
 
       <Grid container spacing={4}>
         {/* Main Content */}
-        <Grid item xs={12} lg={8}>
+        <Grid size={{ xs: 12, lg: 8 }}>
           {/* Step Navigation */}
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2, mb: 4 }}>
             <Box sx={{ p: 3 }}>
@@ -496,7 +476,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                       <AccordionDetails>
                         <Grid container spacing={3}>
                           {/* Response Editor */}
-                          <Grid item xs={12} md={8}>
+                          <Grid size={{ xs: 12, md: 8 }}>
                             <Box sx={{ mb: 2 }}>
                               <Box
                                 sx={{
@@ -554,12 +534,10 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                                   <Chip
                                     size="small"
                                     label={`${criterion.wordCount} words`}
-                                    color={
-                                      getWordCountColor(
-                                        criterion.wordCount,
-                                        criterion.suggestedLength
-                                      ) as any
-                                    }
+                                    color={getWordCountColor(
+                                      criterion.wordCount,
+                                      criterion.suggestedLength
+                                    )}
                                   />
                                 )}
                               </Box>
@@ -567,7 +545,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
                           </Grid>
 
                           {/* Guidance and Examples */}
-                          <Grid item xs={12} md={4}>
+                          <Grid size={{ xs: 12, md: 4 }}>
                             <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                               <CardContent>
                                 <Typography variant="subtitle2" gutterBottom>
@@ -674,7 +652,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
         </Grid>
 
         {/* Sidebar */}
-        <Grid item xs={12} lg={4}>
+        <Grid size={{ xs: 12, lg: 4 }}>
           {/* Quick Stats */}
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider', mb: 3 }}>
             <CardContent>

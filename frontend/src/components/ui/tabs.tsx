@@ -26,13 +26,13 @@ export const TabsList = React.forwardRef<HTMLDivElement, React.ComponentProps<ty
 TabsList.displayName = 'TabsList';
 
 // TabsTrigger component (individual tab)
-interface TabsTriggerProps extends Omit<MuiTabProps, 'component'> {
+interface TabsTriggerProps extends Omit<MuiTabProps, 'component' | 'children'> {
   value: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
-  ({ children, ...props }, ref) => <MuiTab ref={ref} label={children} {...props} />
+  ({ children, ...props }, ref) => <MuiTab ref={ref as any} label={children} {...props} />
 );
 
 TabsTrigger.displayName = 'TabsTrigger';
@@ -69,8 +69,8 @@ const StyledTab = styled(MuiTab)(({ theme }) => ({
   },
 }));
 
-const Tab = React.forwardRef<HTMLDivElement, TabProps>((props, ref) => (
-  <StyledTab ref={ref} component="div" {...props} />
+const Tab = React.forwardRef<HTMLButtonElement, TabProps>((props, ref) => (
+  <StyledTab ref={ref as any} {...props} />
 ));
 
 Tab.displayName = 'Tab';

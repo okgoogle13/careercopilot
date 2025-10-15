@@ -9,6 +9,7 @@ from typing import List
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
+from app.core.enhanced_ai_error_handling import AIOperationResult
 from app.genkit_flows.ats_scoring import AtsResult, ScoreBreakdown, atsScoring
 from app.genkit_flows.extract_job_requirements import JobRequirements
 from app.genkit_flows.extract_resume_entities import ResumeEntities
@@ -61,11 +62,9 @@ class TestAtsScoring:
     def mock_job_requirements(self) -> JobRequirements:
         """Mock job requirements extraction result."""
         return JobRequirements(
-            hard_requirements=["Python", "React", "Bachelor's degree"],
-            soft_requirements=["Leadership", "Communication", "AWS"],
-            keywords=["Python", "React", "JavaScript", "AWS", "Docker", "PostgreSQL"],
-            seniority_level="Senior",
-            role_category="Software Engineer",
+            requiredSkills=["Python", "React", "Bachelor's degree", "AWS"],
+            preferredSkills=["Leadership", "Communication", "Docker", "PostgreSQL"],
+            experienceLevel="Senior",
         )
 
     @pytest.fixture
@@ -73,11 +72,16 @@ class TestAtsScoring:
         """Mock resume entities extraction result."""
         return ResumeEntities(
             skills=["Python", "React", "JavaScript", "Docker", "AWS", "PostgreSQL"],
-            experience_years=5,
-            education_level="Bachelor's",
-            certifications=[],
-            previous_roles=["Senior Software Engineer"],
-            technical_keywords=["Python", "React", "JavaScript", "Docker", "AWS"],
+            experience=[
+                {
+                    "title": "Senior Software Engineer",
+                    "company": "Tech Corp",
+                    "duration": "5 years",
+                }
+            ],
+            education=[
+                {"degree": "Bachelor's", "field": "Computer Science", "institution": "University"}
+            ],
         )
 
     @pytest.fixture
@@ -86,9 +90,8 @@ class TestAtsScoring:
         return [
             KeywordPlacementSuggestion(
                 keyword="Machine Learning",
-                suggested_placement="skills",
-                context="Consider adding 'Machine Learning' to your skills section",
-                priority="medium",
+                suggested_location="In the skills section",
+                example_sentence="Consider adding 'Machine Learning' to your technical skills: Python, React, JavaScript, Machine Learning, Docker, AWS",
             )
         ]
 
@@ -109,12 +112,8 @@ class TestAtsScoring:
         """
 
         # Mock the supporting flow functions
-        with patch(
-            "app.genkit_flows.ats_scoring.extractJobRequirements"
-        ) as mock_extract_job:
-            with patch(
-                "app.genkit_flows.ats_scoring.extractResumeEntities"
-            ) as mock_extract_resume:
+        with patch("app.genkit_flows.ats_scoring.extractJobRequirements") as mock_extract_job:
+            with patch("app.genkit_flows.ats_scoring.extractResumeEntities") as mock_extract_resume:
                 with patch(
                     "app.genkit_flows.ats_scoring.suggestKeywordPlacement"
                 ) as mock_keyword_placement:
@@ -122,164 +121,172 @@ class TestAtsScoring:
                         "app.genkit_flows.ats_scoring.enhanced_ai_handler"
                     ) as mock_ai_handler:
                         # Configure mock returns for supporting flows
-                        mock_extract_job.run = AsyncMock(
-                            return_value=mock_job_requirements
-                        )
-                        mock_extract_resume.run = AsyncMock(
-                            return_value=mock_resume_entities
-                        )
+                        mock_extract_job.run = AsyncMock(return_value=mock_job_requirements)
+                        mock_extract_resume.run = AsyncMock(return_value=mock_resume_entities)
                         mock_keyword_placement.run = AsyncMock(
                             return_value=mock_keyword_placement_suggestions
                         )
 
-                        # Mock the enhanced AI handler to return expected results
+                        # Mock the enhanced AI handler to return AIOperationResult objects
                         mock_ai_handler.execute_ai_operation = AsyncMock()
+                        mock_semantic_result = Mock(
+                            similarityScore=85,
+                            explanation="Strong match based on skills and experience",
+                        )
+                        mock_placement_result = Mock(suggestions=mock_keyword_placement_suggestions)
+
                         mock_ai_handler.execute_ai_operation.side_effect = [
-                            mock_job_requirements,  # First call for job requirements
-                            mock_resume_entities,  # Second call for resume entities
-                            # Mock semantic analysis result
-                            Mock(
-                                similarityScore=85,
-                                explanation="Strong match based on skills and experience",
+                            AIOperationResult(
+                                success=True, data=mock_job_requirements, fallback_used=False
                             ),
-                            mock_keyword_placement_suggestions,  # Keyword placement suggestions
+                            AIOperationResult(
+                                success=True, data=mock_resume_entities, fallback_used=False
+                            ),
+                            AIOperationResult(
+                                success=True, data=mock_semantic_result, fallback_used=False
+                            ),
+                            # Keyword matching (local operation)
+                            AIOperationResult(
+                                success=True,
+                                data={
+                                    "score": 75.0,
+                                    "matchedKeywords": ["Python", "React", "AWS", "Docker"],
+                                    "missingKeywords": ["Leadership"],
+                                },
+                                fallback_used=False,
+                            ),
+                            # Formatting score (local operation)
+                            AIOperationResult(success=True, data=100.0, fallback_used=False),
+                            # Keyword placement suggestions
+                            AIOperationResult(
+                                success=True, data=mock_placement_result, fallback_used=False
+                            ),
                         ]
 
-                        # Mock the gemini_pro model for any direct calls
-                        with patch(
-                            "app.genkit_flows.ats_scoring.gemini_pro"
-                        ) as mock_gemini:
-                            mock_response = Mock()
-                            mock_response.text.return_value = "Mocked AI response"
-                            mock_gemini.generate.return_value = mock_response
+                        # Execute the flow
+                        result = await atsScoring(
+                            resumeText=sample_resume_text,
+                            jobDescription=sample_job_description,
+                            profileKeywords=["Python", "React"],
+                            user_id="test_user",
+                        )
 
-                            # Execute the flow
-                            result = await atsScoring(
-                                resumeText=sample_resume_text,
-                                jobDescription=sample_job_description,
-                                profileKeywords=["Python", "React"],
-                                user_id="test_user",
-                            )
+                        # Assert that result is an AtsResult instance
+                        assert isinstance(
+                            result, AtsResult
+                        ), f"Expected AtsResult, got {type(result)}"
 
-                            # Assert that result is an AtsResult instance
+                        # Assert required fields are present
+                        assert hasattr(result, "overallScore"), "Result should have overallScore"
+                        assert hasattr(result, "breakdown"), "Result should have breakdown"
+                        assert hasattr(
+                            result, "keywordMatches"
+                        ), "Result should have keywordMatches"
+                        assert hasattr(
+                            result, "recommendations"
+                        ), "Result should have recommendations"
+
+                        # Assert score is a valid number between 0-100
+                        assert isinstance(
+                            result.overallScore, (int, float)
+                        ), "overallScore should be numeric"
+                        assert (
+                            0 <= result.overallScore <= 100
+                        ), f"overallScore should be 0-100, got {result.overallScore}"
+
+                        # Assert breakdown has expected structure
+                        assert isinstance(
+                            result.breakdown, ScoreBreakdown
+                        ), "breakdown should be ScoreBreakdown instance"
+                        assert hasattr(
+                            result.breakdown, "keywordScore"
+                        ), "breakdown should have keywordScore"
+                        assert hasattr(
+                            result.breakdown, "semanticScore"
+                        ), "breakdown should have semanticScore"
+                        assert hasattr(
+                            result.breakdown, "formattingScore"
+                        ), "breakdown should have formattingScore"
+
+                        # Assert keywords are lists of strings
+                        assert isinstance(
+                            result.keywordMatches.matched, list
+                        ), "keywordMatches.matched should be a list"
+                        assert isinstance(
+                            result.keywordMatches.missing, list
+                        ), "keywordMatches.missing should be a list"
+
+                        for keyword in result.keywordMatches.matched:
                             assert isinstance(
-                                result, AtsResult
-                            ), f"Expected AtsResult, got {type(result)}"
+                                keyword, str
+                            ), f"matched keywords should contain strings, got {type(keyword)}"
 
-                            # Assert required fields are present
-                            assert hasattr(
-                                result, "overallScore"
-                            ), "Result should have overallScore"
-                            assert hasattr(
-                                result, "breakdown"
-                            ), "Result should have breakdown"
-                            assert hasattr(
-                                result, "matchedKeywords"
-                            ), "Result should have matchedKeywords"
-                            assert hasattr(
-                                result, "missingKeywords"
-                            ), "Result should have missingKeywords"
-                            assert hasattr(
-                                result, "recommendations"
-                            ), "Result should have recommendations"
-
-                            # Assert score is a valid number between 0-100
+                        for keyword in result.keywordMatches.missing:
                             assert isinstance(
-                                result.overallScore, (int, float)
-                            ), "overallScore should be numeric"
+                                keyword, str
+                            ), f"missing keywords should contain strings, got {type(keyword)}"
+
+                        # Assert recommendations is a list of strings
+                        assert isinstance(
+                            result.recommendations, list
+                        ), "recommendations should be a list"
+                        assert (
+                            len(result.recommendations) > 0
+                        ), "recommendations should not be empty"
+
+                        for recommendation in result.recommendations:
+                            assert isinstance(
+                                recommendation, str
+                            ), f"recommendations should contain strings, got {type(recommendation)}"
                             assert (
-                                0 <= result.overallScore <= 100
-                            ), f"overallScore should be 0-100, got {result.overallScore}"
-
-                            # Assert breakdown has expected structure
-                            assert isinstance(
-                                result.breakdown, ScoreBreakdown
-                            ), "breakdown should be ScoreBreakdown instance"
-                            assert hasattr(
-                                result.breakdown, "keywordMatch"
-                            ), "breakdown should have keywordMatch"
-                            assert hasattr(
-                                result.breakdown, "experienceMatch"
-                            ), "breakdown should have experienceMatch"
-                            assert hasattr(
-                                result.breakdown, "semanticScore"
-                            ), "breakdown should have semanticScore"
-                            assert hasattr(
-                                result.breakdown, "formattingScore"
-                            ), "breakdown should have formattingScore"
-
-                            # Assert keywords are lists of strings
-                            assert isinstance(
-                                result.matchedKeywords, list
-                            ), "matchedKeywords should be a list"
-                            assert isinstance(
-                                result.missingKeywords, list
-                            ), "missingKeywords should be a list"
-
-                            for keyword in result.matchedKeywords:
-                                assert isinstance(
-                                    keyword, str
-                                ), f"matchedKeywords should contain strings, got {type(keyword)}"
-
-                            for keyword in result.missingKeywords:
-                                assert isinstance(
-                                    keyword, str
-                                ), f"missingKeywords should contain strings, got {type(keyword)}"
-
-                            # Assert recommendations is a list of strings
-                            assert isinstance(
-                                result.recommendations, list
-                            ), "recommendations should be a list"
-                            assert (
-                                len(result.recommendations) > 0
-                            ), "recommendations should not be empty"
-
-                            for recommendation in result.recommendations:
-                                assert isinstance(
-                                    recommendation, str
-                                ), f"recommendations should contain strings, got {type(recommendation)}"
-                                assert (
-                                    len(recommendation.strip()) > 0
-                                ), "recommendations should not be empty strings"
+                                len(recommendation.strip()) > 0
+                            ), "recommendations should not be empty strings"
 
     @pytest.mark.asyncio
     async def test_ats_scoring_with_minimal_input(self):
         """
         Test atsScoring with minimal valid input to ensure robustness.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.extractJobRequirements"
-        ):
-            with patch(
-                "app.genkit_flows.ats_scoring.extractResumeEntities"
-            ):
-                with patch(
-                    "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-                ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.extractJobRequirements"):
+            with patch("app.genkit_flows.ats_scoring.extractResumeEntities"):
+                with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
                     # Minimal mock responses
                     minimal_job_reqs = JobRequirements(
-                        hard_requirements=["Python"],
-                        soft_requirements=[],
-                        keywords=["Python"],
-                        seniority_level="Junior",
-                        role_category="Developer",
+                        requiredSkills=["Python"],
+                        preferredSkills=[],
+                        experienceLevel="Junior",
                     )
 
                     minimal_resume_entities = ResumeEntities(
                         skills=["Python"],
-                        experience_years=1,
-                        education_level="High School",
-                        certifications=[],
-                        previous_roles=["Junior Developer"],
-                        technical_keywords=["Python"],
+                        experience=[{"title": "Junior Developer", "duration": "1 year"}],
+                        education=[{"degree": "High School"}],
                     )
 
                     mock_ai_handler.execute_ai_operation = AsyncMock()
+                    mock_semantic_result = Mock(similarityScore=60, explanation="Basic match")
+
                     mock_ai_handler.execute_ai_operation.side_effect = [
-                        minimal_job_reqs,
-                        minimal_resume_entities,
-                        Mock(similarityScore=60, explanation="Basic match"),
-                        [],  # No keyword placement suggestions
+                        AIOperationResult(success=True, data=minimal_job_reqs, fallback_used=False),
+                        AIOperationResult(
+                            success=True, data=minimal_resume_entities, fallback_used=False
+                        ),
+                        AIOperationResult(
+                            success=True, data=mock_semantic_result, fallback_used=False
+                        ),
+                        # Keyword matching
+                        AIOperationResult(
+                            success=True,
+                            data={
+                                "score": 80.0,
+                                "matchedKeywords": ["Python"],
+                                "missingKeywords": [],
+                            },
+                            fallback_used=False,
+                        ),
+                        # Formatting score
+                        AIOperationResult(success=True, data=100.0, fallback_used=False),
+                        # Keyword placement (no missing keywords, so skipped)
                     ]
 
                     result = await atsScoring(
@@ -303,18 +310,31 @@ class TestAtsScoring:
         """
         Test atsScoring with additional profile keywords parameter.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-        ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
             mock_ai_handler.execute_ai_operation = AsyncMock()
+            mock_semantic_result = Mock(
+                similarityScore=90,
+                explanation="Excellent match with profile keywords",
+            )
+
             mock_ai_handler.execute_ai_operation.side_effect = [
-                mock_job_requirements,
-                mock_resume_entities,
-                Mock(
-                    similarityScore=90,
-                    explanation="Excellent match with profile keywords",
+                AIOperationResult(success=True, data=mock_job_requirements, fallback_used=False),
+                AIOperationResult(success=True, data=mock_resume_entities, fallback_used=False),
+                AIOperationResult(success=True, data=mock_semantic_result, fallback_used=False),
+                # Keyword matching with profile keywords
+                AIOperationResult(
+                    success=True,
+                    data={
+                        "score": 85.0,
+                        "matchedKeywords": ["Python", "React", "AWS"],
+                        "missingKeywords": ["Machine Learning"],
+                    },
+                    fallback_used=False,
                 ),
-                [],
+                # Formatting score
+                AIOperationResult(success=True, data=100.0, fallback_used=False),
+                # Keyword placement for missing ML keyword
+                AIOperationResult(success=True, data=Mock(suggestions=[]), fallback_used=False),
             ]
 
             profile_keywords = ["Python", "React", "Machine Learning", "AWS"]
@@ -331,24 +351,20 @@ class TestAtsScoring:
             assert result.overallScore >= 0
 
             # Profile keywords should influence matching
-            matched_keywords = result.matchedKeywords
+            matched_keywords = result.keywordMatches.matched
             assert len(matched_keywords) >= 0  # Should have some matches
 
             # Verify some profile keywords appear in matched or missing
-            all_keywords = result.matchedKeywords + result.missingKeywords
+            all_keywords = result.keywordMatches.matched + result.keywordMatches.missing
             common_keywords = set(profile_keywords).intersection(set(all_keywords))
-            assert (
-                len(common_keywords) > 0
-            ), "Some profile keywords should appear in results"
+            assert len(common_keywords) > 0, "Some profile keywords should appear in results"
 
     @pytest.mark.asyncio
     async def test_ats_scoring_error_handling(self):
         """
         Test that atsScoring handles errors gracefully and still returns a valid result.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-        ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
             # Simulate an error in one of the AI operations
             mock_ai_handler.execute_ai_operation = AsyncMock()
             mock_ai_handler.execute_ai_operation.side_effect = [
@@ -357,9 +373,7 @@ class TestAtsScoring:
 
             # The enhanced error handling should provide fallbacks
             with pytest.raises(Exception, match="AI service temporarily unavailable"):
-                await atsScoring(
-                    resumeText="Test resume", jobDescription="Test job description"
-                )
+                await atsScoring(resumeText="Test resume", jobDescription="Test job description")
 
             # Note: In a real implementation with proper error handling,
             # this might return a fallback result instead of raising an exception

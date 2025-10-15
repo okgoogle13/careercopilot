@@ -67,11 +67,18 @@ class SecureSettings(BaseSettings):
                 # Load AI API keys from Secret Manager
                 self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
                 self.OPENAI_API_KEY = get_secret("OPENAI_API_KEY", default=self.OPENAI_API_KEY)
-                self.ANTHROPIC_API_KEY = get_secret("ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY)
+                self.ANTHROPIC_API_KEY = get_secret(
+                    "ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY
+                )
 
                 # Load Firebase credentials
-                self.FIREBASE_PROJECT_ID = get_secret("FIREBASE_PROJECT_ID", default=self.FIREBASE_PROJECT_ID)
-                self.GOOGLE_APPLICATION_CREDENTIALS_JSON = get_secret("GOOGLE_APPLICATION_CREDENTIALS_JSON", default=self.GOOGLE_APPLICATION_CREDENTIALS_JSON)
+                self.FIREBASE_PROJECT_ID = get_secret(
+                    "FIREBASE_PROJECT_ID", default=self.FIREBASE_PROJECT_ID
+                )
+                self.GOOGLE_APPLICATION_CREDENTIALS_JSON = get_secret(
+                    "GOOGLE_APPLICATION_CREDENTIALS_JSON",
+                    default=self.GOOGLE_APPLICATION_CREDENTIALS_JSON,
+                )
             except Exception as e:
                 raise RuntimeError(f"Failed to load production secrets: {e}")
         elif self.ENV in ["production", "staging"]:
@@ -216,10 +223,7 @@ if __name__ == "__main__":
     # Print all settings (without sensitive values)
     print("Current settings:")
     for field, value in settings.dict().items():
-        if any(
-            sensitive in field.lower()
-            for sensitive in ["key", "secret", "token", "password"]
-        ):
+        if any(sensitive in field.lower() for sensitive in ["key", "secret", "token", "password"]):
             print(f"{field}: {'*' * 8} (hidden)")
         else:
             print(f"{field}: {value}")

@@ -1,44 +1,38 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Textarea } from '../../ui/textarea';
-import { Input } from '../../ui/input';
-import { Badge } from '../../ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
-import { Switch } from '../../ui/switch';
-import { Slider } from '../../ui/slider';
-import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
-import { Progress } from '../../ui/progress';
-import { Separator } from '../../ui/separator';
 import {
-  EmojiObjects as Sparkles,
-  Person as User,
-  Work as Briefcase,
-  School as GraduationCap,
+  ArrowLeft,
   EmojiEvents as Award,
-  Add as Plus,
-  LocationOn as MapPin,
+  Work as Briefcase,
+  CameraAlt as Camera,
+  CheckCircle,
+  Code,
+  Visibility as Eye,
+  GitHub,
   Public as Globe,
   LinkedIn,
-  GitHub,
+  LocationOn as MapPin,
+  Add as Plus,
+  Settings,
+  EmojiObjects as Sparkles,
+  Star,
+  GpsFixed as Target,
+  X as Twitter,
+  Person as User,
+  Close as X,
 } from '@mui/icons-material';
-import { KeywordTag, KeywordTagGroup } from './library/KeywordTag';
-import { AnimatedCard, AnimatedButton, AnimatedProgress } from './AnimatedComponents';
+import { Button, Card, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { useState } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
+import { Badge } from '../../ui/badge';
+import { Input } from '../../ui/input';
+import { Progress } from '../../ui/progress';
+import { Separator } from '../../ui/separator';
+import { Slider } from '../../ui/slider';
+import { Switch } from '../../ui/switch';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
+import { Textarea } from '../../ui/textarea';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 import { AIProcessingLoading } from '../common/StandardizedLoadingStates';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-} from '@mui/material';
+import { AnimatedButton, AnimatedProgress } from '../demo/AnimatedComponents';
 
 interface SocialLink {
   platform: 'linkedin' | 'github' | 'twitter' | 'website' | 'portfolio';
@@ -231,8 +225,8 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
   const getSocialIcon = (platform: string) => {
     const icons = {
-      linkedin: Linkedin,
-      github: Github,
+      linkedin: LinkedIn,
+      github: GitHub,
       twitter: Twitter,
       website: Globe,
       portfolio: Code,
@@ -319,7 +313,11 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           </div>
 
           {/* Enhanced Navigation */}
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs
+            value={activeTab}
+            onChange={(_e, newValue) => setActiveTab(newValue as string)}
+            className="w-full"
+          >
             <TabsList className="grid w-full grid-cols-5 mb-8">
               <TabsTrigger value="basic" className="flex items-center gap-2">
                 <User className="h-4 w-4" />
@@ -344,430 +342,439 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsList>
 
             {/* Basic Information Tab */}
-            <TabsContent value="basic" className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Personal Information */}
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-blue-100 rounded-lg">
-                      <User className="w-5 h-5 text-blue-600" />
+            <TabsContent value="basic" currentValue={activeTab} className="space-y-6">
+              <>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Personal Information */}
+                  <Card className="p-6">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2 bg-blue-100 rounded-lg">
+                        <User className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <h3 className="font-semibold text-lg">Personal Details</h3>
                     </div>
-                    <h3 className="font-semibold text-lg">Personal Details</h3>
-                  </div>
 
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-medium mb-2 block">Full Name *</label>
+                          <Input
+                            value={personalInfo.fullName}
+                            onChange={(e) =>
+                              setPersonalInfo({ ...personalInfo, fullName: e.target.value })
+                            }
+                            placeholder="Enter full name"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-2 block">
+                            Professional Title
+                          </label>
+                          <Input
+                            value={personalInfo.title}
+                            onChange={(e) =>
+                              setPersonalInfo({ ...personalInfo, title: e.target.value })
+                            }
+                            placeholder="e.g., Senior Developer"
+                          />
+                        </div>
+                      </div>
+
                       <div>
-                        <label className="text-sm font-medium mb-2 block">Full Name *</label>
+                        <label className="text-sm font-medium mb-2 block">
+                          Professional Tagline
+                        </label>
                         <Input
-                          value={personalInfo.fullName}
+                          value={personalInfo.tagline}
                           onChange={(e) =>
-                            setPersonalInfo({ ...personalInfo, fullName: e.target.value })
+                            setPersonalInfo({ ...personalInfo, tagline: e.target.value })
                           }
-                          placeholder="Enter full name"
+                          placeholder="A brief, compelling description"
                         />
                       </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="text-sm font-medium mb-2 block">Email *</label>
+                          <Input
+                            type="email"
+                            value={personalInfo.email}
+                            onChange={(e) =>
+                              setPersonalInfo({ ...personalInfo, email: e.target.value })
+                            }
+                            placeholder="professional@email.com"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-sm font-medium mb-2 block">Phone</label>
+                          <Input
+                            value={personalInfo.phone}
+                            onChange={(e) =>
+                              setPersonalInfo({ ...personalInfo, phone: e.target.value })
+                            }
+                            placeholder="+1 (555) 123-4567"
+                          />
+                        </div>
+                      </div>
+
                       <div>
-                        <label className="text-sm font-medium mb-2 block">Professional Title</label>
+                        <label className="text-sm font-medium mb-2 block">Location</label>
                         <Input
-                          value={personalInfo.title}
+                          value={personalInfo.location}
                           onChange={(e) =>
-                            setPersonalInfo({ ...personalInfo, title: e.target.value })
+                            setPersonalInfo({ ...personalInfo, location: e.target.value })
                           }
-                          placeholder="e.g., Senior Developer"
+                          placeholder="City, State/Province, Country"
                         />
                       </div>
                     </div>
+                  </Card>
 
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Professional Tagline</label>
-                      <Input
-                        value={personalInfo.tagline}
-                        onChange={(e) =>
-                          setPersonalInfo({ ...personalInfo, tagline: e.target.value })
-                        }
-                        placeholder="A brief, compelling description"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-sm font-medium mb-2 block">Email *</label>
-                        <Input
-                          type="email"
-                          value={personalInfo.email}
-                          onChange={(e) =>
-                            setPersonalInfo({ ...personalInfo, email: e.target.value })
-                          }
-                          placeholder="professional@email.com"
-                        />
+                  {/* Professional Summary */}
+                  <Card className="p-6">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-2 bg-green-100 rounded-lg">
+                        <Briefcase className="w-5 h-5 text-green-600" />
                       </div>
-                      <div>
-                        <label className="text-sm font-medium mb-2 block">Phone</label>
-                        <Input
-                          value={personalInfo.phone}
-                          onChange={(e) =>
-                            setPersonalInfo({ ...personalInfo, phone: e.target.value })
-                          }
-                          placeholder="+1 (555) 123-4567"
-                        />
-                      </div>
+                      <h3 className="font-semibold text-lg">Professional Summary</h3>
                     </div>
 
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Location</label>
-                      <Input
-                        value={personalInfo.location}
-                        onChange={(e) =>
-                          setPersonalInfo({ ...personalInfo, location: e.target.value })
-                        }
-                        placeholder="City, State/Province, Country"
-                      />
-                    </div>
-                  </div>
-                </Card>
-
-                {/* Professional Summary */}
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-green-100 rounded-lg">
-                      <Briefcase className="w-5 h-5 text-green-600" />
-                    </div>
-                    <h3 className="font-semibold text-lg">Professional Summary</h3>
-                  </div>
-
-                  <div className="space-y-4">
-                    <div className="flex gap-2">
-                      {isGenerating ? (
-                        <AIProcessingLoading message="Generating AI summary..." />
-                      ) : (
-                        <AnimatedButton
-                          variant="outlined"
-                          animation="shimmer"
-                          className="flex-1"
-                          onClick={handleGenerateSummary}
-                        >
-                          <Sparkles className="mr-2 h-4 w-4" />
-                          AI Generate
-                        </AnimatedButton>
-                      )}
-                      <Tooltip>
-                        <TooltipTrigger asChild>
+                    <div className="space-y-4">
+                      <div className="flex gap-2">
+                        {isGenerating ? (
+                          <AIProcessingLoading message="Generating AI summary..." />
+                        ) : (
+                          <AnimatedButton
+                            variant="outlined"
+                            animation="shimmer"
+                            className="flex-1"
+                            onClick={handleGenerateSummary}
+                          >
+                            <Sparkles className="mr-2 h-4 w-4" />
+                            AI Generate
+                          </AnimatedButton>
+                        )}
+                        <Tooltip title="Get personalized tips for your summary">
                           <Button variant="outlined" size="small">
                             <Target className="h-4 w-4" />
                           </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>Get personalized tips for your summary</TooltipContent>
-                      </Tooltip>
-                    </div>
+                        </Tooltip>
+                      </div>
 
-                    <Textarea
-                      value={summary}
-                      onChange={(e) => setSummary(e.target.value)}
-                      placeholder="Write a compelling professional summary that highlights your key achievements, skills, and career objectives..."
-                      className="min-h-[150px] resize-none"
-                    />
+                      <Textarea
+                        value={summary}
+                        onChange={(e) => setSummary(e.target.value)}
+                        placeholder="Write a compelling professional summary that highlights your key achievements, skills, and career objectives..."
+                        className="min-h-[150px] resize-none"
+                      />
 
-                    <div className="text-xs text-muted-foreground">
-                      <span className={summary.length > 300 ? 'text-amber-600' : ''}>
-                        {summary.length}/300 characters
-                      </span>
-                      {summary.length > 0 && (
-                        <div className="mt-1 flex gap-4">
-                          <span>Readability: Good</span>
-                          <span>
-                            Keywords:{' '}
-                            {
-                              summary
-                                .split(' ')
-                                .filter((word) =>
-                                  ['experience', 'skilled', 'professional', 'expertise'].some(
-                                    (keyword) => word.toLowerCase().includes(keyword.toLowerCase())
-                                  )
-                                ).length
-                            }
-                          </span>
-                        </div>
-                      )}
+                      <div className="text-xs text-muted-foreground">
+                        <span className={summary.length > 300 ? 'text-amber-600' : ''}>
+                          {summary.length}/300 characters
+                        </span>
+                        {summary.length > 0 && (
+                          <div className="mt-1 flex gap-4">
+                            <span>Readability: Good</span>
+                            <span>
+                              Keywords:{' '}
+                              {
+                                summary
+                                  .split(' ')
+                                  .filter((word) =>
+                                    ['experience', 'skilled', 'professional', 'expertise'].some(
+                                      (keyword) =>
+                                        word.toLowerCase().includes(keyword.toLowerCase())
+                                    )
+                                  ).length
+                              }
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              </div>
+                  </Card>
+                </div>
+              </>
             </TabsContent>
 
             {/* Skills Tab */}
-            <TabsContent value="skills" className="space-y-6">
-              <Card className="p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-purple-100 rounded-lg">
-                      <Award className="w-5 h-5 text-purple-600" />
-                    </div>
-                    <h3 className="font-semibold text-lg">Skills & Expertise</h3>
-                  </div>
-                  <Button variant="outlined" size="small">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Import from Resume
-                  </Button>
-                </div>
-
-                {/* Add New Skill */}
-                <div className="flex gap-2 mb-6">
-                  <Input
-                    placeholder="Add a skill (e.g., JavaScript, Project Management)"
-                    value={newSkill}
-                    onChange={(e) => setNewSkill(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        addSkill();
-                      }
-                    }}
-                    className="flex-1"
-                  />
-                  <FormControl sx={{ width: 120 }}>
-                    <InputLabel>Category</InputLabel>
-                    <Select
-                      value={selectedCategory}
-                      label="Category"
-                      onChange={(e) =>
-                        setSelectedCategory(
-                          e.target.value as 'technical' | 'soft' | 'industry' | 'language'
-                        )
-                      }
-                    >
-                      <MenuItem value="technical">Technical</MenuItem>
-                      <MenuItem value="soft">Soft Skills</MenuItem>
-                      <MenuItem value="industry">Industry</MenuItem>
-                      <MenuItem value="language">Language</MenuItem>
-                    </Select>
-                  </FormControl>
-                  <Button onClick={addSkill}>
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </div>
-
-                {/* Skills Grid */}
-                <div className="space-y-6">
-                  {['technical', 'soft', 'industry', 'language'].map((category) => {
-                    const categorySkills = skills.filter((skill) => skill.category === category);
-                    if (categorySkills.length === 0) return null;
-
-                    return (
-                      <div key={category}>
-                        <h4 className="font-medium text-sm uppercase tracking-wide text-muted-foreground mb-3">
-                          {category} Skills ({categorySkills.length})
-                        </h4>
-                        <div className="grid gap-4">
-                          {categorySkills.map((skill) => (
-                            <Card key={skill.keyword} className="p-4 border border-gray-200">
-                              <div className="flex items-center justify-between mb-3">
-                                <div className="flex items-center gap-3">
-                                  <Badge className={getCategoryColor(skill.category)}>
-                                    {skill.keyword}
-                                  </Badge>
-                                  {skill.yearsOfExperience && (
-                                    <span className="text-xs text-muted-foreground">
-                                      {skill.yearsOfExperience}+ years
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <span className="text-xs text-muted-foreground">
-                                    Level {skill.level}/10
-                                  </span>
-                                  <Button
-                                    variant="text"
-                                    size="small"
-                                    className="h-6 w-6"
-                                    onClick={() => removeSkill(skill.keyword)}
-                                  >
-                                    <X className="h-3 w-3" />
-                                  </Button>
-                                </div>
-                              </div>
-
-                              <div className="space-y-2">
-                                <div className="flex items-center gap-2">
-                                  <span className="text-xs text-muted-foreground w-16">
-                                    Proficiency:
-                                  </span>
-                                  <Slider
-                                    value={[skill.level]}
-                                    onValueChange={(value) =>
-                                      updateSkillLevel(skill.keyword, value[0])
-                                    }
-                                    max={10}
-                                    step={1}
-                                    className="flex-1"
-                                  />
-                                </div>
-                                <Progress value={skill.level * 10} className="h-2" />
-                              </div>
-                            </Card>
-                          ))}
-                        </div>
+            <TabsContent value="skills" currentValue={activeTab} className="space-y-6">
+              <>
+                <Card className="p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-purple-100 rounded-lg">
+                        <Award className="w-5 h-5 text-purple-600" />
                       </div>
-                    );
-                  })}
-                </div>
+                      <h3 className="font-semibold text-lg">Skills & Expertise</h3>
+                    </div>
+                    <Button variant="outlined" size="small">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Import from Resume
+                    </Button>
+                  </div>
 
-                {/* Skill Suggestions */}
-                <Card className="p-4 bg-blue-50 border-blue-200">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-4 h-4 text-blue-600" />
-                    <h4 className="font-medium text-blue-900">AI Skill Suggestions</h4>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      'Team Leadership',
-                      'Data Analysis',
-                      'Customer Service',
-                      'Problem Solving',
-                    ].map((suggestion) => (
-                      <Button
-                        key={suggestion}
-                        variant="outlined"
-                        size="small"
-                        className="text-xs border-blue-300 hover:bg-blue-100"
-                        onClick={() => setNewSkill(suggestion)}
+                  {/* Add New Skill */}
+                  <div className="flex gap-2 mb-6">
+                    <Input
+                      placeholder="Add a skill (e.g., JavaScript, Project Management)"
+                      value={newSkill}
+                      onChange={(e) => setNewSkill(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          addSkill();
+                        }
+                      }}
+                      className="flex-1"
+                    />
+                    <FormControl sx={{ width: 120 }}>
+                      <InputLabel>Category</InputLabel>
+                      <Select
+                        value={selectedCategory}
+                        label="Category"
+                        onChange={(e) =>
+                          setSelectedCategory(
+                            e.target.value as 'technical' | 'soft' | 'industry' | 'language'
+                          )
+                        }
                       >
-                        <Plus className="w-3 h-3 mr-1" />
-                        {suggestion}
-                      </Button>
-                    ))}
+                        <MenuItem value="technical">Technical</MenuItem>
+                        <MenuItem value="soft">Soft Skills</MenuItem>
+                        <MenuItem value="industry">Industry</MenuItem>
+                        <MenuItem value="language">Language</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <Button onClick={addSkill}>
+                      <Plus className="h-4 w-4" />
+                    </Button>
                   </div>
+
+                  {/* Skills Grid */}
+                  <div className="space-y-6">
+                    {['technical', 'soft', 'industry', 'language'].map((category) => {
+                      const categorySkills = skills.filter((skill) => skill.category === category);
+                      if (categorySkills.length === 0) return null;
+
+                      return (
+                        <div key={category}>
+                          <h4 className="font-medium text-sm uppercase tracking-wide text-muted-foreground mb-3">
+                            {category} Skills ({categorySkills.length})
+                          </h4>
+                          <div className="grid gap-4">
+                            {categorySkills.map((skill) => (
+                              <Card key={skill.keyword} className="p-4 border border-gray-200">
+                                <div className="flex items-center justify-between mb-3">
+                                  <div className="flex items-center gap-3">
+                                    <Badge className={getCategoryColor(skill.category)}>
+                                      {skill.keyword}
+                                    </Badge>
+                                    {skill.yearsOfExperience && (
+                                      <span className="text-xs text-muted-foreground">
+                                        {skill.yearsOfExperience}+ years
+                                      </span>
+                                    )}
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-xs text-muted-foreground">
+                                      Level {skill.level}/10
+                                    </span>
+                                    <Button
+                                      variant="text"
+                                      size="small"
+                                      className="h-6 w-6"
+                                      onClick={() => removeSkill(skill.keyword)}
+                                    >
+                                      <X className="h-3 w-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-xs text-muted-foreground w-16">
+                                      Proficiency:
+                                    </span>
+                                    <Slider
+                                      value={[skill.level]}
+                                      onChange={(_event, value) =>
+                                        updateSkillLevel(
+                                          skill.keyword,
+                                          Array.isArray(value) ? value[0] : value
+                                        )
+                                      }
+                                      max={10}
+                                      step={1}
+                                      className="flex-1"
+                                    />
+                                  </div>
+                                  <Progress value={skill.level * 10} className="h-2" />
+                                </div>
+                              </Card>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Skill Suggestions */}
+                  <Card className="p-4 bg-blue-50 border-blue-200">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Sparkles className="w-4 h-4 text-blue-600" />
+                      <h4 className="font-medium text-blue-900">AI Skill Suggestions</h4>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        'Team Leadership',
+                        'Data Analysis',
+                        'Customer Service',
+                        'Problem Solving',
+                      ].map((suggestion) => (
+                        <Button
+                          key={suggestion}
+                          variant="outlined"
+                          size="small"
+                          className="text-xs border-blue-300 hover:bg-blue-100"
+                          onClick={() => setNewSkill(suggestion)}
+                        >
+                          <Plus className="w-3 h-3 mr-1" />
+                          {suggestion}
+                        </Button>
+                      ))}
+                    </div>
+                  </Card>
                 </Card>
-              </Card>
+              </>
             </TabsContent>
 
             {/* Social & Links Tab */}
-            <TabsContent value="social" className="space-y-6">
-              <Card className="p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-indigo-100 rounded-lg">
-                    <Globe className="w-5 h-5 text-indigo-600" />
+            <TabsContent value="social" currentValue={activeTab} className="space-y-6">
+              <>
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-indigo-100 rounded-lg">
+                      <Globe className="w-5 h-5 text-indigo-600" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Social Links & Online Presence</h3>
                   </div>
-                  <h3 className="font-semibold text-lg">Social Links & Online Presence</h3>
-                </div>
 
-                <div className="space-y-4">
-                  {socialLinks.map((link, index) => {
-                    const Icon = getSocialIcon(link.platform);
-                    return (
-                      <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
-                        <Icon className="w-5 h-5 text-muted-foreground" />
-                        <div className="flex-1">
-                          <Input
-                            value={link.url}
-                            onChange={(e) => {
-                              const newLinks = [...socialLinks];
-                              newLinks[index].url = e.target.value;
-                              setSocialLinks(newLinks);
-                            }}
-                            placeholder={`Your ${link.platform} profile URL`}
-                          />
+                  <div className="space-y-4">
+                    {socialLinks.map((link, index) => {
+                      const Icon = getSocialIcon(link.platform);
+                      return (
+                        <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
+                          <Icon className="w-5 h-5 text-muted-foreground" />
+                          <div className="flex-1">
+                            <Input
+                              value={link.url}
+                              onChange={(e) => {
+                                const newLinks = [...socialLinks];
+                                newLinks[index].url = e.target.value;
+                                setSocialLinks(newLinks);
+                              }}
+                              placeholder={`Your ${link.platform} profile URL`}
+                            />
+                          </div>
+                          {link.verified && (
+                            <Tooltip title="Verified profile">
+                              <span><CheckCircle className="w-5 h-5 text-green-500" /></span>
+                            </Tooltip>
+                          )}
+                          <Button variant="text" size="small" className="text-red-500">
+                            <X className="w-4 h-4" />
+                          </Button>
                         </div>
-                        {link.verified && (
-                          <Tooltip>
-                            <TooltipTrigger>
-                              <CheckCircle className="w-5 h-5 text-green-500" />
-                            </TooltipTrigger>
-                            <TooltipContent>Verified profile</TooltipContent>
-                          </Tooltip>
-                        )}
-                        <Button variant="text" size="small" className="text-red-500">
-                          <X className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
 
-                  <Button
-                    variant="outlined"
-                    className="w-full"
-                    onClick={() =>
-                      setSocialLinks([
-                        ...socialLinks,
-                        { platform: 'website', url: '', verified: false },
-                      ])
-                    }
-                  >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add Social Link
-                  </Button>
-                </div>
-              </Card>
+                    <Button
+                      variant="outlined"
+                      className="w-full"
+                      onClick={() =>
+                        setSocialLinks([
+                          ...socialLinks,
+                          { platform: 'website', url: '', verified: false },
+                        ])
+                      }
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add Social Link
+                    </Button>
+                  </div>
+                </Card>
+              </>
             </TabsContent>
 
             {/* Privacy Settings Tab */}
-            <TabsContent value="settings" className="space-y-6">
-              <Card className="p-6">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-red-100 rounded-lg">
-                    <Settings className="w-5 h-5 text-red-600" />
-                  </div>
-                  <h3 className="font-semibold text-lg">Privacy & Preferences</h3>
-                </div>
-
-                <div className="space-y-6">
-                  {/* Profile Visibility */}
-                  <div className="space-y-3">
-                    <label className="text-sm font-medium">Profile Visibility</label>
-                    <Select
-                      value={profileSettings.privacy}
-                      onValueChange={(value: any) =>
-                        setProfileSettings({ ...profileSettings, privacy: value })
-                      }
-                    >
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="public">Public - Visible to everyone</SelectItem>
-                        <SelectItem value="connections">Connections Only</SelectItem>
-                        <SelectItem value="private">Private - Only me</SelectItem>
-                      </SelectContent>
-                    </Select>
+            <TabsContent value="settings" currentValue={activeTab} className="space-y-6">
+              <>
+                <Card className="p-6">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-red-100 rounded-lg">
+                      <Settings className="w-5 h-5 text-red-600" />
+                    </div>
+                    <h3 className="font-semibold text-lg">Privacy & Preferences</h3>
                   </div>
 
-                  {/* Work Preferences */}
-                  <Separator />
-                  <div className="space-y-4">
-                    <h4 className="font-medium">Work Preferences</h4>
-
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-sm">Open to Opportunities</p>
-                        <p className="text-xs text-muted-foreground">
-                          Let recruiters know you're available
-                        </p>
-                      </div>
-                      <Switch
-                        checked={profileSettings.openToOpportunities}
-                        onCheckedChange={(checked) =>
-                          setProfileSettings({ ...profileSettings, openToOpportunities: checked })
+                  <div className="space-y-6">
+                    {/* Profile Visibility */}
+                    <div className="space-y-3">
+                      <label className="text-sm font-medium">Profile Visibility</label>
+                      <Select
+                        value={profileSettings.privacy}
+                        onChange={(e) =>
+                          setProfileSettings({
+                            ...profileSettings,
+                            privacy: e.target.value as 'public' | 'private' | 'connections',
+                          })
                         }
-                      />
+                        fullWidth
+                      >
+                        <MenuItem value="public">Public - Visible to everyone</MenuItem>
+                        <MenuItem value="connections">Connections Only</MenuItem>
+                        <MenuItem value="private">Private - Only me</MenuItem>
+                      </Select>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="font-medium text-sm">Show Location</p>
-                        <p className="text-xs text-muted-foreground">
-                          Display your location publicly
-                        </p>
+                    {/* Work Preferences */}
+                    <Separator />
+                    <div className="space-y-4">
+                      <h4 className="font-medium">Work Preferences</h4>
+
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium text-sm">Open to Opportunities</p>
+                          <p className="text-xs text-muted-foreground">
+                            Let recruiters know you're available
+                          </p>
+                        </div>
+                        <Switch
+                          checked={profileSettings.openToOpportunities}
+                          onCheckedChange={(checked) =>
+                            setProfileSettings({ ...profileSettings, openToOpportunities: checked })
+                          }
+                        />
                       </div>
-                      <Switch
-                        checked={profileSettings.showLocation}
-                        onCheckedChange={(checked) =>
-                          setProfileSettings({ ...profileSettings, _howLocation: checked })
-                        }
-                      />
+
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium text-sm">Show Location</p>
+                          <p className="text-xs text-muted-foreground">
+                            Display your location publicly
+                          </p>
+                        </div>
+                        <Switch
+                          checked={profileSettings.showLocation}
+                          onCheckedChange={(checked) =>
+                            setProfileSettings({ ...profileSettings, showLocation: checked })
+                          }
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
+              </>
             </TabsContent>
           </Tabs>
 
