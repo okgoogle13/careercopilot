@@ -11,13 +11,13 @@ import {
   IconButton,
 } from '@mui/material';
 import {
-  MapPin,
-  Clock,
-  DollarSign,
-  Bookmark,
-  BookmarkCheck,
-  ExternalLink,
-  Building2,
+  LocationOn as MapPin,
+  Schedule as Clock,
+  AttachMoney as DollarSign,
+  BookmarkBorder as Bookmark,
+  Bookmark as BookmarkCheck,
+  OpenInNew as ExternalLink,
+  Business as Building2,
 } from '@mui/icons-material';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';

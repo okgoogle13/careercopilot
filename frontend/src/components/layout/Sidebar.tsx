@@ -1,18 +1,16 @@
-import React from 'react';
+import { BarChart as BarChart3, Description as FileText, Add as Plus } from '@mui/icons-material';
 import {
+  Box,
   Drawer,
   List,
   ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Box,
-  Typography,
-  Divider,
   Button as MuiButton,
+  Typography,
   useTheme,
 } from '@mui/material';
-import { BarChart as BarChart3, Description as FileText, Add as Plus } from '@mui/icons-material';
 
 interface SidebarProps {
   activeTab: string;
@@ -110,7 +108,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
           <MuiButton
             variant="contained"
             fullWidth
-            startIcon={<Plus fontSize="small" />}
+            startIcon={<Plus sx={{ ...{}, fontSize: 20 }} />}
             sx={{
               py: 1.5,
               borderRadius: 2,

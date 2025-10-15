@@ -172,12 +172,12 @@ class JobScoutAgent(BaseAgent):
         self, job: Dict[str, Any], context: Dict[str, Any]
     ) -> Dict[str, Any]:
         """Analyze job relevance using AI"""
-        # user_profile = context.get("user_profile", {})  # Available for future AI analysis
-
         # Future: Use this prompt with actual AI analysis
+        # user_profile = context.get("user_profile", {})
         # analysis_prompt = f"""
         # Analyze the relevance of this job for a candidate transitioning from
-        # {user_profile.get('career_from', 'finance')} to {user_profile.get('career_to', 'social work')}.
+        # {user_profile.get('career_from', 'finance')} to
+        # {user_profile.get('career_to', 'social work')}.
         #
         # Job: {job['title']} at {job['company']}
         # Description: {job['description']}
@@ -244,9 +244,7 @@ class MarketAnalystAgent(BaseAgent):
             "analysis_date": datetime.utcnow().isoformat(),
         }
 
-    async def _analyze_salary_trends(
-        self, job_data: Dict, context: Dict
-    ) -> Dict[str, Any]:
+    async def _analyze_salary_trends(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
         """Analyze salary trends from job data"""
         jobs = job_data.get("all_jobs", [])
 
@@ -271,9 +269,7 @@ class MarketAnalystAgent(BaseAgent):
 
         return {"error": "No salary data available"}
 
-    async def _analyze_skill_trends(
-        self, job_data: Dict, context: Dict
-    ) -> Dict[str, Any]:
+    async def _analyze_skill_trends(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
         """Analyze skill requirements trends"""
         # jobs = job_data.get("all_jobs", [])  # Available for future NLP analysis
 
@@ -297,9 +293,7 @@ class MarketAnalystAgent(BaseAgent):
             "skills_gap_analysis": "Strong match for finance background in budgeting and analysis",
         }
 
-    async def _analyze_competition(
-        self, job_data: Dict, context: Dict
-    ) -> Dict[str, Any]:
+    async def _analyze_competition(self, job_data: Dict, context: Dict) -> Dict[str, Any]:
         """Analyze competition level in the market"""
         # jobs = job_data.get("all_jobs", [])  # Available for future competition analysis
 
@@ -353,9 +347,7 @@ class ApplicationAgent(BaseAgent):
         generated_materials = []
 
         for job in target_jobs[:5]:  # Process top 5 jobs
-            materials = await self._generate_job_materials(
-                job, user_profile, market_insights
-            )
+            materials = await self._generate_job_materials(job, user_profile, market_insights)
             generated_materials.append(
                 {
                     "job_id": job.get("job_id"),
@@ -396,33 +388,39 @@ class ApplicationAgent(BaseAgent):
             ],
         }
 
-    async def _generate_cover_letter(
-        self, job: Dict, profile: Dict, market_data: Dict
-    ) -> str:
+    async def _generate_cover_letter(self, job: Dict, profile: Dict, market_data: Dict) -> str:
         """Generate personalized cover letter"""
         # Mock cover letter generation (use actual AI in production)
+        career_from = profile.get("career_from", "finance")
+        career_to = profile.get("career_to", "social work")
+        job_title = job["title"]
+        company = job["company"]
+
+        insights = market_data.get("market_insights", [])
+        insight_text = insights[0] if insights else "Market analysis pending"
+
         return f"""
 Dear Hiring Manager,
 
-I am writing to express my strong interest in the {job['title']} position at {job['company']}.
-With a background in {profile.get('career_from', 'finance')} and a passion for community service,
-I am excited to transition into {profile.get('career_to', 'social work')}.
+I am writing to express my strong interest in the {job_title} position at {company}.
+With a background in {career_from} and a passion for community service,
+I am excited to transition into {career_to}.
 
-My experience in financial analysis has equipped me with strong analytical and problem-solving
-skills that translate well to case management and client assessment. I have developed
-exceptional stakeholder management capabilities and am comfortable working with diverse populations.
+My experience in financial analysis has equipped me with strong analytical and
+problem-solving skills that translate well to case management and client assessment.
+I have developed exceptional stakeholder management capabilities and am comfortable
+working with diverse populations.
 
-[Generated using market insights: {market_data.get('market_insights', [])[0] if market_data.get('market_insights') else 'Market analysis pending'}]
+[Generated using market insights: {insight_text}]
 
-I would welcome the opportunity to discuss how my unique background can contribute to your team.
+I would welcome the opportunity to discuss how my unique background can contribute
+to your team.
 
 Sincerely,
 [Your Name]
         """.strip()
 
-    async def _generate_email_application(
-        self, job: Dict, profile: Dict
-    ) -> Dict[str, str]:
+    async def _generate_email_application(self, job: Dict, profile: Dict) -> Dict[str, str]:
         """Generate email application"""
         return {
             "subject": f"Application for {job['title']} - [Your Name]",
@@ -442,9 +440,7 @@ Best regards,
             """.strip(),
         }
 
-    async def _generate_follow_up_templates(
-        self, job: Dict, profile: Dict
-    ) -> Dict[str, str]:
+    async def _generate_follow_up_templates(self, job: Dict, profile: Dict) -> Dict[str, str]:
         """Generate follow-up email templates"""
         return {
             "one_week": "Professional follow-up after one week",
@@ -470,9 +466,7 @@ class AgentOrchestrator:
             # Add more agents as needed
         }
 
-    async def run_workflow(
-        self, workflow_type: str, context: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    async def run_workflow(self, workflow_type: str, context: Dict[str, Any]) -> Dict[str, Any]:
         """Run a complete multi-agent workflow"""
         self.user_id = context.get("user_id")
         self.session_id = str(uuid.uuid4())
@@ -499,18 +493,12 @@ class AgentOrchestrator:
             logger.error(f"Workflow {workflow_type} failed: {e}")
             # Update session status
             with get_db_session() as db:
-                session = (
-                    db.query(AgentSession)
-                    .filter(AgentSession.id == self.session_id)
-                    .first()
-                )
+                session = db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
                 if session:
                     session.status = "failed"
             raise
 
-    async def _run_daily_discovery_workflow(
-        self, context: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    async def _run_daily_discovery_workflow(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Run daily job discovery workflow with multiple agents"""
         results = {}
         completed_agents = []
@@ -529,9 +517,7 @@ class AgentOrchestrator:
             # Prepare context with previous results
             agent_context = context.copy()
             for completed_agent in completed_agents:
-                agent_context[f"{completed_agent}_results"] = results.get(
-                    completed_agent, {}
-                )
+                agent_context[f"{completed_agent}_results"] = results.get(completed_agent, {})
 
             try:
                 # Run agent
@@ -543,9 +529,7 @@ class AgentOrchestrator:
                 # Update session with progress
                 with get_db_session() as db:
                     session = (
-                        db.query(AgentSession)
-                        .filter(AgentSession.id == self.session_id)
-                        .first()
+                        db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
                     )
                     if session:
                         session.completed_agents = completed_agents
@@ -557,11 +541,7 @@ class AgentOrchestrator:
 
         # Finalize session
         with get_db_session() as db:
-            session = (
-                db.query(AgentSession)
-                .filter(AgentSession.id == self.session_id)
-                .first()
-            )
+            session = db.query(AgentSession).filter(AgentSession.id == self.session_id).first()
             if session:
                 session.status = "completed"
                 session.completed_at = datetime.utcnow()
@@ -575,19 +555,16 @@ class AgentOrchestrator:
             "success": len(completed_agents) > 0,
         }
 
-    async def _run_application_prep_workflow(
-        self, context: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    async def _run_application_prep_workflow(self, context: Dict[str, Any]) -> Dict[str, Any]:
         """Run application preparation workflow"""
         # Similar to daily discovery but focused on application materials
         # Implementation would follow same pattern
+        return {}
 
     def get_session_status(self, session_id: str) -> Dict[str, Any]:
         """Get detailed status of a workflow session"""
         with get_db_session() as db:
-            session = (
-                db.query(AgentSession).filter(AgentSession.id == session_id).first()
-            )
+            session = db.query(AgentSession).filter(AgentSession.id == session_id).first()
             if not session:
                 return {"error": "Session not found"}
 
@@ -600,10 +577,7 @@ class AgentOrchestrator:
                 "active_agents": session.active_agents,
                 "completed_agents": session.completed_agents,
                 "results_summary": (
-                    {
-                        agent: bool(results)
-                        for agent, results in session.agent_results.items()
-                    }
+                    {agent: bool(results) for agent, results in session.agent_results.items()}
                     if session.agent_results
                     else {}
                 ),

@@ -3,12 +3,12 @@ import { Badge } from '../../ui/badge';
 import { Textarea } from '../../ui/textarea';
 import {
   ArrowLeft,
-  Sparkles,
-  MessageSquare,
-  Play,
+  AutoAwesome as Sparkles,
+  MessageSharp as MessageSquare,
+  PlayArrow as Play,
   Mic,
   MicOff,
-  RotateCcw,
+  Replay as RotateCcw,
 } from '@mui/icons-material';
 import {
   Button,
@@ -229,7 +229,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       {currentQuestion.type}
                     </Badge>
                     <Badge
-                      variant="outlined"
+                      variant="outline"
                       className={getDifficultyColor(currentQuestion.difficulty)}
                     >
                       {currentQuestion.difficulty}
@@ -253,7 +253,8 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 {/* Recording Controls */}
                 <div className="flex items-center gap-4 mb-6 p-4 bg-card rounded-lg">
                   <Button
-                    variant={isRecording ? 'destructive' : 'outline'}
+                    variant={isRecording ? 'contained' : 'outlined'}
+                    color={isRecording ? 'error' : 'primary'}
                     size="small"
                     onClick={toggleRecording}
                   >

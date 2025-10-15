@@ -13,6 +13,9 @@
     "node": ">=18.0.0",
     "yarn": ">=4.0.0"
   },
+  "resolutions": {
+    "write-file-atomic": "^6.0.0"
+  },
   "scripts": {
     "prepare": "husky",
     "dev": "cd frontend && yarn dev",

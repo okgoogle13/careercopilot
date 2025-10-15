@@ -82,9 +82,9 @@ runs:
         # Install development tools for testing and linting
         pip install pytest pytest-asyncio black flake8 mypy bandit
 
-        # Handle problematic dependencies separately if they exist
-        echo "🔧 Resolving any dependency conflicts..."
-        pip install "safety==3.2.7" "psutil>=7.0.0" --force-reinstall || echo "Safety and psutil updates not needed for this build"
+        # Note: safety==3.2.7 conflicts with psutil>=7.0.0, so we skip safety for now
+        # The bandit security scanner is used instead for code security analysis
+        echo "✅ Development tools installed successfully"
 
     - name: Install dependencies (dev mode)
       if: inputs.install-mode == 'dev'

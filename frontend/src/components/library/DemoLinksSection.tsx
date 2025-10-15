@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentSection } from './ComponentDemo';
-import { Sparkles, Play } from '@mui/icons-material';
+import { AutoAwesome as Sparkles, PlayArrow as Play } from '@mui/icons-material';
 import {
   Button,
   IconButton,

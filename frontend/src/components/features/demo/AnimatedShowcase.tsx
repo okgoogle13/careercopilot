@@ -1,44 +1,33 @@
-import React, { useState } from 'react';
-import { Label } from '../../ui/label';
 import {
   ArrowLeft,
-  AutoAwesome as Sparkles,
-  PlayArrow as Play,
-  Pause,
-  RotateLeft as RotateCcw,
-} from '@mui/icons-material';
-import {
-  AnimatedModal,
-  AnimatedDropdown,
-  AnimatedTabs,
-  AnimatedProgress,
-  AnimatedNotification,
-  AnimatedButton,
-  ExpandableCard,
-  StaggeredList,
-  LoadingAnimations,
-  AnimatedStatsCard,
-} from './AnimatedComponents';
-import {
-  Star,
-  Person as User,
+  Notifications as Bell,
   Description as FileText,
+  Pause,
+  PlayArrow as Play,
+  RotateLeft as RotateCcw,
+  Settings,
+  Shield,
+  AutoAwesome as Sparkles,
+  Star,
   MyLocation as Target,
   TrendingUp,
-  Settings,
-  Notifications as Bell,
-  Shield,
+  Person as User,
 } from '@mui/icons-material';
+import { Button, Card, CardContent, CardHeader, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Label } from '../../ui/label';
 import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
+  AnimatedButton,
+  AnimatedDropdown,
+  AnimatedModal,
+  AnimatedNotification,
+  AnimatedProgress,
+  AnimatedStatsCard,
+  AnimatedTabs,
+  ExpandableCard,
+  LoadingAnimations,
+  StaggeredList,
+} from './AnimatedComponents';
 
 interface AnimatedShowcaseProps {
   onBack: () => void;
@@ -57,8 +46,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   >([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
+  const [selectedOption, setSelectedOption] = useState('');
 
-  const addNotification = (type: 'success' | 'error' | 'info' | 'warning', mes_age: string) => {
+  const addNotification = (type: 'success' | 'error' | 'info' | 'warning', message: string) => {
     const id = Math.random().toString(36).substr(2, 9);
     setNotifications((prev) => [...prev, { id, type, message }]);
     setTimeout(() => {
@@ -256,7 +246,7 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                       </Button>
                     }
                     items={dropdownItems}
-                    onSelect={(value) => addNotification('info', `Selected: ${value}`)}
+                    onSelect={setSelectedOption}
                   />
                 </CardContent>
               </Card>

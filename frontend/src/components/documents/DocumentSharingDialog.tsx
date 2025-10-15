@@ -88,7 +88,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
 
 
 
-  const getPermissionColor = (permis_ion: PermissionLevel) => {
+  const getPermissionColor = (permission: PermissionLevel) => {
     switch (permission) {
       case 'view':
         return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
@@ -103,11 +103,10 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogHeader>
+        <DialogTitle>Share "{documentTitle}"</DialogTitle>
+      </DialogHeader>
       <DialogContent className="max-w-2xl">
-        <DialogHeader>
-          <DialogTitle>Share "{documentTitle}"</DialogTitle>
-        </DialogHeader>
-
         <div className="space-y-6 py-4">
           {/* Share Link Section */}
           <div className="space-y-3">
@@ -261,11 +260,10 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
             </div>
           </div>
         </div>
-
-        <DialogFooter>
-          <Button onClick={() => onOpenChange(false)}>Done</Button>
-        </DialogFooter>
       </DialogContent>
+      <DialogFooter>
+        <Button onClick={() => onOpenChange(false)}>Done</Button>
+      </DialogFooter>
     </Dialog>
   );
 };

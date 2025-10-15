@@ -1,17 +1,18 @@
 # backend/app/ai/model_dispatcher.py
 
 from typing import Dict, List, Optional
-from .llm_service import get_llm_response
+
 from app.core.loguru_config import get_logger
-import os
+
+from .llm_service import get_llm_response
 
 logger = get_logger(__name__)
 
 # Define models by cost/capability (from cheapest to most expensive)
-MODEL_ULTRAFAST = "gemini-1.5-flash-8b"     # Ultra-fast, minimal cost
-MODEL_FAST = "gemini-1.5-flash"             # Fast, low cost
-MODEL_BALANCED = "gemini-1.5-pro"           # Balanced cost/capability
-MODEL_PREMIUM = "gemini-1.5-pro-002"        # Premium capability
+MODEL_ULTRAFAST = "gemini-1.5-flash-8b"  # Ultra-fast, minimal cost
+MODEL_FAST = "gemini-1.5-flash"  # Fast, low cost
+MODEL_BALANCED = "gemini-1.5-pro"  # Balanced cost/capability
+MODEL_PREMIUM = "gemini-1.5-pro-002"  # Premium capability
 
 # Task complexity mapping
 TASK_COMPLEXITY_MAP = {
@@ -20,19 +21,16 @@ TASK_COMPLEXITY_MAP = {
     "simple_classification": MODEL_ULTRAFAST,
     "basic_formatting": MODEL_ULTRAFAST,
     "spell_check": MODEL_ULTRAFAST,
-
     # Medium complexity tasks
     "resume_parsing": MODEL_FAST,
     "job_matching": MODEL_FAST,
     "skill_assessment": MODEL_FAST,
     "content_summarization": MODEL_FAST,
-
     # Complex tasks - require more sophisticated models
     "cover_letter_generation": MODEL_BALANCED,
     "resume_optimization": MODEL_BALANCED,
     "interview_preparation": MODEL_BALANCED,
     "career_advice": MODEL_BALANCED,
-
     # Premium tasks - highest capability needed
     "complex_reasoning": MODEL_PREMIUM,
     "code_generation": MODEL_PREMIUM,
@@ -42,18 +40,19 @@ TASK_COMPLEXITY_MAP = {
 
 # Cost estimation (tokens per dollar - approximate)
 MODEL_COSTS = {
-    MODEL_ULTRAFAST: {"input": 0.000075, "output": 0.0003},    # Ultra-cheap
-    MODEL_FAST: {"input": 0.00015, "output": 0.0006},          # Low cost
-    MODEL_BALANCED: {"input": 0.00125, "output": 0.005},       # Medium cost
-    MODEL_PREMIUM: {"input": 0.0025, "output": 0.01},          # Premium cost
+    MODEL_ULTRAFAST: {"input": 0.000075, "output": 0.0003},  # Ultra-cheap
+    MODEL_FAST: {"input": 0.00015, "output": 0.0006},  # Low cost
+    MODEL_BALANCED: {"input": 0.00125, "output": 0.005},  # Medium cost
+    MODEL_PREMIUM: {"input": 0.0025, "output": 0.01},  # Premium cost
 }
+
 
 def dispatch_llm_call(
     task_type: str,
     prompt: str,
     force_model: Optional[str] = None,
     temperature: float = 0.5,
-    max_tokens: Optional[int] = None
+    max_tokens: Optional[int] = None,
 ) -> Dict:
     """
     Selects an appropriate LLM based on the task type to optimize cost.
@@ -81,14 +80,14 @@ def dispatch_llm_call(
         task_type=task_type,
         model=selected_model,
         reason=selection_reason,
-        prompt_length=len(prompt)
+        prompt_length=len(prompt),
     )
 
     # Prepare model parameters
     model_params = {
         "model": selected_model,
         "temperature": temperature,
-        "task_type": task_type
+        "task_type": task_type,
     }
 
     if max_tokens:
@@ -102,10 +101,11 @@ def dispatch_llm_call(
     response["model_selection"] = {
         "selected_model": selected_model,
         "task_type": task_type,
-        "selection_reason": selection_reason
+        "selection_reason": selection_reason,
     }
 
     return response
+
 
 def estimate_cost(model: str, input_text: str, output_text: str) -> Dict:
     """
@@ -137,8 +137,9 @@ def estimate_cost(model: str, input_text: str, output_text: str) -> Dict:
         "output_tokens": int(output_tokens),
         "input_cost_usd": round(input_cost, 6),
         "output_cost_usd": round(output_cost, 6),
-        "total_cost_usd": round(total_cost, 6)
+        "total_cost_usd": round(total_cost, 6),
     }
+
 
 def get_model_recommendations(task_types: List[str]) -> Dict:
     """
@@ -166,20 +167,26 @@ def get_model_recommendations(task_types: List[str]) -> Dict:
         premium_cost = estimate_cost(premium_model, sample_prompt, sample_response)
 
         savings = premium_cost["total_cost_usd"] - optimized_cost["total_cost_usd"]
-        savings_percent = (savings / premium_cost["total_cost_usd"]) * 100 if premium_cost["total_cost_usd"] > 0 else 0
+        savings_percent = (
+            (savings / premium_cost["total_cost_usd"]) * 100
+            if premium_cost["total_cost_usd"] > 0
+            else 0
+        )
 
         recommendations[task_type] = {
             "recommended_model": recommended_model,
             "cost_per_call": optimized_cost["total_cost_usd"],
             "savings_vs_premium": savings,
-            "savings_percent": round(savings_percent, 1)
+            "savings_percent": round(savings_percent, 1),
         }
 
         total_optimized_cost += optimized_cost["total_cost_usd"]
         total_premium_cost += premium_cost["total_cost_usd"]
 
     overall_savings = total_premium_cost - total_optimized_cost
-    overall_savings_percent = (overall_savings / total_premium_cost) * 100 if total_premium_cost > 0 else 0
+    overall_savings_percent = (
+        (overall_savings / total_premium_cost) * 100 if total_premium_cost > 0 else 0
+    )
 
     return {
         "task_recommendations": recommendations,
@@ -187,22 +194,32 @@ def get_model_recommendations(task_types: List[str]) -> Dict:
             "total_optimized_cost": round(total_optimized_cost, 6),
             "total_premium_cost": round(total_premium_cost, 6),
             "total_savings": round(overall_savings, 6),
-            "savings_percent": round(overall_savings_percent, 1)
-        }
+            "savings_percent": round(overall_savings_percent, 1),
+        },
     }
+
 
 # Convenience functions for common task types
 def generate_cover_letter(job_description: str, user_profile: str) -> Dict:
     """Generate a cover letter using optimal model selection."""
-    prompt = f"Generate a cover letter for this job:\n{job_description}\n\nUser profile:\n{user_profile}"
+    prompt = (
+        f"Generate a cover letter for this job:\n{job_description}\n\n"
+        f"User profile:\n{user_profile}"
+    )
     return dispatch_llm_call("cover_letter_generation", prompt, temperature=0.7)
+
 
 def optimize_resume(resume_content: str, job_description: str) -> Dict:
     """Optimize resume content using optimal model selection."""
-    prompt = f"Optimize this resume for the job:\n{job_description}\n\nResume:\n{resume_content}"
+    prompt = (
+        f"Optimize this resume for the job:\n{job_description}\n\n" f"Resume:\n{resume_content}"
+    )
     return dispatch_llm_call("resume_optimization", prompt, temperature=0.3)
+
 
 def extract_keywords(job_description: str) -> Dict:
     """Extract keywords using the most cost-effective model."""
-    prompt = f"Extract key skills and requirements from this job description:\n{job_description}"
+    prompt = (
+        f"Extract key skills and requirements from this job description:\n" f"{job_description}"
+    )
     return dispatch_llm_call("keyword_extraction", prompt, temperature=0.1)

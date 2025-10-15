@@ -110,9 +110,7 @@ class TemplateService:
                     else None
                 ),
                 company_context=(
-                    context.company_research
-                    if context and context.company_research
-                    else None
+                    context.company_research if context and context.company_research else None
                 ),
                 custom_data={
                     "template_type": template_type.value,
@@ -132,20 +130,14 @@ class TemplateService:
 
                 # If response looks like a generic fallback, use our enhanced templates instead
                 if "Enhanced AI response for generic" in ai_response:
-                    logger.info(
-                        f"Using enhanced template fallback for {template_type.value}"
-                    )
+                    logger.info(f"Using enhanced template fallback for {template_type.value}")
                     return self._generate_fallback_template(template_type, context)
 
                 # Parse successful AI response
-                return self._parse_template_response(
-                    template_type, ai_response, context
-                )
+                return self._parse_template_response(template_type, ai_response, context)
 
             except Exception as ai_error:
-                logger.info(
-                    f"AI generation failed, using enhanced template fallback: {ai_error}"
-                )
+                logger.info(f"AI generation failed, using enhanced template fallback: {ai_error}")
                 return self._generate_fallback_template(template_type, context)
 
         except Exception as e:
@@ -338,9 +330,7 @@ Format as JSON with: cover_letter_content, placeholders, customization_tips
             elif "SKILL" in match:
                 placeholders[placeholder_key] = "Relevant skill or experience"
             else:
-                placeholders[placeholder_key] = (
-                    f"Customize {match.lower().replace('_', ' ')}"
-                )
+                placeholders[placeholder_key] = f"Customize {match.lower().replace('_', ' ')}"
 
         return placeholders
 
