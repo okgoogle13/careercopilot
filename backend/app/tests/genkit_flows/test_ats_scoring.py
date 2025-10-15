@@ -136,19 +136,31 @@ class TestAtsScoring:
                         mock_placement_result = Mock(suggestions=mock_keyword_placement_suggestions)
 
                         mock_ai_handler.execute_ai_operation.side_effect = [
-                            AIOperationResult(success=True, data=mock_job_requirements, fallback_used=False),
-                            AIOperationResult(success=True, data=mock_resume_entities, fallback_used=False),
-                            AIOperationResult(success=True, data=mock_semantic_result, fallback_used=False),
+                            AIOperationResult(
+                                success=True, data=mock_job_requirements, fallback_used=False
+                            ),
+                            AIOperationResult(
+                                success=True, data=mock_resume_entities, fallback_used=False
+                            ),
+                            AIOperationResult(
+                                success=True, data=mock_semantic_result, fallback_used=False
+                            ),
                             # Keyword matching (local operation)
                             AIOperationResult(
                                 success=True,
-                                data={"score": 75.0, "matchedKeywords": ["Python", "React", "AWS", "Docker"], "missingKeywords": ["Leadership"]},
-                                fallback_used=False
+                                data={
+                                    "score": 75.0,
+                                    "matchedKeywords": ["Python", "React", "AWS", "Docker"],
+                                    "missingKeywords": ["Leadership"],
+                                },
+                                fallback_used=False,
                             ),
                             # Formatting score (local operation)
                             AIOperationResult(success=True, data=100.0, fallback_used=False),
                             # Keyword placement suggestions
-                            AIOperationResult(success=True, data=mock_placement_result, fallback_used=False),
+                            AIOperationResult(
+                                success=True, data=mock_placement_result, fallback_used=False
+                            ),
                         ]
 
                         # Mock the gemini_pro model for any direct calls
@@ -264,13 +276,21 @@ class TestAtsScoring:
 
                     mock_ai_handler.execute_ai_operation.side_effect = [
                         AIOperationResult(success=True, data=minimal_job_reqs, fallback_used=False),
-                        AIOperationResult(success=True, data=minimal_resume_entities, fallback_used=False),
-                        AIOperationResult(success=True, data=mock_semantic_result, fallback_used=False),
+                        AIOperationResult(
+                            success=True, data=minimal_resume_entities, fallback_used=False
+                        ),
+                        AIOperationResult(
+                            success=True, data=mock_semantic_result, fallback_used=False
+                        ),
                         # Keyword matching
                         AIOperationResult(
                             success=True,
-                            data={"score": 80.0, "matchedKeywords": ["Python"], "missingKeywords": []},
-                            fallback_used=False
+                            data={
+                                "score": 80.0,
+                                "matchedKeywords": ["Python"],
+                                "missingKeywords": [],
+                            },
+                            fallback_used=False,
                         ),
                         # Formatting score
                         AIOperationResult(success=True, data=100.0, fallback_used=False),
@@ -312,17 +332,17 @@ class TestAtsScoring:
                 # Keyword matching with profile keywords
                 AIOperationResult(
                     success=True,
-                    data={"score": 85.0, "matchedKeywords": ["Python", "React", "AWS"], "missingKeywords": ["Machine Learning"]},
-                    fallback_used=False
+                    data={
+                        "score": 85.0,
+                        "matchedKeywords": ["Python", "React", "AWS"],
+                        "missingKeywords": ["Machine Learning"],
+                    },
+                    fallback_used=False,
                 ),
                 # Formatting score
                 AIOperationResult(success=True, data=100.0, fallback_used=False),
                 # Keyword placement for missing ML keyword
-                AIOperationResult(
-                    success=True,
-                    data=Mock(suggestions=[]),
-                    fallback_used=False
-                ),
+                AIOperationResult(success=True, data=Mock(suggestions=[]), fallback_used=False),
             ]
 
             profile_keywords = ["Python", "React", "Machine Learning", "AWS"]
