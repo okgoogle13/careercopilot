@@ -34,7 +34,8 @@ RUN pip install --no-cache-dir \
     "mypy>=1.8.0" \
     "flake8>=7.0.0" \
     "bandit>=1.7.6" \
-    "black>=24.0.0"
+    "black>=24.0.0" \
+    "prometheus-client>=0.19.0"
 
 # Copy the rest of the application code
 COPY . .
