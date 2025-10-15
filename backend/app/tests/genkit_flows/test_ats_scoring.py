@@ -71,11 +71,16 @@ class TestAtsScoring:
         """Mock resume entities extraction result."""
         return ResumeEntities(
             skills=["Python", "React", "JavaScript", "Docker", "AWS", "PostgreSQL"],
-            experience_years=5,
-            education_level="Bachelor's",
-            certifications=[],
-            previous_roles=["Senior Software Engineer"],
-            technical_keywords=["Python", "React", "JavaScript", "Docker", "AWS"],
+            experience=[
+                {
+                    "title": "Senior Software Engineer",
+                    "company": "Tech Corp",
+                    "duration": "5 years",
+                }
+            ],
+            education=[
+                {"degree": "Bachelor's", "field": "Computer Science", "institution": "University"}
+            ],
         )
 
     @pytest.fixture
@@ -245,11 +250,8 @@ class TestAtsScoring:
 
                     minimal_resume_entities = ResumeEntities(
                         skills=["Python"],
-                        experience_years=1,
-                        education_level="High School",
-                        certifications=[],
-                        previous_roles=["Junior Developer"],
-                        technical_keywords=["Python"],
+                        experience=[{"title": "Junior Developer", "duration": "1 year"}],
+                        education=[{"degree": "High School"}],
                     )
 
                     mock_ai_handler.execute_ai_operation = AsyncMock()
