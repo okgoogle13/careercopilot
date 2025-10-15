@@ -1,25 +1,16 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
 import {
-  ChevronRight,
-  CheckCircle as CheckCircle2,
-  Cancel as XCircle,
   Error as AlertCircle,
+  KeyboardArrowDown as ArrowDown,
+  KeyboardArrowUp as ArrowUp,
+  CheckCircle as CheckCircle2,
+  ChevronRight,
   Refresh as RefreshCw,
   TrendingUp,
-  KeyboardArrowUp as ArrowUp,
-  KeyboardArrowDown as ArrowDown,
+  Cancel as XCircle,
 } from '@mui/icons-material';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
+import { AnimatePresence, motion } from 'motion/react';
+import React, { useState } from 'react';
 
 // Animated Modal Component
 export function AnimatedModal({
@@ -69,15 +60,14 @@ export function AnimatedModal({
 }
 
 // Animated Dropdown Component
-export function AnimatedDropdown({
-  trigger,
-  items,
-  onSelect,
-}: {
+
+interface AnimatedDropdownProps {
   trigger: React.ReactNode;
-  items: Array<{ label: string; value: string; icon?: React.ReactNode }>;
-  (_onSelect): (value: string) => void;
-}) {
+  items: { label: string; value: string; icon?: React.ReactNode }[];
+  onSelect: (value: string) => void;
+}
+
+export function AnimatedDropdown({ trigger, items, onSelect }: AnimatedDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

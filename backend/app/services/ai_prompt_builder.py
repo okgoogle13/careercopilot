@@ -113,9 +113,13 @@ EXPERTISE AREAS:
         # Add any additional context from PromptContext
         if context:
             if context.job_context:
-                system_context += f"\n\nCURRENT JOB CONTEXT:\n{json.dumps(context.job_context, indent=2)}"
+                system_context += (
+                    f"\n\nCURRENT JOB CONTEXT:\n{json.dumps(context.job_context, indent=2)}"
+                )
             if context.company_context:
-                system_context += f"\n\nCOMPANY CONTEXT:\n{json.dumps(context.company_context, indent=2)}"
+                system_context += (
+                    f"\n\nCOMPANY CONTEXT:\n{json.dumps(context.company_context, indent=2)}"
+                )
             if context.custom_data:
                 system_context += (
                     f"\n\nADDITIONAL DATA:\n{json.dumps(context.custom_data, indent=2)}"
@@ -160,9 +164,7 @@ REQUIREMENTS:
         """
         try:
             # Build standardized prompt
-            final_prompt = self._apply_prompt_template(
-                prompt_type, task_prompt, context
-            )
+            final_prompt = self._apply_prompt_template(prompt_type, task_prompt, context)
 
             # Create AIRequest with proper structure
             ai_request = AIRequest(
@@ -180,12 +182,8 @@ REQUIREMENTS:
                 return response.content
             except Exception as ai_error:
                 # Fallback to enhanced mock responses based on prompt type
-                logger.warning(
-                    f"AI service unavailable, using enhanced mock response: {ai_error}"
-                )
-                return self._generate_fallback_response(
-                    prompt_type, task_prompt, context
-                )
+                logger.warning(f"AI service unavailable, using enhanced mock response: {ai_error}")
+                return self._generate_fallback_response(prompt_type, task_prompt, context)
 
         except Exception as e:
             logger.error(f"AI prompt generation failed: {e}")

@@ -3,11 +3,11 @@ import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import {
   ArrowLeft,
-  Sparkles,
+  AutoAwesome as Sparkles,
   TrendingUp,
-  Target,
-  BookOpen,
-  AlertCircle,
+  GpsFixed as Target,
+  MenuBook as BookOpen,
+  Error as AlertCircle,
 } from '@mui/icons-material';
 import {
   Button,
@@ -184,7 +184,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                     <div className="flex items-center justify-between mb-3">
                       <h4 className="font-medium">{gap.skill}</h4>
                       <div className="flex items-center gap-2">
-                        <Badge variant="outlined" className={getImportanceColor(gap.importance)}>
+                        <Badge variant="outline" className={getImportanceColor(gap.importance)}>
                           {gap.importance} Priority
                         </Badge>
                         <span className="text-sm text-muted-foreground">

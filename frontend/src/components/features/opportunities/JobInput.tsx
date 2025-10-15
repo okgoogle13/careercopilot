@@ -7,7 +7,7 @@ import {
   Link,
   Description as FileText,
   AutorenewRounded as Loader2,
-  ExternalLink,
+  OpenInNew as ExternalLink,
 } from '@mui/icons-material';
 import {
   Button,
@@ -73,7 +73,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
 
         {/* Input Tabs */}
         <Card className="p-8">
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <Tabs value={activeTab} onChange={(_e, value) => setActiveTab(value as string)} className="w-full">
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="url" className="flex items-center gap-2">
                 <Link className="w-4 h-4" />
@@ -85,7 +85,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="url" className="space-y-4">
+            <TabsContent value="url" currentValue={activeTab} className="space-y-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Job Posting URL</label>
                 <div className="relative">
@@ -110,7 +110,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               )}
             </TabsContent>
 
-            <TabsContent value="text" className="space-y-4">
+            <TabsContent value="text" currentValue={activeTab} className="space-y-4">
               <div>
                 <label className="text-sm font-medium mb-2 block">Job Description</label>
                 <Textarea

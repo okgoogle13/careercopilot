@@ -60,34 +60,20 @@ class CoverLetterFormat(str, Enum):
 class CoverLetterSection(BaseModel):
     section_name: str = Field(description="Name of the section")
     content: str = Field(description="Content of the section")
-    personalization_elements: List[str] = Field(
-        description="Personalized elements used"
-    )
+    personalization_elements: List[str] = Field(description="Personalized elements used")
     key_messages: List[str] = Field(description="Main messages conveyed")
-    call_to_action: Optional[str] = Field(
-        description="Any call to action in this section"
-    )
+    call_to_action: Optional[str] = Field(description="Any call to action in this section")
 
 
 class CoverLetterAnalysis(BaseModel):
-    readability_score: int = Field(
-        description="Readability score (0-100)", ge=0, le=100
-    )
-    personalization_score: int = Field(
-        description="Personalization level (0-100)", ge=0, le=100
-    )
-    compelling_score: int = Field(
-        description="How compelling/persuasive (0-100)", ge=0, le=100
-    )
-    keyword_alignment: int = Field(
-        description="Job keyword alignment (0-100)", ge=0, le=100
-    )
+    readability_score: int = Field(description="Readability score (0-100)", ge=0, le=100)
+    personalization_score: int = Field(description="Personalization level (0-100)", ge=0, le=100)
+    compelling_score: int = Field(description="How compelling/persuasive (0-100)", ge=0, le=100)
+    keyword_alignment: int = Field(description="Job keyword alignment (0-100)", ge=0, le=100)
 
     strengths: List[str] = Field(description="Cover letter strengths")
     improvement_areas: List[str] = Field(description="Areas for improvement")
-    tone_assessment: str = Field(
-        description="Overall tone: professional, friendly, formal, etc."
-    )
+    tone_assessment: str = Field(description="Overall tone: professional, friendly, formal, etc.")
     unique_elements: List[str] = Field(description="What makes this letter stand out")
 
 
@@ -98,20 +84,12 @@ class SmartCoverLetter(BaseModel):
     sections: List[CoverLetterSection] = Field(description="Breakdown by sections")
     analysis: CoverLetterAnalysis = Field(description="Quality analysis")
 
-    personalization_notes: List[str] = Field(
-        description="How the letter was personalized"
-    )
+    personalization_notes: List[str] = Field(description="How the letter was personalized")
     key_selling_points: List[str] = Field(description="Main selling points highlighted")
-    company_connections: List[str] = Field(
-        description="Company-specific connections made"
-    )
+    company_connections: List[str] = Field(description="Company-specific connections made")
 
-    alternative_versions: Dict[str, str] = Field(
-        description="Different style/format versions"
-    )
-    follow_up_suggestions: List[str] = Field(
-        description="Follow-up communication suggestions"
-    )
+    alternative_versions: Dict[str, str] = Field(description="Different style/format versions")
+    follow_up_suggestions: List[str] = Field(description="Follow-up communication suggestions")
 
 
 class CompanyResearchInsights(BaseModel):
@@ -121,12 +99,8 @@ class CompanyResearchInsights(BaseModel):
     key_initiatives: List[str] = Field(description="Major projects or initiatives")
     industry_position: str = Field(description="Company's position in industry")
     growth_indicators: List[str] = Field(description="Signs of company growth/success")
-    potential_challenges: List[str] = Field(
-        description="Challenges company may be facing"
-    )
-    connection_opportunities: List[str] = Field(
-        description="Ways to connect with company mission"
-    )
+    potential_challenges: List[str] = Field(description="Challenges company may be facing")
+    connection_opportunities: List[str] = Field(description="Ways to connect with company mission")
 
 
 @genkit_flow(output_schema=SmartCoverLetter)
@@ -156,16 +130,12 @@ def generate_smart_cover_letter(
     try:
         # Input validation
         if not all([candidate_profile, job_description]):
-            raise InputValidationError(
-                "Candidate profile and job description are required"
-            )
+            raise InputValidationError("Candidate profile and job description are required")
 
         # Sanitize inputs
         sanitized_profile = InputSanitizer.sanitize_dict_input(candidate_profile)
         sanitized_job = InputSanitizer.sanitize_text_input(job_description)
-        sanitized_company = (
-            InputSanitizer.sanitize_dict_input(company_info) if company_info else {}
-        )
+        sanitized_company = InputSanitizer.sanitize_dict_input(company_info) if company_info else {}
         sanitized_instructions = (
             InputSanitizer.sanitize_text_input(special_instructions)
             if special_instructions
@@ -278,9 +248,7 @@ def research_company_for_application(
         sanitized_industry = InputSanitizer.sanitize_text_input(industry)
         sanitized_role = InputSanitizer.sanitize_text_input(job_role)
         sanitized_context = (
-            InputSanitizer.sanitize_text_input(additional_context)
-            if additional_context
-            else None
+            InputSanitizer.sanitize_text_input(additional_context) if additional_context else None
         )
 
         prompt = f"""
@@ -373,9 +341,7 @@ class CoverLetterOptimizationResult(BaseModel):
     before_after_comparison: Dict[str, Dict[str, str]] = Field(
         description="Side-by-side comparison"
     )
-    success_probability: int = Field(
-        description="Estimated success probability", ge=0, le=100
-    )
+    success_probability: int = Field(description="Estimated success probability", ge=0, le=100)
 
 
 @genkit_flow(output_schema=CoverLetterOptimizationResult)
@@ -403,9 +369,7 @@ def optimize_existing_cover_letter(
         sanitized_job = InputSanitizer.sanitize_text_input(job_description)
         sanitized_profile = InputSanitizer.sanitize_dict_input(candidate_profile)
         sanitized_insights = (
-            InputSanitizer.sanitize_dict_input(company_insights)
-            if company_insights
-            else {}
+            InputSanitizer.sanitize_dict_input(company_insights) if company_insights else {}
         )
 
         prompt = f"""
@@ -489,20 +453,12 @@ class MultiFormatCoverLetterSuite(BaseModel):
     full_cover_letter: str = Field(description="Traditional full-length cover letter")
     email_version: str = Field(description="Email application version")
     linkedin_message: str = Field(description="LinkedIn connection message")
-    networking_email: str = Field(
-        description="Networking/informational interview email"
-    )
+    networking_email: str = Field(description="Networking/informational interview email")
     follow_up_templates: Dict[str, str] = Field(description="Follow-up email templates")
 
-    format_guidelines: Dict[str, str] = Field(
-        description="Usage guidelines for each format"
-    )
-    personalization_tips: List[str] = Field(
-        description="How to further personalize each version"
-    )
-    timing_recommendations: Dict[str, str] = Field(
-        description="When to use each format"
-    )
+    format_guidelines: Dict[str, str] = Field(description="Usage guidelines for each format")
+    personalization_tips: List[str] = Field(description="How to further personalize each version")
+    timing_recommendations: Dict[str, str] = Field(description="When to use each format")
 
 
 @genkit_flow(output_schema=MultiFormatCoverLetterSuite)
@@ -527,9 +483,7 @@ def create_multi_format_cover_letter_suite(
         sanitized_profile = InputSanitizer.sanitize_dict_input(candidate_profile)
         sanitized_job = InputSanitizer.sanitize_text_input(job_description)
         sanitized_insights = (
-            InputSanitizer.sanitize_dict_input(company_insights)
-            if company_insights
-            else {}
+            InputSanitizer.sanitize_dict_input(company_insights) if company_insights else {}
         )
 
         prompt = f"""

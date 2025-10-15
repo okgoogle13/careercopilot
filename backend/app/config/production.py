@@ -17,18 +17,14 @@ class ProductionConfig:
     ENV = "production"
 
     # Monitoring configuration
-    PROMETHEUS_MULTIPROC_DIR = os.getenv(
-        "PROMETHEUS_MULTIPROC_DIR", "/tmp/prometheus_metrics"
-    )
+    PROMETHEUS_MULTIPROC_DIR = os.getenv("PROMETHEUS_MULTIPROC_DIR", "/tmp/prometheus_metrics")
     METRICS_PORT = int(os.getenv("METRICS_PORT", "8001"))
     ENABLE_METRICS = os.getenv("ENABLE_METRICS", "true").lower() == "true"
     METRICS_PATH = os.getenv("METRICS_PATH", "/metrics")
 
     # NLP Monitoring
     NLP_METRICS_ENABLED = os.getenv("NLP_METRICS_ENABLED", "true").lower() == "true"
-    NLP_METRICS_UPDATE_INTERVAL = int(
-        os.getenv("NLP_METRICS_UPDATE_INTERVAL", "60")
-    )  # seconds
+    NLP_METRICS_UPDATE_INTERVAL = int(os.getenv("NLP_METRICS_UPDATE_INTERVAL", "60"))  # seconds
     NLP_METRICS_RETENTION_DAYS = int(os.getenv("NLP_METRICS_RETENTION_DAYS", "7"))
 
     # Logging configuration
@@ -40,9 +36,7 @@ class ProductionConfig:
     WORKER_TIMEOUT = int(os.getenv("WORKER_TIMEOUT", "120"))  # seconds
 
     # Caching configuration
-    CACHE_TTL = (
-        int(os.getenv("CACHE_TTL_HOURS", "24")) * 3600
-    )  # Convert hours to seconds
+    CACHE_TTL = int(os.getenv("CACHE_TTL_HOURS", "24")) * 3600  # Convert hours to seconds
 
     @classmethod
     def to_dict(cls) -> Dict[str, Any]:

@@ -37,19 +37,33 @@ runs:
       shell: bash
       run: |
         corepack enable
-        corepack prepare yarn@4.9.1 --activate
+        corepack prepare yarn@4.10.2 --activate
+
+    - name: Get Yarn cache directory
+      id: yarn-cache-dir
+      shell: bash
+      run: echo "dir=$(yarn config get cacheFolder)" >> $GITHUB_OUTPUT
+
+    - name: Setup Yarn cache
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.yarn-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
 
     - name: Install dependencies
       shell: bash
       run: |
+        # Install dependencies (lockfile is validated by version control)
         yarn install
         cd functions && npm install
 
     - name: Type check
       if: inputs.run-checks == 'true'
       shell: bash
+      working-directory: frontend
       run: |
-        cd frontend
         echo "🔧 Running TypeScript type check..."
         npx tsc --noEmit --skipLibCheck || echo "⚠️ Type check completed with warnings"
         echo "✅ Type check completed"
@@ -57,47 +71,39 @@ runs:
     - name: Lint
       if: inputs.run-checks == 'true'
       shell: bash
+      working-directory: frontend
       run: |
-        cd frontend
         echo "🔍 Running ESLint..."
-        yarn lint:ci
+        npm run lint:ci
         echo "✅ Linting completed"
 
     - name: Format check
       if: inputs.run-checks == 'true'
       shell: bash
+      working-directory: frontend
       run: |
-        cd frontend
         echo "✨ Checking code formatting..."
-        yarn format --check || echo "⚠️ Format check completed with warnings"
+        npm run format -- --check || echo "⚠️ Format check completed with warnings"
         echo "✅ Format check completed"
 
     - name: Run unit tests
       if: inputs.run-checks == 'true'
       shell: bash
+      working-directory: frontend
       run: |
-        cd frontend
         echo "🧪 Running Jest unit tests..."
-        yarn test:ci
+        npm run test:ci
         echo "✅ Unit tests completed"
 
-    - name: Upload test coverage
-      if: inputs.run-checks == 'true'
-      uses: actions/upload-artifact@v4
-      with:
-        name: frontend-test-coverage
-        path: frontend/coverage/
-        retention-days: 30
-        if-no-files-found: warn
 
     - name: Build
       id: build
       if: inputs.skip-build != 'true'
       shell: bash
+      working-directory: frontend
       run: |
-        cd frontend
         echo "🏗️ Building frontend with Vite..."
-        yarn build
+        npm run build
         echo "success=true" >> $GITHUB_OUTPUT
 
     - name: Verify build output

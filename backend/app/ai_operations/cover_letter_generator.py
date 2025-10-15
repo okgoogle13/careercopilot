@@ -52,13 +52,9 @@ class CoverLetterGenerator:
         try:
             # Input validation
             if not base_profile_data or not isinstance(base_profile_data, dict):
-                raise InputValidationError(
-                    "Base profile data is required and must be a dictionary"
-                )
+                raise InputValidationError("Base profile data is required and must be a dictionary")
             if not job_analysis_data or not isinstance(job_analysis_data, dict):
-                raise InputValidationError(
-                    "Job analysis data is required and must be a dictionary"
-                )
+                raise InputValidationError("Job analysis data is required and must be a dictionary")
 
             # Sanitize inputs
             sanitized_profile = InputSanitizer.sanitize_dict_input(base_profile_data)
@@ -88,11 +84,7 @@ class CoverLetterGenerator:
                         "customization_applied": bool(customization_preferences),
                     }
             else:
-                result_dict = (
-                    result
-                    if isinstance(result, dict)
-                    else {"cover_letter": str(result)}
-                )
+                result_dict = result if isinstance(result, dict) else {"cover_letter": str(result)}
 
             # Add metadata for tracking
             result_dict["metadata"] = {
@@ -114,9 +106,7 @@ class CoverLetterGenerator:
             return result_dict
 
         except Exception as e:
-            logger.error(
-                f"Error in cover letter generation for user {user_id}: {str(e)}"
-            )
+            logger.error(f"Error in cover letter generation for user {user_id}: {str(e)}")
             raise
 
 

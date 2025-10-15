@@ -1,90 +1,65 @@
-import React, { useState } from 'react';
+import Grid from '@/components/ui/GridCompat';
 import {
-  Box,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-  Button,
-  Card,
-  CardContent,
-  CardActions,
-  Avatar,
-  Chip,
-  Stack,
-  IconButton,
-  Menu,
-  MenuItem,
-  Divider,
-  TextField,
-  InputAdornment,
-  FormControl,
-  InputLabel,
-  Select,
-  Checkbox,
-  FormControlLabel,
-  Alert,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  Tabs,
-  Tab,
-  Badge,
-  Tooltip,
-  LinearProgress,
-  Rating,
-  Fab,
-} from '@mui/material';
-import {
-  Search,
-  FilterList,
-  Sort,
+  Analytics,
+  AttachMoney,
   Bookmark,
   BookmarkBorder,
-  Share,
-  MoreVert,
-  LocationOn,
-  Work,
-  Schedule,
-  AttachMoney,
   Business,
-  Person,
-  School,
-  TrendingUp,
-  Notifications,
-  NotificationsActive,
-  Add,
-  Edit,
-  Delete,
-  Visibility,
-  Send as Apply,
-  CheckCircle,
-  AccessTime,
-  Warning,
-  Error,
-  Star,
-  StarBorder,
-  Language,
-  Groups,
-  Computer,
-  Settings,
-  Refresh,
-  CloudUpload,
-  Analytics,
-  Send,
-  OpenInNew,
-  Download,
-  Flag,
-  Info,
   Cancel,
-  AssignmentTurnedIn,
+  CheckCircle,
+  Delete,
+  FilterList,
+  Flag,
+  LocationOn,
+  MoreVert,
+  NotificationsActive,
+  Schedule,
+  Search,
+  Send,
+  Share,
+  Sort,
+  Star,
+  Visibility,
+  Work,
 } from '@mui/icons-material';
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Checkbox,
+  Chip,
+  ChipProps,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Fab,
+  FormControl,
+  FormControlLabel,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  LinearProgress,
+  LinearProgressProps,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Paper,
+  Select,
+  Stack,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
 
 interface JobOpportunity {
   id: string;
@@ -187,7 +162,7 @@ export function OpportunitiesPage({
 
   const handleBookmark = (jobId: string) => {
     setJobs((prev) =>
-      prev.map((job) => (job.id === jobId ? { ...job, i_Bookmarked: !job.isBookmarked } : job))
+      prev.map((job) => (job.id === jobId ? { ...job, isBookmarked: !job.isBookmarked } : job))
     );
     onBookmark?.(jobId);
   };
@@ -272,8 +247,8 @@ export function OpportunitiesPage({
     },
   ]);
 
-  const getStatusColor = (_tatus: string) => {
-    switch (status) {
+  const getStatusColor = (jobStatus: JobOpportunity['applicationStatus']): ChipProps['color'] => {
+    switch (jobStatus) {
       case 'applied':
         return 'info';
       case 'interviewing':
@@ -287,7 +262,7 @@ export function OpportunitiesPage({
     }
   };
 
-  const getUrgencyColor = (urgency: string) => {
+  const getUrgencyColor = (urgency: JobOpportunity['urgency']): ChipProps['color'] => {
     switch (urgency) {
       case 'high':
         return 'error';
@@ -300,7 +275,7 @@ export function OpportunitiesPage({
     }
   };
 
-  const getMatchScoreColor = (_core: number) => {
+  const getMatchScoreColor = (score: number): LinearProgressProps['color'] => {
     if (score >= 90) return 'success';
     if (score >= 75) return 'warning';
     return 'error';
@@ -457,7 +432,7 @@ export function OpportunitiesPage({
 
       {/* Stats Cards */}
       <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="primary.main">
@@ -470,7 +445,7 @@ export function OpportunitiesPage({
           </Card>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="warning.main">
@@ -483,7 +458,7 @@ export function OpportunitiesPage({
           </Card>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="info.main">
@@ -496,7 +471,7 @@ export function OpportunitiesPage({
           </Card>
         </Grid>
 
-        <Grid item xs={6} sm={3}>
+        <Grid xs={6} sm={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent sx={{ textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={600} color="success.main">
@@ -603,7 +578,7 @@ export function OpportunitiesPage({
             ) : (
               <Grid container spacing={3}>
                 {currentJobs.map((job) => (
-                  <Grid item xs={12} md={6} key={job.id}>
+                  <Grid size={{ xs: 12, md: 6 }} key={job.id}>
                     <Card
                       elevation={0}
                       sx={{
@@ -685,7 +660,7 @@ export function OpportunitiesPage({
                           <LinearProgress
                             variant="determinate"
                             value={job.matchScore}
-                            color={getMatchScoreColor(job.matchScore) as any}
+                            color={getMatchScoreColor(job.matchScore)}
                             sx={{ height: 6, borderRadius: 3 }}
                           />
                         </Box>
@@ -706,16 +681,14 @@ export function OpportunitiesPage({
                               <Chip
                                 label={job.applicationStatus}
                                 size="small"
-                                color={
-                                  getStatusColor(job.applicationStatus || 'not-applied') as any
-                                }
+                                color={getStatusColor(job.applicationStatus)}
                                 sx={{ textTransform: 'capitalize' }}
                               />
                             )}
                             <Chip
                               label={job.urgency}
                               size="small"
-                              color={getUrgencyColor(job.urgency) as any}
+                              color={getUrgencyColor(job.urgency)}
                               sx={{ textTransform: 'capitalize' }}
                             />
                           </Stack>
@@ -836,7 +809,7 @@ export function OpportunitiesPage({
         <DialogContent>
           {selectedJob && (
             <Grid container spacing={3}>
-              <Grid item xs={12} md={8}>
+              <Grid size={{ xs: 12, md: 8 }}>
                 <Typography variant="h6" gutterBottom>
                   Job Description
                 </Typography>
@@ -873,7 +846,7 @@ export function OpportunitiesPage({
                 </List>
               </Grid>
 
-              <Grid item xs={12} md={4}>
+              <Grid size={{ xs: 12, md: 4 }}>
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
@@ -958,17 +931,17 @@ export function OpportunitiesPage({
         <DialogTitle>Create Job Alert</DialogTitle>
         <DialogContent>
           <Grid container spacing={2} sx={{ mt: 1 }}>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
                 label="Keywords"
                 placeholder="e.g., React, Product Manager, Designer"
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <TextField fullWidth label="Location" placeholder="e.g., San Francisco, Remote" />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>Job Type</InputLabel>
                 <Select label="Job Type">
@@ -979,13 +952,13 @@ export function OpportunitiesPage({
                 </Select>
               </FormControl>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid size={{ xs: 12, sm: 6 }}>
               <TextField fullWidth label="Min Salary" type="number" placeholder="50000" />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <FormControlLabel control={<Checkbox />} label="Include remote positions" />
             </Grid>
-            <Grid item xs={12}>
+            <Grid size={{ xs: 12 }}>
               <FormControlLabel
                 control={<Checkbox />}
                 label="Email notifications for new matches"
