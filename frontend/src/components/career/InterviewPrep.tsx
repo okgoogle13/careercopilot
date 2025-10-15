@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
 import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Button,
-  TextField,
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  Chip,
-  LinearProgress,
-  Alert,
-  Tabs,
-  Tab,
-  Grid,
-  IconButton,
-} from '@mui/material';
-import {
-  PlayArrow as Play,
-  Square,
-  Refresh as RotateCcw,
-  Lightbulb,
-  ChatBubble as MessageSquare,
-  Schedule as Clock,
-  Star,
   ChevronLeft,
   ChevronRight,
+  Schedule as Clock,
+  Lightbulb,
+  ChatBubble as MessageSquare,
   Mic,
   MicOff,
+  Refresh as RotateCcw,
+  Star,
 } from '@mui/icons-material';
+import {
+  Alert,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  FormControl,
+  Grid,
+  InputLabel,
+  LinearProgress,
+  MenuItem,
+  Select,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
 
 interface InterviewQuestion {
   id: string;
@@ -246,7 +243,7 @@ export function InterviewPrep({
 
       {/* Filters and Progress */}
       <Grid container spacing={3} className="mb-6">
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Category</InputLabel>
             <Select
@@ -263,7 +260,7 @@ export function InterviewPrep({
           </FormControl>
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Difficulty</InputLabel>
             <Select
@@ -280,7 +277,7 @@ export function InterviewPrep({
           </FormControl>
         </Grid>
 
-        <Grid item xs={12} md={4}>
+        <Grid size={{ xs: 12, md: 4 }}>
           <Box className="flex items-center gap-2 h-full">
             <Typography variant="body2" color="text.secondary">
               Progress: {currentQuestionIndex + 1} of {filteredQuestions.length}
@@ -296,7 +293,7 @@ export function InterviewPrep({
 
       <Grid container spacing={6}>
         {/* Question Panel */}
-        <Grid item xs={12} lg={8}>
+        <Grid size={{ xs: 12, lg: 8 }}>
           <Card className="h-full">
             <CardContent className="p-6">
               {/* Question Header */}
@@ -440,7 +437,7 @@ export function InterviewPrep({
         </Grid>
 
         {/* Tips & Guidance Panel */}
-        <Grid item xs={12} lg={4}>
+        <Grid size={{ xs: 12, lg: 4 }}>
           <Card className="h-full">
             <CardContent className="p-6">
               <Tabs

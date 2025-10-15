@@ -25,6 +25,15 @@ class AIErrorType(Enum):
     AUTHENTICATION = "authentication"
     GENERATION_FAILED = "generation_failed"
     UNKNOWN = "unknown"
+    # Document processing errors
+    DOCUMENT_PROCESSING_ERROR = "document_processing_error"
+    API_ERROR = "api_error"
+    PARSE_ERROR = "parse_error"
+    PROCESSING_ERROR = "processing_error"
+    # Model and generation errors
+    MODEL_UNAVAILABLE = "model_unavailable"
+    PROMPT_FORMATTING_ERROR = "prompt_formatting_error"
+    GENERATION_ERROR = "generation_error"
 
 
 @dataclass
@@ -61,11 +70,7 @@ class AIOperationHandler:
         """Classify an error to determine retry strategy."""
         error_str = str(error).lower()
 
-        if (
-            "rate limit" in error_str
-            or "quota" in error_str
-            or "too many requests" in error_str
-        ):
+        if "rate limit" in error_str or "quota" in error_str or "too many requests" in error_str:
             return AIErrorType.RATE_LIMIT
         elif "timeout" in error_str or "deadline" in error_str:
             return AIErrorType.TIMEOUT
@@ -161,9 +166,7 @@ class AIOperationHandler:
                 # Don't retry certain error types
                 if not self.should_retry(error_type):
                     logger.error(f"Non-retryable error: {error_type.value}")
-                    raise AIError(
-                        message=str(e), error_type=error_type, original_error=e
-                    )
+                    raise AIError(message=str(e), error_type=error_type, original_error=e)
 
                 # Don't retry on the last attempt
                 if attempt >= self.retry_config.max_attempts:
@@ -175,17 +178,13 @@ class AIOperationHandler:
                 await asyncio.sleep(delay)
 
         # All attempts failed
-        logger.error(
-            f"AI operation failed after {self.retry_config.max_attempts} attempts"
-        )
+        logger.error(f"AI operation failed after {self.retry_config.max_attempts} attempts")
         raise AIError(
             message=(
                 f"Operation failed after {self.retry_config.max_attempts} attempts: "
                 f"{str(last_error)}"
             ),
-            error_type=(
-                self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN
-            ),
+            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
             original_error=last_error,
         )
 
@@ -220,9 +219,7 @@ class AIOperationHandler:
 
                 if not self.should_retry(error_type):
                     logger.error(f"Non-retryable error: {error_type.value}")
-                    raise AIError(
-                        message=str(e), error_type=error_type, original_error=e
-                    )
+                    raise AIError(message=str(e), error_type=error_type, original_error=e)
 
                 if attempt >= self.retry_config.max_attempts:
                     break
@@ -231,17 +228,13 @@ class AIOperationHandler:
                 logger.info(f"Retrying in {delay:.2f} seconds...")
                 time.sleep(delay)
 
-        logger.error(
-            f"AI operation (sync) failed after {self.retry_config.max_attempts} attempts"
-        )
+        logger.error(f"AI operation (sync) failed after {self.retry_config.max_attempts} attempts")
         raise AIError(
             message=(
                 f"Operation failed after {self.retry_config.max_attempts} attempts: "
                 f"{str(last_error)}"
             ),
-            error_type=(
-                self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN
-            ),
+            error_type=(self.classify_error(last_error) if last_error else AIErrorType.UNKNOWN),
             original_error=last_error,
         )
 
@@ -296,9 +289,7 @@ def validate_ai_response(response: Any, expected_type: type = str) -> Any:
         AIError: If response is invalid
     """
     if response is None:
-        raise AIError(
-            message="AI response is None", error_type=AIErrorType.INVALID_REQUEST
-        )
+        raise AIError(message="AI response is None", error_type=AIErrorType.INVALID_REQUEST)
 
     if expected_type and not isinstance(response, expected_type):
         raise AIError(
@@ -307,9 +298,7 @@ def validate_ai_response(response: Any, expected_type: type = str) -> Any:
         )
 
     if isinstance(response, str) and not response.strip():
-        raise AIError(
-            message="AI response is empty", error_type=AIErrorType.INVALID_REQUEST
-        )
+        raise AIError(message="AI response is empty", error_type=AIErrorType.INVALID_REQUEST)
 
     return response
 

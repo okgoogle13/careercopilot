@@ -22,7 +22,7 @@ export interface TooltipTriggerProps extends React.HTMLAttributes<HTMLElement> {
 export const TooltipTrigger = React.forwardRef<HTMLElement, TooltipTriggerProps>(
   ({ children, asChild, ...props }, ref) => {
     if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children, { ref, ...props });
+      return React.cloneElement(children, { ...props, ref } as any);
     }
 
     return (

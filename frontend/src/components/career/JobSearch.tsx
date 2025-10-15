@@ -249,13 +249,13 @@ export function JobSearch({
       <Grid container spacing={3}>
         {/* Filters Sidebar */}
         {showFilters && (
-          <Grid item xs={12} md={3}>
+          <Grid size={{ xs: 12, md: 3 }}>
             <FilterPanel onFiltersChange={handleFiltersChange} onReset={() => setFilters(null)} />
           </Grid>
         )}
 
         {/* Main Content */}
-        <Grid item xs={12} md={showFilters ? 9 : 12}>
+        <Grid size={{ xs: 12, md: showFilters ? 9 : 12 }}>
           {/* Controls */}
           <Paper className="p-4 mb-6">
             <Box className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
@@ -326,13 +326,7 @@ export function JobSearch({
             <>
               <Grid container spacing={3}>
                 {currentJobs.map((job) => (
-                  <Grid
-                    item
-                    xs={12}
-                    md={viewMode === 'grid' ? 6 : 12}
-                    lg={viewMode === 'grid' ? 4 : 12}
-                    key={job.id}
-                  >
+                  <Grid size={{ xs: 12, md: viewMode === 'grid' ? 6 : 12, lg: viewMode === 'grid' ? 4 : 12 }} key={job.id}>
                     <JobCard
                       {...job}
                       onBookmark={handleBookmark}

@@ -75,7 +75,7 @@ export function DocumentComparison({
 }: DocumentComparisonProps) {
   const [showFullContent, setShowFullContent] = useState(false);
 
-  const getHighlightedContent = (content: string[], i_Left: boolean) => {
+  const getHighlightedContent = (content: string[], isLeft: boolean) => {
     if (!highlightDifferences) return content;
 
     const otherContent = isLeft ? rightDocument?.content || [] : leftDocument?.content || [];

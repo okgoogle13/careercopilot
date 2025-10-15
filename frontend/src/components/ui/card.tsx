@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 
 type CardVariant = 'elevation' | 'outlined' | 'selected' | 'interactive';
 
-interface CardProps extends Omit<MuiCardProps, 'variant'> {
+export interface CardProps extends Omit<MuiCardProps, 'variant'> {
   variant?: CardVariant;
   children?: React.ReactNode;
 }

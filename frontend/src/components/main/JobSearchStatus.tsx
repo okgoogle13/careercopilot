@@ -1,14 +1,13 @@
-import React from 'react';
-import { Box, Typography, Grid } from '@mui/material';
-import { StatCard } from '../ui/StatCard';
 import {
-  Send,
+  AccessTime,
   CalendarMonth,
   EmojiEvents,
   GpsFixed,
-  AccessTime,
+  Send,
   Visibility,
 } from '@mui/icons-material';
+import { Box, Grid, Typography } from '@mui/material';
+import { StatCard } from '../ui/StatCard';
 
 interface JobSearchStatusProps {
   stats?: {
@@ -54,7 +53,7 @@ export function JobSearchStatus({
 
       <Grid container spacing={3}>
         {/* Applications Sent */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <StatCard
             title="Applications Sent"
             value={stats.applicationsSent}
@@ -66,7 +65,7 @@ export function JobSearchStatus({
         </Grid>
 
         {/* Interviews */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <StatCard
             title="Interviews"
             value={stats.interviews}
@@ -78,7 +77,7 @@ export function JobSearchStatus({
         </Grid>
 
         {/* Offers */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <StatCard
             title="Offers Received"
             value={stats.offers}
@@ -90,7 +89,7 @@ export function JobSearchStatus({
         </Grid>
 
         {/* Response Rate */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <StatCard
             title="Response Rate"
             value={`${stats.responseRate}%`}
@@ -100,7 +99,7 @@ export function JobSearchStatus({
         </Grid>
 
         {/* Average Response Time */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <StatCard
             title="Avg Response Time"
             value={`${stats.avgResponseTime} days`}
@@ -110,7 +109,7 @@ export function JobSearchStatus({
         </Grid>
 
         {/* Profile Views */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid size={{ xs: 12, sm: 6, md: 4 }}>
           <StatCard
             title="Profile Views"
             value={stats.profileViews || 0}

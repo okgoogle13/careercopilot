@@ -3,12 +3,12 @@ import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import {
   ArrowLeft,
-  Sparkles,
-  MapPin,
-  DollarSign,
-  Clock,
-  ExternalLink,
-  Heart,
+  AutoAwesome as Sparkles,
+  LocationOn as MapPin,
+  AttachMoney as DollarSign,
+  Schedule as Clock,
+  OpenInNew as ExternalLink,
+  Favorite as Heart,
   Star,
 } from '@mui/icons-material';
 import {

@@ -16,6 +16,7 @@ from app.genkit_flows.career_application_workflow import (
 from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
 from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
 from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 # Import middleware for authentication (if available)
@@ -31,9 +32,7 @@ router = APIRouter()
 class GenerateApplicationRequest(BaseModel):
     """Request model for application package generation"""
 
-    job_description: str = Field(
-        description="Complete job description/posting text", min_length=50
-    )
+    job_description: str = Field(description="Complete job description/posting text", min_length=50)
     user_profile: Dict = Field(
         description="Comprehensive user profile data including resume content",
         min_items=1,
@@ -44,9 +43,7 @@ class GenerateApplicationResponse(BaseModel):
     """Response model for application package generation"""
 
     success: bool = Field(description="Whether the generation was successful")
-    data: Optional[ApplicationPackageResult] = Field(
-        description="Generated application package"
-    )
+    data: Optional[ApplicationPackageResult] = Field(description="Generated application package")
     message: str = Field(description="Success or error message")
     processing_time_seconds: float = Field(description="Total processing time")
 
@@ -305,15 +302,16 @@ async def workflow_health_check():
     description="Get the status of a running or completed workflow (future enhancement)",
 )
 async def get_workflow_status(workflow_id: str):
-    """
+    """Get the status of a workflow by ID.
+
     Get the status of a workflow by ID.
 
     This is a placeholder for future implementation of async workflow tracking.
     Currently returns a not implemented response.
     """
-    raise HTTPException(
+    return JSONResponse(
         status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="Workflow status tracking not yet implemented",
+        content={"detail": "Workflow status tracking not yet implemented"},
     )
 
 

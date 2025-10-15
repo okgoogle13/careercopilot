@@ -1,0 +1,10 @@
+# Use the production image as a base
+FROM backend-app:latest as test-base
+
+# Install test dependencies
+WORKDIR /app
+COPY ./app/requirements-test.txt .
+RUN pip install --no-cache-dir -r requirements-test.txt
+
+# Copy test files into the container
+COPY ./app/tests ./app/tests

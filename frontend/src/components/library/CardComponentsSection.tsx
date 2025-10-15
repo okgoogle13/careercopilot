@@ -3,7 +3,7 @@ import { Badge } from '../ui/badge';
 import { LoadingProfileCard } from '../features/common/LoadingCard';
 import { ErrorCard, ErrorProfileCard } from '../features/common/ErrorCard';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
-import { Heart } from '@mui/icons-material';
+import { Favorite as Heart } from '@mui/icons-material';
 import { Button, IconButton, Typography, Box } from '@mui/material';
 import {
   Card,
@@ -187,7 +187,7 @@ export function CardComponentsSection() {
                     {profile.lastUpdated || 'Click to create'}
                   </span>
                   {selectedCard === profile.id && (
-                    <Badge variant="elevation" className="bg-primary">
+                    <Badge variant="default" className="bg-primary">
                       Selected
                     </Badge>
                   )}

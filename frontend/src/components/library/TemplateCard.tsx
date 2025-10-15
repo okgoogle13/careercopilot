@@ -35,7 +35,7 @@ export function TemplateCard({
 }: TemplateCardProps) {
   const [isHovered, setIsHovered] = useState(false);
 
-  const getScoreColor = (_core: number) => {
+  const getScoreColor = (score: number) => {
     if (score >= 95) return 'text-accent-green';
     if (score >= 90) return 'text-brand-light';
     if (score >= 85) return 'text-accent-orange';
@@ -126,7 +126,7 @@ export function TemplateCard({
             {best_for_tags.slice(0, 3).map((tag, index) => (
               <Badge
                 key={index}
-                variant="outlined"
+                variant="outline"
                 className="text-xs border-brand-primary/30 text-content-secondary hover:border-brand-primary hover:text-brand-light transition-colors px-2 py-1"
               >
                 {tag}
@@ -134,7 +134,7 @@ export function TemplateCard({
             ))}
             {best_for_tags.length > 3 && (
               <Badge
-                variant="outlined"
+                variant="outline"
                 className="text-xs border-brand-primary/30 text-content-secondary px-2 py-1"
               >
                 +{best_for_tags.length - 3}

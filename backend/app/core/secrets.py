@@ -20,9 +20,7 @@ def _get_secret_manager_client():
         credentials_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS_JSON")
         if credentials_json:
             credentials_dict = json.loads(credentials_json)
-            credentials = service_account.Credentials.from_service_account_info(
-                credentials_dict
-            )
+            credentials = service_account.Credentials.from_service_account_info(credentials_dict)
             return secretmanager.SecretManagerServiceClient(credentials=credentials)
         else:
             # Check if credentials file exists before trying default
@@ -127,9 +125,7 @@ def get_app_secret(secret_name: str, version: str = "latest") -> str:
 
     if client:
         try:
-            secret_path = (
-                f"projects/{GCP_PROJECT_ID}/secrets/{secret_name}/versions/{version}"
-            )
+            secret_path = f"projects/{GCP_PROJECT_ID}/secrets/{secret_name}/versions/{version}"
             response = client.access_secret_version(request={"name": secret_path})
             secret_value = response.payload.data.decode("UTF-8")
             logger.info(f"Successfully retrieved secret: {secret_name}")
@@ -145,9 +141,7 @@ def get_app_secret(secret_name: str, version: str = "latest") -> str:
         logger.info(f"Using environment fallback for {secret_name}")
         return fallback_value
     else:
-        raise Exception(
-            f"Secret {secret_name} not found in Secret Manager or environment"
-        )
+        raise Exception(f"Secret {secret_name} not found in Secret Manager or environment")
 
 
 def get_database_config() -> dict:
@@ -155,26 +149,18 @@ def get_database_config() -> dict:
     return {
         "host": get_app_secret("db-host") if _secret_exists("db-host") else "postgres",
         "port": int(get_app_secret("db-port") if _secret_exists("db-port") else "5432"),
-        "database": (
-            get_app_secret("db-name") if _secret_exists("db-name") else "careercopilot"
-        ),
-        "username": (
-            get_app_secret("db-user") if _secret_exists("db-user") else "careercopilot"
-        ),
+        "database": (get_app_secret("db-name") if _secret_exists("db-name") else "careercopilot"),
+        "username": (get_app_secret("db-user") if _secret_exists("db-user") else "careercopilot"),
         "password": get_app_secret("db-password"),
     }
 
 
 def get_redis_config() -> dict:
     """Get Redis configuration from secrets."""
-    password = (
-        get_app_secret("redis-password") if _secret_exists("redis-password") else None
-    )
+    password = get_app_secret("redis-password") if _secret_exists("redis-password") else None
     return {
         "password": password,
-        "url": (
-            f"redis://:{password}@redis:6379/0" if password else "redis://redis:6379/0"
-        ),
+        "url": (f"redis://:{password}@redis:6379/0" if password else "redis://redis:6379/0"),
     }
 
 
@@ -185,9 +171,7 @@ def get_ai_api_keys() -> dict:
         "anthropic": get_app_secret("anthropic-api-key"),
         "gemini": get_app_secret("gemini-api-key"),
         "perplexity": (
-            get_app_secret("perplexity-api-key")
-            if _secret_exists("perplexity-api-key")
-            else None
+            get_app_secret("perplexity-api-key") if _secret_exists("perplexity-api-key") else None
         ),
     }
 
