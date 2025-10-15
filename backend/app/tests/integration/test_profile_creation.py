@@ -33,10 +33,16 @@ class TestProfileCreation:
         os.environ["GCLOUD_PROJECT"] = "careercopilot-test"
 
         # Initialize Firebase Admin SDK with emulator configuration
+        app = None
         try:
-            # Try to get existing app
-            app = firebase_admin.get_app("test-app")
-        except ValueError:
+            # Try to get existing app - check if any app exists first
+            apps = firebase_admin._apps
+            if "test-app" in apps:
+                app = firebase_admin.get_app("test-app")
+        except (ValueError, KeyError):
+            pass
+
+        if app is None:
             # Initialize new app if it doesn't exist
             cred = credentials.Certificate(
                 {
