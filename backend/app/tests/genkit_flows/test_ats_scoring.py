@@ -90,9 +90,8 @@ class TestAtsScoring:
         return [
             KeywordPlacementSuggestion(
                 keyword="Machine Learning",
-                suggested_placement="skills",
-                context="Consider adding 'Machine Learning' to your skills section",
-                priority="medium",
+                suggested_location="In the skills section",
+                example_sentence="Consider adding 'Machine Learning' to your technical skills: Python, React, JavaScript, Machine Learning, Docker, AWS",
             )
         ]
 
