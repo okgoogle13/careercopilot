@@ -71,7 +71,7 @@ class WorkflowResult(BaseModel):
 
 @genkit_flow(output_schema=WorkflowResult)
 @with_ai_error_handling()
-def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
+async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
     """
     Proactive workflow that scans emails for job opportunities, ranks them using
     advanced matching, and creates calendar tasks for high-scoring matches.

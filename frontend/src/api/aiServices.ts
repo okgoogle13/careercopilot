@@ -161,7 +161,7 @@ export async function detectKscCriteria(jobDescription: string): Promise<KscCrit
 export async function generateSingleKscResponse(
   criterion: string,
   jobDescription: string,
-  userProfile?: any
+  userProfile?: Record<string, unknown>
 ): Promise<string> {
   try {
     if (!criterion || criterion.trim().length === 0) {
@@ -239,12 +239,12 @@ export async function generateCoverLetter(jobDescription: string, tone: string):
  *
  * @param jobDescription - The job description text to tailor the resume to
  * @param userProfileId - The user's profile ID for personalization
- * @returns Promise<any> - Generated resume data
+ * @returns Promise<unknown> - Generated resume data
  */
 export async function generateTailoredResume(
   jobDescription: string,
   userProfileId: string
-): Promise<any> {
+): Promise<unknown> {
   try {
     if (!jobDescription || jobDescription.trim().length === 0) {
       throw new Error('Job description is required');
@@ -259,7 +259,7 @@ export async function generateTailoredResume(
       userProfileId: userProfileId.trim(),
     };
 
-    const response = await apiClient.post<any>('/resumes/tailored', requestBody);
+    const response = await apiClient.post<unknown>('/resumes/tailored', requestBody);
 
     return response;
   } catch (error) {
@@ -276,7 +276,7 @@ export async function generateTailoredResume(
 // Types for Application Package API
 export interface ApplicationPackageRequest {
   job_description: string;
-  user_profile: any;
+  user_profile: Record<string, unknown>;
 }
 
 export interface TailoredResumeResult {
@@ -299,7 +299,7 @@ export interface SmartCoverLetter {
 }
 
 export interface KSCResponsesResult {
-  generated_responses: Array<Record<string, any>>;
+  generated_responses: Array<Record<string, unknown>>;
   total_criteria_addressed: number;
   coverage_completeness: string;
   response_quality_score: number;
@@ -452,13 +452,13 @@ export async function scanInboxForOpportunities(): Promise<EmailScanResponse> {
  * @param templateId - The ID of the selected template
  * @param userData - Optional user data for personalization
  * @param jobDescription - Optional job description for tailoring
- * @returns Promise<any> - Template selection response with generation details
+ * @returns Promise<unknown> - Template selection response with generation details
  */
 export async function selectTemplate(
   templateId: string,
-  userData?: any,
+  userData?: Record<string, unknown>,
   jobDescription?: string
-): Promise<any> {
+): Promise<unknown> {
   try {
     if (!templateId || templateId.trim().length === 0) {
       throw new Error('Template ID is required');
@@ -470,7 +470,7 @@ export async function selectTemplate(
       jobDescription: jobDescription || '',
     };
 
-    const response = await apiClient.post<any>('/templates/select', requestBody);
+    const response = await apiClient.post<unknown>('/templates/select', requestBody);
 
     return response;
   } catch (error) {
@@ -487,15 +487,15 @@ export async function selectTemplate(
  * Get document preview for a template
  *
  * @param templateId - The ID of the template to preview
- * @returns Promise<any> - Document preview data
+ * @returns Promise<unknown> - Document preview data
  */
-export async function getDocumentPreview(templateId: string): Promise<any> {
+export async function getDocumentPreview(templateId: string): Promise<unknown> {
   try {
     if (!templateId || templateId.trim().length === 0) {
       throw new Error('Template ID is required');
     }
 
-    const response = await apiClient.get<any>(`/documents/preview/${templateId}`);
+    const response = await apiClient.get<unknown>(`/documents/preview/${templateId}`);
 
     return response;
   } catch (error) {
