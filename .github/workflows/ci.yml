@@ -205,11 +205,12 @@ jobs:
 
       - name: Copy coverage report from container
         if: matrix.test-group == 'tests'
+        continue-on-error: true
         run: |
           # Create a dummy container to copy artifacts from the test image
           CONTAINER_ID=$(docker create backend-test:latest)
-          docker cp $CONTAINER_ID:/app/htmlcov ./backend/htmlcov
-          docker cp $CONTAINER_ID:/app/coverage.xml ./backend/coverage.xml
+          docker cp $CONTAINER_ID:/app/htmlcov ./backend/htmlcov || echo "⚠️ No htmlcov directory"
+          docker cp $CONTAINER_ID:/app/coverage.xml ./backend/coverage.xml || echo "⚠️ No coverage.xml file"
           docker rm $CONTAINER_ID
 
       - name: Upload test coverage
