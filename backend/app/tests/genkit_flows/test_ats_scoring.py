@@ -61,11 +61,9 @@ class TestAtsScoring:
     def mock_job_requirements(self) -> JobRequirements:
         """Mock job requirements extraction result."""
         return JobRequirements(
-            hard_requirements=["Python", "React", "Bachelor's degree"],
-            soft_requirements=["Leadership", "Communication", "AWS"],
-            keywords=["Python", "React", "JavaScript", "AWS", "Docker", "PostgreSQL"],
-            seniority_level="Senior",
-            role_category="Software Engineer",
+            requiredSkills=["Python", "React", "Bachelor's degree", "AWS"],
+            preferredSkills=["Leadership", "Communication", "Docker", "PostgreSQL"],
+            experienceLevel="Senior",
         )
 
     @pytest.fixture
@@ -240,11 +238,9 @@ class TestAtsScoring:
                 with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
                     # Minimal mock responses
                     minimal_job_reqs = JobRequirements(
-                        hard_requirements=["Python"],
-                        soft_requirements=[],
-                        keywords=["Python"],
-                        seniority_level="Junior",
-                        role_category="Developer",
+                        requiredSkills=["Python"],
+                        preferredSkills=[],
+                        experienceLevel="Junior",
                     )
 
                     minimal_resume_entities = ResumeEntities(
