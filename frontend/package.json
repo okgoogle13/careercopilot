@@ -16,7 +16,8 @@
     "lint:ci": "eslint src --max-warnings=350",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "clean": "rm -rf node_modules dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
