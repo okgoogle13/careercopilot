@@ -9,11 +9,14 @@ import json
 import os
 
 import pytest
+
 # Note: gemini_pro import removed as it no longer exists in cover_letter_generator
 # from app.genkit_flows.cover_letter_generator import gemini_pro
 
 # Skip entire test class until gemini_pro integration is restored
-pytestmark = pytest.mark.skip(reason="gemini_pro model removed from cover_letter_generator - tests need refactoring")
+pytestmark = pytest.mark.skip(
+    reason="gemini_pro model removed from cover_letter_generator - tests need refactoring"
+)
 
 
 class TestCoverLetterOutputValidation:
