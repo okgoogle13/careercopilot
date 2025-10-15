@@ -4,7 +4,7 @@ from fastapi import APIRouter, Body, Depends, HTTPException
 from pydantic import BaseModel
 
 from app.core.dependencies import User, get_current_user
-from app.genkit_flows.advanced_job_matching import analyze_job_compatibility
+from app.genkit_flows.advanced_job_matching import analyze_job_match_detailed
 from app.genkit_flows.ats_scoring import AtsResult, atsScoring
 from app.genkit_flows.flow_decorator import run_flow_async
 from app.genkit_flows.resume_intelligence_pipeline import (
@@ -143,12 +143,9 @@ async def analyze_job_match(
     """
     try:
         result = await run_flow_async(
-            analyze_job_compatibility,
-            {
-                "candidate_profile": request.candidate_profile,
-                "job_description": request.job_description,
-                "matching_preferences": request.matching_preferences,
-            },
+            analyze_job_match_detailed,
+            request.job_description,
+            request.candidate_profile,
         )
         return result
     except Exception as e:

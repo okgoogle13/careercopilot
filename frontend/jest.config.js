@@ -33,7 +33,7 @@ module.exports = {
     ],
   },
   transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
+    'node_modules/(?!(@mui|@babel|@emotion)/)',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
