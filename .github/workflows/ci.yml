@@ -195,15 +195,13 @@ jobs:
         if: matrix.test-group == 'tests'
         run: |
           echo "🧪 Running all backend tests inside the container..."
-          docker run --network=container:postgres backend-test:latest \
-            python -m pytest app/tests/ -v --tb=short --maxfail=5 --disable-warnings \
-              --cov=app --cov-report=xml --cov-report=html:htmlcov
-        env:
-          DATABASE_URL: postgresql://test:test@localhost:5432/test_db
-          ENVIRONMENT: test
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY_STAGING }}
-          TESTCONTAINERS_HOST_OVERRIDE: host.testcontainers.internal
-          TESTCONTAINERS_RYUK_DISABLED: true
+          docker run --network="host" \
+            -e DATABASE_URL="postgresql://test:test@localhost:5432/test_db" \
+            -e ENVIRONMENT="test" \
+            -e GEMINI_API_KEY="${{ secrets.GEMINI_API_KEY_STAGING }}" \
+            -e TESTCONTAINERS_HOST_OVERRIDE="host.testcontainers.internal" \
+            -e TESTCONTAINERS_RYUK_DISABLED="true" \
+            backend-test:latest
 
       - name: Copy coverage report from container
         if: matrix.test-group == 'tests'

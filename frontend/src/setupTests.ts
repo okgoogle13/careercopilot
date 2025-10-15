@@ -1,22 +1,24 @@
 import '@testing-library/jest-dom';
 import { configure } from '@testing-library/react';
-import { TextEncoder, TextDecoder } from 'util';
+import { TextEncoder as NodeTextEncoder, TextDecoder as NodeTextDecoder } from 'util';
 
 // Configure test environment
 configure({ asyncUtilTimeout: 10000 });
 
-// Add missing globals
+// Add missing globals with proper typing
 if (typeof global.TextEncoder === 'undefined') {
-  global.TextEncoder = TextEncoder;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).TextEncoder = NodeTextEncoder;
 }
 if (typeof global.TextDecoder === 'undefined') {
-  global.TextDecoder = TextDecoder as any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (global as any).TextDecoder = NodeTextDecoder;
 }
 
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
-  value: jest.fn().mockImplementation((query) => ({
+  value: jest.fn().mockImplementation((query: string) => ({
     matches: false,
     media: query,
     onchange: null,
@@ -37,4 +39,5 @@ class ResizeObserver {
 
 window.ResizeObserver = ResizeObserver;
 
-global.IS_REACT_ACT_ENVIRONMENT = true;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).IS_REACT_ACT_ENVIRONMENT = true;
