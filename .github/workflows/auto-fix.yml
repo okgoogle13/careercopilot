@@ -158,13 +158,12 @@ jobs:
         if: steps.changes.outputs.frontend_changes == 'true'
         run: |
           echo "⚛️ Applying Frontend formatting fixes..."
-          cd frontend
 
-          # Apply ESLint fixes
-          yarn eslint src/ --ext .js,.jsx,.ts,.tsx --fix --max-warnings 100 || true
+          # Apply ESLint fixes (run from root using yarn workspace)
+          yarn workspace careercopilot-frontend run eslint src/ --ext .js,.jsx,.ts,.tsx --fix --max-warnings 100 || true
 
-          # Apply Prettier formatting
-          yarn prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,md}"
+          # Apply Prettier formatting (run from root using yarn workspace)
+          yarn workspace careercopilot-frontend run prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,md}"
 
           echo "✅ Frontend formatting complete"
 

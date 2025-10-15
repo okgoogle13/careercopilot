@@ -137,8 +137,9 @@ class TestPromptService:
         instruction = service.get_length_instruction("concise")
         assert instruction == "Keep it short (100-200 words)"
 
+        # Nonexistent length type falls back to "standard" default
         instruction = service.get_length_instruction("nonexistent")
-        assert instruction == ""
+        assert instruction == "Standard length (300-400 words)"
 
     def test_validate_template_parameters(self, temp_prompts_dir):
         """Test parameter validation"""
