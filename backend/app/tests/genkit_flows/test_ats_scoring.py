@@ -163,92 +163,86 @@ class TestAtsScoring:
                             ),
                         ]
 
-                        # Mock the gemini_pro model for any direct calls
-                        with patch("app.genkit_flows.ats_scoring.gemini_pro") as mock_gemini:
-                            mock_response = Mock()
-                            mock_response.text.return_value = "Mocked AI response"
-                            mock_gemini.generate.return_value = mock_response
+                        # Execute the flow
+                        result = await atsScoring(
+                            resumeText=sample_resume_text,
+                            jobDescription=sample_job_description,
+                            profileKeywords=["Python", "React"],
+                            user_id="test_user",
+                        )
 
-                            # Execute the flow
-                            result = await atsScoring(
-                                resumeText=sample_resume_text,
-                                jobDescription=sample_job_description,
-                                profileKeywords=["Python", "React"],
-                                user_id="test_user",
-                            )
+                        # Assert that result is an AtsResult instance
+                        assert isinstance(
+                            result, AtsResult
+                        ), f"Expected AtsResult, got {type(result)}"
 
-                            # Assert that result is an AtsResult instance
+                        # Assert required fields are present
+                        assert hasattr(
+                            result, "overallScore"
+                        ), "Result should have overallScore"
+                        assert hasattr(result, "breakdown"), "Result should have breakdown"
+                        assert hasattr(
+                            result, "keywordMatches"
+                        ), "Result should have keywordMatches"
+                        assert hasattr(
+                            result, "recommendations"
+                        ), "Result should have recommendations"
+
+                        # Assert score is a valid number between 0-100
+                        assert isinstance(
+                            result.overallScore, (int, float)
+                        ), "overallScore should be numeric"
+                        assert (
+                            0 <= result.overallScore <= 100
+                        ), f"overallScore should be 0-100, got {result.overallScore}"
+
+                        # Assert breakdown has expected structure
+                        assert isinstance(
+                            result.breakdown, ScoreBreakdown
+                        ), "breakdown should be ScoreBreakdown instance"
+                        assert hasattr(
+                            result.breakdown, "keywordScore"
+                        ), "breakdown should have keywordScore"
+                        assert hasattr(
+                            result.breakdown, "semanticScore"
+                        ), "breakdown should have semanticScore"
+                        assert hasattr(
+                            result.breakdown, "formattingScore"
+                        ), "breakdown should have formattingScore"
+
+                        # Assert keywords are lists of strings
+                        assert isinstance(
+                            result.keywordMatches.matched, list
+                        ), "keywordMatches.matched should be a list"
+                        assert isinstance(
+                            result.keywordMatches.missing, list
+                        ), "keywordMatches.missing should be a list"
+
+                        for keyword in result.keywordMatches.matched:
                             assert isinstance(
-                                result, AtsResult
-                            ), f"Expected AtsResult, got {type(result)}"
+                                keyword, str
+                            ), f"matched keywords should contain strings, got {type(keyword)}"
 
-                            # Assert required fields are present
-                            assert hasattr(
-                                result, "overallScore"
-                            ), "Result should have overallScore"
-                            assert hasattr(result, "breakdown"), "Result should have breakdown"
-                            assert hasattr(
-                                result, "keywordMatches"
-                            ), "Result should have keywordMatches"
-                            assert hasattr(
-                                result, "recommendations"
-                            ), "Result should have recommendations"
-
-                            # Assert score is a valid number between 0-100
+                        for keyword in result.keywordMatches.missing:
                             assert isinstance(
-                                result.overallScore, (int, float)
-                            ), "overallScore should be numeric"
+                                keyword, str
+                            ), f"missing keywords should contain strings, got {type(keyword)}"
+
+                        # Assert recommendations is a list of strings
+                        assert isinstance(
+                            result.recommendations, list
+                        ), "recommendations should be a list"
+                        assert (
+                            len(result.recommendations) > 0
+                        ), "recommendations should not be empty"
+
+                        for recommendation in result.recommendations:
+                            assert isinstance(
+                                recommendation, str
+                            ), f"recommendations should contain strings, got {type(recommendation)}"
                             assert (
-                                0 <= result.overallScore <= 100
-                            ), f"overallScore should be 0-100, got {result.overallScore}"
-
-                            # Assert breakdown has expected structure
-                            assert isinstance(
-                                result.breakdown, ScoreBreakdown
-                            ), "breakdown should be ScoreBreakdown instance"
-                            assert hasattr(
-                                result.breakdown, "keywordScore"
-                            ), "breakdown should have keywordScore"
-                            assert hasattr(
-                                result.breakdown, "semanticScore"
-                            ), "breakdown should have semanticScore"
-                            assert hasattr(
-                                result.breakdown, "formattingScore"
-                            ), "breakdown should have formattingScore"
-
-                            # Assert keywords are lists of strings
-                            assert isinstance(
-                                result.keywordMatches.matched, list
-                            ), "keywordMatches.matched should be a list"
-                            assert isinstance(
-                                result.keywordMatches.missing, list
-                            ), "keywordMatches.missing should be a list"
-
-                            for keyword in result.keywordMatches.matched:
-                                assert isinstance(
-                                    keyword, str
-                                ), f"matched keywords should contain strings, got {type(keyword)}"
-
-                            for keyword in result.keywordMatches.missing:
-                                assert isinstance(
-                                    keyword, str
-                                ), f"missing keywords should contain strings, got {type(keyword)}"
-
-                            # Assert recommendations is a list of strings
-                            assert isinstance(
-                                result.recommendations, list
-                            ), "recommendations should be a list"
-                            assert (
-                                len(result.recommendations) > 0
-                            ), "recommendations should not be empty"
-
-                            for recommendation in result.recommendations:
-                                assert isinstance(
-                                    recommendation, str
-                                ), f"recommendations should contain strings, got {type(recommendation)}"
-                                assert (
-                                    len(recommendation.strip()) > 0
-                                ), "recommendations should not be empty strings"
+                                len(recommendation.strip()) > 0
+                            ), "recommendations should not be empty strings"
 
     @pytest.mark.asyncio
     async def test_ats_scoring_with_minimal_input(self):
