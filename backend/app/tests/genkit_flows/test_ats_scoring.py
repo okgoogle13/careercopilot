@@ -116,12 +116,8 @@ class TestAtsScoring:
         """
 
         # Mock the supporting flow functions
-        with patch(
-            "app.genkit_flows.ats_scoring.extractJobRequirements"
-        ) as mock_extract_job:
-            with patch(
-                "app.genkit_flows.ats_scoring.extractResumeEntities"
-            ) as mock_extract_resume:
+        with patch("app.genkit_flows.ats_scoring.extractJobRequirements") as mock_extract_job:
+            with patch("app.genkit_flows.ats_scoring.extractResumeEntities") as mock_extract_resume:
                 with patch(
                     "app.genkit_flows.ats_scoring.suggestKeywordPlacement"
                 ) as mock_keyword_placement:
@@ -129,12 +125,8 @@ class TestAtsScoring:
                         "app.genkit_flows.ats_scoring.enhanced_ai_handler"
                     ) as mock_ai_handler:
                         # Configure mock returns for supporting flows
-                        mock_extract_job.run = AsyncMock(
-                            return_value=mock_job_requirements
-                        )
-                        mock_extract_resume.run = AsyncMock(
-                            return_value=mock_resume_entities
-                        )
+                        mock_extract_job.run = AsyncMock(return_value=mock_job_requirements)
+                        mock_extract_resume.run = AsyncMock(return_value=mock_resume_entities)
                         mock_keyword_placement.run = AsyncMock(
                             return_value=mock_keyword_placement_suggestions
                         )
@@ -145,9 +137,7 @@ class TestAtsScoring:
                             similarityScore=85,
                             explanation="Strong match based on skills and experience",
                         )
-                        mock_placement_result = Mock(
-                            suggestions=mock_keyword_placement_suggestions
-                        )
+                        mock_placement_result = Mock(suggestions=mock_keyword_placement_suggestions)
 
                         mock_ai_handler.execute_ai_operation.side_effect = [
                             AIOperationResult(
@@ -181,9 +171,7 @@ class TestAtsScoring:
                                 fallback_used=False,
                             ),
                             # Formatting score (local operation)
-                            AIOperationResult(
-                                success=True, data=100.0, fallback_used=False
-                            ),
+                            AIOperationResult(success=True, data=100.0, fallback_used=False),
                             # Keyword placement suggestions
                             AIOperationResult(
                                 success=True,
@@ -206,12 +194,8 @@ class TestAtsScoring:
                         ), f"Expected AtsResult, got {type(result)}"
 
                         # Assert required fields are present
-                        assert hasattr(
-                            result, "overallScore"
-                        ), "Result should have overallScore"
-                        assert hasattr(
-                            result, "breakdown"
-                        ), "Result should have breakdown"
+                        assert hasattr(result, "overallScore"), "Result should have overallScore"
+                        assert hasattr(result, "breakdown"), "Result should have breakdown"
                         assert hasattr(
                             result, "keywordMatches"
                         ), "Result should have keywordMatches"
@@ -282,9 +266,7 @@ class TestAtsScoring:
         """
         with patch("app.genkit_flows.ats_scoring.extractJobRequirements"):
             with patch("app.genkit_flows.ats_scoring.extractResumeEntities"):
-                with patch(
-                    "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-                ) as mock_ai_handler:
+                with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
                     # Minimal mock responses
                     minimal_job_reqs = JobRequirements(
                         requiredSkills=["Python"],
@@ -294,21 +276,15 @@ class TestAtsScoring:
 
                     minimal_resume_entities = ResumeEntities(
                         skills=["Python"],
-                        experience=[
-                            {"title": "Junior Developer", "duration": "1 year"}
-                        ],
+                        experience=[{"title": "Junior Developer", "duration": "1 year"}],
                         education=[{"degree": "High School"}],
                     )
 
                     mock_ai_handler.execute_ai_operation = AsyncMock()
-                    mock_semantic_result = Mock(
-                        similarityScore=60, explanation="Basic match"
-                    )
+                    mock_semantic_result = Mock(similarityScore=60, explanation="Basic match")
 
                     mock_ai_handler.execute_ai_operation.side_effect = [
-                        AIOperationResult(
-                            success=True, data=minimal_job_reqs, fallback_used=False
-                        ),
+                        AIOperationResult(success=True, data=minimal_job_reqs, fallback_used=False),
                         AIOperationResult(
                             success=True,
                             data=minimal_resume_entities,
@@ -328,9 +304,7 @@ class TestAtsScoring:
                             fallback_used=False,
                         ),
                         # Formatting score
-                        AIOperationResult(
-                            success=True, data=100.0, fallback_used=False
-                        ),
+                        AIOperationResult(success=True, data=100.0, fallback_used=False),
                         # Keyword placement (no missing keywords, so skipped)
                     ]
 
@@ -355,9 +329,7 @@ class TestAtsScoring:
         """
         Test atsScoring with additional profile keywords parameter.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-        ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
             mock_ai_handler.execute_ai_operation = AsyncMock()
             mock_semantic_result = Mock(
                 similarityScore=90,
@@ -365,15 +337,9 @@ class TestAtsScoring:
             )
 
             mock_ai_handler.execute_ai_operation.side_effect = [
-                AIOperationResult(
-                    success=True, data=mock_job_requirements, fallback_used=False
-                ),
-                AIOperationResult(
-                    success=True, data=mock_resume_entities, fallback_used=False
-                ),
-                AIOperationResult(
-                    success=True, data=mock_semantic_result, fallback_used=False
-                ),
+                AIOperationResult(success=True, data=mock_job_requirements, fallback_used=False),
+                AIOperationResult(success=True, data=mock_resume_entities, fallback_used=False),
+                AIOperationResult(success=True, data=mock_semantic_result, fallback_used=False),
                 # Keyword matching with profile keywords
                 AIOperationResult(
                     success=True,
@@ -387,9 +353,7 @@ class TestAtsScoring:
                 # Formatting score
                 AIOperationResult(success=True, data=100.0, fallback_used=False),
                 # Keyword placement for missing ML keyword
-                AIOperationResult(
-                    success=True, data=Mock(suggestions=[]), fallback_used=False
-                ),
+                AIOperationResult(success=True, data=Mock(suggestions=[]), fallback_used=False),
             ]
 
             profile_keywords = ["Python", "React", "Machine Learning", "AWS"]
@@ -412,18 +376,14 @@ class TestAtsScoring:
             # Verify some profile keywords appear in matched or missing
             all_keywords = result.keywordMatches.matched + result.keywordMatches.missing
             common_keywords = set(profile_keywords).intersection(set(all_keywords))
-            assert (
-                len(common_keywords) > 0
-            ), "Some profile keywords should appear in results"
+            assert len(common_keywords) > 0, "Some profile keywords should appear in results"
 
     @pytest.mark.asyncio
     async def test_ats_scoring_error_handling(self):
         """
         Test that atsScoring handles errors gracefully and still returns a valid result.
         """
-        with patch(
-            "app.genkit_flows.ats_scoring.enhanced_ai_handler"
-        ) as mock_ai_handler:
+        with patch("app.genkit_flows.ats_scoring.enhanced_ai_handler") as mock_ai_handler:
             # Simulate an error in one of the AI operations
             mock_ai_handler.execute_ai_operation = AsyncMock()
             mock_ai_handler.execute_ai_operation.side_effect = [
@@ -432,9 +392,7 @@ class TestAtsScoring:
 
             # The enhanced error handling should provide fallbacks
             with pytest.raises(Exception, match="AI service temporarily unavailable"):
-                await atsScoring(
-                    resumeText="Test resume", jobDescription="Test job description"
-                )
+                await atsScoring(resumeText="Test resume", jobDescription="Test job description")
 
             # Note: In a real implementation with proper error handling,
             # this might return a fallback result instead of raising an exception
