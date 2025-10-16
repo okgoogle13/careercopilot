@@ -1,4 +1,4 @@
-import { BarChart as BarChart3, Description as FileText, Add as Plus } from '@mui/icons-material';
+import { BarChart, Description as FileText, Add as Plus } from '@mui/icons-material';
 import {
   Box,
   Drawer,
@@ -21,7 +21,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
   const theme = useTheme();
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: BarChart as BarChart3 },
+    { id: 'dashboard', label: 'Dashboard', icon: BarChart },
     { id: 'ats-analysis', label: 'ATS Analysis', icon: FileText },
   ];
 
