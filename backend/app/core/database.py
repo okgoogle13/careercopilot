@@ -57,7 +57,9 @@ class DatabaseConfig:
                 cursor.execute("PRAGMA temp_store=MEMORY")
                 cursor.close()
 
-        self.SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=self.engine)
+        self.SessionLocal = sessionmaker(
+            autocommit=False, autoflush=False, bind=self.engine
+        )
 
     def _get_database_url(self) -> str:
         """Determine database URL based on environment"""
@@ -67,7 +69,9 @@ class DatabaseConfig:
             return db_url
 
         # Check for PostgreSQL connection parameters
-        if all(os.getenv(key) for key in ["DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"]):
+        if all(
+            os.getenv(key) for key in ["DB_HOST", "DB_NAME", "DB_USER", "DB_PASSWORD"]
+        ):
             host = os.getenv("DB_HOST")
             port = os.getenv("DB_PORT", "5432")
             name = os.getenv("DB_NAME")
@@ -84,7 +88,9 @@ class DatabaseConfig:
         """Create all database tables"""
         try:
             Base.metadata.create_all(bind=self.engine)
-            logger.info(f"Database tables created successfully using {self.database_url}")
+            logger.info(
+                f"Database tables created successfully using {self.database_url}"
+            )
         except Exception as e:
             logger.error(f"Failed to create database tables: {e}")
             raise

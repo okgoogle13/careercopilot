@@ -121,7 +121,10 @@ class OptimizedResumeParser:
 
         # Extract noun chunks that might be skills
         for chunk in doc.noun_chunks:
-            if len(chunk.text.split()) <= 3 and chunk.text.lower() not in self._get_common_words():
+            if (
+                len(chunk.text.split()) <= 3
+                and chunk.text.lower() not in self._get_common_words()
+            ):
                 skills.add(chunk.text.strip())
 
         return sorted(list(skills))
@@ -187,7 +190,9 @@ class OptimizedResumeParser:
             contact["email"] = email_match.group()
 
         # Phone pattern
-        phone_pattern = r"(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})"
+        phone_pattern = (
+            r"(?:\+?1[-.\s]?)?\(?([0-9]{3})\)?[-.\s]?([0-9]{3})[-.\s]?([0-9]{4})"
+        )
         phone_match = re.search(phone_pattern, text)
         if phone_match:
             contact["phone"] = phone_match.group()

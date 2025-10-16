@@ -48,10 +48,14 @@ class ATSScorer:
         try:
             # Input validation
             if not resume_text or not isinstance(resume_text, str):
-                raise InputValidationError("Resume text is required and must be a string")
+                raise InputValidationError(
+                    "Resume text is required and must be a string"
+                )
 
             if not job_description or not isinstance(job_description, str):
-                raise InputValidationError("Job description is required and must be a string")
+                raise InputValidationError(
+                    "Job description is required and must be a string"
+                )
 
             # Sanitize inputs
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)

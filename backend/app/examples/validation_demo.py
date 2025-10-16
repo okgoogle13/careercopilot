@@ -116,13 +116,17 @@ try:
         }
     )
 
-    result = default_validator.validate_response(legacy_semantic_response, "semantic_analysis")
+    result = default_validator.validate_response(
+        legacy_semantic_response, "semantic_analysis"
+    )
 
     if result.is_valid:
         print("✅ Legacy field support working!")
         semantic_data = result.parsed_data
         print(f"   Parsed similarity_score: {semantic_data.similarity_score}%")
-        print("   Legacy 'similarityScore' was automatically converted to 'similarity_score'")
+        print(
+            "   Legacy 'similarityScore' was automatically converted to 'similarity_score'"
+        )
     else:
         print(f"❌ Legacy field support failed: {result.error_message}")
 
@@ -281,7 +285,9 @@ try:
 
 except ImportError as e:
     print(f"❌ Import error: {e}")
-    print("Make sure you're running this from the backend directory with the proper Python path")
+    print(
+        "Make sure you're running this from the backend directory with the proper Python path"
+    )
 except Exception as e:
     print(f"❌ Demo error: {e}")
     logger.exception("Demo failed with exception")
