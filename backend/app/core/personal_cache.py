@@ -31,9 +31,7 @@ class PersonalCache:
         (self.cache_dir / "research").mkdir(exist_ok=True)
         (self.cache_dir / "jobs").mkdir(exist_ok=True)
         (self.cache_dir / "ai_responses").mkdir(exist_ok=True)
-        (self.cache_dir / "ai_operations").mkdir(
-            exist_ok=True
-        )  # Enhanced for AI operations
+        (self.cache_dir / "ai_operations").mkdir(exist_ok=True)  # Enhanced for AI operations
         (self.cache_dir / "general").mkdir(exist_ok=True)  # For generic caching
 
         logger.info(f"PersonalCache initialized with directory: {self.cache_dir}")
@@ -49,9 +47,7 @@ class PersonalCache:
         filename = self._generate_cache_key(key)
         return self.cache_dir / category / filename
 
-    async def get(
-        self, key: str, category: str = "general"
-    ) -> Optional[Dict[str, Any]]:
+    async def get(self, key: str, category: str = "general") -> Optional[Dict[str, Any]]:
         """Retrieve cached value with TTL check"""
         try:
             cache_file = self._get_cache_file_path(key, category)
@@ -149,9 +145,7 @@ class PersonalCache:
                 # Clear specific category
                 category_dir = self.cache_dir / category
                 if category_dir.exists():
-                    cleared_count += await self._clear_expired_in_directory(
-                        category_dir
-                    )
+                    cleared_count += await self._clear_expired_in_directory(category_dir)
             else:
                 # Clear all categories
                 for subdir in self.cache_dir.iterdir():
@@ -206,9 +200,7 @@ class PersonalCache:
                     }
 
                     stats["total_files"] += file_count
-                    stats["total_size_mb"] += stats["categories"][category_name][
-                        "size_mb"
-                    ]
+                    stats["total_size_mb"] += stats["categories"][category_name]["size_mb"]
 
             stats["total_size_mb"] = round(stats["total_size_mb"], 2)
             return stats
@@ -347,9 +339,7 @@ class PersonalCache:
                 cleared_count += 1
 
             except Exception as e:
-                logger.error(
-                    f"Error clearing AI operation cache file {cache_file}: {e}"
-                )
+                logger.error(f"Error clearing AI operation cache file {cache_file}: {e}")
 
         logger.info(f"Cleared {cleared_count} AI operation cache entries")
         return cleared_count
@@ -372,9 +362,7 @@ class PersonalCache:
         AICache-compatible set method for cache decorators
         Maps to enhanced AI operation caching
         """
-        return await self.cache_ai_operation(
-            operation_type, input_data, result, user_id
-        )
+        return await self.cache_ai_operation(operation_type, input_data, result, user_id)
 
     async def invalidate_user_cache(
         self, user_id: str, operation_types: Optional[List[str]] = None
@@ -398,8 +386,7 @@ class PersonalCache:
                 # If operation_types specified, filter by those
                 if operation_types:
                     matches_operation = any(
-                        cache_file.name.startswith(f"{op_type}_")
-                        for op_type in operation_types
+                        cache_file.name.startswith(f"{op_type}_") for op_type in operation_types
                     )
                     if not matches_operation:
                         continue
