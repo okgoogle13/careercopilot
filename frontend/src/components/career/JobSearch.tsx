@@ -10,14 +10,12 @@ import {
   InputLabel,
   Pagination,
   Paper,
-  Divider,
 } from '@mui/material';
 import { FilterPanel, JobFilters } from '../features/opportunities/FilterPanel';
 import { JobCard } from '../features/opportunities/JobCard';
 import { LoadingState } from '../ui/LoadingState';
 import { EmptyState } from '../ui/EmptyState';
 import {
-  Search,
   Tune as SlidersHorizontal,
   GridView as Grid3X3,
   List,

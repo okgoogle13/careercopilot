@@ -1,5 +1,6 @@
-import { initializeTestEnvironment } from '@firebase/rules-unit-testing';
-import { readFileSync } from 'fs';
+/* global beforeAll, afterAll */
+import {initializeTestEnvironment} from '@firebase/rules-unit-testing';
+import {readFileSync} from 'fs';
 import path from 'path';
 
 // Load Firestore rules from the file
