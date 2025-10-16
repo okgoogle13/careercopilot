@@ -8,11 +8,21 @@ module.exports = {
   },
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   plugins: ["@typescript-eslint"],
-  ignorePatterns: ["lib/**/*", "node_modules/**/*", "*.js", "eslint.config.js"],
+  ignorePatterns: ["lib/**/*", "node_modules/**/*", "*.js", "eslint.config.js", "test/**/*"],
   env: {
     node: true,
     es2021: true,
     jest: true,
+  },
+  globals: {
+    describe: "readonly",
+    it: "readonly",
+    expect: "readonly",
+    beforeAll: "readonly",
+    afterAll: "readonly",
+    beforeEach: "readonly",
+    afterEach: "readonly",
+    jest: "readonly",
   },
   rules: {
     "no-unused-vars": "off",
