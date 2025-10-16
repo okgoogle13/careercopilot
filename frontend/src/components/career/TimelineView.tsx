@@ -8,7 +8,6 @@ import {
   Avatar,
   IconButton,
   Button,
-  Divider,
 } from '@mui/material';
 import {
   Schedule as Clock,
@@ -51,7 +50,7 @@ const eventIcons = {
   application: FileText,
   interview: Calendar,
   response: MessageCircle,
-  follow_up: Schedule as Clock,
+  follow_up: Clock,
   offer: CheckCircle,
   rejection: AlertCircle,
 };
@@ -73,7 +72,7 @@ const statusColors = {
 } as const;
 
 export function TimelineView({
-  applicationId,
+  applicationId: _applicationId,
   companyName,
   jobTitle,
   events,
