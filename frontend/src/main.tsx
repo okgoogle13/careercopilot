@@ -24,10 +24,10 @@ import { theme } from './theme/theme';
 createRoot(document.getElementById('root')!).render(
   <ErrorBoundary>
     {/* <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}> */}
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </ThemeProvider>
     {/* </Sentry.ErrorBoundary> */}
   </ErrorBoundary>
 );

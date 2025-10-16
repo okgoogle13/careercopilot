@@ -11,12 +11,9 @@ import {
   Star,
   GpsFixed as Target,
   TrendingUp,
-  EmojiEvents as Trophy
+  EmojiEvents as Trophy,
 } from '@mui/icons-material';
-import {
-  Button,
-  Card
-} from '@mui/material';
+import { Button, Card } from '@mui/material';
 import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
@@ -338,7 +335,9 @@ export function CareerGrowthHub({
                             </Badge>
                             {skill.trending && (
                               <Tooltip title="Trending skill in high demand">
-                                <span><TrendingUp className="w-3 h-3 text-green-500" /></span>
+                                <span>
+                                  <TrendingUp className="w-3 h-3 text-green-500" />
+                                </span>
                               </Tooltip>
                             )}
                           </div>

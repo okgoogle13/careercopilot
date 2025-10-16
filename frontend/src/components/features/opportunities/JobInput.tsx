@@ -73,7 +73,11 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
 
         {/* Input Tabs */}
         <Card className="p-8">
-          <Tabs value={activeTab} onChange={(_e, value) => setActiveTab(value as string)} className="w-full">
+          <Tabs
+            value={activeTab}
+            onChange={(_e, value) => setActiveTab(value as string)}
+            className="w-full"
+          >
             <TabsList className="grid w-full grid-cols-2 mb-6">
               <TabsTrigger value="url" className="flex items-center gap-2">
                 <Link className="w-4 h-4" />

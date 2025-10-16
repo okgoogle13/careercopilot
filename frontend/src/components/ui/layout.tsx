@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box,
+import {
+  Box,
   Container,
   Grid,
   Stack,
@@ -7,7 +8,7 @@ import { Box,
   ContainerProps,
   GridProps,
   StackProps,
- } from '@mui/material';
+} from '@mui/material';
 import { Card, CardProps } from './card';
 
 export interface LayoutContainerProps extends ContainerProps {}
