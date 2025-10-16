@@ -13,6 +13,7 @@ from app.genkit_flows.career_application_workflow import (
     ApplicationPackageResult,
     generate_application_package,
 )
+
 # Temporarily disabled due to syntax error in email_task_workflow.py
 # from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
 # from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
