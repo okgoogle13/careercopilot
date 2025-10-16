@@ -58,7 +58,11 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.keywordScore >= 80
-                        else ("warning" if flow_result.breakdown.keywordScore >= 60 else "poor")
+                        else (
+                            "warning"
+                            if flow_result.breakdown.keywordScore >= 60
+                            else "poor"
+                        )
                     ),
                     suggestions=(
                         flow_result.recommendations
@@ -72,7 +76,11 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.semanticScore >= 80
-                        else ("warning" if flow_result.breakdown.semanticScore >= 60 else "poor")
+                        else (
+                            "warning"
+                            if flow_result.breakdown.semanticScore >= 60
+                            else "poor"
+                        )
                     ),
                     suggestions=(
                         flow_result.recommendations
@@ -86,7 +94,11 @@ async def create_ats_score_analysis(
                     status=(
                         "good"
                         if flow_result.breakdown.formattingScore >= 80
-                        else ("warning" if flow_result.breakdown.formattingScore >= 60 else "poor")
+                        else (
+                            "warning"
+                            if flow_result.breakdown.formattingScore >= 60
+                            else "poor"
+                        )
                     ),
                     suggestions=(
                         flow_result.recommendations

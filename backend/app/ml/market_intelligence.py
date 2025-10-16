@@ -59,7 +59,9 @@ class JobMarketAnalyzer:
                     )
 
                     if recent_analysis:
-                        logger.info(f"Using cached market analysis for {field} in {location}")
+                        logger.info(
+                            f"Using cached market analysis for {field} in {location}"
+                        )
                         return self._format_market_analysis(recent_analysis)
 
             # Perform fresh analysis
@@ -69,7 +71,9 @@ class JobMarketAnalyzer:
             job_data = await self._collect_job_data(field, location)
 
             # Analyze with ML
-            analysis_results = await self._perform_ml_analysis(job_data, field, location)
+            analysis_results = await self._perform_ml_analysis(
+                job_data, field, location
+            )
 
             # Store results in database
             with get_db_session() as db:
@@ -83,7 +87,9 @@ class JobMarketAnalyzer:
                     salary_range=analysis_results.get("salary_insights", {}).get(
                         "salary_range", {}
                     ),
-                    top_skills=analysis_results.get("skill_insights", {}).get("top_skills", []),
+                    top_skills=analysis_results.get("skill_insights", {}).get(
+                        "top_skills", []
+                    ),
                     emerging_skills=analysis_results.get("skill_insights", {}).get(
                         "emerging_skills", []
                     ),
@@ -93,12 +99,15 @@ class JobMarketAnalyzer:
                     top_employers=analysis_results.get("employer_insights", {}).get(
                         "top_employers", []
                     ),
-                    company_hiring_trends=analysis_results.get("employer_insights", {}).get(
-                        "hiring_trends", {}
-                    ),
+                    company_hiring_trends=analysis_results.get(
+                        "employer_insights", {}
+                    ).get("hiring_trends", {}),
                     demand_forecast=analysis_results.get("demand_forecast", {}),
-                    competition_level=analysis_results.get("competition_level", "medium"),
-                    expires_at=datetime.utcnow() + timedelta(hours=6),  # Cache for 6 hours
+                    competition_level=analysis_results.get(
+                        "competition_level", "medium"
+                    ),
+                    expires_at=datetime.utcnow()
+                    + timedelta(hours=6),  # Cache for 6 hours
                     source_count=analysis_results.get("data_sources", 0),
                 )
                 db.add(market_analysis)
@@ -109,7 +118,9 @@ class JobMarketAnalyzer:
             logger.error(f"Market analysis failed for {field} in {location}: {e}")
             raise
 
-    async def _collect_job_data(self, field: str, location: str) -> List[Dict[str, Any]]:
+    async def _collect_job_data(
+        self, field: str, location: str
+    ) -> List[Dict[str, Any]]:
         """Collect job data from multiple sources"""
 
         # Get existing job data from database
@@ -158,7 +169,9 @@ class JobMarketAnalyzer:
 
         web_jobs = []
         try:
-            search_results = await asyncio.gather(*[web_search(query) for query in search_queries])
+            search_results = await asyncio.gather(
+                *[web_search(query) for query in search_queries]
+            )
 
             for results in search_results:
                 if results:
@@ -217,7 +230,9 @@ class JobMarketAnalyzer:
             return {"error": "No salary data available"}
 
         # Calculate average salary
-        salary_data["avg_salary"] = (salary_data["salary_min"] + salary_data["salary_max"]) / 2
+        salary_data["avg_salary"] = (
+            salary_data["salary_min"] + salary_data["salary_max"]
+        ) / 2
 
         salary_insights = {
             "average_salary": int(salary_data["avg_salary"].mean()),
@@ -269,7 +284,9 @@ class JobMarketAnalyzer:
                 skill_frequency[skill.replace("_", " ").title()] = count
 
         # Sort skills by frequency
-        sorted_skills = sorted(skill_frequency.items(), key=lambda x: x[1], reverse=True)
+        sorted_skills = sorted(
+            skill_frequency.items(), key=lambda x: x[1], reverse=True
+        )
 
         return {
             "top_skills": [skill for skill, count in sorted_skills[:10]],
@@ -304,7 +321,9 @@ class JobMarketAnalyzer:
             "sector_distribution": {"Government": 40, "Non-profit": 35, "Private": 25},
         }
 
-    async def _forecast_demand(self, df: pd.DataFrame, field: str, location: str) -> Dict[str, Any]:
+    async def _forecast_demand(
+        self, df: pd.DataFrame, field: str, location: str
+    ) -> Dict[str, Any]:
         """Forecast job demand using time series analysis"""
 
         # Group jobs by discovery date
@@ -324,10 +343,14 @@ class JobMarketAnalyzer:
         forecast = {
             "forecast_type": "trend_based",
             "short_term_outlook": (
-                "growing" if recent_trend > 0 else "declining" if recent_trend < 0 else "stable"
+                "growing"
+                if recent_trend > 0
+                else "declining" if recent_trend < 0 else "stable"
             ),
             "predicted_growth": (
-                f"{abs(recent_trend * 30):.0f} jobs/month" if recent_trend != 0 else "stable"
+                f"{abs(recent_trend * 30):.0f} jobs/month"
+                if recent_trend != 0
+                else "stable"
             ),
             "confidence": "medium",
             "factors": [
@@ -515,10 +538,14 @@ class SkillMatchingEngine:
                     matched_skills.append(req_skill)
                     break
 
-        match_percentage = len(matched_skills) / len(required_skills) if required_skills else 0
+        match_percentage = (
+            len(matched_skills) / len(required_skills) if required_skills else 0
+        )
 
         return {
-            "score": min(match_percentage + 0.2, 1.0),  # Add baseline for transferable skills
+            "score": min(
+                match_percentage + 0.2, 1.0
+            ),  # Add baseline for transferable skills
             "matched_skills": matched_skills,
             "missing_skills": [
                 skill for skill in required_skills_lower if skill not in matched_skills
@@ -560,7 +587,9 @@ class SkillMatchingEngine:
             "non-profit": 0.8,
         }
 
-        score = transferable_backgrounds.get(user_bg_lower, 0.5)  # Default for any background
+        score = transferable_backgrounds.get(
+            user_bg_lower, 0.5
+        )  # Default for any background
 
         return {
             "score": score,
@@ -593,7 +622,9 @@ class SkillMatchingEngine:
             )
 
         if experience_match["score"] < 0.8:
-            recommendations.append("Highlight transferable experience from previous roles")
+            recommendations.append(
+                "Highlight transferable experience from previous roles"
+            )
 
         if background_match["score"] < 0.8:
             recommendations.extend(
