@@ -1,61 +1,26 @@
-import { useState, useRef, useEffect } from 'react';
-import { Badge } from '../../ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
-import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar';
-import { ScrollArea } from '../../ui/scroll-area';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
-import { Popover, PopoverContent, PopoverTrigger } from '../../ui/popover';
-import { Textarea } from '../../ui/textarea';
-import { Separator } from '../../ui/separator';
-import { Progress } from '../../ui/progress';
-import { Input } from '../../ui/input';
 import {
+  Archive,
   ArrowLeft,
+  Schedule as Clock,
+  Code,
   Download,
-  Share,
   Edit,
+  Visibility as Eye,
+  Image as FileImage,
+  Description as FileText,
+  Lightbulb,
+  Print as Printer,
+  RotateLeft as RotateCcw,
+  Settings,
+  Share,
+  Close as X,
   ZoomIn,
   ZoomOut,
-  RotateLeft as RotateCcw,
-  Print as Printer,
-  Message as MessageSquare,
-  People as Users,
-  Schedule as Clock,
-  Check,
-  Close as X,
-  MoreVert as MoreVertical,
-  ContentCopy as Copy,
-  History,
-  AccountTree as GitBranch,
-  Description as FileText,
-  Star,
-  Visibility as Eye,
-  Lightbulb,
-  Warning as AlertTriangle,
-  CheckCircle,
-  Cancel as XCircle,
-  Refresh as RefreshCw,
-  Settings,
-  FilterList as Filter,
-  ExpandMore as ChevronDown,
-  ExpandLess as ChevronUp,
-  Bookmark,
-  PlayArrow as Play,
-  Pause,
-  Image as FileImage,
-  Archive,
-  Code,
 } from '@mui/icons-material';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Box, Button, Card } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import { Badge } from '../../ui/badge';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
 
 type DocumentType = 'resume' | 'cover-letter' | 'portfolio' | 'selection-criteria' | 'other';
 
@@ -409,16 +374,6 @@ export function DocumentPreview({
   };
 
   // Handle version control
-  const handleRestoreVersion = (versionId: string) => {
-    if (
-      window.confirm(
-        'Are you sure you want to restore this version? Any unsaved changes will be lost.'
-      )
-    ) {
-      onVersionRestore(versionId);
-      setSelectedVersion(null);
-    }
-  };
 
   // Handle export
   const handleExport = (format: string) => {
@@ -462,15 +417,6 @@ export function DocumentPreview({
     return 'text-red-500';
   };
 
-  // Get ATS score label
-  const getAtsScoreLabel = (score: number) => {
-    if (score >= 90) return 'Excellent';
-    if (score >= 80) return 'Very Good';
-    if (score >= 70) return 'Good';
-    if (score >= 60) return 'Fair';
-    return 'Needs Improvement';
-  };
-
   // Get severity color
   const getSeverityColor = (severity: 'low' | 'medium' | 'high') => {
     return {
@@ -505,8 +451,8 @@ export function DocumentPreview({
           ...(isFullscreen && {
             position: 'fixed',
             inset: 0,
-            zIndex: 50
-          })
+            zIndex: 50,
+          }),
         }}
       >
         {/* Enhanced Header */}
@@ -542,42 +488,36 @@ export function DocumentPreview({
 
             {/* Enhanced Action Buttons */}
             <div className="flex items-center space-x-2">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    onClick={generateAISuggestions}
-                    className="flex items-center space-x-1.5"
-                  >
-                    <Lightbulb className="h-4 w-4" />
-                    <span>AI Assist</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Get AI-powered suggestions for improvement</TooltipContent>
+              <Tooltip title="Get AI-powered suggestions for improvement">
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={generateAISuggestions}
+                  className="flex items-center space-x-1.5"
+                >
+                  <Lightbulb className="h-4 w-4" />
+                  <span>AI Assist</span>
+                </Button>
               </Tooltip>
 
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="outlined"
-                    size="small"
-                    onClick={toggleReadingMode}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.5,
-                      ...(readingMode && {
-                        backgroundColor: 'blue.50',
-                        borderColor: 'blue.200'
-                      })
-                    }}
-                  >
-                    <Eye className="h-4 w-4" />
-                    <span>Reading</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Toggle reading mode for better focus</TooltipContent>
+              <Tooltip title="Toggle reading mode for better focus">
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={toggleReadingMode}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                    ...(readingMode && {
+                      backgroundColor: 'blue.50',
+                      borderColor: 'blue.200',
+                    }),
+                  }}
+                >
+                  <Eye className="h-4 w-4" />
+                  <span>Reading</span>
+                </Button>
               </Tooltip>
 
               <Button
@@ -600,15 +540,10 @@ export function DocumentPreview({
                 <span>Edit Document</span>
               </Button>
 
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="text" size="small" onClick={toggleFullscreen}>
-                    {isFullscreen ? <X className="h-4 w-4" /> : <Settings className="h-4 w-4" />}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  {isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
-                </TooltipContent>
+              <Tooltip title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}>
+                <Button variant="text" size="small" onClick={toggleFullscreen}>
+                  {isFullscreen ? <X className="h-4 w-4" /> : <Settings className="h-4 w-4" />}
+                </Button>
               </Tooltip>
             </div>
           </div>
@@ -730,176 +665,181 @@ export function DocumentPreview({
             {/* Document Preview */}
             <div className="lg:col-span-3">
               <Card className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-medium">Preview</h3>
-                  {mockDocument.pages > 1 && (
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                      >
-                        Previous
-                      </Button>
-                      <span>
-                        Page {currentPage} of {mockDocument.pages}
-                      </span>
-                      <Button
-                        size="small"
-                        variant="outlined"
-                        onClick={() =>
-                          setCurrentPage(Math.min(mockDocument.pages, currentPage + 1))
-                        }
-                      >
-                        Next
-                      </Button>
-                    </div>
-                  )}
-                </div>
+                <>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-medium">Preview</h3>
+                    {mockDocument.pages > 1 && (
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                        >
+                          Previous
+                        </Button>
+                        <span>
+                          Page {currentPage} of {mockDocument.pages}
+                        </span>
+                        <Button
+                          size="small"
+                          variant="outlined"
+                          onClick={() =>
+                            setCurrentPage(Math.min(mockDocument.pages, currentPage + 1))
+                          }
+                        >
+                          Next
+                        </Button>
+                      </div>
+                    )}
+                  </div>
 
-                {/* Document Preview Container */}
-                <div className="bg-gray-100 p-8 rounded-lg flex justify-center overflow-auto">
-                  <div
-                    className="bg-white shadow-lg transition-transform duration-200 max-w-[8.5in]"
-                    style={{
-                      transform: `scale(${zoomLevel / 100})`,
-                      transformOrigin: 'top center',
-                      minHeight: '11in',
-                      aspectRatio: '8.5 / 11',
-                    }}
-                  >
-                    {/* Mock Resume Content */}
-                    <div className="p-12 h-full">
-                      <div className="space-y-6">
-                        {/* Header */}
-                        <div className="text-center border-b border-gray-300 pb-4">
-                          <h1 className="text-2xl font-bold text-gray-900 mb-2">Nishant Dougall</h1>
-                          <div className="text-gray-600 space-y-1">
-                            <p>nishant.dougall@email.com • (555) 123-4567</p>
-                            <p>Vancouver, BC • linkedin.com/in/nishantdougall</p>
-                          </div>
-                        </div>
-
-                        {/* Professional Summary */}
-                        <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
-                            Professional Summary
-                          </h2>
-                          <p className="text-gray-700 leading-relaxed">
-                            Dedicated Community Support Worker with 3+ years of experience providing
-                            client-centered care and advocacy. Proven track record in crisis
-                            intervention, case management, and supporting individuals with mental
-                            health challenges and addiction recovery.
-                          </p>
-                        </div>
-
-                        {/* Experience */}
-                        <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
-                            Professional Experience
-                          </h2>
-                          <div className="space-y-4">
-                            <div>
-                              <div className="flex justify-between items-start mb-2">
-                                <div>
-                                  <h3 className="font-medium text-gray-900">
-                                    Community Support Worker
-                                  </h3>
-                                  <p className="text-gray-600">Community Living BC</p>
-                                </div>
-                                <span className="text-gray-500 text-sm">2021 - Present</span>
-                              </div>
-                              <ul className="text-gray-700 space-y-1 text-sm">
-                                <li>
-                                  • Provide support to 25+ individuals with developmental
-                                  disabilities and mental health challenges
-                                </li>
-                                <li>
-                                  • Facilitate life skills training and community integration
-                                  programs
-                                </li>
-                                <li>
-                                  • Collaborate with multidisciplinary teams to develop and
-                                  implement care plans
-                                </li>
-                                <li>
-                                  • Maintain detailed documentation and progress reports for client
-                                  files
-                                </li>
-                              </ul>
-                            </div>
-
-                            <div>
-                              <div className="flex justify-between items-start mb-2">
-                                <div>
-                                  <h3 className="font-medium text-gray-900">
-                                    Mental Health Support Assistant
-                                  </h3>
-                                  <p className="text-gray-600">Fraser Health Authority</p>
-                                </div>
-                                <span className="text-gray-500 text-sm">2019 - 2021</span>
-                              </div>
-                              <ul className="text-gray-700 space-y-1 text-sm">
-                                <li>
-                                  • Assisted mental health professionals in group therapy sessions
-                                </li>
-                                <li>• Provided crisis intervention and de-escalation support</li>
-                                <li>
-                                  • Connected clients with community resources and support services
-                                </li>
-                              </ul>
+                  {/* Document Preview Container */}
+                  <div className="bg-gray-100 p-8 rounded-lg flex justify-center overflow-auto">
+                    <div
+                      className="bg-white shadow-lg transition-transform duration-200 max-w-[8.5in]"
+                      style={{
+                        transform: `scale(${zoomLevel / 100})`,
+                        transformOrigin: 'top center',
+                        minHeight: '11in',
+                        aspectRatio: '8.5 / 11',
+                      }}
+                    >
+                      {/* Mock Resume Content */}
+                      <div className="p-12 h-full">
+                        <div className="space-y-6">
+                          {/* Header */}
+                          <div className="text-center border-b border-gray-300 pb-4">
+                            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                              Nishant Dougall
+                            </h1>
+                            <div className="text-gray-600 space-y-1">
+                              <p>nishant.dougall@email.com • (555) 123-4567</p>
+                              <p>Vancouver, BC • linkedin.com/in/nishantdougall</p>
                             </div>
                           </div>
-                        </div>
 
-                        {/* Skills */}
-                        <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
-                            Core Competencies
-                          </h2>
-                          <div className="text-gray-700 text-sm">
-                            <p>
-                              <strong>Clinical Skills:</strong> Crisis Intervention, Case
-                              Management, Mental Health Support, Addiction Counseling
-                            </p>
-                            <p>
-                              <strong>Interpersonal:</strong> Active Listening, Cultural Competency,
-                              Team Collaboration, Client Advocacy
-                            </p>
-                            <p>
-                              <strong>Technical:</strong> Documentation, Care Planning, Risk
-                              Assessment, Community Resources
+                          {/* Professional Summary */}
+                          <div>
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                              Professional Summary
+                            </h2>
+                            <p className="text-gray-700 leading-relaxed">
+                              Dedicated Community Support Worker with 3+ years of experience
+                              providing client-centered care and advocacy. Proven track record in
+                              crisis intervention, case management, and supporting individuals with
+                              mental health challenges and addiction recovery.
                             </p>
                           </div>
-                        </div>
 
-                        {/* Education & Certifications */}
-                        <div>
-                          <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
-                            Education & Certifications
-                          </h2>
-                          <div className="space-y-2">
-                            <div className="flex justify-between items-start">
+                          {/* Experience */}
+                          <div>
+                            <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
+                              Professional Experience
+                            </h2>
+                            <div className="space-y-4">
                               <div>
-                                <h3 className="font-medium text-gray-900">
-                                  Diploma in Community Support Work
-                                </h3>
-                                <p className="text-gray-600">Douglas College</p>
+                                <div className="flex justify-between items-start mb-2">
+                                  <div>
+                                    <h3 className="font-medium text-gray-900">
+                                      Community Support Worker
+                                    </h3>
+                                    <p className="text-gray-600">Community Living BC</p>
+                                  </div>
+                                  <span className="text-gray-500 text-sm">2021 - Present</span>
+                                </div>
+                                <ul className="text-gray-700 space-y-1 text-sm">
+                                  <li>
+                                    • Provide support to 25+ individuals with developmental
+                                    disabilities and mental health challenges
+                                  </li>
+                                  <li>
+                                    • Facilitate life skills training and community integration
+                                    programs
+                                  </li>
+                                  <li>
+                                    • Collaborate with multidisciplinary teams to develop and
+                                    implement care plans
+                                  </li>
+                                  <li>
+                                    • Maintain detailed documentation and progress reports for
+                                    client files
+                                  </li>
+                                </ul>
                               </div>
-                              <span className="text-gray-500 text-sm">2019</span>
+
+                              <div>
+                                <div className="flex justify-between items-start mb-2">
+                                  <div>
+                                    <h3 className="font-medium text-gray-900">
+                                      Mental Health Support Assistant
+                                    </h3>
+                                    <p className="text-gray-600">Fraser Health Authority</p>
+                                  </div>
+                                  <span className="text-gray-500 text-sm">2019 - 2021</span>
+                                </div>
+                                <ul className="text-gray-700 space-y-1 text-sm">
+                                  <li>
+                                    • Assisted mental health professionals in group therapy sessions
+                                  </li>
+                                  <li>• Provided crisis intervention and de-escalation support</li>
+                                  <li>
+                                    • Connected clients with community resources and support
+                                    services
+                                  </li>
+                                </ul>
+                              </div>
                             </div>
-                            <div className="text-sm text-gray-700">
+                          </div>
+
+                          {/* Skills */}
+                          <div>
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                              Core Competencies
+                            </h2>
+                            <div className="text-gray-700 text-sm">
                               <p>
-                                <strong>Certifications:</strong> Mental Health First Aid, Crisis
-                                Prevention Institute (CPI), CPR/AED
+                                <strong>Clinical Skills:</strong> Crisis Intervention, Case
+                                Management, Mental Health Support, Addiction Counseling
                               </p>
+                              <p>
+                                <strong>Interpersonal:</strong> Active Listening, Cultural
+                                Competency, Team Collaboration, Client Advocacy
+                              </p>
+                              <p>
+                                <strong>Technical:</strong> Documentation, Care Planning, Risk
+                                Assessment, Community Resources
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Education & Certifications */}
+                          <div>
+                            <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                              Education & Certifications
+                            </h2>
+                            <div className="space-y-2">
+                              <div className="flex justify-between items-start">
+                                <div>
+                                  <h3 className="font-medium text-gray-900">
+                                    Diploma in Community Support Work
+                                  </h3>
+                                  <p className="text-gray-600">Douglas College</p>
+                                </div>
+                                <span className="text-gray-500 text-sm">2019</span>
+                              </div>
+                              <div className="text-sm text-gray-700">
+                                <p>
+                                  <strong>Certifications:</strong> Mental Health First Aid, Crisis
+                                  Prevention Institute (CPI), CPR/AED
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </>
               </Card>
             </div>
           </div>

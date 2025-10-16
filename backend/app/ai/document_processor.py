@@ -136,7 +136,7 @@ class DocumentProcessor(BaseAIService):
 
             except Exception as e:
                 logger.warning(
-                    f"pypdfium2 extraction failed, falling back to pdfplumber: {e}"
+                    f"pypdfium2 extraction failed, falling back to pdfplumber: {e} "
                     "- Some formatting may be lost"
                 )
 

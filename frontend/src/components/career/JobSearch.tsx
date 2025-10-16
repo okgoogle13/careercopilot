@@ -220,7 +220,7 @@ export function JobSearch({
 
   const handleBookmark = (jobId: string) => {
     setJobs((prev) =>
-      prev.map((job) => (job.id === jobId ? { ...job, isBookmarked: !job.isBookmarked } : job))
+      prev.map((job) => (job.id === jobId ? { ...job, i_Bookmarked: !job.isBookmarked } : job))
     );
     onJobBookmark?.(jobId);
   };
@@ -246,16 +246,16 @@ export function JobSearch({
         </Typography>
       </Box>
 
-      <Grid2 container spacing={3}>
+      <Grid container spacing={3}>
         {/* Filters Sidebar */}
         {showFilters && (
-          <Grid2 xs={12} md={3}>
+          <Grid size={{ xs: 12, md: 3 }}>
             <FilterPanel onFiltersChange={handleFiltersChange} onReset={() => setFilters(null)} />
-          </Grid2>
+          </Grid>
         )}
 
         {/* Main Content */}
-        <Grid2 xs={12} md={showFilters ? 9 : 12}>
+        <Grid size={{ xs: 12, md: showFilters ? 9 : 12 }}>
           {/* Controls */}
           <Paper className="p-4 mb-6">
             <Box className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
@@ -324,23 +324,18 @@ export function JobSearch({
             />
           ) : (
             <>
-              <Grid2 container spacing={3}>
+              <Grid container spacing={3}>
                 {currentJobs.map((job) => (
-                  <Grid2
-                    xs={12}
-                    md={viewMode === 'grid' ? 6 : 12}
-                    lg={viewMode === 'grid' ? 4 : 12}
-                    key={job.id}
-                  >
+                  <Grid size={{ xs: 12, md: viewMode === 'grid' ? 6 : 12, lg: viewMode === 'grid' ? 4 : 12 }} key={job.id}>
                     <JobCard
                       {...job}
                       onBookmark={handleBookmark}
                       onApply={onJobApply}
                       onViewDetails={onJobView}
                     />
-                  </Grid2>
+                  </Grid>
                 ))}
-              </Grid2>
+              </Grid>
 
               {/* Pagination */}
               {totalPages > 1 && (
@@ -356,8 +351,8 @@ export function JobSearch({
               )}
             </>
           )}
-        </Grid2>
-      </Grid2>
+        </Grid>
+      </Grid>
     </Box>
   );
 }

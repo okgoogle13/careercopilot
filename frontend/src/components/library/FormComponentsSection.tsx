@@ -55,7 +55,11 @@ export function FormComponentsSection() {
             <div className="space-y-2">
               <Label>Switch</Label>
               <div className="flex items-center space-x-2">
-                <Switch id="switch" checked={switchChecked} onCheckedChange={setSwitchChecked} />
+                <Switch
+                  id="switch"
+                  checked={switchChecked}
+                  onChange={(e) => setSwitchChecked(e.target.checked)}
+                />
                 <Label htmlFor="switch">Enable notifications</Label>
               </div>
             </div>
@@ -65,7 +69,7 @@ export function FormComponentsSection() {
                 <Checkbox
                   id="checkbox"
                   checked={checkboxChecked}
-                  onCheckedChange={setCheckboxChecked}
+                  onChange={(e) => setCheckboxChecked(e.target.checked)}
                 />
                 <Label htmlFor="checkbox">I agree to the terms</Label>
               </div>
@@ -78,7 +82,10 @@ export function FormComponentsSection() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <Label>Radio Group</Label>
-            <RadioGroup value={radioValue} onValueChange={setRadioValue}>
+            <RadioGroup
+              value={radioValue}
+              onChange={(e) => setRadioValue(e.target.value)}
+            >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="option1" id="option1" />
                 <Label htmlFor="option1">Option 1</Label>
@@ -97,7 +104,7 @@ export function FormComponentsSection() {
             <Label>Slider</Label>
             <Slider
               value={sliderValue}
-              onValueChange={setSliderValue}
+              onChange={(e, value) => setSliderValue(Array.isArray(value) ? value : [value])}
               max={100}
               step={1}
               className="w-full"

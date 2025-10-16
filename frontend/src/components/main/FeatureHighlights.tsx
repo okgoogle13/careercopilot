@@ -1,6 +1,5 @@
-import React from 'react';
-import { Box, Typography, Grid  } from '@mui/material';
-import { Bolt, GpsFixed, TrendingUp, EmojiEvents } from '@mui/icons-material';
+import { Bolt, EmojiEvents, GpsFixed, TrendingUp } from '@mui/icons-material';
+import { Box, Grid, Typography } from '@mui/material';
 
 const features = [
   {
@@ -27,9 +26,9 @@ const features = [
 
 export function FeatureHighlights() {
   return (
-    <Grid2 container spacing={4} className="mt-8">
+    <Grid container spacing={4} className="mt-8">
       {features.map((feature, index) => (
-        <Grid2 item xs={12} sm={6} md={3} key={index}>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
           <Box className="text-center">
             <Box className="flex justify-center mb-3">
               <Box className="p-3 bg-primary/10 rounded-full text-primary">{feature.icon}</Box>
@@ -41,8 +40,8 @@ export function FeatureHighlights() {
               {feature.description}
             </Typography>
           </Box>
-        </Grid2>
+        </Grid>
       ))}
-    </Grid2>
+    </Grid>
   );
 }

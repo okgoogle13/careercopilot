@@ -24,7 +24,7 @@ export interface DropdownMenuTriggerProps extends React.HTMLAttributes<HTMLButto
 export const DropdownMenuTrigger = React.forwardRef<HTMLButtonElement, DropdownMenuTriggerProps>(
   ({ children, asChild, ...props }, ref) => {
     if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children, { ref, ...props });
+      return React.cloneElement(children, { ...props, ref } as any);
     }
 
     return (

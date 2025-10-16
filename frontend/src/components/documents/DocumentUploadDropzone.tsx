@@ -110,19 +110,19 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
     setIsUploading(true);
 
     try {
-      const filesWithProgress = files.map((file) => ({ ...file, progress: 0 }));
+      const filesWithProgress = files.map((file) => ({ ...file, progre_s: 0 }));
       setFiles([...filesWithProgress]);
 
       const interval = setInterval(() => {
         setFiles((prevFiles) =>
-          prevFiles.map((f) => ({ ...f, progress: Math.min(f.progress! + 10, 90) }))
+          prevFiles.map((f) => ({ ...f, progre_s: Math.min(f.progress! + 10, 90) }))
         );
       }, 200);
 
       await onUpload(files);
 
       clearInterval(interval);
-      setFiles((prevFiles) => prevFiles.map((f) => ({ ...f, progress: 100 })));
+      setFiles((prevFiles) => prevFiles.map((f) => ({ ...f, progre_s: 100 })));
 
       setTimeout(() => setFiles([]), 1000);
     } catch (error) {

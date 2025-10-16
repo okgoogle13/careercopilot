@@ -115,6 +115,10 @@ gcloud projects add-iam-policy-binding careercopilot-staging \
 gcloud projects add-iam-policy-binding careercopilot-staging \
     --member="serviceAccount:careercopilot-staging@careercopilot-staging.iam.gserviceaccount.com" \
     --role="roles/datastore.user"
+
+gcloud projects add-iam-policy-binding careercopilot-staging \
+    --member="serviceAccount:careercopilot-staging@careercopilot-staging.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.writer"
 ```
 
 #### Create Service Account Keys

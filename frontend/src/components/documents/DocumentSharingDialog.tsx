@@ -30,9 +30,9 @@ interface DocumentSharingDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   documentTitle: string;
-  onInvite: (emails: string[], permission: PermissionLevel) => void;
+  onInvite: (emails: string[], permis_ion: PermissionLevel) => void;
   collaborators?: Collaborator[];
-  onUpdatePermission?: (collaboratorId: string, permission: PermissionLevel) => void;
+  onUpdatePermission?: (collaboratorId: string, permis_ion: PermissionLevel) => void;
   onRemoveCollaborator?: (collaboratorId: string) => void;
   shareLink?: string;
   onShareLinkCopy?: () => void;
@@ -86,18 +86,7 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
       collab.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const getPermissionLabel = (permission: PermissionLevel) => {
-    switch (permission) {
-      case 'view':
-        return 'Can view';
-      case 'comment':
-        return 'Can comment';
-      case 'edit':
-        return 'Can edit';
-      default:
-        return '';
-    }
-  };
+
 
   const getPermissionColor = (permission: PermissionLevel) => {
     switch (permission) {
@@ -114,11 +103,10 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogHeader>
+        <DialogTitle>Share "{documentTitle}"</DialogTitle>
+      </DialogHeader>
       <DialogContent className="max-w-2xl">
-        <DialogHeader>
-          <DialogTitle>Share "{documentTitle}"</DialogTitle>
-        </DialogHeader>
-
         <div className="space-y-6 py-4">
           {/* Share Link Section */}
           <div className="space-y-3">
@@ -272,11 +260,10 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
             </div>
           </div>
         </div>
-
-        <DialogFooter>
-          <Button onClick={() => onOpenChange(false)}>Done</Button>
-        </DialogFooter>
       </DialogContent>
+      <DialogFooter>
+        <Button onClick={() => onOpenChange(false)}>Done</Button>
+      </DialogFooter>
     </Dialog>
   );
 };

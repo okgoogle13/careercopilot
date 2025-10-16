@@ -19,7 +19,7 @@ interface Document {
 interface DocumentComparisonProps {
   leftDocument?: Document;
   rightDocument?: Document;
-  onDocumentSelect?: (position: 'left' | 'right') => void;
+  onDocumentSelect?: (po_ition: 'left' | 'right') => void;
   highlightDifferences?: boolean;
 }
 

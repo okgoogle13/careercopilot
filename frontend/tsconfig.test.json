@@ -24,9 +24,5 @@
     "src/setupTests.ts",
     "src/test-utils.tsx"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build"
-  ]
+  "exclude": ["node_modules", "dist", "build"]
 }

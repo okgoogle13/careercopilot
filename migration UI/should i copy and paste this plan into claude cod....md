@@ -42,8 +42,8 @@ Systematically convert each component from using Tailwind className to using MUI
 
 - **Before (Tailwind)**:
   \<Card className="glass p-6 flex flex-col items-center ..."\>
-   \<h3 className="font-semibold text-foreground text-lg"\>Create New Document\</h3\>
-   \<Button className="btn-gradient px-6 py-2"\>Get Started\</Button\>
+  \<h3 className="font-semibold text-foreground text-lg"\>Create New Document\</h3\>
+  \<Button className="btn-gradient px-6 py-2"\>Get Started\</Button\>
   \</Card\>
 
 - **Target (MUI)**:
@@ -59,8 +59,8 @@ Systematically convert each component from using Tailwind className to using MUI
       border: '2px dashed',
       borderColor: (theme) \=\> theme.palette.divider,
   }}\>
-   \<Typography variant="h6"\>Create New Document\</Typography\>
-   \<Button variant="contained" sx={{ mt: 2 }}\>Get Started\</Button\>
+  \<Typography variant="h6"\>Create New Document\</Typography\>
+  \<Button variant="contained" sx={{ mt: 2 }}\>Get Started\</Button\>
   \</Card\>
 
 ### **Remaining Components:**

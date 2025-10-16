@@ -1,43 +1,44 @@
-import React, { useState } from 'react';
-import { Box,
-  Container,
-  Grid,
-  Paper,
-  Typography,
+import GridCompat from '@/components/ui/GridCompat';
+import {
+  Add,
+  Analytics,
+  CheckCircle,
+  Delete,
+  Description,
+  Download,
+  Edit,
+  MoreVert,
+  Schedule,
+  Share,
+  Speed,
+  TrendingUp,
+  Warning,
+  Work,
+} from '@mui/icons-material';
+import {
+  Avatar,
+  Box,
   Button,
   Card,
   CardContent,
-  Avatar,
-  LinearProgress,
   Chip,
-  Stack,
-  IconButton,
-  Menu,
-  MenuItem,
+  ChipProps,
+  Container,
   Divider,
-  Alert,
-  CircularProgress,
+  IconButton,
+  LinearProgress,
   List,
   ListItem,
-  ListItemText,
   ListItemIcon,
- } from '@mui/material';
-import {
-  Add,
-  MoreVert,
-  TrendingUp,
-  Description,
-  Work,
-  Analytics,
-  Speed,
-  Edit,
-  Download,
-  Share,
-  Delete,
-  CheckCircle,
-  Schedule,
-  Warning,
-} from '@mui/icons-material';
+  ListItemText,
+  Menu,
+  MenuItem,
+  // Grid removed; use GridCompat wrapper for legacy `size` and responsive props
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
 
 interface Profile {
   id: string;
@@ -136,8 +137,8 @@ export function DashboardPage({
     },
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
+  const getStatusColor = (profileStatus: Profile['status']): ChipProps['color'] => {
+    switch (profileStatus) {
       case 'active':
         return 'success';
       case 'draft':
@@ -149,8 +150,8 @@ export function DashboardPage({
     }
   };
 
-  const getActivityIcon = (status: string) => {
-    switch (status) {
+  const getActivityIcon = (activityStatus: RecentActivity['status']) => {
+    switch (activityStatus) {
       case 'completed':
         return <CheckCircle color="success" />;
       case 'pending':
@@ -258,8 +259,8 @@ export function DashboardPage({
       </Box>
 
       {/* Stats Cards */}
-      <Grid2 container spacing={3} sx={{ mb: 4 }}>
-        <Grid2 xs={12} sm={6} md={3}>
+      <GridCompat container spacing={3} sx={{ mb: 4 }}>
+        <GridCompat xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -273,9 +274,9 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
+        </GridCompat>
 
-        <Grid2 xs={12} sm={6} md={3}>
+        <GridCompat xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -289,9 +290,9 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
+        </GridCompat>
 
-        <Grid2 xs={12} sm={6} md={3}>
+        <GridCompat xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -305,9 +306,9 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
+        </GridCompat>
 
-        <Grid2 xs={12} sm={6} md={3}>
+        <GridCompat xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
@@ -321,12 +322,12 @@ export function DashboardPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
-      </Grid2>
+        </GridCompat>
+      </GridCompat>
 
-      <Grid2 container spacing={4}>
+      <GridCompat container spacing={4}>
         {/* Profiles Section */}
-        <Grid2 xs={12} lg={8}>
+        <GridCompat xs={12} lg={8}>
           <Paper elevation={0} sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Box
               sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
@@ -339,9 +340,9 @@ export function DashboardPage({
               </Button>
             </Box>
 
-            <Grid2 container spacing={2}>
+            <GridCompat container spacing={2}>
               {profiles.map((profile) => (
-                <Grid2 xs={12} md={6} key={profile.id}>
+                <GridCompat xs={12} md={6} key={profile.id}>
                   <Card
                     elevation={0}
                     sx={{
@@ -421,7 +422,7 @@ export function DashboardPage({
                         <Chip
                           label={profile.status}
                           size="small"
-                          color={getStatusColor(profile.status) as any}
+                          color={getStatusColor(profile.status)}
                           sx={{ textTransform: 'capitalize' }}
                         />
                         <Stack direction="row" spacing={1} alignItems="center">
@@ -435,14 +436,14 @@ export function DashboardPage({
                       </Box>
                     </CardContent>
                   </Card>
-                </Grid2>
+                </GridCompat>
               ))}
-            </Grid2>
+            </GridCompat>
           </Paper>
-        </Grid2>
+        </GridCompat>
 
         {/* Recent Activity */}
-        <Grid2 xs={12} lg={4}>
+        <GridCompat xs={12} lg={4}>
           <Paper elevation={0} sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
               Recent Activity
@@ -516,9 +517,8 @@ export function DashboardPage({
               </Button>
             </Stack>
           </Paper>
-        </Grid2>
-      </Grid2>
-
+        </GridCompat>
+      </GridCompat>
       {/* Profile Menu */}
       <Menu
         anchorEl={anchorEl}

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { fn } from '@storybook/test';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
+import { useState } from 'react';
 import { DocumentBrowser } from '../../features/Documents/DocumentBrowser';
 import { Document } from '../../features/Documents/types';
 
@@ -9,7 +9,13 @@ type DocumentType = Document['type'];
 
 // Generate sample documents
 const generateDocuments = (count: number): Document[] => {
-  const types: DocumentType[] = ['resume', 'cover-letter', 'selection-criteria', 'portfolio', 'other'];
+  const types: DocumentType[] = [
+    'resume',
+    'cover-letter',
+    'selection-criteria',
+    'portfolio',
+    'other',
+  ];
   const tags = [
     ['frontend', 'react', 'typescript'],
     ['backend', 'node', 'python'],
@@ -133,7 +139,6 @@ export const ListView: Story = {
   },
 };
 
-
 export const EmptyState: Story = {
   args: {
     documents: [],
@@ -157,7 +162,6 @@ export const Interactive: Story = {
       setDocuments(documents.filter((d) => d.id !== doc.id));
       fn()(doc);
     };
-
 
     return (
       <Box sx={{ p: 3 }}>
