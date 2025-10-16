@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DocumentCard } from './DocumentCard';
 import { DocumentView, Document } from './types';
-import { Box, Typography, IconButton, Grid  } from '@mui/material';
+import { Box, Typography, IconButton, Grid } from '@mui/material';
 import { GridView, ViewList } from '@mui/icons-material';
 
 interface DocumentBrowserProps {
@@ -107,7 +107,12 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
           {documents.map((doc) => (
             <Grid
               key={doc.id}
-              size={{ xs: 12, sm: view === 'grid' ? 6 : 12, md: view === 'grid' ? 4 : 12, lg: view === 'grid' ? 3 : 12 }}
+              size={{
+                xs: 12,
+                sm: view === 'grid' ? 6 : 12,
+                md: view === 'grid' ? 4 : 12,
+                lg: view === 'grid' ? 3 : 12,
+              }}
             >
               <DocumentCard
                 document={doc}

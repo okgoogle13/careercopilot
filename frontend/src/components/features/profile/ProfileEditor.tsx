@@ -678,7 +678,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           </div>
                           {link.verified && (
                             <Tooltip title="Verified profile">
-                              <span><CheckCircle className="w-5 h-5 text-green-500" /></span>
+                              <span>
+                                <CheckCircle className="w-5 h-5 text-green-500" />
+                              </span>
                             </Tooltip>
                           )}
                           <Button variant="text" size="small" className="text-red-500">

@@ -5,6 +5,7 @@ This guide provides step-by-step instructions for integrating the new AI cost op
 ## 🎯 Overview
 
 The new AI optimization system provides:
+
 - **Redis caching** for LLM responses (60%+ cost savings on repeated requests)
 - **Smart model dispatch** based on task complexity (75%+ cost savings)
 - **Cost tracking** and optimization recommendations
@@ -38,6 +39,7 @@ grep -r "import.*genkit" backend/app/
 ### Step 2: Common Patterns to Replace
 
 #### ❌ Old Way: Direct LLM Calls
+
 ```python
 # OLD: Direct Genkit AI calls
 from genkit import genkit
@@ -52,6 +54,7 @@ result = genkit.generate(
 ```
 
 #### ✅ New Way: Smart Dispatch with Caching
+
 ```python
 # NEW: Smart dispatch with automatic caching and cost optimization
 from app.ai import dispatch_llm_call
@@ -73,15 +76,15 @@ model_used = result["model_selection"]["selected_model"]
 
 Map your existing use cases to the appropriate task types:
 
-| Your Current Use Case | Recommended Task Type | Optimized Model |
-|----------------------|----------------------|-----------------|
-| Extract job keywords | `keyword_extraction` | `gemini-1.5-flash-8b` |
-| Parse resume text | `resume_parsing` | `gemini-1.5-flash` |
-| Classify job categories | `simple_classification` | `gemini-1.5-flash-8b` |
-| Generate cover letters | `cover_letter_generation` | `gemini-1.5-pro` |
-| Optimize resume content | `resume_optimization` | `gemini-1.5-pro` |
-| Complex reasoning tasks | `complex_reasoning` | `gemini-1.5-pro-002` |
-| Code generation | `code_generation` | `gemini-1.5-pro-002` |
+| Your Current Use Case   | Recommended Task Type     | Optimized Model       |
+| ----------------------- | ------------------------- | --------------------- |
+| Extract job keywords    | `keyword_extraction`      | `gemini-1.5-flash-8b` |
+| Parse resume text       | `resume_parsing`          | `gemini-1.5-flash`    |
+| Classify job categories | `simple_classification`   | `gemini-1.5-flash-8b` |
+| Generate cover letters  | `cover_letter_generation` | `gemini-1.5-pro`      |
+| Optimize resume content | `resume_optimization`     | `gemini-1.5-pro`      |
+| Complex reasoning tasks | `complex_reasoning`       | `gemini-1.5-pro-002`  |
+| Code generation         | `code_generation`         | `gemini-1.5-pro-002`  |
 
 ## 🔧 Implementation Steps
 
@@ -341,6 +344,7 @@ After successful integration:
 ### Common Issues
 
 **Redis Connection Failed:**
+
 ```python
 # Check Redis URL format
 print(os.getenv("REDIS_URL"))  # Should be: redis://host:port/db
@@ -352,6 +356,7 @@ client.ping()  # Should return True
 ```
 
 **High Costs Still Occurring:**
+
 ```python
 # Check if requests are being cached
 from app.ai import get_cache_stats
@@ -363,6 +368,7 @@ print(TASK_COMPLEXITY_MAP)
 ```
 
 **Model Selection Not Working:**
+
 ```python
 # Check if task_type is recognized
 result = dispatch_llm_call("unknown_task", "test")
@@ -372,6 +378,7 @@ result = dispatch_llm_call("unknown_task", "test")
 ## 📞 Support
 
 For issues with this integration:
+
 1. Check the application logs for cache and model selection information
 2. Verify Redis connectivity using the troubleshooting steps above
 3. Review the `backend/app/ai/` service implementation
