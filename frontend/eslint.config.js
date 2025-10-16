@@ -20,6 +20,8 @@ export default [
       '**/__tests__/**',
       '*.test.{ts,tsx}',
       '*.spec.{ts,tsx}',
+      'tests/**',
+      'rules/**',
     ],
   },
   {
