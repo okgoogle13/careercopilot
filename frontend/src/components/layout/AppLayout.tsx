@@ -93,7 +93,7 @@ const mainNavigation: NavigationItem[] = [
   {
     id: 'interview-prep',
     label: 'Interview Prep',
-    icon: ChatBubble as MessageSquare,
+    icon: MessageSquare,
     description: 'Practice and feedback',
   },
   {

@@ -107,7 +107,11 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
           {documents.map((doc) => (
             <Grid
               key={doc.id}
-              size={{ xs: 12, sm: view === 'grid' ? 6 : 12, md: view === 'grid' ? 4 : 12, lg: view === 'grid' ? 3 : 12 }}
+              item
+              xs={12}
+              sm={view === 'grid' ? 6 : 12}
+              md={view === 'grid' ? 4 : 12}
+              lg={view === 'grid' ? 3 : 12}
             >
               <DocumentCard
                 document={doc}
