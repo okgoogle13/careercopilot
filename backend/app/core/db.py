@@ -21,12 +21,8 @@ def get_firestore_client():
         if credentials_json:
             # Use environment-based credentials
             credentials_dict = json.loads(credentials_json)
-            credentials = service_account.Credentials.from_service_account_info(
-                credentials_dict
-            )
-            return firestore.Client(
-                credentials=credentials, project=credentials_dict["project_id"]
-            )
+            credentials = service_account.Credentials.from_service_account_info(credentials_dict)
+            return firestore.Client(credentials=credentials, project=credentials_dict["project_id"])
         else:
             # Fall back to default credentials (file-based)
             return firestore.Client()

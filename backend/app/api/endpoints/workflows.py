@@ -32,9 +32,7 @@ router = APIRouter()
 class GenerateApplicationRequest(BaseModel):
     """Request model for application package generation"""
 
-    job_description: str = Field(
-        description="Complete job description/posting text", min_length=50
-    )
+    job_description: str = Field(description="Complete job description/posting text", min_length=50)
     user_profile: Dict = Field(
         description="Comprehensive user profile data including resume content",
         min_items=1,
@@ -45,9 +43,7 @@ class GenerateApplicationResponse(BaseModel):
     """Response model for application package generation"""
 
     success: bool = Field(description="Whether the generation was successful")
-    data: Optional[ApplicationPackageResult] = Field(
-        description="Generated application package"
-    )
+    data: Optional[ApplicationPackageResult] = Field(description="Generated application package")
     message: str = Field(description="Success or error message")
     processing_time_seconds: float = Field(description="Total processing time")
 
