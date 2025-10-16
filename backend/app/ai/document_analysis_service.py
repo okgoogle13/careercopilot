@@ -56,11 +56,15 @@ class SalaryRange(BaseModel):
 class ResumeAnalysisResult(BaseModel):
     """Result of resume analysis."""
 
-    skills: List[str] = Field(default_factory=list, description="List of extracted skills")
+    skills: List[str] = Field(
+        default_factory=list, description="List of extracted skills"
+    )
     experience: List[Experience] = Field(
         default_factory=list, description="Work experience entries"
     )
-    education: List[Education] = Field(default_factory=list, description="Education history")
+    education: List[Education] = Field(
+        default_factory=list, description="Education history"
+    )
     summary: str = Field(default="", description="Professional summary")
     raw_data: Optional[Dict[str, Any]] = None
 
@@ -73,10 +77,18 @@ class JobDescriptionAnalysisResult(BaseModel):
     location: str = Field(default="", description="Job location")
     job_type: str = Field(default="", description="Employment type")
     experience_level: str = Field(default="", description="Experience level required")
-    required_skills: List[str] = Field(default_factory=list, description="Required skills")
-    preferred_skills: List[str] = Field(default_factory=list, description="Preferred skills")
-    responsibilities: List[str] = Field(default_factory=list, description="Job responsibilities")
-    requirements: List[str] = Field(default_factory=list, description="Job requirements")
+    required_skills: List[str] = Field(
+        default_factory=list, description="Required skills"
+    )
+    preferred_skills: List[str] = Field(
+        default_factory=list, description="Preferred skills"
+    )
+    responsibilities: List[str] = Field(
+        default_factory=list, description="Job responsibilities"
+    )
+    requirements: List[str] = Field(
+        default_factory=list, description="Job requirements"
+    )
     salary_range: Optional[SalaryRange] = Field(None, description="Salary information")
     benefits: List[str] = Field(default_factory=list, description="Benefits offered")
     company_description: str = Field(default="", description="Company description")
@@ -103,7 +115,9 @@ class DocumentAnalysisService(BaseAIService):
         """
         super().__init__(config or {})
         self.config = {
-            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
+            "model": (
+                config.get("model", settings.ai_model) if config else settings.ai_model
+            ),
             "max_tokens": (
                 config.get("max_tokens", settings.ai_max_tokens)
                 if config
@@ -198,7 +212,9 @@ class DocumentAnalysisService(BaseAIService):
             raise ValueError("Job description text must be a non-empty string")
 
         if len(job_description_text) < 20:
-            raise ValueError("Job description text is too short for meaningful analysis")
+            raise ValueError(
+                "Job description text is too short for meaningful analysis"
+            )
 
         # Check if service is enabled
         if not self.config.get("enabled", True):
@@ -258,7 +274,9 @@ class DocumentAnalysisService(BaseAIService):
         # Check if service is enabled
         if not self.config.get("enabled", True):
             logger.warning("Document analysis service is disabled")
-            raise AIError(AIErrorType.SERVICE_UNAVAILABLE, "Document analysis service is disabled")
+            raise AIError(
+                AIErrorType.SERVICE_UNAVAILABLE, "Document analysis service is disabled"
+            )
 
         try:
             # Sanitize input
@@ -272,7 +290,9 @@ class DocumentAnalysisService(BaseAIService):
             )
 
         except Exception as e:
-            error_msg = f"Failed to analyze document with template {template_id}: {str(e)}"
+            error_msg = (
+                f"Failed to analyze document with template {template_id}: {str(e)}"
+            )
             logger.error(error_msg, exc_info=True)
             raise
 
@@ -378,7 +398,9 @@ class DocumentAnalysisService(BaseAIService):
             raw_data={"error": "Analysis not available"},
         )
 
-    async def extract_skills(self, document_text: str, document_type: str = "resume") -> List[str]:
+    async def extract_skills(
+        self, document_text: str, document_type: str = "resume"
+    ) -> List[str]:
         """Extract skills from a document.
 
         Args:
@@ -429,7 +451,9 @@ def get_document_analysis_service() -> DocumentAnalysisService:
 
 
 # Convenience functions for backward compatibility
-async def analyze_resume(resume_text: str, target_industry: str = "") -> ResumeAnalysisResult:
+async def analyze_resume(
+    resume_text: str, target_industry: str = ""
+) -> ResumeAnalysisResult:
     """Convenience function to analyze a resume."""
     service = get_document_analysis_service()
     return await service.analyze_resume(resume_text, target_industry)
