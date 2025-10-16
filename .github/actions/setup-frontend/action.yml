@@ -28,6 +28,10 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: Enable Corepack for Yarn 4+
+      shell: bash
+      run: corepack enable
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -38,12 +42,6 @@ runs:
       with:
         cache-type: dependencies-node
         cache-key-suffix: -v1
-
-    - name: Enable Corepack for Yarn 4+
-      shell: bash
-      run: |
-        corepack enable
-        corepack prepare yarn@4.10.2 --activate
 
     - name: Get Yarn cache directory
       id: yarn-cache-dir
