@@ -48,7 +48,9 @@ class BaseAgent(ABC):
         prompt_str = json.dumps(prompt_data, sort_keys=True, default=str)
         return hashlib.sha256(prompt_str.encode()).hexdigest()[:16]
 
-    async def execute_with_monitoring(self, task_data: Dict[str, Any]) -> Dict[str, Any]:
+    async def execute_with_monitoring(
+        self, task_data: Dict[str, Any]
+    ) -> Dict[str, Any]:
         """Execute agent task with monitoring, caching, and error handling"""
 
         start_time = datetime.now()
@@ -83,7 +85,9 @@ class BaseAgent(ABC):
                 "execution_time": (datetime.now() - start_time).total_seconds(),
             }
 
-            await self.cache.cache_ai_response(cache_key, cache_data, self.ai_response_ttl)
+            await self.cache.cache_ai_response(
+                cache_key, cache_data, self.ai_response_ttl
+            )
 
             execution_time = (datetime.now() - start_time).total_seconds()
 
@@ -125,7 +129,9 @@ class BaseAgent(ABC):
             "task_type": task_data.get("task_type"),
             # Include key fields that affect output
             "user_profile_hash": self._hash_dict(task_data.get("user_profile", {})),
-            "job_description_hash": self._hash_dict({"desc": task_data.get("job_description", "")}),
+            "job_description_hash": self._hash_dict(
+                {"desc": task_data.get("job_description", "")}
+            ),
             "document_type": task_data.get("document_type"),
             "template_id": task_data.get("template_id"),
         }
@@ -133,7 +139,9 @@ class BaseAgent(ABC):
 
     def _hash_dict(self, data: Dict[str, Any]) -> str:
         """Create hash of dictionary data"""
-        return hashlib.md5(json.dumps(data, sort_keys=True, default=str).encode()).hexdigest()[:8]
+        return hashlib.md5(
+            json.dumps(data, sort_keys=True, default=str).encode()
+        ).hexdigest()[:8]
 
     def _is_cache_suitable(
         self, cached_result: Dict[str, Any], current_task_data: Dict[str, Any]
@@ -177,7 +185,9 @@ class BaseAgent(ABC):
         # Check cache first
         cached_response = await self.cache.get_ai_response(prompt_hash)
         if cached_response:
-            self.logger.debug(f"Using cached AI response for prompt hash: {prompt_hash}")
+            self.logger.debug(
+                f"Using cached AI response for prompt hash: {prompt_hash}"
+            )
             return cached_response.get("response", "")
 
         try:
@@ -198,9 +208,13 @@ class BaseAgent(ABC):
                 "generated_at": datetime.now().isoformat(),
             }
 
-            await self.cache.cache_ai_response(prompt_hash, cache_data, self.ai_response_ttl)
+            await self.cache.cache_ai_response(
+                prompt_hash, cache_data, self.ai_response_ttl
+            )
 
-            self.logger.debug(f"Generated and cached AI response for prompt hash: {prompt_hash}")
+            self.logger.debug(
+                f"Generated and cached AI response for prompt hash: {prompt_hash}"
+            )
             return response
 
         except Exception as e:
@@ -223,7 +237,9 @@ class BaseAgent(ABC):
         """
 
         # Use unified AI prompt builder for structured responses
-        response = await self.generate_ai_response_with_cache(structured_prompt, context)
+        response = await self.generate_ai_response_with_cache(
+            structured_prompt, context
+        )
 
         try:
             # Try to parse as JSON (simplified implementation)
@@ -240,7 +256,9 @@ class BaseAgent(ABC):
             self.logger.error(f"Failed to parse structured response: {e}")
             return {"error": f"Could not parse structured response: {str(e)}"}
 
-    def add_personal_context_to_prompt(self, base_prompt: str, user_profile: Dict[str, Any]) -> str:
+    def add_personal_context_to_prompt(
+        self, base_prompt: str, user_profile: Dict[str, Any]
+    ) -> str:
         """Add personal context to any prompt"""
 
         career_info = user_profile.get("career_transition", {})

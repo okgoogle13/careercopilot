@@ -59,7 +59,9 @@ class VoiceProfileResponse(BaseModel):
 class CategoryScore(BaseModel):
     """Represents the score for a specific category in an ATS analysis."""
 
-    name: str = Field(..., description="The name of the category, e.g., 'Keyword Optimization'.")
+    name: str = Field(
+        ..., description="The name of the category, e.g., 'Keyword Optimization'."
+    )
     score: int = Field(..., description="The score for this category (0-100).")
     status: Literal["good", "warning", "poor"] = Field(
         ..., description="The qualitative status of the score."
@@ -152,7 +154,9 @@ class ATSScoreResponse(BaseModel):
     """
 
     overallScore: int = Field(..., description="The composite ATS score (0-100).")
-    categories: List[CategoryScore] = Field(..., description="A breakdown of scores by category.")
+    categories: List[CategoryScore] = Field(
+        ..., description="A breakdown of scores by category."
+    )
     matched_keywords: List[str] = Field(
         ..., description="Keywords found in both the resume and job description."
     )

@@ -150,16 +150,23 @@ def get_firebase_config() -> dict:
             ),
             "storage_bucket": get_secret("firebase-storage-bucket", default=""),
             "database_url": get_secret("firebase-database-url", default=""),
-            "use_emulator": get_secret("firebase-emulator", default="false").lower() == "true",
+            "use_emulator": get_secret("firebase-emulator", default="false").lower()
+            == "true",
             "auth_emulator_host": get_secret("firebase-auth-emulator-host", default=""),
-            "storage_emulator_host": get_secret("firebase-storage-emulator-host", default=""),
-            "database_emulator_host": get_secret("firebase-database-emulator-host", default=""),
+            "storage_emulator_host": get_secret(
+                "firebase-storage-emulator-host", default=""
+            ),
+            "database_emulator_host": get_secret(
+                "firebase-database-emulator-host", default=""
+            ),
         }
         return config
     except Exception:
         # Fallback to environment variables
         return {
-            "project_id": os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
+            "project_id": os.getenv(
+                "FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")
+            ),
             "storage_bucket": os.getenv("FIREBASE_STORAGE_BUCKET", ""),
             "database_url": os.getenv("FIREBASE_DATABASE_URL", ""),
             "use_emulator": os.getenv("FIREBASE_EMULATOR", "false").lower() == "true",
@@ -184,7 +191,9 @@ def get_firebase_frontend_config() -> dict:
                 "firebase-project-id", default=os.getenv("GCP_PROJECT_ID", "")
             ),
             "storage_bucket": get_secret("firebase-storage-bucket", default=""),
-            "messaging_sender_id": get_secret("vite-firebase-messaging-sender-id", default=""),
+            "messaging_sender_id": get_secret(
+                "vite-firebase-messaging-sender-id", default=""
+            ),
             "app_id": get_secret("vite-firebase-app-id", default=""),
         }
         return config
@@ -193,7 +202,9 @@ def get_firebase_frontend_config() -> dict:
         return {
             "api_key": os.getenv("VITE_FIREBASE_API_KEY", ""),
             "auth_domain": os.getenv("VITE_FIREBASE_AUTH_DOMAIN", ""),
-            "project_id": os.getenv("FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")),
+            "project_id": os.getenv(
+                "FIREBASE_PROJECT_ID", os.getenv("GCP_PROJECT_ID", "")
+            ),
             "storage_bucket": os.getenv("FIREBASE_STORAGE_BUCKET", ""),
             "messaging_sender_id": os.getenv("VITE_FIREBASE_MESSAGING_SENDER_ID", ""),
             "app_id": os.getenv("VITE_FIREBASE_APP_ID", ""),
