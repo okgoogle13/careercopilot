@@ -8,6 +8,10 @@ the one-click application package generation and email task workflows.
 import traceback
 from typing import Dict, Optional
 
+from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
+
 # Import workflow functions
 from app.genkit_flows.career_application_workflow import (
     ApplicationPackageResult,
@@ -19,9 +23,6 @@ from app.genkit_flows.career_application_workflow import (
 # from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
 EmailWorkflowResult = dict  # Placeholder
 scan_inbox_for_opportunities = None  # Placeholder
-from fastapi import APIRouter, HTTPException, status
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
 
 # Import middleware for authentication (if available)
 try:

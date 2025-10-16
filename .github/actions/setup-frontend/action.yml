@@ -63,7 +63,6 @@ runs:
       run: |
         # Install dependencies (lockfile is validated by version control)
         yarn install --frozen-lockfile
-        cd functions && yarn install --frozen-lockfile
 
     - name: Type check
       if: inputs.run-checks == 'true'
