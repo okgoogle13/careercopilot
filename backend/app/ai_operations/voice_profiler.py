@@ -52,11 +52,7 @@ class VoiceProfiler:
                 except json.JSONDecodeError:
                     result_dict = {"voice_profile": result, "raw_output": True}
             else:
-                result_dict = (
-                    result
-                    if isinstance(result, dict)
-                    else {"voice_profile": str(result)}
-                )
+                result_dict = result if isinstance(result, dict) else {"voice_profile": str(result)}
 
             logger.info(
                 f"Voice profile generated for user {user_id}",
@@ -64,25 +60,19 @@ class VoiceProfiler:
                     "user_id": user_id,
                     "tone": result_dict.get("tone", "Unknown"),
                     "phrases_count": len(result_dict.get("common_phrases", [])),
-                    "vocabulary_count": len(
-                        result_dict.get("professional_vocabulary", [])
-                    ),
+                    "vocabulary_count": len(result_dict.get("professional_vocabulary", [])),
                 },
             )
 
             return result_dict
 
         except Exception as e:
-            logger.error(
-                f"Error in voice profile generation for user {user_id}: {str(e)}"
-            )
+            logger.error(f"Error in voice profile generation for user {user_id}: {str(e)}")
             raise
 
     @monitor_performance("voice_profile_analysis")
     @cached_ai_operation("voice_analysis", user_id_param="user_id")
-    async def analyze_document_voice(
-        self, user_id: str, document_text: str
-    ) -> Dict[str, Any]:
+    async def analyze_document_voice(self, user_id: str, document_text: str) -> Dict[str, Any]:
         """
         Analyze the voice/tone of a specific document.
 
@@ -95,9 +85,7 @@ class VoiceProfiler:
         """
         try:
             if not document_text or not isinstance(document_text, str):
-                raise InputValidationError(
-                    "Document text is required and must be a string"
-                )
+                raise InputValidationError("Document text is required and must be a string")
 
             # Sanitize input
             sanitized_text = InputSanitizer.sanitize_text_input(document_text)
@@ -121,9 +109,7 @@ class VoiceProfiler:
             return result
 
         except Exception as e:
-            logger.error(
-                f"Error in document voice analysis for user {user_id}: {str(e)}"
-            )
+            logger.error(f"Error in document voice analysis for user {user_id}: {str(e)}")
             raise
 
 

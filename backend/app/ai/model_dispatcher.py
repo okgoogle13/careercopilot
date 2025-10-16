@@ -97,9 +97,7 @@ def dispatch_llm_call(
     response = get_llm_response(prompt, model_params)
 
     # Add cost estimation to response
-    response["cost_info"] = estimate_cost(
-        selected_model, prompt, response.get("response", "")
-    )
+    response["cost_info"] = estimate_cost(selected_model, prompt, response.get("response", ""))
     response["model_selection"] = {
         "selected_model": selected_model,
         "task_type": task_type,
@@ -165,9 +163,7 @@ def get_model_recommendations(task_types: List[str]) -> Dict:
         sample_prompt = "Sample prompt for cost estimation"
         sample_response = "Sample response for cost estimation"
 
-        optimized_cost = estimate_cost(
-            recommended_model, sample_prompt, sample_response
-        )
+        optimized_cost = estimate_cost(recommended_model, sample_prompt, sample_response)
         premium_cost = estimate_cost(premium_model, sample_prompt, sample_response)
 
         savings = premium_cost["total_cost_usd"] - optimized_cost["total_cost_usd"]
@@ -216,8 +212,7 @@ def generate_cover_letter(job_description: str, user_profile: str) -> Dict:
 def optimize_resume(resume_content: str, job_description: str) -> Dict:
     """Optimize resume content using optimal model selection."""
     prompt = (
-        f"Optimize this resume for the job:\n{job_description}\n\n"
-        f"Resume:\n{resume_content}"
+        f"Optimize this resume for the job:\n{job_description}\n\n" f"Resume:\n{resume_content}"
     )
     return dispatch_llm_call("resume_optimization", prompt, temperature=0.3)
 
@@ -225,7 +220,6 @@ def optimize_resume(resume_content: str, job_description: str) -> Dict:
 def extract_keywords(job_description: str) -> Dict:
     """Extract keywords using the most cost-effective model."""
     prompt = (
-        f"Extract key skills and requirements from this job description:\n"
-        f"{job_description}"
+        f"Extract key skills and requirements from this job description:\n" f"{job_description}"
     )
     return dispatch_llm_call("keyword_extraction", prompt, temperature=0.1)
