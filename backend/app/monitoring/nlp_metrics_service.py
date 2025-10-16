@@ -87,9 +87,13 @@ class NLPMetricsService:
 
             # Start the metrics server in a separate thread
             self._running = True
-            self._thread = threading.Thread(target=self._run_metrics_server, daemon=True)
+            self._thread = threading.Thread(
+                target=self._run_metrics_server, daemon=True
+            )
             self._thread.start()
-            logger.info(f"Started Prometheus metrics server on port {config.METRICS_PORT}")
+            logger.info(
+                f"Started Prometheus metrics server on port {config.METRICS_PORT}"
+            )
 
         except Exception as e:
             logger.error(f"Failed to start metrics server: {str(e)}")
@@ -114,7 +118,9 @@ class NLPMetricsService:
     def track_request(self, endpoint: str, model: str, status: str = "success"):
         """Track an NLP request."""
         if config.NLP_METRICS_ENABLED:
-            self.request_count.labels(endpoint=endpoint, model=model, status=status).inc()
+            self.request_count.labels(
+                endpoint=endpoint, model=model, status=status
+            ).inc()
 
     def track_duration(self, endpoint: str, model: str):
         """Track the duration of an NLP operation."""
