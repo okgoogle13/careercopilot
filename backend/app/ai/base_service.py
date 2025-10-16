@@ -58,7 +58,9 @@ class BaseAIService:
         """
         return self.is_enabled and self.is_initialized
 
-    def validate_input(self, input_data: Any, required_fields: Optional[List[str]] = None) -> None:
+    def validate_input(
+        self, input_data: Any, required_fields: Optional[List[str]] = None
+    ) -> None:
         """Validate input data.
 
         Args:

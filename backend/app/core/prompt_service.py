@@ -80,7 +80,9 @@ class PromptService:
                 self._config = json.load(f)
             logger.info(f"Loaded prompt configuration from {config_path}")
         except FileNotFoundError:
-            logger.warning(f"Prompt config file not found at {config_path}, using defaults")
+            logger.warning(
+                f"Prompt config file not found at {config_path}, using defaults"
+            )
             self._config = self._get_default_config()
         except json.JSONDecodeError as e:
             logger.error(f"Invalid JSON in prompt config: {e}")
@@ -117,7 +119,9 @@ class PromptService:
                     template = self._create_template(template_id, template_data)
                     self._templates[template_id] = template
 
-                logger.info(f"Loaded {len(templates_data)} templates from {template_file.name}")
+                logger.info(
+                    f"Loaded {len(templates_data)} templates from {template_file.name}"
+                )
 
             except json.JSONDecodeError as e:
                 logger.error(f"Invalid JSON in template file {template_file}: {e}")
@@ -127,7 +131,9 @@ class PromptService:
         self._cached = True
         logger.info(f"Total templates loaded: {len(self._templates)}")
 
-    def _create_template(self, template_id: str, template_data: Dict[str, Any]) -> PromptTemplate:
+    def _create_template(
+        self, template_id: str, template_data: Dict[str, Any]
+    ) -> PromptTemplate:
         """Create a PromptTemplate object from JSON data"""
         return PromptTemplate(
             name=template_data.get("name", template_id),
@@ -148,7 +154,11 @@ class PromptService:
 
     def get_templates_by_category(self, category: str) -> List[PromptTemplate]:
         """Get all templates in a specific category"""
-        return [template for template in self._templates.values() if template.category == category]
+        return [
+            template
+            for template in self._templates.values()
+            if template.category == category
+        ]
 
     def list_templates(self) -> List[str]:
         """List all available template IDs"""
@@ -185,7 +195,9 @@ class PromptService:
     def get_length_instruction(self, length_type: str) -> str:
         """Get length instruction text for a specific type"""
         length_instructions = self._config.get("length_instructions", {})
-        return length_instructions.get(length_type, length_instructions.get("standard", ""))
+        return length_instructions.get(
+            length_type, length_instructions.get("standard", "")
+        )
 
     def validate_template_parameters(
         self, template_id: str, parameters: Dict[str, Any]
@@ -199,7 +211,9 @@ class PromptService:
 
         # Check for missing required parameters
         if self._config.get("validation_rules", {}).get("required_parameters", True):
-            missing_params = [param for param in template.parameters if param not in parameters]
+            missing_params = [
+                param for param in template.parameters if param not in parameters
+            ]
             if missing_params:
                 errors.append(f"Missing required parameters: {missing_params}")
 
@@ -224,7 +238,9 @@ class PromptService:
         """Update usage count for a template (for analytics)"""
         template = self.get_template(template_id)
         if template:
-            template.metadata["usage_count"] = template.metadata.get("usage_count", 0) + 1
+            template.metadata["usage_count"] = (
+                template.metadata.get("usage_count", 0) + 1
+            )
             template.metadata["last_used"] = datetime.now().isoformat()
 
 
