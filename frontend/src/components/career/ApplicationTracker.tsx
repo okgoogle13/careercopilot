@@ -138,8 +138,8 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
     ? sampleTimelineEvents[selectedApplicationId] || []
     : [];
 
-  const handleApplicationClick = (applicationId: string) => {
-    setSelectedApplicationId(applicationId);
+  const handleApplicationClick = (_applicationId: string) => {
+    setSelectedApplicationId(_applicationId);
     setShowTimeline(true);
   };
 
@@ -148,9 +148,9 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
     setSelectedApplicationId(null);
   };
 
-  const handleApplicationMove = (applicationId: string, newStatus: Application['status']) => {
+  const handleApplicationMove = (_applicationId: string, newStatus: Application['status']) => {
     if (applications && onApplicationUpdate) {
-      const application = applications.find((app) => app.id === applicationId);
+      const application = applications.find((app) => app.id === _applicationId);
       if (application) {
         const updatedApplication = { ...application, status: newStatus };
         onApplicationUpdate(updatedApplication);

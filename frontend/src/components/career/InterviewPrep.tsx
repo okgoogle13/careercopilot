@@ -125,7 +125,7 @@ const difficulties = [
 ];
 
 export function InterviewPrep({
-  jobTitle = 'Software Engineer',
+  jobTitle: _jobTitle = 'Software Engineer',
   company = 'Tech Company',
   interviewType = 'Technical Interview',
 }: InterviewPrepProps) {
@@ -149,7 +149,7 @@ export function InterviewPrep({
   const progress = ((currentQuestionIndex + 1) / filteredQuestions.length) * 100;
 
   React.useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval>;
     if (isTimerRunning) {
       interval = setInterval(() => {
         setTimer((timer) => timer + 1);

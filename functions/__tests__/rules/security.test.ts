@@ -1,5 +1,5 @@
 /* eslint-env jest */
-/* global describe, it, expect, beforeAll, afterEach */
+/* global describe, it, expect, beforeAll, afterEach, beforeEach */
 import {getAuthedFirestore} from '../../test/setup';
 import {doc, setDoc, getDoc, updateDoc, deleteDoc, collection, query, getDocs, writeBatch} from 'firebase/firestore';
 import {Firestore} from 'firebase/firestore';
