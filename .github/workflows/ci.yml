@@ -112,7 +112,7 @@ jobs:
           --health-cmd "pg_isready -U test -d test_db"
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries: 5
     strategy:
       fail-fast: false
       matrix:
@@ -281,7 +281,7 @@ jobs:
       - name: Start Firebase Emulators
         run: |
           cd tests
-          firebase emulators:start --only firestore --project=careercopilot-test &
+          firebase emulators:start --only firestore --project=careercopilot-test &  
           EMULATOR_PID=$!
           echo "Waiting for Firestore emulator to start..."
           # Wait for emulator UI (default port 4000) or Firestore port (default 8080)
@@ -609,17 +609,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: \`❌ **Quality Gate Failed**
-
-            Failed test suites:
-            \${failedList}
-
-            📋 Check the [CI Results](https://github.com/\${{ github.repository }}/actions/runs/\${{ github.run_id }}) and fix issues before merging.
-
-            🔍 **What to check:**
-            - Review failed test logs in the Actions tab
-            - Run tests locally to reproduce issues
-            - Check test coverage reports for completeness\`
+              body: `❌ **Quality Gate Failed**\n\nFailed test suites:\n${failedList}\n\n📋 Check the [CI Results](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and fix issues before merging.\n\n🔍 **What to check:**\n- Review failed test logs in the Actions tab\n- Run tests locally to reproduce issues\n- Check test coverage reports for completeness`
             });
 
       - name: PR comment on success
@@ -631,19 +621,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: \`✅ **All Quality Checks Passed!**
-
-            🎉 **Test Results:**
-            - ✅ Frontend Unit Tests (Jest + React Testing Library)
-            - ✅ Backend Unit Tests (pytest + FastAPI)
-            - ✅ End-to-End Tests (Playwright)
-            - ✅ Firestore Security Rules Tests
-            - ✅ Security Analysis (CodeQL + Bandit)
-            - ✅ Functions Build & Lint
-
-            🚀 Ready for review and merge!
-
-            📊 [View detailed test results](https://github.com/\${{ github.repository }}/actions/runs/\${{ github.run_id }})\`
+              body: `✅ **All Quality Checks Passed!**\n\n🎉 **Test Results:**\n- ✅ Frontend Unit Tests (Jest + React Testing Library)\n- ✅ Backend Unit Tests (pytest + FastAPI)\n- ✅ End-to-End Tests (Playwright)\n- ✅ Firestore Security Rules Tests\n- ✅ Security Analysis (CodeQL + Bandit)\n- ✅ Functions Build & Lint\n\n🚀 Ready for review and merge!\n\n📊 [View detailed test results](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})`
             });
 
       - name: Quality gate result summary
@@ -715,6 +693,6 @@ jobs:
           echo "Successfully built and pushed the backend Docker image to Google Artifact Registry." >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Image Tags:**" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
           echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "```" >> $GITHUB_STEP_SUMMARY
