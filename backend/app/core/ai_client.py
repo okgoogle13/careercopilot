@@ -63,10 +63,14 @@ class AIProviderClient(ABC):
         self.credentials = config_manager.get_provider_credentials(provider)
 
         if not self.credentials:
-            raise ValueError(f"No credentials configured for provider: {provider.value}")
+            raise ValueError(
+                f"No credentials configured for provider: {provider.value}"
+            )
 
     @abstractmethod
-    async def generate_text(self, request: AIRequest, model_config: ModelConfig) -> AIResponse:
+    async def generate_text(
+        self, request: AIRequest, model_config: ModelConfig
+    ) -> AIResponse:
         """Generate text using the provider's API"""
 
     @abstractmethod
@@ -95,7 +99,9 @@ class OpenAIClient(AIProviderClient):
             if self.credentials.organization_id:
                 self.headers["OpenAI-Organization"] = self.credentials.organization_id
 
-    async def generate_text(self, request: AIRequest, model_config: ModelConfig) -> AIResponse:
+    async def generate_text(
+        self, request: AIRequest, model_config: ModelConfig
+    ) -> AIResponse:
         """Generate text using OpenAI API"""
         import httpx
 
@@ -117,7 +123,9 @@ class OpenAIClient(AIProviderClient):
             ]
 
         try:
-            async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
+            async with httpx.AsyncClient(
+                timeout=model_config.timeout_seconds
+            ) as client:
                 response = await client.post(
                     f"{self.base_url}/chat/completions",
                     headers=self.headers,
@@ -181,7 +189,9 @@ class OpenAIClient(AIProviderClient):
             import httpx
 
             async with httpx.AsyncClient(timeout=5.0) as client:
-                response = await client.get(f"{self.base_url}/models", headers=self.headers)
+                response = await client.get(
+                    f"{self.base_url}/models", headers=self.headers
+                )
                 return response.status_code == 200
         except Exception:
             return False
@@ -197,10 +207,16 @@ class OpenAIClient(AIProviderClient):
 
         return messages
 
-    def _calculate_cost(self, tokens_used: Dict[str, int], model_config: ModelConfig) -> float:
+    def _calculate_cost(
+        self, tokens_used: Dict[str, int], model_config: ModelConfig
+    ) -> float:
         """Calculate cost based on token usage"""
-        input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens["input"]
-        output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens["output"]
+        input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens[
+            "input"
+        ]
+        output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens[
+            "output"
+        ]
         return input_cost + output_cost
 
 
@@ -211,7 +227,9 @@ class GoogleAIClient(AIProviderClient):
         super().__init__(AIProvider.GOOGLE_AI, config_manager)
         self.base_url = "https://generativelanguage.googleapis.com/v1beta"
 
-    async def generate_text(self, request: AIRequest, model_config: ModelConfig) -> AIResponse:
+    async def generate_text(
+        self, request: AIRequest, model_config: ModelConfig
+    ) -> AIResponse:
         """Generate text using Google AI API"""
         import httpx
 
@@ -234,7 +252,9 @@ class GoogleAIClient(AIProviderClient):
         try:
             if not self.credentials:
                 raise ValueError("Google AI credentials not configured")
-            async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
+            async with httpx.AsyncClient(
+                timeout=model_config.timeout_seconds
+            ) as client:
                 response = await client.post(
                     f"{self.base_url}/models/{model_config.model_id}:generateContent"
                     f"?key={self.credentials.api_key if self.credentials else ''}",
@@ -266,7 +286,9 @@ class GoogleAIClient(AIProviderClient):
                     cost_estimate=cost_estimate,
                     metadata={
                         "finish_reason": result["candidates"][0].get("finishReason"),
-                        "safety_ratings": result["candidates"][0].get("safetyRatings", []),
+                        "safety_ratings": result["candidates"][0].get(
+                            "safetyRatings", []
+                        ),
                     },
                     request_id=request_id,
                 )
@@ -299,10 +321,16 @@ class GoogleAIClient(AIProviderClient):
         except Exception:
             return False
 
-    def _calculate_cost(self, tokens_used: Dict[str, int], model_config: ModelConfig) -> float:
+    def _calculate_cost(
+        self, tokens_used: Dict[str, int], model_config: ModelConfig
+    ) -> float:
         """Calculate cost based on token usage"""
-        input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens["input"]
-        output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens["output"]
+        input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens[
+            "input"
+        ]
+        output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens[
+            "output"
+        ]
         return input_cost + output_cost
 
 
@@ -320,7 +348,9 @@ class AnthropicClient(AIProviderClient):
                 "anthropic-version": "2023-06-01",
             }
 
-    async def generate_text(self, request: AIRequest, model_config: ModelConfig) -> AIResponse:
+    async def generate_text(
+        self, request: AIRequest, model_config: ModelConfig
+    ) -> AIResponse:
         """Generate text using Anthropic API"""
         import httpx
 
@@ -339,7 +369,9 @@ class AnthropicClient(AIProviderClient):
             payload["system"] = request.system_prompt
 
         try:
-            async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
+            async with httpx.AsyncClient(
+                timeout=model_config.timeout_seconds
+            ) as client:
                 response = await client.post(
                     f"{self.base_url}/messages", headers=self.headers, json=payload
                 )
@@ -402,10 +434,16 @@ class AnthropicClient(AIProviderClient):
         except Exception:
             return False
 
-    def _calculate_cost(self, tokens_used: Dict[str, int], model_config: ModelConfig) -> float:
+    def _calculate_cost(
+        self, tokens_used: Dict[str, int], model_config: ModelConfig
+    ) -> float:
         """Calculate cost based on token usage"""
-        input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens["input"]
-        output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens["output"]
+        input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens[
+            "input"
+        ]
+        output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens[
+            "output"
+        ]
         return input_cost + output_cost
 
 
@@ -477,7 +515,8 @@ class AIClientManager:
                 track_ai_usage(
                     operation_type=request.service_name,
                     user_id=request.user_id,
-                    tokens_used=response.tokens_used["input"] + response.tokens_used["output"],
+                    tokens_used=response.tokens_used["input"]
+                    + response.tokens_used["output"],
                     cached=response.cached,
                 )
 
@@ -519,7 +558,9 @@ class AIClientManager:
 
         # Use default embedding model if none specified
         if not model_name:
-            embedding_models = self.config_manager.get_models_by_type(AIModelType.TEXT_EMBEDDING)
+            embedding_models = self.config_manager.get_models_by_type(
+                AIModelType.TEXT_EMBEDDING
+            )
             if not embedding_models:
                 raise ValueError("No embedding models configured")
             model_name = embedding_models[0].name
@@ -530,7 +571,9 @@ class AIClientManager:
 
         client = self.clients.get(model_config.provider)
         if not client:
-            raise ValueError(f"No client available for provider: {model_config.provider.value}")
+            raise ValueError(
+                f"No client available for provider: {model_config.provider.value}"
+            )
 
         return await client.generate_embeddings(texts, model_config)
 
@@ -561,8 +604,12 @@ class AIClientManager:
         status = {}
 
         for service_name, service_config in self.config_manager.services.items():
-            model_config = self.config_manager.get_model_config(service_config.primary_model)
-            provider_available = model_config.provider in self.clients if model_config else False
+            model_config = self.config_manager.get_model_config(
+                service_config.primary_model
+            )
+            provider_available = (
+                model_config.provider in self.clients if model_config else False
+            )
 
             status[service_name] = {
                 "enabled": service_config.enabled,

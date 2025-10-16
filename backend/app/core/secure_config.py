@@ -65,8 +65,12 @@ class SecureSettings(BaseSettings):
                 self.REDIS_URL = get_redis_url()
 
                 # Load AI API keys from Secret Manager
-                self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
-                self.OPENAI_API_KEY = get_secret("OPENAI_API_KEY", default=self.OPENAI_API_KEY)
+                self.GEMINI_API_KEY = get_secret(
+                    "GEMINI_API_KEY", default=self.GEMINI_API_KEY
+                )
+                self.OPENAI_API_KEY = get_secret(
+                    "OPENAI_API_KEY", default=self.OPENAI_API_KEY
+                )
                 self.ANTHROPIC_API_KEY = get_secret(
                     "ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY
                 )
@@ -84,7 +88,9 @@ class SecureSettings(BaseSettings):
         elif self.ENV in ["production", "staging"]:
             # Fail fast in production if secrets are not properly configured
             if self.SECRET_KEY == "insecure-default-secret-key":
-                raise RuntimeError("Production environment requires secure secret configuration")
+                raise RuntimeError(
+                    "Production environment requires secure secret configuration"
+                )
 
     # Firebase Configuration
     FIREBASE_PROJECT_ID: Optional[str] = None
@@ -223,7 +229,10 @@ if __name__ == "__main__":
     # Print all settings (without sensitive values)
     print("Current settings:")
     for field, value in settings.dict().items():
-        if any(sensitive in field.lower() for sensitive in ["key", "secret", "token", "password"]):
+        if any(
+            sensitive in field.lower()
+            for sensitive in ["key", "secret", "token", "password"]
+        ):
             print(f"{field}: {'*' * 8} (hidden)")
         else:
             print(f"{field}: {value}")

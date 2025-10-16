@@ -60,16 +60,16 @@ class PersonalCareerWorkflow:
         search_results = await asyncio.gather(*[web_search(q) for q in search_queries])
 
         # 2. Check for government pay scales (if applicable)
-        govt_pay_scale_info = "No specific government pay scale found in initial search."
+        govt_pay_scale_info = (
+            "No specific government pay scale found in initial search."
+        )
         if "social work" in job_title.lower():
             # Simplified check
             govt_search = await web_search(
                 "Fair Work Ombudsman Social and Community Services Award rates"
             )
             if govt_search:
-                govt_pay_scale_info = (
-                    f"Potential government award rates may apply. See: {govt_search[0]['url']}"
-                )
+                govt_pay_scale_info = f"Potential government award rates may apply. See: {govt_search[0]['url']}"
 
         # 3. Generate negotiation strategy with AI
         prompt = f"""
@@ -255,11 +255,13 @@ class PersonalCareerWorkflow:
             job_description = job_details.get("description", "")
 
             # 3. Generate complete application materials package
-            application_materials = await self.template_service.generate_application_materials(
-                job_title=job_title,
-                company_name=company_name,
-                job_description=job_description,
-                company_research=company_research.get("talking_points"),
+            application_materials = (
+                await self.template_service.generate_application_materials(
+                    job_title=job_title,
+                    company_name=company_name,
+                    job_description=job_description,
+                    company_research=company_research.get("talking_points"),
+                )
             )
 
             # 4. Generate interview prep materials
@@ -355,14 +357,19 @@ class PersonalCareerWorkflow:
         try:
             # Extract company from URL (simplified)
             company_name = (
-                job_url.split("//")[-1].split("/")[0].replace(".com", "").replace("www.", "")
+                job_url.split("//")[-1]
+                .split("/")[0]
+                .replace(".com", "")
+                .replace("www.", "")
             )
 
             # Mock job details extraction
             job_details = {
                 "title": "Community Services Worker",
                 "company": (
-                    company_name.title() if company_name != "example" else "Community Care Services"
+                    company_name.title()
+                    if company_name != "example"
+                    else "Community Care Services"
                 ),
                 "description": "Community services role focusing on client support and case management",
                 "salary": "65000-80000 AUD",
@@ -505,7 +512,9 @@ class PersonalCareerWorkflow:
             )
 
             # Generate template
-            template = await self.template_service.generate_template(template_enum, context)
+            template = await self.template_service.generate_template(
+                template_enum, context
+            )
 
             return {
                 "success": True,

@@ -43,13 +43,17 @@ class JobAnalyzer:
         try:
             # Input validation
             if not job_description or not isinstance(job_description, str):
-                raise InputValidationError("Job description is required and must be a string")
+                raise InputValidationError(
+                    "Job description is required and must be a string"
+                )
 
             # Sanitize inputs
             sanitized_job_desc = InputSanitizer.sanitize_text_input(job_description)
 
             # Delegate to the genkit flow implementation
-            result = self.job_analysis_flow(job_description=sanitized_job_desc.sanitized_content)
+            result = self.job_analysis_flow(
+                job_description=sanitized_job_desc.sanitized_content
+            )
 
             # Convert result to dict if needed
             if isinstance(result, str):
@@ -61,7 +65,9 @@ class JobAnalyzer:
                     # If not JSON, wrap in basic structure
                     result_dict = {"analysis": result, "raw_output": True}
             else:
-                result_dict = result if isinstance(result, dict) else {"analysis": str(result)}
+                result_dict = (
+                    result if isinstance(result, dict) else {"analysis": str(result)}
+                )
 
             logger.info(
                 f"Job analysis completed for user {user_id}",

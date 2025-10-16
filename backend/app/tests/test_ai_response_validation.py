@@ -80,7 +80,9 @@ class TestAIResponseValidator:
             "result": "Fallback result",
         }
 
-        result = self.validator.validate_response(invalid_response, "star_response", fallback_data)
+        result = self.validator.validate_response(
+            invalid_response, "star_response", fallback_data
+        )
 
         assert result.is_valid
         assert isinstance(result.parsed_data, STARResponse)
@@ -109,7 +111,9 @@ class TestAIResponseValidator:
         empty_responses = ["", "   ", None]
 
         for empty_response in empty_responses:
-            result = self.validator.validate_response(empty_response or "", "star_response")
+            result = self.validator.validate_response(
+                empty_response or "", "star_response"
+            )
             assert not result.is_valid
             assert result.error_type == ValidationErrorType.EMPTY_RESPONSE
 
@@ -174,7 +178,9 @@ class TestAIResponseValidator:
             }
         )
 
-        result = self.validator.validate_response(response_with_warnings, "star_response")
+        result = self.validator.validate_response(
+            response_with_warnings, "star_response"
+        )
 
         # This should fail validation due to empty required field
         assert not result.is_valid
@@ -398,7 +404,9 @@ class TestEdgeCases:
 
     def test_unknown_schema_error(self):
         """Test error for unknown schema"""
-        result = self.validator.validate_response('{"test": "data"}', "nonexistent_schema")
+        result = self.validator.validate_response(
+            '{"test": "data"}', "nonexistent_schema"
+        )
 
         assert not result.is_valid
         assert "Unknown schema" in result.error_message
@@ -529,7 +537,9 @@ if __name__ == "__main__":
 
     if result.is_valid:
         print("✅ Basic validation test passed")
-        print(f"   Validated STAR response with {len(result.validation_warnings)} warnings")
+        print(
+            f"   Validated STAR response with {len(result.validation_warnings)} warnings"
+        )
     else:
         print("❌ Basic validation test failed")
         print(f"   Error: {result.error_message}")
@@ -543,7 +553,9 @@ if __name__ == "__main__":
         "result": "Fallback result",
     }
 
-    result = validator.validate_response(invalid_response, "star_response", fallback_data)
+    result = validator.validate_response(
+        invalid_response, "star_response", fallback_data
+    )
 
     if result.is_valid and result.metadata.get("fallback_used"):
         print("✅ Fallback test passed")

@@ -56,8 +56,10 @@ async def createCalendarEvent(user_id: str, opportunity_data: dict) -> str:
     # Save the event ID to the opportunity document in Firestore for future reference
     opportunity_id = opportunity_data.get("id")
     if opportunity_id:
-        await db.collection("users").document(user_id).collection("opportunities").document(
-            opportunity_id
-        ).set({"calendar_event_id": created_event.get("id")}, merge=True)
+        await db.collection("users").document(user_id).collection(
+            "opportunities"
+        ).document(opportunity_id).set(
+            {"calendar_event_id": created_event.get("id")}, merge=True
+        )
 
     return created_event.get("id")
