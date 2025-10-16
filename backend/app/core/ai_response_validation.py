@@ -91,17 +91,27 @@ class STARResponse(BaseAIResponseSchema):
 class KSCAnalysis(BaseAIResponseSchema):
     """Key Selection Criteria analysis schema"""
 
-    ksc_interpretation: str = Field(..., description="Analysis of what the KSC is asking for")
-    key_competencies: List[str] = Field(..., description="Key skills/competencies tested")
+    ksc_interpretation: str = Field(
+        ..., description="Analysis of what the KSC is asking for"
+    )
+    key_competencies: List[str] = Field(
+        ..., description="Key skills/competencies tested"
+    )
     success_factors: List[str] = Field(..., description="What makes a strong response")
-    common_pitfalls: List[str] = Field(default_factory=list, description="Common mistakes to avoid")
+    common_pitfalls: List[str] = Field(
+        default_factory=list, description="Common mistakes to avoid"
+    )
 
 
 class ExperienceSelection(BaseAIResponseSchema):
     """Experience selection details schema"""
 
-    chosen_experience: str = Field(..., description="Description of selected experience")
-    relevance_score: float = Field(..., ge=0, le=100, description="Relevance score 0-100")
+    chosen_experience: str = Field(
+        ..., description="Description of selected experience"
+    )
+    relevance_score: float = Field(
+        ..., ge=0, le=100, description="Relevance score 0-100"
+    )
     selection_rationale: str = Field(..., description="Why this experience was chosen")
     alternative_experiences: List[str] = Field(
         default_factory=list, description="Other potential experiences"
@@ -121,8 +131,12 @@ class KSCResponseComplete(BaseAIResponseSchema):
 class SemanticAnalysis(BaseAIResponseSchema):
     """Semantic analysis response schema"""
 
-    similarity_score: float = Field(..., ge=0, le=100, description="Similarity score 0-100")
-    explanation: str = Field(..., min_length=10, description="Explanation for the score")
+    similarity_score: float = Field(
+        ..., ge=0, le=100, description="Similarity score 0-100"
+    )
+    explanation: str = Field(
+        ..., min_length=10, description="Explanation for the score"
+    )
 
     # Legacy field name support
     similarityScore: Optional[float] = None
@@ -137,11 +151,17 @@ class SemanticAnalysis(BaseAIResponseSchema):
 class JobRequirements(BaseAIResponseSchema):
     """Job requirements extraction schema"""
 
-    required_skills: List[str] = Field(default_factory=list, description="Required skills")
-    preferred_skills: List[str] = Field(default_factory=list, description="Preferred skills")
+    required_skills: List[str] = Field(
+        default_factory=list, description="Required skills"
+    )
+    preferred_skills: List[str] = Field(
+        default_factory=list, description="Preferred skills"
+    )
     experience_level: str = Field(default="", description="Required experience level")
     education_level: str = Field(default="", description="Required education level")
-    responsibilities: List[str] = Field(default_factory=list, description="Key responsibilities")
+    responsibilities: List[str] = Field(
+        default_factory=list, description="Key responsibilities"
+    )
 
     # Legacy field name support
     requiredSkills: Optional[List[str]] = None
@@ -166,17 +186,23 @@ class ResumeEntities(BaseAIResponseSchema):
     """Resume entities extraction schema"""
 
     skills: List[str] = Field(default_factory=list, description="Extracted skills")
-    experience: List[Dict[str, Any]] = Field(default_factory=list, description="Work experience")
+    experience: List[Dict[str, Any]] = Field(
+        default_factory=list, description="Work experience"
+    )
     education: List[Dict[str, Any]] = Field(
         default_factory=list, description="Education background"
     )
-    achievements: List[str] = Field(default_factory=list, description="Key achievements")
+    achievements: List[str] = Field(
+        default_factory=list, description="Key achievements"
+    )
 
 
 class CoverLetterResponse(BaseAIResponseSchema):
     """Cover letter generation response schema"""
 
-    cover_letter_content: str = Field(..., min_length=100, description="Generated cover letter")
+    cover_letter_content: str = Field(
+        ..., min_length=100, description="Generated cover letter"
+    )
     tone_analysis: Optional[Dict[str, Any]] = None
     customization_notes: List[str] = Field(default_factory=list)
     word_count: Optional[int] = None
@@ -300,7 +326,9 @@ class AIResponseValidator:
             # Step 1: Parse JSON
             if not response_content or response_content.strip() == "":
                 if fallback_data:
-                    return self._create_fallback_result(schema_class, fallback_data, schema_name)
+                    return self._create_fallback_result(
+                        schema_class, fallback_data, schema_name
+                    )
 
                 return ValidationResult(
                     is_valid=False,
@@ -317,7 +345,9 @@ class AIResponseValidator:
                 logger.warning(f"JSON parsing failed for {schema_name}: {str(e)}")
 
                 if fallback_data:
-                    return self._create_fallback_result(schema_class, fallback_data, schema_name)
+                    return self._create_fallback_result(
+                        schema_class, fallback_data, schema_name
+                    )
 
                 return ValidationResult(
                     is_valid=False,
@@ -348,7 +378,9 @@ class AIResponseValidator:
                 logger.error(f"Schema validation failed for {schema_name}: {str(e)}")
 
                 if fallback_data:
-                    return self._create_fallback_result(schema_class, fallback_data, schema_name)
+                    return self._create_fallback_result(
+                        schema_class, fallback_data, schema_name
+                    )
 
                 return ValidationResult(
                     is_valid=False,
@@ -361,7 +393,9 @@ class AIResponseValidator:
             logger.error(f"Unexpected error validating {schema_name}: {str(e)}")
 
             if fallback_data:
-                return self._create_fallback_result(schema_class, fallback_data, schema_name)
+                return self._create_fallback_result(
+                    schema_class, fallback_data, schema_name
+                )
 
             return ValidationResult(
                 is_valid=False,
@@ -414,9 +448,15 @@ class AIResponseValidator:
         for field_name, field_info in schema_class.__fields__.items():
             if field_name in data:
                 value = data[field_name]
-                if isinstance(value, str) and value.strip() == "" and field_info.required:
+                if (
+                    isinstance(value, str)
+                    and value.strip() == ""
+                    and field_info.required
+                ):
                     warnings.append(f"Required field '{field_name}' is empty")
-                elif isinstance(value, list) and len(value) == 0 and field_info.required:
+                elif (
+                    isinstance(value, list) and len(value) == 0 and field_info.required
+                ):
                     warnings.append(f"Required list field '{field_name}' is empty")
 
         return warnings

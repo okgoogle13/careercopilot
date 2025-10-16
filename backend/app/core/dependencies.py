@@ -30,7 +30,9 @@ def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
         "dev-token",
         "fallback-token-dev",
     ]:
-        return User(uid="dev-user-123", email="developer@example.com", name="Development User")
+        return User(
+            uid="dev-user-123", email="developer@example.com", name="Development User"
+        )
 
     # CRITICAL FIX: Ensure Firebase app is initialized before verifying tokens.
     # This check now assumes initialization happens at startup.
@@ -78,7 +80,12 @@ async def get_user_document_from_firestore(
     not-found errors, now using the Pydantic User model for type safety.
     """
     uid = current_user.uid
-    doc_ref = db.collection("users").document(uid).collection("documents").document(document_id)
+    doc_ref = (
+        db.collection("users")
+        .document(uid)
+        .collection("documents")
+        .document(document_id)
+    )
     doc = await doc_ref.get()
     if not doc.exists:
         raise HTTPException(status_code=404, detail="Document not found")

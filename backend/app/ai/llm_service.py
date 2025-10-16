@@ -51,7 +51,9 @@ def get_llm_response(prompt: str, model_params: dict) -> dict:
 
     # 2. If miss, call the actual LLM API and cache the result
     logger.info(
-        "Cache MISS - calling LLM API", cache_key=cache_key, model=model_params.get("model")
+        "Cache MISS - calling LLM API",
+        cache_key=cache_key,
+        model=model_params.get("model"),
     )
 
     # This would be replaced with actual Genkit AI API call

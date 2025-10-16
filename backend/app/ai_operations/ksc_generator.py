@@ -63,10 +63,14 @@ class KSCGenerator:
         try:
             # Input validation
             if not user_profile_data or not isinstance(user_profile_data, dict):
-                raise InputValidationError("User profile data is required and must be a dictionary")
+                raise InputValidationError(
+                    "User profile data is required and must be a dictionary"
+                )
 
             if not ksc_statement or not isinstance(ksc_statement, str):
-                raise InputValidationError("KSC statement is required and must be a string")
+                raise InputValidationError(
+                    "KSC statement is required and must be a string"
+                )
 
             # Sanitize inputs
             sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile_data)
@@ -171,8 +175,12 @@ class KSCGenerator:
                     if hasattr(validated_response.star_response, "dict")
                     else validated_response.star_response
                 ),
-                "response_enhancement": getattr(validated_response, "response_enhancement", None),
-                "interview_preparation": getattr(validated_response, "interview_preparation", None),
+                "response_enhancement": getattr(
+                    validated_response, "response_enhancement", None
+                ),
+                "interview_preparation": getattr(
+                    validated_response, "interview_preparation", None
+                ),
             }
 
             # Add metadata including validation info
@@ -194,9 +202,13 @@ class KSCGenerator:
             # Extract relevance score safely from validated data
             relevance_score = 0
             if hasattr(validated_response.experience_selection, "relevance_score"):
-                relevance_score = validated_response.experience_selection.relevance_score
+                relevance_score = (
+                    validated_response.experience_selection.relevance_score
+                )
             elif isinstance(parsed_result.get("experience_selection"), dict):
-                relevance_score = parsed_result["experience_selection"].get("relevance_score", 0)
+                relevance_score = parsed_result["experience_selection"].get(
+                    "relevance_score", 0
+                )
 
             logger.info(
                 f"KSC STAR response generated for user {user_id}",
@@ -207,7 +219,9 @@ class KSCGenerator:
                     "cached": response.cached,
                     "relevance_score": relevance_score,
                     "validation_successful": validation_result.is_valid,
-                    "fallback_used": validation_result.metadata.get("fallback_used", False),
+                    "fallback_used": validation_result.metadata.get(
+                        "fallback_used", False
+                    ),
                 },
             )
 
@@ -247,17 +261,22 @@ class KSCGenerator:
                 raise InputValidationError("At least one KSC statement is required")
 
             if len(ksc_statements) > 10:
-                raise InputValidationError("Maximum 10 KSC statements can be processed at once")
+                raise InputValidationError(
+                    "Maximum 10 KSC statements can be processed at once"
+                )
 
             sanitized_profile = InputSanitizer.sanitize_dict_input(user_profile_data)
             sanitized_kscs = [
-                InputSanitizer.sanitize_text_input(ksc).sanitized_content for ksc in ksc_statements
+                InputSanitizer.sanitize_text_input(ksc).sanitized_content
+                for ksc in ksc_statements
             ]
 
             preferences_context = ""
             if response_preferences:
                 prefs = InputSanitizer.sanitize_dict_input(response_preferences)
-                preferences_context = f"\\n\\nResponse Preferences: {json.dumps(prefs, indent=2)}"
+                preferences_context = (
+                    f"\\n\\nResponse Preferences: {json.dumps(prefs, indent=2)}"
+                )
 
             system_prompt = (
                 "You are an expert career coach specializing in comprehensive KSC "
@@ -358,7 +377,9 @@ Respond with ONLY the JSON object:"""
             return parsed_result
 
         except Exception as e:
-            logger.error(f"Error in multiple KSC generation for user {user_id}: {str(e)}")
+            logger.error(
+                f"Error in multiple KSC generation for user {user_id}: {str(e)}"
+            )
             raise AIError(
                 message=f"Multiple KSC generation failed: {str(e)}",
                 error_type=AIErrorType.UNKNOWN,
@@ -395,7 +416,9 @@ Respond with ONLY the JSON object:"""
                     InputSanitizer.sanitize_text_input(area).sanitized_content
                     for area in feedback_areas
                 ]
-                feedback_context = f"\\n\\nFocus improvement on: {', '.join(sanitized_feedback)}"
+                feedback_context = (
+                    f"\\n\\nFocus improvement on: {', '.join(sanitized_feedback)}"
+                )
 
             system_prompt = (
                 "You are a STAR response optimization expert who can identify "
@@ -478,9 +501,9 @@ Respond with ONLY the JSON object:"""
                 extra={
                     "user_id": user_id,
                     "feedback_areas": feedback_areas,
-                    "improvement_score": parsed_result.get("enhancement_metrics", {}).get(
-                        "overall_improvement_score", 0
-                    ),
+                    "improvement_score": parsed_result.get(
+                        "enhancement_metrics", {}
+                    ).get("overall_improvement_score", 0),
                 },
             )
 
