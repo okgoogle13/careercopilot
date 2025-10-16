@@ -331,17 +331,15 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
           cache-dependency-path: yarn.lock
-
-      - name: Enable Corepack for Yarn 4+
-        run: |
-          corepack enable
-          corepack prepare yarn@4.10.2 --activate
 
       - name: Get Yarn cache directory
         id: yarn-cache-dir
