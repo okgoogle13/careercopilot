@@ -11,25 +11,33 @@ module.exports = {
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', {
-      tsconfig: 'tsconfig.test.json',
-      diagnostics: {
-        warnOnly: true,
+    '^.+\\.(ts|tsx)$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.test.json',
+        diagnostics: {
+          warnOnly: true,
+        },
+        sourceMap: false, // Disable source maps to avoid write-file-atomic errors
       },
-    }],
-    '^.+\\.(js|jsx)$': ['babel-jest', {
-      presets: [
-        ['@babel/preset-env', { targets: { node: 'current' } }],
-        ['@babel/preset-react', { runtime: 'automatic' }]
-      ]
-    }],
+    ],
+    '^.+\\.(js|jsx)$': [
+      'babel-jest',
+      {
+        presets: [
+          ['@babel/preset-env', { targets: { node: 'current' } }],
+          ['@babel/preset-react', { runtime: 'automatic' }],
+        ],
+        sourceMaps: false, // Disable source maps to avoid write-file-atomic errors
+      },
+    ],
   },
   transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
+    'node_modules/(?!((@mui|@babel|@emotion|@testing-library|@radix-ui|clsx|react-hook-form|uuid|ansi-regex|strip-ansi|ansi-styles|chalk)/|.*\\.mjs$))',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  collectCoverage: true,
+  collectCoverage: false, // Disabled by default due to Node 20 write-file-atomic compatibility issue
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
@@ -51,6 +59,7 @@ module.exports = {
   testTimeout: 15000,
   verbose: true,
   bail: false,
+  cache: false, // Disable cache to avoid write-file-atomic errors
   reporters: [
     'default',
     [

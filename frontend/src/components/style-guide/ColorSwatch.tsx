@@ -42,7 +42,7 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: color.startsWith('var(') ? `var(${color})` : color
+          backgroundColor: color.startsWith('var(') ? `var(${color})` : color,
         }}
       >
         <Typography
@@ -54,7 +54,7 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
             fontWeight: 500,
             color: textColor === 'auto' ? (contrast > 0.5 ? 'black' : 'white') : 'inherit',
             backgroundColor: 'rgba(0,0,0,0.1)',
-            backdropFilter: 'blur(2px)'
+            backdropFilter: 'blur(2px)',
           }}
         >
           {name}
@@ -73,7 +73,7 @@ export const ColorSwatch: React.FC<ColorSwatchProps> = ({
                 py: 0.5,
                 borderRadius: 0.5,
                 backgroundColor: contrast > 4.5 ? 'success.light' : 'warning.light',
-                color: contrast > 4.5 ? 'success.contrastText' : 'warning.contrastText'
+                color: contrast > 4.5 ? 'success.contrastText' : 'warning.contrastText',
               }}
             >
               {contrast.toFixed(2)}:1

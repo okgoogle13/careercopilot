@@ -54,7 +54,9 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
   return (
     <Box sx={{ width: '100%' }} className={className}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>My Documents</Typography>
+        <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
+          My Documents
+        </Typography>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <IconButton
             onClick={() => setView('grid')}
@@ -65,9 +67,9 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
                 backgroundColor: 'primary.main',
                 color: 'primary.contrastText',
                 '&:hover': {
-                  backgroundColor: 'primary.dark'
-                }
-              })
+                  backgroundColor: 'primary.dark',
+                },
+              }),
             }}
             aria-label="Grid view"
           >
@@ -82,9 +84,9 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
                 backgroundColor: 'primary.main',
                 color: 'primary.contrastText',
                 '&:hover': {
-                  backgroundColor: 'primary.dark'
-                }
-              })
+                  backgroundColor: 'primary.dark',
+                },
+              }),
             }}
             aria-label="List view"
           >
@@ -96,18 +98,16 @@ export const DocumentBrowser: React.FC<DocumentBrowserProps> = ({
       {documents.length === 0 ? (
         <Box sx={{ textAlign: 'center', py: 6, color: 'text.secondary' }}>
           <Typography variant="h6">No documents found</Typography>
-          <Typography variant="body2" sx={{ mt: 1 }}>Upload your first document to get started</Typography>
+          <Typography variant="body2" sx={{ mt: 1 }}>
+            Upload your first document to get started
+          </Typography>
         </Box>
       ) : (
         <Grid container spacing={2}>
           {documents.map((doc) => (
             <Grid
-              item
               key={doc.id}
-              xs={12}
-              sm={view === 'grid' ? 6 : 12}
-              md={view === 'grid' ? 4 : 12}
-              lg={view === 'grid' ? 3 : 12}
+              size={{ xs: 12, sm: view === 'grid' ? 6 : 12, md: view === 'grid' ? 4 : 12, lg: view === 'grid' ? 3 : 12 }}
             >
               <DocumentCard
                 document={doc}

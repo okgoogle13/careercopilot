@@ -1,7 +1,6 @@
 import { formatFileSize, formatDate } from './utils';
 
 describe('Utils', () => {
-
   describe('formatFileSize', () => {
     it('should format 0 bytes correctly', () => {
       expect(formatFileSize(0)).toBe('0 Bytes');
@@ -41,26 +40,8 @@ describe('Utils', () => {
   });
 
   describe('formatDate', () => {
-    beforeAll(() => {
-      // Mock timezone to ensure consistent test results
-      jest.spyOn(Intl, 'DateTimeFormat').mockImplementation(
-        () =>
-          ({
-            format: (date: Date) => {
-              const options: Intl.DateTimeFormatOptions = {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-              };
-              return new Intl.DateTimeFormat('en-US', options).format(date);
-            },
-          }) as any
-      );
-    });
-
-    afterAll(() => {
-      jest.restoreAllMocks();
-    });
+    // No need to mock DateTimeFormat - it works consistently across environments
+    // Just test the actual behavior
 
     it('should format date correctly', () => {
       const date = new Date('2024-01-15');
@@ -100,7 +81,6 @@ describe('Utils', () => {
   });
 
   describe('edge cases and error handling', () => {
-
     it('formatFileSize should handle negative numbers', () => {
       expect(formatFileSize(-1024)).toBe('-1 KB');
     });

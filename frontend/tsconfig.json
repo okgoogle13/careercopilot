@@ -6,11 +6,8 @@
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": false,
+    "strict": true,
     "skipLibCheck": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -36,13 +33,6 @@
     "**/__mocks__/**",
     "__mocks__/**",
     "src/setupTests.ts",
-    "**/demo/**",
-    "**/*.stories.tsx",
-    "src/components/library/**",
-    "src/components/features/demo/**",
-    "src/components/features/opportunities/JobMatching.tsx",
-    "src/components/features/opportunities/CareerIntelligence.tsx",
-    "src/components/features/opportunities/InterviewPrep.tsx",
-    "src/components/features/opportunities/CareerGrowthHub.tsx"
+    "src/components/layout/fix-button-variants.ts"
   ]
 }

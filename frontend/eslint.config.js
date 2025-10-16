@@ -64,6 +64,7 @@ export default [
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-namespace': 'warn',
+      '@typescript-eslint/no-empty-object-type': 'off', // Allow empty interfaces for component props
       'prefer-const': 'error',
       'no-var': 'error',
       'no-undef': 'warn',

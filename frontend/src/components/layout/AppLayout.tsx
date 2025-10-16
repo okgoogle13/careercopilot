@@ -1,37 +1,37 @@
-import React, { useState } from 'react';
 import {
-  Box,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListItemButton,
-  Typography,
-  Avatar,
-  Divider,
-  useTheme,
-  useMediaQuery,
-  Chip,
-  Button,
-} from '@mui/material';
-import {
-  Menu as MenuIcon,
+  BarChart as BarChart3,
+  ChevronLeft,
   Dashboard,
   Description as FileText,
-  BarChart as BarChart3,
-  People as Users,
-  Settings,
-  TrendingUp,
-  GpsFixed as Target,
-  Chat as MessageSquare,
   Logout as LogOut,
+  Menu as MenuIcon,
+  Chat as MessageSquare,
   Palette,
-  ChevronLeft,
+  Settings,
+  GpsFixed as Target,
+  TrendingUp,
+  People as Users,
 } from '@mui/icons-material';
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  Chip,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import React, { useState } from 'react';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -186,7 +186,7 @@ export function AppLayout({
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button
             size="small"
-            startIcon={<Palette fontSize="small" />}
+            startIcon={<Palette sx={{ fontSize: 20 }} />}
             onClick={onThemeToggle}
             sx={{ fontSize: '0.75rem' }}
           >
@@ -223,8 +223,8 @@ export function AppLayout({
                       },
                     }}
                   >
-                    <ListItemIcon sx={{ minWidth: 40 }}>
-                      <Icon fontSize="small" />
+                    <ListItemIcon sx={{ minWidth: 40, fontSize: 20 }}>
+                      <Icon />
                     </ListItemIcon>
                     <ListItemText
                       primary={item.label}
@@ -275,8 +275,8 @@ export function AppLayout({
             },
           }}
         >
-          <ListItemIcon sx={{ minWidth: 40, color: 'inherit' }}>
-            <LogOut fontSize="small" />
+          <ListItemIcon sx={{ minWidth: 40, color: 'inherit', fontSize: 20 }}>
+            <LogOut />
           </ListItemIcon>
           <ListItemText
             primary="Sign Out"
@@ -334,7 +334,7 @@ export function AppLayout({
             <Button
               color="inherit"
               onClick={onToggleDemoNav}
-              startIcon={<ChevronLeft fontSize="small" />}
+              startIcon={<ChevronLeft sx={{ fontSize: 20 }} />}
               sx={{ fontSize: '0.75rem' }}
             >
               Hide Navigation
@@ -362,7 +362,7 @@ export function AppLayout({
                 boxSizing: 'border-box',
                 width: DRAWER_WIDTH,
                 border: 'none',
-                background: theme.palette.surface?.container || theme.palette.background.paper,
+                background: theme.palette.background.paper,
               },
             }}
           >
@@ -393,7 +393,7 @@ export function AppLayout({
           <Button
             variant="contained"
             onClick={onToggleDemoNav}
-            startIcon={<MenuIcon fontSize="small" />}
+            startIcon={<MenuIcon sx={{ fontSize: 'small' }} />}
             sx={{
               borderRadius: 20,
               px: 3,

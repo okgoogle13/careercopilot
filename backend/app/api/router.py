@@ -10,6 +10,7 @@ from fastapi import APIRouter
 from .endpoints import (
     analysis,
     auth,
+    config,
     workflows,
 )
 
@@ -19,6 +20,7 @@ api_router = APIRouter()
 routers = [
     (analysis.router, "/analysis", "Analysis"),
     (auth.router, "/auth", "Authentication"),
+    (config.router, "/config", "Configuration"),
     (workflows.router, "/workflows", "Workflows"),
 ]
 
