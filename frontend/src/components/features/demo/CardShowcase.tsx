@@ -15,6 +15,7 @@ import {
   Warning as AlertTriangle,
   AutorenewRounded as Loader2,
   PlayArrow as Play,
+  GpsFixed,
 } from '@mui/icons-material';
 import {
   Button,
@@ -282,7 +283,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   description: 'Generated this month',
                 },
                 {
-                  icon: GpsFixed as Target,
+                  icon: GpsFixed,
                   title: 'Applications',
                   value: '13',
                   description: 'Submitted applications',
