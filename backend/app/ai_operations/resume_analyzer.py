@@ -46,9 +46,7 @@ class ResumeAnalyzer:
         try:
             # Input validation
             if not resume_text or not isinstance(resume_text, str):
-                raise InputValidationError(
-                    "Resume text is required and must be a string"
-                )
+                raise InputValidationError("Resume text is required and must be a string")
 
             # Sanitize inputs
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
@@ -68,18 +66,14 @@ class ResumeAnalyzer:
                 except json.JSONDecodeError:
                     result_dict = {"analysis": result, "raw_output": True}
             else:
-                result_dict = (
-                    result if isinstance(result, dict) else {"analysis": str(result)}
-                )
+                result_dict = result if isinstance(result, dict) else {"analysis": str(result)}
 
             logger.info(
                 f"Resume analysis completed for user {user_id}",
                 extra={
                     "user_id": user_id,
                     "job_comparison": bool(job_analysis_data),
-                    "analysis_type": (
-                        "comparison" if job_analysis_data else "standalone"
-                    ),
+                    "analysis_type": ("comparison" if job_analysis_data else "standalone"),
                 },
             )
 
@@ -110,14 +104,10 @@ class ResumeAnalyzer:
         """
         try:
             if not resume_text or not isinstance(resume_text, str):
-                raise InputValidationError(
-                    "Resume text is required and must be a string"
-                )
+                raise InputValidationError("Resume text is required and must be a string")
 
             if not job_analysis_data or not isinstance(job_analysis_data, dict):
-                raise InputValidationError(
-                    "Job analysis data is required and must be a dictionary"
-                )
+                raise InputValidationError("Job analysis data is required and must be a dictionary")
 
             sanitized_resume = InputSanitizer.sanitize_text_input(resume_text)
 
@@ -136,9 +126,7 @@ class ResumeAnalyzer:
                 except json.JSONDecodeError:
                     result_dict = {"comparison": result, "raw_output": True}
             else:
-                result_dict = (
-                    result if isinstance(result, dict) else {"comparison": str(result)}
-                )
+                result_dict = result if isinstance(result, dict) else {"comparison": str(result)}
 
             logger.info(
                 f"Resume comparison completed for user {user_id}",

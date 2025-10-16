@@ -6,15 +6,11 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 
 
-def _rate_limit_exceeded_handler(
-    request: Request, exc: RateLimitExceeded
-) -> JSONResponse:
+def _rate_limit_exceeded_handler(request: Request, exc: RateLimitExceeded) -> JSONResponse:
     """
     Custom handler to return a 429 error when a rate limit is exceeded.
     """
-    return JSONResponse(
-        status_code=429, content={"detail": f"Rate limit exceeded: {exc.detail}"}
-    )
+    return JSONResponse(status_code=429, content={"detail": f"Rate limit exceeded: {exc.detail}"})
 
 
 def get_user_rate_limit_key(request: Request) -> str:

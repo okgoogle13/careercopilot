@@ -16,9 +16,7 @@ from firebase_admin import credentials
 settings = SecureSettings()
 
 # Configure structured logging
-configure_loguru(
-    environment=settings.ENV, log_dir="logs", service_name="careercopilot-api"
-)
+configure_loguru(environment=settings.ENV, log_dir="logs", service_name="careercopilot-api")
 
 # Get application logger
 logger = get_logger(__name__)
@@ -59,9 +57,7 @@ def on_startup():
         firebase_admin.initialize_app(cred)
         logger.info("Firebase Admin SDK initialized successfully")
     except Exception as e:
-        logger.critical(
-            "Failed to initialize Firebase Admin SDK", error=str(e), exc_info=True
-        )
+        logger.critical("Failed to initialize Firebase Admin SDK", error=str(e), exc_info=True)
         log_security_event("firebase_init_failure", error=str(e))
         # In production, consider failing fast if Firebase is essential
         if settings.ENV == "production":

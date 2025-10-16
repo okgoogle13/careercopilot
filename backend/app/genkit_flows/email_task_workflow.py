@@ -48,25 +48,17 @@ class OpportunityTaskResult(BaseModel):
     company: str = Field(description="Company name")
     match_score: int = Field(description="Compatibility score (0-100)", ge=0, le=100)
     task_created: bool = Field(description="Whether a calendar task was created")
-    calendar_event_id: str = Field(
-        default="", description="Calendar event ID if created"
-    )
+    calendar_event_id: str = Field(default="", description="Calendar event ID if created")
     processing_status: str = Field(description="success, failed, or skipped")
-    error_message: str = Field(
-        default="", description="Error message if processing failed"
-    )
+    error_message: str = Field(default="", description="Error message if processing failed")
 
 
 class WorkflowResult(BaseModel):
     """Overall workflow result structure"""
 
     success: bool = Field(description="Whether the workflow completed successfully")
-    total_opportunities_found: int = Field(
-        description="Total opportunities found in email"
-    )
-    opportunities_processed: int = Field(
-        description="Number of opportunities processed"
-    )
+    total_opportunities_found: int = Field(description="Total opportunities found in email")
+    opportunities_processed: int = Field(description="Number of opportunities processed")
     high_scoring_opportunities: int = Field(description="Opportunities with score > 80")
     tasks_created: int = Field(description="Number of calendar tasks created")
     processing_results: List[OpportunityTaskResult] = Field(
@@ -74,9 +66,7 @@ class WorkflowResult(BaseModel):
     )
     workflow_timestamp: str = Field(description="Workflow execution timestamp")
     execution_time_seconds: float = Field(description="Total execution time")
-    error_message: str = Field(
-        default="", description="Error message if workflow failed"
-    )
+    error_message: str = Field(default="", description="Error message if workflow failed")
 
 
 @genkit_flow(output_schema=WorkflowResult)
@@ -106,9 +96,7 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
             raise InputValidationError("User ID is required and must be a string")
 
         # Sanitize user_id
-        sanitized_user_id = InputSanitizer.sanitize_text_input(
-            user_id
-        ).sanitized_content
+        sanitized_user_id = InputSanitizer.sanitize_text_input(user_id).sanitized_content
 
         # Initialize workflow result
         workflow_result = WorkflowResult(
@@ -127,10 +115,10 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
         email_scan_result = await scanEmailsForJobOpportunities(sanitized_user_id)
 
         if not email_scan_result.get("success", False):
-            workflow_result.error_message = f"Email scanning failed: {email_scan_result.get('error', 'Unknown error')}"
-            workflow_result.execution_time_seconds = (
-                datetime.now() - start_time
-            ).total_seconds()
+            workflow_result.error_message = (
+                f"Email scanning failed: {email_scan_result.get('error', 'Unknown error')}"
+            )
+            workflow_result.execution_time_seconds = (datetime.now() - start_time).total_seconds()
             return workflow_result
 
         opportunities = email_scan_result.get("opportunities", [])
@@ -139,9 +127,7 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
         if not opportunities:
             print("No job opportunities found in emails")
             workflow_result.success = True
-            workflow_result.execution_time_seconds = (
-                datetime.now() - start_time
-            ).total_seconds()
+            workflow_result.execution_time_seconds = (datetime.now() - start_time).total_seconds()
             return workflow_result
 
         # Get user profile for job matching
@@ -164,15 +150,11 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
 
         # Workflow completed successfully
         workflow_result.success = True
-        workflow_result.execution_time_seconds = (
-            datetime.now() - start_time
-        ).total_seconds()
+        workflow_result.execution_time_seconds = (datetime.now() - start_time).total_seconds()
 
         print("Workflow completed successfully:")
         print(f"- Opportunities found: {workflow_result.total_opportunities_found}")
-        print(
-            f"- High-scoring opportunities: {workflow_result.high_scoring_opportunities}"
-        )
+        print(f"- High-scoring opportunities: {workflow_result.high_scoring_opportunities}")
         print(f"- Calendar tasks created: {workflow_result.tasks_created}")
 
         return workflow_result
@@ -180,9 +162,7 @@ async def scan_inbox_for_opportunities(user_id: str) -> WorkflowResult:
     except Exception as e:
         workflow_result.success = False
         workflow_result.error_message = str(e)
-        workflow_result.execution_time_seconds = (
-            datetime.now() - start_time
-        ).total_seconds()
+        workflow_result.execution_time_seconds = (datetime.now() - start_time).total_seconds()
 
         print(f"Workflow failed for user {user_id}: {str(e)}")
         return workflow_result
@@ -243,9 +223,7 @@ async def _process_opportunity(
                     )
             else:
                 print("No deadline found - skipping calendar task creation")
-                opportunity_result.error_message = (
-                    "No deadline available for calendar task"
-                )
+                opportunity_result.error_message = "No deadline available for calendar task"
 
         opportunity_result.processing_status = "success"
 
