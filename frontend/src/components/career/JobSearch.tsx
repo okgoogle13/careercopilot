@@ -324,7 +324,14 @@ export function JobSearch({
             <>
               <Grid container spacing={3}>
                 {currentJobs.map((job) => (
-                  <Grid size={{ xs: 12, md: viewMode === 'grid' ? 6 : 12, lg: viewMode === 'grid' ? 4 : 12 }} key={job.id}>
+                  <Grid
+                    size={{
+                      xs: 12,
+                      md: viewMode === 'grid' ? 6 : 12,
+                      lg: viewMode === 'grid' ? 4 : 12,
+                    }}
+                    key={job.id}
+                  >
                     <JobCard
                       {...job}
                       onBookmark={handleBookmark}

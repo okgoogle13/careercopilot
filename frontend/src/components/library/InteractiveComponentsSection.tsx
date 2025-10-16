@@ -34,7 +34,9 @@ export function InteractiveComponentsSection() {
     >
       <ComponentDemo title="Dialogs & Modals">
         <div className="flex flex-wrap gap-4">
-          <Button variant="outlined" onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
+          <Button variant="outlined" onClick={() => setIsDialogOpen(true)}>
+            Open Dialog
+          </Button>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogHeader>
               <DialogTitle>Dialog Title</DialogTitle>
@@ -48,12 +50,16 @@ export function InteractiveComponentsSection() {
               </div>
             </DialogContent>
             <DialogFooter>
-              <Button variant="outlined" onClick={() => setIsDialogOpen(false)}>Cancel</Button>
+              <Button variant="outlined" onClick={() => setIsDialogOpen(false)}>
+                Cancel
+              </Button>
               <Button onClick={() => setIsDialogOpen(false)}>Confirm</Button>
             </DialogFooter>
           </Dialog>
 
-          <Button variant="outlined" onClick={() => setIsAlertDialogOpen(true)}>Delete Item</Button>
+          <Button variant="outlined" onClick={() => setIsAlertDialogOpen(true)}>
+            Delete Item
+          </Button>
           <AlertDialog open={isAlertDialogOpen} onOpenChange={setIsAlertDialogOpen}>
             <AlertDialogHeader>
               <AlertDialogTitle>Are you sure?</AlertDialogTitle>
@@ -62,8 +68,12 @@ export function InteractiveComponentsSection() {
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
-              <AlertDialogCancel onClick={() => setIsAlertDialogOpen(false)}>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={() => setIsAlertDialogOpen(false)}>Delete</AlertDialogAction>
+              <AlertDialogCancel onClick={() => setIsAlertDialogOpen(false)}>
+                Cancel
+              </AlertDialogCancel>
+              <AlertDialogAction onClick={() => setIsAlertDialogOpen(false)}>
+                Delete
+              </AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialog>
         </div>

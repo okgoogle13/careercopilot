@@ -86,8 +86,6 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
       collab.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-
-
   const getPermissionColor = (permission: PermissionLevel) => {
     switch (permission) {
       case 'view':

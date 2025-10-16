@@ -12,10 +12,14 @@ export function ButtonComponentsSection() {
       <ComponentDemo title="Button Variants">
         <div className="flex flex-wrap gap-4">
           <Button variant="contained">Primary Button</Button>
-          <Button variant="contained" color="secondary">Secondary Button</Button>
+          <Button variant="contained" color="secondary">
+            Secondary Button
+          </Button>
           <Button variant="outlined">Outline Button</Button>
           <Button variant="text">Ghost Button</Button>
-          <Button variant="outlined" color="error">Destructive Button</Button>
+          <Button variant="outlined" color="error">
+            Destructive Button
+          </Button>
           <Button variant="text">Link Button</Button>
         </div>
       </ComponentDemo>

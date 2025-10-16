@@ -82,10 +82,7 @@ export function FormComponentsSection() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <Label>Radio Group</Label>
-            <RadioGroup
-              value={radioValue}
-              onChange={(e) => setRadioValue(e.target.value)}
-            >
+            <RadioGroup value={radioValue} onChange={(e) => setRadioValue(e.target.value)}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="option1" id="option1" />
                 <Label htmlFor="option1">Option 1</Label>
