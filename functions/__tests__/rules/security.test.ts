@@ -1,41 +1,41 @@
 import { getAuthedFirestore } from '../../test/setup';
-import { 
-  doc, 
-  setDoc, 
-  getDoc, 
-  updateDoc, 
-  deleteDoc, 
-  collection, 
-  query, 
-  where, 
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  collection,
+  query,
   getDocs,
-  writeBatch
+  writeBatch,
 } from 'firebase/firestore';
+import { Firestore } from 'firebase/firestore';
 
 // Test user data
 const TEST_USER = {
   uid: 'test-user',
   email: 'test@example.com',
-  name: 'Test User'
+  name: 'Test User',
 };
 
 const OTHER_USER = {
   uid: 'other-user',
   email: 'other@example.com',
-  name: 'Other User'
+  name: 'Other User',
 };
 
 describe('Firestore Security Rules', () => {
-  let testDb: any;
-  let otherUserDb: any;
-  let adminDb: any;
+  let testDb: Firestore;
+  let otherUserDb: Firestore;
+  let adminDb: Firestore;
 
   beforeAll(async () => {
     // Initialize Firestore with different user contexts
-    testDb = await getAuthedFirestore({ ...TEST_USER });
-    otherUserDb = await getAuthedFirestore({ ...OTHER_USER });
+    testDb = await getAuthedFirestore({...TEST_USER});
+    otherUserDb = await getAuthedFirestore({...OTHER_USER});
     // Admin has full access for setup/teardown
-    adminDb = await getAuthedFirestore({ uid: 'admin', admin: true });
+    adminDb = await getAuthedFirestore({uid: 'admin', admin: true});
   });
 
   // Clean up test data
