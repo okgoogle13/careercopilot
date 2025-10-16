@@ -52,18 +52,10 @@ class JobDescriptionAnalysisResult(BaseModel):
     location: str = Field(default="", description="Job location")
     job_type: str = Field(default="", description="Employment type")
     experience_level: str = Field(default="", description="Experience level required")
-    required_skills: List[str] = Field(
-        default_factory=list, description="Required skills"
-    )
-    preferred_skills: List[str] = Field(
-        default_factory=list, description="Preferred skills"
-    )
-    responsibilities: List[str] = Field(
-        default_factory=list, description="Job responsibilities"
-    )
-    requirements: List[str] = Field(
-        default_factory=list, description="Job requirements"
-    )
+    required_skills: List[str] = Field(default_factory=list, description="Required skills")
+    preferred_skills: List[str] = Field(default_factory=list, description="Preferred skills")
+    responsibilities: List[str] = Field(default_factory=list, description="Job responsibilities")
+    requirements: List[str] = Field(default_factory=list, description="Job requirements")
     salary_range: Optional[SalaryRange] = Field(None, description="Salary information")
     benefits: List[str] = Field(default_factory=list, description="Benefits offered")
     company_description: str = Field(default="", description="Company description")
@@ -93,9 +85,7 @@ class JobDescriptionAnalysisService(BaseAIService):
         """
         super().__init__(config or {})
         self.config = {
-            "model": (
-                config.get("model", settings.ai_model) if config else settings.ai_model
-            ),
+            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
             "max_tokens": (
                 config.get("max_tokens", settings.ai_max_tokens)
                 if config
@@ -144,9 +134,7 @@ class JobDescriptionAnalysisService(BaseAIService):
             raise ValueError("Job description text must be a non-empty string")
 
         if len(job_description_text) < 20:  # Minimum reasonable length
-            raise ValueError(
-                "Job description text is too short for meaningful analysis"
-            )
+            raise ValueError("Job description text is too short for meaningful analysis")
 
         # Check if service is enabled
         if not self.config.get("enabled", True):
@@ -185,9 +173,7 @@ class JobDescriptionAnalysisService(BaseAIService):
         text = re.sub(r"\s+", " ", text).strip()  # Normalize whitespace
         return text
 
-    def _get_default_result(
-        self, job_description_text: str = ""
-    ) -> JobDescriptionAnalysisResult:
+    def _get_default_result(self, job_description_text: str = "") -> JobDescriptionAnalysisResult:
         """Return a default result when analysis cannot be performed."""
         return JobDescriptionAnalysisResult(
             title="",
