@@ -48,8 +48,15 @@ export interface LayoutGridItemProps extends Omit<GridProps, 'container'> {
 
 export const LayoutGridItem = React.forwardRef<HTMLDivElement, LayoutGridItemProps>(
   ({ children, xs, sm, md, lg, xl, ...props }, ref) => {
+    // Build size object from breakpoint props
+    const definedBreakpoints = Object.fromEntries(
+      Object.entries({ xs, sm, md, lg, xl }).filter(([, value]) => value !== undefined)
+    );
+
+    const size = Object.keys(definedBreakpoints).length > 0 ? definedBreakpoints : undefined;
+
     return (
-      <Grid ref={ref} item xs={xs} sm={sm} md={md} lg={lg} xl={xl} {...props}>
+      <Grid ref={ref} size={size} {...props}>
         {children}
       </Grid>
     );
