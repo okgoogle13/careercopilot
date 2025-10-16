@@ -37,9 +37,7 @@ def initialize_firebase() -> Optional[App]:
     firebase_config = get_firebase_config()
 
     if not firebase_config.get("project_id"):
-        logger.warning(
-            "Firebase project ID not configured. Firebase features will be disabled."
-        )
+        logger.warning("Firebase project ID not configured. Firebase features will be disabled.")
         return None
 
     try:
@@ -78,9 +76,7 @@ def initialize_firebase() -> Optional[App]:
             # Try to get credentials from secret manager
             firebase_creds = get_firebase_credentials()
             if firebase_creds:
-                logger.info(
-                    "Initializing Firebase Admin SDK with credentials from Secret Manager"
-                )
+                logger.info("Initializing Firebase Admin SDK with credentials from Secret Manager")
                 cred = credentials.Certificate(firebase_creds)
             else:
                 logger.info("Initializing Firebase Admin SDK with default credentials")
@@ -97,9 +93,7 @@ def initialize_firebase() -> Optional[App]:
             if firebase_config["auth_emulator_host"]:
                 import os
 
-                os.environ["FIREBASE_AUTH_EMULATOR_HOST"] = firebase_config[
-                    "auth_emulator_host"
-                ]
+                os.environ["FIREBASE_AUTH_EMULATOR_HOST"] = firebase_config["auth_emulator_host"]
             if firebase_config["storage_emulator_host"]:
                 os.environ["FIREBASE_STORAGE_EMULATOR_HOST"] = firebase_config[
                     "storage_emulator_host"
@@ -109,15 +103,11 @@ def initialize_firebase() -> Optional[App]:
                     "database_emulator_host"
                 ]
 
-        logger.info(
-            f"Firebase Admin SDK initialized for project: {firebase_config['project_id']}"
-        )
+        logger.info(f"Firebase Admin SDK initialized for project: {firebase_config['project_id']}")
         return _firebase_app
 
     except (ValueError, FirebaseError) as e:
-        logger.error(
-            f"Failed to initialize Firebase Admin SDK: {str(e)}", exc_info=True
-        )
+        logger.error(f"Failed to initialize Firebase Admin SDK: {str(e)}", exc_info=True)
         _firebase_app = None
         return None
 

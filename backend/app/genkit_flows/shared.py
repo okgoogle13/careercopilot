@@ -42,6 +42,4 @@ def create_extraction_flow(
         return response.output()
 
     # Wrap with our standardized decorator
-    return create_flow_wrapper(
-        func=extraction_flow, name=name, output_schema=output_schema
-    )
+    return create_flow_wrapper(func=extraction_flow, name=name, output_schema=output_schema)

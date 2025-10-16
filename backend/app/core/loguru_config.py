@@ -166,9 +166,7 @@ def get_logger(name: str) -> Any:
     return logger.bind(context=name)
 
 
-def add_request_context(
-    request_id: str, user_id: Optional[str] = None, **extra: Any
-) -> Any:
+def add_request_context(request_id: str, user_id: Optional[str] = None, **extra: Any) -> Any:
     """
     Add request context to Loguru logger.
 

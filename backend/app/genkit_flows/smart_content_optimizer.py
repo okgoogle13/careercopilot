@@ -59,9 +59,7 @@ class OptimizationGoal(str, Enum):
 
 
 class OptimizationSuggestion(BaseModel):
-    type: str = Field(
-        description="Type of suggestion: word_choice, structure, keyword, format"
-    )
+    type: str = Field(description="Type of suggestion: word_choice, structure, keyword, format")
     priority: str = Field(description="high, medium, low priority")
     original_text: str = Field(description="Original text segment")
     suggested_text: str = Field(description="Optimized text suggestion")
@@ -74,26 +72,16 @@ class OptimizationSuggestion(BaseModel):
 
 class ATSAnalysis(BaseModel):
     ats_score: int = Field(description="ATS compatibility score (0-100)", ge=0, le=100)
-    keyword_density: float = Field(
-        description="Keyword density percentage", ge=0, le=100
-    )
-    readability_score: int = Field(
-        description="Human readability score (0-100)", ge=0, le=100
-    )
+    keyword_density: float = Field(description="Keyword density percentage", ge=0, le=100)
+    readability_score: int = Field(description="Human readability score (0-100)", ge=0, le=100)
     formatting_issues: List[str] = Field(description="ATS formatting problems")
     missing_keywords: List[str] = Field(description="Important keywords missing")
-    keyword_placement_suggestions: List[str] = Field(
-        description="Where to place key terms"
-    )
-    section_recommendations: List[str] = Field(
-        description="Section structure improvements"
-    )
+    keyword_placement_suggestions: List[str] = Field(description="Where to place key terms")
+    section_recommendations: List[str] = Field(description="Section structure improvements")
 
 
 class ContentOptimizationResult(BaseModel):
-    original_score: int = Field(
-        description="Original content quality score (0-100)", ge=0, le=100
-    )
+    original_score: int = Field(description="Original content quality score (0-100)", ge=0, le=100)
     optimized_score: int = Field(
         description="Expected score after optimization (0-100)", ge=0, le=100
     )
@@ -105,38 +93,20 @@ class ContentOptimizationResult(BaseModel):
     ats_analysis: ATSAnalysis = Field(description="ATS compatibility analysis")
 
     optimized_content: str = Field(description="Fully optimized version of content")
-    key_improvements: List[str] = Field(
-        description="Summary of major improvements made"
-    )
+    key_improvements: List[str] = Field(description="Summary of major improvements made")
 
-    next_steps: List[str] = Field(
-        description="Additional steps to further improve content"
-    )
+    next_steps: List[str] = Field(description="Additional steps to further improve content")
     success_metrics: List[str] = Field(description="How to measure success of changes")
 
 
 class PersonalBrandingAnalysis(BaseModel):
-    current_brand_strength: int = Field(
-        description="Current brand clarity (0-100)", ge=0, le=100
-    )
-    brand_consistency: int = Field(
-        description="Consistency across content (0-100)", ge=0, le=100
-    )
-    unique_value_proposition: str = Field(
-        description="Identified unique value proposition"
-    )
-    brand_keywords: List[str] = Field(
-        description="Key terms that define the personal brand"
-    )
-    messaging_gaps: List[str] = Field(
-        description="Areas where messaging could be stronger"
-    )
-    brand_positioning: str = Field(
-        description="How candidate should position themselves"
-    )
-    storytelling_opportunities: List[str] = Field(
-        description="Places to add compelling narratives"
-    )
+    current_brand_strength: int = Field(description="Current brand clarity (0-100)", ge=0, le=100)
+    brand_consistency: int = Field(description="Consistency across content (0-100)", ge=0, le=100)
+    unique_value_proposition: str = Field(description="Identified unique value proposition")
+    brand_keywords: List[str] = Field(description="Key terms that define the personal brand")
+    messaging_gaps: List[str] = Field(description="Areas where messaging could be stronger")
+    brand_positioning: str = Field(description="How candidate should position themselves")
+    storytelling_opportunities: List[str] = Field(description="Places to add compelling narratives")
 
 
 @genkit_flow(output_schema=ContentOptimizationResult)
@@ -159,9 +129,7 @@ def optimize_content_for_job(
     try:
         # Input validation
         if not all([content, job_description, content_type]):
-            raise InputValidationError(
-                "Content, job description, and content type are required"
-            )
+            raise InputValidationError("Content, job description, and content type are required")
 
         # Sanitize inputs
         sanitized_content = InputSanitizer.sanitize_text_input(content)
@@ -255,22 +223,14 @@ def analyze_personal_branding(
 
         sanitized_resume = InputSanitizer.sanitize_text_input(resume)
         sanitized_linkedin = (
-            InputSanitizer.sanitize_text_input(linkedin_profile)
-            if linkedin_profile
-            else None
+            InputSanitizer.sanitize_text_input(linkedin_profile) if linkedin_profile else None
         )
-        sanitized_goals = (
-            InputSanitizer.sanitize_text_input(career_goals) if career_goals else None
-        )
+        sanitized_goals = InputSanitizer.sanitize_text_input(career_goals) if career_goals else None
 
         content_sections = {
             "resume": sanitized_resume.sanitized_content,
-            "linkedin": (
-                sanitized_linkedin.sanitized_content if sanitized_linkedin else None
-            ),
-            "career_goals": (
-                sanitized_goals.sanitized_content if sanitized_goals else None
-            ),
+            "linkedin": (sanitized_linkedin.sanitized_content if sanitized_linkedin else None),
+            "career_goals": (sanitized_goals.sanitized_content if sanitized_goals else None),
         }
 
         prompt = f"""
@@ -327,19 +287,11 @@ class LinkedInOptimizationResult(BaseModel):
     headline_suggestions: List[str] = Field(description="Optimized headline options")
     summary_optimization: str = Field(description="Optimized about/summary section")
     skills_recommendations: List[str] = Field(description="Skills to highlight or add")
-    experience_improvements: List[str] = Field(
-        description="How to improve experience descriptions"
-    )
+    experience_improvements: List[str] = Field(description="How to improve experience descriptions")
     keyword_strategy: List[str] = Field(description="Keywords to incorporate naturally")
-    engagement_tips: List[str] = Field(
-        description="Tips for increasing profile engagement"
-    )
-    network_building_strategy: List[str] = Field(
-        description="Networking and connection strategies"
-    )
-    content_posting_ideas: List[str] = Field(
-        description="Ideas for LinkedIn posts and articles"
-    )
+    engagement_tips: List[str] = Field(description="Tips for increasing profile engagement")
+    network_building_strategy: List[str] = Field(description="Networking and connection strategies")
+    content_posting_ideas: List[str] = Field(description="Ideas for LinkedIn posts and articles")
 
 
 @genkit_flow(output_schema=LinkedInOptimizationResult)
@@ -365,9 +317,7 @@ def optimize_linkedin_profile(
     try:
         # Input validation
         if not all([current_profile, target_roles, industry_focus, career_stage]):
-            raise InputValidationError(
-                "All parameters are required for LinkedIn optimization"
-            )
+            raise InputValidationError("All parameters are required for LinkedIn optimization")
 
         sanitized_profile = InputSanitizer.sanitize_text_input(current_profile)
 
@@ -432,9 +382,7 @@ class MultiChannelOptimizationResult(BaseModel):
     elevator_pitch: str = Field(description="30-second elevator pitch")
     interview_talking_points: List[str] = Field(description="Key points for interviews")
     email_templates: Dict[str, str] = Field(description="Professional email templates")
-    consistency_score: int = Field(
-        description="Cross-platform consistency (0-100)", ge=0, le=100
-    )
+    consistency_score: int = Field(description="Cross-platform consistency (0-100)", ge=0, le=100)
     unified_messaging: List[str] = Field(description="Core messages to use everywhere")
 
 
