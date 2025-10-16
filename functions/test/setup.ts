@@ -1,6 +1,6 @@
 /* global beforeAll, afterAll */
-import { initializeTestEnvironment } from "@firebase/rules-unit-testing";
-import { readFileSync } from "fs";
+import {initializeTestEnvironment} from "@firebase/rules-unit-testing";
+import {readFileSync} from "fs";
 import path from "path";
 
 // Load Firestore rules from the file
@@ -33,6 +33,6 @@ afterAll(async () => {
 export const getAuthedFirestore = (auth?: Record<string, unknown>) => {
   return initializeTestEnvironment({
     projectId: "careercopilot-test",
-    firestore: { rules },
+    firestore: {rules},
   }).then((context) => context.authenticatedContext(auth).firestore());
 };
