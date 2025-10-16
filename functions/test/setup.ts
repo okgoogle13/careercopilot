@@ -29,9 +29,9 @@ afterAll(async () => {
   // Clean up any resources
 });
 
-export const getAuthedFirestore = (auth?: any) => {
+export const getAuthedFirestore = (auth?: Record<string, unknown>) => {
   return initializeTestEnvironment({
     projectId: 'careercopilot-test',
-    firestore: { rules },
+    firestore: {rules},
   }).then(context => context.authenticatedContext(auth).firestore());
 };
