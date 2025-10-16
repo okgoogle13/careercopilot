@@ -5,7 +5,7 @@ import { forwardRef } from 'react';
 
 type CardVariant = 'elevation' | 'outlined' | 'selected' | 'interactive';
 
-interface CardProps extends Omit<MuiCardProps, 'variant'> {
+export interface CardProps extends Omit<MuiCardProps, 'variant'> {
   variant?: CardVariant;
   children?: React.ReactNode;
 }
@@ -66,9 +66,10 @@ export const CardTitle = forwardRef<HTMLHeadingElement, React.ComponentProps<typ
 );
 CardTitle.displayName = 'CardTitle';
 
-export const CardDescription = forwardRef<HTMLParagraphElement, React.ComponentProps<typeof Typography>>(
-  (props, ref) => <Typography ref={ref} variant="body2" color="text.secondary" {...props} />
-);
+export const CardDescription = forwardRef<
+  HTMLParagraphElement,
+  React.ComponentProps<typeof Typography>
+>((props, ref) => <Typography ref={ref} variant="body2" color="text.secondary" {...props} />);
 CardDescription.displayName = 'CardDescription';
 
 export const CardAction = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(

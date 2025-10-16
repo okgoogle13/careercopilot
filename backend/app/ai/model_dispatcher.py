@@ -1,8 +1,10 @@
 # backend/app/ai/model_dispatcher.py
 
 from typing import Dict, List, Optional
-from .llm_service import get_llm_response
+
 from app.core.loguru_config import get_logger
+
+from .llm_service import get_llm_response
 
 logger = get_logger(__name__)
 
@@ -82,7 +84,11 @@ def dispatch_llm_call(
     )
 
     # Prepare model parameters
-    model_params = {"model": selected_model, "temperature": temperature, "task_type": task_type}
+    model_params = {
+        "model": selected_model,
+        "temperature": temperature,
+        "task_type": task_type,
+    }
 
     if max_tokens:
         model_params["max_tokens"] = max_tokens
@@ -197,18 +203,23 @@ def get_model_recommendations(task_types: List[str]) -> Dict:
 def generate_cover_letter(job_description: str, user_profile: str) -> Dict:
     """Generate a cover letter using optimal model selection."""
     prompt = (
-        f"Generate a cover letter for this job:\n{job_description}\n\nUser profile:\n{user_profile}"
+        f"Generate a cover letter for this job:\n{job_description}\n\n"
+        f"User profile:\n{user_profile}"
     )
     return dispatch_llm_call("cover_letter_generation", prompt, temperature=0.7)
 
 
 def optimize_resume(resume_content: str, job_description: str) -> Dict:
     """Optimize resume content using optimal model selection."""
-    prompt = f"Optimize this resume for the job:\n{job_description}\n\nResume:\n{resume_content}"
+    prompt = (
+        f"Optimize this resume for the job:\n{job_description}\n\n" f"Resume:\n{resume_content}"
+    )
     return dispatch_llm_call("resume_optimization", prompt, temperature=0.3)
 
 
 def extract_keywords(job_description: str) -> Dict:
     """Extract keywords using the most cost-effective model."""
-    prompt = f"Extract key skills and requirements from this job description:\n{job_description}"
+    prompt = (
+        f"Extract key skills and requirements from this job description:\n" f"{job_description}"
+    )
     return dispatch_llm_call("keyword_extraction", prompt, temperature=0.1)

@@ -34,18 +34,20 @@ export const AlertDialog = React.forwardRef<HTMLDivElement, AlertDialogProps>(
 
 AlertDialog.displayName = 'AlertDialog';
 
-export interface AlertDialogTriggerProps extends React.HTMLAttributes<HTMLElement> {
+export interface AlertDialogTriggerProps {
   asChild?: boolean;
+  children?: React.ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const AlertDialogTrigger = React.forwardRef<HTMLButtonElement, AlertDialogTriggerProps>(
   ({ children, asChild, ...props }, ref) => {
     if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children, { ref, ...props });
+      return React.cloneElement(children, { ...props, ref } as any);
     }
 
     return (
-      <Button ref={ref} {...props}>
+      <Button ref={ref as any} {...props}>
         {children}
       </Button>
     );

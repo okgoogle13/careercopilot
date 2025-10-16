@@ -43,7 +43,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 
   private handleRefresh = () => {
-    this.setState({ hasError: false, error: undefined, errorInfo: undefined });
+    this.setState({ hasError: false, error: undefined });
   };
 
   private handleGoHome = () => {

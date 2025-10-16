@@ -14,7 +14,9 @@ export function skipIfServerUnavailable(testFunction, testName) {
     const serverAvailable = await checkServerAvailability(page);
 
     if (!serverAvailable) {
-      console.log(`⚠️  Skipping test "${testName}" - Development server not running on localhost:5173`);
+      console.log(
+        `⚠️  Skipping test "${testName}" - Development server not running on localhost:5173`
+      );
       console.log(`   To run this test, start the dev server with: npm run dev`);
       return; // Skip the test
     }

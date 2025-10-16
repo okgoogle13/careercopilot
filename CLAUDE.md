@@ -45,51 +45,6 @@ GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.
 - `backend/app/core/genkit_init.py` - Genkit AI framework initialization and flow management
 - `verify_genkit.py` - Genkit verification and health check script
 
-## Design Token System
-
-### Automated Design Token Extraction
-
-- **Extract Tokens**: `./scripts/token-extract.sh` - Extract design tokens from MUI theme
-- **CI/CD Integration**: Tokens automatically extracted during build process
-- **Output Location**: `frontend/dist/tokens/design-tokens.json`
-- **Configuration**: `lovable.config.json` - Token extraction configuration
-
-### Design Token Workflow
-
-```bash
-# Manual token extraction (local development):
-./scripts/token-extract.sh
-
-# Tokens are automatically extracted during CI/CD build process
-# Available as build artifacts: 'design-tokens'
-
-# Configuration includes:
-# - Colors (palette)
-# - Typography (fonts, sizes)
-# - Spacing (margins, padding)
-# - Shadows (elevation)
-# - Shape (border radius)
-```
-
-### Token Integration
-
-- **Automatic Extraction**: Integrated into GitHub Actions CI/CD pipeline
-- **Build Integration**: Tokens extracted before frontend build process
-- **Fallback System**: Node.js fallback when Lovable CLI unavailable
-- **Artifact Upload**: Tokens uploaded as CI/CD artifacts for download
-- **Theme Source**: Extracted from `frontend/src/theme/theme.ts`
-
-### Token Usage
-
-```typescript
-// Import generated tokens in your components
-import designTokens from '../dist/tokens/design-tokens.json';
-
-// Use tokens for consistent styling
-const primaryColor = designTokens.colors.primary.main;
-const headingFont = designTokens.typography.fontSize.h1;
-```
-
 ## Linting Commands
 
 - **All Projects (Root)**:
@@ -115,7 +70,7 @@ const headingFont = designTokens.typography.fontSize.h1;
 - `yarn lint:fix` - Auto-fix ESLint issues (max 10 warnings)
 - `yarn lint:ci` - Run ESLint with CI settings (max 5 warnings)
 - `yarn storybook` - Start Storybook development server
-- `yarn build-storybook` - Build Storybook for production
+- `2` - Build Storybook for production
 
 ## Frontend Deployment Readiness Commands
 
@@ -133,34 +88,7 @@ const headingFont = designTokens.typography.fontSize.h1;
 
 ## Deployment Workflow Scripts
 
-### AI Cost Optimization Deployment Pipeline
-
-**Complete Production Deployment Workflow:**
-```bash
-/
-
-# 2. Provision Redis infrastructure and secrets
-./scripts/execute-infra-setup.sh
-
-# 3. Refactor codebase for AI optimization
-./scripts/run-code-refactor.sh
-
-# 4. Validate cache functionality
-./scripts/run-validation-tests.sh
-
-# 5. Deploy to production with AI features
-./scripts/deploy-production.sh
-```
-
-### AI Optimization Deployment Scripts
-
-- `./scripts/finalize-git-merge.sh` - Merge clean-start branch with AI optimization features
-- `./scripts/execute-infra-setup.sh` - Provision Redis Memorystore and configure secrets
-- `./scripts/run-code-refactor.sh` - Automatically refactor LLM calls to use cost optimization
-- `./scripts/run-validation-tests.sh` - Validate Redis caching and performance improvements
-- `./scripts/deploy-production.sh` - Deploy optimized backend to Cloud Run with Redis integration
-
-### Legacy Deployment Script: `./scripts/deploy.sh`
+### Main Deployment Script: `./scripts/deploy.sh`
 
 Available targets:
 
@@ -309,11 +237,6 @@ Options:
 - **Endpoint Tests**:
   - `test_ksc_integration.py` - POST /api/v1/ksc/generate endpoint validation
   - Request/response validation, error handling, concurrent request testing
-- **AI Optimization Testing**:
-  - `./scripts/run-validation-tests.sh` - Automated cache validation and performance testing
-  - Cache MISS → Cache HIT workflow verification
-  - Cost optimization feature validation
-  - Multi-environment compatibility testing
 
 ### End-to-End (E2E) Testing
 
@@ -453,73 +376,10 @@ gh workflow run ci.yml \
 - **Linting**: Unified ESLint configuration across workspaces
 - **Pre-commit**: Husky + lint-staged for automated code quality checks
 
-### AI Cost Optimization System
-
-- **Smart Model Dispatch**: Automatic model selection based on task complexity
-  - Ultra-fast models (`gemini-1.5-flash-8b`) for simple tasks (keyword extraction, classification)
-  - Balanced models (`gemini-1.5-pro`) for medium complexity (resume optimization, cover letters)
-  - Premium models (`gemini-1.5-pro-002`) only for complex reasoning and code generation
-- **Redis Caching Layer**: Eliminates redundant LLM API calls with intelligent cache management
-  - Automatic cache key generation based on prompt + model parameters
-  - 1-hour TTL with graceful fallback when Redis unavailable
-  - Real-time cache hit/miss monitoring and performance tracking
-- **Cost Tracking**: Comprehensive monitoring and optimization recommendations
-  - Per-request cost estimation with token usage tracking
-  - Model usage distribution analysis
-  - Expected 60-75% cost reduction through smart optimization
-- **Production Infrastructure**:
-  - Google Cloud Memorystore Redis (1GB BASIC tier)
-  - Terraform-managed infrastructure with automated provisioning
-  - Secret Manager integration for secure credential management
-
-### AI Service Integration
-
-- **Core Services**: `backend/app/ai/llm_service.py` - Redis caching with automatic failover
-- **Model Dispatcher**: `backend/app/ai/model_dispatcher.py` - Task-complexity-based model selection
-- **Cost Estimation**: Real-time cost tracking and optimization recommendations
-- **Convenience Functions**: Pre-configured functions for common CareerCopilot use cases
-  - `generate_cover_letter()` - Optimized cover letter generation
-  - `optimize_resume()` - Resume optimization with job-specific targeting
-  - `extract_keywords()` - Cost-effective keyword extraction
-
 ### Testing Infrastructure
 
 - **Frontend**: Jest with jsdom, React Testing Library, Playwright for E2E
 - **Functions**: Jest with comprehensive test coverage
-- **AI Optimization**: Comprehensive cache validation and cost optimization testing
 - **CI/CD**: GitHub Actions with parallel test execution
 - **Coverage**: Integrated coverage reporting
-
-## AI Cost Optimization Documentation
-
-### Core Documentation Files
-
-- **`REFACTORING_GUIDE.md`** - Complete migration guide from direct LLM calls to optimized dispatch
-- **`TEST_PLAN.md`** - Comprehensive testing procedures for cache validation and cost optimization
-- **`DEPLOYMENT_CHECKLIST.md`** - Production deployment checklist with rollback procedures
-- **`MONITORING_DASHBOARD.md`** - Google Cloud Monitoring dashboard setup and configuration
-- **`BACKUP_VERIFICATION_REPORT.md`** - Repository cleanup verification and recovery instructions
-
-### Infrastructure Configuration
-
-- **`infrastructure/terraform/redis.tf`** - Terraform configuration for Google Cloud Memorystore Redis
-- **`monitoring/dashboard.json`** - Google Cloud Monitoring dashboard JSON configuration
-- **`scripts/setup-redis-secrets.sh`** - Automated Redis credential management in Secret Manager
-
-### Expected Performance Impact
-
-- **Cost Reduction**: 60-75% reduction in AI API costs through intelligent model selection and caching
-- **Performance**: 80%+ faster response times for cached LLM requests
-- **Reliability**: Graceful fallback mechanisms ensure high availability
-- **Monitoring**: Comprehensive observability for cost optimization and system health
-
-### Quick Start - AI Optimization Deployment
-
-```bash
-# Complete deployment pipeline (run in sequence)
-./scripts/finalize-git-merge.sh      # Merge AI optimization features
-./scripts/execute-infra-setup.sh     # Provision Redis and secrets
-./scripts/run-code-refactor.sh       # Refactor codebase automatically
-./scripts/run-validation-tests.sh    # Validate cache functionality
-./scripts/deploy-production.sh       # Deploy to production
-```
+- memorize

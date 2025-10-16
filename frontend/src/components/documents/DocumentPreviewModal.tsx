@@ -1,9 +1,9 @@
+import { Download, Edit, Share as Share2, Delete as Trash2, Close as X } from '@mui/icons-material';
 import React from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '../ui/dialog';
-import { Button } from '../ui/button';
-import { Close as X, Download, Edit, Share as Share2, Delete as Trash2 } from '@mui/icons-material';
-import { Document } from './types';
 import { ATSScoreCircle } from '../features/Analysis/ATSScoreCircle';
+import { Button } from '../ui/button';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
+import { Document } from './types';
 
 interface DocumentPreviewModalProps {
   document: Document | null;
@@ -32,34 +32,27 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
 
   return (
     <Dialog open={!!document} onOpenChange={(open) => !open && onClose()}>
+      <DialogHeader className="flex flex-row items-center justify-between pb-4 border-b">
+        <div>
+          <DialogTitle className="text-xl">{document.title}</DialogTitle>
+          <p className="text-sm text-muted-foreground">
+            {document.type} • {formattedDate}
+          </p>
+        </div>
+        <div className="flex items-center space-x-2">
+          {document.atsScore !== undefined && (
+            <div className="flex items-center">
+              <span className="text-sm mr-2">ATS Score:</span>
+              <ATSScoreCircle score={document.atsScore} size="small" showScore={false} />
+              <span className="ml-1 font-medium">{document.atsScore}</span>
+            </div>
+          )}
+          <Button variant="link" size="small" onClick={onClose} className="ml-2" aria-label="Close">
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+      </DialogHeader>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-        <DialogHeader className="flex flex-row items-center justify-between pb-4 border-b">
-          <div>
-            <DialogTitle className="text-xl">{document.title}</DialogTitle>
-            <p className="text-sm text-muted-foreground">
-              {document.type} • {formattedDate}
-            </p>
-          </div>
-          <div className="flex items-center space-x-2">
-            {document.atsScore !== undefined && (
-              <div className="flex items-center">
-                <span className="text-sm mr-2">ATS Score:</span>
-                <ATSScoreCircle score={document.atsScore} size="small" showScore={false} />
-                <span className="ml-1 font-medium">{document.atsScore}</span>
-              </div>
-            )}
-            <Button
-              variant="link"
-              size="small"
-              onClick={onClose}
-              className="ml-2"
-              aria-label="Close"
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-        </DialogHeader>
-
         <div className="flex-1 overflow-auto py-6">
           {document.previewUrl ? (
             <div className="bg-muted/30 rounded-lg border border-border p-4 flex items-center justify-center">
@@ -75,7 +68,8 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
             </div>
           )}
         </div>
-
+      </DialogContent>
+      <DialogFooter>
         <div className="flex justify-between items-center pt-4 border-t">
           <div className="space-x-2">
             <Button variant="outline" size="small" onClick={() => onEdit?.(document)}>
@@ -103,7 +97,7 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
             </Button>
           </div>
         </div>
-      </DialogContent>
+      </DialogFooter>
     </Dialog>
   );
 };

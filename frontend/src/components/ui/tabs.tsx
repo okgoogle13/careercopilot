@@ -4,39 +4,35 @@ import MuiTab, { TabProps as MuiTabProps } from '@mui/material/Tab';
 import { Box, styled } from '@mui/material';
 
 // Tabs container component
-export const Tabs = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<typeof MuiTabs>
->(({ children, ...props }, ref) => (
-  <MuiTabs ref={ref} {...props}>
-    {children}
-  </MuiTabs>
-));
+export const Tabs = React.forwardRef<HTMLDivElement, React.ComponentProps<typeof MuiTabs>>(
+  ({ children, ...props }, ref) => (
+    <MuiTabs ref={ref} {...props}>
+      {children}
+    </MuiTabs>
+  )
+);
 
 Tabs.displayName = 'Tabs';
 
 // TabsList component (wrapper for individual tabs)
-export const TabsList = React.forwardRef<
-  HTMLDivElement,
-  React.ComponentProps<typeof MuiTabs>
->(({ children, ...props }, ref) => (
-  <MuiTabs ref={ref} {...props}>
-    {children}
-  </MuiTabs>
-));
+export const TabsList = React.forwardRef<HTMLDivElement, React.ComponentProps<typeof MuiTabs>>(
+  ({ children, ...props }, ref) => (
+    <MuiTabs ref={ref} {...props}>
+      {children}
+    </MuiTabs>
+  )
+);
 
 TabsList.displayName = 'TabsList';
 
 // TabsTrigger component (individual tab)
-interface TabsTriggerProps extends Omit<MuiTabProps, 'component'> {
+interface TabsTriggerProps extends Omit<MuiTabProps, 'component' | 'children'> {
   value: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const TabsTrigger = React.forwardRef<HTMLButtonElement, TabsTriggerProps>(
-  ({ children, ...props }, ref) => (
-    <MuiTab ref={ref} label={children} {...props} />
-  )
+  ({ children, ...props }, ref) => <MuiTab ref={ref as any} label={children} {...props} />
 );
 
 TabsTrigger.displayName = 'TabsTrigger';
@@ -51,13 +47,7 @@ interface TabsContentProps {
 
 export const TabsContent = React.forwardRef<HTMLDivElement, TabsContentProps>(
   ({ value, currentValue, children, className, ...props }, ref) => (
-    <Box
-      ref={ref}
-      role="tabpanel"
-      hidden={value !== currentValue}
-      className={className}
-      {...props}
-    >
+    <Box ref={ref} role="tabpanel" hidden={value !== currentValue} className={className} {...props}>
       {value === currentValue && children}
     </Box>
   )
@@ -79,8 +69,8 @@ const StyledTab = styled(MuiTab)(({ theme }) => ({
   },
 }));
 
-const Tab = React.forwardRef<HTMLDivElement, TabProps>((props, ref) => (
-  <StyledTab ref={ref} component="div" {...props} />
+const Tab = React.forwardRef<HTMLButtonElement, TabProps>((props, ref) => (
+  <StyledTab ref={ref as any} {...props} />
 ));
 
 Tab.displayName = 'Tab';

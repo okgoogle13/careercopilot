@@ -54,13 +54,13 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
           cursor: 'pointer',
           transition: 'colors 200ms',
           '&:hover': {
-            backgroundColor: 'action.hover'
+            backgroundColor: 'action.hover',
           },
           ...(isSelected && {
             outline: 2,
             outlineColor: 'primary.main',
-            backgroundColor: 'action.selected'
-          })
+            backgroundColor: 'action.selected',
+          }),
         }}
         onClick={handleClick}
         role="button"
@@ -69,7 +69,15 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
       >
         <Box sx={{ flexShrink: 0, mr: 2, fontSize: '2rem' }}>{icon}</Box>
         <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-          <Typography variant="subtitle1" sx={{ fontWeight: 500, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              fontWeight: 500,
+              textOverflow: 'ellipsis',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
+            }}
+          >
             {document.title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -81,11 +89,7 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             <ATSScoreCircle score={document.atsScore} size="small" />
           </Box>
         )}
-        <IconButton
-          onClick={handleDelete}
-          sx={{ ml: 2 }}
-          aria-label="Delete document"
-        >
+        <IconButton onClick={handleDelete} sx={{ ml: 2 }} aria-label="Delete document">
           <Delete />
         </IconButton>
       </Paper>
@@ -109,20 +113,22 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
         '&:hover': {
           boxShadow: 2,
           borderColor: 'primary.main',
-          borderOpacity: 0.3
+          borderOpacity: 0.3,
         },
         ...(isSelected && {
           outline: 2,
           outlineColor: 'primary.main',
-          backgroundColor: 'action.selected'
-        })
+          backgroundColor: 'action.selected',
+        }),
       }}
       onClick={handleClick}
       role="button"
       tabIndex={0}
       onKeyDown={(e) => e.key === 'Enter' && handleClick()}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1.5 }}>
+      <Box
+        sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 1.5 }}
+      >
         <Box sx={{ fontSize: '2.5rem' }}>{icon}</Box>
         {document.atsScore !== undefined && (
           <Box sx={{ mt: -1, mr: -1 }}>
@@ -131,7 +137,16 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
         )}
       </Box>
 
-      <Typography variant="subtitle1" sx={{ fontWeight: 500, mb: 0.5, textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>
+      <Typography
+        variant="subtitle1"
+        sx={{
+          fontWeight: 500,
+          mb: 0.5,
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+        }}
+      >
         {document.title}
       </Typography>
       <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
@@ -149,8 +164,8 @@ export const DocumentCard: React.FC<DocumentCardProps> = ({
             sx={{
               opacity: 0,
               '.MuiPaper-root:hover &': {
-                opacity: 1
-              }
+                opacity: 1,
+              },
             }}
             aria-label="Delete document"
           >

@@ -185,13 +185,13 @@ export const MUITest: React.FC<MUITestProps> = ({ onBack }) => {
         </Box>
         {/* Dialog Component Test */}
         <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-          <DialogClose onClick={() => setDialogOpen(false)} />
           <DialogHeader>
             <DialogTitle>MUI Dialog Component</DialogTitle>
             <DialogDescription>
               This is a test of the migrated MUI dialog component with proper theming and
               animations.
             </DialogDescription>
+            <DialogClose onClick={() => setDialogOpen(false)} />
           </DialogHeader>
           <DialogContent>
             <LayoutStack spacing={3}>

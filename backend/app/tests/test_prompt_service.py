@@ -16,58 +16,59 @@ from app.core.prompt_service import (
 )
 
 
+@pytest.fixture
+def temp_prompts_dir(tmp_path):
+    """Create a temporary prompts directory for testing"""
+    prompts_dir = tmp_path / "prompts"
+    prompts_dir.mkdir()
+
+    # Create test config
+    config_data = {
+        "prompt_management": {"version": "1.0", "cache_prompts": True},
+        "categories": {"test_category": {"name": "Test Category", "default_temperature": 0.3}},
+        "length_instructions": {
+            "concise": "Keep it short (100-200 words)",
+            "standard": "Standard length (300-400 words)",
+        },
+    }
+
+    config_file = prompts_dir / "prompt_config.json"
+    config_file.write_text(json.dumps(config_data, indent=2))
+
+    # Create test templates
+    templates_data = {
+        "test_template": {
+            "name": "Test Template",
+            "description": "A test template",
+            "category": "test_category",
+            "version": "1.0",
+            "template": "Hello {name}, this is a test with {param}.",
+            "parameters": ["name", "param"],
+            "output_format": "text",
+            "metadata": {"usage_count": 0},
+        },
+        "system_prompt_template": {
+            "name": "System Prompt Template",
+            "description": "Template with system prompt",
+            "category": "test_category",
+            "version": "1.0",
+            "system_prompt": "You are a helpful assistant.",
+            "template": "Process this: {input_text}",
+            "parameters": ["input_text"],
+            "output_format": "json",
+            "has_system_prompt": True,
+            "metadata": {"usage_count": 0},
+        },
+    }
+
+    templates_file = prompts_dir / "test_templates.json"
+    templates_file.write_text(json.dumps(templates_data, indent=2))
+
+    return str(prompts_dir)
+
+
 class TestPromptService:
     """Test the PromptService class"""
-
-    @pytest.fixture
-    def temp_prompts_dir(self, tmp_path):
-        """Create a temporary prompts directory for testing"""
-        prompts_dir = tmp_path / "prompts"
-        prompts_dir.mkdir()
-
-        # Create test config
-        config_data = {
-            "prompt_management": {"version": "1.0", "cache_prompts": True},
-            "categories": {"test_category": {"name": "Test Category", "default_temperature": 0.3}},
-            "length_instructions": {
-                "concise": "Keep it short (100-200 words)",
-                "standard": "Standard length (300-400 words)",
-            },
-        }
-
-        config_file = prompts_dir / "prompt_config.json"
-        config_file.write_text(json.dumps(config_data, indent=2))
-
-        # Create test templates
-        templates_data = {
-            "test_template": {
-                "name": "Test Template",
-                "description": "A test template",
-                "category": "test_category",
-                "version": "1.0",
-                "template": "Hello {name}, this is a test with {param}.",
-                "parameters": ["name", "param"],
-                "output_format": "text",
-                "metadata": {"usage_count": 0},
-            },
-            "system_prompt_template": {
-                "name": "System Prompt Template",
-                "description": "Template with system prompt",
-                "category": "test_category",
-                "version": "1.0",
-                "system_prompt": "You are a helpful assistant.",
-                "template": "Process this: {input_text}",
-                "parameters": ["input_text"],
-                "output_format": "json",
-                "has_system_prompt": True,
-                "metadata": {"usage_count": 0},
-            },
-        }
-
-        templates_file = prompts_dir / "test_templates.json"
-        templates_file.write_text(json.dumps(templates_data, indent=2))
-
-        return str(prompts_dir)
 
     def test_prompt_service_initialization(self, temp_prompts_dir):
         """Test that PromptService initializes correctly"""
@@ -136,8 +137,9 @@ class TestPromptService:
         instruction = service.get_length_instruction("concise")
         assert instruction == "Keep it short (100-200 words)"
 
+        # Nonexistent length type falls back to "standard" default
         instruction = service.get_length_instruction("nonexistent")
-        assert instruction == ""
+        assert instruction == "Standard length (300-400 words)"
 
     def test_validate_template_parameters(self, temp_prompts_dir):
         """Test parameter validation"""

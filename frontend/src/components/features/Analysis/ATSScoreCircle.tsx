@@ -50,7 +50,7 @@ export const ATSScoreCircle: React.FC<ATSScoreCircleProps> = ({
   const circumference = radius * 2 * Math.PI;
   const offset = circumference - (score / 100) * circumference;
 
-  const getColorClass = (score: number) => {
+  const getColorClass = (_core: number) => {
     if (score >= 80) return 'text-green-500';
     if (score >= 60) return 'text-blue-500';
     if (score >= 40) return 'text-yellow-500';
