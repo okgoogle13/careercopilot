@@ -1,16 +1,6 @@
-import { getAuthedFirestore } from '../../test/setup';
-import {
-  doc,
-  setDoc,
-  getDoc,
-  updateDoc,
-  deleteDoc,
-  collection,
-  query,
-  getDocs,
-  writeBatch,
-} from 'firebase/firestore';
-import { Firestore } from 'firebase/firestore';
+import {getAuthedFirestore} from '../../test/setup';
+import {doc, setDoc, getDoc, updateDoc, deleteDoc, collection, query, getDocs, writeBatch} from 'firebase/firestore';
+import {Firestore} from 'firebase/firestore';
 
 // Test user data
 const TEST_USER = {
