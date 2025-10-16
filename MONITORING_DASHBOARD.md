@@ -45,6 +45,7 @@ This document provides detailed specifications for creating a comprehensive Goog
 **Goal:** Confirm cost optimization is working as expected
 
 #### Configuration
+
 ```yaml
 Widget Type: Line Chart
 Display Name: "AI Model Usage Distribution"
@@ -55,6 +56,7 @@ Refresh Rate: 1 minute
 ```
 
 #### Metrics Configuration
+
 ```yaml
 Metric: cloudmonitoring.googleapis.com/vertex_ai/api_request_count
 Resource Type: vertex_ai_endpoint
@@ -76,13 +78,14 @@ Display Options:
   - X-Axis Label: "Time"
   - Legend Position: Right
   - Line Colors:
-    - gemini-1.5-flash-8b: Green (cheapest)
-    - gemini-1.5-flash: Blue (low cost)
-    - gemini-1.5-pro: Orange (medium cost)
-    - gemini-1.5-pro-002: Red (expensive)
+      - gemini-1.5-flash-8b: Green (cheapest)
+      - gemini-1.5-flash: Blue (low cost)
+      - gemini-1.5-pro: Orange (medium cost)
+      - gemini-1.5-pro-002: Red (expensive)
 ```
 
 #### Success Indicators
+
 - ✅ Green and blue lines trending upward (cheap models)
 - ✅ Orange and red lines trending downward (expensive models)
 - ✅ Overall shift toward cost-effective model usage
@@ -96,6 +99,7 @@ Display Options:
 **Goal:** Visualize cost reduction impact
 
 #### Configuration
+
 ```yaml
 Widget Type: Area Chart
 Display Name: "AI Service Costs Over Time"
@@ -106,6 +110,7 @@ Refresh Rate: 5 minutes
 ```
 
 #### Metrics Configuration
+
 ```yaml
 Metric: billing.googleapis.com/billing/billed_cost
 Resource Type: billing_account
@@ -130,6 +135,7 @@ Display Options:
 ```
 
 #### Success Indicators
+
 - ✅ Downward trending cost curve after optimization deployment
 - ✅ Daily cost reduction ≥50% compared to pre-optimization baseline
 - ✅ Sustained cost efficiency over time
@@ -143,6 +149,7 @@ Display Options:
 **Goal:** Validate smart model selection is working
 
 #### Configuration
+
 ```yaml
 Widget Type: Pie Chart
 Display Name: "Current Model Usage Distribution"
@@ -153,6 +160,7 @@ Refresh Rate: 5 minutes
 ```
 
 #### Metrics Configuration
+
 ```yaml
 Metric: cloudmonitoring.googleapis.com/vertex_ai/api_request_count
 Resource Type: vertex_ai_endpoint
@@ -178,6 +186,7 @@ Display Options:
 ```
 
 #### Success Indicators
+
 - ✅ Green + Blue slices ≥70% (cheap models dominating)
 - ✅ Red slice ≤10% (expensive model usage minimized)
 - ✅ Distribution aligns with task complexity expectations
@@ -191,6 +200,7 @@ Display Options:
 **Goal:** Track cache performance and cost savings
 
 #### Configuration
+
 ```yaml
 Widget Type: Stacked Bar Chart
 Display Name: "Redis Cache Hit/Miss Ratio"
@@ -201,6 +211,7 @@ Refresh Rate: 1 minute
 ```
 
 #### Metrics Configuration (Custom Metrics)
+
 ```yaml
 # Note: These are custom metrics logged by the application
 Metrics:
@@ -226,6 +237,7 @@ Display Options:
 ```
 
 #### Success Indicators
+
 - ✅ Cache hit ratio ≥60% after initial warm-up period
 - ✅ Increasing hit ratio over time as cache builds
 - ✅ Green (hits) should be larger than orange (misses)
@@ -239,6 +251,7 @@ Display Options:
 **Goal:** Ensure cache infrastructure is performing optimally
 
 #### Configuration
+
 ```yaml
 Widget Type: Line Chart
 Display Name: "Redis Instance Performance"
@@ -249,6 +262,7 @@ Refresh Rate: 1 minute
 ```
 
 #### Metrics Configuration
+
 ```yaml
 Metrics:
   1. CPU Utilization:
@@ -279,6 +293,7 @@ Display Options:
 ```
 
 #### Success Indicators
+
 - ✅ CPU utilization <70% during normal operations
 - ✅ Memory utilization <85% (allows for cache growth)
 - ✅ No sustained high utilization periods
@@ -292,6 +307,7 @@ Display Options:
 **Goal:** Demonstrate performance benefits of cache hits
 
 #### Configuration
+
 ```yaml
 Widget Type: Histogram
 Display Name: "AI Service Response Times (Cache Hit vs Miss)"
@@ -302,6 +318,7 @@ Refresh Rate: 2 minutes
 ```
 
 #### Metrics Configuration (Custom Metrics)
+
 ```yaml
 Metrics:
   1. Cache Hit Response Times:
@@ -329,6 +346,7 @@ Display Options:
 ```
 
 #### Success Indicators
+
 - ✅ Cache hit response times ≤200ms (fast)
 - ✅ Clear performance difference between hit/miss
 - ✅ Cache hits ≥80% faster than cache misses
@@ -342,6 +360,7 @@ Display Options:
 **Goal:** Ensure application stability hasn't been compromised
 
 #### Configuration
+
 ```yaml
 Widget Type: Stacked Area Chart
 Display Name: "Application Request Volume & Status Codes"
@@ -352,6 +371,7 @@ Refresh Rate: 1 minute
 ```
 
 #### Metrics Configuration
+
 ```yaml
 Metric: run.googleapis.com/request_count
 Resource Type: cloud_run_revision
@@ -378,6 +398,7 @@ Display Options:
 ```
 
 #### Success Indicators
+
 - ✅ 2xx responses ≥95% of total traffic
 - ✅ 5xx responses ≤1% of total traffic
 - ✅ No significant change in error patterns after deployment
@@ -391,6 +412,7 @@ Display Options:
 **Goal:** Early detection of issues caused by optimization changes
 
 #### Configuration
+
 ```yaml
 Widget Type: Line Chart
 Display Name: "Error Rate Monitoring"
@@ -401,6 +423,7 @@ Refresh Rate: 1 minute
 ```
 
 #### Metrics Configuration
+
 ```yaml
 Metrics:
   1. Overall Error Rate:
@@ -433,6 +456,7 @@ Display Options:
 ```
 
 #### Success Indicators
+
 - ✅ Error rate ≤5% consistently
 - ✅ Critical error rate ≤1%
 - ✅ No error spikes after optimization deployment
@@ -446,6 +470,7 @@ Display Options:
 **Goal:** Ensure optimization doesn't negatively impact user experience
 
 #### Configuration
+
 ```yaml
 Widget Type: Heatmap
 Display Name: "Request Latency Distribution"
@@ -456,6 +481,7 @@ Refresh Rate: 2 minutes
 ```
 
 #### Metrics Configuration
+
 ```yaml
 Metric: run.googleapis.com/request_latencies
 Resource Type: cloud_run_revision
@@ -471,12 +497,13 @@ Display Options:
   - Y-Axis Label: "Latency (ms)"
   - Color Scheme: Green (fast) to Red (slow)
   - Percentile Lines:
-    - P50: Solid line
-    - P95: Dashed line
-    - P99: Dotted line
+      - P50: Solid line
+      - P95: Dashed line
+      - P99: Dotted line
 ```
 
 #### Success Indicators
+
 - ✅ P95 latency ≤2000ms for cache misses
 - ✅ P95 latency ≤500ms for cache hits
 - ✅ Consistent latency patterns without degradation
@@ -488,6 +515,7 @@ Display Options:
 ### Critical Alerts
 
 #### Alert 1: High Error Rate
+
 ```yaml
 Alert Name: "CareerCopilot - High Error Rate"
 Condition: Error rate >10% for 5 minutes
@@ -496,6 +524,7 @@ Notification: Slack + Email + SMS
 ```
 
 #### Alert 2: Redis Cache Down
+
 ```yaml
 Alert Name: "CareerCopilot - Redis Cache Unavailable"
 Condition: Redis CPU = 0 for 2 minutes
@@ -504,6 +533,7 @@ Notification: Slack + Email
 ```
 
 #### Alert 3: Cost Anomaly
+
 ```yaml
 Alert Name: "CareerCopilot - Unexpected Cost Increase"
 Condition: Daily AI costs >150% of 7-day average
@@ -514,6 +544,7 @@ Notification: Email
 ### Performance Alerts
 
 #### Alert 4: Cache Hit Rate Low
+
 ```yaml
 Alert Name: "CareerCopilot - Low Cache Performance"
 Condition: Cache hit rate <30% for 30 minutes
@@ -522,6 +553,7 @@ Notification: Slack
 ```
 
 #### Alert 5: High Latency
+
 ```yaml
 Alert Name: "CareerCopilot - High Response Latency"
 Condition: P95 latency >5000ms for 10 minutes
@@ -534,6 +566,7 @@ Notification: Slack + Email
 ## 📋 Dashboard Setup Instructions
 
 ### Step 1: Create Dashboard
+
 ```bash
 # Navigate to Google Cloud Console
 # → Monitoring → Dashboards → Create Dashboard
@@ -541,6 +574,7 @@ Notification: Slack + Email
 ```
 
 ### Step 2: Configure Widgets
+
 ```bash
 # For each widget above:
 # 1. Click "+ Add Widget"
@@ -551,6 +585,7 @@ Notification: Slack + Email
 ```
 
 ### Step 3: Set Up Custom Metrics (if needed)
+
 ```python
 # Add to your application code:
 from google.cloud import monitoring_v3
@@ -571,6 +606,7 @@ def record_cache_metrics(cache_hit: bool, response_time: float):
 ```
 
 ### Step 4: Configure Alerts
+
 ```bash
 # Navigate to Monitoring → Alerting → Create Policy
 # Configure each alert as specified above
@@ -578,6 +614,7 @@ def record_cache_metrics(cache_hit: bool, response_time: float):
 ```
 
 ### Step 5: Share Dashboard
+
 ```bash
 # Dashboard → Share → Add Members
 # Grant view access to relevant team members
@@ -591,6 +628,7 @@ def record_cache_metrics(cache_hit: bool, response_time: float):
 ### Daily Monitoring Routine
 
 #### Morning Check (5 minutes)
+
 1. **Cost Efficiency Section**
    - Verify model distribution is optimal
    - Check for any cost anomalies overnight
@@ -607,6 +645,7 @@ def record_cache_metrics(cache_hit: bool, response_time: float):
    - Confirm overall system stability
 
 #### Weekly Analysis (15 minutes)
+
 1. **Cost Trend Analysis**
    - Calculate weekly savings achieved
    - Compare with baseline metrics
@@ -625,11 +664,13 @@ def record_cache_metrics(cache_hit: bool, response_time: float):
 ### Alert Response Procedures
 
 #### Critical Alerts
+
 - **High Error Rate**: Immediate investigation, consider rollback
 - **Redis Down**: Check infrastructure, enable cache bypass
 - **Cost Anomaly**: Investigate usage patterns, validate model selection
 
 #### Warning Alerts
+
 - **Low Cache Performance**: Analyze cache patterns, optimize TTL
 - **High Latency**: Check Redis performance, review model selection
 
@@ -640,16 +681,19 @@ def record_cache_metrics(cache_hit: bool, response_time: float):
 ### Dashboard KPIs
 
 **Cost Optimization KPIs:**
+
 - Overall AI cost reduction: Target ≥60%
 - Cheap model usage percentage: Target ≥70%
 - Daily cost trend: Target = downward
 
 **Performance KPIs:**
+
 - Cache hit rate: Target ≥60%
 - Cache hit response time: Target ≤200ms
 - Overall error rate: Target ≤5%
 
 **Infrastructure KPIs:**
+
 - Redis CPU utilization: Target <70%
 - Redis memory utilization: Target <85%
 - Service availability: Target ≥99.9%

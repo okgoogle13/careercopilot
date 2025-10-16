@@ -363,7 +363,9 @@ export function PageHeader({
                           }}
                         >
                           {Icon && (
-                            <Box sx={{ mr: 1, display: 'flex', alignItems: 'center', fontSize: 20 }}>
+                            <Box
+                              sx={{ mr: 1, display: 'flex', alignItems: 'center', fontSize: 20 }}
+                            >
                               <Icon />
                             </Box>
                           )}

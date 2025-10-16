@@ -19,13 +19,7 @@ async function isServerRunning() {
 }
 
 test.describe('KSC Generation Workflow', () => {
-  test.beforeEach(async ({ page }) => {
-    // Check if server is running before each test
-    const serverAvailable = await isServerRunning();
-    if (!serverAvailable) {
-      test.skip(true, 'Development server not running on localhost:5173. Start with: npm run dev');
-    }
-  });
+  
 
   test('happy path - complete KSC generation workflow', async ({ page }) => {
     // Step 1: Navigate to the KSC Generator page

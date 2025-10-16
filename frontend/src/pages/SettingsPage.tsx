@@ -228,9 +228,9 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
         </Alert>
       )}
 
-  <GridCompat container spacing={4}>
+      <GridCompat container spacing={4}>
         {/* Settings Navigation */}
-  <GridCompat xs={12} md={3}>
+        <GridCompat xs={12} md={3}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Tabs
               orientation="vertical"
@@ -277,10 +277,10 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
               />
             </Tabs>
           </Paper>
-  </GridCompat>
+        </GridCompat>
 
         {/* Settings Content */}
-  <GridCompat xs={12} md={9}>
+        <GridCompat xs={12} md={9}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
             {/* Profile Tab */}
             <TabPanel value={tabValue} index={0}>

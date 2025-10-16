@@ -79,6 +79,7 @@ python -m scripts.monitor_production
 ### Alerting
 
 Alerts are configured for:
+
 - High error rates (>1% of requests)
 - High cache miss rates (>50% for critical operations)
 - Unusual AI cost spikes

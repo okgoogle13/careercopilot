@@ -20,7 +20,7 @@ test.describe('Document Upload Success Workflow', () => {
     await page.waitForLoadState('networkidle');
   });
 
-  test.skip('successful document upload workflow - PDF resume', async ({ page }) => {
+  test('successful document upload workflow - PDF resume', async ({ page }) => {
     // Step 1: Verify we're on the upload page
     const pageTitle = await page.textContent('h1');
     expect(pageTitle).toMatch(/upload|document|resume/i);
@@ -264,7 +264,7 @@ test.describe('Document Upload Success Workflow', () => {
     await expect(page.locator('text=/success|uploaded|complete/i')).toBeVisible({ timeout: 15000 });
   });
 
-  test.skip('upload success with accessibility features', async ({ page }) => {
+  test('upload success with accessibility features', async ({ page }) => {
     // Test upload workflow with accessibility focus
 
     const fileInput = page.locator('input[type="file"]').first();

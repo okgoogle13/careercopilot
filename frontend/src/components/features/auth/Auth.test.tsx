@@ -57,7 +57,9 @@ describe('Auth Component', () => {
       // Check buttons
       expect(screen.getByRole('button', { name: 'Sign In' })).toBeInTheDocument();
       // Google button has text split across elements, so we search by text content
-      const googleButton = screen.getAllByRole('button').find(btn => btn.textContent?.includes('Continue with Google'));
+      const googleButton = screen
+        .getAllByRole('button')
+        .find((btn) => btn.textContent?.includes('Continue with Google'));
       expect(googleButton).toBeDefined();
       expect(screen.getByRole('button', { name: 'Sign Up' })).toBeInTheDocument();
     });
@@ -98,7 +100,9 @@ describe('Auth Component', () => {
     it('should call onLogin when Google sign-in button is clicked', () => {
       renderAuth();
       // Google button has text split across elements
-      const googleButton = screen.getAllByRole('button').find(btn => btn.textContent?.includes('Continue with Google'));
+      const googleButton = screen
+        .getAllByRole('button')
+        .find((btn) => btn.textContent?.includes('Continue with Google'));
       expect(googleButton).toBeDefined();
 
       fireEvent.click(googleButton!);
@@ -229,7 +233,9 @@ describe('Auth Component', () => {
     it('should render Google button with proper styling', () => {
       renderAuth();
       // Google button has text split across elements
-      const googleButton = screen.getAllByRole('button').find(btn => btn.textContent?.includes('Continue with Google'));
+      const googleButton = screen
+        .getAllByRole('button')
+        .find((btn) => btn.textContent?.includes('Continue with Google'));
 
       expect(googleButton).toBeDefined();
       expect(screen.getByText('G')).toBeInTheDocument(); // Google icon placeholder

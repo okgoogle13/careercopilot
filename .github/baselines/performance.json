@@ -7,14 +7,14 @@
       "name": "Backend API Response Time",
       "description": "Average response time for core API endpoints",
       "stats": {
-        "mean": 0.150,
-        "median": 0.120,
+        "mean": 0.15,
+        "median": 0.12,
         "std": 0.045,
-        "min": 0.080,
-        "max": 0.300
+        "min": 0.08,
+        "max": 0.3
       },
       "unit": "seconds",
-      "threshold": 0.200
+      "threshold": 0.2
     },
     {
       "name": "Frontend Load Time",
@@ -34,13 +34,13 @@
       "description": "Average database query execution time",
       "stats": {
         "mean": 0.025,
-        "median": 0.020,
+        "median": 0.02,
         "std": 0.015,
         "min": 0.005,
-        "max": 0.080
+        "max": 0.08
       },
       "unit": "seconds",
-      "threshold": 0.050
+      "threshold": 0.05
     },
     {
       "name": "AI LLM Response Time",
@@ -67,7 +67,7 @@
         "max": 0.015
       },
       "unit": "seconds",
-      "threshold": 0.010
+      "threshold": 0.01
     }
   ],
   "metadata": {
