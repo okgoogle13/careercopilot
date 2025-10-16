@@ -42,7 +42,7 @@ export function ATSScoreCircle({
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
   // Color based on score
-  const getScoreColor = (score: number) => {
+  const getScoreColor = (_core: number) => {
     if (score >= 80) return '#10b981'; // green-500
     if (score >= 60) return '#f59e0b'; // yellow-500
     return '#ef4444'; // red-500

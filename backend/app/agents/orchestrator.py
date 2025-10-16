@@ -172,12 +172,12 @@ class JobScoutAgent(BaseAgent):
         self, job: Dict[str, Any], context: Dict[str, Any]
     ) -> Dict[str, Any]:
         """Analyze job relevance using AI"""
-        # user_profile = context.get("user_profile", {})  # Available for future AI analysis
-
         # Future: Use this prompt with actual AI analysis
+        # user_profile = context.get("user_profile", {})
         # analysis_prompt = f"""
         # Analyze the relevance of this job for a candidate transitioning from
-        # {user_profile.get('career_from', 'finance')} to {user_profile.get('career_to', 'social work')}.
+        # {user_profile.get('career_from', 'finance')} to
+        # {user_profile.get('career_to', 'social work')}.
         #
         # Job: {job['title']} at {job['company']}
         # Description: {job['description']}
@@ -391,20 +391,30 @@ class ApplicationAgent(BaseAgent):
     async def _generate_cover_letter(self, job: Dict, profile: Dict, market_data: Dict) -> str:
         """Generate personalized cover letter"""
         # Mock cover letter generation (use actual AI in production)
+        career_from = profile.get("career_from", "finance")
+        career_to = profile.get("career_to", "social work")
+        job_title = job["title"]
+        company = job["company"]
+
+        insights = market_data.get("market_insights", [])
+        insight_text = insights[0] if insights else "Market analysis pending"
+
         return f"""
 Dear Hiring Manager,
 
-I am writing to express my strong interest in the {job['title']} position at {job['company']}.
-With a background in {profile.get('career_from', 'finance')} and a passion for community service,
-I am excited to transition into {profile.get('career_to', 'social work')}.
+I am writing to express my strong interest in the {job_title} position at {company}.
+With a background in {career_from} and a passion for community service,
+I am excited to transition into {career_to}.
 
-My experience in financial analysis has equipped me with strong analytical and problem-solving
-skills that translate well to case management and client assessment. I have developed
-exceptional stakeholder management capabilities and am comfortable working with diverse populations.
+My experience in financial analysis has equipped me with strong analytical and
+problem-solving skills that translate well to case management and client assessment.
+I have developed exceptional stakeholder management capabilities and am comfortable
+working with diverse populations.
 
-[Generated using market insights: {market_data.get('market_insights', [])[0] if market_data.get('market_insights') else 'Market analysis pending'}]
+[Generated using market insights: {insight_text}]
 
-I would welcome the opportunity to discuss how my unique background can contribute to your team.
+I would welcome the opportunity to discuss how my unique background can contribute
+to your team.
 
 Sincerely,
 [Your Name]
@@ -549,6 +559,7 @@ class AgentOrchestrator:
         """Run application preparation workflow"""
         # Similar to daily discovery but focused on application materials
         # Implementation would follow same pattern
+        return {}
 
     def get_session_status(self, session_id: str) -> Dict[str, Any]:
         """Get detailed status of a workflow session"""

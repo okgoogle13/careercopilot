@@ -17,7 +17,9 @@ test.describe('Basic Functionality Tests', () => {
   });
 
   test('can handle basic browser interactions', async ({ page }) => {
-    await page.goto('data:text/html,<html><body><h1>Test Page</h1><button id="testBtn">Click me</button><input id="testInput" placeholder="Type here"></body></html>');
+    await page.goto(
+      'data:text/html,<html><body><h1>Test Page</h1><button id="testBtn">Click me</button><input id="testInput" placeholder="Type here"></body></html>'
+    );
 
     // Test basic interactions
     await expect(page.locator('h1')).toContainText('Test Page');
@@ -34,7 +36,9 @@ test.describe('Basic Functionality Tests', () => {
   });
 
   test('can take screenshot', async ({ page }) => {
-    await page.goto('data:text/html,<html><body><h1 style="color: blue;">Playwright Test</h1></body></html>');
+    await page.goto(
+      'data:text/html,<html><body><h1 style="color: blue;">Playwright Test</h1></body></html>'
+    );
 
     // Take a screenshot to verify screenshot functionality
     await page.screenshot({ path: 'test-results/basic-screenshot.png' });

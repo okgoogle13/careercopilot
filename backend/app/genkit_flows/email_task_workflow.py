@@ -200,7 +200,7 @@ async def _process_opportunity(
         )
 
         # Step 2: Run advanced job matching
-        match_analysis = analyze_job_match_detailed(job_description, user_profile)
+        match_analysis = await analyze_job_match_detailed(job_description, user_profile)
         opportunity_result.match_score = match_analysis.overall_match_score
 
         print(f"Match score: {opportunity_result.match_score}")

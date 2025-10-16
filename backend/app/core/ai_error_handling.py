@@ -25,6 +25,15 @@ class AIErrorType(Enum):
     AUTHENTICATION = "authentication"
     GENERATION_FAILED = "generation_failed"
     UNKNOWN = "unknown"
+    # Document processing errors
+    DOCUMENT_PROCESSING_ERROR = "document_processing_error"
+    API_ERROR = "api_error"
+    PARSE_ERROR = "parse_error"
+    PROCESSING_ERROR = "processing_error"
+    # Model and generation errors
+    MODEL_UNAVAILABLE = "model_unavailable"
+    PROMPT_FORMATTING_ERROR = "prompt_formatting_error"
+    GENERATION_ERROR = "generation_error"
 
 
 @dataclass

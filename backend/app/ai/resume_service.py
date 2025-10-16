@@ -11,9 +11,10 @@ import logging
 import re
 from typing import Any, Dict, List, Optional
 
+from pydantic import BaseModel, Field
+
 from app.core.ai_client import get_ai_client
 from app.core.config import settings
-from pydantic import BaseModel, Field
 
 from .base_service import BaseAIService
 
@@ -176,7 +177,7 @@ class ResumeAnalysisService(BaseAIService):
 
     # These methods are kept for backward compatibility if needed elsewhere
 
-    def _get_default_result(self, resume_text: str) -> ResumeAnalysisResult:
+    def _get_default_result(self, resume_text: str = "") -> ResumeAnalysisResult:
         """Return a default result when analysis cannot be performed."""
         return ResumeAnalysisResult(
             skills=[],

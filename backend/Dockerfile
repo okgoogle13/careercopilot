@@ -1,104 +1,60 @@
-# Stage 1: Builder
-# This stage installs all dependencies, including build-time tools.
-FROM python:3.11-slim as builder
+# ===== Base Stage =====
+# Use a specific, slim Python version for a smaller base
+FROM python:3.13-slim as base
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100
+# Set environment variables for consistency
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV PIP_NO_CACHE_DIR off
+ENV PIP_DISABLE_PIP_VERSION_CHECK on
 
-# Install system dependencies required for building Python packages
-RUN apt-get update && apt-get install -y \
-    gcc \
-    g++ \
-    libffi-dev \
-    libssl-dev \
-    libpq-dev \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Python build dependencies
-RUN pip install --upgrade pip wheel
-
+# Set the working directory
 WORKDIR /app
 
-# Copy and install Python dependencies
+# Install system dependencies if any (e.g., for psycopg2)
+# RUN apt-get update && apt-get install -y --no-install-recommends build-essential libpq-dev
+
+# Copy only the requirements file first to leverage Docker cache
 COPY requirements.txt .
-RUN pip wheel --no-cache-dir --wheel-dir=/app/wheels -r requirements.txt
 
-
-# Stage 2: Development
-# This stage is for local development with hot-reloading.
-FROM builder as development
-
-WORKDIR /app
-
-# Install development dependencies and application packages
+# Install production dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Switch to a non-root user
-RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
-USER appuser
+# ===== Test Stage =====
+# This stage includes test-specific dependencies
+FROM base as test
 
-# Expose the application port
-EXPOSE 8000
+# Install additional dependencies for testing
+RUN pip install --no-cache-dir \
+    "pytest>=8.0.0" \
+    "pytest-cov>=4.1.0" \
+    "pytest-asyncio>=0.23.0" \
+    "httpx>=0.27.0" \
+    "requests>=2.31.0" \
+    "mypy>=1.8.0" \
+    "flake8>=7.0.0" \
+    "bandit>=1.7.6" \
+    "black>=24.0.0" \
+    "prometheus-client>=0.19.0"
 
-# Default command for development with hot-reloading
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-
-
-# Stage 3: Production (FINAL STAGE - used by Cloud Run)
-# This is the final, lean image for production.
-FROM python:3.11-slim as production
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
-    PYTHONPATH=/app:/app/app
-
-# Install only necessary runtime system dependencies
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    curl \
-    libglib2.0-0 \
-    libpango-1.0-0 \
-    libcairo2 \
-    fontconfig \
-    && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
-
-# Copy installed packages from the builder stage
-COPY --from=builder /app/wheels /wheels
-RUN pip install --no-cache --no-index --find-links=/wheels /wheels/*
-
-# Create a non-root user for security
-RUN groupadd -r appuser && useradd --no-log-init -r -g appuser appuser
-
-# Copy requirements first for better caching (already handled in builder stage)
-# Copy application code last to maximize cache efficiency
+# Copy the rest of the application code
 COPY . .
 
-# Ensure startup script is executable and owned by appuser
-RUN chmod +x /app/start.sh
+# Default command for running tests
+CMD ["python", "-m", "pytest", "app/tests/", "-v", "--tb=short", "--maxfail=5", "--disable-warnings", "--cov=app", "--cov-report=xml", "--cov-report=html:htmlcov"]
 
-# Create and set permissions for necessary directories
-RUN mkdir -p data/cache/{ai_operations,ai_responses,general,jobs,profiles,research} logs migrations/versions && \
-    chown -R appuser:appuser /app && \
-    chown appuser:appuser /app/start.sh
+# ===== Final/Production Stage =====
+# Start from the clean base stage
+FROM base as final
 
-# Switch to the non-root user
-USER appuser
+# Copy the installed packages from the base stage
+COPY --from=base /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
 
-# Expose the application port (Cloud Run uses PORT env variable)
-EXPOSE 8080
+# Copy the application code
+COPY . .
 
-# Health check for container orchestration
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8080/health || exit 1
+# Expose the port the app runs on
+EXPOSE 8000
 
-# Default command to run the application in production
-# Use ENTRYPOINT to ensure the startup script is executed
-ENTRYPOINT ["/app/start.sh"]
+# Command to run the application
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]

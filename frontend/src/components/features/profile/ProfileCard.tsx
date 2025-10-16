@@ -1,4 +1,4 @@
-import { Edit as Edit3, Delete as Trash2 } from '@mui/icons-material';
+import { Edit, Delete as Trash2 } from '@mui/icons-material';
 import { Avatar, AvatarFallback } from '../../ui/avatar';
 import {
   Button,
@@ -78,7 +78,7 @@ export function ProfileCard({
           className="flex-1 text-muted-foreground hover:text-card-foreground"
           onClick={onEdit}
         >
-          <Edit3 className="w-4 h-4" />
+          <Edit className="w-4 h-4" />
         </Button>
         <Button
           variant="text"

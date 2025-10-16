@@ -1,70 +1,55 @@
-import React, { useState } from 'react';
-import { Box,
-  Container,
-  Grid,
-  Paper,
-  Typography,
+import GridCompat from '@/components/ui/GridCompat';
+import {
+  Add,
+  Archive,
+  CheckCircle,
+  CloudUpload,
+  Delete,
+  Description,
+  Download,
+  Edit,
+  FilterList,
+  FolderOpen,
+  InsertDriveFile,
+  MoreVert,
+  School,
+  Search,
+  Share,
+  Sort,
+  Star,
+  StarBorder,
+  Work,
+} from '@mui/icons-material';
+import {
+  Alert,
+  Box,
   Button,
   Card,
   CardContent,
-  Avatar,
+  Checkbox,
   Chip,
-  Stack,
+  ChipProps,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Divider,
+  Fab,
   IconButton,
+  InputAdornment,
   Menu,
   MenuItem,
-  Divider,
-  TextField,
-  InputAdornment,
-  Fab,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  Tabs,
+  Paper,
+  Stack,
   Tab,
-  CircularProgress,
-  Alert,
-  Checkbox,
+  Tabs,
+  TextField,
   Toolbar,
   Tooltip,
-  Badge,
- } from '@mui/material';
-import {
-  Add,
-  Search,
-  FilterList,
-  Sort,
-  MoreVert,
-  Description,
-  Work,
-  School,
-  Edit,
-  Download,
-  Share,
-  Delete,
-  Visibility,
-  Star,
-  StarBorder,
-  CloudUpload,
-  FileCopy,
-  Archive,
-  Restore,
-  CheckCircle,
-  Schedule,
-  Warning,
-  FolderOpen,
-  InsertDriveFile,
-  PictureAsPdf,
-  Close,
-  CloudDownload,
-  Print,
-} from '@mui/icons-material';
+  Typography,
+} from '@mui/material';
+import React, { useState } from 'react';
 
 interface Document {
   id: string;
@@ -119,7 +104,6 @@ export function DocumentsPage({
   const [selectedDocuments, setSelectedDocuments] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
   const [dragOver, setDragOver] = useState(false);
 
@@ -141,14 +125,6 @@ export function DocumentsPage({
     setSelectedDocuments((prev) =>
       prev.includes(documentId) ? prev.filter((id) => id !== documentId) : [...prev, documentId]
     );
-  };
-
-  const handleSelectAll = () => {
-    if (selectedDocuments.length === documents.length) {
-      setSelectedDocuments([]);
-    } else {
-      setSelectedDocuments(documents.map((doc) => doc.id));
-    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
@@ -228,8 +204,8 @@ export function DocumentsPage({
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
+  const getStatusColor = (docStatus: Document['status']): ChipProps['color'] => {
+    switch (docStatus) {
       case 'active':
         return 'success';
       case 'draft':
@@ -390,8 +366,8 @@ export function DocumentsPage({
       </Box>
 
       {/* Stats and Search */}
-      <Grid2 container spacing={3} sx={{ mb: 4 }}>
-        <Grid2 xs={12} sm={6} md={3}>
+      <GridCompat container spacing={3} sx={{ mb: 4 }}>
+        <GridCompat item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -405,9 +381,9 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
+        </GridCompat>
 
-        <Grid2 xs={12} sm={6} md={3}>
+        <GridCompat item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -421,9 +397,9 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
+        </GridCompat>
 
-        <Grid2 xs={12} sm={6} md={3}>
+        <GridCompat item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -437,9 +413,9 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
+        </GridCompat>
 
-        <Grid2 xs={12} sm={6} md={3}>
+        <GridCompat item xs={12} sm={6} md={3}>
           <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
             <CardContent>
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
@@ -453,8 +429,8 @@ export function DocumentsPage({
               </Typography>
             </CardContent>
           </Card>
-        </Grid2>
-      </Grid2>
+        </GridCompat>
+      </GridCompat>
 
       {/* Search and Filters */}
       <Paper elevation={0} sx={{ p: 3, mb: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
@@ -553,9 +529,9 @@ export function DocumentsPage({
                 </Typography>
               </Box>
             ) : (
-              <Grid2 container spacing={3}>
+              <GridCompat container spacing={3}>
                 {currentDocuments.map((document) => (
-                  <Grid2 xs={12} sm={6} md={4} lg={3} key={document.id}>
+                  <GridCompat xs={12} sm={6} md={4} lg={3} key={document.id}>
                     <Card
                       elevation={0}
                       sx={{
@@ -628,7 +604,7 @@ export function DocumentsPage({
                             <Chip
                               label={document.status}
                               size="small"
-                              color={getStatusColor(document.status) as any}
+                              color={getStatusColor(document.status)}
                               sx={{ textTransform: 'capitalize' }}
                             />
                             {document.atsScore && (
@@ -664,9 +640,9 @@ export function DocumentsPage({
                         </Box>
                       </CardContent>
                     </Card>
-                  </Grid2>
+                  </GridCompat>
                 ))}
-              </Grid2>
+              </GridCompat>
             )}
           </Box>
         </TabPanel>
@@ -679,16 +655,7 @@ export function DocumentsPage({
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>
-          Upload Documents
-          <IconButton
-            aria-label="close"
-            onClick={() => setUploadDialogOpen(false)}
-            sx={{ position: 'absolute', right: 8, top: 8 }}
-          >
-            <Close />
-          </IconButton>
-        </DialogTitle>
+        <DialogTitle>Upload Documents</DialogTitle>
         <DialogContent>
           <Box
             sx={{
@@ -748,14 +715,6 @@ export function DocumentsPage({
         >
           <Edit sx={{ mr: 1.5 }} />
           Edit
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Visibility sx={{ mr: 1.5 }} />
-          Preview
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <FileCopy sx={{ mr: 1.5 }} />
-          Duplicate
         </MenuItem>
         <MenuItem onClick={handleMenuClose}>
           <Download sx={{ mr: 1.5 }} />
