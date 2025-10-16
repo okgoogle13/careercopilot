@@ -1,4 +1,4 @@
-import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
+import {SecretManagerServiceClient} from "@google-cloud/secret-manager";
 
 // Initialize the Secret Manager client
 const client = new SecretManagerServiceClient();
@@ -16,7 +16,7 @@ export async function getSecret(secretName: string): Promise<string> {
     }
 
     const name = `projects/${projectId}/secrets/${secretName}/versions/latest`;
-    const [version] = await client.accessSecretVersion({ name });
+    const [version] = await client.accessSecretVersion({name});
 
     if (!version.payload || !version.payload.data) {
       throw new Error(`No payload data found for secret: ${secretName}`);
@@ -48,12 +48,12 @@ export async function getSecrets<T extends string>(
 ): Promise<{ [K in T]: string }> {
   const secretPromises = secretNames.map(async (name) => {
     const value = await getSecret(name);
-    return { name, value };
+    return {name, value};
   });
 
   const results = await Promise.all(secretPromises);
   return results.reduce(
-    (acc, { name, value }) => {
+    (acc, {name, value}) => {
       acc[name as T] = value;
       return acc;
     },
