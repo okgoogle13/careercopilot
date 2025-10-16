@@ -1,5 +1,5 @@
 import {
-  BarChart as BarChart3,
+  BarChart,
   ChevronLeft,
   Dashboard,
   Description as FileText,
@@ -8,9 +8,10 @@ import {
   Chat as MessageSquare,
   Palette,
   Settings,
-  GpsFixed as Target,
+  GpsFixed,
   TrendingUp,
   People as Users,
+  ChatBubble,
 } from '@mui/icons-material';
 import {
   AppBar,
@@ -74,13 +75,13 @@ const mainNavigation: NavigationItem[] = [
   {
     id: 'ats-analysis',
     label: 'ATS Analysis',
-    icon: BarChart as BarChart3,
+    icon: BarChart,
     description: 'Resume scoring and optimization',
   },
   {
     id: 'job-matching',
     label: 'Job Matching',
-    icon: GpsFixed as Target,
+    icon: GpsFixed,
     description: 'AI-powered job recommendations',
     divider: true,
   },
@@ -93,7 +94,7 @@ const mainNavigation: NavigationItem[] = [
   {
     id: 'interview-prep',
     label: 'Interview Prep',
-    icon: MessageSquare,
+    icon: ChatBubble,
     description: 'Practice and feedback',
   },
   {

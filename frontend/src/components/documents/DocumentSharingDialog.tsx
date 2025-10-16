@@ -9,7 +9,7 @@ import {
   ContentCopy as Copy,
   Check,
   Search,
-  PersonAdd as UserAdd,
+  PersonAdd as UserPlus,
   Mail,
   Lock,
   Public as Globe,
