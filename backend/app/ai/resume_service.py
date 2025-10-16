@@ -52,15 +52,11 @@ class ResumeAnalysisResult(BaseModel):
         raw_data: Raw analysis data from AI
     """
 
-    skills: List[str] = Field(
-        default_factory=list, description="List of extracted skills"
-    )
+    skills: List[str] = Field(default_factory=list, description="List of extracted skills")
     experience: List[Experience] = Field(
         default_factory=list, description="Work experience entries"
     )
-    education: List[Education] = Field(
-        default_factory=list, description="Education history"
-    )
+    education: List[Education] = Field(default_factory=list, description="Education history")
     summary: str = Field(default="", description="Professional summary")
     raw_data: Optional[Dict[str, Any]] = None
 
@@ -87,9 +83,7 @@ class ResumeAnalysisService(BaseAIService):
         """
         super().__init__(config or {})
         self.config = {
-            "model": (
-                config.get("model", settings.ai_model) if config else settings.ai_model
-            ),
+            "model": (config.get("model", settings.ai_model) if config else settings.ai_model),
             "max_tokens": (
                 config.get("max_tokens", settings.ai_max_tokens)
                 if config
