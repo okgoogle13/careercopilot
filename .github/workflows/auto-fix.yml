@@ -7,7 +7,6 @@
 # 2. Performance Caching: Added caching for Pip (linters), Yarn (root),
 #    and NPM (functions) to speed up execution.
 # 3. Maintainability: Standardized on Yarn workspace commands for clarity.
-#
 name: Auto Fix Linting Issues
 
 on:
@@ -38,7 +37,7 @@ jobs:
     timeout-minutes: 10
 
     # Skip auto-fix for bot commits to avoid loops
-    if: ${{ !contains(github.event.head_commit.message, '[skip auto-fix]') && !contains(github.event.head_commit.message, 'ðŸ¤– Auto-fix') }}
+    if: ${{ !contains(github.event.head_commit.message, '[skip auto-fix]') && !contains(github.event.head_commit.message, 'style(auto):') }}
 
     steps:
       - name: Checkout repository
@@ -98,10 +97,10 @@ jobs:
           fi
 
           # Check frontend files (using workspace commands)
-          if ! yarn workspace careercopilot-frontend lint --quiet; then
+          if ! yarn workspace careercopilot-frontend lint --quiet 2>/dev/null; then
             echo "ESLint fixes needed"
             CHANGES_NEEDED=true
-          elif ! yarn workspace careercopilot-frontend format:check --quiet; then
+          elif ! yarn workspace careercopilot-frontend format:check --quiet 2>/dev/null; then
             echo "Prettier formatting needed"
             CHANGES_NEEDED=true
           fi
@@ -121,28 +120,28 @@ jobs:
       - name: Apply Python formatting fixes
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
-          echo "ðŸ Applying Python formatting fixes..."
+          echo "Applying Python formatting fixes..."
           black backend/ --line-length=100
           isort backend/ --profile=black --line-length=100
           autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
-          echo "âœ… Python formatting complete"
+          echo "Python formatting complete"
 
       - name: Apply Frontend formatting fixes
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
-          echo "âš›ï¸ Applying Frontend formatting fixes..."
-          # Use the 'format' script from frontend/package.json
-          yarn workspace careercopilot-frontend format || true
-          # Run lint:fix as well
-          yarn workspace careercopilot-frontend lint:fix || true
-          echo "âœ… Frontend formatting complete"
+          echo "Applying Frontend formatting fixes..."
+          cd frontend
+          npm run format || true
+          npm run lint:fix || true
+          cd ..
+          echo "Frontend formatting complete"
 
       - name: Apply Functions linting fixes
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
-          echo "ðŸ”§ Applying Functions linting fixes..."
+          echo "Applying Functions linting fixes..."
           yarn workspace functions lint:fix || true
-          echo "âœ… Functions linting fixes complete"
+          echo "Functions linting fixes complete"
 
       - name: Check if changes were made
         id: git-check
@@ -154,15 +153,16 @@ jobs:
             echo "changes_made=true" >> $GITHUB_OUTPUT
           else
             echo "changes_made=false" >> $GITHUB_OUTPUT
-            echo "âœ¨ No changes needed - code is already properly formatted!"
+            echo "No changes needed - code is already properly formatted!"
           fi
 
+      # --- EDITED: Standardized Commit Message ---
       - name: Commit and push changes
         if: steps.git-check.outputs.changes_made == 'true'
         run: |
           git add -A
-          # Add [skip ci] to prevent CI loops
-          git commit -m "ðŸ¤– Auto-fix: Apply linting and formatting [skip ci]"
+          # Use conventional commit prefix and [skip ci]
+          git commit -m "style(auto): Apply formatting and linting fixes [skip ci]"
           git push
 
       - name: Comment on PR (if applicable)
@@ -170,7 +170,7 @@ jobs:
         uses: actions/github-script@a3f4296062b40a34b7f5a4de8392b45f18ddab21 # v7.0.1
         with:
           script: |
-            let body = 'ðŸ¤– **Auto-fix applied!**\n\nI automatically fixed linting and formatting issues. Your code is now up to standard.';
+            let body = '🤖 **Auto-fix applied!**\n\nI automatically fixed linting and formatting issues. Your code is now up to standard.';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
