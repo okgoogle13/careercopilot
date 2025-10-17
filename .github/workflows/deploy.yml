@@ -140,13 +140,13 @@ jobs:
       # Authenticate to GCP/Firebase using Service Account Key
       - name: Authenticate to Google Cloud
         id: auth
-        uses: google-github-actions/auth@061d3e8e1610e7b7e3e3c0b17bef6c04f05b14e8 # v2.1.3
+        uses: google-github-actions/auth@v2 # v2.1.3
         with:
           credentials_json: ${{ secrets.GCP_STAGING_SA_KEY }}
 
       - name: Deploy Frontend to Staging
         id: deploy-frontend
-        uses: FirebaseExtended/action-hosting-deploy@a5103c3a9d4e32d3e1119b08d23d8c1106c1a84b # v0.10.0
+        uses: FirebaseExtended/action-hosting-deploy@v0 # v0.10.0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}
@@ -155,7 +155,7 @@ jobs:
         timeout-minutes: 10
 
       - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@0d5fde2d56c353d1000f0745582f34f6ea2ad50e # v2.1.0
+        uses: google-github-actions/setup-gcloud@v2 # v2.1.0
 
       # --- NEW STEP: Verify Image Exists ---
       - name: Verify Backend Image Tag Exists
@@ -271,13 +271,13 @@ jobs:
       # Authenticate to GCP/Firebase using Service Account Key
       - name: Authenticate to Google Cloud
         id: auth
-        uses: google-github-actions/auth@061d3e8e1610e7b7e3e3c0b17bef6c04f05b14e8 # v2.1.3
+        uses: google-github-actions/auth@v2 # v2.1.3
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Deploy Frontend to Production
         id: deploy-frontend
-        uses: FirebaseExtended/action-hosting-deploy@a5103c3a9d4e32d3e1119b08d23d8c1106c1a84b # v0.10.0
+        uses: FirebaseExtended/action-hosting-deploy@v0 # v0.10.0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}
@@ -286,7 +286,7 @@ jobs:
         timeout-minutes: 12
 
       - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@0d5fde2d56c353d1000f0745582f34f6ea2ad50e # v2.1.0
+        uses: google-github-actions/setup-gcloud@v2 # v2.1.0
 
       # --- NEW STEP: Verify Image Exists ---
       - name: Verify Backend Image Tag Exists

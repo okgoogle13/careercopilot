@@ -140,16 +140,16 @@ jobs:
         uses: actions/checkout@v4 # v4.1.7
 
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@b1dda1c6b38c415510de16b5a371c68f18ddab21 # v3.25.12
+        uses: github/codeql-action/init@v3 # v3.25.12
         with:
           languages: ${{ matrix.language }}
           queries: security-extended,security-and-quality
 
       - name: Autobuild
-        uses: github/codeql-action/autobuild@b1dda1c6b38c415510de16b5a371c68f18ddab21 # v3.25.12
+        uses: github/codeql-action/autobuild@v3 # v3.25.12
 
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@b1dda1c6b38c415510de16b5a371c68f18ddab21 # v3.25.12
+        uses: github/codeql-action/analyze@v3 # v3.25.12
         with:
           category: "/language:${{matrix.language}}"
 
@@ -220,7 +220,7 @@ jobs:
 
       - name: Upload bandit report
         if: matrix.test-group == 'security'
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b319e1de689136302c # v4.3.4
+        uses: actions/upload-artifact@v4 # v4.3.4
         with:
           name: bandit-security-report
           path: bandit-report.json
@@ -271,15 +271,15 @@ jobs:
           mypy backend/ --ignore-missing-imports --show-error-codes
 
       - name: Setup Testcontainers Cloud Client
-        uses: atomicjar/testcontainers-cloud-setup-action@a63b3671f60f63b4f51e00b213c4c9d56012e106 # v1.0.0
+        uses: AtomicJar/testcontainers-cloud-setup-action@v1 # v1.0.0
         with:
           token: ${{ secrets.TC_CLOUD_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@9159aff4ebb3f6a6b5d93e9b1dae298b9e6e8c7c # v3.3.0
+        uses: docker/setup-buildx-action@v3 # v3.3.0
 
       - name: Build test image with cache
-        uses: docker/build-push-action@8d3c8f8263e00a359c5c24e52f0ff1805b630012 # v5.4.0
+        uses: docker/build-push-action@v5 # v5.4.0
         with:
           context: ./backend
           load: true # Load the image into the local Docker daemon
@@ -308,7 +308,7 @@ jobs:
           docker rm $CONTAINER_ID
 
       - name: Upload test coverage
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b319e1de689136302c # v4.3.4
+        uses: actions/upload-artifact@v4 # v4.3.4
         with:
           name: backend-test-coverage
           path: backend/htmlcov/
@@ -316,7 +316,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@b0606b97418a03f19e487ba476fdd0f1a07d3714 # v4.4.1
+        uses: codecov/codecov-action@v4 # v4.4.1
         with:
           file: backend/coverage.xml
           flags: backend
@@ -338,7 +338,7 @@ jobs:
         uses: actions/checkout@v4 # v4.1.7
 
       - name: Setup Java
-        uses: actions/setup-java@c3b372f80164c6b8d9ba8a6b16709f6b6477d9c6 # v4.2.1
+        uses: actions/setup-java@v4 # v4.2.1
         with:
           distribution: "temurin"
           java-version: "17"
@@ -379,7 +379,7 @@ jobs:
 
       - name: Upload Firestore test results
         if: always()
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b319e1de689136302c # v4.3.4
+        uses: actions/upload-artifact@v4 # v4.3.4
         with:
           name: firestore-test-results
           path: |
@@ -407,7 +407,7 @@ jobs:
         uses: actions/checkout@v4 # v4.1.7
 
       - name: Setup Java
-        uses: actions/setup-java@c3b372f80164c6b8d9ba8a6b16709f6b6477d9c6 # v4.2.1
+        uses: actions/setup-java@v4 # v4.2.1
         with:
           distribution: "temurin"
           java-version: "17"
@@ -525,7 +525,7 @@ jobs:
 
       - name: Upload E2E test results
         if: always()
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b319e1de689136302c # v4.3.4
+        uses: actions/upload-artifact@v4 # v4.3.4
         with:
           name: e2e-test-results
           path: |
@@ -537,7 +537,7 @@ jobs:
 
       - name: Upload E2E screenshots on failure
         if: failure()
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b319e1de689136302c # v4.3.4
+        uses: actions/upload-artifact@v4 # v4.3.4
         with:
           name: e2e-screenshots
           path: frontend/test-results/**/screenshots/**
@@ -580,7 +580,7 @@ jobs:
 
       - name: Upload performance results
         if: always()
-        uses: actions/upload-artifact@0b2256b8c012f0828dc542b319e1de689136302c # v4.3.4
+        uses: actions/upload-artifact@v4 # v4.3.4
         with:
           name: performance-test-results
           path: backend/.benchmarks/
@@ -685,19 +685,19 @@ jobs:
       # Authenticate to GCP using Service Account Key
       - name: Authenticate to Google Cloud
         id: auth
-        uses: google-github-actions/auth@061d3e8e1610e7b7e3e3c0b17bef6c04f05b14e8 # v2.1.3
+        uses: google-github-actions/auth@v2 # v2.1.3
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@9159aff4ebb3f6a6b5d93e9b1dae298b9e6e8c7c # v3.3.0
+        uses: docker/setup-buildx-action@v3 # v3.3.0
 
       - name: Configure Docker for Artifact Registry
         run: gcloud auth configure-docker ${{ env.GCP_REGISTRY }} --quiet
 
       - name: Extract Docker metadata
         id: meta
-        uses: docker/metadata-action@6051f8071e62602c1b2691341c304d9a6e6963f2 # v5.5.1
+        uses: docker/metadata-action@v5 # v5.5.1
         with:
           images: ${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}
           tags: |
@@ -706,7 +706,7 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@8d3c8f8263e00a359c5c24e52f0ff1805b630012 # v5.4.0
+        uses: docker/build-push-action@v5 # v5.4.0
         with:
           context: ./backend
           push: true
