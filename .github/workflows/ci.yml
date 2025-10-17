@@ -678,14 +678,6 @@ jobs:
     permissions:
       id-token: write
 
-    env:
-      # Use env vars defined at the workflow level
-      PROJECT_ID: ${{ env.GCP_PROJECT_ID }}
-      REGION: ${{ env.GCP_REGION }}
-      REGISTRY: ${{ env.GCP_REGISTRY }}
-      REPOSITORY: ${{ env.GCP_REPOSITORY }}
-      IMAGE_NAME: ${{ env.GCP_IMAGE_NAME }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@a5ac7e51b4109f51b424b11c0c203a9c94ee8384 # v4.1.7
