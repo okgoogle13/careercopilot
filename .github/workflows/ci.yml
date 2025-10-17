@@ -200,21 +200,21 @@ jobs:
       - name: Lint with flake8
         if: matrix.test-group == 'lint'
         run: |
-          echo "ðŸ” Running flake8 linting..."
+          echo " Running flake8 linting..."
           flake8 backend/app/ --show-source --statistics --format=github
-          echo "âœ… Linting completed"
+          echo " Linting completed"
 
       - name: Format check with black
         if: matrix.test-group == 'format'
         run: |
-          echo "âœ¨ Checking code formatting with black..."
+          echo " Checking code formatting with black..."
           black --check backend/ --line-length=100 --diff
-          echo "âœ… Format check completed"
+          echo " Format check completed"
 
       - name: Security scan with bandit
         if: matrix.test-group == 'security'
         run: |
-          echo "ðŸ”’ Running security scan..."
+          echo " Running security scan..."
           bandit -r backend/ -f json -o bandit-report.json || true
           bandit -r backend/ -f txt || true
 
@@ -267,7 +267,7 @@ jobs:
       - name: Type check with mypy
         continue-on-error: true
         run: |
-          echo "ðŸ”§ Running type checks..."
+          echo " Running type checks..."
           mypy backend/ --ignore-missing-imports --show-error-codes
 
       - name: Setup Testcontainers Cloud Client
@@ -290,7 +290,7 @@ jobs:
 
       - name: Run all backend tests in container
         run: |
-          echo "ðŸ§ª Running all backend tests inside the container..."
+          echo " Running all backend tests inside the container..."
           docker run --network="host" \
             -e DATABASE_URL="postgresql://test:test@localhost:5432/test_db" \
             -e ENVIRONMENT="test" \
@@ -303,8 +303,8 @@ jobs:
         continue-on-error: true
         run: |
           CONTAINER_ID=$(docker create backend-test:latest)
-          docker cp $CONTAINER_ID:/app/htmlcov ./backend/htmlcov || echo "âš ï¸ No htmlcov directory"
-          docker cp $CONTAINER_ID:/app/coverage.xml ./backend/coverage.xml || echo "âš ï¸ No coverage.xml file"
+          docker cp $CONTAINER_ID:/app/htmlcov ./backend/htmlcov || echo " No htmlcov directory"
+          docker cp $CONTAINER_ID:/app/coverage.xml ./backend/coverage.xml || echo " No coverage.xml file"
           docker rm $CONTAINER_ID
 
       - name: Upload test coverage
@@ -450,10 +450,10 @@ jobs:
       - name: Verify build output
         run: |
           if [ ! -d "functions/lib" ] || [ ! "$(ls -A functions/lib)" ]; then
-            echo "âŒ Functions build failed - no lib directory found"
+            echo " Functions build failed - no lib directory found"
             exit 1
           fi
-          echo "âœ… Functions build completed successfully"
+          echo " Functions build completed successfully"
 
   # End-to-End Testing
   e2e-tests:
@@ -501,7 +501,7 @@ jobs:
 
       - name: Build frontend for E2E
         run: |
-          echo "ðŸ—ï¸ Building frontend for E2E tests..."
+          echo " Building frontend for E2E tests..."
           yarn workspace careercopilot-frontend build
 
       - name: Install Docker Compose
@@ -509,14 +509,14 @@ jobs:
 
       - name: Start services with Docker Compose
         run: |
-          echo "ðŸš€ Starting backend and frontend services for E2E tests..."
+          echo " Starting backend and frontend services for E2E tests..."
           docker-compose -f docker-compose.e2e.yml up -d --wait
-          echo "âœ… Services are up and healthy."
+          echo " Services are up and healthy."
           docker-compose -f docker-compose.e2e.yml ps
 
       - name: Run Playwright E2E tests
         run: |
-          echo "ðŸŽ­ Running Playwright E2E tests..."
+          echo " Running Playwright E2E tests..."
           # Run from root using workspace command
           yarn workspace careercopilot-frontend playwright test tests/ --reporter=html,json
         env:
@@ -547,7 +547,7 @@ jobs:
       - name: Cleanup servers
         if: always()
         run: |
-          echo "ðŸ›‘ Stopping services..."
+          echo " Stopping services..."
           docker-compose -f docker-compose.e2e.yml down
 
   # Performance Testing (Optional)
@@ -573,7 +573,7 @@ jobs:
       - name: Run performance tests
         run: |
           cd backend
-          echo "âš¡ Running performance test suite..."
+          echo " Running performance test suite..."
           python -m pytest app/tests/performance/ -v --tb=short --disable-warnings --benchmark-only
         env:
           ENVIRONMENT: test
@@ -611,7 +611,7 @@ jobs:
     steps:
       - name: Check results
         run: |
-          echo "ðŸ” Checking all test results..."
+          echo " Checking all test results..."
 
           # A job is considered 'passed' if it succeeded OR was skipped.
           # We only fail if a job explicitly failed.
@@ -624,7 +624,7 @@ jobs:
           if [[ "${{ needs.e2e-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.test-firestore-rules.result }}" == "failure" ]]; then exit 1; fi
 
-          echo "âœ… All required quality checks passed (or were skipped)!"
+          echo " All required quality checks passed (or were skipped)!"
 
       # Your summary and PR comment steps from the original file are excellent
       # and can be kept as-is. I am using SHA-pinned actions for them.
@@ -643,12 +643,12 @@ jobs:
             if ('${{ needs.e2e-tests.result }}' === 'failure') failedJobs.push('E2E Tests');
             if ('${{ needs.test-firestore-rules.result }}' === 'failure') failedJobs.push('Firestore Rules Tests');
 
-            const failedList = failedJobs.map(job => `- âŒ ${job}`).join('\n');
+            const failedList = failedJobs.map(job => `-  ${job}`).join('\n');
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `âŒ **Quality Gate Failed**\n\nFailed test suites:\n${failedList}\n\nðŸ“‹ Check the [CI Results](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and fix issues before merging.`
+              body: ` **Quality Gate Failed**\n\nFailed test suites:\n${failedList}\n\n Check the [CI Results](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and fix issues before merging.`
             });
 
       - name: PR comment on success
@@ -660,7 +660,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `âœ… **All Quality Checks Passed!**\n\nðŸŽ‰ All required test suites passed successfully (or were correctly skipped by path filters).\n\nðŸš€ Ready for review and merge!`
+              body: ` **All Quality Checks Passed!**\n\n All required test suites passed successfully (or were correctly skipped by path filters).\n\n Ready for review and merge!`
             });
 
   # Build and Push Docker image
@@ -729,7 +729,7 @@ jobs:
 
       - name: Add build summary
         run: |
-          echo "### ðŸš€ Backend Image Pushed" >> $GITHUB_STEP_SUMMARY
+          echo "###  Backend Image Pushed" >> $GITHUB_STEP_SUMMARY
           echo "Image successfully pushed to Google Artifact Registry." >> $GITHUB_STEP_SUMMARY
           echo "**Image Tags:**" >> $GITHUB_STEP_SUMMARY
           echo "```" >> $GITHUB_STEP_SUMMARY
