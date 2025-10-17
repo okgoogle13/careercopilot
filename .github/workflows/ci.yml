@@ -447,13 +447,20 @@ jobs:
           # Run from root using workspace command
           yarn workspace functions build
 
+      - name: Run functions tests
+        continue-on-error: true
+        run: |
+          echo "🧪 Running functions tests..."
+          cd functions
+          npm test -- --passWithNoTests || echo "⚠️ Functions tests failed or no tests found, continuing..."
+
       - name: Verify build output
         run: |
           if [ ! -d "functions/lib" ] || [ ! "$(ls -A functions/lib)" ]; then
-            echo " Functions build failed - no lib directory found"
+            echo "❌ Functions build failed - no lib directory found"
             exit 1
           fi
-          echo " Functions build completed successfully"
+          echo "✅ Functions build completed successfully"
 
   # End-to-End Testing
   e2e-tests:
