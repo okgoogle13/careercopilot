@@ -28,10 +28,9 @@ on:
           - staging
           - production
 
-# Default permissions. 'id-token: write' is REQUIRED for WIF.
+# Default permissions for service account key authentication
 permissions:
   contents: read
-  id-token: write
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -111,7 +110,7 @@ jobs:
     environment: staging
     timeout-minutes: 20
     permissions:
-      id-token: write # Required for WIF
+      contents: read # Using service account key authentication
     steps:
       - name: Checkout code
         uses: actions/checkout@a5ac7e51b4109f51b424b11c0c203a9c94ee8384 # v4.1.7
@@ -138,21 +137,19 @@ jobs:
           fi
           echo "✅ Artifact validation passed"
 
-      # SECURE: Authenticate to GCP/Firebase using WIF
-      - name: Authenticate to Google Cloud (WIF)
+      # Authenticate to GCP/Firebase using Service Account Key
+      - name: Authenticate to Google Cloud
         id: auth
         uses: google-github-actions/auth@061d3e8e1610e7b7e3e3c0b17bef6c04f05b14e8 # v2.1.3
         with:
-          workload_identity_provider: ${{ secrets.GCP_STAGING_WIF_PROVIDER }}
-          service_account: ${{ secrets.GCP_STAGING_WIF_SA_EMAIL }}
+          credentials_json: ${{ secrets.GCP_STAGING_SA_KEY }}
 
-      - name: Deploy Frontend to Staging (using WIF)
+      - name: Deploy Frontend to Staging
         id: deploy-frontend
         uses: FirebaseExtended/action-hosting-deploy@a5103c3a9d4e32d3e1119b08d23d8c1106c1a84b # v0.10.0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          workloadIdentityProvider: ${{ secrets.GCP_STAGING_WIF_PROVIDER }}
-          serviceAccount: ${{ secrets.GCP_STAGING_WIF_SA_EMAIL }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}
           channelId: live
           projectId: careercopilot-staging # Your staging project
         timeout-minutes: 10
@@ -244,7 +241,7 @@ jobs:
     environment: production
     timeout-minutes: 25
     permissions:
-      id-token: write # Required for WIF
+      contents: read # Using service account key authentication
     steps:
       - name: Checkout code
         uses: actions/checkout@a5ac7e51b4109f51b424b11c0c203a9c94ee8384 # v4.1.7
@@ -271,21 +268,19 @@ jobs:
           fi
           echo "✅ Artifact validation passed"
 
-      # SECURE: Authenticate to GCP/Firebase using WIF
-      - name: Authenticate to Google Cloud (WIF)
+      # Authenticate to GCP/Firebase using Service Account Key
+      - name: Authenticate to Google Cloud
         id: auth
         uses: google-github-actions/auth@061d3e8e1610e7b7e3e3c0b17bef6c04f05b14e8 # v2.1.3
         with:
-          workload_identity_provider: ${{ secrets.GCP_PROD_WIF_PROVIDER }}
-          service_account: ${{ secrets.GCP_PROD_WIF_SA_EMAIL }}
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Deploy Frontend to Production (using WIF)
+      - name: Deploy Frontend to Production
         id: deploy-frontend
         uses: FirebaseExtended/action-hosting-deploy@a5103c3a9d4e32d3e1119b08d23d8c1106c1a84b # v0.10.0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          workloadIdentityProvider: ${{ secrets.GCP_PROD_WIF_PROVIDER }}
-          serviceAccount: ${{ secrets.GCP_PROD_WIF_SA_EMAIL }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }}
           channelId: live
           projectId: careercopilot-468811 # Your production project
         timeout-minutes: 12
