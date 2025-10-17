@@ -16,6 +16,17 @@ on:
         required: false
         default: "false"
         type: boolean
+env:
+  NODE_VERSION: "20"
+  PYTHON_VERSION: "3.13"
+  PYTHONUNBUFFERED: "1"
+  PYTHONDONTWRITEBYTECODE: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  GCP_PROJECT_ID: careercopilot-468811
+  GCP_REGION: us-central1
+  GCP_REGISTRY: us-central1-docker.pkg.dev
+  GCP_REPOSITORY: careercopilot
+  GCP_IMAGE_NAME: backend
 jobs:
   test:
     runs-on: ubuntu-latest
