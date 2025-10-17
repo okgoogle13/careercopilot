@@ -1,5 +1,21 @@
-name: Test Workflow
-on: [push]
+name: CI - Build and Test
+on:
+  pull_request:
+    branches: [develop, main]
+  push:
+    branches: [develop, main]
+  workflow_dispatch:
+    inputs:
+      run_e2e_tests:
+        description: "Run E2E tests"
+        required: false
+        default: "true"
+        type: boolean
+      run_performance_tests:
+        description: "Run performance tests"
+        required: false
+        default: "false"
+        type: boolean
 jobs:
   test:
     runs-on: ubuntu-latest
