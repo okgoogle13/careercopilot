@@ -28,51 +28,27 @@ env:
   GCP_REPOSITORY: careercopilot
   GCP_IMAGE_NAME: backend
 jobs:
-  changes:
-    name: Detect Code Changes
+  codeql:
+    name: CodeQL Security Analysis
     runs-on: ubuntu-latest
-    outputs:
-      frontend: ${{ steps.filter.outputs.frontend }}
-      backend: ${{ steps.filter.outputs.backend }}
-      functions: ${{ steps.filter.outputs.functions }}
-      firestore_rules: ${{ steps.filter.outputs.firestore_rules }}
-      e2e: ${{ steps.filter.outputs.e2e }}
-      codeql_py: ${{ steps.filter.outputs.codeql_py }}
-      codeql_js: ${{ steps.filter.outputs.codeql_js }}
-    if: github.event_name != 'workflow_dispatch'
+    timeout-minutes: 20
+    permissions:
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["python", "javascript"]
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@a5ac7e51b4109f51b424b11c0c203a9c94ee8384 # v4.1.7
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@b1dda1c6b38c415510de16b5a371c68f18ddab21 # v3.25.12
         with:
-          fetch-depth: 2
-      - name: Calculate paths
-        id: filter
-        uses: dorny/paths-filter@f2b044c1363e17812586b86e8c2b7858f7002016 # v3.0.2
+          languages: ${{ matrix.language }}
+          queries: security-extended,security-and-quality
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@b1dda1c6b38c415510de16b5a371c68f18ddab21 # v3.25.12
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@b1dda1c6b38c415510de16b5a371c68f18ddab21 # v3.25.12
         with:
-          filters: |
-            frontend:
-              - 'frontend/**'
-              - '.github/actions/setup-frontend/**'
-              - 'yarn.lock'
-              - '.github/workflows/ci.yml'
-            backend:
-              - 'backend/**'
-              - '.github/actions/setup-backend/**'
-              - '.github/workflows/ci.yml'
-            functions:
-              - 'functions/**'
-              - '.github/workflows/ci.yml'
-            firestore_rules:
-              - 'firestore.rules'
-              - 'tests/**'
-              - '.github/workflows/ci.yml'
-            e2e:
-              - 'frontend/**'
-              - 'backend/**'
-              - 'docker-compose.e2e.yml'
-              - '.github/workflows/ci.yml'
-            codeql_py:
-              - 'backend/**'
-            codeql_js:
-              - 'frontend/**'
-              - 'functions/**'
+          category: "/language:${{matrix.language}}"
