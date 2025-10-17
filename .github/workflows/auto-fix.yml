@@ -1,15 +1,4 @@
-# .github/workflows/auto-fix.yml
-#
-# FULLY REFACTORED AUTO-FIX WORKFLOW (POLISHED)
-#
-# Implements:
-# 1. SHA-Pinning: All 'uses:' actions are pinned to full commit SHAs.
-# 2. Performance Caching: Added caching for Pip (linters), Yarn (root),
-#    and NPM (functions) to speed up execution.
-# 3. Maintainability: Standardized on Yarn workspace commands for clarity.
-#
 name: Auto Fix Linting Issues
-
 on:
   push:
     branches: [develop, main]
@@ -26,69 +15,54 @@ on:
       - "functions/src/**"
       - "!backend/migrations/**"
   workflow_dispatch:
-
 permissions:
   contents: write
   pull-requests: write
-
 jobs:
   auto-fix:
     name: Auto Fix Code Issues
     runs-on: ubuntu-latest
     timeout-minutes: 10
-
-    # Skip auto-fix for bot commits to avoid loops
     if: ${{ !contains(github.event.head_commit.message, '[skip auto-fix]') && !contains(github.event.head_commit.message, 'ðŸ¤– Auto-fix') }}
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@a5ac7e51b4109f51b424b11c0c203a9c94ee8384 # v4.1.7
+        uses: actions/checkout@a5ac7e51b4109f51b424b11c0c203a9c94ee8384
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0 # Fetch full history for correct branch pushes
-
+          fetch-depth: 0
       - name: Set up Python
-        uses: actions/setup-python@8812c3c1f0100d3387da74b41da4AAc4a16b9b32 # v5.1.0
+        uses: actions/setup-python@8812c3c1f0100d3387da74b41da4AAc4a16b9b32
         with:
           python-version: "3.13"
-          cache: "pip" # Cache pip dependencies
-
+          cache: "pip"
       - name: Set up Node.js
-        uses: actions/setup-node@4a73359c983a54e9357d609c13b3e8e7f1012f20 # v4.0.3
+        uses: actions/setup-node@4a73359c983a54e9357d609c13b3e8e7f1012f20
         with:
           node-version: "22"
-          cache: "yarn" # Cache Yarn dependencies
+          cache: "yarn"
           cache-dependency-path: "yarn.lock"
-
       - name: Enable Corepack for Yarn 4
         run: corepack enable
-
       - name: Cache functions node_modules
-        # Functions uses npm, so it needs its own cache
-        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v4.0.2
+        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8
         with:
           path: functions/node_modules
           key: ${{ runner.os }}-npm-functions-${{ hashFiles('functions/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-npm-functions-
-
       - name: Install Python formatting tools
         run: |
           python -m pip install --upgrade pip
           pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
-
       - name: Install Node dependencies
         run: |
           yarn install --immutable
           cd functions && npm ci
-
       - name: Check for changes needed
         id: changes
         run: |
           echo "Checking if auto-fixes are needed..."
           CHANGES_NEEDED=false
-
-          # Check Python files
           if ! black --check backend/ --line-length=100 --quiet; then
             echo "Python formatting changes needed"
             CHANGES_NEEDED=true
@@ -96,8 +70,6 @@ jobs:
             echo "Python import sorting changes needed"
             CHANGES_NEEDED=true
           fi
-
-          # Check frontend files (using workspace commands)
           if ! yarn workspace careercopilot-frontend lint --quiet; then
             echo "ESLint fixes needed"
             CHANGES_NEEDED=true
@@ -105,19 +77,15 @@ jobs:
             echo "Prettier formatting needed"
             CHANGES_NEEDED=true
           fi
-
-          # Check functions files
           if ! yarn workspace functions lint --silent; then
             echo "Functions linting fixes needed"
             CHANGES_NEEDED=true
           fi
-
           if [[ "$CHANGES_NEEDED" == "true" ]]; then
             echo "changes_needed=true" >> $GITHUB_OUTPUT
           else
             echo "changes_needed=false" >> $GITHUB_OUTPUT
           fi
-
       - name: Apply Python formatting fixes
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
@@ -126,51 +94,44 @@ jobs:
           isort backend/ --profile=black --line-length=100
           autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
           echo "âœ… Python formatting complete"
-
       - name: Apply Frontend formatting fixes
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
           echo "âš›ï¸ Applying Frontend formatting fixes..."
-          # Use the 'format' script from frontend/package.json
           yarn workspace careercopilot-frontend format || true
-          # Run lint:fix as well
           yarn workspace careercopilot-frontend lint:fix || true
           echo "âœ… Frontend formatting complete"
-
       - name: Apply Functions linting fixes
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
           echo "ðŸ”§ Applying Functions linting fixes..."
           yarn workspace functions lint:fix || true
           echo "âœ… Functions linting fixes complete"
-
       - name: Check if changes were made
         id: git-check
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Auto-Fix"
-
           if [[ -n $(git status --porcelain) ]]; then
             echo "changes_made=true" >> $GITHUB_OUTPUT
           else
             echo "changes_made=false" >> $GITHUB_OUTPUT
             echo "âœ¨ No changes needed - code is already properly formatted!"
           fi
-
       - name: Commit and push changes
         if: steps.git-check.outputs.changes_made == 'true'
         run: |
           git add -A
-          # Add [skip ci] to prevent CI loops
           git commit -m "ðŸ¤– Auto-fix: Apply linting and formatting [skip ci]"
           git push
-
       - name: Comment on PR (if applicable)
         if: github.event_name == 'pull_request' && steps.git-check.outputs.changes_made == 'true'
-        uses: actions/github-script@a3f4296062b40a34b7f5a4de8392b45f18ddab21 # v7.0.1
+        uses: actions/github-script@a3f4296062b40a34b7f5a4de8392b45f18ddab21
         with:
           script: |
-            let body = 'ðŸ¤– **Auto-fix applied!**\n\nI automatically fixed linting and formatting issues. Your code is now up to standard.';
+            let body = 'ðŸ¤– **Auto-fix applied!**
+
+I automatically fixed linting and formatting issues. Your code is now up to standard.';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
