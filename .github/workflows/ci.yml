@@ -126,8 +126,8 @@ jobs:
     # Run if the relevant paths changed OR if manually dispatched
     if: |
       (github.event_name == 'workflow_dispatch') ||
-      (needs.changes.outputs.codeql_py == 'true' && matrix.language == 'python') ||
-      (needs.changes.outputs.codeql_js == 'true' && matrix.language == 'javascript')
+      (needs.changes.outputs.codeql_py == 'true') ||
+      (needs.changes.outputs.codeql_js == 'true')
 
     needs: [changes]
     strategy:
