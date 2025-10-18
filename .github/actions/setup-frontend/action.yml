@@ -78,8 +78,8 @@ runs:
       working-directory: frontend
       run: |
         echo "🧪 Running Jest unit tests..."
-        npm run test:ci -- --passWithNoTests || echo "⚠️ No tests found or tests failed, continuing..."
-        echo "✅ Unit tests step completed"
+        npm run test:ci
+        echo "✅ Unit tests completed successfully"
 
 
     - name: Extract design tokens

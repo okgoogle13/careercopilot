@@ -11,7 +11,7 @@
     "test:watch": "jest --watch --config=jest.config.js",
     "test:coverage": "jest --coverage --config=jest.config.js",
     "test:update": "jest --updateSnapshot --config=jest.config.js",
-    "test:ci": "NODE_OPTIONS='--max-old-space-size=4096' jest --ci --runInBand --no-cache --logHeapUsage --config=jest.config.js",
+    "test:ci": "npx jest --config=jest.config.js --ci --runInBand --coverage",
     "test:e2e": "NODE_ENV=test playwright test --config=playwright.config.ts",
     "test:e2e:headed": "NODE_ENV=test playwright test --config=playwright.config.ts --headed",
     "test:e2e:debug": "NODE_ENV=test playwright test --config=playwright.config.ts --debug",
