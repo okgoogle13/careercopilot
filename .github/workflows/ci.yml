@@ -675,10 +675,10 @@ jobs:
     name: Build and Push Backend Image
     runs-on: ubuntu-latest
     needs: [quality-gate, changes]
-    # Run only if quality gate passed AND backend code changed (or manual dispatch)
+    # Run only if quality gate passed AND (backend/frontend changed OR manual dispatch) AND on main/develop
     if: |
       success() &&
-      (github.event_name == 'workflow_dispatch' || needs.changes.outputs.backend == 'true') &&
+      (github.event_name == 'workflow_dispatch' || needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true') &&
       (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
 
     # Using service account key authentication (no special permissions needed)
