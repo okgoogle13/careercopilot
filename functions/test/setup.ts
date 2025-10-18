@@ -1,14 +1,19 @@
-/* global beforeAll, afterAll */
-import {initializeTestEnvironment} from "@firebase/rules-unit-testing";
+import {initializeTestEnvironment, RulesTestEnvironment} from "@firebase/rules-unit-testing";
 import {readFileSync} from "fs";
 import path from "path";
 
 // Load Firestore rules from the file
 const rules = readFileSync(path.resolve(__dirname, "../../firestore.rules"), "utf8");
 
+let testEnv: RulesTestEnvironment | null = null;
+
 // Initialize test environment with project ID and rules
 export const setupTestEnvironment = async () => {
-  const testEnv = await initializeTestEnvironment({
+  if (testEnv) {
+    return testEnv;
+  }
+
+  testEnv = await initializeTestEnvironment({
     projectId: "careercopilot-test",
     firestore: {
       rules,
@@ -20,19 +25,15 @@ export const setupTestEnvironment = async () => {
   return testEnv;
 };
 
-// Global test setup
-beforeAll(async () => {
-  // Any global setup can go here
-});
+export const getAuthedFirestore = async (auth?: Record<string, unknown>) => {
+  const env = await setupTestEnvironment();
+  const context = auth ? env.authenticatedContext(auth as any) : env.unauthenticatedContext();
+  return context.firestore();
+};
 
-// Global test teardown
-afterAll(async () => {
-  // Clean up any resources
-});
-
-export const getAuthedFirestore = (auth?: Record<string, unknown>) => {
-  return initializeTestEnvironment({
-    projectId: "careercopilot-test",
-    firestore: {rules},
-  }).then((context) => context.authenticatedContext(auth).firestore());
+export const cleanupTestEnvironment = async () => {
+  if (testEnv) {
+    await testEnv.cleanup();
+    testEnv = null;
+  }
 };
