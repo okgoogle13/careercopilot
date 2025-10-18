@@ -18,7 +18,7 @@
     "strip-ansi": "6.0.1"
   },
   "scripts": {
-    "prepare": "husky",
+    "prepare": "husky || true",
     "dev": "cd frontend && yarn dev",
     "dev:functions": "cd functions && npm run serve",
     "build": "cd frontend && yarn build && cd ../functions && npm run build",
