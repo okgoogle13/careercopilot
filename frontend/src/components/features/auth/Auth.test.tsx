@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Auth } from './Auth';
@@ -150,10 +150,14 @@ describe('Auth Component', () => {
       expect(passwordInput).toBeVisible();
 
       // Test focus
-      emailInput.focus();
+      act(() => {
+        emailInput.focus();
+      });
       expect(emailInput).toHaveFocus();
 
-      passwordInput.focus();
+      act(() => {
+        passwordInput.focus();
+      });
       expect(passwordInput).toHaveFocus();
     });
 
@@ -177,12 +181,16 @@ describe('Auth Component', () => {
       const signInButton = screen.getByRole('button', { name: 'Sign In' });
 
       // Test tab navigation
-      emailInput.focus();
+      act(() => {
+        emailInput.focus();
+      });
       expect(emailInput).toHaveFocus();
 
       // Simulate tab key
-      fireEvent.keyDown(emailInput, { key: 'Tab' });
-      passwordInput.focus();
+      act(() => {
+        fireEvent.keyDown(emailInput, { key: 'Tab' });
+        passwordInput.focus();
+      });
       expect(passwordInput).toHaveFocus();
 
       // Test clicking button (Enter key doesn't trigger onClick in test environment without form)

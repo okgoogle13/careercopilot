@@ -448,11 +448,10 @@ jobs:
           yarn workspace functions build
 
       - name: Run functions tests
-        continue-on-error: true
         run: |
           echo "🧪 Running functions tests..."
           cd functions
-          npm test -- --passWithNoTests || echo "⚠️ Functions tests failed or no tests found, continuing..."
+          npm run test:ci
 
       - name: Verify build output
         run: |
