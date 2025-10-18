@@ -100,9 +100,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...buttonProps}
         startIcon={loading ? <CircularProgress size={16} color="inherit" /> : props.startIcon}
       >
-        {loading && !props.startIcon ? (
-          <CircularProgress size={16} color="inherit" sx={{ mr: 1 }} />
-        ) : null}
         {children}
       </MuiButton>
     );

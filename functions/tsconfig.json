@@ -3,7 +3,7 @@
     "module": "commonjs",
     "target": "es2021",
     "outDir": "lib",
-    "rootDir": "src",
+    "rootDir": ".",
     "strict": false,
     "noImplicitAny": false,
     "esModuleInterop": true,
@@ -12,8 +12,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
+    "types": ["jest", "node"],
     "typeRoots": ["./node_modules/@types", "./src/types"]
   },
-  "include": ["src/**/*.ts", "__tests__/**/*.ts"],
+  "include": ["src/**/*.ts", "__tests__/**/*.ts", "test/**/*.ts"],
   "exclude": ["node_modules", "lib"]
 }
