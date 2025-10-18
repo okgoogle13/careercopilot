@@ -93,6 +93,7 @@ jobs:
               - 'backend/**'
               - '.github/actions/setup-backend/**' # Your composite action
               - '.github/workflows/ci.yml'
+              - 'frontend/**'
             functions:
               - 'functions/**'
               - '.github/workflows/ci.yml'
