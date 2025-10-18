@@ -88,12 +88,14 @@ jobs:
               - 'frontend/**'
               - '.github/actions/setup-frontend/**' # Your composite action
               - 'yarn.lock'
+              - 'package.json'
               - '.github/workflows/ci.yml'
             backend:
               - 'backend/**'
               - '.github/actions/setup-backend/**' # Your composite action
               - '.github/workflows/ci.yml'
               - 'frontend/**'
+              - 'package.json'
             functions:
               - 'functions/**'
               - '.github/workflows/ci.yml'
