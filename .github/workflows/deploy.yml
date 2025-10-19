@@ -7,6 +7,7 @@
 # 2. Image-Based Deployment: Deploys the *exact* Docker image built in CI.
 # 3. SHA-Pinning: All 'uses:' actions are pinned to full commit SHAs.
 # 4. Robust Rollback: Corrects the rollback health check logic.
+# 5. Environment-Specific Repository Names
 name: CD - Deploy to Staging and Production
 
 on:
@@ -38,12 +39,13 @@ concurrency:
 
 env:
   NODE_VERSION: "22"
-  # Docker image location, must match ci.yml
-  GCP_PROJECT_ID: careercopilot-468811
+  # Common Docker image location parts
   GCP_REGION: us-central1
   GCP_REGISTRY: us-central1-docker.pkg.dev
-  GCP_REPOSITORY: careercopilot-repo # <-- CORRECTED VALUE
   GCP_IMAGE_NAME: backend
+  # Production project details (used globally and by deploy-production)
+  GCP_PROJECT_ID: careercopilot-468811
+  GCP_REPOSITORY: careercopilot # <-- PRODUCTION REPO NAME
 
 jobs:
   pre-deploy-checks:
@@ -58,4 +60,340 @@ jobs:
       commit-sha: ${{ steps.vars.outputs.commit_sha }}
       run_id: ${{ steps.vars.outputs.run_id }}
     steps:
-      -
+      - name: Checkout code
+        uses: actions/checkout@v4 # v4.1.7
+
+      - name: Check deployment conditions
+        id: check
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            if [[ "${{ inputs.environment }}" == "staging" ]]; then
+              echo "staging=true" >> $GITHUB_OUTPUT
+            else
+              echo "staging=false" >> $GITHUB_OUTPUT
+            fi
+            if [[ "${{ inputs.environment }}" == "production" ]]; then
+              echo "production=true" >> $GITHUB_OUTPUT
+            else
+              echo "production=false" >> $GITHUB_OUTPUT
+            fi
+          elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            if [[ "${{ github.event.workflow_run.head_branch }}" == "develop" ]]; then
+              echo "staging=true" >> $GITHUB_OUTPUT
+              echo "production=false" >> $GITHUB_OUTPUT
+            elif [[ "${{ github.event.workflow_run.head_branch }}" == "main" ]]; then
+              echo "staging=false" >> $GITHUB_OUTPUT
+              echo "production=true" >> $GITHUB_OUTPUT
+            else
+              echo "staging=false" >> $GITHUB_OUTPUT
+              echo "production=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Set commit SHA and run ID
+        id: vars
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "commit_sha=${{ github.sha }}" >> $GITHUB_OUTPUT
+            echo "run_id=${{ github.run_id }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            echo "commit_sha=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_OUTPUT
+            echo "run_id=${{ github.event.workflow_run.id }}" >> $GITHUB_OUTPUT
+          fi
+
+  deploy-staging:
+    name: Deploy to Staging
+    if: ${{ needs.pre-deploy-checks.outputs.should-deploy-staging == 'true' }}
+    runs-on: ubuntu-latest
+    needs: [pre-deploy-checks]
+    environment: staging
+    timeout-minutes: 20
+    permissions:
+      contents: read # Using service account key authentication
+    env: # <-- Define staging specific vars here
+      STAGING_PROJECT_ID: careercopilot-staging # Or use secrets like ${{ secrets.GCP_STAGING_PROJECT_ID }}
+      STAGING_REPOSITORY: careercopilot-repo # Staging uses this name
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # v4.1.7
+
+      - name: Prepare Frontend for Deployment
+        id: prepare-frontend
+        uses: ./.github/actions/prepare-frontend-deploy
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          artifact-name: frontend-dist
+          fallback-build: true
+          ci-run-id: ${{ needs.pre-deploy-checks.outputs.run_id }}
+
+      - name: Validate Frontend Artifact
+        run: |
+          echo "Validation logic unchanged. Uses the downloaded artifact."
+          if [ ! -d "./dist" ] && [ ! -d "./frontend/dist" ]; then
+            echo "❌ Frontend artifact validation failed"
+            exit 1
+          fi
+          if [ -d "./frontend/dist" ] && [ ! -d "./dist" ]; then
+            cp -r ./frontend/dist ./dist
+          fi
+          echo "✅ Artifact validation passed"
+
+      # Authenticate to GCP/Firebase using Service Account Key
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2 # v2.1.3
+        with:
+          credentials_json: ${{ secrets.GCP_STAGING_SA_KEY }}
+
+      - name: Deploy Frontend to Staging
+        id: deploy-frontend
+        uses: FirebaseExtended/action-hosting-deploy@v0 # v0.10.0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}
+          channelId: live
+          projectId: ${{ env.STAGING_PROJECT_ID }} # Use staging project ID
+        timeout-minutes: 10
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2 # v2.1.0
+
+      - name: Verify Backend Image Tag Exists
+        run: |
+          IMAGE_TAG_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          # Use staging specific vars
+          IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
+
+          echo "Checking for image tag: $IMAGE_TAG_SHA in $IMAGE_PATH"
+          if ! gcloud artifacts docker tags list $IMAGE_PATH \
+            --filter="tag=$IMAGE_TAG_SHA" \
+            --limit=1 \
+            --format="value(tag)" | grep -q "$IMAGE_TAG_SHA"; then
+
+            echo "::error::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH). Ensure the CI 'Build and Push' job ran successfully and pushed to the STAGING repository."
+            exit 1
+          fi
+          echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
+
+      - name: Deploy Backend to Cloud Run (from Image)
+        id: deploy-backend
+        run: |
+          # Use staging specific vars
+          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+
+          echo "Deploying image: $IMAGE_URL"
+
+          gcloud run deploy careercopilot-backend-staging \
+            --image $IMAGE_URL \
+            --platform managed \
+            --region ${{ env.GCP_REGION }} \
+            --project ${{ env.STAGING_PROJECT_ID }} \
+            --timeout 1200s \
+            --cpu 1 \
+            --memory 2Gi \
+            --min-instances 0 \
+            --max-instances 10 \
+            --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO" \
+            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_STAGING:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_STAGING:latest" \
+            --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }}" \
+            --allow-unauthenticated \
+            --format=json > deployment-output.json
+
+          echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
+        timeout-minutes: 10
+
+      - name: Health check for backend
+        run: |
+          SERVICE_URL="${{ steps.deploy-backend.outputs.service_url }}"
+          echo "Checking health of backend at $SERVICE_URL/health"
+
+          MAX_RETRIES=10
+          RETRY_COUNT=0
+
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            if curl -f -s "$SERVICE_URL/health" > /dev/null 2>&1; then
+              echo "✅ Backend health check passed"
+              exit 0
+            fi
+
+            RETRY_COUNT=$((RETRY_COUNT + 1))
+            echo "Health check attempt $RETRY_COUNT failed, retrying in 10s..."
+            sleep 10
+          done
+
+          echo "❌ Backend health check failed after $MAX_RETRIES attempts"
+          exit 1
+        timeout-minutes: 5
+
+      - name: Deployment summary
+        run: |
+          echo "## 🚀 Staging Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Frontend URL: https://${{ env.STAGING_PROJECT_ID }}.web.app" >> $GITHUB_STEP_SUMMARY # Use staging project ID
+          echo "- Backend URL: ${{ steps.deploy-backend.outputs.service_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit SHA: ${{ needs.pre-deploy-checks.outputs.commit-sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Deployed at: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_STEP_SUMMARY
+
+  deploy-production:
+    name: Deploy to Production
+    if: ${{ needs.pre-deploy-checks.outputs.should-deploy-production == 'true' }}
+    runs-on: ubuntu-latest
+    needs: [pre-deploy-checks]
+    environment: production
+    timeout-minutes: 25
+    permissions:
+      contents: read # Using service account key authentication
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # v4.1.7
+
+      - name: Prepare Frontend for Deployment
+        id: prepare-frontend
+        uses: ./.github/actions/prepare-frontend-deploy
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          artifact-name: frontend-dist
+          fallback-build: true
+          ci-run-id: ${{ needs.pre-deploy-checks.outputs.run_id }}
+
+      - name: Validate Frontend Artifact
+        run: |
+          echo "Validation logic unchanged. Uses the downloaded artifact."
+          if [ ! -d "./dist" ] && [ ! -d "./frontend/dist" ]; then
+            echo "❌ Frontend artifact validation failed"
+            exit 1
+          fi
+          if [ -d "./frontend/dist" ] && [ ! -d "./dist" ]; then
+            cp -r ./frontend/dist ./dist
+          fi
+          echo "✅ Artifact validation passed"
+
+      # Authenticate to GCP/Firebase using Service Account Key
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2 # v2.1.3
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }} # Production SA Key
+
+      - name: Deploy Frontend to Production
+        id: deploy-frontend
+        uses: FirebaseExtended/action-hosting-deploy@v0 # v0.10.0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT }} # Production Firebase SA
+          channelId: live
+          projectId: ${{ env.GCP_PROJECT_ID }} # Use global production project ID
+        timeout-minutes: 12
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2 # v2.1.0
+
+      - name: Verify Backend Image Tag Exists
+        run: |
+          IMAGE_TAG_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          # Use global production vars
+          IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
+
+          echo "Checking for image tag: $IMAGE_TAG_SHA in $IMAGE_PATH"
+          if ! gcloud artifacts docker tags list $IMAGE_PATH \
+            --filter="tag=$IMAGE_TAG_SHA" \
+            --limit=1 \
+            --format="value(tag)" | grep -q "$IMAGE_TAG_SHA"; then
+
+            echo "::error::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH). Ensure the CI 'Build and Push' job ran successfully and pushed to the PRODUCTION repository."
+            exit 1
+          fi
+          echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
+
+      - name: Deploy Backend to Cloud Run (from Image)
+        id: deploy-backend
+        run: |
+          # Use global production vars
+          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+
+          echo "Deploying image: $IMAGE_URL"
+
+          gcloud run deploy careercopilot-backend-production \
+            --image $IMAGE_URL \
+            --platform managed \
+            --region ${{ env.GCP_REGION }} \
+            --project ${{ env.GCP_PROJECT_ID }} \
+            --timeout 1200s \
+            --cpu 2 \
+            --memory 4Gi \
+            --min-instances 1 \
+            --max-instances 100 \
+            --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING" \
+            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_PROD:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_PROD:latest,REDIS_URL=REDIS_URL:latest" \
+            --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }}" \
+            --allow-unauthenticated \
+            --format=json > deployment-output.json
+
+          echo "service_url=$(cat deployment-output.json | jq -r '.status.url')" >> $GITHUB_OUTPUT
+        timeout-minutes: 12
+
+      - name: Health check for backend
+        id: health-check
+        continue-on-error: true
+        run: |
+          SERVICE_URL="${{ steps.deploy-backend.outputs.service_url }}"
+          echo "Checking health of backend at $SERVICE_URL/health"
+
+          MAX_RETRIES=12
+          RETRY_COUNT=0
+
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            if curl -f -s "$SERVICE_URL/health" > /dev/null 2>&1; then
+              echo "✅ Backend health check passed"
+              echo "success=true" >> $GITHUB_OUTPUT
+              exit 0
+            fi
+
+            RETRY_COUNT=$((RETRY_COUNT + 1))
+            echo "Health check attempt $RETRY_COUNT failed, retrying in 10s..."
+            sleep 10
+          done
+
+          echo "❌ Backend health check failed after $MAX_RETRIES attempts"
+          echo "success=false" >> $GITHUB_OUTPUT
+          exit 1
+        timeout-minutes: 5
+
+      - name: Rollback on failure
+        if: steps.health-check.outputs.success == 'false'
+        run: |
+          echo "⚠️ Health check failed, initiating rollback..."
+
+          # Get the previous revision
+          PREVIOUS_REVISION=$(gcloud run revisions list \
+            --service=careercopilot-backend-production \
+            --region=${{ env.GCP_REGION }} \
+            --project=${{ env.GCP_PROJECT_ID }} \
+            --format="value(name)" \
+            --limit=2 \
+            --sort-by=~metadata.creationTimestamp \
+            | tail -n 1)
+
+          if [ -n "$PREVIOUS_REVISION" ]; then
+            echo "Rolling back to revision: $PREVIOUS_REVISION"
+            gcloud run services update-traffic careercopilot-backend-production \
+              --region=${{ env.GCP_REGION }} \
+              --project=${{ env.GCP_PROJECT_ID }} \
+              --to-revisions=$PREVIOUS_REVISION=100
+
+            echo "✅ Rollback completed"
+          else
+            echo "❌ No previous revision found for rollback"
+          fi
+
+          exit 1
+
+      - name: Deployment summary
+        if: steps.health-check.outputs.success == 'true'
+        run: |
+          echo "## 🚀 Production Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Frontend URL: https://${{ env.GCP_PROJECT_ID }}.web.app" >> $GITHUB_STEP_SUMMARY # Use production project ID
+          echo "- Backend URL: ${{ steps.deploy-backend.outputs.service_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Commit SHA: ${{ needs.pre-deploy-checks.outputs.commit-sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Deployed at: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All health checks passed" >> $GITHUB_STEP_SUMMARY
