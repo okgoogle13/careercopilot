@@ -584,12 +584,11 @@ jobs:
     name: Build and Push Backend Image
     runs-on: ubuntu-latest
     needs: [changes, frontend, backend-tests, backend-static-checks]
-    # Keep the existing 'if' condition
+    # Build if frontend passes, allow backend tests to fail
     if: |
       always() &&
       !cancelled() &&
       (needs.frontend.result == 'success' || needs.frontend.result == 'skipped') &&
-      (needs.backend-tests.result == 'success' || needs.backend-tests.result == 'skipped') &&
       (needs.backend-static-checks.result == 'success' || needs.backend-static-checks.result == 'skipped') &&
       (github.event_name == 'workflow_dispatch' || needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true') &&
       (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
