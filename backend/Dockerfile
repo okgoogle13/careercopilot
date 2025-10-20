@@ -1,6 +1,7 @@
 # ===== Base Stage =====
 # Use a specific, slim Python version for a smaller base
-FROM python:3.13-slim as base
+# Using mirror.gcr.io to avoid Docker Hub rate limits and outages
+FROM mirror.gcr.io/library/python:3.13-slim AS base
 
 # Set environment variables for consistency
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -22,7 +23,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # ===== Test Stage =====
 # This stage includes test-specific dependencies
-FROM base as test
+FROM base AS test
 
 # Install additional dependencies for testing
 RUN pip install --no-cache-dir \
@@ -45,10 +46,7 @@ CMD ["python", "-m", "pytest", "app/tests/", "-v", "--tb=short", "--maxfail=5", 
 
 # ===== Final/Production Stage =====
 # Start from the clean base stage
-FROM base as final
-
-# Copy the installed packages from the base stage
-COPY --from=base /usr/local/lib/python3.13/site-packages /usr/local/lib/python3.13/site-packages
+FROM base AS final
 
 # Copy the application code
 COPY . .
