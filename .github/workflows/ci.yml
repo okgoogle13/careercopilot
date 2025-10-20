@@ -624,45 +624,44 @@ jobs:
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2 # v2.1.0
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3 # v3.3.0
-
       - name: Configure Docker for Artifact Registry
         run: |
           gcloud config set project ${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}
           gcloud auth configure-docker ${{ env.GCP_REGISTRY }}
 
-      # Use Target Environment Variables
-      - name: Extract Docker metadata
-        id: meta
-        uses: docker/metadata-action@v5 # v5.5.1
-        with:
-          images: ${{ env.GCP_REGISTRY }}/${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}/${{ steps.env-vars.outputs.TARGET_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}
-          tags: |
-            type=sha,prefix=
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      # Push to the correct registry
+      # Build and push with standard Docker commands (no Buildx)
       - name: Build and push Docker image
-        uses: docker/build-push-action@v5 # v5.4.0
-        with:
-          context: ./backend
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          provenance: false
-          sbom: false
-          target: final
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+        run: |
+          IMAGE_BASE="${{ env.GCP_REGISTRY }}/${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}/${{ steps.env-vars.outputs.TARGET_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
+          IMAGE_SHA="${IMAGE_BASE}:${{ github.sha }}"
+          IMAGE_LATEST="${IMAGE_BASE}:latest"
+
+          echo "Building Docker image..."
+          docker build \
+            --target final \
+            --tag "${IMAGE_SHA}" \
+            --tag "${IMAGE_LATEST}" \
+            ./backend
+
+          echo "Pushing Docker image to Artifact Registry..."
+          docker push "${IMAGE_SHA}"
+          docker push "${IMAGE_LATEST}"
+
+          echo "IMAGE_SHA=${IMAGE_SHA}" >> $GITHUB_OUTPUT
+          echo "IMAGE_LATEST=${IMAGE_LATEST}" >> $GITHUB_OUTPUT
 
       - name: Add build summary
         run: |
-          echo "###  Backend Image Pushed (${{ github.ref_name }})" >> $GITHUB_STEP_SUMMARY
+          IMAGE_BASE="${{ env.GCP_REGISTRY }}/${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}/${{ steps.env-vars.outputs.TARGET_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
+          echo "### ✅ Backend Image Pushed (${{ github.ref_name }})" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "Image successfully pushed to Google Artifact Registry." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Target Project:** ${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}" >> $GITHUB_STEP_SUMMARY
           echo "**Target Repository:** ${{ steps.env-vars.outputs.TARGET_REPOSITORY }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Image Tags:**" >> $GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.meta.outputs.tags }}" >> $GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          echo "${IMAGE_BASE}:${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "${IMAGE_BASE}:latest" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
