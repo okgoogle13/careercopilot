@@ -160,11 +160,13 @@ jobs:
 
       - name: Verify Backend Image Tag Exists
         run: |
-          IMAGE_TAG_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          # Use short SHA (first 7 chars) to match CI tagging convention
+          FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          IMAGE_TAG_SHA="${FULL_SHA:0:7}"
           # Use staging specific vars
           IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
 
-          echo "Checking for image tag: $IMAGE_TAG_SHA in $IMAGE_PATH"
+          echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
           if ! gcloud artifacts docker tags list $IMAGE_PATH \
             --filter="tag=$IMAGE_TAG_SHA" \
             --limit=1 \
@@ -178,10 +180,13 @@ jobs:
       - name: Deploy Backend to Cloud Run (from Image)
         id: deploy-backend
         run: |
+          # Use short SHA (first 7 chars) to match CI tagging convention
+          FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          SHORT_SHA="${FULL_SHA:0:7}"
           # Use staging specific vars
-          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${SHORT_SHA}"
 
-          echo "Deploying image: $IMAGE_URL"
+          echo "Deploying image: $IMAGE_URL (using short SHA from commit $FULL_SHA)"
 
           gcloud run deploy careercopilot-backend-staging \
             --image $IMAGE_URL \
@@ -195,7 +200,7 @@ jobs:
             --max-instances 10 \
             --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO" \
             --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_STAGING:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_STAGING:latest" \
-            --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }}" \
+            --update-labels="managed-by=github-actions,commit-sha=${SHORT_SHA}" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
 
@@ -289,11 +294,13 @@ jobs:
 
       - name: Verify Backend Image Tag Exists
         run: |
-          IMAGE_TAG_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          # Use short SHA (first 7 chars) to match CI tagging convention
+          FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          IMAGE_TAG_SHA="${FULL_SHA:0:7}"
           # Use global production vars
           IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
 
-          echo "Checking for image tag: $IMAGE_TAG_SHA in $IMAGE_PATH"
+          echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
           if ! gcloud artifacts docker tags list $IMAGE_PATH \
             --filter="tag=$IMAGE_TAG_SHA" \
             --limit=1 \
@@ -307,10 +314,13 @@ jobs:
       - name: Deploy Backend to Cloud Run (from Image)
         id: deploy-backend
         run: |
+          # Use short SHA (first 7 chars) to match CI tagging convention
+          FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          SHORT_SHA="${FULL_SHA:0:7}"
           # Use global production vars
-          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ needs.pre-deploy-checks.outputs.commit-sha }}"
+          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${SHORT_SHA}"
 
-          echo "Deploying image: $IMAGE_URL"
+          echo "Deploying image: $IMAGE_URL (using short SHA from commit $FULL_SHA)"
 
           gcloud run deploy careercopilot-backend-production \
             --image $IMAGE_URL \
@@ -324,7 +334,7 @@ jobs:
             --max-instances 100 \
             --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING" \
             --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_PROD:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_PROD:latest,REDIS_URL=REDIS_URL:latest" \
-            --update-labels="managed-by=github-actions,commit-sha=${{ needs.pre-deploy-checks.outputs.commit-sha }}" \
+            --update-labels="managed-by=github-actions,commit-sha=${SHORT_SHA}" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
 
