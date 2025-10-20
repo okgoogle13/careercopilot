@@ -605,12 +605,10 @@ jobs:
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
             echo "TARGET_PROJECT_ID=${{ env.GCP_PROJECT_ID }}" >> $GITHUB_OUTPUT
-            echo "TARGET_REPOSITORY=${{ env.GCP_REPOSITORY }}" >> $GITHUB_OUTPUT # Production repo 'careercopilot'
-            echo "GCP_SA_EMAIL=${{ secrets.GCP_PROD_SA_EMAIL }}" >> $GITHUB_OUTPUT # Needs Prod SA Email Secret
+            echo "TARGET_REPOSITORY=${{ env.GCP_REPOSITORY }}" >> $GITHUB_OUTPUT
           elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
-            echo "TARGET_PROJECT_ID=${{ secrets.GCP_STAGING_PROJECT_ID }}" >> $GITHUB_OUTPUT # Needs Staging Project ID Secret
-            echo "TARGET_REPOSITORY=careercopilot-repo" >> $GITHUB_OUTPUT # Staging repo name
-            echo "GCP_SA_EMAIL=${{ secrets.GCP_STAGING_SA_EMAIL }}" >> $GITHUB_OUTPUT # Needs Staging SA Email Secret
+            echo "TARGET_PROJECT_ID=careercopilot-staging" >> $GITHUB_OUTPUT
+            echo "TARGET_REPOSITORY=careercopilot-repo" >> $GITHUB_OUTPUT
           else
              echo "::error::Unsupported branch for build and push: ${{ github.ref }}"
              exit 1
