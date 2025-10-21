@@ -379,26 +379,14 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
           cache-dependency-path: yarn.lock
-      - name: Cache functions node_modules
-        uses: actions/cache@v4 # v4.0.2
-        with:
-          path: functions/node_modules
-          key: ${{ runner.os }}-npm-functions-${{ hashFiles('functions/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-functions-
       - name: Install dependencies
-        run: |
-          yarn install
-          cd functions && npm ci
+        run: yarn install --immutable
       - name: Lint functions
         run: yarn workspace functions lint
       - name: Build functions
         run: yarn workspace functions build
       - name: Run functions tests
-        run: |
-          echo "🧪 Running functions tests..."
-          cd functions
-          npm run test:ci
+        run: yarn workspace functions test:ci
       - name: Verify build output
         run: |
           if [ ! -d "functions/lib" ] || [ ! "$(ls -A functions/lib)" ]; then
