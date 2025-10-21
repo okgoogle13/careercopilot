@@ -310,6 +310,8 @@ jobs:
         with:
           distribution: "temurin"
           java-version: "17"
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
       - name: Setup Node.js
         uses: actions/setup-node@v4 # v4.0.3
         with:

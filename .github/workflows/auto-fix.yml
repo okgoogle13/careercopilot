@@ -52,15 +52,15 @@ jobs:
           python-version: "3.13"
           cache: "pip" # Cache pip dependencies
 
+      - name: Enable Corepack for Yarn 4
+        run: corepack enable
+
       - name: Set up Node.js
         uses: actions/setup-node@v4 # v4.0.3
         with:
           node-version: "22"
           cache: "yarn" # Cache Yarn dependencies
           cache-dependency-path: "yarn.lock"
-
-      - name: Enable Corepack for Yarn 4
-        run: corepack enable
 
       - name: Cache functions node_modules
         # Functions uses npm, so it needs its own cache
