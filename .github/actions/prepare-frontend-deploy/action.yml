@@ -56,18 +56,18 @@ runs:
         echo "🔨 Performing fallback frontend build..."
         echo "built=true" >> $GITHUB_OUTPUT
 
-    - name: Setup Node.js for fallback build
-      if: steps.build.outputs.built == 'true'
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ inputs.node-version }}
-
     - name: Enable Corepack
       if: steps.build.outputs.built == 'true'
       shell: bash
       run: |
         corepack enable
         corepack prepare yarn@4.10.2 --activate
+
+    - name: Setup Node.js for fallback build
+      if: steps.build.outputs.built == 'true'
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
 
     - name: Install dependencies with lockfile fix
       if: steps.build.outputs.built == 'true'
