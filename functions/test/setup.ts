@@ -27,6 +27,8 @@ export const setupTestEnvironment = async () => {
 
 export const getAuthedFirestore = async (auth?: Record<string, unknown>) => {
   const env = await setupTestEnvironment();
+  // Firebase authenticatedContext expects a subset of Record<string, unknown>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const context = auth ? env.authenticatedContext(auth as any) : env.unauthenticatedContext();
   return context.firestore();
 };
