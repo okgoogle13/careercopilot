@@ -128,8 +128,11 @@ class SecureSettings(BaseSettings):
     # RAG features have been removed in favor of direct AI integration
     EMBEDDING_MODEL: str = "text-embedding-004"
 
-    # Email
-    SENDGRID_API_KEY: Optional[str] = None
+    # Email - AWS SES
+    AWS_ACCESS_KEY_ID: Optional[str] = None
+    AWS_SECRET_ACCESS_KEY: Optional[str] = None
+    AWS_REGION: str = "us-east-1"
+    SES_SENDER_EMAIL: Optional[str] = None
 
     # Performance
     MAX_WORKERS: int = 2
@@ -198,7 +201,9 @@ class SecureSettings(BaseSettings):
                         "GEMINI_API_KEY",
                         "OPENAI_API_KEY",
                         "ANTHROPIC_API_KEY",
-                        "SENDGRID_API_KEY",
+                        "AWS_ACCESS_KEY_ID",
+                        "AWS_SECRET_ACCESS_KEY",
+                        "SES_SENDER_EMAIL",
                     ]:
                         if not settings.get(secret):
                             try:
