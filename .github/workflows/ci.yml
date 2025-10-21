@@ -47,7 +47,6 @@ env:
   PYTHONUNBUFFERED: "1"
   PYTHONDONTWRITEBYTECODE: "1"
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
-  YARN_ENABLE_COREPACK: 1
 
   # Define Docker image location components (used by build job)
   GCP_REGION: us-central1

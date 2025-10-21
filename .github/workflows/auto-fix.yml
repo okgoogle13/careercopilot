@@ -30,8 +30,7 @@ permissions:
   contents: write
   pull-requests: write
 
-env:
-  YARN_ENABLE_COREPACK: 1
+env: {}
 
 jobs:
   auto-fix:
