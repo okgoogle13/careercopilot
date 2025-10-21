@@ -85,3 +85,4 @@ cleanup_backup_*
 cleanup_backup_*/
 /backend/data/
 /frontend/test-results/
+.env.aws-ses

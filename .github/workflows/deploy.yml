@@ -199,7 +199,7 @@ jobs:
             --min-instances 0 \
             --max-instances 10 \
             --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO" \
-            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,AWS_ACCESS_KEY_ID=aws-access-key-id:latest,AWS_SECRET_ACCESS_KEY=aws-secret-access-key:latest,SES_SENDER_EMAIL=ses-sender-email:latest" \
+            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID:latest,AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY:latest,SES_SENDER_EMAIL=SES_SENDER_EMAIL:latest" \
             --update-labels="managed-by=github-actions,commit-sha=${SHORT_SHA}" \
             --allow-unauthenticated \
             --format=json > deployment-output.json

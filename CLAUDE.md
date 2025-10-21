@@ -1,5 +1,14 @@
 # Project Commands and Notes
 
+## Email Service (AWS SES)
+
+- **Quick Start**: See [AWS_SES_QUICK_START.md](AWS_SES_QUICK_START.md) for 15-minute setup
+- **Full Setup Guide**: [docs/AWS_SES_SETUP.md](docs/AWS_SES_SETUP.md) - Complete AWS SES configuration
+- **Migration Summary**: [AWS_SES_MIGRATION_SUMMARY.md](AWS_SES_MIGRATION_SUMMARY.md) - SendGrid → AWS SES changes
+- **Setup GCP Secrets**: `./scripts/setup-aws-ses-secrets.sh` - Add AWS credentials to Google Cloud Secret Manager
+- **Setup GitHub Secrets**: `./scripts/setup-aws-ses-github-secrets.sh` - Add AWS credentials to GitHub Secrets
+- **Email Service**: Uses AWS SES with Gmail sender (100% free, 62k emails/month)
+
 ## Configuration Management
 
 ### Production Secrets (Google Cloud Secret Manager)
