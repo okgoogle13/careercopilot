@@ -21,8 +21,8 @@ openai
 anthropic
 
 # Genkit AI framework
-genkit>=0.5.0
-genkit-plugin-google-genai>=0.5.0
+genkit
+genkit-plugin-google-genai
 
 # Authentication
 python-jose[cryptography]
@@ -54,7 +54,7 @@ psutil
 redis
 httpx[http2]
 slowapi
-sendgrid
+boto3
 loguru
 opencensus
 opencensus-ext-stackdriver

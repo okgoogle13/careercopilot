@@ -1,17 +1,17 @@
 import os
 
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+from app.services.email_service import send_email
 
 
 # Removed @genkit.flow()
 def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> None:
     """
     Sends an email notification to the user about a new job opportunity.
+    Uses AWS SES for email delivery.
     """
-    sendgrid_api_key = os.getenv("SENDGRID_API_KEY")
-    if not sendgrid_api_key:
-        print("SENDGRID_API_KEY not set. Skipping email notification.")
+    # Check if SES is configured
+    if not os.getenv("AWS_ACCESS_KEY_ID") or not os.getenv("SES_SENDER_EMAIL"):
+        print("AWS SES not configured. Skipping email notification.")
         return
 
     user_email = user_data.get("email")
@@ -51,19 +51,17 @@ def sendNewOpportunityNotification(user_data: dict, opportunity_data: dict) -> N
     </html>
     """
 
-    message = Mail(
-        from_email="notifications@careercopilot.com",  # Must be a verified sender in SendGrid
-        to_emails=user_email,
-        subject=subject,
-        html_content=html_content,
-    )
-
     try:
-        sg = SendGridAPIClient(sendgrid_api_key)
-        response = sg.send(message)
-        print(f"Notification email sent to {user_email}, status code: {response.status_code}")
+        response = send_email(
+            to_email=user_email,
+            subject=subject,
+            html_content=html_content,
+        )
+        print(
+            f"Notification email sent to {user_email}, "
+            f"MessageID: {response.get('message_id')}, "
+            f"Status: {response.get('status_code')}"
+        )
     except Exception as e:
         print(f"Error sending notification email: {e}")
-        # Decide if you want to raise an exception or just log the error
-        # For this use case, we'll just log it to avoid breaking the main flow
-        # raise e
+        # Log the error but don't break the main flow
