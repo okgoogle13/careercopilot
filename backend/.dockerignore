@@ -1,4 +1,5 @@
 # .dockerignore for the backend service
+# Optimizes Docker build context by excluding unnecessary files
 
 # Ignore Git and other version control files
 .git
