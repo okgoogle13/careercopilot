@@ -110,6 +110,10 @@ def get_redis_url() -> str:
     try:
         return get_secret("REDIS_URL")
     except RuntimeError:
+        redis_host = os.getenv("REDIS_HOST")
+        redis_port = os.getenv("REDIS_PORT")
+        if redis_host and redis_port:
+            return f"redis://{redis_host}:{redis_port}/0"
         return "redis://localhost:6379/0"
 
 
