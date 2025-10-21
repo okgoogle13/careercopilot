@@ -55,4 +55,4 @@ COPY . .
 EXPOSE 8080
 
 # Command to run the application
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "$PORT"]
+ENTRYPOINT ["/app/start.sh"]

@@ -38,19 +38,17 @@ def configure_loguru(
 
     # Common JSON format for structured logging
     json_format = (
-        "{"
-        '"timestamp": "{time:YYYY-MM-DDTHH:mm:ss.SSSZ}", '
-        '"level": "{level}", '
-        '"service": "' + service_name + '", '
-        '"logger": "{name}", '
-        '"message": "{message}", '
-        '"module": "{module}", '
-        '"function": "{function}", '
-        '"line": {line}, '
-        '"process": {process}, '
-        '"thread": "{thread.name}",'
-        '"extra": "{extra}"'
-        "}"
+        f'{{"timestamp": "{{time:YYYY-MM-DDTHH:mm:ss.SSSZ}}", '
+        f'"level": "{{level}}", '
+        f'"service": "{service_name}", '
+        f'"logger": "{{name}}", '
+        f'"message": "{{message}}", '
+        f'"module": "{{module}}", '
+        f'"function": "{{function}}", '
+        f'"line": {{line}}, '
+        f'"process": {{process}}, '
+        f'"thread": "{{thread.name}}",'
+        f'"extra": "{{extra}}"}}'
     )
 
     # Simple format for development
