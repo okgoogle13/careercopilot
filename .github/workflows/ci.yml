@@ -640,7 +640,10 @@ jobs:
       - name: Build and push Docker image
         run: |
           IMAGE_BASE="${{ env.GCP_REGISTRY }}/${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}/${{ steps.env-vars.outputs.TARGET_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
-          IMAGE_SHA="${IMAGE_BASE}:${{ github.sha }}"
+          # Use short SHA (first 7 chars) to match git convention
+          SHORT_SHA="${{ github.sha }}"
+          SHORT_SHA="${SHORT_SHA:0:7}"
+          IMAGE_SHA="${IMAGE_BASE}:${SHORT_SHA}"
           IMAGE_LATEST="${IMAGE_BASE}:latest"
 
           echo "Building Docker image..."
