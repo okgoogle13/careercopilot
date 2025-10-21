@@ -199,7 +199,7 @@ jobs:
             --min-instances 0 \
             --max-instances 10 \
             --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO" \
-            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_STAGING:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_STAGING:latest" \
+            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,AWS_ACCESS_KEY_ID=aws-access-key-id:latest,AWS_SECRET_ACCESS_KEY=aws-secret-access-key:latest,SES_SENDER_EMAIL=ses-sender-email:latest" \
             --update-labels="managed-by=github-actions,commit-sha=${SHORT_SHA}" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
@@ -333,7 +333,7 @@ jobs:
             --min-instances 1 \
             --max-instances 100 \
             --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING" \
-            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,SENDGRID_API_KEY=SENDGRID_API_KEY:latest,GOOGLE_OAUTH_CLIENT_ID=GOOGLE_OAUTH_CLIENT_ID_PROD:latest,GOOGLE_OAUTH_CLIENT_SECRET=GOOGLE_OAUTH_CLIENT_SECRET_PROD:latest,REDIS_URL=REDIS_URL:latest" \
+            --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,AWS_ACCESS_KEY_ID=aws-access-key-id:latest,AWS_SECRET_ACCESS_KEY=aws-secret-access-key:latest,SES_SENDER_EMAIL=ses-sender-email:latest,REDIS_URL=REDIS_URL:latest" \
             --update-labels="managed-by=github-actions,commit-sha=${SHORT_SHA}" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
