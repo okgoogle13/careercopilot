@@ -48,8 +48,8 @@ def configure_loguru(
         '"function": "{function}", '
         '"line": {line}, '
         '"process": {process}, '
-        '"thread": "{thread.name}"'
-        "{extra}"
+        '"thread": "{thread.name}",'
+        '"extra": "{extra}"'
         "}"
     )
 

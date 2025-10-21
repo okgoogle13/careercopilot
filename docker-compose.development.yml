@@ -59,7 +59,7 @@ services:
     volumes:
       - ./backend:/app
     ports:
-      - "8000:8000"  # Different port to avoid conflicts
+      - "8080:8080"  # Different port to avoid conflicts
     depends_on:
       - postgres
       - redis
