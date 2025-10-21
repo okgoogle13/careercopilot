@@ -94,10 +94,22 @@ class ProductionSecretsValidator:
                 "validation": lambda x: x.endswith(".appspot.com") or x.endswith(".firebaseapp.com"),
                 "critical": True,
             },
-            "sendgrid-api-key": {
-                "description": "SendGrid API Key",
-                "env_var": "SENDGRID_API_KEY",
-                "validation": lambda x: x.startswith("SG.") and len(x) > 20,
+            "aws-access-key-id": {
+                "description": "AWS Access Key ID for SES",
+                "env_var": "AWS_ACCESS_KEY_ID",
+                "validation": lambda x: len(x) == 20 and x.isupper(),
+                "critical": False,
+            },
+            "aws-secret-access-key": {
+                "description": "AWS Secret Access Key for SES",
+                "env_var": "AWS_SECRET_ACCESS_KEY",
+                "validation": lambda x: len(x) == 40,
+                "critical": False,
+            },
+            "ses-sender-email": {
+                "description": "SES Verified Sender Email Address",
+                "env_var": "SES_SENDER_EMAIL",
+                "validation": lambda x: "@" in x and "." in x,
                 "critical": False,
             },
         }

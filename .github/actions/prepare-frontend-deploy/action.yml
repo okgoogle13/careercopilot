@@ -77,7 +77,7 @@ runs:
         # Remove install state to prevent lockfile conflicts
         rm -f .yarn/install-state.gz .yarn/build-state.yml 2>/dev/null || true
         # Install with lockfile update allowed
-        yarn install --mode=update-lockfile || yarn install || {
+        yarn install || {
           echo "⚠️  Standard install failed, cleaning and retrying..."
           yarn cache clean
           rm -f yarn.lock
