@@ -39,7 +39,6 @@ concurrency:
 
 env:
   NODE_VERSION: "22"
-  YARN_ENABLE_COREPACK: 1
   # Common Docker image location parts
   GCP_REGION: us-central1
   GCP_REGISTRY: us-central1-docker.pkg.dev
