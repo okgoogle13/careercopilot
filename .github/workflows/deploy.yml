@@ -167,12 +167,12 @@ jobs:
           IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
 
           echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
-          if ! gcloud artifacts docker tags list $IMAGE_PATH \
-            --filter="tag=$IMAGE_TAG_SHA" \
-            --limit=1 \
-            --format="value(tag)" | grep -q "$IMAGE_TAG_SHA"; then
 
+          # List all tags and grep for our specific tag (more reliable than gcloud filter)
+          if ! gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
             echo "::error::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH). Ensure the CI 'Build and Push' job ran successfully and pushed to the STAGING repository."
+            echo "Available tags:"
+            gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | head -10
             exit 1
           fi
           echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
@@ -301,12 +301,12 @@ jobs:
           IMAGE_PATH="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}"
 
           echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
-          if ! gcloud artifacts docker tags list $IMAGE_PATH \
-            --filter="tag=$IMAGE_TAG_SHA" \
-            --limit=1 \
-            --format="value(tag)" | grep -q "$IMAGE_TAG_SHA"; then
 
+          # List all tags and grep for our specific tag (more reliable than gcloud filter)
+          if ! gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
             echo "::error::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH). Ensure the CI 'Build and Push' job ran successfully and pushed to the PRODUCTION repository."
+            echo "Available tags:"
+            gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | head -10
             exit 1
           fi
           echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
