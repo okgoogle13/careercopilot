@@ -8,7 +8,12 @@ import {
   CardActions,
   Typography,
   Box,
+  Alert,
+  Snackbar,
 } from '@mui/material';
+import { useState } from 'react';
+import { DocumentUploadDropzone, UploadedFile } from '@/components/documents/DocumentUploadDropzone';
+import { uploadAndCreateDocument } from '@/services/documentService';
 
 interface UploadResumeProps {
   onNext: () => void;
@@ -16,6 +21,25 @@ interface UploadResumeProps {
 }
 
 export function UploadResume({ onNext, onBack }: UploadResumeProps) {
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+
+  const handleUpload = async (
+    files: UploadedFile[],
+    type: 'resume' | 'cover-letter' | 'ksc'
+  ) => {
+    try {
+      for (const { file } of files) {
+        await uploadAndCreateDocument(file, type);
+      }
+      setUploadSuccess(true);
+      setUploadError(null);
+    } catch (error) {
+      console.error('Upload error:', error);
+      setUploadError(error instanceof Error ? error.message : 'Upload failed. Please try again.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background p-4">
       <div className="max-w-2xl mx-auto">
@@ -42,16 +66,11 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 </p>
               </div>
             </div>
-
-            <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer">
-              <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
-              <p className="text-sm text-muted-foreground mb-3">
-                Drag and drop files here or click to browse
-              </p>
-              <Button size="small" variant="outlined">
-                Upload Files
-              </Button>
-            </div>
+            <DocumentUploadDropzone
+              onUpload={(files) => handleUpload(files, 'resume')}
+              maxFiles={5}
+              showPreviews={false}
+            />
           </Card>
 
           {/* Cover Letters */}
@@ -67,16 +86,11 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 </p>
               </div>
             </div>
-
-            <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer">
-              <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
-              <p className="text-sm text-muted-foreground mb-3">
-                Drag and drop files here or click to browse
-              </p>
-              <Button size="small" variant="outlined">
-                Upload Files
-              </Button>
-            </div>
+            <DocumentUploadDropzone
+              onUpload={(files) => handleUpload(files, 'cover-letter')}
+              maxFiles={5}
+              showPreviews={false}
+            />
           </Card>
 
           {/* Selection Criteria */}
@@ -92,16 +106,11 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
                 </p>
               </div>
             </div>
-
-            <div className="border-2 border-dashed border-border rounded-lg p-8 text-center hover:border-primary/50 transition-colors cursor-pointer">
-              <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-3" />
-              <p className="text-sm text-muted-foreground mb-3">
-                Drag and drop files here or click to browse
-              </p>
-              <Button size="small" variant="outlined">
-                Upload Files
-              </Button>
-            </div>
+            <DocumentUploadDropzone
+              onUpload={(files) => handleUpload(files, 'ksc')}
+              maxFiles={5}
+              showPreviews={false}
+            />
           </Card>
         </div>
 
@@ -114,6 +123,22 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
             Continue to Profile Creation
           </Button>
         </div>
+
+        {/* Success/Error notifications */}
+        <Snackbar
+          open={uploadSuccess}
+          autoHideDuration={6000}
+          onClose={() => setUploadSuccess(false)}
+        >
+          <Alert severity="success" onClose={() => setUploadSuccess(false)}>
+            Document uploaded successfully!
+          </Alert>
+        </Snackbar>
+        <Snackbar open={!!uploadError} autoHideDuration={6000} onClose={() => setUploadError(null)}>
+          <Alert severity="error" onClose={() => setUploadError(null)}>
+            {uploadError}
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );
