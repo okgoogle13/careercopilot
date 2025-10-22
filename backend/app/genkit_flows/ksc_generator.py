@@ -1,8 +1,8 @@
 import json
 
+from app.ai.model_dispatcher import dispatch_llm_call
 from app.core.prompt_service import format_prompt
 from app.genkit_flows.flow_decorator import simple_genkit_flow
-from app.ai.model_dispatcher import dispatch_llm_call
 from pydantic import BaseModel
 
 

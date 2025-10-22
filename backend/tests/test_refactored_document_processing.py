@@ -18,7 +18,6 @@ from app.ai.job_description_service import (
 from app.ai.resume_service import ResumeAnalysisResult, ResumeAnalysisService
 from app.core.document_processing import (
     DocumentProcessingError,
-    GenericDocumentProcessor,
     PromptTemplates,
     process_document,
 )

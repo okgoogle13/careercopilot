@@ -8,12 +8,7 @@ import json
 from unittest.mock import patch
 
 import pytest
-from app.core.prompt_service import (
-    PromptService,
-    PromptTemplate,
-    format_prompt,
-    get_system_prompt,
-)
+from app.core.prompt_service import PromptService, PromptTemplate, format_prompt, get_system_prompt
 
 
 @pytest.fixture

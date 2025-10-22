@@ -1,6 +1,6 @@
-import pytest
 from unittest.mock import Mock, patch
 
+import pytest
 from app.genkit_flows.email_scanner import extract_job_details_from_email
 
 

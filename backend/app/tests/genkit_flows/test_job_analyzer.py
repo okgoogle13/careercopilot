@@ -1,6 +1,6 @@
-import pytest
 from unittest.mock import Mock, patch
 
+import pytest
 from app.genkit_flows.job_analyzer import analyze_job_description
 
 

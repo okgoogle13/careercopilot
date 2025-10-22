@@ -1,17 +1,14 @@
 # backend/app/api/v1/analysis.py (Revised)
 
-from fastapi import APIRouter, Body, Depends, HTTPException
-from pydantic import BaseModel
-
 from app.core.dependencies import User, get_current_user
 from app.genkit_flows.advanced_job_matching import analyze_job_match_detailed
 from app.genkit_flows.ats_scoring import AtsResult, atsScoring
 from app.genkit_flows.flow_decorator import run_flow_async
-from app.genkit_flows.resume_intelligence_pipeline import (
-    generate_resume_intelligence_report,
-)
+from app.genkit_flows.resume_intelligence_pipeline import generate_resume_intelligence_report
 from app.genkit_flows.smart_content_optimizer import optimize_content_for_job
 from app.models import ATSScoreResponse, CategoryScore
+from fastapi import APIRouter, Body, Depends, HTTPException
+from pydantic import BaseModel
 
 router = APIRouter()
 
