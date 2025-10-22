@@ -27,7 +27,6 @@ const generateDocuments = (count: number): Document[] => {
   return Array.from({ length: count }, (_, i) => {
     const type = types[Math.floor(Math.random() * types.length)];
     const hasAtsScore = Math.random() > 0.3; // 70% chance of having ATS score
-    const docTags = Math.random() > 0.5 ? tags[Math.floor(Math.random() * tags.length)] : [];
 
     return {
       id: `doc-${i + 1}`,
