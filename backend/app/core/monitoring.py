@@ -16,13 +16,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 import psutil
 from fastapi import FastAPI, Request, Response
-from prometheus_client import (
-    CONTENT_TYPE_LATEST,
-    REGISTRY,
-    Counter,
-    Histogram,
-    generate_latest,
-)
+from prometheus_client import CONTENT_TYPE_LATEST, REGISTRY, Counter, Histogram, generate_latest
 from starlette.middleware.base import BaseHTTPMiddleware
 
 logger = logging.getLogger(__name__)
