@@ -20,9 +20,7 @@ class CoverLetterGenerator:
 
     def __init__(self):
         # Import the working genkit flow
-        from app.genkit_flows.cover_letter_generator import (
-            generate_tailored_cover_letter,
-        )
+        from app.genkit_flows.cover_letter_generator import generate_tailored_cover_letter
 
         self.cover_letter_flow = generate_tailored_cover_letter
 

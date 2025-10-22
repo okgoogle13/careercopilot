@@ -13,12 +13,7 @@ from pydantic_settings import BaseSettings
 
 # Try to import the secret manager, but don't fail if not available
 try:
-    from .secret_manager import (
-        get_database_url,
-        get_redis_url,
-        get_secret,
-        get_secret_key,
-    )
+    from .secret_manager import get_database_url, get_redis_url, get_secret, get_secret_key
 
     SECRET_MANAGER_AVAILABLE = True
 except ImportError:

@@ -5,12 +5,7 @@ Authentication endpoints for user registration, login, and session management.
 import logging
 from typing import Dict, List, Optional
 
-from app.core.auth import (
-    auth_manager,
-    create_user_token,
-    get_current_user,
-    session_manager,
-)
+from app.core.auth import auth_manager, create_user_token, get_current_user, session_manager
 from app.core.database import get_db
 from app.genkit_flows.onboarding_voice_workflow import (
     VoiceProfileInput,

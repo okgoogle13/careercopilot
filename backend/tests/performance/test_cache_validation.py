@@ -3,16 +3,13 @@ Cache validation and performance tests
 """
 
 import asyncio
-import time
 import uuid
-from datetime import datetime, timedelta, timezone, UTC
-from unittest.mock import AsyncMock, patch, MagicMock
-from typing import Dict, Any, Optional
 from asyncio import Lock
+from datetime import UTC, datetime, timedelta
+from typing import Any, Dict, Optional
+from unittest.mock import MagicMock
 
 import pytest
-import aiohttp
-from fastapi.testclient import TestClient
 
 # Mock the FastAPI app to avoid database dependencies
 app = MagicMock()

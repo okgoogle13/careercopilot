@@ -1,10 +1,11 @@
 # backend/app/ai/llm_service.py
 
-import redis
 import hashlib
 import json
 import os
 from typing import Dict
+
+import redis
 from app.core.loguru_config import get_logger
 
 logger = get_logger(__name__)

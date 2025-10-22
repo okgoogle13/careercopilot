@@ -7,12 +7,7 @@ Main API router that includes all endpoint modules.
 from fastapi import APIRouter
 
 # Import endpoint modules
-from .endpoints import (
-    analysis,
-    auth,
-    config,
-    workflows,
-)
+from .endpoints import analysis, auth, config, workflows
 
 api_router = APIRouter()
 

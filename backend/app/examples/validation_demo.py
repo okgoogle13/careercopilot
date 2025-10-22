@@ -14,14 +14,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 try:
-    from app.core.ai_flow_integration import (
-        validate_ai_flow_response,
-    )
-    from app.core.ai_response_validation import (
-        AIResponseValidator,
-        STARResponse,
-        default_validator,
-    )
+    from app.core.ai_flow_integration import validate_ai_flow_response
+    from app.core.ai_response_validation import AIResponseValidator, STARResponse, default_validator
 
     print("✅ AI Response Validation Utility - Demo")
     print("=" * 50)
