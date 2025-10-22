@@ -96,7 +96,15 @@
       "Bash(npx tsc:*)",
       "Bash(npm run test:*)",
       "Bash(yarn workspace functions build:*)",
-      "Bash(yarn install)"
+      "Bash(yarn install)",
+      "Bash(gcloud artifacts docker images list:*)",
+      "Bash(gcloud artifacts docker tags list:*)",
+      "Bash(gcloud artifacts docker images describe:*)",
+      "Bash(gcloud config set:*)",
+      "Bash(git -C /home/njd/careercopilot/careercopilot log --all --pretty=format: --name-only --diff-filter=D)",
+      "Bash(for file in /home/njd/careercopilot/careercopilot/*.md)",
+      "Bash(done)",
+      "Bash(sort:*)"
     ]
   }
 }
