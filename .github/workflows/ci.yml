@@ -42,7 +42,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: "20"
+  NODE_VERSION: "22"
   PYTHON_VERSION: "3.13"
   PYTHONUNBUFFERED: "1"
   PYTHONDONTWRITEBYTECODE: "1"
@@ -155,12 +155,43 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # v4.1.7
-      - name: Setup and Build Frontend
+      - name: Setup and Test Frontend
         uses: ./.github/actions/setup-frontend
         with:
           node-version: ${{ env.NODE_VERSION }}
           run-checks: "true"
+          upload-artifacts: "false"
+          skip-build: "true"
+
+  # Frontend Build and Artifact Upload
+  frontend-build:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    needs: [frontend]  # Wait for tests to pass
+    if: (github.event_name == 'workflow_dispatch') || (needs.changes.outputs.frontend == 'true')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # v4.1.7
+      
+      - name: Setup and Build Frontend
+        uses: ./.github/actions/setup-frontend
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          run-checks: "false"
           upload-artifacts: "true"
+          skip-build: "false"
+      
+      - name: Verify Artifact
+        shell: bash
+        run: |
+          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
+            echo "❌ Frontend build failed - no dist directory found or it's empty"
+            ls -la frontend/ || echo "No frontend directory found"
+            exit 1
+          fi
+          echo "✅ Frontend build artifacts verified"
+          echo "Dist contents:"
+          ls -la frontend/dist/
 
   # Backend Static Checks
   backend-static-checks:

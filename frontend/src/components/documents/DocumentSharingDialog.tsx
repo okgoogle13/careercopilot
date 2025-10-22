@@ -11,7 +11,6 @@ import {
   Search,
   PersonAdd as UserPlus,
   Mail,
-  Lock,
   Public as Globe,
 } from '@mui/icons-material';
 
@@ -85,19 +84,6 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
       collab.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       collab.email.toLowerCase().includes(searchQuery.toLowerCase())
   );
-
-  const getPermissionColor = (permission: PermissionLevel) => {
-    switch (permission) {
-      case 'view':
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300';
-      case 'comment':
-        return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300';
-      case 'edit':
-        return 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300';
-      default:
-        return '';
-    }
-  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
