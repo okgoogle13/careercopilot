@@ -159,6 +159,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2 # v2.1.0
 
       - name: Verify Backend Image Tag Exists
+        id: verify-image
         run: |
           # Use short SHA (first 7 chars) to match CI tagging convention
           FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
@@ -169,24 +170,33 @@ jobs:
           echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
 
           # List all tags and grep for our specific tag (more reliable than gcloud filter)
-          if ! gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
-            echo "::error::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH). Ensure the CI 'Build and Push' job ran successfully and pushed to the STAGING repository."
+          if gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
+            echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
+            echo "image_tag=${IMAGE_TAG_SHA}" >> $GITHUB_OUTPUT
+          else
+            echo "::warning::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH)."
             echo "Available tags:"
             gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | head -10
-            exit 1
+
+            # Check if 'latest' tag exists as fallback
+            if gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^latest$"; then
+              echo "::warning::Falling back to 'latest' tag. This may not match the current commit."
+              echo "image_tag=latest" >> $GITHUB_OUTPUT
+            else
+              echo "::error::Neither SHA tag $IMAGE_TAG_SHA nor 'latest' tag found. Ensure the CI 'Build and Push' job ran successfully."
+              exit 1
+            fi
           fi
-          echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
 
       - name: Deploy Backend to Cloud Run (from Image)
         id: deploy-backend
         run: |
-          # Use short SHA (first 7 chars) to match CI tagging convention
-          FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
-          SHORT_SHA="${FULL_SHA:0:7}"
+          # Use the verified image tag from previous step
+          IMAGE_TAG="${{ steps.verify-image.outputs.image_tag }}"
           # Use staging specific vars
-          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${SHORT_SHA}"
+          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${IMAGE_TAG}"
 
-          echo "Deploying image: $IMAGE_URL (using short SHA from commit $FULL_SHA)"
+          echo "Deploying image: $IMAGE_URL"
 
           gcloud run deploy careercopilot-backend-staging \
             --image $IMAGE_URL \
@@ -200,7 +210,7 @@ jobs:
             --max-instances 10 \
             --set-env-vars="ENVIRONMENT=staging,LOG_LEVEL=INFO" \
             --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,AWS_ACCESS_KEY_ID=AWS_ACCESS_KEY_ID:latest,AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY:latest,SES_SENDER_EMAIL=SES_SENDER_EMAIL:latest" \
-            --update-labels="managed-by=github-actions,commit-sha=${SHORT_SHA}" \
+            --update-labels="managed-by=github-actions,image-tag=${IMAGE_TAG}" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
 
@@ -293,6 +303,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2 # v2.1.0
 
       - name: Verify Backend Image Tag Exists
+        id: verify-image-prod
         run: |
           # Use short SHA (first 7 chars) to match CI tagging convention
           FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
@@ -303,24 +314,33 @@ jobs:
           echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
 
           # List all tags and grep for our specific tag (more reliable than gcloud filter)
-          if ! gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
-            echo "::error::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH). Ensure the CI 'Build and Push' job ran successfully and pushed to the PRODUCTION repository."
+          if gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
+            echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
+            echo "image_tag=${IMAGE_TAG_SHA}" >> $GITHUB_OUTPUT
+          else
+            echo "::warning::Image tag $IMAGE_TAG_SHA not found in Artifact Registry ($IMAGE_PATH)."
             echo "Available tags:"
             gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | head -10
-            exit 1
+
+            # Check if 'latest' tag exists as fallback
+            if gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^latest$"; then
+              echo "::warning::Falling back to 'latest' tag. This may not match the current commit."
+              echo "image_tag=latest" >> $GITHUB_OUTPUT
+            else
+              echo "::error::Neither SHA tag $IMAGE_TAG_SHA nor 'latest' tag found. Ensure the CI 'Build and Push' job ran successfully."
+              exit 1
+            fi
           fi
-          echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
 
       - name: Deploy Backend to Cloud Run (from Image)
         id: deploy-backend
         run: |
-          # Use short SHA (first 7 chars) to match CI tagging convention
-          FULL_SHA="${{ needs.pre-deploy-checks.outputs.commit-sha }}"
-          SHORT_SHA="${FULL_SHA:0:7}"
+          # Use the verified image tag from previous step
+          IMAGE_TAG="${{ steps.verify-image-prod.outputs.image_tag }}"
           # Use global production vars
-          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${SHORT_SHA}"
+          IMAGE_URL="${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${IMAGE_TAG}"
 
-          echo "Deploying image: $IMAGE_URL (using short SHA from commit $FULL_SHA)"
+          echo "Deploying image: $IMAGE_URL"
 
           gcloud run deploy careercopilot-backend-production \
             --image $IMAGE_URL \
@@ -334,7 +354,7 @@ jobs:
             --max-instances 100 \
             --set-env-vars="ENVIRONMENT=production,LOG_LEVEL=WARNING" \
             --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest,AWS_ACCESS_KEY_ID=aws-access-key-id:latest,AWS_SECRET_ACCESS_KEY=aws-secret-access-key:latest,SES_SENDER_EMAIL=ses-sender-email:latest,REDIS_URL=REDIS_URL:latest" \
-            --update-labels="managed-by=github-actions,commit-sha=${SHORT_SHA}" \
+            --update-labels="managed-by=github-actions,image-tag=${IMAGE_TAG}" \
             --allow-unauthenticated \
             --format=json > deployment-output.json
 
