@@ -4,23 +4,12 @@ Production monitoring and cost savings analysis
 """
 
 import asyncio
-import json
 import logging
-import os
-import time
 from collections import defaultdict
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional
+from typing import Dict, List
 
-import aiohttp
-import pandas as pd
-from fastapi import FastAPI
-from prometheus_client import (  # type: ignore
-    Counter,
-    Gauge,
-    Histogram,
-    start_http_server,
-)
+from prometheus_client import Counter, Gauge, Histogram, start_http_server  # type: ignore
 from pydantic import BaseModel
 
 # Configure logging

@@ -11,7 +11,6 @@ Run this script to verify the optimization works correctly.
 import asyncio
 import sys
 import time
-from typing import List
 
 # Sample resume text for testing
 SAMPLE_RESUME = """
@@ -126,7 +125,7 @@ def test_with_optimization():
     print("🚀 Testing WITH optimization (cached model)...")
 
     try:
-        from app.core.nlp_model_manager import get_spacy_model, preload_models
+        from app.core.nlp_model_manager import preload_models
         from app.utils.resume_parser import parse_resume_optimized
 
         # Preload models (this happens once at startup)

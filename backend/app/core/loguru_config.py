@@ -206,8 +206,8 @@ def log_function_call(level: str = "DEBUG", exclude_args: bool = True):
     """
 
     def decorator(func):
-        from functools import wraps
         import asyncio
+        from functools import wraps
 
         @wraps(func)
         def sync_wrapper(*args, **kwargs):
@@ -293,9 +293,9 @@ def log_performance(threshold_ms: float = 1000.0):
     """
 
     def decorator(func):
-        from functools import wraps
-        import time
         import asyncio
+        import time
+        from functools import wraps
 
         @wraps(func)
         def sync_wrapper(*args, **kwargs):
