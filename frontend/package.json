@@ -2,6 +2,7 @@
   "name": "careercopilot-frontend",
   "version": "0.1.0",
   "private": true,
+  "description": "AI-powered career application assistant",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
