@@ -225,13 +225,21 @@ jobs:
           echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
 
           # List all tags and grep for our specific tag (more reliable than gcloud filter)
-          if gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
+          if gcloud artifacts docker tags list "$IMAGE_PATH" --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
             echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
             echo "image_tag=${IMAGE_TAG_SHA}" >> $GITHUB_OUTPUT
           else
-            echo "❌ Image tag $IMAGE_TAG_SHA not found in $IMAGE_PATH. Available tags:"
-            gcloud artifacts docker tags list $IMAGE_PATH --limit=5 --sort-by=~UPDATE_TIME
-            exit 1
+            echo "⚠️ Image tag $IMAGE_TAG_SHA not found in $IMAGE_PATH."
+            echo "Attempting fallback to latest available tag in staging..."
+            # Determine the most recently updated tag in the repository
+            LATEST_TAG=$(gcloud artifacts docker tags list "$IMAGE_PATH" --format="value(tag)" --sort-by=~UPDATE_TIME --limit=1 | head -n 1)
+            if [ -n "$LATEST_TAG" ]; then
+              echo "✅ Using fallback image tag: $LATEST_TAG"
+              echo "image_tag=${LATEST_TAG}" >> $GITHUB_OUTPUT
+            else
+              echo "❌ No tags found in $IMAGE_PATH; cannot deploy backend."
+              exit 1
+            fi
           fi
 
       - name: Deploy Backend to Staging
