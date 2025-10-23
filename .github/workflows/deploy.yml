@@ -9,6 +9,7 @@
 # 4. Robust Rollback: Corrects the rollback health check logic.
 # 5. Environment-Specific Repository Names
 name: CD - Deploy to Staging and Production
+# This comment ensures the file is re-validated
 
 on:
   workflow_run:
@@ -249,8 +250,6 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2 # v2.1.0
         with:
           name: backend
-          service_account: ${{ secrets.GCP_SA_EMAIL }}
-          image: ${{ steps.get-image.outputs.image }}
           service: backend
           image: ${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
           region: ${{ env.GCP_REGION }}
@@ -398,8 +397,6 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2 # v2.1.0
         with:
           name: backend
-          service_account: ${{ secrets.GCP_SA_EMAIL }}
-          image: ${{ steps.get-image.outputs.image }}
           service: backend
           image: ${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
           region: ${{ env.GCP_REGION }}
