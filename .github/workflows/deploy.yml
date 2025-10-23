@@ -106,7 +106,7 @@ jobs:
               --jq '.workflow_runs[0].id // empty')
 
             if [ -z "$CI_RUN_ID" ]; then
-              echo "⚠️  No successful CI run found for commit ${{ github.sha }}, falling back to latest CI run"
+              echo "WARNING: No successful CI run found for commit ${{ github.sha }}, falling back to latest CI run"
               CI_RUN_ID=$(gh api \
                 -H "Accept: application/vnd.github+json" \
                 -H "X-GitHub-Api-Version: 2022-11-28" \
@@ -115,10 +115,10 @@ jobs:
             fi
 
             if [ -z "$CI_RUN_ID" ]; then
-              echo "❌ No successful CI run found for this branch"
+              echo "ERROR: No successful CI run found for this branch"
               echo "run_id=${{ github.run_id }}" >> $GITHUB_OUTPUT
             else
-              echo "✅ Found CI run: $CI_RUN_ID"
+              echo "Found CI run: $CI_RUN_ID"
               echo "run_id=$CI_RUN_ID" >> $GITHUB_OUTPUT
             fi
           elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
@@ -158,22 +158,22 @@ jobs:
       - name: Validate and Prepare Frontend Artifact
         id: validate-frontend
         run: |
-          echo "🔍 Validating frontend artifacts..."
+          echo "Validating frontend artifacts..."
           
           # Check for dist in root or frontend directory
           if [ -d "./dist" ]; then
-            echo "✅ Found dist in root directory"
+            echo "Found dist in root directory"
             ARTIFACT_PATH="./dist"
           elif [ -d "./frontend/dist" ]; then
-            echo "✅ Found dist in frontend directory"
+            echo "Found dist in frontend directory"
             ARTIFACT_PATH="./frontend/dist"
             
             # Copy to root for Firebase deployment
-            echo "📂 Copying frontend artifacts to root..."
+            echo "Copying frontend artifacts to root..."
             mkdir -p dist
             cp -r ./frontend/dist/* ./dist/
           else
-            echo "❌ No frontend artifacts found in expected locations"
+            echo "ERROR: No frontend artifacts found in expected locations"
             echo "Current directory contents:"
             ls -la
             echo "Frontend directory contents:"
@@ -183,13 +183,13 @@ jobs:
           
           # Verify the dist directory has the expected files
           if [ ! -f "$ARTIFACT_PATH/index.html" ]; then
-            echo "❌ index.html not found in $ARTIFACT_PATH"
+            echo "ERROR: index.html not found in $ARTIFACT_PATH"
             echo "Dist directory contents:"
             ls -la "$ARTIFACT_PATH/"
             exit 1
           fi
           
-          echo "✅ Frontend artifacts validated successfully"
+          echo "Frontend artifacts validated successfully"
           echo "Dist directory contents:"
           ls -la "$ARTIFACT_PATH/"
 
@@ -226,18 +226,18 @@ jobs:
 
           # List all tags and grep for our specific tag (more reliable than gcloud filter)
           if gcloud artifacts docker tags list "$IMAGE_PATH" --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
-            echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
+            echo "Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
             echo "image_tag=${IMAGE_TAG_SHA}" >> $GITHUB_OUTPUT
           else
-            echo "⚠️ Image tag $IMAGE_TAG_SHA not found in $IMAGE_PATH."
+            echo "WARNING: Image tag $IMAGE_TAG_SHA not found in $IMAGE_PATH."
             echo "Attempting fallback to latest available tag in staging..."
             # Determine the most recently updated tag in the repository
             LATEST_TAG=$(gcloud artifacts docker tags list "$IMAGE_PATH" --format="value(tag)" --sort-by=~UPDATE_TIME --limit=1 | head -n 1)
             if [ -n "$LATEST_TAG" ]; then
-              echo "✅ Using fallback image tag: $LATEST_TAG"
+              echo "Using fallback image tag: $LATEST_TAG"
               echo "image_tag=${LATEST_TAG}" >> $GITHUB_OUTPUT
             else
-              echo "❌ No tags found in $IMAGE_PATH; cannot deploy backend."
+              echo "ERROR: No tags found in $IMAGE_PATH; cannot deploy backend."
               exit 1
             fi
           fi
@@ -277,7 +277,7 @@ jobs:
             fi
             
             if [ $i -lt $MAX_RETRIES ]; then
-              echo "⏳ Backend not ready yet (attempt $i/$MAX_RETRIES), HTTP status: $HTTP_STATUS. Retrying in $RETRY_DELAY seconds..."
+              echo "Backend not ready yet (attempt $i/$MAX_RETRIES), HTTP status: $HTTP_STATUS. Retrying in $RETRY_DELAY seconds..."
               sleep $RETRY_DELAY
             fi
           done
@@ -314,22 +314,22 @@ jobs:
       - name: Validate and Prepare Frontend Artifact
         id: validate-frontend
         run: |
-          echo "🔍 Validating frontend artifacts..."
+          echo "Validating frontend artifacts..."
           
           # Check for dist in root or frontend directory
           if [ -d "./dist" ]; then
-            echo "✅ Found dist in root directory"
+            echo "Found dist in root directory"
             ARTIFACT_PATH="./dist"
           elif [ -d "./frontend/dist" ]; then
-            echo "✅ Found dist in frontend directory"
+            echo "Found dist in frontend directory"
             ARTIFACT_PATH="./frontend/dist"
             
             # Copy to root for Firebase deployment
-            echo "📂 Copying frontend artifacts to root..."
+            echo "Copying frontend artifacts to root..."
             mkdir -p dist
             cp -r ./frontend/dist/* ./dist/
           else
-            echo "❌ No frontend artifacts found in expected locations"
+            echo "ERROR: No frontend artifacts found in expected locations"
             echo "Current directory contents:"
             ls -la
             echo "Frontend directory contents:"
@@ -339,13 +339,13 @@ jobs:
           
           # Verify the dist directory has the expected files
           if [ ! -f "$ARTIFACT_PATH/index.html" ]; then
-            echo "❌ index.html not found in $ARTIFACT_PATH"
+            echo "ERROR: index.html not found in $ARTIFACT_PATH"
             echo "Dist directory contents:"
             ls -la "$ARTIFACT_PATH/"
             exit 1
           fi
           
-          echo "✅ Frontend artifacts validated successfully"
+          echo "Frontend artifacts validated successfully"
           echo "Dist directory contents:"
           ls -la "$ARTIFACT_PATH/"
 
@@ -420,24 +420,24 @@ jobs:
             HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SERVICE_URL/health" || echo "000")
             
             if [ "$HTTP_STATUS" = "200" ]; then
-              echo "✅ Backend is healthy"
+              echo "Backend is healthy"
               echo "healthy=true" >> $GITHUB_OUTPUT
               exit 0
             fi
             
             if [ $i -lt $MAX_RETRIES ]; then
-              echo "⏳ Backend not ready yet (attempt $i/$MAX_RETRIES), HTTP status: $HTTP_STATUS. Retrying in $RETRY_DELAY seconds..."
+              echo "Backend not ready yet (attempt $i/$MAX_RETRIES), HTTP status: $HTTP_STATUS. Retrying in $RETRY_DELAY seconds..."
               sleep $RETRY_DELAY
             fi
           done
           
-          echo "❌ Backend health check failed after $MAX_RETRIES attempts"
+          echo "ERROR: Backend health check failed after $MAX_RETRIES attempts"
           echo "healthy=false" >> $GITHUB_OUTPUT
           exit 1
 
       - name: Rollback on failure
         if: steps.health-check.outputs.healthy != 'true'
         run: |
-          echo "🚨 Rolling back deployment due to health check failure"
+          echo "CRITICAL: Rolling back deployment due to health check failure"
           # Add rollback logic here if needed
           exit 1
