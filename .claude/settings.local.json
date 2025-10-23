@@ -104,7 +104,11 @@
       "Bash(git -C /home/njd/careercopilot/careercopilot log --all --pretty=format: --name-only --diff-filter=D)",
       "Bash(for file in /home/njd/careercopilot/careercopilot/*.md)",
       "Bash(done)",
-      "Bash(sort:*)"
+      "Bash(sort:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(npx jest:*)",
+      "Bash(python3:*)",
+      "Bash(git restore:*)"
     ]
   }
 }
