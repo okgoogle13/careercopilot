@@ -253,7 +253,7 @@ jobs:
           image: ${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
           region: ${{ env.GCP_REGION }}
           project_id: ${{ env.STAGING_PROJECT_ID }}
-          metadata: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          metadata: Deployed from GitHub Actions
           env_vars: |
             NODE_ENV=production
             FIREBASE_PROJECT_ID=${{ env.STAGING_PROJECT_ID }}
@@ -398,7 +398,7 @@ jobs:
           image: ${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
           region: ${{ env.GCP_REGION }}
           project_id: ${{ env.GCP_PROJECT_ID }}
-          metadata: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          metadata: Deployed from GitHub Actions
           env_vars: |
             NODE_ENV=production
             FIREBASE_PROJECT_ID=${{ env.GCP_PROJECT_ID }}
