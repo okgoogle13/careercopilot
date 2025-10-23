@@ -23,7 +23,7 @@ test.describe('KSC Generation Workflow', () => {
 
   test('happy path - complete KSC generation workflow', async ({ page }) => {
     // Step 1: Navigate to the KSC Generator page
-    await page.goto('http://localhost:5173/ksc-generator');
+    await page.goto('/ksc-generator');
 
     // Verify we're on the correct page
     await expect(page).toHaveTitle(/.*KSC.*|.*Key Selection Criteria.*/i);
