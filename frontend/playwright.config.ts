@@ -44,3 +44,38 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+<<<<<<< HEAD
+=======
+      use: {
+        ...devices['Desktop Chrome'],
+        // Use headless mode
+        launchOptions: {
+          args: ['--no-sandbox', '--disable-setuid-sandbox'],
+        },
+      },
+    },
+  ],
+
+  // When running in CI, services are started via docker-compose. Avoid starting a Vite preview server to prevent port conflicts.
+  webServer: isCI
+    ? undefined
+    : {
+        command: 'npm run preview',
+        port: 3000,
+        reuseExistingServer: !isCI,
+        timeout: 120000,
+        stdout: 'pipe',
+        stderr: 'pipe',
+      },
+
+  reporter: [
+    ['list'],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+  ],
+
+  expect: {
+    timeout: 10000,
+  },
+});
+>>>>>>> 5896e600 (chore(ci,e2e): fix CI workflow syntax, readiness checks; Playwright config timeouts; docker compose healthchecks; add E2E handover)
