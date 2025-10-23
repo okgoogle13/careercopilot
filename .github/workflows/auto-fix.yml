@@ -14,28 +14,28 @@ on:
   push:
     branches: [develop, main]
     paths:
-      - "frontend/src/**"
-      - "backend/**"
-      - "functions/src/**"
-      - "!backend/migrations/**"
+      - 'frontend/src/**'
+      - 'backend/**'
+      - 'functions/src/**'
+      - '.github/workflows/auto-fix.yml'
+      - 'yarn.lock'
+      - 'package.json'
+      - '!backend/migrations/**'
+      - '!**/node_modules/**'
+      - '!**/dist/**'
+      - '!**/build/**'
       
   # Trigger on PRs to main/develop with relevant file changes
   pull_request:
     branches: [develop, main]
     paths:
-      - "frontend/src/**"
-      - "backend/**"
-      - "functions/src/**"
-      - "!backend/migrations/**"
+      - 'frontend/src/**'
+      - 'backend/**'
+      - 'functions/src/**'
+      - '!backend/migrations/**'
       
   # Manual trigger option
   workflow_dispatch:
-  
-  # Validate YAML on push to workflows
-  push:
-    branches: [develop, main]
-    paths:
-      - '.github/workflows/auto-fix.yml'
 
 # Required permissions
 permissions:

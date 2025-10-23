@@ -18,8 +18,24 @@ on:
   # Trigger on PRs and pushes to main/develop
   pull_request:
     branches: [develop, main]
+  
+  # Trigger on push to main/develop with path filtering
   push:
     branches: [develop, main]
+    paths:
+      - 'frontend/**'
+      - 'backend/**'
+      - 'functions/**'
+      - 'tests/**'
+      - '.github/workflows/ci.yml'
+      - 'yarn.lock'
+      - 'package.json'
+      - '!**/migrations/**'
+      - '!**/node_modules/**'
+      - '!**/dist/**'
+      - '!**/build/**'
+      - '!**/.next/**'
+      - '!**/.cache/**'
     
   # Manual trigger with options
   workflow_dispatch:
@@ -34,12 +50,6 @@ on:
         required: false
         default: false
         type: boolean
-        
-  # Validate YAML on push to workflows
-  push:
-    branches: [develop, main]
-    paths:
-      - '.github/workflows/ci.yml'
 
 # Minimal required permissions
 permissions:
