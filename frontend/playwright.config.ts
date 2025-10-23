@@ -6,32 +6,30 @@ const isCI = !!process.env.CI;
 const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';
 
 export default defineConfig({
-  // Only look in the tests directory, nowhere else
+  // Only look in the tests directory
   testDir: path.join(__dirname, 'tests'),
 
   // Only match .spec.js files
-  testMatch: '**/*.spec.js',
+  // Your original '**/.*spec.js' is also fine if you have nested test folders.
+  testMatch: '*.spec.js',
 
-  // Explicitly ignore everything outside tests directory
+  // Explicitly ignore any files that end with .test.js/ts/tsx
   testIgnore: [
-    '**/node_modules/**',
-    '**/src/**',
-    '**/dist/**',
-    '**/__tests__/**',
     '**/*.test.ts',
     '**/*.test.tsx',
     '**/*.test.js',
   ],
 
-  // Per-test timeout
-  timeout: 120000,
+  // Per-test timeout (60 seconds)
+  timeout: 60000,
   // Global timeout for the entire playwright run
   globalTimeout: 600000,
   retries: process.env.CI ? 1 : 0,
 
   // Run tests in parallel
-  fullyParallel: false,
-  workers: 1,
+  fullyParallel: true,
+  // Use 50% of available CPUs in CI, default (all) locally
+  workers: process.env.CI ? '50%' : undefined,
 
   use: {
     baseURL,
@@ -46,35 +44,3 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: {
-        ...devices['Desktop Chrome'],
-        // Use headless mode
-        launchOptions: {
-          args: ['--no-sandbox', '--disable-setuid-sandbox'],
-        },
-      },
-    },
-  ],
-
-  // When running in CI, services are started via docker-compose. Avoid starting a Vite preview server to prevent port conflicts.
-  webServer: isCI
-    ? undefined
-    : {
-        command: 'npm run preview',
-        port: 3000,
-        reuseExistingServer: !process.env.CI,
-        timeout: 120000,
-        stdout: 'pipe',
-        stderr: 'pipe',
-      },
-
-  reporter: [
-    ['list'],
-    ['html', { outputFolder: 'playwright-report', open: 'never' }],
-    ['json', { outputFile: 'test-results/results.json' }],
-  ],
-
-  expect: {
-    timeout: 10000,
-  },
-});
