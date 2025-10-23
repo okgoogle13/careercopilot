@@ -44,8 +44,9 @@ env:
   GCP_REGISTRY: us-central1-docker.pkg.dev
   GCP_IMAGE_NAME: backend
   # Production project details (used globally and by deploy-production)
-  GCP_PROJECT_ID: careercopilot-468811
-  GCP_REPOSITORY: careercopilot # <-- PRODUCTION REPO NAME
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  GCP_REPOSITORY: careercopilot # Production repo name
+  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
 
 jobs:
   pre-deploy-checks:
@@ -136,8 +137,9 @@ jobs:
     permissions:
       contents: read # Using service account key authentication
     env: # <-- Define staging specific vars here
-      STAGING_PROJECT_ID: careercopilot-staging
+      STAGING_PROJECT_ID: ${{ secrets.GCP_STAGING_PROJECT_ID }}
       STAGING_REPOSITORY: careercopilot-repo # Staging uses this name
+      GCP_SA_KEY: ${{ secrets.GCP_STAGING_SA_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # v4.1.7
@@ -247,12 +249,14 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2 # v2.1.0
         with:
           name: backend
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+          image: ${{ steps.get-image.outputs.image }}
           service: backend
           image: ${{ env.GCP_REGISTRY }}/${{ env.STAGING_PROJECT_ID }}/${{ env.STAGING_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
           region: ${{ env.GCP_REGION }}
           project_id: ${{ env.STAGING_PROJECT_ID }}
           metadata: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          service_account: ${{ secrets.GCP_RUN_SERVICE_ACCOUNT }}
+          service_account: ${{ env.GCP_SA_EMAIL }}
           env_vars: |
             NODE_ENV=production
             FIREBASE_PROJECT_ID=${{ env.STAGING_PROJECT_ID }}
@@ -354,7 +358,7 @@ jobs:
         id: auth
         uses: google-github-actions/auth@v2 # v2.1.3
         with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+          credentials_json: ${{ env.GCP_SA_KEY }}
 
       - name: Deploy Frontend to Production
         id: deploy-frontend
@@ -394,12 +398,14 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2 # v2.1.0
         with:
           name: backend
+          service_account: ${{ secrets.GCP_SA_EMAIL }}
+          image: ${{ steps.get-image.outputs.image }}
           service: backend
           image: ${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ steps.verify-image.outputs.image_tag }}
           region: ${{ env.GCP_REGION }}
           project_id: ${{ env.GCP_PROJECT_ID }}
           metadata: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          service_account: ${{ secrets.GCP_RUN_SERVICE_ACCOUNT }}
+          service_account: ${{ env.GCP_SA_EMAIL }}
           env_vars: |
             NODE_ENV=production
             FIREBASE_PROJECT_ID=${{ env.GCP_PROJECT_ID }}
