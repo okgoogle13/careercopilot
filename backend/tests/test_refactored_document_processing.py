@@ -16,11 +16,7 @@ from app.ai.job_description_service import (
     JobDescriptionAnalysisService,
 )
 from app.ai.resume_service import ResumeAnalysisResult, ResumeAnalysisService
-from app.core.document_processing import (
-    DocumentProcessingError,
-    PromptTemplates,
-    process_document,
-)
+from app.core.document_processing import DocumentProcessingError, PromptTemplates, process_document
 from app.core.file_upload_decorators import (
     FileUploadConfig,
     FileValidationError,
