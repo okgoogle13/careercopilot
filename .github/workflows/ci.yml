@@ -173,21 +173,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4 # v4.1.7
 
-      - name: Setup and Build Frontend
-        uses: ./.github/actions/setup-frontend
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # v4.0.3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          run-checks: "false"
-          upload-artifacts: "true"
-          skip-build: "false"
-
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Build frontend
+        run: yarn workspace careercopilot-frontend build
+      - name: Upload frontend build artifacts
+        uses: actions/upload-artifact@v4 # v4.3.4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
       - name: Verify build output
         run: |
-          if [ ! -d "functions/lib" ] || [ ! "$(ls -A functions/lib)" ]; then
-            echo "Functions build failed - no lib directory found"
+          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
+            echo "Frontend build failed - no dist directory found or it's empty"
+            ls -la frontend/ || echo "No frontend directory found"
             exit 1
           fi
-          echo "Functions build completed successfully"
+          echo "Frontend build artifacts verified"
+          echo "Dist contents:"
+          ls -la frontend/dist/
 
   # Backend Static Checks
   backend-static-checks:
@@ -414,17 +426,17 @@ jobs:
         run: yarn workspace functions build
       - name: Run functions tests
         run: yarn workspace functions test:ci
-      - name: Verify Artifact
+      - name: Verify build output
         shell: bash
         run: |
-          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
-            echo "Frontend build failed - no dist directory found or it's empty"
-            ls -la frontend/ || echo "No frontend directory found"
+          if [ ! -d "functions/lib" ] || [ ! "$(ls -A functions/lib)" ]; then
+            echo "Functions build failed - no lib directory found or it's empty"
+            ls -la functions/ || echo "No functions directory found"
             exit 1
           fi
-          echo "Frontend build artifacts verified"
-          echo "Dist contents:"
-          ls -la frontend/dist/
+          echo "Functions build artifacts verified"
+          echo "Lib contents:"
+          ls -la functions/lib/
 
   # End-to-End Testing
   e2e-tests:
