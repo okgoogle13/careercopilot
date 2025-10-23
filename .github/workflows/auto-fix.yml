@@ -56,6 +56,13 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
           cache: "pip" # Cache pip dependencies
 
+      - name: Enable Corepack for Yarn 4+
+        run: |
+          corepack enable
+          corepack prepare yarn@4.10.2 --activate
+          yarn set version 4.10.2
+          yarn --version
+
       - name: Set up Node.js
         uses: actions/setup-node@v4 # v4.0.3
         with:
