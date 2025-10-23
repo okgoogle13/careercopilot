@@ -1,16 +1,7 @@
 # .github/workflows/auto-fix.yml
-#
-# FULLY REFACTORED AUTO-FIX WORKFLOW (POLISHED)
-#
-# Implements:
-# 1. SHA-Pinning: All 'uses:' actions are pinned to full commit SHAs.
-# 2. Performance Caching: Added caching for Pip (linters), Yarn (root),
-#    and NPM (functions) to speed up execution.
-# 3. Maintainability: Standardized on Yarn workspace commands for clarity.
 name: Auto Fix Linting Issues
 
 on:
-  # Trigger on push to main/develop with relevant file changes
   push:
     branches: [develop, main]
     paths:
@@ -21,11 +12,6 @@ on:
       - 'yarn.lock'
       - 'package.json'
       - '!backend/migrations/**'
-      - '!**/node_modules/**'
-      - '!**/dist/**'
-      - '!**/build/**'
-      
-  # Trigger on PRs to main/develop with relevant file changes
   pull_request:
     branches: [develop, main]
     paths:
@@ -33,167 +19,74 @@ on:
       - 'backend/**'
       - 'functions/src/**'
       - '!backend/migrations/**'
-      
-  # Manual trigger option
   workflow_dispatch:
 
-# Required permissions
 permissions:
-  contents: write  # Required to push changes
-  pull-requests: write  # Required to comment on PRs
-  id-token: write  # Needed for OIDC authentication
+  contents: write
+  pull-requests: write
 
 env:
-  PYTHON_VERSION: "3.11"
-  NODE_VERSION: "20"
+  PYTHON_VERSION: "3.12"
+  NODE_VERSION: "18"
 
 jobs:
   auto-fix:
     name: Auto Fix Code Issues
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    # Skip auto-fix for bot commits to avoid loops
-    if: ${{ !contains(github.event.head_commit.message, '[skip auto-fix]') && !contains(github.event.head_commit.message, 'style(auto):') }}
-
+    if: "!contains(github.event.head_commit.message, '[skip auto-fix]')"
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4 # v4.1.7
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0 # Fetch full history for correct branch pushes
-
       - name: Set up Python
-        uses: actions/setup-python@v5 # v5.1.0
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
-          cache: "pip" # Cache pip dependencies
-
+          cache: "pip"
       - name: Enable Corepack for Yarn 4+
-        run: |
-          corepack enable
-          corepack prepare yarn@4.10.2 --activate
-          yarn set version 4.10.2
-          yarn --version
-
+        run: corepack enable
       - name: Set up Node.js
-        uses: actions/setup-node@v4 # v4.0.3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: "yarn" # Cache Yarn dependencies
+          cache: "yarn"
           cache-dependency-path: "yarn.lock"
-
-      - name: Cache functions node_modules
-        # Functions uses npm, so it needs its own cache
-        uses: actions/cache@v4 # v4.0.2
-        with:
-          path: functions/node_modules
-          key: ${{ runner.os }}-npm-functions-${{ hashFiles('functions/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-functions-
-
-      - name: Install Python formatting tools
+      - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
-
-      - name: Install Node dependencies
-        run: |
+          pip install black isort autoflake
           yarn install --immutable
           cd functions && npm ci
-
-      - name: Check for changes needed
-        id: changes
+      - name: Apply fixes
         run: |
-          echo "Checking if auto-fixes are needed..."
-          CHANGES_NEEDED=false
-
-          # Check Python files
-          if ! black --check backend/ --line-length=100 --quiet; then
-            echo "Python formatting changes needed"
-            CHANGES_NEEDED=true
-          elif ! isort --check-only backend/ --profile=black --line-length=100 --quiet; then
-            echo "Python import sorting changes needed"
-            CHANGES_NEEDED=true
-          fi
-
-          # Check frontend files (using workspace commands)
-          if ! yarn workspace frontend lint --quiet 2>/dev/null; then
-            echo "ESLint fixes needed"
-            CHANGES_NEEDED=true
-          elif ! yarn workspace frontend format:check --quiet 2>/dev/null; then
-            echo "Prettier formatting needed"
-            CHANGES_NEEDED=true
-          fi
-
-          # Check functions files
-          if ! yarn workspace functions lint --silent; then
-            echo "Functions linting fixes needed"
-            CHANGES_NEEDED=true
-          fi
-
-          if [[ "$CHANGES_NEEDED" == "true" ]]; then
-            echo "changes_needed=true" >> $GITHUB_OUTPUT
-          else
-            echo "changes_needed=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Apply Python formatting fixes
-        if: steps.changes.outputs.changes_needed == 'true'
-        run: |
-          echo "Applying Python formatting fixes..."
           black backend/ --line-length=100
           isort backend/ --profile=black --line-length=100
-          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
-          echo "Python formatting complete"
-
-      - name: Apply Frontend formatting fixes
-        if: steps.changes.outputs.changes_needed == 'true'
-        run: |
-          echo "Applying Frontend formatting fixes..."
+          autoflake --remove-all-unused-imports --in-place --recursive backend/
           yarn workspace frontend format
           yarn workspace frontend lint:fix
-          echo "Frontend formatting complete"
-
-      - name: Apply Functions linting fixes
-        if: steps.changes.outputs.changes_needed == 'true'
-        run: |
-          echo "Applying Functions linting fixes..."
           yarn workspace functions lint:fix
-          echo "Functions linting fixes complete"
-
-      - name: Check if changes were made
+      - name: Check for changes
         id: git-check
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action Auto-Fix"
-          git config --local commit.gpgsign false
-
-          if [[ -n $(git status --porcelain) ]]; then
+          if ! git diff --quiet; then
             echo "changes_made=true" >> $GITHUB_OUTPUT
-          else
-            echo "changes_made=false" >> $GITHUB_OUTPUT
-            echo "No changes needed - code is already properly formatted!"
           fi
-
-      # --- EDITED: Standardized Commit Message ---
       - name: Commit and push changes
         if: steps.git-check.outputs.changes_made == 'true'
         run: |
-          git add -A
-          # Use conventional commit prefix and [skip ci]
-          git commit -m "style(auto): Apply formatting and linting fixes [skip ci]" --no-verify
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Auto-Fix"
+          git add .
+          git commit -m "style(auto): Apply formatting and linting fixes [skip ci]"
           git push
-
-      - name: Comment on PR (if applicable)
+      - name: Comment on PR
         if: github.event_name == 'pull_request' && steps.git-check.outputs.changes_made == 'true'
-        uses: actions/github-script@v7 # v7.0.1
+        uses: actions/github-script@v7
         with:
           script: |
-            let body = '**Auto-fix applied!**\n\nI automatically fixed linting and formatting issues. Your code is now up to standard.';
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: body
+              body: '**Auto-fix applied!** I automatically fixed linting and formatting issues.',
             });
