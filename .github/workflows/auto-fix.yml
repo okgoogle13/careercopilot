@@ -105,10 +105,10 @@ jobs:
           fi
 
           # Check frontend files (using workspace commands)
-          if ! yarn workspace careercopilot-frontend lint --quiet 2>/dev/null; then
+          if ! yarn workspace frontend lint --quiet 2>/dev/null; then
             echo "ESLint fixes needed"
             CHANGES_NEEDED=true
-          elif ! yarn workspace careercopilot-frontend format:check --quiet 2>/dev/null; then
+          elif ! yarn workspace frontend format:check --quiet 2>/dev/null; then
             echo "Prettier formatting needed"
             CHANGES_NEEDED=true
           fi
@@ -138,8 +138,8 @@ jobs:
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
           echo "Applying Frontend formatting fixes..."
-          yarn workspace careercopilot-frontend format
-          yarn workspace careercopilot-frontend lint:fix
+          yarn workspace frontend format
+          yarn workspace frontend lint:fix
           echo "Frontend formatting complete"
 
       - name: Apply Functions linting fixes
