@@ -472,13 +472,27 @@ jobs:
           docker-compose -f docker-compose.e2e.yml up -d --wait
           echo " Services are up and healthy."
           docker-compose -f docker-compose.e2e.yml ps
+      - name: Wait for services to be ready
+        run: |
+          echo " Waiting for frontend (http://127.0.0.1:3000) and backend (http://127.0.0.1:8080/health)"
+          for i in {1..60}; do
+            if curl -fsS "http://127.0.0.1:3000" > /dev/null 2>&1; then echo " Frontend ready"; break; fi; sleep 2; done
+          for i in {1..60}; do
+            if curl -fsS "http://127.0.0.1:8080/health" > /dev/null 2>&1; then echo " Backend ready"; break; fi; sleep 2; done
       - name: Run Playwright E2E tests
         run: |
           echo " Running Playwright E2E tests..."
-          yarn workspace careercopilot-frontend playwright test tests/ --reporter=html,json
+          # Cap E2E duration to 10 minutes to prevent job hangs
+          timeout 10m yarn workspace careercopilot-frontend playwright test tests/
         env:
           PLAYWRIGHT_BASE_URL: "http://127.0.0.1:3000"
           API_BASE_URL: "http://127.0.0.1:8080"
+      - name: Docker diagnostics on failure
+        if: failure()
+        run: |
+          echo " Collecting docker-compose diagnostics..."
+          docker-compose -f docker-compose.e2e.yml ps || true
+          docker-compose -f docker-compose.e2e.yml logs --no-color > docker-compose-e2e-logs.txt || true
       - name: Upload E2E test results
         if: always()
         uses: actions/upload-artifact@v4 # v4.3.4
@@ -487,7 +501,8 @@ jobs:
           path: |
             frontend/test-results/
             frontend/playwright-report/
-            frontend/results.json
+            frontend/test-results/results.json
+            docker-compose-e2e-logs.txt
           retention-days: 30
           if-no-files-found: warn
       - name: Upload E2E screenshots on failure

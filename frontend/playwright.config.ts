@@ -1,5 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
+import process from 'process';
+
+const isCI = !!process.env.CI;
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';
 
 export default defineConfig({
   // Only look in the tests directory, nowhere else
@@ -19,7 +23,10 @@ export default defineConfig({
     '**/*.test.js',
   ],
 
+  // Per-test timeout
   timeout: 120000,
+  // Global timeout for the entire playwright run
+  globalTimeout: 600000,
   retries: process.env.CI ? 1 : 0,
 
   // Run tests in parallel
@@ -27,10 +34,13 @@ export default defineConfig({
   workers: 1,
 
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    // Lower timeouts to surface issues faster in CI
+    navigationTimeout: 15000,
+    actionTimeout: 10000,
   },
 
   projects: [
@@ -46,18 +56,25 @@ export default defineConfig({
     },
   ],
 
-  webServer: {
-    command: 'npm run preview',
-    port: 3000,
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
-    stdout: 'pipe',
-    stderr: 'pipe',
-  },
+  // When running in CI, services are started via docker-compose. Avoid starting a Vite preview server to prevent port conflicts.
+  webServer: isCI
+    ? undefined
+    : {
+        command: 'npm run preview',
+        port: 3000,
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+        stdout: 'pipe',
+        stderr: 'pipe',
+      },
 
   reporter: [
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
     ['json', { outputFile: 'test-results/results.json' }],
   ],
+
+  expect: {
+    timeout: 10000,
+  },
 });
