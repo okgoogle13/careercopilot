@@ -9,16 +9,15 @@
 # 4. Robust Rollback: Corrects the rollback health check logic.
 # 5. Environment-Specific Repository Names
 name: CD - Deploy to Staging and Production
-# This comment ensures the file is re-validated
 
 on:
+  # Trigger on successful CI runs for main/develop
   workflow_run:
     workflows: ["CI - Build and Test"]
-    types:
-      - completed
-    branches:
-      - main
-      - develop
+    types: [completed]
+    branches: [main, develop]
+  
+  # Manual trigger with environment selection
   workflow_dispatch:
     inputs:
       environment:
@@ -29,10 +28,17 @@ on:
         options:
           - staging
           - production
+  
+  # Validate YAML on push to workflows
+  push:
+    branches: [develop, main]
+    paths:
+      - '.github/workflows/deploy.yml'
 
-# Default permissions for service account key authentication
+# Minimal required permissions
 permissions:
   contents: read
+  id-token: write  # Needed for OIDC authentication
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

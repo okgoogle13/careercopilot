@@ -15,10 +15,13 @@
 name: CI - Build and Test
 
 on:
+  # Trigger on PRs and pushes to main/develop
   pull_request:
     branches: [develop, main]
   push:
     branches: [develop, main]
+    
+  # Manual trigger with options
   workflow_dispatch:
     inputs:
       run_e2e_tests:
@@ -31,10 +34,17 @@ on:
         required: false
         default: false
         type: boolean
+        
+  # Validate YAML on push to workflows
+  push:
+    branches: [develop, main]
+    paths:
+      - '.github/workflows/ci.yml'
 
-# Default permissions are read-only for security.
+# Minimal required permissions
 permissions:
   contents: read
+  id-token: write  # Needed for OIDC authentication
 
 # Cancel redundant builds on PRs
 concurrency:
