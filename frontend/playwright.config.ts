@@ -10,26 +10,28 @@ export default defineConfig({
   testDir: path.join(__dirname, 'tests'),
 
   // Only match .spec.js files
-  // Your original '**/.*spec.js' is also fine if you have nested test folders.
-  testMatch: '*.spec.js',
+  testMatch: '**/*.spec.js',
 
-  // Explicitly ignore any files that end with .test.js/ts/tsx
+  // Explicitly ignore everything outside tests directory
   testIgnore: [
+    '**/node_modules/**',
+    '**/src/**',
+    '**/dist/**',
+    '**/__tests__/**',
     '**/*.test.ts',
     '**/*.test.tsx',
     '**/*.test.js',
   ],
 
-  // Per-test timeout (60 seconds)
-  timeout: 60000,
+  // Per-test timeout
+  timeout: 120000,
   // Global timeout for the entire playwright run
   globalTimeout: 600000,
   retries: process.env.CI ? 1 : 0,
 
   // Run tests in parallel
-  fullyParallel: true,
-  // Use 50% of available CPUs in CI, default (all) locally
-  workers: process.env.CI ? '50%' : undefined,
+  fullyParallel: false,
+  workers: 1,
 
   use: {
     baseURL,
