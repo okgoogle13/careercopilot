@@ -30,7 +30,9 @@ permissions:
   contents: write
   pull-requests: write
 
-env: {}
+env:
+  PYTHON_VERSION: "3.11"
+  NODE_VERSION: "20"
 
 jobs:
   auto-fix:
@@ -51,16 +53,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5 # v5.1.0
         with:
-          python-version: "3.13"
+          python-version: ${{ env.PYTHON_VERSION }}
           cache: "pip" # Cache pip dependencies
-
-      - name: Enable Corepack for Yarn 4
-        run: corepack enable
 
       - name: Set up Node.js
         uses: actions/setup-node@v4 # v4.0.3
         with:
-          node-version: "22"
+          node-version: ${{ env.NODE_VERSION }}
           cache: "yarn" # Cache Yarn dependencies
           cache-dependency-path: "yarn.lock"
 
@@ -132,17 +131,15 @@ jobs:
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
           echo "Applying Frontend formatting fixes..."
-          cd frontend
-          npm run format || true
-          npm run lint:fix || true
-          cd ..
+          yarn workspace careercopilot-frontend format
+          yarn workspace careercopilot-frontend lint:fix
           echo "Frontend formatting complete"
 
       - name: Apply Functions linting fixes
         if: steps.changes.outputs.changes_needed == 'true'
         run: |
           echo "Applying Functions linting fixes..."
-          yarn workspace functions lint:fix || true
+          yarn workspace functions lint:fix
           echo "Functions linting fixes complete"
 
       - name: Check if changes were made
