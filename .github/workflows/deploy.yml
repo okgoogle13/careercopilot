@@ -259,6 +259,7 @@ jobs:
             # Add other environment variables as needed
 
       - name: Health check for backend
+        id: health-check-staging
         run: |
           SERVICE_URL="${{ steps.deploy-backend.outputs.url }}"
           echo "Checking health of backend at $SERVICE_URL/health"
@@ -271,7 +272,7 @@ jobs:
             HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SERVICE_URL/health" || echo "000")
             
             if [ "$HTTP_STATUS" = "200" ]; then
-              echo "✅ Backend is healthy"
+              echo "Backend is healthy"
               exit 0
             fi
             
@@ -281,7 +282,7 @@ jobs:
             fi
           done
           
-          echo "❌ Backend health check failed after $MAX_RETRIES attempts"
+          echo "Backend health check failed after $MAX_RETRIES attempts"
           exit 1
 
   deploy-production:
@@ -379,12 +380,12 @@ jobs:
           echo "Checking for image tag: $IMAGE_TAG_SHA (short SHA from $FULL_SHA) in $IMAGE_PATH"
 
           # List all tags and grep for our specific tag (more reliable than gcloud filter)
-          if gcloud artifacts docker tags list $IMAGE_PATH --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
-            echo "✅ Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
+          if gcloud artifacts docker tags list "$IMAGE_PATH" --format="value(tag)" | grep -q "^${IMAGE_TAG_SHA}$"; then
+            echo "Image tag $IMAGE_TAG_SHA verified in $IMAGE_PATH."
             echo "image_tag=${IMAGE_TAG_SHA}" >> $GITHUB_OUTPUT
           else
-            echo "❌ Image tag $IMAGE_TAG_SHA not found in $IMAGE_PATH. Available tags:"
-            gcloud artifacts docker tags list $IMAGE_PATH --limit=5 --sort-by=~UPDATE_TIME
+            echo "Image tag $IMAGE_TAG_SHA not found in $IMAGE_PATH. Available tags:"
+            gcloud artifacts docker tags list "$IMAGE_PATH" --limit=5 --sort-by=~UPDATE_TIME
             exit 1
           fi
 
