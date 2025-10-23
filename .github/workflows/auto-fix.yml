@@ -10,6 +10,7 @@
 name: Auto Fix Linting Issues
 
 on:
+  # Trigger on push to main/develop with relevant file changes
   push:
     branches: [develop, main]
     paths:
@@ -17,6 +18,8 @@ on:
       - "backend/**"
       - "functions/src/**"
       - "!backend/migrations/**"
+      
+  # Trigger on PRs to main/develop with relevant file changes
   pull_request:
     branches: [develop, main]
     paths:
@@ -24,11 +27,21 @@ on:
       - "backend/**"
       - "functions/src/**"
       - "!backend/migrations/**"
+      
+  # Manual trigger option
   workflow_dispatch:
+  
+  # Validate YAML on push to workflows
+  push:
+    branches: [develop, main]
+    paths:
+      - '.github/workflows/auto-fix.yml'
 
+# Required permissions
 permissions:
-  contents: write
-  pull-requests: write
+  contents: write  # Required to push changes
+  pull-requests: write  # Required to comment on PRs
+  id-token: write  # Needed for OIDC authentication
 
 env:
   PYTHON_VERSION: "3.11"
