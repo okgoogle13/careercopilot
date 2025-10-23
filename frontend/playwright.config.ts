@@ -44,8 +44,6 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-<<<<<<< HEAD
-=======
       use: {
         ...devices['Desktop Chrome'],
         // Use headless mode
@@ -78,4 +76,3 @@ export default defineConfig({
     timeout: 10000,
   },
 });
->>>>>>> 5896e600 (chore(ci,e2e): fix CI workflow syntax, readiness checks; Playwright config timeouts; docker compose healthchecks; add E2E handover)
