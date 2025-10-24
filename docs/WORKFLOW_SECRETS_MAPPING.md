@@ -11,21 +11,21 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 
 ## Secrets Mapping Table
 
-| Workflow Requirement | GitHub Secret Name | Environment | Status | Notes |
-|---------------------|-------------------|-------------|--------|-------|
-| **CI Workflow** | | | | |
-| CI GCP Authentication | `GCP_SA_KEY` | Repository | ✅ Set | Used for Docker image building/pushing |
-| AI Testing Key | `GEMINI_API_KEY_STAGING` | Staging Env | ✅ Set | Gemini API for backend tests |
-| Container Testing | `TC_CLOUD_TOKEN` | Repository | ✅ Set | Testcontainers Cloud token |
-| Code Coverage | `CODECOV_TOKEN` | Repository | ✅ Set | Optional - for codecov.io uploads |
-| **Staging Deployment** | | | | |
-| Staging GCP Auth | `GCP_STAGING_SA_KEY` | Staging Env | ✅ Set | Service account for staging Cloud Run |
-| Staging Firebase | `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` | Staging Env | ✅ Set | Firebase Hosting deployment |
-| Staging Project ID | `GCP_STAGING_PROJECT_ID` | Staging Env | ✅ Set | Project: careercopilot-staging |
-| **Production Deployment** | | | | |
-| Production GCP Auth | `GCP_SA_KEY` | Repository | ✅ Set | Service account for production Cloud Run |
-| Production Firebase | `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT` | Repository | ✅ Set | Firebase Hosting deployment |
-| Production Project ID | `GCP_PROJECT_ID` | Production Env | ✅ Set | Project: careercopilot-468811 |
+| Workflow Requirement      | GitHub Secret Name                               | Environment    | Status | Notes                                    |
+| ------------------------- | ------------------------------------------------ | -------------- | ------ | ---------------------------------------- |
+| **CI Workflow**           |                                                  |                |        |                                          |
+| CI GCP Authentication     | `GCP_SA_KEY`                                     | Repository     | ✅ Set | Used for Docker image building/pushing   |
+| AI Testing Key            | `GEMINI_API_KEY_STAGING`                         | Staging Env    | ✅ Set | Gemini API for backend tests             |
+| Container Testing         | `TC_CLOUD_TOKEN`                                 | Repository     | ✅ Set | Testcontainers Cloud token               |
+| Code Coverage             | `CODECOV_TOKEN`                                  | Repository     | ✅ Set | Optional - for codecov.io uploads        |
+| **Staging Deployment**    |                                                  |                |        |                                          |
+| Staging GCP Auth          | `GCP_STAGING_SA_KEY`                             | Staging Env    | ✅ Set | Service account for staging Cloud Run    |
+| Staging Firebase          | `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` | Staging Env    | ✅ Set | Firebase Hosting deployment              |
+| Staging Project ID        | `GCP_STAGING_PROJECT_ID`                         | Staging Env    | ✅ Set | Project: careercopilot-staging           |
+| **Production Deployment** |                                                  |                |        |                                          |
+| Production GCP Auth       | `GCP_SA_KEY`                                     | Repository     | ✅ Set | Service account for production Cloud Run |
+| Production Firebase       | `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT`         | Repository     | ✅ Set | Firebase Hosting deployment              |
+| Production Project ID     | `GCP_PROJECT_ID`                                 | Production Env | ✅ Set | Project: careercopilot-468811            |
 
 ---
 
@@ -34,6 +34,7 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 ### CI Workflow Secrets
 
 #### `GCP_SA_KEY` (Repository Level)
+
 - **Purpose**: Authenticates to Google Cloud for building and pushing Docker images to Artifact Registry
 - **Format**: JSON service account key
 - **Permissions Required**:
@@ -42,6 +43,7 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 - **Used In**: [.github/workflows/ci.yml](../.github/workflows/ci.yml#L686-690)
 
 #### `GEMINI_API_KEY_STAGING` (Staging Environment)
+
 - **Purpose**: Gemini AI API key for testing AI-powered features in CI
 - **Format**: String starting with `AIzaSy...`
 - **Used In**:
@@ -51,12 +53,14 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
   - [.github/workflows/ci.yml](../.github/workflows/ci.yml#L562) - Performance tests
 
 #### `TC_CLOUD_TOKEN` (Repository Level)
+
 - **Purpose**: Testcontainers Cloud authentication for running containerized tests
 - **Format**: String token from testcontainers.cloud
 - **Used In**: [.github/workflows/ci.yml](../.github/workflows/ci.yml#L276)
 - **Optional**: Can run tests locally without this, but needed for CI
 
 #### `CODECOV_TOKEN` (Repository Level)
+
 - **Purpose**: Upload test coverage reports to codecov.io
 - **Format**: UUID string
 - **Used In**: [.github/workflows/ci.yml](../.github/workflows/ci.yml#L324)
@@ -67,6 +71,7 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 ### Staging Deployment Secrets
 
 #### `GCP_STAGING_SA_KEY` (Staging Environment)
+
 - **Purpose**: Authenticates to Google Cloud for staging deployments
 - **Format**: JSON service account key
 - **Permissions Required**:
@@ -76,12 +81,14 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 - **Used In**: [.github/workflows/deploy.yml](../.github/workflows/deploy.yml#L142-146)
 
 #### `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` (Staging Environment)
+
 - **Purpose**: Firebase Hosting deployment for staging frontend
 - **Format**: JSON service account key (Firebase-specific)
 - **Used In**: [.github/workflows/deploy.yml](../.github/workflows/deploy.yml#L153)
 - **Note**: This is separate from `GCP_STAGING_SA_KEY` for security isolation
 
 #### `GCP_STAGING_PROJECT_ID` (Staging Environment)
+
 - **Purpose**: Identifies the GCP project for staging environment
 - **Format**: String (e.g., `careercopilot-staging`)
 - **Used In**: [.github/workflows/deploy.yml](../.github/workflows/deploy.yml#L193)
@@ -91,6 +98,7 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 ### Production Deployment Secrets
 
 #### `GCP_SA_KEY` (Repository Level - Reused)
+
 - **Purpose**: Authenticates to Google Cloud for production deployments
 - **Format**: JSON service account key
 - **Permissions Required**:
@@ -101,11 +109,13 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 - **Note**: Same key used for CI and production deployment
 
 #### `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT` (Repository Level)
+
 - **Purpose**: Firebase Hosting deployment for production frontend
 - **Format**: JSON service account key (Firebase-specific)
 - **Used In**: [.github/workflows/deploy.yml](../.github/workflows/deploy.yml#L284)
 
 #### `GCP_PROJECT_ID` (Production Environment)
+
 - **Purpose**: Identifies the GCP project for production environment
 - **Format**: String (`careercopilot-468811`)
 - **Used In**:
@@ -119,19 +129,19 @@ This document maps all GitHub secrets required by the CI/CD workflows to their c
 
 These secrets exist in your repository but are **not currently used** by GitHub Actions workflows. They are likely used by the application at runtime:
 
-| Secret Name | Environment | Purpose | Status |
-|------------|-------------|---------|--------|
-| `ANTHROPIC_API_KEY` | Both | Claude AI API | ✅ Set (not used in workflows) |
-| `OPENAI_API_KEY` | Both | OpenAI GPT API | ✅ Set (not used in workflows) |
-| `PERPLEXITY_API_KEY` | Both | Perplexity AI | ✅ Set (not used in workflows) |
-| `PINECONE_API_KEY` | Both | Vector database | ✅ Set (not used in workflows) |
-| `PINECONE_ENVIRONMENT` | Both | Pinecone config | ✅ Set (not used in workflows) |
-| `PINECONE_INDEX_NAME` | Both | Pinecone index | ✅ Set (not used in workflows) |
-| `SERP_API_KEY` | Both | Search API | ✅ Set (not used in workflows) |
-| `GOOGLE_OAUTH_CLIENT_ID_STAGING` | Staging | OAuth config | ✅ Set (runtime, not CI/CD) |
-| `GOOGLE_OAUTH_CLIENT_SECRET_STAGING` | Staging | OAuth config | ✅ Set (runtime, not CI/CD) |
-| `GOOGLE_OAUTH_CLIENT_ID_PROD` | Production | OAuth config | ✅ Set (runtime, not CI/CD) |
-| `GOOGLE_OAUTH_CLIENT_SECRET_PROD` | Production | OAuth config | ✅ Set (runtime, not CI/CD) |
+| Secret Name                          | Environment | Purpose         | Status                         |
+| ------------------------------------ | ----------- | --------------- | ------------------------------ |
+| `ANTHROPIC_API_KEY`                  | Both        | Claude AI API   | ✅ Set (not used in workflows) |
+| `OPENAI_API_KEY`                     | Both        | OpenAI GPT API  | ✅ Set (not used in workflows) |
+| `PERPLEXITY_API_KEY`                 | Both        | Perplexity AI   | ✅ Set (not used in workflows) |
+| `PINECONE_API_KEY`                   | Both        | Vector database | ✅ Set (not used in workflows) |
+| `PINECONE_ENVIRONMENT`               | Both        | Pinecone config | ✅ Set (not used in workflows) |
+| `PINECONE_INDEX_NAME`                | Both        | Pinecone index  | ✅ Set (not used in workflows) |
+| `SERP_API_KEY`                       | Both        | Search API      | ✅ Set (not used in workflows) |
+| `GOOGLE_OAUTH_CLIENT_ID_STAGING`     | Staging     | OAuth config    | ✅ Set (runtime, not CI/CD)    |
+| `GOOGLE_OAUTH_CLIENT_SECRET_STAGING` | Staging     | OAuth config    | ✅ Set (runtime, not CI/CD)    |
+| `GOOGLE_OAUTH_CLIENT_ID_PROD`        | Production  | OAuth config    | ✅ Set (runtime, not CI/CD)    |
+| `GOOGLE_OAUTH_CLIENT_SECRET_PROD`    | Production  | OAuth config    | ✅ Set (runtime, not CI/CD)    |
 
 **Note**: These secrets are accessed by the application at runtime through Google Cloud Secret Manager or environment variables, not directly by GitHub Actions.
 
@@ -183,6 +193,7 @@ gh workflow run ci.yml --ref develop
 **Symptom**: CI workflow fails at "Build and push Docker image" step
 
 **Solution**:
+
 - Verify `GCP_SA_KEY` service account has `roles/artifactregistry.writer`
 - Check Artifact Registry is enabled: `gcloud services enable artifactregistry.googleapis.com`
 - Verify repository exists: `gcloud artifacts repositories list --project=careercopilot-468811`
@@ -192,6 +203,7 @@ gh workflow run ci.yml --ref develop
 **Symptom**: Deploy workflow fails at "Deploy Frontend to Staging/Production" step
 
 **Solution**:
+
 - Verify Firebase service account keys are valid JSON
 - Check service account has `roles/firebase.admin`
 - Ensure Firebase project ID matches: `staging` uses `careercopilot-staging`, `production` uses `careercopilot-468811`
@@ -201,6 +213,7 @@ gh workflow run ci.yml --ref develop
 **Symptom**: Any gcloud command fails with authentication errors
 
 **Solution**:
+
 - Regenerate service account key in GCP Console
 - Update GitHub secret with new key
 - Ensure JSON is properly formatted (no extra whitespace)
@@ -210,6 +223,7 @@ gh workflow run ci.yml --ref develop
 **Symptom**: Workflow fails with "secret `SECRET_NAME` not found"
 
 **Solution**:
+
 - Check secret is set at correct level (repository vs environment)
 - Verify environment name matches workflow (staging vs production)
 - Use `gh secret list` to confirm secret exists
@@ -221,11 +235,13 @@ gh workflow run ci.yml --ref develop
 ### Current Setup (Service Account Keys)
 
 ✅ **Pros**:
+
 - Simple to set up and use
 - Works immediately with existing infrastructure
 - All secrets already configured
 
 ⚠️ **Cons**:
+
 - Service account keys are long-lived credentials
 - Need to rotate keys periodically
 - If leaked, provide full access until revoked
@@ -235,6 +251,7 @@ gh workflow run ci.yml --ref develop
 For improved security, consider migrating to Workload Identity Federation (WIF):
 
 **Benefits**:
+
 - No service account keys to manage
 - Short-lived tokens (1 hour)
 - Automatic rotation
@@ -252,6 +269,7 @@ For improved security, consider migrating to Workload Identity Federation (WIF):
 ### Secret Rotation Schedule
 
 Rotate service account keys every:
+
 - **Production**: 90 days
 - **Staging**: 180 days
 - **CI/CD**: 180 days
@@ -259,6 +277,7 @@ Rotate service account keys every:
 ### Rotation Process
 
 1. **Generate new service account key**:
+
    ```bash
    gcloud iam service-accounts keys create new-key.json \
      --iam-account=SA_EMAIL@PROJECT_ID.iam.gserviceaccount.com \
@@ -266,11 +285,13 @@ Rotate service account keys every:
    ```
 
 2. **Update GitHub secret**:
+
    ```bash
    gh secret set SECRET_NAME < new-key.json
    ```
 
 3. **Test workflow**:
+
    ```bash
    gh workflow run ci.yml --ref develop
    ```
@@ -308,6 +329,7 @@ gh run view --log
 ### Expected Workflow Behavior
 
 #### CI Workflow (`ci.yml`)
+
 1. **changes** job - Detects which paths changed
 2. **codeql** job - Security scanning (if relevant paths changed)
 3. **frontend** job - Frontend tests (if frontend changed)
@@ -320,6 +342,7 @@ gh run view --log
 10. **build-and-push-backend** job - Builds and pushes Docker image (on main/develop)
 
 #### Deploy Workflow (`deploy.yml`)
+
 1. **pre-deploy-checks** job - Determines staging vs production
 2. **deploy-staging** or **deploy-production** job:
    - Prepares frontend artifact
@@ -342,6 +365,7 @@ gh run view --log
 ### Next Steps
 
 1. **Push changes to remote**:
+
    ```bash
    git push origin develop
    ```
@@ -351,6 +375,7 @@ gh run view --log
    - Watch for any authentication or permission issues
 
 3. **Test staging deployment** (after CI passes):
+
    ```bash
    gh workflow run deploy.yml --ref develop -f environment=staging
    ```
@@ -366,6 +391,7 @@ gh run view --log
 ---
 
 **For questions or issues, see**:
+
 - [GitHub Secrets Setup Guide](GITHUB_SECRETS_SETUP.md)
 - [Project Commands Reference](../CLAUDE.md)
 - [Deployment Documentation](DEPLOYMENT.md)
