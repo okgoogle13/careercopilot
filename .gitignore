@@ -85,4 +85,6 @@ cleanup_backup_*
 cleanup_backup_*/
 /backend/data/
 /frontend/test-results/
+.frontend-coverage/
+/frontend/playwright-report/
 .env.aws-ses

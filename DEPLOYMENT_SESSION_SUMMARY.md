@@ -9,9 +9,11 @@
 ## ✅ Successfully Completed
 
 ### 1. Fixed Critical Document Upload Bug
+
 **File:** `frontend/src/components/documents/DocumentUploadDropzone.tsx`
 
 **Issue:** Typo in progress tracking property name
+
 - Line 113: `progre_s` → `progress`
 - Line 118: `progre_s` → `progress`
 - Line 125: `progre_s` → `progress`
@@ -19,9 +21,11 @@
 **Impact:** Progress tracking was completely broken - upload progress bar would never update
 
 ### 2. Created Firebase Storage Service
+
 **File:** `frontend/src/services/storageService.ts` (124 lines, new file)
 
 **Features:**
+
 - `uploadFile()` - File upload with real-time progress callbacks
 - `uploadDocument()` - User-specific document uploads with sanitized filenames
 - `deleteFile()` - Delete files from Firebase Storage
@@ -29,6 +33,7 @@
 - `getFileURL()` - Get download URLs for files
 
 **Technical Details:**
+
 - Uses Firebase `uploadBytesResumable` for progress tracking
 - Sanitizes filenames (removes special characters)
 - User-scoped storage paths: `users/{userId}/documents/{type}/`
@@ -36,9 +41,11 @@
 - Progress callback interface: `{bytesTransferred, totalBytes, progress}`
 
 ### 3. Created Document Management Service
+
 **File:** `frontend/src/services/documentService.ts` (236 lines, new file)
 
 **Features:**
+
 - `uploadAndCreateDocument()` - Integrates Storage + Firestore
 - `getUserDocuments()` - Fetch documents with filtering (type, status)
 - `getDocument()` - Fetch single document by ID
@@ -49,13 +56,14 @@
 - `addDocumentTags()` / `removeDocumentTags()` - Tag management
 
 **Document Schema:**
+
 ```typescript
 interface Document {
   id: string;
   userId: string;
   name: string;
-  type: 'resume' | 'cover-letter' | 'ksc' | 'portfolio';
-  status: 'draft' | 'active' | 'archived';
+  type: "resume" | "cover-letter" | "ksc" | "portfolio";
+  status: "draft" | "active" | "archived";
   storagePath: string;
   downloadURL: string;
   size: number;
@@ -69,9 +77,11 @@ interface Document {
 ```
 
 ### 4. Updated UploadResume Component
+
 **File:** `frontend/src/components/features/Documents/UploadResume.tsx`
 
 **Changes:**
+
 - Integrated `DocumentUploadDropzone` for all document types
 - Added real upload handlers using `uploadAndCreateDocument()`
 - Added success/error notifications with Material-UI Snackbar
@@ -79,21 +89,25 @@ interface Document {
 - Proper error handling with user-friendly messages
 
 **Document Types Supported:**
+
 - Resumes (PDF, Word formats)
 - Cover Letters
 - Selection Criteria Responses (KSC)
 
 ### 5. Fixed Deployment Workflow - CI Artifact Lookup
+
 **File:** `.github/workflows/deploy.yml`
 
 **Issue:** Manual deployment triggers couldn't find CI artifacts
 
 **Fix:** Added automatic CI run lookup logic (lines 93-127)
+
 1. Queries GitHub API for successful CI run matching the commit SHA
 2. Falls back to latest successful CI run on the branch
 3. Maintains backward compatibility with automatic `workflow_run` triggers
 
 **API Queries:**
+
 ```bash
 # First: Find CI run by exact commit SHA
 /repos/{repo}/actions/workflows/ci.yml/runs?head_sha={sha}&status=success
@@ -105,12 +119,14 @@ interface Document {
 ### 6. Security & Validation
 
 **Firebase Storage Rules** (already in place):
+
 - User documents: Only accessible by owner (`users/{userId}/**`)
 - File type validation: PDF, Word documents, images only
 - Size limit: 10MB enforced at storage level
 - Read/write permissions tied to Firebase Auth
 
 **File Validation:**
+
 - Sanitized filenames (special characters removed)
 - Content type checking
 - Extension whitelist: `.pdf`, `.doc`, `.docx`, `.txt`
@@ -121,11 +137,13 @@ interface Document {
 ## ❌ Outstanding Issues - Deployment Pipeline
 
 ### Problem 1: CI Workflow Missing Frontend Build
+
 **File:** `.github/workflows/ci.yml`
 
 **Issue:** CI workflow runs tests but doesn't build or upload `frontend-dist` artifacts
 
 **Current CI Jobs:**
+
 - ✅ Frontend tests (Jest)
 - ✅ Backend tests (pytest)
 - ✅ Functions tests
@@ -135,11 +153,13 @@ interface Document {
 **Impact:** CD workflow expects `frontend-dist` artifacts that don't exist
 
 ### Problem 2: CD Workflow Fallback Build Fails
+
 **File:** `.github/workflows/deploy.yml`
 
 **Issue:** When artifacts aren't found, fallback build fails due to yarn lockfile
 
 **Error:**
+
 ```
 YN0028: The lockfile would have been modified by this install,
         which is explicitly forbidden.
@@ -148,11 +168,13 @@ YN0028: The lockfile would have been modified by this install,
 **Root Cause:** CD uses `yarn install --immutable` but lockfile needs updates
 
 ### Problem 3: Automatic CD Trigger Not Working
+
 **Configuration:** `workflow_run` trigger in deploy.yml
 
 **Issue:** After CI completes on main, CD doesn't auto-trigger for production
 
 **Possible Causes:**
+
 - Timing issue / GitHub Actions delay
 - Incorrect branch configuration
 - workflow_run trigger misconfiguration
@@ -272,6 +294,7 @@ YN0028: The lockfile would have been modified by this install,
 ## 🔧 Technical Details
 
 ### Commit History (Main Branch)
+
 ```
 4da45920 - fix(cd): automatically lookup CI artifacts for manual deployments
 10e22067 - fix(cd): automatically lookup CI artifacts for manual deployments (duplicate after rebase)
@@ -281,11 +304,13 @@ a7b0dd82 - chore: remove unnecessary files and reduce repository bloat
 ```
 
 ### CI/CD Workflow Files
+
 - `.github/workflows/ci.yml` - CI: Build and Test
 - `.github/workflows/deploy.yml` - CD: Deploy to Staging and Production
 - `.github/actions/prepare-frontend-deploy/action.yml` - Reusable frontend prep action
 
 ### Deployment Targets
+
 - **Staging:**
   - Frontend: Firebase Hosting (careercopilot-staging)
   - Backend: Cloud Run (us-central1)
@@ -297,12 +322,14 @@ a7b0dd82 - chore: remove unnecessary files and reduce repository bloat
   - Project: careercopilot-468811
 
 ### Required Secrets (Already Configured)
+
 - `GCP_SA_KEY` - Google Cloud service account key
 - `GCP_SA_KEY_STAGING` - Staging service account key
 - `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811` - Production Firebase
 - `FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING` - Staging Firebase
 
 ### Build Artifacts
+
 - **Frontend:** `frontend/dist/` (~500KB gzipped)
 - **Backend:** Docker image in Artifact Registry
 - **Retention:** 7 days for artifacts, 90 days for images
@@ -312,11 +339,13 @@ a7b0dd82 - chore: remove unnecessary files and reduce repository bloat
 ## 📝 Notes & Observations
 
 ### Why Deployment Failed
+
 1. **Missing CI Artifacts:** CI doesn't build/upload frontend
 2. **Fallback Build Issues:** Yarn lockfile immutability conflicts
 3. **Incomplete Testing:** Never verified end-to-end deployment flow
 
 ### What Works
+
 - ✅ Local builds (successful)
 - ✅ CI tests (all passing)
 - ✅ Code merged to main
@@ -324,12 +353,14 @@ a7b0dd82 - chore: remove unnecessary files and reduce repository bloat
 - ✅ Document upload logic
 
 ### What Needs Fixing
+
 - ❌ CI frontend build job
 - ❌ Artifact upload/download flow
 - ❌ CD fallback build logic
 - ❌ Automatic CD trigger reliability
 
 ### Time Estimates
+
 - **Phase 1 (CI Build):** 15-20 minutes
 - **Phase 2 (CD Fallback):** 10-15 minutes
 - **Phase 3 (Testing):** 20-30 minutes
@@ -382,6 +413,7 @@ gh run watch <run-id> --interval 20 --exit-status
 ---
 
 ## 📚 Related Documentation
+
 - [AWS_SES_QUICK_START.md](AWS_SES_QUICK_START.md) - Email service setup
 - [AWS_SES_MIGRATION_SUMMARY.md](AWS_SES_MIGRATION_SUMMARY.md) - SendGrid → AWS SES
 - [CLAUDE.md](CLAUDE.md) - Project commands and setup
