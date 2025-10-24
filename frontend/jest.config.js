@@ -57,7 +57,10 @@ module.exports = {
       statements: 1,
     },
   },
-  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/src/components/layout/fix-button-variants.ts'],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/src/components/layout/fix-button-variants.ts',
+  ],
   testTimeout: 15000,
   verbose: true,
   bail: false,

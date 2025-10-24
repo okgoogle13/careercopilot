@@ -15,29 +15,10 @@
 name: CI - Build and Test
 
 on:
-  # Trigger on PRs and pushes to main/develop
   pull_request:
     branches: [develop, main]
-  
-  # Trigger on push to main/develop with path filtering
   push:
     branches: [develop, main]
-    paths:
-      - 'frontend/**'
-      - 'backend/**'
-      - 'functions/**'
-      - 'tests/**'
-      - '.github/workflows/ci.yml'
-      - 'yarn.lock'
-      - 'package.json'
-      - '!**/migrations/**'
-      - '!**/node_modules/**'
-      - '!**/dist/**'
-      - '!**/build/**'
-      - '!**/.next/**'
-      - '!**/.cache/**'
-    
-  # Manual trigger with options
   workflow_dispatch:
     inputs:
       run_e2e_tests:
@@ -51,10 +32,9 @@ on:
         default: false
         type: boolean
 
-# Minimal required permissions
+# Default permissions are read-only for security.
 permissions:
   contents: read
-  id-token: write  # Needed for OIDC authentication
 
 # Cancel redundant builds on PRs
 concurrency:
@@ -62,7 +42,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: "22"
+  NODE_VERSION: "20"
   PYTHON_VERSION: "3.13"
   PYTHONUNBUFFERED: "1"
   PYTHONDONTWRITEBYTECODE: "1"
@@ -175,13 +155,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # v4.1.7
-      - name: Setup and Test Frontend
-        uses: ./.github/actions/setup-frontend
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # v4.0.3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          run-checks: "true"
-          upload-artifacts: "false"
-          skip-build: "true"
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Run checks
+        run: yarn workspace careercopilot-frontend test
 
   # Frontend Build and Artifact Upload
   frontend-build:
@@ -447,7 +432,6 @@ jobs:
       - name: Run functions tests
         run: yarn workspace functions test:ci
       - name: Verify build output
-        shell: bash
         run: |
           if [ ! -d "functions/lib" ] || [ ! "$(ls -A functions/lib)" ]; then
             echo "Functions build failed - no lib directory found or it's empty"
@@ -463,7 +447,7 @@ jobs:
     name: E2E Tests
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    needs: [changes, frontend, backend-tests]
+    needs: [changes, frontend-build, backend-tests]
     if: |
       (github.event_name == 'workflow_dispatch' && github.event.inputs.run_e2e_tests == 'true') ||
       (needs.changes.outputs.e2e == 'true')
@@ -473,6 +457,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4 # v4.1.7
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist
       - name: Enable Corepack for Yarn 4+
         run: corepack enable
       - name: Setup Node.js
@@ -490,79 +479,19 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-playwright-
-      - name: Install Playwright browsers
-        run: yarn workspace careercopilot-frontend playwright install --with-deps chromium firefox webkit
-      - name: Build frontend for E2E
+      - name: Start the stack
         run: |
-          echo " Building frontend for E2E tests..."
-          yarn workspace careercopilot-frontend build
-      - name: Install Docker Compose
-        run: sudo apt-get update && sudo apt-get install -y docker-compose
-      
-      # --- START OF MODIFIED STEPS ---
-      - name: Start services with Docker Compose
-        id: start-services
+          docker compose -f docker-compose.e2e.yml up -d --build
+      - name: Verify status again
         run: |
-          echo "Starting backend and frontend services for E2E tests..."
-          # Ensure no conflicting containers are running
-          docker-compose -f docker-compose.e2e.yml down -v --remove-orphans || true
-          
-          # Build and start services
-          docker-compose -f docker-compose.e2e.yml build
-          docker-compose -f docker-compose.e2e.yml up -d
-          
-          echo "Services started. Checking container status..."
-          docker-compose -f docker-compose.e2e.yml ps
-          
-          # Initial delay to allow containers to start
-          echo "Waiting 10 seconds for services to initialize..."
-          sleep 10
-          
-      - name: Wait for services to be ready
-        id: wait-for-services
+          docker compose -f docker-compose.e2e.yml ps
+      - name: Tail logs if needed
         run: |
-          echo "Waiting for services to be ready..."
-          
-          # Wait for frontend (3 minute timeout)
-          echo "Waiting for frontend (http://127.0.0.1:3000)..."
-          timeout 180 bash -c 'until curl -s --head --fail http://127.0.0.1:3000 >/dev/null 2>&1; do 
-            echo "Frontend not ready, retrying in 5 seconds..."; 
-            sleep 5; 
-          done'
-          
-          # Wait for backend health check
-          echo "Waiting for backend health check (http://127.0.0.1:8080/health)..."
-          timeout 180 bash -c 'until curl -s --fail http://127.0.0.1:8080/health | grep -q "ok"; do 
-            echo "Backend health check not ready, retrying in 5 seconds..."; 
-            sleep 5; 
-          done'
-          
-          echo "All services are ready!"
-          
-      - name: Check service logs on failure
-        if: failure() && steps.wait-for-services.outcome == 'failure'
+          docker compose -f docker-compose.e2e.yml logs --tail=50
+      - name: Once both services show Up, proceed with Playwright tests
         run: |
-          echo "=== Service Logs ==="
-          docker-compose -f docker-compose.e2e.yml logs --tail=100 || true
-          echo "===================="
-          
-          echo "=== Container Status ==="
-          docker ps -a || true
-          echo "======================="
-          
-          echo "=== Docker System Info ==="
-          docker system df || true
-          echo "========================="
-      # --- END OF MODIFIED STEPS ---
-
-      - name: Run Playwright E2E tests
-        run: |
-          echo " Running Playwright E2E tests..."
-          # Cap E2E duration to 10 minutes to prevent job hangs
-          timeout 10m yarn workspace careercopilot-frontend playwright test tests/
-        env:
-          PLAYWRIGHT_BASE_URL: "http://127.0.0.1:3000"
-          API_BASE_URL: "http://127.0.0.1:8080"
+          yarn workspace careercopilot-frontend playwright install --with-deps
+          yarn workspace careercopilot-frontend playwright test
       - name: Docker diagnostics on failure
         if: failure()
         run: |
@@ -638,6 +567,7 @@ jobs:
         changes,
         codeql,
         frontend,
+        frontend-build,
         backend-static-checks,
         backend-tests,
         functions,
@@ -653,6 +583,7 @@ jobs:
           echo " Checking all test results..."
           if [[ "${{ needs.codeql.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.frontend.result }}" == "failure" ]]; then exit 1; fi
+          if [[ "${{ needs.frontend-build.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-static-checks.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.functions.result }}" == "failure" ]]; then exit 1; fi
@@ -667,6 +598,7 @@ jobs:
             const failedJobs = [];
             if ('${{ needs.codeql.result }}' === 'failure') failedJobs.push('CodeQL Security Analysis');
             if ('${{ needs.frontend.result }}' === 'failure') failedJobs.push('Frontend Tests');
+            if ('${{ needs.frontend-build.result }}' === 'failure') failedJobs.push('Frontend Build');
             if ('${{ needs.backend-static-checks.result }}' === 'failure') failedJobs.push('Backend Static Checks');
             if ('${{ needs.backend-tests.result }}' === 'failure') failedJobs.push('Backend Tests');
             if ('${{ needs.functions.result }}' === 'failure') failedJobs.push('Functions Tests');
@@ -695,12 +627,12 @@ jobs:
   build-and-push-backend:
     name: Build and Push Backend Image
     runs-on: ubuntu-latest
-    needs: [changes, frontend, backend-tests, backend-static-checks]
+    needs: [changes, frontend-build, backend-tests, backend-static-checks]
     # Build if frontend passes, allow backend tests to fail
     if: |
       always() &&
       !cancelled() &&
-      (needs.frontend.result == 'success' || needs.frontend.result == 'skipped') &&
+      (needs.frontend-build.result == 'success' || needs.frontend-build.result == 'skipped') &&
       (needs.backend-static-checks.result == 'success' || needs.backend-static-checks.result == 'skipped') &&
       (github.event_name == 'workflow_dispatch' || needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true') &&
       (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
@@ -710,7 +642,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # v4.1.7
-
+      - name: Download frontend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: backend/dist
       # Determine Target Environment based on branch
       - name: Determine Target Environment
         id: env-vars

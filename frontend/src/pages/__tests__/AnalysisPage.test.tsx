@@ -46,7 +46,9 @@ describe('AnalysisPage', () => {
       render(<AnalysisPage />);
 
       expect(screen.getByRole('heading', { name: /Document Analysis/i })).toBeInTheDocument();
-      expect(screen.getByText(/Comprehensive ATS scoring and optimization recommendations/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Comprehensive ATS scoring and optimization recommendations/i)
+      ).toBeInTheDocument();
     });
 
     it('displays summary statistics cards', () => {
@@ -123,8 +125,12 @@ describe('AnalysisPage', () => {
       await user.click(trendsTab);
 
       await waitFor(() => {
-        expect(screen.getByText(/Average score improved by 12% over last month/i)).toBeInTheDocument();
-        expect(screen.getByText(/Resume: 60% • Cover Letters: 30% • KSC: 10%/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/Average score improved by 12% over last month/i)
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(/Resume: 60% • Cover Letters: 30% • KSC: 10%/i)
+        ).toBeInTheDocument();
       });
     });
 
@@ -150,8 +156,12 @@ describe('AnalysisPage', () => {
       await user.click(insightsTab);
 
       await waitFor(() => {
-        expect(screen.getByText(/Your documents excel in keyword optimization/i)).toBeInTheDocument();
-        expect(screen.getByText(/Consider adding more quantifiable achievements/i)).toBeInTheDocument();
+        expect(
+          screen.getByText(/Your documents excel in keyword optimization/i)
+        ).toBeInTheDocument();
+        expect(
+          screen.getByText(/Consider adding more quantifiable achievements/i)
+        ).toBeInTheDocument();
         expect(screen.getByText(/cloud computing/i)).toBeInTheDocument();
         expect(screen.getByText(/agile methodology/i)).toBeInTheDocument();
       });
@@ -181,9 +191,12 @@ describe('AnalysisPage', () => {
       await user.click(runButton);
 
       // Wait for the simulated async operation
-      await waitFor(() => {
-        expect(mockOnRunAnalysis).toHaveBeenCalledTimes(1);
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          expect(mockOnRunAnalysis).toHaveBeenCalledTimes(1);
+        },
+        { timeout: 3000 }
+      );
     });
 
     it('shows loading state when analysis is running', async () => {
@@ -199,9 +212,12 @@ describe('AnalysisPage', () => {
       });
 
       // Should return to normal state after loading
-      await waitFor(() => {
-        expect(screen.getByRole('button', { name: /Run New Analysis/i })).toBeInTheDocument();
-      }, { timeout: 3000 });
+      await waitFor(
+        () => {
+          expect(screen.getByRole('button', { name: /Run New Analysis/i })).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
     });
 
     it('displays document insights with keywords and skills count', () => {
@@ -248,7 +264,9 @@ describe('AnalysisPage', () => {
 
       // Find action buttons in the table
       const moreButtons = screen.getAllByRole('button', { name: '' });
-      const actionButton = moreButtons.find(btn => btn.querySelector('[data-testid="MoreVertIcon"]'));
+      const actionButton = moreButtons.find((btn) =>
+        btn.querySelector('[data-testid="MoreVertIcon"]')
+      );
 
       if (actionButton) {
         await user.click(actionButton);
@@ -268,7 +286,9 @@ describe('AnalysisPage', () => {
 
       // Find and click action button
       const moreButtons = screen.getAllByRole('button', { name: '' });
-      const actionButton = moreButtons.find(btn => btn.querySelector('[data-testid="MoreVertIcon"]'));
+      const actionButton = moreButtons.find((btn) =>
+        btn.querySelector('[data-testid="MoreVertIcon"]')
+      );
 
       if (actionButton) {
         await user.click(actionButton);
