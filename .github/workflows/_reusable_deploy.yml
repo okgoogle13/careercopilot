@@ -36,11 +36,15 @@ jobs:
           if [[ "${{ inputs.environment }}" == "staging" ]]; then
             echo "GCP_PROJECT_ID=${{ secrets.GCP_STAGING_PROJECT_ID }}" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot-repo" >> $GITHUB_ENV
-            echo "FIREBASE_SERVICE_ACCOUNT=${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}" >> $GITHUB_ENV
+            echo "FIREBASE_SERVICE_ACCOUNT<<EOF" >> $GITHUB_ENV
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
           elif [[ "${{ inputs.environment }}" == "production" ]]; then
             echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot" >> $GITHUB_ENV
-            echo "FIREBASE_SERVICE_ACCOUNT=${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 }}" >> $GITHUB_ENV
+            echo "FIREBASE_SERVICE_ACCOUNT<<EOF" >> $GITHUB_ENV
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 }}" >> $GITHUB_ENV
+            echo "EOF" >> $GITHUB_ENV
           fi
 
       - name: Download frontend artifact
