@@ -1,8 +1,9 @@
 import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { BrowserRouter } from 'react-router-dom';
 // import * as Sentry from '@sentry/react';
-import App from './App';
+import { AppRouter } from './AppRouter';
 import ErrorBoundary from './components/ErrorBoundary';
 import { theme } from './theme/theme';
 
@@ -24,10 +25,12 @@ import { theme } from './theme/theme';
 createRoot(document.getElementById('root')!).render(
   <ErrorBoundary>
     {/* <Sentry.ErrorBoundary fallback={<p>An error has occurred</p>}> */}
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppRouter />
+      </ThemeProvider>
+    </BrowserRouter>
     {/* </Sentry.ErrorBoundary> */}
   </ErrorBoundary>
 );
