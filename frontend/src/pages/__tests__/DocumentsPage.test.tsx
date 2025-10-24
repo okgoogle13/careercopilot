@@ -19,7 +19,9 @@ describe('DocumentsPage', () => {
       render(<DocumentsPage isEmpty={true} onCreateDocument={mockOnCreateDocument} />);
 
       expect(screen.getByRole('heading', { name: /No Documents Yet/i })).toBeInTheDocument();
-      expect(screen.getByText(/Create your first document or upload existing files/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Create your first document or upload existing files/i)
+      ).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /Create Document/i })).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /Upload Files/i })).toBeInTheDocument();
     });
@@ -59,7 +61,9 @@ describe('DocumentsPage', () => {
       render(<DocumentsPage />);
 
       expect(screen.getByRole('heading', { name: /^Documents$/i })).toBeInTheDocument();
-      expect(screen.getByText(/Manage your resumes, cover letters, and other career documents/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Manage your resumes, cover letters, and other career documents/i)
+      ).toBeInTheDocument();
     });
 
     it('displays statistics cards with correct data', () => {

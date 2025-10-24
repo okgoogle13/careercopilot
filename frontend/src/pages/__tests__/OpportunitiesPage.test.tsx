@@ -49,7 +49,9 @@ describe('OpportunitiesPage', () => {
       render(<OpportunitiesPage />);
 
       expect(screen.getByRole('heading', { name: /Job Opportunities/i })).toBeInTheDocument();
-      expect(screen.getByText(/Discover and track job opportunities tailored to your profile/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Discover and track job opportunities tailored to your profile/i)
+      ).toBeInTheDocument();
     });
 
     it('displays statistics cards with correct data', () => {

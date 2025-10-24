@@ -11,12 +11,14 @@ The project uses **GitHub Secrets** for CI/CD workflows and **Google Cloud Secre
 ### 1. CI Workflow Secrets (`ci.yml`)
 
 #### Testcontainers Cloud
+
 - **`TC_CLOUD_TOKEN`** - Testcontainers Cloud authentication token
   - **Purpose**: Enables containerized testing in CI environment
   - **How to get**: Sign up at https://testcontainers.cloud
   - **Required for**: Backend integration tests
 
 #### Google Cloud Authentication (CI)
+
 - **`GCP_WORKLOAD_IDENTITY_PROVIDER`** - Workload Identity Federation provider
   - **Format**: `projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/POOL_NAME/providers/PROVIDER_NAME`
   - **Purpose**: Secure authentication to GCP for Docker image building
@@ -27,11 +29,13 @@ The project uses **GitHub Secrets** for CI/CD workflows and **Google Cloud Secre
   - **Purpose**: Service account impersonated by GitHub Actions for CI operations
 
 #### API Keys (Staging Environment)
+
 - **`GEMINI_API_KEY_STAGING`** - Gemini AI API key for staging
   - **Purpose**: AI-powered features testing in CI
   - **How to get**: https://makersuite.google.com/app/apikey
 
 #### Code Coverage
+
 - **`CODECOV_TOKEN`** - Codecov upload token
   - **Purpose**: Upload test coverage reports
   - **How to get**: https://codecov.io (optional)
@@ -39,6 +43,7 @@ The project uses **GitHub Secrets** for CI/CD workflows and **Google Cloud Secre
 ### 2. Deployment Workflow Secrets (`deploy.yml`)
 
 #### Staging Environment
+
 - **`GCP_STAGING_WIF_PROVIDER`** - Workload Identity Federation provider for staging
   - **Format**: `projects/STAGING_PROJECT_NUMBER/locations/global/workloadIdentityPools/github-staging/providers/github-staging`
   - **Purpose**: Secure authentication for staging deployments
@@ -51,6 +56,7 @@ The project uses **GitHub Secrets** for CI/CD workflows and **Google Cloud Secre
   - **Example**: `careercopilot-staging`
 
 #### Production Environment
+
 - **`GCP_PROD_WIF_PROVIDER`** - Workload Identity Federation provider for production
   - **Format**: `projects/PROD_PROJECT_NUMBER/locations/global/workloadIdentityPools/github-prod/providers/github-prod`
 
@@ -119,6 +125,7 @@ Run the provided setup script:
 ### Staging Environment Configuration
 
 Create a staging environment in GitHub:
+
 1. Go to **Settings** → **Environments**
 2. Click **New environment**
 3. Name it `staging`
@@ -131,6 +138,7 @@ Create a staging environment in GitHub:
 ### Production Environment Configuration
 
 Create a production environment in GitHub:
+
 1. Go to **Settings** → **Environments**
 2. Click **New environment**
 3. Name it `production`
