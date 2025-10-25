@@ -157,24 +157,32 @@ class EnhancedAIErrorHandler:
                 f"[{context.service_type.value}] - {ai_error.error_type.value}: {ai_error.message}"
             )
 
-            # Attempt fallback if configured
+                # Attempt fallback if configured
             if fallback_strategy and fallback_strategy.enabled:
-                fallback_result = await self._execute_fallback(
-                    context, fallback_strategy, ai_error, *args, **kwargs
-                )
-                # Mark fallback_used True if fallback was attempted, regardless of success
-                if fallback_result:
-                    fallback_result.fallback_used = True
-                    result = fallback_result
-
+                try:
+                    fallback_result = await self._execute_fallback(
+                        context, fallback_strategy, ai_error, *args, **kwargs
+                    )
+                    # Mark fallback_used True if fallback was attempted, regardless of success
+                    if fallback_result:
+                        fallback_result.fallback_used = True
+                        result = fallback_result
+                except Exception as fallback_error:
+                    logger.error(
+                        f"Error in fallback execution for {context.operation_name}: {fallback_error}",
+                        exc_info=True
+                    )
+                    # If fallback fails, we'll use the original error
+                    result.error = ai_error
         except Exception as e:
             # Unexpected error - wrap in AIError
-            ai_error = AIError(
-                message=f"Unexpected error in {context.operation_name}: {str(e)}",
+            error_msg = f"Unexpected error in {context.operation_name}"
+            logger.exception(error_msg)
+            result.error = AIError(
+                message=error_msg,
                 error_type=AIErrorType.UNKNOWN,
                 original_error=e,
             )
-            result.error = ai_error
 
             logger.error(
                 f"Unexpected error in AI operation: {context.operation_name} "

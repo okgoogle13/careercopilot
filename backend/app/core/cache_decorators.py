@@ -6,7 +6,8 @@ Provides easy-to-use decorators for caching AI function results
 
 import functools
 import logging
-from typing import Any, Callable, Dict, List, Optional
+from datetime import timedelta
+from typing import Any, Callable, Dict, List, Optional, TypeVar, cast
 
 from .personal_cache import get_ai_cache
 
@@ -64,15 +65,21 @@ def cached_ai_operation(
                 cache_input = _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
 
                 # Try to get from cache
-                cached_result = await cache.get(operation_type, user_id, cache_input)
+                cached_result = await cache.get(operation_type, user_id)
                 if cached_result is not None:
                     return cached_result
 
                 # Execute function and cache result
                 result = await func(*args, **kwargs)
 
-                # Cache the result
-                await cache.set(operation_type, user_id, cache_input, result)
+                # Cache the result with TTL from cache config
+                cache_config = cache.CACHE_CONFIGS.get("default", {})
+                ttl_seconds = cache_config.get("ttl", 3600)  # Default 1 hour TTL
+                ttl = timedelta(seconds=ttl_seconds) if ttl_seconds else None
+                
+                # Convert result to dict if it's not already
+                cache_value = result if isinstance(result, dict) else {"value": result}
+                await cache.set(operation_type, user_id, cache_value, ttl=ttl)
 
                 return result
 
@@ -113,7 +120,9 @@ def _prepare_cache_input(
     return cache_input
 
 
-def invalidate_user_ai_cache(user_id: str, operation_types: Optional[List[str]] = None):
+T = TypeVar('T', bound=Callable[..., Any])
+
+def invalidate_user_ai_cache(user_id: str, operation_types: Optional[List[str]] = None) -> Callable[[T], T]:
     """
     Decorator to invalidate user cache after function execution
 
@@ -124,20 +133,20 @@ def invalidate_user_ai_cache(user_id: str, operation_types: Optional[List[str]] 
             pass
     """
 
-    def decorator(func: Callable) -> Callable:
+    def decorator(func: T) -> T:
         @functools.wraps(func)
-        async def wrapper(*args, **kwargs) -> Any:
-            result = await func(*args, **kwargs)
-
+        async def wrapper(*args: Any, **kwargs: Any) -> Any:
             try:
+                result = await func(*args, **kwargs)
                 cache = get_ai_cache()
-                await cache.invalidate_user_cache(user_id, operation_types)
+                if operation_types:
+                    for op_type in operation_types:
+                        await cache.delete(op_type, user_id)
+                return result
             except Exception as e:
-                logger.error(f"Error invalidating cache for user {user_id}: {e}")
-
-            return result
-
-        return wrapper
+                logger.error(f"Error in cache invalidation: {e}")
+                raise
+        return cast(T, wrapper)
 
     return decorator
 
