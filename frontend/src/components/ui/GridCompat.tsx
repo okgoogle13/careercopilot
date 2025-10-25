@@ -4,7 +4,8 @@ import React from 'react';
 type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type SizeMap = Partial<Record<Breakpoint, number>>;
 
-export interface GridCompatProps extends Omit<MuiGridProps, 'item' | 'container' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'> {
+export interface GridCompatProps
+  extends Omit<MuiGridProps, 'item' | 'container' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'> {
   size?: SizeMap;
   xs?: number;
   sm?: number;
@@ -21,7 +22,7 @@ const GridCompat = React.forwardRef<HTMLDivElement, GridCompatProps>(
     // Handle the new MUI Grid v2 sizing system
     const sizeProps: Record<string, number> = {};
     const breakpoints: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl'];
-    
+
     // Process size prop if provided
     if (size) {
       Object.entries(size).forEach(([key, value]) => {
@@ -30,9 +31,9 @@ const GridCompat = React.forwardRef<HTMLDivElement, GridCompatProps>(
         }
       });
     }
-    
+
     // Process individual breakpoint props
-    breakpoints.forEach(bp => {
+    breakpoints.forEach((bp) => {
       const value = props[bp];
       if (typeof value === 'number') {
         sizeProps[`${bp}${value}`] = value;
