@@ -129,7 +129,8 @@
       "Bash(gcloud projects get-iam-policy:*)",
       "Bash(gh pr close:*)",
       "Bash(gh pr create --base main --head develop --title \"feat: Deploy WIF-based Firebase deployment to production\" --body \"$(cat <<''EOF''\n## Summary\nDeploying production-ready Firebase Hosting with Workload Identity Federation and all recent improvements.\n\n## Key Changes\n\n### 🔒 Security & Authentication\n- **Workload Identity Federation**: Replaced Firebase service account JSON secrets with WIF\n- No long-lived service account keys stored in GitHub\n- Unified authentication across Cloud Run, Artifact Registry, and Firebase\n\n### 🚀 Deployment Workflow Improvements\n- **Firebase CLI deployment**: Direct `firebase deploy` using WIF credentials\n- **Frontend build fallback**: Automatic local build if CI artifacts unavailable  \n- **Corepack integration**: Support for Yarn 4.10.2 package manager\n- **CI/CD fixes**: Updated `dorny/paths-filter` action for reliability\n\n### ✅ Successfully Tested on Staging\n- Firebase Hosting deployed with WIF ✅\n- Frontend build process validated ✅\n- All CI/CD workflows passing ✅\n\n## Files Changed\n- `.github/workflows/ci.yml` - CI workflow fixes\n- `.github/workflows/_reusable_deploy.yml` - WIF-based deployment\n- `backend/app/main.py` - Version bump to 1.1.0\n\n## Deployment Notes\n- **Backend**: Will use existing Docker image (latest available tag)\n- **Frontend**: Will be built fresh during deployment workflow\n- **Auth Method**: Workload Identity Federation (no secrets required)\n\n## Production URLs\n- **Frontend**: https://careercopilot-468811.web.app\n- **Backend**: Cloud Run service in `us-central1`\n\n---\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\nEOF\n)\")",
-      "Bash(gh pr view:*)"
+      "Bash(gh pr view:*)",
+      "Bash(git log:*)"
     ]
   }
 }
