@@ -24,7 +24,9 @@ project.getSourceFiles().forEach((sourceFile: SourceFile) => {
   const storybookImport = sourceFile.getImportDeclaration('@storybook/react');
 
   if (storybookImport && !storybookImport.isTypeOnly()) {
-    const importSpecifiers = storybookImport.getNamedImports().map((ni: ImportSpecifier) => ni.getName());
+    const importSpecifiers = storybookImport
+      .getNamedImports()
+      .map((ni: ImportSpecifier) => ni.getName());
     if (importSpecifiers.includes('Meta') || importSpecifiers.includes('StoryObj')) {
       console.log(
         `- Found incorrect Storybook import in ${path.basename(filePath)}. Adding 'type'.`
