@@ -18,7 +18,9 @@ describe('SettingsPage', () => {
     render(<SettingsPage />);
 
     expect(screen.getByRole('heading', { name: /^Settings$/i })).toBeInTheDocument();
-    expect(screen.getByText(/Manage your account, preferences, and privacy settings/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Manage your account, preferences, and privacy settings/i)
+    ).toBeInTheDocument();
   });
 
   it('displays all settings tabs', () => {
@@ -70,7 +72,9 @@ describe('SettingsPage', () => {
       await user.click(preferencesTab);
 
       await waitFor(() => {
-        expect(screen.getByRole('heading', { name: /Application Preferences/i })).toBeInTheDocument();
+        expect(
+          screen.getByRole('heading', { name: /Application Preferences/i })
+        ).toBeInTheDocument();
       });
     });
 
@@ -113,7 +117,9 @@ describe('SettingsPage', () => {
       await user.click(notificationsTab);
 
       await waitFor(() => {
-        expect(screen.getByRole('heading', { name: /Notification Preferences/i })).toBeInTheDocument();
+        expect(
+          screen.getByRole('heading', { name: /Notification Preferences/i })
+        ).toBeInTheDocument();
       });
     });
 
