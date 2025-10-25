@@ -7279,7 +7279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20, @types/node@npm:^20.11.19":
+"@types/node@npm:^20.11.19":
   version: 20.19.21
   resolution: "@types/node@npm:20.19.21"
   dependencies:
@@ -7288,7 +7288,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.19.17":
+"@types/node@npm:^20.19.17, @types/node@npm:^20.19.23":
   version: 20.19.23
   resolution: "@types/node@npm:20.19.23"
   dependencies:
@@ -13057,7 +13057,7 @@ __metadata:
     "@google-cloud/firestore": "npm:^7.11.3"
     "@google-cloud/secret-manager": "npm:^6.1.0"
     "@types/jest": "npm:^30.0.0"
-    "@types/node": "npm:20"
+    "@types/node": "npm:^20.19.23"
     "@types/supertest": "npm:^2.0.15"
     "@typescript-eslint/eslint-plugin": "npm:^6.0.0"
     "@typescript-eslint/parser": "npm:^6.0.0"
