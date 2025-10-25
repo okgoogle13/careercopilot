@@ -43,10 +43,10 @@ jobs:
           elif [[ "${{ inputs.environment }}" == "production" ]]; then
             echo "GCP_PROJECT_ID=careercopilot-468811" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot" >> $GITHUB_ENV
-            # Using FIREBASE_SERVICE_ACCOUNT for production
-            echo "FIREBASE_SERVICE_ACCOUNT='${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'" >> $GITHUB_ENV
+            # Using FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 for production
+            echo "FIREBASE_SERVICE_ACCOUNT='${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 }}'" >> $GITHUB_ENV
             # Write the service account to a file for debugging
-            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > /tmp/firebase-service-account.json
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 }}" > /tmp/firebase-service-account.json
           fi
           
           # Set WIF provider and service account based on environment
