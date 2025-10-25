@@ -1,55 +1,71 @@
-import { Grid as MuiGrid, GridProps as MuiGridProps } from '@mui/material';
+import { Grid as MuiGrid, GridProps as MuiGridProps, gridClasses } from '@mui/material';
 import React from 'react';
 
-export type SizeMap = Partial<{
-  xs: number;
-  sm: number;
-  md: number;
-  lg: number;
-  xl: number;
-}>;
+type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type SizeMap = Partial<Record<Breakpoint, number>>;
 
-export interface GridCompatProps extends MuiGridProps {
+export interface GridCompatProps extends Omit<MuiGridProps, 'item' | 'container' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'> {
   size?: SizeMap;
-  xs?: unknown;
-  sm?: unknown;
-  md?: unknown;
-  lg?: unknown;
-  xl?: unknown;
-  // allow arbitrary responsive props (other migration-time props)
+  xs?: number;
+  sm?: number;
+  md?: number;
+  lg?: number;
+  xl?: number;
+  item?: boolean;
+  container?: boolean;
   [key: string]: unknown;
 }
 
 const GridCompat = React.forwardRef<HTMLDivElement, GridCompatProps>(
-  ({ size, children, ...props }, ref) => {
-    const sizeProps: Partial<Record<'xs' | 'sm' | 'md' | 'lg' | 'xl', number>> = {};
-    const s = size as SizeMap | undefined;
-    if (s) {
-      if (s.xs !== undefined) sizeProps.xs = s.xs;
-      if (s.sm !== undefined) sizeProps.sm = s.sm;
-      if (s.md !== undefined) sizeProps.md = s.md;
-      if (s.lg !== undefined) sizeProps.lg = s.lg;
-      if (s.xl !== undefined) sizeProps.xl = s.xl;
+  ({ size, children, className = '', item, container, ...props }, ref) => {
+    // Handle the new MUI Grid v2 sizing system
+    const sizeProps: Record<string, number> = {};
+    const breakpoints: Breakpoint[] = ['xs', 'sm', 'md', 'lg', 'xl'];
+    
+    // Process size prop if provided
+    if (size) {
+      Object.entries(size).forEach(([key, value]) => {
+        if (breakpoints.includes(key as Breakpoint) && typeof value === 'number') {
+          sizeProps[`${key}${value}`] = value;
+        }
+      });
     }
+    
+    // Process individual breakpoint props
+    breakpoints.forEach(bp => {
+      const value = props[bp];
+      if (typeof value === 'number') {
+        sizeProps[`${bp}${value}`] = value;
+        // Remove the prop to avoid duplicate props
+        delete props[bp];
+      }
+    });
 
-    // If responsive props already provided directly (xs, sm, md...), allow them via props (they will override size)
-    const combinedProps: MuiGridProps = {
-      ...sizeProps,
+    // Generate responsive class names
+    const responsiveClasses = Object.entries(sizeProps)
+      .map(([key, value]) => {
+        if (key.startsWith('xs')) return `MuiGrid-${key}`;
+        return `${gridClasses[`grid-${key}` as keyof typeof gridClasses]}`;
+      })
+      .join(' ');
+
+    // Handle item/container props
+    const gridProps: MuiGridProps = {
       ...props,
-    } as MuiGridProps;
+      ...(item && { item: true }),
+      ...(container && { container: true }),
+      className: `${className} ${responsiveClasses}`.trim(),
+    };
 
     return (
-      // forward ref to underlying MUI Grid
-      <MuiGrid
-        ref={ref as React.Ref<HTMLDivElement>}
-        {...(combinedProps as unknown as MuiGridProps)}
-      >
-        {children as React.ReactNode}
+      <MuiGrid ref={ref} {...gridProps}>
+        {children}
       </MuiGrid>
     );
   }
 );
 
+// Set display name for better debugging
 GridCompat.displayName = 'GridCompat';
 
 export default GridCompat;
