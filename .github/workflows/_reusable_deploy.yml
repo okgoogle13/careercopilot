@@ -57,6 +57,9 @@ jobs:
             mkdir -p frontend/dist
           }
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -68,7 +71,6 @@ jobs:
         run: |
           if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
             echo "Frontend dist is empty, building frontend..."
-            corepack enable
             yarn install --immutable
             yarn workspace careercopilot-frontend build
           else
