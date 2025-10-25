@@ -21,9 +21,13 @@ class PersonalCache:
         self.cache_dir = Path(cache_dir)
         self.default_ttl = timedelta(hours=24)
         self.backend = self  # For compatibility with cache middleware
-        self.CACHE_CONFIGS: Dict[str, Dict[str, Any]] = (
-            {}
-        )  # For compatibility with cache middleware
+        self.CACHE_CONFIGS: Dict[str, Dict[str, Any]] = {
+            "default": {
+                "ttl": int(self.default_ttl.total_seconds()),
+                "max_size": 1000,
+                "enabled": True,
+            }
+        }  # For compatibility with cache middleware
 
         # Create cache directory if it doesn't exist
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -185,7 +189,11 @@ class PersonalCache:
     async def get_cache_stats(self) -> Dict[str, Any]:
         """Get cache statistics"""
         try:
-            stats = {"total_files": 0, "categories": {}, "total_size_mb": 0}
+            stats: Dict[str, Any] = {
+                "total_files": 0,
+                "categories": {},
+                "total_size_mb": 0.0
+            }
 
             for category_dir in self.cache_dir.iterdir():
                 if category_dir.is_dir():
@@ -194,22 +202,23 @@ class PersonalCache:
                     file_count = len(files)
 
                     # Calculate size
-                    total_size = sum(f.stat().st_size for f in files if f.exists())
+                    total_size = sum(f.stat().st_size for f in files if f.exists())  # type: ignore
+                    size_mb = round(float(total_size) / (1024 * 1024), 2)
 
                     stats["categories"][category_name] = {
                         "files": file_count,
-                        "size_mb": round(total_size / (1024 * 1024), 2),
+                        "size_mb": size_mb,
                     }
 
                     stats["total_files"] += file_count
-                    stats["total_size_mb"] += stats["categories"][category_name]["size_mb"]
+                    stats["total_size_mb"] = float(stats["total_size_mb"]) + size_mb
 
             stats["total_size_mb"] = round(stats["total_size_mb"], 2)
             return stats
 
         except Exception as e:
             logger.error(f"Error getting cache stats: {e}")
-            return {}
+            return {"total_files": 0, "categories": {}, "total_size_mb": 0.0}
 
     # Convenience methods for specific cache categories
 

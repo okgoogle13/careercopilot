@@ -155,9 +155,8 @@ class AIConfigManager:
     """Central manager for all AI service configurations"""
 
     def __init__(self, config_file_path: Optional[str] = None) -> None:
-        self.config_file_path = str(
-            Path(config_file_path or os.getenv("AI_CONFIG_FILE", "config/ai_config.json"))
-        )
+        config_path = config_file_path or os.getenv("AI_CONFIG_FILE", "config/ai_config.json")
+        self.config_file_path = str(Path(config_path)) if config_path else "config/ai_config.json"
 
         self.models: Dict[str, ModelConfig] = {}
         self.credentials: Dict[AIProvider, ProviderCredentials] = {}
@@ -204,6 +203,7 @@ class AIConfigManager:
             models: Dict[str, ModelConfig] = {}
             credentials: Dict[AIProvider, ProviderCredentials] = {}
             services: Dict[str, AIServiceConfig] = {}
+            issues: List[str] = []  # Initialize issues list
 
             # Load models with type checking
             for name, model_data in config.get("models", {}).items():
@@ -533,62 +533,44 @@ class AIConfigManager:
             else []
         )
 
-    def validate_configuration(self) -> List[Dict[str, Any]]:
+    def validate_configuration(self) -> List[str]:
         """Validate the current configuration and return any issues"""
-        issues: List[Dict[str, Any]] = []
+        issues: List[str] = []
 
         # Check for missing required fields
         for model_name, model in self.models.items():
             if not model.name:
                 issues.append(
-                    {
-                        "type": "error",
-                        "message": f"Model {model_name} is missing required field 'name'",
-                    }
+                    f"Model {model_name} is missing required field 'name'"
                 )
             if not model.provider:
                 issues.append(
-                    {
-                        "type": "error",
-                        "message": f"Model {model_name} is missing required field 'provider'",
-                    }
+                    f"Model {model_name} is missing required field 'provider'"
                 )
 
         # Check for missing credentials for configured providers
         for provider in {model.provider for model in self.models.values()}:
             if provider not in self.credentials:
                 issues.append(
-                    {
-                        "type": "warning",
-                        "message": f"No credentials found for provider: {provider.value}",
-                    }
+                    f"No credentials found for provider: {provider.value}"
                 )
 
         # Check service configurations
         for service_name, service in self.services.items():
             if not service.primary_model:
                 issues.append(
-                    {
-                        "type": "error",
-                        "message": f"Service {service_name} is missing required field 'primary_model'",
-                    }
+                    f"Service {service_name} is missing required field 'primary_model'"
                 )
             elif service.primary_model not in self.models:
                 issues.append(
-                    {
-                        "type": "warning",
-                        "message": f"Primary model '{service.primary_model}' for service '{service_name}' not found in models",
-                    }
+                    f"Primary model '{service.primary_model}' for service '{service_name}' not found in models"
                 )
 
             # Check fallback models
             for model_name in service.fallback_models:
                 if model_name not in self.models:
                     issues.append(
-                        {
-                            "type": "warning",
-                            "message": f"Fallback model '{model_name}' for service '{service_name}' not found in models",
-                        }
+                        f"Fallback model '{model_name}' for service '{service_name}' not found in models"
                     )
 
         return issues
@@ -596,21 +578,24 @@ class AIConfigManager:
     def save_configuration(self, file_path: Optional[str] = None) -> bool:
         """Save current configuration to file"""
         try:
-            config: Dict[str, Any] = {
-                "models": {str(name): model.to_dict() for name, model in self.models.items()},
+            config_path = file_path or self.config_file_path
+            if not config_path:
+                raise ValueError("No configuration file path specified")
+                
+            save_path = Path(config_path)
+            save_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Prepare config dictionary
+            config = {
+                "models": {name: model.to_dict() for name, model in self.models.items()},
                 "credentials": {
-                    provider.value: creds.to_dict(include_secrets=False)
-                    for provider, creds in self.credentials.items()
+                    provider.value: cred.to_dict(include_secrets=False)
+                    for provider, cred in self.credentials.items()
                 },
-                "services": {
-                    str(name): service.to_dict() for name, service in self.services.items()
-                },
+                "services": {name: service.to_dict() for name, service in self.services.items()},
             }
 
-            save_path = Path(file_path or self.config_file_path)
-            save_path.parent.mkdir(parents=True, exist_ok=True)
-
-            with open(str(save_path), "w") as f:
+            with save_path.open("w") as f:
                 json.dump(config, f, indent=2, default=str)
 
             logger.info(f"Successfully saved AI configuration to {save_path}")
