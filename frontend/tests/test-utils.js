@@ -1,7 +1,8 @@
 // Utility functions for Playwright tests
 export async function checkServerAvailability(page) {
   try {
-    const response = await fetch('http://localhost:5173', { method: 'HEAD' });
+    const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';
+    const response = await fetch(baseURL, { method: 'HEAD' });
     return response.ok;
   } catch (error) {
     return false;
@@ -15,7 +16,7 @@ export function skipIfServerUnavailable(testFunction, testName) {
 
     if (!serverAvailable) {
       console.log(
-        `⚠️  Skipping test "${testName}" - Development server not running on localhost:5173`
+        `⚠️  Skipping test "${testName}" - Server not available at ${process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000'}`
       );
       console.log(`   To run this test, start the dev server with: npm run dev`);
       return; // Skip the test

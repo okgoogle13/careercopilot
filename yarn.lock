@@ -7279,7 +7279,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:20, @types/node@npm:^20.11.19":
+"@types/node@npm:^20.11.19":
   version: 20.19.21
   resolution: "@types/node@npm:20.19.21"
   dependencies:
@@ -7288,7 +7288,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.19.17":
+"@types/node@npm:^20.19.17, @types/node@npm:^20.19.23":
   version: 20.19.23
   resolution: "@types/node@npm:20.19.23"
   dependencies:
@@ -9053,21 +9053,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"baseline-browser-mapping@npm:^2.8.19":
+  version: 2.8.19
+  resolution: "baseline-browser-mapping@npm:2.8.19"
+  bin:
+    baseline-browser-mapping: dist/cli.js
+  checksum: 10c0/bfdc00501d691166a45303d7a83420ac90ae42619fc1625dcb7ef486b4a049237b37314aaa51e265b8c5083eecfd7064d9af9cb57b9f686bb7b306d7de45b0a3
+  languageName: node
+  linkType: hard
+
 "baseline-browser-mapping@npm:^2.8.3":
   version: 2.8.7
   resolution: "baseline-browser-mapping@npm:2.8.7"
   bin:
     baseline-browser-mapping: dist/cli.js
   checksum: 10c0/9d0929dbec02e065bf67e974f70023c0a5897755dc936ea11ab9383015eddfd32a032db9636cfbf214b767a7145d7674a4c071bba43d99a631cb793f0f4c2bab
-  languageName: node
-  linkType: hard
-
-"baseline-browser-mapping@npm:^2.8.9":
-  version: 2.8.19
-  resolution: "baseline-browser-mapping@npm:2.8.19"
-  bin:
-    baseline-browser-mapping: dist/cli.js
-  checksum: 10c0/bfdc00501d691166a45303d7a83420ac90ae42619fc1625dcb7ef486b4a049237b37314aaa51e265b8c5083eecfd7064d9af9cb57b9f686bb7b306d7de45b0a3
   languageName: node
   linkType: hard
 
@@ -9217,17 +9217,17 @@ __metadata:
   linkType: hard
 
 "browserslist@npm:^4.26.3":
-  version: 4.26.3
-  resolution: "browserslist@npm:4.26.3"
+  version: 4.27.0
+  resolution: "browserslist@npm:4.27.0"
   dependencies:
-    baseline-browser-mapping: "npm:^2.8.9"
-    caniuse-lite: "npm:^1.0.30001746"
-    electron-to-chromium: "npm:^1.5.227"
-    node-releases: "npm:^2.0.21"
-    update-browserslist-db: "npm:^1.1.3"
+    baseline-browser-mapping: "npm:^2.8.19"
+    caniuse-lite: "npm:^1.0.30001751"
+    electron-to-chromium: "npm:^1.5.238"
+    node-releases: "npm:^2.0.26"
+    update-browserslist-db: "npm:^1.1.4"
   bin:
     browserslist: cli.js
-  checksum: 10c0/3899ee3b7fd205ece4ffe4392697c3f2b120b68f3741ef1789212b4971771aee3f66cf37c5c3accf86ce59c0605b5980c0f132711abbcc9e62c132e6e0ee45f3
+  checksum: 10c0/395611e54374da9171cdbe7e3704ab426e0f1d622751392df6d6cbf60c539bf06cf2407e9dd769bc01ee2abca6a14af6509a2e0bbb448ba75a054db6c1840643
   languageName: node
   linkType: hard
 
@@ -9417,7 +9417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001746":
+"caniuse-lite@npm:^1.0.30001751":
   version: 1.0.30001751
   resolution: "caniuse-lite@npm:1.0.30001751"
   checksum: 10c0/c3f2d448f3569004ace160fd9379ea0def8e7a7bc6e65611baadb57d24e1f418258647a6210e46732419f5663e2356c22aa841f92449dd3849eb6471bb7ad592
@@ -9501,6 +9501,7 @@ __metadata:
     styled-components: "npm:^5.3.1"
     terser: "npm:^5.44.0"
     ts-jest: "npm:^29.1.2"
+    ts-morph: "npm:^27.0.0"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.1.4"
     vite-tsconfig-paths: "npm:^4.3.2"
@@ -10965,10 +10966,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.5.227":
-  version: 1.5.238
-  resolution: "electron-to-chromium@npm:1.5.238"
-  checksum: 10c0/e5bd21644d57c6310824e3d3328f2510778bb6fbc6f07fc7f8ec67b63c741ff30612e76d5d073e2d836b44742a6bf2a3fcda4132d28b3b078f2188a0fc864e40
+"electron-to-chromium@npm:^1.5.238":
+  version: 1.5.239
+  resolution: "electron-to-chromium@npm:1.5.239"
+  checksum: 10c0/59fa7d4511be09f7808a9aa891ccf3c2d0f7817c48d7548be198a75c7ffb2df7d192c22b2b5b613b30a4b6f3bf0b2be84700f86480af81f1c2c12e0401990234
   languageName: node
   linkType: hard
 
@@ -13056,7 +13057,7 @@ __metadata:
     "@google-cloud/firestore": "npm:^7.11.3"
     "@google-cloud/secret-manager": "npm:^6.1.0"
     "@types/jest": "npm:^30.0.0"
-    "@types/node": "npm:20"
+    "@types/node": "npm:^20.19.23"
     "@types/supertest": "npm:^2.0.15"
     "@typescript-eslint/eslint-plugin": "npm:^6.0.0"
     "@typescript-eslint/parser": "npm:^6.0.0"
@@ -17228,6 +17229,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-releases@npm:^2.0.26":
+  version: 2.0.26
+  resolution: "node-releases@npm:2.0.26"
+  checksum: 10c0/033539b947ad329e0c996e563a97cdf295163ecbfd500edc3e5bc19d1a854d9515fcaae3967ac07243aff5378f572f18b36c5f50c3aa1fc3aac43fc9c4924e4d
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^8.0.0":
   version: 8.1.0
   resolution: "nopt@npm:8.1.0"
@@ -21146,6 +21154,20 @@ __metadata:
   bin:
     update-browserslist-db: cli.js
   checksum: 10c0/682e8ecbf9de474a626f6462aa85927936cdd256fe584c6df2508b0df9f7362c44c957e9970df55dfe44d3623807d26316ea2c7d26b80bb76a16c56c37233c32
+  languageName: node
+  linkType: hard
+
+"update-browserslist-db@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "update-browserslist-db@npm:1.1.4"
+  dependencies:
+    escalade: "npm:^3.2.0"
+    picocolors: "npm:^1.1.1"
+  peerDependencies:
+    browserslist: ">= 4.21.0"
+  bin:
+    update-browserslist-db: cli.js
+  checksum: 10c0/db0c9aaecf1258a6acda5e937fc27a7996ccca7a7580a1b4aa8bba6a9b0e283e5e65c49ebbd74ec29288ef083f1b88d4da13e3d4d326c1e5fc55bf72d7390702
   languageName: node
   linkType: hard
 
