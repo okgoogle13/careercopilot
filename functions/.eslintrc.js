@@ -1,42 +1,35 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: "./tsconfig.json",
-    tsconfigRootDir: __dirname,
-    ecmaVersion: 2021,
-    sourceType: "module",
-  },
-  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  plugins: ["@typescript-eslint"],
-  ignorePatterns: ["lib/**/*", "node_modules/**/*", "*.js", "eslint.config.js", "test/**/*"],
+  root: true,
   env: {
-    node: true,
+    browser: true,
     es2021: true,
-    jest: true,
+    node: true,
   },
-  globals: {
-    describe: "readonly",
-    it: "readonly",
-    expect: "readonly",
-    beforeAll: "readonly",
-    afterAll: "readonly",
-    beforeEach: "readonly",
-    afterEach: "readonly",
-    jest: "readonly",
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 12,
+    sourceType: 'module',
+  },
+  plugins: ['react', '@typescript-eslint', 'prettier'],
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
   rules: {
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_",
-        caughtErrorsIgnorePattern: "^_",
-      },
-    ],
-    "@typescript-eslint/no-explicit-any": "warn",
-    "object-curly-spacing": ["error", "never"],
-    "prefer-const": "error",
-    "no-var": "error",
+    'prettier/prettier': 'error',
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn', { 'argsIgnorePattern': '^_' }],
+    'react/prop-types': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };
