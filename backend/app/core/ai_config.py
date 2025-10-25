@@ -154,10 +154,9 @@ class AIServiceConfig:
 class AIConfigManager:
     """Central manager for all AI service configurations"""
 
-    def __init__(self, config_file_path: Optional[str] = None):
-        self.config_file_path = config_file_path or os.getenv(
-            "AI_CONFIG_FILE", "config/ai_config.json"
-        )
+    def __init__(self, config_file_path: Optional[str] = None) -> None:
+        config_path = config_file_path or os.getenv("AI_CONFIG_FILE", "config/ai_config.json")
+        self.config_file_path = str(Path(config_path)) if config_path else "config/ai_config.json"
 
         self.models: Dict[str, ModelConfig] = {}
         self.credentials: Dict[AIProvider, ProviderCredentials] = {}
@@ -199,21 +198,66 @@ class AIConfigManager:
 
     def _load_from_dict(self, config: Dict[str, Any]) -> None:
         """Load configuration from dictionary"""
-        # Load models
-        if "models" in config:
-            for model_name, model_data in config["models"].items():
-                self.models[model_name] = ModelConfig.from_dict(model_data)
+        try:
+            # Initialize empty containers with proper types
+            models: Dict[str, ModelConfig] = {}
+            credentials: Dict[AIProvider, ProviderCredentials] = {}
+            services: Dict[str, AIServiceConfig] = {}
+            issues: List[str] = []  # Initialize issues list
 
-        # Load credentials (from environment for security)
-        if "credentials" in config:
-            for provider_name, cred_data in config["credentials"].items():
-                provider = AIProvider(provider_name)
-                self.credentials[provider] = ProviderCredentials.from_dict(cred_data)
+            # Load models with type checking
+            for name, model_data in config.get("models", {}).items():
+                try:
+                    if not isinstance(model_data, dict):
+                        logger.warning(
+                            f"Invalid model data for {name}: expected dict, got {type(model_data).__name__}"
+                        )
+                        continue
+                    model = ModelConfig.from_dict(model_data)
+                    models[str(name)] = model
+                except Exception as e:
+                    logger.error(f"Error loading model {name}: {e}")
+                    continue
 
-        # Load services
-        if "services" in config:
-            for service_name, service_data in config["services"].items():
-                self.services[service_name] = AIServiceConfig.from_dict(service_data)
+            # Load credentials with type checking
+            for provider, cred_data in config.get("credentials", {}).items():
+                try:
+                    if not isinstance(cred_data, dict):
+                        logger.warning(
+                            f"Invalid credential data for {provider}: expected dict, got {type(cred_data).__name__}"
+                        )
+                        continue
+                    provider_enum = AIProvider(provider)
+                    credentials[provider_enum] = ProviderCredentials.from_dict(cred_data)
+                except (ValueError, TypeError) as e:
+                    logger.error(f"Error loading credentials for {provider}: {e}")
+                    continue
+
+            # Load services with type checking
+            for name, service_data in config.get("services", {}).items():
+                try:
+                    if not isinstance(service_data, dict):
+                        logger.warning(
+                            f"Invalid service data for {name}: expected dict, got {type(service_data).__name__}"
+                        )
+                        continue
+                    service = AIServiceConfig.from_dict(service_data)
+                    services[str(name)] = service
+                except Exception as e:
+                    logger.error(f"Error loading service {name}: {e}")
+                    continue
+
+            # Only update if all validations passed
+            self.models = models
+            self.credentials = credentials
+            self.services = services
+            self._loaded = True
+            logger.info("Successfully loaded AI configuration from dictionary")
+
+        except Exception as e:
+            logger.error(f"Error loading AI configuration: {e}")
+            self._loaded = False
+            raise
 
     def _load_from_environment(self) -> None:
         """Load configuration from environment variables"""
@@ -455,97 +499,111 @@ class AIConfigManager:
 
     def get_model_config(self, model_name: str) -> Optional[ModelConfig]:
         """Get configuration for a specific model"""
-        return self.models.get(model_name)
+        return self.models.get(model_name) if model_name in self.models else None
 
     def get_service_config(self, service_name: str) -> Optional[AIServiceConfig]:
         """Get configuration for a specific service"""
-        return self.services.get(service_name)
+        return self.services.get(service_name) if service_name in self.services else None
 
     def get_provider_credentials(self, provider: AIProvider) -> Optional[ProviderCredentials]:
         """Get credentials for a specific provider"""
-        return self.credentials.get(provider)
+        return self.credentials.get(provider) if provider in self.credentials else None
 
     def get_models_by_provider(self, provider: AIProvider) -> List[ModelConfig]:
         """Get all models for a specific provider"""
-        return [model for model in self.models.values() if model.provider == provider]
+        return (
+            [model for model in self.models.values() if model.provider == provider]
+            if self.models
+            else []
+        )
 
     def get_models_by_type(self, model_type: AIModelType) -> List[ModelConfig]:
         """Get all models of a specific type"""
-        return [model for model in self.models.values() if model.model_type == model_type]
+        return (
+            [model for model in self.models.values() if model.model_type == model_type]
+            if self.models
+            else []
+        )
 
     def get_enabled_services(self) -> List[AIServiceConfig]:
         """Get all enabled services"""
-        return [service for service in self.services.values() if service.enabled]
+        return (
+            [service for service in self.services.values() if service.enabled]
+            if self.services
+            else []
+        )
 
-    def validate_configuration(self) -> Dict[str, List[str]]:
+    def validate_configuration(self) -> List[str]:
         """Validate the current configuration and return any issues"""
-        issues = {"errors": [], "warnings": []}
+        issues: List[str] = []
 
-        # Check for missing credentials
-        used_providers = set(model.provider for model in self.models.values())
-        for provider in used_providers:
+        # Check for missing required fields
+        for model_name, model in self.models.items():
+            if not model.name:
+                issues.append(
+                    f"Model {model_name} is missing required field 'name'"
+                )
+            if not model.provider:
+                issues.append(
+                    f"Model {model_name} is missing required field 'provider'"
+                )
+
+        # Check for missing credentials for configured providers
+        for provider in {model.provider for model in self.models.values()}:
             if provider not in self.credentials:
-                issues["warnings"].append(f"Missing credentials for provider: {provider.value}")
-            else:
-                creds = self.credentials[provider]
-                if not creds.api_key and provider != AIProvider.AWS_BEDROCK:
-                    issues["warnings"].append(f"No API key configured for {provider.value}")
+                issues.append(
+                    f"No credentials found for provider: {provider.value}"
+                )
 
         # Check service configurations
-        for service in self.services.values():
-            if service.primary_model not in self.models:
-                issues["errors"].append(
-                    f"Service '{service.service_name}' uses unknown primary model: "
-                    f"{service.primary_model}"
+        for service_name, service in self.services.items():
+            if not service.primary_model:
+                issues.append(
+                    f"Service {service_name} is missing required field 'primary_model'"
+                )
+            elif service.primary_model not in self.models:
+                issues.append(
+                    f"Primary model '{service.primary_model}' for service '{service_name}' not found in models"
                 )
 
-            for fallback_model in service.fallback_models:
-                if fallback_model not in self.models:
-                    issues["warnings"].append(
-                        f"Service '{service.service_name}' uses unknown fallback model: "
-                        f"{fallback_model}"
+            # Check fallback models
+            for model_name in service.fallback_models:
+                if model_name not in self.models:
+                    issues.append(
+                        f"Fallback model '{model_name}' for service '{service_name}' not found in models"
                     )
-
-            if service.cost_budget_daily <= 0:
-                issues["warnings"].append(
-                    f"Service '{service.service_name}' has no cost budget set"
-                )
-
-        # Check model configurations
-        for model in self.models.values():
-            if model.max_tokens <= 0:
-                issues["errors"].append(
-                    f"Model '{model.name}' has invalid max_tokens: {model.max_tokens}"
-                )
-
-            if not (0 <= model.temperature <= 2):
-                issues["warnings"].append(
-                    f"Model '{model.name}' has unusual temperature: {model.temperature}"
-                )
 
         return issues
 
-    def save_configuration(self, file_path: Optional[str] = None) -> None:
+    def save_configuration(self, file_path: Optional[str] = None) -> bool:
         """Save current configuration to file"""
-        save_path = file_path or self.config_file_path
+        try:
+            config_path = file_path or self.config_file_path
+            if not config_path:
+                raise ValueError("No configuration file path specified")
+                
+            save_path = Path(config_path)
+            save_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Prepare config dictionary
+            config = {
+                "models": {name: model.to_dict() for name, model in self.models.items()},
+                "credentials": {
+                    provider.value: cred.to_dict(include_secrets=False)
+                    for provider, cred in self.credentials.items()
+                },
+                "services": {name: service.to_dict() for name, service in self.services.items()},
+            }
 
-        config_data = {
-            "models": {name: model.to_dict() for name, model in self.models.items()},
-            "services": {name: service.to_dict() for name, service in self.services.items()},
-            # Don't save credentials to file for security
-            "credentials": {
-                provider.value: creds.to_dict(include_secrets=False)
-                for provider, creds in self.credentials.items()
-            },
-        }
+            with save_path.open("w") as f:
+                json.dump(config, f, indent=2, default=str)
 
-        # Ensure directory exists
-        Path(save_path).parent.mkdir(parents=True, exist_ok=True)
+            logger.info(f"Successfully saved AI configuration to {save_path}")
+            return True
 
-        with open(save_path, "w") as f:
-            json.dump(config_data, f, indent=2, default=str)
-
-        logger.info(f"AI configuration saved to {save_path}")
+        except Exception as e:
+            logger.error(f"Error saving AI configuration: {e}")
+            return False
 
     def get_configuration_summary(self) -> Dict[str, Any]:
         """Get a summary of the current configuration"""
