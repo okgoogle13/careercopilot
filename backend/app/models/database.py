@@ -5,12 +5,40 @@ Supports both PostgreSQL (production) and SQLite (development).
 
 import uuid
 from datetime import datetime
+from typing import Any, Dict, List, Optional, Type, TypeVar
 
 from sqlalchemy import JSON, Boolean, Column, DateTime, Float, ForeignKey, Integer, String, Text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declared_attr
+from sqlalchemy.orm import declarative_base, relationship
 
-Base = declarative_base()
+# Create a generic type variable that can be 'Base'
+T = TypeVar("T", bound="Base")
+
+
+# Create a base class with proper type hints
+class Base:
+    """Base class for all database models"""
+
+    @declared_attr
+    def __tablename__(cls) -> str:
+        """
+        Generate __tablename__ automatically.
+        Convert CamelCase class name to snake_case table name.
+        """
+        return "".join(["_" + c.lower() if c.isupper() else c for c in cls.__name__]).lstrip("_")
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert model instance to dictionary"""
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
+
+    @classmethod
+    def from_dict(cls: Type[T], data: Dict[str, Any]) -> T:
+        """Create model instance from dictionary"""
+        return cls(**{key: value for key, value in data.items() if key in cls.__table__.columns})
+
+
+# Create declarative base with our custom Base class
+Base = declarative_base(cls=Base)
 
 
 class User(Base):
@@ -18,24 +46,24 @@ class User(Base):
 
     __tablename__ = "users"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    email = Column(String(255), unique=True, nullable=False)
-    name = Column(String(255), nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    id: str = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    email: str = Column(String(255), unique=True, nullable=False)
+    name: str = Column(String(255), nullable=False)
+    created_at: datetime = Column(DateTime, default=datetime.utcnow)
+    updated_at: datetime = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # Career transition context
-    career_transition_from = Column(String(100), nullable=True)
-    career_transition_to = Column(String(100), nullable=True)
-    location = Column(String(100), nullable=True)
-    target_roles = Column(JSON, default=list)  # List of target roles
-    salary_range = Column(JSON, default=dict)  # {"min": 60000, "max": 90000}
+    career_transition_from: Optional[str] = Column(String(100), nullable=True)
+    career_transition_to: Optional[str] = Column(String(100), nullable=True)
+    location: Optional[str] = Column(String(100), nullable=True)
+    target_roles: List[str] = Column(JSON, default=list)  # List of target roles
+    salary_range: Dict[str, int] = Column(JSON, default=dict)  # {"min": 60000, "max": 90000}
 
     # Relationships
-    jobs = relationship("Job", back_populates="user")
-    applications = relationship("Application", back_populates="user")
-    ai_interactions = relationship("AIInteraction", back_populates="user")
-    agent_sessions = relationship("AgentSession", back_populates="user")
+    jobs: List["Job"] = relationship("Job", back_populates="user")
+    applications: List["Application"] = relationship("Application", back_populates="user")
+    ai_interactions: List["AIInteraction"] = relationship("AIInteraction", back_populates="user")
+    agent_sessions: List["AgentSession"] = relationship("AgentSession", back_populates="user")
 
 
 class Job(Base):
@@ -43,35 +71,50 @@ class Job(Base):
 
     __tablename__ = "jobs"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    id: str = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id: str = Column(String, ForeignKey("users.id"), nullable=False)
 
     # Job details
-    title = Column(String(255), nullable=False)
-    company = Column(String(255), nullable=False)
-    location = Column(String(255), nullable=True)
-    description = Column(Text, nullable=True)
-    url = Column(String(500), nullable=True)
-    source = Column(String(100), nullable=True)  # seek.com.au, linkedin, etc.
-
-    # Salary information
-    salary_min = Column(Integer, nullable=True)
-    salary_max = Column(Integer, nullable=True)
-    salary_text = Column(String(255), nullable=True)
+    title: str = Column(String(255), nullable=False)
+    company: str = Column(String(255), nullable=False)
+    location: Optional[str] = Column(String(255), nullable=True)
+    description: Optional[str] = Column(Text, nullable=True)
+    requirements: List[str] = Column(JSON, default=list)
+    preferred_qualifications: List[str] = Column(JSON, default=list)
+    salary_range: Dict[str, int] = Column(JSON, default=dict)
+    job_type: Optional[str] = Column(
+        String(50), nullable=True
+    )  # full-time, part-time, contract, etc.
+    experience_level: Optional[str] = Column(
+        String(50), nullable=True
+    )  # entry, mid, senior, executive
+    remote_ok: bool = Column(Boolean, default=False)
+    application_url: Optional[str] = Column(String(500), nullable=True)
+    application_deadline: Optional[datetime] = Column(DateTime, nullable=True)
+    is_active: bool = Column(Boolean, default=True)
+    source: Optional[str] = Column(
+        String(100), nullable=True, index=True
+    )  # Where the job was scraped from
+    source_id: Optional[str] = Column(
+        String(255), nullable=True, index=True
+    )  # External ID from source
+    posted_date: Optional[datetime] = Column(DateTime, nullable=True)
+    last_updated: datetime = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    metadata: Dict[str, Any] = Column(JSON, default=dict)  # Additional metadata
+    url: Optional[str] = Column(String(500), nullable=True)
+    salary_min: Optional[int] = Column(Integer, nullable=True)
+    salary_max: Optional[int] = Column(Integer, nullable=True)
+    salary_text: Optional[str] = Column(String(255), nullable=True)
 
     # AI analysis
-    match_score = Column(Float, nullable=True)  # 0-1 compatibility score
-    skill_requirements = Column(JSON, default=list)
-    analysis_summary = Column(Text, nullable=True)
+    match_score: Optional[float] = Column(Float, nullable=True)  # 0-1 compatibility score
+    skill_requirements: List[str] = Column(JSON, default=list)
+    analysis_summary: Optional[str] = Column(Text, nullable=True)
 
     # Status tracking
-    discovered_at = Column(DateTime, default=datetime.utcnow)
-    last_analyzed = Column(DateTime, nullable=True)
-    is_active = Column(Boolean, default=True)
-
-    # Relationships
-    user = relationship("User", back_populates="jobs")
-    applications = relationship("Application", back_populates="job")
+    discovered_at: datetime = Column(DateTime, default=datetime.utcnow)
+    last_analyzed: Optional[datetime] = Column(DateTime, nullable=True)
+    is_active: bool = Column(Boolean, default=True)
 
 
 class Application(Base):
@@ -79,9 +122,9 @@ class Application(Base):
 
     __tablename__ = "applications"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String, ForeignKey("users.id"), nullable=False)
-    job_id = Column(String, ForeignKey("jobs.id"), nullable=False)
+    id: str = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id: str = Column(String, ForeignKey("users.id"), nullable=False)
+    job_id: str = Column(String, ForeignKey("jobs.id"), nullable=False)
 
     # Application status
     status = Column(
@@ -116,8 +159,8 @@ class AIInteraction(Base):
 
     __tablename__ = "ai_interactions"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String, ForeignKey("users.id"), nullable=True)
+    id: str = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id: Optional[str] = Column(String, ForeignKey("users.id"), nullable=True)
 
     # Interaction details
     operation_type = Column(String(100), nullable=False)  # salary_intelligence, skills_trends, etc.
@@ -147,8 +190,8 @@ class AgentSession(Base):
 
     __tablename__ = "agent_sessions"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    id: str = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id: str = Column(String, ForeignKey("users.id"), nullable=False)
 
     # Session details
     session_type = Column(
@@ -179,7 +222,7 @@ class MarketAnalysis(Base):
 
     __tablename__ = "market_analysis"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id: str = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
 
     # Analysis scope
     field = Column(String(100), nullable=False)  # social_work, finance, etc.
@@ -214,9 +257,9 @@ class Cache(Base):
 
     __tablename__ = "cache"
 
-    key = Column(String(255), primary_key=True)
-    value = Column(Text, nullable=False)  # JSON serialized data
-    operation_type = Column(String(100), nullable=False)
+    key: str = Column(String(255), primary_key=True)
+    value: str = Column(Text, nullable=False)  # JSON serialized data
+    operation_type: str = Column(String(100), nullable=False)
 
     # TTL management
     created_at = Column(DateTime, default=datetime.utcnow)
