@@ -130,6 +130,33 @@ jobs:
       - name: Run checks
         run: yarn workspace careercopilot-frontend test
 
+  frontend-build:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.frontend == 'true'
+    needs: [changes, frontend]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # v4.1.7
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # v4.0.3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Build frontend
+        run: yarn workspace careercopilot-frontend build
+      - name: Upload frontend build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 1
+
   backend-static-checks:
     name: Backend Static Checks
     runs-on: ubuntu-latest
@@ -301,7 +328,7 @@ jobs:
     name: E2E Tests and Frontend Build
     runs-on: ubuntu-latest
     timeout-minutes: 25
-    needs: [changes, frontend, backend-tests]
+    needs: [changes, frontend-build, backend-tests]
     if: |
       (github.event_name == 'workflow_dispatch' && github.event.inputs.run_e2e_tests == 'true') ||
       (needs.changes.outputs.e2e == 'true')
@@ -392,6 +419,7 @@ jobs:
         changes,
         codeql,
         frontend,
+        frontend-build,
         backend-static-checks,
         backend-tests,
         functions,
@@ -407,7 +435,7 @@ jobs:
           echo " Checking all test results..."
           if [[ "${{ needs.codeql.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.frontend.result }}" == "failure" ]]; then exit 1; fi
-          # Removed frontend-build check as it no longer exists
+          if [[ "${{ needs.frontend-build.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-static-checks.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.backend-tests.result }}" == "failure" ]]; then exit 1; fi
           if [[ "${{ needs.functions.result }}" == "failure" ]]; then exit 1; fi
@@ -429,6 +457,7 @@ jobs:
             if ('${{ needs.e2e-tests.result }}' === 'failure') failedJobs.push('E2E Tests');
             if ('${{ needs.test-firestore-rules.result }}' === 'failure') failedJobs.push('Firestore Rules Tests');
             const failedList = failedJobs.map(job => `-  ${job}`).join('\n');
+            const comment = `**Quality Gate Failed**\n\nThe following test suites failed:\n\n${failedList}\n\nPlease review the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and fix the issues.`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -439,12 +468,12 @@ jobs:
   build-and-push-backend:
     name: Build and Push Backend Image
     runs-on: ubuntu-latest
-    needs: [changes, frontend, backend-tests, backend-static-checks]
+    needs: [changes, frontend-build, backend-tests, backend-static-checks]
     # Build if frontend passes, allow backend tests to fail
     if: |
       always() &&
       !cancelled() &&
-      (needs.frontend.result == 'success' || needs.frontend.result == 'skipped') &&
+      (needs.frontend-build.result == 'success' || needs.frontend-build.result == 'skipped') &&
       (needs.backend-static-checks.result == 'success' || needs.backend-static-checks.result == 'skipped') &&
       (github.event_name == 'workflow_dispatch' || needs.changes.outputs.backend == 'true' || needs.changes.outputs.frontend == 'true') &&
       (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
