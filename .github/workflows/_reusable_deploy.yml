@@ -57,8 +57,7 @@ jobs:
             mkdir -p frontend/dist
           }
 
-      - name: Setup Node.js for frontend build
-        if: hashFiles('frontend/dist/**') == ''
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
