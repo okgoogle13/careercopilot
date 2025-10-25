@@ -545,26 +545,26 @@ gcloud builds submit --config=cloudbuild.yaml
 ### Deployment Approval
 
 - [ ] **Technical Lead Approval**
-  - Name: ******\_\_\_\_******
-  - Date: ******\_\_\_\_******
-  - Signature: ******\_\_\_\_******
+  - Name: **\*\***\_\_\_\_**\*\***
+  - Date: **\*\***\_\_\_\_**\*\***
+  - Signature: **\*\***\_\_\_\_**\*\***
 
 - [ ] **Product Owner Approval**
-  - Name: ******\_\_\_\_******
-  - Date: ******\_\_\_\_******
-  - Signature: ******\_\_\_\_******
+  - Name: **\*\***\_\_\_\_**\*\***
+  - Date: **\*\***\_\_\_\_**\*\***
+  - Signature: **\*\***\_\_\_\_**\*\***
 
 - [ ] **DevOps Lead Approval**
-  - Name: ******\_\_\_\_******
-  - Date: ******\_\_\_\_******
-  - Signature: ******\_\_\_\_******
+  - Name: **\*\***\_\_\_\_**\*\***
+  - Date: **\*\***\_\_\_\_**\*\***
+  - Signature: **\*\***\_\_\_\_**\*\***
 
 ### Post-Deployment Confirmation
 
 - [ ] **Deployment Completed Successfully**
-  - Date/Time: ******\_\_\_\_******
-  - Deployed By: ******\_\_\_\_******
-  - Version/Commit: ******\_\_\_\_******
+  - Date/Time: **\*\***\_\_\_\_**\*\***
+  - Deployed By: **\*\***\_\_\_\_**\*\***
+  - Version/Commit: **\*\***\_\_\_\_**\*\***
 
 - [ ] **Initial Monitoring Confirmed**
   - All systems operational: ✅

@@ -20,6 +20,7 @@
 ### 1️⃣ AWS Setup (5 min)
 
 **Verify Gmail:**
+
 ```
 1. AWS Console → SES → Verified identities
 2. Create identity → Email address → Enter your Gmail
@@ -27,6 +28,7 @@
 ```
 
 **Create IAM User:**
+
 ```
 1. AWS Console → IAM → Users → Create user
 2. Username: careercopilot-ses-user
@@ -43,6 +45,7 @@
 ```
 
 **Enter when prompted:**
+
 - AWS Access Key ID (from .csv)
 - AWS Secret Access Key (from .csv)
 - SES Sender Email (your Gmail)
@@ -103,6 +106,7 @@ pip-compile backend/requirements.in
 ## What You Need from AWS
 
 After creating IAM user:
+
 - ✅ **Access Key ID**: 20 characters (e.g., `AKIAIOSFODNN7EXAMPLE`)
 - ✅ **Secret Access Key**: 40 characters (e.g., `wJalrXUt...`)
 - ✅ **Sender Email**: Your verified Gmail
@@ -112,6 +116,7 @@ After creating IAM user:
 ## Troubleshooting
 
 **Email not sending?**
+
 ```
 1. Check AWS SES → Verified identities (must show "Verified")
 2. Verify credentials are correct in Secret Manager
@@ -120,6 +125,7 @@ After creating IAM user:
 ```
 
 **"Access Denied" error?**
+
 ```
 1. IAM user needs AmazonSESFullAccess policy
 2. Regenerate access key if needed
@@ -129,11 +135,11 @@ After creating IAM user:
 
 ## Cost
 
-| Item | Cost |
-|------|------|
+| Item    | Cost                        |
+| ------- | --------------------------- |
 | AWS SES | **FREE** (62k emails/month) |
-| Gmail | **FREE** |
-| Total | **$0/month** |
+| Gmail   | **FREE**                    |
+| Total   | **$0/month**                |
 
 ---
 

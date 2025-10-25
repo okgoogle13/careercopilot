@@ -5,13 +5,16 @@ module.exports = {
   testPathIgnorePatterns: ["/node_modules/", "/__tests__/rules/"],
   moduleFileExtensions: ["ts", "js", "json"],
   transform: {
-    "^.+\\.tsx?$": ["ts-jest", {
-      tsconfig: {
-        types: ["jest", "node"],
-        esModuleInterop: true,
-        allowSyntheticDefaultImports: true,
+    "^.+\\.tsx?$": [
+      "ts-jest",
+      {
+        tsconfig: {
+          types: ["jest", "node"],
+          esModuleInterop: true,
+          allowSyntheticDefaultImports: true,
+        },
       },
-    }],
+    ],
   },
   globals: {
     "ts-jest": {

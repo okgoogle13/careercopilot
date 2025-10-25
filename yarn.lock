@@ -9501,6 +9501,7 @@ __metadata:
     styled-components: "npm:^5.3.1"
     terser: "npm:^5.44.0"
     ts-jest: "npm:^29.1.2"
+    ts-morph: "npm:^27.0.0"
     typescript: "npm:^5.3.3"
     vite: "npm:^5.1.4"
     vite-tsconfig-paths: "npm:^4.3.2"
