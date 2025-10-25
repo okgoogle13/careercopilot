@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, FileRejection, FileError } from 'react-dropzone';
 import { Upload, InsertDriveFile, Close, HourglassEmpty } from '@mui/icons-material';
 import { Button, LinearProgress, Stack, Box, Typography, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -62,10 +62,10 @@ export const DocumentUploadDropzone: React.FC<DocumentUploadDropzoneProps> = ({
   const [isUploading, setIsUploading] = useState(false);
 
   const onDrop = useCallback(
-    (acceptedFiles: File[], fileRejections: any[]) => {
+    (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       if (fileRejections.length > 0) {
         const rejectedMessages = fileRejections.map(({ file, errors }) => {
-          const messages = errors.map((e: any) => {
+          const messages = errors.map((e: FileError) => {
             if (e.code === 'file-too-large') return 'File is too large';
             if (e.code === 'file-invalid-type') return 'Invalid file type';
             return e.message;

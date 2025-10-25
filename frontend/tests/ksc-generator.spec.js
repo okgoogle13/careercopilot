@@ -43,7 +43,9 @@ test.describe('KSC Generator Page E2E Flow', () => {
 
     // 5. Assert that the results are displayed
     await expect(page.getByRole('heading', { name: 'Generated Responses' })).toBeVisible();
-    await expect(page.getByText('This is an E2E mock response for the Playwright criterion.')).toBeVisible();
+    await expect(
+      page.getByText('This is an E2E mock response for the Playwright criterion.')
+    ).toBeVisible();
   });
 
   test('should show a validation error if a field is missing', async ({ page }) => {
