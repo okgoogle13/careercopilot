@@ -12,35 +12,30 @@ from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.orm import declarative_base, relationship
 
 # Create a generic type variable that can be 'Base'
-T = TypeVar('T', bound='Base')
+T = TypeVar("T", bound="Base")
+
 
 # Create a base class with proper type hints
 class Base:
     """Base class for all database models"""
-    
+
     @declared_attr
     def __tablename__(cls) -> str:
         """
         Generate __tablename__ automatically.
         Convert CamelCase class name to snake_case table name.
         """
-        return ''.join(['_'+c.lower() if c.isupper() else c for c in cls.__name__]).lstrip('_')
+        return "".join(["_" + c.lower() if c.isupper() else c for c in cls.__name__]).lstrip("_")
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert model instance to dictionary"""
-        return {
-            column.name: getattr(self, column.name) 
-            for column in self.__table__.columns
-        }
+        return {column.name: getattr(self, column.name) for column in self.__table__.columns}
 
     @classmethod
     def from_dict(cls: Type[T], data: Dict[str, Any]) -> T:
         """Create model instance from dictionary"""
-        return cls(**{
-            key: value 
-            for key, value in data.items() 
-            if key in cls.__table__.columns
-        })
+        return cls(**{key: value for key, value in data.items() if key in cls.__table__.columns})
+
 
 # Create declarative base with our custom Base class
 Base = declarative_base(cls=Base)
@@ -65,10 +60,10 @@ class User(Base):
     salary_range: Dict[str, int] = Column(JSON, default=dict)  # {"min": 60000, "max": 90000}
 
     # Relationships
-    jobs: List['Job'] = relationship("Job", back_populates="user")
-    applications: List['Application'] = relationship("Application", back_populates="user")
-    ai_interactions: List['AIInteraction'] = relationship("AIInteraction", back_populates="user")
-    agent_sessions: List['AgentSession'] = relationship("AgentSession", back_populates="user")
+    jobs: List["Job"] = relationship("Job", back_populates="user")
+    applications: List["Application"] = relationship("Application", back_populates="user")
+    ai_interactions: List["AIInteraction"] = relationship("AIInteraction", back_populates="user")
+    agent_sessions: List["AgentSession"] = relationship("AgentSession", back_populates="user")
 
 
 class Job(Base):
@@ -87,14 +82,22 @@ class Job(Base):
     requirements: List[str] = Column(JSON, default=list)
     preferred_qualifications: List[str] = Column(JSON, default=list)
     salary_range: Dict[str, int] = Column(JSON, default=dict)
-    job_type: Optional[str] = Column(String(50), nullable=True)  # full-time, part-time, contract, etc.
-    experience_level: Optional[str] = Column(String(50), nullable=True)  # entry, mid, senior, executive
+    job_type: Optional[str] = Column(
+        String(50), nullable=True
+    )  # full-time, part-time, contract, etc.
+    experience_level: Optional[str] = Column(
+        String(50), nullable=True
+    )  # entry, mid, senior, executive
     remote_ok: bool = Column(Boolean, default=False)
     application_url: Optional[str] = Column(String(500), nullable=True)
     application_deadline: Optional[datetime] = Column(DateTime, nullable=True)
     is_active: bool = Column(Boolean, default=True)
-    source: Optional[str] = Column(String(100), nullable=True, index=True)  # Where the job was scraped from
-    source_id: Optional[str] = Column(String(255), nullable=True, index=True)  # External ID from source
+    source: Optional[str] = Column(
+        String(100), nullable=True, index=True
+    )  # Where the job was scraped from
+    source_id: Optional[str] = Column(
+        String(255), nullable=True, index=True
+    )  # External ID from source
     posted_date: Optional[datetime] = Column(DateTime, nullable=True)
     last_updated: datetime = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     metadata: Dict[str, Any] = Column(JSON, default=dict)  # Additional metadata

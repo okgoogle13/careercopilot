@@ -21,7 +21,9 @@ class PersonalCache:
         self.cache_dir = Path(cache_dir)
         self.default_ttl = timedelta(hours=24)
         self.backend = self  # For compatibility with cache middleware
-        self.CACHE_CONFIGS: Dict[str, Dict[str, Any]] = {}  # For compatibility with cache middleware
+        self.CACHE_CONFIGS: Dict[str, Dict[str, Any]] = (
+            {}
+        )  # For compatibility with cache middleware
 
         # Create cache directory if it doesn't exist
         self.cache_dir.mkdir(parents=True, exist_ok=True)
