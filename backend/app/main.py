@@ -36,7 +36,7 @@ logger = get_logger(__name__)
 app = FastAPI(
     title="Careercopilot API",
     description="AI-powered backend for the Careercopilot application.",
-    version="1.0.0",
+    version="1.1.0",
 )
 
 # Set up Prometheus monitoring
