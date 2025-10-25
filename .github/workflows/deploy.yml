@@ -1,13 +1,4 @@
 # .github/workflows/deploy.yml
-#
-# FULLY REFACTORED DEPLOYMENT WORKFLOW (POLISHED)
-#
-# Implements:
-# 1. Workload Identity Federation (WIF): Authenticates to GCP/Firebase using secure OIDC tokens.
-# 2. Image-Based Deployment: Deploys the *exact* Docker image built in CI.
-# 3. SHA-Pinning: All 'uses:' actions are pinned to full commit SHAs.
-# 4. Robust Rollback: Corrects the rollback health check logic.
-# 5. Environment-Specific Repository Names
 name: CD - Deploy to Staging and Production
 
 on:
@@ -44,7 +35,6 @@ jobs:
     name: Pre-deployment Checks
     runs-on: ubuntu-latest
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
-    timeout-minutes: 5
     outputs:
       environment: ${{ steps.check.outputs.environment }}
       commit-sha: ${{ steps.vars.outputs.commit_sha }}
@@ -68,8 +58,6 @@ jobs:
 
       - name: Set Commit SHA and Run ID
         id: vars
-        env:
-          GH_TOKEN: ${{ github.token }}
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "commit_sha=${{ github.sha }}" >> $GITHUB_OUTPUT
