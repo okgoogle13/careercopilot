@@ -36,17 +36,26 @@ jobs:
           if [[ "${{ inputs.environment }}" == "staging" ]]; then
             echo "GCP_PROJECT_ID=careercopilot-staging" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot-repo" >> $GITHUB_ENV
-            # Using FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING for staging
-            echo "FIREBASE_SERVICE_ACCOUNT='${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'" >> $GITHUB_ENV
-            # Write the service account to a file for debugging
+            # Write service account directly to file to avoid JSON parsing issues
             echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}" > /tmp/firebase-service-account.json
+            # Set a flag instead of the actual JSON in the environment
+            echo "FIREBASE_SERVICE_ACCOUNT_PATH=/tmp/firebase-service-account.json" >> $GITHUB_ENV
           elif [[ "${{ inputs.environment }}" == "production" ]]; then
             echo "GCP_PROJECT_ID=careercopilot-468811" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot" >> $GITHUB_ENV
-            # Using FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 for production
-            echo "FIREBASE_SERVICE_ACCOUNT='${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 }}'" >> $GITHUB_ENV
-            # Write the service account to a file for debugging
+            # Write service account directly to file to avoid JSON parsing issues
             echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 }}" > /tmp/firebase-service-account.json
+            # Set a flag instead of the actual JSON in the environment
+            echo "FIREBASE_SERVICE_ACCOUNT_PATH=/tmp/firebase-service-account.json" >> $GITHUB_ENV
+          fi
+          
+          # Verify the service account file was created
+          if [ -f "/tmp/firebase-service-account.json" ]; then
+            echo "Firebase service account file created successfully"
+            echo "File size: $(wc -c <'/tmp/firebase-service-account.json') bytes"
+          else
+            echo "::error::Failed to create Firebase service account file"
+            exit 1
           fi
           
           # Set WIF provider and service account based on environment
@@ -77,10 +86,10 @@ jobs:
       - name: Debug - Print Firebase Service Account
         if: ${{ always() }}
         run: |
-          echo "FIREBASE_SERVICE_ACCOUNT: $FIREBASE_SERVICE_ACCOUNT"
-          if [ -f "/tmp/firebase-service-account.json" ]; then
+          echo "FIREBASE_SERVICE_ACCOUNT_PATH: $FIREBASE_SERVICE_ACCOUNT_PATH"
+          if [ -f "$FIREBASE_SERVICE_ACCOUNT_PATH" ]; then
             echo "Service account file exists, contents:"
-            cat /tmp/firebase-service-account.json
+            cat "$FIREBASE_SERVICE_ACCOUNT_PATH"
           else
             echo "Service account file not found"
           fi
@@ -89,9 +98,10 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0 # v0.10.0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: /tmp/firebase-service-account.json
+          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT_PATH }}
           channelId: live
           projectId: ${{ env.GCP_PROJECT_ID }}
+          debug: true
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2 # v2.1.0
