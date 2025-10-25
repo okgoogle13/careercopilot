@@ -196,8 +196,23 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
     setHasUnsavedChanges(false);
   };
 
+  // Helper function to get responsive grid props for GridCompat
+  const getGridProps = (xs: number, sm?: number, md?: number, lg?: number, xl?: number) => ({
+    size: { xs, ...(sm && { sm }), ...(md && { md }), ...(lg && { lg }), ...(xl && { xl }) },
+    item: true
+  });
+
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
+      {/* Header */}
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h4" fontWeight={600} gutterBottom>
+          Settings
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Manage your account, preferences, and privacy settings
+        </Typography>
+      </Box>
       {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" fontWeight={600} gutterBottom>
@@ -228,9 +243,9 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
         </Alert>
       )}
 
-      <GridCompat container spacing={4}>
+<GridCompat container spacing={4}>
         {/* Settings Navigation */}
-        <GridCompat xs={12} md={3}>
+        <GridCompat {...getGridProps(12, 12, 3)}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Tabs
               orientation="vertical"
@@ -280,7 +295,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
         </GridCompat>
 
         {/* Settings Content */}
-        <GridCompat xs={12} md={9}>
+        <GridCompat {...getGridProps(12, 12, 9)}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
             {/* Profile Tab */}
             <TabPanel value={tabValue} index={0}>
@@ -322,7 +337,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                 {/* Personal Information */}
                 <GridCompat container spacing={3}>
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <TextField
                       fullWidth
                       label="First Name"
@@ -330,7 +345,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('firstName', e.target.value)}
                     />
                   </GridCompat>
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <TextField
                       fullWidth
                       label="Last Name"
@@ -338,7 +353,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('lastName', e.target.value)}
                     />
                   </GridCompat>
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <TextField
                       fullWidth
                       label="Email"
@@ -347,7 +362,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('email', e.target.value)}
                     />
                   </GridCompat>
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <TextField
                       fullWidth
                       label="Phone"
@@ -355,7 +370,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('phone', e.target.value)}
                     />
                   </GridCompat>
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <TextField
                       fullWidth
                       label="Location"
@@ -363,7 +378,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('location', e.target.value)}
                     />
                   </GridCompat>
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <TextField
                       fullWidth
                       label="Website"
@@ -371,7 +386,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                       onChange={(e) => handleProfileChange('website', e.target.value)}
                     />
                   </GridCompat>
-                  <GridCompat size={{ xs: 12 }}>
+                  <GridCompat {...getGridProps(12, 12, 12)}>
                     <TextField
                       fullWidth
                       label="Bio"
@@ -394,7 +409,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <GridCompat container spacing={3}>
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6)}>
                     <FormControl fullWidth>
                       <InputLabel>Theme</InputLabel>
                       <Select
@@ -419,7 +434,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <FormControl fullWidth>
                       <InputLabel>Language</InputLabel>
                       <Select
@@ -436,7 +451,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <FormControl fullWidth>
                       <InputLabel>Timezone</InputLabel>
                       <Select
@@ -453,7 +468,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12, sm: 6 }}>
+                  <GridCompat {...getGridProps(12, 6, 6)}>
                     <FormControl fullWidth>
                       <InputLabel>Date Format</InputLabel>
                       <Select
@@ -468,14 +483,14 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </FormControl>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12 }}>
+                  <GridCompat {...getGridProps(12, 12, 12)}>
                     <Divider sx={{ my: 2 }} />
                     <Typography variant="h6" gutterBottom>
                       Interface Options
                     </Typography>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12 }}>
+                  <GridCompat {...getGridProps(12, 12, 12)}>
                     <List>
                       <ListItem>
                         <ListItemIcon>
@@ -679,7 +694,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <GridCompat container spacing={3}>
-                  <GridCompat size={{ xs: 12 }}>
+                  <GridCompat {...getGridProps(12, 12, 12)}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -739,7 +754,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12 }}>
+                  <GridCompat {...getGridProps(12, 12, 12)}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -827,7 +842,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <GridCompat container spacing={3}>
-                  <GridCompat size={{ xs: 12, md: 6 }}>
+                  <GridCompat {...getGridProps(12, 12, 6)}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -860,7 +875,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12, md: 6 }}>
+                  <GridCompat {...getGridProps(12, 12, 6)}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -895,7 +910,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12 }}>
+                  <GridCompat {...getGridProps(12, 12, 12)}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'error.main' }}>
                       <CardContent>
                         <Typography variant="h6" color="error" gutterBottom>
@@ -933,7 +948,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 </Typography>
 
                 <GridCompat container spacing={3}>
-                  <GridCompat size={{ xs: 12, md: 6 }}>
+                  <GridCompat {...getGridProps(12, 12, 6)}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
@@ -958,7 +973,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     </Card>
                   </GridCompat>
 
-                  <GridCompat size={{ xs: 12, md: 6 }}>
+                  <GridCompat {...getGridProps(12, 12, 6)}>
                     <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
                       <CardContent>
                         <Typography variant="h6" gutterBottom>
