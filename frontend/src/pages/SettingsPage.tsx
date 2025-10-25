@@ -199,7 +199,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
   // Helper function to get responsive grid props for GridCompat
   const getGridProps = (xs: number, sm?: number, md?: number, lg?: number, xl?: number) => ({
     size: { xs, ...(sm && { sm }), ...(md && { md }), ...(lg && { lg }), ...(xl && { xl }) },
-    item: true
+    item: true,
   });
 
   return (
@@ -243,7 +243,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
         </Alert>
       )}
 
-<GridCompat container spacing={4}>
+      <GridCompat container spacing={4}>
         {/* Settings Navigation */}
         <GridCompat {...getGridProps(12, 12, 3)}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
