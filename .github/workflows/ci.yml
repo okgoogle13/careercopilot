@@ -130,6 +130,33 @@ jobs:
       - name: Run checks
         run: yarn workspace careercopilot-frontend test
 
+  frontend-build:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || needs.changes.outputs.frontend == 'true'
+    needs: [changes, frontend]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # v4.1.7
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # v4.0.3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+          cache-dependency-path: yarn.lock
+      - name: Install dependencies
+        run: yarn install --immutable
+      - name: Build frontend
+        run: yarn workspace careercopilot-frontend build
+      - name: Upload frontend build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 1
+
   backend-static-checks:
     name: Backend Static Checks
     runs-on: ubuntu-latest
@@ -397,7 +424,7 @@ jobs:
         backend-tests,
         functions,
         e2e-tests,
-        test-firestore-rules,
+        test-firestore-rules
       ]
     timeout-minutes: 5
     permissions:
@@ -430,6 +457,7 @@ jobs:
             if ('${{ needs.e2e-tests.result }}' === 'failure') failedJobs.push('E2E Tests');
             if ('${{ needs.test-firestore-rules.result }}' === 'failure') failedJobs.push('Firestore Rules Tests');
             const failedList = failedJobs.map(job => `-  ${job}`).join('\n');
+            const comment = `**Quality Gate Failed**\n\nThe following test suites failed:\n\n${failedList}\n\nPlease review the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) and fix the issues.`;
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
@@ -480,8 +508,12 @@ jobs:
         with:
           workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
-      - name: Setup Google Cloud SDK and Docker
+      - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: 'latest'
+          project_id: ${{ steps.env-vars.outputs.TARGET_PROJECT_ID }}
+      - name: Configure Docker for GCR
         run: gcloud auth configure-docker ${{ env.GCP_REGISTRY }} --quiet
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
