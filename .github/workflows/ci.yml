@@ -60,7 +60,7 @@ jobs:
           fetch-depth: 2
       - name: Calculate paths
         id: filter
-        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b2105118b4e082b7bce # v3.0.2
+        uses: dorny/paths-filter@v3 # v3.0.2
         with:
           filters: |
             frontend: &frontend-paths
