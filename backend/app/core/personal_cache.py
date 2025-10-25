@@ -17,11 +17,11 @@ logger = logging.getLogger(__name__)
 class PersonalCache:
     """File-based cache with TTL support for personal automation"""
 
-    def __init__(self, cache_dir: str = "data/cache"):
+    def __init__(self, cache_dir: str = "data/cache") -> None:
         self.cache_dir = Path(cache_dir)
         self.default_ttl = timedelta(hours=24)
         self.backend = self  # For compatibility with cache middleware
-        self.CACHE_CONFIGS = {}  # For compatibility with cache middleware
+        self.CACHE_CONFIGS: Dict[str, Dict[str, Any]] = {}  # For compatibility with cache middleware
 
         # Create cache directory if it doesn't exist
         self.cache_dir.mkdir(parents=True, exist_ok=True)
