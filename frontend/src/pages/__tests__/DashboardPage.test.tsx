@@ -16,9 +16,13 @@ describe('DashboardPage', () => {
     it('renders empty state when isEmpty is true', () => {
       render(<DashboardPage isEmpty={true} onCreateDocument={mockOnCreateDocument} />);
 
-      expect(screen.getByRole('heading', { name: /Welcome to CareerCopilot/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('heading', { name: /Welcome to CareerCopilot/i })
+      ).toBeInTheDocument();
       expect(screen.getByText(/Create your first AI-powered resume/i)).toBeInTheDocument();
-      expect(screen.getByRole('button', { name: /Create Your First Document/i })).toBeInTheDocument();
+      expect(
+        screen.getByRole('button', { name: /Create Your First Document/i })
+      ).toBeInTheDocument();
     });
 
     it('calls onCreateDocument when create button is clicked in empty state', async () => {
@@ -45,7 +49,9 @@ describe('DashboardPage', () => {
       render(<DashboardPage />);
 
       expect(screen.getByRole('heading', { name: /^Dashboard$/i })).toBeInTheDocument();
-      expect(screen.getByText(/Manage your profiles and track your job application progress/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(/Manage your profiles and track your job application progress/i)
+      ).toBeInTheDocument();
     });
 
     it('displays statistics cards with correct data', () => {

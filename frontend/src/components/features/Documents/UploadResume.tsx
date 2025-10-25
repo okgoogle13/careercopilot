@@ -12,7 +12,10 @@ import {
   Snackbar,
 } from '@mui/material';
 import { useState } from 'react';
-import { DocumentUploadDropzone, UploadedFile } from '@/components/documents/DocumentUploadDropzone';
+import {
+  DocumentUploadDropzone,
+  UploadedFile,
+} from '@/components/documents/DocumentUploadDropzone';
 import { uploadAndCreateDocument } from '@/services/documentService';
 
 interface UploadResumeProps {
@@ -24,10 +27,7 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
-  const handleUpload = async (
-    files: UploadedFile[],
-    type: 'resume' | 'cover-letter' | 'ksc'
-  ) => {
+  const handleUpload = async (files: UploadedFile[], type: 'resume' | 'cover-letter' | 'ksc') => {
     try {
       for (const { file } of files) {
         await uploadAndCreateDocument(file, type);
