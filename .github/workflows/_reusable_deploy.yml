@@ -68,12 +68,14 @@ jobs:
           fi
 
       - name: Download frontend artifact
-        uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: frontend-dist
-          path: frontend/dist
-          run-id: ${{ inputs.ci-run-id }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Downloading frontend artifact from CI run ${{ inputs.ci-run-id }}"
+          gh run download ${{ inputs.ci-run-id }} --name frontend-dist --dir frontend/dist || {
+            echo "::warning::Failed to download frontend artifact, will build locally if needed"
+            mkdir -p frontend/dist
+          }
 
       - name: Authenticate to Google Cloud
         id: auth
