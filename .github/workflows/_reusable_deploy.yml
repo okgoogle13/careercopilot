@@ -36,15 +36,17 @@ jobs:
           if [[ "${{ inputs.environment }}" == "staging" ]]; then
             echo "GCP_PROJECT_ID=careercopilot-staging" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot-repo" >> $GITHUB_ENV
-            echo "FIREBASE_SERVICE_ACCOUNT<<EOF" >> $GITHUB_ENV
-            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
+            # Using FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING for staging
+            echo "FIREBASE_SERVICE_ACCOUNT='${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}'" >> $GITHUB_ENV
+            # Write the service account to a file for debugging
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING }}" > /tmp/firebase-service-account.json
           elif [[ "${{ inputs.environment }}" == "production" ]]; then
             echo "GCP_PROJECT_ID=careercopilot-468811" >> $GITHUB_ENV
             echo "GCP_REPOSITORY=careercopilot" >> $GITHUB_ENV
-            echo "FIREBASE_SERVICE_ACCOUNT<<EOF" >> $GITHUB_ENV
-            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811 }}" >> $GITHUB_ENV
-            echo "EOF" >> $GITHUB_ENV
+            # Using FIREBASE_SERVICE_ACCOUNT for production
+            echo "FIREBASE_SERVICE_ACCOUNT='${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'" >> $GITHUB_ENV
+            # Write the service account to a file for debugging
+            echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}" > /tmp/firebase-service-account.json
           fi
           
           # Set WIF provider and service account based on environment
@@ -72,11 +74,22 @@ jobs:
           service_account: ${{ env.SERVICE_ACCOUNT }}
           create_credentials_file: true
 
+      - name: Debug - Print Firebase Service Account
+        if: ${{ always() }}
+        run: |
+          echo "FIREBASE_SERVICE_ACCOUNT: $FIREBASE_SERVICE_ACCOUNT"
+          if [ -f "/tmp/firebase-service-account.json" ]; then
+            echo "Service account file exists, contents:"
+            cat /tmp/firebase-service-account.json
+          else
+            echo "Service account file not found"
+          fi
+
       - name: Deploy Frontend
         uses: FirebaseExtended/action-hosting-deploy@v0 # v0.10.0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: ${{ env.FIREBASE_SERVICE_ACCOUNT }}
+          firebaseServiceAccount: /tmp/firebase-service-account.json
           channelId: live
           projectId: ${{ env.GCP_PROJECT_ID }}
 
