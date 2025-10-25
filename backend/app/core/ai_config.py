@@ -155,9 +155,9 @@ class AIConfigManager:
     """Central manager for all AI service configurations"""
 
     def __init__(self, config_file_path: Optional[str] = None) -> None:
-        self.config_file_path = str(Path(
-            config_file_path or os.getenv("AI_CONFIG_FILE", "config/ai_config.json")
-        ))
+        self.config_file_path = str(
+            Path(config_file_path or os.getenv("AI_CONFIG_FILE", "config/ai_config.json"))
+        )
 
         self.models: Dict[str, ModelConfig] = {}
         self.credentials: Dict[AIProvider, ProviderCredentials] = {}
@@ -209,7 +209,9 @@ class AIConfigManager:
             for name, model_data in config.get("models", {}).items():
                 try:
                     if not isinstance(model_data, dict):
-                        logger.warning(f"Invalid model data for {name}: expected dict, got {type(model_data).__name__}")
+                        logger.warning(
+                            f"Invalid model data for {name}: expected dict, got {type(model_data).__name__}"
+                        )
                         continue
                     model = ModelConfig.from_dict(model_data)
                     models[str(name)] = model
@@ -221,7 +223,9 @@ class AIConfigManager:
             for provider, cred_data in config.get("credentials", {}).items():
                 try:
                     if not isinstance(cred_data, dict):
-                        logger.warning(f"Invalid credential data for {provider}: expected dict, got {type(cred_data).__name__}")
+                        logger.warning(
+                            f"Invalid credential data for {provider}: expected dict, got {type(cred_data).__name__}"
+                        )
                         continue
                     provider_enum = AIProvider(provider)
                     credentials[provider_enum] = ProviderCredentials.from_dict(cred_data)
@@ -233,7 +237,9 @@ class AIConfigManager:
             for name, service_data in config.get("services", {}).items():
                 try:
                     if not isinstance(service_data, dict):
-                        logger.warning(f"Invalid service data for {name}: expected dict, got {type(service_data).__name__}")
+                        logger.warning(
+                            f"Invalid service data for {name}: expected dict, got {type(service_data).__name__}"
+                        )
                         continue
                     service = AIServiceConfig.from_dict(service_data)
                     services[str(name)] = service
@@ -505,15 +511,27 @@ class AIConfigManager:
 
     def get_models_by_provider(self, provider: AIProvider) -> List[ModelConfig]:
         """Get all models for a specific provider"""
-        return [model for model in self.models.values() if model.provider == provider] if self.models else []
+        return (
+            [model for model in self.models.values() if model.provider == provider]
+            if self.models
+            else []
+        )
 
     def get_models_by_type(self, model_type: AIModelType) -> List[ModelConfig]:
         """Get all models of a specific type"""
-        return [model for model in self.models.values() if model.model_type == model_type] if self.models else []
+        return (
+            [model for model in self.models.values() if model.model_type == model_type]
+            if self.models
+            else []
+        )
 
     def get_enabled_services(self) -> List[AIServiceConfig]:
         """Get all enabled services"""
-        return [service for service in self.services.values() if service.enabled] if self.services else []
+        return (
+            [service for service in self.services.values() if service.enabled]
+            if self.services
+            else []
+        )
 
     def validate_configuration(self) -> List[Dict[str, Any]]:
         """Validate the current configuration and return any issues"""
