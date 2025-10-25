@@ -53,9 +53,28 @@ jobs:
         run: |
           echo "Downloading frontend artifact from CI run ${{ inputs.ci-run-id }}"
           gh run download ${{ inputs.ci-run-id }} --name frontend-dist --dir frontend/dist || {
-            echo "::warning::Failed to download frontend artifact, will build locally if needed"
+            echo "::warning::Failed to download frontend artifact, will build locally"
             mkdir -p frontend/dist
           }
+
+      - name: Setup Node.js for frontend build
+        if: hashFiles('frontend/dist/**') == ''
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'yarn'
+          cache-dependency-path: yarn.lock
+
+      - name: Build frontend if artifact unavailable
+        run: |
+          if [ ! -d "frontend/dist" ] || [ -z "$(ls -A frontend/dist)" ]; then
+            echo "Frontend dist is empty, building frontend..."
+            corepack enable
+            yarn install --immutable
+            yarn workspace careercopilot-frontend build
+          else
+            echo "Frontend artifact found, skipping build"
+          fi
 
       - name: Authenticate to Google Cloud
         id: auth
