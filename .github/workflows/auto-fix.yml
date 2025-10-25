@@ -52,18 +52,74 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
           cache-dependency-path: "yarn.lock"
-      - name: Install dependencies
+
+      - name: Install Python formatting tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
+
+      - name: Install Node dependencies
         run: |
           pip install black isort autoflake
           yarn install --immutable
-          cd functions && npm ci
-      - name: Apply fixes
+
+      - name: Check for changes needed
+        id: changes
         run: |
+          echo "Checking if auto-fixes are needed..."
+          CHANGES_NEEDED=false
+
+          # Check Python files
+          if ! black --check backend/ --line-length=100 --quiet; then
+            echo "Python formatting changes needed"
+            CHANGES_NEEDED=true
+          elif ! isort --check-only backend/ --profile=black --line-length=100 --quiet; then
+            echo "Python import sorting changes needed"
+            CHANGES_NEEDED=true
+          fi
+
+          # Check frontend files (using workspace commands)
+          if ! yarn workspace careercopilot-frontend lint --quiet 2>/dev/null; then
+            echo "ESLint fixes needed"
+            CHANGES_NEEDED=true
+          elif ! yarn workspace careercopilot-frontend format:check --quiet 2>/dev/null; then
+            echo "Prettier formatting needed"
+            CHANGES_NEEDED=true
+          fi
+
+          # Check functions files
+          if ! yarn workspace functions lint --silent; then
+            echo "Functions linting fixes needed"
+            CHANGES_NEEDED=true
+          fi
+
+          if [[ "$CHANGES_NEEDED" == "true" ]]; then
+            echo "changes_needed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changes_needed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Apply Python formatting fixes
+        if: steps.changes.outputs.changes_needed == 'true'
+        run: |
+          echo "Applying Python formatting fixes..."
           black backend/ --line-length=100
           isort backend/ --profile=black --line-length=100
-          autoflake --remove-all-unused-imports --in-place --recursive backend/
-          yarn workspace frontend format
-          yarn workspace frontend lint:fix
+          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/
+          echo "Python formatting complete"
+
+      - name: Apply Frontend formatting fixes
+        if: steps.changes.outputs.changes_needed == 'true'
+        run: |
+          echo "Applying Frontend formatting fixes..."
+          yarn workspace careercopilot-frontend format
+          yarn workspace careercopilot-frontend lint:fix
+          echo "Frontend formatting complete"
+
+      - name: Apply Functions linting fixes
+        if: steps.changes.outputs.changes_needed == 'true'
+        run: |
+          echo "Applying Functions linting fixes..."
           yarn workspace functions lint:fix
       - name: Check for changes
         id: git-check

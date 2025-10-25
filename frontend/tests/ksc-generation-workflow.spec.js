@@ -19,8 +19,6 @@ async function isServerRunning() {
 }
 
 test.describe('KSC Generation Workflow', () => {
-  
-
   test('happy path - complete KSC generation workflow', async ({ page }) => {
     // Step 1: Navigate to the KSC Generator page
     await page.goto('/ksc-generator');
