@@ -14,8 +14,11 @@ RUN npm install
 # Copy the rest of the application source code
 COPY . .
 
+# Build the app for production so preview can serve static assets
+RUN npm run build
+
 # Expose the port the app runs on
 EXPOSE 3000
 
-# The command to start the app in development mode
-CMD ["npm", "start"]
+# The command to serve the built app in preview mode
+CMD ["npm", "run", "preview"]

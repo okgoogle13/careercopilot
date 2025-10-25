@@ -1,4 +1,4 @@
-import { Project, SyntaxKind, ImportDeclaration } from 'ts-morph';
+import { Project, SyntaxKind, ImportDeclaration, SourceFile, ImportSpecifier } from 'ts-morph';
 import path from 'path';
 
 const project = new Project();
@@ -15,7 +15,7 @@ const filesToUpdate = [
   'frontend/src/components/ui/Button/Button.stories.tsx',
 ];
 
-project.getSourceFiles().forEach((sourceFile) => {
+project.getSourceFiles().forEach((sourceFile: SourceFile) => {
   const filePath = sourceFile.getFilePath();
   if (!filesToUpdate.some((f) => path.resolve(f) === path.resolve(filePath))) {
     return;
@@ -24,7 +24,9 @@ project.getSourceFiles().forEach((sourceFile) => {
   const storybookImport = sourceFile.getImportDeclaration('@storybook/react');
 
   if (storybookImport && !storybookImport.isTypeOnly()) {
-    const importSpecifiers = storybookImport.getNamedImports().map((ni) => ni.getName());
+    const importSpecifiers = storybookImport
+      .getNamedImports()
+      .map((ni: ImportSpecifier) => ni.getName());
     if (importSpecifiers.includes('Meta') || importSpecifiers.includes('StoryObj')) {
       console.log(
         `- Found incorrect Storybook import in ${path.basename(filePath)}. Adding 'type'.`
