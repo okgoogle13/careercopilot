@@ -157,7 +157,7 @@ class EnhancedAIErrorHandler:
                 f"[{context.service_type.value}] - {ai_error.error_type.value}: {ai_error.message}"
             )
 
-                # Attempt fallback if configured
+            # Attempt fallback if configured
             if fallback_strategy and fallback_strategy.enabled:
                 try:
                     fallback_result = await self._execute_fallback(
@@ -170,7 +170,7 @@ class EnhancedAIErrorHandler:
                 except Exception as fallback_error:
                     logger.error(
                         f"Error in fallback execution for {context.operation_name}: {fallback_error}",
-                        exc_info=True
+                        exc_info=True,
                     )
                     # If fallback fails, we'll use the original error
                     result.error = ai_error
