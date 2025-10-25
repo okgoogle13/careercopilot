@@ -59,7 +59,7 @@ jobs:
           pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
 
       - name: Install Node dependencies
-        run: yarn install
+        run: YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install
 
       - name: Check for changes needed
         id: changes
