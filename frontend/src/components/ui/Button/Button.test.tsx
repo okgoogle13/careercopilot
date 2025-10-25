@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -15,7 +14,11 @@ describe('Button', () => {
   });
 
   it('should render children correctly', () => {
-    render(<Button><span>Child Span</span></Button>);
+    render(
+      <Button>
+        <span>Child Span</span>
+      </Button>
+    );
     expect(screen.getByText('Child Span')).toBeInTheDocument();
   });
 
@@ -41,7 +44,11 @@ describe('Button', () => {
 
   it('should be disabled when disabled prop is true', () => {
     const handleClick = jest.fn();
-    render(<Button disabled onClick={handleClick}>Disabled</Button>);
+    render(
+      <Button disabled onClick={handleClick}>
+        Disabled
+      </Button>
+    );
     const button = screen.getByRole('button', { name: /disabled/i });
     expect(button).toBeDisabled();
     fireEvent.click(button);

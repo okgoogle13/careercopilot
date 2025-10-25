@@ -26,7 +26,6 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: "18"
   GCP_REGION: us-central1
   GCP_REGISTRY: us-central1-docker.pkg.dev
   GCP_IMAGE_NAME: backend
@@ -38,12 +37,13 @@ jobs:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     outputs:
       environment: ${{ steps.check.outputs.environment }}
-      commit_sha: ${{ steps.vars.outputs.commit_sha }}
+      commit-sha: ${{ steps.vars.outputs.commit_sha }}
       run_id: ${{ steps.vars.outputs.run_id }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - name: Check deployment conditions
+        uses: actions/checkout@v4 # v4.1.7
+
+      - name: Determine Environment
         id: check
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
@@ -55,12 +55,18 @@ jobs:
               echo "environment=production" >> $GITHUB_OUTPUT
             fi
           fi
-      - name: Set commit SHA and run ID
+
+      - name: Set Commit SHA and Run ID
         id: vars
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "commit_sha=${{ github.sha }}" >> $GITHUB_OUTPUT
-            CI_RUN_ID=$(gh api "/repos/${{ github.repository }}/actions/workflows/ci.yml/runs?head_sha=${{ github.sha }}&status=success&per_page=1" --jq '.workflow_runs[0].id')
+            # For manual dispatch, use latest successful CI run or current commit
+            CI_RUNS_JSON=$(curl -sS -H "Authorization: Bearer ${GH_TOKEN}" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${{ github.repository }}/actions/workflows/ci.yml/runs?status=success&per_page=1")
+            CI_RUN_ID=$(python3 -c "import json,sys; d=json.load(sys.stdin); print((d.get('workflow_runs') or [{}])[0].get('id',''))" <<<"$CI_RUNS_JSON")
             echo "run_id=${CI_RUN_ID:-${{ github.run_id }}}" >> $GITHUB_OUTPUT
           elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
             echo "commit_sha=${{ github.event.workflow_run.head_sha }}" >> $GITHUB_OUTPUT
@@ -69,61 +75,10 @@ jobs:
 
   deploy:
     name: Deploy to ${{ needs.pre-deploy-checks.outputs.environment }}
-    runs-on: ubuntu-latest
     needs: [pre-deploy-checks]
-    environment: ${{ needs.pre-deploy-checks.outputs.environment }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      - name: Determine Target Environment
-        id: env-vars
-        run: |
-          if [[ "${{ needs.pre-deploy-checks.outputs.environment }}" == "staging" ]]; then
-            echo "GCP_PROJECT_ID=careercopilot-staging" >> $GITHUB_ENV
-            echo "GCP_REPOSITORY=careercopilot-repo" >> $GITHUB_ENV
-            echo "FIREBASE_PROJECT_ID=careercopilot-staging" >> $GITHUB_ENV
-            echo "GCP_WORKLOAD_IDENTITY_PROVIDER=${{ secrets.GCP_STAGING_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
-            echo "GCP_SERVICE_ACCOUNT=${{ secrets.GCP_STAGING_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
-          elif [[ "${{ needs.pre-deploy-checks.outputs.environment }}" == "production" ]]; then
-            echo "GCP_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
-            echo "GCP_REPOSITORY=careercopilot" >> $GITHUB_ENV
-            echo "FIREBASE_PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}" >> $GITHUB_ENV
-            echo "GCP_WORKLOAD_IDENTITY_PROVIDER=${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}" >> $GITHUB_ENV
-            echo "GCP_SERVICE_ACCOUNT=${{ secrets.GCP_SERVICE_ACCOUNT }}" >> $GITHUB_ENV
-          fi
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
-      - name: Download frontend artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: frontend-dist
-          run-id: ${{ needs.pre-deploy-checks.outputs.run_id }}
-          path: ./frontend/dist
-      - name: Deploy Frontend to Firebase
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: ${{ env.GCP_SERVICE_ACCOUNT }}
-          projectId: ${{ env.FIREBASE_PROJECT_ID }}
-      - name: Deploy Backend to Cloud Run
-        id: deploy-backend
-        uses: google-github-actions/deploy-cloudrun@v2
-        with:
-          service: backend
-          image: ${{ env.GCP_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.GCP_REPOSITORY }}/${{ env.GCP_IMAGE_NAME }}:${{ needs.pre-deploy-checks.outputs.commit_sha }}
-          region: ${{ env.GCP_REGION }}
-      - name: Health check for backend
-        id: health-check
-        run: |
-          SERVICE_URL="${{ steps.deploy-backend.outputs.url }}"
-          timeout 120s bash -c 'until curl -s --fail $SERVICE_URL/health > /dev/null; do sleep 5; done'
-      - name: Rollback on failure
-        if: failure() && needs.pre-deploy-checks.outputs.environment == 'production'
-        run: |
-          # This assumes a previous successful revision exists
-          gcloud run services update backend --to-latest --region ${{ env.GCP_REGION }} --project ${{ env.GCP_PROJECT_ID }}
-          echo "Deployment failed, rolled back to previous revision."
-          exit 1
+    uses: ./.github/workflows/_reusable_deploy.yml
+    secrets: inherit
+    with:
+      environment: ${{ needs.pre-deploy-checks.outputs.environment }}
+      commit-sha: ${{ needs.pre-deploy-checks.outputs.commit-sha }}
+      ci-run-id: ${{ needs.pre-deploy-checks.outputs.run_id }}
