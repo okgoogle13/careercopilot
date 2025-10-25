@@ -109,7 +109,18 @@
       "Bash(npx jest:*)",
       "Bash(python3:*)",
       "Bash(git restore:*)",
-      "Bash(gh workflow:*)"
+      "Bash(gh workflow:*)",
+      "Bash(gcloud iam workload-identity-pools providers list:*)",
+      "Bash(for role in \"roles/artifactregistry.reader\" \"roles/run.developer\" \"roles/secretmanager.secretAccessor\" \"roles/firebasehosting.admin\")",
+      "Bash(do)",
+      "Bash(gcloud projects add-iam-policy-binding:*)",
+      "Bash(gcloud iam service-accounts add-iam-policy-binding:*)",
+      "Bash(github-actions-staging-sa@careercopilot-staging.iam.gserviceaccount.com)",
+      "Bash(gcloud iam workload-identity-pools create:*)",
+      "Bash(gcloud iam workload-identity-pools providers create-oidc:*)",
+      "Bash(gcloud iam service-accounts create:*)",
+      "Bash(github-actions-prod-sa@careercopilot-468811.iam.gserviceaccount.com)",
+      "Bash(git push:*)"
     ]
   }
 }
