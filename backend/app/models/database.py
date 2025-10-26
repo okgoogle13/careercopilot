@@ -69,7 +69,6 @@ from sqlalchemy.orm import mapped_column as mapped_column
 from sqlalchemy.orm import relationship as relationship
 from sqlalchemy.orm.query import Query
 from sqlalchemy.orm.session import Session as SQLAlchemySession
-from sqlalchemy.types import TypeDecorator as TypeDecorator
 from sqlalchemy.types import TypeEngine
 
 # Type variables for generic type hints

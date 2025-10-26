@@ -1,14 +1,15 @@
-from typing import Any, Callable, Optional, Type, TypeVar, Union, Awaitable, Dict, List
+from typing import Any, Awaitable, Callable, Dict, List, Optional, Type, TypeVar, Union
+
 from pydantic import BaseModel
 
-T = TypeVar('T', bound=BaseModel)
+T = TypeVar("T", bound=BaseModel)
 
 def flow(
     func: Optional[Callable[..., Any]] = None,
     *,
     name: Optional[str] = None,
     output_schema: Optional[Type[BaseModel]] = None,
-    require_model: bool = True
+    require_model: bool = True,
 ) -> Callable[..., Any]: ...
 
 class AI:
@@ -16,7 +17,7 @@ class AI:
     def generate(
         prompt: str,
         output_schema: Optional[Type[T]] = None,
-        config: Optional[Dict[str, Any]] = None
+        config: Optional[Dict[str, Any]] = None,
     ) -> Awaitable[T]: ...
 
 class ModelConfig:
@@ -24,5 +25,5 @@ class ModelConfig:
         self,
         prompt: str,
         output_schema: Optional[Type[T]] = None,
-        config: Optional[Dict[str, Any]] = None
+        config: Optional[Dict[str, Any]] = None,
     ) -> Awaitable[T]: ...
