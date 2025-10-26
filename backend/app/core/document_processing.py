@@ -11,10 +11,11 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional, Type, TypeVar
 
+from pydantic import BaseModel
+
 from app.core.ai_client import AIRequest, get_ai_client
 from app.core.ai_error_handling import AIError, AIErrorType
 from app.core.config import settings
-from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 

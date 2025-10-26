@@ -4,9 +4,10 @@ Integration tests for AI-Powered Career Services API endpoints
 
 from unittest.mock import patch
 
+from fastapi.testclient import TestClient
+
 from app.core.dependencies import get_current_user
 from app.main import app
-from fastapi.testclient import TestClient
 
 client = TestClient(app)
 

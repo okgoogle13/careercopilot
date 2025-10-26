@@ -1,28 +1,125 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "module": "ES2022",
-    "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    /* Base Options */
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true,
-    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "isolatedModules": false,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "checkJs": false,
     "noEmit": true,
+
+    /* Strict Type-Checking Options */
+    "strict": true,
+    "noImplicitAny": false, // More lenient for tests
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": false, // Disabled for test files
+    "noImplicitThis": true,
+    "useUnknownInCatchVariables": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": false, // Disabled for tests to allow test utilities
+    "noUnusedParameters": false, // Disabled for tests to allow test utilities
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "importsNotUsedAsValues": "error",
+
+    /* JSX Support */
     "jsx": "react-jsx",
-    "types": ["jest", "node", "@testing-library/jest-dom", "vite/client"]
+    "jsxImportSource": "@emotion/react",
+
+    /* Paths and Modules */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/test-utils": ["./src/test-utils"],
+      "@/mocks": ["./src/mocks"]
+    },
+
+    /* Type Checking */
+    "types": [
+      "jest",
+      "node",
+      "jsdom",
+      "@testing-library/jest-dom",
+      "@testing-library/user-event",
+      "@testing-library/react",
+      "@playwright/test",
+      "vite/client"
+    ],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+
+    /* Source Maps */
+    "sourceMap": true,
+    "inlineSources": true,
+    "inlineSourceMap": true,
+
+    /* JSX Output */
+    "jsxFactory": "jsx",
+    "jsxFragmentFactory": "Fragment",
+
+    /* Module Resolution */
+    "allowImportingTsExtensions": true,
+    "allowUmdGlobalAccess": true,
+    "moduleDetection": "force",
+    "preserveSymlinks": true,
+    "preserveWatchOutput": true
   },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "src/**/*.d.ts",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
-    "src/**/__tests__/**/*",
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "src/**/__tests__/**/*.ts",
+    "src/**/__tests__/**/*.tsx",
+    "src/**/__mocks__/**/*.ts",
+    "src/**/__mocks__/**/*.tsx",
+    "src/test-utils.tsx",
     "src/setupTests.ts",
-    "src/test-utils.tsx"
+    "src/setupTests.js",
+    "src/vitest.setup.ts",
+    "src/vitest.setup.js",
+    "vitest.config.ts",
+    "vitest.config.js",
+    "playwright.config.ts",
+    "playwright.config.js",
+    "jest.config.js",
+    "jest.setup.js",
+    "**/*.d.ts",
+    "**/vite-env.d.ts"
   ],
-  "exclude": ["node_modules", "dist", "build"]
+  "exclude": [
+    "**/node_modules",
+    "**/.*/",
+    "**/dist",
+    "**/build",
+    "**/coverage",
+    "**/cypress",
+    "**/.next",
+    "**/.vercel",
+    "**/.cache",
+    "**/public",
+    "**/storybook-static",
+    "**/.storybook",
+    "**/__screenshots__",
+    "**/__snapshots__",
+    "**/*.stories.*",
+    "**/*.story.*"
+  ]
 }

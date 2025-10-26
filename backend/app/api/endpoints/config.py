@@ -7,8 +7,9 @@ Provides secure access to configuration values for the frontend build process.
 import logging
 from typing import Dict
 
-from app.core.secret_manager import get_firebase_frontend_config
 from fastapi import APIRouter, HTTPException
+
+from app.core.secret_manager import get_firebase_frontend_config
 
 logger = logging.getLogger(__name__)
 

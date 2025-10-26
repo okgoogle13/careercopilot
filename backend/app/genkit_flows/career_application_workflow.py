@@ -9,10 +9,11 @@ import json
 from datetime import datetime
 from typing import Dict, List, Optional
 
+from pydantic import BaseModel, Field
+
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
-from pydantic import BaseModel, Field
 
 from .ksc_generator import STAR_Response, generateKscResponse
 

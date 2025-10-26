@@ -1,4 +1,5 @@
 import pytest
+
 from app.core.input_validation import InputSanitizer, InputValidationError, SanitizedInput
 
 

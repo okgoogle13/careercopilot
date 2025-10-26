@@ -1,8 +1,9 @@
 from typing import Callable, Type
 
+from pydantic import BaseModel
+
 from app.core.genkit_init import get_model
 from app.genkit_flows.flow_decorator import create_flow_wrapper
-from pydantic import BaseModel
 
 
 def create_extraction_flow(

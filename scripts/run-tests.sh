@@ -12,9 +12,9 @@ fi
 run_test() {
   local name=$1
   local cmd=$2
-  
+
   echo "🚀 Running $name tests..."
-  
+
   if eval "$cmd"; then
     echo "✅ $name tests passed"
   else
