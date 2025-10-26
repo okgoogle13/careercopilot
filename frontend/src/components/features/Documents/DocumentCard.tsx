@@ -1,8 +1,10 @@
-import React from 'react';
-import { Document } from './types';
-import { ATSScoreCircle } from '../Analysis/ATSScoreCircle';
-import { Box, Paper, Typography, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { Box, Paper, Typography, IconButton } from '@mui/material';
+import React from 'react';
+
+import { ATSScoreCircle } from '../Analysis/ATSScoreCircle';
+
+import type { Document } from './types';
 
 export interface DocumentCardProps {
   document: Document;

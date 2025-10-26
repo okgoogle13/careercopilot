@@ -1,14 +1,15 @@
-import React from 'react';
+import type {
+  RadioGroupProps as MuiRadioGroupProps,
+  RadioProps,
+  FormControlLabelProps} from '@mui/material';
 import {
   RadioGroup as MuiRadioGroup,
-  RadioGroupProps as MuiRadioGroupProps,
   Radio,
-  RadioProps,
-  FormControlLabel,
-  FormControlLabelProps,
+  FormControlLabel
 } from '@mui/material';
+import React from 'react';
 
-export interface RadioGroupProps extends MuiRadioGroupProps {}
+export type RadioGroupProps = MuiRadioGroupProps
 
 export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
   ({ children, ...props }, ref) => {

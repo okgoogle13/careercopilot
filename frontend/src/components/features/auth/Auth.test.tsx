@@ -1,8 +1,10 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Auth } from './Auth';
+import { ThemeProvider } from '@mui/material/styles';
+import { render, screen, fireEvent, act } from '@testing-library/react';
+
 import { theme } from '../../../theme/theme';
+
+import { Auth } from './Auth';
 
 // Mock the CareerCopilotLogo component since it uses an imported image
 jest.mock('../common/CareerCopilotLogo', () => ({

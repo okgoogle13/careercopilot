@@ -1,7 +1,8 @@
-import React from 'react';
+import CloseIcon from '@mui/icons-material/Close';
+import type {
+  DialogProps as MuiDialogProps} from '@mui/material';
 import {
   Dialog as MuiDialog,
-  DialogProps as MuiDialogProps,
   DialogTitle as MuiDialogTitle,
   DialogContent as MuiDialogContent,
   DialogActions as MuiDialogActions,
@@ -9,8 +10,8 @@ import {
   IconButton,
   Box,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledDialog = styled(MuiDialog)(({ theme }) => ({
   '& .MuiDialog-paper': {
@@ -54,7 +55,7 @@ export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(
 
 Dialog.displayName = 'Dialog';
 
-export interface DialogContentProps extends React.ComponentProps<typeof MuiDialogContent> {}
+export type DialogContentProps = React.ComponentProps<typeof MuiDialogContent>
 
 export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
   ({ children, ...props }, ref) => {
@@ -68,7 +69,7 @@ export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps
 
 DialogContent.displayName = 'DialogContent';
 
-export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type DialogHeaderProps = React.HTMLAttributes<HTMLDivElement>
 
 export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
   ({ children, ...props }, ref) => {
@@ -82,7 +83,7 @@ export const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
 
 DialogHeader.displayName = 'DialogHeader';
 
-export interface DialogTitleProps extends React.ComponentProps<typeof Typography> {}
+export type DialogTitleProps = React.ComponentProps<typeof Typography>
 
 export const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(
   ({ children, ...props }, ref) => {
@@ -98,7 +99,7 @@ export const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps
 
 DialogTitle.displayName = 'DialogTitle';
 
-export interface DialogFooterProps extends React.ComponentProps<typeof MuiDialogActions> {}
+export type DialogFooterProps = React.ComponentProps<typeof MuiDialogActions>
 
 export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
   ({ children, ...props }, ref) => {
@@ -112,7 +113,7 @@ export const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
 
 DialogFooter.displayName = 'DialogFooter';
 
-export interface DialogDescriptionProps extends React.ComponentProps<typeof Typography> {}
+export type DialogDescriptionProps = React.ComponentProps<typeof Typography>
 
 export const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
   ({ children, ...props }, ref) => {
@@ -126,7 +127,7 @@ export const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDe
 
 DialogDescription.displayName = 'DialogDescription';
 
-export interface DialogCloseProps extends React.ComponentProps<typeof IconButton> {}
+export type DialogCloseProps = React.ComponentProps<typeof IconButton>
 
 export const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps>(
   ({ onClick, ...props }, ref) => {

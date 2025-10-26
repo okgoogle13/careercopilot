@@ -12,9 +12,11 @@ import {
   Snackbar,
 } from '@mui/material';
 import { useState } from 'react';
+
+import type {
+  UploadedFile} from '@/components/documents/DocumentUploadDropzone';
 import {
-  DocumentUploadDropzone,
-  UploadedFile,
+  DocumentUploadDropzone
 } from '@/components/documents/DocumentUploadDropzone';
 import { uploadAndCreateDocument } from '@/services/documentService';
 

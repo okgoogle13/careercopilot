@@ -1,31 +1,11 @@
 rules_version = '2';
 service firebase.storage {
-  // Allow read access to public assets
   match /b/{bucket}/o {
-    // Public assets (readable by anyone, write requires authentication)
-    match /public/{allPaths=**} {
-      allow read: if true;
-      allow write: if request.auth != null;
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
     }
-
-    // User-specific storage (only accessible by the owner)
-    match /users/{userId}/{allPaths=**} {
-      allow read: if request.auth != null && request.auth.uid == userId;
-      allow write: if request.auth != null && request.auth.uid == userId
-        // Validate file type
-        && (request.resource.contentType.matches('image/.*')
-            || request.resource.contentType.matches('application/pdf')
-            || request.resource.contentType.matches('application/msword')
-            || request.resource.contentType.matches('application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
-        // Limit file size to 10MB
-        && request.resource.size < 10 * 1024 * 1024;
-    }
-
-    // Team assets (accessible by team members)
-    match /teams/{teamId}/{allPaths=**} {
-      allow read: if request.auth != null && exists(/databases/$(database)/documents/teams/$(teamId)/members/$(request.auth.uid));
-      allow write: if request.auth != null &&
-        exists(/databases/$(database)/documents/teams/$(teamId)/admins/$(request.auth.uid));
+    match /temp_ingestions/{file} {
+      allow read, write: if true;  // Or your specific conditions
     }
   }
 }

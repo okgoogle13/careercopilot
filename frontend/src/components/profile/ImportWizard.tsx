@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { LinkedIn, Check, Error, Person, Work, School } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -21,7 +21,7 @@ import {
   ListItemText,
   ListItemIcon,
 } from '@mui/material';
-import { LinkedIn, Check, Error, Person, Work, School } from '@mui/icons-material';
+import React, { useState } from 'react';
 
 interface ImportWizardProps {
   open: boolean;

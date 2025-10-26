@@ -1,7 +1,8 @@
+import type { SliderProps as MuiSliderProps } from '@mui/material';
+import { Slider as MuiSlider } from '@mui/material';
 import React from 'react';
-import { Slider as MuiSlider, SliderProps as MuiSliderProps } from '@mui/material';
 
-export interface SliderProps extends MuiSliderProps {}
+export type SliderProps = MuiSliderProps
 
 export const Slider = React.forwardRef<HTMLSpanElement, SliderProps>(({ ...props }, ref) => {
   return <MuiSlider ref={ref} {...props} />;

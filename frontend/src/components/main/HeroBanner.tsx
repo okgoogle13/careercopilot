@@ -1,6 +1,7 @@
-import React from 'react';
-import { Box, Typography, Button, Container } from '@mui/material';
 import { ArrowRight, PlayArrow } from '@mui/icons-material';
+import { Box, Typography, Button, Container } from '@mui/material';
+import React from 'react';
+
 import { FeatureHighlights } from './FeatureHighlights';
 
 interface HeroBannerProps {

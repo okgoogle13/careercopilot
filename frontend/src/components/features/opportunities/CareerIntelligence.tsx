@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { Badge } from '../../ui/badge';
-import { Progress } from '../../ui/progress';
 import {
   ArrowLeft,
   AutoAwesome as Sparkles,
@@ -19,6 +16,10 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { useState } from 'react';
+
+import { Badge } from '../../ui/badge';
+import { Progress } from '../../ui/progress';
 
 interface CareerIntelligenceProps {
   onBack: () => void;

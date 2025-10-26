@@ -10,6 +10,7 @@ import {
 import { Button, Card, IconButton, Menu, MenuItem } from '@mui/material';
 import { format } from 'date-fns';
 import { useState } from 'react';
+
 import { Badge } from '../ui/badge';
 
 interface ProfileVariationCardProps {
@@ -56,9 +57,9 @@ export function ProfileVariationCard({
       return 'Today';
     } else if (diffInHours < 48) {
       return 'Yesterday';
-    } else {
+    } 
       return format(date, 'MMM d');
-    }
+    
   };
 
   return (

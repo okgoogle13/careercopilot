@@ -1,6 +1,7 @@
-import React from 'react';
-import { FormLabel, FormLabelProps } from '@mui/material';
+import type { FormLabelProps } from '@mui/material';
+import { FormLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledLabel = styled(FormLabel)(({ theme }) => ({
   fontSize: '0.875rem',
@@ -10,7 +11,7 @@ const StyledLabel = styled(FormLabel)(({ theme }) => ({
   display: 'block',
 }));
 
-export interface LabelProps extends FormLabelProps {}
+export type LabelProps = FormLabelProps
 
 export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ children, ...props }, ref) => {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Card } from '@mui/material';
-import { Button } from '@mui/material';
-import { Textarea } from '../../../ui/textarea';
 import { BusinessCenter as Briefcase, Mail } from '@mui/icons-material';
+import { Card , Button } from '@mui/material';
+import React, { useState } from 'react';
+
 import { prepareApplicationPackage, scanInboxForOpportunities } from '../../../../api/aiServices';
+import { Textarea } from '../../../ui/textarea';
 
 export function DashboardStats() {
   // State for Application Preparation

@@ -8,6 +8,7 @@ from fastapi import APIRouter
 
 # Import endpoint modules
 from .endpoints import analysis, auth, config, workflows
+from .routers import ingestion
 
 api_router = APIRouter()
 
@@ -17,6 +18,7 @@ routers = [
     (auth.router, "/auth", "Authentication"),
     (config.router, "/config", "Configuration"),
     (workflows.router, "/workflows", "Workflows"),
+    (ingestion.router, "/ingestion", "Smart Ingestion"),
 ]
 
 # Include all routers

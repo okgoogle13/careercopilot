@@ -2,8 +2,9 @@ import { Box, Button, Stack, Typography } from '@mui/material';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
 import { useState } from 'react';
+
 import { DocumentBrowser } from '../../features/Documents/DocumentBrowser';
-import { Document } from '../../features/Documents/types';
+import type { Document } from '../../features/Documents/types';
 
 type DocumentType = Document['type'];
 

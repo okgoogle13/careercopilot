@@ -1,7 +1,3 @@
-import React from 'react';
-import { Badge } from '../../ui/badge';
-import { Separator } from '../../ui/separator';
-import { CardTitle } from '../../ui/card';
 import {
   ArrowLeft,
   Code,
@@ -20,6 +16,11 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import React from 'react';
+
+import { Badge } from '../../ui/badge';
+import { CardTitle } from '../../ui/card';
+import { Separator } from '../../ui/separator';
 
 interface ComponentUsageGuideProps {
   onBack: () => void;

@@ -1,20 +1,23 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2021",
+    "target": "es2020",
     "outDir": "lib",
-    "rootDir": ".",
-    "strict": false,
-    "noImplicitAny": false,
+    "strict": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["jest", "node"],
-    "typeRoots": ["./node_modules/@types", "./src/types"]
+    "types": ["node", "jest"]
   },
-  "include": ["src/**/*.ts", "__tests__/**/*.ts", "test/**/*.ts"],
-  "exclude": ["node_modules", "lib"]
+  "include": [
+    "src",
+    "__tests__",
+    "test",
+    "*.ts",
+    "*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "lib"
+  ]
 }

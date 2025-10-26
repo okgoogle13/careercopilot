@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { Box, Typography, Button, Card, CardContent, Divider, Chip } from '@mui/material';
-import { ProfileCard } from '../features/profile/ProfileCard';
 import { SwapHoriz, Download, Share } from '@mui/icons-material';
+import { Box, Typography, Button, Card, CardContent, Divider, Chip } from '@mui/material';
+import React, { useState } from 'react';
+
+import { ProfileCard } from '../features/profile/ProfileCard';
+
 
 interface ProfileData {
   id: string;

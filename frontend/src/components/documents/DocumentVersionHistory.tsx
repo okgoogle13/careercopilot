@@ -1,8 +1,8 @@
-import React from 'react';
 import { Schedule, AccessTime, Person, Download, Delete } from '@mui/icons-material';
 import { Button, Stack, Box, Typography, Chip, IconButton } from '@mui/material';
-import { formatDistanceToNow } from 'date-fns';
 import { styled } from '@mui/material/styles';
+import { formatDistanceToNow } from 'date-fns';
+import React from 'react';
 
 export interface DocumentVersion {
   id: string;
@@ -43,7 +43,7 @@ export const DocumentVersionHistory: React.FC<DocumentVersionHistoryProps> = ({
     const k = 1024;
     const sizes = ['B', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))  } ${  sizes[i]}`;
   };
 
   return (

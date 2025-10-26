@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { Button } from '@mui/material';
 import { Description as FileText, Add as Plus } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { useState } from 'react';
+
+import type { DashboardTab } from '../../../types';
+
 import { DashboardHeader } from './dashboard/DashboardHeader';
 import { DashboardStats } from './dashboard/DashboardStats';
 import { ProfileGrid } from './dashboard/ProfileGrid';
-import { DashboardTab } from '../../../types';
 
 interface Profile {
   id: string;
