@@ -8,11 +8,12 @@ opportunities from email, ranks them, and creates calendar tasks for the best ma
 from datetime import datetime
 from typing import Dict, List
 
+from pydantic import BaseModel, Field
+
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import with_ai_error_handling
 from app.core.db import db
 from app.core.input_validation import InputSanitizer, InputValidationError
-from pydantic import BaseModel, Field
 
 from .advanced_job_matching import analyze_job_match_detailed
 from .calendar_manager import createCalendarEvent

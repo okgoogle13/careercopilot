@@ -8,14 +8,15 @@ the one-click application package generation and email task workflows.
 import traceback
 from typing import Dict, Optional
 
+from fastapi import APIRouter, HTTPException, status
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
+
 # Import workflow functions
 from app.genkit_flows.career_application_workflow import (
     ApplicationPackageResult,
     generate_application_package,
 )
-from fastapi import APIRouter, HTTPException, status
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
 
 # Temporarily disabled due to syntax error in email_task_workflow.py
 # from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult

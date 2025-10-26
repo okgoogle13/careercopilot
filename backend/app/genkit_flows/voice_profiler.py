@@ -1,7 +1,8 @@
 import json
 
-from app.core.db import db
 from genkit import ai
+
+from app.core.db import db
 
 # Temporarily commented out due to genkit plugin issues
 # from genkit.plugins.google_genai.models.gemini import GEMINI_2_0_FLASH

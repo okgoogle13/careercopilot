@@ -10,8 +10,9 @@ import threading
 import time
 from typing import Any, Dict, Optional
 
-from app.config.production import ProductionConfig as config
 from prometheus_client import Counter, Gauge, Histogram, start_http_server
+
+from app.config.production import ProductionConfig as config
 
 logger = logging.getLogger(__name__)
 

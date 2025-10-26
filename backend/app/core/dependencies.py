@@ -7,11 +7,12 @@ FastAPI dependencies for authentication, authorization, and data access.
 import os
 
 import firebase_admin
-from app.core.db import db  # Assuming your Firestore client is here
-from app.models import User  # Import the new User model
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import OAuth2PasswordBearer
 from firebase_admin import auth
+
+from app.core.db import db  # Assuming your Firestore client is here
+from app.models import User  # Import the new User model
 
 # Standard OAuth2 scheme pointing to a conceptual token URL
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")

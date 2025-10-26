@@ -11,30 +11,30 @@ FIXED=0
 # Process each file
 for FILE in $FILES; do
   echo "\n🔧 Processing $FILE"
-  
+
   # Create a backup
   cp "$FILE" "${FILE}.bak"
-  
+
   # Process the file
   awk '
   # Function to print indentation
   function indent(level) {
     for (i = 0; i < level; i++) printf "  ";
   }
-  
+
   {
     # Check if line contains <Grid item without a container parent
     if ($0 ~ /<Grid[^>]*item[^>]*>/ && !container) {
       # Get the indentation
       match($0, /^ */);
       spaces = substr($0, 1, RLENGTH);
-      
+
       # Print container Grid
       print spaces "<Grid container>";
       print;
       container = 1;
       level++;
-    } 
+    }
     # Check for closing Grid tag
     else if ($0 ~ /<\/Grid>/) {
       if (container && level > 0) {
@@ -58,7 +58,7 @@ for FILE in $FILES; do
     }
   }
   ' "$FILE" > "${FILE}.tmp"
-  
+
   # Check if the file was modified
   if ! diff -q "$FILE" "${FILE}.tmp" > /dev/null; then
     mv "${FILE}.tmp" "$FILE"
@@ -68,7 +68,7 @@ for FILE in $FILES; do
     rm "${FILE}.tmp"
     echo "ℹ️  No changes needed for $FILE"
   fi
-  
+
   # Remove backup if no changes were made
   if diff -q "$FILE" "${FILE}.bak" > /dev/null; then
     rm "${FILE}.bak"

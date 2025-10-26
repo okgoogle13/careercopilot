@@ -9,9 +9,10 @@ import asyncio
 from typing import Any, Dict
 
 import pytest
-from app.main_simple import app
 from fastapi.testclient import TestClient
 from httpx import ASGITransport, AsyncClient
+
+from app.main_simple import app
 
 
 class TestKscGenerationIntegration:

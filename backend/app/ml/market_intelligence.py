@@ -11,14 +11,15 @@ from datetime import datetime, timedelta
 from typing import Any, Dict, List
 
 import pandas as pd
-from app.core.database import get_db_session
-from app.models.database import Job, MarketAnalysis
-from app.services.web_search import web_search
 from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
+
+from app.core.database import get_db_session
+from app.models.database import Job, MarketAnalysis
+from app.services.web_search import web_search
 
 logger = logging.getLogger(__name__)
 

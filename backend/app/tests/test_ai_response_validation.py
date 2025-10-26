@@ -8,6 +8,7 @@ with various AI response formats and edge cases.
 import json
 
 import pytest
+
 from app.core.ai_flow_integration import (
     AIFlowManager,
     create_fallback_response,

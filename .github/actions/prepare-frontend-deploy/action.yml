@@ -74,33 +74,33 @@ runs:
       shell: bash
       run: |
         echo "📦 Installing dependencies..."
-        
+
         # Clean up any existing installation artifacts
         rm -rf node_modules .yarn/cache .yarn/install-state.gz .yarn/build-state.yml 2>/dev/null || true
-        
+
         # Ensure we're using the correct Node.js version
         echo "Using Node.js $(node -v)"
         echo "Using Yarn $(yarn --version)"
-        
+
         # Try to install with frozen lockfile first
         echo "Attempting to install with frozen lockfile..."
         if yarn install --immutable; then
           echo "✅ Successfully installed with frozen lockfile"
           exit 0
         fi
-        
+
         echo "⚠️  Frozen install failed, trying with --check-cache..."
         if yarn install --check-cache; then
           echo "✅ Successfully installed with --check-cache"
           exit 0
         fi
-        
+
         # If we get here, the lockfile is probably out of sync
         echo "⚠️  Install with lockfile failed, updating lockfile..."
-        
+
         # Backup the lockfile for reference
         cp yarn.lock yarn.lock.backup 2>/dev/null || true
-        
+
         # Update the lockfile
         if yarn install --mode=update-lockfile; then
           echo "✅ Successfully updated lockfile and installed dependencies"
@@ -111,7 +111,7 @@ runs:
           # git commit -m 'Update yarn.lock' || true
           exit 0
         fi
-        
+
         # Last resort: clean install with fresh node_modules
         echo "⚠️  Install with updated lockfile failed, performing clean install..."
         rm -rf node_modules .yarn/cache yarn.lock
@@ -119,7 +119,7 @@ runs:
           echo "✅ Successfully performed clean install"
           exit 0
         fi
-        
+
         echo "❌ All installation attempts failed"
         exit 1
 

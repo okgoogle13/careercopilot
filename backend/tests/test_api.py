@@ -6,10 +6,11 @@ Includes edge cases, error conditions, and integration tests.
 from datetime import timedelta
 
 import pytest
-from app.core.security import create_access_token
-from app.main import app
 from fastapi import status
 from fastapi.testclient import TestClient
+
+from app.core.security import create_access_token
+from app.main import app
 
 client = TestClient(app)
 

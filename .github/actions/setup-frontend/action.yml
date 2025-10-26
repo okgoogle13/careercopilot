@@ -126,16 +126,16 @@ runs:
         echo "🏗️ Building frontend with Vite..."
         # Clean previous build if it exists
         rm -rf dist .next .vercel .svelte-kit .nuxt 2>/dev/null || true
-        
+
         # Build with production settings
         NODE_ENV=production npm run build
-        
+
         # Verify the build output
         if [ ! -d "dist" ] || [ -z "$(ls -A dist 2>/dev/null)" ]; then
           echo "❌ Build failed - no dist directory or it's empty"
           exit 1
         fi
-        
+
         echo "✅ Build completed successfully"
         echo "success=true" >> $GITHUB_OUTPUT
 

@@ -9,6 +9,7 @@ import sys
 from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
+
 from app.core.ai_error_handling import AIError, AIErrorType
 
 # Add the project root to the Python path
@@ -525,16 +526,19 @@ def mock_googleai(monkeypatch, mock_gemini):
     mock_googleai_root.GenerationConfig = MockGoogleAIGenerationConfig
 
     # Patch the necessary modules and functions
-    with patch.dict(
-        "sys.modules",
-        {
-            "googleai": mock_googleai_root,
-            "genkit": mock_genkit,
-            "genkit.plugins.googleai": mock_googleai_module,
-        },
-    ), patch(
-        "app.genkit_flows.resume_intelligence_pipeline.get_ai_config",
-        mock_get_ai_config,
+    with (
+        patch.dict(
+            "sys.modules",
+            {
+                "googleai": mock_googleai_root,
+                "genkit": mock_genkit,
+                "genkit.plugins.googleai": mock_googleai_module,
+            },
+        ),
+        patch(
+            "app.genkit_flows.resume_intelligence_pipeline.get_ai_config",
+            mock_get_ai_config,
+        ),
     ):
         # Import the module to apply patches
         pass

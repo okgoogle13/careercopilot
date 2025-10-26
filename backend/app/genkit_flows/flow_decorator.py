@@ -9,8 +9,9 @@ import functools
 import logging
 from typing import Any, Callable, Optional, Type, TypeVar
 
-from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
 from pydantic import BaseModel
+
+from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
 
 # Try to import Genkit for decorators, with fallback
 try:

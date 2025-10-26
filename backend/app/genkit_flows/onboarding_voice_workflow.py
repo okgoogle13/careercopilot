@@ -1,9 +1,10 @@
 import json
 from typing import List
 
+from pydantic import BaseModel
+
 from app.core.db import db
 from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_function
-from pydantic import BaseModel
 
 # Import the existing voice profiler logic
 

@@ -15,13 +15,14 @@ if "/app/app" not in sys.path:
 
 
 import firebase_admin
+from fastapi import FastAPI
+from firebase_admin import credentials
+
 from app.api.router import api_router
 from app.core.genkit_init import check_genkit_health, startup_genkit
 from app.core.loguru_config import configure_loguru, get_logger, log_security_event
 from app.core.monitoring import setup_prometheus_monitoring
 from app.core.secure_config import SecureSettings
-from fastapi import FastAPI
-from firebase_admin import credentials
 
 # Initialize secure configuration
 settings = SecureSettings()
