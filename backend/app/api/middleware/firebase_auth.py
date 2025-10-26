@@ -7,10 +7,11 @@ This module provides middleware to authenticate requests using Firebase ID token
 import logging
 from typing import Any, Dict, List, Optional
 
-from app.core.config import settings
-from app.core.firebase import verify_id_token
 from fastapi import Depends, HTTPException, Request, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+
+from app.core.config import settings
+from app.core.firebase import verify_id_token
 
 logger = logging.getLogger(__name__)
 

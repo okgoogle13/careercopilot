@@ -9,6 +9,7 @@ from typing import Any, Dict
 from unittest.mock import MagicMock, patch
 
 import pytest
+
 from app.core.ai_error_handling import AIError
 from app.genkit_flows.cover_letter_generator import generate_tailored_cover_letter
 from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter

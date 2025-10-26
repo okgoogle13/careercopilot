@@ -9,11 +9,12 @@ import json
 import os
 from typing import Dict, List, Optional
 
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
-from dotenv import load_dotenv
-from pydantic import BaseModel, Field
 
 try:
     import genkit

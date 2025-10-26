@@ -5,6 +5,10 @@ Authentication endpoints for user registration, login, and session management.
 import logging
 from typing import Dict, List, Optional
 
+from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel, EmailStr
+from sqlalchemy.orm import Session
+
 from app.core.auth import auth_manager, create_user_token, get_current_user, session_manager
 from app.core.database import get_db
 from app.genkit_flows.onboarding_voice_workflow import (
@@ -12,9 +16,6 @@ from app.genkit_flows.onboarding_voice_workflow import (
     analyze_and_create_voice_profile,
 )
 from app.models.database import User
-from fastapi import APIRouter, Depends, HTTPException, status
-from pydantic import BaseModel, EmailStr
-from sqlalchemy.orm import Session
 
 logger = logging.getLogger(__name__)
 

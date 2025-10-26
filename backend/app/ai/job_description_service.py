@@ -11,8 +11,9 @@ import logging
 import re
 from typing import Any, Dict, List, Optional
 
-from app.core.config import settings
 from pydantic import BaseModel, Field
+
+from app.core.config import settings
 
 from .base_service import BaseAIService
 

@@ -152,8 +152,9 @@ try:
     print("\n6. CUSTOM SCHEMA REGISTRATION")
     print("-" * 40)
 
-    from app.core.ai_response_validation import BaseAIResponseSchema
     from pydantic import Field
+
+    from app.core.ai_response_validation import BaseAIResponseSchema
 
     class ProjectAnalysisResponse(BaseAIResponseSchema):
         project_name: str = Field(..., min_length=1)

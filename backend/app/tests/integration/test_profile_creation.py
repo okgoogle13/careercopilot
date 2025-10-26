@@ -13,8 +13,9 @@ from datetime import datetime
 
 import firebase_admin
 import pytest
-from app.services.user_profile_service import UserProfileService
 from firebase_admin import credentials, firestore
+
+from app.services.user_profile_service import UserProfileService
 
 
 @pytest.mark.skip(reason="Firestore emulator not available in CI - requires local setup")

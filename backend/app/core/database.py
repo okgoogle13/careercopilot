@@ -8,10 +8,11 @@ import os
 from contextlib import contextmanager
 from typing import Generator
 
-from app.models.database import Base
 from sqlalchemy import create_engine, event, text
 from sqlalchemy.orm import Session, sessionmaker
 from sqlalchemy.pool import StaticPool
+
+from app.models.database import Base
 
 logger = logging.getLogger(__name__)
 

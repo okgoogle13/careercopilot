@@ -10,14 +10,15 @@ import os
 from datetime import datetime
 from typing import Dict, List, Optional
 
+from dotenv import load_dotenv
+from pydantic import BaseModel, Field
+
 from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.genkit_flows.ksc_generator import generateKscResponse
 from app.genkit_flows.resume_intelligence_pipeline import generate_resume_intelligence_report
 from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
-from dotenv import load_dotenv
-from pydantic import BaseModel, Field
 
 try:
     import genkit

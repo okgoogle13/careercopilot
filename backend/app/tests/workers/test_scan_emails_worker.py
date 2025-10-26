@@ -1,4 +1,5 @@
 import pytest
+
 from app.workers.scan_emails_worker import process_scan_emails_task
 
 

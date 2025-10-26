@@ -1,8 +1,18 @@
 import os
+from datetime import datetime, timedelta, timezone
+from typing import Any, Dict, Optional
 
+import jwt
 from fastapi import HTTPException, Request, status
 from google.auth.transport import requests
 from google.oauth2 import id_token
+
+# JWT Configuration
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")
+if not SECRET_KEY:
+    raise ValueError("JWT_SECRET_KEY environment variable must be set")
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30  # Token expiration time in minutes
 
 
 async def verify_google_oidc_token(request: Request):
@@ -52,3 +62,25 @@ async def verify_google_oidc_token(request: Request):
             detail=f"Invalid OIDC token: {e}",
             headers={"WWW-Authenticate": "Bearer"},
         )
+
+
+def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
+    """
+    Create a JWT access token with the provided data.
+
+    Args:
+        data: Dictionary containing the data to encode in the token
+        expires_delta: Optional timedelta for token expiration
+
+    Returns:
+        str: Encoded JWT token
+    """
+    to_encode = data.copy()
+    if expires_delta:
+        expire = datetime.now(timezone.utc) + expires_delta
+    else:
+        expire = datetime.now(timezone.utc) + timedelta(minutes=15)
+
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
