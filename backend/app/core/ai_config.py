@@ -262,7 +262,7 @@ class AIConfigManager:
     def _load_from_environment(self) -> None:
         """Load configuration from environment variables"""
         # Load provider credentials from environment
-        env_credentials = {
+        env_credentials: Dict[AIProvider, Dict[str, Any]] = {
             AIProvider.OPENAI: {
                 "api_key": os.getenv("OPENAI_API_KEY"),
                 "organization_id": os.getenv("OPENAI_ORG_ID"),
@@ -295,27 +295,25 @@ class AIConfigManager:
                 # Update existing credentials with environment values
                 for key, value in creds.items():
                     if value:
-                        if key == "custom_auth":
+                        if key == "custom_auth" and isinstance(value, dict):
                             self.credentials[provider].custom_auth.update(value)
                         else:
                             setattr(self.credentials[provider], key, value)
 
         # Load global settings from environment
-        global_settings = {
-            "AI_CACHE_ENABLED": os.getenv("AI_CACHE_ENABLED", "true").lower() == "true",
-            "AI_MONITORING_ENABLED": os.getenv("AI_MONITORING_ENABLED", "true").lower() == "true",
-            "AI_RETRY_ATTEMPTS": int(os.getenv("AI_RETRY_ATTEMPTS", "3")),
-            "AI_TIMEOUT_SECONDS": int(os.getenv("AI_TIMEOUT_SECONDS", "30")),
-            "AI_COST_BUDGET_DAILY": float(os.getenv("AI_COST_BUDGET_DAILY", "100.0")),
-        }
+        cache_enabled = os.getenv("AI_CACHE_ENABLED", "true").lower() == "true"
+        monitoring_enabled = os.getenv("AI_MONITORING_ENABLED", "true").lower() == "true"
+        retry_attempts = int(os.getenv("AI_RETRY_ATTEMPTS", "3"))
+        timeout_seconds = int(os.getenv("AI_TIMEOUT_SECONDS", "30"))
+        cost_budget_daily = float(os.getenv("AI_COST_BUDGET_DAILY", "100.0"))
 
         # Apply global settings to all services
         for service in self.services.values():
-            service.cache_enabled = global_settings["AI_CACHE_ENABLED"]
-            service.monitoring_enabled = global_settings["AI_MONITORING_ENABLED"]
-            service.max_retries = global_settings["AI_RETRY_ATTEMPTS"]
-            service.timeout_seconds = global_settings["AI_TIMEOUT_SECONDS"]
-            service.cost_budget_daily = global_settings["AI_COST_BUDGET_DAILY"]
+            service.cache_enabled = cache_enabled
+            service.monitoring_enabled = monitoring_enabled
+            service.max_retries = retry_attempts
+            service.timeout_seconds = timeout_seconds
+            service.cost_budget_daily = cost_budget_daily
 
     def _load_default_configuration(self) -> None:
         """Load default AI configuration"""
