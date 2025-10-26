@@ -62,10 +62,10 @@ def cached_ai_operation(
                     return await func(*args, **kwargs)
 
                 # Prepare cache input data
-                _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
+                input_data = _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
 
                 # Try to get from cache
-                cached_result = await cache.get(operation_type, user_id)
+                cached_result = await cache.get_ai_operation(operation_type, input_data, user_id)
                 if cached_result is not None:
                     return cached_result
 
@@ -75,11 +75,13 @@ def cached_ai_operation(
                 # Cache the result with TTL from cache config
                 cache_config = cache.CACHE_CONFIGS.get("default", {})
                 ttl_seconds = cache_config.get("ttl", 3600)  # Default 1 hour TTL
-                ttl = timedelta(seconds=ttl_seconds) if ttl_seconds else None
+                ttl = timedelta(seconds=ttl_seconds) if ttl_seconds else timedelta(hours=1)
 
                 # Convert result to dict if it's not already
                 cache_value = result if isinstance(result, dict) else {"value": result}
-                await cache.set(operation_type, user_id, cache_value, ttl=ttl)
+                await cache.cache_ai_operation(
+                    operation_type, input_data, cache_value, user_id, ttl
+                )
 
                 return result
 
@@ -166,7 +168,9 @@ class CacheContext:
         self.result = None
 
     async def __aenter__(self):
-        self.result = await self.cache.get(self.operation_type, self.user_id, self.input_data)
+        self.result = await self.cache.get_ai_operation(
+            self.operation_type, self.input_data, self.user_id
+        )
         return self
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
@@ -175,7 +179,11 @@ class CacheContext:
 
     async def set_result(self, result: Any) -> bool:
         """Cache a result within the context"""
-        return await self.cache.set(self.operation_type, self.user_id, self.input_data, result)
+        # Convert result to dict if needed
+        result_data = result if isinstance(result, dict) else {"value": result}
+        return await self.cache.cache_ai_operation(
+            self.operation_type, self.input_data, result_data, self.user_id
+        )
 
 
 # Usage example with context manager:
