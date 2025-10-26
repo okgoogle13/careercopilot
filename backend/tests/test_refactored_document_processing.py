@@ -11,6 +11,9 @@ from io import BytesIO
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
+from fastapi import UploadFile
+from pydantic import BaseModel
+
 from app.ai.job_description_service import (
     JobDescriptionAnalysisResult,
     JobDescriptionAnalysisService,
@@ -22,8 +25,6 @@ from app.core.file_upload_decorators import (
     FileValidationError,
     validate_file_upload,
 )
-from fastapi import UploadFile
-from pydantic import BaseModel
 
 
 class TestModel(BaseModel):

@@ -1,4 +1,5 @@
 import pytest
+
 from app.core.ai_error_handling import (
     AIError,
     AIErrorType,

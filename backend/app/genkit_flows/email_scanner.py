@@ -1,15 +1,16 @@
 import base64
 from datetime import datetime
 
+from google.cloud.firestore import SERVER_TIMESTAMP
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+
 from app.core.db import db
 from app.core.genkit_init import get_model
 from app.core.prompt_service import format_prompt
 from app.core.secrets import get_user_secret
 from app.genkit_flows.flow_decorator import simple_genkit_flow
-from google.cloud.firestore import SERVER_TIMESTAMP
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
 
 # Import the new flows
 from .calendar_manager import createCalendarEvent

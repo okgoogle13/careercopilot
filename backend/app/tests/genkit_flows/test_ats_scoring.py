@@ -9,6 +9,7 @@ from typing import List
 from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
+
 from app.core.enhanced_ai_error_handling import AIOperationResult
 from app.genkit_flows.ats_scoring import AtsResult, ScoreBreakdown, atsScoring
 from app.genkit_flows.extract_job_requirements import JobRequirements

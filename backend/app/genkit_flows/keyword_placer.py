@@ -1,8 +1,9 @@
 from typing import List
 
+from pydantic import BaseModel, Field
+
 from app.core.genkit_init import get_model
 from app.genkit_flows.flow_decorator import simple_genkit_flow
-from pydantic import BaseModel, Field
 
 # --- Pydantic Schemas for Structured Output ---
 

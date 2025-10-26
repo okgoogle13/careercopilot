@@ -17,9 +17,10 @@ from typing import Any, Dict, List, Optional, Union
 
 import pdfplumber
 import pypdfium2
+from bs4 import BeautifulSoup
+
 from app.ai.base_service import BaseAIService
 from app.core.ai_error_handling import AIError, AIErrorType
-from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 

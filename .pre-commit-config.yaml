@@ -30,6 +30,17 @@ repos:
         files: ^backend/
         exclude: ^backend/(migrations|__pycache__|\.venv)/
 
+  # Python static type checking with mypy
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-python-dateutil, types-requests, types-PyYAML, types-pytz]
+        args: [--config-file=backend/pyproject.toml, --no-incremental]
+        files: ^backend/
+        exclude: ^backend/(migrations|__pycache__|\.venv|tests?|scripts)/
+        types: [python]
+
   # Frontend: ESLint for TypeScript/JavaScript
   - repo: local
     hooks:

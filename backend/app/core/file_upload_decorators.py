@@ -10,8 +10,9 @@ import os
 from functools import wraps
 from typing import Callable, List, Optional, Set
 
-from app.core.config import settings
 from fastapi import HTTPException, UploadFile, status
+
+from app.core.config import settings
 
 logger = logging.getLogger(__name__)
 

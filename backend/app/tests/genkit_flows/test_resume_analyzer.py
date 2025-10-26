@@ -2,6 +2,7 @@ import json
 from unittest.mock import Mock, patch
 
 import pytest
+
 from app.core.ai_error_handling import AIError
 from app.genkit_flows.resume_analyzer import compare_resume_to_job
 
