@@ -62,7 +62,7 @@ def cached_ai_operation(
                     return await func(*args, **kwargs)
 
                 # Prepare cache input data
-                cache_input = _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
+                _prepare_cache_input(args, kwargs, cache_key_params, exclude_params)
 
                 # Try to get from cache
                 cached_result = await cache.get(operation_type, user_id)
@@ -76,7 +76,7 @@ def cached_ai_operation(
                 cache_config = cache.CACHE_CONFIGS.get("default", {})
                 ttl_seconds = cache_config.get("ttl", 3600)  # Default 1 hour TTL
                 ttl = timedelta(seconds=ttl_seconds) if ttl_seconds else None
-                
+
                 # Convert result to dict if it's not already
                 cache_value = result if isinstance(result, dict) else {"value": result}
                 await cache.set(operation_type, user_id, cache_value, ttl=ttl)
@@ -120,9 +120,12 @@ def _prepare_cache_input(
     return cache_input
 
 
-T = TypeVar('T', bound=Callable[..., Any])
+T = TypeVar("T", bound=Callable[..., Any])
 
-def invalidate_user_ai_cache(user_id: str, operation_types: Optional[List[str]] = None) -> Callable[[T], T]:
+
+def invalidate_user_ai_cache(
+    user_id: str, operation_types: Optional[List[str]] = None
+) -> Callable[[T], T]:
     """
     Decorator to invalidate user cache after function execution
 
@@ -146,6 +149,7 @@ def invalidate_user_ai_cache(user_id: str, operation_types: Optional[List[str]] 
             except Exception as e:
                 logger.error(f"Error in cache invalidation: {e}")
                 raise
+
         return cast(T, wrapper)
 
     return decorator
