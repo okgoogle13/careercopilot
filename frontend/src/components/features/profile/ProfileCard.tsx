@@ -1,5 +1,4 @@
 import { Edit, Delete as Trash2 } from '@mui/icons-material';
-import { Avatar, AvatarFallback } from '../../ui/avatar';
 import {
   Button,
   IconButton,
@@ -10,6 +9,8 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+
+import { Avatar, AvatarFallback } from '../../ui/avatar';
 
 interface ProfileCardProps {
   name: string;

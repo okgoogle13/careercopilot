@@ -1,6 +1,7 @@
-import React from 'react';
-import { Button as MuiButton, ButtonProps as MuiButtonProps } from '@mui/material';
+import type { ButtonProps as MuiButtonProps } from '@mui/material';
+import { Button as MuiButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 // Custom styled button that maintains compatibility with existing code
 const StyledButton = styled(MuiButton)<{ customvariant?: string }>(({ theme, customvariant }) => ({

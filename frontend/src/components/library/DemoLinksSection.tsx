@@ -1,5 +1,3 @@
-import React from 'react';
-import { ComponentSection } from './ComponentDemo';
 import { AutoAwesome as Sparkles, PlayArrow as Play } from '@mui/icons-material';
 import {
   Button,
@@ -11,6 +9,9 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import React from 'react';
+
+import { ComponentSection } from './ComponentDemo';
 
 interface DemoLinksSectionProps {
   onNavigateToAnimated?: () => void;

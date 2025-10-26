@@ -1,6 +1,7 @@
 import { Close as X, Add as Plus, Check } from '@mui/icons-material';
-import { Badge } from '../ui/badge';
 import { Button, IconButton } from '@mui/material';
+
+import { Badge } from '../ui/badge';
 
 interface KeywordTagProps {
   keyword: string;

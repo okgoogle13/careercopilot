@@ -1,5 +1,5 @@
-import React from 'react';
 import { Box, Typography, Paper } from '@mui/material';
+import React from 'react';
 
 interface ColorSwatchProps {
   name: string;

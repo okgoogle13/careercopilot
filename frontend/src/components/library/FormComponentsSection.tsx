@@ -1,12 +1,14 @@
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
+
+import { Checkbox } from '../ui/checkbox';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { Textarea } from '../ui/textarea';
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { Switch } from '../ui/switch';
-import { Checkbox } from '../ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { Slider } from '../ui/slider';
+import { Switch } from '../ui/switch';
+import { Textarea } from '../ui/textarea';
+
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function FormComponentsSection() {

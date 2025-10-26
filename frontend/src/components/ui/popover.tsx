@@ -1,5 +1,6 @@
+import type { PopoverProps as MuiPopoverProps } from '@mui/material';
+import { Popover as MuiPopover } from '@mui/material';
 import React from 'react';
-import { Popover as MuiPopover, PopoverProps as MuiPopoverProps } from '@mui/material';
 
 export interface PopoverProps extends Omit<MuiPopoverProps, 'open'> {
   open?: boolean;
@@ -47,7 +48,7 @@ export const PopoverTrigger = React.forwardRef<HTMLElement, PopoverTriggerProps>
 
 PopoverTrigger.displayName = 'PopoverTrigger';
 
-export interface PopoverContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type PopoverContentProps = React.HTMLAttributes<HTMLDivElement>
 
 export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
   ({ children, ...props }, ref) => {

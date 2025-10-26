@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   ListItemButton,
   ListItemIcon,
@@ -9,8 +8,11 @@ import {
   useTheme,
   alpha,
 } from '@mui/material';
-import { NavItem } from '../../config/navigation';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import type { NavItem } from '../../config/navigation';
+
 
 interface NavigationItemProps {
   item: NavItem;

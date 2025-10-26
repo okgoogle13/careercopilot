@@ -1,14 +1,3 @@
-import React from 'react';
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Chip,
-  Avatar,
-  IconButton,
-  Button,
-} from '@mui/material';
 import {
   Schedule as Clock,
   CheckCircle,
@@ -19,6 +8,17 @@ import {
   Edit,
   OpenInNew as ExternalLink,
 } from '@mui/icons-material';
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Chip,
+  Avatar,
+  IconButton,
+  Button,
+} from '@mui/material';
+import React from 'react';
 
 interface TimelineEvent {
   id: string;

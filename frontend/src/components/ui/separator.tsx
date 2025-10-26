@@ -1,6 +1,7 @@
-import React from 'react';
-import { Divider, DividerProps } from '@mui/material';
+import type { DividerProps } from '@mui/material';
+import { Divider } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledDivider = styled(Divider)(({ theme }) => ({
   backgroundColor: theme.palette.divider,

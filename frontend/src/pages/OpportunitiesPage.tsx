@@ -1,4 +1,3 @@
-import Grid from '@/components/ui/GridCompat';
 import {
   Analytics,
   AttachMoney,
@@ -22,6 +21,9 @@ import {
   Visibility,
   Work,
 } from '@mui/icons-material';
+import type {
+  ChipProps,
+  LinearProgressProps} from '@mui/material';
 import {
   Avatar,
   Box,
@@ -31,7 +33,6 @@ import {
   CardContent,
   Checkbox,
   Chip,
-  ChipProps,
   Container,
   Dialog,
   DialogActions,
@@ -44,7 +45,6 @@ import {
   InputAdornment,
   InputLabel,
   LinearProgress,
-  LinearProgressProps,
   List,
   ListItem,
   ListItemIcon,
@@ -60,6 +60,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+
+import Grid from '@/components/ui/GridCompat';
 
 interface JobOpportunity {
   id: string;

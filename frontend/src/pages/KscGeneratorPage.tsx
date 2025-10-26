@@ -1,4 +1,3 @@
-import Grid from '@/components/ui/GridCompat';
 import {
   Analytics,
   Assignment,
@@ -16,6 +15,8 @@ import {
   Upload,
   Visibility,
 } from '@mui/icons-material';
+import type {
+  ChipProps} from '@mui/material';
 import {
   Accordion,
   AccordionDetails,
@@ -26,7 +27,6 @@ import {
   Card,
   CardContent,
   Chip,
-  ChipProps,
   CircularProgress,
   Container,
   Dialog,
@@ -50,6 +50,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+
+import Grid from '@/components/ui/GridCompat';
 
 interface KscCriterion {
   id: string;

@@ -1,6 +1,6 @@
-import { Box, Typography } from '@mui/material';
 import { Work } from '@mui/icons-material';
-import { SxProps, Theme } from '@mui/material/styles';
+import { Box, Typography } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material/styles';
 
 interface CareerCopilotLogoProps {
   className?: string;

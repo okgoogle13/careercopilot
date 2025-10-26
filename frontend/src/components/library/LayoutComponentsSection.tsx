@@ -1,7 +1,9 @@
 import React from 'react';
+
 import { Label } from '../ui/label';
 import { Separator } from '../ui/separator';
 import { Skeleton } from '../ui/skeleton';
+
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function LayoutComponentsSection() {

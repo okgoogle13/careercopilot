@@ -25,10 +25,10 @@
 
 ## Production URLs
 
-| Environment | Frontend URL | Backend URL |
-|-------------|--------------|-------------|
-| **Production** | https://careercopilot-468811.web.app | Cloud Run `backend` service |
-| **Staging** | https://careercopilot-staging.web.app | Cloud Run `backend` service |
+| Environment    | Frontend URL                          | Backend URL                 |
+| -------------- | ------------------------------------- | --------------------------- |
+| **Production** | https://careercopilot-468811.web.app  | Cloud Run `backend` service |
+| **Staging**    | https://careercopilot-staging.web.app | Cloud Run `backend` service |
 
 ---
 
@@ -60,6 +60,7 @@ This is the recommended path for a complete production deployment with both fron
 **Issue**: Backend static checks (mypy) are failing, blocking Docker image builds.
 
 **Action**:
+
 ```bash
 # Check what the mypy errors are
 gh run view 18801998109 --log-failed | grep "error:" | head -20
@@ -72,10 +73,12 @@ gh run download 18801998109
 ```
 
 **Files to Check**:
+
 - Look for mypy errors in backend Python files
 - Common issues: missing type hints, incorrect return types, undefined attributes
 
 **Commit Template**:
+
 ```bash
 git add backend/
 git commit -m "fix(backend): resolve mypy type checking errors
@@ -174,11 +177,13 @@ curl $BACKEND_URL/docs | grep "1.1.0"
 **Branch**: `develop`, `main`
 
 **Details**:
+
 - CI workflow run: `18801998109`
 - Job: "Backend Static Checks (mypy)"
 - Status: Failed
 
 **Resolution Path**:
+
 1. Download failed job logs: `gh run download 18801998109`
 2. Review mypy errors
 3. Fix type hints in affected Python files
@@ -191,12 +196,14 @@ curl $BACKEND_URL/docs | grep "1.1.0"
 **Severity**: Medium (workaround available)
 
 **Details**:
+
 - Merge commits don't trigger backend code path changes
 - CI skips backend image build
 - Deployment expects image with merge commit SHA tag
 - Image doesn't exist → deployment fails
 
 **Current Workaround**:
+
 - Existing backend image (`latest` tag) continues running
 - Frontend deploys successfully
 - Backend unchanged (not a critical issue if no backend changes)
@@ -204,6 +211,7 @@ curl $BACKEND_URL/docs | grep "1.1.0"
 **Permanent Fix Options**:
 
 **Option A: Add Fallback to Deployment Workflow**
+
 ```yaml
 # In .github/workflows/_reusable_deploy.yml
 - name: Verify Backend Image Tag Exists
@@ -223,6 +231,7 @@ curl $BACKEND_URL/docs | grep "1.1.0"
 ```
 
 **Option B: Always Trigger Backend Build on Main**
+
 ```yaml
 # In .github/workflows/ci.yml - modify the condition
 build-backend-image:
@@ -238,21 +247,25 @@ build-backend-image:
 ### Workload Identity Federation (WIF)
 
 **What Changed**:
+
 - **Before**: Firebase service account JSON stored as GitHub secrets
 - **After**: WIF authentication using Google Cloud service accounts
 
 **Benefits**:
+
 - 🔒 No long-lived credentials in GitHub
 - 🔄 Unified auth for Cloud Run, Artifact Registry, Firebase
 - ✅ Google's recommended security practice
 
 **Service Accounts**:
+
 ```
 Staging:  github-actions-staging-sa@careercopilot-staging.iam.gserviceaccount.com
 Production: github-actions-prod-sa@careercopilot-468811.iam.gserviceaccount.com
 ```
 
 **Roles**:
+
 - `roles/firebasehosting.admin`
 - `roles/run.developer`
 - `roles/artifactregistry.reader`
@@ -290,12 +303,12 @@ Production: github-actions-prod-sa@careercopilot-468811.iam.gserviceaccount.com
 
 ### Key Workflow Files
 
-| File | Purpose |
-|------|---------|
-| `.github/workflows/ci.yml` | Build, test, create Docker images |
-| `.github/workflows/deploy.yml` | Main deployment orchestrator |
-| `.github/workflows/_reusable_deploy.yml` | Reusable deployment logic |
-| `.github/workflows/auto-fix.yml` | Automatic linting fixes |
+| File                                     | Purpose                           |
+| ---------------------------------------- | --------------------------------- |
+| `.github/workflows/ci.yml`               | Build, test, create Docker images |
+| `.github/workflows/deploy.yml`           | Main deployment orchestrator      |
+| `.github/workflows/_reusable_deploy.yml` | Reusable deployment logic         |
+| `.github/workflows/auto-fix.yml`         | Automatic linting fixes           |
 
 ---
 
@@ -304,14 +317,17 @@ Production: github-actions-prod-sa@careercopilot-468811.iam.gserviceaccount.com
 ### GitHub Secrets (Required)
 
 #### Staging Environment
+
 - `STAGING_GCP_WORKLOAD_IDENTITY_PROVIDER`
 - `STAGING_GCP_SERVICE_ACCOUNT`
 
 #### Production Environment
+
 - `PROD_GCP_WORKLOAD_IDENTITY_PROVIDER`
 - `PROD_GCP_SERVICE_ACCOUNT`
 
 ### Deprecated Secrets (Can Be Removed)
+
 - ~~`FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_STAGING`~~
 - ~~`FIREBASE_SERVICE_ACCOUNT_CAREERCOPILOT_468811`~~
 
@@ -474,26 +490,31 @@ curl $(gcloud run services describe backend \
 ## Quick Reference Commands
 
 ### Deploy to Staging
+
 ```bash
 gh workflow run deploy.yml --ref develop -f environment=staging
 ```
 
 ### Deploy to Production
+
 ```bash
 gh workflow run deploy.yml --ref main -f environment=production
 ```
 
 ### Check Latest CI Build
+
 ```bash
 gh run list --workflow="CI - Build and Test" --branch=main --limit 1
 ```
 
 ### Check Latest Deployment
+
 ```bash
 gh run list --workflow="CD - Deploy to Staging and Production" --limit 1
 ```
 
 ### Verify Production URLs
+
 ```bash
 # Frontend
 curl -I https://careercopilot-468811.web.app

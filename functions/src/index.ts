@@ -1,5 +1,3 @@
-// Import all functions
-import {cleanupUserData, adminCleanupUser} from "./auth.functions";
-
-// Export all functions
-export {cleanupUserData, adminCleanupUser};
+export {uploadAndTag} from './uploadAndTag';
+export {extractAndSave} from './extractAndSave';
+export {healthCheck} from './healthCheck';

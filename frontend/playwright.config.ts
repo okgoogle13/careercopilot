@@ -1,6 +1,7 @@
-import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
 import process from 'process';
+
+import { defineConfig, devices } from '@playwright/test';
 
 const isCI = !!process.env.CI;
 const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:3000';

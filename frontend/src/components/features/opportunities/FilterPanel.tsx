@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { Search, Filter, X, ExpandMore } from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -17,7 +17,7 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from '@mui/material';
-import { Search, Filter, X, ExpandMore } from '@mui/icons-material';
+import React, { useState } from 'react';
 
 interface FilterPanelProps {
   onFiltersChange?: (filters: JobFilters) => void;

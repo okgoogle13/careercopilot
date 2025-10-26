@@ -1,5 +1,6 @@
-import React from 'react';
 import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
+import React from 'react';
+
 import { ComponentSection } from './ComponentDemo';
 
 export function UsageGuidelinesSection() {

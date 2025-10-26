@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import { Input } from '../../ui/input';
-import { Textarea } from '../../ui/textarea';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import {
   ArrowLeft,
   Link,
@@ -19,6 +15,11 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { useState } from 'react';
+
+import { Input } from '../../ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
+import { Textarea } from '../../ui/textarea';
 
 interface JobInputProps {
   documentType?: 'resume' | 'cover-letter' | 'selection-criteria';
@@ -48,9 +49,9 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
   const isValidInput = () => {
     if (activeTab === 'url') {
       return jobUrl.trim().length > 0 && (jobUrl.includes('http') || jobUrl.includes('www'));
-    } else {
+    } 
       return jobDescription.trim().length > 50; // Minimum description length
-    }
+    
   };
 
   return (

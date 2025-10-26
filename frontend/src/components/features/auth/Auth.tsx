@@ -1,5 +1,3 @@
-import { Input } from '../../ui/input';
-import { CareerCopilotLogo } from '../common/CareerCopilotLogo';
 import {
   Button,
   IconButton,
@@ -10,6 +8,9 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+
+import { Input } from '../../ui/input';
+import { CareerCopilotLogo } from '../common/CareerCopilotLogo';
 
 interface AuthProps {
   onLogin: () => void;

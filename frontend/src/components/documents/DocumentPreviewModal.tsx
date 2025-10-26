@@ -1,9 +1,11 @@
 import { Download, Edit, Share as Share2, Delete as Trash2, Close as X } from '@mui/icons-material';
 import React from 'react';
+
 import { ATSScoreCircle } from '../features/Analysis/ATSScoreCircle';
 import { Button } from '../ui/button';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from '../ui/dialog';
-import { Document } from './types';
+
+import type { Document } from './types';
 
 interface DocumentPreviewModalProps {
   document: Document | null;

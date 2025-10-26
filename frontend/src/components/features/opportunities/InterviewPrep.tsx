@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { Badge } from '../../ui/badge';
-import { Textarea } from '../../ui/textarea';
 import {
   ArrowLeft,
   AutoAwesome as Sparkles,
@@ -20,6 +17,10 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { useState } from 'react';
+
+import { Badge } from '../../ui/badge';
+import { Textarea } from '../../ui/textarea';
 
 interface InterviewPrepProps {
   onBack: () => void;

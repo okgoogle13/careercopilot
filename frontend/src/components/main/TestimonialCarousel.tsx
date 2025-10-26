@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Card, CardContent, Typography, Box, IconButton, Rating } from '@mui/material';
 import { ChevronLeft, ChevronRight, FormatQuote } from '@mui/icons-material';
+import { Card, CardContent, Typography, Box, IconButton, Rating } from '@mui/material';
+import React, { useState } from 'react';
 
 interface Testimonial {
   id: number;

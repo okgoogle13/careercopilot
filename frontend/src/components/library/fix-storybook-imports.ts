@@ -1,5 +1,8 @@
-import { Project, SyntaxKind, ImportDeclaration, SourceFile, ImportSpecifier } from 'ts-morph';
 import path from 'path';
+
+import type { SourceFile, ImportSpecifier } from 'ts-morph';
+import { Project, SyntaxKind, ImportDeclaration } from 'ts-morph';
+
 
 const project = new Project();
 project.addSourceFilesAtPaths('frontend/src/**/*.stories.tsx');

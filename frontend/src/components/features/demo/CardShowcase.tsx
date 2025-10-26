@@ -1,8 +1,3 @@
-import React, { useState } from 'react';
-import { Badge } from '../../ui/badge';
-import { LoadingCard, LoadingProfileCard } from '../common/LoadingCard';
-import { ErrorCard, ErrorProfileCard } from '../common/ErrorCard';
-import { CardTitle, CardDescription, CardFooter, CardAction } from '../../ui/card';
 import {
   Star,
   Favorite as Heart,
@@ -27,6 +22,12 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import React, { useState } from 'react';
+
+import { Badge } from '../../ui/badge';
+import { CardTitle, CardDescription, CardFooter, CardAction } from '../../ui/card';
+import { ErrorCard, ErrorProfileCard } from '../common/ErrorCard';
+import { LoadingCard, LoadingProfileCard } from '../common/LoadingCard';
 
 interface CardShowcaseProps {
   onBack: () => void;

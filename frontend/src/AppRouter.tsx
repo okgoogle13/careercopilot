@@ -1,6 +1,6 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
 import { Box, CircularProgress } from '@mui/material';
+import { Suspense, lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Lazy load page components
 const DashboardPage = lazy(() =>

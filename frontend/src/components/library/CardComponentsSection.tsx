@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Badge } from '../ui/badge';
-import { LoadingProfileCard } from '../features/common/LoadingCard';
-import { ErrorCard, ErrorProfileCard } from '../features/common/ErrorCard';
-import { ComponentSection, ComponentDemo } from './ComponentDemo';
 import { Favorite as Heart } from '@mui/icons-material';
 import { Button, IconButton, Typography, Box } from '@mui/material';
+import React, { useState } from 'react';
+
+import { ErrorCard, ErrorProfileCard } from '../features/common/ErrorCard';
+import { LoadingProfileCard } from '../features/common/LoadingCard';
+import { Badge } from '../ui/badge';
 import {
   Card,
   CardContent,
@@ -14,6 +14,9 @@ import {
   CardDescription,
   CardAction,
 } from '../ui/card';
+
+import { ComponentSection, ComponentDemo } from './ComponentDemo';
+
 
 export function CardComponentsSection() {
   const [selectedCard, setSelectedCard] = useState<string | null>('card-2');
