@@ -3,6 +3,7 @@ from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, Union, ov
 from typing_extensions import Protocol, runtime_checkable
 
 T = TypeVar("T")
+T_co = TypeVar("T_co", covariant=True)
 
 class DeclarativeBase:
     __table__: Any
@@ -13,10 +14,10 @@ class DeclarativeBase:
     @classmethod
     def __declare_first__(cls) -> None: ...
 
-class Mapped(Protocol[T]):
+class Mapped(Protocol[T_co]):
     """A type that may be used to indicate any ORM-mapped type."""
 
-class Column(Protocol[T]):
+class Column(Protocol[T_co]):
     """Type for SQLAlchemy Column"""
 
     def __init__(
@@ -31,7 +32,7 @@ class Column(Protocol[T]):
         **kwargs: Any,
     ) -> None: ...
 
-class relationship(Protocol[T]):
+class relationship(Protocol[T_co]):
     """Type for SQLAlchemy relationship"""
 
     def __init__(
