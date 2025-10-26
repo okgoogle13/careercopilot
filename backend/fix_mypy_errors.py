@@ -46,7 +46,7 @@ def fix_cache_decorators():
 
                 # Convert result to dict if it's not already
                 cache_value = result if isinstance(result, dict) else {"value": result}
-                await cache.set(operation_type, cache_value, ttl=ttl, category="ai_operations")"""
+                await cache.set(operation_type, cache_value, ttl=ttl, category="ai_operations")""",
     )
 
     # Fix CacheContext methods
@@ -75,7 +75,7 @@ def fix_cache_decorators():
         \"\"\"Cache a result within the context\"\"\"
         # Use cache_ai_operation for proper cache storage
         result_dict = result if isinstance(result, dict) else {"value": result}
-        return await self.cache.cache_ai_operation(self.operation_type, self.input_data, result_dict, self.user_id)"""
+        return await self.cache.cache_ai_operation(self.operation_type, self.input_data, result_dict, self.user_id)""",
     )
 
     file_path.write_text(content)
@@ -91,42 +91,40 @@ def fix_ai_config():
     content = re.sub(
         r"config_path = Path\(self\.config_file_path\)",
         "config_path = Path(self.config_file_path) if self.config_file_path else Path('config/ai_config.json')",
-        content
+        content,
     )
 
     # Fix line 206: Add type annotation for issues list
     content = re.sub(
         r"(\s+# Initialize empty containers with proper types\n\s+models: Dict\[str, ModelConfig\] = \{\}\n\s+credentials: Dict\[AIProvider, ProviderCredentials\] = \{\}\n\s+services: Dict\[str, AIServiceConfig\] = \{\})",
         r"\1\n            issues: List[str] = []  # Initialize issues list",
-        content
+        content,
     )
 
     # Fix line 247: Remove .values() call on object
     content = re.sub(
-        r"for provider_enum in AIProvider\.values\(\):",
-        "for provider_enum in AIProvider:",
-        content
+        r"for provider_enum in AIProvider\.values\(\):", "for provider_enum in AIProvider:", content
     )
 
     # Fix line 252: Remove .items() call on object
     content = re.sub(
         r"for k, v in config\.items\(\):",
         "for k, v in (config.items() if isinstance(config, dict) else {}.items()):",
-        content
+        content,
     )
 
     # Fix lines 270-273: Type casting for float assignments to bool/int
     content = re.sub(
         r"(\s+)self\.cache_enabled = (.+?\.get\(.+?\))\n(\s+)self\.monitoring_enabled = (.+?\.get\(.+?\))\n(\s+)self\.max_retries = (.+?\.get\(.+?\))\n(\s+)self\.timeout_seconds = (.+?\.get\(.+?\))",
         r"\1self.cache_enabled = bool(\2)\n\3self.monitoring_enabled = bool(\4)\n\5self.max_retries = int(\6)\n\7self.timeout_seconds = int(\8)",
-        content
+        content,
     )
 
     # Fix line 543, 545: Add None checks for Path and open
     content = re.sub(
         r"(\s+)export_path = Path\(export_file_path\)\n(\s+)with open\(export_file_path, 'w'\) as f:",
         r"\1if export_file_path:\n\1    export_path = Path(export_file_path)\n\2    with open(export_file_path, 'w') as f:",
-        content
+        content,
     )
 
     file_path.write_text(content)
@@ -143,7 +141,7 @@ def fix_enhanced_ai_error_handling():
         r"(\s+)except AIError as ai_error:\n(\s+)result\.error = ai_error\n\n(\s+)logger\.warning\(\n(\s+)f\"AI operation failed: \{context\.operation_name\} \"\n(\s+)f\"\[{context\.service_type\.value}\] - {ai_error\.error_type\.value}: {ai_error\.message}\"\n(\s+)\)\n\n(\s+)# Attempt fallback if configured\n(\s+)if fallback_strategy and fallback_strategy\.enabled:\n(\s+)try:\n(\s+)fallback_result = await self\._execute_fallback\(\n(\s+)context, fallback_strategy, ai_error, \*args, \*\*kwargs\n(\s+)\)\n(\s+)# Mark fallback_used True if fallback was attempted, regardless of success\n(\s+)if fallback_result:\n(\s+)fallback_result\.fallback_used = True\n(\s+)result = fallback_result\n(\s+)except Exception as fallback_error:\n(\s+)logger\.error\(\n(\s+)f\"Error in fallback execution for \{context\.operation_name\}: \{fallback_error\}\",\n(\s+)exc_info=True\n(\s+)\)\n(\s+)# If fallback fails, we'll use the original error\n(\s+)result\.error = ai_error",
         r"\1except AIError as ai_error:\n\2result.error = ai_error\n\n\3logger.warning(\n\4f\"AI operation failed: {context.operation_name} \"\n\5f\"[{context.service_type.value}] - {ai_error.error_type.value}: {ai_error.message}\"\n\6)\n\n\8            # Attempt fallback if configured\n\9if fallback_strategy and fallback_strategy.enabled:\n\10try:\n\11fallback_result = await self._execute_fallback(\n\12context, fallback_strategy, ai_error, *args, **kwargs\n\13)\n\14# Mark fallback_used True if fallback was attempted, regardless of success\n\15if fallback_result:\n\16fallback_result.fallback_used = True\n\17result = fallback_result\n\18except Exception as fallback_error:\n\19logger.error(\n\20f\"Error in fallback execution for {context.operation_name}: {fallback_error}\",\n\21exc_info=True\n\22)\n\23# If fallback fails, keep the original AIError in result.error\n\24pass",
         content,
-        flags=re.DOTALL
+        flags=re.DOTALL,
     )
 
     file_path.write_text(content)
@@ -159,13 +157,13 @@ def fix_llm_service():
     content = re.sub(
         r'return \{"status": "unavailable", "total_keys": 0, "llm_keys": 0\}',
         'return {"status": "unavailable", "total_keys": int(0), "llm_keys": int(0)}',
-        content
+        content,
     )
 
     content = re.sub(
         r'(\s+)return \{\n(\s+)"status": "error", "error": str\(e\)\}',
         r'\1return {"status": "error", "error": str(e), "total_keys": int(0), "llm_keys": int(0)}',
-        content
+        content,
     )
 
     file_path.write_text(content)
@@ -188,14 +186,14 @@ class BaseModel(Base):  # type: ignore[misc, valid-type]
     \"\"\"Base class for all database models\"\"\"
     __abstract__ = True
     __allow_unmapped__ = True  # Allow unmapped attributes during migration""",
-        content
+        content,
     )
 
     # Update class definitions to inherit from BaseModel instead of Base
     content = re.sub(
         r"class (User|Job|Resume|Application|Document|Interview|CareerGoal)\(Base\):",
         r"class \1(BaseModel):",
-        content
+        content,
     )
 
     file_path.write_text(content)
@@ -213,9 +211,7 @@ def fix_input_validation():
 
     # Fix lines 136, 138, 172: Type annotations for sanitized values
     content = re.sub(
-        r"(\s+)sanitized_(\w+) = (.+)  # (\w+: str)",
-        r"\1sanitized_\2: Any = \3  # \4",
-        content
+        r"(\s+)sanitized_(\w+) = (.+)  # (\w+: str)", r"\1sanitized_\2: Any = \3  # \4", content
     )
 
     file_path.write_text(content)
@@ -235,7 +231,7 @@ def fix_ai_response_validation():
     content = re.sub(
         r"for field_name, field_info in response_model\.model_fields\.items\(\):",
         "for field_name, field_info in (response_model.model_fields.items() if hasattr(response_model, 'model_fields') and hasattr(response_model.model_fields, 'items') else {}.items()):",
-        content
+        content,
     )
 
     file_path.write_text(content)
@@ -253,37 +249,21 @@ def fix_ai_flow_integration():
 
     # Fix lines 144, 152, 158, 167, 170: Add type: ignore for return type mismatches
     content = re.sub(
-        r"(\s+return STARResponse\(.+?\))",
-        r"\1  # type: ignore[return-value]",
-        content
+        r"(\s+return STARResponse\(.+?\))", r"\1  # type: ignore[return-value]", content
     )
     content = re.sub(
-        r"(\s+return SemanticAnalysis\(.+?\))",
-        r"\1  # type: ignore[return-value]",
-        content
+        r"(\s+return SemanticAnalysis\(.+?\))", r"\1  # type: ignore[return-value]", content
     )
     content = re.sub(
-        r"(\s+return JobRequirements\(.+?\))",
-        r"\1  # type: ignore[return-value]",
-        content
+        r"(\s+return JobRequirements\(.+?\))", r"\1  # type: ignore[return-value]", content
     )
     content = re.sub(
-        r"(\s+return ResumeEntities\(.+?\))",
-        r"\1  # type: ignore[return-value]",
-        content
+        r"(\s+return ResumeEntities\(.+?\))", r"\1  # type: ignore[return-value]", content
     )
-    content = re.sub(
-        r"(\s+return ATSResult\(.+?\))",
-        r"\1  # type: ignore[return-value]",
-        content
-    )
+    content = re.sub(r"(\s+return ATSResult\(.+?\))", r"\1  # type: ignore[return-value]", content)
 
     # Fix lines 190, 192, 194, 196: Type annotations
-    content = re.sub(
-        r"(\s+)(\w+_field) = (.+?)  # (type: \w+)",
-        r"\1\2: Any = \3  # \4",
-        content
-    )
+    content = re.sub(r"(\s+)(\w+_field) = (.+?)  # (type: \w+)", r"\1\2: Any = \3  # \4", content)
 
     file_path.write_text(content)
     print(f"✓ Fixed {file_path}")
@@ -302,7 +282,7 @@ def fix_document_processor():
     content = re.sub(
         r"(\s+)(\w+_id) = (\d+)  # (\w+: str)",
         r"\1\2: Any = \3  # \4 - Using Any for flexibility",
-        content
+        content,
     )
 
     file_path.write_text(content)
@@ -322,7 +302,7 @@ def fix_validation_demo():
     content = re.sub(
         r"(\s+)(print\(.+?validated_response\.)(\w+)",
         r"\1if validated_response:\n\1    \2\3",
-        content
+        content,
     )
 
     file_path.write_text(content)
@@ -340,9 +320,7 @@ def fix_production_scripts():
 
     # Fix line 113: Add type annotation
     content = re.sub(
-        r"(\s+)usage_by_model = \{\}",
-        r"\1usage_by_model: Dict[str, Any] = {}",
-        content
+        r"(\s+)usage_by_model = \{\}", r"\1usage_by_model: Dict[str, Any] = {}", content
     )
 
     file_path.write_text(content)
