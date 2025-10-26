@@ -132,7 +132,7 @@ export async function detectKscCriteria(jobDescription: string): Promise<KscCrit
       throw new Error('Job description is required');
     }
 
-    const requestBody = {
+    const requestBody: Record<string, unknown> = {
       job_description: jobDescription.trim(),
     };
 
@@ -172,7 +172,7 @@ export async function generateSingleKscResponse(
       throw new Error('Job description is required');
     }
 
-    const requestBody = {
+    const requestBody: Record<string, unknown> = {
       criterion: criterion.trim(),
       job_description: jobDescription.trim(),
       user_profile: userProfile,
@@ -212,7 +212,7 @@ export async function generateCoverLetter(jobDescription: string, tone: string):
       throw new Error('Tone is required');
     }
 
-    const requestBody = {
+    const requestBody: Record<string, unknown> = {
       jobDescription: jobDescription.trim(),
       tone: tone.trim(),
     };
@@ -254,7 +254,7 @@ export async function generateTailoredResume(
       throw new Error('User profile ID is required');
     }
 
-    const requestBody = {
+    const requestBody: Record<string, unknown> = {
       jobDescription: jobDescription.trim(),
       userProfileId: userProfileId.trim(),
     };
@@ -347,7 +347,7 @@ export async function prepareApplicationPackage(
     // Get current user profile (this would typically come from your auth/profile service)
     // For now, we'll create a basic profile structure - you may need to adapt this
     // to fetch from your actual user profile service
-    const userProfile = {
+    const userProfile: Record<string, unknown> = {
       resume_content: '', // This should be fetched from user's stored resume
       skills: [], // User's skills array
       experience: [], // User's experience array
@@ -464,7 +464,11 @@ export async function selectTemplate(
       throw new Error('Template ID is required');
     }
 
-    const requestBody = {
+    const requestBody: {
+      templateId: string;
+      userData: Record<string, unknown>;
+      jobDescription: string;
+    } = {
       templateId: templateId.trim(),
       userData: userData || {},
       jobDescription: jobDescription || '',

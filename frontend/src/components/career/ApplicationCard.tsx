@@ -1,4 +1,12 @@
-import React from 'react';
+import {
+  Business as Building2,
+  CalendarToday as Calendar,
+  AttachMoney as DollarSign,
+  LocationOn as MapPin,
+  MoreHoriz as MoreHorizontal,
+  Schedule as Clock,
+  Visibility as Eye,
+} from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -10,15 +18,7 @@ import {
   Avatar,
   LinearProgress,
 } from '@mui/material';
-import {
-  Business as Building2,
-  CalendarToday as Calendar,
-  AttachMoney as DollarSign,
-  LocationOn as MapPin,
-  MoreHoriz as MoreHorizontal,
-  Schedule as Clock,
-  Visibility as Eye,
-} from '@mui/icons-material';
+import React from 'react';
 
 type ApplicationStatus = 'applied' | 'screening' | 'interview' | 'offer' | 'rejected';
 

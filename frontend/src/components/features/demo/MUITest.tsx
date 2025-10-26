@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { Box, Typography, Stack } from '@mui/material';
 import { Search, Mail, Person as User } from '@mui/icons-material';
+import { Box, Typography, Stack } from '@mui/material';
+import { useTheme as useMuiTheme } from '@mui/material/styles';
+import React, { useState } from 'react';
+
+import { Badge } from '../../ui/badge';
 import { Button } from '../../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
-import { Badge } from '../../ui/badge';
-import { Input } from '../../ui/input';
-import { Textarea } from '../../ui/textarea';
 import {
   Dialog,
   DialogContent,
@@ -15,6 +15,7 @@ import {
   DialogFooter,
   DialogClose,
 } from '../../ui/dialog';
+import { Input } from '../../ui/input';
 import {
   LayoutContainer,
   LayoutGrid,
@@ -23,7 +24,7 @@ import {
   LayoutFlex,
   LayoutCard,
 } from '../../ui/layout';
-import { useTheme as useMuiTheme } from '@mui/material/styles';
+import { Textarea } from '../../ui/textarea';
 
 interface MUITestProps {
   onBack: () => void;

@@ -1,6 +1,7 @@
-import React from 'react';
-import { Chip, ChipProps } from '@mui/material';
+import type { ChipProps } from '@mui/material';
+import { Chip } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledChip = styled(Chip)(({ theme, variant }) => ({
   borderRadius: theme.spacing(1),

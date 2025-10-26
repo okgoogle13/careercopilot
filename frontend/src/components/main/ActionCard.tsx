@@ -1,4 +1,4 @@
-import React from 'react';
+import { ArrowRight, AccessTime, CheckCircle, Error } from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -9,7 +9,7 @@ import {
   LinearProgress,
   Chip,
 } from '@mui/material';
-import { ArrowRight, AccessTime, CheckCircle, Error } from '@mui/icons-material';
+import React from 'react';
 
 type ActionCardVariant = 'default' | 'featured' | 'urgent' | 'success';
 type ActionCardStatus = 'pending' | 'in-progress' | 'completed' | 'failed';

@@ -1,6 +1,6 @@
-import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledStatCard = styled(Card)(({ theme }) => ({
   borderRadius: theme.spacing(2),

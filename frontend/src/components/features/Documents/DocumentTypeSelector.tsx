@@ -19,6 +19,7 @@ import {
 import { Button, Card, Tooltip as MuiTooltip } from '@mui/material';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
+
 import { Badge } from '../../ui/badge';
 import { Input } from '../../ui/input';
 import { Skeleton } from '../../ui/skeleton';
@@ -29,7 +30,7 @@ import { AnimatedCard, StaggeredList } from '../demo/AnimatedComponents';
 
 type DocumentCategory = 'all' | 'resume' | 'cover-letter' | 'other';
 
-type DocumentType = {
+interface DocumentType {
   id: string;
   title: string;
   description: string;
@@ -46,7 +47,7 @@ type DocumentType = {
   successRate?: number; // percentage
   recommendedFor?: string[];
   aiPowered?: boolean;
-};
+}
 
 interface DocumentTypeSelectorProps {
   onSelectType?: (type: string) => void;

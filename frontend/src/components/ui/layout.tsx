@@ -1,17 +1,20 @@
-import React from 'react';
+import type {
+  BoxProps,
+  ContainerProps,
+  GridProps,
+  StackProps} from '@mui/material';
 import {
   Box,
   Container,
   Grid,
-  Stack,
-  BoxProps,
-  ContainerProps,
-  GridProps,
-  StackProps,
+  Stack
 } from '@mui/material';
-import { Card, CardProps } from './card';
+import React from 'react';
 
-export interface LayoutContainerProps extends ContainerProps {}
+import type { CardProps } from './card';
+import { Card } from './card';
+
+export type LayoutContainerProps = ContainerProps
 
 export const LayoutContainer = React.forwardRef<HTMLDivElement, LayoutContainerProps>(
   ({ children, ...props }, ref) => {
@@ -25,7 +28,7 @@ export const LayoutContainer = React.forwardRef<HTMLDivElement, LayoutContainerP
 
 LayoutContainer.displayName = 'LayoutContainer';
 
-export interface LayoutGridProps extends GridProps {}
+export type LayoutGridProps = GridProps
 
 export const LayoutGrid = React.forwardRef<HTMLDivElement, LayoutGridProps>(
   ({ children, ...props }, ref) => {
@@ -66,7 +69,7 @@ export const LayoutGridItem = React.forwardRef<HTMLDivElement, LayoutGridItemPro
 
 LayoutGridItem.displayName = 'LayoutGridItem';
 
-export interface LayoutStackProps extends StackProps {}
+export type LayoutStackProps = StackProps
 
 export const LayoutStack = React.forwardRef<HTMLDivElement, LayoutStackProps>(
   ({ children, ...props }, ref) => {
@@ -100,7 +103,7 @@ export const LayoutFlex = React.forwardRef<HTMLDivElement, LayoutFlexProps>(
         ref={ref}
         sx={{
           display: 'flex',
-          gap: gap,
+          gap,
           justifyContent: justify,
           alignItems: align,
           flexWrap: wrap ? 'wrap' : 'nowrap',
@@ -116,7 +119,7 @@ export const LayoutFlex = React.forwardRef<HTMLDivElement, LayoutFlexProps>(
 
 LayoutFlex.displayName = 'LayoutFlex';
 
-export interface LayoutCardProps extends CardProps {}
+export type LayoutCardProps = CardProps
 
 export const LayoutCard = React.forwardRef<HTMLDivElement, LayoutCardProps>(
   ({ children, ...props }, ref) => {

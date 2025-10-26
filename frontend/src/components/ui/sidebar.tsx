@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   Drawer,
   List,
@@ -11,8 +11,8 @@ import {
   Tooltip,
   IconButton,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import { styled } from '@mui/material/styles';
+import React, { createContext, useContext, useState } from 'react';
 
 const SIDEBAR_WIDTH = 280;
 const SIDEBAR_WIDTH_COLLAPSED = 64;
@@ -213,10 +213,10 @@ export const SidebarMenuButton: React.FC<SidebarMenuButtonProps> = ({
               {child}
             </ListItemIcon>
           );
-        } else {
+        } 
           // Remaining children are text
           return <ListItemText primary={child} sx={{ opacity: open ? 1 : 0 }} />;
-        }
+        
       })}
     </ListItemButton>
   );

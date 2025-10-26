@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { Close, ArrowLeft } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -9,9 +9,11 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import React, { useState } from 'react';
+
 // import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 import { TimelineView } from './TimelineView';
-import { Close, ArrowLeft } from '@mui/icons-material';
+
 
 interface Application {
   id: string;

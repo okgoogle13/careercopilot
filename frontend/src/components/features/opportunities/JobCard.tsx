@@ -1,4 +1,12 @@
-import React from 'react';
+import {
+  LocationOn as MapPin,
+  Schedule as Clock,
+  AttachMoney as DollarSign,
+  BookmarkBorder as Bookmark,
+  Bookmark as BookmarkCheck,
+  OpenInNew as ExternalLink,
+  Business as Building2,
+} from '@mui/icons-material';
 import {
   Card,
   CardContent,
@@ -10,15 +18,7 @@ import {
   Avatar,
   IconButton,
 } from '@mui/material';
-import {
-  LocationOn as MapPin,
-  Schedule as Clock,
-  AttachMoney as DollarSign,
-  BookmarkBorder as Bookmark,
-  Bookmark as BookmarkCheck,
-  OpenInNew as ExternalLink,
-  Business as Building2,
-} from '@mui/icons-material';
+import React from 'react';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
 type ExperienceLevel =

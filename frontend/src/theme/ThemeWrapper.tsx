@@ -1,8 +1,10 @@
-import React, { useMemo, useState } from 'react';
 import { ThemeProvider as MuiThemeProvider, CssBaseline, useMediaQuery } from '@mui/material';
-import { theme as baseTheme } from './theme';
-import { ColorModeContext } from './ColorModeContext';
 import { createTheme } from '@mui/material/styles';
+import React, { useMemo, useState } from 'react';
+
+import { ColorModeContext } from './ColorModeContext';
+import { theme as baseTheme } from './theme';
+
 
 export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -22,7 +24,7 @@ export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children
       ...baseTheme,
       palette: {
         ...baseTheme.palette,
-        mode: mode,
+        mode,
       },
     });
   }, [mode]);

@@ -1,7 +1,6 @@
 // Create file: src/components/ui/card.tsx
 import { styled } from '@mui/material/styles';
-import MuiCard, { CardProps as MuiCardProps } from '@mui/material/Card';
-import { forwardRef } from 'react';
+import type { CardProps as MuiCardProps } from '@mui/material/Card';
 
 type CardVariant = 'elevation' | 'outlined' | 'selected' | 'interactive';
 
@@ -45,6 +44,8 @@ import { CardContent as MuiCardContent } from '@mui/material';
 import { CardHeader as MuiCardHeader } from '@mui/material';
 import { CardActions as MuiCardActions } from '@mui/material';
 import { Typography } from '@mui/material';
+import MuiCard from '@mui/material/Card';
+import { forwardRef } from 'react';
 
 export const CardContent = forwardRef<HTMLDivElement, React.ComponentProps<typeof MuiCardContent>>(
   (props, ref) => <MuiCardContent ref={ref} {...props} />

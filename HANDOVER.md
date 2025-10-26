@@ -184,4 +184,5 @@ If anything is unclear, refer to the working notes in this dev session: key temp
 Next step for me (if you want me to continue)
 
 - I can proceed to run the remediation steps above, capture the install logs inside the workspace, and commit the regenerated `yarn.lock` to a fix branch and open a PR. Say "please proceed" to authorize me to run the install+commit flow.
+
 # CI Trigger

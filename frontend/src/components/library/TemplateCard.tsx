@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { Badge } from '../ui/badge';
 import { Check, Visibility, Star } from '@mui/icons-material';
 import {
   Button,
@@ -11,6 +9,9 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { useState } from 'react';
+
+import { Badge } from '../ui/badge';
 
 interface TemplateCardProps {
   template_name: string;

@@ -1,4 +1,3 @@
-import GridCompat from '@/components/ui/GridCompat';
 import {
   Add,
   Archive,
@@ -20,6 +19,8 @@ import {
   StarBorder,
   Work,
 } from '@mui/icons-material';
+import type {
+  ChipProps} from '@mui/material';
 import {
   Alert,
   Box,
@@ -28,7 +29,6 @@ import {
   CardContent,
   Checkbox,
   Chip,
-  ChipProps,
   Container,
   Dialog,
   DialogActions,
@@ -50,6 +50,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+
+import GridCompat from '@/components/ui/GridCompat';
 
 interface Document {
   id: string;

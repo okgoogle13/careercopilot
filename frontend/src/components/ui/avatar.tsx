@@ -1,6 +1,7 @@
-import React from 'react';
-import { Avatar as MuiAvatar, AvatarProps as MuiAvatarProps } from '@mui/material';
+import type { AvatarProps as MuiAvatarProps } from '@mui/material';
+import { Avatar as MuiAvatar } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledAvatar = styled(MuiAvatar)(({ theme }) => ({
   width: 40,
@@ -22,7 +23,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 
 Avatar.displayName = 'Avatar';
 
-export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
+export type AvatarImageProps = React.ImgHTMLAttributes<HTMLImageElement>
 
 export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
   ({ src, alt, ...props }, ref) => {
@@ -42,7 +43,7 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
 
 AvatarImage.displayName = 'AvatarImage';
 
-export interface AvatarFallbackProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type AvatarFallbackProps = React.HTMLAttributes<HTMLDivElement>
 
 export const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
   ({ children, ...props }, ref) => {

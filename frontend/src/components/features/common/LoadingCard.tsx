@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
+
 import { Skeleton } from '../../ui/skeleton';
 
 export function LoadingCard() {
