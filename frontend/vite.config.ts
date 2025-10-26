@@ -1,17 +1,18 @@
-import { defineConfig, loadEnv, type UserConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
 import { fileURLToPath } from 'node:url';
+import path from 'path';
+
+import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig, loadEnv, type UserConfig, PluginOption } from 'vite';
+import { checker } from 'vite-plugin-checker';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
-import { checker } from 'vite-plugin-checker';
 
-type Env = {
+interface Env {
   VITE_API_URL: string;
   VITE_ENVIRONMENT: 'development' | 'staging' | 'production' | 'test';
   VITE_DEBUG: string;
-};
+}
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -23,71 +24,77 @@ export default defineConfig(({ mode }): UserConfig => {
   const isDevelopment = !isProduction;
   const isTest = env.VITE_ENVIRONMENT === 'test';
 
-  return {
-    plugins: [
-      react({
-        babel: {
-          plugins: [
-            ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }],
-            isDevelopment && 'babel-plugin-styled-components',
-          ].filter(Boolean),
-        },
-      }),
-      createHtmlPlugin({
-        minify: isProduction,
-        inject: {
-          data: {
-            title: 'CareerCopilot',
-            description: 'AI-powered career application assistant',
-            environment: env.VITE_ENVIRONMENT,
-          },
-        },
-      }),
-      VitePWA({
-        registerType: 'autoUpdate',
-        includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
-        manifest: {
-          name: 'CareerCopilot',
-          short_name: 'CareerCopilot',
+  const plugins: PluginOption[] = [
+    react({
+      babel: {
+        plugins: [
+          ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }],
+          ...(isDevelopment ? ['babel-plugin-styled-components'] : []),
+        ],
+      },
+    }),
+    createHtmlPlugin({
+      minify: isProduction,
+      inject: {
+        data: {
+          title: 'CareerCopilot',
           description: 'AI-powered career application assistant',
-          theme_color: '#1976d2',
-          icons: [
-            {
-              src: 'pwa-192x192.png',
-              sizes: '192x192',
-              type: 'image/png',
-            },
-            {
-              src: 'pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-            },
-          ],
+          environment: env.VITE_ENVIRONMENT,
         },
-        devOptions: {
-          enabled: isDevelopment,
-          type: 'module',
-        },
-      }),
-      checker({
-        typescript: {
-          tsconfigPath: 'tsconfig.json',
-        },
-        eslint: {
-          lintCommand: 'eslint . --ext .ts,.tsx',
-        },
-        overlay: {
-          initialIsOpen: false,
-        },
-      }),
-      isProduction &&
-        visualizer({
-          open: false,
-          filename: 'bundle-analyzer-report.html',
-          gzipSize: true,
-          brotliSize: true,
-        }),
-    ].filter(Boolean),
+      },
+    }),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      manifest: {
+        name: 'CareerCopilot',
+        short_name: 'CareerCopilot',
+        description: 'AI-powered career application assistant',
+        theme_color: '#1976d2',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+      },
+      devOptions: {
+        enabled: isDevelopment,
+        type: 'module',
+      },
+    }),
+    checker({
+      typescript: {
+        tsconfigPath: 'tsconfig.json',
+      },
+      eslint: {
+        lintCommand: 'eslint . --ext .ts,.tsx',
+      },
+      overlay: {
+        initialIsOpen: false,
+      },
+    }),
+  ];
+
+  if (isProduction) {
+    plugins.push(
+      visualizer({
+        open: false,
+        filename: 'bundle-analyzer-report.html',
+        gzipSize: true,
+        brotliSize: true,
+      })
+    );
+  }
+
+  return {
+    plugins,
 
     // Base public path when served in production
     base: isTest ? '' : '/',
@@ -146,6 +153,7 @@ export default defineConfig(({ mode }): UserConfig => {
               }
               return 'vendor-other';
             }
+            return undefined;
           },
           chunkFileNames: isProduction ? 'assets/js/[name]-[hash].js' : 'assets/js/[name].js',
           entryFileNames: isProduction ? 'assets/js/[name]-[hash].js' : 'assets/js/[name].js',
@@ -198,7 +206,7 @@ export default defineConfig(({ mode }): UserConfig => {
 
     // Environment variables
     define: {
-      __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+      __APP_VERSION__: JSON.stringify(process.env['npm_package_version']),
       'process.env.NODE_ENV': JSON.stringify(mode),
       'process.env.VITE_ENV': JSON.stringify(env.VITE_ENVIRONMENT),
     },

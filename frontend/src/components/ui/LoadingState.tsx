@@ -1,5 +1,5 @@
-import React from 'react';
 import { Box, Typography, CircularProgress } from '@mui/material';
+import React from 'react';
 
 export interface LoadingStateProps {
   message?: string;

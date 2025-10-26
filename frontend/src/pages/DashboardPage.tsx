@@ -1,4 +1,3 @@
-import GridCompat from '@/components/ui/GridCompat';
 import {
   Add,
   Analytics,
@@ -15,6 +14,8 @@ import {
   Warning,
   Work,
 } from '@mui/icons-material';
+import type {
+  ChipProps} from '@mui/material';
 import {
   Avatar,
   Box,
@@ -22,7 +23,6 @@ import {
   Card,
   CardContent,
   Chip,
-  ChipProps,
   Container,
   Divider,
   IconButton,
@@ -39,6 +39,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+
+import GridCompat from '@/components/ui/GridCompat';
 
 interface Profile {
   id: string;

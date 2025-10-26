@@ -1,7 +1,8 @@
-import * as React from 'react';
-import MuiTabs from '@mui/material/Tabs';
-import MuiTab, { TabProps as MuiTabProps } from '@mui/material/Tab';
 import { Box, styled } from '@mui/material';
+import type { TabProps as MuiTabProps } from '@mui/material/Tab';
+import MuiTab from '@mui/material/Tab';
+import MuiTabs from '@mui/material/Tabs';
+import * as React from 'react';
 
 // Tabs container component
 export const Tabs = React.forwardRef<HTMLDivElement, React.ComponentProps<typeof MuiTabs>>(

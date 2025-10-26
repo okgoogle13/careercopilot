@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -10,10 +9,12 @@ import {
   People,
   Lightbulb,
 } from '@mui/icons-material';
+import React, { useState } from 'react';
+
+import { ATSScoreCircle } from '../../library/ATSScoreCircle';
+import { Badge } from '../../ui/badge';
 import { Button } from '../../ui/button';
 import { Card } from '../../ui/card';
-import { Badge } from '../../ui/badge';
-import { ATSScoreCircle } from '../../library/ATSScoreCircle';
 
 interface ATSAnalysisDashboardProps {
   onBack?: () => void;

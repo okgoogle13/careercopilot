@@ -1,7 +1,9 @@
+import { Typography, Chip } from '@mui/material';
 import { useState, Suspense, lazy } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { Typography, Chip } from '@mui/material';
+
 // Advanced Sidebar System imports
+import { Button } from './components/ui/button';
 import {
   SidebarProvider,
   Sidebar,
@@ -14,7 +16,6 @@ import {
   SidebarTrigger,
   SidebarInset,
 } from './components/ui/sidebar';
-import { Button } from './components/ui/button';
 
 // Lazy-loaded components for better performance - Updated paths after restructuring
 const Dashboard = lazy(() =>
@@ -115,7 +116,7 @@ const Settings = lazy(() =>
 const MUITest = lazy(() =>
   import('./components/features/demo/MUITest').then((module) => ({ default: module.MUITest }))
 );
-import { AppTab, DashboardTab } from './types';
+import type { AppTab, DashboardTab } from './types';
 
 import {
   Navigation,

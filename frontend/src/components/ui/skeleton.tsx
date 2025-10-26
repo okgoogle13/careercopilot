@@ -1,6 +1,7 @@
-import React from 'react';
-import { Skeleton as MuiSkeleton, SkeletonProps as MuiSkeletonProps } from '@mui/material';
+import type { SkeletonProps as MuiSkeletonProps } from '@mui/material';
+import { Skeleton as MuiSkeleton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledSkeleton = styled(MuiSkeleton)(({ theme }) => ({
   borderRadius: theme.spacing(1),

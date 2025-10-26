@@ -1,4 +1,3 @@
-import Grid from '@/components/ui/GridCompat';
 import {
   Analytics,
   Assessment,
@@ -22,6 +21,8 @@ import {
   Warning,
   Work,
 } from '@mui/icons-material';
+import type {
+  LinearProgressProps} from '@mui/material';
 import {
   Alert,
   Box,
@@ -33,7 +34,6 @@ import {
   Container,
   IconButton,
   LinearProgress,
-  LinearProgressProps,
   Menu,
   MenuItem,
   Paper,
@@ -49,6 +49,8 @@ import {
   Typography,
 } from '@mui/material';
 import React, { useState } from 'react';
+
+import Grid from '@/components/ui/GridCompat';
 
 interface AnalysisReport {
   id: string;

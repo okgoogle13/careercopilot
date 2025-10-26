@@ -1,4 +1,5 @@
-import { Grid as MuiGrid, GridProps as MuiGridProps, gridClasses } from '@mui/material';
+import type { GridProps as MuiGridProps} from '@mui/material';
+import { Grid as MuiGrid, gridClasses } from '@mui/material';
 import React from 'react';
 
 type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

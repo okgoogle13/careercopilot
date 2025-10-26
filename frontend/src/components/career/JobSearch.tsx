@@ -1,4 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import {
+  Tune as SlidersHorizontal,
+  GridView as Grid3X3,
+  List,
+  Work as Briefcase,
+} from '@mui/icons-material';
 import {
   Box,
   Typography,
@@ -11,16 +16,13 @@ import {
   Pagination,
   Paper,
 } from '@mui/material';
-import { FilterPanel, JobFilters } from '../features/opportunities/FilterPanel';
+import React, { useState, useEffect } from 'react';
+
+import type { JobFilters } from '../features/opportunities/FilterPanel';
+import { FilterPanel } from '../features/opportunities/FilterPanel';
 import { JobCard } from '../features/opportunities/JobCard';
-import { LoadingState } from '../ui/LoadingState';
 import { EmptyState } from '../ui/EmptyState';
-import {
-  Tune as SlidersHorizontal,
-  GridView as Grid3X3,
-  List,
-  Work as Briefcase,
-} from '@mui/icons-material';
+import { LoadingState } from '../ui/LoadingState';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
 type ExperienceLevel =

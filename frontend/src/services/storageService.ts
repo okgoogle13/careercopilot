@@ -1,12 +1,14 @@
-import { storage } from '@/firebase-config';
+import type {
+  UploadTaskSnapshot} from 'firebase/storage';
 import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
   deleteObject,
-  listAll,
-  UploadTaskSnapshot,
+  listAll
 } from 'firebase/storage';
+
+import { storage } from '@/firebase-config';
 
 export interface UploadProgress {
   bytesTransferred: number;
@@ -36,13 +38,13 @@ export async function uploadFile(
 ): Promise<UploadResult> {
   const storageRef = ref(storage, path);
   const uploadTask = uploadBytesResumable(storageRef, file, {
-    contentType: file.type,
+    contentType: file.type || 'application/octet-stream',
   });
 
   return new Promise((resolve, reject) => {
     uploadTask.on(
       'state_changed',
-      (snapshot: UploadTaskSnapshot) => {
+      (snapshot: UploadTaskSnapshot): void => {
         const progress = {
           bytesTransferred: snapshot.bytesTransferred,
           totalBytes: snapshot.totalBytes,
@@ -50,11 +52,11 @@ export async function uploadFile(
         };
         onProgress?.(progress);
       },
-      (error) => {
+      (error: Error): void => {
         console.error('Upload error:', error);
         reject(error);
       },
-      async () => {
+      async (): Promise<void> => {
         try {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           resolve({
@@ -107,7 +109,7 @@ export async function deleteFile(path: string): Promise<void> {
  * @param path - The directory path
  * @returns Array of file references
  */
-export async function listFiles(path: string) {
+export async function listFiles(path: string): Promise<StorageReference[]> {
   const storageRef = ref(storage, path);
   const result = await listAll(storageRef);
   return result.items;

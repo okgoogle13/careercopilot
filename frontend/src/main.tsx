@@ -1,7 +1,8 @@
-import { createRoot } from 'react-dom/client';
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+
 // import * as Sentry from '@sentry/react';
 import { AppRouter } from './AppRouter';
 import ErrorBoundary from './components/ErrorBoundary';

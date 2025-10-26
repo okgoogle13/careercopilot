@@ -1,11 +1,12 @@
-import React from 'react';
+import type {
+  AlertProps as MuiAlertProps} from '@mui/material';
 import {
   Alert as MuiAlert,
-  AlertProps as MuiAlertProps,
   AlertTitle as MuiAlertTitle,
   Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledAlert = styled(MuiAlert)(({ theme }) => ({
   borderRadius: theme.spacing(1),

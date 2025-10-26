@@ -1,7 +1,8 @@
-import React from 'react';
-import { ComponentSection, ComponentDemo } from './ComponentDemo';
 import { Settings, AutorenewRounded as Loader2, Download } from '@mui/icons-material';
 import { Button, IconButton } from '@mui/material';
+import React from 'react';
+
+import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function ButtonComponentsSection() {
   return (

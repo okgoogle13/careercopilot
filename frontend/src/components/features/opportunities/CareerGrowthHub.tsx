@@ -14,6 +14,7 @@ import {
   EmojiEvents as Trophy,
 } from '@mui/icons-material';
 import { Button, Card } from '@mui/material';
+
 import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';

@@ -7,6 +7,7 @@ import {
   Visibility,
 } from '@mui/icons-material';
 import { Box, Grid, Typography } from '@mui/material';
+
 import { StatCard } from '../ui/StatCard';
 
 interface JobSearchStatusProps {

@@ -1,6 +1,3 @@
-import { useState } from 'react';
-import { Input } from '../../ui/input';
-import { Switch } from '../../ui/switch';
 import {
   ArrowLeft,
   Person as User,
@@ -20,6 +17,10 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { useState } from 'react';
+
+import { Input } from '../../ui/input';
+import { Switch } from '../../ui/switch';
 
 interface SettingsProps {
   onBack: () => void;

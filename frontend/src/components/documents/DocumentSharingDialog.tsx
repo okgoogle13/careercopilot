@@ -1,9 +1,3 @@
-import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../ui/dialog';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
-import { Badge } from '../ui/badge';
 import {
   Close as X,
   ContentCopy as Copy,
@@ -13,6 +7,13 @@ import {
   Mail,
   Public as Globe,
 } from '@mui/icons-material';
+import React, { useState } from 'react';
+
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '../ui/dialog';
+import { Input } from '../ui/input';
 
 type PermissionLevel = 'view' | 'comment' | 'edit';
 

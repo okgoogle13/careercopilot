@@ -1,4 +1,3 @@
-import { db, auth } from '@/firebase-config';
 import {
   collection,
   doc,
@@ -13,7 +12,11 @@ import {
   Timestamp,
   serverTimestamp,
 } from 'firebase/firestore';
-import { uploadDocument, deleteFile, UploadProgress } from './storageService';
+
+import { db, auth } from '@/firebase-config';
+
+import type { UploadProgress } from './storageService';
+import { uploadDocument, deleteFile } from './storageService';
 
 export interface Document {
   id: string;
@@ -91,10 +94,12 @@ export async function uploadAndCreateDocument(
  * @param filters - Optional filters (type, status)
  * @returns Array of documents
  */
-export async function getUserDocuments(filters?: {
-  type?: string;
-  status?: string;
-}): Promise<Document[]> {
+interface DocumentFilters {
+  type?: 'resume' | 'cover-letter' | 'ksc' | 'portfolio' | 'all';
+  status?: 'draft' | 'active' | 'archived' | 'all';
+}
+
+export async function getUserDocuments(filters?: DocumentFilters): Promise<Document[]> {
   const user = auth.currentUser;
   if (!user) {
     throw new Error('User must be authenticated');
@@ -216,7 +221,23 @@ export async function removeDocumentTags(documentId: string, tags: string[]): Pr
 /**
  * Convert Firestore document data to Document type
  */
-function convertFirestoreDoc(id: string, data: any): Document {
+interface FirestoreDocumentData {
+  userId: string;
+  name: string;
+  type: 'resume' | 'cover-letter' | 'ksc' | 'portfolio';
+  status: 'draft' | 'active' | 'archived';
+  storagePath: string;
+  downloadURL: string;
+  size: number;
+  contentType: string;
+  atsScore?: number;
+  isFavorite: boolean;
+  tags?: string[];
+  lastModified: Timestamp | Date;
+  createdAt: Timestamp | Date;
+}
+
+function convertFirestoreDoc(id: string, data: FirestoreDocumentData): Document {
   return {
     id,
     userId: data.userId,

@@ -1,4 +1,6 @@
+import { Button, IconButton, Tooltip } from '@mui/material';
 import React from 'react';
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,8 +22,8 @@ import {
   DialogTrigger,
 } from '../ui/dialog';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
-import { Button, IconButton, Tooltip } from '@mui/material';
 
 export function InteractiveComponentsSection() {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);

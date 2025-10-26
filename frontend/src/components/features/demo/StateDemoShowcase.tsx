@@ -1,10 +1,4 @@
 import { ArrowLeft, Refresh as RefreshCw, Wifi, WifiOff } from '@mui/icons-material';
-import { useCallback, useEffect, useState } from 'react';
-import { CreateProfileCard } from '../profile/CreateProfileCard';
-import { ErrorProfileCard } from '../common/ErrorCard';
-import { LoadingProfileCard } from '../common/LoadingCard';
-import { ProfileCard } from '../profile/ProfileCard';
-import { Badge } from '../../ui/badge';
 import {
   Button,
   IconButton,
@@ -15,6 +9,13 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { useCallback, useEffect, useState } from 'react';
+
+import { Badge } from '../../ui/badge';
+import { ErrorProfileCard } from '../common/ErrorCard';
+import { LoadingProfileCard } from '../common/LoadingCard';
+import { CreateProfileCard } from '../profile/CreateProfileCard';
+import { ProfileCard } from '../profile/ProfileCard';
 
 interface StateDemoShowcaseProps {
   onBack: () => void;

@@ -1,8 +1,4 @@
-import { Skeleton } from '../../ui/skeleton';
-import { Progress } from '../../ui/progress';
 import { ArrowLeft, Upload, Description, AutorenewRounded, CheckCircle } from '@mui/icons-material';
-import { CareerCopilotLogo } from './CareerCopilotLogo';
-import { useState, useEffect } from 'react';
 import {
   Button,
   IconButton,
@@ -13,6 +9,13 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { useState, useEffect } from 'react';
+
+import { Progress } from '../../ui/progress';
+import { Skeleton } from '../../ui/skeleton';
+
+import { CareerCopilotLogo } from './CareerCopilotLogo';
+
 
 interface LoadingStatesProps {
   onBack: () => void;

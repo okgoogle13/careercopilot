@@ -1,8 +1,9 @@
-import React, { useCallback, useState } from 'react';
-import { useDropzone, FileRejection, FileError } from 'react-dropzone';
 import { Upload, InsertDriveFile, Close, HourglassEmpty } from '@mui/icons-material';
 import { Button, LinearProgress, Stack, Box, Typography, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React, { useCallback, useState } from 'react';
+import { useDropzone } from 'react-dropzone';
+import type { FileRejection, FileError } from 'react-dropzone';
 
 export interface UploadedFile {
   file: File;

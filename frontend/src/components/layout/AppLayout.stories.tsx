@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { AppLayout } from './AppLayout';
 import { Box, Typography, Card, CardContent } from '@mui/material';
+import type { Meta, StoryObj } from '@storybook/react';
+
+import { AppLayout } from './AppLayout';
 
 const meta: Meta<typeof AppLayout> = {
   title: 'Layout/AppLayout',

@@ -1,6 +1,7 @@
-import React from 'react';
-import { LinearProgress, LinearProgressProps, Box } from '@mui/material';
+import type { LinearProgressProps} from '@mui/material';
+import { LinearProgress, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import React from 'react';
 
 const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 8,

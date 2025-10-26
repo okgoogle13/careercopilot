@@ -1,9 +1,11 @@
 import { Warning as AlertTriangle, Info } from '@mui/icons-material';
+
 import { Alert, AlertDescription, AlertTitle } from '../ui/Alert';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Badge } from '../ui/badge';
 import { Label } from '../ui/label';
 import { Progress } from '../ui/progress';
+
 import { ComponentDemo, ComponentSection } from './ComponentDemo';
 
 export function DisplayComponentsSection() {

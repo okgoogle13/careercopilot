@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  Menu as MenuIcon,
+  NotificationsNone as NotificationsIcon,
+  Close as CloseIcon,
+  Search as SearchIcon,
+} from '@mui/icons-material';
 import {
   AppBar,
   Toolbar,
@@ -22,14 +26,13 @@ import {
   useMediaQuery,
   InputBase,
 } from '@mui/material';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { mainNavigation, userNavigation } from '../../config/navigation';
+
 import { NavigationItem } from './NavigationItem';
-import {
-  Menu as MenuIcon,
-  NotificationsNone as NotificationsIcon,
-  Close as CloseIcon,
-  Search as SearchIcon,
-} from '@mui/icons-material';
+
 
 interface NavbarProps {
   onMenuClick?: () => void;
