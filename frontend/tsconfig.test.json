@@ -33,7 +33,6 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    "importsNotUsedAsValues": "error",
 
     /* JSX Support */
     "jsx": "react-jsx",
@@ -64,10 +63,6 @@
     "sourceMap": true,
     "inlineSources": true,
     "inlineSourceMap": true,
-
-    /* JSX Output */
-    "jsxFactory": "jsx",
-    "jsxFragmentFactory": "Fragment",
 
     /* Module Resolution */
     "allowImportingTsExtensions": true,
