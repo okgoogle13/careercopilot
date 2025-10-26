@@ -3,10 +3,11 @@ from app.core.ai_config import AIModelType, AIProvider, get_ai_config
 
 def test_get_model_config_returns_model():
     config = get_ai_config()
-    model = config.get_model_config("gemini-2.0-flash")
+    # Test with a model that exists in the default configuration
+    model = config.get_model_config("gpt-4o-mini")
     assert model is not None
-    assert model.name == "gemini-2.0-flash"
-    assert model.provider == AIProvider.GOOGLE_AI
+    assert model.name == "gpt-4o-mini"
+    assert model.provider == AIProvider.OPENAI
     assert model.model_type == AIModelType.TEXT_GENERATION
 
 
@@ -20,8 +21,10 @@ def test_get_service_config_returns_service():
 def test_validate_configuration_no_errors():
     config = get_ai_config()
     issues = config.validate_configuration()
-    assert "errors" in issues
-    assert isinstance(issues["errors"], list)
+    # The method returns a list of issues directly
+    assert isinstance(issues, list)
+    # With default config, there should be no validation issues
+    assert len(issues) == 0
 
 
 def test_reload_ai_config_does_not_crash():
