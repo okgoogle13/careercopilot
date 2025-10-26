@@ -540,27 +540,19 @@ class AIConfigManager:
         # Check for missing required fields
         for model_name, model in self.models.items():
             if not model.name:
-                issues.append(
-                    f"Model {model_name} is missing required field 'name'"
-                )
+                issues.append(f"Model {model_name} is missing required field 'name'")
             if not model.provider:
-                issues.append(
-                    f"Model {model_name} is missing required field 'provider'"
-                )
+                issues.append(f"Model {model_name} is missing required field 'provider'")
 
         # Check for missing credentials for configured providers
         for provider in {model.provider for model in self.models.values()}:
             if provider not in self.credentials:
-                issues.append(
-                    f"No credentials found for provider: {provider.value}"
-                )
+                issues.append(f"No credentials found for provider: {provider.value}")
 
         # Check service configurations
         for service_name, service in self.services.items():
             if not service.primary_model:
-                issues.append(
-                    f"Service {service_name} is missing required field 'primary_model'"
-                )
+                issues.append(f"Service {service_name} is missing required field 'primary_model'")
             elif service.primary_model not in self.models:
                 issues.append(
                     f"Primary model '{service.primary_model}' for service '{service_name}' not found in models"
@@ -581,10 +573,10 @@ class AIConfigManager:
             config_path = file_path or self.config_file_path
             if not config_path:
                 raise ValueError("No configuration file path specified")
-                
+
             save_path = Path(config_path)
             save_path.parent.mkdir(parents=True, exist_ok=True)
-            
+
             # Prepare config dictionary
             config = {
                 "models": {name: model.to_dict() for name, model in self.models.items()},

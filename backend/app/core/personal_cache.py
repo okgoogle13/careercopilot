@@ -189,11 +189,7 @@ class PersonalCache:
     async def get_cache_stats(self) -> Dict[str, Any]:
         """Get cache statistics"""
         try:
-            stats: Dict[str, Any] = {
-                "total_files": 0,
-                "categories": {},
-                "total_size_mb": 0.0
-            }
+            stats: Dict[str, Any] = {"total_files": 0, "categories": {}, "total_size_mb": 0.0}
 
             for category_dir in self.cache_dir.iterdir():
                 if category_dir.is_dir():
