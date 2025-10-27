@@ -9,6 +9,7 @@ python-multipart
 # Firebase and Google Cloud essentials
 firebase-admin
 google-api-python-client
+google-cloud-storage
 google-cloud-secret-manager
 
 # Database support
@@ -27,6 +28,8 @@ genkit-plugin-google-genai
 python-jose[cryptography]
 passlib[bcrypt]
 email-validator
+PyJWT
+google-auth
 
 # Document processing
 pdfplumber
@@ -41,6 +44,8 @@ spacy
 # AI Platform and ML utilities - keeping minimal set for Genkit
 google-cloud-aiplatform
 numpy
+scikit-learn
+pandas
 
 # Monitoring and Metrics
 prometheus-client
@@ -50,8 +55,12 @@ psutil
 psutil
 redis
 httpx[http2]
+requests
 slowapi
 boto3
 loguru
 opencensus
 opencensus-ext-stackdriver
+
+# Task Queues
+celery
