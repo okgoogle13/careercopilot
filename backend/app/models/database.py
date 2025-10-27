@@ -211,18 +211,18 @@ class Job(Base, BaseMixin):
 
     # Requirements and qualifications
     requirements: Mapped[List[str]] = mapped_column(
-        JSON, default_factory=list, nullable=False, comment="List of required qualifications"
+        JSON, default=list, nullable=False, comment="List of required qualifications"
     )
     preferred_qualifications: Mapped[List[str]] = mapped_column(
-        JSON, default_factory=list, nullable=False, comment="List of preferred qualifications"
+        JSON, default=list, nullable=False, comment="List of preferred qualifications"
     )
     skill_requirements: Mapped[List[str]] = mapped_column(
-        JSON, default_factory=list, nullable=False, comment="List of required skills"
+        JSON, default=list, nullable=False, comment="List of required skills"
     )
 
     # Salary information
     salary_range: Mapped[Dict[str, int]] = mapped_column(
-        JSON, default_factory=dict, nullable=False, comment="Salary range with min/max values"
+        JSON, default=dict, nullable=False, comment="Salary range with min/max values"
     )
     salary_min: Mapped[Optional[int]] = mapped_column(
         Integer, nullable=True, comment="Minimum salary (extracted)"
@@ -291,7 +291,7 @@ class Job(Base, BaseMixin):
     job_metadata: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
         name="metadata",  # Keep the column name as 'metadata' in the database
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Additional metadata in JSON format",
     )
@@ -368,11 +368,11 @@ class Application(Base, BaseMixin):
         String(500), nullable=True, comment="Path or URL to the resume file"
     )
     application_form: Mapped[Dict[str, Any]] = mapped_column(
-        JSON, default_factory=dict, nullable=False, comment="Structured application form data"
+        JSON, default=dict, nullable=False, comment="Structured application form data"
     )
     custom_answers: Mapped[Dict[str, str]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Custom answers for application questions",
     )
@@ -411,7 +411,7 @@ class Application(Base, BaseMixin):
     )
     metadata: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Additional metadata and system information in JSON format",
     )
@@ -572,24 +572,24 @@ class AgentSession(Base, BaseMixin):
 
     # Agent tracking
     active_agents: Mapped[List[str]] = mapped_column(
-        JSON, default_factory=list, nullable=False, comment="List of currently active agent names"
+        JSON, default=list, nullable=False, comment="List of currently active agent names"
     )
     completed_agents: Mapped[List[str]] = mapped_column(
-        JSON, default_factory=list, nullable=False, comment="List of completed agent names"
+        JSON, default=list, nullable=False, comment="List of completed agent names"
     )
     agent_results: Mapped[Dict[str, Any]] = mapped_column(
-        JSON, default_factory=dict, nullable=False, comment="Results from each agent in the session"
+        JSON, default=dict, nullable=False, comment="Results from each agent in the session"
     )
 
     # Session data
     input_data: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Input data and configuration for the session",
     )
     final_result: Mapped[Dict[str, Any]] = mapped_column(
-        JSON, default_factory=dict, nullable=False, comment="Final result and output of the session"
+        JSON, default=dict, nullable=False, comment="Final result and output of the session"
     )
 
     # Timestamps and metrics
@@ -614,7 +614,7 @@ class AgentSession(Base, BaseMixin):
     )
     error_details: Mapped[Optional[Dict[str, Any]]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=True,
         comment="Detailed error information if the session failed",
     )
@@ -697,24 +697,24 @@ class MarketAnalysis(Base, BaseMixin):
     )
     salary_range: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Salary range distribution (min, max, percentiles)",
     )
 
     # Skill trends
     top_skills: Mapped[List[str]] = mapped_column(
-        JSON, default_factory=list, nullable=False, comment="List of most in-demand skills"
+        JSON, default=list, nullable=False, comment="List of most in-demand skills"
     )
     emerging_skills: Mapped[List[str]] = mapped_column(
         JSON,
-        default_factory=list,
+        default=list,
         nullable=False,
         comment="List of emerging skills with growing demand",
     )
     skill_frequency: Mapped[Dict[str, int]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Frequency count of skills across job postings",
     )
@@ -722,13 +722,13 @@ class MarketAnalysis(Base, BaseMixin):
     # Company insights
     top_employers: Mapped[List[Dict[str, Any]]] = mapped_column(
         JSON,
-        default_factory=list,
+        default=list,
         nullable=False,
         comment="List of top employers in the field with job counts",
     )
     company_hiring_trends: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Hiring trends by company size and industry",
     )
@@ -736,7 +736,7 @@ class MarketAnalysis(Base, BaseMixin):
     # Predictions
     demand_forecast: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
-        default_factory=dict,
+        default=dict,
         nullable=False,
         comment="Future demand forecast for the field and location",
     )
