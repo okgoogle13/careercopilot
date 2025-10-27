@@ -34,8 +34,6 @@ botocore==1.40.55
     # via
     #   boto3
     #   s3transfer
-brotli==1.1.0
-    # via fonttools
 cachecontrol==0.14.3
     # via firebase-admin
 cachetools==5.5.2
@@ -51,9 +49,7 @@ certifi==2025.8.3
     #   httpx
     #   requests
 cffi==1.17.1
-    # via
-    #   cryptography
-    #   weasyprint
+    # via cryptography
 charset-normalizer==3.4.3
     # via
     #   pdfminer-six
@@ -73,8 +69,6 @@ cryptography==45.0.7
     #   pdfminer-six
     #   pyjwt
     #   python-jose
-cssselect2==0.8.0
-    # via weasyprint
 cymem==2.0.11
     # via
     #   preshed
@@ -98,8 +92,6 @@ fastapi==0.116.1
     # via -r backend/requirements.in
 firebase-admin==6.5.0
     # via -r backend/requirements.in
-fonttools[woff]==4.59.2
-    # via weasyprint
 genkit==0.4.0
     # via
     #   -r backend/requirements.in
@@ -252,8 +244,6 @@ limits==5.5.0
     # via slowapi
 loguru==0.7.3
     # via -r backend/requirements.in
-lxml==6.0.1
-    # via python-docx
 mako==1.3.10
     # via alembic
 marisa-trie==1.3.1
@@ -319,7 +309,6 @@ pillow==11.3.0
     # via
     #   genkit
     #   pdfplumber
-    #   weasyprint
 preshed==3.0.10
     # via
     #   spacy
@@ -379,8 +368,6 @@ pydantic-core==2.33.2
     # via pydantic
 pydantic-settings==2.10.1
     # via -r backend/requirements.in
-pydyf==0.11.0
-    # via weasyprint
 pygments==2.19.2
     # via rich
 pyjwt[crypto]==2.10.1
@@ -391,14 +378,10 @@ pypdfium2==4.30.0
     # via
     #   -r backend/requirements.in
     #   pdfplumber
-pyphen==0.17.2
-    # via weasyprint
 python-dateutil==2.9.0.post0
     # via
     #   botocore
     #   google-cloud-bigquery
-python-docx==1.1.2
-    # via -r backend/requirements.in
 python-dotenv==1.1.1
     # via
     #   -r backend/requirements.in
@@ -479,12 +462,6 @@ tenacity==9.1.2
     # via google-genai
 thinc==8.3.6
     # via spacy
-tinycss2==1.4.0
-    # via
-    #   cssselect2
-    #   weasyprint
-tinyhtml5==2.0.0
-    # via weasyprint
 tqdm==4.67.1
     # via
     #   openai
@@ -509,7 +486,6 @@ typing-extensions==4.15.0
     #   opentelemetry-semantic-conventions
     #   pydantic
     #   pydantic-core
-    #   python-docx
     #   sqlalchemy
     #   starlette
     #   typer
@@ -539,13 +515,6 @@ watchfiles==1.1.0
     # via uvicorn
 weasel==0.4.1
     # via spacy
-weasyprint==66.0
-    # via -r backend/requirements.in
-webencodings==0.5.1
-    # via
-    #   cssselect2
-    #   tinycss2
-    #   tinyhtml5
 websockets==15.0.1
     # via
     #   google-genai
@@ -556,8 +525,6 @@ wrapt==1.17.3
     #   smart-open
 zipp==3.23.0
     # via importlib-metadata
-zopfli==0.2.3.post1
-    # via fonttools
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools

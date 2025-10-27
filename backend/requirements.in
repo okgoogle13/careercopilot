@@ -30,13 +30,11 @@ passlib[bcrypt]
 email-validator
 
 # Document processing
-python-docx
 pdfplumber
 pypdfium2
 # sentence-transformers  # Temporarily disabled due to torch dependency conflicts
 beautifulsoup4
 jinja2
-weasyprint
 
 # NLP processing (optional - for resume parsing optimization)
 spacy
