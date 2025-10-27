@@ -106,12 +106,19 @@ class EducationItem(BaseModel):
     year: str
 
 
+class VoiceProfile(BaseModel):
+    """Represents the AI-detected writing style of a user."""
+
+    tone: str
+    vocab_level: str
+
+
 class UserPreferences(BaseModel):
     """Stores user-specific preferences."""
 
     themeId: str
     targetRoles: List[str]
-    voiceProfile: Optional[dict] = None  # Now references canonical VoiceProfile schema from asset_library_schema.py
+    voiceProfile: VoiceProfile
 
 
 class PersonalInfo(BaseModel):
@@ -226,7 +233,7 @@ class JobListingDetails(BaseModel):
     Ported from the TypeScript JobDetails interface.
     """
 
-    due_date: Optional[datetime] = Field(None, description="The application due date.")
+    due_date: Optional[str] = Field(None, description="The application due date.")
     company_name: Optional[str] = Field(
         None, description="The name of the hiring organization or company."
     )
