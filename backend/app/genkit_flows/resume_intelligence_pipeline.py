@@ -5,7 +5,6 @@ Comprehensive resume analysis system that provides deep insights, scoring,
 and optimization recommendations using AI-powered analysis.
 """
 
-import asyncio
 import json
 import os
 from datetime import datetime
@@ -20,6 +19,7 @@ from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handl
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.prompt_service import format_prompt
 
+import asyncio
 try:
     import genkit
     from genkit import ai
@@ -264,15 +264,9 @@ async def generate_resume_intelligence_report(
     """
     try:
         # Get core analysis components in parallel
-        resume_analysis_task = genkit.run(
-            analyze_resume_comprehensive, resume_content, target_industry
-        )
-        career_progression_task = genkit.run(
-            analyze_career_progression, resume_content, career_goals
-        )
-        resume_analysis, career_progression = await asyncio.gather(
-            resume_analysis_task, career_progression_task
-        )
+        resume_analysis_task = genkit.run(analyze_resume_comprehensive, resume_content, target_industry)
+        career_progression_task = genkit.run(analyze_career_progression, resume_content, career_goals)
+        resume_analysis, career_progression = await asyncio.gather(resume_analysis_task, career_progression_task)
 
         # Prepare comprehensive analysis
 
