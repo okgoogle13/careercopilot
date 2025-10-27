@@ -576,53 +576,100 @@ def track_error(error_type: str, component: str, error_message: str, user_id: Op
 # Prometheus Metrics Integration
 # =============================================================================
 
-# Define Prometheus metrics
-http_requests_total = Counter(
-    "http_requests_total",
-    "Total number of HTTP requests",
-    ["method", "endpoint", "status_code", "environment"],
-)
+# Define Prometheus metrics with safe registration to avoid duplicates
+# This is necessary because tests may import modules multiple times
 
-http_request_duration_seconds = Histogram(
-    "http_request_duration_seconds",
-    "HTTP request duration in seconds",
-    ["method", "endpoint", "environment"],
-    buckets=[
-        0.005,
-        0.01,
-        0.025,
-        0.05,
-        0.075,
-        0.1,
-        0.25,
-        0.5,
-        0.75,
-        1.0,
-        2.5,
-        5.0,
-        7.5,
-        10.0,
-    ],
-)
+_metrics_initialized = False
+http_requests_total = None
+http_request_duration_seconds = None
+ai_requests_total = None
+ai_request_duration_seconds = None
+application_errors_total = None
 
-ai_requests_total = Counter(
-    "ai_requests_total",
-    "Total number of AI service requests",
-    ["ai_service", "operation", "status", "environment"],
-)
 
-ai_request_duration_seconds = Histogram(
-    "ai_request_duration_seconds",
-    "AI service request duration in seconds",
-    ["ai_service", "operation", "environment"],
-    buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 30.0, 60.0],
-)
+def _initialize_prometheus_metrics():
+    """Initialize Prometheus metrics only once."""
+    global _metrics_initialized, http_requests_total, http_request_duration_seconds
+    global ai_requests_total, ai_request_duration_seconds, application_errors_total
 
-application_errors_total = Counter(
-    "application_errors_total",
-    "Total application errors",
-    ["error_type", "component", "severity", "environment"],
-)
+    if _metrics_initialized:
+        return
+
+    try:
+        http_requests_total = Counter(
+            "http_requests_total",
+            "Total number of HTTP requests",
+            ["method", "endpoint", "status_code", "environment"],
+        )
+
+        http_request_duration_seconds = Histogram(
+            "http_request_duration_seconds",
+            "HTTP request duration in seconds",
+            ["method", "endpoint", "environment"],
+            buckets=[
+                0.005,
+                0.01,
+                0.025,
+                0.05,
+                0.075,
+                0.1,
+                0.25,
+                0.5,
+                0.75,
+                1.0,
+                2.5,
+                5.0,
+                7.5,
+                10.0,
+            ],
+        )
+
+        ai_requests_total = Counter(
+            "ai_requests_total",
+            "Total number of AI service requests",
+            ["ai_service", "operation", "status", "environment"],
+        )
+
+        ai_request_duration_seconds = Histogram(
+            "ai_request_duration_seconds",
+            "AI service request duration in seconds",
+            ["ai_service", "operation", "environment"],
+            buckets=[0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 30.0, 60.0],
+        )
+
+        application_errors_total = Counter(
+            "application_errors_total",
+            "Total application errors",
+            ["error_type", "component", "severity", "environment"],
+        )
+
+        _metrics_initialized = True
+    except ValueError as e:
+        # Metrics already registered (e.g., in tests), use existing ones
+        if "Duplicated timeseries" in str(e):
+            logger.warning("Prometheus metrics already registered, reusing existing metrics")
+            # Try to get existing metrics from registry
+            from prometheus_client import REGISTRY
+
+            for collector in REGISTRY._collector_to_names.keys():
+                if hasattr(collector, "_name"):
+                    if collector._name == "http_requests_total":
+                        http_requests_total = collector
+                    elif collector._name == "http_request_duration_seconds":
+                        http_request_duration_seconds = collector
+                    elif collector._name == "ai_requests_total":
+                        ai_requests_total = collector
+                    elif collector._name == "ai_request_duration_seconds":
+                        ai_request_duration_seconds = collector
+                    elif collector._name == "application_errors_total":
+                        application_errors_total = collector
+            _metrics_initialized = True
+        else:
+            raise
+
+
+# Initialize metrics on module import
+_initialize_prometheus_metrics()
 
 
 class PrometheusMiddleware(BaseHTTPMiddleware):
