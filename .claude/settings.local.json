@@ -150,7 +150,10 @@
       "Bash(functions/src/auth.functions.ts )",
       "Bash(docs/SMART_INGESTION_INFRASTRUCTURE_SETUP.md )",
       "Bash(docs/DEPENDENCY_CHECK_REPORT.txt)",
-      "Bash(SKIP=mypy git commit:*)"
+      "Bash(SKIP=mypy git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(SKIP=mypy git cherry-pick:*)"
     ]
   }
 }
