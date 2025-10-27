@@ -409,7 +409,7 @@ class Application(Base, BaseMixin):
         nullable=True,
         comment="User notes, reminders, or additional information about this application",
     )
-    metadata: Mapped[Dict[str, Any]] = mapped_column(
+    application_metadata: Mapped[Dict[str, Any]] = mapped_column(
         JSON,
         default=dict,
         nullable=False,
