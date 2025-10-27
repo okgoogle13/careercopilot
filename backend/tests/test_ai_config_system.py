@@ -141,10 +141,11 @@ class TestAIConfigManager:
         # Should pass validation with test config
         validation = config_manager.validate_configuration()
 
-        # Should have some warnings about missing credentials
-        assert isinstance(validation, dict)
-        assert "errors" in validation
-        assert "warnings" in validation
+        # Should return a list of warnings (e.g., about missing credentials)
+        assert isinstance(validation, list)
+
+        # Check that we have the expected warning about missing credentials
+        assert any("No credentials found for provider" in str(warning) for warning in validation)
 
         # Add invalid service to test error detection
         invalid_service = AIServiceConfig(
@@ -156,9 +157,11 @@ class TestAIConfigManager:
         )
         config_manager.services["invalid-service"] = invalid_service
 
+        # Get new validation results with the invalid service
         validation = config_manager.validate_configuration()
-        assert len(validation["errors"]) > 0
-        assert len(validation["warnings"]) > 0
+
+        # Should have warnings about the invalid configuration
+        assert any("non-existent-model" in str(warning) for warning in validation)
 
     def test_get_methods(self, temp_config_file):
         """Test getter methods"""
