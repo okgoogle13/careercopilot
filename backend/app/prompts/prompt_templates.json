@@ -165,5 +165,33 @@
       "last_updated": "2024-09-11",
       "usage_count": 0
     }
+  },
+
+  "job_listing_extractor": {
+    "name": "Job Listing Extractor",
+    "description": "Extracts structured details from a job listing's text content.",
+    "category": "job_analysis",
+    "version": "1.0",
+    "template": "Your task is to act as an expert recruitment assistant and extract the following specific pieces of information from the provided job description text. If a piece of information is not present, you must return null for that field for strings or an empty array for lists.\n\n1.  **Due Date**: The closing date for applications.\n2.  **Company Name**: The name of the organization hiring for the role.\n3.  **Role Title**: The official title of the position.\n4.  **Hiring Manager**: The name of the hiring manager or main contact person.\n5.  **Hiring Manager's Contact**: Any contact details provided for the hiring manager.\n6.  **Essential Criteria**: Skills/qualifications stated as 'essential', 'required', etc.\n7.  **Desirable Criteria**: Skills/qualifications stated as 'desirable', 'preferred', etc.\n8.  **Role Type**: Classify the role as 'Frontline/Support', 'PM/Delivery', or 'Other'.\n9.  **Subsectors**: Identify relevant community service subsectors like 'Homelessness', 'AOD', 'Mental Health'.\n\nPlease provide the output in the specified JSON format.\n\nJob Description Text:\n---\n{job_listing_text}\n---",
+    "parameters": ["job_listing_text"],
+    "output_format": "structured_json"
+  },
+
+  "job_listing_advanced_analysis": {
+    "name": "Job Listing Advanced Analysis",
+    "description": "Performs an advanced analysis on structured job details based on a user's request.",
+    "category": "job_analysis",
+    "version": "1.1",
+    "template": "You are a world-class career coach and recruitment expert. Your task is to perform an advanced analysis based on the provided job details and a user's request.\n\n**Job Details:**\n- Role Title: {role_title}\n- Company: {company_name}\n- Essential Criteria: {essential_criteria}\n- Desirable Criteria: {desirable_criteria}\n- Role Type: {role_type}\n- Subsectors: {subsectors}\n\n**User's Request:**\n{user_prompt}\n\nPlease provide a comprehensive, well-structured response to the user's request, leveraging your deep expertise.",
+    "parameters": [
+      "role_title",
+      "company_name",
+      "essential_criteria",
+      "desirable_criteria",
+      "role_type",
+      "subsectors",
+      "user_prompt"
+    ],
+    "output_format": "text"
   }
 }
