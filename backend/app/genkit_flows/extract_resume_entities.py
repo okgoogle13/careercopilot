@@ -1,21 +1,5 @@
-from typing import Any, Dict, List
-
-from pydantic import BaseModel, Field
-
 from .shared import create_extraction_flow
-
-
-# Define the structured output model for resume entities
-class ResumeEntities(BaseModel):
-    skills: List[str] = Field(
-        description="A comprehensive list of all skills mentioned in the resume."
-    )
-    experience: List[Dict[str, Any]] = Field(
-        description="A list of job experiences, including titles, companies, and durations."
-    )
-    education: List[Dict[str, Any]] = Field(
-        description="A list of educational qualifications, including degrees and institutions."
-    )
+from app.models.schemas import ResumeEntities # Import from centralized schema
 
 
 # Define the prompt template

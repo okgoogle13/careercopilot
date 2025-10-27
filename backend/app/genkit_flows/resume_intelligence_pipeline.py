@@ -6,6 +6,7 @@ and optimization recommendations using AI-powered analysis.
 """
 
 import json
+import asyncio
 import os
 from datetime import datetime
 from enum import Enum
@@ -262,9 +263,11 @@ def generate_resume_intelligence_report(
         ResumeIntelligenceReport: Comprehensive intelligence report with strategic action plan
     """
     try:
-        # Get core analysis components
-        resume_analysis = analyze_resume_comprehensive(resume_content, target_industry)
-        career_progression = analyze_career_progression(resume_content, career_goals)
+        # Get core analysis components in parallel
+        resume_analysis_task = asyncio.create_task(analyze_resume_comprehensive.run(resume_content, target_industry))
+        career_progression_task = asyncio.create_task(analyze_career_progression.run(resume_content, career_goals))
+
+        resume_analysis, career_progression = await asyncio.gather(resume_analysis_task, career_progression_task)
 
         # Prepare comprehensive analysis
 

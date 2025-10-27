@@ -220,3 +220,18 @@ class UserProfile(BaseModel):
     preferences: UserPreferences
     created: datetime
     updated: datetime
+
+
+class ResumeEntities(BaseModel):
+    """
+    Structured output for resume entity extraction.
+    """
+    skills: List[str] = Field(
+        description="A comprehensive list of all skills mentioned in the resume."
+    )
+    experience: List[dict] = Field(
+        description="A list of job experiences, including titles, companies, and durations."
+    )
+    education: List[dict] = Field(
+        description="A list of educational qualifications, including degrees and institutions."
+    )

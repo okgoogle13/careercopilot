@@ -8,7 +8,6 @@ python-multipart
 
 # Firebase and Google Cloud essentials
 firebase-admin
-google-api-python-client
 google-cloud-secret-manager
 
 # Database support
@@ -30,16 +29,9 @@ passlib[bcrypt]
 email-validator
 
 # Document processing
-python-docx
 pdfplumber
 pypdfium2
-# sentence-transformers  # Temporarily disabled due to torch dependency conflicts
-beautifulsoup4
 jinja2
-weasyprint
-
-# NLP processing (optional - for resume parsing optimization)
-spacy
 
 # AI Platform and ML utilities - keeping minimal set for Genkit
 google-cloud-aiplatform
