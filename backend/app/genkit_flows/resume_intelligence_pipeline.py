@@ -19,6 +19,7 @@ from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handl
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.prompt_service import format_prompt
 
+import asyncio
 try:
     import genkit
     from genkit import ai
@@ -243,7 +244,7 @@ def analyze_career_progression(
 
 @genkit_flow(output_schema=ResumeIntelligenceReport)
 @with_ai_error_handling()
-def generate_resume_intelligence_report(
+async def generate_resume_intelligence_report(
     resume_content: str,
     target_industry: Optional[str] = None,
     career_goals: Optional[str] = None,
@@ -262,9 +263,10 @@ def generate_resume_intelligence_report(
         ResumeIntelligenceReport: Comprehensive intelligence report with strategic action plan
     """
     try:
-        # Get core analysis components
-        resume_analysis = analyze_resume_comprehensive(resume_content, target_industry)
-        career_progression = analyze_career_progression(resume_content, career_goals)
+        # Get core analysis components in parallel
+        resume_analysis_task = genkit.run(analyze_resume_comprehensive, resume_content, target_industry)
+        career_progression_task = genkit.run(analyze_career_progression, resume_content, career_goals)
+        resume_analysis, career_progression = await asyncio.gather(resume_analysis_task, career_progression_task)
 
         # Prepare comprehensive analysis
 
