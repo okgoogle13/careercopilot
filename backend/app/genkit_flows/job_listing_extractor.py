@@ -78,9 +78,7 @@ def _scrape_url_content(url: str) -> str:
 
 
 @flow(name="extract_job_listing_details_flow")
-def extract_job_listing_details_flow(
-    source: Union[str, dict]
-) -> JobListingDetails:
+def extract_job_listing_details_flow(source: Union[str, dict]) -> JobListingDetails:
     """
     Orchestrates the extraction of structured job details from either raw text or a URL.
 
@@ -119,9 +117,7 @@ def extract_job_listing_details_flow(
 
 
 @flow(name="advanced_job_analysis_flow")
-def advanced_job_analysis_flow(
-    job_details: JobListingDetails, user_prompt: str
-) -> str:
+def advanced_job_analysis_flow(job_details: JobListingDetails, user_prompt: str) -> str:
     """
     Performs an advanced analysis on structured job details based on a user's query.
 
