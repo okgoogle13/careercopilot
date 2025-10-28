@@ -10,6 +10,7 @@ from enum import Enum as PyEnum
 from typing import (
     TYPE_CHECKING,
     Any,
+    ClassVar,
     Dict,
     Generic,
     List,
@@ -29,9 +30,6 @@ from sqlalchemy import (
     Boolean,
     Column,
     DateTime,
-)
-from sqlalchemy import Enum as SQLEnum
-from sqlalchemy import (
     Float,
     ForeignKey,
     ForeignKeyConstraint,
@@ -52,6 +50,7 @@ from sqlalchemy import (
     text,
     update,
 )
+from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.engine import Engine
 from sqlalchemy.engine.interfaces import _CoreAnyExecuteParams
 from sqlalchemy.exc import SQLAlchemyError
@@ -98,14 +97,6 @@ class Base(DeclarativeBase, BaseMixin):
     # Type hints for SQLAlchemy
     __abstract__ = True
     __mapper_args__ = {"eager_defaults": True}
-
-    @declared_attr
-    def __tablename__(cls) -> str:
-        """
-        Generate __tablename__ automatically.
-        Convert CamelCase class name to snake_case table name.
-        """
-        return "".join(["_" + c.lower() if c.isupper() else c for c in cls.__name__]).lstrip("_")
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert model instance to dictionary"""
@@ -181,7 +172,7 @@ class User(Base):
         return str(self.id)
 
 
-class Job(Base, BaseMixin):
+class Job(Base):
     """Job listings discovered and analyzed by the system.
 
     This model represents job postings that users have saved or the system has discovered.
@@ -321,7 +312,7 @@ class Job(Base, BaseMixin):
         return f"<Job {self.title} at {self.company}>"
 
 
-class Application(Base, BaseMixin):
+class Application(Base):
     """Tracks job applications and associated materials.
 
     This model represents a user's application to a specific job, including
@@ -443,7 +434,7 @@ class Application(Base, BaseMixin):
         return f"<Application {self.id} for job {self.job_id}>"
 
 
-class AIInteraction(Base, BaseMixin):
+class AIInteraction(Base):
     """Tracks all AI interactions for monitoring and improvement.
 
     This model logs interactions with AI models, including inputs, outputs,
@@ -533,7 +524,7 @@ class AIInteraction(Base, BaseMixin):
         return f"<AIInteraction {self.id} ({self.operation_type})>"
 
 
-class AgentSession(Base, BaseMixin):
+class AgentSession(Base):
     """Multi-agent orchestration sessions for advanced intelligence.
 
     This model represents a session where multiple AI agents work together to
@@ -672,7 +663,7 @@ class AgentSession(Base, BaseMixin):
         self.completed_at = datetime.now(timezone.utc)
 
 
-class MarketAnalysis(Base, BaseMixin):
+class MarketAnalysis(Base):
     """Real-time job market analysis and trends"""
 
     __tablename__ = "market_analysis"
@@ -770,7 +761,7 @@ class Cache(Base, BaseMixin):
     )
 
     key: Mapped[str] = mapped_column(
-        String(255), primary_key=True, comment="Unique cache key for lookup"
+        String(255), unique=True, nullable=False, index=True, comment="Unique cache key for lookup"
     )
     value: Mapped[str] = mapped_column(
         Text, nullable=False, comment="JSON serialized data of the cached result"
@@ -783,7 +774,7 @@ class Cache(Base, BaseMixin):
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime,
-        default=datetime.utcnow,
+        default=lambda: datetime.now(timezone.utc),
         nullable=False,
         comment="When this cache entry was created",
     )
