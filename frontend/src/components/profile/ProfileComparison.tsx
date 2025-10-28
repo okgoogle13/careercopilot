@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 
 import { ProfileCard } from '../features/profile/ProfileCard';
 
-
 interface ProfileData {
   id: string;
   name: string;

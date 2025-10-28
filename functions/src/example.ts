@@ -1,10 +1,10 @@
-import {logger} from "firebase-functions/v2";
-import {onRequest} from "firebase-functions/v2/https";
-import {setGlobalOptions} from "firebase-functions/v2/options";
-import {defineString, defineSecret} from "firebase-functions/params";
+import { logger } from "firebase-functions/v2";
+import { onRequest } from "firebase-functions/v2/https";
+import { setGlobalOptions } from "firebase-functions/v2/options";
+import { defineString, defineSecret } from "firebase-functions/params";
 
 // Define parameters using the params subpackage
-const region = defineString("REGION", {default: "us-central1"});
+const region = defineString("REGION", { default: "us-central1" });
 const apiKeySecret = defineSecret("API_KEY");
 const databaseUrlSecret = defineSecret("DATABASE_URL");
 

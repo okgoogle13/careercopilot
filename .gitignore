@@ -64,6 +64,7 @@ temp/
 .eslintcache
 .npm
 .rpt2_cache/
+.tsbuildinfo
 
 # Python cache files
 __pycache__/
