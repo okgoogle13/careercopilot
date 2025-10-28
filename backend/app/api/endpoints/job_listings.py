@@ -37,8 +37,9 @@ async def extract_from_text(request: JobListingTextRequest):
         details = await run(extract_job_listing_details_flow, request.text)
         return details
     except Exception as e:
-        # Catch potential errors from the flow (e.g., AI model failure)
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+        # Log the actual exception for debugging (add logging if not present)
+        # logger.error(f"Failed to extract from text: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Failed to extract job details from text")
 
 
 @router.post(
@@ -80,6 +81,5 @@ async def advanced_analysis(request: AdvancedAnalysisRequest):
         )
         return analysis_result
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"An unexpected error occurred during analysis: {str(e)}"
-        )
+        # logger.error(f"Advanced analysis failed: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail="Failed to perform advanced analysis")
