@@ -50,8 +50,7 @@ class BaseMixin:
     id: Mapped[str] = mapped_column(
         String(36),
         primary_key=True,
-        default_factory=lambda: str(uuid.uuid4()),
-        index=True,
+        default=lambda: str(uuid.uuid4()),
     )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
@@ -82,11 +81,12 @@ class BaseMixin:
         return cls(**data)
 
     def update_from_dict(self, data: Dict[str, Any]) -> None:
+    def update_from_dict(self, data: Dict[str, Any]) -> None:
         """Update model instance from dictionary."""
+        protected_fields = {'id', 'created_at', 'updated_at'}
         for key, value in data.items():
-            if hasattr(self, key):
+            if hasattr(self, key) and key not in protected_fields:
                 setattr(self, key, value)
-
 
 class Base(DeclarativeBase, BaseMixin):
     """Base class for all SQLAlchemy models."""

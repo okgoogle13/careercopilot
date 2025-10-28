@@ -46,8 +46,6 @@ ADVANCED_ANALYSIS_PROMPT = PROMPTS["job_listing_advanced_analysis"]["template"]
 
 
 import logging
-import requests
-from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
