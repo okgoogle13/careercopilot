@@ -9,6 +9,7 @@ from prometheus_client import Counter, Gauge, Histogram, start_http_server
 logger = logging.getLogger(__name__)
 
 # Initialize metrics with safe registration to avoid duplicates
+_nlp_metrics_initialized = False
 NLP_REQUESTS_TOTAL = None
 NLP_REQUEST_DURATION = None
 NLP_TOKENS_PROCESSED = None
@@ -18,10 +19,10 @@ NLP_MODEL_MEMORY_USAGE = None
 
 def _initialize_nlp_metrics():
     """Initialize NLP Prometheus metrics only once."""
-    global NLP_REQUESTS_TOTAL, NLP_REQUEST_DURATION
+    global _nlp_metrics_initialized, NLP_REQUESTS_TOTAL, NLP_REQUEST_DURATION
     global NLP_TOKENS_PROCESSED, NLP_MODEL_LOAD_TIME, NLP_MODEL_MEMORY_USAGE
 
-    if _initialize_nlp_metrics.initialized:
+    if _nlp_metrics_initialized:
         return
 
     try:
@@ -52,15 +53,13 @@ def _initialize_nlp_metrics():
             "nlp_model_memory_usage_bytes", "Memory usage of loaded NLP models", ["model"]
         )
 
-        _initialize_nlp_metrics.initialized = True
+        _nlp_metrics_initialized = True
     except ValueError as e:
         if "Duplicated timeseries" in str(e):
             logger.warning("NLP metrics already registered, reusing existing metrics")
-            _initialize_nlp_metrics.initialized = True
+            _nlp_metrics_initialized = True
         else:
             raise
-# Initialize the flag attribute for metrics initialization
-_initialize_nlp_metrics.initialized = False
 
 
 # Initialize metrics on module import
