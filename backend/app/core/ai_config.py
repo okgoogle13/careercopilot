@@ -11,7 +11,7 @@ import os
 from dataclasses import asdict, dataclass, field
 from enum import Enum
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 
 from app.ai.model_optimizer import OptimizationConfig, OptimizationLevel
 
