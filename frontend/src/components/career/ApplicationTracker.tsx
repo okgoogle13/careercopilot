@@ -14,7 +14,6 @@ import React, { useState } from 'react';
 // import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 import { TimelineView } from './TimelineView';
 
-
 interface Application {
   id: string;
   jobTitle: string;

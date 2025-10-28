@@ -13,18 +13,15 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from app.ai.model_optimizer import OptimizationConfig, OptimizationLevel
+
 logger = logging.getLogger(__name__)
 
 
 class AIProvider(Enum):
     """Supported AI service providers"""
-
-    OPENAI = "openai"
-    GOOGLE_AI = "google_ai"
-    ANTHROPIC = "anthropic"
-    AZURE_OPENAI = "azure_openai"
-    AWS_BEDROCK = "aws_bedrock"
-    HUGGINGFACE = "huggingface"
+    GOOGLE_AI = "google_ai"  # Primary provider for Gemini models
+    ANTHROPIC = "anthropic"  # Optional fallback provider
 
 
 class AIModelType(Enum):
@@ -65,12 +62,20 @@ class ModelConfig:
     supports_streaming: bool = False
     supports_function_calling: bool = False
     custom_parameters: Dict[str, Any] = field(default_factory=dict)
+    optimization_config: Optional[OptimizationConfig] = field(
+        default_factory=lambda: OptimizationConfig(level=OptimizationLevel.NONE)
+    )
+    optimization_enabled: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary with enum serialization"""
         data = asdict(self)
         data["provider"] = self.provider.value
         data["model_type"] = self.model_type.value
+        # Handle optimization config serialization
+        if self.optimization_config:
+            data["optimization_config"] = asdict(self.optimization_config)
+            data["optimization_config"]["level"] = self.optimization_config.level.value
         return data
 
     @classmethod
@@ -79,6 +84,14 @@ class ModelConfig:
         data = data.copy()
         data["provider"] = AIProvider(data["provider"])
         data["model_type"] = AIModelType(data["model_type"])
+        
+        # Handle optimization config deserialization
+        if "optimization_config" in data and data["optimization_config"]:
+            opt_data = data["optimization_config"].copy()
+            if isinstance(opt_data, dict):
+                opt_data["level"] = OptimizationLevel(opt_data.get("level", "none"))
+                data["optimization_config"] = OptimizationConfig(**opt_data)
+        
         return cls(**data)
 
 
@@ -263,27 +276,11 @@ class AIConfigManager:
         """Load configuration from environment variables"""
         # Load provider credentials from environment
         env_credentials: Dict[AIProvider, Dict[str, Any]] = {
-            AIProvider.OPENAI: {
-                "api_key": os.getenv("OPENAI_API_KEY"),
-                "organization_id": os.getenv("OPENAI_ORG_ID"),
-            },
             AIProvider.GOOGLE_AI: {
                 "api_key": os.getenv("GOOGLE_AI_API_KEY"),
                 "project_id": os.getenv("GOOGLE_CLOUD_PROJECT"),
             },
             AIProvider.ANTHROPIC: {"api_key": os.getenv("ANTHROPIC_API_KEY")},
-            AIProvider.AZURE_OPENAI: {
-                "api_key": os.getenv("AZURE_OPENAI_API_KEY"),
-                "endpoint_url": os.getenv("AZURE_OPENAI_ENDPOINT"),
-                "region": os.getenv("AZURE_OPENAI_REGION"),
-            },
-            AIProvider.AWS_BEDROCK: {
-                "region": os.getenv("AWS_DEFAULT_REGION"),
-                "custom_auth": {
-                    "aws_access_key_id": os.getenv("AWS_ACCESS_KEY_ID"),
-                    "aws_secret_access_key": os.getenv("AWS_SECRET_ACCESS_KEY"),
-                },
-            },
         }
 
         for provider, creds in env_credentials.items():
@@ -316,35 +313,10 @@ class AIConfigManager:
             service.cost_budget_daily = cost_budget_daily
 
     def _load_default_configuration(self) -> None:
-        """Load default AI configuration"""
-        # Default models
-        default_models = {
-            "gpt-4o": ModelConfig(
-                name="gpt-4o",
-                provider=AIProvider.OPENAI,
-                model_type=AIModelType.TEXT_GENERATION,
-                model_id="gpt-4o",
-                max_tokens=4096,
-                temperature=0.7,
-                cost_per_1k_tokens={"input": 0.005, "output": 0.015},
-                context_window=128000,
-                supports_streaming=True,
-                supports_function_calling=True,
-            ),
-            "gpt-4o-mini": ModelConfig(
-                name="gpt-4o-mini",
-                provider=AIProvider.OPENAI,
-                model_type=AIModelType.TEXT_GENERATION,
-                model_id="gpt-4o-mini",
-                max_tokens=4096,
-                temperature=0.7,
-                cost_per_1k_tokens={"input": 0.00015, "output": 0.0006},
-                context_window=128000,
-                supports_streaming=True,
-                supports_function_calling=True,
-            ),
-            "gemini-2.0-flash": ModelConfig(
-                name="gemini-2.0-flash",
+        """Load default AI configuration with Gemini models"""
+        self.models = {
+            "gemini-2.5-pro": ModelConfig(
+                name="gemini-2.5-pro",
                 provider=AIProvider.GOOGLE_AI,
                 model_type=AIModelType.TEXT_GENERATION,
                 model_id="gemini-2.0-flash",

@@ -1,4 +1,4 @@
-import type { LinearProgressProps} from '@mui/material';
+import type { LinearProgressProps } from '@mui/material';
 import { LinearProgress, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React from 'react';

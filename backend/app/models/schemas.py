@@ -220,3 +220,62 @@ class UserProfile(BaseModel):
     preferences: UserPreferences
     created: datetime
     updated: datetime
+
+
+# ==============================================================================
+# Job Listing Extractor Models
+# ==============================================================================
+
+
+class JobListingDetails(BaseModel):
+    """
+    Pydantic model for structured job listing details.
+    Ported from the TypeScript JobDetails interface.
+    """
+
+    due_date: Optional[datetime] = Field(None, description="The application due date.")
+    company_name: Optional[str] = Field(
+        None, description="The name of the hiring organization or company."
+    )
+    role_title: Optional[str] = Field(None, description="The title of the role.")
+    hiring_manager: Optional[str] = Field(None, description="The name of the hiring manager.")
+    manager_contact: Optional[str] = Field(
+        None, description="Contact details (email or phone) for the hiring manager."
+    )
+    essential_criteria: List[str] = Field(
+        default_factory=list,
+        description="A list of key selection criteria that are explicitly mentioned as essential, mandatory, or required.",
+    )
+    desirable_criteria: List[str] = Field(
+        default_factory=list,
+        description="A list of key selection criteria that are explicitly mentioned as desirable, preferred, or 'nice to have'.",
+    )
+    role_type: Optional[str] = Field(
+        None,
+        description="The classified role type: 'Frontline/Support', 'PM/Delivery', or 'Other'.",
+    )
+    subsectors: List[str] = Field(
+        default_factory=list,
+        description="A list of relevant community service subsectors this role operates in.",
+    )
+
+
+class JobListingTextRequest(BaseModel):
+    """Request model for extracting job details from raw text."""
+
+    text: str = Field(..., description="The raw text of the job description.")
+
+
+class JobListingUrlRequest(BaseModel):
+    """Request model for extracting job details from a URL."""
+
+    url: str = Field(..., description="The URL of the job listing.")
+
+
+class AdvancedAnalysisRequest(BaseModel):
+    """Request model for the advanced analysis ('Thinking Mode') feature."""
+
+    job_details: JobListingDetails = Field(
+        ..., description="The structured job details extracted from a listing."
+    )
+    user_prompt: str = Field(..., description="The user's specific query for the analysis.")

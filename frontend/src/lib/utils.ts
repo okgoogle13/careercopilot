@@ -11,7 +11,7 @@ export function formatFileSize(bytes: number): string {
   const sizeIndex = Math.min(i, sizes.length - 1);
 
   const value = parseFloat((absBytes / Math.pow(k, sizeIndex)).toFixed(2));
-  return `${(isNegative ? '-' : '') + value  } ${  sizes[sizeIndex]}`;
+  return `${(isNegative ? '-' : '') + value} ${sizes[sizeIndex]}`;
 }
 
 export function formatDate(date: Date): string {
