@@ -9,10 +9,17 @@ import logging
 import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
+from app.ai.model_optimizer import ModelOptimizer, OptimizationConfig, OptimizationLevel
 from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig, get_ai_config
 from .monitoring import monitor_performance, track_ai_usage, track_error
+
+# Remove OpenAI provider from supported providers
+SUPPORTED_PROVIDERS = [
+    AIProvider.GOOGLE_AI,
+    AIProvider.ANTHROPIC
+]
 
 logger = logging.getLogger(__name__)
 
@@ -74,128 +81,7 @@ class AIProviderClient(ABC):
         """Check if the provider is available"""
 
 
-class OpenAIClient(AIProviderClient):
-    """OpenAI API client implementation"""
-
-    def __init__(self, config_manager: AIConfigManager):
-        super().__init__(AIProvider.OPENAI, config_manager)
-        self.base_url = "https://api.openai.com/v1"
-        self.headers = {}
-        if self.credentials and self.credentials.api_key:
-            self.headers = {
-                "Authorization": f"Bearer {self.credentials.api_key}",
-                "Content-Type": "application/json",
-            }
-            if self.credentials.organization_id:
-                self.headers["OpenAI-Organization"] = self.credentials.organization_id
-
-    async def generate_text(self, request: AIRequest, model_config: ModelConfig) -> AIResponse:
-        """Generate text using OpenAI API"""
-        import httpx
-
-        start_time = time.time()
-        request_id = f"openai_{int(start_time)}"
-
-        # Prepare request payload
-        payload = {
-            "model": model_config.model_id,
-            "messages": self._build_messages(request),
-            "max_tokens": request.max_tokens or model_config.max_tokens,
-            "temperature": request.temperature or model_config.temperature,
-            "stream": request.stream,
-        }
-
-        if request.functions:
-            payload["tools"] = [
-                {"type": "function", "function": func} for func in request.functions
-            ]
-
-        try:
-            async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
-                response = await client.post(
-                    f"{self.base_url}/chat/completions",
-                    headers=self.headers,
-                    json=payload,
-                )
-                response.raise_for_status()
-
-                result = response.json()
-                response_time_ms = (time.time() - start_time) * 1000
-
-                # Extract response content
-                content = result["choices"][0]["message"]["content"]
-                tokens_used = {
-                    "input": result["usage"]["prompt_tokens"],
-                    "output": result["usage"]["completion_tokens"],
-                }
-
-                # Calculate cost
-                cost_estimate = self._calculate_cost(tokens_used, model_config)
-
-                return AIResponse(
-                    content=content,
-                    model_used=model_config.name,
-                    provider=self.provider.value,
-                    tokens_used=tokens_used,
-                    response_time_ms=response_time_ms,
-                    cached=False,
-                    cost_estimate=cost_estimate,
-                    metadata={
-                        "finish_reason": result["choices"][0]["finish_reason"],
-                        "system_fingerprint": result.get("system_fingerprint"),
-                    },
-                    request_id=request_id,
-                )
-
-        except Exception as e:
-            logger.error(f"OpenAI API error: {e}")
-            track_error("openai_api_error", "ai_client", str(e), request.user_id)
-            raise
-
-    async def generate_embeddings(
-        self, texts: List[str], model_config: ModelConfig
-    ) -> List[List[float]]:
-        """Generate embeddings using OpenAI API"""
-        import httpx
-
-        payload = {"model": model_config.model_id, "input": texts}
-
-        async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
-            response = await client.post(
-                f"{self.base_url}/embeddings", headers=self.headers, json=payload
-            )
-            response.raise_for_status()
-
-            result = response.json()
-            return [item["embedding"] for item in result["data"]]
-
-    async def health_check(self) -> bool:
-        """Check OpenAI API health"""
-        try:
-            import httpx
-
-            async with httpx.AsyncClient(timeout=5.0) as client:
-                response = await client.get(f"{self.base_url}/models", headers=self.headers)
-                return response.status_code == 200
-        except Exception:
-            return False
-
-    def _build_messages(self, request: AIRequest) -> List[Dict[str, str]]:
-        """Build OpenAI messages format"""
-        messages = []
-
-        if request.system_prompt:
-            messages.append({"role": "system", "content": request.system_prompt})
-
-        messages.append({"role": "user", "content": request.prompt})
-
-        return messages
-
-    def _calculate_cost(self, tokens_used: Dict[str, int], model_config: ModelConfig) -> float:
-        """Calculate cost based on token usage"""
-        input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens["input"]
-        output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens["output"]
-        return input_cost + output_cost
+# OpenAI client implementation removed - using Google's Gemini models instead
 
 
 class GoogleAIClient(AIProviderClient):
@@ -204,9 +90,60 @@ class GoogleAIClient(AIProviderClient):
     def __init__(self, config_manager: AIConfigManager):
         super().__init__(AIProvider.GOOGLE_AI, config_manager)
         self.base_url = "https://generativelanguage.googleapis.com/v1beta"
+        self._model_optimizer = None
+        self._optimized_models = {}  # Cache for optimized model endpoints
+
+    async def _get_optimized_endpoint(
+        self, model_config: ModelConfig
+    ) -> str:
+        """Get or create an optimized model endpoint"""
+        model_id = model_config.model_id
+        optimization_config = getattr(model_config, "optimization_config", None)
+        
+        # If no optimization is needed, return the standard model
+        if not optimization_config or optimization_config.level == OptimizationLevel.NONE:
+            return f"{self.base_url}/models/{model_id}:generateContent"
+            
+        # Check if we already have an optimized model
+        cache_key = f"{model_id}-{optimization_config.level}"
+        if cache_key in self._optimized_models:
+            return self._optimized_models[cache_key]
+            
+        # Initialize the model optimizer if needed
+        if self._model_optimizer is None:
+            project_id = self.credentials.project_id if self.credentials else None
+            location = self.credentials.location if self.credentials else "us-central1"
+            if not project_id:
+                logger.warning(
+                    "No project_id in credentials, using default project for model optimization"
+                )
+                project_id = None  # Will use default project
+                
+            self._model_optimizer = ModelOptimizer(
+                project_id=project_id,
+                location=location,
+            )
+        
+        try:
+            # Optimize and deploy the model
+            endpoint = self._model_optimizer.optimize_model(
+                model_id=model_id,
+                optimization_config=optimization_config,
+                display_name=f"{model_id}-optimized-{optimization_config.level}",
+                description=f"Optimized version of {model_id} for CareerCopilot",
+            )
+            
+            # Cache the endpoint URL
+            self._optimized_models[cache_key] = endpoint.resource_name
+            return endpoint.resource_name
+            
+        except Exception as e:
+            logger.error(f"Failed to optimize model {model_id}: {e}")
+            # Fall back to standard model
+            return f"{self.base_url}/models/{model_id}:generateContent"
 
     async def generate_text(self, request: AIRequest, model_config: ModelConfig) -> AIResponse:
-        """Generate text using Google AI API"""
+        """Generate text using Google AI API with optional model optimization"""
         import httpx
 
         start_time = time.time()
@@ -228,25 +165,42 @@ class GoogleAIClient(AIProviderClient):
         try:
             if not self.credentials:
                 raise ValueError("Google AI credentials not configured")
+            # Get the appropriate endpoint (optimized or standard)
+            endpoint = await self._get_optimized_endpoint(model_config)
+            
+            # Determine if we're using the standard API or an optimized endpoint
+            if endpoint.startswith("https://"):
+                # Standard API endpoint
+                url = f"{endpoint}?key={self.credentials.api_key if self.credentials else ''}"
+            else:
+                # Optimized model endpoint
+                url = f"https://{self.location}-aiplatform.googleapis.com/v1/{endpoint}:predict"
+                if self.credentials and self.credentials.api_key:
+                    url += f"?key={self.credentials.api_key}"
+                # Update payload format for optimized models
+                payload = {"instances": [{"content": request.prompt}]}
+            
             async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
-                response = await client.post(
-                    f"{self.base_url}/models/{model_config.model_id}:generateContent"
-                    f"?key={self.credentials.api_key if self.credentials else ''}",
-                    json=payload,
-                )
+                response = await client.post(url, json=payload, headers=self._get_headers())
                 response.raise_for_status()
 
                 result = response.json()
                 response_time_ms = (time.time() - start_time) * 1000
 
-                # Extract response content
-                content = result["candidates"][0]["content"]["parts"][0]["text"]
-
-                # Estimate tokens (Google doesn't always return usage)
-                tokens_used = {
-                    "input": int(len(request.prompt.split()) * 1.3),  # Rough estimate
-                    "output": int(len(content.split()) * 1.3),
-                }
+                # Extract response content based on endpoint type
+                if "predictions" in result:  # Optimized model response
+                    content = result["predictions"][0]["content"]
+                    # For optimized models, we might not have token counts
+                    tokens_used = {
+                        "input": int(len(request.prompt.split()) * 1.3),
+                        "output": int(len(content.split()) * 1.3),
+                    }
+                else:  # Standard API response
+                    content = result["candidates"][0]["content"]["parts"][0]["text"]
+                    tokens_used = {
+                        "input": int(len(request.prompt.split()) * 1.3),
+                        "output": int(len(content.split()) * 1.3),
+                    }
 
                 cost_estimate = self._calculate_cost(tokens_used, model_config)
 
@@ -403,30 +357,29 @@ class AnthropicClient(AIProviderClient):
         return input_cost + output_cost
 
 
+from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig
+
 class AIClientManager:
     """Manages AI provider clients and routing"""
 
     def __init__(self, config_manager: Optional[AIConfigManager] = None):
+        from .ai_config import get_ai_config
         self.config_manager = config_manager or get_ai_config()
         self.clients: Dict[AIProvider, AIProviderClient] = {}
         self._initialize_clients()
 
     def _initialize_clients(self):
         """Initialize available AI provider clients"""
-        for provider in AIProvider:
-            try:
-                if self.config_manager.get_provider_credentials(provider):
-                    if provider == AIProvider.OPENAI:
-                        self.clients[provider] = OpenAIClient(self.config_manager)
-                    elif provider == AIProvider.GOOGLE_AI:
-                        self.clients[provider] = GoogleAIClient(self.config_manager)
-                    elif provider == AIProvider.ANTHROPIC:
-                        self.clients[provider] = AnthropicClient(self.config_manager)
-                    # Add other providers as needed
+        # Only initialize Google AI client as it's our primary provider
+        if self.config_manager.get_provider_credentials(AIProvider.GOOGLE_AI):
+            self.clients[AIProvider.GOOGLE_AI] = GoogleAIClient(self.config_manager)
+        
+        # Fallback to Anthropic if configured (optional)
+        if self.config_manager.get_provider_credentials(AIProvider.ANTHROPIC):
+            self.clients[AIProvider.ANTHROPIC] = AnthropicClient(self.config_manager)
 
-                    logger.info(f"Initialized {provider.value} client")
-            except Exception as e:
-                logger.warning(f"Failed to initialize {provider.value} client: {e}")
+        if not self.clients:
+            raise ValueError("No AI provider credentials found in configuration")
 
     @monitor_performance("ai_text_generation")
     async def generate_text(self, request: AIRequest) -> AIResponse:

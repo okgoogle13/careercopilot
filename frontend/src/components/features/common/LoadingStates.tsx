@@ -16,7 +16,6 @@ import { Skeleton } from '../../ui/skeleton';
 
 import { CareerCopilotLogo } from './CareerCopilotLogo';
 
-
 interface LoadingStatesProps {
   onBack: () => void;
 }

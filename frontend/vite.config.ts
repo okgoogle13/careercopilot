@@ -24,6 +24,10 @@ export default defineConfig(({ mode }): UserConfig => {
   const isDevelopment = !isProduction;
   const isTest = env.VITE_ENVIRONMENT === 'test';
 
+  // Set default environment variables if not set
+  process.env.NODE_ENV = isProduction ? 'production' : 'development';
+  process.env.VITE_ENVIRONMENT = env.VITE_ENVIRONMENT || 'development';
+
   const plugins: PluginOption[] = [
     react({
       babel: {
@@ -75,10 +79,13 @@ export default defineConfig(({ mode }): UserConfig => {
       },
       eslint: {
         lintCommand: 'eslint . --ext .ts,.tsx',
+        useFlatConfig: false, // Explicitly set to false for better compatibility
       },
       overlay: {
         initialIsOpen: false,
+        position: 'br',
       },
+      enableBuild: false, // Only run in dev server
     }),
   ];
 
@@ -187,6 +194,7 @@ export default defineConfig(({ mode }): UserConfig => {
         'react-dom/client',
         'react-router-dom',
         '@mui/material',
+        '@mui/utils',
         '@emotion/react',
         '@emotion/styled',
       ],

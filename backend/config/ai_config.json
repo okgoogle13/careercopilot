@@ -1,50 +1,48 @@
 {
   "models": {
-    "gpt-4o": {
-      "name": "gpt-4o",
-      "provider": "openai",
+    "gemini-2.5-pro": {
+      "name": "gemini-2.5-pro",
+      "provider": "google_ai",
       "model_type": "text_generation",
-      "model_id": "gpt-4o",
-      "max_tokens": 4096,
+      "model_id": "gemini-2.5-pro",
+      "max_tokens": 8192,
       "temperature": 0.7,
-      "top_p": 1.0,
-      "frequency_penalty": 0.0,
-      "presence_penalty": 0.0,
-      "timeout_seconds": 30,
+      "top_p": 0.95,
+      "top_k": 40,
+      "timeout_seconds": 60,
       "retry_attempts": 3,
       "cost_per_1k_tokens": {
-        "input": 0.005,
-        "output": 0.015
+        "input": 0.0025,
+        "output": 0.0075
       },
       "rate_limit": {
-        "requests_per_minute": 60,
-        "tokens_per_minute": 10000
+        "requests_per_minute": 100,
+        "tokens_per_minute": 15000
       },
-      "context_window": 128000,
+      "context_window": 131072,
       "supports_streaming": true,
       "supports_function_calling": true
     },
-    "gpt-4o-mini": {
-      "name": "gpt-4o-mini",
-      "provider": "openai",
+    "gemini-2.5-flash": {
+      "name": "gemini-2.5-flash",
+      "provider": "google_ai",
       "model_type": "text_generation",
-      "model_id": "gpt-4o-mini",
-      "max_tokens": 4096,
+      "model_id": "gemini-2.5-flash",
+      "max_tokens": 8192,
       "temperature": 0.7,
-      "top_p": 1.0,
-      "frequency_penalty": 0.0,
-      "presence_penalty": 0.0,
-      "timeout_seconds": 30,
+      "top_p": 0.95,
+      "top_k": 40,
+      "timeout_seconds": 60,
       "retry_attempts": 3,
       "cost_per_1k_tokens": {
-        "input": 0.00015,
-        "output": 0.0006
+        "input": 0.001,
+        "output": 0.002
       },
       "rate_limit": {
-        "requests_per_minute": 120,
-        "tokens_per_minute": 20000
+        "requests_per_minute": 200,
+        "tokens_per_minute": 30000
       },
-      "context_window": 128000,
+      "context_window": 131072,
       "supports_streaming": true,
       "supports_function_calling": true
     },
@@ -144,7 +142,7 @@
     "resume_analysis": {
       "service_name": "resume_analysis",
       "description": "Analyze resumes for skills, experience, and recommendations",
-      "primary_model": "gpt-4o-mini",
+      "primary_model": "gemini-2.5-flash",
       "fallback_models": ["gemini-1.5-flash"],
       "enabled": true,
       "cache_enabled": true,
@@ -291,7 +289,7 @@
     "text_embedding": {
       "service_name": "text_embedding",
       "description": "Generate text embeddings for semantic search",
-      "primary_model": "text-embedding-3-small",
+      "primary_model": "text-embedding-004",
       "fallback_models": [],
       "enabled": true,
       "cache_enabled": true,
@@ -310,11 +308,6 @@
     }
   },
   "credentials": {
-    "openai": {
-      "provider": "openai",
-      "api_key": null,
-      "organization_id": null
-    },
     "google_ai": {
       "provider": "google_ai",
       "api_key": null,

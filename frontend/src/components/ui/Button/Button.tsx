@@ -1,9 +1,5 @@
-import type {
-  ButtonProps as MuiButtonProps} from '@mui/material';
-import {
-  Button as MuiButton,
-  CircularProgress,
-} from '@mui/material';
+import type { ButtonProps as MuiButtonProps } from '@mui/material';
+import { Button as MuiButton, CircularProgress } from '@mui/material';
 import React from 'react';
 
 export interface ButtonProps extends Omit<MuiButtonProps, 'color' | 'size'> {

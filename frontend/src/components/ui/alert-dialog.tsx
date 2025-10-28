@@ -1,12 +1,5 @@
-import type {
-  DialogProps} from '@mui/material';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-} from '@mui/material';
+import type { DialogProps } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import React from 'react';
 
 export interface AlertDialogProps extends DialogProps {
@@ -57,7 +50,7 @@ export const AlertDialogTrigger = React.forwardRef<HTMLButtonElement, AlertDialo
 
 AlertDialogTrigger.displayName = 'AlertDialogTrigger';
 
-export type AlertDialogContentProps = React.HTMLAttributes<HTMLDivElement>
+export type AlertDialogContentProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const AlertDialogContent = React.forwardRef<HTMLDivElement, AlertDialogContentProps>(
   ({ children, ...props }, ref) => {
@@ -71,7 +64,7 @@ export const AlertDialogContent = React.forwardRef<HTMLDivElement, AlertDialogCo
 
 AlertDialogContent.displayName = 'AlertDialogContent';
 
-export type AlertDialogHeaderProps = React.HTMLAttributes<HTMLDivElement>
+export type AlertDialogHeaderProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const AlertDialogHeader = React.forwardRef<HTMLDivElement, AlertDialogHeaderProps>(
   ({ children, ...props }, ref) => {
@@ -85,7 +78,7 @@ export const AlertDialogHeader = React.forwardRef<HTMLDivElement, AlertDialogHea
 
 AlertDialogHeader.displayName = 'AlertDialogHeader';
 
-export type AlertDialogTitleProps = React.HTMLAttributes<HTMLHeadingElement>
+export type AlertDialogTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
 
 export const AlertDialogTitle = React.forwardRef<HTMLHeadingElement, AlertDialogTitleProps>(
   ({ children, ...props }, ref) => {
@@ -99,7 +92,7 @@ export const AlertDialogTitle = React.forwardRef<HTMLHeadingElement, AlertDialog
 
 AlertDialogTitle.displayName = 'AlertDialogTitle';
 
-export type AlertDialogDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>
+export type AlertDialogDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
 
 export const AlertDialogDescription = React.forwardRef<
   HTMLParagraphElement,
@@ -114,7 +107,7 @@ export const AlertDialogDescription = React.forwardRef<
 
 AlertDialogDescription.displayName = 'AlertDialogDescription';
 
-export type AlertDialogFooterProps = React.HTMLAttributes<HTMLDivElement>
+export type AlertDialogFooterProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const AlertDialogFooter = React.forwardRef<HTMLDivElement, AlertDialogFooterProps>(
   ({ children, ...props }, ref) => {
@@ -128,7 +121,7 @@ export const AlertDialogFooter = React.forwardRef<HTMLDivElement, AlertDialogFoo
 
 AlertDialogFooter.displayName = 'AlertDialogFooter';
 
-export type AlertDialogActionProps = React.ComponentProps<typeof Button>
+export type AlertDialogActionProps = React.ComponentProps<typeof Button>;
 
 export const AlertDialogAction = React.forwardRef<HTMLButtonElement, AlertDialogActionProps>(
   ({ children, ...props }, ref) => {
@@ -142,7 +135,7 @@ export const AlertDialogAction = React.forwardRef<HTMLButtonElement, AlertDialog
 
 AlertDialogAction.displayName = 'AlertDialogAction';
 
-export type AlertDialogCancelProps = React.ComponentProps<typeof Button>
+export type AlertDialogCancelProps = React.ComponentProps<typeof Button>;
 
 export const AlertDialogCancel = React.forwardRef<HTMLButtonElement, AlertDialogCancelProps>(
   ({ children, ...props }, ref) => {

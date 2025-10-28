@@ -13,11 +13,8 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-import type {
-  UploadedFile} from '@/components/documents/DocumentUploadDropzone';
-import {
-  DocumentUploadDropzone
-} from '@/components/documents/DocumentUploadDropzone';
+import type { UploadedFile } from '@/components/documents/DocumentUploadDropzone';
+import { DocumentUploadDropzone } from '@/components/documents/DocumentUploadDropzone';
 import { uploadAndCreateDocument } from '@/services/documentService';
 
 interface UploadResumeProps {

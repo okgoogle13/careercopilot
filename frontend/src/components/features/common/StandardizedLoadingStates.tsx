@@ -7,7 +7,6 @@ import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 import { Skeleton } from '../../ui/skeleton';
 
-
 // Loading state variants
 export type LoadingVariant =
   | 'spinner'
