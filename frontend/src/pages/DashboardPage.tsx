@@ -14,8 +14,7 @@ import {
   Warning,
   Work,
 } from '@mui/icons-material';
-import type {
-  ChipProps} from '@mui/material';
+import type { ChipProps } from '@mui/material';
 import {
   Avatar,
   Box,

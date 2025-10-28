@@ -9,15 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node", "jest"]
   },
-  "include": [
-    "src",
-    "__tests__",
-    "test",
-    "*.ts",
-    "*.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "lib"
-  ]
+  "include": ["src", "__tests__", "test", "*.ts", "*.js"],
+  "exclude": ["node_modules", "lib"]
 }

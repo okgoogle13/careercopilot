@@ -11,7 +11,7 @@ const StyledLabel = styled(FormLabel)(({ theme }) => ({
   display: 'block',
 }));
 
-export type LabelProps = FormLabelProps
+export type LabelProps = FormLabelProps;
 
 export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
   ({ children, ...props }, ref) => {

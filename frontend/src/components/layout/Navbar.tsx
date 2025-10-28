@@ -33,7 +33,6 @@ import { mainNavigation, userNavigation } from '../../config/navigation';
 
 import { NavigationItem } from './NavigationItem';
 
-
 interface NavbarProps {
   onMenuClick?: () => void;
   currentPage?: string;

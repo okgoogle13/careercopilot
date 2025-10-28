@@ -13,7 +13,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import type { NavItem } from '../../config/navigation';
 
-
 interface NavigationItemProps {
   item: NavItem;
   depth?: number;

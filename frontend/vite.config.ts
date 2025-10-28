@@ -24,6 +24,10 @@ export default defineConfig(({ mode }): UserConfig => {
   const isDevelopment = !isProduction;
   const isTest = env.VITE_ENVIRONMENT === 'test';
 
+  // Set default environment variables if not set
+  process.env.NODE_ENV = isProduction ? 'production' : 'development';
+  process.env.VITE_ENVIRONMENT = env.VITE_ENVIRONMENT || 'development';
+
   const plugins: PluginOption[] = [
     react({
       babel: {
@@ -69,19 +73,20 @@ export default defineConfig(({ mode }): UserConfig => {
         type: 'module',
       },
     }),
-    // Checker temporarily disabled due to ESLint 9 + eslint-plugin-storybook compatibility issues
-    // Re-enable after updating eslint-plugin-storybook to support ESLint 9
-    // checker({
-    //   typescript: {
-    //     tsconfigPath: 'tsconfig.json',
-    //   },
-    //   eslint: {
-    //     lintCommand: 'eslint . --ext .ts,.tsx',
-    //   },
-    //   overlay: {
-    //     initialIsOpen: false,
-    //   },
-    // }),
+    checker({
+      typescript: {
+        tsconfigPath: 'tsconfig.json',
+      },
+      eslint: {
+        lintCommand: 'eslint . --ext .ts,.tsx',
+        useFlatConfig: false, // Explicitly set to false for better compatibility
+      },
+      overlay: {
+        initialIsOpen: false,
+        position: 'br',
+      },
+      enableBuild: false, // Only run in dev server
+    }),
   ];
 
   if (isProduction) {

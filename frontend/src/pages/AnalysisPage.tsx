@@ -21,8 +21,7 @@ import {
   Warning,
   Work,
 } from '@mui/icons-material';
-import type {
-  LinearProgressProps} from '@mui/material';
+import type { LinearProgressProps } from '@mui/material';
 import {
   Alert,
   Box,

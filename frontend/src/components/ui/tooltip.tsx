@@ -2,7 +2,7 @@ import type { TooltipProps as MuiTooltipProps } from '@mui/material';
 import { Tooltip as MuiTooltip } from '@mui/material';
 import React from 'react';
 
-export type TooltipProps = MuiTooltipProps
+export type TooltipProps = MuiTooltipProps;
 
 export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   ({ children, ...props }, ref) => {
@@ -52,7 +52,7 @@ export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentPro
 
 TooltipContent.displayName = 'TooltipContent';
 
-export type TooltipProviderProps = React.HTMLAttributes<HTMLDivElement>
+export type TooltipProviderProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const TooltipProvider = React.forwardRef<HTMLDivElement, TooltipProviderProps>(
   ({ children, ...props }, ref) => {
