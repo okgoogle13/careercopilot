@@ -643,7 +643,7 @@ def _initialize_prometheus_metrics():
             ["error_type", "component", "severity", "environment"],
         )
 
-        _metrics_initialized = True
+        
     except ValueError as e:
         # Metrics already registered (e.g., in tests), use existing ones
         if "Duplicated timeseries" in str(e):
@@ -663,7 +663,7 @@ def _initialize_prometheus_metrics():
                         ai_request_duration_seconds = collector
                     elif collector._name == "application_errors_total":
                         application_errors_total = collector
-            _metrics_initialized = True
+            
         else:
             raise
 
