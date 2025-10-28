@@ -5,7 +5,6 @@ import React, { useMemo, useState } from 'react';
 import { ColorModeContext } from './ColorModeContext';
 import { theme as baseTheme } from './theme';
 
-
 export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [mode, setMode] = useState<'light' | 'dark'>(prefersDarkMode ? 'dark' : 'light');

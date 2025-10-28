@@ -23,7 +23,7 @@ const StyledScrollArea = styled(Box)(({ theme }) => ({
   },
 }));
 
-export type ScrollAreaProps = BoxProps
+export type ScrollAreaProps = BoxProps;
 
 export const ScrollArea = React.forwardRef<HTMLDivElement, ScrollAreaProps>(
   ({ children, ...props }, ref) => {

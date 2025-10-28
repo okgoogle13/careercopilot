@@ -48,7 +48,7 @@ export const PopoverTrigger = React.forwardRef<HTMLElement, PopoverTriggerProps>
 
 PopoverTrigger.displayName = 'PopoverTrigger';
 
-export type PopoverContentProps = React.HTMLAttributes<HTMLDivElement>
+export type PopoverContentProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const PopoverContent = React.forwardRef<HTMLDivElement, PopoverContentProps>(
   ({ children, ...props }, ref) => {

@@ -57,9 +57,8 @@ export function ProfileVariationCard({
       return 'Today';
     } else if (diffInHours < 48) {
       return 'Yesterday';
-    } 
-      return format(date, 'MMM d');
-    
+    }
+    return format(date, 'MMM d');
   };
 
   return (

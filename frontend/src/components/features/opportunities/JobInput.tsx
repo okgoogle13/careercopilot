@@ -49,9 +49,8 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
   const isValidInput = () => {
     if (activeTab === 'url') {
       return jobUrl.trim().length > 0 && (jobUrl.includes('http') || jobUrl.includes('www'));
-    } 
-      return jobDescription.trim().length > 50; // Minimum description length
-    
+    }
+    return jobDescription.trim().length > 50; // Minimum description length
   };
 
   return (
