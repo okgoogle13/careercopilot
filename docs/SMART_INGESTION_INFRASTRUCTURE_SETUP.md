@@ -82,7 +82,6 @@ _(Compute Engine default service account)_
 
 - ✅ `roles/storage.objectAdmin` - Full access to Cloud Storage objects
 - ✅ `roles/secretmanager.secretAccessor` - Read secrets from Secret Manager
-- ✅ `roles/editor` - Project-level editor access
 
 **Command Used:**
 

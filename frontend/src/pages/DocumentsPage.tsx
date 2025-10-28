@@ -107,6 +107,51 @@ export function DocumentsPage({
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [documents, setDocuments] = useState<Document[]>([
+    {
+      id: '1',
+      name: 'Senior Software Developer Resume',
+      type: 'resume',
+      status: 'active',
+      lastModified: '2 hours ago',
+      size: '2.1 MB',
+      atsScore: 85,
+      isFavorite: true,
+      tags: ['Software', 'React', 'TypeScript'],
+    },
+    {
+      id: '2',
+      name: 'Product Manager Cover Letter',
+      type: 'cover-letter',
+      status: 'active',
+      lastModified: '1 day ago',
+      size: '1.5 MB',
+      atsScore: 92,
+      isFavorite: false,
+      tags: ['Product', 'Management', 'Strategy'],
+    },
+    {
+      id: '3',
+      name: 'UX Designer Portfolio',
+      type: 'portfolio',
+      status: 'draft',
+      lastModified: '3 days ago',
+      size: '15.2 MB',
+      isFavorite: true,
+      tags: ['Design', 'UX', 'Portfolio'],
+    },
+    {
+      id: '4',
+      name: 'Key Selection Criteria Response',
+      type: 'ksc',
+      status: 'archived',
+      lastModified: '1 week ago',
+      size: '800 KB',
+      atsScore: 78,
+      isFavorite: false,
+      tags: ['Government', 'KSC', 'Public Sector'],
+    },
+  ]);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -143,8 +188,15 @@ export function DocumentsPage({
     setUploadDialogOpen(true);
   };
 
-  // Sample data
-  const documents: Document[] = [
+  const handleToggleFavorite = (documentId: string) => {
+    setDocuments((prev) =>
+      prev.map((doc) =>
+        doc.id === documentId ? { ...doc, isFavorite: !doc.isFavorite } : doc
+      )
+    );
+  };
+
+  const initialDocuments: Document[] = [
     {
       id: '1',
       name: 'Senior Software Developer Resume',
@@ -570,15 +622,18 @@ export function DocumentsPage({
                             {getTypeIcon(document.type)}
                           </Box>
                           <Stack direction="row" spacing={0.5}>
-                            <IconButton
-                              size="small"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // Toggle favorite
-                              }}
-                            >
-                              {document.isFavorite ? <Star color="warning" /> : <StarBorder />}
-                            </IconButton>
+                            <Tooltip title={document.isFavorite ? 'Remove favorite' : 'Add to favorites'}>
+                              <IconButton
+                                size="small"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleToggleFavorite(document.id);
+                                }}
+                                aria-label={document.isFavorite ? 'Remove favorite' : 'Add to favorites'}
+                              >
+                                {document.isFavorite ? <Star color="warning" /> : <StarBorder />}
+                              </IconButton>
+                            </Tooltip>
                             <IconButton
                               size="small"
                               onClick={(e) => {

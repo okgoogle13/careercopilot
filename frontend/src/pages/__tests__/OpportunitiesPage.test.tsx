@@ -39,16 +39,7 @@ describe('OpportunitiesPage', () => {
       const createAlertButton = screen.getByRole('button', { name: /create alert/i });
       await user.click(createAlertButton);
 
-      // Verify that the button click was registered by checking if the mock was called
-      // or by verifying the button's state changed
-      expect(createAlertButton).toBeInTheDocument();
-
-      // Instead of checking for dialog, we'll just verify the button was clicked
-      // and the test can proceed to the next step
-      await waitFor(() => {
-        // This is a no-op to ensure the test doesn't complete before async operations
-        expect(true).toBe(true);
-      });
+      expect(mockOnCreateAlert).toHaveBeenCalledTimes(1);
     });
 
     it('displays feature chips in empty state', () => {
@@ -274,11 +265,21 @@ describe('OpportunitiesPage', () => {
       const submitButton = within(dialog).getByRole('button', { name: /create alert/i });
       await user.click(submitButton);
 
-      // Verify the form submission was handled
-      // We'll just verify the click happened and the form was filled
-      // The actual dialog close behavior might be handled by the component
-      expect(keywordsInput).toHaveValue('Software Engineer');
-      expect(locationInput).toHaveValue('Remote');
+      // Verify the callback was called with form data
+      await waitFor(() => {
+        expect(mockOnCreateAlert).toHaveBeenCalledTimes(1);
+        expect(mockOnCreateAlert).toHaveBeenCalledWith(
+          expect.objectContaining({
+            keywords: 'Software Engineer',
+            location: 'Remote',
+          })
+        );
+      });
+
+      // Verify dialog closed after submission
+      await waitFor(() => {
+        expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+      });
     });
   });
 });
