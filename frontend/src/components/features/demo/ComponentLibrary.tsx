@@ -12,7 +12,6 @@ import { LayoutComponentsSection } from '../../library/LayoutComponentsSection';
 import { UsageGuidelinesSection } from '../../library/UsageGuidelinesSection';
 import { TooltipProvider } from '../../ui/tooltip';
 
-
 interface ComponentLibraryProps {
   onBack: () => void;
   onNavigateToAnimated?: () => void;

@@ -23,7 +23,7 @@ export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
 
 Avatar.displayName = 'Avatar';
 
-export type AvatarImageProps = React.ImgHTMLAttributes<HTMLImageElement>
+export type AvatarImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
 
 export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
   ({ src, alt, ...props }, ref) => {
@@ -43,7 +43,7 @@ export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
 
 AvatarImage.displayName = 'AvatarImage';
 
-export type AvatarFallbackProps = React.HTMLAttributes<HTMLDivElement>
+export type AvatarFallbackProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
   ({ children, ...props }, ref) => {

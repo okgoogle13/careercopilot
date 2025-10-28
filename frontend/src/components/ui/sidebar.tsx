@@ -213,10 +213,9 @@ export const SidebarMenuButton: React.FC<SidebarMenuButtonProps> = ({
               {child}
             </ListItemIcon>
           );
-        } 
-          // Remaining children are text
-          return <ListItemText primary={child} sx={{ opacity: open ? 1 : 0 }} />;
-        
+        }
+        // Remaining children are text
+        return <ListItemText primary={child} sx={{ opacity: open ? 1 : 0 }} />;
       })}
     </ListItemButton>
   );

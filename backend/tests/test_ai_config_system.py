@@ -30,22 +30,29 @@ class TestAIConfigManager:
     def temp_config_file(self):
         """Create a temporary configuration file"""
         config_data = {
+            "providers": {
+                "google_ai": {
+                    "provider": "google_ai",
+                    "api_key": "test-google-key",
+                    "project_id": "test-project"
+                }
+            },
             "models": {
                 "test-model": {
                     "name": "test-model",
-                    "provider": "openai",
+                    "provider": "google_ai",
                     "model_type": "text_generation",
-                    "model_id": "gpt-3.5-turbo",
-                    "max_tokens": 2000,
-                    "temperature": 0.8,
+                    "model_id": "gemini-2.5-flash",
+                    "max_tokens": 8192,
+                    "temperature": 0.7,
                     "cost_per_1k_tokens": {"input": 0.001, "output": 0.002},
                     "rate_limit": {
-                        "requests_per_minute": 100,
-                        "tokens_per_minute": 10000,
+                        "requests_per_minute": 200,
+                        "tokens_per_minute": 30000,
                     },
-                    "context_window": 4096,
+                    "context_window": 131072,
                     "supports_streaming": True,
-                    "supports_function_calling": False,
+                    "supports_function_calling": True,
                 }
             },
             "services": {
@@ -53,15 +60,15 @@ class TestAIConfigManager:
                     "service_name": "test-service",
                     "description": "Test service",
                     "primary_model": "test-model",
-                    "fallback_models": [],
+                    "fallback_models": ["gemini-2.5-pro"],
                     "enabled": True,
                     "cache_enabled": True,
-                    "cache_ttl_seconds": 1800,
+                    "cache_ttl_seconds": 3600,
                     "max_retries": 3,
-                    "timeout_seconds": 30,
-                    "rate_limit_per_user": 50,
+                    "timeout_seconds": 60,
+                    "rate_limit_per_user": 200,
                     "rate_limit_window_seconds": 3600,
-                    "cost_budget_daily": 25.0,
+                    "cost_budget_daily": 100.0,
                     "quality_threshold": 0.8,
                     "monitoring_enabled": True,
                     "custom_settings": {},

@@ -19,8 +19,7 @@ import {
   StarBorder,
   Work,
 } from '@mui/icons-material';
-import type {
-  ChipProps} from '@mui/material';
+import type { ChipProps } from '@mui/material';
 import {
   Alert,
   Box,
