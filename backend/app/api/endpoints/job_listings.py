@@ -57,10 +57,10 @@ async def extract_from_url(request: JobListingUrlRequest):
         return details
     except IOError as e:
         # Catch scraping-specific errors
-        raise HTTPException(status_code=422, detail=f"Failed to process the URL: {str(e)}")
+        raise HTTPException(status_code=422, detail="Failed to process the URL")
     except Exception as e:
         # Catch other potential errors from the flow
-        raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
+        raise HTTPException(status_code=500, detail="An unexpected error occurred")
 
 
 @router.post(

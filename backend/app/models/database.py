@@ -746,7 +746,7 @@ class MarketAnalysis(Base):
         return f"<MarketAnalysis {self.field} in {self.location}>"
 
 
-class Cache(Base, BaseMixin):
+class Cache(Base):
     """Database-backed cache for expensive operations.
 
     This model stores cached results of expensive operations to improve performance.

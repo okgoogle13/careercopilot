@@ -60,7 +60,7 @@ class TestAIConfigManager:
                     "service_name": "test-service",
                     "description": "Test service",
                     "primary_model": "test-model",
-                    "fallback_models": ["gemini-2.5-pro"],
+                    "fallback_models": [],
                     "enabled": True,
                     "cache_enabled": True,
                     "cache_ttl_seconds": 3600,
@@ -92,7 +92,7 @@ class TestAIConfigManager:
         assert "test-model" in config_manager.models
         model = config_manager.models["test-model"]
         assert model.name == "test-model"
-        assert model.provider == AIProvider.OPENAI
+        assert model.provider == AIProvider.GOOGLE_AI
         assert model.model_type == AIModelType.TEXT_GENERATION
 
         # Check service was loaded
@@ -105,17 +105,9 @@ class TestAIConfigManager:
     def test_load_credentials_from_environment(self, temp_config_file, monkeypatch):
         """Test loading credentials from environment variables"""
         # Set environment variables
-        monkeypatch.setenv("OPENAI_API_KEY", "sk-test-key-123")
-        monkeypatch.setenv("OPENAI_ORG_ID", "org-test-456")
         monkeypatch.setenv("GOOGLE_AI_API_KEY", "ai-test-key-789")
 
         config_manager = AIConfigManager(temp_config_file)
-
-        # Check OpenAI credentials
-        openai_creds = config_manager.get_provider_credentials(AIProvider.OPENAI)
-        assert openai_creds is not None
-        assert openai_creds.api_key == "sk-test-key-123"
-        assert openai_creds.organization_id == "org-test-456"
 
         # Check Google AI credentials
         google_creds = config_manager.get_provider_credentials(AIProvider.GOOGLE_AI)
@@ -132,7 +124,7 @@ class TestAIConfigManager:
         assert len(config_manager.services) > 0
 
         # Check some expected default models
-        expected_models = ["gpt-4o", "gpt-4o-mini", "gemini-1.5-flash"]
+        expected_models = ["gemini-2.5-pro", "gemini-2.5-flash"]
         for model_name in expected_models:
             assert model_name in config_manager.models
 
@@ -185,9 +177,9 @@ class TestAIConfigManager:
         assert service.service_name == "test-service"
 
         # Test get_models_by_provider
-        openai_models = config_manager.get_models_by_provider(AIProvider.OPENAI)
-        assert len(openai_models) >= 1
-        assert any(model.name == "test-model" for model in openai_models)
+        google_models = config_manager.get_models_by_provider(AIProvider.GOOGLE_AI)
+        assert len(google_models) >= 1
+        assert any(model.name == "test-model" for model in google_models)
 
         # Test get_enabled_services
         enabled_services = config_manager.get_enabled_services()
@@ -215,9 +207,9 @@ class TestModelConfig:
         """Test model config to/from dict conversion"""
         model = ModelConfig(
             name="test-model",
-            provider=AIProvider.OPENAI,
+            provider=AIProvider.GOOGLE_AI,
             model_type=AIModelType.TEXT_GENERATION,
-            model_id="gpt-4",
+            model_id="gemini-2.5-pro",
             max_tokens=4096,
             temperature=0.7,
         )
@@ -225,7 +217,7 @@ class TestModelConfig:
         # Test to_dict
         model_dict = model.to_dict()
         assert model_dict["name"] == "test-model"
-        assert model_dict["provider"] == "openai"
+        assert model_dict["provider"] == "google_ai"
         assert model_dict["model_type"] == "text_generation"
 
         # Test from_dict
@@ -241,9 +233,9 @@ class TestProviderCredentials:
     def test_credentials_serialization(self):
         """Test credentials to_dict with and without secrets"""
         creds = ProviderCredentials(
-            provider=AIProvider.OPENAI,
-            api_key="sk-very-secret-key-123456789",
-            organization_id="org-123",
+            provider=AIProvider.GOOGLE_AI,
+            api_key="test-google-key-123456789",
+            project_id="test-project",
             additional_headers={"Custom-Header": "value"},
         )
 
@@ -268,8 +260,8 @@ class TestAIClientManager:
         # Mock model config
         mock_model = MagicMock()
         mock_model.name = "test-model"
-        mock_model.provider = AIProvider.OPENAI
-        mock_model.model_id = "gpt-3.5-turbo"
+        mock_model.provider = AIProvider.GOOGLE_AI
+        mock_model.model_id = "gemini-2.5-flash"
         mock_model.max_tokens = 2000
         mock_model.temperature = 0.7
         mock_model.timeout_seconds = 30
@@ -294,13 +286,13 @@ class TestAIClientManager:
 
     def test_client_manager_initialization(self, mock_config_manager):
         """Test AI client manager initialization"""
-        with patch("core.ai_client.OpenAIClient") as mock_openai_client:
-            mock_openai_client.return_value = MagicMock()
+        with patch("core.ai_client.GoogleAIClient") as mock_google_client:
+            mock_google_client.return_value = MagicMock()
 
             client_manager = AIClientManager(mock_config_manager)
 
-            # Should have tried to initialize OpenAI client
-            assert mock_openai_client.called
+            # Should have tried to initialize Google AI client
+            assert mock_google_client.called
 
             # Should have clients dictionary
             assert hasattr(client_manager, "clients")
@@ -313,7 +305,7 @@ class TestAIClientManager:
         mock_response = AIResponse(
             content="Generated text response",
             model_used="test-model",
-            provider="openai",
+            provider="google_ai",
             tokens_used={"input": 100, "output": 50},
             response_time_ms=250.0,
             cached=False,
@@ -325,7 +317,7 @@ class TestAIClientManager:
 
         # Create client manager with mocked client
         client_manager = AIClientManager(mock_config_manager)
-        client_manager.clients[AIProvider.OPENAI] = mock_client
+        client_manager.clients[AIProvider.GOOGLE_AI] = mock_client
 
         # Create test request
         request = AIRequest(prompt="Test prompt", service_name="test-service", user_id="user-123")
@@ -386,7 +378,7 @@ class TestAIClientManager:
         }
 
         client_manager = AIClientManager(mock_config_manager)
-        client_manager.clients[AIProvider.OPENAI] = MagicMock()
+        client_manager.clients[AIProvider.GOOGLE_AI] = MagicMock()
 
         status = client_manager.get_service_status()
 
@@ -425,8 +417,8 @@ class TestAIResponse:
         """Test creating AI response"""
         response = AIResponse(
             content="Generated content",
-            model_used="gpt-4",
-            provider="openai",
+            model_used="gemini-2.5-pro",
+            provider="google_ai",
             tokens_used={"input": 100, "output": 200},
             response_time_ms=500.0,
             cached=False,
@@ -436,8 +428,8 @@ class TestAIResponse:
         )
 
         assert response.content == "Generated content"
-        assert response.model_used == "gpt-4"
-        assert response.provider == "openai"
+        assert response.model_used == "gemini-2.5-pro"
+        assert response.provider == "google_ai"
         assert response.tokens_used["input"] == 100
         assert response.tokens_used["output"] == 200
         assert response.response_time_ms == 500.0
@@ -459,9 +451,9 @@ class TestAIConfigIntegration:
             "models": {
                 "integration-test-model": {
                     "name": "integration-test-model",
-                    "provider": "openai",
+                    "provider": "google_ai",
                     "model_type": "text_generation",
-                    "model_id": "gpt-3.5-turbo",
+                    "model_id": "gemini-2.5-flash",
                     "max_tokens": 1000,
                     "temperature": 0.5,
                     "cost_per_1k_tokens": {"input": 0.001, "output": 0.002},
@@ -510,7 +502,7 @@ class TestAIConfigIntegration:
             # Test model retrieval
             model = config_manager.get_model_config("integration-test-model")
             assert model.name == "integration-test-model"
-            assert model.provider == AIProvider.OPENAI
+            assert model.provider == AIProvider.GOOGLE_AI
             assert model.max_tokens == 1000
 
             # Test service retrieval
