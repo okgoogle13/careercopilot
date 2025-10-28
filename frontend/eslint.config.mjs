@@ -1,18 +1,20 @@
+
 // For more info, see https://github.com/storybookjs/eslint-plugin-storybook#configuration-flat-config-format
 import storybook from 'eslint-plugin-storybook';
-
 import js from '@eslint/js';
 import globals from 'globals';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
-import tseslint from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import tseslint from 'typescript-eslint';
 import prettierConfig from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactRecommended from 'eslint-plugin-react/configs/recommended.js';
 import reactJsxRuntime from 'eslint-plugin-react/configs/jsx-runtime.js';
+
+// Ensure TypeScript can find the config file
+const tsconfigPath = './tsconfig.json';
 
 export default [
   {
@@ -53,13 +55,21 @@ export default [
         process: 'readonly',
         global: 'readonly',
         JSX: 'readonly',
+        jest: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        expect: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
       },
-      parser: tsParser,
+      parser: tseslint.parser,
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
-        project: './tsconfig.eslint.json',
+        project: tsconfigPath,
         tsconfigRootDir: process.cwd(),
       },
     },
@@ -67,7 +77,7 @@ export default [
       'react': reactPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      '@typescript-eslint': tseslint,
+      '@typescript-eslint': tseslint.plugin,
       'jsx-a11y': jsxA11y,
       import: importPlugin,
     },
@@ -117,7 +127,6 @@ export default [
       '@typescript-eslint/no-non-null-assertion': 'warn',
       '@typescript-eslint/no-empty-interface': 'warn',
       '@typescript-eslint/no-namespace': 'warn',
-      '@typescript-eslint/ban-types': 'warn',
       '@typescript-eslint/explicit-function-return-type': [
         'warn',
         {
@@ -193,6 +202,10 @@ export default [
         beforeEach: 'readonly',
         afterEach: 'readonly',
         jest: 'readonly',
+        vi: 'readonly',
+        it: 'readonly',
+        expectTypeOf: 'readonly',
+        assertType: 'readonly',
       },
     },
     rules: {
@@ -246,6 +259,17 @@ export default [
       'import/no-anonymous-default-export': 'off',
       'storybook/default-exports': 'error',
       'storybook/story-exports': 'error',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+    },
+  },
+  // Configuration files
+  {
+    files: ['*.config.{js,ts}', '**/config/**/*.{js,ts}'],
+    rules: {
+      'import/no-default-export': 'off',
+      '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
 ];
