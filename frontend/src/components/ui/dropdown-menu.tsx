@@ -1,4 +1,4 @@
-import type { MenuProps, MenuItemProps} from '@mui/material';
+import type { MenuProps, MenuItemProps } from '@mui/material';
 import { Menu, MenuItem, IconButton, Divider } from '@mui/material';
 import React from 'react';
 
@@ -38,7 +38,7 @@ export const DropdownMenuTrigger = React.forwardRef<HTMLButtonElement, DropdownM
 
 DropdownMenuTrigger.displayName = 'DropdownMenuTrigger';
 
-export type DropdownMenuContentProps = MenuProps
+export type DropdownMenuContentProps = MenuProps;
 
 export const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenuContentProps>(
   ({ children, ...props }, ref) => {
@@ -52,7 +52,7 @@ export const DropdownMenuContent = React.forwardRef<HTMLDivElement, DropdownMenu
 
 DropdownMenuContent.displayName = 'DropdownMenuContent';
 
-export type DropdownMenuItemProps = MenuItemProps
+export type DropdownMenuItemProps = MenuItemProps;
 
 export const DropdownMenuItem = React.forwardRef<HTMLLIElement, DropdownMenuItemProps>(
   ({ children, ...props }, ref) => {

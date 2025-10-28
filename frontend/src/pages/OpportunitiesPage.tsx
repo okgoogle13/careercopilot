@@ -21,9 +21,7 @@ import {
   Visibility,
   Work,
 } from '@mui/icons-material';
-import type {
-  ChipProps,
-  LinearProgressProps} from '@mui/material';
+import type { ChipProps, LinearProgressProps } from '@mui/material';
 import {
   Avatar,
   Box,
@@ -936,17 +934,30 @@ export function OpportunitiesPage({
             <Grid size={{ xs: 12 }}>
               <TextField
                 fullWidth
+                id="keywords"
                 label="Keywords"
                 placeholder="e.g., React, Product Manager, Designer"
+                inputProps={{ 'data-testid': 'keywords-input' }}
               />
             </Grid>
             <Grid size={{ xs: 12 }}>
-              <TextField fullWidth label="Location" placeholder="e.g., San Francisco, Remote" />
+              <TextField
+                fullWidth
+                id="location"
+                label="Location"
+                placeholder="e.g., San Francisco, Remote"
+                inputProps={{ 'data-testid': 'location-input' }}
+              />
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
-                <InputLabel>Job Type</InputLabel>
-                <Select label="Job Type">
+                <InputLabel id="job-type-label">Job Type</InputLabel>
+                <Select
+                  labelId="job-type-label"
+                  id="job-type"
+                  label="Job Type"
+                  inputProps={{ 'data-testid': 'job-type-select' }}
+                >
                   <MenuItem value="full-time">Full Time</MenuItem>
                   <MenuItem value="part-time">Part Time</MenuItem>
                   <MenuItem value="contract">Contract</MenuItem>
@@ -955,7 +966,17 @@ export function OpportunitiesPage({
               </FormControl>
             </Grid>
             <Grid size={{ xs: 12, sm: 6 }}>
-              <TextField fullWidth label="Min Salary" type="number" placeholder="50000" />
+              <TextField
+                fullWidth
+                id="min-salary"
+                label="Min Salary"
+                type="number"
+                placeholder="50000"
+                inputProps={{
+                  'data-testid': 'min-salary-input',
+                  min: 0,
+                }}
+              />
             </Grid>
             <Grid size={{ xs: 12 }}>
               <FormControlLabel control={<Checkbox />} label="Include remote positions" />

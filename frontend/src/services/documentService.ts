@@ -1,3 +1,5 @@
+import type {
+  DocumentData} from 'firebase/firestore';
 import {
   collection,
   doc,
@@ -11,6 +13,8 @@ import {
   orderBy,
   Timestamp,
   serverTimestamp,
+  QueryDocumentSnapshot,
+  DocumentSnapshot,
 } from 'firebase/firestore';
 
 import { db, auth } from '@/firebase-config';
@@ -100,16 +104,10 @@ interface DocumentFilters {
 }
 
 export async function getUserDocuments(filters?: DocumentFilters): Promise<Document[]> {
-  const user = auth.currentUser;
-  if (!user) {
-    throw new Error('User must be authenticated');
-  }
+  const userId = auth.currentUser?.uid;
+  if (!userId) throw new Error('User not authenticated');
 
-  let q = query(
-    collection(db, 'documents'),
-    where('userId', '==', user.uid),
-    orderBy('lastModified', 'desc')
-  );
+  let q = query(collection(db, 'documents'), where('userId', '==', userId));
 
   if (filters?.type && filters.type !== 'all') {
     q = query(q, where('type', '==', filters.type));
@@ -119,8 +117,13 @@ export async function getUserDocuments(filters?: DocumentFilters): Promise<Docum
     q = query(q, where('status', '==', filters.status));
   }
 
+  q = query(q, orderBy('lastModified', 'desc'));
+
   const querySnapshot = await getDocs(q);
-  return querySnapshot.docs.map((doc) => convertFirestoreDoc(doc.id, doc.data()));
+  return querySnapshot.docs.map((doc) => {
+    const data = doc.data();
+    return convertFirestoreDoc(doc.id, data);
+  });
 }
 
 /**
@@ -136,7 +139,8 @@ export async function getDocument(documentId: string): Promise<Document> {
     throw new Error('Document not found');
   }
 
-  return convertFirestoreDoc(docSnap.id, docSnap.data());
+  const data = docSnap.data();
+  return convertFirestoreDoc(docSnap.id, data);
 }
 
 /**
@@ -237,21 +241,31 @@ interface FirestoreDocumentData {
   createdAt: Timestamp | Date;
 }
 
-function convertFirestoreDoc(id: string, data: FirestoreDocumentData): Document {
+function convertFirestoreDoc(
+  id: string,
+  data: FirestoreDocumentData | DocumentData | undefined
+): Document {
+  if (!data) {
+    throw new Error('Document data is undefined');
+  }
+
+  // Type assertion with runtime validation
+  const docData = data as FirestoreDocumentData;
   return {
     id,
-    userId: data.userId,
-    name: data.name,
-    type: data.type,
-    status: data.status,
-    storagePath: data.storagePath,
-    downloadURL: data.downloadURL,
-    size: data.size,
-    contentType: data.contentType,
-    atsScore: data.atsScore,
-    isFavorite: data.isFavorite,
-    tags: data.tags || [],
-    lastModified: data.lastModified instanceof Timestamp ? data.lastModified.toDate() : new Date(),
-    createdAt: data.createdAt instanceof Timestamp ? data.createdAt.toDate() : new Date(),
+    userId: docData.userId,
+    name: docData.name,
+    type: docData.type,
+    status: docData.status,
+    storagePath: docData.storagePath,
+    downloadURL: docData.downloadURL,
+    size: docData.size,
+    contentType: docData.contentType,
+    atsScore: docData.atsScore,
+    isFavorite: docData.isFavorite,
+    tags: docData.tags || [],
+    lastModified:
+      docData.lastModified instanceof Timestamp ? docData.lastModified.toDate() : new Date(),
+    createdAt: docData.createdAt instanceof Timestamp ? docData.createdAt.toDate() : new Date(),
   };
 }

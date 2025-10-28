@@ -17,7 +17,6 @@ psycopg2-binary
 alembic
 
 # Core AI Integration - Essential only
-openai
 anthropic
 
 # Genkit AI framework

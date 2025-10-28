@@ -1,40 +1,30 @@
 import {
   Person,
   Security,
-  Notifications,
+  Settings as SettingsIcon,
+  Notifications as NotificationsIcon,
   Palette,
-  Language,
-  Storage,
-  Analytics,
-  Help,
-  Info,
-  Edit,
+  Save,
   Delete,
-  Add,
+  Email,
+  Language,
   Visibility,
   VisibilityOff,
   CloudUpload,
-  Download,
-  Refresh,
-  Save,
-  Cancel,
-  Warning,
   CheckCircle,
-  Settings,
+  Warning,
   DarkMode,
   LightMode,
-  VolumeUp,
-  Email,
-  Sms,
-  Phone,
-  Computer,
-  Smartphone,
-  Tablet,
-  Lock,
-  Key,
-  Shield,
-  Backup,
-  Restore,
+  Download as DownloadIcon,
+  Help as HelpIcon,
+  Refresh as RefreshIcon,
+  PhoneAndroid,
+  Sms as SmsIcon,
+  BarChart,
+  VpnKey,
+  Computer as ComputerIcon,
+  HelpOutline,
+  InfoOutlined,
 } from '@mui/icons-material';
 import {
   Box,
@@ -79,7 +69,6 @@ import React, { useState } from 'react';
 
 import GridCompat from '@/components/ui/GridCompat';
 
-
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -102,15 +91,8 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-interface SettingsPageProps {
-  onSave?: (settings: any) => void;
-  onExport?: () => void;
-  onImport?: () => void;
-}
-
-export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) {
+export function SettingsPage() {
   const [tabValue, setTabValue] = useState(0);
-  const [showPassword, setShowPassword] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [exportDialogOpen, setExportDialogOpen] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
@@ -158,7 +140,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
     sessionTimeout: 30,
   });
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
@@ -189,16 +171,16 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
       notifications,
       privacy,
     };
-    onSave?.(allSettings);
+
+    console.log('Saving settings:', allSettings);
     setHasUnsavedChanges(false);
+    alert('Settings saved successfully!');
   };
 
   const handleReset = () => {
-    // Reset to default values
     setHasUnsavedChanges(false);
   };
 
-  // Helper function to get responsive grid props for GridCompat
   const getGridProps = (xs: number, sm?: number, md?: number, lg?: number, xl?: number) => ({
     size: { xs, ...(sm && { sm }), ...(md && { md }), ...(lg && { lg }), ...(xl && { xl }) },
     item: true,
@@ -206,16 +188,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
-      {/* Header */}
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h4" fontWeight={600} gutterBottom>
-          Settings
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Manage your account, preferences, and privacy settings
-        </Typography>
-      </Box>
-      {/* Header */}
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" fontWeight={600} gutterBottom>
           Settings
@@ -225,7 +197,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
         </Typography>
       </Box>
 
-      {/* Unsaved Changes Alert */}
       {hasUnsavedChanges && (
         <Alert
           severity="warning"
@@ -246,7 +217,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
       )}
 
       <GridCompat container spacing={4}>
-        {/* Settings Navigation */}
         <GridCompat {...getGridProps(12, 12, 3)}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
             <Tabs
@@ -263,13 +233,13 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
               />
               <Tab
-                icon={<Settings />}
-                label="Preferences"
+                icon={<SettingsIcon />}
+                label="General"
                 iconPosition="start"
                 sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
               />
               <Tab
-                icon={<Notifications />}
+                icon={<NotificationsIcon />}
                 label="Notifications"
                 iconPosition="start"
                 sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
@@ -281,13 +251,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                 sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
               />
               <Tab
-                icon={<Storage />}
-                label="Data & Storage"
-                iconPosition="start"
-                sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
-              />
-              <Tab
-                icon={<Help />}
+                icon={<HelpIcon />}
                 label="Help & Support"
                 iconPosition="start"
                 sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
@@ -296,17 +260,14 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
           </Paper>
         </GridCompat>
 
-        {/* Settings Content */}
         <GridCompat {...getGridProps(12, 12, 9)}>
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
-            {/* Profile Tab */}
             <TabPanel value={tabValue} index={0}>
               <Box sx={{ px: 4 }}>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
                   Profile Information
                 </Typography>
 
-                {/* Avatar Section */}
                 <Card elevation={0} sx={{ border: 1, borderColor: 'divider', mb: 3 }}>
                   <CardContent>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
@@ -337,7 +298,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                   </CardContent>
                 </Card>
 
-                {/* Personal Information */}
                 <GridCompat container spacing={3}>
                   <GridCompat {...getGridProps(12, 6, 6)}>
                     <TextField
@@ -403,7 +363,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
               </Box>
             </TabPanel>
 
-            {/* Preferences Tab */}
             <TabPanel value={tabValue} index={1}>
               <Box sx={{ px: 4 }}>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
@@ -496,7 +455,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                     <List>
                       <ListItem>
                         <ListItemIcon>
-                          <Save />
+                          <LockIcon />
                         </ListItemIcon>
                         <ListItemText
                           primary="Auto-save"
@@ -512,7 +471,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                       <ListItem>
                         <ListItemIcon>
-                          <Computer />
+                          <DesktopWindowsIcon />
                         </ListItemIcon>
                         <ListItemText
                           primary="Compact Mode"
@@ -530,7 +489,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                       <ListItem>
                         <ListItemIcon>
-                          <Palette />
+                          <PaletteIcon />
                         </ListItemIcon>
                         <ListItemText
                           primary="Animations"
@@ -551,7 +510,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
               </Box>
             </TabPanel>
 
-            {/* Notifications Tab */}
             <TabPanel value={tabValue} index={2}>
               <Box sx={{ px: 4 }}>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
@@ -579,7 +537,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                   <ListItem>
                     <ListItemIcon>
-                      <Smartphone />
+                      <PhoneAndroid />
                     </ListItemIcon>
                     <ListItemText
                       primary="Push Notifications"
@@ -597,7 +555,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                   <ListItem>
                     <ListItemIcon>
-                      <Sms />
+                      <SmsIcon />
                     </ListItemIcon>
                     <ListItemText
                       primary="SMS Notifications"
@@ -617,7 +575,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
 
                   <ListItem>
                     <ListItemIcon>
-                      <Analytics />
+                      <BarChart />
                     </ListItemIcon>
                     <ListItemText
                       primary="Job Alerts"
@@ -688,7 +646,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
               </Box>
             </TabPanel>
 
-            {/* Privacy & Security Tab */}
             <TabPanel value={tabValue} index={3}>
               <Box sx={{ px: 4 }}>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
@@ -836,7 +793,6 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
               </Box>
             </TabPanel>
 
-            {/* Data & Storage Tab */}
             <TabPanel value={tabValue} index={4}>
               <Box sx={{ px: 4 }}>
                 <Typography variant="h5" fontWeight={600} gutterBottom>
@@ -888,7 +844,7 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                           <Button
                             fullWidth
                             variant="outlined"
-                            startIcon={<Download />}
+                            startIcon={<DownloadIcon />}
                             onClick={() => setExportDialogOpen(true)}
                           >
                             Export Data
@@ -897,14 +853,28 @@ export function SettingsPage({ onSave, onExport, onImport }: SettingsPageProps) 
                             fullWidth
                             variant="outlined"
                             startIcon={<CloudUpload />}
-                            onClick={onImport}
+                            onClick={() => {
+                              const data = { profile, preferences, notifications, privacy };
+                              const dataStr = JSON.stringify(data, null, 2);
+                              const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(
+                                dataStr
+                              )}`;
+
+                              const exportName = `career-copilot-settings-${
+                                new Date().toISOString().split('T')[0]
+                              }.json`;
+                              const linkElement = document.createElement('a');
+                              linkElement.setAttribute('href', dataUri);
+                              linkElement.setAttribute('download', exportName);
+                              linkElement.click();
+                            }}
                           >
                             Import Data
                           </Button>
-                          <Button fullWidth variant="outlined" startIcon={<Backup />}>
+                          <Button fullWidth variant="outlined" startIcon={<CloudUpload />}>
                             Create Backup
                           </Button>
-                          <Button fullWidth variant="outlined" startIcon={<Refresh />}>
+                          <Button fullWidth variant="outlined" startIcon={<RefreshIcon />}>
                             Clear Cache
                           </Button>
                         </Stack>

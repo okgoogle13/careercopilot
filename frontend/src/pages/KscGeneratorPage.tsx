@@ -15,8 +15,7 @@ import {
   Upload,
   Visibility,
 } from '@mui/icons-material';
-import type {
-  ChipProps} from '@mui/material';
+import type { ChipProps } from '@mui/material';
 import {
   Accordion,
   AccordionDetails,

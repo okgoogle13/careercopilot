@@ -1,11 +1,10 @@
-import type {
-  UploadTaskSnapshot} from 'firebase/storage';
-import {
+import type { UploadTaskSnapshot ,
   ref,
   uploadBytesResumable,
   getDownloadURL,
   deleteObject,
-  listAll
+  listAll,
+  type StorageReference,
 } from 'firebase/storage';
 
 import { storage } from '@/firebase-config';
