@@ -1,10 +1,5 @@
-import type {
-  SwitchProps as MuiSwitchProps,
-  FormControlLabelProps} from '@mui/material';
-import {
-  Switch as MuiSwitch,
-  FormControlLabel
-} from '@mui/material';
+import type { SwitchProps as MuiSwitchProps, FormControlLabelProps } from '@mui/material';
+import { Switch as MuiSwitch, FormControlLabel } from '@mui/material';
 import React from 'react';
 
 export interface SwitchProps extends MuiSwitchProps {

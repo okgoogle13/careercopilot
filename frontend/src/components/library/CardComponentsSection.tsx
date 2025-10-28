@@ -17,7 +17,6 @@ import {
 
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
-
 export function CardComponentsSection() {
   const [selectedCard, setSelectedCard] = useState<string | null>('card-2');
   const [favoriteCards, setFavoriteCards] = useState<Set<string>>(new Set(['card-1']));

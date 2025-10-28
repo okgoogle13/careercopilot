@@ -1,6 +1,5 @@
 const js = require("@eslint/js");
-const tseslint = require("@typescript-eslint/eslint-plugin");
-const tsParser = require("@typescript-eslint/parser");
+const tseslint = require("typescript-eslint");
 
 module.exports = [
   {
@@ -11,7 +10,7 @@ module.exports = [
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: "module",
-      parser: tsParser,
+      parser: tseslint.parser,
       parserOptions: {
         project: "./tsconfig.eslint.json",
         tsconfigRootDir: __dirname,
@@ -29,7 +28,7 @@ module.exports = [
       },
     },
     plugins: {
-      "@typescript-eslint": tseslint,
+      "@typescript-eslint": tseslint.plugin,
     },
     rules: {
       ...js.configs.recommended.rules,

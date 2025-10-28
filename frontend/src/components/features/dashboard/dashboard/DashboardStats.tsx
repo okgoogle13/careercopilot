@@ -1,5 +1,5 @@
 import { BusinessCenter as Briefcase, Mail } from '@mui/icons-material';
-import { Card , Button } from '@mui/material';
+import { Card, Button } from '@mui/material';
 import React, { useState } from 'react';
 
 import { prepareApplicationPackage, scanInboxForOpportunities } from '../../../../api/aiServices';
