@@ -106,19 +106,12 @@ class EducationItem(BaseModel):
     year: str
 
 
-class VoiceProfile(BaseModel):
-    """Represents the AI-detected writing style of a user."""
-
-    tone: str
-    vocab_level: str
-
-
 class UserPreferences(BaseModel):
     """Stores user-specific preferences."""
 
     themeId: str
     targetRoles: List[str]
-    voiceProfile: VoiceProfile
+    voiceProfile: Optional[dict] = None  # Now references canonical VoiceProfile schema from asset_library_schema.py
 
 
 class PersonalInfo(BaseModel):

@@ -3,6 +3,7 @@ Authentication endpoints for user registration, login, and session management.
 """
 
 import logging
+from datetime import datetime
 from typing import Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -11,10 +12,9 @@ from sqlalchemy.orm import Session
 
 from app.core.auth import auth_manager, create_user_token, get_current_user, session_manager
 from app.core.database import get_db
-from app.genkit_flows.onboarding_voice_workflow import (
-    VoiceProfileInput,
-    analyze_and_create_voice_profile,
-)
+from app.core.firebase import get_firestore
+from app.genkit_flows.smart_ingestion import voiceProfileExtractorFlow
+from app.models.asset_library_schema import AssetDocument, AssetMetadata, ContextTags
 from app.models.database import User
 
 logger = logging.getLogger(__name__)
@@ -100,11 +100,38 @@ async def register_user(
             try:
                 logger.info(f"Running voice profile analysis for new user: {user.email}")
 
-                # Create voice profile input
-                voice_input = VoiceProfileInput(user_id=user.id, documents=request.documents)
+                # Combine all documents into one writing sample
+                combined_text = "\n\n---\n\n".join([doc for doc in request.documents if doc.strip()])
 
-                # Run the voice profile analysis flow
-                await analyze_and_create_voice_profile(voice_input)
+                # Run the real voice profile extraction flow
+                voice_profile = await voiceProfileExtractorFlow.run(
+                    writingSample=combined_text,
+                    confirmedTags={"roleType": "General", "subsectors": []},
+                    user_id=user.id,
+                )
+
+                # Save to Firestore assetLibrary
+                db_firebase = get_firestore()
+                collection_ref = db_firebase.collection("users").document(user.id).collection("assetLibrary")
+
+                asset_doc = AssetDocument(
+                    documentType="voice",
+                    extractedData=voice_profile.model_dump(mode="json"),
+                    tags=ContextTags(roleType="General", subsectors=[]),
+                    metadata=AssetMetadata(
+                        fileName="registration_writing_sample.txt",
+                        fileType="text/plain",
+                        uploadDate=datetime.now(),
+                        storageUri=f"registration/{user.id}/onboarding_voice_sample",
+                        fileSizeBytes=len(combined_text),
+                    ),
+                    schemaVersion="v4",
+                    createdAt=datetime.now(),
+                    updatedAt=datetime.now(),
+                    userId=user.id,
+                )
+
+                collection_ref.add(asset_doc.model_dump(mode="json"))
 
                 voice_profile_created = True
                 response.voice_profile_created = True
@@ -251,7 +278,7 @@ async def create_voice_profile(
     documents: List[str], current_user: User = Depends(get_current_user)
 ) -> Dict[str, str]:
     """
-    Create or update voice profile for existing user.
+    Create or update voice profile for existing user using voiceProfileExtractorFlow.
     """
     try:
         if not documents or not any(doc.strip() for doc in documents):
@@ -262,11 +289,38 @@ async def create_voice_profile(
 
         logger.info(f"Creating voice profile for existing user: {current_user.email}")
 
-        # Create voice profile input
-        voice_input = VoiceProfileInput(user_id=current_user.id, documents=documents)
+        # Combine all documents into one writing sample
+        combined_text = "\n\n---\n\n".join([doc for doc in documents if doc.strip()])
 
-        # Run the voice profile analysis flow
-        await analyze_and_create_voice_profile(voice_input)
+        # Run the real voice profile extraction flow
+        voice_profile = await voiceProfileExtractorFlow.run(
+            writingSample=combined_text,
+            confirmedTags={"roleType": "General", "subsectors": []},
+            user_id=current_user.id,
+        )
+
+        # Save to Firestore assetLibrary
+        db_firebase = get_firestore()
+        collection_ref = db_firebase.collection("users").document(current_user.id).collection("assetLibrary")
+
+        asset_doc = AssetDocument(
+            documentType="voice",
+            extractedData=voice_profile.model_dump(mode="json"),
+            tags=ContextTags(roleType="General", subsectors=[]),
+            metadata=AssetMetadata(
+                fileName="voice_profile_update.txt",
+                fileType="text/plain",
+                uploadDate=datetime.now(),
+                storageUri=f"voice_profiles/{current_user.id}/update_{datetime.now().timestamp()}",
+                fileSizeBytes=len(combined_text),
+            ),
+            schemaVersion="v4",
+            createdAt=datetime.now(),
+            updatedAt=datetime.now(),
+            userId=current_user.id,
+        )
+
+        collection_ref.add(asset_doc.model_dump(mode="json"))
 
         logger.info(f"Voice profile created successfully for user: {current_user.email}")
 
