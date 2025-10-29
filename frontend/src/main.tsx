@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 // import * as Sentry from '@sentry/react';
 import { AppRouter } from './AppRouter';
+import { AuthProvider } from './context/AuthContext';
 import ErrorBoundary from './components/ErrorBoundary';
 import { theme } from './theme/theme';
 
@@ -29,7 +30,9 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppRouter />
+        <AuthProvider>
+          <AppRouter />
+        </AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
     {/* </Sentry.ErrorBoundary> */}

@@ -37,9 +37,11 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import GridCompat from '@/components/ui/GridCompat';
+import { profileService } from '@/api/profileService';
+import { analyticsService } from '@/api/analyticsService';
 
 interface Profile {
   id: string;
@@ -72,6 +74,51 @@ export function DashboardPage({
 }: DashboardPageProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
+  const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [stats, setStats] = useState({
+    activeProfiles: 0,
+    totalApplications: 0,
+    avgAtsScore: 0,
+    responseRate: 0,
+  });
+
+  // Fetch profiles and analytics on mount
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      setIsLoading(true);
+      try {
+        // Fetch profiles
+        const profilesData = await profileService.getProfiles();
+        setProfiles(profilesData);
+
+        // Fetch analytics/stats
+        const dashboardStats = await analyticsService.getDashboardStats();
+        setStats({
+          activeProfiles: dashboardStats.activeProfiles ?? profilesData.length,
+          totalApplications: dashboardStats.totalApplications ?? 0,
+          avgAtsScore: dashboardStats.averageAtsScore ?? 85,
+          responseRate: dashboardStats.responseRate ?? 0,
+        });
+
+        // Fetch recent activity
+        const trends = await analyticsService.getPerformanceTrends('week');
+        if (trends.recentActivity) {
+          setRecentActivity(trends.recentActivity);
+        }
+      } catch (error) {
+        console.error('Failed to fetch dashboard data:', error);
+        // Fall back to empty state if API fails
+        setProfiles([]);
+        setRecentActivity([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, profile: Profile) => {
     setAnchorEl(event.currentTarget);
@@ -82,61 +129,6 @@ export function DashboardPage({
     setAnchorEl(null);
     setSelectedProfile(null);
   };
-
-  // Sample data
-  const profiles: Profile[] = [
-    {
-      id: '1',
-      name: 'Senior Software Developer',
-      role: 'Technology',
-      lastUpdated: '2 hours ago',
-      atsScore: 85,
-      status: 'active',
-      applications: 5,
-    },
-    {
-      id: '2',
-      name: 'Product Manager',
-      role: 'Product',
-      lastUpdated: '1 day ago',
-      atsScore: 92,
-      status: 'active',
-      applications: 3,
-    },
-    {
-      id: '3',
-      name: 'UX Designer',
-      role: 'Design',
-      lastUpdated: '3 days ago',
-      atsScore: 78,
-      status: 'draft',
-      applications: 0,
-    },
-  ];
-
-  const recentActivity: RecentActivity[] = [
-    {
-      id: '1',
-      action: 'Resume updated',
-      document: 'Senior Software Developer',
-      timestamp: '2 hours ago',
-      status: 'completed',
-    },
-    {
-      id: '2',
-      action: 'Application submitted',
-      document: 'Product Manager',
-      timestamp: '1 day ago',
-      status: 'completed',
-    },
-    {
-      id: '3',
-      action: 'ATS analysis',
-      document: 'UX Designer',
-      timestamp: '3 days ago',
-      status: 'pending',
-    },
-  ];
 
   const getStatusColor = (profileStatus: Profile['status']): ChipProps['color'] => {
     switch (profileStatus) {
@@ -267,7 +259,7 @@ export function DashboardPage({
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Description color="primary" sx={{ mr: 1 }} />
                 <Typography variant="h6" fontWeight={600}>
-                  3
+                  {stats.activeProfiles}
                 </Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
@@ -283,7 +275,7 @@ export function DashboardPage({
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Work color="success" sx={{ mr: 1 }} />
                 <Typography variant="h6" fontWeight={600}>
-                  8
+                  {stats.totalApplications}
                 </Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
@@ -299,7 +291,7 @@ export function DashboardPage({
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <Speed color="warning" sx={{ mr: 1 }} />
                 <Typography variant="h6" fontWeight={600}>
-                  85%
+                  {Math.round(stats.avgAtsScore)}%
                 </Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
@@ -315,7 +307,7 @@ export function DashboardPage({
               <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                 <TrendingUp color="info" sx={{ mr: 1 }} />
                 <Typography variant="h6" fontWeight={600}>
-                  12%
+                  {Math.round(stats.responseRate)}%
                 </Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
