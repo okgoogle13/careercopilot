@@ -35,15 +35,17 @@ export interface ExtractAndSaveResponse {
 
 export interface AssetDocument {
   id: string;
+  name: string;
   documentType: 'resume' | 'ksc' | 'voice';
   extractedData: Record<string, any>;
-  tags: ContextTags;
+  tags: string[];  // Changed from ContextTags to string[]
   metadata: {
     fileName: string;
     fileType: string;
     uploadDate: string;
     storageUri: string;
     fileSizeBytes?: number;
+    extractedText?: string;
   };
   createdAt: string;
   updatedAt: string;

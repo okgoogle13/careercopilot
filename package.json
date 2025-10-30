@@ -54,7 +54,7 @@
     "@firebase/storage": "^0.13.2",
     "@playwright/test": "1.55.0",
     "@types/jest": "^30.0.0",
-    "@types/node": "^24.9.1",
+    "@types/node": "^24.9.2",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "@typescript-eslint/eslint-plugin": "^8.46.2",

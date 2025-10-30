@@ -3,7 +3,15 @@
  * Manages and displays user notifications
  */
 
-import React, { useState, useEffect } from 'react';
+import {
+  Notifications,
+  Close,
+  CheckCircle,
+  Info,
+  Warning,
+  Error as ErrorIcon,
+  Delete,
+} from '@mui/icons-material';
 import {
   Badge,
   IconButton,
@@ -20,16 +28,10 @@ import {
   Stack,
   Chip,
 } from '@mui/material';
-import {
-  Notifications,
-  Close,
-  CheckCircle,
-  Info,
-  Warning,
-  Error as ErrorIcon,
-  Delete,
-} from '@mui/icons-material';
-import { notificationService, Notification } from '../api/notificationService';
+import React, { useState, useEffect } from 'react';
+
+import type { Notification } from '../api/notificationService';
+import { notificationService } from '../api/notificationService';
 
 export const NotificationCenter: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);

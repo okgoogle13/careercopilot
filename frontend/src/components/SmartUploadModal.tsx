@@ -3,7 +3,7 @@
  * AI-powered document upload with automatic tag suggestion
  */
 
-import React, { useState } from 'react';
+import { CloudUpload, CheckCircle } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -17,8 +17,10 @@ import {
   Stack,
   Alert,
 } from '@mui/material';
-import { CloudUpload, CheckCircle } from '@mui/icons-material';
-import { smartIngestionService, ContextTags } from '../api/smartIngestionService';
+import React, { useState } from 'react';
+
+import type { ContextTags } from '../api/smartIngestionService';
+import { smartIngestionService } from '../api/smartIngestionService';
 
 interface SmartUploadModalProps {
   open: boolean;

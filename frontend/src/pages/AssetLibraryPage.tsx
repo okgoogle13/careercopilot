@@ -3,7 +3,7 @@
  * View and manage uploaded documents and assets
  */
 
-import React, { useState, useEffect } from 'react';
+import { Add, Search, MoreVert, Delete, Download, Edit, CloudUpload } from '@mui/icons-material';
 import {
   Container,
   Box,
@@ -23,8 +23,10 @@ import {
   Paper,
   Alert,
 } from '@mui/material';
-import { Add, Search, MoreVert, Delete, Download, Edit, CloudUpload } from '@mui/icons-material';
-import { smartIngestionService, AssetDocument } from '../api/smartIngestionService';
+import React, { useState, useEffect } from 'react';
+
+import type { AssetDocument } from '../api/smartIngestionService';
+import { smartIngestionService } from '../api/smartIngestionService';
 import { SmartUploadModal } from '../components/SmartUploadModal';
 
 interface AssetLibraryPageProps {
@@ -196,8 +198,8 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
       {/* Assets Grid */}
       {filteredAssets.length > 0 && (
         <Grid container spacing={3}>
-          {filteredAssets.map((asset) => (
-            <Grid item xs={12} sm={6} md={4} key={asset.id}>
+          {filteredAssets.map((asset: AssetDocument) => (
+            <Grid item xs={12} sm={6} md={4} key={asset.id} component="div">
               <Card
                 sx={{
                   height: '100%',
@@ -234,24 +236,14 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
 
                   {asset.tags && asset.tags.length > 0 && (
                     <Box sx={{ mt: 2, display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                      {asset.tags.map((tag) => (
-                        <Chip key={tag} label={tag} size="small" variant="outlined" />
+                      {asset.tags.map((tag: string, index: number) => (
+                        <Chip key={`${tag}-${index}`} label={tag} size="small" variant="outlined" />
                       ))}
                     </Box>
                   )}
 
                   {asset.metadata?.extractedText && (
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{
-                        mt: 2,
-                        display: '-webkit-box',
-                        WebkitLineClamp: 2,
-                        WebkitBoxOrient: 'vertical',
-                        overflow: 'hidden',
-                      }}
-                    >
+                    <Typography variant="body2">
                       {asset.metadata.extractedText.substring(0, 100)}...
                     </Typography>
                   )}

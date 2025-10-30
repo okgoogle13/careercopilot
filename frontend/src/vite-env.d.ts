@@ -1,24 +1,20 @@
 /// <reference types="vite/client" />
 
-// Add any additional type declarations here
-
-interface ImportMetaEnv {
-  readonly VITE_FIREBASE_API_KEY: string;
-  readonly VITE_FIREBASE_AUTH_DOMAIN: string;
-  readonly VITE_FIREBASE_PROJECT_ID: string;
-  readonly VITE_FIREBASE_STORAGE_BUCKET: string;
-  readonly VITE_FIREBASE_MESSAGING_SENDER_ID: string;
-  readonly VITE_FIREBASE_APP_ID: string;
-  readonly VITE_API_URL: string;
-  readonly VITE_ENVIRONMENT: string;
-  readonly VITE_USE_FALLBACK_AUTH: string;
-  readonly VITE_OFFLINE_MODE: string;
-  readonly VITE_SHOW_DEBUG_INFO: string;
-  readonly VITE_ENABLE_DEV_TOOLS: string;
-  readonly VITE_ENABLE_SERVICE_WORKER: string;
-  readonly VITE_ENABLE_ANALYTICS: string;
+declare module '*.module.css' {
+  const classes: { [key: string]: string };
+  export default classes;
 }
 
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
+declare module '*.svg' {
+  import * as React from 'react';
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  const src: string;
+  export default src;
 }
+
+declare module '*.png';
+declare module '*.jpg';
+declare module '*.jpeg';
+declare module '*.gif';
+declare module '*.bmp';
+declare module '*.tiff';

@@ -3,8 +3,6 @@
  * New user registration page with email, password, and display name
  */
 
-import React, { useState } from 'react';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -16,6 +14,9 @@ import {
   CircularProgress,
   Link,
 } from '@mui/material';
+import React, { useState } from 'react';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
+
 import { useAuth } from '../context/AuthContext';
 
 export const RegisterPage: React.FC = () => {

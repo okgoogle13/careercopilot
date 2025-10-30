@@ -3,7 +3,7 @@
  * One-click job application package generation
  */
 
-import React, { useState } from 'react';
+import { CheckCircle, FileText, Mail, Send } from '@mui/icons-material';
 import {
   Dialog,
   DialogTitle,
@@ -21,8 +21,10 @@ import {
   Stack,
   Chip,
 } from '@mui/material';
-import { CheckCircle, FileText, Mail, Send } from '@mui/icons-material';
-import { workflowService, ApplicationPackage } from '../api/workflowService';
+import React, { useState } from 'react';
+
+import type { ApplicationPackage } from '../api/workflowService';
+import { workflowService } from '../api/workflowService';
 
 interface ApplicationGeneratorModalProps {
   open: boolean;

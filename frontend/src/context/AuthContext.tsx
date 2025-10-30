@@ -3,8 +3,11 @@
  * Manages global authentication state and token persistence
  */
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { authService, UserProfile, AuthResponse } from '../api/authService';
+import type { ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+
+import type { UserProfile, AuthResponse } from '../api/authService';
+import { authService } from '../api/authService';
 
 interface AuthContextType {
   user: UserProfile | null;

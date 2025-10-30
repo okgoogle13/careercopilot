@@ -100,7 +100,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
   const [generating, setGenerating] = useState(false);
   const [selectedCriterion, setSelectedCriterion] = useState<string | null>(null);
   const [previewDialogOpen, setPreviewDialogOpen] = useState(false);
-  const [showGuidance, setShowGuidance] = useState(true);
+  const [_showGuidance, _setShowGuidance] = useState(true);
 
   // Sample KSC criteria
   const [criteria, setCriteria] = useState<KscCriterion[]>([
@@ -159,7 +159,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
     },
   ]);
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
@@ -338,7 +338,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
           <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2, mb: 4 }}>
             <Box sx={{ p: 3 }}>
               <Stepper activeStep={activeStep} orientation="horizontal" alternativeLabel>
-                {steps.map((step, index) => (
+                {steps.map((step, _index) => (
                   <Step key={step.label}>
                     <StepLabel>{step.label}</StepLabel>
                   </Step>
@@ -449,7 +449,7 @@ export function KscGeneratorPage({ onSave, onExport, onImport }: KscGeneratorPag
               {/* Criteria Content */}
               <TabPanel value={tabValue} index={0}>
                 <Box sx={{ p: 3 }}>
-                  {criteria.map((criterion, index) => (
+                  {criteria.map((criterion, _index) => (
                     <Accordion key={criterion.id} sx={{ mb: 2, '&:last-child': { mb: 0 } }}>
                       <AccordionSummary expandIcon={<ExpandMore />}>
                         <Box sx={{ display: 'flex', alignItems: 'center', width: '100%', pr: 2 }}>
