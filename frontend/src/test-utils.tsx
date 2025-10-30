@@ -34,7 +34,7 @@ export const waitForStateUpdate = async (count = 1) => {
 
 // Custom matchers
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
+   
   namespace jest {
     interface Matchers<R> {
       toBeInTheDocument(): R;

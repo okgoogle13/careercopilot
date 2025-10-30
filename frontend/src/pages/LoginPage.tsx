@@ -3,8 +3,6 @@
  * User authentication page with email and password form
  */
 
-import React, { useState, useRef, useEffect } from 'react';
-import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -16,8 +14,11 @@ import {
   CircularProgress,
   Link,
 } from '@mui/material';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
+
 import { useAuth } from '../context/AuthContext';
-import { ariaLabels, announceToScreenReader, focusManagement } from '../utils/accessibility';
+import { ariaLabels, announceToScreenReader } from '../utils/accessibility';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();

@@ -5,8 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 // import * as Sentry from '@sentry/react';
 import { AppRouter } from './AppRouter';
-import { AuthProvider } from './context/AuthContext';
 import ErrorBoundary from './components/ErrorBoundary';
+import { AuthProvider } from './context/AuthContext';
 import { theme } from './theme/theme';
 
 // // Initialize Sentry for error monitoring and session replay

@@ -126,12 +126,12 @@ export function OpportunitiesPage({
   const [selectedJobs, setSelectedJobs] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedJob, setSelectedJob] = useState<JobOpportunity | null>(null);
-  const [filterDialogOpen, setFilterDialogOpen] = useState(false);
+  const [_filterDialogOpen, _setFilterDialogOpen] = useState(false);
   const [jobDetailDialogOpen, setJobDetailDialogOpen] = useState(false);
   const [alertDialogOpen, setAlertDialogOpen] = useState(false);
 
   // Filter state
-  const [filters, setFilters] = useState({
+  const [filters, _setFilters] = useState({
     location: '',
     jobType: [],
     remote: false,
@@ -140,7 +140,7 @@ export function OpportunitiesPage({
     matchScoreMin: 0,
   });
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 

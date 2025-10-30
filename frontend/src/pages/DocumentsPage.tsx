@@ -96,75 +96,25 @@ interface DocumentsPageProps {
 
 export function DocumentsPage({
   isEmpty = false,
-  onCreateDocument,
-  onEditDocument,
-  onUploadDocument,
-}: DocumentsPageProps) {
+}: Pick<DocumentsPageProps, 'isEmpty'>) {
   const [tabValue, setTabValue] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDocuments, setSelectedDocuments] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [uploadDialogOpen, setUploadDialogOpen] = useState(false);
   const [dragOver, setDragOver] = useState(false);
-  const [documents, setDocuments] = useState<Document[]>([
-    {
-      id: '1',
-      name: 'Senior Software Developer Resume',
-      type: 'resume',
-      status: 'active',
-      lastModified: '2 hours ago',
-      size: '2.1 MB',
-      atsScore: 85,
-      isFavorite: true,
-      tags: ['Software', 'React', 'TypeScript'],
-    },
-    {
-      id: '2',
-      name: 'Product Manager Cover Letter',
-      type: 'cover-letter',
-      status: 'active',
-      lastModified: '1 day ago',
-      size: '1.5 MB',
-      atsScore: 92,
-      isFavorite: false,
-      tags: ['Product', 'Management', 'Strategy'],
-    },
-    {
-      id: '3',
-      name: 'UX Designer Portfolio',
-      type: 'portfolio',
-      status: 'draft',
-      lastModified: '3 days ago',
-      size: '15.2 MB',
-      isFavorite: true,
-      tags: ['Design', 'UX', 'Portfolio'],
-    },
-    {
-      id: '4',
-      name: 'Key Selection Criteria Response',
-      type: 'ksc',
-      status: 'archived',
-      lastModified: '1 week ago',
-      size: '800 KB',
-      atsScore: 78,
-      isFavorite: false,
-      tags: ['Government', 'KSC', 'Public Sector'],
-    },
-  ]);
+  const [documents, setDocuments] = useState<Document[]>([]);
 
-  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, document: Document) => {
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
-    setSelectedDocument(document);
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setSelectedDocument(null);
   };
 
   const handleSelectDocument = (documentId: string) => {
@@ -194,51 +144,6 @@ export function DocumentsPage({
     );
   };
 
-  const initialDocuments: Document[] = [
-    {
-      id: '1',
-      name: 'Senior Software Developer Resume',
-      type: 'resume',
-      status: 'active',
-      lastModified: '2 hours ago',
-      size: '2.1 MB',
-      atsScore: 85,
-      isFavorite: true,
-      tags: ['Software', 'React', 'TypeScript'],
-    },
-    {
-      id: '2',
-      name: 'Product Manager Cover Letter',
-      type: 'cover-letter',
-      status: 'active',
-      lastModified: '1 day ago',
-      size: '1.5 MB',
-      atsScore: 92,
-      isFavorite: false,
-      tags: ['Product', 'Management', 'Strategy'],
-    },
-    {
-      id: '3',
-      name: 'UX Designer Portfolio',
-      type: 'portfolio',
-      status: 'draft',
-      lastModified: '3 days ago',
-      size: '15.2 MB',
-      isFavorite: true,
-      tags: ['Design', 'UX', 'Portfolio'],
-    },
-    {
-      id: '4',
-      name: 'Key Selection Criteria Response',
-      type: 'ksc',
-      status: 'archived',
-      lastModified: '1 week ago',
-      size: '800 KB',
-      atsScore: 78,
-      isFavorite: false,
-      tags: ['Government', 'KSC', 'Public Sector'],
-    },
-  ];
 
   const getTypeIcon = (type: string) => {
     switch (type) {

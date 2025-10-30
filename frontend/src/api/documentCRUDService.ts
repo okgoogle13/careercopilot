@@ -25,7 +25,7 @@ export interface Document {
   profileId?: string;
   jobTitle?: string;
   companyName?: string;
-  aTS Score?: number;
+  atsScore?: number;
   tags?: string[];
   metadata: DocumentMetadata;
   status: 'draft' | 'final' | 'archived';

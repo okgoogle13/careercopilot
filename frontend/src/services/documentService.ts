@@ -16,10 +16,11 @@ import {
   DocumentSnapshot,
 } from 'firebase/firestore';
 
-import { db, auth } from '@/firebase-config';
 
 import type { UploadProgress } from './storageService';
 import { uploadDocument, deleteFile } from './storageService';
+
+import { db, auth } from '@/firebase-config';
 
 export interface Document {
   id: string;

@@ -3,8 +3,9 @@
  * Animated placeholder for loading content
  */
 
-import React from 'react';
 import { Box, Skeleton, Stack, Container } from '@mui/material';
+import React from 'react';
+
 import { skeletonAnimation } from '../utils/animations';
 
 interface SkeletonLoaderProps {
