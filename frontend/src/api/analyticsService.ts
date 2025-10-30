@@ -98,10 +98,7 @@ export const analyticsService = {
   /**
    * Get performance trends
    */
-  async getPerformanceTrends(
-    userId: string,
-    timeRange: TimeRange = 'month'
-  ): Promise<TrendData> {
+  async getPerformanceTrends(userId: string, timeRange: TimeRange = 'month'): Promise<TrendData> {
     try {
       const response = await apiClient.get('/trends', {
         params: { userId, timeRange },

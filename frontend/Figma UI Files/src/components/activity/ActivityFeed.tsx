@@ -3,28 +3,37 @@ import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Avatar } from '../ui/avatar';
-import { 
-  FileText, 
-  Briefcase, 
-  Star, 
-  Edit, 
-  Upload, 
-  Download, 
-  Eye, 
-  Settings, 
-  User, 
-  Clock, 
-  Calendar, 
+import {
+  FileText,
+  Briefcase,
+  Star,
+  Edit,
+  Upload,
+  Download,
+  Eye,
+  Settings,
+  User,
+  Clock,
+  Calendar,
   TrendingUp,
   CheckCircle,
   RefreshCw,
   Filter,
-  MoreVertical
+  MoreVertical,
 } from 'lucide-react';
 
 interface ActivityItem {
   id: string;
-  type: 'document_created' | 'document_updated' | 'job_saved' | 'application_submitted' | 'profile_updated' | 'resume_downloaded' | 'ats_score_updated' | 'interview_scheduled' | 'system_update';
+  type:
+    | 'document_created'
+    | 'document_updated'
+    | 'job_saved'
+    | 'application_submitted'
+    | 'profile_updated'
+    | 'resume_downloaded'
+    | 'ats_score_updated'
+    | 'interview_scheduled'
+    | 'system_update';
   title: string;
   description: string;
   timestamp: string;
@@ -55,10 +64,10 @@ const mockActivityItems: ActivityItem[] = [
     metadata: {
       score: 87,
       oldScore: 82,
-      documentName: 'Resume_v4.pdf'
+      documentName: 'Resume_v4.pdf',
     },
     priority: 'high',
-    isUnread: true
+    isUnread: true,
   },
   {
     id: '2',
@@ -69,9 +78,9 @@ const mockActivityItems: ActivityItem[] = [
     icon: FileText,
     iconColor: 'text-brand-primary',
     metadata: {
-      documentName: 'Senior_Developer_Resume.pdf'
+      documentName: 'Senior_Developer_Resume.pdf',
     },
-    priority: 'medium'
+    priority: 'medium',
   },
   {
     id: '3',
@@ -83,9 +92,9 @@ const mockActivityItems: ActivityItem[] = [
     iconColor: 'text-brand-secondary',
     metadata: {
       jobTitle: 'Senior Frontend Developer',
-      companyName: 'TechCorp'
+      companyName: 'TechCorp',
     },
-    priority: 'low'
+    priority: 'low',
   },
   {
     id: '4',
@@ -97,9 +106,9 @@ const mockActivityItems: ActivityItem[] = [
     iconColor: 'text-brand-primary',
     metadata: {
       jobTitle: 'Full Stack Engineer',
-      companyName: 'StartupXYZ'
+      companyName: 'StartupXYZ',
     },
-    priority: 'high'
+    priority: 'high',
   },
   {
     id: '5',
@@ -110,9 +119,9 @@ const mockActivityItems: ActivityItem[] = [
     icon: Download,
     iconColor: 'text-brand-secondary',
     metadata: {
-      fileName: 'Resume_v3.pdf'
+      fileName: 'Resume_v3.pdf',
     },
-    priority: 'medium'
+    priority: 'medium',
   },
   {
     id: '6',
@@ -125,9 +134,9 @@ const mockActivityItems: ActivityItem[] = [
     metadata: {
       jobTitle: 'UI/UX Developer',
       companyName: 'DesignCo',
-      interviewDate: '2024-01-29T10:00:00Z'
+      interviewDate: '2024-01-29T10:00:00Z',
     },
-    priority: 'high'
+    priority: 'high',
   },
   {
     id: '7',
@@ -137,7 +146,7 @@ const mockActivityItems: ActivityItem[] = [
     timestamp: '2024-01-23T13:15:00Z',
     icon: User,
     iconColor: 'text-brand-primary',
-    priority: 'low'
+    priority: 'low',
   },
   {
     id: '8',
@@ -148,10 +157,10 @@ const mockActivityItems: ActivityItem[] = [
     icon: Edit,
     iconColor: 'text-brand-secondary',
     metadata: {
-      documentName: 'Cover_Letter_Tech.pdf'
+      documentName: 'Cover_Letter_Tech.pdf',
     },
-    priority: 'medium'
-  }
+    priority: 'medium',
+  },
 ];
 
 const ActivityItemComponent: React.FC<{
@@ -165,7 +174,7 @@ const ActivityItemComponent: React.FC<{
     const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
     const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-    
+
     if (diffInMinutes < 1) return 'Just now';
     if (diffInMinutes < 60) return `${diffInMinutes}m ago`;
     if (diffInHours < 24) return `${diffInHours}h ago`;
@@ -176,10 +185,14 @@ const ActivityItemComponent: React.FC<{
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'high': return 'bg-brand-tertiary/10 border-brand-tertiary/20';
-      case 'medium': return 'bg-brand-primary/10 border-brand-primary/20';
-      case 'low': return 'bg-surface-container border-outline-variant';
-      default: return 'bg-surface-container border-outline-variant';
+      case 'high':
+        return 'bg-brand-tertiary/10 border-brand-tertiary/20';
+      case 'medium':
+        return 'bg-brand-primary/10 border-brand-primary/20';
+      case 'low':
+        return 'bg-surface-container border-outline-variant';
+      default:
+        return 'bg-surface-container border-outline-variant';
     }
   };
 
@@ -188,7 +201,8 @@ const ActivityItemComponent: React.FC<{
   const renderMetadata = () => {
     if (!item.metadata) return null;
 
-    const { documentName, jobTitle, companyName, score, oldScore, fileName, interviewDate } = item.metadata;
+    const { documentName, jobTitle, companyName, score, oldScore, fileName, interviewDate } =
+      item.metadata;
 
     return (
       <div className="mt-2 space-y-1 text-xs text-on-surface-variant">
@@ -201,13 +215,17 @@ const ActivityItemComponent: React.FC<{
         {jobTitle && companyName && (
           <div className="flex items-center gap-1">
             <Briefcase className="w-3 h-3" />
-            <span>{jobTitle} at {companyName}</span>
+            <span>
+              {jobTitle} at {companyName}
+            </span>
           </div>
         )}
         {score && oldScore && (
           <div className="flex items-center gap-1">
             <TrendingUp className="w-3 h-3" />
-            <span>Score: {oldScore}% → {score}%</span>
+            <span>
+              Score: {oldScore}% → {score}%
+            </span>
           </div>
         )}
         {fileName && (
@@ -227,16 +245,20 @@ const ActivityItemComponent: React.FC<{
   };
 
   return (
-    <div className={`
+    <div
+      className={`
       flex gap-3 p-3 rounded-lg transition-all duration-200 hover:bg-surface-container-low
       ${item.isUnread ? getPriorityColor(item.priority) : 'border border-transparent'}
       ${isCompact ? 'py-2' : ''}
-    `}>
+    `}
+    >
       {/* Icon */}
-      <div className={`
+      <div
+        className={`
         flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-high shrink-0
         ${isCompact ? 'w-6 h-6' : ''}
-      `}>
+      `}
+      >
         <IconComponent className={`w-4 h-4 ${item.iconColor} ${isCompact ? 'w-3 h-3' : ''}`} />
       </div>
 
@@ -286,36 +308,41 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
   maxItems,
   showHeader = true,
   onViewAll,
-  className = ''
+  className = '',
 }) => {
   const [activities, setActivities] = useState<ActivityItem[]>(mockActivityItems);
   const [filter, setFilter] = useState<'all' | 'documents' | 'applications' | 'profile'>('all');
   const [isLoading, setIsLoading] = useState(false);
 
-  const filteredActivities = activities.filter(activity => {
+  const filteredActivities = activities.filter((activity) => {
     if (filter === 'all') return true;
-    if (filter === 'documents') return ['document_created', 'document_updated', 'resume_downloaded'].includes(activity.type);
-    if (filter === 'applications') return ['job_saved', 'application_submitted', 'interview_scheduled', 'ats_score_updated'].includes(activity.type);
+    if (filter === 'documents')
+      return ['document_created', 'document_updated', 'resume_downloaded'].includes(activity.type);
+    if (filter === 'applications')
+      return [
+        'job_saved',
+        'application_submitted',
+        'interview_scheduled',
+        'ats_score_updated',
+      ].includes(activity.type);
     if (filter === 'profile') return ['profile_updated', 'system_update'].includes(activity.type);
     return true;
   });
 
-  const displayedActivities = maxItems 
-    ? filteredActivities.slice(0, maxItems)
-    : filteredActivities;
+  const displayedActivities = maxItems ? filteredActivities.slice(0, maxItems) : filteredActivities;
 
   const handleRefresh = async () => {
     setIsLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsLoading(false);
   };
 
   const markAllAsRead = () => {
-    setActivities(prev => prev.map(item => ({ ...item, isUnread: false })));
+    setActivities((prev) => prev.map((item) => ({ ...item, isUnread: false })));
   };
 
-  const unreadCount = activities.filter(item => item.isUnread).length;
+  const unreadCount = activities.filter((item) => item.isUnread).length;
 
   if (isCompact) {
     return (
@@ -326,18 +353,14 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
             <p className="text-sm text-on-surface-variant">No recent activity</p>
           </div>
         ) : (
-          displayedActivities.map(activity => (
-            <ActivityItemComponent 
-              key={activity.id} 
-              item={activity} 
-              isCompact={true}
-            />
+          displayedActivities.map((activity) => (
+            <ActivityItemComponent key={activity.id} item={activity} isCompact={true} />
           ))
         )}
         {onViewAll && (
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={onViewAll}
             className="w-full justify-center mt-3 text-brand-primary hover:text-brand-primary hover:bg-brand-primary/10"
           >
@@ -353,30 +376,18 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
       {showHeader && (
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-medium text-on-surface mb-1">
-              Recent Activity
-            </h2>
+            <h2 className="text-xl font-medium text-on-surface mb-1">Recent Activity</h2>
             <p className="text-sm text-on-surface-variant">
               Track your career progress and document updates
             </p>
           </div>
           <div className="flex items-center gap-2">
             {unreadCount > 0 && (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={markAllAsRead}
-                className="text-xs"
-              >
+              <Button variant="outline" size="sm" onClick={markAllAsRead} className="text-xs">
                 Mark all read ({unreadCount})
               </Button>
             )}
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={handleRefresh}
-              disabled={isLoading}
-            >
+            <Button variant="ghost" size="sm" onClick={handleRefresh} disabled={isLoading}>
               <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
             </Button>
           </div>
@@ -387,16 +398,38 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
       <div className="flex gap-1 mb-6">
         {[
           { key: 'all', label: 'All Activity', count: activities.length },
-          { key: 'documents', label: 'Documents', count: activities.filter(a => ['document_created', 'document_updated', 'resume_downloaded'].includes(a.type)).length },
-          { key: 'applications', label: 'Applications', count: activities.filter(a => ['job_saved', 'application_submitted', 'interview_scheduled', 'ats_score_updated'].includes(a.type)).length },
-          { key: 'profile', label: 'Profile', count: activities.filter(a => ['profile_updated', 'system_update'].includes(a.type)).length }
+          {
+            key: 'documents',
+            label: 'Documents',
+            count: activities.filter((a) =>
+              ['document_created', 'document_updated', 'resume_downloaded'].includes(a.type)
+            ).length,
+          },
+          {
+            key: 'applications',
+            label: 'Applications',
+            count: activities.filter((a) =>
+              [
+                'job_saved',
+                'application_submitted',
+                'interview_scheduled',
+                'ats_score_updated',
+              ].includes(a.type)
+            ).length,
+          },
+          {
+            key: 'profile',
+            label: 'Profile',
+            count: activities.filter((a) => ['profile_updated', 'system_update'].includes(a.type))
+              .length,
+          },
         ].map(({ key, label, count }) => (
           <Button
             key={key}
-            variant={filter === key ? "default" : "ghost"}
+            variant={filter === key ? 'default' : 'ghost'}
             size="sm"
             onClick={() => setFilter(key as any)}
-            className={`${filter === key ? "btn-gradient" : ""} transition-all duration-200`}
+            className={`${filter === key ? 'btn-gradient' : ''} transition-all duration-200`}
           >
             {label}
             {count > 0 && (
@@ -416,17 +449,14 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
               <Clock className="w-16 h-16 text-on-surface-variant/40 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-on-surface mb-2">No Activity Found</h3>
               <p className="text-on-surface-variant">
-                {filter === 'all' 
-                  ? "No recent activity to display." 
+                {filter === 'all'
+                  ? 'No recent activity to display.'
                   : `No ${filter} activity found.`}
               </p>
             </div>
           ) : (
             displayedActivities.map((activity, index) => (
-              <ActivityItemComponent 
-                key={activity.id} 
-                item={activity}
-              />
+              <ActivityItemComponent key={activity.id} item={activity} />
             ))
           )}
         </div>
@@ -435,11 +465,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
       {/* Load More */}
       {maxItems && filteredActivities.length > maxItems && (
         <div className="text-center mt-4">
-          <Button 
-            variant="outline" 
-            onClick={onViewAll}
-            className="btn-gradient"
-          >
+          <Button variant="outline" onClick={onViewAll} className="btn-gradient">
             View All {filteredActivities.length} Activities
           </Button>
         </div>

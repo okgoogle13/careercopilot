@@ -13,18 +13,21 @@ interface M3ChipProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const M3Chip = React.forwardRef<HTMLButtonElement, M3ChipProps>(
-  ({
-    className,
-    variant = 'assist',
-    selected = false,
-    icon,
-    trailingIcon,
-    removable = false,
-    onRemove,
-    asChild = false,
-    children,
-    ...props
-  }, ref) => {
+  (
+    {
+      className,
+      variant = 'assist',
+      selected = false,
+      icon,
+      trailingIcon,
+      removable = false,
+      onRemove,
+      asChild = false,
+      children,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : 'button';
 
     const handleRemove = (e: React.MouseEvent) => {
@@ -45,37 +48,40 @@ const M3Chip = React.forwardRef<HTMLButtonElement, M3ChipProps>(
           'focus:outline-none focus:ring-2 focus:ring-offset-0',
           'disabled:opacity-60 disabled:cursor-not-allowed',
           'disabled:pointer-events-none',
-          
+
           // Assist Chip (Default state)
-          variant === 'assist' && !selected && [
-            'bg-transparent',
-            'text-[var(--md-sys-color-on-surface)]',
-            'border border-[var(--md-sys-color-outline)]',
-            'hover:bg-[var(--md-sys-color-on-surface)]',
-            'hover:bg-opacity-8',
-            'focus:ring-[var(--md-sys-color-on-surface)]',
-            'focus:ring-opacity-20'
-          ],
-          
+          variant === 'assist' &&
+            !selected && [
+              'bg-transparent',
+              'text-[var(--md-sys-color-on-surface)]',
+              'border border-[var(--md-sys-color-outline)]',
+              'hover:bg-[var(--md-sys-color-on-surface)]',
+              'hover:bg-opacity-8',
+              'focus:ring-[var(--md-sys-color-on-surface)]',
+              'focus:ring-opacity-20',
+            ],
+
           // Filter Chip
-          variant === 'filter' && !selected && [
-            'bg-transparent',
-            'text-[var(--md-sys-color-on-surface-variant)]',
-            'border border-[var(--md-sys-color-outline)]',
-            'hover:bg-[var(--md-sys-color-on-surface-variant)]',
-            'hover:bg-opacity-8',
-            'focus:ring-[var(--md-sys-color-on-surface-variant)]',
-            'focus:ring-opacity-20'
-          ],
-          
-          variant === 'filter' && selected && [
-            'bg-[var(--md-sys-color-secondary-container)]',
-            'text-[var(--md-sys-color-on-secondary-container)]',
-            'border border-transparent',
-            'focus:ring-[var(--md-sys-color-secondary)]',
-            'focus:ring-opacity-20'
-          ],
-          
+          variant === 'filter' &&
+            !selected && [
+              'bg-transparent',
+              'text-[var(--md-sys-color-on-surface-variant)]',
+              'border border-[var(--md-sys-color-outline)]',
+              'hover:bg-[var(--md-sys-color-on-surface-variant)]',
+              'hover:bg-opacity-8',
+              'focus:ring-[var(--md-sys-color-on-surface-variant)]',
+              'focus:ring-opacity-20',
+            ],
+
+          variant === 'filter' &&
+            selected && [
+              'bg-[var(--md-sys-color-secondary-container)]',
+              'text-[var(--md-sys-color-on-secondary-container)]',
+              'border border-transparent',
+              'focus:ring-[var(--md-sys-color-secondary)]',
+              'focus:ring-opacity-20',
+            ],
+
           // Input Chip
           variant === 'input' && [
             'bg-transparent',
@@ -84,9 +90,9 @@ const M3Chip = React.forwardRef<HTMLButtonElement, M3ChipProps>(
             'hover:bg-[var(--md-sys-color-on-surface-variant)]',
             'hover:bg-opacity-8',
             'focus:ring-[var(--md-sys-color-on-surface-variant)]',
-            'focus:ring-opacity-20'
+            'focus:ring-opacity-20',
           ],
-          
+
           // Suggestion Chip
           variant === 'suggestion' && [
             'bg-transparent',
@@ -95,23 +101,17 @@ const M3Chip = React.forwardRef<HTMLButtonElement, M3ChipProps>(
             'hover:bg-[var(--md-sys-color-on-surface-variant)]',
             'hover:bg-opacity-8',
             'focus:ring-[var(--md-sys-color-on-surface-variant)]',
-            'focus:ring-opacity-20'
+            'focus:ring-opacity-20',
           ],
-          
+
           className
         )}
         {...props}
       >
-        {icon && (
-          <span className="flex items-center justify-center w-4 h-4">
-            {icon}
-          </span>
-        )}
-        
-        <span className="text-sm font-medium">
-          {children}
-        </span>
-        
+        {icon && <span className="flex items-center justify-center w-4 h-4">{icon}</span>}
+
+        <span className="text-sm font-medium">{children}</span>
+
         {removable && (
           <button
             type="button"
@@ -135,11 +135,9 @@ const M3Chip = React.forwardRef<HTMLButtonElement, M3ChipProps>(
             </svg>
           </button>
         )}
-        
+
         {trailingIcon && !removable && (
-          <span className="flex items-center justify-center w-4 h-4">
-            {trailingIcon}
-          </span>
+          <span className="flex items-center justify-center w-4 h-4">{trailingIcon}</span>
         )}
       </Comp>
     );

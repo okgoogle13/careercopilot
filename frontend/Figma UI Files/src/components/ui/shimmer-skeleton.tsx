@@ -73,7 +73,7 @@ ShimmerSkeleton.displayName = 'ShimmerSkeleton';
 export const SkeletonCard = forwardRef<HTMLDivElement, { className?: string }>(
   ({ className = '' }, ref) => {
     return (
-      <div 
+      <div
         ref={ref}
         className={`
           p-6 rounded-[var(--radius-lg)]
@@ -103,7 +103,7 @@ SkeletonCard.displayName = 'SkeletonCard';
 export const SkeletonListItem = forwardRef<HTMLDivElement, { className?: string }>(
   ({ className = '' }, ref) => {
     return (
-      <div 
+      <div
         ref={ref}
         className={`
           p-4 rounded-[var(--radius-lg)]

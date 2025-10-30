@@ -7,13 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../ui/dialog';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 import { Stepper } from '../ui/stepper';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
@@ -22,15 +16,7 @@ import { Checkbox } from '../ui/checkbox';
 import { Card } from '../ui/card';
 import { DatePicker } from '../ui/date-picker';
 import { Badge } from '../ui/badge';
-import {
-  Link2,
-  Zap,
-  CheckCircle2,
-  FileText,
-  Calendar,
-  Flag,
-  AlertCircle,
-} from 'lucide-react';
+import { Link2, Zap, CheckCircle2, FileText, Calendar, Flag, AlertCircle } from 'lucide-react';
 
 export interface AddApplicationModalProps {
   open: boolean;
@@ -152,9 +138,7 @@ export function AddApplicationModal({
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Add New Application</DialogTitle>
-          <DialogDescription>
-            Follow the steps to track a new job application
-          </DialogDescription>
+          <DialogDescription>Follow the steps to track a new job application</DialogDescription>
         </DialogHeader>
 
         {/* Stepper */}
@@ -170,9 +154,7 @@ export function AddApplicationModal({
               <div className="flex items-start gap-3 mb-3">
                 <Link2 className="w-5 h-5 text-primary mt-1 shrink-0" />
                 <div className="flex-1">
-                  <h3 className="font-semibold text-sm mb-3">
-                    Job Posting URL (Optional)
-                  </h3>
+                  <h3 className="font-semibold text-sm mb-3">Job Posting URL (Optional)</h3>
                   <div className="flex gap-2">
                     <Input
                       placeholder="Paste job posting URL..."
@@ -214,9 +196,7 @@ export function AddApplicationModal({
               </h3>
 
               <div>
-                <label className="text-sm font-medium block mb-2">
-                  Job Title *
-                </label>
+                <label className="text-sm font-medium block mb-2">Job Title *</label>
                 <Input
                   placeholder="e.g., Senior Frontend Developer"
                   value={jobTitle}
@@ -226,9 +206,7 @@ export function AddApplicationModal({
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="text-sm font-medium block mb-2">
-                    Company *
-                  </label>
+                  <label className="text-sm font-medium block mb-2">Company *</label>
                   <Input
                     placeholder="e.g., TechCorp"
                     value={company}
@@ -236,9 +214,7 @@ export function AddApplicationModal({
                   />
                 </div>
                 <div>
-                  <label className="text-sm font-medium block mb-2">
-                    Location *
-                  </label>
+                  <label className="text-sm font-medium block mb-2">Location *</label>
                   <Input
                     placeholder="e.g., San Francisco, CA"
                     value={location}
@@ -248,9 +224,7 @@ export function AddApplicationModal({
               </div>
 
               <div>
-                <label className="text-sm font-medium block mb-2">
-                  Salary Range (Optional)
-                </label>
+                <label className="text-sm font-medium block mb-2">Salary Range (Optional)</label>
                 <Input
                   placeholder="e.g., $120k - $150k"
                   value={salary}
@@ -259,9 +233,7 @@ export function AddApplicationModal({
               </div>
 
               <div>
-                <label className="text-sm font-medium block mb-2">
-                  Job Description
-                </label>
+                <label className="text-sm font-medium block mb-2">Job Description</label>
                 <Textarea
                   placeholder="Paste the job description here..."
                   value={jobDescription}
@@ -323,12 +295,10 @@ export function AddApplicationModal({
               <div className="flex items-start gap-3">
                 <Zap className="w-5 h-5 text-primary mt-1 shrink-0" />
                 <div className="flex-1">
-                  <h4 className="font-semibold text-sm mb-1">
-                    Generate Tailored Documents
-                  </h4>
+                  <h4 className="font-semibold text-sm mb-1">Generate Tailored Documents</h4>
                   <p className="text-sm text-muted-foreground">
-                    After creating the application, you can generate tailored
-                    resume and cover letter for this position.
+                    After creating the application, you can generate tailored resume and cover
+                    letter for this position.
                   </p>
                 </div>
               </div>
@@ -357,9 +327,7 @@ export function AddApplicationModal({
               </div>
 
               <div>
-                <label className="text-sm font-medium block mb-2">
-                  Priority Level
-                </label>
+                <label className="text-sm font-medium block mb-2">Priority Level</label>
                 <Select value={priority} onValueChange={(val: any) => setPriority(val)}>
                   <SelectTrigger>
                     <SelectValue />
@@ -388,9 +356,7 @@ export function AddApplicationModal({
               </div>
 
               <div>
-                <label className="text-sm font-medium block mb-2">
-                  Notes (Optional)
-                </label>
+                <label className="text-sm font-medium block mb-2">Notes (Optional)</label>
                 <Textarea
                   placeholder="Add any notes about this application..."
                   value={notes}
@@ -460,11 +426,7 @@ export function AddApplicationModal({
           {currentStep < steps.length - 1 ? (
             <Button
               onClick={() => setCurrentStep(currentStep + 1)}
-              disabled={
-                currentStep === 0
-                  ? !canProceedToStep2
-                  : !canProceedToStep3
-              }
+              disabled={currentStep === 0 ? !canProceedToStep2 : !canProceedToStep3}
             >
               Continue
             </Button>

@@ -140,7 +140,7 @@ export const semanticHTML = {
    */
   getHeadingLevel: (depth: number): 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' => {
     const level = Math.min(Math.max(depth, 1), 6) as 1 | 2 | 3 | 4 | 5 | 6;
-    return (`h${level}` as any);
+    return `h${level}` as any;
   },
 
   /**
@@ -155,7 +155,10 @@ export const semanticHTML = {
 /**
  * Screen reader announcements
  */
-export const announceToScreenReader = (message: string, priority: 'polite' | 'assertive' = 'polite') => {
+export const announceToScreenReader = (
+  message: string,
+  priority: 'polite' | 'assertive' = 'polite'
+) => {
   const announcement = document.createElement('div');
   announcement.setAttribute('role', 'status');
   announcement.setAttribute('aria-live', priority);
@@ -197,6 +200,10 @@ export const getContrastRatio = (rgb1: string, rgb2: string): number => {
 /**
  * Accessible color palette validator
  */
-export const validateColorContrast = (foreground: string, background: string, minRatio = 4.5): boolean => {
+export const validateColorContrast = (
+  foreground: string,
+  background: string,
+  minRatio = 4.5
+): boolean => {
   return getContrastRatio(foreground, background) >= minRatio;
 };

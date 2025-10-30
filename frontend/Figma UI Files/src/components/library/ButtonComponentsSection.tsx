@@ -1,12 +1,12 @@
-import React from "react";
-import { Button } from "../ui/button";
-import { ComponentSection, ComponentDemo } from "./ComponentDemo";
-import { Settings, Loader2, Download } from "lucide-react";
+import React from 'react';
+import { Button } from '../ui/button';
+import { ComponentSection, ComponentDemo } from './ComponentDemo';
+import { Settings, Loader2, Download } from 'lucide-react';
 
 export function ButtonComponentsSection() {
   return (
-    <ComponentSection 
-      title="Button Components" 
+    <ComponentSection
+      title="Button Components"
       description="Various button styles and states for different actions and contexts"
     >
       <ComponentDemo title="Button Variants">
@@ -25,7 +25,9 @@ export function ButtonComponentsSection() {
           <Button size="sm">Small</Button>
           <Button size="default">Default</Button>
           <Button size="lg">Large</Button>
-          <Button size="icon"><Settings className="w-4 h-4" /></Button>
+          <Button size="icon">
+            <Settings className="w-4 h-4" />
+          </Button>
         </div>
       </ComponentDemo>
 

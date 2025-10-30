@@ -1,22 +1,28 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Badge } from "./ui/badge";
-import { Card } from "./ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
-import { Logo } from "./Logo";
-import { 
-  Search, 
-  Bell, 
-  Settings, 
-  User, 
-  LogOut, 
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Badge } from './ui/badge';
+import { Card } from './ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from './ui/dropdown-menu';
+import { Logo } from './Logo';
+import {
+  Search,
+  Bell,
+  Settings,
+  User,
+  LogOut,
   HelpCircle,
   Command,
   Sparkles,
-  Menu
-} from "lucide-react";
+  Menu,
+} from 'lucide-react';
 
 interface NavbarProps {
   onMenuToggle?: () => void;
@@ -35,9 +41,9 @@ export function Navbar({
   onSettingsClick,
   notificationCount = 0,
   showMobileMenu = true,
-  className = ""
+  className = '',
 }: NavbarProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -48,14 +54,16 @@ export function Navbar({
   };
 
   return (
-    <nav className={`
+    <nav
+      className={`
       w-full h-16 
       bg-surface-card border-b border-subtle
       glass
       flex items-center justify-between px-4 lg:px-6
       transition-normal
       ${className}
-    `}>
+    `}
+    >
       {/* Left Section - Logo and Mobile Menu */}
       <div className="flex items-center gap-4">
         {showMobileMenu && (
@@ -69,16 +77,12 @@ export function Navbar({
             <Menu className="h-4 w-4" />
           </Button>
         )}
-        
+
         <div className="flex items-center gap-3">
           <Logo size="sm" className="hover:scale-105 transition-normal" />
           <div className="hidden sm:block">
-            <h1 className="text-lg font-semibold text-content-primary">
-              FML Career Copilot
-            </h1>
-            <p className="text-xs text-content-muted leading-tight">
-              AI-Powered Career Growth
-            </p>
+            <h1 className="text-lg font-semibold text-content-primary">FML Career Copilot</h1>
+            <p className="text-xs text-content-muted leading-tight">AI-Powered Career Growth</p>
           </div>
         </div>
       </div>
@@ -100,11 +104,13 @@ export function Navbar({
             "
           />
           <div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-            <kbd className="
+            <kbd
+              className="
               hidden sm:inline-flex h-5 select-none items-center gap-1 
               rounded border border-border bg-muted px-1.5 
               font-mono text-[10px] font-medium text-muted-foreground
-            ">
+            "
+            >
               <Command className="h-3 w-3" />K
             </kbd>
           </div>
@@ -125,8 +131,8 @@ export function Navbar({
         </Button>
 
         {/* AI Assistant Badge */}
-        <Badge 
-          variant="secondary" 
+        <Badge
+          variant="secondary"
           className="
             hidden lg:flex items-center gap-1 px-2 py-1
             bg-brand-purple/10 text-brand-purple border-brand-purple/20
@@ -146,8 +152,8 @@ export function Navbar({
         >
           <Bell className="h-4 w-4" />
           {notificationCount > 0 && (
-            <Badge 
-              variant="destructive" 
+            <Badge
+              variant="destructive"
               className="
                 absolute -top-1 -right-1 h-4 w-4 p-0 
                 flex items-center justify-center text-xs
@@ -172,8 +178,8 @@ export function Navbar({
         {/* Profile Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               className="
                 h-9 w-9 p-0 rounded-full 
                 hover:bg-muted focus-glow
@@ -190,8 +196,8 @@ export function Navbar({
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent 
-            align="end" 
+          <DropdownMenuContent
+            align="end"
             className="
               w-56 glass border-border
               shadow-lg animate-in slide-in-from-top-2
@@ -210,14 +216,14 @@ export function Navbar({
               </div>
             </div>
             <DropdownMenuSeparator />
-            <DropdownMenuItem 
+            <DropdownMenuItem
               onClick={onProfileClick}
               className="hover:bg-muted cursor-pointer focus:bg-muted"
             >
               <User className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </DropdownMenuItem>
-            <DropdownMenuItem 
+            <DropdownMenuItem
               onClick={onSettingsClick}
               className="hover:bg-muted cursor-pointer focus:bg-muted"
             >
@@ -239,12 +245,14 @@ export function Navbar({
 
       {/* Mobile Search Overlay */}
       {showSearch && (
-        <div className="
+        <div
+          className="
           absolute top-full left-0 right-0 z-50 
           bg-surface-card border-b border-border
           p-4 md:hidden
           glass
-        ">
+        "
+        >
           <form onSubmit={handleSearchSubmit}>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />

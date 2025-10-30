@@ -21,37 +21,37 @@ interface WelcomeBannerProps {
 }
 
 export function WelcomeBanner({
-  userName = "User",
+  userName = 'User',
   profileData,
   onCreateDocument,
   onViewAnalytics,
   onStartTour,
-  className
+  className,
 }: WelcomeBannerProps) {
   const getGreeting = () => {
     const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 17) return "Good afternoon";
-    return "Good evening";
+    if (hour < 12) return 'Good morning';
+    if (hour < 17) return 'Good afternoon';
+    return 'Good evening';
   };
 
   const getMotivationalMessage = () => {
-    if (!profileData) return "Ready to accelerate your career journey?";
-    
+    if (!profileData) return 'Ready to accelerate your career journey?';
+
     const { activeApplications, interviewsScheduled } = profileData;
-    
+
     if (interviewsScheduled > 0) {
       return `You have ${interviewsScheduled} interview${interviewsScheduled > 1 ? 's' : ''} coming up. You've got this! 🚀`;
     }
-    
+
     if (activeApplications > 5) {
       return "You're actively pursuing multiple opportunities. Keep the momentum going! 💪";
     }
-    
+
     if (activeApplications > 0) {
       return "Great progress on your job search. Let's optimize your approach! ⭐";
     }
-    
+
     return "Ready to kickstart your career journey? Let's build something amazing! ✨";
   };
 
@@ -76,14 +76,14 @@ export function WelcomeBanner({
                     {getGreeting()}, {userName}!
                   </span>
                 </div>
-                
+
                 <h1 className="text-2xl md:text-3xl font-semibold mb-3 text-white">
                   {getMotivationalMessage()}
                 </h1>
-                
+
                 <p className="text-white/80 text-base max-w-2xl">
-                  Your AI-powered career companion is here to help you land your dream job. 
-                  Let's review your progress and plan your next moves.
+                  Your AI-powered career companion is here to help you land your dream job. Let's
+                  review your progress and plan your next moves.
                 </p>
 
                 {/* Quick Stats */}
@@ -177,7 +177,10 @@ export function WelcomeBanner({
               <div className="space-y-2">
                 {profileData?.recentAchievements ? (
                   profileData.recentAchievements.map((achievement, index) => (
-                    <div key={index} className="text-sm text-muted-foreground flex items-center gap-2">
+                    <div
+                      key={index}
+                      className="text-sm text-muted-foreground flex items-center gap-2"
+                    >
                       <div className="w-2 h-2 bg-tertiary rounded-full" />
                       {achievement}
                     </div>
@@ -201,26 +204,13 @@ export function WelcomeBanner({
           {/* Quick Actions */}
           <div className="mt-6 pt-6 border-t border-outline-variant">
             <div className="flex flex-wrap gap-3">
-              <M3Button
-                variant="text"
-                size="small"
-                onClick={onStartTour}
-                className="text-primary"
-              >
+              <M3Button variant="text" size="small" onClick={onStartTour} className="text-primary">
                 Take a tour
               </M3Button>
-              <M3Button
-                variant="text"
-                size="small"
-                className="text-muted-foreground"
-              >
+              <M3Button variant="text" size="small" className="text-muted-foreground">
                 View tips
               </M3Button>
-              <M3Button
-                variant="text"
-                size="small"
-                className="text-muted-foreground"
-              >
+              <M3Button variant="text" size="small" className="text-muted-foreground">
                 Settings
               </M3Button>
             </div>

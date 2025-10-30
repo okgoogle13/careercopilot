@@ -138,10 +138,7 @@ export const calendarService = {
   /**
    * Get upcoming events
    */
-  async getUpcomingEvents(
-    userId: string,
-    daysAhead: number = 30
-  ): Promise<CalendarEvent[]> {
+  async getUpcomingEvents(userId: string, daysAhead: number = 30): Promise<CalendarEvent[]> {
     try {
       const response = await apiClient.get('/upcoming', {
         params: { userId, daysAhead },

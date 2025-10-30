@@ -28,7 +28,6 @@ Command:
 
 gh pr review 82 --approve -b "Automated approval: ESLint 9 upgrade validated locally. Fixes critical yarn install loop."
 
-
 Merge the PR:
 
 Use the gh CLI to merge PR #82 into develop.
@@ -38,7 +37,6 @@ Use a merge commit (--merge) to preserve history.
 Command:
 
 gh pr merge 82 --merge --body "Automated merge: ESLint 9 upgrade merged to stabilize develop branch."
-
 
 Update Local develop Branch:
 

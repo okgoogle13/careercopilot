@@ -69,10 +69,7 @@ export const analysisService = {
   /**
    * Get ATS score for a document against a job description
    */
-  async getATSScore(
-    documentId: string,
-    jobDescription: string
-  ): Promise<ATSScoreResponse> {
+  async getATSScore(documentId: string, jobDescription: string): Promise<ATSScoreResponse> {
     try {
       const response = await apiClient.post('/ats-score', {
         documentId,

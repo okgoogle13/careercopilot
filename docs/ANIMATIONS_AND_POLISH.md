@@ -13,11 +13,11 @@ Animations and micro-interactions enhance user experience by providing visual fe
 
 ## Timing Guidelines
 
-| Duration | Usage |
-|----------|-------|
-| 100-150ms | Micro-interactions (button click, focus change) |
-| 300ms | Standard transitions (fade in/out, slide in/out) |
-| 500ms | Page transitions, large layout changes |
+| Duration  | Usage                                            |
+| --------- | ------------------------------------------------ |
+| 100-150ms | Micro-interactions (button click, focus change)  |
+| 300ms     | Standard transitions (fade in/out, slide in/out) |
+| 500ms     | Page transitions, large layout changes           |
 
 ## Animation Types
 
@@ -26,6 +26,7 @@ Animations and micro-interactions enhance user experience by providing visual fe
 **Purpose**: Smoothly introduce/remove content
 
 **Implementation**:
+
 ```typescript
 import { animatedSx, animations } from '@/utils/animations';
 
@@ -35,6 +36,7 @@ import { animatedSx, animations } from '@/utils/animations';
 ```
 
 **Use Cases**:
+
 - Page/modal entrance
 - Loading to loaded state
 - Revealing additional content
@@ -44,6 +46,7 @@ import { animatedSx, animations } from '@/utils/animations';
 **Purpose**: Directional entrance from off-screen
 
 **Implementation**:
+
 ```typescript
 <Box sx={animatedSx.slideInUp}>
   Slides in from bottom
@@ -55,6 +58,7 @@ import { animatedSx, animations } from '@/utils/animations';
 ```
 
 **Use Cases**:
+
 - Toast notifications
 - Drawer opening
 - List items appearing
@@ -64,6 +68,7 @@ import { animatedSx, animations } from '@/utils/animations';
 **Purpose**: Zoom entrance/exit effect
 
 **Implementation**:
+
 ```typescript
 <Box sx={animatedSx.scaleIn}>
   Dialog opening
@@ -71,6 +76,7 @@ import { animatedSx, animations } from '@/utils/animations';
 ```
 
 **Use Cases**:
+
 - Modal/dialog opening
 - Expanding content areas
 - Item selection
@@ -80,6 +86,7 @@ import { animatedSx, animations } from '@/utils/animations';
 **Purpose**: Show content is loading
 
 **Implementation**:
+
 ```typescript
 import { SkeletonLoader } from '@/components/SkeletonLoader';
 
@@ -101,11 +108,14 @@ import { hoverEffects } from '@/utils/animations';
 ```
 
 **CSS**:
+
 ```css
-transition: transform 0.3s ease, box-shadow 0.3s ease;
+transition:
+  transform 0.3s ease,
+  box-shadow 0.3s ease;
 &:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 ```
 
@@ -122,6 +132,7 @@ Interactive button feedback:
 ```
 
 **Effect**:
+
 - Slight upward movement
 - Enhanced shadow
 - Smooth transition
@@ -264,6 +275,7 @@ Clear focus indication:
 ```
 
 **Effect**:
+
 - Border color changes
 - Box shadow appears
 - Smooth transition

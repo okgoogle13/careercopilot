@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
-import { 
-  Bookmark, 
-  BookmarkCheck, 
-  MapPin, 
-  Building, 
-  Clock, 
-  DollarSign, 
-  Users, 
+import {
+  Bookmark,
+  BookmarkCheck,
+  MapPin,
+  Building,
+  Clock,
+  DollarSign,
+  Users,
   Zap,
   ExternalLink,
   Star,
   TrendingUp,
-  Shield
+  Shield,
 } from 'lucide-react';
-import { M3Card, M3CardHeader, M3CardTitle, M3CardDescription, M3CardContent, M3CardFooter } from '../ui/m3-card';
+import {
+  M3Card,
+  M3CardHeader,
+  M3CardTitle,
+  M3CardDescription,
+  M3CardContent,
+  M3CardFooter,
+} from '../ui/m3-card';
 import { M3Button } from '../ui/m3-button';
 import { Badge } from '../ui/badge';
 import { cn, formatRelativeTime } from '../ui/utils';
@@ -66,7 +73,7 @@ export function JobCard({
   onSave,
   onApply,
   onViewDetails,
-  className
+  className,
 }: JobCardProps) {
   const [isSaved, setIsSaved] = useState(saved);
   const [isHovered, setIsHovered] = useState(false);
@@ -90,7 +97,7 @@ export function JobCard({
     if (!job.salary) return null;
     const { min, max, currency, period } = job.salary;
     const periodText = period === 'hourly' ? '/hr' : '/year';
-    
+
     if (min === max) {
       return `${currency}${min.toLocaleString()}${periodText}`;
     }
@@ -133,9 +140,7 @@ export function JobCard({
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 <h3 className="font-medium text-foreground truncate">{job.title}</h3>
-                {job.verified && (
-                  <Shield className="w-4 h-4 text-blue-500" />
-                )}
+                {job.verified && <Shield className="w-4 h-4 text-blue-500" />}
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Building className="w-3 h-3" />
@@ -145,13 +150,15 @@ export function JobCard({
                 <span className="truncate">{job.location}</span>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-2 ml-4">
               {job.aiMatch && (
-                <div className={cn(
-                  'text-xs font-medium px-2 py-1 rounded-full',
-                  getMatchScoreColor(job.aiMatch.score)
-                )}>
+                <div
+                  className={cn(
+                    'text-xs font-medium px-2 py-1 rounded-full',
+                    getMatchScoreColor(job.aiMatch.score)
+                  )}
+                >
                   {job.aiMatch.score}% match
                 </div>
               )}
@@ -159,7 +166,9 @@ export function JobCard({
                 variant="text"
                 size="small"
                 onClick={handleSave}
-                icon={isSaved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+                icon={
+                  isSaved ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />
+                }
                 className={cn(
                   'p-2',
                   isSaved ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
@@ -198,9 +207,7 @@ export function JobCard({
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium text-muted-foreground">{job.company}</span>
-                {job.verified && (
-                  <Shield className="w-4 h-4 text-blue-500" />
-                )}
+                {job.verified && <Shield className="w-4 h-4 text-blue-500" />}
                 {job.sponsored && (
                   <Badge variant="secondary" className="text-xs bg-tertiary/10 text-tertiary">
                     Sponsored
@@ -217,21 +224,25 @@ export function JobCard({
           <div className="flex items-center gap-2">
             {job.aiMatch && (
               <div className="text-center">
-                <div className={cn(
-                  'text-lg font-semibold px-3 py-1 rounded-lg',
-                  getMatchScoreColor(job.aiMatch.score)
-                )}>
+                <div
+                  className={cn(
+                    'text-lg font-semibold px-3 py-1 rounded-lg',
+                    getMatchScoreColor(job.aiMatch.score)
+                  )}
+                >
                   {job.aiMatch.score}%
                 </div>
                 <div className="text-xs text-muted-foreground">AI Match</div>
               </div>
             )}
-            
+
             <M3Button
               variant="text"
               size="small"
               onClick={handleSave}
-              icon={isSaved ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />}
+              icon={
+                isSaved ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />
+              }
               className={cn(
                 'p-2',
                 isSaved ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
@@ -240,23 +251,21 @@ export function JobCard({
           </div>
         </div>
 
-        <M3CardTitle className="text-xl mb-2">
-          {job.title}
-        </M3CardTitle>
+        <M3CardTitle className="text-xl mb-2">{job.title}</M3CardTitle>
 
         <div className="flex flex-wrap items-center gap-4 mb-3 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
             <MapPin className="w-4 h-4" />
             <span>{job.location}</span>
           </div>
-          
+
           {job.salary && (
             <div className="flex items-center gap-1">
               <DollarSign className="w-4 h-4" />
               <span>{formatSalary()}</span>
             </div>
           )}
-          
+
           <div className="flex items-center gap-1">
             <Clock className="w-4 h-4" />
             <span>{formatRelativeTime(job.postedDate)}</span>
@@ -351,7 +360,7 @@ export function JobCard({
             Apply Now
           </M3Button>
         )}
-        
+
         <M3Button
           variant="outlined"
           size="medium"

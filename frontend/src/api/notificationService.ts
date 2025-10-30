@@ -10,12 +10,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/
 export interface Notification {
   id: string;
   userId: string;
-  type:
-    | 'application'
-    | 'deadline'
-    | 'opportunity'
-    | 'system'
-    | 'achievement';
+  type: 'application' | 'deadline' | 'opportunity' | 'system' | 'achievement';
   title: string;
   message: string;
   data?: Record<string, any>;

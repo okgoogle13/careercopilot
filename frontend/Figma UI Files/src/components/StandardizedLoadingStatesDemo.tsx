@@ -1,28 +1,32 @@
-import { useState, useEffect } from "react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { 
-  SpinnerLoading, 
-  ProgressLoading, 
-  StateLoading, 
-  EmptyState, 
-  SkeletonCard, 
-  SkeletonList 
-} from "./StandardizedLoadingStates";
-import { FileText, Sparkles } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import {
+  SpinnerLoading,
+  ProgressLoading,
+  StateLoading,
+  EmptyState,
+  SkeletonCard,
+  SkeletonList,
+} from './StandardizedLoadingStates';
+import { FileText, Sparkles } from 'lucide-react';
 
 interface StandardizedLoadingStatesDemoProps {
   onBack?: () => void;
 }
 
-export default function StandardizedLoadingStatesDemo({ onBack }: StandardizedLoadingStatesDemoProps) {
+export default function StandardizedLoadingStatesDemo({
+  onBack,
+}: StandardizedLoadingStatesDemoProps) {
   const [progress, setProgress] = useState(45);
-  const [currentState, setCurrentState] = useState<"loading" | "success" | "error" | "offline" | "processing" | "uploading" | "downloading">("loading");
+  const [currentState, setCurrentState] = useState<
+    'loading' | 'success' | 'error' | 'offline' | 'processing' | 'uploading' | 'downloading'
+  >('loading');
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setProgress(prev => (prev + 5) % 100);
+      setProgress((prev) => (prev + 5) % 100);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -78,27 +82,25 @@ export default function StandardizedLoadingStatesDemo({ onBack }: StandardizedLo
             <div className="space-y-6">
               <div>
                 <h4 className="text-sm font-medium mb-2 text-muted-foreground">Document Upload</h4>
-                <ProgressLoading 
-                  progress={progress} 
+                <ProgressLoading
+                  progress={progress}
                   label="Uploading resume.pdf"
                   showPercentage={true}
                 />
               </div>
               <div>
                 <h4 className="text-sm font-medium mb-2 text-muted-foreground">AI Analysis</h4>
-                <ProgressLoading 
-                  progress={Math.min(100, progress + 20)} 
+                <ProgressLoading
+                  progress={Math.min(100, progress + 20)}
                   label="Analyzing job requirements"
                   showPercentage={true}
                 />
               </div>
               <div>
-                <h4 className="text-sm font-medium mb-2 text-muted-foreground">Without Percentage</h4>
-                <ProgressLoading 
-                  progress={progress} 
-                  label="Processing..."
-                  showPercentage={false}
-                />
+                <h4 className="text-sm font-medium mb-2 text-muted-foreground">
+                  Without Percentage
+                </h4>
+                <ProgressLoading progress={progress} label="Processing..." showPercentage={false} />
               </div>
             </div>
           </Card>
@@ -124,10 +126,20 @@ export default function StandardizedLoadingStatesDemo({ onBack }: StandardizedLo
           <Card className="p-6 glass col-span-1 lg:col-span-2">
             <h3 className="text-lg font-semibold mb-4">State Loading</h3>
             <div className="flex gap-2 mb-4 flex-wrap">
-              {(["loading", "success", "error", "offline", "processing", "uploading", "downloading"] as const).map((state) => (
+              {(
+                [
+                  'loading',
+                  'success',
+                  'error',
+                  'offline',
+                  'processing',
+                  'uploading',
+                  'downloading',
+                ] as const
+              ).map((state) => (
                 <Button
                   key={state}
-                  variant={currentState === state ? "default" : "outline"}
+                  variant={currentState === state ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setCurrentState(state)}
                   className="capitalize focus-glow"
@@ -137,10 +149,7 @@ export default function StandardizedLoadingStatesDemo({ onBack }: StandardizedLo
               ))}
             </div>
             <div className="min-h-48">
-              <StateLoading 
-                state={currentState}
-                onRetry={() => console.log("Retry clicked")}
-              />
+              <StateLoading state={currentState} onRetry={() => console.log('Retry clicked')} />
             </div>
           </Card>
 
@@ -152,8 +161,8 @@ export default function StandardizedLoadingStatesDemo({ onBack }: StandardizedLo
               title="No Documents Yet"
               description="Start by creating your first resume or cover letter."
               action={{
-                label: "Create Document",
-                onClick: () => console.log("Create clicked")
+                label: 'Create Document',
+                onClick: () => console.log('Create clicked'),
               }}
             />
           </Card>
@@ -196,7 +205,7 @@ export default function StandardizedLoadingStatesDemo({ onBack }: StandardizedLo
             <div className="space-y-3">
               <h4 className="font-medium text-foreground">React Component Usage</h4>
               <pre className="bg-muted p-3 rounded text-xs overflow-x-auto">
-{`import { 
+                {`import { 
   SpinnerLoading, 
   ProgressLoading, 
   StateLoading 

@@ -18,17 +18,9 @@ export interface EmptyStateProps {
 }
 
 export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
-  ({ 
-    icon: Icon, 
-    title, 
-    description, 
-    action, 
-    secondaryAction,
-    className = '',
-    children 
-  }, ref) => {
+  ({ icon: Icon, title, description, action, secondaryAction, className = '', children }, ref) => {
     return (
-      <div 
+      <div
         ref={ref}
         className={`
           flex flex-col items-center justify-center
@@ -38,25 +30,23 @@ export const EmptyState = forwardRef<HTMLDivElement, EmptyStateProps>(
       >
         {/* Icon */}
         {Icon && (
-          <div className={`
+          <div
+            className={`
             p-6 rounded-full mb-6
             bg-gradient-to-br from-[var(--primary)]/20 to-[var(--tertiary)]/20
             border-2 border-[var(--primary)]/30
-          `}>
+          `}
+          >
             <Icon className="w-12 h-12 text-[var(--primary)]" />
           </div>
         )}
 
         {/* Title */}
-        <h3 className="text-xl text-[var(--on-surface)] mb-2">
-          {title}
-        </h3>
+        <h3 className="text-xl text-[var(--on-surface)] mb-2">{title}</h3>
 
         {/* Description */}
         {description && (
-          <p className="text-[var(--on-surface-variant)] max-w-md mb-6">
-            {description}
-          </p>
+          <p className="text-[var(--on-surface-variant)] max-w-md mb-6">{description}</p>
         )}
 
         {/* Custom Content */}

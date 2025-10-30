@@ -118,10 +118,7 @@ export const jobService = {
   /**
    * Get job matching score against user profile
    */
-  async getJobMatching(
-    jobId: string,
-    profileId: string
-  ): Promise<JobMatchingResult> {
+  async getJobMatching(jobId: string, profileId: string): Promise<JobMatchingResult> {
     try {
       const response = await apiClient.post('/matching', {
         jobId,

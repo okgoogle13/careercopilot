@@ -1,7 +1,7 @@
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { ArrowLeft, Sparkles, Target, TrendingUp, MessageSquare, ArrowRight } from "lucide-react";
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { Badge } from './ui/badge';
+import { ArrowLeft, Sparkles, Target, TrendingUp, MessageSquare, ArrowRight } from 'lucide-react';
 
 interface CareerGrowthHubProps {
   onNavigate: (feature: 'job-matching' | 'career-intelligence' | 'interview-prep') => void;
@@ -13,30 +13,24 @@ export function CareerGrowthHub({ onNavigate, onBack }: CareerGrowthHubProps) {
     {
       id: 'job-matching' as const,
       title: 'AI Job Matching',
-      description: 'Find roles that perfectly match your skills and experience using advanced AI analysis.',
+      description:
+        'Find roles that perfectly match your skills and experience using advanced AI analysis.',
       icon: Target,
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10',
       borderColor: 'border-blue-500/20',
-      benefits: [
-        'Personalized job recommendations',
-        'Skill gap analysis',
-        'Salary insights'
-      ]
+      benefits: ['Personalized job recommendations', 'Skill gap analysis', 'Salary insights'],
     },
     {
       id: 'career-intelligence' as const,
       title: 'Career Intelligence',
-      description: 'Get data-driven insights about your career trajectory and growth opportunities.',
+      description:
+        'Get data-driven insights about your career trajectory and growth opportunities.',
       icon: TrendingUp,
       color: 'text-green-500',
       bgColor: 'bg-green-500/10',
       borderColor: 'border-green-500/20',
-      benefits: [
-        'Career path analysis',
-        'Market trend insights',
-        'Skill demand forecasting'
-      ]
+      benefits: ['Career path analysis', 'Market trend insights', 'Skill demand forecasting'],
     },
     {
       id: 'interview-prep' as const,
@@ -49,9 +43,9 @@ export function CareerGrowthHub({ onNavigate, onBack }: CareerGrowthHubProps) {
       benefits: [
         'Behavioral question practice',
         'Industry-specific scenarios',
-        'Personalized feedback'
-      ]
-    }
+        'Personalized feedback',
+      ],
+    },
   ];
 
   return (
@@ -71,7 +65,8 @@ export function CareerGrowthHub({ onNavigate, onBack }: CareerGrowthHubProps) {
             <h1 className="text-4xl font-semibold">Career Growth Hub</h1>
           </div>
           <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
-            Leverage AI to supercharge your career growth with personalized insights, job matching, and interview preparation.
+            Leverage AI to supercharge your career growth with personalized insights, job matching,
+            and interview preparation.
           </p>
         </div>
 
@@ -94,17 +89,17 @@ export function CareerGrowthHub({ onNavigate, onBack }: CareerGrowthHubProps) {
                 </div>
 
                 <div className="space-y-6">
-                  <div className={`p-4 ${feature.bgColor} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}>
+                  <div
+                    className={`p-4 ${feature.bgColor} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}
+                  >
                     <Icon className={`w-8 h-8 ${feature.color}`} />
                   </div>
-                  
+
                   <div>
                     <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {feature.description}
-                    </p>
+                    <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <h4 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
                       Key Features
@@ -118,8 +113,8 @@ export function CareerGrowthHub({ onNavigate, onBack }: CareerGrowthHubProps) {
                       ))}
                     </ul>
                   </div>
-                  
-                  <Button 
+
+                  <Button
                     className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90"
                     size="lg"
                   >
@@ -140,8 +135,9 @@ export function CareerGrowthHub({ onNavigate, onBack }: CareerGrowthHubProps) {
               <h3 className="text-xl font-semibold">Powered by Advanced AI</h3>
             </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our career growth tools are powered by cutting-edge AI technology that analyzes market trends, 
-              job requirements, and your unique profile to provide personalized career guidance.
+              Our career growth tools are powered by cutting-edge AI technology that analyzes market
+              trends, job requirements, and your unique profile to provide personalized career
+              guidance.
             </p>
             <div className="flex flex-wrap justify-center gap-3 pt-4">
               <Badge variant="secondary">Machine Learning</Badge>

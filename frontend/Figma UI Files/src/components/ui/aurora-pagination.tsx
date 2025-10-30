@@ -12,18 +12,21 @@ export interface PaginationProps {
 }
 
 export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
-  ({ 
-    currentPage, 
-    totalPages, 
-    onPageChange, 
-    disabled,
-    className = '',
-    showFirstLast = true,
-    maxVisiblePages = 7
-  }, ref) => {
+  (
+    {
+      currentPage,
+      totalPages,
+      onPageChange,
+      disabled,
+      className = '',
+      showFirstLast = true,
+      maxVisiblePages = 7,
+    },
+    ref
+  ) => {
     const getPageNumbers = () => {
       const pages: (number | 'ellipsis')[] = [];
-      
+
       if (totalPages <= maxVisiblePages) {
         return Array.from({ length: totalPages }, (_, i) => i + 1);
       }
@@ -103,9 +106,10 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
                 className={`
                   min-w-[2.5rem] px-3 py-2 rounded-[var(--radius-lg)]
                   border-2 transition-all duration-300
-                  ${isActive
-                    ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white border-transparent shadow-[var(--shadow-glow-aurora)]'
-                    : 'bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] border-[var(--glass-border)] text-[var(--on-surface)] hover:border-[var(--glass-border-hover)] hover:shadow-[var(--shadow-glow-aurora)] hover:-translate-y-0.5'
+                  ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white border-transparent shadow-[var(--shadow-glow-aurora)]'
+                      : 'bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)] border-[var(--glass-border)] text-[var(--on-surface)] hover:border-[var(--glass-border-hover)] hover:shadow-[var(--shadow-glow-aurora)] hover:-translate-y-0.5'
                   }
                   ${disabled && 'opacity-50 cursor-not-allowed'}
                 `}

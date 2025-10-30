@@ -20,43 +20,43 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
     email: true,
     push: false,
     marketing: true,
-    security: true
+    security: true,
   });
 
   const profileOptions: M3SelectOption[] = [
-    { 
-      value: 'profile-1', 
+    {
+      value: 'profile-1',
       label: 'Software Engineer Profile',
-      icon: <div className="w-3 h-3 bg-blue-500 rounded-full" />
+      icon: <div className="w-3 h-3 bg-blue-500 rounded-full" />,
     },
-    { 
-      value: 'profile-2', 
+    {
+      value: 'profile-2',
       label: 'Product Manager Profile',
-      icon: <div className="w-3 h-3 bg-green-500 rounded-full" />
+      icon: <div className="w-3 h-3 bg-green-500 rounded-full" />,
     },
-    { 
-      value: 'profile-3', 
+    {
+      value: 'profile-3',
       label: 'UX Designer Profile',
-      icon: <div className="w-3 h-3 bg-purple-500 rounded-full" />
-    }
+      icon: <div className="w-3 h-3 bg-purple-500 rounded-full" />,
+    },
   ];
 
   const themeOptions: M3SelectOption[] = [
-    { 
-      value: 'light', 
+    {
+      value: 'light',
       label: 'Light Theme',
-      icon: <div className="w-3 h-3 bg-yellow-400 rounded-full" />
+      icon: <div className="w-3 h-3 bg-yellow-400 rounded-full" />,
     },
-    { 
-      value: 'dark', 
+    {
+      value: 'dark',
       label: 'Dark Theme',
-      icon: <div className="w-3 h-3 bg-gray-800 rounded-full" />
+      icon: <div className="w-3 h-3 bg-gray-800 rounded-full" />,
     },
-    { 
-      value: 'auto', 
+    {
+      value: 'auto',
       label: 'System Default',
-      icon: <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-gray-800 rounded-full" />
-    }
+      icon: <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-gray-800 rounded-full" />,
+    },
   ];
 
   const settingsOptions = [
@@ -65,29 +65,29 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
       title: 'Account Settings',
       description: 'Manage your personal information and account preferences',
       icon: <User className="w-6 h-6" />,
-      selected: true
+      selected: true,
     },
     {
       id: 'notifications',
       title: 'Notification Preferences',
       description: 'Configure how and when you receive notifications',
       icon: <Bell className="w-6 h-6" />,
-      selected: false
+      selected: false,
     },
     {
       id: 'privacy',
       title: 'Privacy & Security',
       description: 'Control your privacy settings and security options',
       icon: <Shield className="w-6 h-6" />,
-      selected: false
+      selected: false,
     },
     {
       id: 'appearance',
       title: 'Theme & Appearance',
       description: 'Customize the look and feel of your workspace',
       icon: <Palette className="w-6 h-6" />,
-      selected: false
-    }
+      selected: false,
+    },
   ];
 
   return (
@@ -96,12 +96,7 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">
           {onBack && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onBack}
-              className="shrink-0"
-            >
+            <Button variant="ghost" size="icon" onClick={onBack} className="shrink-0">
               <ArrowLeft className="w-5 h-5" />
             </Button>
           )}
@@ -130,32 +125,41 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
                 >
                   <M3CardContent className="p-4">
                     <div className="flex items-start gap-3">
-                      <div className={`
+                      <div
+                        className={`
                         flex items-center justify-center w-10 h-10 rounded-xl
-                        ${option.selected 
-                          ? 'bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)]' 
-                          : 'bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-on-surface-variant)]'
+                        ${
+                          option.selected
+                            ? 'bg-[var(--md-sys-color-primary)] text-[var(--md-sys-color-on-primary)]'
+                            : 'bg-[var(--md-sys-color-surface-container-high)] text-[var(--md-sys-color-on-surface-variant)]'
                         }
-                      `}>
+                      `}
+                      >
                         {option.icon}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className={`
+                        <h3
+                          className={`
                           font-medium text-sm
-                          ${option.selected 
-                            ? 'text-[var(--md-sys-color-on-primary-container)]' 
-                            : 'text-[var(--md-sys-color-on-surface)]'
+                          ${
+                            option.selected
+                              ? 'text-[var(--md-sys-color-on-primary-container)]'
+                              : 'text-[var(--md-sys-color-on-surface)]'
                           }
-                        `}>
+                        `}
+                        >
                           {option.title}
                         </h3>
-                        <p className={`
+                        <p
+                          className={`
                           text-xs mt-1 leading-4
-                          ${option.selected 
-                            ? 'text-[var(--md-sys-color-on-primary-container)]' 
-                            : 'text-[var(--md-sys-color-on-surface-variant)]'
+                          ${
+                            option.selected
+                              ? 'text-[var(--md-sys-color-on-primary-container)]'
+                              : 'text-[var(--md-sys-color-on-surface-variant)]'
                           }
-                        `}>
+                        `}
+                        >
                           {option.description}
                         </p>
                       </div>
@@ -171,7 +175,7 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
             <h2 className="text-xl font-medium mb-6 text-[var(--md-sys-color-on-surface)]">
               Account Settings
             </h2>
-            
+
             <div className="space-y-6">
               {/* Personal Information */}
               <M3Card variant="default">
@@ -197,7 +201,7 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
                       trailingIcon={<Edit3 className="w-4 h-4" />}
                     />
                   </div>
-                  
+
                   <M3Select
                     label="Active Profile"
                     options={profileOptions}
@@ -205,14 +209,12 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
                     onValueChange={setSelectedProfile}
                     helperText="Choose which profile to use for job applications"
                   />
-                  
+
                   <div className="flex gap-3 pt-4">
                     <M3Button variant="filled" icon={<Download className="w-4 h-4" />}>
                       Save Changes
                     </M3Button>
-                    <M3Button variant="outlined">
-                      Cancel
-                    </M3Button>
+                    <M3Button variant="outlined">Cancel</M3Button>
                   </div>
                 </M3CardContent>
               </M3Card>
@@ -229,40 +231,48 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
                   <M3Checkbox
                     label="Email notifications"
                     checked={notifications.email}
-                    onChange={(e) => setNotifications(prev => ({
-                      ...prev,
-                      email: e.target.checked
-                    }))}
+                    onChange={(e) =>
+                      setNotifications((prev) => ({
+                        ...prev,
+                        email: e.target.checked,
+                      }))
+                    }
                     helperText="Receive updates about job matches and application status"
                   />
-                  
+
                   <M3Checkbox
                     label="Push notifications"
                     checked={notifications.push}
-                    onChange={(e) => setNotifications(prev => ({
-                      ...prev,
-                      push: e.target.checked
-                    }))}
+                    onChange={(e) =>
+                      setNotifications((prev) => ({
+                        ...prev,
+                        push: e.target.checked,
+                      }))
+                    }
                     helperText="Get instant notifications on your device"
                   />
-                  
+
                   <M3Checkbox
                     label="Marketing communications"
                     checked={notifications.marketing}
-                    onChange={(e) => setNotifications(prev => ({
-                      ...prev,
-                      marketing: e.target.checked
-                    }))}
+                    onChange={(e) =>
+                      setNotifications((prev) => ({
+                        ...prev,
+                        marketing: e.target.checked,
+                      }))
+                    }
                     helperText="Receive product updates and feature announcements"
                   />
-                  
+
                   <M3Checkbox
                     label="Security alerts"
                     checked={notifications.security}
-                    onChange={(e) => setNotifications(prev => ({
-                      ...prev,
-                      security: e.target.checked
-                    }))}
+                    onChange={(e) =>
+                      setNotifications((prev) => ({
+                        ...prev,
+                        security: e.target.checked,
+                      }))
+                    }
                     helperText="Important security and account alerts (recommended)"
                   />
                 </M3CardContent>
@@ -272,9 +282,7 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
               <M3Card variant="default">
                 <M3CardHeader>
                   <M3CardTitle>Appearance</M3CardTitle>
-                  <M3CardDescription>
-                    Customize the theme and visual preferences
-                  </M3CardDescription>
+                  <M3CardDescription>Customize the theme and visual preferences</M3CardDescription>
                 </M3CardHeader>
                 <M3CardContent className="space-y-6">
                   <M3Select
@@ -284,14 +292,10 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
                     onValueChange={setSelectedTheme}
                     helperText="Choose your preferred color theme"
                   />
-                  
+
                   <div className="flex gap-3 pt-4">
-                    <M3Button variant="tonal">
-                      Apply Theme
-                    </M3Button>
-                    <M3Button variant="text">
-                      Reset to Default
-                    </M3Button>
+                    <M3Button variant="tonal">Apply Theme</M3Button>
+                    <M3Button variant="text">Reset to Default</M3Button>
                   </div>
                 </M3CardContent>
               </M3Card>
@@ -299,7 +303,9 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
               {/* Danger Zone */}
               <M3Card variant="default" className="border-[var(--md-sys-color-error)] border-2">
                 <M3CardHeader>
-                  <M3CardTitle className="text-[var(--md-sys-color-error)]">Danger Zone</M3CardTitle>
+                  <M3CardTitle className="text-[var(--md-sys-color-error)]">
+                    Danger Zone
+                  </M3CardTitle>
                   <M3CardDescription>
                     Irreversible actions that will permanently affect your account
                   </M3CardDescription>
@@ -311,10 +317,11 @@ export function M3SettingsExample({ onBack }: M3SettingsExampleProps) {
                         Delete Account
                       </h4>
                       <p className="text-sm text-[var(--md-sys-color-on-error-container)] mb-4">
-                        Permanently delete your account and all associated data. This action cannot be undone.
+                        Permanently delete your account and all associated data. This action cannot
+                        be undone.
                       </p>
-                      <M3Button 
-                        variant="filled" 
+                      <M3Button
+                        variant="filled"
                         className="bg-[var(--md-sys-color-error)] hover:bg-[var(--md-sys-color-error)]"
                         icon={<Trash2 className="w-4 h-4" />}
                       >

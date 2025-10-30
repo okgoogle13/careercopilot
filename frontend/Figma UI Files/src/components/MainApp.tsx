@@ -13,10 +13,7 @@ interface MainAppProps {
   onCreateDocument?: () => void;
 }
 
-export function MainApp({ 
-  onSettingsClick,
-  onCreateDocument 
-}: MainAppProps) {
+export function MainApp({ onSettingsClick, onCreateDocument }: MainAppProps) {
   const [activeTab, setActiveTab] = useState<TabValue>('dashboard');
 
   const handleTabChange = (tab: TabValue) => {
@@ -48,46 +45,26 @@ export function MainApp({
             onNavigateToApplications={handleNavigateToApplications}
           />
         );
-      
+
       case 'documents':
-        return (
-          <DocumentsView
-            onCreateDocument={onCreateDocument}
-          />
-        );
-      
+        return <DocumentsView onCreateDocument={onCreateDocument} />;
+
       case 'opportunities':
-        return (
-          <OpportunitiesView
-            onAnalyzeJob={() => console.log('Analyze job')}
-          />
-        );
-      
+        return <OpportunitiesView onAnalyzeJob={() => console.log('Analyze job')} />;
+
       case 'applications':
-        return (
-          <ApplicationsView
-            onAddApplication={() => console.log('Add application')}
-          />
-        );
-      
+        return <ApplicationsView onAddApplication={() => console.log('Add application')} />;
+
       case 'analysis':
-        return (
-          <AnalysisView
-            onAnalyzeDocument={() => console.log('Analyze document')}
-          />
-        );
-      
+        return <AnalysisView onAnalyzeDocument={() => console.log('Analyze document')} />;
+
       default:
         return <DashboardView onCreateDocument={handleCreateDocument} />;
     }
   };
 
   return (
-    <AppShell
-      activeTab={activeTab}
-      onTabChange={handleTabChange}
-      onSettingsClick={onSettingsClick}
-    >
+    <AppShell activeTab={activeTab} onTabChange={handleTabChange} onSettingsClick={onSettingsClick}>
       {renderTabContent()}
     </AppShell>
   );

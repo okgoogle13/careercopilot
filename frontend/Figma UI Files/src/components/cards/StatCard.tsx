@@ -1,14 +1,7 @@
 import React from 'react';
 import { Card } from '../ui/card';
 import { Badge } from '../ui/badge';
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  Minus, 
-  Info,
-  ExternalLink,
-  MoreVertical
-} from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Info, ExternalLink, MoreVertical } from 'lucide-react';
 import { Button } from '../ui/button';
 
 interface StatCardProps {
@@ -48,15 +41,19 @@ export const StatCard: React.FC<StatCardProps> = ({
   onInfoClick,
   onMenuClick,
   className = '',
-  children
+  children,
 }) => {
   const getStatusColor = () => {
     switch (status) {
-      case 'positive': return 'text-brand-primary';
-      case 'negative': return 'text-brand-error';
-      case 'warning': return 'text-brand-tertiary';
+      case 'positive':
+        return 'text-brand-primary';
+      case 'negative':
+        return 'text-brand-error';
+      case 'warning':
+        return 'text-brand-tertiary';
       case 'neutral':
-      default: return 'text-on-surface';
+      default:
+        return 'text-on-surface';
     }
   };
 
@@ -83,11 +80,13 @@ export const StatCard: React.FC<StatCardProps> = ({
   // Loading state
   if (loading) {
     return (
-      <Card className={`
+      <Card
+        className={`
         p-4 animate-pulse 
         ${variant === 'compact' ? 'p-3' : ''}
         ${className}
-      `}>
+      `}
+      >
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="h-4 bg-surface-container-high rounded w-20"></div>
@@ -112,11 +111,13 @@ export const StatCard: React.FC<StatCardProps> = ({
   // Error state
   if (error) {
     return (
-      <Card className={`
+      <Card
+        className={`
         p-4 border-brand-error/20 bg-brand-error/5
         ${variant === 'compact' ? 'p-3' : ''}
         ${className}
-      `}>
+      `}
+      >
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <h3 className="text-sm font-medium text-on-surface-variant">{title}</h3>
@@ -156,20 +157,22 @@ export const StatCard: React.FC<StatCardProps> = ({
         {/* Header */}
         <div className="flex items-start justify-between">
           <div className="flex-1 min-w-0">
-            <h3 className={`
+            <h3
+              className={`
               font-medium truncate
               ${variant === 'compact' ? 'text-xs' : 'text-sm'}
               ${disabled ? 'text-on-surface-variant' : 'text-on-surface-variant'}
-            `}>
+            `}
+            >
               {title}
             </h3>
           </div>
-          
+
           <div className="flex items-center gap-1 shrink-0">
             {onInfoClick && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   onInfoClick();
@@ -179,23 +182,27 @@ export const StatCard: React.FC<StatCardProps> = ({
                 <Info className="w-3 h-3 text-on-surface-variant" />
               </Button>
             )}
-            
+
             {Icon && variant !== 'minimal' && (
-              <div className={`
+              <div
+                className={`
                 flex items-center justify-center rounded-lg bg-surface-container-high
                 ${variant === 'compact' ? 'w-6 h-6' : 'w-8 h-8'}
-              `}>
-                <Icon className={`
+              `}
+              >
+                <Icon
+                  className={`
                   ${getStatusColor()}
                   ${variant === 'compact' ? 'w-3 h-3' : 'w-4 h-4'}
-                `} />
+                `}
+                />
               </div>
             )}
-            
+
             {onMenuClick && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   onMenuClick();
@@ -214,19 +221,23 @@ export const StatCard: React.FC<StatCardProps> = ({
 
         {/* Value */}
         <div>
-          <p className={`
+          <p
+            className={`
             font-medium leading-none mb-1 ${getStatusColor()}
             ${variant === 'compact' ? 'text-xl' : 'text-2xl'}
             ${variant === 'minimal' ? 'text-lg' : ''}
-          `}>
+          `}
+          >
             {value}
           </p>
-          
+
           {subtitle && (
-            <p className={`
+            <p
+              className={`
               text-on-surface-variant
               ${variant === 'compact' ? 'text-xs' : 'text-sm'}
-            `}>
+            `}
+            >
               {subtitle}
             </p>
           )}
@@ -242,18 +253,22 @@ export const StatCard: React.FC<StatCardProps> = ({
               </span>
             </div>
             {trend.label && (
-              <span className={`
+              <span
+                className={`
                 text-on-surface-variant
                 ${variant === 'compact' ? 'text-xs' : 'text-sm'}
-              `}>
+              `}
+              >
                 {trend.label}
               </span>
             )}
             {trend.timeframe && (
-              <span className={`
+              <span
+                className={`
                 text-on-surface-variant
                 ${variant === 'compact' ? 'text-xs' : 'text-sm'}
-              `}>
+              `}
+              >
                 • {trend.timeframe}
               </span>
             )}
@@ -262,20 +277,20 @@ export const StatCard: React.FC<StatCardProps> = ({
 
         {/* Additional Content */}
         {children && variant === 'detailed' && (
-          <div className="pt-2 border-t border-outline-variant">
-            {children}
-          </div>
+          <div className="pt-2 border-t border-outline-variant">{children}</div>
         )}
       </div>
 
       {/* Status Indicator */}
       {status !== 'neutral' && variant === 'detailed' && (
-        <div className={`
+        <div
+          className={`
           absolute top-2 right-2 w-2 h-2 rounded-full
           ${status === 'positive' ? 'bg-brand-primary' : ''}
           ${status === 'negative' ? 'bg-brand-error' : ''}
           ${status === 'warning' ? 'bg-brand-tertiary' : ''}
-        `} />
+        `}
+        />
       )}
     </Card>
   );

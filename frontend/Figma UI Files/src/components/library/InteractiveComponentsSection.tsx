@@ -1,15 +1,33 @@
-import React from "react";
-import { Button } from "../ui/button";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "../ui/alert-dialog";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { ComponentSection, ComponentDemo } from "./ComponentDemo";
+import React from 'react';
+import { Button } from '../ui/button';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '../ui/alert-dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function InteractiveComponentsSection() {
   return (
-    <ComponentSection 
-      title="Interactive Components" 
+    <ComponentSection
+      title="Interactive Components"
       description="Dialogs, popovers, and other interactive overlay components"
     >
       <ComponentDemo title="Dialogs & Modals">
@@ -69,7 +87,9 @@ export function InteractiveComponentsSection() {
                 </p>
                 <div className="flex gap-2">
                   <Button size="sm">Action</Button>
-                  <Button variant="outline" size="sm">Cancel</Button>
+                  <Button variant="outline" size="sm">
+                    Cancel
+                  </Button>
                 </div>
               </div>
             </PopoverContent>

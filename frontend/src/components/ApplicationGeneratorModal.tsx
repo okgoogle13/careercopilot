@@ -124,7 +124,11 @@ export const ApplicationGeneratorModal: React.FC<ApplicationGeneratorModalProps>
           ))}
         </Stepper>
 
-        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
 
         {/* Step Content */}
         <Box sx={{ minHeight: 200 }}>
@@ -239,11 +243,7 @@ export const ApplicationGeneratorModal: React.FC<ApplicationGeneratorModalProps>
           Cancel
         </Button>
         {activeStep === 0 && (
-          <Button
-            onClick={handleGeneratePackage}
-            variant="contained"
-            disabled={isLoading}
-          >
+          <Button onClick={handleGeneratePackage} variant="contained" disabled={isLoading}>
             {isLoading ? <CircularProgress size={24} /> : 'Generate Package'}
           </Button>
         )}

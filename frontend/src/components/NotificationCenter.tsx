@@ -73,9 +73,7 @@ export const NotificationCenter: React.FC = () => {
     try {
       await notificationService.markAsRead(notification.id);
       setNotifications((prev) =>
-        prev.map((n) =>
-          n.id === notification.id ? { ...n, read: true } : n
-        )
+        prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n))
       );
       setUnreadCount((prev) => Math.max(0, prev - 1));
     } catch (error) {
@@ -179,11 +177,7 @@ export const NotificationCenter: React.FC = () => {
           ) : (
             <>
               {unreadCount > 0 && (
-                <Button
-                  size="small"
-                  onClick={handleMarkAllAsRead}
-                  sx={{ mb: 1 }}
-                >
+                <Button size="small" onClick={handleMarkAllAsRead} sx={{ mb: 1 }}>
                   Mark all as read
                 </Button>
               )}

@@ -108,7 +108,7 @@ return (
 ### Focus Management
 
 ```typescript
-import { focusManagement } from '@/utils/accessibility';
+import { focusManagement } from "@/utils/accessibility";
 
 // Save current focus
 const focusManager = focusManagement.createFocusManager();
@@ -190,10 +190,10 @@ Every input must have an associated label:
 ### Testing Tools
 
 ```typescript
-import { validateColorContrast } from '@/utils/accessibility';
+import { validateColorContrast } from "@/utils/accessibility";
 
 // Check if colors meet WCAG AA standard
-const isAccessible = validateColorContrast('#FFFFFF', '#A855F7');
+const isAccessible = validateColorContrast("#FFFFFF", "#A855F7");
 ```
 
 ### Color Combinations
@@ -384,6 +384,7 @@ Label icon-only buttons:
 ### Issue: Form field without label
 
 **Solution**:
+
 ```typescript
 // Use visible label
 <label htmlFor="email">Email</label>
@@ -396,6 +397,7 @@ Label icon-only buttons:
 ### Issue: Icon button without text
 
 **Solution**:
+
 ```typescript
 <IconButton aria-label="Delete">
   <DeleteIcon />
@@ -405,6 +407,7 @@ Label icon-only buttons:
 ### Issue: List items in divs
 
 **Solution**:
+
 ```typescript
 // Bad
 <div onClick={selectItem}>Item 1</div>
@@ -419,6 +422,7 @@ Label icon-only buttons:
 ### Issue: Focus lost in modal
 
 **Solution**:
+
 ```typescript
 const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -440,6 +444,7 @@ useEffect(() => {
 ## Getting Help
 
 For accessibility questions or issues, refer to:
+
 1. This document
 2. Component guidelines documentation
 3. WCAG guidelines

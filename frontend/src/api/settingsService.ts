@@ -72,10 +72,7 @@ export const settingsService = {
   /**
    * Update user settings
    */
-  async updateSettings(
-    userId: string,
-    settings: SettingsUpdate
-  ): Promise<UserSettings> {
+  async updateSettings(userId: string, settings: SettingsUpdate): Promise<UserSettings> {
     try {
       const response = await apiClient.put('/', {
         userId,

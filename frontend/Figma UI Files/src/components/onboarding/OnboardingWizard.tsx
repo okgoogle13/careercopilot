@@ -69,7 +69,13 @@ export function OnboardingWizard({
   ];
 
   const currentStepIndex = steps.findIndex(
-    (s) => s.label.toLowerCase() === onboardingStatus.currentStep.replace('welcome', 'Welcome').replace('upload', 'Upload').replace('review', 'Review').replace('complete', 'Complete')
+    (s) =>
+      s.label.toLowerCase() ===
+      onboardingStatus.currentStep
+        .replace('welcome', 'Welcome')
+        .replace('upload', 'Upload')
+        .replace('review', 'Review')
+        .replace('complete', 'Complete')
   );
 
   const handleNext = async () => {
@@ -114,18 +120,14 @@ export function OnboardingWizard({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Welcome to CareerCopilot</DialogTitle>
-          <DialogDescription>
-            Let's set up your profile to get started
-          </DialogDescription>
+          <DialogDescription>Let's set up your profile to get started</DialogDescription>
         </DialogHeader>
 
         {/* Progress Bar */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium">Profile Setup Progress</span>
-            <span className="text-sm text-muted-foreground">
-              {completionPercentage}%
-            </span>
+            <span className="text-sm text-muted-foreground">{completionPercentage}%</span>
           </div>
           <Progress value={completionPercentage} className="h-2" />
         </div>
@@ -147,11 +149,10 @@ export function OnboardingWizard({
                 <Sparkles className="w-8 h-8 text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">
-                  Welcome to CareerCopilot! 🚀
-                </h3>
+                <h3 className="text-lg font-semibold mb-2">Welcome to CareerCopilot! 🚀</h3>
                 <p className="text-muted-foreground mb-4">
-                  Your AI-powered career assistant is ready to help you land your dream job. Let's set up your profile in just a few steps.
+                  Your AI-powered career assistant is ready to help you land your dream job. Let's
+                  set up your profile in just a few steps.
                 </p>
                 <ul className="space-y-2 text-sm text-left max-w-sm mx-auto">
                   <li className="flex items-center gap-2">
@@ -203,10 +204,7 @@ export function OnboardingWizard({
                 <div className="space-y-2">
                   <p className="text-sm font-medium">Selected Files:</p>
                   {uploadedFiles.map((file, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-2 p-3 bg-accent/50 rounded-lg"
-                    >
+                    <div key={idx} className="flex items-center gap-2 p-3 bg-accent/50 rounded-lg">
                       <FileText className="w-4 h-4 text-muted-foreground" />
                       <span className="text-sm">{file.name}</span>
                     </div>
@@ -235,9 +233,7 @@ export function OnboardingWizard({
 
               <div className="space-y-3">
                 <div>
-                  <label className="text-sm font-medium block mb-1">
-                    Full Name *
-                  </label>
+                  <label className="text-sm font-medium block mb-1">Full Name *</label>
                   <Input
                     placeholder="John Doe"
                     value={formData.fullName}
@@ -251,9 +247,7 @@ export function OnboardingWizard({
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium block mb-1">
-                    Email *
-                  </label>
+                  <label className="text-sm font-medium block mb-1">Email *</label>
                   <Input
                     type="email"
                     placeholder="john@example.com"
@@ -268,9 +262,7 @@ export function OnboardingWizard({
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium block mb-1">
-                    Phone *
-                  </label>
+                  <label className="text-sm font-medium block mb-1">Phone *</label>
                   <Input
                     placeholder="+1 (555) 123-4567"
                     value={formData.phone}
@@ -329,11 +321,10 @@ export function OnboardingWizard({
                 <CheckCircle2 className="w-8 h-8 text-green-600 dark:text-green-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-2">
-                  You're All Set! 🎉
-                </h3>
+                <h3 className="text-lg font-semibold mb-2">You're All Set! 🎉</h3>
                 <p className="text-muted-foreground mb-4">
-                  Your profile is ready to go. Start creating AI-powered resumes and tracking your job applications.
+                  Your profile is ready to go. Start creating AI-powered resumes and tracking your
+                  job applications.
                 </p>
               </div>
 
@@ -367,13 +358,9 @@ export function OnboardingWizard({
               onClick={() => {
                 // Go to previous step
                 const stepOrder = ['welcome', 'upload', 'review', 'complete'];
-                const currentIndex = stepOrder.indexOf(
-                  onboardingStatus.currentStep
-                );
+                const currentIndex = stepOrder.indexOf(onboardingStatus.currentStep);
                 if (currentIndex > 0) {
-                  completeOnboardingStep(
-                    stepOrder[currentIndex - 1] as any
-                  );
+                  completeOnboardingStep(stepOrder[currentIndex - 1] as any);
                 }
               }}
             >
@@ -381,12 +368,11 @@ export function OnboardingWizard({
             </Button>
           )}
 
-          {skipAllowed &&
-            onboardingStatus.currentStep !== 'complete' && (
-              <Button variant="ghost" onClick={skipOnboarding}>
-                Skip
-              </Button>
-            )}
+          {skipAllowed && onboardingStatus.currentStep !== 'complete' && (
+            <Button variant="ghost" onClick={skipOnboarding}>
+              Skip
+            </Button>
+          )}
 
           {onboardingStatus.currentStep === 'complete' ? (
             <Button onClick={handleComplete} className="ml-auto">

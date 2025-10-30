@@ -3,9 +3,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   rootDir: '.',
   roots: ['<rootDir>/src'],
-  testMatch: [
-    '**/*.test.{js,jsx,ts,tsx}'
-  ],
+  testMatch: ['**/*.test.{js,jsx,ts,tsx}'],
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',

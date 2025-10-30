@@ -23,23 +23,26 @@ interface M3SelectProps {
 }
 
 const M3Select = React.forwardRef<HTMLDivElement, M3SelectProps>(
-  ({
-    options,
-    value,
-    onValueChange,
-    placeholder = 'Select an option',
-    label,
-    helperText,
-    error = false,
-    errorText,
-    disabled = false,
-    className,
-  }, ref) => {
+  (
+    {
+      options,
+      value,
+      onValueChange,
+      placeholder = 'Select an option',
+      label,
+      helperText,
+      error = false,
+      errorText,
+      disabled = false,
+      className,
+    },
+    ref
+  ) => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [isFocused, setIsFocused] = React.useState(false);
     const selectRef = React.useRef<HTMLDivElement>(null);
 
-    const selectedOption = options.find(option => option.value === value);
+    const selectedOption = options.find((option) => option.value === value);
 
     React.useEffect(() => {
       const handleClickOutside = (event: MouseEvent) => {
@@ -79,18 +82,18 @@ const M3Select = React.forwardRef<HTMLDivElement, M3SelectProps>(
             'duration-[var(--motion-duration-short4)] ease-[var(--motion-easing-standard)]',
             'bg-[var(--md-sys-color-surface-container-low)]',
             'min-h-[56px] px-4',
-            
+
             // Border states
             error
               ? 'border-[var(--md-sys-color-error)]'
               : isFocused || isOpen
-              ? 'border-[var(--md-sys-color-primary)]'
-              : 'border-[var(--md-sys-color-outline-variant)] hover:border-[var(--md-sys-color-outline)]',
-            
+                ? 'border-[var(--md-sys-color-primary)]'
+                : 'border-[var(--md-sys-color-outline-variant)] hover:border-[var(--md-sys-color-outline)]',
+
             // Focus glow effect
             (isFocused || isOpen) && !error && 'shadow-[0_0_0_3px_rgba(193,193,255,0.12)]',
             error && 'shadow-[0_0_0_3px_rgba(255,180,171,0.12)]',
-            
+
             disabled && 'opacity-60 cursor-not-allowed'
           )}
           onClick={handleToggle}
@@ -104,7 +107,7 @@ const M3Select = React.forwardRef<HTMLDivElement, M3SelectProps>(
                   'text-xs font-medium transition-all pointer-events-none',
                   'duration-[var(--motion-duration-short3)] ease-[var(--motion-easing-standard)]',
                   'mb-1',
-                  
+
                   // Label color states
                   (isFocused || isOpen) && !error && 'text-[var(--md-sys-color-primary)]',
                   error && 'text-[var(--md-sys-color-error)]',
@@ -116,43 +119,47 @@ const M3Select = React.forwardRef<HTMLDivElement, M3SelectProps>(
             )}
 
             {/* Selected Value / Placeholder */}
-            <div className={cn(
-              'flex items-center gap-3',
-              'text-base font-normal',
-              selectedOption
-                ? 'text-[var(--md-sys-color-on-surface)]'
-                : 'text-[var(--md-sys-color-on-surface-variant)]'
-            )}>
+            <div
+              className={cn(
+                'flex items-center gap-3',
+                'text-base font-normal',
+                selectedOption
+                  ? 'text-[var(--md-sys-color-on-surface)]'
+                  : 'text-[var(--md-sys-color-on-surface-variant)]'
+              )}
+            >
               {selectedOption?.icon && (
                 <span className="flex items-center justify-center w-5 h-5">
                   {selectedOption.icon}
                 </span>
               )}
-              <span>
-                {selectedOption?.label || placeholder}
-              </span>
+              <span>{selectedOption?.label || placeholder}</span>
             </div>
           </div>
 
           {/* Chevron Icon */}
-          <ChevronDown className={cn(
-            'w-6 h-6 transition-transform ml-3',
-            'duration-[var(--motion-duration-short3)] ease-[var(--motion-easing-standard)]',
-            'text-[var(--md-sys-color-on-surface-variant)]',
-            isOpen && 'rotate-180'
-          )} />
+          <ChevronDown
+            className={cn(
+              'w-6 h-6 transition-transform ml-3',
+              'duration-[var(--motion-duration-short3)] ease-[var(--motion-easing-standard)]',
+              'text-[var(--md-sys-color-on-surface-variant)]',
+              isOpen && 'rotate-180'
+            )}
+          />
         </div>
 
         {/* Dropdown Menu */}
         {isOpen && (
-          <div className={cn(
-            'absolute top-full left-0 right-0 z-50 mt-2',
-            'bg-[var(--md-sys-color-surface-container-high)]',
-            'border border-[var(--md-sys-color-outline-variant)]',
-            'rounded-xl shadow-[var(--elevation-level3)]',
-            'animate-fade-in',
-            'max-h-60 overflow-y-auto'
-          )}>
+          <div
+            className={cn(
+              'absolute top-full left-0 right-0 z-50 mt-2',
+              'bg-[var(--md-sys-color-surface-container-high)]',
+              'border border-[var(--md-sys-color-outline-variant)]',
+              'rounded-xl shadow-[var(--elevation-level3)]',
+              'animate-fade-in',
+              'max-h-60 overflow-y-auto'
+            )}
+          >
             {options.map((option) => (
               <div
                 key={option.value}
@@ -164,22 +171,19 @@ const M3Select = React.forwardRef<HTMLDivElement, M3SelectProps>(
                   'hover:bg-[var(--md-sys-color-on-surface)]',
                   'hover:bg-opacity-8',
                   'first:rounded-t-xl last:rounded-b-xl',
-                  
+
                   option.disabled && 'opacity-60 cursor-not-allowed pointer-events-none',
-                  option.value === value && 'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)]'
+                  option.value === value &&
+                    'bg-[var(--md-sys-color-primary-container)] text-[var(--md-sys-color-on-primary-container)]'
                 )}
                 onClick={() => !option.disabled && handleSelect(option.value)}
               >
                 {option.icon && (
-                  <span className="flex items-center justify-center w-5 h-5">
-                    {option.icon}
-                  </span>
+                  <span className="flex items-center justify-center w-5 h-5">{option.icon}</span>
                 )}
-                
-                <span className="flex-1 text-base font-normal">
-                  {option.label}
-                </span>
-                
+
+                <span className="flex-1 text-base font-normal">{option.label}</span>
+
                 {option.value === value && (
                   <Check className="w-5 h-5 text-[var(--md-sys-color-primary)]" />
                 )}
@@ -191,12 +195,14 @@ const M3Select = React.forwardRef<HTMLDivElement, M3SelectProps>(
         {/* Helper/Error Text */}
         {(helperText || errorText) && (
           <div className="mt-2 px-4">
-            <p className={cn(
-              'text-xs leading-4',
-              error
-                ? 'text-[var(--md-sys-color-error)]'
-                : 'text-[var(--md-sys-color-on-surface-variant)]'
-            )}>
+            <p
+              className={cn(
+                'text-xs leading-4',
+                error
+                  ? 'text-[var(--md-sys-color-error)]'
+                  : 'text-[var(--md-sys-color-on-surface-variant)]'
+              )}
+            >
               {error ? errorText : helperText}
             </p>
           </div>

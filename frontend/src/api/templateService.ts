@@ -100,9 +100,7 @@ export const templateService = {
   /**
    * Create custom template
    */
-  async createCustomTemplate(
-    data: Partial<Template>
-  ): Promise<Template> {
+  async createCustomTemplate(data: Partial<Template>): Promise<Template> {
     try {
       const response = await apiClient.post('/custom', data);
       return response.data;
@@ -115,10 +113,7 @@ export const templateService = {
   /**
    * Update custom template
    */
-  async updateCustomTemplate(
-    templateId: string,
-    data: Partial<Template>
-  ): Promise<Template> {
+  async updateCustomTemplate(templateId: string, data: Partial<Template>): Promise<Template> {
     try {
       const response = await apiClient.put(`/${templateId}`, data);
       return response.data;

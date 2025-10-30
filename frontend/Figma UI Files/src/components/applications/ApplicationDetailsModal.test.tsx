@@ -65,9 +65,7 @@ describe('ApplicationDetailsModal', () => {
     });
 
     test('does not render modal when open prop is false', () => {
-      const { container } = render(
-        <ApplicationDetailsModal {...defaultProps} open={false} />
-      );
+      const { container } = render(<ApplicationDetailsModal {...defaultProps} open={false} />);
       // Modal should not be visible
       const dialog = container.querySelector('[role="dialog"]');
       expect(dialog).not.toBeInTheDocument();
@@ -252,33 +250,18 @@ describe('ApplicationDetailsModal', () => {
   describe('Edge Cases', () => {
     test('renders without timeline events', () => {
       const appWithoutTimeline = { ...mockApplication, timeline: [] };
-      render(
-        <ApplicationDetailsModal
-          {...defaultProps}
-          application={appWithoutTimeline}
-        />
-      );
+      render(<ApplicationDetailsModal {...defaultProps} application={appWithoutTimeline} />);
       expect(screen.getByText('TechCorp')).toBeInTheDocument();
     });
 
     test('renders without documents', () => {
       const appWithoutDocs = { ...mockApplication, documents: [] };
-      render(
-        <ApplicationDetailsModal
-          {...defaultProps}
-          application={appWithoutDocs}
-        />
-      );
+      render(<ApplicationDetailsModal {...defaultProps} application={appWithoutDocs} />);
       expect(screen.getByText('TechCorp')).toBeInTheDocument();
     });
 
     test('renders with null application gracefully', () => {
-      render(
-        <ApplicationDetailsModal
-          {...defaultProps}
-          application={undefined}
-        />
-      );
+      render(<ApplicationDetailsModal {...defaultProps} application={undefined} />);
       // Should not crash
       expect(screen.queryByText('TechCorp')).not.toBeInTheDocument();
     });

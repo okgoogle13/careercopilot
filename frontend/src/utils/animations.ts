@@ -176,7 +176,8 @@ export const animatedSx = {
   shimmer: {
     animation: `${animations.shimmer} 2s infinite`,
     backgroundSize: '1000px 100%',
-    backgroundImage: 'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0))',
+    backgroundImage:
+      'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 20%, rgba(255,255,255,0) 40%, rgba(255,255,255,0))',
   },
 
   bounce: {

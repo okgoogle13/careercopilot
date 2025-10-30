@@ -3,11 +3,13 @@
 ## Design Token System
 
 ### Overview
+
 Our design system uses a comprehensive design token architecture that bridges Figma designs with CSS implementation. All visual properties should be defined using our design token system for consistency and maintainability.
 
 ### Token Categories
 
 #### Color Tokens (Enhanced Palette)
+
 - **Primary Colors**: `--color-primary` (#60a5fa), `--color-primary-light`, `--color-primary-dark`
 - **Background Colors**: `--color-background-gradient` (enhanced gradient), `--color-background-section`, `--color-background-card`, `--color-background-elevated`
 - **Foreground Colors**: `--color-foreground` (#ffffff), `--color-foreground-secondary` (#e2e8f0), `--color-foreground-muted`
@@ -16,14 +18,17 @@ Our design system uses a comprehensive design token architecture that bridges Fi
 - **Glass Morphism**: `--glass-bg`, `--glass-bg-hover`, `--glass-border`, `--glass-border-hover`, `--glass-blur` (15px)
 
 #### Typography Tokens
+
 - **Font Sizes**: `--font-size-xs` through `--font-size-4xl`
 - **Font Weights**: `--font-weight-regular`, `--font-weight-medium`, `--font-weight-semibold`
 - **Line Heights**: `--line-height-tight`, `--line-height-base`, `--line-height-relaxed`
 
 #### Spacing Tokens
+
 - **Spacing Scale**: `--spacing-xs` through `--spacing-3xl` (8px to 96px)
 
 #### Enhanced Token Categories
+
 - **Border Radius**: `--radius-sm` through `--radius-xl`
 - **Shadows**: `--shadow-sm`, `--shadow-md`, `--shadow-lg`, `--shadow-glow-primary`, `--shadow-glow-purple`, `--shadow-glass`, `--shadow-glass-hover`
 - **Animations**: `--animation-duration-fast` (150ms), `--animation-duration-normal` (300ms), `--animation-duration-slow` (500ms), `--animation-ease`
@@ -33,6 +38,7 @@ Our design system uses a comprehensive design token architecture that bridges Fi
 ### Usage Guidelines
 
 #### In CSS
+
 ```css
 /* Use CSS custom properties */
 .my-component {
@@ -44,22 +50,20 @@ Our design system uses a comprehensive design token architecture that bridges Fi
 ```
 
 #### In React Components
+
 ```tsx
 // Import the hook
 import { useDesignTokens } from '../hooks/useDesignTokens';
 
 function MyComponent() {
   const { tokens, styles } = useDesignTokens();
-  
-  return (
-    <div style={styles.card}>
-      {/* Content */}
-    </div>
-  );
+
+  return <div style={styles.card}>{/* Content */}</div>;
 }
 ```
 
 #### With Token Mapper
+
 ```tsx
 import { careerCopilotTokenMapper } from '../mappings/design-tokens.mapper';
 
@@ -78,12 +82,14 @@ const bgColor = careerCopilotTokenMapper('background-card');
 ## Component Guidelines
 
 ### General Rules
+
 - Only use absolute positioning when necessary. Opt for responsive layouts using flexbox and grid
 - Refactor code to keep components clean and focused
 - Keep file sizes small, extract helper functions and reusable components
 - Use TypeScript for all new components with proper type definitions
 
 ### Enhanced Brand Guidelines
+
 - **Primary Color**: Enhanced Blue (#60a5fa) for primary actions and brand elements
 - **Secondary Color**: Accent Purple (#a78bfa) for secondary actions and highlights
 - **Accent Colors**: Use enhanced brand colors (green, yellow, red) for status and feedback
@@ -97,15 +103,18 @@ const bgColor = careerCopilotTokenMapper('background-card');
 ### Button Component
 
 #### Usage
+
 Buttons trigger actions and provide clear user affordances. They should have action-oriented labels and appropriate visual hierarchy.
 
 #### Variants
+
 - **Primary Button**: Main actions, uses `btn-gradient` class or primary color tokens
 - **Secondary Button**: Alternative actions, outlined style with `border-brand-blue`
 - **Ghost Button**: Subtle actions, minimal styling
 - **Destructive Button**: Dangerous actions, uses `--color-accent-red`
 
 #### Design Token Usage
+
 ```tsx
 // Use pre-built button styles
 const { styles } = useDesignTokens();
@@ -118,15 +127,18 @@ const { styles } = useDesignTokens();
 ### Card Component
 
 #### Purpose
+
 Cards contain related information and actions in a unified container.
 
 #### Token-Based Styling
+
 - Background: `var(--color-background-card)`
 - Border: `1px solid var(--color-border-subtle)`
 - Border Radius: `var(--radius-lg)`
 - Shadow: `var(--shadow-sm)` for base, `var(--shadow-md)` for elevated
 
 #### Hover States
+
 - Transform: `translateY(-2px)`
 - Shadow: `var(--shadow-md)`
 - Border: `var(--color-primary)`
@@ -134,12 +146,14 @@ Cards contain related information and actions in a unified container.
 ### Typography
 
 #### Hierarchy
+
 - **H1**: `var(--font-size-2xl)`, `var(--font-weight-semibold)`
 - **H2**: `var(--font-size-xl)`, `var(--font-weight-semibold)`
 - **Body**: `var(--font-size-base)`, `var(--font-weight-regular)`
 - **Caption**: `var(--font-size-sm)`, `var(--font-weight-regular)`
 
 #### Color Usage
+
 - Primary text: `var(--color-foreground)`
 - Secondary text: `var(--color-foreground-secondary)`
 - Muted text: `var(--color-foreground-muted)`
@@ -147,6 +161,7 @@ Cards contain related information and actions in a unified container.
 ### Spacing System
 
 #### Consistent Spacing
+
 - **Small gaps**: `var(--spacing-xs)` to `var(--spacing-sm)`
 - **Component padding**: `var(--spacing-md)` to `var(--spacing-lg)`
 - **Section spacing**: `var(--spacing-xl)` to `var(--spacing-2xl)`
@@ -155,18 +170,21 @@ Cards contain related information and actions in a unified container.
 ### Enhanced Animation Guidelines
 
 #### Micro-interactions
+
 - Use `transition-normal` (300ms) for smooth state changes
 - Hover transforms: `translateY(-2px)` to `translateY(-4px)` with glass effects
 - Button press: `scale(0.95)` with gradient shadows
 - Glass morphism hover: Enhanced blur and border glow
 
 #### Advanced Effects
+
 - **Shimmer Effects**: Use `.shimmer` class for loading states and progress bars
 - **Pulse Badges**: `.pulse-ai` and `.pulse-new` for dynamic notifications
 - **Glow Hover**: `.glow-hover` for interactive elements
 - **Glass Transitions**: Smooth backdrop-filter and opacity changes
 
 #### Accessibility Support
+
 - **Reduced Motion**: Automatic animation disable for `prefers-reduced-motion`
 - **Focus States**: Enhanced focus indicators with glow effects
 - **High Contrast**: Optional high contrast mode support
@@ -174,6 +192,7 @@ Cards contain related information and actions in a unified container.
 ## Implementation Standards
 
 ### File Organization
+
 - Components in `/components` directory
 - UI primitives in `/components/ui`
 - Design tokens in `/mappings`
@@ -181,12 +200,14 @@ Cards contain related information and actions in a unified container.
 - Examples in `/components/examples`
 
 ### Code Quality
+
 - Use React.forwardRef for components that need ref forwarding
 - Implement proper TypeScript types
 - Follow consistent naming conventions
 - Add displayName to all components for debugging
 
 ### Accessibility
+
 - Ensure proper focus management
 - Use semantic HTML elements
 - Provide appropriate ARIA labels

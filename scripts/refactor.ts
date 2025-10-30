@@ -1,4 +1,4 @@
-import { Project, Node, SyntaxKind } from 'ts-morph';
+import { Project, Node, SyntaxKind } from "ts-morph";
 
 interface RefactoringRule {
   name: string;
@@ -8,42 +8,41 @@ interface RefactoringRule {
 
 const rules: RefactoringRule[] = [
   {
-    name: 'Convert any to unknown',
-    condition: (node) =>
-      node.getKind() === SyntaxKind.AnyKeyword,
+    name: "Convert any to unknown",
+    condition: (node) => node.getKind() === SyntaxKind.AnyKeyword,
     action: (node) => {
-      node.replaceWithText('unknown');
-    }
+      node.replaceWithText("unknown");
+    },
   },
   {
-    name: 'Convert String to string',
+    name: "Convert String to string",
     condition: (node) =>
       node.getKind() === SyntaxKind.Identifier &&
-      node.getText() === 'String' &&
+      node.getText() === "String" &&
       node.getParent()?.getKind() === SyntaxKind.TypeReference,
     action: (node) => {
-      node.replaceWithText('string');
-    }
+      node.replaceWithText("string");
+    },
   },
   {
-    name: 'Convert Number to number',
+    name: "Convert Number to number",
     condition: (node) =>
       node.getKind() === SyntaxKind.Identifier &&
-      node.getText() === 'Number' &&
+      node.getText() === "Number" &&
       node.getParent()?.getKind() === SyntaxKind.TypeReference,
     action: (node) => {
-      node.replaceWithText('number');
-    }
+      node.replaceWithText("number");
+    },
   },
   {
-    name: 'Convert Boolean to boolean',
+    name: "Convert Boolean to boolean",
     condition: (node) =>
       node.getKind() === SyntaxKind.Identifier &&
-      node.getText() === 'Boolean' &&
+      node.getText() === "Boolean" &&
       node.getParent()?.getKind() === SyntaxKind.TypeReference,
     action: (node) => {
-      node.replaceWithText('boolean');
-    }
+      node.replaceWithText("boolean");
+    },
   },
   // Add more rules as needed
 ];
@@ -51,8 +50,8 @@ const rules: RefactoringRule[] = [
 function applyRefactoringRules(project: Project) {
   const sourceFiles = project.getSourceFiles();
 
-  sourceFiles.forEach(sourceFile => {
-    sourceFile.forEachDescendant(node => {
+  sourceFiles.forEach((sourceFile) => {
+    sourceFile.forEachDescendant((node) => {
       for (const rule of rules) {
         if (rule.condition(node)) {
           rule.action(node);

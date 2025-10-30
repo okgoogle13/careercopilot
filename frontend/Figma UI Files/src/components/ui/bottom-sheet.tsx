@@ -14,17 +14,20 @@ export interface BottomSheetProps {
 }
 
 export const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
-  ({ 
-    open,
-    onOpenChange,
-    children,
-    title,
-    description,
-    showHandle = true,
-    snapPoints = [0.9, 0.5],
-    initialSnap = 0,
-    className = ''
-  }, ref) => {
+  (
+    {
+      open,
+      onOpenChange,
+      children,
+      title,
+      description,
+      showHandle = true,
+      snapPoints = [0.9, 0.5],
+      initialSnap = 0,
+      className = '',
+    },
+    ref
+  ) => {
     const [isDragging, setIsDragging] = useState(false);
     const [currentSnap, setCurrentSnap] = useState(initialSnap);
     const [startY, setStartY] = useState(0);
@@ -56,18 +59,18 @@ export const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
 
     const handleDragEnd = () => {
       setIsDragging(false);
-      
+
       // If dragged down more than 100px, close
       if (translateY > 100) {
         onOpenChange(false);
       } else {
         // Snap to nearest point
         const windowHeight = window.innerHeight;
-        const currentPosition = (translateY / windowHeight);
-        
+        const currentPosition = translateY / windowHeight;
+
         let nearestSnap = currentSnap;
         let minDiff = Infinity;
-        
+
         snapPoints.forEach((snap, index) => {
           const diff = Math.abs((1 - snap) * windowHeight - translateY);
           if (diff < minDiff) {
@@ -75,10 +78,10 @@ export const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
             nearestSnap = index;
           }
         });
-        
+
         setCurrentSnap(nearestSnap);
       }
-      
+
       setTranslateY(0);
       setStartY(0);
     };
@@ -136,15 +139,9 @@ export const BottomSheet = forwardRef<HTMLDivElement, BottomSheetProps>(
             <div className="px-6 pb-4 border-b border-[var(--glass-border)]">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1">
-                  {title && (
-                    <h3 className="text-lg text-[var(--on-surface)]">
-                      {title}
-                    </h3>
-                  )}
+                  {title && <h3 className="text-lg text-[var(--on-surface)]">{title}</h3>}
                   {description && (
-                    <p className="text-sm text-[var(--on-surface-variant)] mt-1">
-                      {description}
-                    </p>
+                    <p className="text-sm text-[var(--on-surface-variant)] mt-1">{description}</p>
                   )}
                 </div>
                 <button

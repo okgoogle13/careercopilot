@@ -76,9 +76,7 @@ export function ProfileCompletionCard({
             <h3 className="font-semibold text-green-900 dark:text-green-100">
               Profile Complete! 🎉
             </h3>
-            <p className="text-sm text-green-800 dark:text-green-200">
-              Your profile is 100% ready
-            </p>
+            <p className="text-sm text-green-800 dark:text-green-200">Your profile is 100% ready</p>
           </div>
         </div>
         <p className="text-sm text-green-700 dark:text-green-300">
@@ -93,15 +91,12 @@ export function ProfileCompletionCard({
       <Card className="p-4 space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="font-semibold text-sm">Profile Completion</h3>
-          <span className="text-sm font-medium text-primary">
-            {completion.overallPercentage}%
-          </span>
+          <span className="text-sm font-medium text-primary">{completion.overallPercentage}%</span>
         </div>
         <Progress value={completion.overallPercentage} className="h-2" />
         {incompleteItems.length > 0 && (
           <div className="text-xs text-muted-foreground">
-            {incompleteItems.length} item{incompleteItems.length !== 1 ? 's' : ''}{' '}
-            remaining
+            {incompleteItems.length} item{incompleteItems.length !== 1 ? 's' : ''} remaining
           </div>
         )}
         {onEditProfile && (
@@ -119,9 +114,7 @@ export function ProfileCompletionCard({
       <div>
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-semibold">Complete Your Profile</h3>
-          <span className="text-sm font-medium text-primary">
-            {completion.overallPercentage}%
-          </span>
+          <span className="text-sm font-medium text-primary">{completion.overallPercentage}%</span>
         </div>
         <Progress value={completion.overallPercentage} className="h-2" />
       </div>
@@ -145,17 +138,13 @@ export function ProfileCompletionCard({
               <div className="flex-1">
                 <p
                   className={`text-sm font-medium ${
-                    item.complete
-                      ? 'text-muted-foreground line-through'
-                      : 'text-foreground'
+                    item.complete ? 'text-muted-foreground line-through' : 'text-foreground'
                   }`}
                 >
                   {item.label}
                 </p>
               </div>
-              {!item.complete && (
-                <div className="w-1 h-1 rounded-full bg-primary" />
-              )}
+              {!item.complete && <div className="w-1 h-1 rounded-full bg-primary" />}
             </div>
           );
         })}

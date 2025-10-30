@@ -8,14 +8,14 @@ interface OpportunitiesViewProps {
 
 export function OpportunitiesView({ onAnalyzeJob }: OpportunitiesViewProps) {
   return (
-    <div 
-      className="flex-1 overflow-auto"
-      style={{ background: 'var(--color-background)' }}
-    >
+    <div className="flex-1 overflow-auto" style={{ background: 'var(--color-background)' }}>
       <div className="max-w-7xl mx-auto p-6">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="font-semibold mb-2" style={{ color: 'var(--on-surface)', fontSize: '2rem' }}>
+            <h1
+              className="font-semibold mb-2"
+              style={{ color: 'var(--on-surface)', fontSize: '2rem' }}
+            >
               Opportunities
             </h1>
             <p style={{ color: 'var(--on-surface-variant)' }}>
@@ -36,14 +36,14 @@ export function OpportunitiesView({ onAnalyzeJob }: OpportunitiesViewProps) {
         </div>
 
         {/* Placeholder content */}
-        <div 
+        <div
           className="flex flex-col items-center justify-center py-20 rounded-2xl border-2 border-dashed"
           style={{
             borderColor: 'rgba(244, 114, 182, 0.3)',
-            background: 'rgba(30, 30, 35, 0.4)'
+            background: 'rgba(30, 30, 35, 0.4)',
           }}
         >
-          <div 
+          <div
             className="p-6 rounded-full mb-4"
             style={{
               background: 'rgba(244, 114, 182, 0.1)',

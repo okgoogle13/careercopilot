@@ -70,9 +70,7 @@ export const documentService = {
   /**
    * Generate cover letter
    */
-  async generateCoverLetter(
-    request: CoverLetterRequest
-  ): Promise<CoverLetterResponse> {
+  async generateCoverLetter(request: CoverLetterRequest): Promise<CoverLetterResponse> {
     try {
       const response = await apiClient.post('/generate-cover-letter', request);
       return response.data;
@@ -85,9 +83,7 @@ export const documentService = {
   /**
    * Generate tailored resume
    */
-  async generateTailoredResume(
-    request: TailoredResumeRequest
-  ): Promise<TailoredResumeResponse> {
+  async generateTailoredResume(request: TailoredResumeRequest): Promise<TailoredResumeResponse> {
     try {
       const response = await apiClient.post('/generate-tailored-resume', request);
       return response.data;
@@ -100,9 +96,7 @@ export const documentService = {
   /**
    * Optimize content for job application
    */
-  async optimizeContent(
-    request: OptimizeContentRequest
-  ): Promise<OptimizeContentResponse> {
+  async optimizeContent(request: OptimizeContentRequest): Promise<OptimizeContentResponse> {
     try {
       const response = await apiClient.post('/optimize-content', request);
       return response.data;
@@ -141,10 +135,7 @@ export const documentService = {
   /**
    * Download document as PDF
    */
-  async downloadDocumentPDF(
-    documentId: string,
-    fileName?: string
-  ): Promise<Blob> {
+  async downloadDocumentPDF(documentId: string, fileName?: string): Promise<Blob> {
     try {
       const response = await apiClient.get(`/${documentId}/download`, {
         responseType: 'blob',

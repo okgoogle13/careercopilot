@@ -20,10 +20,7 @@ interface UseApplicationsReturn {
   fetchApplicationById: (id: string) => Promise<void>;
   fetchStats: () => Promise<void>;
   createApplication: (request: CreateApplicationRequest) => Promise<Application>;
-  updateApplication: (
-    id: string,
-    request: UpdateApplicationRequest
-  ) => Promise<Application>;
+  updateApplication: (id: string, request: UpdateApplicationRequest) => Promise<Application>;
   deleteApplication: (id: string) => Promise<void>;
   addTimelineEvent: (
     applicationId: string,
@@ -34,10 +31,7 @@ interface UseApplicationsReturn {
     }
   ) => Promise<Application>;
   attachDocument: (applicationId: string, documentId: string) => Promise<Application>;
-  detachDocument: (
-    applicationId: string,
-    documentId: string
-  ) => Promise<Application>;
+  detachDocument: (applicationId: string, documentId: string) => Promise<Application>;
   clearError: () => void;
   clearSelection: () => void;
 }
@@ -67,8 +61,7 @@ export function useApplications(): UseApplicationsReturn {
       const data = await applicationService.getApplications();
       setApplications(data);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Failed to fetch applications';
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch applications';
       setError(errorMessage);
       console.error(errorMessage);
     } finally {
@@ -84,8 +77,7 @@ export function useApplications(): UseApplicationsReturn {
       const data = await applicationService.getApplication(id);
       setSelectedApplication(data);
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Failed to fetch application';
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch application';
       setError(errorMessage);
       console.error(errorMessage);
     } finally {
@@ -115,8 +107,7 @@ export function useApplications(): UseApplicationsReturn {
         await fetchStats(); // Update stats
         return response.application;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to create application';
+        const errorMessage = err instanceof Error ? err.message : 'Failed to create application';
         setError(errorMessage);
         throw err;
       } finally {
@@ -128,25 +119,19 @@ export function useApplications(): UseApplicationsReturn {
 
   // Update application
   const updateApplication = useCallback(
-    async (
-      id: string,
-      request: UpdateApplicationRequest
-    ): Promise<Application> => {
+    async (id: string, request: UpdateApplicationRequest): Promise<Application> => {
       setIsLoading(true);
       setError(null);
       try {
         const updated = await applicationService.updateApplication(id, request);
-        setApplications((prev) =>
-          prev.map((app) => (app.id === id ? updated : app))
-        );
+        setApplications((prev) => prev.map((app) => (app.id === id ? updated : app)));
         if (selectedApplication?.id === id) {
           setSelectedApplication(updated);
         }
         await fetchStats(); // Update stats
         return updated;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to update application';
+        const errorMessage = err instanceof Error ? err.message : 'Failed to update application';
         setError(errorMessage);
         throw err;
       } finally {
@@ -169,8 +154,7 @@ export function useApplications(): UseApplicationsReturn {
         }
         await fetchStats(); // Update stats
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to delete application';
+        const errorMessage = err instanceof Error ? err.message : 'Failed to delete application';
         setError(errorMessage);
         throw err;
       } finally {
@@ -193,20 +177,14 @@ export function useApplications(): UseApplicationsReturn {
       setIsLoading(true);
       setError(null);
       try {
-        const updated = await applicationService.addTimelineEvent(
-          applicationId,
-          event
-        );
-        setApplications((prev) =>
-          prev.map((app) => (app.id === applicationId ? updated : app))
-        );
+        const updated = await applicationService.addTimelineEvent(applicationId, event);
+        setApplications((prev) => prev.map((app) => (app.id === applicationId ? updated : app)));
         if (selectedApplication?.id === applicationId) {
           setSelectedApplication(updated);
         }
         return updated;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to add timeline event';
+        const errorMessage = err instanceof Error ? err.message : 'Failed to add timeline event';
         setError(errorMessage);
         throw err;
       } finally {
@@ -226,16 +204,13 @@ export function useApplications(): UseApplicationsReturn {
           applicationId,
           documentId
         );
-        setApplications((prev) =>
-          prev.map((app) => (app.id === applicationId ? updated : app))
-        );
+        setApplications((prev) => prev.map((app) => (app.id === applicationId ? updated : app)));
         if (selectedApplication?.id === applicationId) {
           setSelectedApplication(updated);
         }
         return updated;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to attach document';
+        const errorMessage = err instanceof Error ? err.message : 'Failed to attach document';
         setError(errorMessage);
         throw err;
       } finally {
@@ -247,10 +222,7 @@ export function useApplications(): UseApplicationsReturn {
 
   // Detach document
   const detachDocument = useCallback(
-    async (
-      applicationId: string,
-      documentId: string
-    ): Promise<Application> => {
+    async (applicationId: string, documentId: string): Promise<Application> => {
       setIsLoading(true);
       setError(null);
       try {
@@ -258,16 +230,13 @@ export function useApplications(): UseApplicationsReturn {
           applicationId,
           documentId
         );
-        setApplications((prev) =>
-          prev.map((app) => (app.id === applicationId ? updated : app))
-        );
+        setApplications((prev) => prev.map((app) => (app.id === applicationId ? updated : app)));
         if (selectedApplication?.id === applicationId) {
           setSelectedApplication(updated);
         }
         return updated;
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to detach document';
+        const errorMessage = err instanceof Error ? err.message : 'Failed to detach document';
         setError(errorMessage);
         throw err;
       } finally {

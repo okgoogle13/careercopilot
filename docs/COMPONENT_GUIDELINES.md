@@ -7,6 +7,7 @@
 **Purpose**: Authenticate existing users
 
 **Features**:
+
 - Email and password validation
 - Real-time error feedback
 - Loading state with spinner
@@ -14,14 +15,16 @@
 - Screen reader announcements
 
 **Usage**:
+
 ```typescript
-import { LoginPage } from '@/pages/LoginPage';
+import { LoginPage } from "@/pages/LoginPage";
 
 // Renders at /login route
 // Automatically redirects to /dashboard if authenticated
 ```
 
 **Accessibility**:
+
 - ✅ Form validation messages announced to screen readers
 - ✅ Required field indicators
 - ✅ Focus management on errors
@@ -32,14 +35,16 @@ import { LoginPage } from '@/pages/LoginPage';
 **Purpose**: Create new user accounts
 
 **Features**:
+
 - Display name, email, password fields
 - Password strength validation
 - Confirm password matching
 - Loading state with spinner
 
 **Usage**:
+
 ```typescript
-import { RegisterPage } from '@/pages/RegisterPage';
+import { RegisterPage } from "@/pages/RegisterPage";
 
 // Renders at /register route
 // Automatically redirects to /dashboard if authenticated
@@ -52,11 +57,13 @@ import { RegisterPage } from '@/pages/RegisterPage';
 **Purpose**: Guard routes that require authentication
 
 **Features**:
+
 - Automatic redirect to login for unauthenticated users
 - Loading state while checking auth status
 - Preserves intended destination
 
 **Usage**:
+
 ```typescript
 <ProtectedRoute>
   <DashboardPage />
@@ -68,6 +75,7 @@ import { RegisterPage } from '@/pages/RegisterPage';
 **Purpose**: Display user notifications with real-time updates
 
 **Features**:
+
 - Badge showing unread count
 - Popover notification list
 - Mark as read/unread
@@ -76,6 +84,7 @@ import { RegisterPage } from '@/pages/RegisterPage';
 - Auto-polling for new notifications
 
 **Usage**:
+
 ```typescript
 import { NotificationCenter } from '@/components/NotificationCenter';
 
@@ -84,6 +93,7 @@ import { NotificationCenter } from '@/components/NotificationCenter';
 ```
 
 **Accessibility**:
+
 - ✅ Badge announces unread count
 - ✅ Popover is keyboard navigable
 - ✅ Each notification has proper role and aria-live
@@ -96,12 +106,14 @@ import { NotificationCenter } from '@/components/NotificationCenter';
 **Purpose**: Show placeholder while loading content
 
 **Features**:
+
 - Multiple skeleton types (card, table, list, profile, content)
 - Shimmer animation
 - Responsive grid layout
 - ARIA busy state
 
 **Usage**:
+
 ```typescript
 import { SkeletonLoader } from '@/components/SkeletonLoader';
 
@@ -120,6 +132,7 @@ import { SkeletonLoader } from '@/components/SkeletonLoader';
 **Purpose**: Display user overview with stats and profiles
 
 **Features**:
+
 - Real-time stats from analytics service
 - Profile list with ATS scores
 - Recent activity feed
@@ -127,14 +140,16 @@ import { SkeletonLoader } from '@/components/SkeletonLoader';
 - Empty state for new users
 
 **Usage**:
+
 ```typescript
-import { DashboardPage } from '@/pages/DashboardPage';
+import { DashboardPage } from "@/pages/DashboardPage";
 
 // Renders at /dashboard route
 // Automatically fetches data on mount
 ```
 
 **API Integration**:
+
 - Calls `profileService.getProfiles()`
 - Calls `analyticsService.getDashboardStats()`
 - Calls `analyticsService.getPerformanceTrends()`
@@ -146,6 +161,7 @@ import { DashboardPage } from '@/pages/DashboardPage';
 **Purpose**: AI-powered document upload with tag suggestion
 
 **Features**:
+
 - Two-step upload process (upload → tagging)
 - AI-suggested tags with confidence scores
 - Tag selection/deselection
@@ -153,6 +169,7 @@ import { DashboardPage } from '@/pages/DashboardPage';
 - Error handling
 
 **Usage**:
+
 ```typescript
 import { SmartUploadModal } from '@/components/SmartUploadModal';
 
@@ -164,6 +181,7 @@ import { SmartUploadModal } from '@/components/SmartUploadModal';
 ```
 
 **Accepted File Types**:
+
 - PDF (.pdf)
 - Word (.doc, .docx)
 - Text (.txt)
@@ -173,6 +191,7 @@ import { SmartUploadModal } from '@/components/SmartUploadModal';
 **Purpose**: Manage and browse uploaded documents
 
 **Features**:
+
 - Grid display of assets
 - Search functionality
 - Asset metadata display
@@ -181,8 +200,9 @@ import { SmartUploadModal } from '@/components/SmartUploadModal';
 - Delete with confirmation
 
 **Usage**:
+
 ```typescript
-import { AssetLibraryPage } from '@/pages/AssetLibraryPage';
+import { AssetLibraryPage } from "@/pages/AssetLibraryPage";
 
 // Renders at /asset-library route
 ```
@@ -194,6 +214,7 @@ import { AssetLibraryPage } from '@/pages/AssetLibraryPage';
 **Purpose**: Generate complete job application packages
 
 **Features**:
+
 - Step-by-step workflow (Prepare → Customize → Review → Submit)
 - Visual progress tracking
 - Resume, cover letter, KSC responses
@@ -201,6 +222,7 @@ import { AssetLibraryPage } from '@/pages/AssetLibraryPage';
 - Error handling
 
 **Usage**:
+
 ```typescript
 import { ApplicationGeneratorModal } from '@/components/ApplicationGeneratorModal';
 
@@ -221,27 +243,28 @@ import { ApplicationGeneratorModal } from '@/components/ApplicationGeneratorModa
 **Purpose**: User authentication and profile management
 
 **Methods**:
+
 ```typescript
 // Login
-login({ email, password })
+login({ email, password });
 
 // Register
-register({ email, password, displayName })
+register({ email, password, displayName });
 
 // Logout
-logout()
+logout();
 
 // Refresh token
-refreshToken()
+refreshToken();
 
 // Get current user
-getCurrentUser()
+getCurrentUser();
 
 // Update profile
-updateUserProfile(updates)
+updateUserProfile(updates);
 
 // Create voice profile
-createVoiceProfile(profileData)
+createVoiceProfile(profileData);
 ```
 
 ### SmartIngestionService
@@ -249,27 +272,28 @@ createVoiceProfile(profileData)
 **Purpose**: AI-powered document processing
 
 **Methods**:
+
 ```typescript
 // Upload and get tag suggestions
-uploadAndTag(file)
+uploadAndTag(file);
 
 // Extract and save document
-extractAndSave({ file, selectedTags, fileName })
+extractAndSave({ file, selectedTags, fileName });
 
 // Get asset library
-getAssetLibrary()
+getAssetLibrary();
 
 // Get specific asset
-getAssetById(id)
+getAssetById(id);
 
 // Delete asset
-deleteAsset(id)
+deleteAsset(id);
 
 // Search assets
-searchAssets(query)
+searchAssets(query);
 
 // Health check
-healthCheck()
+healthCheck();
 ```
 
 ### ProfileService
@@ -277,13 +301,14 @@ healthCheck()
 **Purpose**: User profile CRUD operations
 
 **Methods**:
+
 ```typescript
-createProfile(profileData)
-getProfiles()
-getProfileById(id)
-updateProfile(id, updates)
-deleteProfile(id)
-duplicateProfile(id)
+createProfile(profileData);
+getProfiles();
+getProfileById(id);
+updateProfile(id, updates);
+deleteProfile(id);
+duplicateProfile(id);
 ```
 
 ### JobService
@@ -291,14 +316,15 @@ duplicateProfile(id)
 **Purpose**: Job extraction and matching
 
 **Methods**:
+
 ```typescript
-extractJobFromUrl(url)
-extractJobFromText(text)
-advancedJobAnalysis(jobData)
-getJobMatching(userProfileId)
-listJobs(filters)
-getJob(jobId)
-deleteJob(jobId)
+extractJobFromUrl(url);
+extractJobFromText(text);
+advancedJobAnalysis(jobData);
+getJobMatching(userProfileId);
+listJobs(filters);
+getJob(jobId);
+deleteJob(jobId);
 ```
 
 ## Best Practices
@@ -354,9 +380,9 @@ try {
   const data = await apiService.fetchData();
   setData(data);
 } catch (err: any) {
-  const message = err.response?.data?.message || 'An error occurred';
+  const message = err.response?.data?.message || "An error occurred";
   setError(message);
-  announceToScreenReader(`Error: ${message}`, 'assertive');
+  announceToScreenReader(`Error: ${message}`, "assertive");
 }
 ```
 
@@ -383,7 +409,7 @@ const validateForm = () => {
   const errors = {};
 
   if (!email) {
-    errors.email = 'Email is required';
+    errors.email = "Email is required";
   }
 
   setFieldErrors(errors);
