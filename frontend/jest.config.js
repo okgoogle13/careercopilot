@@ -2,10 +2,11 @@ module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   rootDir: '.',
+  roots: ['<rootDir>/src'],
   testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}',
-    '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}',
+    '**/*.test.{js,jsx,ts,tsx}'
   ],
+  moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
