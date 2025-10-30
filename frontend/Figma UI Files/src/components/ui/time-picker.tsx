@@ -12,7 +12,10 @@ export interface TimePickerProps {
 }
 
 export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
-  ({ value, onChange, use24Hour = false, placeholder = 'Select time', disabled, className = '' }, ref) => {
+  (
+    { value, onChange, use24Hour = false, placeholder = 'Select time', disabled, className = '' },
+    ref
+  ) => {
     const [open, setOpen] = useState(false);
     const [hours, setHours] = useState(value ? parseInt(value.split(':')[0]) : 12);
     const [minutes, setMinutes] = useState(value ? parseInt(value.split(':')[1]) : 0);
@@ -48,7 +51,7 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
     };
 
     const hourRange = use24Hour ? 24 : 12;
-    const hoursList = Array.from({ length: hourRange }, (_, i) => use24Hour ? i : i + 1);
+    const hoursList = Array.from({ length: hourRange }, (_, i) => (use24Hour ? i : i + 1));
     const minutesList = Array.from({ length: 60 }, (_, i) => i);
 
     return (
@@ -68,18 +71,25 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
               ${disabled && 'opacity-50 cursor-not-allowed'}
               ${className}
             `}
-            style={open ? {
-              boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
-              borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
-            } : {}}
+            style={
+              open
+                ? {
+                    boxShadow:
+                      '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
+                    borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
+                  }
+                : {}
+            }
           >
-            <span className={value ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}>
+            <span
+              className={value ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}
+            >
               {formatTime()}
             </span>
             <Clock className="w-5 h-5 text-[var(--primary)]" />
           </button>
         </PopoverTrigger>
-        <PopoverContent 
+        <PopoverContent
           className="w-auto p-4 bg-[var(--surface-container)] border-2 border-[var(--glass-border)] rounded-[var(--radius-lg)] shadow-[var(--shadow-glow-aurora)]"
           align="start"
         >
@@ -95,9 +105,10 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
                     className={`
                       w-16 px-3 py-2 text-center rounded-[var(--radius-md)]
                       transition-all duration-200
-                      ${hours === hour 
-                        ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white' 
-                        : 'hover:bg-[var(--glass-bg)] text-[var(--on-surface)]'
+                      ${
+                        hours === hour
+                          ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white'
+                          : 'hover:bg-[var(--glass-bg)] text-[var(--on-surface)]'
                       }
                     `}
                   >
@@ -120,9 +131,10 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
                     className={`
                       w-16 px-3 py-2 text-center rounded-[var(--radius-md)]
                       transition-all duration-200
-                      ${minutes === minute 
-                        ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white' 
-                        : 'hover:bg-[var(--glass-bg)] text-[var(--on-surface)]'
+                      ${
+                        minutes === minute
+                          ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white'
+                          : 'hover:bg-[var(--glass-bg)] text-[var(--on-surface)]'
                       }
                     `}
                   >
@@ -147,9 +159,10 @@ export const TimePicker = forwardRef<HTMLButtonElement, TimePickerProps>(
                       className={`
                         w-16 px-3 py-2 text-center rounded-[var(--radius-md)]
                         transition-all duration-200
-                        ${period === p 
-                          ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white' 
-                          : 'hover:bg-[var(--glass-bg)] text-[var(--on-surface)]'
+                        ${
+                          period === p
+                            ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)] text-white'
+                            : 'hover:bg-[var(--glass-bg)] text-[var(--on-surface)]'
                         }
                       `}
                     >

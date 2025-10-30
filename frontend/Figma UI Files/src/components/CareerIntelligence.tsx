@@ -1,9 +1,17 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Badge } from "./ui/badge";
-import { Progress } from "./ui/progress";
-import { ArrowLeft, Sparkles, TrendingUp, TrendingDown, Target, BookOpen, AlertCircle } from "lucide-react";
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
+import {
+  ArrowLeft,
+  Sparkles,
+  TrendingUp,
+  TrendingDown,
+  Target,
+  BookOpen,
+  AlertCircle,
+} from 'lucide-react';
 
 interface CareerIntelligenceProps {
   onBack: () => void;
@@ -15,71 +23,79 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
 
   const skillGaps = [
     {
-      skill: "Python Programming",
-      importance: "High",
+      skill: 'Python Programming',
+      importance: 'High',
       demand: 85,
       currentLevel: 0,
-      description: "Essential for data analysis roles in community health"
+      description: 'Essential for data analysis roles in community health',
     },
     {
-      skill: "Data Analysis",
-      importance: "High", 
+      skill: 'Data Analysis',
+      importance: 'High',
       demand: 78,
       currentLevel: 30,
-      description: "Growing requirement for evidence-based program evaluation"
+      description: 'Growing requirement for evidence-based program evaluation',
     },
     {
-      skill: "Project Management",
-      importance: "Medium",
+      skill: 'Project Management',
+      importance: 'Medium',
       demand: 65,
       currentLevel: 60,
-      description: "Valuable for senior community support positions"
-    }
+      description: 'Valuable for senior community support positions',
+    },
   ];
 
   const careerPaths = [
     {
-      title: "Program Manager",
-      timeframe: "2-3 years",
-      salaryIncrease: "$15,000 - $25,000",
+      title: 'Program Manager',
+      timeframe: '2-3 years',
+      salaryIncrease: '$15,000 - $25,000',
       probability: 78,
-      requirements: ["Project Management Certification", "Leadership Experience", "Budget Management"]
+      requirements: [
+        'Project Management Certification',
+        'Leadership Experience',
+        'Budget Management',
+      ],
     },
     {
-      title: "Mental Health Team Leader",
-      timeframe: "1-2 years", 
-      salaryIncrease: "$8,000 - $15,000",
+      title: 'Mental Health Team Leader',
+      timeframe: '1-2 years',
+      salaryIncrease: '$8,000 - $15,000',
       probability: 92,
-      requirements: ["Advanced Mental Health Training", "Supervision Skills", "Quality Assurance Experience"]
+      requirements: [
+        'Advanced Mental Health Training',
+        'Supervision Skills',
+        'Quality Assurance Experience',
+      ],
     },
     {
-      title: "Community Services Coordinator",
-      timeframe: "6-12 months",
-      salaryIncrease: "$5,000 - $12,000", 
+      title: 'Community Services Coordinator',
+      timeframe: '6-12 months',
+      salaryIncrease: '$5,000 - $12,000',
       probability: 95,
-      requirements: ["Stakeholder Engagement", "Grant Writing", "Community Networks"]
-    }
+      requirements: ['Stakeholder Engagement', 'Grant Writing', 'Community Networks'],
+    },
   ];
 
   const marketTrends = [
     {
-      trend: "Telehealth Integration",
-      growth: "+45%",
-      impact: "High",
-      description: "Growing demand for remote support delivery capabilities"
+      trend: 'Telehealth Integration',
+      growth: '+45%',
+      impact: 'High',
+      description: 'Growing demand for remote support delivery capabilities',
     },
     {
-      trend: "NDIS Service Expansion",
-      growth: "+32%",
-      impact: "High", 
-      description: "Increased opportunities in disability support services"
+      trend: 'NDIS Service Expansion',
+      growth: '+32%',
+      impact: 'High',
+      description: 'Increased opportunities in disability support services',
     },
     {
-      trend: "Peer Support Programs",
-      growth: "+28%",
-      impact: "Medium",
-      description: "Rising recognition of lived experience value"
-    }
+      trend: 'Peer Support Programs',
+      growth: '+28%',
+      impact: 'Medium',
+      description: 'Rising recognition of lived experience value',
+    },
   ];
 
   const handleGenerateLearningPath = async () => {
@@ -92,19 +108,27 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
 
   const getImportanceColor = (importance: string) => {
     switch (importance) {
-      case "High": return "text-red-500";
-      case "Medium": return "text-yellow-500";
-      case "Low": return "text-green-500";
-      default: return "text-gray-500";
+      case 'High':
+        return 'text-red-500';
+      case 'Medium':
+        return 'text-yellow-500';
+      case 'Low':
+        return 'text-green-500';
+      default:
+        return 'text-gray-500';
     }
   };
 
   const getImpactBadgeVariant = (impact: string) => {
     switch (impact) {
-      case "High": return "destructive";
-      case "Medium": return "secondary";
-      case "Low": return "outline";
-      default: return "outline";
+      case 'High':
+        return 'destructive';
+      case 'Medium':
+        return 'secondary';
+      case 'Low':
+        return 'outline';
+      default:
+        return 'outline';
     }
   };
 
@@ -153,10 +177,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                     <div className="flex items-center justify-between mb-3">
                       <h4 className="font-medium">{gap.skill}</h4>
                       <div className="flex items-center gap-2">
-                        <Badge 
-                          variant="outline" 
-                          className={getImportanceColor(gap.importance)}
-                        >
+                        <Badge variant="outline" className={getImportanceColor(gap.importance)}>
                           {gap.importance} Priority
                         </Badge>
                         <span className="text-sm text-muted-foreground">
@@ -164,11 +185,9 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                         </span>
                       </div>
                     </div>
-                    
-                    <p className="text-sm text-muted-foreground mb-3">
-                      {gap.description}
-                    </p>
-                    
+
+                    <p className="text-sm text-muted-foreground mb-3">{gap.description}</p>
+
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span>Current Level</span>
@@ -219,17 +238,15 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                         <div className="text-sm text-green-500 font-medium">
                           {path.probability}% probability
                         </div>
-                        <div className="text-sm text-muted-foreground">
-                          {path.timeframe}
-                        </div>
+                        <div className="text-sm text-muted-foreground">{path.timeframe}</div>
                       </div>
                     </div>
-                    
+
                     <div className="mb-3">
                       <span className="text-sm text-muted-foreground">Salary increase: </span>
                       <span className="text-sm font-medium">{path.salaryIncrease}</span>
                     </div>
-                    
+
                     <div>
                       <p className="text-sm text-muted-foreground mb-2">Requirements:</p>
                       <div className="flex flex-wrap gap-2">
@@ -264,21 +281,17 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                       <h4 className="font-medium text-sm">{trend.trend}</h4>
                       <div className="flex items-center gap-2">
                         <TrendingUp className="w-4 h-4 text-green-500" />
-                        <span className="text-sm font-medium text-green-500">
-                          {trend.growth}
-                        </span>
+                        <span className="text-sm font-medium text-green-500">{trend.growth}</span>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center justify-between mb-2">
                       <Badge variant={getImpactBadgeVariant(trend.impact)} className="text-xs">
                         {trend.impact} Impact
                       </Badge>
                     </div>
-                    
-                    <p className="text-xs text-muted-foreground">
-                      {trend.description}
-                    </p>
+
+                    <p className="text-xs text-muted-foreground">{trend.description}</p>
                   </div>
                 ))}
               </div>
@@ -301,16 +314,18 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                       Python basics, data types, control structures
                     </p>
                   </div>
-                  
+
                   <div className="p-3 bg-background border border-border rounded-lg">
                     <h4 className="font-medium text-sm mb-1">Phase 2: Application (Weeks 5-8)</h4>
                     <p className="text-xs text-muted-foreground">
                       Pandas for data analysis, basic statistics
                     </p>
                   </div>
-                  
+
                   <div className="p-3 bg-background border border-border rounded-lg">
-                    <h4 className="font-medium text-sm mb-1">Phase 3: Specialization (Weeks 9-12)</h4>
+                    <h4 className="font-medium text-sm mb-1">
+                      Phase 3: Specialization (Weeks 9-12)
+                    </h4>
                     <p className="text-xs text-muted-foreground">
                       Healthcare data analysis, reporting dashboards
                     </p>

@@ -1,8 +1,17 @@
-import { useState } from "react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { ArrowLeft, Download, Share2, Edit3, ZoomIn, ZoomOut, RotateCcw, Printer } from "lucide-react";
+import { useState } from 'react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import {
+  ArrowLeft,
+  Download,
+  Share2,
+  Edit3,
+  ZoomIn,
+  ZoomOut,
+  RotateCcw,
+  Printer,
+} from 'lucide-react';
 
 interface DocumentPreviewProps {
   onBack: () => void;
@@ -20,19 +29,24 @@ interface DocumentData {
 }
 
 const mockDocument: DocumentData = {
-  title: "Nishant Dougall - Community Support Worker Resume",
-  type: "resume",
-  lastModified: "2 hours ago",
+  title: 'Nishant Dougall - Community Support Worker Resume',
+  type: 'resume',
+  lastModified: '2 hours ago',
   pages: 1,
-  templateName: "Modern Minimal"
+  templateName: 'Modern Minimal',
 };
 
-export function DocumentPreview({ onBack, onEdit, documentType, templateName }: DocumentPreviewProps) {
+export function DocumentPreview({
+  onBack,
+  onEdit,
+  documentType,
+  templateName,
+}: DocumentPreviewProps) {
   const [zoomLevel, setZoomLevel] = useState(100);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 25, 200));
-  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 25, 50));
+  const handleZoomIn = () => setZoomLevel((prev) => Math.min(prev + 25, 200));
+  const handleZoomOut = () => setZoomLevel((prev) => Math.max(prev - 25, 50));
   const handleResetZoom = () => setZoomLevel(100);
 
   return (
@@ -144,9 +158,7 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
             <h3 className="font-medium mb-3">ATS Score</h3>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-400 mb-2">87%</div>
-              <div className="text-sm text-muted-foreground">
-                Excellent ATS compatibility
-              </div>
+              <div className="text-sm text-muted-foreground">Excellent ATS compatibility</div>
               <Button variant="outline" size="sm" className="w-full mt-3">
                 View Details
               </Button>
@@ -161,11 +173,21 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
               <h3 className="font-medium">Preview</h3>
               {mockDocument.pages > 1 && (
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Button size="sm" variant="outline" onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                  >
                     Previous
                   </Button>
-                  <span>Page {currentPage} of {mockDocument.pages}</span>
-                  <Button size="sm" variant="outline" onClick={() => setCurrentPage(Math.min(mockDocument.pages, currentPage + 1))}>
+                  <span>
+                    Page {currentPage} of {mockDocument.pages}
+                  </span>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setCurrentPage(Math.min(mockDocument.pages, currentPage + 1))}
+                  >
                     Next
                   </Button>
                 </div>
@@ -174,13 +196,13 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
 
             {/* Document Preview Container */}
             <div className="bg-gray-100 p-8 rounded-lg flex justify-center overflow-auto">
-              <div 
+              <div
                 className="bg-white shadow-lg transition-transform duration-200 max-w-[8.5in]"
-                style={{ 
+                style={{
                   transform: `scale(${zoomLevel / 100})`,
                   transformOrigin: 'top center',
                   minHeight: '11in',
-                  aspectRatio: '8.5 / 11'
+                  aspectRatio: '8.5 / 11',
                 }}
               >
                 {/* Mock Resume Content */}
@@ -201,8 +223,10 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
                         Professional Summary
                       </h2>
                       <p className="text-gray-700 leading-relaxed">
-                        Dedicated Community Support Worker with 3+ years of experience providing client-centered care and advocacy. 
-                        Proven track record in crisis intervention, case management, and supporting individuals with mental health challenges and addiction recovery.
+                        Dedicated Community Support Worker with 3+ years of experience providing
+                        client-centered care and advocacy. Proven track record in crisis
+                        intervention, case management, and supporting individuals with mental health
+                        challenges and addiction recovery.
                       </p>
                     </div>
 
@@ -215,31 +239,50 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
                         <div>
                           <div className="flex justify-between items-start mb-2">
                             <div>
-                              <h3 className="font-medium text-gray-900">Community Support Worker</h3>
+                              <h3 className="font-medium text-gray-900">
+                                Community Support Worker
+                              </h3>
                               <p className="text-gray-600">Community Living BC</p>
                             </div>
                             <span className="text-gray-500 text-sm">2021 - Present</span>
                           </div>
                           <ul className="text-gray-700 space-y-1 text-sm">
-                            <li>• Provide support to 25+ individuals with developmental disabilities and mental health challenges</li>
-                            <li>• Facilitate life skills training and community integration programs</li>
-                            <li>• Collaborate with multidisciplinary teams to develop and implement care plans</li>
-                            <li>• Maintain detailed documentation and progress reports for client files</li>
+                            <li>
+                              • Provide support to 25+ individuals with developmental disabilities
+                              and mental health challenges
+                            </li>
+                            <li>
+                              • Facilitate life skills training and community integration programs
+                            </li>
+                            <li>
+                              • Collaborate with multidisciplinary teams to develop and implement
+                              care plans
+                            </li>
+                            <li>
+                              • Maintain detailed documentation and progress reports for client
+                              files
+                            </li>
                           </ul>
                         </div>
 
                         <div>
                           <div className="flex justify-between items-start mb-2">
                             <div>
-                              <h3 className="font-medium text-gray-900">Mental Health Support Assistant</h3>
+                              <h3 className="font-medium text-gray-900">
+                                Mental Health Support Assistant
+                              </h3>
                               <p className="text-gray-600">Fraser Health Authority</p>
                             </div>
                             <span className="text-gray-500 text-sm">2019 - 2021</span>
                           </div>
                           <ul className="text-gray-700 space-y-1 text-sm">
-                            <li>• Assisted mental health professionals in group therapy sessions</li>
+                            <li>
+                              • Assisted mental health professionals in group therapy sessions
+                            </li>
                             <li>• Provided crisis intervention and de-escalation support</li>
-                            <li>• Connected clients with community resources and support services</li>
+                            <li>
+                              • Connected clients with community resources and support services
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -251,9 +294,18 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
                         Core Competencies
                       </h2>
                       <div className="text-gray-700 text-sm">
-                        <p><strong>Clinical Skills:</strong> Crisis Intervention, Case Management, Mental Health Support, Addiction Counseling</p>
-                        <p><strong>Interpersonal:</strong> Active Listening, Cultural Competency, Team Collaboration, Client Advocacy</p>
-                        <p><strong>Technical:</strong> Documentation, Care Planning, Risk Assessment, Community Resources</p>
+                        <p>
+                          <strong>Clinical Skills:</strong> Crisis Intervention, Case Management,
+                          Mental Health Support, Addiction Counseling
+                        </p>
+                        <p>
+                          <strong>Interpersonal:</strong> Active Listening, Cultural Competency,
+                          Team Collaboration, Client Advocacy
+                        </p>
+                        <p>
+                          <strong>Technical:</strong> Documentation, Care Planning, Risk Assessment,
+                          Community Resources
+                        </p>
                       </div>
                     </div>
 
@@ -265,13 +317,18 @@ export function DocumentPreview({ onBack, onEdit, documentType, templateName }: 
                       <div className="space-y-2">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h3 className="font-medium text-gray-900">Diploma in Community Support Work</h3>
+                            <h3 className="font-medium text-gray-900">
+                              Diploma in Community Support Work
+                            </h3>
                             <p className="text-gray-600">Douglas College</p>
                           </div>
                           <span className="text-gray-500 text-sm">2019</span>
                         </div>
                         <div className="text-sm text-gray-700">
-                          <p><strong>Certifications:</strong> Mental Health First Aid, Crisis Prevention Institute (CPI), CPR/AED</p>
+                          <p>
+                            <strong>Certifications:</strong> Mental Health First Aid, Crisis
+                            Prevention Institute (CPI), CPR/AED
+                          </p>
                         </div>
                       </div>
                     </div>

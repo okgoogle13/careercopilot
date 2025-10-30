@@ -17,14 +17,17 @@ export interface StepperProps {
 }
 
 export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
-  ({ 
-    steps, 
-    currentStep, 
-    onStepClick,
-    orientation = 'horizontal',
-    className = '',
-    clickableSteps = false
-  }, ref) => {
+  (
+    {
+      steps,
+      currentStep,
+      onStepClick,
+      orientation = 'horizontal',
+      className = '',
+      clickableSteps = false,
+    },
+    ref
+  ) => {
     const handleStepClick = (index: number) => {
       if (clickableSteps && onStepClick && index <= currentStep) {
         onStepClick(index);
@@ -54,11 +57,12 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                     className={`
                       relative z-10 w-10 h-10 rounded-full flex items-center justify-center
                       border-2 transition-all duration-300
-                      ${status === 'completed'
-                        ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--tertiary)] border-transparent shadow-[var(--shadow-glow-aurora)]'
-                        : status === 'current'
-                          ? 'bg-[var(--surface-container)] border-[var(--primary)] shadow-[var(--shadow-glow-aurora)]'
-                          : 'bg-[var(--glass-bg)] border-[var(--glass-border)]'
+                      ${
+                        status === 'completed'
+                          ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--tertiary)] border-transparent shadow-[var(--shadow-glow-aurora)]'
+                          : status === 'current'
+                            ? 'bg-[var(--surface-container)] border-[var(--primary)] shadow-[var(--shadow-glow-aurora)]'
+                            : 'bg-[var(--glass-bg)] border-[var(--glass-border)]'
                       }
                       ${isClickable && 'cursor-pointer hover:scale-110'}
                     `}
@@ -66,25 +70,34 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                     {status === 'completed' ? (
                       <Check className="w-5 h-5 text-white" />
                     ) : step.icon ? (
-                      <span className={status === 'current' ? 'text-[var(--primary)]' : 'text-[var(--on-surface-variant)]'}>
+                      <span
+                        className={
+                          status === 'current'
+                            ? 'text-[var(--primary)]'
+                            : 'text-[var(--on-surface-variant)]'
+                        }
+                      >
                         {step.icon}
                       </span>
                     ) : (
-                      <span className={`${status === 'current' ? 'text-[var(--primary)]' : 'text-[var(--on-surface-variant)]'}`}>
+                      <span
+                        className={`${status === 'current' ? 'text-[var(--primary)]' : 'text-[var(--on-surface-variant)]'}`}
+                      >
                         {index + 1}
                       </span>
                     )}
                   </button>
-                  
+
                   {/* Connector Line */}
                   {index < steps.length - 1 && (
                     <div className="w-0.5 h-16 my-1">
                       <div
                         className={`
                           w-full h-full transition-all duration-300
-                          ${index < currentStep
-                            ? 'bg-gradient-to-b from-[var(--primary)] to-[var(--tertiary)]'
-                            : 'bg-[var(--glass-border)]'
+                          ${
+                            index < currentStep
+                              ? 'bg-gradient-to-b from-[var(--primary)] to-[var(--tertiary)]'
+                              : 'bg-[var(--glass-border)]'
                           }
                         `}
                       />
@@ -94,7 +107,9 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
 
                 {/* Step Content */}
                 <div className="flex-1 pb-16">
-                  <h4 className={`${status === 'current' ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}`}>
+                  <h4
+                    className={`${status === 'current' ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}`}
+                  >
                     {step.label}
                   </h4>
                   {step.description && (
@@ -127,11 +142,12 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                   className={`
                     relative z-10 w-10 h-10 rounded-full flex items-center justify-center
                     border-2 transition-all duration-300
-                    ${status === 'completed'
-                      ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--tertiary)] border-transparent shadow-[var(--shadow-glow-aurora)]'
-                      : status === 'current'
-                        ? 'bg-[var(--surface-container)] border-[var(--primary)] shadow-[var(--shadow-glow-aurora)]'
-                        : 'bg-[var(--glass-bg)] border-[var(--glass-border)]'
+                    ${
+                      status === 'completed'
+                        ? 'bg-gradient-to-br from-[var(--primary)] to-[var(--tertiary)] border-transparent shadow-[var(--shadow-glow-aurora)]'
+                        : status === 'current'
+                          ? 'bg-[var(--surface-container)] border-[var(--primary)] shadow-[var(--shadow-glow-aurora)]'
+                          : 'bg-[var(--glass-bg)] border-[var(--glass-border)]'
                     }
                     ${isClickable && 'cursor-pointer hover:scale-110'}
                   `}
@@ -139,18 +155,28 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                   {status === 'completed' ? (
                     <Check className="w-5 h-5 text-white" />
                   ) : step.icon ? (
-                    <span className={status === 'current' ? 'text-[var(--primary)]' : 'text-[var(--on-surface-variant)]'}>
+                    <span
+                      className={
+                        status === 'current'
+                          ? 'text-[var(--primary)]'
+                          : 'text-[var(--on-surface-variant)]'
+                      }
+                    >
                       {step.icon}
                     </span>
                   ) : (
-                    <span className={`${status === 'current' ? 'text-[var(--primary)]' : 'text-[var(--on-surface-variant)]'}`}>
+                    <span
+                      className={`${status === 'current' ? 'text-[var(--primary)]' : 'text-[var(--on-surface-variant)]'}`}
+                    >
                       {index + 1}
                     </span>
                   )}
                 </button>
-                
+
                 <div className="text-center">
-                  <p className={`text-sm ${status === 'current' ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}`}>
+                  <p
+                    className={`text-sm ${status === 'current' ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}`}
+                  >
                     {step.label}
                   </p>
                   {step.description && (
@@ -167,9 +193,10 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(
                   <div
                     className={`
                       w-full h-full transition-all duration-300
-                      ${index < currentStep
-                        ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)]'
-                        : 'bg-[var(--glass-border)]'
+                      ${
+                        index < currentStep
+                          ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)]'
+                          : 'bg-[var(--glass-border)]'
                       }
                     `}
                   />

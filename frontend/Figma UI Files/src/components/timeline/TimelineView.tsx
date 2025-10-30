@@ -2,22 +2,22 @@ import React, { useState } from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
-import { 
-  FileText, 
-  Calendar, 
-  Clock, 
-  MessageSquare, 
-  Phone, 
-  Video, 
-  Mail, 
-  CheckCircle, 
-  AlertCircle, 
-  XCircle, 
+import {
+  FileText,
+  Calendar,
+  Clock,
+  MessageSquare,
+  Phone,
+  Video,
+  Mail,
+  CheckCircle,
+  AlertCircle,
+  XCircle,
   Plus,
   ArrowLeft,
   Building2,
   User,
-  Star
+  Star,
 } from 'lucide-react';
 
 interface TimelineEvent {
@@ -50,8 +50,8 @@ const mockTimelineEvents: TimelineEvent[] = [
     color: 'bg-brand-primary',
     details: {
       documents: ['Resume_v3.pdf', 'Cover_Letter.pdf'],
-      notes: 'Applied through company website'
-    }
+      notes: 'Applied through company website',
+    },
   },
   {
     id: '2',
@@ -63,8 +63,8 @@ const mockTimelineEvents: TimelineEvent[] = [
     icon: Mail,
     color: 'bg-brand-secondary',
     details: {
-      notes: 'Automated confirmation email received'
-    }
+      notes: 'Automated confirmation email received',
+    },
   },
   {
     id: '3',
@@ -79,8 +79,8 @@ const mockTimelineEvents: TimelineEvent[] = [
       interviewer: 'Sarah Johnson - HR Manager',
       platform: 'Phone Call',
       notes: 'Discussed role requirements and company culture',
-      nextSteps: 'Technical interview scheduled'
-    }
+      nextSteps: 'Technical interview scheduled',
+    },
   },
   {
     id: '4',
@@ -95,8 +95,8 @@ const mockTimelineEvents: TimelineEvent[] = [
       interviewer: 'Mike Chen - Senior Engineer',
       platform: 'Google Meet',
       notes: 'Live coding session, discussed React patterns',
-      nextSteps: 'Final round with CTO'
-    }
+      nextSteps: 'Final round with CTO',
+    },
   },
   {
     id: '5',
@@ -110,8 +110,8 @@ const mockTimelineEvents: TimelineEvent[] = [
     details: {
       interviewer: 'Alex Rodriguez - CTO',
       platform: 'In-person',
-      notes: 'Culture fit and leadership discussion'
-    }
+      notes: 'Culture fit and leadership discussion',
+    },
   },
   {
     id: '6',
@@ -123,9 +123,9 @@ const mockTimelineEvents: TimelineEvent[] = [
     icon: Star,
     color: 'bg-aurora-tertiary',
     details: {
-      nextSteps: 'HR will contact with decision'
-    }
-  }
+      nextSteps: 'HR will contact with decision',
+    },
+  },
 ];
 
 const TimelineEventComponent: React.FC<{
@@ -134,24 +134,34 @@ const TimelineEventComponent: React.FC<{
   isLatest: boolean;
 }> = ({ event, isLast, isLatest }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  
+
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'text-brand-primary border-brand-primary';
-      case 'in-progress': return 'text-brand-tertiary border-brand-tertiary';
-      case 'upcoming': return 'text-brand-secondary border-brand-secondary';
-      case 'cancelled': return 'text-brand-error border-brand-error';
-      default: return 'text-on-surface-variant border-outline-variant';
+      case 'completed':
+        return 'text-brand-primary border-brand-primary';
+      case 'in-progress':
+        return 'text-brand-tertiary border-brand-tertiary';
+      case 'upcoming':
+        return 'text-brand-secondary border-brand-secondary';
+      case 'cancelled':
+        return 'text-brand-error border-brand-error';
+      default:
+        return 'text-on-surface-variant border-outline-variant';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'completed': return CheckCircle;
-      case 'in-progress': return Clock;
-      case 'upcoming': return AlertCircle;
-      case 'cancelled': return XCircle;
-      default: return Clock;
+      case 'completed':
+        return CheckCircle;
+      case 'in-progress':
+        return Clock;
+      case 'upcoming':
+        return AlertCircle;
+      case 'cancelled':
+        return XCircle;
+      default:
+        return Clock;
     }
   };
 
@@ -160,7 +170,7 @@ const TimelineEventComponent: React.FC<{
     const now = new Date();
     const diffInMs = now.getTime() - date.getTime();
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-    
+
     if (diffInDays === 0) {
       return `Today at ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     } else if (diffInDays === 1) {
@@ -181,27 +191,33 @@ const TimelineEventComponent: React.FC<{
       {!isLast && (
         <div className="absolute left-6 top-12 w-0.5 h-full bg-outline-variant opacity-50"></div>
       )}
-      
+
       {/* Timeline Icon */}
-      <div className={`
+      <div
+        className={`
         relative z-10 flex items-center justify-center w-12 h-12 rounded-full border-2 
         ${getStatusColor(event.status)}
         ${isLatest ? 'ring-4 ring-brand-primary/20 shadow-glow-primary' : ''}
         transition-all duration-300
-      `}>
-        <div className={`
+      `}
+      >
+        <div
+          className={`
           w-8 h-8 rounded-full ${event.color} flex items-center justify-center
           ${isLatest ? 'animate-pulse' : ''}
-        `}>
+        `}
+        >
           <IconComponent className="w-4 h-4 text-white" />
         </div>
       </div>
 
       {/* Event Content */}
-      <Card className={`
+      <Card
+        className={`
         flex-1 mb-6 transition-all duration-300
         ${isLatest ? 'card-aurora ring-1 ring-brand-primary/20' : 'card-surface'}
-      `}>
+      `}
+      >
         <div className="p-4">
           {/* Header */}
           <div className="flex items-start justify-between mb-3">
@@ -210,16 +226,14 @@ const TimelineEventComponent: React.FC<{
                 <h3 className="font-medium text-on-surface">{event.title}</h3>
                 <StatusIcon className={`w-4 h-4 ${getStatusColor(event.status).split(' ')[0]}`} />
               </div>
-              <p className="text-sm text-on-surface-variant mb-2">
-                {event.description}
-              </p>
+              <p className="text-sm text-on-surface-variant mb-2">{event.description}</p>
               <div className="flex items-center gap-2 text-xs text-on-surface-variant">
                 <Calendar className="w-3 h-3" />
                 <span>{formatTimestamp(event.timestamp)}</span>
               </div>
             </div>
-            <Badge 
-              variant="secondary" 
+            <Badge
+              variant="secondary"
               className={`text-xs ${getStatusColor(event.status)} bg-transparent`}
             >
               {event.status.replace('-', ' ').toUpperCase()}
@@ -244,7 +258,10 @@ const TimelineEventComponent: React.FC<{
               {event.details.documents && (
                 <div className="flex items-center gap-2 text-sm text-on-surface-variant">
                   <FileText className="w-3 h-3" />
-                  <span>{event.details.documents.length} document{event.details.documents.length !== 1 ? 's' : ''} shared</span>
+                  <span>
+                    {event.details.documents.length} document
+                    {event.details.documents.length !== 1 ? 's' : ''} shared
+                  </span>
                 </div>
               )}
             </div>
@@ -253,15 +270,15 @@ const TimelineEventComponent: React.FC<{
           {/* Expandable Content */}
           {event.details?.notes && (
             <div className="mt-3">
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="h-8 text-xs text-brand-primary hover:text-brand-primary hover:bg-brand-primary/10"
               >
                 {isExpanded ? 'Show Less' : 'Show Details'}
               </Button>
-              
+
               {isExpanded && (
                 <div className="mt-2 p-3 bg-surface-container-low rounded-lg animate-slide-up">
                   <div className="space-y-2 text-sm">
@@ -313,21 +330,22 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
   jobTitle = 'Senior Frontend Developer',
   companyName = 'TechCorp',
   onBack,
-  className = ''
+  className = '',
 }) => {
   const [events] = useState<TimelineEvent[]>(mockTimelineEvents);
   const [filter, setFilter] = useState<'all' | 'interviews' | 'communications'>('all');
 
-  const filteredEvents = events.filter(event => {
+  const filteredEvents = events.filter((event) => {
     if (filter === 'all') return true;
     if (filter === 'interviews') return event.type === 'interview';
     if (filter === 'communications') return ['follow-up', 'note'].includes(event.type);
     return true;
   });
 
-  const latestEventIndex = events.findIndex(event => event.status === 'in-progress') !== -1 
-    ? events.findIndex(event => event.status === 'in-progress')
-    : 0;
+  const latestEventIndex =
+    events.findIndex((event) => event.status === 'in-progress') !== -1
+      ? events.findIndex((event) => event.status === 'in-progress')
+      : 0;
 
   const handleAddEvent = () => {
     console.log('Add new timeline event');
@@ -335,7 +353,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
   };
 
   const getProgressPercentage = () => {
-    const completedEvents = events.filter(event => event.status === 'completed').length;
+    const completedEvents = events.filter((event) => event.status === 'completed').length;
     return Math.round((completedEvents / events.length) * 100);
   };
 
@@ -353,19 +371,16 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
                 </Button>
               )}
               <div>
-                <h1 className="text-2xl font-medium text-on-surface mb-1">
-                  Application Timeline
-                </h1>
+                <h1 className="text-2xl font-medium text-on-surface mb-1">Application Timeline</h1>
                 <div className="flex items-center gap-2 text-on-surface-variant">
                   <Building2 className="w-4 h-4" />
-                  <span>{jobTitle} at {companyName}</span>
+                  <span>
+                    {jobTitle} at {companyName}
+                  </span>
                 </div>
               </div>
             </div>
-            <Button 
-              onClick={handleAddEvent}
-              className="btn-gradient"
-            >
+            <Button onClick={handleAddEvent} className="btn-gradient">
               <Plus className="w-4 h-4 mr-2" />
               Add Event
             </Button>
@@ -376,7 +391,7 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <div className="w-24 h-2 bg-surface-container-high rounded-full">
-                  <div 
+                  <div
                     className="h-full bg-aurora-primary rounded-full transition-all duration-500"
                     style={{ width: `${getProgressPercentage()}%` }}
                   ></div>
@@ -391,14 +406,14 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
               {[
                 { key: 'all', label: 'All Events' },
                 { key: 'interviews', label: 'Interviews' },
-                { key: 'communications', label: 'Communications' }
+                { key: 'communications', label: 'Communications' },
               ].map(({ key, label }) => (
                 <Button
                   key={key}
-                  variant={filter === key ? "default" : "ghost"}
+                  variant={filter === key ? 'default' : 'ghost'}
                   size="sm"
                   onClick={() => setFilter(key as any)}
-                  className={filter === key ? "btn-gradient" : ""}
+                  className={filter === key ? 'btn-gradient' : ''}
                 >
                   {label}
                 </Button>
@@ -416,8 +431,8 @@ export const TimelineView: React.FC<TimelineViewProps> = ({
               <MessageSquare className="w-16 h-16 text-on-surface-variant/40 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-on-surface mb-2">No Events Found</h3>
               <p className="text-on-surface-variant mb-4">
-                {filter === 'all' 
-                  ? "No timeline events have been recorded yet." 
+                {filter === 'all'
+                  ? 'No timeline events have been recorded yet.'
                   : `No ${filter} events found.`}
               </p>
               <Button onClick={handleAddEvent} className="btn-gradient">

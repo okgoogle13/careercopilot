@@ -15,23 +15,23 @@ import { BottomSheet } from './ui/bottom-sheet';
 import { ShimmerSkeleton, SkeletonCard, SkeletonListItem } from './ui/shimmer-skeleton';
 import { EmptyState } from './ui/empty-state';
 import { ErrorState } from './ui/error-state';
-import { 
-  User, 
-  Mail, 
-  CreditCard, 
-  FileText, 
-  Search, 
+import {
+  User,
+  Mail,
+  CreditCard,
+  FileText,
+  Search,
   FolderOpen,
   RefreshCw,
   Inbox,
-  CheckCircle2
+  CheckCircle2,
 } from 'lucide-react';
 
-const ShowcaseSection: React.FC<{ title: string; description?: string; children: React.ReactNode }> = ({ 
-  title, 
-  description, 
-  children 
-}) => (
+const ShowcaseSection: React.FC<{
+  title: string;
+  description?: string;
+  children: React.ReactNode;
+}> = ({ title, description, children }) => (
   <div className="mb-12">
     <h2 className="text-2xl text-[var(--on-surface)] mb-2">{title}</h2>
     {description && <p className="text-[var(--on-surface-variant)] mb-6">{description}</p>}
@@ -48,7 +48,7 @@ const DemoCard: React.FC<{ title: string; children: React.ReactNode }> = ({ titl
 
 const ShowcaseContent: React.FC = () => {
   const { addToast } = useToast();
-  
+
   // Form Component States
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -79,10 +79,18 @@ const ShowcaseContent: React.FC = () => {
   const [showLoading, setShowLoading] = useState(false);
 
   const steps: Step[] = [
-    { label: 'Personal Info', description: 'Enter your details', icon: <User className="w-5 h-5" /> },
+    {
+      label: 'Personal Info',
+      description: 'Enter your details',
+      icon: <User className="w-5 h-5" />,
+    },
     { label: 'Contact', description: 'How to reach you', icon: <Mail className="w-5 h-5" /> },
     { label: 'Payment', description: 'Payment details', icon: <CreditCard className="w-5 h-5" /> },
-    { label: 'Review', description: 'Confirm submission', icon: <CheckCircle2 className="w-5 h-5" /> },
+    {
+      label: 'Review',
+      description: 'Confirm submission',
+      icon: <CheckCircle2 className="w-5 h-5" />,
+    },
   ];
 
   const handleEmailBlur = () => {
@@ -100,7 +108,7 @@ const ShowcaseContent: React.FC = () => {
       warning: { title: 'Warning!', description: 'Please review this carefully.' },
       info: { title: 'Info', description: 'Here is some information you should know.' },
     };
-    
+
     addToast({ type, ...messages[type] });
   };
 
@@ -118,7 +126,7 @@ const ShowcaseContent: React.FC = () => {
         </div>
 
         {/* Batch 1: Complex Form Components */}
-        <ShowcaseSection 
+        <ShowcaseSection
           title="Batch 1: Complex Form Components"
           description="Advanced input components with Material 3 styling and Aurora effects"
         >
@@ -133,31 +141,23 @@ const ShowcaseContent: React.FC = () => {
                 error={emailError}
                 helperText="We'll never share your email"
               />
-              <EnhancedInput
-                label="Password"
-                type="password"
-                placeholder=""
-              />
-              <EnhancedInput
-                label="Disabled Input"
-                value="Cannot edit this"
-                disabled
-              />
+              <EnhancedInput label="Password" type="password" placeholder="" />
+              <EnhancedInput label="Disabled Input" value="Cannot edit this" disabled />
             </div>
           </DemoCard>
 
           <DemoCard title="Date Pickers">
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">Single Date</label>
-                <DatePicker
-                  value={date}
-                  onChange={setDate}
-                  placeholder="Select a date"
-                />
+                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">
+                  Single Date
+                </label>
+                <DatePicker value={date} onChange={setDate} placeholder="Select a date" />
               </div>
               <div>
-                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">Date Range</label>
+                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">
+                  Date Range
+                </label>
                 <DateRangePicker
                   value={dateRange}
                   onChange={setDateRange}
@@ -170,20 +170,16 @@ const ShowcaseContent: React.FC = () => {
           <DemoCard title="Time Picker">
             <div className="space-y-4">
               <div>
-                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">12-Hour Format</label>
-                <TimePicker
-                  value={time}
-                  onChange={setTime}
-                  use24Hour={false}
-                />
+                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">
+                  12-Hour Format
+                </label>
+                <TimePicker value={time} onChange={setTime} use24Hour={false} />
               </div>
               <div>
-                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">24-Hour Format</label>
-                <TimePicker
-                  value={time}
-                  onChange={setTime}
-                  use24Hour={true}
-                />
+                <label className="block text-sm text-[var(--on-surface-variant)] mb-2">
+                  24-Hour Format
+                </label>
+                <TimePicker value={time} onChange={setTime} use24Hour={true} />
               </div>
             </div>
           </DemoCard>
@@ -240,7 +236,7 @@ const ShowcaseContent: React.FC = () => {
         </ShowcaseSection>
 
         {/* Batch 2: Navigation & Display Components */}
-        <ShowcaseSection 
+        <ShowcaseSection
           title="Batch 2: Navigation & Display Components"
           description="Navigation patterns and UI feedback components"
         >
@@ -337,7 +333,11 @@ const ShowcaseContent: React.FC = () => {
                 confirmLabel="Confirm"
                 cancelLabel="Cancel"
                 onConfirm={() => {
-                  addToast({ type: 'success', title: 'Confirmed!', description: 'Action completed successfully.' });
+                  addToast({
+                    type: 'success',
+                    title: 'Confirmed!',
+                    description: 'Action completed successfully.',
+                  });
                 }}
                 variant="default"
               />
@@ -361,7 +361,8 @@ const ShowcaseContent: React.FC = () => {
             >
               <div className="p-6 space-y-4">
                 <p className="text-[var(--on-surface-variant)]">
-                  Bottom sheets are great for mobile interfaces. You can drag them up and down, or swipe down to dismiss.
+                  Bottom sheets are great for mobile interfaces. You can drag them up and down, or
+                  swipe down to dismiss.
                 </p>
                 <button
                   onClick={() => setShowBottomSheet(false)}
@@ -375,7 +376,7 @@ const ShowcaseContent: React.FC = () => {
         </ShowcaseSection>
 
         {/* Batch 3: Reusable Page Patterns */}
-        <ShowcaseSection 
+        <ShowcaseSection
           title="Batch 3: Reusable Page Patterns"
           description="Common page states and loading patterns"
         >
@@ -414,11 +415,21 @@ const ShowcaseContent: React.FC = () => {
               description="You haven't created any documents yet. Get started by creating your first document."
               action={{
                 label: 'Create Document',
-                onClick: () => addToast({ type: 'info', title: 'Action Clicked', description: 'Create document clicked' })
+                onClick: () =>
+                  addToast({
+                    type: 'info',
+                    title: 'Action Clicked',
+                    description: 'Create document clicked',
+                  }),
               }}
               secondaryAction={{
                 label: 'Learn More',
-                onClick: () => addToast({ type: 'info', title: 'Action Clicked', description: 'Learn more clicked' })
+                onClick: () =>
+                  addToast({
+                    type: 'info',
+                    title: 'Action Clicked',
+                    description: 'Learn more clicked',
+                  }),
               }}
             />
           </DemoCard>
@@ -429,8 +440,20 @@ const ShowcaseContent: React.FC = () => {
               message="We couldn't load your data. This might be due to a network issue or server error."
               error={new Error('Network request failed')}
               showDetails
-              onRetry={() => addToast({ type: 'info', title: 'Retrying...', description: 'Attempting to reload data' })}
-              onGoHome={() => addToast({ type: 'info', title: 'Going Home', description: 'Redirecting to home page' })}
+              onRetry={() =>
+                addToast({
+                  type: 'info',
+                  title: 'Retrying...',
+                  description: 'Attempting to reload data',
+                })
+              }
+              onGoHome={() =>
+                addToast({
+                  type: 'info',
+                  title: 'Going Home',
+                  description: 'Redirecting to home page',
+                })
+              }
             />
           </DemoCard>
         </ShowcaseSection>

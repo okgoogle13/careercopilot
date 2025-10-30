@@ -1,9 +1,24 @@
-import { useState } from "react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Progress } from "./ui/progress";
-import { ArrowLeft, Upload, CheckCircle, AlertTriangle, XCircle, Eye, Download, Check, X, Brain, BarChart3, Target, Sparkles, TrendingUp } from "lucide-react";
+import { useState } from 'react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Progress } from './ui/progress';
+import {
+  ArrowLeft,
+  Upload,
+  CheckCircle,
+  AlertTriangle,
+  XCircle,
+  Eye,
+  Download,
+  Check,
+  X,
+  Brain,
+  BarChart3,
+  Target,
+  Sparkles,
+  TrendingUp,
+} from 'lucide-react';
 
 interface ATSAnalysisDashboardProps {
   onBack: () => void;
@@ -29,55 +44,79 @@ const mockAnalysisResult: AnalysisResult = {
   overallScore: 87,
   categories: [
     {
-      name: "Keyword Optimization",
+      name: 'Keyword Optimization',
       score: 89,
       status: 'good',
-      suggestions: ["Add more social services terminology", "Include community outreach keywords"]
+      suggestions: ['Add more social services terminology', 'Include community outreach keywords'],
     },
     {
-      name: "Format & Structure",
+      name: 'Format & Structure',
       score: 95,
       status: 'good',
-      suggestions: ["Excellent formatting consistency"]
+      suggestions: ['Excellent formatting consistency'],
     },
     {
-      name: "Content Quality",
+      name: 'Content Quality',
       score: 82,
       status: 'good',
-      suggestions: ["Quantify client impact with numbers", "Add more action verbs", "Include recent volunteer work"]
+      suggestions: [
+        'Quantify client impact with numbers',
+        'Add more action verbs',
+        'Include recent volunteer work',
+      ],
     },
     {
-      name: "ATS Compatibility",
+      name: 'ATS Compatibility',
       score: 83,
       status: 'good',
-      suggestions: ["Use standard section headers", "Reduce special characters", "Add more relevant certifications"]
-    }
+      suggestions: [
+        'Use standard section headers',
+        'Reduce special characters',
+        'Add more relevant certifications',
+      ],
+    },
   ],
   keywordMatches: {
-    matched: ["Community Support", "Case Management", "Crisis Intervention", "Mental Health", "Client Advocacy", "Team Collaboration"],
-    missing: ["Peer Support", "Recovery Programs", "Group Facilitation", "Documentation", "Risk Assessment", "Cultural Competency"]
+    matched: [
+      'Community Support',
+      'Case Management',
+      'Crisis Intervention',
+      'Mental Health',
+      'Client Advocacy',
+      'Team Collaboration',
+    ],
+    missing: [
+      'Peer Support',
+      'Recovery Programs',
+      'Group Facilitation',
+      'Documentation',
+      'Risk Assessment',
+      'Cultural Competency',
+    ],
   },
   formatIssues: [
-    "Consider adding volunteer experience section",
-    "Include relevant certifications prominently",
-    "Ensure consistent date formatting"
-  ]
+    'Consider adding volunteer experience section',
+    'Include relevant certifications prominently',
+    'Ensure consistent date formatting',
+  ],
 };
 
 export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardProps) {
   const [analysisResult] = useState<AnalysisResult>(mockAnalysisResult);
-  const [selectedProfile, setSelectedProfile] = useState("Community Support Worker - Nishant Dougall");
+  const [selectedProfile, setSelectedProfile] = useState(
+    'Community Support Worker - Nishant Dougall'
+  );
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return "text-brand-primary";
-    if (score >= 60) return "text-brand-secondary";
-    return "text-error";
+    if (score >= 80) return 'text-brand-primary';
+    if (score >= 60) return 'text-brand-secondary';
+    return 'text-error';
   };
 
   const getScoreBg = (score: number) => {
-    if (score >= 80) return "bg-primary/10 border-primary/20";
-    if (score >= 60) return "bg-secondary/10 border-secondary/20";
-    return "bg-error/10 border-error/20";
+    if (score >= 80) return 'bg-primary/10 border-primary/20';
+    if (score >= 60) return 'bg-secondary/10 border-secondary/20';
+    return 'bg-error/10 border-error/20';
   };
 
   const getStatusIcon = (status: string) => {
@@ -124,10 +163,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
             Download Report
           </Button>
           {onNext && (
-            <Button 
-              className="btn-primary-cta"
-              onClick={onNext}
-            >
+            <Button className="btn-primary-cta" onClick={onNext}>
               Choose Template
             </Button>
           )}
@@ -143,33 +179,46 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 <Brain className="w-6 h-6 text-brand-primary icon-interactive" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-gradient-primary">AI Analysis Complete</h3>
-                <p className="text-muted-foreground">Your resume has been optimized for ATS systems</p>
+                <h3 className="text-xl font-semibold text-gradient-primary">
+                  AI Analysis Complete
+                </h3>
+                <p className="text-muted-foreground">
+                  Your resume has been optimized for ATS systems
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-baseline gap-4">
-              <span className="text-9xl font-bold text-brand-primary ats-score-pulse" style={{ fontSize: '8rem', lineHeight: '0.9' }}>
+              <span
+                className="text-9xl font-bold text-brand-primary ats-score-pulse"
+                style={{ fontSize: '8rem', lineHeight: '0.9' }}
+              >
                 {analysisResult.overallScore}%
               </span>
               <span className="text-muted-foreground text-xl">ATS Score</span>
             </div>
-            
+
             <div className="space-y-3 max-w-md">
               <Progress value={analysisResult.overallScore} className="h-6" />
               <p className="text-base text-muted-foreground">
-                {analysisResult.overallScore >= 80 ? "Excellent! Your resume is highly optimized for ATS systems." :
-                 analysisResult.overallScore >= 60 ? "Good foundation with room for strategic improvements." :
-                 "Needs optimization to pass ATS filtering effectively."}
+                {analysisResult.overallScore >= 80
+                  ? 'Excellent! Your resume is highly optimized for ATS systems.'
+                  : analysisResult.overallScore >= 60
+                    ? 'Good foundation with room for strategic improvements.'
+                    : 'Needs optimization to pass ATS filtering effectively.'}
               </p>
             </div>
           </div>
-          
+
           <div className="text-center space-y-4">
             <div className="relative">
-              <div className={`w-48 h-48 rounded-full flex items-center justify-center border-4 ${getScoreBg(analysisResult.overallScore)} border`}>
+              <div
+                className={`w-48 h-48 rounded-full flex items-center justify-center border-4 ${getScoreBg(analysisResult.overallScore)} border`}
+              >
                 <div className="text-center">
-                  <BarChart3 className={`w-16 h-16 ${getScoreColor(analysisResult.overallScore)} mx-auto mb-2 icon-interactive`} />
+                  <BarChart3
+                    className={`w-16 h-16 ${getScoreColor(analysisResult.overallScore)} mx-auto mb-2 icon-interactive`}
+                  />
                   <p className="text-base text-muted-foreground font-medium">Optimization</p>
                 </div>
               </div>
@@ -177,7 +226,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
             </div>
-            
+
             <Badge className="bg-primary/10 text-brand-primary border-primary/20 border">
               AI Analyzed
             </Badge>
@@ -198,14 +247,18 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 <p className="font-medium text-foreground text-sm">{selectedProfile}</p>
                 <p className="text-xs text-muted-foreground mt-1">Last analyzed: 2 hours ago</p>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-3">
                 <div className="text-center p-3 bg-primary/5 rounded-lg border border-primary/10">
-                  <p className="text-lg font-bold text-brand-primary">{analysisResult.keywordMatches.matched.length}</p>
+                  <p className="text-lg font-bold text-brand-primary">
+                    {analysisResult.keywordMatches.matched.length}
+                  </p>
                   <p className="text-xs text-muted-foreground">Matched</p>
                 </div>
                 <div className="text-center p-3 bg-error/5 rounded-lg border border-error/10">
-                  <p className="text-lg font-bold text-error">{analysisResult.keywordMatches.missing.length}</p>
+                  <p className="text-lg font-bold text-error">
+                    {analysisResult.keywordMatches.missing.length}
+                  </p>
                   <p className="text-xs text-muted-foreground">Missing</p>
                 </div>
               </div>
@@ -218,15 +271,24 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
               <span className="text-gradient-tertiary">Actionable Insights</span>
             </h3>
             <div className="space-y-3">
-              <Button variant="outline" className="w-full justify-start text-sm border-primary/20 hover:bg-primary/10">
+              <Button
+                variant="outline"
+                className="w-full justify-start text-sm border-primary/20 hover:bg-primary/10"
+              >
                 <Brain className="w-4 h-4 mr-2 icon-interactive" />
                 Optimize for Job
               </Button>
-              <Button variant="outline" className="w-full justify-start text-sm border-secondary/20 hover:bg-secondary/10">
+              <Button
+                variant="outline"
+                className="w-full justify-start text-sm border-secondary/20 hover:bg-secondary/10"
+              >
                 <Eye className="w-4 h-4 mr-2 icon-interactive" />
                 Generate Cover Letter
               </Button>
-              <Button variant="outline" className="w-full justify-start text-sm border-tertiary/20 hover:bg-tertiary/10">
+              <Button
+                variant="outline"
+                className="w-full justify-start text-sm border-tertiary/20 hover:bg-tertiary/10"
+              >
                 <Download className="w-4 h-4 mr-2 icon-interactive" />
                 Export Optimized
               </Button>
@@ -283,7 +345,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 </div>
                 <div className="space-y-2 max-h-64 overflow-y-auto">
                   {analysisResult.keywordMatches.matched.map((keyword, index) => (
-                    <div key={index} className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors">
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors"
+                    >
                       <Check className="w-4 h-4 text-brand-primary flex-shrink-0 icon-interactive" />
                       <span className="text-brand-primary font-medium text-sm">{keyword}</span>
                     </div>
@@ -301,7 +366,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 </div>
                 <div className="space-y-2 max-h-64 overflow-y-auto">
                   {analysisResult.keywordMatches.missing.map((keyword, index) => (
-                    <div key={index} className="flex items-center gap-2 p-3 rounded-lg bg-error/5 border border-error/10 hover:bg-error/10 transition-colors">
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 p-3 rounded-lg bg-error/5 border border-error/10 hover:bg-error/10 transition-colors"
+                    >
                       <X className="w-4 h-4 text-error flex-shrink-0 icon-interactive" />
                       <span className="text-error font-medium text-sm">{keyword}</span>
                     </div>
@@ -325,15 +393,18 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="font-semibold text-brand-primary">High Impact</h4>
-                      <Badge className="bg-primary/10 text-brand-primary border-primary/20 border text-xs">+15 points</Badge>
+                      <Badge className="bg-primary/10 text-brand-primary border-primary/20 border text-xs">
+                        +15 points
+                      </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Add "Peer Support" and "Recovery Programs" to your skills section as they appear frequently in community support job postings.
+                      Add "Peer Support" and "Recovery Programs" to your skills section as they
+                      appear frequently in community support job postings.
                     </p>
                   </div>
                 </div>
               </div>
-              
+
               <div className="p-5 bg-gradient-to-r from-secondary/10 to-secondary/5 border border-secondary/20 rounded-xl">
                 <div className="flex items-start gap-4">
                   <div className="p-2 bg-secondary/20 rounded-lg">
@@ -342,15 +413,18 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="font-semibold text-brand-secondary">Medium Impact</h4>
-                      <Badge className="bg-secondary/10 text-brand-secondary border-secondary/20 border text-xs">+8 points</Badge>
+                      <Badge className="bg-secondary/10 text-brand-secondary border-secondary/20 border text-xs">
+                        +8 points
+                      </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Quantify your client impact with specific numbers and outcomes to improve content quality score.
+                      Quantify your client impact with specific numbers and outcomes to improve
+                      content quality score.
                     </p>
                   </div>
                 </div>
               </div>
-              
+
               <div className="p-5 bg-gradient-to-r from-tertiary/10 to-tertiary/5 border border-tertiary/20 rounded-xl">
                 <div className="flex items-start gap-4">
                   <div className="p-2 bg-tertiary/20 rounded-lg">
@@ -359,10 +433,13 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="font-semibold text-brand-tertiary">Format Enhancement</h4>
-                      <Badge className="bg-tertiary/10 text-brand-tertiary border-tertiary/20 border text-xs">+3 points</Badge>
+                      <Badge className="bg-tertiary/10 text-brand-tertiary border-tertiary/20 border text-xs">
+                        +3 points
+                      </Badge>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Consider highlighting any mental health first aid or crisis intervention certifications more prominently.
+                      Consider highlighting any mental health first aid or crisis intervention
+                      certifications more prominently.
                     </p>
                   </div>
                 </div>

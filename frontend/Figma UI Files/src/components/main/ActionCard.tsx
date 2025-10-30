@@ -48,7 +48,7 @@ export function ActionCard({
   onSecondaryAction,
   disabled = false,
   className,
-  aiPowered = false
+  aiPowered = false,
 }: ActionCardProps) {
   const getVariantStyles = () => {
     switch (variant) {
@@ -125,17 +125,19 @@ export function ActionCard({
         <div className="flex items-start justify-between mb-3">
           {/* Icon and AI Badge */}
           <div className="flex items-center gap-3">
-            <div className={cn(
-              'flex items-center justify-center w-12 h-12 rounded-xl',
-              variant === 'primary' && 'bg-primary/10 text-primary',
-              variant === 'secondary' && 'bg-secondary/10 text-secondary',
-              variant === 'tertiary' && 'bg-tertiary/10 text-tertiary',
-              variant === 'urgent' && 'bg-error/10 text-error',
-              variant === 'default' && 'bg-surface-container-high text-foreground'
-            )}>
+            <div
+              className={cn(
+                'flex items-center justify-center w-12 h-12 rounded-xl',
+                variant === 'primary' && 'bg-primary/10 text-primary',
+                variant === 'secondary' && 'bg-secondary/10 text-secondary',
+                variant === 'tertiary' && 'bg-tertiary/10 text-tertiary',
+                variant === 'urgent' && 'bg-error/10 text-error',
+                variant === 'default' && 'bg-surface-container-high text-foreground'
+              )}
+            >
               <Icon className="w-6 h-6" />
             </div>
-            
+
             {aiPowered && (
               <Badge variant="secondary" className="bg-primary/10 text-primary text-xs px-2 py-1">
                 <Zap className="w-3 h-3 mr-1" />
@@ -151,7 +153,7 @@ export function ActionCard({
                 {badge.text}
               </Badge>
             )}
-            
+
             <div className="flex items-center gap-2">
               {getStatusIcon()}
               <span className={cn('text-xs font-medium', getPriorityColor())}>
@@ -161,13 +163,9 @@ export function ActionCard({
           </div>
         </div>
 
-        <M3CardTitle className="text-lg mb-2">
-          {title}
-        </M3CardTitle>
-        
-        <M3CardDescription className="text-sm leading-relaxed">
-          {description}
-        </M3CardDescription>
+        <M3CardTitle className="text-lg mb-2">{title}</M3CardTitle>
+
+        <M3CardDescription className="text-sm leading-relaxed">{description}</M3CardDescription>
       </M3CardHeader>
 
       <M3CardContent>
@@ -179,7 +177,7 @@ export function ActionCard({
               <span className="text-xs font-medium text-foreground">{progress}%</span>
             </div>
             <div className="w-full bg-surface-container-low rounded-full h-2">
-              <div 
+              <div
                 className={cn(
                   'h-2 rounded-full transition-all duration-500',
                   variant === 'primary' && 'bg-primary',
@@ -199,12 +197,8 @@ export function ActionCard({
           <div className="grid grid-cols-2 gap-4 mb-4">
             {metadata.map((item, index) => (
               <div key={index} className="text-center">
-                <div className="text-lg font-semibold text-foreground">
-                  {item.value}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  {item.label}
-                </div>
+                <div className="text-lg font-semibold text-foreground">{item.value}</div>
+                <div className="text-xs text-muted-foreground">{item.label}</div>
               </div>
             ))}
           </div>
@@ -227,10 +221,7 @@ export function ActionCard({
               onClick={onClick}
               disabled={disabled || status === 'blocked'}
               trailingIcon={<ArrowRight className="w-4 h-4" />}
-              className={cn(
-                'flex-1',
-                variant === 'urgent' && 'bg-error hover:bg-error/90'
-              )}
+              className={cn('flex-1', variant === 'urgent' && 'bg-error hover:bg-error/90')}
             >
               {actionText}
             </M3Button>

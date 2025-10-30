@@ -20,7 +20,7 @@ async function getAuthHeaders(): Promise<HeadersInit> {
   const token = localStorage.getItem('firebaseToken') || '';
   return {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
   };
 }
 
@@ -187,13 +187,10 @@ export async function getApplicationTimeline(
 ): Promise<Application['timeline']> {
   try {
     const headers = await getAuthHeaders();
-    const response = await fetch(
-      `${API_BASE_URL}/applications/${applicationId}/timeline`,
-      {
-        method: 'GET',
-        headers,
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/applications/${applicationId}/timeline`, {
+      method: 'GET',
+      headers,
+    });
 
     if (!response.ok) {
       handleApiError(response);
@@ -220,14 +217,11 @@ export async function addTimelineEvent(
 ): Promise<Application> {
   try {
     const headers = await getAuthHeaders();
-    const response = await fetch(
-      `${API_BASE_URL}/applications/${applicationId}/timeline`,
-      {
-        method: 'POST',
-        headers,
-        body: JSON.stringify(event),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/applications/${applicationId}/timeline`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(event),
+    });
 
     if (!response.ok) {
       handleApiError(response);
@@ -278,14 +272,11 @@ export async function attachDocumentToApplication(
 ): Promise<Application> {
   try {
     const headers = await getAuthHeaders();
-    const response = await fetch(
-      `${API_BASE_URL}/applications/${applicationId}/documents`,
-      {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ documentId }),
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/applications/${applicationId}/documents`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ documentId }),
+    });
 
     if (!response.ok) {
       handleApiError(response);

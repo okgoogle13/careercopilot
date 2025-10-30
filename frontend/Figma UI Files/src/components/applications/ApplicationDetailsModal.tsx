@@ -7,12 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '../ui/dialog';
-import {
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-} from '../ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '../ui/tabs';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import { Input } from '../ui/input';
@@ -151,27 +146,25 @@ export function ApplicationDetailsModal({
                   {application.company} • {application.location}
                 </span>
               </div>
-              <DialogTitle className="text-2xl">
-                {application.jobTitle}
-              </DialogTitle>
+              <DialogTitle className="text-2xl">{application.jobTitle}</DialogTitle>
               <DialogDescription className="mt-2">
                 Applied on{' '}
-                {new Date(application.appliedDate).toLocaleDateString(
-                  'en-US',
-                  { month: 'short', day: 'numeric', year: 'numeric' }
-                )}
+                {new Date(application.appliedDate).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                  year: 'numeric',
+                })}
               </DialogDescription>
             </div>
 
             {/* Status and Priority badges */}
             <div className="flex gap-2 flex-col">
               <Badge className={`text-xs px-2 py-1 ${getStatusColor(application.status)}`}>
-                {application.status.charAt(0).toUpperCase() +
-                  application.status.slice(1)}
+                {application.status.charAt(0).toUpperCase() + application.status.slice(1)}
               </Badge>
               <Badge className={`text-xs px-2 py-1 ${getPriorityColor(application.priority)}`}>
-                {application.priority.charAt(0).toUpperCase() +
-                  application.priority.slice(1)} Priority
+                {application.priority.charAt(0).toUpperCase() + application.priority.slice(1)}{' '}
+                Priority
               </Badge>
             </div>
           </div>
@@ -192,10 +185,10 @@ export function ApplicationDetailsModal({
               <div>
                 <p className="text-xs text-muted-foreground">Applied</p>
                 <p className="font-medium">
-                  {new Date(application.appliedDate).toLocaleDateString(
-                    'en-US',
-                    { month: 'short', day: 'numeric' }
-                  )}
+                  {new Date(application.appliedDate).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                  })}
                 </p>
               </div>
             </div>
@@ -212,11 +205,7 @@ export function ApplicationDetailsModal({
               <Edit2 className="w-4 h-4" />
               Edit
             </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="flex-1"
-            >
+            <Button variant="outline" size="sm" className="flex-1">
               <Archive className="w-4 h-4" />
               Archive
             </Button>
@@ -249,34 +238,20 @@ export function ApplicationDetailsModal({
               {editMode ? (
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm font-medium block mb-1">
-                      Job Title
-                    </label>
-                    <Input
-                      defaultValue={application.jobTitle}
-                      disabled
-                    />
+                    <label className="text-sm font-medium block mb-1">Job Title</label>
+                    <Input defaultValue={application.jobTitle} disabled />
                   </div>
                   <div>
-                    <label className="text-sm font-medium block mb-1">
-                      Company
-                    </label>
-                    <Input
-                      defaultValue={application.company}
-                      disabled
-                    />
+                    <label className="text-sm font-medium block mb-1">Company</label>
+                    <Input defaultValue={application.company} disabled />
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-sm font-medium block mb-1">
-                        Location
-                      </label>
+                      <label className="text-sm font-medium block mb-1">Location</label>
                       <Input defaultValue={application.location} />
                     </div>
                     <div>
-                      <label className="text-sm font-medium block mb-1">
-                        Salary
-                      </label>
+                      <label className="text-sm font-medium block mb-1">Salary</label>
                       <Input defaultValue={application.salary || ''} />
                     </div>
                   </div>
@@ -333,14 +308,11 @@ export function ApplicationDetailsModal({
                         <div className="flex-1 pb-4">
                           <p className="font-medium text-sm">{event.event}</p>
                           <p className="text-xs text-muted-foreground">
-                            {new Date(event.date).toLocaleDateString(
-                              'en-US',
-                              {
-                                month: 'short',
-                                day: 'numeric',
-                                year: 'numeric',
-                              }
-                            )}
+                            {new Date(event.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
                           </p>
                         </div>
                       </div>
@@ -380,8 +352,7 @@ export function ApplicationDetailsModal({
                           <div>
                             <p className="font-medium text-sm">{doc.name}</p>
                             <p className="text-xs text-muted-foreground">
-                              {doc.type.replace('_', ' ')}{' '}
-                              {doc.version && `• v${doc.version}`}
+                              {doc.type.replace('_', ' ')} {doc.version && `• v${doc.version}`}
                             </p>
                           </div>
                         </div>

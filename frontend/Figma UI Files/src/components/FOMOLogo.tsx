@@ -6,19 +6,24 @@ interface FOMOLogoProps extends ComponentProps<'div'> {
   showText?: boolean;
 }
 
-export function FOMOLogo({ size = 'md', showText = true, className = '', ...props }: FOMOLogoProps) {
+export function FOMOLogo({
+  size = 'md',
+  showText = true,
+  className = '',
+  ...props
+}: FOMOLogoProps) {
   const sizeClasses = {
     sm: 'w-6 h-6',
-    md: 'w-8 h-8', 
+    md: 'w-8 h-8',
     lg: 'w-12 h-12',
-    xl: 'w-16 h-16'
+    xl: 'w-16 h-16',
   };
 
   const textSizeClasses = {
     sm: 'text-sm',
     md: 'text-lg',
     lg: 'text-xl',
-    xl: 'text-2xl'
+    xl: 'text-2xl',
   };
 
   return (
@@ -26,18 +31,17 @@ export function FOMOLogo({ size = 'md', showText = true, className = '', ...prop
       <div className={`${sizeClasses[size]} relative`}>
         {/* New FOMO Logo */}
         <div className="w-full h-full relative">
-          <img 
-            src={logoImage} 
-            alt="FOMO Logo"
-            className="w-full h-full object-contain"
-          />
+          <img src={logoImage} alt="FOMO Logo" className="w-full h-full object-contain" />
           {/* Optional glow effect */}
           <div className="absolute inset-0 rounded-lg glow-primary opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
         </div>
       </div>
       {showText && (
         <div className="flex flex-col">
-          <span className={`${textSizeClasses[size]} font-bold text-brand-red font-display leading-none`} style={{ fontFamily: 'Space Grotesk, sans-serif' }}>
+          <span
+            className={`${textSizeClasses[size]} font-bold text-brand-red font-display leading-none`}
+            style={{ fontFamily: 'Space Grotesk, sans-serif' }}
+          >
             FML
           </span>
           <span className="text-xs text-content-secondary font-medium tracking-wider">

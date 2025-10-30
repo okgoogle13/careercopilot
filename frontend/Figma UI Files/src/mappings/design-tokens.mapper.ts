@@ -11,7 +11,11 @@ export function designTokenMapper(token: string): string | undefined {
   if (transformed.startsWith('color-')) {
     return `var(--${transformed})`;
   }
-  if (transformed.startsWith('font-size') || transformed.startsWith('font-family') || transformed.startsWith('font-weight')) {
+  if (
+    transformed.startsWith('font-size') ||
+    transformed.startsWith('font-family') ||
+    transformed.startsWith('font-weight')
+  ) {
     return `var(--${transformed})`;
   }
   if (transformed.startsWith('spacing-')) {
@@ -38,18 +42,18 @@ export function designTokenMapper(token: string): string | undefined {
  */
 export function careerCopilotTokenMapper(token: string): string | undefined {
   const normalized = token.toLowerCase().replace(/\s+/g, '-').replace(/\//g, '-');
-  
+
   // Color mappings (Updated with new palette)
   const colorMappings: Record<string, string> = {
-    'primary': 'var(--primary)',
+    primary: 'var(--primary)',
     'primary-light': 'var(--primary-light)',
     'primary-dark': 'var(--primary-dark)',
-    'background': 'var(--background)',
+    background: 'var(--background)',
     'background-section': 'var(--background-section)',
     'background-card': 'var(--background-card)',
     'background-elevated': 'var(--background-elevated)',
     'background-gradient': 'var(--background-gradient)',
-    'foreground': 'var(--foreground)',
+    foreground: 'var(--foreground)',
     'foreground-secondary': 'var(--foreground-secondary)',
     'foreground-muted': 'var(--foreground-muted)',
     'accent-blue': 'var(--accent-blue)',
@@ -114,7 +118,7 @@ export function careerCopilotTokenMapper(token: string): string | undefined {
     'shadow-glass': '0 8px 32px rgba(0, 0, 0, 0.37)',
     'shadow-glass-hover': '0 16px 64px rgba(0, 0, 0, 0.5)',
   };
-  
+
   // Animation mappings
   const animationMappings: Record<string, string> = {
     'animation-duration-fast': '150ms',
@@ -125,7 +129,7 @@ export function careerCopilotTokenMapper(token: string): string | undefined {
     'animation-ease-out': 'cubic-bezier(0, 0, 0.2, 1)',
     'animation-ease-in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
   };
-  
+
   // Glass morphism mappings
   const glassMappings: Record<string, string> = {
     'glass-bg': 'rgba(26, 31, 54, 0.25)',
@@ -134,7 +138,7 @@ export function careerCopilotTokenMapper(token: string): string | undefined {
     'glass-border-hover': 'rgba(96, 165, 250, 0.3)',
     'glass-blur': '15px',
   };
-  
+
   // Breakpoint mappings
   const breakpointMappings: Record<string, string> = {
     'breakpoint-mobile': '768px',
@@ -203,7 +207,7 @@ export const tokens = {
     glassBorder: 'var(--glass-border)',
     glassBorderHover: 'var(--glass-border-hover)',
   },
-  
+
   // Typography tokens
   typography: {
     size: {
@@ -227,7 +231,7 @@ export const tokens = {
       relaxed: '160%',
     },
   },
-  
+
   // Spacing tokens
   spacing: {
     xs: '8px',
@@ -238,7 +242,7 @@ export const tokens = {
     '2xl': '64px',
     '3xl': '96px',
   },
-  
+
   // Border radius tokens
   radius: {
     sm: '4px',
@@ -246,7 +250,7 @@ export const tokens = {
     lg: '16px',
     xl: '24px',
   },
-  
+
   // Shadow tokens (Enhanced)
   shadow: {
     sm: '0 1px 3px rgba(0, 0, 0, 0.3)',
@@ -257,7 +261,7 @@ export const tokens = {
     glass: '0 8px 32px rgba(0, 0, 0, 0.37)',
     glassHover: '0 16px 64px rgba(0, 0, 0, 0.5)',
   },
-  
+
   // Animation tokens
   animation: {
     durationFast: '150ms',
@@ -268,7 +272,7 @@ export const tokens = {
     easeOut: 'cubic-bezier(0, 0, 0.2, 1)',
     easeInOut: 'cubic-bezier(0.4, 0, 0.2, 1)',
   },
-  
+
   // Glass morphism tokens
   glass: {
     bg: 'rgba(26, 31, 54, 0.25)',
@@ -277,7 +281,7 @@ export const tokens = {
     borderHover: 'rgba(96, 165, 250, 0.3)',
     blur: '15px',
   },
-  
+
   // Breakpoint tokens
   breakpoints: {
     mobile: '768px',
@@ -299,16 +303,16 @@ export function useDesignToken(tokenPath: string): string {
  */
 export function generateCSSCustomProperties(tokenObj: Record<string, any>, prefix = ''): string {
   let css = '';
-  
+
   for (const [key, value] of Object.entries(tokenObj)) {
     const tokenName = prefix ? `${prefix}-${key}` : key;
-    
+
     if (typeof value === 'object' && value !== null) {
       css += generateCSSCustomProperties(value, tokenName);
     } else {
       css += `  --${tokenName}: ${value};\n`;
     }
   }
-  
+
   return css;
 }

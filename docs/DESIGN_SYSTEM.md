@@ -16,62 +16,63 @@ Our design is built on three core principles:
 
 ### Primary Colors
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Primary | `#A855F7` | Interactive elements, CTAs, active states |
-| Primary Light | `#D8B4FE` | Hover states, light backgrounds |
-| Primary Dark | `#7E22CE` | Pressed states, dark backgrounds |
+| Color         | Hex       | Usage                                     |
+| ------------- | --------- | ----------------------------------------- |
+| Primary       | `#A855F7` | Interactive elements, CTAs, active states |
+| Primary Light | `#D8B4FE` | Hover states, light backgrounds           |
+| Primary Dark  | `#7E22CE` | Pressed states, dark backgrounds          |
 
 ### Secondary Colors
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Secondary | `#8B5A3C` | Supporting elements, secondary actions |
-| Secondary Light | `#D4A574` | Light secondary backgrounds |
-| Secondary Dark | `#5A3A24` | Dark secondary backgrounds |
+| Color           | Hex       | Usage                                  |
+| --------------- | --------- | -------------------------------------- |
+| Secondary       | `#8B5A3C` | Supporting elements, secondary actions |
+| Secondary Light | `#D4A574` | Light secondary backgrounds            |
+| Secondary Dark  | `#5A3A24` | Dark secondary backgrounds             |
 
 ### Neutral Colors
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| Background | `#0F0F0F` | Main background |
-| Paper | `#1A1A1A` | Card/surface backgrounds |
-| Divider | `#333333` | Dividers, borders |
-| Text Primary | `#FFFFFF` | Main text |
-| Text Secondary | `#B3B3B3` | Secondary text |
-| Text Disabled | `#666666` | Disabled text |
+| Color          | Hex       | Usage                    |
+| -------------- | --------- | ------------------------ |
+| Background     | `#0F0F0F` | Main background          |
+| Paper          | `#1A1A1A` | Card/surface backgrounds |
+| Divider        | `#333333` | Dividers, borders        |
+| Text Primary   | `#FFFFFF` | Main text                |
+| Text Secondary | `#B3B3B3` | Secondary text           |
+| Text Disabled  | `#666666` | Disabled text            |
 
 ### Semantic Colors
 
-| Status | Color | Hex |
-|--------|-------|-----|
+| Status  | Color | Hex       |
+| ------- | ----- | --------- |
 | Success | Green | `#10B981` |
 | Warning | Amber | `#F59E0B` |
-| Error | Red | `#EF4444` |
-| Info | Blue | `#3B82F6` |
+| Error   | Red   | `#EF4444` |
+| Info    | Blue  | `#3B82F6` |
 
 ## Typography
 
 ### Font Family
 
 Primary: System font stack
+
 ```
 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica Neue'
 ```
 
 ### Font Sizes & Weights
 
-| Style | Size | Weight | Usage |
-|-------|------|--------|-------|
-| H1 | 32px | 700 | Page titles |
-| H2 | 28px | 700 | Section headers |
-| H3 | 24px | 600 | Subsection headers |
-| H4 | 20px | 600 | Card titles |
-| Subtitle1 | 16px | 600 | Form labels |
-| Subtitle2 | 14px | 600 | Chip labels |
-| Body1 | 16px | 400 | Body text |
-| Body2 | 14px | 400 | Secondary body |
-| Caption | 12px | 400 | Helpers, hints |
+| Style     | Size | Weight | Usage              |
+| --------- | ---- | ------ | ------------------ |
+| H1        | 32px | 700    | Page titles        |
+| H2        | 28px | 700    | Section headers    |
+| H3        | 24px | 600    | Subsection headers |
+| H4        | 20px | 600    | Card titles        |
+| Subtitle1 | 16px | 600    | Form labels        |
+| Subtitle2 | 14px | 600    | Chip labels        |
+| Body1     | 16px | 400    | Body text          |
+| Body2     | 14px | 400    | Secondary body     |
+| Caption   | 12px | 400    | Helpers, hints     |
 
 ## Spacing Scale
 
@@ -88,22 +89,22 @@ Primary: System font stack
 
 ## Border Radius
 
-| Size | Value | Usage |
-|------|-------|-------|
-| Small | 4px | Small elements, inputs |
-| Medium | 12px | Cards, modals, buttons |
-| Large | 20px | Pill buttons, badges |
-| Full | 50% | Circular elements |
+| Size   | Value | Usage                  |
+| ------ | ----- | ---------------------- |
+| Small  | 4px   | Small elements, inputs |
+| Medium | 12px  | Cards, modals, buttons |
+| Large  | 20px  | Pill buttons, badges   |
+| Full   | 50%   | Circular elements      |
 
 ## Shadows
 
 ### Elevation Scale
 
-| Level | Shadow | Usage |
-|-------|--------|-------|
-| Default | `0 2px 4px rgba(0,0,0,0.1)` | Regular elements |
-| Hover | `0 8px 16px rgba(0,0,0,0.15)` | Hover states |
-| Active | `0 12px 24px rgba(0,0,0,0.2)` | Active states |
+| Level   | Shadow                        | Usage            |
+| ------- | ----------------------------- | ---------------- |
+| Default | `0 2px 4px rgba(0,0,0,0.1)`   | Regular elements |
+| Hover   | `0 8px 16px rgba(0,0,0,0.15)` | Hover states     |
+| Active  | `0 12px 24px rgba(0,0,0,0.2)` | Active states    |
 
 ## Animations & Transitions
 
@@ -215,12 +216,12 @@ See [frontend/src/theme/theme.ts](../../frontend/src/theme/theme.ts) for the com
 
 ### Breakpoints
 
-| Device | Width | CSS |
-|--------|-------|-----|
-| Mobile | < 600px | `xs` |
-| Tablet | 600-960px | `sm` |
+| Device  | Width      | CSS  |
+| ------- | ---------- | ---- |
+| Mobile  | < 600px    | `xs` |
+| Tablet  | 600-960px  | `sm` |
 | Desktop | 960-1264px | `md` |
-| Wide | > 1264px | `lg` |
+| Wide    | > 1264px   | `lg` |
 
 ### Mobile-First Approach
 

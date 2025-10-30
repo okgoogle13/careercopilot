@@ -1,5 +1,4 @@
-import type {
-  DocumentData} from 'firebase/firestore';
+import type { DocumentData } from 'firebase/firestore';
 import {
   collection,
   doc,

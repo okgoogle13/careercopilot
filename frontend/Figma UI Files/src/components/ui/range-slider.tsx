@@ -13,17 +13,20 @@ export interface RangeSliderProps {
 }
 
 export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(
-  ({ 
-    min = 0,
-    max = 100,
-    step = 1,
-    value = [min, max],
-    onChange,
-    disabled,
-    className = '',
-    showLabels = true,
-    formatLabel = (v) => v.toString()
-  }, ref) => {
+  (
+    {
+      min = 0,
+      max = 100,
+      step = 1,
+      value = [min, max],
+      onChange,
+      disabled,
+      className = '',
+      showLabels = true,
+      formatLabel = (v) => v.toString(),
+    },
+    ref
+  ) => {
     const [localValue, setLocalValue] = useState<[number, number]>(value);
     const [activeThumb, setActiveThumb] = useState<'min' | 'max' | null>(null);
     const trackRef = useRef<HTMLDivElement>(null);
@@ -38,12 +41,12 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(
 
     const getValueFromPosition = (clientX: number) => {
       if (!trackRef.current) return min;
-      
+
       const rect = trackRef.current.getBoundingClientRect();
       const percentage = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
       const rawValue = min + (percentage / 100) * (max - min);
       const steppedValue = Math.round(rawValue / step) * step;
-      
+
       return Math.max(min, Math.min(max, steppedValue));
     };
 
@@ -55,9 +58,9 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!activeThumb || disabled) return;
-      
+
       const newValue = getValueFromPosition(e.clientX);
-      
+
       if (activeThumb === 'min') {
         const newMin = Math.min(newValue, localValue[1]);
         const newLocalValue: [number, number] = [newMin, localValue[1]];
@@ -79,7 +82,7 @@ export const RangeSlider = forwardRef<HTMLDivElement, RangeSliderProps>(
       if (activeThumb) {
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
-        
+
         return () => {
           document.removeEventListener('mousemove', handleMouseMove);
           document.removeEventListener('mouseup', handleMouseUp);

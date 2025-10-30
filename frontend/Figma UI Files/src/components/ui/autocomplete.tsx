@@ -17,15 +17,18 @@ export interface AutocompleteProps {
 }
 
 export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
-  ({ 
-    options, 
-    value, 
-    onChange, 
-    placeholder = 'Search...', 
-    disabled, 
-    className = '',
-    filterFunction
-  }, ref) => {
+  (
+    {
+      options,
+      value,
+      onChange,
+      placeholder = 'Search...',
+      disabled,
+      className = '',
+      filterFunction,
+    },
+    ref
+  ) => {
     const [inputValue, setInputValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
     const [highlightedIndex, setHighlightedIndex] = useState(0);
@@ -37,12 +40,12 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
 
     const filter = filterFunction || defaultFilter;
 
-    const filteredOptions = options.filter(option => 
+    const filteredOptions = options.filter((option) =>
       inputValue ? filter(option, inputValue) : true
     );
 
     useEffect(() => {
-      const selectedOption = options.find(opt => opt.value === value);
+      const selectedOption = options.find((opt) => opt.value === value);
       if (selectedOption && !inputValue) {
         setInputValue(selectedOption.label);
       }
@@ -68,10 +71,10 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
     const handleKeyDown = (e: React.KeyboardEvent) => {
       if (e.key === 'ArrowDown') {
         e.preventDefault();
-        setHighlightedIndex(prev => Math.min(prev + 1, filteredOptions.length - 1));
+        setHighlightedIndex((prev) => Math.min(prev + 1, filteredOptions.length - 1));
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        setHighlightedIndex(prev => Math.max(prev - 1, 0));
+        setHighlightedIndex((prev) => Math.max(prev - 1, 0));
       } else if (e.key === 'Enter') {
         e.preventDefault();
         if (filteredOptions[highlightedIndex]) {
@@ -108,12 +111,17 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
               focus:outline-none focus:border-transparent focus:shadow-[var(--shadow-glow-aurora)]
               ${disabled && 'opacity-50 cursor-not-allowed'}
             `}
-            style={isOpen ? {
-              boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
-              borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
-            } : {}}
+            style={
+              isOpen
+                ? {
+                    boxShadow:
+                      '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
+                    borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
+                  }
+                : {}
+            }
           />
-          <ChevronDown 
+          <ChevronDown
             className={`
               absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--primary)]
               transition-transform duration-300
@@ -123,13 +131,15 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         </div>
 
         {isOpen && filteredOptions.length > 0 && (
-          <div className={`
+          <div
+            className={`
             absolute z-50 w-full mt-2 max-h-64 overflow-y-auto
             bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)]
             border-2 border-[var(--glass-border)] rounded-[var(--radius-lg)]
             shadow-[var(--shadow-glow-aurora)]
             scrollbar-thin scrollbar-thumb-[var(--primary)] scrollbar-track-transparent
-          `}>
+          `}
+          >
             {filteredOptions.map((option, index) => {
               const isSelected = option.value === value;
               const isHighlighted = index === highlightedIndex;
@@ -142,18 +152,17 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
                   className={`
                     w-full px-4 py-3 text-left flex items-center justify-between gap-2
                     transition-all duration-200
-                    ${isHighlighted 
-                      ? 'bg-gradient-to-r from-[var(--primary)]/20 to-[var(--tertiary)]/20' 
-                      : 'hover:bg-[var(--glass-bg)]'
+                    ${
+                      isHighlighted
+                        ? 'bg-gradient-to-r from-[var(--primary)]/20 to-[var(--tertiary)]/20'
+                        : 'hover:bg-[var(--glass-bg)]'
                     }
                     ${index === 0 && 'rounded-t-[var(--radius-lg)]'}
                     ${index === filteredOptions.length - 1 && 'rounded-b-[var(--radius-lg)]'}
                   `}
                 >
                   <span className="text-[var(--on-surface)]">{option.label}</span>
-                  {isSelected && (
-                    <Check className="w-4 h-4 text-[var(--primary)]" />
-                  )}
+                  {isSelected && <Check className="w-4 h-4 text-[var(--primary)]" />}
                 </button>
               );
             })}
@@ -161,12 +170,14 @@ export const Autocomplete = forwardRef<HTMLInputElement, AutocompleteProps>(
         )}
 
         {isOpen && filteredOptions.length === 0 && inputValue && (
-          <div className={`
+          <div
+            className={`
             absolute z-50 w-full mt-2 p-4
             bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)]
             border-2 border-[var(--glass-border)] rounded-[var(--radius-lg)]
             text-center text-[var(--on-surface-variant)]
-          `}>
+          `}
+          >
             No results found
           </div>
         )}

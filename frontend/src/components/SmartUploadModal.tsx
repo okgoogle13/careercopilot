@@ -119,7 +119,11 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
       </DialogTitle>
 
       <DialogContent sx={{ py: 3 }}>
-        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
 
         {step === 'upload' && (
           <Box
@@ -137,12 +141,7 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
             }}
             component="label"
           >
-            <input
-              type="file"
-              hidden
-              onChange={handleFileSelect}
-              accept=".pdf,.doc,.docx,.txt"
-            />
+            <input type="file" hidden onChange={handleFileSelect} accept=".pdf,.doc,.docx,.txt" />
             <CloudUpload sx={{ fontSize: 48, color: 'primary.main', mb: 2 }} />
             <Typography variant="h6" gutterBottom>
               Drag & drop your document
@@ -197,9 +196,7 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
           <Box sx={{ mt: 2, p: 2, bgcolor: 'success.light', borderRadius: 1 }}>
             <Stack direction="row" spacing={1} alignItems="center">
               <CheckCircle color="success" />
-              <Typography variant="body2">
-                Selected: {file.name}
-              </Typography>
+              <Typography variant="body2">Selected: {file.name}</Typography>
             </Stack>
           </Box>
         )}
@@ -217,11 +214,7 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
           </Button>
         )}
         {step === 'upload' && file && (
-          <Button
-            onClick={() => setStep('tagging')}
-            variant="contained"
-            disabled={isLoading}
-          >
+          <Button onClick={() => setStep('tagging')} variant="contained" disabled={isLoading}>
             Next
           </Button>
         )}

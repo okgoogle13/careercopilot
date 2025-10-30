@@ -6,11 +6,15 @@ interface CareerCopilotLogoProps {
   variant?: 'full' | 'compact';
 }
 
-export function CareerCopilotLogo({ className = "", size = 32, variant = 'full' }: CareerCopilotLogoProps) {
+export function CareerCopilotLogo({
+  className = '',
+  size = 32,
+  variant = 'full',
+}: CareerCopilotLogoProps) {
   return (
     <div className={`flex items-center ${className}`}>
-      <img 
-        src={logoImage} 
+      <img
+        src={logoImage}
         alt="FML Career Copilot Logo"
         width={size}
         height={size}

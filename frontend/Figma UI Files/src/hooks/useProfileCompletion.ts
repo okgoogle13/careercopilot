@@ -1,10 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import {
-  UserProfile,
-  ProfileCompletion,
-  OnboardingStatus,
-  OnboardingStep,
-} from '../types/profile';
+import { UserProfile, ProfileCompletion, OnboardingStatus, OnboardingStep } from '../types/profile';
 
 interface UseProfileCompletionReturn {
   // State
@@ -84,8 +79,7 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
         }));
       }
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Failed to fetch profile';
+      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch profile';
       setError(errorMessage);
       console.error(errorMessage);
     } finally {
@@ -108,21 +102,11 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
     }
 
     const checks = {
-      personalInfoComplete: !!(
-        profile.personalInfo?.fullName &&
-        profile.personalInfo?.phone
-      ),
+      personalInfoComplete: !!(profile.personalInfo?.fullName && profile.personalInfo?.phone),
       professionalSummaryComplete: !!profile.professionalSummary,
-      skillsComplete: !!(
-        profile.skills?.technical &&
-        profile.skills.technical.length > 0
-      ),
-      experienceComplete: !!(
-        profile.experience && profile.experience.length > 0
-      ),
-      educationComplete: !!(
-        profile.education && profile.education.length > 0
-      ),
+      skillsComplete: !!(profile.skills?.technical && profile.skills.technical.length > 0),
+      experienceComplete: !!(profile.experience && profile.experience.length > 0),
+      educationComplete: !!(profile.education && profile.education.length > 0),
       documentsUploaded: onboardingStatus.hasUploadedDocuments,
     };
 
@@ -151,8 +135,7 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
         // In a real app, this would call an API endpoint
         calculateCompletionMetrics(updatedProfile);
       } catch (err) {
-        const errorMessage =
-          err instanceof Error ? err.message : 'Failed to update profile';
+        const errorMessage = err instanceof Error ? err.message : 'Failed to update profile';
         setError(errorMessage);
         console.error(errorMessage);
         throw err;
@@ -164,36 +147,26 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
   );
 
   // Complete onboarding step
-  const completeOnboardingStep = useCallback(
-    async (step: OnboardingStep) => {
-      setOnboardingStatus((prev) => {
-        const stepsCompleted = [...prev.stepsCompleted];
-        if (!stepsCompleted.includes(step)) {
-          stepsCompleted.push(step);
-        }
+  const completeOnboardingStep = useCallback(async (step: OnboardingStep) => {
+    setOnboardingStatus((prev) => {
+      const stepsCompleted = [...prev.stepsCompleted];
+      if (!stepsCompleted.includes(step)) {
+        stepsCompleted.push(step);
+      }
 
-        // Determine next step
-        const stepOrder: OnboardingStep[] = [
-          'welcome',
-          'upload',
-          'review',
-          'complete',
-        ];
-        const currentIndex = stepOrder.indexOf(step);
-        const nextStep =
-          currentIndex < stepOrder.length - 1
-            ? stepOrder[currentIndex + 1]
-            : 'complete';
+      // Determine next step
+      const stepOrder: OnboardingStep[] = ['welcome', 'upload', 'review', 'complete'];
+      const currentIndex = stepOrder.indexOf(step);
+      const nextStep =
+        currentIndex < stepOrder.length - 1 ? stepOrder[currentIndex + 1] : 'complete';
 
-        return {
-          ...prev,
-          stepsCompleted,
-          currentStep: nextStep,
-        };
-      });
-    },
-    []
-  );
+      return {
+        ...prev,
+        stepsCompleted,
+        currentStep: nextStep,
+      };
+    });
+  }, []);
 
   // Skip onboarding
   const skipOnboarding = useCallback(async () => {
@@ -224,8 +197,7 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
         currentStep: 'complete',
       }));
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : 'Failed to complete onboarding';
+      const errorMessage = err instanceof Error ? err.message : 'Failed to complete onboarding';
       setError(errorMessage);
       console.error(errorMessage);
       throw err;

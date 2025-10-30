@@ -1,0 +1,1069 @@
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
+import type { QueryDocumentSnapshot, DocumentData } from 'firebase-admin/firestore';
+import type { Request, Response } from 'express';
+import { validateFirebaseIdToken } from '../middleware/auth.middleware';
+import { handleError, sendResponse } from '../utils/api.utils';
+import * as PDFDocument from 'pdfkit';
+import { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType } from 'docx';
+import { Buffer } from 'buffer';
+import { 
+  Application, 
+  ApplicationCreate, 
+  ApplicationUpdate, 
+  BulkUpdate, 
+  Contact, 
+  InterviewSchedule 
+} from '../types/api.types';
+
+// Initialize Firebase Admin if not already initialized
+if (!admin.apps.length) {
+  admin.initializeApp();
+}
+
+const db = admin.firestore();
+const applicationsRef = db.collection('applications');
+
+// Types
+type ApplicationStatus = 'draft' | 'applied' | 'interview' | 'offer' | 'rejected' | 'accepted' | 'archived';
+
+interface Contact {
+  name: string;
+  title?: string;
+  email?: string;
+  phone?: string;
+  linkedIn?: string;
+}
+
+interface InterviewSchedule {
+  id: string;
+  type: 'phone' | 'video' | 'in-person' | 'written';
+  scheduledDate?: string;
+  duration?: number;
+  notes?: string;
+  status: 'scheduled' | 'completed' | 'cancelled';
+  feedback?: string;
+}
+
+interface Application {
+  id: string;
+  userId: string;
+  jobId?: string;
+  jobTitle: string;
+  companyName: string;
+  jobDescription: string;
+  source: 'email' | 'manual' | 'job_board';
+  status: ApplicationStatus;
+  appliedDate?: string;
+  deadline?: string;
+  contacts?: Contact[];
+  interviews?: InterviewSchedule[];
+  documents?: {
+    resumeId?: string;
+    coverLetterId?: string;
+    kscId?: string;
+  };
+  notes?: string;
+  rating?: number;
+  createdAt: admin.firestore.Timestamp | admin.firestore.FieldValue;
+  updatedAt: admin.firestore.Timestamp | admin.firestore.FieldValue;
+}
+
+interface ApplicationCreate {
+  jobTitle: string;
+  companyName: string;
+  jobDescription: string;
+  deadline?: string;
+  documents?: {
+    resumeId?: string;
+    coverLetterId?: string;
+    kscId?: string;
+  };
+}
+
+interface ApplicationUpdate {
+  status?: ApplicationStatus;
+  rating?: number;
+  notes?: string;
+  contacts?: Contact[];
+  interviews?: InterviewSchedule[];
+  documents?: {
+    resumeId?: string;
+    coverLetterId?: string;
+    kscId?: string;
+  };
+}
+
+interface BulkUpdate {
+  status?: ApplicationStatus;
+  rating?: number;
+  archived?: boolean;
+}
+
+/**
+ * Create a new job application
+ * POST /applications
+ */
+export const createApplication = functions.https.onRequest(async (req: Request, res: Response) => {
+  try {
+    // Validate request body
+    const applicationData: ApplicationCreate = req.body;
+    if (!applicationData.jobTitle || !applicationData.companyName) {
+      return sendResponse(res, 400, { error: 'Job title and company name are required' });
+    }
+
+    // Authenticate user
+    const { userId, error } = await validateFirebaseIdToken(req, res);
+    if (!userId || error) {
+      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+    }
+
+    // Create application document
+    const newApplication: Omit<Application, 'id'> = {
+      ...applicationData,
+      userId,
+      status: applicationData.status || 'draft',
+      source: applicationData.source || 'manual',
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
+
+    // Save to Firestore
+    const docRef = await applicationsRef.add(newApplication);
+    
+    // Return created application
+    const createdApp: Application = {
+      id: docRef.id,
+      ...newApplication,
+    };
+
+    return sendResponse(res, 201, { data: createdApp });
+  } catch (error) {
+    return handleError(res, error, 'Failed to create application');
+  }
+});
+
+/**
+ * List all applications for the authenticated user
+ * GET /applications
+ */
+export const listApplications = functions.https.onRequest(async (req: Request, res: Response) => {
+  try {
+    // Authenticate user
+    const { userId, error } = await validateFirebaseIdToken(req, res);
+    if (!userId || error) {
+      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+    }
+
+    // Get query parameters
+    const { status, limit = '10', page = '1' } = req.query;
+    const limitNum = Math.min(parseInt(limit as string, 10) || 10, 100);
+    const pageNum = Math.max(parseInt(page as string, 10) || 1, 1);
+    const offset = (pageNum - 1) * limitNum;
+
+    // Build query
+    let query = applicationsRef.where('userId', '==', userId);
+    
+    if (status) {
+      query = query.where('status', '==', status);
+    }
+
+    // Execute query
+    const [snapshot, total] = await Promise.all([
+      query.limit(limitNum).offset(offset).get(),
+      query.count().get()
+    ]);
+
+    // Format response
+    const applications = snapshot.docs.map(applicationFromFirestore);
+    const totalCount = total.data().count;
+
+    return sendResponse(res, 200, {
+      data: applications,
+      pagination: {
+        total: totalCount,
+        page: pageNum,
+        limit: limitNum,
+        totalPages: Math.ceil(totalCount / limitNum)
+      }
+    });
+  } catch (error) {
+    return handleError(res, error, 'Failed to list applications');
+  }
+});
+
+/**
+ * Get a single application by ID
+ * GET /applications/:id
+ */
+export const getApplication = functions.https.onRequest(async (req: Request, res: Response) => {
+  try {
+    // Authenticate user
+    const { userId, error } = await validateFirebaseIdToken(req, res);
+    if (!userId || error) {
+      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+    }
+
+    const { id } = req.params;
+    if (!id) {
+      return sendResponse(res, 400, { error: 'Application ID is required' });
+    }
+
+    // Get application
+    const doc = await applicationsRef.doc(id).get();
+    if (!doc.exists) {
+      return sendResponse(res, 404, { error: 'Application not found' });
+    }
+
+    const application = applicationFromFirestore(doc as QueryDocumentSnapshot<DocumentData>);
+
+    // Check ownership
+    if (application.userId !== userId) {
+      return sendResponse(res, 403, { error: 'Forbidden' });
+    }
+
+    return sendResponse(res, 200, { data: application });
+  } catch (error) {
+    return handleError(res, error, 'Failed to get application');
+  }
+});
+
+/**
+ * Update an existing application
+ * PUT /applications/:id
+ */
+export const updateApplication = functions.https.onRequest(async (req: Request, res: Response) => {
+  try {
+    // Authenticate user
+    const { userId, error } = await validateFirebaseIdToken(req, res);
+    if (!userId || error) {
+      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+    }
+
+    const { id } = req.params;
+    if (!id) {
+      return sendResponse(res, 400, { error: 'Application ID is required' });
+    }
+
+    const updateData: ApplicationUpdate = req.body;
+    if (!updateData || Object.keys(updateData).length === 0) {
+      return sendResponse(res, 400, { error: 'No update data provided' });
+    }
+
+    // Check if application exists and user has permission
+    const doc = await applicationsRef.doc(id).get();
+    if (!doc.exists) {
+      return sendResponse(res, 404, { error: 'Application not found' });
+    }
+
+    const appData = doc.data();
+    if (appData?.userId !== userId) {
+      return sendResponse(res, 403, { error: 'Forbidden' });
+    }
+
+    // Prepare update
+    const update: Partial<Application> = {
+      ...updateData,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
+
+    // Update in Firestore
+    await applicationsRef.doc(id).update(update);
+
+    // Get updated document
+    const updatedDoc = await applicationsRef.doc(id).get();
+    const updatedApp = applicationFromFirestore(updatedDoc as QueryDocumentSnapshot<DocumentData>);
+
+    return sendResponse(res, 200, { data: updatedApp });
+  } catch (error) {
+    return handleError(res, error, 'Failed to update application');
+  }
+});
+
+/**
+ * Delete an application
+ * DELETE /applications/:id
+ */
+export const deleteApplication = functions.https.onRequest(async (req: Request, res: Response) => {
+  try {
+    // Authenticate user
+    const { userId, error } = await validateFirebaseIdToken(req, res);
+    if (!userId || error) {
+      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+    }
+
+    const { id } = req.params;
+    if (!id) {
+      return sendResponse(res, 400, { error: 'Application ID is required' });
+    }
+
+    // Check if application exists and user has permission
+    const doc = await applicationsRef.doc(id).get();
+    if (!doc.exists) {
+      return sendResponse(res, 404, { error: 'Application not found' });
+    }
+
+    const appData = doc.data();
+    if (appData?.userId !== userId) {
+      return sendResponse(res, 403, { error: 'Forbidden' });
+    }
+
+    // Delete the application
+    await applicationsRef.doc(id).delete();
+
+    return sendResponse(res, 204, {});
+  } catch (error) {
+    return handleError(res, error, 'Failed to delete application');
+  }
+});
+
+/**
+ * Bulk update applications
+ * PATCH /applications/bulk-update
+ * Body: { ids: string[], update: BulkUpdate }
+ */
+export const bulkUpdateApplications = functions.https.onRequest(async (req: Request, res: Response) => {
+  try {
+    // Authenticate user
+    const { userId, error } = await validateFirebaseIdToken(req, res);
+    if (!userId || error) {
+      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+    }
+
+    const { ids, update } = req.body as { ids: string[]; update: BulkUpdate };
+    
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return sendResponse(res, 400, { error: 'Application IDs array is required' });
+    }
+
+    if (!update || Object.keys(update).length === 0) {
+      return sendResponse(res, 400, { error: 'No update data provided' });
+    }
+
+    // Limit the number of updates in a single request
+    if (ids.length > 100) {
+      return sendResponse(res, 400, { error: 'Cannot update more than 100 applications at once' });
+    }
+
+    // Get all applications to verify ownership
+    const appsSnapshot = await applicationsRef
+      .where(admin.firestore.FieldPath.documentId(), 'in', ids)
+      .get();
+
+    // Verify all applications exist and belong to the user
+    const batch = db.batch();
+    const now = admin.firestore.FieldValue.serverTimestamp();
+    const updates: string[] = [];
+
+    for (const doc of appsSnapshot.docs) {
+      const appData = doc.data();
+      if (appData.userId !== userId) {
+        return sendResponse(res, 403, { 
+          error: `Forbidden: You don't have permission to update application ${doc.id}` 
+        });
+      }
+      
+      batch.update(applicationsRef.doc(doc.id), {
+        ...update,
+        updatedAt: now
+      });
+      updates.push(doc.id);
+    }
+
+    // Execute batch update
+    await batch.commit();
+
+    return sendResponse(res, 200, { 
+      message: `Successfully updated ${updates.length} applications`,
+      updatedIds: updates
+    });
+  } catch (error) {
+    return handleError(res, error, 'Failed to bulk update applications');
+  }
+});
+
+/**
+ * Export applications to various formats
+ * GET /applications/export?format=csv&status=applied
+ * 
+ * Supported formats:
+ * - csv (default): Comma-separated values
+ * - json: JSON format
+ * - pdf: PDF document
+ * - docx: Microsoft Word document (Office Open XML)
+ * - doc: Alias for docx (legacy support)
+ */
+export const exportApplications = functions.https.onRequest(async (req: Request, res: Response) => {
+  try {
+    // Authenticate user
+    const { userId, error } = await validateFirebaseIdToken(req, res);
+    if (!userId || error) {
+      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+    }
+
+    const { format = 'csv', status } = req.query;
+    
+    // Validate format
+    const validFormats = ['csv', 'json', 'pdf', 'docx', 'doc'];
+    if (!validFormats.includes(format as string)) {
+      return sendResponse(res, 400, { 
+        error: `Invalid format. Supported formats: ${validFormats.join(', ')}` 
+      });
+    }
+    
+    // Build query
+    let query = applicationsRef.where('userId', '==', userId);
+    
+    if (status) {
+      query = query.where('status', '==', status);
+    }
+
+    // Get applications
+    const snapshot = await query.get();
+    const applications = snapshot.docs.map(applicationFromFirestore);
+
+    // Format data based on requested format
+    let exportData: string | Buffer;
+    let contentType: string;
+    let filename: string;
+    const timestamp = new Date().toISOString().split('T')[0];
+
+    switch (format) {
+      case 'json':
+        exportData = JSON.stringify(applications, null, 2);
+        contentType = 'application/json';
+        filename = `applications-${timestamp}.json`;
+        break;
+
+      case 'pdf':
+        // Create PDF document
+        const pdfDoc = new PDFDocument();
+        const pdfBuffers: Buffer[] = [];
+        
+        // Collect PDF data
+        pdfDoc.on('data', (chunk: Buffer) => pdfBuffers.push(chunk));
+        
+        // Add title
+        pdfDoc
+          .fontSize(18)
+          .font('Helvetica-Bold')
+          .text('Job Applications', { align: 'center', underline: true })
+          .moveDown(0.5);
+        
+        // Add generation date
+        pdfDoc
+          .fontSize(10)
+          .font('Helvetica')
+          .text(`Generated on: ${new Date().toLocaleDateString()}`, { align: 'right' })
+          .moveDown(1);
+        
+        // Add applications
+        applications.forEach((app, index) => {
+          // Application header
+          pdfDoc
+            .fontSize(12)
+            .font('Helvetica-Bold')
+            .text(`${index + 1}. ${app.companyName} - ${app.jobTitle}`)
+            .font('Helvetica')
+            .fontSize(10);
+          
+          // Application details
+          const details = [
+            `Status: ${app.status}`,
+            `Applied: ${app.appliedDate || 'Not specified'}`,
+            `Location: ${app.location || 'Not specified'}`,
+            `Rating: ${app.rating ? '★'.repeat(app.rating) + '☆'.repeat(5 - app.rating) : 'Not rated'}`,
+            `Source: ${app.source || 'Not specified'}`
+          ];
+          
+          details.forEach(detail => {
+            pdfDoc.text(`• ${detail}`);
+          });
+          
+          // Add notes if available
+          if (app.notes) {
+            pdfDoc
+              .moveDown(0.5)
+              .font('Helvetica-Oblique')
+              .text('Notes:', { continued: true })
+              .font('Helvetica')
+              .text(` ${app.notes}`);
+          }
+          
+          // Add separator between applications
+          if (index < applications.length - 1) {
+            pdfDoc
+              .moveDown(1)
+              .moveTo(50, pdfDoc.y)
+              .lineTo(550, pdfDoc.y)
+              .stroke('#cccccc')
+              .moveDown(1);
+          }
+        });
+        
+        // Add page numbers
+        const pageCount = pdfDoc.bufferedPageRange().count;
+        for (let i = 0; i < pageCount; i++) {
+          pdfDoc.switchToPage(i);
+          const pageHeight = pdfDoc.page.height;
+          pdfDoc
+            .fontSize(8)
+            .text(
+              `Page ${i + 1} of ${pageCount}`,
+              50,
+              pageHeight - 30,
+              { align: 'center', width: 500 }
+            );
+        }
+        
+        // Finalize PDF
+        pdfDoc.end();
+        
+        // Wait for PDF to be generated
+        exportData = await new Promise<Buffer>((resolve, reject) => {
+          pdfDoc.on('end', () => resolve(Buffer.concat(pdfBuffers)));
+          pdfDoc.on('error', reject);
+        });
+        
+        contentType = 'application/pdf';
+        filename = `job-applications-${timestamp}.pdf`;
+        break;
+
+      case 'docx':
+      case 'doc':
+        // Create a new Document
+        const doc = new Document({
+          styles: {
+            paragraphStyles: [{
+              id: 'normal',
+              name: 'Normal',
+              run: {
+                size: 24, // 12pt
+                font: 'Arial'
+              },
+              paragraph: {
+                spacing: { line: 276, before: 100, after: 100 }
+              }
+            }],
+          },
+          sections: [{
+            properties: {
+              page: {
+                margin: {
+                  top: 1440,    // 1 inch
+                  right: 1440,  // 1 inch
+                  bottom: 1440, // 1 inch
+                  left: 1440,   // 1 inch
+                },
+              },
+            },
+            children: [
+              new Paragraph({
+                text: 'Job Applications',
+                heading: HeadingLevel.HEADING_1,
+                spacing: { after: 400 },
+              }),
+              new Paragraph({
+                text: `Generated on: ${new Date().toLocaleDateString()}`,
+                style: 'normal',
+                spacing: { after: 400 },
+              }),
+              ...applications.flatMap((app, index) => [
+                new Paragraph({
+                  text: `${index + 1}. ${app.companyName} - ${app.jobTitle}`,
+                  heading: HeadingLevel.HEADING_2,
+                  spacing: { before: 400, after: 200 },
+                }),
+                new Table({
+                  width: { size: 100, type: WidthType.PERCENTAGE },
+                  borders: {
+                    top: { style: 'single', size: 6, color: 'CCCCCC' },
+                    bottom: { style: 'single', size: 6, color: 'CCCCCC' },
+                    left: { style: 'single', size: 6, color: 'CCCCCC' },
+                    right: { style: 'single', size: 6, color: 'CCCCCC' },
+                    insideHorizontal: { style: 'single', size: 6, color: 'F2F2F2' },
+                    insideVertical: { style: 'single', size: 6, color: 'F2F2F2' },
+                  },
+                  rows: [
+                    // Header row
+                    new TableRow({
+                      children: [
+                        new TableCell({
+                          children: [new Paragraph({
+                            text: 'Field',
+                            run: { bold: true }
+                          })],
+                          width: { size: 30, type: WidthType.PERCENTAGE },
+                          shading: { fill: 'F2F2F2' }
+                        }),
+                        new TableCell({
+                          children: [new Paragraph({
+                            text: 'Value',
+                            run: { bold: true }
+                          })],
+                          width: { size: 70, type: WidthType.PERCENTAGE },
+                          shading: { fill: 'F2F2F2' }
+                        })
+                      ]
+                    }),
+                    // Data rows
+                    ...Object.entries({
+                      'Status': app.status,
+                      'Applied Date': app.appliedDate || 'Not specified',
+                      'Location': app.location || 'Not specified',
+                      'Rating': app.rating ? '★'.repeat(app.rating) + '☆'.repeat(5 - app.rating) : 'Not rated',
+                      'Source': app.source || 'Not specified'
+                    }).map(([key, value]) => new TableRow({
+                      children: [
+                        new TableCell({ 
+                          children: [new Paragraph(key)],
+                          width: { size: 30, type: WidthType.PERCENTAGE }
+                        }),
+                        new TableCell({ 
+                          children: [new Paragraph(value.toString())],
+                          width: { size: 70, type: WidthType.PERCENTAGE }
+                        })
+                      ]
+                    }))
+                  ]
+                }),
+                // Notes section if available
+                ...(app.notes ? [
+                  new Paragraph({
+                    text: 'Notes:',
+                    heading: HeadingLevel.HEADING_3,
+                    spacing: { before: 400, after: 200 }
+                  }),
+                  new Paragraph({
+                    text: app.notes,
+                    spacing: { after: 400 }
+                  })
+                ] : [new Paragraph({ text: '', spacing: { after: 200 } })])
+              ])
+            ]
+          }]
+        });
+
+        // Generate the DOCX file
+        const buffer = await Packer.toBuffer(doc);
+        exportData = buffer;
+        contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        filename = `job-applications-${timestamp}.${format}`;
+        break;
+
+      case 'csv':
+      default:
+        // Default to CSV
+        const headers = [
+          'id', 'companyName', 'jobTitle', 'status', 'appliedDate',
+          'location', 'salary', 'rating', 'source', 'updatedAt'
+        ];
+        
+        const csvRows = [];
+        csvRows.push(headers.join(','));
+        
+        for (const app of applications) {
+          const row = headers.map(header => {
+            let value = app[header as keyof Application] || '';
+            // Handle nested objects and arrays
+            if (typeof value === 'object' && value !== null) {
+              value = JSON.stringify(value);
+            }
+            // Escape quotes and wrap in quotes if contains comma or newline
+            const escaped = String(value).replace(/"/g, '""');
+            return `"${escaped}"`;
+          });
+          csvRows.push(row.join(','));
+        }
+        
+        exportData = csvRows.join('\n');
+        contentType = 'text/csv';
+        filename = `job-applications-${timestamp}.csv`;
+    }
+
+    // Set headers for file download
+    res.setHeader('Content-Type', `${contentType}; charset=utf-8`);
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    
+    // For binary data, set Content-Length header
+    if (Buffer.isBuffer(exportData)) {
+      res.setHeader('Content-Length', exportData.length);
+      return res.status(200).send(exportData);
+    }
+    
+    // For string data
+    res.setHeader('Content-Length', Buffer.byteLength(exportData, 'utf8'));
+    return res.status(200).send(exportData);
+  } catch (error) {
+    console.error('Export error:', error);
+    return handleError(res, error, 'Failed to export applications');
+  }
+});
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+
+    const applicationData: Omit<Application, 'id'> = {
+      ...req.body as ApplicationCreate,
+      userId,
+      status: 'draft',
+      source: 'manual',
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    };
+
+    const docRef = await applicationsRef.add(applicationData);
+    
+    // Update the document with the ID
+    await docRef.update({ id: docRef.id });
+    
+    const createdApp = { 
+      id: docRef.id, 
+      ...applicationData,
+      // Add any missing required fields with defaults
+      jobTitle: applicationData.jobTitle || '',
+      companyName: applicationData.companyName || '',
+      jobDescription: applicationData.jobDescription || ''
+    } as Application;
+    res.status(201).json(createdApp);
+  } catch (error) {
+    handleError(res, error, 'Error creating application');
+  }
+});
+
+// Get all applications for a user
+export const listApplications = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+
+    const { status, company } = req.query;
+    let query = applicationsRef.where('userId', '==', userId);
+    
+    if (status) {
+      query = query.where('status', '==', status);
+    }
+    
+    if (company) {
+      query = query.where('companyName', '==', company);
+    }
+    
+    const snapshot = await query.orderBy('updatedAt', 'desc').get();
+    const applications = snapshot.docs.map((doc: QueryDocumentSnapshot) => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    
+    res.status(200).json(applications);
+  } catch (error) {
+    handleError(res, error, 'Error fetching applications');
+  }
+});
+
+// Get a specific application
+export const getApplication = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const { id } = req.params;
+    const doc = await applicationsRef.doc(id).get();
+    
+    if (!doc.exists) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    const application = doc.data() as Application;
+    
+    // Ensure the user owns this application
+    if (application.userId !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+    
+    res.status(200).json({ id: doc.id, ...application });
+  } catch (error) {
+    handleError(res, error, 'Error fetching application');
+  }
+});
+
+// Update an application
+export const updateApplication = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const { id } = req.params;
+    const updates: ApplicationUpdate = req.body;
+    
+    // Verify the application exists and belongs to the user
+    const doc = await applicationsRef.doc(id).get();
+    if (!doc.exists) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    const application = doc.data() as Application;
+    if (application.userId !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+    
+    // Update the application
+    await applicationsRef.doc(id).update({
+      ...updates,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    
+    // Get the updated application
+    const updatedDoc = await applicationsRef.doc(id).get();
+    res.status(200).json({ id: updatedDoc.id, ...updatedDoc.data() });
+  } catch (error) {
+    handleError(res, error, 'Error updating application');
+  }
+});
+
+// Delete an application
+export const deleteApplication = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const { id } = req.params;
+    
+    // Verify the application exists and belongs to the user
+    const doc = await applicationsRef.doc(id).get();
+    if (!doc.exists) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    const application = doc.data() as Application;
+    if (application.userId !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+    
+    // Delete the application
+    await applicationsRef.doc(id).delete();
+    
+    res.status(200).json({ success: true });
+  } catch (error) {
+    handleError(res, error, 'Error deleting application');
+  }
+});
+
+// Bulk update applications
+export const bulkUpdateApplications = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const { applicationIds, updates } = req.body as { applicationIds: string[]; updates: BulkUpdate };
+    
+    if (!applicationIds?.length || !updates) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+    
+    const batch = db.batch();
+    const updateData: any = { ...updates };
+    
+    // Add updatedAt timestamp
+    updateData.updatedAt = admin.firestore.FieldValue.serverTimestamp();
+    
+    // Queue all updates in a batch
+    for (const id of applicationIds) {
+      const docRef = applicationsRef.doc(id);
+      // Note: In a production app, you should verify each application belongs to the user
+      batch.update(docRef, updateData);
+    }
+    
+    // Commit the batch update
+    await batch.commit();
+    
+    res.status(200).json({ 
+      success: true, 
+      updated: applicationIds.length 
+    });
+  } catch (error) {
+    handleError(res, error, 'Error bulk updating applications');
+  }
+});
+
+// Add a contact to an application
+export const addContact = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const { id } = req.params;
+    const contact: Contact = req.body;
+    
+    if (!contact.name) {
+      return res.status(400).json({ error: 'Contact name is required' });
+    }
+    
+    // Verify the application exists and belongs to the user
+    const doc = await applicationsRef.doc(id).get();
+    if (!doc.exists) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    const application = doc.data() as Application;
+    if (application.userId !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+    
+    // Add the contact to the application
+    const updatedContacts = [...(application.contacts || []), contact];
+    
+    await applicationsRef.doc(id).update({
+      contacts: updatedContacts,
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    
+    // Get the updated application
+    const updatedDoc = await applicationsRef.doc(id).get();
+    res.status(200).json({ id: updatedDoc.id, ...updatedDoc.data() });
+  } catch (error) {
+    handleError(res, error, 'Error adding contact');
+  }
+});
+
+// Schedule an interview
+export const scheduleInterview = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const { id } = req.params;
+    const interview: InterviewSchedule = {
+      ...req.body,
+      id: admin.firestore().collection('interviews').doc().id, // Generate a unique ID
+      status: 'scheduled',
+    };
+    
+    if (!interview.type || !interview.scheduledDate) {
+      return res.status(400).json({ error: 'Interview type and scheduled date are required' });
+    }
+    
+    // Verify the application exists and belongs to the user
+    const doc = await applicationsRef.doc(id).get();
+    if (!doc.exists) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    
+    const application = doc.data() as Application;
+    if (application.userId !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' });
+    }
+    
+    // Add the interview to the application
+    const updatedInterviews = [...(application.interviews || []), interview];
+    
+    await applicationsRef.doc(id).update({
+      interviews: updatedInterviews,
+      status: 'interview',
+      updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+    });
+    
+    // Get the updated application
+    const updatedDoc = await applicationsRef.doc(id).get();
+    res.status(200).json({ id: updatedDoc.id, ...updatedDoc.data() });
+  } catch (error) {
+    handleError(res, error, 'Error scheduling interview');
+  }
+});
+
+// Get applications by status
+export const getApplicationsByStatus = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const { status } = req.params;
+    
+    if (!status) {
+      return res.status(400).json({ error: 'Status is required' });
+    }
+    
+    const snapshot = await applicationsRef
+      .where('userId', '==', userId)
+      .where('status', '==', status)
+      .orderBy('updatedAt', 'desc')
+      .get();
+    
+    const applications = snapshot.docs.map((doc: QueryDocumentSnapshot) => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    
+    res.status(200).json(applications);
+  } catch (error) {
+    handleError(res, error, 'Error fetching applications by status');
+  }
+});
+
+// Export applications as CSV
+export const exportApplications = https.onRequest(async (req: Request, res: Response) => {
+  try {
+    const auth = await validateFirebaseIdToken(req, res);
+    if (!auth?.userId) return sendResponse(401, { error: 'Unauthorized' });
+    const userId = auth.userId;
+    
+    const snapshot = await applicationsRef
+      .where('userId', '==', userId)
+      .orderBy('updatedAt', 'desc')
+      .get();
+    
+    const applications = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data(),
+      createdAt: doc.data().createdAt?.toDate().toISOString(),
+      updatedAt: doc.data().updatedAt?.toDate().toISOString(),
+    }));
+    
+    // Convert to CSV
+    const headers = [
+      'ID',
+      'Job Title',
+      'Company',
+      'Status',
+      'Applied Date',
+      'Deadline',
+      'Created At',
+      'Updated At',
+    ];
+    
+    const csvRows = [];
+    csvRows.push(headers.join(','));
+    
+    for (const app of applications) {
+      const row = [
+        `"${app.id}"`,
+        `"${app.jobTitle}"`,
+        `"${app.companyName}"`,
+        `"${app.status}"`,
+        `"${app.appliedDate || ''}"`,
+        `"${app.deadline || ''}"`,
+        `"${app.createdAt || ''}"`,
+        `"${app.updatedAt || ''}"`,
+      ];
+      csvRows.push(row.join(','));
+    }
+    
+    const csv = csvRows.join('\n');
+    
+    // Set headers for file download
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=applications.csv');
+    
+    res.status(200).send(csv);
+  } catch (error) {
+    handleError(res, error, 'Error exporting applications');
+  }
+});

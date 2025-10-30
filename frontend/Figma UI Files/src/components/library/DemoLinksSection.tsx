@@ -1,8 +1,8 @@
-import React from "react";
-import { Card, CardContent } from "../ui/card";
-import { Button } from "../ui/button";
-import { ComponentSection } from "./ComponentDemo";
-import { Sparkles, Play, Kanban, Layers, Palette } from "lucide-react";
+import React from 'react';
+import { Card, CardContent } from '../ui/card';
+import { Button } from '../ui/button';
+import { ComponentSection } from './ComponentDemo';
+import { Sparkles, Play, Kanban, Layers, Palette } from 'lucide-react';
 
 interface DemoLinksSectionProps {
   onNavigateToAnimated?: () => void;
@@ -10,10 +10,14 @@ interface DemoLinksSectionProps {
   onNavigateToM3Colors?: () => void;
 }
 
-export function DemoLinksSection({ onNavigateToAnimated, onNavigateToComplex, onNavigateToM3Colors }: DemoLinksSectionProps) {
+export function DemoLinksSection({
+  onNavigateToAnimated,
+  onNavigateToComplex,
+  onNavigateToM3Colors,
+}: DemoLinksSectionProps) {
   return (
-    <ComponentSection 
-      title="Interactive Demos" 
+    <ComponentSection
+      title="Interactive Demos"
       description="Explore advanced component functionality with interactive demonstrations."
     >
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -94,9 +98,7 @@ export function DemoLinksSection({ onNavigateToAnimated, onNavigateToComplex, on
                   </p>
                 </div>
               </div>
-              <Button size="sm">
-                Launch Demo
-              </Button>
+              <Button size="sm">Launch Demo</Button>
             </div>
           </CardContent>
         </Card>

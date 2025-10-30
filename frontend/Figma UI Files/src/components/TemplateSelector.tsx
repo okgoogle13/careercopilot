@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { ArrowLeft, Eye, Star, Download } from "lucide-react";
+import { useState } from 'react';
+import { Card } from './ui/card';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { ArrowLeft, Eye, Star, Download } from 'lucide-react';
 
 interface TemplateSelectorProps {
   onBack: () => void;
@@ -24,90 +24,95 @@ interface Template {
 
 const mockTemplates: Template[] = [
   {
-    id: "modern-minimal",
-    name: "Modern Minimal",
-    description: "Clean, professional design perfect for tech and creative roles",
-    category: "Modern",
+    id: 'modern-minimal',
+    name: 'Modern Minimal',
+    description: 'Clean, professional design perfect for tech and creative roles',
+    category: 'Modern',
     rating: 4.8,
     downloads: 12450,
-    preview: "bg-gradient-to-br from-slate-100 to-slate-200",
-    features: ["ATS-Friendly", "Single Page", "Contact Icons", "Skills Section"],
-    type: "resume",
-    isPremium: false
+    preview: 'bg-gradient-to-br from-slate-100 to-slate-200',
+    features: ['ATS-Friendly', 'Single Page', 'Contact Icons', 'Skills Section'],
+    type: 'resume',
+    isPremium: false,
   },
   {
-    id: "executive-pro",
-    name: "Executive Pro",
-    description: "Sophisticated layout designed for senior-level positions",
-    category: "Professional",
+    id: 'executive-pro',
+    name: 'Executive Pro',
+    description: 'Sophisticated layout designed for senior-level positions',
+    category: 'Professional',
     rating: 4.9,
     downloads: 8920,
-    preview: "bg-gradient-to-br from-blue-100 to-indigo-200",
-    features: ["Two Column", "Executive Summary", "Achievement Highlights", "References"],
-    type: "resume",
-    isPremium: true
+    preview: 'bg-gradient-to-br from-blue-100 to-indigo-200',
+    features: ['Two Column', 'Executive Summary', 'Achievement Highlights', 'References'],
+    type: 'resume',
+    isPremium: true,
   },
   {
-    id: "creative-portfolio",
-    name: "Creative Portfolio",
-    description: "Eye-catching design for designers and creative professionals",
-    category: "Creative",
+    id: 'creative-portfolio',
+    name: 'Creative Portfolio',
+    description: 'Eye-catching design for designers and creative professionals',
+    category: 'Creative',
     rating: 4.7,
     downloads: 6340,
-    preview: "bg-gradient-to-br from-purple-100 to-pink-200",
-    features: ["Portfolio Section", "Color Accents", "Project Showcase", "Skills Visualization"],
-    type: "resume",
-    isPremium: true
+    preview: 'bg-gradient-to-br from-purple-100 to-pink-200',
+    features: ['Portfolio Section', 'Color Accents', 'Project Showcase', 'Skills Visualization'],
+    type: 'resume',
+    isPremium: true,
   },
   {
-    id: "ats-optimized",
-    name: "ATS Optimized",
-    description: "Specifically designed to pass through applicant tracking systems",
-    category: "ATS-Friendly",
+    id: 'ats-optimized',
+    name: 'ATS Optimized',
+    description: 'Specifically designed to pass through applicant tracking systems',
+    category: 'ATS-Friendly',
     rating: 4.6,
     downloads: 15670,
-    preview: "bg-gradient-to-br from-green-100 to-emerald-200",
-    features: ["98% ATS Pass Rate", "Standard Fonts", "Simple Layout", "Keyword Optimized"],
-    type: "resume",
-    isPremium: false
+    preview: 'bg-gradient-to-br from-green-100 to-emerald-200',
+    features: ['98% ATS Pass Rate', 'Standard Fonts', 'Simple Layout', 'Keyword Optimized'],
+    type: 'resume',
+    isPremium: false,
   },
   {
-    id: "cover-professional",
-    name: "Professional Cover",
-    description: "Classic cover letter template for any industry",
-    category: "Professional",
+    id: 'cover-professional',
+    name: 'Professional Cover',
+    description: 'Classic cover letter template for any industry',
+    category: 'Professional',
     rating: 4.8,
     downloads: 9840,
-    preview: "bg-gradient-to-br from-gray-100 to-slate-200",
-    features: ["Business Format", "Customizable", "Multiple Layouts", "Industry Agnostic"],
-    type: "cover-letter",
-    isPremium: false
+    preview: 'bg-gradient-to-br from-gray-100 to-slate-200',
+    features: ['Business Format', 'Customizable', 'Multiple Layouts', 'Industry Agnostic'],
+    type: 'cover-letter',
+    isPremium: false,
   },
   {
-    id: "cover-modern",
-    name: "Modern Cover",
-    description: "Contemporary cover letter design with subtle styling",
-    category: "Modern",
+    id: 'cover-modern',
+    name: 'Modern Cover',
+    description: 'Contemporary cover letter design with subtle styling',
+    category: 'Modern',
     rating: 4.7,
     downloads: 7230,
-    preview: "bg-gradient-to-br from-teal-100 to-cyan-200",
-    features: ["Modern Typography", "Color Accents", "Company Logo Space", "Social Links"],
-    type: "cover-letter",
-    isPremium: true
-  }
+    preview: 'bg-gradient-to-br from-teal-100 to-cyan-200',
+    features: ['Modern Typography', 'Color Accents', 'Company Logo Space', 'Social Links'],
+    type: 'cover-letter',
+    isPremium: true,
+  },
 ];
 
 export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorProps) {
   const [selectedType, setSelectedType] = useState<'resume' | 'cover-letter'>('resume');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  const filteredTemplates = mockTemplates.filter(template => {
+  const filteredTemplates = mockTemplates.filter((template) => {
     const typeMatch = template.type === selectedType;
     const categoryMatch = selectedCategory === 'all' || template.category === selectedCategory;
     return typeMatch && categoryMatch;
   });
 
-  const categories = ['all', ...Array.from(new Set(mockTemplates.filter(t => t.type === selectedType).map(t => t.category)))];
+  const categories = [
+    'all',
+    ...Array.from(
+      new Set(mockTemplates.filter((t) => t.type === selectedType).map((t) => t.category))
+    ),
+  ];
 
   return (
     <div className="flex-1 p-8">
@@ -182,9 +187,7 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
                 </div>
               </div>
               {template.isPremium && (
-                <Badge className="absolute top-2 right-2 bg-yellow-500 text-black">
-                  Premium
-                </Badge>
+                <Badge className="absolute top-2 right-2 bg-yellow-500 text-black">Premium</Badge>
               )}
             </div>
 
@@ -239,7 +242,9 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
 
       {filteredTemplates.length === 0 && (
         <div className="text-center py-12">
-          <div className="text-muted-foreground mb-4">No templates found for the selected filters</div>
+          <div className="text-muted-foreground mb-4">
+            No templates found for the selected filters
+          </div>
           <Button variant="outline" onClick={() => setSelectedCategory('all')}>
             Clear Filters
           </Button>

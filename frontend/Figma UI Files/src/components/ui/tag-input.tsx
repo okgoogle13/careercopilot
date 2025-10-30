@@ -12,15 +12,18 @@ export interface TagInputProps {
 }
 
 export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
-  ({ 
-    value = [], 
-    onChange, 
-    placeholder = 'Type and press Enter...', 
-    disabled,
-    className = '',
-    maxTags,
-    allowDuplicates = false
-  }, ref) => {
+  (
+    {
+      value = [],
+      onChange,
+      placeholder = 'Type and press Enter...',
+      disabled,
+      className = '',
+      maxTags,
+      allowDuplicates = false,
+    },
+    ref
+  ) => {
     const [inputValue, setInputValue] = useState('');
     const [isFocused, setIsFocused] = useState(false);
 
@@ -36,7 +39,7 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
     const addTag = (tag: string) => {
       if (maxTags && value.length >= maxTags) return;
       if (!allowDuplicates && value.includes(tag)) return;
-      
+
       onChange?.([...value, tag]);
       setInputValue('');
     };
@@ -47,23 +50,28 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
     };
 
     return (
-      <div 
+      <div
         className={`
           w-full min-h-[3rem] px-3 py-2
           bg-[var(--glass-bg)] backdrop-blur-[var(--glass-blur)]
           border-2 rounded-[var(--radius-lg)]
           transition-all duration-300
-          ${isFocused 
-            ? 'border-transparent shadow-[var(--shadow-glow-aurora)]' 
-            : 'border-[var(--glass-border)]'
+          ${
+            isFocused
+              ? 'border-transparent shadow-[var(--shadow-glow-aurora)]'
+              : 'border-[var(--glass-border)]'
           }
           ${disabled && 'opacity-50 cursor-not-allowed'}
           ${className}
         `}
-        style={isFocused ? {
-          boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
-          borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
-        } : {}}
+        style={
+          isFocused
+            ? {
+                boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
+                borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
+              }
+            : {}
+        }
       >
         <div className="flex flex-wrap gap-2 items-center">
           {value.map((tag, index) => (
@@ -89,7 +97,7 @@ export const TagInput = forwardRef<HTMLInputElement, TagInputProps>(
               </button>
             </div>
           ))}
-          
+
           <input
             ref={ref}
             type="text"

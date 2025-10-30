@@ -13,6 +13,7 @@ This document describes the newly implemented critical components for the Career
 A comprehensive modal for viewing and editing application details.
 
 **Features:**
+
 - **Overview Tab**: Display job details (title, company, location, salary, status, priority)
 - **Timeline Tab**: Visual timeline of application events with Add Event button
 - **Documents Tab**: Manage attached documents (resume, cover letter, KSC)
@@ -21,6 +22,7 @@ A comprehensive modal for viewing and editing application details.
 - **Status Badges**: Color-coded status and priority indicators
 
 **Usage:**
+
 ```tsx
 import { ApplicationDetailsModal } from '@/components/applications';
 
@@ -31,10 +33,11 @@ import { ApplicationDetailsModal } from '@/components/applications';
   onUpdate={handleUpdate}
   onDelete={handleDelete}
   applicationId={appId}
-/>
+/>;
 ```
 
 **Props:**
+
 ```typescript
 interface ApplicationDetailsModalProps {
   open: boolean;
@@ -51,6 +54,7 @@ interface ApplicationDetailsModalProps {
 A 3-step wizard for adding new applications.
 
 **Steps:**
+
 1. **Job Details**: Auto-fill from URL or manual entry
    - Job posting URL with AI parsing button
    - Manual inputs: job title, company, location, salary, description
@@ -63,6 +67,7 @@ A 3-step wizard for adding new applications.
    - Application summary card
 
 **Usage:**
+
 ```tsx
 import { AddApplicationModal } from '@/components/applications';
 
@@ -71,10 +76,11 @@ import { AddApplicationModal } from '@/components/applications';
   onOpenChange={setIsOpen}
   onCreateApplication={handleCreate}
   existingDocuments={documents}
-/>
+/>;
 ```
 
 **Props:**
+
 ```typescript
 interface AddApplicationModalProps {
   open: boolean;
@@ -91,6 +97,7 @@ interface AddApplicationModalProps {
 Custom React hook for managing application state and API calls.
 
 **Features:**
+
 - Fetch all applications
 - Fetch single application by ID
 - Create new application
@@ -102,6 +109,7 @@ Custom React hook for managing application state and API calls.
 - Loading states
 
 **Usage:**
+
 ```tsx
 import { useApplications } from '@/hooks';
 
@@ -119,6 +127,7 @@ const {
 ```
 
 **Return Type:**
+
 ```typescript
 interface UseApplicationsReturn {
   applications: Application[];
@@ -146,6 +155,7 @@ interface UseApplicationsReturn {
 Complete integration of modals with KanbanBoard.
 
 **Features:**
+
 - Display KanbanBoard or empty state
 - "Add Application" button opens AddApplicationModal
 - Kanban cards clickable to open ApplicationDetailsModal
@@ -158,6 +168,7 @@ Complete integration of modals with KanbanBoard.
 Enhanced with real data binding and click handlers.
 
 **Changes:**
+
 - Accepts `applications` prop (array of Application objects)
 - Accepts `onCardClick` callback for opening details modal
 - Dynamic column update when applications change
@@ -170,6 +181,7 @@ Enhanced with real data binding and click handlers.
 Comprehensive TypeScript interfaces for type safety.
 
 **Exported Types:**
+
 - `Application` - Full application object
 - `ApplicationStatus` - 'applied' | 'interviewing' | 'offer' | 'rejected'
 - `PriorityLevel` - 'low' | 'medium' | 'high'
@@ -187,6 +199,7 @@ Comprehensive TypeScript interfaces for type safety.
 API client for all application-related operations.
 
 **Exported Functions:**
+
 ```typescript
 // CRUD operations
 createApplication(request: CreateApplicationRequest): Promise<CreateApplicationResponse>
@@ -209,6 +222,7 @@ parseJobPosting(url: string): Promise<ParsedJobPosting>
 ```
 
 **Error Handling:**
+
 - Automatic error throwing with descriptive messages
 - HTTP error status detection
 - Graceful fallbacks (e.g., parseJobPosting returns empty object on failure)
@@ -238,6 +252,7 @@ ApplicationsView
 ### Type Safety
 
 All components and hooks are fully typed with TypeScript. The type definitions in `src/types/application.ts` ensure:
+
 - Compile-time safety
 - IDE autocomplete
 - Runtime validation through Pydantic on the backend
@@ -281,24 +296,30 @@ POST   /api/v1/jobs/parse               - Parse job posting URL
 ## 🔧 Integration Steps
 
 ### Step 1: Ensure Backend API is Ready
+
 The components expect FastAPI endpoints. Implement the endpoints listed above in `backend/app/api/routers/applications.py`.
 
 ### Step 2: Configure API Base URL
+
 Update the API_BASE_URL in `src/api/applicationService.ts`:
+
 ```typescript
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1';
 ```
 
 ### Step 3: Set Firebase Token
+
 The service expects a Firebase token in localStorage. Ensure authentication is properly set up.
 
 ### Step 4: Import Components
+
 ```tsx
 import { ApplicationsView } from '@/components/ApplicationsView';
 import { useApplications } from '@/hooks';
 ```
 
 ### Step 5: Use in Router
+
 ```tsx
 <Route path="/applications" element={<ApplicationsView />} />
 ```
@@ -306,6 +327,7 @@ import { useApplications } from '@/hooks';
 ## 📱 Mobile Support
 
 All components are fully responsive:
+
 - Modals adapt to screen size
 - Touch-friendly inputs and buttons
 - Mobile-optimized bottom sheets (ready for implementation)
@@ -314,6 +336,7 @@ All components are fully responsive:
 ## ♿ Accessibility
 
 Components follow WCAG 2.1 AA standards:
+
 - Keyboard navigation support
 - ARIA labels on interactive elements
 - Color contrast compliance
@@ -323,11 +346,13 @@ Components follow WCAG 2.1 AA standards:
 ## 🚀 Next Steps
 
 ### Phase 5: Profile Completion
+
 1. Create OnboardingWizard.tsx
 2. Integrate into DashboardView
 3. Add profile completion progress tracking
 
 ### Phase 6: Testing
+
 1. Unit tests for modals
 2. Hook testing with mock API
 3. E2E tests for complete workflows

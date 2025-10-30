@@ -32,18 +32,25 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
               ${disabled && 'opacity-50 cursor-not-allowed'}
               ${className}
             `}
-            style={open ? {
-              boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
-              borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
-            } : {}}
+            style={
+              open
+                ? {
+                    boxShadow:
+                      '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
+                    borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
+                  }
+                : {}
+            }
           >
-            <span className={value ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}>
+            <span
+              className={value ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}
+            >
               {value ? value.toLocaleDateString() : placeholder}
             </span>
             <CalendarIcon className="w-5 h-5 text-[var(--primary)]" />
           </button>
         </PopoverTrigger>
-        <PopoverContent 
+        <PopoverContent
           className="w-auto p-0 bg-[var(--surface-container)] border-2 border-[var(--glass-border)] rounded-[var(--radius-lg)] shadow-[var(--shadow-glow-aurora)]"
           align="start"
         >
@@ -99,18 +106,27 @@ export const DateRangePicker = forwardRef<HTMLButtonElement, DateRangePickerProp
               ${disabled && 'opacity-50 cursor-not-allowed'}
               ${className}
             `}
-            style={open ? {
-              boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
-              borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
-            } : {}}
+            style={
+              open
+                ? {
+                    boxShadow:
+                      '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
+                    borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
+                  }
+                : {}
+            }
           >
-            <span className={value?.from ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'}>
+            <span
+              className={
+                value?.from ? 'text-[var(--on-surface)]' : 'text-[var(--on-surface-variant)]'
+              }
+            >
               {formatDateRange()}
             </span>
             <CalendarIcon className="w-5 h-5 text-[var(--primary)]" />
           </button>
         </PopoverTrigger>
-        <PopoverContent 
+        <PopoverContent
           className="w-auto p-0 bg-[var(--surface-container)] border-2 border-[var(--glass-border)] rounded-[var(--radius-lg)] shadow-[var(--shadow-glow-aurora)]"
           align="start"
         >

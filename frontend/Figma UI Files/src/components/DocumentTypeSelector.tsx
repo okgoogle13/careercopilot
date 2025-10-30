@@ -1,6 +1,6 @@
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { FileText, Mail, Award, ArrowLeft } from "lucide-react";
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { FileText, Mail, Award, ArrowLeft } from 'lucide-react';
 
 interface DocumentTypeSelectorProps {
   onSelectType: (type: 'resume' | 'cover-letter' | 'selection-criteria') => void;
@@ -15,7 +15,7 @@ export function DocumentTypeSelector({ onSelectType, onBack }: DocumentTypeSelec
       description: 'Create a professional resume tailored to your target role',
       icon: FileText,
       color: 'text-blue-500',
-      bgColor: 'bg-blue-500/10'
+      bgColor: 'bg-blue-500/10',
     },
     {
       id: 'cover-letter' as const,
@@ -23,7 +23,7 @@ export function DocumentTypeSelector({ onSelectType, onBack }: DocumentTypeSelec
       description: 'Write a compelling cover letter that highlights your fit',
       icon: Mail,
       color: 'text-green-500',
-      bgColor: 'bg-green-500/10'
+      bgColor: 'bg-green-500/10',
     },
     {
       id: 'selection-criteria' as const,
@@ -31,8 +31,8 @@ export function DocumentTypeSelector({ onSelectType, onBack }: DocumentTypeSelec
       description: 'Address key selection criteria with detailed examples',
       icon: Award,
       color: 'text-purple-500',
-      bgColor: 'bg-purple-500/10'
-    }
+      bgColor: 'bg-purple-500/10',
+    },
   ];
 
   return (
@@ -64,18 +64,20 @@ export function DocumentTypeSelector({ onSelectType, onBack }: DocumentTypeSelec
                 onClick={() => onSelectType(type.id)}
               >
                 <div className="text-center space-y-4">
-                  <div className={`p-4 ${type.bgColor} rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-200`}>
+                  <div
+                    className={`p-4 ${type.bgColor} rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-200`}
+                  >
                     <Icon className={`w-8 h-8 ${type.color}`} />
                   </div>
-                  
+
                   <div>
                     <h3 className="text-xl font-semibold mb-2">{type.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">
                       {type.description}
                     </p>
                   </div>
-                  
-                  <Button 
+
+                  <Button
                     className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90"
                     size="lg"
                   >

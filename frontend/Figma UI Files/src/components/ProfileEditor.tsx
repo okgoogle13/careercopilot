@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Button } from "./ui/button";
-import { Card } from "./ui/card";
-import { Textarea } from "./ui/textarea";
-import { Input } from "./ui/input";
-import { Sparkles, User, Briefcase, GraduationCap, Award } from "lucide-react";
+import { useState } from 'react';
+import { Button } from './ui/button';
+import { Card } from './ui/card';
+import { Textarea } from './ui/textarea';
+import { Input } from './ui/input';
+import { Sparkles, User, Briefcase, GraduationCap, Award } from 'lucide-react';
 
 interface ProfileEditorProps {
   onNext: () => void;
@@ -11,14 +11,16 @@ interface ProfileEditorProps {
 }
 
 export function ProfileEditor({ onNext, onBack }: ProfileEditorProps) {
-  const [summary, setSummary] = useState("");
+  const [summary, setSummary] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
 
   const handleGenerateSummary = async () => {
     setIsGenerating(true);
     // Simulate AI generation
     setTimeout(() => {
-      setSummary("Dedicated and compassionate Community Support Worker with over 5 years of experience in providing client-centered care. Skilled in crisis intervention, case management, and developing support plans that empower individuals to achieve their goals.");
+      setSummary(
+        'Dedicated and compassionate Community Support Worker with over 5 years of experience in providing client-centered care. Skilled in crisis intervention, case management, and developing support plans that empower individuals to achieve their goals.'
+      );
       setIsGenerating(false);
     }, 2000);
   };
@@ -45,7 +47,7 @@ export function ProfileEditor({ onNext, onBack }: ProfileEditorProps) {
                 </div>
                 <h3 className="font-semibold">Personal Information</h3>
               </div>
-              
+
               <div className="space-y-4">
                 <div>
                   <label className="text-sm font-medium mb-2 block">Full Name</label>
@@ -79,10 +81,10 @@ export function ProfileEditor({ onNext, onBack }: ProfileEditorProps) {
                   className="bg-primary/10 text-primary border-primary/30 hover:bg-primary/20"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
-                  {isGenerating ? "Generating..." : "Generate with Gemini"}
+                  {isGenerating ? 'Generating...' : 'Generate with Gemini'}
                 </Button>
               </div>
-              
+
               <Textarea
                 value={summary}
                 onChange={(e) => setSummary(e.target.value)}
@@ -102,7 +104,7 @@ export function ProfileEditor({ onNext, onBack }: ProfileEditorProps) {
                 </div>
                 <h3 className="font-semibold">Experience</h3>
               </div>
-              
+
               <div className="space-y-3">
                 <div className="p-3 bg-card border border-border rounded-lg">
                   <h4 className="font-medium">Community Support Worker</h4>
@@ -125,7 +127,7 @@ export function ProfileEditor({ onNext, onBack }: ProfileEditorProps) {
                 </div>
                 <h3 className="font-semibold">Education</h3>
               </div>
-              
+
               <div className="p-3 bg-card border border-border rounded-lg">
                 <h4 className="font-medium">Certificate IV in Mental Health Peer Work</h4>
                 <p className="text-sm text-muted-foreground">TAFE Queensland</p>
@@ -141,9 +143,16 @@ export function ProfileEditor({ onNext, onBack }: ProfileEditorProps) {
                 </div>
                 <h3 className="font-semibold">Key Skills</h3>
               </div>
-              
+
               <div className="flex flex-wrap gap-2">
-                {["Crisis Intervention", "Case Management", "Client Support", "Peer Support", "Mental Health", "Community Outreach"].map((skill) => (
+                {[
+                  'Crisis Intervention',
+                  'Case Management',
+                  'Client Support',
+                  'Peer Support',
+                  'Mental Health',
+                  'Community Outreach',
+                ].map((skill) => (
                   <span
                     key={skill}
                     className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full"

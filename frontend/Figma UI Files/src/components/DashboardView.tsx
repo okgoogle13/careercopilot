@@ -12,7 +12,7 @@ import {
   Sparkles,
   Plus,
   Clock,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
 import { Button } from './ui/button';
 
@@ -37,8 +37,8 @@ const mockDocuments = [
       createdDate: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
       atsScore: 87,
       tags: ['Tech', 'Senior Level'],
-      aiGenerated: true
-    }
+      aiGenerated: true,
+    },
   },
   {
     id: '2',
@@ -52,8 +52,8 @@ const mockDocuments = [
       createdDate: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000),
       atsScore: 92,
       tags: ['Tech', 'FAANG'],
-      aiGenerated: true
-    }
+      aiGenerated: true,
+    },
   },
   {
     id: '3',
@@ -67,9 +67,9 @@ const mockDocuments = [
       createdDate: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
       atsScore: 78,
       tags: ['Product', 'Mid Level'],
-      aiGenerated: false
-    }
-  }
+      aiGenerated: false,
+    },
+  },
 ];
 
 const profileData = {
@@ -80,23 +80,18 @@ const profileData = {
   recentAchievements: [
     'ATS score improved by 15%',
     'Applied to 3 dream companies',
-    'Resume optimized for tech roles'
-  ]
+    'Resume optimized for tech roles',
+  ],
 };
 
 export function DashboardView({
   onCreateDocument,
   onViewAnalytics,
   onNavigateToOpportunities,
-  onNavigateToApplications
+  onNavigateToApplications,
 }: DashboardViewProps) {
-  const {
-    profile,
-    onboardingStatus,
-    isLoading,
-    completionPercentage,
-    calculateCompletion,
-  } = useProfileCompletion();
+  const { profile, onboardingStatus, isLoading, completionPercentage, calculateCompletion } =
+    useProfileCompletion();
 
   const [onboardingOpen, setOnboardingOpen] = useState(
     onboardingStatus.isFirstTimeUser && !onboardingStatus.stepsCompleted.includes('complete')
@@ -113,10 +108,7 @@ export function DashboardView({
   };
 
   return (
-    <div
-      className="flex-1 overflow-auto"
-      style={{ background: 'var(--color-background)' }}
-    >
+    <div className="flex-1 overflow-auto" style={{ background: 'var(--color-background)' }}>
       <div className="max-w-7xl mx-auto p-6 space-y-8">
         {/* Welcome Banner */}
         <WelcomeBanner
@@ -141,11 +133,11 @@ export function DashboardView({
         {/* Quick Actions Grid */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 
+            <h2
               className="font-semibold"
-              style={{ 
+              style={{
                 color: 'var(--on-surface)',
-                fontSize: '1.25rem'
+                fontSize: '1.25rem',
               }}
             >
               Quick Actions
@@ -166,8 +158,8 @@ export function DashboardView({
               onClick={onCreateDocument}
               aiPowered={true}
               badge={{
-                text: "Most Popular",
-                variant: "default"
+                text: 'Most Popular',
+                variant: 'default',
               }}
             />
 
@@ -196,8 +188,8 @@ export function DashboardView({
               actionText="View Tracker"
               onClick={onNavigateToApplications}
               metadata={[
-                { label: "Active", value: 8 },
-                { label: "Pending", value: 3 }
+                { label: 'Active', value: 8 },
+                { label: 'Pending', value: 3 },
               ]}
             />
           </div>
@@ -206,11 +198,11 @@ export function DashboardView({
         {/* Recent Documents */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h2 
+            <h2
               className="font-semibold"
-              style={{ 
+              style={{
                 color: 'var(--on-surface)',
-                fontSize: '1.25rem'
+                fontSize: '1.25rem',
               }}
             >
               Recent Documents
@@ -244,22 +236,23 @@ export function DashboardView({
         </div>
 
         {/* Job Search Status Card */}
-        <div 
+        <div
           className="rounded-2xl p-6 border transition-all duration-300 hover:border-opacity-60"
           style={{
             background: 'rgba(30, 30, 35, 0.7)',
             backdropFilter: 'blur(24px)',
             borderColor: 'rgba(167, 139, 250, 0.2)',
-            borderWidth: '2px'
+            borderWidth: '2px',
           }}
         >
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div 
+              <div
                 className="p-3 rounded-xl"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(244, 114, 182, 0.2))',
-                  boxShadow: '0 0 24px rgba(167, 139, 250, 0.3)'
+                  background:
+                    'linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(244, 114, 182, 0.2))',
+                  boxShadow: '0 0 24px rgba(167, 139, 250, 0.3)',
                 }}
               >
                 <Brain className="w-6 h-6" style={{ color: 'var(--primary)' }} />
@@ -278,11 +271,11 @@ export function DashboardView({
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div 
+            <div
               className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
               style={{
                 background: 'var(--surface-container)',
-                borderColor: 'rgba(167, 139, 250, 0.2)'
+                borderColor: 'rgba(167, 139, 250, 0.2)',
               }}
             >
               <div className="flex items-center gap-2 mb-1">
@@ -299,11 +292,11 @@ export function DashboardView({
               </p>
             </div>
 
-            <div 
+            <div
               className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
               style={{
                 background: 'var(--surface-container)',
-                borderColor: 'rgba(244, 114, 182, 0.2)'
+                borderColor: 'rgba(244, 114, 182, 0.2)',
               }}
             >
               <div className="flex items-center gap-2 mb-1">
@@ -320,11 +313,11 @@ export function DashboardView({
               </p>
             </div>
 
-            <div 
+            <div
               className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
               style={{
                 background: 'var(--surface-container)',
-                borderColor: 'rgba(167, 139, 250, 0.2)'
+                borderColor: 'rgba(167, 139, 250, 0.2)',
               }}
             >
               <div className="flex items-center gap-2 mb-1">
@@ -341,11 +334,11 @@ export function DashboardView({
               </p>
             </div>
 
-            <div 
+            <div
               className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
               style={{
                 background: 'var(--surface-container)',
-                borderColor: 'rgba(244, 114, 182, 0.2)'
+                borderColor: 'rgba(244, 114, 182, 0.2)',
               }}
             >
               <div className="flex items-center gap-2 mb-1">

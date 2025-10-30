@@ -38,11 +38,12 @@ export const EnhancedInput = forwardRef<HTMLInputElement, EnhancedInputProps>(
               border-2 rounded-[var(--radius-lg)]
               text-[var(--on-surface)] 
               transition-all duration-300
-              ${isFocused 
-                ? 'border-transparent bg-gradient-to-br from-[var(--primary)]/20 via-[var(--tertiary)]/20 to-transparent' 
-                : error 
-                  ? 'border-[var(--color-error)]' 
-                  : 'border-[var(--glass-border)]'
+              ${
+                isFocused
+                  ? 'border-transparent bg-gradient-to-br from-[var(--primary)]/20 via-[var(--tertiary)]/20 to-transparent'
+                  : error
+                    ? 'border-[var(--color-error)]'
+                    : 'border-[var(--glass-border)]'
               }
               ${isFocused && 'shadow-[var(--shadow-glow-aurora)]'}
               ${props.disabled && 'opacity-50 cursor-not-allowed'}
@@ -54,22 +55,24 @@ export const EnhancedInput = forwardRef<HTMLInputElement, EnhancedInputProps>(
                 boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
                 borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
                 borderImageSlice: 1,
-              })
+              }),
             }}
           />
           <label
             className={`
               absolute left-4 pointer-events-none
               transition-all duration-300
-              ${isFocused || hasValue || props.value
-                ? 'top-2 text-xs'
-                : 'top-1/2 -translate-y-1/2 text-base'
+              ${
+                isFocused || hasValue || props.value
+                  ? 'top-2 text-xs'
+                  : 'top-1/2 -translate-y-1/2 text-base'
               }
-              ${isFocused 
-                ? 'text-[var(--primary)]' 
-                : error 
-                  ? 'text-[var(--color-error)]' 
-                  : 'text-[var(--on-surface-variant)]'
+              ${
+                isFocused
+                  ? 'text-[var(--primary)]'
+                  : error
+                    ? 'text-[var(--color-error)]'
+                    : 'text-[var(--on-surface-variant)]'
               }
             `}
           >
@@ -77,7 +80,7 @@ export const EnhancedInput = forwardRef<HTMLInputElement, EnhancedInputProps>(
           </label>
         </div>
         {(error || helperText) && (
-          <div 
+          <div
             className={`
               mt-2 text-sm px-4
               ${error ? 'text-[var(--color-error)]' : 'text-[var(--on-surface-variant)]'}

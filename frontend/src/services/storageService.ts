@@ -1,4 +1,5 @@
-import type { UploadTaskSnapshot ,
+import type {
+  UploadTaskSnapshot,
   ref,
   uploadBytesResumable,
   getDownloadURL,

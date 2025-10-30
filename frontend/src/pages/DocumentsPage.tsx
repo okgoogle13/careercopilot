@@ -190,9 +190,7 @@ export function DocumentsPage({
 
   const handleToggleFavorite = (documentId: string) => {
     setDocuments((prev) =>
-      prev.map((doc) =>
-        doc.id === documentId ? { ...doc, isFavorite: !doc.isFavorite } : doc
-      )
+      prev.map((doc) => (doc.id === documentId ? { ...doc, isFavorite: !doc.isFavorite } : doc))
     );
   };
 
@@ -622,14 +620,18 @@ export function DocumentsPage({
                             {getTypeIcon(document.type)}
                           </Box>
                           <Stack direction="row" spacing={0.5}>
-                            <Tooltip title={document.isFavorite ? 'Remove favorite' : 'Add to favorites'}>
+                            <Tooltip
+                              title={document.isFavorite ? 'Remove favorite' : 'Add to favorites'}
+                            >
                               <IconButton
                                 size="small"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   handleToggleFavorite(document.id);
                                 }}
-                                aria-label={document.isFavorite ? 'Remove favorite' : 'Add to favorites'}
+                                aria-label={
+                                  document.isFavorite ? 'Remove favorite' : 'Add to favorites'
+                                }
                               >
                                 {document.isFavorite ? <Star color="warning" /> : <StarBorder />}
                               </IconButton>

@@ -37,24 +37,28 @@ export interface PhoneInputProps {
 }
 
 export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
-  ({ 
-    value = '', 
-    onChange, 
-    defaultCountry = 'US',
-    disabled,
-    className = '',
-    placeholder = 'Enter phone number'
-  }, ref) => {
+  (
+    {
+      value = '',
+      onChange,
+      defaultCountry = 'US',
+      disabled,
+      className = '',
+      placeholder = 'Enter phone number',
+    },
+    ref
+  ) => {
     const [selectedCountry, setSelectedCountry] = useState<CountryCode>(
-      countryCodes.find(c => c.code === defaultCountry) || countryCodes[0]
+      countryCodes.find((c) => c.code === defaultCountry) || countryCodes[0]
     );
     const [phoneNumber, setPhoneNumber] = useState(value);
     const [open, setOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const filteredCountries = countryCodes.filter(country =>
-      country.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      country.dialCode.includes(searchQuery)
+    const filteredCountries = countryCodes.filter(
+      (country) =>
+        country.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        country.dialCode.includes(searchQuery)
     );
 
     const handleCountrySelect = (country: CountryCode) => {
@@ -89,17 +93,24 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                 focus:outline-none focus:border-transparent focus:shadow-[var(--shadow-glow-aurora)]
                 ${disabled && 'opacity-50 cursor-not-allowed'}
               `}
-              style={open ? {
-                boxShadow: '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
-                borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
-              } : {}}
+              style={
+                open
+                  ? {
+                      boxShadow:
+                        '0 0 24px rgba(167, 139, 250, 0.3), 0 0 48px rgba(244, 114, 182, 0.2)',
+                      borderImage: 'linear-gradient(135deg, var(--primary), var(--tertiary)) 1',
+                    }
+                  : {}
+              }
             >
               <span className="text-xl">{selectedCountry.flag}</span>
               <span className="text-[var(--on-surface)]">{selectedCountry.dialCode}</span>
-              <ChevronDown className={`w-4 h-4 text-[var(--primary)] transition-transform ${open && 'rotate-180'}`} />
+              <ChevronDown
+                className={`w-4 h-4 text-[var(--primary)] transition-transform ${open && 'rotate-180'}`}
+              />
             </button>
           </PopoverTrigger>
-          <PopoverContent 
+          <PopoverContent
             className="w-80 p-0 bg-[var(--surface-container)] border-2 border-[var(--glass-border)] rounded-[var(--radius-lg)] shadow-[var(--shadow-glow-aurora)]"
             align="start"
           >
@@ -128,9 +139,10 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                     className={`
                       w-full px-4 py-3 flex items-center justify-between gap-3
                       text-left transition-all duration-200
-                      ${isSelected 
-                        ? 'bg-gradient-to-r from-[var(--primary)]/20 to-[var(--tertiary)]/20' 
-                        : 'hover:bg-[var(--glass-bg)]'
+                      ${
+                        isSelected
+                          ? 'bg-gradient-to-r from-[var(--primary)]/20 to-[var(--tertiary)]/20'
+                          : 'hover:bg-[var(--glass-bg)]'
                       }
                     `}
                   >
@@ -138,12 +150,12 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
                       <span className="text-xl">{country.flag}</span>
                       <div>
                         <p className="text-[var(--on-surface)]">{country.name}</p>
-                        <p className="text-sm text-[var(--on-surface-variant)]">{country.dialCode}</p>
+                        <p className="text-sm text-[var(--on-surface-variant)]">
+                          {country.dialCode}
+                        </p>
                       </div>
                     </div>
-                    {isSelected && (
-                      <Check className="w-4 h-4 text-[var(--primary)]" />
-                    )}
+                    {isSelected && <Check className="w-4 h-4 text-[var(--primary)]" />}
                   </button>
                 );
               })}

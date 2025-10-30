@@ -75,14 +75,14 @@ export function ApplicationsView({ onAddApplication }: ApplicationsViewProps) {
   };
 
   return (
-    <div
-      className="flex-1 overflow-auto"
-      style={{ background: 'var(--color-background)' }}
-    >
+    <div className="flex-1 overflow-auto" style={{ background: 'var(--color-background)' }}>
       <div className="max-w-7xl mx-auto p-6">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="font-semibold mb-2" style={{ color: 'var(--on-surface)', fontSize: '2rem' }}>
+            <h1
+              className="font-semibold mb-2"
+              style={{ color: 'var(--on-surface)', fontSize: '2rem' }}
+            >
               Applications
             </h1>
             <p style={{ color: 'var(--on-surface-variant)' }}>
@@ -135,7 +135,7 @@ export function ApplicationsView({ onAddApplication }: ApplicationsViewProps) {
             className="flex flex-col items-center justify-center py-20 rounded-2xl border-2 border-dashed"
             style={{
               borderColor: 'rgba(167, 139, 250, 0.3)',
-              background: 'rgba(30, 30, 35, 0.4)'
+              background: 'rgba(30, 30, 35, 0.4)',
             }}
           >
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -148,7 +148,7 @@ export function ApplicationsView({ onAddApplication }: ApplicationsViewProps) {
             className="flex flex-col items-center justify-center py-20 rounded-2xl border-2 border-dashed"
             style={{
               borderColor: 'rgba(167, 139, 250, 0.3)',
-              background: 'rgba(30, 30, 35, 0.4)'
+              background: 'rgba(30, 30, 35, 0.4)',
             }}
           >
             <div

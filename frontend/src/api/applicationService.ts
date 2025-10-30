@@ -7,7 +7,14 @@ import axios from 'axios';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
 
-export type ApplicationStatus = 'draft' | 'applied' | 'interview' | 'offer' | 'rejected' | 'accepted' | 'archived';
+export type ApplicationStatus =
+  | 'draft'
+  | 'applied'
+  | 'interview'
+  | 'offer'
+  | 'rejected'
+  | 'accepted'
+  | 'archived';
 
 export interface Contact {
   name: string;
@@ -147,10 +154,7 @@ export const applicationService = {
   /**
    * Update application
    */
-  async updateApplication(
-    applicationId: string,
-    updates: ApplicationUpdate
-  ): Promise<Application> {
+  async updateApplication(applicationId: string, updates: ApplicationUpdate): Promise<Application> {
     try {
       const response = await apiClient.put(`/${applicationId}`, updates);
       return response.data;
@@ -213,10 +217,7 @@ export const applicationService = {
     interview: InterviewSchedule
   ): Promise<Application> {
     try {
-      const response = await apiClient.post(
-        `/${applicationId}/interviews`,
-        interview
-      );
+      const response = await apiClient.post(`/${applicationId}/interviews`, interview);
       return response.data;
     } catch (error) {
       console.error('Schedule interview error:', error);
@@ -227,10 +228,7 @@ export const applicationService = {
   /**
    * Get applications by status
    */
-  async getApplicationsByStatus(
-    userId: string,
-    status: ApplicationStatus
-  ): Promise<Application[]> {
+  async getApplicationsByStatus(userId: string, status: ApplicationStatus): Promise<Application[]> {
     try {
       const response = await apiClient.get('/', {
         params: { userId, status },

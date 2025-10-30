@@ -59,7 +59,10 @@ function AppRouterContent() {
         />
 
         {/* Default redirect */}
-        <Route path="/" element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />} />
+        <Route
+          path="/"
+          element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />}
+        />
 
         {/* Protected routes */}
         <Route
@@ -120,7 +123,10 @@ function AppRouterContent() {
         />
 
         {/* Catch-all - redirect to dashboard or login */}
-        <Route path="*" element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />} />
+        <Route
+          path="*"
+          element={<Navigate to={isAuthenticated ? '/dashboard' : '/login'} replace />}
+        />
       </Routes>
     </Suspense>
   );

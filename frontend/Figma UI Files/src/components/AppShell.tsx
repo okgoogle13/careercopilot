@@ -12,11 +12,11 @@ interface AppShellProps {
   onSettingsClick?: () => void;
 }
 
-export function AppShell({ 
-  children, 
+export function AppShell({
+  children,
   activeTab = 'dashboard',
   onTabChange,
-  onSettingsClick 
+  onSettingsClick,
 }: AppShellProps) {
   const handleTabClick = (tab: TabValue) => {
     onTabChange?.(tab);
@@ -25,12 +25,12 @@ export function AppShell({
   return (
     <div className="min-h-screen flex flex-col" style={{ background: 'var(--color-background)' }}>
       {/* Top Bar - Minimal & Bold */}
-      <header 
+      <header
         className="sticky top-0 z-50 border-b transition-all duration-300"
         style={{
           background: 'var(--surface-container)',
           borderColor: 'rgba(167, 139, 250, 0.1)',
-          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)'
+          boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
         }}
       >
         <div className="flex items-center justify-between px-6 py-4">
@@ -38,19 +38,16 @@ export function AppShell({
           <div className="flex items-center gap-3">
             <CareerCopilotLogo />
             <div className="flex flex-col">
-              <span 
+              <span
                 className="font-semibold tracking-tight"
-                style={{ 
+                style={{
                   color: 'var(--on-surface)',
-                  fontSize: '1.25rem'
+                  fontSize: '1.25rem',
                 }}
               >
                 CareerCopilot
               </span>
-              <span 
-                className="text-xs"
-                style={{ color: 'var(--on-surface-variant)' }}
-              >
+              <span className="text-xs" style={{ color: 'var(--on-surface-variant)' }}>
                 AI-Powered Career Assistant
               </span>
             </div>
@@ -72,7 +69,7 @@ export function AppShell({
       </header>
 
       {/* Tabs Navigation - Sticky Below Top Bar */}
-      <div 
+      <div
         className="sticky top-[73px] z-40 border-b"
         style={{
           background: 'var(--surface-container)',
@@ -112,8 +109,10 @@ export function AppShell({
               className="flex items-center gap-2 px-6 h-full border-b-2 transition-all duration-300 bg-transparent cursor-pointer"
               style={{
                 borderColor: activeTab === 'opportunities' ? 'var(--primary)' : 'transparent',
-                color: activeTab === 'opportunities' ? 'var(--primary)' : 'var(--on-surface-variant)',
-                background: activeTab === 'opportunities' ? 'rgba(167, 139, 250, 0.05)' : 'transparent',
+                color:
+                  activeTab === 'opportunities' ? 'var(--primary)' : 'var(--on-surface-variant)',
+                background:
+                  activeTab === 'opportunities' ? 'rgba(167, 139, 250, 0.05)' : 'transparent',
               }}
             >
               <Briefcase className="w-4 h-4" />
@@ -125,8 +124,10 @@ export function AppShell({
               className="flex items-center gap-2 px-6 h-full border-b-2 transition-all duration-300 bg-transparent cursor-pointer"
               style={{
                 borderColor: activeTab === 'applications' ? 'var(--primary)' : 'transparent',
-                color: activeTab === 'applications' ? 'var(--primary)' : 'var(--on-surface-variant)',
-                background: activeTab === 'applications' ? 'rgba(167, 139, 250, 0.05)' : 'transparent',
+                color:
+                  activeTab === 'applications' ? 'var(--primary)' : 'var(--on-surface-variant)',
+                background:
+                  activeTab === 'applications' ? 'rgba(167, 139, 250, 0.05)' : 'transparent',
               }}
             >
               <Target className="w-4 h-4" />
@@ -150,9 +151,7 @@ export function AppShell({
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1">
-        {children}
-      </div>
+      <div className="flex-1">{children}</div>
     </div>
   );
 }

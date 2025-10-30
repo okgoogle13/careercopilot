@@ -17,19 +17,22 @@ export interface ConfirmationDialogProps {
 }
 
 export const ConfirmationDialog = forwardRef<HTMLDivElement, ConfirmationDialogProps>(
-  ({ 
-    open,
-    onOpenChange,
-    title,
-    description,
-    confirmLabel = 'Confirm',
-    cancelLabel = 'Cancel',
-    onConfirm,
-    onCancel,
-    variant = 'default',
-    icon,
-    loading = false
-  }, ref) => {
+  (
+    {
+      open,
+      onOpenChange,
+      title,
+      description,
+      confirmLabel = 'Confirm',
+      cancelLabel = 'Cancel',
+      onConfirm,
+      onCancel,
+      variant = 'default',
+      icon,
+      loading = false,
+    },
+    ref
+  ) => {
     const handleConfirm = () => {
       onConfirm();
       if (!loading) {
@@ -44,7 +47,7 @@ export const ConfirmationDialog = forwardRef<HTMLDivElement, ConfirmationDialogP
 
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent 
+        <DialogContent
           ref={ref}
           className="
             max-w-md
@@ -58,14 +61,19 @@ export const ConfirmationDialog = forwardRef<HTMLDivElement, ConfirmationDialogP
           <div className="p-6">
             {/* Header */}
             <div className="flex items-start gap-4 mb-4">
-              <div className={`
+              <div
+                className={`
                 p-3 rounded-full flex-shrink-0
-                ${variant === 'destructive'
-                  ? 'bg-red-500/20 border border-red-500/30'
-                  : 'bg-gradient-to-br from-[var(--primary)]/20 to-[var(--tertiary)]/20 border border-[var(--primary)]/30'
+                ${
+                  variant === 'destructive'
+                    ? 'bg-red-500/20 border border-red-500/30'
+                    : 'bg-gradient-to-br from-[var(--primary)]/20 to-[var(--tertiary)]/20 border border-[var(--primary)]/30'
                 }
-              `}>
-                {icon ? icon : variant === 'destructive' ? (
+              `}
+              >
+                {icon ? (
+                  icon
+                ) : variant === 'destructive' ? (
                   <AlertTriangle className="w-6 h-6 text-red-500" />
                 ) : (
                   <AlertTriangle className="w-6 h-6 text-[var(--primary)]" />
@@ -73,13 +81,9 @@ export const ConfirmationDialog = forwardRef<HTMLDivElement, ConfirmationDialogP
               </div>
 
               <div className="flex-1 min-w-0">
-                <h3 className="text-lg text-[var(--on-surface)] mb-2">
-                  {title}
-                </h3>
+                <h3 className="text-lg text-[var(--on-surface)] mb-2">{title}</h3>
                 {description && (
-                  <p className="text-sm text-[var(--on-surface-variant)]">
-                    {description}
-                  </p>
+                  <p className="text-sm text-[var(--on-surface-variant)]">{description}</p>
                 )}
               </div>
 
@@ -119,9 +123,10 @@ export const ConfirmationDialog = forwardRef<HTMLDivElement, ConfirmationDialogP
                   transition-all duration-300
                   hover:shadow-[var(--shadow-glow-aurora)] hover:-translate-y-0.5
                   disabled:opacity-50 disabled:cursor-not-allowed
-                  ${variant === 'destructive'
-                    ? 'bg-gradient-to-r from-red-500 to-red-600'
-                    : 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)]'
+                  ${
+                    variant === 'destructive'
+                      ? 'bg-gradient-to-r from-red-500 to-red-600'
+                      : 'bg-gradient-to-r from-[var(--primary)] to-[var(--tertiary)]'
                   }
                   ${loading && 'animate-pulse'}
                 `}

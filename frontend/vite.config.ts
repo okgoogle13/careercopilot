@@ -3,8 +3,8 @@ import path from 'path';
 
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, loadEnv, type UserConfig, PluginOption } from 'vite';
-import { checker } from 'vite-plugin-checker';
+import { defineConfig, loadEnv, type UserConfig, type PluginOption } from 'vite';
+import checker from 'vite-plugin-checker';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { VitePWA } from 'vite-plugin-pwa';
 

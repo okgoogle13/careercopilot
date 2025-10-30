@@ -23,15 +23,7 @@ import {
   Paper,
   Alert,
 } from '@mui/material';
-import {
-  Add,
-  Search,
-  MoreVert,
-  Delete,
-  Download,
-  Edit,
-  CloudUpload,
-} from '@mui/icons-material';
+import { Add, Search, MoreVert, Delete, Download, Edit, CloudUpload } from '@mui/icons-material';
 import { smartIngestionService, AssetDocument } from '../api/smartIngestionService';
 import { SmartUploadModal } from '../components/SmartUploadModal';
 
@@ -128,7 +120,14 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
   if (isLoading) {
     return (
       <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '60vh',
+          }}
+        >
           <CircularProgress />
         </Box>
       </Container>
@@ -137,18 +136,18 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
 
       {/* Header */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Typography variant="h4" fontWeight={600}>
           Asset Library
         </Typography>
-        <Button
-          variant="contained"
-          startIcon={<Add />}
-          onClick={() => setUploadModalOpen(true)}
-        >
+        <Button variant="contained" startIcon={<Add />} onClick={() => setUploadModalOpen(true)}>
           Upload Document
         </Button>
       </Box>
@@ -188,11 +187,7 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
             Upload your first document to get started with AI-powered document analysis
           </Typography>
-          <Button
-            variant="contained"
-            startIcon={<Add />}
-            onClick={() => setUploadModalOpen(true)}
-          >
+          <Button variant="contained" startIcon={<Add />} onClick={() => setUploadModalOpen(true)}>
             Upload Your First Document
           </Button>
         </Paper>
@@ -216,7 +211,14 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
                 }}
               >
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', mb: 2 }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'start',
+                      mb: 2,
+                    }}
+                  >
                     <Box sx={{ flex: 1 }}>
                       <Typography variant="subtitle1" fontWeight={600} noWrap>
                         {asset.name}
@@ -225,10 +227,7 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
                         {new Date(asset.createdAt).toLocaleDateString()}
                       </Typography>
                     </Box>
-                    <IconButton
-                      size="small"
-                      onClick={(e) => handleMenuOpen(e, asset)}
-                    >
+                    <IconButton size="small" onClick={(e) => handleMenuOpen(e, asset)}>
                       <MoreVert />
                     </IconButton>
                   </Box>
@@ -280,12 +279,12 @@ export const AssetLibraryPage: React.FC<AssetLibraryPageProps> = ({ onUpload }) 
       />
 
       {/* Asset Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={() => { handleDownload(); }}>
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+        <MenuItem
+          onClick={() => {
+            handleDownload();
+          }}
+        >
           <Download sx={{ mr: 1.5 }} />
           Download
         </MenuItem>

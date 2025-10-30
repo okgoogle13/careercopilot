@@ -2,16 +2,16 @@ import React from 'react';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
-import { 
-  ArrowRight, 
-  ExternalLink, 
-  Star, 
+import {
+  ArrowRight,
+  ExternalLink,
+  Star,
   Clock,
   Check,
   Lock,
   Sparkles,
   Info,
-  ChevronRight
+  ChevronRight,
 } from 'lucide-react';
 
 interface FeatureCardProps {
@@ -50,27 +50,36 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
   disabled = false,
   loading = false,
   className = '',
-  children
+  children,
 }) => {
   const getStatusBadge = () => {
     switch (status) {
       case 'coming-soon':
         return (
-          <Badge variant="secondary" className="bg-brand-secondary/10 text-brand-secondary border-brand-secondary/20">
+          <Badge
+            variant="secondary"
+            className="bg-brand-secondary/10 text-brand-secondary border-brand-secondary/20"
+          >
             <Clock className="w-3 h-3 mr-1" />
             Coming Soon
           </Badge>
         );
       case 'premium':
         return (
-          <Badge variant="secondary" className="bg-brand-tertiary/10 text-brand-tertiary border-brand-tertiary/20">
+          <Badge
+            variant="secondary"
+            className="bg-brand-tertiary/10 text-brand-tertiary border-brand-tertiary/20"
+          >
             <Star className="w-3 h-3 mr-1" />
             Premium
           </Badge>
         );
       case 'new':
         return (
-          <Badge variant="secondary" className="bg-brand-primary/10 text-brand-primary border-brand-primary/20 pulse-ai">
+          <Badge
+            variant="secondary"
+            className="bg-brand-primary/10 text-brand-primary border-brand-primary/20 pulse-ai"
+          >
             <Sparkles className="w-3 h-3 mr-1" />
             New
           </Badge>
@@ -108,11 +117,13 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
   // Loading state
   if (loading) {
     return (
-      <Card className={`
+      <Card
+        className={`
         p-4 animate-pulse 
         ${variant === 'compact' ? 'p-3' : ''}
         ${className}
-      `}>
+      `}
+      >
         <div className="space-y-4">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 bg-surface-container-high rounded-lg shrink-0"></div>
@@ -159,41 +170,45 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
         <div className="flex items-start gap-3">
           {/* Icon */}
           {Icon && (
-            <div className={`
+            <div
+              className={`
               flex items-center justify-center rounded-lg bg-surface-container-high shrink-0
               ${variant === 'compact' ? 'w-8 h-8' : 'w-10 h-10'}
               ${disabled ? 'opacity-50' : ''}
-            `}>
-              <Icon className={`
+            `}
+            >
+              <Icon
+                className={`
                 ${iconColor}
                 ${variant === 'compact' ? 'w-4 h-4' : 'w-5 h-5'}
-              `} />
+              `}
+              />
             </div>
           )}
 
           {/* Title and Badge */}
           <div className="flex-1 min-w-0">
             <div className="flex items-start justify-between gap-2 mb-2">
-              <h3 className={`
+              <h3
+                className={`
                 font-medium text-on-surface leading-tight
                 ${variant === 'compact' ? 'text-sm' : 'text-base'}
-              `}>
+              `}
+              >
                 {title}
               </h3>
               <div className="flex items-center gap-1 shrink-0">
-                {badge && (
-                  <Badge variant={badge.variant || 'secondary'}>
-                    {badge.text}
-                  </Badge>
-                )}
+                {badge && <Badge variant={badge.variant || 'secondary'}>{badge.text}</Badge>}
                 {getStatusBadge()}
               </div>
             </div>
-            
-            <p className={`
+
+            <p
+              className={`
               text-on-surface-variant leading-relaxed
               ${variant === 'compact' ? 'text-xs' : 'text-sm'}
-            `}>
+            `}
+            >
               {description}
             </p>
           </div>
@@ -217,29 +232,27 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
         )}
 
         {/* Additional Content */}
-        {children && (
-          <div className="border-t border-outline-variant pt-4">
-            {children}
-          </div>
-        )}
+        {children && <div className="border-t border-outline-variant pt-4">{children}</div>}
 
         {/* Actions */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {getStatusIcon()}
-            <span className={`
+            <span
+              className={`
               text-on-surface-variant capitalize
               ${variant === 'compact' ? 'text-xs' : 'text-sm'}
-            `}>
+            `}
+            >
               {status.replace('-', ' ')}
             </span>
           </div>
 
           <div className="flex items-center gap-2">
             {onLearnMore && (
-              <Button 
-                variant="ghost" 
-                size="sm" 
+              <Button
+                variant="ghost"
+                size="sm"
                 onClick={(e) => {
                   e.stopPropagation();
                   onLearnMore();
@@ -249,7 +262,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
                 Learn More
               </Button>
             )}
-            
+
             {isClickable && (
               <div className="flex items-center gap-1 text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity">
                 {href ? (
@@ -259,9 +272,7 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
                   </>
                 ) : (
                   <>
-                    <span className="text-xs">
-                      {variant === 'compact' ? 'Go' : 'Get Started'}
-                    </span>
+                    <span className="text-xs">{variant === 'compact' ? 'Go' : 'Get Started'}</span>
                     <ChevronRight className="w-3 h-3" />
                   </>
                 )}
@@ -269,21 +280,13 @@ export const FeatureCard: React.FC<FeatureCardProps> = ({
             )}
 
             {status === 'coming-soon' && (
-              <Button 
-                size="sm" 
-                variant="outline" 
-                disabled
-                className="text-xs opacity-50"
-              >
+              <Button size="sm" variant="outline" disabled className="text-xs opacity-50">
                 Coming Soon
               </Button>
             )}
 
             {status === 'premium' && isClickable && (
-              <Button 
-                size="sm" 
-                className="text-xs btn-gradient"
-              >
+              <Button size="sm" className="text-xs btn-gradient">
                 Upgrade
               </Button>
             )}

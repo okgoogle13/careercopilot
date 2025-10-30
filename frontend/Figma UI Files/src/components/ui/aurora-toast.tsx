@@ -33,7 +33,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const addToast = useCallback((toast: Omit<Toast, 'id'>) => {
     const id = Math.random().toString(36).substring(7);
     const newToast = { ...toast, id };
-    
+
     setToasts((prev) => [...prev, newToast]);
 
     const duration = toast.duration || 5000;
@@ -116,15 +116,11 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast, onClose }) => {
       `}
     >
       {getIcon()}
-      
+
       <div className="flex-1 min-w-0">
-        <h4 className="text-[var(--on-surface)]">
-          {toast.title}
-        </h4>
+        <h4 className="text-[var(--on-surface)]">{toast.title}</h4>
         {toast.description && (
-          <p className="text-sm text-[var(--on-surface-variant)] mt-1">
-            {toast.description}
-          </p>
+          <p className="text-sm text-[var(--on-surface-variant)] mt-1">{toast.description}</p>
         )}
       </div>
 
