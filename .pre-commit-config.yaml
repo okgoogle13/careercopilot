@@ -1,0 +1,107 @@
+# Pre-commit hooks for automatic code formatting and linting
+# Install with: pip install pre-commit && pre-commit install
+
+repos:
+  # Python formatting with Black
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+        args: [--line-length=100]
+        language_version: python3
+        files: ^backend/
+        exclude: ^backend/(migrations|__pycache__|\.venv)/
+
+  # Python import sorting with isort (compatible with Black)
+  - repo: https://github.com/pycqa/isort
+    rev: 6.0.1
+    hooks:
+      - id: isort
+        args: [--profile=black, --line-length=100]
+        files: ^backend/
+        exclude: ^backend/(migrations|__pycache__|\.venv)/
+
+  # Python linting with flake8
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.3.0
+    hooks:
+      - id: flake8
+        args: []
+        files: ^backend/
+        exclude: ^backend/(migrations|__pycache__|\.venv)/
+
+  # Python static type checking with mypy
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.8.0
+    hooks:
+      - id: mypy
+        additional_dependencies: [types-python-dateutil, types-requests, types-PyYAML, types-pytz]
+        args: [--config-file=backend/pyproject.toml, --no-incremental]
+        files: ^backend/
+        exclude: ^backend/(migrations|__pycache__|\.venv|tests?|scripts)/
+        types: [python]
+
+  # Frontend: ESLint for TypeScript/JavaScript
+  - repo: local
+    hooks:
+      - id: eslint-frontend
+        name: ESLint (Frontend)
+        entry: bash -c 'cd frontend && yarn lint:fix'
+        language: system
+        files: ^frontend/.*\.(ts|tsx|js|jsx)$
+        exclude: ^frontend/(node_modules|dist|build)/
+        pass_filenames: false
+
+      - id: eslint-functions
+        name: ESLint (Functions)
+        entry: bash -c 'cd functions && npm run lint:fix'
+        language: system
+        files: ^functions/.*\.(ts|js)$
+        exclude: ^functions/(node_modules|lib)/
+        pass_filenames: false
+
+  # Frontend: Prettier for code formatting
+  - repo: local
+    hooks:
+      - id: prettier-frontend
+        name: Prettier (Frontend)
+        entry: bash -c 'cd frontend && yarn format'
+        language: system
+        files: ^frontend/.*\.(ts|tsx|js|jsx|css|scss|json|md|mdx|html|yml|yaml)$
+        exclude: ^frontend/(node_modules|dist|build)/
+        pass_filenames: false
+
+  # General: Remove trailing whitespace and basic checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: ^(frontend/(node_modules|dist|build)/|backend/__pycache__|\.git/)
+      - id: end-of-file-fixer
+        exclude: ^(frontend/(node_modules|dist|build)/|backend/__pycache__|\.git/)
+      - id: check-added-large-files
+        args: ['--maxkb=2000']
+        exclude: |
+          ^\.yarn/.*|^(.*/)?yarn\.lock$
+      - id: check-merge-conflict
+      - id: check-yaml
+      - id: check-json
+      - id: check-case-conflict
+      - id: check-toml
+      - id: check-xml
+
+  # Commit message validation
+  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.22.0
+    hooks:
+      - id: commitlint
+        stages: [commit-msg]
+
+# Configuration
+default_language_version:
+  python: python3
+  node: system
+
+# Performance optimization
+default_stages: [commit-msg, pre-commit, pre-push]
+fail_fast: false

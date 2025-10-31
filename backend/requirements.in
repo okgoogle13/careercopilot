@@ -1,0 +1,66 @@
+# Core FastAPI and server dependencies
+fastapi
+uvicorn[standard]
+python-dotenv
+pydantic
+pydantic-settings
+python-multipart
+
+# Firebase and Google Cloud essentials
+firebase-admin
+google-api-python-client
+google-cloud-storage
+google-cloud-secret-manager
+
+# Database support
+sqlalchemy
+psycopg2-binary
+alembic
+
+# Core AI Integration - Essential only
+anthropic
+
+# Genkit AI framework
+genkit
+genkit-plugin-google-genai
+
+# Authentication
+python-jose[cryptography]
+passlib[bcrypt]
+email-validator
+PyJWT
+google-auth
+
+# Document processing
+pdfplumber
+pypdfium2
+# sentence-transformers  # Temporarily disabled due to torch dependency conflicts
+beautifulsoup4
+jinja2
+
+# NLP processing (optional - for resume parsing optimization)
+spacy
+
+# AI Platform and ML utilities - keeping minimal set for Genkit
+google-cloud-aiplatform
+numpy
+scikit-learn
+pandas
+
+# Monitoring and Metrics
+prometheus-client
+psutil
+
+# System utilities
+psutil
+redis
+httpx[http2]
+requests
+slowapi
+boto3
+loguru
+opencensus
+opencensus-ext-stackdriver
+
+# Task Queues
+celery

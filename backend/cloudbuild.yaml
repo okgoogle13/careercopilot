@@ -1,0 +1,19 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--target=production'
+      - '-t'
+      - 'us-central1-docker.pkg.dev/careercopilot-468811/careercopilot/backend:latest'
+      - '.'
+    timeout: '900s'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'us-central1-docker.pkg.dev/careercopilot-468811/careercopilot/backend:latest'
+
+images:
+  - 'us-central1-docker.pkg.dev/careercopilot-468811/careercopilot/backend:latest'
+
+timeout: '1200s'
