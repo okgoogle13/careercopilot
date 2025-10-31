@@ -28,6 +28,7 @@ export interface ApplicationPackage {
   documents: GeneratedDocument[];
   generatedAt: string;
   processingTimeSeconds: number;
+  kscResponses?: string[];
 }
 
 export interface WorkflowStatus {

@@ -42,6 +42,11 @@ export default [
       'playwright.config.ts',
       'vite.config.ts',
       '*.config.{ts,js}',
+      '**/Figma UI Files/**',
+      '**/Figma UI Files/**/*.tsx',
+      '**/Figma UI Files/**/*.ts',
+      'Figma UI Files/',
+      'src/',
     ],
   },
   // Base TypeScript and React configuration
