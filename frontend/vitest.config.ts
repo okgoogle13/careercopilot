@@ -8,8 +8,13 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    testTimeout: 10000,
+    
+    // Test coverage
     coverage: {
+      provider: 'v8',
       reporter: ['text', 'json', 'html'],
+      reportsDirectory: './coverage',
       exclude: [
         '**/node_modules/**',
         '**/dist/**',
@@ -19,25 +24,45 @@ export default defineConfig({
         '**/*.config.*',
         '**/test/**',
         '**/tests/**',
-        '**/__tests__/**/*.test.{ts,tsx,js,jsx}',
-        '**/__tests__/**/*.spec.{ts,tsx,js,jsx}',
+        '**/stories/**',
+        '**/.storybook/**',
+        '**/.next/**',
       ],
     },
+    
+    // Exclude patterns
     exclude: [
       '**/node_modules/**',
       '**/dist/**',
       '**/cypress/**',
-      '**/.{idea,git,cache,output,temp}/**',
       '**/e2e/**',
+      '**/playwright/**',
+      '**/__mocks__/**',
     ],
-    testTimeout: 10000,
-    deps: {
-      inline: ['@testing-library/user-event'],
+    
+    // Environment setup
+    environmentOptions: {
+      jsdom: {
+        url: 'http://localhost:3000',
+      },
     },
   },
+  
+  // Resolve configuration
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+  },
+  
+  // Optimize dependencies
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      '@testing-library/react',
+      '@testing-library/jest-dom',
+      '@testing-library/user-event',
+    ],
   },
 });

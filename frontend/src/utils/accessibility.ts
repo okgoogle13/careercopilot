@@ -1,3 +1,5 @@
+import React from 'react';
+
 /**
  * Accessibility Utilities
  * Helper functions for ARIA labels, keyboard navigation, and semantic HTML
