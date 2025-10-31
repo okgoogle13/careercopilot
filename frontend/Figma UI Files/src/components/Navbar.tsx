@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Typography, InputBase, Badge, Avatar, IconButton, Card } from '@mui/material';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Badge } from './ui/badge';

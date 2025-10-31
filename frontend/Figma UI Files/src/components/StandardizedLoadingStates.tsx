@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { cn } from './ui/utils';
 import { Card } from './ui/card';
 import { Skeleton } from './ui/skeleton';
