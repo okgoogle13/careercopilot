@@ -1,5 +1,41 @@
 import { useState, useCallback, useEffect } from 'react';
-import { UserProfile, ProfileCompletion, OnboardingStatus, OnboardingStep } from '../types/profile';
+import type { UserProfile as AuthUserProfile } from '../api/authService';
+
+// Local types
+export interface ProfileCompletion {
+  personalInfoComplete: boolean;
+  professionalSummaryComplete: boolean;
+  skillsComplete: boolean;
+  experienceComplete: boolean;
+  educationComplete: boolean;
+  documentsUploaded: boolean;
+  overallPercentage: number;
+}
+
+export enum OnboardingStep {
+  WELCOME = 'welcome',
+  UPLOAD = 'upload',
+  REVIEW = 'review',
+  COMPLETE = 'complete'
+}
+
+export interface OnboardingStatus {
+  currentStep: OnboardingStep;
+  completedSteps: OnboardingStep[];
+  isComplete: boolean;
+  isFirstTimeUser: boolean;
+  hasUploadedDocuments: boolean;
+  profileCompletion: ProfileCompletion;
+}
+
+// Extend the UserProfile from auth service with additional fields needed for this hook
+export interface UserProfile extends Omit<AuthUserProfile, 'uid'> {
+  id: string; // Alias for uid
+  completionPercentage: number;
+  onboardingComplete: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 
 interface UseProfileCompletionReturn {
   // State
@@ -25,8 +61,13 @@ interface UseProfileCompletionReturn {
 
 const DEFAULT_PROFILE: UserProfile = {
   id: '',
-  displayName: '',
+  uid: '',
   email: '',
+  displayName: '',
+  personalInfo: {
+    fullName: '',
+  },
+  preferences: {},
   completionPercentage: 0,
   onboardingComplete: false,
   createdAt: new Date().toISOString(),
@@ -37,12 +78,16 @@ const DEFAULT_PROFILE: UserProfile = {
  * Custom hook for tracking profile completion and onboarding status
  * Manages the onboarding workflow and profile completion metrics
  */
-export function useProfileCompletion(): UseProfileCompletionReturn {
+export const useProfileCompletion = (): UseProfileCompletionReturn => {
+  const [completionPercentage, setCompletionPercentage] = useState(0);
+  const [isProfileComplete, setIsProfileComplete] = useState(false);
+  const [isOnboardingComplete, setIsOnboardingComplete] = useState(false);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [onboardingStatus, setOnboardingStatus] = useState<OnboardingStatus>({
     isFirstTimeUser: true,
-    currentStep: 'welcome',
-    stepsCompleted: [],
+    currentStep: OnboardingStep.WELCOME,
+    completedSteps: [],
+    isComplete: false,
     hasUploadedDocuments: false,
     profileCompletion: {
       personalInfoComplete: false,
@@ -75,7 +120,19 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
         setOnboardingStatus((prev) => ({
           ...prev,
           isFirstTimeUser: true,
-          currentStep: 'welcome',
+          currentStep: OnboardingStep.WELCOME,
+          completedSteps: [],
+          isComplete: false,
+          hasUploadedDocuments: false,
+          profileCompletion: {
+            personalInfoComplete: false,
+            professionalSummaryComplete: false,
+            skillsComplete: false,
+            experienceComplete: false,
+            educationComplete: false,
+            documentsUploaded: false,
+            overallPercentage: 0,
+          },
         }));
       }
     } catch (err) {
@@ -101,18 +158,24 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
       };
     }
 
+    // Type-safe checks for profile completion
+    const personalInfo = profile.personalInfo || {};
+    const skills = profile.skills || {};
+    const experience = profile.experience || [];
+    const education = profile.education || [];
+
     const checks = {
-      personalInfoComplete: !!(profile.personalInfo?.fullName && profile.personalInfo?.phone),
+      personalInfoComplete: !!(personalInfo.fullName && personalInfo.phone),
       professionalSummaryComplete: !!profile.professionalSummary,
-      skillsComplete: !!(profile.skills?.technical && profile.skills.technical.length > 0),
-      experienceComplete: !!(profile.experience && profile.experience.length > 0),
-      educationComplete: !!(profile.education && profile.education.length > 0),
+      skillsComplete: !!(Array.isArray(skills.technical) && skills.technical.length > 0),
+      experienceComplete: experience.length > 0,
+      educationComplete: education.length > 0,
       documentsUploaded: onboardingStatus.hasUploadedDocuments,
     };
 
     const completedItems = Object.values(checks).filter(Boolean).length;
     const totalItems = Object.keys(checks).length;
-    const overallPercentage = Math.round((completedItems / totalItems) * 100);
+    const overallPercentage = Math.round((completedItems / Math.max(1, totalItems)) * 100);
 
     return {
       ...checks,
@@ -126,7 +189,25 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
       setIsLoading(true);
       setError(null);
       try {
-        const updatedProfile = { ...profile, ...updates };
+        // Create a new profile object with the updates
+        const updatedProfile = {
+          ...profile,
+          ...updates,
+          // Ensure required fields are always present
+          id: updates.id ?? profile?.id ?? '',
+          email: updates.email ?? profile?.email ?? '',
+          displayName: updates.displayName ?? profile?.displayName ?? '',
+          personalInfo: {
+            ...profile?.personalInfo,
+            ...updates.personalInfo,
+          },
+          preferences: {
+            ...profile?.preferences,
+            ...updates.preferences,
+          },
+          updatedAt: new Date().toISOString(),
+        } as UserProfile;
+
         setProfile(updatedProfile);
 
         // Persist to localStorage
@@ -149,21 +230,29 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
   // Complete onboarding step
   const completeOnboardingStep = useCallback(async (step: OnboardingStep) => {
     setOnboardingStatus((prev) => {
-      const stepsCompleted = [...prev.stepsCompleted];
-      if (!stepsCompleted.includes(step)) {
-        stepsCompleted.push(step);
+      const completedSteps = [...prev.completedSteps];
+      if (!completedSteps.includes(step)) {
+        completedSteps.push(step);
       }
 
       // Determine next step
-      const stepOrder: OnboardingStep[] = ['welcome', 'upload', 'review', 'complete'];
+      const stepOrder: OnboardingStep[] = [
+        OnboardingStep.WELCOME,
+        OnboardingStep.UPLOAD,
+        OnboardingStep.REVIEW,
+        OnboardingStep.COMPLETE
+      ];
+      
       const currentIndex = stepOrder.indexOf(step);
-      const nextStep =
-        currentIndex < stepOrder.length - 1 ? stepOrder[currentIndex + 1] : 'complete';
+      const nextStep = currentIndex < stepOrder.length - 1 
+        ? stepOrder[currentIndex + 1] 
+        : OnboardingStep.COMPLETE;
 
       return {
         ...prev,
-        stepsCompleted,
+        completedSteps,
         currentStep: nextStep,
+        isComplete: nextStep === OnboardingStep.COMPLETE,
       };
     });
   }, []);
@@ -172,8 +261,9 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
   const skipOnboarding = useCallback(async () => {
     setOnboardingStatus((prev) => ({
       ...prev,
-      currentStep: 'complete',
-      stepsCompleted: [...prev.stepsCompleted, 'complete'],
+      currentStep: OnboardingStep.COMPLETE,
+      completedSteps: [...prev.completedSteps, OnboardingStep.COMPLETE],
+      isComplete: true,
     }));
   }, []);
 
@@ -183,19 +273,24 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
     setError(null);
     try {
       if (profile) {
-        const updatedProfile = {
+        const updatedProfile: UserProfile = {
           ...profile,
           onboardingComplete: true,
+          updatedAt: new Date().toISOString(),
         };
         setProfile(updatedProfile);
         localStorage.setItem('userProfile', JSON.stringify(updatedProfile));
+        
+        setOnboardingStatus((prev) => ({
+          ...prev,
+          isComplete: true,
+          currentStep: OnboardingStep.COMPLETE,
+          completedSteps: [...prev.completedSteps, OnboardingStep.COMPLETE],
+        }));
+        
+        // Mark onboarding as complete in the profile
+        await updateProfile({ onboardingComplete: true });
       }
-
-      setOnboardingStatus((prev) => ({
-        ...prev,
-        isFirstTimeUser: false,
-        currentStep: 'complete',
-      }));
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to complete onboarding';
       setError(errorMessage);
@@ -207,13 +302,13 @@ export function useProfileCompletion(): UseProfileCompletionReturn {
   }, [profile]);
 
   // Calculate completion metrics when profile changes
-  const calculateCompletionMetrics = (updatedProfile: UserProfile) => {
+  const calculateCompletionMetrics = useCallback((profile: UserProfile | null) => {
+    if (!profile) return;
+    
     const completion = calculateCompletion();
-    setOnboardingStatus((prev) => ({
-      ...prev,
-      profileCompletion: completion,
-    }));
-  };
+    setCompletionPercentage(completion.overallPercentage);
+    setIsProfileComplete(completion.overallPercentage >= 100);
+  }, [calculateCompletion]);
 
   // Track document upload
   const handleDocumentUpload = useCallback(() => {
