@@ -6,6 +6,8 @@ type ToastOptions = {
   // Add other toast options as needed
 };
 
+import { jest } from '@jest/globals';
+
 const toast = {
   success: jest.fn((message: string, options?: ToastOptions) => 'toast-success'),
   error: jest.fn((message: string, options?: ToastOptions) => 'toast-error'),
