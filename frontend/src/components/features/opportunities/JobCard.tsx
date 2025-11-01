@@ -7,6 +7,7 @@ import {
   OpenInNew as ExternalLink,
   Business as Building2,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Card,
   CardContent,
@@ -72,46 +73,96 @@ export function JobCard({
 
   return (
     <Card
-      className="hover:shadow-lg transition-shadow cursor-pointer"
+      sx={{
+      '&:hover': { boxShadow: 4 },
+      "transition-shadow": true,
+      cursor: "pointer"
+    }}
       onClick={() => onViewDetails?.(id)}
     >
-      <CardContent className="p-6">
+      <CardContent sx={{
+      p: 6
+    }}>
         {/* Header */}
-        <Box className="flex items-start justify-between mb-4">
-          <Box className="flex items-start gap-3 flex-1">
+        <Box sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+          <Box sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 3,
+      flex: 1
+    }}>
             {/* Company Logo */}
-            <Avatar src={companyLogo} className="w-12 h-12" sx={{ bgcolor: 'primary.main' }}>
+            <Avatar src={companyLogo} sx={{
+      "w-12": true,
+      "h-12": true
+    }} sx={{ bgcolor: 'primary.main' }}>
               <Building2 sx={{ fontSize: 20 }} />
             </Avatar>
 
             {/* Job Info */}
-            <Box className="flex-1 min-w-0">
-              <Typography variant="h6" className="font-semibold mb-1 truncate" title={title}>
+            <Box sx={{
+      flex: 1,
+      "min-w-0": true
+    }}>
+              <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 1,
+      [object Object]
+    }} title={title}>
                 {title}
               </Typography>
-              <Typography variant="body1" color="text.secondary" className="mb-2">
+              <Typography variant="body1" color="text.secondary" sx={{
+      mb: 2
+    }}>
                 {company}
               </Typography>
 
               {/* Job Meta */}
-              <Box className="flex flex-wrap gap-3 text-sm text-gray-600">
-                <Box className="flex items-center gap-1">
+              <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 3,
+      typography: body1,
+      color: "gray.600"
+    }}>
+                <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
                   <MapPin sx={{ fontSize: 14 }} />
                   <span>{location}</span>
                   {isRemote && (
                     <Chip
                       label="Remote"
                       size="small"
-                      className="ml-1 bg-green-100 text-green-800"
+                      sx={{
+      ml: 1,
+      bgcolor: "green.100",
+      "text-green-800": true
+    }}
                     />
                   )}
                 </Box>
-                <Box className="flex items-center gap-1">
+                <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
                   <Clock sx={{ fontSize: 14 }} />
                   <span>{postedDate}</span>
                 </Box>
                 {salary && (
-                  <Box className="flex items-center gap-1">
+                  <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
                     <DollarSign sx={{ fontSize: 14 }} />
                     <span>{salary}</span>
                   </Box>
@@ -123,11 +174,16 @@ export function JobCard({
           {/* Bookmark Button */}
           <IconButton
             onClick={handleBookmark}
-            className="text-gray-400 hover:text-primary"
+            sx={{
+      "text-gray-400": true,
+      '&:hover': { "text-primary": true }
+    }}
             aria-label={isBookmarked ? 'Remove bookmark' : 'Add bookmark'}
           >
             {isBookmarked ? (
-              <BookmarkCheck sx={{ fontSize: 20 }} className="text-primary" />
+              <BookmarkCheck sx={{ fontSize: 20 }} sx={{
+      "text-primary": true
+    }} />
             ) : (
               <Bookmark sx={{ fontSize: 20 }} />
             )}
@@ -135,40 +191,68 @@ export function JobCard({
         </Box>
 
         {/* Job Type & Experience Chips */}
-        <Box className="flex gap-2 mb-4">
+        <Box sx={{
+      display: "flex",
+      gap: 2,
+      mb: 4
+    }}>
           <Chip
             label={type}
             size="small"
             variant="outlined"
-            className="border-blue-300 text-blue-800"
+            sx={{
+      borderColor: "blue.300",
+      "text-blue-800": true
+    }}
           />
           <Chip
             label={experience}
             size="small"
             variant="outlined"
-            className="border-purple-300 text-purple-800"
+            sx={{
+      borderColor: "purple.300",
+      "text-purple-800": true
+    }}
           />
         </Box>
 
         {/* Description */}
-        <Typography variant="body2" color="text.secondary" className="mb-4 line-clamp-3">
+        <Typography variant="body2" color="text.secondary" sx={{
+      mb: 4,
+      "line-clamp-3": true
+    }}>
           {description}
         </Typography>
 
         {/* Skills */}
-        <Box className="mb-4">
-          <Typography variant="caption" color="text.secondary" className="mb-2 block">
+        <Box sx={{
+      mb: 4
+    }}>
+          <Typography variant="caption" color="text.secondary" sx={{
+      mb: 2,
+      "block": true
+    }}>
             Required Skills:
           </Typography>
-          <Box className="flex flex-wrap gap-1">
+          <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 1
+    }}>
             {skills.slice(0, 5).map((skill, index) => (
-              <Chip key={index} label={skill} size="small" className="bg-gray-100 text-gray-800" />
+              <Chip key={index} label={skill} size="small" sx={{
+      bgcolor: "gray.100",
+      "text-gray-800": true
+    }} />
             ))}
             {skills.length > 5 && (
               <Chip
                 label={`+${skills.length - 5} more`}
                 size="small"
-                className="bg-gray-100 text-gray-600"
+                sx={{
+      bgcolor: "gray.100",
+      color: "gray.600"
+    }}
               />
             )}
           </Box>
@@ -176,15 +260,26 @@ export function JobCard({
       </CardContent>
 
       {/* Actions */}
-      <CardActions className="px-6 pb-6 pt-0">
-        <Box className="flex gap-2 w-full">
+      <CardActions sx={{
+      px: 6,
+      pb: 6,
+      pt: 0
+    }}>
+        <Box sx={{
+      display: "flex",
+      gap: 2,
+      width: "100%"
+    }}>
           <Button
             variant="contained"
             onClick={(e) => {
               e.stopPropagation();
               onApply?.(id);
             }}
-            className="bg-primary hover:bg-primary/90"
+            sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
           >
             Apply Now
           </Button>

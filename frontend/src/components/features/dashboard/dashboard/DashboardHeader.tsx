@@ -1,4 +1,5 @@
 import { Add as Plus, Person as User, Settings } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button } from '@mui/material';
 import React from 'react';
 
@@ -20,14 +21,36 @@ export function DashboardHeader({
   isEmpty = false,
 }: DashboardHeaderProps) {
   return (
-    <div className="flex items-center justify-between mb-8">
+    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 8
+    }}>
       <div>
-        <h1 className="text-2xl font-bold text-foreground mb-2">{title}</h1>
-        {subtitle && <p className="text-muted-foreground">{subtitle}</p>}
+        <h1 sx={{
+      typography: h4,
+      fontWeight: 700,
+      "text-foreground": true,
+      mb: 2
+    }}>{title}</h1>
+        {subtitle && <p sx={{
+      "text-muted-foreground": true
+    }}>{subtitle}</p>}
       </div>
-      <div className="flex items-center gap-4">
+      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
         {!isEmpty && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
             <span>Dashboard</span>
             <span>ATS Analysis</span>
           </div>
@@ -35,17 +58,40 @@ export function DashboardHeader({
         {showCreateButton && (
           <Button
             onClick={() => onCreateProfile?.()}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true },
+      "text-primary-foreground": true
+    }}
           >
-            <Plus className="w-4 h-4 mr-2" />
+            <Plus sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             {isEmpty ? 'Create Your First Document' : 'Create Document'}
           </Button>
         )}
         <Button onClick={onNavigateToSettings} variant="text" size="small">
-          <Settings className="w-4 h-4" />
+          <Settings sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
         </Button>
-        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-          <User className="w-4 h-4 text-black" />
+        <div sx={{
+      "w-8": true,
+      "h-8": true,
+      bgcolor: "common.white",
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+          <User sx={{
+      "w-4": true,
+      "h-4": true,
+      color: "common.black"
+    }} />
         </div>
       </div>
     </div>

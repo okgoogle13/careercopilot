@@ -8,6 +8,7 @@ import {
   TrendingUp,
   Cancel as XCircle,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
 import { AnimatePresence, motion } from 'motion/react';
 import React, { useState } from 'react';
@@ -32,7 +33,12 @@ export function AnimatedModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-50"
+            sx={{
+      "fixed": true,
+      "inset-0": true,
+      "bg-black/50": true,
+      "z-50": true
+    }}
             onClick={onClose}
           />
           <motion.div
@@ -40,7 +46,17 @@ export function AnimatedModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md"
+            sx={{
+      "fixed": true,
+      "top-1/2": true,
+      "left-1/2": true,
+      "transform": true,
+      "-translate-x-1/2": true,
+      "-translate-y-1/2": true,
+      "z-50": true,
+      width: "100%",
+      maxWidth: "md"
+    }}
           >
             <Card>
               <CardHeader title={<Typography variant="h3">{title}</Typography>}></CardHeader>
@@ -71,7 +87,9 @@ export function AnimatedDropdown({ trigger, items, onSelect }: AnimatedDropdownP
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative">
+    <div sx={{
+      "relative": true
+    }}>
       <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
       <AnimatePresence>
         {isOpen && (
@@ -80,16 +98,40 @@ export function AnimatedDropdown({ trigger, items, onSelect }: AnimatedDropdownP
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 mt-2 min-w-[200px] bg-card border border-border rounded-lg shadow-lg z-10"
+            sx={{
+      "absolute": true,
+      "top-full": true,
+      "left-0": true,
+      mt: 2,
+      w: "200px",
+      "bg-card": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem,
+      boxShadow: 4,
+      "z-10": true
+    }}
           >
-            <div className="py-1">
+            <div sx={{
+      py: 1
+    }}>
               {items.map((item, index) => (
                 <motion.button
                   key={item.value}
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="w-full px-3 py-2 text-left hover:bg-muted transition-colors flex items-center gap-2"
+                  sx={{
+      width: "100%",
+      px: 3,
+      py: 2,
+      textAlign: "left",
+      '&:hover': { "bg-muted": true },
+      "transition-colors": true,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}
                   onClick={() => {
                     onSelect(item.value);
                     setIsOpen(false);
@@ -120,27 +162,66 @@ export function AnimatedTabs({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full">
-      <div className="relative">
-        <div className="flex bg-muted rounded-lg p-1">
+    <div sx={{
+      width: "100%"
+    }}>
+      <div sx={{
+      "relative": true
+    }}>
+        <div sx={{
+      display: "flex",
+      "bg-muted": true,
+      borderRadius: 0.5rem,
+      p: 1
+    }}>
           {tabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className={`relative flex-1 px-3 py-2 text-sm font-medium transition-colors flex items-center justify-center gap-2 ${
-                activeTab === tab.id
-                  ? 'text-primary'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              sx={{
+      "relative": true,
+      flex: 1,
+      px: 3,
+      py: 2,
+      typography: body1,
+      fontWeight: 500,
+      "transition-colors": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      "${": true,
+      "activeTab": true,
+      "===": true,
+      "tab.id": true,
+      "?": true,
+      "'text-primary'": true,
+      ":": true,
+      "'text-muted-foreground": true,
+      '&:hover': { "text-foreground'": true },
+      "}": true
+    }}
             >
               {activeTab === tab.id && (
                 <motion.div
                   layoutId="activeTab"
-                  className="absolute inset-0 bg-card rounded-md shadow-sm"
+                  sx={{
+      "absolute": true,
+      "inset-0": true,
+      "bg-card": true,
+      borderRadius: 0.375rem,
+      boxShadow: 1
+    }}
                   transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                 />
               )}
-              <span className="relative z-10 flex items-center gap-2">
+              <span sx={{
+      "relative": true,
+      "z-10": true,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
                 {tab.icon}
                 {tab.label}
               </span>
@@ -148,7 +229,9 @@ export function AnimatedTabs({
           ))}
         </div>
       </div>
-      <div className="mt-4">
+      <div sx={{
+      mt: 4
+    }}>
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -180,16 +263,39 @@ export function AnimatedProgress({
   const percentage = (value / max) * 100;
 
   return (
-    <div className="w-full">
+    <div sx={{
+      width: "100%"
+    }}>
       {showPercentage && (
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-medium">Progress</span>
-          <span className="text-sm text-muted-foreground">{Math.round(percentage)}%</span>
+        <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      mb: 2
+    }}>
+          <span sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>Progress</span>
+          <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{Math.round(percentage)}%</span>
         </div>
       )}
-      <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+      <div sx={{
+      width: "100%",
+      "bg-muted": true,
+      borderRadius: 9999px,
+      "h-2": true,
+      overflow: "hidden"
+    }}>
         <motion.div
-          className="h-full bg-primary rounded-full"
+          sx={{
+      height: "100%",
+      "bg-primary": true,
+      borderRadius: 9999px
+    }}
           initial={animated ? { width: '0%' } : { width: `${percentage}%` }}
           animate={{ width: `${percentage}%` }}
           transition={animated ? { type: 'spring', damping: 30, stiffness: 100 } : { duration: 0 }}
@@ -231,12 +337,33 @@ export function AnimatedNotification({
       animate={{ opacity: 1, x: 0, scale: 1 }}
       exit={{ opacity: 0, x: 300, scale: 0.9 }}
       transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-      className={`flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg min-w-[300px] ${colors[type]}`}
+      sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      px: 4,
+      py: 3,
+      borderRadius: 0.5rem,
+      boxShadow: 4,
+      w: "300px",
+      "${colors[type]}": true
+    }}
     >
-      <Icon className="w-4 h-4" />
-      <span className="text-sm flex-1">{message}</span>
-      <button onClick={onClose} className="hover:opacity-70">
-        <XCircle className="w-4 h-4" />
+      <Icon sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
+      <span sx={{
+      typography: body1,
+      flex: 1
+    }}>{message}</span>
+      <button onClick={onClose} sx={{
+      '&:hover': { opacity: 0.7 }
+    }}>
+        <XCircle sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
       </button>
     </motion.div>
   );
@@ -301,14 +428,28 @@ export function AnimatedButton({
   const MotionButton =
     animation === 'shimmer'
       ? ({ children, ...props }: any) => (
-          <Button className={`relative overflow-hidden group ${className}`} {...props}>
+          <Button sx={{
+      "relative": true,
+      overflow: "hidden",
+      "group": true,
+      "${className}": true
+    }} {...props}>
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              sx={{
+      "absolute": true,
+      "inset-0": true,
+      "bg-gradient-to-r": true,
+      "from-transparent": true,
+      "via-white/20": true,
+      "to-transparent": true
+    }}
               initial={{ x: '-100%' }}
               whileHover={{ x: '100%' }}
               transition={{ duration: 0.6 }}
             />
-            <span className="relative">{children}</span>
+            <span sx={{
+      "relative": true
+    }}>{children}</span>
           </Button>
         )
       : motion(Button);
@@ -341,20 +482,46 @@ export function ExpandableCard({
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <motion.div layout className="border border-border rounded-lg overflow-hidden">
+    <motion.div layout sx={{
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem,
+      overflow: "hidden"
+    }}>
       <motion.button
-        className="w-full p-4 text-left flex items-center justify-between hover:bg-muted transition-colors"
+        sx={{
+      width: "100%",
+      p: 4,
+      textAlign: "left",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      '&:hover': { "bg-muted": true },
+      "transition-colors": true
+    }}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div className="flex items-center gap-3">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
           {icon}
           <div>
-            <h4 className="font-medium">{title}</h4>
-            <p className="text-sm text-muted-foreground">{preview}</p>
+            <h4 sx={{
+      fontWeight: 500
+    }}>{title}</h4>
+            <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{preview}</p>
           </div>
         </div>
         <motion.div animate={{ rotate: isExpanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronRight className="w-4 h-4" />
+          <ChevronRight sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
         </motion.div>
       </motion.button>
       <AnimatePresence>
@@ -364,9 +531,16 @@ export function ExpandableCard({
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden"
+            sx={{
+      overflow: "hidden"
+    }}
           >
-            <div className="p-4 pt-0 border-t border-border">{children}</div>
+            <div sx={{
+      p: 4,
+      pt: 0,
+      borderTop: 1,
+      "border-border": true
+    }}>{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -417,24 +591,40 @@ export function StaggeredList({
 // Loading Animations Component
 export function LoadingAnimations() {
   return (
-    <div className="flex gap-6 items-center">
+    <div sx={{
+      display: "flex",
+      gap: 6,
+      alignItems: "center"
+    }}>
       {/* Spinning loader */}
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
-        <RefreshCw className="w-6 h-6 text-primary" />
+        <RefreshCw sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
       </motion.div>
 
       {/* Pulsing dot */}
       <motion.div
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 1, repeat: Infinity }}
-        className="w-6 h-6 bg-primary rounded-full"
+        sx={{
+      "w-6": true,
+      "h-6": true,
+      "bg-primary": true,
+      borderRadius: 9999px
+    }}
       />
 
       {/* Bouncing dots */}
-      <div className="flex gap-1">
+      <div sx={{
+      display: "flex",
+      gap: 1
+    }}>
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
@@ -444,7 +634,12 @@ export function LoadingAnimations() {
               repeat: Infinity,
               delay: i * 0.2,
             }}
-            className="w-2 h-6 bg-primary rounded-full"
+            sx={{
+      "w-2": true,
+      "h-6": true,
+      "bg-primary": true,
+      borderRadius: 9999px
+    }}
           />
         ))}
       </div>
@@ -453,7 +648,15 @@ export function LoadingAnimations() {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-        className="w-6 h-6 rounded-full border-2 border-transparent border-t-primary border-r-primary"
+        sx={{
+      "w-6": true,
+      "h-6": true,
+      borderRadius: 9999px,
+      border: 2,
+      borderColor: "transparent",
+      "border-t-primary": true,
+      "border-r-primary": true
+    }}
       />
 
       {/* Morphing loader */}
@@ -463,7 +666,11 @@ export function LoadingAnimations() {
           scale: [1, 0.8, 1],
         }}
         transition={{ duration: 1.5, repeat: Infinity }}
-        className="w-6 h-6 bg-primary"
+        sx={{
+      "w-6": true,
+      "h-6": true,
+      "bg-primary": true
+    }}
       />
     </div>
   );
@@ -500,14 +707,23 @@ export function AnimatedStatsCard({
   return (
     <AnimatedCard>
       <Card>
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
+        <CardContent sx={{
+      p: 6
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
             <div>
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="text-sm text-muted-foreground"
+                sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}
               >
                 {title}
               </motion.p>
@@ -515,7 +731,10 @@ export function AnimatedStatsCard({
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring' }}
-                className="text-2xl font-bold"
+                sx={{
+      typography: h4,
+      fontWeight: 700
+    }}
               >
                 {value}
               </motion.p>
@@ -523,9 +742,18 @@ export function AnimatedStatsCard({
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className={`flex items-center gap-1 text-sm ${trendColors[trend]}`}
+                sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1,
+      typography: body1,
+      "${trendColors[trend]}": true
+    }}
               >
-                <TrendIcon className="w-3 h-3" />
+                <TrendIcon sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                 {change}
               </motion.div>
             </div>
@@ -533,7 +761,11 @@ export function AnimatedStatsCard({
               initial={{ opacity: 0, rotate: -45 }}
               animate={{ opacity: 1, rotate: 0 }}
               transition={{ delay: 0.4 }}
-              className="p-3 bg-primary/10 rounded-lg"
+              sx={{
+      p: 3,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}
             >
               {icon}
             </motion.div>
