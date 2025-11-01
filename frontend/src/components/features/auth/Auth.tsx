@@ -8,6 +8,7 @@ import {
   Typography,
   Box,
 } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { Input } from '../../ui/input';
 import { CareerCopilotLogo } from '../common/CareerCopilotLogo';
@@ -18,48 +19,116 @@ interface AuthProps {
 
 export function Auth({ onLogin }: AuthProps) {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      p: 4
+    }}>
+      <div sx={{
+      width: "100%",
+      maxWidth: "md",
+      "space-y-6": true
+    }}>
         {/* Logo */}
-        <div className="text-center">
-          <CareerCopilotLogo className="mx-auto mb-4" />
-          <h1 className="text-2xl font-semibold">Welcome to FML Career Copilot</h1>
-          <p className="text-muted-foreground mt-2">Your AI-powered job application assistant</p>
+        <div sx={{
+      textAlign: "center"
+    }}>
+          <CareerCopilotLogo sx={{
+      "mx-auto": true,
+      mb: 4
+    }} />
+          <h1 sx={{
+      typography: h4,
+      fontWeight: 600
+    }}>Welcome to FML Career Copilot</h1>
+          <p sx={{
+      "text-muted-foreground": true,
+      mt: 2
+    }}>Your AI-powered job application assistant</p>
         </div>
 
         {/* Auth Form */}
-        <Card className="p-6">
-          <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-center">Sign In</h2>
+        <Card sx={{
+      p: 6
+    }}>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <h2 sx={{
+      typography: h6,
+      fontWeight: 600,
+      textAlign: "center"
+    }}>Sign In</h2>
 
-            <div className="space-y-3">
-              <Input type="email" placeholder="you@example.com" className="w-full" />
-              <Input type="password" placeholder="••••••••" className="w-full" />
+            <div sx={{
+      "space-y-3": true
+    }}>
+              <Input type="email" placeholder="you@example.com" sx={{
+      width: "100%"
+    }} />
+              <Input type="password" placeholder="••••••••" sx={{
+      width: "100%"
+    }} />
             </div>
 
-            <Button className="w-full bg-primary hover:bg-primary/90" onClick={onLogin}>
+            <Button sx={{
+      width: "100%",
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }} onClick={onLogin}>
               Sign In
             </Button>
 
-            <div className="flex items-center text-sm text-muted-foreground">
-              <hr className="flex-1 border-border" />
-              <span className="px-3">OR</span>
-              <hr className="flex-1 border-border" />
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
+              <hr sx={{
+      flex: 1,
+      "border-border": true
+    }} />
+              <span sx={{
+      px: 3
+    }}>OR</span>
+              <hr sx={{
+      flex: 1,
+      "border-border": true
+    }} />
             </div>
 
             <Button
               variant="outlined"
-              className="w-full bg-white text-black hover:bg-gray-50"
+              sx={{
+      width: "100%",
+      bgcolor: "common.white",
+      color: "common.black",
+      '&:hover': { bgcolor: "gray.50" }
+    }}
               onClick={onLogin}
             >
-              <span className="mr-2 text-lg">G</span>
+              <span sx={{
+      mr: 2,
+      typography: h6
+    }}>G</span>
               Continue with Google
             </Button>
 
-            <div className="text-center text-sm text-muted-foreground">
+            <div sx={{
+      textAlign: "center",
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
               <p>
                 Don't have an account?{' '}
-                <button className="text-primary hover:underline" onClick={onLogin}>
+                <button sx={{
+      "text-primary": true,
+      '&:hover': { textDecoration: "underline" }
+    }} onClick={onLogin}>
                   Sign Up
                 </button>
               </p>

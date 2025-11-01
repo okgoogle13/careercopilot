@@ -13,6 +13,7 @@ import {
   TrendingUp,
   EmojiEvents as Trophy,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, Card } from '@mui/material';
 
 import { Badge } from '../../ui/badge';
@@ -205,150 +206,391 @@ export function CareerGrowthHub({
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-background p-4">
-        <div className="max-w-7xl mx-auto">
+      <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 4
+    }}>
+        <div sx={{
+      "max-w-7xl": true,
+      "mx-auto": true
+    }}>
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 8
+    }}>
             <Button variant="text" size="small" onClick={onBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
               Back to Dashboard
             </Button>
             <Button variant="outlined" size="small">
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
               Add Goal
             </Button>
           </div>
 
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Sparkles className="w-8 h-8 text-primary" />
-              <h1 className="text-4xl font-semibold">Career Growth Hub</h1>
+          <div sx={{
+      textAlign: "center",
+      mb: 8
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      mb: 4
+    }}>
+              <Sparkles sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-primary": true
+    }} />
+              <h1 sx={{
+      typography: h2,
+      fontWeight: 600
+    }}>Career Growth Hub</h1>
             </div>
-            <p className="text-muted-foreground text-xl max-w-3xl mx-auto">
+            <p sx={{
+      "text-muted-foreground": true,
+      typography: h5,
+      "max-w-3xl": true,
+      "mx-auto": true
+    }}>
               Track your goals, develop skills, and leverage AI to supercharge your career growth.
             </p>
           </div>
 
           {/* Enhanced Navigation */}
-          <Tabs defaultValue="overview" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-8">
-              <TabsTrigger value="overview" className="flex items-center gap-2">
-                <BarChart className="w-4 h-4" />
+          <Tabs defaultValue="overview" sx={{
+      width: "100%"
+    }}>
+            <TabsList sx={{
+      "grid": true,
+      width: "100%",
+      "grid-cols-4": true,
+      mb: 8
+    }}>
+              <TabsTrigger value="overview" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <BarChart sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                 Overview
               </TabsTrigger>
-              <TabsTrigger value="goals" className="flex items-center gap-2">
-                <Target className="w-4 h-4" />
+              <TabsTrigger value="goals" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <Target sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                 Goals ({userGoals.length})
               </TabsTrigger>
-              <TabsTrigger value="skills" className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4" />
+              <TabsTrigger value="skills" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <BookOpen sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                 Skills ({userSkills.length})
               </TabsTrigger>
-              <TabsTrigger value="ai-tools" className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4" />
+              <TabsTrigger value="ai-tools" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <Sparkles sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                 AI Tools
               </TabsTrigger>
             </TabsList>
 
             {/* Overview Tab */}
-            <TabsContent value="overview" currentValue="overview" className="space-y-8">
+            <TabsContent value="overview" currentValue="overview" sx={{
+      "space-y-8": true
+    }}>
               {/* Quick Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <Card className="p-6 text-center">
-                  <div className="flex items-center justify-center mb-2">
-                    <Target className="w-6 h-6 text-blue-500" />
+              <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-4": true },
+      gap: 4
+    }}>
+                <Card sx={{
+      p: 6,
+      textAlign: "center"
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      mb: 2
+    }}>
+                    <Target sx={{
+      "w-6": true,
+      "h-6": true,
+      color: "blue.500"
+    }} />
                   </div>
-                  <div className="text-2xl font-bold text-blue-600">
+                  <div sx={{
+      typography: h4,
+      fontWeight: 700,
+      color: "blue.600"
+    }}>
                     {userGoals.filter((g) => g.status === 'active').length}
                   </div>
-                  <div className="text-sm text-muted-foreground">Active Goals</div>
+                  <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Active Goals</div>
                 </Card>
-                <Card className="p-6 text-center">
-                  <div className="flex items-center justify-center mb-2">
-                    <BookOpen className="w-6 h-6 text-green-500" />
+                <Card sx={{
+      p: 6,
+      textAlign: "center"
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      mb: 2
+    }}>
+                    <BookOpen sx={{
+      "w-6": true,
+      "h-6": true,
+      color: "green.500"
+    }} />
                   </div>
-                  <div className="text-2xl font-bold text-green-600">{userSkills.length}</div>
-                  <div className="text-sm text-muted-foreground">Skills Tracking</div>
+                  <div sx={{
+      typography: h4,
+      fontWeight: 700,
+      color: "green.600"
+    }}>{userSkills.length}</div>
+                  <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Skills Tracking</div>
                 </Card>
-                <Card className="p-6 text-center">
-                  <div className="flex items-center justify-center mb-2">
-                    <Trophy className="w-6 h-6 text-amber-500" />
+                <Card sx={{
+      p: 6,
+      textAlign: "center"
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      mb: 2
+    }}>
+                    <Trophy sx={{
+      "w-6": true,
+      "h-6": true,
+      color: "amber.500"
+    }} />
                   </div>
-                  <div className="text-2xl font-bold text-amber-600">
+                  <div sx={{
+      typography: h4,
+      fontWeight: 700,
+      color: "amber.600"
+    }}>
                     {userGoals.filter((g) => g.status === 'completed').length}
                   </div>
-                  <div className="text-sm text-muted-foreground">Completed</div>
+                  <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Completed</div>
                 </Card>
-                <Card className="p-6 text-center">
-                  <div className="flex items-center justify-center mb-2">
-                    <TrendingUp className="w-6 h-6 text-purple-500" />
+                <Card sx={{
+      p: 6,
+      textAlign: "center"
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      mb: 2
+    }}>
+                    <TrendingUp sx={{
+      "w-6": true,
+      "h-6": true,
+      color: "purple.500"
+    }} />
                   </div>
-                  <div className="text-2xl font-bold text-purple-600">
+                  <div sx={{
+      typography: h4,
+      fontWeight: 700,
+      color: "purple.600"
+    }}>
                     {Math.round(
                       userGoals.reduce((acc, g) => acc + g.progress, 0) / userGoals.length
                     )}
                     %
                   </div>
-                  <div className="text-sm text-muted-foreground">Avg Progress</div>
+                  <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Avg Progress</div>
                 </Card>
               </div>
 
               {/* Recent Activity & Top Goals */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <Card className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    <Clock className="w-5 h-5" />
+              <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      gap: 8
+    }}>
+                <Card sx={{
+      p: 6
+    }}>
+                  <h3 sx={{
+      typography: h6,
+      fontWeight: 600,
+      mb: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                    <Clock sx={{
+      "w-5": true,
+      "h-5": true
+    }} />
                     Recent Activity
                   </h3>
-                  <div className="space-y-3">
+                  <div sx={{
+      "space-y-3": true
+    }}>
                     {userGoals.slice(0, 3).map((goal) => (
                       <div
                         key={goal.id}
-                        className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg"
+                        sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      p: 3,
+      bgcolor: "gray.50",
+      borderRadius: 0.5rem
+    }}
                       >
-                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                          <CheckCircle className="w-4 h-4 text-blue-600" />
+                        <div sx={{
+      "w-8": true,
+      "h-8": true,
+      bgcolor: "blue.100",
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                          <CheckCircle sx={{
+      "w-4": true,
+      "h-4": true,
+      color: "blue.600"
+    }} />
                         </div>
-                        <div className="flex-1">
-                          <p className="font-medium text-sm">{goal.title}</p>
-                          <p className="text-xs text-muted-foreground">
+                        <div sx={{
+      flex: 1
+    }}>
+                          <p sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>{goal.title}</p>
+                          <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                             Progress: {goal.progress}%
                           </p>
                         </div>
-                        <Progress value={goal.progress} className="w-16 h-2" />
+                        <Progress value={goal.progress} sx={{
+      "w-16": true,
+      "h-2": true
+    }} />
                       </div>
                     ))}
                   </div>
                 </Card>
 
-                <Card className="p-6">
-                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                    <Star className="w-5 h-5" />
+                <Card sx={{
+      p: 6
+    }}>
+                  <h3 sx={{
+      typography: h6,
+      fontWeight: 600,
+      mb: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                    <Star sx={{
+      "w-5": true,
+      "h-5": true
+    }} />
                     Priority Skills
                   </h3>
-                  <div className="space-y-3">
+                  <div sx={{
+      "space-y-3": true
+    }}>
                     {userSkills.slice(0, 3).map((skill) => (
-                      <div key={skill.id} className="space-y-2">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
+                      <div key={skill.id} sx={{
+      "space-y-2": true
+    }}>
+                        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
                             <Badge className={getSkillCategoryColor(skill.category)}>
                               {skill.name}
                             </Badge>
                             {skill.trending && (
                               <Tooltip title="Trending skill in high demand">
                                 <span>
-                                  <TrendingUp className="w-3 h-3 text-green-500" />
+                                  <TrendingUp sx={{
+      "w-3": true,
+      "h-3": true,
+      color: "green.500"
+    }} />
                                 </span>
                               </Tooltip>
                             )}
                           </div>
-                          <span className="text-xs text-muted-foreground">
+                          <span sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                             {skill.currentLevel}/{skill.targetLevel}
                           </span>
                         </div>
                         <Progress
                           value={(skill.currentLevel / skill.targetLevel) * 100}
-                          className="h-2"
+                          sx={{
+      "h-2": true
+    }}
                         />
                       </div>
                     ))}
@@ -357,46 +599,119 @@ export function CareerGrowthHub({
               </div>
             </TabsContent>
 
-            <TabsContent value="ai-tools" currentValue="ai-tools" className="space-y-8">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <TabsContent value="ai-tools" currentValue="ai-tools" sx={{
+      "space-y-8": true
+    }}>
+              <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 8,
+      mb: 12
+    }}>
                 {features.map((feature) => {
                   const Icon = feature.icon;
                   return (
                     <Card
                       key={feature.id}
-                      className={`p-8 border-2 ${feature.borderColor} hover:border-primary cursor-pointer transition-all duration-300 hover:shadow-xl group relative overflow-hidden`}
+                      sx={{
+      p: 8,
+      border: 2,
+      "${feature.borderColor}": true,
+      '&:hover': { "border-primary": true },
+      cursor: "pointer",
+      "transition-all": true,
+      "duration-300": true,
+      '&:hover': { boxShadow: 5 },
+      "group": true,
+      "relative": true,
+      overflow: "hidden"
+    }}
                       onClick={() => onNavigate(feature.id)}
                     >
                       {/* Gemini AI Badge */}
-                      <div className="absolute top-4 right-4">
-                        <Badge className="bg-primary/10 text-primary border-primary/30">
-                          <Sparkles className="w-3 h-3 mr-1" />
+                      <div sx={{
+      "absolute": true,
+      "top-4": true,
+      "right-4": true
+    }}>
+                        <Badge sx={{
+      "bg-primary/10": true,
+      "text-primary": true,
+      "border-primary/30": true
+    }}>
+                          <Sparkles sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                           AI Powered
                         </Badge>
                       </div>
 
-                      <div className="space-y-6">
+                      <div sx={{
+      "space-y-6": true
+    }}>
                         <div
-                          className={`p-4 ${feature.bgColor} rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300`}
+                          sx={{
+      p: 4,
+      "${feature.bgColor}": true,
+      borderRadius: 1rem,
+      "w-fit": true,
+      "group-hover:scale-110": true,
+      "transition-transform": true,
+      "duration-300": true
+    }}
                         >
-                          <Icon className={`w-8 h-8 ${feature.color}`} />
+                          <Icon sx={{
+      "w-8": true,
+      "h-8": true,
+      "${feature.color}": true
+    }} />
                         </div>
 
                         <div>
-                          <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
-                          <p className="text-muted-foreground leading-relaxed">
+                          <h3 sx={{
+      typography: h4,
+      fontWeight: 600,
+      mb: 3
+    }}>{feature.title}</h3>
+                          <p sx={{
+      "text-muted-foreground": true,
+      "leading-relaxed": true
+    }}>
                             {feature.description}
                           </p>
                         </div>
 
-                        <div className="space-y-2">
-                          <h4 className="font-medium text-sm text-muted-foreground uppercase tracking-wide">
+                        <div sx={{
+      "space-y-2": true
+    }}>
+                          <h4 sx={{
+      fontWeight: 500,
+      typography: body1,
+      "text-muted-foreground": true,
+      textTransform: "uppercase",
+      "tracking-wide": true
+    }}>
                             Key Features
                           </h4>
-                          <ul className="space-y-1">
+                          <ul sx={{
+      "space-y-1": true
+    }}>
                             {feature.benefits.map((benefit, index) => (
-                              <li key={index} className="text-sm flex items-center gap-2">
-                                <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                              <li key={index} sx={{
+      typography: body1,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                                <div sx={{
+      "w-1.5": true,
+      "h-1.5": true,
+      "bg-primary": true,
+      borderRadius: 9999px
+    }} />
                                 {benefit}
                               </li>
                             ))}
@@ -404,11 +719,22 @@ export function CareerGrowthHub({
                         </div>
 
                         <Button
-                          className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90"
+                          sx={{
+      width: "100%",
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true },
+      "group-hover:bg-primary/90": true
+    }}
                           size="large"
                         >
                           Explore {feature.title}
-                          <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight sx={{
+      "w-4": true,
+      "h-4": true,
+      ml: 2,
+      "group-hover:translate-x-1": true,
+      "transition-transform": true
+    }} />
                         </Button>
                       </div>
                     </Card>
@@ -419,18 +745,50 @@ export function CareerGrowthHub({
           </Tabs>
 
           {/* Additional Info */}
-          <Card className="p-8 bg-gradient-to-r from-primary/5 to-purple-500/5 border-primary/20 mt-8">
-            <div className="text-center space-y-4">
-              <div className="flex items-center justify-center gap-2">
-                <Sparkles className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-semibold">Powered by Advanced AI</h3>
+          <Card sx={{
+      p: 8,
+      "bg-gradient-to-r": true,
+      "from-primary/5": true,
+      "to-purple-500/5": true,
+      "border-primary/20": true,
+      mt: 8
+    }}>
+            <div sx={{
+      textAlign: "center",
+      "space-y-4": true
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2
+    }}>
+                <Sparkles sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
+                <h3 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>Powered by Advanced AI</h3>
               </div>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p sx={{
+      "text-muted-foreground": true,
+      "max-w-2xl": true,
+      "mx-auto": true
+    }}>
                 Our career growth tools are powered by cutting-edge AI technology that analyzes
                 market trends, job requirements, and your unique profile to provide personalized
                 career guidance.
               </p>
-              <div className="flex flex-wrap justify-center gap-3 pt-4">
+              <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: 3,
+      pt: 4
+    }}>
                 <Badge variant="secondary">Machine Learning</Badge>
                 <Badge variant="secondary">Natural Language Processing</Badge>
                 <Badge variant="secondary">Real-time Data Analysis</Badge>

@@ -1,4 +1,5 @@
-import { Description as FileText, Add as Plus } from '@mui/icons-material';
+import { Article as ArticleIcon, Add as AddIcon } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 
@@ -89,7 +90,10 @@ export function Dashboard({
   // Empty state for first-time users
   if (isEmpty || profiles.length === 0) {
     return (
-      <div className="flex-1 p-8">
+      <div sx={{
+      flex: 1,
+      p: 8
+    }}>
         <DashboardHeader
           title="Welcome to Career Copilot"
           onNavigateToSettings={onNavigateToSettings}
@@ -98,22 +102,62 @@ export function Dashboard({
           isEmpty={true}
         />
 
-        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-          <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-            <FileText className="w-8 h-8 text-primary" />
+        <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      h: "60vh",
+      textAlign: "center"
+    }}>
+          <div sx={{
+      "w-16": true,
+      "h-16": true,
+      "bg-primary/10": true,
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      mb: 6
+    }}>
+            <ArticleIcon sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-primary": true
+    }} />
           </div>
 
-          <h2 className="text-2xl font-semibold mb-3">Your Dashboard is Empty</h2>
-          <p className="text-muted-foreground text-lg mb-8 max-w-md">
+          <h2 sx={{
+      typography: h4,
+      fontWeight: 600,
+      mb: 3
+    }}>Your Dashboard is Empty</h2>
+          <p sx={{
+      "text-muted-foreground": true,
+      typography: h6,
+      mb: 8,
+      maxWidth: "md"
+    }}>
             Create your first document to get started with AI-powered job applications.
           </p>
 
           <Button
             onClick={() => onCreateProfile?.()}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg"
+            sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true },
+      "text-primary-foreground": true,
+      px: 8,
+      py: 6,
+      typography: h6
+    }}
             size="large"
           >
-            <Plus className="w-5 h-5 mr-2" />
+            <AddIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      mr: 2
+    }} />
             Create Your First Document
           </Button>
         </div>
@@ -122,7 +166,10 @@ export function Dashboard({
   }
 
   return (
-    <div className="flex-1 p-8">
+    <div sx={{
+      flex: 1,
+      p: 8
+    }}>
       <DashboardHeader
         title="Your Job Seeker Profiles"
         onCreateProfile={onCreateProfile}

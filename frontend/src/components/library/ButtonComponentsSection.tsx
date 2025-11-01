@@ -1,4 +1,5 @@
 import { Settings, AutorenewRounded as Loader2, Download } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, IconButton } from '@mui/material';
 import React from 'react';
 
@@ -11,7 +12,11 @@ export function ButtonComponentsSection() {
       description="Various button styles and states for different actions and contexts"
     >
       <ComponentDemo title="Button Variants">
-        <div className="flex flex-wrap gap-4">
+        <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 4
+    }}>
           <Button variant="contained">Primary Button</Button>
           <Button variant="contained" color="secondary">
             Secondary Button
@@ -26,26 +31,47 @@ export function ButtonComponentsSection() {
       </ComponentDemo>
 
       <ComponentDemo title="Button Sizes">
-        <div className="flex flex-wrap items-center gap-4">
+        <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      alignItems: "center",
+      gap: 4
+    }}>
           <Button size="small">Small</Button>
           <Button size="medium">Default</Button>
           <Button size="large">Large</Button>
           <Button size="small">
-            <Settings className="w-4 h-4" />
+            <Settings sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
           </Button>
         </div>
       </ComponentDemo>
 
       <ComponentDemo title="Button States">
-        <div className="flex flex-wrap gap-4">
+        <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 4
+    }}>
           <Button>Normal</Button>
           <Button disabled>Disabled</Button>
           <Button>
-            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            <Loader2 sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2,
+      "animate-spin": true
+    }} />
             Loading
           </Button>
           <Button>
-            <Download className="w-4 h-4 mr-2" />
+            <Download sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             With Icon
           </Button>
         </div>

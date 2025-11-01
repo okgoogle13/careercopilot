@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box } from '@mui/material';
 
 interface ATSScoreCircleProps {
   score: number;
@@ -51,8 +52,17 @@ export function ATSScoreCircle({
   const scoreColor = getScoreColor(score);
 
   return (
-    <div className={`relative inline-flex items-center justify-center ${className}`}>
-      <svg width={config.diameter} height={config.diameter} className="transform -rotate-90">
+    <div sx={{
+      "relative": true,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "${className}": true
+    }}>
+      <svg width={config.diameter} height={config.diameter} sx={{
+      "transform": true,
+      "-rotate-90": true
+    }}>
         {/* Background circle */}
         <circle
           cx={config.diameter / 2}
@@ -61,7 +71,9 @@ export function ATSScoreCircle({
           stroke="var(--muted)"
           strokeWidth={config.strokeWidth}
           fill="transparent"
-          className="opacity-20"
+          sx={{
+      opacity: 0.2
+    }}
         />
 
         {/* Progress circle */}
@@ -75,7 +87,11 @@ export function ATSScoreCircle({
           strokeDasharray={strokeDasharray}
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
-          className="transition-all duration-1000 ease-out"
+          sx={{
+      "transition-all": true,
+      "duration-1000": true,
+      "ease-out": true
+    }}
           style={{
             filter: `drop-shadow(0 0 8px ${scoreColor}40)`,
           }}
@@ -93,7 +109,12 @@ export function ATSScoreCircle({
             strokeDasharray={strokeDasharray}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
-            className="transition-all duration-1000 ease-out opacity-30"
+            sx={{
+      "transition-all": true,
+      "duration-1000": true,
+      "ease-out": true,
+      opacity: 0.3
+    }}
             style={{
               filter: `blur(4px)`,
             }}
@@ -103,13 +124,27 @@ export function ATSScoreCircle({
 
       {/* Score text overlay - removed since it's handled in parent component for large size */}
       {size !== 'large' && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className={`font-bold ${config.textSize}`} style={{ color: scoreColor }}>
+        <div sx={{
+      "absolute": true,
+      "inset-0": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+          <div sx={{
+      textAlign: "center"
+    }}>
+            <div sx={{
+      fontWeight: 700,
+      "${config.textSize}": true
+    }} style={{ color: scoreColor }}>
               {score}%
             </div>
             {showLabel && (
-              <div className={`text-muted-foreground ${config.labelSize}`}>ATS Score</div>
+              <div sx={{
+      "text-muted-foreground": true,
+      "${config.labelSize}": true
+    }}>ATS Score</div>
             )}
           </div>
         </div>
