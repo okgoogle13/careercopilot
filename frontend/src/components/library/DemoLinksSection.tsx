@@ -1,4 +1,5 @@
 import { AutoAwesome as Sparkles, PlayArrow as Play } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -23,17 +24,44 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
       title="Interactive Demos"
       description="Explore advanced component functionality with interactive demonstrations."
     >
-      <div className="grid md:grid-cols-2 gap-4">
+      <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 4
+    }}>
         <Card variant="elevation">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Sparkles className="w-6 h-6 text-primary" />
+          <CardContent sx={{
+      p: 6
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
+                <div sx={{
+      p: 3,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <Sparkles sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
                 </div>
                 <div>
-                  <h3 className="font-medium mb-1">Animated Components</h3>
-                  <p className="text-muted-foreground">
+                  <h3 sx={{
+      fontWeight: 500,
+      mb: 1
+    }}>Animated Components</h3>
+                  <p sx={{
+      "text-muted-foreground": true
+    }}>
                     Explore smooth animations and micro-interactions
                   </p>
                 </div>
@@ -44,15 +72,38 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
         </Card>
 
         <Card variant="elevation">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Play className="w-6 h-6 text-primary" />
+          <CardContent sx={{
+      p: 6
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
+                <div sx={{
+      p: 3,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <Play sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
                 </div>
                 <div>
-                  <h3 className="font-medium mb-1">State Management Demo</h3>
-                  <p className="text-muted-foreground">
+                  <h3 sx={{
+      fontWeight: 500,
+      mb: 1
+    }}>State Management Demo</h3>
+                  <p sx={{
+      "text-muted-foreground": true
+    }}>
                     Simulate loading states and error scenarios
                   </p>
                 </div>

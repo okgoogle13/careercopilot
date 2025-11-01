@@ -90,3 +90,6 @@ cleanup_backup_*/
 .frontend-coverage/
 /frontend/playwright-report/
 .env.aws-ses
+
+*storybook.log
+storybook-static

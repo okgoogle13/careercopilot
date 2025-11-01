@@ -1,4 +1,5 @@
 import { Favorite as Heart } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, IconButton, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -42,48 +43,131 @@ export function CardComponentsSection() {
     >
       {/* Card Variants Overview */}
       <ComponentDemo title="Card Variants Overview">
-        <div className="grid gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-4 h-4 border border-border rounded bg-card"></div>
+        <div sx={{
+      "grid": true,
+      gap: 4
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.25rem,
+      "bg-card": true
+    }}></div>
             <div>
-              <p className="font-medium">Default Card</p>
-              <p className="text-muted-foreground">
+              <p sx={{
+      fontWeight: 500
+    }}>Default Card</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>
                 Standard card with subtle border for static content
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-4 h-4 border border-border rounded bg-card shadow-lg shadow-primary/10"></div>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.25rem,
+      "bg-card": true,
+      boxShadow: 4,
+      "shadow-primary/10": true
+    }}></div>
             <div>
-              <p className="font-medium">Interactive Card</p>
-              <p className="text-muted-foreground">
+              <p sx={{
+      fontWeight: 500
+    }}>Interactive Card</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>
                 Hover effects and cursor pointer for clickable content
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-4 h-4 border-2 border-primary rounded bg-card shadow-lg shadow-primary/20"></div>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 2,
+      "border-primary": true,
+      borderRadius: 0.25rem,
+      "bg-card": true,
+      boxShadow: 4,
+      "shadow-primary/20": true
+    }}></div>
             <div>
-              <p className="font-medium">Selected Card</p>
-              <p className="text-muted-foreground">
+              <p sx={{
+      fontWeight: 500
+    }}>Selected Card</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>
                 Prominent purple border and glow for active/selected state
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-4 h-4 border border-border rounded bg-card animate-pulse"></div>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.25rem,
+      "bg-card": true,
+      "animate-pulse": true
+    }}></div>
             <div>
-              <p className="font-medium">Loading Card</p>
-              <p className="text-muted-foreground">
+              <p sx={{
+      fontWeight: 500
+    }}>Loading Card</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>
                 Skeleton placeholders during data loading states
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-4 h-4 border border-destructive/50 rounded bg-destructive/5"></div>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-destructive/50": true,
+      borderRadius: 0.25rem,
+      "bg-destructive/5": true
+    }}></div>
             <div>
-              <p className="font-medium">Error Card</p>
-              <p className="text-muted-foreground">
+              <p sx={{
+      fontWeight: 500
+    }}>Error Card</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>
                 Red-tinted border and background for error states
               </p>
             </div>
@@ -93,7 +177,12 @@ export function CardComponentsSection() {
 
       {/* Interactive Profile Cards */}
       <ComponentDemo title="Profile Cards (Interactive & Selected)">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 4
+    }}>
           {[
             {
               id: 'card-1',
@@ -129,7 +218,11 @@ export function CardComponentsSection() {
               onClick={() => handleCardClick(profile.id)}
             >
               <CardHeader>
-                <div className="flex items-start justify-between">
+                <div sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between"
+    }}>
                   <div>
                     <CardTitle>{profile.name}</CardTitle>
                     <CardDescription>{profile.role}</CardDescription>
@@ -142,14 +235,25 @@ export function CardComponentsSection() {
                         e.stopPropagation();
                         handleFavoriteToggle(profile.id);
                       }}
-                      className="p-1 h-8 w-8"
+                      sx={{
+      p: 1,
+      "h-8": true,
+      "w-8": true
+    }}
                     >
                       <Heart
-                        className={`w-4 h-4 ${
-                          favoriteCards.has(profile.id)
-                            ? 'fill-red-500 text-red-500'
-                            : 'text-muted-foreground'
-                        }`}
+                        sx={{
+      "w-4": true,
+      "h-4": true,
+      "${": true,
+      "favoriteCards.has(profile.id)": true,
+      "?": true,
+      "'fill-red-500": true,
+      "text-red-500'": true,
+      ":": true,
+      "'text-muted-foreground'": true,
+      "}": true
+    }}
                       />
                     </Button>
                   </CardAction>
@@ -157,25 +261,61 @@ export function CardComponentsSection() {
               </CardHeader>
               {profile.id !== 'card-3' && (
                 <CardContent>
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Applications</span>
+                  <div sx={{
+      "space-y-4": true
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>Applications</span>
                       <Badge variant="secondary">{profile.applications}</Badge>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">ATS Score</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-12 h-2 bg-muted rounded-full overflow-hidden">
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>ATS Score</span>
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                        <div sx={{
+      "w-12": true,
+      "h-2": true,
+      "bg-muted": true,
+      borderRadius: 9999px,
+      overflow: "hidden"
+    }}>
                           <div
-                            className="h-full bg-primary rounded-full"
+                            sx={{
+      height: "100%",
+      "bg-primary": true,
+      borderRadius: 9999px
+    }}
                             style={{ width: `${profile.atsScore}%` }}
                           />
                         </div>
-                        <span className="font-medium">{profile.atsScore}%</span>
+                        <span sx={{
+      fontWeight: 500
+    }}>{profile.atsScore}%</span>
                       </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-muted-foreground">Status</span>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>Status</span>
                       <Badge variant={profile.status === 'Active' ? 'default' : 'secondary'}>
                         {profile.status}
                       </Badge>
@@ -184,12 +324,21 @@ export function CardComponentsSection() {
                 </CardContent>
               )}
               <CardFooter>
-                <div className="flex items-center justify-between w-full">
-                  <span className="text-muted-foreground">
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%"
+    }}>
+                  <span sx={{
+      "text-muted-foreground": true
+    }}>
                     {profile.lastUpdated || 'Click to create'}
                   </span>
                   {selectedCard === profile.id && (
-                    <Badge variant="default" className="bg-primary">
+                    <Badge variant="default" sx={{
+      "bg-primary": true
+    }}>
                       Selected
                     </Badge>
                   )}
@@ -202,17 +351,33 @@ export function CardComponentsSection() {
 
       {/* Loading & Error States */}
       <ComponentDemo title="Loading & Error Card States">
-        <div className="grid md:grid-cols-3 gap-4">
-          <div className="space-y-3">
-            <h4 className="font-medium">Loading Profile Card</h4>
+        <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 4
+    }}>
+          <div sx={{
+      "space-y-3": true
+    }}>
+            <h4 sx={{
+      fontWeight: 500
+    }}>Loading Profile Card</h4>
             <LoadingProfileCard />
           </div>
-          <div className="space-y-3">
-            <h4 className="font-medium">Error Profile Card</h4>
+          <div sx={{
+      "space-y-3": true
+    }}>
+            <h4 sx={{
+      fontWeight: 500
+    }}>Error Profile Card</h4>
             <ErrorProfileCard onRetry={() => alert('Retrying...')} />
           </div>
-          <div className="space-y-3">
-            <h4 className="font-medium">Generic Error Card</h4>
+          <div sx={{
+      "space-y-3": true
+    }}>
+            <h4 sx={{
+      fontWeight: 500
+    }}>Generic Error Card</h4>
             <ErrorCard
               title="Connection Failed"
               message="Unable to connect to the server."

@@ -1,4 +1,5 @@
 import { ArrowRight, AccessTime, CheckCircle, Error } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Card,
   CardContent,
@@ -74,17 +75,45 @@ export function ActionCard({
   const isFailed = status === 'failed';
 
   return (
-    <Card className={`p-0 border-2 ${variantStyles[variant]} hover:shadow-md transition-shadow`}>
-      <CardContent className="p-6">
+    <Card sx={{
+      p: 0,
+      border: 2,
+      "${variantStyles[variant]}": true,
+      '&:hover': { boxShadow: 3 },
+      "transition-shadow": true
+    }}>
+      <CardContent sx={{
+      p: 6
+    }}>
         {/* Header with Icon and Status */}
-        <Box className="flex items-start justify-between mb-4">
-          <Box className="flex items-center gap-3">
-            {icon && <Box className="p-2 bg-primary/10 rounded-lg">{icon}</Box>}
+        <Box sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            {icon && <Box sx={{
+      p: 2,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}>{icon}</Box>}
             <Box>
-              <Typography variant="h6" className="font-semibold mb-1">
+              <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 1
+    }}>
                 {title}
               </Typography>
-              <Box className="flex items-center gap-2">
+              <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
                 <StatusIcon sx={{ fontSize: 16 }} className={statusConfig[status].color} />
                 <Typography variant="caption" className={statusConfig[status].color}>
                   {status.replace('-', ' ').toUpperCase()}
@@ -98,14 +127,23 @@ export function ActionCard({
         </Box>
 
         {/* Description */}
-        <Typography variant="body2" color="text.secondary" className="mb-4">
+        <Typography variant="body2" color="text.secondary" sx={{
+      mb: 4
+    }}>
           {description}
         </Typography>
 
         {/* Progress Bar */}
         {progress !== undefined && (
-          <Box className="mb-4">
-            <Box className="flex justify-between items-center mb-2">
+          <Box sx={{
+      mb: 4
+    }}>
+            <Box sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      mb: 2
+    }}>
               <Typography variant="caption" color="text.secondary">
                 Progress
               </Typography>
@@ -113,20 +151,38 @@ export function ActionCard({
                 {progress}%
               </Typography>
             </Box>
-            <LinearProgress variant="determinate" value={progress} className="h-2 rounded-full" />
+            <LinearProgress variant="determinate" value={progress} sx={{
+      "h-2": true,
+      borderRadius: 9999px
+    }} />
           </Box>
         )}
 
         {/* Meta Information */}
-        <Box className="flex flex-wrap gap-4 mb-4 text-sm text-gray-500">
+        <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 4,
+      mb: 4,
+      typography: body1,
+      color: "gray.500"
+    }}>
           {estimatedTime && (
-            <Box className="flex items-center gap-1">
+            <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
               <AccessTime sx={{ fontSize: 14 }} />
               <span>{estimatedTime}</span>
             </Box>
           )}
           {dueDate && (
-            <Box className="flex items-center gap-1">
+            <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
               <span>Due: {dueDate}</span>
             </Box>
           )}
@@ -134,17 +190,32 @@ export function ActionCard({
 
         {/* Tags */}
         {tags.length > 0 && (
-          <Box className="flex flex-wrap gap-1 mb-4">
+          <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 1,
+      mb: 4
+    }}>
             {tags.map((tag, index) => (
-              <Chip key={index} label={tag} size="small" variant="outlined" className="text-xs" />
+              <Chip key={index} label={tag} size="small" variant="outlined" sx={{
+      typography: body2
+    }} />
             ))}
           </Box>
         )}
       </CardContent>
 
       {/* Actions */}
-      <CardActions className="px-6 pb-6 pt-0">
-        <Box className="flex gap-2 w-full">
+      <CardActions sx={{
+      px: 6,
+      pb: 6,
+      pt: 0
+    }}>
+        <Box sx={{
+      display: "flex",
+      gap: 2,
+      width: "100%"
+    }}>
           {onAction && (
             <Button
               variant={variant === 'featured' ? 'contained' : 'outlined'}

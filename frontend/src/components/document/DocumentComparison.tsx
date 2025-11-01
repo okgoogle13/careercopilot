@@ -98,13 +98,31 @@ export function DocumentComparison({
     position: 'left' | 'right';
     isLeft: boolean;
   }) => (
-    <Card className="h-full">
-      <CardContent className="p-4">
+    <Card sx={{
+      height: "100%"
+    }}>
+      <CardContent sx={{
+      p: 4
+    }}>
         {/* Header */}
-        <Box className="flex items-center justify-between mb-4">
-          <Box className="flex items-center gap-2">
-            <FileText sx={{ fontSize: 20 }} className="text-primary" />
-            <Typography variant="h6" className="font-semibold truncate">
+        <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+            <FileText sx={{ fontSize: 20 }} sx={{
+      "text-primary": true
+    }} />
+            <Typography variant="h6" sx={{
+      fontWeight: 600,
+      [object Object]
+    }}>
               {document.title}
             </Typography>
           </Box>
@@ -114,25 +132,57 @@ export function DocumentComparison({
         </Box>
 
         {/* Metadata */}
-        <Box className="flex flex-wrap gap-2 mb-4">
+        <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2,
+      mb: 4
+    }}>
           <Chip label={document.type.replace('-', ' ')} size="small" variant="outlined" />
           <Chip label={`${document.wordCount} words`} size="small" variant="outlined" />
           <Chip label={`Modified: ${document.lastModified}`} size="small" variant="outlined" />
         </Box>
 
         {/* Content */}
-        <Box className="bg-gray-50 p-4 rounded-lg max-h-96 overflow-y-auto">
-          <Box className="space-y-1 font-mono text-sm">
+        <Box sx={{
+      bgcolor: "gray.50",
+      p: 4,
+      borderRadius: 0.5rem,
+      "max-h-96": true,
+      overflowY: "auto"
+    }}>
+          <Box sx={{
+      "space-y-1": true,
+      "font-mono": true,
+      typography: body1
+    }}>
             {getHighlightedContent(document.content, isLeft).map((line, index) => (
               <Box
                 key={index}
-                className={`p-1 rounded ${
-                  typeof line === 'object' && line.isDifferent
-                    ? isLeft
-                      ? 'bg-red-100 border-l-2 border-red-400'
-                      : 'bg-green-100 border-l-2 border-green-400'
-                    : ''
-                }`}
+                sx={{
+      p: 1,
+      borderRadius: 0.25rem,
+      "${": true,
+      "typeof": true,
+      "line": true,
+      "===": true,
+      "'object'": true,
+      "&&": true,
+      "line.isDifferent": true,
+      "?": true,
+      "isLeft": true,
+      "?": true,
+      "'bg-red-100": true,
+      "border-l-2": true,
+      "border-red-400'": true,
+      ":": true,
+      "'bg-green-100": true,
+      "border-l-2": true,
+      "border-green-400'": true,
+      ":": true,
+      "''": true,
+      "}": true
+    }}
               >
                 {typeof line === 'object' ? line.text : line}
               </Box>
@@ -141,7 +191,11 @@ export function DocumentComparison({
         </Box>
 
         {/* Actions */}
-        <Box className="flex gap-2 mt-4">
+        <Box sx={{
+      display: "flex",
+      gap: 2,
+      mt: 4
+    }}>
           <Button size="small" variant="outlined" startIcon={<Eye sx={{ fontSize: 16 }} />}>
             Preview
           </Button>
@@ -154,11 +208,22 @@ export function DocumentComparison({
   );
 
   return (
-    <Box className="w-full">
+    <Box sx={{
+      width: "100%"
+    }}>
       {/* Header */}
-      <Box className="flex items-center justify-between mb-6">
+      <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 6
+    }}>
         <Box>
-          <Typography variant="h4" className="text-2xl font-bold mb-2">
+          <Typography variant="h4" sx={{
+      typography: h4,
+      fontWeight: 700,
+      mb: 2
+    }}>
             Document Comparison
           </Typography>
           <Typography variant="body1" color="text.secondary">
@@ -166,7 +231,10 @@ export function DocumentComparison({
           </Typography>
         </Box>
 
-        <Box className="flex gap-2">
+        <Box sx={{
+      display: "flex",
+      gap: 2
+    }}>
           <Button
             variant="outlined"
             onClick={() => setShowFullContent(!showFullContent)}
@@ -174,7 +242,10 @@ export function DocumentComparison({
           >
             {showFullContent ? 'Compact View' : 'Full View'}
           </Button>
-          <Button variant="contained" className="bg-primary hover:bg-primary/90">
+          <Button variant="contained" sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}>
             Merge Changes
           </Button>
         </Box>
@@ -182,49 +253,110 @@ export function DocumentComparison({
 
       {/* Legend */}
       {highlightDifferences && (
-        <Box className="flex gap-4 mb-4 p-3 bg-gray-50 rounded-lg">
-          <Box className="flex items-center gap-2">
-            <Box className="w-4 h-4 bg-red-100 border-l-2 border-red-400 rounded"></Box>
+        <Box sx={{
+      display: "flex",
+      gap: 4,
+      mb: 4,
+      p: 3,
+      bgcolor: "gray.50",
+      borderRadius: 0.5rem
+    }}>
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+            <Box sx={{
+      "w-4": true,
+      "h-4": true,
+      bgcolor: "red.100",
+      "border-l-2": true,
+      "border-red-400": true,
+      borderRadius: 0.25rem
+    }}></Box>
             <Typography variant="caption">Removed/Modified (Left)</Typography>
           </Box>
-          <Box className="flex items-center gap-2">
-            <Box className="w-4 h-4 bg-green-100 border-l-2 border-green-400 rounded"></Box>
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+            <Box sx={{
+      "w-4": true,
+      "h-4": true,
+      bgcolor: "green.100",
+      "border-l-2": true,
+      "border-green-400": true,
+      borderRadius: 0.25rem
+    }}></Box>
             <Typography variant="caption">Added/New (Right)</Typography>
           </Box>
         </Box>
       )}
 
       {/* Comparison Panels */}
-      <Box className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <Box sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
         <DocumentPanel document={leftDocument} position="left" isLeft={true} />
         <DocumentPanel document={rightDocument} position="right" isLeft={false} />
       </Box>
 
       {/* Summary */}
-      <Card className="mt-6">
-        <CardContent className="p-4">
-          <Typography variant="h6" className="font-semibold mb-3">
+      <Card sx={{
+      mt: 6
+    }}>
+        <CardContent sx={{
+      p: 4
+    }}>
+          <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 3
+    }}>
             Comparison Summary
           </Typography>
-          <Box className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Box className="text-center">
-              <Typography variant="h4" className="font-bold text-red-600">
+          <Box sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 4
+    }}>
+            <Box sx={{
+      textAlign: "center"
+    }}>
+              <Typography variant="h4" sx={{
+      fontWeight: 700,
+      color: "red.600"
+    }}>
                 5
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 Lines Modified
               </Typography>
             </Box>
-            <Box className="text-center">
-              <Typography variant="h4" className="font-bold text-green-600">
+            <Box sx={{
+      textAlign: "center"
+    }}>
+              <Typography variant="h4" sx={{
+      fontWeight: 700,
+      color: "green.600"
+    }}>
                 2
               </Typography>
               <Typography variant="caption" color="text.secondary">
                 Lines Added
               </Typography>
             </Box>
-            <Box className="text-center">
-              <Typography variant="h4" className="font-bold text-blue-600">
+            <Box sx={{
+      textAlign: "center"
+    }}>
+              <Typography variant="h4" sx={{
+      fontWeight: 700,
+      color: "blue.600"
+    }}>
                 10
               </Typography>
               <Typography variant="caption" color="text.secondary">

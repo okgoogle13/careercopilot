@@ -13,6 +13,7 @@ import {
   TrendingUp,
   Person as User,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { useState } from 'react';
 
@@ -84,16 +85,37 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
   };
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: <Star className="w-4 h-4" /> },
-    { id: 'details', label: 'Details', icon: <FileText className="w-4 h-4" /> },
-    { id: 'settings', label: 'Settings', icon: <Settings className="w-4 h-4" /> },
+    { id: 'overview', label: 'Overview', icon: <Star sx={{
+      "w-4": true,
+      "h-4": true
+    }} /> },
+    { id: 'details', label: 'Details', icon: <FileText sx={{
+      "w-4": true,
+      "h-4": true
+    }} /> },
+    { id: 'settings', label: 'Settings', icon: <Settings sx={{
+      "w-4": true,
+      "h-4": true
+    }} /> },
   ];
 
   const dropdownItems = [
-    { label: 'Profile', value: 'profile', icon: <User className="w-4 h-4" /> },
-    { label: 'Settings', value: 'settings', icon: <Settings className="w-4 h-4" /> },
-    { label: 'Notifications', value: 'notifications', icon: <Bell className="w-4 h-4" /> },
-    { label: 'Security', value: 'security', icon: <Shield className="w-4 h-4" /> },
+    { label: 'Profile', value: 'profile', icon: <User sx={{
+      "w-4": true,
+      "h-4": true
+    }} /> },
+    { label: 'Settings', value: 'settings', icon: <Settings sx={{
+      "w-4": true,
+      "h-4": true
+    }} /> },
+    { label: 'Notifications', value: 'notifications', icon: <Bell sx={{
+      "w-4": true,
+      "h-4": true
+    }} /> },
+    { label: 'Security', value: 'security', icon: <Shield sx={{
+      "w-4": true,
+      "h-4": true
+    }} /> },
   ];
 
   const listItems = [
@@ -110,67 +132,133 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
       value: '12,345',
       change: '+12.5%',
       trend: 'up' as const,
-      icon: <User className="w-6 h-6 text-primary" />,
+      icon: <User sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />,
     },
     {
       title: 'Revenue',
       value: '$89,432',
       change: '+23.1%',
       trend: 'up' as const,
-      icon: <TrendingUp className="w-6 h-6 text-primary" />,
+      icon: <TrendingUp sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />,
     },
     {
       title: 'Conversions',
       value: '2,847',
       change: '-5.4%',
       trend: 'down' as const,
-      icon: <Target className="w-6 h-6 text-primary" />,
+      icon: <Target sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />,
     },
     {
       title: 'Avg. Rating',
       value: '4.8',
       change: '0.0%',
       trend: 'neutral' as const,
-      icon: <Star className="w-6 h-6 text-primary" />,
+      icon: <Star sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />,
     },
   ];
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 6
+    }}>
+      <div sx={{
+      "max-w-7xl": true,
+      "mx-auto": true
+    }}>
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Button variant="text" size="small" onClick={onBack} className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
+        <div sx={{
+      mb: 8
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 4
+    }}>
+            <Button variant="text" size="small" onClick={onBack} sx={{
+      gap: 2
+    }}>
+              <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
               Back to Component Library
             </Button>
           </div>
-          <div className="flex items-center justify-between">
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
             <div>
-              <h1 className="mb-2 flex items-center gap-2">
-                <Sparkles className="w-6 h-6 text-primary" />
+              <h1 sx={{
+      mb: 2,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <Sparkles sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
                 Animated Components Showcase
               </h1>
-              <p className="text-muted-foreground">
+              <p sx={{
+      "text-muted-foreground": true
+    }}>
                 Interactive demonstrations of animated UI components with smooth transitions and
                 micro-interactions
               </p>
             </div>
-            <div className="flex gap-2">
-              <Button variant="outlined" onClick={resetAnimations} className="gap-2">
-                <RotateCcw className="w-4 h-4" />
+            <div sx={{
+      display: "flex",
+      gap: 2
+    }}>
+              <Button variant="outlined" onClick={resetAnimations} sx={{
+      gap: 2
+    }}>
+                <RotateCcw sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                 Reset All
               </Button>
-              <Button onClick={simulateProgress} disabled={isPlaying} className="gap-2">
+              <Button onClick={simulateProgress} disabled={isPlaying} sx={{
+      gap: 2
+    }}>
                 {isPlaying ? (
                   <>
-                    <Pause className="w-4 h-4" />
+                    <Pause sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                     Running...
                   </>
                 ) : (
                   <>
-                    <Play className="w-4 h-4" />
+                    <Play sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                     Demo All
                   </>
                 )}
@@ -179,12 +267,22 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
           </div>
         </div>
 
-        <div className="space-y-12">
+        <div sx={{
+      "space-y-12": true
+    }}>
           {/* Animated Statistics Cards */}
           <section>
-            <h2 className="mb-6">Animated Statistics Cards</h2>
+            <h2 sx={{
+      mb: 6
+    }}>Animated Statistics Cards</h2>
             <div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-4": true },
+      gap: 6
+    }}
               key={`stats-${animationKey}`}
             >
               {statsData.map((stat, index) => (
@@ -202,8 +300,14 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Modal & Dropdown Demos */}
           <section>
-            <h2 className="mb-6">Interactive Overlays</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h2 sx={{
+      mb: 6
+    }}>Interactive Overlays</h2>
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
               <Card>
                 <CardHeader
                   title={<Typography variant="h3">Animated Modal</Typography>}
@@ -221,8 +325,16 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     title="Animated Modal Example"
                   >
                     <p>This modal demonstrates smooth spring animations for a natural feel.</p>
-                    <div className="mt-4 p-3 bg-muted rounded-lg">
-                      <p className="text-sm text-muted-foreground">
+                    <div sx={{
+      mt: 4,
+      p: 3,
+      "bg-muted": true,
+      borderRadius: 0.5rem
+    }}>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                         Features: Spring animations, backdrop blur, scale and opacity transitions
                       </p>
                     </div>
@@ -242,9 +354,14 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 <CardContent>
                   <AnimatedDropdown
                     trigger={
-                      <Button variant="outlined" className="gap-2">
+                      <Button variant="outlined" sx={{
+      gap: 2
+    }}>
                         Select Option
-                        <Sparkles className="w-4 h-4" />
+                        <Sparkles sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                       </Button>
                     }
                     items={dropdownItems}
@@ -257,7 +374,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Tabs Demo */}
           <section>
-            <h2 className="mb-6">Animated Tabs</h2>
+            <h2 sx={{
+      mb: 6
+    }}>Animated Tabs</h2>
             <Card>
               <CardHeader
                 title={<Typography variant="h3">Sliding Tab Indicator</Typography>}
@@ -269,27 +388,46 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
               ></CardHeader>
               <CardContent>
                 <AnimatedTabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab}>
-                  <div className="p-4 bg-muted rounded-lg">
+                  <div sx={{
+      p: 4,
+      "bg-muted": true,
+      borderRadius: 0.5rem
+    }}>
                     {activeTab === 'overview' && (
                       <div>
-                        <h3 className="font-medium mb-2">Overview Content</h3>
-                        <p className="text-muted-foreground">
+                        <h3 sx={{
+      fontWeight: 500,
+      mb: 2
+    }}>Overview Content</h3>
+                        <p sx={{
+      "text-muted-foreground": true
+    }}>
                           This is the overview tab content with smooth transitions.
                         </p>
                       </div>
                     )}
                     {activeTab === 'details' && (
                       <div>
-                        <h3 className="font-medium mb-2">Details Content</h3>
-                        <p className="text-muted-foreground">
+                        <h3 sx={{
+      fontWeight: 500,
+      mb: 2
+    }}>Details Content</h3>
+                        <p sx={{
+      "text-muted-foreground": true
+    }}>
                           Detailed information appears here with animated transitions.
                         </p>
                       </div>
                     )}
                     {activeTab === 'settings' && (
                       <div>
-                        <h3 className="font-medium mb-2">Settings Content</h3>
-                        <p className="text-muted-foreground">
+                        <h3 sx={{
+      fontWeight: 500,
+      mb: 2
+    }}>Settings Content</h3>
+                        <p sx={{
+      "text-muted-foreground": true
+    }}>
                           Configuration options are shown in this animated panel.
                         </p>
                       </div>
@@ -302,8 +440,14 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Progress & Loading */}
           <section>
-            <h2 className="mb-6">Progress & Loading Animations</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <h2 sx={{
+      mb: 6
+    }}>Progress & Loading Animations</h2>
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
               <Card>
                 <CardHeader
                   title={<Typography variant="h3">Animated Progress</Typography>}
@@ -313,9 +457,14 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     </Typography>
                   }
                 ></CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent sx={{
+      "space-y-4": true
+    }}>
                   <AnimatedProgress value={progress} />
-                  <div className="flex gap-2">
+                  <div sx={{
+      display: "flex",
+      gap: 2
+    }}>
                     <Button size="small" onClick={simulateProgress} disabled={isPlaying}>
                       Start Progress
                     </Button>
@@ -344,7 +493,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Button Animations */}
           <section>
-            <h2 className="mb-6">Animated Buttons</h2>
+            <h2 sx={{
+      mb: 6
+    }}>Animated Buttons</h2>
             <Card>
               <CardHeader
                 title={<Typography variant="h3">Button Interaction Animations</Typography>}
@@ -355,22 +506,35 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 }
               ></CardHeader>
               <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="space-y-2">
+                <div sx={{
+      "grid": true,
+      "grid-cols-2": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-4": true },
+      gap: 4
+    }}>
+                  <div sx={{
+      "space-y-2": true
+    }}>
                     <Label>Scale Animation</Label>
                     <AnimatedButton animation="scale">Hover Me</AnimatedButton>
                   </div>
-                  <div className="space-y-2">
+                  <div sx={{
+      "space-y-2": true
+    }}>
                     <Label>Lift Animation</Label>
                     <AnimatedButton animation="lift" variant="outlined">
                       Lift Effect
                     </AnimatedButton>
                   </div>
-                  <div className="space-y-2">
+                  <div sx={{
+      "space-y-2": true
+    }}>
                     <Label>Glow Animation</Label>
                     <AnimatedButton animation="glow">Glow Effect</AnimatedButton>
                   </div>
-                  <div className="space-y-2">
+                  <div sx={{
+      "space-y-2": true
+    }}>
                     <Label>Shimmer Animation</Label>
                     <AnimatedButton animation="shimmer" variant="outlined">
                       Shimmer
@@ -383,26 +547,43 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Expandable Cards */}
           <section>
-            <h2 className="mb-6">Expandable Content</h2>
-            <div className="space-y-4" key={`expandable-${animationKey}`}>
+            <h2 sx={{
+      mb: 6
+    }}>Expandable Content</h2>
+            <div sx={{
+      "space-y-4": true
+    }} key={`expandable-${animationKey}`}>
               <ExpandableCard
                 title="Project Management"
                 preview="Click to expand and see project details"
-                icon={<FileText className="w-5 h-5 text-primary" />}
+                icon={<FileText sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-primary": true
+    }} />}
               >
-                <div className="space-y-4">
+                <div sx={{
+      "space-y-4": true
+    }}>
                   <p>
                     This expandable card demonstrates smooth height animations and content
                     transitions.
                   </p>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div sx={{
+      "grid": true,
+      "grid-cols-2": true,
+      gap: 4
+    }}>
                     <div>
                       <Label>Progress</Label>
                       <AnimatedProgress value={75} />
                     </div>
                     <div>
                       <Label>Team Size</Label>
-                      <p className="text-lg font-medium">8 members</p>
+                      <p sx={{
+      typography: h6,
+      fontWeight: 500
+    }}>8 members</p>
                     </div>
                   </div>
                 </div>
@@ -411,24 +592,61 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
               <ExpandableCard
                 title="Performance Metrics"
                 preview="View detailed performance analytics"
-                icon={<TrendingUp className="w-5 h-5 text-primary" />}
+                icon={<TrendingUp sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-primary": true
+    }} />}
               >
-                <div className="space-y-4">
+                <div sx={{
+      "space-y-4": true
+    }}>
                   <p>
                     Analytics and performance data with animated charts and progress indicators.
                   </p>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-green-500">94%</p>
-                      <p className="text-sm text-muted-foreground">Uptime</p>
+                  <div sx={{
+      "grid": true,
+      "grid-cols-3": true,
+      gap: 4
+    }}>
+                    <div sx={{
+      textAlign: "center"
+    }}>
+                      <p sx={{
+      typography: h4,
+      fontWeight: 700,
+      color: "green.500"
+    }}>94%</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Uptime</p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-blue-500">1.2s</p>
-                      <p className="text-sm text-muted-foreground">Load Time</p>
+                    <div sx={{
+      textAlign: "center"
+    }}>
+                      <p sx={{
+      typography: h4,
+      fontWeight: 700,
+      color: "blue.500"
+    }}>1.2s</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Load Time</p>
                     </div>
-                    <div className="text-center">
-                      <p className="text-2xl font-bold text-purple-500">99.1%</p>
-                      <p className="text-sm text-muted-foreground">Success Rate</p>
+                    <div sx={{
+      textAlign: "center"
+    }}>
+                      <p sx={{
+      typography: h4,
+      fontWeight: 700,
+      color: "purple.500"
+    }}>99.1%</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Success Rate</p>
                     </div>
                   </div>
                 </div>
@@ -438,7 +656,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Staggered List */}
           <section>
-            <h2 className="mb-6">Staggered List Animation</h2>
+            <h2 sx={{
+      mb: 6
+    }}>Staggered List Animation</h2>
             <Card>
               <CardHeader
                 title={<Typography variant="h3">Task List</Typography>}
@@ -452,11 +672,23 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 <StaggeredList
                   key={`list-${animationKey}`}
                   items={listItems}
-                  className="space-y-3"
+                  sx={{
+      "space-y-3": true
+    }}
                   renderItem={(item, _index) => (
-                    <div className="p-4 bg-muted rounded-lg">
-                      <h4 className="font-medium">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                    <div sx={{
+      p: 4,
+      "bg-muted": true,
+      borderRadius: 0.5rem
+    }}>
+                      <h4 sx={{
+      fontWeight: 500
+    }}>{item.title}</h4>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mt: 1
+    }}>{item.description}</p>
                     </div>
                   )}
                 />
@@ -466,7 +698,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Notification Demo */}
           <section>
-            <h2 className="mb-6">Animated Notifications</h2>
+            <h2 sx={{
+      mb: 6
+    }}>Animated Notifications</h2>
             <Card>
               <CardHeader
                 title={<Typography variant="h3">Toast Notifications</Typography>}
@@ -477,7 +711,11 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 }
               ></CardHeader>
               <CardContent>
-                <div className="flex flex-wrap gap-2">
+                <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
                   <Button
                     size="small"
                     onClick={() =>
@@ -517,7 +755,9 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
 
           {/* Implementation Guidelines */}
           <section>
-            <h2 className="mb-6">Implementation Guidelines</h2>
+            <h2 sx={{
+      mb: 6
+    }}>Implementation Guidelines</h2>
             <Card>
               <CardHeader
                 title={<Typography variant="h3">Animation Best Practices</Typography>}
@@ -528,10 +768,22 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                 }
               ></CardHeader>
               <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
+                <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
                   <div>
-                    <h4 className="font-medium mb-3 text-green-600">✓ Best Practices</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 sx={{
+      fontWeight: 500,
+      mb: 3,
+      color: "green.600"
+    }}>✓ Best Practices</h4>
+                    <ul sx={{
+      "space-y-2": true,
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                       <li>• Use spring animations for natural movement</li>
                       <li>• Keep durations between 200-500ms for UI interactions</li>
                       <li>• Respect users' reduced motion preferences</li>
@@ -541,8 +793,16 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="font-medium mb-3 text-red-600">✗ Common Pitfalls</h4>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <h4 sx={{
+      fontWeight: 500,
+      mb: 3,
+      color: "red.600"
+    }}>✗ Common Pitfalls</h4>
+                    <ul sx={{
+      "space-y-2": true,
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                       <li>• Overusing animations - less is more</li>
                       <li>• Making animations too slow (&gt;500ms)</li>
                       <li>• Ignoring accessibility preferences</li>
@@ -558,7 +818,13 @@ export function AnimatedShowcase({ onBack }: AnimatedShowcaseProps) {
         </div>
 
         {/* Notification Container */}
-        <div className="fixed top-4 right-4 z-50 space-y-2">
+        <div sx={{
+      "fixed": true,
+      "top-4": true,
+      "right-4": true,
+      "z-50": true,
+      "space-y-2": true
+    }}>
           {notifications.map((notification) => (
             <AnimatedNotification
               key={notification.id}

@@ -33,6 +33,13 @@ export default [
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': 'warn',
       'react/react-in-jsx-scope': 'off',
+      'no-restricted-syntax': [
+        'error',
+        {
+          'selector': "JSXAttribute[name='className']",
+          'message': "Use MUI's sx prop instead of className for styling",
+        },
+      ],
     },
   },
   {

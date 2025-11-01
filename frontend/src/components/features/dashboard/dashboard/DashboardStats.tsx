@@ -1,4 +1,5 @@
 import { BusinessCenter as Briefcase, Mail } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Card, Button } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -75,48 +76,107 @@ Calendar tasks created: ${response.data.tasks_created}`);
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      gap: 6,
+      mb: 6
+    }}>
       {/* One-Click Application Prep Card */}
-      <Card className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-blue-100 rounded-lg">
-              <Briefcase className="w-5 h-5 text-blue-600" />
+      <Card sx={{
+      p: 6,
+      "bg-gradient-to-br": true,
+      "from-blue-50": true,
+      "to-indigo-50": true,
+      borderColor: "blue.200"
+    }}>
+        <div sx={{
+      "space-y-4": true
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <div sx={{
+      p: 2,
+      bgcolor: "blue.100",
+      borderRadius: 0.5rem
+    }}>
+              <Briefcase sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "blue.600"
+    }} />
             </div>
-            <h3 className="font-semibold text-lg text-blue-900">One-Click Application Prep</h3>
+            <h3 sx={{
+      fontWeight: 600,
+      typography: h6,
+      "text-blue-900": true
+    }}>One-Click Application Prep</h3>
           </div>
 
-          <p className="text-blue-700 text-sm">
+          <p sx={{
+      color: "blue.700",
+      typography: body1
+    }}>
             Generate a complete application package including tailored resume, cover letter, and KSC
             responses.
           </p>
 
-          <div className="space-y-3">
+          <div sx={{
+      "space-y-3": true
+    }}>
             <Textarea
               placeholder="Paste the job description here..."
               value={jobDescription}
               onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                 setJobDescription(e.target.value)
               }
-              className="min-h-[100px] resize-y"
+              sx={{
+      h: "100px",
+      "resize-y": true
+    }}
               disabled={isPreparingApplication}
             />
 
-            {applicationError && <p className="text-red-600 text-sm">{applicationError}</p>}
+            {applicationError && <p sx={{
+      color: "red.600",
+      typography: body1
+    }}>{applicationError}</p>}
 
             <Button
               onClick={handlePrepareApplication}
               disabled={isPreparingApplication || !jobDescription.trim()}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+              sx={{
+      width: "100%",
+      "bg-blue-600": true,
+      '&:hover': { "bg-blue-700": true },
+      color: "common.white"
+    }}
             >
               {isPreparingApplication ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 2,
+      "border-white": true,
+      "border-t-transparent": true,
+      borderRadius: 9999px,
+      "animate-spin": true,
+      mr: 2
+    }} />
                   Preparing Application Package...
                 </>
               ) : (
                 <>
-                  <Briefcase className="w-4 h-4 mr-2" />
+                  <Briefcase sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                   Prepare Application Package
                 </>
               )}
@@ -126,36 +186,86 @@ Calendar tasks created: ${response.data.tasks_created}`);
       </Card>
 
       {/* Email Scanning Card */}
-      <Card className="p-6 bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
-        <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <Mail className="w-5 h-5 text-green-600" />
+      <Card sx={{
+      p: 6,
+      "bg-gradient-to-br": true,
+      "from-green-50": true,
+      "to-emerald-50": true,
+      borderColor: "green.200"
+    }}>
+        <div sx={{
+      "space-y-4": true
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <div sx={{
+      p: 2,
+      bgcolor: "green.100",
+      borderRadius: 0.5rem
+    }}>
+              <Mail sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "green.600"
+    }} />
             </div>
-            <h3 className="font-semibold text-lg text-green-900">Scan Inbox for Jobs</h3>
+            <h3 sx={{
+      fontWeight: 600,
+      typography: h6,
+      "text-green-900": true
+    }}>Scan Inbox for Jobs</h3>
           </div>
 
-          <p className="text-green-700 text-sm">
+          <p sx={{
+      color: "green.700",
+      typography: body1
+    }}>
             Automatically scan your email for job opportunities and create calendar tasks for
             high-scoring matches.
           </p>
 
-          <div className="space-y-3">
-            {emailScanError && <p className="text-red-600 text-sm">{emailScanError}</p>}
+          <div sx={{
+      "space-y-3": true
+    }}>
+            {emailScanError && <p sx={{
+      color: "red.600",
+      typography: body1
+    }}>{emailScanError}</p>}
 
             <Button
               onClick={handleScanEmails}
               disabled={isScanningEmails}
-              className="w-full bg-green-600 hover:bg-green-700 text-white"
+              sx={{
+      width: "100%",
+      "bg-green-600": true,
+      '&:hover': { "bg-green-700": true },
+      color: "common.white"
+    }}
             >
               {isScanningEmails ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 2,
+      "border-white": true,
+      "border-t-transparent": true,
+      borderRadius: 9999px,
+      "animate-spin": true,
+      mr: 2
+    }} />
                   Scanning Inbox...
                 </>
               ) : (
                 <>
-                  <Mail className="w-4 h-4 mr-2" />
+                  <Mail sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                   Scan Inbox for Opportunities
                 </>
               )}

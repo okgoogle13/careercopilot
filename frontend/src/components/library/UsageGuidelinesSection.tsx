@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 
 import { ComponentSection } from './ComponentDemo';
@@ -10,49 +11,127 @@ export function UsageGuidelinesSection() {
       description="Best practices and guidelines for using components effectively"
     >
       <Card variant="elevation">
-        <CardContent className="pt-6">
-          <div className="grid md:grid-cols-3 gap-6">
+        <CardContent sx={{
+      pt: 6
+    }}>
+          <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 6
+    }}>
             <div>
-              <h4 className="mb-3 font-medium">Color System</h4>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-primary rounded"></div>
-                  <span className="text-sm">Primary - Actions & Branding</span>
+              <h4 sx={{
+      mb: 3,
+      fontWeight: 500
+    }}>Color System</h4>
+              <div sx={{
+      "space-y-2": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      "bg-primary": true,
+      borderRadius: 0.25rem
+    }}></div>
+                  <span sx={{
+      typography: body1
+    }}>Primary - Actions & Branding</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-destructive rounded"></div>
-                  <span className="text-sm">Destructive - Errors & Warnings</span>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      "bg-destructive": true,
+      borderRadius: 0.25rem
+    }}></div>
+                  <span sx={{
+      typography: body1
+    }}>Destructive - Errors & Warnings</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 bg-muted rounded"></div>
-                  <span className="text-sm">Muted - Secondary Information</span>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      "bg-muted": true,
+      borderRadius: 0.25rem
+    }}></div>
+                  <span sx={{
+      typography: body1
+    }}>Muted - Secondary Information</span>
                 </div>
               </div>
             </div>
             <div>
-              <h4 className="mb-3 font-medium">Animation Guidelines</h4>
-              <div className="space-y-2">
-                <div className="text-sm text-muted-foreground">
+              <h4 sx={{
+      mb: 3,
+      fontWeight: 500
+    }}>Animation Guidelines</h4>
+              <div sx={{
+      "space-y-2": true
+    }}>
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                   • Duration: 200-300ms for micro-interactions
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                   • Easing: Spring animations for natural feel
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                   • Stagger delays: 50-100ms between items
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                   • Reduce motion for accessibility preferences
                 </div>
               </div>
             </div>
             <div>
-              <h4 className="mb-3 font-medium">Spacing System</h4>
-              <div className="space-y-2">
-                <div className="text-sm text-muted-foreground">• Border radius: 0.75rem</div>
-                <div className="text-sm text-muted-foreground">• Consistent padding scales</div>
-                <div className="text-sm text-muted-foreground">• Logical gap spacing</div>
-                <div className="text-sm text-muted-foreground">• Responsive breakpoints</div>
+              <h4 sx={{
+      mb: 3,
+      fontWeight: 500
+    }}>Spacing System</h4>
+              <div sx={{
+      "space-y-2": true
+    }}>
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>• Border radius: 0.75rem</div>
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>• Consistent padding scales</div>
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>• Logical gap spacing</div>
+                <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>• Responsive breakpoints</div>
               </div>
             </div>
           </div>

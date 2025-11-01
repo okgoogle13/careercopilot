@@ -1,4 +1,5 @@
 import { ArrowLeft } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 
@@ -161,29 +162,65 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
   ];
 
   return (
-    <div className="flex-1 p-8">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
+    <div sx={{
+      flex: 1,
+      p: 8
+    }}>
+      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 8
+    }}>
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
           <Button
             variant="text"
             onClick={onBack}
-            className="text-muted-foreground hover:text-foreground"
+            sx={{
+      "text-muted-foreground": true,
+      '&:hover': { "text-foreground": true }
+    }}
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             Back to Dashboard
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">Choose Template</h1>
+          <h1 sx={{
+      typography: h4,
+      fontWeight: 700,
+      "text-foreground": true
+    }}>Choose Template</h1>
         </div>
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary" className="bg-primary/10 text-primary">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+          <Badge variant="secondary" sx={{
+      "bg-primary/10": true,
+      "text-primary": true
+    }}>
             {filteredTemplates.length} templates available
           </Badge>
         </div>
       </div>
 
       {/* Type and Category Filters */}
-      <div className="mb-8 space-y-4">
-        <div className="flex gap-2">
+      <div sx={{
+      mb: 8,
+      "space-y-4": true
+    }}>
+        <div sx={{
+      display: "flex",
+      gap: 2
+    }}>
           <Button
             variant={selectedType === 'resume' ? 'contained' : 'outlined'}
             className={selectedType === 'resume' ? 'bg-primary hover:bg-primary/90' : ''}
@@ -200,7 +237,11 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
           </Button>
         </div>
 
-        <div className="flex gap-2 flex-wrap">
+        <div sx={{
+      display: "flex",
+      gap: 2,
+      flexWrap: "wrap"
+    }}>
           {categories.map((category) => (
             <Button
               key={category}
@@ -217,7 +258,19 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
 
       {/* Template Grid */}
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${isSelectingTemplate ? 'opacity-50 pointer-events-none' : ''}`}
+        sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 6,
+      "${isSelectingTemplate": true,
+      "?": true,
+      "'opacity-50": true,
+      "pointer-events-none'": true,
+      ":": true,
+      "''}": true
+    }}
       >
         {filteredTemplates.map((template) => (
           <TemplateCard
@@ -234,19 +287,53 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
       </div>
 
       {isSelectingTemplate && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <div className="flex items-center gap-3">
-              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
-              <span className="text-lg font-medium">Selecting template...</span>
+        <div sx={{
+      "fixed": true,
+      "inset-0": true,
+      bgcolor: "common.black",
+      "bg-opacity-50": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "z-50": true
+    }}>
+          <div sx={{
+      bgcolor: "common.white",
+      p: 6,
+      borderRadius: 0.5rem,
+      boxShadow: 4
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+              <div sx={{
+      "animate-spin": true,
+      borderRadius: 9999px,
+      "h-6": true,
+      "w-6": true,
+      "border-b-2": true,
+      "border-primary": true
+    }}></div>
+              <span sx={{
+      typography: h6,
+      fontWeight: 500
+    }}>Selecting template...</span>
             </div>
           </div>
         </div>
       )}
 
       {filteredTemplates.length === 0 && (
-        <div className="text-center py-12">
-          <div className="text-muted-foreground mb-4">
+        <div sx={{
+      textAlign: "center",
+      py: 12
+    }}>
+          <div sx={{
+      "text-muted-foreground": true,
+      mb: 4
+    }}>
             No templates found for the selected filters
           </div>
           <Button variant="outlined" onClick={() => setSelectedCategory('all')}>
