@@ -1,4 +1,5 @@
 import { Edit, Delete as Trash2 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -36,11 +37,24 @@ export function ProfileCard({
   isSelected = false,
 }: ProfileCardProps) {
   return (
-    <Card variant={isSelected ? 'selected' : 'interactive'} className="p-6 space-y-4">
-      <div className="flex items-center gap-3">
-        <Avatar className="w-12 h-12">
+    <Card variant={isSelected ? 'selected' : 'interactive'} sx={{
+      p: 6,
+      "space-y-4": true
+    }}>
+      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+        <Avatar sx={{
+      "w-12": true,
+      "h-12": true
+    }}>
           <AvatarFallback
-            className="text-black font-medium"
+            sx={{
+      color: "common.black",
+      fontWeight: 500
+    }}
             style={{ backgroundColor: avatarColor }}
           >
             {name
@@ -50,44 +64,100 @@ export function ProfileCard({
           </AvatarFallback>
         </Avatar>
         <div>
-          <h3 className="font-medium text-card-foreground">{name}</h3>
-          <p className="text-sm text-muted-foreground">{role}</p>
+          <h3 sx={{
+      fontWeight: 500,
+      "text-card-foreground": true
+    }}>{name}</h3>
+          <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{role}</p>
         </div>
       </div>
 
-      <div className="space-y-3">
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">Active Applications:</span>
-          <span className="font-medium text-card-foreground">{activeApplications}</span>
+      <div sx={{
+      "space-y-3": true
+    }}>
+        <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+          <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Active Applications:</span>
+          <span sx={{
+      fontWeight: 500,
+      "text-card-foreground": true
+    }}>{activeApplications}</span>
         </div>
 
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">ATS Score Average:</span>
-          <span className="font-medium text-primary">{atsScore}%</span>
+        <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+          <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>ATS Score Average:</span>
+          <span sx={{
+      fontWeight: 500,
+      "text-primary": true
+    }}>{atsScore}%</span>
         </div>
 
-        <div className="flex justify-between items-center">
-          <span className="text-sm text-muted-foreground">Last Updated:</span>
-          <span className="text-sm text-muted-foreground">{lastUpdated}</span>
+        <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+          <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Last Updated:</span>
+          <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{lastUpdated}</span>
         </div>
       </div>
 
-      <div className="flex gap-2 pt-2">
+      <div sx={{
+      display: "flex",
+      gap: 2,
+      pt: 2
+    }}>
         <Button
           variant="text"
           size="small"
-          className="flex-1 text-muted-foreground hover:text-card-foreground"
+          sx={{
+      flex: 1,
+      "text-muted-foreground": true,
+      '&:hover': { "text-card-foreground": true }
+    }}
           onClick={onEdit}
         >
-          <Edit className="w-4 h-4" />
+          <Edit sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
         </Button>
         <Button
           variant="text"
           size="small"
-          className="flex-1 text-destructive hover:text-destructive"
+          sx={{
+      flex: 1,
+      "text-destructive": true,
+      '&:hover': { "text-destructive": true }
+    }}
           onClick={onDelete}
         >
-          <Trash2 className="w-4 h-4" />
+          <Trash2 sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
         </Button>
       </div>
     </Card>

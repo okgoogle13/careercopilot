@@ -1,4 +1,5 @@
 import { ArrowLeft, Upload, Description, AutorenewRounded, CheckCircle } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -51,80 +52,237 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
   ];
 
   return (
-    <div className="flex-1 p-8">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
+    <div sx={{
+      flex: 1,
+      p: 8
+    }}>
+      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 8
+    }}>
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
           <Button
             variant="text"
             onClick={onBack}
-            className="text-muted-foreground hover:text-foreground"
+            sx={{
+      "text-muted-foreground": true,
+      '&:hover': { "text-foreground": true }
+    }}
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             Back to Dashboard
           </Button>
-          <h1 className="text-2xl font-bold text-foreground">Loading States</h1>
+          <h1 sx={{
+      typography: h4,
+      fontWeight: 700,
+      "text-foreground": true
+    }}>Loading States</h1>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
         {/* Profile Loading State */}
-        <Card className="p-6">
-          <h3 className="font-medium mb-4">Profile Card Loading</h3>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Skeleton className="w-12 h-12 rounded-full" />
-              <div className="space-y-2">
-                <Skeleton className="h-4 w-32" />
-                <Skeleton className="h-3 w-24" />
+        <Card sx={{
+      p: 6
+    }}>
+          <h3 sx={{
+      fontWeight: 500,
+      mb: 4
+    }}>Profile Card Loading</h3>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+              <Skeleton sx={{
+      "w-12": true,
+      "h-12": true,
+      borderRadius: 9999px
+    }} />
+              <div sx={{
+      "space-y-2": true
+    }}>
+                <Skeleton sx={{
+      "h-4": true,
+      "w-32": true
+    }} />
+                <Skeleton sx={{
+      "h-3": true,
+      "w-24": true
+    }} />
               </div>
             </div>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <Skeleton className="h-3 w-28" />
-                <Skeleton className="h-3 w-8" />
+            <div sx={{
+      "space-y-3": true
+    }}>
+              <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+                <Skeleton sx={{
+      "h-3": true,
+      "w-28": true
+    }} />
+                <Skeleton sx={{
+      "h-3": true,
+      "w-8": true
+    }} />
               </div>
-              <div className="flex justify-between items-center">
-                <Skeleton className="h-3 w-24" />
-                <Skeleton className="h-3 w-12" />
+              <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+                <Skeleton sx={{
+      "h-3": true,
+      "w-24": true
+    }} />
+                <Skeleton sx={{
+      "h-3": true,
+      "w-12": true
+    }} />
               </div>
-              <div className="flex justify-between items-center">
-                <Skeleton className="h-3 w-20" />
-                <Skeleton className="h-3 w-16" />
+              <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center"
+    }}>
+                <Skeleton sx={{
+      "h-3": true,
+      "w-20": true
+    }} />
+                <Skeleton sx={{
+      "h-3": true,
+      "w-16": true
+    }} />
               </div>
             </div>
-            <div className="flex gap-2 pt-2">
-              <Skeleton className="h-8 flex-1" />
-              <Skeleton className="h-8 flex-1" />
+            <div sx={{
+      display: "flex",
+      gap: 2,
+      pt: 2
+    }}>
+              <Skeleton sx={{
+      "h-8": true,
+      flex: 1
+    }} />
+              <Skeleton sx={{
+      "h-8": true,
+      flex: 1
+    }} />
             </div>
           </div>
         </Card>
 
         {/* Document Analysis Loading */}
-        <Card className="p-6">
-          <h3 className="font-medium mb-4">Document Analysis</h3>
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <AutorenewRounded className="w-6 h-6 text-primary animate-spin" />
+        <Card sx={{
+      p: 6
+    }}>
+          <h3 sx={{
+      fontWeight: 500,
+      mb: 4
+    }}>Document Analysis</h3>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+              <div sx={{
+      "w-12": true,
+      "h-12": true,
+      "bg-primary/10": true,
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                <AutorenewRounded sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true,
+      "animate-spin": true
+    }} />
               </div>
               <div>
-                <p className="font-medium">Analyzing your resume...</p>
-                <p className="text-sm text-muted-foreground">This may take a few moments</p>
+                <p sx={{
+      fontWeight: 500
+    }}>Analyzing your resume...</p>
+                <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>This may take a few moments</p>
               </div>
             </div>
 
-            <div className="space-y-3">
+            <div sx={{
+      "space-y-3": true
+    }}>
               {analysisSteps.map((step, index) => (
-                <div key={index} className="flex items-center gap-3">
+                <div key={index} sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
                   {step.completed ? (
-                    <CheckCircle className="w-4 h-4 text-green-400" />
+                    <CheckCircle sx={{
+      "w-4": true,
+      "h-4": true,
+      "text-green-400": true
+    }} />
                   ) : index === analysisStep ? (
-                    <AutorenewRounded className="w-4 h-4 text-primary animate-spin" />
+                    <AutorenewRounded sx={{
+      "w-4": true,
+      "h-4": true,
+      "text-primary": true,
+      "animate-spin": true
+    }} />
                   ) : (
-                    <div className="w-4 h-4 border-2 border-muted rounded-full" />
+                    <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 2,
+      "border-muted": true,
+      borderRadius: 9999px
+    }} />
                   )}
                   <span
-                    className={`text-sm ${step.completed ? 'text-green-400' : index === analysisStep ? 'text-primary' : 'text-muted-foreground'}`}
+                    sx={{
+      typography: body1,
+      "${step.completed": true,
+      "?": true,
+      "'text-green-400'": true,
+      ":": true,
+      "index": true,
+      "===": true,
+      "analysisStep": true,
+      "?": true,
+      "'text-primary'": true,
+      ":": true,
+      "'text-muted-foreground'}": true
+    }}
                   >
                     {step.label}
                   </span>
@@ -135,57 +293,171 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
         </Card>
 
         {/* File Upload Loading */}
-        <Card className="p-6">
-          <h3 className="font-medium mb-4">File Upload Progress</h3>
-          <div className="space-y-4">
-            <div className="border-2 border-dashed border-muted rounded-lg p-6 text-center">
-              <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
-              <p className="text-sm text-muted-foreground mb-4">Uploading resume.pdf...</p>
-              <Progress value={uploadProgress} className="w-full mb-2" />
-              <p className="text-xs text-muted-foreground">{uploadProgress}% completed</p>
+        <Card sx={{
+      p: 6
+    }}>
+          <h3 sx={{
+      fontWeight: 500,
+      mb: 4
+    }}>File Upload Progress</h3>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      border: 2,
+      borderStyle: "dashed",
+      "border-muted": true,
+      borderRadius: 0.5rem,
+      p: 6,
+      textAlign: "center"
+    }}>
+              <Upload sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-muted-foreground": true,
+      "mx-auto": true,
+      mb: 2
+    }} />
+              <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mb: 4
+    }}>Uploading resume.pdf...</p>
+              <Progress value={uploadProgress} sx={{
+      width: "100%",
+      mb: 2
+    }} />
+              <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>{uploadProgress}% completed</p>
             </div>
           </div>
         </Card>
 
         {/* Template Generation Loading */}
-        <Card className="p-6">
-          <h3 className="font-medium mb-4">Template Generation</h3>
-          <div className="space-y-4">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                <CareerCopilotLogo className="text-primary" sx={{ fontSize: 32 }} />
+        <Card sx={{
+      p: 6
+    }}>
+          <h3 sx={{
+      fontWeight: 500,
+      mb: 4
+    }}>Template Generation</h3>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      textAlign: "center"
+    }}>
+              <div sx={{
+      "w-16": true,
+      "h-16": true,
+      "bg-primary/10": true,
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "mx-auto": true,
+      mb: 4,
+      "animate-pulse": true
+    }}>
+                <CareerCopilotLogo sx={{
+      "text-primary": true
+    }} sx={{ fontSize: 32 }} />
               </div>
-              <p className="font-medium mb-2">Generating your resume</p>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p sx={{
+      fontWeight: 500,
+      mb: 2
+    }}>Generating your resume</p>
+              <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mb: 4
+    }}>
                 Applying Modern Minimal template...
               </p>
-              <Progress value={progress} className="w-full mb-2" />
-              <p className="text-xs text-muted-foreground">Processing content and formatting</p>
+              <Progress value={progress} sx={{
+      width: "100%",
+      mb: 2
+    }} />
+              <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>Processing content and formatting</p>
             </div>
           </div>
         </Card>
 
         {/* Dashboard Loading State */}
-        <Card className="p-6">
-          <h3 className="font-medium mb-4">Dashboard Loading</h3>
-          <div className="grid grid-cols-1 gap-4">
+        <Card sx={{
+      p: 6
+    }}>
+          <h3 sx={{
+      fontWeight: 500,
+      mb: 4
+    }}>Dashboard Loading</h3>
+          <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      gap: 4
+    }}>
             {[1, 2, 3].map((i) => (
-              <Card key={i} className="p-4 border">
-                <div className="flex items-center gap-3 mb-3">
-                  <Skeleton className="w-10 h-10 rounded-full" />
-                  <div className="space-y-1">
-                    <Skeleton className="h-3 w-24" />
-                    <Skeleton className="h-3 w-20" />
+              <Card key={i} sx={{
+      p: 4,
+      border: 1
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 3
+    }}>
+                  <Skeleton sx={{
+      "w-10": true,
+      "h-10": true,
+      borderRadius: 9999px
+    }} />
+                  <div sx={{
+      "space-y-1": true
+    }}>
+                    <Skeleton sx={{
+      "h-3": true,
+      "w-24": true
+    }} />
+                    <Skeleton sx={{
+      "h-3": true,
+      "w-20": true
+    }} />
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between">
-                    <Skeleton className="h-3 w-20" />
-                    <Skeleton className="h-3 w-6" />
+                <div sx={{
+      "space-y-2": true
+    }}>
+                  <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                    <Skeleton sx={{
+      "h-3": true,
+      "w-20": true
+    }} />
+                    <Skeleton sx={{
+      "h-3": true,
+      "w-6": true
+    }} />
                   </div>
-                  <div className="flex justify-between">
-                    <Skeleton className="h-3 w-24" />
-                    <Skeleton className="h-3 w-8" />
+                  <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                    <Skeleton sx={{
+      "h-3": true,
+      "w-24": true
+    }} />
+                    <Skeleton sx={{
+      "h-3": true,
+      "w-8": true
+    }} />
                   </div>
                 </div>
               </Card>
@@ -194,57 +466,176 @@ export function LoadingStates({ onBack }: LoadingStatesProps) {
         </Card>
 
         {/* Spinner Variations */}
-        <Card className="p-6">
-          <h3 className="font-medium mb-4">Loading Spinners</h3>
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 justify-center">
-              <AutorenewRounded className="w-6 h-6 text-primary animate-spin" />
-              <div className="text-sm text-muted-foreground">Default spinner</div>
+        <Card sx={{
+      p: 6
+    }}>
+          <h3 sx={{
+      fontWeight: 500,
+      mb: 4
+    }}>Loading Spinners</h3>
+          <div sx={{
+      "space-y-6": true
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      justifyContent: "center"
+    }}>
+              <AutorenewRounded sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true,
+      "animate-spin": true
+    }} />
+              <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Default spinner</div>
             </div>
 
-            <div className="flex items-center gap-4 justify-center">
-              <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              <div className="text-sm text-muted-foreground">Border spinner</div>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      justifyContent: "center"
+    }}>
+              <div sx={{
+      "w-6": true,
+      "h-6": true,
+      border: 2,
+      "border-primary": true,
+      "border-t-transparent": true,
+      borderRadius: 9999px,
+      "animate-spin": true
+    }} />
+              <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Border spinner</div>
             </div>
 
-            <div className="flex items-center gap-4 justify-center">
-              <div className="flex gap-1">
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      justifyContent: "center"
+    }}>
+              <div sx={{
+      display: "flex",
+      gap: 1
+    }}>
                 <div
-                  className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                  sx={{
+      "w-2": true,
+      "h-2": true,
+      "bg-primary": true,
+      borderRadius: 9999px,
+      "animate-bounce": true
+    }}
                   style={{ animationDelay: '0ms' }}
                 />
                 <div
-                  className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                  sx={{
+      "w-2": true,
+      "h-2": true,
+      "bg-primary": true,
+      borderRadius: 9999px,
+      "animate-bounce": true
+    }}
                   style={{ animationDelay: '150ms' }}
                 />
                 <div
-                  className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                  sx={{
+      "w-2": true,
+      "h-2": true,
+      "bg-primary": true,
+      borderRadius: 9999px,
+      "animate-bounce": true
+    }}
                   style={{ animationDelay: '300ms' }}
                 />
               </div>
-              <div className="text-sm text-muted-foreground">Dot animation</div>
+              <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Dot animation</div>
             </div>
 
-            <div className="flex items-center gap-4 justify-center">
-              <div className="w-6 h-6 border-2 border-muted rounded-full">
-                <div className="w-full h-full border-2 border-primary border-b-transparent rounded-full animate-spin" />
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      justifyContent: "center"
+    }}>
+              <div sx={{
+      "w-6": true,
+      "h-6": true,
+      border: 2,
+      "border-muted": true,
+      borderRadius: 9999px
+    }}>
+                <div sx={{
+      width: "100%",
+      height: "100%",
+      border: 2,
+      "border-primary": true,
+      "border-b-transparent": true,
+      borderRadius: 9999px,
+      "animate-spin": true
+    }} />
               </div>
-              <div className="text-sm text-muted-foreground">Double ring</div>
+              <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Double ring</div>
             </div>
           </div>
         </Card>
       </div>
 
       {/* Full Page Loading Overlay Example */}
-      <Card className="p-6 mt-6">
-        <h3 className="font-medium mb-4">Full Page Loading Overlay</h3>
-        <div className="relative bg-muted/10 border border-muted rounded-lg h-32 overflow-hidden">
-          <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
-            <div className="text-center">
-              <div className="mb-3 animate-pulse">
-                <CareerCopilotLogo className="text-primary mx-auto" sx={{ fontSize: 32 }} />
+      <Card sx={{
+      p: 6,
+      mt: 6
+    }}>
+        <h3 sx={{
+      fontWeight: 500,
+      mb: 4
+    }}>Full Page Loading Overlay</h3>
+        <div sx={{
+      "relative": true,
+      "bg-muted/10": true,
+      border: 1,
+      "border-muted": true,
+      borderRadius: 0.5rem,
+      "h-32": true,
+      overflow: "hidden"
+    }}>
+          <div sx={{
+      "absolute": true,
+      "inset-0": true,
+      "bg-background/80": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+            <div sx={{
+      textAlign: "center"
+    }}>
+              <div sx={{
+      mb: 3,
+      "animate-pulse": true
+    }}>
+                <CareerCopilotLogo sx={{
+      "text-primary": true,
+      "mx-auto": true
+    }} sx={{ fontSize: 32 }} />
               </div>
-              <p className="text-sm text-muted-foreground">Loading Career Copilot...</p>
+              <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Loading Career Copilot...</p>
             </div>
           </div>
         </div>

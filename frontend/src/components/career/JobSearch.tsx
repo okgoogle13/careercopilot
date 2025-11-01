@@ -4,6 +4,7 @@ import {
   List,
   Work as Briefcase,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Box,
   Typography,
@@ -235,10 +236,18 @@ export function JobSearch({
   }
 
   return (
-    <Box className="w-full">
+    <Box sx={{
+      width: "100%"
+    }}>
       {/* Header */}
-      <Box className="mb-6">
-        <Typography variant="h4" className="text-2xl font-bold mb-2">
+      <Box sx={{
+      mb: 6
+    }}>
+        <Typography variant="h4" sx={{
+      typography: h4,
+      fontWeight: 700,
+      mb: 2
+    }}>
           Job Search
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -257,9 +266,24 @@ export function JobSearch({
         {/* Main Content */}
         <Grid size={{ xs: 12, md: showFilters ? 9 : 12 }}>
           {/* Controls */}
-          <Paper className="p-4 mb-6">
-            <Box className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-              <Box className="flex items-center gap-4">
+          <Paper sx={{
+      p: 4,
+      mb: 6
+    }}>
+            <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      [theme.breakpoints.up('xs')]: { flexDirection: "row" },
+      gap: 4,
+      alignItems: "flex-start",
+      [theme.breakpoints.up('xs')]: { alignItems: "center" },
+      justifyContent: "space-between"
+    }}>
+              <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
                 <Button
                   variant="outlined"
                   onClick={() => setShowFilters(!showFilters)}
@@ -273,13 +297,31 @@ export function JobSearch({
                 </Typography>
               </Box>
 
-              <Box className="flex items-center gap-4">
+              <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
                 {/* View Mode Toggle */}
-                <Box className="flex border rounded-lg overflow-hidden">
+                <Box sx={{
+      display: "flex",
+      border: 1,
+      borderRadius: 0.5rem,
+      overflow: "hidden"
+    }}>
                   <Button
                     variant={viewMode === 'grid' ? 'contained' : 'outlined'}
                     onClick={() => setViewMode('grid')}
-                    className={`rounded-none ${viewMode === 'grid' ? 'bg-primary' : ''}`}
+                    sx={{
+      borderRadius: 0,
+      "${viewMode": true,
+      "===": true,
+      "'grid'": true,
+      "?": true,
+      "'bg-primary'": true,
+      ":": true,
+      "''}": true
+    }}
                     size="small"
                   >
                     <Grid3X3 sx={{ fontSize: 16 }} />
@@ -287,7 +329,16 @@ export function JobSearch({
                   <Button
                     variant={viewMode === 'list' ? 'contained' : 'outlined'}
                     onClick={() => setViewMode('list')}
-                    className={`rounded-none ${viewMode === 'list' ? 'bg-primary' : ''}`}
+                    sx={{
+      borderRadius: 0,
+      "${viewMode": true,
+      "===": true,
+      "'list'": true,
+      "?": true,
+      "'bg-primary'": true,
+      ":": true,
+      "''}": true
+    }}
                     size="small"
                   >
                     <List sx={{ fontSize: 16 }} />
@@ -295,7 +346,9 @@ export function JobSearch({
                 </Box>
 
                 {/* Sort */}
-                <FormControl size="small" className="min-w-32">
+                <FormControl size="small" sx={{
+      "min-w-32": true
+    }}>
                   <InputLabel>Sort by</InputLabel>
                   <Select
                     value={sortBy}
@@ -346,7 +399,11 @@ export function JobSearch({
 
               {/* Pagination */}
               {totalPages > 1 && (
-                <Box className="flex justify-center mt-8">
+                <Box sx={{
+      display: "flex",
+      justifyContent: "center",
+      mt: 8
+    }}>
                   <Pagination
                     count={totalPages}
                     page={currentPage}

@@ -7,6 +7,7 @@ import {
   MicOff,
   Replay as RotateCcw,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -168,49 +169,134 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4">
-      <div className="max-w-6xl mx-auto">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 4
+    }}>
+      <div sx={{
+      "max-w-6xl": true,
+      "mx-auto": true
+    }}>
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 8
+    }}>
           <Button variant="text" size="small" onClick={onBack}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             Back to Career Hub
           </Button>
         </div>
 
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-semibold">AI Interview Preparation</h1>
+        <div sx={{
+      textAlign: "center",
+      mb: 8
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      mb: 4
+    }}>
+            <Sparkles sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-primary": true
+    }} />
+            <h1 sx={{
+      typography: h3,
+      fontWeight: 600
+    }}>AI Interview Preparation</h1>
           </div>
-          <p className="text-muted-foreground text-lg">
+          <p sx={{
+      "text-muted-foreground": true,
+      typography: h6
+    }}>
             Practice with AI-powered mock interviews tailored to community support roles.
           </p>
         </div>
 
         {!currentQuestion ? (
           /* Question Category Selection */
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 6,
+      "max-w-4xl": true,
+      "mx-auto": true
+    }}>
             {questionCategories.map((category) => (
               <Card
                 key={category.id}
-                className="p-6 border-2 border-border hover:border-primary cursor-pointer transition-all duration-200 hover:shadow-lg group"
+                sx={{
+      p: 6,
+      border: 2,
+      "border-border": true,
+      '&:hover': { "border-primary": true },
+      cursor: "pointer",
+      "transition-all": true,
+      "duration-200": true,
+      '&:hover': { boxShadow: 4 },
+      "group": true
+    }}
                 onClick={() => handleSelectCategory(category.id)}
               >
-                <div className="text-center space-y-4">
-                  <div className="p-4 bg-primary/10 rounded-2xl w-fit mx-auto group-hover:scale-110 transition-transform duration-200">
-                    <MessageSquare className="w-8 h-8 text-primary" />
+                <div sx={{
+      textAlign: "center",
+      "space-y-4": true
+    }}>
+                  <div sx={{
+      p: 4,
+      "bg-primary/10": true,
+      borderRadius: 1rem,
+      "w-fit": true,
+      "mx-auto": true,
+      "group-hover:scale-110": true,
+      "transition-transform": true,
+      "duration-200": true
+    }}>
+                    <MessageSquare sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-primary": true
+    }} />
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">{category.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
+                    <h3 sx={{
+      typography: h5,
+      fontWeight: 600,
+      mb: 2
+    }}>{category.title}</h3>
+                    <p sx={{
+      "text-muted-foreground": true,
+      typography: body1,
+      "leading-relaxed": true
+    }}>
                       {category.description}
                     </p>
                   </div>
 
-                  <Button className="w-full bg-primary hover:bg-primary/90 group-hover:bg-primary/90">
-                    <Play className="w-4 h-4 mr-2" />
+                  <Button sx={{
+      width: "100%",
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true },
+      "group-hover:bg-primary/90": true
+    }}>
+                    <Play sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                     Start Practice
                   </Button>
                 </div>
@@ -219,13 +305,32 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
           </div>
         ) : (
           /* Interview Practice Interface */
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+          <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('lg')]: { "grid-cols-3": true },
+      gap: 8
+    }}>
             {/* Main Practice Area */}
-            <div className="xl:col-span-2 space-y-6">
+            <div sx={{
+      [theme.breakpoints.up('lg')]: { "col-span-2": true },
+      "space-y-6": true
+    }}>
               {/* Question Card */}
-              <Card className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
+              <Card sx={{
+      p: 6
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
                     <Badge className={getTypeColor(currentQuestion.type)}>
                       {currentQuestion.type}
                     </Badge>
@@ -237,22 +342,45 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     </Badge>
                   </div>
                   <Button variant="outlined" size="small" onClick={handleNewQuestion}>
-                    <RotateCcw className="w-4 h-4 mr-2" />
+                    <RotateCcw sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                     New Question
                   </Button>
                 </div>
 
-                <div className="mb-4">
-                  <h3 className="text-sm font-medium text-muted-foreground mb-2">
+                <div sx={{
+      mb: 4
+    }}>
+                  <h3 sx={{
+      typography: body1,
+      fontWeight: 500,
+      "text-muted-foreground": true,
+      mb: 2
+    }}>
                     {currentQuestion.category}
                   </h3>
-                  <h2 className="text-xl font-semibold leading-relaxed">
+                  <h2 sx={{
+      typography: h5,
+      fontWeight: 600,
+      "leading-relaxed": true
+    }}>
                     {currentQuestion.question}
                   </h2>
                 </div>
 
                 {/* Recording Controls */}
-                <div className="flex items-center gap-4 mb-6 p-4 bg-card rounded-lg">
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 6,
+      p: 4,
+      "bg-card": true,
+      borderRadius: 0.5rem
+    }}>
                   <Button
                     variant={isRecording ? 'contained' : 'outlined'}
                     color={isRecording ? 'error' : 'primary'}
@@ -261,48 +389,95 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                   >
                     {isRecording ? (
                       <>
-                        <MicOff className="w-4 h-4 mr-2" />
+                        <MicOff sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                         Stop Recording
                       </>
                     ) : (
                       <>
-                        <Mic className="w-4 h-4 mr-2" />
+                        <Mic sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                         Start Recording
                       </>
                     )}
                   </Button>
                   {isRecording && (
-                    <div className="flex items-center gap-2 text-red-500">
-                      <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-                      <span className="text-sm">Recording...</span>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      color: "red.500"
+    }}>
+                      <div sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "red.500",
+      borderRadius: 9999px,
+      "animate-pulse": true
+    }} />
+                      <span sx={{
+      typography: body1
+    }}>Recording...</span>
                     </div>
                   )}
-                  <span className="text-sm text-muted-foreground">Or type your answer below</span>
+                  <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Or type your answer below</span>
                 </div>
 
                 {/* Answer Input */}
-                <div className="space-y-4">
-                  <label className="text-sm font-medium">Your Answer</label>
+                <div sx={{
+      "space-y-4": true
+    }}>
+                  <label sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>Your Answer</label>
                   <Textarea
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
                     placeholder="Type your answer here using the STAR method (Situation, Task, Action, Result)..."
-                    className="min-h-[150px] resize-none"
+                    sx={{
+      h: "150px",
+      "resize-none": true
+    }}
                   />
-                  <div className="flex gap-3">
+                  <div sx={{
+      display: "flex",
+      gap: 3
+    }}>
                     <Button
                       onClick={handleGenerateTips}
                       disabled={isGeneratingTips || !userAnswer.trim()}
-                      className="bg-primary hover:bg-primary/90"
+                      sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
                     >
                       {isGeneratingTips ? (
                         <>
-                          <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
+                          <Sparkles sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2,
+      "animate-pulse": true
+    }} />
                           Analyzing...
                         </>
                       ) : (
                         <>
-                          <Sparkles className="w-4 h-4 mr-2" />
+                          <Sparkles sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                           Get AI Feedback
                         </>
                       )}
@@ -319,9 +494,21 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
 
               {/* Sample Answer */}
               {showSampleAnswer && currentQuestion.sampleAnswer && (
-                <Card className="p-6 bg-green-500/5 border-green-500/20">
-                  <h3 className="font-semibold mb-3 text-green-700">Sample Answer</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
+                <Card sx={{
+      p: 6,
+      "bg-green-500/5": true,
+      "border-green-500/20": true
+    }}>
+                  <h3 sx={{
+      fontWeight: 600,
+      mb: 3,
+      color: "green.700"
+    }}>Sample Answer</h3>
+                  <p sx={{
+      typography: body1,
+      "leading-relaxed": true,
+      "text-muted-foreground": true
+    }}>
                     {currentQuestion.sampleAnswer}
                   </p>
                 </Card>
@@ -329,12 +516,32 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
 
               {/* AI Feedback (shown after analysis) */}
               {isGeneratingTips && (
-                <Card className="p-6 bg-primary/5 border-primary/20">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-                    <h3 className="font-semibold text-primary">AI Feedback</h3>
+                <Card sx={{
+      p: 6,
+      "bg-primary/5": true,
+      "border-primary/20": true
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      mb: 3
+    }}>
+                    <Sparkles sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-primary": true,
+      "animate-pulse": true
+    }} />
+                    <h3 sx={{
+      fontWeight: 600,
+      "text-primary": true
+    }}>AI Feedback</h3>
                   </div>
-                  <div className="space-y-2 text-sm">
+                  <div sx={{
+      "space-y-2": true,
+      typography: body1
+    }}>
                     <p>
                       • <strong>Structure:</strong> Good use of STAR method, clear sequence of
                       events
@@ -355,44 +562,98 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               )}
             </div>
             {/* Tips Sidebar */}
-            <div className="space-y-6">
-              <Card className="p-6">
-                <h3 className="font-semibold mb-4">Tips for this Question</h3>
-                <ul className="space-y-2">
+            <div sx={{
+      "space-y-6": true
+    }}>
+              <Card sx={{
+      p: 6
+    }}>
+                <h3 sx={{
+      fontWeight: 600,
+      mb: 4
+    }}>Tips for this Question</h3>
+                <ul sx={{
+      "space-y-2": true
+    }}>
                   {currentQuestion.tips.map((tip, index) => (
-                    <li key={index} className="text-sm flex items-start gap-2">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                    <li key={index} sx={{
+      typography: body1,
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 2
+    }}>
+                      <div sx={{
+      "w-1.5": true,
+      "h-1.5": true,
+      "bg-primary": true,
+      borderRadius: 9999px,
+      mt: 2,
+      flexShrink: 0
+    }} />
                       {tip}
                     </li>
                   ))}
                 </ul>
               </Card>
 
-              <Card className="p-6">
-                <h3 className="font-semibold mb-4">STAR Method</h3>
-                <div className="space-y-3">
+              <Card sx={{
+      p: 6
+    }}>
+                <h3 sx={{
+      fontWeight: 600,
+      mb: 4
+    }}>STAR Method</h3>
+                <div sx={{
+      "space-y-3": true
+    }}>
                   <div>
-                    <h4 className="font-medium text-sm">Situation</h4>
-                    <p className="text-xs text-muted-foreground">Set the context</p>
+                    <h4 sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>Situation</h4>
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>Set the context</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-sm">Task</h4>
-                    <p className="text-xs text-muted-foreground">Describe your responsibility</p>
+                    <h4 sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>Task</h4>
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>Describe your responsibility</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-sm">Action</h4>
-                    <p className="text-xs text-muted-foreground">Explain what you did</p>
+                    <h4 sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>Action</h4>
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>Explain what you did</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-sm">Result</h4>
-                    <p className="text-xs text-muted-foreground">Share the outcome</p>
+                    <h4 sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>Result</h4>
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>Share the outcome</p>
                   </div>
                 </div>
               </Card>
 
               <Button
                 variant="outlined"
-                className="w-full"
+                sx={{
+      width: "100%"
+    }}
                 onClick={() => setCurrentQuestion(null)}
               >
                 Choose Different Category

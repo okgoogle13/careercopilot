@@ -10,6 +10,9 @@ export default defineConfig({
     setupFiles: ['./src/test/setup.ts'],
     testTimeout: 10000,
     
+    // Use a single worker to avoid thread issues
+    threads: false,
+    
     // Test coverage
     coverage: {
       provider: 'v8',
