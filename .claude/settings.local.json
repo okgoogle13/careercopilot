@@ -180,7 +180,12 @@
       "Bash(yarn lint:*)",
       "Bash(gh pr create:*)",
       "Bash(git rm:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(npx ts-node:*)",
+      "Bash(node:*)",
+      "Bash(jq:*)",
+      "Bash(yarn test:*)",
+      "Bash(ulimit -n:*)"
     ]
   },
   "outputStyle": "default"

@@ -1,24 +1,31 @@
-import { useState } from 'react';
-import { Card } from './ui/card';
-import { Button } from './ui/button';
-import { Badge } from './ui/badge';
-import { Progress } from './ui/progress';
+import React, { useState } from 'react';
 import {
-  ArrowLeft,
+  Box,
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  LinearProgress,
+  Grid,
+  alpha,
+} from '@mui/material';
+import {
+  ArrowBack,
   Upload,
   CheckCircle,
-  AlertTriangle,
-  XCircle,
-  Eye,
+  Warning,
+  Cancel,
+  Visibility,
   Download,
   Check,
-  X,
-  Brain,
-  BarChart3,
-  Target,
-  Sparkles,
+  Close,
+  Psychology,
+  BarChart,
+  TrackChanges,
+  AutoAwesome,
   TrendingUp,
-} from 'lucide-react';
+} from '@mui/icons-material';
 
 interface ATSAnalysisDashboardProps {
   onBack: () => void;
@@ -59,21 +66,13 @@ const mockAnalysisResult: AnalysisResult = {
       name: 'Content Quality',
       score: 82,
       status: 'good',
-      suggestions: [
-        'Quantify client impact with numbers',
-        'Add more action verbs',
-        'Include recent volunteer work',
-      ],
+      suggestions: ['Quantify client impact with numbers', 'Add more action verbs', 'Include recent volunteer work'],
     },
     {
       name: 'ATS Compatibility',
       score: 83,
       status: 'good',
-      suggestions: [
-        'Use standard section headers',
-        'Reduce special characters',
-        'Add more relevant certifications',
-      ],
+      suggestions: ['Use standard section headers', 'Reduce special characters', 'Add more relevant certifications'],
     },
   ],
   keywordMatches: {
@@ -101,353 +100,530 @@ const mockAnalysisResult: AnalysisResult = {
   ],
 };
 
-export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardProps) {
+export const ATSAnalysisDashboard: React.FC<ATSAnalysisDashboardProps> = ({ onBack, onNext }) => {
   const [analysisResult] = useState<AnalysisResult>(mockAnalysisResult);
-  const [selectedProfile, setSelectedProfile] = useState(
-    'Community Support Worker - Nishant Dougall'
-  );
 
   const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-brand-primary';
-    if (score >= 60) return 'text-brand-secondary';
-    return 'text-error';
+    if (score >= 80) return 'primary.main';
+    if (score >= 60) return 'warning.main';
+    return 'error.main';
   };
 
-  const getScoreBg = (score: number) => {
-    if (score >= 80) return 'bg-primary/10 border-primary/20';
-    if (score >= 60) return 'bg-secondary/10 border-secondary/20';
-    return 'bg-error/10 border-error/20';
+  const getScoreBg = (score: number) => (theme: any) => {
+    if (score >= 80) return alpha(theme.palette.primary.main, 0.1);
+    if (score >= 60) return alpha(theme.palette.warning.main, 0.1);
+    return alpha(theme.palette.error.main, 0.1);
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'good':
-        return <CheckCircle className="w-4 h-4 text-brand-primary icon-interactive" />;
+        return <CheckCircle sx={{ fontSize: 16, color: '#A78BFA' }} />;
       case 'warning':
-        return <AlertTriangle className="w-4 h-4 text-brand-secondary icon-interactive" />;
+        return <Warning sx={{ fontSize: 16, color: '#FDE047' }} />;
       case 'poor':
-        return <XCircle className="w-4 h-4 text-error icon-interactive" />;
+        return <Cancel sx={{ fontSize: 16, color: '#FFB4AB' }} />;
       default:
         return null;
     }
   };
 
   return (
-    <div className="flex-1 p-8 space-y-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <Button
-            variant="ghost"
-            onClick={onBack}
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
-          </Button>
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">ATS Analysis</h1>
-            <p className="text-muted-foreground">AI-powered resume optimization insights</p>
-          </div>
-        </div>
-        <div className="flex gap-3">
-          <Button variant="outline" className="border-border/50">
-            <Upload className="w-4 h-4 mr-2" />
-            Upload Resume
-          </Button>
-          <Button variant="outline" className="border-border/50">
-            <Eye className="w-4 h-4 mr-2" />
-            View Original
-          </Button>
-          <Button variant="outline" className="border-border/50">
-            <Download className="w-4 h-4 mr-2" />
-            Download Report
-          </Button>
-          {onNext && (
-            <Button className="btn-primary-cta" onClick={onNext}>
-              Choose Template
+    <Box
+      sx={{
+        flex: 1,
+        p: { xs: 3, md: 6 },
+        bgcolor: 'background.default',
+        minHeight: '100vh',
+      }}
+    >
+      <Box sx={{ maxWidth: 1400, mx: 'auto', display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {/* Header */}
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+            <Button
+              variant="text"
+              startIcon={<ArrowBack sx={{ fontSize: 16 }} />}
+              onClick={onBack}
+              sx={{ color: 'text.secondary', textTransform: 'none', fontWeight: 600 }}
+            >
+              Back
             </Button>
-          )}
-        </div>
-      </div>
+            <Box>
+              <Typography variant="h3" sx={{ fontWeight: 700 }}>
+                ATS Analysis
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                AI-powered resume optimization insights
+              </Typography>
+            </Box>
+          </Box>
+          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            <Button variant="outlined" startIcon={<Upload sx={{ fontSize: 16 }} />}>
+              Upload Resume
+            </Button>
+            <Button variant="outlined" startIcon={<Visibility sx={{ fontSize: 16 }} />}>
+              View Original
+            </Button>
+            <Button variant="outlined" startIcon={<Download sx={{ fontSize: 16 }} />}>
+              Download Report
+            </Button>
+            {onNext && (
+              <Button variant="aurora" onClick={onNext}>
+                Choose Template
+              </Button>
+            )}
+          </Box>
+        </Box>
 
-      {/* Overall Score Hero Section */}
-      <Card className="card-aurora glass p-8 bg-gradient-to-br from-primary/15 via-tertiary/5 to-transparent">
-        <div className="flex items-center justify-between">
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="p-3 bg-primary/20 rounded-xl glow-primary">
-                <Brain className="w-6 h-6 text-brand-primary icon-interactive" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gradient-primary">
-                  AI Analysis Complete
-                </h3>
-                <p className="text-muted-foreground">
-                  Your resume has been optimized for ATS systems
-                </p>
-              </div>
-            </div>
+        {/* Overall Score Hero Section */}
+        <Card
+          variant="glass"
+          sx={{
+            p: 6,
+            background: (theme) =>
+              `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.15)}, ${alpha(
+                theme.palette.tertiary.main,
+                0.05
+              )})`,
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 4 }}>
+            <Box sx={{ flex: 1 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: (theme) => alpha(theme.palette.primary.main, 0.2),
+                    borderRadius: 3,
+                    boxShadow: (theme) => theme.customShadows.glowPrimary,
+                  }}
+                >
+                  <Psychology sx={{ fontSize: 24, color: '#A78BFA' }} />
+                </Box>
+                <Box>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      fontWeight: 600,
+                      background: (theme) =>
+                        `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    AI Analysis Complete
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Your resume has been optimized for ATS systems
+                  </Typography>
+                </Box>
+              </Box>
 
-            <div className="flex items-baseline gap-4">
-              <span
-                className="text-9xl font-bold text-brand-primary ats-score-pulse"
-                style={{ fontSize: '8rem', lineHeight: '0.9' }}
-              >
-                {analysisResult.overallScore}%
-              </span>
-              <span className="text-muted-foreground text-xl">ATS Score</span>
-            </div>
+              <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 2, mb: 3 }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontSize: { xs: '4rem', md: '8rem' },
+                    fontWeight: 700,
+                    lineHeight: 0.9,
+                    color: 'primary.main',
+                    animation: 'glow-pulse 2s ease-in-out infinite',
+                  }}
+                >
+                  {analysisResult.overallScore}%
+                </Typography>
+                <Typography variant="h6" color="text.secondary">
+                  ATS Score
+                </Typography>
+              </Box>
 
-            <div className="space-y-3 max-w-md">
-              <Progress value={analysisResult.overallScore} className="h-6" />
-              <p className="text-base text-muted-foreground">
+              <LinearProgress
+                variant="determinate"
+                value={analysisResult.overallScore}
+                sx={{
+                  height: 24,
+                  borderRadius: 3,
+                  mb: 2,
+                  bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                }}
+              />
+              <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 600 }}>
                 {analysisResult.overallScore >= 80
                   ? 'Excellent! Your resume is highly optimized for ATS systems.'
                   : analysisResult.overallScore >= 60
-                    ? 'Good foundation with room for strategic improvements.'
-                    : 'Needs optimization to pass ATS filtering effectively.'}
-              </p>
-            </div>
-          </div>
+                  ? 'Good foundation with room for strategic improvements.'
+                  : 'Needs optimization to pass ATS filtering effectively.'}
+              </Typography>
+            </Box>
 
-          <div className="text-center space-y-4">
-            <div className="relative">
-              <div
-                className={`w-48 h-48 rounded-full flex items-center justify-center border-4 ${getScoreBg(analysisResult.overallScore)} border`}
+            <Box sx={{ textAlign: 'center' }}>
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: 192,
+                  height: 192,
+                  borderRadius: '50%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  border: 4,
+                  borderColor: (theme) =>
+                    analysisResult.overallScore >= 80
+                      ? alpha(theme.palette.primary.main, 0.3)
+                      : analysisResult.overallScore >= 60
+                      ? alpha(theme.palette.warning.main, 0.3)
+                      : alpha(theme.palette.error.main, 0.3),
+                  bgcolor: getScoreBg(analysisResult.overallScore),
+                }}
               >
-                <div className="text-center">
-                  <BarChart3
-                    className={`w-16 h-16 ${getScoreColor(analysisResult.overallScore)} mx-auto mb-2 icon-interactive`}
-                  />
-                  <p className="text-base text-muted-foreground font-medium">Optimization</p>
-                </div>
-              </div>
-              <div className="absolute -top-2 -right-2 w-10 h-10 bg-gradient-to-r from-primary to-tertiary rounded-full flex items-center justify-center pulse-ai">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-            </div>
+                <Box sx={{ textAlign: 'center' }}>
+                  <BarChart sx={{ fontSize: 64, color: '#A78BFA', mb: 1 }} />
+                  <Typography variant="body2" color="text.secondary" sx={{ fontWeight: 600 }}>
+                    Optimization
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: -8,
+                    right: -8,
+                    width: 40,
+                    height: 40,
+                    borderRadius: '50%',
+                    background: (theme) =>
+                      `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    animation: 'glow-pulse 2s ease-in-out infinite',
+                  }}
+                >
+                  <AutoAwesome sx={{ fontSize: 20, color: 'white' }} />
+                </Box>
+              </Box>
+              <Chip
+                label="AI Analyzed"
+                sx={{
+                  mt: 2,
+                  bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                  color: 'primary.main',
+                  border: 1,
+                  borderColor: (theme) => alpha(theme.palette.primary.main, 0.2),
+                }}
+              />
+            </Box>
+          </Box>
+        </Card>
 
-            <Badge className="bg-primary/10 text-brand-primary border-primary/20 border">
-              AI Analyzed
-            </Badge>
-          </div>
-        </div>
-      </Card>
-
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Stats Overview */}
-        <div className="lg:col-span-1 space-y-6">
-          <Card className="card-aurora glass p-6">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Target className="w-4 h-4 text-brand-primary icon-interactive" />
-              <span className="text-gradient-primary">Keywords</span>
-            </h3>
-            <div className="space-y-4">
-              <div className="p-4 bg-primary/5 rounded-lg border border-primary/10">
-                <p className="font-medium text-foreground text-sm">{selectedProfile}</p>
-                <p className="text-xs text-muted-foreground mt-1">Last analyzed: 2 hours ago</p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="text-center p-3 bg-primary/5 rounded-lg border border-primary/10">
-                  <p className="text-lg font-bold text-brand-primary">
-                    {analysisResult.keywordMatches.matched.length}
-                  </p>
-                  <p className="text-xs text-muted-foreground">Matched</p>
-                </div>
-                <div className="text-center p-3 bg-error/5 rounded-lg border border-error/10">
-                  <p className="text-lg font-bold text-error">
-                    {analysisResult.keywordMatches.missing.length}
-                  </p>
-                  <p className="text-xs text-muted-foreground">Missing</p>
-                </div>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="card-aurora glass p-6">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-brand-tertiary icon-interactive" />
-              <span className="text-gradient-tertiary">Actionable Insights</span>
-            </h3>
-            <div className="space-y-3">
-              <Button
-                variant="outline"
-                className="w-full justify-start text-sm border-primary/20 hover:bg-primary/10"
-              >
-                <Brain className="w-4 h-4 mr-2 icon-interactive" />
-                Optimize for Job
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start text-sm border-secondary/20 hover:bg-secondary/10"
-              >
-                <Eye className="w-4 h-4 mr-2 icon-interactive" />
-                Generate Cover Letter
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start text-sm border-tertiary/20 hover:bg-tertiary/10"
-              >
-                <Download className="w-4 h-4 mr-2 icon-interactive" />
-                Export Optimized
-              </Button>
-            </div>
-          </Card>
-        </div>
-
-        {/* Detailed Analysis */}
-        <div className="lg:col-span-3 space-y-6">
-          <Card className="card-aurora glass p-6">
-            <h3 className="font-semibold mb-6 flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-brand-primary icon-interactive" />
-              <span className="text-gradient-primary">Category Breakdown</span>
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {analysisResult.categories.map((category, index) => (
-                <div key={index} className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      {getStatusIcon(category.status)}
-                      <span className="font-medium">{category.name}</span>
-                    </div>
-                    <Badge className={`${getScoreBg(category.score)} border font-semibold`}>
-                      {category.score}%
-                    </Badge>
-                  </div>
-                  <Progress value={category.score} className="h-2" />
-                  <div className="space-y-2">
-                    {category.suggestions.map((suggestion, suggestionIndex) => (
-                      <div key={suggestionIndex} className="flex items-start gap-2 text-sm">
-                        <div className="w-1 h-1 bg-brand-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-muted-foreground">{suggestion}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
-
-          <Card className="card-aurora glass p-6">
-            <h3 className="font-semibold mb-6 flex items-center gap-2">
-              <Target className="w-5 h-5 text-brand-primary icon-interactive" />
-              <span className="text-gradient-primary">Keyword Analysis</span>
-            </h3>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Matched Keywords */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 pb-3 border-b border-primary/20">
-                  <CheckCircle className="w-5 h-5 text-brand-primary icon-interactive" />
-                  <h4 className="font-medium text-brand-primary">
-                    Matched ({analysisResult.keywordMatches.matched.length})
-                  </h4>
-                </div>
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {analysisResult.keywordMatches.matched.map((keyword, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 p-3 rounded-lg bg-primary/5 border border-primary/10 hover:bg-primary/10 transition-colors"
+        <Grid container spacing={3}>
+          {/* Stats Overview */}
+          <Grid item xs={12} lg={3}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <Card variant="glass" sx={{ p: 3 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
+                  <TrackChanges sx={{ fontSize: 16, color: '#A78BFA' }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 600,
+                      background: (theme) =>
+                        `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    Keywords
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    p: 2,
+                    bgcolor: (theme) => alpha(theme.palette.primary.main, 0.05),
+                    borderRadius: 2,
+                    border: 1,
+                    borderColor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                    mb: 2,
+                  }}
+                >
+                  <Typography variant="body2" sx={{ fontWeight: 600, mb: 0.5 }}>
+                    Community Support Worker
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary">
+                    Last analyzed: 2 hours ago
+                  </Typography>
+                </Box>
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        p: 2,
+                        bgcolor: (theme) => alpha(theme.palette.primary.main, 0.05),
+                        borderRadius: 2,
+                        border: 1,
+                        borderColor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                      }}
                     >
-                      <Check className="w-4 h-4 text-brand-primary flex-shrink-0 icon-interactive" />
-                      <span className="text-brand-primary font-medium text-sm">{keyword}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Missing Keywords */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 pb-3 border-b border-error/20">
-                  <XCircle className="w-5 h-5 text-error icon-interactive" />
-                  <h4 className="font-medium text-brand-secondary">
-                    Missing ({analysisResult.keywordMatches.missing.length})
-                  </h4>
-                </div>
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {analysisResult.keywordMatches.missing.map((keyword, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center gap-2 p-3 rounded-lg bg-error/5 border border-error/10 hover:bg-error/10 transition-colors"
+                      <Typography variant="h6" sx={{ fontWeight: 700, color: 'primary.main' }}>
+                        {analysisResult.keywordMatches.matched.length}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        Matched
+                      </Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Box
+                      sx={{
+                        textAlign: 'center',
+                        p: 2,
+                        bgcolor: (theme) => alpha(theme.palette.error.main, 0.05),
+                        borderRadius: 2,
+                        border: 1,
+                        borderColor: (theme) => alpha(theme.palette.error.main, 0.1),
+                      }}
                     >
-                      <X className="w-4 h-4 text-error flex-shrink-0 icon-interactive" />
-                      <span className="text-error font-medium text-sm">{keyword}</span>
-                    </div>
+                      <Typography variant="h6" sx={{ fontWeight: 700, color: 'error.main' }}>
+                        {analysisResult.keywordMatches.missing.length}
+                      </Typography>
+                      <Typography variant="caption" color="text.secondary">
+                        Missing
+                      </Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Card>
+
+              <Card variant="glass" sx={{ p: 3 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
+                  <TrendingUp sx={{ fontSize: 16, color: '#F472B6' }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 600,
+                      color: 'tertiary.main',
+                    }}
+                  >
+                    Actions
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    startIcon={<Psychology sx={{ fontSize: 16 }} />}
+                    sx={{
+                      justifyContent: 'flex-start',
+                      textTransform: 'none',
+                      borderColor: (theme) => alpha(theme.palette.primary.main, 0.2),
+                    }}
+                  >
+                    Optimize for Job
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    startIcon={<Visibility sx={{ fontSize: 16 }} />}
+                    sx={{
+                      justifyContent: 'flex-start',
+                      textTransform: 'none',
+                      borderColor: (theme) => alpha(theme.palette.secondary.main, 0.2),
+                    }}
+                  >
+                    Generate Cover Letter
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    fullWidth
+                    startIcon={<Download sx={{ fontSize: 16 }} />}
+                    sx={{
+                      justifyContent: 'flex-start',
+                      textTransform: 'none',
+                      borderColor: (theme) => alpha(theme.palette.tertiary.main, 0.2),
+                    }}
+                  >
+                    Export Optimized
+                  </Button>
+                </Box>
+              </Card>
+            </Box>
+          </Grid>
+
+          {/* Detailed Analysis */}
+          <Grid item xs={12} lg={9}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <Card variant="glass" sx={{ p: 4 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 4 }}>
+                  <BarChart sx={{ fontSize: 20, color: '#A78BFA' }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 600,
+                      background: (theme) =>
+                        `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    Category Breakdown
+                  </Typography>
+                </Box>
+                <Grid container spacing={4}>
+                  {analysisResult.categories.map((category, index) => (
+                    <Grid item xs={12} md={6} key={index}>
+                      <Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                            {getStatusIcon(category.status)}
+                            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+                              {category.name}
+                            </Typography>
+                          </Box>
+                          <Chip
+                            label={`${category.score}%`}
+                            sx={{
+                              bgcolor: getScoreBg(category.score),
+                              color: getScoreColor(category.score),
+                              fontWeight: 700,
+                            }}
+                          />
+                        </Box>
+                        <LinearProgress
+                          variant="determinate"
+                          value={category.score}
+                          sx={{
+                            height: 8,
+                            borderRadius: 4,
+                            mb: 2,
+                            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                          }}
+                        />
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                          {category.suggestions.map((suggestion, suggestionIndex) => (
+                            <Box key={suggestionIndex} sx={{ display: 'flex', alignItems: 'flex-start', gap: 1.5 }}>
+                              <Box
+                                sx={{
+                                  width: 4,
+                                  height: 4,
+                                  bgcolor: 'primary.main',
+                                  borderRadius: '50%',
+                                  mt: 1,
+                                  flexShrink: 0,
+                                }}
+                              />
+                              <Typography variant="body2" color="text.secondary">
+                                {suggestion}
+                              </Typography>
+                            </Box>
+                          ))}
+                        </Box>
+                      </Box>
+                    </Grid>
                   ))}
-                </div>
-              </div>
-            </div>
-          </Card>
+                </Grid>
+              </Card>
 
-          <Card className="card-aurora glass p-6">
-            <h3 className="font-semibold mb-6 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-gradient-aurora icon-interactive" />
-              <span className="text-gradient-aurora">AI Optimization Suggestions</span>
-            </h3>
-            <div className="space-y-4">
-              <div className="p-5 bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 rounded-xl">
-                <div className="flex items-start gap-4">
-                  <div className="p-2 bg-primary/20 rounded-lg">
-                    <CheckCircle className="w-5 h-5 text-brand-primary icon-interactive" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h4 className="font-semibold text-brand-primary">High Impact</h4>
-                      <Badge className="bg-primary/10 text-brand-primary border-primary/20 border text-xs">
-                        +15 points
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Add "Peer Support" and "Recovery Programs" to your skills section as they
-                      appear frequently in community support job postings.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <Card variant="glass" sx={{ p: 4 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 4 }}>
+                  <TrackChanges sx={{ fontSize: 20, color: '#A78BFA' }} />
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: 600,
+                      background: (theme) =>
+                        `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`,
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    Keyword Analysis
+                  </Typography>
+                </Box>
+                <Grid container spacing={4}>
+                  {/* Matched Keywords */}
+                  <Grid item xs={12} lg={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3, pb: 2, borderBottom: 1, borderColor: (theme) => alpha(theme.palette.primary.main, 0.2) }}>
+                      <CheckCircle sx={{ fontSize: 20, color: '#A78BFA' }} />
+                      <Typography variant="h6" sx={{ fontWeight: 600, color: 'primary.main' }}>
+                        Matched ({analysisResult.keywordMatches.matched.length})
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, maxHeight: 320, overflowY: 'auto' }}>
+                      {analysisResult.keywordMatches.matched.map((keyword, index) => (
+                        <Box
+                          key={index}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.5,
+                            p: 2,
+                            borderRadius: 2,
+                            bgcolor: (theme) => alpha(theme.palette.primary.main, 0.05),
+                            border: 1,
+                            borderColor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                            transition: 'all 0.3s',
+                            '&:hover': {
+                              bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                            },
+                          }}
+                        >
+                          <Check sx={{ fontSize: 16, color: '#A78BFA', flexShrink: 0 }} />
+                          <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
+                            {keyword}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  </Grid>
 
-              <div className="p-5 bg-gradient-to-r from-secondary/10 to-secondary/5 border border-secondary/20 rounded-xl">
-                <div className="flex items-start gap-4">
-                  <div className="p-2 bg-secondary/20 rounded-lg">
-                    <AlertTriangle className="w-5 h-5 text-brand-secondary icon-interactive" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h4 className="font-semibold text-brand-secondary">Medium Impact</h4>
-                      <Badge className="bg-secondary/10 text-brand-secondary border-secondary/20 border text-xs">
-                        +8 points
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Quantify your client impact with specific numbers and outcomes to improve
-                      content quality score.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-5 bg-gradient-to-r from-tertiary/10 to-tertiary/5 border border-tertiary/20 rounded-xl">
-                <div className="flex items-start gap-4">
-                  <div className="p-2 bg-tertiary/20 rounded-lg">
-                    <Eye className="w-5 h-5 text-brand-tertiary icon-interactive" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <h4 className="font-semibold text-brand-tertiary">Format Enhancement</h4>
-                      <Badge className="bg-tertiary/10 text-brand-tertiary border-tertiary/20 border text-xs">
-                        +3 points
-                      </Badge>
-                    </div>
-                    <p className="text-sm text-muted-foreground">
-                      Consider highlighting any mental health first aid or crisis intervention
-                      certifications more prominently.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-      </div>
-    </div>
+                  {/* Missing Keywords */}
+                  <Grid item xs={12} lg={6}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3, pb: 2, borderBottom: 1, borderColor: (theme) => alpha(theme.palette.error.main, 0.2) }}>
+                      <Cancel sx={{ fontSize: 20, color: '#FFB4AB' }} />
+                      <Typography variant="h6" sx={{ fontWeight: 600, color: 'error.main' }}>
+                        Missing ({analysisResult.keywordMatches.missing.length})
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, maxHeight: 320, overflowY: 'auto' }}>
+                      {analysisResult.keywordMatches.missing.map((keyword, index) => (
+                        <Box
+                          key={index}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1.5,
+                            p: 2,
+                            borderRadius: 2,
+                            bgcolor: (theme) => alpha(theme.palette.error.main, 0.05),
+                            border: 1,
+                            borderColor: (theme) => alpha(theme.palette.error.main, 0.1),
+                            transition: 'all 0.3s',
+                            '&:hover': {
+                              bgcolor: (theme) => alpha(theme.palette.error.main, 0.1),
+                            },
+                          }}
+                        >
+                          <Close sx={{ fontSize: 16, color: '#FFB4AB', flexShrink: 0 }} />
+                          <Typography variant="body2" sx={{ fontWeight: 600, color: 'error.main' }}>
+                            {keyword}
+                          </Typography>
+                        </Box>
+                      ))}
+                    </Box>
+                  </Grid>
+                </Grid>
+              </Card>
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
-}
+};
+
+export default ATSAnalysisDashboard;

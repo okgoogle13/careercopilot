@@ -19,8 +19,9 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-import type { ContextTags } from '../api/smartIngestionService';
-import { smartIngestionService } from '../api/smartIngestionService';
+import { smartIngestionService } from '../services/smartIngestionService';
+import type { ContextTags } from '../services/smartIngestionService';
+import { isApiError } from '../types/api';
 
 interface SmartUploadModalProps {
   open: boolean;
@@ -54,15 +55,23 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
     try {
       // Upload and get tag suggestions
       const response = await smartIngestionService.uploadAndTag(selectedFile);
-      setSuggestedTags(response.suggestedTags);
+      
+      if (isApiError(response)) {
+        setError(response.message || 'Failed to process document');
+        setStep('upload');
+        return;
+      }
 
-      // Pre-select all suggested tags
-      const tagLabels = Object.keys(response.suggestedTags)
-        .filter((key) => response.suggestedTags[key as keyof ContextTags] > 0.5)
+      setSuggestedTags(response.data.suggestedTags);
+
+      // Pre-select all suggested tags with confidence > 0.5
+      const tagLabels = Object.keys(response.data.suggestedTags)
+        .filter((key) => response.data.suggestedTags[key as keyof ContextTags] > 0.5)
         .map((key) => key.replace(/_/g, ' ').toUpperCase());
       setSelectedTags(tagLabels);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to process document');
+    } catch (error) {
+      console.error('Error processing document:', error);
+      setError('An unexpected error occurred while processing the document');
       setStep('upload');
     } finally {
       setIsLoading(false);
@@ -76,21 +85,27 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
     setStep('saving');
 
     try {
-      await smartIngestionService.extractAndSave({
+      const response = await smartIngestionService.extractAndSave({
         file,
         selectedTags,
         fileName: file.name,
       });
 
+      if (isApiError(response)) {
+        throw new Error(response.message || 'Failed to save document');
+      }
+
       onUploadComplete({
         fileName: file.name,
         tags: selectedTags,
+        ...response.data, // Include any additional data from the response
       });
 
       // Reset state
       handleClose();
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to save document');
+    } catch (error) {
+      console.error('Error saving document:', error);
+      setError(error instanceof Error ? error.message : 'Failed to save document');
       setStep('tagging');
     } finally {
       setIsLoading(false);

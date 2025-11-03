@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
+import {
+  Box,
+  Typography,
+  Button,
+  Grid,
+  Card,
+  alpha,
+} from '@mui/material';
+import {
+  Description,
+  TrackChanges,
+  Psychology,
+  TrendingUp,
+  AutoAwesome,
+  Add,
+  AccessTime,
+  CheckCircle,
+} from '@mui/icons-material';
 import { WelcomeBanner } from './main/WelcomeBanner';
 import { ActionCard } from './main/ActionCard';
 import { DocumentCard } from './document/DocumentCard';
 import { OnboardingWizard, ProfileCompletionCard } from './onboarding';
 import { useProfileCompletion } from '../hooks';
-import {
-  FileText,
-  Target,
-  Brain,
-  TrendingUp,
-  Sparkles,
-  Plus,
-  Clock,
-  CheckCircle,
-} from 'lucide-react';
-import { Button } from './ui/button';
 
 interface DashboardViewProps {
   onCreateDocument?: () => void;
@@ -84,12 +91,12 @@ const profileData = {
   ],
 };
 
-export function DashboardView({
+export const DashboardView: React.FC<DashboardViewProps> = ({
   onCreateDocument,
   onViewAnalytics,
   onNavigateToOpportunities,
   onNavigateToApplications,
-}: DashboardViewProps) {
+}) => {
   const { profile, onboardingStatus, isLoading, completionPercentage, calculateCompletion } =
     useProfileCompletion();
 
@@ -108,8 +115,14 @@ export function DashboardView({
   };
 
   return (
-    <div className="flex-1 overflow-auto" style={{ background: 'var(--color-background)' }}>
-      <div className="max-w-7xl mx-auto p-6 space-y-8">
+    <Box
+      sx={{
+        flex: 1,
+        overflowY: 'auto',
+        bgcolor: 'background.default',
+      }}
+    >
+      <Box sx={{ maxWidth: 1400, mx: 'auto', p: { xs: 3, md: 6 }, display: 'flex', flexDirection: 'column', gap: 6 }}>
         {/* Welcome Banner */}
         <WelcomeBanner
           userName="Nishant"
@@ -120,242 +133,285 @@ export function DashboardView({
 
         {/* Profile Completion Card */}
         {completionPercentage < 100 && (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
+          <Grid container spacing={3}>
+            <Grid item xs={12} lg={8}>
               <ProfileCompletionCard
                 completion={profileCompletion}
                 onEditProfile={handleEditProfile}
               />
-            </div>
-          </div>
+            </Grid>
+          </Grid>
         )}
 
         {/* Quick Actions Grid */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2
-              className="font-semibold"
-              style={{
-                color: 'var(--on-surface)',
-                fontSize: '1.25rem',
-              }}
-            >
+        <Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+            <Typography variant="h5" sx={{ fontWeight: 600 }}>
               Quick Actions
-            </h2>
-          </div>
+            </Typography>
+          </Box>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Grid container spacing={3}>
             {/* Create Document Action */}
-            <ActionCard
-              title="Create New Document"
-              description="Generate an AI-optimized resume or cover letter tailored to your target role"
-              icon={FileText}
-              variant="primary"
-              status="available"
-              priority="high"
-              estimatedTime="5-10 min"
-              actionText="Start Creating"
-              onClick={onCreateDocument}
-              aiPowered={true}
-              badge={{
-                text: 'Most Popular',
-                variant: 'default',
-              }}
-            />
+            <Grid item xs={12} md={6} lg={4}>
+              <ActionCard
+                title="Create New Document"
+                description="Generate an AI-optimized resume or cover letter tailored to your target role"
+                icon={Description}
+                variant="primary"
+                status="available"
+                priority="high"
+                estimatedTime="5-10 min"
+                actionText="Start Creating"
+                onClick={onCreateDocument}
+                aiPowered={true}
+                badge={{
+                  text: 'Most Popular',
+                  variant: 'default',
+                }}
+              />
+            </Grid>
 
             {/* Find Opportunities */}
-            <ActionCard
-              title="Find Job Opportunities"
-              description="Discover jobs that match your skills and get AI-powered insights on each role"
-              icon={Target}
-              variant="tertiary"
-              status="available"
-              priority="medium"
-              estimatedTime="3-5 min"
-              actionText="Browse Jobs"
-              onClick={onNavigateToOpportunities}
-              aiPowered={true}
-            />
+            <Grid item xs={12} md={6} lg={4}>
+              <ActionCard
+                title="Find Job Opportunities"
+                description="Discover jobs that match your skills and get AI-powered insights on each role"
+                icon={TrackChanges}
+                variant="tertiary"
+                status="available"
+                priority="medium"
+                estimatedTime="3-5 min"
+                actionText="Browse Jobs"
+                onClick={onNavigateToOpportunities}
+                aiPowered={true}
+              />
+            </Grid>
 
             {/* Track Applications */}
-            <ActionCard
-              title="Track Applications"
-              description="Monitor your job applications, interview schedules, and follow-up actions"
-              icon={TrendingUp}
-              variant="secondary"
-              status="available"
-              priority="medium"
-              actionText="View Tracker"
-              onClick={onNavigateToApplications}
-              metadata={[
-                { label: 'Active', value: 8 },
-                { label: 'Pending', value: 3 },
-              ]}
-            />
-          </div>
-        </div>
+            <Grid item xs={12} md={6} lg={4}>
+              <ActionCard
+                title="Track Applications"
+                description="Monitor your job applications, interview schedules, and follow-up actions"
+                icon={TrendingUp}
+                variant="secondary"
+                status="available"
+                priority="medium"
+                actionText="View Tracker"
+                onClick={onNavigateToApplications}
+                metadata={[
+                  { label: 'Active', value: 8 },
+                  { label: 'Pending', value: 3 },
+                ]}
+              />
+            </Grid>
+          </Grid>
+        </Box>
 
         {/* Recent Documents */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h2
-              className="font-semibold"
-              style={{
-                color: 'var(--on-surface)',
-                fontSize: '1.25rem',
-              }}
-            >
+        <Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+            <Typography variant="h5" sx={{ fontWeight: 600 }}>
               Recent Documents
-            </h2>
+            </Typography>
             <Button
-              variant="ghost"
-              size="sm"
+              variant="text"
+              startIcon={<Add sx={{ fontSize: 16 }} />}
               onClick={onCreateDocument}
-              className="transition-all duration-300"
-              style={{
-                color: 'var(--primary)',
+              sx={{
+                color: 'primary.main',
+                textTransform: 'none',
+                fontWeight: 600,
               }}
             >
-              <Plus className="w-4 h-4 mr-2" />
               New Document
             </Button>
-          </div>
+          </Box>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Grid container spacing={3}>
             {mockDocuments.map((doc) => (
-              <DocumentCard
-                key={doc.id}
-                document={doc.document}
-                onEdit={() => console.log('Edit', doc.id)}
-                onDelete={() => console.log('Delete', doc.id)}
-                onDownload={() => console.log('Download', doc.id)}
-                onView={() => console.log('View', doc.id)}
-              />
+              <Grid item xs={12} md={6} lg={4} key={doc.id}>
+                <DocumentCard
+                  document={doc.document}
+                  onEdit={() => console.log('Edit', doc.id)}
+                  onDelete={() => console.log('Delete', doc.id)}
+                  onDownload={() => console.log('Download', doc.id)}
+                  onView={() => console.log('View', doc.id)}
+                />
+              </Grid>
             ))}
-          </div>
-        </div>
+          </Grid>
+        </Box>
 
-        {/* Job Search Status Card */}
-        <div
-          className="rounded-2xl p-6 border transition-all duration-300 hover:border-opacity-60"
-          style={{
-            background: 'rgba(30, 30, 35, 0.7)',
-            backdropFilter: 'blur(24px)',
-            borderColor: 'rgba(167, 139, 250, 0.2)',
-            borderWidth: '2px',
+        {/* Job Search Intelligence Card */}
+        <Card
+          variant="glass"
+          sx={{
+            p: 4,
+            background: (theme) =>
+              `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.05)}, ${alpha(
+                theme.palette.tertiary.main,
+                0.05
+              )})`,
+            border: 2,
+            borderColor: (theme) => alpha(theme.palette.primary.main, 0.2),
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            '&:hover': {
+              borderColor: (theme) => alpha(theme.palette.primary.main, 0.4),
+            },
           }}
         >
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div
-                className="p-3 rounded-xl"
-                style={{
-                  background:
-                    'linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(244, 114, 182, 0.2))',
-                  boxShadow: '0 0 24px rgba(167, 139, 250, 0.3)',
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 4 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Box
+                sx={{
+                  p: 2,
+                  borderRadius: 3,
+                  background: (theme) =>
+                    `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.2)}, ${alpha(
+                      theme.palette.tertiary.main,
+                      0.2
+                    )})`,
+                  boxShadow: (theme) => theme.customShadows.glowAurora,
                 }}
               >
-                <Brain className="w-6 h-6" style={{ color: 'var(--primary)' }} />
-              </div>
-              <div>
-                <h3 className="font-semibold" style={{ color: 'var(--on-surface)' }}>
+                <Psychology sx={{ fontSize: 24, color: '#A78BFA' }} />
+              </Box>
+              <Box>
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Job Search Intelligence
-                </h3>
-                <p className="text-sm" style={{ color: 'var(--on-surface-variant)' }}>
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
                   AI-powered insights and recommendations
-                </p>
-              </div>
-            </div>
-            <Sparkles className="w-5 h-5" style={{ color: 'var(--tertiary)' }} />
-          </div>
+                </Typography>
+              </Box>
+            </Box>
+            <AutoAwesome sx={{ fontSize: 20, color: '#F472B6' }} />
+          </Box>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div
-              className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
-              style={{
-                background: 'var(--surface-container)',
-                borderColor: 'rgba(167, 139, 250, 0.2)',
-              }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <Target className="w-4 h-4" style={{ color: 'var(--primary)' }} />
-                <span className="text-sm" style={{ color: 'var(--on-surface-variant)' }}>
-                  Applications
-                </span>
-              </div>
-              <p className="font-semibold text-2xl" style={{ color: 'var(--on-surface)' }}>
-                {profileData.activeApplications}
-              </p>
-              <p className="text-xs" style={{ color: 'var(--on-surface-variant)' }}>
-                Active this month
-              </p>
-            </div>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card
+                sx={{
+                  p: 3,
+                  borderRadius: 3,
+                  bgcolor: 'surface.container',
+                  border: 1,
+                  borderColor: (theme) => alpha(theme.palette.primary.main, 0.2),
+                  transition: 'all 0.3s',
+                  '&:hover': {
+                    transform: 'scale(1.05)',
+                    boxShadow: (theme) => theme.customShadows.glowPrimary,
+                  },
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <TrackChanges sx={{ fontSize: 16, color: '#A78BFA' }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Applications
+                  </Typography>
+                </Box>
+                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                  {profileData.activeApplications}
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  Active this month
+                </Typography>
+              </Card>
+            </Grid>
 
-            <div
-              className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
-              style={{
-                background: 'var(--surface-container)',
-                borderColor: 'rgba(244, 114, 182, 0.2)',
-              }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <Clock className="w-4 h-4" style={{ color: 'var(--tertiary)' }} />
-                <span className="text-sm" style={{ color: 'var(--on-surface-variant)' }}>
-                  Interviews
-                </span>
-              </div>
-              <p className="font-semibold text-2xl" style={{ color: 'var(--on-surface)' }}>
-                {profileData.interviewsScheduled}
-              </p>
-              <p className="text-xs" style={{ color: 'var(--on-surface-variant)' }}>
-                Scheduled
-              </p>
-            </div>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card
+                sx={{
+                  p: 3,
+                  borderRadius: 3,
+                  bgcolor: 'surface.container',
+                  border: 1,
+                  borderColor: (theme) => alpha(theme.palette.tertiary.main, 0.2),
+                  transition: 'all 0.3s',
+                  '&:hover': {
+                    transform: 'scale(1.05)',
+                    boxShadow: (theme) => theme.customShadows.glowTertiary,
+                  },
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <AccessTime sx={{ fontSize: 16, color: '#F472B6' }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Interviews
+                  </Typography>
+                </Box>
+                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                  {profileData.interviewsScheduled}
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  Scheduled
+                </Typography>
+              </Card>
+            </Grid>
 
-            <div
-              className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
-              style={{
-                background: 'var(--surface-container)',
-                borderColor: 'rgba(167, 139, 250, 0.2)',
-              }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <CheckCircle className="w-4 h-4" style={{ color: 'var(--primary)' }} />
-                <span className="text-sm" style={{ color: 'var(--on-surface-variant)' }}>
-                  Response Rate
-                </span>
-              </div>
-              <p className="font-semibold text-2xl" style={{ color: 'var(--on-surface)' }}>
-                67%
-              </p>
-              <p className="text-xs" style={{ color: 'var(--on-surface-variant)' }}>
-                +12% this week
-              </p>
-            </div>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card
+                sx={{
+                  p: 3,
+                  borderRadius: 3,
+                  bgcolor: 'surface.container',
+                  border: 1,
+                  borderColor: (theme) => alpha(theme.palette.primary.main, 0.2),
+                  transition: 'all 0.3s',
+                  '&:hover': {
+                    transform: 'scale(1.05)',
+                    boxShadow: (theme) => theme.customShadows.glowPrimary,
+                  },
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <CheckCircle sx={{ fontSize: 16, color: '#A78BFA' }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Response Rate
+                  </Typography>
+                </Box>
+                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                  67%
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  +12% this week
+                </Typography>
+              </Card>
+            </Grid>
 
-            <div
-              className="p-4 rounded-xl border transition-all duration-300 hover:scale-105"
-              style={{
-                background: 'var(--surface-container)',
-                borderColor: 'rgba(244, 114, 182, 0.2)',
-              }}
-            >
-              <div className="flex items-center gap-2 mb-1">
-                <TrendingUp className="w-4 h-4" style={{ color: 'var(--tertiary)' }} />
-                <span className="text-sm" style={{ color: 'var(--on-surface-variant)' }}>
-                  Avg ATS Score
-                </span>
-              </div>
-              <p className="font-semibold text-2xl" style={{ color: 'var(--on-surface)' }}>
-                85%
-              </p>
-              <p className="text-xs" style={{ color: 'var(--on-surface-variant)' }}>
-                Excellent
-              </p>
-            </div>
-          </div>
-        </div>
+            <Grid item xs={12} sm={6} md={3}>
+              <Card
+                sx={{
+                  p: 3,
+                  borderRadius: 3,
+                  bgcolor: 'surface.container',
+                  border: 1,
+                  borderColor: (theme) => alpha(theme.palette.tertiary.main, 0.2),
+                  transition: 'all 0.3s',
+                  '&:hover': {
+                    transform: 'scale(1.05)',
+                    boxShadow: (theme) => theme.customShadows.glowTertiary,
+                  },
+                }}
+              >
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <TrendingUp sx={{ fontSize: 16, color: '#F472B6' }} />
+                  <Typography variant="body2" color="text.secondary">
+                    Avg ATS Score
+                  </Typography>
+                </Box>
+                <Typography variant="h4" sx={{ fontWeight: 700, mb: 0.5 }}>
+                  85%
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  Excellent
+                </Typography>
+              </Card>
+            </Grid>
+          </Grid>
+        </Card>
 
         {/* Onboarding Modal */}
         <OnboardingWizard
@@ -364,7 +420,9 @@ export function DashboardView({
           onComplete={handleOnboardingComplete}
           skipAllowed={!onboardingStatus.isFirstTimeUser}
         />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
-}
+};
+
+export default DashboardView;

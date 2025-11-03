@@ -1,9 +1,19 @@
 import React from 'react';
-import { Sparkles, TrendingUp, Target, Clock } from 'lucide-react';
-import { M3Card, M3CardContent } from '../ui/m3-card';
-import { M3Button } from '../ui/m3-button';
-import { Badge } from '../ui/badge';
-import { formatRelativeTime } from '../ui/utils';
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  Box,
+  Chip,
+  alpha,
+} from '@mui/material';
+import {
+  AutoAwesome,
+  TrendingUp,
+  TrackChanges,
+  AccessTime,
+} from '@mui/icons-material';
 
 interface WelcomeBannerProps {
   userName?: string;
@@ -17,17 +27,28 @@ interface WelcomeBannerProps {
   onCreateDocument?: () => void;
   onViewAnalytics?: () => void;
   onStartTour?: () => void;
-  className?: string;
 }
 
-export function WelcomeBanner({
+const formatRelativeTime = (date: Date | string): string => {
+  const now = new Date();
+  const then = typeof date === 'string' ? new Date(date) : date;
+  const diffMs = now.getTime() - then.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return 'today';
+  if (diffDays === 1) return '1 day ago';
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  return `${Math.floor(diffDays / 30)} months ago`;
+};
+
+export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
   userName = 'User',
   profileData,
   onCreateDocument,
   onViewAnalytics,
   onStartTour,
-  className,
-}: WelcomeBannerProps) {
+}) => {
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return 'Good morning';
@@ -56,167 +77,373 @@ export function WelcomeBanner({
   };
 
   return (
-    <M3Card variant="default" className={`overflow-hidden ${className}`}>
-      <M3CardContent className="p-0">
-        {/* Main Banner Section */}
-        <div className="relative bg-gradient-to-br from-primary via-primary-container to-secondary p-8 text-white">
+    <Card
+      sx={{
+        overflow: 'hidden',
+        borderRadius: 4,
+        background: 'transparent',
+        backgroundImage: 'none',
+        boxShadow: 'none',
+      }}
+    >
+      <CardContent sx={{ p: 0 }}>
+        {/* Main Banner Section with Gradient */}
+        <Box
+          sx={{
+            position: 'relative',
+            background: (theme) =>
+              `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark}, ${theme.palette.secondary.main})`,
+            p: 6,
+            color: 'white',
+            overflow: 'hidden',
+          }}
+        >
           {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-4 right-4 w-32 h-32 bg-white rounded-full blur-3xl" />
-            <div className="absolute bottom-4 left-4 w-24 h-24 bg-white rounded-full blur-2xl" />
-          </div>
+          <Box
+            sx={{
+              position: 'absolute',
+              inset: 0,
+              opacity: 0.1,
+              pointerEvents: 'none',
+            }}
+          >
+            <Box
+              sx={{
+                position: 'absolute',
+                top: 16,
+                right: 16,
+                width: 256,
+                height: 256,
+                bgcolor: 'white',
+                borderRadius: '50%',
+                filter: 'blur(96px)',
+              }}
+            />
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: 16,
+                left: 16,
+                width: 192,
+                height: 192,
+                bgcolor: 'white',
+                borderRadius: '50%',
+                filter: 'blur(64px)',
+              }}
+            />
+          </Box>
 
-          <div className="relative z-10">
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          {/* Content */}
+          <Box
+            sx={{
+              position: 'relative',
+              zIndex: 1,
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', lg: 'row' },
+                alignItems: { lg: 'center' },
+                justifyContent: { lg: 'space-between' },
+                gap: 4,
+              }}
+            >
               {/* Welcome Content */}
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <Sparkles className="w-5 h-5 text-white" />
-                  <span className="text-sm font-medium opacity-90">
+              <Box sx={{ flex: 1 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                  <AutoAwesome sx={{ fontSize: 20, color: 'white' }} />
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      opacity: 0.9,
+                      fontWeight: 500,
+                      color: 'white',
+                    }}
+                  >
                     {getGreeting()}, {userName}!
-                  </span>
-                </div>
+                  </Typography>
+                </Box>
 
-                <h1 className="text-2xl md:text-3xl font-semibold mb-3 text-white">
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontWeight: 600,
+                    mb: 2,
+                    color: 'white',
+                    fontSize: { xs: '1.75rem', md: '2.125rem' },
+                  }}
+                >
                   {getMotivationalMessage()}
-                </h1>
+                </Typography>
 
-                <p className="text-white/80 text-base max-w-2xl">
-                  Your AI-powered career companion is here to help you land your dream job. Let's
-                  review your progress and plan your next moves.
-                </p>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'rgba(255, 255, 255, 0.8)',
+                    maxWidth: 800,
+                    mb: 3,
+                  }}
+                >
+                  Your AI-powered career companion is here to help you land your dream job.
+                  Let's review your progress and plan your next moves.
+                </Typography>
 
                 {/* Quick Stats */}
                 {profileData && (
-                  <div className="flex flex-wrap gap-4 mt-6">
-                    <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
-                      <Target className="w-4 h-4 text-white" />
-                      <span className="text-sm font-medium text-white">
-                        {profileData.activeApplications} Active Applications
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
-                      <TrendingUp className="w-4 h-4 text-white" />
-                      <span className="text-sm font-medium text-white">
-                        {profileData.totalApplications} Total Applications
-                      </span>
-                    </div>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 4 }}>
+                    <Chip
+                      icon={<TrackChanges sx={{ fontSize: 16, color: 'white' }} />}
+                      label={`${profileData.activeApplications} Active Applications`}
+                      sx={{
+                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                        color: 'white',
+                        fontWeight: 500,
+                        backdropFilter: 'blur(8px)',
+                        '& .MuiChip-icon': {
+                          color: 'white',
+                        },
+                      }}
+                    />
+                    <Chip
+                      icon={<TrendingUp sx={{ fontSize: 16, color: 'white' }} />}
+                      label={`${profileData.totalApplications} Total Applications`}
+                      sx={{
+                        bgcolor: 'rgba(255, 255, 255, 0.1)',
+                        color: 'white',
+                        fontWeight: 500,
+                        backdropFilter: 'blur(8px)',
+                        '& .MuiChip-icon': {
+                          color: 'white',
+                        },
+                      }}
+                    />
                     {profileData.interviewsScheduled > 0 && (
-                      <div className="flex items-center gap-2 bg-white/10 rounded-lg px-3 py-2">
-                        <Clock className="w-4 h-4 text-white" />
-                        <span className="text-sm font-medium text-white">
-                          {profileData.interviewsScheduled} Interviews Scheduled
-                        </span>
-                      </div>
+                      <Chip
+                        icon={<AccessTime sx={{ fontSize: 16, color: 'white' }} />}
+                        label={`${profileData.interviewsScheduled} Interviews Scheduled`}
+                        sx={{
+                          bgcolor: 'rgba(255, 255, 255, 0.1)',
+                          color: 'white',
+                          fontWeight: 500,
+                          backdropFilter: 'blur(8px)',
+                          '& .MuiChip-icon': {
+                            color: 'white',
+                          },
+                        }}
+                      />
                     )}
-                  </div>
+                  </Box>
                 )}
-              </div>
+              </Box>
 
               {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 lg:flex-col">
-                <M3Button
-                  variant="filled"
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'row', sm: 'row', lg: 'column' },
+                  gap: 2,
+                  minWidth: { lg: 240 },
+                }}
+              >
+                <Button
+                  variant="contained"
                   size="large"
+                  startIcon={<AutoAwesome sx={{ fontSize: 20 }} />}
                   onClick={onCreateDocument}
-                  className="bg-white text-primary hover:bg-white/90"
-                  icon={<Sparkles className="w-5 h-5" />}
+                  sx={{
+                    bgcolor: 'white',
+                    color: 'primary.main',
+                    flex: { xs: 1, lg: 'initial' },
+                    py: 1.5,
+                    px: 3,
+                    fontWeight: 600,
+                    '&:hover': {
+                      bgcolor: 'rgba(255, 255, 255, 0.9)',
+                      transform: 'translateY(-2px)',
+                    },
+                  }}
+                  fullWidth
                 >
                   Create New Document
-                </M3Button>
-                <M3Button
+                </Button>
+                <Button
                   variant="outlined"
                   size="large"
+                  startIcon={<TrendingUp sx={{ fontSize: 20 }} />}
                   onClick={onViewAnalytics}
-                  className="border-white text-white hover:bg-white/10"
-                  icon={<TrendingUp className="w-5 h-5" />}
+                  sx={{
+                    borderColor: 'white',
+                    color: 'white',
+                    flex: { xs: 1, lg: 'initial' },
+                    py: 1.5,
+                    px: 3,
+                    fontWeight: 600,
+                    borderWidth: 2,
+                    '&:hover': {
+                      borderColor: 'white',
+                      borderWidth: 2,
+                      bgcolor: 'rgba(255, 255, 255, 0.1)',
+                      transform: 'translateY(-2px)',
+                    },
+                  }}
+                  fullWidth
                 >
                   View Analytics
-                </M3Button>
-              </div>
-            </div>
-          </div>
-        </div>
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
 
         {/* Recent Activity & Achievements */}
-        <div className="p-6 bg-surface-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Box
+          sx={{
+            p: 4,
+            bgcolor: 'surface.container',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' },
+              gap: 4,
+            }}
+          >
             {/* Recent Activity */}
-            <div>
-              <h3 className="font-medium text-foreground mb-3 flex items-center gap-2">
-                <Clock className="w-4 h-4 text-primary" />
-                Recent Activity
-              </h3>
-              <div className="space-y-2">
+            <Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                <AccessTime sx={{ fontSize: 16, color: '#A78BFA' }} />
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Recent Activity
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 {profileData?.lastActivity ? (
-                  <div className="text-sm text-muted-foreground">
+                  <Typography variant="body2" color="text.secondary">
                     Last active {formatRelativeTime(profileData.lastActivity)}
-                  </div>
+                  </Typography>
                 ) : (
-                  <div className="text-sm text-muted-foreground">
+                  <Typography variant="body2" color="text.secondary">
                     Welcome back! Ready to make progress today?
-                  </div>
+                  </Typography>
                 )}
-                <div className="flex gap-2">
-                  <Badge variant="secondary" className="text-xs">
-                    Resume updated recently
-                  </Badge>
-                  <Badge variant="secondary" className="text-xs">
-                    New job matches available
-                  </Badge>
-                </div>
-              </div>
-            </div>
+                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mt: 1 }}>
+                  <Chip label="Resume updated recently" size="small" />
+                  <Chip label="New job matches available" size="small" />
+                </Box>
+              </Box>
+            </Box>
 
             {/* Recent Achievements */}
-            <div>
-              <h3 className="font-medium text-foreground mb-3 flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-tertiary" />
-                Recent Achievements
-              </h3>
-              <div className="space-y-2">
+            <Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                <AutoAwesome sx={{ fontSize: 16, color: '#F472B6' }} />
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Recent Achievements
+                </Typography>
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
                 {profileData?.recentAchievements ? (
                   profileData.recentAchievements.map((achievement, index) => (
-                    <div
-                      key={index}
-                      className="text-sm text-muted-foreground flex items-center gap-2"
-                    >
-                      <div className="w-2 h-2 bg-tertiary rounded-full" />
-                      {achievement}
-                    </div>
+                    <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                      <Box
+                        sx={{
+                          width: 8,
+                          height: 8,
+                          bgcolor: 'tertiary.main',
+                          borderRadius: '50%',
+                        }}
+                      />
+                      <Typography variant="body2" color="text.secondary">
+                        {achievement}
+                      </Typography>
+                    </Box>
                   ))
                 ) : (
-                  <div className="space-y-2">
-                    <div className="text-sm text-muted-foreground flex items-center gap-2">
-                      <div className="w-2 h-2 bg-primary rounded-full" />
-                      Profile setup completed
-                    </div>
-                    <div className="text-sm text-muted-foreground flex items-center gap-2">
-                      <div className="w-2 h-2 bg-secondary rounded-full" />
-                      First resume created
-                    </div>
-                  </div>
+                  <>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                      <Box
+                        sx={{
+                          width: 8,
+                          height: 8,
+                          bgcolor: 'primary.main',
+                          borderRadius: '50%',
+                        }}
+                      />
+                      <Typography variant="body2" color="text.secondary">
+                        Profile setup completed
+                      </Typography>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                      <Box
+                        sx={{
+                          width: 8,
+                          height: 8,
+                          bgcolor: 'secondary.main',
+                          borderRadius: '50%',
+                        }}
+                      />
+                      <Typography variant="body2" color="text.secondary">
+                        First resume created
+                      </Typography>
+                    </Box>
+                  </>
                 )}
-              </div>
-            </div>
-          </div>
+              </Box>
+            </Box>
+          </Box>
 
           {/* Quick Actions */}
-          <div className="mt-6 pt-6 border-t border-outline-variant">
-            <div className="flex flex-wrap gap-3">
-              <M3Button variant="text" size="small" onClick={onStartTour} className="text-primary">
+          <Box
+            sx={{
+              mt: 4,
+              pt: 4,
+              borderTop: 1,
+              borderColor: 'outline.variant',
+            }}
+          >
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+              <Button
+                variant="text"
+                size="small"
+                onClick={onStartTour}
+                sx={{
+                  color: 'primary.main',
+                  textTransform: 'none',
+                  fontWeight: 600,
+                }}
+              >
                 Take a tour
-              </M3Button>
-              <M3Button variant="text" size="small" className="text-muted-foreground">
+              </Button>
+              <Button
+                variant="text"
+                size="small"
+                sx={{
+                  color: 'text.secondary',
+                  textTransform: 'none',
+                  fontWeight: 600,
+                }}
+              >
                 View tips
-              </M3Button>
-              <M3Button variant="text" size="small" className="text-muted-foreground">
+              </Button>
+              <Button
+                variant="text"
+                size="small"
+                sx={{
+                  color: 'text.secondary',
+                  textTransform: 'none',
+                  fontWeight: 600,
+                }}
+              >
                 Settings
-              </M3Button>
-            </div>
-          </div>
-        </div>
-      </M3CardContent>
-    </M3Card>
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </CardContent>
+    </Card>
   );
-}
+};
+
+export default WelcomeBanner;
