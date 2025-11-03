@@ -23,8 +23,9 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-import type { ApplicationPackage } from '../api/workflowService';
-import { workflowService } from '../api/workflowService';
+import { workflowService } from '../services/workflowService';
+import type { ApplicationPackage } from '../services/workflowService';
+import { ApiResponse, isApiError } from '../types/api';
 
 interface ApplicationGeneratorModalProps {
   open: boolean;
@@ -57,16 +58,22 @@ export const ApplicationGeneratorModal: React.FC<ApplicationGeneratorModalProps>
 
     try {
       // Generate the application package
-      const result = await workflowService.generateApplicationPackage({
+      const response = await workflowService.generateApplicationPackage({
         jobTitle,
         jobDescription,
         companyName,
       });
 
-      setApplicationPackage(result);
+      if (isApiError(response)) {
+        setError(response.message || 'Failed to generate application package');
+        return;
+      }
+
+      setApplicationPackage(response.data);
       setActiveStep(2); // Skip to review step
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to generate application package');
+    } catch (error) {
+      console.error('Error generating application package:', error);
+      setError('Failed to generate application package. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -86,13 +93,21 @@ export const ApplicationGeneratorModal: React.FC<ApplicationGeneratorModalProps>
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setProgress(66);
 
+      // In a real app, you would call an API endpoint here
+      // For example:
+      // const response = await applicationService.submitApplication(applicationPackage);
+      // if (isApiError(response)) {
+      //   throw new Error(response.message);
+      // }
+
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setProgress(100);
 
       onSuccess?.(applicationPackage);
       setTimeout(() => onClose(), 1500);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to submit application');
+    } catch (error) {
+      console.error('Error submitting application:', error);
+      setError(error instanceof Error ? error.message : 'Failed to submit application');
       setActiveStep(2);
     } finally {
       setIsLoading(false);

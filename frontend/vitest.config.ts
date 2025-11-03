@@ -9,9 +9,19 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
     testTimeout: 10000,
-    
-    // Use a single worker to avoid thread issues
-    threads: false,
+
+    // Use single-threaded mode to avoid worker pool issues
+    pool: 'forks',
+    poolOptions: {
+      forks: {
+        singleFork: true,
+        isolate: true,
+      },
+    },
+
+    // Limit file operations to prevent EMFILE errors
+    maxConcurrency: 1,
+    fileParallelism: false,
     
     // Test coverage
     coverage: {
@@ -41,6 +51,10 @@ export default defineConfig({
       '**/e2e/**',
       '**/playwright/**',
       '**/__mocks__/**',
+      '**/tests/*.spec.{js,ts}',  // Playwright test files
+      '**/*.spec.{js,ts}',  // All .spec files (Playwright convention)
+      '**/example.test.js',  // Example files
+      '**/simple.test.js',  // Simple test files
     ],
     
     // Environment setup

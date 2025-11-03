@@ -4,102 +4,149 @@
  */
 
 import type { ReactNode } from 'react';
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import type { UserProfile, AuthResponse } from '../api/authService';
-import { authService } from '../api/authService';
+import { 
+  AuthUser, 
+  LoginCredentials, 
+  RegisterData, 
+  login as authLogin, 
+  register as authRegister, 
+  logout as authLogout, 
+  refreshToken, 
+  getCurrentUserProfile,
+  getCurrentUser
+} from '../services/authService';
+import { ApiResponse } from '../types/api';
 
 interface AuthContextType {
-  user: UserProfile | null;
+  user: AuthUser | null;
   token: string | null;
+  refreshToken: string | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (email: string, password: string) => Promise<AuthResponse>;
-  register: (email: string, password: string, displayName: string) => Promise<AuthResponse>;
-  logout: () => Promise<void>;
-  refreshToken: () => Promise<void>;
-  updateProfile: (updates: any) => Promise<UserProfile>;
+  login: (credentials: LoginCredentials) => Promise<ApiResponse<{ user: AuthUser; accessToken: string; refreshToken: string }>>;
+  register: (data: RegisterData) => Promise<ApiResponse<{ user: AuthUser }>>;
+  logout: () => Promise<ApiResponse<null>>;
+  refreshAccessToken: () => Promise<ApiResponse<{ accessToken: string; refreshToken: string }>>;
+  updateProfile: (updates: Partial<AuthUser>) => Promise<ApiResponse<{ user: AuthUser }>>;
+  initializeAuth: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<UserProfile | null>(null);
-  const [token, setToken] = useState<string | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [token, setToken] = useState<string | null>(() => localStorage.getItem('access_token'));
+  const [refreshToken, setRefreshToken] = useState<string | null>(() => localStorage.getItem('refresh_token'));
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
-  // Initialize from localStorage and verify token
+  // Save tokens to localStorage when they change
   useEffect(() => {
-    const initializeAuth = async () => {
-      try {
-        const storedToken = localStorage.getItem('auth_token');
-        if (storedToken) {
-          setToken(storedToken);
-          // Verify token is valid by fetching current user
-          const currentUser = await authService.getCurrentUser();
-          setUser(currentUser);
-        }
-      } catch (error) {
-        // Token invalid or expired, clear storage
-        localStorage.removeItem('auth_token');
-        localStorage.removeItem('refresh_token');
-        setToken(null);
-        setUser(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+    if (token) {
+      localStorage.setItem('access_token', token);
+    } else {
+      localStorage.removeItem('access_token');
+    }
+  }, [token]);
 
-    initializeAuth();
+  useEffect(() => {
+    if (refreshToken) {
+      localStorage.setItem('refresh_token', refreshToken);
+    } else {
+      localStorage.removeItem('refresh_token');
+    }
+  }, [refreshToken]);
+
+  // Initialize authentication state
+  const initializeAuth = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const storedToken = localStorage.getItem('access_token');
+      if (storedToken) {
+        // Verify token is valid by fetching current user profile
+        const response = await getCurrentUserProfile();
+        setUser(response.data.user);
+        setToken(storedToken);
+      }
+    } catch (error) {
+      console.error('Failed to initialize auth:', error);
+      // Token might be expired, try to refresh it
+      const storedRefreshToken = localStorage.getItem('refresh_token');
+      if (storedRefreshToken) {
+        try {
+          const { data } = await refreshToken();
+          setToken(data.accessToken);
+          setRefreshToken(data.refreshToken);
+          const response = await getCurrentUserProfile();
+          setUser(response.data.user);
+        } catch (refreshError) {
+          console.error('Failed to refresh token:', refreshError);
+          // Clear invalid tokens
+          setToken(null);
+          setRefreshToken(null);
+          setUser(null);
+        }
+      }
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
-  const login = async (email: string, password: string): Promise<AuthResponse> => {
+  // Initialize auth on mount
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
+
+  const login = async (credentials: LoginCredentials) => {
     setIsLoading(true);
     try {
-      const response = await authService.login({ email, password });
-      setToken(response.token);
-      setUser(response.user);
+      const response = await authLogin(credentials);
+      setToken(response.data.accessToken);
+      setRefreshToken(response.data.refreshToken);
+      setUser(response.data.user);
       return response;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const register = async (
-    email: string,
-    password: string,
-    displayName: string
-  ): Promise<AuthResponse> => {
+  const register = async (data: RegisterData) => {
     setIsLoading(true);
     try {
-      const response = await authService.register({
-        email,
-        password,
-        displayName,
-      });
-      setToken(response.token);
-      setUser(response.user);
+      const response = await authRegister(data);
+      // Optionally log in the user after registration
+      if (response.data.user) {
+        setUser(response.data.user);
+      }
       return response;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const logout = async (): Promise<void> => {
+  const logout = async () => {
     setIsLoading(true);
     try {
-      await authService.logout();
+      const response = await authLogout();
       setToken(null);
+      setRefreshToken(null);
       setUser(null);
+      navigate('/login');
+      return response;
     } finally {
       setIsLoading(false);
     }
   };
 
-  const refreshToken = async (): Promise<void> => {
+  const refreshAccessToken = async () => {
     try {
-      const response = await authService.refreshToken();
-      setToken(response.token);
+      const refreshResponse = await authRefreshToken();
+      setToken(refreshResponse.data.accessToken);
+      setRefreshToken(refreshResponse.data.refreshToken);
+      return refreshResponse;
     } catch (error) {
       // Refresh failed, logout user
       await logout();
@@ -107,13 +154,15 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  const updateProfile = async (updates: any): Promise<UserProfile> => {
+  const updateProfile = async (updates: Partial<AuthUser>) => {
     try {
-      const updated = await authService.updateUserProfile(updates);
-      setUser(updated);
-      return updated;
+      // This would call your profile update endpoint
+      // const response = await profileService.updateProfile(updates);
+      // setUser({ ...user, ...updates } as AuthUser);
+      // return response;
+      throw new Error('Update profile not implemented');
     } catch (error) {
-      console.error('Profile update error:', error);
+      console.error('Failed to update profile:', error);
       throw error;
     }
   };
@@ -123,16 +172,18 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       value={{
         user,
         token,
+        refreshToken,
         isLoading,
-        isAuthenticated: !!token,
+        isAuthenticated: !!user && !!token,
         login,
         register,
         logout,
-        refreshToken,
+        refreshAccessToken,
         updateProfile,
+        initializeAuth,
       }}
     >
-      {children}
+      {!isLoading && children}
     </AuthContext.Provider>
   );
 };
@@ -143,4 +194,16 @@ export const useAuth = (): AuthContextType => {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
+};
+
+// Helper hook to check if user has required roles
+// Example usage: const hasAdminAccess = useHasRole(['admin']);
+export const useHasRole = (requiredRoles: string[] = []): boolean => {
+  const { user } = useAuth();
+  
+  if (!user || !requiredRoles.length) return false;
+  
+  // Assuming user.roles is an array of role strings
+  const userRoles = user.roles || [];
+  return requiredRoles.some(role => userRoles.includes(role));
 };
