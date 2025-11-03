@@ -30,8 +30,9 @@ import {
 } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
-import type { Notification } from '../api/notificationService';
-import { notificationService } from '../api/notificationService';
+import { notificationService } from '../services/notificationService';
+import type { Notification } from '../services/notificationService';
+import { isApiError } from '../types/api';
 
 export const NotificationCenter: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
@@ -44,13 +45,21 @@ export const NotificationCenter: React.FC = () => {
     const fetchNotifications = async () => {
       setIsLoading(true);
       try {
-        const data = await notificationService.getNotifications();
-        setNotifications(data);
+        const notificationsResponse = await notificationService.getNotifications();
+        if (!isApiError(notificationsResponse)) {
+          setNotifications(notificationsResponse.data);
+        } else {
+          console.error('Failed to fetch notifications:', notificationsResponse.message);
+        }
 
-        const count = await notificationService.getUnreadCount();
-        setUnreadCount(count.unreadCount ?? 0);
+        const countResponse = await notificationService.getUnreadCount();
+        if (!isApiError(countResponse)) {
+          setUnreadCount(countResponse.data.count);
+        } else {
+          console.error('Failed to fetch unread count:', countResponse.message);
+        }
       } catch (error) {
-        console.error('Failed to fetch notifications:', error);
+        console.error('Error fetching notifications:', error);
       } finally {
         setIsLoading(false);
       }
@@ -71,25 +80,33 @@ export const NotificationCenter: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const handleMarkAsRead = async (notification: Notification) => {
+  const handleMarkAsRead = async (id: string) => {
     try {
-      await notificationService.markAsRead(notification.id);
-      setNotifications((prev) =>
-        prev.map((n) => (n.id === notification.id ? { ...n, read: true } : n))
-      );
-      setUnreadCount((prev) => Math.max(0, prev - 1));
+      const response = await notificationService.markAsRead(id);
+      if (!isApiError(response)) {
+        setNotifications((prev) =>
+          prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+        );
+        setUnreadCount((prev) => Math.max(0, prev - 1));
+      } else {
+        console.error('Failed to mark notification as read:', response.message);
+      }
     } catch (error) {
-      console.error('Failed to mark notification as read:', error);
+      console.error('Error marking notification as read:', error);
     }
   };
 
   const handleMarkAllAsRead = async () => {
     try {
-      await notificationService.markAllAsRead();
-      setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-      setUnreadCount(0);
+      const response = await notificationService.markAllAsRead();
+      if (!isApiError(response)) {
+        setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+        setUnreadCount(0);
+      } else {
+        console.error('Failed to mark all notifications as read:', response.message);
+      }
     } catch (error) {
-      console.error('Failed to mark all as read:', error);
+      console.error('Error marking all notifications as read:', error);
     }
   };
 

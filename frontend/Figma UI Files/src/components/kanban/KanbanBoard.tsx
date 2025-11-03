@@ -1,21 +1,28 @@
-import React, { useState, useRef } from 'react';
-import { Card } from '../ui/card';
-import { Button } from '../ui/button';
-import { Badge } from '../ui/badge';
-import { Avatar } from '../ui/avatar';
+import React, { useState } from 'react';
 import {
-  Plus,
-  Building2,
-  Calendar,
-  DollarSign,
-  MapPin,
-  MoreVertical,
-  Briefcase,
-  Clock,
+  Box,
+  Typography,
+  Button,
+  Card,
+  Chip,
+  Avatar,
+  IconButton,
+  alpha,
+} from '@mui/material';
+import type { SvgIconComponent } from '@mui/icons-material';
+import {
+  Add,
+  Business,
+  CalendarMonth,
+  AttachMoney,
+  LocationOn,
+  MoreVert,
+  Work,
+  AccessTime,
   CheckCircle,
-  XCircle,
-  AlertCircle,
-} from 'lucide-react';
+  Cancel,
+  Warning,
+} from '@mui/icons-material';
 
 interface ApplicationCard {
   id: string;
@@ -36,7 +43,7 @@ interface KanbanColumn {
   status: ApplicationCard['status'];
   cards: ApplicationCard[];
   color: string;
-  icon: React.ComponentType<any>;
+  icon: SvgIconComponent;
 }
 
 const mockApplications: ApplicationCard[] = [
@@ -91,13 +98,13 @@ const ApplicationCardComponent: React.FC<{
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case 'high':
-        return 'bg-brand-tertiary text-brand-on-tertiary';
+        return { bgcolor: 'tertiary.main', color: 'white' };
       case 'medium':
-        return 'bg-brand-primary text-brand-on-primary';
+        return { bgcolor: 'primary.main', color: 'white' };
       case 'low':
-        return 'bg-brand-secondary text-brand-on-secondary';
+        return { bgcolor: 'secondary.main', color: 'white' };
       default:
-        return 'bg-surface-container text-on-surface';
+        return { bgcolor: 'surface.container', color: 'text.primary' };
     }
   };
 
@@ -106,69 +113,143 @@ const ApplicationCardComponent: React.FC<{
   };
 
   return (
-    <div
-      className={`
-        p-4 cursor-grab active:cursor-grabbing transition-all duration-300
-        card-aurora hover:card-aurora rounded-lg border hover:shadow-lg
-        ${isDragging ? 'opacity-50 rotate-2 scale-105' : ''}
-      `}
+    <Card
       draggable
       onDragStart={(e) => onDragStart(e, card.id)}
       onClick={onClick}
-      style={{ cursor: 'pointer' }}
+      sx={{
+        p: 3,
+        cursor: 'grab',
+        transition: 'all 0.3s ease',
+        borderRadius: 3,
+        border: 2,
+        borderColor: (theme) => alpha(theme.palette.primary.main, 0.1),
+        opacity: isDragging ? 0.5 : 1,
+        transform: isDragging ? 'rotate(2deg) scale(1.05)' : 'none',
+        '&:active': {
+          cursor: 'grabbing',
+        },
+        '&:hover': {
+          boxShadow: (theme) => theme.customShadows.glowAurora,
+          transform: 'translateY(-4px)',
+          borderColor: (theme) => alpha(theme.palette.primary.main, 0.3),
+        },
+      }}
     >
-      <div className="space-y-3">
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
         {/* Header */}
-        <div className="flex items-start justify-between">
-          <div className="flex items-start gap-3 flex-1">
-            <Avatar className="w-10 h-10 bg-surface-container-high">
-              <div className="w-full h-full flex items-center justify-center text-sm font-medium text-on-surface">
-                {getCompanyAvatar(card.company)}
-              </div>
+        <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, flex: 1 }}>
+            <Avatar
+              sx={{
+                width: 40,
+                height: 40,
+                bgcolor: 'surface.containerHigh',
+                color: 'text.primary',
+                fontSize: '0.875rem',
+                fontWeight: 500,
+              }}
+            >
+              {getCompanyAvatar(card.company)}
             </Avatar>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-medium text-on-surface truncate mb-1">{card.jobTitle}</h3>
-              <p className="text-sm text-on-surface-variant flex items-center gap-1">
-                <Building2 className="w-3 h-3" />
-                {card.company}
-              </p>
-            </div>
-          </div>
-          <Button variant="ghost" size="sm" className="h-6 w-6 p-0 shrink-0">
-            <MoreVertical className="w-4 h-4" />
-          </Button>
-        </div>
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Typography
+                variant="subtitle1"
+                sx={{
+                  fontWeight: 500,
+                  mb: 0.5,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {card.jobTitle}
+              </Typography>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                <Business sx={{ fontSize: 12, color: 'text.secondary' }} />
+                <Typography variant="body2" color="text.secondary">
+                  {card.company}
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          <IconButton size="small" sx={{ flexShrink: 0 }}>
+            <MoreVert sx={{ fontSize: 16 }} />
+          </IconButton>
+        </Box>
 
         {/* Details */}
-        <div className="space-y-2 text-sm text-on-surface-variant">
-          <div className="flex items-center gap-2">
-            <MapPin className="w-3 h-3" />
-            <span className="truncate">{card.location}</span>
-          </div>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <LocationOn sx={{ fontSize: 12, color: 'text.secondary' }} />
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+            >
+              {card.location}
+            </Typography>
+          </Box>
           {card.salary && (
-            <div className="flex items-center gap-2">
-              <DollarSign className="w-3 h-3" />
-              <span>{card.salary}</span>
-            </div>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+              <AttachMoney sx={{ fontSize: 12, color: 'text.secondary' }} />
+              <Typography variant="body2" color="text.secondary">
+                {card.salary}
+              </Typography>
+            </Box>
           )}
-          <div className="flex items-center gap-2">
-            <Calendar className="w-3 h-3" />
-            <span>Applied {new Date(card.appliedDate).toLocaleDateString()}</span>
-          </div>
-        </div>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+            <CalendarMonth sx={{ fontSize: 12, color: 'text.secondary' }} />
+            <Typography variant="body2" color="text.secondary">
+              Applied {new Date(card.appliedDate).toLocaleDateString()}
+            </Typography>
+          </Box>
+        </Box>
 
         {/* Footer */}
-        <div className="flex items-center justify-between pt-2">
-          <Badge variant="secondary" className={`text-xs ${getPriorityColor(card.priority)}`}>
-            {card.priority.toUpperCase()} PRIORITY
-          </Badge>
-          <div className="flex gap-1">
-            <div className="w-2 h-2 rounded-full bg-brand-primary opacity-60"></div>
-            <div className="w-2 h-2 rounded-full bg-brand-tertiary opacity-40"></div>
-          </div>
-        </div>
-      </div>
-    </div>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            pt: 1,
+            borderTop: 1,
+            borderColor: 'divider',
+          }}
+        >
+          <Chip
+            label={`${card.priority.toUpperCase()} PRIORITY`}
+            size="small"
+            sx={{
+              fontSize: '0.625rem',
+              fontWeight: 600,
+              height: 24,
+              ...getPriorityColor(card.priority),
+            }}
+          />
+          <Box sx={{ display: 'flex', gap: 0.5 }}>
+            <Box
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                bgcolor: 'primary.main',
+                opacity: 0.6,
+              }}
+            />
+            <Box
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                bgcolor: 'tertiary.main',
+                opacity: 0.4,
+              }}
+            />
+          </Box>
+        </Box>
+      </Box>
+    </Card>
   );
 };
 
@@ -199,60 +280,111 @@ const KanbanColumn: React.FC<{
 
   const IconComponent = column.icon;
 
+  const getColumnColor = (color: string) => {
+    const colorMap: Record<string, string> = {
+      'bg-brand-secondary': 'secondary.main',
+      'bg-brand-primary': 'primary.main',
+      'bg-aurora-tertiary': 'tertiary.main',
+      'bg-brand-error': 'error.main',
+    };
+    return colorMap[color] || 'primary.main';
+  };
+
   return (
-    <div className="flex flex-col h-full min-w-80">
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', minWidth: 320 }}>
       {/* Column Header */}
-      <div className="flex items-center justify-between p-4 bg-surface-container border border-outline-variant rounded-lg mb-4">
-        <div className="flex items-center gap-3">
-          <div className={`p-2 rounded-lg ${column.color}`}>
-            <IconComponent className="w-4 h-4 text-white" />
-          </div>
-          <div>
-            <h3 className="font-medium text-on-surface">{column.title}</h3>
-            <p className="text-sm text-on-surface-variant">
-              {column.cards.length} application{column.cards.length !== 1 ? 's' : ''}
-            </p>
-          </div>
-        </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onAddCard(column.id)}
-          className="h-8 w-8 p-0 hover:bg-surface-container-high"
-        >
-          <Plus className="w-4 h-4" />
-        </Button>
-      </div>
+      <Card
+        sx={{
+          p: 2,
+          mb: 3,
+          bgcolor: 'surface.container',
+          border: 1,
+          borderColor: 'outline.variant',
+          borderRadius: 3,
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Box
+              sx={{
+                p: 1.5,
+                borderRadius: 2,
+                bgcolor: getColumnColor(column.color),
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <IconComponent sx={{ fontSize: 16, color: 'white' }} />
+            </Box>
+            <Box>
+              <Typography variant="subtitle1" sx={{ fontWeight: 500 }}>
+                {column.title}
+              </Typography>
+              <Typography variant="caption" color="text.secondary">
+                {column.cards.length} application{column.cards.length !== 1 ? 's' : ''}
+              </Typography>
+            </Box>
+          </Box>
+          <IconButton size="small" onClick={() => onAddCard(column.id)}>
+            <Add sx={{ fontSize: 16 }} />
+          </IconButton>
+        </Box>
+      </Card>
 
       {/* Drop Zone */}
-      <div
-        className={`
-          flex-1 p-2 rounded-lg border-2 border-dashed transition-all duration-200
-          ${
-            isDragOver
-              ? 'border-brand-primary bg-brand-primary/10'
-              : 'border-outline-variant bg-surface-container-lowest/50'
-          }
-        `}
+      <Box
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
+        sx={{
+          flex: 1,
+          p: 1.5,
+          borderRadius: 3,
+          border: 2,
+          borderStyle: 'dashed',
+          borderColor: isDragOver ? 'primary.main' : 'outline.variant',
+          bgcolor: isDragOver
+            ? (theme) => alpha(theme.palette.primary.main, 0.1)
+            : (theme) => alpha(theme.palette.surface.containerLowest, 0.5),
+          transition: 'all 0.2s ease',
+        }}
       >
-        <div className="space-y-3">
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           {column.cards.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <IconComponent className="w-12 h-12 text-on-surface-variant/40 mb-3" />
-              <p className="text-sm text-on-surface-variant mb-2">No applications</p>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                py: 8,
+                textAlign: 'center',
+              }}
+            >
+              <IconComponent
+                sx={{
+                  fontSize: 48,
+                  color: (theme) => alpha(theme.palette.text.secondary, 0.4),
+                  mb: 2,
+                }}
+              />
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 1.5 }}>
+                No applications
+              </Typography>
               <Button
-                variant="outline"
-                size="sm"
+                variant="outlined"
+                size="small"
+                startIcon={<Add sx={{ fontSize: 12 }} />}
                 onClick={() => onAddCard(column.id)}
-                className="btn-gradient text-xs"
+                sx={{
+                  fontSize: '0.75rem',
+                  textTransform: 'none',
+                }}
               >
-                <Plus className="w-3 h-3 mr-1" />
                 Add Application
               </Button>
-            </div>
+            </Box>
           ) : (
             column.cards.map((card) => (
               <ApplicationCardComponent
@@ -266,9 +398,9 @@ const KanbanColumn: React.FC<{
               />
             ))
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
@@ -295,7 +427,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
       status: 'applied',
       cards: applications.filter((app) => app.status === 'applied'),
       color: 'bg-brand-secondary',
-      icon: Briefcase,
+      icon: Work,
     },
     {
       id: 'interviewing',
@@ -303,7 +435,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
       status: 'interviewing',
       cards: applications.filter((app) => app.status === 'interviewing'),
       color: 'bg-brand-primary',
-      icon: Clock,
+      icon: AccessTime,
     },
     {
       id: 'offer',
@@ -319,7 +451,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
       status: 'rejected',
       cards: applications.filter((app) => app.status === 'rejected'),
       color: 'bg-brand-error',
-      icon: XCircle,
+      icon: Cancel,
     },
   ]);
 
@@ -332,7 +464,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
         status: 'applied',
         cards: applications.filter((app) => app.status === 'applied'),
         color: 'bg-brand-secondary',
-        icon: Briefcase,
+        icon: Work,
       },
       {
         id: 'interviewing',
@@ -340,7 +472,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
         status: 'interviewing',
         cards: applications.filter((app) => app.status === 'interviewing'),
         color: 'bg-brand-primary',
-        icon: Clock,
+        icon: AccessTime,
       },
       {
         id: 'offer',
@@ -356,7 +488,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
         status: 'rejected',
         cards: applications.filter((app) => app.status === 'rejected'),
         color: 'bg-brand-error',
-        icon: XCircle,
+        icon: Cancel,
       },
     ]);
   }, [applications]);
@@ -406,46 +538,92 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
   const totalApplications = columns.reduce((sum, col) => sum + col.cards.length, 0);
 
   return (
-    <div className={`min-h-screen bg-surface ${className}`}>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        bgcolor: 'background.default',
+      }}
+      className={className}
+    >
       {/* Header */}
-      <div className="sticky top-0 z-10 bg-surface/80 backdrop-blur-lg border-b border-outline-variant">
-        <div className="p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-2xl font-medium text-on-surface mb-2">Application Tracker</h1>
-              <p className="text-on-surface-variant">
+      <Box
+        sx={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 10,
+          bgcolor: (theme) => alpha(theme.palette.background.default, 0.8),
+          backdropFilter: 'blur(16px)',
+          borderBottom: 1,
+          borderColor: 'outline.variant',
+        }}
+      >
+        <Box sx={{ p: { xs: 3, md: 4 } }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 3 }}>
+            <Box>
+              <Typography variant="h4" sx={{ fontWeight: 500, mb: 1 }}>
+                Application Tracker
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
                 Manage your job applications across different stages
-              </p>
-            </div>
+              </Typography>
+            </Box>
             {onBack && (
-              <Button variant="outline" onClick={onBack}>
+              <Button variant="outlined" onClick={onBack}>
                 Back to Dashboard
               </Button>
             )}
-          </div>
+          </Box>
 
           {/* Stats */}
-          <div className="flex gap-4">
-            <div className="flex items-center gap-2 text-sm">
-              <div className="w-3 h-3 rounded-full bg-brand-primary"></div>
-              <span className="text-on-surface-variant">
+          <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Box
+                sx={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: '50%',
+                  bgcolor: 'primary.main',
+                }}
+              />
+              <Typography variant="body2" color="text.secondary">
                 {totalApplications} Total Applications
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-sm">
-              <AlertCircle className="w-3 h-3 text-brand-tertiary" />
-              <span className="text-on-surface-variant">
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Warning sx={{ fontSize: 12, color: 'tertiary.main' }} />
+              <Typography variant="body2" color="text.secondary">
                 {columns.find((col) => col.id === 'interviewing')?.cards.length || 0} Active
                 Interviews
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
 
       {/* Kanban Board */}
-      <div className="p-6">
-        <div className="flex gap-6 overflow-x-auto pb-6">
+      <Box sx={{ p: { xs: 3, md: 4 } }}>
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 4,
+            overflowX: 'auto',
+            pb: 4,
+            '&::-webkit-scrollbar': {
+              height: 8,
+            },
+            '&::-webkit-scrollbar-track': {
+              bgcolor: 'surface.container',
+              borderRadius: 4,
+            },
+            '&::-webkit-scrollbar-thumb': {
+              bgcolor: 'primary.main',
+              borderRadius: 4,
+              '&:hover': {
+                bgcolor: 'primary.dark',
+              },
+            },
+          }}
+        >
           {columns.map((column) => (
             <KanbanColumn
               key={column.id}
@@ -456,9 +634,9 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
               onCardClick={onCardClick}
             />
           ))}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

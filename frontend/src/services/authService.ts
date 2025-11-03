@@ -4,7 +4,22 @@ import { apiGet, apiPost } from './apiClient';
 import { ApiResponse } from '@/types/api';
 
 // Types
-export interface AuthUser extends User {}
+export interface AuthUser extends Omit<User, 'emailVerified'> {
+  roles?: string[];
+  // The User interface from Firebase already includes these properties,
+  // but we can redeclare them with more specific types if needed
+  emailVerified: boolean;
+  // Add any additional user properties here
+  metadata?: {
+    creationTime?: string;
+    lastSignInTime?: string;
+    [key: string]: any;
+  };
+  // Add any custom claims that might be on the user
+  customClaims?: {
+    [key: string]: any;
+  };
+}
 
 export interface LoginCredentials {
   email: string;
