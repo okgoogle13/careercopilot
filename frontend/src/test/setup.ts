@@ -1,15 +1,13 @@
 import React from 'react';
-import { afterEach, vi, expect } from 'vitest';
+import { afterEach, beforeAll, afterAll, vi, expect } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import * as matchers from '@testing-library/jest-dom/matchers';
-import '@testing-library/jest-dom/vitest';
 
 // Extend Vitest's expect with jest-dom matchers
-Object.entries(matchers).forEach(([key, value]) => {
-  if (key.startsWith('expect')) {
-    expect.extend(value);
-  }
-});
+expect.extend(matchers);
+
+// Global jest mock for compatibility with tests using jest.fn()
+globalThis.jest = vi;
 
 // Run cleanup after each test case (e.g., clearing jsdom)
 afterEach(() => {

@@ -1,7 +1,8 @@
-import { Typography, Chip } from '@mui/material';
-import { Box } from '@mui/material';
+import { Typography, Chip, CssBaseline } from '@mui/material';
+import { ThemeProvider, Box } from '@mui/material';
 import { useState, Suspense, lazy } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import theme from './theme/theme';
 
 // Advanced Sidebar System imports
 import { Button } from './components/ui/button';
@@ -183,7 +184,7 @@ interface UserState {
   hasDocuments: boolean;
 }
 
-export default function App() {
+function AppContent() {
   const [, setActiveTab] = useState<Tab>('dashboard');
   const [dashboardActiveTab, setDashboardActiveTab] = useState<DashboardTab>('documents');
   const [currentView, setCurrentView] = useState<View>('auth');
@@ -809,5 +810,14 @@ export default function App() {
         )}
       </SidebarInset>
     </SidebarProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppContent />
+    </ThemeProvider>
   );
 }
