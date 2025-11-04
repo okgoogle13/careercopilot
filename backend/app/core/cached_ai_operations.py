@@ -113,7 +113,9 @@ class CachedAIOperations:
         Canonical implementation: backend/app/genkit_flows/smart_ingestion.py:voiceProfileExtractorFlow
         """
 
-        logger.info(f"Generating voice profile for user {user_id} using cached mock (not using real AI model)")
+        logger.info(
+            f"Generating voice profile for user {user_id} using cached mock (not using real AI model)"
+        )
 
         await asyncio.sleep(0.3)  # Simulate processing
 
