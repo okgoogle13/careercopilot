@@ -20,6 +20,7 @@ logger = logging.getLogger(__name__)
 
 class AIProvider(Enum):
     """Supported AI service providers"""
+
     GOOGLE_AI = "google_ai"  # Primary provider for Gemini models
     ANTHROPIC = "anthropic"  # Optional fallback provider
 
@@ -84,14 +85,14 @@ class ModelConfig:
         data = data.copy()
         data["provider"] = AIProvider(data["provider"])
         data["model_type"] = AIModelType(data["model_type"])
-        
+
         # Handle optimization config deserialization
         if "optimization_config" in data and data["optimization_config"]:
             opt_data = data["optimization_config"].copy()
             if isinstance(opt_data, dict):
                 opt_data["level"] = OptimizationLevel(opt_data.get("level", "none"))
                 data["optimization_config"] = OptimizationConfig(**opt_data)
-        
+
         return cls(**data)
 
 

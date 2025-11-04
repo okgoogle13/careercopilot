@@ -68,13 +68,13 @@ class TestCacheDecorators:
         # Test cache miss
         async with CacheContext(operation_type, user_id, input_data) as ctx:
             assert ctx.cached is False
-            
+
             # Set the result
             await ctx.set_result(result)
-            
+
             # Should be cached now
             assert ctx.cached is True
-            
+
             # Get the result
             cached_result = await ctx.get_result()
             assert cached_result == result
@@ -86,7 +86,7 @@ class TestCacheDecorators:
 
         # Test cache invalidation
         await cache.invalidate_user_cache(user_id, [operation_type])
-        
+
         # Should be a cache miss after invalidation
         async with CacheContext(operation_type, user_id, input_data) as ctx:
             assert ctx.cached is False
@@ -98,7 +98,7 @@ class TestCacheDecorators:
         with pytest.raises(ValueError):
             async with CacheContext("", "", {}) as ctx:
                 pass
-                
+
         # Test with None values
         with pytest.raises(ValueError):
             async with CacheContext(None, None, None) as ctx:  # type: ignore
@@ -144,7 +144,7 @@ class TestAICache:
         # Test with CacheContext which handles key generation internally
         async with CacheContext(operation_type, user_id, input_data) as ctx1:
             key1 = ctx1.cache_key
-            
+
         # Same inputs should generate same key
         async with CacheContext(operation_type, user_id, input_data) as ctx2:
             key2 = ctx2.cache_key
@@ -162,19 +162,19 @@ class TestAICache:
         user_id = "user_ttl"
         operation_type = "test_ttl"
         input_data = {"test": "ttl_test"}
-        
+
         # Set with short TTL (1 second)
         async with CacheContext(operation_type, user_id, input_data) as ctx:
             await ctx.set_result({"data": "test"}, ttl=1)
             assert await ctx.get_result() == {"data": "test"}
-        
+
         # Should still be cached
         async with CacheContext(operation_type, user_id, input_data) as ctx:
             assert ctx.cached is True
-        
+
         # Wait for TTL to expire
         await asyncio.sleep(1.1)
-        
+
         # Should be a cache miss now
         async with CacheContext(operation_type, user_id, input_data) as ctx:
             assert ctx.cached is False
@@ -210,7 +210,7 @@ class TestAICache:
         # Verify only specified operations were invalidated
         async with CacheContext("resume_analysis", user_id, operations[0][1]) as ctx:
             assert ctx.cached is False, "resume_analysis should be invalidated"
-            
+
         async with CacheContext("voice_profile", user_id, operations[2][1]) as ctx:
             assert ctx.cached is True, "voice_profile should still be cached"
 
@@ -223,19 +223,19 @@ class TestCacheConfiguration:
         """Test that different operations can have different TTLs"""
         cache = get_ai_cache()
         user_id = "ttl_test_user"
-        
+
         # Test operations with different TTLs
         operations = [
             ("short_ttl", {"data": "short"}, 10),  # 10 seconds
             ("medium_ttl", {"data": "medium"}, 60),  # 1 minute
             ("long_ttl", {"data": "long"}, 3600),  # 1 hour
         ]
-        
+
         # Set cache entries with different TTLs
         for op_type, input_data, ttl in operations:
             async with CacheContext(op_type, user_id, input_data) as ctx:
                 await ctx.set_result({"result": f"{op_type}_result"}, ttl=ttl)
-        
+
         # Verify all entries are cached initially
         for op_type, input_data, _ in operations:
             async with CacheContext(op_type, user_id, input_data) as ctx:
@@ -247,12 +247,12 @@ class TestCacheConfiguration:
     async def test_cache_config_validation(self):
         """Test that cache configuration is valid"""
         cache = get_ai_cache()
-        
+
         # Test with invalid operation type
         with pytest.raises(ValueError):
             async with CacheContext("", "user123", {}) as ctx:
                 pass
-                
+
         # Test with invalid user ID
         with pytest.raises(ValueError):
             async with CacheContext("test_op", "", {}) as ctx:
@@ -267,45 +267,47 @@ class TestCacheIntegration:
         """Test complete cache flow with multiple operations"""
         cache = get_ai_cache()
         user_id = "integration_user"
-        
+
         # Test data
         test_data = [
             ("resume_analysis", {"resume_text": "Python developer"}),
             ("job_analysis", {"job_description": "Senior Python Developer"}),
             ("cover_letter", {"job_title": "Python Developer"}),
         ]
-        
+
         # Test cache miss, set, and get
         for op_type, input_data in test_data:
             # First call - cache miss
             async with CacheContext(op_type, user_id, input_data) as ctx:
                 assert ctx.cached is False
-                
+
                 # Set the result
                 result = {"status": "success", "op_type": op_type}
                 await ctx.set_result(result)
-                
+
                 # Should be cached now
                 assert ctx.cached is True
-                
+
                 # Get the result
                 cached_result = await ctx.get_result()
                 assert cached_result == result
-            
+
             # Second call - cache hit
             async with CacheContext(op_type, user_id, input_data) as ctx:
                 assert ctx.cached is True
                 result = await ctx.get_result()
                 assert result == {"status": "success", "op_type": op_type}
-        
+
         # Test cache invalidation
-        invalidated = await cache.invalidate_user_cache(user_id, ["resume_analysis", "job_analysis"])
+        invalidated = await cache.invalidate_user_cache(
+            user_id, ["resume_analysis", "job_analysis"]
+        )
         assert invalidated >= 2  # At least 2 operations should be invalidated
-        
+
         # Verify invalidation
         async with CacheContext("resume_analysis", user_id, test_data[0][1]) as ctx:
             assert ctx.cached is False
-            
+
         async with CacheContext("cover_letter", user_id, test_data[2][1]) as ctx:
             assert ctx.cached is True  # This one should still be cached
 
@@ -313,12 +315,12 @@ class TestCacheIntegration:
     async def test_cache_error_handling(self):
         """Test that cache handles errors gracefully"""
         # Create a mock cache that will raise an error
-        with patch('app.core.personal_cache.get_ai_cache') as mock_get_cache:
+        with patch("app.core.personal_cache.get_ai_cache") as mock_get_cache:
             # Configure the mock to raise an exception
             mock_cache = AsyncMock()
             mock_cache.get.side_effect = Exception("Cache error")
             mock_get_cache.return_value = mock_cache
-            
+
             # Should not raise an exception
             result = await get_ai_cache().get("test_op", "user123", {})
             assert result is None
