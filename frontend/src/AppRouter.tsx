@@ -1,6 +1,6 @@
-import { Box, CircularProgress } from '@mui/material';
-import { Suspense, lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import ExamplePage from './pages/ExamplePage';
 
 import { ProtectedRoute } from './components/ProtectedRoute';
 import { useAuth } from './context/AuthContext';
@@ -8,6 +8,7 @@ import { useAuth } from './context/AuthContext';
 // Auth pages - not lazy loaded since they're critical path
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
+import { ExamplePage } from './pages/ExamplePage';
 
 // Lazy load page components
 const DashboardPage = lazy(() =>
@@ -32,6 +33,7 @@ const AssetLibraryPage = lazy(() =>
   import('./pages/AssetLibraryPage').then((m) => ({ default: m.AssetLibraryPage }))
 );
 
+<<<<<<< HEAD
 // Loading fallback
 const LoadingFallback = () => (
   <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
@@ -133,6 +135,8 @@ function AppRouterContent() {
   );
 }
 
-export function AppRouter() {
+const AppRouter: React.FC = () => {
   return <AppRouterContent />;
-}
+};
+
+export default AppRouter;
