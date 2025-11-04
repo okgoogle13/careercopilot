@@ -2,43 +2,170 @@
 
 **CareerCopilot** is an AI-powered career management platform designed to help you streamline your job search, manage your resumes and applications, and automate repetitive tasks. This monorepo contains the code for the CareerCopilot frontend, backend, and serverless functions.
 
-## Features
+## 🚀 Quick Start
 
-- **AI-Powered Resume Builder:** Create and tailor your resume for specific job applications.
-- **Job Application Tracker:** Keep track of all your job applications in one place.
-- **Automated Application Filler:** (Coming Soon) Automatically fill out job applications.
-- **Interview Preparation Assistant:** (Coming Soon) Get help preparing for interviews with AI-powered mock interviews and feedback.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/careercopilot.git
+   cd careercopilot
+   ```
 
-## Architecture
+2. **Install dependencies**
+   ```bash
+   # Install frontend dependencies
+   cd frontend
+   yarn install
+   
+   # Install backend dependencies
+   cd ../backend
+   pip install -r requirements.txt
+   ```
 
-CareerCopilot is a monorepo that consists of three main components:
+3. **Start development servers**
+   ```bash
+   # Start frontend (in frontend directory)
+   yarn dev
+   
+   # Start backend (in backend directory)
+   uvicorn app.main:app --reload
+   ```
 
-- **Frontend:** A React application built with Vite and Material-UI.
-- **Backend:** A Python API built with FastAPI.
-- **Functions:** Serverless functions for Firebase that handle backend logic.
+4. **Run tests**
+   ```bash
+   # Frontend tests
+   cd frontend
+   yarn test
+   
+   # Backend tests
+   cd ../backend
+   pytest
+   ```
 
-The application is hosted on Firebase, with the frontend on Firebase Hosting, the backend logic in Firebase Functions, and the data stored in Firestore.
+## ✨ Features
 
-## Technologies
+### Core Features
+- **AI-Powered Resume Builder**
+  - Create and tailor your resume for specific job applications
+  - Get AI-powered suggestions for improvement
+  - Export to multiple formats (PDF, DOCX)
 
-| Category            | Technology                           |
-| ------------------- | ------------------------------------ |
-| **Frontend**        | React, Vite, Material-UI, TypeScript |
-| **Backend**         | Python, FastAPI                      |
-| **Serverless**      | Firebase Functions                   |
-| **Database**        | Firestore                            |
-| **Hosting**         | Firebase Hosting                     |
-| **Testing**         | Jest, Playwright                     |
-| **Package Manager** | Yarn                                 |
+- **Job Application Tracker**
+  - Track all your job applications in one place
+  - Set reminders for follow-ups
+  - Monitor application status
 
-## Prerequisites
+- **UI Components**
+  - Built with Material-UI v7
+  - Fully responsive design
+  - Accessible components
+  - Dark/light theme support
 
-Before you begin, ensure you have the following installed:
+### Coming Soon
+- **Automated Application Filler**
+  - Automatically fill out job applications
+  - Save time on repetitive tasks
 
+- **Interview Preparation Assistant**
+  - AI-powered mock interviews
+  - Personalized feedback
+  - Common interview questions database
+
+## 🏗️ Architecture
+
+CareerCopilot follows a modern, component-based architecture with a clear separation of concerns.
+
+### Frontend
+- **Framework**: React 18 with TypeScript
+- **UI Library**: Material-UI v7
+- **State Management**: React Context API
+- **Routing**: React Router v7
+- **Build Tool**: Vite
+- **Testing**: Vitest, React Testing Library
+
+### Backend
+- **Framework**: FastAPI (Python)
+- **Database**: Firestore
+- **Authentication**: Firebase Auth
+- **API**: RESTful API design
+
+### Infrastructure
+- **Hosting**: Firebase Hosting
+- **Serverless**: Firebase Functions
+- **CI/CD**: GitHub Actions
+- **Monitoring**: Firebase Performance Monitoring
+
+## 🛠️ Technology Stack
+
+### Frontend
+| Category           | Technology                          |
+|-------------------|-------------------------------------|
+| Framework         | React 18                            |
+| Language          | TypeScript                          |
+| UI Library        | Material-UI v7                      |
+| State Management  | React Context API                   |
+| Routing           | React Router v7                     |
+| Build Tool        | Vite                                |
+| Testing           | Vitest, React Testing Library       |
+| E2E Testing       | Playwright                          |
+| Styling           | Emotion, Tailwind CSS               |
+| Form Handling     | React Hook Form                     |
+| API Client        | Axios                              |
+
+### Backend
+| Category           | Technology                          |
+|-------------------|-------------------------------------|
+| Framework         | FastAPI (Python)                   |
+| Database          | Firestore                          |
+| Authentication    | Firebase Auth                      |
+| Caching           | Redis                              |
+| Background Tasks  | Celery                             |
+| Testing           | Pytest                             |
+
+### DevOps
+| Category           | Technology                          |
+|-------------------|-------------------------------------|
+| CI/CD             | GitHub Actions                      |
+| Hosting           | Firebase Hosting & Functions       |
+| Monitoring        | Firebase Monitoring                |
+| Logging           | Google Cloud Logging               |
+| Error Tracking    | Sentry                             |
+
+## 📋 Prerequisites
+
+### Development Environment
 - [Node.js](https://nodejs.org/) (v18 or later)
 - [Yarn](https://yarnpkg.com/) (v4 or later)
-- [Firebase CLI](https://firebase.google.com/docs/cli)
 - [Python](https://www.python.org/) (v3.12 or later)
+- [Firebase CLI](https://firebase.google.com/docs/cli)
+- [Docker](https://www.docker.com/) (for local development)
+
+### Recommended Tools
+- [VS Code](https://code.visualstudio.com/)
+  - Extensions:
+    - ESLint
+    - Prettier
+    - TypeScript Hero
+    - Material Icon Theme
+
+### Environment Variables
+Create a `.env` file in the project root with the following variables:
+
+```env
+# Frontend
+VITE_API_URL=http://localhost:8000
+VITE_FIREBASE_API_KEY=your-firebase-api-key
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-bucket.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+VITE_FIREBASE_APP_ID=your-app-id
+
+# Backend
+DATABASE_URL=sqlite:///./careercopilot.db
+SECRET_KEY=your-secret-key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+```
 
 ## Installation
 
