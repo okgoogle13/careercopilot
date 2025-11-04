@@ -101,7 +101,9 @@ async def register_user(
                 logger.info(f"Running voice profile analysis for new user: {user.email}")
 
                 # Combine all documents into one writing sample
-                combined_text = "\n\n---\n\n".join([doc for doc in request.documents if doc.strip()])
+                combined_text = "\n\n---\n\n".join(
+                    [doc for doc in request.documents if doc.strip()]
+                )
 
                 # Run the real voice profile extraction flow
                 voice_profile = await voiceProfileExtractorFlow.run(
@@ -112,7 +114,9 @@ async def register_user(
 
                 # Save to Firestore assetLibrary
                 db_firebase = get_firestore()
-                collection_ref = db_firebase.collection("users").document(user.id).collection("assetLibrary")
+                collection_ref = (
+                    db_firebase.collection("users").document(user.id).collection("assetLibrary")
+                )
 
                 asset_doc = AssetDocument(
                     documentType="voice",
@@ -301,7 +305,9 @@ async def create_voice_profile(
 
         # Save to Firestore assetLibrary
         db_firebase = get_firestore()
-        collection_ref = db_firebase.collection("users").document(current_user.id).collection("assetLibrary")
+        collection_ref = (
+            db_firebase.collection("users").document(current_user.id).collection("assetLibrary")
+        )
 
         asset_doc = AssetDocument(
             documentType="voice",

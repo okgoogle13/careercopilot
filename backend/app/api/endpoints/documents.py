@@ -34,7 +34,8 @@ class CoverLetterRequest(BaseModel):
         ..., description="User profile data including work experience", min_items=1
     )
     tone: Optional[str] = Field(
-        default="professional", description="Tone for the cover letter (professional, conversational, formal)"
+        default="professional",
+        description="Tone for the cover letter (professional, conversational, formal)",
     )
     voice_profile: Optional[Dict] = Field(
         default=None, description="Optional voice profile for writing style matching"

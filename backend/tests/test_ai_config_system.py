@@ -34,7 +34,7 @@ class TestAIConfigManager:
                 "google_ai": {
                     "provider": "google_ai",
                     "api_key": "test-google-key",
-                    "project_id": "test-project"
+                    "project_id": "test-project",
                 }
             },
             "models": {
