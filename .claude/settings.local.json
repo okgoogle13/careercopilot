@@ -185,7 +185,8 @@
       "Bash(node:*)",
       "Bash(jq:*)",
       "Bash(yarn test:*)",
-      "Bash(ulimit -n:*)"
+      "Bash(ulimit -n:*)",
+      "Bash(black:*)"
     ]
   },
   "outputStyle": "default"
