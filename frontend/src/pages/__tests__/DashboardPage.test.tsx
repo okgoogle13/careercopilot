@@ -39,7 +39,8 @@ describe('DashboardPage', () => {
       render(<DashboardPage isEmpty={true} />);
 
       expect(screen.getByText(/AI Resume/i)).toBeInTheDocument();
-      expect(screen.getByText(/Cover Letter/i)).toBeInTheDocument();
+      const coverLetterElements = screen.getAllByText(/Cover Letter/i);
+      expect(coverLetterElements.length).toBeGreaterThan(0);
       expect(screen.getByText(/Selection Criteria/i)).toBeInTheDocument();
     });
   });
@@ -66,7 +67,8 @@ describe('DashboardPage', () => {
       expect(screen.getByText(/^Applications$/i)).toBeInTheDocument();
 
       // ATS Score stat
-      expect(screen.getByText(/85%/)).toBeInTheDocument();
+      const atsScoreElements = screen.getAllByText(/85%/);
+      expect(atsScoreElements.length).toBeGreaterThan(0);
       expect(screen.getByText(/Avg ATS Score/i)).toBeInTheDocument();
 
       // Response Rate stat
@@ -77,7 +79,8 @@ describe('DashboardPage', () => {
     it('displays profile cards with correct information', () => {
       render(<DashboardPage />);
 
-      expect(screen.getByText(/Senior Software Developer/i)).toBeInTheDocument();
+      const seniorDevElements = screen.getAllByText(/Senior Software Developer/i);
+      expect(seniorDevElements.length).toBeGreaterThan(0);
       expect(screen.getByText(/Product Manager/i)).toBeInTheDocument();
       expect(screen.getByText(/UX Designer/i)).toBeInTheDocument();
       expect(screen.getByText(/Technology/i)).toBeInTheDocument();
@@ -91,7 +94,8 @@ describe('DashboardPage', () => {
       expect(screen.getByRole('heading', { name: /Recent Activity/i })).toBeInTheDocument();
       expect(screen.getByText(/Resume updated/i)).toBeInTheDocument();
       expect(screen.getByText(/Application submitted/i)).toBeInTheDocument();
-      expect(screen.getByText(/ATS analysis/i)).toBeInTheDocument();
+      const atsAnalysisElements = screen.getAllByText(/ATS analysis/i);
+      expect(atsAnalysisElements.length).toBeGreaterThan(0);
     });
 
     it('displays quick actions section', () => {
@@ -127,8 +131,9 @@ describe('DashboardPage', () => {
       const atsScoreElements = screen.getAllByText(/ATS Score/i);
       expect(atsScoreElements.length).toBeGreaterThan(0);
 
-      // Check for specific score percentages
-      expect(screen.getByText(/85%/)).toBeInTheDocument();
+      // Check for specific score percentages - using getAllByText since scores appear in multiple places
+      const score85Elements = screen.getAllByText(/85%/);
+      expect(score85Elements.length).toBeGreaterThan(0);
       expect(screen.getByText(/92%/)).toBeInTheDocument();
       expect(screen.getByText(/78%/)).toBeInTheDocument();
     });
