@@ -61,7 +61,6 @@ class SecureSettings(BaseSettings):
 
                 # Load AI API keys from Secret Manager
                 self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
-                self.OPENAI_API_KEY = get_secret("OPENAI_API_KEY", default=self.OPENAI_API_KEY)
                 self.ANTHROPIC_API_KEY = get_secret(
                     "ANTHROPIC_API_KEY", default=self.ANTHROPIC_API_KEY
                 )
@@ -115,8 +114,6 @@ class SecureSettings(BaseSettings):
 
     # AI Services
     GEMINI_API_KEY: Optional[str] = None
-    OPENAI_API_KEY: Optional[str] = None
-    OPENAI_ORG_ID: Optional[str] = None
     ANTHROPIC_API_KEY: Optional[str] = None
 
     # RAG Configuration - REMOVED: Vector search functionality simplified
