@@ -39,9 +39,8 @@ class SecureSettings(BaseSettings):
     DB_NAME: str = "careercopilot"
     DB_USER: str = "careercopilot"
 
-    # Redis
-    REDIS_URL: str = "redis://localhost:6379/0"
-    REDIS_PASSWORD: Optional[str] = None
+    # Cache configuration (using Firestore instead of Redis)
+    CACHE_COLLECTION: str = "redis_cache"  # Firestore collection for caching
 
     # Authentication
     SECRET_KEY: str = "insecure-default-secret-key"
@@ -57,7 +56,6 @@ class SecureSettings(BaseSettings):
                 self.SECRET_KEY = get_secret_key()
                 self.JWT_SECRET_KEY = self.SECRET_KEY
                 self.DATABASE_URL = get_database_url()
-                self.REDIS_URL = get_redis_url()
 
                 # Load AI API keys from Secret Manager
                 self.GEMINI_API_KEY = get_secret("GEMINI_API_KEY", default=self.GEMINI_API_KEY)
