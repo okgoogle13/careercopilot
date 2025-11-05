@@ -64,8 +64,8 @@ class Settings(BaseSettings):
     secret_key: str = secure_settings.SECRET_KEY
     algorithm: str = secure_settings.ALGORITHM
 
-    # Redis
-    redis_url: str = secure_settings.REDIS_URL
+    # Cache (using Firestore)
+    cache_collection: str = secure_settings.CACHE_COLLECTION
 
     # ATS Scoring Configuration
     ats_scoring_weights: Dict[str, float] = field(

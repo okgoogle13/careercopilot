@@ -44,6 +44,21 @@
 GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.py --output frontend/.env.production.local
 ```
 
+## Cache Configuration (Firestore-backed)
+
+The application uses Firebase Cloud Firestore for caching instead of Redis, providing seamless integration with the existing Firebase infrastructure.
+
+- **Collection Name**: `redis_cache` (Firestore collection for storing cached values)
+- **Cache Service**: `backend/app/core/firestore_cache.py` - Firestore-backed cache implementation
+- **LLM Cache**: `backend/app/ai/llm_service.py` - Uses Firestore cache for LLM responses
+- **Cache Middleware**: `backend/app/core/cache_middleware.py` - Automatic cache cleanup and monitoring
+- **Features**:
+  - Automatic TTL-based expiration (default: 1 hour)
+  - Pattern-based cache clearing
+  - Cache statistics and monitoring
+  - Automatic expired entry cleanup
+  - Seamless fallback when Firestore unavailable
+
 ## Configuration Files
 
 - `.env.local` - Local development environment variables (not committed)
@@ -51,6 +66,7 @@ GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.
 - `backend/app/core/config.py` - Centralized configuration management
 - `backend/app/core/secure_config.py` - Secure settings with Secret Manager integration
 - `backend/app/core/secret_manager.py` - Google Cloud Secret Manager integration
+- `backend/app/core/firestore_cache.py` - Firestore-backed cache service
 - `backend/app/core/genkit_init.py` - Genkit AI framework initialization and flow management
 - `verify_genkit.py` - Genkit verification and health check script
 
