@@ -75,7 +75,7 @@ class ErrorBoundary extends Component<Props, State> {
       maxWidth: "md",
       width: "100%",
       bgcolor: "common.white",
-      borderRadius: 0.5rem,
+      borderRadius: '0.5rem',
       boxShadow: 4,
       p: 8,
       textAlign: "center"
@@ -121,7 +121,7 @@ class ErrorBoundary extends Component<Props, State> {
       bgcolor: "red.50",
       border: 1,
       borderColor: "red.200",
-      borderRadius: 0.25rem,
+      borderRadius: '0.25rem',
       p: 3,
       typography: body2
     }}>
@@ -174,7 +174,7 @@ class ErrorBoundary extends Component<Props, State> {
       borderColor: "transparent",
       typography: body1,
       fontWeight: 500,
-      borderRadius: 0.375rem,
+      borderRadius: '0.375rem',
       color: "common.white",
       "bg-blue-600": true,
       '&:hover': { "bg-blue-700": true },
@@ -205,7 +205,7 @@ class ErrorBoundary extends Component<Props, State> {
       borderColor: "gray.300",
       typography: body1,
       fontWeight: 500,
-      borderRadius: 0.375rem,
+      borderRadius: '0.375rem',
       color: "gray.700",
       bgcolor: "common.white",
       '&:hover': { bgcolor: "gray.50" },
