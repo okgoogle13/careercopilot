@@ -4219,7 +4219,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@joshwooding/vite-plugin-react-docgen-typescript@npm:0.5.0, @joshwooding/vite-plugin-react-docgen-typescript@npm:0.6.1":
+"@joshwooding/vite-plugin-react-docgen-typescript@npm:0.6.1":
   version: 0.5.0
   resolution: "@joshwooding/vite-plugin-react-docgen-typescript@npm:0.5.0"
   dependencies:
