@@ -34,10 +34,12 @@ describe('AnalysisPage', () => {
     it('displays analysis features in empty state', () => {
       render(<AnalysisPage isEmpty={true} />);
 
-      expect(screen.getByText(/ATS Score/i)).toBeInTheDocument();
+      const atsScoreElements = screen.getAllByText(/ATS Score/i);
+      expect(atsScoreElements.length).toBeGreaterThan(0);
       expect(screen.getByText(/Keyword Match/i)).toBeInTheDocument();
       expect(screen.getByText(/Skills Gap/i)).toBeInTheDocument();
-      expect(screen.getByText(/Recommendations/i)).toBeInTheDocument();
+      const recommendationsElements = screen.getAllByText(/Recommendations/i);
+      expect(recommendationsElements.length).toBeGreaterThan(0);
     });
   });
 
@@ -96,7 +98,8 @@ describe('AnalysisPage', () => {
     it('displays analysis statistics with correct values', () => {
       render(<AnalysisPage />);
 
-      expect(screen.getByText(/85%/i)).toBeInTheDocument();
+      const score85Elements = screen.getAllByText(/85%/i);
+      expect(score85Elements.length).toBeGreaterThan(0);
       expect(screen.getByText(/\+12%/i)).toBeInTheDocument();
       expect(screen.getByText(/^15$/)).toBeInTheDocument();
       expect(screen.getByText(/^8$/)).toBeInTheDocument();

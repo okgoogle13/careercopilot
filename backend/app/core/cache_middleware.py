@@ -44,16 +44,22 @@ class CacheCleanupMiddleware(BaseHTTPMiddleware):
         """Background task to clean up expired cache entries"""
         try:
             # Clean up both PersonalCache and Firestore cache
-            cleared_personal = await self.cache.cleanup_expired() if hasattr(self.cache, 'cleanup_expired') else 0
+            cleared_personal = (
+                await self.cache.cleanup_expired() if hasattr(self.cache, "cleanup_expired") else 0
+            )
 
             # Clean up Firestore cache
             firestore_cache = get_firestore_cache()
-            cleared_firestore = firestore_cache.cleanup_expired() if firestore_cache.is_available else 0
+            cleared_firestore = (
+                firestore_cache.cleanup_expired() if firestore_cache.is_available else 0
+            )
 
             total_cleared = cleared_personal + cleared_firestore
             if total_cleared > 0:
-                logger.info(f"Cache cleanup: removed {total_cleared} expired entries "
-                          f"(personal: {cleared_personal}, firestore: {cleared_firestore})")
+                logger.info(
+                    f"Cache cleanup: removed {total_cleared} expired entries "
+                    f"(personal: {cleared_personal}, firestore: {cleared_firestore})"
+                )
         except Exception as e:
             logger.error(f"Cache cleanup error: {e}")
 
