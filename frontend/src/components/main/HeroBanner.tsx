@@ -11,32 +11,70 @@ interface HeroBannerProps {
 
 export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
   return (
-    <Box className="bg-gradient-to-br from-primary/5 to-primary/10 py-20">
+    <Box sx={{
+      "bg-gradient-to-br": true,
+      "from-primary/5": true,
+      "to-primary/10": true,
+      py: 20
+    }}>
       <Container maxWidth="lg">
         {/* Main Hero Content */}
-        <Box className="text-center mb-16">
+        <Box sx={{
+      textAlign: "center",
+      mb: 16
+    }}>
           <Typography
             variant="h1"
-            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+            sx={{
+      typography: h2,
+      [theme.breakpoints.up('sm')]: { typography: h1 },
+      fontWeight: 700,
+      mb: 6,
+      "bg-gradient-to-r": true,
+      "from-primary": true,
+      "to-primary/80": true,
+      "bg-clip-text": true,
+      "text-transparent": true
+    }}
           >
             Land Your Dream Job with AI
           </Typography>
 
           <Typography
             variant="h2"
-            className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto"
+            sx={{
+      typography: h5,
+      [theme.breakpoints.up('sm')]: { typography: h4 },
+      color: "gray.600",
+      mb: 8,
+      "max-w-3xl": true,
+      "mx-auto": true
+    }}
           >
             Create compelling applications, track your progress, and ace your interviews with our
             AI-powered career copilot
           </Typography>
 
           {/* CTA Buttons */}
-          <Box className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Box sx={{
+      display: "flex",
+      flexDirection: "column",
+      [theme.breakpoints.up('xs')]: { flexDirection: "row" },
+      gap: 4,
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
             <Button
               variant="contained"
               size="large"
               onClick={onGetStarted}
-              className="bg-primary hover:bg-primary/90 px-8 py-3 text-lg"
+              sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true },
+      px: 8,
+      py: 3,
+      typography: h6
+    }}
               endIcon={<ArrowRight sx={{ fontSize: 20 }} />}
             >
               Get Started Free
@@ -46,7 +84,14 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
               variant="outlined"
               size="large"
               onClick={onWatchDemo}
-              className="border-primary text-primary hover:bg-primary/10 px-8 py-3 text-lg"
+              sx={{
+      "border-primary": true,
+      "text-primary": true,
+      '&:hover': { "bg-primary/10": true },
+      px: 8,
+      py: 3,
+      typography: h6
+    }}
               startIcon={<PlayArrow sx={{ fontSize: 20 }} />}
             >
               Watch Demo

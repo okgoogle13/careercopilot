@@ -1,4 +1,5 @@
 import { Close as X, Add as Plus, Check } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, IconButton } from '@mui/material';
 
 import { Badge } from '../ui/badge';
@@ -23,17 +24,26 @@ export function KeywordTag({
   const statusConfig = {
     matched: {
       bgClass: 'bg-accent-green/20 border-accent-green/50 text-accent-green',
-      icon: <Check className="w-3 h-3" />,
+      icon: <Check sx={{
+      "w-3": true,
+      "h-3": true
+    }} />,
       hoverClass: 'hover:bg-accent-green/30 hover:border-accent-green',
     },
     missing: {
       bgClass: 'bg-accent-red/20 border-accent-red/50 text-accent-red',
-      icon: <X className="w-3 h-3" />,
+      icon: <X sx={{
+      "w-3": true,
+      "h-3": true
+    }} />,
       hoverClass: 'hover:bg-accent-red/30 hover:border-accent-red',
     },
     suggested: {
       bgClass: 'bg-brand-primary/20 border-brand-primary/50 text-brand-light',
-      icon: <Plus className="w-3 h-3" />,
+      icon: <Plus sx={{
+      "w-3": true,
+      "h-3": true
+    }} />,
       hoverClass: 'hover:bg-brand-primary/30 hover:border-brand-primary',
     },
   };
@@ -42,28 +52,64 @@ export function KeywordTag({
 
   return (
     <div
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border transition-all duration-200 cursor-pointer group font-medium ${config.bgClass} ${config.hoverClass}`}
+      sx={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 1.5,
+      px: 3,
+      py: 1.5,
+      borderRadius: 9999px,
+      border: 1,
+      "transition-all": true,
+      "duration-200": true,
+      cursor: "pointer",
+      "group": true,
+      fontWeight: 500,
+      "${config.bgClass}": true,
+      "${config.hoverClass}": true
+    }}
       onClick={onClick}
     >
       {/* Status Icon */}
-      <span className="shrink-0">{config.icon}</span>
+      <span sx={{
+      "shrink-0": true
+    }}>{config.icon}</span>
 
       {/* Keyword Text */}
-      <span className="text-sm font-medium truncate">{keyword}</span>
+      <span sx={{
+      typography: body1,
+      fontWeight: 500,
+      [object Object]
+    }}>{keyword}</span>
 
       {/* Action Buttons */}
-      <div className="flex items-center gap-1 ml-1">
+      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1,
+      ml: 1
+    }}>
         {status === 'suggested' && onAdd && (
           <Button
             size="small"
             variant="text"
-            className="h-5 w-5 p-0 hover:bg-brand-primary/30 text-brand-light hover:text-brand-primary"
+            sx={{
+      "h-5": true,
+      "w-5": true,
+      p: 0,
+      '&:hover': { "bg-brand-primary/30": true },
+      "text-brand-light": true,
+      '&:hover': { "text-brand-primary": true }
+    }}
             onClick={(e) => {
               e.stopPropagation();
               onAdd();
             }}
           >
-            <Plus className="w-3 h-3" />
+            <Plus sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
           </Button>
         )}
 
@@ -71,13 +117,26 @@ export function KeywordTag({
           <Button
             size="small"
             variant="text"
-            className="h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-accent-red/30 text-content-secondary hover:text-accent-red"
+            sx={{
+      "h-5": true,
+      "w-5": true,
+      p: 0,
+      opacity: 0,
+      "group-hover:opacity-100": true,
+      "transition-opacity": true,
+      '&:hover': { "bg-accent-red/30": true },
+      "text-content-secondary": true,
+      '&:hover': { "text-accent-red": true }
+    }}
             onClick={(e) => {
               e.stopPropagation();
               onRemove();
             }}
           >
-            <X className="w-3 h-3" />
+            <X sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
           </Button>
         )}
       </div>
@@ -118,28 +177,54 @@ export function KeywordTagGroup({
   );
 
   return (
-    <div className="space-y-3">
+    <div sx={{
+      "space-y-3": true
+    }}>
       {title && (
-        <div className="flex items-center justify-between">
-          <h4 className="font-semibold text-content-primary">{title}</h4>
-          <div className="flex items-center gap-2 text-xs">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+          <h4 sx={{
+      fontWeight: 600,
+      "text-content-primary": true
+    }}>{title}</h4>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      typography: body2
+    }}>
             {statusCounts.matched && (
               <Badge
                 variant="outline"
-                className="border-accent-green/50 text-accent-green font-medium"
+                sx={{
+      "border-accent-green/50": true,
+      "text-accent-green": true,
+      fontWeight: 500
+    }}
               >
                 {statusCounts.matched} matched
               </Badge>
             )}
             {statusCounts.missing && (
-              <Badge variant="outline" className="border-accent-red/50 text-accent-red font-medium">
+              <Badge variant="outline" sx={{
+      "border-accent-red/50": true,
+      "text-accent-red": true,
+      fontWeight: 500
+    }}>
                 {statusCounts.missing} missing
               </Badge>
             )}
             {statusCounts.suggested && (
               <Badge
                 variant="outline"
-                className="border-brand-primary/50 text-brand-light font-medium"
+                sx={{
+      "border-brand-primary/50": true,
+      "text-brand-light": true,
+      fontWeight: 500
+    }}
               >
                 {statusCounts.suggested} suggested
               </Badge>
@@ -148,7 +233,11 @@ export function KeywordTagGroup({
         </div>
       )}
 
-      <div className="flex flex-wrap gap-2">
+      <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
         {visibleKeywords.map(({ keyword, status, id }, index) => (
           <KeywordTag
             key={id || index}
@@ -164,7 +253,15 @@ export function KeywordTagGroup({
         {hiddenCount > 0 && (
           <Badge
             variant="outline"
-            className="border-subtle text-content-secondary hover:border-brand-primary hover:text-brand-light cursor-pointer transition-colors font-medium"
+            sx={{
+      "border-subtle": true,
+      "text-content-secondary": true,
+      '&:hover': { "border-brand-primary": true },
+      '&:hover': { "text-brand-light": true },
+      cursor: "pointer",
+      "transition-colors": true,
+      fontWeight: 500
+    }}
           >
             +{hiddenCount} more
           </Badge>

@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight, FormatQuote } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Card, CardContent, Typography, Box, IconButton, Rating } from '@mui/material';
 import React, { useState } from 'react';
 
@@ -65,35 +66,74 @@ export function TestimonialCarousel() {
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <Box className="max-w-4xl mx-auto py-12">
-      <Typography variant="h3" className="text-3xl font-bold text-center mb-12">
+    <Box sx={{
+      "max-w-4xl": true,
+      "mx-auto": true,
+      py: 12
+    }}>
+      <Typography variant="h3" sx={{
+      typography: h3,
+      fontWeight: 700,
+      textAlign: "center",
+      mb: 12
+    }}>
         What Our Users Say
       </Typography>
 
-      <Box className="relative">
-        <Card className="p-8 bg-gradient-to-r from-gray-50 to-gray-100">
-          <CardContent className="text-center">
+      <Box sx={{
+      "relative": true
+    }}>
+        <Card sx={{
+      p: 8,
+      "bg-gradient-to-r": true,
+      "from-gray-50": true,
+      "to-gray-100": true
+    }}>
+          <CardContent sx={{
+      textAlign: "center"
+    }}>
             {/* Quote Icon */}
-            <Box className="flex justify-center mb-6">
-              <FormatQuote sx={{ fontSize: 48 }} className="text-primary/30" />
+            <Box sx={{
+      display: "flex",
+      justifyContent: "center",
+      mb: 6
+    }}>
+              <FormatQuote sx={{ fontSize: 48 }} sx={{
+      "text-primary/30": true
+    }} />
             </Box>
 
             {/* Testimonial Quote */}
             <Typography
               variant="h6"
-              className="text-lg md:text-xl font-medium mb-6 text-gray-800 italic leading-relaxed"
+              sx={{
+      typography: h6,
+      [theme.breakpoints.up('sm')]: { typography: h5 },
+      fontWeight: 500,
+      mb: 6,
+      "text-gray-800": true,
+      fontStyle: "italic",
+      "leading-relaxed": true
+    }}
             >
               "{currentTestimonial.quote}"
             </Typography>
 
             {/* Rating */}
-            <Box className="flex justify-center mb-4">
+            <Box sx={{
+      display: "flex",
+      justifyContent: "center",
+      mb: 4
+    }}>
               <Rating value={currentTestimonial.rating} readOnly size="small" />
             </Box>
 
             {/* Author Info */}
             <Box>
-              <Typography variant="h6" className="font-semibold text-gray-900">
+              <Typography variant="h6" sx={{
+      fontWeight: 600,
+      "text-gray-900": true
+    }}>
                 {currentTestimonial.author}
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -104,23 +144,49 @@ export function TestimonialCarousel() {
         </Card>
 
         {/* Navigation Controls */}
-        <Box className="flex justify-center items-center mt-8 gap-4">
+        <Box sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      mt: 8,
+      gap: 4
+    }}>
           <IconButton
             onClick={prevTestimonial}
-            className="border border-gray-300 hover:bg-primary/10"
+            sx={{
+      border: 1,
+      borderColor: "gray.300",
+      '&:hover': { "bg-primary/10": true }
+    }}
             aria-label="Previous testimonial"
           >
             <ChevronLeft sx={{ fontSize: 20 }} />
           </IconButton>
 
           {/* Dots Indicator */}
-          <Box className="flex gap-2">
+          <Box sx={{
+      display: "flex",
+      gap: 2
+    }}>
             {testimonials.map((_, index) => (
               <Box
                 key={index}
-                className={`w-2 h-2 rounded-full cursor-pointer transition-colors ${
-                  index === currentIndex ? 'bg-primary' : 'bg-gray-300'
-                }`}
+                sx={{
+      "w-2": true,
+      "h-2": true,
+      borderRadius: 9999px,
+      cursor: "pointer",
+      "transition-colors": true,
+      "${": true,
+      "index": true,
+      "===": true,
+      "currentIndex": true,
+      "?": true,
+      "'bg-primary'": true,
+      ":": true,
+      "'bg-gray-300'": true,
+      "}": true
+    }}
                 onClick={() => setCurrentIndex(index)}
               />
             ))}
@@ -128,7 +194,11 @@ export function TestimonialCarousel() {
 
           <IconButton
             onClick={nextTestimonial}
-            className="border border-gray-300 hover:bg-primary/10"
+            sx={{
+      border: 1,
+      borderColor: "gray.300",
+      '&:hover': { "bg-primary/10": true }
+    }}
             aria-label="Next testimonial"
           >
             <ChevronRight sx={{ fontSize: 20 }} />

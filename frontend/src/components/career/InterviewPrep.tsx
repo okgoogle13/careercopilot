@@ -9,6 +9,7 @@ import {
   Refresh as RotateCcw,
   Star,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Alert,
   Box,
@@ -211,7 +212,10 @@ export function InterviewPrep({
 
   if (!currentQuestion) {
     return (
-      <Box className="text-center py-8">
+      <Box sx={{
+      textAlign: "center",
+      py: 8
+    }}>
         <Typography variant="h6" color="text.secondary">
           No questions found for the selected filters.
         </Typography>
@@ -221,7 +225,9 @@ export function InterviewPrep({
             setSelectedCategory('all');
             setSelectedDifficulty('all');
           }}
-          className="mt-4"
+          sx={{
+      mt: 4
+    }}
         >
           Reset Filters
         </Button>
@@ -230,10 +236,20 @@ export function InterviewPrep({
   }
 
   return (
-    <Box className="w-full max-w-6xl mx-auto">
+    <Box sx={{
+      width: "100%",
+      "max-w-6xl": true,
+      "mx-auto": true
+    }}>
       {/* Header */}
-      <Box className="mb-6">
-        <Typography variant="h4" className="text-2xl font-bold mb-2">
+      <Box sx={{
+      mb: 6
+    }}>
+        <Typography variant="h4" sx={{
+      typography: h4,
+      fontWeight: 700,
+      mb: 2
+    }}>
           Interview Preparation
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -242,7 +258,9 @@ export function InterviewPrep({
       </Box>
 
       {/* Filters and Progress */}
-      <Grid container spacing={3} className="mb-6">
+      <Grid container spacing={3} sx={{
+      mb: 6
+    }}>
         <Grid size={{ xs: 12, md: 4 }}>
           <FormControl fullWidth size="small">
             <InputLabel>Category</InputLabel>
@@ -278,14 +296,23 @@ export function InterviewPrep({
         </Grid>
 
         <Grid size={{ xs: 12, md: 4 }}>
-          <Box className="flex items-center gap-2 h-full">
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      height: "100%"
+    }}>
             <Typography variant="body2" color="text.secondary">
               Progress: {currentQuestionIndex + 1} of {filteredQuestions.length}
             </Typography>
             <LinearProgress
               variant="determinate"
               value={progress}
-              className="flex-1 h-2 rounded-full"
+              sx={{
+      flex: 1,
+      "h-2": true,
+      borderRadius: 9999px
+    }}
             />
           </Box>
         </Grid>
@@ -294,15 +321,31 @@ export function InterviewPrep({
       <Grid container spacing={6}>
         {/* Question Panel */}
         <Grid size={{ xs: 12, lg: 8 }}>
-          <Card className="h-full">
-            <CardContent className="p-6">
+          <Card sx={{
+      height: "100%"
+    }}>
+            <CardContent sx={{
+      p: 6
+    }}>
               {/* Question Header */}
-              <Box className="flex items-center justify-between mb-4">
-                <Box className="flex items-center gap-2">
+              <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+                <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
                   <Chip
                     label={currentQuestion.category}
                     size="small"
-                    className="bg-blue-100 text-blue-800"
+                    sx={{
+      bgcolor: "blue.100",
+      "text-blue-800": true
+    }}
                   />
                   <Chip
                     label={currentQuestion.difficulty}
@@ -317,8 +360,18 @@ export function InterviewPrep({
                   />
                 </Box>
 
-                <Box className="flex items-center gap-2">
-                  <Box className="flex items-center gap-1 text-sm text-gray-500">
+                <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1,
+      typography: body1,
+      color: "gray.500"
+    }}>
                     <Clock sx={{ fontSize: 16 }} />
                     <span>{formatTime(timer)}</span>
                   </Box>
@@ -326,13 +379,21 @@ export function InterviewPrep({
               </Box>
 
               {/* Question */}
-              <Typography variant="h6" className="font-semibold mb-6">
+              <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 6
+    }}>
                 {currentQuestion.question}
               </Typography>
 
               {/* Answer Input */}
-              <Box className="mb-6">
-                <Typography variant="subtitle2" className="font-medium mb-3">
+              <Box sx={{
+      mb: 6
+    }}>
+                <Typography variant="subtitle2" sx={{
+      fontWeight: 500,
+      mb: 3
+    }}>
                   Your Answer:
                 </Typography>
                 <TextField
@@ -347,8 +408,17 @@ export function InterviewPrep({
               </Box>
 
               {/* Recording Controls */}
-              <Box className="flex items-center justify-between mb-6">
-                <Box className="flex items-center gap-2">
+              <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 6
+    }}>
+                <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
                   <Button
                     variant={isRecording ? 'contained' : 'outlined'}
                     onClick={isRecording ? handleStopRecording : handleStartRecording}
@@ -361,13 +431,18 @@ export function InterviewPrep({
                   </Button>
 
                   {isRecording && (
-                    <Alert severity="info" className="flex-1">
+                    <Alert severity="info" sx={{
+      flex: 1
+    }}>
                       Recording in progress... Speak clearly and take your time.
                     </Alert>
                   )}
                 </Box>
 
-                <Box className="flex gap-2">
+                <Box sx={{
+      display: "flex",
+      gap: 2
+    }}>
                   <Button
                     variant="outlined"
                     onClick={handleReset}
@@ -379,7 +454,10 @@ export function InterviewPrep({
                     variant="contained"
                     onClick={handleGetFeedback}
                     disabled={!userAnswer.trim() && !isRecording}
-                    className="bg-primary hover:bg-primary/90"
+                    sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
                     startIcon={<MessageSquare sx={{ fontSize: 16 }} />}
                   >
                     Get AI Feedback
@@ -389,22 +467,46 @@ export function InterviewPrep({
 
               {/* AI Feedback */}
               {showFeedback && (
-                <Alert severity="success" className="mb-6">
-                  <Typography variant="subtitle2" className="font-semibold mb-2">
+                <Alert severity="success" sx={{
+      mb: 6
+    }}>
+                  <Typography variant="subtitle2" sx={{
+      fontWeight: 600,
+      mb: 2
+    }}>
                     AI Feedback:
                   </Typography>
-                  <Typography variant="body2" className="mb-2">
+                  <Typography variant="body2" sx={{
+      mb: 2
+    }}>
                     Good structure using the STAR method! Your answer demonstrates strong
                     problem-solving skills. Consider adding more specific metrics or outcomes to
                     strengthen your response.
                   </Typography>
-                  <Box className="flex items-center gap-1 mt-2">
-                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
-                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
-                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
-                    <Star sx={{ fontSize: 16 }} className="text-yellow-500" />
-                    <Star sx={{ fontSize: 16 }} className="text-gray-300" />
-                    <Typography variant="caption" className="ml-2">
+                  <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1,
+      mt: 2
+    }}>
+                    <Star sx={{ fontSize: 16 }} sx={{
+      color: "yellow.500"
+    }} />
+                    <Star sx={{ fontSize: 16 }} sx={{
+      color: "yellow.500"
+    }} />
+                    <Star sx={{ fontSize: 16 }} sx={{
+      color: "yellow.500"
+    }} />
+                    <Star sx={{ fontSize: 16 }} sx={{
+      color: "yellow.500"
+    }} />
+                    <Star sx={{ fontSize: 16 }} sx={{
+      "text-gray-300": true
+    }} />
+                    <Typography variant="caption" sx={{
+      ml: 2
+    }}>
                       4/5 - Strong answer with room for improvement
                     </Typography>
                   </Box>
@@ -412,7 +514,10 @@ export function InterviewPrep({
               )}
 
               {/* Navigation */}
-              <Box className="flex justify-between">
+              <Box sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
                 <Button
                   variant="outlined"
                   onClick={handlePreviousQuestion}
@@ -427,7 +532,10 @@ export function InterviewPrep({
                   onClick={handleNextQuestion}
                   disabled={currentQuestionIndex === filteredQuestions.length - 1}
                   endIcon={<ChevronRight sx={{ fontSize: 16 }} />}
-                  className="bg-primary hover:bg-primary/90"
+                  sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
                 >
                   Next Question
                 </Button>
@@ -438,12 +546,18 @@ export function InterviewPrep({
 
         {/* Tips & Guidance Panel */}
         <Grid size={{ xs: 12, lg: 4 }}>
-          <Card className="h-full">
-            <CardContent className="p-6">
+          <Card sx={{
+      height: "100%"
+    }}>
+            <CardContent sx={{
+      p: 6
+    }}>
               <Tabs
                 value={activeTab}
                 onChange={(_, newValue) => setActiveTab(newValue)}
-                className="mb-4"
+                sx={{
+      mb: 4
+    }}
               >
                 <Tab label="Tips" />
                 <Tab label="Key Points" />
@@ -451,16 +565,38 @@ export function InterviewPrep({
 
               {activeTab === 0 && (
                 <Box>
-                  <Box className="flex items-center gap-2 mb-4">
-                    <Lightbulb sx={{ fontSize: 20 }} className="text-yellow-500" />
-                    <Typography variant="h6" className="font-semibold">
+                  <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      mb: 4
+    }}>
+                    <Lightbulb sx={{ fontSize: 20 }} sx={{
+      color: "yellow.500"
+    }} />
+                    <Typography variant="h6" sx={{
+      fontWeight: 600
+    }}>
                       Interview Tips
                     </Typography>
                   </Box>
-                  <Box className="space-y-3">
+                  <Box sx={{
+      "space-y-3": true
+    }}>
                     {currentQuestion.tips.map((tip, index) => (
-                      <Box key={index} className="flex items-start gap-2">
-                        <Box className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                      <Box key={index} sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 2
+    }}>
+                        <Box sx={{
+      "w-2": true,
+      "h-2": true,
+      "bg-primary": true,
+      borderRadius: 9999px,
+      mt: 2,
+      flexShrink: 0
+    }} />
                         <Typography variant="body2" color="text.secondary">
                           {tip}
                         </Typography>
@@ -472,17 +608,25 @@ export function InterviewPrep({
 
               {activeTab === 1 && (
                 <Box>
-                  <Typography variant="h6" className="font-semibold mb-4">
+                  <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 4
+    }}>
                     Key Points to Address
                   </Typography>
-                  <Box className="space-y-2">
+                  <Box sx={{
+      "space-y-2": true
+    }}>
                     {currentQuestion.keyPoints.map((point, index) => (
                       <Chip
                         key={index}
                         label={point}
                         size="small"
                         variant="outlined"
-                        className="mr-2 mb-2"
+                        sx={{
+      mr: 2,
+      mb: 2
+    }}
                       />
                     ))}
                   </Box>
@@ -491,16 +635,32 @@ export function InterviewPrep({
 
               {/* Follow-up Questions */}
               {currentQuestion.followUpQuestions && (
-                <Box className="mt-6 pt-6 border-t border-gray-200">
-                  <Typography variant="subtitle2" className="font-semibold mb-3">
+                <Box sx={{
+      mt: 6,
+      pt: 6,
+      borderTop: 1,
+      borderColor: "gray.200"
+    }}>
+                  <Typography variant="subtitle2" sx={{
+      fontWeight: 600,
+      mb: 3
+    }}>
                     Potential Follow-up Questions:
                   </Typography>
-                  <Box className="space-y-2">
+                  <Box sx={{
+      "space-y-2": true
+    }}>
                     {currentQuestion.followUpQuestions.map((followUp, index) => (
                       <Typography
                         key={index}
                         variant="caption"
-                        className="block p-2 bg-gray-50 rounded text-gray-600"
+                        sx={{
+      "block": true,
+      p: 2,
+      bgcolor: "gray.50",
+      borderRadius: 0.25rem,
+      color: "gray.600"
+    }}
                       >
                         {followUp}
                       </Typography>

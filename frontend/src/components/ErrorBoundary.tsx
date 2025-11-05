@@ -1,4 +1,5 @@
 import { Warning, Refresh, Home } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import type { ErrorInfo, ReactNode } from 'react';
 import React, { Component } from 'react';
 
@@ -60,30 +61,93 @@ class ErrorBoundary extends Component<Props, State> {
 
       // Default error UI
       return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-          <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
-            <div className="mb-6">
-              <Warning className="w-16 h-16 mx-auto text-red-500 mb-4" />
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">Oops! Something went wrong</h1>
-              <p className="text-gray-600">
+        <div sx={{
+      minHeight: "100vh",
+      "bg-gradient-to-br": true,
+      "from-gray-50": true,
+      "to-gray-100": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      p: 4
+    }}>
+          <div sx={{
+      maxWidth: "md",
+      width: "100%",
+      bgcolor: "common.white",
+      borderRadius: 0.5rem,
+      boxShadow: 4,
+      p: 8,
+      textAlign: "center"
+    }}>
+            <div sx={{
+      mb: 6
+    }}>
+              <Warning sx={{
+      "w-16": true,
+      "h-16": true,
+      "mx-auto": true,
+      color: "red.500",
+      mb: 4
+    }} />
+              <h1 sx={{
+      typography: h4,
+      fontWeight: 700,
+      "text-gray-900": true,
+      mb: 2
+    }}>Oops! Something went wrong</h1>
+              <p sx={{
+      color: "gray.600"
+    }}>
                 We're sorry, but something unexpected happened. Our team has been notified.
               </p>
             </div>
 
             {process.env.NODE_ENV === 'development' && this.state.error && (
-              <details className="mb-6 text-left">
-                <summary className="cursor-pointer text-sm font-medium text-gray-700 mb-2">
+              <details sx={{
+      mb: 6,
+      textAlign: "left"
+    }}>
+                <summary sx={{
+      cursor: "pointer",
+      typography: body1,
+      fontWeight: 500,
+      color: "gray.700",
+      mb: 2
+    }}>
                   Error Details (Development Only)
                 </summary>
-                <div className="bg-red-50 border border-red-200 rounded p-3 text-xs">
-                  <p className="font-medium text-red-800 mb-1">
+                <div sx={{
+      bgcolor: "red.50",
+      border: 1,
+      borderColor: "red.200",
+      borderRadius: 0.25rem,
+      p: 3,
+      typography: body2
+    }}>
+                  <p sx={{
+      fontWeight: 500,
+      "text-red-800": true,
+      mb: 1
+    }}>
                     {this.state.error.name}: {this.state.error.message}
                   </p>
-                  <pre className="text-red-700 whitespace-pre-wrap overflow-auto max-h-32">
+                  <pre sx={{
+      color: "red.700",
+      whiteSpace: "pre-wrap",
+      overflow: "auto",
+      "max-h-32": true
+    }}>
                     {this.state.error.stack}
                   </pre>
                   {this.state.errorInfo && (
-                    <pre className="text-red-700 whitespace-pre-wrap overflow-auto max-h-32 mt-2">
+                    <pre sx={{
+      color: "red.700",
+      whiteSpace: "pre-wrap",
+      overflow: "auto",
+      "max-h-32": true,
+      mt: 2
+    }}>
                       {this.state.errorInfo.componentStack}
                     </pre>
                   )}
@@ -91,24 +155,81 @@ class ErrorBoundary extends Component<Props, State> {
               </details>
             )}
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      [theme.breakpoints.up('xs')]: { flexDirection: "row" },
+      gap: 3
+    }}>
               <button
                 onClick={this.handleRefresh}
-                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                sx={{
+      flex: 1,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      px: 4,
+      py: 2,
+      border: 1,
+      borderColor: "transparent",
+      typography: body1,
+      fontWeight: 500,
+      borderRadius: 0.375rem,
+      color: "common.white",
+      "bg-blue-600": true,
+      '&:hover': { "bg-blue-700": true },
+      '&:focus': { outline: 'none' },
+      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },
+      "focus:ring-offset-2": true,
+      "focus:ring-blue-500": true,
+      "transition-colors": true
+    }}
               >
-                <Refresh className="w-4 h-4 mr-2" />
+                <Refresh sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Try Again
               </button>
               <button
                 onClick={this.handleGoHome}
-                className="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                sx={{
+      flex: 1,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      px: 4,
+      py: 2,
+      border: 1,
+      borderColor: "gray.300",
+      typography: body1,
+      fontWeight: 500,
+      borderRadius: 0.375rem,
+      color: "gray.700",
+      bgcolor: "common.white",
+      '&:hover': { bgcolor: "gray.50" },
+      '&:focus': { outline: 'none' },
+      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },
+      "focus:ring-offset-2": true,
+      "focus:ring-blue-500": true,
+      "transition-colors": true
+    }}
               >
-                <Home className="w-4 h-4 mr-2" />
+                <Home sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Go Home
               </button>
             </div>
 
-            <p className="mt-4 text-xs text-gray-500">
+            <p sx={{
+      mt: 4,
+      typography: body2,
+      color: "gray.500"
+    }}>
               If this problem persists, please contact support.
             </p>
           </div>

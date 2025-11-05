@@ -9,6 +9,7 @@ import {
   People,
   Lightbulb,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import React, { useState } from 'react';
 
 import { ATSScoreCircle } from '../../library/ATSScoreCircle';
@@ -82,80 +83,196 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 6
+    }}>
+      <div sx={{
+      "max-w-6xl": true,
+      "mx-auto": true,
+      "space-y-8": true
+    }}>
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
             <Button
               variant="link"
               onClick={onBack}
-              className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+              sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      "text-muted-foreground": true,
+      '&:hover': { "text-foreground": true }
+    }}
             >
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
               Back to Job Analysis
             </Button>
           </div>
-          <div className="flex items-center gap-3">
-            <Button variant="default" onClick={onNext} className="flex items-center gap-2">
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+            <Button variant="default" onClick={onNext} sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
               Continue to Templates
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
             </Button>
           </div>
         </div>
 
         {/* Title Section */}
-        <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold text-gradient-aurora">ATS Compatibility Analysis</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+        <div sx={{
+      textAlign: "center",
+      "space-y-4": true
+    }}>
+          <h1 sx={{
+      typography: h2,
+      fontWeight: 700,
+      "text-gradient-aurora": true
+    }}>ATS Compatibility Analysis</h1>
+          <p sx={{
+      typography: h6,
+      "text-muted-foreground": true,
+      "max-w-2xl": true,
+      "mx-auto": true
+    }}>
             Your resume has been analyzed for compatibility with Applicant Tracking Systems. Here's
             how well it matches the job requirements.
           </p>
         </div>
 
         {/* Main Score Section - Enhanced Size */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 8
+    }}>
           {/* Overall Score - Made Larger and More Prominent */}
-          <div className="lg:col-span-1">
-            <Card className="card-aurora p-8 text-center">
-              <div className="space-y-6">
-                <div className="flex items-center justify-center gap-2 mb-4">
-                  <GpsFixed className="w-6 h-6 text-primary" />
-                  <h2 className="text-xl font-semibold">Overall ATS Score</h2>
+          <div sx={{
+      [theme.breakpoints.up('md')]: { "col-span-1": true }
+    }}>
+            <Card sx={{
+      "card-aurora": true,
+      p: 8,
+      textAlign: "center"
+    }}>
+              <div sx={{
+      "space-y-6": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      mb: 4
+    }}>
+                  <GpsFixed sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
+                  <h2 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>Overall ATS Score</h2>
                 </div>
 
                 {/* Enlarged Score Circle */}
-                <div className="flex justify-center">
-                  <div className="relative">
+                <div sx={{
+      display: "flex",
+      justifyContent: "center"
+    }}>
+                  <div sx={{
+      "relative": true
+    }}>
                     <ATSScoreCircle
                       score={analysisData.overallScore}
                       size="large"
-                      className="w-48 h-48" // Increased from default size
+                      sx={{
+      "w-48": true,
+      "h-48": true
+    }} // Increased from default size
                     />
                     {/* Enhanced pulsing score text overlay */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
+                    <div sx={{
+      "absolute": true,
+      "inset-0": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                      <div sx={{
+      textAlign: "center"
+    }}>
                         <div
-                          className={`text-5xl font-bold pulsing-score-text ${getScoreColor(analysisData.overallScore)}`}
+                          sx={{
+      typography: h1,
+      fontWeight: 700,
+      "pulsing-score-text": true,
+      "${getScoreColor(analysisData.overallScore)}": true
+    }}
                         >
                           {analysisData.overallScore}%
                         </div>
-                        <div className="text-sm text-muted-foreground mt-1">ATS Compatible</div>
+                        <div sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mt: 1
+    }}>ATS Compatible</div>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 <div
-                  className={`inline-flex items-center gap-2 px-4 py-2 rounded-full ${getScoreBgColor(analysisData.overallScore)}`}
+                  sx={{
+      display: "inline-flex",
+      alignItems: "center",
+      gap: 2,
+      px: 4,
+      py: 2,
+      borderRadius: 9999px,
+      "${getScoreBgColor(analysisData.overallScore)}": true
+    }}
                 >
-                  <CheckCircle className={`w-4 h-4 ${getScoreColor(analysisData.overallScore)}`} />
-                  <span className={`font-medium ${getScoreColor(analysisData.overallScore)}`}>
+                  <CheckCircle sx={{
+      "w-4": true,
+      "h-4": true,
+      "${getScoreColor(analysisData.overallScore)}": true
+    }} />
+                  <span sx={{
+      fontWeight: 500,
+      "${getScoreColor(analysisData.overallScore)}": true
+    }}>
                     Excellent Match
                   </span>
                 </div>
 
-                <p className="text-sm text-muted-foreground">
+                <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                   Your resume is well-optimized for ATS systems and matches{' '}
                   {analysisData.keywordMatches} of {analysisData.totalKeywords} key requirements.
                 </p>
@@ -164,31 +281,84 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           </div>
 
           {/* Score Breakdown */}
-          <div className="lg:col-span-2">
-            <Card className="card-surface p-6">
-              <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                <TrendingUp className="w-5 h-5 text-primary" />
+          <div sx={{
+      [theme.breakpoints.up('md')]: { "col-span-2": true }
+    }}>
+            <Card sx={{
+      "card-surface": true,
+      p: 6
+    }}>
+              <h3 sx={{
+      typography: h5,
+      fontWeight: 600,
+      mb: 6,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <TrendingUp sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-primary": true
+    }} />
                 Score Breakdown
               </h3>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div sx={{
+      "grid": true,
+      "grid-cols-2": true,
+      gap: 6
+    }}>
                 {Object.entries(analysisData.sections).map(([section, score]) => (
-                  <div key={section} className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-medium capitalize">
+                  <div key={section} sx={{
+      "space-y-3": true
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      typography: body1,
+      fontWeight: 500,
+      textTransform: "capitalize"
+    }}>
                         {section.replace(/([A-Z])/g, ' $1').trim()}
                       </span>
-                      <span className={`text-sm font-bold ${getScoreColor(score)}`}>{score}%</span>
+                      <span sx={{
+      typography: body1,
+      fontWeight: 700,
+      "${getScoreColor(score)}": true
+    }}>{score}%</span>
                     </div>
-                    <div className="w-full bg-muted rounded-full h-2">
+                    <div sx={{
+      width: "100%",
+      "bg-muted": true,
+      borderRadius: 9999px,
+      "h-2": true
+    }}>
                       <div
-                        className={`h-2 rounded-full transition-all duration-1000 ${
-                          score >= 80
-                            ? 'bg-green-500'
-                            : score >= 60
-                              ? 'bg-yellow-500'
-                              : 'bg-red-500'
-                        }`}
+                        sx={{
+      "h-2": true,
+      borderRadius: 9999px,
+      "transition-all": true,
+      "duration-1000": true,
+      "${": true,
+      "score": true,
+      ">=": true,
+      "80": true,
+      "?": true,
+      "'bg-green-500'": true,
+      ":": true,
+      "score": true,
+      ">=": true,
+      "60": true,
+      "?": true,
+      "'bg-yellow-500'": true,
+      ":": true,
+      "'bg-red-500'": true,
+      "}": true
+    }}
                         style={{ width: `${score}%` }}
                       />
                     </div>
@@ -200,9 +370,18 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
         </div>
 
         {/* Detailed Analysis Tabs */}
-        <div className="space-y-6">
+        <div sx={{
+      "space-y-6": true
+    }}>
           {/* Tab Navigation */}
-          <div className="flex space-x-1 p-1 bg-muted rounded-lg w-fit">
+          <div sx={{
+      display: "flex",
+      "space-x-1": true,
+      p: 1,
+      "bg-muted": true,
+      borderRadius: 0.5rem,
+      "w-fit": true
+    }}>
             {[
               { id: 'overview', label: 'Overview', icon: Description },
               { id: 'keywords', label: 'Keywords', icon: GpsFixed },
@@ -213,13 +392,34 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                    activeTab === tab.id
-                      ? 'bg-background text-foreground shadow-sm'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
+                  sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      px: 4,
+      py: 2,
+      borderRadius: 0.375rem,
+      typography: body1,
+      fontWeight: 500,
+      "transition-colors": true,
+      "${": true,
+      "activeTab": true,
+      "===": true,
+      "tab.id": true,
+      "?": true,
+      "'bg-background": true,
+      "text-foreground": true,
+      "shadow-sm'": true,
+      ":": true,
+      "'text-muted-foreground": true,
+      '&:hover': { "text-foreground'": true },
+      "}": true
+    }}
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                   {tab.label}
                 </button>
               );
@@ -228,36 +428,104 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
 
           {/* Tab Content */}
           {activeTab === 'overview' && (
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card className="card-surface p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
+              <Card sx={{
+      "card-surface": true,
+      p: 6
+    }}>
+                <h3 sx={{
+      typography: h6,
+      fontWeight: 600,
+      mb: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <CheckCircle sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "green.500"
+    }} />
                   Strengths
                 </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                <ul sx={{
+      "space-y-3": true
+    }}>
+                  <li sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 3
+    }}>
+                    <div sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "green.500",
+      borderRadius: 9999px,
+      mt: 2,
+      flexShrink: 0
+    }} />
                     <div>
-                      <p className="font-medium">Excellent Formatting</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p sx={{
+      fontWeight: 500
+    }}>Excellent Formatting</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                         Clean structure that ATS can easily parse
                       </p>
                     </div>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                  <li sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 3
+    }}>
+                    <div sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "green.500",
+      borderRadius: 9999px,
+      mt: 2,
+      flexShrink: 0
+    }} />
                     <div>
-                      <p className="font-medium">Strong Experience Match</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p sx={{
+      fontWeight: 500
+    }}>Strong Experience Match</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                         Your background aligns well with job requirements
                       </p>
                     </div>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
+                  <li sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 3
+    }}>
+                    <div sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "green.500",
+      borderRadius: 9999px,
+      mt: 2,
+      flexShrink: 0
+    }} />
                     <div>
-                      <p className="font-medium">Relevant Skills Listed</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p sx={{
+      fontWeight: 500
+    }}>Relevant Skills Listed</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                         Key competencies are clearly highlighted
                       </p>
                     </div>
@@ -265,26 +533,74 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                 </ul>
               </Card>
 
-              <Card className="card-surface p-6">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Error className="w-5 h-5 text-yellow-500" />
+              <Card sx={{
+      "card-surface": true,
+      p: 6
+    }}>
+                <h3 sx={{
+      typography: h6,
+      fontWeight: 600,
+      mb: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <Error sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "yellow.500"
+    }} />
                   Areas for Improvement
                 </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
+                <ul sx={{
+      "space-y-3": true
+    }}>
+                  <li sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 3
+    }}>
+                    <div sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "yellow.500",
+      borderRadius: 9999px,
+      mt: 2,
+      flexShrink: 0
+    }} />
                     <div>
-                      <p className="font-medium">Missing Keywords</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p sx={{
+      fontWeight: 500
+    }}>Missing Keywords</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                         3 important terms not found in your resume
                       </p>
                     </div>
                   </li>
-                  <li className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0" />
+                  <li sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 3
+    }}>
+                    <div sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "yellow.500",
+      borderRadius: 9999px,
+      mt: 2,
+      flexShrink: 0
+    }} />
                     <div>
-                      <p className="font-medium">Technical Skills Section</p>
-                      <p className="text-sm text-muted-foreground">
+                      <p sx={{
+      fontWeight: 500
+    }}>Technical Skills Section</p>
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                         Could benefit from more specific software mentions
                       </p>
                     </div>
@@ -295,28 +611,59 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           )}
 
           {activeTab === 'keywords' && (
-            <div className="space-y-6">
+            <div sx={{
+      "space-y-6": true
+    }}>
               {/* Keywords Section with Primary Color */}
-              <Card className="card-surface p-6">
+              <Card sx={{
+      "card-surface": true,
+      p: 6
+    }}>
                 <h3
-                  className="text-lg font-semibold mb-4 flex items-center gap-2"
+                  sx={{
+      typography: h6,
+      fontWeight: 600,
+      mb: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}
                   style={{ color: 'var(--color-primary)' }}
                 >
-                  <GpsFixed className="w-5 h-5" style={{ color: 'var(--color-primary)' }} />
+                  <GpsFixed sx={{
+      "w-5": true,
+      "h-5": true
+    }} style={{ color: 'var(--color-primary)' }} />
                   Keyword Analysis
                 </h3>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
                   <div>
-                    <h4 className="font-medium text-green-600 mb-3">
+                    <h4 sx={{
+      fontWeight: 500,
+      color: "green.600",
+      mb: 3
+    }}>
                       Matched Keywords ({analysisData.matchedKeywords.length})
                     </h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
                       {analysisData.matchedKeywords.map((keyword, index) => (
                         <Badge
                           key={index}
                           variant="secondary"
-                          className="bg-green-500/10 text-green-600 border-green-500/20"
+                          sx={{
+      "bg-green-500/10": true,
+      color: "green.600",
+      "border-green-500/20": true
+    }}
                         >
                           {keyword}
                         </Badge>
@@ -325,15 +672,27 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                   </div>
 
                   <div>
-                    <h4 className="font-medium text-yellow-600 mb-3">
+                    <h4 sx={{
+      fontWeight: 500,
+      color: "yellow.600",
+      mb: 3
+    }}>
                       Missing Keywords ({analysisData.missingKeywords.length})
                     </h4>
-                    <div className="flex flex-wrap gap-2">
+                    <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
                       {analysisData.missingKeywords.map((keyword, index) => (
                         <Badge
                           key={index}
                           variant="secondary"
-                          className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20"
+                          sx={{
+      "bg-yellow-500/10": true,
+      color: "yellow.600",
+      "border-yellow-500/20": true
+    }}
                         >
                           {keyword}
                         </Badge>
@@ -346,41 +705,89 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           )}
 
           {activeTab === 'insights' && (
-            <div className="space-y-4">
+            <div sx={{
+      "space-y-4": true
+    }}>
               {/* Insights Section with Secondary Color */}
               <h3
-                className="text-lg font-semibold mb-4 flex items-center gap-2"
+                sx={{
+      typography: h6,
+      fontWeight: 600,
+      mb: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}
                 style={{ color: 'var(--color-secondary)' }}
               >
-                <Lightbulb className="w-5 h-5" style={{ color: 'var(--color-secondary)' }} />
+                <Lightbulb sx={{
+      "w-5": true,
+      "h-5": true
+    }} style={{ color: 'var(--color-secondary)' }} />
                 Actionable Insights
               </h3>
 
               {analysisData.insights.map((insight, index) => (
-                <Card key={index} className="card-surface p-6">
-                  <div className="flex items-start gap-4">
+                <Card key={index} sx={{
+      "card-surface": true,
+      p: 6
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 4
+    }}>
                     <div
-                      className={`p-2 rounded-lg ${
-                        insight.type === 'strength'
-                          ? 'bg-green-500/10'
-                          : insight.type === 'improvement'
-                            ? 'bg-yellow-500/10'
-                            : 'bg-blue-500/10'
-                      }`}
+                      sx={{
+      p: 2,
+      borderRadius: 0.5rem,
+      "${": true,
+      "insight.type": true,
+      "===": true,
+      "'strength'": true,
+      "?": true,
+      "'bg-green-500/10'": true,
+      ":": true,
+      "insight.type": true,
+      "===": true,
+      "'improvement'": true,
+      "?": true,
+      "'bg-yellow-500/10'": true,
+      ":": true,
+      "'bg-blue-500/10'": true,
+      "}": true
+    }}
                     >
                       {insight.type === 'strength' && (
-                        <CheckCircle className="w-5 h-5 text-green-500" />
+                        <CheckCircle sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "green.500"
+    }} />
                       )}
                       {insight.type === 'improvement' && (
-                        <Error className="w-5 h-5 text-yellow-500" />
+                        <Error sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "yellow.500"
+    }} />
                       )}
                       {insight.type === 'opportunity' && (
-                        <TrendingUp className="w-5 h-5 text-blue-500" />
+                        <TrendingUp sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "blue.500"
+    }} />
                       )}
                     </div>
                     <div>
-                      <h4 className="font-semibold mb-2">{insight.title}</h4>
-                      <p className="text-muted-foreground">{insight.description}</p>
+                      <h4 sx={{
+      fontWeight: 600,
+      mb: 2
+    }}>{insight.title}</h4>
+                      <p sx={{
+      "text-muted-foreground": true
+    }}>{insight.description}</p>
                     </div>
                   </div>
                 </Card>
@@ -390,19 +797,48 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-between items-center pt-8 border-t border-border">
-          <Button variant="outline" onClick={onBack} className="flex items-center gap-2">
-            <ArrowLeft className="w-4 h-4" />
+        <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      pt: 8,
+      borderTop: 1,
+      "border-border": true
+    }}>
+          <Button variant="outline" onClick={onBack} sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
             Back to Job Analysis
           </Button>
 
-          <div className="flex items-center gap-4">
-            <div className="text-sm text-muted-foreground">
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
+            <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
               Ready to create an optimized resume?
             </div>
-            <Button onClick={onNext} className="flex items-center gap-2 btn-primary-cta">
+            <Button onClick={onNext} sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      "btn-primary-cta": true
+    }}>
               Choose Template
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
             </Button>
           </div>
         </div>

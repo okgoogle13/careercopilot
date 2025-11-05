@@ -3,6 +3,7 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+import { jest } from '@jest/globals';
 
 // Mock Firebase config module to avoid import.meta issues
 jest.mock('./firebase-config', () => ({

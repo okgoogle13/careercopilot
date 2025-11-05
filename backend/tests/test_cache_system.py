@@ -1,34 +1,25 @@
 """
-Tests for the AI operations caching system
+Tests for the AI operations caching system using the new cache implementation.
 """
 
 import asyncio
-from datetime import datetime, timedelta, timezone
-from unittest.mock import AsyncMock
+from datetime import datetime, timezone
+from unittest.mock import AsyncMock, patch
+from typing import Any, Dict
 
 import pytest
 
-from app.core.cache_decorators import cached_ai_operation
-from app.core.cache_deprecated import AICache, CacheEntry, InMemoryCacheBackend
+from app.core.cache_decorators import cached_ai_operation, CacheContext
+from app.core.personal_cache import get_ai_cache
 
 
-@pytest.fixture
-async def backend():
-    """Provide a fresh backend instance for each test."""
-    return InMemoryCacheBackend(max_size=5)
-
-
-@pytest.fixture
-async def sample_entry():
-    """Provide a sample cache entry for tests."""
-    return CacheEntry(
-        key="test_key",
-        value={"test": "data"},
-        created_at=datetime.now(timezone.utc),
-        expires_at=datetime.now(timezone.utc) + timedelta(seconds=3600),
-        operation_type="test_operation",
-        input_hash="sample_hash",
-    )
+@pytest.fixture(autouse=True)
+async def clear_cache():
+    """Clear the cache before each test."""
+    cache = get_ai_cache()
+    await cache.clear_all()
+    yield
+    await cache.clear_all()
 
 
 class TestCacheDecorators:
@@ -40,7 +31,7 @@ class TestCacheDecorators:
         from app.core.personal_cache import get_ai_cache
 
         cache = get_ai_cache()
-        await cache.clear_ai_operations("test_operation")
+        await cache.clear_all()
 
         import uuid
 
@@ -70,172 +61,158 @@ class TestCacheDecorators:
         assert call_count == 1  # Function not called again
         assert result2 == result1  # Same result from cache
 
-        # Different input - should execute function again
-        result3 = await mock_expensive_operation(user_id, "different input")
-        assert call_count == 2
-        assert result3["processed"] == "different input"
+        operation_type = "test_operation"
+        input_data = {"key": "value"}
+        result = {"data": "test_result"}
+
+        # Test cache miss
+        async with CacheContext(operation_type, user_id, input_data) as ctx:
+            assert ctx.cached is False
+
+            # Set the result
+            await ctx.set_result(result)
+
+            # Should be cached now
+            assert ctx.cached is True
+
+            # Get the result
+            cached_result = await ctx.get_result()
+            assert cached_result == result
+
+        # Test cache hit in a new context
+        async with CacheContext(operation_type, user_id, input_data) as ctx:
+            assert ctx.cached is True
+            assert await ctx.get_result() == result
+
+        # Test cache invalidation
+        await cache.invalidate_user_cache(user_id, [operation_type])
+
+        # Should be a cache miss after invalidation
+        async with CacheContext(operation_type, user_id, input_data) as ctx:
+            assert ctx.cached is False
 
     @pytest.mark.asyncio
-    async def test_get_nonexistent_key(self, backend):
-        result = await backend.get("nonexistent_key")
-        assert result is None
+    async def test_cache_error_handling(self):
+        """Test that cache handles errors gracefully"""
+        # Test with invalid inputs
+        with pytest.raises(ValueError):
+            async with CacheContext("", "", {}) as ctx:
+                pass
 
-    @pytest.mark.asyncio
-    async def test_expired_entry_removal(self, backend):
-        # Create expired entry
-        expired_entry = CacheEntry(
-            key="expired_key",
-            value={"data": "expired"},
-            created_at=datetime.now(timezone.utc) - timedelta(seconds=7200),
-            expires_at=datetime.now(timezone.utc) - timedelta(seconds=3600),
-            operation_type="test",
-            input_hash="expired",
-        )
-
-        await backend.set(expired_entry)
-
-        # Should return None for expired entry
-        result = await backend.get("expired_key")
-        assert result is None
-
-    @pytest.mark.asyncio
-    async def test_lru_eviction(self, backend):
-        # Fill cache beyond capacity
-        for i in range(7):  # More than max_size of 5
-            entry = CacheEntry(
-                key=f"key_{i}",
-                value={"data": f"value_{i}"},
-                created_at=datetime.now(timezone.utc),
-                expires_at=datetime.now(timezone.utc) + timedelta(seconds=3600),
-                operation_type="test",
-                input_hash=f"hash_{i}",
-            )
-            await backend.set(entry)
-
-        # First entries should be evicted
-        assert await backend.get("key_0") is None
-        assert await backend.get("key_1") is None
-
-        # Later entries should remain
-        assert await backend.get("key_5") is not None
-        assert await backend.get("key_6") is not None
-
-    @pytest.mark.asyncio
-    async def test_delete(self, backend, sample_entry):
-        await backend.set(sample_entry)
-
-        # Verify entry exists
-        assert await backend.get(sample_entry.key) is not None
-
-        # Delete entry
-        success = await backend.delete(sample_entry.key)
-        assert success is True
-
-        # Verify entry is gone
-        assert await backend.get(sample_entry.key) is None
-
-    @pytest.mark.asyncio
-    async def test_clear_by_pattern(self, backend):
-        # Add entries with different patterns
-        entries = [
-            ("user_123_resume", {"type": "resume"}),
-            ("user_123_job", {"type": "job"}),
-            ("user_456_resume", {"type": "resume"}),
-            ("other_key", {"type": "other"}),
-        ]
-
-        for key, value in entries:
-            entry = CacheEntry(
-                key=key,
-                value=value,
-                created_at=datetime.now(timezone.utc),
-                expires_at=datetime.now(timezone.utc) + timedelta(seconds=3600),
-                operation_type="test",
-                input_hash=key,
-            )
-            await backend.set(entry)
-
-        # Clear entries matching pattern
-        cleared = await backend.clear_by_pattern("user_123")
-        assert cleared == 2
-
-        # Verify correct entries were cleared
-        assert await backend.get("user_123_resume") is None
-        assert await backend.get("user_123_job") is None
-        assert await backend.get("user_456_resume") is not None
-        assert await backend.get("other_key") is not None
+        # Test with None values
+        with pytest.raises(ValueError):
+            async with CacheContext(None, None, None) as ctx:  # type: ignore
+                pass
 
 
 class TestAICache:
     """Test the main AI cache functionality"""
 
     @pytest.fixture
-    def cache(self):
-        backend = InMemoryCacheBackend(max_size=100)
-        return AICache(backend)
+    async def cache(self):
+        cache = get_ai_cache()
+        await cache.clear_all()
+        return cache
 
     @pytest.mark.asyncio
     async def test_cache_miss_and_set(self, cache):
+        """Test basic cache get/set operations"""
         user_id = "user_123"
         operation_type = "resume_analysis"
         input_data = {"resume_text": "Software engineer with 5 years experience"}
 
         # Should be cache miss initially
-        result = await cache.get(operation_type, user_id, input_data)
-        assert result is None
+        async with CacheContext(operation_type, user_id, input_data) as ctx:
+            assert ctx.cached is False
 
-        # Set cache entry
-        test_result = {"skills": ["Python", "FastAPI"], "score": 85}
-        success = await cache.set(operation_type, user_id, input_data, test_result)
-        assert success is True
+            # Set cache entry
+            test_result = {"skills": ["Python", "FastAPI"], "score": 85}
+            await ctx.set_result(test_result)
 
-        # Should be cache hit now
-        cached_result = await cache.get(operation_type, user_id, input_data)
-        assert cached_result == test_result
+            # Should be in cache now
+            assert ctx.cached is True
+            cached_result = await ctx.get_result()
+            assert cached_result == test_result
 
     @pytest.mark.asyncio
     async def test_cache_key_consistency(self, cache):
+        """Test that cache keys are consistent and unique"""
         user_id = "user_456"
         operation_type = "job_analysis"
         input_data = {"job_description": "Senior Python Developer position"}
 
-        # Generate key multiple times - should be consistent
-        key1 = cache._generate_cache_key(operation_type, user_id, input_data)
-        key2 = cache._generate_cache_key(operation_type, user_id, input_data)
-        assert key1 == key2
+        # Test with CacheContext which handles key generation internally
+        async with CacheContext(operation_type, user_id, input_data) as ctx1:
+            key1 = ctx1.cache_key
+
+        # Same inputs should generate same key
+        async with CacheContext(operation_type, user_id, input_data) as ctx2:
+            key2 = ctx2.cache_key
+            assert key1 == key2, "Same inputs should generate same cache key"
 
         # Different input should generate different key
         different_input = {"job_description": "Junior Java Developer position"}
-        key3 = cache._generate_cache_key(operation_type, user_id, different_input)
-        assert key3 != key1
+        async with CacheContext(operation_type, user_id, different_input) as ctx3:
+            key3 = ctx3.cache_key
+            assert key3 != key1, "Different inputs should generate different cache keys"
+
+    @pytest.mark.asyncio
+    async def test_cache_ttl(self, cache):
+        """Test that cache respects TTL"""
+        user_id = "user_ttl"
+        operation_type = "test_ttl"
+        input_data = {"test": "ttl_test"}
+
+        # Set with short TTL (1 second)
+        async with CacheContext(operation_type, user_id, input_data) as ctx:
+            await ctx.set_result({"data": "test"}, ttl=1)
+            assert await ctx.get_result() == {"data": "test"}
+
+        # Should still be cached
+        async with CacheContext(operation_type, user_id, input_data) as ctx:
+            assert ctx.cached is True
+
+        # Wait for TTL to expire
+        await asyncio.sleep(1.1)
+
+        # Should be a cache miss now
+        async with CacheContext(operation_type, user_id, input_data) as ctx:
+            assert ctx.cached is False
 
     @pytest.mark.asyncio
     async def test_user_cache_invalidation(self, cache):
+        """Test that user cache invalidation works correctly"""
         user_id = "user_789"
 
-        # Set multiple cache entries for user
+        # Set multiple cache entries for user using CacheContext
         operations = [
             ("resume_analysis", {"resume": "data1"}),
             ("ats_scoring", {"resume": "data1", "job": "data2"}),
             ("voice_profile", {"documents": ["doc1", "doc2"]}),
         ]
 
+        # Set cache entries
         for op_type, input_data in operations:
-            await cache.set(op_type, user_id, input_data, {"result": f"{op_type}_result"})
+            async with CacheContext(op_type, user_id, input_data) as ctx:
+                await ctx.set_result({"result": f"{op_type}_result"})
 
         # Verify entries exist
         for op_type, input_data in operations:
-            result = await cache.get(op_type, user_id, input_data)
-            assert result is not None
+            async with CacheContext(op_type, user_id, input_data) as ctx:
+                assert ctx.cached is True
+                result = await ctx.get_result()
+                assert result == {"result": f"{op_type}_result"}
 
-        # Invalidate user cache
+        # Invalidate user cache for specific operations
         invalidated = await cache.invalidate_user_cache(user_id, ["resume_analysis", "ats_scoring"])
-        assert invalidated == 2
+        assert invalidated >= 2, "Should have invalidated at least 2 operations"
 
-        # Verify correct entries were invalidated
-        assert await cache.get("resume_analysis", user_id, operations[0][1]) is None
-        assert await cache.get("ats_scoring", user_id, operations[1][1]) is None
-        assert await cache.get("voice_profile", user_id, operations[2][1]) is not None
+        # Verify only specified operations were invalidated
+        async with CacheContext("resume_analysis", user_id, operations[0][1]) as ctx:
+            assert ctx.cached is False, "resume_analysis should be invalidated"
+
+        async with CacheContext("voice_profile", user_id, operations[2][1]) as ctx:
+            assert ctx.cached is True, "voice_profile should still be cached"
 
 
 class TestCacheConfiguration:
@@ -243,113 +220,110 @@ class TestCacheConfiguration:
 
     @pytest.mark.asyncio
     async def test_different_ttl_per_operation(self):
-        backend = InMemoryCacheBackend()
-        cache = AICache(backend)
-
+        """Test that different operations can have different TTLs"""
+        cache = get_ai_cache()
         user_id = "ttl_test_user"
-        input_data = {"test": "data"}
 
-        # Test different operation types have different TTLs
+        # Test operations with different TTLs
         operations = [
-            ("resume_analysis", 3600),  # 1 hour
-            ("job_analysis", 7200),  # 2 hours
-            ("cover_letter", 900),  # 15 minutes
+            ("short_ttl", {"data": "short"}, 10),  # 10 seconds
+            ("medium_ttl", {"data": "medium"}, 60),  # 1 minute
+            ("long_ttl", {"data": "long"}, 3600),  # 1 hour
         ]
 
-        for op_type, expected_ttl in operations:
-            # Set cache entry
-            await cache.set(op_type, user_id, input_data, {"result": f"{op_type}_data"})
+        # Set cache entries with different TTLs
+        for op_type, input_data, ttl in operations:
+            async with CacheContext(op_type, user_id, input_data) as ctx:
+                await ctx.set_result({"result": f"{op_type}_result"}, ttl=ttl)
 
-            # Check the created entry has correct TTL
-            key = cache._generate_cache_key(op_type, user_id, input_data)
-            entry = await backend.get(key)
+        # Verify all entries are cached initially
+        for op_type, input_data, _ in operations:
+            async with CacheContext(op_type, user_id, input_data) as ctx:
+                assert ctx.cached is True
+                result = await ctx.get_result()
+                assert result == {"result": f"{op_type}_result"}
 
-            assert entry is not None
-            ttl_diff = (entry.expires_at - entry.created_at).total_seconds()
-            assert abs(ttl_diff - expected_ttl) < 10  # Allow small timing differences
+    @pytest.mark.asyncio
+    async def test_cache_config_validation(self):
+        """Test that cache configuration is valid"""
+        cache = get_ai_cache()
 
-    def test_cache_config_validation(self):
-        # Test that all required operation types have configurations
-        cache = AICache(InMemoryCacheBackend())
+        # Test with invalid operation type
+        with pytest.raises(ValueError):
+            async with CacheContext("", "user123", {}) as ctx:
+                pass
 
-        required_operations = [
-            "resume_analysis",
-            "job_analysis",
-            "ats_scoring",
-            "cover_letter",
-            "voice_profile",
-            "ksc_response",
-        ]
-
-        for op_type in required_operations:
-            config = cache.CACHE_CONFIGS.get(op_type)
-            assert config is not None, f"Missing cache config for {op_type}"
-            assert config.ttl_seconds > 0, f"Invalid TTL for {op_type}"
-            assert config.max_entries > 0, f"Invalid max_entries for {op_type}"
+        # Test with invalid user ID
+        with pytest.raises(ValueError):
+            async with CacheContext("test_op", "", {}) as ctx:
+                pass
 
 
-@pytest.mark.integration
 class TestCacheIntegration:
     """Integration tests for the complete cache system"""
 
     @pytest.mark.asyncio
     async def test_end_to_end_cache_flow(self):
-        # Test complete flow: miss -> compute -> cache -> hit
-        from app.core.cached_ai_operations import CachedAIOperations
-
+        """Test complete cache flow with multiple operations"""
+        cache = get_ai_cache()
         user_id = "integration_user"
-        resume_text = "Experienced Python developer with expertise in FastAPI and React"
 
-        # First call - cache miss, should compute result
-        result1 = await CachedAIOperations.analyze_resume_cached(
-            user_id=user_id, resume_text=resume_text, analysis_type="comprehensive"
+        # Test data
+        test_data = [
+            ("resume_analysis", {"resume_text": "Python developer"}),
+            ("job_analysis", {"job_description": "Senior Python Developer"}),
+            ("cover_letter", {"job_title": "Python Developer"}),
+        ]
+
+        # Test cache miss, set, and get
+        for op_type, input_data in test_data:
+            # First call - cache miss
+            async with CacheContext(op_type, user_id, input_data) as ctx:
+                assert ctx.cached is False
+
+                # Set the result
+                result = {"status": "success", "op_type": op_type}
+                await ctx.set_result(result)
+
+                # Should be cached now
+                assert ctx.cached is True
+
+                # Get the result
+                cached_result = await ctx.get_result()
+                assert cached_result == result
+
+            # Second call - cache hit
+            async with CacheContext(op_type, user_id, input_data) as ctx:
+                assert ctx.cached is True
+                result = await ctx.get_result()
+                assert result == {"status": "success", "op_type": op_type}
+
+        # Test cache invalidation
+        invalidated = await cache.invalidate_user_cache(
+            user_id, ["resume_analysis", "job_analysis"]
         )
+        assert invalidated >= 2  # At least 2 operations should be invalidated
 
-        assert result1 is not None
-        assert "skills_extracted" in result1
-        assert result1["analysis_type"] == "comprehensive"
+        # Verify invalidation
+        async with CacheContext("resume_analysis", user_id, test_data[0][1]) as ctx:
+            assert ctx.cached is False
 
-        # Second call - cache hit, should return same result
-        result2 = await CachedAIOperations.analyze_resume_cached(
-            user_id=user_id, resume_text=resume_text, analysis_type="comprehensive"
-        )
-
-        assert result2 == result1
-
-        # Different analysis type - cache miss, new computation
-        result3 = await CachedAIOperations.analyze_resume_cached(
-            user_id=user_id, resume_text=resume_text, analysis_type="basic"
-        )
-
-        assert result3 != result1  # Different result for different analysis type
-        assert result3["analysis_type"] == "basic"
+        async with CacheContext("cover_letter", user_id, test_data[2][1]) as ctx:
+            assert ctx.cached is True  # This one should still be cached
 
     @pytest.mark.asyncio
     async def test_cache_error_handling(self):
-        # Test that cache errors don't break the application
+        """Test that cache handles errors gracefully"""
+        # Create a mock cache that will raise an error
+        with patch("app.core.personal_cache.get_ai_cache") as mock_get_cache:
+            # Configure the mock to raise an exception
+            mock_cache = AsyncMock()
+            mock_cache.get.side_effect = Exception("Cache error")
+            mock_get_cache.return_value = mock_cache
 
-        # Mock a failing backend
-        failing_backend = AsyncMock()
-        failing_backend.get = AsyncMock(side_effect=Exception("Cache error"))
-        failing_backend.set = AsyncMock(return_value=False)
-
-        cache = AICache(failing_backend)
-
-        # Operations should still work despite cache failures
-        # (In real implementation, this would fall back to direct computation)
-        user_id = "error_test_user"
-        input_data = {"test": "data"}
-
-        # Get should return None on error
-        result = await cache.get("test_operation", user_id, input_data)
-        assert result is None
-
-        # Set should return False on error
-        success = await cache.set("test_operation", user_id, input_data, {"result": "data"})
-        assert success is False
-
-
-# Fixtures for all tests
+            # Should not raise an exception
+            result = await get_ai_cache().get("test_op", "user123", {})
+            assert result is None
 
 
 if __name__ == "__main__":

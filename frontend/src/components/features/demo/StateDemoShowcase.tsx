@@ -1,4 +1,5 @@
 import { ArrowLeft, Refresh as RefreshCw, Wifi, WifiOff } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -109,7 +110,12 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
     switch (dataState) {
       case 'loading':
         return (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div sx={{
+      "grid": true,
+      gap: 6,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true }
+    }}>
             {Array.from({ length: 3 }).map((_, index) => (
               <LoadingProfileCard key={index} />
             ))}
@@ -118,7 +124,12 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
       case 'error':
         return (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div sx={{
+      "grid": true,
+      gap: 6,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true }
+    }}>
             <ErrorProfileCard
               onRetry={handleRetryLoad}
               title="Connection Error"
@@ -138,11 +149,25 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
       case 'empty':
         return (
-          <div className="space-y-4">
-            <div className="text-center p-8">
-              <p className="text-muted-foreground mb-4">No profiles found</p>
-              <Button onClick={handleRetryLoad} variant="outlined" className="mr-2">
-                <RefreshCw className="w-4 h-4 mr-2" />
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      textAlign: "center",
+      p: 8
+    }}>
+              <p sx={{
+      "text-muted-foreground": true,
+      mb: 4
+    }}>No profiles found</p>
+              <Button onClick={handleRetryLoad} variant="outlined" sx={{
+      mr: 2
+    }}>
+                <RefreshCw sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Refresh
               </Button>
             </div>
@@ -152,7 +177,12 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
       case 'loaded':
         return (
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div sx={{
+      "grid": true,
+      gap: 6,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true }
+    }}>
             {profiles.map((profile) => (
               <ProfileCard
                 key={profile.id}
@@ -176,66 +206,123 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 6
+    }}>
+      <div sx={{
+      "max-w-7xl": true,
+      "mx-auto": true
+    }}>
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Button variant="text" size="small" onClick={onBack} className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
+        <div sx={{
+      mb: 8
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 4
+    }}>
+            <Button variant="text" size="small" onClick={onBack} sx={{
+      gap: 2
+    }}>
+              <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
               Back to Component Library
             </Button>
           </div>
-          <h1 className="mb-2">Interactive State Management Demo</h1>
-          <p className="text-muted-foreground">
+          <h1 sx={{
+      mb: 2
+    }}>Interactive State Management Demo</h1>
+          <p sx={{
+      "text-muted-foreground": true
+    }}>
             Experience how the card variants work together in realistic loading, error, and data
             scenarios
           </p>
         </div>
 
         {/* Control Panel */}
-        <div className="mb-8">
+        <div sx={{
+      mb: 8
+    }}>
           <Card variant="elevation">
             <CardHeader
               title={<Typography variant="h3">Simulation Controls</Typography>}
             ></CardHeader>
             <CardContent>
-              <div className="flex flex-wrap gap-3">
+              <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 3
+    }}>
                 <Button
                   variant="outlined"
                   onClick={() => simulateDataLoad(2000, false)}
-                  className="gap-2"
+                  sx={{
+      gap: 2
+    }}
                 >
-                  <RefreshCw className="w-4 h-4" />
+                  <RefreshCw sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                   Simulate Loading
                 </Button>
 
-                <Button variant="outlined" onClick={handleSimulateError} className="gap-2">
+                <Button variant="outlined" onClick={handleSimulateError} sx={{
+      gap: 2
+    }}>
                   Simulate Error
                 </Button>
 
-                <Button variant="outlined" onClick={handleResetToEmpty} className="gap-2">
+                <Button variant="outlined" onClick={handleResetToEmpty} sx={{
+      gap: 2
+    }}>
                   Show Empty State
                 </Button>
 
-                <Button variant="outlined" onClick={handleToggleConnection} className="gap-2">
+                <Button variant="outlined" onClick={handleToggleConnection} sx={{
+      gap: 2
+    }}>
                   {connectionStatus === 'online' ? (
                     <>
-                      <WifiOff className="w-4 h-4" />
+                      <WifiOff sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                       Go Offline
                     </>
                   ) : (
                     <>
-                      <Wifi className="w-4 h-4" />
+                      <Wifi sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                       Go Online
                     </>
                   )}
                 </Button>
               </div>
 
-              <div className="mt-4 flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <span className="text-muted-foreground">Current State:</span>
+              <div sx={{
+      mt: 4,
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <span sx={{
+      "text-muted-foreground": true
+    }}>Current State:</span>
                   <Badge
                     variant={
                       dataState === 'loaded'
@@ -251,17 +338,31 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
                   </Badge>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <span className="text-muted-foreground">Connection:</span>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <span sx={{
+      "text-muted-foreground": true
+    }}>Connection:</span>
                   <Badge variant={connectionStatus === 'online' ? 'default' : 'destructive'}>
                     {connectionStatus === 'online' ? (
                       <>
-                        <Wifi className="w-3 h-3 mr-1" />
+                        <Wifi sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                         Online
                       </>
                     ) : (
                       <>
-                        <WifiOff className="w-3 h-3 mr-1" />
+                        <WifiOff sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                         Offline
                       </>
                     )}
@@ -273,8 +374,14 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         </div>
 
         {/* Profile Cards Display */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
+        <div sx={{
+      "space-y-6": true
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
             <h2>Job Application Profiles</h2>
             <Badge variant="secondary">
               {dataState === 'loaded' ? `${profiles.length} profiles` : dataState}
@@ -285,14 +392,24 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         </div>
 
         {/* Real-world Usage Examples */}
-        <div className="mt-12 space-y-6">
+        <div sx={{
+      mt: 12,
+      "space-y-6": true
+    }}>
           <h2>Real-world Implementation Patterns</h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
             <Card variant="elevation">
               <CardHeader title={<Typography variant="h3">Best Practices</Typography>}></CardHeader>
               <CardContent>
-                <ul className="space-y-2 text-muted-foreground">
+                <ul sx={{
+      "space-y-2": true,
+      "text-muted-foreground": true
+    }}>
                   <li>• Always show loading states for operations taking &gt;200ms</li>
                   <li>• Provide retry functionality for failed operations</li>
                   <li>• Use skeleton placeholders that match the final content layout</li>
@@ -307,7 +424,10 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
                 title={<Typography variant="h3">Implementation Tips</Typography>}
               ></CardHeader>
               <CardContent>
-                <ul className="space-y-2 text-muted-foreground">
+                <ul sx={{
+      "space-y-2": true,
+      "text-muted-foreground": true
+    }}>
                   <li>• Use React.Suspense with ErrorBoundaries</li>
                   <li>• Implement exponential backoff for retries</li>
                   <li>• Cache successful responses to reduce loading states</li>

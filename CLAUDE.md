@@ -76,7 +76,7 @@ GOOGLE_CLOUD_PROJECT=careercopilot-468811 python3 scripts/fetch-firebase-config.
 - `yarn preview` - Preview production build locally
 - `yarn test` - Run Jest unit tests
 - `yarn lint` - Run ESLint (max 0 warnings)
-- `y arn lint:fix`- Auto-fix ESLint issues (max 10 warnings)
+- `yarn lint:fix`- Auto-fix ESLint issues (max 10 warnings)
 - `yarn lint:ci` - Run ESLint with CI settings (max 5 warnings)
 - `yarn storybook` - Start Storybook development server
 - `2` - Build Storybook for production

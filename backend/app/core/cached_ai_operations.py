@@ -105,9 +105,17 @@ class CachedAIOperations:
     @staticmethod
     @cached_ai_operation("voice_profile", user_id_param="user_id")
     async def generate_voice_profile_cached(user_id: str, document_texts: list) -> Dict[str, Any]:
-        """Cached version of voice profile generation"""
+        """
+        Cached version of voice profile generation.
 
-        logger.info(f"Generating voice profile for user {user_id} (not cached)")
+        NOTE: For production use, call voiceProfileExtractorFlow directly from smart_ingestion.py
+        This cached version is for testing/demo purposes only and returns mock data.
+        Canonical implementation: backend/app/genkit_flows/smart_ingestion.py:voiceProfileExtractorFlow
+        """
+
+        logger.info(
+            f"Generating voice profile for user {user_id} using cached mock (not using real AI model)"
+        )
 
         await asyncio.sleep(0.3)  # Simulate processing
 

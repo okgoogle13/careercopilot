@@ -16,6 +16,7 @@ import {
   People as Users,
   FlashOn as Zap,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, Card, Tooltip as MuiTooltip } from '@mui/material';
 import { motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
@@ -297,10 +298,21 @@ export function DocumentTypeSelector({
         <AnimatedCard
           hover={true}
           tap={true}
-          className="group relative overflow-hidden border border-border rounded-lg cursor-pointer"
+          sx={{
+      "group": true,
+      "relative": true,
+      overflow: "hidden",
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem,
+      cursor: "pointer"
+    }}
         >
           <Card
-            className="border-0 shadow-none"
+            sx={{
+      border: 0,
+      boxShadow: 0
+    }}
             onClick={() => onSelectType?.(doc.id)}
             onKeyDown={(e) => handleKeyDown(e, doc.id)}
             role="button"
@@ -308,62 +320,157 @@ export function DocumentTypeSelector({
           >
             {/* Recommendation Score Badge */}
             {sortBy === 'recommended' && recommendationScore > 70 && (
-              <div className="absolute top-2 right-2 z-10">
-                <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs">
+              <div sx={{
+      "absolute": true,
+      "top-2": true,
+      "right-2": true,
+      "z-10": true
+    }}>
+                <Badge sx={{
+      "bg-gradient-to-r": true,
+      "from-green-500": true,
+      "to-emerald-500": true,
+      color: "common.white",
+      typography: body2
+    }}>
                   {Math.round(recommendationScore)}% match
                 </Badge>
               </div>
             )}
 
-            <div className="p-6 space-y-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3 flex-1">
-                  <div className={`p-3 ${doc.bgColor} rounded-xl relative`}>
-                    <Icon className={`w-6 h-6 ${doc.color}`} />
+            <div sx={{
+      p: 6,
+      "space-y-4": true
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between"
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      flex: 1
+    }}>
+                  <div sx={{
+      p: 3,
+      "${doc.bgColor}": true,
+      borderRadius: 0.75rem,
+      "relative": true
+    }}>
+                    <Icon sx={{
+      "w-6": true,
+      "h-6": true,
+      "${doc.color}": true
+    }} />
                     {doc.aiPowered && (
-                      <div className="absolute -top-1 -right-1 w-4 h-4 bg-purple-500 rounded-full flex items-center justify-center">
-                        <Zap className="w-2 h-2 text-white" />
+                      <div sx={{
+      "absolute": true,
+      "-top-1": true,
+      "-right-1": true,
+      "w-4": true,
+      "h-4": true,
+      bgcolor: "purple.500",
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                        <Zap sx={{
+      "w-2": true,
+      "h-2": true,
+      color: "common.white"
+    }} />
                       </div>
                     )}
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-foreground">{doc.title}</h3>
-                    <div className="flex items-center gap-2 mt-1">
+                  <div sx={{
+      flex: 1
+    }}>
+                    <h3 sx={{
+      typography: h6,
+      fontWeight: 600,
+      "text-foreground": true
+    }}>{doc.title}</h3>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      mt: 1
+    }}>
                       <Badge variant="outline" className={getDifficultyColor(doc.difficulty)}>
                         {doc.difficulty}
                       </Badge>
-                      <span className="text-xs text-muted-foreground flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
+                      <span sx={{
+      typography: body2,
+      "text-muted-foreground": true,
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                        <Clock sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                         {formatTime(doc.estimatedTime)}
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-2 items-end">
+                <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      gap: 2,
+      alignItems: "flex-end"
+    }}>
                   <MuiTooltip title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}>
                     <Button
                       variant="text"
                       size="small"
-                      className="h-8 w-8"
+                      sx={{
+      "h-8": true,
+      "w-8": true
+    }}
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleFavorite(doc.id);
                       }}
                     >
                       <Heart
-                        className={`w-4 h-4 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-muted-foreground'}`}
+                        sx={{
+      "w-4": true,
+      "h-4": true,
+      "${isFavorite": true,
+      "?": true,
+      "'fill-red-500": true,
+      "text-red-500'": true,
+      ":": true,
+      "'text-muted-foreground'}": true
+    }}
                       />
                     </Button>
                   </MuiTooltip>
 
-                  <div className="flex gap-1">
+                  <div sx={{
+      display: "flex",
+      gap: 1
+    }}>
                     {doc.isNew && (
-                      <Badge variant="secondary" className="bg-green-100 text-green-800 text-xs">
+                      <Badge variant="secondary" sx={{
+      bgcolor: "green.100",
+      "text-green-800": true,
+      typography: body2
+    }}>
                         New
                       </Badge>
                     )}
                     {doc.isPopular && (
-                      <Badge variant="secondary" className="bg-amber-100 text-amber-800 text-xs">
+                      <Badge variant="secondary" sx={{
+      bgcolor: "amber.100",
+      "text-amber-800": true,
+      typography: body2
+    }}>
                         Popular
                       </Badge>
                     )}
@@ -371,17 +478,44 @@ export function DocumentTypeSelector({
                 </div>
               </div>
 
-              <p className="text-sm text-muted-foreground">{doc.description}</p>
+              <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{doc.description}</p>
 
               {/* Analytics */}
-              <div className="flex items-center justify-between text-xs text-muted-foreground">
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1">
-                    <Users className="w-3 h-3" />
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                  <span sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                    <Users sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                     {doc.usageCount?.toLocaleString() || 0} users
                   </span>
-                  <span className="flex items-center gap-1">
-                    <Target className="w-3 h-3" />
+                  <span sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                    <Target sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                     {doc.successRate}% success
                   </span>
                 </div>
@@ -389,7 +523,11 @@ export function DocumentTypeSelector({
                   <MuiTooltip title="This template includes AI assistance for content generation">
                     <Badge
                       variant="outline"
-                      className="bg-purple-50 text-purple-700 border-purple-200"
+                      sx={{
+      bgcolor: "purple.50",
+      color: "purple.700",
+      borderColor: "purple.200"
+    }}
                     >
                       AI-Powered
                     </Badge>
@@ -397,21 +535,35 @@ export function DocumentTypeSelector({
                 )}
               </div>
 
-              <div className="flex flex-wrap gap-2 pt-2">
+              <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2,
+      pt: 2
+    }}>
                 {doc.tags.slice(0, 3).map((tag, i) => (
-                  <Badge key={i} variant="outline" className="text-xs">
+                  <Badge key={i} variant="outline" sx={{
+      typography: body2
+    }}>
                     {tag}
                   </Badge>
                 ))}
                 {doc.tags.length > 3 && (
-                  <Badge variant="outline" className="text-xs">
+                  <Badge variant="outline" sx={{
+      typography: body2
+    }}>
                     +{doc.tags.length - 3} more
                   </Badge>
                 )}
               </div>
 
               <Button
-                className="w-full mt-4 group-hover:bg-primary group-hover:text-primary-foreground"
+                sx={{
+      width: "100%",
+      mt: 4,
+      "group-hover:bg-primary": true,
+      "group-hover:text-primary-foreground": true
+    }}
                 variant="outlined"
                 size="small"
               >
@@ -425,70 +577,186 @@ export function DocumentTypeSelector({
   };
 
   const renderSkeleton = () => (
-    <Card className="p-6 space-y-4">
-      <div className="flex items-center gap-3">
-        <Skeleton className="h-12 w-12 rounded-xl" />
-        <Skeleton className="h-6 w-32" />
+    <Card sx={{
+      p: 6,
+      "space-y-4": true
+    }}>
+      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+        <Skeleton sx={{
+      "h-12": true,
+      "w-12": true,
+      borderRadius: 0.75rem
+    }} />
+        <Skeleton sx={{
+      "h-6": true,
+      "w-32": true
+    }} />
       </div>
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-3/4" />
-      <div className="flex gap-2 pt-2">
-        <Skeleton className="h-6 w-16 rounded-full" />
-        <Skeleton className="h-6 w-20 rounded-full" />
+      <Skeleton sx={{
+      "h-4": true,
+      width: "100%"
+    }} />
+      <Skeleton sx={{
+      "h-4": true,
+      width: "75%"
+    }} />
+      <div sx={{
+      display: "flex",
+      gap: 2,
+      pt: 2
+    }}>
+        <Skeleton sx={{
+      "h-6": true,
+      "w-16": true,
+      borderRadius: 9999px
+    }} />
+        <Skeleton sx={{
+      "h-6": true,
+      "w-20": true,
+      borderRadius: 9999px
+    }} />
       </div>
-      <Skeleton className="h-9 w-full mt-4" />
+      <Skeleton sx={{
+      "h-9": true,
+      width: "100%",
+      mt: 4
+    }} />
     </Card>
   );
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-6">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 4,
+      [theme.breakpoints.up('sm')]: { p: 6 }
+    }}>
+      <div sx={{
+      "max-w-6xl": true,
+      "mx-auto": true,
+      "space-y-8": true
+    }}>
         {/* Header */}
-        <div className="flex flex-col gap-4">
-          <Button variant="text" size="small" onClick={onBack} className="w-fit">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+        <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      gap: 4
+    }}>
+          <Button variant="text" size="small" onClick={onBack} sx={{
+      "w-fit": true
+    }}>
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             Back to Dashboard
           </Button>
 
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight">Create New Document</h1>
-            <p className="text-muted-foreground">
+          <div sx={{
+      "space-y-2": true
+    }}>
+            <h1 sx={{
+      typography: h3,
+      fontWeight: 700,
+      "tracking-tight": true
+    }}>Create New Document</h1>
+            <p sx={{
+      "text-muted-foreground": true
+    }}>
               Select a template to get started with your next career document
             </p>
           </div>
         </div>
 
         {/* Search and Filter */}
-        <div className="space-y-4">
-          <div className="flex gap-4">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <div sx={{
+      "space-y-4": true
+    }}>
+          <div sx={{
+      display: "flex",
+      gap: 4
+    }}>
+            <div sx={{
+      "relative": true,
+      flex: 1
+    }}>
+              <Search sx={{
+      "absolute": true,
+      "left-3": true,
+      "top-1/2": true,
+      "h-4": true,
+      "w-4": true,
+      "-translate-y-1/2": true,
+      "text-muted-foreground": true
+    }} />
               <Input
                 ref={searchInputRef}
                 placeholder="Search templates..."
-                className="pl-10"
+                sx={{
+      pl: 10
+    }}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-muted-foreground">Sort by:</span>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+              <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Sort by:</span>
               <Tabs value={sortBy} onChange={(_e, value) => setSortBy(value as any)}>
-                <TabsList className="grid grid-cols-4 w-[400px]">
-                  <TabsTrigger value="recommended" className="text-xs">
-                    <TrendingUp className="w-3 h-3 mr-1" />
+                <TabsList sx={{
+      "grid": true,
+      "grid-cols-4": true,
+      w: "400px"
+    }}>
+                  <TabsTrigger value="recommended" sx={{
+      typography: body2
+    }}>
+                    <TrendingUp sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                     Recommended
                   </TabsTrigger>
-                  <TabsTrigger value="popular" className="text-xs">
-                    <BarChart className="w-3 h-3 mr-1" />
+                  <TabsTrigger value="popular" sx={{
+      typography: body2
+    }}>
+                    <BarChart sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                     Popular
                   </TabsTrigger>
-                  <TabsTrigger value="recent" className="text-xs">
-                    <Clock className="w-3 h-3 mr-1" />
+                  <TabsTrigger value="recent" sx={{
+      typography: body2
+    }}>
+                    <Clock sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                     Recent
                   </TabsTrigger>
-                  <TabsTrigger value="difficulty" className="text-xs">
-                    <Target className="w-3 h-3 mr-1" />
+                  <TabsTrigger value="difficulty" sx={{
+      typography: body2
+    }}>
+                    <Target sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                     Difficulty
                   </TabsTrigger>
                 </TabsList>
@@ -499,9 +767,15 @@ export function DocumentTypeSelector({
           <Tabs
             value={selectedCategory}
             onChange={(_e, value) => setSelectedCategory(value as DocumentCategoryExtended)}
-            className="w-full"
+            sx={{
+      width: "100%"
+    }}
           >
-            <TabsList className="w-full justify-start overflow-x-auto">
+            <TabsList sx={{
+      width: "100%",
+      justifyContent: "flex-start",
+      "overflow-x-auto": true
+    }}>
               {categories.map((category) => {
                 const Icon = category.icon;
                 const count =
@@ -515,11 +789,21 @@ export function DocumentTypeSelector({
                   <TabsTrigger
                     key={category.id}
                     value={category.id}
-                    className="flex items-center gap-2"
+                    sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                     {category.label}
-                    <Badge variant="secondary" className="ml-1 text-xs">
+                    <Badge variant="secondary" sx={{
+      ml: 1,
+      typography: body2
+    }}>
                       {count}
                     </Badge>
                   </TabsTrigger>
@@ -530,12 +814,30 @@ export function DocumentTypeSelector({
         </div>
         {/* Recent Documents */}
         {recentDocuments.length > 0 && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <History className="h-5 w-5" />
-              <h2 className="font-medium">Recently Opened</h2>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      "text-muted-foreground": true
+    }}>
+              <History sx={{
+      "h-5": true,
+      "w-5": true
+    }} />
+              <h2 sx={{
+      fontWeight: 500
+    }}>Recently Opened</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 4
+    }}>
               {recentDocuments.slice(0, 3).map((doc) => {
                 const template = documentTypes.find((t) => t.id === doc.type);
                 if (!template) return null;
@@ -544,16 +846,43 @@ export function DocumentTypeSelector({
                 return (
                   <Card
                     key={doc.id}
-                    className="p-4 hover:bg-muted/50 transition-colors cursor-pointer"
+                    sx={{
+      p: 4,
+      '&:hover': { "bg-muted/50": true },
+      "transition-colors": true,
+      cursor: "pointer"
+    }}
                     onClick={() => onSelectType?.(doc.type)}
                   >
-                    <div className="flex items-center gap-3">
-                      <div className={`p-2 ${template.bgColor} rounded-lg`}>
-                        <Icon className={`w-4 h-4 ${template.color}`} />
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                      <div sx={{
+      p: 2,
+      "${template.bgColor}": true,
+      borderRadius: 0.5rem
+    }}>
+                        <Icon sx={{
+      "w-4": true,
+      "h-4": true,
+      "${template.color}": true
+    }} />
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-medium truncate">{doc.title}</h3>
-                        <p className="text-xs text-muted-foreground truncate">
+                      <div sx={{
+      flex: 1,
+      "min-w-0": true
+    }}>
+                        <h3 sx={{
+      fontWeight: 500,
+      [object Object]
+    }}>{doc.title}</h3>
+                        <p sx={{
+      typography: body2,
+      "text-muted-foreground": true,
+      [object Object]
+    }}>
                           {new Date(doc.lastOpened).toLocaleDateString()}
                         </p>
                       </div>
@@ -568,7 +897,13 @@ export function DocumentTypeSelector({
         {/* Document Grid */}
         {isLoading ? (
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 6
+    }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -588,20 +923,42 @@ export function DocumentTypeSelector({
           <StaggeredList
             items={filteredDocuments}
             renderItem={(doc) => renderDocumentCard(doc)}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 6
+    }}
           />
         ) : (
-          <div className="text-center py-12 space-y-4">
-            <FileText className="mx-auto h-12 w-12 text-muted-foreground" />
-            <h3 className="text-lg font-medium">No templates found</h3>
-            <p className="text-muted-foreground">Try adjusting your search or filter criteria</p>
+          <div sx={{
+      textAlign: "center",
+      py: 12,
+      "space-y-4": true
+    }}>
+            <FileText sx={{
+      "mx-auto": true,
+      "h-12": true,
+      "w-12": true,
+      "text-muted-foreground": true
+    }} />
+            <h3 sx={{
+      typography: h6,
+      fontWeight: 500
+    }}>No templates found</h3>
+            <p sx={{
+      "text-muted-foreground": true
+    }}>Try adjusting your search or filter criteria</p>
             <Button
               variant="outlined"
               onClick={() => {
                 setSearchQuery('');
                 setSelectedCategory('all');
               }}
-              className="mt-4"
+              sx={{
+      mt: 4
+    }}
             >
               Clear filters
             </Button>

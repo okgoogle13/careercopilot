@@ -34,7 +34,8 @@ genkit.configure(
 )
 
 # Define the models to be used in the flows
-optimizer_model = llm("gemini-optimizer")
+flash_model = llm("gemini-1.5-flash")
+pro_model = llm("gemini-1.5-pro-preview")
 
 # Load prompts from the central template file
 with open("app/prompts/prompt_templates.json", "r") as f:
@@ -44,35 +45,23 @@ JOB_EXTRACTOR_PROMPT = PROMPTS["job_listing_extractor"]["template"]
 ADVANCED_ANALYSIS_PROMPT = PROMPTS["job_listing_advanced_analysis"]["template"]
 
 
-
-import logging
-
-logger = logging.getLogger(__name__)
-
-# Maximum response size (10 MB)
-MAX_RESPONSE_SIZE = 10 * 1024 * 1024
-
 def _scrape_url_content(url: str) -> str:
+    """
+    Scrapes the text content from a given URL.
+
+    Args:
+        url: The URL to scrape.
+
+    Returns:
+        The cleaned text content of the page.
+
+    Raises:
+        HTTPError: If the URL cannot be fetched.
+    """
     try:
-        response = requests.get(url, timeout=10, stream=True)
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
-        
-        # Check content type
-        content_type = response.headers.get("content-type", "")
-        if "text/html" not in content_type.lower():
-            raise ValueError(f"URL does not return HTML content: {content_type}")
-        
-        # Check content length
-        content_length = response.headers.get("content-length")
-        if content_length and int(content_length) > MAX_RESPONSE_SIZE:
-            raise ValueError(f"Response too large: {content_length} bytes")
-        
-        # Read with size limit
-        content = response.raw.read(MAX_RESPONSE_SIZE + 1)
-        if len(content) > MAX_RESPONSE_SIZE:
-            raise ValueError("Response exceeds maximum size")
-        
-        soup = BeautifulSoup(content, "html.parser")
+        soup = BeautifulSoup(response.content, "html.parser")
         # Remove script and style elements
         for script_or_style in soup(["script", "style"]):
             script_or_style.decompose()
@@ -83,7 +72,7 @@ def _scrape_url_content(url: str) -> str:
         text = "\n".join(chunk for chunk in chunks if chunk)
         return text
     except requests.exceptions.RequestException as e:
-        logger.error(f"Error scraping URL {url}: {e}")
+        print(f"Error scraping URL {url}: {e}")
         # Re-raise as a more generic exception to be caught by the flow's error handling
         raise IOError(f"Failed to retrieve content from the URL: {url}") from e
 
@@ -118,10 +107,10 @@ def extract_job_listing_details_flow(source: Union[str, dict]) -> JobListingDeta
 
     prompt = JOB_EXTRACTOR_PROMPT.format(job_listing_text=text_content)
 
-    response = optimizer_model.generate(
+    response = flash_model.generate(
         prompt,
         output_format=JobListingDetails,
-        config={"temperature": 0.1, "preference": "cost"},
+        config={"temperature": 0.1},
     )
 
     return response.output
@@ -139,30 +128,16 @@ def advanced_job_analysis_flow(job_details: JobListingDetails, user_prompt: str)
     Returns:
         A string containing the AI's comprehensive, text-based response.
     """
-    if not job_details:
-        raise ValueError("job_details cannot be None or empty")
-    
-    if not user_prompt or not user_prompt.strip():
-        raise ValueError("user_prompt cannot be None or empty")
-    
-    # Safely handle optional/null fields
-    essential_criteria = ", ".join(str(c) for c in (job_details.essential_criteria or []))
-    desirable_criteria = ", ".join(str(c) for c in (job_details.desirable_criteria or []))
-    subsectors = ", ".join(str(s) for s in (job_details.subsectors or []))
-    
     prompt = ADVANCED_ANALYSIS_PROMPT.format(
-        role_title=job_details.role_title or "Not specified",
-        company_name=job_details.company_name or "Not specified",
-        essential_criteria=essential_criteria,
-        desirable_criteria=desirable_criteria,
-        role_type=job_details.role_type or "Not specified",
-        subsectors=subsectors,
+        role_title=job_details.role_title,
+        company_name=job_details.company_name,
+        essential_criteria=", ".join(job_details.essential_criteria),
+        desirable_criteria=", ".join(job_details.desirable_criteria),
+        role_type=job_details.role_type,
+        subsectors=", ".join(job_details.subsectors),
         user_prompt=user_prompt,
     )
 
-    response = optimizer_model.generate(prompt, config={"temperature": 0.7})
+    response = pro_model.generate(prompt, config={"temperature": 0.7})
 
-    if response.output is None:
-        raise ValueError("Model failed to generate analysis")
-    
     return response.output

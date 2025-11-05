@@ -1,25 +1,92 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeOptions, Theme } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 
-/**
- * Career Copilot Dark Theme
- *
- * Color Palette:
- * - Primary: Purple/Violet (#A855F7) - Main brand color
- * - Secondary: Warm Brown (#8B5A3C) - Accent color for cards
- * - Background: Very dark (#0F0F0F) with slightly lighter papers (#1A1A1A)
- * - Text: High contrast white (#FFFFFF) with light gray secondary (#B3B3B3)
- *
- * Features:
- * - Custom Card variants: 'selected' and 'interactive'
- * - Warm-toned card styles for accent elements
- * - Enhanced typography with proper contrast
- */
+// --- Module Augmentation ---
+// This adds our custom tokens to the Theme object for TypeScript
+declare module '@mui/material/styles' {
+  // Add custom status
+  interface Theme {
+    status: {
+      danger: string;
+    };
+    customShadows: {
+      glowPrimary: string;
+      glowSecondary: string;
+      glowTertiary: string;
+      glowAurora: string;
+      glass: string;
+      glassHover: string;
+    };
+    glass: {
+      background: string;
+      backgroundHover: string;
+      border: string;
+      borderHover: string;
+      blur: string;
+    };
+    // Add M3 palette extensions
+    palette: {
+      tertiary: Theme['palette']['primary'];
+      surface: {
+        main: string;
+        variant: string;
+        containerLow: string;
+        container: string;
+        containerHigh: string;
+        containerHighest: string;
+      };
+      outline: {
+        main: string;
+        variant: string;
+      };
+    };
+  }
+
+  // Add custom status options
+  interface ThemeOptions {
+    status?: {
+      danger?: string;
+    };
+    customShadows?: {
+      glowPrimary?: string;
+      glowSecondary?: string;
+      glowTertiary?: string;
+      glowAurora?: string;
+      glass?: string;
+      glassHover?: string;
+    };
+    glass?: {
+      background?: string;
+      backgroundHover?: string;
+      border?: string;
+      borderHover?: string;
+      blur?: string;
+    };
+    // Add M3 palette extensions
+    palette?: {
+      tertiary?: ThemeOptions['palette']['primary'];
+      surface?: {
+        main: string;
+        variant: string;
+        containerLow: string;
+        container: string;
+        containerHigh: string;
+        containerHighest: string;
+      };
+      outline?: {
+        main: string;
+        variant: string;
+      };
+    };
+  }
+}
 
 // Extend component props to include custom variants
 declare module '@mui/material/Card' {
   interface CardPropsVariantOverrides {
     selected: true;
     interactive: true;
+    glass: true;
   }
 }
 
@@ -27,194 +94,271 @@ declare module '@mui/material/Paper' {
   interface PaperPropsVariantOverrides {
     selected: true;
     interactive: true;
+    glass: true;
   }
 }
 
-export const theme = createTheme({
+// --- Theme Definition ---
+// We define the options object first, so we can pass the
+// final theme object into functions that need it (like alpha())
+
+const themeOptions: ThemeOptions = {
+  shape: {
+    borderRadius: 12,
+  },
   palette: {
     mode: 'dark',
     primary: {
-      main: '#A855F7', // Purple/violet that matches your screenshots
-      light: '#C084FC',
-      dark: '#7C3AED',
-      contrastText: '#FFFFFF',
+      main: '#A78BFA', // --color-primary
+      light: '#C084FC', // --color-primary-accent
+      dark: '#7C3AED', // --color-primary-container
+      contrastText: '#1E1B4B', // --color-on-primary
     },
     secondary: {
-      main: '#8B5A3C', // Warm brown/orange for accent cards
-      light: '#A67C5A',
-      dark: '#6B4423',
-      contrastText: '#FFFFFF',
+      main: '#C9C3DC', // --color-secondary
+      dark: '#474459', // --color-secondary-container
+      contrastText: '#312E41', // --color-on-secondary
     },
-    background: {
-      default: '#0F0F0F', // Very dark background like in your screenshots
-      paper: '#1A1A1A', // Slightly lighter for cards/papers
-    },
-    text: {
-      primary: '#FFFFFF', // Bright white for primary text
-      secondary: '#B3B3B3', // Light gray for secondary text
+    // Added missing Tertiary color from globals.css
+    tertiary: {
+      main: '#F472B6', // --color-tertiary
+      dark: '#EC4899', // --color-tertiary-container
+      contrastText: '#831843', // --color-on-tertiary
     },
     error: {
-      main: '#EF4444', // Red with good contrast on dark backgrounds
-      light: '#F87171',
-      dark: '#DC2626',
-      contrastText: '#FFFFFF',
+      main: '#FFB4AB', // --color-error
+      dark: '#93000A', // --color-error-container
+      contrastText: '#690005', // --color-on-error
     },
-    warning: {
-      main: '#F59E0B', // Orange with good contrast
-      light: '#FCD34D',
-      dark: '#D97706',
-      contrastText: '#FFFFFF',
+    background: {
+      default: '#131318', // --color-background
+      paper: '#1E1E23', // --color-surface-container (M3 paper color)
     },
-    success: {
-      main: '#10B981', // Same as secondary for consistency
-      light: '#34D399',
-      dark: '#047857',
-      contrastText: '#FFFFFF',
+    text: {
+      primary: '#F8FAFC', // --color-on-surface
+      secondary: '#E2E8F0', // --color-on-surface-variant
+      disabled: '#928F99', // --color-outline
     },
-    info: {
-      main: '#3B82F6', // Blue with good contrast
-      light: '#60A5FA',
-      dark: '#1D4ED8',
-      contrastText: '#FFFFFF',
+    divider: '#48464F', // --color-outline-variant
+    // Added M3 surface colors
+    surface: {
+      main: '#131318', // --color-surface
+      variant: '#1F1F23', // --color-surface-variant
+      containerLow: '#18181D', // --color-surface-container-low
+      container: '#1E1E23', // --color-surface-container
+      containerHigh: '#262629', // --color-surface-container-high
+      containerHighest: '#2E2E32', // --color-surface-container-highest
+    },
+    // Added M3 outline colors
+    outline: {
+      main: '#928F99', // --color-outline
+      variant: '#48464F', // --color-outline-variant
     },
   },
+  typography: {
+    fontFamily:
+      '"Google Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+    // Replaced var() with raw values from globals.css
+    h1: {
+      fontWeight: 700,
+      fontSize: '64px', // --font-size-4xl
+      lineHeight: 1.2,
+      letterSpacing: '-0.02em',
+    },
+    h2: {
+      fontWeight: 600,
+      fontSize: '48px', // --font-size-3xl
+      lineHeight: 1.2,
+    },
+    h3: {
+      fontWeight: 600,
+      fontSize: '32px', // --font-size-2xl
+      lineHeight: 1.3,
+    },
+    h4: {
+      fontWeight: 600,
+      fontSize: '24px', // --font-size-xl
+      lineHeight: 1.4,
+    },
+    h5: {
+      fontWeight: 600,
+      fontSize: '18px', // --font-size-lg
+      lineHeight: 1.4,
+    },
+    h6: {
+      fontWeight: 600,
+      fontSize: '16px', // --font-size-base
+      lineHeight: 1.5,
+    },
+    body1: {
+      fontSize: '16px', // --font-size-base
+      lineHeight: 1.5,
+    },
+    body2: {
+      fontSize: '14px', // --font-size-sm
+      lineHeight: 1.5,
+    },
+    button: {
+      textTransform: 'none',
+      fontWeight: 500,
+    },
+  },
+  spacing: 4, // Note: This makes theme.spacing(1) = 4px. MUI default is 8px.
+  // --- Custom Tokens (Fixed) ---
+  // Fixed glass tokens to use dark-mode values from globals.css
+  glass: {
+    background: 'rgba(30, 30, 35, 0.7)', // --glass-bg
+    backgroundHover: 'rgba(38, 38, 41, 0.8)', // --glass-bg-hover
+    border: 'rgba(167, 139, 250, 0.2)', // --glass-border
+    borderHover: 'rgba(244, 114, 182, 0.4)', // --glass-border-hover
+    blur: '24px', // --glass-blur
+  },
+  status: {
+    danger: '#FFB4AB', // --color-error
+  },
+};
+
+// --- Create the Base Theme ---
+// We create the theme here so we can use its values below
+const baseTheme = createTheme(themeOptions);
+
+// --- Create Final Theme with Dynamic Values ---
+// Now we add values that depend on the baseTheme (like palette colors)
+const finalTheme = createTheme(baseTheme, {
+  // Fixed customShadows to use alpha() and theme palette
+  customShadows: {
+    glowPrimary: `0 0 16px ${alpha(baseTheme.palette.primary.main, 0.4)}`,
+    glowSecondary: `0 0 16px ${alpha(baseTheme.palette.secondary.main, 0.4)}`,
+    glowTertiary: `0 0 16px ${alpha(
+      baseTheme.palette.tertiary.main,
+      0.4
+    )}`,
+    glowAurora: `0 0 64px ${alpha(baseTheme.palette.primary.main, 0.2)}`,
+    glass: '0 4px 30px rgba(0, 0, 0, 0.1)',
+    glassHover: '0 8px 40px rgba(0, 0, 0, 0.15)',
+  },
   components: {
-    // Ensure buttons meet contrast requirements
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          background: baseTheme.palette.background.default,
+          color: baseTheme.palette.text.primary,
+          // Fixed: Use aurora effect from globals.css
+          '&::before': {
+            content: '""',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background:
+              'radial-gradient(circle at 20% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(244, 114, 182, 0.08) 0%, transparent 50%), radial-gradient(circle at 40% 40%, rgba(167, 139, 250, 0.05) 0%, transparent 50%)',
+            pointerEvents: 'none',
+            zIndex: -2,
+          },
+          // Fixed: Use grain effect from globals.css
+          '&::after': {
+            content: '""',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundImage:
+              'radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            backgroundSize: '50px 50px',
+            opacity: 0.03,
+            pointerEvents: 'none',
+            zIndex: -1,
+          },
+        },
+      },
+    },
+    // Merged MuiCard definition
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 16,
+          overflow: 'hidden',
+          transition: 'all 0.3s ease-in-out',
+          // Use M3 paper color as default
+          backgroundColor: baseTheme.palette.surface.container,
+          backgroundImage: 'none', // Ensure no rogue gradients
+        },
+      },
+      variants: [
+        // This is the new, working 'glass' variant
+        {
+          props: { variant: 'glass' },
+          style: {
+            background: baseTheme.glass.background,
+            backdropFilter: `blur(${baseTheme.glass.blur})`,
+            WebkitBackdropFilter: `blur(${baseTheme.glass.blur})`,
+            border: `1px solid ${baseTheme.glass.border}`,
+            boxShadow: baseTheme.customShadows.glass,
+            '&:hover': {
+              background: baseTheme.glass.backgroundHover,
+              borderColor: baseTheme.glass.borderHover,
+              boxShadow: baseTheme.customShadows.glassHover,
+            },
+          },
+        },
+      ],
+    },
+    // Apply glass variant to Paper as well
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: baseTheme.palette.surface.container,
+          backgroundImage: 'none',
+        },
+      },
+      variants: (baseTheme.components?.MuiCard as any).variants,
+    },
     MuiButton: {
       styleOverrides: {
         root: {
-          fontWeight: 600, // Slightly bolder for better readability
-        },
-        containedPrimary: {
-          backgroundColor: '#A855F7',
-          color: '#FFFFFF',
+          borderRadius: 12,
+          padding: '8px 16px',
+          transition: 'all 0.2s ease-in-out',
           '&:hover': {
-            backgroundColor: '#9333EA',
+            transform: 'translateY(-1px)',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
           },
-          '&:disabled': {
-            backgroundColor: '#64748B',
-            color: '#94A3B8',
+          '&:active': {
+            transform: 'translateY(0)',
+          },
+        },
+        contained: {
+          boxShadow: 'none',
+          '&:hover': {
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
           },
         },
       },
     },
-    // Ensure form inputs have proper contrast
     MuiTextField: {
+      // I removed the 'glass' variant as it depended on an external file
+      // I fixed the styleOverrides to use theme colors instead of var()
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-              borderColor: '#64748B', // Better contrast for borders
+            borderRadius: 12,
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: baseTheme.palette.outline.variant, // Use theme
             },
-            '&:hover fieldset': {
-              borderColor: '#94A3B8',
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: baseTheme.palette.outline.main, // Use theme
             },
-            '&.Mui-focused fieldset': {
-              borderColor: '#A855F7',
-            },
-          },
-        },
-      },
-    },
-    // Add Card component styles for warm-toned cards like in your screenshots
-    MuiCard: {
-      variants: [
-        {
-          props: { variant: 'selected' },
-          style: {
-            border: '2px solid',
-            borderColor: '#A855F7', // Use new primary color
-            boxShadow: '0 0 12px rgba(168, 85, 247, 0.3)',
-          },
-        },
-        {
-          props: { variant: 'interactive' },
-          style: {
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              transform: 'translateY(-4px)',
-              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)',
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: baseTheme.palette.primary.main, // Use theme
+              borderWidth: 2,
             },
           },
-        },
-      ],
-      styleOverrides: {
-        root: {
-          backgroundColor: '#1A1A1A',
-          borderRadius: '12px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-          '&.warm-card': {
-            backgroundColor: '#2D1B12', // Warm brown background for accent cards
-            border: '1px solid #8B5A3C',
-          },
-          '&.purple-card': {
-            backgroundColor: '#1E1B3A', // Purple-tinted background
-            border: '1px solid #A855F7',
-          },
-        },
-      },
-    },
-    // Enhanced Paper component for consistency
-    MuiPaper: {
-      variants: [
-        {
-          props: { variant: 'selected' },
-          style: {
-            border: '2px solid',
-            borderColor: '#A855F7',
-            boxShadow: '0 0 12px rgba(168, 85, 247, 0.3)',
-          },
-        },
-        {
-          props: { variant: 'interactive' },
-          style: {
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              transform: 'translateY(-4px)',
-              boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)',
-            },
-          },
-        },
-      ],
-      styleOverrides: {
-        root: {
-          backgroundColor: '#1A1A1A',
-          '&.warm-paper': {
-            backgroundColor: '#2D1B12',
-          },
-        },
-      },
-    },
-    // Typography enhancements
-    MuiTypography: {
-      styleOverrides: {
-        h1: {
-          color: '#FFFFFF',
-          fontWeight: 700,
-        },
-        h2: {
-          color: '#FFFFFF',
-          fontWeight: 600,
-        },
-        h3: {
-          color: '#FFFFFF',
-          fontWeight: 600,
-        },
-        h4: {
-          color: '#FFFFFF',
-          fontWeight: 600,
-        },
-        h5: {
-          color: '#FFFFFF',
-          fontWeight: 500,
-        },
-        h6: {
-          color: '#FFFFFF',
-          fontWeight: 500,
         },
       },
     },
   },
 });
+
+export default finalTheme;

@@ -1,0 +1,116 @@
+import { Meta, Story } from '@storybook/addon-docs';
+import { ErrorBoundary } from '../components/ui/feedback/ErrorBoundary';
+
+<Meta title="Components/Feedback/ErrorBoundary" component={ErrorBoundary} />
+
+# ErrorBoundary
+
+The `ErrorBoundary` component catches JavaScript errors in its child component tree, logs those errors, and displays a fallback UI.
+
+## Basic Usage
+
+```jsx
+<ErrorBoundary>
+  <YourComponent />
+</ErrorBoundary>
+```
+
+## With Custom Fallback
+
+You can provide a custom fallback component:
+
+```jsx
+<ErrorBoundary
+  fallback={({ error, resetErrorBoundary }) => (
+    <div>
+      <h2>Something went wrong</h2>
+      <p>{error.message}</p>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  )}
+>
+  <YourComponent />
+</ErrorBoundary>
+```
+
+## With Error Reset
+
+```jsx
+<ErrorBoundary
+  onReset={() => {
+    // Reset the state of your app here
+  }}
+>
+  <YourComponent />
+</ErrorBoundary>
+```
+
+## With Error Reporting
+
+```jsx
+<ErrorBoundary
+  onError={(error, info) => {
+    // Log the error to an error reporting service
+    console.error('Error caught by boundary:', error, info);
+  }}
+>
+  <YourComponent />
+</ErrorBoundary>
+```
+
+## With HOC
+
+You can also use the `withErrorBoundary` HOC:
+
+```jsx
+import { withErrorBoundary } from '../components/ui/feedback/ErrorBoundary';
+
+const YourComponent = () => {
+  // Your component code
+};
+
+export default withErrorBoundary(YourComponent, {
+  fallback: <div>Something went wrong</div>,
+  onError: (error) => console.error(error),
+});
+```
+
+## Props
+
+| Prop | Type | Required | Description |
+|------|------|----------|-------------|
+| children | ReactNode | Yes | The child components to wrap with the error boundary |
+| fallback | ReactNode or (error: Error, resetErrorBoundary: () => void) => ReactNode | No | The fallback UI to display when an error occurs |
+| onError | (error: Error, info: ErrorInfo) => void | No | Callback when an error is caught |
+| onReset | () => void | No | Callback to reset the error state |
+| resetKeys | any[] | No | When changed, the error boundary will reset its state |
+
+## When to Use
+
+- To prevent your entire application from crashing due to an error in a single component
+- To provide a better user experience when something goes wrong
+- To log errors to a monitoring service
+
+## Best Practices
+
+- Wrap individual components that might fail with their own error boundaries
+- Use different fallback UIs for different parts of your application
+- Always log errors to a monitoring service
+- Provide a way for users to recover from errors when possible
+
+## Example
+
+<Story name="With Error">
+  {() => {
+    const ErrorProneComponent = () => {
+      throw new Error('This is a test error');
+      return <div>This won't render</div>;
+    };
+
+    return (
+      <ErrorBoundary>
+        <ErrorProneComponent />
+      </ErrorBoundary>
+    );
+  }}
+</Story>
