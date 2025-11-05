@@ -46,6 +46,7 @@ export default defineConfig({
     // Exclude patterns
     exclude: [
       '**/node_modules/**',
+      '**/Figma UI Files/**',
       '**/dist/**',
       '**/cypress/**',
       '**/e2e/**',
