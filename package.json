@@ -26,7 +26,8 @@
     "@vitest/expect": "^4.0.6",
     "@vitest/snapshot": "^4.0.6",
     "@vitest/spy": "^4.0.6",
-    "@vitest/ui": "^4.0.6"
+    "@vitest/ui": "^4.0.6",
+    "pathe": "2.0.3"
   },
   "scripts": {
     "prepare": "husky || true",
