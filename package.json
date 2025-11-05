@@ -78,6 +78,7 @@
     "@storybook/addon-onboarding": "^10.0.2",
     "@storybook/addon-vitest": "^10.0.2",
     "@storybook/blocks": "7.6.17",
+    "@storybook/builder-vite": "10.0.2",
     "@storybook/jest": "0.2.3",
     "@storybook/react": "7.6.17",
     "@storybook/react-vite": "^10.0.2",
