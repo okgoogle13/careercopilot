@@ -1,4 +1,5 @@
-// Create file: src/components/ui/card.tsx
+import React from 'react';
+import { cn } from '@/lib/utils';
 import { styled } from '@mui/material/styles';
 import type { CardProps as MuiCardProps } from '@mui/material/Card';
 

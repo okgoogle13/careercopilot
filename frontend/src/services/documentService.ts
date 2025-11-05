@@ -1,5 +1,4 @@
-import type {
-  DocumentData} from 'firebase/firestore';
+import type { DocumentData } from 'firebase/firestore';
 import {
   collection,
   doc,
@@ -17,10 +16,17 @@ import {
   DocumentSnapshot,
 } from 'firebase/firestore';
 
-import { db, auth } from '@/firebase-config';
 
-import type { UploadProgress } from './storageService';
-import { uploadDocument, deleteFile } from './storageService';
+// Define UploadProgress type locally since it's not exported from storageService
+type UploadProgress = {
+  progress: number;
+  bytesTransferred: number;
+  totalBytes: number;
+};
+
+import { uploadFile as uploadDocument, deleteFile } from './storageService';
+
+import { db, auth } from '@/firebase-config';
 
 export interface Document {
   id: string;
@@ -67,16 +73,17 @@ export async function uploadAndCreateDocument(
   }
 
   // Upload file to Storage
-  const uploadResult = await uploadDocument(file, user.uid, documentType, onProgress);
+  const storagePath = `${user.uid}/${documentType}/${file.name}`;
+  const downloadURL = await uploadDocument(file, storagePath);
 
   // Create Firestore document
   const documentData: CreateDocumentData = {
     name: file.name,
     type: documentType,
-    storagePath: uploadResult.fullPath,
-    downloadURL: uploadResult.downloadURL,
-    size: uploadResult.size,
-    contentType: uploadResult.contentType,
+    storagePath: storagePath,
+    downloadURL: downloadURL as string,
+    size: file.size,
+    contentType: file.type,
     tags: [],
   };
 

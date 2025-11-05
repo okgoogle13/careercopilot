@@ -1,4 +1,5 @@
 import { ColorSwatch } from '@/components/style-guide/ColorSwatch';
+import { Box } from '@mui/material';
 
 export default function StyleGuidePage() {
   const colorGroups = [
@@ -80,21 +81,54 @@ export default function StyleGuidePage() {
   ];
 
   return (
-    <div className="container mx-auto py-12 px-4">
-      <header className="mb-12">
-        <h1 className="text-4xl font-bold mb-2">Aurora Design System</h1>
-        <p className="text-muted-foreground">
+    <div sx={{
+      "container": true,
+      "mx-auto": true,
+      py: 12,
+      px: 4
+    }}>
+      <header sx={{
+      mb: 12
+    }}>
+        <h1 sx={{
+      typography: h2,
+      fontWeight: 700,
+      mb: 2
+    }}>Aurora Design System</h1>
+        <p sx={{
+      "text-muted-foreground": true
+    }}>
           A comprehensive guide to the Aurora design system colors and components
         </p>
       </header>
 
-      <section className="mb-16">
-        <h2 className="text-2xl font-semibold mb-6">Color Palette</h2>
-        <div className="space-y-12">
+      <section sx={{
+      mb: 16
+    }}>
+        <h2 sx={{
+      typography: h4,
+      fontWeight: 600,
+      mb: 6
+    }}>Color Palette</h2>
+        <div sx={{
+      "space-y-12": true
+    }}>
           {colorGroups.map((group, index) => (
             <div key={index}>
-              <h3 className="text-xl font-medium mb-4">{group.title}</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+              <h3 sx={{
+      typography: h5,
+      fontWeight: 500,
+      mb: 4
+    }}>{group.title}</h3>
+              <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('xs')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-4": true },
+      [theme.breakpoints.up('lg')]: { "grid-cols-5": true },
+      gap: 4
+    }}>
                 {group.colors.map((color, colorIndex) => (
                   <ColorSwatch
                     key={colorIndex}
@@ -109,26 +143,76 @@ export default function StyleGuidePage() {
         </div>
       </section>
 
-      <section className="mb-16">
-        <h2 className="text-2xl font-semibold mb-6">Color Usage</h2>
-        <div className="bg-card p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-medium mb-4">Text Colors</h3>
-          <div className="space-y-4">
-            <p className="text-primary">Primary Text (text-primary)</p>
-            <p className="text-secondary">Secondary Text (text-secondary)</p>
-            <p className="text-muted-foreground">Muted Text (text-muted-foreground)</p>
-            <p className="text-destructive">Destructive Text (text-destructive)</p>
+      <section sx={{
+      mb: 16
+    }}>
+        <h2 sx={{
+      typography: h4,
+      fontWeight: 600,
+      mb: 6
+    }}>Color Usage</h2>
+        <div sx={{
+      "bg-card": true,
+      p: 6,
+      borderRadius: 0.5rem,
+      boxShadow: 1
+    }}>
+          <h3 sx={{
+      typography: h6,
+      fontWeight: 500,
+      mb: 4
+    }}>Text Colors</h3>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <p sx={{
+      "text-primary": true
+    }}>Primary Text (text-primary)</p>
+            <p sx={{
+      "text-secondary": true
+    }}>Secondary Text (text-secondary)</p>
+            <p sx={{
+      "text-muted-foreground": true
+    }}>Muted Text (text-muted-foreground)</p>
+            <p sx={{
+      "text-destructive": true
+    }}>Destructive Text (text-destructive)</p>
           </div>
 
-          <h3 className="text-lg font-medium mt-8 mb-4">Backgrounds</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="bg-background p-4 rounded-lg border">
+          <h3 sx={{
+      typography: h6,
+      fontWeight: 500,
+      mt: 8,
+      mb: 4
+    }}>Backgrounds</h3>
+          <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 4
+    }}>
+            <div sx={{
+      "bg-background": true,
+      p: 4,
+      borderRadius: 0.5rem,
+      border: 1
+    }}>
               <p>Background (bg-background)</p>
             </div>
-            <div className="bg-card p-4 rounded-lg border">
+            <div sx={{
+      "bg-card": true,
+      p: 4,
+      borderRadius: 0.5rem,
+      border: 1
+    }}>
               <p>Card (bg-card)</p>
             </div>
-            <div className="bg-popover p-4 rounded-lg text-popover-foreground">
+            <div sx={{
+      "bg-popover": true,
+      p: 4,
+      borderRadius: 0.5rem,
+      "text-popover-foreground": true
+    }}>
               <p>Popover (bg-popover)</p>
             </div>
           </div>
@@ -136,20 +220,47 @@ export default function StyleGuidePage() {
       </section>
 
       <section>
-        <h2 className="text-2xl font-semibold mb-6">Accessibility</h2>
-        <div className="bg-card p-6 rounded-lg shadow-sm">
-          <h3 className="text-lg font-medium mb-4">Contrast Ratios</h3>
-          <div className="space-y-2">
+        <h2 sx={{
+      typography: h4,
+      fontWeight: 600,
+      mb: 6
+    }}>Accessibility</h2>
+        <div sx={{
+      "bg-card": true,
+      p: 6,
+      borderRadius: 0.5rem,
+      boxShadow: 1
+    }}>
+          <h3 sx={{
+      typography: h6,
+      fontWeight: 500,
+      mb: 4
+    }}>Contrast Ratios</h3>
+          <div sx={{
+      "space-y-2": true
+    }}>
             <p>
-              <span className="font-medium">AA (Minimum):</span> 4.5:1 for normal text, 3:1 for
+              <span sx={{
+      fontWeight: 500
+    }}>AA (Minimum):</span> 4.5:1 for normal text, 3:1 for
               large text
             </p>
             <p>
-              <span className="font-medium">AAA (Enhanced):</span> 7:1 for normal text, 4.5:1 for
+              <span sx={{
+      fontWeight: 500
+    }}>AAA (Enhanced):</span> 7:1 for normal text, 4.5:1 for
               large text
             </p>
-            <div className="mt-4 p-4 bg-destructive/10 text-destructive-foreground rounded">
-              <p className="font-medium">Note:</p>
+            <div sx={{
+      mt: 4,
+      p: 4,
+      "bg-destructive/10": true,
+      "text-destructive-foreground": true,
+      borderRadius: 0.25rem
+    }}>
+              <p sx={{
+      fontWeight: 500
+    }}>Note:</p>
               <p>Colors with contrast ratio below 4.5:1 will be marked with a warning indicator.</p>
               <p>Always test colors with real content and in context.</p>
             </div>

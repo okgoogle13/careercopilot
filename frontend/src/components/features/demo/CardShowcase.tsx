@@ -12,6 +12,7 @@ import {
   PlayArrow as Play,
   GpsFixed,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -52,25 +53,52 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-7xl mx-auto">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 6
+    }}>
+      <div sx={{
+      "max-w-7xl": true,
+      "mx-auto": true
+    }}>
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Button variant="text" size="small" onClick={onBack} className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
+        <div sx={{
+      mb: 8
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 4
+    }}>
+            <Button variant="text" size="small" onClick={onBack} sx={{
+      gap: 2
+    }}>
+              <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
               Back to Dashboard
             </Button>
           </div>
-          <h1 className="mb-2">Career Copilot Card Library</h1>
-          <p className="text-muted-foreground">
+          <h1 sx={{
+      mb: 2
+    }}>Career Copilot Card Library</h1>
+          <p sx={{
+      "text-muted-foreground": true
+    }}>
             A comprehensive showcase of five card variants: Default, Interactive, Selected, Loading,
             and Error
           </p>
         </div>
 
         {/* Card Variants Documentation */}
-        <div className="grid gap-6 mb-8">
+        <div sx={{
+      "grid": true,
+      gap: 6,
+      mb: 8
+    }}>
           <Card>
             <CardHeader
               title={<Typography variant="h3">Card Component Variants</Typography>}
@@ -81,48 +109,131 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
               }
             ></CardHeader>
             <CardContent>
-              <div className="grid gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 border border-border rounded bg-card"></div>
+              <div sx={{
+      "grid": true,
+      gap: 4
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.25rem,
+      "bg-card": true
+    }}></div>
                   <div>
-                    <p className="font-medium">Default Card</p>
-                    <p className="text-muted-foreground">
+                    <p sx={{
+      fontWeight: 500
+    }}>Default Card</p>
+                    <p sx={{
+      "text-muted-foreground": true
+    }}>
                       Standard card with subtle border for static content
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 border border-border rounded bg-card shadow-lg shadow-primary/10"></div>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.25rem,
+      "bg-card": true,
+      boxShadow: 4,
+      "shadow-primary/10": true
+    }}></div>
                   <div>
-                    <p className="font-medium">Interactive Card</p>
-                    <p className="text-muted-foreground">
+                    <p sx={{
+      fontWeight: 500
+    }}>Interactive Card</p>
+                    <p sx={{
+      "text-muted-foreground": true
+    }}>
                       Hover effects and cursor pointer for clickable content
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 border-2 border-primary rounded bg-card shadow-lg shadow-primary/20"></div>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 2,
+      "border-primary": true,
+      borderRadius: 0.25rem,
+      "bg-card": true,
+      boxShadow: 4,
+      "shadow-primary/20": true
+    }}></div>
                   <div>
-                    <p className="font-medium">Selected Card</p>
-                    <p className="text-muted-foreground">
+                    <p sx={{
+      fontWeight: 500
+    }}>Selected Card</p>
+                    <p sx={{
+      "text-muted-foreground": true
+    }}>
                       Prominent purple border and glow for active/selected state
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 border border-border rounded bg-card animate-pulse"></div>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.25rem,
+      "bg-card": true,
+      "animate-pulse": true
+    }}></div>
                   <div>
-                    <p className="font-medium">Loading Card</p>
-                    <p className="text-muted-foreground">
+                    <p sx={{
+      fontWeight: 500
+    }}>Loading Card</p>
+                    <p sx={{
+      "text-muted-foreground": true
+    }}>
                       Skeleton placeholders during data loading states
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-4 h-4 border border-destructive/50 rounded bg-destructive/5"></div>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                  <div sx={{
+      "w-4": true,
+      "h-4": true,
+      border: 1,
+      "border-destructive/50": true,
+      borderRadius: 0.25rem,
+      "bg-destructive/5": true
+    }}></div>
                   <div>
-                    <p className="font-medium">Error Card</p>
-                    <p className="text-muted-foreground">
+                    <p sx={{
+      fontWeight: 500
+    }}>Error Card</p>
+                    <p sx={{
+      "text-muted-foreground": true
+    }}>
                       Red-tinted border and background for error states
                     </p>
                   </div>
@@ -133,14 +244,26 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
         </div>
 
         {/* Live Examples Section */}
-        <div className="space-y-8">
+        <div sx={{
+      "space-y-8": true
+    }}>
           {/* Profile Cards Example */}
           <section>
-            <h2 className="mb-4">Profile Cards (Interactive & Selected)</h2>
-            <p className="text-muted-foreground mb-6">
+            <h2 sx={{
+      mb: 4
+    }}>Profile Cards (Interactive & Selected)</h2>
+            <p sx={{
+      "text-muted-foreground": true,
+      mb: 6
+    }}>
               Click on cards to select them. These demonstrate interactive and selected states.
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      gap: 6
+    }}>
               {[
                 {
                   id: 'card-1',
@@ -189,7 +312,11 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   }}
                 >
                   <CardHeader>
-                    <div className="flex items-start justify-between">
+                    <div sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between"
+    }}>
                       <div>
                         <CardTitle>{profile.name}</CardTitle>
                         <CardDescription>{profile.role}</CardDescription>
@@ -202,14 +329,25 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                             e.stopPropagation();
                             handleFavoriteToggle(profile.id);
                           }}
-                          className="p-1 h-8 w-8"
+                          sx={{
+      p: 1,
+      "h-8": true,
+      "w-8": true
+    }}
                         >
                           <Heart
-                            className={`w-4 h-4 ${
-                              favoriteCards.has(profile.id)
-                                ? 'fill-red-500 text-red-500'
-                                : 'text-muted-foreground'
-                            }`}
+                            sx={{
+      "w-4": true,
+      "h-4": true,
+      "${": true,
+      "favoriteCards.has(profile.id)": true,
+      "?": true,
+      "'fill-red-500": true,
+      "text-red-500'": true,
+      ":": true,
+      "'text-muted-foreground'": true,
+      "}": true
+    }}
                           />
                         </Button>
                       </CardAction>
@@ -217,25 +355,61 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   </CardHeader>
                   {profile.id !== 'card-3' && (
                     <CardContent>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Applications</span>
+                      <div sx={{
+      "space-y-4": true
+    }}>
+                        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                          <span sx={{
+      "text-muted-foreground": true
+    }}>Applications</span>
                           <Badge variant="secondary">{profile.applications}</Badge>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">ATS Score</span>
-                          <div className="flex items-center gap-2">
-                            <div className="w-12 h-2 bg-muted rounded-full overflow-hidden">
+                        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                          <span sx={{
+      "text-muted-foreground": true
+    }}>ATS Score</span>
+                          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                            <div sx={{
+      "w-12": true,
+      "h-2": true,
+      "bg-muted": true,
+      borderRadius: 9999px,
+      overflow: "hidden"
+    }}>
                               <div
-                                className="h-full bg-primary rounded-full"
+                                sx={{
+      height: "100%",
+      "bg-primary": true,
+      borderRadius: 9999px
+    }}
                                 style={{ width: `${profile.atsScore}%` }}
                               />
                             </div>
-                            <span className="font-medium">{profile.atsScore}%</span>
+                            <span sx={{
+      fontWeight: 500
+    }}>{profile.atsScore}%</span>
                           </div>
                         </div>
-                        <div className="flex items-center justify-between">
-                          <span className="text-muted-foreground">Status</span>
+                        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                          <span sx={{
+      "text-muted-foreground": true
+    }}>Status</span>
                           <Badge variant={profile.status === 'Active' ? 'default' : 'secondary'}>
                             {profile.status}
                           </Badge>
@@ -244,8 +418,15 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </CardContent>
                   )}
                   <CardFooter>
-                    <div className="flex items-center justify-between w-full">
-                      <span className="text-muted-foreground">
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>
                         {profile.lastUpdated || 'Click to create'}
                       </span>
                       {selectedCard === profile.id && (
@@ -265,11 +446,21 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
           {/* Default Cards Example */}
           <section>
-            <h2 className="mb-4">Information Cards (Default)</h2>
-            <p className="text-muted-foreground mb-6">
+            <h2 sx={{
+      mb: 4
+    }}>Information Cards (Default)</h2>
+            <p sx={{
+      "text-muted-foreground": true,
+      mb: 6
+    }}>
               Static information cards using the default variant for non-interactive content.
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: { "grid-cols-4": true },
+      gap: 6
+    }}>
               {[
                 {
                   icon: User,
@@ -299,14 +490,32 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                 const IconComponent = stat.icon;
                 return (
                   <Card key={index}>
-                    <CardContent className="pt-6">
-                      <div className="flex items-center gap-4">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <IconComponent className="w-6 h-6 text-primary" />
+                    <CardContent sx={{
+      pt: 6
+    }}>
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
+                        <div sx={{
+      p: 2,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}>
+                          <IconComponent sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
                         </div>
                         <div>
-                          <p className="font-medium">{stat.value}</p>
-                          <p className="text-muted-foreground">{stat.title}</p>
+                          <p sx={{
+      fontWeight: 500
+    }}>{stat.value}</p>
+                          <p sx={{
+      "text-muted-foreground": true
+    }}>{stat.title}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -318,15 +527,28 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
           {/* Mixed Usage Example */}
           <section>
-            <h2 className="mb-4">Template Selection (Mixed Usage)</h2>
-            <p className="text-muted-foreground mb-6">
+            <h2 sx={{
+      mb: 4
+    }}>Template Selection (Mixed Usage)</h2>
+            <p sx={{
+      "text-muted-foreground": true,
+      mb: 6
+    }}>
               Combining all three variants in a template selection interface.
             </p>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 6
+    }}>
               {/* Featured Template - Selected */}
               <Card>
                 <CardHeader>
-                  <div className="flex items-start justify-between">
+                  <div sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between"
+    }}>
                     <div>
                       <CardTitle>Modern Minimal</CardTitle>
                       <CardDescription>Professional & Clean</CardDescription>
@@ -335,18 +557,43 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-3">
-                    <div className="h-32 bg-muted rounded-lg flex items-center justify-center">
-                      <FileText className="w-8 h-8 text-muted-foreground" />
+                  <div sx={{
+      "space-y-3": true
+    }}>
+                    <div sx={{
+      "h-32": true,
+      "bg-muted": true,
+      borderRadius: 0.5rem,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                      <FileText sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-muted-foreground": true
+    }} />
                     </div>
-                    <div className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      <span className="text-green-500">ATS Optimized</span>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                      <CheckCircle sx={{
+      "w-4": true,
+      "h-4": true,
+      color: "green.500"
+    }} />
+                      <span sx={{
+      color: "green.500"
+    }}>ATS Optimized</span>
                     </div>
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full">Currently Selected</Button>
+                  <Button sx={{
+      width: "100%"
+    }}>Currently Selected</Button>
                 </CardFooter>
               </Card>
 
@@ -365,18 +612,41 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     }
                   ></CardHeader>
                   <CardContent>
-                    <div className="space-y-3">
-                      <div className="h-32 bg-muted rounded-lg flex items-center justify-center">
-                        <FileText className="w-8 h-8 text-muted-foreground" />
+                    <div sx={{
+      "space-y-3": true
+    }}>
+                      <div sx={{
+      "h-32": true,
+      "bg-muted": true,
+      borderRadius: 0.5rem,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                        <FileText sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-muted-foreground": true
+    }} />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Star className="w-4 h-4 text-yellow-500" />
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                        <Star sx={{
+      "w-4": true,
+      "h-4": true,
+      color: "yellow.500"
+    }} />
                         <span>4.{5 + index} rating</span>
                       </div>
                     </div>
                   </CardContent>
                   <CardFooter>
-                    <Button variant="outlined" className="w-full">
+                    <Button variant="outlined" sx={{
+      width: "100%"
+    }}>
                       Select Template
                     </Button>
                   </CardFooter>
@@ -387,27 +657,51 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
           {/* Loading and Error States Example */}
           <section>
-            <h2 className="mb-4">Loading & Error States</h2>
-            <p className="text-muted-foreground mb-6">
+            <h2 sx={{
+      mb: 4
+    }}>Loading & Error States</h2>
+            <p sx={{
+      "text-muted-foreground": true,
+      mb: 6
+    }}>
               Specialized card variants for handling loading and error states with appropriate
               visual feedback.
             </p>
-            <div className="grid md:grid-cols-3 gap-6">
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 6
+    }}>
               {/* Loading Profile Card */}
-              <div className="space-y-3">
-                <h3 className="font-medium text-card-foreground">Loading Profile</h3>
+              <div sx={{
+      "space-y-3": true
+    }}>
+                <h3 sx={{
+      fontWeight: 500,
+      "text-card-foreground": true
+    }}>Loading Profile</h3>
                 <LoadingProfileCard />
               </div>
 
               {/* Error Profile Card */}
-              <div className="space-y-3">
-                <h3 className="font-medium text-card-foreground">Error Profile</h3>
+              <div sx={{
+      "space-y-3": true
+    }}>
+                <h3 sx={{
+      fontWeight: 500,
+      "text-card-foreground": true
+    }}>Error Profile</h3>
                 <ErrorProfileCard onRetry={() => alert('Retrying...')} />
               </div>
 
               {/* Generic Error Card */}
-              <div className="space-y-3">
-                <h3 className="font-medium text-card-foreground">Generic Error</h3>
+              <div sx={{
+      "space-y-3": true
+    }}>
+                <h3 sx={{
+      fontWeight: 500,
+      "text-card-foreground": true
+    }}>Generic Error</h3>
                 <ErrorCard
                   title="Connection Failed"
                   message="Unable to connect to the server. Please check your internet connection."
@@ -419,71 +713,185 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
           {/* State Comparison */}
           <section>
-            <h2 className="mb-4">State Progression Example</h2>
-            <p className="text-muted-foreground mb-6">
+            <h2 sx={{
+      mb: 4
+    }}>State Progression Example</h2>
+            <p sx={{
+      "text-muted-foreground": true,
+      mb: 6
+    }}>
               See how a profile card transitions through different states during the data loading
               lifecycle.
             </p>
-            <div className="grid md:grid-cols-4 gap-6">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Loader2 className="w-4 h-4 text-primary animate-spin" />
-                  <h4 className="font-medium">1. Loading</h4>
+            <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-4": true },
+      gap: 6
+    }}>
+              <div sx={{
+      "space-y-3": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <Loader2 sx={{
+      "w-4": true,
+      "h-4": true,
+      "text-primary": true,
+      "animate-spin": true
+    }} />
+                  <h4 sx={{
+      fontWeight: 500
+    }}>1. Loading</h4>
                 </div>
                 <LoadingCard />
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <h4 className="font-medium">2. Loaded</h4>
+              <div sx={{
+      "space-y-3": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <CheckCircle sx={{
+      "w-4": true,
+      "h-4": true,
+      color: "green.500"
+    }} />
+                  <h4 sx={{
+      fontWeight: 500
+    }}>2. Loaded</h4>
                 </div>
                 <Card sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-medium">ND</span>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                    <div sx={{
+      "w-12": true,
+      "h-12": true,
+      bgcolor: "purple.500",
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                      <span sx={{
+      color: "common.white",
+      fontWeight: 500
+    }}>ND</span>
                     </div>
                     <div>
-                      <h3 className="font-medium text-card-foreground">Nishant Dougall</h3>
-                      <p className="text-muted-foreground">Community Support Worker</p>
+                      <h3 sx={{
+      fontWeight: 500,
+      "text-card-foreground": true
+    }}>Nishant Dougall</h3>
+                      <p sx={{
+      "text-muted-foreground": true
+    }}>Community Support Worker</p>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Applications</span>
+                  <div sx={{
+      "space-y-2": true
+    }}>
+                    <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>Applications</span>
                       <Badge variant="secondary">8</Badge>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">ATS Score</span>
-                      <span className="text-primary">92%</span>
+                    <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>ATS Score</span>
+                      <span sx={{
+      "text-primary": true
+    }}>92%</span>
                     </div>
                   </div>
                 </Card>
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Star className="w-4 h-4 text-primary" />
-                  <h4 className="font-medium">3. Selected</h4>
+              <div sx={{
+      "space-y-3": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <Star sx={{
+      "w-4": true,
+      "h-4": true,
+      "text-primary": true
+    }} />
+                  <h4 sx={{
+      fontWeight: 500
+    }}>3. Selected</h4>
                 </div>
                 <Card sx={{ p: 3, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
-                      <span className="text-white font-medium">ND</span>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                    <div sx={{
+      "w-12": true,
+      "h-12": true,
+      bgcolor: "purple.500",
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
+                      <span sx={{
+      color: "common.white",
+      fontWeight: 500
+    }}>ND</span>
                     </div>
                     <div>
-                      <h3 className="font-medium text-card-foreground">Nishant Dougall</h3>
-                      <p className="text-muted-foreground">Community Support Worker</p>
+                      <h3 sx={{
+      fontWeight: 500,
+      "text-card-foreground": true
+    }}>Nishant Dougall</h3>
+                      <p sx={{
+      "text-muted-foreground": true
+    }}>Community Support Worker</p>
                     </div>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">Applications</span>
+                  <div sx={{
+      "space-y-2": true
+    }}>
+                    <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>Applications</span>
                       <Badge variant="secondary">8</Badge>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-muted-foreground">ATS Score</span>
-                      <span className="text-primary">92%</span>
+                    <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                      <span sx={{
+      "text-muted-foreground": true
+    }}>ATS Score</span>
+                      <span sx={{
+      "text-primary": true
+    }}>92%</span>
                     </div>
                   </div>
                   <Badge
@@ -495,10 +903,22 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                 </Card>
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4 text-destructive" />
-                  <h4 className="font-medium">4. Error</h4>
+              <div sx={{
+      "space-y-3": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                  <AlertTriangle sx={{
+      "w-4": true,
+      "h-4": true,
+      "text-destructive": true
+    }} />
+                  <h4 sx={{
+      fontWeight: 500
+    }}>4. Error</h4>
                 </div>
                 <ErrorProfileCard onRetry={() => alert('Retrying...')} />
               </div>
@@ -507,21 +927,49 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
           {/* Interactive Demo Link */}
           <section>
-            <h2 className="mb-4">Interactive State Demo</h2>
-            <p className="text-muted-foreground mb-6">
+            <h2 sx={{
+      mb: 4
+    }}>Interactive State Demo</h2>
+            <p sx={{
+      "text-muted-foreground": true,
+      mb: 6
+    }}>
               Experience these card variants in action with realistic loading, error, and data
               scenarios.
             </p>
             <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Play className="w-6 h-6 text-primary" />
+              <CardContent sx={{
+      p: 6
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
+                    <div sx={{
+      p: 3,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}>
+                      <Play sx={{
+      "w-6": true,
+      "h-6": true,
+      "text-primary": true
+    }} />
                     </div>
                     <div>
-                      <h3 className="font-medium mb-1">Try the Interactive Demo</h3>
-                      <p className="text-muted-foreground">
+                      <h3 sx={{
+      fontWeight: 500,
+      mb: 1
+    }}>Try the Interactive Demo</h3>
+                      <p sx={{
+      "text-muted-foreground": true
+    }}>
                         Simulate loading states, network errors, and data management scenarios
                       </p>
                     </div>
@@ -534,13 +982,27 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
           {/* Usage Guidelines */}
           <section>
-            <h2 className="mb-4">Usage Guidelines</h2>
+            <h2 sx={{
+      mb: 4
+    }}>Usage Guidelines</h2>
             <Card>
-              <CardContent className="pt-6">
-                <div className="grid md:grid-cols-5 gap-6">
+              <CardContent sx={{
+      pt: 6
+    }}>
+                <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-5": true },
+      gap: 6
+    }}>
                   <div>
-                    <h4 className="mb-2 font-medium">Default Cards</h4>
-                    <ul className="space-y-1 text-muted-foreground">
+                    <h4 sx={{
+      mb: 2,
+      fontWeight: 500
+    }}>Default Cards</h4>
+                    <ul sx={{
+      "space-y-1": true,
+      "text-muted-foreground": true
+    }}>
                       <li>• Static information display</li>
                       <li>• Statistics and metrics</li>
                       <li>• Non-interactive content</li>
@@ -548,8 +1010,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="mb-2 font-medium">Interactive Cards</h4>
-                    <ul className="space-y-1 text-muted-foreground">
+                    <h4 sx={{
+      mb: 2,
+      fontWeight: 500
+    }}>Interactive Cards</h4>
+                    <ul sx={{
+      "space-y-1": true,
+      "text-muted-foreground": true
+    }}>
                       <li>• Clickable content</li>
                       <li>• Navigation elements</li>
                       <li>• Template selection</li>
@@ -557,8 +1025,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="mb-2 font-medium">Selected Cards</h4>
-                    <ul className="space-y-1 text-muted-foreground">
+                    <h4 sx={{
+      mb: 2,
+      fontWeight: 500
+    }}>Selected Cards</h4>
+                    <ul sx={{
+      "space-y-1": true,
+      "text-muted-foreground": true
+    }}>
                       <li>• Active selections</li>
                       <li>• Current choices</li>
                       <li>• Featured content</li>
@@ -566,8 +1040,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="mb-2 font-medium">Loading Cards</h4>
-                    <ul className="space-y-1 text-muted-foreground">
+                    <h4 sx={{
+      mb: 2,
+      fontWeight: 500
+    }}>Loading Cards</h4>
+                    <ul sx={{
+      "space-y-1": true,
+      "text-muted-foreground": true
+    }}>
                       <li>• Data fetching states</li>
                       <li>• Skeleton placeholders</li>
                       <li>• Initial page loads</li>
@@ -575,8 +1055,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </ul>
                   </div>
                   <div>
-                    <h4 className="mb-2 font-medium">Error Cards</h4>
-                    <ul className="space-y-1 text-muted-foreground">
+                    <h4 sx={{
+      mb: 2,
+      fontWeight: 500
+    }}>Error Cards</h4>
+                    <ul sx={{
+      "space-y-1": true,
+      "text-muted-foreground": true
+    }}>
                       <li>• Failed data loads</li>
                       <li>• Network errors</li>
                       <li>• Validation failures</li>

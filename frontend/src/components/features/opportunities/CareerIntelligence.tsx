@@ -6,6 +6,7 @@ import {
   MenuBook as BookOpen,
   Error as AlertCircle,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -141,86 +142,208 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4">
-      <div className="max-w-7xl mx-auto">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 4
+    }}>
+      <div sx={{
+      "max-w-7xl": true,
+      "mx-auto": true
+    }}>
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 8
+    }}>
           <Button variant="text" size="small" onClick={onBack}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             Back to Career Hub
           </Button>
         </div>
 
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-semibold">Career Intelligence</h1>
+        <div sx={{
+      textAlign: "center",
+      mb: 8
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      mb: 4
+    }}>
+            <Sparkles sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-primary": true
+    }} />
+            <h1 sx={{
+      typography: h3,
+      fontWeight: 600
+    }}>Career Intelligence</h1>
           </div>
-          <p className="text-muted-foreground text-lg">
+          <p sx={{
+      "text-muted-foreground": true,
+      typography: h6
+    }}>
             Get data-driven insights about your career trajectory and growth opportunities.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+        <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('lg')]: { "grid-cols-3": true },
+      gap: 8
+    }}>
           {/* Left Column - Skill Gaps */}
-          <div className="xl:col-span-2 space-y-6">
+          <div sx={{
+      [theme.breakpoints.up('lg')]: { "col-span-2": true },
+      "space-y-6": true
+    }}>
             {/* Skill Gap Analysis */}
-            <Card className="p-6">
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-red-500/10 rounded-lg">
-                    <AlertCircle className="w-5 h-5 text-red-500" />
+            <Card sx={{
+      p: 6
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 6
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                  <div sx={{
+      p: 2,
+      "bg-red-500/10": true,
+      borderRadius: 0.5rem
+    }}>
+                    <AlertCircle sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "red.500"
+    }} />
                   </div>
-                  <h3 className="text-xl font-semibold">Identified Skill Gaps</h3>
+                  <h3 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>Identified Skill Gaps</h3>
                 </div>
-                <Badge className="bg-primary/10 text-primary border-primary/30">
-                  <Sparkles className="w-3 h-3 mr-1" />
+                <Badge sx={{
+      "bg-primary/10": true,
+      "text-primary": true,
+      "border-primary/30": true
+    }}>
+                  <Sparkles sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                   AI Analysis
                 </Badge>
               </div>
 
-              <div className="space-y-4">
+              <div sx={{
+      "space-y-4": true
+    }}>
                 {skillGaps.map((gap, index) => (
-                  <div key={index} className="p-4 bg-card border border-border rounded-lg">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium">{gap.skill}</h4>
-                      <div className="flex items-center gap-2">
+                  <div key={index} sx={{
+      p: 4,
+      "bg-card": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 3
+    }}>
+                      <h4 sx={{
+      fontWeight: 500
+    }}>{gap.skill}</h4>
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
                         <Badge variant="outline" className={getImportanceColor(gap.importance)}>
                           {gap.importance} Priority
                         </Badge>
-                        <span className="text-sm text-muted-foreground">
+                        <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                           {gap.demand}% market demand
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-sm text-muted-foreground mb-3">{gap.description}</p>
+                    <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mb: 3
+    }}>{gap.description}</p>
 
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
+                    <div sx={{
+      "space-y-2": true
+    }}>
+                      <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      typography: body1
+    }}>
                         <span>Current Level</span>
                         <span>{gap.currentLevel}%</span>
                       </div>
-                      <Progress value={gap.currentLevel} className="w-full" />
+                      <Progress value={gap.currentLevel} sx={{
+      width: "100%"
+    }} />
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-6 text-center">
+              <div sx={{
+      mt: 6,
+      textAlign: "center"
+    }}>
                 <Button
                   onClick={handleGenerateLearningPath}
                   disabled={isGeneratingPath}
-                  className="bg-primary hover:bg-primary/90"
+                  sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
                 >
                   {isGeneratingPath ? (
                     <>
-                      <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
+                      <Sparkles sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2,
+      "animate-pulse": true
+    }} />
                       Generating Learning Path...
                     </>
                   ) : (
                     <>
-                      <Sparkles className="w-4 h-4 mr-2" />
+                      <Sparkles sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                       Generate Learning Path
                     </>
                   )}
@@ -229,37 +352,98 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
             </Card>
 
             {/* Career Paths */}
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-green-500/10 rounded-lg">
-                  <Target className="w-5 h-5 text-green-500" />
+            <Card sx={{
+      p: 6
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                <div sx={{
+      p: 2,
+      "bg-green-500/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <Target sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "green.500"
+    }} />
                 </div>
-                <h3 className="text-xl font-semibold">Career Path Opportunities</h3>
+                <h3 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>Career Path Opportunities</h3>
               </div>
 
-              <div className="space-y-4">
+              <div sx={{
+      "space-y-4": true
+    }}>
                 {careerPaths.map((path, index) => (
-                  <div key={index} className="p-4 bg-card border border-border rounded-lg">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-lg">{path.title}</h4>
-                      <div className="text-right">
-                        <div className="text-sm text-green-500 font-medium">
+                  <div key={index} sx={{
+      p: 4,
+      "bg-card": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 3
+    }}>
+                      <h4 sx={{
+      fontWeight: 500,
+      typography: h6
+    }}>{path.title}</h4>
+                      <div sx={{
+      textAlign: "right"
+    }}>
+                        <div sx={{
+      typography: body1,
+      color: "green.500",
+      fontWeight: 500
+    }}>
                           {path.probability}% probability
                         </div>
-                        <div className="text-sm text-muted-foreground">{path.timeframe}</div>
+                        <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{path.timeframe}</div>
                       </div>
                     </div>
 
-                    <div className="mb-3">
-                      <span className="text-sm text-muted-foreground">Salary increase: </span>
-                      <span className="text-sm font-medium">{path.salaryIncrease}</span>
+                    <div sx={{
+      mb: 3
+    }}>
+                      <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Salary increase: </span>
+                      <span sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>{path.salaryIncrease}</span>
                     </div>
 
                     <div>
-                      <p className="text-sm text-muted-foreground mb-2">Requirements:</p>
-                      <div className="flex flex-wrap gap-2">
+                      <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mb: 2
+    }}>Requirements:</p>
+                      <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
                         {path.requirements.map((req, reqIndex) => (
-                          <Badge key={reqIndex} variant="secondary" className="text-xs">
+                          <Badge key={reqIndex} variant="secondary" sx={{
+      typography: body2
+    }}>
                             {req}
                           </Badge>
                         ))}
@@ -272,34 +456,92 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
           </div>
 
           {/* Right Column - Market Trends & Learning Path */}
-          <div className="space-y-6">
+          <div sx={{
+      "space-y-6": true
+    }}>
             {/* Market Trends */}
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <TrendingUp className="w-5 h-5 text-blue-500" />
+            <Card sx={{
+      p: 6
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                <div sx={{
+      p: 2,
+      "bg-blue-500/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <TrendingUp sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "blue.500"
+    }} />
                 </div>
-                <h3 className="text-lg font-semibold">Market Trends</h3>
+                <h3 sx={{
+      typography: h6,
+      fontWeight: 600
+    }}>Market Trends</h3>
               </div>
 
-              <div className="space-y-4">
+              <div sx={{
+      "space-y-4": true
+    }}>
                 {marketTrends.map((trend, index) => (
-                  <div key={index} className="p-3 bg-card border border-border rounded-lg">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-medium text-sm">{trend.trend}</h4>
-                      <div className="flex items-center gap-2">
-                        <TrendingUp className="w-4 h-4 text-green-500" />
-                        <span className="text-sm font-medium text-green-500">{trend.growth}</span>
+                  <div key={index} sx={{
+      p: 3,
+      "bg-card": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 2
+    }}>
+                      <h4 sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>{trend.trend}</h4>
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                        <TrendingUp sx={{
+      "w-4": true,
+      "h-4": true,
+      color: "green.500"
+    }} />
+                        <span sx={{
+      typography: body1,
+      fontWeight: 500,
+      color: "green.500"
+    }}>{trend.growth}</span>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant={getImpactBadgeVariant(trend.impact)} className="text-xs">
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 2
+    }}>
+                      <Badge variant={getImpactBadgeVariant(trend.impact)} sx={{
+      typography: body2
+    }}>
                         {trend.impact} Impact
                       </Badge>
                     </div>
 
-                    <p className="text-xs text-muted-foreground">{trend.description}</p>
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>{trend.description}</p>
                   </div>
                 ))}
               </div>
@@ -307,41 +549,110 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
 
             {/* Learning Path (conditionally shown) */}
             {showLearningPath && (
-              <Card className="p-6 bg-primary/5 border-primary/20">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <BookOpen className="w-5 h-5 text-primary" />
+              <Card sx={{
+      p: 6,
+      "bg-primary/5": true,
+      "border-primary/20": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 4
+    }}>
+                  <div sx={{
+      p: 2,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}>
+                    <BookOpen sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-primary": true
+    }} />
                   </div>
-                  <h3 className="text-lg font-semibold text-primary">AI-Generated Learning Path</h3>
+                  <h3 sx={{
+      typography: h6,
+      fontWeight: 600,
+      "text-primary": true
+    }}>AI-Generated Learning Path</h3>
                 </div>
 
-                <div className="space-y-3">
-                  <div className="p-3 bg-background border border-border rounded-lg">
-                    <h4 className="font-medium text-sm mb-1">Phase 1: Foundation (Weeks 1-4)</h4>
-                    <p className="text-xs text-muted-foreground">
+                <div sx={{
+      "space-y-3": true
+    }}>
+                  <div sx={{
+      p: 3,
+      "bg-background": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem
+    }}>
+                    <h4 sx={{
+      fontWeight: 500,
+      typography: body1,
+      mb: 1
+    }}>Phase 1: Foundation (Weeks 1-4)</h4>
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                       Python basics, data types, control structures
                     </p>
                   </div>
 
-                  <div className="p-3 bg-background border border-border rounded-lg">
-                    <h4 className="font-medium text-sm mb-1">Phase 2: Application (Weeks 5-8)</h4>
-                    <p className="text-xs text-muted-foreground">
+                  <div sx={{
+      p: 3,
+      "bg-background": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem
+    }}>
+                    <h4 sx={{
+      fontWeight: 500,
+      typography: body1,
+      mb: 1
+    }}>Phase 2: Application (Weeks 5-8)</h4>
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                       Pandas for data analysis, basic statistics
                     </p>
                   </div>
 
-                  <div className="p-3 bg-background border border-border rounded-lg">
-                    <h4 className="font-medium text-sm mb-1">
+                  <div sx={{
+      p: 3,
+      "bg-background": true,
+      border: 1,
+      "border-border": true,
+      borderRadius: 0.5rem
+    }}>
+                    <h4 sx={{
+      fontWeight: 500,
+      typography: body1,
+      mb: 1
+    }}>
                       Phase 3: Specialization (Weeks 9-12)
                     </h4>
-                    <p className="text-xs text-muted-foreground">
+                    <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                       Healthcare data analysis, reporting dashboards
                     </p>
                   </div>
                 </div>
 
-                <Button className="w-full mt-4" variant="outlined">
-                  <BookOpen className="w-4 h-4 mr-2" />
+                <Button sx={{
+      width: "100%",
+      mt: 4
+    }} variant="outlined">
+                  <BookOpen sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                   View Full Learning Plan
                 </Button>
               </Card>

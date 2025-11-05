@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box } from '@mui/material';
 import React, { useState } from 'react';
 
 import { Checkbox } from '../ui/checkbox';
@@ -24,23 +25,39 @@ export function FormComponentsSection() {
       description="Input controls and form elements for user data collection"
     >
       <ComponentDemo title="Input Controls">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <div className="space-y-2">
+        <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      "space-y-2": true
+    }}>
               <Label htmlFor="text-input">Text Input</Label>
               <Input id="text-input" placeholder="Enter text here..." />
             </div>
-            <div className="space-y-2">
+            <div sx={{
+      "space-y-2": true
+    }}>
               <Label htmlFor="password-input">Password Input</Label>
               <Input id="password-input" type="password" placeholder="Password" />
             </div>
-            <div className="space-y-2">
+            <div sx={{
+      "space-y-2": true
+    }}>
               <Label htmlFor="textarea">Textarea</Label>
               <Textarea id="textarea" placeholder="Enter longer text here..." />
             </div>
           </div>
-          <div className="space-y-4">
-            <div className="space-y-2">
+          <div sx={{
+      "space-y-4": true
+    }}>
+            <div sx={{
+      "space-y-2": true
+    }}>
               <FormControl fullWidth>
                 <InputLabel>Select</InputLabel>
                 <Select
@@ -54,9 +71,15 @@ export function FormComponentsSection() {
                 </Select>
               </FormControl>
             </div>
-            <div className="space-y-2">
+            <div sx={{
+      "space-y-2": true
+    }}>
               <Label>Switch</Label>
-              <div className="flex items-center space-x-2">
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
                 <Switch
                   id="switch"
                   checked={switchChecked}
@@ -65,9 +88,15 @@ export function FormComponentsSection() {
                 <Label htmlFor="switch">Enable notifications</Label>
               </div>
             </div>
-            <div className="space-y-2">
+            <div sx={{
+      "space-y-2": true
+    }}>
               <Label>Checkbox</Label>
-              <div className="flex items-center space-x-2">
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
                 <Checkbox
                   id="checkbox"
                   checked={checkboxChecked}
@@ -81,34 +110,59 @@ export function FormComponentsSection() {
       </ComponentDemo>
 
       <ComponentDemo title="Radio Group & Slider">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
+        <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
+          <div sx={{
+      "space-y-4": true
+    }}>
             <Label>Radio Group</Label>
             <RadioGroup value={radioValue} onChange={(e) => setRadioValue(e.target.value)}>
-              <div className="flex items-center space-x-2">
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
                 <RadioGroupItem value="option1" id="option1" />
                 <Label htmlFor="option1">Option 1</Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
                 <RadioGroupItem value="option2" id="option2" />
                 <Label htmlFor="option2">Option 2</Label>
               </div>
-              <div className="flex items-center space-x-2">
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
                 <RadioGroupItem value="option3" id="option3" />
                 <Label htmlFor="option3">Option 3</Label>
               </div>
             </RadioGroup>
           </div>
-          <div className="space-y-4">
+          <div sx={{
+      "space-y-4": true
+    }}>
             <Label>Slider</Label>
             <Slider
               value={sliderValue}
               onChange={(e, value) => setSliderValue(Array.isArray(value) ? value : [value])}
               max={100}
               step={1}
-              className="w-full"
+              sx={{
+      width: "100%"
+    }}
             />
-            <p className="text-sm text-muted-foreground">Value: {sliderValue[0]}</p>
+            <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Value: {sliderValue[0]}</p>
           </div>
         </div>
       </ComponentDemo>

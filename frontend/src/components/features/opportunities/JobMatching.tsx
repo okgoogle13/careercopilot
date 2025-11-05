@@ -8,6 +8,7 @@ import {
   Favorite as Heart,
   Star,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -121,52 +122,149 @@ export function JobMatching({ onBack }: JobMatchingProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4">
-      <div className="max-w-6xl mx-auto">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 4
+    }}>
+      <div sx={{
+      "max-w-6xl": true,
+      "mx-auto": true
+    }}>
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 8
+    }}>
           <Button variant="text" size="small" onClick={onBack}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             Back to Career Hub
           </Button>
         </div>
 
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Sparkles className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-semibold">AI Job Matching</h1>
+        <div sx={{
+      textAlign: "center",
+      mb: 8
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      mb: 4
+    }}>
+            <Sparkles sx={{
+      "w-8": true,
+      "h-8": true,
+      "text-primary": true
+    }} />
+            <h1 sx={{
+      typography: h3,
+      fontWeight: 600
+    }}>AI Job Matching</h1>
           </div>
-          <p className="text-muted-foreground text-lg">
+          <p sx={{
+      "text-muted-foreground": true,
+      typography: h6
+    }}>
             Discover roles that perfectly match your skills, experience, and career goals.
           </p>
         </div>
 
         {/* Job Matches */}
-        <div className="space-y-6">
+        <div sx={{
+      "space-y-6": true
+    }}>
           {jobMatches.map((job) => (
-            <Card key={job.id} className="p-6 hover:shadow-lg transition-shadow">
-              <div className="flex flex-col lg:flex-row gap-6">
+            <Card key={job.id} sx={{
+      p: 6,
+      '&:hover': { boxShadow: 4 },
+      "transition-shadow": true
+    }}>
+              <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      [theme.breakpoints.up('md')]: { flexDirection: "row" },
+      gap: 6
+    }}>
                 {/* Main Job Info */}
-                <div className="flex-1 space-y-4">
-                  <div className="flex items-start justify-between">
+                <div sx={{
+      flex: 1,
+      "space-y-4": true
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between"
+    }}>
                     <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-semibold">{job.title}</h3>
-                        {job.isFavorited && <Heart className="w-5 h-5 text-red-500 fill-current" />}
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 2
+    }}>
+                        <h3 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>{job.title}</h3>
+                        {job.isFavorited && <Heart sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "red.500",
+      fill: "currentColor"
+    }} />}
                       </div>
-                      <p className="text-lg text-muted-foreground">{job.company}</p>
+                      <p sx={{
+      typography: h6,
+      "text-muted-foreground": true
+    }}>{job.company}</p>
 
-                      <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mt: 2,
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
+                        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                          <MapPin sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                           {job.location}
                         </div>
-                        <div className="flex items-center gap-1">
-                          <DollarSign className="w-4 h-4" />
+                        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                          <DollarSign sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                           {job.salaryRange}
                         </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
+                        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                          <Clock sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                           {job.postedDate}
                         </div>
                         {job.isRemote && <Badge variant="secondary">Remote Available</Badge>}
@@ -174,18 +272,42 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                     </div>
                   </div>
 
-                  <p className="text-muted-foreground leading-relaxed">{job.description}</p>
+                  <p sx={{
+      "text-muted-foreground": true,
+      "leading-relaxed": true
+    }}>{job.description}</p>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 4
+    }}>
                     <div>
-                      <h4 className="font-medium mb-2">Key Requirements</h4>
-                      <ul className="space-y-1">
+                      <h4 sx={{
+      fontWeight: 500,
+      mb: 2
+    }}>Key Requirements</h4>
+                      <ul sx={{
+      "space-y-1": true
+    }}>
                         {job.keyRequirements.map((req, index) => (
                           <li
                             key={index}
-                            className="text-sm text-muted-foreground flex items-center gap-2"
+                            sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}
                           >
-                            <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                            <div sx={{
+      "w-1.5": true,
+      "h-1.5": true,
+      "bg-primary": true,
+      borderRadius: 9999px
+    }} />
                             {req}
                           </li>
                         ))}
@@ -193,14 +315,30 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                     </div>
 
                     <div>
-                      <h4 className="font-medium mb-2">Benefits</h4>
-                      <ul className="space-y-1">
+                      <h4 sx={{
+      fontWeight: 500,
+      mb: 2
+    }}>Benefits</h4>
+                      <ul sx={{
+      "space-y-1": true
+    }}>
                         {job.benefits.map((benefit, index) => (
                           <li
                             key={index}
-                            className="text-sm text-muted-foreground flex items-center gap-2"
+                            sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}
                           >
-                            <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
+                            <div sx={{
+      "w-1.5": true,
+      "h-1.5": true,
+      bgcolor: "green.500",
+      borderRadius: 9999px
+    }} />
                             {benefit}
                           </li>
                         ))}
@@ -210,58 +348,128 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                 </div>
 
                 {/* Match Score & Actions */}
-                <div className="lg:w-80 space-y-4">
-                  <Card className={`p-4 ${getMatchBgColor(job.matchPercentage)} border-0`}>
-                    <div className="text-center">
+                <div sx={{
+      [theme.breakpoints.up('md')]: { "w-80": true },
+      "space-y-4": true
+    }}>
+                  <Card sx={{
+      p: 4,
+      "${getMatchBgColor(job.matchPercentage)}": true,
+      border: 0
+    }}>
+                    <div sx={{
+      textAlign: "center"
+    }}>
                       <div
-                        className={`text-3xl font-bold ${getMatchColor(job.matchPercentage)} mb-2`}
+                        sx={{
+      typography: h3,
+      fontWeight: 700,
+      "${getMatchColor(job.matchPercentage)}": true,
+      mb: 2
+    }}
                       >
                         {job.matchPercentage}%
                       </div>
-                      <p className="text-sm font-medium mb-3">Match Score</p>
-                      <Progress value={job.matchPercentage} className="w-full" />
-                      <div className="flex items-center justify-center gap-1 mt-2">
+                      <p sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 3
+    }}>Match Score</p>
+                      <Progress value={job.matchPercentage} sx={{
+      width: "100%"
+    }} />
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 1,
+      mt: 2
+    }}>
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className={`w-4 h-4 ${
-                              i < Math.floor(job.matchPercentage / 20)
-                                ? 'text-yellow-500 fill-current'
-                                : 'text-gray-300'
-                            }`}
+                            sx={{
+      "w-4": true,
+      "h-4": true,
+      "${": true,
+      "i": true,
+      "<": true,
+      "Math.floor(job.matchPercentage": true,
+      "/": true,
+      "20)": true,
+      "?": true,
+      "'text-yellow-500": true,
+      "fill-current'": true,
+      ":": true,
+      "'text-gray-300'": true,
+      "}": true
+    }}
                           />
                         ))}
                       </div>
                     </div>
                   </Card>
 
-                  <div className="space-y-3">
+                  <div sx={{
+      "space-y-3": true
+    }}>
                     <Button
-                      className="w-full bg-primary hover:bg-primary/90"
+                      sx={{
+      width: "100%",
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
                       onClick={() => handleGenerateInsights(job.id)}
                       disabled={isGeneratingInsights && selectedJob === job.id}
                     >
                       {isGeneratingInsights && selectedJob === job.id ? (
                         <>
-                          <Sparkles className="w-4 h-4 mr-2 animate-pulse" />
+                          <Sparkles sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2,
+      "animate-pulse": true
+    }} />
                           Generating Insights...
                         </>
                       ) : (
                         <>
-                          <Sparkles className="w-4 h-4 mr-2" />
+                          <Sparkles sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                           Get AI Insights
                         </>
                       )}
                     </Button>
 
-                    <Button variant="outlined" className="w-full">
-                      <ExternalLink className="w-4 h-4 mr-2" />
+                    <Button variant="outlined" sx={{
+      width: "100%"
+    }}>
+                      <ExternalLink sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                       View Full Job
                     </Button>
 
-                    <Button variant="outlined" className="w-full">
+                    <Button variant="outlined" sx={{
+      width: "100%"
+    }}>
                       <Heart
-                        className={`w-4 h-4 mr-2 ${job.isFavorited ? 'text-red-500 fill-current' : ''}`}
+                        sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2,
+      "${job.isFavorited": true,
+      "?": true,
+      "'text-red-500": true,
+      "fill-current'": true,
+      ":": true,
+      "''}": true
+    }}
                       />
                       {job.isFavorited ? 'Saved' : 'Save Job'}
                     </Button>
@@ -271,12 +479,35 @@ export function JobMatching({ onBack }: JobMatchingProps) {
 
               {/* AI Insights (shown when generated) */}
               {isGeneratingInsights && selectedJob === job.id && (
-                <div className="mt-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Sparkles className="w-5 h-5 text-primary animate-pulse" />
-                    <h4 className="font-medium text-primary">AI-Generated Insights</h4>
+                <div sx={{
+      mt: 6,
+      p: 4,
+      "bg-primary/5": true,
+      border: 1,
+      "border-primary/20": true,
+      borderRadius: 0.5rem
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      mb: 3
+    }}>
+                    <Sparkles sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-primary": true,
+      "animate-pulse": true
+    }} />
+                    <h4 sx={{
+      fontWeight: 500,
+      "text-primary": true
+    }}>AI-Generated Insights</h4>
                   </div>
-                  <div className="space-y-2 text-sm">
+                  <div sx={{
+      "space-y-2": true,
+      typography: body1
+    }}>
                     <p>
                       • <strong>Strong match:</strong> Your Community Support Worker experience
                       aligns perfectly with this role
@@ -301,7 +532,10 @@ export function JobMatching({ onBack }: JobMatchingProps) {
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-8">
+        <div sx={{
+      textAlign: "center",
+      mt: 8
+    }}>
           <Button variant="outlined" size="large">
             Load More Matches
           </Button>

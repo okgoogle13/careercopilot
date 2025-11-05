@@ -430,14 +430,35 @@ export function DocumentPreview({
   // Get file icon based on export format
   const getFileIcon = (format: string) => {
     const icons: Record<string, React.ReactNode> = {
-      pdf: <FileText className="w-4 h-4" />,
-      docx: <FileText className="w-4 h-4" />,
-      txt: <Code className="w-4 h-4" />,
-      jpg: <FileImage className="w-4 h-4" />,
-      png: <FileImage className="w-4 h-4" />,
-      zip: <Archive className="w-4 h-4" />,
+      pdf: <FileText sx={{
+      "w-4": true,
+      "h-4": true
+    }} />,
+      docx: <FileText sx={{
+      "w-4": true,
+      "h-4": true
+    }} />,
+      txt: <Code sx={{
+      "w-4": true,
+      "h-4": true
+    }} />,
+      jpg: <FileImage sx={{
+      "w-4": true,
+      "h-4": true
+    }} />,
+      png: <FileImage sx={{
+      "w-4": true,
+      "h-4": true
+    }} />,
+      zip: <Archive sx={{
+      "w-4": true,
+      "h-4": true
+    }} />,
     };
-    return icons[format] || <FileText className="w-4 h-4" />;
+    return icons[format] || <FileText sx={{
+      "w-4": true,
+      "h-4": true
+    }} />;
   };
 
   return (
@@ -457,46 +478,103 @@ export function DocumentPreview({
         }}
       >
         {/* Enhanced Header */}
-        <header className="bg-white border-b border-gray-200 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+        <header sx={{
+      bgcolor: "common.white",
+      borderBottom: 1,
+      borderColor: "gray.200",
+      px: 6,
+      py: 4
+    }}>
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-4": true
+    }}>
               <Button
                 variant="text"
                 size="small"
                 onClick={onBack}
-                className="text-gray-500 hover:bg-gray-100 rounded-full"
+                sx={{
+      color: "gray.500",
+      '&:hover': { bgcolor: "gray.100" },
+      borderRadius: 9999px
+    }}
               >
-                <ArrowLeft className="h-5 w-5" />
-                <span className="sr-only">Back</span>
+                <ArrowLeft sx={{
+      "h-5": true,
+      "w-5": true
+    }} />
+                <span sx={{
+      [object Object]
+    }}>Back</span>
               </Button>
               <div>
-                <h1 className="text-lg font-semibold text-gray-900">{document.title}</h1>
-                <div className="flex items-center space-x-2 text-sm text-gray-500">
+                <h1 sx={{
+      typography: h6,
+      fontWeight: 600,
+      "text-gray-900": true
+    }}>{document.title}</h1>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true,
+      typography: body1,
+      color: "gray.500"
+    }}>
                   <span>Last modified: {formatDate(document.updatedAt)}</span>
                   <span>•</span>
                   <span>{formatFileSize(document.size)}</span>
                   <span>•</span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
+                  <span sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                    <Clock sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                     {formatTime(trackingTime)} reading time
                   </span>
                   {isTracking && (
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                    <div sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "green.500",
+      borderRadius: 9999px,
+      "animate-pulse": true
+    }} />
                   )}
                 </div>
               </div>
             </div>
 
             {/* Enhanced Action Buttons */}
-            <div className="flex items-center space-x-2">
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
               <Tooltip title="Get AI-powered suggestions for improvement">
                 <Button
                   variant="outlined"
                   size="small"
                   onClick={generateAISuggestions}
-                  className="flex items-center space-x-1.5"
+                  sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-1.5": true
+    }}
                 >
-                  <Lightbulb className="h-4 w-4" />
+                  <Lightbulb sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                   <span>AI Assist</span>
                 </Button>
               </Tooltip>
@@ -516,7 +594,10 @@ export function DocumentPreview({
                     }),
                   }}
                 >
-                  <Eye className="h-4 w-4" />
+                  <Eye sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                   <span>Reading</span>
                 </Button>
               </Tooltip>
@@ -525,9 +606,16 @@ export function DocumentPreview({
                 variant="outlined"
                 size="small"
                 onClick={() => setShowShareDialog(true)}
-                className="flex items-center space-x-1.5"
+                sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-1.5": true
+    }}
               >
-                <Share className="h-4 w-4" />
+                <Share sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 <span>Share</span>
               </Button>
 
@@ -535,128 +623,308 @@ export function DocumentPreview({
                 variant="contained"
                 size="small"
                 onClick={onEdit}
-                className="flex items-center space-x-1.5"
+                sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-1.5": true
+    }}
               >
-                <Edit className="h-4 w-4" />
+                <Edit sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 <span>Edit Document</span>
               </Button>
 
               <Tooltip title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}>
                 <Button variant="text" size="small" onClick={toggleFullscreen}>
-                  {isFullscreen ? <X className="h-4 w-4" /> : <Settings className="h-4 w-4" />}
+                  {isFullscreen ? <X sx={{
+      "h-4": true,
+      "w-4": true
+    }} /> : <Settings sx={{
+      "h-4": true,
+      "w-4": true
+    }} />}
                 </Button>
               </Tooltip>
             </div>
           </div>
         </header>
 
-        <div className="flex flex-1 overflow-hidden">
+        <div sx={{
+      display: "flex",
+      flex: 1,
+      overflow: "hidden"
+    }}>
           {/* Main Content Area */}
-          <div className="flex-1 p-6">
-            <div className="flex items-center justify-between mb-6">
-              <Button variant="text" onClick={onBack} className="hover:bg-gray-100">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+          <div sx={{
+      flex: 1,
+      p: 6
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 6
+    }}>
+              <Button variant="text" onClick={onBack} sx={{
+      '&:hover': { bgcolor: "gray.100" }
+    }}>
+                <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Back to Templates
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">Document Preview</h1>
-                <p className="text-sm text-muted-foreground mt-1">
+                <h1 sx={{
+      typography: h4,
+      fontWeight: 700,
+      "text-foreground": true
+    }}>Document Preview</h1>
+                <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mt: 1
+    }}>
                   {mockDocument.title} • Template: {templateName}
                 </p>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div sx={{
+      display: "flex",
+      gap: 2
+    }}>
               <Button variant="outlined" onClick={onEdit}>
-                <Edit className="w-4 h-4 mr-2" />
+                <Edit sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Edit Document
               </Button>
               <Button variant="outlined">
-                <Share className="w-4 h-4 mr-2" />
+                <Share sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Share
               </Button>
               <Button variant="outlined">
-                <Printer className="w-4 h-4 mr-2" />
+                <Printer sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Print
               </Button>
-              <Button className="bg-primary hover:bg-primary/90">
-                <Download className="w-4 h-4 mr-2" />
+              <Button sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}>
+                <Download sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Download PDF
               </Button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-4": true },
+      gap: 6
+    }}>
             {/* Document Info Sidebar */}
-            <div className="lg:col-span-1 space-y-4">
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">Document Info</h3>
-                <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Type:</span>
-                    <Badge variant="secondary" className="capitalize">
+            <div sx={{
+      [theme.breakpoints.up('md')]: { "col-span-1": true },
+      "space-y-4": true
+    }}>
+              <Card sx={{
+      p: 4
+    }}>
+                <h3 sx={{
+      fontWeight: 500,
+      mb: 3
+    }}>Document Info</h3>
+                <div sx={{
+      "space-y-2": true,
+      typography: body1
+    }}>
+                  <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                    <span sx={{
+      "text-muted-foreground": true
+    }}>Type:</span>
+                    <Badge variant="secondary" sx={{
+      textTransform: "capitalize"
+    }}>
                       {documentType.replace('-', ' ')}
                     </Badge>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Template:</span>
-                    <span className="font-medium">{templateName}</span>
+                  <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                    <span sx={{
+      "text-muted-foreground": true
+    }}>Template:</span>
+                    <span sx={{
+      fontWeight: 500
+    }}>{templateName}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Pages:</span>
-                    <span className="font-medium">{mockDocument.pages}</span>
+                  <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                    <span sx={{
+      "text-muted-foreground": true
+    }}>Pages:</span>
+                    <span sx={{
+      fontWeight: 500
+    }}>{mockDocument.pages}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Modified:</span>
-                    <span className="font-medium">{mockDocument.lastModified}</span>
+                  <div sx={{
+      display: "flex",
+      justifyContent: "space-between"
+    }}>
+                    <span sx={{
+      "text-muted-foreground": true
+    }}>Modified:</span>
+                    <span sx={{
+      fontWeight: 500
+    }}>{mockDocument.lastModified}</span>
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">View Options</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Zoom Level</span>
-                    <span className="text-sm font-medium">{zoomLevel}%</span>
+              <Card sx={{
+      p: 4
+    }}>
+                <h3 sx={{
+      fontWeight: 500,
+      mb: 3
+    }}>View Options</h3>
+                <div sx={{
+      "space-y-3": true
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                    <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Zoom Level</span>
+                    <span sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>{zoomLevel}%</span>
                   </div>
-                  <div className="flex gap-1">
+                  <div sx={{
+      display: "flex",
+      gap: 1
+    }}>
                     <Button size="small" variant="outlined" onClick={handleZoomOut}>
-                      <ZoomOut className="w-3 h-3" />
+                      <ZoomOut sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                     </Button>
                     <Button size="small" variant="outlined" onClick={handleResetZoom}>
-                      <RotateCcw className="w-3 h-3" />
+                      <RotateCcw sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                     </Button>
                     <Button size="small" variant="outlined" onClick={handleZoomIn}>
-                      <ZoomIn className="w-3 h-3" />
+                      <ZoomIn sx={{
+      "w-3": true,
+      "h-3": true
+    }} />
                     </Button>
                   </div>
                 </div>
               </Card>
 
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">Export Options</h3>
-                <div className="space-y-2">
-                  <Button variant="outlined" size="small" className="w-full justify-start">
-                    <Download className="w-3 h-3 mr-2" />
+              <Card sx={{
+      p: 4
+    }}>
+                <h3 sx={{
+      fontWeight: 500,
+      mb: 3
+    }}>Export Options</h3>
+                <div sx={{
+      "space-y-2": true
+    }}>
+                  <Button variant="outlined" size="small" sx={{
+      width: "100%",
+      justifyContent: "flex-start"
+    }}>
+                    <Download sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 2
+    }} />
                     PDF (Recommended)
                   </Button>
-                  <Button variant="outlined" size="small" className="w-full justify-start">
-                    <Download className="w-3 h-3 mr-2" />
+                  <Button variant="outlined" size="small" sx={{
+      width: "100%",
+      justifyContent: "flex-start"
+    }}>
+                    <Download sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 2
+    }} />
                     Word Document
                   </Button>
-                  <Button variant="outlined" size="small" className="w-full justify-start">
-                    <Download className="w-3 h-3 mr-2" />
+                  <Button variant="outlined" size="small" sx={{
+      width: "100%",
+      justifyContent: "flex-start"
+    }}>
+                    <Download sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 2
+    }} />
                     Plain Text
                   </Button>
                 </div>
               </Card>
 
-              <Card className="p-4">
-                <h3 className="font-medium mb-3">ATS Score</h3>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-400 mb-2">87%</div>
-                  <div className="text-sm text-muted-foreground">Excellent ATS compatibility</div>
-                  <Button variant="outlined" size="small" className="w-full mt-3">
+              <Card sx={{
+      p: 4
+    }}>
+                <h3 sx={{
+      fontWeight: 500,
+      mb: 3
+    }}>ATS Score</h3>
+                <div sx={{
+      textAlign: "center"
+    }}>
+                  <div sx={{
+      typography: h4,
+      fontWeight: 700,
+      "text-green-400": true,
+      mb: 2
+    }}>87%</div>
+                  <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Excellent ATS compatibility</div>
+                  <Button variant="outlined" size="small" sx={{
+      width: "100%",
+      mt: 3
+    }}>
                     View Details
                   </Button>
                 </div>
@@ -664,13 +932,30 @@ export function DocumentPreview({
             </div>
 
             {/* Document Preview */}
-            <div className="lg:col-span-3">
-              <Card className="p-6">
+            <div sx={{
+      [theme.breakpoints.up('md')]: { "col-span-3": true }
+    }}>
+              <Card sx={{
+      p: 6
+    }}>
                 <>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-medium">Preview</h3>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+                    <h3 sx={{
+      fontWeight: 500
+    }}>Preview</h3>
                     {mockDocument.pages > 1 && (
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                         <Button
                           size="small"
                           variant="outlined"
@@ -695,9 +980,22 @@ export function DocumentPreview({
                   </div>
 
                   {/* Document Preview Container */}
-                  <div className="bg-gray-100 p-8 rounded-lg flex justify-center overflow-auto">
+                  <div sx={{
+      bgcolor: "gray.100",
+      p: 8,
+      borderRadius: 0.5rem,
+      display: "flex",
+      justifyContent: "center",
+      overflow: "auto"
+    }}>
                     <div
-                      className="bg-white shadow-lg transition-transform duration-200 max-w-[8.5in]"
+                      sx={{
+      bgcolor: "common.white",
+      boxShadow: 4,
+      "transition-transform": true,
+      "duration-200": true,
+      w: "8.5in"
+    }}
                       style={{
                         transform: `scale(${zoomLevel / 100})`,
                         transformOrigin: 'top center',
@@ -706,14 +1004,32 @@ export function DocumentPreview({
                       }}
                     >
                       {/* Mock Resume Content */}
-                      <div className="p-12 h-full">
-                        <div className="space-y-6">
+                      <div sx={{
+      p: 12,
+      height: "100%"
+    }}>
+                        <div sx={{
+      "space-y-6": true
+    }}>
                           {/* Header */}
-                          <div className="text-center border-b border-gray-300 pb-4">
-                            <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                          <div sx={{
+      textAlign: "center",
+      borderBottom: 1,
+      borderColor: "gray.300",
+      pb: 4
+    }}>
+                            <h1 sx={{
+      typography: h4,
+      fontWeight: 700,
+      "text-gray-900": true,
+      mb: 2
+    }}>
                               Nishant Dougall
                             </h1>
-                            <div className="text-gray-600 space-y-1">
+                            <div sx={{
+      color: "gray.600",
+      "space-y-1": true
+    }}>
                               <p>nishant.dougall@email.com • (555) 123-4567</p>
                               <p>Vancouver, BC • linkedin.com/in/nishantdougall</p>
                             </div>
@@ -721,10 +1037,21 @@ export function DocumentPreview({
 
                           {/* Professional Summary */}
                           <div>
-                            <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                            <h2 sx={{
+      typography: h6,
+      fontWeight: 600,
+      "text-gray-900": true,
+      mb: 2,
+      borderBottom: 1,
+      borderColor: "gray.200",
+      pb: 1
+    }}>
                               Professional Summary
                             </h2>
-                            <p className="text-gray-700 leading-relaxed">
+                            <p sx={{
+      color: "gray.700",
+      "leading-relaxed": true
+    }}>
                               Dedicated Community Support Worker with 3+ years of experience
                               providing client-centered care and advocacy. Proven track record in
                               crisis intervention, case management, and supporting individuals with
@@ -734,21 +1061,48 @@ export function DocumentPreview({
 
                           {/* Experience */}
                           <div>
-                            <h2 className="text-lg font-semibold text-gray-900 mb-3 border-b border-gray-200 pb-1">
+                            <h2 sx={{
+      typography: h6,
+      fontWeight: 600,
+      "text-gray-900": true,
+      mb: 3,
+      borderBottom: 1,
+      borderColor: "gray.200",
+      pb: 1
+    }}>
                               Professional Experience
                             </h2>
-                            <div className="space-y-4">
+                            <div sx={{
+      "space-y-4": true
+    }}>
                               <div>
-                                <div className="flex justify-between items-start mb-2">
+                                <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      mb: 2
+    }}>
                                   <div>
-                                    <h3 className="font-medium text-gray-900">
+                                    <h3 sx={{
+      fontWeight: 500,
+      "text-gray-900": true
+    }}>
                                       Community Support Worker
                                     </h3>
-                                    <p className="text-gray-600">Community Living BC</p>
+                                    <p sx={{
+      color: "gray.600"
+    }}>Community Living BC</p>
                                   </div>
-                                  <span className="text-gray-500 text-sm">2021 - Present</span>
+                                  <span sx={{
+      color: "gray.500",
+      typography: body1
+    }}>2021 - Present</span>
                                 </div>
-                                <ul className="text-gray-700 space-y-1 text-sm">
+                                <ul sx={{
+      color: "gray.700",
+      "space-y-1": true,
+      typography: body1
+    }}>
                                   <li>
                                     • Provide support to 25+ individuals with developmental
                                     disabilities and mental health challenges
@@ -769,16 +1123,33 @@ export function DocumentPreview({
                               </div>
 
                               <div>
-                                <div className="flex justify-between items-start mb-2">
+                                <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start",
+      mb: 2
+    }}>
                                   <div>
-                                    <h3 className="font-medium text-gray-900">
+                                    <h3 sx={{
+      fontWeight: 500,
+      "text-gray-900": true
+    }}>
                                       Mental Health Support Assistant
                                     </h3>
-                                    <p className="text-gray-600">Fraser Health Authority</p>
+                                    <p sx={{
+      color: "gray.600"
+    }}>Fraser Health Authority</p>
                                   </div>
-                                  <span className="text-gray-500 text-sm">2019 - 2021</span>
+                                  <span sx={{
+      color: "gray.500",
+      typography: body1
+    }}>2019 - 2021</span>
                                 </div>
-                                <ul className="text-gray-700 space-y-1 text-sm">
+                                <ul sx={{
+      color: "gray.700",
+      "space-y-1": true,
+      typography: body1
+    }}>
                                   <li>
                                     • Assisted mental health professionals in group therapy sessions
                                   </li>
@@ -794,10 +1165,21 @@ export function DocumentPreview({
 
                           {/* Skills */}
                           <div>
-                            <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                            <h2 sx={{
+      typography: h6,
+      fontWeight: 600,
+      "text-gray-900": true,
+      mb: 2,
+      borderBottom: 1,
+      borderColor: "gray.200",
+      pb: 1
+    }}>
                               Core Competencies
                             </h2>
-                            <div className="text-gray-700 text-sm">
+                            <div sx={{
+      color: "gray.700",
+      typography: body1
+    }}>
                               <p>
                                 <strong>Clinical Skills:</strong> Crisis Intervention, Case
                                 Management, Mental Health Support, Addiction Counseling
@@ -815,20 +1197,45 @@ export function DocumentPreview({
 
                           {/* Education & Certifications */}
                           <div>
-                            <h2 className="text-lg font-semibold text-gray-900 mb-2 border-b border-gray-200 pb-1">
+                            <h2 sx={{
+      typography: h6,
+      fontWeight: 600,
+      "text-gray-900": true,
+      mb: 2,
+      borderBottom: 1,
+      borderColor: "gray.200",
+      pb: 1
+    }}>
                               Education & Certifications
                             </h2>
-                            <div className="space-y-2">
-                              <div className="flex justify-between items-start">
+                            <div sx={{
+      "space-y-2": true
+    }}>
+                              <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "flex-start"
+    }}>
                                 <div>
-                                  <h3 className="font-medium text-gray-900">
+                                  <h3 sx={{
+      fontWeight: 500,
+      "text-gray-900": true
+    }}>
                                     Diploma in Community Support Work
                                   </h3>
-                                  <p className="text-gray-600">Douglas College</p>
+                                  <p sx={{
+      color: "gray.600"
+    }}>Douglas College</p>
                                 </div>
-                                <span className="text-gray-500 text-sm">2019</span>
+                                <span sx={{
+      color: "gray.500",
+      typography: body1
+    }}>2019</span>
                               </div>
-                              <div className="text-sm text-gray-700">
+                              <div sx={{
+      typography: body1,
+      color: "gray.700"
+    }}>
                                 <p>
                                   <strong>Certifications:</strong> Mental Health First Aid, Crisis
                                   Prevention Institute (CPI), CPR/AED

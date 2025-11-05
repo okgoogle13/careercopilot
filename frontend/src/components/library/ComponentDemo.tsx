@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 
 export const ComponentSection = ({
@@ -10,12 +11,20 @@ export const ComponentSection = ({
   description: string;
   children: React.ReactNode;
 }) => (
-  <section className="space-y-4">
+  <section sx={{
+      "space-y-4": true
+    }}>
     <div>
-      <h2 className="mb-2">{title}</h2>
-      <p className="text-muted-foreground">{description}</p>
+      <h2 sx={{
+      mb: 2
+    }}>{title}</h2>
+      <p sx={{
+      "text-muted-foreground": true
+    }}>{description}</p>
     </div>
-    <div className="space-y-6">{children}</div>
+    <div sx={{
+      "space-y-6": true
+    }}>{children}</div>
   </section>
 );
 
@@ -29,7 +38,9 @@ export const ComponentDemo = ({
   <Card variant="elevation">
     <CardHeader title={<Typography variant="h3">{title}</Typography>}></CardHeader>
     <CardContent>
-      <div className="space-y-4">{children}</div>
+      <div sx={{
+      "space-y-4": true
+    }}>{children}</div>
     </CardContent>
   </Card>
 );
