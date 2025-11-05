@@ -40,18 +40,6 @@ class ProductionSecretsValidator:
 
         # Define required secrets for production
         self.required_secrets = {
-            "openai-api-key": {
-                "description": "OpenAI API Key",
-                "env_var": "OPENAI_API_KEY",
-                "validation": lambda x: x.startswith("sk-") and len(x) > 20,
-                "critical": True,
-            },
-            "anthropic-api-key": {
-                "description": "Anthropic Claude API Key",
-                "env_var": "ANTHROPIC_API_KEY",
-                "validation": lambda x: x.startswith("sk-ant-") and len(x) > 20,
-                "critical": True,
-            },
             "gemini-api-key": {
                 "description": "Google Gemini API Key",
                 "env_var": "GEMINI_API_KEY",
