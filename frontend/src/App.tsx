@@ -765,7 +765,7 @@ function AppContent() {
     }}>
                   <div sx={{
       "animate-spin": true,
-      borderRadius: 9999px,
+      borderRadius: '9999px',
       "h-12": true,
       "w-12": true,
       "border-b-2": true,
@@ -794,7 +794,7 @@ function AppContent() {
               variant="default"
               onClick={() => setShowDemoNav(true)}
               sx={{
-      borderRadius: 9999px,
+      borderRadius: '9999px',
       px: 6,
       py: 3
     }}
