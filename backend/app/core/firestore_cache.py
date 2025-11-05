@@ -7,10 +7,9 @@ with automatic TTL-based expiration.
 """
 
 import hashlib
-import json
 import logging
 from datetime import datetime, timedelta, timezone
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, cast
 
 try:
     from firebase_admin import firestore
@@ -46,8 +45,7 @@ class FirestoreCache:
                 self.db.collection(self.collection_name).limit(1).stream()
                 self.is_available = True
                 logger.info(
-                    f"Firestore cache initialized successfully",
-                    collection=self.collection_name,
+                    f"Firestore cache initialized successfully using collection: {self.collection_name}"
                 )
             except Exception as e:
                 logger.warning(
@@ -251,14 +249,16 @@ class FirestoreCache:
             docs = self.db.collection(self.collection_name).stream()
 
             for doc in docs:
-                stats["total_entries"] += 1
+                total_entries = cast(int, stats.get("total_entries", 0))
+                stats["total_entries"] = total_entries + 1
                 data = doc.to_dict()
                 expires_at = data.get("expires_at")
                 if isinstance(expires_at, str):
                     expires_at = datetime.fromisoformat(expires_at)
 
                 if expires_at and now > expires_at:
-                    stats["expired_entries"] += 1
+                    expired_entries = cast(int, stats.get("expired_entries", 0))
+                    stats["expired_entries"] = expired_entries + 1
 
             return stats
 

@@ -9,10 +9,9 @@ import logging
 import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional
 
-from app.ai.model_optimizer import ModelOptimizer, OptimizationConfig, OptimizationLevel
-from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig, get_ai_config
+from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig
 from .monitoring import monitor_performance, track_ai_usage, track_error
 
 # Remove OpenAI provider from supported providers
@@ -87,55 +86,6 @@ class GoogleAIClient(AIProviderClient):
     def __init__(self, config_manager: AIConfigManager):
         super().__init__(AIProvider.GOOGLE_AI, config_manager)
         self.base_url = "https://generativelanguage.googleapis.com/v1beta"
-        self._model_optimizer = None
-        self._optimized_models = {}  # Cache for optimized model endpoints
-
-    async def _get_optimized_endpoint(self, model_config: ModelConfig) -> str:
-        """Get or create an optimized model endpoint"""
-        model_id = model_config.model_id
-        optimization_config = getattr(model_config, "optimization_config", None)
-
-        # If no optimization is needed, return the standard model
-        if not optimization_config or optimization_config.level == OptimizationLevel.NONE:
-            return f"{self.base_url}/models/{model_id}:generateContent"
-
-        # Check if we already have an optimized model
-        cache_key = f"{model_id}-{optimization_config.level}"
-        if cache_key in self._optimized_models:
-            return self._optimized_models[cache_key]
-
-        # Initialize the model optimizer if needed
-        if self._model_optimizer is None:
-            project_id = self.credentials.project_id if self.credentials else None
-            location = self.credentials.location if self.credentials else "us-central1"
-            if not project_id:
-                logger.warning(
-                    "No project_id in credentials, using default project for model optimization"
-                )
-                project_id = None  # Will use default project
-
-            self._model_optimizer = ModelOptimizer(
-                project_id=project_id,
-                location=location,
-            )
-
-        try:
-            # Optimize and deploy the model
-            endpoint = self._model_optimizer.optimize_model(
-                model_id=model_id,
-                optimization_config=optimization_config,
-                display_name=f"{model_id}-optimized-{optimization_config.level}",
-                description=f"Optimized version of {model_id} for CareerCopilot",
-            )
-
-            # Cache the endpoint URL
-            self._optimized_models[cache_key] = endpoint.resource_name
-            return endpoint.resource_name
-
-        except Exception as e:
-            logger.error(f"Failed to optimize model {model_id}: {e}")
-            # Fall back to standard model
-            return f"{self.base_url}/models/{model_id}:generateContent"
 
     async def generate_text(self, request: AIRequest, model_config: ModelConfig) -> AIResponse:
         """Generate text using Google AI API with optional model optimization"""
@@ -160,42 +110,23 @@ class GoogleAIClient(AIProviderClient):
         try:
             if not self.credentials:
                 raise ValueError("Google AI credentials not configured")
-            # Get the appropriate endpoint (optimized or standard)
-            endpoint = await self._get_optimized_endpoint(model_config)
 
-            # Determine if we're using the standard API or an optimized endpoint
-            if endpoint.startswith("https://"):
-                # Standard API endpoint
-                url = f"{endpoint}?key={self.credentials.api_key if self.credentials else ''}"
-            else:
-                # Optimized model endpoint
-                url = f"https://{self.location}-aiplatform.googleapis.com/v1/{endpoint}:predict"
-                if self.credentials and self.credentials.api_key:
-                    url += f"?key={self.credentials.api_key}"
-                # Update payload format for optimized models
-                payload = {"instances": [{"content": request.prompt}]}
+            # Use standard Google AI API endpoint
+            url = f"{self.base_url}/models/{model_config.model_id}:generateContent?key={self.credentials.api_key if self.credentials else ''}"
 
             async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
-                response = await client.post(url, json=payload, headers=self._get_headers())
+                response = await client.post(url, json=payload)
                 response.raise_for_status()
 
                 result = response.json()
                 response_time_ms = (time.time() - start_time) * 1000
 
-                # Extract response content based on endpoint type
-                if "predictions" in result:  # Optimized model response
-                    content = result["predictions"][0]["content"]
-                    # For optimized models, we might not have token counts
-                    tokens_used = {
-                        "input": int(len(request.prompt.split()) * 1.3),
-                        "output": int(len(content.split()) * 1.3),
-                    }
-                else:  # Standard API response
-                    content = result["candidates"][0]["content"]["parts"][0]["text"]
-                    tokens_used = {
-                        "input": int(len(request.prompt.split()) * 1.3),
-                        "output": int(len(content.split()) * 1.3),
-                    }
+                # Extract response content from standard API response
+                content = result["candidates"][0]["content"]["parts"][0]["text"]
+                tokens_used = {
+                    "input": int(len(request.prompt.split()) * 1.3),
+                    "output": int(len(content.split()) * 1.3),
+                }
 
                 cost_estimate = self._calculate_cost(tokens_used, model_config)
 
@@ -350,9 +281,6 @@ class AnthropicClient(AIProviderClient):
         input_cost = (tokens_used["input"] / 1000) * model_config.cost_per_1k_tokens["input"]
         output_cost = (tokens_used["output"] / 1000) * model_config.cost_per_1k_tokens["output"]
         return input_cost + output_cost
-
-
-from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig
 
 
 class AIClientManager:
