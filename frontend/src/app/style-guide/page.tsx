@@ -154,7 +154,7 @@ export default function StyleGuidePage() {
         <div sx={{
       "bg-card": true,
       p: 6,
-      borderRadius: 0.5rem,
+      borderRadius: '0.5rem',
       boxShadow: 1
     }}>
           <h3 sx={{
@@ -194,7 +194,7 @@ export default function StyleGuidePage() {
             <div sx={{
       "bg-background": true,
       p: 4,
-      borderRadius: 0.5rem,
+      borderRadius: '0.5rem',
       border: 1
     }}>
               <p>Background (bg-background)</p>
@@ -202,7 +202,7 @@ export default function StyleGuidePage() {
             <div sx={{
       "bg-card": true,
       p: 4,
-      borderRadius: 0.5rem,
+      borderRadius: '0.5rem',
       border: 1
     }}>
               <p>Card (bg-card)</p>
@@ -210,7 +210,7 @@ export default function StyleGuidePage() {
             <div sx={{
       "bg-popover": true,
       p: 4,
-      borderRadius: 0.5rem,
+      borderRadius: '0.5rem',
       "text-popover-foreground": true
     }}>
               <p>Popover (bg-popover)</p>
@@ -228,7 +228,7 @@ export default function StyleGuidePage() {
         <div sx={{
       "bg-card": true,
       p: 6,
-      borderRadius: 0.5rem,
+      borderRadius: '0.5rem',
       boxShadow: 1
     }}>
           <h3 sx={{
@@ -256,7 +256,7 @@ export default function StyleGuidePage() {
       p: 4,
       "bg-destructive/10": true,
       "text-destructive-foreground": true,
-      borderRadius: 0.25rem
+      borderRadius: '0.25rem'
     }}>
               <p sx={{
       fontWeight: 500
