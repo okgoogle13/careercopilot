@@ -48,7 +48,6 @@ class Settings(BaseSettings):
     db_pool_size: int = secure_settings.DB_POOL_SIZE
 
     # API Keys (from secure settings)
-    openai_api_key: str = secure_settings.OPENAI_API_KEY or ""
     anthropic_api_key: str = secure_settings.ANTHROPIC_API_KEY or ""
     gemini_api_key: str = secure_settings.GEMINI_API_KEY or ""
 
@@ -161,10 +160,8 @@ def validate_required_api_keys() -> None:
 
     # Check for other optional but recommended keys
     warnings = []
-    if not settings.openai_api_key:
-        warnings.append("OPENAI_API_KEY (fallback AI service)")
     if not settings.anthropic_api_key:
-        warnings.append("ANTHROPIC_API_KEY (fallback AI service)")
+        warnings.append("ANTHROPIC_API_KEY (optional fallback AI service)")
 
     # Fail fast if critical keys are missing
     if missing_keys:
