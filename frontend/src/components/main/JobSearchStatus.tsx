@@ -42,9 +42,17 @@ export function JobSearchStatus({
   },
 }: JobSearchStatusProps) {
   return (
-    <Box className="w-full">
-      <Box className="mb-6">
-        <Typography variant="h4" className="text-2xl font-bold mb-2">
+    <Box sx={{
+      width: "100%"
+    }}>
+      <Box sx={{
+      mb: 6
+    }}>
+        <Typography variant="h4" sx={{
+      typography: h4,
+      fontWeight: 700,
+      mb: 2
+    }}>
           Job Search Dashboard
         </Typography>
         <Typography variant="body1" color="text.secondary">
@@ -59,7 +67,9 @@ export function JobSearchStatus({
             title="Applications Sent"
             value={stats.applicationsSent}
             subtitle="This month"
-            icon={<Send sx={{ fontSize: 20 }} className="text-blue-600" />}
+            icon={<Send sx={{ fontSize: 20 }} sx={{
+      color: "blue.600"
+    }} />}
             trend={trends.applicationsTrend?.isPositive ? 'up' : 'down'}
             trendValue={`+${trends.applicationsTrend?.value}%`}
           />
@@ -71,7 +81,9 @@ export function JobSearchStatus({
             title="Interviews"
             value={stats.interviews}
             subtitle="Scheduled & completed"
-            icon={<CalendarMonth sx={{ fontSize: 20 }} className="text-green-600" />}
+            icon={<CalendarMonth sx={{ fontSize: 20 }} sx={{
+      color: "green.600"
+    }} />}
             trend={trends.interviewsTrend?.isPositive ? 'up' : 'down'}
             trendValue={`+${trends.interviewsTrend?.value}%`}
           />
@@ -83,7 +95,9 @@ export function JobSearchStatus({
             title="Offers Received"
             value={stats.offers}
             subtitle="Active offers"
-            icon={<EmojiEvents sx={{ fontSize: 20 }} className="text-orange-600" />}
+            icon={<EmojiEvents sx={{ fontSize: 20 }} sx={{
+      color: "orange.600"
+    }} />}
             trend={trends.offersTrend?.isPositive ? 'up' : 'down'}
             trendValue={`+${trends.offersTrend?.value}%`}
           />
@@ -95,7 +109,9 @@ export function JobSearchStatus({
             title="Response Rate"
             value={`${stats.responseRate}%`}
             subtitle="Interview invitations"
-            icon={<GpsFixed sx={{ fontSize: 20 }} className="text-purple-600" />}
+            icon={<GpsFixed sx={{ fontSize: 20 }} sx={{
+      color: "purple.600"
+    }} />}
           />
         </Grid>
 
@@ -105,7 +121,9 @@ export function JobSearchStatus({
             title="Avg Response Time"
             value={`${stats.avgResponseTime} days`}
             subtitle="From application"
-            icon={<AccessTime sx={{ fontSize: 20 }} className="text-indigo-600" />}
+            icon={<AccessTime sx={{ fontSize: 20 }} sx={{
+      color: "indigo.600"
+    }} />}
           />
         </Grid>
 
@@ -115,7 +133,9 @@ export function JobSearchStatus({
             title="Profile Views"
             value={stats.profileViews || 0}
             subtitle="Last 30 days"
-            icon={<Visibility sx={{ fontSize: 20 }} className="text-gray-600" />}
+            icon={<Visibility sx={{ fontSize: 20 }} sx={{
+      color: "gray.600"
+    }} />}
             trend="up"
             trendValue="+12%"
           />

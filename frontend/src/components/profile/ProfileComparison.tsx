@@ -140,13 +140,27 @@ export function ProfileComparison({
   ];
 
   const renderSkillsComparison = () => (
-    <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <Box sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
       <Card>
-        <CardContent className="p-4">
-          <Typography variant="h6" className="font-semibold mb-3">
+        <CardContent sx={{
+      p: 4
+    }}>
+          <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 3
+    }}>
             {leftProfile.name} - Skills
           </Typography>
-          <Box className="flex flex-wrap gap-2">
+          <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
             {leftProfile.skills.map((skill, index) => (
               <Chip
                 key={index}
@@ -164,11 +178,20 @@ export function ProfileComparison({
       </Card>
 
       <Card>
-        <CardContent className="p-4">
-          <Typography variant="h6" className="font-semibold mb-3">
+        <CardContent sx={{
+      p: 4
+    }}>
+          <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 3
+    }}>
             {rightProfile.name} - Skills
           </Typography>
-          <Box className="flex flex-wrap gap-2">
+          <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
             {rightProfile.skills.map((skill, index) => (
               <Chip
                 key={index}
@@ -188,24 +211,48 @@ export function ProfileComparison({
   );
 
   const renderExperienceComparison = () => (
-    <Box className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <Box sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
       <Card>
-        <CardContent className="p-4">
-          <Typography variant="h6" className="font-semibold mb-3">
+        <CardContent sx={{
+      p: 4
+    }}>
+          <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 3
+    }}>
             {leftProfile.name} - Experience
           </Typography>
-          <Box className="space-y-4">
+          <Box sx={{
+      "space-y-4": true
+    }}>
             {leftProfile.experience.map((exp, index) => (
-              <Box key={index} className="border-l-2 border-gray-200 pl-4">
-                <Typography variant="subtitle1" className="font-semibold">
+              <Box key={index} sx={{
+      "border-l-2": true,
+      borderColor: "gray.200",
+      pl: 4
+    }}>
+                <Typography variant="subtitle1" sx={{
+      fontWeight: 600
+    }}>
                   {exp.position}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {exp.company} • {exp.duration}
                 </Typography>
-                <ul className="mt-2 text-sm space-y-1">
+                <ul sx={{
+      mt: 2,
+      typography: body1,
+      "space-y-1": true
+    }}>
                   {exp.highlights.map((highlight, hIndex) => (
-                    <li key={hIndex} className="text-gray-600">
+                    <li key={hIndex} sx={{
+      color: "gray.600"
+    }}>
                       • {highlight}
                     </li>
                   ))}
@@ -217,22 +264,41 @@ export function ProfileComparison({
       </Card>
 
       <Card>
-        <CardContent className="p-4">
-          <Typography variant="h6" className="font-semibold mb-3">
+        <CardContent sx={{
+      p: 4
+    }}>
+          <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 3
+    }}>
             {rightProfile.name} - Experience
           </Typography>
-          <Box className="space-y-4">
+          <Box sx={{
+      "space-y-4": true
+    }}>
             {rightProfile.experience.map((exp, index) => (
-              <Box key={index} className="border-l-2 border-blue-200 pl-4">
-                <Typography variant="subtitle1" className="font-semibold">
+              <Box key={index} sx={{
+      "border-l-2": true,
+      borderColor: "blue.200",
+      pl: 4
+    }}>
+                <Typography variant="subtitle1" sx={{
+      fontWeight: 600
+    }}>
                   {exp.position}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {exp.company} • {exp.duration}
                 </Typography>
-                <ul className="mt-2 text-sm space-y-1">
+                <ul sx={{
+      mt: 2,
+      typography: body1,
+      "space-y-1": true
+    }}>
                   {exp.highlights.map((highlight, hIndex) => (
-                    <li key={hIndex} className="text-gray-600">
+                    <li key={hIndex} sx={{
+      color: "gray.600"
+    }}>
                       • {highlight}
                     </li>
                   ))}
@@ -246,11 +312,22 @@ export function ProfileComparison({
   );
 
   return (
-    <Box className="w-full">
+    <Box sx={{
+      width: "100%"
+    }}>
       {/* Header */}
-      <Box className="flex items-center justify-between mb-6">
+      <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 6
+    }}>
         <Box>
-          <Typography variant="h4" className="text-2xl font-bold mb-2">
+          <Typography variant="h4" sx={{
+      typography: h4,
+      fontWeight: 700,
+      mb: 2
+    }}>
             Profile Comparison
           </Typography>
           <Typography variant="body1" color="text.secondary">
@@ -258,7 +335,10 @@ export function ProfileComparison({
           </Typography>
         </Box>
 
-        <Box className="flex gap-2">
+        <Box sx={{
+      display: "flex",
+      gap: 2
+    }}>
           <Button
             variant="outlined"
             onClick={onSwapProfiles}
@@ -271,7 +351,10 @@ export function ProfileComparison({
           </Button>
           <Button
             variant="contained"
-            className="bg-primary hover:bg-primary/90"
+            sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
             startIcon={<Share sx={{ fontSize: 16 }} />}
           >
             Share
@@ -280,10 +363,23 @@ export function ProfileComparison({
       </Box>
 
       {/* Profile Cards Overview */}
-      <Box className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <Box sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6,
+      mb: 8
+    }}>
         <Box>
-          <Box className="flex items-center justify-between mb-4">
-            <Typography variant="h6" className="font-semibold">
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+            <Typography variant="h6" sx={{
+      fontWeight: 600
+    }}>
               Profile Version 1
             </Typography>
             <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('left')}>
@@ -303,8 +399,15 @@ export function ProfileComparison({
         </Box>
 
         <Box>
-          <Box className="flex items-center justify-between mb-4">
-            <Typography variant="h6" className="font-semibold">
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 4
+    }}>
+            <Typography variant="h6" sx={{
+      fontWeight: 600
+    }}>
               Profile Version 2
             </Typography>
             <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('right')}>
@@ -325,7 +428,12 @@ export function ProfileComparison({
       </Box>
 
       {/* Section Navigation */}
-      <Box className="flex gap-2 mb-6 overflow-x-auto">
+      <Box sx={{
+      display: "flex",
+      gap: 2,
+      mb: 6,
+      "overflow-x-auto": true
+    }}>
         {sections.map((section) => (
           <Button
             key={section.id}
@@ -343,14 +451,20 @@ export function ProfileComparison({
         {selectedSection === 'skills' && renderSkillsComparison()}
         {selectedSection === 'experience' && renderExperienceComparison()}
         {selectedSection === 'overview' && (
-          <Box className="text-center py-8">
+          <Box sx={{
+      textAlign: "center",
+      py: 8
+    }}>
             <Typography variant="h6" color="text.secondary">
               Select a section above to compare profile details
             </Typography>
           </Box>
         )}
         {(selectedSection === 'education' || selectedSection === 'certifications') && (
-          <Box className="text-center py-8">
+          <Box sx={{
+      textAlign: "center",
+      py: 8
+    }}>
             <Typography variant="h6" color="text.secondary">
               {selectedSection.charAt(0).toUpperCase() + selectedSection.slice(1)} comparison coming
               soon

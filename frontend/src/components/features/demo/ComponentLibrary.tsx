@@ -1,4 +1,5 @@
 import { ArrowLeft } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, IconButton } from '@mui/material';
 import React from 'react';
 
@@ -20,24 +21,49 @@ interface ComponentLibraryProps {
 export function ComponentLibrary({ onBack, onNavigateToAnimated }: ComponentLibraryProps) {
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-background p-6">
-        <div className="max-w-7xl mx-auto">
+      <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 6
+    }}>
+        <div sx={{
+      "max-w-7xl": true,
+      "mx-auto": true
+    }}>
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-4 mb-4">
-              <Button variant="text" size="small" onClick={onBack} className="gap-2">
-                <ArrowLeft className="w-4 h-4" />
+          <div sx={{
+      mb: 8
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 4
+    }}>
+              <Button variant="text" size="small" onClick={onBack} sx={{
+      gap: 2
+    }}>
+                <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                 Back to Dashboard
               </Button>
             </div>
-            <h1 className="mb-2">Career Copilot Component Library</h1>
-            <p className="text-muted-foreground">
+            <h1 sx={{
+      mb: 2
+    }}>Career Copilot Component Library</h1>
+            <p sx={{
+      "text-muted-foreground": true
+    }}>
               A comprehensive design system showcasing all reusable components used throughout the
               Career Copilot platform
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div sx={{
+      "space-y-12": true
+    }}>
             <CardComponentsSection />
             <ButtonComponentsSection />
             <FormComponentsSection />

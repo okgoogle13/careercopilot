@@ -50,7 +50,7 @@ def extract_job_details_from_email(email_content: str) -> dict:
 # Flow is automatically registered by the @simple_genkit_flow decorator
 
 
-# Removed @genkit.flow()
+@simple_genkit_flow()
 async def scanEmailsForJobOpportunities(user_id: str) -> dict:
     """
     Enhanced version of email scanning that returns structured results.

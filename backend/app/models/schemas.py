@@ -233,7 +233,7 @@ class JobListingDetails(BaseModel):
     Ported from the TypeScript JobDetails interface.
     """
 
-    due_date: Optional[datetime] = Field(None, description="The application due date.")
+    due_date: Optional[str] = Field(None, description="The application due date.")
     company_name: Optional[str] = Field(
         None, description="The name of the hiring organization or company."
     )

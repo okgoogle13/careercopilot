@@ -5,6 +5,7 @@ This document tracks the remaining cleanup tasks after the initial ESLint 9 upgr
 ## Status: Core Upgrade Complete ✅
 
 **Major accomplishments:**
+
 - ✅ ESLint upgraded to v9.38.0
 - ✅ **Fixed 2-hour yarn install loop** (removed ajv/esbuild resolutions)
 - ✅ **Fixed CI failures** (clean yarn.lock regenerated)
@@ -19,6 +20,7 @@ This document tracks the remaining cleanup tasks after the initial ESLint 9 upgr
 ### Issue 1: Missing `@nolyfill/is-core-module` Dependency
 
 **Problem:**
+
 ```
 Resolve error: Cannot find module '@nolyfill/is-core-module'
 ```
@@ -26,7 +28,9 @@ Resolve error: Cannot find module '@nolyfill/is-core-module'
 **Root cause:** This was a dependency of `eslint-import-resolver-typescript` which we removed.
 
 **Solution options:**
+
 - **Option A (Quick):** Remove import plugin rules that require the resolver:
+
   ```javascript
   // Remove from frontend/eslint.config.mjs:
   'import/no-unresolved': 'error',
@@ -48,6 +52,7 @@ Resolve error: Cannot find module '@nolyfill/is-core-module'
 ### Issue 2: TypeScript Project Configuration Warnings
 
 **Problem:**
+
 ```
 Parsing error: "parserOptions.project" has been provided for @typescript-eslint/parser.
 The file was not found in any of the provided project(s):
@@ -60,14 +65,15 @@ The file was not found in any of the provided project(s):
 
 **Solution:**
 Add to `frontend/eslint.config.mjs` ignores:
+
 ```javascript
 ignores: [
   // ... existing ignores
-  '.storybook/**',
-  'playwright.config.ts',
-  'vite.config.ts',
-  '*.config.{ts,js}', // All config files
-]
+  ".storybook/**",
+  "playwright.config.ts",
+  "vite.config.ts",
+  "*.config.{ts,js}", // All config files
+];
 ```
 
 **Effort:** 5 minutes
@@ -77,6 +83,7 @@ ignores: [
 ### Issue 3: Generated Files with Deprecated Rules
 
 **Problem:**
+
 ```
 /frontend/dev-dist/workbox-302896ff.js
   error: Definition for rule '@typescript-eslint/ban-types' was not found
@@ -94,6 +101,7 @@ Add `dev-dist/**` to ignores (already partially done, may need to verify).
 ### Issue 4: `.eslintignore` Deprecation Warning
 
 **Problem:**
+
 ```
 ESLintIgnoreWarning: The ".eslintignore" file is no longer supported.
 ```
@@ -122,22 +130,26 @@ Before closing this follow-up, verify:
 ## Implementation Plan
 
 ### Phase 1: Quick Wins (15 minutes)
+
 1. Add `.storybook/**`, `playwright.config.ts`, `*.config.{ts,js}` to ignores
 2. Delete `.eslintignore` if it exists
 3. Verify `dev-dist/**` is ignored
 4. Test: `yarn lint` in frontend
 
 ### Phase 2: Import Plugin Cleanup (15 minutes)
+
 5. Remove problematic import plugin rules (Option A from Issue 1)
 6. Keep only: `import/order`, `import/no-duplicates`, `import/newline-after-import`
 7. Test: `yarn lint` in frontend again
 
 ### Phase 3: Functions Testing (10 minutes)
+
 8. Test: `yarn lint` in functions directory
 9. Fix any functions-specific issues
 10. Document any remaining warnings
 
 ### Phase 4: CI Validation (5 minutes)
+
 11. Push changes to a new branch
 12. Create PR and wait for CI
 13. Verify all jobs pass
@@ -147,6 +159,7 @@ Before closing this follow-up, verify:
 ## Expected Final State
 
 **Linting should:**
+
 - ✅ Pass with 0 errors in frontend
 - ✅ Pass with 0 errors in functions
 - ✅ Have < 10 warnings total (acceptable)
@@ -154,6 +167,7 @@ Before closing this follow-up, verify:
 - ✅ Work in CI without issues
 
 **Configuration should:**
+
 - ✅ Use only modern flat config files
 - ✅ Have no .eslintrc or .eslintignore files
 - ✅ Use official recommended configs (no custom Airbnb)

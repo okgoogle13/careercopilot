@@ -16,10 +16,7 @@ from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig, ge
 from .monitoring import monitor_performance, track_ai_usage, track_error
 
 # Remove OpenAI provider from supported providers
-SUPPORTED_PROVIDERS = [
-    AIProvider.GOOGLE_AI,
-    AIProvider.ANTHROPIC
-]
+SUPPORTED_PROVIDERS = [AIProvider.GOOGLE_AI, AIProvider.ANTHROPIC]
 
 logger = logging.getLogger(__name__)
 
@@ -93,22 +90,20 @@ class GoogleAIClient(AIProviderClient):
         self._model_optimizer = None
         self._optimized_models = {}  # Cache for optimized model endpoints
 
-    async def _get_optimized_endpoint(
-        self, model_config: ModelConfig
-    ) -> str:
+    async def _get_optimized_endpoint(self, model_config: ModelConfig) -> str:
         """Get or create an optimized model endpoint"""
         model_id = model_config.model_id
         optimization_config = getattr(model_config, "optimization_config", None)
-        
+
         # If no optimization is needed, return the standard model
         if not optimization_config or optimization_config.level == OptimizationLevel.NONE:
             return f"{self.base_url}/models/{model_id}:generateContent"
-            
+
         # Check if we already have an optimized model
         cache_key = f"{model_id}-{optimization_config.level}"
         if cache_key in self._optimized_models:
             return self._optimized_models[cache_key]
-            
+
         # Initialize the model optimizer if needed
         if self._model_optimizer is None:
             project_id = self.credentials.project_id if self.credentials else None
@@ -118,12 +113,12 @@ class GoogleAIClient(AIProviderClient):
                     "No project_id in credentials, using default project for model optimization"
                 )
                 project_id = None  # Will use default project
-                
+
             self._model_optimizer = ModelOptimizer(
                 project_id=project_id,
                 location=location,
             )
-        
+
         try:
             # Optimize and deploy the model
             endpoint = self._model_optimizer.optimize_model(
@@ -132,11 +127,11 @@ class GoogleAIClient(AIProviderClient):
                 display_name=f"{model_id}-optimized-{optimization_config.level}",
                 description=f"Optimized version of {model_id} for CareerCopilot",
             )
-            
+
             # Cache the endpoint URL
             self._optimized_models[cache_key] = endpoint.resource_name
             return endpoint.resource_name
-            
+
         except Exception as e:
             logger.error(f"Failed to optimize model {model_id}: {e}")
             # Fall back to standard model
@@ -167,7 +162,7 @@ class GoogleAIClient(AIProviderClient):
                 raise ValueError("Google AI credentials not configured")
             # Get the appropriate endpoint (optimized or standard)
             endpoint = await self._get_optimized_endpoint(model_config)
-            
+
             # Determine if we're using the standard API or an optimized endpoint
             if endpoint.startswith("https://"):
                 # Standard API endpoint
@@ -179,7 +174,7 @@ class GoogleAIClient(AIProviderClient):
                     url += f"?key={self.credentials.api_key}"
                 # Update payload format for optimized models
                 payload = {"instances": [{"content": request.prompt}]}
-            
+
             async with httpx.AsyncClient(timeout=model_config.timeout_seconds) as client:
                 response = await client.post(url, json=payload, headers=self._get_headers())
                 response.raise_for_status()
@@ -359,11 +354,13 @@ class AnthropicClient(AIProviderClient):
 
 from .ai_config import AIConfigManager, AIModelType, AIProvider, ModelConfig
 
+
 class AIClientManager:
     """Manages AI provider clients and routing"""
 
     def __init__(self, config_manager: Optional[AIConfigManager] = None):
         from .ai_config import get_ai_config
+
         self.config_manager = config_manager or get_ai_config()
         self.clients: Dict[AIProvider, AIProviderClient] = {}
         self._initialize_clients()
@@ -373,7 +370,7 @@ class AIClientManager:
         # Only initialize Google AI client as it's our primary provider
         if self.config_manager.get_provider_credentials(AIProvider.GOOGLE_AI):
             self.clients[AIProvider.GOOGLE_AI] = GoogleAIClient(self.config_manager)
-        
+
         # Fallback to Anthropic if configured (optional)
         if self.config_manager.get_provider_credentials(AIProvider.ANTHROPIC):
             self.clients[AIProvider.ANTHROPIC] = AnthropicClient(self.config_manager)

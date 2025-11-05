@@ -1,12 +1,13 @@
 import {
   ArrowLeft,
-  Person as User,
-  Notifications as Bell,
+  Person as PersonIcon,
+  Notifications as NotificationsIcon,
   Shield,
-  Delete as Trash2,
+  Delete as DeleteIcon,
   Download,
-  Upload,
+  CloudUpload as CloudUploadIcon,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -67,35 +68,92 @@ export function Settings({ onBack }: SettingsProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4">
-      <div className="max-w-4xl mx-auto">
+    <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 4
+    }}>
+      <div sx={{
+      "max-w-4xl": true,
+      "mx-auto": true
+    }}>
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 8
+    }}>
           <Button variant="text" size="small" onClick={onBack}>
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
             Back to Dashboard
           </Button>
         </div>
 
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-semibold mb-2">Settings</h1>
-          <p className="text-muted-foreground">Manage your account preferences and data</p>
+        <div sx={{
+      textAlign: "center",
+      mb: 8
+    }}>
+          <h1 sx={{
+      typography: h3,
+      fontWeight: 600,
+      mb: 2
+    }}>Settings</h1>
+          <p sx={{
+      "text-muted-foreground": true
+    }}>Manage your account preferences and data</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      gap: 8
+    }}>
           {/* Profile Settings */}
-          <div className="space-y-6">
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <User className="w-5 h-5 text-primary" />
+          <div sx={{
+      "space-y-6": true
+    }}>
+            <Card sx={{
+      p: 6
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                <div sx={{
+      p: 2,
+      "bg-primary/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <PersonIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-primary": true
+    }} />
                 </div>
-                <h3 className="text-xl font-semibold">Profile Information</h3>
+                <h3 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>Profile Information</h3>
               </div>
 
-              <div className="space-y-4">
+              <div sx={{
+      "space-y-4": true
+    }}>
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Full Name</label>
+                  <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>Full Name</label>
                   <Input
                     value={profile.name}
                     onChange={(e) => setProfile({ ...profile, name: e.target.value })}
@@ -103,7 +161,12 @@ export function Settings({ onBack }: SettingsProps) {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Email Address</label>
+                  <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>Email Address</label>
                   <Input
                     type="email"
                     value={profile.email}
@@ -112,7 +175,12 @@ export function Settings({ onBack }: SettingsProps) {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">Phone Number</label>
+                  <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>Phone Number</label>
                   <Input
                     value={profile.phone}
                     onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
@@ -121,7 +189,11 @@ export function Settings({ onBack }: SettingsProps) {
 
                 <Button
                   onClick={handleProfileUpdate}
-                  className="w-full bg-primary hover:bg-primary/90"
+                  sx={{
+      width: "100%",
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}
                 >
                   Update Profile
                 </Button>
@@ -129,37 +201,89 @@ export function Settings({ onBack }: SettingsProps) {
             </Card>
 
             {/* Data Management */}
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-blue-500/10 rounded-lg">
-                  <Shield className="w-5 h-5 text-blue-500" />
+            <Card sx={{
+      p: 6
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                <div sx={{
+      p: 2,
+      "bg-blue-500/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <Shield sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "blue.500"
+    }} />
                 </div>
-                <h3 className="text-xl font-semibold">Data Management</h3>
+                <h3 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>Data Management</h3>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+              <div sx={{
+      "space-y-4": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      p: 3,
+      "bg-card": true,
+      borderRadius: 0.5rem
+    }}>
                   <div>
-                    <h4 className="font-medium">Export Data</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 sx={{
+      fontWeight: 500
+    }}>Export Data</h4>
+                    <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                       Download all your data in JSON format
                     </p>
                   </div>
                   <Button variant="outlined" size="small" onClick={handleExportData}>
-                    <Download className="w-4 h-4 mr-2" />
+                    <Download sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                     Export
                   </Button>
                 </div>
 
-                <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      p: 3,
+      "bg-card": true,
+      borderRadius: 0.5rem
+    }}>
                   <div>
-                    <h4 className="font-medium">Import Data</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 sx={{
+      fontWeight: 500
+    }}>Import Data</h4>
+                    <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                       Import data from another account
                     </p>
                   </div>
                   <Button variant="outlined" size="small" onClick={handleImportData}>
-                    <Upload className="w-4 h-4 mr-2" />
+                    <CloudUploadIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                     Import
                   </Button>
                 </div>
@@ -168,20 +292,54 @@ export function Settings({ onBack }: SettingsProps) {
           </div>
 
           {/* Notification Settings */}
-          <div className="space-y-6">
-            <Card className="p-6">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-yellow-500/10 rounded-lg">
-                  <Bell className="w-5 h-5 text-yellow-500" />
+          <div sx={{
+      "space-y-6": true
+    }}>
+            <Card sx={{
+      p: 6
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                <div sx={{
+      p: 2,
+      "bg-yellow-500/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <NotificationsIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "yellow.500"
+    }} />
                 </div>
-                <h3 className="text-xl font-semibold">Notification Preferences</h3>
+                <h3 sx={{
+      typography: h5,
+      fontWeight: 600
+    }}>Notification Preferences</h3>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+              <div sx={{
+      "space-y-4": true
+    }}>
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      p: 3,
+      "bg-card": true,
+      borderRadius: 0.5rem
+    }}>
                   <div>
-                    <h4 className="font-medium">Email Alerts</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 sx={{
+      fontWeight: 500
+    }}>Email Alerts</h4>
+                    <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                       Receive important updates via email
                     </p>
                   </div>
@@ -193,10 +351,22 @@ export function Settings({ onBack }: SettingsProps) {
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      p: 3,
+      "bg-card": true,
+      borderRadius: 0.5rem
+    }}>
                   <div>
-                    <h4 className="font-medium">Job Match Notifications</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 sx={{
+      fontWeight: 500
+    }}>Job Match Notifications</h4>
+                    <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                       Get notified about new job matches
                     </p>
                   </div>
@@ -208,10 +378,22 @@ export function Settings({ onBack }: SettingsProps) {
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      p: 3,
+      "bg-card": true,
+      borderRadius: 0.5rem
+    }}>
                   <div>
-                    <h4 className="font-medium">Application Updates</h4>
-                    <p className="text-sm text-muted-foreground">
+                    <h4 sx={{
+      fontWeight: 500
+    }}>Application Updates</h4>
+                    <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                       Updates on your job applications
                     </p>
                   </div>
@@ -223,10 +405,22 @@ export function Settings({ onBack }: SettingsProps) {
                   />
                 </div>
 
-                <div className="flex items-center justify-between p-3 bg-card rounded-lg">
+                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      p: 3,
+      "bg-card": true,
+      borderRadius: 0.5rem
+    }}>
                   <div>
-                    <h4 className="font-medium">Weekly Digest</h4>
-                    <p className="text-sm text-muted-foreground">Weekly summary of your activity</p>
+                    <h4 sx={{
+      fontWeight: 500
+    }}>Weekly Digest</h4>
+                    <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>Weekly summary of your activity</p>
                   </div>
                   <Switch
                     checked={notifications.weeklyDigest}
@@ -239,41 +433,97 @@ export function Settings({ onBack }: SettingsProps) {
             </Card>
 
             {/* Danger Zone */}
-            <Card className="p-6 border-destructive/30 bg-destructive/5">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 bg-destructive/10 rounded-lg">
-                  <Trash2 className="w-5 h-5 text-destructive" />
+            <Card sx={{
+      p: 6,
+      "border-destructive/30": true,
+      "bg-destructive/5": true
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                <div sx={{
+      p: 2,
+      "bg-destructive/10": true,
+      borderRadius: 0.5rem
+    }}>
+                  <DeleteIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-destructive": true
+    }} />
                 </div>
-                <h3 className="text-xl font-semibold text-destructive">Danger Zone</h3>
+                <h3 sx={{
+      typography: h5,
+      fontWeight: 600,
+      "text-destructive": true
+    }}>Danger Zone</h3>
               </div>
 
-              <div className="space-y-4">
-                <div className="p-4 bg-background border border-destructive/30 rounded-lg">
-                  <h4 className="font-medium text-destructive mb-2">Delete Account</h4>
-                  <p className="text-sm text-muted-foreground mb-4">
+              <div sx={{
+      "space-y-4": true
+    }}>
+                <div sx={{
+      p: 4,
+      "bg-background": true,
+      border: 1,
+      "border-destructive/30": true,
+      borderRadius: 0.5rem
+    }}>
+                  <h4 sx={{
+      fontWeight: 500,
+      "text-destructive": true,
+      mb: 2
+    }}>Delete Account</h4>
+                  <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mb: 4
+    }}>
                     Permanently delete your account and all associated data. This action cannot be
                     undone.
                   </p>
 
                   {!showDeleteConfirm ? (
-                    <Button variant="outlined" onClick={handleDeleteAccount} className="w-full">
-                      <Trash2 className="w-4 h-4 mr-2" />
+                    <Button variant="outlined" onClick={handleDeleteAccount} sx={{
+      width: "100%"
+    }}>
+                      <DeleteIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                       Delete Account
                     </Button>
                   ) : (
-                    <div className="space-y-3">
-                      <p className="text-sm font-medium text-destructive">
+                    <div sx={{
+      "space-y-3": true
+    }}>
+                      <p sx={{
+      typography: body1,
+      fontWeight: 500,
+      "text-destructive": true
+    }}>
                         Are you absolutely sure? This action cannot be undone.
                       </p>
-                      <div className="flex gap-3">
+                      <div sx={{
+      display: "flex",
+      gap: 3
+    }}>
                         <Button
                           variant="outlined"
                           onClick={() => setShowDeleteConfirm(false)}
-                          className="flex-1"
+                          sx={{
+      flex: 1
+    }}
                         >
                           Cancel
                         </Button>
-                        <Button variant="outlined" onClick={handleDeleteAccount} className="flex-1">
+                        <Button variant="outlined" onClick={handleDeleteAccount} sx={{
+      flex: 1
+    }}>
                           Yes, Delete Forever
                         </Button>
                       </div>
@@ -286,20 +536,45 @@ export function Settings({ onBack }: SettingsProps) {
         </div>
 
         {/* Additional Info */}
-        <Card className="mt-8 p-6 bg-muted/20">
-          <h3 className="font-semibold mb-4">Account Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+        <Card sx={{
+      mt: 8,
+      p: 6,
+      "bg-muted/20": true
+    }}>
+          <h3 sx={{
+      fontWeight: 600,
+      mb: 4
+    }}>Account Information</h3>
+          <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 4,
+      typography: body1
+    }}>
             <div>
-              <p className="text-muted-foreground">Account created</p>
-              <p className="font-medium">January 15, 2024</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>Account created</p>
+              <p sx={{
+      fontWeight: 500
+    }}>January 15, 2024</p>
             </div>
             <div>
-              <p className="text-muted-foreground">Last login</p>
-              <p className="font-medium">Today at 2:30 PM</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>Last login</p>
+              <p sx={{
+      fontWeight: 500
+    }}>Today at 2:30 PM</p>
             </div>
             <div>
-              <p className="text-muted-foreground">Data usage</p>
-              <p className="font-medium">2.4 MB of 100 MB</p>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>Data usage</p>
+              <p sx={{
+      fontWeight: 500
+    }}>2.4 MB of 100 MB</p>
             </div>
           </div>
         </Card>

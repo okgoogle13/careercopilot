@@ -1,4 +1,5 @@
 import { Button, IconButton, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import React from 'react';
 
 import {
@@ -35,7 +36,11 @@ export function InteractiveComponentsSection() {
       description="Dialogs, popovers, and other interactive overlay components"
     >
       <ComponentDemo title="Dialogs & Modals">
-        <div className="flex flex-wrap gap-4">
+        <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 4
+    }}>
           <Button variant="outlined" onClick={() => setIsDialogOpen(true)}>
             Open Dialog
           </Button>
@@ -47,7 +52,9 @@ export function InteractiveComponentsSection() {
               </DialogDescription>
             </DialogHeader>
             <DialogContent>
-              <div className="py-4">
+              <div sx={{
+      py: 4
+    }}>
                 <p>Dialog content goes here.</p>
               </div>
             </DialogContent>
@@ -82,18 +89,34 @@ export function InteractiveComponentsSection() {
       </ComponentDemo>
 
       <ComponentDemo title="Popovers & Tooltips">
-        <div className="flex flex-wrap gap-4">
+        <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 4
+    }}>
           <Popover>
             <PopoverTrigger asChild>
               <Button variant="outlined">Open Popover</Button>
             </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="space-y-2">
-                <h4 className="font-medium">Popover Title</h4>
-                <p className="text-sm text-muted-foreground">
+            <PopoverContent sx={{
+      "w-80": true
+    }}>
+              <div sx={{
+      "space-y-2": true
+    }}>
+                <h4 sx={{
+      fontWeight: 500
+    }}>Popover Title</h4>
+                <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                   This is a popover with some content inside it.
                 </p>
-                <div className="flex gap-2">
+                <div sx={{
+      display: "flex",
+      gap: 2
+    }}>
                   <Button size="small">Action</Button>
                   <Button variant="outlined" size="small">
                     Cancel

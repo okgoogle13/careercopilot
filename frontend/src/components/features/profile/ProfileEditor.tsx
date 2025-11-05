@@ -1,24 +1,25 @@
 import {
-  ArrowLeft,
-  EmojiEvents as Award,
-  Work as Briefcase,
-  CameraAlt as Camera,
-  CheckCircle,
-  Code,
-  Visibility as Eye,
-  GitHub,
-  Public as Globe,
-  LinkedIn,
-  LocationOn as MapPin,
-  Add as Plus,
-  Settings,
-  EmojiObjects as Sparkles,
-  Star,
-  GpsFixed as Target,
-  X as Twitter,
-  Person as User,
-  Close as X,
+  ArrowLeft as ArrowLeftIcon,
+  EmojiEvents as EmojiEventsIcon,
+  Work as WorkIcon,
+  CameraAlt as CameraAltIcon,
+  CheckCircle as CheckCircleIcon,
+  Code as CodeIcon,
+  Visibility as VisibilityIcon,
+  GitHub as GitHubIcon,
+  Public as PublicIcon,
+  LinkedIn as LinkedInIcon,
+  LocationOn as LocationOnIcon,
+  Add as AddIcon,
+  Settings as SettingsIcon,
+  EmojiObjects as EmojiObjectsIcon,
+  Star as StarIcon,
+  GpsFixed as GpsFixedIcon,
+  X as TwitterIcon,
+  Person as PersonIcon,
+  Close as CloseIcon,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Button, Card, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useState } from 'react';
 
@@ -226,13 +227,13 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
   const getSocialIcon = (platform: string) => {
     const icons = {
-      linkedin: LinkedIn,
-      github: GitHub,
-      twitter: Twitter,
-      website: Globe,
-      portfolio: Code,
+      linkedin: LinkedInIcon,
+      github: GitHubIcon,
+      twitter: TwitterIcon,
+      website: PublicIcon,
+      portfolio: CodeIcon,
     };
-    return icons[platform as keyof typeof icons] || Globe;
+    return icons[platform as keyof typeof icons] || PublicIcon;
   };
 
   const getCategoryColor = (category: string) => {
@@ -261,15 +262,46 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-background p-4">
-        <div className="max-w-6xl mx-auto">
+      <div sx={{
+      minHeight: "100vh",
+      "bg-background": true,
+      p: 4
+    }}>
+        <div sx={{
+      "max-w-6xl": true,
+      "mx-auto": true
+    }}>
           {/* Enhanced Header */}
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="relative">
-                <Avatar className="h-20 w-20 border-4 border-white shadow-lg">
+          <div sx={{
+      textAlign: "center",
+      mb: 8
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 4,
+      mb: 6
+    }}>
+              <div sx={{
+      "relative": true
+    }}>
+                <Avatar sx={{
+      "h-20": true,
+      "w-20": true,
+      border: 4,
+      "border-white": true,
+      boxShadow: 4
+    }}>
                   <AvatarImage src={personalInfo.avatarUrl} />
-                  <AvatarFallback className="text-lg font-semibold bg-gradient-to-br from-blue-500 to-purple-600 text-white">
+                  <AvatarFallback sx={{
+      typography: h6,
+      fontWeight: 600,
+      "bg-gradient-to-br": true,
+      "from-blue-500": true,
+      "to-purple-600": true,
+      color: "common.white"
+    }}>
                     {personalInfo.fullName
                       .split(' ')
                       .map((n) => n[0])
@@ -279,31 +311,80 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 <Button
                   size="small"
                   variant="outlined"
-                  className="absolute -bottom-1 -right-1 h-8 w-8 rounded-full bg-white shadow-sm"
+                  sx={{
+      "absolute": true,
+      "-bottom-1": true,
+      "-right-1": true,
+      "h-8": true,
+      "w-8": true,
+      borderRadius: 9999px,
+      bgcolor: "common.white",
+      boxShadow: 1
+    }}
                 >
-                  <Camera className="h-4 w-4" />
+                  <CameraAltIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 </Button>
               </div>
-              <div className="text-left">
-                <h1 className="text-3xl font-bold text-foreground">{personalInfo.fullName}</h1>
-                <p className="text-lg text-muted-foreground">{personalInfo.title}</p>
-                <p className="text-sm text-muted-foreground flex items-center gap-1">
-                  <MapPin className="h-3 w-3" />
+              <div sx={{
+      textAlign: "left"
+    }}>
+                <h1 sx={{
+      typography: h3,
+      fontWeight: 700,
+      "text-foreground": true
+    }}>{personalInfo.fullName}</h1>
+                <p sx={{
+      typography: h6,
+      "text-muted-foreground": true
+    }}>{personalInfo.title}</p>
+                <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
+                  <LocationOnIcon sx={{
+      "h-3": true,
+      "w-3": true
+    }} />
                   {personalInfo.location}
                 </p>
               </div>
             </div>
 
             {/* Profile Strength Indicator */}
-            <Card className="p-4 mb-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium">Profile Strength</span>
+            <Card sx={{
+      p: 4,
+      mb: 6,
+      "bg-gradient-to-r": true,
+      "from-blue-50": true,
+      "to-purple-50": true,
+      borderColor: "blue.200"
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 2
+    }}>
+                <span sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>Profile Strength</span>
                 <Badge variant={calculateProfileStrength() >= 80 ? 'default' : 'secondary'}>
                   {calculateProfileStrength()}% Complete
                 </Badge>
               </div>
               <AnimatedProgress value={calculateProfileStrength()} max={100} />
-              <p className="text-xs text-muted-foreground mt-2">
+              <p sx={{
+      typography: body2,
+      "text-muted-foreground": true,
+      mt: 2
+    }}>
                 {calculateProfileStrength() >= 90
                   ? 'Excellent! Your profile is highly optimized.'
                   : calculateProfileStrength() >= 70
@@ -317,48 +398,127 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           <Tabs
             value={activeTab}
             onChange={(_e, newValue) => setActiveTab(newValue as string)}
-            className="w-full"
+            sx={{
+      width: "100%"
+    }}
           >
-            <TabsList className="grid w-full grid-cols-5 mb-8">
-              <TabsTrigger value="basic" className="flex items-center gap-2">
-                <User className="h-4 w-4" />
+            <TabsList sx={{
+      "grid": true,
+      width: "100%",
+      "grid-cols-5": true,
+      mb: 8
+    }}>
+              <TabsTrigger value="basic" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <PersonIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 Basic Info
               </TabsTrigger>
-              <TabsTrigger value="experience" className="flex items-center gap-2">
-                <Briefcase className="h-4 w-4" />
+              <TabsTrigger value="experience" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <WorkIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 Experience
               </TabsTrigger>
-              <TabsTrigger value="skills" className="flex items-center gap-2">
-                <Award className="h-4 w-4" />
+              <TabsTrigger value="skills" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <EmojiEventsIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 Skills
               </TabsTrigger>
-              <TabsTrigger value="social" className="flex items-center gap-2">
-                <Globe className="h-4 w-4" />
+              <TabsTrigger value="social" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <PublicIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 Social & Links
               </TabsTrigger>
-              <TabsTrigger value="settings" className="flex items-center gap-2">
-                <Settings className="h-4 w-4" />
+              <TabsTrigger value="settings" sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                <SettingsIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                 Privacy
               </TabsTrigger>
             </TabsList>
 
             {/* Basic Information Tab */}
-            <TabsContent value="basic" currentValue={activeTab} className="space-y-6">
+            <TabsContent value="basic" currentValue={activeTab} sx={{
+      "space-y-6": true
+    }}>
               <>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
                   {/* Personal Information */}
-                  <Card className="p-6">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2 bg-blue-100 rounded-lg">
-                        <User className="w-5 h-5 text-blue-600" />
+                  <Card sx={{
+      p: 6
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                      <div sx={{
+      p: 2,
+      bgcolor: "blue.100",
+      borderRadius: 0.5rem
+    }}>
+                        <PersonIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "blue.600"
+    }} />
                       </div>
-                      <h3 className="font-semibold text-lg">Personal Details</h3>
+                      <h3 sx={{
+      fontWeight: 600,
+      typography: h6
+    }}>Personal Details</h3>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div sx={{
+      "space-y-4": true
+    }}>
+                      <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 4
+    }}>
                         <div>
-                          <label className="text-sm font-medium mb-2 block">Full Name *</label>
+                          <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>Full Name *</label>
                           <Input
                             value={personalInfo.fullName}
                             onChange={(e) =>
@@ -368,7 +528,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           />
                         </div>
                         <div>
-                          <label className="text-sm font-medium mb-2 block">
+                          <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>
                             Professional Title
                           </label>
                           <Input
@@ -382,7 +547,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium mb-2 block">
+                        <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>
                           Professional Tagline
                         </label>
                         <Input
@@ -394,9 +564,19 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         />
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 4
+    }}>
                         <div>
-                          <label className="text-sm font-medium mb-2 block">Email *</label>
+                          <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>Email *</label>
                           <Input
                             type="email"
                             value={personalInfo.email}
@@ -407,7 +587,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           />
                         </div>
                         <div>
-                          <label className="text-sm font-medium mb-2 block">Phone</label>
+                          <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>Phone</label>
                           <Input
                             value={personalInfo.phone}
                             onChange={(e) =>
@@ -419,7 +604,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       </div>
 
                       <div>
-                        <label className="text-sm font-medium mb-2 block">Location</label>
+                        <label sx={{
+      typography: body1,
+      fontWeight: 500,
+      mb: 2,
+      "block": true
+    }}>Location</label>
                         <Input
                           value={personalInfo.location}
                           onChange={(e) =>
@@ -432,32 +622,64 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   </Card>
 
                   {/* Professional Summary */}
-                  <Card className="p-6">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="p-2 bg-green-100 rounded-lg">
-                        <Briefcase className="w-5 h-5 text-green-600" />
+                  <Card sx={{
+      p: 6
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                      <div sx={{
+      p: 2,
+      bgcolor: "green.100",
+      borderRadius: 0.5rem
+    }}>
+                        <WorkIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "green.600"
+    }} />
                       </div>
-                      <h3 className="font-semibold text-lg">Professional Summary</h3>
+                      <h3 sx={{
+      fontWeight: 600,
+      typography: h6
+    }}>Professional Summary</h3>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex gap-2">
+                    <div sx={{
+      "space-y-4": true
+    }}>
+                      <div sx={{
+      display: "flex",
+      gap: 2
+    }}>
                         {isGenerating ? (
                           <AIProcessingLoading message="Generating AI summary..." />
                         ) : (
                           <AnimatedButton
                             variant="outlined"
                             animation="shimmer"
-                            className="flex-1"
+                            sx={{
+      flex: 1
+    }}
                             onClick={handleGenerateSummary}
                           >
-                            <Sparkles className="mr-2 h-4 w-4" />
+                            <EmojiObjectsIcon sx={{
+      mr: 2,
+      "h-4": true,
+      "w-4": true
+    }} />
                             AI Generate
                           </AnimatedButton>
                         )}
                         <Tooltip title="Get personalized tips for your summary">
                           <Button variant="outlined" size="small">
-                            <Target className="h-4 w-4" />
+                            <GpsFixedIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                           </Button>
                         </Tooltip>
                       </div>
@@ -466,15 +688,25 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         value={summary}
                         onChange={(e) => setSummary(e.target.value)}
                         placeholder="Write a compelling professional summary that highlights your key achievements, skills, and career objectives..."
-                        className="min-h-[150px] resize-none"
+                        sx={{
+      h: "150px",
+      "resize-none": true
+    }}
                       />
 
-                      <div className="text-xs text-muted-foreground">
+                      <div sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                         <span className={summary.length > 300 ? 'text-amber-600' : ''}>
                           {summary.length}/300 characters
                         </span>
                         {summary.length > 0 && (
-                          <div className="mt-1 flex gap-4">
+                          <div sx={{
+      mt: 1,
+      display: "flex",
+      gap: 4
+    }}>
                             <span>Readability: Good</span>
                             <span>
                               Keywords:{' '}
@@ -499,24 +731,56 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Skills Tab */}
-            <TabsContent value="skills" currentValue={activeTab} className="space-y-6">
+            <TabsContent value="skills" currentValue={activeTab} sx={{
+      "space-y-6": true
+    }}>
               <>
-                <Card className="p-6">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-purple-100 rounded-lg">
-                        <Award className="w-5 h-5 text-purple-600" />
+                <Card sx={{
+      p: 6
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 6
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+                      <div sx={{
+      p: 2,
+      bgcolor: "purple.100",
+      borderRadius: 0.5rem
+    }}>
+                        <EmojiEventsIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "purple.600"
+    }} />
                       </div>
-                      <h3 className="font-semibold text-lg">Skills & Expertise</h3>
+                      <h3 sx={{
+      fontWeight: 600,
+      typography: h6
+    }}>Skills & Expertise</h3>
                     </div>
                     <Button variant="outlined" size="small">
-                      <Plus className="w-4 h-4 mr-2" />
+                      <AddIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                       Import from Resume
                     </Button>
                   </div>
 
                   {/* Add New Skill */}
-                  <div className="flex gap-2 mb-6">
+                  <div sx={{
+      display: "flex",
+      gap: 2,
+      mb: 6
+    }}>
                     <Input
                       placeholder="Add a skill (e.g., JavaScript, Project Management)"
                       value={newSkill}
@@ -527,7 +791,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           addSkill();
                         }
                       }}
-                      className="flex-1"
+                      sx={{
+      flex: 1
+    }}
                     />
                     <FormControl sx={{ width: 120 }}>
                       <InputLabel>Category</InputLabel>
@@ -547,53 +813,107 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       </Select>
                     </FormControl>
                     <Button onClick={addSkill}>
-                      <Plus className="h-4 w-4" />
+                      <AddIcon sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                     </Button>
                   </div>
 
                   {/* Skills Grid */}
-                  <div className="space-y-6">
+                  <div sx={{
+      "space-y-6": true
+    }}>
                     {['technical', 'soft', 'industry', 'language'].map((category) => {
                       const categorySkills = skills.filter((skill) => skill.category === category);
                       if (categorySkills.length === 0) return null;
 
                       return (
                         <div key={category}>
-                          <h4 className="font-medium text-sm uppercase tracking-wide text-muted-foreground mb-3">
+                          <h4 sx={{
+      fontWeight: 500,
+      typography: body1,
+      textTransform: "uppercase",
+      "tracking-wide": true,
+      "text-muted-foreground": true,
+      mb: 3
+    }}>
                             {category} Skills ({categorySkills.length})
                           </h4>
-                          <div className="grid gap-4">
+                          <div sx={{
+      "grid": true,
+      gap: 4
+    }}>
                             {categorySkills.map((skill) => (
-                              <Card key={skill.keyword} className="p-4 border border-gray-200">
-                                <div className="flex items-center justify-between mb-3">
-                                  <div className="flex items-center gap-3">
+                              <Card key={skill.keyword} sx={{
+      p: 4,
+      border: 1,
+      borderColor: "gray.200"
+    }}>
+                                <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      mb: 3
+    }}>
+                                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
                                     <Badge className={getCategoryColor(skill.category)}>
                                       {skill.keyword}
                                     </Badge>
                                     {skill.yearsOfExperience && (
-                                      <span className="text-xs text-muted-foreground">
+                                      <span sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                                         {skill.yearsOfExperience}+ years
                                       </span>
                                     )}
                                   </div>
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-xs text-muted-foreground">
+                                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                                    <span sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                                       Level {skill.level}/10
                                     </span>
                                     <Button
                                       variant="text"
                                       size="small"
-                                      className="h-6 w-6"
+                                      sx={{
+      "h-6": true,
+      "w-6": true
+    }}
                                       onClick={() => removeSkill(skill.keyword)}
                                     >
-                                      <X className="h-3 w-3" />
+                                      <CloseIcon sx={{
+      "h-3": true,
+      "w-3": true
+    }} />
                                     </Button>
                                   </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-xs text-muted-foreground w-16">
+                                <div sx={{
+      "space-y-2": true
+    }}>
+                                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
+                                    <span sx={{
+      typography: body2,
+      "text-muted-foreground": true,
+      "w-16": true
+    }}>
                                       Proficiency:
                                     </span>
                                     <Slider
@@ -606,10 +926,14 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                                       }
                                       max={10}
                                       step={1}
-                                      className="flex-1"
+                                      sx={{
+      flex: 1
+    }}
                                     />
                                   </div>
-                                  <Progress value={skill.level * 10} className="h-2" />
+                                  <Progress value={skill.level * 10} sx={{
+      "h-2": true
+    }} />
                                 </div>
                               </Card>
                             ))}
@@ -620,12 +944,32 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   </div>
 
                   {/* Skill Suggestions */}
-                  <Card className="p-4 bg-blue-50 border-blue-200">
-                    <div className="flex items-center gap-2 mb-3">
-                      <Sparkles className="w-4 h-4 text-blue-600" />
-                      <h4 className="font-medium text-blue-900">AI Skill Suggestions</h4>
+                  <Card sx={{
+      p: 4,
+      bgcolor: "blue.50",
+      borderColor: "blue.200"
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      mb: 3
+    }}>
+                      <EmojiObjectsIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      color: "blue.600"
+    }} />
+                      <h4 sx={{
+      fontWeight: 500,
+      "text-blue-900": true
+    }}>AI Skill Suggestions</h4>
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
                       {[
                         'Team Leadership',
                         'Data Analysis',
@@ -636,10 +980,18 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           key={suggestion}
                           variant="outlined"
                           size="small"
-                          className="text-xs border-blue-300 hover:bg-blue-100"
+                          sx={{
+      typography: body2,
+      borderColor: "blue.300",
+      '&:hover': { bgcolor: "blue.100" }
+    }}
                           onClick={() => setNewSkill(suggestion)}
                         >
-                          <Plus className="w-3 h-3 mr-1" />
+                          <AddIcon sx={{
+      "w-3": true,
+      "h-3": true,
+      mr: 1
+    }} />
                           {suggestion}
                         </Button>
                       ))}
@@ -650,23 +1002,58 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Social & Links Tab */}
-            <TabsContent value="social" currentValue={activeTab} className="space-y-6">
+            <TabsContent value="social" currentValue={activeTab} sx={{
+      "space-y-6": true
+    }}>
               <>
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-indigo-100 rounded-lg">
-                      <Globe className="w-5 h-5 text-indigo-600" />
+                <Card sx={{
+      p: 6
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                    <div sx={{
+      p: 2,
+      bgcolor: "indigo.100",
+      borderRadius: 0.5rem
+    }}>
+                      <PublicIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "indigo.600"
+    }} />
                     </div>
-                    <h3 className="font-semibold text-lg">Social Links & Online Presence</h3>
+                    <h3 sx={{
+      fontWeight: 600,
+      typography: h6
+    }}>Social Links & Online Presence</h3>
                   </div>
 
-                  <div className="space-y-4">
+                  <div sx={{
+      "space-y-4": true
+    }}>
                     {socialLinks.map((link, index) => {
                       const Icon = getSocialIcon(link.platform);
                       return (
-                        <div key={index} className="flex items-center gap-3 p-3 border rounded-lg">
-                          <Icon className="w-5 h-5 text-muted-foreground" />
-                          <div className="flex-1">
+                        <div key={index} sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      p: 3,
+      border: 1,
+      borderRadius: 0.5rem
+    }}>
+                          <Icon sx={{
+      "w-5": true,
+      "h-5": true,
+      "text-muted-foreground": true
+    }} />
+                          <div sx={{
+      flex: 1
+    }}>
                             <Input
                               value={link.url}
                               onChange={(e) => {
@@ -680,12 +1067,21 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           {link.verified && (
                             <Tooltip title="Verified profile">
                               <span>
-                                <CheckCircle className="w-5 h-5 text-green-500" />
+                                <CheckCircleIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "green.500"
+    }} />
                               </span>
                             </Tooltip>
                           )}
-                          <Button variant="text" size="small" className="text-red-500">
-                            <X className="w-4 h-4" />
+                          <Button variant="text" size="small" sx={{
+      color: "red.500"
+    }}>
+                            <CloseIcon sx={{
+      "w-4": true,
+      "h-4": true
+    }} />
                           </Button>
                         </div>
                       );
@@ -693,7 +1089,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                     <Button
                       variant="outlined"
-                      className="w-full"
+                      sx={{
+      width: "100%"
+    }}
                       onClick={() =>
                         setSocialLinks([
                           ...socialLinks,
@@ -701,7 +1099,11 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         ])
                       }
                     >
-                      <Plus className="w-4 h-4 mr-2" />
+                      <AddIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                       Add Social Link
                     </Button>
                   </div>
@@ -710,20 +1112,47 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Privacy Settings Tab */}
-            <TabsContent value="settings" currentValue={activeTab} className="space-y-6">
+            <TabsContent value="settings" currentValue={activeTab} sx={{
+      "space-y-6": true
+    }}>
               <>
-                <Card className="p-6">
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="p-2 bg-red-100 rounded-lg">
-                      <Settings className="w-5 h-5 text-red-600" />
+                <Card sx={{
+      p: 6
+    }}>
+                  <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      mb: 6
+    }}>
+                    <div sx={{
+      p: 2,
+      bgcolor: "red.100",
+      borderRadius: 0.5rem
+    }}>
+                      <SettingsIcon sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "red.600"
+    }} />
                     </div>
-                    <h3 className="font-semibold text-lg">Privacy & Preferences</h3>
+                    <h3 sx={{
+      fontWeight: 600,
+      typography: h6
+    }}>Privacy & Preferences</h3>
                   </div>
 
-                  <div className="space-y-6">
+                  <div sx={{
+      "space-y-6": true
+    }}>
                     {/* Profile Visibility */}
-                    <div className="space-y-3">
-                      <label className="text-sm font-medium">Profile Visibility</label>
+                    <div sx={{
+      "space-y-3": true
+    }}>
+                      <label sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>Profile Visibility</label>
                       <Select
                         value={profileSettings.privacy}
                         onChange={(e) =>
@@ -742,13 +1171,27 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                     {/* Work Preferences */}
                     <Separator />
-                    <div className="space-y-4">
-                      <h4 className="font-medium">Work Preferences</h4>
+                    <div sx={{
+      "space-y-4": true
+    }}>
+                      <h4 sx={{
+      fontWeight: 500
+    }}>Work Preferences</h4>
 
-                      <div className="flex items-center justify-between">
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
                         <div>
-                          <p className="font-medium text-sm">Open to Opportunities</p>
-                          <p className="text-xs text-muted-foreground">
+                          <p sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>Open to Opportunities</p>
+                          <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                             Let recruiters know you're available
                           </p>
                         </div>
@@ -760,10 +1203,20 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         />
                       </div>
 
-                      <div className="flex items-center justify-between">
+                      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
                         <div>
-                          <p className="font-medium text-sm">Show Location</p>
-                          <p className="text-xs text-muted-foreground">
+                          <p sx={{
+      fontWeight: 500,
+      typography: body1
+    }}>Show Location</p>
+                          <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                             Display your location publicly
                           </p>
                         </div>
@@ -782,29 +1235,70 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
           </Tabs>
 
           {/* Enhanced Actions */}
-          <div className="flex justify-between items-center mt-8 pt-6 border-t">
-            <div className="flex items-center gap-4">
+          <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      mt: 8,
+      pt: 6,
+      borderTop: 1
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
               <Button variant="outlined" onClick={onBack} size="large">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeftIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Back
               </Button>
-              <div className="text-sm text-muted-foreground">
-                <CheckCircle className="w-4 h-4 inline mr-1 text-green-500" />
+              <div sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
+                <CheckCircleIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      "inline": true,
+      mr: 1,
+      color: "green.500"
+    }} />
                 Auto-saved 2 minutes ago
               </div>
             </div>
 
-            <div className="flex gap-2">
+            <div sx={{
+      display: "flex",
+      gap: 2
+    }}>
               <Button variant="outlined" size="large">
-                <Eye className="w-4 h-4 mr-2" />
+                <VisibilityIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Preview
               </Button>
               <Button
                 onClick={onNext}
                 size="large"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                sx={{
+      "bg-gradient-to-r": true,
+      "from-blue-600": true,
+      "to-purple-600": true,
+      '&:hover': { "from-blue-700": true },
+      '&:hover': { "to-purple-700": true }
+    }}
               >
-                <Star className="w-4 h-4 mr-2" />
+                <StarIcon sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Save Profile & Continue
               </Button>
             </div>

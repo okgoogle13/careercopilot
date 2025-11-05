@@ -5,7 +5,6 @@ Comprehensive resume analysis system that provides deep insights, scoring,
 and optimization recommendations using AI-powered analysis.
 """
 
-import asyncio
 import json
 import os
 from datetime import datetime
@@ -19,6 +18,8 @@ from app.core.ai_config import get_ai_config
 from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handling
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.prompt_service import format_prompt
+
+import asyncio
 
 try:
     import genkit

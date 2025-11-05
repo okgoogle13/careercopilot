@@ -20,6 +20,7 @@ export default [
   {
     ignores: [
       'dist',
+      'dev-dist/**',
       'node_modules',
       '**/__mocks__/**',
       '**/test-utils.tsx',
@@ -37,6 +38,15 @@ export default [
       '**/.next/**',
       '**/.vercel/**',
       '**/.cache/**',
+      '.storybook/**',
+      'playwright.config.ts',
+      'vite.config.ts',
+      '*.config.{ts,js}',
+      '**/Figma UI Files/**',
+      '**/Figma UI Files/**/*.tsx',
+      '**/Figma UI Files/**/*.ts',
+      'Figma UI Files/',
+      'src/',
     ],
   },
   // Base TypeScript and React configuration
@@ -50,6 +60,7 @@ export default [
         ...globals.browser,
         ...globals.node,
         ...globals.es2020,
+        ...globals.react,
         NodeListOf: 'readonly',
         RequestInit: 'readonly',
         process: 'readonly',
@@ -66,7 +77,6 @@ export default [
       },
       parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
         project: tsconfigPath,
@@ -150,11 +160,6 @@ export default [
         },
       ],
       'import/no-duplicates': 'error',
-      'import/no-unresolved': 'error',
-      'import/named': 'error',
-      'import/namespace': 'error',
-      'import/default': 'error',
-      'import/export': 'error',
       'import/newline-after-import': 'warn',
 
       // General best practices

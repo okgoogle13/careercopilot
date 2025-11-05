@@ -8,6 +8,7 @@ import {
   Edit,
   OpenInNew as ExternalLink,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Box,
   Typography,
@@ -88,31 +89,65 @@ export function TimelineView({
     const IconComponent = eventIcons[event.type];
 
     return (
-      <Card key={event.id} className="mb-4">
-        <CardContent className="p-4">
-          <Box className="flex items-start gap-4">
+      <Card key={event.id} sx={{
+      mb: 4
+    }}>
+        <CardContent sx={{
+      p: 4
+    }}>
+          <Box sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 4
+    }}>
             {/* Event Icon */}
-            <Avatar className={`w-10 h-10 ${eventColors[event.type]}`}>
+            <Avatar sx={{
+      "w-10": true,
+      "h-10": true,
+      "${eventColors[event.type]}": true
+    }}>
               <IconComponent sx={{ fontSize: 20 }} />
             </Avatar>
 
             {/* Event Content */}
-            <Box className="flex-1">
-              <Box className="flex items-start justify-between mb-2">
+            <Box sx={{
+      flex: 1
+    }}>
+              <Box sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      mb: 2
+    }}>
                 <Box>
-                  <Typography variant="h6" className="font-semibold mb-1">
+                  <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 1
+    }}>
                     {event.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary" className="mb-2">
+                  <Typography variant="body2" color="text.secondary" sx={{
+      mb: 2
+    }}>
                     {event.description}
                   </Typography>
-                  <Box className="flex items-center gap-2 text-sm text-gray-500">
+                  <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      typography: body1,
+      color: "gray.500"
+    }}>
                     <Clock sx={{ fontSize: 14 }} />
                     <span>{event.date}</span>
                   </Box>
                 </Box>
 
-                <Box className="flex items-center gap-2">
+                <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
                   <Chip
                     label={event.status.replace('_', ' ')}
                     size="small"
@@ -133,10 +168,16 @@ export function TimelineView({
 
               {/* Event Metadata */}
               {event.metadata && (
-                <Box className="space-y-3 mt-4">
+                <Box sx={{
+      "space-y-3": true,
+      mt: 4
+    }}>
                   {event.metadata.interviewer && (
                     <Box>
-                      <Typography variant="caption" color="text.secondary" className="block mb-1">
+                      <Typography variant="caption" color="text.secondary" sx={{
+      "block": true,
+      mb: 1
+    }}>
                         Interviewer:
                       </Typography>
                       <Typography variant="body2">{event.metadata.interviewer}</Typography>
@@ -145,7 +186,10 @@ export function TimelineView({
 
                   {event.metadata.interviewType && (
                     <Box>
-                      <Typography variant="caption" color="text.secondary" className="block mb-1">
+                      <Typography variant="caption" color="text.secondary" sx={{
+      "block": true,
+      mb: 1
+    }}>
                         Interview Type:
                       </Typography>
                       <Chip label={event.metadata.interviewType} size="small" variant="outlined" />
@@ -154,10 +198,17 @@ export function TimelineView({
 
                   {event.metadata.documents && event.metadata.documents.length > 0 && (
                     <Box>
-                      <Typography variant="caption" color="text.secondary" className="block mb-2">
+                      <Typography variant="caption" color="text.secondary" sx={{
+      "block": true,
+      mb: 2
+    }}>
                         Documents:
                       </Typography>
-                      <Box className="flex flex-wrap gap-2">
+                      <Box sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
                         {event.metadata.documents.map((doc, index) => (
                           <Button
                             key={index}
@@ -175,10 +226,17 @@ export function TimelineView({
 
                   {event.metadata.notes && (
                     <Box>
-                      <Typography variant="caption" color="text.secondary" className="block mb-1">
+                      <Typography variant="caption" color="text.secondary" sx={{
+      "block": true,
+      mb: 1
+    }}>
                         Notes:
                       </Typography>
-                      <Typography variant="body2" className="bg-gray-50 p-3 rounded-lg">
+                      <Typography variant="body2" sx={{
+      bgcolor: "gray.50",
+      p: 3,
+      borderRadius: 0.5rem
+    }}>
                         {event.metadata.notes}
                       </Typography>
                     </Box>
@@ -186,10 +244,15 @@ export function TimelineView({
 
                   {event.metadata.nextSteps && (
                     <Box>
-                      <Typography variant="caption" color="text.secondary" className="block mb-1">
+                      <Typography variant="caption" color="text.secondary" sx={{
+      "block": true,
+      mb: 1
+    }}>
                         Next Steps:
                       </Typography>
-                      <Typography variant="body2" className="text-blue-600">
+                      <Typography variant="body2" sx={{
+      color: "blue.600"
+    }}>
                         {event.metadata.nextSteps}
                       </Typography>
                     </Box>
@@ -198,7 +261,11 @@ export function TimelineView({
               )}
 
               {/* Action Buttons */}
-              <Box className="flex gap-2 mt-4">
+              <Box sx={{
+      display: "flex",
+      gap: 2,
+      mt: 4
+    }}>
                 {onAddNote && (
                   <Button
                     size="small"
@@ -218,10 +285,19 @@ export function TimelineView({
   };
 
   return (
-    <Box className="w-full max-w-4xl mx-auto">
+    <Box sx={{
+      width: "100%",
+      "max-w-4xl": true,
+      "mx-auto": true
+    }}>
       {/* Header */}
-      <Box className="mb-6">
-        <Typography variant="h4" className="font-bold mb-2">
+      <Box sx={{
+      mb: 6
+    }}>
+        <Typography variant="h4" sx={{
+      fontWeight: 700,
+      mb: 2
+    }}>
           Application Timeline
         </Typography>
         <Typography variant="h6" color="text.secondary">
@@ -230,35 +306,83 @@ export function TimelineView({
       </Box>
 
       {/* Timeline */}
-      <Box className="relative">
+      <Box sx={{
+      "relative": true
+    }}>
         {/* Timeline Line */}
-        <Box className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200" />
+        <Box sx={{
+      "absolute": true,
+      "left-8": true,
+      "top-0": true,
+      "bottom-0": true,
+      "w-0.5": true,
+      bgcolor: "gray.200"
+    }} />
 
         {/* Events */}
-        <Box className="space-y-6">
+        <Box sx={{
+      "space-y-6": true
+    }}>
           {sortedEvents.map((event, index) => (
-            <Box key={event.id} className="relative">
+            <Box key={event.id} sx={{
+      "relative": true
+    }}>
               {/* Timeline Dot */}
-              <Box className="absolute left-6 w-4 h-4 rounded-full bg-white border-4 border-primary z-10" />
+              <Box sx={{
+      "absolute": true,
+      "left-6": true,
+      "w-4": true,
+      "h-4": true,
+      borderRadius: 9999px,
+      bgcolor: "common.white",
+      border: 4,
+      "border-primary": true,
+      "z-10": true
+    }} />
 
               {/* Event Content */}
-              <Box className="ml-16">{renderEventContent(event)}</Box>
+              <Box sx={{
+      ml: 16
+    }}>{renderEventContent(event)}</Box>
             </Box>
           ))}
         </Box>
 
         {/* Future Placeholder */}
-        <Box className="relative mt-6">
-          <Box className="absolute left-6 w-4 h-4 rounded-full bg-gray-300 border-4 border-gray-400" />
-          <Box className="ml-16">
-            <Card className="border-dashed border-2 border-gray-300">
-              <CardContent className="p-6 text-center">
+        <Box sx={{
+      "relative": true,
+      mt: 6
+    }}>
+          <Box sx={{
+      "absolute": true,
+      "left-6": true,
+      "w-4": true,
+      "h-4": true,
+      borderRadius: 9999px,
+      bgcolor: "gray.300",
+      border: 4,
+      "border-gray-400": true
+    }} />
+          <Box sx={{
+      ml: 16
+    }}>
+            <Card sx={{
+      borderStyle: "dashed",
+      border: 2,
+      borderColor: "gray.300"
+    }}>
+              <CardContent sx={{
+      p: 6,
+      textAlign: "center"
+    }}>
                 <Typography variant="body1" color="text.secondary">
                   Add more events to track your progress
                 </Typography>
                 <Button
                   variant="outlined"
-                  className="mt-3"
+                  sx={{
+      mt: 3
+    }}
                   startIcon={<Calendar sx={{ fontSize: 16 }} />}
                 >
                   Add Event
@@ -270,14 +394,31 @@ export function TimelineView({
       </Box>
 
       {/* Summary Stats */}
-      <Card className="mt-8 bg-gray-50">
-        <CardContent className="p-6">
-          <Typography variant="h6" className="font-semibold mb-4">
+      <Card sx={{
+      mt: 8,
+      bgcolor: "gray.50"
+    }}>
+        <CardContent sx={{
+      p: 6
+    }}>
+          <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 4
+    }}>
             Application Summary
           </Typography>
-          <Box className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <Box sx={{
+      "grid": true,
+      "grid-cols-1": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      gap: 4,
+      textAlign: "center"
+    }}>
             <Box>
-              <Typography variant="h4" className="font-bold text-blue-600">
+              <Typography variant="h4" sx={{
+      fontWeight: 700,
+      color: "blue.600"
+    }}>
                 {events.filter((e) => e.status === 'completed').length}
               </Typography>
               <Typography variant="caption" color="text.secondary">
@@ -285,7 +426,10 @@ export function TimelineView({
               </Typography>
             </Box>
             <Box>
-              <Typography variant="h4" className="font-bold text-orange-600">
+              <Typography variant="h4" sx={{
+      fontWeight: 700,
+      color: "orange.600"
+    }}>
                 {events.filter((e) => e.status === 'upcoming').length}
               </Typography>
               <Typography variant="caption" color="text.secondary">
@@ -293,7 +437,10 @@ export function TimelineView({
               </Typography>
             </Box>
             <Box>
-              <Typography variant="h4" className="font-bold text-gray-600">
+              <Typography variant="h4" sx={{
+      fontWeight: 700,
+      color: "gray.600"
+    }}>
                 {Math.floor(
                   (Date.now() - new Date(events[0]?.date || Date.now()).getTime()) /
                     (1000 * 60 * 60 * 24)

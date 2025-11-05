@@ -1,6 +1,8 @@
-import { Typography, Chip } from '@mui/material';
+import { Typography, Chip, CssBaseline } from '@mui/material';
+import { ThemeProvider, Box } from '@mui/material';
 import { useState, Suspense, lazy } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import theme from './theme/theme';
 
 // Advanced Sidebar System imports
 import { Button } from './components/ui/button';
@@ -182,7 +184,7 @@ interface UserState {
   hasDocuments: boolean;
 }
 
-export default function App() {
+function AppContent() {
   const [, setActiveTab] = useState<Tab>('dashboard');
   const [dashboardActiveTab, setDashboardActiveTab] = useState<DashboardTab>('documents');
   const [currentView, setCurrentView] = useState<View>('auth');
@@ -630,8 +632,16 @@ export default function App() {
     <SidebarProvider defaultOpen={showDemoNav}>
       <Sidebar collapsible="icon" variant="sidebar">
         <SidebarHeader>
-          <div className="flex items-center gap-2 px-4 py-2">
-            <Typography variant="h6" className="font-semibold">
+          <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      px: 4,
+      py: 2
+    }}>
+            <Typography variant="h6" sx={{
+      fontWeight: 600
+    }}>
               Demo Navigation
             </Typography>
           </div>
@@ -648,7 +658,10 @@ export default function App() {
                     onClick={() => handleDemoNavigation(view.id)}
                     tooltip={view.label}
                   >
-                    <Icon className="w-5 h-5" />
+                    <Icon sx={{
+      "w-5": true,
+      "h-5": true
+    }} />
                     <span>{view.label}</span>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -658,12 +671,17 @@ export default function App() {
         </SidebarContent>
 
         <SidebarFooter>
-          <div className="p-2">
+          <div sx={{
+      p: 2
+    }}>
             {showDemoNav ? (
               <Button
                 variant="ghost"
                 onClick={() => setShowDemoNav(false)}
-                className="w-full justify-start"
+                sx={{
+      width: "100%",
+      justifyContent: "flex-start"
+    }}
               >
                 Hide Navigation
               </Button>
@@ -671,9 +689,16 @@ export default function App() {
               <Button
                 variant="default"
                 onClick={() => setShowDemoNav(true)}
-                className="w-full justify-start"
+                sx={{
+      width: "100%",
+      justifyContent: "flex-start"
+    }}
               >
-                <Navigation className="w-4 h-4 mr-2" />
+                <Navigation sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
                 Show Navigation
               </Button>
             )}
@@ -684,10 +709,27 @@ export default function App() {
       <SidebarInset>
         {/* Top Header Bar */}
         {showDemoNav && (
-          <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-            <SidebarTrigger className="-ml-1" />
-            <div className="flex items-center gap-2 flex-1">
-              <Typography variant="h6" className="font-medium">
+          <header sx={{
+      display: "flex",
+      "h-16": true,
+      "shrink-0": true,
+      alignItems: "center",
+      gap: 2,
+      borderBottom: 1,
+      px: 4
+    }}>
+            <SidebarTrigger sx={{
+      "-ml-1": true
+    }} />
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2,
+      flex: 1
+    }}>
+              <Typography variant="h6" sx={{
+      fontWeight: 500
+    }}>
                 {currentViewInfo.label}
               </Typography>
               <Chip
@@ -700,12 +742,35 @@ export default function App() {
         )}
 
         {/* Content Area */}
-        <div className="flex flex-1 flex-col gap-4 p-4">
+        <div sx={{
+      display: "flex",
+      flex: 1,
+      flexDirection: "column",
+      gap: 4,
+      p: 4
+    }}>
           <Suspense
             fallback={
-              <div className="flex items-center justify-center h-64">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "h-64": true
+    }}>
+                <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 4
+    }}>
+                  <div sx={{
+      "animate-spin": true,
+      borderRadius: 9999px,
+      "h-12": true,
+      "w-12": true,
+      "border-b-2": true,
+      "border-blue-600": true
+    }}></div>
                   <Typography variant="body2" color="text.secondary">
                     Loading...
                   </Typography>
@@ -719,18 +784,40 @@ export default function App() {
 
         {/* Show Demo Nav Button (when hidden) */}
         {!showDemoNav && (
-          <div className="fixed bottom-6 right-6 z-50">
+          <div sx={{
+      "fixed": true,
+      "bottom-6": true,
+      "right-6": true,
+      "z-50": true
+    }}>
             <Button
               variant="default"
               onClick={() => setShowDemoNav(true)}
-              className="rounded-full px-6 py-3"
+              sx={{
+      borderRadius: 9999px,
+      px: 6,
+      py: 3
+    }}
             >
-              <Navigation className="w-4 h-4 mr-2" />
+              <Navigation sx={{
+      "w-4": true,
+      "h-4": true,
+      mr: 2
+    }} />
               Demo Navigation
             </Button>
           </div>
         )}
       </SidebarInset>
     </SidebarProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppContent />
+    </ThemeProvider>
   );
 }

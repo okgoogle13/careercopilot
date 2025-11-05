@@ -1,4 +1,5 @@
 import { Warning as AlertTriangle, Info } from '@mui/icons-material';
+import { Box } from '@mui/material';
 
 import { Alert, AlertDescription, AlertTitle } from '../ui/Alert';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -15,40 +16,88 @@ export function DisplayComponentsSection() {
       description="Components for displaying information, status, and visual elements"
     >
       <ComponentDemo title="Badges">
-        <div className="flex flex-wrap gap-2">
+        <div sx={{
+      display: "flex",
+      flexWrap: "wrap",
+      gap: 2
+    }}>
           <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
-          <Badge className="bg-red-500 text-white">Destructive</Badge>
-          <Badge className="border border-gray-300 bg-transparent">Outline</Badge>
-          <Badge className="bg-green-500">Custom Green</Badge>
-          <Badge className="bg-primary">Primary</Badge>
+          <Badge sx={{
+      bgcolor: "red.500",
+      color: "common.white"
+    }}>Destructive</Badge>
+          <Badge sx={{
+      border: 1,
+      borderColor: "gray.300",
+      bgcolor: "transparent"
+    }}>Outline</Badge>
+          <Badge sx={{
+      bgcolor: "green.500"
+    }}>Custom Green</Badge>
+          <Badge sx={{
+      "bg-primary": true
+    }}>Primary</Badge>
         </div>
       </ComponentDemo>
 
       <ComponentDemo title="Progress & Avatars">
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="space-y-4">
+        <div sx={{
+      "grid": true,
+      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      gap: 6
+    }}>
+          <div sx={{
+      "space-y-4": true
+    }}>
             <div>
               <Label>Progress Indicators</Label>
-              <div className="space-y-3 mt-2">
+              <div sx={{
+      "space-y-3": true,
+      mt: 2
+    }}>
                 <div>
-                  <Progress value={33} className="w-full" />
-                  <p className="text-sm text-muted-foreground mt-1">33% Complete</p>
+                  <Progress value={33} sx={{
+      width: "100%"
+    }} />
+                  <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mt: 1
+    }}>33% Complete</p>
                 </div>
                 <div>
-                  <Progress value={66} className="w-full" />
-                  <p className="text-sm text-muted-foreground mt-1">66% Complete</p>
+                  <Progress value={66} sx={{
+      width: "100%"
+    }} />
+                  <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mt: 1
+    }}>66% Complete</p>
                 </div>
                 <div>
-                  <Progress value={100} className="w-full" />
-                  <p className="text-sm text-muted-foreground mt-1">100% Complete</p>
+                  <Progress value={100} sx={{
+      width: "100%"
+    }} />
+                  <p sx={{
+      typography: body1,
+      "text-muted-foreground": true,
+      mt: 1
+    }}>100% Complete</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="space-y-4">
+          <div sx={{
+      "space-y-4": true
+    }}>
             <Label>Avatars</Label>
-            <div className="flex items-center gap-4">
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4
+    }}>
               <Avatar>
                 <AvatarImage src="/placeholder-avatar.jpg" alt="User" />
                 <AvatarFallback>ND</AvatarFallback>
@@ -57,7 +106,10 @@ export function DisplayComponentsSection() {
                 <AvatarFallback>AB</AvatarFallback>
               </Avatar>
               <Avatar>
-                <AvatarFallback className="bg-primary text-primary-foreground">CD</AvatarFallback>
+                <AvatarFallback sx={{
+      "bg-primary": true,
+      "text-primary-foreground": true
+    }}>CD</AvatarFallback>
               </Avatar>
             </div>
           </div>
@@ -65,16 +117,28 @@ export function DisplayComponentsSection() {
       </ComponentDemo>
 
       <ComponentDemo title="Alerts">
-        <div className="space-y-4">
+        <div sx={{
+      "space-y-4": true
+    }}>
           <Alert>
-            <Info className="h-4 w-4" />
+            <Info sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
             <AlertTitle>Information</AlertTitle>
             <AlertDescription>
               This is an informational alert with additional details.
             </AlertDescription>
           </Alert>
-          <Alert className="border border-red-300 bg-red-50">
-            <AlertTriangle className="h-4 w-4" />
+          <Alert sx={{
+      border: 1,
+      borderColor: "red.300",
+      bgcolor: "red.50"
+    }}>
+            <AlertTriangle sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>Something went wrong. Please try again later.</AlertDescription>
           </Alert>
