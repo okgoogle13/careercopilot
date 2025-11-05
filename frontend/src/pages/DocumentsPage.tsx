@@ -96,7 +96,10 @@ interface DocumentsPageProps {
 
 export function DocumentsPage({
   isEmpty = false,
-}: Pick<DocumentsPageProps, 'isEmpty'>) {
+  onCreateDocument,
+  onEditDocument,
+  onUploadDocument,
+}: DocumentsPageProps) {
   const [tabValue, setTabValue] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedDocuments, setSelectedDocuments] = useState<string[]>([]);
