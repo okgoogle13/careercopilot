@@ -1,4 +1,5 @@
 import { Close, ArrowLeft } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Box,
   Button,
@@ -177,7 +178,9 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
   };
 
   return (
-    <Box className="w-full">
+    <Box sx={{
+      width: "100%"
+    }}>
       {/* Kanban Board View (WIP) */}
       {/* <KanbanBoard
         applications={applications}
@@ -197,8 +200,16 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
         }}
       >
         <DialogTitle>
-          <Box className="flex items-center justify-between">
-            <Box className="flex items-center gap-2">
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+            <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 2
+    }}>
               <IconButton
                 onClick={handleCloseTimeline}
                 size="small"
@@ -214,9 +225,13 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
           </Box>
         </DialogTitle>
 
-        <DialogContent className="p-0">
+        <DialogContent sx={{
+      p: 0
+    }}>
           {selectedApplication && (
-            <Box className="p-6">
+            <Box sx={{
+      p: 6
+    }}>
               <TimelineView
                 applicationId={selectedApplication.id}
                 companyName={selectedApplication.company}
@@ -232,7 +247,10 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
 
         <DialogActions>
           <Button onClick={handleCloseTimeline}>Close</Button>
-          <Button variant="contained" className="bg-primary hover:bg-primary/90">
+          <Button variant="contained" sx={{
+      "bg-primary": true,
+      '&:hover': { "bg-primary/90": true }
+    }}>
             Add Event
           </Button>
         </DialogActions>

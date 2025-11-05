@@ -1,169 +1,377 @@
-import { ArrowRight, AccessTime, CheckCircle, Error } from '@mui/icons-material';
+import React from 'react';
 import {
   Card,
   CardContent,
-  CardActions,
   Typography,
   Button,
   Box,
-  LinearProgress,
   Chip,
+  LinearProgress,
+  alpha,
 } from '@mui/material';
-import React from 'react';
+import {
+  ArrowForward,
+  AccessTime,
+  CheckCircle,
+  Error,
+  Bolt,
+} from '@mui/icons-material';
+import type { SvgIconComponent } from '@mui/icons-material';
 
-type ActionCardVariant = 'default' | 'featured' | 'urgent' | 'success';
-type ActionCardStatus = 'pending' | 'in-progress' | 'completed' | 'failed';
-type ActionCardPriority = 'low' | 'medium' | 'high' | 'critical';
-
-interface ActionCardProps {
+export interface ActionCardProps {
   title: string;
   description: string;
-  variant?: ActionCardVariant;
-  status?: ActionCardStatus;
-  priority?: ActionCardPriority;
-  progress?: number;
-  dueDate?: string;
+  icon: SvgIconComponent;
+  variant?: 'default' | 'primary' | 'secondary' | 'tertiary' | 'urgent';
+  status?: 'available' | 'in-progress' | 'completed' | 'blocked';
+  priority?: 'low' | 'medium' | 'high' | 'urgent';
   estimatedTime?: string;
-  actionLabel?: string;
-  onAction?: () => void;
-  secondaryActionLabel?: string;
+  progress?: number;
+  badge?: {
+    text: string;
+    variant?: 'default' | 'secondary' | 'outline' | 'destructive';
+  };
+  metadata?: {
+    label: string;
+    value: string | number;
+  }[];
+  actionText?: string;
+  secondaryActionText?: string;
+  onClick?: () => void;
   onSecondaryAction?: () => void;
-  icon?: React.ReactNode;
-  tags?: string[];
+  disabled?: boolean;
+  aiPowered?: boolean;
 }
 
-const variantStyles = {
-  default: 'border-gray-200',
-  featured: 'border-primary bg-primary/5',
-  urgent: 'border-orange-300 bg-orange-50',
-  success: 'border-green-300 bg-green-50',
-};
-
-const statusConfig = {
-  pending: { color: 'text-gray-500', icon: AccessTime, bgColor: 'bg-gray-100' },
-  'in-progress': { color: 'text-blue-500', icon: AccessTime, bgColor: 'bg-blue-100' },
-  completed: { color: 'text-green-500', icon: CheckCircle, bgColor: 'bg-green-100' },
-  failed: { color: 'text-red-500', icon: Error, bgColor: 'bg-red-100' },
-};
-
-const priorityColors = {
-  low: 'bg-gray-100 text-gray-800',
-  medium: 'bg-blue-100 text-blue-800',
-  high: 'bg-orange-100 text-orange-800',
-  critical: 'bg-red-100 text-red-800',
-};
-
-export function ActionCard({
+export const ActionCard: React.FC<ActionCardProps> = ({
   title,
   description,
+  icon: Icon,
   variant = 'default',
-  status = 'pending',
+  status = 'available',
   priority = 'medium',
-  progress,
-  dueDate,
   estimatedTime,
-  actionLabel = 'Start',
-  onAction,
-  secondaryActionLabel,
+  progress,
+  badge,
+  metadata,
+  actionText = 'Get Started',
+  secondaryActionText,
+  onClick,
   onSecondaryAction,
-  icon,
-  tags = [],
-}: ActionCardProps) {
-  const StatusIcon = statusConfig[status].icon;
-  const isCompleted = status === 'completed';
-  const isFailed = status === 'failed';
+  disabled = false,
+  aiPowered = false,
+}) => {
+  const getVariantColor = () => {
+    switch (variant) {
+      case 'primary':
+        return 'primary.main';
+      case 'secondary':
+        return 'secondary.main';
+      case 'tertiary':
+        return 'tertiary.main';
+      case 'urgent':
+        return 'error.main';
+      default:
+        return 'text.primary';
+    }
+  };
+
+  const getVariantBg = () => {
+    const variantColor = getVariantColor();
+    return (theme: any) => alpha(theme.palette[variant as keyof typeof theme.palette]?.main || theme.palette.primary.main, 0.1);
+  };
+
+  const getPriorityColor = () => {
+    switch (priority) {
+      case 'high':
+        return 'error.main';
+      case 'urgent':
+        return 'error.main';
+      case 'medium':
+        return 'tertiary.main';
+      case 'low':
+        return 'text.secondary';
+      default:
+        return 'text.secondary';
+    }
+  };
+
+  const getStatusIcon = () => {
+    switch (status) {
+      case 'completed':
+        return <CheckCircle sx={{ fontSize: 16, color: '#86EFAC' }} />;
+      case 'in-progress':
+        return <AccessTime sx={{ fontSize: 16, color: '#F472B6' }} />;
+      case 'blocked':
+        return <Error sx={{ fontSize: 16, color: '#FFB4AB' }} />;
+      default:
+        return null;
+    }
+  };
+
+  const getStatusText = () => {
+    switch (status) {
+      case 'completed':
+        return 'Completed';
+      case 'in-progress':
+        return 'In Progress';
+      case 'blocked':
+        return 'Blocked';
+      case 'available':
+        return 'Available';
+      default:
+        return '';
+    }
+  };
+
+  const isInteractive = !disabled && onClick && status !== 'completed' && status !== 'blocked';
 
   return (
-    <Card className={`p-0 border-2 ${variantStyles[variant]} hover:shadow-md transition-shadow`}>
-      <CardContent className="p-6">
-        {/* Header with Icon and Status */}
-        <Box className="flex items-start justify-between mb-4">
-          <Box className="flex items-center gap-3">
-            {icon && <Box className="p-2 bg-primary/10 rounded-lg">{icon}</Box>}
-            <Box>
-              <Typography variant="h6" className="font-semibold mb-1">
-                {title}
-              </Typography>
-              <Box className="flex items-center gap-2">
-                <StatusIcon sx={{ fontSize: 16 }} className={statusConfig[status].color} />
-                <Typography variant="caption" className={statusConfig[status].color}>
-                  {status.replace('-', ' ').toUpperCase()}
+    <Card
+      variant={isInteractive ? 'interactive' : undefined}
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        position: 'relative',
+        background: (theme) =>
+          variant !== 'default'
+            ? `linear-gradient(135deg, ${alpha(
+                (theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] || theme.palette.primary).main,
+                0.05
+              )}, ${alpha(
+                (theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] || theme.palette.primary).main,
+                0.1
+              )})`
+            : theme.palette.surface.container,
+        borderColor:
+          variant !== 'default'
+            ? (theme) =>
+                alpha(
+                  (theme.palette[variant as 'primary' | 'secondary' | 'tertiary' | 'error'] || theme.palette.primary).main,
+                  0.3
+                )
+            : 'outline.variant',
+        opacity: disabled ? 0.6 : 1,
+        cursor: isInteractive ? 'pointer' : 'default',
+        '&:hover': isInteractive
+          ? {
+              transform: 'translateY(-4px)',
+              boxShadow: (theme) => theme.customShadows.glowPrimary,
+            }
+          : {},
+      }}
+      onClick={isInteractive ? onClick : undefined}
+    >
+      <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', p: 3 }}>
+        {/* Header */}
+        <Box sx={{ mb: 3 }}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', mb: 2 }}>
+            {/* Icon and AI Badge */}
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 48,
+                  height: 48,
+                  borderRadius: 3,
+                  bgcolor: getVariantBg(),
+                  color: getVariantColor(),
+                }}
+              >
+                <Icon sx={{ fontSize: 24 }} />
+              </Box>
+
+              {aiPowered && (
+                <Chip
+                  icon={<Bolt sx={{ fontSize: 12 }} />}
+                  label="AI"
+                  size="small"
+                  sx={{
+                    height: 24,
+                    fontSize: '0.75rem',
+                    bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                    color: 'primary.main',
+                    fontWeight: 600,
+                    '& .MuiChip-icon': {
+                      color: 'primary.main',
+                    },
+                  }}
+                />
+              )}
+            </Box>
+
+            {/* Status and Priority */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 1 }}>
+              {badge && (
+                <Chip
+                  label={badge.text}
+                  size="small"
+                  sx={{
+                    height: 24,
+                    fontSize: '0.75rem',
+                  }}
+                />
+              )}
+
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                {getStatusIcon()}
+                <Typography variant="caption" sx={{ color: getPriorityColor(), fontWeight: 600 }}>
+                  {getStatusText()}
                 </Typography>
               </Box>
             </Box>
           </Box>
 
-          {/* Priority Badge */}
-          <Chip label={priority.toUpperCase()} size="small" className={priorityColors[priority]} />
-        </Box>
+          <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+            {title}
+          </Typography>
 
-        {/* Description */}
-        <Typography variant="body2" color="text.secondary" className="mb-4">
-          {description}
-        </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
+            {description}
+          </Typography>
+        </Box>
 
         {/* Progress Bar */}
         {progress !== undefined && (
-          <Box className="mb-4">
-            <Box className="flex justify-between items-center mb-2">
+          <Box sx={{ mb: 3 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
               <Typography variant="caption" color="text.secondary">
                 Progress
               </Typography>
-              <Typography variant="caption" color="text.secondary">
+              <Typography variant="caption" sx={{ fontWeight: 600 }}>
                 {progress}%
               </Typography>
             </Box>
-            <LinearProgress variant="determinate" value={progress} className="h-2 rounded-full" />
+            <LinearProgress
+              variant="determinate"
+              value={progress}
+              sx={{
+                height: 8,
+                borderRadius: 4,
+                bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
+                '& .MuiLinearProgress-bar': {
+                  background: (theme) =>
+                    `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`,
+                },
+              }}
+            />
           </Box>
         )}
 
-        {/* Meta Information */}
-        <Box className="flex flex-wrap gap-4 mb-4 text-sm text-gray-500">
-          {estimatedTime && (
-            <Box className="flex items-center gap-1">
-              <AccessTime sx={{ fontSize: 14 }} />
-              <span>{estimatedTime}</span>
-            </Box>
-          )}
-          {dueDate && (
-            <Box className="flex items-center gap-1">
-              <span>Due: {dueDate}</span>
-            </Box>
-          )}
-        </Box>
-
-        {/* Tags */}
-        {tags.length > 0 && (
-          <Box className="flex flex-wrap gap-1 mb-4">
-            {tags.map((tag, index) => (
-              <Chip key={index} label={tag} size="small" variant="outlined" className="text-xs" />
+        {/* Metadata */}
+        {metadata && metadata.length > 0 && (
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: 2,
+              mb: 3,
+            }}
+          >
+            {metadata.map((item, index) => (
+              <Box key={index} sx={{ textAlign: 'center' }}>
+                <Typography variant="h6" sx={{ fontWeight: 700 }}>
+                  {item.value}
+                </Typography>
+                <Typography variant="caption" color="text.secondary">
+                  {item.label}
+                </Typography>
+              </Box>
             ))}
           </Box>
         )}
-      </CardContent>
 
-      {/* Actions */}
-      <CardActions className="px-6 pb-6 pt-0">
-        <Box className="flex gap-2 w-full">
-          {onAction && (
+        {/* Estimated Time */}
+        {estimatedTime && (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
+            <AccessTime sx={{ fontSize: 16 }} />
+            <Typography variant="body2" color="text.secondary">
+              Estimated time: {estimatedTime}
+            </Typography>
+          </Box>
+        )}
+
+        {/* Action Buttons */}
+        <Box sx={{ display: 'flex', gap: 2, mt: 'auto' }}>
+          {status !== 'completed' && (
             <Button
-              variant={variant === 'featured' ? 'contained' : 'outlined'}
-              onClick={onAction}
-              disabled={isCompleted || isFailed}
-              endIcon={<ArrowRight sx={{ fontSize: 16 }} />}
-              className={variant === 'featured' ? 'bg-primary hover:bg-primary/90' : ''}
+              variant={variant === 'urgent' ? 'aurora' : 'outlined'}
+              fullWidth
+              endIcon={<ArrowForward sx={{ fontSize: 16 }} />}
+              onClick={onClick}
+              disabled={disabled || status === 'blocked'}
+              sx={{
+                py: 1.25,
+                fontWeight: 600,
+              }}
             >
-              {actionLabel}
+              {actionText}
             </Button>
           )}
 
-          {onSecondaryAction && secondaryActionLabel && (
-            <Button variant="text" onClick={onSecondaryAction} disabled={isCompleted || isFailed}>
-              {secondaryActionLabel}
+          {secondaryActionText && onSecondaryAction && (
+            <Button
+              variant="text"
+              onClick={onSecondaryAction}
+              disabled={disabled}
+              sx={{
+                color: 'text.secondary',
+                textTransform: 'none',
+                fontWeight: 600,
+              }}
+            >
+              {secondaryActionText}
             </Button>
           )}
         </Box>
-      </CardActions>
+
+        {/* Blocked Message */}
+        {status === 'blocked' && (
+          <Box
+            sx={{
+              mt: 2,
+              p: 2,
+              bgcolor: (theme) => alpha(theme.palette.error.main, 0.1),
+              border: 1,
+              borderColor: (theme) => alpha(theme.palette.error.main, 0.2),
+              borderRadius: 2,
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Error sx={{ fontSize: 16, color: '#FFB4AB' }} />
+              <Typography variant="body2" color="error.main">
+                This action is currently unavailable. Complete prerequisites first.
+              </Typography>
+            </Box>
+          </Box>
+        )}
+
+        {/* Completed Message */}
+        {status === 'completed' && (
+          <Box
+            sx={{
+              mt: 2,
+              p: 2,
+              bgcolor: (theme) => alpha(theme.palette.success.main, 0.1),
+              border: 1,
+              borderColor: (theme) => alpha(theme.palette.success.main, 0.2),
+              borderRadius: 2,
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <CheckCircle sx={{ fontSize: 16, color: '#86EFAC' }} />
+              <Typography variant="body2" sx={{ color: 'success.main' }}>
+                Task completed successfully!
+              </Typography>
+            </Box>
+          </Box>
+        )}
+      </CardContent>
     </Card>
   );
-}
+};
+
+export default ActionCard;

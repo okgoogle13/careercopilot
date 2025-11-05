@@ -1,40 +1,16 @@
-import { ThemeProvider as MuiThemeProvider, CssBaseline, useMediaQuery } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
-import React, { useMemo, useState } from 'react';
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
+import React from 'react';
+import finalTheme from './theme'; // Import your fixed theme
 
-import { ColorModeContext } from './ColorModeContext';
-import { theme as baseTheme } from './theme';
-
-export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [mode, setMode] = useState<'light' | 'dark'>(prefersDarkMode ? 'dark' : 'light');
-
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-      },
-    }),
-    []
-  );
-
-  const theme = useMemo(() => {
-    return createTheme({
-      ...baseTheme,
-      palette: {
-        ...baseTheme.palette,
-        mode,
-      },
-    });
-  }, [mode]);
-
+export const ThemeWrapper: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  // We don't need context or state, just provide the one theme
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </MuiThemeProvider>
-    </ColorModeContext.Provider>
+    <MuiThemeProvider theme={finalTheme}>
+      <CssBaseline />
+      {children}
+    </MuiThemeProvider>
   );
 };
 

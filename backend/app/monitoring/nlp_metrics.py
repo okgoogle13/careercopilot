@@ -65,6 +65,7 @@ def _initialize_nlp_metrics():
 # Initialize metrics on module import
 _initialize_nlp_metrics()
 
+
 def start_metrics_server(port=8001):
     """Start the Prometheus metrics server"""
     start_http_server(port)

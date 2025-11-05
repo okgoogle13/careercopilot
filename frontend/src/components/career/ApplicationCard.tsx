@@ -7,6 +7,7 @@ import {
   Schedule as Clock,
   Visibility as Eye,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import {
   Card,
   CardContent,
@@ -70,21 +71,56 @@ export function ApplicationCard({
 
   return (
     <Card
-      className={`transition-all duration-200 hover:shadow-md ${
-        isDragging ? 'rotate-2 scale-105 shadow-lg' : ''
-      }`}
+      sx={{
+      "transition-all": true,
+      "duration-200": true,
+      '&:hover': { boxShadow: 3 },
+      "${": true,
+      "isDragging": true,
+      "?": true,
+      "'rotate-2": true,
+      "scale-105": true,
+      "shadow-lg'": true,
+      ":": true,
+      "''": true,
+      "}": true
+    }}
     >
-      <CardContent className="p-4">
+      <CardContent sx={{
+      p: 4
+    }}>
         {/* Header */}
-        <Box className="flex items-start justify-between mb-3">
-          <Box className="flex items-start gap-3 flex-1 min-w-0">
-            <Avatar src={companyLogo} className="w-10 h-10" sx={{ bgcolor: 'primary.main' }}>
+        <Box sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      justifyContent: "space-between",
+      mb: 3
+    }}>
+          <Box sx={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: 3,
+      flex: 1,
+      "min-w-0": true
+    }}>
+            <Avatar src={companyLogo} sx={{
+      "w-10": true,
+      "h-10": true
+    }} sx={{ bgcolor: 'primary.main' }}>
               <Building2 sx={{ fontSize: 16 }} />
             </Avatar>
-            <Box className="flex-1 min-w-0">
+            <Box sx={{
+      flex: 1,
+      "min-w-0": true
+    }}>
               <Typography
                 variant="h6"
-                className="font-semibold text-sm mb-1 truncate"
+                sx={{
+      fontWeight: 600,
+      typography: body1,
+      mb: 1,
+      [object Object]
+    }}
                 title={jobTitle}
               >
                 {jobTitle}
@@ -92,7 +128,9 @@ export function ApplicationCard({
               <Typography
                 variant="body2"
                 color="text.secondary"
-                className="truncate"
+                sx={{
+      [object Object]
+    }}
                 title={company}
               >
                 {company}
@@ -106,33 +144,61 @@ export function ApplicationCard({
         </Box>
 
         {/* Status Badge */}
-        <Box className="mb-3">
+        <Box sx={{
+      mb: 3
+    }}>
           <Chip label={statusInfo.label} size="small" className={statusInfo.color} />
         </Box>
 
         {/* Job Details */}
-        <Box className="space-y-2 mb-4 text-xs text-gray-600">
-          <Box className="flex items-center gap-1">
+        <Box sx={{
+      "space-y-2": true,
+      mb: 4,
+      typography: body2,
+      color: "gray.600"
+    }}>
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
             <MapPin sx={{ fontSize: 12 }} />
-            <span className="truncate">{location}</span>
+            <span sx={{
+      [object Object]
+    }}>{location}</span>
           </Box>
 
           {salary && (
-            <Box className="flex items-center gap-1">
+            <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
               <DollarSign sx={{ fontSize: 12 }} />
               <span>{salary}</span>
             </Box>
           )}
 
-          <Box className="flex items-center gap-1">
+          <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1
+    }}>
             <Calendar sx={{ fontSize: 12 }} />
             <span>Applied {appliedDate}</span>
           </Box>
         </Box>
 
         {/* Progress Bar */}
-        <Box className="mb-4">
-          <Box className="flex justify-between items-center mb-1">
+        <Box sx={{
+      mb: 4
+    }}>
+          <Box sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      mb: 1
+    }}>
             <Typography variant="caption" color="text.secondary">
               Progress
             </Typography>
@@ -140,15 +206,31 @@ export function ApplicationCard({
               {progress}%
             </Typography>
           </Box>
-          <LinearProgress variant="determinate" value={progress} className="h-1.5 rounded-full" />
+          <LinearProgress variant="determinate" value={progress} sx={{
+      "h-1.5": true,
+      borderRadius: 9999px
+    }} />
         </Box>
 
         {/* Next Event */}
         {nextEvent && (
-          <Box className="mb-4 p-2 bg-blue-50 rounded-lg">
-            <Box className="flex items-center gap-1 text-xs text-blue-700">
+          <Box sx={{
+      mb: 4,
+      p: 2,
+      bgcolor: "blue.50",
+      borderRadius: 0.5rem
+    }}>
+            <Box sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 1,
+      typography: body2,
+      color: "blue.700"
+    }}>
               <Clock sx={{ fontSize: 12 }} />
-              <span className="font-medium">{nextEvent.type}</span>
+              <span sx={{
+      fontWeight: 500
+    }}>{nextEvent.type}</span>
             </Box>
             <Typography variant="caption" color="text.secondary">
               {nextEvent.date}
@@ -157,13 +239,18 @@ export function ApplicationCard({
         )}
 
         {/* Actions */}
-        <Box className="flex gap-2">
+        <Box sx={{
+      display: "flex",
+      gap: 2
+    }}>
           <Button
             size="small"
             variant="outlined"
             onClick={() => onViewTimeline?.(id)}
             startIcon={<Eye sx={{ fontSize: 14 }} />}
-            className="text-xs"
+            sx={{
+      typography: body2
+    }}
           >
             Timeline
           </Button>

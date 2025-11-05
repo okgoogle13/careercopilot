@@ -26,14 +26,30 @@ const features = [
 
 export function FeatureHighlights() {
   return (
-    <Grid container spacing={4} className="mt-8">
+    <Grid container spacing={4} sx={{
+      mt: 8
+    }}>
       {features.map((feature, index) => (
         <Grid size={{ xs: 12, sm: 6, md: 3 }} key={index}>
-          <Box className="text-center">
-            <Box className="flex justify-center mb-3">
-              <Box className="p-3 bg-primary/10 rounded-full text-primary">{feature.icon}</Box>
+          <Box sx={{
+      textAlign: "center"
+    }}>
+            <Box sx={{
+      display: "flex",
+      justifyContent: "center",
+      mb: 3
+    }}>
+              <Box sx={{
+      p: 3,
+      "bg-primary/10": true,
+      borderRadius: 9999px,
+      "text-primary": true
+    }}>{feature.icon}</Box>
             </Box>
-            <Typography variant="h6" className="font-semibold mb-2">
+            <Typography variant="h6" sx={{
+      fontWeight: 600,
+      mb: 2
+    }}>
               {feature.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">

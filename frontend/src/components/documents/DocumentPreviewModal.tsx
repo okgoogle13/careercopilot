@@ -1,4 +1,5 @@
 import { Download, Edit, Share as Share2, Delete as Trash2, Close as X } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import React from 'react';
 
 import { ATSScoreCircle } from '../features/Analysis/ATSScoreCircle';
@@ -34,67 +35,161 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
 
   return (
     <Dialog open={!!document} onOpenChange={(open) => !open && onClose()}>
-      <DialogHeader className="flex flex-row items-center justify-between pb-4 border-b">
+      <DialogHeader sx={{
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      pb: 4,
+      borderBottom: 1
+    }}>
         <div>
-          <DialogTitle className="text-xl">{document.title}</DialogTitle>
-          <p className="text-sm text-muted-foreground">
+          <DialogTitle sx={{
+      typography: h5
+    }}>{document.title}</DialogTitle>
+          <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
             {document.type} • {formattedDate}
           </p>
         </div>
-        <div className="flex items-center space-x-2">
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
           {document.atsScore !== undefined && (
-            <div className="flex items-center">
-              <span className="text-sm mr-2">ATS Score:</span>
+            <div sx={{
+      display: "flex",
+      alignItems: "center"
+    }}>
+              <span sx={{
+      typography: body1,
+      mr: 2
+    }}>ATS Score:</span>
               <ATSScoreCircle score={document.atsScore} size="small" showScore={false} />
-              <span className="ml-1 font-medium">{document.atsScore}</span>
+              <span sx={{
+      ml: 1,
+      fontWeight: 500
+    }}>{document.atsScore}</span>
             </div>
           )}
-          <Button variant="link" size="small" onClick={onClose} className="ml-2" aria-label="Close">
-            <X className="h-5 w-5" />
+          <Button variant="link" size="small" onClick={onClose} sx={{
+      ml: 2
+    }} aria-label="Close">
+            <X sx={{
+      "h-5": true,
+      "w-5": true
+    }} />
           </Button>
         </div>
       </DialogHeader>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-        <div className="flex-1 overflow-auto py-6">
+      <DialogContent sx={{
+      "max-w-4xl": true,
+      h: "90vh",
+      overflow: "hidden",
+      display: "flex",
+      flexDirection: "column"
+    }}>
+        <div sx={{
+      flex: 1,
+      overflow: "auto",
+      py: 6
+    }}>
           {document.previewUrl ? (
-            <div className="bg-muted/30 rounded-lg border border-border p-4 flex items-center justify-center">
+            <div sx={{
+      "bg-muted/30": true,
+      borderRadius: 0.5rem,
+      border: 1,
+      "border-border": true,
+      p: 4,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}>
               <img
                 src={document.previewUrl}
                 alt={`Preview of ${document.title}`}
-                className="max-w-full max-h-[60vh] object-contain"
+                sx={{
+      maxWidth: "100%",
+      h: "60vh",
+      "object-contain": true
+    }}
               />
             </div>
           ) : (
-            <div className="h-64 flex items-center justify-center bg-muted/30 rounded-lg border border-dashed border-border">
-              <p className="text-muted-foreground">No preview available</p>
+            <div sx={{
+      "h-64": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      "bg-muted/30": true,
+      borderRadius: 0.5rem,
+      border: 1,
+      borderStyle: "dashed",
+      "border-border": true
+    }}>
+              <p sx={{
+      "text-muted-foreground": true
+    }}>No preview available</p>
             </div>
           )}
         </div>
       </DialogContent>
       <DialogFooter>
-        <div className="flex justify-between items-center pt-4 border-t">
-          <div className="space-x-2">
+        <div sx={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      pt: 4,
+      borderTop: 1
+    }}>
+          <div sx={{
+      "space-x-2": true
+    }}>
             <Button variant="outline" size="small" onClick={() => onEdit?.(document)}>
-              <Edit className="h-4 w-4 mr-2" />
+              <Edit sx={{
+      "h-4": true,
+      "w-4": true,
+      mr: 2
+    }} />
               Edit
             </Button>
             <Button variant="outline" size="small" onClick={() => onDownload?.(document)}>
-              <Download className="h-4 w-4 mr-2" />
+              <Download sx={{
+      "h-4": true,
+      "w-4": true,
+      mr: 2
+    }} />
               Download
             </Button>
           </div>
-          <div className="space-x-2">
+          <div sx={{
+      "space-x-2": true
+    }}>
             <Button variant="link" size="small" onClick={() => onShare?.(document)}>
-              <Share2 className="h-4 w-4 mr-2" />
+              <Share2 sx={{
+      "h-4": true,
+      "w-4": true,
+      mr: 2
+    }} />
               Share
             </Button>
             <Button
               variant="link"
               size="small"
               onClick={() => onDelete?.(document)}
-              className="text-destructive hover:text-destructive"
+              sx={{
+      "text-destructive": true,
+      '&:hover': { "text-destructive": true }
+    }}
             >
-              <Trash2 className="h-4 w-4 mr-2" />
+              <Trash2 sx={{
+      "h-4": true,
+      "w-4": true,
+      mr: 2
+    }} />
               Delete
             </Button>
           </div>

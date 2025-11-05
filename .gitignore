@@ -65,6 +65,7 @@ temp/
 .npm
 .rpt2_cache/
 .tsbuildinfo
+.yarn/install-state.gz
 
 # Python cache files
 __pycache__/
@@ -89,3 +90,6 @@ cleanup_backup_*/
 .frontend-coverage/
 /frontend/playwright-report/
 .env.aws-ses
+
+*storybook.log
+storybook-static

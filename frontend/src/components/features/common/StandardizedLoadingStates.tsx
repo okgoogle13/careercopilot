@@ -1,4 +1,5 @@
 import { AutorenewRounded, Refresh, FlashOn, CheckCircle } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
 import { motion } from 'motion/react';
 import React from 'react';
@@ -35,14 +36,26 @@ export const SpinnerLoading = ({ size = 'md', message, className = '' }: Loading
   };
 
   return (
-    <div className={`flex items-center justify-center gap-2 ${className}`}>
+    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      "${className}": true
+    }}>
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
-        <AutorenewRounded className={`${sizeClasses[size]} text-primary`} />
+        <AutorenewRounded sx={{
+      "${sizeClasses[size]}": true,
+      "text-primary": true
+    }} />
       </motion.div>
-      {message && <span className="text-sm text-muted-foreground">{message}</span>}
+      {message && <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{message}</span>}
     </div>
   );
 };
@@ -56,13 +69,26 @@ export const PulseLoading = ({ size = 'md', message, className = '' }: LoadingSt
   };
 
   return (
-    <div className={`flex items-center justify-center gap-2 ${className}`}>
+    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      "${className}": true
+    }}>
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 1.5, repeat: Infinity }}
-        className={`${sizeClasses[size]} bg-primary rounded-full`}
+        sx={{
+      "${sizeClasses[size]}": true,
+      "bg-primary": true,
+      borderRadius: 9999px
+    }}
       />
-      {message && <span className="text-sm text-muted-foreground">{message}</span>}
+      {message && <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{message}</span>}
     </div>
   );
 };
@@ -76,8 +102,18 @@ export const DotsLoading = ({ size = 'md', message, className = '' }: LoadingSta
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center gap-3 ${className}`}>
-      <div className="flex gap-1">
+    <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 3,
+      "${className}": true
+    }}>
+      <div sx={{
+      display: "flex",
+      gap: 1
+    }}>
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
@@ -87,11 +123,18 @@ export const DotsLoading = ({ size = 'md', message, className = '' }: LoadingSta
               repeat: Infinity,
               delay: i * 0.1,
             }}
-            className={`${sizeClasses[size]} bg-primary rounded-full`}
+            sx={{
+      "${sizeClasses[size]}": true,
+      "bg-primary": true,
+      borderRadius: 9999px
+    }}
           />
         ))}
       </div>
-      {message && <span className="text-sm text-muted-foreground">{message}</span>}
+      {message && <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{message}</span>}
     </div>
   );
 };
@@ -105,8 +148,19 @@ export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingSta
   };
 
   return (
-    <div className={`flex flex-col items-center justify-center gap-3 ${className}`}>
-      <div className="flex gap-1 items-end">
+    <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 3,
+      "${className}": true
+    }}>
+      <div sx={{
+      display: "flex",
+      gap: 1,
+      alignItems: "flex-end"
+    }}>
         {[0, 1, 2, 3, 4].map((i) => (
           <motion.div
             key={i}
@@ -116,11 +170,19 @@ export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingSta
               repeat: Infinity,
               delay: i * 0.1,
             }}
-            className={`${sizeClasses[size]} bg-primary rounded-sm origin-bottom`}
+            sx={{
+      "${sizeClasses[size]}": true,
+      "bg-primary": true,
+      borderRadius: 0.125rem,
+      "origin-bottom": true
+    }}
           />
         ))}
       </div>
-      {message && <span className="text-sm text-muted-foreground">{message}</span>}
+      {message && <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{message}</span>}
     </div>
   );
 };
@@ -128,12 +190,27 @@ export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingSta
 // Progress Loading
 export const ProgressLoading = ({ progress = 0, message, className = '' }: LoadingStateProps) => {
   return (
-    <div className={`space-y-3 ${className}`}>
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium">{message || 'Loading...'}</span>
-        <span className="text-sm text-muted-foreground">{progress}%</span>
+    <div sx={{
+      "space-y-3": true,
+      "${className}": true
+    }}>
+      <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+        <span sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>{message || 'Loading...'}</span>
+        <span sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>{progress}%</span>
       </div>
-      <Progress value={progress} className="h-2" />
+      <Progress value={progress} sx={{
+      "h-2": true
+    }} />
     </div>
   );
 };
@@ -145,34 +222,99 @@ export const SkeletonLoading = ({
 }: LoadingStateProps & { variant?: 'card' | 'list' | 'profile' }) => {
   if (variant === 'card') {
     return (
-      <Card className={`p-6 space-y-4 ${className}`}>
-        <div className="flex items-center gap-3">
-          <Skeleton className="h-12 w-12 rounded-xl" />
-          <div className="space-y-2 flex-1">
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-3 w-1/2" />
+      <Card sx={{
+      p: 6,
+      "space-y-4": true,
+      "${className}": true
+    }}>
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3
+    }}>
+          <Skeleton sx={{
+      "h-12": true,
+      "w-12": true,
+      borderRadius: 0.75rem
+    }} />
+          <div sx={{
+      "space-y-2": true,
+      flex: 1
+    }}>
+            <Skeleton sx={{
+      "h-4": true,
+      width: "75%"
+    }} />
+            <Skeleton sx={{
+      "h-3": true,
+      width: "50%"
+    }} />
           </div>
         </div>
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-5/6" />
-        <div className="flex gap-2 pt-2">
-          <Skeleton className="h-6 w-16 rounded-full" />
-          <Skeleton className="h-6 w-20 rounded-full" />
+        <Skeleton sx={{
+      "h-4": true,
+      width: "100%"
+    }} />
+        <Skeleton sx={{
+      "h-4": true,
+      "w-5/6": true
+    }} />
+        <div sx={{
+      display: "flex",
+      gap: 2,
+      pt: 2
+    }}>
+          <Skeleton sx={{
+      "h-6": true,
+      "w-16": true,
+      borderRadius: 9999px
+    }} />
+          <Skeleton sx={{
+      "h-6": true,
+      "w-20": true,
+      borderRadius: 9999px
+    }} />
         </div>
-        <Skeleton className="h-9 w-full" />
+        <Skeleton sx={{
+      "h-9": true,
+      width: "100%"
+    }} />
       </Card>
     );
   }
 
   if (variant === 'list') {
     return (
-      <div className={`space-y-3 ${className}`}>
+      <div sx={{
+      "space-y-3": true,
+      "${className}": true
+    }}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="flex items-center gap-3 p-3 border rounded-lg">
-            <Skeleton className="h-10 w-10 rounded-full" />
-            <div className="space-y-2 flex-1">
-              <Skeleton className="h-4 w-3/4" />
-              <Skeleton className="h-3 w-1/2" />
+          <div key={i} sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 3,
+      p: 3,
+      border: 1,
+      borderRadius: 0.5rem
+    }}>
+            <Skeleton sx={{
+      "h-10": true,
+      "w-10": true,
+      borderRadius: 9999px
+    }} />
+            <div sx={{
+      "space-y-2": true,
+      flex: 1
+    }}>
+              <Skeleton sx={{
+      "h-4": true,
+      width: "75%"
+    }} />
+              <Skeleton sx={{
+      "h-3": true,
+      width: "50%"
+    }} />
             </div>
           </div>
         ))}
@@ -182,19 +324,54 @@ export const SkeletonLoading = ({
 
   if (variant === 'profile') {
     return (
-      <Card className={`p-6 ${className}`}>
-        <div className="flex items-center gap-4 mb-6">
-          <Skeleton className="h-20 w-20 rounded-full" />
-          <div className="space-y-2 flex-1">
-            <Skeleton className="h-6 w-48" />
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-3 w-24" />
+      <Card sx={{
+      p: 6,
+      "${className}": true
+    }}>
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      gap: 4,
+      mb: 6
+    }}>
+          <Skeleton sx={{
+      "h-20": true,
+      "w-20": true,
+      borderRadius: 9999px
+    }} />
+          <div sx={{
+      "space-y-2": true,
+      flex: 1
+    }}>
+            <Skeleton sx={{
+      "h-6": true,
+      "w-48": true
+    }} />
+            <Skeleton sx={{
+      "h-4": true,
+      "w-32": true
+    }} />
+            <Skeleton sx={{
+      "h-3": true,
+      "w-24": true
+    }} />
           </div>
         </div>
-        <div className="space-y-4">
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-5/6" />
-          <Skeleton className="h-4 w-4/6" />
+        <div sx={{
+      "space-y-4": true
+    }}>
+          <Skeleton sx={{
+      "h-4": true,
+      width: "100%"
+    }} />
+          <Skeleton sx={{
+      "h-4": true,
+      "w-5/6": true
+    }} />
+          <Skeleton sx={{
+      "h-4": true,
+      "w-4/6": true
+    }} />
         </div>
       </Card>
     );
@@ -206,9 +383,22 @@ export const SkeletonLoading = ({
 // Shimmer Loading Effect
 export const ShimmerLoading = ({ className = '' }: LoadingStateProps) => {
   return (
-    <div className={`relative overflow-hidden bg-gray-200 rounded ${className}`}>
+    <div sx={{
+      "relative": true,
+      overflow: "hidden",
+      bgcolor: "gray.200",
+      borderRadius: 0.25rem,
+      "${className}": true
+    }}>
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
+        sx={{
+      "absolute": true,
+      "inset-0": true,
+      "bg-gradient-to-r": true,
+      "from-transparent": true,
+      "via-white/60": true,
+      "to-transparent": true
+    }}
         initial={{ x: '-100%' }}
         animate={{ x: '100%' }}
         transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
@@ -223,24 +413,62 @@ export const AIProcessingLoading = ({
   className = '',
 }: LoadingStateProps) => {
   return (
-    <div className={`flex flex-col items-center justify-center gap-4 p-6 ${className}`}>
-      <div className="relative">
+    <div sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 4,
+      p: 6,
+      "${className}": true
+    }}>
+      <div sx={{
+      "relative": true
+    }}>
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-          className="w-12 h-12 border-2 border-purple-200 border-t-purple-600 rounded-full"
+          sx={{
+      "w-12": true,
+      "h-12": true,
+      border: 2,
+      borderColor: "purple.200",
+      "border-t-purple-600": true,
+      borderRadius: 9999px
+    }}
         />
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="absolute inset-0 flex items-center justify-center"
+          sx={{
+      "absolute": true,
+      "inset-0": true,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}
         >
-          <FlashOn className="w-5 h-5 text-purple-600" />
+          <FlashOn sx={{
+      "w-5": true,
+      "h-5": true,
+      color: "purple.600"
+    }} />
         </motion.div>
       </div>
-      <div className="text-center">
-        <p className="font-medium text-purple-700">{message}</p>
-        <div className="flex items-center justify-center gap-1 mt-2">
+      <div sx={{
+      textAlign: "center"
+    }}>
+        <p sx={{
+      fontWeight: 500,
+      color: "purple.700"
+    }}>{message}</p>
+        <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 1,
+      mt: 2
+    }}>
           {[0, 1, 2].map((i) => (
             <motion.div
               key={i}
@@ -250,7 +478,12 @@ export const AIProcessingLoading = ({
                 repeat: Infinity,
                 delay: i * 0.5,
               }}
-              className="w-2 h-2 bg-purple-400 rounded-full"
+              sx={{
+      "w-2": true,
+      "h-2": true,
+      bgcolor: "purple.400",
+      borderRadius: 9999px
+    }}
             />
           ))}
         </div>
@@ -266,21 +499,44 @@ export const SuccessLoading = ({ message = 'Complete!', className = '' }: Loadin
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-      className={`flex flex-col items-center justify-center gap-3 ${className}`}
+      sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 3,
+      "${className}": true
+    }}
     >
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: [0, 1.2, 1] }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"
+        sx={{
+      "w-12": true,
+      "h-12": true,
+      bgcolor: "green.100",
+      borderRadius: 9999px,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
+    }}
       >
-        <CheckCircle className="w-6 h-6 text-green-600" />
+        <CheckCircle sx={{
+      "w-6": true,
+      "h-6": true,
+      color: "green.600"
+    }} />
       </motion.div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="text-sm font-medium text-green-700"
+        sx={{
+      typography: body1,
+      fontWeight: 500,
+      color: "green.700"
+    }}
       >
         {message}
       </motion.p>

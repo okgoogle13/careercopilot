@@ -174,12 +174,7 @@
     "version": "1.0",
     "template": "Your task is to act as an expert recruitment assistant and extract the following specific pieces of information from the provided job description text. If a piece of information is not present, you must return null for that field for strings or an empty array for lists.\n\n1.  **Due Date**: The closing date for applications.\n2.  **Company Name**: The name of the organization hiring for the role.\n3.  **Role Title**: The official title of the position.\n4.  **Hiring Manager**: The name of the hiring manager or main contact person.\n5.  **Hiring Manager's Contact**: Any contact details provided for the hiring manager.\n6.  **Essential Criteria**: Skills/qualifications stated as 'essential', 'required', etc.\n7.  **Desirable Criteria**: Skills/qualifications stated as 'desirable', 'preferred', etc.\n8.  **Role Type**: Classify the role as 'Frontline/Support', 'PM/Delivery', or 'Other'.\n9.  **Subsectors**: Identify relevant community service subsectors like 'Homelessness', 'AOD', 'Mental Health'.\n\nPlease provide the output in the specified JSON format.\n\nJob Description Text:\n---\n{job_listing_text}\n---",
     "parameters": ["job_listing_text"],
-    "output_format": "structured_json",
-    "metadata": {
-      "created_at": "2024-09-11",
-      "last_updated": "2024-09-11",
-      "usage_count": 0
-    }
+    "output_format": "structured_json"
   },
 
   "job_listing_advanced_analysis": {
@@ -197,11 +192,6 @@
       "subsectors",
       "user_prompt"
     ],
-    "output_format": "text",
-    "metadata": {
-      "created_at": "2024-09-11",
-      "last_updated": "2024-09-11",
-      "usage_count": 0
-    }
+    "output_format": "text"
   }
 }

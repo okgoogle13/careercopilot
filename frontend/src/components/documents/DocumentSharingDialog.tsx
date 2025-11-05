@@ -7,6 +7,7 @@ import {
   Mail,
   Public as Globe,
 } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import React, { useState } from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -91,68 +92,143 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
       <DialogHeader>
         <DialogTitle>Share "{documentTitle}"</DialogTitle>
       </DialogHeader>
-      <DialogContent className="max-w-2xl">
-        <div className="space-y-6 py-4">
+      <DialogContent sx={{
+      "max-w-2xl": true
+    }}>
+        <div sx={{
+      "space-y-6": true,
+      py: 4
+    }}>
           {/* Share Link Section */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <Globe className="h-5 w-5 text-muted-foreground" />
-                <span className="text-sm font-medium">Share with link</span>
+          <div sx={{
+      "space-y-3": true
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
+                <Globe sx={{
+      "h-5": true,
+      "w-5": true,
+      "text-muted-foreground": true
+    }} />
+                <span sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>Share with link</span>
               </div>
               <Button
                 variant={shareLink ? 'default' : 'outline'}
                 size="small"
                 onClick={handleCopyLink}
                 disabled={!shareLink}
-                className="h-8"
+                sx={{
+      "h-8": true
+    }}
               >
                 {copied ? (
                   <>
-                    <Check className="h-4 w-4 mr-1" />
+                    <Check sx={{
+      "h-4": true,
+      "w-4": true,
+      mr: 1
+    }} />
                     Copied
                   </>
                 ) : (
                   <>
-                    <Copy className="h-4 w-4 mr-1" />
+                    <Copy sx={{
+      "h-4": true,
+      "w-4": true,
+      mr: 1
+    }} />
                     Copy link
                   </>
                 )}
               </Button>
             </div>
             {!shareLink && (
-              <p className="text-sm text-muted-foreground">
+              <p sx={{
+      typography: body1,
+      "text-muted-foreground": true
+    }}>
                 Enable link sharing to generate a shareable link
               </p>
             )}
           </div>
 
           {/* Invite Section */}
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <UserPlus className="h-5 w-5 text-muted-foreground" />
-                <span className="text-sm font-medium">Invite people</span>
+          <div sx={{
+      "space-y-3": true
+    }}>
+            <div sx={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+              <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
+                <UserPlus sx={{
+      "h-5": true,
+      "w-5": true,
+      "text-muted-foreground": true
+    }} />
+                <span sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>Invite people</span>
               </div>
               <Button
                 variant="outline"
                 size="small"
                 onClick={() => setInviteSectionOpen(!inviteSectionOpen)}
-                className="h-8"
+                sx={{
+      "h-8": true
+    }}
               >
                 {inviteSectionOpen ? 'Cancel' : 'Add people'}
               </Button>
             </div>
 
             {inviteSectionOpen && (
-              <div className="space-y-3 p-3 bg-muted/30 rounded-lg">
-                <div className="flex space-x-2">
-                  <div className="flex-1 relative">
-                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <div sx={{
+      "space-y-3": true,
+      p: 3,
+      "bg-muted/30": true,
+      borderRadius: 0.5rem
+    }}>
+                <div sx={{
+      display: "flex",
+      "space-x-2": true
+    }}>
+                  <div sx={{
+      flex: 1,
+      "relative": true
+    }}>
+                    <Mail sx={{
+      "absolute": true,
+      "left-3": true,
+      "top-1/2": true,
+      "-translate-y-1/2": true,
+      "h-4": true,
+      "w-4": true,
+      "text-muted-foreground": true
+    }} />
                     <Input
                       type="email"
                       placeholder="Enter email addresses, separated by commas"
-                      className="pl-9"
+                      sx={{
+      pl: 9
+    }}
                       value={emailInput}
                       onChange={(e) => setEmailInput(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleInvite()}
@@ -161,7 +237,18 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                   <select
                     value={selectedPermission}
                     onChange={(e) => setSelectedPermission(e.target.value as PermissionLevel)}
-                    className="text-sm rounded-md border border-input bg-background px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    sx={{
+      typography: body1,
+      borderRadius: 0.375rem,
+      border: 1,
+      "border-input": true,
+      "bg-background": true,
+      px: 3,
+      py: 2,
+      '&:focus': { outline: 'none' },
+      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },
+      "focus:ring-primary/50": true
+    }}
                   >
                     <option value="view">Can view</option>
                     <option value="comment">Can comment</option>
@@ -171,7 +258,10 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                     Invite
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground">
+                <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>
                   People with access can view and edit this document
                 </p>
               </div>
@@ -179,22 +269,49 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
           </div>
 
           {/* Collaborators List */}
-          <div className="space-y-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <div sx={{
+      "space-y-3": true
+    }}>
+            <div sx={{
+      "relative": true
+    }}>
+              <Search sx={{
+      "absolute": true,
+      "left-3": true,
+      "top-1/2": true,
+      "-translate-y-1/2": true,
+      "h-4": true,
+      "w-4": true,
+      "text-muted-foreground": true
+    }} />
               <Input
                 placeholder="Search people"
-                className="pl-9"
+                sx={{
+      pl: 9
+    }}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
 
-            <div className="border rounded-lg divide-y">
+            <div sx={{
+      border: 1,
+      borderRadius: 0.5rem,
+      "divide-y": true
+    }}>
               {filteredCollaborators.length > 0 ? (
                 filteredCollaborators.map((collab) => (
-                  <div key={collab.id} className="p-3 flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
+                  <div key={collab.id} sx={{
+      p: 3,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between"
+    }}>
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-3": true
+    }}>
                       <Avatar>
                         <AvatarImage src={collab.avatar} />
                         <AvatarFallback>
@@ -205,13 +322,25 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="text-sm font-medium">{collab.name}</p>
-                        <p className="text-xs text-muted-foreground">{collab.email}</p>
+                        <p sx={{
+      typography: body1,
+      fontWeight: 500
+    }}>{collab.name}</p>
+                        <p sx={{
+      typography: body2,
+      "text-muted-foreground": true
+    }}>{collab.email}</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div sx={{
+      display: "flex",
+      alignItems: "center",
+      "space-x-2": true
+    }}>
                       {collab.status === 'pending' && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" sx={{
+      typography: body2
+    }}>
                           Pending
                         </Badge>
                       )}
@@ -220,7 +349,18 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                         onChange={(e) =>
                           onUpdatePermission?.(collab.id, e.target.value as PermissionLevel)
                         }
-                        className="text-sm rounded-md border border-input bg-background px-2 py-1 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        sx={{
+      typography: body1,
+      borderRadius: 0.375rem,
+      border: 1,
+      "border-input": true,
+      "bg-background": true,
+      px: 2,
+      py: 1,
+      '&:focus': { outline: 'none' },
+      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },
+      "focus:ring-primary/50": true
+    }}
                       >
                         <option value="view">Can view</option>
                         <option value="comment">Can comment</option>
@@ -229,16 +369,26 @@ export const DocumentSharingDialog: React.FC<DocumentSharingDialogProps> = ({
                       <Button
                         variant="link"
                         size="small"
-                        className="h-8 w-8"
+                        sx={{
+      "h-8": true,
+      "w-8": true
+    }}
                         onClick={() => onRemoveCollaborator?.(collab.id)}
                       >
-                        <X className="h-4 w-4" />
+                        <X sx={{
+      "h-4": true,
+      "w-4": true
+    }} />
                       </Button>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="p-6 text-center text-muted-foreground">
+                <div sx={{
+      p: 6,
+      textAlign: "center",
+      "text-muted-foreground": true
+    }}>
                   <p>No collaborators found</p>
                 </div>
               )}
