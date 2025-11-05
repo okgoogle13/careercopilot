@@ -14,6 +14,7 @@ from typing import Any, Dict, Optional
 
 try:
     from firebase_admin import firestore
+
     FIRESTORE_AVAILABLE = True
 except ImportError:
     FIRESTORE_AVAILABLE = False
