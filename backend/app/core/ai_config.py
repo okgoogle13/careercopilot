@@ -13,7 +13,6 @@ from enum import Enum
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from app.ai.model_optimizer import OptimizationConfig, OptimizationLevel
 
 logger = logging.getLogger(__name__)
 
@@ -63,20 +62,12 @@ class ModelConfig:
     supports_streaming: bool = False
     supports_function_calling: bool = False
     custom_parameters: Dict[str, Any] = field(default_factory=dict)
-    optimization_config: Optional[OptimizationConfig] = field(
-        default_factory=lambda: OptimizationConfig(level=OptimizationLevel.NONE)
-    )
-    optimization_enabled: bool = False
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary with enum serialization"""
         data = asdict(self)
         data["provider"] = self.provider.value
         data["model_type"] = self.model_type.value
-        # Handle optimization config serialization
-        if self.optimization_config:
-            data["optimization_config"] = asdict(self.optimization_config)
-            data["optimization_config"]["level"] = self.optimization_config.level.value
         return data
 
     @classmethod
@@ -85,14 +76,6 @@ class ModelConfig:
         data = data.copy()
         data["provider"] = AIProvider(data["provider"])
         data["model_type"] = AIModelType(data["model_type"])
-
-        # Handle optimization config deserialization
-        if "optimization_config" in data and data["optimization_config"]:
-            opt_data = data["optimization_config"].copy()
-            if isinstance(opt_data, dict):
-                opt_data["level"] = OptimizationLevel(opt_data.get("level", "none"))
-                data["optimization_config"] = OptimizationConfig(**opt_data)
-
         return cls(**data)
 
 
@@ -217,7 +200,6 @@ class AIConfigManager:
             models: Dict[str, ModelConfig] = {}
             credentials: Dict[AIProvider, ProviderCredentials] = {}
             services: Dict[str, AIServiceConfig] = {}
-            issues: List[str] = []  # Initialize issues list
 
             # Load models with type checking
             for name, model_data in config.get("models", {}).items():
@@ -463,7 +445,6 @@ class AIConfigManager:
             ),
         }
 
-        self.models.update(default_models)
         self.services.update(default_services)
 
         logger.info("Loaded default AI configuration")
