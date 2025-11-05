@@ -295,11 +295,11 @@ const finalTheme = createTheme(baseTheme, {
             backdropFilter: `blur(${baseTheme.glass.blur})`,
             WebkitBackdropFilter: `blur(${baseTheme.glass.blur})`,
             border: `1px solid ${baseTheme.glass.border}`,
-            boxShadow: baseTheme.customShadows.glass,
+            boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
             '&:hover': {
               background: baseTheme.glass.backgroundHover,
               borderColor: baseTheme.glass.borderHover,
-              boxShadow: baseTheme.customShadows.glassHover,
+              boxShadow: '0 8px 40px rgba(0, 0, 0, 0.15)',
             },
           },
         },
