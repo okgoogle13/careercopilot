@@ -81,9 +81,8 @@ class BaseMixin:
         return cls(**data)
 
     def update_from_dict(self, data: Dict[str, Any]) -> None:
-    def update_from_dict(self, data: Dict[str, Any]) -> None:
         """Update model instance from dictionary."""
-        protected_fields = {'id', 'created_at', 'updated_at'}
+        protected_fields = {"id", "created_at", "updated_at"}
         for key, value in data.items():
             if hasattr(self, key) and key not in protected_fields:
                 setattr(self, key, value)
