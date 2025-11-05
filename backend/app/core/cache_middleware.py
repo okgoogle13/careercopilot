@@ -15,6 +15,7 @@ from fastapi import FastAPI, Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from .personal_cache import PersonalCache, get_ai_cache
+from .firestore_cache import get_firestore_cache
 
 logger = logging.getLogger(__name__)
 
@@ -42,9 +43,17 @@ class CacheCleanupMiddleware(BaseHTTPMiddleware):
     async def _cleanup_cache(self):
         """Background task to clean up expired cache entries"""
         try:
-            cleared = await self.cache.cleanup_expired()
-            if cleared > 0:
-                logger.info(f"Cache cleanup: removed {cleared} expired entries")
+            # Clean up both PersonalCache and Firestore cache
+            cleared_personal = await self.cache.cleanup_expired() if hasattr(self.cache, 'cleanup_expired') else 0
+
+            # Clean up Firestore cache
+            firestore_cache = get_firestore_cache()
+            cleared_firestore = firestore_cache.cleanup_expired() if firestore_cache.is_available else 0
+
+            total_cleared = cleared_personal + cleared_firestore
+            if total_cleared > 0:
+                logger.info(f"Cache cleanup: removed {total_cleared} expired entries "
+                          f"(personal: {cleared_personal}, firestore: {cleared_firestore})")
         except Exception as e:
             logger.error(f"Cache cleanup error: {e}")
 
@@ -188,29 +197,15 @@ class CacheInvalidationMiddleware(BaseHTTPMiddleware):
 
 async def setup_cache_backend() -> PersonalCache:
     """Setup cache backend based on environment"""
-    redis_url = os.getenv("REDIS_URL")
+    # Initialize Firestore cache (if available)
+    firestore_cache = get_firestore_cache()
+    if firestore_cache.is_available:
+        logger.info("Using Firestore cache backend")
+    else:
+        logger.warning("Firestore cache unavailable")
 
-    if redis_url:
-        try:
-            from .redis_cache import RedisCacheBackend
-
-            backend = RedisCacheBackend(redis_url=redis_url)
-
-            # Test connection
-            if await backend.health_check():
-                logger.info("Using Redis cache backend")
-                from .cache import setup_cache
-
-                return setup_cache(backend)
-            else:
-                logger.warning("Redis health check failed, falling back to in-memory cache")
-        except ImportError:
-            logger.warning("Redis not available, falling back to in-memory cache")
-        except Exception as e:
-            logger.error(f"Redis setup failed: {e}, falling back to in-memory cache")
-
-    # Fall back to in-memory cache
-    logger.info("Using in-memory cache backend")
+    # Fall back to in-memory cache for PersonalCache
+    logger.info("Using in-memory cache backend for PersonalCache")
     return get_ai_cache()
 
 

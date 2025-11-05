@@ -186,7 +186,14 @@
       "Bash(jq:*)",
       "Bash(yarn test:*)",
       "Bash(ulimit -n:*)",
-      "Bash(black:*)"
+      "Bash(black:*)",
+      "Bash(git branch:*)",
+      "Bash(gcloud beta billing projects describe:*)",
+      "Bash(gcloud services list:*)",
+      "Bash(gcloud secrets list:*)",
+      "Bash(test:*)",
+      "Bash(export ENABLE_GENKIT_FLOWS=true)",
+      "Bash(gcloud billing projects describe:*)"
     ]
   },
   "outputStyle": "default"
