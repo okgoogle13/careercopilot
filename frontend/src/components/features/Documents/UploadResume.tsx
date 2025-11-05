@@ -1,5 +1,4 @@
 import { Upload, Description as FileText, Mail, EmojiEvents } from '@mui/icons-material';
-import { Box } from '@mui/material';
 import {
   Button,
   IconButton,
@@ -41,65 +40,27 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
   };
 
   return (
-    <div sx={{
-      minHeight: "100vh",
-      "bg-background": true,
-      p: 4
-    }}>
-      <div sx={{
-      "max-w-2xl": true,
-      "mx-auto": true
-    }}>
+    <div className="min-h-screen bg-background p-4">
+      <div className="max-w-2xl mx-auto">
         {/* Header */}
-        <div sx={{
-      textAlign: "center",
-      mb: 8
-    }}>
-          <h1 sx={{
-      typography: h4,
-      fontWeight: 600,
-      mb: 2
-    }}>Create Your Master Profile</h1>
-          <p sx={{
-      "text-muted-foreground": true
-    }}>
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-semibold mb-2">Create Your Master Profile</h1>
+          <p className="text-muted-foreground">
             Upload your existing documents. We'll build your profile from them.
           </p>
         </div>
 
         {/* Upload Areas */}
-        <div sx={{
-      "space-y-6": true
-    }}>
+        <div className="space-y-6">
           {/* Resumes */}
-          <Card sx={{
-      p: 6
-    }}>
-            <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4,
-      mb: 4
-    }}>
-              <div sx={{
-      p: 2,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
-    }}>
-                <FileText sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-primary": true
-    }} />
+          <Card className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <FileText className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 sx={{
-      fontWeight: 600
-    }}>Resumes</h3>
-                <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+                <h3 className="font-semibold">Resumes</h3>
+                <p className="text-sm text-muted-foreground">
                   Upload your current resume(s) in PDF or Word format
                 </p>
               </div>
@@ -112,34 +73,14 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
           </Card>
 
           {/* Cover Letters */}
-          <Card sx={{
-      p: 6
-    }}>
-            <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4,
-      mb: 4
-    }}>
-              <div sx={{
-      p: 2,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
-    }}>
-                <Mail sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-primary": true
-    }} />
+          <Card className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <Mail className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 sx={{
-      fontWeight: 600
-    }}>Cover Letters</h3>
-                <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+                <h3 className="font-semibold">Cover Letters</h3>
+                <p className="text-sm text-muted-foreground">
                   Upload any existing cover letters for reference
                 </p>
               </div>
@@ -152,34 +93,14 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
           </Card>
 
           {/* Selection Criteria */}
-          <Card sx={{
-      p: 6
-    }}>
-            <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4,
-      mb: 4
-    }}>
-              <div sx={{
-      p: 2,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
-    }}>
-                <EmojiEvents sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-primary": true
-    }} />
+          <Card className="p-6">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="p-2 bg-primary/10 rounded-lg">
+                <EmojiEvents className="w-5 h-5 text-primary" />
               </div>
               <div>
-                <h3 sx={{
-      fontWeight: 600
-    }}>Selection Criteria Responses</h3>
-                <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+                <h3 className="font-semibold">Selection Criteria Responses</h3>
+                <p className="text-sm text-muted-foreground">
                   Upload any previous selection criteria responses
                 </p>
               </div>
@@ -193,18 +114,11 @@ export function UploadResume({ onNext, onBack }: UploadResumeProps) {
         </div>
 
         {/* Actions */}
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      mt: 8
-    }}>
+        <div className="flex justify-between mt-8">
           <Button variant="outlined" onClick={onBack}>
             Back
           </Button>
-          <Button onClick={onNext} sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
-    }}>
+          <Button onClick={onNext} className="bg-primary hover:bg-primary/90">
             Continue to Profile Creation
           </Button>
         </div>
