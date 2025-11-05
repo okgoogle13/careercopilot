@@ -89,18 +89,18 @@ class ConfigurationTester:
             self.print_test("Secret Manager Connection", "PASS",
                           f"Found {len(secrets)} secrets")
 
-            # Test accessing a specific secret
+            # Test accessing Gemini secret (required)
             try:
-                test_secret = get_app_secret("openai-api-key")
+                test_secret = get_app_secret("gemini-api-key")
                 if test_secret:
-                    self.print_test("Secret Access Test", "PASS",
-                                  "Successfully retrieved secret")
+                    self.print_test("Secret Access Test (Gemini)", "PASS",
+                                  "Successfully retrieved Gemini API key")
                 else:
-                    self.print_test("Secret Access Test", "WARN",
+                    self.print_test("Secret Access Test (Gemini)", "WARN",
                                   "Secret exists but is empty")
             except Exception as e:
-                self.print_test("Secret Access Test", "FAIL", str(e))
-                self.errors.append(f"Failed to access secrets: {e}")
+                self.print_test("Secret Access Test (Gemini)", "FAIL", str(e))
+                self.errors.append(f"Failed to access Gemini secret: {e}")
                 return False
 
             return True
@@ -116,11 +116,10 @@ class ConfigurationTester:
 
         results = {}
 
-        # AI service configurations
+        # AI service configurations (Gemini is required, Anthropic is optional fallback)
         ai_services = [
-            ("openai-api-key", "OpenAI API", "https://api.openai.com/v1/models"),
-            ("anthropic-api-key", "Anthropic API", None),  # No easy public endpoint
-            ("gemini-api-key", "Google Gemini API", None),  # Requires specific setup
+            ("gemini-api-key", "Google Gemini API", None),  # Required, Requires specific setup
+            ("anthropic-api-key", "Anthropic API (fallback)", None),  # Optional fallback
         ]
 
         for secret_name, service_name, test_url in ai_services:
@@ -132,10 +131,7 @@ class ConfigurationTester:
                     continue
 
                 # Basic format validation
-                if secret_name == "openai-api-key" and not api_key.startswith("sk-"):
-                    self.print_test(f"{service_name} Key", "WARN", "Invalid format")
-                    results[secret_name] = False
-                elif secret_name == "anthropic-api-key" and not api_key.startswith("sk-ant-"):
+                if secret_name == "anthropic-api-key" and not api_key.startswith("sk-ant-"):
                     self.print_test(f"{service_name} Key", "WARN", "Invalid format")
                     results[secret_name] = False
                 elif secret_name == "gemini-api-key" and not api_key.startswith("AIzaSy"):
