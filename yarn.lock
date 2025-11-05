@@ -7536,7 +7536,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:10.0.2, @storybook/builder-vite@npm:8.6.14, @storybook/builder-vite@npm:^8.6.14":
+"@storybook/builder-vite@npm:10.0.2":
   version: 8.6.14
   resolution: "@storybook/builder-vite@npm:8.6.14"
   dependencies:
