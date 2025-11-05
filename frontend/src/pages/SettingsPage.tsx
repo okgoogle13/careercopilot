@@ -25,6 +25,15 @@ import {
   Computer as ComputerIcon,
   HelpOutline,
   InfoOutlined,
+  Lock as LockIcon,
+  DesktopWindows as DesktopWindowsIcon,
+  Palette as PaletteIcon,
+  VpnKey as Key,
+  Security as Shield,
+  Computer,
+  Help,
+  Info,
+  Analytics,
 } from '@mui/icons-material';
 import {
   Box,
@@ -91,7 +100,14 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-export function SettingsPage() {
+interface SettingsPageProps {
+  onSave?: (settings: any) => void;
+  onExport?: () => void;
+  onImport?: () => void;
+}
+
+export function SettingsPage(props: SettingsPageProps = {}) {
+  const { onSave: onSaveProp, onExport: onExportProp, onImport: onImportProp } = props;
   const [tabValue, setTabValue] = useState(0);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [exportDialogOpen, setExportDialogOpen] = useState(false);
@@ -174,7 +190,12 @@ export function SettingsPage() {
 
     console.log('Saving settings:', allSettings);
     setHasUnsavedChanges(false);
-    alert('Settings saved successfully!');
+
+    if (onSaveProp) {
+      onSaveProp(allSettings);
+    } else {
+      alert('Settings saved successfully!');
+    }
   };
 
   const handleReset = () => {
@@ -234,7 +255,7 @@ export function SettingsPage() {
               />
               <Tab
                 icon={<SettingsIcon />}
-                label="General"
+                label="Preferences"
                 iconPosition="start"
                 sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
               />
@@ -247,6 +268,12 @@ export function SettingsPage() {
               <Tab
                 icon={<Security />}
                 label="Privacy & Security"
+                iconPosition="start"
+                sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
+              />
+              <Tab
+                icon={<CloudUpload />}
+                label="Data & Storage"
                 iconPosition="start"
                 sx={{ justifyContent: 'flex-start', textTransform: 'none', minHeight: 60 }}
               />
@@ -1035,7 +1062,15 @@ export function SettingsPage() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setExportDialogOpen(false)}>Cancel</Button>
-          <Button variant="contained" onClick={onExport}>
+          <Button
+            variant="contained"
+            onClick={() => {
+              if (onExportProp) {
+                onExportProp();
+              }
+              setExportDialogOpen(false);
+            }}
+          >
             Export
           </Button>
         </DialogActions>
