@@ -11,7 +11,7 @@ from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, AsyncIterator, Awaitable, Tuple
 
 from .ai_error_handling import AIError, AIErrorType, AIOperationHandler, RetryConfig
 
@@ -59,7 +59,7 @@ class FallbackStrategy:
     """Configuration for fallback mechanisms"""
 
     enabled: bool = True
-    fallback_function: Optional[Callable] = None
+    fallback_function: Optional[Callable[..., Awaitable[Any] | Any]] = None
     fallback_data: Any = None
     use_cached_result: bool = True
     degraded_mode: bool = False
@@ -68,8 +68,8 @@ class FallbackStrategy:
 class EnhancedAIErrorHandler:
     """Enhanced error handler with granular control and fallbacks"""
 
-    def __init__(self):
-        self.operation_handlers = {
+    def __init__(self) -> None:
+        self.operation_handlers: Dict[AIServiceType, AIOperationHandler] = {
             AIServiceType.GEMINI_EXTRACTION: AIOperationHandler(
                 RetryConfig(max_attempts=3, base_delay=1.0, max_delay=30.0)
             ),
@@ -96,11 +96,11 @@ class EnhancedAIErrorHandler:
 
     async def execute_ai_operation(
         self,
-        operation: Callable,
+        operation: Callable[..., Awaitable[Any] | Any],
         context: AIOperationContext,
         fallback_strategy: Optional[FallbackStrategy] = None,
-        *args,
-        **kwargs,
+        *args: Any,
+        **kwargs: Any,
     ) -> AIOperationResult:
         """
         Execute AI operation with enhanced error handling and fallback.
@@ -205,8 +205,8 @@ class EnhancedAIErrorHandler:
         context: AIOperationContext,
         strategy: FallbackStrategy,
         original_error: AIError,
-        *args,
-        **kwargs,
+        *args: Any,
+        **kwargs: Any,
     ) -> AIOperationResult:
         """Execute fallback mechanism"""
 
@@ -257,7 +257,7 @@ class EnhancedAIErrorHandler:
         return result
 
     async def _get_cached_result(
-        self, context: AIOperationContext, *args, **kwargs
+        self, context: AIOperationContext, *args: Any, **kwargs: Any
     ) -> Optional[Any]:
         """Try to retrieve cached result for operation"""
         # This would integrate with your existing cache system
@@ -299,7 +299,7 @@ class EnhancedAIErrorHandler:
         else:
             return {"degraded_mode": True, "message": "Service temporarily unavailable"}
 
-    def _record_operation_stats(self, result: AIOperationResult):
+    def _record_operation_stats(self, result: AIOperationResult) -> None:
         """Record operation statistics for monitoring"""
         if not result.context:
             return
@@ -344,8 +344,8 @@ class EnhancedAIErrorHandler:
         service_type: AIServiceType,
         user_id: str,
         fallback_strategy: Optional[FallbackStrategy] = None,
-        **metadata,
-    ):
+        **metadata: Any,
+    ) -> AsyncIterator[AIOperationContext]:
         """Context manager for AI operations with automatic error handling"""
         context = AIOperationContext(
             operation_name=operation_name,
@@ -365,18 +365,18 @@ class EnhancedAIErrorHandler:
 
 
 # Global instance
-enhanced_ai_handler = EnhancedAIErrorHandler()
+enhanced_ai_handler: EnhancedAIErrorHandler = EnhancedAIErrorHandler()
 
 
 # Convenience functions
 async def execute_with_enhanced_handling(
-    operation: Callable,
+    operation: Callable[..., Awaitable[Any] | Any],
     operation_name: str,
     service_type: AIServiceType,
     user_id: str,
     fallback_strategy: Optional[FallbackStrategy] = None,
-    *args,
-    **kwargs,
+    *args: Any,
+    **kwargs: Any,
 ) -> AIOperationResult:
     """Execute AI operation with enhanced error handling"""
     context = AIOperationContext(
@@ -390,7 +390,7 @@ async def execute_with_enhanced_handling(
 
 def create_fallback_strategy(
     enabled: bool = True,
-    fallback_function: Optional[Callable] = None,
+    fallback_function: Optional[Callable[..., Awaitable[Any] | Any]] = None,
     fallback_data: Any = None,
     use_cached_result: bool = False,
     degraded_mode: bool = False,

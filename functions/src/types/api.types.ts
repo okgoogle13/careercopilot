@@ -1,7 +1,7 @@
 // Shared types for API responses and requests
 
 // Base API response type
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -61,10 +61,10 @@ export interface ApplicationBase {
     coverLetterId?: string;
     kscId?: string;
   };
-  // Using any to avoid circular dependency with firebase-admin
+  // Using unknown to avoid circular dependency with firebase-admin
   // These will be properly typed when used with Firestore
-  createdAt: any;
-  updatedAt: any;
+  createdAt: unknown;
+  updatedAt: unknown;
   archived?: boolean;
 }
 

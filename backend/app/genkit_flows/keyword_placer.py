@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, cast
 
 from pydantic import BaseModel, Field
 
@@ -67,7 +67,7 @@ def suggestKeywordPlacement(
     """
 
     # Model availability is guaranteed by the decorator
-    model = get_model()
+    model = get_model()  # type: ignore[no-untyped-call]
 
     response = model.generate(
         prompt=prompt,
@@ -75,4 +75,4 @@ def suggestKeywordPlacement(
         config={"response_mime_type": "application/json"},
     )
 
-    return response.output()
+    return cast(KeywordPlacementResponse, response.output())

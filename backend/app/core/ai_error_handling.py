@@ -9,7 +9,7 @@ import time
 from dataclasses import dataclass
 from enum import Enum
 from functools import wraps
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, TypeVar, Awaitable, cast, overload
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +45,7 @@ class AIError(Exception):
     original_error: Optional[Exception] = None
     retry_after: Optional[int] = None
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.error_type.value}: {self.message}"
 
 
@@ -60,10 +60,13 @@ class RetryConfig:
     jitter: bool = True
 
 
+R = TypeVar("R")
+
+
 class AIOperationHandler:
     """Handles AI operations with error handling and retry logic."""
 
-    def __init__(self, retry_config: Optional[RetryConfig] = None):
+    def __init__(self, retry_config: Optional[RetryConfig] = None) -> None:
         self.retry_config = retry_config or RetryConfig()
 
     def classify_error(self, error: Exception) -> AIErrorType:
@@ -117,7 +120,12 @@ class AIOperationHandler:
 
         return delay
 
-    async def execute_with_retry(self, operation: Callable, *args, **kwargs) -> Any:
+    async def execute_with_retry(
+        self,
+        operation: Callable[..., R] | Callable[..., Awaitable[R]],
+        *args: Any,
+        **kwargs: Any,
+    ) -> R:
         """
         Execute an AI operation with retry logic.
 
@@ -141,9 +149,11 @@ class AIOperationHandler:
 
                 # Execute the operation
                 if asyncio.iscoroutinefunction(operation):
-                    result = await operation(*args, **kwargs)
+                    coro_op = cast(Callable[..., Awaitable[R]], operation)
+                    result = await coro_op(*args, **kwargs)
                 else:
-                    result = operation(*args, **kwargs)
+                    sync_op = cast(Callable[..., R], operation)
+                    result = sync_op(*args, **kwargs)
 
                 # Validate result
                 if result is None:
@@ -153,7 +163,7 @@ class AIOperationHandler:
                     )
 
                 logger.info(f"AI operation succeeded on attempt {attempt}")
-                return result
+                return cast(R, result)
 
             except Exception as e:
                 last_error = e
@@ -188,7 +198,9 @@ class AIOperationHandler:
             original_error=last_error,
         )
 
-    def execute_with_retry_sync(self, operation: Callable, *args, **kwargs) -> Any:
+    def execute_with_retry_sync(
+        self, operation: Callable[..., R], *args: Any, **kwargs: Any
+    ) -> R:
         """Synchronous variant of execute_with_retry for non-async operations."""
         last_error = None
 
@@ -239,7 +251,23 @@ class AIOperationHandler:
         )
 
 
-def with_ai_error_handling(retry_config: Optional[RetryConfig] = None):
+@overload
+def with_ai_error_handling(
+    retry_config: Optional[RetryConfig] = None,
+) -> Callable[[Callable[..., Awaitable[R]]], Callable[..., Awaitable[R]]]:
+    ...
+
+
+@overload
+def with_ai_error_handling(
+    retry_config: Optional[RetryConfig] = None,
+) -> Callable[[Callable[..., R]], Callable[..., R]]:
+    ...
+
+
+def with_ai_error_handling(
+    retry_config: Optional[RetryConfig] = None,
+) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
     """
     Decorator to add error handling and retry logic to AI operations.
 
@@ -253,21 +281,23 @@ def with_ai_error_handling(retry_config: Optional[RetryConfig] = None):
             pass
     """
 
-    def decorator(func: Callable) -> Callable:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
         if asyncio.iscoroutinefunction(func):
 
             @wraps(func)
-            async def async_wrapper(*args, **kwargs):
+            async def async_wrapper(*args: Any, **kwargs: Any) -> Any:
                 handler = AIOperationHandler(retry_config)
-                return await handler.execute_with_retry(func, *args, **kwargs)
+                result = await handler.execute_with_retry(func, *args, **kwargs)
+                return result
 
             return async_wrapper
         else:
 
             @wraps(func)
-            def sync_wrapper(*args, **kwargs):
+            def sync_wrapper(*args: Any, **kwargs: Any) -> Any:
                 handler = AIOperationHandler(retry_config)
-                return handler.execute_with_retry_sync(func, *args, **kwargs)
+                result2 = handler.execute_with_retry_sync(func, *args, **kwargs)
+                return result2
 
             return sync_wrapper
 
@@ -310,9 +340,10 @@ patient_handler = AIOperationHandler(RetryConfig(max_attempts=5, max_delay=120.0
 
 
 # Convenience functions
-async def safe_ai_call(operation: Callable, *args, **kwargs) -> Any:
+async def safe_ai_call(operation: Callable[..., R] | Callable[..., Awaitable[R]], *args: Any, **kwargs: Any) -> R:
     """Execute AI operation with default error handling."""
-    return await default_handler.execute_with_retry(operation, *args, **kwargs)
+    result = await default_handler.execute_with_retry(operation, *args, **kwargs)
+    return cast(R, result)
 
 
 def create_user_friendly_error(ai_error: AIError) -> str:
