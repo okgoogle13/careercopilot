@@ -1,9 +1,10 @@
 # backend/app/api/v1/analysis.py (Revised)
 
 from fastapi import APIRouter, Body, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import Any, Dict, List, Optional, cast
 
-from app.core.dependencies import User, get_current_user
+from app.core.dependencies import get_current_user
 from app.genkit_flows.advanced_job_matching import analyze_job_match_detailed
 from app.genkit_flows.ats_scoring import AtsResult, atsScoring
 from app.genkit_flows.flow_decorator import run_flow_async
@@ -27,8 +28,8 @@ class ATSScoreRequest(BaseModel):
 )
 async def create_ats_score_analysis(
     request: ATSScoreRequest = Body(...),
-    current_user: User = Depends(get_current_user),
-):
+    current_user: Any = Depends(get_current_user),
+) -> ATSScoreResponse:
     """
     Invokes the sophisticated `atsScoring` Genkit flow and transforms its
     output into the format expected by the frontend UI components.
@@ -38,10 +39,10 @@ async def create_ats_score_analysis(
         # Note: Your flow expects snake_case arguments.
         flow_result: AtsResult = await run_flow_async(
             atsScoring,
-            {
+            **{
                 "resumeText": request.resume_text,
                 "jobDescription": request.job_description,
-                "user_id": current_user.uid,
+                "user_id": getattr(current_user, "uid", None),
             },
         )
 
@@ -93,8 +94,8 @@ async def create_ats_score_analysis(
                     ),
                 ),
             ],
-            matched_keywords=flow_result.matchedKeywords,
-            missing_keywords=flow_result.missingKeywords,
+            matched_keywords=getattr(flow_result, "matchedKeywords", []),
+            missing_keywords=getattr(flow_result, "missingKeywords", []),
         )
 
         return response_data
@@ -108,21 +109,21 @@ async def create_ats_score_analysis(
 
 
 class JobMatchingRequest(BaseModel):
-    candidate_profile: dict
+    candidate_profile: Dict[str, Any]
     job_description: str
-    matching_preferences: dict = {}
+    matching_preferences: Dict[str, Any] = Field(default_factory=dict)
 
 
 class ContentOptimizationRequest(BaseModel):
     content: str
     target_role: str
-    optimization_goals: list = []
+    optimization_goals: List[str] = Field(default_factory=list)
 
 
 class ResumeIntelligenceRequest(BaseModel):
     resume_content: str
-    target_industry: str = None
-    career_goals: str = None
+    target_industry: Optional[str] = None
+    career_goals: Optional[str] = None
     experience_level: str = "mid_level"
 
 
@@ -133,17 +134,22 @@ class ResumeIntelligenceRequest(BaseModel):
 )
 async def analyze_job_match(
     request: JobMatchingRequest = Body(...),
-    current_user: User = Depends(get_current_user),
-):
+    current_user: Any = Depends(get_current_user),
+) -> Dict[str, Any]:
     """
     Analyze compatibility between candidate profile and job opportunity
     using advanced multi-dimensional matching algorithms.
     """
     try:
-        result = await run_flow_async(
-            analyze_job_match_detailed,
-            request.job_description,
-            request.candidate_profile,
+        result = cast(
+            Dict[str, Any],
+            await run_flow_async(
+                analyze_job_match_detailed,
+                **{
+                    "job_description": request.job_description,
+                    "candidate_profile": request.candidate_profile,
+                },
+            ),
         )
         return result
     except Exception as e:
@@ -161,19 +167,24 @@ async def analyze_job_match(
 )
 async def optimize_content(
     request: ContentOptimizationRequest = Body(...),
-    current_user: User = Depends(get_current_user),
-):
+    current_user: Any = Depends(get_current_user),
+) -> Dict[str, Any]:
     """
     Optimize resume/cover letter content for specific target roles
     using AI-powered content enhancement.
     """
     try:
-        result = await run_flow_async(
-            optimize_content_for_job,
-            request.content,
-            request.target_role,  # Used as job_description
-            "resume",  # content_type
-            request.optimization_goals,
+        result = cast(
+            Dict[str, Any],
+            await run_flow_async(
+                optimize_content_for_job,
+                **{
+                    "content": request.content,
+                    "job_description": request.target_role,
+                    "content_type": "resume",
+                    "optimization_goals": request.optimization_goals,
+                },
+            ),
         )
         return result
     except Exception as e:
@@ -191,21 +202,24 @@ async def optimize_content(
 )
 async def generate_resume_intelligence(
     request: ResumeIntelligenceRequest = Body(...),
-    current_user: User = Depends(get_current_user),
-):
+    current_user: Any = Depends(get_current_user),
+) -> Dict[str, Any]:
     """
     Generate comprehensive resume intelligence report with
     market readiness analysis and optimization recommendations.
     """
     try:
-        result = await run_flow_async(
-            generate_resume_intelligence_report,
-            {
-                "resume_content": request.resume_content,
-                "target_industry": request.target_industry,
-                "career_goals": request.career_goals,
-                "experience_level": request.experience_level,
-            },
+        result = cast(
+            Dict[str, Any],
+            await run_flow_async(
+                generate_resume_intelligence_report,
+                **{
+                    "resume_content": request.resume_content,
+                    "target_industry": request.target_industry,
+                    "career_goals": request.career_goals,
+                    "experience_level": request.experience_level,
+                },
+            ),
         )
         return result
     except Exception as e:

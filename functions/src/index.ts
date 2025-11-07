@@ -1,8 +1,8 @@
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
-import { genkit } from '@genkit-ai/core';
-import { onFlow } from '@genkit-ai/firebase';
-import { JobListingExtractor } from './services/job_listing_extractor';
+import {genkit} from '@genkit-ai/core';
+import {onFlow} from '@genkit-ai/firebase';
+import {JobListingExtractor} from './services/job_listing_extractor';
 
 // Initialize Firebase Admin
 admin.initializeApp();
@@ -19,9 +19,9 @@ genkit.configure({
 const jobListingExtractor = new JobListingExtractor();
 
 // Core services
-export { uploadAndTag } from "./uploadAndTag";
-export { extractAndSave } from "./extractAndSave";
-export { healthCheck } from "./healthCheck";
+export {uploadAndTag} from "./uploadAndTag";
+export {extractAndSave} from "./extractAndSave";
+export {healthCheck} from "./healthCheck";
 
 // Background processing functions
 export const enqueueJobProcessing = functions.https.onCall(
@@ -49,7 +49,7 @@ export const enqueueJobProcessing = functions.https.onCall(
         source: data.source,
       });
 
-      return { success: true, jobId: jobRef.id };
+      return {success: true, jobId: jobRef.id};
     } catch (error) {
       console.error('Error enqueuing job processing:', error);
       throw new functions.https.HttpsError(
@@ -75,7 +75,7 @@ export const processJobListing = functions.tasks
   })
   .onDispatch(async (data: { jobId: string; source: string | { url: string } }) => {
     try {
-      const { jobId, source } = data;
+      const {jobId, source} = data;
       const result = await jobListingExtractor.extract({
         source,
         options: {
@@ -92,7 +92,7 @@ export const processJobListing = functions.tasks
         completedAt: admin.firestore.FieldValue.serverTimestamp(),
       });
 
-      return { success: true, jobId };
+      return {success: true, jobId};
     } catch (error) {
       console.error('Error processing job listing:', error);
       
@@ -135,7 +135,7 @@ export const extractJobListing = onFlow(
     name: 'extractJobListing',
     authPolicy: 'authenticated',
   },
-  async (data: { source: string | { url: string } }, { user }) => {
+  async (data: { source: string | { url: string } }, {_user}) => {
     try {
       const result = await jobListingExtractor.extract({
         source: data.source,
@@ -145,7 +145,7 @@ export const extractJobListing = onFlow(
           extractLocation: true,
         },
       });
-      return { success: true, data: result };
+      return {success: true, data: result};
     } catch (error) {
       console.error('Error extracting job listing:', error);
       throw new functions.https.HttpsError(
@@ -167,12 +167,12 @@ export const findSimilarListings = onFlow(
   },
   async (
     data: { 
-      query: string | Record<string, any>;
+      query: string | Record<string, unknown>;
       limit?: number;
       minScore?: number;
-      filters?: Record<string, any>;
+      filters?: Record<string, unknown>;
     },
-    { user }
+    {_user}
   ) => {
     try {
       const results = await jobListingExtractor.findSimilar({
@@ -181,7 +181,7 @@ export const findSimilarListings = onFlow(
         minScore: data.minScore || 0.7,
         filters: data.filters || {},
       });
-      return { success: true, data: results };
+      return {success: true, data: results};
     } catch (error) {
       console.error('Error finding similar listings:', error);
       throw new functions.https.HttpsError(

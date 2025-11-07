@@ -6,7 +6,7 @@ the one-click application package generation and email task workflows.
 """
 
 import traceback
-from typing import Dict, Optional
+from typing import Any, Dict, Optional, TypedDict, Union
 
 from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import JSONResponse
@@ -21,12 +21,21 @@ from app.genkit_flows.career_application_workflow import (
 # Temporarily disabled due to syntax error in email_task_workflow.py
 # from app.genkit_flows.email_task_workflow import WorkflowResult as EmailWorkflowResult
 # from app.genkit_flows.email_task_workflow import scan_inbox_for_opportunities
-EmailWorkflowResult = dict  # Placeholder
-scan_inbox_for_opportunities = None  # Placeholder
+
+class EmailWorkflowResult(TypedDict, total=False):
+    success: bool
+    total_opportunities_found: int
+    tasks_created: int
+    error_message: str
+    details: Dict[str, Any]
+
+
+scan_inbox_for_opportunities: Optional[Any] = None  # Placeholder for async function
+
 
 # Import middleware for authentication (if available)
 try:
-    from app.api.middleware.firebase_auth import verify_firebase_token
+    from app.api.middleware.firebase_auth import verify_id_token as verify_firebase_token
 except ImportError:
     verify_firebase_token = None
 
@@ -38,9 +47,10 @@ class GenerateApplicationRequest(BaseModel):
     """Request model for application package generation"""
 
     job_description: str = Field(description="Complete job description/posting text", min_length=50)
-    user_profile: Dict = Field(
+    user_profile: Dict[str, Any] = Field(
+        default=...,
         description="Comprehensive user profile data including resume content",
-        min_items=1,
+        min_length=1,
     )
 
 
@@ -85,7 +95,7 @@ class ScanEmailResponse(BaseModel):
     of the job description and user profile.
     """,
 )
-async def create_application_package(request: GenerateApplicationRequest):
+async def create_application_package(request: GenerateApplicationRequest) -> GenerateApplicationResponse:
     """
     Generate a complete job application package using AI-powered workflows.
 
@@ -187,7 +197,7 @@ async def create_application_package(request: GenerateApplicationRequest):
     Requires user to have Google OAuth credentials configured for email and calendar access.
     """,
 )
-async def scan_email_for_opportunities(request: ScanEmailRequest):
+async def scan_email_for_opportunities(request: ScanEmailRequest) -> ScanEmailResponse:
     """
     Scan user's email for job opportunities and create tasks for high-scoring matches.
 
@@ -214,25 +224,33 @@ async def scan_email_for_opportunities(request: ScanEmailRequest):
                 status_code=status.HTTP_400_BAD_REQUEST, detail="User ID is required"
             )
 
-        # Execute email scanning workflow
+        # Execute email scanning workflow (guard placeholder)
         print(f"Starting email scanning for user: {request.user_id}")
-        result = await scan_inbox_for_opportunities(request.user_id)
+        if scan_inbox_for_opportunities is None:
+            raise HTTPException(
+                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                detail="Email scanning workflow is temporarily unavailable",
+            )
+        result: EmailWorkflowResult = await scan_inbox_for_opportunities(request.user_id)
 
         # Prepare response
-        if result.success:
+        if bool(result.get("success", False)):
             response = ScanEmailResponse(
                 success=True,
                 data=result,
-                message=f"Email scan completed. Found {result.total_opportunities_found} opportunities, created {result.tasks_created} tasks",
+                message=(
+                    f"Email scan completed. Found {result.get('total_opportunities_found', 0)} "
+                    f"opportunities, created {result.get('tasks_created', 0)} tasks"
+                ),
             )
             print("✓ Email scanning completed successfully")
         else:
             response = ScanEmailResponse(
                 success=False,
                 data=result,
-                message=f"Email scanning failed: {result.error_message}",
+                message=f"Email scanning failed: {result.get('error_message', 'Unknown error')}",
             )
-            print(f"✗ Email scanning failed: {result.error_message}")
+            print(f"✗ Email scanning failed: {result.get('error_message', 'Unknown error')}")
 
         return response
 
@@ -253,7 +271,7 @@ async def scan_email_for_opportunities(request: ScanEmailRequest):
     summary="Workflow Service Health Check",
     description="Check the health and availability of workflow services",
 )
-async def workflow_health_check():
+async def workflow_health_check() -> Dict[str, Any]:
     """
     Check the health of workflow services and dependencies.
 
@@ -306,7 +324,7 @@ async def workflow_health_check():
     summary="Get Workflow Status",
     description="Get the status of a running or completed workflow (future enhancement)",
 )
-async def get_workflow_status(workflow_id: str):
+async def get_workflow_status(workflow_id: str) -> JSONResponse:
     """Get the status of a workflow by ID.
 
     Get the status of a workflow by ID.

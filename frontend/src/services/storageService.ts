@@ -2,6 +2,10 @@ import { storage } from '../firebase-config';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject, listAll } from 'firebase/storage';
 
 export const uploadFile = async (file: File, path: string) => {
+  const MAX_BYTES = 5 * 1024 * 1024; // 5 MB limit
+  if (file.size > MAX_BYTES) {
+    throw new Error('File is too large. Maximum allowed size is 5 MB.');
+  }
   const storageRef = ref(storage, path);
   const uploadTask = uploadBytesResumable(storageRef, file, {
     contentType: file.type,

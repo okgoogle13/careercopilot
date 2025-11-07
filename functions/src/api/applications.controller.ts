@@ -1,12 +1,12 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import type { QueryDocumentSnapshot, DocumentData } from 'firebase-admin/firestore';
-import type { Request, Response } from 'express';
-import { validateFirebaseIdToken } from '../middleware/auth.middleware';
-import { handleError, sendResponse } from '../utils/api.utils';
+import type {QueryDocumentSnapshot} from 'firebase-admin/firestore';
+import type {Request, Response} from 'express';
+import {validateFirebaseIdToken} from '../middleware/auth.middleware';
+import {handleError, sendResponse} from '../utils/api.utils';
 import * as PDFDocument from 'pdfkit';
-import { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType } from 'docx';
-import { Buffer } from 'buffer';
+import {Document, Packer, Paragraph, TextRun, HeadingLevel} from 'docx';
+import {Buffer} from 'buffer';
 
 // Initialize Firebase Admin if not already initialized
 if (!admin.apps.length) {
@@ -98,9 +98,9 @@ const applicationFromFirestore = (doc: QueryDocumentSnapshot): Application => {
 export const createApplication = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
     // Authenticate user
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
     const applicationData: Omit<Application, 'id'> = {
@@ -133,12 +133,12 @@ export const createApplication = functions.https.onRequest(async (req: Request, 
  */
 export const listApplications = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
-    const { status, company } = req.query;
+    const {status, company} = req.query;
     let query = applicationsRef.where('userId', '==', userId);
     
     if (status) {
@@ -165,22 +165,22 @@ export const listApplications = functions.https.onRequest(async (req: Request, r
  */
 export const getApplication = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
-    const { id } = req.params;
+    const {id} = req.params;
     const doc = await applicationsRef.doc(id).get();
     
     if (!doc.exists) {
-      return sendResponse(res, 404, { error: 'Application not found' });
+      return sendResponse(res, 404, {error: 'Application not found'});
     }
     
     const application = applicationFromFirestore(doc as QueryDocumentSnapshot);
     
     if (application.userId !== userId) {
-      return sendResponse(res, 403, { error: 'Forbidden' });
+      return sendResponse(res, 403, {error: 'Forbidden'});
     }
     
     return sendResponse(res, 200, application);
@@ -195,12 +195,12 @@ export const getApplication = functions.https.onRequest(async (req: Request, res
  */
 export const updateApplication = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
-    const { id } = req.params;
+    const {id} = req.params;
     const updateData: Partial<Application> = {
       ...req.body,
       updatedAt: admin.firestore.FieldValue.serverTimestamp(),
@@ -210,12 +210,12 @@ export const updateApplication = functions.https.onRequest(async (req: Request, 
     const doc = await docRef.get();
     
     if (!doc.exists) {
-      return sendResponse(res, 404, { error: 'Application not found' });
+      return sendResponse(res, 404, {error: 'Application not found'});
     }
     
     const application = doc.data() as Application;
     if (application.userId !== userId) {
-      return sendResponse(res, 403, { error: 'Forbidden' });
+      return sendResponse(res, 403, {error: 'Forbidden'});
     }
 
     await docRef.update(updateData);
@@ -233,21 +233,21 @@ export const updateApplication = functions.https.onRequest(async (req: Request, 
  */
 export const deleteApplication = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
-    const { id } = req.params;
+    const {id} = req.params;
     const doc = await applicationsRef.doc(id).get();
     
     if (!doc.exists) {
-      return sendResponse(res, 404, { error: 'Application not found' });
+      return sendResponse(res, 404, {error: 'Application not found'});
     }
     
     const application = doc.data() as Application;
     if (application.userId !== userId) {
-      return sendResponse(res, 403, { error: 'Forbidden' });
+      return sendResponse(res, 403, {error: 'Forbidden'});
     }
 
     await applicationsRef.doc(id).delete();
@@ -263,12 +263,12 @@ export const deleteApplication = functions.https.onRequest(async (req: Request, 
  */
 export const scheduleInterview = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
-    const { id } = req.params;
+    const {id} = req.params;
     const interviewData: InterviewSchedule = {
       id: admin.firestore().collection('_').doc().id, // Generate a unique ID
       ...req.body,
@@ -279,12 +279,12 @@ export const scheduleInterview = functions.https.onRequest(async (req: Request, 
     const doc = await docRef.get();
     
     if (!doc.exists) {
-      return sendResponse(res, 404, { error: 'Application not found' });
+      return sendResponse(res, 404, {error: 'Application not found'});
     }
     
     const application = doc.data() as Application;
     if (application.userId !== userId) {
-      return sendResponse(res, 403, { error: 'Forbidden' });
+      return sendResponse(res, 403, {error: 'Forbidden'});
     }
 
     const interviews = [...(application.interviews || []), interviewData];
@@ -308,15 +308,15 @@ export const scheduleInterview = functions.https.onRequest(async (req: Request, 
  */
 export const bulkUpdateApplications = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
-    const { ids, updates } = req.body as { ids: string[]; updates: Partial<Application> };
+    const {ids, updates} = req.body as { ids: string[]; updates: Partial<Application> };
     
     if (!ids || !Array.isArray(ids) || ids.length === 0) {
-      return sendResponse(res, 400, { error: 'No application IDs provided' });
+      return sendResponse(res, 400, {error: 'No application IDs provided'});
     }
 
     const batch = db.batch();
@@ -331,7 +331,7 @@ export const bulkUpdateApplications = functions.https.onRequest(async (req: Requ
     }
 
     await batch.commit();
-    return sendResponse(res, 200, { success: true, updated: ids.length });
+    return sendResponse(res, 200, {success: true, updated: ids.length});
   } catch (error) {
     return handleError(res, error, 'Error bulk updating applications');
   }
@@ -345,12 +345,12 @@ export const bulkUpdateApplications = functions.https.onRequest(async (req: Requ
  */
 export const exportApplications = functions.https.onRequest(async (req: Request, res: Response) => {
   try {
-    const { userId, error } = await validateFirebaseIdToken(req, res);
+    const {userId, error} = await validateFirebaseIdToken(req, res);
     if (!userId || error) {
-      return sendResponse(res, 401, { error: error || 'Unauthorized' });
+      return sendResponse(res, 401, {error: error || 'Unauthorized'});
     }
 
-    const { format = 'json', status } = req.query;
+    const {format = 'json', status} = req.query;
     let query = applicationsRef.where('userId', '==', userId);
     
     if (status) {
@@ -366,13 +366,14 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
     let filename: string;
 
     switch (format) {
-      case 'json':
+      case 'json': {
         exportData = JSON.stringify(applications, null, 2);
         contentType = 'application/json';
         filename = `applications-${timestamp}.json`;
         break;
+      }
 
-      case 'csv':
+      case 'csv': {
         const headers = [
           'id', 'companyName', 'jobTitle', 'status', 'appliedDate',
           'location', 'salary', 'rating', 'source', 'updatedAt'
@@ -380,10 +381,11 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         
         const csvRows = [
           headers.join(','),
-          ...applications.map(app => 
-            headers.map(field => {
-              const value = (app as any)[field] || '';
-              return `"${value.toString().replace(/"/g, '\"')}"`;
+          ...applications.map((app) => 
+            headers.map((field) => {
+              const value = (app as Record<string, unknown>)[field] ?? '';
+              // CSV escaping: double double-quotes to escape quotes per RFC 4180
+              return `"${value.toString().replace(/"/g, '""')}"`;
             }).join(',')
           )
         ];
@@ -392,8 +394,9 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         contentType = 'text/csv';
         filename = `applications-${timestamp}.csv`;
         break;
+      }
 
-      case 'pdf':
+      case 'pdf': {
         const doc = new PDFDocument();
         const buffers: Buffer[] = [];
         
@@ -402,7 +405,7 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
           // Handled by the Promise below
         });
 
-        doc.fontSize(20).text('Job Applications', { align: 'center' });
+        doc.fontSize(20).text('Job Applications', {align: 'center'});
         doc.moveDown();
         
         applications.forEach((app, index) => {
@@ -424,8 +427,9 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         contentType = 'application/pdf';
         filename = `applications-${timestamp}.pdf`;
         break;
+      }
 
-      case 'doc':
+      case 'doc': {
         const docx = new Document({
           sections: [{
             properties: {},
@@ -433,13 +437,13 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
               new Paragraph({
                 text: 'Job Applications',
                 heading: HeadingLevel.HEADING_1,
-                spacing: { after: 200 }
+                spacing: {after: 200}
               }),
               ...applications.flatMap((app, index) => [
                 new Paragraph({
                   text: `${index + 1}. ${app.companyName} - ${app.jobTitle}`,
                   heading: HeadingLevel.HEADING_2,
-                  spacing: { after: 100 }
+                  spacing: {after: 100}
                 }),
                 new Paragraph({
                   children: [
@@ -455,7 +459,7 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
                 }),
                 new Paragraph({
                   text: app.jobDescription.substring(0, 200) + '...',
-                  spacing: { after: 200 }
+                  spacing: {after: 200}
                 })
               ])
             ]
@@ -467,9 +471,11 @@ export const exportApplications = functions.https.onRequest(async (req: Request,
         contentType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
         filename = `applications-${timestamp}.docx`;
         break;
+      }
 
-      default:
-        return sendResponse(res, 400, { error: 'Unsupported export format' });
+      default: {
+        return sendResponse(res, 400, {error: 'Unsupported export format'});
+      }
     }
 
     // Set headers for file download

@@ -1,22 +1,17 @@
 import * as admin from 'firebase-admin';
-import { genkit } from '@genkit-ai/core';
-import { defineFlow } from '@genkit-ai/flow';
-import { JobListing } from '../types/job_listing';
+import * as firebase from 'firebase-admin/firestore';
+import {genkit} from '@genkit-ai/core';
+import {defineFlow} from '@genkit-ai/flow';
+import {JobListing} from '../types/job_listing';
+import {FirebaseVectorSearch} from '../lib/firebase_vector_search';
+import https from 'https';
 
 // Configure Genkit to use the default model
 const model = genkit.model('gemini-pro');
 
-interface JobListingEmbedding {
-  title: string[];
-  description: string[];
-  company: string[];
-  skills: string[];
-  location: string[];
-}
-
 export class JobListingExtractor {
   private vectorSearch: FirebaseVectorSearch<JobListing>;
-  private db: FirebaseFirestore.Firestore;
+  private db: firebase.Firestore;
 
   constructor() {
     this.db = admin.firestore();
@@ -32,13 +27,13 @@ export class JobListingExtractor {
       inputSchema: {
         type: 'object',
         properties: {
-          source: { type: 'string' },
+          source: {type: 'string'},
           options: {
             type: 'object',
             properties: {
-              extractSkills: { type: 'boolean', default: true },
-              extractSalary: { type: 'boolean', default: true },
-              extractLocation: { type: 'boolean', default: true },
+              extractSkills: {type: 'boolean', default: true},
+              extractSalary: {type: 'boolean', default: true},
+              extractLocation: {type: 'boolean', default: true},
             },
           },
         },
@@ -46,14 +41,14 @@ export class JobListingExtractor {
       outputSchema: {
         type: 'object',
         properties: {
-          job: { $ref: 'JobListing' },
-          metadata: { type: 'object' },
+          job: {$ref: 'JobListing'},
+          metadata: {type: 'object'},
         },
       },
     },
     async ({
       source,
-      options = { extractSkills: true, extractSalary: true, extractLocation: true },
+      options = {extractSkills: true, extractSalary: true, extractLocation: true},
     }) => {
       const text = typeof source === 'string' ? source : await this.fetchUrl(source.url);
       
@@ -86,7 +81,7 @@ export class JobListingExtractor {
       query: string | JobListing;
       limit?: number;
       minScore?: number;
-      filters?: Record<string, any>;
+      filters?: Record<string, unknown>;
     }
   ): Promise<Array<{ job: JobListing; score: number }>> {
     // Use Genkit's semantic search
@@ -96,20 +91,34 @@ export class JobListingExtractor {
       company: typeof data.query === 'string' ? '' : data.query.company || '',
     });
 
-    const results = await this.vectorSearch.search(embedding, options);
-    return results.map(({ id, score, metadata }) => ({
+    const results = await this.vectorSearch.search(queryEmbedding, {
+      limit: data.limit,
+      minScore: data.minScore,
+      filters: data.filters,
+    });
+    return results.map(({id: _id, score, metadata}) => ({
       job: metadata,
       score,
     }));
   }
 
   private async fetchUrl(url: string): Promise<string> {
-    // Implement URL fetching logic here
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch URL: ${url}`);
-    }
-    return response.text();
+    return new Promise<string>((resolve, reject) => {
+      https.get(url, (res) => {
+        if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+          // Follow simple redirects
+          return this.fetchUrl(res.headers.location).then(resolve).catch(reject);
+        }
+        if (!res.statusCode || res.statusCode >= 400) {
+          reject(new Error(`Failed to fetch URL: ${url} (status: ${res.statusCode || 'unknown'})`));
+          return;
+        }
+        const chunks: Buffer[] = [];
+        res.on('data', (chunk) => chunks.push(chunk));
+        res.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+        res.on('error', reject);
+      }).on('error', reject);
+    });
   }
 
   private extractTitle(text: string): string {

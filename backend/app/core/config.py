@@ -6,7 +6,7 @@ with support for loading secrets from Google Cloud Secret Manager.
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict, List, Any, Optional
 
 from pydantic_settings import BaseSettings
 
@@ -106,7 +106,7 @@ class PersonalCareerConfig:
             "Community Services Worker",
         ]
     )
-    salary_range: Dict[str, int] = field(
+    salary_range: Dict[str, Any] = field(
         default_factory=lambda: {"min": 60000, "max": 85000, "currency": "AUD"}
     )
     transferable_skills: List[str] = field(
@@ -130,7 +130,7 @@ class PersonalCareerConfig:
 
 # Global configuration instances
 settings = Settings()
-_personal_config: PersonalCareerConfig = None
+_personal_config: Optional[PersonalCareerConfig] = None
 
 
 def get_personal_config() -> PersonalCareerConfig:
