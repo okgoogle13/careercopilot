@@ -9,7 +9,7 @@
 | File/Context | Instruction | Priority/Source |
 | :--- | :--- | :--- |
 | **`backend/app/core/config.py`** | Implement logic to fetch all production secrets at runtime from **Google Secret Manager**, replacing the insecure `.env` file strategy. Remove all hardcoded fallbacks (e.g., `change-in-production`). | **CRITICAL (Original Audit)** |
-| **`docker-compose.production.yml`** | Remove the exposed `ports` configuration for the **`postgres` and `redis`** services to restrict access to the internal container network only, eliminating host exposure. | **HIGH (Original Audit)** |
+| **`docker-compose.production.yml`** | Remove the exposed `ports` configuration for the **`postgres`** service to restrict access to the internal container network only, eliminating host exposure. | **HIGH (Original Audit)** |
 | **`firestore.rules`** | Manually review and harden the rules to enforce the **principle of least privilege**. | **HIGH (Original Audit)** |
 | **All API Endpoints** | Integrate explicit **Input Sanitization and Validation** (leveraging Pydantic/FastAPI features) to mitigate XSS and SQL Injection vulnerabilities. | **HIGH (Original Audit)** |
 | **Pinecone/Vector Logic** | **Delete all Pinecone integration code, configurations, and setup scripts** (e.g., references in `scripts/rotate-api-keys.sh`, `scripts/setup-secrets.sh`, `docs/setup/SETUP_GUIDE.md`, and any unused API fetching logic). | **HIGH (Copilot Cleanup)** |

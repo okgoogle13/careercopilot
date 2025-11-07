@@ -105,18 +105,6 @@ def get_database_url() -> str:
         return "sqlite:///data/careercopilot-dev.db"
 
 
-def get_redis_url() -> str:
-    """Get the Redis URL from secrets or environment."""
-    try:
-        return get_secret("REDIS_URL")
-    except RuntimeError:
-        redis_host = os.getenv("REDIS_HOST")
-        redis_port = os.getenv("REDIS_PORT")
-        if redis_host and redis_port:
-            return f"redis://{redis_host}:{redis_port}/0"
-        return "redis://localhost:6379/0"
-
-
 def get_secret_key() -> str:
     """Get the secret key for JWT tokens."""
     return get_secret("SECRET_KEY")

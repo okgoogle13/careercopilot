@@ -63,7 +63,6 @@ def main():
     secrets = {
         # Database
         "DATABASE_URL": "sqlite:///data/careercopilot-dev.db",
-        "REDIS_URL": "redis://localhost:6379/0",
         # Authentication
         "SECRET_KEY": "generate-a-secure-secret-key-here",
         "ALGORITHM": "HS256",

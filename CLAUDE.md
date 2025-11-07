@@ -70,11 +70,393 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 - `backend/app/core/genkit_init.py` - Genkit AI framework initialization and flow management
 - `verify_genkit.py` - Genkit verification and health check script
 
+## Backend API Development & Integration Skills
+
+### Backend API Scaffolding (NEW - 2025-01-06)
+
+**FastAPI Endpoint Scaffolding:**
+- **Skill**: `fastapi-endpoint-scaffolder` - Create new FastAPI endpoints with Pydantic models, tests, and router registration
+- **Location**: `.claude/skills/fastapi-endpoint-scaffolder/`
+- **Capabilities**:
+  - Generate FastAPI endpoint files with proper structure (`backend/app/api/endpoints/`)
+  - Create Pydantic request/response models (`backend/app/models/*_schemas.py`)
+  - Auto-update router registration (`backend/app/api/router.py`)
+  - Generate integration test scaffolds (`backend/app/tests/api/`)
+  - Include authentication middleware (Firebase Auth)
+  - Standard error handling patterns
+
+**Pydantic Model Scaffolding:**
+- **Skill**: `pydantic-model-scaffolder` - Create type-safe Pydantic models for API data validation
+- **Location**: `.claude/skills/pydantic-model-scaffolder/`
+- **Capabilities**:
+  - Generate Request/Response/Database model variants
+  - Add field validation rules (email, length, ranges, enums)
+  - Create list/pagination response models
+  - Include OpenAPI documentation examples
+  - Auto-update `backend/app/models/__init__.py`
+
+### Frontend-Backend Integration Analysis (NEW - 2025-01-06)
+
+**Integration Mapping:**
+- **Skill**: `frontend-backend-mapper` - Analyze and map frontend API calls to backend endpoints
+- **Location**: `.claude/skills/frontend-backend-mapper/`
+- **Capabilities**:
+  - Scan all frontend API services (`frontend/src/api/*.ts`)
+  - Scan all backend endpoints (`backend/app/api/endpoints/*.py`)
+  - Generate integration health report (`docs/INTEGRATION_MAP.md`)
+  - Detect missing backend endpoints (frontend calls without backend)
+  - Identify unused backend endpoints (backend routes without frontend)
+  - Find type mismatches (camelCase vs snake_case, type inconsistencies)
+  - Calculate integration health score
+  - Create visual Mermaid diagrams
+
+**API Contract Validation:**
+- **Skill**: `api-contract-validator` - Validate type contracts between TypeScript and Pydantic
+- **Location**: `.claude/skills/api-contract-validator/`
+- **Capabilities**:
+  - Compare TypeScript interfaces vs Pydantic models
+  - Detect field name mismatches (camelCase vs snake_case)
+  - Identify type inconsistencies (string vs int, optional differences)
+  - Validate enum value consistency
+  - Generate validation reports with fix recommendations
+  - Provide code examples for fixes
+  - Distinguish breaking vs non-breaking changes
+
+**Integration Test Scaffolding:**
+- **Skill**: `api-integration-test-scaffolder` - Generate E2E integration tests
+- **Location**: `.claude/skills/api-integration-test-scaffolder/`
+- **Capabilities**:
+  - Create tests for frontend → backend → Genkit flow paths
+  - Include test scenarios: success, validation, auth, errors
+  - Mock Firebase Auth and external services
+  - Verify Genkit flow execution
+  - Test response validation and type checking
+  - Generate comprehensive test suites (`backend/app/tests/integration/`)
+
+### Fullstack Flow Analysis (NEW - 2025-01-06)
+
+**Complete Flow Mapping:**
+- **Skill**: `fullstack-flow-mapper` - Trace complete data flows across all layers
+- **Location**: `.claude/skills/fullstack-flow-mapper/`
+- **Capabilities**:
+  - Map Component → Service → Endpoint → Genkit Flow → Database
+  - Generate comprehensive flow documentation (`docs/FULLSTACK_FLOWS.md`)
+  - Create visual architecture diagrams (Mermaid sequence diagrams)
+  - Document data transformations at each layer
+  - Track caching strategies and performance metrics
+  - Identify optimization opportunities
+  - Map error handling patterns
+
+**Fullstack Integration Specialist (NEW - 2025-01-06):**
+- **Subagent**: `fullstack-integration-specialist` - Expert orchestrator for full-stack feature development
+- **Location**: `.claude/agents/fullstack-integration-specialist.md`
+- **Expertise**:
+  - Complete stack integration (React → FastAPI → Genkit → Firestore)
+  - Full-stack feature planning and architecture
+  - Systematic use of all backend and integration skills
+  - Integration debugging and troubleshooting
+  - API contract design and validation
+  - Type safety across stack boundaries
+- **When to Use**:
+  - Planning new full-stack features
+  - Debugging integration issues (422 errors, type mismatches)
+  - Analyzing system architecture
+  - Generating integration documentation
+  - Validating frontend ↔ backend contracts
+
+### Quick Start: Backend API Development
+
+**Create New Endpoint:**
+```bash
+# Use the fastapi-endpoint-scaffolder skill
+# Ask Claude: "Create a new endpoint for user notifications"
+# Skill will:
+# 1. Create backend/app/api/endpoints/notifications.py
+# 2. Create backend/app/models/notification_schemas.py
+# 3. Update backend/app/api/router.py
+# 4. Generate backend/app/tests/api/test_notifications.py
+```
+
+**Validate Integration:**
+```bash
+# Use the frontend-backend-mapper skill
+# Ask Claude: "Map all frontend-backend integrations"
+# Generates: docs/INTEGRATION_MAP.md with health report
+```
+
+**Check Type Safety:**
+```bash
+# Use the api-contract-validator skill
+# Ask Claude: "Validate all API contracts"
+# Generates: docs/API_CONTRACT_VALIDATION.md with mismatches
+```
+
+**Document Flows:**
+```bash
+# Use the fullstack-flow-mapper skill
+# Ask Claude: "Map the KSC generation flow"
+# Generates: docs/FULLSTACK_FLOWS.md with Mermaid diagrams
+```
+
+## Testing Infrastructure & Automation Skills
+
+### Testing Skills & Subagents (NEW - 2025-01-06)
+
+**Current Test Coverage:**
+- **Frontend Components:** 10.6% (12/113 components tested)
+- **Backend APIs:** 85% (comprehensive pytest coverage)
+- **E2E Flows:** 90% (7 Playwright tests, 722 lines)
+- **Storybook Documentation:** 3.5% (4/113 components)
+
+**Coverage Goals:**
+- **Frontend Target:** 50% (56 components)
+- **Storybook Target:** 40% (45 components)
+- **E2E Target:** 95% (10+ critical flows)
+
+### Frontend Unit Test Generation (NEW)
+
+**Vitest Test Scaffolder:**
+- **Skill**: `vitest-test-scaffolder` - Generate React component and hook tests
+- **Location**: `.claude/skills/vitest-test-scaffolder/`
+- **Capabilities:**
+  - Auto-detect component props from TypeScript
+  - Generate render tests, interaction tests, accessibility tests
+  - Use `@testing-library/react` + `userEvent` patterns
+  - Support component and custom hook testing
+  - Include edge cases (disabled, loading, error states)
+  - Generate TODO placeholders for manual test additions
+- **Templates:**
+  - `component.test.tsx.tpl` - Component test template
+  - `hook.test.tsx.tpl` - React hook test template
+- **Pattern:** Matches existing `Button.test.tsx` (36 lines, 3 tests)
+- **Usage:**
+  ```bash
+  # Ask Claude: "Create tests for {{ComponentName}}"
+  # Generates: src/components/.../__ tests__/{{ComponentName}}.test.tsx
+  # Run: yarn test {{ComponentName}}
+  ```
+
+### Backend Unit Test Generation (Planned)
+
+**Pytest Test Scaffolder:**
+- **Skill**: `pytest-test-scaffolder` (Pending - Week 2)
+- **Location**: `.claude/skills/pytest-test-scaffolder/` (To be created)
+- **Capabilities:**
+  - Generate unit tests for Python functions/classes
+  - Create fixtures for dependencies
+  - Include happy path + error scenarios
+  - Use pytest markers (unit, integration, asyncio)
+  - Mock external dependencies
+- **Templates:**
+  - `unit_test.py.tpl` - Synchronous test template
+  - `async_test.py.tpl` - Async function test template
+  - `fixture.py.tpl` - Shared fixture template
+- **Pattern:** Matches existing `test_ksc_integration.py` (268 lines)
+
+### Integration Test Scaffolding
+
+**API Integration Test Scaffolder:**
+- **Skill**: `api-integration-test-scaffolder` - Generate backend integration tests
+- **Location**: `.claude/skills/api-integration-test-scaffolder/`
+- **Capabilities:**
+  - Create comprehensive E2E API tests
+  - Test scenarios: success, validation, auth, errors, concurrent requests
+  - Mock Firebase Auth and Genkit flows
+  - Include performance assertions (response time < 10s)
+  - Validate response structure and types
+- **Template:** `integration_test.py.tpl` (✅ NOW COMPLETE)
+- **Target:** `backend/app/tests/integration/test_{{feature_name}}_integration.py`
+- **Usage:**
+  ```bash
+  # Ask Claude: "Test {{endpoint_name}} integration"
+  # Generates: backend/app/tests/integration/test_{{feature}}_integration.py
+  # Run: pytest backend/app/tests/integration/ -v
+  ```
+
+### Component Documentation
+
+**Storybook Scaffolder:**
+- **Skill**: `storybook-scaffolder` - Generate Storybook stories
+- **Location**: `.claude/skills/storybook-scaffolder/`
+- **Capabilities:**
+  - Create `.stories.tsx` files from component
+  - Auto-extract component name and props
+  - Generate variant stories (Primary, Secondary, sizes, colors)
+  - Add interaction tests with `@storybook/test`
+  - Include accessibility addon usage
+- **Template:** `story.tsx.tpl`
+- **Usage:**
+  ```bash
+  # Ask Claude: "Create story for {{ComponentName}}"
+  # Generates: src/components/.../{{ComponentName}}.stories.tsx
+  # Run: yarn storybook
+  ```
+
+### E2E Test Generation
+
+**Webapp Testing (Playwright):**
+- **Skill**: `webapp-testing` - Generate Playwright E2E tests
+- **Location**: `.claude/skills/webapp-testing/`
+- **Capabilities:**
+  - Write new E2E tests for user journeys
+  - Run existing Playwright test suites
+  - Use stable `data-testid` selectors
+  - Include accessibility and mobile testing
+  - Consult selector reference guide
+- **Reference:** `.claude/skills/webapp-testing/REFERENCE/careercopilot-selectors.md`
+- **Target:** `frontend/tests/{{feature_name}}.spec.js`
+- **Usage:**
+  ```bash
+  # Ask Claude: "Test {{feature_name}} end-to-end"
+  # Generates: frontend/tests/{{feature_name}}.spec.js
+  # Run: npx playwright test
+  ```
+
+### Testing Orchestration (NEW)
+
+**Testing Specialist Subagent:**
+- **Subagent**: `testing-specialist` - Expert test automation and QA specialist
+- **Location**: `.claude/agents/testing-specialist.md`
+- **Expertise:**
+  - Test generation for all layers (frontend, backend, integration, E2E)
+  - Coverage analysis and improvement (10.6% → 50% target)
+  - Test quality assurance and pattern enforcement
+  - Test data management and fixture creation
+  - Integration with other specialists (fullstack, test-runner, code-reviewer)
+- **Responsibilities:**
+  1. **Test Generation:**
+     - Use `vitest-test-scaffolder` for React components
+     - Use `pytest-test-scaffolder` for Python functions
+     - Use `api-integration-test-scaffolder` for API endpoints
+     - Use `storybook-scaffolder` for component documentation
+     - Use `webapp-testing` for E2E user journeys
+  2. **Coverage Analysis:**
+     - Run `yarn test:coverage` and `pytest --cov`
+     - Identify untested critical paths (89.4% components uncovered)
+     - Prioritize by user impact
+     - Track progress toward 50% target
+  3. **Quality Assurance:**
+     - Review test patterns and best practices
+     - Enforce React Testing Library standards
+     - Ensure accessibility testing
+     - Refactor brittle/flaky tests
+  4. **Proactive Testing:**
+     - Automatically generate tests for new components
+     - Flag PRs without test coverage
+     - Report weekly coverage metrics
+- **When to Use:**
+  - "Create tests for {{ComponentName}}"
+  - "Improve test coverage to 50%"
+  - "Test {{endpoint_name}} integration"
+  - "Generate Storybook story for {{ComponentName}}"
+  - "Fix failing tests in {{TestFile}}"
+- **Collaboration:**
+  - Works with `fullstack-integration-specialist` on full-stack feature tests
+  - Reports to `test-runner` for test execution
+  - Coordinates with `code-reviewer` on quality checks
+
+### Quick Start: Testing Workflows
+
+**Generate Component Tests:**
+```bash
+# Ask Claude: "Create tests for the Badge component"
+# testing-specialist uses vitest-test-scaffolder:
+# 1. Reads src/components/ui/Badge/Badge.tsx
+# 2. Extracts props: { children, variant, size, color }
+# 3. Generates __tests__/Badge.test.tsx (5 tests)
+# 4. Runs: yarn test Badge
+# 5. Reports: ✅ 5/5 tests passing, coverage 100%
+```
+
+**Improve Coverage:**
+```bash
+# Ask Claude: "Improve frontend test coverage to 50%"
+# testing-specialist:
+# 1. Runs yarn test:coverage (current: 10.6%)
+# 2. Identifies 44 critical components needing tests
+# 3. Generates tests systematically (10/week for 4 weeks)
+# 4. Tracks progress: Week 1 (20%), Week 2 (35%), Week 3 (45%), Week 4 (50%)
+```
+
+**Generate Integration Tests:**
+```bash
+# Ask Claude: "Test the notification preferences endpoint"
+# testing-specialist uses api-integration-test-scaffolder:
+# 1. Identifies POST /api/v1/users/notifications/preferences
+# 2. Generates test_notification_preferences_integration.py
+# 3. Includes 10 scenarios (success, validation, auth, concurrent, performance)
+# 4. Runs: pytest backend/app/tests/integration/ -v
+# 5. Reports: ✅ 10/10 scenarios passing
+```
+
+**Create Storybook Stories:**
+```bash
+# Ask Claude: "Create story for Input component"
+# testing-specialist uses storybook-scaffolder:
+# 1. Reads src/components/ui/Input/Input.tsx
+# 2. Generates Input.stories.tsx with variant stories
+# 3. Adds interaction tests for typing, validation, error states
+# 4. Runs: yarn storybook
+# 5. Reports: ✅ Story created with 4 variants
+```
+
+### Test Infrastructure
+
+**Frontend Testing (Vitest):**
+- **Runner:** Vitest 4.0.7
+- **Config:** `frontend/vitest.config.ts`
+- **Coverage:** v8 provider, HTML/JSON/text reports
+- **Commands:**
+  - `yarn test` - Run all tests
+  - `yarn test:watch` - Watch mode
+  - `yarn test:coverage` - Generate coverage report
+  - `yarn test {{ComponentName}}` - Run specific test
+
+**Backend Testing (pytest):**
+- **Runner:** pytest 7.0.0+
+- **Config:** `backend/pytest.ini`, `backend/pyproject.toml`
+- **Coverage:** pytest-cov with 25% minimum threshold
+- **Commands:**
+  - `pytest backend/app/tests/` - Run all tests
+  - `pytest backend/app/tests/ -v` - Verbose output
+  - `pytest backend/app/tests/ --cov` - With coverage
+  - `pytest -m unit` - Run only unit tests
+
+**E2E Testing (Playwright):**
+- **Framework:** Playwright 1.55.0
+- **Config:** `frontend/playwright.config.ts`
+- **Browsers:** Chromium (Desktop Chrome)
+- **Commands:**
+  - `npx playwright test` - Run all E2E tests
+  - `npx playwright test --headed` - With browser UI
+  - `npx playwright test --debug` - Debug mode
+  - `npx playwright test {{test_name}}` - Run specific test
+
+### Coverage Improvement Roadmap
+
+**Baseline (Current):**
+- Frontend Components: 10.6% (12/113)
+- Storybook: 3.5% (4/113)
+- Backend: 85% (comprehensive)
+- E2E: 90% (7 tests)
+
+**Target (Month 1):**
+- Frontend Components: 50% (56/113)
+- Storybook: 40% (45/113)
+- Backend: 90% (maintain + new features)
+- E2E: 95% (10+ critical flows)
+
+**Weekly Milestones:**
+- Week 1: Frontend 20% (22 components) + Integration tests complete
+- Week 2: Frontend 35% (39 components) + pytest-test-scaffolder created
+- Week 3: Frontend 45% (50 components) + Enhanced Storybook
+- Week 4: Frontend 50% (56 components) + Storybook 40%
+
 ## Linting Commands
 
 - **All Projects (Root)**:
   - `yarn lint` - Run ESLint on frontend and functions
-  - `yarn lint:fystn- Auto-fix all linting errors across entire project
+  - `yarn lint:fix` - Auto-fix all linting errors across entire project
   - `yarn lint:ci` - Run linting with CI-friendly settings
   - `yarn lint:autofix` - Execute comprehensive auto-fix script
 - **Individual Projects**:

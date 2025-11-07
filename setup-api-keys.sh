@@ -132,7 +132,6 @@ echo "• Backend (Prod): http://localhost:8000"
 echo "• Backend (Dev):  http://localhost:8001"
 echo "• Grafana:        http://localhost:3000"
 echo "• PostgreSQL:     localhost:5432"
-echo "• Redis:          localhost:6379"
 echo ""
 
 # Test basic connectivity

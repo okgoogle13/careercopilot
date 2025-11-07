@@ -21,24 +21,6 @@ services:
       - careercopilot-network
     restart: unless-stopped
 
-  # Redis for caching and session management
-  redis:
-    image: redis:7-alpine
-    container_name: careercopilot-redis
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-change-in-production}
-    volumes:
-      - redis_data:/data
-    # ports:
-      # - "6379:6379"  # SECURITY: Removed host port exposure - redis only accessible within container network
-    healthcheck:
-      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    networks:
-      - careercopilot-network
-    restart: unless-stopped
-
   # CareerCopilot Backend API
   backend:
     build:
@@ -56,9 +38,6 @@ services:
       DB_NAME: careercopilot
       DB_USER: careercopilot
       DB_PASSWORD: ${DB_PASSWORD:-change-in-production}
-
-      # Redis configuration
-      REDIS_URL: redis://:${REDIS_PASSWORD:-change-in-production}@redis:6379/0
 
       # Authentication
       JWT_SECRET_KEY: ${JWT_SECRET_KEY:-your-secret-key-change-in-production}
@@ -108,71 +87,11 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-      redis:
-        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
       interval: 30s
       timeout: 10s
       retries: 5
-    networks:
-      - careercopilot-network
-    restart: unless-stopped
-
-  # Celery Worker for background tasks
-  celery-worker:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-      target: production
-    container_name: careercopilot-worker
-    command: python -m celery -A app.worker worker --loglevel=info --concurrency=4
-    env_file:
-      - .env.production
-    environment:
-      DATABASE_URL: postgresql://careercopilot:${DB_PASSWORD:-change-in-production}@postgres:5432/careercopilot
-      REDIS_URL: redis://:${REDIS_PASSWORD:-change-in-production}@redis:6379/0
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
-      ENVIRONMENT: production
-    # volumes:
-      # - ./data:/app/data
-      # - ./logs:/app/logs
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      backend:
-        condition: service_healthy
-    networks:
-      - careercopilot-network
-    restart: unless-stopped
-
-  # Celery Beat scheduler for periodic tasks
-  celery-beat:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-      target: production
-    container_name: careercopilot-scheduler
-    command: python -m celery -A app.worker beat --loglevel=info
-    env_file:
-      - .env.production
-    environment:
-      DATABASE_URL: postgresql://careercopilot:${DB_PASSWORD:-change-in-production}@postgres:5432/careercopilot
-      REDIS_URL: redis://:${REDIS_PASSWORD:-change-in-production}@redis:6379/0
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
-      ENVIRONMENT: production
-    # volumes:
-      # - ./data:/app/data
-      # - ./logs:/app/logs
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
     networks:
       - careercopilot-network
     restart: unless-stopped
@@ -234,6 +153,5 @@ networks:
 
 volumes:
   postgres_data:
-  redis_data:
   prometheus_data:
   grafana_data:

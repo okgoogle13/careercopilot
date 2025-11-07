@@ -213,7 +213,6 @@ def get_logging_config(environment: Optional[str] = None) -> Dict[str, Any]:
             "uvicorn.access": {"level": "INFO", "handlers": [], "propagate": True},
             "uvicorn.error": {"level": "INFO", "handlers": [], "propagate": True},
             # Third-party loggers
-            "redis": {"level": "WARNING", "handlers": [], "propagate": True},
             "firebase_admin": {"level": "WARNING", "handlers": [], "propagate": True},
             "google.auth": {"level": "WARNING", "handlers": [], "propagate": True},
         }
