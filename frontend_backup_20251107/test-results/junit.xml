@@ -1,0 +1,1972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="139" failures="32" errors="0" time="530.476">
+  <testsuite name="Utils" errors="0" failures="0" skipped="0" timestamp="2025-10-29T16:58:05" time="3.314" tests="15">
+    <testcase classname="Utils formatFileSize should format 0 bytes correctly" name="Utils formatFileSize should format 0 bytes correctly" time="0.009">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format bytes correctly" name="Utils formatFileSize should format bytes correctly" time="0">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format KB correctly" name="Utils formatFileSize should format KB correctly" time="0">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format MB correctly" name="Utils formatFileSize should format MB correctly" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatFileSize should format GB correctly" name="Utils formatFileSize should format GB correctly" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatFileSize should handle decimal places correctly" name="Utils formatFileSize should handle decimal places correctly" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatFileSize should handle very large numbers" name="Utils formatFileSize should handle very large numbers" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatDate should format date correctly" name="Utils formatDate should format date correctly" time="0.225">
+    </testcase>
+    <testcase classname="Utils formatDate should handle different months" name="Utils formatDate should handle different months" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatDate should handle different years" name="Utils formatDate should handle different years" time="0.001">
+    </testcase>
+    <testcase classname="Utils formatDate should handle leap year dates" name="Utils formatDate should handle leap year dates" time="0.002">
+    </testcase>
+    <testcase classname="Utils formatDate should handle start of year" name="Utils formatDate should handle start of year" time="0">
+    </testcase>
+    <testcase classname="Utils formatDate should handle end of year" name="Utils formatDate should handle end of year" time="0">
+    </testcase>
+    <testcase classname="Utils edge cases and error handling formatFileSize should handle negative numbers" name="Utils edge cases and error handling formatFileSize should handle negative numbers" time="0">
+    </testcase>
+    <testcase classname="Utils edge cases and error handling formatDate should handle invalid dates gracefully" name="Utils edge cases and error handling formatDate should handle invalid dates gracefully" time="0.014">
+    </testcase>
+  </testsuite>
+  <testsuite name="DocumentWorkflow Integration" errors="0" failures="0" skipped="0" timestamp="2025-10-29T16:58:08" time="0.333" tests="0">
+    <testcase classname="DocumentWorkflow Integration should complete document workflow end-to-end" name="DocumentWorkflow Integration should complete document workflow end-to-end" time="0">
+    </testcase>
+    <testcase classname="DocumentWorkflow Integration should handle document creation and editing" name="DocumentWorkflow Integration should handle document creation and editing" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="LoginForm" errors="0" failures="0" skipped="0" timestamp="2025-10-29T16:58:09" time="0.293" tests="0">
+    <testcase classname="LoginForm should render login form" name="LoginForm should render login form" time="0">
+    </testcase>
+    <testcase classname="LoginForm should handle form submission" name="LoginForm should handle form submission" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="KscCriteriaInput" errors="0" failures="0" skipped="0" timestamp="2025-10-29T16:58:05" time="8.443" tests="2">
+    <testcase classname="KscCriteriaInput calls onAddCriterion with the input value when add button is clicked" name="KscCriteriaInput calls onAddCriterion with the input value when add button is clicked" time="0.704">
+    </testcase>
+    <testcase classname="KscCriteriaInput does not call onAddCriterion if the input is empty" name="KscCriteriaInput does not call onAddCriterion if the input is empty" time="0.037">
+    </testcase>
+  </testsuite>
+  <testsuite name="Button" errors="0" failures="0" skipped="0" timestamp="2025-10-29T16:58:05" time="32.497" tests="8">
+    <testcase classname="Button should render with default props" name="Button should render with default props" time="0.429">
+    </testcase>
+    <testcase classname="Button should render children correctly" name="Button should render children correctly" time="0.019">
+    </testcase>
+    <testcase classname="Button should apply variant, color, and size classes" name="Button should apply variant, color, and size classes" time="0.071">
+    </testcase>
+    <testcase classname="Button should handle onClick event" name="Button should handle onClick event" time="0.052">
+    </testcase>
+    <testcase classname="Button should be disabled when disabled prop is true" name="Button should be disabled when disabled prop is true" time="0.033">
+    </testcase>
+    <testcase classname="Button should show loading indicator and be disabled when loading prop is true" name="Button should show loading indicator and be disabled when loading prop is true" time="0.134">
+    </testcase>
+    <testcase classname="Button should render as a link when href is provided" name="Button should render as a link when href is provided" time="0.021">
+    </testcase>
+    <testcase classname="Button should apply fullWidth class" name="Button should apply fullWidth class" time="0.025">
+    </testcase>
+  </testsuite>
+  <testsuite name="Auth Component" errors="0" failures="0" skipped="0" timestamp="2025-10-29T16:58:05" time="33.722" tests="20">
+    <testcase classname="Auth Component Rendering should render the auth form with all elements" name="Auth Component Rendering should render the auth form with all elements" time="0.795">
+    </testcase>
+    <testcase classname="Auth Component Rendering should render email input with correct type" name="Auth Component Rendering should render email input with correct type" time="0.067">
+    </testcase>
+    <testcase classname="Auth Component Rendering should render password input with correct type" name="Auth Component Rendering should render password input with correct type" time="0.061">
+    </testcase>
+    <testcase classname="Auth Component Rendering should display OR separator between sign-in methods" name="Auth Component Rendering should display OR separator between sign-in methods" time="0.039">
+    </testcase>
+    <testcase classname="Auth Component Rendering should display sign-up link text" name="Auth Component Rendering should display sign-up link text" time="0.031">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should call onLogin when Sign In button is clicked" name="Auth Component User Interactions should call onLogin when Sign In button is clicked" time="0.039">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should call onLogin when Google sign-in button is clicked" name="Auth Component User Interactions should call onLogin when Google sign-in button is clicked" time="0.034">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should call onLogin when Sign Up link is clicked" name="Auth Component User Interactions should call onLogin when Sign Up link is clicked" time="0.039">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should allow typing in email input field" name="Auth Component User Interactions should allow typing in email input field" time="0.018">
+    </testcase>
+    <testcase classname="Auth Component User Interactions should allow typing in password input field" name="Auth Component User Interactions should allow typing in password input field" time="0.027">
+    </testcase>
+    <testcase classname="Auth Component Accessibility should have proper form structure" name="Auth Component Accessibility should have proper form structure" time="0.102">
+    </testcase>
+    <testcase classname="Auth Component Accessibility should have accessible button roles" name="Auth Component Accessibility should have accessible button roles" time="0.125">
+    </testcase>
+    <testcase classname="Auth Component Accessibility should support keyboard navigation" name="Auth Component Accessibility should support keyboard navigation" time="0.076">
+    </testcase>
+    <testcase classname="Auth Component Form Validation Edge Cases should handle empty form submission" name="Auth Component Form Validation Edge Cases should handle empty form submission" time="0.056">
+    </testcase>
+    <testcase classname="Auth Component Form Validation Edge Cases should handle special characters in inputs" name="Auth Component Form Validation Edge Cases should handle special characters in inputs" time="0.03">
+    </testcase>
+    <testcase classname="Auth Component Component Layout should have proper CSS classes for styling" name="Auth Component Component Layout should have proper CSS classes for styling" time="0.022">
+    </testcase>
+    <testcase classname="Auth Component Component Layout should render Google button with proper styling" name="Auth Component Component Layout should render Google button with proper styling" time="0.107">
+    </testcase>
+    <testcase classname="Auth Component Error Handling should not break when onLogin prop is undefined" name="Auth Component Error Handling should not break when onLogin prop is undefined" time="0.027">
+    </testcase>
+    <testcase classname="Auth Component Error Handling should handle multiple rapid clicks gracefully" name="Auth Component Error Handling should handle multiple rapid clicks gracefully" time="0.081">
+    </testcase>
+    <testcase classname="Auth Component Integration with Theme should apply theme styles correctly" name="Auth Component Integration with Theme should apply theme styles correctly" time="0.021">
+    </testcase>
+  </testsuite>
+  <testsuite name="Button" errors="0" failures="1" skipped="0" timestamp="2025-10-29T16:58:05" time="35.72" tests="3">
+    <testcase classname="Button renders with the correct text" name="Button renders with the correct text" time="0.538">
+    </testcase>
+    <testcase classname="Button calls the onClick handler when clicked" name="Button calls the onClick handler when clicked" time="0.325">
+    </testcase>
+    <testcase classname="Button is disabled when the disabled prop is true" name="Button is disabled when the disabled prop is true" time="0.041">
+      <failure>Error: Unable to perform pointer interaction as the element has `pointer-events: none`:
+
+BUTTON(label=Click Me)
+    at Object.assertPointerEvents (/Applications/careercopilot/careercopilot/node_modules/@testing-library/user-event/dist/cjs/utils/pointer/cssPointerEvents.js:47:15)
+    at Object.assertPointerEvents [as enter] (/Applications/careercopilot/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:52:34)
+    at PointerHost.enter [as move] (/Applications/careercopilot/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:53:85)
+    at move (/Applications/careercopilot/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:59:39)
+    at Object.pointerAction [as pointer] (/Applications/careercopilot/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:15)
+    at Object.asyncWrapper (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:88:22)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/components/ui/Button/__tests__/Button.test.tsx:33:5)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="DocumentsPage" errors="0" failures="3" skipped="0" timestamp="2025-10-29T16:58:05" time="437.715" tests="21">
+    <testcase classname="DocumentsPage Empty State renders empty state when isEmpty is true" name="DocumentsPage Empty State renders empty state when isEmpty is true" time="5.187">
+    </testcase>
+    <testcase classname="DocumentsPage Empty State calls onCreateDocument when create button is clicked in empty state" name="DocumentsPage Empty State calls onCreateDocument when create button is clicked in empty state" time="15.727">
+      <failure>Error: thrown: &quot;Exceeded timeout of 15000 ms for a test.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/DocumentsPage.test.tsx:29:5
+    at _dispatchDescribe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:55:5)
+    at /Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/DocumentsPage.test.tsx:17:3
+    at _dispatchDescribe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/DocumentsPage.test.tsx:6:1)
+    at Runtime._execModule (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="DocumentsPage Empty State calls onUploadDocument when upload button is clicked in empty state" name="DocumentsPage Empty State calls onUploadDocument when upload button is clicked in empty state" time="1.258">
+    </testcase>
+    <testcase classname="DocumentsPage Empty State displays supported file formats in empty state" name="DocumentsPage Empty State displays supported file formats in empty state" time="0.124">
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content renders the documents heading and description" name="DocumentsPage Documents Page with Content renders the documents heading and description" time="4.203">
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content displays statistics cards with correct data" name="DocumentsPage Documents Page with Content displays statistics cards with correct data" time="0.842">
+      <failure>TestingLibraryElementError: Found multiple elements with the text: /Archived/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;p
+  class=&quot;MuiTypography-root MuiTypography-body2 css-1wle3ir-MuiTypography-root&quot;
+&gt;
+  Archived
+&lt;/p&gt;
+
+Ignored nodes: comments, script, style
+&lt;span
+  class=&quot;MuiChip-label MuiChip-labelSmall css-eccknh-MuiChip-label&quot;
+&gt;
+  archived
+&lt;/span&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;MuiContainer-root MuiContainer-maxWidthXl css-12chgqh-MuiContainer-root&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-1yjvs5a&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-1kw3y0a&quot;
+        &gt;
+          &lt;h4
+            class=&quot;MuiTypography-root MuiTypography-h4 css-17nmnue-MuiTypography-root&quot;
+          &gt;
+            Documents
+          &lt;/h4&gt;
+          &lt;div
+            class=&quot;MuiStack-root css-pl8gqh-MuiStack-root&quot;
+          &gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1ja5qwg-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              &lt;span
+                class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1sh91j5-MuiButton-startIcon&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                  data-testid=&quot;CloudUploadIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96M14 13v4h-4v-4H7l5-5 5 5z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/span&gt;
+              Upload
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1fkrse0-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              &lt;span
+                class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1sh91j5-MuiButton-startIcon&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                  data-testid=&quot;AddIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/span&gt;
+              Create Document
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p
+          class=&quot;MuiTypography-root MuiTypography-body1 css-k16oju-MuiTypography-root&quot;
+        &gt;
+          Manage your resumes, cover letters, and other career documents
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div
+        class=&quot;MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1qouitu-MuiGrid-root&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs12 undefined undefined css-17fpwt7-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+            style=&quot;--Paper-shadow: none;&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiCardContent-root css-1lt5qva-MuiCardContent-root&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiBox-root css-kmnzss&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1k3hahg-MuiSvgIcon-root&quot;
+                  data-testid=&quot;DescriptionIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm2 16H8v-2h8zm0-4H8v-2h8zm-3-5V3.5L18.5 9z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;h6
+                  class=&quot;MuiTypography-root MuiTypography-h6 css-fe0fwj-MuiTypography-root&quot;
+                &gt;
+                  4
+                &lt;/h6&gt;
+              &lt;/div&gt;
+              &lt;p
+                class=&quot;MuiTypography-root MuiTypography-body2 css-1wle3ir-MuiTypography-root&quot;
+              &gt;
+                Total Documents
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs12 undefined undefined css-17fpwt7-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+            style=&quot;--Paper-shadow: none;&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiCardContent-root css-1lt5qva-MuiCardContent-root&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiBox-root css-kmnzss&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIc...
+    at Object.getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+    at getMultipleElementsFoundError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:55:13)
+    at query (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/DocumentsPage.test.tsx:75:21)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content displays all document tabs" name="DocumentsPage Documents Page with Content displays all document tabs" time="2.605">
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content displays document cards with correct information" name="DocumentsPage Documents Page with Content displays document cards with correct information" time="0.613">
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content displays search bar and filter buttons" name="DocumentsPage Documents Page with Content displays search bar and filter buttons" time="1.894">
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content displays upload and create document buttons" name="DocumentsPage Documents Page with Content displays upload and create document buttons" time="2.395">
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content displays document status chips" name="DocumentsPage Documents Page with Content displays document status chips" time="0.464">
+    </testcase>
+    <testcase classname="DocumentsPage Documents Page with Content displays ATS scores for documents that have them" name="DocumentsPage Documents Page with Content displays ATS scores for documents that have them" time="0.519">
+    </testcase>
+    <testcase classname="DocumentsPage Document Interactions filters documents based on search query" name="DocumentsPage Document Interactions filters documents based on search query" time="9.607">
+    </testcase>
+    <testcase classname="DocumentsPage Document Interactions switches tabs when clicking on different document type tabs" name="DocumentsPage Document Interactions switches tabs when clicking on different document type tabs" time="0.356">
+    </testcase>
+    <testcase classname="DocumentsPage Document Interactions allows selecting multiple documents for bulk actions" name="DocumentsPage Document Interactions allows selecting multiple documents for bulk actions" time="0.619">
+    </testcase>
+    <testcase classname="DocumentsPage Document Interactions opens upload dialog when upload button is clicked" name="DocumentsPage Document Interactions opens upload dialog when upload button is clicked" time="0.532">
+    </testcase>
+    <testcase classname="DocumentsPage Document Interactions calls onCreateDocument when create document button is clicked" name="DocumentsPage Document Interactions calls onCreateDocument when create document button is clicked" time="0.279">
+    </testcase>
+    <testcase classname="DocumentsPage Document Interactions displays floating action button for creating documents" name="DocumentsPage Document Interactions displays floating action button for creating documents" time="0.362">
+      <failure>TestingLibraryElementError: Found multiple elements with the role &quot;button&quot; and name `/add/i`
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;button
+  aria-label=&quot;Add to favorites&quot;
+  class=&quot;MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-155wbr6-MuiButtonBase-root-MuiIconButton-root&quot;
+  data-mui-internal-clone-element=&quot;true&quot;
+  tabindex=&quot;0&quot;
+  type=&quot;button&quot;
+&gt;
+  &lt;svg
+    aria-hidden=&quot;true&quot;
+    class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+    data-testid=&quot;StarBorderIcon&quot;
+    focusable=&quot;false&quot;
+    viewBox=&quot;0 0 24 24&quot;
+  &gt;
+    &lt;path
+      d=&quot;m22 9.24-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28z&quot;
+    /&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;
+
+Ignored nodes: comments, script, style
+&lt;button
+  aria-label=&quot;Add to favorites&quot;
+  class=&quot;MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall css-155wbr6-MuiButtonBase-root-MuiIconButton-root&quot;
+  data-mui-internal-clone-element=&quot;true&quot;
+  tabindex=&quot;0&quot;
+  type=&quot;button&quot;
+&gt;
+  &lt;svg
+    aria-hidden=&quot;true&quot;
+    class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+    data-testid=&quot;StarBorderIcon&quot;
+    focusable=&quot;false&quot;
+    viewBox=&quot;0 0 24 24&quot;
+  &gt;
+    &lt;path
+      d=&quot;m22 9.24-7.19-.62L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.63-7.03zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28z&quot;
+    /&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;
+
+Ignored nodes: comments, script, style
+&lt;button
+  aria-label=&quot;add&quot;
+  class=&quot;MuiButtonBase-root MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-primary MuiFab-root MuiFab-circular MuiFab-sizeLarge MuiFab-primary css-1ec5dex-MuiButtonBase-root-MuiFab-root&quot;
+  tabindex=&quot;0&quot;
+  type=&quot;button&quot;
+&gt;
+  &lt;svg
+    aria-hidden=&quot;true&quot;
+    class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+    data-testid=&quot;AddIcon&quot;
+    focusable=&quot;false&quot;
+    viewBox=&quot;0 0 24 24&quot;
+  &gt;
+    &lt;path
+      d=&quot;M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z&quot;
+    /&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body
+  style=&quot;&quot;
+&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;MuiContainer-root MuiContainer-maxWidthXl css-12chgqh-MuiContainer-root&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-1yjvs5a&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-1kw3y0a&quot;
+        &gt;
+          &lt;h4
+            class=&quot;MuiTypography-root MuiTypography-h4 css-17nmnue-MuiTypography-root&quot;
+          &gt;
+            Documents
+          &lt;/h4&gt;
+          &lt;div
+            class=&quot;MuiStack-root css-pl8gqh-MuiStack-root&quot;
+          &gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1ja5qwg-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              &lt;span
+                class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1sh91j5-MuiButton-startIcon&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                  data-testid=&quot;CloudUploadIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96M14 13v4h-4v-4H7l5-5 5 5z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/span&gt;
+              Upload
+            &lt;/button&gt;
+            &lt;button
+              class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1fkrse0-MuiButtonBase-root-MuiButton-root&quot;
+              tabindex=&quot;0&quot;
+              type=&quot;button&quot;
+            &gt;
+              &lt;span
+                class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1sh91j5-MuiButton-startIcon&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                  data-testid=&quot;AddIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+              &lt;/span&gt;
+              Create Document
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;p
+          class=&quot;MuiTypography-root MuiTypography-body1 css-k16oju-MuiTypography-root&quot;
+        &gt;
+          Manage your resumes, cover letters, and other career documents
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div
+        class=&quot;MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1qouitu-MuiGrid-root&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs12 undefined undefined css-17fpwt7-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+            style=&quot;--Paper-shadow: none;&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiCardContent-root css-1lt5qva-MuiCardContent-root&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiBox-root css-kmnzss&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1k3hahg-MuiSvgIcon-root&quot;
+                  data-testid=&quot;DescriptionIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8zm2 16H8v-2h8zm0-4H8v-2h8zm-3-5V3.5L18.5 9z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;h6
+                  class=&quot;MuiTypography-root MuiTypography-h6 css-fe0fwj-MuiTypography-root&quot;
+                &gt;
+                  4
+                &lt;/h6&gt;
+              &lt;/div&gt;
+              &lt;p
+                class=&quot;MuiTypography-root MuiTypography-body2 css-1wle3ir-MuiTypography-root&quot;
+              &gt;
+                Total Documents
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs12 undefined undefined css-17fpwt7-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+            style=&quot;--Paper-shadow: none;&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiCardContent-root css-1lt5qva-MuiCardContent-root&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiBox-root css-kmnzss&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+      ...
+    at Object.getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+    at getMultipleElementsFoundError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:55:13)
+    at query (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/DocumentsPage.test.tsx:204:26)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="DocumentsPage Document Interactions displays document size and last modified information" name="DocumentsPage Document Interactions displays document size and last modified information" time="0.071">
+    </testcase>
+    <testcase classname="DocumentsPage Upload Dialog displays upload dialog with drag and drop area" name="DocumentsPage Upload Dialog displays upload dialog with drag and drop area" time="1.33">
+    </testcase>
+    <testcase classname="DocumentsPage Upload Dialog displays supported formats alert in upload dialog" name="DocumentsPage Upload Dialog displays supported formats alert in upload dialog" time="0.304">
+    </testcase>
+  </testsuite>
+  <testsuite name="SettingsPage" errors="0" failures="24" skipped="0" timestamp="2025-10-29T16:58:05" time="404.921" tests="24">
+    <testcase classname="SettingsPage renders the settings heading and description" name="SettingsPage renders the settings heading and description" time="8.679">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:18:11)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage displays all settings tabs" name="SettingsPage displays all settings tabs" time="0.878">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:27:11)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Profile Tab displays profile information fields" name="SettingsPage Profile Tab displays profile information fields" time="0.125">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:39:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Profile Tab shows default profile values" name="SettingsPage Profile Tab shows default profile values" time="0.495">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:51:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Profile Tab displays profile photo section with upload button" name="SettingsPage Profile Tab displays profile photo section with upload button" time="0.459">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:59:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Preferences Tab switches to preferences tab when clicked" name="SettingsPage Preferences Tab switches to preferences tab when clicked" time="0.435">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:69:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Preferences Tab displays theme, language, and timezone selectors" name="SettingsPage Preferences Tab displays theme, language, and timezone selectors" time="0.457">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:83:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Preferences Tab displays interface options switches" name="SettingsPage Preferences Tab displays interface options switches" time="0.432">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:98:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Notifications Tab switches to notifications tab when clicked" name="SettingsPage Notifications Tab switches to notifications tab when clicked" time="0.248">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:114:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Notifications Tab displays all notification options" name="SettingsPage Notifications Tab displays all notification options" time="0.692">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:128:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Privacy &amp; Security Tab switches to privacy &amp; security tab when clicked" name="SettingsPage Privacy &amp; Security Tab switches to privacy &amp; security tab when clicked" time="0.364">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:148:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Privacy &amp; Security Tab displays account security options" name="SettingsPage Privacy &amp; Security Tab displays account security options" time="0.233">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:160:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Privacy &amp; Security Tab displays privacy settings with profile visibility options" name="SettingsPage Privacy &amp; Security Tab displays privacy settings with profile visibility options" time="0.306">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:174:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Data &amp; Storage Tab switches to data &amp; storage tab when clicked" name="SettingsPage Data &amp; Storage Tab switches to data &amp; storage tab when clicked" time="0.324">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:191:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Data &amp; Storage Tab displays storage usage information" name="SettingsPage Data &amp; Storage Tab displays storage usage information" time="0.404">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:203:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Data &amp; Storage Tab displays data management buttons" name="SettingsPage Data &amp; Storage Tab displays data management buttons" time="0.719">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:216:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Data &amp; Storage Tab displays danger zone with delete account option" name="SettingsPage Data &amp; Storage Tab displays danger zone with delete account option" time="1.036">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:231:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Help &amp; Support Tab switches to help &amp; support tab when clicked" name="SettingsPage Help &amp; Support Tab switches to help &amp; support tab when clicked" time="0.306">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:247:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Help &amp; Support Tab displays help options" name="SettingsPage Help &amp; Support Tab displays help options" time="0.328">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:259:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage Help &amp; Support Tab displays about information" name="SettingsPage Help &amp; Support Tab displays about information" time="0.182">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:274:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage User Interactions shows unsaved changes alert when settings are modified" name="SettingsPage User Interactions shows unsaved changes alert when settings are modified" time="0.084">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:291:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage User Interactions calls onSave when save changes button is clicked" name="SettingsPage User Interactions calls onSave when save changes button is clicked" time="0.248">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:304:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage User Interactions opens export data dialog when export button is clicked" name="SettingsPage User Interactions opens export data dialog when export button is clicked" time="0.187">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:332:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="SettingsPage User Interactions opens delete account dialog when delete account button is clicked" name="SettingsPage User Interactions opens delete account dialog when delete account button is clicked" time="0.217">
+      <failure>ReferenceError: LockIcon is not defined
+    at SettingsPage (/Applications/careercopilot/careercopilot/frontend/src/pages/SettingsPage.tsx:458:28)
+    at renderWithHooks (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at actImplementation (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:25)
+    at renderRoot (/Applications/careercopilot/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/SettingsPage.test.tsx:349:13)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="UploadResume" errors="0" failures="0" skipped="0" timestamp="2025-10-29T16:58:05" time="436.925" tests="5">
+    <testcase classname="UploadResume should render the component" name="UploadResume should render the component" time="4.633">
+    </testcase>
+    <testcase classname="UploadResume should render the back and continue buttons" name="UploadResume should render the back and continue buttons" time="0.903">
+    </testcase>
+    <testcase classname="UploadResume should call onNext when the continue button is clicked" name="UploadResume should call onNext when the continue button is clicked" time="0.432">
+    </testcase>
+    <testcase classname="UploadResume should call onBack when the back button is clicked" name="UploadResume should call onBack when the back button is clicked" time="0.076">
+    </testcase>
+    <testcase classname="UploadResume should render the three upload areas" name="UploadResume should render the three upload areas" time="0.104">
+    </testcase>
+  </testsuite>
+  <testsuite name="AnalysisPage" errors="0" failures="2" skipped="0" timestamp="2025-10-29T16:58:05" time="504.492" tests="23">
+    <testcase classname="AnalysisPage Empty State renders empty state when isEmpty is true" name="AnalysisPage Empty State renders empty state when isEmpty is true" time="1.448">
+    </testcase>
+    <testcase classname="AnalysisPage Empty State calls onRunAnalysis when run first analysis button is clicked in empty state" name="AnalysisPage Empty State calls onRunAnalysis when run first analysis button is clicked in empty state" time="9.67">
+    </testcase>
+    <testcase classname="AnalysisPage Empty State displays analysis features in empty state" name="AnalysisPage Empty State displays analysis features in empty state" time="0.097">
+      <failure>TestingLibraryElementError: Found multiple elements with the text: /Recommendations/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;p
+  class=&quot;MuiTypography-root MuiTypography-body1 css-o5kk20-MuiTypography-root&quot;
+&gt;
+  Upload documents and run ATS analysis to get detailed insights and recommendations for your job applications.
+&lt;/p&gt;
+
+Ignored nodes: comments, script, style
+&lt;span
+  class=&quot;MuiChip-label MuiChip-labelSmall css-eccknh-MuiChip-label&quot;
+&gt;
+  Recommendations
+&lt;/span&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;MuiContainer-root MuiContainer-maxWidthLg css-xsov46-MuiContainer-root&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-txuz9b&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 css-11j1shd-MuiPaper-root&quot;
+          style=&quot;--Paper-shadow: none;&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiBox-root css-1yjvs5a&quot;
+          &gt;
+            &lt;svg
+              aria-hidden=&quot;true&quot;
+              class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1wexnva-MuiSvgIcon-root&quot;
+              data-testid=&quot;AnalyticsIcon&quot;
+              focusable=&quot;false&quot;
+              viewBox=&quot;0 0 24 24&quot;
+            &gt;
+              &lt;path
+                d=&quot;M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M9 17H7v-5h2zm4 0h-2v-3h2zm0-5h-2v-2h2zm4 5h-2V7h2z&quot;
+              /&gt;
+            &lt;/svg&gt;
+            &lt;h4
+              class=&quot;MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom css-1y9jsk6-MuiTypography-root&quot;
+            &gt;
+              No Analysis Available
+            &lt;/h4&gt;
+            &lt;p
+              class=&quot;MuiTypography-root MuiTypography-body1 css-o5kk20-MuiTypography-root&quot;
+            &gt;
+              Upload documents and run ATS analysis to get detailed insights and recommendations for your job applications.
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;button
+            class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeLarge MuiButton-containedSizeLarge MuiButton-colorPrimary css-1qpnyeq-MuiButtonBase-root-MuiButton-root&quot;
+            tabindex=&quot;0&quot;
+            type=&quot;button&quot;
+          &gt;
+            &lt;span
+              class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeLarge css-hev6se-MuiButton-startIcon&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                data-testid=&quot;AssessmentIcon&quot;
+                focusable=&quot;false&quot;
+                viewBox=&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M9 17H7v-7h2zm4 0h-2V7h2zm4 0h-2v-4h2z&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            Run First Analysis
+          &lt;/button&gt;
+          &lt;div
+            class=&quot;MuiBox-root css-xv81a9&quot;
+          &gt;
+            &lt;p
+              class=&quot;MuiTypography-root MuiTypography-body2 MuiTypography-gutterBottom css-1bub9p-MuiTypography-root&quot;
+            &gt;
+              What gets analyzed:
+            &lt;/p&gt;
+            &lt;div
+              class=&quot;MuiStack-root css-miphnx-MuiStack-root&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-filledDefault css-1lflu6f-MuiChip-root&quot;
+              &gt;
+                &lt;span
+                  class=&quot;MuiChip-label MuiChip-labelSmall css-eccknh-MuiChip-label&quot;
+                &gt;
+                  ATS Score
+                &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div
+                class=&quot;MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-filledDefault css-1lflu6f-MuiChip-root&quot;
+              &gt;
+                &lt;span
+                  class=&quot;MuiChip-label MuiChip-labelSmall css-eccknh-MuiChip-label&quot;
+                &gt;
+                  Keyword Match
+                &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div
+                class=&quot;MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-filledDefault css-1lflu6f-MuiChip-root&quot;
+              &gt;
+                &lt;span
+                  class=&quot;MuiChip-label MuiChip-labelSmall css-eccknh-MuiChip-label&quot;
+                &gt;
+                  Skills Gap
+                &lt;/span&gt;
+              &lt;/div&gt;
+              &lt;div
+                class=&quot;MuiChip-root MuiChip-filled MuiChip-sizeSmall MuiChip-colorDefault MuiChip-filledDefault css-1lflu6f-MuiChip-root&quot;
+              &gt;
+                &lt;span
+                  class=&quot;MuiChip-label MuiChip-labelSmall css-eccknh-MuiChip-label&quot;
+                &gt;
+                  Recommendations
+                &lt;/span&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+    at getMultipleElementsFoundError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:55:13)
+    at query (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/AnalysisPage.test.tsx:40:21)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Page with Content renders the document analysis heading and description" name="AnalysisPage Analysis Page with Content renders the document analysis heading and description" time="0.943">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Page with Content displays summary statistics cards" name="AnalysisPage Analysis Page with Content displays summary statistics cards" time="0.293">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Page with Content displays run new analysis button" name="AnalysisPage Analysis Page with Content displays run new analysis button" time="0.153">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Page with Content displays all analysis tabs" name="AnalysisPage Analysis Page with Content displays all analysis tabs" time="0.267">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Page with Content displays analysis reports in table format" name="AnalysisPage Analysis Page with Content displays analysis reports in table format" time="0.065">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Page with Content displays document type, ATS score, and status columns" name="AnalysisPage Analysis Page with Content displays document type, ATS score, and status columns" time="0.3">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Page with Content displays analysis statistics with correct values" name="AnalysisPage Analysis Page with Content displays analysis statistics with correct values" time="0.089">
+      <failure>TestingLibraryElementError: Found multiple elements with the text: /85%/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+&lt;h6
+  class=&quot;MuiTypography-root MuiTypography-h6 css-fe0fwj-MuiTypography-root&quot;
+&gt;
+  85%
+&lt;/h6&gt;
+
+Ignored nodes: comments, script, style
+&lt;p
+  class=&quot;MuiTypography-root MuiTypography-body2 css-10six06-MuiTypography-root&quot;
+&gt;
+  85
+  %
+&lt;/p&gt;
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      class=&quot;MuiContainer-root MuiContainer-maxWidthXl css-12chgqh-MuiContainer-root&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-1yjvs5a&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-1kw3y0a&quot;
+        &gt;
+          &lt;h4
+            class=&quot;MuiTypography-root MuiTypography-h4 css-17nmnue-MuiTypography-root&quot;
+          &gt;
+            Document Analysis
+          &lt;/h4&gt;
+          &lt;button
+            class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1fkrse0-MuiButtonBase-root-MuiButton-root&quot;
+            tabindex=&quot;0&quot;
+            type=&quot;button&quot;
+          &gt;
+            &lt;span
+              class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1sh91j5-MuiButton-startIcon&quot;
+            &gt;
+              &lt;svg
+                aria-hidden=&quot;true&quot;
+                class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                data-testid=&quot;AssessmentIcon&quot;
+                focusable=&quot;false&quot;
+                viewBox=&quot;0 0 24 24&quot;
+              &gt;
+                &lt;path
+                  d=&quot;M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M9 17H7v-7h2zm4 0h-2V7h2zm4 0h-2v-4h2z&quot;
+                /&gt;
+              &lt;/svg&gt;
+            &lt;/span&gt;
+            Run New Analysis
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;p
+          class=&quot;MuiTypography-root MuiTypography-body1 css-k16oju-MuiTypography-root&quot;
+        &gt;
+          Comprehensive ATS scoring and optimization recommendations for your documents
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div
+        class=&quot;MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1qouitu-MuiGrid-root&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs12 undefined undefined css-17fpwt7-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+            style=&quot;--Paper-shadow: none;&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiCardContent-root css-1lt5qva-MuiCardContent-root&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiBox-root css-1coeexk&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeMedium css-1k3hahg-MuiSvgIcon-root&quot;
+                  data-testid=&quot;SpeedIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;m20.38 8.57-1.23 1.85a8 8 0 0 1-.22 7.58H5.07A8 8 0 0 1 15.58 6.85l1.85-1.23A10 10 0 0 0 3.35 19a2 2 0 0 0 1.72 1h13.85a2 2 0 0 0 1.74-1 10 10 0 0 0-.27-10.44zm-9.79 6.84a2 2 0 0 0 2.83 0l5.66-8.49-8.49 5.66a2 2 0 0 0 0 2.83&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;h6
+                  class=&quot;MuiTypography-root MuiTypography-h6 css-fe0fwj-MuiTypography-root&quot;
+                &gt;
+                  85%
+                &lt;/h6&gt;
+              &lt;/div&gt;
+              &lt;p
+                class=&quot;MuiTypography-root MuiTypography-body2 css-1wle3ir-MuiTypography-root&quot;
+              &gt;
+                Average ATS Score
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs12 undefined undefined css-17fpwt7-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+            style=&quot;--Paper-shadow: none;&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiCardContent-root css-1lt5qva-MuiCardContent-root&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiBox-root css-1coeexk&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-colorSuccess MuiSvgIcon-fontSizeMedium css-1ml276o-MuiSvgIcon-root&quot;
+                  data-testid=&quot;TrendingUpIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;m16 6 2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;h6
+                  class=&quot;MuiTypography-root MuiTypography-h6 css-fe0fwj-MuiTypography-root&quot;
+                &gt;
+                  +12%
+                &lt;/h6&gt;
+              &lt;/div&gt;
+              &lt;p
+                class=&quot;MuiTypography-root MuiTypography-body2 css-1wle3ir-MuiTypography-root&quot;
+              &gt;
+                Score Improvement
+              &lt;/p&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs12 undefined undefined css-17fpwt7-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+            style=&quot;--Paper-shadow: none;...
+    at Object.getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:20:35)
+    at getElementError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:23:10)
+    at getMultipleElementsFoundError (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:55:13)
+    at query (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/AnalysisPage.test.tsx:99:21)
+    at Promise.then.completed (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:298:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/utils.js:231:10)
+    at _callCircusTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:316:40)
+    at _runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:252:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:126:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:121:9)
+    at run (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/run.js:71:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapterInit.js:122:21)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:79:19)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Tabs switches to performance trends tab when clicked" name="AnalysisPage Analysis Tabs switches to performance trends tab when clicked" time="0.37">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Tabs displays charts in performance trends tab" name="AnalysisPage Analysis Tabs displays charts in performance trends tab" time="0.141">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Tabs switches to insights tab when clicked" name="AnalysisPage Analysis Tabs switches to insights tab when clicked" time="0.238">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Tabs displays insights with recommendations" name="AnalysisPage Analysis Tabs displays insights with recommendations" time="0.235">
+    </testcase>
+    <testcase classname="AnalysisPage Analysis Tabs displays quick actions in insights tab" name="AnalysisPage Analysis Tabs displays quick actions in insights tab" time="0.658">
+    </testcase>
+    <testcase classname="AnalysisPage User Interactions calls onRunAnalysis when run new analysis button is clicked" name="AnalysisPage User Interactions calls onRunAnalysis when run new analysis button is clicked" time="2.198">
+    </testcase>
+    <testcase classname="AnalysisPage User Interactions shows loading state when analysis is running" name="AnalysisPage User Interactions shows loading state when analysis is running" time="2.586">
+    </testcase>
+    <testcase classname="AnalysisPage User Interactions displays document insights with keywords and skills count" name="AnalysisPage User Interactions displays document insights with keywords and skills count" time="0.06">
+    </testcase>
+    <testcase classname="AnalysisPage User Interactions displays ATS scores with progress bars" name="AnalysisPage User Interactions displays ATS scores with progress bars" time="0.038">
+    </testcase>
+    <testcase classname="AnalysisPage User Interactions displays analysis status indicators" name="AnalysisPage User Interactions displays analysis status indicators" time="0.051">
+    </testcase>
+    <testcase classname="AnalysisPage User Interactions displays analysis dates for each report" name="AnalysisPage User Interactions displays analysis dates for each report" time="0.045">
+    </testcase>
+    <testcase classname="AnalysisPage Report Actions displays action menu when more options is clicked" name="AnalysisPage Report Actions displays action menu when more options is clicked" time="0.431">
+    </testcase>
+    <testcase classname="AnalysisPage Report Actions calls onViewReport when view report is selected" name="AnalysisPage Report Actions calls onViewReport when view report is selected" time="0.564">
+    </testcase>
+  </testsuite>
+  <testsuite name="OpportunitiesPage" errors="0" failures="2" skipped="0" timestamp="2025-10-29T16:58:05" time="516.136" tests="18">
+    <testcase classname="OpportunitiesPage Empty State renders empty state when isEmpty is true" name="OpportunitiesPage Empty State renders empty state when isEmpty is true" time="6.092">
+    </testcase>
+    <testcase classname="OpportunitiesPage Empty State calls onCreateAlert when create alert button is clicked in empty state" name="OpportunitiesPage Empty State calls onCreateAlert when create alert button is clicked in empty state" time="68.849">
+      <failure>Error: thrown: &quot;Exceeded timeout of 15000 ms for a test.
+Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
+    at /Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/OpportunitiesPage.test.tsx:35:5
+    at _dispatchDescribe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:55:5)
+    at /Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/OpportunitiesPage.test.tsx:17:3
+    at _dispatchDescribe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:91:26)
+    at describe (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/index.js:55:5)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/OpportunitiesPage.test.tsx:6:1)
+    at Runtime._execModule (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runtime/build/index.js:1439:24)
+    at Runtime._loadModule (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runtime/build/index.js:1022:12)
+    at Runtime.requireModule (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runtime/build/index.js:882:12)
+    at jestAdapter (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-circus/build/legacy-code-todo-rewrite/jestAdapter.js:77:13)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at runTestInternal (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:367:16)
+    at runTest (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/runTest.js:444:34)
+    at Object.worker (/Applications/careercopilot/careercopilot/frontend/node_modules/jest-runner/build/testWorker.js:106:12)</failure>
+    </testcase>
+    <testcase classname="OpportunitiesPage Empty State displays feature chips in empty state" name="OpportunitiesPage Empty State displays feature chips in empty state" time="0.344">
+    </testcase>
+    <testcase classname="OpportunitiesPage Opportunities Page with Content renders the job opportunities heading and description" name="OpportunitiesPage Opportunities Page with Content renders the job opportunities heading and description" time="2.421">
+    </testcase>
+    <testcase classname="OpportunitiesPage Opportunities Page with Content displays statistics cards with correct data" name="OpportunitiesPage Opportunities Page with Content displays statistics cards with correct data" time="0.268">
+    </testcase>
+    <testcase classname="OpportunitiesPage Opportunities Page with Content displays all job tabs" name="OpportunitiesPage Opportunities Page with Content displays all job tabs" time="0.526">
+    </testcase>
+    <testcase classname="OpportunitiesPage Opportunities Page with Content displays search bar and filter buttons" name="OpportunitiesPage Opportunities Page with Content displays search bar and filter buttons" time="0.881">
+    </testcase>
+    <testcase classname="OpportunitiesPage Opportunities Page with Content displays match scores for jobs" name="OpportunitiesPage Opportunities Page with Content displays match scores for jobs" time="0.154">
+    </testcase>
+    <testcase classname="OpportunitiesPage Opportunities Page with Content displays job cards with basic information" name="OpportunitiesPage Opportunities Page with Content displays job cards with basic information" time="0.099">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Interactions filters jobs based on search query" name="OpportunitiesPage Job Interactions filters jobs based on search query" time="0.836">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Interactions switches tabs when clicking on different job status tabs" name="OpportunitiesPage Job Interactions switches tabs when clicking on different job status tabs" time="0.398">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Interactions opens job alert dialog when job alerts button is clicked" name="OpportunitiesPage Job Interactions opens job alert dialog when job alerts button is clicked" time="1.445">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Interactions calls onApply when apply now button is clicked" name="OpportunitiesPage Job Interactions calls onApply when apply now button is clicked" time="0.495">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Interactions allows selecting multiple jobs for bulk actions" name="OpportunitiesPage Job Interactions allows selecting multiple jobs for bulk actions" time="0.783">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Interactions opens job details dialog when view details is clicked" name="OpportunitiesPage Job Interactions opens job details dialog when view details is clicked" time="1.05">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Interactions displays floating action button for creating alerts" name="OpportunitiesPage Job Interactions displays floating action button for creating alerts" time="0.454">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Alert Creation displays job alert creation form with all fields when create alert button is clicked" name="OpportunitiesPage Job Alert Creation displays job alert creation form with all fields when create alert button is clicked" time="0.832">
+    </testcase>
+    <testcase classname="OpportunitiesPage Job Alert Creation allows creating a job alert" name="OpportunitiesPage Job Alert Creation allows creating a job alert" time="2.272">
+      <failure>Error: pretty-format: Unknown option &quot;maxWidth&quot;.
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta
+      content=&quot;&quot;
+      name=&quot;emotion-insertion-point&quot;
+    /&gt;
+  &lt;/head&gt;
+  &lt;body
+    style=&quot;padding-right: 1024px; overflow: hidden;&quot;
+  &gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiContainer-root MuiContainer-maxWidthXl css-12chgqh-MuiContainer-root&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-1yjvs5a&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiBox-root css-1kw3y0a&quot;
+          &gt;
+            &lt;h4
+              class=&quot;MuiTypography-root MuiTypography-h4 css-17nmnue-MuiTypography-root&quot;
+            &gt;
+              Job Opportunities
+            &lt;/h4&gt;
+            &lt;div
+              class=&quot;MuiStack-root css-pl8gqh-MuiStack-root&quot;
+            &gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-colorPrimary css-1blvszr-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                &lt;span
+                  class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1sh91j5-MuiButton-startIcon&quot;
+                &gt;
+                  &lt;svg
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                    data-testid=&quot;NotificationsActiveIcon&quot;
+                    focusable=&quot;false&quot;
+                    viewBox=&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      d=&quot;M7.58 4.08 6.15 2.65C3.75 4.48 2.17 7.3 2.03 10.5h2c.15-2.65 1.51-4.97 3.55-6.42m12.39 6.42h2c-.15-3.2-1.73-6.02-4.12-7.85l-1.42 1.43c2.02 1.45 3.39 3.77 3.54 6.42M18 11c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-6 11c.14 0 .27-.01.4-.04.65-.14 1.18-.58 1.44-1.18q.15-.36.15-.78h-4c.01 1.1.9 2 2.01 2&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/span&gt;
+                Job Alerts
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-74d805-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                &lt;span
+                  class=&quot;MuiButton-icon MuiButton-startIcon MuiButton-iconSizeMedium css-1sh91j5-MuiButton-startIcon&quot;
+                &gt;
+                  &lt;svg
+                    aria-hidden=&quot;true&quot;
+                    class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-1umw9bq-MuiSvgIcon-root&quot;
+                    data-testid=&quot;AnalyticsIcon&quot;
+                    focusable=&quot;false&quot;
+                    viewBox=&quot;0 0 24 24&quot;
+                  &gt;
+                    &lt;path
+                      d=&quot;M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2M9 17H7v-5h2zm4 0h-2v-3h2zm0-5h-2v-2h2zm4 5h-2V7h2z&quot;
+                    /&gt;
+                  &lt;/svg&gt;
+                &lt;/span&gt;
+                Market Insights
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;p
+            class=&quot;MuiTypography-root MuiTypography-body1 css-k16oju-MuiTypography-root&quot;
+          &gt;
+            Discover and track job opportunities tailored to your profile
+          &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div
+          class=&quot;MuiGrid-root MuiGrid-container MuiGrid-direction-xs-row MuiGrid-spacing-xs-3 css-1qouitu-MuiGrid-root&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs6 undefined css-17fpwt7-MuiGrid-root&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+              style=&quot;--Paper-shadow: none;&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiCardContent-root css-8rand2-MuiCardContent-root&quot;
+              &gt;
+                &lt;h4
+                  class=&quot;MuiTypography-root MuiTypography-h4 css-1azy44d-MuiTypography-root&quot;
+                &gt;
+                  4
+                &lt;/h4&gt;
+                &lt;p
+                  class=&quot;MuiTypography-root MuiTypography-body2 css-1wle3ir-MuiTypography-root&quot;
+                &gt;
+                  Total Opportunities
+                &lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div
+            class=&quot;MuiGrid-root MuiGrid-direction-xs-row MuiGrid-xs6 undefined css-17fpwt7-MuiGrid-root&quot;
+          &gt;
+            &lt;div
+              class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiCard-root css-ayj358-MuiPaper-root-MuiCard-root&quot;
+              style=&quot;--Paper-shadow: none;&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiCardContent-root css-8rand2-MuiCardContent-root&quot;
+              &gt;
+                &lt;h4
+                  class=&quot;MuiTypography-root MuiTypography-h4 css-2nj7ao-MuiTypography-root&quot;
+                &gt;
+                  2
+                &lt;/h4&gt;
+                &lt;p
+                 ...
+    at /Applications/careercopilot/careercopilot/frontend/src/pages/__tests__/OpportunitiesPage.test.tsx:271:35
+    at callback (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:124:76)
+    at checkCallback (/Applications/careercopilot/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Applications/careercopilot/node_modules/jsdom/lib/jsdom/browser/Window.js:520:19)
+    at listOnTimeout (node:internal/timers:581:17)
+    at processTimers (node:internal/timers:519:7)</failure>
+    </testcase>
+  </testsuite>
+</testsuites>
