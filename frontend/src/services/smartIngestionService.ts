@@ -50,10 +50,9 @@ export interface ExtractAndSaveResponseData {
 
 export interface AssetDocument {
   id: string;
-  name: string;
   documentType: 'resume' | 'ksc' | 'voice';
   extractedData: Record<string, any>;
-  tags: string[];
+  tags: ContextTags;
   metadata: {
     fileName: string;
     fileType: string;
@@ -62,8 +61,10 @@ export interface AssetDocument {
     fileSizeBytes?: number;
     extractedText?: string;
   };
+  schemaVersion: string;
   createdAt: string;
   updatedAt: string;
+  userId: string;
 }
 
 export interface DocumentFilters {

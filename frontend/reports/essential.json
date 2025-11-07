@@ -1,0 +1,2140 @@
+[
+  {
+    "name": "badge",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/badge.tsx",
+    "relativePath": "components/ui/badge.tsx",
+    "category": "ui",
+    "usageCount": 21,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentSharingDialog.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/CardComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/DisplayComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/KeywordTag.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/ProfileVariationCard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/TemplateCard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Analysis/ATSAnalysisDashboard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/StandardizedLoadingStates.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/CardShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/ComponentUsageGuide.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/StateDemoShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentPreview.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/ResumeBuilder.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/TemplateSelector.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerIntelligence.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/InterviewPrep.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobMatching.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "BadgeProps",
+      "Badge"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 42,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "input",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/input.tsx",
+    "relativePath": "components/ui/input.tsx",
+    "category": "ui",
+    "usageCount": 9,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentSharingDialog.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/FormComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/auth/Auth.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/Settings.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/ResumeBuilder.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobInput.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "InputProps",
+      "Input"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 30,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "card",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/card.tsx",
+    "relativePath": "components/ui/card.tsx",
+    "category": "ui",
+    "usageCount": 8,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/CardComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/ui/layout.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Analysis/ATSAnalysisDashboard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/ErrorCard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/CardShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/ComponentUsageGuide.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx"
+    ],
+    "exports": [
+      "CardProps",
+      "Card",
+      "CardContent",
+      "CardHeader",
+      "CardFooter",
+      "CardTitle",
+      "CardDescription",
+      "CardAction"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 57,
+    "complexity": "medium",
+    "dependencies": [
+      "@/lib/utils"
+    ],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "progress",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/progress.tsx",
+    "relativePath": "components/ui/progress.tsx",
+    "category": "ui",
+    "usageCount": 7,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/DisplayComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/LoadingStates.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/StandardizedLoadingStates.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerIntelligence.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobMatching.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "ProgressProps",
+      "Progress"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 23,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "textarea",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/textarea.tsx",
+    "relativePath": "components/ui/textarea.tsx",
+    "category": "ui",
+    "usageCount": 7,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/FormComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/ResumeBuilder.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/InterviewPrep.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobInput.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/dashboard/DashboardStats.tsx"
+    ],
+    "exports": [
+      "TextareaProps",
+      "Textarea"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 32,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "button",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/button.tsx",
+    "relativePath": "components/ui/button.tsx",
+    "category": "ui",
+    "usageCount": 6,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/App.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentPreviewModal.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentSharingDialog.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Analysis/ATSAnalysisDashboard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/ErrorCard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx"
+    ],
+    "exports": [
+      "ButtonProps",
+      "Button"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 56,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "label",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/label.tsx",
+    "relativePath": "components/ui/label.tsx",
+    "category": "ui",
+    "usageCount": 5,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/DisplayComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/FormComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/LayoutComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/AnimatedShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/ResumeBuilder.tsx"
+    ],
+    "exports": [
+      "LabelProps",
+      "Label"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 18,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "skeleton",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/skeleton.tsx",
+    "relativePath": "components/ui/skeleton.tsx",
+    "category": "ui",
+    "usageCount": 5,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/LayoutComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/LoadingCard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/LoadingStates.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/StandardizedLoadingStates.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx"
+    ],
+    "exports": [
+      "SkeletonProps",
+      "Skeleton"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 12,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "tooltip",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/tooltip.tsx",
+    "relativePath": "components/ui/tooltip.tsx",
+    "category": "ui",
+    "usageCount": 5,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/ComponentLibrary.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentPreview.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "TooltipProps",
+      "Tooltip",
+      "TooltipTriggerProps",
+      "TooltipTrigger",
+      "TooltipContentProps",
+      "TooltipContent",
+      "TooltipProviderProps",
+      "TooltipProvider"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 51,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "avatar",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/avatar.tsx",
+    "relativePath": "components/ui/avatar.tsx",
+    "category": "ui",
+    "usageCount": 4,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentSharingDialog.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/DisplayComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileCard.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "AvatarProps",
+      "Avatar",
+      "AvatarImageProps",
+      "AvatarImage",
+      "AvatarFallbackProps",
+      "AvatarFallback"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 44,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "dialog",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/dialog.tsx",
+    "relativePath": "components/ui/dialog.tsx",
+    "category": "ui",
+    "usageCount": 4,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentPreviewModal.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentSharingDialog.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/InteractiveComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx"
+    ],
+    "exports": [
+      "DialogProps",
+      "Dialog",
+      "DialogContentProps",
+      "DialogContent",
+      "DialogHeaderProps",
+      "DialogHeader",
+      "DialogTitleProps",
+      "DialogTitle",
+      "DialogFooterProps",
+      "DialogFooter",
+      "DialogDescriptionProps",
+      "DialogDescription",
+      "DialogCloseProps",
+      "DialogClose",
+      "DialogTriggerProps",
+      "DialogTrigger"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 135,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "tabs",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/tabs.tsx",
+    "relativePath": "components/ui/tabs.tsx",
+    "category": "ui",
+    "usageCount": 4,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobInput.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "Tabs",
+      "TabsList",
+      "TabsTrigger",
+      "TabsContent",
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 54,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ErrorCard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/ErrorCard.tsx",
+    "relativePath": "components/features/common/ErrorCard.tsx",
+    "category": "features",
+    "usageCount": 3,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/CardComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/CardShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/StateDemoShowcase.tsx"
+    ],
+    "exports": [
+      "ErrorCard",
+      "ErrorProfileCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 60,
+    "complexity": "medium",
+    "dependencies": [
+      "../../ui/button",
+      "../../ui/card"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "LoadingCard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/LoadingCard.tsx",
+    "relativePath": "components/features/common/LoadingCard.tsx",
+    "category": "features",
+    "usageCount": 3,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/CardComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/CardShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/StateDemoShowcase.tsx"
+    ],
+    "exports": [
+      "LoadingCard",
+      "LoadingProfileCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 95,
+    "complexity": "medium",
+    "dependencies": [
+      "../../ui/skeleton"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "AnimatedComponents",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/AnimatedComponents.tsx",
+    "relativePath": "components/features/demo/AnimatedComponents.tsx",
+    "category": "features",
+    "usageCount": 3,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/AnimatedShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "AnimatedModal",
+      "AnimatedDropdown",
+      "AnimatedTabs",
+      "AnimatedProgress",
+      "AnimatedNotification",
+      "AnimatedCard",
+      "AnimatedButton",
+      "ExpandableCard",
+      "StaggeredList",
+      "LoadingAnimations",
+      "AnimatedStatsCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 733,
+    "complexity": "complex",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ProfileCard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileCard.tsx",
+    "relativePath": "components/features/profile/ProfileCard.tsx",
+    "category": "features",
+    "usageCount": 3,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/profile/ProfileComparison.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/StateDemoShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/dashboard/ProfileGrid.tsx"
+    ],
+    "exports": [
+      "ProfileCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 154,
+    "complexity": "medium",
+    "dependencies": [
+      "../../ui/avatar"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "separator",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/separator.tsx",
+    "relativePath": "components/ui/separator.tsx",
+    "category": "ui",
+    "usageCount": 3,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/LayoutComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/ComponentUsageGuide.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "SeparatorProps",
+      "Separator"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 13,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "switch",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/switch.tsx",
+    "relativePath": "components/ui/switch.tsx",
+    "category": "ui",
+    "usageCount": 3,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/FormComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/Settings.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "SwitchProps",
+      "Switch"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 23,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "CareerCopilotLogo",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/CareerCopilotLogo.tsx",
+    "relativePath": "components/features/common/CareerCopilotLogo.tsx",
+    "category": "features",
+    "usageCount": 2,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/auth/Auth.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/LoadingStates.tsx"
+    ],
+    "exports": [
+      "CareerCopilotLogo"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 39,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "StandardizedLoadingStates",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/StandardizedLoadingStates.tsx",
+    "relativePath": "components/features/common/StandardizedLoadingStates.tsx",
+    "category": "features",
+    "usageCount": 2,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "LoadingVariant",
+      "SpinnerLoading",
+      "PulseLoading",
+      "DotsLoading",
+      "BarsLoading",
+      "ProgressLoading",
+      "SkeletonLoading",
+      "ShimmerLoading",
+      "AIProcessingLoading",
+      "SuccessLoading",
+      "LoadingState",
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 531,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/progress",
+      "../../ui/skeleton"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "FilterPanel",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/FilterPanel.tsx",
+    "relativePath": "components/features/opportunities/FilterPanel.tsx",
+    "category": "features",
+    "usageCount": 2,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/career/JobSearch.tsx"
+    ],
+    "exports": [
+      "FilterPanel",
+      "JobFilters"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 394,
+    "complexity": "complex",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "CreateProfileCard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/CreateProfileCard.tsx",
+    "relativePath": "components/features/profile/CreateProfileCard.tsx",
+    "category": "features",
+    "usageCount": 2,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/StateDemoShowcase.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/dashboard/ProfileGrid.tsx"
+    ],
+    "exports": [
+      "CreateProfileCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 72,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Button",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/Button/Button.tsx",
+    "relativePath": "components/ui/Button/Button.tsx",
+    "category": "ui",
+    "usageCount": 2,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/ui/Button/Button.stories.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/ui/Button/Button.test.tsx"
+    ],
+    "exports": [
+      "ButtonProps",
+      "default"
+    ],
+    "hasTests": true,
+    "hasStories": true,
+    "hasDocs": false,
+    "linesOfCode": 100,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "slider",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/slider.tsx",
+    "relativePath": "components/ui/slider.tsx",
+    "category": "ui",
+    "usageCount": 2,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/FormComponentsSection.tsx",
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx"
+    ],
+    "exports": [
+      "SliderProps",
+      "Slider"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 5,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ATSScoreCircle",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Analysis/ATSScoreCircle.tsx",
+    "relativePath": "components/features/Analysis/ATSScoreCircle.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/DocumentPreviewModal.tsx"
+    ],
+    "exports": [
+      "ATSScoreCircle"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 110,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Auth",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/auth/Auth.tsx",
+    "relativePath": "components/features/auth/Auth.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/auth/Auth.test.tsx"
+    ],
+    "exports": [
+      "Auth"
+    ],
+    "hasTests": true,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 128,
+    "complexity": "medium",
+    "dependencies": [
+      "../../ui/input",
+      "../common/CareerCopilotLogo"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "DashboardHeader",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/dashboard/DashboardHeader.tsx",
+    "relativePath": "components/features/dashboard/dashboard/DashboardHeader.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/Dashboard.tsx"
+    ],
+    "exports": [
+      "DashboardHeader"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 93,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "DashboardStats",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/dashboard/DashboardStats.tsx",
+    "relativePath": "components/features/dashboard/dashboard/DashboardStats.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/Dashboard.tsx"
+    ],
+    "exports": [
+      "DashboardStats"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 243,
+    "complexity": "complex",
+    "dependencies": [
+      "../../../../api/aiServices",
+      "../../../ui/textarea"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ProfileGrid",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/dashboard/ProfileGrid.tsx",
+    "relativePath": "components/features/dashboard/dashboard/ProfileGrid.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/Dashboard.tsx"
+    ],
+    "exports": [
+      "ProfileGrid"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 161,
+    "complexity": "medium",
+    "dependencies": [
+      "../../../library/ProfileVariationCard",
+      "../../profile/CreateProfileCard",
+      "../../profile/ProfileCard"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "DocumentBrowser",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentBrowser.tsx",
+    "relativePath": "components/features/Documents/DocumentBrowser.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/documents/__stories__/DocumentBrowser.stories.tsx"
+    ],
+    "exports": [
+      "DocumentBrowser"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 137,
+    "complexity": "medium",
+    "dependencies": [
+      "./DocumentCard",
+      "./types",
+      "./types"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "DocumentCard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentCard.tsx",
+    "relativePath": "components/features/Documents/DocumentCard.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentBrowser.tsx"
+    ],
+    "exports": [
+      "DocumentCardProps",
+      "DocumentCard",
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 527,
+    "complexity": "complex",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "UploadResume",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/UploadResume.tsx",
+    "relativePath": "components/features/Documents/UploadResume.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/__tests__/UploadResume.test.tsx"
+    ],
+    "exports": [
+      "UploadResume"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 128,
+    "complexity": "medium",
+    "dependencies": [
+      "@/components/documents/DocumentUploadDropzone",
+      "@/components/documents/DocumentUploadDropzone",
+      "@/services/documentService"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "JobCard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobCard.tsx",
+    "relativePath": "components/features/opportunities/JobCard.tsx",
+    "category": "features",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/career/JobSearch.tsx"
+    ],
+    "exports": [
+      "JobCardProps",
+      "JobCard",
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 436,
+    "complexity": "complex",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "AppLayout",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/layout/AppLayout.tsx",
+    "relativePath": "components/layout/AppLayout.tsx",
+    "category": "layout",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/layout/AppLayout.stories.tsx"
+    ],
+    "exports": [
+      "AppLayout",
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": true,
+    "hasDocs": false,
+    "linesOfCode": 391,
+    "complexity": "complex",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "NavigationItem",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/layout/NavigationItem.tsx",
+    "relativePath": "components/layout/NavigationItem.tsx",
+    "category": "layout",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/layout/Navbar.tsx"
+    ],
+    "exports": [
+      "NavigationItem"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 81,
+    "complexity": "medium",
+    "dependencies": [
+      "../../config/navigation"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "PageHeader",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/layout/PageHeader.tsx",
+    "relativePath": "components/layout/PageHeader.tsx",
+    "category": "layout",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/layout/PageHeader.stories.tsx"
+    ],
+    "exports": [
+      "PageHeader",
+      "PageHeaderPresets",
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": true,
+    "hasDocs": false,
+    "linesOfCode": 425,
+    "complexity": "complex",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "alert-dialog",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/alert-dialog.tsx",
+    "relativePath": "components/ui/alert-dialog.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/InteractiveComponentsSection.tsx"
+    ],
+    "exports": [
+      "AlertDialogProps",
+      "AlertDialog",
+      "AlertDialogTriggerProps",
+      "AlertDialogTrigger",
+      "AlertDialogContentProps",
+      "AlertDialogContent",
+      "AlertDialogHeaderProps",
+      "AlertDialogHeader",
+      "AlertDialogTitleProps",
+      "AlertDialogTitle",
+      "AlertDialogDescriptionProps",
+      "AlertDialogDescription",
+      "AlertDialogFooterProps",
+      "AlertDialogFooter",
+      "AlertDialogActionProps",
+      "AlertDialogAction",
+      "AlertDialogCancelProps",
+      "AlertDialogCancel"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 118,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Alert",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/Alert.tsx",
+    "relativePath": "components/ui/Alert.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/DisplayComponentsSection.tsx"
+    ],
+    "exports": [
+      "AlertProps",
+      "Alert",
+      "AlertTitleProps",
+      "AlertTitle",
+      "AlertDescriptionProps",
+      "AlertDescription"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 56,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "checkbox",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/checkbox.tsx",
+    "relativePath": "components/ui/checkbox.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/FormComponentsSection.tsx"
+    ],
+    "exports": [
+      "CheckboxProps",
+      "Checkbox"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 14,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "EmptyState",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/EmptyState.tsx",
+    "relativePath": "components/ui/EmptyState.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/career/JobSearch.tsx"
+    ],
+    "exports": [
+      "EmptyStateProps",
+      "EmptyState"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 42,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "layout",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/layout.tsx",
+    "relativePath": "components/ui/layout.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx"
+    ],
+    "exports": [
+      "LayoutContainerProps",
+      "LayoutContainer",
+      "LayoutGridProps",
+      "LayoutGrid",
+      "LayoutGridItemProps",
+      "LayoutGridItem",
+      "LayoutStackProps",
+      "LayoutStack",
+      "LayoutFlexProps",
+      "LayoutFlex",
+      "LayoutCardProps",
+      "LayoutCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 98,
+    "complexity": "medium",
+    "dependencies": [
+      "./card",
+      "./card"
+    ],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "LoadingState",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/LoadingState.tsx",
+    "relativePath": "components/ui/LoadingState.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/career/JobSearch.tsx"
+    ],
+    "exports": [
+      "LoadingStateProps",
+      "LoadingState"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 29,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "popover",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/popover.tsx",
+    "relativePath": "components/ui/popover.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/InteractiveComponentsSection.tsx"
+    ],
+    "exports": [
+      "PopoverProps",
+      "Popover",
+      "PopoverTriggerProps",
+      "PopoverTrigger",
+      "PopoverContentProps",
+      "PopoverContent"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 49,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "radio-group",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/radio-group.tsx",
+    "relativePath": "components/ui/radio-group.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/library/FormComponentsSection.tsx"
+    ],
+    "exports": [
+      "RadioGroupProps",
+      "RadioGroup",
+      "RadioGroupItemProps",
+      "RadioGroupItem"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 32,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "sidebar",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/sidebar.tsx",
+    "relativePath": "components/ui/sidebar.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/App.tsx"
+    ],
+    "exports": [
+      "SidebarProviderProps",
+      "SidebarProvider",
+      "SidebarProps",
+      "Sidebar",
+      "SidebarHeaderProps",
+      "SidebarHeader",
+      "SidebarContentProps",
+      "SidebarContent",
+      "SidebarFooterProps",
+      "SidebarFooter",
+      "SidebarMenuProps",
+      "SidebarMenu",
+      "SidebarMenuItemProps",
+      "SidebarMenuItem",
+      "SidebarMenuButtonProps",
+      "SidebarMenuButton",
+      "SidebarTriggerProps",
+      "SidebarTrigger",
+      "SidebarInsetProps",
+      "SidebarInset"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 224,
+    "complexity": "complex",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "StatCard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/StatCard.tsx",
+    "relativePath": "components/ui/StatCard.tsx",
+    "category": "ui",
+    "usageCount": 1,
+    "importedBy": [
+      "/Applications/careercopilot/careercopilot/frontend/src/components/main/JobSearchStatus.tsx"
+    ],
+    "exports": [
+      "StatCardProps",
+      "StatCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 72,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ATSAnalysisDashboard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Analysis/ATSAnalysisDashboard.tsx",
+    "relativePath": "components/features/Analysis/ATSAnalysisDashboard.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "ATSAnalysisDashboard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 816,
+    "complexity": "complex",
+    "dependencies": [
+      "../../library/ATSScoreCircle",
+      "../../ui/badge",
+      "../../ui/button",
+      "../../ui/card"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "LoadingStates",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/LoadingStates.tsx",
+    "relativePath": "components/features/common/LoadingStates.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "LoadingStates"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 616,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/progress",
+      "../../ui/skeleton",
+      "./CareerCopilotLogo"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "StyledComponents",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/common/StyledComponents.tsx",
+    "relativePath": "components/features/common/StyledComponents.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "StyledButton",
+      "GlassCard",
+      "StyledCard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 127,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Dashboard",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/Dashboard.tsx",
+    "relativePath": "components/features/dashboard/Dashboard.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "Dashboard"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 167,
+    "complexity": "medium",
+    "dependencies": [
+      "../../../types",
+      "./dashboard/DashboardHeader",
+      "./dashboard/DashboardStats",
+      "./dashboard/ProfileGrid"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Settings",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/dashboard/Settings.tsx",
+    "relativePath": "components/features/dashboard/Settings.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "Settings"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 546,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/input",
+      "../../ui/switch"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "AnimatedShowcase",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/AnimatedShowcase.tsx",
+    "relativePath": "components/features/demo/AnimatedShowcase.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "AnimatedShowcase"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 808,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/label",
+      "./AnimatedComponents"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "CardShowcase",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/CardShowcase.tsx",
+    "relativePath": "components/features/demo/CardShowcase.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "CardShowcase"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 1052,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/card",
+      "../common/ErrorCard",
+      "../common/LoadingCard"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ComponentLibrary",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/ComponentLibrary.tsx",
+    "relativePath": "components/features/demo/ComponentLibrary.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "ComponentLibrary"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 63,
+    "complexity": "medium",
+    "dependencies": [
+      "../../library/ButtonComponentsSection",
+      "../../library/CardComponentsSection",
+      "../../library/DemoLinksSection",
+      "../../library/DisplayComponentsSection",
+      "../../library/FormComponentsSection",
+      "../../library/InteractiveComponentsSection",
+      "../../library/LayoutComponentsSection",
+      "../../library/UsageGuidelinesSection",
+      "../../ui/tooltip"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ComponentUsageGuide",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/ComponentUsageGuide.tsx",
+    "relativePath": "components/features/demo/ComponentUsageGuide.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "ComponentUsageGuide"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 547,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/card",
+      "../../ui/separator"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "MUITest",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/MUITest.tsx",
+    "relativePath": "components/features/demo/MUITest.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "MUITest"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 212,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/button",
+      "../../ui/card",
+      "../../ui/dialog",
+      "../../ui/input",
+      "../../ui/layout",
+      "../../ui/textarea"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "StateDemoShowcase",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/demo/StateDemoShowcase.tsx",
+    "relativePath": "components/features/demo/StateDemoShowcase.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "StateDemoShowcase"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 404,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../common/ErrorCard",
+      "../common/LoadingCard",
+      "../profile/CreateProfileCard",
+      "../profile/ProfileCard"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "DocumentPreview",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentPreview.tsx",
+    "relativePath": "components/features/Documents/DocumentPreview.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "DocumentPreview"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 1175,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/tooltip"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "DocumentTypeSelector",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/DocumentTypeSelector.tsx",
+    "relativePath": "components/features/Documents/DocumentTypeSelector.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "DocumentTypeSelector"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 911,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/input",
+      "../../ui/skeleton",
+      "../../ui/tabs",
+      "../../ui/tooltip",
+      "../common/StandardizedLoadingStates",
+      "../demo/AnimatedComponents"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ResumeBuilder",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/ResumeBuilder.tsx",
+    "relativePath": "components/features/Documents/ResumeBuilder.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "ResumeBuilder"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 788,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/input",
+      "../../ui/label",
+      "../../ui/textarea"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "TemplateSelector",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/Documents/TemplateSelector.tsx",
+    "relativePath": "components/features/Documents/TemplateSelector.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "TemplateSelector"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 316,
+    "complexity": "complex",
+    "dependencies": [
+      "../../../api/aiServices",
+      "../../library/TemplateCard",
+      "../../ui/badge"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "CareerGrowthHub",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerGrowthHub.tsx",
+    "relativePath": "components/features/opportunities/CareerGrowthHub.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "CareerGrowthHub"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 776,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/progress",
+      "../../ui/tabs",
+      "../../ui/tooltip"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "CareerIntelligence",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/CareerIntelligence.tsx",
+    "relativePath": "components/features/opportunities/CareerIntelligence.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "CareerIntelligence"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 630,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/progress"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "InterviewPrep",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/InterviewPrep.tsx",
+    "relativePath": "components/features/opportunities/InterviewPrep.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "InterviewPrep"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 636,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/textarea"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "JobInput",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobInput.tsx",
+    "relativePath": "components/features/opportunities/JobInput.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "JobInput"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 359,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/input",
+      "../../ui/tabs",
+      "../../ui/textarea"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "JobMatching",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/opportunities/JobMatching.tsx",
+    "relativePath": "components/features/opportunities/JobMatching.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "JobMatching"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 517,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/badge",
+      "../../ui/progress"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ProfileEditor",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/features/profile/ProfileEditor.tsx",
+    "relativePath": "components/features/profile/ProfileEditor.tsx",
+    "category": "features",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "ProfileEditor"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 1238,
+    "complexity": "complex",
+    "dependencies": [
+      "../../ui/avatar",
+      "../../ui/badge",
+      "../../ui/input",
+      "../../ui/progress",
+      "../../ui/separator",
+      "../../ui/slider",
+      "../../ui/switch",
+      "../../ui/tabs",
+      "../../ui/textarea",
+      "../../ui/tooltip",
+      "../common/StandardizedLoadingStates",
+      "../demo/AnimatedComponents"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Navbar",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/layout/Navbar.tsx",
+    "relativePath": "components/layout/Navbar.tsx",
+    "category": "layout",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 374,
+    "complexity": "complex",
+    "dependencies": [
+      "../../config/navigation",
+      "./NavigationItem"
+    ],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Sidebar",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/layout/Sidebar.tsx",
+    "relativePath": "components/layout/Sidebar.tsx",
+    "category": "layout",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "Sidebar"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 115,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": false,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "dropdown-menu",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/dropdown-menu.tsx",
+    "relativePath": "components/ui/dropdown-menu.tsx",
+    "category": "ui",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "DropdownMenuProps",
+      "DropdownMenu",
+      "DropdownMenuTriggerProps",
+      "DropdownMenuTrigger",
+      "DropdownMenuContentProps",
+      "DropdownMenuContent",
+      "DropdownMenuItemProps",
+      "DropdownMenuItem",
+      "DropdownMenuSeparator"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 58,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "EmptyState",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/feedback/EmptyState.tsx",
+    "relativePath": "components/ui/feedback/EmptyState.tsx",
+    "category": "ui",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "EmptyStateProps",
+      "EmptyState",
+      "NoResultsFound",
+      "ErrorState"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 198,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "ErrorBoundary",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/feedback/ErrorBoundary.tsx",
+    "relativePath": "components/ui/feedback/ErrorBoundary.tsx",
+    "category": "ui",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "ErrorBoundaryProps",
+      "ErrorBoundary",
+      "withErrorBoundary"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 136,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "Skeleton",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/feedback/Skeleton.tsx",
+    "relativePath": "components/ui/feedback/Skeleton.tsx",
+    "category": "ui",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "Skeleton",
+      "CardSkeleton",
+      "TextSkeleton",
+      "AvatarSkeleton"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 58,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "GridCompat",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/GridCompat.tsx",
+    "relativePath": "components/ui/GridCompat.tsx",
+    "category": "ui",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "GridCompatProps",
+      "default"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 53,
+    "complexity": "medium",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  },
+  {
+    "name": "scroll-area",
+    "path": "/Applications/careercopilot/careercopilot/frontend/src/components/ui/scroll-area.tsx",
+    "relativePath": "components/ui/scroll-area.tsx",
+    "category": "ui",
+    "usageCount": 0,
+    "importedBy": [],
+    "exports": [
+      "ScrollAreaProps",
+      "ScrollArea"
+    ],
+    "hasTests": false,
+    "hasStories": false,
+    "hasDocs": false,
+    "linesOfCode": 30,
+    "complexity": "simple",
+    "dependencies": [],
+    "isReusable": true,
+    "usesMUI": true,
+    "usesCustomUI": false,
+    "isDemo": false,
+    "migrationStatus": "migrated"
+  }
+]

@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import List, Optional
+from typing import List, Optional, Dict, Any, cast
 
 from pydantic import BaseModel, Field
 
@@ -41,7 +41,7 @@ class SemanticAnalysis(BaseModel):
 
 async def _perform_semantic_analysis(resume_text: str, job_description: str) -> SemanticAnalysis:
     """Perform semantic analysis with proper error handling"""
-    model = get_model()
+    model = get_model()  # type: ignore[no-untyped-call]
     if not model:
         raise RuntimeError("Genkit model not available for semantic analysis")
 
@@ -55,11 +55,11 @@ async def _perform_semantic_analysis(resume_text: str, job_description: str) -> 
         config={"response_mime_type": "application/json"},
     )
 
-    return semantic_response.output()
+    return cast(SemanticAnalysis, semantic_response.output())
 
 
 def _generate_recommendations(
-    keyword_analysis: dict,
+    keyword_analysis: Dict[str, Any],
     semantic_analysis: SemanticAnalysis,
     formatting_score: float,
     job_extraction_success: bool,
@@ -118,8 +118,8 @@ def _generate_recommendations(
 def _calculate_keyword_score(
     resume_skills: List[str],
     job_reqs: JobRequirements,
-    profile_keywords: List[str] = None,
-):
+    profile_keywords: Optional[List[str]] = None,
+) -> Dict[str, Any]:
     """Calculates a score based on keyword matching."""
     required_matched = [
         skill
@@ -164,9 +164,9 @@ def _calculate_keyword_score(
     }
 
 
-def _calculate_formatting_score(resume_entities: ResumeEntities):
+def _calculate_formatting_score(resume_entities: ResumeEntities) -> float:
     """Checks for the presence of key resume sections."""
-    score = 0
+    score: float = 0.0
     if resume_entities.skills:
         score += 33.3
     if resume_entities.experience:
@@ -212,7 +212,7 @@ class AtsResult(BaseModel):
 async def atsScoring(
     resumeText: str,
     jobDescription: str,
-    profileKeywords: List[str] = None,
+    profileKeywords: Optional[List[str]] = None,
     user_id: str = "anonymous",
 ) -> AtsResult:
     """
@@ -223,7 +223,7 @@ async def atsScoring(
 
     # Step 1 & 2: Extract structured data from both inputs in parallel with error handling
     job_reqs_task = enhanced_ai_handler.execute_ai_operation(
-        lambda: extractJobRequirements.run(jobDescription=jobDescription),
+        lambda: extractJobRequirements(jobDescription),
         AIOperationContext(
             operation_name="extract_job_requirements",
             service_type=AIServiceType.GENKIT_FLOW,
@@ -234,7 +234,7 @@ async def atsScoring(
     )
 
     resume_entities_task = enhanced_ai_handler.execute_ai_operation(
-        lambda: extractResumeEntities.run(resumeText=resumeText),
+        lambda: extractResumeEntities(resumeText),
         AIOperationContext(
             operation_name="extract_resume_entities",
             service_type=AIServiceType.GENKIT_FLOW,
@@ -257,8 +257,6 @@ async def atsScoring(
             requiredSkills=[],
             preferredSkills=[],
             experienceLevel="",
-            educationLevel="",
-            responsibilities=[],
         )
     else:
         job_reqs = job_reqs_result.data
@@ -331,7 +329,7 @@ async def atsScoring(
     placement_suggestions = None
     if keyword_analysis["missingKeywords"]:
         placement_result = await enhanced_ai_handler.execute_ai_operation(
-            lambda: suggestKeywordPlacement.run(
+            lambda: suggestKeywordPlacement(
                 resumeText=resumeText,
                 list_of_missing_keywords=keyword_analysis["missingKeywords"],
             ),

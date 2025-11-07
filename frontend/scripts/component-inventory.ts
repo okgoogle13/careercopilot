@@ -42,6 +42,10 @@ interface ComponentInfo {
   complexity: 'simple' | 'medium' | 'complex';
   dependencies: string[];
   isReusable: boolean;
+  usesMUI: boolean;
+  usesCustomUI: boolean;
+  isDemo: boolean;
+  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
 }
 
 interface InventoryReport {
@@ -52,6 +56,7 @@ interface InventoryReport {
   unusedComponents: string[];
   mostUsedComponents: Array<{ name: string; count: number }>;
   recommendations: string[];
+  migrationSummary: Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>;
 }
 
 const FRONTEND_DIR = path.join(__dirname, '..');
@@ -168,6 +173,23 @@ function analyzeComponents(): InventoryReport {
       }
     });
 
+    // Determine migration flags
+    const importDecls = sourceFile.getImportDeclarations();
+    const usesMUI = importDecls.some(imp => {
+      const mod = imp.getModuleSpecifierValue();
+      return mod.startsWith('@mui/material') || mod.startsWith('@mui/icons-material');
+    });
+    const usesCustomUI = importDecls.some(imp => {
+      const mod = imp.getModuleSpecifierValue();
+      // local UI layer patterns
+      return mod.includes('/components/ui/') || mod.startsWith('../ui') || mod.startsWith('./ui') || mod.includes('src/components/ui/');
+    });
+    const isDemo = filePath.includes('Figma UI Files');
+    let migrationStatus: ComponentInfo['migrationStatus'] = 'unknown';
+    if (usesMUI && !usesCustomUI) migrationStatus = 'migrated';
+    else if (usesMUI && usesCustomUI) migrationStatus = 'mixed';
+    else if (!usesMUI && usesCustomUI) migrationStatus = 'not_migrated';
+
     const { hasTests, hasStories, hasDocs } = findRelatedFiles(filePath);
     const category = categorizeComponent(filePath);
 
@@ -186,6 +208,10 @@ function analyzeComponents(): InventoryReport {
       complexity: calculateComplexity(lines.length, dependencies.length),
       dependencies,
       isReusable: category === 'ui' || category === 'library',
+      usesMUI,
+      usesCustomUI,
+      isDemo,
+      migrationStatus,
     };
 
     components.push(component);
@@ -284,6 +310,17 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
+  // Migration summary
+  const migrationSummary = components.reduce((acc, c) => {
+    acc[c.migrationStatus] = (acc[c.migrationStatus] || 0) + 1;
+    return acc;
+  }, {
+    migrated: 0,
+    mixed: 0,
+    not_migrated: 0,
+    unknown: 0,
+  } as Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>);
+
   const report: InventoryReport = {
     generatedAt: new Date().toISOString(),
     totalComponents: components.length,
@@ -292,6 +329,7 @@ function analyzeComponents(): InventoryReport {
     unusedComponents,
     mostUsedComponents,
     recommendations,
+    migrationSummary,
   };
 
   return report;
