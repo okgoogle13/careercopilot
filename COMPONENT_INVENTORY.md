@@ -12,6 +12,60 @@ Last Updated: 2025-11-07
 - 🔄 Needs Refactoring
 - 📝 Needs Documentation
 
+## Migration Summary (Material 3 Expressive)
+
+- **Generated**: 2025-11-07T10:43:06.374Z
+- **Scope (non-demo components)**: 114
+- **Status**:
+  - Migrated: 102
+  - Mixed: 12
+  - Not Migrated: 0
+  - Unknown: 0
+
+Artifacts generated under `frontend/reports/`:
+- `essential.json` / `essential.csv`
+- `nice-to-have.json` / `nice-to-have.csv`
+- `migration-breakdown.json`
+- `summary.json`
+
+## Prioritized Lists (Top by usage)
+
+### Essential Components (non-demo, ui/layout/features)
+| Name | Path | Category | Usage | Migration |
+|------|------|----------|-------|-----------|
+| badge | components/ui/badge.tsx | ui | 21 | migrated |
+| input | components/ui/input.tsx | ui | 9 | migrated |
+| card | components/ui/card.tsx | ui | 8 | migrated |
+| progress | components/ui/progress.tsx | ui | 7 | migrated |
+| textarea | components/ui/textarea.tsx | ui | 7 | migrated |
+| button | components/ui/button.tsx | ui | 6 | migrated |
+| label | components/ui/label.tsx | ui | 5 | migrated |
+| skeleton | components/ui/skeleton.tsx | ui | 5 | migrated |
+| tooltip | components/ui/tooltip.tsx | ui | 5 | migrated |
+| avatar | components/ui/avatar.tsx | ui | 4 | migrated |
+| dialog | components/ui/dialog.tsx | ui | 4 | migrated |
+| tabs | components/ui/tabs.tsx | ui | 4 | migrated |
+
+### Mixed Components (need standardization)
+| Name | Path | Category | Usage | Notes |
+|------|------|----------|-------|-------|
+| CardComponentsSection | components/library/CardComponentsSection.tsx | library | 1 | Uses both MUI and custom UI |
+| DisplayComponentsSection | components/library/DisplayComponentsSection.tsx | library | 1 | Uses both MUI and custom UI |
+| FormComponentsSection | components/library/FormComponentsSection.tsx | library | 1 | Uses both MUI and custom UI |
+| InteractiveComponentsSection | components/library/InteractiveComponentsSection.tsx | library | 1 | Uses both MUI and custom UI |
+| LayoutComponentsSection | components/library/LayoutComponentsSection.tsx | library | 1 | Uses both MUI and custom UI |
+| ProfileVariationCard | components/library/ProfileVariationCard.tsx | library | 1 | Uses both MUI and custom UI |
+| TemplateCard | components/library/TemplateCard.tsx | library | 1 | Uses both MUI and custom UI |
+| JobSearch | components/career/JobSearch.tsx | other | 0 | Uses both MUI and custom UI |
+| DocumentPreviewModal | components/documents/DocumentPreviewModal.tsx | documents | 0 | Uses both MUI and custom UI |
+| DocumentSharingDialog | components/documents/DocumentSharingDialog.tsx | documents | 0 | Uses both MUI and custom UI |
+| KeywordTag | components/library/KeywordTag.tsx | library | 0 | Uses both MUI and custom UI |
+| JobSearchStatus | components/main/JobSearchStatus.tsx | main | 0 | Uses both MUI and custom UI |
+
+### Not Migrated Components (highest impact first)
+
+No non-demo components currently flagged as not migrated in the latest report.
+
 ## Core UI Components
 
 ### Layout
