@@ -13,7 +13,7 @@ from pydantic_settings import BaseSettings
 
 # Try to import the secret manager, but don't fail if not available
 try:
-    from .secret_manager import get_database_url, get_redis_url, get_secret, get_secret_key
+    from .secret_manager import get_database_url, get_secret, get_secret_key
 
     SECRET_MANAGER_AVAILABLE = True
 except ImportError:
@@ -177,10 +177,6 @@ class SecureSettings(BaseSettings):
                     # Get database URL from secret manager
                     if not settings.get("DATABASE_URL"):
                         settings["DATABASE_URL"] = get_database_url()
-
-                    # Get Redis URL from secret manager
-                    if not settings.get("REDIS_URL"):
-                        settings["REDIS_URL"] = get_redis_url()
 
                     # Get secret key from secret manager
                     if not settings.get("SECRET_KEY"):

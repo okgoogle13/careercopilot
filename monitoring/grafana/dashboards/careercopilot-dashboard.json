@@ -89,24 +89,6 @@
         }
       },
       {
-        "id": 4,
-        "title": "Redis Memory Usage",
-        "type": "graph",
-        "targets": [
-          {
-            "expr": "redis_memory_used_bytes",
-            "refId": "A",
-            "legendFormat": "Memory Used"
-          }
-        ],
-        "gridPos": {
-          "h": 8,
-          "w": 12,
-          "x": 12,
-          "y": 8
-        }
-      },
-      {
         "id": 5,
         "title": "HTTP Requests per Second",
         "type": "graph",

@@ -34,14 +34,6 @@ scrape_configs:
     scrape_interval: 30s
     scrape_timeout: 10s
 
-  # Redis Cache
-  - job_name: 'redis'
-    static_configs:
-      - targets: ['redis:6379']
-    metrics_path: /metrics
-    scrape_interval: 30s
-    scrape_timeout: 10s
-
   # Nginx Reverse Proxy
   - job_name: 'nginx'
     static_configs:

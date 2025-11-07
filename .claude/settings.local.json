@@ -193,7 +193,9 @@
       "Bash(gcloud secrets list:*)",
       "Bash(test:*)",
       "Bash(export ENABLE_GENKIT_FLOWS=true)",
-      "Bash(gcloud billing projects describe:*)"
+      "Bash(gcloud billing projects describe:*)",
+      "Bash(awk:*)",
+      "Skill(api-contract-validator)"
     ]
   },
   "outputStyle": "default"

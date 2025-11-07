@@ -82,7 +82,6 @@ def main():
 
     # Define optional secrets
     optional_secrets = {
-        "REDIS_URL": "Redis connection URL (default: redis://localhost:6379/0)",
         "OPENAI_API_KEY": "OpenAI API key",
         "ANTHROPIC_API_KEY": "Anthropic API key",
         "SENDGRID_API_KEY": "SendGrid API key for email",
