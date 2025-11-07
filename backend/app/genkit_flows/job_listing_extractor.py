@@ -24,7 +24,7 @@ from app.models.schemas import JobListingDetails
 genkit.configure(
     {
         "llm": {
-            "service": "vertexai",
+            "service": "googleai",
             "models": [
                 {"name": "gemini-1.5-flash"},
                 {"name": "gemini-1.5-pro-preview"},

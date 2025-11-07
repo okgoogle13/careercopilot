@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-11-02T05:18:12.252Z",
+  "generatedAt": "2025-11-06T21:24:38.622Z",
   "totalComponents": 265,
   "componentsByCategory": {
     "other": 167,
@@ -4909,8 +4909,8 @@
       "hasTests": false,
       "hasStories": false,
       "hasDocs": false,
-      "linesOfCode": 213,
-      "complexity": "complex",
+      "linesOfCode": 128,
+      "complexity": "medium",
       "dependencies": [
         "@/components/documents/DocumentUploadDropzone",
         "@/components/documents/DocumentUploadDropzone",
@@ -6826,6 +6826,6 @@
     "262 components lack test coverage. Consider adding tests for: button, card, badge, badge, input...",
     "44 reusable components lack Storybook stories. Consider documenting: badge, input, ComponentDemo, card, progress...",
     "114 components appear unused. Consider archiving or removing them.",
-    "98 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: dropdown-menu, AnimatedComponents, ApplicationDetailsModal, KanbanBoard, file-upload..."
+    "97 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: dropdown-menu, AnimatedComponents, ApplicationDetailsModal, KanbanBoard, file-upload..."
   ]
 }

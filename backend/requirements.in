@@ -53,7 +53,6 @@ psutil
 
 # System utilities
 psutil
-redis
 httpx[http2]
 requests
 slowapi

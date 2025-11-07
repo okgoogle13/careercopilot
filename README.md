@@ -117,7 +117,7 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
 | Framework         | FastAPI (Python)                   |
 | Database          | Firestore                          |
 | Authentication    | Firebase Auth                      |
-| Caching           | Redis                              |
+| Caching           | Firestore                          |
 | Background Tasks  | Celery                             |
 | Testing           | Pytest                             |
 

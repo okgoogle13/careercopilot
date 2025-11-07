@@ -155,15 +155,6 @@ def get_database_config() -> dict:
     }
 
 
-def get_redis_config() -> dict:
-    """Get Redis configuration from secrets."""
-    password = get_app_secret("redis-password") if _secret_exists("redis-password") else None
-    return {
-        "password": password,
-        "url": (f"redis://:{password}@redis:6379/0" if password else "redis://redis:6379/0"),
-    }
-
-
 def get_ai_api_keys() -> dict:
     """Get all AI service API keys from secrets."""
     return {

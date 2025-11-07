@@ -15,8 +15,6 @@ env_variables:
   ENABLE_AI_CACHE: "true"
   ENABLE_GENKIT_FLOWS: "true"
   PORT: "8080"
-  REDIS_HOST: "10.200.126.35"
-  REDIS_PORT: "6379"
 
 # Entrypoint - use our startup script
 entrypoint: /app/start.sh
