@@ -120,27 +120,6 @@ groups:
       summary: "High AI token usage detected"
       description: "Hourly token usage is above 50,000 - potential cost impact"
 
-  # Redis Cache Alerts
-  - alert: RedisMemoryHigh
-    expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 80
-    for: 2m
-    labels:
-      severity: warning
-      component: cache
-    annotations:
-      summary: "Redis memory usage high"
-      description: "Redis memory usage is above 80%"
-
-  - alert: RedisConnectionsHigh
-    expr: redis_connected_clients > 100
-    for: 1m
-    labels:
-      severity: warning
-      component: cache
-    annotations:
-      summary: "High Redis connections"
-      description: "Redis has more than 100 connected clients"
-
   # Frontend Alerts (if metrics available)
   - alert: FrontendHighErrorRate
     expr: rate(frontend_errors_total[5m]) > 10

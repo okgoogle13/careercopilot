@@ -57,24 +57,25 @@
       "notes": "Includes both cached (fast) and uncached (slower) responses"
     },
     {
-      "name": "Redis Cache Performance",
-      "description": "Redis cache hit/miss performance",
+      "name": "Firestore Cache Performance",
+      "description": "Firestore-backed cache hit/miss performance",
       "stats": {
-        "mean": 0.005,
-        "median": 0.003,
-        "std": 0.003,
-        "min": 0.001,
-        "max": 0.015
+        "mean": 0.015,
+        "median": 0.012,
+        "std": 0.008,
+        "min": 0.005,
+        "max": 0.040
       },
       "unit": "seconds",
-      "threshold": 0.01
+      "threshold": 0.05,
+      "notes": "Firestore cache provides seamless Firebase integration with TTL-based expiration"
     }
   ],
   "metadata": {
     "test_environment": "GitHub Actions CI",
     "node_version": "20",
     "python_version": "3.13",
-    "redis_version": "7.0",
+    "cache_backend": "firestore",
     "postgres_version": "15"
   }
 }

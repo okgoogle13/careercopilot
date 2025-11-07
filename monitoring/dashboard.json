@@ -36,32 +36,6 @@
         }
       },
       {
-        "title": "Redis Cache - CPU Utilization",
-        "xyChart": {
-          "dataSets": [
-            {
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "filter": "metric.type=\"redis.googleapis.com/instance/cpu/utilization\" resource.type=\"redis_instance\"",
-                  "aggregation": {
-                    "alignmentPeriod": "300s",
-                    "perSeriesAligner": "ALIGN_MEAN"
-                  }
-                }
-              },
-              "plotType": "LINE"
-            }
-          ],
-          "chartOptions": {
-            "mode": "COLOR"
-          },
-          "yAxis": {
-            "label": "CPU Utilization (%)",
-            "scale": "LINEAR"
-          }
-        }
-      },
-      {
         "title": "Application Health - Server Errors (5xx)",
         "xyChart": {
           "dataSets": [
@@ -84,32 +58,6 @@
           },
           "yAxis": {
             "label": "Error Rate (errors/min)",
-            "scale": "LINEAR"
-          }
-        }
-      },
-      {
-        "title": "Redis Memory Utilization",
-        "xyChart": {
-          "dataSets": [
-            {
-              "timeSeriesQuery": {
-                "timeSeriesFilter": {
-                  "filter": "metric.type=\"redis.googleapis.com/instance/memory/utilization\" resource.type=\"redis_instance\"",
-                  "aggregation": {
-                    "alignmentPeriod": "300s",
-                    "perSeriesAligner": "ALIGN_MEAN"
-                  }
-                }
-              },
-              "plotType": "LINE"
-            }
-          ],
-          "chartOptions": {
-            "mode": "COLOR"
-          },
-          "yAxis": {
-            "label": "Memory Utilization (%)",
             "scale": "LINEAR"
           }
         }

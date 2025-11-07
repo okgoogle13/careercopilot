@@ -109,7 +109,7 @@ wait_for_logs() {
 }
 
 # Test data
-TEST_PAYLOAD='{"job_description": "Senior Software Engineer with Python and Redis experience. Must have experience with caching systems and microservices architecture."}'
+TEST_PAYLOAD='{"job_description": "Senior Software Engineer with Python and Firestore experience. Must have experience with cloud databases and microservices architecture."}'
 
 echo "🔍 Detecting service endpoint..."
 SERVICE_TYPE=$(detect_service_endpoint)
@@ -141,11 +141,11 @@ HEALTH_RESPONSE=$(curl -s "$API_BASE_URL/health" || echo "ERROR")
 if echo "$HEALTH_RESPONSE" | grep -q '"status".*"ok"'; then
     echo -e "${GREEN}✅ Health check passed${NC}"
 
-    # Check if Redis status is included
-    if echo "$HEALTH_RESPONSE" | grep -q "redis"; then
-        echo "  Redis status included in health check"
+    # Check if Firestore cache status is included
+    if echo "$HEALTH_RESPONSE" | grep -q "cache\|firestore"; then
+        echo "  Cache status included in health check"
     else
-        echo -e "${YELLOW}  ⚠️  Redis status not in health check response${NC}"
+        echo -e "${YELLOW}  ⚠️  Cache status not in health check response${NC}"
     fi
 else
     echo -e "${RED}❌ Health check failed${NC}"

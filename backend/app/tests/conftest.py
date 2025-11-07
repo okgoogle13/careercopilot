@@ -17,7 +17,6 @@ def pytest_configure(config):
     os.environ.setdefault("ENV", "test")
     os.environ.setdefault("ENVIRONMENT", "test")
     os.environ.setdefault("DATABASE_URL", "sqlite:///:memory:")
-    os.environ.setdefault("REDIS_URL", "redis://localhost:6379/0")
     os.environ.setdefault("ENABLE_GENKIT_FLOWS", "false")
 
     # Clear Prometheus registry to avoid duplicate metrics

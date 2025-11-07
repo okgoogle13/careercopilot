@@ -58,12 +58,6 @@ class ProductionSecretsValidator:
                 "validation": lambda x: x.startswith(("postgresql://", "mysql://", "sqlite:///")),
                 "critical": True,
             },
-            "redis-password": {
-                "description": "Redis Password",
-                "env_var": "REDIS_PASSWORD",
-                "validation": lambda x: len(x) >= 8,
-                "critical": False,
-            },
             "firebase-credentials-json": {
                 "description": "Firebase Admin SDK Credentials",
                 "env_var": "FIREBASE_CREDENTIALS_JSON",
