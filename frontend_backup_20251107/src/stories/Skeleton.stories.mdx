@@ -1,0 +1,160 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs';
+import { Skeleton } from '../components/ui/feedback/Skeleton';
+import { Stack, Box } from '@mui/material';
+
+<Meta title="Components/Feedback/Skeleton" component={Skeleton} />
+
+# Skeleton
+
+The `Skeleton` component provides a visual placeholder for content that is loading. It's designed to improve perceived performance by showing a preview of the content structure before the actual content loads.
+
+## Basic Usage
+
+```jsx
+import { Skeleton } from '../components/ui/feedback/Skeleton';
+
+function LoadingContent() {
+  return (
+    <div>
+      <Skeleton variant="text" width={200} />
+      <Skeleton variant="circular" width={40} height={40} />
+      <Skeleton variant="rectangular" width={210} height={60} />
+    </div>
+  );
+}
+```
+
+## Variants
+
+### Text
+
+<Canvas>
+  <Story name="Text Variant">
+    <Box sx={{ width: '100%' }}>
+      <Skeleton variant="text" width={200} height={24} />
+      <Skeleton variant="text" width={150} height={24} />
+      <Skeleton variant="text" width={180} height={24} />
+    </Box>
+  </Story>
+</Canvas>
+
+### Circular
+
+<Canvas>
+  <Story name="Circular Variant">
+    <Stack direction="row" spacing={2}>
+      <Skeleton variant="circular" width={40} height={40} />
+      <Skeleton variant="circular" width={60} height={60} />
+      <Skeleton variant="circular" width={80} height={80} />
+    </Stack>
+  </Story>
+</Canvas>
+
+### Rectangular
+
+<Canvas>
+  <Story name="Rectangular Variant">
+    <Stack spacing={2}>
+      <Skeleton variant="rectangular" width={210} height={60} />
+      <Skeleton variant="rectangular" width={300} height={100} />
+      <Skeleton variant="rectangular" width={400} height={40} />
+    </Stack>
+  </Story>
+</Canvas>
+
+### Rounded
+
+<Canvas>
+  <Story name="Rounded Variant">
+    <Stack spacing={2}>
+      <Skeleton variant="rounded" width={210} height={60} />
+      <Skeleton variant="rounded" width={300} height={100} />
+    </Stack>
+  </Story>
+</Canvas>
+
+## Animation
+
+You can control the animation of the skeleton with the `animation` prop:
+
+- `pulse` (default): A pulsing animation
+- `wave`: A shimmering wave animation
+- `false`: No animation
+
+<Canvas>
+  <Story name="Animation Types">
+    <Stack spacing={2}>
+      <Skeleton variant="text" width={200} animation="pulse" />
+      <Skeleton variant="text" width={200} animation="wave" />
+      <Skeleton variant="text" width={200} animation={false} />
+    </Stack>
+  </Story>
+</Canvas>
+
+## Customization
+
+You can customize the appearance of the Skeleton using the `sx` prop:
+
+<Canvas>
+  <Story name="Custom Styling">
+    <Stack spacing={2}>
+      <Skeleton 
+        variant="rectangular" 
+        width={200} 
+        height={100} 
+        sx={{ 
+          bgcolor: 'primary.main',
+          '&:after': {
+            background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)'
+          }
+        }} 
+      />
+    </Stack>
+  </Story>
+</Canvas>
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| variant | 'text' \| 'circular' \| 'rectangular' \| 'rounded' | 'text' | The type of skeleton to display |
+| animation | 'pulse' \| 'wave' \| false | 'pulse' | The animation type |
+| width | number \| string | - | The width of the skeleton |
+| height | number \| string | - | The height of the skeleton |
+| sx | object | - | Custom styles |
+
+## Best Practices
+
+- Use skeleton loaders when the content takes more than 300ms to load
+- Match the skeleton shape to the content it will replace
+- Use appropriate animation to indicate loading without being distracting
+- Consider using skeleton loaders for above-the-fold content first
+- Keep the skeleton design simple and lightweight
+
+## Example: Loading State
+
+<Canvas>
+  <Story name="Loading State Example">
+    {() => {
+      const isLoading = true; // This would come from your component's state
+      
+      if (isLoading) {
+        return (
+          <Stack spacing={2}>
+            <Skeleton variant="rectangular" width={300} height={40} />
+            <Skeleton variant="text" width={250} />
+            <Skeleton variant="text" width={200} />
+            <Skeleton variant="rectangular" width={300} height={100} sx={{ mt: 2 }} />
+          </Stack>
+        );
+      }
+      
+      return (
+        <div>
+          <h2>Loaded Content</h2>
+          <p>This is the actual content that was loading.</p>
+        </div>
+      );
+    }}
+  </Story>
+</Canvas>
