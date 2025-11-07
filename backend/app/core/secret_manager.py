@@ -6,25 +6,27 @@ in a way that falls back to environment variables for local development.
 """
 
 import os
-from typing import Optional
+from typing import Optional, Dict, Any, cast
 
 from google.api_core.exceptions import NotFound
 from google.cloud import secretmanager
 
 # Lazy initialization of Secret Manager client
-_client = None
+_client: Optional[secretmanager.SecretManagerServiceClient] = None
+_client_init_failed: bool = False
 
 
-def _get_client():
+def _get_client() -> Optional[secretmanager.SecretManagerServiceClient]:
     """Get or initialize the Secret Manager client."""
-    global _client
-    if _client is None:
+    global _client, _client_init_failed
+    if _client is None and not _client_init_failed:
         try:
             _client = secretmanager.SecretManagerServiceClient()
         except Exception as e:
             print(f"Warning: Could not initialize Secret Manager client: {e}")
-            _client = False  # Use False to indicate failed initialization
-    return _client if _client is not False else None
+            _client_init_failed = True
+            _client = None
+    return _client
 
 
 def get_secret(
@@ -64,7 +66,7 @@ def get_secret(
 
     # Get the client, return environment fallback if not available
     client = _get_client()
-    if not client:
+    if client is None:
         # Secret Manager not available, try environment variable fallback
         env_var = os.getenv(f"DEFAULT_{secret_id}")
         if env_var:
@@ -110,7 +112,7 @@ def get_secret_key() -> str:
     return get_secret("SECRET_KEY")
 
 
-def get_firebase_credentials() -> Optional[dict]:
+def get_firebase_credentials() -> Optional[Dict[str, Any]]:
     """
     Get Firebase Admin SDK credentials from Secret Manager.
 
@@ -122,13 +124,13 @@ def get_firebase_credentials() -> Optional[dict]:
         if creds_json:
             import json
 
-            return json.loads(creds_json)
+            return cast(Dict[str, Any], json.loads(creds_json))
     except Exception as e:
         print(f"Warning: Could not load Firebase credentials: {e}")
     return None
 
 
-def get_firebase_config() -> dict:
+def get_firebase_config() -> Dict[str, Any]:
     """
     Get Firebase configuration from Secret Manager or environment variables.
 
@@ -136,7 +138,7 @@ def get_firebase_config() -> dict:
         dict: Firebase configuration
     """
     try:
-        config = {
+        config: Dict[str, Any] = {
             "project_id": get_secret(
                 "firebase-project-id", default=os.getenv("GCP_PROJECT_ID", "")
             ),
@@ -161,7 +163,7 @@ def get_firebase_config() -> dict:
         }
 
 
-def get_firebase_frontend_config() -> dict:
+def get_firebase_frontend_config() -> Dict[str, Any]:
     """
     Get Firebase frontend configuration from Secret Manager or environment variables.
 
@@ -192,7 +194,7 @@ def get_firebase_frontend_config() -> dict:
         }
 
 
-def get_app_secret(secret_name: str, default: str = None) -> str:
+def get_app_secret(secret_name: str, default: Optional[str] = None) -> str:
     """
     Get an application secret with the modern naming convention.
 

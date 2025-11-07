@@ -7,7 +7,7 @@ Main API router that includes all endpoint modules.
 from fastapi import APIRouter
 
 # Import endpoint modules
-from .endpoints import analysis, auth, config, documents, workflows
+from .endpoints import analysis, auth, config, documents, workflows, applications
 from .routers import ingestion
 
 api_router = APIRouter()
@@ -20,6 +20,7 @@ routers = [
     (documents.router, "/documents", "Documents"),
     (workflows.router, "/workflows", "Workflows"),
     (ingestion.router, "/ingestion", "Smart Ingestion"),
+    (applications.router, "/applications", "Applications"),
 ]
 
 # Include all routers

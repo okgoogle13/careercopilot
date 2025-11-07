@@ -5,6 +5,7 @@ import json
 from typing import Dict
 
 from app.core.loguru_config import get_logger
+from app.core.ai_config import get_ai_config
 from app.core.firestore_cache import get_firestore_cache
 
 logger = get_logger(__name__)
@@ -56,7 +57,19 @@ def get_llm_response(prompt: str, model_params: dict) -> dict:
 
     # Cache the result in Firestore
     try:
-        cache_ttl = 3600  # Cache for 1 hour
+        # Determine TTL from AI service config when available
+        cache_ttl = 3600
+        try:
+            service_name = (
+                model_params.get("service_name")
+                or model_params.get("task_type")
+            )
+            if service_name:
+                svc = get_ai_config().get_service_config(service_name)
+                if svc and getattr(svc, "cache_enabled", True):
+                    cache_ttl = int(getattr(svc, "cache_ttl_seconds", cache_ttl))
+        except Exception as e:
+            logger.warning("Failed to resolve per-flow cache TTL", error=str(e))
         cache.set(cache_key, result, cache_ttl)
         logger.info("Response cached", cache_key=cache_key, ttl=cache_ttl)
     except Exception as e:

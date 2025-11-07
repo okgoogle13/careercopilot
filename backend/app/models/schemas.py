@@ -51,9 +51,50 @@ class VoiceProfileResponse(BaseModel):
     # ... any other fields your voice profile flow returns
 
 
-# ==============================================================================
+# =============================================================================
+# KSC Generation Models
+# =============================================================================
+
+
+class KscCriterion(BaseModel):
+    id: str
+    text: str
+
+
+class KscResponse(BaseModel):
+    criterion_id: str
+    response: str
+    word_count: int
+
+
+class GenerateKscRequest(BaseModel):
+    job_description: str = Field(..., min_length=50)
+
+
+class GenerateKscResponse(BaseModel):
+    criteria: List[KscCriterion]
+    responses: List[KscResponse]
+    processing_time: Optional[float] = None
+
+
+# =============================================================================
+# Cover Letter Generation Models
+# =============================================================================
+
+
+class CoverLetterRequest(BaseModel):
+    job_description: str = Field(..., alias="jobDescription", min_length=50)
+    tone: Literal["professional", "enthusiastic", "creative", "formal"] = Field(...)
+
+
+class CoverLetterResponse(BaseModel):
+    cover_letter: str
+    subject_line: Optional[str] = None
+
+
+# =============================================================================
 # Sub-Models for Nested Structures
-# ==============================================================================
+# =============================================================================
 
 
 class CategoryScore(BaseModel):
@@ -140,9 +181,9 @@ class MasterProfile(BaseModel):
     certifications: List[str]
 
 
-# ==============================================================================
+# =============================================================================
 # Main API Response Models
-# ==============================================================================
+# =============================================================================
 
 
 class ATSScoreResponse(BaseModel):
@@ -151,14 +192,17 @@ class ATSScoreResponse(BaseModel):
     Corresponds to Ref #22 in the UI Mapping.
     """
 
-    overallScore: int = Field(..., description="The composite ATS score (0-100).")
-    categories: List[CategoryScore] = Field(..., description="A breakdown of scores by category.")
+    overall_score: int = Field(..., alias="score", description="The composite ATS score (0-100).")
+    categories: List[CategoryScore] = Field(..., alias="breakdown", description="A breakdown of scores by category.")
     matched_keywords: List[str] = Field(
-        ..., description="Keywords found in both the resume and job description."
+        ..., alias="matchedKeywords", description="Keywords found in both the resume and job description."
     )
     missing_keywords: List[str] = Field(
-        ..., description="Keywords found in the job description but not the resume."
+        ..., alias="missingKeywords", description="Keywords found in the job description but not the resume."
     )
+
+    class Config:
+        populate_by_name = True
 
 
 class KeywordAnalysisResponse(BaseModel):
@@ -222,9 +266,9 @@ class UserProfile(BaseModel):
     updated: datetime
 
 
-# ==============================================================================
+# =============================================================================
 # Job Listing Extractor Models
-# ==============================================================================
+# =============================================================================
 
 
 class JobListingDetails(BaseModel):

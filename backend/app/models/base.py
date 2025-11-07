@@ -87,6 +87,7 @@ class BaseMixin:
             if hasattr(self, key) and key not in protected_fields:
                 setattr(self, key, value)
 
+
 class Base(DeclarativeBase, BaseMixin):
     """Base class for all SQLAlchemy models."""
 

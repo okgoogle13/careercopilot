@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-11-06T21:24:38.622Z",
+  "generatedAt": "2025-11-07T10:43:06.374Z",
   "totalComponents": 265,
   "componentsByCategory": {
     "other": 167,
@@ -35,7 +35,11 @@
         "../ui/badge",
         "../ui/avatar"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "AnalysisView",
@@ -57,7 +61,11 @@
       "dependencies": [
         "./ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "AnimatedComponents",
@@ -93,7 +101,11 @@
         "./ui/label",
         "./ui/input"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "AnimatedShowcase",
@@ -118,7 +130,11 @@
         "./ui/separator",
         "./AnimatedComponents"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "AddApplicationModal",
@@ -150,7 +166,11 @@
         "../ui/date-picker",
         "../ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ApplicationDetailsModal",
@@ -180,7 +200,11 @@
         "../ui/textarea",
         "../ui/card"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ApplicationsView",
@@ -207,7 +231,11 @@
         "../hooks/useApplications",
         "../types/application"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "AppShell",
@@ -230,7 +258,11 @@
         "./ui/button",
         "./CareerCopilotLogo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ATSAnalysisDashboard",
@@ -249,7 +281,11 @@
       "linesOfCode": 608,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "migrated"
     },
     {
       "name": "AuroraShowcase",
@@ -274,7 +310,11 @@
         "./ui/aurora-utils",
         "./ui/m3-input"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "Auth",
@@ -297,7 +337,11 @@
         "./ui/card",
         "./CareerCopilotLogo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "FeatureHighlights",
@@ -318,7 +362,11 @@
         "../ui/m3-card",
         "../ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ProgressStepper",
@@ -341,7 +389,11 @@
       "dependencies": [
         "../ui/utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "TestimonialCarousel",
@@ -364,7 +416,11 @@
         "../ui/avatar",
         "../ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "FeatureCard",
@@ -392,7 +448,11 @@
         "../ui/button",
         "../ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "StatCard",
@@ -420,7 +480,11 @@
         "../ui/badge",
         "../ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "CardShowcase",
@@ -444,7 +508,11 @@
         "./LoadingCard",
         "./ErrorCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "JobCard",
@@ -468,7 +536,11 @@
         "../ui/badge",
         "../ui/utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "CareerCopilotLogo",
@@ -491,7 +563,11 @@
       "linesOfCode": 22,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "CareerGrowthHub",
@@ -513,7 +589,11 @@
         "./ui/card",
         "./ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "CareerIntelligence",
@@ -536,7 +616,11 @@
         "./ui/badge",
         "./ui/progress"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ComplexComponentsShowcase",
@@ -567,7 +651,11 @@
         "./cards/StatCard",
         "./cards/FeatureCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ComponentLibrary",
@@ -596,7 +684,11 @@
         "./library/UsageGuidelinesSection",
         "./library/DemoLinksSection"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ComponentUsageGuide",
@@ -619,7 +711,11 @@
         "./ui/badge",
         "./ui/separator"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "CreateProfileCard",
@@ -643,7 +739,11 @@
         "./ui/card",
         "./ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "Dashboard",
@@ -667,7 +767,11 @@
         "./CreateProfileCard",
         "./ui/progress"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "DashboardView",
@@ -694,7 +798,11 @@
         "./onboarding",
         "../hooks"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentCard",
@@ -722,7 +830,11 @@
         "../ui/dropdown-menu",
         "../ui/utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "DocumentPreview",
@@ -744,7 +856,11 @@
         "./ui/button",
         "./ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "DocumentsView",
@@ -766,7 +882,11 @@
       "dependencies": [
         "./ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "DocumentTypeSelector",
@@ -787,7 +907,11 @@
         "./ui/button",
         "./ui/card"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ErrorCard",
@@ -813,7 +937,11 @@
         "./ui/card",
         "./ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "DesignTokenExample",
@@ -838,7 +966,11 @@
         "../ui/badge",
         "../ui/progress"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ImageWithFallback",
@@ -856,7 +988,11 @@
       "linesOfCode": 21,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "FilterPanel",
@@ -888,7 +1024,11 @@
         "../ui/badge",
         "../ui/separator"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "FOMOLogo",
@@ -907,7 +1047,11 @@
       "linesOfCode": 51,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "InterviewPrep",
@@ -930,7 +1074,11 @@
         "./ui/badge",
         "./ui/textarea"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "JobInput",
@@ -954,7 +1102,11 @@
         "./ui/textarea",
         "./ui/tabs"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "JobMatching",
@@ -977,7 +1129,11 @@
         "./ui/badge",
         "./ui/progress"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "KanbanBoard",
@@ -999,7 +1155,11 @@
       "linesOfCode": 602,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ATSScoreCircle",
@@ -1017,7 +1177,11 @@
       "linesOfCode": 109,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "ButtonComponentsSection",
@@ -1040,7 +1204,11 @@
         "../ui/button",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "CardComponentsSection",
@@ -1067,7 +1235,11 @@
         "../ErrorCard",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ComponentDemo",
@@ -1097,7 +1269,11 @@
       "dependencies": [
         "../ui/card"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "DemoLinksSection",
@@ -1121,7 +1297,11 @@
         "../ui/button",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "DisplayComponentsSection",
@@ -1148,7 +1328,11 @@
         "../ui/label",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "FormComponentsSection",
@@ -1178,7 +1362,11 @@
         "../ui/slider",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "InteractiveComponentsSection",
@@ -1205,7 +1393,11 @@
         "../ui/tooltip",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "KeywordTag",
@@ -1227,7 +1419,11 @@
         "../ui/badge",
         "../ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "LayoutComponentsSection",
@@ -1252,7 +1448,11 @@
         "../ui/skeleton",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ProfileVariationCard",
@@ -1276,7 +1476,11 @@
         "../ui/button",
         "../ui/dropdown-menu"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "TemplateCard",
@@ -1298,7 +1502,11 @@
         "../ui/badge",
         "../ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "UsageGuidelinesSection",
@@ -1321,7 +1529,11 @@
         "../ui/card",
         "./ComponentDemo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "LoadingCard",
@@ -1347,7 +1559,11 @@
         "./ui/card",
         "./ui/skeleton"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "LoadingStates",
@@ -1371,7 +1587,11 @@
         "./ui/progress",
         "./CareerCopilotLogo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "Logo",
@@ -1397,7 +1617,11 @@
       "dependencies": [
         "./ui/utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "M3ColorSystemShowcase",
@@ -1421,7 +1645,11 @@
         "./ui/badge",
         "./ui/separator"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "M3ComponentShowcase",
@@ -1448,7 +1676,11 @@
         "./ui/m3-select",
         "./ui/m3-checkbox"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "M3SettingsExample",
@@ -1473,7 +1705,11 @@
         "./ui/m3-select",
         "./ui/m3-checkbox"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ActionCard",
@@ -1499,7 +1735,11 @@
         "../ui/badge",
         "../ui/utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "WelcomeBanner",
@@ -1520,7 +1760,11 @@
       "linesOfCode": 426,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "migrated"
     },
     {
       "name": "MainApp",
@@ -1545,7 +1789,11 @@
         "./ApplicationsView",
         "./AnalysisView"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "Navbar",
@@ -1573,7 +1821,11 @@
         "./ui/dropdown-menu",
         "./Logo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "mixed"
     },
     {
       "name": "NewComponentsShowcase",
@@ -1608,7 +1860,11 @@
         "./ui/empty-state",
         "./ui/error-state"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "OnboardingWizard",
@@ -1637,7 +1893,11 @@
         "../ui/file-upload",
         "../../hooks/useProfileCompletion"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ProfileCompletionCard",
@@ -1661,7 +1921,11 @@
         "../ui/progress",
         "../../types/profile"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "OpportunitiesView",
@@ -1683,7 +1947,11 @@
       "dependencies": [
         "./ui/button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ProfileCard",
@@ -1710,7 +1978,11 @@
         "./ui/progress",
         "./ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ProfileEditor",
@@ -1733,7 +2005,11 @@
         "./ui/textarea",
         "./ui/input"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ResumeBuilder",
@@ -1757,7 +2033,11 @@
         "./ui/card",
         "./ui/label"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "Settings",
@@ -1780,7 +2060,11 @@
         "./ui/input",
         "./ui/switch"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "Sidebar",
@@ -1803,7 +2087,11 @@
         "./ui/button",
         "./CareerCopilotLogo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "StandardizedLoadingStates",
@@ -1836,7 +2124,11 @@
         "./ui/button",
         "./ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "StandardizedLoadingStatesDemo",
@@ -1859,7 +2151,11 @@
         "./ui/badge",
         "./StandardizedLoadingStates"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "StateDemoShowcase",
@@ -1885,7 +2181,11 @@
         "./ProfileCard",
         "./CreateProfileCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "StyleGuideShowcase",
@@ -1908,7 +2208,11 @@
         "./ui/m3-button",
         "./ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "TemplateSelector",
@@ -1930,7 +2234,11 @@
         "./ui/button",
         "./ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "ThemeWrapper",
@@ -1958,7 +2266,11 @@
         "../hooks/useDesignTokens",
         "./ui/utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "TimelineView",
@@ -1983,7 +2295,11 @@
         "../ui/button",
         "../ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "accordion",
@@ -2006,7 +2322,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "alert-dialog",
@@ -2039,7 +2359,11 @@
         "./utils",
         "./button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "alert",
@@ -2063,7 +2387,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "aspect-ratio",
@@ -2081,7 +2409,11 @@
       "linesOfCode": 5,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "aurora-pagination",
@@ -2102,7 +2434,11 @@
       "linesOfCode": 126,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "aurora-toast",
@@ -2126,7 +2462,11 @@
       "linesOfCode": 127,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "aurora-utils",
@@ -2151,7 +2491,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "autocomplete",
@@ -2173,7 +2517,11 @@
       "linesOfCode": 171,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "avatar",
@@ -2202,7 +2550,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "badge",
@@ -2262,7 +2614,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "bottom-sheet",
@@ -2283,7 +2639,11 @@
       "linesOfCode": 145,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "breadcrumb",
@@ -2309,7 +2669,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "button-aurora",
@@ -2332,7 +2696,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "button",
@@ -2416,7 +2784,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "calendar",
@@ -2440,7 +2812,11 @@
         "./utils",
         "./button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "card",
@@ -2515,7 +2891,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "carousel",
@@ -2541,7 +2921,11 @@
         "./utils",
         "./button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "chart",
@@ -2567,7 +2951,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "checkbox",
@@ -2591,7 +2979,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "collapsible",
@@ -2613,7 +3005,11 @@
       "linesOfCode": 15,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "command",
@@ -2642,7 +3038,11 @@
         "./utils",
         "./dialog"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "confirmation-dialog",
@@ -2665,7 +3065,11 @@
       "dependencies": [
         "./dialog"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "context-menu",
@@ -2699,7 +3103,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "date-picker",
@@ -2726,7 +3134,11 @@
         "./calendar",
         "./popover"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "dialog",
@@ -2762,7 +3174,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "drawer",
@@ -2791,7 +3207,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "dropdown-menu",
@@ -2829,7 +3249,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "empty-state",
@@ -2850,7 +3274,11 @@
       "linesOfCode": 85,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "enhanced-input",
@@ -2871,7 +3299,11 @@
       "linesOfCode": 91,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "error-state",
@@ -2892,7 +3324,11 @@
       "linesOfCode": 118,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "file-upload",
@@ -2917,7 +3353,11 @@
       "dependencies": [
         "./progress"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "form",
@@ -2945,7 +3385,11 @@
         "./utils",
         "./label"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "hover-card",
@@ -2967,7 +3411,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "input-otp",
@@ -2990,7 +3438,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "input",
@@ -3023,7 +3475,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "label",
@@ -3052,7 +3508,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "m3-button",
@@ -3080,7 +3540,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "m3-card",
@@ -3114,7 +3578,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "m3-checkbox",
@@ -3137,7 +3605,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "m3-chip",
@@ -3159,7 +3631,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "m3-fab",
@@ -3181,7 +3657,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "m3-input",
@@ -3205,7 +3685,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "m3-select",
@@ -3229,7 +3713,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "menubar",
@@ -3264,7 +3752,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "navigation-menu",
@@ -3292,7 +3784,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "pagination",
@@ -3319,7 +3815,11 @@
         "./utils",
         "./button"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "phone-input",
@@ -3342,7 +3842,11 @@
       "dependencies": [
         "./popover"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "popover",
@@ -3371,7 +3875,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "progress",
@@ -3402,7 +3910,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "radio-group",
@@ -3426,7 +3938,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "range-slider",
@@ -3447,7 +3963,11 @@
       "linesOfCode": 152,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "resizable",
@@ -3469,7 +3989,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "scroll-area",
@@ -3490,7 +4014,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "select",
@@ -3522,7 +4050,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "separator",
@@ -3550,7 +4082,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "sheet",
@@ -3579,7 +4115,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "shimmer-skeleton",
@@ -3602,7 +4142,11 @@
       "linesOfCode": 135,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "sidebar",
@@ -3652,7 +4196,11 @@
         "./skeleton",
         "./tooltip"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "skeleton",
@@ -3678,7 +4226,11 @@
       "dependencies": [
         "@/lib/utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "slider",
@@ -3700,7 +4252,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "sonner",
@@ -3718,7 +4274,11 @@
       "linesOfCode": 19,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "stepper",
@@ -3742,7 +4302,11 @@
       "linesOfCode": 197,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "switch",
@@ -3765,7 +4329,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "table",
@@ -3792,7 +4360,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "tabs",
@@ -3819,7 +4391,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "tag-input",
@@ -3840,7 +4416,11 @@
       "linesOfCode": 111,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "textarea",
@@ -3869,7 +4449,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "time-picker",
@@ -3892,7 +4476,11 @@
       "dependencies": [
         "./popover"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "toggle-group",
@@ -3914,7 +4502,11 @@
         "./utils",
         "./toggle"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "toggle",
@@ -3937,7 +4529,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "tooltip",
@@ -3964,7 +4560,11 @@
       "dependencies": [
         "./utils"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": false,
+      "isDemo": true,
+      "migrationStatus": "unknown"
     },
     {
       "name": "UploadResume",
@@ -3985,7 +4585,11 @@
         "./ui/button",
         "./ui/card"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": false,
+      "usesCustomUI": true,
+      "isDemo": true,
+      "migrationStatus": "not_migrated"
     },
     {
       "name": "Button",
@@ -4008,7 +4612,11 @@
       "linesOfCode": 156,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ApplicationGeneratorModal",
@@ -4030,7 +4638,11 @@
         "../services/workflowService",
         "../types/api"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ApplicationCard",
@@ -4048,7 +4660,11 @@
       "linesOfCode": 243,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ApplicationTracker",
@@ -4068,7 +4684,11 @@
       "dependencies": [
         "./TimelineView"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "InterviewPrep",
@@ -4086,7 +4706,11 @@
       "linesOfCode": 638,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "JobSearch",
@@ -4110,7 +4734,11 @@
         "../ui/EmptyState",
         "../ui/LoadingState"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "TimelineView",
@@ -4130,7 +4758,11 @@
       "linesOfCode": 432,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentComparison",
@@ -4148,7 +4780,11 @@
       "linesOfCode": 352,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentPreviewModal",
@@ -4171,7 +4807,11 @@
         "../ui/dialog",
         "./types"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "DocumentSharingDialog",
@@ -4195,7 +4835,11 @@
         "../ui/dialog",
         "../ui/input"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "DocumentUploadDropzone",
@@ -4214,7 +4858,11 @@
       "linesOfCode": 231,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentVersionHistory",
@@ -4233,7 +4881,11 @@
       "linesOfCode": 119,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ErrorBoundary",
@@ -4251,7 +4903,11 @@
       "linesOfCode": 213,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ATSAnalysisDashboard",
@@ -4274,7 +4930,11 @@
         "../../ui/button",
         "../../ui/card"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ATSScoreCircle",
@@ -4294,7 +4954,11 @@
       "linesOfCode": 110,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Auth",
@@ -4317,7 +4981,11 @@
         "../../ui/input",
         "../common/CareerCopilotLogo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "CareerCopilotLogo",
@@ -4338,7 +5006,11 @@
       "linesOfCode": 39,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ErrorCard",
@@ -4364,7 +5036,11 @@
         "../../ui/button",
         "../../ui/card"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "LoadingCard",
@@ -4389,7 +5065,11 @@
       "dependencies": [
         "../../ui/skeleton"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "LoadingStates",
@@ -4411,7 +5091,11 @@
         "../../ui/skeleton",
         "./CareerCopilotLogo"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "StandardizedLoadingStates",
@@ -4447,7 +5131,11 @@
         "../../ui/progress",
         "../../ui/skeleton"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "StyledComponents",
@@ -4467,7 +5155,11 @@
       "linesOfCode": 127,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Dashboard",
@@ -4490,7 +5182,11 @@
         "./dashboard/DashboardStats",
         "./dashboard/ProfileGrid"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DashboardHeader",
@@ -4510,7 +5206,11 @@
       "linesOfCode": 93,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DashboardStats",
@@ -4533,7 +5233,11 @@
         "../../../../api/aiServices",
         "../../../ui/textarea"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ProfileGrid",
@@ -4557,7 +5261,11 @@
         "../../profile/CreateProfileCard",
         "../../profile/ProfileCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Settings",
@@ -4578,7 +5286,11 @@
         "../../ui/input",
         "../../ui/switch"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "AnimatedComponents",
@@ -4610,7 +5322,11 @@
       "linesOfCode": 733,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "AnimatedShowcase",
@@ -4631,7 +5347,11 @@
         "../../ui/label",
         "./AnimatedComponents"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "CardShowcase",
@@ -4654,7 +5374,11 @@
         "../common/ErrorCard",
         "../common/LoadingCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ComponentLibrary",
@@ -4682,7 +5406,11 @@
         "../../library/UsageGuidelinesSection",
         "../../ui/tooltip"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ComponentUsageGuide",
@@ -4704,7 +5432,11 @@
         "../../ui/card",
         "../../ui/separator"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "MUITest",
@@ -4730,7 +5462,11 @@
         "../../ui/layout",
         "../../ui/textarea"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "StateDemoShowcase",
@@ -4754,7 +5490,11 @@
         "../profile/CreateProfileCard",
         "../profile/ProfileCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentBrowser",
@@ -4778,7 +5518,11 @@
         "./types",
         "./types"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentCard",
@@ -4800,7 +5544,11 @@
       "linesOfCode": 527,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentPreview",
@@ -4821,7 +5569,11 @@
         "../../ui/badge",
         "../../ui/tooltip"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DocumentTypeSelector",
@@ -4847,7 +5599,11 @@
         "../common/StandardizedLoadingStates",
         "../demo/AnimatedComponents"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ResumeBuilder",
@@ -4870,7 +5626,11 @@
         "../../ui/label",
         "../../ui/textarea"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "TemplateSelector",
@@ -4892,7 +5652,11 @@
         "../../library/TemplateCard",
         "../../ui/badge"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "UploadResume",
@@ -4916,7 +5680,11 @@
         "@/components/documents/DocumentUploadDropzone",
         "@/services/documentService"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "CareerGrowthHub",
@@ -4939,7 +5707,11 @@
         "../../ui/tabs",
         "../../ui/tooltip"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "CareerIntelligence",
@@ -4960,7 +5732,11 @@
         "../../ui/badge",
         "../../ui/progress"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "FilterPanel",
@@ -4981,7 +5757,11 @@
       "linesOfCode": 394,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "InterviewPrep",
@@ -5002,7 +5782,11 @@
         "../../ui/badge",
         "../../ui/textarea"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "JobCard",
@@ -5024,7 +5808,11 @@
       "linesOfCode": 436,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "JobInput",
@@ -5046,7 +5834,11 @@
         "../../ui/tabs",
         "../../ui/textarea"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "JobMatching",
@@ -5067,7 +5859,11 @@
         "../../ui/badge",
         "../../ui/progress"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "CreateProfileCard",
@@ -5088,7 +5884,11 @@
       "linesOfCode": 72,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ProfileCard",
@@ -5112,7 +5912,11 @@
       "dependencies": [
         "../../ui/avatar"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ProfileEditor",
@@ -5143,7 +5947,11 @@
         "../common/StandardizedLoadingStates",
         "../demo/AnimatedComponents"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ImageWithFallback",
@@ -5161,7 +5969,11 @@
       "linesOfCode": 35,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "AppLayout",
@@ -5182,7 +5994,11 @@
       "linesOfCode": 391,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Navbar",
@@ -5203,7 +6019,11 @@
         "../../config/navigation",
         "./NavigationItem"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "NavigationItem",
@@ -5225,7 +6045,11 @@
       "dependencies": [
         "../../config/navigation"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "PageHeader",
@@ -5247,7 +6071,11 @@
       "linesOfCode": 425,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Sidebar",
@@ -5265,7 +6093,11 @@
       "linesOfCode": 115,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ATSScoreCircle",
@@ -5285,7 +6117,11 @@
       "linesOfCode": 141,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ButtonComponentsSection",
@@ -5307,7 +6143,11 @@
       "dependencies": [
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "CardComponentsSection",
@@ -5333,7 +6173,11 @@
         "../ui/card",
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "ComponentDemo",
@@ -5361,7 +6205,11 @@
       "linesOfCode": 41,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DemoLinksSection",
@@ -5383,7 +6231,11 @@
       "dependencies": [
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "DisplayComponentsSection",
@@ -5410,7 +6262,11 @@
         "../ui/progress",
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "FormComponentsSection",
@@ -5439,7 +6295,11 @@
         "../ui/textarea",
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "InteractiveComponentsSection",
@@ -5464,7 +6324,11 @@
         "../ui/popover",
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "KeywordTag",
@@ -5485,7 +6349,11 @@
       "dependencies": [
         "../ui/badge"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "LayoutComponentsSection",
@@ -5510,7 +6378,11 @@
         "../ui/skeleton",
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "ProfileVariationCard",
@@ -5533,7 +6405,11 @@
       "dependencies": [
         "../ui/badge"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "TemplateCard",
@@ -5555,7 +6431,11 @@
       "dependencies": [
         "../ui/badge"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "UsageGuidelinesSection",
@@ -5577,7 +6457,11 @@
       "dependencies": [
         "./ComponentDemo"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ActionCard",
@@ -5597,7 +6481,11 @@
       "linesOfCode": 352,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "FeatureHighlights",
@@ -5617,7 +6505,11 @@
       "linesOfCode": 59,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "HeroBanner",
@@ -5637,7 +6529,11 @@
       "dependencies": [
         "./FeatureHighlights"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "JobSearchStatus",
@@ -5657,7 +6553,11 @@
       "dependencies": [
         "../ui/StatCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": true,
+      "isDemo": false,
+      "migrationStatus": "mixed"
     },
     {
       "name": "TestimonialCarousel",
@@ -5675,7 +6575,11 @@
       "linesOfCode": 192,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "NotificationCenter",
@@ -5697,7 +6601,11 @@
         "../services/notificationService",
         "../types/api"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ImportWizard",
@@ -5715,7 +6623,11 @@
       "linesOfCode": 551,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ProfileComparison",
@@ -5735,7 +6647,11 @@
       "dependencies": [
         "../features/profile/ProfileCard"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ProtectedRoute",
@@ -5757,7 +6673,11 @@
       "dependencies": [
         "../context/AuthContext"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "SkeletonLoader",
@@ -5777,7 +6697,11 @@
       "dependencies": [
         "../utils/animations"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "SmartUploadModal",
@@ -5801,7 +6725,11 @@
         "../services/smartIngestionService",
         "../types/api"
       ],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ColorSwatch",
@@ -5819,7 +6747,11 @@
       "linesOfCode": 76,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": false
+      "isReusable": false,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "alert-dialog",
@@ -5856,7 +6788,11 @@
       "linesOfCode": 118,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Alert",
@@ -5881,7 +6817,11 @@
       "linesOfCode": 56,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "avatar",
@@ -5909,7 +6849,11 @@
       "linesOfCode": 44,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "badge",
@@ -5950,7 +6894,11 @@
       "linesOfCode": 42,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "button",
@@ -5976,7 +6924,11 @@
       "linesOfCode": 56,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Button",
@@ -5998,7 +6950,11 @@
       "linesOfCode": 100,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "card",
@@ -6033,7 +6989,11 @@
       "dependencies": [
         "@/lib/utils"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "checkbox",
@@ -6054,7 +7014,11 @@
       "linesOfCode": 14,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "dialog",
@@ -6092,7 +7056,11 @@
       "linesOfCode": 135,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "dropdown-menu",
@@ -6118,7 +7086,11 @@
       "linesOfCode": 58,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "EmptyState",
@@ -6139,7 +7111,11 @@
       "linesOfCode": 42,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "EmptyState",
@@ -6160,7 +7136,11 @@
       "linesOfCode": 198,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "ErrorBoundary",
@@ -6180,7 +7160,11 @@
       "linesOfCode": 136,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "Skeleton",
@@ -6201,7 +7185,11 @@
       "linesOfCode": 58,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "GridCompat",
@@ -6220,7 +7208,11 @@
       "linesOfCode": 53,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "input",
@@ -6249,7 +7241,11 @@
       "linesOfCode": 30,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "label",
@@ -6274,7 +7270,11 @@
       "linesOfCode": 18,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "layout",
@@ -6308,7 +7308,11 @@
         "./card",
         "./card"
       ],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "LoadingState",
@@ -6329,7 +7333,11 @@
       "linesOfCode": 29,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "popover",
@@ -6354,7 +7362,11 @@
       "linesOfCode": 49,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "progress",
@@ -6381,7 +7393,11 @@
       "linesOfCode": 23,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "radio-group",
@@ -6404,7 +7420,11 @@
       "linesOfCode": 32,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "scroll-area",
@@ -6423,7 +7443,11 @@
       "linesOfCode": 30,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "separator",
@@ -6446,7 +7470,11 @@
       "linesOfCode": 13,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "sidebar",
@@ -6485,7 +7513,11 @@
       "linesOfCode": 224,
       "complexity": "complex",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "skeleton",
@@ -6510,7 +7542,11 @@
       "linesOfCode": 12,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "slider",
@@ -6532,7 +7568,11 @@
       "linesOfCode": 5,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "StatCard",
@@ -6553,7 +7593,11 @@
       "linesOfCode": 72,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "switch",
@@ -6576,7 +7620,11 @@
       "linesOfCode": 23,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "tabs",
@@ -6603,7 +7651,11 @@
       "linesOfCode": 54,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "textarea",
@@ -6630,7 +7682,11 @@
       "linesOfCode": 32,
       "complexity": "simple",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     },
     {
       "name": "tooltip",
@@ -6661,7 +7717,11 @@
       "linesOfCode": 51,
       "complexity": "medium",
       "dependencies": [],
-      "isReusable": true
+      "isReusable": true,
+      "usesMUI": true,
+      "usesCustomUI": false,
+      "isDemo": false,
+      "migrationStatus": "migrated"
     }
   ],
   "unusedComponents": [
@@ -6827,5 +7887,11 @@
     "44 reusable components lack Storybook stories. Consider documenting: badge, input, ComponentDemo, card, progress...",
     "114 components appear unused. Consider archiving or removing them.",
     "97 components are marked as complex (>200 LOC or >10 dependencies). Consider refactoring: dropdown-menu, AnimatedComponents, ApplicationDetailsModal, KanbanBoard, file-upload..."
-  ]
+  ],
+  "migrationSummary": {
+    "migrated": 106,
+    "mixed": 13,
+    "not_migrated": 70,
+    "unknown": 76
+  }
 }
