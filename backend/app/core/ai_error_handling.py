@@ -163,7 +163,7 @@ class AIOperationHandler:
                     )
 
                 logger.info(f"AI operation succeeded on attempt {attempt}")
-                return cast(R, result)
+                return result
 
             except Exception as e:
                 last_error = e
@@ -251,20 +251,6 @@ class AIOperationHandler:
         )
 
 
-@overload
-def with_ai_error_handling(
-    retry_config: Optional[RetryConfig] = None,
-) -> Callable[[Callable[..., Awaitable[R]]], Callable[..., Awaitable[R]]]:
-    ...
-
-
-@overload
-def with_ai_error_handling(
-    retry_config: Optional[RetryConfig] = None,
-) -> Callable[[Callable[..., R]], Callable[..., R]]:
-    ...
-
-
 def with_ai_error_handling(
     retry_config: Optional[RetryConfig] = None,
 ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
@@ -343,7 +329,7 @@ patient_handler = AIOperationHandler(RetryConfig(max_attempts=5, max_delay=120.0
 async def safe_ai_call(operation: Callable[..., R] | Callable[..., Awaitable[R]], *args: Any, **kwargs: Any) -> R:
     """Execute AI operation with default error handling."""
     result = await default_handler.execute_with_retry(operation, *args, **kwargs)
-    return cast(R, result)
+    return result
 
 
 def create_user_friendly_error(ai_error: AIError) -> str:

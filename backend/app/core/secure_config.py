@@ -6,7 +6,10 @@ falling back to environment variables when not in production.
 """
 
 import os
-from typing import Optional
+from typing import Any, Dict, Optional, Tuple, cast
+
+from pydantic import validator
+from pydantic_settings import BaseSettings
 
 from pydantic import validator
 from pydantic_settings import BaseSettings
@@ -48,7 +51,7 @@ class SecureSettings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs: Any) -> None:
         super().__init__(**kwargs)
         # Override with secure values for production
         if SECRET_MANAGER_AVAILABLE and self.ENV in ["production", "staging"]:
@@ -91,13 +94,13 @@ class SecureSettings(BaseSettings):
     FIREBASE_CREDENTIALS_JSON: Optional[str] = None
 
     @validator("FIREBASE_CREDENTIALS_JSON", pre=True)
-    def validate_firebase_creds(cls, v, values):
+    def validate_firebase_creds(cls, v: Optional[str], values: Dict[str, Any]) -> Optional[str]:
         if not v and values.get("FIREBASE_PROJECT_ID"):
             # Try to load from Google Cloud's default credentials
             try:
                 import google.auth
 
-                credentials, project = google.auth.default()
+                credentials, project = google.auth.default()  # type: ignore[no-untyped-call]
                 if project == values.get("FIREBASE_PROJECT_ID"):
                     return None  # Will use default credentials
             except Exception:
@@ -148,10 +151,10 @@ class SecureSettings(BaseSettings):
         @classmethod
         def customise_sources(
             cls,
-            init_settings,
-            env_settings,
-            file_secret_settings,
-        ):
+            init_settings: Any,
+            env_settings: Any,
+            file_secret_settings: Any,
+        ) -> Tuple[Any, Dict[str, str], Any]:
             """Customize how settings are loaded."""
             if not SECRET_MANAGER_AVAILABLE:
                 # If secret manager is not available, just use the default sources
@@ -162,9 +165,9 @@ class SecureSettings(BaseSettings):
                 )
 
             # Load settings from environment first
-            settings = {
+            settings: Dict[str, str] = {
                 **os.environ,
-                **env_settings(),
+                **cast(Dict[str, str], env_settings()),
             }
 
             # Then try to get values from secret manager
@@ -207,7 +210,7 @@ class SecureSettings(BaseSettings):
 
 
 # Create a single instance of the settings
-settings = SecureSettings()
+settings: 'SecureSettings' = SecureSettings()
 
 # For backward compatibility
 if __name__ == "__main__":

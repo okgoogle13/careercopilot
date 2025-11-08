@@ -55,13 +55,9 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 6
     }}>
-      <div sx={{
-      "max-w-7xl": true,
-      "mx-auto": true
-    }}>
+      <div sx={{}}>
         {/* Header */}
         <div sx={{
       mb: 8
@@ -75,19 +71,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
             <Button variant="text" size="small" onClick={onBack} sx={{
       gap: 2
     }}>
-              <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+              <ArrowLeft sx={{}} />
               Back to Dashboard
             </Button>
           </div>
           <h1 sx={{
       mb: 2
     }}>Career Copilot Card Library</h1>
-          <p sx={{
-      "text-muted-foreground": true
-    }}>
+          <p sx={{}}>
             A comprehensive showcase of five card variants: Default, Interactive, Selected, Loading,
             and Error
           </p>
@@ -95,7 +86,6 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
 
         {/* Card Variants Documentation */}
         <div sx={{
-      "grid": true,
       gap: 6,
       mb: 8
     }}>
@@ -110,7 +100,6 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
             ></CardHeader>
             <CardContent>
               <div sx={{
-      "grid": true,
       gap: 4
     }}>
                 <div sx={{
@@ -119,20 +108,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 3
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.25rem,
-      "bg-card": true
-    }}></div>
+      borderRadius: "0.25rem",}}></div>
                   <div>
                     <p sx={{
       fontWeight: 500
     }}>Default Card</p>
-                    <p sx={{
-      "text-muted-foreground": true
-    }}>
+                    <p sx={{}}>
                       Standard card with subtle border for static content
                     </p>
                   </div>
@@ -143,22 +125,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 3
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.25rem,
-      "bg-card": true,
-      boxShadow: 4,
-      "shadow-primary/10": true
-    }}></div>
+      borderRadius: "0.25rem",
+      boxShadow: 4,}}></div>
                   <div>
                     <p sx={{
       fontWeight: 500
     }}>Interactive Card</p>
-                    <p sx={{
-      "text-muted-foreground": true
-    }}>
+                    <p sx={{}}>
                       Hover effects and cursor pointer for clickable content
                     </p>
                   </div>
@@ -169,22 +143,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 3
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 2,
-      "border-primary": true,
-      borderRadius: 0.25rem,
-      "bg-card": true,
-      boxShadow: 4,
-      "shadow-primary/20": true
-    }}></div>
+      borderRadius: "0.25rem",
+      boxShadow: 4,}}></div>
                   <div>
                     <p sx={{
       fontWeight: 500
     }}>Selected Card</p>
-                    <p sx={{
-      "text-muted-foreground": true
-    }}>
+                    <p sx={{}}>
                       Prominent purple border and glow for active/selected state
                     </p>
                   </div>
@@ -195,21 +161,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 3
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.25rem,
-      "bg-card": true,
-      "animate-pulse": true
-    }}></div>
+      borderRadius: "0.25rem",}}></div>
                   <div>
                     <p sx={{
       fontWeight: 500
     }}>Loading Card</p>
-                    <p sx={{
-      "text-muted-foreground": true
-    }}>
+                    <p sx={{}}>
                       Skeleton placeholders during data loading states
                     </p>
                   </div>
@@ -220,20 +178,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 3
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-destructive/50": true,
-      borderRadius: 0.25rem,
-      "bg-destructive/5": true
-    }}></div>
+      borderRadius: "0.25rem",}}></div>
                   <div>
                     <p sx={{
       fontWeight: 500
     }}>Error Card</p>
-                    <p sx={{
-      "text-muted-foreground": true
-    }}>
+                    <p sx={{}}>
                       Red-tinted border and background for error states
                     </p>
                   </div>
@@ -244,24 +195,20 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
         </div>
 
         {/* Live Examples Section */}
-        <div sx={{
-      "space-y-8": true
-    }}>
+        <div sx={{}}>
           {/* Profile Cards Example */}
           <section>
             <h2 sx={{
       mb: 4
     }}>Profile Cards (Interactive & Selected)</h2>
             <p sx={{
-      "text-muted-foreground": true,
       mb: 6
     }}>
               Click on cards to select them. These demonstrate interactive and selected states.
             </p>
             <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}>
               {[
@@ -330,24 +277,10 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                             handleFavoriteToggle(profile.id);
                           }}
                           sx={{
-      p: 1,
-      "h-8": true,
-      "w-8": true
-    }}
+      p: 1,}}
                         >
                           <Heart
-                            sx={{
-      "w-4": true,
-      "h-4": true,
-      "${": true,
-      "favoriteCards.has(profile.id)": true,
-      "?": true,
-      "'fill-red-500": true,
-      "text-red-500'": true,
-      ":": true,
-      "'text-muted-foreground'": true,
-      "}": true
-    }}
+                            sx={{}}
                           />
                         </Button>
                       </CardAction>
@@ -355,17 +288,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   </CardHeader>
                   {profile.id !== 'card-3' && (
                     <CardContent>
-                      <div sx={{
-      "space-y-4": true
-    }}>
+                      <div sx={{}}>
                         <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
     }}>
-                          <span sx={{
-      "text-muted-foreground": true
-    }}>Applications</span>
+                          <span sx={{}}>Applications</span>
                           <Badge variant="secondary">{profile.applications}</Badge>
                         </div>
                         <div sx={{
@@ -373,26 +302,20 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       alignItems: "center",
       justifyContent: "space-between"
     }}>
-                          <span sx={{
-      "text-muted-foreground": true
-    }}>ATS Score</span>
+                          <span sx={{}}>ATS Score</span>
                           <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
                             <div sx={{
-      "w-12": true,
-      "h-2": true,
-      "bg-muted": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       overflow: "hidden"
     }}>
                               <div
                                 sx={{
       height: "100%",
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
                                 style={{ width: `${profile.atsScore}%` }}
                               />
@@ -407,9 +330,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       alignItems: "center",
       justifyContent: "space-between"
     }}>
-                          <span sx={{
-      "text-muted-foreground": true
-    }}>Status</span>
+                          <span sx={{}}>Status</span>
                           <Badge variant={profile.status === 'Active' ? 'default' : 'secondary'}>
                             {profile.status}
                           </Badge>
@@ -424,9 +345,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       justifyContent: "space-between",
       width: "100%"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>
+                      <span sx={{}}>
                         {profile.lastUpdated || 'Click to create'}
                       </span>
                       {selectedCard === profile.id && (
@@ -450,15 +369,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 4
     }}>Information Cards (Default)</h2>
             <p sx={{
-      "text-muted-foreground": true,
       mb: 6
     }}>
               Static information cards using the default variant for non-interactive content.
             </p>
             <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-4": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}>
               {[
@@ -500,22 +417,15 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
     }}>
                         <div sx={{
       p: 2,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                          <IconComponent sx={{
-      "w-6": true,
-      "h-6": true,
-      "text-primary": true
-    }} />
+                          <IconComponent sx={{}} />
                         </div>
                         <div>
                           <p sx={{
       fontWeight: 500
     }}>{stat.value}</p>
-                          <p sx={{
-      "text-muted-foreground": true
-    }}>{stat.title}</p>
+                          <p sx={{}}>{stat.title}</p>
                         </div>
                       </div>
                     </CardContent>
@@ -531,14 +441,12 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 4
     }}>Template Selection (Mixed Usage)</h2>
             <p sx={{
-      "text-muted-foreground": true,
       mb: 6
     }}>
               Combining all three variants in a template selection interface.
             </p>
             <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
               {/* Featured Template - Selected */}
@@ -557,22 +465,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div sx={{
-      "space-y-3": true
-    }}>
+                  <div sx={{}}>
                     <div sx={{
-      "h-32": true,
-      "bg-muted": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }}>
-                      <FileText sx={{
-      "w-8": true,
-      "h-8": true,
-      "text-muted-foreground": true
-    }} />
+                      <FileText sx={{}} />
                     </div>
                     <div sx={{
       display: "flex",
@@ -580,8 +480,6 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 2
     }}>
                       <CheckCircle sx={{
-      "w-4": true,
-      "h-4": true,
       color: "green.500"
     }} />
                       <span sx={{
@@ -612,22 +510,14 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     }
                   ></CardHeader>
                   <CardContent>
-                    <div sx={{
-      "space-y-3": true
-    }}>
+                    <div sx={{}}>
                       <div sx={{
-      "h-32": true,
-      "bg-muted": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }}>
-                        <FileText sx={{
-      "w-8": true,
-      "h-8": true,
-      "text-muted-foreground": true
-    }} />
+                        <FileText sx={{}} />
                       </div>
                       <div sx={{
       display: "flex",
@@ -635,8 +525,6 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 2
     }}>
                         <Star sx={{
-      "w-4": true,
-      "h-4": true,
       color: "yellow.500"
     }} />
                         <span>4.{5 + index} rating</span>
@@ -661,47 +549,33 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 4
     }}>Loading & Error States</h2>
             <p sx={{
-      "text-muted-foreground": true,
       mb: 6
     }}>
               Specialized card variants for handling loading and error states with appropriate
               visual feedback.
             </p>
             <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
               {/* Loading Profile Card */}
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <h3 sx={{
-      fontWeight: 500,
-      "text-card-foreground": true
-    }}>Loading Profile</h3>
+      fontWeight: 500,}}>Loading Profile</h3>
                 <LoadingProfileCard />
               </div>
 
               {/* Error Profile Card */}
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <h3 sx={{
-      fontWeight: 500,
-      "text-card-foreground": true
-    }}>Error Profile</h3>
+      fontWeight: 500,}}>Error Profile</h3>
                 <ErrorProfileCard onRetry={() => alert('Retrying...')} />
               </div>
 
               {/* Generic Error Card */}
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <h3 sx={{
-      fontWeight: 500,
-      "text-card-foreground": true
-    }}>Generic Error</h3>
+      fontWeight: 500,}}>Generic Error</h3>
                 <ErrorCard
                   title="Connection Failed"
                   message="Unable to connect to the server. Please check your internet connection."
@@ -717,31 +591,22 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 4
     }}>State Progression Example</h2>
             <p sx={{
-      "text-muted-foreground": true,
       mb: 6
     }}>
               See how a profile card transitions through different states during the data loading
               lifecycle.
             </p>
             <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-4": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                  <Loader2 sx={{
-      "w-4": true,
-      "h-4": true,
-      "text-primary": true,
-      "animate-spin": true
-    }} />
+                  <Loader2 sx={{}} />
                   <h4 sx={{
       fontWeight: 500
     }}>1. Loading</h4>
@@ -749,17 +614,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                 <LoadingCard />
               </div>
 
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
                   <CheckCircle sx={{
-      "w-4": true,
-      "h-4": true,
       color: "green.500"
     }} />
                   <h4 sx={{
@@ -773,10 +634,8 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 3
     }}>
                     <div sx={{
-      "w-12": true,
-      "h-12": true,
       bgcolor: "purple.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
@@ -788,54 +647,36 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </div>
                     <div>
                       <h3 sx={{
-      fontWeight: 500,
-      "text-card-foreground": true
-    }}>Nishant Dougall</h3>
-                      <p sx={{
-      "text-muted-foreground": true
-    }}>Community Support Worker</p>
+      fontWeight: 500,}}>Nishant Dougall</h3>
+                      <p sx={{}}>Community Support Worker</p>
                     </div>
                   </div>
-                  <div sx={{
-      "space-y-2": true
-    }}>
+                  <div sx={{}}>
                     <div sx={{
       display: "flex",
       justifyContent: "space-between"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>Applications</span>
+                      <span sx={{}}>Applications</span>
                       <Badge variant="secondary">8</Badge>
                     </div>
                     <div sx={{
       display: "flex",
       justifyContent: "space-between"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>ATS Score</span>
-                      <span sx={{
-      "text-primary": true
-    }}>92%</span>
+                      <span sx={{}}>ATS Score</span>
+                      <span sx={{}}>92%</span>
                     </div>
                   </div>
                 </Card>
               </div>
 
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                  <Star sx={{
-      "w-4": true,
-      "h-4": true,
-      "text-primary": true
-    }} />
+                  <Star sx={{}} />
                   <h4 sx={{
       fontWeight: 500
     }}>3. Selected</h4>
@@ -847,10 +688,8 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       gap: 3
     }}>
                     <div sx={{
-      "w-12": true,
-      "h-12": true,
       bgcolor: "purple.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
@@ -862,36 +701,24 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                     </div>
                     <div>
                       <h3 sx={{
-      fontWeight: 500,
-      "text-card-foreground": true
-    }}>Nishant Dougall</h3>
-                      <p sx={{
-      "text-muted-foreground": true
-    }}>Community Support Worker</p>
+      fontWeight: 500,}}>Nishant Dougall</h3>
+                      <p sx={{}}>Community Support Worker</p>
                     </div>
                   </div>
-                  <div sx={{
-      "space-y-2": true
-    }}>
+                  <div sx={{}}>
                     <div sx={{
       display: "flex",
       justifyContent: "space-between"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>Applications</span>
+                      <span sx={{}}>Applications</span>
                       <Badge variant="secondary">8</Badge>
                     </div>
                     <div sx={{
       display: "flex",
       justifyContent: "space-between"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>ATS Score</span>
-                      <span sx={{
-      "text-primary": true
-    }}>92%</span>
+                      <span sx={{}}>ATS Score</span>
+                      <span sx={{}}>92%</span>
                     </div>
                   </div>
                   <Badge
@@ -903,19 +730,13 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
                 </Card>
               </div>
 
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                  <AlertTriangle sx={{
-      "w-4": true,
-      "h-4": true,
-      "text-destructive": true
-    }} />
+                  <AlertTriangle sx={{}} />
                   <h4 sx={{
       fontWeight: 500
     }}>4. Error</h4>
@@ -931,7 +752,6 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 4
     }}>Interactive State Demo</h2>
             <p sx={{
-      "text-muted-foreground": true,
       mb: 6
     }}>
               Experience these card variants in action with realistic loading, error, and data
@@ -953,23 +773,16 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
     }}>
                     <div sx={{
       p: 3,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                      <Play sx={{
-      "w-6": true,
-      "h-6": true,
-      "text-primary": true
-    }} />
+                      <Play sx={{}} />
                     </div>
                     <div>
                       <h3 sx={{
       fontWeight: 500,
       mb: 1
     }}>Try the Interactive Demo</h3>
-                      <p sx={{
-      "text-muted-foreground": true
-    }}>
+                      <p sx={{}}>
                         Simulate loading states, network errors, and data management scenarios
                       </p>
                     </div>
@@ -990,8 +803,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       pt: 6
     }}>
                 <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-5": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
                   <div>
@@ -999,10 +811,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 2,
       fontWeight: 500
     }}>Default Cards</h4>
-                    <ul sx={{
-      "space-y-1": true,
-      "text-muted-foreground": true
-    }}>
+                    <ul sx={{}}>
                       <li>• Static information display</li>
                       <li>• Statistics and metrics</li>
                       <li>• Non-interactive content</li>
@@ -1014,10 +823,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 2,
       fontWeight: 500
     }}>Interactive Cards</h4>
-                    <ul sx={{
-      "space-y-1": true,
-      "text-muted-foreground": true
-    }}>
+                    <ul sx={{}}>
                       <li>• Clickable content</li>
                       <li>• Navigation elements</li>
                       <li>• Template selection</li>
@@ -1029,10 +835,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 2,
       fontWeight: 500
     }}>Selected Cards</h4>
-                    <ul sx={{
-      "space-y-1": true,
-      "text-muted-foreground": true
-    }}>
+                    <ul sx={{}}>
                       <li>• Active selections</li>
                       <li>• Current choices</li>
                       <li>• Featured content</li>
@@ -1044,10 +847,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 2,
       fontWeight: 500
     }}>Loading Cards</h4>
-                    <ul sx={{
-      "space-y-1": true,
-      "text-muted-foreground": true
-    }}>
+                    <ul sx={{}}>
                       <li>• Data fetching states</li>
                       <li>• Skeleton placeholders</li>
                       <li>• Initial page loads</li>
@@ -1059,10 +859,7 @@ export function CardShowcase({ onBack }: CardShowcaseProps) {
       mb: 2,
       fontWeight: 500
     }}>Error Cards</h4>
-                    <ul sx={{
-      "space-y-1": true,
-      "text-muted-foreground": true
-    }}>
+                    <ul sx={{}}>
                       <li>• Failed data loads</li>
                       <li>• Network errors</li>
                       <li>• Validation failures</li>

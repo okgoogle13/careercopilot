@@ -23,13 +23,9 @@ export function ComponentLibrary({ onBack, onNavigateToAnimated }: ComponentLibr
     <TooltipProvider>
       <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 6
     }}>
-        <div sx={{
-      "max-w-7xl": true,
-      "mx-auto": true
-    }}>
+        <div sx={{}}>
           {/* Header */}
           <div sx={{
       mb: 8
@@ -43,27 +39,20 @@ export function ComponentLibrary({ onBack, onNavigateToAnimated }: ComponentLibr
               <Button variant="text" size="small" onClick={onBack} sx={{
       gap: 2
     }}>
-                <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                <ArrowLeft sx={{}} />
                 Back to Dashboard
               </Button>
             </div>
             <h1 sx={{
       mb: 2
     }}>Career Copilot Component Library</h1>
-            <p sx={{
-      "text-muted-foreground": true
-    }}>
+            <p sx={{}}>
               A comprehensive design system showcasing all reusable components used throughout the
               Career Copilot platform
             </p>
           </div>
 
-          <div sx={{
-      "space-y-12": true
-    }}>
+          <div sx={{}}>
             <CardComponentsSection />
             <ButtonComponentsSection />
             <FormComponentsSection />

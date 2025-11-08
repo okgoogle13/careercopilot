@@ -208,13 +208,9 @@ export function CareerGrowthHub({
     <TooltipProvider>
       <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 4
     }}>
-        <div sx={{
-      "max-w-7xl": true,
-      "mx-auto": true
-    }}>
+        <div sx={{}}>
           {/* Header */}
           <div sx={{
       display: "flex",
@@ -224,16 +220,12 @@ export function CareerGrowthHub({
     }}>
             <Button variant="text" size="small" onClick={onBack}>
               <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
               Back to Dashboard
             </Button>
             <Button variant="outlined" size="small">
               <Plus sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
               Add Goal
@@ -251,22 +243,14 @@ export function CareerGrowthHub({
       gap: 2,
       mb: 4
     }}>
-              <Sparkles sx={{
-      "w-8": true,
-      "h-8": true,
-      "text-primary": true
-    }} />
+              <Sparkles sx={{}} />
               <h1 sx={{
-      typography: h2,
+      typography: "h2",
       fontWeight: 600
     }}>Career Growth Hub</h1>
             </div>
             <p sx={{
-      "text-muted-foreground": true,
-      typography: h5,
-      "max-w-3xl": true,
-      "mx-auto": true
-    }}>
+      typography: "h5",}}>
               Track your goals, develop skills, and leverage AI to supercharge your career growth.
             </p>
           </div>
@@ -276,9 +260,7 @@ export function CareerGrowthHub({
       width: "100%"
     }}>
             <TabsList sx={{
-      "grid": true,
       width: "100%",
-      "grid-cols-4": true,
       mb: 8
     }}>
               <TabsTrigger value="overview" sx={{
@@ -286,10 +268,7 @@ export function CareerGrowthHub({
       alignItems: "center",
       gap: 2
     }}>
-                <BarChart sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                <BarChart sx={{}} />
                 Overview
               </TabsTrigger>
               <TabsTrigger value="goals" sx={{
@@ -297,10 +276,7 @@ export function CareerGrowthHub({
       alignItems: "center",
       gap: 2
     }}>
-                <Target sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                <Target sx={{}} />
                 Goals ({userGoals.length})
               </TabsTrigger>
               <TabsTrigger value="skills" sx={{
@@ -308,10 +284,7 @@ export function CareerGrowthHub({
       alignItems: "center",
       gap: 2
     }}>
-                <BookOpen sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                <BookOpen sx={{}} />
                 Skills ({userSkills.length})
               </TabsTrigger>
               <TabsTrigger value="ai-tools" sx={{
@@ -319,23 +292,16 @@ export function CareerGrowthHub({
       alignItems: "center",
       gap: 2
     }}>
-                <Sparkles sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                <Sparkles sx={{}} />
                 AI Tools
               </TabsTrigger>
             </TabsList>
 
             {/* Overview Tab */}
-            <TabsContent value="overview" currentValue="overview" sx={{
-      "space-y-8": true
-    }}>
+            <TabsContent value="overview" currentValue="overview" sx={{}}>
               {/* Quick Stats */}
               <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-4": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4
     }}>
                 <Card sx={{
@@ -349,22 +315,18 @@ export function CareerGrowthHub({
       mb: 2
     }}>
                     <Target sx={{
-      "w-6": true,
-      "h-6": true,
       color: "blue.500"
     }} />
                   </div>
                   <div sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       color: "blue.600"
     }}>
                     {userGoals.filter((g) => g.status === 'active').length}
                   </div>
                   <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Active Goals</div>
+      typography: "body1",}}>Active Goals</div>
                 </Card>
                 <Card sx={{
       p: 6,
@@ -377,20 +339,16 @@ export function CareerGrowthHub({
       mb: 2
     }}>
                     <BookOpen sx={{
-      "w-6": true,
-      "h-6": true,
       color: "green.500"
     }} />
                   </div>
                   <div sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       color: "green.600"
     }}>{userSkills.length}</div>
                   <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Skills Tracking</div>
+      typography: "body1",}}>Skills Tracking</div>
                 </Card>
                 <Card sx={{
       p: 6,
@@ -403,22 +361,18 @@ export function CareerGrowthHub({
       mb: 2
     }}>
                     <Trophy sx={{
-      "w-6": true,
-      "h-6": true,
       color: "amber.500"
     }} />
                   </div>
                   <div sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       color: "amber.600"
     }}>
                     {userGoals.filter((g) => g.status === 'completed').length}
                   </div>
                   <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Completed</div>
+      typography: "body1",}}>Completed</div>
                 </Card>
                 <Card sx={{
       p: 6,
@@ -431,13 +385,11 @@ export function CareerGrowthHub({
       mb: 2
     }}>
                     <TrendingUp sx={{
-      "w-6": true,
-      "h-6": true,
       color: "purple.500"
     }} />
                   </div>
                   <div sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       color: "purple.600"
     }}>
@@ -447,39 +399,30 @@ export function CareerGrowthHub({
                     %
                   </div>
                   <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Avg Progress</div>
+      typography: "body1",}}>Avg Progress</div>
                 </Card>
               </div>
 
               {/* Recent Activity & Top Goals */}
               <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 8
     }}>
                 <Card sx={{
       p: 6
     }}>
                   <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       mb: 4,
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                    <Clock sx={{
-      "w-5": true,
-      "h-5": true
-    }} />
+                    <Clock sx={{}} />
                     Recent Activity
                   </h3>
-                  <div sx={{
-      "space-y-3": true
-    }}>
+                  <div sx={{}}>
                     {userGoals.slice(0, 3).map((goal) => (
                       <div
                         key={goal.id}
@@ -489,21 +432,17 @@ export function CareerGrowthHub({
       gap: 3,
       p: 3,
       bgcolor: "gray.50",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}
                       >
                         <div sx={{
-      "w-8": true,
-      "h-8": true,
       bgcolor: "blue.100",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }}>
                           <CheckCircle sx={{
-      "w-4": true,
-      "h-4": true,
       color: "blue.600"
     }} />
                         </div>
@@ -512,19 +451,14 @@ export function CareerGrowthHub({
     }}>
                           <p sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>{goal.title}</p>
                           <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                             Progress: {goal.progress}%
                           </p>
                         </div>
-                        <Progress value={goal.progress} sx={{
-      "w-16": true,
-      "h-2": true
-    }} />
+                        <Progress value={goal.progress} sx={{}} />
                       </div>
                     ))}
                   </div>
@@ -534,26 +468,19 @@ export function CareerGrowthHub({
       p: 6
     }}>
                   <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       mb: 4,
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                    <Star sx={{
-      "w-5": true,
-      "h-5": true
-    }} />
+                    <Star sx={{}} />
                     Priority Skills
                   </h3>
-                  <div sx={{
-      "space-y-3": true
-    }}>
+                  <div sx={{}}>
                     {userSkills.slice(0, 3).map((skill) => (
-                      <div key={skill.id} sx={{
-      "space-y-2": true
-    }}>
+                      <div key={skill.id} sx={{}}>
                         <div sx={{
       display: "flex",
       alignItems: "center",
@@ -571,8 +498,6 @@ export function CareerGrowthHub({
                               <Tooltip title="Trending skill in high demand">
                                 <span>
                                   <TrendingUp sx={{
-      "w-3": true,
-      "h-3": true,
       color: "green.500"
     }} />
                                 </span>
@@ -580,17 +505,13 @@ export function CareerGrowthHub({
                             )}
                           </div>
                           <span sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                             {skill.currentLevel}/{skill.targetLevel}
                           </span>
                         </div>
                         <Progress
                           value={(skill.currentLevel / skill.targetLevel) * 100}
-                          sx={{
-      "h-2": true
-    }}
+                          sx={{}}
                         />
                       </div>
                     ))}
@@ -599,13 +520,9 @@ export function CareerGrowthHub({
               </div>
             </TabsContent>
 
-            <TabsContent value="ai-tools" currentValue="ai-tools" sx={{
-      "space-y-8": true
-    }}>
+            <TabsContent value="ai-tools" currentValue="ai-tools" sx={{}}>
               <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 8,
       mb: 12
     }}>
@@ -617,100 +534,60 @@ export function CareerGrowthHub({
                       sx={{
       p: 8,
       border: 2,
-      "${feature.borderColor}": true,
-      '&:hover': { "border-primary": true },
+      '&:hover': {},
       cursor: "pointer",
-      "transition-all": true,
-      "duration-300": true,
       '&:hover': { boxShadow: 5 },
-      "group": true,
-      "relative": true,
       overflow: "hidden"
     }}
                       onClick={() => onNavigate(feature.id)}
                     >
                       {/* Gemini AI Badge */}
-                      <div sx={{
-      "absolute": true,
-      "top-4": true,
-      "right-4": true
-    }}>
-                        <Badge sx={{
-      "bg-primary/10": true,
-      "text-primary": true,
-      "border-primary/30": true
-    }}>
+                      <div sx={{}}>
+                        <Badge sx={{}}>
                           <Sparkles sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                           AI Powered
                         </Badge>
                       </div>
 
-                      <div sx={{
-      "space-y-6": true
-    }}>
+                      <div sx={{}}>
                         <div
                           sx={{
       p: 4,
-      "${feature.bgColor}": true,
-      borderRadius: 1rem,
-      "w-fit": true,
-      "group-hover:scale-110": true,
-      "transition-transform": true,
-      "duration-300": true
-    }}
+      borderRadius: "1rem",}}
                         >
-                          <Icon sx={{
-      "w-8": true,
-      "h-8": true,
-      "${feature.color}": true
-    }} />
+                          <Icon sx={{}} />
                         </div>
 
                         <div>
                           <h3 sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 600,
       mb: 3
     }}>{feature.title}</h3>
-                          <p sx={{
-      "text-muted-foreground": true,
-      "leading-relaxed": true
-    }}>
+                          <p sx={{}}>
                             {feature.description}
                           </p>
                         </div>
 
-                        <div sx={{
-      "space-y-2": true
-    }}>
+                        <div sx={{}}>
                           <h4 sx={{
       fontWeight: 500,
-      typography: body1,
-      "text-muted-foreground": true,
-      textTransform: "uppercase",
-      "tracking-wide": true
-    }}>
+      typography: "body1",
+      textTransform: "uppercase",}}>
                             Key Features
                           </h4>
-                          <ul sx={{
-      "space-y-1": true
-    }}>
+                          <ul sx={{}}>
                             {feature.benefits.map((benefit, index) => (
                               <li key={index} sx={{
-      typography: body1,
+      typography: "body1",
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
                                 <div sx={{
-      "w-1.5": true,
-      "h-1.5": true,
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
                                 {benefit}
                               </li>
@@ -721,20 +598,12 @@ export function CareerGrowthHub({
                         <Button
                           sx={{
       width: "100%",
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true },
-      "group-hover:bg-primary/90": true
-    }}
+      '&:hover': {},}}
                           size="large"
                         >
                           Explore {feature.title}
                           <ArrowRight sx={{
-      "w-4": true,
-      "h-4": true,
-      ml: 2,
-      "group-hover:translate-x-1": true,
-      "transition-transform": true
-    }} />
+      ml: 2,}} />
                         </Button>
                       </div>
                     </Card>
@@ -747,37 +616,23 @@ export function CareerGrowthHub({
           {/* Additional Info */}
           <Card sx={{
       p: 8,
-      "bg-gradient-to-r": true,
-      "from-primary/5": true,
-      "to-purple-500/5": true,
-      "border-primary/20": true,
       mt: 8
     }}>
             <div sx={{
-      textAlign: "center",
-      "space-y-4": true
-    }}>
+      textAlign: "center",}}>
               <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       gap: 2
     }}>
-                <Sparkles sx={{
-      "w-6": true,
-      "h-6": true,
-      "text-primary": true
-    }} />
+                <Sparkles sx={{}} />
                 <h3 sx={{
-      typography: h5,
+      typography: "h5",
       fontWeight: 600
     }}>Powered by Advanced AI</h3>
               </div>
-              <p sx={{
-      "text-muted-foreground": true,
-      "max-w-2xl": true,
-      "mx-auto": true
-    }}>
+              <p sx={{}}>
                 Our career growth tools are powered by cutting-edge AI technology that analyzes
                 market trends, job requirements, and your unique profile to provide personalized
                 career guidance.

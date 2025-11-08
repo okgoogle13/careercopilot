@@ -157,9 +157,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
   }
 
   return (
-    <Card sx={{
-      "h-fit": true
-    }}>
+    <Card sx={{}}>
       <CardHeader sx={{
       pb: 4
     }}>
@@ -173,9 +171,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
       alignItems: "center",
       gap: 2
     }}>
-            <Filter sx={{ fontSize: 20 }} sx={{
-      "text-primary": true
-    }} />
+            <Filter sx={{ fontSize: 20 }} sx={{}} />
             <Typography variant="h6" sx={{
       fontWeight: 600
     }}>
@@ -183,7 +179,6 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             </Typography>
             {getActiveFilterCount() > 0 && (
               <Chip label={getActiveFilterCount()} size="small" sx={{
-      "bg-primary": true,
       color: "common.white"
     }} />
             )}
@@ -200,9 +195,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         </Box>
       </CardHeader>
 
-      <CardContent sx={{
-      "space-y-6": true
-    }}>
+      <CardContent sx={{}}>
         {/* Search Query */}
         <Box>
           <Typography variant="subtitle2" sx={{
@@ -218,7 +211,6 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
             InputProps={{
               startAdornment: <Search sx={{ fontSize: 20 }} sx={{
-      "text-gray-400": true,
       mr: 2
     }} />,
             }}
@@ -263,9 +255,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Box sx={{
-      "space-y-2": true
-    }}>
+            <Box sx={{}}>
               {jobTypeOptions.map((type) => (
                 <FormControlLabel
                   key={type}
@@ -297,9 +287,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Box sx={{
-      "space-y-2": true
-    }}>
+            <Box sx={{}}>
               {experienceLevelOptions.map((level) => (
                 <FormControlLabel
                   key={level}
@@ -344,7 +332,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             <Box sx={{
       display: "flex",
       justifyContent: "space-between",
-      typography: body1,
+      typography: "body1",
       color: "gray.500",
       mt: 1
     }}>
@@ -399,9 +387,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
     }}>
             Date Posted
           </Typography>
-          <Box sx={{
-      "space-y-2": true
-    }}>
+          <Box sx={{}}>
             {datePostedOptions.map((option) => (
               <FormControlLabel
                 key={option.value}

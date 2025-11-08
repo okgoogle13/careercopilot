@@ -7,24 +7,26 @@ Handles AI model initialization, flow registration, and provides health monitori
 
 import logging
 import os
-from typing import Any, Callable, Dict, Optional
+import importlib
+from typing import Any, Callable, Dict, Optional, List, cast
 
+# Best-effort dynamic imports, keeping symbols typed as Any for mypy compatibility
+GENKIT_AVAILABLE = False
+genkit_ai: Any = None
+genkit_plugins_google: Any = None
 try:
-    from genkit.ai import Genkit
-    from genkit.plugins.google_genai import GoogleAI
-
+    genkit_ai = importlib.import_module("genkit.ai")
+    genkit_plugins_google = importlib.import_module("genkit.plugins.google_genai")
     GENKIT_AVAILABLE = True
 except ImportError:
     GENKIT_AVAILABLE = False
-    Genkit = None
-    GoogleAI = None
 
 # Setup logger for this module
 logger = logging.getLogger(__name__)
 
 # --- Global State ---
-initialized = False
-genkit_instance = None
+initialized: bool = False
+genkit_instance: Any | None = None
 registered_flows: Dict[str, Any] = {}
 
 # --- Core Initialization ---
@@ -55,8 +57,16 @@ def init_genkit() -> bool:
             return False
 
         # Initialize Genkit with Google AI plugin
-        genkit_instance = Genkit(
-            plugins=[GoogleAI(api_key=api_key)],
+        Genkit = getattr(genkit_ai, "Genkit", None)
+        GoogleAI = getattr(genkit_plugins_google, "GoogleAI", None)
+        if Genkit is None or GoogleAI is None:
+            logger.error("Genkit modules available but required classes are missing")
+            return False
+
+        genkit_local = cast(Any, Genkit)
+        google_ai_local = cast(Any, GoogleAI)
+        genkit_instance = genkit_local(
+            plugins=[google_ai_local(api_key=api_key)],
             model="googleai/gemini-2.0-flash",
         )
 
@@ -69,7 +79,7 @@ def init_genkit() -> bool:
         return False
 
 
-def get_model():
+def get_model() -> Any | None:
     """
     Get the initialized Genkit instance for model operations.
 
@@ -99,25 +109,26 @@ def check_genkit_health() -> Dict[str, Any]:
         Dict containing health status information
     """
     api_key_present = bool(os.getenv("GEMINI_API_KEY"))
-    health_status = {
+    errors: List[str] = []
+    health_status: Dict[str, Any] = {
         "available": GENKIT_AVAILABLE,
         "initialized": initialized,
         "gemini_api_key_present": api_key_present,
         "enabled": is_genkit_enabled(),
         "flows_registered": len(registered_flows),
         "model_available": bool(genkit_instance),
-        "errors": [],
+        "errors": errors,
     }
 
     if not GENKIT_AVAILABLE:
-        health_status["errors"].append("Genkit package not available")
+        errors.append("Genkit package not available")
     elif health_status["enabled"]:
         if not health_status["initialized"]:
-            health_status["errors"].append("Genkit failed to initialize")
+            errors.append("Genkit failed to initialize")
         if not health_status["gemini_api_key_present"]:
-            health_status["errors"].append("GEMINI_API_KEY is not set")
+            errors.append("GEMINI_API_KEY is not set")
         if not health_status["model_available"]:
-            health_status["errors"].append("Gemini model not available")
+            errors.append("Gemini model not available")
 
     return health_status
 
@@ -137,7 +148,7 @@ def startup_genkit() -> None:
         logger.info("Genkit initialization skipped (ENABLE_GENKIT_FLOWS is not 'true')")
 
 
-def register_flow_function(func: Callable, name: Optional[str] = None) -> Callable:
+def register_flow_function(func: Callable[..., Any], name: Optional[str] = None) -> Callable[..., Any]:
     """
     Register a flow function for tracking purposes.
 

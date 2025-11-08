@@ -15,8 +15,7 @@ export function UsageGuidelinesSection() {
       pt: 6
     }}>
           <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
             <div>
@@ -24,22 +23,17 @@ export function UsageGuidelinesSection() {
       mb: 3,
       fontWeight: 500
     }}>Color System</h4>
-              <div sx={{
-      "space-y-2": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
-      "bg-primary": true,
-      borderRadius: 0.25rem
+      borderRadius: "0.25rem"
     }}></div>
                   <span sx={{
-      typography: body1
+      typography: "body1"
     }}>Primary - Actions & Branding</span>
                 </div>
                 <div sx={{
@@ -48,13 +42,10 @@ export function UsageGuidelinesSection() {
       gap: 2
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
-      "bg-destructive": true,
-      borderRadius: 0.25rem
+      borderRadius: "0.25rem"
     }}></div>
                   <span sx={{
-      typography: body1
+      typography: "body1"
     }}>Destructive - Errors & Warnings</span>
                 </div>
                 <div sx={{
@@ -63,13 +54,10 @@ export function UsageGuidelinesSection() {
       gap: 2
     }}>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
-      "bg-muted": true,
-      borderRadius: 0.25rem
+      borderRadius: "0.25rem"
     }}></div>
                   <span sx={{
-      typography: body1
+      typography: "body1"
     }}>Muted - Secondary Information</span>
                 </div>
               </div>
@@ -79,31 +67,21 @@ export function UsageGuidelinesSection() {
       mb: 3,
       fontWeight: 500
     }}>Animation Guidelines</h4>
-              <div sx={{
-      "space-y-2": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                   • Duration: 200-300ms for micro-interactions
                 </div>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                   • Easing: Spring animations for natural feel
                 </div>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                   • Stagger delays: 50-100ms between items
                 </div>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                   • Reduce motion for accessibility preferences
                 </div>
               </div>
@@ -113,25 +91,15 @@ export function UsageGuidelinesSection() {
       mb: 3,
       fontWeight: 500
     }}>Spacing System</h4>
-              <div sx={{
-      "space-y-2": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>• Border radius: 0.75rem</div>
+      typography: "body1",}}>• Border radius: 0.75rem</div>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>• Consistent padding scales</div>
+      typography: "body1",}}>• Consistent padding scales</div>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>• Logical gap spacing</div>
+      typography: "body1",}}>• Logical gap spacing</div>
                 <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>• Responsive breakpoints</div>
+      typography: "body1",}}>• Responsive breakpoints</div>
               </div>
             </div>
           </div>

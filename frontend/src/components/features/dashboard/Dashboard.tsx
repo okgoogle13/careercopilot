@@ -111,30 +111,22 @@ export function Dashboard({
       textAlign: "center"
     }}>
           <div sx={{
-      "w-16": true,
-      "h-16": true,
-      "bg-primary/10": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       mb: 6
     }}>
-            <ArticleIcon sx={{
-      "w-8": true,
-      "h-8": true,
-      "text-primary": true
-    }} />
+            <ArticleIcon sx={{}} />
           </div>
 
           <h2 sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 600,
       mb: 3
     }}>Your Dashboard is Empty</h2>
           <p sx={{
-      "text-muted-foreground": true,
-      typography: h6,
+      typography: "h6",
       mb: 8,
       maxWidth: "md"
     }}>
@@ -144,18 +136,14 @@ export function Dashboard({
           <Button
             onClick={() => onCreateProfile?.()}
             sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true },
-      "text-primary-foreground": true,
+      '&:hover': {},
       px: 8,
       py: 6,
-      typography: h6
+      typography: "h6"
     }}
             size="large"
           >
             <AddIcon sx={{
-      "w-5": true,
-      "h-5": true,
       mr: 2
     }} />
             Create Your First Document

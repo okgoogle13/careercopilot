@@ -198,22 +198,17 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
             variant="text"
             onClick={onBack}
             sx={{
-      "text-muted-foreground": true,
-      '&:hover': { "text-foreground": true }
+      '&:hover': {}
     }}
           >
             <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Back to Dashboard
           </Button>
           <h1 sx={{
-      typography: h4,
-      fontWeight: 700,
-      "text-foreground": true
-    }}>Resume Builder</h1>
+      typography: "h4",
+      fontWeight: 700,}}>Resume Builder</h1>
         </div>
         <div sx={{
       display: "flex",
@@ -221,27 +216,20 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
     }}>
           <Button variant="outlined" onClick={onNext}>
             <Visibility sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Preview
           </Button>
           <Button variant="outlined">
             <Download sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Export PDF
           </Button>
           <Button sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }} onClick={onNext}>
             <Save sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Save & Continue
@@ -261,21 +249,17 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       mb: 4
     }}>
           <ViewModule sx={{
-      "w-5": true,
-      "h-5": true,
       color: "blue.600"
     }} />
           <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500
     }}>Choose Resume Template</h3>
         </div>
 
         <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-4": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 4,
       mb: 4
     }}>
@@ -285,25 +269,11 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
               sx={{
       p: 4,
       cursor: "pointer",
-      "transition-all": true,
       border: 2,
-      "${": true,
-      "selectedTemplate": true,
-      "===": true,
-      "template.id": true,
-      "?": true,
-      "'border-blue-500": true,
-      "bg-blue-50'": true,
-      ":": true,
-      "'border-gray-200": true,
-      '&:hover': { "border-gray-300'": true },
-      "}": true
-    }}
+      '&:hover': {},}}
               onClick={() => setSelectedTemplate(template.id)}
             >
-              <div sx={{
-      "space-y-3": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
@@ -311,23 +281,22 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
     }}>
                   <h4 sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>{template.name}</h4>
                   <Badge className={getCategoryColor(template.category)}>{template.category}</Badge>
                 </div>
                 <p sx={{
-      typography: body2,
+      typography: "body2",
       color: "gray.600"
     }}>{template.description}</p>
                 <div sx={{
-      "h-20": true,
       bgcolor: "gray.100",
-      borderRadius: 0.25rem,
+      borderRadius: "0.25rem",
       border: 1,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      typography: body2,
+      typography: "body2",
       color: "gray.500"
     }}>
                   Template Preview
@@ -339,7 +308,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
     }}>
                   {template.features.slice(0, 2).map((feature, idx) => (
                     <Badge key={idx} variant="outline" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                       {feature}
                     </Badge>
@@ -353,7 +322,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
         <div sx={{
       bgcolor: "gray.50",
       p: 4,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
           <div sx={{
       display: "flex",
@@ -361,18 +330,16 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       gap: 3
     }}>
             <Palette sx={{
-      "w-4": true,
-      "h-4": true,
       color: "gray.600",
       mt: 0.5
     }} />
             <div>
               <h5 sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>Selected: {getCurrentTemplate().name}</h5>
               <p sx={{
-      typography: body2,
+      typography: "body2",
       color: "gray.600",
       mb: 2
     }}>{getCurrentTemplate().preview}</p>
@@ -383,7 +350,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
     }}>
                 {getCurrentTemplate().features.map((feature, idx) => (
                   <Badge key={idx} variant="outline" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                     {feature}
                   </Badge>
@@ -395,25 +362,19 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       </Card>
 
       <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 8
     }}>
-        <div sx={{
-      "space-y-6": true
-    }}>
+        <div sx={{}}>
           <Card sx={{
       p: 6
     }}>
             <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500,
       mb: 4
     }}>Personal Information</h3>
-            <div sx={{
-      "space-y-4": true
-    }}>
+            <div sx={{}}>
               <div>
                 <Label htmlFor="fullName">Full Name</Label>
                 <Input
@@ -499,27 +460,20 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       mb: 4
     }}>
               <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500
     }}>Work Experience</h3>
               <Button onClick={addExperience} variant="outlined" size="small">
                 Add Experience
               </Button>
             </div>
-            <div sx={{
-      "space-y-4": true
-    }}>
+            <div sx={{}}>
               {resumeData.experience.map((exp, index) => (
                 <div key={exp.id} sx={{
       p: 4,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem,
-      "space-y-3": true
-    }}>
+      borderRadius: "0.5rem",}}>
                   <div sx={{
-      "grid": true,
-      "grid-cols-2": true,
       gap: 3
     }}>
                     <Input
@@ -578,9 +532,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
           </Card>
         </div>
 
-        <div sx={{
-      "space-y-6": true
-    }}>
+        <div sx={{}}>
           <Card sx={{
       p: 6
     }}>
@@ -591,24 +543,19 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       mb: 4
     }}>
               <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500
     }}>Education</h3>
               <Button onClick={addEducation} variant="outlined" size="small">
                 Add Education
               </Button>
             </div>
-            <div sx={{
-      "space-y-4": true
-    }}>
+            <div sx={{}}>
               {resumeData.education.map((edu, index) => (
                 <div key={edu.id} sx={{
       p: 4,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem,
-      "space-y-3": true
-    }}>
+      borderRadius: "0.5rem",}}>
                   <Input
                     placeholder="Degree"
                     value={edu.degree}
@@ -654,13 +601,11 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       p: 6
     }}>
             <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500,
       mb: 4
     }}>Skills</h3>
-            <div sx={{
-      "space-y-4": true
-    }}>
+            <div sx={{}}>
               <div sx={{
       display: "flex",
       gap: 2
@@ -684,12 +629,10 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
                   <div
                     key={index}
                     sx={{
-      "bg-primary/10": true,
-      "text-primary": true,
       px: 3,
       py: 1,
-      borderRadius: 0.375rem,
-      typography: body1,
+      borderRadius: "0.375rem",
+      typography: "body1",
       display: "flex",
       alignItems: "center",
       gap: 2
@@ -699,8 +642,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
                     <button
                       onClick={() => removeSkill(index)}
                       sx={{
-      "text-primary": true,
-      '&:hover': { "text-primary/70": true }
+      '&:hover': {}
     }}
                     >
                       ×
@@ -715,7 +657,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       p: 6
     }}>
             <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500,
       mb: 4
     }}>Resume Preview</h3>
@@ -723,15 +665,14 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
       bgcolor: "common.white",
       color: "common.black",
       p: 6,
-      borderRadius: 0.5rem,
-      "min-h-96": true,
-      typography: body1
+      borderRadius: "0.5rem",
+      typography: "body1"
     }}>
               <div sx={{
       mb: 4
     }}>
                 <h2 sx={{
-      typography: h5,
+      typography: "h5",
       fontWeight: 700
     }}>
                   {resumeData.personalInfo.fullName || 'Your Name'}
@@ -790,7 +731,7 @@ export function ResumeBuilder({ template, onBack, onNext, profileName }: ResumeB
                           {exp.description && (
                             <p sx={{
       color: "gray.700",
-      typography: body1
+      typography: "body1"
     }}>{exp.description}</p>
                           )}
                         </div>
