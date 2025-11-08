@@ -237,16 +237,13 @@ export function InterviewPrep({
 
   return (
     <Box sx={{
-      width: "100%",
-      "max-w-6xl": true,
-      "mx-auto": true
-    }}>
+      width: "100%",}}>
       {/* Header */}
       <Box sx={{
       mb: 6
     }}>
         <Typography variant="h4" sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       mb: 2
     }}>
@@ -310,8 +307,7 @@ export function InterviewPrep({
               value={progress}
               sx={{
       flex: 1,
-      "h-2": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
             />
           </Box>
@@ -343,9 +339,7 @@ export function InterviewPrep({
                     label={currentQuestion.category}
                     size="small"
                     sx={{
-      bgcolor: "blue.100",
-      "text-blue-800": true
-    }}
+      bgcolor: "blue.100",}}
                   />
                   <Chip
                     label={currentQuestion.difficulty}
@@ -369,7 +363,7 @@ export function InterviewPrep({
       display: "flex",
       alignItems: "center",
       gap: 1,
-      typography: body1,
+      typography: "body1",
       color: "gray.500"
     }}>
                     <Clock sx={{ fontSize: 16 }} />
@@ -455,8 +449,7 @@ export function InterviewPrep({
                     onClick={handleGetFeedback}
                     disabled={!userAnswer.trim() && !isRecording}
                     sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}
                     startIcon={<MessageSquare sx={{ fontSize: 16 }} />}
                   >
@@ -501,9 +494,7 @@ export function InterviewPrep({
                     <Star sx={{ fontSize: 16 }} sx={{
       color: "yellow.500"
     }} />
-                    <Star sx={{ fontSize: 16 }} sx={{
-      "text-gray-300": true
-    }} />
+                    <Star sx={{ fontSize: 16 }} sx={{}} />
                     <Typography variant="caption" sx={{
       ml: 2
     }}>
@@ -533,8 +524,7 @@ export function InterviewPrep({
                   disabled={currentQuestionIndex === filteredQuestions.length - 1}
                   endIcon={<ChevronRight sx={{ fontSize: 16 }} />}
                   sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}
                 >
                   Next Question
@@ -580,9 +570,7 @@ export function InterviewPrep({
                       Interview Tips
                     </Typography>
                   </Box>
-                  <Box sx={{
-      "space-y-3": true
-    }}>
+                  <Box sx={{}}>
                     {currentQuestion.tips.map((tip, index) => (
                       <Box key={index} sx={{
       display: "flex",
@@ -590,10 +578,7 @@ export function InterviewPrep({
       gap: 2
     }}>
                         <Box sx={{
-      "w-2": true,
-      "h-2": true,
-      "bg-primary": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       mt: 2,
       flexShrink: 0
     }} />
@@ -614,9 +599,7 @@ export function InterviewPrep({
     }}>
                     Key Points to Address
                   </Typography>
-                  <Box sx={{
-      "space-y-2": true
-    }}>
+                  <Box sx={{}}>
                     {currentQuestion.keyPoints.map((point, index) => (
                       <Chip
                         key={index}
@@ -647,18 +630,15 @@ export function InterviewPrep({
     }}>
                     Potential Follow-up Questions:
                   </Typography>
-                  <Box sx={{
-      "space-y-2": true
-    }}>
+                  <Box sx={{}}>
                     {currentQuestion.followUpQuestions.map((followUp, index) => (
                       <Typography
                         key={index}
                         variant="caption"
                         sx={{
-      "block": true,
       p: 2,
       bgcolor: "gray.50",
-      borderRadius: 0.25rem,
+      borderRadius: "0.25rem",
       color: "gray.600"
     }}
                       >

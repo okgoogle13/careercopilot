@@ -430,35 +430,14 @@ export function DocumentPreview({
   // Get file icon based on export format
   const getFileIcon = (format: string) => {
     const icons: Record<string, React.ReactNode> = {
-      pdf: <FileText sx={{
-      "w-4": true,
-      "h-4": true
-    }} />,
-      docx: <FileText sx={{
-      "w-4": true,
-      "h-4": true
-    }} />,
-      txt: <Code sx={{
-      "w-4": true,
-      "h-4": true
-    }} />,
-      jpg: <FileImage sx={{
-      "w-4": true,
-      "h-4": true
-    }} />,
-      png: <FileImage sx={{
-      "w-4": true,
-      "h-4": true
-    }} />,
-      zip: <Archive sx={{
-      "w-4": true,
-      "h-4": true
-    }} />,
+      pdf: <FileText sx={{}} />,
+      docx: <FileText sx={{}} />,
+      txt: <Code sx={{}} />,
+      jpg: <FileImage sx={{}} />,
+      png: <FileImage sx={{}} />,
+      zip: <Archive sx={{}} />,
     };
-    return icons[format] || <FileText sx={{
-      "w-4": true,
-      "h-4": true
-    }} />;
+    return icons[format] || <FileText sx={{}} />;
   };
 
   return (
@@ -492,9 +471,7 @@ export function DocumentPreview({
     }}>
             <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-4": true
-    }}>
+      alignItems: "center",}}>
               <Button
                 variant="text"
                 size="small"
@@ -502,28 +479,22 @@ export function DocumentPreview({
                 sx={{
       color: "gray.500",
       '&:hover': { bgcolor: "gray.100" },
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
               >
-                <ArrowLeft sx={{
-      "h-5": true,
-      "w-5": true
-    }} />
+                <ArrowLeft sx={{}} />
                 <span sx={{
-      [object Object]
+      
     }}>Back</span>
               </Button>
               <div>
                 <h1 sx={{
-      typography: h6,
-      fontWeight: 600,
-      "text-gray-900": true
-    }}>{document.title}</h1>
+      typography: "h6",
+      fontWeight: 600,}}>{document.title}</h1>
                 <div sx={{
       display: "flex",
       alignItems: "center",
-      "space-x-2": true,
-      typography: body1,
+      typography: "body1",
       color: "gray.500"
     }}>
                   <span>Last modified: {formatDate(document.updatedAt)}</span>
@@ -535,20 +506,13 @@ export function DocumentPreview({
       alignItems: "center",
       gap: 1
     }}>
-                    <Clock sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                    <Clock sx={{}} />
                     {formatTime(trackingTime)} reading time
                   </span>
                   {isTracking && (
                     <div sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "green.500",
-      borderRadius: 9999px,
-      "animate-pulse": true
-    }} />
+      borderRadius: "9999px",}} />
                   )}
                 </div>
               </div>
@@ -557,9 +521,7 @@ export function DocumentPreview({
             {/* Enhanced Action Buttons */}
             <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-2": true
-    }}>
+      alignItems: "center",}}>
               <Tooltip title="Get AI-powered suggestions for improvement">
                 <Button
                   variant="outlined"
@@ -567,14 +529,9 @@ export function DocumentPreview({
                   onClick={generateAISuggestions}
                   sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-1.5": true
-    }}
+      alignItems: "center",}}
                 >
-                  <Lightbulb sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                  <Lightbulb sx={{}} />
                   <span>AI Assist</span>
                 </Button>
               </Tooltip>
@@ -594,10 +551,7 @@ export function DocumentPreview({
                     }),
                   }}
                 >
-                  <Eye sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                  <Eye sx={{}} />
                   <span>Reading</span>
                 </Button>
               </Tooltip>
@@ -608,14 +562,9 @@ export function DocumentPreview({
                 onClick={() => setShowShareDialog(true)}
                 sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-1.5": true
-    }}
+      alignItems: "center",}}
               >
-                <Share sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                <Share sx={{}} />
                 <span>Share</span>
               </Button>
 
@@ -625,26 +574,15 @@ export function DocumentPreview({
                 onClick={onEdit}
                 sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-1.5": true
-    }}
+      alignItems: "center",}}
               >
-                <Edit sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                <Edit sx={{}} />
                 <span>Edit Document</span>
               </Button>
 
               <Tooltip title={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}>
                 <Button variant="text" size="small" onClick={toggleFullscreen}>
-                  {isFullscreen ? <X sx={{
-      "h-4": true,
-      "w-4": true
-    }} /> : <Settings sx={{
-      "h-4": true,
-      "w-4": true
-    }} />}
+                  {isFullscreen ? <X sx={{}} /> : <Settings sx={{}} />}
                 </Button>
               </Tooltip>
             </div>
@@ -671,21 +609,16 @@ export function DocumentPreview({
       '&:hover': { bgcolor: "gray.100" }
     }}>
                 <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Back to Templates
               </Button>
               <div>
                 <h1 sx={{
-      typography: h4,
-      fontWeight: 700,
-      "text-foreground": true
-    }}>Document Preview</h1>
+      typography: "h4",
+      fontWeight: 700,}}>Document Preview</h1>
                 <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mt: 1
     }}>
                   {mockDocument.title} • Template: {templateName}
@@ -698,35 +631,26 @@ export function DocumentPreview({
     }}>
               <Button variant="outlined" onClick={onEdit}>
                 <Edit sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Edit Document
               </Button>
               <Button variant="outlined">
                 <Share sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Share
               </Button>
               <Button variant="outlined">
                 <Printer sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Print
               </Button>
               <Button sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}>
                 <Download sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Download PDF
@@ -735,16 +659,12 @@ export function DocumentPreview({
           </div>
 
           <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-4": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}>
             {/* Document Info Sidebar */}
             <div sx={{
-      [theme.breakpoints.up('md')]: { "col-span-1": true },
-      "space-y-4": true
-    }}>
+      [theme.breakpoints.up('md')]: {},}}>
               <Card sx={{
       p: 4
     }}>
@@ -753,16 +673,13 @@ export function DocumentPreview({
       mb: 3
     }}>Document Info</h3>
                 <div sx={{
-      "space-y-2": true,
-      typography: body1
+      typography: "body1"
     }}>
                   <div sx={{
       display: "flex",
       justifyContent: "space-between"
     }}>
-                    <span sx={{
-      "text-muted-foreground": true
-    }}>Type:</span>
+                    <span sx={{}}>Type:</span>
                     <Badge variant="secondary" sx={{
       textTransform: "capitalize"
     }}>
@@ -773,9 +690,7 @@ export function DocumentPreview({
       display: "flex",
       justifyContent: "space-between"
     }}>
-                    <span sx={{
-      "text-muted-foreground": true
-    }}>Template:</span>
+                    <span sx={{}}>Template:</span>
                     <span sx={{
       fontWeight: 500
     }}>{templateName}</span>
@@ -784,9 +699,7 @@ export function DocumentPreview({
       display: "flex",
       justifyContent: "space-between"
     }}>
-                    <span sx={{
-      "text-muted-foreground": true
-    }}>Pages:</span>
+                    <span sx={{}}>Pages:</span>
                     <span sx={{
       fontWeight: 500
     }}>{mockDocument.pages}</span>
@@ -795,9 +708,7 @@ export function DocumentPreview({
       display: "flex",
       justifyContent: "space-between"
     }}>
-                    <span sx={{
-      "text-muted-foreground": true
-    }}>Modified:</span>
+                    <span sx={{}}>Modified:</span>
                     <span sx={{
       fontWeight: 500
     }}>{mockDocument.lastModified}</span>
@@ -812,20 +723,16 @@ export function DocumentPreview({
       fontWeight: 500,
       mb: 3
     }}>View Options</h3>
-                <div sx={{
-      "space-y-3": true
-    }}>
+                <div sx={{}}>
                   <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
     }}>
                     <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Zoom Level</span>
+      typography: "body1",}}>Zoom Level</span>
                     <span sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500
     }}>{zoomLevel}%</span>
                   </div>
@@ -834,22 +741,13 @@ export function DocumentPreview({
       gap: 1
     }}>
                     <Button size="small" variant="outlined" onClick={handleZoomOut}>
-                      <ZoomOut sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                      <ZoomOut sx={{}} />
                     </Button>
                     <Button size="small" variant="outlined" onClick={handleResetZoom}>
-                      <RotateCcw sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                      <RotateCcw sx={{}} />
                     </Button>
                     <Button size="small" variant="outlined" onClick={handleZoomIn}>
-                      <ZoomIn sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                      <ZoomIn sx={{}} />
                     </Button>
                   </div>
                 </div>
@@ -862,16 +760,12 @@ export function DocumentPreview({
       fontWeight: 500,
       mb: 3
     }}>Export Options</h3>
-                <div sx={{
-      "space-y-2": true
-    }}>
+                <div sx={{}}>
                   <Button variant="outlined" size="small" sx={{
       width: "100%",
       justifyContent: "flex-start"
     }}>
                     <Download sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 2
     }} />
                     PDF (Recommended)
@@ -881,8 +775,6 @@ export function DocumentPreview({
       justifyContent: "flex-start"
     }}>
                     <Download sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 2
     }} />
                     Word Document
@@ -892,8 +784,6 @@ export function DocumentPreview({
       justifyContent: "flex-start"
     }}>
                     <Download sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 2
     }} />
                     Plain Text
@@ -912,15 +802,12 @@ export function DocumentPreview({
       textAlign: "center"
     }}>
                   <div sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
-      "text-green-400": true,
       mb: 2
     }}>87%</div>
                   <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Excellent ATS compatibility</div>
+      typography: "body1",}}>Excellent ATS compatibility</div>
                   <Button variant="outlined" size="small" sx={{
       width: "100%",
       mt: 3
@@ -933,7 +820,7 @@ export function DocumentPreview({
 
             {/* Document Preview */}
             <div sx={{
-      [theme.breakpoints.up('md')]: { "col-span-3": true }
+      [theme.breakpoints.up('md')]: {}
     }}>
               <Card sx={{
       p: 6
@@ -953,9 +840,7 @@ export function DocumentPreview({
       display: "flex",
       alignItems: "center",
       gap: 2,
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                         <Button
                           size="small"
                           variant="outlined"
@@ -983,7 +868,7 @@ export function DocumentPreview({
                   <div sx={{
       bgcolor: "gray.100",
       p: 8,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       display: "flex",
       justifyContent: "center",
       overflow: "auto"
@@ -992,8 +877,6 @@ export function DocumentPreview({
                       sx={{
       bgcolor: "common.white",
       boxShadow: 4,
-      "transition-transform": true,
-      "duration-200": true,
       w: "8.5in"
     }}
                       style={{
@@ -1008,9 +891,7 @@ export function DocumentPreview({
       p: 12,
       height: "100%"
     }}>
-                        <div sx={{
-      "space-y-6": true
-    }}>
+                        <div sx={{}}>
                           {/* Header */}
                           <div sx={{
       textAlign: "center",
@@ -1019,17 +900,14 @@ export function DocumentPreview({
       pb: 4
     }}>
                             <h1 sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
-      "text-gray-900": true,
       mb: 2
     }}>
                               Nishant Dougall
                             </h1>
                             <div sx={{
-      color: "gray.600",
-      "space-y-1": true
-    }}>
+      color: "gray.600",}}>
                               <p>nishant.dougall@email.com • (555) 123-4567</p>
                               <p>Vancouver, BC • linkedin.com/in/nishantdougall</p>
                             </div>
@@ -1038,9 +916,8 @@ export function DocumentPreview({
                           {/* Professional Summary */}
                           <div>
                             <h2 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
-      "text-gray-900": true,
       mb: 2,
       borderBottom: 1,
       borderColor: "gray.200",
@@ -1049,9 +926,7 @@ export function DocumentPreview({
                               Professional Summary
                             </h2>
                             <p sx={{
-      color: "gray.700",
-      "leading-relaxed": true
-    }}>
+      color: "gray.700",}}>
                               Dedicated Community Support Worker with 3+ years of experience
                               providing client-centered care and advocacy. Proven track record in
                               crisis intervention, case management, and supporting individuals with
@@ -1062,9 +937,8 @@ export function DocumentPreview({
                           {/* Experience */}
                           <div>
                             <h2 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
-      "text-gray-900": true,
       mb: 3,
       borderBottom: 1,
       borderColor: "gray.200",
@@ -1072,9 +946,7 @@ export function DocumentPreview({
     }}>
                               Professional Experience
                             </h2>
-                            <div sx={{
-      "space-y-4": true
-    }}>
+                            <div sx={{}}>
                               <div>
                                 <div sx={{
       display: "flex",
@@ -1084,9 +956,7 @@ export function DocumentPreview({
     }}>
                                   <div>
                                     <h3 sx={{
-      fontWeight: 500,
-      "text-gray-900": true
-    }}>
+      fontWeight: 500,}}>
                                       Community Support Worker
                                     </h3>
                                     <p sx={{
@@ -1095,13 +965,12 @@ export function DocumentPreview({
                                   </div>
                                   <span sx={{
       color: "gray.500",
-      typography: body1
+      typography: "body1"
     }}>2021 - Present</span>
                                 </div>
                                 <ul sx={{
       color: "gray.700",
-      "space-y-1": true,
-      typography: body1
+      typography: "body1"
     }}>
                                   <li>
                                     • Provide support to 25+ individuals with developmental
@@ -1131,9 +1000,7 @@ export function DocumentPreview({
     }}>
                                   <div>
                                     <h3 sx={{
-      fontWeight: 500,
-      "text-gray-900": true
-    }}>
+      fontWeight: 500,}}>
                                       Mental Health Support Assistant
                                     </h3>
                                     <p sx={{
@@ -1142,13 +1009,12 @@ export function DocumentPreview({
                                   </div>
                                   <span sx={{
       color: "gray.500",
-      typography: body1
+      typography: "body1"
     }}>2019 - 2021</span>
                                 </div>
                                 <ul sx={{
       color: "gray.700",
-      "space-y-1": true,
-      typography: body1
+      typography: "body1"
     }}>
                                   <li>
                                     • Assisted mental health professionals in group therapy sessions
@@ -1166,9 +1032,8 @@ export function DocumentPreview({
                           {/* Skills */}
                           <div>
                             <h2 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
-      "text-gray-900": true,
       mb: 2,
       borderBottom: 1,
       borderColor: "gray.200",
@@ -1178,7 +1043,7 @@ export function DocumentPreview({
                             </h2>
                             <div sx={{
       color: "gray.700",
-      typography: body1
+      typography: "body1"
     }}>
                               <p>
                                 <strong>Clinical Skills:</strong> Crisis Intervention, Case
@@ -1198,9 +1063,8 @@ export function DocumentPreview({
                           {/* Education & Certifications */}
                           <div>
                             <h2 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
-      "text-gray-900": true,
       mb: 2,
       borderBottom: 1,
       borderColor: "gray.200",
@@ -1208,9 +1072,7 @@ export function DocumentPreview({
     }}>
                               Education & Certifications
                             </h2>
-                            <div sx={{
-      "space-y-2": true
-    }}>
+                            <div sx={{}}>
                               <div sx={{
       display: "flex",
       justifyContent: "space-between",
@@ -1218,9 +1080,7 @@ export function DocumentPreview({
     }}>
                                 <div>
                                   <h3 sx={{
-      fontWeight: 500,
-      "text-gray-900": true
-    }}>
+      fontWeight: 500,}}>
                                     Diploma in Community Support Work
                                   </h3>
                                   <p sx={{
@@ -1229,11 +1089,11 @@ export function DocumentPreview({
                                 </div>
                                 <span sx={{
       color: "gray.500",
-      typography: body1
+      typography: "body1"
     }}>2019</span>
                               </div>
                               <div sx={{
-      typography: body1,
+      typography: "body1",
       color: "gray.700"
     }}>
                                 <p>

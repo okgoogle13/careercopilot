@@ -141,9 +141,7 @@ export function ProfileComparison({
 
   const renderSkillsComparison = () => (
     <Box sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
       <Card>
@@ -212,9 +210,7 @@ export function ProfileComparison({
 
   const renderExperienceComparison = () => (
     <Box sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
       <Card>
@@ -227,12 +223,9 @@ export function ProfileComparison({
     }}>
             {leftProfile.name} - Experience
           </Typography>
-          <Box sx={{
-      "space-y-4": true
-    }}>
+          <Box sx={{}}>
             {leftProfile.experience.map((exp, index) => (
               <Box key={index} sx={{
-      "border-l-2": true,
       borderColor: "gray.200",
       pl: 4
     }}>
@@ -246,9 +239,7 @@ export function ProfileComparison({
                 </Typography>
                 <ul sx={{
       mt: 2,
-      typography: body1,
-      "space-y-1": true
-    }}>
+      typography: "body1",}}>
                   {exp.highlights.map((highlight, hIndex) => (
                     <li key={hIndex} sx={{
       color: "gray.600"
@@ -273,12 +264,9 @@ export function ProfileComparison({
     }}>
             {rightProfile.name} - Experience
           </Typography>
-          <Box sx={{
-      "space-y-4": true
-    }}>
+          <Box sx={{}}>
             {rightProfile.experience.map((exp, index) => (
               <Box key={index} sx={{
-      "border-l-2": true,
       borderColor: "blue.200",
       pl: 4
     }}>
@@ -292,9 +280,7 @@ export function ProfileComparison({
                 </Typography>
                 <ul sx={{
       mt: 2,
-      typography: body1,
-      "space-y-1": true
-    }}>
+      typography: "body1",}}>
                   {exp.highlights.map((highlight, hIndex) => (
                     <li key={hIndex} sx={{
       color: "gray.600"
@@ -324,7 +310,7 @@ export function ProfileComparison({
     }}>
         <Box>
           <Typography variant="h4" sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       mb: 2
     }}>
@@ -352,8 +338,7 @@ export function ProfileComparison({
           <Button
             variant="contained"
             sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}
             startIcon={<Share sx={{ fontSize: 16 }} />}
           >
@@ -364,9 +349,7 @@ export function ProfileComparison({
 
       {/* Profile Cards Overview */}
       <Box sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6,
       mb: 8
     }}>
@@ -431,9 +414,7 @@ export function ProfileComparison({
       <Box sx={{
       display: "flex",
       gap: 2,
-      mb: 6,
-      "overflow-x-auto": true
-    }}>
+      mb: 6,}}>
         {sections.map((section) => (
           <Button
             key={section.id}

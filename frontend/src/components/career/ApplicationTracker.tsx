@@ -248,8 +248,7 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
         <DialogActions>
           <Button onClick={handleCloseTimeline}>Close</Button>
           <Button variant="contained" sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}>
             Add Event
           </Button>

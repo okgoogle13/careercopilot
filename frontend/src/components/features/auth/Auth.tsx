@@ -21,7 +21,6 @@ export function Auth({ onLogin }: AuthProps) {
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -29,23 +28,19 @@ export function Auth({ onLogin }: AuthProps) {
     }}>
       <div sx={{
       width: "100%",
-      maxWidth: "md",
-      "space-y-6": true
-    }}>
+      maxWidth: "md",}}>
         {/* Logo */}
         <div sx={{
       textAlign: "center"
     }}>
           <CareerCopilotLogo sx={{
-      "mx-auto": true,
       mb: 4
     }} />
           <h1 sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 600
     }}>Welcome to FML Career Copilot</h1>
           <p sx={{
-      "text-muted-foreground": true,
       mt: 2
     }}>Your AI-powered job application assistant</p>
         </div>
@@ -54,18 +49,14 @@ export function Auth({ onLogin }: AuthProps) {
         <Card sx={{
       p: 6
     }}>
-          <div sx={{
-      "space-y-4": true
-    }}>
+          <div sx={{}}>
             <h2 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       textAlign: "center"
     }}>Sign In</h2>
 
-            <div sx={{
-      "space-y-3": true
-    }}>
+            <div sx={{}}>
               <Input type="email" placeholder="you@example.com" sx={{
       width: "100%"
     }} />
@@ -76,8 +67,7 @@ export function Auth({ onLogin }: AuthProps) {
 
             <Button sx={{
       width: "100%",
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }} onClick={onLogin}>
               Sign In
             </Button>
@@ -85,20 +75,14 @@ export function Auth({ onLogin }: AuthProps) {
             <div sx={{
       display: "flex",
       alignItems: "center",
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
               <hr sx={{
-      flex: 1,
-      "border-border": true
-    }} />
+      flex: 1,}} />
               <span sx={{
       px: 3
     }}>OR</span>
               <hr sx={{
-      flex: 1,
-      "border-border": true
-    }} />
+      flex: 1,}} />
             </div>
 
             <Button
@@ -113,20 +97,17 @@ export function Auth({ onLogin }: AuthProps) {
             >
               <span sx={{
       mr: 2,
-      typography: h6
+      typography: "h6"
     }}>G</span>
               Continue with Google
             </Button>
 
             <div sx={{
       textAlign: "center",
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
               <p>
                 Don't have an account?{' '}
                 <button sx={{
-      "text-primary": true,
       '&:hover': { textDecoration: "underline" }
     }} onClick={onLogin}>
                   Sign Up

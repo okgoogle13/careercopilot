@@ -25,8 +25,7 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
       description="Explore advanced component functionality with interactive demonstrations."
     >
       <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4
     }}>
         <Card variant="elevation">
@@ -45,23 +44,16 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
     }}>
                 <div sx={{
       p: 3,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                  <Sparkles sx={{
-      "w-6": true,
-      "h-6": true,
-      "text-primary": true
-    }} />
+                  <Sparkles sx={{}} />
                 </div>
                 <div>
                   <h3 sx={{
       fontWeight: 500,
       mb: 1
     }}>Animated Components</h3>
-                  <p sx={{
-      "text-muted-foreground": true
-    }}>
+                  <p sx={{}}>
                     Explore smooth animations and micro-interactions
                   </p>
                 </div>
@@ -87,23 +79,16 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
     }}>
                 <div sx={{
       p: 3,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                  <Play sx={{
-      "w-6": true,
-      "h-6": true,
-      "text-primary": true
-    }} />
+                  <Play sx={{}} />
                 </div>
                 <div>
                   <h3 sx={{
       fontWeight: 500,
       mb: 1
     }}>State Management Demo</h3>
-                  <p sx={{
-      "text-muted-foreground": true
-    }}>
+                  <p sx={{}}>
                     Simulate loading states and error scenarios
                   </p>
                 </div>

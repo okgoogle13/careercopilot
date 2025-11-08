@@ -30,7 +30,7 @@ class PromptTemplate:
     has_system_prompt: bool = False
     metadata: Dict[str, Any] = field(default_factory=dict)
 
-    def format(self, **kwargs) -> str:
+    def format(self, **kwargs: Any) -> str:
         """Format the template with provided parameters"""
         try:
             # Validate required parameters
@@ -158,7 +158,7 @@ class PromptService:
         """List all available categories"""
         return list(set(template.category for template in self._templates.values()))
 
-    def format_prompt(self, template_id: str, **kwargs) -> str:
+    def format_prompt(self, template_id: str, **kwargs: Any) -> str:
         """Format a prompt template with the provided parameters"""
         template = self.get_template(template_id)
         if not template:
@@ -180,11 +180,14 @@ class PromptService:
 
     def get_category_config(self, category: str) -> Dict[str, Any]:
         """Get configuration for a specific category"""
-        return self._config.get("categories", {}).get(category, {})
+        categories = self._config.get("categories", {})
+        from typing import cast as _cast
+        return _cast(Dict[str, Any], categories.get(category, {}))
 
     def get_length_instruction(self, length_type: str) -> str:
         """Get length instruction text for a specific type"""
-        length_instructions = self._config.get("length_instructions", {})
+        from typing import Dict as _Dict, cast as _cast
+        length_instructions = _cast(_Dict[str, str], self._config.get("length_instructions", {}))
         return length_instructions.get(length_type, length_instructions.get("standard", ""))
 
     def validate_template_parameters(
@@ -240,7 +243,7 @@ def get_prompt_service() -> PromptService:
     return _prompt_service
 
 
-def format_prompt(template_id: str, **kwargs) -> str:
+def format_prompt(template_id: str, **kwargs: Any) -> str:
     """Convenience function to format a prompt"""
     service = get_prompt_service()
     service.update_template_usage(template_id)

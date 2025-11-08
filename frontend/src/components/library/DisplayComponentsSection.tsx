@@ -35,25 +35,19 @@ export function DisplayComponentsSection() {
           <Badge sx={{
       bgcolor: "green.500"
     }}>Custom Green</Badge>
-          <Badge sx={{
-      "bg-primary": true
-    }}>Primary</Badge>
+          <Badge sx={{}}>Primary</Badge>
         </div>
       </ComponentDemo>
 
       <ComponentDemo title="Progress & Avatars">
         <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
-          <div sx={{
-      "space-y-4": true
-    }}>
+          <div sx={{}}>
             <div>
               <Label>Progress Indicators</Label>
               <div sx={{
-      "space-y-3": true,
       mt: 2
     }}>
                 <div>
@@ -61,8 +55,7 @@ export function DisplayComponentsSection() {
       width: "100%"
     }} />
                   <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mt: 1
     }}>33% Complete</p>
                 </div>
@@ -71,8 +64,7 @@ export function DisplayComponentsSection() {
       width: "100%"
     }} />
                   <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mt: 1
     }}>66% Complete</p>
                 </div>
@@ -81,17 +73,14 @@ export function DisplayComponentsSection() {
       width: "100%"
     }} />
                   <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mt: 1
     }}>100% Complete</p>
                 </div>
               </div>
             </div>
           </div>
-          <div sx={{
-      "space-y-4": true
-    }}>
+          <div sx={{}}>
             <Label>Avatars</Label>
             <div sx={{
       display: "flex",
@@ -106,10 +95,7 @@ export function DisplayComponentsSection() {
                 <AvatarFallback>AB</AvatarFallback>
               </Avatar>
               <Avatar>
-                <AvatarFallback sx={{
-      "bg-primary": true,
-      "text-primary-foreground": true
-    }}>CD</AvatarFallback>
+                <AvatarFallback sx={{}}>CD</AvatarFallback>
               </Avatar>
             </div>
           </div>
@@ -117,14 +103,9 @@ export function DisplayComponentsSection() {
       </ComponentDemo>
 
       <ComponentDemo title="Alerts">
-        <div sx={{
-      "space-y-4": true
-    }}>
+        <div sx={{}}>
           <Alert>
-            <Info sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+            <Info sx={{}} />
             <AlertTitle>Information</AlertTitle>
             <AlertDescription>
               This is an informational alert with additional details.
@@ -135,10 +116,7 @@ export function DisplayComponentsSection() {
       borderColor: "red.300",
       bgcolor: "red.50"
     }}>
-            <AlertTriangle sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+            <AlertTriangle sx={{}} />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>Something went wrong. Please try again later.</AlertDescription>
           </Alert>

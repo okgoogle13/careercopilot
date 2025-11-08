@@ -45,27 +45,23 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
     }}>
         <div>
           <DialogTitle sx={{
-      typography: h5
+      typography: "h5"
     }}>{document.title}</DialogTitle>
           <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
             {document.type} • {formattedDate}
           </p>
         </div>
         <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-2": true
-    }}>
+      alignItems: "center",}}>
           {document.atsScore !== undefined && (
             <div sx={{
       display: "flex",
       alignItems: "center"
     }}>
               <span sx={{
-      typography: body1,
+      typography: "body1",
       mr: 2
     }}>ATS Score:</span>
               <ATSScoreCircle score={document.atsScore} size="small" showScore={false} />
@@ -78,15 +74,11 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
           <Button variant="link" size="small" onClick={onClose} sx={{
       ml: 2
     }} aria-label="Close">
-            <X sx={{
-      "h-5": true,
-      "w-5": true
-    }} />
+            <X sx={{}} />
           </Button>
         </div>
       </DialogHeader>
       <DialogContent sx={{
-      "max-w-4xl": true,
       h: "90vh",
       overflow: "hidden",
       display: "flex",
@@ -99,10 +91,8 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
     }}>
           {document.previewUrl ? (
             <div sx={{
-      "bg-muted/30": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       border: 1,
-      "border-border": true,
       p: 4,
       display: "flex",
       alignItems: "center",
@@ -113,26 +103,18 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
                 alt={`Preview of ${document.title}`}
                 sx={{
       maxWidth: "100%",
-      h: "60vh",
-      "object-contain": true
-    }}
+      h: "60vh",}}
               />
             </div>
           ) : (
             <div sx={{
-      "h-64": true,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      "bg-muted/30": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       border: 1,
-      borderStyle: "dashed",
-      "border-border": true
-    }}>
-              <p sx={{
-      "text-muted-foreground": true
-    }}>No preview available</p>
+      borderStyle: "dashed",}}>
+              <p sx={{}}>No preview available</p>
             </div>
           )}
         </div>
@@ -145,33 +127,23 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
       pt: 4,
       borderTop: 1
     }}>
-          <div sx={{
-      "space-x-2": true
-    }}>
+          <div sx={{}}>
             <Button variant="outline" size="small" onClick={() => onEdit?.(document)}>
               <Edit sx={{
-      "h-4": true,
-      "w-4": true,
       mr: 2
     }} />
               Edit
             </Button>
             <Button variant="outline" size="small" onClick={() => onDownload?.(document)}>
               <Download sx={{
-      "h-4": true,
-      "w-4": true,
       mr: 2
     }} />
               Download
             </Button>
           </div>
-          <div sx={{
-      "space-x-2": true
-    }}>
+          <div sx={{}}>
             <Button variant="link" size="small" onClick={() => onShare?.(document)}>
               <Share2 sx={{
-      "h-4": true,
-      "w-4": true,
       mr: 2
     }} />
               Share
@@ -181,13 +153,10 @@ export const DocumentPreviewModal: React.FC<DocumentPreviewModalProps> = ({
               size="small"
               onClick={() => onDelete?.(document)}
               sx={{
-      "text-destructive": true,
-      '&:hover': { "text-destructive": true }
+      '&:hover': {}
     }}
             >
               <Trash2 sx={{
-      "h-4": true,
-      "w-4": true,
       mr: 2
     }} />
               Delete

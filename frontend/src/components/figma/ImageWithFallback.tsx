@@ -16,14 +16,8 @@ export function ImageWithFallback(props: React.ImgHTMLAttributes<HTMLImageElemen
   return didError ? (
     <div
       sx={{
-      "inline-block": true,
       bgcolor: "gray.100",
-      textAlign: "center",
-      "align-middle": true,
-      "${className": true,
-      "??": true,
-      "''}": true
-    }}
+      textAlign: "center",}}
       style={style}
     >
       <div sx={{

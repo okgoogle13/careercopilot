@@ -48,6 +48,8 @@ logs/
 *.log
 
 # Coverage
+htmlcov/
+.coverage
 
 # Backup directories
 frontend-pre-migration-backup/

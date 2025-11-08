@@ -63,9 +63,6 @@ class ErrorBoundary extends Component<Props, State> {
       return (
         <div sx={{
       minHeight: "100vh",
-      "bg-gradient-to-br": true,
-      "from-gray-50": true,
-      "to-gray-100": true,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -84,16 +81,12 @@ class ErrorBoundary extends Component<Props, State> {
       mb: 6
     }}>
               <Warning sx={{
-      "w-16": true,
-      "h-16": true,
-      "mx-auto": true,
       color: "red.500",
       mb: 4
     }} />
               <h1 sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
-      "text-gray-900": true,
       mb: 2
     }}>Oops! Something went wrong</h1>
               <p sx={{
@@ -110,7 +103,7 @@ class ErrorBoundary extends Component<Props, State> {
     }}>
                 <summary sx={{
       cursor: "pointer",
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
       color: "gray.700",
       mb: 2
@@ -123,11 +116,10 @@ class ErrorBoundary extends Component<Props, State> {
       borderColor: "red.200",
       borderRadius: '0.25rem',
       p: 3,
-      typography: body2
+      typography: "body2"
     }}>
                   <p sx={{
       fontWeight: 500,
-      "text-red-800": true,
       mb: 1
     }}>
                     {this.state.error.name}: {this.state.error.message}
@@ -135,9 +127,7 @@ class ErrorBoundary extends Component<Props, State> {
                   <pre sx={{
       color: "red.700",
       whiteSpace: "pre-wrap",
-      overflow: "auto",
-      "max-h-32": true
-    }}>
+      overflow: "auto",}}>
                     {this.state.error.stack}
                   </pre>
                   {this.state.errorInfo && (
@@ -145,7 +135,6 @@ class ErrorBoundary extends Component<Props, State> {
       color: "red.700",
       whiteSpace: "pre-wrap",
       overflow: "auto",
-      "max-h-32": true,
       mt: 2
     }}>
                       {this.state.errorInfo.componentStack}
@@ -172,22 +161,15 @@ class ErrorBoundary extends Component<Props, State> {
       py: 2,
       border: 1,
       borderColor: "transparent",
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
       borderRadius: '0.375rem',
       color: "common.white",
-      "bg-blue-600": true,
-      '&:hover': { "bg-blue-700": true },
+      '&:hover': {},
       '&:focus': { outline: 'none' },
-      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },
-      "focus:ring-offset-2": true,
-      "focus:ring-blue-500": true,
-      "transition-colors": true
-    }}
+      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },}}
               >
                 <Refresh sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Try Again
@@ -203,22 +185,16 @@ class ErrorBoundary extends Component<Props, State> {
       py: 2,
       border: 1,
       borderColor: "gray.300",
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
       borderRadius: '0.375rem',
       color: "gray.700",
       bgcolor: "common.white",
       '&:hover': { bgcolor: "gray.50" },
       '&:focus': { outline: 'none' },
-      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },
-      "focus:ring-offset-2": true,
-      "focus:ring-blue-500": true,
-      "transition-colors": true
-    }}
+      '&:focus': { outline: 'none', boxShadow: '0 0 0 2px currentColor' },}}
               >
                 <Home sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Go Home
@@ -227,7 +203,7 @@ class ErrorBoundary extends Component<Props, State> {
 
             <p sx={{
       mt: 4,
-      typography: body2,
+      typography: "body2",
       color: "gray.500"
     }}>
               If this problem persists, please contact support.

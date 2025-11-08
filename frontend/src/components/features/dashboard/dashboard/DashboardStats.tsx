@@ -77,23 +77,16 @@ Calendar tasks created: ${response.data.tasks_created}`);
 
   return (
     <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 6,
       mb: 6
     }}>
       {/* One-Click Application Prep Card */}
       <Card sx={{
       p: 6,
-      "bg-gradient-to-br": true,
-      "from-blue-50": true,
-      "to-indigo-50": true,
       borderColor: "blue.200"
     }}>
-        <div sx={{
-      "space-y-4": true
-    }}>
+        <div sx={{}}>
           <div sx={{
       display: "flex",
       alignItems: "center",
@@ -102,32 +95,26 @@ Calendar tasks created: ${response.data.tasks_created}`);
             <div sx={{
       p: 2,
       bgcolor: "blue.100",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
               <Briefcase sx={{
-      "w-5": true,
-      "h-5": true,
       color: "blue.600"
     }} />
             </div>
             <h3 sx={{
       fontWeight: 600,
-      typography: h6,
-      "text-blue-900": true
-    }}>One-Click Application Prep</h3>
+      typography: "h6",}}>One-Click Application Prep</h3>
           </div>
 
           <p sx={{
       color: "blue.700",
-      typography: body1
+      typography: "body1"
     }}>
             Generate a complete application package including tailored resume, cover letter, and KSC
             responses.
           </p>
 
-          <div sx={{
-      "space-y-3": true
-    }}>
+          <div sx={{}}>
             <Textarea
               placeholder="Paste the job description here..."
               value={jobDescription}
@@ -135,15 +122,13 @@ Calendar tasks created: ${response.data.tasks_created}`);
                 setJobDescription(e.target.value)
               }
               sx={{
-      h: "100px",
-      "resize-y": true
-    }}
+      h: "100px",}}
               disabled={isPreparingApplication}
             />
 
             {applicationError && <p sx={{
       color: "red.600",
-      typography: body1
+      typography: "body1"
     }}>{applicationError}</p>}
 
             <Button
@@ -151,21 +136,15 @@ Calendar tasks created: ${response.data.tasks_created}`);
               disabled={isPreparingApplication || !jobDescription.trim()}
               sx={{
       width: "100%",
-      "bg-blue-600": true,
-      '&:hover': { "bg-blue-700": true },
+      '&:hover': {},
       color: "common.white"
     }}
             >
               {isPreparingApplication ? (
                 <>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 2,
-      "border-white": true,
-      "border-t-transparent": true,
-      borderRadius: 9999px,
-      "animate-spin": true,
+      borderRadius: "9999px",
       mr: 2
     }} />
                   Preparing Application Package...
@@ -173,8 +152,6 @@ Calendar tasks created: ${response.data.tasks_created}`);
               ) : (
                 <>
                   <Briefcase sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                   Prepare Application Package
@@ -188,14 +165,9 @@ Calendar tasks created: ${response.data.tasks_created}`);
       {/* Email Scanning Card */}
       <Card sx={{
       p: 6,
-      "bg-gradient-to-br": true,
-      "from-green-50": true,
-      "to-emerald-50": true,
       borderColor: "green.200"
     }}>
-        <div sx={{
-      "space-y-4": true
-    }}>
+        <div sx={{}}>
           <div sx={{
       display: "flex",
       alignItems: "center",
@@ -204,35 +176,29 @@ Calendar tasks created: ${response.data.tasks_created}`);
             <div sx={{
       p: 2,
       bgcolor: "green.100",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
               <Mail sx={{
-      "w-5": true,
-      "h-5": true,
       color: "green.600"
     }} />
             </div>
             <h3 sx={{
       fontWeight: 600,
-      typography: h6,
-      "text-green-900": true
-    }}>Scan Inbox for Jobs</h3>
+      typography: "h6",}}>Scan Inbox for Jobs</h3>
           </div>
 
           <p sx={{
       color: "green.700",
-      typography: body1
+      typography: "body1"
     }}>
             Automatically scan your email for job opportunities and create calendar tasks for
             high-scoring matches.
           </p>
 
-          <div sx={{
-      "space-y-3": true
-    }}>
+          <div sx={{}}>
             {emailScanError && <p sx={{
       color: "red.600",
-      typography: body1
+      typography: "body1"
     }}>{emailScanError}</p>}
 
             <Button
@@ -240,21 +206,15 @@ Calendar tasks created: ${response.data.tasks_created}`);
               disabled={isScanningEmails}
               sx={{
       width: "100%",
-      "bg-green-600": true,
-      '&:hover': { "bg-green-700": true },
+      '&:hover': {},
       color: "common.white"
     }}
             >
               {isScanningEmails ? (
                 <>
                   <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 2,
-      "border-white": true,
-      "border-t-transparent": true,
-      borderRadius: 9999px,
-      "animate-spin": true,
+      borderRadius: "9999px",
       mr: 2
     }} />
                   Scanning Inbox...
@@ -262,8 +222,6 @@ Calendar tasks created: ${response.data.tasks_created}`);
               ) : (
                 <>
                   <Mail sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                   Scan Inbox for Opportunities

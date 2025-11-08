@@ -41,10 +41,7 @@ export function ButtonComponentsSection() {
           <Button size="medium">Default</Button>
           <Button size="large">Large</Button>
           <Button size="small">
-            <Settings sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+            <Settings sx={{}} />
           </Button>
         </div>
       </ComponentDemo>
@@ -59,17 +56,11 @@ export function ButtonComponentsSection() {
           <Button disabled>Disabled</Button>
           <Button>
             <Loader2 sx={{
-      "w-4": true,
-      "h-4": true,
-      mr: 2,
-      "animate-spin": true
-    }} />
+      mr: 2,}} />
             Loading
           </Button>
           <Button>
             <Download sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             With Icon

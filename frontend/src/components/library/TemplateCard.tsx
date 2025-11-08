@@ -47,47 +47,23 @@ export function TemplateCard({
   return (
     <Card
       sx={{
-      "relative": true,
       overflow: "hidden",
-      "transition-all": true,
-      "duration-300": true,
       cursor: "pointer",
-      "group": true,
-      "card-surface": true,
-      '&:hover': { "border-brand-primary": true },
-      "${": true,
-      "is_selected": true,
-      "?": true,
-      "'ring-2": true,
-      "ring-brand-primary": true,
-      "glow-primary'": true,
-      ":": true,
-      "''": true,
-      "}": true
-    }}
+      '&:hover': {},}}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onSelect}
     >
       {/* Recommended Badge */}
       {is_recommended && (
-        <div sx={{
-      "absolute": true,
-      "top-3": true,
-      "left-3": true,
-      "z-10": true
-    }}>
+        <div sx={{}}>
           <Badge sx={{
-      "bg-accent-green": true,
       color: "common.white",
       gap: 1,
       boxShadow: 4,
       fontWeight: 600
     }}>
-            <Star sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+            <Star sx={{}} />
             Recommended
           </Badge>
         </div>
@@ -95,25 +71,15 @@ export function TemplateCard({
 
       {/* Selection Indicator */}
       {is_selected && (
-        <div sx={{
-      "absolute": true,
-      "top-3": true,
-      "right-3": true,
-      "z-10": true
-    }}>
+        <div sx={{}}>
           <div sx={{
-      "w-6": true,
-      "h-6": true,
-      "bg-brand-primary": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       boxShadow: 4
     }}>
             <Check sx={{
-      "w-4": true,
-      "h-4": true,
       color: "common.white"
     }} />
           </div>
@@ -122,24 +88,14 @@ export function TemplateCard({
 
       {/* Preview Image */}
       <div sx={{
-      "relative": true,
-      "h-48": true,
-      "bg-surface-section": true,
-      overflow: "hidden",
-      "rounded-t-2xl": true
-    }}>
+      overflow: "hidden",}}>
         {preview_image ? (
           <img
             src={preview_image}
             alt={`${template_name} preview`}
             sx={{
       width: "100%",
-      height: "100%",
-      "object-cover": true,
-      "transition-transform": true,
-      "duration-300": true,
-      "group-hover:scale-105": true
-    }}
+      height: "100%",}}
           />
         ) : (
           <div sx={{
@@ -147,23 +103,14 @@ export function TemplateCard({
       height: "100%",
       display: "flex",
       alignItems: "center",
-      justifyContent: "center",
-      "bg-gradient-to-br": true,
-      "from-surface-section": true,
-      "to-surface-card": true
-    }}>
-            <div sx={{
-      "text-content-muted": true
-    }}>
+      justifyContent: "center",}}>
+            <div sx={{}}>
               <Visibility sx={{
-      "w-12": true,
-      "h-12": true,
-      "mx-auto": true,
       mb: 2,
       opacity: 0.5
     }} />
               <p sx={{
-      typography: body1
+      typography: "body1"
     }}>Preview</p>
             </div>
           </div>
@@ -172,23 +119,10 @@ export function TemplateCard({
         {/* Hover Overlay */}
         <div
           sx={{
-      "absolute": true,
-      "inset-0": true,
       bgcolor: "common.black",
-      "bg-opacity-50": true,
-      "transition-opacity": true,
-      "duration-300": true,
       display: "flex",
       alignItems: "center",
-      justifyContent: "center",
-      "${": true,
-      "isHovered": true,
-      "?": true,
-      "'opacity-100'": true,
-      ":": true,
-      "'opacity-0'": true,
-      "}": true
-    }}
+      justifyContent: "center",}}
         >
           <Button
             variant="outlined"
@@ -198,16 +132,13 @@ export function TemplateCard({
               onPreview?.();
             }}
             sx={{
-      "border-brand-primary": true,
       color: "common.white",
-      '&:hover': { "bg-brand-primary": true },
+      '&:hover': {},
       '&:hover': { color: "common.white" },
       fontWeight: 600
     }}
           >
             <Visibility sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Preview
@@ -217,9 +148,7 @@ export function TemplateCard({
 
       {/* Content */}
       <div sx={{
-      p: 6,
-      "space-y-4": true
-    }}>
+      p: 6,}}>
         <div sx={{
       display: "flex",
       alignItems: "flex-start",
@@ -227,10 +156,7 @@ export function TemplateCard({
     }}>
           <h3 sx={{
       fontWeight: 600,
-      "text-content-primary": true,
-      "group-hover:text-brand-light": true,
-      "transition-colors": true,
-      typography: h6
+      typography: "h6"
     }}>
             {template_name}
           </h3>
@@ -238,14 +164,10 @@ export function TemplateCard({
       textAlign: "right"
     }}>
             <div sx={{
-      typography: h5,
-      fontWeight: 700,
-      "${getScoreColor(ats_score)}": true
-    }}>{ats_score}%</div>
+      typography: "h5",
+      fontWeight: 700,}}>{ats_score}%</div>
             <div sx={{
-      typography: body2,
-      "text-content-secondary": true
-    }}>ATS Score</div>
+      typography: "body2",}}>ATS Score</div>
           </div>
         </div>
 
@@ -261,12 +183,9 @@ export function TemplateCard({
                 key={index}
                 variant="outline"
                 sx={{
-      typography: body2,
-      "border-brand-primary/30": true,
-      "text-content-secondary": true,
-      '&:hover': { "border-brand-primary": true },
-      '&:hover': { "text-brand-light": true },
-      "transition-colors": true,
+      typography: "body2",
+      '&:hover': {},
+      '&:hover': {},
       px: 2,
       py: 1
     }}
@@ -278,9 +197,7 @@ export function TemplateCard({
               <Badge
                 variant="outline"
                 sx={{
-      typography: body2,
-      "border-brand-primary/30": true,
-      "text-content-secondary": true,
+      typography: "body2",
       px: 2,
       py: 1
     }}
@@ -295,23 +212,11 @@ export function TemplateCard({
         <Button
           sx={{
       width: "100%",
-      "transition-all": true,
-      "duration-300": true,
       fontWeight: 600,
-      borderRadius: 1.5rem,
+      borderRadius: "1.5rem",
       py: 3,
-      "${": true,
-      "is_selected": true,
-      "?": true,
-      "'btn-gradient'": true,
-      ":": true,
-      "'border-2": true,
-      "border-brand-primary": true,
-      "text-brand-primary": true,
-      '&:hover': { "btn-gradient": true },
-      '&:hover': { "text-white'": true },
-      "}": true
-    }}
+      '&:hover': {},
+      '&:hover': {},}}
           onClick={(e) => {
             e.stopPropagation();
             onSelect?.();
