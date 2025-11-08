@@ -85,14 +85,9 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 6
     }}>
-      <div sx={{
-      "max-w-6xl": true,
-      "mx-auto": true,
-      "space-y-8": true
-    }}>
+      <div sx={{}}>
         {/* Header */}
         <div sx={{
       display: "flex",
@@ -111,14 +106,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       display: "flex",
       alignItems: "center",
       gap: 2,
-      "text-muted-foreground": true,
-      '&:hover': { "text-foreground": true }
+      '&:hover': {}
     }}
             >
-              <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+              <ArrowLeft sx={{}} />
               Back to Job Analysis
             </Button>
           </div>
@@ -133,30 +124,19 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 2
     }}>
               Continue to Templates
-              <ArrowRight sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+              <ArrowRight sx={{}} />
             </Button>
           </div>
         </div>
 
         {/* Title Section */}
         <div sx={{
-      textAlign: "center",
-      "space-y-4": true
-    }}>
+      textAlign: "center",}}>
           <h1 sx={{
-      typography: h2,
-      fontWeight: 700,
-      "text-gradient-aurora": true
-    }}>ATS Compatibility Analysis</h1>
+      typography: "h2",
+      fontWeight: 700,}}>ATS Compatibility Analysis</h1>
           <p sx={{
-      typography: h6,
-      "text-muted-foreground": true,
-      "max-w-2xl": true,
-      "mx-auto": true
-    }}>
+      typography: "h6",}}>
             Your resume has been analyzed for compatibility with Applicant Tracking Systems. Here's
             how well it matches the job requirements.
           </p>
@@ -164,22 +144,18 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
 
         {/* Main Score Section - Enhanced Size */}
         <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 8
     }}>
           {/* Overall Score - Made Larger and More Prominent */}
           <div sx={{
-      [theme.breakpoints.up('md')]: { "col-span-1": true }
+      [theme.breakpoints.up('md')]: {}
     }}>
             <Card sx={{
-      "card-aurora": true,
       p: 8,
       textAlign: "center"
     }}>
-              <div sx={{
-      "space-y-6": true
-    }}>
+              <div sx={{}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
@@ -187,13 +163,9 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 2,
       mb: 4
     }}>
-                  <GpsFixed sx={{
-      "w-6": true,
-      "h-6": true,
-      "text-primary": true
-    }} />
+                  <GpsFixed sx={{}} />
                   <h2 sx={{
-      typography: h5,
+      typography: "h5",
       fontWeight: 600
     }}>Overall ATS Score</h2>
                 </div>
@@ -203,21 +175,14 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       display: "flex",
       justifyContent: "center"
     }}>
-                  <div sx={{
-      "relative": true
-    }}>
+                  <div sx={{}}>
                     <ATSScoreCircle
                       score={analysisData.overallScore}
                       size="large"
-                      sx={{
-      "w-48": true,
-      "h-48": true
-    }} // Increased from default size
+                      sx={{}} // Increased from default size
                     />
                     {/* Enhanced pulsing score text overlay */}
                     <div sx={{
-      "absolute": true,
-      "inset-0": true,
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
@@ -227,17 +192,13 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
     }}>
                         <div
                           sx={{
-      typography: h1,
-      fontWeight: 700,
-      "pulsing-score-text": true,
-      "${getScoreColor(analysisData.overallScore)}": true
-    }}
+      typography: "h1",
+      fontWeight: 700,}}
                         >
                           {analysisData.overallScore}%
                         </div>
                         <div sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mt: 1
     }}>ATS Compatible</div>
                       </div>
@@ -252,27 +213,17 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 2,
       px: 4,
       py: 2,
-      borderRadius: 9999px,
-      "${getScoreBgColor(analysisData.overallScore)}": true
-    }}
+      borderRadius: "9999px",}}
                 >
-                  <CheckCircle sx={{
-      "w-4": true,
-      "h-4": true,
-      "${getScoreColor(analysisData.overallScore)}": true
-    }} />
+                  <CheckCircle sx={{}} />
                   <span sx={{
-      fontWeight: 500,
-      "${getScoreColor(analysisData.overallScore)}": true
-    }}>
+      fontWeight: 500,}}>
                     Excellent Match
                   </span>
                 </div>
 
                 <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                   Your resume is well-optimized for ATS systems and matches{' '}
                   {analysisData.keywordMatches} of {analysisData.totalKeywords} key requirements.
                 </p>
@@ -282,83 +233,50 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
 
           {/* Score Breakdown */}
           <div sx={{
-      [theme.breakpoints.up('md')]: { "col-span-2": true }
+      [theme.breakpoints.up('md')]: {}
     }}>
             <Card sx={{
-      "card-surface": true,
       p: 6
     }}>
               <h3 sx={{
-      typography: h5,
+      typography: "h5",
       fontWeight: 600,
       mb: 6,
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                <TrendingUp sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-primary": true
-    }} />
+                <TrendingUp sx={{}} />
                 Score Breakdown
               </h3>
 
               <div sx={{
-      "grid": true,
-      "grid-cols-2": true,
       gap: 6
     }}>
                 {Object.entries(analysisData.sections).map(([section, score]) => (
-                  <div key={section} sx={{
-      "space-y-3": true
-    }}>
+                  <div key={section} sx={{}}>
                     <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
     }}>
                       <span sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
       textTransform: "capitalize"
     }}>
                         {section.replace(/([A-Z])/g, ' $1').trim()}
                       </span>
                       <span sx={{
-      typography: body1,
-      fontWeight: 700,
-      "${getScoreColor(score)}": true
-    }}>{score}%</span>
+      typography: "body1",
+      fontWeight: 700,}}>{score}%</span>
                     </div>
                     <div sx={{
       width: "100%",
-      "bg-muted": true,
-      borderRadius: 9999px,
-      "h-2": true
-    }}>
+      borderRadius: "9999px",}}>
                       <div
                         sx={{
-      "h-2": true,
-      borderRadius: 9999px,
-      "transition-all": true,
-      "duration-1000": true,
-      "${": true,
-      "score": true,
-      ">=": true,
-      "80": true,
-      "?": true,
-      "'bg-green-500'": true,
-      ":": true,
-      "score": true,
-      ">=": true,
-      "60": true,
-      "?": true,
-      "'bg-yellow-500'": true,
-      ":": true,
-      "'bg-red-500'": true,
-      "}": true
-    }}
+      borderRadius: "9999px",}}
                         style={{ width: `${score}%` }}
                       />
                     </div>
@@ -370,18 +288,12 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
         </div>
 
         {/* Detailed Analysis Tabs */}
-        <div sx={{
-      "space-y-6": true
-    }}>
+        <div sx={{}}>
           {/* Tab Navigation */}
           <div sx={{
       display: "flex",
-      "space-x-1": true,
       p: 1,
-      "bg-muted": true,
-      borderRadius: 0.5rem,
-      "w-fit": true
-    }}>
+      borderRadius: "0.5rem",}}>
             {[
               { id: 'overview', label: 'Overview', icon: Description },
               { id: 'keywords', label: 'Keywords', icon: GpsFixed },
@@ -398,28 +310,12 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 2,
       px: 4,
       py: 2,
-      borderRadius: 0.375rem,
-      typography: body1,
+      borderRadius: "0.375rem",
+      typography: "body1",
       fontWeight: 500,
-      "transition-colors": true,
-      "${": true,
-      "activeTab": true,
-      "===": true,
-      "tab.id": true,
-      "?": true,
-      "'bg-background": true,
-      "text-foreground": true,
-      "shadow-sm'": true,
-      ":": true,
-      "'text-muted-foreground": true,
-      '&:hover': { "text-foreground'": true },
-      "}": true
-    }}
+      '&:hover': {},}}
                 >
-                  <Icon sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                  <Icon sx={{}} />
                   {tab.label}
                 </button>
               );
@@ -429,16 +325,14 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           {/* Tab Content */}
           {activeTab === 'overview' && (
             <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
               <Card sx={{
-      "card-surface": true,
       p: 6
     }}>
                 <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       mb: 4,
       display: "flex",
@@ -446,25 +340,19 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 2
     }}>
                   <CheckCircle sx={{
-      "w-5": true,
-      "h-5": true,
       color: "green.500"
     }} />
                   Strengths
                 </h3>
-                <ul sx={{
-      "space-y-3": true
-    }}>
+                <ul sx={{}}>
                   <li sx={{
       display: "flex",
       alignItems: "flex-start",
       gap: 3
     }}>
                     <div sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "green.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       mt: 2,
       flexShrink: 0
     }} />
@@ -473,9 +361,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       fontWeight: 500
     }}>Excellent Formatting</p>
                       <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                         Clean structure that ATS can easily parse
                       </p>
                     </div>
@@ -486,10 +372,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 3
     }}>
                     <div sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "green.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       mt: 2,
       flexShrink: 0
     }} />
@@ -498,9 +382,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       fontWeight: 500
     }}>Strong Experience Match</p>
                       <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                         Your background aligns well with job requirements
                       </p>
                     </div>
@@ -511,10 +393,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 3
     }}>
                     <div sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "green.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       mt: 2,
       flexShrink: 0
     }} />
@@ -523,9 +403,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       fontWeight: 500
     }}>Relevant Skills Listed</p>
                       <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                         Key competencies are clearly highlighted
                       </p>
                     </div>
@@ -534,11 +412,10 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
               </Card>
 
               <Card sx={{
-      "card-surface": true,
       p: 6
     }}>
                 <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       mb: 4,
       display: "flex",
@@ -546,25 +423,19 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 2
     }}>
                   <Error sx={{
-      "w-5": true,
-      "h-5": true,
       color: "yellow.500"
     }} />
                   Areas for Improvement
                 </h3>
-                <ul sx={{
-      "space-y-3": true
-    }}>
+                <ul sx={{}}>
                   <li sx={{
       display: "flex",
       alignItems: "flex-start",
       gap: 3
     }}>
                     <div sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "yellow.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       mt: 2,
       flexShrink: 0
     }} />
@@ -573,9 +444,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       fontWeight: 500
     }}>Missing Keywords</p>
                       <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                         3 important terms not found in your resume
                       </p>
                     </div>
@@ -586,10 +455,8 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 3
     }}>
                     <div sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "yellow.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       mt: 2,
       flexShrink: 0
     }} />
@@ -598,9 +465,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       fontWeight: 500
     }}>Technical Skills Section</p>
                       <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                         Could benefit from more specific software mentions
                       </p>
                     </div>
@@ -611,17 +476,14 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           )}
 
           {activeTab === 'keywords' && (
-            <div sx={{
-      "space-y-6": true
-    }}>
+            <div sx={{}}>
               {/* Keywords Section with Primary Color */}
               <Card sx={{
-      "card-surface": true,
       p: 6
     }}>
                 <h3
                   sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       mb: 4,
       display: "flex",
@@ -630,16 +492,12 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
     }}
                   style={{ color: 'var(--color-primary)' }}
                 >
-                  <GpsFixed sx={{
-      "w-5": true,
-      "h-5": true
-    }} style={{ color: 'var(--color-primary)' }} />
+                  <GpsFixed sx={{}} style={{ color: 'var(--color-primary)' }} />
                   Keyword Analysis
                 </h3>
 
                 <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
                   <div>
@@ -660,10 +518,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                           key={index}
                           variant="secondary"
                           sx={{
-      "bg-green-500/10": true,
-      color: "green.600",
-      "border-green-500/20": true
-    }}
+      color: "green.600",}}
                         >
                           {keyword}
                         </Badge>
@@ -689,10 +544,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                           key={index}
                           variant="secondary"
                           sx={{
-      "bg-yellow-500/10": true,
-      color: "yellow.600",
-      "border-yellow-500/20": true
-    }}
+      color: "yellow.600",}}
                         >
                           {keyword}
                         </Badge>
@@ -705,13 +557,11 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
           )}
 
           {activeTab === 'insights' && (
-            <div sx={{
-      "space-y-4": true
-    }}>
+            <div sx={{}}>
               {/* Insights Section with Secondary Color */}
               <h3
                 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       mb: 4,
       display: "flex",
@@ -720,16 +570,12 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
     }}
                 style={{ color: 'var(--color-secondary)' }}
               >
-                <Lightbulb sx={{
-      "w-5": true,
-      "h-5": true
-    }} style={{ color: 'var(--color-secondary)' }} />
+                <Lightbulb sx={{}} style={{ color: 'var(--color-secondary)' }} />
                 Actionable Insights
               </h3>
 
               {analysisData.insights.map((insight, index) => (
                 <Card key={index} sx={{
-      "card-surface": true,
       p: 6
     }}>
                   <div sx={{
@@ -740,42 +586,20 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
                     <div
                       sx={{
       p: 2,
-      borderRadius: 0.5rem,
-      "${": true,
-      "insight.type": true,
-      "===": true,
-      "'strength'": true,
-      "?": true,
-      "'bg-green-500/10'": true,
-      ":": true,
-      "insight.type": true,
-      "===": true,
-      "'improvement'": true,
-      "?": true,
-      "'bg-yellow-500/10'": true,
-      ":": true,
-      "'bg-blue-500/10'": true,
-      "}": true
-    }}
+      borderRadius: "0.5rem",}}
                     >
                       {insight.type === 'strength' && (
                         <CheckCircle sx={{
-      "w-5": true,
-      "h-5": true,
       color: "green.500"
     }} />
                       )}
                       {insight.type === 'improvement' && (
                         <Error sx={{
-      "w-5": true,
-      "h-5": true,
       color: "yellow.500"
     }} />
                       )}
                       {insight.type === 'opportunity' && (
                         <TrendingUp sx={{
-      "w-5": true,
-      "h-5": true,
       color: "blue.500"
     }} />
                       )}
@@ -785,9 +609,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       fontWeight: 600,
       mb: 2
     }}>{insight.title}</h4>
-                      <p sx={{
-      "text-muted-foreground": true
-    }}>{insight.description}</p>
+                      <p sx={{}}>{insight.description}</p>
                     </div>
                   </div>
                 </Card>
@@ -802,18 +624,13 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       justifyContent: "space-between",
       alignItems: "center",
       pt: 8,
-      borderTop: 1,
-      "border-border": true
-    }}>
+      borderTop: 1,}}>
           <Button variant="outline" onClick={onBack} sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-            <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+            <ArrowLeft sx={{}} />
             Back to Job Analysis
           </Button>
 
@@ -823,22 +640,15 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       gap: 4
     }}>
             <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
               Ready to create an optimized resume?
             </div>
             <Button onClick={onNext} sx={{
       display: "flex",
       alignItems: "center",
-      gap: 2,
-      "btn-primary-cta": true
-    }}>
+      gap: 2,}}>
               Choose Template
-              <ArrowRight sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+              <ArrowRight sx={{}} />
             </Button>
           </div>
         </div>

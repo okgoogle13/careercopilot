@@ -53,16 +53,10 @@ export function ATSScoreCircle({
 
   return (
     <div sx={{
-      "relative": true,
       display: "inline-flex",
       alignItems: "center",
-      justifyContent: "center",
-      "${className}": true
-    }}>
-      <svg width={config.diameter} height={config.diameter} sx={{
-      "transform": true,
-      "-rotate-90": true
-    }}>
+      justifyContent: "center",}}>
+      <svg width={config.diameter} height={config.diameter} sx={{}}>
         {/* Background circle */}
         <circle
           cx={config.diameter / 2}
@@ -87,11 +81,7 @@ export function ATSScoreCircle({
           strokeDasharray={strokeDasharray}
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
-          sx={{
-      "transition-all": true,
-      "duration-1000": true,
-      "ease-out": true
-    }}
+          sx={{}}
           style={{
             filter: `drop-shadow(0 0 8px ${scoreColor}40)`,
           }}
@@ -110,9 +100,6 @@ export function ATSScoreCircle({
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
             sx={{
-      "transition-all": true,
-      "duration-1000": true,
-      "ease-out": true,
       opacity: 0.3
     }}
             style={{
@@ -125,8 +112,6 @@ export function ATSScoreCircle({
       {/* Score text overlay - removed since it's handled in parent component for large size */}
       {size !== 'large' && (
         <div sx={{
-      "absolute": true,
-      "inset-0": true,
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
@@ -135,16 +120,11 @@ export function ATSScoreCircle({
       textAlign: "center"
     }}>
             <div sx={{
-      fontWeight: 700,
-      "${config.textSize}": true
-    }} style={{ color: scoreColor }}>
+      fontWeight: 700,}} style={{ color: scoreColor }}>
               {score}%
             </div>
             {showLabel && (
-              <div sx={{
-      "text-muted-foreground": true,
-      "${config.labelSize}": true
-    }}>ATS Score</div>
+              <div sx={{}}>ATS Score</div>
             )}
           </div>
         </div>

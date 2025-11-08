@@ -98,19 +98,13 @@ export function InteractiveComponentsSection() {
             <PopoverTrigger asChild>
               <Button variant="outlined">Open Popover</Button>
             </PopoverTrigger>
-            <PopoverContent sx={{
-      "w-80": true
-    }}>
-              <div sx={{
-      "space-y-2": true
-    }}>
+            <PopoverContent sx={{}}>
+              <div sx={{}}>
                 <h4 sx={{
       fontWeight: 500
     }}>Popover Title</h4>
                 <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                   This is a popover with some content inside it.
                 </p>
                 <div sx={{

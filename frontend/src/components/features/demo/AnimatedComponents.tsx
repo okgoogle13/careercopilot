@@ -33,12 +33,7 @@ export function AnimatedModal({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            sx={{
-      "fixed": true,
-      "inset-0": true,
-      "bg-black/50": true,
-      "z-50": true
-    }}
+            sx={{}}
             onClick={onClose}
           />
           <motion.div
@@ -47,13 +42,6 @@ export function AnimatedModal({
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             sx={{
-      "fixed": true,
-      "top-1/2": true,
-      "left-1/2": true,
-      "transform": true,
-      "-translate-x-1/2": true,
-      "-translate-y-1/2": true,
-      "z-50": true,
       width: "100%",
       maxWidth: "md"
     }}
@@ -87,9 +75,7 @@ export function AnimatedDropdown({ trigger, items, onSelect }: AnimatedDropdownP
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div sx={{
-      "relative": true
-    }}>
+    <div sx={{}}>
       <div onClick={() => setIsOpen(!isOpen)}>{trigger}</div>
       <AnimatePresence>
         {isOpen && (
@@ -99,18 +85,11 @@ export function AnimatedDropdown({ trigger, items, onSelect }: AnimatedDropdownP
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
             sx={{
-      "absolute": true,
-      "top-full": true,
-      "left-0": true,
       mt: 2,
       w: "200px",
-      "bg-card": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem,
-      boxShadow: 4,
-      "z-10": true
-    }}
+      borderRadius: "0.5rem",
+      boxShadow: 4,}}
           >
             <div sx={{
       py: 1
@@ -126,8 +105,7 @@ export function AnimatedDropdown({ trigger, items, onSelect }: AnimatedDropdownP
       px: 3,
       py: 2,
       textAlign: "left",
-      '&:hover': { "bg-muted": true },
-      "transition-colors": true,
+      '&:hover': {},
       display: "flex",
       alignItems: "center",
       gap: 2
@@ -165,13 +143,10 @@ export function AnimatedTabs({
     <div sx={{
       width: "100%"
     }}>
-      <div sx={{
-      "relative": true
-    }}>
+      <div sx={{}}>
         <div sx={{
       display: "flex",
-      "bg-muted": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       p: 1
     }}>
           {tabs.map((tab) => (
@@ -179,45 +154,28 @@ export function AnimatedTabs({
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
               sx={{
-      "relative": true,
       flex: 1,
       px: 3,
       py: 2,
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      "transition-colors": true,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       gap: 2,
-      "${": true,
-      "activeTab": true,
-      "===": true,
-      "tab.id": true,
-      "?": true,
-      "'text-primary'": true,
-      ":": true,
-      "'text-muted-foreground": true,
-      '&:hover': { "text-foreground'": true },
-      "}": true
-    }}
+      '&:hover': {},}}
             >
               {activeTab === tab.id && (
                 <motion.div
                   layoutId="activeTab"
                   sx={{
-      "absolute": true,
-      "inset-0": true,
-      "bg-card": true,
-      borderRadius: 0.375rem,
+      borderRadius: "0.375rem",
       boxShadow: 1
     }}
                   transition={{ type: 'spring', damping: 30, stiffness: 300 }}
                 />
               )}
               <span sx={{
-      "relative": true,
-      "z-10": true,
       display: "flex",
       alignItems: "center",
       gap: 2
@@ -274,27 +232,22 @@ export function AnimatedProgress({
       mb: 2
     }}>
           <span sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500
     }}>Progress</span>
           <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{Math.round(percentage)}%</span>
+      typography: "body1",}}>{Math.round(percentage)}%</span>
         </div>
       )}
       <div sx={{
       width: "100%",
-      "bg-muted": true,
-      borderRadius: 9999px,
-      "h-2": true,
+      borderRadius: "9999px",
       overflow: "hidden"
     }}>
         <motion.div
           sx={{
       height: "100%",
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
           initial={animated ? { width: '0%' } : { width: `${percentage}%` }}
           animate={{ width: `${percentage}%` }}
@@ -343,27 +296,19 @@ export function AnimatedNotification({
       gap: 2,
       px: 4,
       py: 3,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       boxShadow: 4,
-      w: "300px",
-      "${colors[type]}": true
-    }}
+      w: "300px",}}
     >
-      <Icon sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+      <Icon sx={{}} />
       <span sx={{
-      typography: body1,
+      typography: "body1",
       flex: 1
     }}>{message}</span>
       <button onClick={onClose} sx={{
       '&:hover': { opacity: 0.7 }
     }}>
-        <XCircle sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+        <XCircle sx={{}} />
       </button>
     </motion.div>
   );
@@ -429,27 +374,14 @@ export function AnimatedButton({
     animation === 'shimmer'
       ? ({ children, ...props }: any) => (
           <Button sx={{
-      "relative": true,
-      overflow: "hidden",
-      "group": true,
-      "${className}": true
-    }} {...props}>
+      overflow: "hidden",}} {...props}>
             <motion.div
-              sx={{
-      "absolute": true,
-      "inset-0": true,
-      "bg-gradient-to-r": true,
-      "from-transparent": true,
-      "via-white/20": true,
-      "to-transparent": true
-    }}
+              sx={{}}
               initial={{ x: '-100%' }}
               whileHover={{ x: '100%' }}
               transition={{ duration: 0.6 }}
             />
-            <span sx={{
-      "relative": true
-    }}>{children}</span>
+            <span sx={{}}>{children}</span>
           </Button>
         )
       : motion(Button);
@@ -484,8 +416,7 @@ export function ExpandableCard({
   return (
     <motion.div layout sx={{
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       overflow: "hidden"
     }}>
       <motion.button
@@ -496,9 +427,7 @@ export function ExpandableCard({
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      '&:hover': { "bg-muted": true },
-      "transition-colors": true
-    }}
+      '&:hover': {},}}
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div sx={{
@@ -512,16 +441,11 @@ export function ExpandableCard({
       fontWeight: 500
     }}>{title}</h4>
             <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{preview}</p>
+      typography: "body1",}}>{preview}</p>
           </div>
         </div>
         <motion.div animate={{ rotate: isExpanded ? 90 : 0 }} transition={{ duration: 0.2 }}>
-          <ChevronRight sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+          <ChevronRight sx={{}} />
         </motion.div>
       </motion.button>
       <AnimatePresence>
@@ -538,9 +462,7 @@ export function ExpandableCard({
             <div sx={{
       p: 4,
       pt: 0,
-      borderTop: 1,
-      "border-border": true
-    }}>{children}</div>
+      borderTop: 1,}}>{children}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -601,11 +523,7 @@ export function LoadingAnimations() {
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
-        <RefreshCw sx={{
-      "w-6": true,
-      "h-6": true,
-      "text-primary": true
-    }} />
+        <RefreshCw sx={{}} />
       </motion.div>
 
       {/* Pulsing dot */}
@@ -613,10 +531,7 @@ export function LoadingAnimations() {
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ duration: 1, repeat: Infinity }}
         sx={{
-      "w-6": true,
-      "h-6": true,
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
       />
 
@@ -635,10 +550,7 @@ export function LoadingAnimations() {
               delay: i * 0.2,
             }}
             sx={{
-      "w-2": true,
-      "h-6": true,
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
           />
         ))}
@@ -649,14 +561,9 @@ export function LoadingAnimations() {
         animate={{ rotate: 360 }}
         transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
         sx={{
-      "w-6": true,
-      "h-6": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       border: 2,
-      borderColor: "transparent",
-      "border-t-primary": true,
-      "border-r-primary": true
-    }}
+      borderColor: "transparent",}}
       />
 
       {/* Morphing loader */}
@@ -666,11 +573,7 @@ export function LoadingAnimations() {
           scale: [1, 0.8, 1],
         }}
         transition={{ duration: 1.5, repeat: Infinity }}
-        sx={{
-      "w-6": true,
-      "h-6": true,
-      "bg-primary": true
-    }}
+        sx={{}}
       />
     </div>
   );
@@ -721,9 +624,7 @@ export function AnimatedStatsCard({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
                 sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}
+      typography: "body1",}}
               >
                 {title}
               </motion.p>
@@ -732,7 +633,7 @@ export function AnimatedStatsCard({
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring' }}
                 sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700
     }}
               >
@@ -746,14 +647,9 @@ export function AnimatedStatsCard({
       display: "flex",
       alignItems: "center",
       gap: 1,
-      typography: body1,
-      "${trendColors[trend]}": true
-    }}
+      typography: "body1",}}
               >
-                <TrendIcon sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                <TrendIcon sx={{}} />
                 {change}
               </motion.div>
             </div>
@@ -763,8 +659,7 @@ export function AnimatedStatsCard({
               transition={{ delay: 0.4 }}
               sx={{
       p: 3,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}
             >
               {icon}

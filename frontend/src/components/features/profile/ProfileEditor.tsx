@@ -264,13 +264,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     <TooltipProvider>
       <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 4
     }}>
-        <div sx={{
-      "max-w-6xl": true,
-      "mx-auto": true
-    }}>
+        <div sx={{}}>
           {/* Enhanced Header */}
           <div sx={{
       textAlign: "center",
@@ -283,23 +279,15 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       gap: 4,
       mb: 6
     }}>
-              <div sx={{
-      "relative": true
-    }}>
+              <div sx={{}}>
                 <Avatar sx={{
-      "h-20": true,
-      "w-20": true,
       border: 4,
-      "border-white": true,
       boxShadow: 4
     }}>
                   <AvatarImage src={personalInfo.avatarUrl} />
                   <AvatarFallback sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
-      "bg-gradient-to-br": true,
-      "from-blue-500": true,
-      "to-purple-600": true,
       color: "common.white"
     }}>
                     {personalInfo.fullName
@@ -312,45 +300,29 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   size="small"
                   variant="outlined"
                   sx={{
-      "absolute": true,
-      "-bottom-1": true,
-      "-right-1": true,
-      "h-8": true,
-      "w-8": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       bgcolor: "common.white",
       boxShadow: 1
     }}
                 >
-                  <CameraAltIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                  <CameraAltIcon sx={{}} />
                 </Button>
               </div>
               <div sx={{
       textAlign: "left"
     }}>
                 <h1 sx={{
-      typography: h3,
-      fontWeight: 700,
-      "text-foreground": true
-    }}>{personalInfo.fullName}</h1>
+      typography: "h3",
+      fontWeight: 700,}}>{personalInfo.fullName}</h1>
                 <p sx={{
-      typography: h6,
-      "text-muted-foreground": true
-    }}>{personalInfo.title}</p>
+      typography: "h6",}}>{personalInfo.title}</p>
                 <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       display: "flex",
       alignItems: "center",
       gap: 1
     }}>
-                  <LocationOnIcon sx={{
-      "h-3": true,
-      "w-3": true
-    }} />
+                  <LocationOnIcon sx={{}} />
                   {personalInfo.location}
                 </p>
               </div>
@@ -360,9 +332,6 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             <Card sx={{
       p: 4,
       mb: 6,
-      "bg-gradient-to-r": true,
-      "from-blue-50": true,
-      "to-purple-50": true,
       borderColor: "blue.200"
     }}>
               <div sx={{
@@ -372,7 +341,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       mb: 2
     }}>
                 <span sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500
     }}>Profile Strength</span>
                 <Badge variant={calculateProfileStrength() >= 80 ? 'default' : 'secondary'}>
@@ -381,8 +350,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
               </div>
               <AnimatedProgress value={calculateProfileStrength()} max={100} />
               <p sx={{
-      typography: body2,
-      "text-muted-foreground": true,
+      typography: "body2",
       mt: 2
     }}>
                 {calculateProfileStrength() >= 90
@@ -403,9 +371,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     }}
           >
             <TabsList sx={{
-      "grid": true,
       width: "100%",
-      "grid-cols-5": true,
       mb: 8
     }}>
               <TabsTrigger value="basic" sx={{
@@ -413,10 +379,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       alignItems: "center",
       gap: 2
     }}>
-                <PersonIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                <PersonIcon sx={{}} />
                 Basic Info
               </TabsTrigger>
               <TabsTrigger value="experience" sx={{
@@ -424,10 +387,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       alignItems: "center",
       gap: 2
     }}>
-                <WorkIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                <WorkIcon sx={{}} />
                 Experience
               </TabsTrigger>
               <TabsTrigger value="skills" sx={{
@@ -435,10 +395,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       alignItems: "center",
       gap: 2
     }}>
-                <EmojiEventsIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                <EmojiEventsIcon sx={{}} />
                 Skills
               </TabsTrigger>
               <TabsTrigger value="social" sx={{
@@ -446,10 +403,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       alignItems: "center",
       gap: 2
     }}>
-                <PublicIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                <PublicIcon sx={{}} />
                 Social & Links
               </TabsTrigger>
               <TabsTrigger value="settings" sx={{
@@ -457,23 +411,16 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       alignItems: "center",
       gap: 2
     }}>
-                <SettingsIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                <SettingsIcon sx={{}} />
                 Privacy
               </TabsTrigger>
             </TabsList>
 
             {/* Basic Information Tab */}
-            <TabsContent value="basic" currentValue={activeTab} sx={{
-      "space-y-6": true
-    }}>
+            <TabsContent value="basic" currentValue={activeTab} sx={{}}>
               <>
                 <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}>
                   {/* Personal Information */}
@@ -489,36 +436,28 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <div sx={{
       p: 2,
       bgcolor: "blue.100",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                         <PersonIcon sx={{
-      "w-5": true,
-      "h-5": true,
       color: "blue.600"
     }} />
                       </div>
                       <h3 sx={{
       fontWeight: 600,
-      typography: h6
+      typography: "h6"
     }}>Personal Details</h3>
                     </div>
 
-                    <div sx={{
-      "space-y-4": true
-    }}>
+                    <div sx={{}}>
                       <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4
     }}>
                         <div>
                           <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>Full Name *</label>
+      mb: 2,}}>Full Name *</label>
                           <Input
                             value={personalInfo.fullName}
                             onChange={(e) =>
@@ -529,11 +468,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         </div>
                         <div>
                           <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>
+      mb: 2,}}>
                             Professional Title
                           </label>
                           <Input
@@ -548,11 +485,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                       <div>
                         <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>
+      mb: 2,}}>
                           Professional Tagline
                         </label>
                         <Input
@@ -565,18 +500,14 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       </div>
 
                       <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4
     }}>
                         <div>
                           <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>Email *</label>
+      mb: 2,}}>Email *</label>
                           <Input
                             type="email"
                             value={personalInfo.email}
@@ -588,11 +519,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         </div>
                         <div>
                           <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>Phone</label>
+      mb: 2,}}>Phone</label>
                           <Input
                             value={personalInfo.phone}
                             onChange={(e) =>
@@ -605,11 +534,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                       <div>
                         <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>Location</label>
+      mb: 2,}}>Location</label>
                         <Input
                           value={personalInfo.location}
                           onChange={(e) =>
@@ -634,23 +561,19 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <div sx={{
       p: 2,
       bgcolor: "green.100",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                         <WorkIcon sx={{
-      "w-5": true,
-      "h-5": true,
       color: "green.600"
     }} />
                       </div>
                       <h3 sx={{
       fontWeight: 600,
-      typography: h6
+      typography: "h6"
     }}>Professional Summary</h3>
                     </div>
 
-                    <div sx={{
-      "space-y-4": true
-    }}>
+                    <div sx={{}}>
                       <div sx={{
       display: "flex",
       gap: 2
@@ -667,19 +590,13 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                             onClick={handleGenerateSummary}
                           >
                             <EmojiObjectsIcon sx={{
-      mr: 2,
-      "h-4": true,
-      "w-4": true
-    }} />
+      mr: 2,}} />
                             AI Generate
                           </AnimatedButton>
                         )}
                         <Tooltip title="Get personalized tips for your summary">
                           <Button variant="outlined" size="small">
-                            <GpsFixedIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                            <GpsFixedIcon sx={{}} />
                           </Button>
                         </Tooltip>
                       </div>
@@ -689,15 +606,11 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         onChange={(e) => setSummary(e.target.value)}
                         placeholder="Write a compelling professional summary that highlights your key achievements, skills, and career objectives..."
                         sx={{
-      h: "150px",
-      "resize-none": true
-    }}
+      h: "150px",}}
                       />
 
                       <div sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                         <span className={summary.length > 300 ? 'text-amber-600' : ''}>
                           {summary.length}/300 characters
                         </span>
@@ -731,9 +644,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Skills Tab */}
-            <TabsContent value="skills" currentValue={activeTab} sx={{
-      "space-y-6": true
-    }}>
+            <TabsContent value="skills" currentValue={activeTab} sx={{}}>
               <>
                 <Card sx={{
       p: 6
@@ -752,23 +663,19 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <div sx={{
       p: 2,
       bgcolor: "purple.100",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                         <EmojiEventsIcon sx={{
-      "w-5": true,
-      "h-5": true,
       color: "purple.600"
     }} />
                       </div>
                       <h3 sx={{
       fontWeight: 600,
-      typography: h6
+      typography: "h6"
     }}>Skills & Expertise</h3>
                     </div>
                     <Button variant="outlined" size="small">
                       <AddIcon sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                       Import from Resume
@@ -813,17 +720,12 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       </Select>
                     </FormControl>
                     <Button onClick={addSkill}>
-                      <AddIcon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                      <AddIcon sx={{}} />
                     </Button>
                   </div>
 
                   {/* Skills Grid */}
-                  <div sx={{
-      "space-y-6": true
-    }}>
+                  <div sx={{}}>
                     {['technical', 'soft', 'industry', 'language'].map((category) => {
                       const categorySkills = skills.filter((skill) => skill.category === category);
                       if (categorySkills.length === 0) return null;
@@ -832,16 +734,13 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <div key={category}>
                           <h4 sx={{
       fontWeight: 500,
-      typography: body1,
+      typography: "body1",
       textTransform: "uppercase",
-      "tracking-wide": true,
-      "text-muted-foreground": true,
       mb: 3
     }}>
                             {category} Skills ({categorySkills.length})
                           </h4>
                           <div sx={{
-      "grid": true,
       gap: 4
     }}>
                             {categorySkills.map((skill) => (
@@ -866,9 +765,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                                     </Badge>
                                     {skill.yearsOfExperience && (
                                       <span sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                                         {skill.yearsOfExperience}+ years
                                       </span>
                                     )}
@@ -879,41 +776,28 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       gap: 2
     }}>
                                     <span sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                                       Level {skill.level}/10
                                     </span>
                                     <Button
                                       variant="text"
                                       size="small"
-                                      sx={{
-      "h-6": true,
-      "w-6": true
-    }}
+                                      sx={{}}
                                       onClick={() => removeSkill(skill.keyword)}
                                     >
-                                      <CloseIcon sx={{
-      "h-3": true,
-      "w-3": true
-    }} />
+                                      <CloseIcon sx={{}} />
                                     </Button>
                                   </div>
                                 </div>
 
-                                <div sx={{
-      "space-y-2": true
-    }}>
+                                <div sx={{}}>
                                   <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
                                     <span sx={{
-      typography: body2,
-      "text-muted-foreground": true,
-      "w-16": true
-    }}>
+      typography: "body2",}}>
                                       Proficiency:
                                     </span>
                                     <Slider
@@ -931,9 +815,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     }}
                                     />
                                   </div>
-                                  <Progress value={skill.level * 10} sx={{
-      "h-2": true
-    }} />
+                                  <Progress value={skill.level * 10} sx={{}} />
                                 </div>
                               </Card>
                             ))}
@@ -956,14 +838,10 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       mb: 3
     }}>
                       <EmojiObjectsIcon sx={{
-      "w-4": true,
-      "h-4": true,
       color: "blue.600"
     }} />
                       <h4 sx={{
-      fontWeight: 500,
-      "text-blue-900": true
-    }}>AI Skill Suggestions</h4>
+      fontWeight: 500,}}>AI Skill Suggestions</h4>
                     </div>
                     <div sx={{
       display: "flex",
@@ -981,15 +859,13 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           variant="outlined"
                           size="small"
                           sx={{
-      typography: body2,
+      typography: "body2",
       borderColor: "blue.300",
       '&:hover': { bgcolor: "blue.100" }
     }}
                           onClick={() => setNewSkill(suggestion)}
                         >
                           <AddIcon sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                           {suggestion}
@@ -1002,9 +878,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Social & Links Tab */}
-            <TabsContent value="social" currentValue={activeTab} sx={{
-      "space-y-6": true
-    }}>
+            <TabsContent value="social" currentValue={activeTab} sx={{}}>
               <>
                 <Card sx={{
       p: 6
@@ -1018,23 +892,19 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <div sx={{
       p: 2,
       bgcolor: "indigo.100",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                       <PublicIcon sx={{
-      "w-5": true,
-      "h-5": true,
       color: "indigo.600"
     }} />
                     </div>
                     <h3 sx={{
       fontWeight: 600,
-      typography: h6
+      typography: "h6"
     }}>Social Links & Online Presence</h3>
                   </div>
 
-                  <div sx={{
-      "space-y-4": true
-    }}>
+                  <div sx={{}}>
                     {socialLinks.map((link, index) => {
                       const Icon = getSocialIcon(link.platform);
                       return (
@@ -1044,13 +914,9 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       gap: 3,
       p: 3,
       border: 1,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                          <Icon sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-muted-foreground": true
-    }} />
+                          <Icon sx={{}} />
                           <div sx={{
       flex: 1
     }}>
@@ -1068,8 +934,6 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                             <Tooltip title="Verified profile">
                               <span>
                                 <CheckCircleIcon sx={{
-      "w-5": true,
-      "h-5": true,
       color: "green.500"
     }} />
                               </span>
@@ -1078,10 +942,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                           <Button variant="text" size="small" sx={{
       color: "red.500"
     }}>
-                            <CloseIcon sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                            <CloseIcon sx={{}} />
                           </Button>
                         </div>
                       );
@@ -1100,8 +961,6 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       }
                     >
                       <AddIcon sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                       Add Social Link
@@ -1112,9 +971,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
             </TabsContent>
 
             {/* Privacy Settings Tab */}
-            <TabsContent value="settings" currentValue={activeTab} sx={{
-      "space-y-6": true
-    }}>
+            <TabsContent value="settings" currentValue={activeTab} sx={{}}>
               <>
                 <Card sx={{
       p: 6
@@ -1128,29 +985,23 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <div sx={{
       p: 2,
       bgcolor: "red.100",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                       <SettingsIcon sx={{
-      "w-5": true,
-      "h-5": true,
       color: "red.600"
     }} />
                     </div>
                     <h3 sx={{
       fontWeight: 600,
-      typography: h6
+      typography: "h6"
     }}>Privacy & Preferences</h3>
                   </div>
 
-                  <div sx={{
-      "space-y-6": true
-    }}>
+                  <div sx={{}}>
                     {/* Profile Visibility */}
-                    <div sx={{
-      "space-y-3": true
-    }}>
+                    <div sx={{}}>
                       <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500
     }}>Profile Visibility</label>
                       <Select
@@ -1171,9 +1022,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
 
                     {/* Work Preferences */}
                     <Separator />
-                    <div sx={{
-      "space-y-4": true
-    }}>
+                    <div sx={{}}>
                       <h4 sx={{
       fontWeight: 500
     }}>Work Preferences</h4>
@@ -1186,12 +1035,10 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <div>
                           <p sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>Open to Opportunities</p>
                           <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                             Let recruiters know you're available
                           </p>
                         </div>
@@ -1211,12 +1058,10 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                         <div>
                           <p sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>Show Location</p>
                           <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                             Display your location publicly
                           </p>
                         </div>
@@ -1250,20 +1095,13 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     }}>
               <Button variant="outlined" onClick={onBack} size="large">
                 <ArrowLeftIcon sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Back
               </Button>
               <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                 <CheckCircleIcon sx={{
-      "w-4": true,
-      "h-4": true,
-      "inline": true,
       mr: 1,
       color: "green.500"
     }} />
@@ -1277,8 +1115,6 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
     }}>
               <Button variant="outlined" size="large">
                 <VisibilityIcon sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Preview
@@ -1287,16 +1123,11 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                 onClick={onNext}
                 size="large"
                 sx={{
-      "bg-gradient-to-r": true,
-      "from-blue-600": true,
-      "to-purple-600": true,
-      '&:hover': { "from-blue-700": true },
-      '&:hover': { "to-purple-700": true }
+      '&:hover': {},
+      '&:hover': {}
     }}
               >
                 <StarIcon sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Save Profile & Continue

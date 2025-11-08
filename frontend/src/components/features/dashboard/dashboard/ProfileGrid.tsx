@@ -50,7 +50,7 @@ export function ProfileGrid({
       mb: 6
     }}>
         <h2 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600,
       mb: 4
     }}>Your Profile Variations</h2>
@@ -67,13 +67,10 @@ export function ProfileGrid({
       py: 8
     }}>
               <p sx={{
-      "text-muted-foreground": true,
       mb: 4
     }}>No profile variations yet</p>
               <Button onClick={() => onCreateProfile?.()}>
                 <Plus sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Create Your First Profile
@@ -85,10 +82,8 @@ export function ProfileGrid({
 
       {/* Profile Cards Grid */}
       <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}>
         {profiles.map((profile) => (
@@ -110,16 +105,8 @@ export function ProfileGrid({
         {onNavigateToCareerGrowth && (
           <Card sx={{
       p: 6,
-      "bg-gradient-to-br": true,
-      "from-primary/5": true,
-      "to-purple-500/5": true,
-      "border-primary/20": true,
-      '&:hover': { "border-primary/40": true },
-      "transition-colors": true
-    }}>
-            <div sx={{
-      "space-y-4": true
-    }}>
+      '&:hover': {},}}>
+            <div sx={{}}>
               <div sx={{
       display: "flex",
       alignItems: "center",
@@ -127,24 +114,18 @@ export function ProfileGrid({
     }}>
                 <div sx={{
       p: 2,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                  <TrendingUp sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-primary": true
-    }} />
+                  <TrendingUp sx={{}} />
                 </div>
                 <h3 sx={{
       fontWeight: 600,
-      typography: h6
+      typography: "h6"
     }}>Career Growth</h3>
               </div>
 
               <p sx={{
-      "text-muted-foreground": true,
-      typography: body1
+      typography: "body1"
     }}>
                 Explore AI-powered career insights, job matching, and interview preparation tools.
               </p>
@@ -153,17 +134,12 @@ export function ProfileGrid({
                 onClick={onNavigateToCareerGrowth}
                 sx={{
       width: "100%",
-      "bg-primary/10": true,
-      "text-primary": true,
       border: 1,
-      "border-primary/30": true,
-      '&:hover': { "bg-primary/20": true }
+      '&:hover': {}
     }}
                 variant="outlined"
               >
                 <Sparkles sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Explore Career Tools

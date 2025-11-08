@@ -181,32 +181,24 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
             variant="text"
             onClick={onBack}
             sx={{
-      "text-muted-foreground": true,
-      '&:hover': { "text-foreground": true }
+      '&:hover': {}
     }}
           >
             <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Back to Dashboard
           </Button>
           <h1 sx={{
-      typography: h4,
-      fontWeight: 700,
-      "text-foreground": true
-    }}>Choose Template</h1>
+      typography: "h4",
+      fontWeight: 700,}}>Choose Template</h1>
         </div>
         <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-          <Badge variant="secondary" sx={{
-      "bg-primary/10": true,
-      "text-primary": true
-    }}>
+          <Badge variant="secondary" sx={{}}>
             {filteredTemplates.length} templates available
           </Badge>
         </div>
@@ -214,9 +206,7 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
 
       {/* Type and Category Filters */}
       <div sx={{
-      mb: 8,
-      "space-y-4": true
-    }}>
+      mb: 8,}}>
         <div sx={{
       display: "flex",
       gap: 2
@@ -259,18 +249,9 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
       {/* Template Grid */}
       <div
         sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
-      gap: 6,
-      "${isSelectingTemplate": true,
-      "?": true,
-      "'opacity-50": true,
-      "pointer-events-none'": true,
-      ":": true,
-      "''}": true
-    }}
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
+      gap: 6,}}
       >
         {filteredTemplates.map((template) => (
           <TemplateCard
@@ -288,19 +269,14 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
 
       {isSelectingTemplate && (
         <div sx={{
-      "fixed": true,
-      "inset-0": true,
       bgcolor: "common.black",
-      "bg-opacity-50": true,
       display: "flex",
       alignItems: "center",
-      justifyContent: "center",
-      "z-50": true
-    }}>
+      justifyContent: "center",}}>
           <div sx={{
       bgcolor: "common.white",
       p: 6,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       boxShadow: 4
     }}>
             <div sx={{
@@ -309,15 +285,9 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
       gap: 3
     }}>
               <div sx={{
-      "animate-spin": true,
-      borderRadius: 9999px,
-      "h-6": true,
-      "w-6": true,
-      "border-b-2": true,
-      "border-primary": true
-    }}></div>
+      borderRadius: "9999px",}}></div>
               <span sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500
     }}>Selecting template...</span>
             </div>
@@ -331,7 +301,6 @@ export function TemplateSelector({ onBack, onSelectTemplate }: TemplateSelectorP
       py: 12
     }}>
           <div sx={{
-      "text-muted-foreground": true,
       mb: 4
     }}>
             No templates found for the selected filters

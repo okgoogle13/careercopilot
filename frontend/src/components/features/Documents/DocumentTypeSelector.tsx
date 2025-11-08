@@ -299,12 +299,9 @@ export function DocumentTypeSelector({
           hover={true}
           tap={true}
           sx={{
-      "group": true,
-      "relative": true,
       overflow: "hidden",
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       cursor: "pointer"
     }}
         >
@@ -320,18 +317,10 @@ export function DocumentTypeSelector({
           >
             {/* Recommendation Score Badge */}
             {sortBy === 'recommended' && recommendationScore > 70 && (
-              <div sx={{
-      "absolute": true,
-      "top-2": true,
-      "right-2": true,
-      "z-10": true
-    }}>
+              <div sx={{}}>
                 <Badge sx={{
-      "bg-gradient-to-r": true,
-      "from-green-500": true,
-      "to-emerald-500": true,
       color: "common.white",
-      typography: body2
+      typography: "body2"
     }}>
                   {Math.round(recommendationScore)}% match
                 </Badge>
@@ -339,9 +328,7 @@ export function DocumentTypeSelector({
             )}
 
             <div sx={{
-      p: 6,
-      "space-y-4": true
-    }}>
+      p: 6,}}>
               <div sx={{
       display: "flex",
       alignItems: "flex-start",
@@ -355,31 +342,17 @@ export function DocumentTypeSelector({
     }}>
                   <div sx={{
       p: 3,
-      "${doc.bgColor}": true,
-      borderRadius: 0.75rem,
-      "relative": true
-    }}>
-                    <Icon sx={{
-      "w-6": true,
-      "h-6": true,
-      "${doc.color}": true
-    }} />
+      borderRadius: "0.75rem",}}>
+                    <Icon sx={{}} />
                     {doc.aiPowered && (
                       <div sx={{
-      "absolute": true,
-      "-top-1": true,
-      "-right-1": true,
-      "w-4": true,
-      "h-4": true,
       bgcolor: "purple.500",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }}>
                         <Zap sx={{
-      "w-2": true,
-      "h-2": true,
       color: "common.white"
     }} />
                       </div>
@@ -389,10 +362,8 @@ export function DocumentTypeSelector({
       flex: 1
     }}>
                     <h3 sx={{
-      typography: h6,
-      fontWeight: 600,
-      "text-foreground": true
-    }}>{doc.title}</h3>
+      typography: "h6",
+      fontWeight: 600,}}>{doc.title}</h3>
                     <div sx={{
       display: "flex",
       alignItems: "center",
@@ -403,16 +374,12 @@ export function DocumentTypeSelector({
                         {doc.difficulty}
                       </Badge>
                       <span sx={{
-      typography: body2,
-      "text-muted-foreground": true,
+      typography: "body2",
       display: "flex",
       alignItems: "center",
       gap: 1
     }}>
-                        <Clock sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                        <Clock sx={{}} />
                         {formatTime(doc.estimatedTime)}
                       </span>
                     </div>
@@ -428,26 +395,14 @@ export function DocumentTypeSelector({
                     <Button
                       variant="text"
                       size="small"
-                      sx={{
-      "h-8": true,
-      "w-8": true
-    }}
+                      sx={{}}
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleFavorite(doc.id);
                       }}
                     >
                       <Heart
-                        sx={{
-      "w-4": true,
-      "h-4": true,
-      "${isFavorite": true,
-      "?": true,
-      "'fill-red-500": true,
-      "text-red-500'": true,
-      ":": true,
-      "'text-muted-foreground'}": true
-    }}
+                        sx={{}}
                       />
                     </Button>
                   </MuiTooltip>
@@ -459,8 +414,7 @@ export function DocumentTypeSelector({
                     {doc.isNew && (
                       <Badge variant="secondary" sx={{
       bgcolor: "green.100",
-      "text-green-800": true,
-      typography: body2
+      typography: "body2"
     }}>
                         New
                       </Badge>
@@ -468,8 +422,7 @@ export function DocumentTypeSelector({
                     {doc.isPopular && (
                       <Badge variant="secondary" sx={{
       bgcolor: "amber.100",
-      "text-amber-800": true,
-      typography: body2
+      typography: "body2"
     }}>
                         Popular
                       </Badge>
@@ -479,18 +432,14 @@ export function DocumentTypeSelector({
               </div>
 
               <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{doc.description}</p>
+      typography: "body1",}}>{doc.description}</p>
 
               {/* Analytics */}
               <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
@@ -501,10 +450,7 @@ export function DocumentTypeSelector({
       alignItems: "center",
       gap: 1
     }}>
-                    <Users sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                    <Users sx={{}} />
                     {doc.usageCount?.toLocaleString() || 0} users
                   </span>
                   <span sx={{
@@ -512,10 +458,7 @@ export function DocumentTypeSelector({
       alignItems: "center",
       gap: 1
     }}>
-                    <Target sx={{
-      "w-3": true,
-      "h-3": true
-    }} />
+                    <Target sx={{}} />
                     {doc.successRate}% success
                   </span>
                 </div>
@@ -543,14 +486,14 @@ export function DocumentTypeSelector({
     }}>
                 {doc.tags.slice(0, 3).map((tag, i) => (
                   <Badge key={i} variant="outline" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                     {tag}
                   </Badge>
                 ))}
                 {doc.tags.length > 3 && (
                   <Badge variant="outline" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                     +{doc.tags.length - 3} more
                   </Badge>
@@ -560,10 +503,7 @@ export function DocumentTypeSelector({
               <Button
                 sx={{
       width: "100%",
-      mt: 4,
-      "group-hover:bg-primary": true,
-      "group-hover:text-primary-foreground": true
-    }}
+      mt: 4,}}
                 variant="outlined"
                 size="small"
               >
@@ -578,30 +518,21 @@ export function DocumentTypeSelector({
 
   const renderSkeleton = () => (
     <Card sx={{
-      p: 6,
-      "space-y-4": true
-    }}>
+      p: 6,}}>
       <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 3
     }}>
         <Skeleton sx={{
-      "h-12": true,
-      "w-12": true,
-      borderRadius: 0.75rem
+      borderRadius: "0.75rem"
     }} />
-        <Skeleton sx={{
-      "h-6": true,
-      "w-32": true
-    }} />
+        <Skeleton sx={{}} />
       </div>
       <Skeleton sx={{
-      "h-4": true,
       width: "100%"
     }} />
       <Skeleton sx={{
-      "h-4": true,
       width: "75%"
     }} />
       <div sx={{
@@ -610,18 +541,13 @@ export function DocumentTypeSelector({
       pt: 2
     }}>
         <Skeleton sx={{
-      "h-6": true,
-      "w-16": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
         <Skeleton sx={{
-      "h-6": true,
-      "w-20": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
       </div>
       <Skeleton sx={{
-      "h-9": true,
       width: "100%",
       mt: 4
     }} />
@@ -631,69 +557,43 @@ export function DocumentTypeSelector({
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 4,
       [theme.breakpoints.up('sm')]: { p: 6 }
     }}>
-      <div sx={{
-      "max-w-6xl": true,
-      "mx-auto": true,
-      "space-y-8": true
-    }}>
+      <div sx={{}}>
         {/* Header */}
         <div sx={{
       display: "flex",
       flexDirection: "column",
       gap: 4
     }}>
-          <Button variant="text" size="small" onClick={onBack} sx={{
-      "w-fit": true
-    }}>
+          <Button variant="text" size="small" onClick={onBack} sx={{}}>
             <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Back to Dashboard
           </Button>
 
-          <div sx={{
-      "space-y-2": true
-    }}>
+          <div sx={{}}>
             <h1 sx={{
-      typography: h3,
-      fontWeight: 700,
-      "tracking-tight": true
-    }}>Create New Document</h1>
-            <p sx={{
-      "text-muted-foreground": true
-    }}>
+      typography: "h3",
+      fontWeight: 700,}}>Create New Document</h1>
+            <p sx={{}}>
               Select a template to get started with your next career document
             </p>
           </div>
         </div>
 
         {/* Search and Filter */}
-        <div sx={{
-      "space-y-4": true
-    }}>
+        <div sx={{}}>
           <div sx={{
       display: "flex",
       gap: 4
     }}>
             <div sx={{
-      "relative": true,
       flex: 1
     }}>
-              <Search sx={{
-      "absolute": true,
-      "left-3": true,
-      "top-1/2": true,
-      "h-4": true,
-      "w-4": true,
-      "-translate-y-1/2": true,
-      "text-muted-foreground": true
-    }} />
+              <Search sx={{}} />
               <Input
                 ref={searchInputRef}
                 placeholder="Search templates..."
@@ -710,51 +610,39 @@ export function DocumentTypeSelector({
       gap: 2
     }}>
               <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Sort by:</span>
+      typography: "body1",}}>Sort by:</span>
               <Tabs value={sortBy} onChange={(_e, value) => setSortBy(value as any)}>
                 <TabsList sx={{
-      "grid": true,
-      "grid-cols-4": true,
       w: "400px"
     }}>
                   <TabsTrigger value="recommended" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                     <TrendingUp sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                     Recommended
                   </TabsTrigger>
                   <TabsTrigger value="popular" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                     <BarChart sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                     Popular
                   </TabsTrigger>
                   <TabsTrigger value="recent" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                     <Clock sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                     Recent
                   </TabsTrigger>
                   <TabsTrigger value="difficulty" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                     <Target sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                     Difficulty
@@ -773,9 +661,7 @@ export function DocumentTypeSelector({
           >
             <TabsList sx={{
       width: "100%",
-      justifyContent: "flex-start",
-      "overflow-x-auto": true
-    }}>
+      justifyContent: "flex-start",}}>
               {categories.map((category) => {
                 const Icon = category.icon;
                 const count =
@@ -795,14 +681,11 @@ export function DocumentTypeSelector({
       gap: 2
     }}
                   >
-                    <Icon sx={{
-      "h-4": true,
-      "w-4": true
-    }} />
+                    <Icon sx={{}} />
                     {category.label}
                     <Badge variant="secondary" sx={{
       ml: 1,
-      typography: body2
+      typography: "body2"
     }}>
                       {count}
                     </Badge>
@@ -814,28 +697,19 @@ export function DocumentTypeSelector({
         </div>
         {/* Recent Documents */}
         {recentDocuments.length > 0 && (
-          <div sx={{
-      "space-y-4": true
-    }}>
+          <div sx={{}}>
             <div sx={{
       display: "flex",
       alignItems: "center",
-      gap: 2,
-      "text-muted-foreground": true
-    }}>
-              <History sx={{
-      "h-5": true,
-      "w-5": true
-    }} />
+      gap: 2,}}>
+              <History sx={{}} />
               <h2 sx={{
       fontWeight: 500
     }}>Recently Opened</h2>
             </div>
             <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 4
     }}>
               {recentDocuments.slice(0, 3).map((doc) => {
@@ -848,8 +722,7 @@ export function DocumentTypeSelector({
                     key={doc.id}
                     sx={{
       p: 4,
-      '&:hover': { "bg-muted/50": true },
-      "transition-colors": true,
+      '&:hover': {},
       cursor: "pointer"
     }}
                     onClick={() => onSelectType?.(doc.type)}
@@ -861,27 +734,19 @@ export function DocumentTypeSelector({
     }}>
                       <div sx={{
       p: 2,
-      "${template.bgColor}": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                        <Icon sx={{
-      "w-4": true,
-      "h-4": true,
-      "${template.color}": true
-    }} />
+                        <Icon sx={{}} />
                       </div>
                       <div sx={{
-      flex: 1,
-      "min-w-0": true
-    }}>
+      flex: 1,}}>
                         <h3 sx={{
       fontWeight: 500,
-      [object Object]
+      
     }}>{doc.title}</h3>
                         <p sx={{
-      typography: body2,
-      "text-muted-foreground": true,
-      [object Object]
+      typography: "body2",
+      
     }}>
                           {new Date(doc.lastOpened).toLocaleDateString()}
                         </p>
@@ -898,10 +763,8 @@ export function DocumentTypeSelector({
         {isLoading ? (
           <motion.div
             sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}
             initial={{ opacity: 0 }}
@@ -924,32 +787,21 @@ export function DocumentTypeSelector({
             items={filteredDocuments}
             renderItem={(doc) => renderDocumentCard(doc)}
             sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}
           />
         ) : (
           <div sx={{
       textAlign: "center",
-      py: 12,
-      "space-y-4": true
-    }}>
-            <FileText sx={{
-      "mx-auto": true,
-      "h-12": true,
-      "w-12": true,
-      "text-muted-foreground": true
-    }} />
+      py: 12,}}>
+            <FileText sx={{}} />
             <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 500
     }}>No templates found</h3>
-            <p sx={{
-      "text-muted-foreground": true
-    }}>Try adjusting your search or filter criteria</p>
+            <p sx={{}}>Try adjusting your search or filter criteria</p>
             <Button
               variant="outlined"
               onClick={() => {

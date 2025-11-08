@@ -26,38 +26,25 @@ export function FormComponentsSection() {
     >
       <ComponentDemo title="Input Controls">
         <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
-          <div sx={{
-      "space-y-4": true
-    }}>
-            <div sx={{
-      "space-y-2": true
-    }}>
+          <div sx={{}}>
+            <div sx={{}}>
               <Label htmlFor="text-input">Text Input</Label>
               <Input id="text-input" placeholder="Enter text here..." />
             </div>
-            <div sx={{
-      "space-y-2": true
-    }}>
+            <div sx={{}}>
               <Label htmlFor="password-input">Password Input</Label>
               <Input id="password-input" type="password" placeholder="Password" />
             </div>
-            <div sx={{
-      "space-y-2": true
-    }}>
+            <div sx={{}}>
               <Label htmlFor="textarea">Textarea</Label>
               <Textarea id="textarea" placeholder="Enter longer text here..." />
             </div>
           </div>
-          <div sx={{
-      "space-y-4": true
-    }}>
-            <div sx={{
-      "space-y-2": true
-    }}>
+          <div sx={{}}>
+            <div sx={{}}>
               <FormControl fullWidth>
                 <InputLabel>Select</InputLabel>
                 <Select
@@ -71,15 +58,11 @@ export function FormComponentsSection() {
                 </Select>
               </FormControl>
             </div>
-            <div sx={{
-      "space-y-2": true
-    }}>
+            <div sx={{}}>
               <Label>Switch</Label>
               <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-2": true
-    }}>
+      alignItems: "center",}}>
                 <Switch
                   id="switch"
                   checked={switchChecked}
@@ -88,15 +71,11 @@ export function FormComponentsSection() {
                 <Label htmlFor="switch">Enable notifications</Label>
               </div>
             </div>
-            <div sx={{
-      "space-y-2": true
-    }}>
+            <div sx={{}}>
               <Label>Checkbox</Label>
               <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-2": true
-    }}>
+      alignItems: "center",}}>
                 <Checkbox
                   id="checkbox"
                   checked={checkboxChecked}
@@ -111,44 +90,33 @@ export function FormComponentsSection() {
 
       <ComponentDemo title="Radio Group & Slider">
         <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
-          <div sx={{
-      "space-y-4": true
-    }}>
+          <div sx={{}}>
             <Label>Radio Group</Label>
             <RadioGroup value={radioValue} onChange={(e) => setRadioValue(e.target.value)}>
               <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-2": true
-    }}>
+      alignItems: "center",}}>
                 <RadioGroupItem value="option1" id="option1" />
                 <Label htmlFor="option1">Option 1</Label>
               </div>
               <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-2": true
-    }}>
+      alignItems: "center",}}>
                 <RadioGroupItem value="option2" id="option2" />
                 <Label htmlFor="option2">Option 2</Label>
               </div>
               <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-2": true
-    }}>
+      alignItems: "center",}}>
                 <RadioGroupItem value="option3" id="option3" />
                 <Label htmlFor="option3">Option 3</Label>
               </div>
             </RadioGroup>
           </div>
-          <div sx={{
-      "space-y-4": true
-    }}>
+          <div sx={{}}>
             <Label>Slider</Label>
             <Slider
               value={sliderValue}
@@ -160,9 +128,7 @@ export function FormComponentsSection() {
     }}
             />
             <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Value: {sliderValue[0]}</p>
+      typography: "body1",}}>Value: {sliderValue[0]}</p>
           </div>
         </div>
       </ComponentDemo>

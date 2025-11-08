@@ -11,20 +11,14 @@ export const ComponentSection = ({
   description: string;
   children: React.ReactNode;
 }) => (
-  <section sx={{
-      "space-y-4": true
-    }}>
+  <section sx={{}}>
     <div>
       <h2 sx={{
       mb: 2
     }}>{title}</h2>
-      <p sx={{
-      "text-muted-foreground": true
-    }}>{description}</p>
+      <p sx={{}}>{description}</p>
     </div>
-    <div sx={{
-      "space-y-6": true
-    }}>{children}</div>
+    <div sx={{}}>{children}</div>
   </section>
 );
 
@@ -38,9 +32,7 @@ export const ComponentDemo = ({
   <Card variant="elevation">
     <CardHeader title={<Typography variant="h3">{title}</Typography>}></CardHeader>
     <CardContent>
-      <div sx={{
-      "space-y-4": true
-    }}>{children}</div>
+      <div sx={{}}>{children}</div>
     </CardContent>
   </Card>
 );

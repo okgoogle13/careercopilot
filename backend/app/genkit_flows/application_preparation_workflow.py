@@ -8,7 +8,8 @@ package by coordinating multiple specialized flows.
 import json
 import os
 from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, cast
+from typing_extensions import ParamSpec
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -20,18 +21,29 @@ from app.genkit_flows.ksc_generator import generateKscResponse
 from app.genkit_flows.resume_intelligence_pipeline import generate_resume_intelligence_report
 from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
 
+# Type stubs for genkit if not available
 try:
     import genkit
     from genkit.plugins import google_genai
-except Exception:
-    genkit = None
-    googleai = None
+    GENKIT_AVAILABLE = True
+except ImportError:
+    from typing import Any, Dict, Optional
+    
+    class _DummyGenkit:
+        def __getattr__(self, name: str) -> Any:
+            return _noop_flow
+    
+    genkit = _DummyGenkit()
+    google_genai = None
+    GENKIT_AVAILABLE = False
 
 
-def _noop_flow(*args, **kwargs):
-    def _decorator(fn):
+P = ParamSpec('P')
+R = TypeVar('R')
+
+def _noop_flow(*args: Any, **kwargs: Any) -> Callable[[Callable[P, R]], Callable[P, R]]:
+    def _decorator(fn: Callable[P, R]) -> Callable[P, R]:
         return fn
-
     return _decorator
 
 
@@ -43,21 +55,23 @@ if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("goo
     genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
 gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
+if gemini_pro is None:
+    raise RuntimeError("Failed to load Gemini Pro model configuration")
 
 
 # Data Models
 class ApplicationPackage(BaseModel):
-    tailored_resume: Dict = Field(description="Optimized resume content and analysis")
-    cover_letter: Dict = Field(description="Personalized cover letter with analysis")
-    ksc_responses: Optional[List[Dict]] = Field(
+    tailored_resume: Dict[str, Any] = Field(description="Optimized resume content and analysis")
+    cover_letter: Dict[str, Any] = Field(description="Personalized cover letter with analysis")
+    ksc_responses: Optional[List[Dict[str, Any]]] = Field(
         description="Key Selection Criteria responses if applicable"
     )
 
-    application_strategy: Dict = Field(description="Strategic guidance for this application")
+    application_strategy: Dict[str, Any] = Field(description="Strategic guidance for this application")
     submission_checklist: List[str] = Field(description="Final submission checklist")
-    follow_up_plan: Dict = Field(description="Post-application follow-up strategy")
+    follow_up_plan: Dict[str, Any] = Field(description="Post-application follow-up strategy")
 
-    package_metadata: Dict = Field(description="Package generation metadata")
+    package_metadata: Dict[str, Any] = Field(description="Package generation metadata")
 
 
 class KscDetectionResult(BaseModel):
@@ -145,9 +159,9 @@ Respond with valid JSON matching the KscDetectionResult schema.
 @with_ai_error_handling()
 def prepare_full_application(
     job_description: str,
-    user_profile: Dict,
-    application_preferences: Optional[Dict] = None,
-    company_research: Optional[Dict] = None,
+    user_profile: Dict[str, Any],
+    application_preferences: Optional[Dict[str, Any]] = None,
+    company_research: Optional[Dict[str, Any]] = None,
 ) -> ApplicationPackage:
     """
     Orchestrates the complete application preparation process by coordinating
@@ -365,7 +379,10 @@ Respond with a JSON object containing these strategic insights.
 # Utility function for quick application assessment
 @genkit_flow()
 @with_ai_error_handling()
-def assess_application_readiness(user_profile: Dict, job_description: str) -> Dict:
+def assess_application_readiness(
+    user_profile: Dict[str, Any], 
+    job_description: str
+) -> Dict[str, Any]:
     """
     Quick assessment of application readiness without full generation.
 

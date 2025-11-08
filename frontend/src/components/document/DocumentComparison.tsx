@@ -116,12 +116,10 @@ export function DocumentComparison({
       alignItems: "center",
       gap: 2
     }}>
-            <FileText sx={{ fontSize: 20 }} sx={{
-      "text-primary": true
-    }} />
+            <FileText sx={{ fontSize: 20 }} sx={{}} />
             <Typography variant="h6" sx={{
       fontWeight: 600,
-      [object Object]
+      
     }}>
               {document.title}
             </Typography>
@@ -147,42 +145,18 @@ export function DocumentComparison({
         <Box sx={{
       bgcolor: "gray.50",
       p: 4,
-      borderRadius: 0.5rem,
-      "max-h-96": true,
+      borderRadius: "0.5rem",
       overflowY: "auto"
     }}>
           <Box sx={{
-      "space-y-1": true,
-      "font-mono": true,
-      typography: body1
+      typography: "body1"
     }}>
             {getHighlightedContent(document.content, isLeft).map((line, index) => (
               <Box
                 key={index}
                 sx={{
       p: 1,
-      borderRadius: 0.25rem,
-      "${": true,
-      "typeof": true,
-      "line": true,
-      "===": true,
-      "'object'": true,
-      "&&": true,
-      "line.isDifferent": true,
-      "?": true,
-      "isLeft": true,
-      "?": true,
-      "'bg-red-100": true,
-      "border-l-2": true,
-      "border-red-400'": true,
-      ":": true,
-      "'bg-green-100": true,
-      "border-l-2": true,
-      "border-green-400'": true,
-      ":": true,
-      "''": true,
-      "}": true
-    }}
+      borderRadius: "0.25rem",}}
               >
                 {typeof line === 'object' ? line.text : line}
               </Box>
@@ -220,7 +194,7 @@ export function DocumentComparison({
     }}>
         <Box>
           <Typography variant="h4" sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       mb: 2
     }}>
@@ -243,8 +217,7 @@ export function DocumentComparison({
             {showFullContent ? 'Compact View' : 'Full View'}
           </Button>
           <Button variant="contained" sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}>
             Merge Changes
           </Button>
@@ -259,7 +232,7 @@ export function DocumentComparison({
       mb: 4,
       p: 3,
       bgcolor: "gray.50",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
           <Box sx={{
       display: "flex",
@@ -267,12 +240,8 @@ export function DocumentComparison({
       gap: 2
     }}>
             <Box sx={{
-      "w-4": true,
-      "h-4": true,
       bgcolor: "red.100",
-      "border-l-2": true,
-      "border-red-400": true,
-      borderRadius: 0.25rem
+      borderRadius: "0.25rem"
     }}></Box>
             <Typography variant="caption">Removed/Modified (Left)</Typography>
           </Box>
@@ -282,12 +251,8 @@ export function DocumentComparison({
       gap: 2
     }}>
             <Box sx={{
-      "w-4": true,
-      "h-4": true,
       bgcolor: "green.100",
-      "border-l-2": true,
-      "border-green-400": true,
-      borderRadius: 0.25rem
+      borderRadius: "0.25rem"
     }}></Box>
             <Typography variant="caption">Added/New (Right)</Typography>
           </Box>
@@ -296,9 +261,7 @@ export function DocumentComparison({
 
       {/* Comparison Panels */}
       <Box sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('md')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}>
         <DocumentPanel document={leftDocument} position="left" isLeft={true} />
@@ -319,9 +282,7 @@ export function DocumentComparison({
             Comparison Summary
           </Typography>
           <Box sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4
     }}>
             <Box sx={{

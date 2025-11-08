@@ -136,7 +136,8 @@ function analyzeComponents(): InventoryReport {
              filePath.endsWith('.tsx') &&
              !filePath.includes('.test.') &&
              !filePath.includes('.stories.') &&
-             !filePath.includes('node_modules');
+             !filePath.includes('node_modules') &&
+             !filePath.includes('/Figma UI Files/');
     });
 
   console.log(`Found ${componentFiles.length} component files`);
@@ -222,7 +223,10 @@ function analyzeComponents(): InventoryReport {
 
   // Second pass: analyze all source files to find component usage
   const allSourceFiles = project.getSourceFiles()
-    .filter(sf => !sf.getFilePath().includes('node_modules'));
+    .filter(sf => {
+      const p = sf.getFilePath();
+      return !p.includes('node_modules') && !p.includes('/Figma UI Files/');
+    });
 
   for (const sourceFile of allSourceFiles) {
     const imports = sourceFile.getImportDeclarations();

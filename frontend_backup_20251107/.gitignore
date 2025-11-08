@@ -1,9 +1,0 @@
-node_modules/
-dist/
-.vite/
-*.log
-coverage/
-.DS_Store
-
-*storybook.log
-storybook-static

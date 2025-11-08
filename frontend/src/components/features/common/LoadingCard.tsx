@@ -13,41 +13,23 @@ export function LoadingCard() {
       gap: 3
     }}>
         <Skeleton sx={{
-      "w-12": true,
-      "h-12": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
-        <div sx={{
-      "space-y-2": true
-    }}>
-          <Skeleton sx={{
-      "h-4": true,
-      "w-32": true
-    }} />
-          <Skeleton sx={{
-      "h-3": true,
-      "w-24": true
-    }} />
+        <div sx={{}}>
+          <Skeleton sx={{}} />
+          <Skeleton sx={{}} />
         </div>
       </div>
 
       {/* Profile Stats Section */}
-      <div sx={{
-      "space-y-3": true
-    }}>
+      <div sx={{}}>
         <div sx={{
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center"
     }}>
-          <Skeleton sx={{
-      "h-3": true,
-      "w-24": true
-    }} />
-          <Skeleton sx={{
-      "h-4": true,
-      "w-8": true
-    }} />
+          <Skeleton sx={{}} />
+          <Skeleton sx={{}} />
         </div>
 
         <div sx={{
@@ -55,14 +37,8 @@ export function LoadingCard() {
       justifyContent: "space-between",
       alignItems: "center"
     }}>
-          <Skeleton sx={{
-      "h-3": true,
-      "w-28": true
-    }} />
-          <Skeleton sx={{
-      "h-4": true,
-      "w-12": true
-    }} />
+          <Skeleton sx={{}} />
+          <Skeleton sx={{}} />
         </div>
 
         <div sx={{
@@ -70,14 +46,8 @@ export function LoadingCard() {
       justifyContent: "space-between",
       alignItems: "center"
     }}>
-          <Skeleton sx={{
-      "h-3": true,
-      "w-20": true
-    }} />
-          <Skeleton sx={{
-      "h-3": true,
-      "w-16": true
-    }} />
+          <Skeleton sx={{}} />
+          <Skeleton sx={{}} />
         </div>
       </div>
 
@@ -88,13 +58,9 @@ export function LoadingCard() {
       pt: 2
     }}>
         <Skeleton sx={{
-      flex: 1,
-      "h-8": true
-    }} />
+      flex: 1,}} />
         <Skeleton sx={{
-      flex: 1,
-      "h-8": true
-    }} />
+      flex: 1,}} />
       </div>
     </Card>
   );

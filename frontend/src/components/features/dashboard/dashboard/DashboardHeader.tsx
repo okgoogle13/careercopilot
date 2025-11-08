@@ -29,14 +29,11 @@ export function DashboardHeader({
     }}>
       <div>
         <h1 sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
-      "text-foreground": true,
       mb: 2
     }}>{title}</h1>
-        {subtitle && <p sx={{
-      "text-muted-foreground": true
-    }}>{subtitle}</p>}
+        {subtitle && <p sx={{}}>{subtitle}</p>}
       </div>
       <div sx={{
       display: "flex",
@@ -48,9 +45,7 @@ export function DashboardHeader({
       display: "flex",
       alignItems: "center",
       gap: 2,
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
             <span>Dashboard</span>
             <span>ATS Analysis</span>
           </div>
@@ -59,37 +54,25 @@ export function DashboardHeader({
           <Button
             onClick={() => onCreateProfile?.()}
             sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true },
-      "text-primary-foreground": true
-    }}
+      '&:hover': {},}}
           >
             <Plus sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             {isEmpty ? 'Create Your First Document' : 'Create Document'}
           </Button>
         )}
         <Button onClick={onNavigateToSettings} variant="text" size="small">
-          <Settings sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+          <Settings sx={{}} />
         </Button>
         <div sx={{
-      "w-8": true,
-      "h-8": true,
       bgcolor: "common.white",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }}>
           <User sx={{
-      "w-4": true,
-      "h-4": true,
       color: "common.black"
     }} />
         </div>
