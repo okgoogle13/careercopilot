@@ -40,22 +40,15 @@ export const SpinnerLoading = ({ size = 'md', message, className = '' }: Loading
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      gap: 2,
-      "${className}": true
-    }}>
+      gap: 2,}}>
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
-        <AutorenewRounded sx={{
-      "${sizeClasses[size]}": true,
-      "text-primary": true
-    }} />
+        <AutorenewRounded sx={{}} />
       </motion.div>
       {message && <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{message}</span>}
+      typography: "body1",}}>{message}</span>}
     </div>
   );
 };
@@ -73,22 +66,16 @@ export const PulseLoading = ({ size = 'md', message, className = '' }: LoadingSt
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      gap: 2,
-      "${className}": true
-    }}>
+      gap: 2,}}>
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 1.5, repeat: Infinity }}
         sx={{
-      "${sizeClasses[size]}": true,
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
       />
       {message && <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{message}</span>}
+      typography: "body1",}}>{message}</span>}
     </div>
   );
 };
@@ -107,9 +94,7 @@ export const DotsLoading = ({ size = 'md', message, className = '' }: LoadingSta
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: 3,
-      "${className}": true
-    }}>
+      gap: 3,}}>
       <div sx={{
       display: "flex",
       gap: 1
@@ -124,17 +109,13 @@ export const DotsLoading = ({ size = 'md', message, className = '' }: LoadingSta
               delay: i * 0.1,
             }}
             sx={{
-      "${sizeClasses[size]}": true,
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
           />
         ))}
       </div>
       {message && <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{message}</span>}
+      typography: "body1",}}>{message}</span>}
     </div>
   );
 };
@@ -153,9 +134,7 @@ export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingSta
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: 3,
-      "${className}": true
-    }}>
+      gap: 3,}}>
       <div sx={{
       display: "flex",
       gap: 1,
@@ -171,18 +150,12 @@ export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingSta
               delay: i * 0.1,
             }}
             sx={{
-      "${sizeClasses[size]}": true,
-      "bg-primary": true,
-      borderRadius: 0.125rem,
-      "origin-bottom": true
-    }}
+      borderRadius: "0.125rem",}}
           />
         ))}
       </div>
       {message && <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{message}</span>}
+      typography: "body1",}}>{message}</span>}
     </div>
   );
 };
@@ -190,27 +163,20 @@ export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingSta
 // Progress Loading
 export const ProgressLoading = ({ progress = 0, message, className = '' }: LoadingStateProps) => {
   return (
-    <div sx={{
-      "space-y-3": true,
-      "${className}": true
-    }}>
+    <div sx={{}}>
       <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
     }}>
         <span sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500
     }}>{message || 'Loading...'}</span>
         <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{progress}%</span>
+      typography: "body1",}}>{progress}%</span>
       </div>
-      <Progress value={progress} sx={{
-      "h-2": true
-    }} />
+      <Progress value={progress} sx={{}} />
     </div>
   );
 };
@@ -223,60 +189,43 @@ export const SkeletonLoading = ({
   if (variant === 'card') {
     return (
       <Card sx={{
-      p: 6,
-      "space-y-4": true,
-      "${className}": true
-    }}>
+      p: 6,}}>
         <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 3
     }}>
           <Skeleton sx={{
-      "h-12": true,
-      "w-12": true,
-      borderRadius: 0.75rem
+      borderRadius: "0.75rem"
     }} />
           <div sx={{
-      "space-y-2": true,
       flex: 1
     }}>
             <Skeleton sx={{
-      "h-4": true,
       width: "75%"
     }} />
             <Skeleton sx={{
-      "h-3": true,
       width: "50%"
     }} />
           </div>
         </div>
         <Skeleton sx={{
-      "h-4": true,
       width: "100%"
     }} />
-        <Skeleton sx={{
-      "h-4": true,
-      "w-5/6": true
-    }} />
+        <Skeleton sx={{}} />
         <div sx={{
       display: "flex",
       gap: 2,
       pt: 2
     }}>
           <Skeleton sx={{
-      "h-6": true,
-      "w-16": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
           <Skeleton sx={{
-      "h-6": true,
-      "w-20": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
         </div>
         <Skeleton sx={{
-      "h-9": true,
       width: "100%"
     }} />
       </Card>
@@ -285,10 +234,7 @@ export const SkeletonLoading = ({
 
   if (variant === 'list') {
     return (
-      <div sx={{
-      "space-y-3": true,
-      "${className}": true
-    }}>
+      <div sx={{}}>
         {Array.from({ length: 5 }).map((_, i) => (
           <div key={i} sx={{
       display: "flex",
@@ -296,23 +242,18 @@ export const SkeletonLoading = ({
       gap: 3,
       p: 3,
       border: 1,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
             <Skeleton sx={{
-      "h-10": true,
-      "w-10": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
             <div sx={{
-      "space-y-2": true,
       flex: 1
     }}>
               <Skeleton sx={{
-      "h-4": true,
       width: "75%"
     }} />
               <Skeleton sx={{
-      "h-3": true,
       width: "50%"
     }} />
             </div>
@@ -325,9 +266,7 @@ export const SkeletonLoading = ({
   if (variant === 'profile') {
     return (
       <Card sx={{
-      p: 6,
-      "${className}": true
-    }}>
+      p: 6,}}>
         <div sx={{
       display: "flex",
       alignItems: "center",
@@ -335,43 +274,22 @@ export const SkeletonLoading = ({
       mb: 6
     }}>
           <Skeleton sx={{
-      "h-20": true,
-      "w-20": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
           <div sx={{
-      "space-y-2": true,
       flex: 1
     }}>
-            <Skeleton sx={{
-      "h-6": true,
-      "w-48": true
-    }} />
-            <Skeleton sx={{
-      "h-4": true,
-      "w-32": true
-    }} />
-            <Skeleton sx={{
-      "h-3": true,
-      "w-24": true
-    }} />
+            <Skeleton sx={{}} />
+            <Skeleton sx={{}} />
+            <Skeleton sx={{}} />
           </div>
         </div>
-        <div sx={{
-      "space-y-4": true
-    }}>
+        <div sx={{}}>
           <Skeleton sx={{
-      "h-4": true,
       width: "100%"
     }} />
-          <Skeleton sx={{
-      "h-4": true,
-      "w-5/6": true
-    }} />
-          <Skeleton sx={{
-      "h-4": true,
-      "w-4/6": true
-    }} />
+          <Skeleton sx={{}} />
+          <Skeleton sx={{}} />
         </div>
       </Card>
     );
@@ -384,21 +302,11 @@ export const SkeletonLoading = ({
 export const ShimmerLoading = ({ className = '' }: LoadingStateProps) => {
   return (
     <div sx={{
-      "relative": true,
       overflow: "hidden",
       bgcolor: "gray.200",
-      borderRadius: 0.25rem,
-      "${className}": true
-    }}>
+      borderRadius: "0.25rem",}}>
       <motion.div
-        sx={{
-      "absolute": true,
-      "inset-0": true,
-      "bg-gradient-to-r": true,
-      "from-transparent": true,
-      "via-white/60": true,
-      "to-transparent": true
-    }}
+        sx={{}}
         initial={{ x: '-100%' }}
         animate={{ x: '100%' }}
         transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
@@ -419,38 +327,27 @@ export const AIProcessingLoading = ({
       alignItems: "center",
       justifyContent: "center",
       gap: 4,
-      p: 6,
-      "${className}": true
-    }}>
-      <div sx={{
-      "relative": true
-    }}>
+      p: 6,}}>
+      <div sx={{}}>
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
           sx={{
-      "w-12": true,
-      "h-12": true,
       border: 2,
       borderColor: "purple.200",
-      "border-t-purple-600": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
         />
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
           sx={{
-      "absolute": true,
-      "inset-0": true,
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }}
         >
           <FlashOn sx={{
-      "w-5": true,
-      "h-5": true,
       color: "purple.600"
     }} />
         </motion.div>
@@ -479,10 +376,8 @@ export const AIProcessingLoading = ({
                 delay: i * 0.5,
               }}
               sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "purple.400",
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
             />
           ))}
@@ -504,27 +399,21 @@ export const SuccessLoading = ({ message = 'Complete!', className = '' }: Loadin
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: 3,
-      "${className}": true
-    }}
+      gap: 3,}}
     >
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: [0, 1.2, 1] }}
         transition={{ delay: 0.2, duration: 0.6 }}
         sx={{
-      "w-12": true,
-      "h-12": true,
       bgcolor: "green.100",
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
     }}
       >
         <CheckCircle sx={{
-      "w-6": true,
-      "h-6": true,
       color: "green.600"
     }} />
       </motion.div>
@@ -533,7 +422,7 @@ export const SuccessLoading = ({ message = 'Complete!', className = '' }: Loadin
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
         sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
       color: "green.700"
     }}

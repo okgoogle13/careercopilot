@@ -41,10 +41,7 @@ export function FeatureHighlights() {
     }}>
               <Box sx={{
       p: 3,
-      "bg-primary/10": true,
-      borderRadius: 9999px,
-      "text-primary": true
-    }}>{feature.icon}</Box>
+      borderRadius: "9999px",}}>{feature.icon}</Box>
             </Box>
             <Typography variant="h6" sx={{
       fontWeight: 600,

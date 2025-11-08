@@ -111,10 +111,9 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
       case 'loading':
         return (
           <div sx={{
-      "grid": true,
       gap: 6,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true }
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {}
     }}>
             {Array.from({ length: 3 }).map((_, index) => (
               <LoadingProfileCard key={index} />
@@ -125,10 +124,9 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
       case 'error':
         return (
           <div sx={{
-      "grid": true,
       gap: 6,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true }
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {}
     }}>
             <ErrorProfileCard
               onRetry={handleRetryLoad}
@@ -149,23 +147,18 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
       case 'empty':
         return (
-          <div sx={{
-      "space-y-4": true
-    }}>
+          <div sx={{}}>
             <div sx={{
       textAlign: "center",
       p: 8
     }}>
               <p sx={{
-      "text-muted-foreground": true,
       mb: 4
     }}>No profiles found</p>
               <Button onClick={handleRetryLoad} variant="outlined" sx={{
       mr: 2
     }}>
                 <RefreshCw sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                 Refresh
@@ -178,10 +171,9 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
       case 'loaded':
         return (
           <div sx={{
-      "grid": true,
       gap: 6,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true }
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {}
     }}>
             {profiles.map((profile) => (
               <ProfileCard
@@ -208,13 +200,9 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 6
     }}>
-      <div sx={{
-      "max-w-7xl": true,
-      "mx-auto": true
-    }}>
+      <div sx={{}}>
         {/* Header */}
         <div sx={{
       mb: 8
@@ -228,19 +216,14 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
             <Button variant="text" size="small" onClick={onBack} sx={{
       gap: 2
     }}>
-              <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+              <ArrowLeft sx={{}} />
               Back to Component Library
             </Button>
           </div>
           <h1 sx={{
       mb: 2
     }}>Interactive State Management Demo</h1>
-          <p sx={{
-      "text-muted-foreground": true
-    }}>
+          <p sx={{}}>
             Experience how the card variants work together in realistic loading, error, and data
             scenarios
           </p>
@@ -267,10 +250,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
       gap: 2
     }}
                 >
-                  <RefreshCw sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                  <RefreshCw sx={{}} />
                   Simulate Loading
                 </Button>
 
@@ -291,18 +271,12 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
     }}>
                   {connectionStatus === 'online' ? (
                     <>
-                      <WifiOff sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                      <WifiOff sx={{}} />
                       Go Offline
                     </>
                   ) : (
                     <>
-                      <Wifi sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                      <Wifi sx={{}} />
                       Go Online
                     </>
                   )}
@@ -320,9 +294,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
       alignItems: "center",
       gap: 2
     }}>
-                  <span sx={{
-      "text-muted-foreground": true
-    }}>Current State:</span>
+                  <span sx={{}}>Current State:</span>
                   <Badge
                     variant={
                       dataState === 'loaded'
@@ -343,15 +315,11 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
       alignItems: "center",
       gap: 2
     }}>
-                  <span sx={{
-      "text-muted-foreground": true
-    }}>Connection:</span>
+                  <span sx={{}}>Connection:</span>
                   <Badge variant={connectionStatus === 'online' ? 'default' : 'destructive'}>
                     {connectionStatus === 'online' ? (
                       <>
                         <Wifi sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                         Online
@@ -359,8 +327,6 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
                     ) : (
                       <>
                         <WifiOff sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                         Offline
@@ -374,9 +340,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
         </div>
 
         {/* Profile Cards Display */}
-        <div sx={{
-      "space-y-6": true
-    }}>
+        <div sx={{}}>
           <div sx={{
       display: "flex",
       alignItems: "center",
@@ -393,23 +357,17 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
 
         {/* Real-world Usage Examples */}
         <div sx={{
-      mt: 12,
-      "space-y-6": true
-    }}>
+      mt: 12,}}>
           <h2>Real-world Implementation Patterns</h2>
 
           <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 6
     }}>
             <Card variant="elevation">
               <CardHeader title={<Typography variant="h3">Best Practices</Typography>}></CardHeader>
               <CardContent>
-                <ul sx={{
-      "space-y-2": true,
-      "text-muted-foreground": true
-    }}>
+                <ul sx={{}}>
                   <li>• Always show loading states for operations taking &gt;200ms</li>
                   <li>• Provide retry functionality for failed operations</li>
                   <li>• Use skeleton placeholders that match the final content layout</li>
@@ -424,10 +382,7 @@ export function StateDemoShowcase({ onBack }: StateDemoShowcaseProps) {
                 title={<Typography variant="h3">Implementation Tips</Typography>}
               ></CardHeader>
               <CardContent>
-                <ul sx={{
-      "space-y-2": true,
-      "text-muted-foreground": true
-    }}>
+                <ul sx={{}}>
                   <li>• Use React.Suspense with ErrorBoundaries</li>
                   <li>• Implement exponential backoff for retries</li>
                   <li>• Cache successful responses to reduce loading states</li>

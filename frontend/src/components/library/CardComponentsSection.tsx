@@ -44,7 +44,6 @@ export function CardComponentsSection() {
       {/* Card Variants Overview */}
       <ComponentDemo title="Card Variants Overview">
         <div sx={{
-      "grid": true,
       gap: 4
     }}>
           <div sx={{
@@ -53,20 +52,13 @@ export function CardComponentsSection() {
       gap: 3
     }}>
             <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.25rem,
-      "bg-card": true
-    }}></div>
+      borderRadius: "0.25rem",}}></div>
             <div>
               <p sx={{
       fontWeight: 500
     }}>Default Card</p>
-              <p sx={{
-      "text-muted-foreground": true
-    }}>
+              <p sx={{}}>
                 Standard card with subtle border for static content
               </p>
             </div>
@@ -77,22 +69,14 @@ export function CardComponentsSection() {
       gap: 3
     }}>
             <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.25rem,
-      "bg-card": true,
-      boxShadow: 4,
-      "shadow-primary/10": true
-    }}></div>
+      borderRadius: "0.25rem",
+      boxShadow: 4,}}></div>
             <div>
               <p sx={{
       fontWeight: 500
     }}>Interactive Card</p>
-              <p sx={{
-      "text-muted-foreground": true
-    }}>
+              <p sx={{}}>
                 Hover effects and cursor pointer for clickable content
               </p>
             </div>
@@ -103,22 +87,14 @@ export function CardComponentsSection() {
       gap: 3
     }}>
             <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 2,
-      "border-primary": true,
-      borderRadius: 0.25rem,
-      "bg-card": true,
-      boxShadow: 4,
-      "shadow-primary/20": true
-    }}></div>
+      borderRadius: "0.25rem",
+      boxShadow: 4,}}></div>
             <div>
               <p sx={{
       fontWeight: 500
     }}>Selected Card</p>
-              <p sx={{
-      "text-muted-foreground": true
-    }}>
+              <p sx={{}}>
                 Prominent purple border and glow for active/selected state
               </p>
             </div>
@@ -129,21 +105,13 @@ export function CardComponentsSection() {
       gap: 3
     }}>
             <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.25rem,
-      "bg-card": true,
-      "animate-pulse": true
-    }}></div>
+      borderRadius: "0.25rem",}}></div>
             <div>
               <p sx={{
       fontWeight: 500
     }}>Loading Card</p>
-              <p sx={{
-      "text-muted-foreground": true
-    }}>
+              <p sx={{}}>
                 Skeleton placeholders during data loading states
               </p>
             </div>
@@ -154,20 +122,13 @@ export function CardComponentsSection() {
       gap: 3
     }}>
             <div sx={{
-      "w-4": true,
-      "h-4": true,
       border: 1,
-      "border-destructive/50": true,
-      borderRadius: 0.25rem,
-      "bg-destructive/5": true
-    }}></div>
+      borderRadius: "0.25rem",}}></div>
             <div>
               <p sx={{
       fontWeight: 500
     }}>Error Card</p>
-              <p sx={{
-      "text-muted-foreground": true
-    }}>
+              <p sx={{}}>
                 Red-tinted border and background for error states
               </p>
             </div>
@@ -178,9 +139,8 @@ export function CardComponentsSection() {
       {/* Interactive Profile Cards */}
       <ComponentDemo title="Profile Cards (Interactive & Selected)">
         <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 4
     }}>
           {[
@@ -236,24 +196,10 @@ export function CardComponentsSection() {
                         handleFavoriteToggle(profile.id);
                       }}
                       sx={{
-      p: 1,
-      "h-8": true,
-      "w-8": true
-    }}
+      p: 1,}}
                     >
                       <Heart
-                        sx={{
-      "w-4": true,
-      "h-4": true,
-      "${": true,
-      "favoriteCards.has(profile.id)": true,
-      "?": true,
-      "'fill-red-500": true,
-      "text-red-500'": true,
-      ":": true,
-      "'text-muted-foreground'": true,
-      "}": true
-    }}
+                        sx={{}}
                       />
                     </Button>
                   </CardAction>
@@ -261,17 +207,13 @@ export function CardComponentsSection() {
               </CardHeader>
               {profile.id !== 'card-3' && (
                 <CardContent>
-                  <div sx={{
-      "space-y-4": true
-    }}>
+                  <div sx={{}}>
                     <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>Applications</span>
+                      <span sx={{}}>Applications</span>
                       <Badge variant="secondary">{profile.applications}</Badge>
                     </div>
                     <div sx={{
@@ -279,26 +221,20 @@ export function CardComponentsSection() {
       alignItems: "center",
       justifyContent: "space-between"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>ATS Score</span>
+                      <span sx={{}}>ATS Score</span>
                       <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
                         <div sx={{
-      "w-12": true,
-      "h-2": true,
-      "bg-muted": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       overflow: "hidden"
     }}>
                           <div
                             sx={{
       height: "100%",
-      "bg-primary": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}
                             style={{ width: `${profile.atsScore}%` }}
                           />
@@ -313,9 +249,7 @@ export function CardComponentsSection() {
       alignItems: "center",
       justifyContent: "space-between"
     }}>
-                      <span sx={{
-      "text-muted-foreground": true
-    }}>Status</span>
+                      <span sx={{}}>Status</span>
                       <Badge variant={profile.status === 'Active' ? 'default' : 'secondary'}>
                         {profile.status}
                       </Badge>
@@ -330,15 +264,11 @@ export function CardComponentsSection() {
       justifyContent: "space-between",
       width: "100%"
     }}>
-                  <span sx={{
-      "text-muted-foreground": true
-    }}>
+                  <span sx={{}}>
                     {profile.lastUpdated || 'Click to create'}
                   </span>
                   {selectedCard === profile.id && (
-                    <Badge variant="default" sx={{
-      "bg-primary": true
-    }}>
+                    <Badge variant="default" sx={{}}>
                       Selected
                     </Badge>
                   )}
@@ -352,29 +282,22 @@ export function CardComponentsSection() {
       {/* Loading & Error States */}
       <ComponentDemo title="Loading & Error Card States">
         <div sx={{
-      "grid": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4
     }}>
-          <div sx={{
-      "space-y-3": true
-    }}>
+          <div sx={{}}>
             <h4 sx={{
       fontWeight: 500
     }}>Loading Profile Card</h4>
             <LoadingProfileCard />
           </div>
-          <div sx={{
-      "space-y-3": true
-    }}>
+          <div sx={{}}>
             <h4 sx={{
       fontWeight: 500
     }}>Error Profile Card</h4>
             <ErrorProfileCard onRetry={() => alert('Retrying...')} />
           </div>
-          <div sx={{
-      "space-y-3": true
-    }}>
+          <div sx={{}}>
             <h4 sx={{
       fontWeight: 500
     }}>Generic Error Card</h4>

@@ -67,12 +67,10 @@ export function TestimonialCarousel() {
 
   return (
     <Box sx={{
-      "max-w-4xl": true,
-      "mx-auto": true,
       py: 12
     }}>
       <Typography variant="h3" sx={{
-      typography: h3,
+      typography: "h3",
       fontWeight: 700,
       textAlign: "center",
       mb: 12
@@ -80,15 +78,9 @@ export function TestimonialCarousel() {
         What Our Users Say
       </Typography>
 
-      <Box sx={{
-      "relative": true
-    }}>
+      <Box sx={{}}>
         <Card sx={{
-      p: 8,
-      "bg-gradient-to-r": true,
-      "from-gray-50": true,
-      "to-gray-100": true
-    }}>
+      p: 8,}}>
           <CardContent sx={{
       textAlign: "center"
     }}>
@@ -98,23 +90,18 @@ export function TestimonialCarousel() {
       justifyContent: "center",
       mb: 6
     }}>
-              <FormatQuote sx={{ fontSize: 48 }} sx={{
-      "text-primary/30": true
-    }} />
+              <FormatQuote sx={{ fontSize: 48 }} sx={{}} />
             </Box>
 
             {/* Testimonial Quote */}
             <Typography
               variant="h6"
               sx={{
-      typography: h6,
-      [theme.breakpoints.up('sm')]: { typography: h5 },
+      typography: "h6",
+      [theme.breakpoints.up('sm')]: { typography: "h5" },
       fontWeight: 500,
       mb: 6,
-      "text-gray-800": true,
-      fontStyle: "italic",
-      "leading-relaxed": true
-    }}
+      fontStyle: "italic",}}
             >
               "{currentTestimonial.quote}"
             </Typography>
@@ -131,9 +118,7 @@ export function TestimonialCarousel() {
             {/* Author Info */}
             <Box>
               <Typography variant="h6" sx={{
-      fontWeight: 600,
-      "text-gray-900": true
-    }}>
+      fontWeight: 600,}}>
                 {currentTestimonial.author}
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -156,7 +141,7 @@ export function TestimonialCarousel() {
             sx={{
       border: 1,
       borderColor: "gray.300",
-      '&:hover': { "bg-primary/10": true }
+      '&:hover': {}
     }}
             aria-label="Previous testimonial"
           >
@@ -172,21 +157,8 @@ export function TestimonialCarousel() {
               <Box
                 key={index}
                 sx={{
-      "w-2": true,
-      "h-2": true,
-      borderRadius: 9999px,
-      cursor: "pointer",
-      "transition-colors": true,
-      "${": true,
-      "index": true,
-      "===": true,
-      "currentIndex": true,
-      "?": true,
-      "'bg-primary'": true,
-      ":": true,
-      "'bg-gray-300'": true,
-      "}": true
-    }}
+      borderRadius: "9999px",
+      cursor: "pointer",}}
                 onClick={() => setCurrentIndex(index)}
               />
             ))}
@@ -197,7 +169,7 @@ export function TestimonialCarousel() {
             sx={{
       border: 1,
       borderColor: "gray.300",
-      '&:hover': { "bg-primary/10": true }
+      '&:hover': {}
     }}
             aria-label="Next testimonial"
           >

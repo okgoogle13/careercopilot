@@ -12,9 +12,6 @@ interface HeroBannerProps {
 export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
   return (
     <Box sx={{
-      "bg-gradient-to-br": true,
-      "from-primary/5": true,
-      "to-primary/10": true,
       py: 20
     }}>
       <Container maxWidth="lg">
@@ -26,16 +23,10 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
           <Typography
             variant="h1"
             sx={{
-      typography: h2,
-      [theme.breakpoints.up('sm')]: { typography: h1 },
+      typography: "h2",
+      [theme.breakpoints.up('sm')]: { typography: "h1" },
       fontWeight: 700,
-      mb: 6,
-      "bg-gradient-to-r": true,
-      "from-primary": true,
-      "to-primary/80": true,
-      "bg-clip-text": true,
-      "text-transparent": true
-    }}
+      mb: 6,}}
           >
             Land Your Dream Job with AI
           </Typography>
@@ -43,13 +34,10 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
           <Typography
             variant="h2"
             sx={{
-      typography: h5,
-      [theme.breakpoints.up('sm')]: { typography: h4 },
+      typography: "h5",
+      [theme.breakpoints.up('sm')]: { typography: "h4" },
       color: "gray.600",
-      mb: 8,
-      "max-w-3xl": true,
-      "mx-auto": true
-    }}
+      mb: 8,}}
           >
             Create compelling applications, track your progress, and ace your interviews with our
             AI-powered career copilot
@@ -69,11 +57,10 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
               size="large"
               onClick={onGetStarted}
               sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true },
+      '&:hover': {},
       px: 8,
       py: 3,
-      typography: h6
+      typography: "h6"
     }}
               endIcon={<ArrowRight sx={{ fontSize: 20 }} />}
             >
@@ -85,12 +72,10 @@ export function HeroBanner({ onGetStarted, onWatchDemo }: HeroBannerProps) {
               size="large"
               onClick={onWatchDemo}
               sx={{
-      "border-primary": true,
-      "text-primary": true,
-      '&:hover': { "bg-primary/10": true },
+      '&:hover': {},
       px: 8,
       py: 3,
-      typography: h6
+      typography: "h6"
     }}
               startIcon={<PlayArrow sx={{ fontSize: 20 }} />}
             >

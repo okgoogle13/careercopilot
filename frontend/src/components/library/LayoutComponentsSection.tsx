@@ -14,13 +14,10 @@ export function LayoutComponentsSection() {
       description="Structural components for organizing content and creating layouts"
     >
       <ComponentDemo title="Separators & Skeletons">
-        <div sx={{
-      "space-y-6": true
-    }}>
+        <div sx={{}}>
           <div>
             <Label>Separators</Label>
             <div sx={{
-      "space-y-3": true,
       mt: 2
     }}>
               <div>
@@ -35,38 +32,27 @@ export function LayoutComponentsSection() {
           <div>
             <Label>Loading Skeletons</Label>
             <div sx={{
-      "space-y-3": true,
       mt: 2
     }}>
               <div sx={{
       display: "flex",
-      alignItems: "center",
-      "space-x-4": true
-    }}>
+      alignItems: "center",}}>
                 <Skeleton sx={{
-      "h-12": true,
-      "w-12": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
-                <div sx={{
-      "space-y-2": true
-    }}>
+                <div sx={{}}>
                   <Skeleton sx={{
-      "h-4": true,
       w: "250px"
     }} />
                   <Skeleton sx={{
-      "h-4": true,
       w: "200px"
     }} />
                 </div>
               </div>
               <Skeleton sx={{
-      "h-4": true,
       width: "100%"
     }} />
               <Skeleton sx={{
-      "h-4": true,
       width: "75%"
     }} />
             </div>

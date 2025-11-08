@@ -49,7 +49,7 @@ export function JobSearchStatus({
       mb: 6
     }}>
         <Typography variant="h4" sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       mb: 2
     }}>

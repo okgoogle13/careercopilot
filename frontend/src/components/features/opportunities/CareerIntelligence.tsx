@@ -144,13 +144,9 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 4
     }}>
-      <div sx={{
-      "max-w-7xl": true,
-      "mx-auto": true
-    }}>
+      <div sx={{}}>
         {/* Header */}
         <div sx={{
       display: "flex",
@@ -160,8 +156,6 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
           <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Back to Career Hub
@@ -179,35 +173,26 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       gap: 2,
       mb: 4
     }}>
-            <Sparkles sx={{
-      "w-8": true,
-      "h-8": true,
-      "text-primary": true
-    }} />
+            <Sparkles sx={{}} />
             <h1 sx={{
-      typography: h3,
+      typography: "h3",
       fontWeight: 600
     }}>Career Intelligence</h1>
           </div>
           <p sx={{
-      "text-muted-foreground": true,
-      typography: h6
+      typography: "h6"
     }}>
             Get data-driven insights about your career trajectory and growth opportunities.
           </p>
         </div>
 
         <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('lg')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('lg')]: {},
       gap: 8
     }}>
           {/* Left Column - Skill Gaps */}
           <div sx={{
-      [theme.breakpoints.up('lg')]: { "col-span-2": true },
-      "space-y-6": true
-    }}>
+      [theme.breakpoints.up('lg')]: {},}}>
             {/* Skill Gap Analysis */}
             <Card sx={{
       p: 6
@@ -225,44 +210,31 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                   <div sx={{
       p: 2,
-      "bg-red-500/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                     <AlertCircle sx={{
-      "w-5": true,
-      "h-5": true,
       color: "red.500"
     }} />
                   </div>
                   <h3 sx={{
-      typography: h5,
+      typography: "h5",
       fontWeight: 600
     }}>Identified Skill Gaps</h3>
                 </div>
-                <Badge sx={{
-      "bg-primary/10": true,
-      "text-primary": true,
-      "border-primary/30": true
-    }}>
+                <Badge sx={{}}>
                   <Sparkles sx={{
-      "w-3": true,
-      "h-3": true,
       mr: 1
     }} />
                   AI Analysis
                 </Badge>
               </div>
 
-              <div sx={{
-      "space-y-4": true
-    }}>
+              <div sx={{}}>
                 {skillGaps.map((gap, index) => (
                   <div key={index} sx={{
       p: 4,
-      "bg-card": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                     <div sx={{
       display: "flex",
@@ -282,27 +254,22 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                           {gap.importance} Priority
                         </Badge>
                         <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                           {gap.demand}% market demand
                         </span>
                       </div>
                     </div>
 
                     <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mb: 3
     }}>{gap.description}</p>
 
-                    <div sx={{
-      "space-y-2": true
-    }}>
+                    <div sx={{}}>
                       <div sx={{
       display: "flex",
       justifyContent: "space-between",
-      typography: body1
+      typography: "body1"
     }}>
                         <span>Current Level</span>
                         <span>{gap.currentLevel}%</span>
@@ -323,25 +290,18 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                   onClick={handleGenerateLearningPath}
                   disabled={isGeneratingPath}
                   sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}
                 >
                   {isGeneratingPath ? (
                     <>
                       <Sparkles sx={{
-      "w-4": true,
-      "h-4": true,
-      mr: 2,
-      "animate-pulse": true
-    }} />
+      mr: 2,}} />
                       Generating Learning Path...
                     </>
                   ) : (
                     <>
                       <Sparkles sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                       Generate Learning Path
@@ -363,31 +323,24 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                 <div sx={{
       p: 2,
-      "bg-green-500/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                   <Target sx={{
-      "w-5": true,
-      "h-5": true,
       color: "green.500"
     }} />
                 </div>
                 <h3 sx={{
-      typography: h5,
+      typography: "h5",
       fontWeight: 600
     }}>Career Path Opportunities</h3>
               </div>
 
-              <div sx={{
-      "space-y-4": true
-    }}>
+              <div sx={{}}>
                 {careerPaths.map((path, index) => (
                   <div key={index} sx={{
       p: 4,
-      "bg-card": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                     <div sx={{
       display: "flex",
@@ -397,22 +350,20 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                       <h4 sx={{
       fontWeight: 500,
-      typography: h6
+      typography: "h6"
     }}>{path.title}</h4>
                       <div sx={{
       textAlign: "right"
     }}>
                         <div sx={{
-      typography: body1,
+      typography: "body1",
       color: "green.500",
       fontWeight: 500
     }}>
                           {path.probability}% probability
                         </div>
                         <div sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{path.timeframe}</div>
+      typography: "body1",}}>{path.timeframe}</div>
                       </div>
                     </div>
 
@@ -420,19 +371,16 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       mb: 3
     }}>
                       <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Salary increase: </span>
+      typography: "body1",}}>Salary increase: </span>
                       <span sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500
     }}>{path.salaryIncrease}</span>
                     </div>
 
                     <div>
                       <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mb: 2
     }}>Requirements:</p>
                       <div sx={{
@@ -442,7 +390,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                         {path.requirements.map((req, reqIndex) => (
                           <Badge key={reqIndex} variant="secondary" sx={{
-      typography: body2
+      typography: "body2"
     }}>
                             {req}
                           </Badge>
@@ -456,9 +404,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
           </div>
 
           {/* Right Column - Market Trends & Learning Path */}
-          <div sx={{
-      "space-y-6": true
-    }}>
+          <div sx={{}}>
             {/* Market Trends */}
             <Card sx={{
       p: 6
@@ -471,31 +417,24 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                 <div sx={{
       p: 2,
-      "bg-blue-500/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                   <TrendingUp sx={{
-      "w-5": true,
-      "h-5": true,
       color: "blue.500"
     }} />
                 </div>
                 <h3 sx={{
-      typography: h6,
+      typography: "h6",
       fontWeight: 600
     }}>Market Trends</h3>
               </div>
 
-              <div sx={{
-      "space-y-4": true
-    }}>
+              <div sx={{}}>
                 {marketTrends.map((trend, index) => (
                   <div key={index} sx={{
       p: 3,
-      "bg-card": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                     <div sx={{
       display: "flex",
@@ -505,7 +444,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                       <h4 sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>{trend.trend}</h4>
                       <div sx={{
       display: "flex",
@@ -513,12 +452,10 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       gap: 2
     }}>
                         <TrendingUp sx={{
-      "w-4": true,
-      "h-4": true,
       color: "green.500"
     }} />
                         <span sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
       color: "green.500"
     }}>{trend.growth}</span>
@@ -532,16 +469,14 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       mb: 2
     }}>
                       <Badge variant={getImpactBadgeVariant(trend.impact)} sx={{
-      typography: body2
+      typography: "body2"
     }}>
                         {trend.impact} Impact
                       </Badge>
                     </div>
 
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>{trend.description}</p>
+      typography: "body2",}}>{trend.description}</p>
                   </div>
                 ))}
               </div>
@@ -550,10 +485,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
             {/* Learning Path (conditionally shown) */}
             {showLearningPath && (
               <Card sx={{
-      p: 6,
-      "bg-primary/5": true,
-      "border-primary/20": true
-    }}>
+      p: 6,}}>
                 <div sx={{
       display: "flex",
       alignItems: "center",
@@ -562,83 +494,62 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                   <div sx={{
       p: 2,
-      "bg-primary/10": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
-                    <BookOpen sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-primary": true
-    }} />
+                    <BookOpen sx={{}} />
                   </div>
                   <h3 sx={{
-      typography: h6,
-      fontWeight: 600,
-      "text-primary": true
-    }}>AI-Generated Learning Path</h3>
+      typography: "h6",
+      fontWeight: 600,}}>AI-Generated Learning Path</h3>
                 </div>
 
-                <div sx={{
-      "space-y-3": true
-    }}>
+                <div sx={{}}>
                   <div sx={{
       p: 3,
-      "bg-background": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                     <h4 sx={{
       fontWeight: 500,
-      typography: body1,
+      typography: "body1",
       mb: 1
     }}>Phase 1: Foundation (Weeks 1-4)</h4>
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                       Python basics, data types, control structures
                     </p>
                   </div>
 
                   <div sx={{
       p: 3,
-      "bg-background": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                     <h4 sx={{
       fontWeight: 500,
-      typography: body1,
+      typography: "body1",
       mb: 1
     }}>Phase 2: Application (Weeks 5-8)</h4>
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                       Pandas for data analysis, basic statistics
                     </p>
                   </div>
 
                   <div sx={{
       p: 3,
-      "bg-background": true,
       border: 1,
-      "border-border": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                     <h4 sx={{
       fontWeight: 500,
-      typography: body1,
+      typography: "body1",
       mb: 1
     }}>
                       Phase 3: Specialization (Weeks 9-12)
                     </h4>
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>
+      typography: "body2",}}>
                       Healthcare data analysis, reporting dashboards
                     </p>
                   </div>
@@ -649,8 +560,6 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       mt: 4
     }} variant="outlined">
                   <BookOpen sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                   View Full Learning Plan

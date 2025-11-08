@@ -57,13 +57,9 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 4
     }}>
-      <div sx={{
-      "max-w-3xl": true,
-      "mx-auto": true
-    }}>
+      <div sx={{}}>
         {/* Header */}
         <div sx={{
       display: "flex",
@@ -73,8 +69,6 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
     }}>
           <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Back
@@ -86,13 +80,12 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       mb: 8
     }}>
           <h1 sx={{
-      typography: h3,
+      typography: "h3",
       fontWeight: 600,
       mb: 4
     }}>Analyze the Job</h1>
           <p sx={{
-      "text-muted-foreground": true,
-      typography: h6
+      typography: "h6"
     }}>
             Provide the job details so we can optimize your document for maximum impact.
           </p>
@@ -110,9 +103,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
     }}
           >
             <TabsList sx={{
-      "grid": true,
       width: "100%",
-      "grid-cols-2": true,
       mb: 6
     }}>
               <TabsTrigger value="url" sx={{
@@ -120,10 +111,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       alignItems: "center",
       gap: 2
     }}>
-                <Link sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                <Link sx={{}} />
                 Job URL
               </TabsTrigger>
               <TabsTrigger value="text" sx={{
@@ -131,27 +119,18 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       alignItems: "center",
       gap: 2
     }}>
-                <FileText sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+                <FileText sx={{}} />
                 Job Description
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="url" currentValue={activeTab} sx={{
-      "space-y-4": true
-    }}>
+            <TabsContent value="url" currentValue={activeTab} sx={{}}>
               <div>
                 <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>Job Posting URL</label>
-                <div sx={{
-      "relative": true
-    }}>
+      mb: 2,}}>Job Posting URL</label>
+                <div sx={{}}>
                   <Input
                     type="url"
                     placeholder="https://example.com/job-posting"
@@ -161,20 +140,10 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       pr: 10
     }}
                   />
-                  <ExternalLink sx={{
-      "w-4": true,
-      "h-4": true,
-      "text-muted-foreground": true,
-      "absolute": true,
-      "right-3": true,
-      "top-1/2": true,
-      "transform": true,
-      "-translate-y-1/2": true
-    }} />
+                  <ExternalLink sx={{}} />
                 </div>
                 <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mt: 2
     }}>
                   We'll automatically extract the job requirements and qualifications
@@ -184,41 +153,30 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               {jobUrl && (
                 <div sx={{
       p: 4,
-      "bg-primary/5": true,
       border: 1,
-      "border-primary/20": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                   <p sx={{
-      typography: body1,
-      "text-primary": true
-    }}>✓ Valid job URL detected</p>
+      typography: "body1",}}>✓ Valid job URL detected</p>
                 </div>
               )}
             </TabsContent>
 
-            <TabsContent value="text" currentValue={activeTab} sx={{
-      "space-y-4": true
-    }}>
+            <TabsContent value="text" currentValue={activeTab} sx={{}}>
               <div>
                 <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      mb: 2,
-      "block": true
-    }}>Job Description</label>
+      mb: 2,}}>Job Description</label>
                 <Textarea
                   placeholder="Paste the complete job description here, including requirements, responsibilities, and qualifications..."
                   value={jobDescription}
                   onChange={(e) => setJobDescription(e.target.value)}
                   sx={{
-      h: "200px",
-      "resize-none": true
-    }}
+      h: "200px",}}
                 />
                 <p sx={{
-      typography: body1,
-      "text-muted-foreground": true,
+      typography: "body1",
       mt: 2
     }}>
                   {jobDescription.length}/50 characters minimum
@@ -228,15 +186,11 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               {jobDescription.length >= 50 && (
                 <div sx={{
       p: 4,
-      "bg-primary/5": true,
       border: 1,
-      "border-primary/20": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                   <p sx={{
-      typography: body1,
-      "text-primary": true
-    }}>✓ Job description looks good</p>
+      typography: "body1",}}>✓ Job description looks good</p>
                 </div>
               )}
             </TabsContent>
@@ -252,22 +206,17 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
               onClick={handleAnalyze}
               disabled={!isValidInput() || isAnalyzing}
               sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true },
+      '&:hover': {},
       px: 8,
       py: 6,
-      typography: h6
+      typography: "h6"
     }}
               size="large"
             >
               {isAnalyzing ? (
                 <>
                   <Loader2 sx={{
-      "w-5": true,
-      "h-5": true,
-      mr: 2,
-      "animate-spin": true
-    }} />
+      mr: 2,}} />
                   Analyzing Job...
                 </>
               ) : (
@@ -280,9 +229,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
         {/* Features Preview */}
         <div sx={{
       mt: 8,
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4
     }}>
           <div sx={{
@@ -290,19 +237,13 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       p: 4
     }}>
             <div sx={{
-      "w-12": true,
-      "h-12": true,
-      "bg-blue-500/10": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      "mx-auto": true,
       mb: 3
     }}>
               <FileText sx={{
-      "w-6": true,
-      "h-6": true,
       color: "blue.500"
     }} />
             </div>
@@ -311,9 +252,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       mb: 1
     }}>Keyword Extraction</h3>
             <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Identify critical keywords and phrases</p>
+      typography: "body1",}}>Identify critical keywords and phrases</p>
           </div>
 
           <div sx={{
@@ -321,19 +260,13 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       p: 4
     }}>
             <div sx={{
-      "w-12": true,
-      "h-12": true,
-      "bg-green-500/10": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      "mx-auto": true,
       mb: 3
     }}>
               <FileText sx={{
-      "w-6": true,
-      "h-6": true,
       color: "green.500"
     }} />
             </div>
@@ -342,9 +275,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       mb: 1
     }}>ATS Optimization</h3>
             <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Ensure your document passes ATS systems</p>
+      typography: "body1",}}>Ensure your document passes ATS systems</p>
           </div>
 
           <div sx={{
@@ -352,19 +283,13 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       p: 4
     }}>
             <div sx={{
-      "w-12": true,
-      "h-12": true,
-      "bg-purple-500/10": true,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      "mx-auto": true,
       mb: 3
     }}>
               <FileText sx={{
-      "w-6": true,
-      "h-6": true,
       color: "purple.500"
     }} />
             </div>
@@ -373,9 +298,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       mb: 1
     }}>Match Analysis</h3>
             <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Calculate your compatibility score</p>
+      typography: "body1",}}>Calculate your compatibility score</p>
           </div>
         </div>
       </div>

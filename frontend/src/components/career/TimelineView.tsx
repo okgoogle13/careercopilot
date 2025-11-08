@@ -101,11 +101,7 @@ export function TimelineView({
       gap: 4
     }}>
             {/* Event Icon */}
-            <Avatar sx={{
-      "w-10": true,
-      "h-10": true,
-      "${eventColors[event.type]}": true
-    }}>
+            <Avatar sx={{}}>
               <IconComponent sx={{ fontSize: 20 }} />
             </Avatar>
 
@@ -135,7 +131,7 @@ export function TimelineView({
       display: "flex",
       alignItems: "center",
       gap: 2,
-      typography: body1,
+      typography: "body1",
       color: "gray.500"
     }}>
                     <Clock sx={{ fontSize: 14 }} />
@@ -169,13 +165,11 @@ export function TimelineView({
               {/* Event Metadata */}
               {event.metadata && (
                 <Box sx={{
-      "space-y-3": true,
       mt: 4
     }}>
                   {event.metadata.interviewer && (
                     <Box>
                       <Typography variant="caption" color="text.secondary" sx={{
-      "block": true,
       mb: 1
     }}>
                         Interviewer:
@@ -187,7 +181,6 @@ export function TimelineView({
                   {event.metadata.interviewType && (
                     <Box>
                       <Typography variant="caption" color="text.secondary" sx={{
-      "block": true,
       mb: 1
     }}>
                         Interview Type:
@@ -199,7 +192,6 @@ export function TimelineView({
                   {event.metadata.documents && event.metadata.documents.length > 0 && (
                     <Box>
                       <Typography variant="caption" color="text.secondary" sx={{
-      "block": true,
       mb: 2
     }}>
                         Documents:
@@ -227,7 +219,6 @@ export function TimelineView({
                   {event.metadata.notes && (
                     <Box>
                       <Typography variant="caption" color="text.secondary" sx={{
-      "block": true,
       mb: 1
     }}>
                         Notes:
@@ -235,7 +226,7 @@ export function TimelineView({
                       <Typography variant="body2" sx={{
       bgcolor: "gray.50",
       p: 3,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                         {event.metadata.notes}
                       </Typography>
@@ -245,7 +236,6 @@ export function TimelineView({
                   {event.metadata.nextSteps && (
                     <Box>
                       <Typography variant="caption" color="text.secondary" sx={{
-      "block": true,
       mb: 1
     }}>
                         Next Steps:
@@ -286,10 +276,7 @@ export function TimelineView({
 
   return (
     <Box sx={{
-      width: "100%",
-      "max-w-4xl": true,
-      "mx-auto": true
-    }}>
+      width: "100%",}}>
       {/* Header */}
       <Box sx={{
       mb: 6
@@ -306,39 +293,21 @@ export function TimelineView({
       </Box>
 
       {/* Timeline */}
-      <Box sx={{
-      "relative": true
-    }}>
+      <Box sx={{}}>
         {/* Timeline Line */}
         <Box sx={{
-      "absolute": true,
-      "left-8": true,
-      "top-0": true,
-      "bottom-0": true,
-      "w-0.5": true,
       bgcolor: "gray.200"
     }} />
 
         {/* Events */}
-        <Box sx={{
-      "space-y-6": true
-    }}>
+        <Box sx={{}}>
           {sortedEvents.map((event, index) => (
-            <Box key={event.id} sx={{
-      "relative": true
-    }}>
+            <Box key={event.id} sx={{}}>
               {/* Timeline Dot */}
               <Box sx={{
-      "absolute": true,
-      "left-6": true,
-      "w-4": true,
-      "h-4": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       bgcolor: "common.white",
-      border: 4,
-      "border-primary": true,
-      "z-10": true
-    }} />
+      border: 4,}} />
 
               {/* Event Content */}
               <Box sx={{
@@ -350,19 +319,12 @@ export function TimelineView({
 
         {/* Future Placeholder */}
         <Box sx={{
-      "relative": true,
       mt: 6
     }}>
           <Box sx={{
-      "absolute": true,
-      "left-6": true,
-      "w-4": true,
-      "h-4": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       bgcolor: "gray.300",
-      border: 4,
-      "border-gray-400": true
-    }} />
+      border: 4,}} />
           <Box sx={{
       ml: 16
     }}>
@@ -408,9 +370,7 @@ export function TimelineView({
             Application Summary
           </Typography>
           <Box sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
       gap: 4,
       textAlign: "center"
     }}>

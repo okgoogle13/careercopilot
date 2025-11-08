@@ -171,13 +171,9 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
   return (
     <div sx={{
       minHeight: "100vh",
-      "bg-background": true,
       p: 4
     }}>
-      <div sx={{
-      "max-w-6xl": true,
-      "mx-auto": true
-    }}>
+      <div sx={{}}>
         {/* Header */}
         <div sx={{
       display: "flex",
@@ -187,8 +183,6 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
     }}>
           <Button variant="text" size="small" onClick={onBack}>
             <ArrowLeft sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
             Back to Career Hub
@@ -206,19 +200,14 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       gap: 2,
       mb: 4
     }}>
-            <Sparkles sx={{
-      "w-8": true,
-      "h-8": true,
-      "text-primary": true
-    }} />
+            <Sparkles sx={{}} />
             <h1 sx={{
-      typography: h3,
+      typography: "h3",
       fontWeight: 600
     }}>AI Interview Preparation</h1>
           </div>
           <p sx={{
-      "text-muted-foreground": true,
-      typography: h6
+      typography: "h6"
     }}>
             Practice with AI-powered mock interviews tailored to community support roles.
           </p>
@@ -227,74 +216,43 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
         {!currentQuestion ? (
           /* Question Category Selection */
           <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-3": true },
-      gap: 6,
-      "max-w-4xl": true,
-      "mx-auto": true
-    }}>
+      [theme.breakpoints.up('sm')]: {},
+      gap: 6,}}>
             {questionCategories.map((category) => (
               <Card
                 key={category.id}
                 sx={{
       p: 6,
       border: 2,
-      "border-border": true,
-      '&:hover': { "border-primary": true },
+      '&:hover': {},
       cursor: "pointer",
-      "transition-all": true,
-      "duration-200": true,
-      '&:hover': { boxShadow: 4 },
-      "group": true
-    }}
+      '&:hover': { boxShadow: 4 },}}
                 onClick={() => handleSelectCategory(category.id)}
               >
                 <div sx={{
-      textAlign: "center",
-      "space-y-4": true
-    }}>
+      textAlign: "center",}}>
                   <div sx={{
       p: 4,
-      "bg-primary/10": true,
-      borderRadius: 1rem,
-      "w-fit": true,
-      "mx-auto": true,
-      "group-hover:scale-110": true,
-      "transition-transform": true,
-      "duration-200": true
-    }}>
-                    <MessageSquare sx={{
-      "w-8": true,
-      "h-8": true,
-      "text-primary": true
-    }} />
+      borderRadius: "1rem",}}>
+                    <MessageSquare sx={{}} />
                   </div>
 
                   <div>
                     <h3 sx={{
-      typography: h5,
+      typography: "h5",
       fontWeight: 600,
       mb: 2
     }}>{category.title}</h3>
                     <p sx={{
-      "text-muted-foreground": true,
-      typography: body1,
-      "leading-relaxed": true
-    }}>
+      typography: "body1",}}>
                       {category.description}
                     </p>
                   </div>
 
                   <Button sx={{
       width: "100%",
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true },
-      "group-hover:bg-primary/90": true
-    }}>
+      '&:hover': {},}}>
                     <Play sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                     Start Practice
@@ -306,16 +264,12 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
         ) : (
           /* Interview Practice Interface */
           <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('lg')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('lg')]: {},
       gap: 8
     }}>
             {/* Main Practice Area */}
             <div sx={{
-      [theme.breakpoints.up('lg')]: { "col-span-2": true },
-      "space-y-6": true
-    }}>
+      [theme.breakpoints.up('lg')]: {},}}>
               {/* Question Card */}
               <Card sx={{
       p: 6
@@ -343,8 +297,6 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                   </div>
                   <Button variant="outlined" size="small" onClick={handleNewQuestion}>
                     <RotateCcw sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                     New Question
@@ -355,18 +307,15 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       mb: 4
     }}>
                   <h3 sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500,
-      "text-muted-foreground": true,
       mb: 2
     }}>
                     {currentQuestion.category}
                   </h3>
                   <h2 sx={{
-      typography: h5,
-      fontWeight: 600,
-      "leading-relaxed": true
-    }}>
+      typography: "h5",
+      fontWeight: 600,}}>
                     {currentQuestion.question}
                   </h2>
                 </div>
@@ -378,8 +327,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       gap: 4,
       mb: 6,
       p: 4,
-      "bg-card": true,
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
                   <Button
                     variant={isRecording ? 'contained' : 'outlined'}
@@ -390,8 +338,6 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     {isRecording ? (
                       <>
                         <MicOff sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                         Stop Recording
@@ -399,8 +345,6 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     ) : (
                       <>
                         <Mic sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                         Start Recording
@@ -415,29 +359,21 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       color: "red.500"
     }}>
                       <div sx={{
-      "w-2": true,
-      "h-2": true,
       bgcolor: "red.500",
-      borderRadius: 9999px,
-      "animate-pulse": true
-    }} />
+      borderRadius: "9999px",}} />
                       <span sx={{
-      typography: body1
+      typography: "body1"
     }}>Recording...</span>
                     </div>
                   )}
                   <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Or type your answer below</span>
+      typography: "body1",}}>Or type your answer below</span>
                 </div>
 
                 {/* Answer Input */}
-                <div sx={{
-      "space-y-4": true
-    }}>
+                <div sx={{}}>
                   <label sx={{
-      typography: body1,
+      typography: "body1",
       fontWeight: 500
     }}>Your Answer</label>
                   <Textarea
@@ -445,9 +381,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     onChange={(e) => setUserAnswer(e.target.value)}
                     placeholder="Type your answer here using the STAR method (Situation, Task, Action, Result)..."
                     sx={{
-      h: "150px",
-      "resize-none": true
-    }}
+      h: "150px",}}
                   />
                   <div sx={{
       display: "flex",
@@ -457,25 +391,18 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       onClick={handleGenerateTips}
                       disabled={isGeneratingTips || !userAnswer.trim()}
                       sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}
                     >
                       {isGeneratingTips ? (
                         <>
                           <Sparkles sx={{
-      "w-4": true,
-      "h-4": true,
-      mr: 2,
-      "animate-pulse": true
-    }} />
+      mr: 2,}} />
                           Analyzing...
                         </>
                       ) : (
                         <>
                           <Sparkles sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
                           Get AI Feedback
@@ -495,20 +422,14 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               {/* Sample Answer */}
               {showSampleAnswer && currentQuestion.sampleAnswer && (
                 <Card sx={{
-      p: 6,
-      "bg-green-500/5": true,
-      "border-green-500/20": true
-    }}>
+      p: 6,}}>
                   <h3 sx={{
       fontWeight: 600,
       mb: 3,
       color: "green.700"
     }}>Sample Answer</h3>
                   <p sx={{
-      typography: body1,
-      "leading-relaxed": true,
-      "text-muted-foreground": true
-    }}>
+      typography: "body1",}}>
                     {currentQuestion.sampleAnswer}
                   </p>
                 </Card>
@@ -517,30 +438,19 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               {/* AI Feedback (shown after analysis) */}
               {isGeneratingTips && (
                 <Card sx={{
-      p: 6,
-      "bg-primary/5": true,
-      "border-primary/20": true
-    }}>
+      p: 6,}}>
                   <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 2,
       mb: 3
     }}>
-                    <Sparkles sx={{
-      "w-5": true,
-      "h-5": true,
-      "text-primary": true,
-      "animate-pulse": true
-    }} />
+                    <Sparkles sx={{}} />
                     <h3 sx={{
-      fontWeight: 600,
-      "text-primary": true
-    }}>AI Feedback</h3>
+      fontWeight: 600,}}>AI Feedback</h3>
                   </div>
                   <div sx={{
-      "space-y-2": true,
-      typography: body1
+      typography: "body1"
     }}>
                     <p>
                       • <strong>Structure:</strong> Good use of STAR method, clear sequence of
@@ -562,9 +472,7 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               )}
             </div>
             {/* Tips Sidebar */}
-            <div sx={{
-      "space-y-6": true
-    }}>
+            <div sx={{}}>
               <Card sx={{
       p: 6
     }}>
@@ -572,21 +480,16 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       fontWeight: 600,
       mb: 4
     }}>Tips for this Question</h3>
-                <ul sx={{
-      "space-y-2": true
-    }}>
+                <ul sx={{}}>
                   {currentQuestion.tips.map((tip, index) => (
                     <li key={index} sx={{
-      typography: body1,
+      typography: "body1",
       display: "flex",
       alignItems: "flex-start",
       gap: 2
     }}>
                       <div sx={{
-      "w-1.5": true,
-      "h-1.5": true,
-      "bg-primary": true,
-      borderRadius: 9999px,
+      borderRadius: "9999px",
       mt: 2,
       flexShrink: 0
     }} />
@@ -603,48 +506,38 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       fontWeight: 600,
       mb: 4
     }}>STAR Method</h3>
-                <div sx={{
-      "space-y-3": true
-    }}>
+                <div sx={{}}>
                   <div>
                     <h4 sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>Situation</h4>
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>Set the context</p>
+      typography: "body2",}}>Set the context</p>
                   </div>
                   <div>
                     <h4 sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>Task</h4>
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>Describe your responsibility</p>
+      typography: "body2",}}>Describe your responsibility</p>
                   </div>
                   <div>
                     <h4 sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>Action</h4>
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>Explain what you did</p>
+      typography: "body2",}}>Explain what you did</p>
                   </div>
                   <div>
                     <h4 sx={{
       fontWeight: 500,
-      typography: body1
+      typography: "body1"
     }}>Result</h4>
                     <p sx={{
-      typography: body2,
-      "text-muted-foreground": true
-    }}>Share the outcome</p>
+      typography: "body2",}}>Share the outcome</p>
                   </div>
                 </div>
               </Card>

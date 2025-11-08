@@ -160,7 +160,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               <Box sx={{
       p: 6,
       bgcolor: "blue.100",
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}>
                 <LinkedIn sx={{ fontSize: 48 }} sx={{
       color: "blue.600"
@@ -177,9 +177,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
 
             <Typography variant="body1" color="text.secondary" sx={{
       mb: 6,
-      maxWidth: "md",
-      "mx-auto": true
-    }}>
+      maxWidth: "md",}}>
               We'll securely import your professional information from LinkedIn to help build your
               profile.
             </Typography>
@@ -231,9 +229,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               Review the information we found and select what you'd like to import.
             </Typography>
 
-            <Box sx={{
-      "space-y-4": true
-    }}>
+            <Box sx={{}}>
               {/* Profile Section */}
               <Card variant="outlined">
                 <CardContent sx={{
@@ -270,8 +266,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                     />
                   </Box>
                   <Box sx={{
-      "space-y-2": true,
-      typography: body1
+      typography: "body1"
     }}>
                     <Box>
                       <strong>Name:</strong> {linkedInData?.profile.name}
@@ -435,7 +430,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               <Box sx={{
       p: 6,
       bgcolor: "green.100",
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }}>
                 <Check sx={{ fontSize: 48 }} sx={{
       color: "green.600"
@@ -571,8 +566,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
           onClick={handleNext}
           disabled={isConnecting || (activeStep === 0 && !isConnected)}
           sx={{
-      "bg-primary": true,
-      '&:hover': { "bg-primary/90": true }
+      '&:hover': {}
     }}
         >
           {isConnecting

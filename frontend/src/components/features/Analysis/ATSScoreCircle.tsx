@@ -61,27 +61,19 @@ export const ATSScoreCircle: React.FC<ATSScoreCircleProps> = ({
   return (
     <div
       sx={{
-      "relative": true,
       display: "inline-flex",
       alignItems: "center",
-      justifyContent: "center",
-      "${className}": true
-    }}
+      justifyContent: "center",}}
       style={{ width: circleSize, height: circleSize }}
     >
       <svg
-        sx={{
-      "transform": true,
-      "-rotate-90": true
-    }}
+        sx={{}}
         width={circleSize}
         height={circleSize}
         viewBox={`0 0 ${circleSize} ${circleSize}`}
       >
         <circle
-          sx={{
-      "text-surface-container-highest": true
-    }}
+          sx={{}}
           strokeWidth={strokeWidth}
           stroke="currentColor"
           fill="transparent"
@@ -90,12 +82,7 @@ export const ATSScoreCircle: React.FC<ATSScoreCircleProps> = ({
           cy={circleSize / 2}
         />
         <circle
-          sx={{
-      "${getColorClass(score)}": true,
-      "transition-all": true,
-      "duration-500": true,
-      "ease-in-out": true
-    }}
+          sx={{}}
           strokeWidth={strokeWidth}
           strokeDasharray={circumference}
           strokeDashoffset={offset}
@@ -108,8 +95,6 @@ export const ATSScoreCircle: React.FC<ATSScoreCircleProps> = ({
         />
       </svg>
       {showScore && <span sx={{
-      "absolute": true,
-      "${textSize}": true,
       fontWeight: 500
     }}>{Math.round(score)}</span>}
     </div>

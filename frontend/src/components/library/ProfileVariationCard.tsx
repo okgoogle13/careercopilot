@@ -65,46 +65,23 @@ export function ProfileVariationCard({
   return (
     <Card
       sx={{
-      "relative": true,
       overflow: "hidden",
-      "transition-all": true,
-      "duration-300": true,
       cursor: "pointer",
-      "group": true,
-      "card-surface": true,
-      '&:hover': { "border-brand-primary": true },
-      "${": true,
-      "is_default": true,
-      "?": true,
-      "'ring-2": true,
-      "ring-brand-primary/50": true,
-      "bg-brand-primary/5'": true,
-      ":": true,
-      "''": true,
-      "}": true
-    }}
+      '&:hover': {},}}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
     >
       {/* Default Badge */}
       {is_default && (
-        <div sx={{
-      "absolute": true,
-      "top-3": true,
-      "left-3": true,
-      "z-10": true
-    }}>
+        <div sx={{}}>
           <Badge sx={{
-      "bg-brand-primary": true,
       color: "common.white",
       gap: 1,
       boxShadow: 4,
       fontWeight: 600
     }}>
             <Star sx={{
-      "w-3": true,
-      "h-3": true,
       fill: "currentColor"
     }} />
             Default
@@ -113,29 +90,12 @@ export function ProfileVariationCard({
       )}
 
       {/* Actions Menu */}
-      <div sx={{
-      "absolute": true,
-      "top-3": true,
-      "right-3": true,
-      "z-10": true
-    }}>
+      <div sx={{}}>
         <IconButton
           size="small"
           sx={{
-      "transition-opacity": true,
-      "bg-surface-card/80": true,
-      "backdrop-blur-sm": true,
       border: 1,
-      "border-subtle": true,
-      '&:hover': { "bg-surface-section": true },
-      "${": true,
-      "isHovered": true,
-      "?": true,
-      "'opacity-100'": true,
-      ":": true,
-      "'opacity-0'": true,
-      "}": true
-    }}
+      '&:hover': {},}}
           onClick={handleMenuClick}
           sx={{
             width: 32,
@@ -209,19 +169,12 @@ export function ProfileVariationCard({
 
       {/* Content */}
       <div sx={{
-      p: 6,
-      "space-y-4": true
-    }}>
+      p: 6,}}>
         {/* Header */}
-        <div sx={{
-      "space-y-2": true
-    }}>
+        <div sx={{}}>
           <h3 sx={{
       fontWeight: 600,
-      "text-content-primary": true,
-      "group-hover:text-brand-light": true,
-      "transition-colors": true,
-      typography: h6
+      typography: "h6"
     }}>
             {profile_name}
           </h3>
@@ -229,73 +182,50 @@ export function ProfileVariationCard({
 
         {/* Stats */}
         <div sx={{
-      "grid": true,
-      "grid-cols-2": true,
       gap: 4
     }}>
           <div sx={{
       display: "flex",
       alignItems: "center",
-      gap: 2,
-      "text-content-secondary": true
-    }}>
-            <Tag sx={{
-      "w-4": true,
-      "h-4": true,
-      "text-brand-primary/70": true
-    }} />
+      gap: 2,}}>
+            <Tag sx={{}} />
             <div>
               <div sx={{
-      typography: body1,
-      fontWeight: 600,
-      "text-content-primary": true
-    }}>{keyword_count}</div>
+      typography: "body1",
+      fontWeight: 600,}}>{keyword_count}</div>
               <div sx={{
-      typography: body2
+      typography: "body2"
     }}>Keywords</div>
             </div>
           </div>
           <div sx={{
       display: "flex",
       alignItems: "center",
-      gap: 2,
-      "text-content-secondary": true
-    }}>
-            <CalendarMonth sx={{
-      "w-4": true,
-      "h-4": true,
-      "text-brand-primary/70": true
-    }} />
+      gap: 2,}}>
+            <CalendarMonth sx={{}} />
             <div>
               <div sx={{
-      typography: body1,
-      fontWeight: 600,
-      "text-content-primary": true
-    }}>
+      typography: "body1",
+      fontWeight: 600,}}>
                 {formatDate(last_modified)}
               </div>
               <div sx={{
-      typography: body2
+      typography: "body2"
     }}>Modified</div>
             </div>
           </div>
         </div>
 
         {/* Progress Indicator */}
-        <div sx={{
-      "space-y-2": true
-    }}>
+        <div sx={{}}>
           <div sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      typography: body1
+      typography: "body1"
     }}>
+            <span sx={{}}>Optimization</span>
             <span sx={{
-      "text-content-secondary": true
-    }}>Optimization</span>
-            <span sx={{
-      "text-content-primary": true,
       fontWeight: 600
     }}>
               {Math.min(100, Math.round((keyword_count / 15) * 100))}%
@@ -303,20 +233,10 @@ export function ProfileVariationCard({
           </div>
           <div sx={{
       width: "100%",
-      "bg-surface-section": true,
-      borderRadius: 9999px,
-      "h-2": true
-    }}>
+      borderRadius: "9999px",}}>
             <div
               sx={{
-      "bg-gradient-to-r": true,
-      "from-brand-primary": true,
-      "to-brand-light": true,
-      "h-2": true,
-      borderRadius: 9999px,
-      "transition-all": true,
-      "duration-500": true
-    }}
+      borderRadius: "9999px",}}
               style={{ width: `${Math.min(100, Math.round((keyword_count / 15) * 100))}%` }}
             />
           </div>
@@ -327,12 +247,10 @@ export function ProfileVariationCard({
           variant="outlined"
           sx={{
       width: "100%",
-      "border-brand-primary/30": true,
-      '&:hover': { "border-brand-primary": true },
-      '&:hover': { "bg-brand-primary/10": true },
-      "transition-all": true,
+      '&:hover': {},
+      '&:hover': {},
       fontWeight: 600,
-      borderRadius: 1.5rem,
+      borderRadius: "1.5rem",
       py: 3
     }}
           onClick={(e) => {
@@ -341,8 +259,6 @@ export function ProfileVariationCard({
           }}
         >
           <Edit sx={{
-      "w-4": true,
-      "h-4": true,
       mr: 2
     }} />
           Edit Profile
@@ -351,23 +267,7 @@ export function ProfileVariationCard({
 
       {/* Hover Effect Overlay */}
       <div
-        sx={{
-      "absolute": true,
-      "inset-0": true,
-      "bg-gradient-to-r": true,
-      "from-primary-purple/5": true,
-      "to-transparent": true,
-      "transition-opacity": true,
-      "duration-300": true,
-      "pointer-events-none": true,
-      "${": true,
-      "isHovered": true,
-      "?": true,
-      "'opacity-100'": true,
-      ":": true,
-      "'opacity-0'": true,
-      "}": true
-    }}
+        sx={{}}
       />
     </Card>
   );
@@ -404,10 +304,8 @@ export function ProfileVariationGrid({
 
   return (
     <div sx={{
-      "grid": true,
-      "grid-cols-1": true,
-      [theme.breakpoints.up('sm')]: { "grid-cols-2": true },
-      [theme.breakpoints.up('md')]: { "grid-cols-3": true },
+      [theme.breakpoints.up('sm')]: {},
+      [theme.breakpoints.up('md')]: {},
       gap: 6
     }}>
       {profiles.map((profile) => (

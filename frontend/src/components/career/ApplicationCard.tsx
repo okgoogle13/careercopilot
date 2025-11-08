@@ -72,19 +72,7 @@ export function ApplicationCard({
   return (
     <Card
       sx={{
-      "transition-all": true,
-      "duration-200": true,
-      '&:hover': { boxShadow: 3 },
-      "${": true,
-      "isDragging": true,
-      "?": true,
-      "'rotate-2": true,
-      "scale-105": true,
-      "shadow-lg'": true,
-      ":": true,
-      "''": true,
-      "}": true
-    }}
+      '&:hover': { boxShadow: 3 },}}
     >
       <CardContent sx={{
       p: 4
@@ -100,26 +88,19 @@ export function ApplicationCard({
       display: "flex",
       alignItems: "flex-start",
       gap: 3,
-      flex: 1,
-      "min-w-0": true
-    }}>
-            <Avatar src={companyLogo} sx={{
-      "w-10": true,
-      "h-10": true
-    }} sx={{ bgcolor: 'primary.main' }}>
+      flex: 1,}}>
+            <Avatar src={companyLogo} sx={{}} sx={{ bgcolor: 'primary.main' }}>
               <Building2 sx={{ fontSize: 16 }} />
             </Avatar>
             <Box sx={{
-      flex: 1,
-      "min-w-0": true
-    }}>
+      flex: 1,}}>
               <Typography
                 variant="h6"
                 sx={{
       fontWeight: 600,
-      typography: body1,
+      typography: "body1",
       mb: 1,
-      [object Object]
+      
     }}
                 title={jobTitle}
               >
@@ -129,7 +110,7 @@ export function ApplicationCard({
                 variant="body2"
                 color="text.secondary"
                 sx={{
-      [object Object]
+      
     }}
                 title={company}
               >
@@ -152,9 +133,8 @@ export function ApplicationCard({
 
         {/* Job Details */}
         <Box sx={{
-      "space-y-2": true,
       mb: 4,
-      typography: body2,
+      typography: "body2",
       color: "gray.600"
     }}>
           <Box sx={{
@@ -164,7 +144,7 @@ export function ApplicationCard({
     }}>
             <MapPin sx={{ fontSize: 12 }} />
             <span sx={{
-      [object Object]
+      
     }}>{location}</span>
           </Box>
 
@@ -207,8 +187,7 @@ export function ApplicationCard({
             </Typography>
           </Box>
           <LinearProgress variant="determinate" value={progress} sx={{
-      "h-1.5": true,
-      borderRadius: 9999px
+      borderRadius: "9999px"
     }} />
         </Box>
 
@@ -218,13 +197,13 @@ export function ApplicationCard({
       mb: 4,
       p: 2,
       bgcolor: "blue.50",
-      borderRadius: 0.5rem
+      borderRadius: "0.5rem"
     }}>
             <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 1,
-      typography: body2,
+      typography: "body2",
       color: "blue.700"
     }}>
               <Clock sx={{ fontSize: 12 }} />
@@ -249,7 +228,7 @@ export function ApplicationCard({
             onClick={() => onViewTimeline?.(id)}
             startIcon={<Eye sx={{ fontSize: 14 }} />}
             sx={{
-      typography: body2
+      typography: "body2"
     }}
           >
             Timeline

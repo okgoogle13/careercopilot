@@ -244,7 +244,7 @@ export function JobSearch({
       mb: 6
     }}>
         <Typography variant="h4" sx={{
-      typography: h4,
+      typography: "h4",
       fontWeight: 700,
       mb: 2
     }}>
@@ -306,22 +306,14 @@ export function JobSearch({
                 <Box sx={{
       display: "flex",
       border: 1,
-      borderRadius: 0.5rem,
+      borderRadius: "0.5rem",
       overflow: "hidden"
     }}>
                   <Button
                     variant={viewMode === 'grid' ? 'contained' : 'outlined'}
                     onClick={() => setViewMode('grid')}
                     sx={{
-      borderRadius: 0,
-      "${viewMode": true,
-      "===": true,
-      "'grid'": true,
-      "?": true,
-      "'bg-primary'": true,
-      ":": true,
-      "''}": true
-    }}
+      borderRadius: 0,}}
                     size="small"
                   >
                     <Grid3X3 sx={{ fontSize: 16 }} />
@@ -330,15 +322,7 @@ export function JobSearch({
                     variant={viewMode === 'list' ? 'contained' : 'outlined'}
                     onClick={() => setViewMode('list')}
                     sx={{
-      borderRadius: 0,
-      "${viewMode": true,
-      "===": true,
-      "'list'": true,
-      "?": true,
-      "'bg-primary'": true,
-      ":": true,
-      "''}": true
-    }}
+      borderRadius: 0,}}
                     size="small"
                   >
                     <List sx={{ fontSize: 16 }} />
@@ -346,9 +330,7 @@ export function JobSearch({
                 </Box>
 
                 {/* Sort */}
-                <FormControl size="small" sx={{
-      "min-w-32": true
-    }}>
+                <FormControl size="small" sx={{}}>
                   <InputLabel>Sort by</InputLabel>
                   <Select
                     value={sortBy}

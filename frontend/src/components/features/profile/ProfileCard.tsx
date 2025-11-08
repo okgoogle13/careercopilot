@@ -38,18 +38,13 @@ export function ProfileCard({
 }: ProfileCardProps) {
   return (
     <Card variant={isSelected ? 'selected' : 'interactive'} sx={{
-      p: 6,
-      "space-y-4": true
-    }}>
+      p: 6,}}>
       <div sx={{
       display: "flex",
       alignItems: "center",
       gap: 3
     }}>
-        <Avatar sx={{
-      "w-12": true,
-      "h-12": true
-    }}>
+        <Avatar sx={{}}>
           <AvatarFallback
             sx={{
       color: "common.black",
@@ -65,32 +60,22 @@ export function ProfileCard({
         </Avatar>
         <div>
           <h3 sx={{
-      fontWeight: 500,
-      "text-card-foreground": true
-    }}>{name}</h3>
+      fontWeight: 500,}}>{name}</h3>
           <p sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{role}</p>
+      typography: "body1",}}>{role}</p>
         </div>
       </div>
 
-      <div sx={{
-      "space-y-3": true
-    }}>
+      <div sx={{}}>
         <div sx={{
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center"
     }}>
           <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Active Applications:</span>
+      typography: "body1",}}>Active Applications:</span>
           <span sx={{
-      fontWeight: 500,
-      "text-card-foreground": true
-    }}>{activeApplications}</span>
+      fontWeight: 500,}}>{activeApplications}</span>
         </div>
 
         <div sx={{
@@ -99,13 +84,9 @@ export function ProfileCard({
       alignItems: "center"
     }}>
           <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>ATS Score Average:</span>
+      typography: "body1",}}>ATS Score Average:</span>
           <span sx={{
-      fontWeight: 500,
-      "text-primary": true
-    }}>{atsScore}%</span>
+      fontWeight: 500,}}>{atsScore}%</span>
         </div>
 
         <div sx={{
@@ -114,13 +95,9 @@ export function ProfileCard({
       alignItems: "center"
     }}>
           <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>Last Updated:</span>
+      typography: "body1",}}>Last Updated:</span>
           <span sx={{
-      typography: body1,
-      "text-muted-foreground": true
-    }}>{lastUpdated}</span>
+      typography: "body1",}}>{lastUpdated}</span>
         </div>
       </div>
 
@@ -134,30 +111,22 @@ export function ProfileCard({
           size="small"
           sx={{
       flex: 1,
-      "text-muted-foreground": true,
-      '&:hover': { "text-card-foreground": true }
+      '&:hover': {}
     }}
           onClick={onEdit}
         >
-          <Edit sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+          <Edit sx={{}} />
         </Button>
         <Button
           variant="text"
           size="small"
           sx={{
       flex: 1,
-      "text-destructive": true,
-      '&:hover': { "text-destructive": true }
+      '&:hover': {}
     }}
           onClick={onDelete}
         >
-          <Trash2 sx={{
-      "w-4": true,
-      "h-4": true
-    }} />
+          <Trash2 sx={{}} />
         </Button>
       </div>
     </Card>
