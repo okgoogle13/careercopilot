@@ -5,11 +5,15 @@ Comprehensive resume analysis system that provides deep insights, scoring,
 and optimization recommendations using AI-powered analysis.
 """
 
+from __future__ import annotations
+
+import asyncio
 import json
 import os
 from datetime import datetime
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, cast
+from typing_extensions import ParamSpec
 
 from dotenv import load_dotenv
 from pydantic import BaseModel, Field
@@ -19,33 +23,64 @@ from app.core.ai_error_handling import AIError, AIErrorType, with_ai_error_handl
 from app.core.input_validation import InputSanitizer, InputValidationError
 from app.core.prompt_service import format_prompt
 
-import asyncio
+# Type variables
+P = ParamSpec('P')
+R = TypeVar('R')
 
+# Protocol for model configuration
+class ModelConfigProtocol:
+    """Protocol for model configuration."""
+    
+    def generate(self, prompt: str, **kwargs: Any) -> Any:
+        ...
+
+
+# Type for genkit flow
+def _noop_flow(*args: Any, **kwargs: Any) -> Callable[[Callable[P, R]], Callable[P, R]]:
+    """No-op flow decorator for when genkit is not available."""
+    def _decorator(fn: Callable[P, R]) -> Callable[P, R]:
+        return fn
+    return _decorator
+
+
+
+
+# Type stubs for genkit if not available
 try:
     import genkit
     from genkit import ai
     from genkit.plugins import google_genai
-except Exception:
-    genkit = None
-    googleai = None
-    ai = None
+    GENKIT_AVAILABLE = True
+except ImportError:
+    genkit = None  # type: ignore[assignment]
+    ai = None  # type: ignore[assignment]
+    google_genai = None  # type: ignore[assignment]
+    GENKIT_AVAILABLE = False
 
-
-def _noop_flow(*args, **kwargs):
-    def _decorator(fn):
-        return fn
-
-    return _decorator
-
-
-genkit_flow = getattr(genkit, "flow", _noop_flow) if genkit else _noop_flow
+# Initialize genkit flow decorator
+genkit_flow: Any = getattr(genkit, "flow", _noop_flow) if GENKIT_AVAILABLE else _noop_flow
 
 # Load environment variables
 load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
-gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
+# Initialize genkit with Google AI plugin if available
+if GENKIT_AVAILABLE and hasattr(genkit, 'get_plugin'):
+    if not genkit.get_plugin("googleai") and google_genai and hasattr(google_genai, 'init'):
+        api_key = os.getenv("GEMINI_API_KEY")
+        if api_key:
+            # Initialize genkit with Google AI plugin
+            init_func = getattr(google_genai, 'init', None)
+            if init_func and callable(init_func):
+                plugin = init_func(api_key=api_key)
+                if hasattr(genkit, 'init') and callable(genkit.init):
+                    genkit.init(plugins=[plugin])
+
+
+# Get model configuration
+model_config = get_ai_config().get_model_config("gemini-2.0-flash")
+if model_config is None:
+    raise RuntimeError("Failed to load model configuration")
+gemini_pro = cast(ModelConfigProtocol, model_config)
 
 
 # Core Data Models
@@ -150,7 +185,7 @@ class ResumeIntelligenceReport(BaseModel):
     role_recommendations: List[str] = Field(description="Suitable roles based on profile")
 
 
-@genkit_flow(output_schema=ResumeAnalysisResult)
+@genkit_flow  # type: ignore[misc]
 @with_ai_error_handling()
 def analyze_resume_comprehensive(
     resume_content: str, target_industry: Optional[str] = None
@@ -197,7 +232,7 @@ def analyze_resume_comprehensive(
         )
 
 
-@genkit_flow(output_schema=CareerProgressionAnalysis)
+@genkit_flow  # type: ignore[misc]
 @with_ai_error_handling()
 def analyze_career_progression(
     resume_content: str, career_goals: Optional[str] = None
@@ -243,7 +278,7 @@ def analyze_career_progression(
         )
 
 
-@genkit_flow(output_schema=ResumeIntelligenceReport)
+@genkit_flow  # type: ignore[misc]
 @with_ai_error_handling()
 async def generate_resume_intelligence_report(
     resume_content: str,
@@ -264,15 +299,16 @@ async def generate_resume_intelligence_report(
         ResumeIntelligenceReport: Comprehensive intelligence report with strategic action plan
     """
     try:
-        # Get core analysis components in parallel
-        resume_analysis_task = genkit.run(
-            analyze_resume_comprehensive, resume_content, target_industry
+        # Run analyses in parallel
+        analysis_task = asyncio.create_task(
+            analyze_resume_comprehensive(resume_content, target_industry)
         )
-        career_progression_task = genkit.run(
-            analyze_career_progression, resume_content, career_goals
+        progression_task = asyncio.create_task(
+            analyze_career_progression(resume_content, career_goals)
         )
+
         resume_analysis, career_progression = await asyncio.gather(
-            resume_analysis_task, career_progression_task
+            analysis_task, progression_task
         )
 
         # Prepare comprehensive analysis
@@ -320,15 +356,18 @@ Respond with valid JSON matching the ResumeIntelligenceReport schema.
 """
 
         response = gemini_pro.generate(
-            prompt,
-            config={
-                "response_mime_type": "application/json",
-                "temperature": 0.2,
-            },
+            prompt=prompt,
+            config={"response_mime_type": "application/json"},
             output_schema=ResumeIntelligenceReport,
         )
 
+        # Ensure the response has the expected output method
+        if not hasattr(response, 'output') or not callable(response.output):
+            raise RuntimeError("Invalid response from model: missing output method")
+            
         result = response.output()
+        if not isinstance(result, ResumeIntelligenceReport):
+            raise RuntimeError("Unexpected response type from model")
 
         # Add the component analyses
         result.resume_analysis = resume_analysis
@@ -349,7 +388,7 @@ Respond with valid JSON matching the ResumeIntelligenceReport schema.
 @with_ai_error_handling()
 def analyze_resume_batch(
     resume_contents: List[str], target_industry: Optional[str] = None
-) -> List[Dict]:
+) -> List[Dict[str, Any]]:
     """
     Analyzes multiple resumes for comparative insights.
 
@@ -388,7 +427,7 @@ class SkillsGapAnalysis(BaseModel):
     )
 
 
-@genkit_flow(output_schema=SkillsGapAnalysis)
+@genkit_flow  # type: ignore[misc]
 @with_ai_error_handling()
 def analyze_skills_gap_for_transition(
     resume_content: str,
