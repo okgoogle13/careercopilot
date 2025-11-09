@@ -20,6 +20,9 @@ class SanitizedInput(BaseModel):
     original_length: int
     sanitized_content: str
     warnings: list[str] = []
+    
+    class Config:
+        arbitrary_types_allowed = True
 
 
 class InputSanitizer:
@@ -111,6 +114,7 @@ class InputSanitizer:
         )
 
     @classmethod
+    @classmethod
     def sanitize_dict_input(cls, data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Recursively sanitize dictionary values.
@@ -121,7 +125,7 @@ class InputSanitizer:
         Returns:
             Dictionary with sanitized values
         """
-        sanitized = {}
+        sanitized: Dict[str, Any] = {}
         for key, value in data.items():
             if isinstance(value, str):
                 try:
@@ -137,8 +141,8 @@ class InputSanitizer:
             elif isinstance(value, list):
                 sanitized[key] = [
                     (
-                        cls.sanitize_text_input(item).sanitized_content
-                        if isinstance(item, str)
+                        cls.sanitize_text_input(str(item)).sanitized_content
+                        if isinstance(item, str) or item is None
                         else item
                     )
                     for item in value
@@ -148,7 +152,7 @@ class InputSanitizer:
         return sanitized
 
     @classmethod
-    def create_safe_prompt(cls, template: str, **kwargs) -> str:
+    def create_safe_prompt(cls, template: str, **kwargs: Any) -> str:
         """
         Create a safe prompt by sanitizing all input variables.
 
@@ -169,7 +173,8 @@ class InputSanitizer:
                 sanitized = cls.sanitize_text_input(value)
                 safe_kwargs[key] = sanitized.sanitized_content
             elif isinstance(value, dict):
-                safe_kwargs[key] = cls.sanitize_dict_input(value)
+                # Convert dict to string representation for safety
+                safe_kwargs[key] = str(cls.sanitize_dict_input(value))
             else:
                 safe_kwargs[key] = str(value)  # Convert to string safely
 
@@ -203,5 +208,15 @@ def sanitize_job_description(job_description: str) -> str:
 
 
 def create_analysis_prompt(template: str, resume: str, job_desc: str) -> str:
-    """Create a safe analysis prompt with sanitized inputs."""
+    """
+    Create a safe analysis prompt with sanitized inputs.
+    
+    Args:
+        template: The prompt template string with placeholders
+        resume: The resume text to be sanitized
+        job_desc: The job description text to be sanitized
+        
+    Returns:
+        A sanitized prompt string with the provided inputs
+    """
     return InputSanitizer.create_safe_prompt(template, resume_text=resume, job_description=job_desc)
