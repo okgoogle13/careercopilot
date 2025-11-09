@@ -8,7 +8,12 @@ package by coordinating multiple specialized flows.
 import json
 import os
 from datetime import datetime
-from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, cast
+from __future__ import annotations
+
+import json
+import os
+from datetime import datetime
+from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, cast, Union, Protocol
 from typing_extensions import ParamSpec
 
 from dotenv import load_dotenv
@@ -21,57 +26,98 @@ from app.genkit_flows.ksc_generator import generateKscResponse
 from app.genkit_flows.resume_intelligence_pipeline import generate_resume_intelligence_report
 from app.genkit_flows.smart_cover_letter_system import generate_smart_cover_letter
 
-# Type stubs for genkit if not available
-try:
-    import genkit
-    from genkit.plugins import google_genai
-    GENKIT_AVAILABLE = True
-except ImportError:
-    from typing import Any, Dict, Optional
-    
-    class _DummyGenkit:
-        def __getattr__(self, name: str) -> Any:
-            return _noop_flow
-    
-    genkit = _DummyGenkit()
-    google_genai = None
-    GENKIT_AVAILABLE = False
-
-
+# Type variables
 P = ParamSpec('P')
 R = TypeVar('R')
 
+# Protocol for model configuration
+class ModelConfigProtocol(Protocol):
+    """Protocol for model configuration."""
+    
+    def generate(self, prompt: str, **kwargs: Any) -> Any:
+        ...
+        
+# Type for genkit flow
 def _noop_flow(*args: Any, **kwargs: Any) -> Callable[[Callable[P, R]], Callable[P, R]]:
+    """No-op flow decorator for when genkit is not available."""
     def _decorator(fn: Callable[P, R]) -> Callable[P, R]:
         return fn
     return _decorator
 
+# Type stubs for genkit if not available
+try:
+    import genkit  # type: ignore[import-not-found]
+    from genkit.plugins import google_genai  # type: ignore[import-not-found]
+    GENKIT_AVAILABLE = True
+except ImportError:
+    class _DummyGenkit:
+        def __getattr__(self, name: str) -> Any:
+            return _noop_flow
+    
+    genkit = _DummyGenkit()  # type: ignore[assignment]
+    google_genai = None  # type: ignore[assignment]
+    GENKIT_AVAILABLE = False
 
-genkit_flow = getattr(genkit, "flow", _noop_flow) if genkit else _noop_flow
+# Initialize genkit flow decorator
+genkit_flow: Any = getattr(genkit, "flow", _noop_flow)
+
+
 
 # Load environment variables
 load_dotenv()
-if genkit and getattr(genkit, "get_plugin", None) and not genkit.get_plugin("googleai"):
-    genkit.init(plugins=[google_genai.init(api_key=os.getenv("GEMINI_API_KEY"))])
 
-gemini_pro = get_ai_config().get_model_config("gemini-2.0-flash")
-if gemini_pro is None:
-    raise RuntimeError("Failed to load Gemini Pro model configuration")
+# Initialize genkit with Google AI plugin if available
+try:
+    if GENKIT_AVAILABLE and hasattr(genkit, 'get_plugin'):
+        if not genkit.get_plugin("googleai") and google_genai and hasattr(google_genai, 'init'):
+            api_key = os.getenv("GEMINI_API_KEY")
+            if not api_key:
+                raise ValueError("GEMINI_API_KEY environment variable is not set")
+            genkit.init(plugins=[google_genai.init(api_key=api_key)])  # type: ignore[attr-defined]
+except Exception as e:
+    print(f"Warning: Failed to initialize genkit with Google AI plugin: {e}")
+
+# Get model configuration
+model_config = get_ai_config().get_model_config("gemini-2.0-flash")
+if model_config is None:
+    raise RuntimeError("Failed to load model configuration")
+
+# Cast to our protocol type
+gemini_pro = cast(ModelConfigProtocol, model_config)
 
 
 # Data Models
 class ApplicationPackage(BaseModel):
-    tailored_resume: Dict[str, Any] = Field(description="Optimized resume content and analysis")
-    cover_letter: Dict[str, Any] = Field(description="Personalized cover letter with analysis")
+    """Represents a complete job application package."""
+    
+    tailored_resume: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Optimized resume content and analysis"
+    )
+    cover_letter: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Personalized cover letter with analysis"
+    )
     ksc_responses: Optional[List[Dict[str, Any]]] = Field(
+        default=None,
         description="Key Selection Criteria responses if applicable"
     )
-
-    application_strategy: Dict[str, Any] = Field(description="Strategic guidance for this application")
-    submission_checklist: List[str] = Field(description="Final submission checklist")
-    follow_up_plan: Dict[str, Any] = Field(description="Post-application follow-up strategy")
-
-    package_metadata: Dict[str, Any] = Field(description="Package generation metadata")
+    application_strategy: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Strategic guidance for this application"
+    )
+    submission_checklist: List[str] = Field(
+        default_factory=list,
+        description="Final submission checklist"
+    )
+    follow_up_plan: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Post-application follow-up strategy"
+    )
+    package_metadata: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Package generation metadata"
+    )
 
 
 class KscDetectionResult(BaseModel):
@@ -81,7 +127,7 @@ class KscDetectionResult(BaseModel):
     extraction_notes: List[str] = Field(description="Notes about the extraction process")
 
 
-@genkit_flow(output_schema=KscDetectionResult)
+@genkit_flow  # type: ignore[call-arg]
 @with_ai_error_handling()
 def detect_ksc_requirements(job_description: str) -> KscDetectionResult:
     """
@@ -98,6 +144,12 @@ def detect_ksc_requirements(job_description: str) -> KscDetectionResult:
             raise InputValidationError("Job description is required and must be a string")
 
         sanitized_job = InputSanitizer.sanitize_text_input(job_description)
+        
+        if not gemini_pro:
+            raise RuntimeError("Model configuration not available")
+            
+        if not hasattr(gemini_pro, 'generate'):
+            raise RuntimeError("Model configuration does not support generation")
 
         prompt = f"""
 As a recruitment specialist, analyze this job description to identify if Key Selection
@@ -137,15 +189,20 @@ Respond with valid JSON matching the KscDetectionResult schema.
 """
 
         response = gemini_pro.generate(
-            prompt,
-            config={
-                "response_mime_type": "application/json",
-                "temperature": 0.2,
-            },
+            prompt=prompt,
+            config={"response_mime_type": "application/json"},
             output_schema=KscDetectionResult,
         )
-
-        return response.output()
+        
+        # Ensure the response has the expected output method
+        if not hasattr(response, 'output') or not callable(response.output):
+            raise RuntimeError("Invalid response from model: missing output method")
+            
+        result = response.output()
+        if not isinstance(result, KscDetectionResult):
+            raise TypeError(f"Expected KscDetectionResult, got {type(result).__name__}")
+            
+        return result
 
     except Exception as e:
         raise AIError(
@@ -155,7 +212,7 @@ Respond with valid JSON matching the KscDetectionResult schema.
         )
 
 
-@genkit_flow(output_schema=ApplicationPackage)
+@genkit_flow  # type: ignore[call-arg]
 @with_ai_error_handling()
 def prepare_full_application(
     job_description: str,
@@ -377,7 +434,7 @@ Respond with a JSON object containing these strategic insights.
 
 
 # Utility function for quick application assessment
-@genkit_flow()
+@genkit_flow  # type: ignore[call-arg]
 @with_ai_error_handling()
 def assess_application_readiness(
     user_profile: Dict[str, Any], 

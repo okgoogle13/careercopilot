@@ -1,9 +1,14 @@
 """Type stubs for genkit and related modules."""
-from typing import Any, Callable, Dict, List, Optional, Type, TypeVar, Union
+from __future__ import annotations
+
+from typing import Any, Callable, Dict, Generic, List, Optional, Type, TypeVar, Union
 from typing_extensions import ParamSpec, Protocol, runtime_checkable
 
 T = TypeVar('T')
 P = ParamSpec('P')
+R = TypeVar('R')
+InputT = TypeVar('InputT')
+OutputT = TypeVar('OutputT')
 
 # Type stubs for genkit
 class GenkitFlow(Protocol[P, T]):
@@ -66,7 +71,17 @@ InputT = TypeVar('InputT')
 OutputT = TypeVar('OutputT')
 
 # Type for flow functions
-FlowFunction = Callable[P, OutputT]
+FlowFunction = Callable[..., OutputT]
 
 # Type for error handler
 ErrorHandler = Callable[[Exception], None]
+
+# Type for model configuration
+class ModelConfig(Protocol):
+    """Protocol for model configuration."""
+    
+    def generate(self, prompt: str, **kwargs: Any) -> Any:
+        ...
+        
+    def __call__(self, *args: Any, **kwargs: Any) -> Any:
+        ...
