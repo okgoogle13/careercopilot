@@ -3,12 +3,12 @@ import { Box, Typography, Button, Container, alpha, Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import type { Profile } from './types';
-import { ProfileCard } from './ProfileCard';
+import { ProfileCard } from './ProfileCardMUI';
 import { CreateProfileCard } from './CreateProfileCard';
 
 const mockProfiles: Profile[] = [
-  { id: '1', name: 'Nishant Dougall', role: 'Community Support Worker', activeApplications: 8, atsScore: 87, lastUpdated: '2 days ago', avatarColor: '#A78BFA' },
-  { id: '2', name: 'Senior Developer', role: 'React & TypeScript', activeApplications: 5, atsScore: 92, lastUpdated: '1 week ago', avatarColor: '#F472B6' },
+  { id: '1', name: 'Nishant Dougall', role: 'Community Support Worker', activeApplications: 8, atsScore: 87, lastUpdated: '2 days ago', avatarColor: 'primary.light' },
+  { id: '2', name: 'Senior Developer', role: 'React & TypeScript', activeApplications: 5, atsScore: 92, lastUpdated: '1 week ago', avatarColor: 'secondary.light' },
 ];
 
 export interface DashboardProps {
@@ -27,11 +27,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ onCreateProfile, onEditPro
   if (isEmpty || profiles.length === 0) {
     return (
       <Container maxWidth="md">
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', py: 15, borderRadius: 3, border: 2, borderStyle: 'dashed', borderColor: (theme) => alpha(theme.palette.primary.main, 0.3), bgcolor: (theme) => alpha(theme.palette.surface.containerHigh, 0.4), textAlign: 'center' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', py: 15, borderRadius: 3, border: 2, borderStyle: 'dashed', borderColor: (theme) => alpha(theme.palette.primary.main, 0.3), bgcolor: (theme) => alpha(theme.palette.primary.main, 0.04), textAlign: 'center' }}>
           <Box sx={{ p: 3, borderRadius: '50%', bgcolor: (theme) => alpha(theme.palette.primary.main, 0.12), mb: 3 }}>
-            <PsychologyIcon sx={{ fontSize: 48, color: '#A78BFA' }} />
+            <PsychologyIcon sx={{ fontSize: 48, color: (theme) => theme.palette.primary.light }} />
           </Box>
-          <Typography variant="h4" sx={{ fontFamily: '"Roboto Flex", "Roboto", serif', fontWeight: 700, mb: 2, background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.tertiary.main})`, backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <Typography variant="h4" sx={{ fontFamily: '"Roboto Flex", "Roboto", serif', fontWeight: 700, mb: 2, background: (theme) => `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`, backgroundClip: 'text', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
             Ready to Launch Your Career?
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 480, mb: 4 }}>

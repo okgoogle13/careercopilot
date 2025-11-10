@@ -103,7 +103,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
         gap: 3,
         position: 'relative',
         zIndex: 1,
-        color: 'tertiary.contrastText',
+        color: 'secondary.contrastText',
       }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
@@ -111,10 +111,10 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
               {name.split(' ').map((n) => n[0]).join('')}
             </Avatar>
             <Box>
-              <Typography variant="h6" sx={{ fontFamily: '"Roboto Flex", "Roboto", serif', fontWeight: 700, color: 'tertiary.contrastText' }}>
+              <Typography variant="h6" sx={{ fontFamily: '"Roboto Flex", "Roboto", serif', fontWeight: 700, color: 'secondary.contrastText' }}>
                 {name}
               </Typography>
-              <Typography variant="body2" color={alpha(theme.palette.tertiary.contrastText, 0.7)}>
+              <Typography variant="body2" color={alpha(theme.palette.secondary.contrastText, 0.7)}>
                 {role}
               </Typography>
             </Box>
@@ -137,7 +137,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
 
         <Box>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
-            <Typography variant="body2" color={alpha(theme.palette.tertiary.contrastText, 0.7)}>ATS Score</Typography>
+            <Typography variant="body2" color={alpha(theme.palette.secondary.contrastText, 0.7)}>ATS Score</Typography>
             <Typography variant="body2" sx={{ fontWeight: 600, color: scoreColor }}>{atsScore}%</Typography>
           </Box>
           <LinearProgress
@@ -155,7 +155,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
             <CardContent sx={{ p: 1.5, '&:last-child': { pb: 1.5 } }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, mb: 0.5 }}>
                 <TrackChangesIcon sx={{ fontSize: 12, color: 'primary.light' }} />
-                <Typography variant="caption" color={alpha(theme.palette.tertiary.contrastText, 0.7)}>Applications</Typography>
+                <Typography variant="caption" color={alpha(theme.palette.secondary.contrastText, 0.7)}>Applications</Typography>
               </Box>
               <Typography variant="body1" sx={{ fontWeight: 600, color: 'primary.light' }}>{activeApplications}</Typography>
             </CardContent>
@@ -164,7 +164,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
             <CardContent sx={{ p: 1.5, '&:last-child': { pb: 1.5 } }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 0.5, mb: 0.5 }}>
                 <TrendingUpIcon sx={{ fontSize: 12, color: 'success.light' }} />
-                <Typography variant="caption" color={alpha(theme.palette.tertiary.contrastText, 0.7)}>Potential</Typography>
+                <Typography variant="caption" color={alpha(theme.palette.secondary.contrastText, 0.7)}>Potential</Typography>
               </Box>
               <Typography variant="body1" sx={{ fontWeight: 600, color: 'success.light' }}>High</Typography>
             </CardContent>
@@ -173,11 +173,11 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
         
         <Box sx={{ flex: 1 }} /> 
         
-        <Typography variant="caption" color={alpha(theme.palette.tertiary.contrastText, 0.7)} sx={{ textAlign: 'center' }}>
+        <Typography variant="caption" color={alpha(theme.palette.secondary.contrastText, 0.7)} sx={{ textAlign: 'center' }}>
           Updated {lastUpdated}
         </Typography>
 
-        <Divider sx={{ my: 1, borderColor: alpha(theme.palette.tertiary.contrastText, 0.1) }} />
+        <Divider sx={{ my: 1, borderColor: alpha(theme.palette.secondary.contrastText, 0.1) }} />
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button 
             variant="text" 
@@ -186,7 +186,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
             onClick={onEdit} 
             sx={{ 
               flex: 1, 
-              color: alpha(theme.palette.tertiary.contrastText, 0.7), 
+              color: alpha(theme.palette.secondary.contrastText, 0.7), 
               '&:hover': { 
                 color: 'primary.light', 
                 bgcolor: (theme) => alpha(theme.palette.primary.main, 0.08) 
@@ -202,7 +202,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
             onClick={onDelete} 
             sx={{ 
               flex: 1, 
-              color: alpha(theme.palette.tertiary.contrastText, 0.7), 
+              color: alpha(theme.palette.secondary.contrastText, 0.7), 
               '&:hover': { 
                 color: 'error.light', 
                 bgcolor: (theme) => alpha(theme.palette.error.main, 0.08) 
