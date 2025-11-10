@@ -120,7 +120,8 @@
       "Bash(gcloud iam workload-identity-pools providers create-oidc:*)",
       "Bash(gcloud iam service-accounts create:*)",
       "Bash(github-actions-prod-sa@careercopilot-468811.iam.gserviceaccount.com)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(git -C /Applications/careercopilot status:*)"
     ]
   }
 }
