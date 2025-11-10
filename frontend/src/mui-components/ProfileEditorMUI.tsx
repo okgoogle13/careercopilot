@@ -25,7 +25,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
                   <Box sx={{ p: 1.5, bgcolor: (theme) => alpha(theme.palette.primary.main, 0.12), borderRadius: 2 }}>
-                    <PersonIcon sx={{ fontSize: 20, color: '#A78BFA' }} />
+                    <PersonIcon sx={{ fontSize: 20, color: (theme) => theme.palette.primary.light }} />
                   </Box>
                   <Typography variant="h6" sx={{ fontFamily: '"Roboto Flex", "Roboto", serif', fontWeight: 700 }}>Personal Information</Typography>
                 </Box>
@@ -41,8 +41,8 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
             <Card sx={{ p: 2 }}>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                  <Box sx={{ p: 1.5, bgcolor: (theme) => alpha(theme.palette.tertiary.main, 0.12), borderRadius: 2 }}>
-                    <WorkIcon sx={{ fontSize: 20, color: '#F472B6' }} />
+                  <Box sx={{ p: 1.5, bgcolor: (theme) => alpha(theme.palette.secondary.main, 0.12), borderRadius: 2 }}>
+                    <WorkIcon sx={{ fontSize: 20, color: (theme) => theme.palette.secondary.light }} />
                   </Box>
                   <Typography variant="h6" sx={{ fontFamily: '"Roboto Flex", "Roboto", serif', fontWeight: 700 }}>Experience</Typography>
                 </Box>

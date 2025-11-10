@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ProfileCard } from './ProfileCard';
+import { ProfileCard } from './ProfileCardMUI';
 
 const meta: Meta<typeof ProfileCard> = {
   title: 'Components/ProfileCard',
