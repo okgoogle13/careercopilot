@@ -32,6 +32,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { mainNavigation, userNavigation } from '../../config/navigation';
 
 import { NavigationItem } from './NavigationItem';
+import { NotificationCenter } from '../NotificationCenter';
 
 interface NavbarProps {
   onMenuClick?: () => void;
@@ -318,45 +319,8 @@ const Navbar: React.FC<NavbarProps> = ({
             ))}
           </Menu>
 
-          {/* Notifications Menu */}
-          <Menu
-            anchorEl={notificationsAnchorEl}
-            open={Boolean(notificationsAnchorEl)}
-            onClose={handleNotificationsClose}
-            onClick={handleNotificationsClose}
-            PaperProps={{
-              elevation: 3,
-              sx: {
-                width: 360,
-                maxWidth: '100%',
-                maxHeight: 400,
-                overflowY: 'auto',
-                mt: 1.5,
-              },
-            }}
-            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-          >
-            <Box sx={{ p: 2, borderBottom: 1, borderColor: 'divider' }}>
-              <Typography variant="subtitle1" fontWeight={600}>
-                Notifications
-              </Typography>
-            </Box>
-            {notificationCount > 0 ? (
-              <Box sx={{ p: 2 }}>
-                <Typography variant="body2" color="text.secondary">
-                  You have {notificationCount} new notification{notificationCount > 1 ? 's' : ''}
-                </Typography>
-                {/* TODO(#86): Render actual notifications list here */}
-              </Box>
-            ) : (
-              <Box sx={{ p: 2, textAlign: 'center' }}>
-                <Typography variant="body2" color="text.secondary">
-                  No notifications
-                </Typography>
-              </Box>
-            )}
-          </Menu>
+          {/* Notifications Center */}
+          <NotificationCenter />
         </Toolbar>
       </AppBar>
 

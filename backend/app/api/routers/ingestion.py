@@ -414,17 +414,25 @@ async def extract_and_save(
         # Step 4: Move file to permanent storage
         permanent_uri = await _move_file_in_storage(request.fileId, user_id)
 
-        # Step 5: Create AssetDocument
+        # Step 5: Detect actual MIME type and file size from storage metadata
+        bucket = get_storage()
+        blob_name = permanent_uri.replace(f"gs://{bucket.name}/", "")
+        blob = bucket.blob(blob_name)
+        blob.reload()  # Refresh metadata from GCS
+        detected_mime_type = blob.content_type or "application/octet-stream"
+        file_size = blob.size
+
+        # Step 6: Create AssetDocument
         asset_doc = AssetDocument(
             documentType=document_type,
             extractedData=extracted_data,
             tags=request.confirmedTags,
             metadata=AssetMetadata(
                 fileName=filename,
-                fileType="application/pdf",  # TODO(#89): Detect actual MIME type from file
+                fileType=detected_mime_type,
                 uploadDate=datetime.now(),
                 storageUri=permanent_uri,
-                fileSizeBytes=None,  # Could be retrieved from storage metadata
+                fileSizeBytes=file_size,
             ),
             schemaVersion="v4",
             createdAt=datetime.now(),
