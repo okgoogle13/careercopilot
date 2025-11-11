@@ -44,18 +44,21 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@hookform/resolvers": "^5.2.2",
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.4",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.13.1",
     "date-fns": "^3.0.0",
     "firebase": "^12.5.0",
+    "lucide-react": "^0.553.0",
     "motion": "^12.23.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.3.8",
     "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^7.9.3"
+    "react-router-dom": "^7.9.3",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",

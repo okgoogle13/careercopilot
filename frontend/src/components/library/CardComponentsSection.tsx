@@ -3,8 +3,8 @@ import { Box } from '@mui/material';
 import { Button, IconButton, Typography, Box } from '@mui/material';
 import React, { useState } from 'react';
 
-import { ErrorCard, ErrorProfileCard } from '../features/common/ErrorCard';
-import { LoadingProfileCard } from '../features/common/LoadingCard';
+import { ErrorCard, ErrorProfileCard } from '../common/ErrorCard';
+import { LoadingProfileCard } from '../common/LoadingCard';
 import { Badge } from '../ui/badge';
 import {
   Card,
