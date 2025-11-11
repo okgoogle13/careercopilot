@@ -73,91 +73,33 @@ const resumeSchema = z.object({
 
 type ResumeData = z.infer<typeof resumeSchema>;
 
-// Helper function to extract text from file
-async function extractTextFromFile(bucket: any, filePath: string): Promise<string> {
-  const file = bucket.file(filePath);
+async function extractAndStructureData(bucket: any, name: string, userId: string, fileId: string): Promise<ResumeData> {
+  // Download the file from Storage and extract its raw text.
+  const file = bucket.file(name);
   const [fileContent] = await file.download();
-  // For PDFs, you might want to use a library like pdf-parse
-  // For simplicity, we'll assume it's a text file for now
-  return fileContent.toString('utf-8');
-}
+  const rawText = fileContent.toString('utf-8');
 
-// AI processing function
-async function structureResumeWithAI(rawText: string): Promise<ResumeData> {
+  // Defines a detailed prompt for the Gemini API
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-  
   const prompt = `
   You are an expert resume parser. Extract the following information from the resume and return it as a JSON object.
-  
-  Required fields:
-  - personalInfo: Object containing name, email, phone, location, summary, linkedin, portfolio
-  - workExperience: Array of work experiences with jobTitle, company, location, startDate, endDate, responsibilities, achievements, skillsUsed
-  - education: Array of education entries with institution, degree, fieldOfStudy, startDate, endDate, gpa, achievements
-  - skills: Object with technical, soft, and languages arrays
-  - projects: Array of projects with name, description, technologies, url, startDate, endDate
-  - certifications: (Optional) Array of certifications with name, issuer, dateEarned, expirationDate, credentialId, credentialUrl
-  
-  Example output format:
-  {
-    "personalInfo": {
-      "name": "John Doe",
-      "email": "john.doe@example.com",
-      "phone": "+1234567890",
-      "location": "San Francisco, CA",
-      "summary": "Experienced software engineer...",
-      "linkedin": "https://linkedin.com/in/johndoe",
-      "portfolio": "https://johndoe.com"
-    },
-    "workExperience": [{
-      "jobTitle": "Senior Software Engineer",
-      "company": "Tech Corp",
-      "location": "San Francisco, CA",
-      "startDate": "2020-01",
-      "endDate": "Present",
-      "responsibilities": ["Developed features...", "Maintained codebase..."],
-      "achievements": ["Improved performance by 50%"],
-      "skillsUsed": ["JavaScript", "React", "Node.js"]
-    }],
-    "education": [{
-      "institution": "Stanford University",
-      "degree": "B.S. Computer Science",
-      "fieldOfStudy": "Artificial Intelligence",
-      "startDate": "2016-09",
-      "endDate": "2020-06",
-      "gpa": "3.8/4.0"
-    }],
-    "skills": {
-      "technical": ["JavaScript", "TypeScript", "React", "Node.js"],
-      "soft": ["Teamwork", "Communication"],
-      "languages": ["English (Fluent)", "Spanish (Intermediate)"]
-    },
-    "projects": [{
-      "name": "Portfolio Website",
-      "description": "A personal portfolio website built with React and Node.js",
-      "technologies": ["React", "Node.js", "MongoDB"],
-      "url": "https://johndoe.com"
-    }]
-  }
-  
+  The JSON object must match the following Zod schema:
+  ${JSON.stringify(resumeSchema.shape, null, 2)}
+
   Here's the resume text to parse:
   ${rawText}
   `;
 
-  try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    
-    // Extract JSON from the response (in case the model adds markdown code blocks)
-    const jsonMatch = text.match(/```(?:json)?\n([\s\S]*?)\n```/) || [null, text];
-    const jsonString = jsonMatch[1] || text;
-    
-    const parsedData = JSON.parse(jsonString);
-    return resumeSchema.parse(parsedData);
-  } catch (error) {
-    console.error('Error processing resume with AI:', error);
-    throw new Error(`Failed to process resume with AI: ${error instanceof Error ? error.message : String(error)}`);
-  }
+  // Calls the Gemini API with the raw text and the prompt.
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = response.text();
+  
+  // Parses the Gemini API's JSON response.
+  const jsonMatch = text.match(/```(?:json)?\n([\s\S]*?)\n```/) || [null, text];
+  const jsonString = jsonMatch[1] || text;
+  
+  return JSON.parse(jsonString);
 }
 
 // Main Cloud Function
@@ -172,7 +114,7 @@ export const processUploadedResume = functions.storage.object().onFinalize(async
     return null;
   }
 
-  // Extract userId and fileId from path (format: uploads/{userId}/{fileId}.{ext})
+  // Extract userId and fileId from path
   const pathParts = filePath.split('/');
   if (pathParts.length < 3) {
     console.error('Invalid file path format:', filePath);
@@ -184,40 +126,39 @@ export const processUploadedResume = functions.storage.object().onFinalize(async
   const docRef = db.collection('ingestedResumes').doc(fileId);
 
   try {
-    // Update status to processing
-    await docRef.set({
-      status: 'processing',
-      userId,
-      originalPath: filePath,
-      startedAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    const structuredData = await extractAndStructureData(bucket, filePath, userId, fileId);
 
-    // Extract text from file
-    const rawText = await extractTextFromFile(bucket, filePath);
-    
-    // Process with AI
-    const resumeData = await structureResumeWithAI(rawText);
+    const validationResult = resumeSchema.safeParse(structuredData);
 
-    // Save the structured data to Firestore
-    await docRef.update({
-      status: 'pending_review',
-      processedAt: admin.firestore.FieldValue.serverTimestamp(),
-      resumeData,
-      rawText,
-    });
+    if (!validationResult.success) {
+      await docRef.set({
+        status: 'failed',
+        error: validationResult.error.flatten(),
+        userId,
+        originalPath: filePath,
+        failedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    } else {
+      await docRef.set({
+        status: 'pending_review',
+        resumeData: validationResult.data,
+        userId,
+        originalPath: filePath,
+        processedAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+    }
 
     console.log(`Successfully processed resume ${fileId} for user ${userId}`);
     return null;
   } catch (error) {
     console.error(`Error processing resume ${fileId}:`, error);
     
-    // Save error details to Firestore
-    await docRef.update({
+    await docRef.set({
       status: 'failed',
       error: error instanceof Error ? error.message : 'Unknown error',
       errorDetails: JSON.stringify(error, Object.getOwnPropertyNames(error)),
       failedAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    }, { merge: true });
     
     return null;
   }
