@@ -23,6 +23,11 @@ service-account-*.json
 *_key.json
 *-key.json
 firebase-adminsdk-*.json
+firebase-prod-key.json
+firebase-staging-key.json
+
+# Duplicate careercopilot directory (to be deleted)
+/careercopilot/
 
 # Build outputs
 dist/
