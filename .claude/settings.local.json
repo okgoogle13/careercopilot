@@ -144,7 +144,8 @@
       "Bash(source:*)",
       "Bash(pip-audit:*)",
       "Bash(while read f)",
-      "Bash(do echo \"=== $f ===\" head -20 \"$f\" done)"
+      "Bash(do echo \"=== $f ===\" head -20 \"$f\" done)",
+      "Bash(node_modules/.bin/tsc:*)"
     ]
   }
 }
