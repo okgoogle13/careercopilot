@@ -137,7 +137,10 @@
       "Bash(do echo '=== $file ===')",
       "Bash(while read file)",
       "Bash(do basename \"$file\")",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(yarn lint:ci:*)",
+      "Bash(yarn build:*)",
+      "Bash(npx depcheck:*)"
     ]
   }
 }
