@@ -26,6 +26,7 @@ from app.genkit_flows.smart_ingestion import (
     contextTaggerFlow,
     kscExtractorFlow,
     resumeExtractorFlow,
+    skillsExtractorFlow,
     voiceProfileExtractorFlow,
 )
 from app.models.asset_library_schema import AssetDocument, AssetMetadata, ContextTags
@@ -379,6 +380,41 @@ async def extract_and_save(
                 confirmedTags=confirmed_tags_dict,
                 user_id=user_id,
             )
+
+            # Run supplemental skills extraction for deeper skill analysis
+            logger.info(f"Running supplemental Skills Extractor flow for user {user_id}")
+            try:
+                skills_result = await skillsExtractorFlow.run(
+                    resumeText=document_text,
+                    confirmedTags=confirmed_tags_dict,
+                    user_id=user_id,
+                )
+                # Merge extracted skills with the profile's skills
+                if skills_result.technical:
+                    master_profile.skills.technical.extend(skills_result.technical)
+                if skills_result.tools:
+                    master_profile.skills.tools.extend(skills_result.tools)
+                if skills_result.soft:
+                    master_profile.skills.soft.extend(skills_result.soft)
+                if skills_result.methodologies:
+                    master_profile.skills.methodologies.extend(skills_result.methodologies)
+
+                # Deduplicate skills (case-insensitive)
+                master_profile.skills.technical = list(set(s.strip() for s in master_profile.skills.technical if s.strip()))
+                master_profile.skills.tools = list(set(s.strip() for s in master_profile.skills.tools if s.strip()))
+                master_profile.skills.soft = list(set(s.strip() for s in master_profile.skills.soft if s.strip()))
+                master_profile.skills.methodologies = list(set(s.strip() for s in master_profile.skills.methodologies if s.strip()))
+
+                logger.info(
+                    f"Skills enriched: {len(master_profile.skills.technical)} technical, "
+                    f"{len(master_profile.skills.tools)} tools, "
+                    f"{len(master_profile.skills.soft)} soft skills, "
+                    f"{len(master_profile.skills.methodologies)} methodologies"
+                )
+            except Exception as e:
+                # Log but don't fail the entire ingestion if skills extraction fails
+                logger.warning(f"Skills extraction failed (non-critical): {str(e)}")
+
             extracted_data = master_profile.model_dump(mode="json")
 
         elif document_type == "ksc":
