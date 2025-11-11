@@ -23,8 +23,8 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-import { workflowService } from '../services/workflowService';
-import type { ApplicationPackage } from '../services/workflowService';
+import { workflowService } from '@/api/workflowService';
+import type { ApplicationPackage } from '@/api/workflowService';
 import { ApiResponse, isApiError } from '../types/api';
 
 interface ApplicationGeneratorModalProps {

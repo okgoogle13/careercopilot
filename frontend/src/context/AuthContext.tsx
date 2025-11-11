@@ -17,7 +17,7 @@ import {
   refreshToken, 
   getCurrentUserProfile,
   getCurrentUser
-} from '../services/authService';
+} from '@/api/authService';
 import { ApiResponse } from '../types/api';
 
 interface AuthContextType {

@@ -1,48 +1,34 @@
-import { Typography, Chip, CssBaseline } from '@mui/material';
-import { ThemeProvider, Box } from '@mui/material';
-import { useState, Suspense, lazy } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import theme from './theme/theme';
+import { lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-// Advanced Sidebar System imports
-import { Button } from './components/ui/button';
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarTrigger,
-  SidebarInset,
-} from './components/ui/sidebar';
+// New App Shell and Components
+import { AppShell } from './components/layout/AppShell';
+import { WelcomeBanner } from './components/dashboard/WelcomeBanner';
 
-// Lazy-loaded components for better performance - Updated paths after restructuring
+// Lazy-loaded components for better performance
 const Dashboard = lazy(() =>
   import('./components/features/dashboard/Dashboard').then((module) => ({
     default: module.Dashboard,
   }))
 );
 const ResumeBuilder = lazy(() =>
-  import('./components/features/Documents/ResumeBuilder').then((module) => ({
-    default: module.ResumeBuilder,
+  import('./components/features/documents/ResumeBuilder').then((module) => ({
+    default: module.default,
   }))
 );
 const ATSAnalysisDashboard = lazy(() =>
-  import('./components/features/Analysis/ATSAnalysisDashboard').then((module) => ({
-    default: module.ATSAnalysisDashboard,
+  import('./components/features/analysis/ATSAnalysisDashboard').then((module) => ({
+    default: module.default || module.ATSAnalysisDashboard,
   }))
 );
 const TemplateSelector = lazy(() =>
-  import('./components/features/Documents/TemplateSelector').then((module) => ({
-    default: module.TemplateSelector,
+  import('./components/features/documents/TemplateSelector').then((module) => ({
+    default: module.default || module.TemplateSelector,
   }))
 );
 const DocumentPreview = lazy(() =>
-  import('./components/features/Documents/DocumentPreview').then((module) => ({
-    default: module.DocumentPreview,
+  import('./components/features/documents/DocumentPreview').then((module) => ({
+    default: module.default || module.DocumentPreview,
   }))
 );
 const LoadingStates = lazy(() =>
@@ -813,11 +799,31 @@ function AppContent() {
   );
 }
 
+// Placeholder Dashboard Page component
+const DashboardPage = () => {
+  return (
+    <div style={{ padding: '24px' }}>
+      <WelcomeBanner />
+      {/* Other dashboard components will go here */}
+    </div>
+  );
+};
+
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppContent />
-    </ThemeProvider>
+    <BrowserRouter>
+      <AppShell>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="/documents" element={<div>Documents Page</div>} />
+            <Route path="/opportunities" element={<div>Opportunities Page</div>} />
+            <Route path="/applications" element={<div>Applications Page</div>} />
+            <Route path="/analysis" element={<div>Analysis Page</div>} />
+            {/* Add other routes as needed */}
+          </Routes>
+        </Suspense>
+      </AppShell>
+    </BrowserRouter>
   );
 }
