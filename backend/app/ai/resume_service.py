@@ -193,7 +193,7 @@ class ResumeAnalysisService(BaseAIService):
         )
 
     async def extract_skills(self, resume_text: str) -> List[str]:
-        """Extract skills from resume text.
+        """Extract skills from resume text using AI.
 
         Args:
             resume_text: The text content of the resume
@@ -205,9 +205,40 @@ class ResumeAnalysisService(BaseAIService):
             return []
 
         try:
-            # TODO(#88): Implement skill extraction using Genkit
-            # This is a placeholder implementation
-            return ["Python", "Machine Learning", "Data Analysis"]
+            # Sanitize input
+            clean_text = self._sanitize_resume_text(resume_text)
+
+            # Create a prompt for skill extraction
+            skill_extraction_prompt = f"""Analyze the following resume and extract ONLY the skills mentioned.
+
+Resume:
+{clean_text}
+
+Return the skills as a JSON object with this format:
+{{"skills": ["skill1", "skill2", "skill3", ...]}}
+
+Include all technical skills, tools, frameworks, methodologies, soft skills, and certifications mentioned."""
+
+            # Use AI client to extract skills
+            from app.core.document_processing import process_document
+
+            # Define a simple response model for skill extraction
+            class SkillExtractionResult(BaseModel):
+                skills: List[str] = Field(default_factory=list, description="List of extracted skills")
+
+            result = await process_document(
+                file_content=clean_text,
+                prompt_template=skill_extraction_prompt,
+                response_model=SkillExtractionResult,
+                processor_config=self.config,
+            )
+
+            # Deduplicate and clean up skills
+            unique_skills = list(set(skill.strip() for skill in result.skills if skill.strip()))
+
+            logger.info(f"Extracted {len(unique_skills)} unique skills from resume")
+            return sorted(unique_skills)
+
         except Exception as e:
             self.handle_error(e, "extract_skills")
             return []
