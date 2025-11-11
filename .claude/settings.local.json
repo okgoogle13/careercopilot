@@ -132,7 +132,12 @@
       "Bash(npm install:*)",
       "Bash(npm remove:*)",
       "Bash(yarn lint:*)",
-      "Bash(xargs du:*)"
+      "Bash(xargs du:*)",
+      "Bash(for file in dropdown-menu scroll-area skeleton)",
+      "Bash(do echo '=== $file ===')",
+      "Bash(while read file)",
+      "Bash(do basename \"$file\")",
+      "Bash(git mv:*)"
     ]
   }
 }
