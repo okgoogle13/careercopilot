@@ -57,7 +57,7 @@ const Auth = lazy(() =>
   import('./components/features/auth/Auth').then((module) => ({ default: module.Auth }))
 );
 const UploadResume = lazy(() =>
-  import('./components/features/Documents/UploadResume').then((module) => ({
+  import('./components/Documents/UploadResume').then((module) => ({
     default: module.UploadResume,
   }))
 );
@@ -67,7 +67,7 @@ const ProfileEditor = lazy(() =>
   }))
 );
 const DocumentTypeSelector = lazy(() =>
-  import('./components/features/Documents/DocumentTypeSelector').then((module) => ({
+  import('./components/Documents/DocumentTypeSelector').then((module) => ({
     default: module.DocumentTypeSelector,
   }))
 );
