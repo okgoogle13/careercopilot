@@ -30,8 +30,8 @@ import {
 } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
-import { notificationService } from '../services/notificationService';
-import type { Notification } from '../services/notificationService';
+import { notificationService } from '@/api/notificationService';
+import type { Notification } from '@/api/notificationService';
 import { isApiError } from '../types/api';
 
 export const NotificationCenter: React.FC = () => {

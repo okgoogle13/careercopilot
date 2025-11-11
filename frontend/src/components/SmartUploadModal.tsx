@@ -19,8 +19,8 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-import { smartIngestionService } from '../services/smartIngestionService';
-import type { ContextTags } from '../services/smartIngestionService';
+import { smartIngestionService } from '@/api/smartIngestionService';
+import type { ContextTags } from '@/api/smartIngestionService';
 import { isApiError } from '../types/api';
 
 interface SmartUploadModalProps {
