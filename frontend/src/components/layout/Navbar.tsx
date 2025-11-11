@@ -347,7 +347,7 @@ const Navbar: React.FC<NavbarProps> = ({
                 <Typography variant="body2" color="text.secondary">
                   You have {notificationCount} new notification{notificationCount > 1 ? 's' : ''}
                 </Typography>
-                {/* TODO: Render actual notifications list here */}
+                {/* TODO(#86): Render actual notifications list here */}
               </Box>
             ) : (
               <Box sx={{ p: 2, textAlign: 'center' }}>
