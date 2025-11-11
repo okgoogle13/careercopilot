@@ -131,7 +131,8 @@
       "Bash(yarn audit:*)",
       "Bash(npm install:*)",
       "Bash(npm remove:*)",
-      "Bash(yarn lint:*)"
+      "Bash(yarn lint:*)",
+      "Bash(xargs du:*)"
     ]
   }
 }
