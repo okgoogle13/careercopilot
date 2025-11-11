@@ -135,7 +135,7 @@ export const StyledCard = styled(Card)(({ theme, variant = 'elevation' }) => ({
 
 // Example usage in your component:
 /*
-import { StyledButton } from './features/common/StyledComponents';
+import { StyledButton } from '@/components/common/StyledComponents';
 
 <StyledButton 
   variant="contained" 
