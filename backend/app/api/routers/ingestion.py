@@ -421,7 +421,7 @@ async def extract_and_save(
             tags=request.confirmedTags,
             metadata=AssetMetadata(
                 fileName=filename,
-                fileType="application/pdf",  # TODO: Detect actual MIME type from file
+                fileType="application/pdf",  # TODO(#89): Detect actual MIME type from file
                 uploadDate=datetime.now(),
                 storageUri=permanent_uri,
                 fileSizeBytes=None,  # Could be retrieved from storage metadata

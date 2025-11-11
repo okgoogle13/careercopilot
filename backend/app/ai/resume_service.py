@@ -205,7 +205,7 @@ class ResumeAnalysisService(BaseAIService):
             return []
 
         try:
-            # TODO: Implement skill extraction using Genkit
+            # TODO(#88): Implement skill extraction using Genkit
             # This is a placeholder implementation
             return ["Python", "Machine Learning", "Data Analysis"]
         except Exception as e:
