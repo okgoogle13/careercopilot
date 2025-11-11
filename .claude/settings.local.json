@@ -140,7 +140,11 @@
       "Bash(git mv:*)",
       "Bash(yarn lint:ci:*)",
       "Bash(yarn build:*)",
-      "Bash(npx depcheck:*)"
+      "Bash(npx depcheck:*)",
+      "Bash(source:*)",
+      "Bash(pip-audit:*)",
+      "Bash(while read f)",
+      "Bash(do echo \"=== $f ===\" head -20 \"$f\" done)"
     ]
   }
 }
