@@ -37,8 +37,6 @@
     "test:rules": "firebase emulators:exec --only firestore \"jest tests/firestore.rules.test.js --forceExit\"",
     "clean": "cd frontend && yarn clean && cd ../functions && npm run clean",
     "start": "cd frontend && yarn preview",
-    "commit": "git-cz",
-    "commitlint": "commitlint --edit $1",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
@@ -50,11 +48,9 @@
     "@firebase/firestore": "^4.6.0",
     "@firebase/functions": "^0.13.0",
     "@firebase/storage": "^0.13.2",
-    "@playwright/test": "1.55.0",
+    "@playwright/test": "^1.56.1",
     "@types/node": "^24.5.2",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
-    "esbuild": "^0.18.20",
+    "esbuild": "^0.27.0",
     "eslint-config-prettier": "^9.1.0",
     "firebase": "^12.2.1",
     "firebase-admin": "^12.1.0",
@@ -69,11 +65,6 @@
     "ts-morph": "^27.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "keywords": [
     "career",
