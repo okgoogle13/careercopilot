@@ -12,7 +12,7 @@ const Dashboard = lazy(() =>
   }))
 );
 const ResumeBuilder = lazy(() =>
-  import('./components/features/documents/ResumeBuilder').then((module) => ({
+  import('./components/Documents/ResumeBuilder').then((module) => ({
     default: module.default,
   }))
 );
@@ -22,17 +22,17 @@ const ATSAnalysisDashboard = lazy(() =>
   }))
 );
 const TemplateSelector = lazy(() =>
-  import('./components/features/documents/TemplateSelector').then((module) => ({
+  import('./components/Documents/TemplateSelector').then((module) => ({
     default: module.default || module.TemplateSelector,
   }))
 );
 const DocumentPreview = lazy(() =>
-  import('./components/features/documents/DocumentPreview').then((module) => ({
+  import('./components/Documents/DocumentPreview').then((module) => ({
     default: module.default || module.DocumentPreview,
   }))
 );
 const LoadingStates = lazy(() =>
-  import('./components/features/common/LoadingStates').then((module) => ({
+  import('./components/common/LoadingStates').then((module) => ({
     default: module.LoadingStates,
   }))
 );
@@ -62,7 +62,7 @@ const UploadResume = lazy(() =>
   }))
 );
 const ProfileEditor = lazy(() =>
-  import('./components/features/profile/ProfileEditor').then((module) => ({
+  import('./components/profile/ProfileEditor').then((module) => ({
     default: module.ProfileEditor,
   }))
 );
