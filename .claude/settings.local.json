@@ -121,7 +121,17 @@
       "Bash(gcloud iam service-accounts create:*)",
       "Bash(github-actions-prod-sa@careercopilot-468811.iam.gserviceaccount.com)",
       "Bash(git push:*)",
-      "Bash(git -C /Applications/careercopilot status:*)"
+      "Bash(git -C /Applications/careercopilot status:*)",
+      "Bash(npm audit:*)",
+      "Bash(git -C /Applications/careercopilot check-ignore:*)",
+      "Bash(git -C /Applications/careercopilot log --all --full-history --pretty=format:\"%H %s\" -- \"*-key.json\" \"*service-account*.json\")",
+      "Bash(git -C /Applications/careercopilot ls-files)",
+      "Bash(find:*)",
+      "Bash(git checkout:*)",
+      "Bash(yarn audit:*)",
+      "Bash(npm install:*)",
+      "Bash(npm remove:*)",
+      "Bash(yarn lint:*)"
     ]
   }
 }
