@@ -67,7 +67,7 @@ def client(monkeypatch, mock_db, mock_get_current_user):
     from app.core.dependencies import get_current_user
     from app.main import app
 
-    # monkeypatch.setattr(db, "db", mock_db)  # TODO: Fix db import
+    # monkeypatch.setattr(db, "db", mock_db)  # TODO(#87): Fix db import
     app.dependency_overrides[get_current_user] = mock_get_current_user
 
     with TestClient(app) as tc:
