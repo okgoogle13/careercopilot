@@ -442,6 +442,117 @@ Return valid JSON matching the VoiceProfile schema.
 
 
 # ============================================================================
+# Flow 5: Skills Extractor
+# ============================================================================
+
+
+class SkillsExtractionResult(BaseModel):
+    """Result of skills extraction with categorized skills."""
+
+    technical: List[str] = Field(default_factory=list, description="Technical skills")
+    tools: List[str] = Field(default_factory=list, description="Software and tools")
+    soft: List[str] = Field(default_factory=list, description="Soft/interpersonal skills")
+    methodologies: List[str] = Field(default_factory=list, description="Methodologies and frameworks")
+
+
+@genkit_flow(output_schema=SkillsExtractionResult, require_model=True)
+async def skillsExtractorFlow(
+    resumeText: str, confirmedTags: dict, user_id: str = "anonymous"
+) -> SkillsExtractionResult:
+    """
+    Extract and categorize skills from a resume or document.
+
+    This flow performs deep skill extraction and categorization, identifying:
+    - Technical skills (domain-specific expertise)
+    - Tools (software, platforms, applications)
+    - Soft skills (interpersonal and professional)
+    - Methodologies (frameworks, processes, approaches)
+
+    Args:
+        resumeText: The full text content of the resume
+        confirmedTags: User-confirmed tags for context
+        user_id: Firebase UID of the user
+
+    Returns:
+        SkillsExtractionResult with categorized skills
+
+    Example:
+        Input: Resume for a software engineer
+        Output: {
+            "technical": ["Full-stack development", "System design", "REST APIs"],
+            "tools": ["Python", "React", "PostgreSQL", "Docker"],
+            "soft": ["Team leadership", "Communication", "Problem-solving"],
+            "methodologies": ["Agile", "CI/CD", "Test-driven development"]
+        }
+    """
+    logger.info(f"Starting comprehensive skills extraction for user {user_id}")
+
+    role_type = confirmedTags.get("roleType", "Professional")
+    subsectors = confirmedTags.get("subsectors", [])
+
+    prompt = f"""You are an expert career skills analyst. Extract and categorize ALL skills mentioned in this resume.
+
+**Context:**
+- Target Role: {role_type}
+- Industry Subsectors: {', '.join(subsectors) if subsectors else 'General'}
+
+**Resume Content:**
+{resumeText}
+
+**Extraction Instructions:**
+
+1. **Technical Skills** - Domain-specific expertise and specialized knowledge
+   - Examples for software engineer: "Full-stack development", "Microservices architecture", "API design"
+   - Examples for social worker: "Case management", "Crisis intervention", "Community development"
+   - Be specific to the domain and role
+
+2. **Tools** - Software, platforms, programming languages, frameworks, and applications
+   - Examples: "Python", "React", "AWS", "Salesforce", "Microsoft Excel", "JIRA", "Docker"
+   - Include programming languages, frameworks, platforms, and software tools
+   - Only include tools that are explicitly or implicitly mentioned
+
+3. **Soft Skills** - Interpersonal, communication, and professional development skills
+   - Examples: "Leadership", "Communication", "Problem-solving", "Team collaboration", "Empathy", "Negotiation"
+   - Focus on human-centered and professional competencies
+
+4. **Methodologies** - Frameworks, processes, approaches, and best practices
+   - Examples: "Agile", "Scrum", "Lean", "Design thinking", "STAR methodology", "Project management"
+   - Include approaches, frameworks, and systematic processes mentioned
+
+**Requirements:**
+- Extract EVERY skill mentioned, including implicit skills demonstrated through responsibilities
+- Avoid duplicates - consolidate similar skills under one name
+- Be comprehensive but avoid being overly granular
+- Sort by frequency/importance (most mentioned or most prominent first)
+- Return valid JSON matching the SkillsExtractionResult schema
+
+**Output Format:**
+{{
+    "technical": ["skill1", "skill2", ...],
+    "tools": ["tool1", "tool2", ...],
+    "soft": ["skill1", "skill2", ...],
+    "methodologies": ["method1", "method2", ...]
+}}
+"""
+
+    skills_result = await _generate_with_model(
+        prompt=prompt,
+        output_schema=SkillsExtractionResult,
+        operation_name="skills_extraction",
+        user_id=user_id,
+    )
+
+    logger.info(
+        f"Skills extraction completed: {len(skills_result.technical)} technical, "
+        f"{len(skills_result.tools)} tools, "
+        f"{len(skills_result.soft)} soft skills, "
+        f"{len(skills_result.methodologies)} methodologies"
+    )
+
+    return skills_result
+
+
+# ============================================================================
 # Flow Registration (automatic via decorators)
 # ============================================================================
 
