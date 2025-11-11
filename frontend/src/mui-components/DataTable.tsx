@@ -206,6 +206,7 @@ const DataTable = <T extends Record<string, any>>({
       const newCell = rows[newRowIndex]?.querySelectorAll('td, th')[newColIndex] as HTMLElement;
       newCell?.focus();
     }
+  };
 
   // Use controlled props if provided, otherwise use local state
   const page = controlledPage ?? uncontrolledPage;
