@@ -1,3 +1,2184 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="0" failures="0" errors="0" time="5.151">
+<testsuites name="jest tests" tests="218" failures="42" errors="0" time="41.481">
+  <testsuite name="LoadingSpinner" errors="0" failures="1" skipped="0" timestamp="2025-11-12T08:50:06" time="33.388" tests="11">
+    <testcase classname="LoadingSpinner renders CircularProgress with default size 40" name="LoadingSpinner renders CircularProgress with default size 40" time="0.195">
+    </testcase>
+    <testcase classname="LoadingSpinner renders CircularProgress with custom size" name="LoadingSpinner renders CircularProgress with custom size" time="0.022">
+    </testcase>
+    <testcase classname="LoadingSpinner applies primary color variant" name="LoadingSpinner applies primary color variant" time="0.02">
+    </testcase>
+    <testcase classname="LoadingSpinner applies secondary color variant" name="LoadingSpinner applies secondary color variant" time="0.008">
+    </testcase>
+    <testcase classname="LoadingSpinner applies success color variant" name="LoadingSpinner applies success color variant" time="0.007">
+    </testcase>
+    <testcase classname="LoadingSpinner applies error color variant" name="LoadingSpinner applies error color variant" time="0.006">
+    </testcase>
+    <testcase classname="LoadingSpinner applies inherit color variant" name="LoadingSpinner applies inherit color variant" time="0.005">
+    </testcase>
+    <testcase classname="LoadingSpinner displays message when provided" name="LoadingSpinner displays message when provided" time="0.015">
+    </testcase>
+    <testcase classname="LoadingSpinner does not display message when not provided" name="LoadingSpinner does not display message when not provided" time="0.012">
+      <failure>Error: expect(element).not.toBeInTheDocument()
+
+expected document not to contain element, found &lt;span class=&quot;MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root&quot; role=&quot;progressbar&quot; style=&quot;width: 40px; height: 40px;&quot;&gt;&lt;svg class=&quot;MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg&quot; viewBox=&quot;22 22 44 44&quot;&gt;&lt;circle class=&quot;MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle&quot; cx=&quot;44&quot; cy=&quot;44&quot; fill=&quot;none&quot; r=&quot;20.2&quot; stroke-width=&quot;3.6&quot; /&gt;&lt;/svg&gt;&lt;/span&gt; instead
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/loading/__tests__/LoadingSpinner.test.tsx:75:28)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="LoadingSpinner applies custom sx styles" name="LoadingSpinner applies custom sx styles" time="0.018">
+    </testcase>
+    <testcase classname="LoadingSpinner centers content using flexbox" name="LoadingSpinner centers content using flexbox" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="LoadingSkeleton" errors="0" failures="1" skipped="0" timestamp="2025-11-12T08:50:06" time="33.504" tests="28">
+    <testcase classname="LoadingSkeleton renders single Skeleton by default when count is not provided" name="LoadingSkeleton renders single Skeleton by default when count is not provided" time="0.114">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders single Skeleton when count=1 is explicitly set" name="LoadingSkeleton renders single Skeleton when count=1 is explicitly set" time="0.01">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders multiple Skeletons when count &gt; 1" name="LoadingSkeleton renders multiple Skeletons when count &gt; 1" time="0.023">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders correct number of Skeletons with count=3" name="LoadingSkeleton renders correct number of Skeletons with count=3" time="0.007">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies text variant to Skeleton when variant=&quot;text&quot;" name="LoadingSkeleton applies text variant to Skeleton when variant=&quot;text&quot;" time="0.006">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies rectangular variant to Skeleton" name="LoadingSkeleton applies rectangular variant to Skeleton" time="0.006">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies circular variant to Skeleton" name="LoadingSkeleton applies circular variant to Skeleton" time="0.007">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies rounded variant to Skeleton" name="LoadingSkeleton applies rounded variant to Skeleton" time="0.008">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies pulse animation when animation=&quot;pulse&quot;" name="LoadingSkeleton applies pulse animation when animation=&quot;pulse&quot;" time="0.005">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies wave animation when animation=&quot;wave&quot;" name="LoadingSkeleton applies wave animation when animation=&quot;wave&quot;" time="0.008">
+    </testcase>
+    <testcase classname="LoadingSkeleton disables animation when animation=false" name="LoadingSkeleton disables animation when animation=false" time="0.005">
+    </testcase>
+    <testcase classname="LoadingSkeleton uses custom wrapper component when wrapper prop is provided" name="LoadingSkeleton uses custom wrapper component when wrapper prop is provided" time="0.008">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders Skeletons inside custom wrapper component" name="LoadingSkeleton renders Skeletons inside custom wrapper component" time="0.007">
+    </testcase>
+    <testcase classname="LoadingSkeleton uses Box as default wrapper component" name="LoadingSkeleton uses Box as default wrapper component" time="0.004">
+    </testcase>
+    <testcase classname="LoadingSkeleton passes wrapperProps to wrapper component" name="LoadingSkeleton passes wrapperProps to wrapper component" time="0.072">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies custom className from wrapperProps" name="LoadingSkeleton applies custom className from wrapperProps" time="0.005">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies custom sx prop to Skeleton elements" name="LoadingSkeleton applies custom sx prop to Skeleton elements" time="0.011">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies custom height to Skeleton" name="LoadingSkeleton applies custom height to Skeleton" time="0.012">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies background color to Skeleton from sx prop" name="LoadingSkeleton applies background color to Skeleton from sx prop" time="0.011">
+    </testcase>
+    <testcase classname="LoadingSkeleton combines custom sx with default bgcolor" name="LoadingSkeleton combines custom sx with default bgcolor" time="0.008">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies text variant with transform none styling" name="LoadingSkeleton applies text variant with transform none styling" time="0.005">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders multiple Skeletons with custom wrapper and wrapperProps" name="LoadingSkeleton renders multiple Skeletons with custom wrapper and wrapperProps" time="0.006">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders Skeletons with rectangular variant and wave animation" name="LoadingSkeleton renders Skeletons with rectangular variant and wave animation" time="0.014">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders with all props combined" name="LoadingSkeleton renders with all props combined" time="0.009">
+      <failure>Error: expect(element).toHaveClass(&quot;skeleton-container&quot;)
+
+Expected the element to have class:
+  skeleton-container
+Received:
+
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/loading/__tests__/LoadingSkeleton.test.tsx:219:21)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="LoadingSkeleton renders with zero count (edge case)" name="LoadingSkeleton renders with zero count (edge case)" time="0.002">
+    </testcase>
+    <testcase classname="LoadingSkeleton renders with large count value" name="LoadingSkeleton renders with large count value" time="0.007">
+    </testcase>
+    <testcase classname="LoadingSkeleton passes through standard Skeleton props" name="LoadingSkeleton passes through standard Skeleton props" time="0.012">
+    </testcase>
+    <testcase classname="LoadingSkeleton applies custom wrapper with data-testid for testing" name="LoadingSkeleton applies custom wrapper with data-testid for testing" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="ToastContext" errors="0" failures="1" skipped="0" timestamp="2025-11-12T08:50:06" time="33.863" tests="12">
+    <testcase classname="ToastContext useToast hook throws error when used outside ToastProvider" name="ToastContext useToast hook throws error when used outside ToastProvider" time="0.246">
+      <failure>Error: useToast must be used within a ToastProvider
+    at useToast (/Applications/careercopilot/frontend/src/components/ui/feedback/ToastContext.tsx:131:11)
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/ToastContext.test.tsx:18:51
+    at TestComponent (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:331:27)
+    at renderWithHooks (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:15486:18)
+    at mountIndeterminateComponent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:20103:13)
+    at beginWork (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:21626:16)
+    at beginWork$1 (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:27465:14)
+    at performUnitOfWork (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26599:12)
+    at workLoopSync (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26505:5)
+    at renderRootSync (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26473:7)
+    at recoverFromConcurrentError (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25889:20)
+    at performConcurrentWorkOnRoot (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:25789:22)
+    at flushActQueue (/Applications/careercopilot/frontend/node_modules/react/cjs/react.development.js:2667:24)
+    at act (/Applications/careercopilot/frontend/node_modules/react/cjs/react.development.js:2582:11)
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25
+    at renderRoot (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:190:26)
+    at render (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:292:10)
+    at renderHook (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:340:7)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/ToastContext.test.tsx:18:36)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="ToastContext useToast hook showToast displays toast with message" name="ToastContext useToast hook showToast displays toast with message" time="0.164">
+    </testcase>
+    <testcase classname="ToastContext useToast hook showSuccess displays success severity toast" name="ToastContext useToast hook showSuccess displays success severity toast" time="0.053">
+    </testcase>
+    <testcase classname="ToastContext useToast hook showError displays error severity toast" name="ToastContext useToast hook showError displays error severity toast" time="0.048">
+    </testcase>
+    <testcase classname="ToastContext useToast hook showWarning displays warning severity toast" name="ToastContext useToast hook showWarning displays warning severity toast" time="0.052">
+    </testcase>
+    <testcase classname="ToastContext useToast hook showInfo displays info severity toast" name="ToastContext useToast hook showInfo displays info severity toast" time="0.051">
+    </testcase>
+    <testcase classname="ToastContext useToast hook toast auto-closes after duration" name="ToastContext useToast hook toast auto-closes after duration" time="0.032">
+    </testcase>
+    <testcase classname="ToastContext useToast hook multiple toasts can be displayed simultaneously" name="ToastContext useToast hook multiple toasts can be displayed simultaneously" time="0.09">
+    </testcase>
+    <testcase classname="ToastContext useToast hook toast closes when onClose is called" name="ToastContext useToast hook toast closes when onClose is called" time="0.022">
+    </testcase>
+    <testcase classname="ToastContext useToast hook toast respects custom anchorOrigin option" name="ToastContext useToast hook toast respects custom anchorOrigin option" time="0.03">
+    </testcase>
+    <testcase classname="ToastContext ToastProvider component renders children correctly" name="ToastContext ToastProvider component renders children correctly" time="0.006">
+    </testcase>
+    <testcase classname="ToastContext ToastProvider component provides correct context value with all methods" name="ToastContext ToastProvider component provides correct context value with all methods" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="FullPageLoading" errors="0" failures="5" skipped="0" timestamp="2025-11-12T08:50:06" time="33.793" tests="23">
+    <testcase classname="FullPageLoading Visibility renders when open=true" name="FullPageLoading Visibility renders when open=true" time="0.126">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/loading/__tests__/FullPageLoading.test.tsx:18:26)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="FullPageLoading Visibility does not render when open=false" name="FullPageLoading Visibility does not render when open=false" time="0.005">
+    </testcase>
+    <testcase classname="FullPageLoading Backdrop Rendering renders with Backdrop by default (withBackdrop=true)" name="FullPageLoading Backdrop Rendering renders with Backdrop by default (withBackdrop=true)" time="0.019">
+    </testcase>
+    <testcase classname="FullPageLoading Backdrop Rendering does not render Backdrop when withBackdrop=false" name="FullPageLoading Backdrop Rendering does not render Backdrop when withBackdrop=false" time="0.012">
+    </testcase>
+    <testcase classname="FullPageLoading Backdrop Rendering renders with default Backdrop when withBackdrop prop not specified" name="FullPageLoading Backdrop Rendering renders with default Backdrop when withBackdrop prop not specified" time="0.012">
+    </testcase>
+    <testcase classname="FullPageLoading Spinner Props passes size prop to LoadingSpinner" name="FullPageLoading Spinner Props passes size prop to LoadingSpinner" time="0.111">
+      <failure>TestingLibraryElementError: Unable to find an accessible element with the role &quot;progressbar&quot;
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+      class=&quot;MuiBackdrop-root css-qk7mw-MuiBackdrop-root&quot;
+      style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-qu4anz&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-x6epf7&quot;
+        &gt;
+          &lt;span
+            class=&quot;MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root&quot;
+            role=&quot;progressbar&quot;
+            style=&quot;width: 60px; height: 60px;&quot;
+          &gt;
+            &lt;svg
+              class=&quot;MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg&quot;
+              viewBox=&quot;22 22 44 44&quot;
+            &gt;
+              &lt;circle
+                class=&quot;MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle&quot;
+                cx=&quot;44&quot;
+                cy=&quot;44&quot;
+                fill=&quot;none&quot;
+                r=&quot;20.2&quot;
+                stroke-width=&quot;3.6&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/loading/__tests__/FullPageLoading.test.tsx:62:39)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="FullPageLoading Spinner Props passes color prop to LoadingSpinner" name="FullPageLoading Spinner Props passes color prop to LoadingSpinner" time="0.014">
+    </testcase>
+    <testcase classname="FullPageLoading Spinner Props passes message prop to LoadingSpinner" name="FullPageLoading Spinner Props passes message prop to LoadingSpinner" time="0.015">
+    </testcase>
+    <testcase classname="FullPageLoading Spinner Props renders with multiple spinner props combined" name="FullPageLoading Spinner Props renders with multiple spinner props combined" time="0.041">
+      <failure>TestingLibraryElementError: Unable to find an accessible element with the role &quot;progressbar&quot;
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+      class=&quot;MuiBackdrop-root css-qk7mw-MuiBackdrop-root&quot;
+      style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-qu4anz&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-x6epf7&quot;
+        &gt;
+          &lt;span
+            class=&quot;MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorSuccess css-15u8j6q-MuiCircularProgress-root&quot;
+            role=&quot;progressbar&quot;
+            style=&quot;width: 50px; height: 50px;&quot;
+          &gt;
+            &lt;svg
+              class=&quot;MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg&quot;
+              viewBox=&quot;22 22 44 44&quot;
+            &gt;
+              &lt;circle
+                class=&quot;MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle&quot;
+                cx=&quot;44&quot;
+                cy=&quot;44&quot;
+                fill=&quot;none&quot;
+                r=&quot;20.2&quot;
+                stroke-width=&quot;3.6&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;div
+            class=&quot;MuiBox-root css-zycen2&quot;
+          &gt;
+            &lt;span&gt;
+              Processing application...
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/loading/__tests__/FullPageLoading.test.tsx:94:39)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="FullPageLoading Container Styling applies fixed positioning to container" name="FullPageLoading Container Styling applies fixed positioning to container" time="0.039">
+    </testcase>
+    <testcase classname="FullPageLoading Container Styling centers content with flexbox" name="FullPageLoading Container Styling centers content with flexbox" time="0.012">
+    </testcase>
+    <testcase classname="FullPageLoading Container Styling applies custom sx to container" name="FullPageLoading Container Styling applies custom sx to container" time="0.01">
+    </testcase>
+    <testcase classname="FullPageLoading Container Styling merges custom sx with default fixed positioning" name="FullPageLoading Container Styling merges custom sx with default fixed positioning" time="0.018">
+    </testcase>
+    <testcase classname="FullPageLoading Backdrop Styling applies default Backdrop styles when withBackdrop=true" name="FullPageLoading Backdrop Styling applies default Backdrop styles when withBackdrop=true" time="0.011">
+    </testcase>
+    <testcase classname="FullPageLoading Backdrop Styling applies custom backdropSx to Backdrop" name="FullPageLoading Backdrop Styling applies custom backdropSx to Backdrop" time="0.016">
+    </testcase>
+    <testcase classname="FullPageLoading Backdrop Styling ignores backdropSx when withBackdrop=false" name="FullPageLoading Backdrop Styling ignores backdropSx when withBackdrop=false" time="0.006">
+    </testcase>
+    <testcase classname="FullPageLoading Backdrop Styling Backdrop has higher zIndex than content" name="FullPageLoading Backdrop Styling Backdrop has higher zIndex than content" time="0.01">
+    </testcase>
+    <testcase classname="FullPageLoading Portal Rendering renders LoadingSpinner inside Backdrop when withBackdrop=true" name="FullPageLoading Portal Rendering renders LoadingSpinner inside Backdrop when withBackdrop=true" time="0.014">
+    </testcase>
+    <testcase classname="FullPageLoading Portal Rendering renders LoadingSpinner as standalone when withBackdrop=false" name="FullPageLoading Portal Rendering renders LoadingSpinner as standalone when withBackdrop=false" time="0.008">
+    </testcase>
+    <testcase classname="FullPageLoading Integration Tests renders complete full page loading with all props" name="FullPageLoading Integration Tests renders complete full page loading with all props" time="0.112">
+      <failure>TestingLibraryElementError: Unable to find an accessible element with the role &quot;progressbar&quot;
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+      class=&quot;MuiBackdrop-root css-1bcy4ll-MuiBackdrop-root&quot;
+      style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-vjegva&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-x6epf7&quot;
+        &gt;
+          &lt;span
+            class=&quot;MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorPrimary css-18lrjg1-MuiCircularProgress-root&quot;
+            role=&quot;progressbar&quot;
+            style=&quot;width: 48px; height: 48px;&quot;
+          &gt;
+            &lt;svg
+              class=&quot;MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg&quot;
+              viewBox=&quot;22 22 44 44&quot;
+            &gt;
+              &lt;circle
+                class=&quot;MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle&quot;
+                cx=&quot;44&quot;
+                cy=&quot;44&quot;
+                fill=&quot;none&quot;
+                r=&quot;20.2&quot;
+                stroke-width=&quot;3.6&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;div
+            class=&quot;MuiBox-root css-zycen2&quot;
+          &gt;
+            &lt;span&gt;
+              Generating your resume...
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/loading/__tests__/FullPageLoading.test.tsx:249:39)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="FullPageLoading Integration Tests toggles visibility by changing open prop" name="FullPageLoading Integration Tests toggles visibility by changing open prop" time="0.013">
+    </testcase>
+    <testcase classname="FullPageLoading Integration Tests toggles Backdrop by changing withBackdrop prop" name="FullPageLoading Integration Tests toggles Backdrop by changing withBackdrop prop" time="0.018">
+    </testcase>
+    <testcase classname="FullPageLoading Integration Tests renders multiple spinner props correctly together" name="FullPageLoading Integration Tests renders multiple spinner props correctly together" time="0.034">
+      <failure>TestingLibraryElementError: Unable to find an accessible element with the role &quot;progressbar&quot;
+
+There are no accessible roles. But there might be some inaccessible roles. If you wish to access them, then set the `hidden` option to `true`. Learn more about this here: https://testing-library.com/docs/dom-testing-library/api-queries#byrole
+
+Ignored nodes: comments, script, style
+&lt;body&gt;
+  &lt;div&gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+      class=&quot;MuiBackdrop-root css-qk7mw-MuiBackdrop-root&quot;
+      style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+    &gt;
+      &lt;div
+        class=&quot;MuiBox-root css-qu4anz&quot;
+      &gt;
+        &lt;div
+          class=&quot;MuiBox-root css-x6epf7&quot;
+        &gt;
+          &lt;span
+            class=&quot;MuiCircularProgress-root MuiCircularProgress-indeterminate MuiCircularProgress-colorInfo css-11ugd5e-MuiCircularProgress-root&quot;
+            role=&quot;progressbar&quot;
+            style=&quot;width: 72px; height: 72px;&quot;
+          &gt;
+            &lt;svg
+              class=&quot;MuiCircularProgress-svg css-1idz92c-MuiCircularProgress-svg&quot;
+              viewBox=&quot;22 22 44 44&quot;
+            &gt;
+              &lt;circle
+                class=&quot;MuiCircularProgress-circle MuiCircularProgress-circleIndeterminate css-176wh8e-MuiCircularProgress-circle&quot;
+                cx=&quot;44&quot;
+                cy=&quot;44&quot;
+                fill=&quot;none&quot;
+                r=&quot;20.2&quot;
+                stroke-width=&quot;3.6&quot;
+              /&gt;
+            &lt;/svg&gt;
+          &lt;/span&gt;
+          &lt;div
+            class=&quot;MuiBox-root css-zycen2&quot;
+          &gt;
+            &lt;span&gt;
+              Analyzing job description...
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/body&gt;
+    at Object.getElementError (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:37:19)
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+    at /Applications/careercopilot/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/loading/__tests__/FullPageLoading.test.tsx:313:39)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Toast Component" errors="0" failures="6" skipped="0" timestamp="2025-11-12T08:50:06" time="34.273" tests="23">
+    <testcase classname="Toast Component Visibility renders when open=true" name="Toast Component Visibility renders when open=true" time="0.156">
+    </testcase>
+    <testcase classname="Toast Component Visibility does not render when open=false" name="Toast Component Visibility does not render when open=false" time="0.009">
+    </testcase>
+    <testcase classname="Toast Component Message Display displays message text correctly" name="Toast Component Message Display displays message text correctly" time="0.035">
+    </testcase>
+    <testcase classname="Toast Component Message Display renders message with long text" name="Toast Component Message Display renders message with long text" time="0.02">
+    </testcase>
+    <testcase classname="Toast Component Close Functionality calls onClose when close button clicked" name="Toast Component Close Functionality calls onClose when close button clicked" time="0.305">
+    </testcase>
+    <testcase classname="Toast Component Close Functionality calls onClose after autoHideDuration expires" name="Toast Component Close Functionality calls onClose after autoHideDuration expires" time="0.226">
+    </testcase>
+    <testcase classname="Toast Component Severity Levels renders with severity=success" name="Toast Component Severity Levels renders with severity=success" time="0.053">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Toast.test.tsx:139:21)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:545:9)
+    at processTimers (node:internal/timers:519:7)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Toast Component Severity Levels renders with severity=error" name="Toast Component Severity Levels renders with severity=error" time="0.029">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Toast.test.tsx:155:21)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:545:9)
+    at processTimers (node:internal/timers:519:7)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Toast Component Severity Levels renders with severity=warning" name="Toast Component Severity Levels renders with severity=warning" time="0.026">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Toast.test.tsx:171:21)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:545:9)
+    at processTimers (node:internal/timers:519:7)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Toast Component Severity Levels renders with default severity=info" name="Toast Component Severity Levels renders with default severity=info" time="0.019">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Toast.test.tsx:186:21)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at runNextTicks (node:internal/process/task_queues:60:5)
+    at listOnTimeout (node:internal/timers:545:9)
+    at processTimers (node:internal/timers:519:7)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Toast Component Anchor Origin Positioning positions toast at default bottom-center" name="Toast Component Anchor Origin Positioning positions toast at default bottom-center" time="0.014">
+    </testcase>
+    <testcase classname="Toast Component Anchor Origin Positioning positions toast at top-left" name="Toast Component Anchor Origin Positioning positions toast at top-left" time="0.015">
+    </testcase>
+    <testcase classname="Toast Component Anchor Origin Positioning positions toast at bottom-right" name="Toast Component Anchor Origin Positioning positions toast at bottom-right" time="0.02">
+    </testcase>
+    <testcase classname="Toast Component Anchor Origin Positioning positions toast at top-right" name="Toast Component Anchor Origin Positioning positions toast at top-right" time="0.033">
+    </testcase>
+    <testcase classname="Toast Component Custom Action Element renders custom action element when provided" name="Toast Component Custom Action Element renders custom action element when provided" time="0.011">
+    </testcase>
+    <testcase classname="Toast Component Custom Action Element action element is clickable" name="Toast Component Custom Action Element action element is clickable" time="0.04">
+    </testcase>
+    <testcase classname="Toast Component Custom Action Element renders multiple elements in action prop" name="Toast Component Custom Action Element renders multiple elements in action prop" time="0.036">
+    </testcase>
+    <testcase classname="Toast Component Integration Tests handles complete toast workflow with all props" name="Toast Component Integration Tests handles complete toast workflow with all props" time="0.012">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Toast.test.tsx:355:21)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Toast Component Integration Tests updates message when prop changes" name="Toast Component Integration Tests updates message when prop changes" time="0.017">
+    </testcase>
+    <testcase classname="Toast Component Integration Tests opens and closes toast dynamically" name="Toast Component Integration Tests opens and closes toast dynamically" time="0.023">
+      <failure>Error: expect(element).not.toBeInTheDocument()
+
+expected document not to contain element, found &lt;div class=&quot;MuiAlert-message css-1pxa9xg-MuiAlert-message&quot;&gt;Dynamic toast&lt;/div&gt; instead
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Toast.test.tsx:417:55)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Toast Component Integration Tests applies custom className" name="Toast Component Integration Tests applies custom className" time="0.012">
+    </testcase>
+    <testcase classname="Toast Component Integration Tests applies custom sx props" name="Toast Component Integration Tests applies custom sx props" time="0.017">
+    </testcase>
+    <testcase classname="Toast Component Integration Tests renders multiple toast instances independently" name="Toast Component Integration Tests renders multiple toast instances independently" time="0.028">
+    </testcase>
+  </testsuite>
+  <testsuite name="EmptyState" errors="0" failures="1" skipped="0" timestamp="2025-11-12T08:50:06" time="34.395" tests="47">
+    <testcase classname="EmptyState Title Rendering renders title correctly" name="EmptyState Title Rendering renders title correctly" time="0.203">
+    </testcase>
+    <testcase classname="EmptyState Description Rendering renders description when provided as string" name="EmptyState Description Rendering renders description when provided as string" time="0.017">
+    </testcase>
+    <testcase classname="EmptyState Description Rendering renders description when provided as ReactNode" name="EmptyState Description Rendering renders description when provided as ReactNode" time="0.178">
+    </testcase>
+    <testcase classname="EmptyState Description Rendering does not render description when not provided" name="EmptyState Description Rendering does not render description when not provided" time="0.022">
+    </testcase>
+    <testcase classname="EmptyState Icon Rendering renders icon when provided" name="EmptyState Icon Rendering renders icon when provided" time="0.019">
+    </testcase>
+    <testcase classname="EmptyState Icon Rendering does not render icon wrapper when icon is not provided" name="EmptyState Icon Rendering does not render icon wrapper when icon is not provided" time="0.015">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with correct label" name="EmptyState Action Button renders action button with correct label" time="0.164">
+    </testcase>
+    <testcase classname="EmptyState Action Button calls action.onClick when button clicked" name="EmptyState Action Button calls action.onClick when button clicked" time="0.143">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with text variant" name="EmptyState Action Button renders action button with text variant" time="0.066">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with outlined variant" name="EmptyState Action Button renders action button with outlined variant" time="0.039">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with contained variant" name="EmptyState Action Button renders action button with contained variant" time="0.014">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with primary color" name="EmptyState Action Button renders action button with primary color" time="0.017">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with secondary color" name="EmptyState Action Button renders action button with secondary color" time="0.024">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with error color" name="EmptyState Action Button renders action button with error color" time="0.023">
+    </testcase>
+    <testcase classname="EmptyState Action Button renders action button with startIcon" name="EmptyState Action Button renders action button with startIcon" time="0.02">
+    </testcase>
+    <testcase classname="EmptyState Action Button does not render action button when action is not provided" name="EmptyState Action Button does not render action button when action is not provided" time="0.005">
+    </testcase>
+    <testcase classname="EmptyState Component Variant renders with plain variant by default" name="EmptyState Component Variant renders with plain variant by default" time="0.008">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/EmptyState.test.tsx:257:19)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="EmptyState Component Variant renders with outlined variant" name="EmptyState Component Variant renders with outlined variant" time="0.007">
+    </testcase>
+    <testcase classname="EmptyState Component Variant renders with contained variant" name="EmptyState Component Variant renders with contained variant" time="0.009">
+    </testcase>
+    <testcase classname="EmptyState MaxWidth Constraint applies default maxWidth of 400px" name="EmptyState MaxWidth Constraint applies default maxWidth of 400px" time="0.008">
+    </testcase>
+    <testcase classname="EmptyState MaxWidth Constraint applies custom maxWidth as number" name="EmptyState MaxWidth Constraint applies custom maxWidth as number" time="0.009">
+    </testcase>
+    <testcase classname="EmptyState MaxWidth Constraint applies custom maxWidth as string" name="EmptyState MaxWidth Constraint applies custom maxWidth as string" time="0.008">
+    </testcase>
+    <testcase classname="EmptyState Children Rendering renders children when provided" name="EmptyState Children Rendering renders children when provided" time="0.006">
+    </testcase>
+    <testcase classname="EmptyState Children Rendering renders multiple children" name="EmptyState Children Rendering renders multiple children" time="0.006">
+    </testcase>
+    <testcase classname="EmptyState Children Rendering does not render children section when children not provided" name="EmptyState Children Rendering does not render children section when children not provided" time="0.005">
+    </testcase>
+    <testcase classname="EmptyState Custom SX Props applies custom sx props" name="EmptyState Custom SX Props applies custom sx props" time="0.007">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset renders with default &quot;No items found&quot; when no searchQuery provided" name="EmptyState NoResultsFound Preset renders with default &quot;No items found&quot; when no searchQuery provided" time="0.006">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset renders with &quot;No results found&quot; when searchQuery is provided" name="EmptyState NoResultsFound Preset renders with &quot;No results found&quot; when searchQuery is provided" time="0.005">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset displays search query in description" name="EmptyState NoResultsFound Preset displays search query in description" time="0.003">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset renders &quot;Clear search&quot; button when onClearSearch is provided" name="EmptyState NoResultsFound Preset renders &quot;Clear search&quot; button when onClearSearch is provided" time="0.014">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset calls onClearSearch when &quot;Clear search&quot; button is clicked" name="EmptyState NoResultsFound Preset calls onClearSearch when &quot;Clear search&quot; button is clicked" time="0.032">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset does not render action button when onClearSearch is not provided" name="EmptyState NoResultsFound Preset does not render action button when onClearSearch is not provided" time="0.004">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset applies outlined variant by default" name="EmptyState NoResultsFound Preset applies outlined variant by default" time="0.009">
+    </testcase>
+    <testcase classname="EmptyState NoResultsFound Preset accepts additional props" name="EmptyState NoResultsFound Preset accepts additional props" time="0.008">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset renders with &quot;Something went wrong&quot; title" name="EmptyState ErrorState Preset renders with &quot;Something went wrong&quot; title" time="0.007">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset displays error message from string" name="EmptyState ErrorState Preset displays error message from string" time="0.007">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset displays error message from Error object" name="EmptyState ErrorState Preset displays error message from Error object" time="0.007">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset renders &quot;Retry&quot; button when onRetry is provided" name="EmptyState ErrorState Preset renders &quot;Retry&quot; button when onRetry is provided" time="0.014">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset calls onRetry when &quot;Retry&quot; button is clicked" name="EmptyState ErrorState Preset calls onRetry when &quot;Retry&quot; button is clicked" time="0.032">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset does not render action button when onRetry is not provided" name="EmptyState ErrorState Preset does not render action button when onRetry is not provided" time="0.003">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset renders error icon" name="EmptyState ErrorState Preset renders error icon" time="0.004">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset displays generic message for unknown error" name="EmptyState ErrorState Preset displays generic message for unknown error" time="0.005">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset applies outlined variant" name="EmptyState ErrorState Preset applies outlined variant" time="0.007">
+    </testcase>
+    <testcase classname="EmptyState ErrorState Preset accepts additional props" name="EmptyState ErrorState Preset accepts additional props" time="0.005">
+    </testcase>
+    <testcase classname="EmptyState Integration Tests renders complete EmptyState with all features" name="EmptyState Integration Tests renders complete EmptyState with all features" time="0.013">
+    </testcase>
+    <testcase classname="EmptyState Integration Tests handles rapid button clicks" name="EmptyState Integration Tests handles rapid button clicks" time="0.052">
+    </testcase>
+    <testcase classname="EmptyState Integration Tests renders multiple EmptyState components independently" name="EmptyState Integration Tests renders multiple EmptyState components independently" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="Dialog Component" errors="0" failures="27" skipped="0" timestamp="2025-11-12T08:50:06" time="39.714" tests="74">
+    <testcase classname="Dialog Component rendering based on open state renders dialog when open prop is true" name="Dialog Component rendering based on open state renders dialog when open prop is true" time="0.352">
+    </testcase>
+    <testcase classname="Dialog Component rendering based on open state does not render dialog when open prop is false" name="Dialog Component rendering based on open state does not render dialog when open prop is false" time="0.007">
+    </testcase>
+    <testcase classname="Dialog Component rendering based on open state renders with internal state when open prop is not provided" name="Dialog Component rendering based on open state renders with internal state when open prop is not provided" time="0.25">
+    </testcase>
+    <testcase classname="Dialog Component title and content display displays title when provided" name="Dialog Component title and content display displays title when provided" time="0.047">
+    </testcase>
+    <testcase classname="Dialog Component title and content display does not render DialogTitle when title is not provided" name="Dialog Component title and content display does not render DialogTitle when title is not provided" time="0.051">
+    </testcase>
+    <testcase classname="Dialog Component title and content display displays contentText when provided" name="Dialog Component title and content display displays contentText when provided" time="0.053">
+    </testcase>
+    <testcase classname="Dialog Component title and content display displays content ReactNode when provided instead of contentText" name="Dialog Component title and content display displays content ReactNode when provided instead of contentText" time="0.029">
+    </testcase>
+    <testcase classname="Dialog Component title and content display displays children when provided instead of content" name="Dialog Component title and content display displays children when provided instead of content" time="0.02">
+    </testcase>
+    <testcase classname="Dialog Component title and content display prioritizes contentText over content and children" name="Dialog Component title and content display prioritizes contentText over content and children" time="0.027">
+    </testcase>
+    <testcase classname="Dialog Component button rendering and visibility renders close button by default" name="Dialog Component button rendering and visibility renders close button by default" time="0.053">
+    </testcase>
+    <testcase classname="Dialog Component button rendering and visibility does not render close button when showCloseButton is false" name="Dialog Component button rendering and visibility does not render close button when showCloseButton is false" time="0.031">
+    </testcase>
+    <testcase classname="Dialog Component button rendering and visibility renders cancel button by default" name="Dialog Component button rendering and visibility renders cancel button by default" time="0.04">
+    </testcase>
+    <testcase classname="Dialog Component button rendering and visibility does not render cancel button when showCancelButton is false" name="Dialog Component button rendering and visibility does not render cancel button when showCancelButton is false" time="0.026">
+    </testcase>
+    <testcase classname="Dialog Component button rendering and visibility renders confirm button by default" name="Dialog Component button rendering and visibility renders confirm button by default" time="0.041">
+    </testcase>
+    <testcase classname="Dialog Component button rendering and visibility does not render confirm button when showConfirmButton is false" name="Dialog Component button rendering and visibility does not render confirm button when showConfirmButton is false" time="0.024">
+    </testcase>
+    <testcase classname="Dialog Component button rendering and visibility does not render actions section when no buttons are shown and no custom actions provided" name="Dialog Component button rendering and visibility does not render actions section when no buttons are shown and no custom actions provided" time="0.014">
+    </testcase>
+    <testcase classname="Dialog Component onClose callback with different reasons calls onClose with closeButton reason when close button is clicked" name="Dialog Component onClose callback with different reasons calls onClose with closeButton reason when close button is clicked" time="0.051">
+    </testcase>
+    <testcase classname="Dialog Component onClose callback with different reasons calls onClose with cancelButton reason when cancel button is clicked" name="Dialog Component onClose callback with different reasons calls onClose with cancelButton reason when cancel button is clicked" time="0.046">
+    </testcase>
+    <testcase classname="Dialog Component onClose callback with different reasons calls onClose with escapeKeyDown reason when Escape key is pressed" name="Dialog Component onClose callback with different reasons calls onClose with escapeKeyDown reason when Escape key is pressed" time="0.028">
+    </testcase>
+    <testcase classname="Dialog Component onClose callback with different reasons calls onClose with backdropClick reason when backdrop is clicked" name="Dialog Component onClose callback with different reasons calls onClose with backdropClick reason when backdrop is clicked" time="1.021">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalled()
+
+Expected number of calls: &gt;= 1
+Received number of calls:    0
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body
+    style=&quot;padding-right: 1024px; overflow: hidden;&quot;
+  &gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+    /&gt;
+    &lt;div
+      class=&quot;MuiDialog-root MuiModal-root css-1j1qve-MuiModal-root-MuiDialog-root&quot;
+      role=&quot;presentation&quot;
+    &gt;
+      &lt;div
+        aria-hidden=&quot;true&quot;
+        class=&quot;MuiBackdrop-root MuiModal-backdrop css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+      /&gt;
+      &lt;div
+        data-testid=&quot;sentinelStart&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+      &lt;div
+        class=&quot;MuiDialog-container MuiDialog-scrollBody css-1hsk4vd-MuiDialog-container&quot;
+        role=&quot;presentation&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;div
+          aria-labelledby=&quot;:rj:&quot;
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollBody MuiDialog-paperWidthSm css-2zwj5t-MuiPaper-root-MuiDialog-paper&quot;
+          role=&quot;dialog&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiBox-root css-79elbk&quot;
+          &gt;
+            &lt;h2
+              class=&quot;MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-1nj3aqa-MuiTypography-root-MuiDialogTitle-root&quot;
+              id=&quot;:rj:&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root&quot;
+              &gt;
+                Test Dialog
+              &lt;/div&gt;
+              &lt;button
+                aria-label=&quot;close&quot;
+                class=&quot;MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-lc2yqr-MuiButtonBase-root-MuiIconButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root&quot;
+                  data-testid=&quot;CloseIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+            &lt;/h2&gt;
+            &lt;div
+              class=&quot;MuiBox-root css-1gsv261&quot;
+            /&gt;
+            &lt;div
+              class=&quot;MuiDialogContent-root css-ypiqx9-MuiDialogContent-root&quot;
+            &gt;
+              &lt;p
+                class=&quot;MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiDialogContentText-root css-qfso29-MuiTypography-root-MuiDialogContentText-root&quot;
+              &gt;
+                Content
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;MuiDialogActions-root MuiDialogActions-spacing css-1bs3osv-MuiDialogActions-root&quot;
+            &gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Cancel
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Confirm
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div
+        data-testid=&quot;sentinelEnd&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:219:29
+    at runWithExpensiveErrorDiagnosticsDisabled (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+    at listOnTimeout (node:internal/timers:581:17)
+    at processTimers (node:internal/timers:519:7)</failure>
+    </testcase>
+    <testcase classname="Dialog Component disableBackdropClick prop prevents closing when backdrop is clicked and disableBackdropClick is true" name="Dialog Component disableBackdropClick prop prevents closing when backdrop is clicked and disableBackdropClick is true" time="0.014">
+    </testcase>
+    <testcase classname="Dialog Component disableBackdropClick prop allows closing when backdrop is clicked and disableBackdropClick is false" name="Dialog Component disableBackdropClick prop allows closing when backdrop is clicked and disableBackdropClick is false" time="1.018">
+      <failure>Error: expect(jest.fn()).toHaveBeenCalled()
+
+Expected number of calls: &gt;= 1
+Received number of calls:    0
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body
+    style=&quot;padding-right: 1024px; overflow: hidden;&quot;
+  &gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+    /&gt;
+    &lt;div
+      class=&quot;MuiDialog-root MuiModal-root css-1j1qve-MuiModal-root-MuiDialog-root&quot;
+      role=&quot;presentation&quot;
+    &gt;
+      &lt;div
+        aria-hidden=&quot;true&quot;
+        class=&quot;MuiBackdrop-root MuiModal-backdrop css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+      /&gt;
+      &lt;div
+        data-testid=&quot;sentinelStart&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+      &lt;div
+        class=&quot;MuiDialog-container MuiDialog-scrollBody css-1hsk4vd-MuiDialog-container&quot;
+        role=&quot;presentation&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;div
+          aria-labelledby=&quot;:rl:&quot;
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollBody MuiDialog-paperWidthSm css-2zwj5t-MuiPaper-root-MuiDialog-paper&quot;
+          role=&quot;dialog&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiBox-root css-79elbk&quot;
+          &gt;
+            &lt;h2
+              class=&quot;MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-1nj3aqa-MuiTypography-root-MuiDialogTitle-root&quot;
+              id=&quot;:rl:&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root&quot;
+              &gt;
+                Test Dialog
+              &lt;/div&gt;
+              &lt;button
+                aria-label=&quot;close&quot;
+                class=&quot;MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-lc2yqr-MuiButtonBase-root-MuiIconButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root&quot;
+                  data-testid=&quot;CloseIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+            &lt;/h2&gt;
+            &lt;div
+              class=&quot;MuiBox-root css-1gsv261&quot;
+            /&gt;
+            &lt;div
+              class=&quot;MuiDialogContent-root css-ypiqx9-MuiDialogContent-root&quot;
+            &gt;
+              &lt;p
+                class=&quot;MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiDialogContentText-root css-qfso29-MuiTypography-root-MuiDialogContentText-root&quot;
+              &gt;
+                Content
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;MuiDialogActions-root MuiDialogActions-spacing css-1bs3osv-MuiDialogActions-root&quot;
+            &gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Cancel
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Confirm
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div
+        data-testid=&quot;sentinelEnd&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:270:29
+    at runWithExpensiveErrorDiagnosticsDisabled (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+    at listOnTimeout (node:internal/timers:581:17)
+    at processTimers (node:internal/timers:519:7)</failure>
+    </testcase>
+    <testcase classname="Dialog Component disableEscapeKeyDown prop prevents closing when Escape key is pressed and disableEscapeKeyDown is true" name="Dialog Component disableEscapeKeyDown prop prevents closing when Escape key is pressed and disableEscapeKeyDown is true" time="0.02">
+    </testcase>
+    <testcase classname="Dialog Component disableEscapeKeyDown prop allows closing when Escape key is pressed and disableEscapeKeyDown is false" name="Dialog Component disableEscapeKeyDown prop allows closing when Escape key is pressed and disableEscapeKeyDown is false" time="0.02">
+    </testcase>
+    <testcase classname="Dialog Component onConfirm callback calls onConfirm when confirm button is clicked" name="Dialog Component onConfirm callback calls onConfirm when confirm button is clicked" time="0.072">
+    </testcase>
+    <testcase classname="Dialog Component onConfirm callback handles async onConfirm callback" name="Dialog Component onConfirm callback handles async onConfirm callback" time="0.035">
+    </testcase>
+    <testcase classname="Dialog Component onConfirm callback closes dialog after onConfirm is called with controlled component" name="Dialog Component onConfirm callback closes dialog after onConfirm is called with controlled component" time="0.046">
+    </testcase>
+    <testcase classname="Dialog Component isConfirmLoading prop disables confirm button when isConfirmLoading is true" name="Dialog Component isConfirmLoading prop disables confirm button when isConfirmLoading is true" time="0.023">
+    </testcase>
+    <testcase classname="Dialog Component isConfirmLoading prop disables cancel button when isConfirmLoading is true" name="Dialog Component isConfirmLoading prop disables cancel button when isConfirmLoading is true" time="0.016">
+    </testcase>
+    <testcase classname="Dialog Component isConfirmLoading prop enables confirm button when isConfirmLoading is false" name="Dialog Component isConfirmLoading prop enables confirm button when isConfirmLoading is false" time="0.017">
+    </testcase>
+    <testcase classname="Dialog Component isConfirmLoading prop enables cancel button when isConfirmLoading is false" name="Dialog Component isConfirmLoading prop enables cancel button when isConfirmLoading is false" time="0.022">
+    </testcase>
+    <testcase classname="Dialog Component custom button text displays custom cancel button text" name="Dialog Component custom button text displays custom cancel button text" time="0.027">
+    </testcase>
+    <testcase classname="Dialog Component custom button text displays custom confirm button text" name="Dialog Component custom button text displays custom confirm button text" time="0.017">
+    </testcase>
+    <testcase classname="Dialog Component custom button text uses default text when no custom text is provided" name="Dialog Component custom button text uses default text when no custom text is provided" time="0.021">
+    </testcase>
+    <testcase classname="Dialog Component confirmButtonColor variants applies primary color to confirm button" name="Dialog Component confirmButtonColor variants applies primary color to confirm button" time="0.017">
+      <failure>Error: expect(element).toHaveClass(&quot;MuiButton-primary&quot;)
+
+Expected the element to have class:
+  MuiButton-primary
+Received:
+  MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:464:31)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component confirmButtonColor variants applies secondary color to confirm button" name="Dialog Component confirmButtonColor variants applies secondary color to confirm button" time="0.024">
+      <failure>Error: expect(element).toHaveClass(&quot;MuiButton-secondary&quot;)
+
+Expected the element to have class:
+  MuiButton-secondary
+Received:
+  MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSecondary css-zcbmsk-MuiButtonBase-root-MuiButton-root
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:464:31)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component confirmButtonColor variants applies error color to confirm button" name="Dialog Component confirmButtonColor variants applies error color to confirm button" time="0.022">
+      <failure>Error: expect(element).toHaveClass(&quot;MuiButton-error&quot;)
+
+Expected the element to have class:
+  MuiButton-error
+Received:
+  MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedError MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorError MuiButton-root MuiButton-contained MuiButton-containedError MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorError css-1sszw6i-MuiButtonBase-root-MuiButton-root
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:464:31)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component confirmButtonColor variants applies info color to confirm button" name="Dialog Component confirmButtonColor variants applies info color to confirm button" time="0.022">
+      <failure>Error: expect(element).toHaveClass(&quot;MuiButton-info&quot;)
+
+Expected the element to have class:
+  MuiButton-info
+Received:
+  MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedInfo MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorInfo MuiButton-root MuiButton-contained MuiButton-containedInfo MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorInfo css-kjirbw-MuiButtonBase-root-MuiButton-root
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:464:31)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component confirmButtonColor variants applies success color to confirm button" name="Dialog Component confirmButtonColor variants applies success color to confirm button" time="0.02">
+      <failure>Error: expect(element).toHaveClass(&quot;MuiButton-success&quot;)
+
+Expected the element to have class:
+  MuiButton-success
+Received:
+  MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSuccess MuiButton-root MuiButton-contained MuiButton-containedSuccess MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorSuccess css-ke5b6m-MuiButtonBase-root-MuiButton-root
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:464:31)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component confirmButtonColor variants applies warning color to confirm button" name="Dialog Component confirmButtonColor variants applies warning color to confirm button" time="0.021">
+      <failure>Error: expect(element).toHaveClass(&quot;MuiButton-warning&quot;)
+
+Expected the element to have class:
+  MuiButton-warning
+Received:
+  MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedWarning MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorWarning MuiButton-root MuiButton-contained MuiButton-containedWarning MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorWarning css-1qtu9q6-MuiButtonBase-root-MuiButton-root
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:464:31)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component confirmButtonColor variants defaults to primary color when not specified" name="Dialog Component confirmButtonColor variants defaults to primary color when not specified" time="0.021">
+      <failure>Error: expect(element).toHaveClass(&quot;MuiButton-primary&quot;)
+
+Expected the element to have class:
+  MuiButton-primary
+Received:
+  MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:474:29)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component custom actions renders custom actions when provided" name="Dialog Component custom actions renders custom actions when provided" time="0.017">
+    </testcase>
+    <testcase classname="Dialog Component custom actions does not render default buttons when custom actions are provided" name="Dialog Component custom actions does not render default buttons when custom actions are provided" time="0.018">
+    </testcase>
+    <testcase classname="Dialog Component maxWidth variants applies maxWidth=xs to dialog" name="Dialog Component maxWidth variants applies maxWidth=xs to dialog" time="0.011">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:537:24)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component maxWidth variants applies maxWidth=sm to dialog" name="Dialog Component maxWidth variants applies maxWidth=sm to dialog" time="0.01">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:537:24)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component maxWidth variants applies maxWidth=md to dialog" name="Dialog Component maxWidth variants applies maxWidth=md to dialog" time="0.011">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:537:24)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component maxWidth variants applies maxWidth=lg to dialog" name="Dialog Component maxWidth variants applies maxWidth=lg to dialog" time="0.011">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:537:24)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component maxWidth variants applies maxWidth=xl to dialog" name="Dialog Component maxWidth variants applies maxWidth=xl to dialog" time="0.011">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:537:24)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component maxWidth variants applies maxWidth=false to dialog" name="Dialog Component maxWidth variants applies maxWidth=false to dialog" time="0.01">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:537:24)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component maxWidth variants defaults to sm maxWidth when not specified" name="Dialog Component maxWidth variants defaults to sm maxWidth when not specified" time="0.017">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:547:22)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component variant prop renders default variant dialog" name="Dialog Component variant prop renders default variant dialog" time="0.012">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:560:22)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component variant prop renders fullscreen variant dialog" name="Dialog Component variant prop renders fullscreen variant dialog" time="0.012">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:570:22)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component variant prop renders scrollable variant dialog" name="Dialog Component variant prop renders scrollable variant dialog" time="0.013">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:585:22)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component variant prop defaults to default variant when not specified" name="Dialog Component variant prop defaults to default variant when not specified" time="0.015">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:594:22)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component divider visibility shows divider by default when title is present" name="Dialog Component divider visibility shows divider by default when title is present" time="0.016">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:607:23)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component divider visibility hides divider when divider prop is false" name="Dialog Component divider visibility hides divider when divider prop is false" time="0.021">
+    </testcase>
+    <testcase classname="Dialog Component divider visibility shows bottom divider in actions when divider is true" name="Dialog Component divider visibility shows bottom divider in actions when divider is true" time="0.011">
+    </testcase>
+    <testcase classname="Dialog Component divider visibility hides bottom divider in actions when divider is false" name="Dialog Component divider visibility hides bottom divider in actions when divider is false" time="0.009">
+    </testcase>
+    <testcase classname="Dialog Component imperative ref methods opens dialog when ref.open() is called" name="Dialog Component imperative ref methods opens dialog when ref.open() is called" time="0.033">
+    </testcase>
+    <testcase classname="Dialog Component imperative ref methods closes dialog when ref.close() is called" name="Dialog Component imperative ref methods closes dialog when ref.close() is called" time="1.049">
+      <failure>Error: expect(element).not.toBeInTheDocument()
+
+expected document not to contain element, found &lt;h2 class=&quot;MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-1nj3aqa-MuiTypography-root-MuiDialogTitle-root&quot; id=&quot;:r1r:&quot;&gt;&lt;div class=&quot;MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root&quot;&gt;Test Dialog&lt;/div&gt;&lt;button aria-label=&quot;close&quot; class=&quot;MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeMedium css-lc2yqr-MuiButtonBase-root-MuiIconButton-root&quot; tabindex=&quot;0&quot; type=&quot;button&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root&quot; data-testid=&quot;CloseIcon&quot; focusable=&quot;false&quot; viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z&quot; /&gt;&lt;/svg&gt;&lt;span class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;&gt;&lt;span class=&quot;css-y4cjyz-MuiTouchRipple-ripple MuiTouchRipple-ripple MuiTouchRipple-rippleVisible MuiTouchRipple-ripplePulsate&quot; style=&quot;width: 1px; height: 1px; top: -0.5px; left: -0.5px;&quot;&gt;&lt;span class=&quot;MuiTouchRipple-child MuiTouchRipple-childPulsate&quot; /&gt;&lt;/span&gt;&lt;/span&gt;&lt;/button&gt;&lt;/h2&gt; instead
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body
+    style=&quot;padding-right: 1024px; overflow: hidden;&quot;
+  &gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+    &gt;
+      &lt;button&gt;
+        Close
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div
+      class=&quot;MuiDialog-root MuiModal-root css-1j1qve-MuiModal-root-MuiDialog-root&quot;
+      role=&quot;presentation&quot;
+    &gt;
+      &lt;div
+        aria-hidden=&quot;true&quot;
+        class=&quot;MuiBackdrop-root MuiModal-backdrop css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+      /&gt;
+      &lt;div
+        data-testid=&quot;sentinelStart&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+      &lt;div
+        class=&quot;MuiDialog-container MuiDialog-scrollBody css-1hsk4vd-MuiDialog-container&quot;
+        role=&quot;presentation&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;div
+          aria-labelledby=&quot;:r1r:&quot;
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollBody MuiDialog-paperWidthSm css-2zwj5t-MuiPaper-root-MuiDialog-paper&quot;
+          role=&quot;dialog&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiBox-root css-79elbk&quot;
+          &gt;
+            &lt;h2
+              class=&quot;MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-1nj3aqa-MuiTypography-root-MuiDialogTitle-root&quot;
+              id=&quot;:r1r:&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root&quot;
+              &gt;
+                Test Dialog
+              &lt;/div&gt;
+              &lt;button
+                aria-label=&quot;close&quot;
+                class=&quot;MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeMedium css-lc2yqr-MuiButtonBase-root-MuiIconButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root&quot;
+                  data-testid=&quot;CloseIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                &gt;
+                  &lt;span
+                    class=&quot;css-y4cjyz-MuiTouchRipple-ripple MuiTouchRipple-ripple MuiTouchRipple-rippleVisible MuiTouchRipple-ripplePulsate&quot;
+                    style=&quot;width: 1px; height: 1px; top: -0.5px; left: -0.5px;&quot;
+                  &gt;
+                    &lt;span
+                      class=&quot;MuiTouchRipple-child MuiTouchRipple-childPulsate&quot;
+                    /&gt;
+                  &lt;/span&gt;
+                &lt;/span&gt;
+              &lt;/button&gt;
+            &lt;/h2&gt;
+            &lt;div
+              class=&quot;MuiBox-root css-1gsv261&quot;
+            /&gt;
+            &lt;div
+              class=&quot;MuiDialogContent-root css-ypiqx9-MuiDialogContent-root&quot;
+            &gt;
+              &lt;p
+                class=&quot;MuiTypography-root MuiDialogContentText-root MuiTypography-body1 MuiDialogContentText-root css-qfso29-MuiTypography-root-MuiDialogContentText-root&quot;
+              &gt;
+                Content
+              &lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;MuiDialogActions-root MuiDialogActions-spacing css-1bs3osv-MuiDialogActions-root&quot;
+            &gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Cancel
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Confirm
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div
+        data-testid=&quot;sentinelEnd&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:700:77
+    at runWithExpensiveErrorDiagnosticsDisabled (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+    at listOnTimeout (node:internal/timers:581:17)
+    at processTimers (node:internal/timers:519:7)</failure>
+    </testcase>
+    <testcase classname="Dialog Component imperative ref methods returns isOpen property from ref" name="Dialog Component imperative ref methods returns isOpen property from ref" time="0.002">
+    </testcase>
+    <testcase classname="Dialog Component imperative ref methods calls onClose with closeButton reason when ref.close() is called" name="Dialog Component imperative ref methods calls onClose with closeButton reason when ref.close() is called" time="0.033">
+    </testcase>
+    <testcase classname="Dialog Component integration scenarios handles complete user workflow: open, view content, confirm" name="Dialog Component integration scenarios handles complete user workflow: open, view content, confirm" time="0.059">
+    </testcase>
+    <testcase classname="Dialog Component integration scenarios handles complete user workflow: open, view content, cancel" name="Dialog Component integration scenarios handles complete user workflow: open, view content, cancel" time="0.054">
+    </testcase>
+    <testcase classname="Dialog Component integration scenarios handles fullscreen variant with long content" name="Dialog Component integration scenarios handles fullscreen variant with long content" time="1.023">
+      <failure>Error: expect(received).toHaveClass()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+
+Ignored nodes: comments, script, style
+&lt;html&gt;
+  &lt;head /&gt;
+  &lt;body
+    style=&quot;padding-right: 1024px; overflow: hidden;&quot;
+  &gt;
+    &lt;div
+      aria-hidden=&quot;true&quot;
+    &gt;
+      &lt;button&gt;
+        Open
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div
+      class=&quot;MuiDialog-root MuiModal-root css-1sox9b1-MuiModal-root-MuiDialog-root&quot;
+      role=&quot;presentation&quot;
+    &gt;
+      &lt;div
+        aria-hidden=&quot;true&quot;
+        class=&quot;MuiBackdrop-root MuiModal-backdrop css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+      /&gt;
+      &lt;div
+        data-testid=&quot;sentinelStart&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+      &lt;div
+        class=&quot;MuiDialog-container MuiDialog-scrollBody css-1hsk4vd-MuiDialog-container&quot;
+        role=&quot;presentation&quot;
+        style=&quot;opacity: 1; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;&quot;
+        tabindex=&quot;-1&quot;
+      &gt;
+        &lt;div
+          aria-labelledby=&quot;:r20:&quot;
+          class=&quot;MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollBody MuiDialog-paperWidthSm MuiDialog-paperFullScreen css-1k2f74c-MuiPaper-root-MuiDialog-paper&quot;
+          role=&quot;dialog&quot;
+        &gt;
+          &lt;div
+            class=&quot;MuiBox-root css-79elbk&quot;
+          &gt;
+            &lt;h2
+              class=&quot;MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-1nj3aqa-MuiTypography-root-MuiDialogTitle-root&quot;
+              id=&quot;:r20:&quot;
+            &gt;
+              &lt;div
+                class=&quot;MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root&quot;
+              &gt;
+                Long Content
+              &lt;/div&gt;
+              &lt;button
+                aria-label=&quot;close&quot;
+                class=&quot;MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-lc2yqr-MuiButtonBase-root-MuiIconButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                &lt;svg
+                  aria-hidden=&quot;true&quot;
+                  class=&quot;MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root&quot;
+                  data-testid=&quot;CloseIcon&quot;
+                  focusable=&quot;false&quot;
+                  viewBox=&quot;0 0 24 24&quot;
+                &gt;
+                  &lt;path
+                    d=&quot;M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z&quot;
+                  /&gt;
+                &lt;/svg&gt;
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+            &lt;/h2&gt;
+            &lt;div
+              class=&quot;MuiBox-root css-1gsv261&quot;
+            /&gt;
+            &lt;div
+              class=&quot;MuiDialogContent-root css-ypiqx9-MuiDialogContent-root&quot;
+            &gt;
+              &lt;div
+                style=&quot;white-space: pre-wrap;&quot;
+              &gt;
+                Line 1
+Line 2
+Line 3
+Line 4
+Line 5
+Line 6
+Line 7
+Line 8
+Line 9
+Line 10
+Line 11
+Line 12
+Line 13
+Line 14
+Line 15
+Line 16
+Line 17
+Line 18
+Line 19
+Line 20
+Line 21
+Line 22
+Line 23
+Line 24
+Line 25
+Line 26
+Line 27
+Line 28
+Line 29
+Line 30
+Line 31
+Line 32
+Line 33
+Line 34
+Line 35
+Line 36
+Line 37
+Line 38
+Line 39
+Line 40
+Line 41
+Line 42
+Line 43
+Line 44
+Line 45
+Line 46
+Line 47
+Line 48
+Line 49
+Line 50
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div
+              class=&quot;MuiDialogActions-root MuiDialogActions-spacing css-1bs3osv-MuiDialogActions-root&quot;
+            &gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-colorPrimary css-1e6y48t-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Cancel
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+              &lt;button
+                class=&quot;MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-sghohy-MuiButtonBase-root-MuiButton-root&quot;
+                tabindex=&quot;0&quot;
+                type=&quot;button&quot;
+              &gt;
+                Confirm
+                &lt;span
+                  class=&quot;MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root&quot;
+                /&gt;
+              &lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div
+        data-testid=&quot;sentinelEnd&quot;
+        tabindex=&quot;0&quot;
+      /&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toHaveClass] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:864:24
+    at runWithExpensiveErrorDiagnosticsDisabled (/Applications/careercopilot/node_modules/@testing-library/dom/dist/config.js:47:12)
+    at checkCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:124:77)
+    at checkRealTimersCallback (/Applications/careercopilot/node_modules/@testing-library/dom/dist/wait-for.js:118:16)
+    at Timeout.task [as _onTimeout] (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/browser/Window.js:579:19)
+    at listOnTimeout (node:internal/timers:581:17)
+    at processTimers (node:internal/timers:519:7)</failure>
+    </testcase>
+    <testcase classname="Dialog Component integration scenarios prevents multiple actions during loading state" name="Dialog Component integration scenarios prevents multiple actions during loading state" time="0.025">
+      <failure>Error: Unable to perform pointer interaction as the element has `pointer-events: none`:
+
+BUTTON(label=Confirm)
+    at Object.assertPointerEvents (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/utils/pointer/cssPointerEvents.js:47:15)
+    at Object.enter (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/pointer.js:52:34)
+    at PointerHost.move (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:53:85)
+    at pointerAction (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:59:39)
+    at Object.pointer (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:15)
+    at Object.asyncWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:88:22)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:890:7)</failure>
+    </testcase>
+    <testcase classname="Dialog Component integration scenarios supports controlled and uncontrolled modes" name="Dialog Component integration scenarios supports controlled and uncontrolled modes" time="0.058">
+    </testcase>
+    <testcase classname="Dialog Component edge cases and error handling handles dialog with only title (no content)" name="Dialog Component edge cases and error handling handles dialog with only title (no content)" time="0.016">
+    </testcase>
+    <testcase classname="Dialog Component edge cases and error handling handles dialog with only content (no title)" name="Dialog Component edge cases and error handling handles dialog with only content (no title)" time="0.01">
+    </testcase>
+    <testcase classname="Dialog Component edge cases and error handling handles empty dialog" name="Dialog Component edge cases and error handling handles empty dialog" time="0.019">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:962:63)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component edge cases and error handling preserves custom sx props" name="Dialog Component edge cases and error handling preserves custom sx props" time="0.016">
+      <failure>Error: expect(received).toBeInTheDocument()
+
+received value must be an HTMLElement or an SVGElement.
+Received has value: null
+    at __EXTERNAL_MATCHER_TRAP__ (/Applications/careercopilot/node_modules/expect/build/index.js:2240:22)
+    at Object.throwingMatcher [as toBeInTheDocument] (/Applications/careercopilot/node_modules/expect/build/index.js:2241:6)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:976:22)
+    at Promise.finally.completed (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1556:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1496:10)
+    at _callCircusTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1006:40)
+    at _runTest (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:946:3)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:839:13)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at _runTestsForDescribeBlock (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:829:11)
+    at run (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:757:3)
+    at runAndTransformResultsToJestFormat (/Applications/careercopilot/node_modules/jest-circus/build/jestAdapterInit.js:1917:21)
+    at jestAdapter (/Applications/careercopilot/node_modules/jest-circus/build/runner.js:101:19)
+    at runTestInternal (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:275:16)
+    at runTest (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:343:7)
+    at Object.worker (/Applications/careercopilot/node_modules/jest-runner/build/testWorker.js:497:12)</failure>
+    </testcase>
+    <testcase classname="Dialog Component edge cases and error handling handles rapid open/close calls" name="Dialog Component edge cases and error handling handles rapid open/close calls" time="0.014">
+    </testcase>
+    <testcase classname="Dialog Component edge cases and error handling handles onConfirm returning undefined (synchronous)" name="Dialog Component edge cases and error handling handles onConfirm returning undefined (synchronous)" time="0.037">
+    </testcase>
+    <testcase classname="Dialog Component edge cases and error handling handles onConfirm throwing error gracefully" name="Dialog Component edge cases and error handling handles onConfirm throwing error gracefully" time="0.033">
+      <failure>Error: Confirm error
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1021:15
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:305:39
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:312:13
+    at mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:102:19)
+    at handleConfirm (/Applications/careercopilot/frontend/src/components/ui/feedback/Dialog.tsx:192:13)
+    at HTMLUnknownElement.callCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at invokeGuardedCallbackAndCatchFirstError (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4291:25)
+    at executeDispatch (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9041:3)
+    at processDispatchQueueItemsInOrder (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9073:7)
+    at processDispatchQueue (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9086:5)
+    at dispatchEventsForPlugins (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9097:3)
+    at /Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9288:12
+    at batchedUpdates$1 (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26179:12)
+    at batchedUpdates (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:3991:12)
+    at dispatchEventForPluginEventSystem (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9287:3)
+    at dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6465:5)
+    at dispatchEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6457:5)
+    at dispatchDiscreteEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6430:5)
+    at HTMLBodyElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLButtonElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLButtonElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLButtonElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at /Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:108:16
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:48:24
+    at act (/Applications/careercopilot/frontend/node_modules/react/cjs/react.development.js:2512:16)
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25
+    at Object.eventWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:107:28)
+    at Object.wrapEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+    at Object.dispatchEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+    at Object.dispatchUIEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+    at Mouse.up (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/mouse.js:100:30)
+    at PointerHost.release (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:87:24)
+    at pointerAction (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+    at Object.pointer (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+    at Object.asyncWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:88:22)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1033:7)</failure>
+      <failure>Error: Confirm error
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1021:15
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:305:39
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:312:13
+    at mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:102:19)
+    at handleConfirm (/Applications/careercopilot/frontend/src/components/ui/feedback/Dialog.tsx:192:13)
+    at HTMLUnknownElement.callCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at invokeGuardedCallbackAndCatchFirstError (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4291:25)
+    at executeDispatch (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9041:3)
+    at processDispatchQueueItemsInOrder (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9073:7)
+    at processDispatchQueue (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9086:5)
+    at dispatchEventsForPlugins (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9097:3)
+    at /Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9288:12
+    at batchedUpdates$1 (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26179:12)
+    at batchedUpdates (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:3991:12)
+    at dispatchEventForPluginEventSystem (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9287:3)
+    at dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6465:5)
+    at dispatchEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6457:5)
+    at dispatchDiscreteEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6430:5)
+    at HTMLBodyElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLButtonElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLButtonElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLButtonElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at /Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:108:16
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:48:24
+    at act (/Applications/careercopilot/frontend/node_modules/react/cjs/react.development.js:2512:16)
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25
+    at Object.eventWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:107:28)
+    at Object.wrapEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+    at Object.dispatchEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+    at Object.dispatchUIEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+    at Mouse.up (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/mouse.js:100:30)
+    at PointerHost.release (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:87:24)
+    at pointerAction (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+    at Object.pointer (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+    at Object.asyncWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:88:22)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1033:7)</failure>
+      <failure>Error: Confirm error
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1021:15
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:305:39
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:312:13
+    at mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:102:19)
+    at handleConfirm (/Applications/careercopilot/frontend/src/components/ui/feedback/Dialog.tsx:192:13)
+    at HTMLUnknownElement.callCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at invokeGuardedCallbackAndCatchFirstError (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4291:25)
+    at executeDispatch (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9041:3)
+    at processDispatchQueueItemsInOrder (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9073:7)
+    at processDispatchQueue (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9086:5)
+    at dispatchEventsForPlugins (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9097:3)
+    at /Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9288:12
+    at batchedUpdates$1 (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26179:12)
+    at batchedUpdates (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:3991:12)
+    at dispatchEventForPluginEventSystem (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9287:3)
+    at dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6465:5)
+    at dispatchEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6457:5)
+    at dispatchDiscreteEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6430:5)
+    at HTMLBodyElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLButtonElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLButtonElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLButtonElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at /Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:108:16
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:48:24
+    at act (/Applications/careercopilot/frontend/node_modules/react/cjs/react.development.js:2512:16)
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25
+    at Object.eventWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:107:28)
+    at Object.wrapEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+    at Object.dispatchEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+    at Object.dispatchUIEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+    at Mouse.up (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/mouse.js:100:30)
+    at PointerHost.release (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:87:24)
+    at pointerAction (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+    at Object.pointer (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+    at Object.asyncWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:88:22)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1033:7)</failure>
+      <failure>Error: Confirm error
+    at /Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1021:15
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:305:39
+    at /Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:312:13
+    at mockConstructor (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jest-mock/build/index.js:102:19)
+    at handleConfirm (/Applications/careercopilot/frontend/src/components/ui/feedback/Dialog.tsx:192:13)
+    at HTMLUnknownElement.callCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4164:14)
+    at HTMLUnknownElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLUnknownElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLUnknownElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLUnknownElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at Object.invokeGuardedCallbackDev (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4213:16)
+    at invokeGuardedCallback (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4277:31)
+    at invokeGuardedCallbackAndCatchFirstError (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:4291:25)
+    at executeDispatch (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9041:3)
+    at processDispatchQueueItemsInOrder (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9073:7)
+    at processDispatchQueue (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9086:5)
+    at dispatchEventsForPlugins (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9097:3)
+    at /Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9288:12
+    at batchedUpdates$1 (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:26179:12)
+    at batchedUpdates (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:3991:12)
+    at dispatchEventForPluginEventSystem (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:9287:3)
+    at dispatchEventWithEnableCapturePhaseSelectiveHydrationWithoutDiscreteEventReplay (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6465:5)
+    at dispatchEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6457:5)
+    at dispatchDiscreteEvent (/Applications/careercopilot/frontend/node_modules/react-dom/cjs/react-dom.development.js:6430:5)
+    at HTMLBodyElement.callTheUserObjectsOperation (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:350:25)
+    at invokeEventListeners (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:286:3)
+    at HTMLButtonElementImpl._dispatch (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:233:9)
+    at HTMLButtonElementImpl.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:104:17)
+    at HTMLButtonElement.dispatchEvent (/Applications/careercopilot/node_modules/jest-environment-jsdom/node_modules/jsdom/lib/jsdom/living/generated/EventTarget.js:241:34)
+    at /Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:43
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:108:16
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:48:24
+    at act (/Applications/careercopilot/frontend/node_modules/react/cjs/react.development.js:2512:16)
+    at /Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/act-compat.js:47:25
+    at Object.eventWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:107:28)
+    at Object.wrapEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/wrapEvent.js:6:28)
+    at Object.dispatchEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:45:22)
+    at Object.dispatchUIEvent (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/event/dispatchEvent.js:22:26)
+    at Mouse.up (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/mouse.js:100:30)
+    at PointerHost.release (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/system/pointer/index.js:87:24)
+    at pointerAction (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:54:47)
+    at Object.pointer (/Applications/careercopilot/node_modules/@testing-library/user-event/dist/cjs/pointer/index.js:27:9)
+    at Object.asyncWrapper (/Applications/careercopilot/frontend/node_modules/@testing-library/react/dist/pure.js:88:22)
+    at Object.&lt;anonymous&gt; (/Applications/careercopilot/frontend/src/components/ui/feedback/__tests__/Dialog.test.tsx:1033:7)</failure>
+    </testcase>
+  </testsuite>
 </testsuites>
