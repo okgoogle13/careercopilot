@@ -63,7 +63,7 @@ jest.mock('next/navigation', () => ({
     get: jest.fn(),
   }),
   usePathname: () => '/',
-}));
+}), { virtual: true });
 
 // Mock next-auth/react
 jest.mock('next-auth/react', () => ({
@@ -73,7 +73,7 @@ jest.mock('next-auth/react', () => ({
   })),
   signIn: jest.fn(),
   signOut: jest.fn(),
-}));
+}), { virtual: true });
 
 // Mock console methods to reduce test noise
 const consoleError = console.error;
