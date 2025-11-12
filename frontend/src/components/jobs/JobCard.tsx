@@ -11,17 +11,17 @@ import {
   alpha,
 } from '@mui/material';
 import {
-  Bookmark,
-  BookmarkCheck,
-  MapPin,
-  Building,
-  DollarSign,
-  Zap,
-  Star,
-  TrendingUp,
-  Shield,
-  ExternalLink,
-} from 'lucide-react';
+  Bookmark as BookmarkIcon,
+  BookmarkAdded as BookmarkCheckIcon,
+  LocationOn as MapPinIcon,
+  Business as BuildingIcon,
+  AttachMoney as DollarSignIcon,
+  Bolt as ZapIcon,
+  Star as StarIcon,
+  TrendingUp as TrendingUpIcon,
+  Security as ShieldIcon,
+  OpenInNew as ExternalLinkIcon,
+} from '@mui/icons-material';
 
 export interface JobCardProps {
   job: {
@@ -152,12 +152,12 @@ export const JobCard: React.FC<JobCardProps> = ({
                 {job.verified && <Shield size={16} color="#60a5fa" />}
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
-                <Building size={12} />
+                <BuildingIcon sx={{ fontSize: 12 }} />
                 <Typography variant="caption" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {job.company}
                 </Typography>
                 <Typography variant="caption">•</Typography>
-                <MapPin size={12} />
+                <MapPinIcon sx={{ fontSize: 12 }} />
                 <Typography variant="caption" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {job.location}
                 </Typography>
@@ -185,7 +185,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                   color: isSaved ? 'primary.main' : 'text.secondary',
                 }}
               >
-                {isSaved ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
+                {isSaved ? <BookmarkCheckIcon sx={{ fontSize: 16 }} /> : <BookmarkIcon sx={{ fontSize: 16 }} />}
               </IconButton>
             </Box>
           </Box>
@@ -235,7 +235,7 @@ export const JobCard: React.FC<JobCardProps> = ({
               {job.logoUrl ? (
                 <img src={job.logoUrl} alt={job.company} style={{ width: 32, height: 32, borderRadius: 8 }} />
               ) : (
-                <Building size={24} />
+                <BuildingIcon sx={{ fontSize: 24 }} />
               )}
             </Box>
             <Box>
@@ -292,7 +292,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                 color: isSaved ? 'primary.main' : 'text.secondary',
               }}
             >
-              {isSaved ? <BookmarkCheck size={20} /> : <Bookmark size={20} />}
+              {isSaved ? <BookmarkCheckIcon sx={{ fontSize: 20 }} /> : <BookmarkIcon sx={{ fontSize: 20 }} />}
             </IconButton>
           </Box>
         </Box>
@@ -303,7 +303,7 @@ export const JobCard: React.FC<JobCardProps> = ({
 
         <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2, mb: 2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <MapPin size={16} />
+            <MapPinIcon sx={{ fontSize: 16 }} />
             <Typography variant="body2" color="text.secondary">
               {job.location}
             </Typography>
@@ -311,7 +311,7 @@ export const JobCard: React.FC<JobCardProps> = ({
           
           {job.salary && (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <DollarSign size={16} />
+              <DollarSignIcon sx={{ fontSize: 16 }} />
               <Typography variant="body2" color="text.secondary">
                 {formatSalary()}
               </Typography>
@@ -394,7 +394,7 @@ export const JobCard: React.FC<JobCardProps> = ({
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              <Zap size={16} color="#A78BFA" />
+              <ZapIcon sx={{ fontSize: 16, color: '#A78BFA' }} />
               <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
                 Why this matches you
               </Typography>
