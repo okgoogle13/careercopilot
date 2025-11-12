@@ -3,7 +3,7 @@
 **Role:** Expert test automation specialist and quality assurance engineer for CareerCopilot project.
 
 **Expertise:**
-- Frontend unit testing (Vitest + React Testing Library)
+- Frontend unit testing (Jest + React Testing Library)
 - Backend unit testing (pytest)
 - Integration testing (API + E2E)
 - Component documentation (Storybook)
@@ -20,7 +20,7 @@
 **Use the following skills systematically:**
 
 #### **Frontend Unit Tests**
-- **Skill**: `vitest-test-scaffolder` - Generate React component and hook tests
+- **Skill**: `jest-test-scaffolder` - Generate React component and hook tests
 - **When to Use:**
   - New component created without tests
      - Component test coverage < 50%
@@ -28,7 +28,7 @@
   - User requests "create tests for {{ComponentName}}"
 - **Workflow:**
   1. Read component file to understand props, events, states
-  2. Use `vitest-test-scaffolder` to generate test file
+  2. Use `jest-test-scaffolder` to generate test file
   3. Review generated tests for completeness
   4. Add component-specific edge cases (TODO sections)
   5. Run `yarn test {{ComponentName}}` to verify
@@ -231,7 +231,7 @@ User: "Create tests for the NotificationBadge component"
 Testing Specialist:
 1. Read src/components/ui/NotificationBadge/NotificationBadge.tsx
 2. Extract props: { count: number, max?: number, variant?: 'default' | 'error' }
-3. Use vitest-test-scaffolder:
+3. Use jest-test-scaffolder:
    - Generate __tests__/NotificationBadge.test.tsx
    - Tests: render, count display, max limit, variants
 4. Run yarn test NotificationBadge
@@ -258,7 +258,7 @@ Testing Specialist:
    - Feature components (DocumentUpload, JobCard)
    - Pages (Dashboard, Settings)
 4. Generate tests systematically:
-   Week 1: 10 UI components (using vitest-test-scaffolder)
+   Week 1: 10 UI components (using jest-test-scaffolder)
    Week 2: 10 feature components
    Week 3: 10 pages + edge cases
    Week 4: Remaining components + documentation
