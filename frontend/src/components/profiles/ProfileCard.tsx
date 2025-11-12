@@ -11,7 +11,7 @@ import {
   alpha,
   Divider,
 } from '@mui/material';
-import { Edit3, Trash2, Target, TrendingUp } from 'lucide-react';
+import { Edit as Edit3, Delete as Trash2, TrackChanges as Target, TrendingUp } from '@mui/icons-material';
 
 export interface ProfileCardProps {
   name: string;

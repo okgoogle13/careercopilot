@@ -17,58 +17,32 @@ import { Badge } from '../../ui/badge';
 import { Button } from '../../ui/button';
 import { Card } from '../../ui/card';
 
-interface ATSAnalysisDashboardProps {
-  onBack?: () => void;
-  onNext?: () => void;
+export interface AnalysisResult {
+  overallScore: number;
+  keywordMatches: number;
+  totalKeywords: number;
+  sections: {
+    [key: string]: number;
+  };
+  matchedKeywords: string[];
+  missingKeywords: string[];
+  insights: {
+    type: 'strength' | 'improvement' | 'opportunity';
+    title: string;
+    description: string;
+  }[];
 }
 
-export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardProps) {
-  const [activeTab, setActiveTab] = useState<'overview' | 'keywords' | 'insights'>('overview');
+interface ATSAnalysisDashboardProps {
+  data: AnalysisResult;
+  onBack?: () => void;
+  onNext?: () => void;
+  onContinueToTemplates?: () => void;
+  onBackToJobAnalysis?: () => void;
+}
 
-  // Mock data - in real app this would come from props or API
-  const analysisData = {
-    overallScore: 85,
-    keywordMatches: 12,
-    totalKeywords: 15,
-    sections: {
-      formatting: 92,
-      keywords: 78,
-      experience: 88,
-      skills: 85,
-    },
-    matchedKeywords: [
-      'Community Services',
-      'Case Management',
-      'Crisis Intervention',
-      'Mental Health Support',
-      'Program Coordination',
-      'Client Assessment',
-      'Documentation',
-      'Multidisciplinary Team',
-      'Advocacy',
-      'Resource Coordination',
-      'Trauma-Informed Care',
-      'Cultural Competency',
-    ],
-    missingKeywords: ['Data Management', 'Quality Assurance', 'Risk Assessment'],
-    insights: [
-      {
-        type: 'strength' as const,
-        title: 'Strong Experience Match',
-        description: 'Your community services experience aligns perfectly with job requirements',
-      },
-      {
-        type: 'improvement' as const,
-        title: 'Add Technical Skills',
-        description: 'Include specific database management and reporting software experience',
-      },
-      {
-        type: 'opportunity' as const,
-        title: 'Highlight Leadership',
-        description: 'Emphasize your program coordination and team leadership experience',
-      },
-    ],
-  };
+export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onContinueToTemplates, onBackToJobAnalysis }: ATSAnalysisDashboardProps) {
+  const [activeTab, setActiveTab] = useState<'overview' | 'keywords' | 'insights'>('overview');
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-500';
@@ -101,7 +75,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
     }}>
             <Button
               variant="link"
-              onClick={onBack}
+              onClick={onBackToJobAnalysis}
               sx={{
       display: "flex",
       alignItems: "center",
@@ -118,7 +92,7 @@ export function ATSAnalysisDashboard({ onBack, onNext }: ATSAnalysisDashboardPro
       alignItems: "center",
       gap: 3
     }}>
-            <Button variant="default" onClick={onNext} sx={{
+            <Button variant="default" onClick={onContinueToTemplates} sx={{
       display: "flex",
       alignItems: "center",
       gap: 2

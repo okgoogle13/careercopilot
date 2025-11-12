@@ -9,19 +9,19 @@ import {
   LinearProgress,
   alpha,
 } from '@mui/material';
+import { SvgIconComponent } from '@mui/icons-material';
 import {
-  LucideIcon,
-  ArrowRight,
-  Clock,
-  CheckCircle,
-  AlertCircle,
-  Zap,
-} from 'lucide-react';
+  ArrowForward as ArrowRight,
+  AccessTime as Clock,
+  CheckCircle as CheckCircleIcon,
+  Error as AlertCircle,
+  Bolt as Zap,
+} from '@mui/icons-material';
 
 export interface ActionCardProps {
   title: string;
   description: string;
-  icon: LucideIcon;
+  icon: SvgIconComponent;
   variant?: 'default' | 'primary' | 'secondary' | 'tertiary' | 'urgent';
   status?: 'available' | 'in-progress' | 'completed' | 'blocked';
   priority?: 'low' | 'medium' | 'high' | 'urgent';

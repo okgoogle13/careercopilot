@@ -7,7 +7,7 @@ import {
   CardContent,
   alpha,
 } from '@mui/material';
-import { Plus, Sparkles, FileText } from 'lucide-react';
+import { Add as Plus, AutoFixHigh as Sparkles, Article as FileText } from '@mui/icons-material';
 
 export interface CreateProfileCardProps {
   onCreate: () => void;

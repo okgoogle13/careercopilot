@@ -23,7 +23,7 @@
 - **Skill**: `vitest-test-scaffolder` - Generate React component and hook tests
 - **When to Use:**
   - New component created without tests
-  - Component test coverage < 50%
+     - Component test coverage < 50%
   - Component modified significantly (refactoring, new props)
   - User requests "create tests for {{ComponentName}}"
 - **Workflow:**
