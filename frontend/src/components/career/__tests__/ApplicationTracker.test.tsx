@@ -1,16 +1,16 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { jest } from '@jest/globals';
 import { ApplicationTracker } from '../ApplicationTracker';
 import { TimelineView } from '../TimelineView';
 
 // Mock the TimelineView component
-vi.mock('../TimelineView', () => ({
-  TimelineView: vi.fn(() => <div data-testid="timeline-view">TimelineView Mock</div>)
+jest.mock('../TimelineView', () => ({
+  TimelineView: jest.fn(() => <div data-testid="timeline-view">TimelineView Mock</div>)
 }));
 
 // Mock MUI components
-vi.mock('@mui/material', async () => {
-  const actual = await vi.importActual('@mui/material');
+jest.mock('@mui/material', async () => {
+  const actual = await jest.requireActual('@mui/material');
   return {
     ...actual,
     Dialog: ({ children, open, onClose, maxWidth, fullWidth, PaperProps }: any) => {
@@ -65,7 +65,7 @@ vi.mock('@mui/material', async () => {
 });
 
 // Mock MUI icons
-vi.mock('@mui/icons-material', () => ({
+jest.mock('@mui/icons-material', () => ({
   Close: () => <span data-testid="close-icon">×</span>,
   ArrowLeft: () => <span data-testid="arrow-left-icon">←</span>,
 }));
@@ -103,10 +103,10 @@ describe('ApplicationTracker', () => {
     },
   ];
 
-  const mockOnApplicationUpdate = vi.fn();
+  const mockOnApplicationUpdate = jest.fn();
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   it('renders without crashing', () => {
@@ -199,9 +199,9 @@ describe('ApplicationTracker', () => {
     
     // Simulate adding a new application
     const { handleAddApplication } = require('../ApplicationTracker');
-    const consoleSpy = vi.spyOn(console, 'log');
+    const consoleSpy = jest.spyOn(console, 'log');
     handleAddApplication();
-    
+
     expect(consoleSpy).toHaveBeenCalledWith('Add new application');
     consoleSpy.mockRestore();
   });
@@ -217,11 +217,11 @@ describe('ApplicationTracker', () => {
     // Open the dialog first
     const { handleApplicationClick, handleEventEdit } = require('../ApplicationTracker');
     handleApplicationClick('1');
-    
+
     // Simulate editing an event
-    const consoleSpy = vi.spyOn(console, 'log');
+    const consoleSpy = jest.spyOn(console, 'log');
     handleEventEdit('event-123');
-    
+
     expect(consoleSpy).toHaveBeenCalledWith('Edit event:', 'event-123');
     consoleSpy.mockRestore();
   });
@@ -237,11 +237,11 @@ describe('ApplicationTracker', () => {
     // Open the dialog first
     const { handleApplicationClick, handleAddNote } = require('../ApplicationTracker');
     handleApplicationClick('1');
-    
+
     // Simulate adding a note to an event
-    const consoleSpy = vi.spyOn(console, 'log');
+    const consoleSpy = jest.spyOn(console, 'log');
     handleAddNote('event-123');
-    
+
     expect(consoleSpy).toHaveBeenCalledWith('Add note to event:', 'event-123');
     consoleSpy.mockRestore();
   });
@@ -257,11 +257,11 @@ describe('ApplicationTracker', () => {
     // Open the dialog first
     const { handleApplicationClick, handleViewDocument } = require('../ApplicationTracker');
     handleApplicationClick('1');
-    
+
     // Simulate viewing a document
-    const consoleSpy = vi.spyOn(console, 'log');
+    const consoleSpy = jest.spyOn(console, 'log');
     handleViewDocument('resume.pdf');
-    
+
     expect(consoleSpy).toHaveBeenCalledWith('View document:', 'resume.pdf');
     consoleSpy.mockRestore();
   });
