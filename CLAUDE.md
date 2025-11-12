@@ -215,9 +215,9 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 
 ### Frontend Unit Test Generation (NEW)
 
-**Vitest Test Scaffolder:**
-- **Skill**: `vitest-test-scaffolder` - Generate React component and hook tests
-- **Location**: `.claude/skills/vitest-test-scaffolder/`
+**Jest Test Scaffolder:**
+- **Skill**: `jest-test-scaffolder` - Generate React component and hook tests
+- **Location**: `.claude/skills/jest-test-scaffolder/`
 - **Capabilities:**
   - Auto-detect component props from TypeScript
   - Generate render tests, interaction tests, accessibility tests
@@ -325,7 +325,7 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
   - Integration with other specialists (fullstack, test-runner, code-reviewer)
 - **Responsibilities:**
   1. **Test Generation:**
-     - Use `vitest-test-scaffolder` for React components
+     - Use `jest-test-scaffolder` for React components
      - Use `pytest-test-scaffolder` for Python functions
      - Use `api-integration-test-scaffolder` for API endpoints
      - Use `storybook-scaffolder` for component documentation
@@ -360,7 +360,7 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 **Generate Component Tests:**
 ```bash
 # Ask Claude: "Create tests for the Badge component"
-# testing-specialist uses vitest-test-scaffolder:
+# testing-specialist uses jest-test-scaffolder:
 # 1. Reads src/components/ui/Badge/Badge.tsx
 # 2. Extracts props: { children, variant, size, color }
 # 3. Generates __tests__/Badge.test.tsx (5 tests)
