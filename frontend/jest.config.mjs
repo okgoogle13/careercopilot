@@ -1,34 +1,31 @@
-module.exports = {
-  preset: 'ts-jest',
+export default {
+  preset: 'ts-jest/presets/default-esm',
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   testEnvironment: 'jsdom',
   rootDir: '.',
   roots: ['<rootDir>/src'],
-  testMatch: ['**/__tests__/**/*.{test,spec}.{js,jsx,ts,tsx}', '**/*.{test,spec}.{js,jsx,ts,tsx}'],
+  testMatch: ['<rootDir>/src/**/__tests__/**/*.(test|spec).(js|jsx|ts|tsx)', '<rootDir>/src/**/*.(test|spec).(js|jsx|ts|tsx)'],
   moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  globals: {
+    'ts-jest': {
+      tsconfig: '<rootDir>/tsconfig.test.json',
+    },
+  },
   transform: {
     '^.+\\.(ts|tsx)$': [
       'ts-jest',
       {
-        tsconfig: 'tsconfig.test.json',
+        tsconfig: '<rootDir>/tsconfig.test.json',
         diagnostics: {
           warnOnly: true,
         },
-        sourceMap: false, // Disable source maps to avoid write-file-atomic errors
-      },
-    ],
-    '^.+\\.(js|jsx)$': [
-      'babel-jest',
-      {
-        presets: [
-          ['@babel/preset-env', { targets: { node: 'current' } }],
-          ['@babel/preset-react', { runtime: 'automatic' }],
-        ],
-        sourceMaps: false, // Disable source maps to avoid write-file-atomic errors
+        useESM: true,
+        sourceMap: false,
       },
     ],
   },
@@ -37,7 +34,7 @@ module.exports = {
     '^.+\\.module\\.(css|sass|scss)$',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  collectCoverage: false, // Disabled by default due to Node 20 write-file-atomic compatibility issue
+  collectCoverage: false,
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
@@ -63,7 +60,7 @@ module.exports = {
   testTimeout: 15000,
   verbose: true,
   bail: false,
-  cache: false, // Disable cache to avoid write-file-atomic errors
+  cache: false,
   reporters: [
     'default',
     [
