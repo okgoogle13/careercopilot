@@ -13,19 +13,19 @@ import {
 import {
   ArrowLeft,
   Upload,
-  CheckCircle,
-  AlertTriangle,
-  XCircle,
-  Eye,
-  Download,
-  Check,
-  X,
-  Brain,
-  BarChart3,
-  Target,
-  Sparkles,
-  TrendingUp,
-} from 'lucide-react';
+  CheckCircle as CheckCircleIcon,
+  WarningAmber as AlertTriangle,
+  Cancel as XCircle,
+  Visibility as Eye,
+  Download as DownloadIcon,
+  Check as CheckIcon,
+  Close as XIcon,
+  Psychology as Brain,
+  BarChart as BarChart3,
+  TrackChanges as Target,
+  AutoFixHigh as Sparkles,
+  TrendingUp as TrendingUpIcon,
+} from '@mui/icons-material';
 
 interface ATSAnalysisDashboardProps {
   onBack: () => void;
