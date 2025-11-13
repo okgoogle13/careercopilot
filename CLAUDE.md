@@ -202,15 +202,15 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 
 ### Testing Skills & Subagents (NEW - 2025-01-06)
 
-**Current Test Coverage:**
-- **Frontend Components:** 10.6% (12/113 components tested)
+**Current Test Coverage (Updated 2025-11-14):**
+- **Frontend Components:** 17% (22/128 components tested)
 - **Backend APIs:** 85% (comprehensive pytest coverage)
 - **E2E Flows:** 90% (7 Playwright tests, 722 lines)
-- **Storybook Documentation:** 3.5% (4/113 components)
+- **Storybook Documentation:** 2.3% (3/128 components)
 
 **Coverage Goals:**
-- **Frontend Target:** 50% (56 components)
-- **Storybook Target:** 40% (45 components)
+- **Frontend Target:** 50% (64 components needed for 128 total)
+- **Storybook Target:** 40% (51 components needed for 128 total)
 - **E2E Target:** 95% (10+ critical flows)
 
 ### Frontend Unit Test Generation (NEW)
@@ -402,15 +402,18 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 
 ### Test Infrastructure
 
-**Frontend Testing (Vitest):**
-- **Runner:** Vitest 4.0.7
-- **Config:** `frontend/vitest.config.ts`
+**Frontend Testing (Jest):**
+- **Runner:** Jest 29.7.0
+- **Config:** `frontend/jest.config.mjs` (ES module support)
+- **Environment:** jsdom with TypeScript support (ts-jest)
 - **Coverage:** v8 provider, HTML/JSON/text reports
 - **Commands:**
   - `yarn test` - Run all tests
   - `yarn test:watch` - Watch mode
   - `yarn test:coverage` - Generate coverage report
   - `yarn test {{ComponentName}}` - Run specific test
+  - `yarn test:ci` - CI mode (single run + coverage)
+- **Setup:** `frontend/src/setupTests.ts` with Firebase mocks, Material-UI theme, ResizeObserver
 
 **Backend Testing (pytest):**
 - **Runner:** pytest 7.0.0+
@@ -427,30 +430,268 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 - **Config:** `frontend/playwright.config.ts`
 - **Browsers:** Chromium (Desktop Chrome)
 - **Commands:**
-  - `npx playwright test` - Run all E2E tests
-  - `npx playwright test --headed` - With browser UI
-  - `npx playwright test --debug` - Debug mode
-  - `npx playwright test {{test_name}}` - Run specific test
+  - `yarn test:e2e` - Run all E2E tests (headless)
+  - `yarn test:e2e:headed` - With browser UI
+  - `yarn test:e2e:debug` - Debug mode
+  - `yarn test:e2e:ui` - Interactive UI mode
+  - `yarn playwright:report` - View last test report
 
-### Coverage Improvement Roadmap
+### Accelerated Coverage Improvement Strategy (2-Week Timeline)
 
-**Baseline (Current):**
-- Frontend Components: 10.6% (12/113)
-- Storybook: 3.5% (4/113)
-- Backend: 85% (comprehensive)
-- E2E: 90% (7 tests)
+**Current Status (Baseline):**
+- Frontend Components: 8.1% (10/124 tested)
+- Components with 176/218 tests passing (80.7%)
+- Jest infrastructure fully configured and operational
+- jest-test-scaffolder skill ready for automated test generation
 
-**Target (Month 1):**
-- Frontend Components: 50% (56/113)
-- Storybook: 40% (45/113)
-- Backend: 90% (maintain + new features)
-- E2E: 95% (10+ critical flows)
+**Target (End of Week 2):**
+- Frontend Components: 56%+ (70+ components)
+- 90%+ test pass rate across all layers
+- Complete automation with parallel delegation
 
-**Weekly Milestones:**
-- Week 1: Frontend 20% (22 components) + Integration tests complete
-- Week 2: Frontend 35% (39 components) + pytest-test-scaffolder created
-- Week 3: Frontend 45% (50 components) + Enhanced Storybook
-- Week 4: Frontend 50% (56 components) + Storybook 40%
+**Three-Tier Parallel Delegation Strategy:**
+
+#### Tier 1: Cascade Agent (Windsurf IDE - Real-time Feedback)
+**Role:** Test simple, standalone UI components in parallel with other tiers
+**Scope:** Base UI components (Button, Input, Card, Badge, Chip, etc.) - 30-40 components
+**Characteristics:**
+- No complex state management
+- No API integrations
+- No Material-UI theme dependencies beyond ThemeProvider
+- Straightforward prop variations
+**Approach:**
+- Real-time testing in Windsurf IDE for immediate feedback
+- Use jest-test-scaffolder skill for generation
+- Fix simple test failures on the spot
+- Coordinate with test-runner for final validation
+**Timeline:** Concurrent with Jules batches (Days 1-5)
+
+#### Tier 2: Jules Instances (Parallel Batches - Maximum Velocity)
+**Role:** Generate and test feature, common, and library components at massive scale
+**Setup:** Days 1-2 (create task-delegator skill, prepare batch files)
+**Execution:** Days 3-4 (launch 8 parallel Jules instances)
+**Consolidation:** Day 5 (merge results, validate with test-runner)
+
+**Batch Configuration (8 instances, 66 components total):**
+- **Batch 1:** UI Components (feedback) - Dialog, Toast, EmptyState, Popover (10-12 components)
+- **Batch 2:** UI Components (loading) - LoadingSpinner, FullPageLoading, LoadingSkeleton (8-10 components)
+- **Batch 3:** UI Components (navigation) - Sidebar, Navbar, Breadcrumbs, Tabs (10-12 components)
+- **Batch 4:** UI Components (surfaces) - Card, Paper, Container, Grid (8-10 components)
+- **Batch 5:** Common Components - Header, Footer, Layout, PageWrapper (8-10 components)
+- **Batch 6:** Library Components - Modal, Dropdown, Tooltip, Menu (10-12 components)
+- **Batch 7:** Feature Components - Forms, Inputs, Controls (10-12 components)
+- **Batch 8:** Career Components - KSC, Resume, CoverLetter generators (10-12 components)
+
+**Per-Batch Approach:**
+- Generate tests for 8-12 components per batch
+- Run tests immediately after generation
+- Capture pass/fail metrics
+- Document issues for Day 5 consolidation
+**Expected Results:** 100-150 tests per batch, 70%+ pass rate initially
+
+#### Tier 3: testing-specialist (Complex Components - Sequential Refinement)
+**Role:** Handle complex components with special setup needs
+**Scope:** Components requiring API mocks, custom context, special configuration - 10-15 components
+**Characteristics:**
+- Require React Context (ToastContext, ThemeContext, etc.)
+- Require Firebase mocking beyond standard setup
+- Require Portal or positioning tests
+- Custom hook testing
+**Approach:**
+- Work in parallel with Tiers 1 & 2 on Days 1-4
+- Focus on quality over quantity
+- Document special setup patterns for reuse
+- Validate patterns with test-runner
+**Timeline:** Days 1-4 (parallel), Day 5 (finalization and validation)
+
+### Week 1 Execution Plan
+
+**Days 1-2: Infrastructure Setup**
+- Create task-delegator skill for Jules coordination
+- Prepare batch component lists (8 batches, 66 components)
+- Set up parallel execution environment
+- Cascade agent ready for real-time testing
+- testing-specialist ready for complex components
+- **Target:** 0 tests (setup phase)
+
+**Days 3-4: Parallel Execution**
+- Launch 8 Jules instances simultaneously (Tier 2)
+- Cascade agent testing UI components (Tier 1)
+- testing-specialist handling complex components (Tier 3)
+- **Target:** 200-400 tests generated, 70%+ pass rate
+
+**Day 5: Consolidation & Validation**
+- Merge Jules results from 8 batches
+- Run test-runner to validate all batches in parallel
+- Identify and document failures
+- Cascade fixes for high-impact failures
+- **Target:** 66 components tested, 53% coverage achieved
+
+**Week 1 Success Criteria:**
+- ✅ 66 components tested (up from 10 initial)
+- ✅ 50%+ pass rate across all new tests
+- ✅ 53% frontend coverage (exceeds 50% target)
+- ✅ Clean git history with batch commits
+- ✅ Documented test patterns for Tier 3 complex components
+
+### Week 2 Refinement Plan
+
+**Days 1-3: Fix & Enhance**
+- Analyze failures from Week 1 Jules batches
+- Fix broken tests (target: 90%+ pass rate)
+- Add edge case tests for critical components
+- Enhance existing test coverage
+- **Target:** 70+ components, 90%+ pass rate
+
+**Days 4-5: Quality Assurance & Documentation**
+- Run full test suite validation
+- Update documentation with new patterns
+- Prepare for deployment or next phase
+- **Target:** 70+ components, 56% coverage (goal achieved)
+
+**Week 2 Success Criteria:**
+- ✅ 70+ components tested
+- ✅ 90%+ test pass rate
+- ✅ 56% frontend coverage (goal exceeded)
+- ✅ Documented test patterns for all component types
+- ✅ Ready for additional coverage scaling
+
+### Coverage Improvement Timeline
+
+**Week 1 Milestones:**
+- Day 2: Infrastructure ready
+- Day 4: 8 Jules batches executing in parallel
+- Day 5: 66 components tested, 53% coverage achieved
+
+**Week 2 Milestones:**
+- Day 3: All failures fixed, 90%+ pass rate
+- Day 5: 70+ components tested, 56% coverage achieved (GOAL EXCEEDED)
+
+**Beyond Week 2:**
+- Path to 100% coverage using proven patterns
+- Scaling to Storybook and E2E coverage
+- Maintenance and continuous improvement
+
+## Jules Delegation Protocol
+
+### Overview
+This protocol standardizes how tasks are delegated to Jules (parallel execution agent) for efficient batch processing of test generation and component creation.
+
+### Core Rules
+
+#### 1. Paths: Relative Only
+- **Always use relative paths** (e.g., `./src/components/`, `./frontend/src/pages/`)
+- **Never use absolute paths** (e.g., `/Applications/careercopilot/frontend/src/`)
+- **Pattern**: Start with `./` and follow the repo structure
+- **Examples**:
+  - ✅ `./frontend/src/components/ui/Button/Button.tsx`
+  - ✅ `./src/pages/OpportunitiesPage.tsx`
+  - ✅ `./.ai_reports/[ComponentName]_report.md`
+  - ❌ `/Applications/careercopilot/frontend/src/...`
+  - ❌ `/home/user/projects/...`
+
+#### 2. Format: Flatten Instructions
+- **Single continuous line** for each task (no newlines in task description)
+- **No markdown formatting** inside task lines
+- **Structure**: `Task: [Component list] - [Action] - [Requirements] - [Handover hook]`
+- **Readability**: Use pipes `|` or semicolons `;` to separate sections if needed
+
+#### 3. Handover Hook: Mandatory
+- **Append to every task line**: Must include the exact markdown report generation string
+- **Report location**: `./.ai_reports/[ComponentName]_report.md`
+- **Report structure**: Use exact template provided
+- **Activation**: Report is created after Jules completes the task
+- **Full hook string**:
+  ```
+  Finally, create a markdown file at ./.ai_reports/[ComponentName]_report.md using this exact structure: # [ComponentName] Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [List], **Test Coverage:** [Summary], **Pending Actions:** [Next steps]
+  ```
+
+### Task Line Template
+
+```
+Task: [Component1, Component2, Component3] - [Generate tests/Create component/Run tests] - [Specific requirements] - Finally, create a markdown file at ./.ai_reports/[ComponentName]_report.md using this exact structure: # [ComponentName] Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [List], **Test Coverage:** [Summary], **Pending Actions:** [Next steps]
+```
+
+### Example Jules Delegation Tasks
+
+**Example 1: Test Generation for Multiple Components**
+```
+Task: Button, Input, Card - Generate comprehensive Jest tests using jest-test-scaffolder - Each component needs 15-25 test cases covering render, interaction, accessibility, and state variants - Tests must follow React Testing Library best practices with role-based queries - Finally, create a markdown file at ./.ai_reports/Input_report.md using this exact structure: # Input Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [./frontend/src/components/ui/input.test.tsx], **Test Coverage:** [16 tests, 100% pass rate], **Pending Actions:** [Batch 2 components ready]
+```
+
+**Example 2: Component Creation with Types**
+```
+Task: NotificationPanel, AlertBanner, StatusWidget - Create React components in ./src/components/features with TypeScript props interface and Material-UI styling - Each component must be tested and include data-testid attributes - Follow existing patterns from OpportunitiesPage and SettingsPage - Finally, create a markdown file at ./.ai_reports/NotificationPanel_report.md using this exact structure: # NotificationPanel Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [List paths relative to repo root], **Test Coverage:** [Summary of tests created], **Pending Actions:** [Integration with existing components]
+```
+
+### Benefits
+
+- **Clarity**: Clear instruction format minimizes ambiguity
+- **Scalability**: Flat format works well for parallel batch processing
+- **Traceability**: Handover hook ensures every Jules task generates documentation
+- **Consistency**: Relative paths work across all environments (local, CI, containers)
+- **Reproducibility**: Report structure allows verification of work completion
+
+### Jules Checklist Before Submission
+
+- ✅ All paths are relative (start with `./`)
+- ✅ Task description is a single continuous line
+- ✅ Handover hook is appended with exact format
+- ✅ Component list is clear and unambiguous
+- ✅ Requirements are specific and measurable
+- ✅ Report file path uses `./` prefix
+- ✅ Report structure follows exact template
+
+### Jules Launch Commands
+
+**Launch all Jules sessions from tasks.txt:**
+```bash
+# Multi-line format (recommended):
+cat tasks.txt | while IFS= read -r line; do
+  jules remote new --repo . --session "$line"
+done
+
+# Single-line format (for command history):
+cat tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line"; done
+```
+
+**How it works:**
+1. Reads each line from `tasks.txt` (each line is a complete task)
+2. For each line, creates a new Jules remote session
+3. `--repo .` specifies current directory as the repository
+4. `--session "$line"` passes the entire task line to Jules
+5. Each batch executes as a parallel Jules instance
+
+**Alternative - Launch single batch:**
+```bash
+# Extract specific batch from tasks.txt and launch
+grep "^Task: Dialog" tasks.txt | xargs -I {} julius remote new --repo . --session "{}"
+```
+
+**Monitor Jules sessions:**
+```bash
+# List all active Jules sessions
+jules remote list
+
+# Get status of specific batch
+jules remote status --session [batch-name]
+
+# Tail logs for a session
+jules remote logs --session [batch-name] -f
+```
+
+**Collect all reports after completion:**
+```bash
+# List all generated batch reports
+ls -lah ./.ai_reports/*_report.md
+
+# Generate summary of all batch results
+for report in ./.ai_reports/*_report.md; do
+  echo "=== $(basename $report) ===" && head -5 "$report"
+done
+```
+
+---
 
 ## Linting Commands
 
@@ -477,7 +718,7 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 - `yarn lint:fix`- Auto-fix ESLint issues (max 10 warnings)
 - `yarn lint:ci` - Run ESLint with CI settings (max 5 warnings)
 - `yarn storybook` - Start Storybook development server
-- `2` - Build Storybook for production
+- `yarn build-storybook` - Build Storybook for production
 
 ## Frontend Deployment Readiness Commands
 
@@ -486,6 +727,92 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 - **Bundle Analysis**: `./scripts/vite-bundle-analyzer.sh` - Vite bundle analysis and optimization recommendations
 - **Frontend Structure**: `./frontend/restructure.sh` - Reorganize frontend components and structure
 - See `scripts/frontend-commands.md` for detailed usage and examples
+
+## Design System & Aesthetic Direction (Design Wing)
+
+The project includes a comprehensive **Design Wing** infrastructure for creating and managing design systems with full WCAG compliance and accessibility auditing.
+
+### Design Agents (3 Total)
+
+**Visual Design Director** (`visual-design-director`)
+- Senior Art Director who defines aesthetic direction and visual vibe
+- Analyzes design references and creates `aestheticPreferences` JSON
+- Orchestrates design critique using vision analysis
+- Hands off complete aesthetic specifications to Design Systems Architect
+
+**Design Systems Architect** (`design-systems-architect`)
+- Design Operations specialist who translates aesthetics into tokenized systems
+- Receives aesthetic preferences and generates complete token system
+- Validates color contrast against WCAG AA/AAA standards
+- Builds frontend assets (CSS variables, Tailwind configuration)
+
+**UX & Accessibility Lead** (`ux-accessibility-lead`)
+- User advocate who audits designs for accessibility and usability
+- Validates WCAG compliance, focus states, and keyboard navigation
+- Audits user flows against Nielsen's 10 Usability Heuristics
+- Provides actionable remediation recommendations
+
+### Design Skills (4 + PDF Multimodal Skills)
+
+**Design Skills:**
+- `design-critique-vision` - Analyzes screenshots for visual quality, hierarchy, spacing, and contrast
+- `design-token-generator` - Translates aesthetic preferences into complete design token JSON (color, shape, spacing, elevation, typography)
+- `wcag-contrast-checker` - Validates text/background color pairs against WCAG AA/AAA standards
+- `ux-heuristic-audit` - Audits user flows against Nielsen's 10 Usability Heuristics
+
+**Document Skills (PDF Multimodal):**
+- `pdf-text-extractor` - Extract text, summarize, answer questions, or parse forms from PDF documents
+- Includes specialized guides: `forms.md` (structured form extraction), `reference.md` (usage patterns)
+
+### Design System Automation Scripts
+
+- `scripts/validate-design-tokens.py` - Schema validation, WCAG contrast checking, comprehensive error reporting
+- `scripts/build-design-tokens.py` - Generates CSS variables (`:root`) and Tailwind configuration patch
+- `scripts/update-design-system.sh` - Orchestration script: validates → builds → reports with error handling
+- `design-system/` - Directory for storing `tokens.json` and generated assets
+
+### Design System Workflow
+
+```
+1. User provides design vibe/reference
+   ↓
+2. Visual Design Director analyzes & creates aestheticPreferences JSON
+   ↓
+3. Design Systems Architect generates token system via design-token-generator skill
+   ↓
+4. WCAG validation via wcag-contrast-checker skill
+   ↓
+5. Save to design-system/tokens.json
+   ↓
+6. Build frontend assets: ./scripts/update-design-system.sh
+   ↓
+7. Frontend Specialist consumes tokens in components (CSS variables)
+   ↓
+8. UX & Accessibility Lead audits final design for compliance
+```
+
+### Quick Start: Create a Design System
+
+```bash
+# 1. Define aesthetics with Visual Design Director
+# Request: "Create a design system with a 'premium, minimal' aesthetic"
+
+# 2. Design Systems Architect generates tokens (automatic)
+# Saves to: design-system/tokens.json
+
+# 3. Build frontend assets
+./scripts/update-design-system.sh
+
+# 4. Output generated:
+# - frontend/src/styles/design-tokens.css (CSS custom properties)
+# - design-system/tailwind-token-patch.js (Tailwind config patch)
+
+# 5. Import in your app
+# Add to frontend/src/App.tsx: import './styles/design-tokens.css'
+
+# 6. Use in components
+# .button { background-color: var(--sys-color-primary); color: var(--sys-color-on-primary); }
+```
 
 ## Automated Linting Configuration
 
@@ -789,4 +1116,3 @@ gh workflow run ci.yml \
 - **Functions**: Jest with comprehensive test coverage
 - **CI/CD**: GitHub Actions with parallel test execution
 - **Coverage**: Integrated coverage reporting
-- memorize
