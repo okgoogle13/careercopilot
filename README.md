@@ -76,11 +76,15 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
 
 ### Frontend
 - **Framework**: React 18 with TypeScript
-- **UI Library**: Material-UI v7
+- **UI Library**: Material-UI v5
 - **State Management**: React Context API
-- **Routing**: React Router v7
+- **Routing**: React Router v6
 - **Build Tool**: Vite
-- **Testing**: Vitest, React Testing Library
+- **Testing**: Jest, React Testing Library
+- **E2E Testing**: Playwright
+- **Styling**: Emotion, Tailwind CSS
+- **Form Handling**: React Hook Form
+- **API Client**: Axios
 
 ### Backend
 - **Framework**: FastAPI (Python)
@@ -101,11 +105,11 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
 |-------------------|-------------------------------------|
 | Framework         | React 18                            |
 | Language          | TypeScript                          |
-| UI Library        | Material-UI v7                      |
+| UI Library        | Material-UI v5                      |
 | State Management  | React Context API                   |
-| Routing           | React Router v7                     |
+| Routing           | React Router v6                     |
 | Build Tool        | Vite                                |
-| Testing           | Vitest, React Testing Library       |
+| Testing           | Jest, React Testing Library         |
 | E2E Testing       | Playwright                          |
 | Styling           | Emotion, Tailwind CSS               |
 | Form Handling     | React Hook Form                     |
@@ -134,8 +138,8 @@ CareerCopilot follows a modern, component-based architecture with a clear separa
 
 ### Development Environment
 - [Node.js](https://nodejs.org/) (v18 or later)
-- [Yarn](https://yarnpkg.com/) (v4 or later)
-- [Python](https://www.python.org/) (v3.12 or later)
+- [Yarn](https://yarnpkg.com/) (v1.22.19 or later)
+- [Python](https://www.python.org/) (v3.11 or later)
 - [Firebase CLI](https://firebase.google.com/docs/cli)
 - [Docker](https://www.docker.com/) (for local development)
 
