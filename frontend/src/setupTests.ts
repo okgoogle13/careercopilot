@@ -6,6 +6,9 @@ import '@testing-library/jest-dom';
 import { jest } from '@jest/globals';
 import { cleanup } from '@testing-library/react';
 
+// Make jest available globally
+(global as any).jest = jest;
+
 // Run cleanup after each test case (e.g., clearing jsdom)
 afterEach(() => {
   cleanup();
