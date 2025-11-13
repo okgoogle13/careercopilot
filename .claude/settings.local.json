@@ -9,7 +9,9 @@
       "Bash(git commit:*)",
       "Bash(npx tsc:*)",
       "Bash(yarn install:*)",
-      "Bash(test:*)"
+      "Bash(test:*)",
+      "Bash(chmod:*)",
+      "Bash(/Applications/careercopilot/setup-agent-infrasturcutre.sh)"
     ],
     "deny": [],
     "ask": []

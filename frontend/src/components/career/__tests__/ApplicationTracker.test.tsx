@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { jest } from '@jest/globals';
 import { ApplicationTracker } from '../ApplicationTracker';
-import { TimelineView } from '../TimelineView';
+import type { Application } from '../types';
 
 // Mock the TimelineView component
 jest.mock('../TimelineView', () => ({
@@ -9,10 +9,10 @@ jest.mock('../TimelineView', () => ({
 }));
 
 // Mock MUI components
-jest.mock('@mui/material', async () => {
-  const actual = await jest.requireActual('@mui/material');
+jest.mock('@mui/material', () => {
+  const actual = jest.requireActual('@mui/material');
   return {
-    ...actual,
+    ...actual as object,
     Dialog: ({ children, open, onClose, maxWidth, fullWidth, PaperProps }: any) => {
       return open ? (
         <div data-testid="dialog" data-maxwidth={maxWidth} data-fullwidth={String(fullWidth)}>
@@ -80,6 +80,7 @@ describe('ApplicationTracker', () => {
       salary: '$120,000 - $150,000',
       appliedDate: '2023-10-15',
       status: 'screening' as const,
+      events: [],
       nextEvent: {
         type: 'Phone Interview',
         date: '2023-10-20',
@@ -187,6 +188,18 @@ describe('ApplicationTracker', () => {
         status: 'interview',
       })
     );
+  });
+
+  it('renders the timeline view with applications', () => {
+    render(
+      <ApplicationTracker 
+        applications={mockApplications as Application[]} 
+        onApplicationUpdate={mockOnApplicationUpdate} 
+      />
+    );
+    
+    // Check if the timeline view is rendered
+    expect(screen.getByTestId('timeline-view')).toBeInTheDocument();
   });
 
   it('handles adding a new application', () => {
