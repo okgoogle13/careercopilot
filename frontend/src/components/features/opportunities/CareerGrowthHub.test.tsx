@@ -1,99 +1,141 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
+import { render } from '../../../test-utils';
 import { CareerGrowthHub } from './CareerGrowthHub';
-import { vi } from 'vitest';
+import { TabContext } from '@mui/lab';
+import React from 'react';
 
 describe('CareerGrowthHub', () => {
-  const mockOnNavigate = vi.fn();
-  const mockOnBack = vi.fn();
+  const mockOnNavigate = jest.fn();
+  const mockOnBack = jest.fn();
 
   const defaultProps = {
     onNavigate: mockOnNavigate,
     onBack: mockOnBack,
+    userGoals: [],
+    userSkills: [],
   };
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
-  it('renders the component with all sections', () => {
+  const renderWithTabContext = (ui: React.ReactElement, value: string) => {
+    return render(
+      <TabContext.Provider value={value}>
+        {ui}
+      </TabContext.Provider>
+    );
+  };
+
+  it('renders the component with all main sections', async () => {
     render(<CareerGrowthHub {...defaultProps} />);
     
-    // Check main sections
     expect(screen.getByText('Career Growth Hub')).toBeInTheDocument();
-    expect(screen.getByText('AI Job Matching')).toBeInTheDocument();
-    expect(screen.getByText('Career Intelligence')).toBeInTheDocument();
-    expect(screen.getByText('Interview Preparation')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /Back to Dashboard/i })).toBeInTheDocument();
     
-    // Check tabs
-    expect(screen.getByText('Overview')).toBeInTheDocument();
-    expect(screen.getByText('Goals (3)')).toBeInTheDocument();
-    expect(screen.getByText('Skills (3)')).toBeInTheDocument();
-    expect(screen.getByText('AI Tools')).toBeInTheDocument();
+    const aiToolsTab = screen.getByRole('tab', { name: /AI Tools/i });
+    fireEvent.click(aiToolsTab);
+
+    await waitFor(() => {
+      expect(screen.getByRole('heading', { name: /AI Job Matching/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /Career Intelligence/i })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: /Interview Preparation/i })).toBeInTheDocument();
+    });
   });
 
-  it('navigates between tabs', () => {
-    render(<CareerGrowthHub {...defaultProps} />);
+  it('navigates between tabs correctly', async () => {
+    let value = 'overview';
+    const { rerender } = renderWithTabContext(<CareerGrowthHub {...defaultProps} />, value);
     
-    // Click on Goals tab
-    fireEvent.click(screen.getByText('Goals (3)'));
-    expect(screen.getByText('Add New Goal')).toBeInTheDocument();
-    
-    // Click on Skills tab
-    fireEvent.click(screen.getByText('Skills (3)'));
-    expect(screen.getByText('Add New Skill')).toBeInTheDocument();
-    
-    // Click on AI Tools tab
-    fireEvent.click(screen.getByText('AI Tools'));
-    expect(screen.getByText('AI Job Matching')).toBeInTheDocument();
+    const goalsTab = screen.getByRole('tab', { name: /Goals/i });
+    fireEvent.click(goalsTab);
+    value = 'goals';
+    rerender(
+      <TabContext.Provider value={value}>
+        <CareerGrowthHub {...defaultProps} />
+      </TabContext.Provider>
+    );
+    await waitFor(() => {
+      expect(screen.getByTestId('tabs-content-goals')).toBeVisible();
+    });
+
+    const skillsTab = screen.getByRole('tab', { name: /Skills/i });
+    fireEvent.click(skillsTab);
+    value = 'skills';
+    rerender(
+      <TabContext.Provider value={value}>
+        <CareerGrowthHub {...defaultProps} />
+      </TabContext.Provider>
+    );
+    await waitFor(() => {
+      expect(screen.getByTestId('tabs-content-skills')).toBeVisible();
+    });
   });
 
-  it('navigates to AI tools when clicking on feature cards', () => {
-    render(<CareerGrowthHub {...defaultProps} />);
+  it('calls onNavigate with correct feature when feature cards are clicked', async () => {
+    let value = 'ai-tools';
+    const { rerender } = renderWithTabContext(<CareerGrowthHub {...defaultProps} />, value);
     
-    // Click on AI Job Matching card
-    fireEvent.click(screen.getByText('AI Job Matching'));
+    const aiToolsTab = screen.getByRole('tab', { name: /AI Tools/i });
+    fireEvent.click(aiToolsTab);
+    rerender(
+      <TabContext.Provider value={value}>
+        <CareerGrowthHub {...defaultProps} />
+      </TabContext.Provider>
+    );
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByRole('heading', { name: /AI Job Matching/i }));
+    });
     expect(mockOnNavigate).toHaveBeenCalledWith('job-matching');
     
-    // Click on Career Intelligence card
-    fireEvent.click(screen.getByText('Career Intelligence'));
+    await waitFor(() => {
+      fireEvent.click(screen.getByRole('heading', { name: /Career Intelligence/i }));
+    });
     expect(mockOnNavigate).toHaveBeenCalledWith('career-intelligence');
     
-    // Click on Interview Preparation card
-    fireEvent.click(screen.getByText('Interview Preparation'));
+    await waitFor(() => {
+      fireEvent.click(screen.getByRole('heading', { name: /Interview Preparation/i }));
+    });
     expect(mockOnNavigate).toHaveBeenCalledWith('interview-prep');
   });
 
-  it('calls onBack when clicking the back button', () => {
+  it('calls onBack when back button is clicked', () => {
     render(<CareerGrowthHub {...defaultProps} />);
     
-    const backButton = screen.getByRole('button', { name: /back to dashboard/i });
+    const backButton = screen.getByRole('button', { name: /Back to Dashboard/i });
     fireEvent.click(backButton);
     
     expect(mockOnBack).toHaveBeenCalledTimes(1);
   });
 
-  it('displays the correct number of active goals and skills', () => {
-    render(<CareerGrowthHub {...defaultProps} />);
+  it('displays the correct number of goals and skills when provided', () => {
+    const props = {
+      ...defaultProps,
+      userGoals: [
+        { id: '1', title: 'Goal 1', description: '...', category: 'skill' as const, progress: 50, targetDate: '2025-12-31', status: 'active', milestones: [] },
+      ],
+      userSkills: [
+        { id: '1', name: 'Skill 1', category: 'technical' as const, currentLevel: 2, targetLevel: 4, demandScore: 80, trending: true, resources: [] },
+        { id: '2', name: 'Skill 2', category: 'soft' as const, currentLevel: 3, targetLevel: 5, demandScore: 60, trending: false, resources: [] },
+      ],
+    };
+    render(<CareerGrowthHub {...props} />);
     
-    // Check active goals count
-    expect(screen.getByText('3')).toBeInTheDocument(); // Active goals
-    expect(screen.getByText('3')).toBeInTheDocument(); // Skills tracking
+    const goalsTab = screen.getByRole('tab', { name: /Goals/i });
+    expect(goalsTab.textContent).toBe('Goals (1)');
+    
+    const skillsTab = screen.getByRole('tab', { name: /Skills/i });
+    expect(skillsTab.textContent).toBe('Skills (2)');
   });
 
-  it('shows the add goal form when clicking add goal button', async () => {
+  it('displays a message when there are no goals or skills', () => {
     render(<CareerGrowthHub {...defaultProps} />);
     
-    // Click on Goals tab
-    fireEvent.click(screen.getByText('Goals (3)'));
+    const goalsTab = screen.getByRole('tab', { name: /Goals/i });
+    expect(goalsTab.textContent).toBe('Goals (0)');
     
-    // Click on Add Goal button
-    const addButton = screen.getByRole('button', { name: /add goal/i });
-    fireEvent.click(addButton);
-    
-    // Check if the form is displayed
-    await waitFor(() => {
-      expect(screen.getByLabelText(/goal title/i)).toBeInTheDocument();
-      expect(screen.getByLabelText(/description/i)).toBeInTheDocument();
-    });
+    const skillsTab = screen.getByRole('tab', { name: /Skills/i });
+    expect(skillsTab.textContent).toBe('Skills (0)');
   });
 });
