@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "last_updated": "2025-11-17T17:05:08.880461",
+  "last_updated": "2025-11-17T17:16:45.909375",
   "components": {
     "components/ui/M3Button.tsx": {
       "status": "migrated",
@@ -551,6 +551,22 @@
       "notes": "M3 tokens detected"
     },
     "components/ui/M3Breadcrumb.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ui/M3Switch.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ui/M3Slider.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ui/M3RadioGroup.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ui/M3Checkbox.tsx": {
       "status": "migrated",
       "notes": "M3 tokens detected"
     }
