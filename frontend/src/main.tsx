@@ -2,6 +2,9 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
+// M3 Expressive Design Tokens
+import './styles/m3-design-tokens.css';
+
 // import * as Sentry from '@sentry/react';
 import { AuthProvider } from './context/AuthContext';
 import AppWrapper from './AppWrapper';
@@ -27,11 +30,11 @@ link.rel = 'stylesheet';
 link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
 document.head.appendChild(link);
 
-// Add Inter font
-const interLink = document.createElement('link');
-interLink.rel = 'stylesheet';
-interLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap';
-document.head.appendChild(interLink);
+// Add M3 Expressive fonts
+const fontsLink = document.createElement('link');
+fontsLink.rel = 'stylesheet';
+fontsLink.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap';
+document.head.appendChild(fontsLink);
 
 const root = document.getElementById('root');
 
