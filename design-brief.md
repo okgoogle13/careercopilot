@@ -54,25 +54,25 @@ B. Structure: Roboto Flex (Headings & UI)
 
 Headings should feel "open" and confident. We use the Width axis to stretch them slightly.
 	•	Usage: Page Titles, Card Headers, Buttons.
-	•	Base Style: CSS    font-family: 'Roboto Flex', sans-serif;
+	•	Base Style:CSS font-family: 'Roboto Flex', sans-serif;
 	•	font-weight: 650;
 	•	font-variation-settings: 'wdth' 110, 'GRAD' 0; /* 110 = Slightly Expanded */
 	•	letter-spacing: -0.02em;
-	•	   
-	•	Interaction (The "Breathing" Hover): When hovering over a primary button or card, the text expands and gets heavier. CSS    selector:hover {
+	•	
+	•	Interaction (The "Breathing" Hover):When hovering over a primary button or card, the text expands and gets heavier.CSS selector:hover {
 	•	  font-variation-settings: 'wdth' 120, 'GRAD' 50;
 	•	  transition: font-variation-settings 0.4s cubic-bezier(0.2, 0, 0, 1);
 	•	}
-	•	   
+	•	
 
 C. Magic: Syne (The Expressive Moment)
 
 	•	Usage: Only for the "AHA!" moments. E.g., The title of a card revealing a perfect job match, or the AI's opening greeting.
-	•	Style: CSS    font-family: 'Syne', sans-serif;
+	•	Style:CSS font-family: 'Syne', sans-serif;
 	•	font-weight: 700;
 	•	font-size: 1.5rem; /* Needs to be large to work */
 	•	color: var(--tertiary); /* Pink */
-	•	   
+	•	
 
 2. Shape System (Organic & Asymmetric)
 
