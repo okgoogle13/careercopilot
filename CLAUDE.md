@@ -382,6 +382,93 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 # .button { background-color: var(--sys-color-primary); color: var(--sys-color-on-primary); }
 ```
 
+## M3 Expressive Migration Infrastructure (NEW - 2025-11-17)
+
+The project includes a complete **M3 Expressive Design System migration infrastructure** for systematic component upgrades from Material-UI v5 to Material Design 3.
+
+### M3 Migration Architect Agent
+
+**Agent:** `m3-migration-architect` - Orchestrates 8-step migration protocol
+**Location:** `.claude/agents/m3-migration-architect.md`
+
+**Capabilities:**
+- Complete stack migration (MUI v5 → M3 Expressive)
+- Orchestrates all 8 frontend-migration skills sequentially
+- Ensures 100% token replacement (no hardcoded values)
+- Validates M3 compliance post-migration
+
+**When to Use:** "Migrate the Button component to M3 Expressive design tokens"
+
+### M3 Migration Skills (8 + Orchestrator = 9 total, 5,036 lines)
+
+**Location:** `.claude/skills/frontend-migration/`
+
+#### Batch Migration Orchestrator
+**Skill:** `batch-migration-orchestrator` (539 lines)
+- Parallel component migration coordinator
+- Manages multi-component migrations
+- Coordinates all 8 migration skills
+
+#### Individual Migration Skills
+
+1. **m3-layout-refactor** (460 lines) - Spacing tokens
+   - Convert padding/margin/gap to `var(--sys-spacing-*)`
+   - Transform `theme.spacing()` calls and hardcoded pixels
+   - 8px base grid alignment
+
+2. **m3-color-themer** (530 lines) - Color tokens
+   - Replace hardcoded colors with `var(--sys-color-*)`
+   - 78 color tokens, 30+ semantic roles
+   - WCAG compliance validation
+
+3. **m3-typography-classifier** (626 lines) - Typography scale
+   - Map fonts to `var(--sys-typescale-*-*)`
+   - 13 typography scales (display, headline, title, label, body)
+   - Font weight and line-height tokens
+
+4. **m3-editorial-stylist** (593 lines) - Editorial conventions
+   - Content-specific styles (line-height, letter-spacing, max-width)
+   - Reading-optimized typography
+   - Text alignment and justification
+
+5. **m3-shape-refactor** (568 lines) - Shape tokens
+   - Convert border-radius to `var(--sys-shape-corner-*)`
+   - 7 shape scales (extra-small to full)
+   - Consistent corner treatments
+
+6. **m3-elevation-refactor** (554 lines) - Elevation tokens
+   - Replace box-shadow with `var(--sys-elevation-level*)`
+   - 6 elevation levels (0-5)
+   - Standardized shadow depths
+
+7. **m3-icon-replacer** (549 lines) - Icon standards
+   - Migrate Material-UI Icons → Material Symbols
+   - Consistent sizing and colors
+   - Icon token system integration
+
+8. **m3-motion-applier** (617 lines) - Motion tokens
+   - Transform transitions to M3 duration/easing tokens
+   - 16 duration scales, 10 easing functions
+   - Consistent animation timing
+
+### Migration Workflow
+
+```bash
+# Migrate a single component
+# Ask: "Migrate the Button component to M3 Expressive"
+# m3-migration-architect executes all 8 skills sequentially
+
+# Batch migrate multiple components
+# Ask: "Migrate Card, Dialog, and Menu to M3 Expressive"
+# batch-migration-orchestrator coordinates parallel migrations
+```
+
+### Documentation & References
+
+- **Complete Infrastructure Guide:** `.claude/docs/M3_EXPRESSIVE_INFRASTRUCTURE.md` (347 lines)
+- **Skill-Agent Matrix:** `SKILL_AGENT_MATRIX.md` - Complete M3 skill mappings
+- **Agent Reference:** `AGENT_MODEL_REFERENCE.md` - m3-migration-architect details
+
 ## Automated Linting Configuration
 
 - **VS Code Auto-fix**: ESLint auto-fixes on save via `.vscode/settings.json`
