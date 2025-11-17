@@ -156,7 +156,7 @@ This document provides a comprehensive reference for all agents in the CareerCop
 - Fixes broken tests
 - Reports coverage metrics
 
-**Skills Used:** jest-test-scaffolder, vitest-test-scaffolder, webapp-testing, api-integration-test-scaffolder
+**Skills Used:** jest-test-scaffolder, webapp-testing, api-integration-test-scaffolder
 
 ---
 
@@ -169,7 +169,7 @@ This document provides a comprehensive reference for all agents in the CareerCop
 - Test quality assurance and pattern enforcement
 - Test data management and fixture creation
 
-**Skills Used:** jest-test-scaffolder, vitest-test-scaffolder, api-integration-test-scaffolder, storybook-scaffolder, webapp-testing
+**Skills Used:** jest-test-scaffolder, api-integration-test-scaffolder, storybook-scaffolder, webapp-testing
 
 ---
 
