@@ -7,16 +7,10 @@ import {
   MicOff,
   Replay as RotateCcw,
 } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import {
   Button,
-  IconButton,
   Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
 } from '@mui/material';
 import { useState } from 'react';
 
@@ -38,6 +32,7 @@ interface Question {
 }
 
 export function InterviewPrep({ onBack }: InterviewPrepProps) {
+  const theme = useTheme();
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [isGeneratingTips, setIsGeneratingTips] = useState(false);
   const [userAnswer, setUserAnswer] = useState('');
@@ -158,24 +153,24 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'behavioral':
-        return 'bg-blue-500/10 text-blue-500';
+        return 'bg-blue-100 text-blue-800';
       case 'situational':
-        return 'bg-green-500/10 text-green-500';
+        return 'bg-green-100 text-green-800';
       case 'technical':
-        return 'bg-purple-500/10 text-purple-500';
+        return 'bg-purple-100 text-purple-800';
       default:
-        return 'bg-gray-500/10 text-gray-500';
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   return (
-    <div sx={{
+    <Box sx={{
       minHeight: "100vh",
       p: 4
     }}>
-      <div sx={{}}>
+      <Box>
         {/* Header */}
-        <div sx={{
+        <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 4,
@@ -187,36 +182,34 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
     }} />
             Back to Career Hub
           </Button>
-        </div>
+        </Box>
 
-        <div sx={{
+        <Box sx={{
       textAlign: "center",
       mb: 8
     }}>
-          <div sx={{
+          <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       gap: 2,
       mb: 4
     }}>
-            <Sparkles sx={{}} />
-            <h1 sx={{
-      typography: "h3",
+            <Sparkles />
+            <Typography variant="h3" sx={{
       fontWeight: 600
-    }}>AI Interview Preparation</h1>
-          </div>
-          <p sx={{
-      typography: "h6"
-    }}>
+    }}>AI Interview Preparation</Typography>
+          </Box>
+          <Typography variant="h6" sx={{ color: 'text.secondary' }}>
             Practice with AI-powered mock interviews tailored to community support roles.
-          </p>
-        </div>
+          </Typography>
+        </Box>
 
         {!currentQuestion ? (
           /* Question Category Selection */
-          <div sx={{
-      [theme.breakpoints.up('sm')]: {},
+          <Box sx={{
+      display: 'grid',
+      gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' },
       gap: 6,}}>
             {questionCategories.map((category) => (
               <Card
@@ -224,63 +217,81 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                 sx={{
       p: 6,
       border: 2,
-      '&:hover': {},
+      borderColor: 'grey.200',
+      transition: 'all 0.3s',
+      '&:hover': {
+        boxShadow: 4,
+        transform: 'translateY(-4px)',
+        borderColor: 'primary.main',
+      },
       cursor: "pointer",
-      '&:hover': { boxShadow: 4 },}}
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign: 'center',
+    }}
                 onClick={() => handleSelectCategory(category.id)}
               >
-                <div sx={{
-      textAlign: "center",}}>
-                  <div sx={{
+                <Box sx={{
       p: 4,
-      borderRadius: "1rem",}}>
-                    <MessageSquare sx={{}} />
-                  </div>
+      borderRadius: "1rem",
+      mb: 4,
+      display: 'inline-flex',
+      bgcolor: category.color.split(' ')[0],
+      color: category.color.split(' ')[1],
+    }}>
+                    <MessageSquare sx={{ fontSize: '2.5rem' }} />
+                  </Box>
 
-                  <div>
-                    <h3 sx={{
-      typography: "h5",
+                  <Box sx={{ flexGrow: 1 }}>
+                    <Typography variant="h5" sx={{
       fontWeight: 600,
       mb: 2
-    }}>{category.title}</h3>
-                    <p sx={{
-      typography: "body1",}}>
+    }}>{category.title}</Typography>
+                    <Typography sx={{
+      typography: "body1",
+      color: 'text.secondary',
+      mb: 4
+    }}>
                       {category.description}
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
 
                   <Button sx={{
       width: "100%",
-      '&:hover': {},}}>
+      mt: 'auto',
+      '&:hover': { bgcolor: 'primary.dark' },}}>
                     <Play sx={{
       mr: 2
     }} />
                     Start Practice
                   </Button>
-                </div>
               </Card>
             ))}
-          </div>
+          </Box>
         ) : (
           /* Interview Practice Interface */
-          <div sx={{
-      [theme.breakpoints.up('lg')]: {},
+          <Box sx={{
+      display: 'grid',
+      gridTemplateColumns: { xs: '1fr', lg: '2fr 1fr' },
       gap: 8
     }}>
             {/* Main Practice Area */}
-            <div sx={{
-      [theme.breakpoints.up('lg')]: {},}}>
+            <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 6,}}>
               {/* Question Card */}
               <Card sx={{
       p: 6
     }}>
-                <div sx={{
+                <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       mb: 4
     }}>
-                  <div sx={{
+                  <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 3
@@ -294,39 +305,41 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     >
                       {currentQuestion.difficulty}
                     </Badge>
-                  </div>
+                  </Box>
                   <Button variant="outlined" size="small" onClick={handleNewQuestion}>
                     <RotateCcw sx={{
-      mr: 2
+      mr: 2,
+      fontSize: '1rem'
     }} />
                     New Question
                   </Button>
-                </div>
+                </Box>
 
-                <div sx={{
+                <Box sx={{
       mb: 4
     }}>
-                  <h3 sx={{
+                  <Typography sx={{
       typography: "body1",
       fontWeight: 500,
+      color: 'text.secondary',
       mb: 2
     }}>
                     {currentQuestion.category}
-                  </h3>
-                  <h2 sx={{
-      typography: "h5",
+                  </Typography>
+                  <Typography variant="h5" sx={{
       fontWeight: 600,}}>
                     {currentQuestion.question}
-                  </h2>
-                </div>
+                  </Typography>
+                </Box>
 
                 {/* Recording Controls */}
-                <div sx={{
+                <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 4,
       mb: 6,
       p: 4,
+      bgcolor: 'grey.50',
       borderRadius: "0.5rem"
     }}>
                   <Button
@@ -338,52 +351,62 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     {isRecording ? (
                       <>
                         <MicOff sx={{
-      mr: 2
+      mr: 1
     }} />
                         Stop Recording
                       </>
                     ) : (
                       <>
                         <Mic sx={{
-      mr: 2
+      mr: 1
     }} />
                         Start Recording
                       </>
                     )}
                   </Button>
                   {isRecording && (
-                    <div sx={{
+                    <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 2,
       color: "red.500"
     }}>
-                      <div sx={{
+                      <Box sx={{
+      width: 8,
+      height: 8,
       bgcolor: "red.500",
-      borderRadius: "9999px",}} />
-                      <span sx={{
+      borderRadius: "9999px",
+      animation: 'pulse 1.5s infinite'
+    }} />
+                      <Typography sx={{
       typography: "body1"
-    }}>Recording...</span>
-                    </div>
+    }}>Recording...</Typography>
+                    </Box>
                   )}
-                  <span sx={{
-      typography: "body1",}}>Or type your answer below</span>
-                </div>
+                  <Typography sx={{
+      typography: "body1",
+      color: 'text.secondary'
+    }}>Or type your answer below</Typography>
+                </Box>
 
                 {/* Answer Input */}
-                <div sx={{}}>
-                  <label sx={{
+                <Box>
+                  <Typography component="label" sx={{
       typography: "body1",
-      fontWeight: 500
-    }}>Your Answer</label>
+      fontWeight: 500,
+      mb: 1,
+      display: 'block'
+    }}>Your Answer</Typography>
                   <Textarea
                     value={userAnswer}
                     onChange={(e) => setUserAnswer(e.target.value)}
                     placeholder="Type your answer here using the STAR method (Situation, Task, Action, Result)..."
                     sx={{
-      h: "150px",}}
+      minHeight: "150px",
+      mb: 2
+    }}
                   />
-                  <div sx={{
+                  <Box sx={{
       display: "flex",
       gap: 3
     }}>
@@ -391,13 +414,15 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                       onClick={handleGenerateTips}
                       disabled={isGeneratingTips || !userAnswer.trim()}
                       sx={{
-      '&:hover': {}
+      '&:hover': { bgcolor: 'primary.dark' }
     }}
                     >
                       {isGeneratingTips ? (
                         <>
                           <Sparkles sx={{
-      mr: 2,}} />
+      mr: 2,
+      animation: 'spin 1s linear infinite'
+    }} />
                           Analyzing...
                         </>
                       ) : (
@@ -415,23 +440,27 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
                     >
                       {showSampleAnswer ? 'Hide' : 'Show'} Sample Answer
                     </Button>
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               </Card>
 
               {/* Sample Answer */}
               {showSampleAnswer && currentQuestion.sampleAnswer && (
                 <Card sx={{
-      p: 6,}}>
-                  <h3 sx={{
+      p: 6,
+      bgcolor: 'green.50'
+    }}>
+                  <Typography variant="h6" sx={{
       fontWeight: 600,
       mb: 3,
       color: "green.700"
-    }}>Sample Answer</h3>
-                  <p sx={{
-      typography: "body1",}}>
+    }}>Sample Answer</Typography>
+                  <Typography sx={{
+      typography: "body1",
+      whiteSpace: 'pre-wrap'
+    }}>
                     {currentQuestion.sampleAnswer}
-                  </p>
+                  </Typography>
                 </Card>
               )}
 
@@ -439,48 +468,58 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               {isGeneratingTips && (
                 <Card sx={{
       p: 6,}}>
-                  <div sx={{
+                  <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 2,
       mb: 3
     }}>
-                    <Sparkles sx={{}} />
-                    <h3 sx={{
-      fontWeight: 600,}}>AI Feedback</h3>
-                  </div>
-                  <div sx={{
-      typography: "body1"
+                    <Sparkles sx={{ color: 'primary.main' }} />
+                    <Typography variant="h6" sx={{
+      fontWeight: 600,}}>AI Feedback</Typography>
+                  </Box>
+                  <Box sx={{
+      typography: "body1",
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 2
     }}>
-                    <p>
+                    <Typography>
                       • <strong>Structure:</strong> Good use of STAR method, clear sequence of
                       events
-                    </p>
-                    <p>
+                    </Typography>
+                    <Typography>
                       • <strong>Impact:</strong> Consider quantifying the results more specifically
-                    </p>
-                    <p>
+                    </Typography>
+                    <Typography>
                       • <strong>Skills demonstrated:</strong> Shows empathy, adaptability, and
                       client-centered approach
-                    </p>
-                    <p>
+                    </Typography>
+                    <Typography>
                       • <strong>Suggestion:</strong> Add more detail about the specific strategies
                       you used
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
                 </Card>
               )}
-            </div>
+            </Box>
             {/* Tips Sidebar */}
-            <div sx={{}}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
               <Card sx={{
       p: 6
     }}>
-                <h3 sx={{
+                <Typography variant="h6" sx={{
       fontWeight: 600,
       mb: 4
-    }}>Tips for this Question</h3>
-                <ul sx={{}}>
+    }}>Tips for this Question</Typography>
+                <ul sx={{
+      p: 0,
+      m: 0,
+      listStyle: 'none',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3
+    }}>
                   {currentQuestion.tips.map((tip, index) => (
                     <li key={index} sx={{
       typography: "body1",
@@ -488,9 +527,12 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
       alignItems: "flex-start",
       gap: 2
     }}>
-                      <div sx={{
+                      <Box sx={{
+      width: 8,
+      height: 8,
       borderRadius: "9999px",
-      mt: 2,
+      bgcolor: 'primary.main',
+      mt: '6px',
       flexShrink: 0
     }} />
                       {tip}
@@ -502,44 +544,52 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               <Card sx={{
       p: 6
     }}>
-                <h3 sx={{
+                <Typography variant="h6" sx={{
       fontWeight: 600,
       mb: 4
-    }}>STAR Method</h3>
-                <div sx={{}}>
-                  <div>
-                    <h4 sx={{
+    }}>STAR Method</Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Box>
+                    <Typography sx={{
       fontWeight: 500,
       typography: "body1"
-    }}>Situation</h4>
-                    <p sx={{
-      typography: "body2",}}>Set the context</p>
-                  </div>
-                  <div>
-                    <h4 sx={{
+    }}>Situation</Typography>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>Set the context</Typography>
+                  </Box>
+                  <Box>
+                    <Typography sx={{
       fontWeight: 500,
       typography: "body1"
-    }}>Task</h4>
-                    <p sx={{
-      typography: "body2",}}>Describe your responsibility</p>
-                  </div>
-                  <div>
-                    <h4 sx={{
+    }}>Task</Typography>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>Describe your responsibility</Typography>
+                  </Box>
+                  <Box>
+                    <Typography sx={{
       fontWeight: 500,
       typography: "body1"
-    }}>Action</h4>
-                    <p sx={{
-      typography: "body2",}}>Explain what you did</p>
-                  </div>
-                  <div>
-                    <h4 sx={{
+    }}>Action</Typography>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>Explain what you did</Typography>
+                  </Box>
+                  <Box>
+                    <Typography sx={{
       fontWeight: 500,
       typography: "body1"
-    }}>Result</h4>
-                    <p sx={{
-      typography: "body2",}}>Share the outcome</p>
-                  </div>
-                </div>
+    }}>Result</Typography>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>Share the outcome</Typography>
+                  </Box>
+                </Box>
               </Card>
 
               <Button
@@ -551,10 +601,10 @@ export function InterviewPrep({ onBack }: InterviewPrepProps) {
               >
                 Choose Different Category
               </Button>
-            </div>
-          </div>
+            </Box>
+          </Box>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

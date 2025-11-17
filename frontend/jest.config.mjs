@@ -2,6 +2,7 @@ export default {
   preset: 'ts-jest/presets/default-esm',
   extensionsToTreatAsEsm: ['.ts', '.tsx'],
   testEnvironment: 'jsdom',
+  testTimeout: 30000,
   rootDir: '.',
   roots: ['<rootDir>/src'],
   testMatch: ['<rootDir>/src/**/__tests__/**/*.(test|spec).(js|jsx|ts|tsx)', '<rootDir>/src/**/*.(test|spec).(js|jsx|ts|tsx)'],

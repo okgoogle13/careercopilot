@@ -222,8 +222,8 @@ julius remote list --session | grep "Task:"
 ```
 
 ### Monitor Batch 4 (Fastest - should complete first)
-```bash
-julius remote logs --session 424616855579134593 -f
+```bashulius
+j remote logs --session 424616855579134593 -f
 ```
 
 ### Pull Results When Complete
