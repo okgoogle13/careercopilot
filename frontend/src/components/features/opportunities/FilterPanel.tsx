@@ -1,11 +1,10 @@
 import { Search, Filter, X, ExpandMore } from '@mui/icons-material';
-import { Box } from '@mui/material';
 import {
+  Box,
   Card,
   CardContent,
   CardHeader,
   Typography,
-  Box,
   Slider,
   TextField,
   Autocomplete,
@@ -18,7 +17,7 @@ import {
   AccordionSummary,
   AccordionDetails,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React from 'react';
 
 interface FilterPanelProps {
   onFiltersChange?: (filters: JobFilters) => void;
@@ -104,7 +103,7 @@ const datePostedOptions = [
 ];
 
 export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: FilterPanelProps) {
-  const [filters, setFilters] = useState<JobFilters>(defaultFilters);
+  const [filters, setFilters] = React.useState<JobFilters>(defaultFilters);
 
   const handleFilterChange = (key: keyof JobFilters, value: any) => {
     const newFilters = { ...filters, [key]: value };
@@ -135,16 +134,14 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
   if (isCollapsed) {
     return (
       <Card sx={{
-      p: 4
+      p: 2
     }}>
         <Box sx={{
       display: "flex",
       alignItems: "center",
-      gap: 4
+      gap: 2
     }}>
-          <Filter sx={{ fontSize: 20 }} sx={{
-      color: "gray.500"
-    }} />
+          <Filter sx={{ fontSize: 20, color: "text.secondary" }} />
           <Typography variant="body2" color="text.secondary">
             {getActiveFilterCount()} filters active
           </Typography>
@@ -157,9 +154,10 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
   }
 
   return (
-    <Card sx={{}}>
+    <Card sx={{ p: 2 }}>
       <CardHeader sx={{
-      pb: 4
+      p: 2,
+      pb: 2
     }}>
         <Box sx={{
       display: "flex",
@@ -171,14 +169,14 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
       alignItems: "center",
       gap: 2
     }}>
-            <Filter sx={{ fontSize: 20 }} sx={{}} />
+            <Filter sx={{ fontSize: 20 }} />
             <Typography variant="h6" sx={{
       fontWeight: 600
     }}>
               Filters
             </Typography>
             {getActiveFilterCount() > 0 && (
-              <Chip label={getActiveFilterCount()} size="small" sx={{
+              <Chip label={getActiveFilterCount()} size="small" color="primary" sx={{
       color: "common.white"
     }} />
             )}
@@ -195,12 +193,17 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         </Box>
       </CardHeader>
 
-      <CardContent sx={{}}>
+      <CardContent sx={{
+      p: 2,
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 3
+    }}>
         {/* Search Query */}
         <Box>
           <Typography variant="subtitle2" sx={{
       fontWeight: 500,
-      mb: 3
+      mb: 1
     }}>
             Keywords
           </Typography>
@@ -210,9 +213,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
             value={filters.searchQuery}
             onChange={(e) => handleFilterChange('searchQuery', e.target.value)}
             InputProps={{
-              startAdornment: <Search sx={{ fontSize: 20 }} sx={{
-      mr: 2
-    }} />,
+              startAdornment: <Search sx={{ fontSize: 20, mr: 1, color: 'text.secondary' }} />,
             }}
             size="small"
             aria-label="Search jobs by keywords, skills, or companies"
@@ -225,7 +226,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         <Box>
           <Typography variant="subtitle2" sx={{
       fontWeight: 500,
-      mb: 3
+      mb: 1
     }}>
             Location
           </Typography>
@@ -246,16 +247,16 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         </Box>
 
         {/* Job Type */}
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMore />}>
+        <Accordion sx={{ boxShadow: 'none', '&:before': { display: 'none' } }}>
+          <AccordionSummary expandIcon={<ExpandMore />} sx={{ p: 0 }}>
             <Typography variant="subtitle2" sx={{
       fontWeight: 500
     }}>
               Job Type
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Box sx={{}}>
+          <AccordionDetails sx={{ p: 0 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               {jobTypeOptions.map((type) => (
                 <FormControlLabel
                   key={type}
@@ -268,9 +269,10 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
                           : filters.jobType.filter((t) => t !== type);
                         handleFilterChange('jobType', newTypes);
                       }}
+                      size="small"
                     />
                   }
-                  label={type}
+                  label={<Typography variant="body2">{type}</Typography>}
                 />
               ))}
             </Box>
@@ -278,16 +280,16 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         </Accordion>
 
         {/* Experience Level */}
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMore />}>
+        <Accordion sx={{ boxShadow: 'none', '&:before': { display: 'none' } }}>
+          <AccordionSummary expandIcon={<ExpandMore />} sx={{ p: 0 }}>
             <Typography variant="subtitle2" sx={{
       fontWeight: 500
     }}>
               Experience Level
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
-            <Box sx={{}}>
+          <AccordionDetails sx={{ p: 0 }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
               {experienceLevelOptions.map((level) => (
                 <FormControlLabel
                   key={level}
@@ -300,9 +302,10 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
                           : filters.experienceLevel.filter((l) => l !== level);
                         handleFilterChange('experienceLevel', newLevels);
                       }}
+                      size="small"
                     />
                   }
-                  label={level}
+                  label={<Typography variant="body2">{level}</Typography>}
                 />
               ))}
             </Box>
@@ -313,12 +316,12 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         <Box>
           <Typography variant="subtitle2" sx={{
       fontWeight: 500,
-      mb: 3
+      mb: 1
     }}>
             Salary Range
           </Typography>
           <Box sx={{
-      px: 2
+      px: 1
     }}>
             <Slider
               value={filters.salaryRange}
@@ -327,14 +330,14 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
               min={0}
               max={200000}
               step={5000}
-              valueLabelFormat={(value) => `$${value.toLocaleString()}`}
+              valueLabelFormat={(value) => `$${Math.round(value / 1000)}k`}
             />
             <Box sx={{
       display: "flex",
       justifyContent: "space-between",
-      typography: "body1",
-      color: "gray.500",
-      mt: 1
+      typography: "body2",
+      color: "text.secondary",
+      mt: -1
     }}>
               <span>${filters.salaryRange[0].toLocaleString()}</span>
               <span>${filters.salaryRange[1].toLocaleString()}</span>
@@ -349,9 +352,10 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
               <Checkbox
                 checked={filters.remote}
                 onChange={(e) => handleFilterChange('remote', e.target.checked)}
+                size="small"
               />
             }
-            label="Remote work available"
+            label={<Typography variant="body2">Remote work available</Typography>}
           />
         </Box>
 
@@ -359,7 +363,7 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         <Box>
           <Typography variant="subtitle2" sx={{
       fontWeight: 500,
-      mb: 3
+      mb: 1
     }}>
             Required Skills
           </Typography>
@@ -383,11 +387,11 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
         <Box>
           <Typography variant="subtitle2" sx={{
       fontWeight: 500,
-      mb: 3
+      mb: 1
     }}>
             Date Posted
           </Typography>
-          <Box sx={{}}>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             {datePostedOptions.map((option) => (
               <FormControlLabel
                 key={option.value}
@@ -395,9 +399,10 @@ export function FilterPanel({ onFiltersChange, onReset, isCollapsed = false }: F
                   <Checkbox
                     checked={filters.datePosted === option.value}
                     onChange={() => handleFilterChange('datePosted', option.value)}
+                    size="small"
                   />
                 }
-                label={option.label}
+                label={<Typography variant="body2">{option.label}</Typography>}
               />
             ))}
           </Box>

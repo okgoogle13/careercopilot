@@ -6,16 +6,10 @@ import {
   MenuBook as BookOpen,
   Error as AlertCircle,
 } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import {
   Button,
-  IconButton,
   Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
 } from '@mui/material';
 import { useState } from 'react';
 
@@ -27,6 +21,7 @@ interface CareerIntelligenceProps {
 }
 
 export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
+  const theme = useTheme();
   const [isGeneratingPath, setIsGeneratingPath] = useState(false);
   const [showLearningPath, setShowLearningPath] = useState(false);
 
@@ -142,13 +137,13 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
   };
 
   return (
-    <div sx={{
+    <Box sx={{
       minHeight: "100vh",
       p: 4
     }}>
-      <div sx={{}}>
+      <Box>
         {/* Header */}
-        <div sx={{
+        <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 4,
@@ -160,92 +155,94 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }} />
             Back to Career Hub
           </Button>
-        </div>
+        </Box>
 
-        <div sx={{
+        <Box sx={{
       textAlign: "center",
       mb: 8
     }}>
-          <div sx={{
+          <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       gap: 2,
       mb: 4
     }}>
-            <Sparkles sx={{}} />
-            <h1 sx={{
-      typography: "h3",
+            <Sparkles />
+            <Typography variant="h3" sx={{
       fontWeight: 600
-    }}>Career Intelligence</h1>
-          </div>
-          <p sx={{
-      typography: "h6"
-    }}>
+    }}>Career Intelligence</Typography>
+          </Box>
+          <Typography variant="h6">
             Get data-driven insights about your career trajectory and growth opportunities.
-          </p>
-        </div>
+          </Typography>
+        </Box>
 
-        <div sx={{
-      [theme.breakpoints.up('lg')]: {},
+        <Box sx={{
+      display: 'grid',
+      gridTemplateColumns: { xs: '1fr', lg: '2fr 1fr' },
       gap: 8
     }}>
           {/* Left Column - Skill Gaps */}
-          <div sx={{
-      [theme.breakpoints.up('lg')]: {},}}>
+          <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      gap: 8,}}>
             {/* Skill Gap Analysis */}
             <Card sx={{
       p: 6
     }}>
-              <div sx={{
+              <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       mb: 6
     }}>
-                <div sx={{
+                <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 3
     }}>
-                  <div sx={{
+                  <Box sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "0.5rem",
+      bgcolor: 'red.50'
     }}>
                     <AlertCircle sx={{
       color: "red.500"
     }} />
-                  </div>
-                  <h3 sx={{
-      typography: "h5",
+                  </Box>
+                  <Typography variant="h5" sx={{
       fontWeight: 600
-    }}>Identified Skill Gaps</h3>
-                </div>
-                <Badge sx={{}}>
+    }}>Identified Skill Gaps</Typography>
+                </Box>
+                <Badge sx={{ bgcolor: 'purple.100', color: 'purple.800' }}>
                   <Sparkles sx={{
-      mr: 1
+      mr: 1,
+      fontSize: '1rem'
     }} />
                   AI Analysis
                 </Badge>
-              </div>
+              </Box>
 
-              <div sx={{}}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {skillGaps.map((gap, index) => (
-                  <div key={index} sx={{
+                  <Box key={index} sx={{
       p: 4,
       border: 1,
+      borderColor: 'grey.200',
       borderRadius: "0.5rem"
     }}>
-                    <div sx={{
+                    <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       mb: 3
     }}>
-                      <h4 sx={{
+                      <Typography variant="h6" sx={{
       fontWeight: 500
-    }}>{gap.skill}</h4>
-                      <div sx={{
+    }}>{gap.skill}</Typography>
+                      <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
@@ -253,36 +250,38 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                         <Badge variant="outline" className={getImportanceColor(gap.importance)}>
                           {gap.importance} Priority
                         </Badge>
-                        <span sx={{
+                        <Typography sx={{
       typography: "body1",}}>
                           {gap.demand}% market demand
-                        </span>
-                      </div>
-                    </div>
+                        </Typography>
+                      </Box>
+                    </Box>
 
-                    <p sx={{
+                    <Typography sx={{
       typography: "body1",
+      color: 'text.secondary',
       mb: 3
-    }}>{gap.description}</p>
+    }}>{gap.description}</Typography>
 
-                    <div sx={{}}>
-                      <div sx={{
+                    <Box>
+                      <Box sx={{
       display: "flex",
       justifyContent: "space-between",
-      typography: "body1"
+      typography: "body1",
+      mb: 1
     }}>
-                        <span>Current Level</span>
-                        <span>{gap.currentLevel}%</span>
-                      </div>
+                        <Typography>Current Level</Typography>
+                        <Typography>{gap.currentLevel}%</Typography>
+                      </Box>
                       <Progress value={gap.currentLevel} sx={{
       width: "100%"
     }} />
-                    </div>
-                  </div>
+                    </Box>
+                  </Box>
                 ))}
-              </div>
+              </Box>
 
-              <div sx={{
+              <Box sx={{
       mt: 6,
       textAlign: "center"
     }}>
@@ -290,13 +289,17 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                   onClick={handleGenerateLearningPath}
                   disabled={isGeneratingPath}
                   sx={{
-      '&:hover': {}
+      bgcolor: 'primary.main',
+      color: 'common.white',
+      '&:hover': { bgcolor: 'primary.dark' }
     }}
                 >
                   {isGeneratingPath ? (
                     <>
                       <Sparkles sx={{
-      mr: 2,}} />
+      mr: 2,
+      animation: 'spin 1s linear infinite'
+    }} />
                       Generating Learning Path...
                     </>
                   ) : (
@@ -308,82 +311,87 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                     </>
                   )}
                 </Button>
-              </div>
+              </Box>
             </Card>
 
             {/* Career Paths */}
             <Card sx={{
       p: 6
     }}>
-              <div sx={{
+              <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 3,
       mb: 6
     }}>
-                <div sx={{
+                <Box sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "0.5rem",
+      bgcolor: 'green.50'
     }}>
                   <Target sx={{
       color: "green.500"
     }} />
-                </div>
-                <h3 sx={{
-      typography: "h5",
+                </Box>
+                <Typography variant="h5" sx={{
       fontWeight: 600
-    }}>Career Path Opportunities</h3>
-              </div>
+    }}>Career Path Opportunities</Typography>
+              </Box>
 
-              <div sx={{}}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {careerPaths.map((path, index) => (
-                  <div key={index} sx={{
+                  <Box key={index} sx={{
       p: 4,
       border: 1,
+      borderColor: 'grey.200',
       borderRadius: "0.5rem"
     }}>
-                    <div sx={{
+                    <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       mb: 3
     }}>
-                      <h4 sx={{
+                      <Typography variant="h6" sx={{
       fontWeight: 500,
-      typography: "h6"
-    }}>{path.title}</h4>
-                      <div sx={{
+    }}>{path.title}</Typography>
+                      <Box sx={{
       textAlign: "right"
     }}>
-                        <div sx={{
+                        <Typography sx={{
       typography: "body1",
       color: "green.500",
       fontWeight: 500
     }}>
                           {path.probability}% probability
-                        </div>
-                        <div sx={{
-      typography: "body1",}}>{path.timeframe}</div>
-                      </div>
-                    </div>
+                        </Typography>
+                        <Typography sx={{
+      typography: "body1",
+      color: 'text.secondary'
+    }}>{path.timeframe}</Typography>
+                      </Box>
+                    </Box>
 
-                    <div sx={{
+                    <Box sx={{
       mb: 3
     }}>
-                      <span sx={{
-      typography: "body1",}}>Salary increase: </span>
-                      <span sx={{
+                      <Typography component="span" sx={{
+      typography: "body1",
+      color: 'text.secondary'
+    }}>Salary increase: </Typography>
+                      <Typography component="span" sx={{
       typography: "body1",
       fontWeight: 500
-    }}>{path.salaryIncrease}</span>
-                    </div>
+    }}>{path.salaryIncrease}</Typography>
+                    </Box>
 
-                    <div>
-                      <p sx={{
+                    <Box>
+                      <Typography sx={{
       typography: "body1",
+      color: 'text.secondary',
       mb: 2
-    }}>Requirements:</p>
-                      <div sx={{
+    }}>Requirements:</Typography>
+                      <Box sx={{
       display: "flex",
       flexWrap: "wrap",
       gap: 2
@@ -395,58 +403,59 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                             {req}
                           </Badge>
                         ))}
-                      </div>
-                    </div>
-                  </div>
+                      </Box>
+                    </Box>
+                  </Box>
                 ))}
-              </div>
+              </Box>
             </Card>
-          </div>
+          </Box>
 
           {/* Right Column - Market Trends & Learning Path */}
-          <div sx={{}}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {/* Market Trends */}
             <Card sx={{
       p: 6
     }}>
-              <div sx={{
+              <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 3,
       mb: 6
     }}>
-                <div sx={{
+                <Box sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "0.5rem",
+      bgcolor: 'blue.50'
     }}>
                   <TrendingUp sx={{
       color: "blue.500"
     }} />
-                </div>
-                <h3 sx={{
-      typography: "h6",
+                </Box>
+                <Typography variant="h6" sx={{
       fontWeight: 600
-    }}>Market Trends</h3>
-              </div>
+    }}>Market Trends</Typography>
+              </Box>
 
-              <div sx={{}}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
                 {marketTrends.map((trend, index) => (
-                  <div key={index} sx={{
+                  <Box key={index} sx={{
       p: 3,
       border: 1,
+      borderColor: 'grey.200',
       borderRadius: "0.5rem"
     }}>
-                    <div sx={{
+                    <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
       mb: 2
     }}>
-                      <h4 sx={{
+                      <Typography sx={{
       fontWeight: 500,
       typography: "body1"
-    }}>{trend.trend}</h4>
-                      <div sx={{
+    }}>{trend.trend}</Typography>
+                      <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
@@ -454,15 +463,15 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                         <TrendingUp sx={{
       color: "green.500"
     }} />
-                        <span sx={{
+                        <Typography sx={{
       typography: "body1",
       fontWeight: 500,
       color: "green.500"
-    }}>{trend.growth}</span>
-                      </div>
-                    </div>
+    }}>{trend.growth}</Typography>
+                      </Box>
+                    </Box>
 
-                    <div sx={{
+                    <Box sx={{
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
@@ -473,87 +482,98 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                         {trend.impact} Impact
                       </Badge>
-                    </div>
+                    </Box>
 
-                    <p sx={{
-      typography: "body2",}}>{trend.description}</p>
-                  </div>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>{trend.description}</Typography>
+                  </Box>
                 ))}
-              </div>
+              </Box>
             </Card>
 
             {/* Learning Path (conditionally shown) */}
             {showLearningPath && (
               <Card sx={{
       p: 6,}}>
-                <div sx={{
+                <Box sx={{
       display: "flex",
       alignItems: "center",
       gap: 3,
       mb: 4
     }}>
-                  <div sx={{
+                  <Box sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "0.5rem",
+      bgcolor: 'secondary.light'
     }}>
-                    <BookOpen sx={{}} />
-                  </div>
-                  <h3 sx={{
-      typography: "h6",
-      fontWeight: 600,}}>AI-Generated Learning Path</h3>
-                </div>
+                    <BookOpen />
+                  </Box>
+                  <Typography variant="h6" sx={{
+      fontWeight: 600,}}>AI-Generated Learning Path</Typography>
+                </Box>
 
-                <div sx={{}}>
-                  <div sx={{
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                  <Box sx={{
       p: 3,
       border: 1,
+      borderColor: 'grey.200',
       borderRadius: "0.5rem"
     }}>
-                    <h4 sx={{
+                    <Typography sx={{
       fontWeight: 500,
       typography: "body1",
       mb: 1
-    }}>Phase 1: Foundation (Weeks 1-4)</h4>
-                    <p sx={{
-      typography: "body2",}}>
+    }}>Phase 1: Foundation (Weeks 1-4)</Typography>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>
                       Python basics, data types, control structures
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
 
-                  <div sx={{
+                  <Box sx={{
       p: 3,
       border: 1,
+      borderColor: 'grey.200',
       borderRadius: "0.5rem"
     }}>
-                    <h4 sx={{
+                    <Typography sx={{
       fontWeight: 500,
       typography: "body1",
       mb: 1
-    }}>Phase 2: Application (Weeks 5-8)</h4>
-                    <p sx={{
-      typography: "body2",}}>
+    }}>Phase 2: Application (Weeks 5-8)</Typography>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>
                       Pandas for data analysis, basic statistics
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
 
-                  <div sx={{
+                  <Box sx={{
       p: 3,
       border: 1,
+      borderColor: 'grey.200',
       borderRadius: "0.5rem"
     }}>
-                    <h4 sx={{
+                    <Typography sx={{
       fontWeight: 500,
       typography: "body1",
       mb: 1
     }}>
                       Phase 3: Specialization (Weeks 9-12)
-                    </h4>
-                    <p sx={{
-      typography: "body2",}}>
+                    </Typography>
+                    <Typography sx={{
+      typography: "body2",
+      color: 'text.secondary'
+    }}>
                       Healthcare data analysis, reporting dashboards
-                    </p>
-                  </div>
-                </div>
+                    </Typography>
+                  </Box>
+                </Box>
 
                 <Button sx={{
       width: "100%",
@@ -566,9 +586,9 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
                 </Button>
               </Card>
             )}
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }
