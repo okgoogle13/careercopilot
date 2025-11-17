@@ -1,6 +1,6 @@
 # M3 Expressive Component Migration Report
-**Total Components:** 131
-**Migrated:** 5 (3.8%)
+**Total Components:** 134
+**Migrated:** 8 (6.0%)
 **Needs Migration:** 125
 **Unknown Status:** 1
 
@@ -24,10 +24,13 @@
 ### ✅ Already Migrated
 
 - M3Card (`components/ui/M3Card.tsx`)
+- M3Progress (`components/ui/M3Progress.tsx`)
 - M3Badge (`components/ui/M3Badge.tsx`)
 - M3Input (`components/ui/M3Input.tsx`)
+- M3Textarea (`components/ui/M3Textarea.tsx`)
 - M3Dialog (`components/ui/M3Dialog.tsx`)
 - M3Button (`components/ui/M3Button.tsx`)
+- M3SearchInput (`components/ui/M3SearchInput.tsx`)
 
 ### 📋 Needs Migration
 
