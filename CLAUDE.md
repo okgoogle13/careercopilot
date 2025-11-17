@@ -59,16 +59,15 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
   - Automatic expired entry cleanup
   - Seamless fallback when Firestore unavailable
 
-## Configuration Files
+## Core Configuration Files
 
-- `.env.local` - Local development environment variables (not committed)
-- `.env.production` - Production environment template
-- `backend/app/core/config.py` - Centralized configuration management
-- `backend/app/core/secure_config.py` - Secure settings with Secret Manager integration
-- `backend/app/core/secret_manager.py` - Google Cloud Secret Manager integration
-- `backend/app/core/firestore_cache.py` - Firestore-backed cache service
-- `backend/app/core/genkit_init.py` - Genkit AI framework initialization and flow management
-- `verify_genkit.py` - Genkit verification and health check script
+- `.env.local` - Local development environment (not committed)
+- `.env.production` - Production template
+- `backend/app/core/config.py` - Centralized configuration
+- `backend/app/core/secure_config.py` - Secret Manager integration
+- `backend/app/core/firestore_cache.py` - Firestore cache (instead of Redis)
+- `backend/app/core/genkit_init.py` - Genkit initialization
+- `verify_genkit.py` - Genkit health check
 
 ## Backend API Development & Integration Skills
 
@@ -198,535 +197,104 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 # Generates: docs/FULLSTACK_FLOWS.md with Mermaid diagrams
 ```
 
-## Testing Infrastructure & Automation Skills
+## Testing & Test Automation
 
-### Testing Skills & Subagents (NEW - 2025-01-06)
+### Current Test Coverage (Updated 2025-11-14)
 
-**Current Test Coverage (Updated 2025-11-14):**
 - **Frontend Components:** 17% (22/128 components tested)
 - **Backend APIs:** 85% (comprehensive pytest coverage)
 - **E2E Flows:** 90% (7 Playwright tests, 722 lines)
 - **Storybook Documentation:** 2.3% (3/128 components)
 
-**Coverage Goals:**
-- **Frontend Target:** 50% (64 components needed for 128 total)
-- **Storybook Target:** 40% (51 components needed for 128 total)
-- **E2E Target:** 95% (10+ critical flows)
+**Target:** 50% frontend components, 40% Storybook, 95% E2E flows
 
-### Frontend Unit Test Generation (NEW)
+### Testing Skills
 
-**Jest Test Scaffolder:**
-- **Skill**: `jest-test-scaffolder` - Generate React component and hook tests
-- **Location**: `.claude/skills/jest-test-scaffolder/`
-- **Capabilities:**
-  - Auto-detect component props from TypeScript
-  - Generate render tests, interaction tests, accessibility tests
-  - Use `@testing-library/react` + `userEvent` patterns
-  - Support component and custom hook testing
-  - Include edge cases (disabled, loading, error states)
-  - Generate TODO placeholders for manual test additions
-- **Templates:**
-  - `component.test.tsx.tpl` - Component test template
-  - `hook.test.tsx.tpl` - React hook test template
-- **Pattern:** Matches existing `Button.test.tsx` (36 lines, 3 tests)
-- **Usage:**
-  ```bash
-  # Ask Claude: "Create tests for {{ComponentName}}"
-  # Generates: src/components/.../__ tests__/{{ComponentName}}.test.tsx
-  # Run: yarn test {{ComponentName}}
-  ```
+**Jest Test Scaffolder** (`jest-test-scaffolder`)
+- Generate React component and hook tests with auto-detected props
+- Use `@testing-library/react` + `userEvent` patterns, edge case coverage
+- Templates: `component.test.tsx.tpl`, `hook.test.tsx.tpl`
 
-### Backend Unit Test Generation (Planned)
+**API Integration Test Scaffolder** (`api-integration-test-scaffolder`)
+- Generate backend integration tests with success, validation, auth, error scenarios
+- Mock Firebase Auth and Genkit flows, performance assertions
 
-**Pytest Test Scaffolder:**
-- **Skill**: `pytest-test-scaffolder` (Pending - Week 2)
-- **Location**: `.claude/skills/pytest-test-scaffolder/` (To be created)
-- **Capabilities:**
-  - Generate unit tests for Python functions/classes
-  - Create fixtures for dependencies
-  - Include happy path + error scenarios
-  - Use pytest markers (unit, integration, asyncio)
-  - Mock external dependencies
-- **Templates:**
-  - `unit_test.py.tpl` - Synchronous test template
-  - `async_test.py.tpl` - Async function test template
-  - `fixture.py.tpl` - Shared fixture template
-- **Pattern:** Matches existing `test_ksc_integration.py` (268 lines)
+**Storybook Scaffolder** (`storybook-scaffolder`)
+- Generate `.stories.tsx` files with variant stories and interaction tests
+- Auto-extract component names and props
 
-### Integration Test Scaffolding
+**Webapp Testing** (`webapp-testing`)
+- Generate Playwright E2E tests for user journeys
+- Reference: `.claude/skills/webapp-testing/REFERENCE/careercopilot-selectors.md`
 
-**API Integration Test Scaffolder:**
-- **Skill**: `api-integration-test-scaffolder` - Generate backend integration tests
-- **Location**: `.claude/skills/api-integration-test-scaffolder/`
-- **Capabilities:**
-  - Create comprehensive E2E API tests
-  - Test scenarios: success, validation, auth, errors, concurrent requests
-  - Mock Firebase Auth and Genkit flows
-  - Include performance assertions (response time < 10s)
-  - Validate response structure and types
-- **Template:** `integration_test.py.tpl` (✅ NOW COMPLETE)
-- **Target:** `backend/app/tests/integration/test_{{feature_name}}_integration.py`
-- **Usage:**
-  ```bash
-  # Ask Claude: "Test {{endpoint_name}} integration"
-  # Generates: backend/app/tests/integration/test_{{feature}}_integration.py
-  # Run: pytest backend/app/tests/integration/ -v
-  ```
+**Testing Specialist Subagent** (`testing-specialist`)
+- Orchestrates test generation for all layers with coverage analysis
+- Integrates with fullstack-integration-specialist, test-runner, code-reviewer
 
-### Component Documentation
+### Test Commands
 
-**Storybook Scaffolder:**
-- **Skill**: `storybook-scaffolder` - Generate Storybook stories
-- **Location**: `.claude/skills/storybook-scaffolder/`
-- **Capabilities:**
-  - Create `.stories.tsx` files from component
-  - Auto-extract component name and props
-  - Generate variant stories (Primary, Secondary, sizes, colors)
-  - Add interaction tests with `@storybook/test`
-  - Include accessibility addon usage
-- **Template:** `story.tsx.tpl`
-- **Usage:**
-  ```bash
-  # Ask Claude: "Create story for {{ComponentName}}"
-  # Generates: src/components/.../{{ComponentName}}.stories.tsx
-  # Run: yarn storybook
-  ```
+**Frontend (Jest):**
+- `yarn test` - Run all tests
+- `yarn test:watch` - Watch mode
+- `yarn test:coverage` - Generate coverage report
 
-### E2E Test Generation
+**Backend (pytest):**
+- `pytest backend/app/tests/` - Run all tests
+- `pytest backend/app/tests/ --cov` - With coverage
 
-**Webapp Testing (Playwright):**
-- **Skill**: `webapp-testing` - Generate Playwright E2E tests
-- **Location**: `.claude/skills/webapp-testing/`
-- **Capabilities:**
-  - Write new E2E tests for user journeys
-  - Run existing Playwright test suites
-  - Use stable `data-testid` selectors
-  - Include accessibility and mobile testing
-  - Consult selector reference guide
-- **Reference:** `.claude/skills/webapp-testing/REFERENCE/careercopilot-selectors.md`
-- **Target:** `frontend/tests/{{feature_name}}.spec.js`
-- **Usage:**
-  ```bash
-  # Ask Claude: "Test {{feature_name}} end-to-end"
-  # Generates: frontend/tests/{{feature_name}}.spec.js
-  # Run: npx playwright test
-  ```
-
-### Testing Orchestration (NEW)
-
-**Testing Specialist Subagent:**
-- **Subagent**: `testing-specialist` - Expert test automation and QA specialist
-- **Location**: `.claude/agents/testing-specialist.md`
-- **Expertise:**
-  - Test generation for all layers (frontend, backend, integration, E2E)
-  - Coverage analysis and improvement (10.6% → 50% target)
-  - Test quality assurance and pattern enforcement
-  - Test data management and fixture creation
-  - Integration with other specialists (fullstack, test-runner, code-reviewer)
-- **Responsibilities:**
-  1. **Test Generation:**
-     - Use `jest-test-scaffolder` for React components
-     - Use `pytest-test-scaffolder` for Python functions
-     - Use `api-integration-test-scaffolder` for API endpoints
-     - Use `storybook-scaffolder` for component documentation
-     - Use `webapp-testing` for E2E user journeys
-  2. **Coverage Analysis:**
-     - Run `yarn test:coverage` and `pytest --cov`
-     - Identify untested critical paths (89.4% components uncovered)
-     - Prioritize by user impact
-     - Track progress toward 50% target
-  3. **Quality Assurance:**
-     - Review test patterns and best practices
-     - Enforce React Testing Library standards
-     - Ensure accessibility testing
-     - Refactor brittle/flaky tests
-  4. **Proactive Testing:**
-     - Automatically generate tests for new components
-     - Flag PRs without test coverage
-     - Report weekly coverage metrics
-- **When to Use:**
-  - "Create tests for {{ComponentName}}"
-  - "Improve test coverage to 50%"
-  - "Test {{endpoint_name}} integration"
-  - "Generate Storybook story for {{ComponentName}}"
-  - "Fix failing tests in {{TestFile}}"
-- **Collaboration:**
-  - Works with `fullstack-integration-specialist` on full-stack feature tests
-  - Reports to `test-runner` for test execution
-  - Coordinates with `code-reviewer` on quality checks
-
-### Quick Start: Testing Workflows
-
-**Generate Component Tests:**
-```bash
-# Ask Claude: "Create tests for the Badge component"
-# testing-specialist uses jest-test-scaffolder:
-# 1. Reads src/components/ui/Badge/Badge.tsx
-# 2. Extracts props: { children, variant, size, color }
-# 3. Generates __tests__/Badge.test.tsx (5 tests)
-# 4. Runs: yarn test Badge
-# 5. Reports: ✅ 5/5 tests passing, coverage 100%
-```
-
-**Improve Coverage:**
-```bash
-# Ask Claude: "Improve frontend test coverage to 50%"
-# testing-specialist:
-# 1. Runs yarn test:coverage (current: 10.6%)
-# 2. Identifies 44 critical components needing tests
-# 3. Generates tests systematically (10/week for 4 weeks)
-# 4. Tracks progress: Week 1 (20%), Week 2 (35%), Week 3 (45%), Week 4 (50%)
-```
-
-**Generate Integration Tests:**
-```bash
-# Ask Claude: "Test the notification preferences endpoint"
-# testing-specialist uses api-integration-test-scaffolder:
-# 1. Identifies POST /api/v1/users/notifications/preferences
-# 2. Generates test_notification_preferences_integration.py
-# 3. Includes 10 scenarios (success, validation, auth, concurrent, performance)
-# 4. Runs: pytest backend/app/tests/integration/ -v
-# 5. Reports: ✅ 10/10 scenarios passing
-```
-
-**Create Storybook Stories:**
-```bash
-# Ask Claude: "Create story for Input component"
-# testing-specialist uses storybook-scaffolder:
-# 1. Reads src/components/ui/Input/Input.tsx
-# 2. Generates Input.stories.tsx with variant stories
-# 3. Adds interaction tests for typing, validation, error states
-# 4. Runs: yarn storybook
-# 5. Reports: ✅ Story created with 4 variants
-```
-
-### Test Infrastructure
-
-**Frontend Testing (Jest):**
-- **Runner:** Jest 29.7.0
-- **Config:** `frontend/jest.config.mjs` (ES module support)
-- **Environment:** jsdom with TypeScript support (ts-jest)
-- **Coverage:** v8 provider, HTML/JSON/text reports
-- **Commands:**
-  - `yarn test` - Run all tests
-  - `yarn test:watch` - Watch mode
-  - `yarn test:coverage` - Generate coverage report
-  - `yarn test {{ComponentName}}` - Run specific test
-  - `yarn test:ci` - CI mode (single run + coverage)
-- **Setup:** `frontend/src/setupTests.ts` with Firebase mocks, Material-UI theme, ResizeObserver
-
-**Backend Testing (pytest):**
-- **Runner:** pytest 7.0.0+
-- **Config:** `backend/pytest.ini`, `backend/pyproject.toml`
-- **Coverage:** pytest-cov with 25% minimum threshold
-- **Commands:**
-  - `pytest backend/app/tests/` - Run all tests
-  - `pytest backend/app/tests/ -v` - Verbose output
-  - `pytest backend/app/tests/ --cov` - With coverage
-  - `pytest -m unit` - Run only unit tests
-
-**E2E Testing (Playwright):**
-- **Framework:** Playwright 1.55.0
-- **Config:** `frontend/playwright.config.ts`
-- **Browsers:** Chromium (Desktop Chrome)
-- **Commands:**
-  - `yarn test:e2e` - Run all E2E tests (headless)
-  - `yarn test:e2e:headed` - With browser UI
-  - `yarn test:e2e:debug` - Debug mode
-  - `yarn test:e2e:ui` - Interactive UI mode
-  - `yarn playwright:report` - View last test report
-
-### Accelerated Coverage Improvement Strategy (2-Week Timeline)
-
-**Current Status (Baseline):**
-- Frontend Components: 8.1% (10/124 tested)
-- Components with 176/218 tests passing (80.7%)
-- Jest infrastructure fully configured and operational
-- jest-test-scaffolder skill ready for automated test generation
-
-**Target (End of Week 2):**
-- Frontend Components: 56%+ (70+ components)
-- 90%+ test pass rate across all layers
-- Complete automation with parallel delegation
-
-**Three-Tier Parallel Delegation Strategy:**
-
-#### Tier 1: Cascade Agent (Windsurf IDE - Real-time Feedback)
-**Role:** Test simple, standalone UI components in parallel with other tiers
-**Scope:** Base UI components (Button, Input, Card, Badge, Chip, etc.) - 30-40 components
-**Characteristics:**
-- No complex state management
-- No API integrations
-- No Material-UI theme dependencies beyond ThemeProvider
-- Straightforward prop variations
-**Approach:**
-- Real-time testing in Windsurf IDE for immediate feedback
-- Use jest-test-scaffolder skill for generation
-- Fix simple test failures on the spot
-- Coordinate with test-runner for final validation
-**Timeline:** Concurrent with Jules batches (Days 1-5)
-
-#### Tier 2: Jules Instances (Parallel Batches - Maximum Velocity)
-**Role:** Generate and test feature, common, and library components at massive scale
-**Setup:** Days 1-2 (create task-delegator skill, prepare batch files)
-**Execution:** Days 3-4 (launch 8 parallel Jules instances)
-**Consolidation:** Day 5 (merge results, validate with test-runner)
-
-**Batch Configuration (8 instances, 66 components total):**
-- **Batch 1:** UI Components (feedback) - Dialog, Toast, EmptyState, Popover (10-12 components)
-- **Batch 2:** UI Components (loading) - LoadingSpinner, FullPageLoading, LoadingSkeleton (8-10 components)
-- **Batch 3:** UI Components (navigation) - Sidebar, Navbar, Breadcrumbs, Tabs (10-12 components)
-- **Batch 4:** UI Components (surfaces) - Card, Paper, Container, Grid (8-10 components)
-- **Batch 5:** Common Components - Header, Footer, Layout, PageWrapper (8-10 components)
-- **Batch 6:** Library Components - Modal, Dropdown, Tooltip, Menu (10-12 components)
-- **Batch 7:** Feature Components - Forms, Inputs, Controls (10-12 components)
-- **Batch 8:** Career Components - KSC, Resume, CoverLetter generators (10-12 components)
-
-**Per-Batch Approach:**
-- Generate tests for 8-12 components per batch
-- Run tests immediately after generation
-- Capture pass/fail metrics
-- Document issues for Day 5 consolidation
-**Expected Results:** 100-150 tests per batch, 70%+ pass rate initially
-
-#### Tier 3: testing-specialist (Complex Components - Sequential Refinement)
-**Role:** Handle complex components with special setup needs
-**Scope:** Components requiring API mocks, custom context, special configuration - 10-15 components
-**Characteristics:**
-- Require React Context (ToastContext, ThemeContext, etc.)
-- Require Firebase mocking beyond standard setup
-- Require Portal or positioning tests
-- Custom hook testing
-**Approach:**
-- Work in parallel with Tiers 1 & 2 on Days 1-4
-- Focus on quality over quantity
-- Document special setup patterns for reuse
-- Validate patterns with test-runner
-**Timeline:** Days 1-4 (parallel), Day 5 (finalization and validation)
-
-### Week 1 Execution Plan
-
-**Days 1-2: Infrastructure Setup**
-- Create task-delegator skill for Jules coordination
-- Prepare batch component lists (8 batches, 66 components)
-- Set up parallel execution environment
-- Cascade agent ready for real-time testing
-- testing-specialist ready for complex components
-- **Target:** 0 tests (setup phase)
-
-**Days 3-4: Parallel Execution**
-- Launch 8 Jules instances simultaneously (Tier 2)
-- Cascade agent testing UI components (Tier 1)
-- testing-specialist handling complex components (Tier 3)
-- **Target:** 200-400 tests generated, 70%+ pass rate
-
-**Day 5: Consolidation & Validation**
-- Merge Jules results from 8 batches
-- Run test-runner to validate all batches in parallel
-- Identify and document failures
-- Cascade fixes for high-impact failures
-- **Target:** 66 components tested, 53% coverage achieved
-
-**Week 1 Success Criteria:**
-- ✅ 66 components tested (up from 10 initial)
-- ✅ 50%+ pass rate across all new tests
-- ✅ 53% frontend coverage (exceeds 50% target)
-- ✅ Clean git history with batch commits
-- ✅ Documented test patterns for Tier 3 complex components
-
-### Week 2 Refinement Plan
-
-**Days 1-3: Fix & Enhance**
-- Analyze failures from Week 1 Jules batches
-- Fix broken tests (target: 90%+ pass rate)
-- Add edge case tests for critical components
-- Enhance existing test coverage
-- **Target:** 70+ components, 90%+ pass rate
-
-**Days 4-5: Quality Assurance & Documentation**
-- Run full test suite validation
-- Update documentation with new patterns
-- Prepare for deployment or next phase
-- **Target:** 70+ components, 56% coverage (goal achieved)
-
-**Week 2 Success Criteria:**
-- ✅ 70+ components tested
-- ✅ 90%+ test pass rate
-- ✅ 56% frontend coverage (goal exceeded)
-- ✅ Documented test patterns for all component types
-- ✅ Ready for additional coverage scaling
-
-### Coverage Improvement Timeline
-
-**Week 1 Milestones:**
-- Day 2: Infrastructure ready
-- Day 4: 8 Jules batches executing in parallel
-- Day 5: 66 components tested, 53% coverage achieved
-
-**Week 2 Milestones:**
-- Day 3: All failures fixed, 90%+ pass rate
-- Day 5: 70+ components tested, 56% coverage achieved (GOAL EXCEEDED)
-
-**Beyond Week 2:**
-- Path to 100% coverage using proven patterns
-- Scaling to Storybook and E2E coverage
-- Maintenance and continuous improvement
+**E2E (Playwright):**
+- `yarn test:e2e` - Run all E2E tests
+- `yarn test:e2e:headed` - With browser UI
 
 ## Jules Delegation Protocol
 
-### Overview
-This protocol standardizes how tasks are delegated to Jules (parallel execution agent) for efficient batch processing of test generation and component creation.
-
 ### Core Rules
 
-#### 1. Paths: Relative Only
-- **Always use relative paths** (e.g., `./src/components/`, `./frontend/src/pages/`)
-- **Never use absolute paths** (e.g., `/Applications/careercopilot/frontend/src/`)
-- **Pattern**: Start with `./` and follow the repo structure
-- **Examples**:
-  - ✅ `./frontend/src/components/ui/Button/Button.tsx`
-  - ✅ `./src/pages/OpportunitiesPage.tsx`
-  - ✅ `./.ai_reports/[ComponentName]_report.md`
-  - ❌ `/Applications/careercopilot/frontend/src/...`
-  - ❌ `/home/user/projects/...`
+1. **Paths**: Always relative (e.g., `./frontend/src/components/`) - start with `./`
+2. **Format**: Single continuous line per task, no newlines: `Task: [Components] - [Action] - [Requirements] - [Handover hook]`
+3. **Handover Hook**: Append markdown report generation (creates `./.ai_reports/[ComponentName]_report.md`)
 
-#### 2. Format: Flatten Instructions
-- **Single continuous line** for each task (no newlines in task description)
-- **No markdown formatting** inside task lines
-- **Structure**: `Task: [Component list] - [Action] - [Requirements] - [Handover hook]`
-- **Readability**: Use pipes `|` or semicolons `;` to separate sections if needed
+### Launch Commands
 
-#### 3. Handover Hook: Mandatory
-- **Append to every task line**: Must include the exact markdown report generation string
-- **Report location**: `./.ai_reports/[ComponentName]_report.md`
-- **Report structure**: Use exact template provided
-- **Activation**: Report is created after Jules completes the task
-- **Full hook string**:
-  ```
-  Finally, create a markdown file at ./.ai_reports/[ComponentName]_report.md using this exact structure: # [ComponentName] Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [List], **Test Coverage:** [Summary], **Pending Actions:** [Next steps]
-  ```
-
-### Task Line Template
-
-```
-Task: [Component1, Component2, Component3] - [Generate tests/Create component/Run tests] - [Specific requirements] - Finally, create a markdown file at ./.ai_reports/[ComponentName]_report.md using this exact structure: # [ComponentName] Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [List], **Test Coverage:** [Summary], **Pending Actions:** [Next steps]
-```
-
-### Example Jules Delegation Tasks
-
-**Example 1: Test Generation for Multiple Components**
-```
-Task: Button, Input, Card - Generate comprehensive Jest tests using jest-test-scaffolder - Each component needs 15-25 test cases covering render, interaction, accessibility, and state variants - Tests must follow React Testing Library best practices with role-based queries - Finally, create a markdown file at ./.ai_reports/Input_report.md using this exact structure: # Input Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [./frontend/src/components/ui/input.test.tsx], **Test Coverage:** [16 tests, 100% pass rate], **Pending Actions:** [Batch 2 components ready]
-```
-
-**Example 2: Component Creation with Types**
-```
-Task: NotificationPanel, AlertBanner, StatusWidget - Create React components in ./src/components/features with TypeScript props interface and Material-UI styling - Each component must be tested and include data-testid attributes - Follow existing patterns from OpportunitiesPage and SettingsPage - Finally, create a markdown file at ./.ai_reports/NotificationPanel_report.md using this exact structure: # NotificationPanel Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [List paths relative to repo root], **Test Coverage:** [Summary of tests created], **Pending Actions:** [Integration with existing components]
-```
-
-### Benefits
-
-- **Clarity**: Clear instruction format minimizes ambiguity
-- **Scalability**: Flat format works well for parallel batch processing
-- **Traceability**: Handover hook ensures every Jules task generates documentation
-- **Consistency**: Relative paths work across all environments (local, CI, containers)
-- **Reproducibility**: Report structure allows verification of work completion
-
-### Jules Checklist Before Submission
-
-- ✅ All paths are relative (start with `./`)
-- ✅ Task description is a single continuous line
-- ✅ Handover hook is appended with exact format
-- ✅ Component list is clear and unambiguous
-- ✅ Requirements are specific and measurable
-- ✅ Report file path uses `./` prefix
-- ✅ Report structure follows exact template
-
-### Jules Launch Commands
-
-**Launch all Jules sessions from tasks.txt:**
 ```bash
-# Multi-line format (recommended):
+# Launch all tasks from tasks.txt:
 cat tasks.txt | while IFS= read -r line; do
   jules remote new --repo . --session "$line"
 done
 
-# Single-line format (for command history):
-cat tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line"; done
-```
-
-**How it works:**
-1. Reads each line from `tasks.txt` (each line is a complete task)
-2. For each line, creates a new Jules remote session
-3. `--repo .` specifies current directory as the repository
-4. `--session "$line"` passes the entire task line to Jules
-5. Each batch executes as a parallel Jules instance
-
-**Alternative - Launch single batch:**
-```bash
-# Extract specific batch from tasks.txt and launch
-grep "^Task: Dialog" tasks.txt | xargs -I {} julius remote new --repo . --session "{}"
-```
-
-**Monitor Jules sessions:**
-```bash
-# List all active Jules sessions
+# Monitor sessions:
 jules remote list
-
-# Get status of specific batch
 jules remote status --session [batch-name]
-
-# Tail logs for a session
-jules remote logs --session [batch-name] -f
 ```
 
-**Collect all reports after completion:**
-```bash
-# List all generated batch reports
-ls -lah ./.ai_reports/*_report.md
-
-# Generate summary of all batch results
-for report in ./.ai_reports/*_report.md; do
-  echo "=== $(basename $report) ===" && head -5 "$report"
-done
-```
+**Report template:** `# [ComponentName] Status, **Result:** [SUCCESS/FAILURE], **Files Modified:** [List], **Test Coverage:** [Summary], **Pending Actions:** [Next steps]`
 
 ---
 
-## Linting Commands
+## Frontend Development & Build Commands
 
-- **All Projects (Root)**:
-  - `yarn lint` - Run ESLint on frontend and functions
-  - `yarn lint:fix` - Auto-fix all linting errors across entire project
-  - `yarn lint:ci` - Run linting with CI-friendly settings
-  - `yarn lint:autofix` - Execute comprehensive auto-fix script
-- **Individual Projects**:
-  - **Functions**: `npm run lint` or `npm run lint:fix` (from functions directory)
-- **Formatting**:
-  - `yarn format` - Format all files with Prettier
-  - `yarn format:check` - Check formatting without changes
-- **Pre-commit**: Hooks configured with `husky` for automatic linting on commit
-- **Workspace Setup**: Yarn workspaces with functions using npm scripts
-
-### Current Frontend Scripts
-
+**Development:**
 - `yarn dev` - Start Vite development server
-- `yarn build` - TypeScript compilation + Vite build for production
-- `yarn preview` - Preview production build locally
-- `yarn test` - Run Jest unit tests
-- `yarn lint` - Run ESLint (max 0 warnings)
-- `yarn lint:fix`- Auto-fix ESLint issues (max 10 warnings)
-- `yarn lint:ci` - Run ESLint with CI settings (max 5 warnings)
 - `yarn storybook` - Start Storybook development server
+
+**Building & Validation:**
+- `yarn build` - TypeScript compilation + Vite production build
+- `yarn preview` - Preview production build locally
 - `yarn build-storybook` - Build Storybook for production
 
-## Frontend Deployment Readiness Commands
+**Linting & Formatting:**
+- `yarn lint` - Run ESLint (entire project)
+- `yarn lint:fix` - Auto-fix ESLint issues
+- `yarn lint:ci` - CI-friendly linting
+- `yarn format` - Format with Prettier
+- `yarn format:check` - Check formatting without changes
+- Pre-commit hooks enabled via `husky`
 
-- **Full Deployment Check**: `./scripts/frontend-deployment-readiness.sh` - Comprehensive validation (TypeScript, build, tests, linting, security)
-- **TypeScript Validation**: `./scripts/typescript-check.sh` - Dedicated TypeScript type checking and analysis
-- **Bundle Analysis**: `./scripts/vite-bundle-analyzer.sh` - Vite bundle analysis and optimization recommendations
-- **Frontend Structure**: `./frontend/restructure.sh` - Reorganize frontend components and structure
-- See `scripts/frontend-commands.md` for detailed usage and examples
+**Deployment Readiness:**
+- `./scripts/frontend-deployment-readiness.sh` - Full TypeScript, build, tests, linting, security validation
+- `./scripts/typescript-check.sh` - TypeScript type checking
+- `./scripts/vite-bundle-analyzer.sh` - Bundle analysis and optimization
+- See `scripts/frontend-commands.md` for more details
 
 ## Design System & Aesthetic Direction (Design Wing)
 
@@ -933,148 +501,20 @@ Options:
   - `./scripts/setup-firebase.sh` - Firebase-specific setup
   - `./scripts/validate-environment.sh` - Validate environment configuration
 
-## Testing Framework
+### Test Infrastructure
 
-### Frontend Testing
+**Configuration:**
+- `frontend/jest.config.mjs` - Jest ES module config with ts-jest
+- `frontend/playwright.config.ts` - Playwright E2E configuration
+- `backend/pytest.ini`, `backend/pyproject.toml` - Backend test config
+- `frontend/src/setupTests.ts` - Firebase mocks, Material-UI theme, ResizeObserver
 
-- **Unit Tests**: Jest + React Testing Library for component testing
-- **Test Commands**:
-  - `yarn test` - Run all frontend tests
-  - `yarn test:watch` - Run tests in watch mode
-  - `yarn test:coverage` - Generate coverage report
-- **Component Tests**: Comprehensive tests for all major UI components
-  - `KscGeneratorPage` - Render tests and user interaction validation
-  - `CoverLetterGenerator` - AI service integration and form validation
-  - `TailoredResumeGenerator` - Resume generation workflow testing
-  - `OneClickApplyButton` - Complex application flow testing
-  - `DocumentReviewModal` - Document review and approval workflow
-  - `Editor` - Rich text editing functionality
-  - `KeywordTagGroup` - Keyword management and bulk actions
-
-### Backend Testing
-
-- **Unit Tests**: pytest for flow and service testing
-- **Test Commands**:
-  - `pytest backend/app/tests/` - Run all backend tests
-  - `pytest backend/app/tests/ -v` - Verbose test output
-  - `pytest backend/app/tests/ --cov` - Generate coverage report
-- **Flow Tests**: Genkit flow validation with mocked AI models
-  - `test_ats_scoring.py` - ATS scoring flow with comprehensive mocking
-  - `test_cover_letter_robustness.py` - Robustness testing for edge cases
-  - `test_cover_letter_output_validation.py` - AI model output validation
-
-### Integration Testing
-
-- **API Testing**: httpx + FastAPI TestClient for endpoint validation
-- **Test Commands**:
-  - `pytest backend/app/tests/api/` - Run integration tests
-- **Endpoint Tests**:
-  - `test_ksc_integration.py` - POST /api/v1/ksc/generate endpoint validation
-  - Request/response validation, error handling, concurrent request testing
-
-### End-to-End (E2E) Testing
-
-- **E2E Framework**: Playwright for complete user journey testing
-- **Test Commands**:
-  - `npx playwright test` (from frontend directory) - Run all E2E tests
-  - `npx playwright test --headed` - Run tests with browser UI
-  - `npx playwright test --debug` - Debug mode with step-through
-- **User Journey Tests**:
-  - `ksc-generation-workflow.spec.js` - Complete KSC generation workflow
-  - Mobile responsiveness, accessibility, keyboard navigation testing
-  - Error handling and edge case validation
-
-### Test Coverage
-
-- **Frontend**: Component rendering, user interactions, API integration, error states
-- **Backend**: Flow logic, AI model mocking, robustness testing, output validation
-- **Integration**: API endpoints, request/response validation, error handling
-- **E2E**: Complete user workflows, accessibility, responsive design
-
-### Test Configuration Files
-
-- `frontend/package.json` - Jest configuration embedded for React components
-- `frontend/playwright.config.ts` - Playwright E2E test configuration
-- `functions/package.json` - Jest configuration for Functions testing
-- `frontend/src/setupTests.ts` - Test environment setup
-- `jest.config.js` files removed in favor of package.json configuration
-
-## CI/CD Testing Pipeline
-
-### GitHub Actions Workflow
-
-- **Main Workflow**: `.github/workflows/ci.yml` - Comprehensive testing pipeline
-- **Test Triggers**: Pull requests, pushes to main/develop, manual dispatch
-- **Parallel Execution**: All test suites run in parallel for faster feedback
-  - Frontend tests (Jest), Backend tests (pytest), and E2E tests (Playwright) execute simultaneously
-  - Tool calls batched together for optimal performance (multiple bash commands, file operations)
-  - Independent test jobs reduce total CI/CD pipeline execution time
-  - Parallel dependency installation across workspaces (frontend, functions)
-  - Concurrent linting and type checking processes
-
-### Test Jobs in CI Pipeline
-
-#### Frontend Testing Job
-
-- **Jest Unit Tests**: Component rendering, user interactions, API integration
-- **Coverage Report**: HTML and XML coverage reports with artifacts
-- **Linting & Formatting**: ESLint and Prettier validation
-- **Build Verification**: Ensures frontend builds successfully
-
-#### Backend Testing Job
-
-- **Unit Tests**: `pytest app/tests/genkit_flows/ app/tests/core/` with coverage
-- **Integration Tests**: `pytest app/tests/api/` for endpoint validation
-- **Coverage Upload**: Codecov integration for coverage tracking
-- **Security Scanning**: Bandit security analysis with artifact reports
-- **Type Checking**: mypy validation for type safety
-
-#### E2E Testing Job
-
-- **Playwright Tests**: Complete user journey validation
-- **Multi-Browser**: Chromium, Firefox, WebKit testing
-- **Full Stack**: Starts both backend and frontend servers
-- **Screenshot Capture**: Failure screenshots uploaded as artifacts
-- **Environment Variables**: Uses staging environment configuration
-
-#### Performance Testing Job (Optional)
-
-- **Benchmark Tests**: Performance regression detection
-- **Scheduled Runs**: Runs on schedule or manual trigger
-- **Performance Metrics**: Benchmark results with historical tracking
-
-### Test Artifacts & Reporting
-
-- **Coverage Reports**: Frontend and backend coverage uploaded to Codecov
-- **Test Results**: HTML reports for all test suites
-- **E2E Screenshots**: Failure screenshots for debugging
-- **Security Reports**: Bandit security scan results
-- **Performance Benchmarks**: Historical performance tracking
-
-### Quality Gate
-
-- **All Tests Required**: Frontend, backend, functions, and E2E tests must pass
-- **Security Validation**: CodeQL and Bandit security checks
-- **Test Summary**: Detailed test results table in PR comments
-- **Artifact Links**: Direct links to coverage and test reports
-
-### Manual Test Controls
-
-```bash
-# Trigger CI with specific test options
-gh workflow run ci.yml \
-  --ref develop \
-  -f run_e2e_tests=true \
-  -f run_performance_tests=false \
-  -f test_environment=staging
-```
-
-### Environment Configuration
-
-- **Test Environment**: Isolated test database and services
-- **API Keys**: Staging environment secrets for integration tests
-- **Service Mocking**: External services mocked in unit tests
-- **Database**: Testcontainers for integration test isolation
+**CI/CD Pipeline** (`.github/workflows/ci.yml`):
+- Parallel test execution: Frontend (Jest), Backend (pytest), E2E (Playwright)
+- Coverage reporting to Codecov
+- Security scanning (Bandit, CodeQL)
+- Type checking (mypy)
+- Artifacts: Coverage reports, E2E screenshots, security reports
 
 ## Current Project Status
 
