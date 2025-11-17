@@ -52,7 +52,7 @@ import React, { useState } from 'react';
 
 import GridCompat from '@/components/ui/GridCompat';
 
-interface Document {
+export interface Document {
   id: string;
   name: string;
   type: 'resume' | 'cover-letter' | 'ksc' | 'portfolio';
