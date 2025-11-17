@@ -118,64 +118,66 @@ EOF
 echo -e "\n=== 2. Installing New Skills (Categorized) ==="
 
 # --- 2.1. Design System Core ---
-create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "design-token-generator.md" "$(cat << 'EOF'
----
-name: design-token-generator
-description: Translates a high-level "aestheticPreferences" JSON object into a complete JSON Design Token system.
-tags: [ "design", "tokens" ]
----
-# Design Token Generator
-Translates an `aestheticPreferences` JSON into a full `tokens.json` file.
-EOF
-)"
-create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "design-critique-vision.md" "$(cat << 'EOF'
----
-name: design-critique-vision
-description: Analyzes a provided image for visual design quality and provides actionable critique.
-tags: [ "design", "critique", "vision" ]
----
-# Design Critique (Vision)
-Analyzes a screenshot to identify visual design properties (layout, hierarchy, color, etc.).
-EOF
-)"
-create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "wcag-contrast-checker.md" "$(cat << 'EOF'
----
-name: wcag-contrast-checker
-description: Calculates the contrast ratio between two hex colors and provides WCAG pass/fail status.
-tags: [ "accessibility", "wcag" ]
----
-# WCAG Contrast Checker
-Calculates contrast ratio between two hex colors to ensure AA/AAA compliance.
-EOF
-)"
-create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "ux-heuristic-audit.md" "$(cat << 'EOF'
----
-name: ux-heuristic-audit
-description: Audits a component or user flow against Nielsen's 10 Usability Heuristics.
-tags: [ "ux", "audit" ]
----
-# UX Heuristic Audit
-Audits a UI flow against Nielsen's 10 Heuristics for usability issues.
-EOF
-)"
+# COMMENTED OUT: Skills already exist in .claude/skills/design-skills/
+# create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "design-token-generator.md" "$(cat << 'EOF'
+# ---
+# name: design-token-generator
+# description: Translates a high-level "aestheticPreferences" JSON object into a complete JSON Design Token system.
+# tags: [ "design", "tokens" ]
+# ---
+# # Design Token Generator
+# Translates an `aestheticPreferences` JSON into a full `tokens.json` file.
+# EOF
+# )"
+# create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "design-critique-vision.md" "$(cat << 'EOF'
+# ---
+# name: design-critique-vision
+# description: Analyzes a provided image for visual design quality and provides actionable critique.
+# tags: [ "design", "critique", "vision" ]
+# ---
+# # Design Critique (Vision)
+# Analyzes a screenshot to identify visual design properties (layout, hierarchy, color, etc.).
+# EOF
+# )"
+# create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "wcag-contrast-checker.md" "$(cat << 'EOF'
+# ---
+# name: wcag-contrast-checker
+# description: Calculates the contrast ratio between two hex colors and provides WCAG pass/fail status.
+# tags: [ "accessibility", "wcag" ]
+# ---
+# # WCAG Contrast Checker
+# Calculates contrast ratio between two hex colors to ensure AA/AAA compliance.
+# EOF
+# )"
+# create_file_if_not_exists "$DESIGN_CORE_SKILL_DIR" "ux-heuristic-audit.md" "$(cat << 'EOF'
+# ---
+# name: ux-heuristic-audit
+# description: Audits a component or user flow against Nielsen's 10 Usability Heuristics.
+# tags: [ "ux", "audit" ]
+# ---
+# # UX Heuristic Audit
+# Audits a UI flow against Nielsen's 10 Heuristics for usability issues.
+# EOF
+# )"
 
 # --- 2.2. Frontend Generation ---
-create_file_if_not_exists "$FRONTEND_GEN_SKILL_DIR" "component-builder.md" "$(cat << 'EOF'
----
-name: component-builder
-description: The core engine that writes M3-compliant React code using Design Tokens.
-version: 1.0.0
-tags: ["react", "m3", "tokens", "engineering"]
-system_prompt: |
-  You are the **Component Builder**. Your job is to take a description and write production-ready React code.
-
-  **CRITICAL RULES:**
-  1.  **No Magic Values:** You must NEVER use hex codes, pixel values, or raw CSS colors.
-  2.  **Use Tokens:** You must use `var(--sys-...)` CSS variables for ALL styling.
-  3.  **MUI System:** Use the `sx` prop for all styling.
-  4.  **Self-Contained:** Do not create separate `.module.css` files.
-EOF
-)"
+# COMMENTED OUT: component-builder already exists in .claude/skills/component-builder/
+# create_file_if_not_exists "$FRONTEND_GEN_SKILL_DIR" "component-builder.md" "$(cat << 'EOF'
+# ---
+# name: component-builder
+# description: The core engine that writes M3-compliant React code using Design Tokens.
+# version: 1.0.0
+# tags: ["react", "m3", "tokens", "engineering"]
+# system_prompt: |
+#   You are the **Component Builder**. Your job is to take a description and write production-ready React code.
+#
+#   **CRITICAL RULES:**
+#   1.  **No Magic Values:** You must NEVER use hex codes, pixel values, or raw CSS colors.
+#   2.  **Use Tokens:** You must use `var(--sys-...)` CSS variables for ALL styling.
+#   3.  **MUI System:** Use the `sx` prop for all styling.
+#   4.  **Self-Contained:** Do not create separate `.module.css` files.
+# EOF
+# )"
 
 # --- 2.3. Frontend Migration (M3 Wing) ---
 create_file_if_not_exists "$FRONTEND_MIG_SKILL_DIR" "m3-layout-refactor.md" '# M3 Layout Refactor...'
@@ -200,7 +202,8 @@ EOF
 )"
 
 # --- 2.5. Document Processing ---
-create_file_if_not_exists "$DOC_SKILL_DIR" "pdf-text-extractor.md" '# PDF Text Extractor...'
+# COMMENTED OUT: pdf-text-extractor already exists in .claude/skills/document-skills/pdf/
+# create_file_if_not_exists "$DOC_SKILL_DIR" "pdf-text-extractor.md" '# PDF Text Extractor...'
 
 # ==============================================================================
 # 3. NEW AUTOMATION SCRIPTS (FULL CODE)
