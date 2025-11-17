@@ -1,8 +1,8 @@
 # Skill-Agent Matrix
 
 **Last Updated:** 2025-11-17
-**Total Skills:** 24 (+ 12 nested skills)
-**Total Agents:** 15
+**Total Skills:** 24 (+ 12 nested skills, + 3 Jest templates)
+**Total Agents:** 16
 
 This document maps all skills to the agents that use them, organized by functional category.
 
@@ -135,9 +135,15 @@ This document maps all skills to the agents that use them, organized by function
 
 ### jest-test-scaffolder
 - **Description:** Generates Jest tests for React components and hooks
-- **Used By:** testing-specialist, test-runner
+- **Used By:** testing-specialist, test-runner, test-automation-specialist
 - **Output:** `__tests__/*.test.tsx`
 - **Pattern:** React Testing Library best practices
+- **Templates:**
+  - `component.test.tsx.tpl` - Standard component tests
+  - `component-m3.test.tsx.tpl` - M3 token-aware tests (V2)
+  - `integration.test.tsx.tpl` - Complex flow tests (V2)
+  - `hook.test.tsx.tpl` - React hook tests
+- **Version:** V2 (M3 Design Token awareness)
 
 ### webapp-testing
 - **Description:** Runs/writes Playwright E2E tests
@@ -216,6 +222,7 @@ This document maps all skills to the agents that use them, organized by function
 | code-reviewer | api-contract-validator | 1 |
 | test-runner | jest-test-scaffolder, webapp-testing, api-integration-test-scaffolder | 3 |
 | testing-specialist | jest-test-scaffolder, api-integration-test-scaffolder, storybook-scaffolder, webapp-testing, task-delegator | 5 |
+| test-automation-specialist | jest-test-scaffolder, task-delegator | 2 |
 | devops-specialist | deployment-manager, project-health-checker | 2 |
 
 ### By Skill Type
@@ -240,6 +247,7 @@ This document maps all skills to the agents that use them, organized by function
 4. **storybook-scaffolder** - Auto-imports design-tokens.css
 5. **figma-to-component** - Vision-based token mapping
 6. **fullstack-flow-mapper** - Includes token flow diagrams
+7. **jest-test-scaffolder** - M3 component template validates token usage (NEW)
 
 ### New M3 Skills (8)
 All frontend-migration/ skills created for M3 migration workflow
