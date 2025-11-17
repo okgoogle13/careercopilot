@@ -1,17 +1,24 @@
 #!/usr/bin/env ts-node
 /**
- * Component Inventory Generator
+ * Component Inventory Generator - Material Design 3 Expressive Edition
  *
  * This script analyzes the frontend codebase to generate an accurate inventory
- * of all components, their usage patterns, and dependencies.
+ * of all components, their usage patterns, and Material Design 3 (Expressive) migration status.
  *
  * Features:
  * - Uses TypeScript AST analysis via ts-morph for accuracy
  * - Detects all import patterns (default, named, dynamic)
- * - Tracks component dependencies
+ * - Tracks component dependencies and M3 migration status
  * - Identifies test/story file coverage
  * - Categorizes components by type
- * - Generates detailed JSON report
+ * - Analyzes M3 Expressive adoption (design tokens, theme provider, MUI components)
+ * - Generates detailed JSON report with migration recommendations
+ *
+ * Migration Status Detection:
+ * - 'migrated': Uses MUI components only (no custom UI wrapper components)
+ * - 'mixed': Uses both MUI and custom UI components (needs consolidation)
+ * - 'not_migrated': Uses only custom UI components (needs M3 migration)
+ * - 'expressive': Fully adopted M3 Expressive with design tokens
  *
  * Usage:
  *   npx ts-node scripts/component-inventory.ts
@@ -45,7 +52,11 @@ interface ComponentInfo {
   usesMUI: boolean;
   usesCustomUI: boolean;
   isDemo: boolean;
-  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
+  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown';
+  // M3 Expressive specific fields
+  usesDesignTokens: boolean;
+  usesThemeProvider: boolean;
+  usesM3Components: boolean;
 }
 
 interface InventoryReport {
@@ -56,7 +67,13 @@ interface InventoryReport {
   unusedComponents: string[];
   mostUsedComponents: Array<{ name: string; count: number }>;
   recommendations: string[];
-  migrationSummary: Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>;
+  migrationSummary: Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>;
+  m3ExpressiveAdoption: {
+    withDesignTokens: number;
+    withThemeProvider: number;
+    withM3Components: number;
+    fullyExpressive: number;
+  };
 }
 
 const FRONTEND_DIR = path.join(__dirname, '..');
@@ -174,7 +191,7 @@ function analyzeComponents(): InventoryReport {
       }
     });
 
-    // Determine migration flags
+    // Determine migration flags and M3 Expressive adoption
     const importDecls = sourceFile.getImportDeclarations();
     const usesMUI = importDecls.some(imp => {
       const mod = imp.getModuleSpecifierValue();
@@ -185,11 +202,35 @@ function analyzeComponents(): InventoryReport {
       // local UI layer patterns
       return mod.includes('/components/ui/') || mod.startsWith('../ui') || mod.startsWith('./ui') || mod.includes('src/components/ui/');
     });
+
+    // M3 Expressive feature detection
+    const usesDesignTokens = text.includes('var(--') || text.includes('theme.palette') || text.includes('theme.spacing');
+    const usesThemeProvider = importDecls.some(imp => {
+      const mod = imp.getModuleSpecifierValue();
+      return mod.includes('@mui/material/styles') || mod.includes('ThemeProvider');
+    }) || text.includes('useTheme()') || text.includes('useTheme(');
+    const usesM3Components = importDecls.some(imp => {
+      const mod = imp.getModuleSpecifierValue();
+      // Check for common M3 components
+      return mod.includes('@mui/material/') && (
+        mod.includes('Card') || mod.includes('Button') || mod.includes('TextField') ||
+        mod.includes('Dialog') || mod.includes('AppBar') || mod.includes('Chip')
+      );
+    });
+
     const isDemo = filePath.includes('Figma UI Files');
     let migrationStatus: ComponentInfo['migrationStatus'] = 'unknown';
-    if (usesMUI && !usesCustomUI) migrationStatus = 'migrated';
-    else if (usesMUI && usesCustomUI) migrationStatus = 'mixed';
-    else if (!usesMUI && usesCustomUI) migrationStatus = 'not_migrated';
+
+    // Determine migration status with M3 Expressive detection
+    if (usesMUI && !usesCustomUI && usesDesignTokens && usesThemeProvider) {
+      migrationStatus = 'expressive'; // Fully adopted M3 Expressive
+    } else if (usesMUI && !usesCustomUI) {
+      migrationStatus = 'migrated'; // Uses MUI but may not fully use design tokens
+    } else if (usesMUI && usesCustomUI) {
+      migrationStatus = 'mixed'; // Mixed usage, needs consolidation
+    } else if (!usesMUI && usesCustomUI) {
+      migrationStatus = 'not_migrated'; // Still using custom UI only
+    }
 
     const { hasTests, hasStories, hasDocs } = findRelatedFiles(filePath);
     const category = categorizeComponent(filePath);
@@ -213,6 +254,9 @@ function analyzeComponents(): InventoryReport {
       usesCustomUI,
       isDemo,
       migrationStatus,
+      usesDesignTokens,
+      usesThemeProvider,
+      usesM3Components,
     };
 
     components.push(component);
@@ -314,6 +358,25 @@ function analyzeComponents(): InventoryReport {
     );
   }
 
+  // M3 Expressive specific recommendations
+  const mixedComponents = components.filter(c => c.migrationStatus === 'mixed');
+  if (mixedComponents.length > 0) {
+    recommendations.push(
+      `${mixedComponents.length} components have mixed MUI/custom UI usage. Consolidate to pure MUI for M3 consistency: ` +
+      mixedComponents.slice(0, 5).map(c => c.name).join(', ') +
+      (mixedComponents.length > 5 ? '...' : '')
+    );
+  }
+
+  const notMigratedComponents = components.filter(c => c.migrationStatus === 'not_migrated');
+  if (notMigratedComponents.length > 0) {
+    recommendations.push(
+      `${notMigratedComponents.length} components still use custom UI only. Migrate to Material UI components: ` +
+      notMigratedComponents.slice(0, 5).map(c => c.name).join(', ') +
+      (notMigratedComponents.length > 5 ? '...' : '')
+    );
+  }
+
   // Migration summary
   const migrationSummary = components.reduce((acc, c) => {
     acc[c.migrationStatus] = (acc[c.migrationStatus] || 0) + 1;
@@ -322,8 +385,32 @@ function analyzeComponents(): InventoryReport {
     migrated: 0,
     mixed: 0,
     not_migrated: 0,
+    expressive: 0,
     unknown: 0,
-  } as Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>);
+  } as Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>);
+
+  // M3 Expressive adoption metrics
+  const m3ExpressiveAdoption = {
+    withDesignTokens: components.filter(c => c.usesDesignTokens).length,
+    withThemeProvider: components.filter(c => c.usesThemeProvider).length,
+    withM3Components: components.filter(c => c.usesM3Components).length,
+    fullyExpressive: components.filter(c => c.migrationStatus === 'expressive').length,
+  };
+
+  const migratedWithoutTokens = components.filter(c => c.migrationStatus === 'migrated' && !c.usesDesignTokens);
+  if (migratedWithoutTokens.length > 0) {
+    recommendations.push(
+      `${migratedWithoutTokens.length} migrated components don't use design tokens. Adopt M3 Expressive theming: ` +
+      migratedWithoutTokens.slice(0, 5).map(c => c.name).join(', ') +
+      (migratedWithoutTokens.length > 5 ? '...' : '')
+    );
+  }
+
+  const fullyExpressivePercent = ((m3ExpressiveAdoption.fullyExpressive / components.length) * 100).toFixed(1);
+  recommendations.push(
+    `M3 Expressive Adoption: ${fullyExpressivePercent}% (${m3ExpressiveAdoption.fullyExpressive}/${components.length}) fully adopted. ` +
+    `Target: 80%+ for complete M3 Expressive migration.`
+  );
 
   const report: InventoryReport = {
     generatedAt: new Date().toISOString(),
@@ -334,6 +421,7 @@ function analyzeComponents(): InventoryReport {
     mostUsedComponents,
     recommendations,
     migrationSummary,
+    m3ExpressiveAdoption,
   };
 
   return report;
@@ -357,6 +445,20 @@ function main() {
     Object.entries(report.componentsByCategory).forEach(([category, count]) => {
       console.log(`  ${category}: ${count}`);
     });
+
+    console.log(`\n=== M3 Migration Status ===`);
+    console.log(`Expressive (Fully Adopted): ${report.migrationSummary.expressive}`);
+    console.log(`Migrated (MUI Only): ${report.migrationSummary.migrated}`);
+    console.log(`Mixed (MUI + Custom UI): ${report.migrationSummary.mixed}`);
+    console.log(`Not Migrated (Custom UI Only): ${report.migrationSummary.not_migrated}`);
+    console.log(`Unknown: ${report.migrationSummary.unknown}`);
+
+    console.log(`\n=== M3 Expressive Adoption ===`);
+    console.log(`Components with Design Tokens: ${report.m3ExpressiveAdoption.withDesignTokens}`);
+    console.log(`Components with Theme Provider: ${report.m3ExpressiveAdoption.withThemeProvider}`);
+    console.log(`Components with M3 Components: ${report.m3ExpressiveAdoption.withM3Components}`);
+    console.log(`Fully Expressive: ${report.m3ExpressiveAdoption.fullyExpressive}`);
+
     console.log(`\nUnused Components: ${report.unusedComponents.length}`);
     console.log(`\nTop 5 Most Used:`);
     report.mostUsedComponents.slice(0, 5).forEach((c, i) => {
