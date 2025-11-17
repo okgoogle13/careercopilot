@@ -255,3 +255,44 @@ New Status:
 - Test setup: `frontend/src/setupTests.ts`
 - Quick reference: `.ai_reports/TEST_QUICK_REFERENCE.md`
 - Complete guide: `.ai_reports/TEST_RUNNER_GUIDE.md`
+
+---
+
+## Example Workflows
+
+### Workflow 1: Run Tests After Component Changes
+
+**Scenario:** Modified `Button.tsx`
+
+**Steps:**
+1. Identify affected tests: `Button.test.tsx`
+2. Run: `yarn test Button`
+3. Analyze results: ✅ passing → Continue | ❌ failures → Fix
+4. Before commit: `yarn test:ci`
+
+### Workflow 2: Fix Failing Tests
+
+**Scenario:** Tests failing after API change
+
+**Steps:**
+1. Run: `yarn test --onlyFailed`
+2. Categorize: same file/component/multiple?
+3. For each: Read test → Read source → Identify mismatch
+4. Fix (code/test/config)
+5. Verify: `yarn test:ci`
+
+### Workflow 3: Generate Coverage Report
+
+**Steps:**
+1. Run: `yarn test:coverage`
+2. Open: `frontend/coverage/lcov-report/index.html`
+3. Delegate untested components to testing-specialist
+4. Track progress toward 50% target
+
+---
+
+## Collaboration with Other Agents
+
+- **testing-specialist:** Generates tests → test-runner validates
+- **debugger:** test-runner detects failures → debugger analyzes → test-runner validates fix
+- **test-automation-specialist:** Generates batch tests → test-runner validates batches
