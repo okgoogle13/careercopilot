@@ -1,7 +1,7 @@
 # Skill-Agent Matrix
 
 **Last Updated:** 2025-11-17
-**Total Skills:** 25 (+ 12 nested skills)
+**Total Skills:** 24 (+ 12 nested skills)
 **Total Agents:** 15
 
 This document maps all skills to the agents that use them, organized by functional category.
@@ -131,18 +131,13 @@ This document maps all skills to the agents that use them, organized by function
 
 ---
 
-## Testing Skills (4)
+## Testing Skills (3)
 
 ### jest-test-scaffolder
 - **Description:** Generates Jest tests for React components and hooks
 - **Used By:** testing-specialist, test-runner
 - **Output:** `__tests__/*.test.tsx`
 - **Pattern:** React Testing Library best practices
-
-### vitest-test-scaffolder
-- **Description:** Generates Vitest unit tests for components
-- **Used By:** testing-specialist, test-runner
-- **Alternative to:** jest-test-scaffolder
 
 ### webapp-testing
 - **Description:** Runs/writes Playwright E2E tests
@@ -219,8 +214,8 @@ This document maps all skills to the agents that use them, organized by function
 | fullstack-integration-specialist | fastapi-endpoint-scaffolder, pydantic-model-scaffolder, api-contract-validator, api-integration-test-scaffolder, frontend-backend-mapper, fullstack-flow-mapper | 6 |
 | ai-agent-specialist | careercopilot-agent-scaffolder, careercopilot-tool-creator, document-skills | 3 |
 | code-reviewer | api-contract-validator | 1 |
-| test-runner | jest-test-scaffolder, vitest-test-scaffolder, webapp-testing, api-integration-test-scaffolder | 4 |
-| testing-specialist | jest-test-scaffolder, vitest-test-scaffolder, api-integration-test-scaffolder, storybook-scaffolder, webapp-testing, task-delegator | 6 |
+| test-runner | jest-test-scaffolder, webapp-testing, api-integration-test-scaffolder | 3 |
+| testing-specialist | jest-test-scaffolder, api-integration-test-scaffolder, storybook-scaffolder, webapp-testing, task-delegator | 5 |
 | devops-specialist | deployment-manager, project-health-checker | 2 |
 
 ### By Skill Type
@@ -230,7 +225,7 @@ This document maps all skills to the agents that use them, organized by function
 | Design System | 4 + 8 M3 | Yes (M3 migration) |
 | Component Scaffolding | 6 | 5 updated to V2 |
 | Backend & API | 5 | 1 updated (fullstack-flow-mapper) |
-| Testing | 4 | No |
+| Testing | 3 | No |
 | Document & AI | 3 | No |
 | Infrastructure | 3 | No |
 
@@ -318,6 +313,5 @@ All frontend-migration/ skills created for M3 migration workflow
 ├── task-delegator/
 ├── theme-factory/
 │   └── theme-factory.md
-├── vitest-test-scaffolder/
 └── webapp-testing/
 ```
