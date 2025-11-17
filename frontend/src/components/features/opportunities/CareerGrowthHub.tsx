@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   ArrowLeft,
   ArrowRight,
@@ -12,58 +13,18 @@ import {
   GpsFixed as Target,
   TrendingUp,
   EmojiEvents as Trophy,
+  Workspaces as WorkspacesIcon,
+  Insights as InsightsIcon,
+  ModelTraining as ModelTrainingIcon,
 } from '@mui/icons-material';
 import { Box, Typography, useTheme } from '@mui/material';
 import { Button, Card } from '@mui/material';
-
-import { Badge } from '../../ui/badge';
-import { Progress } from '../../ui/progress';
+import { TabContext, TabPanel } from '@mui/lab';
+import { FeatureCard } from './FeatureCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../ui/tabs';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../../ui/tooltip';
+import { Badge } from '../../ui/badge';
 
-interface Goal {
-  id: string;
-  title: string;
-  description: string;
-  category: 'skill' | 'career' | 'network' | 'certification';
-  progress: number;
-  targetDate: string;
-  status: 'active' | 'completed' | 'paused';
-  milestones: Array<{
-    id: string;
-    title: string;
-    completed: boolean;
-    dueDate?: string;
-  }>;
-}
-
-interface Skill {
-  id: string;
-  name: string;
-  category: 'technical' | 'soft' | 'industry';
-  currentLevel: number;
-  targetLevel: number;
-  demandScore: number;
-  trending: boolean;
-  resources: Array<{
-    type: 'course' | 'article' | 'video' | 'book';
-    title: string;
-    url: string;
-    duration?: string;
-    rating?: number;
-  }>;
-}
-
-interface CareerGrowthHubProps {
-  onNavigate: (feature: 'job-matching' | 'career-intelligence' | 'interview-prep') => void;
-  onBack: () => void;
-  userGoals?: Goal[];
-  userSkills?: Skill[];
-  onAddGoal?: (goal: Omit<Goal, 'id'>) => void;
-  onUpdateGoal?: (goalId: string, updates: Partial<Goal>) => void;
-}
-
-// Mock data
 const mockGoals: Goal[] = [
   {
     id: '1',
@@ -151,6 +112,7 @@ const mockSkills: Skill[] = [
     ],
   },
 ];
+
 const features = [
   {
     id: 'job-matching' as const,
@@ -196,6 +158,11 @@ export function CareerGrowthHub({
   userSkills = mockSkills,
 }: CareerGrowthHubProps) {
   const theme = useTheme();
+  const [value, setValue] = React.useState('overview');
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);
+  };
 
   const getSkillCategoryColor = (category: Skill['category']) => {
     const colors = {
@@ -256,301 +223,111 @@ export function CareerGrowthHub({
           </Box>
 
           {/* Enhanced Navigation */}
-          <Tabs defaultValue="overview" sx={{
+          <TabContext value={value}>
+            <Tabs onChange={handleChange} defaultValue="overview" sx={{
       width: "100%"
     }}>
-            <TabsList sx={{
+              <TabsList sx={{
       width: "100%",
       mb: 8
     }}>
-              <TabsTrigger value="overview" sx={{
+                <TabsTrigger value="overview" sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                <BarChart />
-                Overview
-              </TabsTrigger>
-              <TabsTrigger value="goals" sx={{
+                  <BarChart />
+                  Overview
+                </TabsTrigger>
+                <TabsTrigger value="goals" sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                <Target />
-                Goals ({userGoals.length})
-              </TabsTrigger>
-              <TabsTrigger value="skills" sx={{
+                  <Target />
+                  Goals ({userGoals.length})
+                </TabsTrigger>
+                <TabsTrigger value="skills" sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                <BookOpen />
-                Skills ({userSkills.length})
-              </TabsTrigger>
-              <TabsTrigger value="ai-tools" sx={{
+                  <BookOpen />
+                  Skills ({userSkills.length})
+                </TabsTrigger>
+                <TabsTrigger value="ai-tools" sx={{
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                <Sparkles />
-                AI Tools
-              </TabsTrigger>
-            </TabsList>
+                  <Sparkles />
+                  AI Tools
+                </TabsTrigger>
+              </TabsList>
 
-            {/* Overview Tab */}
-            <TabsContent value="overview" sx={{}}>
-              {/* Quick Stats */}
-              <Box sx={{
-      display: 'grid',
-      gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(4, 1fr)' },
-      gap: 4
-    }}>
-                <Card sx={{
-      p: 6,
-      textAlign: "center"
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      mb: 2
-    }}>
-                    <Target sx={{
-      color: "blue.500"
-    }} />
-                  </Box>
-                  <Typography sx={{
-      typography: "h4",
-      fontWeight: 700,
-      color: "blue.600"
-    }}>
-                    {userGoals.filter((g) => g.status === 'active').length}
-                  </Typography>
-                  <Typography sx={{
-      typography: "body1",}}>Active Goals</Typography>
-                </Card>
-                <Card sx={{
-      p: 6,
-      textAlign: "center"
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      mb: 2
-    }}>
-                    <BookOpen sx={{
-      color: "green.500"
-    }} />
-                  </Box>
-                  <Typography sx={{
-      typography: "h4",
-      fontWeight: 700,
-      color: "green.600"
-    }}>{userSkills.length}</Typography>
-                  <Typography sx={{
-      typography: "body1",}}>Skills Tracking</Typography>
-                </Card>
-                <Card sx={{
-      p: 6,
-      textAlign: "center"
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      mb: 2
-    }}>
-                    <Trophy sx={{
-      color: "amber.500"
-    }} />
-                  </Box>
-                  <Typography sx={{
-      typography: "h4",
-      fontWeight: 700,
-      color: "amber.600"
-    }}>
-                    {userGoals.filter((g) => g.status === 'completed').length}
-                  </Typography>
-                  <Typography sx={{
-      typography: "body1",}}>Completed</Typography>
-                </Card>
-                <Card sx={{
-      p: 6,
-      textAlign: "center"
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      mb: 2
-    }}>
-                    <TrendingUp sx={{
-      color: "purple.500"
-    }} />
-                  </Box>
-                  <Typography sx={{
-      typography: "h4",
-      fontWeight: 700,
-      color: "purple.600"
-    }}>
-                    {Math.round(
-                      userGoals.reduce((acc, g) => acc + g.progress, 0) / userGoals.length
-                    )}
-                    %
-                  </Typography>
-                  <Typography sx={{
-      typography: "body1",}}>Avg Progress</Typography>
-                </Card>
-              </Box>
+              {/* Overview Tab */}
+              <TabPanel value="overview" data-testid="tabs-content-overview">
+  <Typography variant="h6">Overview Content</Typography>
+</TabPanel>
+<TabPanel value="goals" data-testid="tabs-content-goals">
+  {userGoals.length > 0 ? (
+    userGoals.map((goal) => (
+      <div key={goal.id}>
+        <Typography variant="h6">{goal.title}</Typography>
+        <Typography>{goal.description}</Typography>
+      </div>
+    ))
+  ) : (
+    <Typography>No goals set yet.</Typography>
+  )}
+</TabPanel>
+<TabPanel value="skills" data-testid="tabs-content-skills">
+  {userSkills.length > 0 ? (
+    userSkills.map((skill) => (
+      <div key={skill.id}>
+        <Typography variant="h6">{skill.name}</Typography>
+      </div>
+    ))
+  ) : (
+    <Typography>No skills to display.</Typography>
+  )}
+</TabPanel>
+<TabPanel value="ai-tools" data-testid="tabs-content-ai-tools">
+  <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+    <FeatureCard
+      title="AI Job Matching"
+      description="Get matched with jobs that fit your skills and goals."
+      icon={<WorkspacesIcon />}
+      onClick={() => onNavigate('job-matching')}
+    />
+    <FeatureCard
+      title="Career Intelligence"
+      description="Gain insights into career paths and salary expectations."
+      icon={<InsightsIcon />}
+      onClick={() => onNavigate('career-intelligence')}
+    />
+    <FeatureCard
+      title="Interview Preparation"
+      description="Practice with AI-powered interview simulations."
+      icon={<ModelTrainingIcon />}
+      onClick={() => onNavigate('interview-prep')}
+    />
+  </Box>
+</TabPanel>
 
-              {/* Recent Activity & Top Goals */}
-              <Box sx={{
-      display: 'grid',
-      gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
-      gap: 8,
-      mt: 8
-    }}>
-                <Card sx={{
-      p: 6
-    }}>
-                  <Typography variant="h6" sx={{
-      fontWeight: 600,
-      mb: 4,
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                    <Clock />
-                    Recent Activity
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    {userGoals.slice(0, 3).map((goal) => (
-                      <Box
-                        key={goal.id}
-                        sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3,
-      p: 3,
-      bgcolor: "grey.50",
-      borderRadius: "0.5rem"
-    }}
-                      >
-                        <Box sx={{
-      bgcolor: "blue.100",
-      borderRadius: "9999px",
-      p: 1,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-                          <CheckCircle sx={{
-      color: "blue.600"
-    }} />
-                        </Box>
-                        <Box sx={{
-      flex: 1
-    }}>
-                          <Typography sx={{
-      fontWeight: 500,
-      typography: "body1"
-    }}>{goal.title}</Typography>
-                          <Typography sx={{
-      typography: "body2",}}>
-                            Progress: {goal.progress}%
-                          </Typography>
-                        </Box>
-                        <Progress value={goal.progress} sx={{ width: '100px' }} />
-                      </Box>
-                    ))}
-                  </Box>
-                </Card>
-
-                <Card sx={{
-      p: 6
-    }}>
-                  <Typography variant="h6" sx={{
-      fontWeight: 600,
-      mb: 4,
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                    <Star />
-                    Priority Skills
-                  </Typography>
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    {userSkills.slice(0, 3).map((skill) => (
-                      <Box key={skill.id}>
-                        <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 1
-    }}>
-                          <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                            <Badge className={getSkillCategoryColor(skill.category)}>
-                              {skill.name}
-                            </Badge>
-                            {skill.trending && (
-                              <TooltipProvider>
-                                <Tooltip>
-                                  <TooltipTrigger>
-                                    <span>
-                                      <TrendingUp sx={{
-      color: "green.500"
-    }} />
-                                    </span>
-                                  </TooltipTrigger>
-                                  <TooltipContent>
-                                    <p>Trending skill in high demand</p>
-                                  </TooltipContent>
-                                </Tooltip>
-                              </TooltipProvider>
-                            )}
-                          </Box>
-                          <Typography sx={{
-      typography: "body2",}}>
-                            {skill.currentLevel}/{skill.targetLevel}
-                          </Typography>
-                        </Box>
-                        <Progress
-                          value={(skill.currentLevel / skill.targetLevel) * 100}
-                          sx={{ width: '100%' }}
-                        />
-                      </Box>
-                    ))}
-                  </Box>
-                </Card>
-              </Box>
-            </TabsContent>
-
-            <TabsContent value="goals" data-testid="tabs-content-goals">
-              {/* Goals content here */}
-            </TabsContent>
-
-            <TabsContent value="skills" data-testid="tabs-content-skills">
-              {/* Skills content here */}
-            </TabsContent>
-
-            <TabsContent value="ai-tools" sx={{}}>
-              <Box sx={{
+              <TabsContent value="ai-tools" sx={{}}>
+                <Box sx={{
       display: 'grid',
       gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' },
       gap: 8,
       mb: 12
     }}>
-                {features.map((feature) => {
-                  const Icon = feature.icon;
-                  return (
-                    <Card
-                      key={feature.id}
-                      sx={{
+                  {features.map((feature) => {
+                    const Icon = feature.icon;
+                    return (
+                      <Card
+                        key={feature.id}
+                        sx={{
       p: 8,
       border: 2,
       borderColor: 'grey.200',
@@ -564,22 +341,22 @@ export function CareerGrowthHub({
       display: 'flex',
       flexDirection: 'column'
     }}
-                      onClick={() => onNavigate(feature.id)}
-                    >
-                      {/* Gemini AI Badge */}
-                      <Box sx={{ mb: 4, textAlign: 'right' }}>
-                        <Badge sx={{ bgcolor: 'purple.100', color: 'purple.800' }}>
-                          <Sparkles sx={{
+                        onClick={() => onNavigate(feature.id)}
+                      >
+                        {/* Gemini AI Badge */}
+                        <Box sx={{ mb: 4, textAlign: 'right' }}>
+                          <Badge sx={{ bgcolor: 'purple.100', color: 'purple.800' }}>
+                            <Sparkles sx={{
       mr: 1,
       fontSize: '1rem'
     }} />
-                          AI Powered
-                        </Badge>
-                      </Box>
+                            AI Powered
+                          </Badge>
+                        </Box>
 
-                      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                        <Box
-                          sx={{
+                        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+                          <Box
+                            sx={{
       p: 4,
       borderRadius: "1rem",
       mb: 4,
@@ -587,38 +364,38 @@ export function CareerGrowthHub({
       bgcolor: feature.bgColor,
       color: feature.color
     }}
-                        >
-                          <Icon sx={{ fontSize: '2.5rem' }} />
-                        </Box>
+                          >
+                            <Icon sx={{ fontSize: '2.5rem' }} />
+                          </Box>
 
-                        <Box>
-                          <Typography variant="h5" sx={{
+                          <Box>
+                            <Typography variant="h5" sx={{
       fontWeight: 600,
       mb: 3
     }}>{feature.title}</Typography>
-                          <Typography sx={{
+                            <Typography sx={{
       color: 'text.secondary',
       flexGrow: 1,
       mb: 4
     }}>
-                            {feature.description}
-                          </Typography>
-                        </Box>
+                              {feature.description}
+                            </Typography>
+                          </Box>
 
-                        <Box sx={{
+                          <Box sx={{
       mb: 6,
       width: '100%'
     }}>
-                          <Typography sx={{
+                            <Typography sx={{
       fontWeight: 500,
       typography: "body1",
       textTransform: "uppercase",
       color: 'text.secondary',
       mb: 2
     }}>
-                            Key Features
-                          </Typography>
-                          <ul sx={{
+                              Key Features
+                            </Typography>
+                            <ul sx={{
       listStyle: 'none',
       p: 0,
       m: 0,
@@ -626,47 +403,48 @@ export function CareerGrowthHub({
       flexDirection: 'column',
       gap: 1.5
     }}>
-                            {feature.benefits.map((benefit, index) => (
-                              <li key={index} sx={{
+                              {feature.benefits.map((benefit, index) => (
+                                <li key={index} sx={{
       typography: "body1",
       display: "flex",
       alignItems: "center",
       gap: 2
     }}>
-                                <Box sx={{
+                                  <Box sx={{
       width: 6,
       height: 6,
       borderRadius: "9999px",
       bgcolor: feature.color,
       opacity: 0.5
     }} />
-                                {benefit}
-                              </li>
-                            ))}
-                          </ul>
-                        </Box>
+                                  {benefit}
+                                </li>
+                              ))}
+                            </ul>
+                          </Box>
 
-                        <Button
-                          sx={{
+                          <Button
+                            sx={{
       width: "100%",
       mt: 'auto',
       bgcolor: feature.color,
       color: 'common.white',
       '&:hover': { bgcolor: feature.color, filter: 'brightness(0.9)' },
     }}
-                          size="large"
-                        >
-                          Explore {feature.title}
-                          <ArrowRight sx={{
+                            size="large"
+                          >
+                            Explore {feature.title}
+                            <ArrowRight sx={{
       ml: 2,}} />
-                        </Button>
-                      </Box>
-                    </Card>
-                  );
-                })}
-              </Box>
-            </TabsContent>
-          </Tabs>
+                          </Button>
+                        </Box>
+                      </Card>
+                    );
+                  })}
+                </Box>
+              </TabsContent>
+            </Tabs>
+          </TabContext>
 
                     {/* Additional Info */}
 

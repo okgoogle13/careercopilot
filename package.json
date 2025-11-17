@@ -30,7 +30,9 @@
     "pathe": "2.0.3",
     "sirv": "3.0.2",
     "@joshwooding/vite-plugin-react-docgen-typescript": "0.6.2",
-    "@storybook/builder-vite": "10.0.2"
+    "@storybook/builder-vite": "10.0.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "scripts": {
     "prepare": "husky || true",
