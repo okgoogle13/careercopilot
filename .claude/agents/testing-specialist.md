@@ -416,3 +416,9 @@ Testing Specialist:
 - Weekly test generation summary
 - Monthly quality metrics
 - Quarterly coverage improvement roadmap
+
+#### **With `test-automation-specialist`:**
+- **When:** Batch test generation needed (10+ components)
+- **Role:** Delegate batch to `test-automation-specialist` for parallel generation via Jules
+- **Handoff:** Provide component list, `test-automation-specialist` coordinates 8 Jules instances
+- **Example:** "Improve coverage to 50%" → testing-specialist (analyze) → test-automation-specialist (66 components via Jules) → test-runner (validate)
