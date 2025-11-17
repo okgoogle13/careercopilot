@@ -32,7 +32,21 @@
       "Bash(grep:*)",
       "Bash(done)",
       "Bash(while read dir)",
-      "Bash(do [ -f \"/Applications/careercopilot/.claude/skills/$dir/SKILL.md\" ])"
+      "Bash(do [ -f \"/Applications/careercopilot/.claude/skills/$dir/SKILL.md\" ])",
+      "Skill(project-health-checker)",
+      "Bash(python3:*)",
+      "Bash(for skill in m3-layout-refactor m3-color-themer m3-typography-classifier m3-editorial-stylist m3-shape-refactor m3-elevation-refactor m3-icon-replacer m3-motion-applier)",
+      "Bash(do test -f /Applications/careercopilot/.claude/skills/frontend-migration/$skill.md)",
+      "Bash(export GOOGLE_CLOUD_PROJECT=careercopilot-468811)",
+      "Bash(export ENVIRONMENT=development)",
+      "Bash(export ENABLE_GENKIT_FLOWS=true)",
+      "Bash(gh secret list:*)",
+      "Bash(export GEMINI_API_KEY=\"AQ.Ab8RN6I9G3pegbeuvuYw-3OhtwdWD21GXRUZkASy0UrXqBjOhA\":*)",
+      "Bash(env)",
+      "Bash(unset:*)",
+      "Bash(gcloud services list:*)",
+      "Bash(gcloud secrets versions list:*)",
+      "Bash(gcloud secrets versions access:*)"
     ],
     "deny": [],
     "ask": []
