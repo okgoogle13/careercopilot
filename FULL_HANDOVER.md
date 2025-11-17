@@ -877,7 +877,7 @@ Look for "Status" column: Planning → Running → Completed
 jules remote logs --session 7401566218163211110 -f
 
 # Example: Monitor Batch 4 (easiest, should complete quickly)
-julius remote logs --session 424616855579134593 -f
+jules remote logs --session 424616855579134593 -f
 ```
 
 ### 3. Check When Batch is Complete
@@ -893,10 +893,10 @@ ls -lah ./.ai_reports/*_report.md
 ### 4. Pull Results When Batch Completes
 ```bash
 # Once a batch shows "Completed" status:
-julius remote pull --session [SESSION_ID]
+jules remote pull --session [SESSION_ID]
 
 # Example - Pull Batch 1 results:
-julius remote pull --session 7401566218163211110
+jules remote pull --session 7401566218163211110
 ```
 
 ### 5. Watch All Reports Generate in Real-Time
@@ -913,7 +913,7 @@ ls -lt .ai_reports/*_report.md | head -10
 ## Batch Completion Indicators
 
 ### ✅ Batch Complete When:
-1. **Status Changes**: `Planning/Running` → `Completed` in `julius remote list --session`
+1. **Status Changes**: `Planning/Running` → `Completed` in `jules remote list --session`
 2. **Report File Exists**: Check for `.ai_reports/[Component]_report.md`
 3. **Report Contains Metrics**: File has test count and pass rate values
 
@@ -993,25 +993,25 @@ done | awk '{sum += $1; count++} END {printf "Average: %.1f%% pass rate\n", sum/
 ### If a batch is stuck in "Planning"
 ```bash
 # Check logs for errors
-julius remote logs --session [SESSION_ID] | tail -20
+jules remote logs --session [SESSION_ID] | tail -20
 
 # Check if Jules service is responsive
-julius remote list --session | head -1
+jules remote list --session | head -1
 ```
 
 ### If a batch shows "Running" for >30 minutes
 ```bash
 # Check last active time (should be recent)
-julius remote list --session | grep [SESSION_ID]
+jules remote list --session | grep [SESSION_ID]
 
 # Check logs for progress/errors
-julius remote logs --session [SESSION_ID] | tail -50
+jules remote logs --session [SESSION_ID] | tail -50
 ```
 
 ### If report file is missing after batch completes
 ```bash
 # Manually pull the results
-julius remote pull --session [SESSION_ID]
+jules remote pull --session [SESSION_ID]
 
 # Check if report was generated but with different name
 ls -la .ai_reports/*.md | grep -i [component_name]
@@ -1042,11 +1042,11 @@ Add these to your `.bashrc` or `.zshrc`:
 
 ```bash
 # Check all Jules sessions
-alias j-status="julius remote list --session"
+alias j-status="jules remote list --session"
 
 # Monitor specific batch (usage: j-log 7401566218163211110)
 j-log() {
-  julius remote logs --session "$1" -f
+  jules remote logs --session "$1" -f
 }
 
 # Count completed batches
@@ -1063,7 +1063,7 @@ alias j-progress='echo "✅ Completed:"; ls -1 .ai_reports/*_report.md 2>/dev/nu
 ```bash
 # Terminal command for live monitoring (updates every 5 seconds)
 watch -n 5 -c 'echo "=== Jules Batch Status ===" && \
-julius remote list --session | grep "Task:" | awk "{print \$2, \$4, \$NF}" | column -t && \
+jules remote list --session | grep "Task:" | awk "{print \$2, \$4, \$NF}" | column -t && \
 echo "" && echo "Completed Reports:" && \
 ls -1 .ai_reports/*_report.md 2>/dev/null | wc -l && \
 echo "/8"'
@@ -2781,19 +2781,19 @@ Goal Status: ✅ ACHIEVED
 
 ### "I just want to check status"
 ```bash
-julius remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
+jules remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
 ```
 → See [QUICK_REFERENCE.txt](QUICK_REFERENCE.txt)
 
 ### "I want to monitor in real-time"
 ```bash
-watch -n 5 "julius remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
+watch -n 5 "jules remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
 ```
 → See [BATCH_MONITORING_GUIDE.md](BATCH_MONITORING_GUIDE.md) Section 4
 
 ### "I need to pull a result"
 ```bash
-julius remote pull --session 7401566218163211110  # Example: Batch 1
+jules remote pull --session 7401566218163211110  # Example: Batch 1
 ```
 → See [QUICK_REFERENCE.txt](QUICK_REFERENCE.txt) - Pull Results section
 
@@ -2915,7 +2915,7 @@ INDEX.md                            ← THIS FILE
 ### For Someone Troubleshooting Issues:
 1. Check [BATCH_MONITORING_GUIDE.md](BATCH_MONITORING_GUIDE.md) - Troubleshooting section
 2. Review [JULES_DELEGATION_WORKFLOW.md](JULES_DELEGATION_WORKFLOW.md) - Full troubleshooting guide
-3. Check batch logs: `julius remote logs --session [ID] | tail -50`
+3. Check batch logs: `jules remote logs --session [ID] | tail -50`
 
 ---
 
@@ -2955,7 +2955,7 @@ for f in .ai_reports/*_report.md; do grep -oE '[0-9]+%' "$f" | tail -1; done | s
    - Watch Batch 4 complete first
 
 2. **Pull Results** (As batches complete)
-   - Use: `julius remote pull --session [ID]`
+   - Use: `jules remote pull --session [ID]`
    - Reports appear in `.ai_reports/`
 
 3. **Validate Reports** (Once all complete)
@@ -2998,7 +2998,7 @@ for f in .ai_reports/*_report.md; do grep -oE '[0-9]+%' "$f" | tail -1; done | s
 ## ⚡ One-Liner Status Check
 
 ```bash
-echo "Completed: $(ls .ai_reports/*_report.md 2>/dev/null | wc -l) / 8" && julius remote list --session | grep "Task:" | awk '{print $4}' | sort | uniq -c
+echo "Completed: $(ls .ai_reports/*_report.md 2>/dev/null | wc -l) / 8" && jules remote list --session | grep "Task:" | awk '{print $4}' | sort | uniq -c
 ```
 
 ---
@@ -4825,7 +4825,7 @@ bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do jules remote new 
 **Or simplified** (if using plain bash):
 ```bash
 cat tasks.txt | while IFS= read -r line; do
-  [ "$line" != "${line#Task:}" ] && julius remote new --repo . --session "$line"
+  [ "$line" != "${line#Task:}" ] && jules remote new --repo . --session "$line"
 done
 ```
 
@@ -4834,7 +4834,7 @@ done
 After launching, verify all sessions exist:
 ```bash
 # Should show 8 sessions with "Planning" status
-julius remote list --session | grep "^.*Task:" | wc -l
+jules remote list --session | grep "^.*Task:" | wc -l
 ```
 
 ### 3.3 Session IDs (Week 2 Launch)
@@ -4858,10 +4858,10 @@ Batch 8: 4291377980303646738     (KSCGenerator, etc - HARDEST)
 
 ```bash
 # Check all batches in one command
-julius remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
+jules remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
 
 # Monitor specific batch logs (real-time)
-julius remote logs --session 7401566218163211110 -f
+jules remote logs --session 7401566218163211110 -f
 
 # Count completed batches
 ls .ai_reports/*_report.md 2>/dev/null | wc -l
@@ -4931,7 +4931,7 @@ Each report must contain:
 
 ```bash
 # Once batch status = "Completed", pull results
-julius remote pull --session 7401566218163211110
+jules remote pull --session 7401566218163211110
 
 # This writes the report file to .ai_reports/
 ```
@@ -5000,19 +5000,19 @@ done | awk '{sum += $1; count++} END {printf "Avg: %.1f%%\n", sum/count}'
 **Diagnosis**:
 ```bash
 # Check if Jules is responsive
-julius remote list --session | head -3
+jules remote list --session | head -3
 
 # Check batch logs for errors
-julius remote logs --session [SESSION_ID] | tail -20
+jules remote logs --session [SESSION_ID] | tail -20
 ```
 
 **Solution**:
 ```bash
 # Cancel stuck batch
-julius remote cancel --session [SESSION_ID]
+jules remote cancel --session [SESSION_ID]
 
 # Re-launch specific batch
-julius remote new --repo . --session "[Task line from tasks.txt]"
+jules remote new --repo . --session "[Task line from tasks.txt]"
 ```
 
 ### Issue: Very low pass rate (<50%) on batch
@@ -5023,7 +5023,7 @@ julius remote new --repo . --session "[Task line from tasks.txt]"
 cat .ai_reports/[Component]_report.md | grep -A 5 "Pending Actions"
 
 # Check batch logs for error patterns
-julius remote logs --session [SESSION_ID] | grep -i error
+jules remote logs --session [SESSION_ID] | grep -i error
 ```
 
 **Resolution**:
@@ -5036,10 +5036,10 @@ julius remote logs --session [SESSION_ID] | grep -i error
 **Diagnosis**:
 ```bash
 # Verify batch is truly complete
-julius remote list --session | grep [SESSION_ID]
+jules remote list --session | grep [SESSION_ID]
 
 # Check if pull worked
-julius remote pull --session [SESSION_ID]
+jules remote pull --session [SESSION_ID]
 ```
 
 **Solution**:
@@ -5056,13 +5056,13 @@ julius remote pull --session [SESSION_ID]
 
 ```bash
 # Terminal 1: Watch batch status
-watch -n 5 "julius remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
+watch -n 5 "jules remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
 
 # Terminal 2: Watch reports being created
 watch -n 3 "ls -1 .ai_reports/*_report.md | wc -l"
 
 # Terminal 3: Monitor specific batch logs
-julius remote logs --session 424616855579134593 -f  # Batch 4 (fastest)
+jules remote logs --session 424616855579134593 -f  # Batch 4 (fastest)
 ```
 
 ### 8.2 Result Collection (As Batches Complete)
@@ -5072,7 +5072,7 @@ julius remote logs --session 424616855579134593 -f  # Batch 4 (fastest)
 watch -n 600 "ls -lt .ai_reports/*_report.md | head -3"
 
 # Or use cron for automated pulls
-# Add to crontab: */5 * * * * cd /path/to/repo && julius remote pull --session [ID] 2>/dev/null
+# Add to crontab: */5 * * * * cd /path/to/repo && jules remote pull --session [ID] 2>/dev/null
 ```
 
 ### 8.3 Final Validation (After All Complete)
@@ -6545,7 +6545,7 @@ npx jest --config=frontend/jest.config.mjs --watch
 **Problem**: The command provided by user failed with "parse error near `done'"
 ```bash
 # BROKEN (missing semicolon):
-cat tasks.txt | while IFS= read -r line; do julius remote new --repo . --session "$line" done
+cat tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line" done
 
 # ERROR: exit code 1, parse error near `done'
 ```
@@ -6553,7 +6553,7 @@ cat tasks.txt | while IFS= read -r line; do julius remote new --repo . --session
 **Solution**: Added missing semicolon before `done`
 ```bash
 # FIXED (correct syntax):
-bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do julius remote new --repo . --session "$line"; done'
+bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line"; done'
 ```
 
 **Validation**: Tested syntax with `bash -c` wrapper - syntax verified working
@@ -6591,7 +6591,7 @@ bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do julius remote new
 
 **Verification Command**:
 ```bash
-julius remote list --session | grep "Task:" | wc -l
+jules remote list --session | grep "Task:" | wc -l
 # Output: 8 sessions confirmed
 ```
 
@@ -6630,8 +6630,8 @@ julius remote list --session | grep "Task:" | wc -l
 ### 5. Verified Jules Installation & Connectivity ✅
 
 ```bash
-which julius
-# Output: /Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/julius
+which jules
+# Output: /Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/jules
 # ✅ Jules is installed and accessible
 ```
 
@@ -6663,12 +6663,12 @@ which julius
 
 ### Quickest Check (One Command)
 ```bash
-julius remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
+jules remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
 ```
 
 ### Real-Time Dashboard
 ```bash
-watch -n 5 "julius remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
+watch -n 5 "jules remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
 ```
 
 ### Count Completed Batches
@@ -6749,17 +6749,17 @@ ls .ai_reports/*_report.md 2>/dev/null | wc -l
 
 ### Check Status
 ```bash
-julius remote list --session | grep "Task:"
+jules remote list --session | grep "Task:"
 ```
 
 ### Monitor Batch 4 (Fastest - should complete first)
 ```bash
-julius remote logs --session 424616855579134593 -f
+jules remote logs --session 424616855579134593 -f
 ```
 
 ### Pull Results When Complete
 ```bash
-julius remote pull --session 7401566218163211110  # Batch 1 example
+jules remote pull --session 7401566218163211110  # Batch 1 example
 ```
 
 ### View All Reports
@@ -6783,7 +6783,7 @@ for f in .ai_reports/*_report.md; do grep -oE '[0-9]+ tests' "$f"; done | awk '{
 
 2. **Pull Results**: As each batch completes, pull the results
    ```bash
-   julius remote pull --session [SESSION_ID]
+   jules remote pull --session [SESSION_ID]
    ```
 
 3. **Validate Reports**: Check `.ai_reports/` directory for `*_report.md` files
