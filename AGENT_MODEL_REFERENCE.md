@@ -1,7 +1,7 @@
 # Agent Model Reference
 
 **Last Updated:** 2025-11-17
-**Total Agents:** 15
+**Total Agents:** 16
 
 This document provides a comprehensive reference for all agents in the CareerCopilot project, organized by functional category.
 
@@ -119,7 +119,7 @@ This document provides a comprehensive reference for all agents in the CareerCop
 
 ---
 
-## Quality & Operations Agents (4)
+## Quality & Operations Agents (5)
 
 ### code-reviewer
 **Description:** Code quality and M3 Design System policy enforcer.
@@ -170,6 +170,21 @@ This document provides a comprehensive reference for all agents in the CareerCop
 - Test data management and fixture creation
 
 **Skills Used:** jest-test-scaffolder, api-integration-test-scaffolder, storybook-scaffolder, webapp-testing
+
+---
+
+### test-automation-specialist
+**Description:** Expert in automated test generation using Jest, coordinating test coverage improvements.
+**When to Use:** Batch test generation, coverage improvement, automated test creation
+**Key Capabilities:**
+- Automated test generation using jest-test-scaffolder
+- Test coverage analysis and improvement
+- M3 Design Token test validation
+- Parallel test generation via task-delegator
+- Integration with test-runner for validation
+
+**Skills Used:** jest-test-scaffolder, task-delegator
+**Version:** V2 (M3-aware test generation)
 
 ---
 
