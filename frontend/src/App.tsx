@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './styles/design-tokens.css';
 
 // New App Shell and Components
 import { AppShell } from './components/layout/AppShell';
