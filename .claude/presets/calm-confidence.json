@@ -1,0 +1,24 @@
+{
+  "name": "Calm Confidence",
+  "description": "Soothing, elegant colors with professional depth. Perfect for wellness apps, financial services, and premium platforms.",
+  "style": "elegant-calm",
+  "colorPalette": {
+    "primary": "#1A237E",
+    "secondary": "#9FA8DA",
+    "tertiary": "#FF7043",
+    "accent": "#FFC107",
+    "background": "#F5F5F7",
+    "surface": "#FFFFFF",
+    "text": "#1C1C1E",
+    "border": "#D1D1D6"
+  },
+  "fontPairing": {
+    "display": "'Poppins', 'Sora', sans-serif",
+    "heading": "'Poppins', 'Sora', sans-serif",
+    "body": "'Open Sans', 'Inter', sans-serif"
+  },
+  "layout": "spacious",
+  "shape": "rounded-elegant",
+  "shadows": "subtle-elevated",
+  "motion": "smooth-eased"
+}
