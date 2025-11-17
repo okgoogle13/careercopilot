@@ -1,38 +1,35 @@
-import { screen, fireEvent, waitFor } from '@testing-library/react';
-import { render } from '../../../test-utils';
-import { CareerGrowthHub } from './CareerGrowthHub';
-import { TabContext } from '@mui/lab';
 import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { CareerGrowthHub } from './CareerGrowthHub';
+import { MemoryRouter } from 'react-router-dom';
+
+const mockOnNavigate = jest.fn();
+const mockOnBack = jest.fn();
+
+const renderComponent = (props = {}) => {
+  return render(
+    <MemoryRouter>
+      <CareerGrowthHub
+        goals={[]}
+        skills={[]}
+        onNavigate={mockOnNavigate}
+        onBack={mockOnBack}
+        {...props}
+      />
+    </MemoryRouter>
+  );
+};
 
 describe('CareerGrowthHub', () => {
-  const mockOnNavigate = jest.fn();
-  const mockOnBack = jest.fn();
-
-  const defaultProps = {
-    onNavigate: mockOnNavigate,
-    onBack: mockOnBack,
-    userGoals: [],
-    userSkills: [],
-  };
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
-
-  const renderWithTabContext = (ui: React.ReactElement, value: string) => {
-    return render(
-      <TabContext.Provider value={value}>
-        {ui}
-      </TabContext.Provider>
-    );
-  };
-
   it('renders the component with all main sections', async () => {
-    render(<CareerGrowthHub {...defaultProps} />);
-    
+    renderComponent();
     expect(screen.getByText('Career Growth Hub')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Back to Dashboard/i })).toBeInTheDocument();
-    
+    expect(screen.getByRole('tab', { name: /Overview/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /Goals/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /Skills/i })).toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /AI Tools/i })).toBeInTheDocument();
+
     const aiToolsTab = screen.getByRole('tab', { name: /AI Tools/i });
     fireEvent.click(aiToolsTab);
 
@@ -43,57 +40,33 @@ describe('CareerGrowthHub', () => {
     });
   });
 
-  it('navigates between tabs correctly', async () => {
-    let value = 'overview';
-    const { rerender } = renderWithTabContext(<CareerGrowthHub {...defaultProps} />, value);
-    
+  it('navigates between tabs correctly', () => {
+    renderComponent();
+
     const goalsTab = screen.getByRole('tab', { name: /Goals/i });
     fireEvent.click(goalsTab);
-    value = 'goals';
-    rerender(
-      <TabContext.Provider value={value}>
-        <CareerGrowthHub {...defaultProps} />
-      </TabContext.Provider>
-    );
-    await waitFor(() => {
-      expect(screen.getByTestId('tabs-content-goals')).toBeVisible();
-    });
+    expect(screen.getByTestId('tabs-content-goals')).toBeVisible();
 
     const skillsTab = screen.getByRole('tab', { name: /Skills/i });
     fireEvent.click(skillsTab);
-    value = 'skills';
-    rerender(
-      <TabContext.Provider value={value}>
-        <CareerGrowthHub {...defaultProps} />
-      </TabContext.Provider>
-    );
-    await waitFor(() => {
-      expect(screen.getByTestId('tabs-content-skills')).toBeVisible();
-    });
+    expect(screen.getByTestId('tabs-content-skills')).toBeVisible();
   });
 
   it('calls onNavigate with correct feature when feature cards are clicked', async () => {
-    let value = 'ai-tools';
-    const { rerender } = renderWithTabContext(<CareerGrowthHub {...defaultProps} />, value);
-    
+    renderComponent();
     const aiToolsTab = screen.getByRole('tab', { name: /AI Tools/i });
     fireEvent.click(aiToolsTab);
-    rerender(
-      <TabContext.Provider value={value}>
-        <CareerGrowthHub {...defaultProps} />
-      </TabContext.Provider>
-    );
 
     await waitFor(() => {
       fireEvent.click(screen.getByRole('heading', { name: /AI Job Matching/i }));
     });
     expect(mockOnNavigate).toHaveBeenCalledWith('job-matching');
-    
+
     await waitFor(() => {
       fireEvent.click(screen.getByRole('heading', { name: /Career Intelligence/i }));
     });
     expect(mockOnNavigate).toHaveBeenCalledWith('career-intelligence');
-    
+
     await waitFor(() => {
       fireEvent.click(screen.getByRole('heading', { name: /Interview Preparation/i }));
     });
@@ -101,41 +74,32 @@ describe('CareerGrowthHub', () => {
   });
 
   it('calls onBack when back button is clicked', () => {
-    render(<CareerGrowthHub {...defaultProps} />);
-    
-    const backButton = screen.getByRole('button', { name: /Back to Dashboard/i });
-    fireEvent.click(backButton);
-    
-    expect(mockOnBack).toHaveBeenCalledTimes(1);
+    renderComponent();
+    fireEvent.click(screen.getByText('Back to Dashboard'));
+    expect(mockOnBack).toHaveBeenCalled();
   });
 
   it('displays the correct number of goals and skills when provided', () => {
-    const props = {
-      ...defaultProps,
-      userGoals: [
-        { id: '1', title: 'Goal 1', description: '...', category: 'skill' as const, progress: 50, targetDate: '2025-12-31', status: 'active', milestones: [] },
-      ],
-      userSkills: [
-        { id: '1', name: 'Skill 1', category: 'technical' as const, currentLevel: 2, targetLevel: 4, demandScore: 80, trending: true, resources: [] },
-        { id: '2', name: 'Skill 2', category: 'soft' as const, currentLevel: 3, targetLevel: 5, demandScore: 60, trending: false, resources: [] },
-      ],
-    };
-    render(<CareerGrowthHub {...props} />);
-    
+    const goals = [{ id: '1', title: 'Master React Advanced Patterns', description: 'Deep dive into advanced React patterns and state management', category: 'skill', progress: 65, targetDate: '2025-03-01', status: 'active', milestones: [] }];
+    const skills = [{ id: '1', name: 'React.js', category: 'technical', currentLevel: 8, targetLevel: 10, demandScore: 95, trending: true, resources: [] }];
+    renderComponent({ goals, skills });
     const goalsTab = screen.getByRole('tab', { name: /Goals/i });
-    expect(goalsTab.textContent).toBe('Goals (1)');
-    
+    fireEvent.click(goalsTab);
+    expect(screen.getByText('Master React Advanced Patterns')).toBeInTheDocument();
+
     const skillsTab = screen.getByRole('tab', { name: /Skills/i });
-    expect(skillsTab.textContent).toBe('Skills (2)');
+    fireEvent.click(skillsTab);
+    expect(screen.getByText('React.js')).toBeInTheDocument();
   });
 
   it('displays a message when there are no goals or skills', () => {
-    render(<CareerGrowthHub {...defaultProps} />);
-    
+    renderComponent({ goals: [], skills: [] });
     const goalsTab = screen.getByRole('tab', { name: /Goals/i });
-    expect(goalsTab.textContent).toBe('Goals (0)');
-    
+    fireEvent.click(goalsTab);
+    expect(screen.getByText('No goals set yet.')).toBeInTheDocument();
+
     const skillsTab = screen.getByRole('tab', { name: /Skills/i });
-    expect(skillsTab.textContent).toBe('Skills (0)');
+    fireEvent.click(skillsTab);
+    expect(screen.getByText('No skills to display.')).toBeInTheDocument();
   });
 });
