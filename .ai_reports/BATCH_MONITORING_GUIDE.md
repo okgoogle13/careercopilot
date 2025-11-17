@@ -45,7 +45,7 @@ Look for "Status" column: Planning → Running → Completed
 jules remote logs --session 7401566218163211110 -f
 
 # Example: Monitor Batch 4 (easiest, should complete quickly)
-julius remote logs --session 424616855579134593 -f
+jules remote logs --session 424616855579134593 -f
 ```
 
 ### 3. Check When Batch is Complete
@@ -61,10 +61,10 @@ ls -lah ./.ai_reports/*_report.md
 ### 4. Pull Results When Batch Completes
 ```bash
 # Once a batch shows "Completed" status:
-julius remote pull --session [SESSION_ID]
+jules remote pull --session [SESSION_ID]
 
 # Example - Pull Batch 1 results:
-julius remote pull --session 7401566218163211110
+jules remote pull --session 7401566218163211110
 ```
 
 ### 5. Watch All Reports Generate in Real-Time
@@ -81,7 +81,7 @@ ls -lt .ai_reports/*_report.md | head -10
 ## Batch Completion Indicators
 
 ### ✅ Batch Complete When:
-1. **Status Changes**: `Planning/Running` → `Completed` in `julius remote list --session`
+1. **Status Changes**: `Planning/Running` → `Completed` in `jules remote list --session`
 2. **Report File Exists**: Check for `.ai_reports/[Component]_report.md`
 3. **Report Contains Metrics**: File has test count and pass rate values
 
@@ -161,25 +161,25 @@ done | awk '{sum += $1; count++} END {printf "Average: %.1f%% pass rate\n", sum/
 ### If a batch is stuck in "Planning"
 ```bash
 # Check logs for errors
-julius remote logs --session [SESSION_ID] | tail -20
+jules remote logs --session [SESSION_ID] | tail -20
 
 # Check if Jules service is responsive
-julius remote list --session | head -1
+jules remote list --session | head -1
 ```
 
 ### If a batch shows "Running" for >30 minutes
 ```bash
 # Check last active time (should be recent)
-julius remote list --session | grep [SESSION_ID]
+jules remote list --session | grep [SESSION_ID]
 
 # Check logs for progress/errors
-julius remote logs --session [SESSION_ID] | tail -50
+jules remote logs --session [SESSION_ID] | tail -50
 ```
 
 ### If report file is missing after batch completes
 ```bash
 # Manually pull the results
-julius remote pull --session [SESSION_ID]
+jules remote pull --session [SESSION_ID]
 
 # Check if report was generated but with different name
 ls -la .ai_reports/*.md | grep -i [component_name]
@@ -210,11 +210,11 @@ Add these to your `.bashrc` or `.zshrc`:
 
 ```bash
 # Check all Jules sessions
-alias j-status="julius remote list --session"
+alias j-status="jules remote list --session"
 
 # Monitor specific batch (usage: j-log 7401566218163211110)
 j-log() {
-  julius remote logs --session "$1" -f
+  jules remote logs --session "$1" -f
 }
 
 # Count completed batches
@@ -231,7 +231,7 @@ alias j-progress='echo "✅ Completed:"; ls -1 .ai_reports/*_report.md 2>/dev/nu
 ```bash
 # Terminal command for live monitoring (updates every 5 seconds)
 watch -n 5 -c 'echo "=== Jules Batch Status ===" && \
-julius remote list --session | grep "Task:" | awk "{print \$2, \$4, \$NF}" | column -t && \
+jules remote list --session | grep "Task:" | awk "{print \$2, \$4, \$NF}" | column -t && \
 echo "" && echo "Completed Reports:" && \
 ls -1 .ai_reports/*_report.md 2>/dev/null | wc -l && \
 echo "/8"'
