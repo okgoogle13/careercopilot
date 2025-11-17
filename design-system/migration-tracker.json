@@ -1,0 +1,527 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2025-11-17T15:30:51.131270",
+  "components": {
+    "components/ui/M3Button.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ErrorBoundary.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ApplicationGeneratorModal.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ProtectedRoute.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/SkeletonLoader.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/NotificationCenter.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/SmartUploadModal.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/main/TestimonialCarousel.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/main/JobSearchStatus.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/main/ActionCard.tsx": {
+      "status": "pending",
+      "notes": "9 MUI patterns"
+    },
+    "components/main/HeroBanner.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/main/FeatureHighlights.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/opportunities/JobCard.tsx": {
+      "status": "pending",
+      "notes": "4 MUI patterns"
+    },
+    "components/features/opportunities/CareerGrowthHub.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/opportunities/JobInput.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/opportunities/FilterPanel.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/opportunities/CareerIntelligence.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/opportunities/JobMatching.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/opportunities/InterviewPrep.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/opportunities/FeatureCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/demo/AnimatedShowcase.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/demo/CardShowcase.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/features/demo/ComponentUsageGuide.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/demo/MUITest.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/demo/ComponentLibrary.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/demo/AnimatedComponents.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/demo/StateDemoShowcase.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/dashboard/Settings.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/dashboard/Dashboard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/dashboard/dashboard/DashboardStats.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/dashboard/dashboard/ProfileGrid.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/dashboard/dashboard/DashboardHeader.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/Analysis/ATSScoreCircle.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/Analysis/ATSAnalysisDashboard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/features/auth/Auth.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/style-guide/ColorSwatch.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/layout/AppShell.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/layout/PageHeader.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/layout/AppLayout.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/layout/Sidebar.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/layout/Navbar.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/layout/NavigationItem.tsx": {
+      "status": "pending",
+      "notes": "4 MUI patterns"
+    },
+    "components/Documents/DocumentPreview.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/Documents/TemplateSelector.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/Documents/ResumeBuilder.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/Documents/DocumentTypeSelector.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/Documents/UploadResume.tsx": {
+      "status": "pending",
+      "notes": "3 MUI patterns"
+    },
+    "components/figma/ImageWithFallback.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/profile/ImportWizard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/profile/CreateProfileCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/profile/ProfileComparison.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/profile/ProfileEditor.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/profile/ProfileCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/_deprecated/dropdown-menu.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/_deprecated/scroll-area.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/career/TimelineView.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/career/ApplicationTracker.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/career/JobSearch.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/career/ApplicationCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/career/InterviewPrep.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/DisplayComponentsSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/TemplateCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/KeywordTag.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/ATSScoreCircle.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/ProfileVariationCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/FormComponentsSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/ButtonComponentsSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/CardComponentsSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/DemoLinksSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/ComponentDemo.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/InteractiveComponentsSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/LayoutComponentsSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/library/UsageGuidelinesSection.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/dashboard/WelcomeBanner.tsx": {
+      "status": "pending",
+      "notes": "3 MUI patterns"
+    },
+    "components/ui/textarea.tsx": {
+      "status": "pending",
+      "notes": "4 MUI patterns"
+    },
+    "components/ui/layout.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/Alert.tsx": {
+      "status": "pending",
+      "notes": "3 MUI patterns"
+    },
+    "components/ui/avatar.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/card.tsx": {
+      "status": "pending",
+      "notes": "1 MUI patterns"
+    },
+    "components/ui/progress.tsx": {
+      "status": "pending",
+      "notes": "5 MUI patterns"
+    },
+    "components/ui/tabs.tsx": {
+      "status": "pending",
+      "notes": "1 MUI patterns"
+    },
+    "components/ui/checkbox.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/tooltip.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/GridCompat.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/input.tsx": {
+      "status": "pending",
+      "notes": "4 MUI patterns"
+    },
+    "components/ui/StatCard.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/ui/date-picker.tsx": {
+      "status": "pending",
+      "notes": "15 MUI patterns"
+    },
+    "components/ui/breadcrumb.tsx": {
+      "status": "pending",
+      "notes": "3 MUI patterns"
+    },
+    "components/ui/radio-group.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/switch.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/dialog.tsx": {
+      "status": "pending",
+      "notes": "3 MUI patterns"
+    },
+    "components/ui/sidebar.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/LoadingState.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/label.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/separator.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/toast.tsx": {
+      "status": "pending",
+      "notes": "6 MUI patterns"
+    },
+    "components/ui/button.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/ui/skeleton.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/ui/slider.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/alert-dialog.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/popover.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/select.tsx": {
+      "status": "pending",
+      "notes": "13 MUI patterns"
+    },
+    "components/ui/EmptyState.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/ui/badge.tsx": {
+      "status": "pending",
+      "notes": "2 MUI patterns"
+    },
+    "components/ui/search-input.tsx": {
+      "status": "pending",
+      "notes": "5 MUI patterns"
+    },
+    "components/ui/feedback/ErrorBoundary.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/feedback/Toast.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/feedback/Skeleton.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/feedback/Dialog.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/feedback/ToastContext.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/feedback/EmptyState.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/loading/LoadingSpinner.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/loading/LoadingSkeleton.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/loading/FullPageLoading.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ui/Button/Button.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/jobs/JobCard.tsx": {
+      "status": "pending",
+      "notes": "4 MUI patterns"
+    },
+    "components/common/LoadingCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/common/StyledComponents.tsx": {
+      "status": "pending",
+      "notes": "9 MUI patterns"
+    },
+    "components/common/ActionCard.tsx": {
+      "status": "pending",
+      "notes": "9 MUI patterns"
+    },
+    "components/common/CareerCopilotLogo.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/common/StandardizedLoadingStates.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/common/LoadingStates.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/common/ErrorCard.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/ingestion/ConfirmTagsModal.tsx": {
+      "status": "pending",
+      "notes": "0 MUI patterns"
+    },
+    "components/profiles/CreateProfileCard.tsx": {
+      "status": "pending",
+      "notes": "3 MUI patterns"
+    },
+    "components/profiles/ProfileCard.tsx": {
+      "status": "pending",
+      "notes": "6 MUI patterns"
+    },
+    "components/ui/M3Card.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ui/M3Badge.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ui/M3Input.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    },
+    "components/ui/M3Dialog.tsx": {
+      "status": "migrated",
+      "notes": "M3 tokens detected"
+    }
+  },
+  "batches": []
+}
