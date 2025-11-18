@@ -1,6 +1,6 @@
 ---
 name: component-builder
-description: The core engine that generates production-ready, M3-compliant React components using MUI and Design Tokens.
+description: The core engine that generates production-ready, M3-compliant React components using MUI and Design Tokens. Use when creating new React components, building UI elements with Material Design 3, or scaffolding token-aware components.
 version: 2.1.0
 tags:
   - react
@@ -158,3 +158,4 @@ system_prompt: |
     margin-top: var(--sys-spacing-2);
   }
   ```
+---
