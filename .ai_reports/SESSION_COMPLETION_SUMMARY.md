@@ -14,7 +14,7 @@
 **Problem**: The command provided by user failed with "parse error near `done'"
 ```bash
 # BROKEN (missing semicolon):
-cat tasks.txt | while IFS= read -r line; do julius remote new --repo . --session "$line" done
+cat tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line" done
 
 # ERROR: exit code 1, parse error near `done'
 ```
@@ -22,7 +22,7 @@ cat tasks.txt | while IFS= read -r line; do julius remote new --repo . --session
 **Solution**: Added missing semicolon before `done`
 ```bash
 # FIXED (correct syntax):
-bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do julius remote new --repo . --session "$line"; done'
+bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line"; done'
 ```
 
 **Validation**: Tested syntax with `bash -c` wrapper - syntax verified working
@@ -60,7 +60,7 @@ bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do julius remote new
 
 **Verification Command**:
 ```bash
-julius remote list --session | grep "Task:" | wc -l
+jules remote list --session | grep "Task:" | wc -l
 # Output: 8 sessions confirmed
 ```
 
@@ -99,8 +99,8 @@ julius remote list --session | grep "Task:" | wc -l
 ### 5. Verified Jules Installation & Connectivity ✅
 
 ```bash
-which julius
-# Output: /Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/julius
+which jules
+# Output: /Users/okgoogle13/.nvm/versions/node/v20.19.5/bin/jules
 # ✅ Jules is installed and accessible
 ```
 
@@ -132,12 +132,12 @@ which julius
 
 ### Quickest Check (One Command)
 ```bash
-julius remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
+jules remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
 ```
 
 ### Real-Time Dashboard
 ```bash
-watch -n 5 "julius remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
+watch -n 5 "jules remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
 ```
 
 ### Count Completed Batches
@@ -218,7 +218,7 @@ ls .ai_reports/*_report.md 2>/dev/null | wc -l
 
 ### Check Status
 ```bash
-julius remote list --session | grep "Task:"
+jules remote list --session | grep "Task:"
 ```
 
 ### Monitor Batch 4 (Fastest - should complete first)
@@ -228,7 +228,7 @@ j remote logs --session 424616855579134593 -f
 
 ### Pull Results When Complete
 ```bash
-julius remote pull --session 7401566218163211110  # Batch 1 example
+jules remote pull --session 7401566218163211110  # Batch 1 example
 ```
 
 ### View All Reports
@@ -252,7 +252,7 @@ for f in .ai_reports/*_report.md; do grep -oE '[0-9]+ tests' "$f"; done | awk '{
 
 2. **Pull Results**: As each batch completes, pull the results
    ```bash
-   julius remote pull --session [SESSION_ID]
+   jules remote pull --session [SESSION_ID]
    ```
 
 3. **Validate Reports**: Check `.ai_reports/` directory for `*_report.md` files

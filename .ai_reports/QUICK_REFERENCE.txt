@@ -24,16 +24,16 @@ Batch 8 (KSCGenerator, etc):         4291377980303646738
 ================================================================================
 
 Check all batches:
-  $ julius remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
+  $ jules remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
 
 Count completed batches:
   $ ls .ai_reports/*_report.md 2>/dev/null | wc -l
 
 Monitor Batch 4 (fastest - 5-10 min):
-  $ julius remote logs --session 424616855579134593 -f
+  $ jules remote logs --session 424616855579134593 -f
 
 Real-time dashboard (updates every 5 sec):
-  $ watch -n 5 "julius remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
+  $ watch -n 5 "jules remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
 
 ================================================================================
                          EXPECTED COMPLETION ORDER
@@ -71,11 +71,11 @@ Step 1: Check Status
 
 Step 2: Watch Batch 4 First
   Why: Simplest batch, should complete first
-  Command: julius remote logs --session 424616855579134593 -f
+  Command: jules remote logs --session 424616855579134593 -f
 
 Step 3: Pull Results When Complete
   Status should change to "Completed"
-  Command: julius remote pull --session [SESSION_ID]
+  Command: jules remote pull --session [SESSION_ID]
 
 Step 4: Verify Reports
   ls -la .ai_reports/*_report.md
@@ -137,8 +137,8 @@ Protocol Docs:
 ================================================================================
 
 Batch not moving from "Planning" after 5 minutes:
-  Check: julius remote logs --session [SESSION_ID] | tail -20
-  Fix: julius remote cancel --session [SESSION_ID]
+  Check: jules remote logs --session [SESSION_ID] | tail -20
+  Fix: jules remote cancel --session [SESSION_ID]
        Then relaunch that specific batch
 
 Very low pass rate (<50%) on non-Batch-8:
@@ -147,7 +147,7 @@ Very low pass rate (<50%) on non-Batch-8:
   Plan fixes for Week 2 refinement
 
 Report file missing but status = Completed:
-  Try: julius remote pull --session [SESSION_ID]
+  Try: jules remote pull --session [SESSION_ID]
   If still missing: Create manual report from batch logs
 
 ================================================================================
@@ -178,14 +178,14 @@ After all 8 batches complete:
                               KEY CONTACTS
 ================================================================================
 
-Jules Status:       julius remote list --session
-Jules Logs:         julius remote logs --session [SESSION_ID] -f
-Jules Help:         julius remote --help
+Jules Status:       jules remote list --session
+Jules Logs:         jules remote logs --session [SESSION_ID] -f
+Jules Help:         jules remote --help
 Report Status:      ls .ai_reports/*_report.md
 Monitoring Guide:   .ai_reports/BATCH_MONITORING_GUIDE.md
 
 For blockers or issues:
-  - Check batch logs (Julius remote logs)
+  - Check batch logs (Jules remote logs)
   - Review Pending Actions in report files
   - Document in final Week 2 completion report
   - Plan fixes for Week 2 refinement phase
