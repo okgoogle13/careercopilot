@@ -44,7 +44,7 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
     }}>
                 <div sx={{
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <Sparkles sx={{}} />
                 </div>
@@ -79,7 +79,7 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
     }}>
                 <div sx={{
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <Play sx={{}} />
                 </div>

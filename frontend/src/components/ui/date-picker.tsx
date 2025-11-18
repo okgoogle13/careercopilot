@@ -45,7 +45,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     backgroundColor: theme.palette.surface.containerHigh,
     borderRadius: 12,
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    transition: 'all var(--sys-motion-duration-medium2) cubic-bezier(0.4, 0, 0.2, 1)',
     '& fieldset': {
       borderColor: theme.palette.outline.main,
       borderWidth: 1,

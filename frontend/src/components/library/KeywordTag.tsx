@@ -49,7 +49,7 @@ export function KeywordTag({
       gap: 1.5,
       px: 3,
       py: 1.5,
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       border: 1,
       cursor: "pointer",
       fontWeight: 500,}}

@@ -115,7 +115,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 width: 256,
                 height: 256,
                 bgcolor: 'white',
-                borderRadius: '50%',
+                borderRadius: 'var(--sys-shape-radius-full)',
                 filter: 'blur(96px)',
               }}
             />
@@ -127,7 +127,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                 width: 192,
                 height: 192,
                 bgcolor: 'white',
-                borderRadius: '50%',
+                borderRadius: 'var(--sys-shape-radius-full)',
                 filter: 'blur(64px)',
               }}
             />
@@ -313,7 +313,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             {/* Recent Activity */}
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                <Clock size={16} color="#A78BFA" />
+                <Clock size={16} color="var(--sys-color-primary)" />
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Recent Activity
                 </Typography>
@@ -338,7 +338,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
             {/* Recent Achievements */}
             <Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
-                <Sparkles size={16} color="#F472B6" />
+                <Sparkles size={16} color="var(--sys-color-tertiary)" />
                 <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Recent Achievements
                 </Typography>
@@ -352,7 +352,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                           width: 8,
                           height: 8,
                           bgcolor: 'tertiary.main',
-                          borderRadius: '50%',
+                          borderRadius: 'var(--sys-shape-radius-full)',
                         }}
                       />
                       <Typography variant="body2" color="text.secondary">
@@ -368,7 +368,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                           width: 8,
                           height: 8,
                           bgcolor: 'primary.main',
-                          borderRadius: '50%',
+                          borderRadius: 'var(--sys-shape-radius-full)',
                         }}
                       />
                       <Typography variant="body2" color="text.secondary">
@@ -381,7 +381,7 @@ export const WelcomeBanner: React.FC<WelcomeBannerProps> = ({
                           width: 8,
                           height: 8,
                           bgcolor: 'secondary.main',
-                          borderRadius: '50%',
+                          borderRadius: 'var(--sys-shape-radius-full)',
                         }}
                       />
                       <Typography variant="body2" color="text.secondary">

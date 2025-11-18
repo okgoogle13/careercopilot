@@ -154,7 +154,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
                 <div sx={{
       p: 4,
       border: 1,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <p sx={{
       typography: "body1",}}>✓ Valid job URL detected</p>
@@ -187,7 +187,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
                 <div sx={{
       p: 4,
       border: 1,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <p sx={{
       typography: "body1",}}>✓ Job description looks good</p>
@@ -237,7 +237,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       p: 4
     }}>
             <div sx={{
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -260,7 +260,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       p: 4
     }}>
             <div sx={{
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -283,7 +283,7 @@ export function JobInput({ documentType, onAnalyze, onBack }: JobInputProps) {
       p: 4
     }}>
             <div sx={{
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",

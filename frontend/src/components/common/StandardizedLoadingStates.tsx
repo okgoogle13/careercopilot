@@ -71,7 +71,7 @@ export const PulseLoading = ({ size = 'md', message, className = '' }: LoadingSt
         animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 1.5, repeat: Infinity }}
         sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }}
       />
       {message && <span sx={{
@@ -109,7 +109,7 @@ export const DotsLoading = ({ size = 'md', message, className = '' }: LoadingSta
               delay: i * 0.1,
             }}
             sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }}
           />
         ))}
@@ -219,10 +219,10 @@ export const SkeletonLoading = ({
       pt: 2
     }}>
           <Skeleton sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
           <Skeleton sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
         </div>
         <Skeleton sx={{
@@ -242,10 +242,10 @@ export const SkeletonLoading = ({
       gap: 3,
       p: 3,
       border: 1,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
             <Skeleton sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
             <div sx={{
       flex: 1
@@ -274,7 +274,7 @@ export const SkeletonLoading = ({
       mb: 6
     }}>
           <Skeleton sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
           <div sx={{
       flex: 1
@@ -304,7 +304,7 @@ export const ShimmerLoading = ({ className = '' }: LoadingStateProps) => {
     <div sx={{
       overflow: "hidden",
       bgcolor: "gray.200",
-      borderRadius: "0.25rem",}}>
+      borderRadius: "var(--sys-shape-radius-sm)",}}>
       <motion.div
         sx={{}}
         initial={{ x: '-100%' }}
@@ -335,7 +335,7 @@ export const AIProcessingLoading = ({
           sx={{
       border: 2,
       borderColor: "purple.200",
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }}
         />
         <motion.div
@@ -377,7 +377,7 @@ export const AIProcessingLoading = ({
               }}
               sx={{
       bgcolor: "purple.400",
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }}
             />
           ))}
@@ -407,7 +407,7 @@ export const SuccessLoading = ({ message = 'Complete!', className = '' }: Loadin
         transition={{ delay: 0.2, duration: 0.6 }}
         sx={{
       bgcolor: "green.100",
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"
