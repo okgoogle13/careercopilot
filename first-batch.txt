@@ -1,0 +1,10 @@
+profile/CreateProfileCard.tsx
+layout/NavigationItem.tsx
+Documents/DocumentTypeSelector.tsx
+Documents/UploadResume.tsx
+Documents/DocumentPreview.tsx
+Documents/TemplateSelector.tsx
+Documents/ResumeBuilder.tsx
+common/ErrorCard.tsx
+common/CareerCopilotLogo.tsx
+common/LoadingCard.tsx
