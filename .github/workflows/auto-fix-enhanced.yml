@@ -1,0 +1,276 @@
+# .github/workflows/auto-fix-enhanced.yml
+name: Enhanced Auto Fix (TypeScript + Linting)
+
+on:
+  pull_request:
+    branches: [develop, main]
+    paths:
+      - 'frontend/src/**'
+      - 'backend/**'
+      - 'functions/src/**'
+      - '!backend/migrations/**'
+  workflow_dispatch:
+    inputs:
+      fix_type:
+        description: 'Type of fixes to apply'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - typescript
+          - linting
+          - formatting
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.13"
+  NODE_VERSION: "20"  # Match CI version
+
+jobs:
+  auto-fix-enhanced:
+    name: Enhanced Auto Fix
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip auto-fix]')"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "pip"
+
+      - name: Enable Corepack for Yarn 4+
+        run: corepack enable
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "yarn"
+          cache-dependency-path: "yarn.lock"
+
+      # ============================================================
+      # PYTHON AUTO-FIXES
+      # ============================================================
+      - name: Install Python formatting tools
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
+        run: |
+          python -m pip install --upgrade pip
+          pip install black==24.3.0 isort==5.13.2 flake8==7.0.0 autoflake==2.3.1
+
+      - name: Apply Python formatting fixes
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
+        run: |
+          echo "🐍 Applying Python formatting fixes..."
+          black backend/ --line-length=100 || true
+          isort backend/ --profile=black --line-length=100 || true
+          autoflake --remove-all-unused-imports --remove-unused-variables --in-place --recursive backend/ || true
+          echo "✅ Python formatting complete"
+
+      # ============================================================
+      # TYPESCRIPT AUTO-FIXES
+      # ============================================================
+      - name: Install Node dependencies
+        run: YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install
+
+      - name: Run TypeScript auto-fix (unused imports, organize imports)
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'typescript' || github.event_name == 'pull_request'
+        run: |
+          echo "🔷 Running TypeScript auto-fixes..."
+
+          # Create a Node.js script to fix TypeScript issues
+          cat > ts-autofix.mjs << 'EOFSCRIPT'
+          import { Project } from 'ts-morph';
+          import { glob } from 'glob';
+
+          async function fixTypeScriptIssues() {
+            const project = new Project({
+              tsConfigFilePath: './frontend/tsconfig.json',
+            });
+
+            const sourceFiles = project.getSourceFiles();
+            let fixedCount = 0;
+
+            for (const sourceFile of sourceFiles) {
+              const filePath = sourceFile.getFilePath();
+
+              // Skip node_modules, dist, and test files
+              if (filePath.includes('node_modules') ||
+                  filePath.includes('/dist/') ||
+                  filePath.includes('.test.')) {
+                continue;
+              }
+
+              let hasChanges = false;
+
+              // Fix: Remove unused imports
+              sourceFile.fixUnusedIdentifiers();
+              hasChanges = true;
+
+              // Fix: Organize imports
+              sourceFile.organizeImports({
+                ensureNewLineAtEndOfFile: true,
+              });
+              hasChanges = true;
+
+              // Fix: Add missing import declarations for common types
+              const text = sourceFile.getFullText();
+
+              // Check for React usage without import (with new JSX transform this is ok)
+              // But we can still add explicit imports if needed
+
+              if (hasChanges) {
+                await sourceFile.save();
+                fixedCount++;
+                console.log(`✓ Fixed: ${filePath}`);
+              }
+            }
+
+            console.log(`\n✅ Fixed ${fixedCount} TypeScript files`);
+          }
+
+          fixTypeScriptIssues().catch(console.error);
+          EOFSCRIPT
+
+          node ts-autofix.mjs || echo "⚠️  TypeScript auto-fix encountered issues (non-blocking)"
+
+          echo "✅ TypeScript auto-fix complete"
+
+      # ============================================================
+      # ESLINT AUTO-FIXES
+      # ============================================================
+      - name: Apply ESLint auto-fixes
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'linting' || github.event_name == 'pull_request'
+        run: |
+          echo "🔧 Applying ESLint fixes..."
+          yarn workspace careercopilot-frontend lint:fix || echo "⚠️  ESLint auto-fix encountered issues (non-blocking)"
+          yarn workspace functions lint:fix || echo "⚠️  Functions lint auto-fix encountered issues (non-blocking)"
+          echo "✅ ESLint fixes complete"
+
+      # ============================================================
+      # PRETTIER AUTO-FIXES
+      # ============================================================
+      - name: Apply Prettier formatting
+        if: github.event.inputs.fix_type == 'all' || github.event.inputs.fix_type == 'formatting' || github.event_name == 'pull_request'
+        run: |
+          echo "💅 Applying Prettier formatting..."
+          yarn workspace careercopilot-frontend format || true
+          echo "✅ Prettier formatting complete"
+
+      # ============================================================
+      # M3 TOKEN COMPLIANCE CHECK (NEW)
+      # ============================================================
+      - name: Check M3 Token Compliance
+        id: m3-check
+        run: |
+          echo "🎨 Checking M3 token compliance..."
+
+          # Check for hardcoded colors, spacing, etc.
+          HARDCODED_COLORS=$(grep -rn "color:\s*#[0-9a-fA-F]\{3,6\}" frontend/src/components --include="*.tsx" --include="*.css" | wc -l)
+          HARDCODED_SPACING=$(grep -rn "padding:\s*[0-9]\+px\|margin:\s*[0-9]\+px" frontend/src/components --include="*.tsx" --include="*.css" | wc -l)
+
+          echo "❌ Found $HARDCODED_COLORS hardcoded color values"
+          echo "❌ Found $HARDCODED_SPACING hardcoded spacing values"
+
+          if [ $HARDCODED_COLORS -gt 0 ] || [ $HARDCODED_SPACING -gt 0 ]; then
+            echo "m3_violations=true" >> $GITHUB_OUTPUT
+            echo "⚠️  M3 token violations detected. Consider running M3 migration skills."
+          else
+            echo "m3_violations=false" >> $GITHUB_OUTPUT
+            echo "✅ M3 token compliance verified"
+          fi
+
+      # ============================================================
+      # COMMIT CHANGES
+      # ============================================================
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --exit-code || echo "changes_made=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.changes_made == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions Auto-Fix Bot"
+          git add .
+          git commit -m "style(auto): Apply auto-fixes (TS + ESLint + Prettier) [skip ci]" \
+            -m "- Fixed TypeScript unused imports and organized imports" \
+            -m "- Applied ESLint auto-fixes" \
+            -m "- Applied Prettier formatting" \
+            -m "- Python formatting (black, isort, autoflake)"
+          git push
+
+      # ============================================================
+      # PR COMMENTS
+      # ============================================================
+      - name: Comment on PR with fix summary
+        if: github.event_name == 'pull_request' && steps.git-check.outputs.changes_made == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const m3Violations = '${{ steps.m3-check.outputs.m3_violations }}' === 'true';
+
+            let body = '🤖 **Auto-fix Applied!**\n\n';
+            body += '✅ Fixed the following:\n';
+            body += '- TypeScript: Removed unused imports, organized imports\n';
+            body += '- ESLint: Applied auto-fixable linting rules\n';
+            body += '- Prettier: Applied code formatting\n';
+            body += '- Python: Applied black, isort, and autoflake\n\n';
+
+            if (m3Violations) {
+              body += '⚠️  **M3 Token Compliance Issues Detected**\n\n';
+              body += 'Found hardcoded colors or spacing values. Consider running M3 migration skills:\n';
+              body += '```bash\n';
+              body += '# Ask Claude to migrate components to M3 tokens\n';
+              body += '"Migrate the Button component to M3 Expressive design tokens"\n';
+              body += '```\n\n';
+              body += 'See `.claude/skills/frontend-migration/` for available migration skills.\n';
+            }
+
+            body += '\n*Changes pushed to this PR. CI checks will run automatically.*';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body,
+            });
+
+      - name: Comment on M3 violations (if detected)
+        if: github.event_name == 'pull_request' && steps.m3-check.outputs.m3_violations == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🎨 **M3 Design Token Compliance Check**\n\n' +
+                    '⚠️  This PR contains hardcoded color or spacing values.\n\n' +
+                    '**Recommendation:** Use M3 design tokens for consistency:\n' +
+                    '- Colors: `var(--sys-color-*)` instead of `#hex` or `rgb()`\n' +
+                    '- Spacing: `var(--sys-space-*)` instead of hardcoded `px` values\n' +
+                    '- Shapes: `var(--sys-shape-radius-*)` instead of `border-radius: Npx`\n\n' +
+                    'Available M3 migration skills:\n' +
+                    '- `m3-color-themer` - Migrate colors to tokens\n' +
+                    '- `m3-layout-refactor` - Migrate spacing to tokens\n' +
+                    '- `m3-shape-refactor` - Migrate border-radius to tokens\n' +
+                    '- `batch-migration-orchestrator` - Migrate multiple components\n\n' +
+                    'See `CLAUDE.md` for more details.',
+            });
