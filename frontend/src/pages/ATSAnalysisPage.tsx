@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { CircularProgress, Box, Typography } from '@mui/material';
-import { ATSAnalysisDashboard, AnalysisResult } from '../components/features/Analysis/ATSAnalysisDashboard';
+import { ATSAnalysisDashboard, AnalysisResult } from '@/components/features/analysis/ATSAnalysisDashboard';
 
 // Placeholder for the async function to fetch analysis data
 const fetchAnalysisData = async (resumeId: string): Promise<AnalysisResult> => {

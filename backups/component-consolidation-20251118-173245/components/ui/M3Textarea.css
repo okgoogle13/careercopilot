@@ -1,0 +1,109 @@
+/**
+ * M3 Expressive Textarea Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== BASE TEXTAREA STYLES ===== */
+.m3-textarea {
+  /* Reset */
+  border: none;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  /* Typography - M3 Label Large */
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-labelLarge-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-labelLarge-line-height);
+  letter-spacing: var(--md-sys-typescale-labelLarge-tracking);
+
+  /* Shape - M3 Extra Small */
+  border-radius: var(--md-sys-shape-corner-extraSmall);
+
+  /* Motion */
+  transition-property: background-color, box-shadow, color, transform;
+  transition-duration: var(--md-sys-motion-duration-short2);
+  transition-timing-function: var(--md-sys-motion-easing-standard);
+}
+
+/* ===== SIZE VARIANTS ===== */
+.m3-textarea--small {
+  height: 32px;
+  padding: 0 var(--md-sys-spacing-3);
+}
+
+.m3-textarea--medium {
+  height: 40px;
+  padding: 0 var(--md-sys-spacing-6);
+}
+
+.m3-textarea--large {
+  height: 48px;
+  padding: 0 var(--md-sys-spacing-8);
+}
+
+/* ===== VARIANT: FILLED ===== */
+.m3-textarea--filled.m3-textarea--primary {
+  background-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-primary-100);
+}
+
+.m3-textarea--filled.m3-textarea--secondary {
+  background-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-secondary-100);
+}
+
+.m3-textarea--filled.m3-textarea--tertiary {
+  background-color: var(--md-sys-color-tertiary-50);
+  color: var(--md-sys-color-tertiary-100);
+}
+
+.m3-textarea--filled.m3-textarea--error {
+  background-color: var(--md-sys-color-error-50);
+  color: var(--md-sys-color-error-100);
+}
+
+/* ===== VARIANT: OUTLINED ===== */
+.m3-textarea--outlined {
+  background-color: transparent;
+  border: 1px solid var(--md-sys-color-outline-default);
+}
+
+.m3-textarea--outlined.m3-textarea--primary {
+  color: var(--md-sys-color-primary-50);
+  border-color: var(--md-sys-color-primary-50);
+}
+
+/* ===== STATE: HOVER ===== */
+.m3-textarea:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+/* ===== STATE: FOCUS ===== */
+.m3-textarea:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary-50);
+  outline-offset: 2px;
+}
+
+/* ===== STATE: DISABLED ===== */
+.m3-textarea:disabled,
+.m3-textarea--disabled {
+  opacity: 0.38;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-textarea--large {
+    height: 40px;
+  }
+}

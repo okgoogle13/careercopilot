@@ -57,11 +57,16 @@ prompt_continue() {
     local message=$1
     echo ""
     echo -e "${YELLOW}$message${NC}"
-    read -p "Continue? (y/n) " -n 1 -r
-    echo ""
-    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-        echo "Aborted by user"
-        exit 0
+    # Check if stdin is a TTY, if not skip prompt
+    if [ -t 0 ]; then
+        read -p "Continue? (y/n) " -n 1 -r
+        echo ""
+        if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+            echo "Aborted by user"
+            exit 0
+        fi
+    else
+        echo "Running in non-interactive mode, continuing..."
     fi
 }
 
