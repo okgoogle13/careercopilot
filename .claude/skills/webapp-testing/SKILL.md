@@ -14,6 +14,6 @@ description: "Runs or writes Playwright tests for the 'careercopilot' webapp. Us
 3.  **If "write":**
     * Ask for a description of the test (e.g., "test the login flow").
     * Ask for the new test file name (e.g., `login.spec.ts`).
-    * **Consult `REFERENCE/careercopilot-selectors.md`** to use stable `data-testid` selectors.
+    * **Consult `references/careercopilot-selectors.md`** to use stable `data-testid` selectors.
     * Write the new Playwright test code to `e2e/{{FILE_NAME}}`.
     * Report success and ask the user if they want to run the new test.
