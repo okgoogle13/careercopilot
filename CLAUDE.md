@@ -466,8 +466,180 @@ The project includes a complete **M3 Expressive Design System migration infrastr
 ### Documentation & References
 
 - **Complete Infrastructure Guide:** `.claude/docs/M3_EXPRESSIVE_INFRASTRUCTURE.md` (347 lines)
+- **Enhancement Summary:** `.claude/docs/M3_EXPRESSIVE_ENHANCEMENTS.md` (NEW - M3 Expressive v2.0.0)
 - **Skill-Agent Matrix:** `SKILL_AGENT_MATRIX.md` - Complete M3 skill mappings
 - **Agent Reference:** `AGENT_MODEL_REFERENCE.md` - m3-migration-architect details
+
+## M3 Expressive Enhancements v2.0.0 (NEW - 2025-01-18)
+
+**Based on:** Anthropic context engineering best practices + Google M3 Expressive design principles
+
+The project now includes **4 new M3 Expressive skills** and **3 enhanced agents** to create interfaces that are **vibrant, dynamic, playful, and emotionally impactful** while preventing generic "AI slop" aesthetics.
+
+### M3 Expressive Principles
+
+Material 3 Expressive creates interfaces that feel:
+- **Vibrant & Dynamic** - Rich, personalized color palettes (40+ tonal shades)
+- **Playful & Energetic** - Spring-based physics, choreographed animations
+- **Emotionally Impactful** - Variable fonts, extreme weight contrasts (100 vs 900)
+- **Distinctive** - Creative, unexpected choices that avoid predictable patterns
+- **"Alive"** - Physics-based interactions that react to user gestures
+
+### New M3 Expressive Skills (4 Total)
+
+**Location:** `.claude/skills/design-skills/`
+
+#### 1. m3-expressive-typography-enhancer
+**Purpose:** Variable fonts, extreme weight contrasts, emotional tone mapping
+
+**Key Features:**
+- Variable font integration (font-variation-settings)
+- Extreme weight contrasts (100 vs 900, not 400 vs 600)
+- Extreme size contrasts (3x+ ratio: 57px vs 12px)
+- Emotional tone mapping (playful, confident, elegant, tech-forward)
+- Expressive font pairing (display + monospace, serif + geometric)
+
+**Forbidden Fonts:** Inter, Roboto, Arial, Helvetica, system fonts (alone)
+**Recommended:** Plus Jakarta Sans Variable, Poppins, Montserrat, Sora
+
+#### 2. m3-spring-motion-choreography
+**Purpose:** Physics-based animations with spring easing and choreographed page loads
+
+**Key Features:**
+- Spring-based physics (expressive-spring, expressive-bounce)
+- Choreographed page loads (staggered reveals with animation-delay)
+- High-impact moments (focus on orchestrated entrance)
+- "Alive" interactions (buttons bounce, cards react to hover)
+- Accessibility support (prefers-reduced-motion)
+
+**Spring Easing:**
+- `expressive-spring` - cubic-bezier(0.175, 0.885, 0.32, 1.275) - 12.75% overshoot
+- `expressive-bounce` - cubic-bezier(0.68, -0.55, 0.265, 1.55) - 55% overshoot
+
+#### 3. m3-atmospheric-backgrounds
+**Purpose:** Layered gradients, geometric patterns, atmospheric depth (not flat solids)
+
+**Key Features:**
+- Layered gradients (multi-stop, radial + linear)
+- Geometric patterns (grid, dots, stripes, organic blobs)
+- Contextual effects (playful, professional, elegant)
+- Performance (CSS-only, GPU-accelerated)
+
+**Pattern Library:** Mesh gradient, noise texture, isometric grid, aurora effect
+
+#### 4. m3-anti-slop-validator
+**Purpose:** Detect and prevent generic "AI slop" aesthetics with quality scoring
+
+**Key Features:**
+- Detects generic fonts (Inter, Roboto, Arial)
+- Identifies clichéd colors (purple gradients on white, generic Material Blue)
+- Spots flat layouts (solid backgrounds, no elevation)
+- Flags predictable patterns (monotone font pairing, timid contrasts)
+- Aesthetic quality score (0-100, Grade A-F)
+
+**Forbidden Patterns:**
+- ❌ Generic fonts (Inter, Roboto, Arial alone)
+- ❌ Purple gradients on white (#7C4DFF → #9C27B0 on #FFFFFF)
+- ❌ Timid weight contrast (400 vs 500 = 1.25x)
+- ❌ Timid size contrast (24px vs 16px = 1.5x)
+- ❌ Flat backgrounds (solid colors, no gradients)
+- ❌ Linear/ease-in-out easing (use spring physics)
+
+**Required Score:** ≥ 80 (Grade B or higher)
+
+### Enhanced Agents (3 Updated)
+
+#### 1. visual-design-director (v1.2.0)
+**Enhancements:**
+- Added M3 Expressive Anti-Slop Rules section (CRITICAL)
+- Forbidden patterns explicitly listed
+- Required M3 Expressive elements checklist
+- Validation workflow before handoff
+- Aesthetic quality score requirement (≥ 80)
+
+#### 2. design-systems-architect (v2.0.0)
+**Enhancements:**
+- Updated to use 4 new M3 Expressive skills
+- Sequential skill execution workflow
+- Validation includes m3-anti-slop-validator
+- Saves to `design-system/tokens-expressive.json`
+- Generates 200+ tokens (up from ~150)
+
+#### 3. m3-migration-architect (v2.0.0)
+**Enhancements:**
+- Extended from 8-step to 12-step protocol
+- Added Step 4: m3-expressive-typography-enhancer
+- Added Step 10: m3-spring-motion-choreography
+- Added Step 11: m3-atmospheric-backgrounds
+- Added Step 12: m3-anti-slop-validator
+- Success criteria: All 12 steps + aesthetic score ≥ 80
+
+### M3 Expressive Quick Reference
+
+**Typography:**
+- Variable fonts (Plus Jakarta Sans Variable, Poppins, Montserrat, Sora)
+- Weight contrast ≥ 3x (100 vs 900, not 400 vs 600)
+- Size contrast ≥ 3x (57px vs 12px, not 24px vs 16px)
+- High-contrast pairing (display + monospace, serif + geometric)
+
+**Color:**
+- Vibrant palettes (40-80% saturation)
+- Tonal shades (40+ stops per palette)
+- HCT color space (perceptually uniform)
+- Dominant color with sharp accents
+
+**Motion:**
+- Spring physics (expressive-spring, expressive-bounce)
+- Choreographed page loads (staggered 100-150ms)
+- "Alive" interactions (bounce on press, react to hover)
+- prefers-reduced-motion support
+
+**Background:**
+- Layered gradients (≥ 2 layers)
+- Geometric patterns (grid, dots, organic)
+- Atmospheric effects (mesh, aurora, noise)
+- CSS-only, GPU-accelerated
+
+**Anti-Slop:**
+- No generic fonts (Inter, Roboto, Arial alone)
+- No purple gradients on white
+- No flat layouts (solid colors)
+- No timid contrasts (< 3x ratio)
+- Aesthetic score ≥ 80
+
+### Quick Start: M3 Expressive
+
+**Create Design System:**
+```bash
+# User: "Create a design system with vibrant, confident aesthetic"
+# Visual Design Director defines aestheticPreferences
+# Design Systems Architect generates tokens using 4 new skills
+# Output: design-system/tokens-expressive.json with 200+ tokens
+# Aesthetic Quality Score: 88/100 (Grade A)
+```
+
+**Migrate Component:**
+```bash
+# User: "Migrate the Button component to M3 Expressive"
+# m3-migration-architect executes 12-step protocol
+# Includes: typography enhancement, motion choreography, atmospheric bg
+# Validates with m3-anti-slop-validator (score ≥ 80)
+```
+
+**Validate Design:**
+```bash
+# User: "Check if my design has generic AI slop"
+# m3-anti-slop-validator detects violations
+# Reports: Typography, Color, Layout, Motion issues
+# Provides remediation steps + aesthetic score
+```
+
+### Documentation
+
+- **Enhancement Summary:** `.claude/docs/M3_EXPRESSIVE_ENHANCEMENTS.md` - Complete guide
+- **Infrastructure Guide:** `.claude/docs/M3_EXPRESSIVE_INFRASTRUCTURE.md` - Original M3 docs
+- **Context Engineering:** Based on Anthropic best practices for effective AI agents
+- **Frontend Design:** Aligned with modern design aesthetics (avoiding "AI slop")
 
 ## Automated Linting Configuration
 
