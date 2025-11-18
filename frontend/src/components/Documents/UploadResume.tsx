@@ -16,8 +16,8 @@ export const UploadResume: React.FC<UploadResumeProps> = ({ onNext, onBack }) =>
         </Box>
         <Card>
           <CardContent sx={{ p: 4 }}>
-            <Box sx={{ border: 2, borderStyle: 'dashed', borderColor: 'outline.variant', borderRadius: 2, p: 6, textAlign: 'center', cursor: 'pointer', transition: 'all 0.3s', '&:hover': { borderColor: 'primary.main', bgcolor: (theme) => alpha(theme.palette.primary.main, 0.02) } }}>
-              <Box sx={{ p: 2, borderRadius: '50%', bgcolor: (theme) => alpha(theme.palette.primary.main, 0.12), display: 'inline-block', mb: 2 }}>
+            <Box sx={{ border: 2, borderStyle: 'dashed', borderColor: 'outline.variant', borderRadius: 2, p: 6, textAlign: 'center', cursor: 'pointer', transition: 'all var(--sys-motion-duration-medium2)', '&:hover': { borderColor: 'primary.main', bgcolor: (theme) => alpha(theme.palette.primary.main, 0.02) } }}>
+              <Box sx={{ p: 2, borderRadius: 'var(--sys-shape-radius-full)', bgcolor: (theme) => alpha(theme.palette.primary.main, 0.12), display: 'inline-block', mb: 2 }}>
                 <UploadIcon sx={{ fontSize: 32, color: (theme) => theme.palette.primary.light }} />
               </Box>
               <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>Drag & Drop Your Resume</Typography>

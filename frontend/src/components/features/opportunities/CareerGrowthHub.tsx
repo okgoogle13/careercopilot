@@ -331,7 +331,7 @@ export function CareerGrowthHub({
       p: 8,
       border: 2,
       borderColor: 'grey.200',
-      transition: 'all 0.3s',
+      transition: 'all var(--sys-motion-duration-medium2)',
       '&:hover': {
         boxShadow: 6,
         transform: 'translateY(-4px)',
@@ -413,7 +413,7 @@ export function CareerGrowthHub({
                                   <Box sx={{
       width: 6,
       height: 6,
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       bgcolor: feature.color,
       opacity: 0.5
     }} />

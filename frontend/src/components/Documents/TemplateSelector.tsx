@@ -37,7 +37,7 @@ export const TemplateSelector: React.FC<TemplateSelectorProps> = ({ documentType
                 sx={{
                   cursor: 'pointer',
                   height: '100%',
-                  transition: 'all 0.3s',
+                  transition: 'all var(--sys-motion-duration-medium2)',
                   '&:hover': {
                     boxShadow: 3,
                     transform: 'translateY(-4px)',

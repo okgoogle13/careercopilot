@@ -95,7 +95,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
             <div sx={{
       p: 2,
       bgcolor: "blue.100",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
               <Briefcase sx={{
       color: "blue.600"
@@ -144,7 +144,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
                 <>
                   <div sx={{
       border: 2,
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       mr: 2
     }} />
                   Preparing Application Package...
@@ -176,7 +176,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
             <div sx={{
       p: 2,
       bgcolor: "green.100",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
               <Mail sx={{
       color: "green.600"
@@ -214,7 +214,7 @@ Calendar tasks created: ${response.data.tasks_created}`);
                 <>
                   <div sx={{
       border: 2,
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       mr: 2
     }} />
                   Scanning Inbox...

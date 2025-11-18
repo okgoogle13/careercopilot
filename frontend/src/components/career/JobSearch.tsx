@@ -22,7 +22,7 @@ import React, { useState, useEffect } from 'react';
 import type { JobFilters } from '../features/opportunities/FilterPanel';
 import { FilterPanel } from '../features/opportunities/FilterPanel';
 import { JobCard } from '../features/opportunities/JobCard';
-import { EmptyState } from '../ui/EmptyState';
+import { EmptyState } from '../ui/feedback/EmptyState';
 import { LoadingState } from '../ui/LoadingState';
 
 type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
@@ -306,7 +306,7 @@ export function JobSearch({
                 <Box sx={{
       display: "flex",
       border: 1,
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       overflow: "hidden"
     }}>
                   <Button

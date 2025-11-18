@@ -263,7 +263,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
     }}
                           >
                             <div sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
                             {req}
                           </li>
@@ -289,7 +289,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
                           >
                             <div sx={{
       bgcolor: "green.500",
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
                             {benefit}
                           </li>
@@ -396,7 +396,7 @@ export function JobMatching({ onBack }: JobMatchingProps) {
       mt: 6,
       p: 4,
       border: 1,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <div sx={{
       display: "flex",
