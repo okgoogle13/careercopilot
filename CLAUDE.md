@@ -69,6 +69,83 @@ The application uses Firebase Cloud Firestore for caching instead of Redis, prov
 - `backend/app/core/genkit_init.py` - Genkit initialization
 - `verify_genkit.py` - Genkit health check
 
+## Skills Development & Tooling
+
+The project includes automation scripts for creating and validating Claude Code skills following [Anthropic's official guidelines](https://github.com/anthropics/skills/blob/main/skill-creator/SKILL.md).
+
+### Skill Creation Tool
+
+**Initialize a New Skill:**
+```bash
+python3 .claude/scripts/init-skill.py <skill-name> [--path <output-directory>]
+
+# Examples:
+python3 .claude/scripts/init-skill.py my-awesome-skill
+python3 .claude/scripts/init-skill.py database-migrator --path .claude/skills
+```
+
+**What it creates:**
+- `SKILL.md` - Main skill definition with YAML frontmatter and workflow
+- `README.md` - Development notes and guidelines
+- `scripts/` - Directory for automation scripts (bash, python)
+- `references/` - Directory for detailed documentation
+- `assets/` - Directory for templates and boilerplate files
+
+### Skill Validation & Packaging Tool
+
+**Validate a Skill:**
+```bash
+python3 .claude/scripts/package-skill.py <path/to/skill> [--validate-only]
+
+# Examples:
+python3 .claude/scripts/package-skill.py .claude/skills/my-skill --validate-only
+python3 .claude/scripts/package-skill.py .claude/skills/my-skill dist/
+```
+
+**Validation Checks:**
+- ✅ SKILL.md exists with valid YAML frontmatter
+- ✅ Required fields: `name`, `description`
+- ✅ Description includes "when to use" triggers
+- ✅ SKILL.md under 500 lines (recommended)
+- ✅ Lowercase directory names (`scripts/`, `references/`, `assets/`)
+- ✅ References one level deep (no nested subdirectories)
+- ✅ Reference files over 100 lines have table of contents
+- ✅ No auxiliary docs (README.md excluded from package)
+- ✅ Scripts are executable (`chmod +x`)
+
+**Package Output:**
+- Creates `.skill` file (zip format) ready for distribution
+- Excludes README.md and auxiliary documentation
+- Includes only essential skill resources
+
+### Skill Development Best Practices
+
+**Structure Guidelines:**
+1. **Keep SKILL.md concise** - Under 500 lines, move detailed content to `references/`
+2. **Progressive disclosure** - Load content in layers (metadata → SKILL.md → references)
+3. **Single-level references** - All reference files directly in `references/`, no nesting
+4. **Table of contents** - Add TOC to reference files over 100 lines
+5. **Executable scripts** - Always `chmod +x` your automation scripts
+6. **Clear descriptions** - Include both functionality and "when to use" triggers
+
+**Example Description (Good):**
+```yaml
+description: "Runs or writes Playwright tests for the webapp. Use when asked to 'run playwright' or 'write a new e2e test'."
+```
+
+**Example Description (Needs Improvement):**
+```yaml
+description: "Example skill demonstrating YAML best practices"
+# Missing: When to use this skill!
+```
+
+### Skill Audit Report
+
+A comprehensive audit of all skills against official guidelines is available at:
+- **Audit Report**: `.claude/docs/SKILL_GUIDELINES_AUDIT.md`
+- **Compliance Status**: 95% (19/20 skills passing validation)
+- **Last Audit**: 2025-11-18
+
 ## Backend API Development & Integration Skills
 
 ### Backend API Scaffolding (NEW - 2025-01-06)
