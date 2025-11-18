@@ -1,6 +1,6 @@
 ---
 name: example-skill
-description: "Example skill demonstrating YAML best practices"
+description: "Example skill demonstrating YAML best practices. Use when learning skill structure, reviewing formatting standards, or creating new skills as a reference."
 version: 1.0.0
 tags:
   - example
@@ -30,5 +30,5 @@ config:
 
 ## Reference Files
 
-- `REFERENCE/yaml-style-guide.md` - YAML formatting standards
-- `REFERENCE/example-config.md` - Configuration options
+- `references/yaml-style-guide.md` - YAML formatting standards
+- `references/example-config.md` - Configuration options
