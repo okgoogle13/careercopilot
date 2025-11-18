@@ -46,7 +46,9 @@
       "Bash(unset:*)",
       "Bash(gcloud services list:*)",
       "Bash(gcloud secrets versions list:*)",
-      "Bash(gcloud secrets versions access:*)"
+      "Bash(gcloud secrets versions access:*)",
+      "Bash(./scripts/prepare-for-migration.sh)",
+      "Bash(./scripts/prepare-for-migration.sh:*)"
     ],
     "deny": [],
     "ask": []
