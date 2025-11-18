@@ -1,0 +1,87 @@
+/**
+ * M3 Expressive Popover Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== BACKDROP ===== */
+.m3-popover-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 1300;
+}
+
+/* ===== BASE POPOVER STYLES ===== */
+.m3-popover {
+  position: fixed;
+  z-index: 1400;
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  border-radius: var(--md-sys-shape-corner-medium);
+  box-shadow: var(--md-sys-elevation-level2);
+  font-family: var(--md-sys-typescale-font-plain);
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: center;
+  transition: opacity var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
+              transform var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+}
+
+.m3-popover--open {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== PLACEMENT TRANSFORM ORIGINS ===== */
+.m3-popover--top {
+  transform-origin: center bottom;
+}
+
+.m3-popover--top.m3-popover--open {
+  transform: scale(1);
+}
+
+.m3-popover--bottom {
+  transform-origin: center top;
+}
+
+.m3-popover--bottom.m3-popover--open {
+  transform: scale(1);
+}
+
+.m3-popover--left {
+  transform-origin: right center;
+}
+
+.m3-popover--left.m3-popover--open {
+  transform: scale(1);
+}
+
+.m3-popover--right {
+  transform-origin: left center;
+}
+
+.m3-popover--right.m3-popover--open {
+  transform: scale(1);
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .m3-popover {
+    transition: opacity var(--md-sys-motion-duration-short1) linear;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-popover {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+}

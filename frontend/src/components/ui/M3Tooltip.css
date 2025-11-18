@@ -1,0 +1,101 @@
+/**
+ * M3 Expressive Tooltip Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== WRAPPER ===== */
+.m3-tooltip-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+/* ===== BASE TOOLTIP STYLES ===== */
+.m3-tooltip {
+  position: absolute;
+  z-index: 1500;
+  background-color: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
+  padding: var(--md-sys-spacing-2) var(--md-sys-spacing-3);
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodySmall-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  line-height: var(--md-sys-typescale-bodySmall-line-height);
+  letter-spacing: var(--md-sys-typescale-bodySmall-tracking);
+  white-space: nowrap;
+  max-width: 300px;
+  word-wrap: break-word;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
+              transform var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+}
+
+.m3-tooltip--visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== PLACEMENT: TOP ===== */
+.m3-tooltip--top {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  margin-bottom: var(--md-sys-spacing-2);
+}
+
+.m3-tooltip--top.m3-tooltip--visible {
+  transform: translateX(-50%) scale(1);
+}
+
+/* ===== PLACEMENT: BOTTOM ===== */
+.m3-tooltip--bottom {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  margin-top: var(--md-sys-spacing-2);
+}
+
+.m3-tooltip--bottom.m3-tooltip--visible {
+  transform: translateX(-50%) scale(1);
+}
+
+/* ===== PLACEMENT: LEFT ===== */
+.m3-tooltip--left {
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  margin-right: var(--md-sys-spacing-2);
+}
+
+.m3-tooltip--left.m3-tooltip--visible {
+  transform: translateY(-50%) scale(1);
+}
+
+/* ===== PLACEMENT: RIGHT ===== */
+.m3-tooltip--right {
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  margin-left: var(--md-sys-spacing-2);
+}
+
+.m3-tooltip--right.m3-tooltip--visible {
+  transform: translateY(-50%) scale(1);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-tooltip {
+    max-width: 200px;
+    font-size: var(--md-sys-typescale-bodySmall-size);
+  }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+  .m3-tooltip {
+    transition: opacity var(--md-sys-motion-duration-short1) linear;
+  }
+}
