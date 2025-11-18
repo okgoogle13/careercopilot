@@ -296,6 +296,109 @@ jules remote status --session [batch-name]
 - `./scripts/vite-bundle-analyzer.sh` - Bundle analysis and optimization
 - See `scripts/frontend-commands.md` for more details
 
+## Frontend Migration Preparation (Material Design 3)
+
+The project is preparing for automated Material Design 3 (M3) migration. Migration automation skills are being built and will be deployed soon. In the meantime, the codebase must be prepared for seamless automation.
+
+### Current Readiness Status
+
+- **Readiness Score:** 12% (based on initial audit)
+- **Target Score:** 70% before migration automation
+- **Components:** 126 total
+- **With Tests:** 17% (22 components)
+- **With Storybook:** 2% (3 components)
+- **With Index Exports:** 18% (5 components)
+
+### Migration Preparation Commands
+
+**Quick Start (All-in-One):**
+```bash
+./scripts/prepare-for-migration.sh
+# Interactive script that runs all preparation steps in order
+# Creates backups, validates each step, runs TypeScript compilation
+```
+
+**Individual Steps:**
+
+1. **Audit Current Structure:**
+   ```bash
+   ./scripts/audit-component-structure.sh
+   # Analyzes component structure and generates readiness report
+   ```
+
+2. **Consolidate Duplicate Directories:**
+   ```bash
+   ./scripts/consolidate-duplicate-dirs.sh
+   # Merges Ksc/KSC, renames PascalCase dirs to kebab-case
+   # Updates all imports automatically
+   ```
+
+3. **Standardize Component Structure:**
+   ```bash
+   ./scripts/standardize-component-structure.sh --dry-run  # Preview
+   ./scripts/standardize-component-structure.sh           # Apply
+   # Moves loose files into ComponentName/ directories
+   # Creates index.ts barrel exports
+   ```
+
+4. **Generate Component Manifest:**
+   ```bash
+   node scripts/generate-component-manifest.ts
+   # Creates component-manifest.json for automation tools
+   # Generates component-manifest-summary.md report
+   ```
+
+5. **Validate Migration Readiness:**
+   ```bash
+   ./scripts/pre-migration-validation.sh
+   # Runs 10 validation checks
+   # Verifies structure, tests, TypeScript, build, linting
+   # Exit code 0 = ready, 1 = not ready
+   ```
+
+### M3 Migration Skills (In Development)
+
+Located in `.claude/skills/frontend-migration/`:
+
+- **m3-layout-refactor** - Migrates layout patterns to M3 spacing/grid system
+- **m3-color-themer** - Applies M3 color system and dynamic color
+- **m3-typography-classifier** - Updates typography to M3 type scale
+- **m3-editorial-stylist** - Standardizes content/editorial styling
+- **m3-shape-refactor** - Applies M3 shape system (corner radius)
+- **m3-elevation-refactor** - Migrates shadows to M3 elevation tokens
+- **m3-icon-replacer** - Swaps icons to Material Symbols
+- **m3-motion-applier** - Adds M3 motion/animation patterns
+
+**Status:** Placeholder files created, implementation in progress
+
+### Documentation
+
+- **Quick Start Guide:** `MIGRATION_PREP_QUICKSTART.md` - Step-by-step instructions
+- **Full Readiness Report:** `docs/MIGRATION_READINESS.md` - Comprehensive analysis
+- **Component Manifest:** `component-manifest.json` - Generated automation data
+- **Manifest Summary:** `component-manifest-summary.md` - Human-readable report
+
+### Preparation Workflow
+
+1. Run audit to assess current state
+2. Consolidate duplicate directories (Ksc/KSC)
+3. Standardize component structure
+4. Generate component manifest
+5. Address failing validation checks
+6. Generate missing tests (use `jest-test-scaffolder` skill)
+7. Generate Storybook stories (use `storybook-scaffolder` skill)
+8. Re-run validation until 70%+ readiness
+9. Wait for M3 migration skills deployment
+10. Run automated migration
+
+### Safety Features
+
+- **Backups:** All scripts create timestamped backups in `./backups/`
+- **Dry-Run Mode:** Preview changes before applying
+- **TypeScript Validation:** All scripts verify compilation after changes
+- **Git Integration:** Changes are trackable and reversible
+- **Import Auto-Update:** Scripts automatically update imports after restructuring
+
 ## Design System & Aesthetic Direction (Design Wing)
 
 The project includes a comprehensive **Design Wing** infrastructure for creating and managing design systems with full WCAG compliance and accessibility auditing.
