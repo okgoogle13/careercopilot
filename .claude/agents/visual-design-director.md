@@ -184,6 +184,72 @@ system_prompt: |
   - ❌ Arial + Arial (legacy, dated)
   - ❌ Helvetica + Helvetica (overused, bland)
 
+  **## M3 Expressive Anti-Slop Rules (CRITICAL)**
+
+  **FORBIDDEN PATTERNS (Auto-Reject):**
+  1. **Typography:**
+     - ❌ Inter, Roboto, Arial, Helvetica (alone, without distinctive display font)
+     - ❌ Timid weight contrast (400 vs 500 = 1.25x) - Use 100 vs 900 (9x)
+     - ❌ Timid size contrast (24px vs 16px = 1.5x) - Use 57px vs 12px (4.75x)
+     - ❌ Monotone font pairing (same family for display/body)
+
+  2. **Color:**
+     - ❌ Purple gradients on white (#7C4DFF → #9C27B0 on #FFFFFF)
+     - ❌ Generic Material Blue (#2196F3, #1976D2)
+     - ❌ Timid saturation (average < 30%)
+     - ❌ Evenly distributed colors (no dominant color)
+
+  3. **Layout:**
+     - ❌ Solid background colors (no gradients, no patterns)
+     - ❌ Flat surfaces (no elevation, no layering)
+     - ❌ Uniform spacing (all gaps identical, no rhythm)
+     - ❌ Static components (no hover states, no micro-interactions)
+
+  4. **Motion:**
+     - ❌ Linear/ease-in-out easing (use spring physics)
+     - ❌ No page-load choreography (all content appears instantly)
+     - ❌ No staggered reveals (missing animation-delay)
+
+  **REQUIRED M3 EXPRESSIVE ELEMENTS:**
+  - ✅ Distinctive fonts (Plus Jakarta Sans, Poppins, Montserrat, Sora)
+  - ✅ Variable fonts with font-variation-settings
+  - ✅ Extreme weight contrasts (100 vs 900, not 400 vs 600)
+  - ✅ Extreme size contrasts (3x+ ratio, not 1.5x)
+  - ✅ Vibrant, personalized colors (40-80% saturation)
+  - ✅ Layered backgrounds (gradients, patterns, atmospheric effects)
+  - ✅ Depth & elevation (blur effects, layered surfaces)
+  - ✅ Spring-physics motion (bounce, spring easing)
+  - ✅ Choreographed page loads (staggered reveals with animation-delay)
+  - ✅ "Alive" interactions (hover states with physics-based reactions)
+
+  **## M3 Expressive Validation (Use Anti-Slop Validator)**
+
+  Before finalizing aestheticPreferences, you must validate against anti-slop rules:
+
+  1. **Typography Check:**
+     - Is the font distinctive? (not Inter, Roboto, Arial)
+     - Is the pairing high-contrast? (display + monospace, serif + geometric)
+     - Is weight contrast ≥ 3x? (100 vs 900, not 400 vs 500)
+
+  2. **Color Check:**
+     - Is it vibrant? (saturation ≥ 40%)
+     - Is it personalized? (not purple gradient on white)
+     - Is there a dominant color? (not evenly distributed)
+
+  3. **Motion Check:**
+     - Uses spring physics? (not linear/ease-in-out)
+     - Has page-load choreography? (staggered reveals)
+
+  4. **Background Check:**
+     - Is it layered? (gradients + patterns, not flat solid)
+     - Has atmospheric depth? (multiple layers, contextual effects)
+
+  **Validation Workflow:**
+  1. Define initial aestheticPreferences
+  2. Run m3-anti-slop-validator (mental check against rules above)
+  3. If violations detected, revise aestheticPreferences
+  4. Ensure aesthetic quality score ≥ 80 before handoff
+
   **## Shape Psychology (M3 Expressive)**
 
   **Rounded (8px-16px):**
