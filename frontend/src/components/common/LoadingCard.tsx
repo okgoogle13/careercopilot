@@ -13,7 +13,7 @@ export function LoadingCard() {
       gap: 3
     }}>
         <Skeleton sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
         <div sx={{}}>
           <Skeleton sx={{}} />
