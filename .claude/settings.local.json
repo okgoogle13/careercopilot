@@ -52,7 +52,10 @@
       "Bash(yes:*)",
       "Bash(script -q -c \"(printf ''''y\\n''''; sleep 1; printf ''''y\\n''''; sleep 1; printf ''''y\\n''''; sleep 1; printf ''''y\\n''''; sleep 1; printf ''''y\\n'''') | ./scripts/prepare-for-migration.sh --auto-commit\" /dev/null)",
       "Bash(bash -c '(printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\") | ./scripts/prepare-for-migration.sh --auto-commit')",
-      "Bash(/tmp/run-migration.sh:*)"
+      "Bash(/tmp/run-migration.sh:*)",
+      "Bash(git merge:*)",
+      "Bash(git checkout:*)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []
