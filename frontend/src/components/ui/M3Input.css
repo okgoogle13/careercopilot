@@ -1,0 +1,299 @@
+/**
+ * M3 Expressive Input Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== BASE INPUT WRAPPER ===== */
+.m3-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-1);
+  position: relative;
+}
+
+.m3-input-wrapper--full-width {
+  width: 100%;
+}
+
+/* ===== INPUT CONTAINER ===== */
+.m3-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-2);
+}
+
+/* ===== FIELD WRAPPER ===== */
+.m3-input__field-wrapper {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* ===== INPUT FIELD ===== */
+.m3-input__field {
+  /* Reset */
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* M3 Typography - Body Large */
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyLarge-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  line-height: var(--md-sys-typescale-bodyLarge-line-height);
+  letter-spacing: var(--md-sys-typescale-bodyLarge-tracking);
+
+  /* Color */
+  color: var(--md-sys-color-neutral-10);
+
+  /* Spacing */
+  padding: var(--md-sys-spacing-4);
+  padding-top: calc(var(--md-sys-spacing-4) + var(--md-sys-spacing-2));
+
+  /* Position for outline */
+  position: relative;
+  z-index: 1;
+}
+
+.m3-input__field::placeholder {
+  color: var(--md-sys-color-neutral-50);
+  opacity: 1;
+}
+
+.m3-input__field:disabled {
+  color: var(--md-sys-color-neutral-40);
+  cursor: not-allowed;
+}
+
+/* ===== SIZE VARIANTS ===== */
+.m3-input-wrapper--small .m3-input__field {
+  height: 40px;
+  padding: var(--md-sys-spacing-2) var(--md-sys-spacing-3);
+  padding-top: calc(var(--md-sys-spacing-2) + var(--md-sys-spacing-1));
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+}
+
+.m3-input-wrapper--medium .m3-input__field {
+  height: 56px;
+}
+
+.m3-input-wrapper--large .m3-input__field {
+  height: 64px;
+  padding: var(--md-sys-spacing-5) var(--md-sys-spacing-4);
+  padding-top: calc(var(--md-sys-spacing-5) + var(--md-sys-spacing-3));
+  font-size: var(--md-sys-typescale-titleMedium-size);
+}
+
+/* ===== FLOATING LABEL ===== */
+.m3-input__label {
+  position: absolute;
+  left: var(--md-sys-spacing-4);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+
+  /* M3 Typography - Body Large */
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyLarge-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  line-height: var(--md-sys-typescale-bodyLarge-line-height);
+
+  /* Color */
+  color: var(--md-sys-color-neutral-50);
+
+  /* Motion */
+  transition-property: transform, font-size, color;
+  transition-duration: var(--md-sys-motion-duration-short4);
+  transition-timing-function: var(--md-sys-motion-easing-standard);
+
+  /* Background for floating label */
+  background-color: var(--md-sys-color-surface-default);
+  padding: 0 var(--md-sys-spacing-1);
+  margin-left: calc(-1 * var(--md-sys-spacing-1));
+}
+
+/* Floating label state */
+.m3-input-wrapper--focused .m3-input__label,
+.m3-input-wrapper--has-value .m3-input__label {
+  transform: translateY(calc(-100% - var(--md-sys-spacing-3)));
+  font-size: var(--md-sys-typescale-bodySmall-size);
+  color: var(--md-sys-color-primary-50);
+}
+
+/* Small size label adjustments */
+.m3-input-wrapper--small .m3-input__label {
+  left: var(--md-sys-spacing-3);
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+}
+
+.m3-input-wrapper--small.m3-input-wrapper--focused .m3-input__label,
+.m3-input-wrapper--small.m3-input-wrapper--has-value .m3-input__label {
+  font-size: var(--md-sys-typescale-labelSmall-size);
+}
+
+/* Large size label adjustments */
+.m3-input-wrapper--large .m3-input__label {
+  font-size: var(--md-sys-typescale-titleMedium-size);
+}
+
+.m3-input-wrapper--large.m3-input-wrapper--focused .m3-input__label,
+.m3-input-wrapper--large.m3-input-wrapper--has-value .m3-input__label {
+  font-size: var(--md-sys-typescale-bodySmall-size);
+}
+
+/* ===== OUTLINE ===== */
+.m3-input__outline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  /* Border */
+  border: 1px solid var(--md-sys-color-outline-default);
+  border-radius: var(--md-sys-shape-corner-extraSmall);
+
+  /* Motion */
+  transition: border-color var(--md-sys-motion-duration-short2)
+    var(--md-sys-motion-easing-standard);
+}
+
+/* Legend for label spacing */
+.m3-input__legend {
+  padding: 0;
+  height: 0;
+  visibility: hidden;
+  max-width: 0;
+  transition: max-width var(--md-sys-motion-duration-short2)
+    var(--md-sys-motion-easing-standard);
+}
+
+.m3-input__legend span {
+  padding: 0 var(--md-sys-spacing-1);
+  font-size: var(--md-sys-typescale-bodySmall-size);
+  opacity: 0;
+}
+
+/* Show legend when floating */
+.m3-input-wrapper--focused .m3-input__legend,
+.m3-input-wrapper--has-value .m3-input__legend {
+  max-width: 100%;
+}
+
+/* ===== STATE: HOVER ===== */
+.m3-input-container:hover .m3-input__outline {
+  border-color: var(--md-sys-color-neutral-40);
+}
+
+/* ===== STATE: FOCUSED ===== */
+.m3-input-wrapper--focused .m3-input__outline {
+  border-width: 2px;
+  border-color: var(--md-sys-color-primary-50);
+}
+
+.m3-input-wrapper--focused .m3-input__label {
+  color: var(--md-sys-color-primary-50);
+}
+
+/* ===== STATE: ERROR ===== */
+.m3-input-wrapper--error .m3-input__outline {
+  border-color: var(--md-sys-color-error-50);
+}
+
+.m3-input-wrapper--error.m3-input-wrapper--focused .m3-input__outline {
+  border-width: 2px;
+  border-color: var(--md-sys-color-error-50);
+}
+
+.m3-input-wrapper--error .m3-input__label {
+  color: var(--md-sys-color-error-50);
+}
+
+.m3-input-wrapper--error.m3-input-wrapper--focused .m3-input__label,
+.m3-input-wrapper--error.m3-input-wrapper--has-value .m3-input__label {
+  color: var(--md-sys-color-error-50);
+}
+
+/* ===== STATE: DISABLED ===== */
+.m3-input-wrapper--disabled {
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.m3-input-wrapper--disabled .m3-input__outline {
+  border-color: var(--md-sys-color-neutral-70);
+  border-style: dashed;
+}
+
+/* ===== ICONS ===== */
+.m3-input__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--md-sys-color-neutral-40);
+  z-index: 2;
+}
+
+.m3-input__icon--start {
+  margin-left: var(--md-sys-spacing-3);
+}
+
+.m3-input__icon--end {
+  margin-right: var(--md-sys-spacing-3);
+}
+
+.m3-input-wrapper--focused .m3-input__icon {
+  color: var(--md-sys-color-primary-50);
+}
+
+.m3-input-wrapper--error .m3-input__icon {
+  color: var(--md-sys-color-error-50);
+}
+
+/* ===== HELPER TEXT ===== */
+.m3-input__helper-text {
+  display: block;
+  padding: 0 var(--md-sys-spacing-4);
+
+  /* M3 Typography - Body Small */
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodySmall-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  line-height: var(--md-sys-typescale-bodySmall-line-height);
+
+  color: var(--md-sys-color-neutral-40);
+}
+
+.m3-input__helper-text--error {
+  color: var(--md-sys-color-error-50);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-input-wrapper--large .m3-input__field {
+    height: 56px;
+    padding: var(--md-sys-spacing-4);
+  }
+}
+
+/* ===== AUTOFILL STYLES ===== */
+.m3-input__field:-webkit-autofill,
+.m3-input__field:-webkit-autofill:hover,
+.m3-input__field:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--md-sys-color-neutral-10);
+  -webkit-box-shadow: 0 0 0 1000px var(--md-sys-color-surface-default) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
