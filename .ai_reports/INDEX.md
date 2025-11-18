@@ -48,19 +48,19 @@
 
 ### "I just want to check status"
 ```bash
-julius remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
+jules remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
 ```
 → See [QUICK_REFERENCE.txt](QUICK_REFERENCE.txt)
 
 ### "I want to monitor in real-time"
 ```bash
-watch -n 5 "julius remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
+watch -n 5 "jules remote list --session | grep 'Task:' | awk '{print \$2, \$4, \$NF}'"
 ```
 → See [BATCH_MONITORING_GUIDE.md](BATCH_MONITORING_GUIDE.md) Section 4
 
 ### "I need to pull a result"
 ```bash
-julius remote pull --session 7401566218163211110  # Example: Batch 1
+jules remote pull --session 7401566218163211110  # Example: Batch 1
 ```
 → See [QUICK_REFERENCE.txt](QUICK_REFERENCE.txt) - Pull Results section
 
@@ -182,7 +182,7 @@ INDEX.md                            ← THIS FILE
 ### For Someone Troubleshooting Issues:
 1. Check [BATCH_MONITORING_GUIDE.md](BATCH_MONITORING_GUIDE.md) - Troubleshooting section
 2. Review [JULES_DELEGATION_WORKFLOW.md](JULES_DELEGATION_WORKFLOW.md) - Full troubleshooting guide
-3. Check batch logs: `julius remote logs --session [ID] | tail -50`
+3. Check batch logs: `jules remote logs --session [ID] | tail -50`
 
 ---
 
@@ -222,7 +222,7 @@ for f in .ai_reports/*_report.md; do grep -oE '[0-9]+%' "$f" | tail -1; done | s
    - Watch Batch 4 complete first
 
 2. **Pull Results** (As batches complete)
-   - Use: `julius remote pull --session [ID]`
+   - Use: `jules remote pull --session [ID]`
    - Reports appear in `.ai_reports/`
 
 3. **Validate Reports** (Once all complete)
@@ -265,7 +265,7 @@ for f in .ai_reports/*_report.md; do grep -oE '[0-9]+%' "$f" | tail -1; done | s
 ## ⚡ One-Liner Status Check
 
 ```bash
-echo "Completed: $(ls .ai_reports/*_report.md 2>/dev/null | wc -l) / 8" && julius remote list --session | grep "Task:" | awk '{print $4}' | sort | uniq -c
+echo "Completed: $(ls .ai_reports/*_report.md 2>/dev/null | wc -l) / 8" && jules remote list --session | grep "Task:" | awk '{print $4}' | sort | uniq -c
 ```
 
 ---
