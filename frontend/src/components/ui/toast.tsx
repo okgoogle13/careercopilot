@@ -37,15 +37,15 @@ export interface ToastProps {
  * 
  * Local Styles Used:
  * Success:
- * - Background: success.main (#86EFAC) with alpha
+ * - Background: success.main (var(--sys-color-success)) with alpha
  * - Text: success.contrastText or onSurface
  * 
  * Error:
- * - Background: error.main (#FFB4AB) with alpha
+ * - Background: error.main (var(--sys-color-error)) with alpha
  * - Text: error.contrastText (#690005) or onSurface
  * 
  * Warning:
- * - Background: warning.main (#FDE047) with alpha
+ * - Background: warning.main (var(--sys-color-warning)) with alpha
  * - Text: warning.contrastText or onSurface
  * 
  * Info:

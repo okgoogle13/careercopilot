@@ -30,7 +30,7 @@ export function UsageGuidelinesSection() {
       gap: 2
     }}>
                   <div sx={{
-      borderRadius: "0.25rem"
+      borderRadius: "var(--sys-shape-radius-sm)"
     }}></div>
                   <span sx={{
       typography: "body1"
@@ -42,7 +42,7 @@ export function UsageGuidelinesSection() {
       gap: 2
     }}>
                   <div sx={{
-      borderRadius: "0.25rem"
+      borderRadius: "var(--sys-shape-radius-sm)"
     }}></div>
                   <span sx={{
       typography: "body1"
@@ -54,7 +54,7 @@ export function UsageGuidelinesSection() {
       gap: 2
     }}>
                   <div sx={{
-      borderRadius: "0.25rem"
+      borderRadius: "var(--sys-shape-radius-sm)"
     }}></div>
                   <span sx={{
       typography: "body1"

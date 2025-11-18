@@ -187,7 +187,7 @@ export function ApplicationCard({
             </Typography>
           </Box>
           <LinearProgress variant="determinate" value={progress} sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
         </Box>
 
@@ -197,7 +197,7 @@ export function ApplicationCard({
       mb: 4,
       p: 2,
       bgcolor: "blue.50",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
             <Box sx={{
       display: "flex",

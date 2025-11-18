@@ -213,7 +213,7 @@ export const NotificationCenter: React.FC = () => {
                   },
                   '&::-webkit-scrollbar-thumb': {
                     bgcolor: 'primary.main',
-                    borderRadius: '4px',
+                    borderRadius: 'var(--sys-shape-radius-sm)',
                   },
                 }}
               >

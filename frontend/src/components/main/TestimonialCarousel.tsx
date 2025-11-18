@@ -157,7 +157,7 @@ export function TestimonialCarousel() {
               <Box
                 key={index}
                 sx={{
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       cursor: "pointer",}}
                 onClick={() => setCurrentIndex(index)}
               />
