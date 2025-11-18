@@ -41,7 +41,7 @@ export function FeatureHighlights() {
     }}>
               <Box sx={{
       p: 3,
-      borderRadius: "9999px",}}>{feature.icon}</Box>
+      borderRadius: "var(--sys-shape-radius-full)",}}>{feature.icon}</Box>
             </Box>
             <Typography variant="h6" sx={{
       fontWeight: 600,

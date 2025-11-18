@@ -38,7 +38,7 @@ export function LayoutComponentsSection() {
       display: "flex",
       alignItems: "center",}}>
                 <Skeleton sx={{
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }} />
                 <div sx={{}}>
                   <Skeleton sx={{
