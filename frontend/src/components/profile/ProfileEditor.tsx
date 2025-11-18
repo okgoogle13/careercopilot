@@ -300,7 +300,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                   size="small"
                   variant="outlined"
                   sx={{
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       bgcolor: "common.white",
       boxShadow: 1
     }}
@@ -436,7 +436,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <div sx={{
       p: 2,
       bgcolor: "blue.100",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                         <PersonIcon sx={{
       color: "blue.600"
@@ -561,7 +561,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <div sx={{
       p: 2,
       bgcolor: "green.100",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                         <WorkIcon sx={{
       color: "green.600"
@@ -663,7 +663,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                       <div sx={{
       p: 2,
       bgcolor: "purple.100",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                         <EmojiEventsIcon sx={{
       color: "purple.600"
@@ -892,7 +892,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <div sx={{
       p: 2,
       bgcolor: "indigo.100",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                       <PublicIcon sx={{
       color: "indigo.600"
@@ -914,7 +914,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
       gap: 3,
       p: 3,
       border: 1,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                           <Icon sx={{}} />
                           <div sx={{
@@ -985,7 +985,7 @@ export function ProfileEditor({ onNext, onBack, initialData }: ProfileEditorProp
                     <div sx={{
       p: 2,
       bgcolor: "red.100",
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                       <SettingsIcon sx={{
       color: "red.600"

@@ -205,7 +205,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                   <Box sx={{
       p: 2,
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       bgcolor: 'red.50'
     }}>
                     <AlertCircle sx={{
@@ -231,7 +231,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       p: 4,
       border: 1,
       borderColor: 'grey.200',
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                     <Box sx={{
       display: "flex",
@@ -326,7 +326,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                 <Box sx={{
       p: 2,
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       bgcolor: 'green.50'
     }}>
                   <Target sx={{
@@ -344,7 +344,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       p: 4,
       border: 1,
       borderColor: 'grey.200',
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                     <Box sx={{
       display: "flex",
@@ -425,7 +425,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                 <Box sx={{
       p: 2,
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       bgcolor: 'blue.50'
     }}>
                   <TrendingUp sx={{
@@ -443,7 +443,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       p: 3,
       border: 1,
       borderColor: 'grey.200',
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                     <Box sx={{
       display: "flex",
@@ -505,7 +505,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
     }}>
                   <Box sx={{
       p: 2,
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       bgcolor: 'secondary.light'
     }}>
                     <BookOpen />
@@ -519,7 +519,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       p: 3,
       border: 1,
       borderColor: 'grey.200',
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                     <Typography sx={{
       fontWeight: 500,
@@ -538,7 +538,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       p: 3,
       border: 1,
       borderColor: 'grey.200',
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                     <Typography sx={{
       fontWeight: 500,
@@ -557,7 +557,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       p: 3,
       border: 1,
       borderColor: 'grey.200',
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                     <Typography sx={{
       fontWeight: 500,
