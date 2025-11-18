@@ -114,7 +114,7 @@ export function ProfileGrid({
     }}>
                 <div sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <TrendingUp sx={{}} />
                 </div>

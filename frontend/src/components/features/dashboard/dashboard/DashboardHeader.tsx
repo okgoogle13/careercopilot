@@ -67,7 +67,7 @@ export function DashboardHeader({
         </Button>
         <div sx={{
       bgcolor: "common.white",
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center"

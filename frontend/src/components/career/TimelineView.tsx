@@ -226,7 +226,7 @@ export function TimelineView({
                       <Typography variant="body2" sx={{
       bgcolor: "gray.50",
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                         {event.metadata.notes}
                       </Typography>
@@ -305,7 +305,7 @@ export function TimelineView({
             <Box key={event.id} sx={{}}>
               {/* Timeline Dot */}
               <Box sx={{
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       bgcolor: "common.white",
       border: 4,}} />
 
@@ -322,7 +322,7 @@ export function TimelineView({
       mt: 6
     }}>
           <Box sx={{
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       bgcolor: "gray.300",
       border: 4,}} />
           <Box sx={{

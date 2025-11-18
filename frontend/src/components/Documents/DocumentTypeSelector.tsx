@@ -34,7 +34,7 @@ export const DocumentTypeSelector: React.FC<DocumentTypeSelectorProps> = ({ onSe
                 sx={{
                   cursor: 'pointer',
                   height: '100%',
-                  transition: 'all 0.3s',
+                  transition: 'all var(--sys-motion-duration-medium2)',
                   '&:hover': {
                     boxShadow: 3,
                     transform: 'translateY(-4px)',

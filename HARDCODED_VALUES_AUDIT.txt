@@ -1,0 +1,112 @@
+🔍 Hardcoded Values Audit
+=========================
+
+Generated: Mon Nov 17 18:50:29 UTC 2025
+
+📌 HARDCODED COLORS
+===================
+
+backgroundColor with hex colors:
+  /home/user/careercopilot/frontend/src/components/ui/loading/__tests__/LoadingSkeleton.test.tsx:211:          sx: { padding: 2, backgroundColor: '#f5f5f5' },
+
+color with hex colors:
+  /home/user/careercopilot/frontend/src/components/main/ActionCard.tsx:102:        return <CheckCircle sx={{ fontSize: 16, color: '#86EFAC' }} />;
+  /home/user/careercopilot/frontend/src/components/main/ActionCard.tsx:104:        return <AccessTime sx={{ fontSize: 16, color: '#F472B6' }} />;
+  /home/user/careercopilot/frontend/src/components/main/ActionCard.tsx:106:        return <Error sx={{ fontSize: 16, color: '#FFB4AB' }} />;
+  /home/user/careercopilot/frontend/src/components/main/ActionCard.tsx:344:              <Error sx={{ fontSize: 16, color: '#FFB4AB' }} />
+  /home/user/careercopilot/frontend/src/components/main/ActionCard.tsx:365:              <CheckCircle sx={{ fontSize: 16, color: '#86EFAC' }} />
+  /home/user/careercopilot/frontend/src/components/features/opportunities/JobCard.tsx:152:                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: '#60a5fa' }} />}
+  /home/user/careercopilot/frontend/src/components/features/opportunities/JobCard.tsx:246:                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: '#60a5fa' }} />}
+  /home/user/careercopilot/frontend/src/components/features/opportunities/JobCard.tsx:397:              <Bolt sx={{ fontSize: 16, color: '#A78BFA' }} />
+  /home/user/careercopilot/frontend/src/components/features/opportunities/JobCard.tsx:414:                  <Star sx={{ fontSize: 12, color: '#A78BFA', mt: 0.5, flexShrink: 0 }} />
+  /home/user/careercopilot/frontend/src/components/profiles/ProfileCard.tsx:72:                color: '#000',
+  /home/user/careercopilot/frontend/src/components/jobs/JobCard.tsx:397:              <ZapIcon sx={{ fontSize: 16, color: '#A78BFA' }} />
+
+borderColor with hex colors:
+
+📌 HARDCODED SPACING (px values)
+================================
+
+padding with px values:
+  /home/user/careercopilot/frontend/src/components/ui/search-input.tsx:72:    padding: '12px 0',
+  /home/user/careercopilot/frontend/src/components/ui/feedback/__tests__/EmptyState.test.tsx:352:      expect(box).toHaveStyle({ padding: '64px' }); // MUI spacing scale: 8 * 8px
+  /home/user/careercopilot/frontend/src/components/ui/toast.tsx:99:    padding: '12px 16px',
+  /home/user/careercopilot/frontend/src/components/ui/breadcrumb.tsx:63:  padding: '4px 8px',
+  /home/user/careercopilot/frontend/src/components/ui/breadcrumb.tsx:85:  padding: '4px 8px',
+  /home/user/careercopilot/frontend/src/components/ui/loading/__tests__/LoadingSkeleton.test.tsx:160:      <div data-testid="custom-wrapper" style={{ padding: '16px' }}>
+  /home/user/careercopilot/frontend/src/components/ui/select.tsx:107:      padding: '12px 16px',
+  /home/user/careercopilot/frontend/src/components/ui/select.tsx:131:    padding: '16px',
+  ... (showing first 20)
+
+margin with px values:
+  /home/user/careercopilot/frontend/src/components/ui/breadcrumb.tsx:47:    margin: '0 8px',
+  ... (showing first 20)
+
+gap with px values:
+  ... (showing first 20)
+
+📌 HARDCODED BORDER RADIUS
+==========================
+
+borderRadius with px values:
+  /home/user/careercopilot/frontend/src/components/career/InterviewPrep.tsx:310:      borderRadius: "9999px"
+  /home/user/careercopilot/frontend/src/components/career/InterviewPrep.tsx:581:      borderRadius: "9999px",
+  /home/user/careercopilot/frontend/src/components/career/InterviewPrep.tsx:641:      borderRadius: "0.25rem",
+  /home/user/careercopilot/frontend/src/components/career/JobSearch.tsx:309:      borderRadius: "0.5rem",
+  /home/user/careercopilot/frontend/src/components/career/ApplicationCard.tsx:190:      borderRadius: "9999px"
+  /home/user/careercopilot/frontend/src/components/career/ApplicationCard.tsx:200:      borderRadius: "0.5rem"
+  /home/user/careercopilot/frontend/src/components/career/TimelineView.tsx:229:      borderRadius: "0.5rem"
+  /home/user/careercopilot/frontend/src/components/career/TimelineView.tsx:308:      borderRadius: "9999px",
+  /home/user/careercopilot/frontend/src/components/career/TimelineView.tsx:325:      borderRadius: "9999px",
+  /home/user/careercopilot/frontend/src/components/_deprecated/scroll-area.tsx:19:    borderRadius: '4px',
+  /home/user/careercopilot/frontend/src/components/dashboard/WelcomeBanner.tsx:118:                borderRadius: '50%',
+  /home/user/careercopilot/frontend/src/components/dashboard/WelcomeBanner.tsx:130:                borderRadius: '50%',
+  /home/user/careercopilot/frontend/src/components/dashboard/WelcomeBanner.tsx:355:                          borderRadius: '50%',
+  /home/user/careercopilot/frontend/src/components/dashboard/WelcomeBanner.tsx:371:                          borderRadius: '50%',
+  /home/user/careercopilot/frontend/src/components/dashboard/WelcomeBanner.tsx:384:                          borderRadius: '50%',
+  /home/user/careercopilot/frontend/src/components/main/FeatureHighlights.tsx:44:      borderRadius: "9999px",}}>{feature.icon}</Box>
+  /home/user/careercopilot/frontend/src/components/main/TestimonialCarousel.tsx:160:      borderRadius: "9999px",
+  /home/user/careercopilot/frontend/src/components/Documents/UploadResume.tsx:20:              <Box sx={{ p: 2, borderRadius: '50%', bgcolor: (theme) => alpha(theme.palette.primary.main, 0.12), display: 'inline-block', mb: 2 }}>
+  /home/user/careercopilot/frontend/src/components/NotificationCenter.tsx:216:                    borderRadius: '4px',
+  /home/user/careercopilot/frontend/src/components/library/KeywordTag.tsx:52:      borderRadius: "9999px",
+  ... (showing first 20)
+
+📊 SUMMARY
+==========
+
+Total hardcoded color values: 12
+Total hardcoded spacing values: 9
+Total hardcoded border radius values: 162
+
+TOTAL HARDCODED VALUES: 183
+
+📋 RECOMMENDATIONS
+==================
+
+1. Replace hardcoded colors with design tokens:
+   BAD:  backgroundColor: '#A78BFA'
+   GOOD: backgroundColor: 'var(--sys-color-primary)'
+
+2. Replace hardcoded spacing with design tokens:
+   BAD:  padding: '16px'
+   GOOD: padding: 'var(--sys-space-md)'
+
+3. Replace hardcoded radius with design tokens:
+   BAD:  borderRadius: '12px'
+   GOOD: borderRadius: 'var(--sys-shape-radius-lg)'
+
+📁 FILES WITH MOST VIOLATIONS (Top 10)
+======================================
+
+       13 /home/user/careercopilot/frontend/src/components/features/demo/CardShowcase.tsx
+       13 /home/user/careercopilot/frontend/src/components/common/StandardizedLoadingStates.tsx
+       13 /home/user/careercopilot/frontend/src/components/common/LoadingStates.tsx
+       11 /home/user/careercopilot/frontend/src/components/features/demo/AnimatedComponents.tsx
+       11 /home/user/careercopilot/frontend/src/components/features/dashboard/Settings.tsx
+       11 /home/user/careercopilot/frontend/src/components/features/Analysis/ATSAnalysisDashboard.tsx
+       10 /home/user/careercopilot/frontend/src/components/features/opportunities/CareerIntelligence.tsx
+        7 /home/user/careercopilot/frontend/src/components/profile/ProfileEditor.tsx
+        7 /home/user/careercopilot/frontend/src/components/library/CardComponentsSection.tsx
+        5 /home/user/careercopilot/frontend/src/components/main/ActionCard.tsx
+
+✅ Audit complete! Results saved to: /home/user/careercopilot/HARDCODED_VALUES_AUDIT.txt
