@@ -187,7 +187,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
       gap: 2,
       px: 4,
       py: 2,
-      borderRadius: "9999px",}}
+      borderRadius: "var(--sys-shape-radius-full)",}}
                 >
                   <CheckCircle sx={{}} />
                   <span sx={{
@@ -247,10 +247,10 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
                     </div>
                     <div sx={{
       width: "100%",
-      borderRadius: "9999px",}}>
+      borderRadius: "var(--sys-shape-radius-full)",}}>
                       <div
                         sx={{
-      borderRadius: "9999px",}}
+      borderRadius: "var(--sys-shape-radius-full)",}}
                         style={{ width: `${score}%` }}
                       />
                     </div>
@@ -267,7 +267,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
           <div sx={{
       display: "flex",
       p: 1,
-      borderRadius: "0.5rem",}}>
+      borderRadius: "var(--sys-shape-radius-md)",}}>
             {[
               { id: 'overview', label: 'Overview', icon: Description },
               { id: 'keywords', label: 'Keywords', icon: GpsFixed },
@@ -326,7 +326,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
     }}>
                     <div sx={{
       bgcolor: "green.500",
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       mt: 2,
       flexShrink: 0
     }} />
@@ -347,7 +347,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
     }}>
                     <div sx={{
       bgcolor: "green.500",
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       mt: 2,
       flexShrink: 0
     }} />
@@ -368,7 +368,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
     }}>
                     <div sx={{
       bgcolor: "green.500",
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       mt: 2,
       flexShrink: 0
     }} />
@@ -409,7 +409,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
     }}>
                     <div sx={{
       bgcolor: "yellow.500",
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       mt: 2,
       flexShrink: 0
     }} />
@@ -430,7 +430,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
     }}>
                     <div sx={{
       bgcolor: "yellow.500",
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       mt: 2,
       flexShrink: 0
     }} />
@@ -560,7 +560,7 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
                     <div
                       sx={{
       p: 2,
-      borderRadius: "0.5rem",}}
+      borderRadius: "var(--sys-shape-radius-md)",}}
                     >
                       {insight.type === 'strength' && (
                         <CheckCircle sx={{

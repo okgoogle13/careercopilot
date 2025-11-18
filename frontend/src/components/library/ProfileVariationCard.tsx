@@ -233,10 +233,10 @@ export function ProfileVariationCard({
           </div>
           <div sx={{
       width: "100%",
-      borderRadius: "9999px",}}>
+      borderRadius: "var(--sys-shape-radius-full)",}}>
             <div
               sx={{
-      borderRadius: "9999px",}}
+      borderRadius: "var(--sys-shape-radius-full)",}}
               style={{ width: `${Math.min(100, Math.round((keyword_count / 15) * 100))}%` }}
             />
           </div>
