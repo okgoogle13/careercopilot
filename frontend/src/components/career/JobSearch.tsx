@@ -306,7 +306,7 @@ export function JobSearch({
                 <Box sx={{
       display: "flex",
       border: 1,
-      borderRadius: "0.5rem",
+      borderRadius: "var(--sys-shape-radius-md)",
       overflow: "hidden"
     }}>
                   <Button

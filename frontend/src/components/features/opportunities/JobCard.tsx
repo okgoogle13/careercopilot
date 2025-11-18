@@ -110,23 +110,23 @@ export const JobCard: React.FC<JobCardProps> = ({
   const getExperienceBadgeColor = () => {
     switch (job.experienceLevel) {
       case 'entry':
-        return { bg: alpha('#86EFAC', 0.1), text: '#86EFAC', border: alpha('#86EFAC', 0.2) };
+        return { bg: alpha('var(--sys-color-success)', 0.1), text: 'var(--sys-color-success)', border: alpha('var(--sys-color-success)', 0.2) };
       case 'mid':
-        return { bg: alpha('#60a5fa', 0.1), text: '#60a5fa', border: alpha('#60a5fa', 0.2) };
+        return { bg: alpha('var(--sys-color-info-light)', 0.1), text: 'var(--sys-color-info-light)', border: alpha('var(--sys-color-info-light)', 0.2) };
       case 'senior':
-        return { bg: alpha('#A78BFA', 0.1), text: '#A78BFA', border: alpha('#A78BFA', 0.2) };
+        return { bg: alpha('var(--sys-color-primary)', 0.1), text: 'var(--sys-color-primary)', border: alpha('var(--sys-color-primary)', 0.2) };
       case 'executive':
-        return { bg: alpha('#FDE047', 0.1), text: '#FDE047', border: alpha('#FDE047', 0.2) };
+        return { bg: alpha('var(--sys-color-warning)', 0.1), text: 'var(--sys-color-warning)', border: alpha('var(--sys-color-warning)', 0.2) };
       default:
-        return { bg: alpha('#928F99', 0.1), text: '#928F99', border: alpha('#928F99', 0.2) };
+        return { bg: alpha('var(--sys-color-text-disabled)', 0.1), text: 'var(--sys-color-text-disabled)', border: alpha('var(--sys-color-text-disabled)', 0.2) };
     }
   };
 
   const getMatchScoreColor = (score: number) => {
-    if (score >= 90) return { text: '#86EFAC', bg: alpha('#86EFAC', 0.1) };
-    if (score >= 75) return { text: '#60a5fa', bg: alpha('#60a5fa', 0.1) };
-    if (score >= 60) return { text: '#FDE047', bg: alpha('#FDE047', 0.1) };
-    return { text: '#FFB4AB', bg: alpha('#FFB4AB', 0.1) };
+    if (score >= 90) return { text: 'var(--sys-color-success)', bg: alpha('var(--sys-color-success)', 0.1) };
+    if (score >= 75) return { text: 'var(--sys-color-info-light)', bg: alpha('var(--sys-color-info-light)', 0.1) };
+    if (score >= 60) return { text: 'var(--sys-color-warning)', bg: alpha('var(--sys-color-warning)', 0.1) };
+    return { text: 'var(--sys-color-error)', bg: alpha('var(--sys-color-error)', 0.1) };
   };
 
   if (variant === 'compact') {
@@ -149,7 +149,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                 <Typography variant="body2" sx={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {job.title}
                 </Typography>
-                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: '#60a5fa' }} />}
+                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: 'var(--sys-color-info-light)' }} />}
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
                 <Business sx={{ fontSize: 12 }} />
@@ -243,7 +243,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                 <Typography variant="body2" sx={{ fontWeight: 600 }} color="text.secondary">
                   {job.company}
                 </Typography>
-                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: '#60a5fa' }} />}
+                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: 'var(--sys-color-info-light)' }} />}
                 {job.sponsored && (
                   <Chip
                     label="Sponsored"
@@ -394,7 +394,7 @@ export const JobCard: React.FC<JobCardProps> = ({
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              <Bolt sx={{ fontSize: 16, color: '#A78BFA' }} />
+              <Bolt sx={{ fontSize: 16, color: 'var(--sys-color-primary)' }} />
               <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
                 Why this matches you
               </Typography>
@@ -411,7 +411,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                     listStyle: 'none',
                   }}
                 >
-                  <Star sx={{ fontSize: 12, color: '#A78BFA', mt: 0.5, flexShrink: 0 }} />
+                  <Star sx={{ fontSize: 12, color: 'var(--sys-color-primary)', mt: 0.5, flexShrink: 0 }} />
                   <Typography variant="caption" color="text.secondary">
                     {reason}
                   </Typography>

@@ -160,7 +160,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               <Box sx={{
       p: 6,
       bgcolor: "blue.100",
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }}>
                 <LinkedIn sx={{ fontSize: 48 }} sx={{
       color: "blue.600"
@@ -430,7 +430,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               <Box sx={{
       p: 6,
       bgcolor: "green.100",
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }}>
                 <Check sx={{ fontSize: 48 }} sx={{
       color: "green.600"
