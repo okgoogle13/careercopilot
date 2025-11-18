@@ -48,7 +48,11 @@
       "Bash(gcloud secrets versions list:*)",
       "Bash(gcloud secrets versions access:*)",
       "Bash(./scripts/prepare-for-migration.sh)",
-      "Bash(./scripts/prepare-for-migration.sh:*)"
+      "Bash(./scripts/prepare-for-migration.sh:*)",
+      "Bash(yes:*)",
+      "Bash(script -q -c \"(printf ''''y\\n''''; sleep 1; printf ''''y\\n''''; sleep 1; printf ''''y\\n''''; sleep 1; printf ''''y\\n''''; sleep 1; printf ''''y\\n'''') | ./scripts/prepare-for-migration.sh --auto-commit\" /dev/null)",
+      "Bash(bash -c '(printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\"; sleep 0.5; printf \"\"\"\"y\\n\"\"\"\") | ./scripts/prepare-for-migration.sh --auto-commit')",
+      "Bash(/tmp/run-migration.sh:*)"
     ],
     "deny": [],
     "ask": []

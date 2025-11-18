@@ -1,6 +1,6 @@
 export { AppShell } from './AppShell';
 export { Dashboard as DashboardMUI } from './DashboardMUI';
-export { DocumentsView } from './DocumentsView';
+export { DocumentsView } from '@/components/documentsView';
 export { OpportunitiesView } from './OpportunitiesView';
 export { ApplicationsView } from './ApplicationsView';
 export { AnalysisView } from './AnalysisView';

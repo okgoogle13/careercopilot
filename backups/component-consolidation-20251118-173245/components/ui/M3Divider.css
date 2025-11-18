@@ -1,0 +1,105 @@
+/**
+ * M3 Expressive Divider Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== BASE DIVIDER STYLES ===== */
+.m3-divider {
+  border: none;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* ===== HORIZONTAL DIVIDER ===== */
+.m3-divider--horizontal {
+  width: 100%;
+  height: 0;
+  margin: var(--md-sys-spacing-4) 0;
+}
+
+.m3-divider--horizontal.m3-divider--inset {
+  margin-left: var(--md-sys-spacing-8);
+}
+
+.m3-divider--horizontal.m3-divider--middle {
+  margin-left: var(--md-sys-spacing-8);
+  margin-right: var(--md-sys-spacing-8);
+}
+
+/* ===== VERTICAL DIVIDER ===== */
+.m3-divider--vertical {
+  width: 0;
+  height: auto;
+  border-top: none;
+  border-left: 1px solid var(--md-sys-color-outline-variant);
+  margin: 0 var(--md-sys-spacing-4);
+  align-self: stretch;
+}
+
+.m3-divider--vertical.m3-divider--flex-item {
+  margin-top: var(--md-sys-spacing-4);
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+.m3-divider--vertical.m3-divider--inset {
+  margin-top: var(--md-sys-spacing-8);
+}
+
+.m3-divider--vertical.m3-divider--middle {
+  margin-top: var(--md-sys-spacing-8);
+  margin-bottom: var(--md-sys-spacing-8);
+}
+
+/* ===== DIVIDER WITH TEXT ===== */
+.m3-divider--with-text {
+  display: flex;
+  align-items: center;
+  border-top: none;
+  color: var(--md-sys-color-on-surface-variant);
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-labelMedium-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-labelMedium-line-height);
+}
+
+.m3-divider--with-text::before,
+.m3-divider--with-text::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.m3-divider--with-text::before {
+  margin-right: var(--md-sys-spacing-3);
+}
+
+.m3-divider--with-text::after {
+  margin-left: var(--md-sys-spacing-3);
+}
+
+/* ===== TEXT ALIGNMENT ===== */
+.m3-divider--text-left::before {
+  flex: 0 0 var(--md-sys-spacing-8);
+}
+
+.m3-divider--text-right::after {
+  flex: 0 0 var(--md-sys-spacing-8);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-divider--horizontal {
+    margin: var(--md-sys-spacing-3) 0;
+  }
+
+  .m3-divider--vertical {
+    margin: 0 var(--md-sys-spacing-3);
+  }
+
+  .m3-divider--horizontal.m3-divider--inset,
+  .m3-divider--horizontal.m3-divider--middle {
+    margin-left: var(--md-sys-spacing-4);
+    margin-right: var(--md-sys-spacing-4);
+  }
+}
