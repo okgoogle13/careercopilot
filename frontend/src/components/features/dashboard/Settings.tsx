@@ -117,7 +117,7 @@ export function Settings({ onBack }: SettingsProps) {
     }}>
                 <div sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <PersonIcon sx={{}} />
                 </div>
@@ -186,7 +186,7 @@ export function Settings({ onBack }: SettingsProps) {
     }}>
                 <div sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <Shield sx={{
       color: "blue.500"
@@ -204,7 +204,7 @@ export function Settings({ onBack }: SettingsProps) {
       alignItems: "center",
       justifyContent: "space-between",
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <div>
                     <h4 sx={{
@@ -228,7 +228,7 @@ export function Settings({ onBack }: SettingsProps) {
       alignItems: "center",
       justifyContent: "space-between",
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <div>
                     <h4 sx={{
@@ -263,7 +263,7 @@ export function Settings({ onBack }: SettingsProps) {
     }}>
                 <div sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <NotificationsIcon sx={{
       color: "yellow.500"
@@ -281,7 +281,7 @@ export function Settings({ onBack }: SettingsProps) {
       alignItems: "center",
       justifyContent: "space-between",
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <div>
                     <h4 sx={{
@@ -305,7 +305,7 @@ export function Settings({ onBack }: SettingsProps) {
       alignItems: "center",
       justifyContent: "space-between",
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <div>
                     <h4 sx={{
@@ -329,7 +329,7 @@ export function Settings({ onBack }: SettingsProps) {
       alignItems: "center",
       justifyContent: "space-between",
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <div>
                     <h4 sx={{
@@ -353,7 +353,7 @@ export function Settings({ onBack }: SettingsProps) {
       alignItems: "center",
       justifyContent: "space-between",
       p: 3,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <div>
                     <h4 sx={{
@@ -383,7 +383,7 @@ export function Settings({ onBack }: SettingsProps) {
     }}>
                 <div sx={{
       p: 2,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <DeleteIcon sx={{}} />
                 </div>
@@ -396,7 +396,7 @@ export function Settings({ onBack }: SettingsProps) {
                 <div sx={{
       p: 4,
       border: 1,
-      borderRadius: "0.5rem"
+      borderRadius: "var(--sys-shape-radius-md)"
     }}>
                   <h4 sx={{
       fontWeight: 500,

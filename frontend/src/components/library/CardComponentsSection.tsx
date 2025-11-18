@@ -53,7 +53,7 @@ export function CardComponentsSection() {
     }}>
             <div sx={{
       border: 1,
-      borderRadius: "0.25rem",}}></div>
+      borderRadius: "var(--sys-shape-radius-sm)",}}></div>
             <div>
               <p sx={{
       fontWeight: 500
@@ -70,7 +70,7 @@ export function CardComponentsSection() {
     }}>
             <div sx={{
       border: 1,
-      borderRadius: "0.25rem",
+      borderRadius: "var(--sys-shape-radius-sm)",
       boxShadow: 4,}}></div>
             <div>
               <p sx={{
@@ -88,7 +88,7 @@ export function CardComponentsSection() {
     }}>
             <div sx={{
       border: 2,
-      borderRadius: "0.25rem",
+      borderRadius: "var(--sys-shape-radius-sm)",
       boxShadow: 4,}}></div>
             <div>
               <p sx={{
@@ -106,7 +106,7 @@ export function CardComponentsSection() {
     }}>
             <div sx={{
       border: 1,
-      borderRadius: "0.25rem",}}></div>
+      borderRadius: "var(--sys-shape-radius-sm)",}}></div>
             <div>
               <p sx={{
       fontWeight: 500
@@ -123,7 +123,7 @@ export function CardComponentsSection() {
     }}>
             <div sx={{
       border: 1,
-      borderRadius: "0.25rem",}}></div>
+      borderRadius: "var(--sys-shape-radius-sm)",}}></div>
             <div>
               <p sx={{
       fontWeight: 500
@@ -228,13 +228,13 @@ export function CardComponentsSection() {
       gap: 2
     }}>
                         <div sx={{
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       overflow: "hidden"
     }}>
                           <div
                             sx={{
       height: "100%",
-      borderRadius: "9999px"
+      borderRadius: "var(--sys-shape-radius-full)"
     }}
                             style={{ width: `${profile.atsScore}%` }}
                           />
