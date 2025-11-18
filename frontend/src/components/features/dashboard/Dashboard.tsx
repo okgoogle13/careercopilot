@@ -111,7 +111,7 @@ export function Dashboard({
       textAlign: "center"
     }}>
           <div sx={{
-      borderRadius: "9999px",
+      borderRadius: "var(--sys-shape-radius-full)",
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
