@@ -25,7 +25,7 @@ export const StyledButton = styled(Button, {
   borderRadius: theme.shape.borderRadius,
   textTransform: 'none',
   fontWeight: 500,
-  transition: 'all 0.2s ease-in-out',
+  transition: 'all 0.2s var(--sys-motion-easing-standard)',
   position: 'relative',
   overflow: 'hidden',
   
@@ -107,7 +107,7 @@ export const GlassCard = styled(Card, {
   backdropFilter: theme.glass.blur,
   border: `1px solid ${theme.glass.border}`,
   borderRadius: theme.shape.borderRadius * 2,
-  transition: 'all 0.3s ease-in-out',
+  transition: 'all var(--sys-motion-duration-medium2) var(--sys-motion-easing-standard)',
   overflow: 'hidden',
   '&:hover': {
     backgroundColor: theme.glass.backgroundHover,

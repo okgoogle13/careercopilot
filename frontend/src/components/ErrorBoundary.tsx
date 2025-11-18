@@ -72,7 +72,7 @@ class ErrorBoundary extends Component<Props, State> {
       maxWidth: "md",
       width: "100%",
       bgcolor: "common.white",
-      borderRadius: '0.5rem',
+      borderRadius: 'var(--sys-shape-radius-md)',
       boxShadow: 4,
       p: 8,
       textAlign: "center"
@@ -114,7 +114,7 @@ class ErrorBoundary extends Component<Props, State> {
       bgcolor: "red.50",
       border: 1,
       borderColor: "red.200",
-      borderRadius: '0.25rem',
+      borderRadius: 'var(--sys-shape-radius-sm)',
       p: 3,
       typography: "body2"
     }}>
