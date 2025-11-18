@@ -59,16 +59,25 @@ update_imports() {
 
     echo "🔍 Updating imports: $old_path -> $new_path"
 
-    # Find all TypeScript/JavaScript files
-    find ./frontend/src -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \) \
-        -exec sed -i.bak "s|from ['\"].*${old_path}|from '${new_path}|g" {} \;
+    # Find all TypeScript/JavaScript files and update imports
+    find ./frontend/src -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \) | while read -r file; do
+        # Create backup
+        cp "$file" "$file.bak"
 
-    # Also update relative imports
-    find ./frontend/src -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \) \
-        -exec sed -i.bak "s|from ['\"]\\.\\./${old_path}|from '../${new_path}|g" {} \;
+        # Update imports (using more specific patterns)
+        sed "s|from ['\"]@/components/${old_path}|from '@/components/${new_path}|g" "$file.bak" | \
+        sed "s|from ['\"]\\.\\./${old_path}|from '../${new_path}|g" | \
+        sed "s|from ['\"]\\./${old_path}|from './${new_path}|g" > "$file"
 
-    # Clean up backup files
-    find ./frontend/src -name "*.bak" -delete
+        # Remove backup if file changed successfully
+        if [ $? -eq 0 ]; then
+            rm "$file.bak"
+        else
+            # Restore from backup on error
+            mv "$file.bak" "$file"
+            echo "  ⚠️  Error updating: $file"
+        fi
+    done
 
     echo "✅ Import updates complete"
     echo ""
