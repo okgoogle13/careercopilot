@@ -1,0 +1,106 @@
+/**
+ * M3 Expressive Avatar Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== BASE AVATAR STYLES ===== */
+.m3-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  font-family: var(--md-sys-typescale-font-plain);
+}
+
+/* ===== IMAGE ===== */
+.m3-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== FALLBACK ===== */
+.m3-avatar__fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--md-sys-typescale-weight-medium);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.m3-avatar__icon {
+  width: 60%;
+  height: 60%;
+}
+
+/* ===== SIZE: SMALL ===== */
+.m3-avatar--small {
+  width: 32px;
+  height: 32px;
+  font-size: var(--md-sys-typescale-labelSmall-size);
+}
+
+/* ===== SIZE: MEDIUM (Default) ===== */
+.m3-avatar--medium {
+  width: 40px;
+  height: 40px;
+  font-size: var(--md-sys-typescale-labelMedium-size);
+}
+
+/* ===== SIZE: LARGE ===== */
+.m3-avatar--large {
+  width: 56px;
+  height: 56px;
+  font-size: var(--md-sys-typescale-labelLarge-size);
+}
+
+/* ===== SIZE: XLARGE ===== */
+.m3-avatar--xlarge {
+  width: 96px;
+  height: 96px;
+  font-size: var(--md-sys-typescale-headlineSmall-size);
+}
+
+/* ===== VARIANT: CIRCULAR (Default) ===== */
+.m3-avatar--circular {
+  border-radius: 50%;
+}
+
+/* ===== VARIANT: ROUNDED ===== */
+.m3-avatar--rounded {
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+
+/* ===== VARIANT: SQUARE ===== */
+.m3-avatar--square {
+  border-radius: var(--md-sys-shape-corner-extra-small);
+}
+
+/* ===== COLOR: PRIMARY ===== */
+.m3-avatar--primary .m3-avatar__fallback {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+/* ===== COLOR: SECONDARY ===== */
+.m3-avatar--secondary .m3-avatar__fallback {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* ===== COLOR: TERTIARY ===== */
+.m3-avatar--tertiary .m3-avatar__fallback {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+/* ===== COLOR: ERROR ===== */
+.m3-avatar--error .m3-avatar__fallback {
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
