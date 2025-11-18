@@ -64,6 +64,14 @@ def generate_css_variables(tokens):
     for key, value in tokens.get('typography', {}).get('scale', {}).items():
         content.append(f"  --sys-text-{key.replace('text', '')}: {value};\n")
 
+    # Add Motion (Durations)
+    for key, value in tokens.get('motion', {}).get('duration', {}).items():
+        content.append(f"  --sys-motion-duration-{key.replace('_', '-')}: {value};\n")
+
+    # Add Motion (Easing)
+    for key, value in tokens.get('motion', {}).get('easing', {}).items():
+        content.append(f"  --sys-motion-easing-{key.replace('_', '-')}: {value};\n")
+
     content.append("}\n")
 
     with open(CSS_OUTPUT_FILE, 'w') as f:
