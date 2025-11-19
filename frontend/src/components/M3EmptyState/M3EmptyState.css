@@ -1,0 +1,189 @@
+/**
+ * M3 Expressive EmptyState Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== BASE EMPTY STATE STYLES ===== */
+.m3-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--md-sys-spacing-8);
+  font-family: var(--md-sys-typescale-font-plain);
+}
+
+/* ===== ICON ===== */
+.m3-empty-state__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+.m3-empty-state__icon svg {
+  width: 64px;
+  height: 64px;
+}
+
+/* ===== CONTENT ===== */
+.m3-empty-state__content {
+  max-width: 480px;
+  margin-bottom: var(--md-sys-spacing-6);
+}
+
+.m3-empty-state__title {
+  font-size: var(--md-sys-typescale-headlineSmall-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-headlineSmall-line-height);
+  color: var(--md-sys-color-on-surface);
+  margin: 0 0 var(--md-sys-spacing-2) 0;
+}
+
+.m3-empty-state__description {
+  font-size: var(--md-sys-typescale-bodyLarge-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  line-height: var(--md-sys-typescale-bodyLarge-line-height);
+  letter-spacing: var(--md-sys-typescale-bodyLarge-tracking);
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+/* ===== ACTIONS ===== */
+.m3-empty-state__actions {
+  display: flex;
+  gap: var(--md-sys-spacing-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.m3-empty-state__action {
+  display: flex;
+}
+
+/* ===== SIZE: SMALL ===== */
+.m3-empty-state--small {
+  padding: var(--md-sys-spacing-6);
+}
+
+.m3-empty-state--small .m3-empty-state__icon {
+  margin-bottom: var(--md-sys-spacing-3);
+}
+
+.m3-empty-state--small .m3-empty-state__icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.m3-empty-state--small .m3-empty-state__content {
+  max-width: 320px;
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+.m3-empty-state--small .m3-empty-state__title {
+  font-size: var(--md-sys-typescale-titleLarge-size);
+  line-height: var(--md-sys-typescale-titleLarge-line-height);
+  margin-bottom: var(--md-sys-spacing-1);
+}
+
+.m3-empty-state--small .m3-empty-state__description {
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+  line-height: var(--md-sys-typescale-bodyMedium-line-height);
+}
+
+.m3-empty-state--small .m3-empty-state__actions {
+  gap: var(--md-sys-spacing-2);
+}
+
+/* ===== SIZE: MEDIUM (Default) ===== */
+.m3-empty-state--medium {
+  padding: var(--md-sys-spacing-8);
+}
+
+.m3-empty-state--medium .m3-empty-state__icon {
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+.m3-empty-state--medium .m3-empty-state__icon svg {
+  width: 64px;
+  height: 64px;
+}
+
+.m3-empty-state--medium .m3-empty-state__content {
+  max-width: 480px;
+  margin-bottom: var(--md-sys-spacing-6);
+}
+
+/* ===== SIZE: LARGE ===== */
+.m3-empty-state--large {
+  padding: var(--md-sys-spacing-12);
+}
+
+.m3-empty-state--large .m3-empty-state__icon {
+  margin-bottom: var(--md-sys-spacing-6);
+}
+
+.m3-empty-state--large .m3-empty-state__icon svg {
+  width: 96px;
+  height: 96px;
+}
+
+.m3-empty-state--large .m3-empty-state__content {
+  max-width: 640px;
+  margin-bottom: var(--md-sys-spacing-8);
+}
+
+.m3-empty-state--large .m3-empty-state__title {
+  font-size: var(--md-sys-typescale-headlineMedium-size);
+  line-height: var(--md-sys-typescale-headlineMedium-line-height);
+  margin-bottom: var(--md-sys-spacing-3);
+}
+
+.m3-empty-state--large .m3-empty-state__description {
+  font-size: var(--md-sys-typescale-bodyLarge-size);
+  line-height: var(--md-sys-typescale-bodyLarge-line-height);
+}
+
+.m3-empty-state--large .m3-empty-state__actions {
+  gap: var(--md-sys-spacing-4);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .m3-empty-state {
+    padding: var(--md-sys-spacing-6);
+  }
+
+  .m3-empty-state--small {
+    padding: var(--md-sys-spacing-4);
+  }
+
+  .m3-empty-state--large {
+    padding: var(--md-sys-spacing-8);
+  }
+
+  .m3-empty-state__icon svg {
+    width: 48px;
+    height: 48px;
+  }
+
+  .m3-empty-state--large .m3-empty-state__icon svg {
+    width: 72px;
+    height: 72px;
+  }
+
+  .m3-empty-state__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .m3-empty-state__action {
+    width: 100%;
+  }
+
+  .m3-empty-state__action > * {
+    width: 100%;
+  }
+}
