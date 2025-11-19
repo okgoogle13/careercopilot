@@ -27,6 +27,24 @@ export type { AnimatedButtonProps } from '../AnimatedButton';
 export { AnimatedProgress } from '../AnimatedProgress';
 export type { AnimatedProgressProps } from '../AnimatedProgress';
 
+export { AnimatedDropdown } from '../AnimatedDropdown';
+export type { AnimatedDropdownProps, DropdownItem } from '../AnimatedDropdown';
+
+export { StaggeredList, StaggeredGrid } from '../StaggeredList';
+export type { StaggeredListProps } from '../StaggeredList';
+
+// Skeleton Loaders
+export {
+  Skeleton,
+  SkeletonText,
+  SkeletonCircle,
+  SkeletonButton,
+  LoadingProfileCard,
+  LoadingCard,
+  LoadingDashboard,
+} from '../SkeletonLoaders';
+export type { SkeletonProps } from '../SkeletonLoaders';
+
 // Animation Utilities (re-export from utils)
 export {
   animations,
