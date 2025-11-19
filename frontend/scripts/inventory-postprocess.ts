@@ -21,7 +21,7 @@ interface ComponentInfo {
   usesMUI: boolean;
   usesCustomUI: boolean;
   isDemo: boolean;
-  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'unknown';
+  migrationStatus: 'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown';
 }
 
 interface InventoryReport {
@@ -29,7 +29,7 @@ interface InventoryReport {
   totalComponents: number;
   componentsByCategory: Record<string, number>;
   components: ComponentInfo[];
-  migrationSummary?: Record<'migrated' | 'mixed' | 'not_migrated' | 'unknown', number>;
+  migrationSummary?: Record<'migrated' | 'mixed' | 'not_migrated' | 'expressive' | 'unknown', number>;
 }
 
 function toCSV<T extends Record<string, any>>(rows: T[], headers?: string[]) {
@@ -67,11 +67,11 @@ function main() {
   const migrationBreakdownOverall = nonDemo.reduce((acc, c) => {
     acc[c.migrationStatus] = (acc[c.migrationStatus] ?? 0) + 1;
     return acc;
-  }, { migrated: 0, mixed: 0, not_migrated: 0, unknown: 0 } as Record<string, number>);
+  }, { migrated: 0, mixed: 0, not_migrated: 0, expressive: 0, unknown: 0 } as Record<string, number>);
 
   const migrationByCategory: Record<string, Record<string, number>> = {};
   for (const c of nonDemo) {
-    migrationByCategory[c.category] = migrationByCategory[c.category] || { migrated: 0, mixed: 0, not_migrated: 0, unknown: 0 };
+    migrationByCategory[c.category] = migrationByCategory[c.category] || { migrated: 0, mixed: 0, not_migrated: 0, expressive: 0, unknown: 0 };
     migrationByCategory[c.category][c.migrationStatus]++;
   }
 
