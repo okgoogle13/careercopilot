@@ -55,7 +55,12 @@
       "Bash(/tmp/run-migration.sh:*)",
       "Bash(git merge:*)",
       "Bash(git checkout:*)",
-      "Bash(tee:*)"
+      "Bash(tee:*)",
+      "Bash(git branch:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh workflow:*)",
+      "Bash(gh run list:*)"
     ],
     "deny": [],
     "ask": []
