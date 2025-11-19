@@ -16,6 +16,7 @@ if "/app/app" not in sys.path:
 
 import firebase_admin
 from fastapi import FastAPI
+from fastapi.middleware.gzip import GZipMiddleware
 from firebase_admin import credentials
 
 from app.api.router import api_router
@@ -39,6 +40,11 @@ app = FastAPI(
     description="AI-powered backend for the Careercopilot application.",
     version="1.1.0",
 )
+
+# Add GZIP compression middleware for response compression
+# Compresses responses larger than 1000 bytes using gzip algorithm
+# Reduces bandwidth usage and improves response times for large payloads
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 # Set up Prometheus monitoring
 setup_prometheus_monitoring(app, environment=settings.ENV)

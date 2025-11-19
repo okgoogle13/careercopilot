@@ -1,0 +1,120 @@
+/**
+ * M3 Expressive Skeleton Styles
+ * Uses Material Design 3 Expressive design tokens
+ */
+
+/* ===== BASE SKELETON STYLES ===== */
+.m3-skeleton {
+  display: block;
+  background-color: var(--md-sys-color-surface-variant);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== VARIANT: TEXT ===== */
+.m3-skeleton--text {
+  margin-top: 0;
+  margin-bottom: 0;
+  height: 1em;
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  transform-origin: 0 55%;
+  transform: scale(1, 0.6);
+}
+
+.m3-skeleton--text:empty::before {
+  content: '\00a0';
+}
+
+/* ===== VARIANT: RECTANGULAR ===== */
+.m3-skeleton--rectangular {
+  border-radius: var(--md-sys-shape-corner-medium);
+}
+
+/* ===== VARIANT: CIRCULAR ===== */
+.m3-skeleton--circular {
+  border-radius: 50%;
+}
+
+/* ===== VARIANT: ROUNDED ===== */
+.m3-skeleton--rounded {
+  border-radius: var(--md-sys-shape-corner-large);
+}
+
+/* ===== ANIMATION: PULSE ===== */
+@keyframes m3-skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.m3-skeleton--animation-pulse {
+  animation: m3-skeleton-pulse 1.5s ease-in-out 0.5s infinite;
+}
+
+/* ===== ANIMATION: WAVE ===== */
+@keyframes m3-skeleton-wave {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.m3-skeleton--animation-wave::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: m3-skeleton-wave 1.6s linear 0.5s infinite;
+}
+
+/* ===== WITH CHILDREN ===== */
+.m3-skeleton--with-children {
+  background-color: transparent;
+}
+
+.m3-skeleton--with-children::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--md-sys-color-surface-variant);
+  z-index: 1;
+}
+
+.m3-skeleton--with-children > * {
+  visibility: hidden;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (prefers-reduced-motion: reduce) {
+  .m3-skeleton--animation-pulse,
+  .m3-skeleton--animation-wave {
+    animation: none;
+  }
+
+  .m3-skeleton--animation-wave::after {
+    animation: none;
+  }
+}
