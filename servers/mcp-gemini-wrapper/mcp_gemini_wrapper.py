@@ -179,6 +179,33 @@ class GeminiMCPServer:
         system_prompt = f"Generate {count} creative ideas for the following topic:"
         return self.delegate_to_gemini(topic, system_prompt)
 
+    def architecture_analysis(self, system_description: str) -> Dict[str, Any]:
+        """Analyze system architecture and suggest improvements."""
+        system_prompt = "You are a senior architecture expert. Analyze the system design, identify bottlenecks, and suggest optimizations."
+        return self.delegate_to_gemini(system_description, system_prompt)
+
+    def refactoring_suggestions(self, code: str, language: str = "python") -> Dict[str, Any]:
+        """Generate refactoring suggestions for code."""
+        system_prompt = f"You are a {language} expert. Suggest refactoring improvements for code quality, maintainability, and performance."
+        return self.delegate_to_gemini(code, system_prompt)
+
+    def error_diagnosis(self, error_message: str, context: str = "") -> Dict[str, Any]:
+        """Diagnose errors and suggest fixes."""
+        prompt = f"Error: {error_message}\n\nContext: {context}" if context else error_message
+        system_prompt = "You are a debugging expert. Diagnose the root cause and suggest the most likely fix."
+        return self.delegate_to_gemini(prompt, system_prompt)
+
+    def documentation_insights(self, doc_content: str, query: str = "") -> Dict[str, Any]:
+        """Extract insights and patterns from documentation."""
+        prompt = f"Documentation:\n{doc_content}\n\nQuery: {query}" if query else doc_content
+        system_prompt = "You are a documentation analyst. Extract key insights, patterns, and suggest improvements."
+        return self.delegate_to_gemini(prompt, system_prompt)
+
+    def optimization_analysis(self, performance_data: str) -> Dict[str, Any]:
+        """Analyze performance data and suggest optimizations."""
+        system_prompt = "You are a performance optimization expert. Identify bottlenecks and suggest concrete optimizations with expected impact."
+        return self.delegate_to_gemini(performance_data, system_prompt)
+
     def health_check(self) -> Dict[str, Any]:
         """Check server health."""
         return {
@@ -214,6 +241,29 @@ def handle_request(server: GeminiMCPServer, request: Dict[str, Any]) -> Dict[str
             return server.brainstorm(
                 topic=params.get("topic", ""),
                 count=params.get("count", 5)
+            )
+        elif method == "architecture_analysis":
+            return server.architecture_analysis(
+                system_description=params.get("system_description", "")
+            )
+        elif method == "refactoring_suggestions":
+            return server.refactoring_suggestions(
+                code=params.get("code", ""),
+                language=params.get("language", "python")
+            )
+        elif method == "error_diagnosis":
+            return server.error_diagnosis(
+                error_message=params.get("error_message", ""),
+                context=params.get("context", "")
+            )
+        elif method == "documentation_insights":
+            return server.documentation_insights(
+                doc_content=params.get("doc_content", ""),
+                query=params.get("query", "")
+            )
+        elif method == "optimization_analysis":
+            return server.optimization_analysis(
+                performance_data=params.get("performance_data", "")
             )
         elif method == "health":
             return server.health_check()
