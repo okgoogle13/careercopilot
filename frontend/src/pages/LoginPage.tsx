@@ -1,24 +1,22 @@
 /**
  * Login Page
  * User authentication page with email and password form
+ * Migrated to Electric Alchemist Design System v4.2
  */
 
-import {
-  Box,
-  Container,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-  CircularProgress,
-  Link,
-} from '@mui/material';
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
 import { ariaLabels, announceToScreenReader } from '../utils/accessibility';
+import {
+  ElectricContainer,
+  ElectricCard,
+  ElectricInput,
+  ElectricButton,
+  ElectricAlert,
+  ElectricSkeleton,
+} from '../components/electric';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -94,139 +92,131 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          py: 4,
-        }}
-      >
-        <Paper
-          elevation={3}
-          sx={{
-            p: 4,
-            width: '100%',
-            maxWidth: 400,
-            backgroundColor: '#1A1A1A',
-          }}
+    <ElectricContainer size="sm">
+      <div className="flex flex-col justify-center items-center min-h-screen py-8">
+        <ElectricCard
+          variant="default"
+          className="w-full max-w-md"
           component="main"
         >
-          <Typography
-            variant="h4"
-            component="h1"
-            sx={{
-              mb: 1,
-              fontWeight: 700,
-              color: '#FFFFFF',
-              textAlign: 'center',
-            }}
-          >
+          {/* Header */}
+          <h1 className="text-hero text-center mb-2">
             Career Copilot
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              mb: 3,
-              color: '#B3B3B3',
-              textAlign: 'center',
-            }}
-          >
+          </h1>
+          <p className="text-ai text-center mb-6 text-outline">
             Sign in to your account
-          </Typography>
+          </p>
 
+          {/* Error Alert */}
           {error && (
-            <Alert
-              severity="error"
-              sx={{ mb: 2 }}
-              ref={errorRef}
-              tabIndex={-1}
-              role="alert"
-              aria-live="assertive"
-            >
-              {error}
-            </Alert>
+            <div ref={errorRef} tabIndex={-1}>
+              <ElectricAlert
+                variant="error"
+                className="mb-4"
+                role="alert"
+                aria-live="assertive"
+              >
+                {error}
+              </ElectricAlert>
+            </div>
           )}
 
-          <Box
-            component="form"
+          {/* Login Form */}
+          <form
             ref={formRef}
             onSubmit={handleSubmit}
-            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+            className="flex flex-col gap-4"
             noValidate
             aria-label={ariaLabels.submit}
           >
-            <TextField
-              fullWidth
-              label="Email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              disabled={isLoading}
-              autoComplete="email"
-              required
-              error={Boolean(fieldErrors.email)}
-              helperText={fieldErrors.email}
-              aria-required="true"
-              aria-invalid={Boolean(fieldErrors.email)}
-              aria-describedby={fieldErrors.email ? 'email-error' : undefined}
-            />
+            {/* Email Input */}
+            <div>
+              <label htmlFor="email" className="block text-ai mb-2">
+                Email
+              </label>
+              <ElectricInput
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                disabled={isLoading}
+                autoComplete="email"
+                required
+                variant={fieldErrors.email ? 'error' : 'default'}
+                aria-required="true"
+                aria-invalid={Boolean(fieldErrors.email)}
+                aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+                className="w-full"
+              />
+              {fieldErrors.email && (
+                <p id="email-error" className="text-red-400 text-sm mt-1">
+                  {fieldErrors.email}
+                </p>
+              )}
+            </div>
 
-            <TextField
-              fullWidth
-              label="Password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              disabled={isLoading}
-              autoComplete="current-password"
-              required
-              error={Boolean(fieldErrors.password)}
-              helperText={fieldErrors.password}
-              aria-required="true"
-              aria-invalid={Boolean(fieldErrors.password)}
-              aria-describedby={fieldErrors.password ? 'password-error' : undefined}
-            />
+            {/* Password Input */}
+            <div>
+              <label htmlFor="password" className="block text-ai mb-2">
+                Password
+              </label>
+              <ElectricInput
+                id="password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                disabled={isLoading}
+                autoComplete="current-password"
+                required
+                variant={fieldErrors.password ? 'error' : 'default'}
+                aria-required="true"
+                aria-invalid={Boolean(fieldErrors.password)}
+                aria-describedby={fieldErrors.password ? 'password-error' : undefined}
+                className="w-full"
+              />
+              {fieldErrors.password && (
+                <p id="password-error" className="text-red-400 text-sm mt-1">
+                  {fieldErrors.password}
+                </p>
+              )}
+            </div>
 
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
+            {/* Submit Button */}
+            <ElectricButton
+              variant="default"
+              size="lg"
               type="submit"
               disabled={isLoading}
-              sx={{
-                py: 1.5,
-                mt: 1,
-              }}
+              className="w-full mt-2"
               aria-label={ariaLabels.submit}
             >
-              {isLoading ? <CircularProgress size={24} /> : 'Sign In'}
-            </Button>
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <ElectricSkeleton variant="circle" className="h-6 w-6" />
+                  Signing in...
+                </span>
+              ) : (
+                'Sign In'
+              )}
+            </ElectricButton>
 
-            <Typography variant="body2" sx={{ textAlign: 'center', color: '#B3B3B3' }}>
+            {/* Sign Up Link */}
+            <p className="text-ai text-center text-outline mt-2">
               Don't have an account?{' '}
-              <Link
-                component={RouterLink}
+              <RouterLink
                 to="/register"
-                sx={{
-                  color: '#A855F7',
-                  textDecoration: 'none',
-                  '&:hover': { textDecoration: 'underline' },
-                }}
+                className="text-tertiary hover:text-primary transition-colors"
                 aria-label="Navigate to sign up page"
               >
                 Sign up
-              </Link>
-            </Typography>
-          </Box>
-        </Paper>
-      </Box>
-    </Container>
+              </RouterLink>
+            </p>
+          </form>
+        </ElectricCard>
+      </div>
+    </ElectricContainer>
   );
 };
