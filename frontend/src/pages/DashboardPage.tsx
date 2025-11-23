@@ -1,3 +1,9 @@
+/**
+ * Dashboard Page
+ * Main dashboard with profiles, stats, and recent activity
+ * Migrated to Electric Alchemist Design System v4.2
+ */
+
 import {
   Add,
   Analytics,
@@ -14,32 +20,19 @@ import {
   Warning,
   Work,
 } from '@mui/icons-material';
-import type { ChipProps } from '@mui/material';
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  Container,
-  Divider,
-  IconButton,
-  LinearProgress,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-  MenuItem,
-  // Grid removed; use GridCompat wrapper for legacy `size` and responsive props
-  Paper,
-  Stack,
-  Typography,
-} from '@mui/material';
 import React, { useState } from 'react';
 
-import GridCompat from '@/components/ui/GridCompat';
+import {
+  ElectricContainer,
+  ElectricCard,
+  ElectricButton,
+  ElectricBadge,
+  ElectricAvatar,
+  ElectricProgress,
+  ElectricDivider,
+  ElectricGrid,
+  ElectricPopover,
+} from '../components/electric';
 
 interface Profile {
   id: string;
@@ -138,16 +131,18 @@ export function DashboardPage({
     },
   ];
 
-  const getStatusColor = (profileStatus: Profile['status']): ChipProps['color'] => {
+  const getStatusVariant = (
+    profileStatus: Profile['status']
+  ): 'primary' | 'secondary' | 'outline' | 'ghost' => {
     switch (profileStatus) {
       case 'active':
-        return 'success';
+        return 'primary';
       case 'draft':
-        return 'warning';
+        return 'secondary';
       case 'pending':
-        return 'info';
+        return 'outline';
       default:
-        return 'default';
+        return 'ghost';
     }
   };
 
@@ -166,397 +161,264 @@ export function DashboardPage({
 
   if (isEmpty) {
     return (
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '60vh',
-            textAlign: 'center',
-          }}
-        >
-          <Paper
-            elevation={0}
-            sx={{
-              p: 6,
-              borderRadius: 4,
-              bgcolor: 'background.paper',
-              border: 1,
-              borderColor: 'divider',
-              maxWidth: 500,
-            }}
-          >
-            <Box sx={{ mb: 4 }}>
+      <ElectricContainer size="lg">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center py-8">
+          <ElectricCard variant="default" className="max-w-lg p-12">
+            <div className="mb-8">
               <Description
-                sx={{
-                  fontSize: 80,
-                  color: 'primary.main',
-                  mb: 2,
-                }}
+                sx={{ fontSize: 80, color: '#D0BCFF', mb: 2 }}
+                className="mb-4"
               />
-              <Typography variant="h4" gutterBottom fontWeight={600}>
-                Welcome to CareerCopilot
-              </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+              <h1 className="text-hero text-hero-sm mb-4">Welcome to CareerCopilot</h1>
+              <p className="text-human text-outline mb-8">
                 Create your first AI-powered resume or cover letter to get started with your job
                 search journey.
-              </Typography>
-            </Box>
+              </p>
+            </div>
 
-            <Button
-              variant="contained"
-              size="large"
-              startIcon={<Add />}
+            <ElectricButton
+              variant="default"
+              size="lg"
               onClick={onCreateDocument}
-              sx={{
-                borderRadius: 20,
-                px: 4,
-                py: 1.5,
-                fontSize: '1.1rem',
-                fontWeight: 600,
-              }}
+              className="px-8 py-3"
             >
+              <Add className="mr-2" />
               Create Your First Document
-            </Button>
+            </ElectricButton>
 
-            <Box sx={{ mt: 4, pt: 4, borderTop: 1, borderColor: 'divider' }}>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                What you can create:
-              </Typography>
-              <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap">
-                <Chip label="AI Resume" size="small" />
-                <Chip label="Cover Letter" size="small" />
-                <Chip label="Selection Criteria" size="small" />
-              </Stack>
-            </Box>
-          </Paper>
-        </Box>
-      </Container>
+            <div className="mt-8 pt-8 border-t border-outline-variant">
+              <p className="text-ai text-outline mb-3">What you can create:</p>
+              <div className="flex flex-row gap-2 justify-center flex-wrap">
+                <ElectricBadge variant="secondary">AI Resume</ElectricBadge>
+                <ElectricBadge variant="secondary">Cover Letter</ElectricBadge>
+                <ElectricBadge variant="secondary">Selection Criteria</ElectricBadge>
+              </div>
+            </div>
+          </ElectricCard>
+        </div>
+      </ElectricContainer>
     );
   }
 
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
-      {/* Header */}
-      <Box sx={{ mb: 4 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Typography variant="h4" fontWeight={600}>
-            Dashboard
-          </Typography>
-          <Button
-            variant="contained"
-            startIcon={<Add />}
-            onClick={onCreateDocument}
-            sx={{ borderRadius: 20 }}
-          >
-            Create Document
-          </Button>
-        </Box>
-        <Typography variant="body1" color="text.secondary">
-          Manage your profiles and track your job application progress
-        </Typography>
-      </Box>
+    <ElectricContainer size="2xl">
+      <div className="py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-hero text-hero-sm">Dashboard</h1>
+            <ElectricButton variant="default" onClick={onCreateDocument}>
+              <Add className="mr-2" />
+              Create Document
+            </ElectricButton>
+          </div>
+          <p className="text-ai text-outline">
+            Manage your profiles and track your job application progress
+          </p>
+        </div>
 
-      {/* Stats Cards */}
-      <GridCompat container spacing={3} sx={{ mb: 4 }}>
-        <GridCompat xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Description color="primary" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  3
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Active Profiles
-              </Typography>
-            </CardContent>
-          </Card>
-        </GridCompat>
+        {/* Stats Cards */}
+        <ElectricGrid cols={4} gap="md" className="mb-8">
+          <ElectricCard variant="default">
+            <div className="flex items-center mb-4">
+              <Description sx={{ color: '#D0BCFF', mr: 1 }} />
+              <h2 className="text-hero text-hero-xs">3</h2>
+            </div>
+            <p className="text-ai text-outline">Active Profiles</p>
+          </ElectricCard>
 
-        <GridCompat xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Work color="success" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  8
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Applications
-              </Typography>
-            </CardContent>
-          </Card>
-        </GridCompat>
+          <ElectricCard variant="default">
+            <div className="flex items-center mb-4">
+              <Work sx={{ color: '#81C784', mr: 1 }} />
+              <h2 className="text-hero text-hero-xs">8</h2>
+            </div>
+            <p className="text-ai text-outline">Applications</p>
+          </ElectricCard>
 
-        <GridCompat xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Speed color="warning" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  85%
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Avg ATS Score
-              </Typography>
-            </CardContent>
-          </Card>
-        </GridCompat>
+          <ElectricCard variant="default">
+            <div className="flex items-center mb-4">
+              <Speed sx={{ color: '#FFB74D', mr: 1 }} />
+              <h2 className="text-hero text-hero-xs">85%</h2>
+            </div>
+            <p className="text-ai text-outline">Avg ATS Score</p>
+          </ElectricCard>
 
-        <GridCompat xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <TrendingUp color="info" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  12%
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Response Rate
-              </Typography>
-            </CardContent>
-          </Card>
-        </GridCompat>
-      </GridCompat>
+          <ElectricCard variant="default">
+            <div className="flex items-center mb-4">
+              <TrendingUp sx={{ color: '#64B5F6', mr: 1 }} />
+              <h2 className="text-hero text-hero-xs">12%</h2>
+            </div>
+            <p className="text-ai text-outline">Response Rate</p>
+          </ElectricCard>
+        </ElectricGrid>
 
-      <GridCompat container spacing={4}>
-        {/* Profiles Section */}
-        <GridCompat xs={12} lg={8}>
-          <Paper elevation={0} sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
-            <Box
-              sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}
-            >
-              <Typography variant="h6" fontWeight={600}>
-                Your Profiles
-              </Typography>
-              <Button size="small" startIcon={<Analytics />} sx={{ borderRadius: 20 }}>
-                View Analytics
-              </Button>
-            </Box>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Profiles Section */}
+          <div className="lg:col-span-2">
+            <ElectricCard variant="default" className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-hero text-hero-xs">Your Profiles</h2>
+                <ElectricButton variant="outline" size="sm">
+                  <Analytics className="mr-2" />
+                  View Analytics
+                </ElectricButton>
+              </div>
 
-            <GridCompat container spacing={2}>
-              {profiles.map((profile) => (
-                <GridCompat xs={12} md={6} key={profile.id}>
-                  <Card
-                    elevation={0}
-                    sx={{
-                      border: 1,
-                      borderColor: 'divider',
-                      borderRadius: 2,
-                      transition: 'all 0.2s',
-                      '&:hover': {
-                        borderColor: 'primary.main',
-                        transform: 'translateY(-2px)',
-                        boxShadow: 1,
-                      },
-                    }}
+              <ElectricGrid cols={2} gap="md">
+                {profiles.map((profile) => (
+                  <ElectricCard
+                    key={profile.id}
+                    variant="default"
+                    interactive
+                    className="transition-all duration-200 hover:border-primary"
                   >
-                    <CardContent>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'start',
-                          mb: 2,
-                        }}
-                      >
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                          <Avatar
-                            sx={{
-                              bgcolor: 'primary.main',
-                              width: 40,
-                              height: 40,
-                              mr: 2,
-                              fontSize: '1rem',
-                            }}
-                          >
-                            {profile.name.charAt(0)}
-                          </Avatar>
-                          <Box>
-                            <Typography variant="subtitle1" fontWeight={600}>
-                              {profile.name}
-                            </Typography>
-                            <Typography variant="body2" color="text.secondary">
-                              {profile.role}
-                            </Typography>
-                          </Box>
-                        </Box>
-                        <IconButton size="small" onClick={(e) => handleMenuOpen(e, profile)}>
-                          <MoreVert />
-                        </IconButton>
-                      </Box>
-
-                      <Box sx={{ mb: 2 }}>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-                          <Typography variant="body2" color="text.secondary">
-                            ATS Score
-                          </Typography>
-                          <Typography variant="body2" fontWeight={600}>
-                            {profile.atsScore}%
-                          </Typography>
-                        </Box>
-                        <LinearProgress
-                          variant="determinate"
-                          value={profile.atsScore}
-                          sx={{
-                            height: 6,
-                            borderRadius: 3,
-                            bgcolor: 'action.hover',
-                          }}
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex items-center">
+                        <ElectricAvatar
+                          size="md"
+                          fallback={profile.name.charAt(0)}
+                          className="mr-3"
                         />
-                      </Box>
-
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                        }}
+                        <div>
+                          <h3 className="text-ai font-semibold">{profile.name}</h3>
+                          <p className="text-ai text-outline text-sm">{profile.role}</p>
+                        </div>
+                      </div>
+                      <ElectricButton
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => handleMenuOpen(e, profile)}
                       >
-                        <Chip
-                          label={profile.status}
-                          size="small"
-                          color={getStatusColor(profile.status)}
-                          sx={{ textTransform: 'capitalize' }}
-                        />
-                        <Stack direction="row" spacing={1} alignItems="center">
-                          <Typography variant="caption" color="text.secondary">
-                            {profile.applications} apps
-                          </Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            Updated {profile.lastUpdated}
-                          </Typography>
-                        </Stack>
-                      </Box>
-                    </CardContent>
-                  </Card>
-                </GridCompat>
-              ))}
-            </GridCompat>
-          </Paper>
-        </GridCompat>
+                        <MoreVert />
+                      </ElectricButton>
+                    </div>
 
-        {/* Recent Activity */}
-        <GridCompat xs={12} lg={4}>
-          <Paper elevation={0} sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 2 }}>
-            <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
-              Recent Activity
-            </Typography>
+                    <div className="mb-4">
+                      <div className="flex justify-between mb-2">
+                        <span className="text-ai text-outline text-sm">ATS Score</span>
+                        <span className="text-ai font-semibold text-sm">{profile.atsScore}%</span>
+                      </div>
+                      <ElectricProgress value={profile.atsScore} max={100} />
+                    </div>
 
-            <List disablePadding>
-              {recentActivity.map((activity, index) => (
-                <React.Fragment key={activity.id}>
-                  <ListItem disablePadding sx={{ mb: 2 }}>
-                    <ListItemIcon sx={{ minWidth: 40 }}>
-                      {getActivityIcon(activity.status)}
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={activity.action}
-                      secondary={
-                        <Box>
-                          <Typography variant="body2" color="text.secondary">
-                            {activity.document}
-                          </Typography>
-                          <Typography variant="caption" color="text.secondary">
-                            {activity.timestamp}
-                          </Typography>
-                        </Box>
-                      }
-                    />
-                  </ListItem>
-                  {index < recentActivity.length - 1 && <Divider sx={{ my: 1 }} />}
-                </React.Fragment>
-              ))}
-            </List>
+                    <div className="flex justify-between items-center">
+                      <ElectricBadge
+                        variant={getStatusVariant(profile.status)}
+                        className="capitalize"
+                      >
+                        {profile.status}
+                      </ElectricBadge>
+                      <div className="flex gap-3 items-center">
+                        <span className="text-data text-sm">{profile.applications} apps</span>
+                        <span className="text-data text-sm">Updated {profile.lastUpdated}</span>
+                      </div>
+                    </div>
+                  </ElectricCard>
+                ))}
+              </ElectricGrid>
+            </ElectricCard>
+          </div>
 
-            <Button fullWidth variant="outlined" size="small" sx={{ mt: 2, borderRadius: 20 }}>
-              View All Activity
-            </Button>
-          </Paper>
+          {/* Recent Activity & Quick Actions */}
+          <div className="flex flex-col gap-6">
+            {/* Recent Activity */}
+            <ElectricCard variant="default" className="p-6">
+              <h2 className="text-hero text-hero-xs mb-6">Recent Activity</h2>
 
-          {/* Quick Actions */}
-          <Paper
-            elevation={0}
-            sx={{ p: 3, border: 1, borderColor: 'divider', borderRadius: 2, mt: 3 }}
-          >
-            <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
-              Quick Actions
-            </Typography>
+              <div className="flex flex-col">
+                {recentActivity.map((activity, index) => (
+                  <React.Fragment key={activity.id}>
+                    <div className="flex gap-4 py-3">
+                      <div className="min-w-[40px]">{getActivityIcon(activity.status)}</div>
+                      <div className="flex-1">
+                        <p className="text-ai font-medium mb-1">{activity.action}</p>
+                        <p className="text-ai text-outline text-sm mb-1">{activity.document}</p>
+                        <span className="text-data text-sm">{activity.timestamp}</span>
+                      </div>
+                    </div>
+                    {index < recentActivity.length - 1 && (
+                      <ElectricDivider className="my-2" />
+                    )}
+                  </React.Fragment>
+                ))}
+              </div>
 
-            <Stack spacing={2}>
-              <Button
-                fullWidth
-                variant="outlined"
-                startIcon={<Add />}
-                sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
-                onClick={onCreateDocument}
+              <ElectricButton variant="outline" size="sm" className="w-full mt-4">
+                View All Activity
+              </ElectricButton>
+            </ElectricCard>
+
+            {/* Quick Actions */}
+            <ElectricCard variant="default" className="p-6">
+              <h2 className="text-hero text-hero-xs mb-6">Quick Actions</h2>
+
+              <div className="flex flex-col gap-3">
+                <ElectricButton
+                  variant="outline"
+                  size="md"
+                  onClick={onCreateDocument}
+                  className="w-full justify-start"
+                >
+                  <Add className="mr-2" />
+                  Create New Document
+                </ElectricButton>
+                <ElectricButton variant="outline" size="md" className="w-full justify-start">
+                  <Analytics className="mr-2" />
+                  Run ATS Analysis
+                </ElectricButton>
+                <ElectricButton variant="outline" size="md" className="w-full justify-start">
+                  <Work className="mr-2" />
+                  Find Job Opportunities
+                </ElectricButton>
+              </div>
+            </ElectricCard>
+          </div>
+        </div>
+        {/* Profile Menu */}
+        <ElectricPopover
+          trigger={<div />}
+          content={
+            <div className="flex flex-col gap-2 min-w-[200px]">
+              <button
+                onClick={() => {
+                  handleMenuClose();
+                  onEditProfile?.(selectedProfile!);
+                }}
+                className="flex items-center gap-3 px-4 py-2 text-ai hover:bg-surface-container transition-colors rounded-sm"
               >
-                Create New Document
-              </Button>
-              <Button
-                fullWidth
-                variant="outlined"
-                startIcon={<Analytics />}
-                sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
+                <Edit sx={{ fontSize: 20 }} />
+                Edit Profile
+              </button>
+              <button
+                onClick={handleMenuClose}
+                className="flex items-center gap-3 px-4 py-2 text-ai hover:bg-surface-container transition-colors rounded-sm"
               >
-                Run ATS Analysis
-              </Button>
-              <Button
-                fullWidth
-                variant="outlined"
-                startIcon={<Work />}
-                sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
+                <Download sx={{ fontSize: 20 }} />
+                Download
+              </button>
+              <button
+                onClick={handleMenuClose}
+                className="flex items-center gap-3 px-4 py-2 text-ai hover:bg-surface-container transition-colors rounded-sm"
               >
-                Find Job Opportunities
-              </Button>
-            </Stack>
-          </Paper>
-        </GridCompat>
-      </GridCompat>
-      {/* Profile Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem
-          onClick={() => {
-            handleMenuClose();
-            onEditProfile?.(selectedProfile!);
+                <Share sx={{ fontSize: 20 }} />
+                Share
+              </button>
+              <ElectricDivider className="my-1" />
+              <button
+                onClick={handleMenuClose}
+                className="flex items-center gap-3 px-4 py-2 text-ai text-red-400 hover:bg-surface-container transition-colors rounded-sm"
+              >
+                <Delete sx={{ fontSize: 20 }} />
+                Delete
+              </button>
+            </div>
+          }
+          open={Boolean(anchorEl)}
+          onOpenChange={(isOpen) => {
+            if (!isOpen) handleMenuClose();
           }}
-        >
-          <Edit sx={{ mr: 1.5 }} />
-          Edit Profile
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Download sx={{ mr: 1.5 }} />
-          Download
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Share sx={{ mr: 1.5 }} />
-          Share
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleMenuClose} sx={{ color: 'error.main' }}>
-          <Delete sx={{ mr: 1.5 }} />
-          Delete
-        </MenuItem>
-      </Menu>
-    </Container>
+        />
+      </div>
+    </ElectricContainer>
   );
 }
