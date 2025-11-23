@@ -1,4 +1,5 @@
 from datetime import datetime
+from enum import Enum
 from typing import List, Literal, Optional, Dict, Any
 
 from pydantic import BaseModel, Field, HttpUrl
@@ -10,16 +11,14 @@ class DocumentReferences(BaseModel):
     ksc_id: Optional[str] = Field(None, alias="kscId")
 
 
-class ApplicationStatus(str, Literal[
-    "draft",
-    "applied",
-    "interviewing",
-    "offer",
-    "rejected",
-    "withdrawn",
-    "archived",
-]):
-    pass
+class ApplicationStatus(str, Enum):
+    DRAFT = "draft"
+    APPLIED = "applied"
+    INTERVIEWING = "interviewing"
+    OFFER = "offer"
+    REJECTED = "rejected"
+    WITHDRAWN = "withdrawn"
+    ARCHIVED = "archived"
 
 
 class Contact(BaseModel):

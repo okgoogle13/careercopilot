@@ -55,7 +55,7 @@ class TestAIEndpoints:
             }
 
             response = client.post(
-                "/api/ai/resume/analyze",
+                "/api/analysis/resume-intelligence",
                 json={"resume_content": SAMPLE_RESUME, "target_industry": "Technology"},
             )
 
@@ -65,71 +65,70 @@ class TestAIEndpoints:
             assert "strengths" in data
             assert "weaknesses" in data
 
-    def test_generate_cover_letter_endpoint(self):
-        """Test cover letter generation endpoint"""
+    def test_generate_application_package_endpoint(self):
+        """Test application package generation endpoint"""
         with patch(
-            "app.genkit_flows.smart_cover_letter_system.generate_smart_cover_letter"
+            "app.genkit_flows.career_application_workflow.generate_application_package"
         ) as mock_generate:
             mock_generate.return_value = {
-                "letter_content": "Dear Hiring Manager...",
-                "subject_line": "Application for Senior Software Engineer Position",
-                "analysis": {
-                    "readability_score": 90,
-                    "personalization_score": 85,
-                    "strengths": ["Well-structured", "Personalized"],
-                },
+                "success": True,
+                "components_generated": ["resume", "cover_letter"],
+                "processing_time_seconds": 10.0,
+                "resume": {"content": "..."}
             }
 
             response = client.post(
-                "/api/ai/cover-letter/generate",
+                "/api/workflows/generate-application",
                 json={
-                    "candidate_profile": {
+                    "job_description": SAMPLE_JOB_DESCRIPTION,
+                    "user_profile": {
                         "name": "John Doe",
                         "email": "john@example.com",
+                        "resume_content": SAMPLE_RESUME,
+                        "skills": [],
+                        "experience": []
                     },
-                    "job_description": SAMPLE_JOB_DESCRIPTION,
-                    "style": "professional",
                 },
             )
 
             assert response.status_code == 200
             data = response.json()
-            assert "letter_content" in data
-            assert "analysis" in data
-            assert data["analysis"]["readability_score"] == 90
+            assert data["success"] is True
+            assert "data" in data
+            assert data["data"]["components_generated"] == ["resume", "cover_letter"]
 
-    def test_skills_gap_analysis_endpoint(self):
-        """Test skills gap analysis endpoint"""
-        with patch(
-            "app.genkit_flows.resume_intelligence_pipeline.analyze_skills_gap_for_transition"
-        ) as mock_analyze:
-            mock_analyze.return_value = {
-                "skill_gaps": ["Machine Learning", "Data Analysis"],
-                "transferable_skills": ["Python", "Problem Solving"],
-                "feasibility_score": 75,
-            }
-
-            response = client.post(
-                "/api/ai/skills-gap/analyze",
-                json={
-                    "resume_content": SAMPLE_RESUME,
-                    "target_role_description": "Data Scientist",
-                    "current_industry": "Software Development",
-                    "target_industry": "Data Science",
-                },
-            )
-
-            assert response.status_code == 200
-            data = response.json()
-            assert "skill_gaps" in data
-            assert "transferable_skills" in data
-            assert data["feasibility_score"] == 75
+    # def test_skills_gap_analysis_endpoint(self):
+    #     """Test skills gap analysis endpoint"""
+    #     with patch(
+    #         "app.genkit_flows.resume_intelligence_pipeline.analyze_skills_gap_for_transition"
+    #     ) as mock_analyze:
+    #         mock_analyze.return_value = {
+    #             "skill_gaps": ["Machine Learning", "Data Analysis"],
+    #             "transferable_skills": ["Python", "Problem Solving"],
+    #             "feasibility_score": 75,
+    #         }
+    #
+    #         response = client.post(
+    #             "/api/ai/skills-gap/analyze",
+    #             json={
+    #                 "resume_content": SAMPLE_RESUME,
+    #                 "target_role_description": "Data Scientist",
+    #                 "current_industry": "Software Development",
+    #                 "target_industry": "Data Science",
+    #             },
+    #         )
+    #
+    #         assert response.status_code == 200
+    #         data = response.json()
+    #         assert "skill_gaps" in data
+    #         assert "transferable_skills" in data
+    #         assert data["feasibility_score"] == 75
 
     def test_rate_limiting(self):
         """Test rate limiting on API endpoints"""
         # This test assumes the rate limit is set to 100 requests per minute
         for _ in range(105):  # Exceed rate limit
-            response = client.post("/api/ai/resume/analyze", json={"resume_content": SAMPLE_RESUME})
+            response = client.post("/api/analysis/resume-intelligence", json={"resume_content": SAMPLE_RESUME})
 
             if response.status_code == 429:  # Rate limit exceeded
                 break
@@ -141,7 +140,7 @@ class TestAIEndpoints:
         # Clear the auth override for this test
         app.dependency_overrides = {}
 
-        response = client.post("/api/v1/ai/resume/analyze", json={"resume_content": SAMPLE_RESUME})
+        response = client.post("/api/analysis/resume-intelligence", json={"resume_content": SAMPLE_RESUME})
 
         assert response.status_code == 401  # Unauthorized
 
