@@ -1,0 +1,29 @@
+/**
+ * M3 Expressive Label Styles
+ */
+
+.m3-label {
+  /* Typography */
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-bodyMedium-line-height);
+  letter-spacing: var(--md-sys-typescale-bodyMedium-tracking);
+  color: var(--md-sys-color-on-surface);
+
+  /* Layout */
+  display: inline-block;
+  margin-bottom: var(--md-sys-spacing-2);
+  cursor: pointer;
+}
+
+.m3-label__required {
+  color: var(--md-sys-color-error-50);
+  margin-left: var(--md-sys-spacing-1);
+}
+
+.m3-label--disabled {
+  color: var(--md-sys-color-on-surface);
+  opacity: 0.38;
+  cursor: not-allowed;
+}
