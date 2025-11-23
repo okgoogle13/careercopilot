@@ -31,7 +31,7 @@
     "command": "npx",
     "args": ["-y", "@your_preferred_perplexity_wrapper"],
     "env": {
-      "PERPLEXITY_API_KEY": "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"
+      "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
     }
   }
   ```
