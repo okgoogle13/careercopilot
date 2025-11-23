@@ -1,27 +1,28 @@
 /**
  * Register Page
  * New user registration page with email, password, and display name
+ * Migrated to Electric Alchemist Design System v4.2
  */
 
-import {
-  Box,
-  Container,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-  CircularProgress,
-  Link,
-} from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
+import { ariaLabels, announceToScreenReader } from '../utils/accessibility';
+import {
+  ElectricContainer,
+  ElectricCard,
+  ElectricInput,
+  ElectricButton,
+  ElectricAlert,
+  ElectricSkeleton,
+} from '../components/electric';
 
 export const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const { register, isLoading } = useAuth();
+  const formRef = useRef<HTMLFormElement>(null);
+  const errorRef = useRef<HTMLDivElement>(null);
 
   const [formData, setFormData] = useState({
     displayName: '',
@@ -30,6 +31,20 @@ export const RegisterPage: React.FC = () => {
     confirmPassword: '',
   });
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{
+    displayName?: string;
+    email?: string;
+    password?: string;
+    confirmPassword?: string;
+  }>({});
+
+  // Focus on error when it appears
+  useEffect(() => {
+    if (error) {
+      errorRef.current?.focus();
+      announceToScreenReader(`Error: ${error}`, 'assertive');
+    }
+  }, [error]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -38,168 +53,249 @@ export const RegisterPage: React.FC = () => {
       [name]: value,
     }));
     setError(null);
+    // Clear field error
+    setFieldErrors((prev) => ({
+      ...prev,
+      [name]: undefined,
+    }));
+  };
+
+  const validateForm = (): boolean => {
+    const errors: {
+      displayName?: string;
+      email?: string;
+      password?: string;
+      confirmPassword?: string;
+    } = {};
+
+    if (!formData.displayName) {
+      errors.displayName = 'Display name is required';
+    }
+
+    if (!formData.email) {
+      errors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.password) {
+      errors.password = 'Password is required';
+    } else if (formData.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters';
+    }
+
+    if (!formData.confirmPassword) {
+      errors.confirmPassword = 'Please confirm your password';
+    } else if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
+    }
+
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
-    // Validation
-    if (!formData.displayName || !formData.email || !formData.password) {
-      setError('All fields are required');
-      return;
-    }
-
-    if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters');
-      return;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+    if (!validateForm()) {
+      announceToScreenReader('Form validation failed. Please check your entries.', 'assertive');
       return;
     }
 
     try {
       await register(formData.email, formData.password, formData.displayName);
+      announceToScreenReader('Registration successful. Redirecting to dashboard...', 'polite');
       navigate('/dashboard', { replace: true });
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      const errorMessage = err.response?.data?.message || 'Registration failed. Please try again.';
+      setError(errorMessage);
     }
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '100vh',
-          py: 4,
-        }}
-      >
-        <Paper
-          elevation={3}
-          sx={{
-            p: 4,
-            width: '100%',
-            maxWidth: 400,
-            backgroundColor: '#1A1A1A',
-          }}
+    <ElectricContainer size="sm">
+      <div className="flex flex-col justify-center items-center min-h-screen py-8">
+        <ElectricCard
+          variant="default"
+          className="w-full max-w-md"
+          component="main"
         >
-          <Typography
-            variant="h4"
-            component="h1"
-            sx={{
-              mb: 1,
-              fontWeight: 700,
-              color: '#FFFFFF',
-              textAlign: 'center',
-            }}
-          >
+          {/* Header */}
+          <h1 className="text-hero text-center mb-2">
             Career Copilot
-          </Typography>
-          <Typography
-            variant="body2"
-            sx={{
-              mb: 3,
-              color: '#B3B3B3',
-              textAlign: 'center',
-            }}
-          >
+          </h1>
+          <p className="text-ai text-center mb-6 text-outline">
             Create your account
-          </Typography>
+          </p>
 
+          {/* Error Alert */}
           {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {error}
-            </Alert>
+            <div ref={errorRef} tabIndex={-1}>
+              <ElectricAlert
+                variant="error"
+                className="mb-4"
+                role="alert"
+                aria-live="assertive"
+              >
+                {error}
+              </ElectricAlert>
+            </div>
           )}
 
-          <Box
-            component="form"
+          {/* Registration Form */}
+          <form
+            ref={formRef}
             onSubmit={handleSubmit}
-            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+            className="flex flex-col gap-4"
+            noValidate
+            aria-label="Registration form"
           >
-            <TextField
-              fullWidth
-              label="Display Name"
-              name="displayName"
-              value={formData.displayName}
-              onChange={handleChange}
-              placeholder="John Doe"
-              disabled={isLoading}
-              autoComplete="name"
-            />
+            {/* Display Name Input */}
+            <div>
+              <label htmlFor="displayName" className="block text-ai mb-2">
+                Display Name
+              </label>
+              <ElectricInput
+                id="displayName"
+                name="displayName"
+                type="text"
+                value={formData.displayName}
+                onChange={handleChange}
+                placeholder="John Doe"
+                disabled={isLoading}
+                autoComplete="name"
+                required
+                variant={fieldErrors.displayName ? 'error' : 'default'}
+                aria-required="true"
+                aria-invalid={Boolean(fieldErrors.displayName)}
+                aria-describedby={fieldErrors.displayName ? 'displayName-error' : undefined}
+                className="w-full"
+              />
+              {fieldErrors.displayName && (
+                <p id="displayName-error" className="text-red-400 text-sm mt-1">
+                  {fieldErrors.displayName}
+                </p>
+              )}
+            </div>
 
-            <TextField
-              fullWidth
-              label="Email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              disabled={isLoading}
-              autoComplete="email"
-            />
+            {/* Email Input */}
+            <div>
+              <label htmlFor="email" className="block text-ai mb-2">
+                Email
+              </label>
+              <ElectricInput
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="you@example.com"
+                disabled={isLoading}
+                autoComplete="email"
+                required
+                variant={fieldErrors.email ? 'error' : 'default'}
+                aria-required="true"
+                aria-invalid={Boolean(fieldErrors.email)}
+                aria-describedby={fieldErrors.email ? 'email-error' : undefined}
+                className="w-full"
+              />
+              {fieldErrors.email && (
+                <p id="email-error" className="text-red-400 text-sm mt-1">
+                  {fieldErrors.email}
+                </p>
+              )}
+            </div>
 
-            <TextField
-              fullWidth
-              label="Password"
-              name="password"
-              type="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="At least 8 characters"
-              disabled={isLoading}
-              autoComplete="new-password"
-            />
+            {/* Password Input */}
+            <div>
+              <label htmlFor="password" className="block text-ai mb-2">
+                Password
+              </label>
+              <ElectricInput
+                id="password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="At least 8 characters"
+                disabled={isLoading}
+                autoComplete="new-password"
+                required
+                variant={fieldErrors.password ? 'error' : 'default'}
+                aria-required="true"
+                aria-invalid={Boolean(fieldErrors.password)}
+                aria-describedby={fieldErrors.password ? 'password-error' : undefined}
+                className="w-full"
+              />
+              {fieldErrors.password && (
+                <p id="password-error" className="text-red-400 text-sm mt-1">
+                  {fieldErrors.password}
+                </p>
+              )}
+            </div>
 
-            <TextField
-              fullWidth
-              label="Confirm Password"
-              name="confirmPassword"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              disabled={isLoading}
-              autoComplete="new-password"
-            />
+            {/* Confirm Password Input */}
+            <div>
+              <label htmlFor="confirmPassword" className="block text-ai mb-2">
+                Confirm Password
+              </label>
+              <ElectricInput
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Re-enter your password"
+                disabled={isLoading}
+                autoComplete="new-password"
+                required
+                variant={fieldErrors.confirmPassword ? 'error' : 'default'}
+                aria-required="true"
+                aria-invalid={Boolean(fieldErrors.confirmPassword)}
+                aria-describedby={fieldErrors.confirmPassword ? 'confirmPassword-error' : undefined}
+                className="w-full"
+              />
+              {fieldErrors.confirmPassword && (
+                <p id="confirmPassword-error" className="text-red-400 text-sm mt-1">
+                  {fieldErrors.confirmPassword}
+                </p>
+              )}
+            </div>
 
-            <Button
-              fullWidth
-              variant="contained"
-              color="primary"
+            {/* Submit Button */}
+            <ElectricButton
+              variant="default"
+              size="lg"
               type="submit"
               disabled={isLoading}
-              sx={{
-                py: 1.5,
-                mt: 1,
-              }}
+              className="w-full mt-2"
+              aria-label="Create account"
             >
-              {isLoading ? <CircularProgress size={24} /> : 'Create Account'}
-            </Button>
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <ElectricSkeleton variant="circle" className="h-6 w-6" />
+                  Creating account...
+                </span>
+              ) : (
+                'Create Account'
+              )}
+            </ElectricButton>
 
-            <Typography variant="body2" sx={{ textAlign: 'center', color: '#B3B3B3' }}>
+            {/* Sign In Link */}
+            <p className="text-ai text-center text-outline mt-2">
               Already have an account?{' '}
-              <Link
-                component={RouterLink}
+              <RouterLink
                 to="/login"
-                sx={{
-                  color: '#A855F7',
-                  textDecoration: 'none',
-                  '&:hover': { textDecoration: 'underline' },
-                }}
+                className="text-tertiary hover:text-primary transition-colors"
+                aria-label="Navigate to sign in page"
               >
                 Sign in
-              </Link>
-            </Typography>
-          </Box>
-        </Paper>
-      </Box>
-    </Container>
+              </RouterLink>
+            </p>
+          </form>
+        </ElectricCard>
+      </div>
+    </ElectricContainer>
   );
 };
