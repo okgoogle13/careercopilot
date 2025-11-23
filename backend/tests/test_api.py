@@ -3,13 +3,9 @@ Comprehensive test cases for the FastAPI backend API endpoints.
 Includes edge cases, error conditions, and integration tests.
 """
 
-from datetime import timedelta
-
 import pytest
-from fastapi import status
 from fastapi.testclient import TestClient
 
-from app.core.security import create_access_token
 from app.main import app
 
 client = TestClient(app)
@@ -126,21 +122,4 @@ def test_protected_endpoints():
     assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
 
-@pytest.fixture(autouse=True)
-def cleanup():
-    """Clean up test data after each test."""
-    # Setup: runs before each test
-    test_user = {"email": TEST_USER["email"]}
 
-    yield
-
-    # Teardown: runs after each test
-    # Clean up test user from database
-    # Note: This assumes you have a way to clean up test data
-    # In a real application, you would use your database session
-    # to delete the test user
-    try:
-        # Example: db.users.delete_one({"email": test_user["email"]})
-        pass
-    except Exception as e:
-        print(f"Error during test cleanup: {e}")

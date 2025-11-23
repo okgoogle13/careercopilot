@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Roboto+Flex:opsz,wght,GRAD,XTRA,YTUC,YOPQ,YTAS,YTDE,YTFI,YTLC@8..144,100..900,-200..150,323..603,560..788,25..135,649..854,-305..-98,0..1,416..570&family=Roboto+Serif:opsz,wght,GRAD@8..144,100..900,-50..100&display=swap');
+
+/* Base Font Setup */
+:root {
+  /* Font Families */
+  --font-hologram: 'Nabla', system-ui, sans-serif;
+  --font-hero: 'Roboto Flex', system-ui, sans-serif;
+  --font-human: 'Roboto Serif', system-ui, serif;
+  --font-ai: 'Roboto Flex', system-ui, sans-serif;
+  --font-data: 'Roboto Flex', system-ui, monospace;
+}
+
+/* TIER 1: THE HOLOGRAM */
+.text-hologram {
+  font-family: var(--font-hologram);
+  font-variation-settings: 'FILL' 1, 'wght' 400;
+  color: var(--md-sys-color-primary);
+  text-shadow: 2px 2px 0 var(--md-sys-color-seed);
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* TIER 2: THE HERO */
+.text-hero {
+  font-family: var(--font-hero);
+  font-variation-settings: 'wdth' 150, 'wght' 800, 'YTUC' 760, 'opsz' 48, 'GRAD' 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* TIER 3: THE VOICE */
+/* Human Voice (Input) */
+.text-human {
+  font-family: var(--font-human);
+  font-variation-settings: 'wdth' 100, 'wght' 400, 'GRAD' -25;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* AI Voice (Output) */
+.text-ai {
+  font-family: var(--font-ai);
+  font-variation-settings: 'wdth' 92, 'wght' 450, 'opsz' 16, 'GRAD' 20;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* TIER 4: THE DATA */
+.text-data {
+  font-family: var(--font-data);
+  font-variation-settings: 'wdth' 110, 'wght' 500, 'opsz' 8, 'GRAD' 0;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  transition: font-variation-settings 0.2s ease;
+}
+
+.text-data:hover {
+  font-variation-settings: 'wdth' 110, 'wght' 600, 'opsz' 8, 'GRAD' 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .text-hero {
+    font-variation-settings: 'wdth' 130, 'wght' 700, 'YTUC' 700, 'opsz' 40, 'GRAD' 0;
+  }
+  
+  .text-human,
+  .text-ai {
+    font-size: 0.95em;
+  }
+}

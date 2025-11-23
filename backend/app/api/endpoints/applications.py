@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from google.cloud.firestore import CollectionReference, DocumentReference
 
 from app.core.db import db
-from app.core.security import get_current_user
+from app.core.dependencies import get_current_user
 from app.models.application_schemas import ApplicationCreate, ApplicationResponse
 from app.models.user import User
 

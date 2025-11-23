@@ -47,7 +47,8 @@ app = FastAPI(
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 # Set up Prometheus monitoring
-setup_prometheus_monitoring(app, environment=settings.ENV)
+if settings.ENV != "test":
+    setup_prometheus_monitoring(app, environment=settings.ENV)
 
 
 @app.on_event("startup")

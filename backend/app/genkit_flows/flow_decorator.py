@@ -16,11 +16,11 @@ from app.core.genkit_init import get_model, is_genkit_enabled, register_flow_fun
 
 # Try to import Genkit for decorators, with fallback, keeping a typed 'genkit' symbol
 try:
-    _genkit = importlib.import_module("genkit")
-    genkit = cast(Any, _genkit)
+    _genkit = importlib.import_module("genkit.python")
+    ai = cast(Any, _genkit)
     GENKIT_AVAILABLE = True
 except ImportError:
-    genkit = cast(Any, None)
+    ai = cast(Any, None)
     GENKIT_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
@@ -112,7 +112,7 @@ def genkit_flow(
             if output_schema:
                 genkit_decorator_kwargs["output_schema"] = output_schema
 
-            decorated_any = genkit.flow(**genkit_decorator_kwargs)(wrapper)
+            decorated_any = ai.flow(**genkit_decorator_kwargs)(wrapper)
             decorated_func = cast(Callable[P, R], decorated_any)
         else:
             decorated_func = wrapper
@@ -174,7 +174,7 @@ def async_genkit_flow(
             if output_schema:
                 genkit_decorator_kwargs["output_schema"] = output_schema
 
-            decorated_any = genkit.flow(**genkit_decorator_kwargs)(async_wrapper)
+            decorated_any = ai.flow(**genkit_decorator_kwargs)(async_wrapper)
             decorated_func = cast(Callable[P, Awaitable[R]], decorated_any)
         else:
             decorated_func = async_wrapper
