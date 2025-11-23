@@ -310,6 +310,30 @@ class AIConfigManager:
                 supports_streaming=True,
                 supports_function_calling=True,
             ),
+            "gemini-2.5-flash": ModelConfig(
+                name="gemini-2.5-flash",
+                provider=AIProvider.GOOGLE_AI,
+                model_type=AIModelType.TEXT_GENERATION,
+                model_id="gemini-2.5-flash",
+                max_tokens=8192,
+                temperature=0.7,
+                cost_per_1k_tokens={"input": 0.000037, "output": 0.00015},
+                context_window=1000000,
+                supports_streaming=True,
+                supports_function_calling=True,
+            ),
+            "gemini-2.0-flash": ModelConfig(
+                name="gemini-2.0-flash",
+                provider=AIProvider.GOOGLE_AI,
+                model_type=AIModelType.TEXT_GENERATION,
+                model_id="gemini-2.0-flash",
+                max_tokens=8192,
+                temperature=0.7,
+                cost_per_1k_tokens={"input": 0.000075, "output": 0.0003},
+                context_window=1000000,
+                supports_streaming=True,
+                supports_function_calling=True,
+            ),
             "gemini-2.0-flash-lite": ModelConfig(
                 name="gemini-2.0-flash-lite",
                 provider=AIProvider.GOOGLE_AI,
@@ -488,6 +512,8 @@ class AIConfigManager:
     def validate_configuration(self) -> List[str]:
         """Validate the current configuration and return any issues"""
         issues: List[str] = []
+        logger.info(f"Models: {self.models}")
+        logger.info(f"Credentials: {self.credentials}")
 
         # Check for missing required fields
         for model_name, model in self.models.items():
