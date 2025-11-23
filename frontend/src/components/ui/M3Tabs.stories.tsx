@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { M3Tooltip } from './M3Tooltip';
+import { M3Tabs } from './M3Tabs';
 
-const meta: Meta<typeof M3Tooltip> = {
-  title: 'M3/Feedback/Tooltip',
-  component: M3Tooltip,
+const meta: Meta<typeof M3Tabs> = {
+  title: 'M3/Buttons/Tabs',
+  component: M3Tabs,
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
-      options: ['filled', 'outlined', 'tonal'],
+      options: ['filled', 'tonal', 'outlined', 'text', 'elevated'],
     },
     color: {
       control: 'select',
@@ -22,22 +22,24 @@ const meta: Meta<typeof M3Tooltip> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof M3Tooltip>;
+type Story = StoryObj<typeof M3Tabs>;
 
 export const Primary: Story = {
   args: {
     variant: 'filled',
     color: 'primary',
-    children: 'Feedback Message',
+    children: 'Click Me',
   },
 };
 
 export const AllVariants: Story = {
   render: () => (
     <div style={ { display: 'flex', gap: '16px', flexWrap: 'wrap' } }>
-      <M3Tooltip variant="filled">Filled</M3Tooltip>
-      <M3Tooltip variant="outlined">Outlined</M3Tooltip>
-      <M3Tooltip variant="tonal">Tonal</M3Tooltip>
+      <M3Tabs variant="filled">Filled</M3Tabs>
+      <M3Tabs variant="tonal">Tonal</M3Tabs>
+      <M3Tabs variant="outlined">Outlined</M3Tabs>
+      <M3Tabs variant="text">Text</M3Tabs>
+      <M3Tabs variant="elevated">Elevated</M3Tabs>
     </div>
   ),
 };
@@ -45,10 +47,10 @@ export const AllVariants: Story = {
 export const AllColors: Story = {
   render: () => (
     <div style={ { display: 'flex', gap: '16px', flexWrap: 'wrap' } }>
-      <M3Tooltip color="primary">Primary</M3Tooltip>
-      <M3Tooltip color="secondary">Secondary</M3Tooltip>
-      <M3Tooltip color="tertiary">Tertiary</M3Tooltip>
-      <M3Tooltip color="error">Error</M3Tooltip>
+      <M3Tabs color="primary">Primary</M3Tabs>
+      <M3Tabs color="secondary">Secondary</M3Tabs>
+      <M3Tabs color="tertiary">Tertiary</M3Tabs>
+      <M3Tabs color="error">Error</M3Tabs>
     </div>
   ),
 };
@@ -56,9 +58,9 @@ export const AllColors: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div style={ { display: 'flex', gap: '16px', alignItems: 'center' } }>
-      <M3Tooltip size="small">Small</M3Tooltip>
-      <M3Tooltip size="medium">Medium</M3Tooltip>
-      <M3Tooltip size="large">Large</M3Tooltip>
+      <M3Tabs size="small">Small</M3Tabs>
+      <M3Tabs size="medium">Medium</M3Tabs>
+      <M3Tabs size="large">Large</M3Tabs>
     </div>
   ),
 };

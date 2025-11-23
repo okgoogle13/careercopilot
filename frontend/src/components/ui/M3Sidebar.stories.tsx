@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { M3Tooltip } from './M3Tooltip';
+import { M3Sidebar } from './M3Sidebar';
 
-const meta: Meta<typeof M3Tooltip> = {
-  title: 'M3/Feedback/Tooltip',
-  component: M3Tooltip,
+const meta: Meta<typeof M3Sidebar> = {
+  title: 'M3/Surfaces/Sidebar',
+  component: M3Sidebar,
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
-      options: ['filled', 'outlined', 'tonal'],
+      options: ['filled', 'elevated', 'outlined'],
     },
     color: {
       control: 'select',
@@ -22,22 +22,22 @@ const meta: Meta<typeof M3Tooltip> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof M3Tooltip>;
+type Story = StoryObj<typeof M3Sidebar>;
 
 export const Primary: Story = {
   args: {
     variant: 'filled',
     color: 'primary',
-    children: 'Feedback Message',
+    children: 'Card Content',
   },
 };
 
 export const AllVariants: Story = {
   render: () => (
     <div style={ { display: 'flex', gap: '16px', flexWrap: 'wrap' } }>
-      <M3Tooltip variant="filled">Filled</M3Tooltip>
-      <M3Tooltip variant="outlined">Outlined</M3Tooltip>
-      <M3Tooltip variant="tonal">Tonal</M3Tooltip>
+      <M3Sidebar variant="filled">Filled</M3Sidebar>
+      <M3Sidebar variant="elevated">Elevated</M3Sidebar>
+      <M3Sidebar variant="outlined">Outlined</M3Sidebar>
     </div>
   ),
 };
@@ -45,10 +45,10 @@ export const AllVariants: Story = {
 export const AllColors: Story = {
   render: () => (
     <div style={ { display: 'flex', gap: '16px', flexWrap: 'wrap' } }>
-      <M3Tooltip color="primary">Primary</M3Tooltip>
-      <M3Tooltip color="secondary">Secondary</M3Tooltip>
-      <M3Tooltip color="tertiary">Tertiary</M3Tooltip>
-      <M3Tooltip color="error">Error</M3Tooltip>
+      <M3Sidebar color="primary">Primary</M3Sidebar>
+      <M3Sidebar color="secondary">Secondary</M3Sidebar>
+      <M3Sidebar color="tertiary">Tertiary</M3Sidebar>
+      <M3Sidebar color="error">Error</M3Sidebar>
     </div>
   ),
 };
@@ -56,9 +56,9 @@ export const AllColors: Story = {
 export const AllSizes: Story = {
   render: () => (
     <div style={ { display: 'flex', gap: '16px', alignItems: 'center' } }>
-      <M3Tooltip size="small">Small</M3Tooltip>
-      <M3Tooltip size="medium">Medium</M3Tooltip>
-      <M3Tooltip size="large">Large</M3Tooltip>
+      <M3Sidebar size="small">Small</M3Sidebar>
+      <M3Sidebar size="medium">Medium</M3Sidebar>
+      <M3Sidebar size="large">Large</M3Sidebar>
     </div>
   ),
 };
