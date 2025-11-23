@@ -1,0 +1,324 @@
+/**
+ * ELECTRIC ALCHEMIST: GLOBAL STYLES
+ * Version: 4.2 - "Solid State Expressive"
+ *
+ * This file contains:
+ * - Global resets and base styles
+ * - The Deep Violet Void background (#141218)
+ * - Radial Dot Grid texture
+ * - Noise overlay implementation
+ * - Cascade rules for the Electric Alchemist system
+ */
+
+/* ============================================================================
+   IMPORTS
+   ============================================================================ */
+@import '../theme/typography.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+/* ============================================================================
+   GLOBAL RESETS & BASE STYLES
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Prevent font size inflation on mobile */
+  -webkit-text-size-adjust: 100%;
+  /* Enable smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Typography */
+  font-family: var(--font-ai);
+  font-variation-settings: var(--type-ai-axes);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--md-sys-color-primary);
+
+  /* Background: The Deep Violet Void */
+  background-color: var(--md-sys-color-surface);
+
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+
+  /* Font smoothing */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================================ */
+
+:root {
+  /* Colors - Deep Violet Void Palette */
+  --md-sys-color-surface: #141218;
+  --md-sys-color-surface-container-low: #1D1B20;
+  --md-sys-color-surface-container: #211F26;
+  --md-sys-color-surface-container-high: #2B2930;
+
+  --md-sys-color-primary: #D0BCFF;
+  --md-sys-color-primary-container: #EADDFF;
+  --md-sys-color-on-primary-container: #21005D;
+
+  --md-sys-color-tertiary: #EFB8C8;
+  --md-sys-color-tertiary-container: #FFD8E4;
+  --md-sys-color-on-tertiary: #492532;
+
+  --md-sys-color-outline: #938F99;
+  --md-sys-color-outline-variant: #49454F;
+
+  --md-sys-color-seed-shadow: #6750A4;
+}
+
+
+/* ============================================================================
+   THE ARCHITECTURAL SHELL (Global Background)
+   ============================================================================ */
+
+.architectural-shell,
+#root {
+  /* The Void */
+  background-color: var(--md-sys-color-surface);
+
+  /* Technical Dot Matrix */
+  background-image: radial-gradient(
+    var(--md-sys-color-outline-variant) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 24px 24px;
+
+  /* Full viewport */
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+
+  /* Position for noise overlay */
+  position: relative;
+}
+
+
+/* ============================================================================
+   GLOBAL NOISE OVERLAY
+   ============================================================================ */
+
+.architectural-shell::before,
+#root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+
+  /* Fractal Noise via SVG data URI */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+
+  /* Opacity: 3-5% for subtle friction */
+  opacity: 0.04;
+
+  /* Blend mode for "overlay" effect */
+  mix-blend-mode: overlay;
+
+  /* Don't interfere with mouse events */
+  pointer-events: none;
+}
+
+/* Ensure content sits above noise */
+.architectural-shell > *,
+#root > * {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ============================================================================
+   TYPOGRAPHY DEFAULTS (Cascade Rules)
+   ============================================================================ */
+
+/* Headings use Hero tier by default */
+h1, h2, h3 {
+  font-family: var(--font-hero);
+  font-variation-settings: var(--type-hero-axes);
+  text-transform: uppercase;
+  color: var(--md-sys-color-primary-container);
+}
+
+h1 {
+  font-size: 4rem; /* 64px */
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 3rem; /* 48px */
+  line-height: 1.15;
+}
+
+h3 {
+  font-size: 2rem; /* 32px */
+  line-height: 1.2;
+}
+
+/* Paragraphs use Human tier */
+p {
+  font-family: var(--font-human);
+  font-variation-settings: var(--type-human-axes);
+  color: var(--md-sys-color-primary);
+  margin-bottom: 1rem;
+}
+
+/* Code, pre, kbd use Data tier */
+code, pre, kbd {
+  font-family: var(--font-data);
+  font-variation-settings: var(--type-data-axes);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Links */
+a {
+  color: var(--md-sys-color-tertiary);
+  text-decoration: none;
+  transition: color 150ms ease-out;
+}
+
+a:hover {
+  color: var(--md-sys-color-primary-container);
+}
+
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+/* Bento Card Base */
+.bento-card {
+  background-color: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: 28px;
+  padding: 24px;
+  padding-top: 48px; /* Extra top padding for Pop-Out graphics */
+  position: relative;
+  overflow: visible; /* Allow Pop-Out elements to break boundaries */
+}
+
+/* Hero Cards (Primary Container) */
+.bento-card-hero {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+/* Add subtle gradient scrim to colored cards */
+.bento-card-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.1), transparent);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Asymmetric Drawer (Sidebar) */
+.drawer-asymmetric {
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: 0 28px 28px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 40;
+}
+
+/* Pop-Out Graphic */
+.pop-out-graphic {
+  position: absolute;
+  top: -40px;
+  z-index: 20;
+  filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.5));
+}
+
+
+/* ============================================================================
+   SCROLLBAR STYLING (WebKit browsers)
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--md-sys-color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--md-sys-color-outline-variant);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--md-sys-color-outline);
+}
+
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--md-sys-color-tertiary);
+  outline-offset: 2px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* ============================================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem; /* 40px */
+  }
+
+  h2 {
+    font-size: 2rem; /* 32px */
+  }
+
+  h3 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  .bento-card {
+    padding: 16px;
+    padding-top: 32px;
+  }
+}

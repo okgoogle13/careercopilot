@@ -3,85 +3,107 @@
  * Uses Material Design 3 Expressive design tokens
  */
 
-/* ===== BACKDROP ===== */
-.m3-popover-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: transparent;
-  z-index: 1300;
-}
-
 /* ===== BASE POPOVER STYLES ===== */
 .m3-popover {
-  position: fixed;
-  z-index: 1400;
-  background-color: var(--md-sys-color-surface-container);
-  color: var(--md-sys-color-on-surface);
-  border-radius: var(--md-sys-shape-corner-medium);
-  box-shadow: var(--md-sys-elevation-level2);
+  /* Reset */
+  border: none;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  /* Typography - M3 Label Medium */
   font-family: var(--md-sys-typescale-font-plain);
-  opacity: 0;
-  transform: scale(0.8);
-  transform-origin: center;
-  transition: opacity var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
-              transform var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
-  max-width: 90vw;
-  max-height: 90vh;
-  overflow: auto;
+  font-size: var(--md-sys-typescale-labelMedium-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-labelMedium-line-height);
+  letter-spacing: var(--md-sys-typescale-labelMedium-tracking);
+
+  /* Shape - M3 Small */
+  border-radius: var(--md-sys-shape-corner-small);
+
+  /* Motion */
+  transition-property: background-color, box-shadow, color, transform;
+  transition-duration: var(--md-sys-motion-duration-short2);
+  transition-timing-function: var(--md-sys-motion-easing-standard);
 }
 
-.m3-popover--open {
-  opacity: 1;
-  transform: scale(1);
+/* ===== SIZE VARIANTS ===== */
+.m3-popover--small {
+  height: 32px;
+  padding: 0 var(--md-sys-spacing-3);
 }
 
-/* ===== PLACEMENT TRANSFORM ORIGINS ===== */
-.m3-popover--top {
-  transform-origin: center bottom;
+.m3-popover--medium {
+  height: 40px;
+  padding: 0 var(--md-sys-spacing-6);
 }
 
-.m3-popover--top.m3-popover--open {
-  transform: scale(1);
+.m3-popover--large {
+  height: 48px;
+  padding: 0 var(--md-sys-spacing-8);
 }
 
-.m3-popover--bottom {
-  transform-origin: center top;
+/* ===== VARIANT: FILLED ===== */
+.m3-popover--filled.m3-popover--primary {
+  background-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-primary-100);
 }
 
-.m3-popover--bottom.m3-popover--open {
-  transform: scale(1);
+.m3-popover--filled.m3-popover--secondary {
+  background-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-secondary-100);
 }
 
-.m3-popover--left {
-  transform-origin: right center;
+.m3-popover--filled.m3-popover--tertiary {
+  background-color: var(--md-sys-color-tertiary-50);
+  color: var(--md-sys-color-tertiary-100);
 }
 
-.m3-popover--left.m3-popover--open {
-  transform: scale(1);
+.m3-popover--filled.m3-popover--error {
+  background-color: var(--md-sys-color-error-50);
+  color: var(--md-sys-color-error-100);
 }
 
-.m3-popover--right {
-  transform-origin: left center;
+/* ===== VARIANT: OUTLINED ===== */
+.m3-popover--outlined {
+  background-color: transparent;
+  border: 1px solid var(--md-sys-color-outline-default);
 }
 
-.m3-popover--right.m3-popover--open {
-  transform: scale(1);
+.m3-popover--outlined.m3-popover--primary {
+  color: var(--md-sys-color-primary-50);
+  border-color: var(--md-sys-color-primary-50);
 }
 
-/* ===== ACCESSIBILITY ===== */
-@media (prefers-reduced-motion: reduce) {
-  .m3-popover {
-    transition: opacity var(--md-sys-motion-duration-short1) linear;
-  }
+/* ===== STATE: HOVER ===== */
+.m3-popover:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+/* ===== STATE: FOCUS ===== */
+.m3-popover:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary-50);
+  outline-offset: 2px;
+}
+
+/* ===== STATE: DISABLED ===== */
+.m3-popover:disabled,
+.m3-popover--disabled {
+  opacity: 0.38;
+  pointer-events: none;
+  cursor: not-allowed;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  .m3-popover {
-    max-width: 95vw;
-    max-height: 80vh;
+  .m3-popover--large {
+    height: 40px;
   }
 }
