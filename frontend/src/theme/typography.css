@@ -1,72 +1,191 @@
-@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Roboto+Flex:opsz,wght,GRAD,XTRA,YTUC,YOPQ,YTAS,YTDE,YTFI,YTLC@8..144,100..900,-200..150,323..603,560..788,25..135,649..854,-305..-98,0..1,416..570&family=Roboto+Serif:opsz,wght,GRAD@8..144,100..900,-50..100&display=swap');
+/**
+ * ELECTRIC ALCHEMIST: POLY-BODY TYPOGRAPHY MATRIX
+ * Version: 4.2
+ *
+ * Four-Tier Role System with Variable Font Axes
+ * - TIER 1: Hologram (Nabla Color Font)
+ * - TIER 2: Hero (Roboto Flex - Architectural)
+ * - TIER 3: Voice (Roboto Serif/Flex - Content)
+ * - TIER 4: Data (Roboto Flex - System/Lo-Fi)
+ */
 
-/* Base Font Setup */
+/* ============================================================================
+   FONT IMPORTS (Variable Fonts Only)
+   ============================================================================ */
+
+/* Nabla - Color Font for Hologram tier */
+@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+
+/* Roboto Flex - Variable font for Hero, AI, and Data tiers */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght,GRAD,XTRA,YTUC@8..144,25..151,100..1000,-200..150,323..603,528..760&display=swap');
+
+/* Roboto Serif - Variable font for Human tier */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght,GRAD@8..144,50..150,100..900,-50..100&display=swap');
+
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ============================================================================ */
+
 :root {
   /* Font Families */
-  --font-hologram: 'Nabla', system-ui, sans-serif;
-  --font-hero: 'Roboto Flex', system-ui, sans-serif;
-  --font-human: 'Roboto Serif', system-ui, serif;
-  --font-ai: 'Roboto Flex', system-ui, sans-serif;
-  --font-data: 'Roboto Flex', system-ui, monospace;
+  --font-hologram: 'Nabla', display;
+  --font-hero: 'Roboto Flex', sans-serif;
+  --font-human: 'Roboto Serif', serif;
+  --font-ai: 'Roboto Flex', sans-serif;
+  --font-data: 'Roboto Flex', sans-serif;
+
+  /* Variable Font Axis Configurations */
+  --type-hero-axes: 'wdth' 150, 'wght' 800, 'YTUC' 760, 'XTRA' 600, 'GRAD' 0;
+  --type-human-axes: 'wdth' 100, 'wght' 400, 'opsz' 24, 'GRAD' -25;
+  --type-ai-axes: 'wdth' 92, 'wght' 450, 'opsz' 16, 'GRAD' 20;
+  --type-data-axes: 'wdth' 110, 'wght' 500, 'opsz' 8, 'GRAD' 0;
+  --type-data-axes-glitch: 'wdth' 110, 'wght' 600, 'opsz' 8, 'GRAD' 0;
 }
 
-/* TIER 1: THE HOLOGRAM */
+
+/* ============================================================================
+   TIER 1: HOLOGRAM (Hyper-Expressive)
+   ============================================================================ */
+
 .text-hologram {
   font-family: var(--font-hologram);
-  font-variation-settings: 'FILL' 1, 'wght' 400;
-  color: var(--md-sys-color-primary);
-  text-shadow: 2px 2px 0 var(--md-sys-color-seed);
+  /* Nabla is a color font - palette mapping happens via CSS or SVG */
+  font-palette: --electric-palette;
+  font-size: 3rem; /* 48px default, adjust as needed */
   line-height: 1.1;
-  text-transform: uppercase;
+  letter-spacing: -0.02em;
 }
 
-/* TIER 2: THE HERO */
+/* Custom color palette for Nabla */
+@font-palette-values --electric-palette {
+  font-family: 'Nabla';
+  base-palette: 2;
+  override-colors:
+    0 #6750A4, /* Shadow color */
+    1 #D0BCFF; /* Face color */
+}
+
+
+/* ============================================================================
+   TIER 2: HERO (Architectural)
+   ============================================================================ */
+
 .text-hero {
   font-family: var(--font-hero);
-  font-variation-settings: 'wdth' 150, 'wght' 800, 'YTUC' 760, 'opsz' 48, 'GRAD' 0;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
+  font-variation-settings: var(--type-hero-axes);
+  font-size: 2.5rem; /* 40px default */
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
 }
 
-/* TIER 3: THE VOICE */
-/* Human Voice (Input) */
+/* Responsive scaling */
+@media (min-width: 768px) {
+  .text-hero {
+    font-size: 3.5rem; /* 56px */
+  }
+}
+
+@media (min-width: 1024px) {
+  .text-hero {
+    font-size: 4rem; /* 64px */
+  }
+}
+
+
+/* ============================================================================
+   TIER 3: VOICE (Content Flow)
+   ============================================================================ */
+
+/* Sub-Tier A: Human (User Input) */
 .text-human {
   font-family: var(--font-human);
-  font-variation-settings: 'wdth' 100, 'wght' 400, 'GRAD' -25;
+  font-variation-settings: var(--type-human-axes);
+  font-size: 1rem; /* 16px */
   line-height: 1.6;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 
-/* AI Voice (Output) */
+/* Sub-Tier B: AI (System Output) */
 .text-ai {
   font-family: var(--font-ai);
-  font-variation-settings: 'wdth' 92, 'wght' 450, 'opsz' 16, 'GRAD' 20;
-  line-height: 1.6;
+  font-variation-settings: var(--type-ai-axes);
+  font-size: 0.875rem; /* 14px */
+  line-height: 1.5;
   letter-spacing: 0.01em;
 }
 
-/* TIER 4: THE DATA */
+
+/* ============================================================================
+   TIER 4: DATA (System Log / Lo-Fi)
+   ============================================================================ */
+
 .text-data {
   font-family: var(--font-data);
-  font-variation-settings: 'wdth' 110, 'wght' 500, 'opsz' 8, 'GRAD' 0;
-  line-height: 1.5;
-  letter-spacing: 0.02em;
-  transition: font-variation-settings 0.2s ease;
+  font-variation-settings: var(--type-data-axes);
+  font-size: 0.75rem; /* 12px */
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: font-variation-settings 0s; /* Instant weight change */
 }
 
+/* Glitch Hover Effect - Weight jumps instantly */
 .text-data:hover {
-  font-variation-settings: 'wdth' 110, 'wght' 600, 'opsz' 8, 'GRAD' 0;
+  font-variation-settings: var(--type-data-axes-glitch);
 }
 
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .text-hero {
-    font-variation-settings: 'wdth' 130, 'wght' 700, 'YTUC' 700, 'opsz' 40, 'GRAD' 0;
-  }
-  
-  .text-human,
-  .text-ai {
-    font-size: 0.95em;
-  }
+
+/* ============================================================================
+   UTILITY CLASSES (Size Variants)
+   ============================================================================ */
+
+/* Hero sizes */
+.text-hero-sm {
+  font-size: 2rem; /* 32px */
+}
+
+.text-hero-lg {
+  font-size: 5rem; /* 80px */
+}
+
+/* Human/AI sizes */
+.text-human-sm {
+  font-size: 0.875rem; /* 14px */
+}
+
+.text-human-lg {
+  font-size: 1.125rem; /* 18px */
+}
+
+.text-ai-sm {
+  font-size: 0.75rem; /* 12px */
+}
+
+.text-ai-lg {
+  font-size: 1rem; /* 16px */
+}
+
+/* Data sizes */
+.text-data-xs {
+  font-size: 0.625rem; /* 10px */
+}
+
+.text-data-sm {
+  font-size: 0.75rem; /* 12px */
+}
+
+
+/* ============================================================================
+   IRREGULARITY (Breaking Grid Rigidity)
+   ============================================================================ */
+
+/* Random rotation for hero text in cards - Apply to specific elements */
+.text-hero-irregular {
+  transform: rotate(-1deg);
+}
+
+.text-hero-irregular-alt {
+  transform: rotate(1deg);
 }

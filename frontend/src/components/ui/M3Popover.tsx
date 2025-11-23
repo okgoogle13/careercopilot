@@ -1,47 +1,55 @@
 /**
  * M3 Expressive Popover Component
- * Implements Material Design 3 popover with positioning
+ * Implements Material Design 3 feedback component with M3 styling
  *
  * Uses CSS variables from m3-design-tokens.css:
  * - Color: --md-sys-color-*
  * - Shape: --md-sys-shape-corner-*
- * - Elevation: --md-sys-elevation-*
  * - Motion: --md-sys-motion-*
+ * - Typography: --md-sys-typescale-*
+ * - Elevation: --md-sys-elevation-*
  */
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React from 'react';
 import './M3Popover.css';
 
-export interface M3PopoverProps {
+
+
+export interface M3PopoverProps extends React.divAttributes<HTMLDivElement> {
   /**
-   * If true, popover is open
+   * The variant to use
+   * @default 'filled'
    */
-  open: boolean;
+  variant?: 'filled' | 'outlined' | 'tonal';
 
   /**
-   * Callback when popover requests to close
+   * The color role from M3 palette
+   * @default 'primary'
    */
-  onClose?: () => void;
+  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
 
   /**
-   * Anchor element or ref
+   * The size of the component
+   * @default 'medium'
    */
-  anchorEl?: HTMLElement | null;
+  size?: 'small' | 'medium' | 'large';
 
   /**
-   * Placement of the popover
-   * @default 'bottom'
+   * If true, component is disabled
+   * @default false
    */
-  placement?: 'top' | 'bottom' | 'left' | 'right';
+  disabled?: boolean;
 
   /**
-   * Popover content
+   * Content of the component
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   /**
    * Custom className
    */
   className?: string;
+
+  
 }
 
 /**
@@ -49,145 +57,46 @@ export interface M3PopoverProps {
  *
  * Example usage:
  * ```tsx
- * const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
- * const open = Boolean(anchorEl);
- *
- * <button onClick={(e) => setAnchorEl(e.currentTarget)}>Open</button>
- * <M3Popover
- *   open={open}
- *   anchorEl={anchorEl}
- *   onClose={() => setAnchorEl(null)}
- * >
- *   <div>Popover content</div>
+ * <M3Popover variant="filled" color="primary">
+ *   Feedback Message
  * </M3Popover>
  * ```
  */
 export const M3Popover = React.forwardRef<HTMLDivElement, M3PopoverProps>(
   (
     {
-      open,
-      onClose,
-      anchorEl,
-      placement = 'bottom',
+      variant = 'filled',
+      color = 'primary',
+      size = 'medium',
+      disabled = false,
       children,
       className = '',
+      
+      ...props
     },
     ref
   ) => {
-    const popoverRef = useRef<HTMLDivElement | null>(null);
-    const [position, setPosition] = useState({ top: 0, left: 0 });
-
-    const updatePosition = useCallback(() => {
-      if (!anchorEl || !popoverRef.current) return;
-
-      const anchorRect = anchorEl.getBoundingClientRect();
-      const popoverRect = popoverRef.current.getBoundingClientRect();
-
-      let top = 0;
-      let left = 0;
-
-      switch (placement) {
-        case 'top':
-          top = anchorRect.top - popoverRect.height - 8;
-          left = anchorRect.left + anchorRect.width / 2 - popoverRect.width / 2;
-          break;
-        case 'bottom':
-          top = anchorRect.bottom + 8;
-          left = anchorRect.left + anchorRect.width / 2 - popoverRect.width / 2;
-          break;
-        case 'left':
-          top = anchorRect.top + anchorRect.height / 2 - popoverRect.height / 2;
-          left = anchorRect.left - popoverRect.width - 8;
-          break;
-        case 'right':
-          top = anchorRect.top + anchorRect.height / 2 - popoverRect.height / 2;
-          left = anchorRect.right + 8;
-          break;
-      }
-
-      setPosition({ top, left });
-    }, [anchorEl, placement]);
-
-    useEffect(() => {
-      if (open) {
-        updatePosition();
-        window.addEventListener('resize', updatePosition);
-        window.addEventListener('scroll', updatePosition, true);
-
-        return () => {
-          window.removeEventListener('resize', updatePosition);
-          window.removeEventListener('scroll', updatePosition, true);
-        };
-      }
-    }, [open, updatePosition]);
-
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          popoverRef.current &&
-          !popoverRef.current.contains(event.target as Node) &&
-          anchorEl &&
-          !anchorEl.contains(event.target as Node)
-        ) {
-          onClose?.();
-        }
-      };
-
-      const handleEscape = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') {
-          onClose?.();
-        }
-      };
-
-      if (open) {
-        document.addEventListener('mousedown', handleClickOutside);
-        document.addEventListener('keydown', handleEscape);
-
-        return () => {
-          document.removeEventListener('mousedown', handleClickOutside);
-          document.removeEventListener('keydown', handleEscape);
-        };
-      }
-    }, [open, onClose, anchorEl]);
-
-    if (!open) {
-      return null;
-    }
-
     const classNames = [
       'm3-popover',
-      `m3-popover--${placement}`,
-      open && 'm3-popover--open',
+      `m3-popover--${variant}`,
+      `m3-popover--${color}`,
+      `m3-popover--${size}`,
+      disabled && 'm3-popover--disabled',
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <>
-        <div className="m3-popover-backdrop" data-testid="m3-popover-backdrop" />
-        <div
-          ref={(node) => {
-            popoverRef.current = node;
-            if (typeof ref === 'function') {
-              ref(node);
-            } else if (ref) {
-              ref.current = node;
-            }
-          }}
-          className={classNames}
-          style={{
-            position: 'fixed',
-            top: `${position.top}px`,
-            left: `${position.left}px`,
-          }}
-          role="dialog"
-          aria-modal="true"
-          data-testid="m3-popover"
-        >
-          {children}
-        </div>
-      </>
+      <div
+        ref={ref}
+        className={classNames}
+        disabled={disabled}
+        data-testid="m3-popover"
+        {...props}
+      >
+        {children}
+      </div>
     );
   }
 );
