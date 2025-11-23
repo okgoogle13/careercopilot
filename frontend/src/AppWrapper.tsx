@@ -4,12 +4,15 @@ import App from './App';
 
 /**
  * AppWrapper component that provides theme and global styles to the application
+ * Now includes Electric Alchemist architectural shell (Deep Violet Void + dot grid + noise)
  */
 function AppWrapper() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <App />
+      <div className="architectural-shell">
+        <App />
+      </div>
     </ThemeProvider>
   );
 }
