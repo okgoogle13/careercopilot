@@ -1,9 +1,9 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './styles/design-tokens.css';
+import './app/globals.css';
 
 // New App Shell and Components
-import { AppShell } from './components/layout/AppShell';
+import { AppShell } from './components/AppShell/AppShell';
 import { WelcomeBanner } from './components/dashboard/WelcomeBanner';
 
 // Lazy-loaded components for better performance
@@ -12,23 +12,28 @@ const Dashboard = lazy(() =>
     default: module.Dashboard,
   }))
 );
+const DesignSystemPreview = lazy(() =>
+  import('./features/design-system/DesignSystemPreview').then((module) => ({
+    default: module.DesignSystemPreview,
+  }))
+);
 const ResumeBuilder = lazy(() =>
-  import('./components/Documents/ResumeBuilder').then((module) => ({
+  import('./components/documents/ResumeBuilder').then((module) => ({
     default: module.default,
   }))
 );
 const ATSAnalysisDashboard = lazy(() =>
-  import('./components/features/analysis/ATSAnalysisDashboard').then((module) => ({
+  import('./components/features/ATSAnalysisDashboard/ATSAnalysisDashboard').then((module) => ({
     default: module.default || module.ATSAnalysisDashboard,
   }))
 );
 const TemplateSelector = lazy(() =>
-  import('./components/Documents/TemplateSelector').then((module) => ({
+  import('./components/documents/TemplateSelector').then((module) => ({
     default: module.default || module.TemplateSelector,
   }))
 );
 const DocumentPreview = lazy(() =>
-  import('./components/Documents/DocumentPreview').then((module) => ({
+  import('./components/documents/DocumentPreview').then((module) => ({
     default: module.default || module.DocumentPreview,
   }))
 );
@@ -58,7 +63,7 @@ const Auth = lazy(() =>
   import('./components/features/auth/Auth').then((module) => ({ default: module.Auth }))
 );
 const UploadResume = lazy(() =>
-  import('./components/Documents/UploadResume').then((module) => ({
+  import('./components/documents/UploadResume').then((module) => ({
     default: module.UploadResume,
   }))
 );
@@ -68,7 +73,7 @@ const ProfileEditor = lazy(() =>
   }))
 );
 const DocumentTypeSelector = lazy(() =>
-  import('./components/Documents/DocumentTypeSelector').then((module) => ({
+  import('./components/documents/DocumentTypeSelector').then((module) => ({
     default: module.DocumentTypeSelector,
   }))
 );
@@ -148,7 +153,8 @@ type View =
   | 'component-library'
   | 'state-demo'
   | 'animated-showcase'
-  | 'mui-test';
+  | 'mui-test'
+  | 'design-system-preview';
 
 // Using shared types
 type Tab = AppTab;
@@ -448,6 +454,7 @@ function AppContent() {
     },
     { id: 'state-demo', label: 'State Demo', icon: Play, description: 'Interactive demos' },
     { id: 'mui-test', label: 'MUI Test', icon: Sparkles, description: 'MUI component showcase' },
+    { id: 'design-system-preview', label: 'Electric Alchemist', icon: Sparkles, description: 'Design System v4.2 Test Kitchen' },
   ];
 
   const handleDemoNavigation = (viewId: string) => {
@@ -599,6 +606,9 @@ function AppContent() {
 
       case 'mui-test':
         return <MUITest onBack={handleBackToDashboard} />;
+
+      case 'design-system-preview':
+        return <DesignSystemPreview />;
 
       default:
         return (
