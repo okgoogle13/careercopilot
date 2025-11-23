@@ -100,3 +100,45 @@ export type { ElectricGridProps } from './grid';
 // Tabs
 export { ElectricTabs } from './tabs';
 export type { ElectricTabsProps, Tab } from './tabs';
+
+// ============================================================================
+// BATCH 3: DATA DISPLAY
+// ============================================================================
+
+// Avatar
+export { ElectricAvatar } from './avatar';
+export type { ElectricAvatarProps } from './avatar';
+
+// Date Picker
+export { ElectricDatePicker } from './date-picker';
+export type { ElectricDatePickerProps } from './date-picker';
+
+// Pagination
+export { ElectricPagination } from './pagination';
+export type { ElectricPaginationProps } from './pagination';
+
+// Popover
+export { ElectricPopover } from './popover';
+export type { ElectricPopoverProps } from './popover';
+
+// Table
+export {
+  ElectricTable,
+  ElectricTableHeader,
+  ElectricTableBody,
+  ElectricTableRow,
+  ElectricTableHead,
+  ElectricTableCell,
+} from './table';
+export type {
+  ElectricTableProps,
+  ElectricTableHeaderProps,
+  ElectricTableBodyProps,
+  ElectricTableRowProps,
+  ElectricTableHeadProps,
+  ElectricTableCellProps,
+} from './table';
+
+// Tooltip
+export { ElectricTooltip } from './tooltip';
+export type { ElectricTooltipProps } from './tooltip';
