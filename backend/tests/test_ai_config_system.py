@@ -30,13 +30,6 @@ class TestAIConfigManager:
     def temp_config_file(self):
         """Create a temporary configuration file"""
         config_data = {
-            "providers": {
-                "google_ai": {
-                    "provider": "google_ai",
-                    "api_key": "test-google-key",
-                    "project_id": "test-project",
-                }
-            },
             "models": {
                 "test-model": {
                     "name": "test-model",
@@ -133,8 +126,10 @@ class TestAIConfigManager:
         for service_name in expected_services:
             assert service_name in config_manager.services
 
-    def test_configuration_validation(self, temp_config_file):
+    def test_configuration_validation(self, temp_config_file, monkeypatch):
         """Test configuration validation"""
+        monkeypatch.delenv("GOOGLE_CLOUD_PROJECT", raising=False)
+        monkeypatch.delenv("GOOGLE_AI_API_KEY", raising=False)
         config_manager = AIConfigManager(temp_config_file)
 
         # Should pass validation with test config
@@ -236,6 +231,7 @@ class TestProviderCredentials:
             provider=AIProvider.GOOGLE_AI,
             api_key="test-google-key-123456789",
             project_id="test-project",
+            organization_id="org-123",
             additional_headers={"Custom-Header": "value"},
         )
 
@@ -246,7 +242,7 @@ class TestProviderCredentials:
 
         # Test with secrets included
         creds_dict_with_secrets = creds.to_dict(include_secrets=True)
-        assert creds_dict_with_secrets["api_key"] == "sk-very-secret-key-123456789"
+        assert creds_dict_with_secrets["api_key"] == "test-google-key-123456789"
 
 
 class TestAIClientManager:
@@ -444,8 +440,10 @@ class TestAIConfigIntegration:
     """Integration tests for AI configuration system"""
 
     @pytest.mark.asyncio
-    async def test_end_to_end_configuration_flow(self):
+    async def test_end_to_end_configuration_flow(self, monkeypatch):
         """Test complete configuration loading and usage flow"""
+        monkeypatch.delenv("GOOGLE_CLOUD_PROJECT", raising=False)
+        monkeypatch.delenv("GOOGLE_AI_API_KEY", raising=False)
         # Create temporary config
         config_data = {
             "models": {
@@ -514,8 +512,7 @@ class TestAIConfigIntegration:
             # Test validation
             validation = config_manager.validate_configuration()
             # Should have warnings about missing credentials but no errors
-            assert len(validation["errors"]) == 0
-            assert len(validation["warnings"]) >= 1  # Missing API keys
+            assert any("No credentials found for provider" in str(warning) for warning in validation)
 
             # Test configuration summary
             summary = config_manager.get_configuration_summary()

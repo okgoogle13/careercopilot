@@ -1,0 +1,16 @@
+{
+  "key": "voice_profile_user_789_31228d7792db96c3",
+  "value": {
+    "result": {
+      "result": "voice_profile_result"
+    },
+    "operation_type": "voice_profile",
+    "input_hash": "31228d7792db96c3",
+    "user_id": "user_789",
+    "cached_at": "2025-11-22T20:57:26.423738"
+  },
+  "timestamp": "2025-11-22T20:57:26.423756",
+  "expires_at": "2025-11-25T20:57:26.423756",
+  "ttl_hours": 72.0,
+  "category": "ai_operations"
+}
