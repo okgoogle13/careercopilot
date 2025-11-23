@@ -25,6 +25,16 @@
 - **Firebase Config**: `python3 scripts/setup-firebase-config.py` - Configure Firebase integration
 - **Test Configuration**: `python3 scripts/test-configuration.py` - Validate all configurations
 - **Genkit Verification**: `python3 verify_genkit.py` - Verify Genkit AI framework integration
+- **Perplexity API**: Configured for real-time search and documentation lookups
+  ```json
+  "perplexity_search": {
+    "command": "npx",
+    "args": ["-y", "@your_preferred_perplexity_wrapper"],
+    "env": {
+      "PERPLEXITY_API_KEY": "${PERPLEXITY_API_KEY}"
+    }
+  }
+  ```
 
 ### Secrets Management Flow
 

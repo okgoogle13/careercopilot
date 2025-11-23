@@ -52,6 +52,9 @@ try:
     from genkit.plugins import google_genai
     GENKIT_AVAILABLE = True
 except ImportError:
+    import logging
+    logger = logging.getLogger(__name__)
+    logger.info(f"Genkit available: {GENKIT_AVAILABLE}")
     genkit = None  # type: ignore[assignment]
     ai = None  # type: ignore[assignment]
     google_genai = None  # type: ignore[assignment]
