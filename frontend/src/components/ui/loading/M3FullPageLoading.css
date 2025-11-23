@@ -1,0 +1,41 @@
+.m3-full-page-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.m3-full-page-loading__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--md-sys-color-scrim);
+  opacity: 0.32;
+}
+
+.m3-full-page-loading__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--md-sys-spacing-4);
+  padding: var(--md-sys-spacing-8);
+  background-color: var(--md-sys-color-surface);
+  border-radius: var(--md-sys-shape-corner-large);
+  box-shadow: var(--md-sys-elevation-level3);
+}
+
+.m3-full-page-loading__message {
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+  font-weight: var(--md-sys-typescale-bodyMedium-weight);
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+}
