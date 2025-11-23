@@ -3,99 +3,107 @@
  * Uses Material Design 3 Expressive design tokens
  */
 
-/* ===== WRAPPER ===== */
-.m3-tooltip-wrapper {
-  display: inline-block;
-  position: relative;
-}
-
 /* ===== BASE TOOLTIP STYLES ===== */
 .m3-tooltip {
-  position: absolute;
-  z-index: 1500;
-  background-color: var(--md-sys-color-inverse-surface);
-  color: var(--md-sys-color-inverse-on-surface);
-  padding: var(--md-sys-spacing-2) var(--md-sys-spacing-3);
-  border-radius: var(--md-sys-shape-corner-extra-small);
+  /* Reset */
+  border: none;
+  outline: none;
+  user-select: none;
+  -webkit-user-select: none;
+
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  /* Typography - M3 Label Medium */
   font-family: var(--md-sys-typescale-font-plain);
-  font-size: var(--md-sys-typescale-bodySmall-size);
-  font-weight: var(--md-sys-typescale-weight-regular);
-  line-height: var(--md-sys-typescale-bodySmall-line-height);
-  letter-spacing: var(--md-sys-typescale-bodySmall-tracking);
-  white-space: nowrap;
-  max-width: 300px;
-  word-wrap: break-word;
+  font-size: var(--md-sys-typescale-labelMedium-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-labelMedium-line-height);
+  letter-spacing: var(--md-sys-typescale-labelMedium-tracking);
+
+  /* Shape - M3 Small */
+  border-radius: var(--md-sys-shape-corner-small);
+
+  /* Motion */
+  transition-property: background-color, box-shadow, color, transform;
+  transition-duration: var(--md-sys-motion-duration-short2);
+  transition-timing-function: var(--md-sys-motion-easing-standard);
+}
+
+/* ===== SIZE VARIANTS ===== */
+.m3-tooltip--small {
+  height: 32px;
+  padding: 0 var(--md-sys-spacing-3);
+}
+
+.m3-tooltip--medium {
+  height: 40px;
+  padding: 0 var(--md-sys-spacing-6);
+}
+
+.m3-tooltip--large {
+  height: 48px;
+  padding: 0 var(--md-sys-spacing-8);
+}
+
+/* ===== VARIANT: FILLED ===== */
+.m3-tooltip--filled.m3-tooltip--primary {
+  background-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-primary-100);
+}
+
+.m3-tooltip--filled.m3-tooltip--secondary {
+  background-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-secondary-100);
+}
+
+.m3-tooltip--filled.m3-tooltip--tertiary {
+  background-color: var(--md-sys-color-tertiary-50);
+  color: var(--md-sys-color-tertiary-100);
+}
+
+.m3-tooltip--filled.m3-tooltip--error {
+  background-color: var(--md-sys-color-error-50);
+  color: var(--md-sys-color-error-100);
+}
+
+/* ===== VARIANT: OUTLINED ===== */
+.m3-tooltip--outlined {
+  background-color: transparent;
+  border: 1px solid var(--md-sys-color-outline-default);
+}
+
+.m3-tooltip--outlined.m3-tooltip--primary {
+  color: var(--md-sys-color-primary-50);
+  border-color: var(--md-sys-color-primary-50);
+}
+
+/* ===== STATE: HOVER ===== */
+.m3-tooltip:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+/* ===== STATE: FOCUS ===== */
+.m3-tooltip:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary-50);
+  outline-offset: 2px;
+}
+
+/* ===== STATE: DISABLED ===== */
+.m3-tooltip:disabled,
+.m3-tooltip--disabled {
+  opacity: 0.38;
   pointer-events: none;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
-              transform var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
-}
-
-.m3-tooltip--visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* ===== PLACEMENT: TOP ===== */
-.m3-tooltip--top {
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%) scale(0.8);
-  margin-bottom: var(--md-sys-spacing-2);
-}
-
-.m3-tooltip--top.m3-tooltip--visible {
-  transform: translateX(-50%) scale(1);
-}
-
-/* ===== PLACEMENT: BOTTOM ===== */
-.m3-tooltip--bottom {
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) scale(0.8);
-  margin-top: var(--md-sys-spacing-2);
-}
-
-.m3-tooltip--bottom.m3-tooltip--visible {
-  transform: translateX(-50%) scale(1);
-}
-
-/* ===== PLACEMENT: LEFT ===== */
-.m3-tooltip--left {
-  right: 100%;
-  top: 50%;
-  transform: translateY(-50%) scale(0.8);
-  margin-right: var(--md-sys-spacing-2);
-}
-
-.m3-tooltip--left.m3-tooltip--visible {
-  transform: translateY(-50%) scale(1);
-}
-
-/* ===== PLACEMENT: RIGHT ===== */
-.m3-tooltip--right {
-  left: 100%;
-  top: 50%;
-  transform: translateY(-50%) scale(0.8);
-  margin-left: var(--md-sys-spacing-2);
-}
-
-.m3-tooltip--right.m3-tooltip--visible {
-  transform: translateY(-50%) scale(1);
+  cursor: not-allowed;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-  .m3-tooltip {
-    max-width: 200px;
-    font-size: var(--md-sys-typescale-bodySmall-size);
-  }
-}
-
-/* ===== ACCESSIBILITY ===== */
-@media (prefers-reduced-motion: reduce) {
-  .m3-tooltip {
-    transition: opacity var(--md-sys-motion-duration-short1) linear;
+  .m3-tooltip--large {
+    height: 40px;
   }
 }

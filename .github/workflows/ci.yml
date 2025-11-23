@@ -98,14 +98,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           queries: security-extended,security-and-quality
       - name: Autobuild
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@v4
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: "/language:${{matrix.language}}"
 
@@ -217,7 +217,7 @@ jobs:
         options: >-
           --health-cmd "pg_isready -U test -d test_db"
           --health-interval 10s
-          --health-timeout 5s
+          --health-timeout 10s
           --health-retries 5
     steps:
       - name: Checkout
@@ -375,8 +375,8 @@ jobs:
         if: failure()
         run: |
           echo " Collecting docker-compose diagnostics..."
-          docker-compose -f docker-compose.e2e.yml ps || true
-          docker-compose -f docker-compose.e2e.yml logs --no-color > docker-compose-e2e-logs.txt || true
+          docker compose -f docker-compose.e2e.yml ps || true
+          docker compose -f docker-compose.e2e.yml logs --no-color > docker-compose-e2e-logs.txt || true
       - name: Upload E2E test results
         if: always()
         uses: actions/upload-artifact@v4
@@ -388,7 +388,7 @@ jobs:
           if-no-files-found: warn
       - name: Cleanup services
         if: always()
-        run: docker-compose -f docker-compose.e2e.yml down
+        run: docker compose -f docker-compose.e2e.yml down
 
   performance-tests:
     name: Performance Tests
@@ -443,7 +443,7 @@ jobs:
           if [[ "${{ needs.test-firestore-rules.result }}" == "failure" ]]; then exit 1; fi
           echo " All required quality checks passed (or were skipped)!"
       - name: PR comment on failure
-        if: failure()
+        if: failure() && github.event_name == 'pull_request'
         uses: actions/github-script@v7
         with:
           script: |

@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* --- ELECTRIC ALCHEMIST COLOR TOKENS --- */
+    --md-sys-color-seed: #6750A4;
+    --md-sys-color-primary: #D0BCFF;
+    --md-sys-color-primary-container: #EADDFF;
+    --md-sys-color-on-primary-container: #21005D;
+    
+    --md-sys-color-tertiary: #EFB8C8;
+    --md-sys-color-tertiary-container: #FFD8E4;
+    --md-sys-color-on-tertiary: #492532;
+    
+    /* THE DEEP VIOLET VOID SYSTEM */
+    --md-sys-color-surface: #141218;
+    --md-sys-color-surface-container-low: #1D1B20;
+    --md-sys-color-surface-container: #211F26;
+    --md-sys-color-surface-container-high: #2B2930;
+    
+    --md-sys-color-outline: #938F99;
+    --md-sys-color-outline-variant: #49454F;
+    --md-sys-color-on-surface: #E6E0E9;
+
+    /* --- FONT VARIABLES (Loaded via Next.js) --- */
+    --font-sans: 'Roboto Flex', system-ui, sans-serif;
+    --font-serif: 'Roboto Serif', serif;
+    --font-hologram: 'Nabla', system-ui, sans-serif;
+  }
+
+  /* 1. THE BODY (Base Layer) */
+  body {
+    @apply bg-surface text-on-surface antialiased;
+    /* The Radial Dot Grid */
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--md-sys-color-outline-variant) 1px,
+      transparent 0
+    );
+    background-size: 24px 24px;
+    min-height: 100vh;
+  }
+
+  /* 2. THE NOISE OVERLAY (Texture Layer) */
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Corrected SVG Data URI */
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; /* CRITICAL: Allows clicks to pass through */
+    z-index: 40; /* High, but below Modals (z-50) */
+    mix-blend-mode: overlay;
+  }
+}
+
+@layer utilities {
+  /* Pattern Utility for individual cards */
+  .bg-grid-pattern {
+    background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--md-sys-color-outline-variant) 1px,
+      transparent 0
+    );
+    background-size: 24px 24px;
+  }
+  
+  /* Noise Utility for individual cards */
+  .bg-noise {
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  }
+}
+
+/* --- ANIMATIONS --- */
+/* Kept because complex keyframes are hard in pure Tailwind */
+
+@keyframes glitch {
+  0% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75); }
+  14% { text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75), -0.05em -0.025em 0 rgba(0, 255, 0, 0.75); }
+  15% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 0, 255, 0.75); }
+  49% { text-shadow: -0.05em -0.025em 0 rgba(255, 0, 0, 0.75), 0.025em 0.025em 0 rgba(0, 0, 255, 0.75); }
+  50% { text-shadow: 0.025em 0.05em 0 rgba(0, 255, 0, 0.75), 0.05em 0 0 rgba(0, 0, 255, 0.75); }
+  99% { text-shadow: 0.025em 0.05em 0 rgba(0, 255, 0, 0.75), 0.05em 0 0 rgba(0, 0, 255, 0.75); }
+  100% { text-shadow: -0.025em 0 0 rgba(255, 0, 0, 0.75), -0.025em -0.025em 0 rgba(0, 255, 0, 0.75); }
+}
+
+.text-data:hover {
+  animation: glitch 1s infinite;
+}
