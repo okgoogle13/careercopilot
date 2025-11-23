@@ -150,3 +150,93 @@ This document provides a comprehensive overview of the CareerCopilot codebase, s
 **Interaction Patterns**:
 - **To update the design system**: Modify the `design-system/tokens.json` file and run `scripts/update-design-system.sh`.
 - **To use design tokens in components**: Use the generated CSS custom properties (e.g., `var(--sys-color-primary)`).
+
+---
+
+## 🔍 TECHNICAL DEBT AUDIT PROTOCOL
+
+This file defines the expected format, tone, and scoring rules for autonomous audit reports. All final output must strictly follow the format of the provided example.
+
+### 1.1 GOLDEN EXAMPLE: TECHNICAL DEBT FINDING
+
+**File:** `backend/src/controllers/user_auth.py`  
+**Snippet:**
+```python
+def check_password(user, password):
+    # TODO: Refactor using bcrypt
+    if user.password == password:
+        return True
+    return False
+```
+
+| Field | Value |
+|-------|-------|
+| **Issue Type** | High-Risk Security Debt (Weak Hashing) |
+| **Location** | `backend/src/controllers/user_auth.py:55` |
+| **Risk Score** | 9/10 |
+| **Effort Score** | Medium (Requires new dependency + refactor of 2 files) |
+| **Proposed Fix** | Implement standard, modern hashing (e.g., bcrypt) using environment variable for salt. Deprecate current plain-text comparison. |
+| **Affected Components** | User authentication, password storage |
+| **Technical Impact** | Security vulnerability, potential data breach |
+| **Business Impact** | High - Compromises user account security |
+| **Recommended Actions** | 1. Add bcrypt dependency<br>2. Update password hashing logic<br>3. Add migration for existing passwords<br>4. Update tests |
+
+**Expected Tone:** Professional, concise, and focused on maintainability and security.
+
+### 1.2 SCORING GUIDELINES
+
+**Risk Score (1-10):**
+- 9-10: Critical security issues, data loss risks
+- 7-8: Major functionality or performance issues
+- 5-6: Moderate issues affecting maintainability
+- 3-4: Minor issues, low impact
+- 1-2: Cosmetic or very minor issues
+
+**Effort Score:**
+- Low: <1 day of work
+- Medium: 1-3 days of work
+- High: >3 days of work
+
+### 1.3 AUDIT SCOPE
+- **Code Quality**: Identify complex methods, duplicated code, and anti-patterns
+- **Security**: Find potential vulnerabilities and security risks
+- **Performance**: Locate bottlenecks and inefficient operations
+- **Maintainability**: Spot areas that need refactoring or documentation
+
+### 1.4 OUTPUT FORMAT
+Each finding must include:
+- Clear, descriptive title
+- Exact file path and line numbers
+- Risk and effort scores
+- Detailed impact analysis
+- Step-by-step remediation plan
+
+### 1.5 PRIORITIZATION
+1. Security vulnerabilities (especially authentication/authorization)
+2. Data integrity issues
+3. Performance bottlenecks
+4. Code quality and maintainability
+5. Documentation gaps
+
+### 1.6 ROUTING STRATEGY
+
+**Delegation Strategy:**
+- Use the Jules web interface with the provided delegation prompt
+- Jules will automatically read AGENTS.md for the golden example format
+- Focus on high-risk issues (Risk Score 8-10) as specified in the prompt
+- Output will be generated as TECHNICAL_DEBT_AUDIT.md in the repository root
+- The audit should be exhaustive but prioritize security and performance critical issues
+
+### 1.7 FINAL DELEGATION PROMPT
+
+```text
+You are the Technical Debt Auditor. Your task is to perform an **Exhaustive Technical Debt Audit** across the entire 'careercopilot' repository.
+
+**Instructions:**
+1.  **Analyze** the entire codebase for excessive complexity, unhandled errors, and inconsistent patterns.
+2.  **Format:** Your final output MUST strictly adhere to the exact structure, tone, and scoring criteria demonstrated in the "GOLDEN EXAMPLE: TECHNICAL DEBT FINDING" section of the **AGENTS.md** file.
+3.  **Scope:** Prioritize security and high-risk performance issues (Risk Score 8-10).
+4.  **Output:** Generate a single, comprehensive `TECHNICAL_DEBT_AUDIT.md` report in the root of the repository.
+
+Proceed with planning this massive audit now.
+```
