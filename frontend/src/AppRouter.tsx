@@ -31,6 +31,9 @@ const DocumentsPage = lazy(() =>
 const AssetLibraryPage = lazy(() =>
   import('./pages/AssetLibraryPage').then((m) => ({ default: m.AssetLibraryPage }))
 );
+const ElectricAlchemistTestKitchen = lazy(() =>
+  import('./pages/ElectricAlchemistTestKitchen').then((m) => ({ default: m.ElectricAlchemistTestKitchen }))
+);
 
 // Loading fallback
 const LoadingFallback = () => (
@@ -57,6 +60,10 @@ function AppRouterContent() {
         <Route
           path="/register"
           element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <RegisterPage />}
+        />
+        <Route
+          path="/electric-alchemist"
+          element={<ElectricAlchemistTestKitchen />}
         />
 
         {/* Default redirect */}
