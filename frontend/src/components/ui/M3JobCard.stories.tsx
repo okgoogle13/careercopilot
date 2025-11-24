@@ -80,7 +80,7 @@ export const AllVariants: Story = {
         logo="https://logo.clearbit.com/stripe.com"
         title="Backend Engineer"
         company="Stripe"
-        location: Remote"
+        location="Remote"
         jobType="Full-time"
         tags={['Python', 'PostgreSQL']}
         actions={<button style={ButtonStyle}>Apply</button>}
