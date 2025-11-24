@@ -1,6 +1,6 @@
 /**
- * M3 Expressive Popover Component
- * Implements Material Design 3 feedback component with M3 styling
+ * M3 Expressive NavigationItem Component
+ * Implements Material Design 3 button with M3 styling
  *
  * Uses CSS variables from m3-design-tokens.css:
  * - Color: --md-sys-color-*
@@ -10,16 +10,16 @@
  * - Elevation: --md-sys-elevation-*
  */
 import React from 'react';
-import './M3Popover.css';
+import './M3NavigationItem.css';
 
 
 
-export interface M3PopoverProps extends React.divAttributes<HTMLDivElement> {
+export interface M3NavigationItemProps extends React.buttonAttributes<HTMLButtonElement> {
   /**
    * The variant to use
    * @default 'filled'
    */
-  variant?: 'filled' | 'outlined' | 'tonal';
+  variant?: 'filled' | 'tonal' | 'outlined' | 'text' | 'elevated';
 
   /**
    * The color role from M3 palette
@@ -53,16 +53,16 @@ export interface M3PopoverProps extends React.divAttributes<HTMLDivElement> {
 }
 
 /**
- * M3 Expressive Popover component using design tokens.
+ * M3 Expressive NavigationItem component using design tokens.
  *
  * Example usage:
  * ```tsx
- * <M3Popover variant="filled" color="primary">
- *   Feedback Message
- * </M3Popover>
+ * <M3NavigationItem variant="filled" color="primary">
+ *   Click Me
+ * </M3NavigationItem>
  * ```
  */
-export const M3Popover = React.forwardRef<HTMLDivElement, M3PopoverProps>(
+export const M3NavigationItem = React.forwardRef<HTMLButtonElement, M3NavigationItemProps>(
   (
     {
       variant = 'filled',
@@ -77,30 +77,30 @@ export const M3Popover = React.forwardRef<HTMLDivElement, M3PopoverProps>(
     ref
   ) => {
     const classNames = [
-      'm3-popover',
-      `m3-popover--${variant}`,
-      `m3-popover--${color}`,
-      `m3-popover--${size}`,
-      disabled && 'm3-popover--disabled',
+      'm3-navigation-item',
+      `m3-navigation-item--${variant}`,
+      `m3-navigation-item--${color}`,
+      `m3-navigation-item--${size}`,
+      disabled && 'm3-navigation-item--disabled',
       className,
     ]
       .filter(Boolean)
       .join(' ');
 
     return (
-      <div
+      <button
         ref={ref}
         className={classNames}
         disabled={disabled}
-        data-testid="m3-popover"
+        data-testid="m3-navigation-item"
         {...props}
       >
         {children}
-      </div>
+      </button>
     );
   }
 );
 
-M3Popover.displayName = 'M3Popover';
+M3NavigationItem.displayName = 'M3NavigationItem';
 
-export default M3Popover;
+export default M3NavigationItem;
