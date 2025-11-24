@@ -93,3 +93,11 @@ describe('Breadcrumbs', () => {
   describe('Icons', () => {
     it('renders custom icon for item', () => {
       const items: BreadcrumbItem[] = [
+        { label: 'Home', icon: \u003csvg data- testid="home-icon" /\u003e },
+      { label: 'Current' },
+      ];
+    render(\u003cBreadcrumbs items = { items } /\u003e);
+    expect(screen.getByTestId('home-icon')).toBeInTheDocument();
+  });
+});
+});
