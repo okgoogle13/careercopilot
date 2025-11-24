@@ -22,3 +22,9 @@ describe('EmptyState', () => {
     });
 
     it('renders with icon', () => {
+      const TestIcon = () => <svg data-testid="test-icon" />;
+      render(<EmptyState icon={<TestIcon />} />);
+      expect(screen.getByTestId('test-icon')).toBeInTheDocument();
+    });
+  });
+});
