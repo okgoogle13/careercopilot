@@ -1,0 +1,81 @@
+/**
+ * M3 Expressive LoadingSpinner Styles
+ */
+
+@keyframes m3-spinner-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes m3-spinner-dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+.m3-loading-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.m3-loading-spinner__svg {
+  animation: m3-spinner-rotate 2s linear infinite;
+}
+
+.m3-loading-spinner__circle {
+  stroke: var(--md-sys-color-primary-50);
+  stroke-linecap: round;
+  animation: m3-spinner-dash 1.5s ease-in-out infinite;
+}
+
+/* Size variants */
+.m3-loading-spinner--small .m3-loading-spinner__svg {
+  width: 20px;
+  height: 20px;
+}
+
+.m3-loading-spinner--medium .m3-loading-spinner__svg {
+  width: 40px;
+  height: 40px;
+}
+
+.m3-loading-spinner--large .m3-loading-spinner__svg {
+  width: 60px;
+  height: 60px;
+}
+
+/* Screen reader only */
+.m3-loading-spinner__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .m3-loading-spinner__svg {
+    animation: m3-spinner-rotate 4s linear infinite;
+  }
+
+  .m3-loading-spinner__circle {
+    animation: none;
+    stroke-dasharray: 90, 150;
+  }
+}
