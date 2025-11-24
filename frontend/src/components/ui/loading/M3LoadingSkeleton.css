@@ -1,0 +1,6 @@
+.m3-loading-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--md-sys-spacing-2);
+  width: 100%;
+}
