@@ -5,6 +5,9 @@ import { HelmetProvider } from 'react-helmet-async';
 // M3 Expressive Design Tokens
 import './styles/m3-design-tokens.css';
 
+// Electric Alchemist Design System
+import './styles/electric-alchemist.css';
+
 // import * as Sentry from '@sentry/react';
 import { AuthProvider } from './context/AuthContext';
 import AppWrapper from './AppWrapper';
