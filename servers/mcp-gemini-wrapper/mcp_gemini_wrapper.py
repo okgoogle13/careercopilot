@@ -46,21 +46,39 @@ class GeminiMCPServer:
     def __init__(self):
         """Initialize Gemini MCP server."""
         self.api_key = os.getenv("GEMINI_API_KEY", "")
-        self.model_name = "gemini-1.5-flash"
+        self.model_name = os.getenv("GEMINI_MODEL", "models/gemini-3-pro-preview")
+        self.fallback_models = [
+            "models/gemini-2.5-flash",
+            "models/gemini-2.0-flash",
+            "models/gemini-flash-latest"
+        ]
         self.initialized = False
         self.model = None
 
         if GENAI_AVAILABLE and self.api_key and self.api_key.startswith("AIza"):
             try:
                 genai.configure(api_key=self.api_key)
-                self.model = genai.GenerativeModel(self.model_name)
-                # Test connection
-                test_response = self.model.generate_content("test")
-                if test_response:
-                    self.initialized = True
-                    logger.info(f"Gemini MCP server initialized with {self.model_name}")
-                else:
-                    raise Exception("Test generation failed")
+                
+                # Try primary model first
+                models_to_try = [self.model_name] + self.fallback_models
+                
+                for model_name in models_to_try:
+                    try:
+                        self.model = genai.GenerativeModel(model_name)
+                        # Test connection
+                        test_response = self.model.generate_content("test")
+                        if test_response:
+                            self.model_name = model_name
+                            self.initialized = True
+                            logger.info(f"Gemini MCP server initialized with {self.model_name}")
+                            break
+                    except Exception as e:
+                        logger.warning(f"Failed to initialize {model_name}: {e}")
+                        continue
+                
+                if not self.initialized:
+                    raise Exception("All models failed to initialize")
+                    
             except Exception as e:
                 logger.warning(f"Gemini initialization failed, using demo mode: {e}")
                 self.initialized = False
