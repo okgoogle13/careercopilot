@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Breadcrumbs, BreadcrumbItem } from '../breadcrumb';
+import { Breadcrumbs, BreadcrumbItem } from '../../breadcrumb/breadcrumb';
 
 describe('Breadcrumbs', () => {
   const defaultItems: BreadcrumbItem[] = [
@@ -93,11 +93,11 @@ describe('Breadcrumbs', () => {
   describe('Icons', () => {
     it('renders custom icon for item', () => {
       const items: BreadcrumbItem[] = [
-        { label: 'Home', icon: \u003csvg data- testid="home-icon" /\u003e },
-      { label: 'Current' },
+        { label: 'Home', icon: <svg data-testid="home-icon" /> },
+        { label: 'Current' },
       ];
-    render(\u003cBreadcrumbs items = { items } /\u003e);
-    expect(screen.getByTestId('home-icon')).toBeInTheDocument();
+      render(<Breadcrumbs items={items} />);
+      expect(screen.getByTestId('home-icon')).toBeInTheDocument();
+    });
   });
-});
 });

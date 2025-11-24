@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Label } from '../label';
+import { Label } from '../../label/label';
 
 describe('Label', () => {
   describe('Rendering', () => {
@@ -169,3 +169,11 @@ describe('Label', () => {
     it('renders with icon', () => {
       render(
         <Label>
+          <svg data-testid="label-icon" /> Label with Icon
+        </Label>
+      );
+      expect(screen.getByTestId('label-icon')).toBeInTheDocument();
+      expect(screen.getByText(/Label with Icon/i)).toBeInTheDocument();
+    });
+  });
+});
