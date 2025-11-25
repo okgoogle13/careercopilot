@@ -57,11 +57,9 @@ export interface M3ProgressProps extends Omit<React.HTMLAttributes<HTMLDivElemen
  * M3 Expressive Progress component using design tokens.
  *
  * Example usage:
- * ```tsx
  * <M3Progress type="linear" value={75} showLabel />
  * <M3Progress type="circular" value={50} color="secondary" />
- * <M3Progress type="linear" /> {/* Indeterminate */}
- * ```
+ * <M3Progress type="linear" /> // Indeterminate
  */
 export const M3Progress = React.forwardRef<HTMLDivElement, M3ProgressProps>(
   (
