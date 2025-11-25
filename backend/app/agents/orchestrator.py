@@ -23,6 +23,7 @@ from app.core.ai_client import get_ai_client
 from app.core.cache_decorators import cached_ai_operation
 from app.core.database import get_db_session
 from app.models.database import AgentSession
+from .test_automation_specialist import TestAutomationSpecialistAgent
 
 logger = logging.getLogger(__name__)
 
@@ -463,6 +464,7 @@ class AgentOrchestrator:
             "job_scout": JobScoutAgent(),
             "market_analyst": MarketAnalystAgent(),
             "application_agent": ApplicationAgent(),
+            "test_automation_specialist": TestAutomationSpecialistAgent(),
             # Add more agents as needed
         }
 
