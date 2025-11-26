@@ -13,7 +13,7 @@ const StyledButton = styled(MuiButton)<{ customvariant?: string }>(({ theme, cus
     color: theme.palette.text.primary,
     border: 'none',
     '&:hover': {
-      backgroundColor: theme.palette.action.hover,
+      backgroundColor: theme.palette.surface.containerHigh,
     },
   }),
   ...(customvariant === 'outline' && {
@@ -21,7 +21,7 @@ const StyledButton = styled(MuiButton)<{ customvariant?: string }>(({ theme, cus
     border: `1px solid ${theme.palette.divider}`,
     color: theme.palette.text.primary,
     '&:hover': {
-      backgroundColor: theme.palette.action.hover,
+      backgroundColor: theme.palette.surface.containerHigh,
     },
   }),
 }));
