@@ -1,22 +1,18 @@
-import type { AlertProps as MuiAlertProps } from '@mui/material';
-import { Alert as MuiAlert, AlertTitle as MuiAlertTitle, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import { M3Alert } from '../M3Alert/M3Alert';
+import type { M3AlertProps } from '../M3Alert/M3Alert';
 
-const StyledAlert = styled(MuiAlert)(({ theme }) => ({
-  borderRadius: theme.spacing(1),
-  '& .MuiAlert-icon': {
-    marginRight: theme.spacing(1),
-  },
-}));
-
-export interface AlertProps extends Omit<MuiAlertProps, 'variant'> {
+export type AlertProps = M3AlertProps & {
   variant?: 'default' | 'destructive';
-}
+};
 
+/**
+ * Migrated to M3Alert - uses M3 design tokens instead of MUI theme
+ * Maps variant 'destructive' to severity 'error'
+ */
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
   ({ children, variant = 'default', severity, ...props }, ref) => {
-    const getSeverity = (variant: string): MuiAlertProps['severity'] => {
+    const getSeverity = (variant: string): M3AlertProps['severity'] => {
       switch (variant) {
         case 'destructive':
           return 'error';
@@ -26,44 +22,39 @@ export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     };
 
     return (
-      <StyledAlert ref={ref} severity={getSeverity(variant)} {...props}>
+      <M3Alert ref={ref} severity={getSeverity(variant)} {...props}>
         {children}
-      </StyledAlert>
+      </M3Alert>
     );
   }
 );
 
 Alert.displayName = 'Alert';
 
-export type AlertTitleProps = React.ComponentProps<typeof Typography>;
-
-export const AlertTitle = React.forwardRef<HTMLHeadingElement, AlertTitleProps>(
+/**
+ * AlertTitle wrapper for M3Alert title prop
+ */
+export const AlertTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ children, ...props }, ref) => {
     return (
-      <Typography
-        ref={ref}
-        component="h5"
-        variant="subtitle2"
-        fontWeight={600}
-        gutterBottom
-        {...props}
-      >
+      <div ref={ref} className="m3-alert__title" {...props}>
         {children}
-      </Typography>
+      </div>
     );
   }
 );
 
 AlertTitle.displayName = 'AlertTitle';
 
-export type AlertDescriptionProps = React.ComponentProps<typeof Typography>;
-
-export const AlertDescription = React.forwardRef<HTMLParagraphElement, AlertDescriptionProps>(
+/**
+ * AlertDescription wrapper for M3Alert children content
+ */
+export const AlertDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ children, ...props }, ref) => {
     return (
-      <Typography ref={ref} variant="body2" {...props}>
+      <div ref={ref} className="m3-alert__message" {...props}>
         {children}
-      </Typography>
+      </div>
     );
   }
 );
