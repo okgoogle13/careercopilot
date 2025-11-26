@@ -13,10 +13,10 @@ export interface SpinnerProps {
  *
  * @example
  * ```tsx
- * <RotatingSpinner size={24} color="#a855f7" />
+ * <RotatingSpinner size={24} color="#A78BFA" />
  * ```
  */
-export function RotatingSpinner({ size = 24, color = '#a855f7', className }: SpinnerProps) {
+export function RotatingSpinner({ size = 24, color = '#A78BFA', className }: SpinnerProps) {
   return (
     <motion.div
       className={className}
@@ -40,10 +40,10 @@ export function RotatingSpinner({ size = 24, color = '#a855f7', className }: Spi
  *
  * @example
  * ```tsx
- * <PulsingDot size={12} color="#a855f7" />
+ * <PulsingDot size={12} color="#A78BFA" />
  * ```
  */
-export function PulsingDot({ size = 12, color = '#a855f7', className }: SpinnerProps) {
+export function PulsingDot({ size = 12, color = '#A78BFA', className }: SpinnerProps) {
   return (
     <motion.div
       className={className}
@@ -66,12 +66,12 @@ export function PulsingDot({ size = 12, color = '#a855f7', className }: SpinnerP
  *
  * @example
  * ```tsx
- * <BouncingDots dotSize={8} color="#a855f7" />
+ * <BouncingDots dotSize={8} color="#A78BFA" />
  * ```
  */
 export function BouncingDots({
   size = 8,
-  color = '#a855f7',
+  color = '#A78BFA',
   className,
 }: SpinnerProps & { dotSize?: number }) {
   const dotSize = size;
@@ -114,10 +114,10 @@ export function BouncingDots({
  *
  * @example
  * ```tsx
- * <GradientSpinner size={32} color="#a855f7" />
+ * <GradientSpinner size={32} color="#A78BFA" />
  * ```
  */
-export function GradientSpinner({ size = 32, color = '#a855f7', className }: SpinnerProps) {
+export function GradientSpinner({ size = 32, color = '#A78BFA', className }: SpinnerProps) {
   return (
     <motion.div
       className={className}
@@ -143,10 +143,10 @@ export function GradientSpinner({ size = 32, color = '#a855f7', className }: Spi
  *
  * @example
  * ```tsx
- * <MorphingLoader size={24} color="#a855f7" />
+ * <MorphingLoader size={24} color="#A78BFA" />
  * ```
  */
-export function MorphingLoader({ size = 24, color = '#a855f7', className }: SpinnerProps) {
+export function MorphingLoader({ size = 24, color = '#A78BFA', className }: SpinnerProps) {
   return (
     <motion.div
       className={className}
