@@ -183,9 +183,9 @@ const Navbar: React.FC<NavbarProps> = ({
               sx={{
                 position: 'relative',
                 borderRadius: 2,
-                backgroundColor: 'action.hover',
+                backgroundColor: theme.palette.surface.containerHigh,
                 '&:hover': {
-                  backgroundColor: 'action.selected',
+                  backgroundColor: theme.palette.surface.containerHighest,
                 },
                 width: '100%',
                 maxWidth: 600,
