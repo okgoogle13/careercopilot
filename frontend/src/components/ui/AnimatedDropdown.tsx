@@ -213,7 +213,7 @@ export function AnimatedDropdown({
                       textAlign: 'left',
                       justifyContent: 'flex-start',
                       '&:hover': {
-                        bgcolor: 'action.hover',
+                        bgcolor: (theme) => theme.palette.surface.containerHigh,
                       },
                       '&:disabled': {
                         opacity: 0.5,

@@ -246,7 +246,7 @@ export function AppLayout({
                         sx={{
                           height: 20,
                           fontSize: '0.7rem',
-                          bgcolor: isSelected ? 'rgba(255,255,255,0.2)' : 'action.selected',
+                          bgcolor: isSelected ? 'rgba(255,255,255,0.2)' : theme.palette.surface.containerHigh,
                           color: isSelected ? 'inherit' : 'text.secondary',
                         }}
                       />

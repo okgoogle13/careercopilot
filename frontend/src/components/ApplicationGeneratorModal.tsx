@@ -120,7 +120,7 @@ export const ApplicationGeneratorModal: React.FC<ApplicationGeneratorModalProps>
 
       <DialogContent sx={{ py: 3 }}>
         {/* Job Info */}
-        <Box sx={{ mb: 3, p: 2, bgcolor: 'action.hover', borderRadius: 1 }}>
+        <Box sx={{ mb: 3, p: 2, bgcolor: (theme) => theme.palette.surface.containerHigh, borderRadius: 1 }}>
           <Typography variant="body2" color="text.secondary">
             Job Position
           </Typography>

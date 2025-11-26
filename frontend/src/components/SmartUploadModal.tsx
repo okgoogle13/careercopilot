@@ -153,7 +153,7 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
               cursor: 'pointer',
               transition: 'all 0.2s',
               '&:hover': {
-                bgcolor: 'action.hover',
+                bgcolor: (theme) => theme.palette.surface.containerHigh,
               },
             }}
             component="label"
