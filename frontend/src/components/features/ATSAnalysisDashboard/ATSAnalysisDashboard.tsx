@@ -6,10 +6,9 @@ import {
   Error,
   TrendingUp,
   Description,
-  People,
   Lightbulb,
 } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 import { ATSScoreCircle } from '../../library/ATSScoreCircle';
@@ -41,233 +40,126 @@ interface ATSAnalysisDashboardProps {
   onBackToJobAnalysis?: () => void;
 }
 
-export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onContinueToTemplates, onBackToJobAnalysis }: ATSAnalysisDashboardProps) {
+export function ATSAnalysisDashboard({
+  data: analysisData,
+  onBack,
+  onNext,
+  onContinueToTemplates,
+  onBackToJobAnalysis,
+}: ATSAnalysisDashboardProps) {
   const [activeTab, setActiveTab] = useState<'overview' | 'keywords' | 'insights'>('overview');
 
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-500';
-    if (score >= 60) return 'text-yellow-500';
-    return 'text-red-500';
-  };
-
-  const getScoreBgColor = (score: number) => {
-    if (score >= 80) return 'bg-green-500/10';
-    if (score >= 60) return 'bg-yellow-500/10';
-    return 'bg-red-500/10';
-  };
-
   return (
-    <div sx={{
-      minHeight: "100vh",
-      p: 6
-    }}>
-      <div sx={{}}>
+    <Box sx={{ minHeight: '100vh', p: 6 }}>
+      <Box>
         {/* Header */}
-        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4
-    }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            mb: 6,
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
             <Button
-              variant="link"
+              variant="text"
               onClick={onBackToJobAnalysis}
-              sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2,
-      '&:hover': {}
-    }}
+              sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
             >
-              <ArrowLeft sx={{}} />
+              <ArrowLeft />
               Back to Job Analysis
             </Button>
-          </div>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-            <Button variant="default" onClick={onContinueToTemplates} sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+            <Button variant="contained" onClick={onContinueToTemplates} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               Continue to Templates
-              <ArrowRight sx={{}} />
+              <ArrowRight />
             </Button>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* Title Section */}
-        <div sx={{
-      textAlign: "center",}}>
-          <h1 sx={{
-      typography: "h2",
-      fontWeight: 700,}}>ATS Compatibility Analysis</h1>
-          <p sx={{
-      typography: "h6",}}>
-            Your resume has been analyzed for compatibility with Applicant Tracking Systems. Here's
-            how well it matches the job requirements.
-          </p>
-        </div>
+        <Box sx={{ textAlign: 'center', mb: 8 }}>
+          <Typography variant="h2" sx={{ fontWeight: 700, mb: 2 }}>
+            ATS Compatibility Analysis
+          </Typography>
+          <Typography variant="h6">
+            Your resume has been analyzed for compatibility with Applicant Tracking Systems. Here's how well it matches the job requirements.
+          </Typography>
+        </Box>
 
-        {/* Main Score Section - Enhanced Size */}
-        <div sx={{
-      [theme.breakpoints.up('md')]: {},
-      gap: 8
-    }}>
-          {/* Overall Score - Made Larger and More Prominent */}
-          <div sx={{
-      [theme.breakpoints.up('md')]: {}
-    }}>
-            <Card sx={{
-      p: 8,
-      textAlign: "center"
-    }}>
-              <div sx={{}}>
-                <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 2,
-      mb: 4
-    }}>
-                  <GpsFixed sx={{}} />
-                  <h2 sx={{
-      typography: "h5",
-      fontWeight: 600
-    }}>Overall ATS Score</h2>
-                </div>
+        {/* Main Score Section */}
+        <Box sx={{ display: 'grid', gap: 8, mb: 8 }}>
+          {/* Overall Score */}
+          <Box>
+            <Card sx={{ p: 8, textAlign: 'center' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 4 }}>
+                <GpsFixed />
+                <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                  Overall ATS Score
+                </Typography>
+              </Box>
 
-                {/* Enlarged Score Circle */}
-                <div sx={{
-      display: "flex",
-      justifyContent: "center"
-    }}>
-                  <div sx={{}}>
-                    <ATSScoreCircle
-                      score={analysisData.overallScore}
-                      size="large"
-                      sx={{}} // Increased from default size
-                    />
-                    {/* Enhanced pulsing score text overlay */}
-                    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-                      <div sx={{
-      textAlign: "center"
-    }}>
-                        <div
-                          sx={{
-      typography: "h1",
-      fontWeight: 700,}}
-                        >
-                          {analysisData.overallScore}%
-                        </div>
-                        <div sx={{
-      typography: "body1",
-      mt: 1
-    }}>ATS Compatible</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+                <ATSScoreCircle score={analysisData.overallScore} size="large" />
+              </Box>
 
-                <div
-                  sx={{
-      display: "inline-flex",
-      alignItems: "center",
-      gap: 2,
-      px: 4,
-      py: 2,
-      borderRadius: "var(--sys-shape-radius-full)",}}
-                >
-                  <CheckCircle sx={{}} />
-                  <span sx={{
-      fontWeight: 500,}}>
-                    Excellent Match
-                  </span>
-                </div>
+              <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+                <Box sx={{ textAlign: 'center' }}>
+                  <Typography variant="h1" sx={{ fontWeight: 700 }}>
+                    {analysisData.overallScore}%
+                  </Typography>
+                  <Typography variant="body1">ATS Compatible</Typography>
+                </Box>
+              </Box>
 
-                <p sx={{
-      typography: "body1",}}>
-                  Your resume is well-optimized for ATS systems and matches{' '}
-                  {analysisData.keywordMatches} of {analysisData.totalKeywords} key requirements.
-                </p>
-              </div>
+              <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 2, px: 4, py: 2, borderRadius: '9999px', mb: 4 }}>
+                <CheckCircle />
+                <Typography sx={{ fontWeight: 500 }}>Excellent Match</Typography>
+              </Box>
+
+              <Typography variant="body1">
+                Your resume is well-optimized for ATS systems and matches {analysisData.keywordMatches} of {analysisData.totalKeywords} key requirements.
+              </Typography>
             </Card>
-          </div>
+          </Box>
 
           {/* Score Breakdown */}
-          <div sx={{
-      [theme.breakpoints.up('md')]: {}
-    }}>
-            <Card sx={{
-      p: 6
-    }}>
-              <h3 sx={{
-      typography: "h5",
-      fontWeight: 600,
-      mb: 6,
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                <TrendingUp sx={{}} />
-                Score Breakdown
-              </h3>
+          <Box>
+            <Card sx={{ p: 6 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 6 }}>
+                <TrendingUp />
+                <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                  Score Breakdown
+                </Typography>
+              </Box>
 
-              <div sx={{
-      gap: 6
-    }}>
+              <Box sx={{ display: 'grid', gap: 6 }}>
                 {Object.entries(analysisData.sections).map(([section, score]) => (
-                  <div key={section} sx={{}}>
-                    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-                      <span sx={{
-      typography: "body1",
-      fontWeight: 500,
-      textTransform: "capitalize"
-    }}>
+                  <Box key={section}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
+                      <Typography variant="body1" sx={{ fontWeight: 500, textTransform: 'capitalize' }}>
                         {section.replace(/([A-Z])/g, ' $1').trim()}
-                      </span>
-                      <span sx={{
-      typography: "body1",
-      fontWeight: 700,}}>{score}%</span>
-                    </div>
-                    <div sx={{
-      width: "100%",
-      borderRadius: "var(--sys-shape-radius-full)",}}>
-                      <div
-                        sx={{
-      borderRadius: "var(--sys-shape-radius-full)",}}
-                        style={{ width: `${score}%` }}
-                      />
-                    </div>
-                  </div>
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontWeight: 700 }}>
+                        {score}%
+                      </Typography>
+                    </Box>
+                    <Box sx={{ width: '100%', height: 8, bgcolor: 'divider', borderRadius: '9999px', overflow: 'hidden' }}>
+                      <Box sx={{ width: `${score}%`, height: '100%', bgcolor: 'primary.main' }} />
+                    </Box>
+                  </Box>
                 ))}
-              </div>
+              </Box>
             </Card>
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* Detailed Analysis Tabs */}
-        <div sx={{}}>
+        <Box sx={{ mb: 8 }}>
           {/* Tab Navigation */}
-          <div sx={{
-      display: "flex",
-      p: 1,
-      borderRadius: "var(--sys-shape-radius-md)",}}>
+          <Box sx={{ display: 'flex', gap: 2, mb: 6, borderBottom: 1, borderColor: 'divider' }}>
             {[
               { id: 'overview', label: 'Overview', icon: Description },
               { id: 'keywords', label: 'Keywords', icon: GpsFixed },
@@ -275,358 +167,149 @@ export function ATSAnalysisDashboard({ data: analysisData, onBack, onNext, onCon
             ].map((tab) => {
               const Icon = tab.icon;
               return (
-                <button
+                <Button
                   key={tab.id}
+                  variant={activeTab === tab.id ? 'contained' : 'text'}
                   onClick={() => setActiveTab(tab.id as any)}
-                  sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2,
-      px: 4,
-      py: 2,
-      borderRadius: "0.375rem",
-      typography: "body1",
-      fontWeight: 500,
-      '&:hover': {},}}
+                  sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
                 >
-                  <Icon sx={{}} />
+                  <Icon />
                   {tab.label}
-                </button>
+                </Button>
               );
             })}
-          </div>
+          </Box>
 
           {/* Tab Content */}
           {activeTab === 'overview' && (
-            <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6
-    }}>
-              <Card sx={{
-      p: 6
-    }}>
-                <h3 sx={{
-      typography: "h6",
-      fontWeight: 600,
-      mb: 4,
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                  <CheckCircle sx={{
-      color: "green.500"
-    }} />
-                  Strengths
-                </h3>
-                <ul sx={{}}>
-                  <li sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 3
-    }}>
-                    <div sx={{
-      bgcolor: "green.500",
-      borderRadius: "var(--sys-shape-radius-full)",
-      mt: 2,
-      flexShrink: 0
-    }} />
-                    <div>
-                      <p sx={{
-      fontWeight: 500
-    }}>Excellent Formatting</p>
-                      <p sx={{
-      typography: "body1",}}>
-                        Clean structure that ATS can easily parse
-                      </p>
-                    </div>
-                  </li>
-                  <li sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 3
-    }}>
-                    <div sx={{
-      bgcolor: "green.500",
-      borderRadius: "var(--sys-shape-radius-full)",
-      mt: 2,
-      flexShrink: 0
-    }} />
-                    <div>
-                      <p sx={{
-      fontWeight: 500
-    }}>Strong Experience Match</p>
-                      <p sx={{
-      typography: "body1",}}>
-                        Your background aligns well with job requirements
-                      </p>
-                    </div>
-                  </li>
-                  <li sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 3
-    }}>
-                    <div sx={{
-      bgcolor: "green.500",
-      borderRadius: "var(--sys-shape-radius-full)",
-      mt: 2,
-      flexShrink: 0
-    }} />
-                    <div>
-                      <p sx={{
-      fontWeight: 500
-    }}>Relevant Skills Listed</p>
-                      <p sx={{
-      typography: "body1",}}>
-                        Key competencies are clearly highlighted
-                      </p>
-                    </div>
-                  </li>
-                </ul>
+            <Box sx={{ display: 'grid', gap: 6 }}>
+              <Card sx={{ p: 6 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 4 }}>
+                  <CheckCircle sx={{ color: 'success.main' }} />
+                  <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    Strengths
+                  </Typography>
+                </Box>
+                <Box component="ul" sx={{ pl: 0, listStyle: 'none' }}>
+                  {[
+                    { title: 'Excellent Formatting', desc: 'Clean structure that ATS can easily parse' },
+                    { title: 'Strong Experience Match', desc: 'Your background aligns well with job requirements' },
+                    { title: 'Relevant Skills Listed', desc: 'Key competencies are clearly highlighted' },
+                  ].map((item, idx) => (
+                    <Box key={idx} component="li" sx={{ display: 'flex', alignItems: 'flex-start', gap: 3, mb: 3 }}>
+                      <Box sx={{ width: 12, height: 12, bgcolor: 'success.main', borderRadius: '50%', mt: 1, flexShrink: 0 }} />
+                      <Box>
+                        <Typography sx={{ fontWeight: 500 }}>{item.title}</Typography>
+                        <Typography variant="body2">{item.desc}</Typography>
+                      </Box>
+                    </Box>
+                  ))}
+                </Box>
               </Card>
 
-              <Card sx={{
-      p: 6
-    }}>
-                <h3 sx={{
-      typography: "h6",
-      fontWeight: 600,
-      mb: 4,
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                  <Error sx={{
-      color: "yellow.500"
-    }} />
-                  Areas for Improvement
-                </h3>
-                <ul sx={{}}>
-                  <li sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 3
-    }}>
-                    <div sx={{
-      bgcolor: "yellow.500",
-      borderRadius: "var(--sys-shape-radius-full)",
-      mt: 2,
-      flexShrink: 0
-    }} />
-                    <div>
-                      <p sx={{
-      fontWeight: 500
-    }}>Missing Keywords</p>
-                      <p sx={{
-      typography: "body1",}}>
-                        3 important terms not found in your resume
-                      </p>
-                    </div>
-                  </li>
-                  <li sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 3
-    }}>
-                    <div sx={{
-      bgcolor: "yellow.500",
-      borderRadius: "var(--sys-shape-radius-full)",
-      mt: 2,
-      flexShrink: 0
-    }} />
-                    <div>
-                      <p sx={{
-      fontWeight: 500
-    }}>Technical Skills Section</p>
-                      <p sx={{
-      typography: "body1",}}>
-                        Could benefit from more specific software mentions
-                      </p>
-                    </div>
-                  </li>
-                </ul>
+              <Card sx={{ p: 6 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 4 }}>
+                  <Error sx={{ color: 'warning.main' }} />
+                  <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                    Areas for Improvement
+                  </Typography>
+                </Box>
+                <Box component="ul" sx={{ pl: 0, listStyle: 'none' }}>
+                  {[
+                    { title: 'Missing Keywords', desc: '3 important terms not found in your resume' },
+                    { title: 'Technical Skills Section', desc: 'Could benefit from more specific software mentions' },
+                  ].map((item, idx) => (
+                    <Box key={idx} component="li" sx={{ display: 'flex', alignItems: 'flex-start', gap: 3, mb: 3 }}>
+                      <Box sx={{ width: 12, height: 12, bgcolor: 'warning.main', borderRadius: '50%', mt: 1, flexShrink: 0 }} />
+                      <Box>
+                        <Typography sx={{ fontWeight: 500 }}>{item.title}</Typography>
+                        <Typography variant="body2">{item.desc}</Typography>
+                      </Box>
+                    </Box>
+                  ))}
+                </Box>
               </Card>
-            </div>
+            </Box>
           )}
 
           {activeTab === 'keywords' && (
-            <div sx={{}}>
-              {/* Keywords Section with Primary Color */}
-              <Card sx={{
-      p: 6
-    }}>
-                <h3
-                  sx={{
-      typography: "h6",
-      fontWeight: 600,
-      mb: 4,
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}
-                  style={{ color: 'var(--color-primary)' }}
-                >
-                  <GpsFixed sx={{}} style={{ color: 'var(--color-primary)' }} />
+            <Card sx={{ p: 6 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 6 }}>
+                <GpsFixed />
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
                   Keyword Analysis
-                </h3>
+                </Typography>
+              </Box>
 
-                <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6
-    }}>
-                  <div>
-                    <h4 sx={{
-      fontWeight: 500,
-      color: "green.600",
-      mb: 3
-    }}>
-                      Matched Keywords ({analysisData.matchedKeywords.length})
-                    </h4>
-                    <div sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: 2
-    }}>
-                      {analysisData.matchedKeywords.map((keyword, index) => (
-                        <Badge
-                          key={index}
-                          variant="secondary"
-                          sx={{
-      color: "green.600",}}
-                        >
-                          {keyword}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
+              <Box sx={{ display: 'grid', gap: 6 }}>
+                <Box>
+                  <Typography variant="body1" sx={{ fontWeight: 500, mb: 3, color: 'success.main' }}>
+                    Matched Keywords ({analysisData.matchedKeywords.length})
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                    {analysisData.matchedKeywords.map((keyword, index) => (
+                      <Badge key={index} variant="outlined">
+                        {keyword}
+                      </Badge>
+                    ))}
+                  </Box>
+                </Box>
 
-                  <div>
-                    <h4 sx={{
-      fontWeight: 500,
-      color: "yellow.600",
-      mb: 3
-    }}>
-                      Missing Keywords ({analysisData.missingKeywords.length})
-                    </h4>
-                    <div sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: 2
-    }}>
-                      {analysisData.missingKeywords.map((keyword, index) => (
-                        <Badge
-                          key={index}
-                          variant="secondary"
-                          sx={{
-      color: "yellow.600",}}
-                        >
-                          {keyword}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Card>
-            </div>
+                <Box>
+                  <Typography variant="body1" sx={{ fontWeight: 500, mb: 3, color: 'warning.main' }}>
+                    Missing Keywords ({analysisData.missingKeywords.length})
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                    {analysisData.missingKeywords.map((keyword, index) => (
+                      <Badge key={index} variant="outlined">
+                        {keyword}
+                      </Badge>
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
+            </Card>
           )}
 
           {activeTab === 'insights' && (
-            <div sx={{}}>
-              {/* Insights Section with Secondary Color */}
-              <h3
-                sx={{
-      typography: "h6",
-      fontWeight: 600,
-      mb: 4,
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}
-                style={{ color: 'var(--color-secondary)' }}
-              >
-                <Lightbulb sx={{}} style={{ color: 'var(--color-secondary)' }} />
-                Actionable Insights
-              </h3>
-
+            <Box sx={{ display: 'grid', gap: 4 }}>
               {analysisData.insights.map((insight, index) => (
-                <Card key={index} sx={{
-      p: 6
-    }}>
-                  <div sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      gap: 4
-    }}>
-                    <div
-                      sx={{
-      p: 2,
-      borderRadius: "var(--sys-shape-radius-md)",}}
-                    >
-                      {insight.type === 'strength' && (
-                        <CheckCircle sx={{
-      color: "green.500"
-    }} />
-                      )}
-                      {insight.type === 'improvement' && (
-                        <Error sx={{
-      color: "yellow.500"
-    }} />
-                      )}
-                      {insight.type === 'opportunity' && (
-                        <TrendingUp sx={{
-      color: "blue.500"
-    }} />
-                      )}
-                    </div>
-                    <div>
-                      <h4 sx={{
-      fontWeight: 600,
-      mb: 2
-    }}>{insight.title}</h4>
-                      <p sx={{}}>{insight.description}</p>
-                    </div>
-                  </div>
+                <Card key={index} sx={{ p: 6 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 4 }}>
+                    <Box>
+                      {insight.type === 'strength' && <CheckCircle sx={{ color: 'success.main' }} />}
+                      {insight.type === 'improvement' && <Error sx={{ color: 'warning.main' }} />}
+                      {insight.type === 'opportunity' && <TrendingUp sx={{ color: 'info.main' }} />}
+                    </Box>
+                    <Box>
+                      <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
+                        {insight.title}
+                      </Typography>
+                      <Typography variant="body2">{insight.description}</Typography>
+                    </Box>
+                  </Box>
                 </Card>
               ))}
-            </div>
+            </Box>
           )}
-        </div>
+        </Box>
 
         {/* Action Buttons */}
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      pt: 8,
-      borderTop: 1,}}>
-          <Button variant="outline" onClick={onBack} sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-            <ArrowLeft sx={{}} />
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pt: 8, borderTop: 1, borderColor: 'divider' }}>
+          <Button variant="outlined" onClick={onBack} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <ArrowLeft />
             Back to Job Analysis
           </Button>
 
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4
-    }}>
-            <div sx={{
-      typography: "body1",}}>
-              Ready to create an optimized resume?
-            </div>
-            <Button onClick={onNext} sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2,}}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+            <Typography variant="body1">Ready to create an optimized resume?</Typography>
+            <Button variant="contained" onClick={onNext} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               Choose Template
-              <ArrowRight sx={{}} />
+              <ArrowRight />
             </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 }

@@ -9,6 +9,7 @@ import {
   Chip,
   IconButton,
   alpha,
+  useTheme,
 } from '@mui/material';
 import {
   BookmarkBorder,
@@ -83,6 +84,7 @@ export const JobCard: React.FC<JobCardProps> = ({
   onApply,
   onViewDetails,
 }) => {
+  const theme = useTheme();
   const [isSaved, setIsSaved] = useState(saved);
 
   const handleSave = (e: React.MouseEvent) => {
@@ -107,26 +109,26 @@ export const JobCard: React.FC<JobCardProps> = ({
     return `${currency}${min.toLocaleString()} - ${currency}${max.toLocaleString()}${periodText}`;
   };
 
-  const getExperienceBadgeColor = () => {
+  const getExperienceBadgeColor = (theme: any) => {
     switch (job.experienceLevel) {
       case 'entry':
-        return { bg: alpha('var(--sys-color-success)', 0.1), text: 'var(--sys-color-success)', border: alpha('var(--sys-color-success)', 0.2) };
+        return { bg: alpha(theme.palette.secondary.main, 0.1), text: theme.palette.secondary.main, border: alpha(theme.palette.secondary.main, 0.2) };
       case 'mid':
-        return { bg: alpha('var(--sys-color-info-light)', 0.1), text: 'var(--sys-color-info-light)', border: alpha('var(--sys-color-info-light)', 0.2) };
+        return { bg: alpha(theme.palette.tertiary.main, 0.1), text: theme.palette.tertiary.main, border: alpha(theme.palette.tertiary.main, 0.2) };
       case 'senior':
-        return { bg: alpha('var(--sys-color-primary)', 0.1), text: 'var(--sys-color-primary)', border: alpha('var(--sys-color-primary)', 0.2) };
+        return { bg: alpha(theme.palette.primary.main, 0.1), text: theme.palette.primary.main, border: alpha(theme.palette.primary.main, 0.2) };
       case 'executive':
-        return { bg: alpha('var(--sys-color-warning)', 0.1), text: 'var(--sys-color-warning)', border: alpha('var(--sys-color-warning)', 0.2) };
+        return { bg: alpha(theme.palette.error.main, 0.1), text: theme.palette.error.main, border: alpha(theme.palette.error.main, 0.2) };
       default:
-        return { bg: alpha('var(--sys-color-text-disabled)', 0.1), text: 'var(--sys-color-text-disabled)', border: alpha('var(--sys-color-text-disabled)', 0.2) };
+        return { bg: alpha(theme.palette.text.disabled, 0.1), text: theme.palette.text.disabled, border: alpha(theme.palette.text.disabled, 0.2) };
     }
   };
 
-  const getMatchScoreColor = (score: number) => {
-    if (score >= 90) return { text: 'var(--sys-color-success)', bg: alpha('var(--sys-color-success)', 0.1) };
-    if (score >= 75) return { text: 'var(--sys-color-info-light)', bg: alpha('var(--sys-color-info-light)', 0.1) };
-    if (score >= 60) return { text: 'var(--sys-color-warning)', bg: alpha('var(--sys-color-warning)', 0.1) };
-    return { text: 'var(--sys-color-error)', bg: alpha('var(--sys-color-error)', 0.1) };
+  const getMatchScoreColor = (score: number, theme: any) => {
+    if (score >= 90) return { text: theme.palette.primary.main, bg: alpha(theme.palette.primary.main, 0.1) };
+    if (score >= 75) return { text: theme.palette.secondary.main, bg: alpha(theme.palette.secondary.main, 0.1) };
+    if (score >= 60) return { text: theme.palette.tertiary.main, bg: alpha(theme.palette.tertiary.main, 0.1) };
+    return { text: theme.palette.error.main, bg: alpha(theme.palette.error.main, 0.1) };
   };
 
   if (variant === 'compact') {
@@ -149,7 +151,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                 <Typography variant="body2" sx={{ fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                   {job.title}
                 </Typography>
-                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: 'var(--sys-color-info-light)' }} />}
+                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: theme.palette.secondary.main }} />}
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary' }}>
                 <Business sx={{ fontSize: 12 }} />
@@ -194,8 +196,8 @@ export const JobCard: React.FC<JobCardProps> = ({
     );
   }
 
-  const experienceColor = getExperienceBadgeColor();
-  const matchColor = job.aiMatch ? getMatchScoreColor(job.aiMatch.score) : null;
+  const experienceColor = getExperienceBadgeColor(theme);
+  const matchColor = job.aiMatch ? getMatchScoreColor(job.aiMatch.score, theme) : null;
 
   return (
     <Card
@@ -243,7 +245,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                 <Typography variant="body2" sx={{ fontWeight: 600 }} color="text.secondary">
                   {job.company}
                 </Typography>
-                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: 'var(--sys-color-info-light)' }} />}
+                {job.verified && <VerifiedUser sx={{ fontSize: 16, color: theme.palette.secondary.main }} />}
                 {job.sponsored && (
                   <Chip
                     label="Sponsored"
@@ -394,7 +396,7 @@ export const JobCard: React.FC<JobCardProps> = ({
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              <Bolt sx={{ fontSize: 16, color: 'var(--sys-color-primary)' }} />
+              <Bolt sx={{ fontSize: 16, color: theme.palette.primary.main }} />
               <Typography variant="body2" sx={{ fontWeight: 600, color: 'primary.main' }}>
                 Why this matches you
               </Typography>
@@ -411,7 +413,7 @@ export const JobCard: React.FC<JobCardProps> = ({
                     listStyle: 'none',
                   }}
                 >
-                  <Star sx={{ fontSize: 12, color: 'var(--sys-color-primary)', mt: 0.5, flexShrink: 0 }} />
+                  <Star sx={{ fontSize: 12, color: theme.palette.primary.main, mt: 0.5, flexShrink: 0 }} />
                   <Typography variant="caption" color="text.secondary">
                     {reason}
                   </Typography>
@@ -429,9 +431,9 @@ export const JobCard: React.FC<JobCardProps> = ({
             fullWidth
             disabled
             sx={{
-              bgcolor: (theme) => alpha(theme.palette.success.main, 0.1),
-              borderColor: (theme) => alpha(theme.palette.success.main, 0.2),
-              color: 'success.main',
+              bgcolor: alpha(theme.palette.secondary.main, 0.1),
+              borderColor: alpha(theme.palette.secondary.main, 0.2),
+              color: theme.palette.secondary.main,
             }}
           >
             Applied

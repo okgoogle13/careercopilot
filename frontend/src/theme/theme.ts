@@ -24,21 +24,39 @@ declare module '@mui/material/styles' {
       borderHover: string;
       blur: string;
     };
-    // Add M3 palette extensions
-    palette: {
-      tertiary: Theme['palette']['primary'];
-      surface: {
-        main: string;
-        variant: string;
-        containerLow: string;
-        container: string;
-        containerHigh: string;
-        containerHighest: string;
-      };
-      outline: {
-        main: string;
-        variant: string;
-      };
+  }
+
+  // Extend the Palette interface to add custom colors
+  interface Palette {
+    tertiary: Palette['primary'];
+    surface: {
+      main: string;
+      variant: string;
+      containerLow: string;
+      container: string;
+      containerHigh: string;
+      containerHighest: string;
+    };
+    outline: {
+      main: string;
+      variant: string;
+    };
+  }
+
+  // Extend the PaletteOptions interface
+  interface PaletteOptions {
+    tertiary?: PaletteOptions['primary'];
+    surface?: {
+      main: string;
+      variant: string;
+      containerLow: string;
+      container: string;
+      containerHigh: string;
+      containerHighest: string;
+    };
+    outline?: {
+      main: string;
+      variant: string;
     };
   }
 
@@ -61,22 +79,6 @@ declare module '@mui/material/styles' {
       border?: string;
       borderHover?: string;
       blur?: string;
-    };
-    // Add M3 palette extensions
-    palette?: {
-      tertiary?: ThemeOptions['palette']['primary'];
-      surface?: {
-        main: string;
-        variant: string;
-        containerLow: string;
-        container: string;
-        containerHigh: string;
-        containerHighest: string;
-      };
-      outline?: {
-        main: string;
-        variant: string;
-      };
     };
   }
 }

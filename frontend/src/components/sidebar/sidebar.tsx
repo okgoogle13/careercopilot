@@ -36,7 +36,7 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
         '& .MuiDrawer-paper': {
           width: drawerWidth,
           boxSizing: 'border-box',
-          backgroundColor: theme.palette.mode === 'light' ? '#fafafa' : '#1a1a1a',
+          backgroundColor: theme.palette.background.default,
           borderRight: `1px solid ${theme.palette.divider}`,
         },
       }}
@@ -71,10 +71,10 @@ export function Sidebar({ activeTab, onTabChange }: SidebarProps) {
                       minHeight: 48,
                       px: 2,
                       py: 1.5,
-                      backgroundColor: isActive ? theme.palette.action.selected : 'transparent',
-                      color: isActive ? theme.palette.primary.main : theme.palette.text.primary,
+                      backgroundColor: isActive ? theme.palette.primary.main : 'transparent',
+                      color: isActive ? theme.palette.primary.contrastText : theme.palette.text.primary,
                       '&:hover': {
-                        backgroundColor: theme.palette.action.hover,
+                        backgroundColor: isActive ? theme.palette.primary.dark : theme.palette.surface.containerHigh,
                         color: theme.palette.primary.main,
                       },
                     }}
