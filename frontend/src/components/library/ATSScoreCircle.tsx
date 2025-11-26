@@ -42,11 +42,11 @@ export function ATSScoreCircle({
   const strokeDasharray = circumference;
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
-  // Color based on score
-  const getScoreColor = (_core: number) => {
-    if (score >= 80) return '#10b981'; // green-500
-    if (score >= 60) return '#f59e0b'; // yellow-500
-    return '#ef4444'; // red-500
+  // Color based on score (M3 tokens: primary/secondary/error)
+  const getScoreColor = (score: number) => {
+    if (score >= 80) return '#A78BFA'; // primary-main
+    if (score >= 60) return '#C9C3DC'; // secondary-main
+    return '#FFB4AB'; // error-main
   };
 
   const scoreColor = getScoreColor(score);

@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { motion } from 'motion/react';
 import React, { useMemo } from 'react';
 
@@ -39,14 +39,20 @@ const sizeConfigs: Record<'small' | 'medium' | 'large', SizeConfig> = {
 
 /**
  * Get color based on score threshold
- * - score ≥ 80: Green (Excellent)
- * - score 60-79: Yellow/Orange (Good)
- * - score < 60: Red (Needs improvement)
+ * - score ≥ 80: Primary (Excellent)
+ * - score 60-79: Secondary (Good)
+ * - score < 60: Error (Needs improvement)
  */
-function getScoreColor(score: number): string {
-  if (score >= 80) return '#10b981'; // green-500
-  if (score >= 60) return '#f59e0b'; // yellow-500
-  return '#ef4444'; // red-500
+function getScoreColor(score: number, theme?: any): string {
+  if (theme) {
+    if (score >= 80) return theme.palette.primary.main;
+    if (score >= 60) return theme.palette.secondary.main;
+    return theme.palette.error.main;
+  }
+  // Fallback to hardcoded colors if no theme
+  if (score >= 80) return '#A78BFA'; // primary-main
+  if (score >= 60) return '#C9C3DC'; // secondary-main
+  return '#FFB4AB'; // error-main
 }
 
 /**
@@ -84,11 +90,12 @@ export function ATSScoreCircle({
   showLabel = false,
   className,
 }: ATSScoreCircleProps) {
+  const theme = useTheme();
   // Ensure score is within valid range
   const clampedScore = Math.min(100, Math.max(0, score));
 
   const config = sizeConfigs[size];
-  const scoreColor = getScoreColor(clampedScore);
+  const scoreColor = getScoreColor(clampedScore, theme);
   const { radius, circumference, strokeDasharray, strokeDashoffset } = useMemo(
     () => calculateCircleMetrics(config.diameter, config.strokeWidth, clampedScore),
     [config.diameter, config.strokeWidth, clampedScore]
