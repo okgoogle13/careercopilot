@@ -1,22 +1,8 @@
-import React, { ReactNode, forwardRef, useImperativeHandle, useState } from 'react';
-import {
-  Dialog as MuiDialog,
-  DialogProps as MuiDialogProps,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Button,
-  IconButton,
-  Box,
-  Typography,
-  SxProps,
-  Theme,
-  Breakpoint,
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
+import React, { ReactNode, useState } from 'react';
+import { M3Dialog } from '../../M3Dialog/M3Dialog';
+import { M3Button } from '../../M3Button/M3Button';
 
-export interface DialogProps extends Omit<MuiDialogProps, 'open' | 'onClose' | 'maxWidth'> {
+export interface DialogProps {
   /**
    * The title of the dialog
    */
@@ -62,7 +48,7 @@ export interface DialogProps extends Omit<MuiDialogProps, 'open' | 'onClose' | '
    * The color of the confirm button
    * @default 'primary'
    */
-  confirmButtonColor?: 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
+  confirmButtonColor?: 'primary' | 'secondary' | 'error';
   /**
    * Whether the confirm button is in a loading state
    * @default false
@@ -83,25 +69,13 @@ export interface DialogProps extends Omit<MuiDialogProps, 'open' | 'onClose' | '
   onConfirm?: () => void | Promise<void>;
   /**
    * The maximum width of the dialog
-   * @default 'sm'
+   * @default 'medium'
    */
-  maxWidth?: Breakpoint | false;
+  maxWidth?: 'small' | 'medium' | 'large' | 'full';
   /**
-   * Additional styles for the dialog
+   * Additional className
    */
-  sx?: SxProps<Theme>;
-  /**
-   * Additional styles for the dialog content
-   */
-  contentSx?: SxProps<Theme>;
-  /**
-   * Additional styles for the dialog title
-   */
-  titleSx?: SxProps<Theme>;
-  /**
-   * Additional styles for the dialog actions
-   */
-  actionsSx?: SxProps<Theme>;
+  className?: string;
   /**
    * Whether to disable the backdrop click to close the dialog
    * @default false
@@ -117,24 +91,14 @@ export interface DialogProps extends Omit<MuiDialogProps, 'open' | 'onClose' | '
    * @default true
    */
   divider?: boolean;
-  /**
-   * The variant of the dialog
-   * @default 'default'
-   */
-  variant?: 'default' | 'fullscreen' | 'scrollable';
-}
-
-export interface DialogRef {
-  open: () => void;
-  close: () => void;
-  isOpen: boolean;
 }
 
 /**
- * A customizable dialog component built with Material-UI's Dialog.
- * Supports various sizes, fullscreen mode, scrollable content, and custom actions.
+ * Dialog component - Migrated to M3Dialog
+ * Uses Material Design 3 tokens instead of MUI theme
+ * Supports controlled and uncontrolled open state
  */
-const Dialog = forwardRef<DialogRef, DialogProps>(({
+export const Dialog = React.forwardRef<HTMLDivElement, DialogProps>(({
   title,
   content,
   contentText,
@@ -149,41 +113,30 @@ const Dialog = forwardRef<DialogRef, DialogProps>(({
   open: openProp,
   onClose,
   onConfirm,
-  maxWidth = 'sm',
-  sx,
-  contentSx,
-  titleSx,
-  actionsSx,
+  maxWidth = 'medium',
+  className = '',
   disableBackdropClick = false,
   disableEscapeKeyDown = false,
   divider = true,
-  variant = 'default',
   children,
-  ...rest
 }, ref) => {
   const [internalOpen, setInternalOpen] = useState(false);
   const isControlled = openProp !== undefined;
   const open = isControlled ? openProp : internalOpen;
 
-  const handleOpen = () => {
-    if (!isControlled) {
-      setInternalOpen(true);
-    }
-  };
-
   const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown' | 'closeButton' | 'cancelButton') => {
     if (reason === 'backdropClick' && disableBackdropClick) {
       return;
     }
-    
+
     if (reason === 'escapeKeyDown' && disableEscapeKeyDown) {
       return;
     }
-    
+
     if (!isControlled) {
       setInternalOpen(false);
     }
-    
+
     onClose?.(event, reason);
   };
 
@@ -196,134 +149,77 @@ const Dialog = forwardRef<DialogRef, DialogProps>(({
     }
   };
 
-  useImperativeHandle(ref, () => ({
-    open: handleOpen,
-    close: () => handleClose({}, 'closeButton'),
-    isOpen: open,
-  }));
-
-  const dialogProps: MuiDialogProps = {
-    open,
-    onClose: (event, reason) => handleClose(event, reason as 'backdropClick' | 'escapeKeyDown'),
-    maxWidth,
-    fullScreen: variant === 'fullscreen',
-    scroll: variant === 'scrollable' ? 'paper' : 'body',
-    ...rest,
-    sx: {
-      '& .MuiDialog-paper': {
-        width: '100%',
-        m: 2,
-        ...(variant === 'fullscreen' && {
-          m: 0,
-          height: '100%',
-        }),
-        ...(variant === 'scrollable' && {
-          maxHeight: 'calc(100% - 64px)',
-        }),
-      },
-      ...sx,
-    },
-  };
+  const mapColorToVariant = (color: 'primary' | 'secondary' | 'error'): 'primary' | 'secondary' | 'error' => color;
 
   return (
-    <MuiDialog {...dialogProps}>
-      <Box sx={{ position: 'relative' }}>
-        {title && (
-          <>
-            <DialogTitle 
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                pr: 6,
-                ...titleSx,
-              }}
+    <M3Dialog
+      ref={ref}
+      open={open}
+      onClose={() => handleClose({}, 'closeButton')}
+      maxWidth={maxWidth}
+      className={className}
+      disableBackdropClick={disableBackdropClick}
+      disableEscapeKeyDown={disableEscapeKeyDown}
+    >
+      {/* Dialog Header */}
+      {title && (
+        <div className="m3-dialog-header">
+          <div className="m3-dialog-title">{title}</div>
+          {showCloseButton && (
+            <button
+              type="button"
+              className="m3-dialog-close"
+              onClick={() => handleClose({}, 'closeButton')}
+              aria-label="Close dialog"
             >
-              <Typography variant="h6" component="div">
-                {title}
-              </Typography>
-              {showCloseButton && (
-                <IconButton
-                  aria-label="close"
-                  onClick={() => handleClose({}, 'closeButton')}
-                  sx={{
-                    position: 'absolute',
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
-                  }}
-                >
-                  <CloseIcon />
-                </IconButton>
-              )}
-            </DialogTitle>
-            {divider && <Box sx={{ borderBottom: 1, borderColor: 'divider' }} />}
-          </>
-        )}
-        
-        <DialogContent 
-          sx={{
-            ...(variant === 'scrollable' && { overflowY: 'auto' }),
-            ...contentSx,
-          }}
-        >
-          {contentText ? (
-            <DialogContentText>{contentText}</DialogContentText>
-          ) : (
-            content || children
+              <svg className="m3-dialog-close-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </svg>
+            </button>
           )}
-        </DialogContent>
-        
-        {(showCancelButton || showConfirmButton || actions) && (
-          <DialogActions 
-            sx={{
-              px: 3,
-              py: 2,
-              ...(divider && { borderTop: 1, borderColor: 'divider' }),
-              ...actionsSx,
-            }}
-          >
-            {actions || (
-              <>
-                {showCancelButton && (
-                  <Button 
-                    onClick={() => handleClose({}, 'cancelButton')}
-                    disabled={isConfirmLoading}
-                  >
-                    {cancelButtonText}
-                  </Button>
-                )}
-                {showConfirmButton && (
-                  <Button
-                    onClick={handleConfirm}
-                    color={confirmButtonColor}
-                    variant="contained"
-                    disabled={isConfirmLoading}
-                  >
-                    {confirmButtonText}
-                    {isConfirmLoading && (
-                      <Box 
-                        component="span" 
-                        sx={{ 
-                          display: 'inline-flex', 
-                          ml: 1,
-                          '& > *': { 
-                            width: '1em !important', 
-                            height: '1em !important' 
-                          } 
-                        }}
-                      >
-                        {/* Add your loading spinner here */}
-                      </Box>
-                    )}
-                  </Button>
-                )}
-              </>
-            )}
-          </DialogActions>
+        </div>
+      )}
+
+      {divider && title && <div className="m3-dialog-divider" />}
+
+      {/* Dialog Content */}
+      <div className="m3-dialog-content">
+        {contentText ? (
+          <p className="m3-dialog-text">{contentText}</p>
+        ) : (
+          content || children
         )}
-      </Box>
-    </MuiDialog>
+      </div>
+
+      {/* Dialog Actions */}
+      {(showCancelButton || showConfirmButton || actions) && (
+        <div className="m3-dialog-actions">
+          {actions || (
+            <>
+              {showCancelButton && (
+                <M3Button
+                  variant="text"
+                  onClick={() => handleClose({}, 'cancelButton')}
+                  disabled={isConfirmLoading}
+                >
+                  {cancelButtonText}
+                </M3Button>
+              )}
+              {showConfirmButton && (
+                <M3Button
+                  variant="filled"
+                  color={mapColorToVariant(confirmButtonColor)}
+                  onClick={handleConfirm}
+                  disabled={isConfirmLoading}
+                >
+                  {confirmButtonText}
+                </M3Button>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </M3Dialog>
   );
 });
 
