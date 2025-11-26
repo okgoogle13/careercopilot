@@ -1,27 +1,18 @@
-import type { ChipProps } from '@mui/material';
-import { Chip } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import { M3Badge } from '../M3Badge/M3Badge';
+import type { M3BadgeProps, M3BadgeColor, M3BadgeVariant } from '../M3Badge/M3Badge';
 
-const StyledChip = styled(Chip)(({ theme, variant }) => ({
-  borderRadius: theme.spacing(1),
-  fontSize: '0.75rem',
-  height: 'auto',
-  padding: theme.spacing(0.5, 1),
-  ...(variant === 'outlined' && {
-    backgroundColor: 'transparent',
-    border: `1px solid ${theme.palette.divider}`,
-  }),
-}));
-
-export interface BadgeProps extends Omit<ChipProps, 'variant' | 'children'> {
+export interface BadgeProps extends Omit<M3BadgeProps, 'variant'> {
   variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-  children?: React.ReactNode;
 }
 
-export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
+/**
+ * Migrated to M3Badge - uses M3 design tokens instead of MUI theme
+ * Maps old BadgeProps variants to M3Badge color and variant system
+ */
+export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ variant = 'default', children, ...props }, ref) => {
-    const getColor = (variant: string): ChipProps['color'] => {
+    const getColor = (variant: string): M3BadgeColor => {
       switch (variant) {
         case 'destructive':
           return 'error';
@@ -32,19 +23,20 @@ export const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
       }
     };
 
-    const getVariant = (variant: string): ChipProps['variant'] => {
+    const getVariant = (variant: string): M3BadgeVariant => {
       return variant === 'outline' ? 'outlined' : 'filled';
     };
 
     return (
-      <StyledChip
+      <M3Badge
         ref={ref}
         variant={getVariant(variant)}
         color={getColor(variant)}
-        label={children}
         size="small"
         {...props}
-      />
+      >
+        {children}
+      </M3Badge>
     );
   }
 );
