@@ -1,0 +1,47 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["src"],
+    "includePattern": "\\.(jsx?|tsx?|mjs)$",
+    "excludePattern": "(^|\\/|\\\\)[._]|(node_modules|.next|dist|coverage|docs)"
+  },
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/better-docs/category"
+  ],
+  "opts": {
+    "encoding": "utf8",
+    "readme": "README.md",
+    "recurse": true,
+    "verbose": true,
+    "destination": "docs/api/",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "title": "Electric Alchemist Design System",
+      "nav_style": "inline",
+      "search": true,
+      "collapse": true,
+      "meta": {
+        "description": "Documentation for the Electric Alchemist Design System",
+        "keyword": "design system, ui, react, mui, typescript"
+      }
+    }
+  },
+  "templates": {
+    "better-docs": {
+      "name": "Electric Alchemist",
+      "navLinks": [
+        {
+          "label": "GitHub",
+          "href": "https://github.com/okgoogle13/careercopilot"
+        }
+      ]
+    }
+  },
+  "markdown": {
+    "idInHeadings": true
+  }
+}

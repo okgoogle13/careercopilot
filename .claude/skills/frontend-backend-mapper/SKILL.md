@@ -1,10 +1,10 @@
 ---
 name: frontend-backend-mapper
-description: "Analyzes and maps frontend API calls to backend endpoints. Detects missing endpoints, unused endpoints, and integration gaps."
+description: "Analyzes and maps frontend API calls to backend endpoints. Detects missing endpoints, unused endpoints, and integration gaps. Optional: trace complete data flows to database and design tokens. Related: api-contract-validator for detailed type analysis."
 ---
 # Frontend-Backend Mapper Workflow
 
-This skill analyzes the integration between frontend API services and backend endpoints to ensure complete coverage.
+This skill analyzes the integration between frontend API services and backend endpoints to ensure complete coverage. It can optionally trace complete data flows including database operations and design token usage.
 
 ## Workflow Steps
 
@@ -38,7 +38,22 @@ This skill analyzes the integration between frontend API services and backend en
    - Map backend endpoints to Genkit flows
    - Track complete data flow: Component → Service → Endpoint → Flow
 
-5. **Generate mapping report:**
+5. **[OPTIONAL] Trace database operations:**
+   - Read `backend/app/core/firestore_cache.py` and Firestore collection usage
+   - Map backend endpoints to Firestore collections they read/write
+   - Document data persistence flow: Endpoint → Collection → Cache strategy
+   - Identify missing database operations (endpoints without data persistence)
+   - Only included when `--include-database` flag is used
+
+6. **[OPTIONAL] Map design token usage:**
+   - Read `frontend/src/theme/tokens.json` and CSS token definitions
+   - Scan components in `frontend/src/components/**/*.tsx`
+   - Identify which components use design tokens vs hardcoded values
+   - Document token application flow: Token → CSS Variable → Component
+   - Flag components not using the M3 token system
+   - Only included when `--include-design-tokens` flag is used
+
+7. **Generate mapping report:**
    - Create `docs/INTEGRATION_MAP.md` with:
      - Complete integration matrix
      - Missing endpoint list with priority
@@ -46,15 +61,19 @@ This skill analyzes the integration between frontend API services and backend en
      - Type mismatch warnings
      - Integration health score
      - Recommendations for fixes
+     - [OPTIONAL] Database persistence flow (with `--include-database`)
+     - [OPTIONAL] Design token coverage report (with `--include-design-tokens`)
 
-6. **Generate visual diagram:**
+8. **Generate visual diagrams:**
    - Create Mermaid diagram showing:
      - Frontend components → API services
      - API services → Backend endpoints
      - Backend endpoints → Genkit flows
      - Missing connections highlighted
+     - [OPTIONAL] Add Firestore collection connections (with `--include-database`)
+     - [OPTIONAL] Add design token flow (with `--include-design-tokens`)
 
-7. **Report findings:**
+9. **Report findings:**
    - Display summary statistics
    - Show critical issues (missing required endpoints)
    - List improvement opportunities
@@ -146,3 +165,6 @@ graph LR
 - Generate integration map for new team members
 - Track integration health over time
 - Prioritize missing endpoints by usage frequency
+- Use `--include-database` to trace complete data flows to Firestore
+- Use `--include-design-tokens` to audit component token compliance
+- Use both flags for comprehensive fullstack documentation

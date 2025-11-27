@@ -1,0 +1,58 @@
+:root {
+  /* --- COLOR SYSTEM: THE ALCHEMIST PALETTE --- */
+  /* Core Tones */
+  --color-deep-void: #141218;
+  --color-floor: #1D1B20;
+  --color-shelf: #211F26;
+  --color-light: #EADDFF;
+  --color-ink: #21005D;
+  --color-spark: #EFB8C8;
+  
+  /* Semantic Roles */
+  --sys-surface: var(--color-deep-void);
+  --sys-surface-low: var(--color-floor);
+  --sys-surface-container: var(--color-shelf);
+  
+  --sys-primary: #D0BCFF; /* Lavender */
+  --sys-secondary: #9D88D4; /* Lilac */
+  --sys-tertiary: var(--color-spark);
+  --sys-error: #FF6B9D; /* Coral Pink */
+  
+  --sys-outline: #938F99;
+  --sys-outline-variant: #49454F; /* Grid Lines */
+
+  /* --- SPACING: BASE-24 SYSTEM --- */
+  --space-xs: 4px;   /* 0.16x */
+  --space-sm: 8px;   /* 0.33x */
+  --space-md: 12px;  /* 0.5x */
+  --space-base: 16px;/* 0.66x */
+  --space-lg: 24px;  /* 1x - GRID UNIT */
+  --space-xl: 48px;  /* 2x */
+  --space-2xl: 72px; /* 3x */
+  --space-3xl: 96px; /* 4x */
+
+  /* --- BORDERS & ELEVATION (SOLID STATE) --- */
+  --radius-bento: 24px;
+  --radius-inner: 28px;
+  --radius-badge: 8px;
+  
+  --border-width-card: 1px;
+  --border-width-hover: 2px;
+  --border-width-modal: 3px;
+
+  /* --- Z-INDEX LAYERS --- */
+  --z-card: 1;
+  --z-sticky: 20;
+  --z-drawer: 30;
+  --z-scrim: 39;
+  --z-modal: 40;
+}
+
+/* Global Reset for Dark Mode */
+body {
+  background-color: var(--sys-surface);
+  color: var(--sys-primary);
+  /* The Technical Dot Matrix Background */
+  background-image: radial-gradient(var(--sys-outline-variant) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}

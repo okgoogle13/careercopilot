@@ -19,18 +19,14 @@ This skill coordinates the complete 8-step M3 migration protocol across multiple
 
 ---
 
-## 8-Step Migration Protocol
+## 4-Step Migration Protocol (Consolidated)
 
-Each component goes through 8 sequential steps:
+Each component goes through 4 sequential steps:
 
-1. **m3-layout-refactor** - Spacing tokens (padding, margin, gap)
-2. **m3-color-themer** - Color tokens (78 colors, 30+ roles)
-3. **m3-typography-classifier** - Type scale tokens (13 scales)
-4. **m3-editorial-stylist** - Editorial conventions (alignment, truncation)
-5. **m3-shape-refactor** - Shape tokens (7 corner radii)
-6. **m3-elevation-refactor** - Elevation tokens (6 levels)
-7. **m3-icon-replacer** - Icon standards (20px, 24px, 40px)
-8. **m3-motion-applier** - Motion tokens (16 durations, 10 easing)
+1. **m3-layout-tokens** - Spacing tokens (padding, margin, gap)
+2. **m3-visual-tokens** - Color, shape, elevation tokens (78 colors, 7 shapes, 6 levels)
+3. **m3-typography-tokens** - Type scale + editorial conventions (13 scales + alignment/spacing)
+4. **m3-interaction-tokens** - Icon sizing/colors + motion tokens (3 sizes, 16 durations, 10 easing)
 
 ---
 
@@ -63,31 +59,31 @@ frontend/src/components/ui/Dropdown/Dropdown.tsx
       "path": "frontend/src/components/ui/Button/Button.tsx",
       "status": "success",
       "replacements": 42,
-      "duration": "2.3min"
+      "duration": "2.5min"
     },
     {
       "path": "frontend/src/components/ui/Card/Card.tsx",
       "status": "success",
       "replacements": 38,
-      "duration": "2.1min"
+      "duration": "2.2min"
     },
     {
       "path": "frontend/src/components/ui/Input/Input.tsx",
       "status": "success",
       "replacements": 29,
-      "duration": "1.8min"
+      "duration": "1.9min"
     },
     {
       "path": "frontend/src/components/ui/Modal/Modal.tsx",
       "status": "success",
       "replacements": 51,
-      "duration": "2.7min"
+      "duration": "2.8min"
     },
     {
       "path": "frontend/src/components/ui/Dropdown/Dropdown.tsx",
       "status": "failed",
-      "error": "Syntax error after m3-typography-classifier",
-      "duration": "1.2min"
+      "error": "Syntax error after m3-typography-tokens",
+      "duration": "1.3min"
     }
   ]
 }
@@ -99,7 +95,7 @@ frontend/src/components/ui/Dropdown/Dropdown.tsx
 # Launch parallel Jules sessions for batch migration
 cat components.txt | while IFS= read -r component; do
   echo "Launching M3 migration for: $component"
-  jules remote new --repo . --session "Task: [M3 Migration] Migrate $component to M3 Expressive design tokens using the 8-step protocol (m3-layout-refactor → m3-color-themer → m3-typography-classifier → m3-editorial-stylist → m3-shape-refactor → m3-elevation-refactor → m3-icon-replacer → m3-motion-applier). Generate markdown report at ./.ai_reports/$(basename $component .tsx)_m3_migration.md with replacements count, warnings, and before/after examples."
+  jules remote new --repo . --session "Task: [M3 Migration] Migrate $component using 4-step protocol (m3-layout-tokens → m3-visual-tokens → m3-typography-tokens → m3-interaction-tokens). Generate report at ./.ai_reports/$(basename $component .tsx)_m3_migration.md with replacements, warnings, examples."
 done
 ```
 
@@ -124,19 +120,15 @@ function parseComponentList(filePath) {
 }
 ```
 
-### Step 2: Run 8-Step Protocol
+### Step 2: Run 4-Step Protocol
 
 ```javascript
 async function migrateComponent(component, tokens) {
   const steps = [
-    'm3-layout-refactor',
-    'm3-color-themer',
-    'm3-typography-classifier',
-    'm3-editorial-stylist',
-    'm3-shape-refactor',
-    'm3-elevation-refactor',
-    'm3-icon-replacer',
-    'm3-motion-applier'
+    'm3-layout-tokens',
+    'm3-visual-tokens',
+    'm3-typography-tokens',
+    'm3-interaction-tokens'
   ];
 
   let code = readFileSync(component.path, 'utf-8');
@@ -384,7 +376,7 @@ class MigrationProgress {
 ### Single Component Task
 
 ```
-Task: [M3 Migration] Migrate frontend/src/components/ui/Button/Button.tsx to M3 Expressive design tokens. Run 8-step protocol: (1) m3-layout-refactor, (2) m3-color-themer, (3) m3-typography-classifier, (4) m3-editorial-stylist, (5) m3-shape-refactor, (6) m3-elevation-refactor, (7) m3-icon-replacer, (8) m3-motion-applier. Save migrated code and generate report at ./.ai_reports/Button_m3_migration.md with replacements count, warnings, validation results.
+Task: [M3 Migration] Migrate frontend/src/components/ui/Button/Button.tsx to M3 Expressive. Run 4-step protocol: (1) m3-layout-tokens, (2) m3-visual-tokens, (3) m3-typography-tokens, (4) m3-interaction-tokens. Generate report at ./.ai_reports/Button_m3_migration.md with replacements, warnings, validation results.
 ```
 
 ### Batch Launch Script
@@ -403,7 +395,7 @@ while IFS= read -r component; do
 
   echo "Launching Jules session for: $name"
 
-  jules remote new --repo . --session "Task: [M3 Migration] Migrate $component to M3 Expressive. Run 8-step protocol (layout→color→typography→editorial→shape→elevation→icons→motion). Generate report at $REPORT_DIR/${name}_m3_migration.md."
+  jules remote new --repo . --session "Task: [M3 Migration] Migrate $component to M3 Expressive. Run 4-step protocol (layout→visual→typography→interaction). Generate report at $REPORT_DIR/${name}_m3_migration.md."
 
   # Brief pause to avoid overwhelming system
   sleep 0.5
@@ -436,14 +428,10 @@ echo "Launched $(wc -l < $COMPONENTS_FILE) parallel migration sessions"
       "replacements": 42,
       "duration": "2.3min",
       "steps": [
-        { "skill": "m3-layout-refactor", "replacements": 8, "status": "success" },
-        { "skill": "m3-color-themer", "replacements": 12, "status": "success" },
-        { "skill": "m3-typography-classifier", "replacements": 6, "status": "success" },
-        { "skill": "m3-editorial-stylist", "replacements": 4, "status": "success" },
-        { "skill": "m3-shape-refactor", "replacements": 3, "status": "success" },
-        { "skill": "m3-elevation-refactor", "replacements": 5, "status": "success" },
-        { "skill": "m3-icon-replacer", "replacements": 2, "status": "success" },
-        { "skill": "m3-motion-applier", "replacements": 2, "status": "success" }
+        { "skill": "m3-layout-tokens", "replacements": 8, "status": "success" },
+        { "skill": "m3-visual-tokens", "replacements": 20, "status": "success" },
+        { "skill": "m3-typography-tokens", "replacements": 10, "status": "success" },
+        { "skill": "m3-interaction-tokens", "replacements": 4, "status": "success" }
       ],
       "validations": [
         { "check": "syntax", "status": "pass" },
