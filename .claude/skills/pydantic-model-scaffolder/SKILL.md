@@ -1,6 +1,6 @@
 ---
 name: pydantic-model-scaffolder
-description: "Scaffolds Pydantic models for request/response validation. Use when creating data models for API endpoints or database schemas."
+description: "Scaffolds Pydantic models for request/response validation with advanced validation rules. Use for complex data models. Related: fastapi-endpoint-scaffolder for quick endpoint creation."
 ---
 # Pydantic Model Scaffolder Workflow
 

@@ -1,0 +1,30 @@
+/* src/index.css */
+
+/* 1. Tailwind Directives (MUST be first) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Your Design System Layers */
+@import './styles/variables.css';  /* The CSS Variables */
+@import './styles/typography.css'; /* The Font Classes */
+
+/* 3. Global Reset / Overrides */
+html, body {
+  @apply bg-surface text-primary font-ai antialiased;
+  /* Ensures the dot grid covers the whole viewport */
+  min-height: 100vh; 
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Optional: Make the scrollbar fit the vibe */
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  @apply bg-surface-container-low;
+}
+body::-webkit-scrollbar-thumb {
+  @apply bg-outline-variant rounded-full border-[3px] border-surface-container-low;
+}

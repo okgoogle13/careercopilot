@@ -1,6 +1,6 @@
 ---
 name: project-health-checker
-description: "Runs this project's full suite of validation and health checks. Use when 'something is wrong' or for a general checkup."
+description: "Quick diagnostic tool (30s) running validation and health checks. Use for fast status checks. Related: audit-agent for comprehensive security and code quality audits."
 ---
 # Project Health Check Workflow
 

@@ -1,6 +1,6 @@
 ---
 name: audit-agent
-description: "Performs comprehensive security and code quality audits. Use when asked to 'audit the codebase', 'check for vulnerabilities', or 'run security scan'."
+description: "Comprehensive security and code quality audit. Use for thorough security, vulnerability, and code quality analysis. Related: project-health-checker for quick diagnostic checks."
 version: 1.0.0
 tags:
   - security
