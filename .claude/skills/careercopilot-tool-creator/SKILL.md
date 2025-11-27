@@ -1,6 +1,6 @@
 ---
 name: careercopilot-tool-creator
-description: "Scaffolds a new Python tool file in 'src/tools/' from a template. Use when asked to create a new agent tool."
+description: "Scaffolds a new Python tool utility in 'src/tools/' for agents to call. Tools are utility functions (web scraping, PDF parsing, database queries) that agents use. Use when creating utilities that agents depend on."
 ---
 # Tool Creator Workflow
 

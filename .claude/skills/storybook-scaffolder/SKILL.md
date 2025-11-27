@@ -1,6 +1,6 @@
 ---
 name: storybook-scaffolder
-description: "Scaffolds a new, M3-token-aware Storybook file (*.stories.tsx)."
+description: "Generates a Storybook story file (*.stories.tsx) with M3 design token imports and interactive variant stories. Use when documenting React components for development and QA testing."
 version: 2.0.0
 ---
 # Storybook Scaffolder Workflow (v2)
