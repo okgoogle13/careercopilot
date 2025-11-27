@@ -3,66 +3,121 @@
 
 ## Current State Overview
 
-### Component Distribution (Actual Audit)
+### Consolidated Skill Structure (Updated 2025-11-28)
+
+**4 Core M3 Token Skills + 1 Orchestrator + 1 Generator:**
+
+- **m3-visual-tokens** - Color (78+ tokens), shape (7 scales), elevation (6 levels)
+- **m3-typography-tokens** - Type scale (13 variants), font families, editorial conventions
+- **m3-layout-tokens** - Spacing grid (4px, 8px, 12px...64px), sizing, gaps
+- **m3-interaction-tokens** - Icon sizes, motion durations (16 scales), easing (10 curves), spring physics
+- **batch-migration-orchestrator** - 4-step migration protocol (layout → visual → typography → interaction)
+- **m3-design-system-generator** - Unified token generation (150+ tokens), WCAG validation, CSS variables
+
+### Component Distribution (Audit as of 2025-11-28)
 ```
 ✅ M3 Token-Based:        30 components (Complete)
 ⏳ Hybrid/Incomplete:     86 components (Partial M3, needs finishing)
 ⏳ MUI v5 Legacy:        100 components (Pure theme.palette, theme.spacing)
-🗑️  Deprecated:           19 components (Should remove from _deprecated/)
+🗑️  Deprecated:           19 components (Marked for removal)
 ❓ Other/Utility:          1 component (Keep)
 ─────────────────────────────────────────────
 📊 TOTAL:               216 components
    Progress: 30 complete / 186 remaining = 13.9%
-   Note: 23 "M3*" components were started but not finished
+   Note: 23 components in progress with new token system
 
 
-## 3-Phase Execution Plan (Revised Based on Audit)
+## 4-Phase Migration Strategy (Updated 2025-11-28)
 
-### 📍 Phase 1: Foundation Components (2-3 days) - 16 Hours
-**Goal:** Unblock entire app by migrating base components
-- Migrate **Button** (18 imports) - `styled()` to M3 tokens
-- Migrate **Input** (12 imports) - `theme.palette` to M3 tokens
-- Migrate **Sidebar** (5 imports) - Layout restructure
-- Migrate **Navbar** (5 imports) - Navigation bar
-- Migrate **AppShell** (5 imports) - Page wrapper
+### 🏗️ Phase 0: Design System Foundation (2-3 days) - 8 Hours
+**Goal:** Establish unified token system with consolidated skills
 
-**Unblocks:** 30+ dependent components
-**Progress:** 13.9% → ~25%
+**Primary Tool:** `m3-design-system-generator`
+```
+Request: "Generate complete M3 design system with 150+ tokens"
+Output: tokens.json + CSS variables + Tailwind patch + WCAG report
+```
 
----
+**Tasks:**
+- [ ] Execute m3-design-system-generator (generates all tokens automatically)
+- [ ] Review WCAG compliance report
+- [ ] Integrate tokens into frontend build
+- [ ] Document token naming conventions
 
-### 🎯 Phase 2: Forms & Navigation (2-3 days) - 14 Hours
-**Goal:** Complete all user interaction patterns
-- Finish **Toast** (9 imports, hybrid component)
-- Migrate **Dialog** (9 imports) - Modals
-- Migrate **Select** (8 imports) - Dropdowns
-- Migrate **Tabs** (7 imports) - Tab navigation
-- Migrate **PageHeader** (4 imports) - Section headers
-
-**Unblocks:** All forms, dialogs, navigation
-**Progress:** ~25% → ~40%
+**Outcome:** Production-ready M3 token system with accessibility validation
+**Progress:** 13.9% → 20%
 
 ---
 
-### 📦 Phase 3: Finish M3* Components & Cleanup (3-4 days) - 20 Hours
-**Goal:** Complete migration infrastructure and remove technical debt
+### 📍 Phase 1: Core Components (2-3 days) - 12 Hours
+**Goal:** Migrate atomic design components using batch-migration-orchestrator
 
-**Part A - Finish 23 Incomplete M3* Components (10 hours)**
-- These have M3 token CSS but still use `styled()` and theme patterns
-- Use as reference: profile/, library/, main/ (100% M3-compliant)
-- Migrate 4-5 per day
+**Primary Tool:** `batch-migration-orchestrator` (4-step protocol)
 
-**Part B - Delete Deprecated Files (2 hours)**
-- Remove 19 files from `frontend/src/components/_deprecated/`
-- Clean up old Button, Dialog, Card duplicates
+**Components (5 priority):**
+- Button (18 imports) - m3-visual-tokens + m3-layout-tokens
+- Input (12 imports) - m3-interaction-tokens + m3-visual-tokens
+- Select (8 imports) - batch-migration-orchestrator (full)
+- Navbar (5 imports) - m3-layout-tokens + m3-visual-tokens
+- Sidebar (5 imports) - m3-layout-tokens + m3-visual-tokens
 
-**Part C - Validate & Test (8 hours)**
-- Visual regression testing (all pages)
-- Accessibility audit (WCAG AA)
-- TypeScript compilation check
-- Storybook updates
+**Process:**
+```
+Ask Claude: "Migrate Button, Input, Select, Navbar, Sidebar to M3 Expressive"
+batch-migration-orchestrator will:
+  1. Apply m3-layout-tokens (spacing, sizing)
+  2. Apply m3-visual-tokens (colors, elevation, shape)
+  3. Apply m3-typography-tokens (if needed)
+  4. Apply m3-interaction-tokens (motion, icon sizes)
+  5. Validate compliance
+```
 
-**Progress:** ~40% → ~70%
+**Unlocks:** 45+ dependent components
+**Progress:** 20% → 35%
+
+---
+
+### 🎯 Phase 2: Composite Components (3-4 days) - 18 Hours
+**Goal:** Migrate complex components and patterns
+
+**Primary Tool:** `batch-migration-orchestrator` (full 4-step)
+
+**Component Groups:**
+- **Surfaces** (AppShell, Dialog, PageHeader) - Layout + Visual + Typography
+- **Feedback** (Toast, Snackbar, Tooltip) - Visual + Interaction
+- **Forms** (Select, Checkbox, Radio) - Layout + Interaction
+
+**Process:**
+```
+Ask Claude: "Migrate AppShell, Dialog, PageHeader, Toast to M3 Expressive"
+Tools will apply all 4 migration steps automatically
+```
+
+**Unlocks:** All app layouts and user flows
+**Progress:** 35% → 60%
+
+---
+
+### 🧹 Phase 3: Batch Migration & Cleanup (5-6 days) - 40 Hours
+**Goal:** Complete remaining components and remove deprecated code
+
+**Batch Execution with Orchestrator:**
+- Batch A: Layout components (AppLayout, Grid/Flex) - 5 hrs
+- Batch B: Form components (all inputs, selects) - 6 hrs
+- Batch C: Data display (Table, List, Card variants) - 8 hrs
+- Batch D: Feature components (Job, Document, Career) - 20 hrs
+
+**Cleanup:**
+- Remove 18 deprecated components - 1.5 hrs
+- Delete old theme.palette references - 1 hr
+
+**Final Validation:**
+- M3 compliance audit (all skills) - 3 hrs
+- Visual regression testing - 4 hrs
+- Accessibility audit - 2 hrs
+- Performance optimization - 1.5 hrs
+
+**Progress:** 60% → 100%
 
 ---
 
