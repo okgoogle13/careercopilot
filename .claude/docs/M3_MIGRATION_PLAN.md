@@ -29,222 +29,241 @@ CareerCopilot frontend has 204 components across three design systems:
 
 ---
 
+## M3 Consolidated Skills Architecture (Updated 2025-11-28)
+
+The migration now uses **4 unified design system skills + 1 orchestrator**:
+
+### Core M3 Token Skills
+1. **m3-layout-tokens** - Spacing, sizing, and layout patterns
+   - 12-stop spacing scale (4px, 8px, 12px...64px)
+   - Convert padding/margin/gap to `var(--sys-space-*)`
+   - Transform hardcoded pixels to token variables
+
+2. **m3-visual-tokens** - Color, shape, and elevation tokens
+   - 78+ color tokens with semantic roles
+   - 7 corner radius scales
+   - 6 elevation levels with standardized shadows
+
+3. **m3-typography-tokens** - Type scale and text styles
+   - 13 semantic type scales (display, headline, title, label, body)
+   - Font weight and line-height standards
+   - Editorial conventions (alignment, spacing, overflow)
+
+4. **m3-interaction-tokens** - Icons, motion, and animations
+   - 3 standard icon sizes with semantic colors
+   - 16 duration scales and 10 easing functions
+   - Spring physics support for expressive animations
+
+### Migration Orchestrator
+- **batch-migration-orchestrator** - Coordinates multi-component migrations
+  - 4-step migration protocol (layout → visual → typography → interaction)
+  - Parallel execution for multiple components
+  - Validation and compliance checking
+
+### Design System Generator
+- **m3-design-system-generator** - Unified token generation
+  - Complete M3 token system creation
+  - 150+ tokens with WCAG validation
+  - Automatic CSS variable generation
+  - Tailwind configuration integration
+
+### Usage in Migration Process
+Each phase uses these skills in sequence:
+```
+Phase 1 (Foundation): m3-design-system-generator
+Phase 2-4 (Components): batch-migration-orchestrator
+  ├─ Step 1: m3-layout-tokens
+  ├─ Step 2: m3-visual-tokens
+  ├─ Step 3: m3-typography-tokens
+  └─ Step 4: m3-interaction-tokens
+Phase 5 (Validation): All skills for compliance audit
+```
+
+---
+
 ## 5-Phase Migration Strategy
 
 ### Phase 1: Foundation (Week 1) - 8 Hours
-**Objective:** Establish M3 design system baseline and team readiness
+**Objective:** Establish M3 design system baseline using consolidated skills
+
+**Primary Tool:** `m3-design-system-generator` skill
+- Request: "Generate complete M3 design system with 150+ tokens"
+- Output: Unified token system with all colors, typography, spacing, and animation
+- WCAG validation ensures accessibility compliance
 
 **Tasks:**
-- [ ] Document complete M3 design token mapping (colors, typography, spacing, shape, elevation)
-- [ ] Create migration checklist for developers
-- [ ] Train team on M3 patterns and automated refactoring tools
-- [ ] Set up component migration template
-- [ ] Create before/after examples for common patterns
+- [ ] Use `m3-design-system-generator` to create design token system (4 hours)
+- [ ] Document token usage patterns (2 hours)
+- [ ] Train team on batch-migration-orchestrator workflow (1 hour)
+- [ ] Set up component migration template with new skill references (1 hour)
 
 **Deliverables:**
-- M3 Design Token Reference document
-- Migration Checklist (step-by-step process)
-- Component Template file
-- Team training materials
+- Complete M3 token system (150+ tokens)
+- Design token CSS variables file
+- Migration workflow guide (how to use batch-migration-orchestrator)
+- Component migration template with skill examples
+- WCAG compliance report
 
 **Timeline:** Week 1, Days 1-2
 
 ---
 
 ### Phase 2: Quick Wins (Week 1-2) - 6 Hours
-**Objective:** Build momentum with easy, high-value migrations
+**Objective:** Build momentum with easy, high-value migrations using batch orchestrator
 
-**12 Components to Migrate:**
+**Primary Tool:** `batch-migration-orchestrator` skill
+- Request: "Migrate [Component1, Component2, ...] to M3 Expressive"
+- Executes 4-step protocol for each component (layout → visual → typography → interaction)
+- Validates compliance and reports results
 
-1. **NavigationItem.tsx** (0.5 hrs)
-   - Replace theme colors with M3 tokens
-   - Update spacing to M3 grid (4px base)
+**12 Components to Migrate (2-3 days):**
 
-2. **tabs/tabs.tsx** (0.25 hrs)
-   - Color replacement only
-   - Keep structure intact
-
-3. **sidebar/sidebar.tsx** (0.5 hrs)
-   - Background colors to surface tokens
-   - Text colors to on-surface tokens
-
-4. **card/card.tsx** (0.25 hrs)
-   - Container color update
-   - Shadow to elevation token
-
-5. **progress/progress.tsx** (0.25 hrs)
-   - Color replacement
-   - Keep animation intact
-
-6. **input/input.tsx** (0.25 hrs)
-   - Border colors to outline tokens
-   - Focus colors to primary tokens
-
-7. **toast/toast.tsx** (0.5 hrs)
-   - Background colors based on variant
-   - Text colors contrast-appropriate
-
-8. **ErrorCard.tsx & LoadingCard.tsx** (0.5 hrs)
-   - Color and spacing updates
-   - Typography standardization
-
-9. **Typography Standardization** (1.5 hrs)
-   - Replace all `<div>` with `<Typography>`
-   - Apply proper variants (h1-h6, body1-2, caption)
-   - Update font sizes to M3 scale
-
-10. **Spacing Standardization** (1.5 hrs)
-    - Convert px to theme.spacing() or M3 tokens
-    - Apply 4px, 8px, 12px, 16px, 24px grid
-    - Remove hardcoded margin/padding
-
-11. **M3 Tokens CSS Documentation** (1.0 hr)
-    - Export complete token library
-    - Create CSS variables reference
-    - Document usage examples
-
-12. **Components Review & Refine** (0.25 hrs)
-    - Audit migrations for consistency
-    - Fix any issues found
+1. **NavigationItem.tsx** (0.3 hrs) - batch-migration-orchestrator
+2. **tabs/tabs.tsx** (0.2 hrs) - batch-migration-orchestrator
+3. **sidebar/sidebar.tsx** (0.3 hrs) - batch-migration-orchestrator
+4. **card/card.tsx** (0.2 hrs) - batch-migration-orchestrator
+5. **progress/progress.tsx** (0.2 hrs) - batch-migration-orchestrator
+6. **input/input.tsx** (0.2 hrs) - batch-migration-orchestrator
+7. **toast/toast.tsx** (0.3 hrs) - batch-migration-orchestrator
+8. **ErrorCard.tsx & LoadingCard.tsx** (0.3 hrs) - batch-migration-orchestrator
+9-10. **Typography + Spacing** (0.8 hrs) - m3-typography-tokens + m3-layout-tokens
+11. **Token CSS Documentation** (0.8 hrs) - Manual review of generated tokens
+12. **Components Review & Refine** (0.2 hrs) - Validation checklist
 
 **Effort:** 6 hours total (2-3 days with 1 developer)
+**Expected Outcome:** 12 components migrated, 100% token compliance, momentum established
 
 ---
 
 ### Phase 3: High-Impact Components (Week 2-3) - 12-15 Hours
-**Objective:** Migrate critical components affecting entire user experience
+**Objective:** Migrate critical components using consolidated skills
+
+**Tool:** `batch-migration-orchestrator` with focused validation
 
 **5 Priority Components:**
 
-#### 1. Navbar.tsx (4 hours) - CRITICAL
-**Current State:** MUI v5 with theme.palette references
-**Changes:**
+#### 1. Navbar.tsx (2.5 hours) - CRITICAL
+**Primary Skills:** m3-visual-tokens, m3-layout-tokens
 - Replace primary/secondary colors with M3 surface/on-surface tokens
-- Update icon colors to proper contrast levels
-- Apply M3 elevation to navbar
-- Standardize spacing to 4px grid
-- Update all nested button components
+- Update spacing to 4px grid using m3-layout-tokens
+- Apply M3 elevation via m3-visual-tokens
+- Icon colors via m3-interaction-tokens
 **Impact:** Navigation affects 100% of app
-**Dependencies:** Button, Icon components
 
-#### 2. PageHeader.tsx (3 hours) - CRITICAL
-**Current State:** Hardcoded colors and spacing
-**Changes:**
-- Color palette → M3 tokens (headline, supporting text)
-- Spacing → M3 grid (4px base)
-- Typography → proper Typography component variants
-- Icon sizing → M3 standard sizes
+#### 2. PageHeader.tsx (2 hours) - CRITICAL
+**Primary Skills:** m3-typography-tokens, m3-visual-tokens
+- Typography palette via m3-typography-tokens (headline, supporting)
+- Colors via m3-visual-tokens
+- Icon sizing via m3-interaction-tokens
 **Impact:** Used across all pages (20+ instances)
-**Dependencies:** Typography, Icon components
 
-#### 3. JobCard.tsx (2 hours) - HIGH
-**Current State:** MUI v5 card with theme styling
-**Changes:**
-- Container → surface container token
-- Text colors → on-surface/on-surface-variant tokens
-- Spacing → M3 grid
-- Card elevation → M3 elevation token
+#### 3. JobCard.tsx (1.5 hours) - HIGH
+**Primary Skills:** m3-visual-tokens, m3-layout-tokens
+- Container colors via m3-visual-tokens
+- Text colors via semantic M3 tokens
+- Spacing via m3-layout-tokens (4px grid)
+- Card elevation via m3-visual-tokens
 **Impact:** Job matching features
-**Dependencies:** Card, Badge components
 
-#### 4. JobMatching.tsx (3 hours) - HIGH
-**Current State:** Complex component with multiple MUI elements
-**Changes:**
-- Convert all styled elements to M3
-- Update layout spacing
-- Color all text elements properly
-- Apply M3 motion/animation tokens
+#### 4. JobMatching.tsx (2.5 hours) - HIGH
+**Primary Skills:** batch-migration-orchestrator (full 4-step)
+- All styled elements → M3 tokens
+- Layout spacing via m3-layout-tokens
+- Typography via m3-typography-tokens
+- Motion/animation via m3-interaction-tokens
 **Impact:** Core career matching feature
-**Dependencies:** JobCard, Button, Select, Slider
 
-#### 5. ATSAnalysisDashboard.tsx (2.5 hours) - HIGH
-**Current State:** Already partially fixed in deployment phase
-**Changes:**
-- Complete M3 token integration
-- Color progress bars with M3 success/warning tokens
+#### 5. ATSAnalysisDashboard.tsx (2 hours) - HIGH
+**Primary Skills:** m3-visual-tokens, m3-typography-tokens
+- M3 token integration
+- Progress bars with success/warning tokens
 - Typography scale consistency
 - Spacing standardization
 **Impact:** Resume analysis feature
-**Dependencies:** Card, Typography, ProgressBar, Badge
 
-**Total Effort:** 14.5 hours (1 week with 1 developer, or 3-4 days with 2)
-
----
-
-### Phase 4: Batch Migration (Week 4-5) - 100 Hours
-**Objective:** Systematically migrate remaining 116 MUI v5 components
-
-**Strategy:** Categorize by complexity and migrate in batches
-
-**Component Categories:**
-
-**Batch A: Layout Components (12 components) - 8 hours**
-- AppLayout.tsx (2 hrs)
-- AppShell.tsx (2 hrs)
-- Sidebar variants (2 hrs)
-- Grid/Flex components (2 hrs)
-
-**Batch B: Form Components (18 components) - 12 hours**
-- Input components (4 hrs)
-- Select/Dropdown components (4 hrs)
-- Checkbox/Radio (2 hrs)
-- Form containers (2 hrs)
-
-**Batch C: Data Display (22 components) - 18 hours**
-- Table components (6 hrs)
-- List components (4 hrs)
-- Card variants (4 hrs)
-- Badge/Chip components (4 hrs)
-
-**Batch D: Feature Components (54 components) - 44 hours**
-- Job related (12 hrs)
-- Document related (10 hrs)
-- Career related (10 hrs)
-- Application tracking (12 hrs)
-
-**Batch E: Utility Components (10 components) - 18 hours**
-- Dialogs/Modals (6 hrs)
-- Snackbars/Toast (3 hrs)
-- Loading states (3 hrs)
-- Error boundaries (6 hrs)
-
-**Parallel Execution:** Run batches A-B concurrently with 2 developers, then C-D-E
+**Total Effort:** 10.5 hours (2-3 days with batch orchestrator)
+**Timeline:** Week 2-3
 
 ---
 
-### Phase 5: Cleanup & Validation (Week 5) - 12-15 Hours
-**Objective:** Complete migration, remove deprecated code, comprehensive testing
+### Phase 4: Batch Migration (Week 4-5) - 60-75 Hours
+**Objective:** Systematically migrate remaining 100+ MUI v5 components
 
-**Tasks:**
+**Primary Tool:** `batch-migration-orchestrator`
+- Coordinates multi-component migrations in parallel
+- Validates each batch against M3 compliance rules
+- Generates migration reports
 
-**5.1 Remove Deprecated Components (2 hours)**
+**Component Batches (Optimized with new skills):**
+
+**Batch A: Layout Components (12 components) - 5 hours**
+- Tools: m3-layout-tokens (primary), m3-visual-tokens
+- AppLayout, AppShell, Sidebar variants, Grid/Flex
+- Focus: Spacing standardization and elevation
+
+**Batch B: Form Components (18 components) - 6 hours**
+- Tools: m3-interaction-tokens, m3-visual-tokens, m3-layout-tokens
+- Input, Select, Checkbox/Radio, Form containers
+- Focus: Interactive states and color contrast
+
+**Batch C: Data Display (22 components) - 8 hours**
+- Tools: m3-visual-tokens (primary), m3-typography-tokens
+- Table, List, Card variants, Badge/Chip
+- Focus: Text colors and surface containers
+
+**Batch D: Feature Components (32 components) - 20 hours**
+- Tools: batch-migration-orchestrator (full 4-step)
+- Job-related, Document-related, Career-related, Application tracking
+- Focus: Complex interactions and animations
+
+**Batch E: Utility Components (16 components) - 6 hours**
+- Tools: m3-interaction-tokens, m3-visual-tokens
+- Dialogs/Modals, Snackbars/Toast, Loading states, Error boundaries
+- Focus: Motion tokens and feedback states
+
+**Parallel Execution Strategy:**
+- Run Batches A-B concurrently (days 1-2)
+- Run Batches C-D concurrently (days 3-5)
+- Run Batch E (day 6)
+- With 2 developers: 10-12 days total
+
+---
+
+### Phase 5: Cleanup & Validation (Week 5) - 10-12 Hours
+**Objective:** Complete migration, validate compliance, remove deprecated code
+
+**Tools:** All M3 skills + compliance validation
+
+**5.1 Remove Deprecated Components (1.5 hours)**
 - [ ] Delete 18 deprecated components from `_deprecated/` folder
-- [ ] Check for any remaining imports
-- [ ] Update documentation
+- [ ] Verify no remaining theme.palette imports
+- [ ] Update documentation references
 
-**5.2 Comprehensive Testing (6 hours)**
+**5.2 M3 Compliance Audit (3 hours)**
+- [ ] Use m3-visual-tokens validator for color compliance
+- [ ] Use m3-typography-tokens to ensure font consistency
+- [ ] Use m3-layout-tokens to validate spacing grid
+- [ ] Use m3-interaction-tokens for animation compliance
+- [ ] Generate compliance report for all 100+ migrated components
+
+**5.3 Comprehensive Testing (4 hours)**
 - [ ] Visual regression testing (all pages)
 - [ ] Component interaction testing
 - [ ] Responsive design testing (mobile, tablet, desktop)
 - [ ] Accessibility audit (WCAG AA compliance)
 - [ ] Performance audit (bundle size, load time)
 
-**5.3 Documentation (3 hours)**
-- [ ] Update component library documentation
-- [ ] Create M3 migration guide for future developers
-- [ ] Document token usage patterns
-- [ ] Add before/after screenshots
+**5.4 Documentation & Training (2 hours)**
+- [ ] Update component library with M3 guidelines
+- [ ] Document new skill workflows
+- [ ] Create token usage reference
+- [ ] Add migration examples for future components
 
-**5.4 Final Audit (2 hours)**
-- [ ] Code review all migrations
-- [ ] Ensure consistency across components
-- [ ] Fix any edge cases or inconsistencies
-- [ ] Deploy to staging for QA
-
-**5.5 Performance Optimization (2 hours)**
-- [ ] Analyze bundle size changes
-- [ ] Optimize if needed
-- [ ] Check CSS coverage
+**5.5 Deploy & Monitor (1.5 hours)**
+- [ ] Deploy to staging for QA validation
+- [ ] Monitor for token loading issues
+- [ ] Validate CSS coverage and specificity
+- [ ] Prepare production deployment
 
 ---
 
