@@ -11,85 +11,99 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
-      /* ========================================================================
-         COLORS (The Alchemist Palette)
-         ======================================================================== */
+      /* --- COLORS --- */
       colors: {
-        // Primary system
         primary: {
           DEFAULT: tokens.colors.primary.DEFAULT,
           container: tokens.colors.primary.container,
           'on-container': tokens.colors.primary.onContainer,
         },
-        // Tertiary system
+        secondary: {
+          DEFAULT: tokens.colors.secondary.DEFAULT,
+          container: tokens.colors.secondary.container,
+          on: tokens.colors.secondary.on,
+        },
         tertiary: {
           DEFAULT: tokens.colors.tertiary.DEFAULT,
           container: tokens.colors.tertiary.container,
           on: tokens.colors.tertiary.on,
         },
-        // Surface system (Deep Violet Void)
+        error: {
+          DEFAULT: tokens.colors.error.DEFAULT,
+          container: tokens.colors.error.container,
+          on: tokens.colors.error.on,
+        },
         surface: {
           DEFAULT: tokens.colors.surface.DEFAULT,
           'container-low': tokens.colors.surface.containerLow,
           container: tokens.colors.surface.container,
           'container-high': tokens.colors.surface.containerHigh,
         },
-        // Outline system
         outline: {
           DEFAULT: tokens.colors.outline.DEFAULT,
           variant: tokens.colors.outline.variant,
         },
-        // Seed color
-        seed: {
-          shadow: tokens.colors.seed.shadow,
+        disabled: {
+          text: tokens.colors.disabled.text,
+          surface: tokens.colors.disabled.surface,
         },
+        seed: { shadow: tokens.colors.seed.shadow },
       },
 
-      /* ========================================================================
-         TYPOGRAPHY (Font Families)
-         ======================================================================== */
+      /* --- FONT FAMILY UTILITIES (Fallbacks only) --- */
+      /* Note: Use .text-hero, .text-data classes from typography.css for full effect */
       fontFamily: {
         hologram: [tokens.typography.families.hologram, 'display'],
         hero: [tokens.typography.families.hero, 'sans-serif'],
         human: [tokens.typography.families.human, 'serif'],
         ai: [tokens.typography.families.ai, 'sans-serif'],
-        data: [tokens.typography.families.data, 'sans-serif'],
-        sans: ['var(--font-roboto-flex)', 'system-ui', 'sans-serif'], // Fallback/Legacy
-        serif: ['var(--font-roboto-serif)', 'serif'], // Fallback/Legacy
-        mono: ['var(--font-roboto-mono)', 'monospace'], // Fallback/Legacy
+        data: [tokens.typography.families.data, 'monospace'],
       },
 
-      /* ========================================================================
-         BORDER RADIUS (Shape System)
-         ======================================================================== */
+      /* --- BREAKPOINTS --- */
+      screens: {
+        'mobile': tokens.breakpoint.mobile,
+        'tablet': tokens.breakpoint.tablet,
+        'desktop-sidebar': tokens.breakpoint.desktopSidebar,
+      },
+
+      /* --- SHAPE & BORDER --- */
       borderRadius: {
         card: tokens.shape.radius.card,
         button: tokens.shape.radius.button,
         badge: tokens.shape.radius.badge,
         asymmetric: tokens.shape.radius.asymmetric,
       },
+      borderWidth: {
+        DEFAULT: '1px',
+        ...tokens.elevation.borderWidth,
+      },
 
-      /* ========================================================================
-         SPACING (Grid System)
-         ======================================================================== */
+      /* --- SPACING (Base-24) --- */
       spacing: {
+        'xs': tokens.spacing.xs,
+        'sm': tokens.spacing.sm,
+        'md': tokens.spacing.md,
+        'base': tokens.spacing.base,
+        'lg': tokens.spacing.lg,
+        'xl': tokens.spacing.xl,
+        '2xl': tokens.spacing['2xl'],
+        '3xl': tokens.spacing['3xl'],
         'grid': tokens.spacing.grid,
         'card-padding': tokens.spacing.cardPadding,
         'card-padding-top': tokens.spacing.cardPaddingTop,
       },
 
-      /* ========================================================================
-         Z-INDEX (Elevation System)
-         ======================================================================== */
+      /* --- Z-INDEX --- */
       zIndex: {
         base: tokens.elevation.zIndex.base,
         'pop-out': tokens.elevation.zIndex.popOut,
+        scrim: tokens.elevation.zIndex.scrim,
         modal: tokens.elevation.zIndex.modal,
+        tooltip: tokens.elevation.zIndex.tooltip,
       },
 
-      /* ========================================================================
-         ANIMATION (Legacy & New)
-         ======================================================================== */
+      /* --- ANIMATION --- */
       animation: {
         'tactile-press': 'tactilePress 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         'pop-out': 'popOut 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
@@ -108,83 +122,12 @@ module.exports = {
   },
 
   plugins: [
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/forms'),
-    /* ==========================================================================
-       CUSTOM PLUGIN: Poly-Body Typography Utilities
-       ========================================================================== */
+    require('@tailwindcss/typography'), // Standard prose plugin
+    require('@tailwindcss/forms'),      // Standard forms plugin
+    
+    /* --- CUSTOM PLUGIN: TEXTURE & FX ONLY --- */
     function ({ addUtilities }) {
       const newUtilities = {
-        // TIER 1: Hologram
-        '.text-hologram': {
-          fontFamily: `${tokens.typography.families.hologram}, display`,
-          fontSize: '3rem',
-          lineHeight: '1.1',
-          letterSpacing: '-0.02em',
-          fontPalette: '--electric-palette',
-          // Legacy support
-          '@apply text-primary': {},
-          'text-shadow': '2px 2px 0 var(--md-sys-color-seed)',
-        },
-
-        // TIER 2: Hero (Architectural)
-        '.text-hero': {
-          fontFamily: `${tokens.typography.families.hero}, sans-serif`,
-          fontVariationSettings: `'wdth' ${tokens.typography.axes.hero.wdth}, 'wght' ${tokens.typography.axes.hero.wght}, 'YTUC' ${tokens.typography.axes.hero.YTUC}, 'XTRA' ${tokens.typography.axes.hero.XTRA}, 'GRAD' ${tokens.typography.axes.hero.GRAD}`,
-          fontSize: '2.5rem',
-          lineHeight: '1.2',
-          letterSpacing: '-0.01em',
-          textTransform: 'uppercase',
-        },
-
-        // TIER 3: Voice - Human
-        '.text-human': {
-          fontFamily: `${tokens.typography.families.human}, serif`,
-          fontVariationSettings: `'wdth' ${tokens.typography.axes.human.wdth}, 'wght' ${tokens.typography.axes.human.wght}, 'opsz' ${tokens.typography.axes.human.opsz}, 'GRAD' ${tokens.typography.axes.human.GRAD}`,
-          fontSize: '1rem',
-          lineHeight: '1.6',
-          letterSpacing: '0',
-        },
-
-        // TIER 3: Voice - AI
-        '.text-ai': {
-          fontFamily: `${tokens.typography.families.ai}, sans-serif`,
-          fontVariationSettings: `'wdth' ${tokens.typography.axes.ai.wdth}, 'wght' ${tokens.typography.axes.ai.wght}, 'opsz' ${tokens.typography.axes.ai.opsz}, 'GRAD' ${tokens.typography.axes.ai.GRAD}`,
-          fontSize: '0.875rem',
-          lineHeight: '1.5',
-          letterSpacing: '0.01em',
-        },
-
-        // TIER 4: Data (Lo-Fi System)
-        '.text-data': {
-          fontFamily: `${tokens.typography.families.data}, sans-serif`,
-          fontVariationSettings: `'wdth' ${tokens.typography.axes.data.wdth}, 'wght' ${tokens.typography.axes.data.wght}, 'opsz' ${tokens.typography.axes.data.opsz}, 'GRAD' ${tokens.typography.axes.data.GRAD}`,
-          fontSize: '0.75rem',
-          lineHeight: '1.4',
-          letterSpacing: '0.05em',
-          textTransform: 'uppercase',
-          transition: 'font-variation-settings 0s',
-        },
-
-        // Data Glitch Hover
-        '.text-data:hover': {
-          fontVariationSettings: `'wdth' ${tokens.typography.axes.data.wdth}, 'wght' ${tokens.typography.interactions.dataGlitch.hover}, 'opsz' ${tokens.typography.axes.data.opsz}, 'GRAD' ${tokens.typography.axes.data.GRAD}`,
-        },
-
-        // Irregularity classes
-        '.text-hero-irregular': {
-          transform: 'rotate(-1deg)',
-        },
-        '.text-hero-irregular-alt': {
-          transform: 'rotate(1deg)',
-        },
-
-        // Tactile Press Animation (for motion.div wrapper)
-        '.tactile-press': {
-          cursor: 'pointer',
-          transition: 'transform 150ms ease-out',
-        },
-
         // Dot Grid Background
         '.bg-dot-grid': {
           backgroundColor: tokens.colors.surface.DEFAULT,
@@ -206,27 +149,18 @@ module.exports = {
           },
         },
 
-        // Asymmetric Radius (Sidebar anchoring)
+        // Solid State Scrim (Blur + No Shadow)
+        '.scrim-solid': {
+            position: 'fixed',
+            inset: '0',
+            backgroundColor: 'rgba(0,0,0,0.7)',
+            backdropFilter: 'blur(4px)',
+            zIndex: tokens.elevation.zIndex.scrim,
+        },
+        
+        // Asymmetric Border Radius Utils
         '.radius-asymmetric': {
           borderRadius: tokens.shape.radius.asymmetric,
-        },
-
-        // Legacy/Bento support
-        '.bento-card': {
-          '@apply bg-surface-container-low rounded-card p-6 relative overflow-hidden': {},
-          '&:hover': {
-            transform: 'scale(0.99)',
-          },
-          transition: 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-        },
-        '.pop-out-graphic': {
-          '@apply absolute z-20': {},
-          top: '-40px',
-          right: '24px',
-          '&:hover': {
-            transform: 'translateY(-15px) rotate(5deg) scale(1.1)',
-          },
-          transition: 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
         },
       };
 

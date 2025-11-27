@@ -25,18 +25,16 @@
   - Find unused endpoints for cleanup
   - Detect type mismatches between layers
   - Generate integration health reports
+  - **Enhanced capabilities:**
+    - Use `--include-database` flag to trace complete data flows to Firestore
+    - Use `--include-design-tokens` flag to audit component token compliance
+    - Use both flags for comprehensive fullstack documentation
 
 - **api-contract-validator**: Ensure type safety
   - Validate TypeScript ↔ Pydantic model consistency
   - Check field naming (camelCase vs snake_case)
   - Verify required vs optional fields match
   - Generate fix recommendations
-
-- **fullstack-flow-mapper**: Document complete data flows
-  - Trace Component → Service → Endpoint → Flow → Database
-  - Generate Mermaid architecture diagrams
-  - Document caching strategies
-  - Identify performance bottlenecks
 
 ### 2. New Feature Planning
 
@@ -86,17 +84,17 @@ When asked to plan a new full-stack feature:
 
 **Step 5: Validation**
 - Run `frontend-backend-mapper` to verify integration
+- Run `frontend-backend-mapper --include-database --include-design-tokens` for comprehensive fullstack documentation
 - Run `api-contract-validator` for type safety
 - Run integration tests
-- Generate flow documentation with `fullstack-flow-mapper`
 
 ### 3. Debugging Integration Issues
 
 When integration problems occur:
 
 1. **Analyze the Flow:**
-   - Use `fullstack-flow-mapper` to trace the complete path
-   - Identify where the flow breaks (UI → API → Backend → Flow)
+   - Use `frontend-backend-mapper --include-database` to trace the complete path
+   - Identify where the flow breaks (UI → API → Backend → Flow → Database)
 
 2. **Check Contracts:**
    - Use `api-contract-validator` to find type mismatches
@@ -119,7 +117,7 @@ When integration problems occur:
 
 - **Integration Map**: Use `frontend-backend-mapper` to create `docs/INTEGRATION_MAP.md`
 - **Contract Validation**: Use `api-contract-validator` for `docs/API_CONTRACT_VALIDATION.md`
-- **Flow Diagrams**: Use `fullstack-flow-mapper` for `docs/FULLSTACK_FLOWS.md`
+- **Complete Fullstack Flows**: Use `frontend-backend-mapper --include-database --include-design-tokens` for comprehensive flow documentation with database and design token mappings
 
 ---
 
@@ -296,7 +294,7 @@ Phase 3: Integration
 10. Use `webapp-testing`: Create E2E tests
 
 Phase 4: Documentation
-11. Use `fullstack-flow-mapper`: Document complete flow
+11. Use `frontend-backend-mapper --include-database --include-design-tokens`: Document complete flow
 12. Update CLAUDE.md with new endpoints
 ```
 
@@ -308,7 +306,7 @@ Phase 4: Documentation
 **My Debugging Process:**
 
 1. **Trace the Flow:**
-   - Use `fullstack-flow-mapper` to understand: KscGeneratorPage → aiServices → Backend → Genkit
+   - Use `frontend-backend-mapper --include-database` to understand: KscGeneratorPage → aiServices → Backend → Genkit
 
 2. **Check the Contract:**
    - Use `api-contract-validator` on aiServices.ts vs ksc_schemas.py

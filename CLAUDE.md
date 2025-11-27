@@ -195,6 +195,8 @@ A comprehensive audit of all skills against official guidelines is available at:
   - Find type mismatches (camelCase vs snake_case, type inconsistencies)
   - Calculate integration health score
   - Create visual Mermaid diagrams
+  - **Optional `--include-database` flag**: Trace complete data flows to Firestore collections
+  - **Optional `--include-design-tokens` flag**: Audit component design token compliance (M3 migration)
 
 **API Contract Validation:**
 - **Skill**: `api-contract-validator` - Validate type contracts between TypeScript and Pydantic
@@ -219,21 +221,9 @@ A comprehensive audit of all skills against official guidelines is available at:
   - Test response validation and type checking
   - Generate comprehensive test suites (`backend/app/tests/integration/`)
 
-### Fullstack Flow Analysis (NEW - 2025-01-06)
+### Fullstack Integration Analysis & Planning (NEW - 2025-01-06)
 
-**Complete Flow Mapping:**
-- **Skill**: `fullstack-flow-mapper` - Trace complete data flows across all layers
-- **Location**: `.claude/skills/fullstack-flow-mapper/`
-- **Capabilities**:
-  - Map Component → Service → Endpoint → Genkit Flow → Database
-  - Generate comprehensive flow documentation (`docs/FULLSTACK_FLOWS.md`)
-  - Create visual architecture diagrams (Mermaid sequence diagrams)
-  - Document data transformations at each layer
-  - Track caching strategies and performance metrics
-  - Identify optimization opportunities
-  - Map error handling patterns
-
-**Fullstack Integration Specialist (NEW - 2025-01-06):**
+**Fullstack Integration Specialist:**
 - **Subagent**: `fullstack-integration-specialist` - Expert orchestrator for full-stack feature development
 - **Location**: `.claude/agents/fullstack-integration-specialist.md`
 - **Expertise**:
@@ -277,11 +267,12 @@ A comprehensive audit of all skills against official guidelines is available at:
 # Generates: docs/API_CONTRACT_VALIDATION.md with mismatches
 ```
 
-**Document Flows:**
+**Document Complete Flows:**
 ```bash
-# Use the fullstack-flow-mapper skill
-# Ask Claude: "Map the KSC generation flow"
-# Generates: docs/FULLSTACK_FLOWS.md with Mermaid diagrams
+# Use the frontend-backend-mapper skill with optional flags
+# Ask Claude: "Map the KSC generation flow with database and token tracing"
+# Generates: docs/INTEGRATION_MAP.md with complete fullstack flow diagrams
+# Options: --include-database (trace to Firestore), --include-design-tokens (audit token usage)
 ```
 
 ## Testing & Test Automation
@@ -447,16 +438,12 @@ The project is preparing for automated Material Design 3 (M3) migration. Migrati
 
 Located in `.claude/skills/frontend-migration/`:
 
-- **m3-layout-refactor** - Migrates layout patterns to M3 spacing/grid system
-- **m3-color-themer** - Applies M3 color system and dynamic color
-- **m3-typography-classifier** - Updates typography to M3 type scale
-- **m3-editorial-stylist** - Standardizes content/editorial styling
-- **m3-shape-refactor** - Applies M3 shape system (corner radius)
-- **m3-elevation-refactor** - Migrates shadows to M3 elevation tokens
-- **m3-icon-replacer** - Swaps icons to Material Symbols
-- **m3-motion-applier** - Adds M3 motion/animation patterns
+- **m3-layout-tokens** - Spacing tokens (padding, margin, gap)
+- **m3-visual-tokens** - Color, shape, elevation tokens (78 colors, 7 shapes, 6 levels)
+- **m3-typography-tokens** - Type scale + editorial conventions (13 scales + alignment/spacing)
+- **m3-interaction-tokens** - Icon sizing/colors + motion tokens (3 sizes, 16 durations, 10 easing)
 
-**Status:** Placeholder files created, implementation in progress
+**Status:** 4 consolidated skills (8 original skills merged into 4 groups by token type)
 
 ### Documentation
 
@@ -514,8 +501,7 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 
 **Design Skills:**
 - `design-critique-vision` - Analyzes screenshots for visual quality, hierarchy, spacing, and contrast
-- `design-token-generator` - Translates aesthetic preferences into complete design token JSON (color, shape, spacing, elevation, typography)
-- `wcag-contrast-checker` - Validates text/background color pairs against WCAG AA/AAA standards
+- `m3-design-system-generator` - Complete design token generation (colors, motion, base tokens + WCAG validation)
 - `ux-heuristic-audit` - Audits user flows against Nielsen's 10 Usability Heuristics
 
 **Document Skills (PDF Multimodal):**
@@ -529,24 +515,26 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 - `scripts/update-design-system.sh` - Orchestration script: validates → builds → reports with error handling
 - `design-system/` - Directory for storing `tokens.json` and generated assets
 
-### Design System Workflow
+### Design System Workflow (Unified m3-design-system-generator)
 
 ```
 1. User provides design vibe/reference
    ↓
 2. Visual Design Director analyzes & creates aestheticPreferences JSON
    ↓
-3. Design Systems Architect generates token system via design-token-generator skill
+3. Design Systems Architect calls m3-design-system-generator (unified skill)
+   → Generates colors (78+ tokens, 13 tones each)
+   → Generates motion (16 durations, 10 easing curves)
+   → Generates base tokens (shape, spacing, elevation, typography)
+   → Validates WCAG AAA compliance on all color pairs
    ↓
-4. WCAG validation via wcag-contrast-checker skill
+4. Save to design-system/tokens-expressive.json
    ↓
-5. Save to design-system/tokens.json
+5. Build frontend assets: ./scripts/update-design-system.sh
    ↓
-6. Build frontend assets: ./scripts/update-design-system.sh
+6. Frontend Specialist consumes tokens in components (CSS variables)
    ↓
-7. Frontend Specialist consumes tokens in components (CSS variables)
-   ↓
-8. UX & Accessibility Lead audits final design for compliance
+7. UX & Accessibility Lead audits final design for compliance
 ```
 
 ### Quick Start: Create a Design System
@@ -555,21 +543,29 @@ The project includes a comprehensive **Design Wing** infrastructure for creating
 # 1. Define aesthetics with Visual Design Director
 # Request: "Create a design system with a 'premium, minimal' aesthetic"
 
-# 2. Design Systems Architect generates tokens (automatic)
-# Saves to: design-system/tokens.json
+# 2. Design Systems Architect calls unified m3-design-system-generator
+# → Generates 150+ tokens (colors, motion, base tokens)
+# → Validates WCAG AAA compliance
+# → Saves to: design-system/tokens-expressive.json
 
 # 3. Build frontend assets
 ./scripts/update-design-system.sh
 
 # 4. Output generated:
-# - frontend/src/styles/design-tokens.css (CSS custom properties)
+# - design-system/tokens-expressive.json (all 150+ tokens)
+# - frontend/src/theme/design-tokens.css (CSS custom properties)
 # - design-system/tailwind-token-patch.js (Tailwind config patch)
+# - design-system/WCAG_VALIDATION_REPORT.md (accessibility audit)
 
 # 5. Import in your app
-# Add to frontend/src/App.tsx: import './styles/design-tokens.css'
+# Add to frontend/src/App.tsx: import './theme/design-tokens.css'
 
 # 6. Use in components
-# .button { background-color: var(--sys-color-primary); color: var(--sys-color-on-primary); }
+# .button {
+#   background-color: var(--sys-color-primary);
+#   color: var(--sys-color-on-primary);
+#   animation: fadeIn var(--sys-motion-duration-medium-2) var(--sys-motion-easing-standard);
+# }
 ```
 
 ## M3 Expressive Migration Infrastructure (NEW - 2025-11-17)
@@ -597,60 +593,40 @@ The project includes a complete **M3 Expressive Design System migration infrastr
 **Skill:** `batch-migration-orchestrator` (539 lines)
 - Parallel component migration coordinator
 - Manages multi-component migrations
-- Coordinates all 8 migration skills
+- Orchestrates 4-step migration protocol (layout → visual → typography → interaction)
 
 #### Individual Migration Skills
 
-1. **m3-layout-refactor** (460 lines) - Spacing tokens
-   - Convert padding/margin/gap to `var(--sys-spacing-*)`
+1. **m3-layout-tokens** (~221 lines) - Spacing tokens
+   - 12-stop spacing scale (0px, 4px, 8px...64px)
+   - Convert padding/margin/gap to `var(--sys-space-*)`
    - Transform `theme.spacing()` calls and hardcoded pixels
-   - 8px base grid alignment
 
-2. **m3-color-themer** (530 lines) - Color tokens
-   - Replace hardcoded colors with `var(--sys-color-*)`
-   - 78 color tokens, 30+ semantic roles
-   - WCAG compliance validation
+2. **m3-visual-tokens** (~870 lines) - Color, shape, elevation tokens
+   - **Color:** 78 tokens, 30+ semantic roles, WCAG validation
+   - **Shape:** 7 corner radii scales (4px to full)
+   - **Elevation:** 6 levels with standardized shadow depths
 
-3. **m3-typography-classifier** (626 lines) - Typography scale
-   - Map fonts to `var(--sys-typescale-*-*)`
-   - 13 typography scales (display, headline, title, label, body)
+3. **m3-typography-tokens** (~647 lines) - Type scale + editorial
+   - 13 semantic type scales (display, headline, title, label, body)
+   - Editorial conventions (text alignment, letter spacing, overflow handling)
    - Font weight and line-height tokens
 
-4. **m3-editorial-stylist** (593 lines) - Editorial conventions
-   - Content-specific styles (line-height, letter-spacing, max-width)
-   - Reading-optimized typography
-   - Text alignment and justification
-
-5. **m3-shape-refactor** (568 lines) - Shape tokens
-   - Convert border-radius to `var(--sys-shape-corner-*)`
-   - 7 shape scales (extra-small to full)
-   - Consistent corner treatments
-
-6. **m3-elevation-refactor** (554 lines) - Elevation tokens
-   - Replace box-shadow with `var(--sys-elevation-level*)`
-   - 6 elevation levels (0-5)
-   - Standardized shadow depths
-
-7. **m3-icon-replacer** (549 lines) - Icon standards
-   - Migrate Material-UI Icons → Material Symbols
-   - Consistent sizing and colors
-   - Icon token system integration
-
-8. **m3-motion-applier** (617 lines) - Motion tokens
-   - Transform transitions to M3 duration/easing tokens
-   - 16 duration scales, 10 easing functions
-   - Consistent animation timing
+4. **m3-interaction-tokens** (~628 lines) - Icons + motion
+   - **Icons:** 3 standard sizes (20px, 24px, 40px), semantic colors
+   - **Motion:** 16 duration scales, 10 easing functions
+   - Spring physics + choreography support
 
 ### Migration Workflow
 
 ```bash
 # Migrate a single component
 # Ask: "Migrate the Button component to M3 Expressive"
-# m3-migration-architect executes all 8 skills sequentially
+# m3-migration-architect executes 4-step protocol sequentially
 
 # Batch migrate multiple components
 # Ask: "Migrate Card, Dialog, and Menu to M3 Expressive"
-# batch-migration-orchestrator coordinates parallel migrations
+# batch-migration-orchestrator coordinates parallel migrations (4 steps each)
 ```
 
 ### Documentation & References

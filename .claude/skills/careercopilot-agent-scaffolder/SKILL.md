@@ -1,6 +1,6 @@
 ---
 name: careercopilot-agent-scaffolder
-description: "Scaffolds a new Python agent file in 'src/agents/' from a template. Use when asked to create a new agent."
+description: "Scaffolds a new Python agent for autonomous AI tasks in 'src/agents/'. Agents are autonomous components that handle complex operations (resume analysis, job matching, KSC generation). Use when asked to create a new AI agent or automation component."
 ---
 # Agent Scaffolder Workflow
 
