@@ -1,6 +1,6 @@
 # Batch Migration Orchestrator
 
-**Purpose:** Orchestrate parallel M3 Expressive migration across multiple components using the 8-step protocol.
+**Purpose:** Orchestrate parallel M3 Expressive migration across multiple components using the 4-step consolidated protocol.
 
 **Input:** Component list + tokens-expressive.json
 **Output:** Batch migration report with success/failure status for each component
@@ -9,7 +9,7 @@
 
 ## Overview
 
-This skill coordinates the complete 8-step M3 migration protocol across multiple components in parallel, enabling:
+This skill coordinates the complete 4-step consolidated M3 migration protocol across multiple components in parallel, enabling:
 
 - **Batch Processing:** Migrate 10-20 components simultaneously
 - **Parallel Execution:** 87% time savings (2-3 min vs 15-20 min per component)
