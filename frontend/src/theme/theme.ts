@@ -105,4 +105,39 @@ const themeOptions: ThemeOptions = {
     button: { fontFamily: 'var(--font-ai)', fontWeight: 600, letterSpacing: '0.05em' },
     
     // TIER 4: DATA (The Log)
-    caption: { fontFamily: 'var(--
+    caption: { fontFamily: 'var(--font-data)', fontSize: 'var(--text-body-xs)' },
+  },
+
+  // ========================================================================
+  // COMPONENT OVERRIDES
+  // ========================================================================
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: 'var(--radius-button)',
+          fontWeight: 600,
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 'var(--radius-card)',
+          backgroundColor: 'var(--sys-surface-container)',
+          border: `1px solid var(--sys-outline-variant)`,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'var(--sys-surface-low)',
+        },
+      },
+    },
+  },
+};
+
+export const theme = createTheme(themeOptions);
