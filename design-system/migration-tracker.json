@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
-  "last_updated": "2025-11-17T17:16:45.909375",
+  "last_updated": "2025-11-28T04:00:00.000000",
   "components": {
-    "components/ui/M3Button.tsx": {
+    "components/M3Button/M3Button.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Lavender/Lilac colors, full token support"
     },
     "components/ErrorBoundary.tsx": {
       "status": "pending",
@@ -347,8 +347,8 @@
       "notes": "2 MUI patterns"
     },
     "components/ui/date-picker.tsx": {
-      "status": "pending",
-      "notes": "15 MUI patterns"
+      "status": "migrated",
+      "notes": "Electric Alchemist: Date picker with MUI calendar, primary selection"
     },
     "components/ui/breadcrumb.tsx": {
       "status": "pending",
@@ -383,12 +383,12 @@
       "notes": "0 MUI patterns"
     },
     "components/ui/toast.tsx": {
-      "status": "pending",
-      "notes": "6 MUI patterns"
+      "status": "migrated",
+      "notes": "Electric Alchemist: Toast notification with surface container, error/success variants"
     },
     "components/ui/button.tsx": {
-      "status": "pending",
-      "notes": "2 MUI patterns"
+      "status": "migrated",
+      "notes": "Electric Alchemist: Base button component with MUI integration"
     },
     "components/ui/skeleton.tsx": {
       "status": "pending",
@@ -407,8 +407,8 @@
       "notes": "0 MUI patterns"
     },
     "components/ui/select.tsx": {
-      "status": "pending",
-      "notes": "13 MUI patterns"
+      "status": "migrated",
+      "notes": "Electric Alchemist: Select/dropdown with MUI base, elevated menu"
     },
     "components/ui/EmptyState.tsx": {
       "status": "pending",
@@ -506,69 +506,69 @@
       "status": "pending",
       "notes": "6 MUI patterns"
     },
-    "components/ui/M3Card.tsx": {
+    "components/M3Card/M3Card.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Surface container colors, elevation tokens"
     },
-    "components/ui/M3Badge.tsx": {
+    "components/M3Badge/M3Badge.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Status badge with secondary/tertiary/error colors"
     },
-    "components/ui/M3Input.tsx": {
+    "components/M3Input/M3Input.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Outlined input with primary focus state, error colors"
     },
-    "components/ui/M3Dialog.tsx": {
+    "components/M3Dialog/M3Dialog.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Dialog with scrim, elevated surface, scale animation"
     },
-    "components/ui/M3Progress.tsx": {
+    "components/M3Progress/M3Progress.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Linear/circular progress with primary color indicators"
     },
-    "components/ui/M3Textarea.tsx": {
+    "components/M3Textarea/M3Textarea.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Textarea with floating label, outlined variant"
     },
-    "components/ui/M3SearchInput.tsx": {
+    "components/M3SearchInput/M3SearchInput.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Search input with icon, outlined variant"
     },
-    "components/ui/M3Tabs.tsx": {
+    "components/M3Tabs/M3Tabs.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Tab navigation with animated indicator, primary underline"
     },
-    "components/ui/M3Select.tsx": {
+    "components/M3Select/M3Select.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Dropdown select with menu elevation, outlined variant"
     },
-    "components/ui/M3Sidebar.tsx": {
+    "components/M3Sidebar/M3Sidebar.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Sidebar navigation with surface container"
     },
-    "components/ui/M3DatePicker.tsx": {
+    "components/M3DatePicker/M3DatePicker.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Date picker with calendar grid, primary highlight"
     },
-    "components/ui/M3Breadcrumb.tsx": {
+    "components/M3Breadcrumb/M3Breadcrumb.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Breadcrumb navigation with primary links"
     },
-    "components/ui/M3Switch.tsx": {
+    "components/M3Switch/M3Switch.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Toggle switch with primary color, on/off states"
     },
-    "components/ui/M3Slider.tsx": {
+    "components/M3Slider/M3Slider.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Range slider with primary track, thumb indicator"
     },
-    "components/ui/M3RadioGroup.tsx": {
+    "components/M3RadioGroup/M3RadioGroup.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Radio button group with primary color, state layers"
     },
-    "components/ui/M3Checkbox.tsx": {
+    "components/M3Checkbox/M3Checkbox.tsx": {
       "status": "migrated",
-      "notes": "M3 tokens detected"
+      "notes": "Electric Alchemist: Checkbox with primary color, indeterminate state"
     }
   },
   "batches": []
