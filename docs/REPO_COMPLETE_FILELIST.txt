@@ -1,0 +1,3175 @@
+.
+├── -l
+├── 30
+├── AGENT_MODEL_REFERENCE.md
+├── AGENT_SKILL_REVIEW.md
+├── AWS_SES_MIGRATION_SUMMARY.md
+├── AWS_SES_QUICK_START.md
+├── BACKEND_BUILD_REVIEW.md
+├── BATCH_1_2_COMPLETE.md
+├── BATCH_4_MIGRATION_GUIDE.md
+├── BULK_SKILL_UPLOAD_INSTRUCTIONS.md
+├── CLAUDE.md
+├── CLAUDE.md.backup
+├── CLEANUP-COMPLETE-SUMMARY.md
+├── CLOUD_STORAGE_EXPORT_SUMMARY.md
+├── COMPONENT_DUPLICATES.md
+├── COMPONENT_INVENTORY.json
+├── CONFIGURATION_GUIDE.md
+├── CONSOLIDATED_PROJECT_ROADMAP.md
+├── Career Copilot (Community)
+│   └── src
+├── DEAD_CODE_LIST.txt
+├── DEPENDENCY_FIXES_SUMMARY.md
+├── DEPLOYMENT_CHECKLIST.md
+├── DEPLOYMENT_SESSION_SUMMARY.md
+├── Dockerfile
+├── ELECTRIC_ALCHEMIST_COMPLETE_SUMMARY.md
+├── ELECTRIC_ALCHEMIST_MIGRATION_PLAN.md
+├── ESLINT_9_FOLLOWUP.md
+├── FREE_BACKEND_HOSTING_OPTIONS.md
+├── FRONTEND_SIMPLIFICATION_STRATEGY.md
+├── FULL_HANDOVER.md
+├── GEO_POP_STYLE_GUIDE.md
+├── HANDOVER_COMPLETION_SUMMARY.md
+├── HANDOVER_TODO.md
+├── HARDCODED_VALUES_AUDIT.txt
+├── IMPLEMENTATION_COMPLETE.md
+├── M3_BATCH_EXECUTION_PLAN.md
+├── M3_DELEGATION_GUIDE.md
+├── M3_EXPRESSIVE_ENHANCEMENT_PLAN.md
+├── M3_IMPLEMENTATION_STATUS.md
+├── M3_WEEK1_COMPLETE.md
+├── M3_WEEK2_PLAN.md
+├── MCP_SERVERS.md
+├── MIGRATION_PREP_QUICKSTART.md
+├── MONITORING_DASHBOARD.md
+├── PHASE-3-CLEANUP-SUMMARY.md
+├── PHASE-4-CLEANUP-SUMMARY.md
+├── PHASE_1_QUICK_WINS_RESULTS.md
+├── PHASE_2_SIMPLIFICATION_RESULTS.md
+├── PHASE_3_M3_MIGRATION_RESULTS.md
+├── PRIORITIES_2_AND_3_COMPLETE.md
+├── README.md
+├── RECOVERY_SUMMARY.md
+├── REDIS_FIRESTORE_MIGRATION_PLAN.md
+├── REDIS_REMOVAL_SUMMARY.md
+├── REDIS_TO_FIRESTORE_MIGRATION.md
+├── SCRIPTS_README.md
+├── SKILL_AGENT_MATRIX.md
+├── SKILL_UPLOAD_GUIDE.md
+├── STYLE_GUIDE.md
+├── TECHNICAL-DEBT.md
+├── TODO_AGENTS_SKILLS_GAPS.md
+├── TOKEN_SAVING_STRATEGY.md
+├── TYPESCRIPT_QUICK_REFERENCE.md
+├── The Electric Alchemist: Brand Identity &.md
+├── UI_setup.sh
+├── VERTEX_AI_REDIS_REMOVAL_COMPLETE.md
+├── WORK_RECOVERY_REPORT.md
+├── agents.md
+├── archive
+│   └── old_docs
+├── audit.sh
+├── backend
+│   ├── Dockerfile
+│   ├── Dockerfile.test
+│   ├── alembic.ini
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── agents
+│   │   │   ├── __init__.py
+│   │   │   ├── orchestrator.py
+│   │   │   └── test_automation_specialist.py
+│   │   ├── ai
+│   │   │   ├── __init__.py
+│   │   │   ├── base_service.py
+│   │   │   ├── document_analysis_service.py
+│   │   │   ├── document_processor.py
+│   │   │   ├── job_description_service.py
+│   │   │   ├── llm_service.py
+│   │   │   ├── model_dispatcher.py
+│   │   │   └── resume_service.py
+│   │   ├── ai_operations
+│   │   │   ├── ats_scoring.py
+│   │   │   ├── cover_letter_generator.py
+│   │   │   ├── job_analyzer.py
+│   │   │   ├── ksc_generator.py
+│   │   │   └── resume_analyzer.py
+│   │   ├── api
+│   │   │   ├── __init__.py
+│   │   │   ├── endpoints
+│   │   │   │   ├── analysis.py
+│   │   │   │   ├── applications.py
+│   │   │   │   ├── auth.py
+│   │   │   │   ├── config.py
+│   │   │   │   ├── document_export.py
+│   │   │   │   ├── documents.py
+│   │   │   │   ├── job_listings.py
+│   │   │   │   └── workflows.py
+│   │   │   ├── middleware
+│   │   │   │   └── firebase_auth.py
+│   │   │   ├── router.py
+│   │   │   └── routers
+│   │   │       └── ingestion.py
+│   │   ├── config
+│   │   │   └── production.py
+│   │   ├── core
+│   │   │   ├── __init__.py
+│   │   │   ├── ai_client.py
+│   │   │   ├── ai_config.py
+│   │   │   ├── ai_error_handling.py
+│   │   │   ├── ai_flow_integration.py
+│   │   │   ├── ai_response_validation.py
+│   │   │   ├── auth.py
+│   │   │   ├── base_agent.py
+│   │   │   ├── cache_decorators.py
+│   │   │   ├── cache_middleware.py
+│   │   │   ├── cached_ai_operations.py
+│   │   │   ├── cloud_storage.py
+│   │   │   ├── config.py
+│   │   │   ├── database.py
+│   │   │   ├── db.py
+│   │   │   ├── dependencies.py
+│   │   │   ├── document_export_service.py
+│   │   │   ├── document_processing.py
+│   │   │   ├── enhanced_ai_error_handling.py
+│   │   │   ├── file_upload_decorators.py
+│   │   │   ├── firebase.py
+│   │   │   ├── firestore_cache.py
+│   │   │   ├── genkit_init.py
+│   │   │   ├── input_validation.py
+│   │   │   ├── limiter.py
+│   │   │   ├── logging_config.py
+│   │   │   ├── loguru_config.py
+│   │   │   ├── monitoring.py
+│   │   │   ├── monitoring_middleware.py
+│   │   │   ├── nlp_model_manager.py
+│   │   │   ├── personal_cache.py
+│   │   │   ├── prompt_service.py
+│   │   │   ├── secret_manager.py
+│   │   │   ├── secrets.py
+│   │   │   ├── secure_config.py
+│   │   │   └── security.py
+│   │   ├── docs
+│   │   │   └── AI_RESPONSE_VALIDATION_GUIDE.md
+│   │   ├── examples
+│   │   │   └── validation_demo.py
+│   │   ├── genkit_flows
+│   │   │   ├── README_FLOW_DECORATOR.md
+│   │   │   ├── __init__.py
+│   │   │   ├── advanced_job_matching.py
+│   │   │   ├── application_preparation_workflow.py
+│   │   │   ├── ats_scoring.py
+│   │   │   ├── calendar_manager.py
+│   │   │   ├── career_application_workflow.py
+│   │   │   ├── cover_letter_generator.py
+│   │   │   ├── document_generator.py
+│   │   │   ├── email_scanner.py
+│   │   │   ├── email_task_workflow.py
+│   │   │   ├── extract_job_requirements.py
+│   │   │   ├── extract_resume_entities.py
+│   │   │   ├── flow_decorator.py
+│   │   │   ├── job_analyzer.py
+│   │   │   ├── job_listing_extractor.py
+│   │   │   ├── keyword_placer.py
+│   │   │   ├── ksc_generator.py
+│   │   │   ├── notifier.py
+│   │   │   ├── resume_analyzer.py
+│   │   │   ├── resume_intelligence_pipeline.py
+│   │   │   ├── shared.py
+│   │   │   ├── shared_fixed.py
+│   │   │   ├── smart_content_optimizer.py
+│   │   │   ├── smart_cover_letter_system.py
+│   │   │   ├── smart_ingestion.py
+│   │   │   └── types.py
+│   │   ├── main.py
+│   │   ├── main_simple.py
+│   │   ├── ml
+│   │   │   └── __init__.py
+│   │   ├── models
+│   │   │   ├── __init__.py
+│   │   │   ├── application_schemas.py
+│   │   │   ├── asset_library_schema.py
+│   │   │   ├── base.py
+│   │   │   ├── cache.py
+│   │   │   ├── database.py
+│   │   │   ├── document_export_schemas.py
+│   │   │   ├── ingestion_schemas.py
+│   │   │   ├── market_analysis.py
+│   │   │   ├── master_profile_schema.py
+│   │   │   ├── profile.py
+│   │   │   ├── schemas.py
+│   │   │   └── user.py
+│   │   ├── monitoring
+│   │   │   ├── nlp_metrics.py
+│   │   │   ├── nlp_metrics_service.py
+│   │   │   └── nlp_monitor.py
+│   │   ├── prompts
+│   │   │   ├── prompt_config.json
+│   │   │   └── prompt_templates.json
+│   │   ├── requirements-test.txt
+│   │   ├── services
+│   │   │   ├── __init__.py
+│   │   │   ├── ai_prompt_builder.py
+│   │   │   ├── email_service.py
+│   │   │   ├── jobs_service.py
+│   │   │   ├── template_service.py
+│   │   │   ├── user_profile_service.py
+│   │   │   └── web_search.py
+│   │   ├── templates
+│   │   │   ├── __init__.py
+│   │   │   ├── creative
+│   │   │   │   ├── style.css
+│   │   │   │   └── template.html
+│   │   │   ├── modern
+│   │   │   │   ├── style.css
+│   │   │   │   └── template.html
+│   │   │   ├── professional
+│   │   │   │   ├── style.css
+│   │   │   │   └── template.html
+│   │   │   └── resume_template.html
+│   │   ├── tests
+│   │   │   ├── __init__.py
+│   │   │   ├── api
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── test_ksc_integration.py
+│   │   │   ├── conftest.py
+│   │   │   ├── core
+│   │   │   │   ├── test_ai_config.py
+│   │   │   │   ├── test_ai_error_handling.py
+│   │   │   │   └── test_input_validation.py
+│   │   │   ├── genkit_flows
+│   │   │   │   ├── test_ats_scoring.py
+│   │   │   │   ├── test_cover_letter_output_validation.py
+│   │   │   │   ├── test_cover_letter_robustness.py
+│   │   │   │   ├── test_email_scanner.py
+│   │   │   │   ├── test_job_analyzer.py
+│   │   │   │   └── test_resume_analyzer.py
+│   │   │   ├── integration
+│   │   │   │   ├── README.md
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── test_document_export.py
+│   │   │   │   └── test_profile_creation.py
+│   │   │   ├── test_ai_response_validation.py
+│   │   │   ├── test_enhanced_ai_error_handling.py
+│   │   │   ├── test_main.py
+│   │   │   ├── test_prompt_service.py
+│   │   │   └── workers
+│   │   │       ├── test_ats_score_worker.py
+│   │   │       └── test_scan_emails_worker.py
+│   │   ├── utils
+│   │   │   ├── firestore_cache_manager.py
+│   │   │   └── resume_parser.py
+│   │   ├── workers
+│   │   │   ├── __init__.py
+│   │   │   ├── ats_score_worker.py
+│   │   │   └── scan_emails_worker.py
+│   │   └── workflows
+│   │       ├── __init__.py
+│   │       └── personal_career_workflow.py
+│   ├── app.yaml
+│   ├── cloudbuild.yaml
+│   ├── config
+│   │   ├── ai_config.json
+│   │   └── themes.json
+│   ├── data
+│   │   ├── cache
+│   │   │   ├── ai_operations
+│   │   │   ├── ai_responses
+│   │   │   ├── general
+│   │   │   ├── jobs
+│   │   │   ├── profiles
+│   │   │   └── research
+│   │   ├── careercopilot.db-shm
+│   │   └── careercopilot.db-wal
+│   ├── docs
+│   │   ├── REFACTORING_SUMMARY.md
+│   │   └── monitoring.md
+│   ├── firebase-prod-key.json
+│   ├── fix_mypy_errors.py
+│   ├── logs
+│   │   └── debug.log
+│   ├── migrate-to-mui.sh
+│   ├── migrations
+│   │   ├── README
+│   │   ├── env.py
+│   │   ├── script.py.mako
+│   │   └── versions
+│   │       ├── 39448280638b_initial_database_schema.py
+│   │       ├── 5347ecca6618_merge_heads.py
+│   │       ├── 8bed27b99c7c_merge_all_heads.py
+│   │       ├── bc8b9dcfbe50_cleanup_before_application_update.py
+│   │       └── ea364f0feefd_update_application_model_final.py
+│   ├── mypy.ini
+│   ├── py.typed
+│   ├── pyproject.toml
+│   ├── pytest.ini
+│   ├── requirements.in
+│   ├── requirements.txt
+│   ├── scripts
+│   │   ├── monitor_production.py
+│   │   ├── setup_secrets.py
+│   │   └── setup_secrets_cli.py
+│   ├── setup.cfg
+│   ├── setup_nlp.sh
+│   ├── sql
+│   │   └── init.sql
+│   ├── start.sh
+│   ├── test_autofix_validation.py
+│   ├── test_nlp_optimization.py
+│   ├── tests
+│   │   ├── __init__.py
+│   │   ├── conftest.py
+│   │   ├── performance
+│   │   │   ├── test_ai_services_performance.py
+│   │   │   └── test_cache_validation.py
+│   │   ├── test_ai_config_system.py
+│   │   ├── test_ai_services_api.py
+│   │   ├── test_api.py
+│   │   ├── test_cache_system.py
+│   │   ├── test_monitoring_system.py
+│   │   ├── test_refactored_document_processing.py
+│   │   ├── test_resume_intelligence_pipeline.py
+│   │   └── unit
+│   │       └── core
+│   │           └── test_cloud_storage.py
+│   └── typings
+│       ├── genkit.pyi
+│       └── sqlalchemy-stubs
+│           ├── __init__.pyi
+│           └── py.typed
+├── backups
+│   ├── component-consolidation-20251118-173245
+│   │   └── components
+│   │       ├── ApplicationGeneratorModal.tsx
+│   │       ├── Documents
+│   │       │   ├── DocumentPreview.tsx
+│   │       │   ├── DocumentTypeSelector.tsx
+│   │       │   ├── ResumeBuilder.tsx
+│   │       │   ├── TemplateSelector.tsx
+│   │       │   ├── UploadResume.tsx
+│   │       │   └── __tests__
+│   │       │       ├── DocumentPreview.test.tsx
+│   │       │       ├── TemplateSelector.test.tsx
+│   │       │       └── UploadResume.test.tsx
+│   │       ├── ErrorBoundary.tsx
+│   │       ├── NotificationCenter
+│   │       │   └── __tests__
+│   │       │       └── NotificationCenter.test.tsx
+│   │       ├── NotificationCenter.tsx
+│   │       ├── ProtectedRoute.tsx
+│   │       ├── README.md
+│   │       ├── SkeletonLoader
+│   │       │   └── __tests__
+│   │       │       └── SkeletonLoader.test.tsx
+│   │       ├── SkeletonLoader.tsx
+│   │       ├── SmartUploadModal
+│   │       │   └── __tests__
+│   │       │       └── SmartUploadModal.test.tsx
+│   │       ├── SmartUploadModal.tsx
+│   │       ├── __tests__
+│   │       │   ├── ApplicationGeneratorModal.test.tsx
+│   │       │   ├── ErrorBoundary.test.tsx
+│   │       │   └── ProtectedRoute.test.tsx
+│   │       ├── _deprecated
+│   │       │   ├── README.md
+│   │       │   ├── dropdown-menu.tsx
+│   │       │   └── scroll-area.tsx
+│   │       ├── career
+│   │       │   ├── ApplicationCard.tsx
+│   │       │   ├── ApplicationTracker.tsx
+│   │       │   ├── InterviewPrep.tsx
+│   │       │   ├── JobSearch.tsx
+│   │       │   ├── TimelineView.tsx
+│   │       │   ├── __mocks__
+│   │       │   │   └── TimelineView.tsx
+│   │       │   ├── __tests__
+│   │       │   │   ├── ApplicationCard.test.tsx
+│   │       │   │   ├── ApplicationTracker.test.tsx
+│   │       │   │   ├── InterviewPrep.test.tsx
+│   │       │   │   ├── JobSearch.test.tsx
+│   │       │   │   └── TimelineView.test.tsx
+│   │       │   └── types.ts
+│   │       ├── common
+│   │       │   ├── ActionCard.tsx
+│   │       │   ├── CareerCopilotLogo.tsx
+│   │       │   ├── ErrorCard.tsx
+│   │       │   ├── LoadingCard.tsx
+│   │       │   ├── LoadingStates.tsx
+│   │       │   ├── StandardizedLoadingStates.tsx
+│   │       │   ├── StyledComponents.tsx
+│   │       │   └── __tests__
+│   │       │       ├── ActionCard.test.tsx
+│   │       │       ├── CareerCopilotLogo.test.tsx
+│   │       │       ├── ErrorCard.test.tsx
+│   │       │       └── LoadingCard.test.tsx
+│   │       ├── dashboard
+│   │       │   ├── WelcomeBanner.tsx
+│   │       │   └── __tests__
+│   │       │       └── WelcomeBanner.test.tsx
+│   │       ├── features
+│   │       │   ├── Analysis
+│   │       │   │   ├── ATSAnalysisDashboard.tsx
+│   │       │   │   ├── ATSScoreCircle.tsx
+│   │       │   │   ├── __tests__
+│   │       │   │   │   ├── ATSAnalysisDashboard.test.tsx
+│   │       │   │   │   └── ATSScoreCircle.test.tsx
+│   │       │   │   └── index.ts
+│   │       │   ├── KSC
+│   │       │   │   ├── __tests__
+│   │       │   │   │   └── KscCriteriaInput.test.tsx
+│   │       │   │   └── index.ts
+│   │       │   ├── auth
+│   │       │   │   ├── Auth.test.tsx
+│   │       │   │   ├── Auth.tsx
+│   │       │   │   └── __tests__
+│   │       │   │       └── LoginForm.test.tsx
+│   │       │   ├── dashboard
+│   │       │   │   ├── Dashboard.tsx
+│   │       │   │   ├── Settings.tsx
+│   │       │   │   ├── __tests__
+│   │       │   │   │   ├── Dashboard.test.tsx
+│   │       │   │   │   └── Settings.test.tsx
+│   │       │   │   └── dashboard
+│   │       │   │       ├── DashboardHeader.tsx
+│   │       │   │       ├── DashboardStats.tsx
+│   │       │   │       ├── ProfileGrid.tsx
+│   │       │   │       └── __tests__
+│   │       │   │           ├── DashboardHeader.test.tsx
+│   │       │   │           ├── DashboardStats.test.tsx
+│   │       │   │           └── ProfileGrid.test.tsx
+│   │       │   ├── demo
+│   │       │   │   ├── AnimatedComponents.tsx
+│   │       │   │   ├── AnimatedShowcase.tsx
+│   │       │   │   ├── CardShowcase.tsx
+│   │       │   │   ├── ComponentLibrary.tsx
+│   │       │   │   ├── ComponentUsageGuide.tsx
+│   │       │   │   ├── MUITest.tsx
+│   │       │   │   ├── StateDemoShowcase.tsx
+│   │       │   │   └── fix-icon-fontsize.ts
+│   │       │   └── opportunities
+│   │       │       ├── CareerGrowthHub.test.tsx
+│   │       │       ├── CareerGrowthHub.tsx
+│   │       │       ├── CareerIntelligence.test.tsx
+│   │       │       ├── CareerIntelligence.tsx
+│   │       │       ├── FeatureCard.tsx
+│   │       │       ├── FilterPanel.test.tsx
+│   │       │       ├── FilterPanel.tsx
+│   │       │       ├── InterviewPrep.test.tsx
+│   │       │       ├── InterviewPrep.tsx
+│   │       │       ├── JobCard.tsx
+│   │       │       ├── JobInput.tsx
+│   │       │       ├── JobMatching.tsx
+│   │       │       ├── KanbanBoard.tsx.wip
+│   │       │       └── __tests__
+│   │       │           ├── FeatureCard.test.tsx
+│   │       │           ├── JobCard.test.tsx
+│   │       │           ├── JobInput.test.tsx
+│   │       │           └── JobMatching.test.tsx
+│   │       ├── figma
+│   │       │   ├── ImageWithFallback.tsx
+│   │       │   └── __tests__
+│   │       │       └── ImageWithFallback.test.tsx
+│   │       ├── ingestion
+│   │       │   ├── ConfirmTagsModal.tsx
+│   │       │   └── __tests__
+│   │       │       └── ConfirmTagsModal.test.tsx
+│   │       ├── jobs
+│   │       │   ├── JobCard.tsx
+│   │       │   └── __tests__
+│   │       │       └── JobCard.test.tsx
+│   │       ├── layout
+│   │       │   ├── AppLayout.stories.tsx
+│   │       │   ├── AppLayout.tsx
+│   │       │   ├── AppShell.tsx
+│   │       │   ├── Navbar.tsx
+│   │       │   ├── NavigationItem.tsx
+│   │       │   ├── PageHeader.stories.tsx
+│   │       │   ├── PageHeader.tsx
+│   │       │   ├── Sidebar.tsx
+│   │       │   ├── __tests__
+│   │       │   │   ├── AppLayout.test.tsx
+│   │       │   │   ├── AppShell.test.tsx
+│   │       │   │   ├── Navbar.test.tsx
+│   │       │   │   ├── NavigationItem.test.tsx
+│   │       │   │   ├── PageHeader.test.tsx
+│   │       │   │   └── Sidebar.test.tsx
+│   │       │   └── fix-button-variants.ts
+│   │       ├── library
+│   │       │   ├── ATSScoreCircle.tsx
+│   │       │   ├── ButtonComponentsSection.tsx
+│   │       │   ├── CardComponentsSection.tsx
+│   │       │   ├── ComponentDemo.tsx
+│   │       │   ├── DemoLinksSection.tsx
+│   │       │   ├── DisplayComponentsSection.tsx
+│   │       │   ├── FormComponentsSection.tsx
+│   │       │   ├── InteractiveComponentsSection.tsx
+│   │       │   ├── KeywordTag.tsx
+│   │       │   ├── LayoutComponentsSection.tsx
+│   │       │   ├── ProfileVariationCard.tsx
+│   │       │   ├── TemplateCard.tsx
+│   │       │   ├── UsageGuidelinesSection.tsx
+│   │       │   ├── __tests__
+│   │       │   │   ├── ATSScoreCircle.test.tsx
+│   │       │   │   ├── ComponentDemo.test.tsx
+│   │       │   │   ├── KeywordTag.test.tsx
+│   │       │   │   ├── ProfileVariationCard.test.tsx
+│   │       │   │   └── TemplateCard.test.tsx
+│   │       │   ├── fix-document-type-selector.ts
+│   │       │   └── fix-storybook-imports.ts
+│   │       ├── main
+│   │       │   ├── ActionCard.tsx
+│   │       │   ├── FeatureHighlights.tsx
+│   │       │   ├── HeroBanner.tsx
+│   │       │   ├── JobSearchStatus.tsx
+│   │       │   ├── TestimonialCarousel.tsx
+│   │       │   └── __tests__
+│   │       │       ├── ActionCard.test.tsx
+│   │       │       ├── FeatureHighlights.test.tsx
+│   │       │       ├── HeroBanner.test.tsx
+│   │       │       ├── JobSearchStatus.test.tsx
+│   │       │       └── TestimonialCarousel.test.tsx
+│   │       ├── profile
+│   │       │   ├── CreateProfileCard.tsx
+│   │       │   ├── ImportWizard.tsx
+│   │       │   ├── ProfileCard.tsx
+│   │       │   ├── ProfileComparison.tsx
+│   │       │   ├── ProfileEditor.tsx
+│   │       │   └── __tests__
+│   │       │       ├── CreateProfileCard.test.tsx
+│   │       │       ├── ImportWizard.test.tsx
+│   │       │       ├── ProfileCard.test.tsx
+│   │       │       ├── ProfileComparison.test.tsx
+│   │       │       └── ProfileEditor.test.tsx
+│   │       ├── profiles
+│   │       │   ├── CreateProfileCard.tsx
+│   │       │   ├── ProfileCard.tsx
+│   │       │   └── __tests__
+│   │       │       ├── CreateProfileCard.test.tsx
+│   │       │       └── ProfileCard.test.tsx
+│   │       ├── style-guide
+│   │       │   └── ColorSwatch.tsx
+│   │       └── ui
+│   │           ├── Alert.tsx
+│   │           ├── Button
+│   │           │   ├── Button.stories.tsx
+│   │           │   ├── Button.test.tsx
+│   │           │   ├── Button.tsx
+│   │           │   ├── __tests__
+│   │           │   │   └── Button.test.tsx
+│   │           │   ├── fix-templateselector-props.ts
+│   │           │   └── index.ts
+│   │           ├── EmptyState.tsx
+│   │           ├── GridCompat.tsx
+│   │           ├── LoadingState.tsx
+│   │           ├── M3Alert.css
+│   │           ├── M3Alert.stories.tsx
+│   │           ├── M3Alert.tsx
+│   │           ├── M3Badge.css
+│   │           ├── M3Badge.tsx
+│   │           ├── M3Breadcrumb.css
+│   │           ├── M3Breadcrumb.stories.tsx
+│   │           ├── M3Breadcrumb.tsx
+│   │           ├── M3Button.css
+│   │           ├── M3Button.stories.tsx
+│   │           ├── M3Button.tsx
+│   │           ├── M3Card.css
+│   │           ├── M3Card.stories.tsx
+│   │           ├── M3Card.tsx
+│   │           ├── M3Checkbox.css
+│   │           ├── M3Checkbox.stories.tsx
+│   │           ├── M3Checkbox.tsx
+│   │           ├── M3Container.css
+│   │           ├── M3Container.stories.tsx
+│   │           ├── M3Container.tsx
+│   │           ├── M3DatePicker.css
+│   │           ├── M3DatePicker.stories.tsx
+│   │           ├── M3DatePicker.tsx
+│   │           ├── M3Dialog.css
+│   │           ├── M3Dialog.tsx
+│   │           ├── M3Divider.css
+│   │           ├── M3Divider.stories.tsx
+│   │           ├── M3Divider.tsx
+│   │           ├── M3EmptyState.css
+│   │           ├── M3EmptyState.stories.tsx
+│   │           ├── M3EmptyState.tsx
+│   │           ├── M3Grid.css
+│   │           ├── M3Grid.stories.tsx
+│   │           ├── M3Grid.tsx
+│   │           ├── M3Input.css
+│   │           ├── M3Input.tsx
+│   │           ├── M3Progress.css
+│   │           ├── M3Progress.stories.tsx
+│   │           ├── M3Progress.tsx
+│   │           ├── M3RadioGroup.css
+│   │           ├── M3RadioGroup.stories.tsx
+│   │           ├── M3RadioGroup.tsx
+│   │           ├── M3SearchInput.css
+│   │           ├── M3SearchInput.stories.tsx
+│   │           ├── M3SearchInput.tsx
+│   │           ├── M3Select.css
+│   │           ├── M3Select.stories.tsx
+│   │           ├── M3Select.tsx
+│   │           ├── M3Sidebar.css
+│   │           ├── M3Sidebar.stories.tsx
+│   │           ├── M3Sidebar.tsx
+│   │           ├── M3Skeleton.css
+│   │           ├── M3Skeleton.stories.tsx
+│   │           ├── M3Skeleton.tsx
+│   │           ├── M3Slider.css
+│   │           ├── M3Slider.stories.tsx
+│   │           ├── M3Slider.tsx
+│   │           ├── M3Switch.css
+│   │           ├── M3Switch.stories.tsx
+│   │           ├── M3Switch.tsx
+│   │           ├── M3Tabs.css
+│   │           ├── M3Tabs.stories.tsx
+│   │           ├── M3Tabs.tsx
+│   │           ├── M3Textarea.css
+│   │           ├── M3Textarea.stories.tsx
+│   │           ├── M3Textarea.tsx
+│   │           ├── StatCard.tsx
+│   │           ├── __tests__
+│   │           │   ├── Alert.test.tsx
+│   │           │   ├── EmptyState.test.tsx
+│   │           │   ├── GridCompat.test.tsx
+│   │           │   ├── LoadingState.test.tsx
+│   │           │   ├── StatCard.test.tsx
+│   │           │   ├── alert-dialog.test.tsx
+│   │           │   ├── avatar.test.tsx
+│   │           │   ├── badge.test.tsx
+│   │           │   ├── breadcrumb.test.tsx
+│   │           │   ├── button.test.tsx
+│   │           │   ├── card.test.tsx
+│   │           │   ├── checkbox.test.tsx
+│   │           │   ├── date-picker.test.tsx
+│   │           │   ├── dialog.test.tsx
+│   │           │   ├── input.test.tsx
+│   │           │   ├── label.test.tsx
+│   │           │   ├── layout.test.tsx
+│   │           │   ├── popover.test.tsx
+│   │           │   ├── progress.test.tsx
+│   │           │   ├── radio-group.test.tsx
+│   │           │   ├── search-input.test.tsx
+│   │           │   ├── select.test.tsx
+│   │           │   ├── separator.test.tsx
+│   │           │   ├── sidebar.test.tsx
+│   │           │   ├── skeleton.test.tsx
+│   │           │   ├── slider.test.tsx
+│   │           │   ├── switch.test.tsx
+│   │           │   ├── tabs.test.tsx
+│   │           │   ├── textarea.test.tsx
+│   │           │   ├── toast.test.tsx
+│   │           │   └── tooltip.test.tsx
+│   │           ├── alert-dialog.test.tsx
+│   │           ├── alert-dialog.tsx
+│   │           ├── avatar.tsx
+│   │           ├── badge.test.tsx
+│   │           ├── badge.tsx
+│   │           ├── breadcrumb.tsx
+│   │           ├── button.tsx
+│   │           ├── card.test.tsx
+│   │           ├── card.tsx
+│   │           ├── checkbox.test.tsx
+│   │           ├── checkbox.tsx
+│   │           ├── date-picker.tsx
+│   │           ├── dialog.tsx
+│   │           ├── feedback
+│   │           │   ├── Dialog.tsx
+│   │           │   ├── EmptyState.tsx
+│   │           │   ├── ErrorBoundary.tsx
+│   │           │   ├── Skeleton.tsx
+│   │           │   ├── Toast.tsx
+│   │           │   ├── ToastContext.tsx
+│   │           │   └── __tests__
+│   │           │       ├── Dialog.test.tsx
+│   │           │       ├── EmptyState.test.tsx
+│   │           │       ├── Toast.test.tsx
+│   │           │       └── ToastContext.test.tsx
+│   │           ├── index.ts
+│   │           ├── input.test.tsx
+│   │           ├── input.tsx
+│   │           ├── label.tsx
+│   │           ├── layout.tsx
+│   │           ├── loading
+│   │           │   ├── FullPageLoading.tsx
+│   │           │   ├── LoadingSkeleton.tsx
+│   │           │   ├── LoadingSpinner.tsx
+│   │           │   ├── __tests__
+│   │           │   │   ├── FullPageLoading.test.tsx
+│   │           │   │   ├── LoadingSkeleton.test.tsx
+│   │           │   │   └── LoadingSpinner.test.tsx
+│   │           │   ├── index.ts
+│   │           │   └── variants.ts
+│   │           ├── popover.tsx
+│   │           ├── progress.tsx
+│   │           ├── radio-group.tsx
+│   │           ├── search-input.tsx
+│   │           ├── select.tsx
+│   │           ├── separator.tsx
+│   │           ├── sidebar.tsx
+│   │           ├── skeleton.tsx
+│   │           ├── slider.tsx
+│   │           ├── switch.tsx
+│   │           ├── tabs.tsx
+│   │           ├── textarea.tsx
+│   │           ├── toast.tsx
+│   │           └── tooltip.tsx
+│   ├── component-consolidation-20251118-190046
+│   │   └── components
+│   │       ├── ApplicationGeneratorModal.tsx
+│   │       ├── ErrorBoundary.tsx
+│   │       ├── NotificationCenter
+│   │       │   └── __tests__
+│   │       │       └── NotificationCenter.test.tsx
+│   │       ├── NotificationCenter.tsx
+│   │       ├── ProtectedRoute.tsx
+│   │       ├── README.md
+│   │       ├── SkeletonLoader
+│   │       │   └── __tests__
+│   │       │       └── SkeletonLoader.test.tsx
+│   │       ├── SkeletonLoader.tsx
+│   │       ├── SmartUploadModal
+│   │       │   └── __tests__
+│   │       │       └── SmartUploadModal.test.tsx
+│   │       ├── SmartUploadModal.tsx
+│   │       ├── __tests__
+│   │       │   ├── ApplicationGeneratorModal.test.tsx
+│   │       │   ├── ErrorBoundary.test.tsx
+│   │       │   └── ProtectedRoute.test.tsx
+│   │       ├── _deprecated
+│   │       │   ├── ATSScoreCircle-Analysis.tsx
+│   │       │   ├── ActionCard-common.tsx
+│   │       │   ├── ActionCard-main.tsx
+│   │       │   ├── CreateProfileCard-profiles.tsx
+│   │       │   ├── InterviewPrep-career.tsx
+│   │       │   ├── InterviewPrep-opportunities.tsx
+│   │       │   ├── JobCard-jobs.tsx
+│   │       │   ├── LoadingStates-unused.tsx
+│   │       │   ├── ProfileCard-profiles.tsx
+│   │       │   ├── README.md
+│   │       │   ├── demo-AnimatedComponents.tsx
+│   │       │   ├── demo-AnimatedShowcase.tsx
+│   │       │   ├── demo-CardShowcase.tsx
+│   │       │   ├── demo-ComponentLibrary.tsx
+│   │       │   ├── demo-ComponentUsageGuide.tsx
+│   │       │   ├── demo-MUITest.tsx
+│   │       │   ├── demo-StateDemoShowcase.tsx
+│   │       │   ├── demo-fix-icon-fontsize.ts
+│   │       │   ├── dropdown-menu.tsx
+│   │       │   └── scroll-area.tsx
+│   │       ├── career
+│   │       │   ├── ApplicationCard.tsx
+│   │       │   ├── ApplicationTracker.tsx
+│   │       │   ├── JobSearch.tsx
+│   │       │   ├── TimelineView.tsx
+│   │       │   ├── __mocks__
+│   │       │   │   └── TimelineView.tsx
+│   │       │   ├── __tests__
+│   │       │   │   ├── ApplicationCard.test.tsx
+│   │       │   │   ├── ApplicationTracker.test.tsx
+│   │       │   │   ├── InterviewPrep.test.tsx
+│   │       │   │   ├── JobSearch.test.tsx
+│   │       │   │   └── TimelineView.test.tsx
+│   │       │   └── types.ts
+│   │       ├── common
+│   │       │   ├── CareerCopilotLogo.tsx
+│   │       │   ├── ErrorCard.tsx
+│   │       │   ├── LoadingCard.tsx
+│   │       │   ├── StandardizedLoadingStates.tsx
+│   │       │   ├── StyledComponents.tsx
+│   │       │   └── __tests__
+│   │       │       ├── ActionCard.test.tsx
+│   │       │       ├── CareerCopilotLogo.test.tsx
+│   │       │       ├── ErrorCard.test.tsx
+│   │       │       └── LoadingCard.test.tsx
+│   │       ├── dashboard
+│   │       │   ├── WelcomeBanner.tsx
+│   │       │   └── __tests__
+│   │       │       └── WelcomeBanner.test.tsx
+│   │       ├── documents
+│   │       │   ├── DocumentPreview.tsx
+│   │       │   ├── DocumentTypeSelector.tsx
+│   │       │   ├── ResumeBuilder.tsx
+│   │       │   ├── TemplateSelector.tsx
+│   │       │   ├── UploadResume.tsx
+│   │       │   └── __tests__
+│   │       │       ├── DocumentPreview.test.tsx
+│   │       │       ├── TemplateSelector.test.tsx
+│   │       │       └── UploadResume.test.tsx
+│   │       ├── features
+│   │       │   ├── KSC
+│   │       │   │   ├── __tests__
+│   │       │   │   │   └── KscCriteriaInput.test.tsx
+│   │       │   │   └── index.ts
+│   │       │   ├── analysis
+│   │       │   │   ├── ATSAnalysisDashboard.tsx
+│   │       │   │   ├── __tests__
+│   │       │   │   │   ├── ATSAnalysisDashboard.test.tsx
+│   │       │   │   │   └── ATSScoreCircle.test.tsx
+│   │       │   │   └── index.ts
+│   │       │   ├── auth
+│   │       │   │   ├── Auth.test.tsx
+│   │       │   │   ├── Auth.tsx
+│   │       │   │   └── __tests__
+│   │       │   │       └── LoginForm.test.tsx
+│   │       │   ├── dashboard
+│   │       │   │   ├── Dashboard.tsx
+│   │       │   │   ├── Settings.tsx
+│   │       │   │   ├── __tests__
+│   │       │   │   │   ├── Dashboard.test.tsx
+│   │       │   │   │   └── Settings.test.tsx
+│   │       │   │   └── dashboard
+│   │       │   │       ├── DashboardHeader.tsx
+│   │       │   │       ├── DashboardStats.tsx
+│   │       │   │       ├── ProfileGrid.tsx
+│   │       │   │       └── __tests__
+│   │       │   │           ├── DashboardHeader.test.tsx
+│   │       │   │           ├── DashboardStats.test.tsx
+│   │       │   │           └── ProfileGrid.test.tsx
+│   │       │   └── opportunities
+│   │       │       ├── CareerGrowthHub.test.tsx
+│   │       │       ├── CareerGrowthHub.tsx
+│   │       │       ├── CareerIntelligence.test.tsx
+│   │       │       ├── CareerIntelligence.tsx
+│   │       │       ├── FeatureCard.tsx
+│   │       │       ├── FilterPanel.test.tsx
+│   │       │       ├── FilterPanel.tsx
+│   │       │       ├── InterviewPrep.test.tsx
+│   │       │       ├── JobCard.tsx
+│   │       │       ├── JobInput.tsx
+│   │       │       ├── JobMatching.tsx
+│   │       │       ├── KanbanBoard.tsx.wip
+│   │       │       └── __tests__
+│   │       │           ├── FeatureCard.test.tsx
+│   │       │           ├── JobCard.test.tsx
+│   │       │           ├── JobInput.test.tsx
+│   │       │           └── JobMatching.test.tsx
+│   │       ├── figma
+│   │       │   ├── ImageWithFallback.tsx
+│   │       │   └── __tests__
+│   │       │       └── ImageWithFallback.test.tsx
+│   │       ├── ingestion
+│   │       │   ├── ConfirmTagsModal.tsx
+│   │       │   └── __tests__
+│   │       │       └── ConfirmTagsModal.test.tsx
+│   │       ├── jobs
+│   │       │   └── __tests__
+│   │       │       └── JobCard.test.tsx
+│   │       ├── layout
+│   │       │   ├── AppLayout.stories.tsx
+│   │       │   ├── AppLayout.tsx
+│   │       │   ├── AppShell.tsx
+│   │       │   ├── Navbar.tsx
+│   │       │   ├── NavigationItem.tsx
+│   │       │   ├── PageHeader.stories.tsx
+│   │       │   ├── PageHeader.tsx
+│   │       │   ├── Sidebar.tsx
+│   │       │   ├── __tests__
+│   │       │   │   ├── AppLayout.test.tsx
+│   │       │   │   ├── AppShell.test.tsx
+│   │       │   │   ├── Navbar.test.tsx
+│   │       │   │   ├── NavigationItem.test.tsx
+│   │       │   │   ├── PageHeader.test.tsx
+│   │       │   │   └── Sidebar.test.tsx
+│   │       │   └── fix-button-variants.ts
+│   │       ├── library
+│   │       │   ├── ATSScoreCircle.tsx
+│   │       │   ├── ButtonComponentsSection.tsx
+│   │       │   ├── CardComponentsSection.tsx
+│   │       │   ├── ComponentDemo.tsx
+│   │       │   ├── DemoLinksSection.tsx
+│   │       │   ├── DisplayComponentsSection.tsx
+│   │       │   ├── FormComponentsSection.tsx
+│   │       │   ├── InteractiveComponentsSection.tsx
+│   │       │   ├── KeywordTag.tsx
+│   │       │   ├── LayoutComponentsSection.tsx
+│   │       │   ├── ProfileVariationCard.tsx
+│   │       │   ├── TemplateCard.tsx
+│   │       │   ├── UsageGuidelinesSection.tsx
+│   │       │   ├── __tests__
+│   │       │   │   ├── ATSScoreCircle.test.tsx
+│   │       │   │   ├── ComponentDemo.test.tsx
+│   │       │   │   ├── KeywordTag.test.tsx
+│   │       │   │   ├── ProfileVariationCard.test.tsx
+│   │       │   │   └── TemplateCard.test.tsx
+│   │       │   ├── fix-document-type-selector.ts
+│   │       │   └── fix-storybook-imports.ts
+│   │       ├── main
+│   │       │   ├── FeatureHighlights.tsx
+│   │       │   ├── HeroBanner.tsx
+│   │       │   ├── JobSearchStatus.tsx
+│   │       │   ├── TestimonialCarousel.tsx
+│   │       │   └── __tests__
+│   │       │       ├── ActionCard.test.tsx
+│   │       │       ├── FeatureHighlights.test.tsx
+│   │       │       ├── HeroBanner.test.tsx
+│   │       │       ├── JobSearchStatus.test.tsx
+│   │       │       └── TestimonialCarousel.test.tsx
+│   │       ├── profile
+│   │       │   ├── CreateProfileCard.tsx
+│   │       │   ├── ImportWizard.tsx
+│   │       │   ├── ProfileCard.tsx
+│   │       │   ├── ProfileComparison.tsx
+│   │       │   ├── ProfileEditor.tsx
+│   │       │   └── __tests__
+│   │       │       ├── CreateProfileCard.test.tsx
+│   │       │       ├── ImportWizard.test.tsx
+│   │       │       ├── ProfileCard.test.tsx
+│   │       │       ├── ProfileComparison.test.tsx
+│   │       │       └── ProfileEditor.test.tsx
+│   │       ├── profiles
+│   │       │   └── __tests__
+│   │       │       ├── CreateProfileCard.test.tsx
+│   │       │       └── ProfileCard.test.tsx
+│   │       ├── style-guide
+│   │       │   └── ColorSwatch.tsx
+│   │       └── ui
+│   │           ├── Alert.tsx
+│   │           ├── Button
+│   │           │   ├── Button.stories.tsx
+│   │           │   ├── Button.test.tsx
+│   │           │   ├── Button.tsx
+│   │           │   ├── __tests__
+│   │           │   │   └── Button.test.tsx
+│   │           │   ├── fix-templateselector-props.ts
+│   │           │   └── index.ts
+│   │           ├── GridCompat.tsx
+│   │           ├── LoadingState.tsx
+│   │           ├── M3Alert.css
+│   │           ├── M3Alert.stories.tsx
+│   │           ├── M3Alert.tsx
+│   │           ├── M3Badge.css
+│   │           ├── M3Badge.tsx
+│   │           ├── M3Breadcrumb.css
+│   │           ├── M3Breadcrumb.stories.tsx
+│   │           ├── M3Breadcrumb.tsx
+│   │           ├── M3Button.css
+│   │           ├── M3Button.stories.tsx
+│   │           ├── M3Button.tsx
+│   │           ├── M3Card.css
+│   │           ├── M3Card.stories.tsx
+│   │           ├── M3Card.tsx
+│   │           ├── M3Checkbox.css
+│   │           ├── M3Checkbox.stories.tsx
+│   │           ├── M3Checkbox.tsx
+│   │           ├── M3Container.css
+│   │           ├── M3Container.stories.tsx
+│   │           ├── M3Container.tsx
+│   │           ├── M3DatePicker.css
+│   │           ├── M3DatePicker.stories.tsx
+│   │           ├── M3DatePicker.tsx
+│   │           ├── M3Dialog.css
+│   │           ├── M3Dialog.tsx
+│   │           ├── M3Divider.css
+│   │           ├── M3Divider.stories.tsx
+│   │           ├── M3Divider.tsx
+│   │           ├── M3EmptyState.css
+│   │           ├── M3EmptyState.stories.tsx
+│   │           ├── M3EmptyState.tsx
+│   │           ├── M3Grid.css
+│   │           ├── M3Grid.stories.tsx
+│   │           ├── M3Grid.tsx
+│   │           ├── M3Input.css
+│   │           ├── M3Input.tsx
+│   │           ├── M3Progress.css
+│   │           ├── M3Progress.stories.tsx
+│   │           ├── M3Progress.tsx
+│   │           ├── M3RadioGroup.css
+│   │           ├── M3RadioGroup.stories.tsx
+│   │           ├── M3RadioGroup.tsx
+│   │           ├── M3SearchInput.css
+│   │           ├── M3SearchInput.stories.tsx
+│   │           ├── M3SearchInput.tsx
+│   │           ├── M3Select.css
+│   │           ├── M3Select.stories.tsx
+│   │           ├── M3Select.tsx
+│   │           ├── M3Sidebar.css
+│   │           ├── M3Sidebar.stories.tsx
+│   │           ├── M3Sidebar.tsx
+│   │           ├── M3Skeleton.css
+│   │           ├── M3Skeleton.stories.tsx
+│   │           ├── M3Skeleton.tsx
+│   │           ├── M3Slider.css
+│   │           ├── M3Slider.stories.tsx
+│   │           ├── M3Slider.tsx
+│   │           ├── M3Switch.css
+│   │           ├── M3Switch.stories.tsx
+│   │           ├── M3Switch.tsx
+│   │           ├── M3Tabs.css
+│   │           ├── M3Tabs.stories.tsx
+│   │           ├── M3Tabs.tsx
+│   │           ├── M3Textarea.css
+│   │           ├── M3Textarea.stories.tsx
+│   │           ├── M3Textarea.tsx
+│   │           ├── StatCard.tsx
+│   │           ├── __tests__
+│   │           │   ├── Alert.test.tsx
+│   │           │   ├── EmptyState.test.tsx
+│   │           │   ├── GridCompat.test.tsx
+│   │           │   ├── LoadingState.test.tsx
+│   │           │   ├── StatCard.test.tsx
+│   │           │   ├── alert-dialog.test.tsx
+│   │           │   ├── avatar.test.tsx
+│   │           │   ├── badge.test.tsx
+│   │           │   ├── breadcrumb.test.tsx
+│   │           │   ├── button.test.tsx
+│   │           │   ├── card.test.tsx
+│   │           │   ├── checkbox.test.tsx
+│   │           │   ├── date-picker.test.tsx
+│   │           │   ├── dialog.test.tsx
+│   │           │   ├── input.test.tsx
+│   │           │   ├── label.test.tsx
+│   │           │   ├── layout.test.tsx
+│   │           │   ├── popover.test.tsx
+│   │           │   ├── progress.test.tsx
+│   │           │   ├── radio-group.test.tsx
+│   │           │   ├── search-input.test.tsx
+│   │           │   ├── select.test.tsx
+│   │           │   ├── separator.test.tsx
+│   │           │   ├── sidebar.test.tsx
+│   │           │   ├── skeleton.test.tsx
+│   │           │   ├── slider.test.tsx
+│   │           │   ├── switch.test.tsx
+│   │           │   ├── tabs.test.tsx
+│   │           │   ├── textarea.test.tsx
+│   │           │   ├── toast.test.tsx
+│   │           │   └── tooltip.test.tsx
+│   │           ├── alert-dialog.test.tsx
+│   │           ├── alert-dialog.tsx
+│   │           ├── avatar.tsx
+│   │           ├── badge.test.tsx
+│   │           ├── badge.tsx
+│   │           ├── breadcrumb.tsx
+│   │           ├── button.tsx
+│   │           ├── card.test.tsx
+│   │           ├── card.tsx
+│   │           ├── checkbox.test.tsx
+│   │           ├── checkbox.tsx
+│   │           ├── date-picker.tsx
+│   │           ├── dialog.tsx
+│   │           ├── feedback
+│   │           │   ├── Dialog.tsx
+│   │           │   ├── EmptyState.tsx
+│   │           │   ├── Skeleton.tsx
+│   │           │   ├── Toast.tsx
+│   │           │   ├── ToastContext.tsx
+│   │           │   └── __tests__
+│   │           │       ├── Dialog.test.tsx
+│   │           │       ├── EmptyState.test.tsx
+│   │           │       ├── Toast.test.tsx
+│   │           │       └── ToastContext.test.tsx
+│   │           ├── index.ts
+│   │           ├── input.test.tsx
+│   │           ├── input.tsx
+│   │           ├── label.tsx
+│   │           ├── layout.tsx
+│   │           ├── loading
+│   │           │   ├── FullPageLoading.tsx
+│   │           │   ├── LoadingSkeleton.tsx
+│   │           │   ├── LoadingSpinner.tsx
+│   │           │   ├── __tests__
+│   │           │   │   ├── FullPageLoading.test.tsx
+│   │           │   │   ├── LoadingSkeleton.test.tsx
+│   │           │   │   └── LoadingSpinner.test.tsx
+│   │           │   ├── index.ts
+│   │           │   └── variants.ts
+│   │           ├── popover.tsx
+│   │           ├── progress.tsx
+│   │           ├── radio-group.tsx
+│   │           ├── search-input.tsx
+│   │           ├── select.tsx
+│   │           ├── separator.tsx
+│   │           ├── sidebar.tsx
+│   │           ├── skeleton.tsx
+│   │           ├── slider.tsx
+│   │           ├── switch.tsx
+│   │           ├── tabs.tsx
+│   │           ├── textarea.tsx
+│   │           ├── toast.tsx
+│   │           └── tooltip.tsx
+│   ├── component-standardization-20251118-173325
+│   │   └── components
+│   └── component-standardization-20251118-190116
+│       └── components
+│           ├── ApplicationGeneratorModal.tsx
+│           ├── ErrorBoundary.tsx
+│           ├── NotificationCenter
+│           │   └── __tests__
+│           │       └── NotificationCenter.test.tsx
+│           ├── NotificationCenter.tsx
+│           ├── ProtectedRoute.tsx
+│           ├── README.md
+│           ├── SkeletonLoader
+│           │   └── __tests__
+│           │       └── SkeletonLoader.test.tsx
+│           ├── SkeletonLoader.tsx
+│           ├── SmartUploadModal
+│           │   └── __tests__
+│           │       └── SmartUploadModal.test.tsx
+│           ├── SmartUploadModal.tsx
+│           ├── __tests__
+│           │   ├── ApplicationGeneratorModal.test.tsx
+│           │   ├── ErrorBoundary.test.tsx
+│           │   └── ProtectedRoute.test.tsx
+│           ├── _deprecated
+│           │   ├── ATSScoreCircle-Analysis.tsx
+│           │   ├── ActionCard-common.tsx
+│           │   ├── ActionCard-main.tsx
+│           │   ├── CreateProfileCard-profiles.tsx
+│           │   ├── InterviewPrep-career.tsx
+│           │   ├── InterviewPrep-opportunities.tsx
+│           │   ├── JobCard-jobs.tsx
+│           │   ├── LoadingStates-unused.tsx
+│           │   ├── ProfileCard-profiles.tsx
+│           │   ├── README.md
+│           │   ├── demo-AnimatedComponents.tsx
+│           │   ├── demo-AnimatedShowcase.tsx
+│           │   ├── demo-CardShowcase.tsx
+│           │   ├── demo-ComponentLibrary.tsx
+│           │   ├── demo-ComponentUsageGuide.tsx
+│           │   ├── demo-MUITest.tsx
+│           │   ├── demo-StateDemoShowcase.tsx
+│           │   ├── demo-fix-icon-fontsize.ts
+│           │   ├── dropdown-menu.tsx
+│           │   └── scroll-area.tsx
+│           ├── career
+│           │   ├── ApplicationCard.tsx
+│           │   ├── ApplicationTracker.tsx
+│           │   ├── JobSearch.tsx
+│           │   ├── TimelineView.tsx
+│           │   ├── __mocks__
+│           │   │   └── TimelineView.tsx
+│           │   ├── __tests__
+│           │   │   ├── ApplicationCard.test.tsx
+│           │   │   ├── ApplicationTracker.test.tsx
+│           │   │   ├── InterviewPrep.test.tsx
+│           │   │   ├── JobSearch.test.tsx
+│           │   │   └── TimelineView.test.tsx
+│           │   └── types.ts
+│           ├── common
+│           │   ├── CareerCopilotLogo.tsx
+│           │   ├── ErrorCard.tsx
+│           │   ├── LoadingCard.tsx
+│           │   ├── StandardizedLoadingStates.tsx
+│           │   ├── StyledComponents.tsx
+│           │   └── __tests__
+│           │       ├── ActionCard.test.tsx
+│           │       ├── CareerCopilotLogo.test.tsx
+│           │       ├── ErrorCard.test.tsx
+│           │       └── LoadingCard.test.tsx
+│           ├── dashboard
+│           │   ├── WelcomeBanner.tsx
+│           │   └── __tests__
+│           │       └── WelcomeBanner.test.tsx
+│           ├── documents
+│           │   ├── DocumentPreview.tsx
+│           │   ├── DocumentTypeSelector.tsx
+│           │   ├── ResumeBuilder.tsx
+│           │   ├── TemplateSelector.tsx
+│           │   ├── UploadResume.tsx
+│           │   └── __tests__
+│           │       ├── DocumentPreview.test.tsx
+│           │       ├── TemplateSelector.test.tsx
+│           │       └── UploadResume.test.tsx
+│           ├── features
+│           │   ├── KSC
+│           │   │   ├── __tests__
+│           │   │   │   └── KscCriteriaInput.test.tsx
+│           │   │   └── index.ts
+│           │   ├── analysis
+│           │   │   ├── ATSAnalysisDashboard.tsx
+│           │   │   ├── __tests__
+│           │   │   │   ├── ATSAnalysisDashboard.test.tsx
+│           │   │   │   └── ATSScoreCircle.test.tsx
+│           │   │   └── index.ts
+│           │   ├── auth
+│           │   │   ├── Auth.test.tsx
+│           │   │   ├── Auth.tsx
+│           │   │   └── __tests__
+│           │   │       └── LoginForm.test.tsx
+│           │   ├── dashboard
+│           │   │   ├── Dashboard.tsx
+│           │   │   ├── Settings.tsx
+│           │   │   ├── __tests__
+│           │   │   │   ├── Dashboard.test.tsx
+│           │   │   │   └── Settings.test.tsx
+│           │   │   └── dashboard
+│           │   │       ├── DashboardHeader.tsx
+│           │   │       ├── DashboardStats.tsx
+│           │   │       ├── ProfileGrid.tsx
+│           │   │       └── __tests__
+│           │   │           ├── DashboardHeader.test.tsx
+│           │   │           ├── DashboardStats.test.tsx
+│           │   │           └── ProfileGrid.test.tsx
+│           │   └── opportunities
+│           │       ├── CareerGrowthHub.test.tsx
+│           │       ├── CareerGrowthHub.tsx
+│           │       ├── CareerIntelligence.test.tsx
+│           │       ├── CareerIntelligence.tsx
+│           │       ├── FeatureCard.tsx
+│           │       ├── FilterPanel.test.tsx
+│           │       ├── FilterPanel.tsx
+│           │       ├── InterviewPrep.test.tsx
+│           │       ├── JobCard.tsx
+│           │       ├── JobInput.tsx
+│           │       ├── JobMatching.tsx
+│           │       ├── KanbanBoard.tsx.wip
+│           │       └── __tests__
+│           │           ├── FeatureCard.test.tsx
+│           │           ├── JobCard.test.tsx
+│           │           ├── JobInput.test.tsx
+│           │           └── JobMatching.test.tsx
+│           ├── figma
+│           │   ├── ImageWithFallback.tsx
+│           │   └── __tests__
+│           │       └── ImageWithFallback.test.tsx
+│           ├── ingestion
+│           │   ├── ConfirmTagsModal.tsx
+│           │   └── __tests__
+│           │       └── ConfirmTagsModal.test.tsx
+│           ├── jobs
+│           │   └── __tests__
+│           │       └── JobCard.test.tsx
+│           ├── layout
+│           │   ├── AppLayout.stories.tsx
+│           │   ├── AppLayout.tsx
+│           │   ├── AppShell.tsx
+│           │   ├── Navbar.tsx
+│           │   ├── NavigationItem.tsx
+│           │   ├── PageHeader.stories.tsx
+│           │   ├── PageHeader.tsx
+│           │   ├── Sidebar.tsx
+│           │   ├── __tests__
+│           │   │   ├── AppLayout.test.tsx
+│           │   │   ├── AppShell.test.tsx
+│           │   │   ├── Navbar.test.tsx
+│           │   │   ├── NavigationItem.test.tsx
+│           │   │   ├── PageHeader.test.tsx
+│           │   │   └── Sidebar.test.tsx
+│           │   └── fix-button-variants.ts
+│           ├── library
+│           │   ├── ATSScoreCircle.tsx
+│           │   ├── ButtonComponentsSection.tsx
+│           │   ├── CardComponentsSection.tsx
+│           │   ├── ComponentDemo.tsx
+│           │   ├── DemoLinksSection.tsx
+│           │   ├── DisplayComponentsSection.tsx
+│           │   ├── FormComponentsSection.tsx
+│           │   ├── InteractiveComponentsSection.tsx
+│           │   ├── KeywordTag.tsx
+│           │   ├── LayoutComponentsSection.tsx
+│           │   ├── ProfileVariationCard.tsx
+│           │   ├── TemplateCard.tsx
+│           │   ├── UsageGuidelinesSection.tsx
+│           │   ├── __tests__
+│           │   │   ├── ATSScoreCircle.test.tsx
+│           │   │   ├── ComponentDemo.test.tsx
+│           │   │   ├── KeywordTag.test.tsx
+│           │   │   ├── ProfileVariationCard.test.tsx
+│           │   │   └── TemplateCard.test.tsx
+│           │   ├── fix-document-type-selector.ts
+│           │   └── fix-storybook-imports.ts
+│           ├── main
+│           │   ├── FeatureHighlights.tsx
+│           │   ├── HeroBanner.tsx
+│           │   ├── JobSearchStatus.tsx
+│           │   ├── TestimonialCarousel.tsx
+│           │   └── __tests__
+│           │       ├── ActionCard.test.tsx
+│           │       ├── FeatureHighlights.test.tsx
+│           │       ├── HeroBanner.test.tsx
+│           │       ├── JobSearchStatus.test.tsx
+│           │       └── TestimonialCarousel.test.tsx
+│           ├── profile
+│           │   ├── CreateProfileCard.tsx
+│           │   ├── ImportWizard.tsx
+│           │   ├── ProfileCard.tsx
+│           │   ├── ProfileComparison.tsx
+│           │   ├── ProfileEditor.tsx
+│           │   └── __tests__
+│           │       ├── CreateProfileCard.test.tsx
+│           │       ├── ImportWizard.test.tsx
+│           │       ├── ProfileCard.test.tsx
+│           │       ├── ProfileComparison.test.tsx
+│           │       └── ProfileEditor.test.tsx
+│           ├── profiles
+│           │   └── __tests__
+│           │       ├── CreateProfileCard.test.tsx
+│           │       └── ProfileCard.test.tsx
+│           ├── style-guide
+│           │   └── ColorSwatch.tsx
+│           └── ui
+│               ├── Alert.tsx
+│               ├── Button
+│               │   ├── Button.stories.tsx
+│               │   ├── Button.test.tsx
+│               │   ├── Button.tsx
+│               │   ├── __tests__
+│               │   │   └── Button.test.tsx
+│               │   ├── fix-templateselector-props.ts
+│               │   └── index.ts
+│               ├── GridCompat.tsx
+│               ├── LoadingState.tsx
+│               ├── M3Alert.css
+│               ├── M3Alert.stories.tsx
+│               ├── M3Alert.tsx
+│               ├── M3Badge.css
+│               ├── M3Badge.tsx
+│               ├── M3Breadcrumb.css
+│               ├── M3Breadcrumb.stories.tsx
+│               ├── M3Breadcrumb.tsx
+│               ├── M3Button.css
+│               ├── M3Button.stories.tsx
+│               ├── M3Button.tsx
+│               ├── M3Card.css
+│               ├── M3Card.stories.tsx
+│               ├── M3Card.tsx
+│               ├── M3Checkbox.css
+│               ├── M3Checkbox.stories.tsx
+│               ├── M3Checkbox.tsx
+│               ├── M3Container.css
+│               ├── M3Container.stories.tsx
+│               ├── M3Container.tsx
+│               ├── M3DatePicker.css
+│               ├── M3DatePicker.stories.tsx
+│               ├── M3DatePicker.tsx
+│               ├── M3Dialog.css
+│               ├── M3Dialog.tsx
+│               ├── M3Divider.css
+│               ├── M3Divider.stories.tsx
+│               ├── M3Divider.tsx
+│               ├── M3EmptyState.css
+│               ├── M3EmptyState.stories.tsx
+│               ├── M3EmptyState.tsx
+│               ├── M3Grid.css
+│               ├── M3Grid.stories.tsx
+│               ├── M3Grid.tsx
+│               ├── M3Input.css
+│               ├── M3Input.tsx
+│               ├── M3Progress.css
+│               ├── M3Progress.stories.tsx
+│               ├── M3Progress.tsx
+│               ├── M3RadioGroup.css
+│               ├── M3RadioGroup.stories.tsx
+│               ├── M3RadioGroup.tsx
+│               ├── M3SearchInput.css
+│               ├── M3SearchInput.stories.tsx
+│               ├── M3SearchInput.tsx
+│               ├── M3Select.css
+│               ├── M3Select.stories.tsx
+│               ├── M3Select.tsx
+│               ├── M3Sidebar.css
+│               ├── M3Sidebar.stories.tsx
+│               ├── M3Sidebar.tsx
+│               ├── M3Skeleton.css
+│               ├── M3Skeleton.stories.tsx
+│               ├── M3Skeleton.tsx
+│               ├── M3Slider.css
+│               ├── M3Slider.stories.tsx
+│               ├── M3Slider.tsx
+│               ├── M3Switch.css
+│               ├── M3Switch.stories.tsx
+│               ├── M3Switch.tsx
+│               ├── M3Tabs.css
+│               ├── M3Tabs.stories.tsx
+│               ├── M3Tabs.tsx
+│               ├── M3Textarea.css
+│               ├── M3Textarea.stories.tsx
+│               ├── M3Textarea.tsx
+│               ├── StatCard.tsx
+│               ├── __tests__
+│               │   ├── Alert.test.tsx
+│               │   ├── EmptyState.test.tsx
+│               │   ├── GridCompat.test.tsx
+│               │   ├── LoadingState.test.tsx
+│               │   ├── StatCard.test.tsx
+│               │   ├── alert-dialog.test.tsx
+│               │   ├── avatar.test.tsx
+│               │   ├── badge.test.tsx
+│               │   ├── breadcrumb.test.tsx
+│               │   ├── button.test.tsx
+│               │   ├── card.test.tsx
+│               │   ├── checkbox.test.tsx
+│               │   ├── date-picker.test.tsx
+│               │   ├── dialog.test.tsx
+│               │   ├── input.test.tsx
+│               │   ├── label.test.tsx
+│               │   ├── layout.test.tsx
+│               │   ├── popover.test.tsx
+│               │   ├── progress.test.tsx
+│               │   ├── radio-group.test.tsx
+│               │   ├── search-input.test.tsx
+│               │   ├── select.test.tsx
+│               │   ├── separator.test.tsx
+│               │   ├── sidebar.test.tsx
+│               │   ├── skeleton.test.tsx
+│               │   ├── slider.test.tsx
+│               │   ├── switch.test.tsx
+│               │   ├── tabs.test.tsx
+│               │   ├── textarea.test.tsx
+│               │   ├── toast.test.tsx
+│               │   └── tooltip.test.tsx
+│               ├── alert-dialog.test.tsx
+│               ├── alert-dialog.tsx
+│               ├── avatar.tsx
+│               ├── badge.test.tsx
+│               ├── badge.tsx
+│               ├── breadcrumb.tsx
+│               ├── button.tsx
+│               ├── card.test.tsx
+│               ├── card.tsx
+│               ├── checkbox.test.tsx
+│               ├── checkbox.tsx
+│               ├── date-picker.tsx
+│               ├── dialog.tsx
+│               ├── feedback
+│               │   ├── Dialog.tsx
+│               │   ├── EmptyState.tsx
+│               │   ├── Skeleton.tsx
+│               │   ├── Toast.tsx
+│               │   ├── ToastContext.tsx
+│               │   └── __tests__
+│               │       ├── Dialog.test.tsx
+│               │       ├── EmptyState.test.tsx
+│               │       ├── Toast.test.tsx
+│               │       └── ToastContext.test.tsx
+│               ├── index.ts
+│               ├── input.test.tsx
+│               ├── input.tsx
+│               ├── label.tsx
+│               ├── layout.tsx
+│               ├── loading
+│               │   ├── FullPageLoading.tsx
+│               │   ├── LoadingSkeleton.tsx
+│               │   ├── LoadingSpinner.tsx
+│               │   ├── __tests__
+│               │   │   ├── FullPageLoading.test.tsx
+│               │   │   ├── LoadingSkeleton.test.tsx
+│               │   │   └── LoadingSpinner.test.tsx
+│               │   ├── index.ts
+│               │   └── variants.ts
+│               ├── popover.tsx
+│               ├── progress.tsx
+│               ├── radio-group.tsx
+│               ├── search-input.tsx
+│               ├── select.tsx
+│               ├── separator.tsx
+│               ├── sidebar.tsx
+│               ├── skeleton.tsx
+│               ├── slider.tsx
+│               ├── switch.tsx
+│               ├── tabs.tsx
+│               ├── textarea.tsx
+│               ├── toast.tsx
+│               └── tooltip.tsx
+├── claude-artifact-runner
+│   ├── LICENSE
+│   ├── README.default.md
+│   ├── README.md
+│   ├── artifact.html
+│   ├── bin
+│   │   └── test-pr.sh
+│   ├── components.json
+│   ├── expressiveartifact.tsx
+│   ├── index.html
+│   ├── inputs
+│   │   ├── artifact_template.html
+│   │   └── theme.css
+│   ├── jsconfig.json
+│   ├── npx
+│   │   ├── README.md
+│   │   ├── docker
+│   │   │   ├── Dockerfile
+│   │   │   ├── README.md
+│   │   │   ├── build
+│   │   │   └── publish
+│   │   ├── package.json
+│   │   ├── publish.js
+│   │   └── run-claude-artifact.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   └── favicon.ico
+│   ├── src
+│   │   ├── artifacts
+│   │   │   ├── index.tsx
+│   │   │   └── signup.tsx
+│   │   ├── components
+│   │   │   ├── layout.tsx
+│   │   │   └── ui
+│   │   │       ├── accordion.tsx
+│   │   │       ├── alert-dialog.tsx
+│   │   │       ├── alert.tsx
+│   │   │       ├── aspect-ratio.tsx
+│   │   │       ├── avatar.tsx
+│   │   │       ├── badge.tsx
+│   │   │       ├── breadcrumb.tsx
+│   │   │       ├── button.tsx
+│   │   │       ├── calendar.tsx
+│   │   │       ├── card.tsx
+│   │   │       ├── carousel.tsx
+│   │   │       ├── chart.tsx
+│   │   │       ├── checkbox.tsx
+│   │   │       ├── collapsible.tsx
+│   │   │       ├── command.tsx
+│   │   │       ├── context-menu.tsx
+│   │   │       ├── dialog.tsx
+│   │   │       ├── drawer.tsx
+│   │   │       ├── dropdown-menu.tsx
+│   │   │       ├── form.tsx
+│   │   │       ├── hover-card.tsx
+│   │   │       ├── input-otp.tsx
+│   │   │       ├── input.tsx
+│   │   │       ├── label.tsx
+│   │   │       ├── menubar.tsx
+│   │   │       ├── navigation-menu.tsx
+│   │   │       ├── pagination.tsx
+│   │   │       ├── popover.tsx
+│   │   │       ├── progress.tsx
+│   │   │       ├── radio-group.tsx
+│   │   │       ├── resizable.tsx
+│   │   │       ├── scroll-area.tsx
+│   │   │       ├── select.tsx
+│   │   │       ├── separator.tsx
+│   │   │       ├── sheet.tsx
+│   │   │       ├── skeleton.tsx
+│   │   │       ├── slider.tsx
+│   │   │       ├── sonner.tsx
+│   │   │       ├── switch.tsx
+│   │   │       ├── table.tsx
+│   │   │       ├── tabs.tsx
+│   │   │       ├── textarea.tsx
+│   │   │       ├── toast.tsx
+│   │   │       ├── toaster.tsx
+│   │   │       ├── toggle-group.tsx
+│   │   │       ├── toggle.tsx
+│   │   │       ├── tooltip.tsx
+│   │   │       └── use-toast.ts
+│   │   ├── index.css
+│   │   ├── lib
+│   │   │   └── utils.ts
+│   │   ├── main.tsx
+│   │   ├── styled-jsx.d.ts
+│   │   └── vite-env.d.ts
+│   ├── tailwind.config.mjs
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   ├── vite.config.ts
+│   └── vite.single.config.ts
+├── claude_desktop_config.json
+├── cleanup.sh
+├── complex-components.txt
+├── component-builder.md
+├── data
+│   └── cache
+│       └── ai_operations
+│           ├── 0dcd37502676250aa8130a40d01d3752.json
+│           ├── c1a11f3fb8898a02debc84791e4ddfaa.json
+│           └── d028c5efbe794fd14f4deda88aca6be2.json
+├── dead_code_detector.py
+├── design-brief.md
+├── design-system
+│   ├── MIGRATION_REPORT.md
+│   ├── QUICKSTART.md
+│   ├── README.md
+│   ├── migration-tracker.json
+│   ├── tailwind-m3-patch.js
+│   ├── tailwind-token-patch.js
+│   ├── tokens.json
+│   └── tokens.json.backup
+├── docker-compose.development.yml
+├── docker-compose.e2e.yml
+├── docker-compose.production.yml
+├── docs
+│   ├── ACCESSIBILITY_GUIDELINES.md
+│   ├── ANIMATIONS_AND_POLISH.md
+│   ├── API_CONTRACT_VALIDATION.md
+│   ├── AWS_SES_SETUP.md
+│   ├── CACHE_PERFORMANCE_AUDIT.md
+│   ├── CI_CD_OPTIMIZATION_RECOMMENDATIONS.md
+│   ├── COMPONENT_GUIDELINES.md
+│   ├── DEPENDENCY_CHECK_REPORT.txt
+│   ├── DEPLOYMENT_WORKFLOW.md
+│   ├── DESIGN_SYSTEM.md
+│   ├── DIRECTORY_STRUCTURE_OVERVIEW.md
+│   ├── DOCKER_REGISTRY_SETUP.md
+│   ├── DOCKER_WORKFLOW_EXAMPLE.yml
+│   ├── DOCUMENT_EXPORT_IMPLEMENTATION.md
+│   ├── FIREBASE_FUNCTIONS_OPTIMIZATION.md
+│   ├── FIRESTORE_OPTIMIZATION.md
+│   ├── FULLSTACK_FLOWS.md
+│   ├── IMPLEMENTATION_PLAN.md
+│   ├── INTEGRATION_ARCHITECTURAL_GUIDE.md
+│   ├── INTEGRATION_MAP.md
+│   ├── JULES_DELEGATION_WORKFLOW.md
+│   ├── JULES_PROTOCOL.md
+│   ├── MERGE_PLAN_PR82.md
+│   ├── MIGRATION_READINESS.md
+│   ├── NLP_MONITORING.md
+│   ├── NLP_OPTIMIZATION_GUIDE.md
+│   ├── PARALLEL_AGENTS_GUIDE.md
+│   ├── PHASE_COMPLETION_SUMMARY.md
+│   ├── PROJECT_ROADMAP.md
+│   ├── README.md
+│   ├── REPO_COMPLETE_FILELIST.txt
+│   ├── SECRETS_MANAGEMENT.md
+│   ├── SECRETS_QUICK_REFERENCE.md
+│   ├── SMART_INGESTION_INFRASTRUCTURE_SETUP.md
+│   ├── _archive
+│   │   ├── CODE_REVIEW_HANDOVER.md
+│   │   ├── E2E_HANDOVER.md
+│   │   ├── HANDOVER.md
+│   │   ├── legacy-summaries
+│   │   │   └── PHASE-2-CLEANUP-SUMMARY.md
+│   │   └── merge-plan-pr82-eslint-alt.md
+│   ├── architecture
+│   │   ├── AGENT_SYSTEM_REFERENCE.md
+│   │   ├── BACKEND_REFACTORING_SUMMARY.md
+│   │   ├── CACHE_STRATEGY.md
+│   │   ├── PROJECT_KNOWLEDGE_BASE.md
+│   │   ├── SKILLS_AND_TOOLING.md
+│   │   └── SKILL_AGENT_MATRIX.md
+│   ├── deployment
+│   │   ├── AI_DEPLOYMENT_HANDOVER.md
+│   │   ├── DEPLOYMENT_HANDOVER.md
+│   │   ├── DEPLOYMENT_STATUS.md
+│   │   ├── PRODUCTION_DEPLOYMENT.md
+│   │   └── SETUP_STATUS.md
+│   ├── design
+│   │   ├── DESIGN_SYSTEM_OVERVIEW.md
+│   │   ├── ELECTRIC_ALCHEMIST_DESIGN_SYSTEM.md
+│   │   └── M3_EXPRESSIVE_DESIGN_SYSTEM.md
+│   ├── development
+│   │   ├── AI_CONFIGURATION_SYSTEM.md
+│   │   ├── AI_INTEGRATION_PLAN.md
+│   │   ├── AI_SERVICES_README.md
+│   │   ├── AI_TESTING_SUMMARY.md
+│   │   ├── AUTHENTICATION_TEST_REPORT.md
+│   │   ├── CACHING_SYSTEM.md
+│   │   ├── CI_CD_STATUS_REPORT.md
+│   │   ├── COMPONENT_STRUCTURE.md
+│   │   ├── CONFIGURATION_AUDIT_RESULTS.md
+│   │   ├── E2E_WORKFLOW_TEST_REPORT.md
+│   │   ├── ENHANCED_AI_ERROR_HANDLING_SUMMARY.md
+│   │   ├── ERROR_BOUNDARY_TEST_REPORT.md
+│   │   ├── ERROR_HANDLING_GUIDE.md
+│   │   ├── FIREBASE_CONFIG.md
+│   │   ├── FORM_VALIDATION_TEST_REPORT.md
+│   │   ├── FRONTEND_MIGRATION_STATUS.md
+│   │   ├── INTEGRATION_EXAMPLES.md
+│   │   ├── KEYBOARD_NAVIGATION_TEST_REPORT.md
+│   │   ├── MOBILE_RESPONSIVENESS_TEST_REPORT.md
+│   │   ├── MONITORING_SYSTEM.md
+│   │   ├── PERFORMANCE_BENCHMARKS_REPORT.md
+│   │   ├── PHASE2_COMPLETION_REPORT.md
+│   │   ├── REMAINING_UI_UX_GAPS.md
+│   │   ├── SECURITY_AUDIT_REPORT.md
+│   │   ├── TESTING_STRATEGY.md
+│   │   └── WORKFLOW_STATUS_REPORT.md
+│   ├── infrastructure
+│   │   └── INFRASTRUCTURE_GUIDE.md
+│   ├── setup
+│   │   ├── AI_AGENTS_UPDATE_GUIDE.md
+│   │   ├── CLAUDE_CODE_AGENT_CONFIGURATION.md
+│   │   ├── OAUTH_SETUP.md
+│   │   ├── SECURE_SETUP.md
+│   │   └── SETUP_GUIDE.md
+│   └── technical-requirements.md
+├── firebase.json
+├── firestore.indexes.json
+├── firestore.rules
+├── first-batch.txt
+├── frontend
+│   ├── Dockerfile
+│   ├── Dockerfile.e2e
+│   ├── ELECTRIC_ALCHEMIST_IMPLEMENTATION.md
+│   ├── MIGRATION-STATUS.md
+│   ├── PRE-MIGRATION-CHECKLIST.md
+│   ├── README.md
+│   ├── __mocks__
+│   │   ├── fileMock.js
+│   │   └── react-hot-toast.ts
+│   ├── _archive
+│   │   ├── MIGRATION-ANALYSIS.md
+│   │   ├── MIGRATION-PLAN-SAFE.md
+│   │   ├── refactor_MUI.md
+│   │   └── refactor_plan.md
+│   ├── babel.config.cjs
+│   ├── component-inventory.json
+│   ├── component-library.csv
+│   ├── dev-dist
+│   │   ├── registerSW.js
+│   │   ├── sw.js
+│   │   ├── sw.js.map
+│   │   ├── workbox-302896ff.js
+│   │   └── workbox-302896ff.js.map
+│   ├── docs
+│   │   ├── # Frontend-Migration-Implementation.md
+│   │   ├── API_RESPONSE_MIGRATION.md
+│   │   ├── ActionCard.tsx
+│   │   ├── COMPONENTS.md
+│   │   ├── DashboardView.tsx
+│   │   ├── DocumentCard.tsx
+│   │   ├── ExampleMigratedCard.tsx
+│   │   ├── JobCard.tsx
+│   │   ├── KanbanBoard.tsx
+│   │   ├── MUI_COMPONENTS_README.md
+│   │   ├── WelcomeBanner.tsx
+│   │   ├── index.ts
+│   │   └── theme.ts
+│   ├── eslint.config.js
+│   ├── eslint.config.mjs
+│   ├── eslint.config.ts
+│   ├── example.test.js
+│   ├── functions
+│   │   ├── package.json
+│   │   └── src
+│   │       └── index.ts
+│   ├── index.html
+│   ├── jest.config.mjs
+│   ├── jsdoc.config.json
+│   ├── nginx.conf
+│   ├── nginx.e2e.conf
+│   ├── package.json
+│   ├── package.json.bak
+│   ├── packages
+│   │   └── ui
+│   │       ├── README.md
+│   │       ├── package.json
+│   │       ├── src
+│   │       │   ├── components
+│   │       │   │   └── Button
+│   │       │   │       ├── Button.stories.tsx
+│   │       │   │       └── Button.tsx
+│   │       │   ├── index.ts
+│   │       │   └── theme
+│   │       │       ├── ThemeProvider.tsx
+│   │       │       └── theme.ts
+│   │       └── tsconfig.json
+│   ├── playwright.config.ts
+│   ├── public
+│   │   └── favicon.ico
+│   ├── reports
+│   │   ├── essential.csv
+│   │   ├── essential.json
+│   │   ├── migration-breakdown.json
+│   │   ├── nice-to-have.csv
+│   │   ├── nice-to-have.json
+│   │   └── summary.json
+│   ├── scaffold.sh
+│   ├── scripts
+│   │   ├── component-inventory.ts
+│   │   ├── fix-styles.ts
+│   │   ├── inventory-postprocess.ts
+│   │   ├── migrate-tailwind.mts
+│   │   ├── safe-migrate-component.ts
+│   │   └── updateIcons.js
+│   ├── simple.test.js
+│   ├── src
+│   │   ├── App.tsx
+│   │   ├── AppRouter.tsx
+│   │   ├── AppWrapper.tsx
+│   │   ├── Attributions.md
+│   │   ├── NotificationCenter
+│   │   │   ├── NotificationCenter.tsx
+│   │   │   └── index.ts
+│   │   ├── ProtectedRoute
+│   │   │   ├── ProtectedRoute.tsx
+│   │   │   └── index.ts
+│   │   ├── SkeletonLoader
+│   │   │   ├── SkeletonLoader.tsx
+│   │   │   └── index.ts
+│   │   ├── __mocks__
+│   │   │   ├── @
+│   │   │   │   └── api
+│   │   │   │       └── aiServices.ts
+│   │   │   └── firebase-config.ts
+│   │   ├── __tests__
+│   │   │   └── integration
+│   │   │       └── DocumentWorkflow.test.tsx
+│   │   ├── api
+│   │   │   ├── __mocks__
+│   │   │   │   └── aiServices.ts
+│   │   │   ├── aiServices.d.ts
+│   │   │   ├── aiServices.ts
+│   │   │   ├── analysisService.ts
+│   │   │   ├── analyticsService.ts
+│   │   │   ├── apiClient.ts
+│   │   │   ├── applicationService.ts
+│   │   │   ├── authService.ts
+│   │   │   ├── calendarService.ts
+│   │   │   ├── documentCRUDService.ts
+│   │   │   ├── documentService.ts
+│   │   │   ├── emailService.ts
+│   │   │   ├── index.ts
+│   │   │   ├── ingestion.service.ts
+│   │   │   ├── jobService.ts
+│   │   │   ├── notificationService.ts
+│   │   │   ├── profileService.ts
+│   │   │   ├── settingsService.ts
+│   │   │   ├── smartIngestionService.ts
+│   │   │   ├── storageService.ts
+│   │   │   ├── templateService.ts
+│   │   │   └── workflowService.ts
+│   │   ├── app
+│   │   │   ├── globals.css
+│   │   │   ├── layout.tsx
+│   │   │   ├── style-guide
+│   │   │   │   └── page.tsx
+│   │   │   └── test-system
+│   │   │       └── page.tsx
+│   │   ├── assets
+│   │   │   └── cb6eaf84aec85fc7699f0c2f9000a1cb19725dc5.png
+│   │   ├── components
+│   │   │   ├── Alert
+│   │   │   │   ├── Alert.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── AppLayout
+│   │   │   │   ├── AppLayout.stories.tsx
+│   │   │   │   ├── AppLayout.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── AppShell
+│   │   │   │   ├── AppShell.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── ApplicationCard
+│   │   │   │   ├── ApplicationCard.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── ApplicationGeneratorModal.tsx
+│   │   │   ├── ApplicationTracker
+│   │   │   │   ├── ApplicationTracker.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── ConfirmTagsModal
+│   │   │   │   ├── ConfirmTagsModal.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── Documents
+│   │   │   │   ├── DocumentPreview.tsx
+│   │   │   │   ├── DocumentTypeSelector.tsx
+│   │   │   │   ├── ResumeBuilder.tsx
+│   │   │   │   ├── TemplateSelector.tsx
+│   │   │   │   ├── UploadResume.tsx
+│   │   │   │   └── __tests__
+│   │   │   │       ├── DocumentPreview.test.tsx
+│   │   │   │       ├── TemplateSelector.test.tsx
+│   │   │   │       └── UploadResume.test.tsx
+│   │   │   ├── ErrorBoundary.tsx
+│   │   │   ├── GridCompat
+│   │   │   │   ├── GridCompat.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── JobSearch
+│   │   │   │   ├── JobSearch.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── LoadingState
+│   │   │   │   ├── LoadingState.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Alert
+│   │   │   │   ├── M3Alert.css
+│   │   │   │   ├── M3Alert.stories.tsx
+│   │   │   │   ├── M3Alert.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Badge
+│   │   │   │   ├── M3Badge.css
+│   │   │   │   ├── M3Badge.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Breadcrumb
+│   │   │   │   ├── M3Breadcrumb.css
+│   │   │   │   ├── M3Breadcrumb.stories.tsx
+│   │   │   │   ├── M3Breadcrumb.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Button
+│   │   │   │   ├── M3Button.css
+│   │   │   │   ├── M3Button.stories.tsx
+│   │   │   │   ├── M3Button.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Card
+│   │   │   │   ├── M3Card.css
+│   │   │   │   ├── M3Card.stories.tsx
+│   │   │   │   ├── M3Card.tsx
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── M3Card.test.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Checkbox
+│   │   │   │   ├── M3Checkbox.css
+│   │   │   │   ├── M3Checkbox.stories.tsx
+│   │   │   │   ├── M3Checkbox.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Container
+│   │   │   │   ├── M3Container.css
+│   │   │   │   ├── M3Container.stories.tsx
+│   │   │   │   ├── M3Container.tsx
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── M3Container.test.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3DatePicker
+│   │   │   │   ├── M3DatePicker.css
+│   │   │   │   ├── M3DatePicker.stories.tsx
+│   │   │   │   ├── M3DatePicker.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Dialog
+│   │   │   │   ├── M3Dialog.css
+│   │   │   │   ├── M3Dialog.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Divider
+│   │   │   │   ├── M3Divider.css
+│   │   │   │   ├── M3Divider.stories.tsx
+│   │   │   │   ├── M3Divider.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3EmptyState
+│   │   │   │   ├── M3EmptyState.css
+│   │   │   │   ├── M3EmptyState.stories.tsx
+│   │   │   │   ├── M3EmptyState.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Grid
+│   │   │   │   ├── M3Grid.css
+│   │   │   │   ├── M3Grid.stories.tsx
+│   │   │   │   ├── M3Grid.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Input
+│   │   │   │   ├── M3Input.css
+│   │   │   │   ├── M3Input.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Progress
+│   │   │   │   ├── M3Progress.css
+│   │   │   │   ├── M3Progress.stories.tsx
+│   │   │   │   ├── M3Progress.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3RadioGroup
+│   │   │   │   ├── M3RadioGroup.css
+│   │   │   │   ├── M3RadioGroup.stories.tsx
+│   │   │   │   ├── M3RadioGroup.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3SearchInput
+│   │   │   │   ├── M3SearchInput.css
+│   │   │   │   ├── M3SearchInput.stories.tsx
+│   │   │   │   ├── M3SearchInput.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Select
+│   │   │   │   ├── M3Select.css
+│   │   │   │   ├── M3Select.stories.tsx
+│   │   │   │   ├── M3Select.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Sidebar
+│   │   │   │   ├── M3Sidebar.css
+│   │   │   │   ├── M3Sidebar.stories.tsx
+│   │   │   │   ├── M3Sidebar.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Skeleton
+│   │   │   │   ├── M3Skeleton.css
+│   │   │   │   ├── M3Skeleton.stories.tsx
+│   │   │   │   ├── M3Skeleton.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Slider
+│   │   │   │   ├── M3Slider.css
+│   │   │   │   ├── M3Slider.stories.tsx
+│   │   │   │   ├── M3Slider.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Switch
+│   │   │   │   ├── M3Switch.css
+│   │   │   │   ├── M3Switch.stories.tsx
+│   │   │   │   ├── M3Switch.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Tabs
+│   │   │   │   ├── M3Tabs.css
+│   │   │   │   ├── M3Tabs.stories.tsx
+│   │   │   │   ├── M3Tabs.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── M3Textarea
+│   │   │   │   ├── M3Textarea.css
+│   │   │   │   ├── M3Textarea.stories.tsx
+│   │   │   │   ├── M3Textarea.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── Navbar
+│   │   │   │   ├── Navbar.tsx
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── Navbar.test.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── NavigationItem
+│   │   │   │   ├── NavigationItem.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── NotificationCenter
+│   │   │   │   └── __tests__
+│   │   │   │       └── NotificationCenter.test.tsx
+│   │   │   ├── PageHeader
+│   │   │   │   ├── PageHeader.stories.tsx
+│   │   │   │   ├── PageHeader.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── README.md
+│   │   │   ├── SkeletonLoader
+│   │   │   │   └── __tests__
+│   │   │   │       └── SkeletonLoader.test.tsx
+│   │   │   ├── SmartUploadModal
+│   │   │   │   └── __tests__
+│   │   │   │       └── SmartUploadModal.test.tsx
+│   │   │   ├── SmartUploadModal.tsx
+│   │   │   ├── StatCard
+│   │   │   │   ├── StatCard.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── TimelineView
+│   │   │   │   ├── TimelineView.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── __tests__
+│   │   │   │   ├── ApplicationGeneratorModal.test.tsx
+│   │   │   │   ├── ErrorBoundary.test.tsx
+│   │   │   │   └── ProtectedRoute.test.tsx
+│   │   │   ├── _deprecated
+│   │   │   │   ├── ATSScoreCircle-Analysis.tsx
+│   │   │   │   ├── ActionCard-common.tsx
+│   │   │   │   ├── ActionCard-main.tsx
+│   │   │   │   ├── CreateProfileCard-profiles.tsx
+│   │   │   │   ├── InterviewPrep-career.tsx
+│   │   │   │   ├── InterviewPrep-opportunities.tsx
+│   │   │   │   ├── JobCard-jobs.tsx
+│   │   │   │   ├── LoadingStates-unused.tsx
+│   │   │   │   ├── ProfileCard-profiles.tsx
+│   │   │   │   ├── README.md
+│   │   │   │   ├── demo-AnimatedComponents.tsx
+│   │   │   │   ├── demo-AnimatedShowcase.tsx
+│   │   │   │   ├── demo-CardShowcase.tsx
+│   │   │   │   ├── demo-ComponentLibrary.tsx
+│   │   │   │   ├── demo-ComponentUsageGuide.tsx
+│   │   │   │   ├── demo-MUITest.tsx
+│   │   │   │   ├── demo-StateDemoShowcase.tsx
+│   │   │   │   ├── demo-fix-icon-fontsize.ts
+│   │   │   │   ├── dropdown-menu.tsx
+│   │   │   │   └── scroll-area.tsx
+│   │   │   ├── alert-dialog
+│   │   │   │   ├── alert-dialog.test.tsx
+│   │   │   │   ├── alert-dialog.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── avatar
+│   │   │   │   ├── avatar.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── badge
+│   │   │   │   ├── badge.test.tsx
+│   │   │   │   ├── badge.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── breadcrumb
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── breadcrumb.test.tsx
+│   │   │   │   ├── breadcrumb.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── button
+│   │   │   │   ├── button.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── card
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── card.enhanced.test.tsx
+│   │   │   │   ├── card.test.tsx
+│   │   │   │   ├── card.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── career
+│   │   │   │   ├── TimelineView
+│   │   │   │   │   ├── TimelineView.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── __tests__
+│   │   │   │   │   ├── ApplicationCard.test.tsx
+│   │   │   │   │   ├── ApplicationTracker.test.tsx
+│   │   │   │   │   ├── InterviewPrep.test.tsx
+│   │   │   │   │   ├── JobSearch.test.tsx
+│   │   │   │   │   └── TimelineView.test.tsx
+│   │   │   │   └── types.ts
+│   │   │   ├── checkbox
+│   │   │   │   ├── checkbox.test.tsx
+│   │   │   │   ├── checkbox.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── common
+│   │   │   │   ├── CareerCopilotLogo.tsx
+│   │   │   │   ├── ErrorCard.tsx
+│   │   │   │   ├── LoadingCard.tsx
+│   │   │   │   ├── StandardizedLoadingStates.tsx
+│   │   │   │   ├── StyledComponents.tsx
+│   │   │   │   └── __tests__
+│   │   │   │       ├── ActionCard.test.tsx
+│   │   │   │       ├── CareerCopilotLogo.test.tsx
+│   │   │   │       ├── ErrorCard.enhanced.test.tsx
+│   │   │   │       ├── ErrorCard.test.tsx
+│   │   │   │       ├── LoadingCard.enhanced.test.tsx
+│   │   │   │       └── LoadingCard.test.tsx
+│   │   │   ├── dashboard
+│   │   │   │   ├── WelcomeBanner.tsx
+│   │   │   │   └── __tests__
+│   │   │   │       └── WelcomeBanner.test.tsx
+│   │   │   ├── date-picker
+│   │   │   │   ├── date-picker.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── dialog
+│   │   │   │   ├── dialog.tsx
+│   │   │   │   └── index.ts
+│   │   │   ├── electric
+│   │   │   │   ├── alert
+│   │   │   │   │   ├── ElectricAlert.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── avatar
+│   │   │   │   │   ├── ElectricAvatar.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── badge
+│   │   │   │   │   ├── ElectricBadge.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── breadcrumb
+│   │   │   │   │   ├── ElectricBreadcrumb.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── button
+│   │   │   │   │   ├── ElectricButton.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── card
+│   │   │   │   │   ├── ElectricCard.tsx
+│   │   │   │   │   ├── PopOutGraphic.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── checkbox
+│   │   │   │   │   ├── ElectricCheckbox.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── container
+│   │   │   │   │   ├── ElectricContainer.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── date-picker
+│   │   │   │   │   ├── ElectricDatePicker.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── dialog
+│   │   │   │   │   ├── ElectricDialog.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── divider
+│   │   │   │   │   ├── ElectricDivider.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── drawer
+│   │   │   │   │   ├── ElectricDrawer.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── empty-state
+│   │   │   │   │   ├── ElectricEmptyState.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── grid
+│   │   │   │   │   ├── ElectricGrid.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── input
+│   │   │   │   │   ├── ElectricInput.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── pagination
+│   │   │   │   │   ├── ElectricPagination.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── popover
+│   │   │   │   │   ├── ElectricPopover.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── progress
+│   │   │   │   │   ├── ElectricProgress.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── radio-group
+│   │   │   │   │   ├── ElectricRadioGroup.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── search-input
+│   │   │   │   │   ├── ElectricSearchInput.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── select
+│   │   │   │   │   ├── ElectricSelect.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── skeleton
+│   │   │   │   │   ├── ElectricSkeleton.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── slider
+│   │   │   │   │   ├── ElectricSlider.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── switch
+│   │   │   │   │   ├── ElectricSwitch.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── table
+│   │   │   │   │   ├── ElectricTable.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── tabs
+│   │   │   │   │   ├── ElectricTabs.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── textarea
+│   │   │   │   │   ├── ElectricTextarea.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   └── tooltip
+│   │   │   │       ├── ElectricTooltip.tsx
+│   │   │   │       └── index.ts
+│   │   │   ├── features
+│   │   │   │   ├── ATSAnalysisDashboard
+│   │   │   │   │   ├── ATSAnalysisDashboard.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── Analysis
+│   │   │   │   │   ├── __tests__
+│   │   │   │   │   │   ├── ATSAnalysisDashboard.test.tsx
+│   │   │   │   │   │   └── ATSScoreCircle.test.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── CareerGrowthHub
+│   │   │   │   │   ├── CareerGrowthHub.test.tsx
+│   │   │   │   │   ├── CareerGrowthHub.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── CareerIntelligence
+│   │   │   │   │   ├── CareerIntelligence.test.tsx
+│   │   │   │   │   ├── CareerIntelligence.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── FeatureCard
+│   │   │   │   │   ├── FeatureCard.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── FilterPanel
+│   │   │   │   │   ├── FilterPanel.test.tsx
+│   │   │   │   │   ├── FilterPanel.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── JobCard
+│   │   │   │   │   ├── JobCard.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── JobInput
+│   │   │   │   │   ├── JobInput.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── JobMatching
+│   │   │   │   │   ├── JobMatching.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── KSC
+│   │   │   │   │   ├── __tests__
+│   │   │   │   │   │   └── KscCriteriaInput.test.tsx
+│   │   │   │   │   └── index.ts
+│   │   │   │   ├── auth
+│   │   │   │   │   ├── Auth.test.tsx
+│   │   │   │   │   ├── Auth.tsx
+│   │   │   │   │   └── __tests__
+│   │   │   │   │       └── LoginForm.test.tsx
+│   │   │   │   ├── dashboard
+│   │   │   │   │   ├── Dashboard.tsx
+│   │   │   │   │   ├── Settings.tsx
+│   │   │   │   │   ├── __tests__
+│   │   │   │   │   │   ├── Dashboard.test.tsx
+│   │   │   │   │   │   └── Settings.test.tsx
+│   │   │   │   │   └── dashboard
+│   │   │   │   │       ├── DashboardHeader.tsx
+│   │   │   │   │       ├── DashboardStats.tsx
+│   │   │   │   │       ├── ProfileGrid.tsx
+│   │   │   │   │       └── __tests__
+│   │   │   │   │           ├── DashboardHeader.test.tsx
+│   │   │   │   │           ├── DashboardStats.test.tsx
+│   │   │   │   │           └── ProfileGrid.test.tsx
+│   │   │   │   └── opportunities
+│   │   │   │       ├── InterviewPrep.test.tsx
+│   │   │   │       ├── KanbanBoard.tsx.wip
+│   │   │   │       └── __tests__
+│   │   │   │           ├── FeatureCard.test.tsx
+│   │   │   │           ├── JobCard.test.tsx
+│   │   │   │           ├── JobInput.test.tsx
+│   │   │   │           └── JobMatching.test.tsx
+│   │   │   ├── figma
+│   │   │   │   ├── ImageWithFallback.tsx
+│   │   │   │   └── __tests__
+│   │   │   │       └── ImageWithFallback.test.tsx
+│   │   │   ├── ingestion
+│   │   │   │   └── __tests__
+│   │   │   │       └── ConfirmTagsModal.test.tsx
+│   │   │   ├── input
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── input.test.tsx
+│   │   │   │   └── input.tsx
+│   │   │   ├── jobs
+│   │   │   │   └── __tests__
+│   │   │   │       └── JobCard.test.tsx
+│   │   │   ├── label
+│   │   │   │   ├── index.ts
+│   │   │   │   └── label.tsx
+│   │   │   ├── layout
+│   │   │   │   ├── M3NavigationItem.css
+│   │   │   │   ├── M3NavigationItem.stories.tsx
+│   │   │   │   ├── M3NavigationItem.tsx
+│   │   │   │   ├── __tests__
+│   │   │   │   │   ├── AppLayout.test.tsx
+│   │   │   │   │   ├── AppShell.test.tsx
+│   │   │   │   │   ├── Navbar.test.tsx
+│   │   │   │   │   ├── NavigationItem.test.tsx
+│   │   │   │   │   ├── PageHeader.test.tsx
+│   │   │   │   │   └── Sidebar.test.tsx
+│   │   │   │   ├── fix-button-variants.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   └── layout.tsx
+│   │   │   ├── library
+│   │   │   │   ├── ATSScoreCircle.tsx
+│   │   │   │   ├── ButtonComponentsSection.tsx
+│   │   │   │   ├── CardComponentsSection.tsx
+│   │   │   │   ├── ComponentDemo.tsx
+│   │   │   │   ├── DemoLinksSection.tsx
+│   │   │   │   ├── DisplayComponentsSection.tsx
+│   │   │   │   ├── FormComponentsSection.tsx
+│   │   │   │   ├── InteractiveComponentsSection.tsx
+│   │   │   │   ├── KeywordTag.tsx
+│   │   │   │   ├── LayoutComponentsSection.tsx
+│   │   │   │   ├── ProfileVariationCard.tsx
+│   │   │   │   ├── TemplateCard.tsx
+│   │   │   │   ├── UsageGuidelinesSection.tsx
+│   │   │   │   ├── __tests__
+│   │   │   │   │   ├── ATSScoreCircle.test.tsx
+│   │   │   │   │   ├── ComponentDemo.test.tsx
+│   │   │   │   │   ├── KeywordTag.test.tsx
+│   │   │   │   │   ├── ProfileVariationCard.test.tsx
+│   │   │   │   │   └── TemplateCard.test.tsx
+│   │   │   │   ├── fix-document-type-selector.ts
+│   │   │   │   └── fix-storybook-imports.ts
+│   │   │   ├── main
+│   │   │   │   ├── FeatureHighlights.tsx
+│   │   │   │   ├── HeroBanner.tsx
+│   │   │   │   ├── JobSearchStatus.tsx
+│   │   │   │   ├── TestimonialCarousel.tsx
+│   │   │   │   └── __tests__
+│   │   │   │       ├── ActionCard.test.tsx
+│   │   │   │       ├── FeatureHighlights.test.tsx
+│   │   │   │       ├── HeroBanner.test.tsx
+│   │   │   │       ├── JobSearchStatus.test.tsx
+│   │   │   │       └── TestimonialCarousel.test.tsx
+│   │   │   ├── popover
+│   │   │   │   ├── index.ts
+│   │   │   │   └── popover.tsx
+│   │   │   ├── profile
+│   │   │   │   ├── CreateProfileCard.tsx
+│   │   │   │   ├── ImportWizard.tsx
+│   │   │   │   ├── ProfileCard.tsx
+│   │   │   │   ├── ProfileComparison.tsx
+│   │   │   │   ├── ProfileEditor.tsx
+│   │   │   │   └── __tests__
+│   │   │   │       ├── CreateProfileCard.test.tsx
+│   │   │   │       ├── ImportWizard.test.tsx
+│   │   │   │       ├── ProfileCard.test.tsx
+│   │   │   │       ├── ProfileComparison.test.tsx
+│   │   │   │       └── ProfileEditor.test.tsx
+│   │   │   ├── profiles
+│   │   │   │   └── __tests__
+│   │   │   │       ├── CreateProfileCard.test.tsx
+│   │   │   │       └── ProfileCard.test.tsx
+│   │   │   ├── progress
+│   │   │   │   ├── index.ts
+│   │   │   │   └── progress.tsx
+│   │   │   ├── radio-group
+│   │   │   │   ├── index.ts
+│   │   │   │   └── radio-group.tsx
+│   │   │   ├── search-input
+│   │   │   │   ├── index.ts
+│   │   │   │   └── search-input.tsx
+│   │   │   ├── select
+│   │   │   │   ├── index.ts
+│   │   │   │   └── select.tsx
+│   │   │   ├── separator
+│   │   │   │   ├── index.ts
+│   │   │   │   └── separator.tsx
+│   │   │   ├── sidebar
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── sidebar.test.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   └── sidebar.tsx
+│   │   │   ├── skeleton
+│   │   │   │   ├── index.ts
+│   │   │   │   └── skeleton.tsx
+│   │   │   ├── slider
+│   │   │   │   ├── index.ts
+│   │   │   │   └── slider.tsx
+│   │   │   ├── style-guide
+│   │   │   │   └── ColorSwatch.tsx
+│   │   │   ├── switch
+│   │   │   │   ├── index.ts
+│   │   │   │   └── switch.tsx
+│   │   │   ├── tabs
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── tabs.test.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   └── tabs.tsx
+│   │   │   ├── textarea
+│   │   │   │   ├── index.ts
+│   │   │   │   └── textarea.tsx
+│   │   │   ├── toast
+│   │   │   │   ├── __tests__
+│   │   │   │   │   └── toast.test.tsx
+│   │   │   │   ├── index.ts
+│   │   │   │   └── toast.tsx
+│   │   │   ├── tooltip
+│   │   │   │   ├── index.ts
+│   │   │   │   └── tooltip.tsx
+│   │   │   └── ui
+│   │   │       ├── ATSScoreCircle.tsx
+│   │   │       ├── Alert.tsx
+│   │   │       ├── AnimatedButton.tsx
+│   │   │       ├── AnimatedDropdown.tsx
+│   │   │       ├── AnimatedProgress.tsx
+│   │   │       ├── Button
+│   │   │       │   ├── Button.stories.tsx
+│   │   │       │   ├── Button.test.tsx
+│   │   │       │   ├── Button.tsx
+│   │   │       │   ├── __tests__
+│   │   │       │   │   └── Button.test.tsx
+│   │   │       │   ├── fix-templateselector-props.ts
+│   │   │       │   └── index.ts
+│   │   │       ├── Button.tsx
+│   │   │       ├── Dialog
+│   │   │       │   ├── Dialog.tsx
+│   │   │       │   ├── __tests__
+│   │   │       │   │   └── Dialog.enhanced.test.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── ElectricCard.tsx
+│   │   │       ├── EmptyState
+│   │   │       │   ├── EmptyState.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── FullPageLoading
+│   │   │       │   ├── FullPageLoading.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── LoadingSkeleton
+│   │   │       │   ├── LoadingSkeleton.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── LoadingSpinner
+│   │   │       │   ├── LoadingSpinner.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── LoadingSpinners.tsx
+│   │   │       ├── M3ActionCard.css
+│   │   │       ├── M3ActionCard.stories.tsx
+│   │   │       ├── M3ActionCard.tsx
+│   │   │       ├── M3Alert.css
+│   │   │       ├── M3Alert.stories.tsx
+│   │   │       ├── M3Alert.tsx
+│   │   │       ├── M3Avatar.css
+│   │   │       ├── M3Avatar.stories.tsx
+│   │   │       ├── M3Avatar.tsx
+│   │   │       ├── M3Breadcrumb.css
+│   │   │       ├── M3Breadcrumb.stories.tsx
+│   │   │       ├── M3Breadcrumb.tsx
+│   │   │       ├── M3Chip.css
+│   │   │       ├── M3Chip.stories.tsx
+│   │   │       ├── M3Chip.tsx
+│   │   │       ├── M3DatePicker.css
+│   │   │       ├── M3DatePicker.stories.tsx
+│   │   │       ├── M3DatePicker.tsx
+│   │   │       ├── M3EmptyState.css
+│   │   │       ├── M3EmptyState.stories.tsx
+│   │   │       ├── M3EmptyState.tsx
+│   │   │       ├── M3JobCard.css
+│   │   │       ├── M3JobCard.stories.tsx
+│   │   │       ├── M3JobCard.tsx
+│   │   │       ├── M3Label.css
+│   │   │       ├── M3Label.stories.tsx
+│   │   │       ├── M3Label.tsx
+│   │   │       ├── M3Menu.css
+│   │   │       ├── M3Menu.stories.tsx
+│   │   │       ├── M3Menu.tsx
+│   │   │       ├── M3Popover.css
+│   │   │       ├── M3Popover.stories.tsx
+│   │   │       ├── M3Popover.tsx
+│   │   │       ├── M3ProfileCard.css
+│   │   │       ├── M3ProfileCard.stories.tsx
+│   │   │       ├── M3ProfileCard.tsx
+│   │   │       ├── M3Select.css
+│   │   │       ├── M3Select.stories.tsx
+│   │   │       ├── M3Select.tsx
+│   │   │       ├── M3Separator.css
+│   │   │       ├── M3Separator.stories.tsx
+│   │   │       ├── M3Separator.tsx
+│   │   │       ├── M3Sidebar.css
+│   │   │       ├── M3Sidebar.stories.tsx
+│   │   │       ├── M3Sidebar.tsx
+│   │   │       ├── M3Skeleton.css
+│   │   │       ├── M3Skeleton.stories.tsx
+│   │   │       ├── M3Skeleton.tsx
+│   │   │       ├── M3Tabs.css
+│   │   │       ├── M3Tabs.stories.tsx
+│   │   │       ├── M3Tabs.tsx
+│   │   │       ├── M3Tooltip.css
+│   │   │       ├── M3Tooltip.stories.tsx
+│   │   │       ├── M3Tooltip.tsx
+│   │   │       ├── Skeleton
+│   │   │       │   ├── Skeleton.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── SkeletonLoaders.tsx
+│   │   │       ├── StaggeredList.tsx
+│   │   │       ├── Toast
+│   │   │       │   ├── Toast.tsx
+│   │   │       │   ├── __tests__
+│   │   │       │   │   └── Toast.enhanced.test.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── ToastContext
+│   │   │       │   ├── ToastContext.tsx
+│   │   │       │   ├── __tests__
+│   │   │       │   │   └── ToastContext.test.tsx
+│   │   │       │   └── index.ts
+│   │   │       ├── __tests__
+│   │   │       │   ├── ATSScoreCircle.test.tsx
+│   │   │       │   ├── Alert.test.tsx
+│   │   │       │   ├── AnimatedButton.test.tsx
+│   │   │       │   ├── AnimatedDropdown.test.tsx
+│   │   │       │   ├── AnimatedProgress.test.tsx
+│   │   │       │   ├── EmptyState.test.tsx
+│   │   │       │   ├── GridCompat.test.tsx
+│   │   │       │   ├── LoadingState.test.tsx
+│   │   │       │   ├── M3Menu.test.tsx
+│   │   │       │   ├── M3Tooltip.test.tsx
+│   │   │       │   ├── StatCard.test.tsx
+│   │   │       │   ├── alert-dialog.test.tsx
+│   │   │       │   ├── avatar.test.tsx
+│   │   │       │   ├── badge.test.tsx
+│   │   │       │   ├── breadcrumb.test.tsx
+│   │   │       │   ├── button.test.tsx
+│   │   │       │   ├── card.test.tsx
+│   │   │       │   ├── checkbox.test.tsx
+│   │   │       │   ├── date-picker.test.tsx
+│   │   │       │   ├── dialog.test.tsx
+│   │   │       │   ├── input.test.tsx
+│   │   │       │   ├── label.test.tsx
+│   │   │       │   ├── layout.test.tsx
+│   │   │       │   ├── popover.test.tsx
+│   │   │       │   ├── progress.test.tsx
+│   │   │       │   ├── radio-group.test.tsx
+│   │   │       │   ├── search-input.test.tsx
+│   │   │       │   ├── select.test.tsx
+│   │   │       │   ├── separator.test.tsx
+│   │   │       │   ├── sidebar.test.tsx
+│   │   │       │   ├── skeleton.test.tsx
+│   │   │       │   ├── slider.test.tsx
+│   │   │       │   ├── switch.test.tsx
+│   │   │       │   ├── tabs.test.tsx
+│   │   │       │   ├── textarea.test.tsx
+│   │   │       │   ├── toast.test.tsx
+│   │   │       │   └── tooltip.test.tsx
+│   │   │       ├── animations
+│   │   │       │   └── index.ts
+│   │   │       ├── badge.tsx
+│   │   │       ├── feedback
+│   │   │       │   └── __tests__
+│   │   │       │       ├── Dialog.test.tsx
+│   │   │       │       ├── EmptyState.test.tsx
+│   │   │       │       ├── Toast.test.tsx
+│   │   │       │       └── ToastContext.test.tsx
+│   │   │       ├── index.ts
+│   │   │       └── loading
+│   │   │           ├── M3FullPageLoading.css
+│   │   │           ├── M3FullPageLoading.stories.tsx
+│   │   │           ├── M3FullPageLoading.tsx
+│   │   │           ├── M3LoadingSkeleton.css
+│   │   │           ├── M3LoadingSkeleton.stories.tsx
+│   │   │           ├── M3LoadingSkeleton.tsx
+│   │   │           ├── M3LoadingSpinner.css
+│   │   │           ├── M3LoadingSpinner.stories.tsx
+│   │   │           ├── M3LoadingSpinner.tsx
+│   │   │           ├── __tests__
+│   │   │           │   ├── FullPageLoading.test.tsx
+│   │   │           │   ├── LoadingSkeleton.test.tsx
+│   │   │           │   └── LoadingSpinner.test.tsx
+│   │   │           ├── index.ts
+│   │   │           └── variants.tsx
+│   │   ├── config
+│   │   │   └── navigation.tsx
+│   │   ├── context
+│   │   │   └── AuthContext.tsx
+│   │   ├── features
+│   │   │   ├── design-system
+│   │   │   │   └── DesignSystemPreview.tsx
+│   │   │   └── design-system-test
+│   │   │       └── TestPage.tsx
+│   │   ├── firebase-config.ts
+│   │   ├── guidelines
+│   │   │   └── Guidelines.md
+│   │   ├── hooks
+│   │   │   ├── index.ts
+│   │   │   └── useFileUpload.ts
+│   │   ├── index.css
+│   │   ├── lib
+│   │   │   ├── cn.ts
+│   │   │   ├── index.ts
+│   │   │   ├── motion.ts
+│   │   │   ├── utils.test.ts
+│   │   │   └── utils.ts
+│   │   ├── main.tsx
+│   │   ├── mui-components
+│   │   │   ├── AnalysisView.tsx
+│   │   │   ├── AppShell.tsx
+│   │   │   ├── ApplicationsView.tsx
+│   │   │   ├── CreateProfileCard.stories.tsx
+│   │   │   ├── CreateProfileCard.tsx
+│   │   │   ├── DashboardMUI.tsx
+│   │   │   ├── DataTable.stories.tsx
+│   │   │   ├── DataTable.tsx
+│   │   │   ├── DocumentsView.tsx
+│   │   │   ├── ExampleIllustratedCard.tsx
+│   │   │   ├── FormField.stories.tsx
+│   │   │   ├── FormField.tsx
+│   │   │   ├── OpportunitiesView.tsx
+│   │   │   ├── ProfileCard.stories.tsx
+│   │   │   ├── ProfileCardMUI.tsx
+│   │   │   ├── ProfileEditorMUI.tsx
+│   │   │   ├── SettingsMUI.tsx
+│   │   │   ├── UploadResumeMUI.tsx
+│   │   │   ├── __tests__
+│   │   │   │   ├── DataTable.test.tsx
+│   │   │   │   └── ProfileCard.test.tsx
+│   │   │   ├── index.ts
+│   │   │   └── types.ts
+│   │   ├── pages
+│   │   │   ├── ATSAnalysisPage.tsx
+│   │   │   ├── AnalysisPage.tsx
+│   │   │   ├── AssetLibraryPage.tsx
+│   │   │   ├── DashboardPage.tsx
+│   │   │   ├── DocumentsPage.tsx
+│   │   │   ├── ElectricAlchemistTestKitchen.tsx
+│   │   │   ├── ExamplePage.tsx
+│   │   │   ├── KscGeneratorPage.tsx
+│   │   │   ├── LoginPage.tsx
+│   │   │   ├── OpportunitiesPage.tsx
+│   │   │   ├── RegisterPage.tsx
+│   │   │   ├── SettingsPage.tsx
+│   │   │   └── __tests__
+│   │   │       ├── AnalysisPage.test.tsx
+│   │   │       ├── DashboardPage.test.tsx
+│   │   │       ├── DocumentsPage.test.tsx
+│   │   │       ├── OpportunitiesPage.test.tsx
+│   │   │       └── SettingsPage.test.tsx
+│   │   ├── schemas
+│   │   │   ├── api.schema.ts
+│   │   │   └── asset.schema.ts
+│   │   ├── setupTests.ts
+│   │   ├── stores
+│   │   │   └── useExampleStore.ts
+│   │   ├── stories
+│   │   │   ├── ATSScoreCircle.stories.tsx
+│   │   │   ├── AnimatedButton.stories.tsx
+│   │   │   ├── AnimatedDropdown.stories.tsx
+│   │   │   ├── AnimatedProgress.stories.tsx
+│   │   │   ├── Configure.mdx
+│   │   │   ├── Dialog.stories.mdx
+│   │   │   ├── EmptyState.stories.mdx
+│   │   │   ├── ErrorBoundary.stories.mdx
+│   │   │   ├── Introduction.stories.mdx
+│   │   │   ├── LoadingSpinners.stories.tsx
+│   │   │   ├── Skeleton.stories.mdx
+│   │   │   ├── SkeletonLoaders.stories.tsx
+│   │   │   ├── StaggeredList.stories.tsx
+│   │   │   ├── Toast.stories.mdx
+│   │   │   ├── assets
+│   │   │   │   ├── accessibility.png
+│   │   │   │   ├── accessibility.svg
+│   │   │   │   ├── addon-library.png
+│   │   │   │   ├── assets.png
+│   │   │   │   ├── avif-test-image.avif
+│   │   │   │   ├── context.png
+│   │   │   │   ├── discord.svg
+│   │   │   │   ├── docs.png
+│   │   │   │   ├── figma-plugin.png
+│   │   │   │   ├── github.svg
+│   │   │   │   ├── share.png
+│   │   │   │   ├── styling.png
+│   │   │   │   ├── testing.png
+│   │   │   │   ├── theming.png
+│   │   │   │   ├── tutorials.svg
+│   │   │   │   └── youtube.svg
+│   │   │   ├── button.css
+│   │   │   ├── header.css
+│   │   │   └── page.css
+│   │   ├── styles
+│   │   │   ├── authentic-intelligence-theme.css
+│   │   │   ├── design-tokens.css
+│   │   │   ├── electric-alchemist.css
+│   │   │   ├── m3-design-tokens.css
+│   │   │   └── variables.css
+│   │   ├── test-autofix
+│   │   │   └── TestComponent.tsx
+│   │   ├── test-utils
+│   │   │   └── test-utils.tsx
+│   │   ├── test-utils.tsx
+│   │   ├── theme
+│   │   │   ├── ThemeWrapper.tsx
+│   │   │   ├── fonts.ts
+│   │   │   ├── theme.ts
+│   │   │   ├── tokens.json
+│   │   │   └── typography.css
+│   │   ├── types
+│   │   │   ├── ai.ts
+│   │   │   ├── aiServices.d.ts
+│   │   │   ├── api.ts
+│   │   │   ├── index.ts
+│   │   │   └── test-types.ts
+│   │   ├── utils
+│   │   │   ├── accessibility.ts
+│   │   │   └── animations.ts
+│   │   └── vite-env.d.ts
+│   ├── tailwind.config.js
+│   ├── test-results
+│   │   └── junit.xml
+│   ├── test_results.log
+│   ├── tests
+│   │   ├── basic-functionality.spec.js
+│   │   ├── dashboard.spec.js
+│   │   ├── document_upload_success.spec.js
+│   │   ├── example.spec.js
+│   │   ├── ksc-generation-workflow.spec.js
+│   │   ├── ksc-generator.spec.js
+│   │   ├── settings.spec.js
+│   │   └── test-utils.js
+│   ├── tsconfig.app.json
+│   ├── tsconfig.build.json
+│   ├── tsconfig.documents.json
+│   ├── tsconfig.eslint.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   ├── tsconfig.test.json
+│   ├── update-grid-imports.js
+│   └── vite.config.ts
+├── functions
+│   ├── MIGRATION-GUIDE.md
+│   ├── README.md
+│   ├── __tests__
+│   │   ├── example.test.ts
+│   │   └── rules
+│   │       └── security.test.ts
+│   ├── custom-build.js
+│   ├── deploy.sh
+│   ├── eslint.config.js
+│   ├── firebase.json
+│   ├── jest.config.js
+│   ├── jest.rules.config.js
+│   ├── lib
+│   │   ├── auth.functions.d.ts
+│   │   ├── auth.functions.js
+│   │   ├── example.js
+│   │   ├── firebase.d.ts
+│   │   ├── firebase.js
+│   │   ├── index.d.ts
+│   │   ├── index.js
+│   │   └── utils
+│   │       └── secretManager.js
+│   ├── package.json
+│   ├── src
+│   │   ├── api
+│   │   │   ├── applications.controller.ts
+│   │   │   └── applications.controller.ts.bak
+│   │   ├── auth.functions.ts
+│   │   ├── config
+│   │   │   └── runtime.config.ts
+│   │   ├── example.ts
+│   │   ├── firebase.ts
+│   │   ├── genkit-setup.js
+│   │   ├── index.ts
+│   │   ├── middleware
+│   │   │   └── auth.middleware.ts
+│   │   ├── services
+│   │   │   └── job_listing_extractor.ts
+│   │   ├── types
+│   │   │   ├── api.types.ts
+│   │   │   ├── firebase.d.ts
+│   │   │   ├── global.d.ts
+│   │   │   └── job_listing.ts
+│   │   └── utils
+│   │       ├── api.utils.ts
+│   │       └── secretManager.ts
+│   ├── test
+│   │   └── setup.ts
+│   ├── tsconfig.build.json
+│   ├── tsconfig.build.tsbuildinfo
+│   ├── tsconfig.eslint.json
+│   └── tsconfig.json
+├── get-pip.py
+├── jobs
+├── logs
+│   └── debug.log
+├── lovable.config.json
+├── mcp_cli.py
+├── mcp_client.py
+├── mcp_http_server.py
+├── medium-components.txt
+├── monitoring
+│   ├── alerts.yml
+│   ├── dashboard.json
+│   ├── grafana
+│   │   ├── dashboards
+│   │   │   ├── careercopilot-dashboard.json
+│   │   │   └── nlp-dashboard.json
+│   │   └── datasources
+│   │       └── prometheus.yml
+│   └── prometheus.yml
+├── nginx
+├── package-lock.json
+├── package.json
+├── package_skills.sh
+├── pytest.ini
+├── readiness.sh
+├── renovate.json
+├── run_jules.py
+├── scripts
+│   ├── README.md
+│   ├── _archived
+│   │   ├── README.md
+│   │   ├── UI_setup.sh
+│   │   ├── add-grid2-imports.sh
+│   │   ├── add-remaining-secrets.sh
+│   │   ├── autofix-critical-errors.sh
+│   │   ├── autofix-remaining-errors.sh
+│   │   ├── autofix-typescript-errors.sh
+│   │   ├── commit-cleanup.sh
+│   │   ├── consolidate-env-config.sh
+│   │   ├── finalize-git-merge.sh
+│   │   ├── fix-deployment-pipeline.sh
+│   │   ├── fix-eslint-issues.sh
+│   │   ├── fix-gcp-iam-permissions.sh
+│   │   ├── fix-genkit-imports.py
+│   │   ├── fix-grid.sh
+│   │   ├── fix-import-paths.sh
+│   │   ├── fix-mui-grid-v7.sh
+│   │   ├── fix-mui-imports.sh
+│   │   ├── fix-typescript-issues.sh
+│   │   ├── migrate-grid-to-grid2.sh
+│   │   ├── migrate_mui_grid.py
+│   │   ├── personal_automation.py
+│   │   ├── prep-production-env.sh
+│   │   ├── token-extract.sh
+│   │   ├── verify-gcp-permissions.sh
+│   │   └── verify-rotation.sh
+│   ├── archive-stale-docs.sh
+│   ├── audit-component-structure.sh
+│   ├── audit-hardcoded-values.sh
+│   ├── audit.sh
+│   ├── auto-fix-test-report.md
+│   ├── batch-migrate-m3.sh
+│   ├── build-design-tokens.py
+│   ├── build-m3-tokens.py
+│   ├── button-transformer.js
+│   ├── card-transformer.js
+│   ├── check-genkit-config.py
+│   ├── check-updates.sh
+│   ├── cleanup-old-reports.sh
+│   ├── cleanup.sh
+│   ├── configure-firebase-permissions.sh
+│   ├── consolidate-duplicate-dirs.sh
+│   ├── deploy-production.sh
+│   ├── deploy-staging.sh
+│   ├── deploy.sh
+│   ├── fetch-firebase-config.py
+│   ├── firebase-config-validator.py
+│   ├── fix-grid-imports.js
+│   ├── fix-grid-imports.ts
+│   ├── fix-typescript-errors.ts
+│   ├── fix_skills_dirs.sh
+│   ├── form-elements-transformer.js
+│   ├── frontend-commands.md
+│   ├── frontend-deployment-readiness.sh
+│   ├── generate-component-manifest.ts
+│   ├── generate-m3-component.py
+│   ├── generate-migration-list.sh
+│   ├── lint-autofix.sh
+│   ├── manage_firebase_secrets.sh
+│   ├── migrate-component-m3.py
+│   ├── migrate-tailwind.js
+│   ├── migrate-to-m3.py
+│   ├── migrate_redis_to_firestore.py
+│   ├── package_claude_skills.py
+│   ├── pre-migration-validation.sh
+│   ├── prepare-for-migration.sh
+│   ├── production-secrets-validator.py
+│   ├── readiness.sh
+│   ├── refactor.ts
+│   ├── rotate-api-keys.sh
+│   ├── run-code-refactor.sh
+│   ├── run-tests.sh
+│   ├── run-validation-tests.sh
+│   ├── run_parallel_agents.py
+│   ├── run_test_automation_specialist.py
+│   ├── save-aws-ses-secrets.py
+│   ├── secrets-quick-reference.sh
+│   ├── setup-agents.sh
+│   ├── setup-api-keys.sh
+│   ├── setup-aws-ses-github-secrets.sh
+│   ├── setup-aws-ses-secrets.sh
+│   ├── setup-careercopilot-firebase.sh
+│   ├── setup-everything.sh
+│   ├── setup-firebase-config.py
+│   ├── setup-firebase.sh
+│   ├── setup-github-secret.sh
+│   ├── setup-google-oauth.sh
+│   ├── setup-secrets.py
+│   ├── setup-secrets.sh
+│   ├── setup-secure-credentials.sh
+│   ├── simple-component-inventory.sh
+│   ├── standardize-component-structure.sh
+│   ├── standardize-package-manager.sh
+│   ├── switch-to-development.sh
+│   ├── switch-to-production.sh
+│   ├── sync-theme-to-tokens.py
+│   ├── test-configuration.py
+│   ├── test-deployment.sh
+│   ├── test_firebase_secrets.py
+│   ├── tsconfig.json
+│   ├── typescript-check.sh
+│   ├── update-dependencies.sh
+│   ├── update-design-system.sh
+│   ├── validate-design-tokens.py
+│   ├── validate-environment.sh
+│   ├── validate-secrets.sh
+│   ├── validate-security.sh
+│   ├── validate-workflows.py
+│   ├── verify-m3-recovery.py
+│   ├── vite-bundle-analyzer.sh
+│   └── workflow-validation-report.md
+├── servers
+│   ├── mcp-claude-orchestrator
+│   │   └── mcp_claude_orchestrator.py
+│   ├── mcp-gemini-wrapper
+│   │   ├── mcp_gemini_wrapper.py
+│   │   └── requirements.txt
+│   ├── mcp-resilience-router
+│   └── perplexity
+│       ├── README.md
+│       ├── package-lock.json
+│       ├── package.json
+│       └── src
+│           ├── index.js
+│           └── logs
+├── setup-agent-infrastructure.sh
+├── setup-api-keys.sh
+├── setup.cfg
+├── simple-components.txt
+├── sleep
+├── src
+│   ├── stories
+│   │   ├── Button.stories.ts
+│   │   ├── Button.tsx
+│   │   ├── Configure.mdx
+│   │   ├── Header.stories.ts
+│   │   ├── Header.tsx
+│   │   ├── Page.stories.ts
+│   │   ├── Page.tsx
+│   │   ├── assets
+│   │   │   ├── accessibility.png
+│   │   │   ├── accessibility.svg
+│   │   │   ├── addon-library.png
+│   │   │   ├── assets.png
+│   │   │   ├── avif-test-image.avif
+│   │   │   ├── context.png
+│   │   │   ├── discord.svg
+│   │   │   ├── docs.png
+│   │   │   ├── figma-plugin.png
+│   │   │   ├── github.svg
+│   │   │   ├── share.png
+│   │   │   ├── styling.png
+│   │   │   ├── testing.png
+│   │   │   ├── theming.png
+│   │   │   ├── tutorials.svg
+│   │   │   └── youtube.svg
+│   │   ├── button.css
+│   │   ├── header.css
+│   │   └── page.css
+│   └── styles
+│       └── Palette.mdx
+├── storage.rules
+├── stories
+│   ├── Button.stories.ts
+│   ├── Button.tsx
+│   ├── Configure.mdx
+│   ├── Header.stories.ts
+│   ├── Header.tsx
+│   ├── Page.stories.ts
+│   ├── Page.tsx
+│   ├── assets
+│   │   ├── accessibility.png
+│   │   ├── accessibility.svg
+│   │   ├── addon-library.png
+│   │   ├── assets.png
+│   │   ├── avif-test-image.avif
+│   │   ├── context.png
+│   │   ├── discord.svg
+│   │   ├── docs.png
+│   │   ├── figma-plugin.png
+│   │   ├── github.svg
+│   │   ├── share.png
+│   │   ├── styling.png
+│   │   ├── testing.png
+│   │   ├── theming.png
+│   │   ├── tutorials.svg
+│   │   └── youtube.svg
+│   ├── button.css
+│   ├── header.css
+│   └── page.css
+├── tasks.txt
+├── tasks_remaining.txt
+├── temp_run_analysis.py
+├── test-results
+│   └── junit.xml
+├── tests
+│   ├── README.md
+│   ├── firestore.rules.test.js
+│   ├── jest.setup.js
+│   ├── package-lock.json
+│   └── package.json
+├── troubleshooting_runbook.md
+├── verified_backups
+│   ├── cleanup_backup_2025-09-27_22-11-18
+│   │   ├── Career Copilot (Community).zip
+│   │   ├── Screenshot 2025-09-20 at 01.52.47.png
+│   │   ├── Screenshot 2025-09-21 at 08.26.25.png
+│   │   ├── Screenshot 2025-09-21 at 08.26.40.png
+│   │   ├── UI Mapping - UI Mapping - Sheet1.csv
+│   │   ├── docker-compose.development.yml.save
+│   │   ├── frontend.zip
+│   │   ├── stabilization-plan.md
+│   │   ├── stablise.md
+│   │   └── stablization-plan.md
+│   └── cleanup_backup_20250928_001519
+│       ├── careercopilot.db
+│       ├── community_ui
+│       │   ├── README.md
+│       │   ├── index.html
+│       │   ├── package.json
+│       │   ├── src
+│       │   │   ├── App.tsx
+│       │   │   ├── Attributions.md
+│       │   │   ├── assets
+│       │   │   │   └── cb6eaf84aec85fc7699f0c2f9000a1cb19725dc5.png
+│       │   │   ├── cleanup-notes.md
+│       │   │   ├── components
+│       │   │   │   ├── ATSAnalysisDashboard.tsx
+│       │   │   │   ├── AnimatedComponents.tsx
+│       │   │   │   ├── AnimatedShowcase.tsx
+│       │   │   │   ├── AuroraShowcase.tsx
+│       │   │   │   ├── Auth.tsx
+│       │   │   │   ├── CardShowcase.tsx
+│       │   │   │   ├── CareerCopilotLogo.tsx
+│       │   │   │   ├── CareerGrowthHub.tsx
+│       │   │   │   ├── CareerIntelligence.tsx
+│       │   │   │   ├── ComplexComponentsShowcase.tsx
+│       │   │   │   ├── ComponentLibrary.tsx
+│       │   │   │   ├── ComponentUsageGuide.tsx
+│       │   │   │   ├── CreateProfileCard.tsx
+│       │   │   │   ├── Dashboard.tsx
+│       │   │   │   ├── DocumentPreview.tsx
+│       │   │   │   ├── DocumentTypeSelector.tsx
+│       │   │   │   ├── ErrorCard.tsx
+│       │   │   │   ├── FOMOLogo.tsx
+│       │   │   │   ├── InterviewPrep.tsx
+│       │   │   │   ├── JobInput.tsx
+│       │   │   │   ├── JobMatching.tsx
+│       │   │   │   ├── LoadingCard.tsx
+│       │   │   │   ├── LoadingStates.tsx
+│       │   │   │   ├── Logo.tsx
+│       │   │   │   ├── M3ColorSystemShowcase.tsx
+│       │   │   │   ├── M3ComponentShowcase.tsx
+│       │   │   │   ├── M3SettingsExample.tsx
+│       │   │   │   ├── Navbar.tsx
+│       │   │   │   ├── ProfileCard.tsx
+│       │   │   │   ├── ProfileEditor.tsx
+│       │   │   │   ├── ResumeBuilder.tsx
+│       │   │   │   ├── Settings.tsx
+│       │   │   │   ├── Sidebar.tsx
+│       │   │   │   ├── StandardizedLoadingStates.tsx
+│       │   │   │   ├── StandardizedLoadingStatesDemo.tsx
+│       │   │   │   ├── StateDemoShowcase.tsx
+│       │   │   │   ├── StyleGuideShowcase.tsx
+│       │   │   │   ├── TemplateSelector.tsx
+│       │   │   │   ├── ThemeWrapper.tsx
+│       │   │   │   ├── UploadResume.tsx
+│       │   │   │   ├── activity
+│       │   │   │   │   └── ActivityFeed.tsx
+│       │   │   │   ├── auth
+│       │   │   │   │   ├── FeatureHighlights.tsx
+│       │   │   │   │   ├── ProgressStepper.tsx
+│       │   │   │   │   └── TestimonialCarousel.tsx
+│       │   │   │   ├── cards
+│       │   │   │   │   ├── FeatureCard.tsx
+│       │   │   │   │   └── StatCard.tsx
+│       │   │   │   ├── career
+│       │   │   │   │   └── JobCard.tsx
+│       │   │   │   ├── document
+│       │   │   │   │   └── DocumentCard.tsx
+│       │   │   │   ├── examples
+│       │   │   │   │   └── DesignTokenExample.tsx
+│       │   │   │   ├── figma
+│       │   │   │   │   └── ImageWithFallback.tsx
+│       │   │   │   ├── filter
+│       │   │   │   │   └── FilterPanel.tsx
+│       │   │   │   ├── kanban
+│       │   │   │   │   └── KanbanBoard.tsx
+│       │   │   │   ├── library
+│       │   │   │   │   ├── ATSScoreCircle.tsx
+│       │   │   │   │   ├── ButtonComponentsSection.tsx
+│       │   │   │   │   ├── CardComponentsSection.tsx
+│       │   │   │   │   ├── ComponentDemo.tsx
+│       │   │   │   │   ├── DemoLinksSection.tsx
+│       │   │   │   │   ├── DisplayComponentsSection.tsx
+│       │   │   │   │   ├── FormComponentsSection.tsx
+│       │   │   │   │   ├── InteractiveComponentsSection.tsx
+│       │   │   │   │   ├── KeywordTag.tsx
+│       │   │   │   │   ├── LayoutComponentsSection.tsx
+│       │   │   │   │   ├── ProfileVariationCard.tsx
+│       │   │   │   │   ├── TemplateCard.tsx
+│       │   │   │   │   └── UsageGuidelinesSection.tsx
+│       │   │   │   ├── main
+│       │   │   │   │   ├── ActionCard.tsx
+│       │   │   │   │   └── WelcomeBanner.tsx
+│       │   │   │   ├── timeline
+│       │   │   │   │   └── TimelineView.tsx
+│       │   │   │   └── ui
+│       │   │   │       ├── accordion.tsx
+│       │   │   │       ├── alert-dialog.tsx
+│       │   │   │       ├── alert.tsx
+│       │   │   │       ├── aspect-ratio.tsx
+│       │   │   │       ├── aurora-utils.tsx
+│       │   │   │       ├── avatar.tsx
+│       │   │   │       ├── badge.tsx
+│       │   │   │       ├── breadcrumb.tsx
+│       │   │   │       ├── button-aurora.tsx
+│       │   │   │       ├── button.tsx
+│       │   │   │       ├── calendar.tsx
+│       │   │   │       ├── card.tsx
+│       │   │   │       ├── carousel.tsx
+│       │   │   │       ├── chart.tsx
+│       │   │   │       ├── checkbox.tsx
+│       │   │   │       ├── collapsible.tsx
+│       │   │   │       ├── command.tsx
+│       │   │   │       ├── context-menu.tsx
+│       │   │   │       ├── dialog.tsx
+│       │   │   │       ├── drawer.tsx
+│       │   │   │       ├── dropdown-menu.tsx
+│       │   │   │       ├── form.tsx
+│       │   │   │       ├── hover-card.tsx
+│       │   │   │       ├── input-otp.tsx
+│       │   │   │       ├── input.tsx
+│       │   │   │       ├── label.tsx
+│       │   │   │       ├── m3-button.tsx
+│       │   │   │       ├── m3-card.tsx
+│       │   │   │       ├── m3-checkbox.tsx
+│       │   │   │       ├── m3-chip.tsx
+│       │   │   │       ├── m3-fab.tsx
+│       │   │   │       ├── m3-input.tsx
+│       │   │   │       ├── m3-select.tsx
+│       │   │   │       ├── menubar.tsx
+│       │   │   │       ├── navigation-menu.tsx
+│       │   │   │       ├── pagination.tsx
+│       │   │   │       ├── popover.tsx
+│       │   │   │       ├── progress.tsx
+│       │   │   │       ├── radio-group.tsx
+│       │   │   │       ├── resizable.tsx
+│       │   │   │       ├── scroll-area.tsx
+│       │   │   │       ├── select.tsx
+│       │   │   │       ├── separator.tsx
+│       │   │   │       ├── sheet.tsx
+│       │   │   │       ├── sidebar.tsx
+│       │   │   │       ├── skeleton.tsx
+│       │   │   │       ├── slider.tsx
+│       │   │   │       ├── sonner.tsx
+│       │   │   │       ├── switch.tsx
+│       │   │   │       ├── table.tsx
+│       │   │   │       ├── tabs.tsx
+│       │   │   │       ├── textarea.tsx
+│       │   │   │       ├── toggle-group.tsx
+│       │   │   │       ├── toggle.tsx
+│       │   │   │       ├── tooltip.tsx
+│       │   │   │       ├── use-mobile.ts
+│       │   │   │       └── utils.ts
+│       │   │   ├── contexts
+│       │   │   │   └── ColorModeContext.tsx
+│       │   │   ├── guidelines
+│       │   │   │   └── Guidelines.md
+│       │   │   ├── hooks
+│       │   │   │   └── useDesignTokens.ts
+│       │   │   ├── index.css
+│       │   │   ├── main.tsx
+│       │   │   ├── mappings
+│       │   │   │   └── design-tokens.mapper.ts
+│       │   │   └── styles
+│       │   │       └── globals.css
+│       │   ├── vite.config.ts
+│       │   └── yarn.lock
+│       ├── index.html
+│       └── vertex-ai-config.env
+├── verify_genkit.py
+├── vitest.config.ts
+├── vitest.shims.d.ts
+├── walkthrough.md
+└── yarn.lock
+
+548 directories, 2625 files
