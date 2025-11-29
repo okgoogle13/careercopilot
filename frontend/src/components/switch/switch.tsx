@@ -1,31 +1,44 @@
-import type { SwitchProps as MuiSwitchProps, FormControlLabelProps } from '@mui/material';
-import { Switch as MuiSwitch, FormControlLabel } from '@mui/material';
+import type { InputHTMLAttributes } from 'react';
 import React from 'react';
+import styles from './switch.module.css';
 
-export interface SwitchProps extends MuiSwitchProps {
+export interface SwitchProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: React.ReactNode;
-  labelProps?: Omit<FormControlLabelProps, 'control' | 'label'>;
-  onCheckedChange?: (checked: boolean) => void;
 }
 
-export const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
-  ({ label, labelProps, onCheckedChange, ...props }, ref) => {
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (onCheckedChange) {
-        onCheckedChange(event.target.checked);
-      }
-      if (props.onChange) {
-        props.onChange(event, event.target.checked);
-      }
-    };
+export const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+  ({ label, className, disabled, ...props }, ref) => {
+    const switchId = props.id || ("switch-" + Math.random().toString(36).substr(2, 9));
+    const disabledClass = disabled ? 'switch--disabled' : '';
 
-    const switchElement = <MuiSwitch ref={ref} {...props} onChange={handleChange} />;
+    const switchClassNames = [
+      styles.switch,
+      styles[disabledClass],
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-    if (label) {
-      return <FormControlLabel control={switchElement} label={label} {...labelProps} />;
-    }
-
-    return switchElement;
+    return (
+      <div className={styles['switch-wrapper']}>
+        <input
+          ref={ref}
+          id={switchId}
+          type="checkbox"
+          className={switchClassNames}
+          disabled={disabled}
+          {...props}
+        />
+        <span className={styles['switch-track']}>
+          <span className={styles['switch-thumb']} />
+        </span>
+        {label && (
+          <label htmlFor={switchId} className={styles.label}>
+            {label}
+          </label>
+        )}
+      </div>
+    );
   }
 );
 
