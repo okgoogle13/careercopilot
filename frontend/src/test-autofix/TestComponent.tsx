@@ -10,7 +10,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Button, Card } from '@mui/material';
 import axios from 'axios';
 import { Dialog, TextField, IconButton } from '@mui/material';  // Unused: Dialog, TextField, IconButton
-import { formatDate } from '../../utils/dateUtils';  // Assume this doesn't exist - unused
+import { formatDate } from '../utils/dateUtils';  // Assume this doesn't exist - unused
 
 // Hardcoded color - M3 violation
 const StyledCard = {
