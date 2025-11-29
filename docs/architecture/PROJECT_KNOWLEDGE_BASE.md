@@ -36,7 +36,7 @@ Use these skills and agents for all automation and complex task execution.
 | Area | Quick Start Script / Index | Detailed Documentation |
 | :--- | :--- | :--- |
 | **Deployment** | `./scripts/deploy.sh` (staging/production) | `docs/DEPLOYMENT_WORKFLOW.md` |
-| **Secrets Setup** | `./setup-api-keys.sh` (local dev) | `docs/SECRETS_MANAGEMENT.md` |
+| **Secrets Setup** | `./scripts/setup-secrets.sh` (local dev) | `docs/SECRETS_MANAGEMENT.md` |
 | **Linting/Formatting**| `yarn lint:fix` (auto-fix) | `.vscode/settings.json` (Auto-fix on save) |
 | **Email Service** | `AWS_SES_QUICK_START.md` | `docs/AWS_SES_SETUP.md` |
 | **M3 Prep Steps** | `./scripts/prepare-for-migration.sh` | `docs/MIGRATION_READINESS.md` |
@@ -64,7 +64,7 @@ Use these skills and agents for all automation and complex task execution.
 3. python3 scripts/production-secrets-validator.py --checklist  # Final validation
 
 # For Local Development:
-1. ./setup-api-keys.sh  # Interactive setup
+1. ./scripts/setup-secrets.sh  # Interactive setup
 2. python3 scripts/test-configuration.py  # Validate setup
 3. ENABLE_GENKIT_FLOWS=true python3 verify_genkit.py  # Test Genkit integration
 
@@ -866,8 +866,8 @@ Options:
   - `yarn dev` (from root) - Start frontend development server
   - `yarn dev:functions` (from root) - Start Functions emulator
 - **Cleanup**: `yarn clean` (from root) - Clean all build artifacts
-- **Production Deployment**: `./scripts/deploy-production.sh` - Full production deployment
-- **Staging Deployment**: `./scripts/deploy-staging.sh` - Deploy to staging environment
+- **Production Deployment**: `./scripts/deploy.sh production` - Full production deployment
+- **Staging Deployment**: `./scripts/deploy.sh staging` - Deploy to staging environment
 
 ### Environment URLs
 
@@ -942,8 +942,8 @@ Options:
   - `./scripts/firebase-config-validator.py` - Validate Firebase configuration
 - **Setup & Configuration**:
   - `./scripts/setup-everything.sh` - Complete project setup script
-  - `./scripts/setup-firebase.sh` - Firebase-specific setup
-  - `./scripts/validate-environment.sh` - Validate environment configuration
+  - `./scripts/setup-careercopilot-firebase.sh` - Firebase-specific setup
+  - `python3 scripts/test-configuration.py` - Validate environment configuration
 
 ### Test Infrastructure
 

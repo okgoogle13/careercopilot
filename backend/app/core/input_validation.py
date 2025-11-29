@@ -114,7 +114,6 @@ class InputSanitizer:
         )
 
     @classmethod
-    @classmethod
     def sanitize_dict_input(cls, data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Recursively sanitize dictionary values.

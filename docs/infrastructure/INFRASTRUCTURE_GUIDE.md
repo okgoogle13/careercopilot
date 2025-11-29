@@ -126,8 +126,8 @@ deactivate                  # Deactivate
 
 ```bash
 ./scripts/setup-everything.sh          # Complete project setup script
-./scripts/setup-firebase.sh           # Firebase-specific setup
-./scripts/validate-environment.sh      # Validate environment configuration
+./scripts/setup-careercopilot-firebase.sh  # Firebase-specific setup
+python3 scripts/test-configuration.py  # Validate environment configuration
 ```
 
 ## Test Infrastructure
@@ -313,7 +313,7 @@ yarn vite-bundle-analyzer
 
 ```bash
 # Validate environment configuration
-./scripts/validate-environment.sh
+python3 scripts/test-configuration.py
 
 # Check for hardcoded secrets
 grep -r "sk-\|AIzaSy\|GOCSPX" . --exclude-dir=.git --exclude-dir=node_modules

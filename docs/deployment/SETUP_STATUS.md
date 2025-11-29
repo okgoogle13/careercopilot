@@ -14,7 +14,7 @@
 - **Built automated setup scripts**:
   - `scripts/setup-secrets.sh` - Interactive secrets configuration
   - `scripts/add-remaining-secrets.sh` - Quick missing secrets setup
-  - `scripts/setup-firebase.sh` - Firebase project automation
+  - `scripts/setup-careercopilot-firebase.sh` - Firebase project automation
 
 ### 🚀 Deployment Pipeline Enhancement
 
@@ -99,7 +99,7 @@ gh secret set SENDGRID_API_KEY --body "SG.xxxxx" --repo okgoogle13/careercopilot
 ./scripts/setup-secrets.sh
 
 # Set up Firebase projects automatically
-./scripts/setup-firebase.sh
+./scripts/setup-careercopilot-firebase.sh
 
 # Add any remaining secrets
 ./scripts/add-remaining-secrets.sh

@@ -20,7 +20,7 @@ This guide explains how to configure the CareerCopilot application for developme
 
 ```bash
 # Run the interactive setup script
-./setup-api-keys.sh
+./scripts/setup-secrets.sh
 
 # Choose option 1 for local development
 # Edit .env.local with your API keys
@@ -202,7 +202,7 @@ python3 scripts/test-configuration.py --quick
 Interactive script for basic configuration setup.
 
 ```bash
-./setup-api-keys.sh
+./scripts/setup-secrets.sh
 ```
 
 Options:
@@ -439,7 +439,7 @@ rm .env.local
 # python3 scripts/delete-all-secrets.py --confirm
 
 # Run setup again
-./setup-api-keys.sh
+./scripts/setup-secrets.sh
 ```
 
 ## Security Best Practices

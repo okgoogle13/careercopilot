@@ -1,0 +1,33 @@
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy package.json and yarn.lock from project root
+# This enables building from the root directory context
+COPY package*.json ./
+COPY yarn.lock ./
+
+# Copy frontend package.json as well (for workspace setup)
+COPY frontend/package*.json ./frontend/
+COPY frontend/yarn.lock ./frontend/  # if it exists
+
+# Install dependencies using Yarn with legacy peer deps
+# This resolves the dependency conflicts we encountered
+RUN yarn install --legacy-peer-deps
+
+# Copy the rest of the frontend application source code
+COPY frontend/ ./frontend/
+
+# Set working directory to frontend for build commands
+WORKDIR /app/frontend
+
+# Build the app for production using Yarn
+RUN yarn build
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# The command to serve the built app in preview mode using Yarn
+CMD ["yarn", "run", "preview"]

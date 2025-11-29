@@ -2,6 +2,12 @@
 
 This directory contains utility scripts for setup, deployment, testing, and maintenance of the CareerCopilot project.
 
+## 📊 Cleanup Status (Nov 2025)
+- **Active Scripts**: 58 (reduced from 85+)
+- **Archived Scripts**: 39 (moved to `_archived/`)
+- **Reduction**: 40% fewer scripts to maintain
+- **Status**: ✅ Cleanup completed
+
 ## Quick Start
 
 For initial project setup, run:
@@ -16,46 +22,86 @@ This master setup script handles:
 - API keys setup
 - Environment configuration validation
 
-## Script Categories
+## 📁 Essential Scripts (Post-Cleanup)
 
-### Setup & Configuration Scripts
+### 🚀 Deployment Scripts
+- **`deploy.sh`** - Unified deployment (staging/production/frontend/functions)
+- **`frontend-deployment-readiness.sh`** - Pre-deployment validation
+- **`test-deployment.sh`** - Comprehensive deployment testing
 
-Use these scripts to configure your development environment:
+### 🔐 Setup & Configuration Scripts
+- **`setup-everything.sh`** - Master setup orchestrator
+- **`setup-secrets.sh`** - Unified secrets management (replaces 3 scripts)
+- **`setup-careercopilot-firebase.sh`** - Comprehensive Firebase setup
+- **`setup-production-secrets.py`** - Production secrets configuration
 
-#### `setup-everything.sh` (Master Setup)
-Complete development environment setup orchestrator. Runs all initialization steps.
+### ✅ Validation & Testing Scripts
+- **`test-configuration.py`** - Comprehensive configuration validation
+- **`production-secrets-validator.py`** - Production secrets validation
+- **`run-tests.sh`** - Test suite runner
+- **`typescript-check.sh`** - TypeScript validation
+
+### 🎨 Design System Scripts
+- **`build-design-tokens.py`** - Design token generation
+- **`build-m3-tokens.py`** - M3 token building
+- **`validate-design-tokens.py`** - Token validation
+
+### 🔄 Migration Scripts
+- **`migrate-to-m3.py`** - M3 Expressive migration
+- **`batch-migrate-m3.sh`** - Batch M3 migration
+
+### 📊 Analysis Scripts
+- **`vite-bundle-analyzer.sh`** - Bundle size analysis
+- **`audit-component-structure.sh`** - Component structure audit
+- **`audit-hardcoded-values.sh`** - Hardcoded values audit
+
+## 📦 Archived Scripts
+
+The following 39 scripts have been moved to `_archived/`:
+- Obsolete migration scripts (Redis → Firestore completed)
+- Redundant setup scripts (consolidated into unified scripts)
+- One-time cleanup scripts (completed tasks)
+- Duplicate deployment wrappers (consolidated into deploy.sh)
+
+**Note**: All archived scripts are preserved and can be restored if needed.
+
+## 🚨 Important Changes
+
+1. **Unified Secrets Management**: Use `setup-secrets.sh` instead of separate API keys/credentials scripts
+2. **Unified Deployment**: Use `deploy.sh` with environment arguments instead of separate staging/production scripts
+3. **Comprehensive Firebase**: Use `setup-careercopilot-firebase.sh` for all Firebase setup
+4. **Validation**: Use `test-configuration.py` for most validation needs
+
+## Usage Examples
+
+### Deploy to Staging:
 ```bash
-./scripts/setup-everything.sh
+./scripts/deploy.sh staging
 ```
 
-#### `setup-api-keys.sh`
-Interactive API keys configuration for development.
+### Deploy to Production:
 ```bash
-./scripts/setup-api-keys.sh
+./scripts/deploy.sh production
 ```
 
-#### `setup-firebase.sh`
-Firebase project configuration and initialization.
+### Setup All Secrets:
 ```bash
-./scripts/setup-firebase.sh
+./scripts/setup-secrets.sh
 ```
 
-#### `setup-firebase-config.py`
-Python script to configure Firebase settings programmatically.
+### Validate Configuration:
 ```bash
-python3 scripts/setup-firebase-config.py
+python3 scripts/test-configuration.py
 ```
 
-#### `setup-production-secrets.py`
-Interactive production secrets setup (Google Cloud Secret Manager integration).
+### Run All Tests:
 ```bash
-python3 scripts/setup-production-secrets.py
+./scripts/run-tests.sh
 ```
 
-#### `setup-google-oauth.sh`
-Configure Google OAuth for authentication.
+### Migrate to M3:
 ```bash
-./scripts/setup-google-oauth.sh
+python3 scripts/migrate-to-m3.py component-name
 ```
 
 #### `configure-firebase-permissions.sh`
