@@ -104,3 +104,6 @@ frontend/Figma UI Files/
 .claude-backup-*.tar.gz
 *.bak.*
 claude-artifact-runner/
+
+# Jules Delegation Protocol Output Reports
+/.ai_reports/
