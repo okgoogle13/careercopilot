@@ -23,7 +23,7 @@
 # Secure credential management
 ~/.careercopilot/credentials.env          # Encrypted credential storage
 ~/.careercopilot/load-credentials.sh      # Secure credential loader
-~/.careercopilot/deploy-production.sh     # Secure production deployment
+~/.careercopilot/deploy.sh production     # Secure production deployment
 ```
 
 ---
@@ -272,7 +272,7 @@
 source ~/.careercopilot/load-credentials.sh
 
 # Deploy with secure credentials
-~/.careercopilot/deploy-production.sh
+~/.careercopilot/deploy.sh production
 ```
 
 ---

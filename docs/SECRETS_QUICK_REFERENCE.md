@@ -70,7 +70,7 @@ python3 scripts/production-secrets-validator.py --checklist  # Generate checklis
 
 ### Local Development
 ```bash
-./setup-api-keys.sh                    # Interactive local setup
+./scripts/setup-secrets.sh                # Interactive local setup
 python3 scripts/test-configuration.py   # Validate local config
 ```
 
@@ -81,7 +81,7 @@ python3 scripts/test-configuration.py   # Validate local config
 ### New Developer Setup
 ```bash
 # 1. Local development setup
-./setup-api-keys.sh
+./scripts/setup-secrets.sh
 
 # 2. Validate local configuration
 python3 scripts/test-configuration.py

@@ -51,6 +51,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.16.14",
     "@mui/material": "^5.16.14",
+    "@tanstack/react-query": "^5.90.11",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.1",
@@ -66,7 +67,8 @@
     "react-helmet-async": "^2.0.4",
     "react-router-dom": "^6.23.1",
     "tailwind-merge": "^2.5.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",

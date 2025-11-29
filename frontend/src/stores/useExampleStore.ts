@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { AIResponse } from '../types/ai';
 import apiClient from '../utils/apiClient';
 
