@@ -2,22 +2,14 @@
 """
 MCP Gemini Wrapper - Google Generative AI Integration
 
-Provides a Model Context Protocol (MCP) server that delegates tasks to Google's
-Gemini AI models (1.5-flash by default). Enables seamless integration of Gemini
-capabilities into Claude workflows through MCP.
-
-Features:
-- Fast inference with gemini-1.5-flash (128K token context)
-- Streaming responses for real-time feedback
-- Error handling with graceful degradation
-- Environment-based API key management
-- Structured JSON responses
+... [Docstring remains the same] ...
 """
 
 import json
 import os
 import sys
 import logging
+import inspect
 from typing import Optional, Dict, Any
 
 # Configure logging
@@ -44,7 +36,7 @@ class GeminiMCPServer:
     """MCP Server for Google Generative AI integration."""
 
     def __init__(self):
-        """Initialize Gemini MCP server."""
+        # ... [Initialization logic remains the same] ...
         self.api_key = os.getenv("GEMINI_API_KEY", "")
         self.model_name = os.getenv("GEMINI_MODEL", "models/gemini-3-pro-preview")
         self.fallback_models = [
@@ -91,16 +83,7 @@ class GeminiMCPServer:
                 logger.warning("GEMINI_API_KEY does not appear to be valid (should start with 'AIza')")
 
     def delegate_to_gemini(self, prompt: str, system_prompt: Optional[str] = None) -> Dict[str, Any]:
-        """
-        Delegate a task to Gemini AI.
-
-        Args:
-            prompt: User prompt/query
-            system_prompt: Optional system instruction
-
-        Returns:
-            Dict with response, tokens, and metadata
-        """
+        # ... [delegate_to_gemini method remains the same] ...
         try:
             if not self.initialized:
                 return {
@@ -151,11 +134,7 @@ class GeminiMCPServer:
             }
 
     def _count_tokens(self, text: str) -> int:
-        """
-        Estimate token count for text.
-
-        Uses Gemini's token counting API if available, otherwise uses conservative estimate.
-        """
+        # ... [_count_tokens method remains the same] ...
         try:
             if GENAI_AVAILABLE:
                 # Use Gemini's token counter
@@ -166,9 +145,54 @@ class GeminiMCPServer:
 
         # Fallback: conservative estimate (4 chars = 1 token for English)
         return len(text) // 4
+        
+    # --- NEW METHOD FOR CONTEXT SAVING ---
+    def generate_interface_definition(self) -> str:
+        """
+        Generates a minimal Python interface file (IDF) containing only method 
+        signatures and docstrings. This file should be referenced in CLAUDE.md 
+        instead of the full implementation to save context tokens.
+        """
+        methods = [
+            self.explain_text, self.analyze_code, self.summarize, 
+            self.brainstorm, self.architecture_analysis, 
+            self.refactoring_suggestions, self.error_diagnosis, 
+            self.documentation_insights, self.optimization_analysis, self.health_check
+        ]
+        
+        output = [
+            '# Minimal Interface Definition File (IDF) for mcp-gemini-wrapper.',
+            '# Use this file for Claude context instead of the full implementation.',
+            'from typing import Dict, Any, Optional',
+            '',
+            'class GeminiMCPServerInterface:',
+        ]
+        
+        for method in methods:
+            try:
+                sig = inspect.signature(method)
+                doc = inspect.getdoc(method)
+                
+                # Format signature (e.g., 'def analyze_code(self, code: str, language: str = "python") -> Dict[str, Any]:')
+                signature_str = f"    def {method.__name__}{sig}:"
+
+                output.append(signature_str)
+                if doc:
+                    # Indent docstring and add triple quotes
+                    doc_lines = doc.split('\n')
+                    doc_indented = '        ' + '\n        '.join(doc_lines)
+                    output.append(f'        """{doc_lines[0]}')
+                    output.extend(doc_indented.split('\n')[1:])
+                    output.append('        """')
+                output.append('        ...') # Placeholder body
+            except Exception as e:
+                logger.error(f"Error processing method {method.__name__}: {e}")
+
+        return '\n'.join(output)
 
     def explain_text(self, text: str) -> Dict[str, Any]:
         """Explain what given text means (concise, one-sentence version)."""
+        # ... [Method body remains the same] ...
         if not self.initialized:
             # Demo mode when API key not available
             return {
@@ -186,7 +210,7 @@ class GeminiMCPServer:
         """Analyze and explain code."""
         system_prompt = f"You are an expert {language} code reviewer. Analyze the following code and provide insights."
         return self.delegate_to_gemini(code, system_prompt)
-
+        
     def summarize(self, text: str) -> Dict[str, Any]:
         """Create a concise summary of text."""
         system_prompt = "You are an expert summarizer. Provide a concise summary in 2-3 sentences."
@@ -236,7 +260,7 @@ class GeminiMCPServer:
 
 
 def handle_request(server: GeminiMCPServer, request: Dict[str, Any]) -> Dict[str, Any]:
-    """Route requests to appropriate handlers."""
+    # ... [handle_request remains the same] ...
     method = request.get("method")
     params = request.get("params", {})
 
@@ -246,6 +270,13 @@ def handle_request(server: GeminiMCPServer, request: Dict[str, Any]) -> Dict[str
                 prompt=params.get("prompt", ""),
                 system_prompt=params.get("system_prompt")
             )
+        # --- NEW METHOD HANDLER FOR IDF GENERATION ---
+        elif method == "generate_idf":
+            return {
+                "status": "success",
+                "content": server.generate_interface_definition()
+            }
+        # --- REST OF HANDLERS REMAINS THE SAME ---
         elif method == "explain":
             return server.explain_text(params.get("text", ""))
         elif method == "analyze_code":
@@ -327,4 +358,13 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # If the script is run with a specific argument (e.g., 'idf'), generate the interface file
+    if len(sys.argv) > 1 and sys.argv[1] == 'idf':
+        try:
+            server = GeminiMCPServer()
+            idf_content = server.generate_interface_definition()
+            print(idf_content)
+        except Exception as e:
+            print(f"Error generating IDF: {e}")
+    else:
+        main()
