@@ -1,24 +1,33 @@
-import type { FormLabelProps } from '@mui/material';
-import { FormLabel } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import type { LabelHTMLAttributes } from 'react';
 import React from 'react';
+import styles from './label.module.css';
 
-const StyledLabel = styled(FormLabel)(({ theme }) => ({
-  fontSize: '0.875rem',
-  fontWeight: 500,
-  color: theme.palette.text.primary,
-  marginBottom: theme.spacing(0.5),
-  display: 'block',
-}));
-
-export type LabelProps = FormLabelProps;
+export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+  required?: boolean;
+  disabled?: boolean;
+  error?: boolean;
+}
 
 export const Label = React.forwardRef<HTMLLabelElement, LabelProps>(
-  ({ children, ...props }, ref) => {
+  ({ required, disabled, error, className, children, ...props }, ref) => {
+    const requiredClass = required ? styles['label--required'] : '';
+    const disabledClass = disabled ? styles['label--disabled'] : '';
+    const errorClass = error ? styles['label--error'] : '';
+
+    const labelClassNames = [
+      styles.label,
+      requiredClass,
+      disabledClass,
+      errorClass,
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
     return (
-      <StyledLabel ref={ref} {...props}>
+      <label ref={ref} className={labelClassNames} {...props}>
         {children}
-      </StyledLabel>
+      </label>
     );
   }
 );

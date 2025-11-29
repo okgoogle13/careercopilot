@@ -1,38 +1,68 @@
-import type { TextFieldProps } from '@mui/material';
-import { TextField } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import type { TextareaHTMLAttributes } from 'react';
 import React from 'react';
+import styles from './textarea.module.css';
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
-  '& .MuiOutlinedInput-root': {
-    borderRadius: theme.spacing(1),
-    '& fieldset': {
-      borderColor: theme.palette.divider,
-    },
-    '&:hover fieldset': {
-      borderColor: theme.palette.primary.main,
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: theme.palette.primary.main,
-    },
-  },
-}));
-
-export interface TextareaProps extends Omit<TextFieldProps, 'variant' | 'multiline'> {
-  variant?: 'default' | 'outlined' | 'filled';
+export interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  error?: boolean;
+  helperText?: string;
+  fullWidth?: boolean;
 }
 
-export const Textarea = React.forwardRef<HTMLDivElement, TextareaProps>(
-  ({ variant = 'outlined', rows = 4, ...props }, ref) => {
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({
+    label,
+    error = false,
+    helperText,
+    fullWidth = true,
+    className,
+    disabled,
+    rows = 4,
+    ...props
+  }, ref) => {
+    const textareaId = props.id || ("textarea-" + Math.random().toString(36).substring(2, 9));
+    const errorClass = error ? styles['textarea--error'] : '';
+    const disabledClass = disabled ? styles['textarea--disabled'] : '';
+    const fullWidthClass = fullWidth ? styles['textarea--full-width'] : '';
+
+    const textareaClassNames = [
+      styles.textarea,
+      errorClass,
+      disabledClass,
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    const wrapperClassNames = [
+      styles['textarea-wrapper'],
+      fullWidthClass,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
     return (
-      <StyledTextField
-        ref={ref}
-        variant={variant === 'default' ? 'outlined' : variant}
-        multiline
-        rows={rows}
-        fullWidth
-        {...props}
-      />
+      <div className={wrapperClassNames}>
+        {label && (
+          <label htmlFor={textareaId} className={styles.label}>
+            {label}
+          </label>
+        )}
+        <textarea
+          ref={ref}
+          id={textareaId}
+          className={textareaClassNames}
+          disabled={disabled}
+          rows={rows}
+          aria-invalid={error}
+          {...props}
+        />
+        {helperText && (
+          <span className={error ? styles['helper-text--error'] : styles['helper-text']}>
+            {helperText}
+          </span>
+        )}
+      </div>
     );
   }
 );
