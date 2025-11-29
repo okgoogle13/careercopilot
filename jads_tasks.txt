@@ -1,0 +1,61 @@
+# Jules Delegation Tasks - Week 2 Component Testing Batches (JADS v1.0 Format)
+
+## BATCH 1: UI Components (Feedback)
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_1 Generating comprehensive Jest tests for feedback UI components : GOAL Generate 150-200 Jest tests with 80%+ pass rate for Dialog, Toast, ToastContext, EmptyState, Alert, Snackbar, Skeleton components using React Testing Library best practices : SCOPE_AND_TESTS SCOPE ./frontend/src/components/ui/feedback/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/Dialog_report.md
+
+## BATCH 2: UI Components (Loading)
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_2 Generating comprehensive Jest tests for loading and progress indicator components : GOAL Generate 100-150 Jest tests with 70%+ pass rate for LoadingSpinner, FullPageLoading, LoadingSkeleton, LinearProgress, CircularProgress, ProgressBar components with proper animation and jsdom limitation handling : SCOPE_AND_TESTS SCOPE ./frontend/src/components/ui/loading/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/LoadingSpinner_report.md
+
+## BATCH 3: UI Components (Navigation)
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_3 Generating comprehensive Jest tests for navigation and routing components : GOAL Generate 150-200 Jest tests with 65%+ pass rate for Sidebar, Navbar, Breadcrumbs, Tabs, Stepper, Pagination components with proper React Router mocking and keyboard navigation : SCOPE_AND_TESTS SCOPE ./frontend/src/components/ui/navigation/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/Sidebar_report.md
+
+## BATCH 4: UI Components (Surfaces) ⭐
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_4 Generating comprehensive Jest tests for simple surface and container components (EASIEST BATCH) : GOAL Generate 120-150 Jest tests with 85%+ pass rate for Card, Paper, Container, Grid, Box, Panel components - these are simple composition components with no complex logic, no special mocks needed : SCOPE_AND_TESTS SCOPE ./frontend/src/components/ui/surfaces/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/Card_report.md
+
+## BATCH 5: Common Components
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_5 Generating comprehensive Jest tests for common app layout and shared feature components : GOAL Generate 120-150 Jest tests with 70%+ pass rate for Header, Footer, Layout, PageWrapper, Sidebar, NavBar components with proper Application Context mocking for Auth/User/Theme contexts : SCOPE_AND_TESTS SCOPE ./frontend/src/components/common/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/Header_report.md
+
+## BATCH 6: Library Components
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_6 Generating comprehensive Jest tests for complex interactive library components : GOAL Generate 150-200 Jest tests with 65%+ pass rate for Modal, Dropdown, Tooltip, Menu, Popover, DatePicker components with userEvent interactions and proper async handling : SCOPE_AND_TESTS SCOPE ./frontend/src/components/library/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/Modal_report.md
+
+## BATCH 7: Feature Components
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_7 Generating comprehensive Jest tests for form and feature components handling user input : GOAL Generate 150-200 Jest tests with 60%+ pass rate for FormGroup, FormControl, TextInput, SelectField, Checkbox, Radio components with React Hook Form integration and accessibility testing : SCOPE_AND_TESTS SCOPE ./frontend/src/components/features/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/FormGroup_report.md
+
+## BATCH 8: Career-Specific Components ⚠️
+JADS_TASK: CONTEXT WEEK2_TESTING_BATCH_8 Generating comprehensive Jest tests for career/AI-integrated components (MOST COMPLEX) : GOAL Generate 150-200 Jest tests with 50%+ pass rate for KSCGenerator, TailoredResumeGenerator, CoverLetterGenerator, ApplicationTracker, JobMatcher, OneClickApplyButton components with comprehensive mocking of AI services, Firebase, Genkit flows, and HTTP clients : SCOPE_AND_TESTS SCOPE ./frontend/src/components/career/ TEST Run npm test in frontend directory and verify all new tests pass : OUTPUT_REPORT REPORT Generate detailed markdown to /.ai_reports/KSCGenerator_report.md
+
+---
+
+## Jules Execution Instructions
+
+1. **Process in Order**: Execute batches sequentially 1 → 8 to build test patterns progressively
+2. **Parallel Option**: Can execute Batch 4 (easiest) in parallel with others for quick wins
+3. **Handover Hook Compliance**: Every batch must create the report file specified in the task line
+4. **Path Format**: All file paths in reports must be relative (./frontend/src/...) not absolute
+5. **Commit Pattern**: Create one commit per batch with message "test: Add [Batch N] tests for [component list]"
+6. **Report Location**: Save all reports to ./.ai_reports/ directory
+7. **Success Criteria**: Each batch should achieve documented pass rate before proceeding to next
+
+## Success Metrics for All Batches
+
+- ✅ All component tests in __tests__/ directories
+- ✅ Comprehensive test coverage (15-25 tests per component)
+- ✅ Pass rate at or above batch target
+- ✅ Handover report created with accurate metrics
+- ✅ Relative paths used throughout
+- ✅ Single-line flat task format respected
+
+## Week 2 Timeline
+
+- Batches 1-2: Monday (Feedback & Loading)
+- Batches 3-4: Tuesday (Navigation & Surfaces)
+- Batches 5-6: Wednesday (Common & Library)
+- Batches 7-8: Thursday-Friday (Features & Career)
+- Final Validation: Friday afternoon
+
+## Contact Points
+
+- Report Status: Check ./.ai_reports/ directory for batch reports
+- Metrics Tracking: Track cumulative tests and pass rate in summary
+- Blockers: Document any issues in the Pending Actions section of each report
+- Next Phase: Week 2 refinement plan in progress

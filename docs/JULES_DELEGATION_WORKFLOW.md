@@ -17,60 +17,51 @@ This document provides the complete end-to-end workflow for delegating complex t
 
 ---
 
-## Part 1: Task Preparation
+## Part 1: Jules Autonomous Delegation Standard (JADS) v1.0
 
-### 1.1 Jules Delegation Protocol Requirements
+This standard defines the **non-negotiable input requirements** for task delegation to the autonomous Jules agent. Compliance ensures transparent planning, test validation, and successful, auditable task completion.
 
-All Jules tasks must comply with three core rules:
+### 1.1 🎯 Task Execution Rules (Non-Negotiable)
 
-**Rule 1: Paths - Relative Only**
+| ID | Rule | Description |
+| :--- | :--- | :--- |
+| **R1** | **Asynchronous Mode** | All tasks are assumed to run in **asynchronous, autonomous mode**. No real-time interaction is expected during execution (use MCP for that). |
+| **R2** | **Relative Paths** | All file references in the `SCOPE_AND_TESTS` block **MUST** use relative paths (starting with `./`). |
+| **R3** | **Single Line Format** | The task command **MUST** be written on a single continuous line for script compatibility. |
+| **R4** | **Plan Approval Hook** | The task is **defaulted to require human approval** of the generated plan unless the `AUTO_APPROVE` flag is explicitly included in the command. |
+
+### 1.2 📝 Structured Task Command Format
+
+The task line uses four mandatory, colon-separated blocks to ensure clarity and full context.
+
+**Template (Single Line):**
 ```
-✅ CORRECT:   ./frontend/src/components/ui/Button.test.tsx
-❌ INCORRECT: /Applications/careercopilot/frontend/src/components/ui/Button.test.tsx
-```
-
-**Rule 2: Format - Single-Line Tasks**
-```
-✅ CORRECT:   Task: [Components] - [Action] - [Requirements] - [Handover Hook]
-❌ INCORRECT: (Multi-line with sections and line breaks)
-```
-
-**Rule 3: Handover Hook - Mandatory Report Generation**
-```
-✅ CORRECT:   Finally, create a markdown file at ./.ai_reports/Dialog_report.md using this
-              exact structure: # Dialog Status, **Result:** [SUCCESS/FAILURE], ...
-
-❌ INCORRECT: (Missing report generation instruction)
+JADS_TASK: [CONTEXT] : [GOAL] : [SCOPE_AND_TESTS] : [OUTPUT_REPORT]
 ```
 
-### 1.2 Task Line Template
+**Block Details:**
 
-```
-Task: [Component1, Component2, ...] - [Action: Generate/Enhance/Fix tests] -
-[Requirements: List detailed test coverage, mocking, patterns, edge cases] -
-Special handling: [Any specific patterns, workarounds, or considerations] -
-Expected: [Test count and pass rate targets] -
-Finally, create a markdown file at ./.ai_reports/[Component]_report.md using this
-exact structure: # [Component] Status, **Result:** [SUCCESS/FAILURE],
-**Files Modified:** [...], **Test Coverage:** [...], **Pending Actions:** [...]
-```
+| Block | Purpose | Mandatory Contents | Example |
+| :--- | :--- | :--- | :--- |
+| **CONTEXT** | **Why** the task is needed (business reason). | Must reference a **unique ID** (e.g., GitHub Issue ID, JIRA ticket). | `ISSUE_1234: Bugfix for null pointer` |
+| **GOAL** | **What** the final outcome must be. | Must specify the **exact functional change** expected. | `Implement JWT token refresh logic and pass all existing tests.` |
+| **SCOPE_AND_TESTS** | **Where** to focus and **How** to validate. | A list of files/directories to examine, plus the **test validation command**. | `SCOPE: ./auth/ \| TEST: Run 'npm test' in auth dir.` |
+| **OUTPUT_REPORT** | **Audit requirement** for history. | A mandatory instruction for the final report file location. | `REPORT: Generate detailed markdown to /.ai_reports/Task_1234_report.md` |
 
-### 1.3 Example: Batch 1 Task (Actual)
+### 1.3 🛠️ Operational Workflow
 
-```
-Task: Dialog, Toast, ToastContext, EmptyState, Alert, Snackbar, Skeleton -
-Generate comprehensive Jest tests using jest-test-scaffolder skill for
-feedback/information UI components - Each component needs 15-25 tests covering
-render, props, interaction, state, and edge cases - Use React Testing Library
-best practices with role-based queries; handle Portal components with snapshot
-tests; consider jest.useFakeTimers() for animations; leverage Material-UI theme
-already mocked in setupTests.ts; some components already tested so focus on edge
-cases - Expected: 150-200 tests generated, 80%+ pass rate - Finally, create a
-markdown file at ./.ai_reports/Dialog_report.md using this exact structure:
-# Dialog Status, **Result:** [SUCCESS/FAILURE], **Files Modified:**
-[./frontend/src/components/ui/feedback/Dialog.test.tsx and others], **Test
-Coverage:** [X tests generated, Y% pass rate], **Pending Actions:** [Next batch ready]
-```
+This section details how to execute the JADS tasks using the command line interface (CLI).
+
+| Step | Command/Action | Notes |
+| :--- | :--- | :--- |
+| **Batch Launch** | `bash -c 'grep "^JADS_TASK:" jads_tasks.txt \| while IFS= read -r line; do jules remote new --repo . --session "$line"; done'` | Launches all JADS-compliant tasks in batch mode. |
+| **Monitoring** | `jules remote list --session \| awk '/^JADS_TASK:/ {session_id = $2; status = $4; full_prompt = ""; for (i = 5; i <= NF; i++) full_prompt = full_prompt $i " "; if (match(full_prompt, /REPORT: ([^ ]+)/, arr)) { print session_id, status, arr[1] } else { print session_id, status, "REPORT_PATH_UNKNOWN" }}'` | Extracts the **Session ID**, **Status**, and the final **Report Path** for easy human/script review. |
+| **Plan Approval** | `jules task approve --id=task_abc123` | **MANDATORY** action to approve the plan posted by Jules before execution begins (unless `AUTO_APPROVE` was used). |
+| **Status Details** | `jules task status --id=task_abc123` | Use to inspect the detailed status, logs, and execution plan of a single task. |
+
+### 1.4 Legacy Format Support
+
+The previous `Task:` format is deprecated but still supported for backward compatibility. New tasks should use the `JADS_TASK:` format exclusively.
 
 ---
 
@@ -89,13 +80,13 @@ Before launching batches, verify:
 ### Validation Script
 ```bash
 # Count tasks that are properly formatted
-grep "^Task:" tasks.txt | wc -l
+grep "^JADS_TASK:" jads_tasks.txt | wc -l
 
 # Verify all paths are relative (should be 0 absolute paths)
-grep "^Task:" tasks.txt | grep -c "/Applications" || echo "✅ All paths relative"
+grep "^JADS_TASK:" jads_tasks.txt | grep -c "/Applications" || echo "✅ All paths relative"
 
 # Verify all tasks are single-line (should match task count)
-grep "^Task:" tasks.txt | wc -l
+grep "^JADS_TASK:" jads_tasks.txt | wc -l
 ```
 
 ---
@@ -104,15 +95,15 @@ grep "^Task:" tasks.txt | wc -l
 
 ### 3.1 Fixed Launch Command
 
-**Corrected Syntax** (with semicolon before `done`):
+**JADS v1.0 Command**:
 ```bash
-bash -c 'grep "^Task:" tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line"; done'
+bash -c 'grep "^JADS_TASK:" jads_tasks.txt | while IFS= read -r line; do jules remote new --repo . --session "$line"; done'
 ```
 
 **Or simplified** (if using plain bash):
 ```bash
-cat tasks.txt | while IFS= read -r line; do
-  [ "$line" != "${line#Task:}" ] && jules remote new --repo . --session "$line"
+cat jads_tasks.txt | while IFS= read -r line; do
+  [ "$line" != "${line#JADS_TASK:}" ] && jules remote new --repo . --session "$line"
 done
 ```
 
@@ -121,7 +112,7 @@ done
 After launching, verify all sessions exist:
 ```bash
 # Should show 8 sessions with "Planning" status
-jules remote list --session | grep "^.*Task:" | wc -l
+jules remote list --session | grep "^.*JADS_TASK:" | wc -l
 ```
 
 ### 3.3 Session IDs (Week 2 Launch)
@@ -145,7 +136,7 @@ Batch 8: 4291377980303646738     (KSCGenerator, etc - HARDEST)
 
 ```bash
 # Check all batches in one command
-jules remote list --session | grep "Task:" | awk '{print $2, $4, $NF}'
+jules remote list --session | grep "JADS_TASK:" | awk '{print $2, $4, $NF}'
 
 # Monitor specific batch logs (real-time)
 jules remote logs --session 7401566218163211110 -f
