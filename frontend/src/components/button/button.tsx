@@ -1,66 +1,41 @@
-import type { ButtonProps as MuiButtonProps } from '@mui/material';
-import { Button as MuiButton } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import type { ButtonHTMLAttributes } from 'react';
 import React from 'react';
+import styles from './button.module.css';
 
-// Custom styled button that maintains compatibility with existing code
-const StyledButton = styled(MuiButton)<{ customvariant?: string }>(({ theme, customvariant }) => ({
-  borderRadius: theme.spacing(1),
-  textTransform: 'none',
-  fontWeight: 500,
-  ...(customvariant === 'ghost' && {
-    backgroundColor: 'transparent',
-    color: theme.palette.text.primary,
-    border: 'none',
-    '&:hover': {
-      backgroundColor: theme.palette.surface.containerHigh,
-    },
-  }),
-  ...(customvariant === 'outline' && {
-    backgroundColor: 'transparent',
-    border: `1px solid ${theme.palette.divider}`,
-    color: theme.palette.text.primary,
-    '&:hover': {
-      backgroundColor: theme.palette.surface.containerHigh,
-    },
-  }),
-}));
+export type ButtonVariant = 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+export type ButtonSize = 'sm' | 'md' | 'lg';
 
-export interface ButtonProps extends Omit<MuiButtonProps, 'variant'> {
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  disabled?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = 'default', children, ...props }, ref) => {
-    // Map custom variants to MUI variants
-    const getMuiVariant = (variant: string): MuiButtonProps['variant'] => {
-      switch (variant) {
-        case 'outline':
-        case 'ghost':
-          return 'outlined';
-        case 'link':
-          return 'text';
-        case 'secondary':
-          return 'outlined';
-        case 'destructive':
-          return 'contained';
-        default:
-          return 'contained';
-      }
-    };
+  ({ variant = 'default', size = 'md', className, disabled, children, ...props }, ref) => {
+    const variantClass = `button--${variant}`;
+    const sizeClass = `button--${size}`;
+    const disabledClass = disabled ? 'button--disabled' : '';
 
-    const muiVariant = getMuiVariant(variant);
+    const classNames = [
+      styles.button,
+      styles[variantClass],
+      styles[sizeClass],
+      disabledClass && styles[disabledClass],
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
-      <StyledButton
+      <button
         ref={ref}
-        variant={muiVariant}
-        customvariant={variant}
+        className={classNames}
+        disabled={disabled}
         {...props}
-        color={variant === 'destructive' ? 'error' : 'primary'}
       >
         {children}
-      </StyledButton>
+      </button>
     );
   }
 );
