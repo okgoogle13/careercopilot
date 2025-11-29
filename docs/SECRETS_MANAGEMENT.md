@@ -51,7 +51,7 @@ GitHub Secrets → GitHub Actions → GCP Deployment
 
 ```bash
 # 1. Set up local environment
-./setup-api-keys.sh
+./scripts/setup-secrets.sh
 
 # 2. Test configuration
 python3 scripts/test-configuration.py
