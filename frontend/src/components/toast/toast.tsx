@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Snackbar,
-  Alert,
-  AlertTitle,
-  IconButton,
-  alpha,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
+import styles from './toast.module.css';
 import { X, CheckCircle, AlertCircle, AlertTriangle, Info } from 'lucide-react';
 
 export type ToastSeverity = 'success' | 'error' | 'warning' | 'info';
@@ -24,184 +17,92 @@ export interface ToastProps {
   };
 }
 
-/**
- * M3Toast - Material 3 Expressive Toast Notification
- * 
- * Features:
- * - Based on MUI Snackbar with Alert
- * - Uses Material Theme Builder tokens
- * - Four variants: success, error, warning, info
- * - Backgrounds map to success/error color styles
- * - Text maps to corresponding onSuccess/onError styles
- * - Custom icons from lucide-react
- * 
- * Local Styles Used:
- * Success:
- * - Background: success.main (var(--sys-color-success)) with alpha
- * - Text: success.contrastText or onSurface
- * 
- * Error:
- * - Background: error.main (var(--sys-color-error)) with alpha
- * - Text: error.contrastText (#690005) or onSurface
- * 
- * Warning:
- * - Background: warning.main (var(--sys-color-warning)) with alpha
- * - Text: warning.contrastText or onSurface
- * 
- * Info:
- * - Background: primary.main (#DAB9FF) with alpha
- * - Text: primary.contrastText (#470084) or onSurface
- */
-
-const getSeverityColors = (severity: ToastSeverity, theme: any) => {
-  switch (severity) {
-    case 'success':
-      return {
-        bg: alpha(theme.palette.success.main, 0.15),
-        border: theme.palette.success.main,
-        icon: theme.palette.success.main,
-        text: theme.palette.text.primary,
-      };
-    case 'error':
-      return {
-        bg: alpha(theme.palette.error.main, 0.15),
-        border: theme.palette.error.main,
-        icon: theme.palette.error.main,
-        text: theme.palette.text.primary,
-      };
-    case 'warning':
-      return {
-        bg: alpha(theme.palette.warning.main, 0.15),
-        border: theme.palette.warning.main,
-        icon: theme.palette.warning.main,
-        text: theme.palette.text.primary,
-      };
-    case 'info':
-      return {
-        bg: alpha(theme.palette.primary.main, 0.15),
-        border: theme.palette.primary.main,
-        icon: theme.palette.primary.main,
-        text: theme.palette.text.primary,
-      };
-  }
-};
-
-const StyledAlert = styled(Alert, {
-  shouldForwardProp: (prop) => prop !== 'severity',
-})<{ severity: ToastSeverity }>(({ theme, severity }) => {
-  const colors = getSeverityColors(severity, theme);
-  
-  return {
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    backgroundColor: colors.bg,
-    border: `1px solid ${colors.border}`,
-    borderRadius: 12,
-    padding: '12px 16px',
-    minWidth: 300,
-    maxWidth: 500,
-    boxShadow: `0 4px 12px ${alpha(theme.palette.background.default, 0.4)}`,
-    backdropFilter: 'blur(8px)',
-    '& .MuiAlert-icon': {
-      color: colors.icon,
-      marginRight: 12,
-      padding: 0,
-      opacity: 1,
-    },
-    '& .MuiAlert-message': {
-      padding: 0,
-      color: colors.text,
-    },
-    '& .MuiAlert-action': {
-      padding: 0,
-      marginRight: 0,
-      marginLeft: 12,
-    },
-    '& .MuiAlertTitle-root': {
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-      fontWeight: 600,
-      fontSize: '0.875rem',
-      marginBottom: 4,
-      color: colors.text,
-    },
+const getSeverityClass = (severity: ToastSeverity) => {
+  const severityMap = {
+    success: styles['toast--success'],
+    error: styles['toast--error'],
+    warning: styles['toast--warning'],
+    info: styles['toast--info'],
   };
-});
+  return severityMap[severity];
+};
 
 const iconMapping = {
-  success: <CheckCircle size={20} />,
-  error: <AlertCircle size={20} />,
-  warning: <AlertTriangle size={20} />,
-  info: <Info size={20} />,
+  success: CheckCircle({}),
+  error: AlertCircle({}),
+  warning: AlertTriangle({}),
+  info: Info({}),
 };
 
-export const Toast: React.FC<ToastProps> = ({
-  open,
-  onClose,
-  severity,
-  title,
-  message,
-  duration = 6000,
-  position = { vertical: 'bottom', horizontal: 'right' },
-}) => {
-  return (
-    <Snackbar
-      open={open}
-      autoHideDuration={duration}
-      onClose={onClose}
-      anchorOrigin={position}
-    >
-      <StyledAlert
-        severity={severity}
-        icon={iconMapping[severity]}
-        action={
-          <IconButton
-            size="small"
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              color: (theme) => theme.palette.text.secondary,
-              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-              '&:hover': {
-                backgroundColor: (theme) =>
-                  alpha(theme.palette.text.primary, 0.08),
-              },
-            }}
-          >
-            <X size={18} />
-          </IconButton>
-        }
-      >
-        {title && <AlertTitle>{title}</AlertTitle>}
-        <span
-          style={{
-            fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-            fontSize: '0.875rem',
-          }}
-        >
-          {message}
-        </span>
-      </StyledAlert>
-    </Snackbar>
+const getPositionClass = (position) => {
+  const verticalClass = position.vertical === 'top' ? styles['toast--top'] : styles['toast--bottom'];
+  const horizontalMap = {
+    left: styles['toast--left'],
+    center: styles['toast--center'],
+    right: styles['toast--right'],
+  };
+  return verticalClass + ' ' + horizontalMap[position.horizontal];
+};
+
+export const Toast = React.forwardRef((props, ref) => {
+  const {
+    open,
+    onClose,
+    severity,
+    title,
+    message,
+    duration = 6000,
+    position = { vertical: 'bottom', horizontal: 'right' },
+  } = props;
+
+  React.useEffect(() => {
+    if (!open || duration <= 0) return;
+
+    const timer = setTimeout(onClose, duration);
+    return () => clearTimeout(timer);
+  }, [open, duration, onClose]);
+
+  if (!open) return null;
+
+  return React.createElement(
+    'div',
+    {
+      className: styles.toast + ' ' + getSeverityClass(severity) + ' ' + getPositionClass(position),
+      role: 'alert',
+      ref: ref,
+    },
+    React.createElement(
+      'div',
+      { className: styles['toast-icon'] },
+      iconMapping[severity]
+    ),
+    React.createElement(
+      'div',
+      { className: styles['toast-content'] },
+      title && React.createElement('div', { className: styles['toast-title'] }, title),
+      React.createElement('div', { className: styles['toast-message'] }, message)
+    ),
+    React.createElement(
+      'button',
+      {
+        className: styles['toast-close'],
+        onClick: onClose,
+        'aria-label': 'Close notification',
+        type: 'button',
+      },
+      React.createElement(X, { size: 18 })
+    )
   );
-};
+});
 
-// Helper hook for managing toast state
 export const useToast = () => {
-  const [toastState, setToastState] = React.useState<{
-    open: boolean;
-    severity: ToastSeverity;
-    title?: string;
-    message: string;
-  }>({
+  const [toastState, setToastState] = React.useState({
     open: false,
     severity: 'info',
     message: '',
   });
 
-  const showToast = (
-    severity: ToastSeverity,
-    message: string,
-    title?: string
-  ) => {
+  const showToast = (severity, message, title) => {
     setToastState({ open: true, severity, message, title });
   };
 
@@ -213,14 +114,10 @@ export const useToast = () => {
     toastState,
     showToast,
     closeToast,
-    showSuccess: (message: string, title?: string) =>
-      showToast('success', message, title),
-    showError: (message: string, title?: string) =>
-      showToast('error', message, title),
-    showWarning: (message: string, title?: string) =>
-      showToast('warning', message, title),
-    showInfo: (message: string, title?: string) =>
-      showToast('info', message, title),
+    showSuccess: (message, title) => showToast('success', message, title),
+    showError: (message, title) => showToast('error', message, title),
+    showWarning: (message, title) => showToast('warning', message, title),
+    showInfo: (message, title) => showToast('info', message, title),
   };
 };
 

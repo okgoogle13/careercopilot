@@ -1,150 +1,113 @@
-import type { DialogProps } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@mui/material';
 import React from 'react';
+import styles from './alert-dialog.module.css';
+import { X } from 'lucide-react';
 
-export interface AlertDialogProps extends DialogProps {
+export interface AlertDialogProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
-export const AlertDialog = React.forwardRef<HTMLDivElement, AlertDialogProps>(
-  ({ open, onOpenChange, children, onClose, ...props }, ref) => {
-    const handleClose = (event: {}, reason: 'backdropClick' | 'escapeKeyDown') => {
-      if (onOpenChange) {
-        onOpenChange(false);
-      }
-      if (onClose) {
-        onClose(event, reason);
-      }
-    };
+const AlertDialogContext = React.createContext({ onClose: () => {} });
 
-    return (
-      <Dialog ref={ref} open={open} onClose={handleClose} {...props}>
-        {children}
-      </Dialog>
-    );
-  }
-);
+export const AlertDialog = React.forwardRef((props, ref) => {
+  const { open, onOpenChange, children } = props;
+  const handleClose = () => onOpenChange?.(false);
+
+  if (!open) return null;
+
+  return React.createElement(
+    'div',
+    {
+      className: styles['alert-dialog-overlay'],
+      onClick: () => handleClose(),
+    },
+    React.createElement(
+      React.Provider,
+      { value: { onClose: handleClose } },
+      React.createElement(
+        'div',
+        {
+          className: styles['alert-dialog-paper'],
+          onClick: (e) => e.stopPropagation(),
+          ref: ref,
+        },
+        React.createElement(AlertDialogContext.Provider, { value: { onClose: handleClose } }, children)
+      )
+    )
+  );
+});
 
 AlertDialog.displayName = 'AlertDialog';
 
-export interface AlertDialogTriggerProps {
-  asChild?: boolean;
-  children?: React.ReactNode;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-export const AlertDialogTrigger = React.forwardRef<HTMLButtonElement, AlertDialogTriggerProps>(
-  ({ children, asChild, ...props }, ref) => {
-    if (asChild && React.isValidElement(children)) {
-      return React.cloneElement(children, { ...props, ref } as any);
-    }
-
-    return (
-      <Button ref={ref as any} {...props}>
-        {children}
-      </Button>
-    );
+export const AlertDialogTrigger = React.forwardRef((props, ref) => {
+  const { children, asChild } = props;
+  if (asChild && React.isValidElement(children)) {
+    return React.cloneElement(children, { ref } as any);
   }
-);
+  return React.createElement('button', { ref: ref, ...props }, children);
+});
 
 AlertDialogTrigger.displayName = 'AlertDialogTrigger';
 
-export type AlertDialogContentProps = React.HTMLAttributes<HTMLDivElement>;
-
-export const AlertDialogContent = React.forwardRef<HTMLDivElement, AlertDialogContentProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <DialogContent ref={ref} {...props}>
-        {children}
-      </DialogContent>
-    );
-  }
-);
+export const AlertDialogContent = React.forwardRef((props, ref) => {
+  return React.createElement(
+    'div',
+    { ...props, ref: ref, className: styles['alert-dialog-content'] }
+  );
+});
 
 AlertDialogContent.displayName = 'AlertDialogContent';
 
-export type AlertDialogHeaderProps = React.HTMLAttributes<HTMLDivElement>;
-
-export const AlertDialogHeader = React.forwardRef<HTMLDivElement, AlertDialogHeaderProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <DialogTitle ref={ref} {...props}>
-        {children}
-      </DialogTitle>
-    );
-  }
-);
+export const AlertDialogHeader = React.forwardRef((props, ref) => {
+  return React.createElement(
+    'div',
+    { ...props, ref: ref, className: styles['alert-dialog-header'] }
+  );
+});
 
 AlertDialogHeader.displayName = 'AlertDialogHeader';
 
-export type AlertDialogTitleProps = React.HTMLAttributes<HTMLHeadingElement>;
-
-export const AlertDialogTitle = React.forwardRef<HTMLHeadingElement, AlertDialogTitleProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <DialogTitle ref={ref as React.Ref<HTMLDivElement>} {...props}>
-        {children}
-      </DialogTitle>
-    );
-  }
-);
+export const AlertDialogTitle = React.forwardRef((props, ref) => {
+  return React.createElement(
+    'h2',
+    { ...props, ref: ref, className: styles['alert-dialog-title'] }
+  );
+});
 
 AlertDialogTitle.displayName = 'AlertDialogTitle';
 
-export type AlertDialogDescriptionProps = React.HTMLAttributes<HTMLParagraphElement>;
-
-export const AlertDialogDescription = React.forwardRef<
-  HTMLParagraphElement,
-  AlertDialogDescriptionProps
->(({ children, ...props }, ref) => {
-  return (
-    <div ref={ref as React.Ref<HTMLDivElement>} {...props}>
-      {children}
-    </div>
+export const AlertDialogDescription = React.forwardRef((props, ref) => {
+  return React.createElement(
+    'p',
+    { ...props, ref: ref, className: styles['alert-dialog-description'] }
   );
 });
 
 AlertDialogDescription.displayName = 'AlertDialogDescription';
 
-export type AlertDialogFooterProps = React.HTMLAttributes<HTMLDivElement>;
-
-export const AlertDialogFooter = React.forwardRef<HTMLDivElement, AlertDialogFooterProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <DialogActions ref={ref} {...props}>
-        {children}
-      </DialogActions>
-    );
-  }
-);
+export const AlertDialogFooter = React.forwardRef((props, ref) => {
+  return React.createElement(
+    'div',
+    { ...props, ref: ref, className: styles['alert-dialog-footer'] }
+  );
+});
 
 AlertDialogFooter.displayName = 'AlertDialogFooter';
 
-export type AlertDialogActionProps = React.ComponentProps<typeof Button>;
-
-export const AlertDialogAction = React.forwardRef<HTMLButtonElement, AlertDialogActionProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <Button ref={ref} {...props}>
-        {children}
-      </Button>
-    );
-  }
-);
+export const AlertDialogAction = React.forwardRef((props, ref) => {
+  return React.createElement(
+    'button',
+    { ...props, ref: ref, className: styles['alert-dialog-action'] }
+  );
+});
 
 AlertDialogAction.displayName = 'AlertDialogAction';
 
-export type AlertDialogCancelProps = React.ComponentProps<typeof Button>;
-
-export const AlertDialogCancel = React.forwardRef<HTMLButtonElement, AlertDialogCancelProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <Button ref={ref} variant="outlined" {...props}>
-        {children}
-      </Button>
-    );
-  }
-);
+export const AlertDialogCancel = React.forwardRef((props, ref) => {
+  return React.createElement(
+    'button',
+    { ...props, ref: ref, className: styles['alert-dialog-cancel'] }
+  );
+});
 
 AlertDialogCancel.displayName = 'AlertDialogCancel';
