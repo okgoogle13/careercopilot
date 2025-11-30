@@ -1,0 +1,67 @@
+/* M3 Expressive Tabs Component - Design Tokens */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tabs-list {
+  display: flex;
+  border-bottom: 1px solid var(--sys-color-outline, #79747e);
+  gap: var(--sys-space-4, 16px);
+}
+
+.tabs-trigger {
+  position: relative;
+  padding: var(--sys-space-3, 12px) var(--sys-space-4, 16px);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--sys-color-on-surface-variant, #49454e);
+  font-size: var(--sys-type-label-medium-size, 12px);
+  font-weight: var(--sys-type-label-medium-weight, 500);
+  transition: color var(--sys-motion-duration-short-2, 100ms) ease-in-out;
+  white-space: nowrap;
+}
+
+.tabs-trigger:hover {
+  color: var(--sys-color-on-surface, #1c1b1f);
+}
+
+.tabs-trigger--active {
+  color: var(--sys-color-primary, #6e44ff);
+  font-weight: 600;
+}
+
+.tabs-trigger--active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--sys-color-primary, #6e44ff);
+  animation: indicatorSlide var(--sys-motion-duration-short-2, 100ms) ease-in-out;
+}
+
+@keyframes indicatorSlide {
+  from {
+    opacity: 0;
+    transform: scaleX(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+.tabs-content {
+  padding: var(--sys-space-4, 16px) 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs-trigger--active::after {
+    animation: none;
+  }
+}
