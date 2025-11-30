@@ -1,0 +1,49 @@
+/* M3 Expressive Popover Component - Design Tokens */
+
+.popover-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events: auto;
+}
+
+.popover-paper {
+  position: fixed;
+  z-index: 1300;
+  pointer-events: auto;
+
+  /* Layout Tokens */
+  padding: var(--sys-space-4, 16px);
+  border-radius: var(--sys-shape-corner-medium, 12px);
+  min-width: 200px;
+  max-width: 400px;
+
+  /* Color Tokens */
+  background-color: var(--sys-color-surface, #fffbfe);
+  color: var(--sys-color-on-surface, #1c1b1f);
+  border: 1px solid var(--sys-color-outline, #79747e);
+
+  /* Elevation */
+  box-shadow: var(--sys-elevation-level-3, 0 8px 16px rgba(0, 0, 0, 0.15));
+
+  /* Animation */
+  animation: popoverSlideIn var(--sys-motion-duration-medium-2, 250ms) var(--sys-motion-easing-emphasized, cubic-bezier(0.2, 0, 0, 1));
+}
+
+@keyframes popoverSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .popover-paper {
+    animation: none;
+  }
+}
