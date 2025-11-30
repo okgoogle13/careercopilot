@@ -1,0 +1,85 @@
+/* M3 Expressive Dialog Component */
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1300;
+  backdrop-filter: blur(4px);
+}
+
+.dialog-paper {
+  background-color: var(--sys-color-surface, #fffbfe);
+  border-radius: var(--sys-shape-corner-large, 28px);
+  box-shadow: var(--sys-elevation-level-4, 0 12px 28px rgba(0, 0, 0, 0.15));
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  min-width: 280px;
+  animation: slideUp 0.3s var(--sys-motion-easing-emphasized-decelerate, cubic-bezier(0.05, 0.7, 0.1, 1));
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dialog-header {
+  padding: var(--sys-space-6, 24px) var(--sys-space-6, 24px) var(--sys-space-4, 16px);
+  border-bottom: 1px solid var(--sys-color-outline-variant, #ccc0d9);
+}
+
+.dialog-title {
+  font-size: var(--sys-type-headline-small-size, 24px);
+  font-weight: var(--sys-type-headline-small-weight, 400);
+  color: var(--sys-color-on-surface, #1c1b1f);
+  margin: 0;
+}
+
+.dialog-content {
+  padding: var(--sys-space-6, 24px);
+  color: var(--sys-color-on-surface, #1c1b1f);
+}
+
+.dialog-footer {
+  padding: var(--sys-space-4, 16px) var(--sys-space-6, 24px);
+  border-top: 1px solid var(--sys-color-outline-variant, #ccc0d9);
+  display: flex;
+  gap: var(--sys-space-3, 12px);
+  justify-content: flex-end;
+}
+
+.dialog-close {
+  position: absolute;
+  top: var(--sys-space-4, 16px);
+  right: var(--sys-space-4, 16px);
+  background: none;
+  border: none;
+  padding: var(--sys-space-2, 8px);
+  cursor: pointer;
+  color: var(--sys-color-on-surface, #1c1b1f);
+  transition: background-color 150ms;
+}
+
+.dialog-close:hover {
+  background-color: var(--sys-color-surface-container-highest, #faf9fc);
+  border-radius: var(--sys-shape-corner-extra-small, 4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-paper {
+    animation: none;
+  }
+}
