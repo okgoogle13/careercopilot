@@ -1,20 +1,20 @@
-import type { DividerProps } from '@mui/material';
-import { Divider } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import styles from './separator.module.css';
 
-const StyledDivider = styled(Divider)(({ theme }) => ({
-  backgroundColor: theme.palette.divider,
-}));
-
-export interface SeparatorProps extends DividerProps {
+export interface SeparatorProps extends React.HTMLAttributes<HTMLHRElement> {
   orientation?: 'horizontal' | 'vertical';
-  className?: string;
 }
 
 export const Separator = React.forwardRef<HTMLHRElement, SeparatorProps>(
   ({ orientation = 'horizontal', className, ...props }, ref) => {
-    return <StyledDivider ref={ref} orientation={orientation} className={className} {...props} />;
+    const orientationClass = orientation === 'vertical' ? styles['separator--vertical'] : styles['separator--horizontal'];
+    return (
+      <hr
+        ref={ref}
+        className={styles.separator + ' ' + orientationClass + (className ? ' ' + className : '')}
+        {...props}
+      />
+    );
   }
 );
 
