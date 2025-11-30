@@ -1,0 +1,65 @@
+/* M3 Expressive Alert Component */
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sys-space-4, 16px);
+  padding: var(--sys-space-4, 16px);
+  border-radius: var(--sys-shape-corner-medium, 12px);
+  border-left: 4px solid;
+
+  /* Typography */
+  font-family: var(--sys-type-body-medium-font, 'Roboto', sans-serif);
+  font-size: var(--sys-type-body-medium-size, 14px);
+  line-height: var(--sys-type-body-medium-line-height, 20px);
+}
+
+.alert-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.alert-title {
+  font-weight: 600;
+  font-size: var(--sys-type-body-medium-size, 14px);
+  line-height: var(--sys-type-body-medium-line-height, 20px);
+}
+
+.alert-message {
+  font-size: var(--sys-type-body-small-size, 12px);
+  line-height: var(--sys-type-body-small-line-height, 16px);
+  opacity: 0.95;
+}
+
+.alert-action {
+  flex-shrink: 0;
+  display: flex;
+  gap: 8px;
+}
+
+/* Severity Variants */
+.alert--success {
+  background-color: rgba(102, 184, 34, 0.12);
+  color: #1b5e20;
+  border-left-color: #66b822;
+}
+
+.alert--error {
+  background-color: rgba(179, 38, 30, 0.12);
+  color: #410e0b;
+  border-left-color: #b3261e;
+}
+
+.alert--warning {
+  background-color: rgba(255, 179, 0, 0.12);
+  color: #331b00;
+  border-left-color: #ffb300;
+}
+
+.alert--info {
+  background-color: rgba(110, 68, 255, 0.12);
+  color: #21005d;
+  border-left-color: #6e44ff;
+}
