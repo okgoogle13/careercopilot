@@ -1,15 +1,15 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from '@jest/globals';
+import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 
 import { ImportWizard } from '../ImportWizard';
 
 describe('ImportWizard', () => {
-  const mockOnClose = vi.fn();
-  const mockOnImportComplete = vi.fn();
+  const mockOnClose = jest.fn();
+  const mockOnImportComplete = jest.fn();
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('Component Rendering', () => {

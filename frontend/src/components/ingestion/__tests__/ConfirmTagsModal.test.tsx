@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from '@jest/globals';
 
-import { ConfirmTagsModal } from '../ConfirmTagsModal';
+import { ConfirmTagsModal } from '../../ConfirmTagsModal';
 
 describe('ConfirmTagsModal', () => {
   const mockOnClose = vi.fn();

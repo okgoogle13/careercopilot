@@ -21,34 +21,7 @@ import {
   Warning,
   Work,
 } from '@mui/icons-material';
-import type { LinearProgressProps } from '@mui/material';
-import {
-  Alert,
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Chip,
-  CircularProgress,
-  Container,
-  IconButton,
-  LinearProgress,
-  Menu,
-  MenuItem,
-  Paper,
-  Stack,
-  Tab,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Tabs,
-  Typography,
-} from '@mui/material';
 import React, { useState } from 'react';
-
 import Grid from '@/components/ui/GridCompat';
 
 interface AnalysisReport {
@@ -77,15 +50,15 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <Box
+    <div
       role="tabpanel"
       hidden={value !== index}
       id={`analysis-tabpanel-${index}`}
       aria-labelledby={`analysis-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ py: 3 }}>{children}</Box>}
-    </Box>
+      {value === index && <div className="py-3">{children}</div>}
+    </div>
   );
 }
 
@@ -184,20 +157,20 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
     },
   ];
 
-  const getScoreColor = (score: number): LinearProgressProps['color'] => {
-    if (score >= 90) return 'success';
-    if (score >= 75) return 'warning';
-    return 'error';
+  const getScoreColor = (score: number) => {
+    if (score >= 90) return 'bg-green-500';
+    if (score >= 75) return 'bg-yellow-500';
+    return 'bg-red-500';
   };
 
   const getStatusIcon = (reportStatus: AnalysisReport['status']) => {
     switch (reportStatus) {
       case 'completed':
-        return <CheckCircle color="success" />;
+        return <CheckCircle className="text-green-500" />;
       case 'pending':
-        return <Warning color="warning" />;
+        return <Warning className="text-yellow-500" />;
       case 'failed':
-        return <Error color="error" />;
+        return <Error className="text-red-500" />;
       default:
         return <Info />;
     }
@@ -206,11 +179,11 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
   const getTypeIcon = (reportType: AnalysisReport['type']) => {
     switch (reportType) {
       case 'resume':
-        return <Description color="primary" />;
+        return <Description className="text-primary-500" />;
       case 'cover-letter':
-        return <Work color="secondary" />;
+        return <Work className="text-secondary-500" />;
       case 'ksc':
-        return <School color="info" />;
+        return <School className="text-info-500" />;
       default:
         return <Description />;
     }
@@ -218,458 +191,331 @@ export function AnalysisPage({ isEmpty = false, onRunAnalysis, onViewReport }: A
 
   if (isEmpty) {
     return (
-      <Container maxWidth="lg" sx={{ py: 4 }}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            minHeight: '60vh',
-            textAlign: 'center',
-          }}
-        >
-          <Paper
-            elevation={0}
-            sx={{
-              p: 6,
-              borderRadius: 4,
-              bgcolor: 'background.paper',
-              border: 1,
-              borderColor: 'divider',
-              maxWidth: 500,
-            }}
-          >
-            <Box sx={{ mb: 4 }}>
-              <Analytics
-                sx={{
-                  fontSize: 80,
-                  color: 'primary.main',
-                  mb: 2,
-                }}
-              />
-              <Typography variant="h4" gutterBottom fontWeight={600}>
-                No Analysis Available
-              </Typography>
-              <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+      <div className="container mx-auto max-w-lg py-4">
+        <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+          <div className="p-6 rounded-lg bg-white border border-gray-200 max-w-md">
+            <div className="mb-4">
+              <Analytics className="w-20 h-20 text-primary-500 mb-2" />
+              <h1 className="text-2xl font-semibold mb-2">No Analysis Available</h1>
+              <p className="text-gray-600 mb-4">
                 Upload documents and run ATS analysis to get detailed insights and recommendations
                 for your job applications.
-              </Typography>
-            </Box>
+              </p>
+            </div>
 
-            <Button
-              variant="contained"
-              size="large"
-              startIcon={<Assessment />}
+            <button
+              className="px-4 py-2 text-lg font-semibold rounded-full bg-primary-500 text-white flex items-center gap-2"
               onClick={onRunAnalysis}
-              sx={{
-                borderRadius: 20,
-                px: 4,
-                py: 1.5,
-                fontSize: '1.1rem',
-                fontWeight: 600,
-              }}
             >
+              <Assessment />
               Run First Analysis
-            </Button>
+            </button>
 
-            <Box sx={{ mt: 4, pt: 4, borderTop: 1, borderColor: 'divider' }}>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
-                What gets analyzed:
-              </Typography>
-              <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap">
-                <Chip label="ATS Score" size="small" />
-                <Chip label="Keyword Match" size="small" />
-                <Chip label="Skills Gap" size="small" />
-                <Chip label="Recommendations" size="small" />
-              </Stack>
-            </Box>
-          </Paper>
-        </Box>
-      </Container>
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="text-sm text-gray-600 mb-2">What gets analyzed:</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                <div className="px-2 py-1 text-xs rounded-full bg-gray-100">ATS Score</div>
+                <div className="px-2 py-1 text-xs rounded-full bg-gray-100">Keyword Match</div>
+                <div className="px-2 py-1 text-xs rounded-full bg-gray-100">Skills Gap</div>
+                <div className="px-2 py-1 text-xs rounded-full bg-gray-100">Recommendations</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
+    <div className="container mx-auto max-w-7xl py-4">
       {/* Header */}
-      <Box sx={{ mb: 4 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-          <Typography variant="h4" fontWeight={600}>
-            Document Analysis
-          </Typography>
-          <Button
-            variant="contained"
-            startIcon={
-              loading ? <CircularProgress sx={{ fontSize: 20 }} color="inherit" /> : <Assessment />
-            }
+      <div className="mb-4">
+        <div className="flex justify-between items-center mb-2">
+          <h1 className="text-3xl font-semibold">Document Analysis</h1>
+          <button
+            className="px-4 py-2 rounded-full bg-primary-500 text-white flex items-center gap-2"
             onClick={handleRunAnalysis}
             disabled={loading}
-            sx={{ borderRadius: 20 }}
           >
+            {loading ? (
+              <div className="w-5 h-5 border-2 border-t-transparent border-white rounded-full animate-spin" />
+            ) : (
+              <Assessment />
+            )}
             {loading ? 'Analyzing...' : 'Run New Analysis'}
-          </Button>
-        </Box>
-        <Typography variant="body1" color="text.secondary">
+          </button>
+        </div>
+        <p className="text-gray-600">
           Comprehensive ATS scoring and optimization recommendations for your documents
-        </Typography>
-      </Box>
+        </p>
+      </div>
 
       {/* Analysis Summary Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        <Grid xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Speed color="primary" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  85%
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Average ATS Score
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <TrendingUp color="success" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  +12%
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Score Improvement
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Timeline color="warning" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  15
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Documents Analyzed
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-
-        <Grid xs={12} sm={6} md={3}>
-          <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-            <CardContent>
-              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <CheckCircle color="info" sx={{ mr: 1 }} />
-                <Typography variant="h6" fontWeight={600}>
-                  8
-                </Typography>
-              </Box>
-              <Typography variant="body2" color="text.secondary">
-                Optimized Documents
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+        <div className="border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center mb-2">
+            <Speed className="text-primary-500 mr-1" />
+            <h3 className="text-lg font-semibold">85%</h3>
+          </div>
+          <p className="text-sm text-gray-600">Average ATS Score</p>
+        </div>
+        <div className="border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center mb-2">
+            <TrendingUp className="text-green-500 mr-1" />
+            <h3 className="text-lg font-semibold">+12%</h3>
+          </div>
+          <p className="text-sm text-gray-600">Score Improvement</p>
+        </div>
+        <div className="border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center mb-2">
+            <Timeline className="text-yellow-500 mr-1" />
+            <h3 className="text-lg font-semibold">15</h3>
+          </div>
+          <p className="text-sm text-gray-600">Documents Analyzed</p>
+        </div>
+        <div className="border border-gray-200 rounded-lg p-4">
+          <div className="flex items-center mb-2">
+            <CheckCircle className="text-blue-500 mr-1" />
+            <h3 className="text-lg font-semibold">8</h3>
+          </div>
+          <p className="text-sm text-gray-600">Optimized Documents</p>
+        </div>
+      </div>
 
       {/* Analysis Tabs */}
-      <Paper elevation={0} sx={{ border: 1, borderColor: 'divider', borderRadius: 2 }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs
-            value={tabValue}
-            onChange={handleTabChange}
-            aria-label="analysis tabs"
-            sx={{ px: 3 }}
-          >
-            <Tab
-              label="Recent Analysis"
-              icon={<Timeline />}
-              iconPosition="start"
-              sx={{ textTransform: 'none', fontWeight: 500 }}
-            />
-            <Tab
-              label="Performance Trends"
-              icon={<ShowChart />}
-              iconPosition="start"
-              sx={{ textTransform: 'none', fontWeight: 500 }}
-            />
-            <Tab
-              label="Insights"
-              icon={<DonutLarge />}
-              iconPosition="start"
-              sx={{ textTransform: 'none', fontWeight: 500 }}
-            />
-          </Tabs>
-        </Box>
+      <div className="border border-gray-200 rounded-lg">
+        <div className="border-b border-gray-200">
+          <div className="flex px-3">
+            <button
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium ${
+                tabValue === 0 ? 'border-b-2 border-primary-500' : ''
+              }`}
+              onClick={() => setTabValue(0)}
+            >
+              <Timeline />
+              Recent Analysis
+            </button>
+            <button
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium ${
+                tabValue === 1 ? 'border-b-2 border-primary-500' : ''
+              }`}
+              onClick={() => setTabValue(1)}
+            >
+              <ShowChart />
+              Performance Trends
+            </button>
+            <button
+              className={`flex items-center gap-2 px-4 py-2 text-sm font-medium ${
+                tabValue === 2 ? 'border-b-2 border-primary-500' : ''
+              }`}
+              onClick={() => setTabValue(2)}
+            >
+              <DonutLarge />
+              Insights
+            </button>
+          </div>
+        </div>
 
         {/* Recent Analysis Tab */}
         <TabPanel value={tabValue} index={0}>
-          <Box sx={{ px: 3 }}>
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Document</TableCell>
-                    <TableCell>Type</TableCell>
-                    <TableCell>ATS Score</TableCell>
-                    <TableCell>Analysis Date</TableCell>
-                    <TableCell>Status</TableCell>
-                    <TableCell>Actions</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
+          <div className="px-3">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="text-left text-sm font-semibold text-gray-600">
+                    <th className="p-2">Document</th>
+                    <th className="p-2">Type</th>
+                    <th className="p-2">ATS Score</th>
+                    <th className="p-2">Analysis Date</th>
+                    <th className="p-2">Status</th>
+                    <th className="p-2">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
                   {analysisReports.map((report) => (
-                    <TableRow key={report.id} hover>
-                      <TableCell>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <tr key={report.id} className="hover:bg-gray-50">
+                      <td className="p-2">
+                        <div className="flex items-center">
                           {getTypeIcon(report.type)}
-                          <Box sx={{ ml: 2 }}>
-                            <Typography variant="subtitle2" fontWeight={600}>
-                              {report.documentName}
-                            </Typography>
-                            <Typography variant="caption" color="text.secondary">
+                          <div className="ml-2">
+                            <p className="font-semibold">{report.documentName}</p>
+                            <p className="text-xs text-gray-500">
                               {report.insights.keywords} keywords • {report.insights.skills} skills
-                            </Typography>
-                          </Box>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          label={report.type.replace('-', ' ')}
-                          size="small"
-                          sx={{ textTransform: 'capitalize' }}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <Box sx={{ display: 'flex', alignItems: 'center', minWidth: 100 }}>
-                          <Box sx={{ width: '100%', mr: 1 }}>
-                            <LinearProgress
-                              variant="determinate"
-                              value={report.atsScore}
-                              color={getScoreColor(report.atsScore)}
-                              sx={{ height: 6, borderRadius: 3 }}
-                            />
-                          </Box>
-                          <Typography variant="body2" fontWeight={600} sx={{ minWidth: 40 }}>
+                            </p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="p-2">
+                        <div className="px-2 py-1 text-xs rounded-full bg-gray-100 capitalize">
+                          {report.type.replace('-', ' ')}
+                        </div>
+                      </td>
+                      <td className="p-2">
+                        <div className="flex items-center min-w-[100px]">
+                          <div className="w-full mr-1">
+                            <div className="h-1.5 rounded-full bg-gray-200">
+                              <div
+                                className={`h-1.5 rounded-full ${getScoreColor(report.atsScore)}`}
+                                style={{ width: `${report.atsScore}%` }}
+                              />
+                            </div>
+                          </div>
+                          <p className="text-sm font-semibold min-w-[40px]">
                             {report.atsScore}%
-                          </Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2" color="text.secondary">
-                          {report.analysisDate}
-                        </Typography>
-                      </TableCell>
-                      <TableCell>
-                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                          </p>
+                        </div>
+                      </td>
+                      <td className="p-2">
+                        <p className="text-sm text-gray-600">{report.analysisDate}</p>
+                      </td>
+                      <td className="p-2">
+                        <div className="flex items-center">
                           {getStatusIcon(report.status)}
-                          <Typography
-                            variant="body2"
-                            sx={{
-                              ml: 1,
-                              textTransform: 'capitalize',
-                              color:
-                                report.status === 'completed'
-                                  ? 'success.main'
-                                  : report.status === 'pending'
-                                    ? 'warning.main'
-                                    : 'error.main',
-                            }}
+                          <p
+                            className={`ml-1 text-sm capitalize ${
+                              report.status === 'completed'
+                                ? 'text-green-500'
+                                : report.status === 'pending'
+                                ? 'text-yellow-500'
+                                : 'text-red-500'
+                            }`}
                           >
                             {report.status}
-                          </Typography>
-                        </Box>
-                      </TableCell>
-                      <TableCell>
-                        <IconButton size="small" onClick={(e) => handleMenuOpen(e, report)}>
+                          </p>
+                        </div>
+                      </td>
+                      <td className="p-2">
+                        <button
+                          className="p-1 rounded-full hover:bg-gray-100"
+                          onClick={(e) => handleMenuOpen(e, report)}
+                        >
                           <MoreVert />
-                        </IconButton>
-                      </TableCell>
-                    </TableRow>
+                        </button>
+                      </td>
+                    </tr>
                   ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </TabPanel>
 
         {/* Performance Trends Tab */}
         <TabPanel value={tabValue} index={1}>
-          <Box sx={{ px: 3 }}>
-            <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 6 }}>
-                <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-                  <CardContent>
-                    <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                      Score Trends
-                    </Typography>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: 200,
-                      }}
-                    >
-                      <BarChart sx={{ fontSize: 60, color: 'primary.main' }} />
-                    </Box>
-                    <Typography variant="body2" color="text.secondary" textAlign="center">
-                      Average score improved by 12% over last month
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-
-              <Grid size={{ xs: 12, md: 6 }}>
-                <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-                  <CardContent>
-                    <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                      Document Types
-                    </Typography>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: 200,
-                      }}
-                    >
-                      <PieChart sx={{ fontSize: 60, color: 'secondary.main' }} />
-                    </Box>
-                    <Typography variant="body2" color="text.secondary" textAlign="center">
-                      Resume: 60% • Cover Letters: 30% • KSC: 10%
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-          </Box>
+          <div className="px-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="border border-gray-200 rounded-lg p-4">
+                <h3 className="text-lg font-semibold mb-2">Score Trends</h3>
+                <div className="flex items-center justify-center h-48">
+                  <BarChart className="w-16 h-16 text-primary-500" />
+                </div>
+                <p className="text-sm text-gray-600 text-center">
+                  Average score improved by 12% over last month
+                </p>
+              </div>
+              <div className="border border-gray-200 rounded-lg p-4">
+                <h3 className="text-lg font-semibold mb-2">Document Types</h3>
+                <div className="flex items-center justify-center h-48">
+                  <PieChart className="w-16 h-16 text-secondary-500" />
+                </div>
+                <p className="text-sm text-gray-600 text-center">
+                  Resume: 60% • Cover Letters: 30% • KSC: 10%
+                </p>
+              </div>
+            </div>
+          </div>
         </TabPanel>
 
         {/* Insights Tab */}
         <TabPanel value={tabValue} index={2}>
-          <Box sx={{ px: 3 }}>
-            <Grid container spacing={3}>
-              <Grid size={{ xs: 12, md: 8 }}>
-                <Stack spacing={2}>
-                  <Alert severity="success" sx={{ borderRadius: 2 }}>
-                    <Typography variant="subtitle2" fontWeight={600}>
-                      Strong Performance Areas
-                    </Typography>
-                    <Typography variant="body2">
-                      Your documents excel in keyword optimization and technical skills
-                      presentation.
-                    </Typography>
-                  </Alert>
-
-                  <Alert severity="warning" sx={{ borderRadius: 2 }}>
-                    <Typography variant="subtitle2" fontWeight={600}>
-                      Areas for Improvement
-                    </Typography>
-                    <Typography variant="body2">
-                      Consider adding more quantifiable achievements and industry-specific
-                      certifications.
-                    </Typography>
-                  </Alert>
-
-                  <Alert severity="info" sx={{ borderRadius: 2 }}>
-                    <Typography variant="subtitle2" fontWeight={600}>
-                      Trending Keywords
-                    </Typography>
-                    <Typography variant="body2">
-                      Current high-value keywords: "cloud computing", "agile methodology", "data
-                      analysis"
-                    </Typography>
-                  </Alert>
-                </Stack>
-              </Grid>
-
-              <Grid size={{ xs: 12, md: 4 }}>
-                <Card elevation={0} sx={{ border: 1, borderColor: 'divider' }}>
-                  <CardContent>
-                    <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                      Quick Actions
-                    </Typography>
-                    <Stack spacing={2}>
-                      <Button
-                        fullWidth
-                        variant="outlined"
-                        startIcon={<Refresh />}
-                        sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
-                      >
-                        Re-analyze All
-                      </Button>
-                      <Button
-                        fullWidth
-                        variant="outlined"
-                        startIcon={<Download />}
-                        sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
-                      >
-                        Export Report
-                      </Button>
-                      <Button
-                        fullWidth
-                        variant="outlined"
-                        startIcon={<Share />}
-                        sx={{ borderRadius: 20, justifyContent: 'flex-start' }}
-                      >
-                        Share Insights
-                      </Button>
-                    </Stack>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-          </Box>
+          <div className="px-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div className="md:col-span-2 space-y-2">
+                <div className="p-4 rounded-lg bg-green-50 border border-green-200">
+                  <h4 className="font-semibold">Strong Performance Areas</h4>
+                  <p className="text-sm">
+                    Your documents excel in keyword optimization and technical skills presentation.
+                  </p>
+                </div>
+                <div className="p-4 rounded-lg bg-yellow-50 border border-yellow-200">
+                  <h4 className="font-semibold">Areas for Improvement</h4>
+                  <p className="text-sm">
+                    Consider adding more quantifiable achievements and industry-specific
+                    certifications.
+                  </p>
+                </div>
+                <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                  <h4 className="font-semibold">Trending Keywords</h4>
+                  <p className="text-sm">
+                    Current high-value keywords: "cloud computing", "agile methodology", "data
+                    analysis"
+                  </p>
+                </div>
+              </div>
+              <div className="border border-gray-200 rounded-lg p-4">
+                <h3 className="text-lg font-semibold mb-2">Quick Actions</h3>
+                <div className="space-y-2">
+                  <button className="w-full px-4 py-2 text-sm rounded-full border hover:bg-gray-100 flex items-center gap-2">
+                    <Refresh />
+                    Re-analyze All
+                  </button>
+                  <button className="w-full px-4 py-2 text-sm rounded-full border hover:bg-gray-100 flex items-center gap-2">
+                    <Download />
+                    Export Report
+                  </button>
+                  <button className="w-full px-4 py-2 text-sm rounded-full border hover:bg-gray-100 flex items-center gap-2">
+                    <Share />
+                    Share Insights
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </TabPanel>
-      </Paper>
+      </div>
 
       {/* Report Menu */}
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleMenuClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-      >
-        <MenuItem
-          onClick={() => {
-            handleMenuClose();
-            onViewReport?.(selectedReport!);
+      {anchorEl && (
+        <div
+          className="absolute bg-white rounded-md shadow-lg border"
+          style={{
+            top: anchorEl.getBoundingClientRect().bottom,
+            right: 0,
           }}
         >
-          <Visibility sx={{ mr: 1.5 }} />
-          View Report
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Refresh sx={{ mr: 1.5 }} />
-          Re-analyze
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Download sx={{ mr: 1.5 }} />
-          Download
-        </MenuItem>
-        <MenuItem onClick={handleMenuClose}>
-          <Share sx={{ mr: 1.5 }} />
-          Share
-        </MenuItem>
-      </Menu>
-    </Container>
+          <button
+            className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+            onClick={() => {
+              handleMenuClose();
+              onViewReport?.(selectedReport!);
+            }}
+          >
+            <Visibility />
+            View Report
+          </button>
+          <button
+            className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+            onClick={handleMenuClose}
+          >
+            <Refresh />
+            Re-analyze
+          </button>
+          <button
+            className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+            onClick={handleMenuClose}
+          >
+            <Download />
+            Download
+          </button>
+          <button
+            className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
+            onClick={handleMenuClose}
+          >
+            <Share />
+            Share
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
