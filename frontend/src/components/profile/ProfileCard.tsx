@@ -1,17 +1,12 @@
 import { Edit, Delete as Trash2 } from '@mui/icons-material';
-import { Box } from '@mui/material';
 import {
   Button,
-  IconButton,
   Card,
-  CardContent,
-  CardHeader,
-  CardActions,
   Typography,
   Box,
 } from '@mui/material';
 
-import { Avatar, AvatarFallback } from '../../ui/avatar';
+import { Avatar, AvatarFallback } from '../ui/avatar';
 
 interface ProfileCardProps {
   name: string;
@@ -37,20 +32,31 @@ export function ProfileCard({
   isSelected = false,
 }: ProfileCardProps) {
   return (
-    <Card variant={isSelected ? 'selected' : 'interactive'} sx={{
-      p: 6,}}>
-      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-        <Avatar sx={{}}>
+    <Card
+      variant="outlined"
+      sx={{
+        p: 'var(--sys-space-6)',
+        borderRadius: 'var(--sys-shape-corner-medium)',
+        boxShadow: 'var(--sys-elevation-level1)',
+        backgroundColor: isSelected ? 'var(--sys-color-primary-container)' : 'var(--sys-color-surface)',
+        border: isSelected ? '1px solid var(--sys-color-primary)' : '1px solid var(--sys-color-outline-variant)',
+        transition: 'box-shadow var(--sys-motion-duration-short2) var(--sys-motion-easing-standard)',
+        '&:hover': {
+          boxShadow: 'var(--sys-elevation-level2)',
+        },
+      }}
+    >
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 'var(--sys-space-3)' }}>
+        <Avatar>
           <AvatarFallback
-            sx={{
-      color: "common.black",
-      fontWeight: 500
-    }}
-            style={{ backgroundColor: avatarColor }}
+            style={{
+              backgroundColor: avatarColor,
+              color: 'var(--sys-color-on-primary-container)',
+              fontFamily: 'var(--sys-type-font-family-brand)',
+              fontWeight: 'var(--sys-type-weight-medium)',
+              fontSize: 'var(--sys-type-size-title-medium)',
+              lineHeight: 'var(--sys-type-line-height-title-medium)',
+            }}
           >
             {name
               .split(' ')
@@ -58,77 +64,83 @@ export function ProfileCard({
               .join('')}
           </AvatarFallback>
         </Avatar>
-        <div>
-          <h3 sx={{
-      fontWeight: 500,}}>{name}</h3>
-          <p sx={{
-      typography: "body1",}}>{role}</p>
-        </div>
-      </div>
+        <Box>
+          <Typography
+            variant="h3"
+            sx={{
+              fontFamily: 'var(--sys-type-font-family-brand)',
+              fontWeight: 'var(--sys-type-weight-medium)',
+              fontSize: 'var(--sys-type-size-title-large)',
+              lineHeight: 'var(--sys-type-line-height-title-large)',
+              color: 'var(--sys-color-on-surface)',
+            }}
+          >
+            {name}
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              fontFamily: 'var(--sys-type-font-family-plain)',
+              fontWeight: 'var(--sys-type-weight-regular)',
+              fontSize: 'var(--sys-type-size-body-medium)',
+              lineHeight: 'var(--sys-type-line-height-body-medium)',
+              color: 'var(--sys-color-on-surface-variant)',
+            }}
+          >
+            {role}
+          </Typography>
+        </Box>
+      </Box>
 
-      <div sx={{}}>
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-    }}>
-          <span sx={{
-      typography: "body1",}}>Active Applications:</span>
-          <span sx={{
-      fontWeight: 500,}}>{activeApplications}</span>
-        </div>
+      <Box sx={{ mt: 'var(--sys-space-4)' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 'var(--sys-space-2)' }}>
+          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>Active Applications:</Typography>
+          <Typography variant="body1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>{activeApplications}</Typography>
+        </Box>
 
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-    }}>
-          <span sx={{
-      typography: "body1",}}>ATS Score Average:</span>
-          <span sx={{
-      fontWeight: 500,}}>{atsScore}%</span>
-        </div>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 'var(--sys-space-2)' }}>
+          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>ATS Score Average:</Typography>
+          <Typography variant="body1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>{atsScore}%</Typography>
+        </Box>
 
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-    }}>
-          <span sx={{
-      typography: "body1",}}>Last Updated:</span>
-          <span sx={{
-      typography: "body1",}}>{lastUpdated}</span>
-        </div>
-      </div>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>Last Updated:</Typography>
+          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>{lastUpdated}</Typography>
+        </Box>
+      </Box>
 
-      <div sx={{
-      display: "flex",
-      gap: 2,
-      pt: 2
-    }}>
+      <Box sx={{ display: 'flex', gap: 'var(--sys-space-2)', pt: 'var(--sys-space-4)' }}>
         <Button
           variant="text"
           size="small"
-          sx={{
-      flex: 1,
-      '&:hover': {}
-    }}
           onClick={onEdit}
+          sx={{
+            flex: 1,
+            color: 'var(--sys-color-primary)',
+            '& .MuiButton-startIcon': {
+              width: 'var(--sys-icon-size-medium)',
+              height: 'var(--sys-icon-size-medium)',
+            },
+          }}
+          startIcon={<Edit />}
         >
-          <Edit sx={{}} />
         </Button>
         <Button
           variant="text"
           size="small"
-          sx={{
-      flex: 1,
-      '&:hover': {}
-    }}
           onClick={onDelete}
+          sx={{
+            flex: 1,
+            color: 'var(--sys-color-error)',
+            '& .MuiButton-startIcon': {
+              width: 'var(--sys-icon-size-medium)',
+              height: 'var(--sys-icon-size-medium)',
+            },
+          }}
+          startIcon={<Trash2 />}
         >
-          <Trash2 sx={{}} />
         </Button>
-      </div>
+      </Box>
     </Card>
   );
 }

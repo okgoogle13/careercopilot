@@ -1,5 +1,4 @@
 import { Close, ArrowLeft } from '@mui/icons-material';
-import { Box } from '@mui/material';
 import {
   Box,
   Button,
@@ -12,8 +11,8 @@ import {
 } from '@mui/material';
 import React, { useState } from 'react';
 
-// import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 import { TimelineView } from './TimelineView';
+// import { KanbanBoard } from '../features/opportunities/KanbanBoard';
 
 interface Application {
   id: string;
@@ -30,10 +29,15 @@ interface Application {
   progress: number;
   companyLogo?: string;
 }
-
 interface TimelineEvent {
   id: string;
-  type: 'application' | 'interview' | 'response' | 'follow_up' | 'offer' | 'rejection';
+  type:
+    | 'application'
+    | 'interview'
+    | 'response'
+    | 'follow_up'
+    | 'offer'
+    | 'rejection';
   title: string;
   description: string;
   date: string;
@@ -46,13 +50,10 @@ interface TimelineEvent {
     nextSteps?: string;
   };
 }
-
 interface ApplicationTrackerProps {
   applications?: Application[];
   onApplicationUpdate?: (application: Application) => void;
 }
-
-// Sample timeline events for demonstration
 const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
   '1': [
     {
@@ -68,14 +69,6 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       },
     },
     {
-      id: 'ev2',
-      type: 'response',
-      title: 'Application Acknowledged',
-      description: 'Received automated confirmation email',
-      date: '2024-01-15 09:15 AM',
-      status: 'completed',
-    },
-    {
       id: 'ev3',
       type: 'interview',
       title: 'Phone Screening Scheduled',
@@ -89,68 +82,33 @@ const sampleTimelineEvents: Record<string, TimelineEvent[]> = {
       },
     },
   ],
-  '2': [
-    {
-      id: 'ev4',
-      type: 'application',
-      title: 'Application Submitted',
-      description: 'Applied for Frontend Developer position',
-      date: '2024-01-08 10:30 AM',
-      status: 'completed',
-      metadata: {
-        documents: ['Resume.pdf', 'Portfolio Link'],
-        notes: 'Referred by current employee John Smith',
-      },
-    },
-    {
-      id: 'ev5',
-      type: 'interview',
-      title: 'Phone Screening',
-      description: 'Initial phone screening with HR',
-      date: '2024-01-10 03:00 PM',
-      status: 'completed',
-      metadata: {
-        interviewer: 'Mike Chen (HR)',
-        interviewType: 'Phone Screen',
-        notes: 'Went well, discussed role requirements and team structure',
-      },
-    },
-    {
-      id: 'ev6',
-      type: 'interview',
-      title: 'Technical Interview',
-      description: 'Technical interview with senior engineers',
-      date: '2024-01-19 10:00 AM',
-      status: 'upcoming',
-      metadata: {
-        interviewer: 'Alex Rodriguez, Jennifer Wang (Engineering)',
-        interviewType: 'Technical Interview',
-        nextSteps: 'Review React concepts and prepare coding exercises',
-      },
-    },
-  ],
 };
-
-export function ApplicationTracker({ applications, onApplicationUpdate }: ApplicationTrackerProps) {
-  const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null);
+export function ApplicationTracker({
+  applications,
+  onApplicationUpdate,
+}: ApplicationTrackerProps) {
+  const [selectedApplicationId, setSelectedApplicationId] = useState<
+    string | null
+  >(null);
   const [showTimeline, setShowTimeline] = useState(false);
-
-  const selectedApplication = applications?.find((app) => app.id === selectedApplicationId);
+  const selectedApplication = applications?.find(
+    (app) => app.id === selectedApplicationId
+  );
   const timelineEvents = selectedApplicationId
     ? sampleTimelineEvents[selectedApplicationId] || []
     : [];
-
   const handleApplicationClick = (_applicationId: string) => {
     setSelectedApplicationId(_applicationId);
     setShowTimeline(true);
   };
-
   const handleCloseTimeline = () => {
     setShowTimeline(false);
     setSelectedApplicationId(null);
   };
-
-  const handleApplicationMove = (_applicationId: string, newStatus: Application['status']) => {
+  const handleApplicationMove = (
+    _applicationId: string,
+    newStatus: Application['status']
+  ) => {
     if (applications && onApplicationUpdate) {
       const application = applications.find((app) => app.id === _applicationId);
       if (application) {
@@ -159,79 +117,78 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
       }
     }
   };
-
   const handleAddApplication = () => {
-    // This would typically open a form to add a new application
     console.log('Add new application');
   };
-
   const handleEventEdit = (eventId: string) => {
     console.log('Edit event:', eventId);
   };
-
   const handleAddNote = (eventId: string) => {
     console.log('Add note to event:', eventId);
   };
-
   const handleViewDocument = (documentName: string) => {
     console.log('View document:', documentName);
   };
 
   return (
-    <Box sx={{
-      width: "100%"
-    }}>
-      {/* Kanban Board View (WIP) */}
+    <Box sx={{ width: '100%' }}>
       {/* <KanbanBoard
         applications={applications}
         onApplicationMove={handleApplicationMove}
         onApplicationClick={handleApplicationClick}
         onAddApplication={handleAddApplication}
       /> */}
-
-      {/* Timeline View Dialog */}
       <Dialog
         open={showTimeline}
         onClose={handleCloseTimeline}
         maxWidth="lg"
         fullWidth
         PaperProps={{
-          className: 'max-h-screen',
+          sx: {
+            maxHeight: 'calc(100vh - 64px)',
+            backgroundColor: 'var(--sys-color-surface-container-low)',
+          },
         }}
       >
         <DialogTitle>
-          <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-            <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--sys-spacing-2)',
+              }}
+            >
               <IconButton
                 onClick={handleCloseTimeline}
                 size="small"
                 aria-label="Back to kanban view"
               >
-                <ArrowLeft sx={{ fontSize: 20 }} />
+                <ArrowLeft />
               </IconButton>
-              <Typography variant="h6">Application Timeline</Typography>
+              <Typography sx={{ font: 'var(--sys-type-headline-small)' }}>
+                Application Timeline
+              </Typography>
             </Box>
-            <IconButton onClick={handleCloseTimeline} size="small" aria-label="Close dialog">
-              <Close sx={{ fontSize: 20 }} />
+            <IconButton
+              onClick={handleCloseTimeline}
+              size="small"
+              aria-label="Close dialog"
+            >
+              <Close />
             </IconButton>
           </Box>
         </DialogTitle>
 
-        <DialogContent sx={{
-      p: 0
-    }}>
+        <DialogContent sx={{ p: 0 }}>
           {selectedApplication && (
-            <Box sx={{
-      p: 6
-    }}>
+            <Box sx={{ p: 'var(--sys-spacing-6)' }}>
               <TimelineView
                 applicationId={selectedApplication.id}
                 companyName={selectedApplication.company}
@@ -245,11 +202,23 @@ export function ApplicationTracker({ applications, onApplicationUpdate }: Applic
           )}
         </DialogContent>
 
-        <DialogActions>
-          <Button onClick={handleCloseTimeline}>Close</Button>
-          <Button variant="contained" sx={{
-      '&:hover': {}
-    }}>
+        <DialogActions sx={{ p: 'var(--sys-spacing-3)' }}>
+          <Button
+            onClick={handleCloseTimeline}
+            sx={{ color: 'var(--sys-color-primary)' }}
+          >
+            Close
+          </Button>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: 'var(--sys-color-primary)',
+              color: 'var(--sys-color-on-primary)',
+              '&:hover': {
+                backgroundColor: 'var(--sys-color-primary-dark)',
+              },
+            }}
+          >
             Add Event
           </Button>
         </DialogActions>

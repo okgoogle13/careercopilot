@@ -26,7 +26,6 @@ import {
   Layout,
   ChevronLeft,
 } from 'lucide-react';
-import angryUnicornLogo from 'figma:asset/2b518e3d45dd3339dc49139b4dae057dfc868e92.png';
 
 type TabValue = 'dashboard' | 'documents' | 'opportunities' | 'applications' | 'analysis';
 
@@ -83,14 +82,13 @@ export const AppShell: React.FC<AppShellProps> = ({
       >
         <Box
           component="img"
-          src={angryUnicornLogo}
           alt="Angry Unicorn"
           sx={{
             width: 48,
             height: 48,
             objectFit: 'contain',
           }}
-        />
+        /> */}
         <Box>
           <Typography
             variant="h6"
@@ -224,14 +222,13 @@ export const AppShell: React.FC<AppShellProps> = ({
           >
             <Box
               component="img"
-              src={angryUnicornLogo}
               alt="Angry Unicorn"
               sx={{
                 width: 32,
                 height: 32,
                 objectFit: 'contain',
               }}
-            />
+            /> */}
             <Typography
               variant="h6"
               sx={{

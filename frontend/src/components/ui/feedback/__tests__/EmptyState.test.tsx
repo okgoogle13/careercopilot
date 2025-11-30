@@ -6,7 +6,7 @@ import {
   NoResultsFound,
   ErrorState,
   EmptyStateProps,
-} from '../EmptyState';
+} from '../../EmptyState/EmptyState';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import InfoIcon from '@mui/icons-material/Info';
