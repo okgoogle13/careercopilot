@@ -1,0 +1,16 @@
+/* M3 Expressive Divider */
+
+.divider {
+  background-color: var(--sys-color-outline-variant, #cac4d0);
+  border: none;
+}
+
+.divider--horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.divider--vertical {
+  width: 1px;
+  height: 100%;
+}
