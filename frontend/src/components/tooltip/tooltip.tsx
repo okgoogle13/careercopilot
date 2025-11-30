@@ -1,15 +1,47 @@
-import type { TooltipProps as MuiTooltipProps } from '@mui/material';
-import { Tooltip as MuiTooltip } from '@mui/material';
+import type { HTMLAttributes } from 'react';
 import React from 'react';
+import styles from './tooltip.module.css';
 
-export type TooltipProps = MuiTooltipProps;
+export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
+  title: string;
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  delayMs?: number;
+}
 
 export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
-  ({ children, ...props }, ref) => {
+  ({ title, side = 'top', delayMs = 200, children, className, ...props }, ref) => {
+    const [open, setOpen] = React.useState(false);
+    const timeoutRef = React.useRef<NodeJS.Timeout>();
+
+    const handleMouseEnter = () => {
+      timeoutRef.current = setTimeout(() => setOpen(true), delayMs);
+    };
+
+    const handleMouseLeave = () => {
+      clearTimeout(timeoutRef.current);
+      setOpen(false);
+    };
+
+    React.useEffect(() => {
+      return () => clearTimeout(timeoutRef.current);
+    }, []);
+
     return (
-      <MuiTooltip ref={ref} {...props}>
+      <div
+        ref={ref}
+        className={[styles['tooltip-root'], className].filter(Boolean).join(' ')}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        {...props}
+      >
         {children}
-      </MuiTooltip>
+        {open && (
+          <div className={`${styles['tooltip-popper']} ${styles['tooltip-popper--open']}`} data-popper-placement={side}>
+            <div className={styles['tooltip-tooltip']} role="tooltip">{title}</div>
+            <div className={styles['tooltip-arrow']} data-popper-placement={side} />
+          </div>
+        )}
+      </div>
     );
   }
 );
@@ -25,12 +57,7 @@ export const TooltipTrigger = React.forwardRef<HTMLElement, TooltipTriggerProps>
     if (asChild && React.isValidElement(children)) {
       return React.cloneElement(children, { ...props, ref } as any);
     }
-
-    return (
-      <div ref={ref as React.Ref<HTMLDivElement>} {...props}>
-        {children}
-      </div>
-    );
+    return <div ref={ref as React.Ref<HTMLDivElement>} {...props}>{children}</div>;
   }
 );
 
@@ -41,13 +68,7 @@ export interface TooltipContentProps extends React.HTMLAttributes<HTMLDivElement
 }
 
 export const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentProps>(
-  ({ children, side = 'top', ...props }, ref) => {
-    return (
-      <div ref={ref} {...props}>
-        {children}
-      </div>
-    );
-  }
+  ({ children, ...props }, ref) => <div ref={ref} {...props}>{children}</div>
 );
 
 TooltipContent.displayName = 'TooltipContent';
@@ -55,13 +76,7 @@ TooltipContent.displayName = 'TooltipContent';
 export type TooltipProviderProps = React.HTMLAttributes<HTMLDivElement>;
 
 export const TooltipProvider = React.forwardRef<HTMLDivElement, TooltipProviderProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <div ref={ref} {...props}>
-        {children}
-      </div>
-    );
-  }
+  ({ children, ...props }, ref) => <div ref={ref} {...props}>{children}</div>
 );
 
 TooltipProvider.displayName = 'TooltipProvider';

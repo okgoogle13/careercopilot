@@ -1,62 +1,35 @@
 import React from 'react';
-import { M3Alert } from '../M3Alert/M3Alert';
-import type { M3AlertProps } from '../M3Alert/M3Alert';
+import styles from './Alert.module.css';
 
-export type AlertProps = M3AlertProps & {
-  variant?: 'default' | 'destructive';
-};
+export type AlertSeverity = 'success' | 'error' | 'warning' | 'info';
 
-/**
- * Migrated to M3Alert - uses M3 design tokens instead of MUI theme
- * Maps variant 'destructive' to severity 'error'
- */
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  severity?: AlertSeverity;
+  title?: string;
+}
+
 export const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
-  ({ children, variant = 'default', severity, ...props }, ref) => {
-    const getSeverity = (variant: string): M3AlertProps['severity'] => {
-      switch (variant) {
-        case 'destructive':
-          return 'error';
-        default:
-          return severity || 'info';
-      }
-    };
-
-    return (
-      <M3Alert ref={ref} severity={getSeverity(variant)} {...props}>
-        {children}
-      </M3Alert>
-    );
-  }
+  ({ severity = 'info', title, children, className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={[styles.alert, styles[`alert--${severity}`], className].filter(Boolean).join(' ')}
+      role="alert"
+      {...props}
+    >
+      <div>
+        {title && <div className={styles['alert-title']}>{title}</div>}
+        <div className={styles['alert-message']}>{children}</div>
+      </div>
+    </div>
+  )
 );
 
 Alert.displayName = 'Alert';
 
-/**
- * AlertTitle wrapper for M3Alert title prop
- */
-export const AlertTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ children, ...props }, ref) => {
-    return (
-      <div ref={ref} className="m3-alert__title" {...props}>
-        {children}
-      </div>
-    );
-  }
+export const AlertTitle = ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={styles['alert-title']} {...props}>{children}</div>
 );
 
-AlertTitle.displayName = 'AlertTitle';
-
-/**
- * AlertDescription wrapper for M3Alert children content
- */
-export const AlertDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ children, ...props }, ref) => {
-    return (
-      <div ref={ref} className="m3-alert__message" {...props}>
-        {children}
-      </div>
-    );
-  }
+export const AlertDescription = ({ children, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={styles['alert-message']} {...props}>{children}</div>
 );
-
-AlertDescription.displayName = 'AlertDescription';
