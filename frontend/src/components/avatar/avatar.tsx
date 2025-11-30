@@ -1,58 +1,35 @@
-import type { AvatarProps as MuiAvatarProps } from '@mui/material';
-import { Avatar as MuiAvatar } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import styles from './avatar.module.css';
 
-const StyledAvatar = styled(MuiAvatar)(({ theme }) => ({
-  width: 40,
-  height: 40,
-  fontSize: '1rem',
-}));
-
-export type AvatarProps = MuiAvatarProps;
+export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
+  src?: string;
+  alt?: string;
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  initials?: string;
+}
 
 export const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
-  ({ children, ...props }, ref) => {
+  ({ src, alt, size = 'md', initials, className, ...props }, ref) => {
+    const sizeClass = styles['avatar--' + size];
+
     return (
-      <StyledAvatar ref={ref} {...props}>
-        {children}
-      </StyledAvatar>
+      <div
+        ref={ref}
+        className={styles.avatar + ' ' + sizeClass + (className ? ' ' + className : '')}
+        {...props}
+      >
+        {src ? (
+          <img src={src} alt={alt || 'avatar'} className={styles['avatar-image']} />
+        ) : initials ? (
+          <span className={styles['avatar-initials']}>{initials}</span>
+        ) : (
+          <svg className={styles['avatar-icon']} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+          </svg>
+        )}
+      </div>
     );
   }
 );
 
 Avatar.displayName = 'Avatar';
-
-export type AvatarImageProps = React.ImgHTMLAttributes<HTMLImageElement>;
-
-export const AvatarImage = React.forwardRef<HTMLImageElement, AvatarImageProps>(
-  ({ src, alt, ...props }, ref) => {
-    return (
-      <Avatar>
-        <img
-          ref={ref}
-          src={src}
-          alt={alt}
-          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          {...props}
-        />
-      </Avatar>
-    );
-  }
-);
-
-AvatarImage.displayName = 'AvatarImage';
-
-export type AvatarFallbackProps = React.HTMLAttributes<HTMLDivElement>;
-
-export const AvatarFallback = React.forwardRef<HTMLDivElement, AvatarFallbackProps>(
-  ({ children, ...props }, ref) => {
-    return (
-      <Avatar ref={ref} {...props}>
-        {children}
-      </Avatar>
-    );
-  }
-);
-
-AvatarFallback.displayName = 'AvatarFallback';
