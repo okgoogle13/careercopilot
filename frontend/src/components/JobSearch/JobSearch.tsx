@@ -4,7 +4,6 @@ import {
   List,
   Work as Briefcase,
 } from '@mui/icons-material';
-import { Box } from '@mui/material';
 import {
   Box,
   Typography,
@@ -19,13 +18,18 @@ import {
 } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
-import type { JobFilters } from '../features/opportunities/FilterPanel';
-import { FilterPanel } from '../features/opportunities/FilterPanel';
-import { JobCard } from '../features/opportunities/JobCard';
-import { EmptyState } from '../ui/feedback/EmptyState';
-import { LoadingState } from '../ui/LoadingState';
+import type { JobFilters } from '../features/FilterPanel/FilterPanel';
+import { FilterPanel } from '../features/FilterPanel/FilterPanel';
+import { JobCard } from '../features/JobCard/JobCard';
+import { EmptyState } from '../ui/EmptyState/EmptyState';
+import { LoadingState } from '../LoadingState';
 
-type JobType = 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
+type JobType =
+  | 'Full-time'
+  | 'Part-time'
+  | 'Contract'
+  | 'Freelance'
+  | 'Internship';
 type ExperienceLevel =
   | 'Entry Level'
   | 'Mid Level'
@@ -88,36 +92,6 @@ const sampleJobs: Job[] = [
     isBookmarked: true,
     isRemote: false,
   },
-  {
-    id: '3',
-    title: 'Full Stack Developer',
-    company: 'Startup Inc',
-    location: 'Austin, TX',
-    type: 'Full-time',
-    experience: 'Mid Level',
-    salary: '$90K - $130K',
-    description:
-      'Be part of a fast-growing startup and help shape the future of our product. You will work across the entire stack and have significant impact on our technology decisions.',
-    skills: ['JavaScript', 'Node.js', 'PostgreSQL', 'Docker', 'AWS'],
-    postedDate: '3 days ago',
-    isBookmarked: false,
-    isRemote: true,
-  },
-  {
-    id: '4',
-    title: 'DevOps Engineer',
-    company: 'Netflix',
-    location: 'Los Gatos, CA',
-    type: 'Full-time',
-    experience: 'Senior Level',
-    salary: '$130K - $180K',
-    description:
-      'Help us scale our infrastructure to serve millions of users worldwide. You will work with Kubernetes, AWS, and other modern DevOps tools.',
-    skills: ['Kubernetes', 'AWS', 'Docker', 'Python', 'Terraform'],
-    postedDate: '1 week ago',
-    isBookmarked: false,
-    isRemote: true,
-  },
 ];
 
 const sortOptions = [
@@ -153,7 +127,6 @@ export function JobSearch({
     let filtered = [...jobs];
 
     if (filters) {
-      // Apply search query filter
       if (filters.searchQuery) {
         const query = filters.searchQuery.toLowerCase();
         filtered = filtered.filter(
@@ -164,39 +137,33 @@ export function JobSearch({
         );
       }
 
-      // Apply location filter
       if (filters.location.length > 0) {
         filtered = filtered.filter((job) =>
           filters.location.some(
-            (loc) => job.location.includes(loc) || (job.isRemote && loc === 'Remote')
+            (loc) =>
+              job.location.includes(loc) || (job.isRemote && loc === 'Remote')
           )
         );
       }
-
-      // Apply job type filter
       if (filters.jobType.length > 0) {
-        filtered = filtered.filter((job) => filters.jobType.includes(job.type));
+        filtered = filtered.filter((job) =>
+          filters.jobType.includes(job.type)
+        );
       }
-
-      // Apply experience level filter
       if (filters.experienceLevel.length > 0) {
-        filtered = filtered.filter((job) => filters.experienceLevel.includes(job.experience));
+        filtered = filtered.filter((job) =>
+          filters.experienceLevel.includes(job.experience)
+        );
       }
-
-      // Apply remote filter
       if (filters.remote) {
         filtered = filtered.filter((job) => job.isRemote);
       }
-
-      // Apply skills filter
       if (filters.skills.length > 0) {
         filtered = filtered.filter((job) =>
           filters.skills.some((skill) => job.skills.includes(skill))
         );
       }
     }
-
-    // Apply sorting
     filtered.sort((a, b) => {
       switch (sortBy) {
         case 'date':
@@ -204,9 +171,8 @@ export function JobSearch({
         case 'company':
           return a.company.localeCompare(b.company);
         case 'salary':
-          // Simple salary comparison (in a real app, you'd parse the salary string)
           return b.salary?.localeCompare(a.salary || '') || 0;
-        default: // relevance
+        default:
           return 0;
       }
     });
@@ -218,10 +184,11 @@ export function JobSearch({
   const handleFiltersChange = (newFilters: JobFilters) => {
     setFilters(newFilters);
   };
-
   const handleBookmark = (jobId: string) => {
     setJobs((prev) =>
-      prev.map((job) => (job.id === jobId ? { ...job, i_Bookmarked: !job.isBookmarked } : job))
+      prev.map((job) =>
+        job.id === jobId ? { ...job, isBookmarked: !job.isBookmarked } : job
+      )
     );
     onJobBookmark?.(jobId);
   };
@@ -236,101 +203,123 @@ export function JobSearch({
   }
 
   return (
-    <Box sx={{
-      width: "100%"
-    }}>
-      {/* Header */}
-      <Box sx={{
-      mb: 6
-    }}>
-        <Typography variant="h4" sx={{
-      typography: "h4",
-      fontWeight: 700,
-      mb: 2
-    }}>
+    <Box sx={{ width: '100%', p: 'var(--sys-spacing-4)' }}>
+      <Box sx={{ mb: 'var(--sys-spacing-6)' }}>
+        <Typography
+          variant="h1"
+          sx={{
+            font: 'var(--sys-type-display-small)',
+            fontWeight: 'var(--sys-type-weight-bold)',
+            color: 'var(--sys-color-on-surface)',
+            mb: 'var(--sys-spacing-2)',
+          }}
+        >
           Job Search
         </Typography>
-        <Typography variant="body1" color="text.secondary">
+        <Typography
+          variant="body1"
+          sx={{
+            font: 'var(--sys-type-body-large)',
+            color: 'var(--sys-color-on-surface-variant)',
+          }}
+        >
           Find your next opportunity with our AI-powered job matching
         </Typography>
       </Box>
 
       <Grid container spacing={3}>
-        {/* Filters Sidebar */}
         {showFilters && (
-          <Grid size={{ xs: 12, md: 3 }}>
-            <FilterPanel onFiltersChange={handleFiltersChange} onReset={() => setFilters(null)} />
+          <Grid item xs={12} md={3}>
+            <FilterPanel
+              onFiltersChange={handleFiltersChange}
+              onReset={() => setFilters(null)}
+            />
           </Grid>
         )}
-
-        {/* Main Content */}
-        <Grid size={{ xs: 12, md: showFilters ? 9 : 12 }}>
-          {/* Controls */}
-          <Paper sx={{
-      p: 4,
-      mb: 6
-    }}>
-            <Box sx={{
-      display: "flex",
-      flexDirection: "column",
-      [theme.breakpoints.up('xs')]: { flexDirection: "row" },
-      gap: 4,
-      alignItems: "flex-start",
-      [theme.breakpoints.up('xs')]: { alignItems: "center" },
-      justifyContent: "space-between"
-    }}>
-              <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4
-    }}>
+        <Grid item xs={12} md={showFilters ? 9 : 12}>
+          <Paper
+            sx={{
+              p: 'var(--sys-spacing-4)',
+              mb: 'var(--sys-spacing-6)',
+              backgroundColor: 'var(--sys-color-surface-container)',
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', sm: 'row' },
+                gap: 'var(--sys-spacing-4)',
+                alignItems: { xs: 'flex-start', sm: 'center' },
+                justifyContent: 'space-between',
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--sys-spacing-4)',
+                }}
+              >
                 <Button
                   variant="outlined"
                   onClick={() => setShowFilters(!showFilters)}
-                  startIcon={<SlidersHorizontal sx={{ fontSize: 16 }} />}
+                  startIcon={<SlidersHorizontal />}
+                  sx={{
+                    borderColor: 'var(--sys-color-outline)',
+                    color: 'var(--sys-color-on-surface)',
+                  }}
                 >
                   {showFilters ? 'Hide' : 'Show'} Filters
                 </Button>
-
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  sx={{ color: 'var(--sys-color-on-surface-variant)' }}
+                >
                   {filteredJobs.length} jobs found
                 </Typography>
               </Box>
 
-              <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4
-    }}>
-                {/* View Mode Toggle */}
-                <Box sx={{
-      display: "flex",
-      border: 1,
-      borderRadius: "var(--sys-shape-radius-md)",
-      overflow: "hidden"
-    }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--sys-spacing-4)',
+                }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    border: '1px solid var(--sys-color-outline)',
+                    borderRadius: 'var(--sys-shape-corner-medium)',
+                    overflow: 'hidden',
+                  }}
+                >
                   <Button
-                    variant={viewMode === 'grid' ? 'contained' : 'outlined'}
+                    variant={viewMode === 'grid' ? 'contained' : 'text'}
                     onClick={() => setViewMode('grid')}
                     sx={{
-      borderRadius: 0,}}
+                      borderRadius: 0,
+                      minWidth: 'auto',
+                      p: 'var(--sys-spacing-2)',
+                    }}
                     size="small"
                   >
-                    <Grid3X3 sx={{ fontSize: 16 }} />
+                    <Grid3X3 />
                   </Button>
                   <Button
-                    variant={viewMode === 'list' ? 'contained' : 'outlined'}
+                    variant={viewMode === 'list' ? 'contained' : 'text'}
                     onClick={() => setViewMode('list')}
                     sx={{
-      borderRadius: 0,}}
+                      borderRadius: 0,
+                      minWidth: 'auto',
+                      p: 'var(--sys-spacing-2)',
+                    }}
                     size="small"
                   >
-                    <List sx={{ fontSize: 16 }} />
+                    <List />
                   </Button>
                 </Box>
-
-                {/* Sort */}
-                <FormControl size="small" sx={{}}>
+                <FormControl size="small" sx={{ minWidth: 160 }}>
                   <InputLabel>Sort by</InputLabel>
                   <Select
                     value={sortBy}
@@ -348,7 +337,6 @@ export function JobSearch({
             </Box>
           </Paper>
 
-          {/* Job Results */}
           {currentJobs.length === 0 ? (
             <EmptyState
               icon={<Briefcase sx={{ fontSize: 48 }} />}
@@ -362,11 +350,10 @@ export function JobSearch({
               <Grid container spacing={3}>
                 {currentJobs.map((job) => (
                   <Grid
-                    size={{
-                      xs: 12,
-                      md: viewMode === 'grid' ? 6 : 12,
-                      lg: viewMode === 'grid' ? 4 : 12,
-                    }}
+                    item
+                    xs={12}
+                    md={viewMode === 'grid' ? 6 : 12}
+                    lg={viewMode === 'grid' ? 4 : 12}
                     key={job.id}
                   >
                     <JobCard
@@ -379,13 +366,14 @@ export function JobSearch({
                 ))}
               </Grid>
 
-              {/* Pagination */}
               {totalPages > 1 && (
-                <Box sx={{
-      display: "flex",
-      justifyContent: "center",
-      mt: 8
-    }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    mt: 'var(--sys-spacing-8)',
+                  }}
+                >
                   <Pagination
                     count={totalPages}
                     page={currentPage}

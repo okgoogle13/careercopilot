@@ -129,15 +129,21 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
 
   return (
     <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-      <DialogTitle>
+      <DialogTitle
+        sx={{
+          fontSize: 'var(--sys-type-title-large-size)',
+          fontWeight: 'var(--sys-type-title-large-weight)',
+          lineHeight: 'var(--sys-type-title-large-lineHeight)',
+        }}
+      >
         {step === 'upload' && 'Upload Document'}
         {step === 'tagging' && 'Review & Tag Document'}
         {step === 'saving' && 'Saving Document'}
       </DialogTitle>
 
-      <DialogContent sx={{ py: 3 }}>
+      <DialogContent sx={{ py: 'var(--sys-space-3)' }}>
         {error && (
-          <Alert severity="error" sx={{ mb: 2 }}>
+          <Alert severity="error" sx={{ mb: 'var(--sys-space-2)', borderRadius: 'var(--sys-shape-corner-small)' }}>
             {error}
           </Alert>
         )}
@@ -171,11 +177,11 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
 
         {step === 'tagging' && suggestedTags && (
           <Box>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            <Typography variant="body2" sx={{ color: 'var(--sys-color-on-surface-variant)', mb: 'var(--sys-space-2)' }}>
               AI has analyzed your document. Select the tags that apply:
             </Typography>
 
-            <Stack spacing={2}>
+            <Stack spacing={'var(--sys-space-2)'}>
               {Object.entries(suggestedTags).map(([key, confidence]) => {
                 const label = key.replace(/_/g, ' ').toUpperCase();
                 const isSelected = selectedTags.includes(label);
@@ -188,32 +194,56 @@ export const SmartUploadModal: React.FC<SmartUploadModalProps> = ({
                     key={key}
                     label={`${label} (${Math.round(confidence * 100)}%)`}
                     onClick={() => toggleTag(label)}
-                    variant={isSelected ? 'filled' : 'outlined'}
-                    color={isSelected ? 'primary' : 'default'}
-                    sx={{ justifyContent: 'flex-start', height: 'auto' }}
+                    sx={{
+                      justifyContent: 'flex-start',
+                      height: 'auto',
+                      padding: 'var(--sys-space-1)',
+                      backgroundColor: isSelected ? 'var(--sys-color-primary)' : 'transparent',
+                      color: isSelected ? 'var(--sys-color-on-primary)' : 'var(--sys-color-on-surface)',
+                      border: isSelected ? 'none' : '1px solid var(--sys-color-outline)',
+                      borderRadius: 'var(--sys-shape-corner-small)',
+                    }}
                   />
                 );
               })}
             </Stack>
 
-            <Typography variant="caption" color="text.secondary" sx={{ mt: 2, display: 'block' }}>
+            <Typography variant="caption" sx={{ color: 'var(--sys-color-on-surface-variant)', mt: 'var(--sys-space-2)', display: 'block' }}>
               Confidence scores shown in parentheses. AI suggestions are pre-selected.
             </Typography>
           </Box>
         )}
 
         {step === 'saving' && (
-          <Box sx={{ textAlign: 'center', py: 4 }}>
-            <CircularProgress sx={{ mb: 2 }} />
-            <Typography variant="body1">Saving your document...</Typography>
+          <Box sx={{ textAlign: 'center', py: 'var(--sys-space-4)' }}>
+            <CircularProgress sx={{ mb: 'var(--sys-space-2)' }} />
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: 'var(--sys-type-body-large-size)',
+                fontWeight: 'var(--sys-type-body-large-weight)',
+                lineHeight: 'var(--sys-type-body-large-lineHeight)',
+              }}
+            >
+              Saving your document...
+            </Typography>
           </Box>
         )}
 
         {step === 'upload' && file && (
-          <Box sx={{ mt: 2, p: 2, bgcolor: 'success.light', borderRadius: 1 }}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <CheckCircle color="success" />
-              <Typography variant="body2">Selected: {file.name}</Typography>
+          <Box
+            sx={{
+              mt: 'var(--sys-space-2)',
+              p: 'var(--sys-space-2)',
+              backgroundColor: 'var(--sys-color-tertiary-container)',
+              borderRadius: 'var(--sys-shape-corner-small)',
+            }}
+          >
+            <Stack direction="row" spacing={'var(--sys-space-1)'} alignItems="center">
+              <CheckCircle sx={{ color: 'var(--sys-color-on-tertiary-container)' }} />
+              <Typography variant="body2" sx={{ color: 'var(--sys-color-on-tertiary-container)' }}>
+                Selected: {file.name}
+              </Typography>
             </Stack>
           </Box>
         )}

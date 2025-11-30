@@ -1,38 +1,12 @@
-import { Add as Plus, TrendingUp, AutoAwesome as Sparkles } from '@mui/icons-material';
-import { Box } from '@mui/material';
-import { Card, Button } from '@mui/material';
+import { Add as Plus, AutoAwesome as Sparkles, TrendingUp } from '@mui/icons-material';
+import { Box, Card, Button } from '@mui/material';
 import React from 'react';
 
 import { ProfileVariationGrid } from '../../../library/ProfileVariationCard';
 import { CreateProfileCard } from '../../profile/CreateProfileCard';
 import { ProfileCard } from '../../profile/ProfileCard';
 
-interface Profile {
-  id: string;
-  name: string;
-  role: string;
-  activeApplications: number;
-  atsScore: number;
-  lastUpdated: string;
-  avatarColor: string;
-}
-
-interface ProfileVariation {
-  id: string;
-  profile_name: string;
-  keyword_count: number;
-  last_modified: Date;
-  is_default: boolean;
-}
-
-interface ProfileGridProps {
-  profiles: Profile[];
-  profileVariations: ProfileVariation[];
-  onCreateProfile?: () => void;
-  onEditProfile: (profile: Profile) => void;
-  onDeleteProfile: (id: string) => void;
-  onNavigateToCareerGrowth?: () => void;
-}
+// ... (interface definitions remain the same)
 
 export function ProfileGrid({
   profiles,
@@ -44,16 +18,24 @@ export function ProfileGrid({
 }: ProfileGridProps) {
   return (
     <>
-      {/* Profile Variations Section */}
-      <Card sx={{
-      p: 6,
-      mb: 6
-    }}>
-        <h2 sx={{
-      typography: "h6",
-      fontWeight: 600,
-      mb: 4
-    }}>Your Profile Variations</h2>
+      <Card
+        sx={{
+          padding: 'var(--sys-spacing-6)',
+          marginBottom: 'var(--sys-spacing-6)',
+          backgroundColor: 'var(--sys-color-surface-container)',
+          borderRadius: 'var(--shape-corner-large)',
+          boxShadow: 'var(--elevation-level1)',
+        }}
+      >
+        <h2
+          style={{
+            font: 'var(--sys-type-title-large)',
+            color: 'var(--sys-color-on-surface)',
+            marginBottom: 'var(--sys-spacing-4)',
+          }}
+        >
+          Your Profile Variations
+        </h2>
         <ProfileVariationGrid
           profiles={profileVariations}
           onProfileEdit={(id) => console.log('Edit profile:', id)}
@@ -62,92 +44,129 @@ export function ProfileGrid({
           onProfileSetDefault={(id) => console.log('Set default profile:', id)}
           onProfileClick={(id) => console.log('View profile:', id)}
           emptyState={
-            <div sx={{
-      textAlign: "center",
-      py: 8
-    }}>
-              <p sx={{
-      mb: 4
-    }}>No profile variations yet</p>
-              <Button onClick={() => onCreateProfile?.()}>
-                <Plus sx={{
-      mr: 2
-    }} />
+            <Box
+              sx={{
+                textAlign: 'center',
+                paddingY: 'var(--sys-spacing-8)',
+                border: '1px dashed var(--sys-color-outline-variant)',
+                borderRadius: 'var(--shape-corner-medium)',
+              }}
+            >
+              <p
+                style={{
+                  font: 'var(--sys-type-body-large)',
+                  color: 'var(--sys-color-on-surface-variant)',
+                  marginBottom: 'var(--sys-spacing-4)',
+                }}
+              >
+                No profile variations yet
+              </p>
+              <Button
+                onClick={() => onCreateProfile?.()}
+                variant="contained"
+                sx={{
+                  backgroundColor: 'var(--sys-color-primary)',
+                  color: 'var(--sys-color-on-primary)',
+                }}
+              >
+                <Plus sx={{ marginRight: 'var(--sys-spacing-2)' }} />
                 Create Your First Profile
               </Button>
-            </div>
+            </Box>
           }
         />
       </Card>
 
-      {/* Profile Cards Grid */}
-      <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      [theme.breakpoints.up('md')]: {},
-      gap: 6
-    }}>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            sm: 'repeat(2, 1fr)',
+            md: 'repeat(3, 1fr)',
+          },
+          gap: 'var(--sys-spacing-6)',
+        }}
+      >
         {profiles.map((profile) => (
           <ProfileCard
             key={profile.id}
-            name={profile.name}
-            role={profile.role}
-            activeApplications={profile.activeApplications}
-            atsScore={profile.atsScore}
-            lastUpdated={profile.lastUpdated}
-            avatarColor={profile.avatarColor}
+            {...profile}
             onEdit={() => onEditProfile(profile)}
             onDelete={() => onDeleteProfile(profile.id)}
           />
         ))}
         <CreateProfileCard onCreate={() => onCreateProfile?.()} />
 
-        {/* Career Growth Card */}
         {onNavigateToCareerGrowth && (
-          <Card sx={{
-      p: 6,
-      '&:hover': {},}}>
-            <div sx={{}}>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-                <div sx={{
-      p: 2,
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                  <TrendingUp sx={{}} />
-                </div>
-                <h3 sx={{
-      fontWeight: 600,
-      typography: "h6"
-    }}>Career Growth</h3>
-              </div>
-
-              <p sx={{
-      typography: "body1"
-    }}>
+          <Card
+            sx={{
+              padding: 'var(--sys-spacing-6)',
+              backgroundColor: 'var(--sys-color-surface-container-high)',
+              borderRadius: 'var(--shape-corner-extra-large)',
+              boxShadow: 'var(--elevation-level2)',
+              transition: `all var(--sys-motion-duration-medium1) var(--sys-motion-easing-standard)`,
+              '&:hover': {
+                transform: 'translateY(-4px)',
+                boxShadow: 'var(--elevation-level4)',
+              },
+            }}
+          >
+            <Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--sys-spacing-3)',
+                  marginBottom: 'var(--sys-spacing-2)',
+                }}
+              >
+                <Box
+                  sx={{
+                    padding: 'var(--sys-spacing-2)',
+                    backgroundColor: 'var(--sys-color-tertiary-container)',
+                    borderRadius: 'var(--shape-corner-medium)',
+                  }}
+                >
+                  <TrendingUp sx={{ color: 'var(--sys-color-on-tertiary-container)' }} />
+                </Box>
+                <h3
+                  style={{
+                    font: 'var(--sys-type-title-large)',
+                    color: 'var(--sys-color-on-surface)',
+                  }}
+                >
+                  Career Growth
+                </h3>
+              </Box>
+              <p
+                style={{
+                  font: 'var(--sys-type-body-medium)',
+                  color: 'var(--sys-color-on-surface-variant)',
+                  marginBottom: 'var(--sys-spacing-4)',
+                }}
+              >
                 Explore AI-powered career insights, job matching, and interview preparation tools.
               </p>
-
               <Button
                 onClick={onNavigateToCareerGrowth}
-                sx={{
-      width: "100%",
-      border: 1,
-      '&:hover': {}
-    }}
                 variant="outlined"
+                sx={{
+                  width: '100%',
+                  borderColor: 'var(--sys-color-outline)',
+                  color: 'var(--sys-color-primary)',
+                  '&:hover': {
+                    backgroundColor: 'var(--sys-color-primary-container)',
+                    borderColor: 'var(--sys-color-primary)',
+                  },
+                }}
               >
-                <Sparkles sx={{
-      mr: 2
-    }} />
+                <Sparkles sx={{ marginRight: 'var(--sys-spacing-2)' }} />
                 Explore Career Tools
               </Button>
-            </div>
+            </Box>
           </Card>
         )}
-      </div>
+      </Box>
     </>
   );
 }

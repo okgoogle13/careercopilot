@@ -124,9 +124,9 @@ describe('UploadResume', () => {
 
   describe('Upload Area Styling', () => {
     it('renders dashed border for drag and drop area', () => {
-      const { container } = render(<UploadResume {...defaultProps} />);
-      const uploadArea = container.querySelector('[style*="dashed"]');
-      expect(uploadArea).toBeTruthy();
+      render(<UploadResume {...defaultProps} />);
+      const uploadArea = screen.getByTestId('upload-area');
+      expect(uploadArea).toHaveStyle('border: 2px dashed var(--sys-color-outline-variant)');
     });
 
     it('has pointer cursor for clickable upload area', () => {

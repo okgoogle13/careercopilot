@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from '@jest/globals';
+import { describe, it, expect, jest, beforeEach } from '@jest/globals';
 
 import { CreateProfileCard } from '../CreateProfileCard';
 
 describe('CreateProfileCard', () => {
-  const mockOnCreate = vi.fn();
+  const mockOnCreate = jest.fn();
 
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('Component Rendering', () => {
@@ -120,7 +120,7 @@ describe('CreateProfileCard', () => {
 
   describe('Component Props', () => {
     it('accepts onCreate function prop', () => {
-      const customCreate = vi.fn();
+      const customCreate = jest.fn();
       render(<CreateProfileCard onCreate={customCreate} />);
 
       const button = screen.getByText('Create Profile');
@@ -129,7 +129,7 @@ describe('CreateProfileCard', () => {
 
     it('works with different onCreate implementations', async () => {
       const user = userEvent.setup();
-      const asyncCreate = vi.fn(async () => {
+      const asyncCreate = jest.fn(async () => {
         return Promise.resolve();
       });
 
@@ -172,7 +172,7 @@ describe('CreateProfileCard', () => {
     });
 
     it('renders correctly with console errors suppressed', () => {
-      const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
       render(<CreateProfileCard onCreate={mockOnCreate} />);
       expect(screen.getByText('Create New Profile')).toBeInTheDocument();

@@ -119,7 +119,7 @@ describe('Settings', () => {
     await user.click(deleteButtons[0]);
 
     // Click cancel
-    const cancelButton = screen.getByText('Cancel');
+    const cancelButton = screen.getByRole('button', { name: /cancel/i });
     await user.click(cancelButton);
 
     // Confirmation should be hidden
@@ -130,7 +130,7 @@ describe('Settings', () => {
     renderWithTheme(<Settings onBack={mockOnBack} />);
     expect(screen.getByText('Account Information')).toBeInTheDocument();
     expect(screen.getByText('Account created')).toBeInTheDocument();
-    expect(screen.getByText('Last login')).toBeInTheDocument();
+    expect(screen.getByText(/last login/i)).toBeInTheDocument();
     expect(screen.getByText('Data usage')).toBeInTheDocument();
   });
 

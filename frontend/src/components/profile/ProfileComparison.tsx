@@ -30,7 +30,7 @@ interface ProfileData {
 interface ProfileComparisonProps {
   leftProfile?: ProfileData;
   rightProfile?: ProfileData;
-  onProfileSelect?: (po_ition: 'left' | 'right') => void;
+  onProfileSelect?: (position: 'left' | 'right') => void;
   onSwapProfiles?: () => void;
 }
 
@@ -42,7 +42,7 @@ const sampleProfiles: ProfileData[] = [
     activeApplications: 8,
     atsScore: 85,
     lastUpdated: '2024-01-15',
-    avatarColor: '#3B82F6',
+    avatarColor: 'var(--sys-color-tertiary)',
     skills: ['JavaScript', 'React', 'Node.js', 'Python', 'PostgreSQL'],
     experience: [
       {
@@ -78,7 +78,7 @@ const sampleProfiles: ProfileData[] = [
     activeApplications: 12,
     atsScore: 92,
     lastUpdated: '2024-01-20',
-    avatarColor: '#3B82F6',
+    avatarColor: 'var(--sys-color-primary)',
     skills: [
       'JavaScript',
       'TypeScript',
@@ -140,66 +140,51 @@ export function ProfileComparison({
   ];
 
   const renderSkillsComparison = () => (
-    <Box sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6
-    }}>
-      <Card>
-        <CardContent sx={{
-      p: 4
-    }}>
-          <Typography variant="h6" sx={{
-      fontWeight: 600,
-      mb: 3
-    }}>
+    <Box sx={{ display: 'grid', gridTemplateColumns: { sm: '1fr 1fr' }, gap: 'var(--sys-space-6)' }}>
+      <Card sx={{ borderRadius: 'var(--sys-shape-corner-medium)', boxShadow: 'var(--sys-elevation-level1)' }}>
+        <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-3)', color: 'var(--sys-color-on-surface)' }}>
             {leftProfile.name} - Skills
           </Typography>
-          <Box sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: 2
-    }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sys-space-2)' }}>
             {leftProfile.skills.map((skill, index) => (
               <Chip
                 key={index}
                 label={skill}
                 size="small"
-                className={
-                  !rightProfile.skills.includes(skill)
-                    ? 'bg-red-100 text-red-800'
-                    : 'bg-gray-100 text-gray-800'
-                }
+                sx={{
+                  backgroundColor: !rightProfile.skills.includes(skill)
+                    ? 'var(--sys-color-error-container)'
+                    : 'var(--sys-color-surface-variant)',
+                  color: !rightProfile.skills.includes(skill)
+                    ? 'var(--sys-color-on-error-container)'
+                    : 'var(--sys-color-on-surface-variant)',
+                }}
               />
             ))}
           </Box>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardContent sx={{
-      p: 4
-    }}>
-          <Typography variant="h6" sx={{
-      fontWeight: 600,
-      mb: 3
-    }}>
+      <Card sx={{ borderRadius: 'var(--sys-shape-corner-medium)', boxShadow: 'var(--sys-elevation-level1)' }}>
+        <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-3)', color: 'var(--sys-color-on-surface)' }}>
             {rightProfile.name} - Skills
           </Typography>
-          <Box sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: 2
-    }}>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--sys-space-2)' }}>
             {rightProfile.skills.map((skill, index) => (
               <Chip
                 key={index}
                 label={skill}
                 size="small"
-                className={
-                  !leftProfile.skills.includes(skill)
-                    ? 'bg-green-100 text-green-800'
-                    : 'bg-gray-100 text-gray-800'
-                }
+                sx={{
+                  backgroundColor: !leftProfile.skills.includes(skill)
+                    ? 'var(--sys-color-tertiary-container)'
+                    : 'var(--sys-color-surface-variant)',
+                  color: !leftProfile.skills.includes(skill)
+                    ? 'var(--sys-color-on-tertiary-container)'
+                    : 'var(--sys-color-on-surface-variant)',
+                }}
               />
             ))}
           </Box>
@@ -209,42 +194,25 @@ export function ProfileComparison({
   );
 
   const renderExperienceComparison = () => (
-    <Box sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6
-    }}>
-      <Card>
-        <CardContent sx={{
-      p: 4
-    }}>
-          <Typography variant="h6" sx={{
-      fontWeight: 600,
-      mb: 3
-    }}>
+    <Box sx={{ display: 'grid', gridTemplateColumns: { sm: '1fr 1fr' }, gap: 'var(--sys-space-6)' }}>
+      <Card sx={{ borderRadius: 'var(--sys-shape-corner-medium)', boxShadow: 'var(--sys-elevation-level1)' }}>
+        <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-3)', color: 'var(--sys-color-on-surface)' }}>
             {leftProfile.name} - Experience
           </Typography>
-          <Box sx={{}}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 'var(--sys-space-4)' }}>
             {leftProfile.experience.map((exp, index) => (
-              <Box key={index} sx={{
-      borderColor: "gray.200",
-      pl: 4
-    }}>
-                <Typography variant="subtitle1" sx={{
-      fontWeight: 600
-    }}>
+              <Box key={index} sx={{ borderLeft: '2px solid var(--sys-color-outline-variant)', pl: 'var(--sys-space-4)' }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
                   {exp.position}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
                   {exp.company} • {exp.duration}
                 </Typography>
-                <ul sx={{
-      mt: 2,
-      typography: "body1",}}>
+                <ul sx={{ mt: 'var(--sys-space-2)', pl: 'var(--sys-space-4)' }}>
                   {exp.highlights.map((highlight, hIndex) => (
-                    <li key={hIndex} sx={{
-      color: "gray.600"
-    }}>
-                      • {highlight}
+                    <li key={hIndex} sx={{ color: 'var(--sys-color-on-surface-variant)', mb: 'var(--sys-space-1)' }}>
+                      {highlight}
                     </li>
                   ))}
                 </ul>
@@ -254,38 +222,24 @@ export function ProfileComparison({
         </CardContent>
       </Card>
 
-      <Card>
-        <CardContent sx={{
-      p: 4
-    }}>
-          <Typography variant="h6" sx={{
-      fontWeight: 600,
-      mb: 3
-    }}>
+      <Card sx={{ borderRadius: 'var(--sys-shape-corner-medium)', boxShadow: 'var(--sys-elevation-level1)' }}>
+        <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+          <Typography variant="h6" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-3)', color: 'var(--sys-color-on-surface)' }}>
             {rightProfile.name} - Experience
           </Typography>
-          <Box sx={{}}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 'var(--sys-space-4)' }}>
             {rightProfile.experience.map((exp, index) => (
-              <Box key={index} sx={{
-      borderColor: "blue.200",
-      pl: 4
-    }}>
-                <Typography variant="subtitle1" sx={{
-      fontWeight: 600
-    }}>
+              <Box key={index} sx={{ borderLeft: '2px solid var(--sys-color-primary)', pl: 'var(--sys-space-4)' }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
                   {exp.position}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
                   {exp.company} • {exp.duration}
                 </Typography>
-                <ul sx={{
-      mt: 2,
-      typography: "body1",}}>
+                <ul sx={{ mt: 'var(--sys-space-2)', pl: 'var(--sys-space-4)' }}>
                   {exp.highlights.map((highlight, hIndex) => (
-                    <li key={hIndex} sx={{
-      color: "gray.600"
-    }}>
-                      • {highlight}
+                    <li key={hIndex} sx={{ color: 'var(--sys-color-on-surface-variant)', mb: 'var(--sys-space-1)' }}>
+                      {highlight}
                     </li>
                   ))}
                 </ul>
@@ -298,49 +252,34 @@ export function ProfileComparison({
   );
 
   return (
-    <Box sx={{
-      width: "100%"
-    }}>
+    <Box sx={{ width: '100%', p: 'var(--sys-space-4)' }}>
       {/* Header */}
-      <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 6
-    }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 'var(--sys-space-6)' }}>
         <Box>
-          <Typography variant="h4" sx={{
-      typography: "h4",
-      fontWeight: 700,
-      mb: 2
-    }}>
+          <Typography variant="h4" sx={{ fontFamily: 'var(--sys-type-font-family-brand)', fontSize: 'var(--sys-type-size-display-small)', fontWeight: 'var(--sys-type-weight-bold)', mb: 'var(--sys-space-2)', color: 'var(--sys-color-on-surface)' }}>
             Profile Comparison
           </Typography>
-          <Typography variant="body1" color="text.secondary">
+          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
             Compare different versions of your profile side by side
           </Typography>
         </Box>
 
-        <Box sx={{
-      display: "flex",
-      gap: 2
-    }}>
+        <Box sx={{ display: 'flex', gap: 'var(--sys-space-2)' }}>
           <Button
             variant="outlined"
             onClick={onSwapProfiles}
-            startIcon={<SwapHoriz sx={{ fontSize: 16 }} />}
+            startIcon={<SwapHoriz />}
+            sx={{ borderColor: 'var(--sys-color-outline)', color: 'var(--sys-color-primary)' }}
           >
             Swap Profiles
           </Button>
-          <Button variant="outlined" startIcon={<Download sx={{ fontSize: 16 }} />}>
+          <Button variant="outlined" startIcon={<Download />} sx={{ borderColor: 'var(--sys-color-outline)', color: 'var(--sys-color-primary)' }}>
             Export Comparison
           </Button>
           <Button
             variant="contained"
-            sx={{
-      '&:hover': {}
-    }}
-            startIcon={<Share sx={{ fontSize: 16 }} />}
+            sx={{ backgroundColor: 'var(--sys-color-primary)', color: 'var(--sys-color-on-primary)', '&:hover': { backgroundColor: 'var(--sys-color-primary-dark)' } }}
+            startIcon={<Share />}
           >
             Share
           </Button>
@@ -348,24 +287,13 @@ export function ProfileComparison({
       </Box>
 
       {/* Profile Cards Overview */}
-      <Box sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6,
-      mb: 8
-    }}>
+      <Box sx={{ display: 'grid', gridTemplateColumns: { sm: '1fr 1fr' }, gap: 'var(--sys-space-6)', mb: 'var(--sys-space-8)' }}>
         <Box>
-          <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 4
-    }}>
-            <Typography variant="h6" sx={{
-      fontWeight: 600
-    }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 'var(--sys-space-4)' }}>
+            <Typography variant="h6" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
               Profile Version 1
             </Typography>
-            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('left')}>
+            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('left')} sx={{ borderColor: 'var(--sys-color-outline)', color: 'var(--sys-color-primary)' }}>
               Change Profile
             </Button>
           </Box>
@@ -382,18 +310,11 @@ export function ProfileComparison({
         </Box>
 
         <Box>
-          <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 4
-    }}>
-            <Typography variant="h6" sx={{
-      fontWeight: 600
-    }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 'var(--sys-space-4)' }}>
+            <Typography variant="h6" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
               Profile Version 2
             </Typography>
-            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('right')}>
+            <Button size="small" variant="outlined" onClick={() => onProfileSelect?.('right')} sx={{ borderColor: 'var(--sys-color-outline)', color: 'var(--sys-color-primary)' }}>
               Change Profile
             </Button>
           </Box>
@@ -411,16 +332,17 @@ export function ProfileComparison({
       </Box>
 
       {/* Section Navigation */}
-      <Box sx={{
-      display: "flex",
-      gap: 2,
-      mb: 6,}}>
+      <Box sx={{ display: 'flex', gap: 'var(--sys-space-2)', mb: 'var(--sys-space-6)', borderBottom: '1px solid var(--sys-color-outline-variant)', pb: 'var(--sys-space-2)' }}>
         {sections.map((section) => (
           <Button
             key={section.id}
-            variant={selectedSection === section.id ? 'contained' : 'outlined'}
+            variant="text"
             onClick={() => setSelectedSection(section.id)}
-            className={selectedSection === section.id ? 'bg-primary hover:bg-primary/90' : ''}
+            sx={{
+              color: selectedSection === section.id ? 'var(--sys-color-primary)' : 'var(--sys-color-on-surface-variant)',
+              borderBottom: selectedSection === section.id ? '2px solid var(--sys-color-primary)' : 'none',
+              borderRadius: 0,
+            }}
           >
             {section.label}
           </Button>
@@ -432,21 +354,15 @@ export function ProfileComparison({
         {selectedSection === 'skills' && renderSkillsComparison()}
         {selectedSection === 'experience' && renderExperienceComparison()}
         {selectedSection === 'overview' && (
-          <Box sx={{
-      textAlign: "center",
-      py: 8
-    }}>
-            <Typography variant="h6" color="text.secondary">
+          <Box sx={{ textAlign: 'center', py: 'var(--sys-space-8)', backgroundColor: 'var(--sys-color-surface-container-low)', borderRadius: 'var(--sys-shape-corner-medium)' }}>
+            <Typography variant="h6" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
               Select a section above to compare profile details
             </Typography>
           </Box>
         )}
         {(selectedSection === 'education' || selectedSection === 'certifications') && (
-          <Box sx={{
-      textAlign: "center",
-      py: 8
-    }}>
-            <Typography variant="h6" color="text.secondary">
+          <Box sx={{ textAlign: 'center', py: 'var(--sys-space-8)', backgroundColor: 'var(--sys-color-surface-container-low)', borderRadius: 'var(--sys-shape-corner-medium)' }}>
+            <Typography variant="h6" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
               {selectedSection.charAt(0).toUpperCase() + selectedSection.slice(1)} comparison coming
               soon
             </Typography>

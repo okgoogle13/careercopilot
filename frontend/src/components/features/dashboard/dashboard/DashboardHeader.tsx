@@ -1,6 +1,5 @@
 import { Add as Plus, Person as User, Settings } from '@mui/icons-material';
-import { Box } from '@mui/material';
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import React from 'react';
 
 interface DashboardHeaderProps {
@@ -21,62 +20,90 @@ export function DashboardHeader({
   isEmpty = false,
 }: DashboardHeaderProps) {
   return (
-    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 8
-    }}>
-      <div>
-        <h1 sx={{
-      typography: "h4",
-      fontWeight: 700,
-      mb: 2
-    }}>{title}</h1>
-        {subtitle && <p sx={{}}>{subtitle}</p>}
-      </div>
-      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4
-    }}>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: 'var(--sys-spacing-8)',
+      }}
+    >
+      <Box>
+        <h1
+          style={{
+            font: 'var(--sys-type-headline-large)',
+            marginBottom: 'var(--sys-spacing-2)',
+            color: 'var(--sys-color-on-surface)',
+          }}
+        >
+          {title}
+        </h1>
+        {subtitle && (
+          <p
+            style={{
+              font: 'var(--sys-type-body-medium)',
+              color: 'var(--sys-color-on-surface-variant)',
+            }}
+          >
+            {subtitle}
+          </p>
+        )}
+      </Box>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 'var(--sys-spacing-4)' }}>
         {!isEmpty && (
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2,
-      typography: "body1",}}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--sys-spacing-2)',
+              font: 'var(--sys-type-body-large)',
+              color: 'var(--sys-color-on-surface-variant)',
+            }}
+          >
             <span>Dashboard</span>
             <span>ATS Analysis</span>
-          </div>
+          </Box>
         )}
         {showCreateButton && (
           <Button
             onClick={() => onCreateProfile?.()}
+            variant="contained"
             sx={{
-      '&:hover': {},}}
+              backgroundColor: 'var(--sys-color-primary)',
+              color: 'var(--sys-color-on-primary)',
+              borderRadius: 'var(--shape-corner-full)',
+              padding: 'var(--sys-spacing-2) var(--sys-spacing-4)',
+              '&:hover': {
+                backgroundColor: 'var(--sys-color-primary-dark)',
+              },
+            }}
           >
-            <Plus sx={{
-      mr: 2
-    }} />
+            <Plus sx={{ marginRight: 'var(--sys-spacing-2)' }} />
             {isEmpty ? 'Create Your First Document' : 'Create Document'}
           </Button>
         )}
-        <Button onClick={onNavigateToSettings} variant="text" size="small">
-          <Settings sx={{}} />
+        <Button
+          onClick={onNavigateToSettings}
+          variant="text"
+          size="small"
+          sx={{ color: 'var(--sys-color-on-surface-variant)' }}
+        >
+          <Settings />
         </Button>
-        <div sx={{
-      bgcolor: "common.white",
-      borderRadius: "var(--sys-shape-radius-full)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-          <User sx={{
-      color: "common.black"
-    }} />
-        </div>
-      </div>
-    </div>
+        <Box
+          sx={{
+            backgroundColor: 'var(--sys-color-surface-container-highest)',
+            borderRadius: 'var(--shape-corner-full)',
+            padding: 'var(--sys-spacing-2)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: 'var(--elevation-level1)',
+          }}
+        >
+          <User sx={{ color: 'var(--sys-color-on-surface)' }} />
+        </Box>
+      </Box>
+    </Box>
   );
 }

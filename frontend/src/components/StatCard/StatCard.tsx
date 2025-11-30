@@ -1,15 +1,5 @@
-import { Card, CardContent, Typography, Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React from 'react';
-
-const StyledStatCard = styled(Card)(({ theme }) => ({
-  borderRadius: theme.spacing(2),
-  border: `1px solid ${theme.palette.divider}`,
-  boxShadow: 'none',
-  '&:hover': {
-    boxShadow: theme.shadows[2],
-  },
-}));
+import { Card } from '../ui/card';
 
 export interface StatCardProps {
   title: string;
@@ -33,49 +23,33 @@ export const StatCard: React.FC<StatCardProps> = ({
   const getTrendColor = (trend?: 'up' | 'down' | 'neutral') => {
     switch (trend) {
       case 'up':
-        return 'success.main';
+        return 'text-green-500';
       case 'down':
-        return 'error.main';
+        return 'text-red-500';
       default:
-        return 'text.secondary';
+        return 'text-gray-500';
     }
   };
 
   return (
-    <StyledStatCard className={className}>
-      <CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1 }}>
-          <Typography variant="subtitle2" color="text.secondary">
-            {title}
-          </Typography>
-          {icon && <Box sx={{ color: 'primary.main' }}>{icon}</Box>}
-        </Box>
+    <Card className={`p-4 rounded-lg border shadow-sm hover:shadow-md transition-shadow ${className}`}>
+      <div className="flex items-center justify-between mb-1">
+        <div className="text-sm text-gray-500">{title}</div>
+        {icon && <div className="text-primary-500">{icon}</div>}
+      </div>
 
-        <Typography variant="h4" fontWeight={600} sx={{ mb: 0.5 }}>
-          {value}
-        </Typography>
+      <div className="text-3xl font-bold mb-0.5">{value}</div>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-          {subtitle && (
-            <Typography variant="body2" color="text.secondary">
-              {subtitle}
-            </Typography>
-          )}
-          {trendValue && (
-            <Typography
-              variant="caption"
-              sx={{
-                color: getTrendColor(trend),
-                fontWeight: 500,
-              }}
-            >
-              {trend === 'up' && '↗'}
-              {trend === 'down' && '↘'}
-              {trendValue}
-            </Typography>
-          )}
-        </Box>
-      </CardContent>
-    </StyledStatCard>
+      <div className="flex items-center gap-1">
+        {subtitle && <div className="text-sm text-gray-500">{subtitle}</div>}
+        {trendValue && (
+          <div className={`text-xs font-medium ${getTrendColor(trend)}`}>
+            {trend === 'up' && '↗'}
+            {trend === 'down' && '↘'}
+            {trendValue}
+          </div>
+        )}
+      </div>
+    </Card>
   );
 };

@@ -184,10 +184,16 @@ export const JobCard: React.FC<JobCardProps> = ({
                 size="small"
                 onClick={handleSave}
                 sx={{
-                  color: isSaved ? 'primary.main' : 'text.secondary',
+                  color: isSaved
+                    ? 'var(--sys-color-primary)'
+                    : 'var(--sys-color-on-surface-variant)',
                 }}
               >
-                {isSaved ? <Bookmark sx={{ fontSize: 16 }} /> : <BookmarkBorder sx={{ fontSize: 16 }} />}
+                {isSaved ? (
+                  <Bookmark sx={{ fontSize: '20px' }} />
+                ) : (
+                  <BookmarkBorder sx={{ fontSize: '20px' }} />
+                )}
               </IconButton>
             </Box>
           </Box>
@@ -291,59 +297,116 @@ export const JobCard: React.FC<JobCardProps> = ({
               size="small"
               onClick={handleSave}
               sx={{
-                color: isSaved ? 'primary.main' : 'text.secondary',
+                color: isSaved
+                  ? 'var(--sys-color-primary)'
+                  : 'var(--sys-color-on-surface-variant)',
               }}
             >
-              {isSaved ? <Bookmark sx={{ fontSize: 20 }} /> : <BookmarkBorder sx={{ fontSize: 20 }} />}
+              {isSaved ? (
+                <Bookmark sx={{ fontSize: '24px' }} />
+              ) : (
+                <BookmarkBorder sx={{ fontSize: '24px' }} />
+              )}
             </IconButton>
           </Box>
         </Box>
 
-        <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+        <Typography
+          sx={{
+            font: 'var(--sys-type-headline-small)',
+            fontWeight: 'var(--sys-type-weight-semibold)',
+            mb: 'var(--sys-spacing-2)',
+          }}
+        >
           {job.title}
         </Typography>
 
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 2, mb: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <LocationOn sx={{ fontSize: 16 }} />
-            <Typography variant="body2" color="text.secondary">
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: 'var(--sys-spacing-2)',
+            mb: 'var(--sys-spacing-2)',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'calc(var(--sys-spacing-1)/2)',
+            }}
+          >
+            <LocationOn sx={{ fontSize: '20px' }} />
+            <Typography
+              sx={{
+                font: 'var(--sys-type-body-medium)',
+                color: 'var(--sys-color-on-surface-variant)',
+              }}
+            >
               {job.location}
             </Typography>
           </Box>
 
           {job.salary && (
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-              <AttachMoney sx={{ fontSize: 16 }} />
-              <Typography variant="body2" color="text.secondary">
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'calc(var(--sys-spacing-1)/2)',
+              }}
+            >
+              <AttachMoney sx={{ fontSize: '20px' }} />
+              <Typography
+                sx={{
+                  font: 'var(--sys-type-body-medium)',
+                  color: 'var(--sys-color-on-surface-variant)',
+                }}
+              >
                 {formatSalary()}
               </Typography>
             </Box>
           )}
 
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            sx={{
+              font: 'var(--sys-type-body-medium)',
+              color: 'var(--sys-color-on-surface-variant)',
+            }}
+          >
             Posted {formatRelativeTime(job.postedDate)}
           </Typography>
         </Box>
 
         <Typography
-          variant="body2"
-          color="text.secondary"
           sx={{
-            mb: 3,
+            font: 'var(--sys-type-body-medium)',
+            color: 'var(--sys-color-on-surface-variant)',
+            mb: 'var(--sys-spacing-3)',
             overflow: 'hidden',
             textOverflow: 'ellipsis',
             display: '-webkit-box',
             WebkitLineClamp: 3,
             WebkitBoxOrient: 'vertical',
-            lineHeight: 1.6,
           }}
         >
           {job.description}
         </Typography>
 
         {/* Job Type & Experience Level */}
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 }}>
-          <Chip label={job.type.replace('-', ' ').toUpperCase()} size="small" variant="outlined" />
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: 'var(--sys-spacing-1)',
+            mb: 'var(--sys-spacing-3)',
+          }}
+        >
+          <Chip
+            label={job.type.replace('-', ' ').toUpperCase()}
+            size="small"
+            variant="outlined"
+          />
           <Chip
             label={`${job.experienceLevel.toUpperCase()} LEVEL`}
             size="small"
@@ -352,6 +415,8 @@ export const JobCard: React.FC<JobCardProps> = ({
               bgcolor: experienceColor.bg,
               color: experienceColor.text,
               borderColor: experienceColor.border,
+              borderWidth: '1px',
+              borderStyle: 'solid',
             }}
           />
           {job.remote && (
@@ -359,8 +424,8 @@ export const JobCard: React.FC<JobCardProps> = ({
               label="REMOTE"
               size="small"
               sx={{
-                bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
-                color: 'primary.main',
+                bgcolor: 'var(--sys-color-primary-container)',
+                color: 'var(--sys-color-on-primary-container)',
               }}
             />
           )}
@@ -368,16 +433,32 @@ export const JobCard: React.FC<JobCardProps> = ({
 
         {/* Skills */}
         {job.skills.length > 0 && (
-          <Box sx={{ mb: 3 }}>
-            <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>
+          <Box sx={{ mb: 'var(--sys-spacing-3)' }}>
+            <Typography
+              sx={{
+                font: 'var(--sys-type-body-medium)',
+                fontWeight: 'var(--sys-type-weight-semibold)',
+                mb: 'var(--sys-spacing-1)',
+              }}
+            >
               Required Skills
             </Typography>
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 'calc(var(--sys-spacing-1)/2)',
+              }}
+            >
               {job.skills.slice(0, 6).map((skill, index) => (
                 <Chip key={index} label={skill} size="small" />
               ))}
               {job.skills.length > 6 && (
-                <Chip label={`+${job.skills.length - 6} more`} size="small" variant="outlined" />
+                <Chip
+                  label={`+${job.skills.length - 6} more`}
+                  size="small"
+                  variant="outlined"
+                />
               )}
             </Box>
           </Box>
@@ -451,12 +532,16 @@ export const JobCard: React.FC<JobCardProps> = ({
 
         <Button
           variant="outlined"
-          endIcon={<OpenInNew sx={{ fontSize: 16 }} />}
+          endIcon={<OpenInNew sx={{ fontSize: '20px' }} />}
           onClick={(e) => {
             e.stopPropagation();
             onViewDetails?.(job.id);
           }}
-          sx={{ ml: 1 }}
+          sx={{
+            ml: 'var(--sys-spacing-1)',
+            borderColor: 'var(--sys-color-outline)',
+            color: 'var(--sys-color-primary)',
+          }}
         >
           Details
         </Button>
