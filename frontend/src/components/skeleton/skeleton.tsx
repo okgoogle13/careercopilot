@@ -1,19 +1,30 @@
-import type { SkeletonProps as MuiSkeletonProps } from '@mui/material';
-import { Skeleton as MuiSkeleton } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import styles from './skeleton.module.css';
 
-const StyledSkeleton = styled(MuiSkeleton)(({ theme }) => ({
-  borderRadius: theme.spacing(1),
-}));
-
-export interface SkeletonProps extends MuiSkeletonProps {
-  className?: string;
+export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'text' | 'rectangular' | 'circular';
+  width?: string | number;
+  height?: string | number;
+  animation?: 'pulse' | 'wave' | 'none';
 }
 
-export const Skeleton = React.forwardRef<HTMLSpanElement, SkeletonProps>(
-  ({ className, ...props }, ref) => {
-    return <StyledSkeleton ref={ref} className={className} {...props} />;
+export const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
+  ({ variant = 'text', width, height, animation = 'pulse', className, style, ...props }, ref) => {
+    const animationClass = styles['skeleton--' + animation];
+    const variantClass = styles['skeleton--' + variant];
+
+    return (
+      <div
+        ref={ref}
+        className={styles.skeleton + ' ' + variantClass + ' ' + animationClass + (className ? ' ' + className : '')}
+        style={{
+          width: typeof width === 'number' ? width + 'px' : width,
+          height: typeof height === 'number' ? height + 'px' : height,
+          ...style,
+        }}
+        {...props}
+      />
+    );
   }
 );
 

@@ -1,0 +1,42 @@
+/* M3 Expressive Breadcrumb Component - Design Tokens */
+
+.breadcrumb {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--sys-space-1, 4px);
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sys-space-1, 4px);
+  font-size: var(--sys-type-body-small-size, 12px);
+  line-height: var(--sys-type-body-small-line-height, 16px);
+}
+
+.breadcrumb-item--current {
+  color: var(--sys-color-on-surface, #1c1b1f);
+  font-weight: 500;
+}
+
+.breadcrumb-item:not(.breadcrumb-item--current) {
+  color: var(--sys-color-on-surface-variant, #49454e);
+}
+
+.breadcrumb-link {
+  color: var(--sys-color-primary, #6e44ff);
+  text-decoration: none;
+  transition: color var(--sys-motion-duration-short-2, 100ms) ease-in-out;
+}
+
+.breadcrumb-link:hover {
+  color: var(--sys-color-primary-90, #8565ff);
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  color: var(--sys-color-on-surface-variant, #49454e);
+  opacity: 0.5;
+}

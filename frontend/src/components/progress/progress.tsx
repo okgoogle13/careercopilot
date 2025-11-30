@@ -1,29 +1,31 @@
-import type { LinearProgressProps } from '@mui/material';
-import { LinearProgress, Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React from 'react';
+import styles from './progress.module.css';
 
-const StyledLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 8,
-  borderRadius: theme.spacing(1),
-  backgroundColor: theme.palette.grey[200],
-  '& .MuiLinearProgress-bar': {
-    borderRadius: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main,
-  },
-}));
-
-export interface ProgressProps extends LinearProgressProps {
-  value?: number;
-  className?: string;
+export interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+  value: number;
+  max?: number;
+  variant?: 'determinate' | 'indeterminate';
 }
 
 export const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
-  ({ value, className, ...props }, ref) => {
+  ({ value, max = 100, variant = 'determinate', className, ...props }, ref) => {
+    const percentage = Math.min(100, Math.max(0, (value / max) * 100));
+
     return (
-      <Box ref={ref} className={className} sx={{ width: '100%' }}>
-        <StyledLinearProgress variant="determinate" value={value} {...props} />
-      </Box>
+      <div
+        ref={ref}
+        className={styles.progress + ' ' + styles['progress--' + variant] + (className ? ' ' + className : '')}
+        role="progressbar"
+        aria-valuenow={value}
+        aria-valuemin={0}
+        aria-valuemax={max}
+        {...props}
+      >
+        <div
+          className={styles['progress-bar']}
+          style={variant === 'determinate' ? { width: percentage + '%' } : {}}
+        />
+      </div>
     );
   }
 );
