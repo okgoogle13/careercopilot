@@ -28,10 +28,10 @@ const getSeverityClass = (severity: ToastSeverity) => {
 };
 
 const iconMapping = {
-  success: CheckCircle({}),
-  error: AlertCircle({}),
-  warning: AlertTriangle({}),
-  info: Info({}),
+  success: React.createElement(CheckCircle, { size: 20 }),
+  error: React.createElement(AlertCircle, { size: 20 }),
+  warning: React.createElement(AlertTriangle, { size: 20 }),
+  info: React.createElement(Info, { size: 20 }),
 };
 
 const getPositionClass = (position) => {

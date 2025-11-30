@@ -22,7 +22,7 @@ export const AlertDialog = React.forwardRef((props, ref) => {
       onClick: () => handleClose(),
     },
     React.createElement(
-      React.Provider,
+      AlertDialogContext.Provider,
       { value: { onClose: handleClose } },
       React.createElement(
         'div',
@@ -31,7 +31,7 @@ export const AlertDialog = React.forwardRef((props, ref) => {
           onClick: (e) => e.stopPropagation(),
           ref: ref,
         },
-        React.createElement(AlertDialogContext.Provider, { value: { onClose: handleClose } }, children)
+        children
       )
     )
   );
