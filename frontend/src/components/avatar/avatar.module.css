@@ -1,0 +1,54 @@
+/* M3 Expressive Avatar Component - Design Tokens */
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--sys-shape-corner-full, 50%);
+  background-color: var(--sys-color-primary-container, #f3e9ff);
+  color: var(--sys-color-on-primary-container, #470084);
+  font-weight: 600;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatar--sm {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.avatar--md {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.avatar--lg {
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+}
+
+.avatar--xl {
+  width: 80px;
+  height: 80px;
+  font-size: 24px;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-initials {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.avatar-icon {
+  width: 60%;
+  height: 60%;
+  opacity: 0.7;
+}
