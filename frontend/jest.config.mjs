@@ -12,11 +12,6 @@ export default {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.test.json',
-    },
-  },
   transform: {
     '^.+\\.(ts|tsx)$': [
       'ts-jest',
@@ -36,6 +31,9 @@ export default {
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: false,
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+  ],
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',
@@ -54,10 +52,6 @@ export default {
       statements: 1,
     },
   },
-  testPathIgnorePatterns: [
-    '<rootDir>/node_modules/',
-    '<rootDir>/src/components/layout/fix-button-variants.ts',
-  ],
   testTimeout: 15000,
   verbose: true,
   bail: false,

@@ -8,17 +8,7 @@ import {
   Favorite as Heart,
   Star,
 } from '@mui/icons-material';
-import { Box } from '@mui/material';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Box, Card, Typography, Button, IconButton } from '@mui/material';
 import { useState } from 'react';
 
 import { Badge } from '../../ui/badge';
@@ -32,7 +22,7 @@ interface JobMatch {
   id: string;
   title: string;
   company: string;
-  location: string;
+  location:string;
   matchPercentage: number;
   salaryRange: string;
   postedDate: string;
@@ -102,348 +92,494 @@ export function JobMatching({ onBack }: JobMatchingProps) {
   const handleGenerateInsights = async (jobId: string) => {
     setIsGeneratingInsights(true);
     setSelectedJob(jobId);
-
-    // Simulate AI analysis
     setTimeout(() => {
       setIsGeneratingInsights(false);
     }, 2000);
   };
-
   const getMatchColor = (percentage: number) => {
-    if (percentage >= 90) return 'text-green-500';
-    if (percentage >= 80) return 'text-yellow-500';
-    return 'text-orange-500';
+    if (percentage >= 90) return 'var(--sys-color-primary)';
+    if (percentage >= 80) return 'var(--sys-color-secondary)';
+    return 'var(--sys-color-tertiary)';
   };
-
-  const getMatchBgColor = (percentage: number) => {
-    if (percentage >= 90) return 'bg-green-500/10';
-    if (percentage >= 80) return 'bg-yellow-500/10';
-    return 'bg-orange-500/10';
-  };
-
   return (
-    <div sx={{
-      minHeight: "100vh",
-      p: 4
-    }}>
-      <div sx={{}}>
-        {/* Header */}
-        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4,
-      mb: 8
-    }}>
-          <Button variant="text" size="small" onClick={onBack}>
-            <ArrowLeft sx={{
-      mr: 2
-    }} />
+    <Box
+      sx={{
+        minHeight: '100vh',
+        p: 'var(--sys-spacing-4)',
+        backgroundColor: 'var(--sys-color-surface)',
+      }}
+    >
+      <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--sys-spacing-4)',
+            mb: 'var(--sys-spacing-8)',
+          }}
+        >
+          <Button
+            variant="text"
+            size="small"
+            onClick={onBack}
+            sx={{ color: 'var(--sys-color-on-surface)' }}
+          >
+            <ArrowLeft sx={{ mr: 'var(--sys-spacing-2)' }} />
             Back to Career Hub
           </Button>
-        </div>
+        </Box>
 
-        <div sx={{
-      textAlign: "center",
-      mb: 8
-    }}>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 2,
-      mb: 4
-    }}>
-            <Sparkles sx={{}} />
-            <h1 sx={{
-      typography: "h3",
-      fontWeight: 600
-    }}>AI Job Matching</h1>
-          </div>
-          <p sx={{
-      typography: "h6"
-    }}>
-            Discover roles that perfectly match your skills, experience, and career goals.
-          </p>
-        </div>
+        <Box sx={{ textAlign: 'center', mb: 'var(--sys-spacing-8)' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 'var(--sys-spacing-2)',
+              mb: 'var(--sys-spacing-4)',
+            }}
+          >
+            <Sparkles sx={{ color: 'var(--sys-color-primary)' }} />
+            <Typography
+              variant="h1"
+              sx={{
+                font: 'var(--sys-type-display-small)',
+                fontWeight: 'var(--sys-type-weight-bold)',
+                color: 'var(--sys-color-on-surface)',
+              }}
+            >
+              AI Job Matching
+            </Typography>
+          </Box>
+          <Typography
+            variant="h6"
+            sx={{
+              font: 'var(--sys-type-headline-small)',
+              color: 'var(--sys-color-on-surface-variant)',
+            }}
+          >
+            Discover roles that perfectly match your skills, experience, and
+            career goals.
+          </Typography>
+        </Box>
 
-        {/* Job Matches */}
-        <div sx={{}}>
+        <Box sx={{ display: 'grid', gap: 'var(--sys-spacing-4)' }}>
           {jobMatches.map((job) => (
-            <Card key={job.id} sx={{
-      p: 6,
-      '&:hover': { boxShadow: 4 },}}>
-              <div sx={{
-      display: "flex",
-      flexDirection: "column",
-      [theme.breakpoints.up('md')]: { flexDirection: "row" },
-      gap: 6
-    }}>
-                {/* Main Job Info */}
-                <div sx={{
-      flex: 1,}}>
-                  <div sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      justifyContent: "space-between"
-    }}>
-                    <div>
-                      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3,
-      mb: 2
-    }}>
-                        <h3 sx={{
-      typography: "h5",
-      fontWeight: 600
-    }}>{job.title}</h3>
-                        {job.isFavorited && <Heart sx={{
-      color: "red.500",
-      fill: "currentColor"
-    }} />}
-                      </div>
-                      <p sx={{
-      typography: "h6",}}>{job.company}</p>
-
-                      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4,
-      mt: 2,
-      typography: "body1",}}>
-                        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 1
-    }}>
-                          <MapPin sx={{}} />
-                          {job.location}
-                        </div>
-                        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 1
-    }}>
-                          <DollarSign sx={{}} />
-                          {job.salaryRange}
-                        </div>
-                        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 1
-    }}>
-                          <Clock sx={{}} />
-                          {job.postedDate}
-                        </div>
-                        {job.isRemote && <Badge variant="secondary">Remote Available</Badge>}
-                      </div>
-                    </div>
-                  </div>
-
-                  <p sx={{}}>{job.description}</p>
-
-                  <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 4
-    }}>
-                    <div>
-                      <h4 sx={{
-      fontWeight: 500,
-      mb: 2
-    }}>Key Requirements</h4>
-                      <ul sx={{}}>
-                        {job.keyRequirements.map((req, index) => (
-                          <li
-                            key={index}
-                            sx={{
-      typography: "body1",
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}
-                          >
-                            <div sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
-                            {req}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div>
-                      <h4 sx={{
-      fontWeight: 500,
-      mb: 2
-    }}>Benefits</h4>
-                      <ul sx={{}}>
-                        {job.benefits.map((benefit, index) => (
-                          <li
-                            key={index}
-                            sx={{
-      typography: "body1",
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}
-                          >
-                            <div sx={{
-      bgcolor: "green.500",
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
-                            {benefit}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Match Score & Actions */}
-                <div sx={{
-      [theme.breakpoints.up('md')]: {},}}>
-                  <Card sx={{
-      p: 4,
-      border: 0
-    }}>
-                    <div sx={{
-      textAlign: "center"
-    }}>
-                      <div
+            <Card
+              key={job.id}
+              sx={{
+                p: 'var(--sys-spacing-6)',
+                borderRadius: 'var(--sys-shape-corner-large)',
+                boxShadow: 'var(--sys-elevation-level1)',
+                transition:
+                  'box-shadow var(--sys-motion-duration-short2) var(--sys-motion-easing-standard)',
+                '&:hover': { boxShadow: 'var(--sys-elevation-level2)' },
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'grid',
+                  gridTemplateColumns: {
+                    xs: '1fr',
+                    md: '1fr 300px',
+                  },
+                  gap: 'var(--sys-spacing-6)',
+                }}
+              >
+                <Box>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      justifyContent: 'space-between',
+                      mb: 'var(--sys-spacing-2)',
+                    }}
+                  >
+                    <Box>
+                      <Box
                         sx={{
-      typography: "h3",
-      fontWeight: 700,
-      mb: 2
-    }}
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--sys-spacing-3)',
+                          mb: 'var(--sys-spacing-2)',
+                        }}
                       >
-                        {job.matchPercentage}%
-                      </div>
-                      <p sx={{
-      typography: "body1",
-      fontWeight: 500,
-      mb: 3
-    }}>Match Score</p>
-                      <Progress value={job.matchPercentage} sx={{
-      width: "100%"
-    }} />
-                      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 1,
-      mt: 2
-    }}>
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            sx={{}}
-                          />
+                        <Typography
+                          variant="h3"
+                          sx={{
+                            font: 'var(--sys-type-headline-medium)',
+                            fontWeight: 'var(--sys-type-weight-semibold)',
+                            color: 'var(--sys-color-on-surface)',
+                          }}
+                        >
+                          {job.title}
+                        </Typography>
+                        {job.isFavorited && (
+                          <Heart sx={{ color: 'var(--sys-color-error)' }} />
+                        )}
+                      </Box>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          font: 'var(--sys-type-title-large)',
+                          color: 'var(--sys-color-on-surface-variant)',
+                        }}
+                      >
+                        {job.company}
+                      </Typography>
+
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--sys-spacing-4)',
+                          mt: 'var(--sys-spacing-2)',
+                          font: 'var(--sys-type-body-medium)',
+                          color: 'var(--sys-color-on-surface-variant)',
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 'var(--sys-spacing-1)',
+                          }}
+                        >
+                          <MapPin />
+                          {job.location}
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 'var(--sys-spacing-1)',
+                          }}
+                        >
+                          <DollarSign />
+                          {job.salaryRange}
+                        </Box>
+                        <Box
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 'var(--sys-spacing-1)',
+                          }}
+                        >
+                          <Clock />
+                          {job.postedDate}
+                        </Box>
+                        {job.isRemote && (
+                          <Badge variant="secondary">Remote Available</Badge>
+                        )}
+                      </Box>
+                    </Box>
+                  </Box>
+
+                  <Typography
+                    sx={{
+                      font: 'var(--sys-type-body-large)',
+                      my: 'var(--sys-spacing-4)',
+                      color: 'var(--sys-color-on-surface-variant)',
+                    }}
+                  >
+                    {job.description}
+                  </Typography>
+
+                  <Box
+                    sx={{
+                      display: 'grid',
+                      gridTemplateColumns: {
+                        xs: '1fr',
+                        sm: '1fr 1fr',
+                      },
+                      gap: 'var(--sys-spacing-4)',
+                    }}
+                  >
+                    <Box>
+                      <Typography
+                        sx={{
+                          font: 'var(--sys-type-title-medium)',
+                          fontWeight: 'var(--sys-type-weight-medium)',
+                          mb: 'var(--sys-spacing-2)',
+                          color: 'var(--sys-color-on-surface)',
+                        }}
+                      >
+                        Key Requirements
+                      </Typography>
+                      <Box
+                        component="ul"
+                        sx={{
+                          listStyle: 'none',
+                          p: 0,
+                          m: 0,
+                          display: 'grid',
+                          gap: 'var(--sys-spacing-1)',
+                        }}
+                      >
+                        {job.keyRequirements.map((req, index) => (
+                          <Box
+                            component="li"
+                            key={index}
+                            sx={{
+                              font: 'var(--sys-type-body-medium)',
+                              color: 'var(--sys-color-on-surface-variant)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 'var(--sys-spacing-2)',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                width: '8px',
+                                height: '8px',
+                                borderRadius: 'var(--sys-shape-corner-full)',
+                                backgroundColor: 'var(--sys-color-primary)',
+                              }}
+                            />
+                            {req}
+                          </Box>
                         ))}
-                      </div>
-                    </div>
+                      </Box>
+                    </Box>
+
+                    <Box>
+                      <Typography
+                        sx={{
+                          font: 'var(--sys-type-title-medium)',
+                          fontWeight: 'var(--sys-type-weight-medium)',
+                          mb: 'var(--sys-spacing-2)',
+                          color: 'var(--sys-color-on-surface)',
+                        }}
+                      >
+                        Benefits
+                      </Typography>
+                      <Box
+                        component="ul"
+                        sx={{
+                          listStyle: 'none',
+                          p: 0,
+                          m: 0,
+                          display: 'grid',
+                          gap: 'var(--sys-spacing-1)',
+                        }}
+                      >
+                        {job.benefits.map((benefit, index) => (
+                          <Box
+                            component="li"
+                            key={index}
+                            sx={{
+                              font: 'var(--sys-type-body-medium)',
+                              color: 'var(--sys-color-on-surface-variant)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              gap: 'var(--sys-spacing-2)',
+                            }}
+                          >
+                            <Box
+                              sx={{
+                                width: '8px',
+                                height: '8px',
+                                borderRadius: 'var(--sys-shape-corner-full)',
+                                backgroundColor: 'var(--sys-color-secondary)',
+                              }}
+                            />
+                            {benefit}
+                          </Box>
+                        ))}
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 'var(--sys-spacing-2)',
+                  }}
+                >
+                  <Card
+                    sx={{
+                      p: 'var(--sys-spacing-4)',
+                      border: '1px solid var(--sys-color-outline-variant)',
+                      borderRadius: 'var(--sys-shape-corner-medium)',
+                      textAlign: 'center',
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        font: 'var(--sys-type-display-small)',
+                        fontWeight: 'var(--sys-type-weight-bold)',
+                        mb: 'var(--sys-spacing-2)',
+                        color: getMatchColor(job.matchPercentage),
+                      }}
+                    >
+                      {job.matchPercentage}%
+                    </Typography>
+                    <Typography
+                      sx={{
+                        font: 'var(--sys-type-body-large)',
+                        fontWeight: 'var(--sys-type-weight-medium)',
+                        mb: 'var(--sys-spacing-3)',
+                        color: 'var(--sys-color-on-surface-variant)',
+                      }}
+                    >
+                      Match Score
+                    </Typography>
+                    <Progress
+                      value={job.matchPercentage}
+                      sx={{
+                        width: '100%',
+                        '& .MuiLinearProgress-bar': {
+                          backgroundColor: getMatchColor(job.matchPercentage),
+                        },
+                      }}
+                    />
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 'var(--sys-spacing-1)',
+                        mt: 'var(--sys-spacing-2)',
+                      }}
+                    >
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          sx={{
+                            color:
+                              i < Math.round(job.matchPercentage / 20)
+                                ? 'var(--sys-color-tertiary)'
+                                : 'var(--sys-color-outline-variant)',
+                          }}
+                        />
+                      ))}
+                    </Box>
                   </Card>
 
-                  <div sx={{}}>
-                    <Button
-                      sx={{
-      width: "100%",
-      '&:hover': {}
-    }}
-                      onClick={() => handleGenerateInsights(job.id)}
-                      disabled={isGeneratingInsights && selectedJob === job.id}
-                    >
-                      {isGeneratingInsights && selectedJob === job.id ? (
-                        <>
-                          <Sparkles sx={{
-      mr: 2,}} />
-                          Generating Insights...
-                        </>
-                      ) : (
-                        <>
-                          <Sparkles sx={{
-      mr: 2
-    }} />
-                          Get AI Insights
-                        </>
-                      )}
-                    </Button>
+                  <Button
+                    sx={{
+                      width: '100%',
+                      backgroundColor: 'var(--sys-color-primary)',
+                      color: 'var(--sys-color-on-primary)',
+                      '&:hover': {
+                        backgroundColor: 'var(--sys-color-primary-dark)',
+                      },
+                    }}
+                    onClick={() => handleGenerateInsights(job.id)}
+                    disabled={isGeneratingInsights && selectedJob === job.id}
+                  >
+                    {isGeneratingInsights && selectedJob === job.id ? (
+                      <>
+                        <Sparkles sx={{ mr: 'var(--sys-spacing-2)' }} />
+                        Generating Insights...
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles sx={{ mr: 'var(--sys-spacing-2)' }} />
+                        Get AI Insights
+                      </>
+                    )}
+                  </Button>
 
-                    <Button variant="outlined" sx={{
-      width: "100%"
-    }}>
-                      <ExternalLink sx={{
-      mr: 2
-    }} />
-                      View Full Job
-                    </Button>
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      width: '100%',
+                      borderColor: 'var(--sys-color-outline)',
+                      color: 'var(--sys-color-primary)',
+                    }}
+                  >
+                    <ExternalLink sx={{ mr: 'var(--sys-spacing-2)' }} />
+                    View Full Job
+                  </Button>
 
-                    <Button variant="outlined" sx={{
-      width: "100%"
-    }}>
-                      <Heart
-                        sx={{
-      mr: 2,}}
-                      />
-                      {job.isFavorited ? 'Saved' : 'Save Job'}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              {/* AI Insights (shown when generated) */}
+                  <Button
+                    variant="outlined"
+                    sx={{
+                      width: '100%',
+                      borderColor: 'var(--sys-color-outline)',
+                      color: 'var(--sys-color-primary)',
+                    }}
+                  >
+                    <Heart sx={{ mr: 'var(--sys-spacing-2)' }} />
+                    {job.isFavorited ? 'Saved' : 'Save Job'}
+                  </Button>
+                </Box>
+              </Box>
               {isGeneratingInsights && selectedJob === job.id && (
-                <div sx={{
-      mt: 6,
-      p: 4,
-      border: 1,
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                  <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2,
-      mb: 3
-    }}>
-                    <Sparkles sx={{}} />
-                    <h4 sx={{
-      fontWeight: 500,}}>AI-Generated Insights</h4>
-                  </div>
-                  <div sx={{
-      typography: "body1"
-    }}>
-                    <p>
-                      • <strong>Strong match:</strong> Your Community Support Worker experience
-                      aligns perfectly with this role
-                    </p>
-                    <p>
-                      • <strong>Salary competitive:</strong> This position offers 15% above market
-                      average for your experience level
-                    </p>
-                    <p>
-                      • <strong>Growth opportunity:</strong> Company has promoted 78% of CSWs to
-                      senior roles within 2 years
-                    </p>
-                    <p>
-                      • <strong>Recommendation:</strong> Highlight your crisis intervention skills
-                      and community engagement experience
-                    </p>
-                  </div>
-                </div>
+                <Box
+                  sx={{
+                    mt: 'var(--sys-spacing-6)',
+                    p: 'var(--sys-spacing-4)',
+                    border: '1px solid var(--sys-color-outline-variant)',
+                    borderRadius: 'var(--sys-shape-corner-medium)',
+                    backgroundColor: 'var(--sys-color-surface-container-low)',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 'var(--sys-spacing-2)',
+                      mb: 'var(--sys-spacing-3)',
+                    }}
+                  >
+                    <Sparkles sx={{ color: 'var(--sys-color-primary)' }} />
+                    <Typography
+                      sx={{
+                        font: 'var(--sys-type-title-medium)',
+                        fontWeight: 'var(--sys-type-weight-medium)',
+                        color: 'var(--sys-color-on-surface)',
+                      }}
+                    >
+                      AI-Generated Insights
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      font: 'var(--sys-type-body-large)',
+                      color: 'var(--sys-color-on-surface-variant)',
+                      display: 'grid',
+                      gap: 'var(--sys-spacing-2)',
+                    }}
+                  >
+                    <Typography>
+                      • <strong>Strong match:</strong> Your Community Support
+                      Worker experience aligns perfectly with this role
+                    </Typography>
+                    <Typography>
+                      • <strong>Salary competitive:</strong> This position
+                      offers 15% above market average for your experience level
+                    </Typography>
+                    <Typography>
+                      • <strong>Growth opportunity:</strong> Company has
+                      promoted 78% of CSWs to senior roles within 2 years
+                    </Typography>
+                    <Typography>
+                      • <strong>Recommendation:</strong> Highlight your crisis
+                      intervention skills and community engagement experience
+                    </Typography>
+                  </Box>
+                </Box>
               )}
             </Card>
           ))}
-        </div>
+        </Box>
 
-        {/* Load More */}
-        <div sx={{
-      textAlign: "center",
-      mt: 8
-    }}>
-          <Button variant="outlined" size="large">
+        <Box sx={{ textAlign: 'center', mt: 'var(--sys-spacing-8)' }}>
+          <Button
+            variant="outlined"
+            size="large"
+            sx={{
+              borderColor: 'var(--sys-color-outline)',
+              color: 'var(--sys-color-primary)',
+            }}
+          >
             Load More Matches
           </Button>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }

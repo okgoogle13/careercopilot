@@ -6,13 +6,8 @@ import {
   MenuBook as BookOpen,
   Error as AlertCircle,
 } from '@mui/icons-material';
-import { Box, Typography, useTheme } from '@mui/material';
-import {
-  Button,
-  Card,
-} from '@mui/material';
+import { Box, Typography, Button, Card, useTheme } from '@mui/material';
 import { useState } from 'react';
-
 import { Badge } from '../../ui/badge';
 import { Progress } from '../../ui/progress';
 
@@ -21,7 +16,6 @@ interface CareerIntelligenceProps {
 }
 
 export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
-  const theme = useTheme();
   const [isGeneratingPath, setIsGeneratingPath] = useState(false);
   const [showLearningPath, setShowLearningPath] = useState(false);
 
@@ -72,13 +66,6 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
         'Quality Assurance Experience',
       ],
     },
-    {
-      title: 'Community Services Coordinator',
-      timeframe: '6-12 months',
-      salaryIncrease: '$5,000 - $12,000',
-      probability: 95,
-      requirements: ['Stakeholder Engagement', 'Grant Writing', 'Community Networks'],
-    },
   ];
 
   const marketTrends = [
@@ -94,14 +81,7 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       impact: 'High',
       description: 'Increased opportunities in disability support services',
     },
-    {
-      trend: 'Peer Support Programs',
-      growth: '+28%',
-      impact: 'Medium',
-      description: 'Rising recognition of lived experience value',
-    },
   ];
-
   const handleGenerateLearningPath = async () => {
     setIsGeneratingPath(true);
     setTimeout(() => {
@@ -109,20 +89,18 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
       setShowLearningPath(true);
     }, 2000);
   };
-
   const getImportanceColor = (importance: string) => {
     switch (importance) {
       case 'High':
-        return 'text-red-500';
+        return 'var(--sys-color-error)';
       case 'Medium':
-        return 'text-yellow-500';
+        return 'var(--sys-color-tertiary)';
       case 'Low':
-        return 'text-green-500';
+        return 'var(--sys-color-primary)';
       default:
-        return 'text-gray-500';
+        return 'var(--sys-color-on-surface-variant)';
     }
   };
-
   const getImpactBadgeVariant = (impact: string) => {
     switch (impact) {
       case 'High':
@@ -135,271 +113,378 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
         return 'outline';
     }
   };
-
   return (
-    <Box sx={{
-      minHeight: "100vh",
-      p: 4
-    }}>
+    <Box
+      sx={{
+        minHeight: '100vh',
+        p: 'var(--sys-spacing-4)',
+        backgroundColor: 'var(--sys-color-surface)',
+      }}
+    >
       <Box>
-        {/* Header */}
-        <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4,
-      mb: 8
-    }}>
-          <Button variant="text" size="small" onClick={onBack}>
-            <ArrowLeft sx={{
-      mr: 2
-    }} />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--sys-spacing-4)',
+            mb: 'var(--sys-spacing-8)',
+          }}
+        >
+          <Button
+            variant="text"
+            size="small"
+            onClick={onBack}
+            sx={{ color: 'var(--sys-color-on-surface)' }}
+          >
+            <ArrowLeft sx={{ mr: 'var(--sys-spacing-2)' }} />
             Back to Career Hub
           </Button>
         </Box>
 
-        <Box sx={{
-      textAlign: "center",
-      mb: 8
-    }}>
-          <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 2,
-      mb: 4
-    }}>
-            <Sparkles />
-            <Typography variant="h3" sx={{
-      fontWeight: 600
-    }}>Career Intelligence</Typography>
+        <Box sx={{ textAlign: 'center', mb: 'var(--sys-spacing-8)' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 'var(--sys-spacing-2)',
+              mb: 'var(--sys-spacing-4)',
+            }}
+          >
+            <Sparkles sx={{ color: 'var(--sys-color-primary)' }} />
+            <Typography
+              variant="h1"
+              sx={{
+                font: 'var(--sys-type-display-small)',
+                fontWeight: 'var(--sys-type-weight-bold)',
+                color: 'var(--sys-color-on-surface)',
+              }}
+            >
+              Career Intelligence
+            </Typography>
           </Box>
-          <Typography variant="h6">
-            Get data-driven insights about your career trajectory and growth opportunities.
+          <Typography
+            variant="h6"
+            sx={{
+              font: 'var(--sys-type-headline-small)',
+              color: 'var(--sys-color-on-surface-variant)',
+            }}
+          >
+            Get data-driven insights about your career trajectory and growth
+            opportunities.
           </Typography>
         </Box>
 
-        <Box sx={{
-      display: 'grid',
-      gridTemplateColumns: { xs: '1fr', lg: '2fr 1fr' },
-      gap: 8
-    }}>
-          {/* Left Column - Skill Gaps */}
-          <Box sx={{
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 8,}}>
-            {/* Skill Gap Analysis */}
-            <Card sx={{
-      p: 6
-    }}>
-              <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 6
-    }}>
-                <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-                  <Box sx={{
-      p: 2,
-      borderRadius: "var(--sys-shape-radius-md)",
-      bgcolor: 'red.50'
-    }}>
-                    <AlertCircle sx={{
-      color: "red.500"
-    }} />
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', lg: '2fr 1fr' },
+            gap: 'var(--sys-spacing-8)',
+          }}
+        >
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--sys-spacing-8)',
+            }}
+          >
+            <Card
+              sx={{
+                p: 'var(--sys-spacing-6)',
+                borderRadius: 'var(--sys-shape-corner-large)',
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  mb: 'var(--sys-spacing-6)',
+                }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--sys-spacing-3)',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      p: 'var(--sys-spacing-2)',
+                      borderRadius: 'var(--sys-shape-corner-medium)',
+                      backgroundColor: 'var(--sys-color-error-container)',
+                    }}
+                  >
+                    <AlertCircle sx={{ color: 'var(--sys-color-error)' }} />
                   </Box>
-                  <Typography variant="h5" sx={{
-      fontWeight: 600
-    }}>Identified Skill Gaps</Typography>
+                  <Typography
+                    variant="h5"
+                    sx={{
+                      font: 'var(--sys-type-headline-small)',
+                      fontWeight: 'var(--sys-type-weight-semibold)',
+                    }}
+                  >
+                    Identified Skill Gaps
+                  </Typography>
                 </Box>
-                <Badge sx={{ bgcolor: 'purple.100', color: 'purple.800' }}>
-                  <Sparkles sx={{
-      mr: 1,
-      fontSize: '1rem'
-    }} />
+                <Badge
+                  sx={{
+                    backgroundColor: 'var(--sys-color-tertiary-container)',
+                    color: 'var(--sys-color-on-tertiary-container)',
+                  }}
+                >
+                  <Sparkles sx={{ mr: 1, fontSize: '1rem' }} />
                   AI Analysis
                 </Badge>
               </Box>
 
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--sys-spacing-4)',
+                }}
+              >
                 {skillGaps.map((gap, index) => (
-                  <Box key={index} sx={{
-      p: 4,
-      border: 1,
-      borderColor: 'grey.200',
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 3
-    }}>
-                      <Typography variant="h6" sx={{
-      fontWeight: 500
-    }}>{gap.skill}</Typography>
-                      <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                        <Badge variant="outline" className={getImportanceColor(gap.importance)}>
+                  <Box
+                    key={index}
+                    sx={{
+                      p: 'var(--sys-spacing-4)',
+                      border: '1px solid var(--sys-color-outline-variant)',
+                      borderRadius: 'var(--sys-shape-corner-medium)',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        mb: 'var(--sys-spacing-3)',
+                      }}
+                    >
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          font: 'var(--sys-type-title-large)',
+                          fontWeight: 'var(--sys-type-weight-medium)',
+                        }}
+                      >
+                        {gap.skill}
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--sys-spacing-2)',
+                        }}
+                      >
+                        <Badge
+                          variant="outline"
+                          sx={{ color: getImportanceColor(gap.importance) }}
+                        >
                           {gap.importance} Priority
                         </Badge>
-                        <Typography sx={{
-      typography: "body1",}}>
+                        <Typography sx={{ font: 'var(--sys-type-body-medium)' }}>
                           {gap.demand}% market demand
                         </Typography>
                       </Box>
                     </Box>
 
-                    <Typography sx={{
-      typography: "body1",
-      color: 'text.secondary',
-      mb: 3
-    }}>{gap.description}</Typography>
+                    <Typography
+                      sx={{
+                        font: 'var(--sys-type-body-large)',
+                        color: 'var(--sys-color-on-surface-variant)',
+                        mb: 'var(--sys-spacing-3)',
+                      }}
+                    >
+                      {gap.description}
+                    </Typography>
 
                     <Box>
-                      <Box sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      typography: "body1",
-      mb: 1
-    }}>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          font: 'var(--sys-type-body-medium)',
+                          mb: 1,
+                        }}
+                      >
                         <Typography>Current Level</Typography>
                         <Typography>{gap.currentLevel}%</Typography>
                       </Box>
-                      <Progress value={gap.currentLevel} sx={{
-      width: "100%"
-    }} />
+                      <Progress
+                        value={gap.currentLevel}
+                        sx={{ width: '100%' }}
+                      />
                     </Box>
                   </Box>
                 ))}
               </Box>
-
-              <Box sx={{
-      mt: 6,
-      textAlign: "center"
-    }}>
+              <Box sx={{ mt: 'var(--sys-spacing-6)', textAlign: 'center' }}>
                 <Button
                   onClick={handleGenerateLearningPath}
                   disabled={isGeneratingPath}
                   sx={{
-      bgcolor: 'primary.main',
-      color: 'common.white',
-      '&:hover': { bgcolor: 'primary.dark' }
-    }}
+                    backgroundColor: 'var(--sys-color-primary)',
+                    color: 'var(--sys-color-on-primary)',
+                    '&:hover': {
+                      backgroundColor: 'var(--sys-color-primary-dark)',
+                    },
+                  }}
                 >
                   {isGeneratingPath ? (
                     <>
-                      <Sparkles sx={{
-      mr: 2,
-      animation: 'spin 1s linear infinite'
-    }} />
+                      <Sparkles
+                        sx={{
+                          mr: 'var(--sys-spacing-2)',
+                          animation: 'spin 1s linear infinite',
+                        }}
+                      />
                       Generating Learning Path...
                     </>
                   ) : (
                     <>
-                      <Sparkles sx={{
-      mr: 2
-    }} />
+                      <Sparkles sx={{ mr: 'var(--sys-spacing-2)' }} />
                       Generate Learning Path
                     </>
                   )}
                 </Button>
               </Box>
             </Card>
-
-            {/* Career Paths */}
-            <Card sx={{
-      p: 6
-    }}>
-              <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3,
-      mb: 6
-    }}>
-                <Box sx={{
-      p: 2,
-      borderRadius: "var(--sys-shape-radius-md)",
-      bgcolor: 'green.50'
-    }}>
-                  <Target sx={{
-      color: "green.500"
-    }} />
+            <Card
+              sx={{
+                p: 'var(--sys-spacing-6)',
+                borderRadius: 'var(--sys-shape-corner-large)',
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--sys-spacing-3)',
+                  mb: 'var(--sys-spacing-6)',
+                }}
+              >
+                <Box
+                  sx={{
+                    p: 'var(--sys-spacing-2)',
+                    borderRadius: 'var(--sys-shape-corner-medium)',
+                    backgroundColor: 'var(--sys-color-primary-container)',
+                  }}
+                >
+                  <Target sx={{ color: 'var(--sys-color-primary)' }} />
                 </Box>
-                <Typography variant="h5" sx={{
-      fontWeight: 600
-    }}>Career Path Opportunities</Typography>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    font: 'var(--sys-type-headline-small)',
+                    fontWeight: 'var(--sys-type-weight-semibold)',
+                  }}
+                >
+                  Career Path Opportunities
+                </Typography>
               </Box>
 
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--sys-spacing-4)',
+                }}
+              >
                 {careerPaths.map((path, index) => (
-                  <Box key={index} sx={{
-      p: 4,
-      border: 1,
-      borderColor: 'grey.200',
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 3
-    }}>
-                      <Typography variant="h6" sx={{
-      fontWeight: 500,
-    }}>{path.title}</Typography>
-                      <Box sx={{
-      textAlign: "right"
-    }}>
-                        <Typography sx={{
-      typography: "body1",
-      color: "green.500",
-      fontWeight: 500
-    }}>
+                  <Box
+                    key={index}
+                    sx={{
+                      p: 'var(--sys-spacing-4)',
+                      border: '1px solid var(--sys-color-outline-variant)',
+                      borderRadius: 'var(--sys-shape-corner-medium)',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        mb: 'var(--sys-spacing-3)',
+                      }}
+                    >
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          font: 'var(--sys-type-title-large)',
+                          fontWeight: 'var(--sys-type-weight-medium)',
+                        }}
+                      >
+                        {path.title}
+                      </Typography>
+                      <Box sx={{ textAlign: 'right' }}>
+                        <Typography
+                          sx={{
+                            font: 'var(--sys-type-body-large)',
+                            color: 'var(--sys-color-primary)',
+                            fontWeight: 'var(--sys-type-weight-medium)',
+                          }}
+                        >
                           {path.probability}% probability
                         </Typography>
-                        <Typography sx={{
-      typography: "body1",
-      color: 'text.secondary'
-    }}>{path.timeframe}</Typography>
+                        <Typography
+                          sx={{
+                            font: 'var(--sys-type-body-medium)',
+                            color: 'var(--sys-color-on-surface-variant)',
+                          }}
+                        >
+                          {path.timeframe}
+                        </Typography>
                       </Box>
                     </Box>
 
-                    <Box sx={{
-      mb: 3
-    }}>
-                      <Typography component="span" sx={{
-      typography: "body1",
-      color: 'text.secondary'
-    }}>Salary increase: </Typography>
-                      <Typography component="span" sx={{
-      typography: "body1",
-      fontWeight: 500
-    }}>{path.salaryIncrease}</Typography>
+                    <Box sx={{ mb: 'var(--sys-spacing-3)' }}>
+                      <Typography
+                        component="span"
+                        sx={{
+                          font: 'var(--sys-type-body-large)',
+                          color: 'var(--sys-color-on-surface-variant)',
+                        }}
+                      >
+                        Salary increase:{' '}
+                      </Typography>
+                      <Typography
+                        component="span"
+                        sx={{
+                          font: 'var(--sys-type-body-large)',
+                          fontWeight: 'var(--sys-type-weight-medium)',
+                        }}
+                      >
+                        {path.salaryIncrease}
+                      </Typography>
                     </Box>
 
                     <Box>
-                      <Typography sx={{
-      typography: "body1",
-      color: 'text.secondary',
-      mb: 2
-    }}>Requirements:</Typography>
-                      <Box sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: 2
-    }}>
+                      <Typography
+                        sx={{
+                          font: 'var(--sys-type-body-medium)',
+                          color: 'var(--sys-color-on-surface-variant)',
+                          mb: 'var(--sys-spacing-2)',
+                        }}
+                      >
+                        Requirements:
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexWrap: 'wrap',
+                          gap: 'var(--sys-spacing-2)',
+                        }}
+                      >
                         {path.requirements.map((req, reqIndex) => (
-                          <Badge key={reqIndex} variant="secondary" sx={{
-      typography: "body2"
-    }}>
+                          <Badge
+                            key={reqIndex}
+                            variant="secondary"
+                            sx={{ font: 'var(--sys-type-label-large)' }}
+                          >
                             {req}
                           </Badge>
                         ))}
@@ -410,178 +495,207 @@ export function CareerIntelligence({ onBack }: CareerIntelligenceProps) {
               </Box>
             </Card>
           </Box>
-
-          {/* Right Column - Market Trends & Learning Path */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {/* Market Trends */}
-            <Card sx={{
-      p: 6
-    }}>
-              <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3,
-      mb: 6
-    }}>
-                <Box sx={{
-      p: 2,
-      borderRadius: "var(--sys-shape-radius-md)",
-      bgcolor: 'blue.50'
-    }}>
-                  <TrendingUp sx={{
-      color: "blue.500"
-    }} />
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--sys-spacing-8)',
+            }}
+          >
+            <Card
+              sx={{
+                p: 'var(--sys-spacing-6)',
+                borderRadius: 'var(--sys-shape-corner-large)',
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--sys-spacing-3)',
+                  mb: 'var(--sys-spacing-6)',
+                }}
+              >
+                <Box
+                  sx={{
+                    p: 'var(--sys-spacing-2)',
+                    borderRadius: 'var(--sys-shape-corner-medium)',
+                    backgroundColor: 'var(--sys-color-secondary-container)',
+                  }}
+                >
+                  <TrendingUp sx={{ color: 'var(--sys-color-secondary)' }} />
                 </Box>
-                <Typography variant="h6" sx={{
-      fontWeight: 600
-    }}>Market Trends</Typography>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    font: 'var(--sys-type-headline-small)',
+                    fontWeight: 'var(--sys-type-weight-semibold)',
+                  }}
+                >
+                  Market Trends
+                </Typography>
               </Box>
 
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 'var(--sys-spacing-3)',
+                }}
+              >
                 {marketTrends.map((trend, index) => (
-                  <Box key={index} sx={{
-      p: 3,
-      border: 1,
-      borderColor: 'grey.200',
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 2
-    }}>
-                      <Typography sx={{
-      fontWeight: 500,
-      typography: "body1"
-    }}>{trend.trend}</Typography>
-                      <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                        <TrendingUp sx={{
-      color: "green.500"
-    }} />
-                        <Typography sx={{
-      typography: "body1",
-      fontWeight: 500,
-      color: "green.500"
-    }}>{trend.growth}</Typography>
+                  <Box
+                    key={index}
+                    sx={{
+                      p: 'var(--sys-spacing-3)',
+                      border: '1px solid var(--sys-color-outline-variant)',
+                      borderRadius: 'var(--sys-shape-corner-medium)',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        mb: 'var(--sys-spacing-2)',
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontWeight: 'var(--sys-type-weight-medium)',
+                          font: 'var(--sys-type-title-medium)',
+                        }}
+                      >
+                        {trend.trend}
+                      </Typography>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 'var(--sys-spacing-2)',
+                        }}
+                      >
+                        <TrendingUp sx={{ color: 'var(--sys-color-primary)' }} />
+                        <Typography
+                          sx={{
+                            font: 'var(--sys-type-body-large)',
+                            fontWeight: 'var(--sys-type-weight-medium)',
+                            color: 'var(--sys-color-primary)',
+                          }}
+                        >
+                          {trend.growth}
+                        </Typography>
                       </Box>
                     </Box>
 
-                    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 2
-    }}>
-                      <Badge variant={getImpactBadgeVariant(trend.impact)} sx={{
-      typography: "body2"
-    }}>
+                    <Box sx={{ mb: 'var(--sys-spacing-2)' }}>
+                      <Badge
+                        variant={getImpactBadgeVariant(trend.impact)}
+                        sx={{ font: 'var(--sys-type-label-large)' }}
+                      >
                         {trend.impact} Impact
                       </Badge>
                     </Box>
-
-                    <Typography sx={{
-      typography: "body2",
-      color: 'text.secondary'
-    }}>{trend.description}</Typography>
+                    <Typography
+                      sx={{
+                        font: 'var(--sys-type-body-medium)',
+                        color: 'var(--sys-color-on-surface-variant)',
+                      }}
+                    >
+                      {trend.description}
+                    </Typography>
                   </Box>
                 ))}
               </Box>
             </Card>
-
-            {/* Learning Path (conditionally shown) */}
             {showLearningPath && (
-              <Card sx={{
-      p: 6,}}>
-                <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3,
-      mb: 4
-    }}>
-                  <Box sx={{
-      p: 2,
-      borderRadius: "var(--sys-shape-radius-md)",
-      bgcolor: 'secondary.light'
-    }}>
-                    <BookOpen />
+              <Card
+                sx={{
+                  p: 'var(--sys-spacing-6)',
+                  borderRadius: 'var(--sys-shape-corner-large)',
+                }}
+              >
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--sys-spacing-3)',
+                    mb: 'var(--sys-spacing-4)',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      p: 'var(--sys-spacing-2)',
+                      borderRadius: 'var(--sys-shape-corner-medium)',
+                      backgroundColor: 'var(--sys-color-tertiary-container)',
+                    }}
+                  >
+                    <BookOpen sx={{ color: 'var(--sys-color-tertiary)' }} />
                   </Box>
-                  <Typography variant="h6" sx={{
-      fontWeight: 600,}}>AI-Generated Learning Path</Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      font: 'var(--sys-type-headline-small)',
+                      fontWeight: 'var(--sys-type-weight-semibold)',
+                    }}
+                  >
+                    AI-Generated Learning Path
+                  </Typography>
                 </Box>
-
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-                  <Box sx={{
-      p: 3,
-      border: 1,
-      borderColor: 'grey.200',
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                    <Typography sx={{
-      fontWeight: 500,
-      typography: "body1",
-      mb: 1
-    }}>Phase 1: Foundation (Weeks 1-4)</Typography>
-                    <Typography sx={{
-      typography: "body2",
-      color: 'text.secondary'
-    }}>
-                      Python basics, data types, control structures
-                    </Typography>
-                  </Box>
-
-                  <Box sx={{
-      p: 3,
-      border: 1,
-      borderColor: 'grey.200',
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                    <Typography sx={{
-      fontWeight: 500,
-      typography: "body1",
-      mb: 1
-    }}>Phase 2: Application (Weeks 5-8)</Typography>
-                    <Typography sx={{
-      typography: "body2",
-      color: 'text.secondary'
-    }}>
-                      Pandas for data analysis, basic statistics
-                    </Typography>
-                  </Box>
-
-                  <Box sx={{
-      p: 3,
-      border: 1,
-      borderColor: 'grey.200',
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                    <Typography sx={{
-      fontWeight: 500,
-      typography: "body1",
-      mb: 1
-    }}>
-                      Phase 3: Specialization (Weeks 9-12)
-                    </Typography>
-                    <Typography sx={{
-      typography: "body2",
-      color: 'text.secondary'
-    }}>
-                      Healthcare data analysis, reporting dashboards
-                    </Typography>
-                  </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 'var(--sys-spacing-3)',
+                  }}
+                >
+                  {[
+                    {
+                      title: 'Phase 1: Foundation (Weeks 1-4)',
+                      description: 'Python basics, data types, control structures',
+                    },
+                    {
+                      title: 'Phase 2: Application (Weeks 5-8)',
+                      description: 'Pandas for data analysis, basic statistics',
+                    },
+                    {
+                      title: 'Phase 3: Specialization (Weeks 9-12)',
+                      description: 'Healthcare data analysis, reporting dashboards',
+                    },
+                  ].map((phase, index) => (
+                    <Box
+                      key={index}
+                      sx={{
+                        p: 'var(--sys-spacing-3)',
+                        border: '1px solid var(--sys-color-outline-variant)',
+                        borderRadius: 'var(--sys-shape-corner-medium)',
+                      }}
+                    >
+                      <Typography
+                        sx={{
+                          fontWeight: 'var(--sys-type-weight-medium)',
+                          font: 'var(--sys-type-title-medium)',
+                          mb: 1,
+                        }}
+                      >
+                        {phase.title}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          font: 'var(--sys-type-body-medium)',
+                          color: 'var(--sys-color-on-surface-variant)',
+                        }}
+                      >
+                        {phase.description}
+                      </Typography>
+                    </Box>
+                  ))}
                 </Box>
-
-                <Button sx={{
-      width: "100%",
-      mt: 4
-    }} variant="outlined">
-                  <BookOpen sx={{
-      mr: 2
-    }} />
+                <Button
+                  sx={{ width: '100%', mt: 'var(--sys-spacing-4)' }}
+                  variant="outlined"
+                >
+                  <BookOpen sx={{ mr: 'var(--sys-spacing-2)' }} />
                   View Full Learning Plan
                 </Button>
               </Card>

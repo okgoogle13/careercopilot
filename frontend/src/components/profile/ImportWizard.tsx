@@ -1,5 +1,4 @@
 import { LinkedIn, Check, Error, Person, Work, School } from '@mui/icons-material';
-import { Box } from '@mui/material';
 import {
   Dialog,
   DialogTitle,
@@ -148,64 +147,38 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
     switch (activeStep) {
       case 0:
         return (
-          <Box sx={{
-      textAlign: "center",
-      py: 8
-    }}>
-            <Box sx={{
-      display: "flex",
-      justifyContent: "center",
-      mb: 6
-    }}>
-              <Box sx={{
-      p: 6,
-      bgcolor: "blue.100",
-      borderRadius: "var(--sys-shape-radius-full)"
-    }}>
-                <LinkedIn sx={{ fontSize: 48 }} sx={{
-      color: "blue.600"
-    }} />
+          <Box sx={{ textAlign: 'center', py: 'var(--sys-space-8)' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 'var(--sys-space-6)' }}>
+              <Box sx={{ p: 'var(--sys-space-6)', backgroundColor: 'var(--sys-color-primary-container)', borderRadius: 'var(--sys-shape-corner-full)' }}>
+                <LinkedIn sx={{ fontSize: 'var(--sys-icon-size-xlarge)', color: 'var(--sys-color-on-primary-container)' }} />
               </Box>
             </Box>
 
-            <Typography variant="h5" sx={{
-      fontWeight: 600,
-      mb: 4
-    }}>
+            <Typography variant="h5" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-4)', color: 'var(--sys-color-on-surface)' }}>
               Connect to LinkedIn
             </Typography>
 
-            <Typography variant="body1" color="text.secondary" sx={{
-      mb: 6,
-      maxWidth: "md",}}>
+            <Typography variant="body1" sx={{ mb: 'var(--sys-space-6)', maxWidth: 'md', color: 'var(--sys-color-on-surface-variant)' }}>
               We'll securely import your professional information from LinkedIn to help build your
               profile.
             </Typography>
 
             {isConnecting && (
-              <Box sx={{
-      mb: 6
-    }}>
-                <LinearProgress sx={{
-      mb: 2
-    }} />
-                <Typography variant="body2" color="text.secondary">
+              <Box sx={{ mb: 'var(--sys-space-6)' }}>
+                <LinearProgress sx={{ mb: 'var(--sys-space-2)' }} />
+                <Typography variant="body2" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
                   Connecting to LinkedIn...
                 </Typography>
               </Box>
             )}
 
             {isConnected && (
-              <Alert severity="success" sx={{
-      mb: 4
-    }}>
+              <Alert severity="success" sx={{ mb: 'var(--sys-space-4)' }}>
                 Successfully connected to LinkedIn!
               </Alert>
             )}
 
-            <Alert severity="info" sx={{
-      mb: 6
-    }}>
+            <Alert severity="info" sx={{ mb: 'var(--sys-space-6)' }}>
               Your LinkedIn data is processed securely and never stored on our servers.
             </Alert>
           </Box>
@@ -213,45 +186,23 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
 
       case 1:
         return (
-          <Box sx={{
-      py: 4
-    }}>
-            <Typography variant="h6" sx={{
-      fontWeight: 600,
-      mb: 4
-    }}>
+          <Box sx={{ py: 'var(--sys-space-4)' }}>
+            <Typography variant="h6" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-4)', color: 'var(--sys-color-on-surface)' }}>
               Preview Imported Data
             </Typography>
 
-            <Typography variant="body2" color="text.secondary" sx={{
-      mb: 6
-    }}>
+            <Typography variant="body2" sx={{ mb: 'var(--sys-space-6)', color: 'var(--sys-color-on-surface-variant)' }}>
               Review the information we found and select what you'd like to import.
             </Typography>
 
-            <Box sx={{}}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 'var(--sys-space-4)' }}>
               {/* Profile Section */}
-              <Card variant="outlined">
-                <CardContent sx={{
-      p: 4
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 3
-    }}>
-                    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                      <Person sx={{ fontSize: 20 }} sx={{
-      color: "blue.600"
-    }} />
-                      <Typography variant="subtitle1" sx={{
-      fontWeight: 600
-    }}>
+              <Card variant="outlined" sx={{ borderRadius: 'var(--sys-shape-corner-medium)' }}>
+                <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 'var(--sys-space-3)' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 'var(--sys-space-2)' }}>
+                      <Person sx={{ fontSize: 'var(--sys-icon-size-medium)', color: 'var(--sys-color-primary)' }} />
+                      <Typography variant="subtitle1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
                         Profile Information
                       </Typography>
                     </Box>
@@ -265,9 +216,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                       label="Import"
                     />
                   </Box>
-                  <Box sx={{
-      typography: "body1"
-    }}>
+                  <Box sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
                     <Box>
                       <strong>Name:</strong> {linkedInData?.profile.name}
                     </Box>
@@ -282,27 +231,12 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               </Card>
 
               {/* Experience Section */}
-              <Card variant="outlined">
-                <CardContent sx={{
-      p: 4
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 3
-    }}>
-                    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                      <Work sx={{ fontSize: 20 }} sx={{
-      color: "green.600"
-    }} />
-                      <Typography variant="subtitle1" sx={{
-      fontWeight: 600
-    }}>
+              <Card variant="outlined" sx={{ borderRadius: 'var(--sys-shape-corner-medium)' }}>
+                <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 'var(--sys-space-3)' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 'var(--sys-space-2)' }}>
+                      <Work sx={{ fontSize: 'var(--sys-icon-size-medium)', color: 'var(--sys-color-secondary)' }} />
+                      <Typography variant="subtitle1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
                         Work Experience ({linkedInData?.experience.length} positions)
                       </Typography>
                     </Box>
@@ -318,9 +252,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                   </Box>
                   <List dense>
                     {linkedInData?.experience.slice(0, 2).map((exp, index) => (
-                      <ListItem key={index} sx={{
-      px: 0
-    }}>
+                      <ListItem key={index} sx={{ px: 0 }}>
                         <ListItemText
                           primary={`${exp.position} at ${exp.company}`}
                           secondary={exp.duration}
@@ -332,27 +264,12 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               </Card>
 
               {/* Education Section */}
-              <Card variant="outlined">
-                <CardContent sx={{
-      p: 4
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 3
-    }}>
-                    <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                      <School sx={{ fontSize: 20 }} sx={{
-      color: "purple.600"
-    }} />
-                      <Typography variant="subtitle1" sx={{
-      fontWeight: 600
-    }}>
+              <Card variant="outlined" sx={{ borderRadius: 'var(--sys-shape-corner-medium)' }}>
+                <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 'var(--sys-space-3)' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 'var(--sys-space-2)' }}>
+                      <School sx={{ fontSize: 'var(--sys-icon-size-medium)', color: 'var(--sys-color-tertiary)' }} />
+                      <Typography variant="subtitle1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
                         Education ({linkedInData?.education.length} entries)
                       </Typography>
                     </Box>
@@ -368,9 +285,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                   </Box>
                   <List dense>
                     {linkedInData?.education.map((edu, index) => (
-                      <ListItem key={index} sx={{
-      px: 0
-    }}>
+                      <ListItem key={index} sx={{ px: 0 }}>
                         <ListItemText
                           primary={`${edu.degree} in ${edu.field}`}
                           secondary={`${edu.institution} • ${edu.year}`}
@@ -382,19 +297,10 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
               </Card>
 
               {/* Skills Section */}
-              <Card variant="outlined">
-                <CardContent sx={{
-      p: 4
-    }}>
-                  <Box sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      mb: 3
-    }}>
-                    <Typography variant="subtitle1" sx={{
-      fontWeight: 600
-    }}>
+              <Card variant="outlined" sx={{ borderRadius: 'var(--sys-shape-corner-medium)' }}>
+                <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 'var(--sys-space-3)' }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
                       Skills ({linkedInData?.skills.length} skills)
                     </Typography>
                     <FormControlLabel
@@ -407,7 +313,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                       label="Import"
                     />
                   </Box>
-                  <Typography variant="body2" color="text.secondary">
+                  <Typography variant="body2" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
                     {linkedInData?.skills.join(', ')}
                   </Typography>
                 </CardContent>
@@ -418,57 +324,31 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
 
       case 2:
         return (
-          <Box sx={{
-      textAlign: "center",
-      py: 8
-    }}>
-            <Box sx={{
-      display: "flex",
-      justifyContent: "center",
-      mb: 6
-    }}>
-              <Box sx={{
-      p: 6,
-      bgcolor: "green.100",
-      borderRadius: "var(--sys-shape-radius-full)"
-    }}>
-                <Check sx={{ fontSize: 48 }} sx={{
-      color: "green.600"
-    }} />
+          <Box sx={{ textAlign: 'center', py: 'var(--sys-space-8)' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 'var(--sys-space-6)' }}>
+              <Box sx={{ p: 'var(--sys-space-6)', backgroundColor: 'var(--sys-color-tertiary-container)', borderRadius: 'var(--sys-shape-corner-full)' }}>
+                <Check sx={{ fontSize: 'var(--sys-icon-size-xlarge)', color: 'var(--sys-color-on-tertiary-container)' }} />
               </Box>
             </Box>
 
-            <Typography variant="h5" sx={{
-      fontWeight: 600,
-      mb: 4
-    }}>
+            <Typography variant="h5" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-4)', color: 'var(--sys-color-on-surface)' }}>
               Ready to Import
             </Typography>
 
-            <Typography variant="body1" color="text.secondary" sx={{
-      mb: 6
-    }}>
+            <Typography variant="body1" sx={{ mb: 'var(--sys-space-6)', color: 'var(--sys-color-on-surface-variant)' }}>
               We're ready to import your selected LinkedIn data to create your profile.
             </Typography>
 
-            <Card variant="outlined" sx={{
-      mb: 6
-    }}>
-              <CardContent sx={{
-      p: 4
-    }}>
-                <Typography variant="subtitle1" sx={{
-      fontWeight: 600,
-      mb: 3
-    }}>
+            <Card variant="outlined" sx={{ mb: 'var(--sys-space-6)', borderRadius: 'var(--sys-shape-corner-medium)' }}>
+              <CardContent sx={{ p: 'var(--sys-space-4)' }}>
+                <Typography variant="subtitle1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', mb: 'var(--sys-space-3)', color: 'var(--sys-color-on-surface)' }}>
                   Import Summary
                 </Typography>
                 <List dense>
                   <ListItem>
                     <ListItemIcon>
                       <Check
-                        sx={{ fontSize: 16 }}
-                        className={selectedSections.profile ? 'text-green-600' : 'text-gray-400'}
+                        sx={{ fontSize: 'var(--sys-icon-size-medium)', color: selectedSections.profile ? 'var(--sys-color-tertiary)' : 'var(--sys-color-outline)' }}
                       />
                     </ListItemIcon>
                     <ListItemText primary="Profile Information" />
@@ -476,8 +356,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                   <ListItem>
                     <ListItemIcon>
                       <Check
-                        sx={{ fontSize: 16 }}
-                        className={selectedSections.experience ? 'text-green-600' : 'text-gray-400'}
+                        sx={{ fontSize: 'var(--sys-icon-size-medium)', color: selectedSections.experience ? 'var(--sys-color-tertiary)' : 'var(--sys-color-outline)' }}
                       />
                     </ListItemIcon>
                     <ListItemText primary="Work Experience" />
@@ -485,8 +364,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                   <ListItem>
                     <ListItemIcon>
                       <Check
-                        sx={{ fontSize: 16 }}
-                        className={selectedSections.education ? 'text-green-600' : 'text-gray-400'}
+                        sx={{ fontSize: 'var(--sys-icon-size-medium)', color: selectedSections.education ? 'var(--sys-color-tertiary)' : 'var(--sys-color-outline)' }}
                       />
                     </ListItemIcon>
                     <ListItemText primary="Education" />
@@ -494,8 +372,7 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
                   <ListItem>
                     <ListItemIcon>
                       <Check
-                        sx={{ fontSize: 16 }}
-                        className={selectedSections.skills ? 'text-green-600' : 'text-gray-400'}
+                        sx={{ fontSize: 'var(--sys-icon-size-medium)', color: selectedSections.skills ? 'var(--sys-color-tertiary)' : 'var(--sys-color-outline)' }}
                       />
                     </ListItemIcon>
                     <ListItemText primary="Skills" />
@@ -516,30 +393,24 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>
-        <Typography variant="h5" sx={{
-      fontWeight: 600
-    }}>
+    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth PaperProps={{ sx: { borderRadius: 'var(--sys-shape-corner-large)' } }}>
+      <DialogTitle sx={{ p: 'var(--sys-space-6)' }}>
+        <Typography variant="h5" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>
           Import from LinkedIn
         </Typography>
       </DialogTitle>
 
-      <DialogContent>
+      <DialogContent sx={{ p: 'var(--sys-space-6)' }}>
         {/* Stepper */}
-        <Stepper activeStep={activeStep} sx={{
-      mb: 8
-    }}>
+        <Stepper activeStep={activeStep} sx={{ mb: 'var(--sys-space-8)' }}>
           {steps.map((step, index) => (
             <Step key={step.label}>
               <StepLabel>
                 <Box>
-                  <Typography variant="body2" sx={{
-      fontWeight: 500
-    }}>
+                  <Typography variant="body2" sx={{ fontWeight: 'var(--sys-type-weight-medium)' }}>
                     {step.label}
                   </Typography>
-                  <Typography variant="caption" color="text.secondary">
+                  <Typography variant="caption" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>
                     {step.description}
                   </Typography>
                 </Box>
@@ -552,22 +423,18 @@ export function ImportWizard({ open, onClose, onImportComplete }: ImportWizardPr
         {renderStepContent()}
       </DialogContent>
 
-      <DialogActions sx={{
-      p: 6
-    }}>
-        <Button onClick={onClose} disabled={isConnecting}>
+      <DialogActions sx={{ p: 'var(--sys-space-6)' }}>
+        <Button onClick={onClose} disabled={isConnecting} sx={{ color: 'var(--sys-color-primary)' }}>
           Cancel
         </Button>
-        <Button onClick={handleBack} disabled={activeStep === 0 || isConnecting}>
+        <Button onClick={handleBack} disabled={activeStep === 0 || isConnecting} sx={{ color: 'var(--sys-color-primary)' }}>
           Back
         </Button>
         <Button
           variant="contained"
           onClick={handleNext}
           disabled={isConnecting || (activeStep === 0 && !isConnected)}
-          sx={{
-      '&:hover': {}
-    }}
+          sx={{ backgroundColor: 'var(--sys-color-primary)', color: 'var(--sys-color-on-primary)', '&:hover': { backgroundColor: 'var(--sys-color-primary-dark)' } }}
         >
           {isConnecting
             ? 'Connecting...'

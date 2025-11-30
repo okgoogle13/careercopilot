@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi, beforeEach } from '@jest/globals';
 
-import { JobCard } from '../JobCard';
+import { JobCard } from '../../features/JobCard';
 
 describe('JobCard', () => {
   const mockOnSave = vi.fn();
