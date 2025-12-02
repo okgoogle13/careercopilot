@@ -6,8 +6,8 @@
 
 import React from 'react';
 import { Brain, BarChart3, Lightbulb, TrendingUp } from 'lucide-react';
-import { Card } from '@/components/ui';
-import { Button } from '@/components/ui/Button/Button';
+import { Card } from '@/components';
+import { Button } from '@/components/electric/button';
 
 export function CareerIntelligence() {
   return (

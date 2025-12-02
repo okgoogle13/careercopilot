@@ -18,7 +18,7 @@ export interface ElectricBreadcrumbProps {
   className?: string;
 }
 
-export const ElectricBreadcrumb: React.FC<ElectricBreadcrumbProps> = ({
+export const ElectricBreadcrumb: React.FC<BreadcrumbProps> = ({
   items,
   separator = '/',
   className,

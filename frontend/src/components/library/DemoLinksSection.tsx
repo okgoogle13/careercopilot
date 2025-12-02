@@ -6,8 +6,8 @@
 
 import React from 'react';
 import { Sparkles, Play } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Card } from '@/components/ui';
+import { Button } from '@/components/electric/button';
+import { Card } from '@/components';
 import { ComponentSection } from './ComponentDemo';
 
 interface DemoLinksSectionProps {

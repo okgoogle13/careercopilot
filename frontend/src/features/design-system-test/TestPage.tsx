@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card } from '@/components/ui/ElectricCard';
-import { Button } from '@/components/ui/Button';
+import { Card } from '@/components/electric';
+import { Button } from '@/components/electric/button';
 
 const TestPage = () => {
   return (

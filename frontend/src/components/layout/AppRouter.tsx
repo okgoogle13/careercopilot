@@ -9,7 +9,7 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
-import { Card } from '@/components/ui';
+import { Card } from '@/components';
 
 // Auth pages - not lazy loaded since they're critical path
 import { LoginPage } from '@/pages/LoginPage';
@@ -74,7 +74,7 @@ function AppRouterContent() {
           path="/register"
           element={isAuthenticated ? <Navigate to="/dashboard" replace /> : <RegisterPage />}
         />
-        <Route path="/electric-alchemist" element={<ElectricAlchemistTestKitchen />} />
+        <Route path="/electric-alchemist" element={<AlchemistTestKitchen />} />
 
         {/* Default redirect */}
         <Route

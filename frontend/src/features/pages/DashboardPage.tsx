@@ -18,7 +18,7 @@ import {
   Trash2,
   Brain,
 } from 'lucide-react';
-import { Container, Card, Button, Badge, Avatar, Progress, Grid } from '@/components/ui';
+import { Container, Card, Button, Badge, Avatar, Progress, Grid } from '@/components';
 import { ProfileCard, CreateProfileCard } from '@/components/profile';
 import { cn } from '@/lib/utils';
 

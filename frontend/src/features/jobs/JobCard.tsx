@@ -18,7 +18,7 @@ import {
   Shield,
   ExternalLink,
 } from 'lucide-react';
-import { Card, Button, Badge, Avatar } from '@/components/ui';
+import { Card, Button, Badge, Avatar } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface JobCardProps {

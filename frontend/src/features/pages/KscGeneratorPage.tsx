@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Container, Card, Button, Textarea } from '@/components/ui';
+import { Container, Card, Button, Textarea } from '@/components';
 
 export function KscGeneratorPage() {
   return (

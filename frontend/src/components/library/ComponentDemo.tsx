@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Card } from '@/components/ui';
+import { Card } from '@/components';
 import { cn } from '@/lib/utils';
 
 export const ComponentSection = ({

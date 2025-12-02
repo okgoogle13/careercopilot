@@ -16,7 +16,7 @@ export interface ElectricPaginationProps {
   className?: string;
 }
 
-export const ElectricPagination: React.FC<ElectricPaginationProps> = ({
+export const ElectricPagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,

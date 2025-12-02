@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Card } from '@/components/ui';
+import { Card } from '@/components';
 import { ComponentSection } from './ComponentDemo';
 
 export function UsageGuidelinesSection() {

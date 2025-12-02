@@ -7,8 +7,8 @@
 
 import React from 'react';
 import { Plus } from 'lucide-react';
-import { Card } from '@/components/ui';
-import { Button } from '@/components/ui/Button/Button';
+import { Card } from '@/components';
+import { Button } from '@/components/electric/button';
 
 export interface CreateProfileCardProps {
   onCreate: () => void;

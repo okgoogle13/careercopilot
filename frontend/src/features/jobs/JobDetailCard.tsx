@@ -15,7 +15,7 @@ import {
   Briefcase,
   CheckCircle,
 } from 'lucide-react';
-import { Card, Button, Badge } from '@/components/ui';
+import { Card, Button, Badge } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface JobDetailCardProps {

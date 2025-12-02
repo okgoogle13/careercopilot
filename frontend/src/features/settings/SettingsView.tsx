@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { ArrowLeft, User, Bell } from 'lucide-react';
-import { Container, Card, Button, Input, Switch } from '@/components/ui';
+import { Container, Card, Button, Input, Switch } from '@/components';
 
 export interface SettingsViewProps {
   onBack: () => void;

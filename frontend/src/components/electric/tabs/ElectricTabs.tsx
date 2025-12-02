@@ -21,7 +21,7 @@ export interface ElectricTabsProps {
   className?: string;
 }
 
-export const ElectricTabs: React.FC<ElectricTabsProps> = ({
+export const ElectricTabs: React.FC<TabsProps> = ({
   tabs,
   defaultTab,
   onChange,

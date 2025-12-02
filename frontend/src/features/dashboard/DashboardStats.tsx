@@ -6,10 +6,10 @@
 
 import React, { useState } from 'react';
 import { Briefcase, Mail, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Textarea } from '@/components/ui/Textarea';
-import { Card } from '@/components/ui';
-import { Alert } from '@/components/ui/Alert';
+import { Button } from '@/components/electric/button';
+import { Textarea } from '@/components/electric';
+import { Card } from '@/components';
+import { Alert } from '@/components/electric';
 import { prepareApplicationPackage, scanInboxForOpportunities } from '@/api/aiServices';
 
 export function DashboardStats() {

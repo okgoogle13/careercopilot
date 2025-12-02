@@ -10,12 +10,12 @@ import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { ariaLabels, announceToScreenReader } from '../utils/accessibility';
 import {
-  ElectricContainer,
-  ElectricCard,
-  ElectricInput,
-  ElectricButton,
-  ElectricAlert,
-  ElectricSkeleton,
+  Container,
+  Card,
+  Input,
+  Button,
+  Alert,
+  Skeleton,
 } from '../components/electric';
 
 export const LoginPage: React.FC = () => {
@@ -92,9 +92,9 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <ElectricContainer size="sm">
+    <Container size="sm">
       <div className="flex flex-col justify-center items-center min-h-screen py-8">
-        <ElectricCard
+        <Card
           variant="default"
           className="w-full max-w-md"
           component="main"
@@ -110,14 +110,14 @@ export const LoginPage: React.FC = () => {
           {/* Error Alert */}
           {error && (
             <div ref={errorRef} tabIndex={-1}>
-              <ElectricAlert
+              <Alert
                 variant="error"
                 className="mb-4"
                 role="alert"
                 aria-live="assertive"
               >
                 {error}
-              </ElectricAlert>
+              </Alert>
             </div>
           )}
 
@@ -134,7 +134,7 @@ export const LoginPage: React.FC = () => {
               <label htmlFor="email" className="block text-ai mb-2">
                 Email
               </label>
-              <ElectricInput
+              <Input
                 id="email"
                 name="email"
                 type="email"
@@ -162,7 +162,7 @@ export const LoginPage: React.FC = () => {
               <label htmlFor="password" className="block text-ai mb-2">
                 Password
               </label>
-              <ElectricInput
+              <Input
                 id="password"
                 name="password"
                 type="password"
@@ -185,7 +185,7 @@ export const LoginPage: React.FC = () => {
             </div>
 
             {/* Submit Button */}
-            <ElectricButton
+            <Button
               variant="default"
               size="lg"
               type="submit"
@@ -195,13 +195,13 @@ export const LoginPage: React.FC = () => {
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
-                  <ElectricSkeleton variant="circle" className="h-6 w-6" />
+                  <Skeleton variant="circle" className="h-6 w-6" />
                   Signing in...
                 </span>
               ) : (
                 'Sign In'
               )}
-            </ElectricButton>
+            </Button>
 
             {/* Sign Up Link */}
             <p className="text-ai text-center text-outline mt-2">
@@ -215,8 +215,8 @@ export const LoginPage: React.FC = () => {
               </RouterLink>
             </p>
           </form>
-        </ElectricCard>
+        </Card>
       </div>
-    </ElectricContainer>
+    </Container>
   );
 };

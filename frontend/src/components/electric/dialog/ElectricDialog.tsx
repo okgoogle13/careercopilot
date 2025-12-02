@@ -15,7 +15,7 @@ export interface ElectricDialogProps {
   className?: string;
 }
 
-export const ElectricDialog: React.FC<ElectricDialogProps> = ({
+export const ElectricDialog: React.FC<DialogProps> = ({
   open,
   onClose,
   title,
