@@ -6,9 +6,9 @@
 
 import React from 'react';
 import { Sparkles, TrendingUp, Target, Clock } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Card } from '@/components/ui';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/electric/button';
+import { Card } from '@/components';
+import { Badge } from '@/components/electric';
 import { motion } from 'framer-motion';
 
 interface WelcomeBannerProps {

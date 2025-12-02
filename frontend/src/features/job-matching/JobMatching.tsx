@@ -6,10 +6,10 @@
 
 import React, { useState } from 'react';
 import { ArrowLeft, Sparkles, MapPin, DollarSign, Clock, ExternalLink, Heart, Star } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Card } from '@/components/ui';
-import { Badge } from '@/components/ui/Badge';
-import { Progress } from '@/components/ui/Progress';
+import { Button } from '@/components/electric/button';
+import { Card } from '@/components';
+import { Badge } from '@/components/electric';
+import { Progress } from '@/components/electric';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 

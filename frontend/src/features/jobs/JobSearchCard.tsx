@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Search, Filter } from 'lucide-react';
-import { Card, Button, Input } from '@/components/ui';
+import { Card, Button, Input } from '@/components';
 
 export interface JobSearchCardProps {
   searchQuery?: string;

@@ -5,11 +5,11 @@
  */
 
 import React from 'react';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/Alert';
-import { Badge } from '@/components/ui/Badge';
-import { Label } from '@/components/ui/Label';
-import { Progress } from '@/components/ui/Progress';
-import { ATSScoreCircle } from '@/components/ui/ATSScoreCircle';
+import { Alert, AlertTitle, AlertDescription } from '@/components/electric';
+import { Badge } from '@/components/electric';
+import { Label } from '@/components/electric/Label';
+import { Progress } from '@/components/electric';
+import { ATSScoreCircle } from '@/components/electric';
 import { ComponentDemo, ComponentSection } from './ComponentDemo';
 
 export function DisplayComponentsSection() {

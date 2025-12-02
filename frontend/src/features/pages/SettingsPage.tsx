@@ -5,8 +5,8 @@
  */
 
 import React from 'react';
-import { Container, Card, Button, Tabs } from '@/components/ui';
-import { Input, Textarea, Switch } from '@/components/ui';
+import { Container, Card, Button, Tabs } from '@/components';
+import { Input, Textarea, Switch } from '@/components';
 
 export function SettingsPage() {
   const tabs = [

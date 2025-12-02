@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Container, Card, Button } from '@/components/ui';
+import { Container, Card, Button } from '@/components';
 import { ATSAnalysisDashboard } from '@/features/analysis/ATSAnalysisDashboard';
 import type { AnalysisResult } from '@/features/analysis/ATSAnalysisDashboard';
 

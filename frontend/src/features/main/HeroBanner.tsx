@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { ArrowRight, Play } from 'lucide-react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components';
 import { FeatureHighlights } from './FeatureHighlights';
 
 interface HeroBannerProps {

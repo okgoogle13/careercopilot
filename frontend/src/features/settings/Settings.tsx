@@ -5,13 +5,13 @@
  */
 
 import React, { useState } from 'react';
-import { Card } from '@/components/ui';
-import { Input } from '@/components/ui/Input';
-import { Select } from '@/components/ui/Select';
-import { Checkbox } from '@/components/ui/Checkbox';
-import { Button } from '@/components/ui/Button/Button';
-import { Separator } from '@/components/ui/Separator';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { Card } from '@/components';
+import { Input } from '@/components/electric/input';
+import { Select } from '@/components/electric/select';
+import { Checkbox } from '@/components/electric';
+import { Button } from '@/components/electric/button';
+import { Separator } from '@/components/electric';
+import { PageHeader } from '@/components/electric';
 
 export function Settings() {
   const [settings, setSettings] = useState({

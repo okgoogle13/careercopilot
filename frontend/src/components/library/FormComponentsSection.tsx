@@ -5,14 +5,14 @@
  */
 
 import React, { useState } from 'react';
-import { Checkbox } from '@/components/ui/Checkbox';
-import { Input } from '@/components/ui/Input';
-import { Label } from '@/components/ui/Label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/RadioGroup';
-import { Select } from '@/components/ui/Select';
-import { Slider } from '@/components/ui/Slider';
-import { Switch } from '@/components/ui/Switch';
-import { Textarea } from '@/components/ui/Textarea';
+import { Checkbox } from '@/components/electric';
+import { Input } from '@/components/electric/input';
+import { Label } from '@/components/electric/Label';
+import { RadioGroup, RadioGroupItem } from '@/components/electric';
+import { Select } from '@/components/electric/select';
+import { Slider } from '@/components/electric';
+import { Switch } from '@/components/electric';
+import { Textarea } from '@/components/electric';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function FormComponentsSection() {

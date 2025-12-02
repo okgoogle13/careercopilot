@@ -16,7 +16,7 @@ export interface ElectricDrawerProps {
   className?: string;
 }
 
-export const ElectricDrawer: React.FC<ElectricDrawerProps> = ({
+export const ElectricDrawer: React.FC<DrawerProps> = ({
   open,
   onClose,
   title,

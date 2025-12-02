@@ -6,8 +6,8 @@
 
 import React from 'react';
 import { Plus, FileText, Briefcase } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Card } from '@/components/ui';
+import { Button } from '@/components/electric/button';
+import { Card } from '@/components';
 
 interface DashboardHeaderProps {
   userName?: string;

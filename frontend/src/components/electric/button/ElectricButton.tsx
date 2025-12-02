@@ -91,14 +91,14 @@ export interface ElectricButtonProps
  * Electric Button Component
  *
  * @example
- * <ElectricButton variant="default" size="md" onClick={() => console.log('Pressed')}>
+ * <Button variant="default" size="md" onClick={() => console.log('Pressed')}>
  *   Click Me
- * </ElectricButton>
+ * </Button>
  *
  * @example
- * <ElectricButton variant="tertiary" size="lg">
+ * <Button variant="tertiary" size="lg">
  *   New Project
- * </ElectricButton>
+ * </Button>
  */
 export const ElectricButton = React.forwardRef<
   HTMLButtonElement,

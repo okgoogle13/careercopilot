@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Button } from '@/components/ui';
+import { Button } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {

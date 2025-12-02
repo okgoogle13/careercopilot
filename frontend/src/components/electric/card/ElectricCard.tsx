@@ -79,19 +79,19 @@ export interface ElectricCardProps
  * Electric Bento Card Component
  *
  * @example
- * <ElectricCard variant="default">
+ * <Card variant="default">
  *   <h3 className="text-hero">Project Dashboard</h3>
  *   <p className="text-human">Track your progress across all projects.</p>
- * </ElectricCard>
+ * </Card>
  *
  * @example
- * <ElectricCard
+ * <Card
  *   variant="hero"
  *   interactive
  *   popOutGraphic={<div className="pop-out-graphic">🚀</div>}
  * >
  *   <h2 className="text-hero text-hero-irregular">New Project</h2>
- * </ElectricCard>
+ * </Card>
  */
 export const ElectricCard = React.forwardRef<HTMLDivElement, ElectricCardProps>(
   ({ className, variant, interactive, children, popOutGraphic, ...props }, ref) => {

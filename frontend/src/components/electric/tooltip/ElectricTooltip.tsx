@@ -14,7 +14,7 @@ export interface ElectricTooltipProps {
   className?: string;
 }
 
-export const ElectricTooltip: React.FC<ElectricTooltipProps> = ({
+export const ElectricTooltip: React.FC<TooltipProps> = ({
   content,
   children,
   side = 'top',

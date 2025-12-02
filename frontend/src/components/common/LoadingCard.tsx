@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { Card } from '@/components/ui';
-import { Skeleton } from '@/components/ui/Skeleton';
+import { Card } from '@/components';
+import { Skeleton } from '@/components/electric';
 
 export function LoadingCard() {
   return (

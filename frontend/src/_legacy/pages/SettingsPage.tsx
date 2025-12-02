@@ -36,22 +36,22 @@ import {
 import React, { useState } from 'react';
 
 import {
-  ElectricContainer,
-  ElectricCard,
-  ElectricButton,
-  ElectricInput,
-  ElectricTextarea,
-  ElectricSelect,
-  ElectricSwitch,
-  ElectricRadioGroup,
-  ElectricCheckbox,
-  ElectricSlider,
-  ElectricAvatar,
-  ElectricTabs,
-  ElectricDivider,
-  ElectricAlert,
-  ElectricDialog,
-  ElectricProgress,
+  Container,
+  Card,
+  Button,
+  Input,
+  Textarea,
+  Select,
+  Switch,
+  RadioGroup,
+  Checkbox,
+  Slider,
+  Avatar,
+  Tabs,
+  Divider,
+  Alert,
+  Dialog,
+  Progress,
 } from '../components/electric';
 
 interface TabPanelProps {

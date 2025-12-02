@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/Button/Button';
+import { Button } from '@/components/electric/button';
 import {
   Dialog,
   DialogContent,
@@ -13,8 +13,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogClose,
-} from '@/components/ui/Dialog';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/Popover';
+} from '@/components/electric/dialog';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/electric';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function InteractiveComponentsSection() {
