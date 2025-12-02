@@ -10,7 +10,8 @@ import './styles/electric-alchemist.css';
 
 // import * as Sentry from '@sentry/react';
 import { AuthProvider } from './context/AuthContext';
-import AppWrapper from './AppWrapper';
+import AppWrapper from './components/layout/AppWrapper';
+import { AppRouter } from './components/layout/AppRouter';
 
 // // Initialize Sentry for error monitoring and session replay
 // Sentry.init({
@@ -46,7 +47,9 @@ if (root) {
     <HelmetProvider>
       <BrowserRouter>
         <AuthProvider>
-          <AppWrapper />
+          <AppWrapper>
+            <AppRouter />
+          </AppWrapper>
         </AuthProvider>
       </BrowserRouter>
     </HelmetProvider>

@@ -8,28 +8,26 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 import { useNavigate } from 'react-router-dom';
 
 import { 
-  AuthUser, 
-  LoginCredentials, 
-  RegisterData, 
   login as authLogin, 
   register as authRegister, 
   logout as authLogout, 
-  refreshToken, 
   getCurrentUserProfile,
-  getCurrentUser
+  User as AuthUser
 } from '@/api/authService';
 import { ApiResponse } from '../types/api';
+
+// These types are not defined in the new authService, so we define them here.
+type LoginCredentials = any;
+type RegisterData = any;
 
 interface AuthContextType {
   user: AuthUser | null;
   token: string | null;
-  refreshToken: string | null;
   isLoading: boolean;
   isAuthenticated: boolean;
-  login: (credentials: LoginCredentials) => Promise<ApiResponse<{ user: AuthUser; accessToken: string; refreshToken: string }>>;
+  login: (credentials: LoginCredentials) => Promise<ApiResponse<{ user: AuthUser; accessToken: string }>>;
   register: (data: RegisterData) => Promise<ApiResponse<{ user: AuthUser }>>;
   logout: () => Promise<ApiResponse<null>>;
-  refreshAccessToken: () => Promise<ApiResponse<{ accessToken: string; refreshToken: string }>>;
   updateProfile: (updates: Partial<AuthUser>) => Promise<ApiResponse<{ user: AuthUser }>>;
   initializeAuth: () => Promise<void>;
 }
@@ -39,7 +37,6 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [token, setToken] = useState<string | null>(() => localStorage.getItem('access_token'));
-  const [refreshToken, setRefreshToken] = useState<string | null>(() => localStorage.getItem('refresh_token'));
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -52,14 +49,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, [token]);
 
-  useEffect(() => {
-    if (refreshToken) {
-      localStorage.setItem('refresh_token', refreshToken);
-    } else {
-      localStorage.removeItem('refresh_token');
-    }
-  }, [refreshToken]);
-
   // Initialize authentication state
   const initializeAuth = useCallback(async () => {
     setIsLoading(true);
@@ -67,29 +56,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const storedToken = localStorage.getItem('access_token');
       if (storedToken) {
         // Verify token is valid by fetching current user profile
-        const response = await getCurrentUserProfile();
-        setUser(response.data.user);
+        const user = await getCurrentUserProfile();
+        setUser(user);
         setToken(storedToken);
       }
     } catch (error) {
       console.error('Failed to initialize auth:', error);
-      // Token might be expired, try to refresh it
-      const storedRefreshToken = localStorage.getItem('refresh_token');
-      if (storedRefreshToken) {
-        try {
-          const { data } = await refreshToken();
-          setToken(data.accessToken);
-          setRefreshToken(data.refreshToken);
-          const response = await getCurrentUserProfile();
-          setUser(response.data.user);
-        } catch (refreshError) {
-          console.error('Failed to refresh token:', refreshError);
-          // Clear invalid tokens
-          setToken(null);
-          setRefreshToken(null);
-          setUser(null);
-        }
-      }
+      setToken(null);
+      setUser(null);
     } finally {
       setIsLoading(false);
     }
@@ -103,11 +77,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const login = async (credentials: LoginCredentials) => {
     setIsLoading(true);
     try {
-      const response = await authLogin(credentials);
-      setToken(response.data.accessToken);
-      setRefreshToken(response.data.refreshToken);
-      setUser(response.data.user);
-      return response;
+      const { user, token } = await authLogin(credentials);
+      setToken(token);
+      setUser(user);
+      return { data: { user, accessToken: token }, status: 200, statusText: "OK", headers: {}, config: {} } as any;
     } finally {
       setIsLoading(false);
     }
@@ -116,12 +89,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const register = async (data: RegisterData) => {
     setIsLoading(true);
     try {
-      const response = await authRegister(data);
+      const { user, token } = await authRegister(data);
       // Optionally log in the user after registration
-      if (response.data.user) {
-        setUser(response.data.user);
-      }
-      return response;
+      setToken(token);
+      setUser(user);
+      return { data: { user }, status: 200, statusText: "OK", headers: {}, config: {} } as any;
     } finally {
       setIsLoading(false);
     }
@@ -130,27 +102,13 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const logout = async () => {
     setIsLoading(true);
     try {
-      const response = await authLogout();
+      await authLogout();
       setToken(null);
-      setRefreshToken(null);
       setUser(null);
       navigate('/login');
-      return response;
+      return { data: null, status: 200, statusText: "OK", headers: {}, config: {} } as any;
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const refreshAccessToken = async () => {
-    try {
-      const refreshResponse = await authRefreshToken();
-      setToken(refreshResponse.data.accessToken);
-      setRefreshToken(refreshResponse.data.refreshToken);
-      return refreshResponse;
-    } catch (error) {
-      // Refresh failed, logout user
-      await logout();
-      throw error;
     }
   };
 
@@ -172,16 +130,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       value={{
         user,
         token,
-        refreshToken,
         isLoading,
         isAuthenticated: !!user && !!token,
         login,
         register,
         logout,
-        refreshAccessToken,
         updateProfile,
         initializeAuth,
-      }}
+      } as AuthContextType}
     >
       {!isLoading && children}
     </AuthContext.Provider>
@@ -204,6 +160,6 @@ export const useHasRole = (requiredRoles: string[] = []): boolean => {
   if (!user || !requiredRoles.length) return false;
   
   // Assuming user.roles is an array of role strings
-  const userRoles = user.roles || [];
+  const userRoles = user.role ? [user.role] : [];
   return requiredRoles.some(role => userRoles.includes(role));
 };

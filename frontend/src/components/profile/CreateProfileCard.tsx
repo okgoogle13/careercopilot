@@ -1,98 +1,46 @@
-import { Add as Plus } from '@mui/icons-material';
-import {
-  Button,
-  Card,
-  Typography,
-  Box,
-} from '@mui/material';
+/**
+ * ELECTRIC ALCHEMIST: CREATE PROFILE CARD COMPONENT
+ *
+ * Card for creating new profiles using Electric Alchemist Design System v4.4.
+ * Composed of Card and Button atoms.
+ */
 
-interface CreateProfileCardProps {
+import React from 'react';
+import { Plus } from 'lucide-react';
+import { Card } from '@/components/ui';
+import { Button } from '@/components/ui/Button/Button';
+
+export interface CreateProfileCardProps {
   onCreate: () => void;
 }
 
 export function CreateProfileCard({ onCreate }: CreateProfileCardProps) {
   return (
     <Card
-      variant="outlined"
-      sx={{
-        p: 'var(--sys-space-6)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        height: '100%',
-        borderRadius: 'var(--sys-shape-corner-medium)',
-        boxShadow: 'var(--sys-elevation-level1)',
-        backgroundColor: 'var(--sys-color-surface-container-low)',
-        border: '1px dashed var(--sys-color-outline)',
-        transition: 'box-shadow var(--sys-motion-duration-short2) var(--sys-motion-easing-standard)',
-        '&:hover': {
-          boxShadow: 'var(--sys-elevation-level2)',
-          backgroundColor: 'var(--sys-color-surface-container)',
-        },
-      }}
+      variant="interactive"
+      className="flex flex-col items-center justify-center text-center h-full bg-surface-container-low border-dashed border-2 border-outline hover:bg-surface-container"
     >
-      <Box
-        sx={{
-          width: 'var(--sys-icon-size-large)',
-          height: 'var(--sys-icon-size-large)',
-          borderRadius: 'var(--sys-shape-corner-full)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'var(--sys-color-primary-container)',
-          color: 'var(--sys-color-on-primary-container)',
-          mb: 'var(--sys-space-4)',
-        }}
-      >
-        <Plus sx={{ fontSize: 'var(--sys-icon-size-medium)' }} />
-      </Box>
+      <div className="w-16 h-16 rounded-full flex items-center justify-center bg-primary-container text-on-primary-container mb-4">
+        <Plus className="h-8 w-8" />
+      </div>
 
-      <Box>
-        <Typography
-          variant="h3"
-          sx={{
-            fontFamily: 'var(--sys-type-font-family-brand)',
-            fontWeight: 'var(--sys-type-weight-medium)',
-            fontSize: 'var(--sys-type-size-title-large)',
-            lineHeight: 'var(--sys-type-line-height-title-large)',
-            color: 'var(--sys-color-on-surface)',
-            mb: 'var(--sys-space-2)',
-          }}
-        >
+      <div className="mb-4">
+        <h3 className="text-hero text-lg font-medium text-on-surface mb-2">
           Create New Profile
-        </Typography>
-        <Typography
-          variant="body1"
-          sx={{
-            fontFamily: 'var(--sys-type-font-family-plain)',
-            fontWeight: 'var(--sys-type-weight-regular)',
-            fontSize: 'var(--sys-type-size-body-medium)',
-            lineHeight: 'var(--sys-type-line-height-body-medium)',
-            color: 'var(--sys-color-on-surface-variant)',
-            mb: 'var(--sys-space-4)',
-          }}
-        >
-          Build a tailored profile to optimize your resume for specific job applications and track
-          your progress.
-        </Typography>
-      </Box>
+        </h3>
+        <p className="text-human text-sm text-on-surface-variant mb-4">
+          Build a tailored profile to optimize your resume for specific job
+          applications and track your progress.
+        </p>
+      </div>
 
-      <Button
-        variant="contained"
-        onClick={onCreate}
-        sx={{
-          backgroundColor: 'var(--sys-color-primary)',
-          color: 'var(--sys-color-on-primary)',
-          '&:hover': {
-            backgroundColor: 'var(--sys-color-primary-dark)',
-          },
-        }}
-        startIcon={<Plus />}
-      >
+      <Button variant="default" onClick={onCreate}>
+        <Plus className="h-4 w-4 mr-2" />
         Create Profile
       </Button>
     </Card>
   );
 }
+
+export default CreateProfileCard;
+

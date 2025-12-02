@@ -1,10 +1,16 @@
-import { Warning, Refresh } from '@mui/icons-material';
-import { Card as MuiCard, CardContent, CardHeader, Typography, Box } from '@mui/material';
+/**
+ * ELECTRIC ALCHEMIST: ERROR CARD COMPONENT
+ *
+ * Error state card using Electric Alchemist Design System v4.4.
+ * Composed of Card and Button atoms.
+ */
 
-import { Button } from '../../ui/button';
-import { CardTitle, CardFooter } from '../../ui/card';
+import React from 'react';
+import { AlertCircle, RefreshCw } from 'lucide-react';
+import { Card } from '@/components/ui';
+import { Button } from '@/components/ui/Button/Button';
 
-interface ErrorCardProps {
+export interface ErrorCardProps {
   title?: string;
   message?: string;
   onRetry?: () => void;
@@ -18,44 +24,30 @@ export function ErrorCard({
   showRetryButton = true,
 }: ErrorCardProps) {
   return (
-    <MuiCard sx={{ p: 3 }}>
-      <CardHeader>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Box sx={{ p: 1, backgroundColor: 'error.light', borderRadius: 1 }}>
-            <Warning sx={{ fontSize: 20, color: 'error.main' }} />
-          </Box>
-          <CardTitle sx={{ color: 'error.main' }}>{title}</CardTitle>
-        </Box>
-      </CardHeader>
+    <Card className="p-6">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="p-2 bg-error-container rounded-lg">
+          <AlertCircle className="h-5 w-5 text-error" />
+        </div>
+        <h3 className="text-hero text-lg font-medium text-error">{title}</h3>
+      </div>
 
-      <CardContent>
-        <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-          {message}
-        </Typography>
-      </CardContent>
+      <p className="text-human text-sm text-on-surface-variant mb-4 leading-relaxed">
+        {message}
+      </p>
 
       {showRetryButton && (
-        <CardFooter>
-          <Button
-            variant="outline"
-            size="small"
-            onClick={onRetry}
-            sx={{
-              width: '100%',
-              borderColor: 'error.light',
-              color: 'error.main',
-              '&:hover': {
-                backgroundColor: 'error.light',
-                opacity: 0.1,
-              },
-            }}
-          >
-            <Refresh sx={{ fontSize: 16, mr: 1 }} />
-            Try Again
-          </Button>
-        </CardFooter>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={onRetry}
+          className="w-full border-error-container text-error hover:bg-error-container"
+        >
+          <RefreshCw className="h-4 w-4 mr-2" />
+          Try Again
+        </Button>
       )}
-    </MuiCard>
+    </Card>
   );
 }
 
@@ -68,3 +60,8 @@ export function ErrorProfileCard(props: ErrorCardProps) {
     />
   );
 }
+
+export default ErrorCard;
+
+
+

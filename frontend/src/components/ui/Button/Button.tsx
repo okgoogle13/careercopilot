@@ -1,104 +1,109 @@
-import type { ButtonProps as MuiButtonProps } from '@mui/material';
-import { Button as MuiButton, CircularProgress } from '@mui/material';
-import React from 'react';
+/**
+ * ELECTRIC ALCHEMIST: BUTTON COMPONENT
+ *
+ * Implements Tactile Press physics (scale 0.98 hover, 0.95 tap)
+ * with 5 visual variants aligned to the Alchemist Palette.
+ */
 
-export interface ButtonProps extends Omit<MuiButtonProps, 'color' | 'size'> {
+import * as React from 'react';
+import { motion, type HTMLMotionProps } from 'framer-motion';
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
+import { tactilePress } from '@/lib/motion';
+
+/**
+ * Button variant styles using CVA (Class Variance Authority)
+ */
+const buttonVariants = cva(
+  // Base styles (applied to all variants)
+  [
+    'inline-flex items-center justify-center',
+    'text-ai font-ai', // Typography: AI Voice tier (used for UI text)
+    'rounded-[24px]', // 24px radius
+    'border border-solid',
+    'cursor-pointer',
+    'transition-colors duration-150',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
+    'disabled:pointer-events-none disabled:opacity-50',
+  ],
+  {
+    variants: {
+      variant: {
+        // Primary: Light on Dark
+        default: [
+          'bg-primary-container text-on-primary-container',
+          'border-primary-container',
+          'hover:bg-primary', // Use primary for hover effect
+          'focus-visible:ring-primary',
+        ],
+        // Secondary: Surface Container
+        secondary: [
+          'bg-surface-container text-primary',
+          'border-outline-variant',
+          'hover:bg-surface-container-high',
+          'focus-visible:ring-outline',
+        ],
+        // Outline: Transparent with border
+        outline: [
+          'bg-transparent text-primary',
+          'border-outline-variant',
+          'hover:bg-surface-container-low',
+          'focus-visible:ring-outline',
+        ],
+        // Ghost: No border or background
+        ghost: [
+          'bg-transparent text-primary',
+          'border-transparent',
+          'hover:bg-surface-container-low',
+          'focus-visible:ring-outline',
+        ],
+        // Tertiary: Expressive Accent
+        tertiary: [
+          'bg-tertiary-container text-on-tertiary',
+          'border-tertiary-container',
+          'hover:bg-tertiary',
+          'focus-visible:ring-tertiary',
+        ],
+      },
+      size: {
+        sm: 'h-9 px-3 text-xs',
+        md: 'h-11 px-6 text-sm',
+        lg: 'h-14 px-8 text-base',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'md',
+    },
+  }
+);
+
+export interface ButtonProps
+  extends Omit<HTMLMotionProps<'button'>, 'variants'>,
+    VariantProps<typeof buttonVariants> {
   /**
-   * The variant to use
-   * @default 'contained'
-   */
-  variant?: 'contained' | 'outlined' | 'text';
-  /**
-   * The color of the component
-   * @default 'primary'
-   */
-  color?: 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning';
-  /**
-   * The size of the component
-   * @default 'medium'
-   */
-  size?: 'small' | 'medium' | 'large';
-  /**
-   * If `true`, the button will take up the full width of its container
-   * @default false
-   */
-  fullWidth?: boolean;
-  /**
-   * If `true`, the button will be disabled
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * If `true`, the button will show a loading indicator
-   * @default false
-   */
-  loading?: boolean;
-  /**
-   * The type of the button
-   * @default 'button'
-   */
-  type?: 'button' | 'submit' | 'reset';
-  /**
-   * The URL to link to when the button is clicked
-   */
-  href?: string;
-  /**
-   * The content of the button
+   * Content to render inside the button
    */
   children: React.ReactNode;
-  /**
-   * Custom class name
-   */
-  className?: string;
-  /**
-   * Callback fired when the button is clicked
-   */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**
- * A customizable button component that extends Material-UI's Button with additional features.
- * It supports different variants, colors, sizes, and loading states.
+ * Electric Button Component
  */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      variant = 'contained',
-      color = 'primary',
-      size = 'medium',
-      fullWidth = false,
-      disabled = false,
-      loading = false,
-      type = 'button',
-      href,
-      children,
-      className = '',
-      onClick,
-      ...props
-    },
-    ref
-  ) => {
-    const buttonProps = {
-      variant,
-      color: color as 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
-      size,
-      fullWidth,
-      disabled: disabled || loading,
-      type,
-      href,
-      className: `career-button ${className}`,
-      onClick,
-      ...props,
-    };
-
+  ({ className, variant, size, children, ...props }, ref) => {
     return (
-      <MuiButton
+      <motion.button
         ref={ref}
-        {...buttonProps}
-        startIcon={loading ? <CircularProgress size={16} color="inherit" /> : props.startIcon}
+        className={cn(buttonVariants({ variant, size }), className)}
+        variants={tactilePress}
+        initial="rest"
+        whileHover="hover"
+        whileTap="tap"
+        {...props}
       >
         {children}
-      </MuiButton>
+      </motion.button>
     );
   }
 );
@@ -106,3 +111,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = 'Button';
 
 export default Button;
+export { Button, buttonVariants };

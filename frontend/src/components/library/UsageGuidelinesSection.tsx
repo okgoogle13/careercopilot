@@ -1,7 +1,11 @@
-import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
-import { Box } from '@mui/material';
-import React from 'react';
+/**
+ * ELECTRIC ALCHEMIST: USAGE GUIDELINES SECTION
+ *
+ * Documentation section with usage guidelines and best practices.
+ */
 
+import React from 'react';
+import { Card } from '@/components/ui';
 import { ComponentSection } from './ComponentDemo';
 
 export function UsageGuidelinesSection() {
@@ -10,101 +14,51 @@ export function UsageGuidelinesSection() {
       title="Usage Guidelines"
       description="Best practices and guidelines for using components effectively"
     >
-      <Card variant="elevation">
-        <CardContent sx={{
-      pt: 6
-    }}>
-          <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6
-    }}>
-            <div>
-              <h4 sx={{
-      mb: 3,
-      fontWeight: 500
-    }}>Color System</h4>
-              <div sx={{}}>
-                <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                  <div sx={{
-      borderRadius: "var(--sys-shape-radius-sm)"
-    }}></div>
-                  <span sx={{
-      typography: "body1"
-    }}>Primary - Actions & Branding</span>
-                </div>
-                <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                  <div sx={{
-      borderRadius: "var(--sys-shape-radius-sm)"
-    }}></div>
-                  <span sx={{
-      typography: "body1"
-    }}>Destructive - Errors & Warnings</span>
-                </div>
-                <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                  <div sx={{
-      borderRadius: "var(--sys-shape-radius-sm)"
-    }}></div>
-                  <span sx={{
-      typography: "body1"
-    }}>Muted - Secondary Information</span>
-                </div>
+      <Card className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 className="text-hero text-base font-medium text-on-surface mb-3">
+              Color System
+            </h4>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-sm bg-primary-container" />
+                <span className="text-human text-sm text-on-surface">
+                  Primary - Actions & Branding
+                </span>
               </div>
-            </div>
-            <div>
-              <h4 sx={{
-      mb: 3,
-      fontWeight: 500
-    }}>Animation Guidelines</h4>
-              <div sx={{}}>
-                <div sx={{
-      typography: "body1",}}>
-                  • Duration: 200-300ms for micro-interactions
-                </div>
-                <div sx={{
-      typography: "body1",}}>
-                  • Easing: Spring animations for natural feel
-                </div>
-                <div sx={{
-      typography: "body1",}}>
-                  • Stagger delays: 50-100ms between items
-                </div>
-                <div sx={{
-      typography: "body1",}}>
-                  • Reduce motion for accessibility preferences
-                </div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-sm bg-error-container" />
+                <span className="text-human text-sm text-on-surface">
+                  Error - Errors & Warnings
+                </span>
               </div>
-            </div>
-            <div>
-              <h4 sx={{
-      mb: 3,
-      fontWeight: 500
-    }}>Spacing System</h4>
-              <div sx={{}}>
-                <div sx={{
-      typography: "body1",}}>• Border radius: 0.75rem</div>
-                <div sx={{
-      typography: "body1",}}>• Consistent padding scales</div>
-                <div sx={{
-      typography: "body1",}}>• Logical gap spacing</div>
-                <div sx={{
-      typography: "body1",}}>• Responsive breakpoints</div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-sm bg-tertiary-container" />
+                <span className="text-human text-sm text-on-surface">
+                  Tertiary - Expressive Accents
+                </span>
               </div>
             </div>
           </div>
-        </CardContent>
+          <div>
+            <h4 className="text-hero text-base font-medium text-on-surface mb-3">
+              Typography
+            </h4>
+            <div className="space-y-2">
+              <p className="text-hero text-lg text-on-surface">Hero - Headings</p>
+              <p className="text-human text-base text-on-surface">Human - Body Text</p>
+              <p className="text-data text-sm text-on-surface-variant uppercase">
+                DATA - SYSTEM TEXT
+              </p>
+              <p className="text-ai text-sm text-on-surface">AI - UI Labels</p>
+            </div>
+          </div>
+        </div>
       </Card>
     </ComponentSection>
   );
 }
+
+export default UsageGuidelinesSection;
+
