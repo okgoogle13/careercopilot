@@ -13,8 +13,8 @@ import {
   TableRow,
   TableHead,
   TableCell,
-} from '@/components/ui';
-import { Button } from '@/components/ui';
+} from '@/components';
+import { Button } from '@/components';
 import { cn } from '@/lib/utils';
 
 type Order = 'asc' | 'desc';

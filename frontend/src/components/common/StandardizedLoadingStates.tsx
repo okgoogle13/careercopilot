@@ -8,9 +8,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, CheckCircle2, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui';
-import { Progress } from '@/components/ui/Progress';
-import { Skeleton } from '@/components/ui/Skeleton';
+import { Card } from '@/components';
+import { Progress } from '@/components/electric';
+import { Skeleton } from '@/components/electric';
 
 export type LoadingVariant =
   | 'spinner'

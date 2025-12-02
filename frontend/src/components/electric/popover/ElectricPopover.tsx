@@ -14,7 +14,7 @@ export interface ElectricPopoverProps {
   className?: string;
 }
 
-export const ElectricPopover: React.FC<ElectricPopoverProps> = ({
+export const ElectricPopover: React.FC<PopoverProps> = ({
   trigger,
   content,
   side = 'bottom',

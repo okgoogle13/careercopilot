@@ -6,11 +6,11 @@
 
 import React, { useState } from 'react';
 import { SwapHoriz, Download, Share } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Card } from '@/components/ui';
-import { Badge } from '@/components/ui/Badge';
-import { ATSScoreCircle } from '@/components/ui/ATSScoreCircle';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
+import { Button } from '@/components/electric/button';
+import { Card } from '@/components';
+import { Badge } from '@/components/electric';
+import { ATSScoreCircle } from '@/components/electric';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/electric';
 
 interface ProfileData {
   id: string;

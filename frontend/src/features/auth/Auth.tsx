@@ -6,10 +6,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/Button/Button';
-import { Input } from '@/components/ui/Input';
-import { Card } from '@/components/ui';
-import { Separator } from '@/components/ui/Separator';
+import { Button } from '@/components/electric/button';
+import { Input } from '@/components/electric/input';
+import { Card } from '@/components';
+import { Separator } from '@/components/electric';
 
 interface AuthProps {
   onLogin: () => void;

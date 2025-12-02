@@ -21,7 +21,7 @@ export interface ElectricRadioGroupProps {
   className?: string;
 }
 
-export const ElectricRadioGroup: React.FC<ElectricRadioGroupProps> = ({
+export const ElectricRadioGroup: React.FC<RadioGroupProps> = ({
   name,
   options,
   value,

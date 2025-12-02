@@ -142,3 +142,109 @@ export type {
 // Tooltip
 export { ElectricTooltip } from './tooltip';
 export type { ElectricTooltipProps } from './tooltip';
+
+// ============================================================================
+// ALIASED EXPORTS (Without 'Electric' Prefix)
+// Use these for cleaner imports while maintaining backward compatibility
+// ============================================================================
+
+// Core primitives
+export { ElectricBadge as Badge } from './badge';
+export type { ElectricBadgeProps as BadgeProps } from './badge';
+
+export { ElectricButton as Button } from './button';
+export type { ElectricButtonProps as ButtonProps } from './button';
+
+export { ElectricCheckbox as Checkbox } from './checkbox';
+export type { ElectricCheckboxProps as CheckboxProps } from './checkbox';
+
+export { ElectricDivider as Divider } from './divider';
+export type { ElectricDividerProps as DividerProps } from './divider';
+
+export { ElectricInput as Input } from './input';
+export type { ElectricInputProps as InputProps } from './input';
+
+export { ElectricProgress as Progress } from './progress';
+export type { ElectricProgressProps as ProgressProps } from './progress';
+
+export { ElectricRadioGroup as RadioGroup } from './radio-group';
+export type { ElectricRadioGroupProps as RadioGroupProps, RadioOption } from './radio-group';
+
+export { ElectricSearchInput as SearchInput } from './search-input';
+export type { ElectricSearchInputProps as SearchInputProps } from './search-input';
+
+export { ElectricSelect as Select } from './select';
+export type { ElectricSelectProps as SelectProps } from './select';
+
+export { ElectricSkeleton as Skeleton } from './skeleton';
+export type { ElectricSkeletonProps as SkeletonProps } from './skeleton';
+
+export { ElectricSlider as Slider } from './slider';
+export type { ElectricSliderProps as SliderProps } from './slider';
+
+export { ElectricSwitch as Switch } from './switch';
+export type { ElectricSwitchProps as SwitchProps } from './switch';
+
+export { ElectricTextarea as Textarea } from './textarea';
+export type { ElectricTextareaProps as TextareaProps } from './textarea';
+
+// Layout & containers
+export { ElectricAlert as Alert } from './alert';
+export type { ElectricAlertProps as AlertProps } from './alert';
+
+export { ElectricBreadcrumb as Breadcrumb } from './breadcrumb';
+export type { ElectricBreadcrumbProps as BreadcrumbProps, BreadcrumbItem } from './breadcrumb';
+
+export { ElectricCard as Card, PopOutGraphic } from './card';
+export type { ElectricCardProps as CardProps, PopOutGraphicProps } from './card';
+
+export { ElectricContainer as Container } from './container';
+export type { ElectricContainerProps as ContainerProps } from './container';
+
+export { ElectricDialog as Dialog } from './dialog';
+export type { ElectricDialogProps as DialogProps } from './dialog';
+
+export { ElectricDrawer as Drawer } from './drawer';
+export type { ElectricDrawerProps as DrawerProps } from './drawer';
+
+export { ElectricEmptyState as EmptyState } from './empty-state';
+export type { ElectricEmptyStateProps as EmptyStateProps } from './empty-state';
+
+export { ElectricGrid as Grid } from './grid';
+export type { ElectricGridProps as GridProps } from './grid';
+
+export { ElectricTabs as Tabs } from './tabs';
+export type { ElectricTabsProps as TabsProps, Tab } from './tabs';
+
+// Data display
+export { ElectricAvatar as Avatar } from './avatar';
+export type { ElectricAvatarProps as AvatarProps } from './avatar';
+
+export { ElectricDatePicker as DatePicker } from './date-picker';
+export type { ElectricDatePickerProps as DatePickerProps } from './date-picker';
+
+export { ElectricPagination as Pagination } from './pagination';
+export type { ElectricPaginationProps as PaginationProps } from './pagination';
+
+export { ElectricPopover as Popover } from './popover';
+export type { ElectricPopoverProps as PopoverProps } from './popover';
+
+export {
+  ElectricTable as Table,
+  ElectricTableHeader as TableHeader,
+  ElectricTableBody as TableBody,
+  ElectricTableRow as TableRow,
+  ElectricTableHead as TableHead,
+  ElectricTableCell as TableCell,
+} from './table';
+export type {
+  ElectricTableProps as TableProps,
+  ElectricTableHeaderProps as TableHeaderProps,
+  ElectricTableBodyProps as TableBodyProps,
+  ElectricTableRowProps as TableRowProps,
+  ElectricTableHeadProps as TableHeadProps,
+  ElectricTableCellProps as TableCellProps,
+} from './table';
+
+export { ElectricTooltip as Tooltip } from './tooltip';
+export type { ElectricTooltipProps as TooltipProps } from './tooltip';

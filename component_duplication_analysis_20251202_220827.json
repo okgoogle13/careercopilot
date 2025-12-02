@@ -1,0 +1,1378 @@
+{
+  "analysis_date": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+  "consolidation_strategy": "Dual design system coexistence",
+  "summary": {
+    "total_components_found": 0,
+    "duplicates_identified": 0,
+    "total_duplicate_files": 0,
+    "recommended_deletions": []
+  },
+  "component_analysis": [
+    {
+      "name": "Button",
+      "kebab_name": "button",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/button/",
+          "file": "ElectricButton.tsx",
+          "size_lines":      122,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Button.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/button/",
+          "size_lines":      122,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Card",
+      "kebab_name": "card",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/card/",
+          "file": "ElectricCard.tsx",
+          "size_lines":      139,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Card.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/card/",
+          "size_lines":      139,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Input",
+      "kebab_name": "input",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/input/",
+          "file": "ElectricInput.tsx",
+          "size_lines":       52,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Input.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/input/",
+          "size_lines":       52,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Dialog",
+      "kebab_name": "dialog",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/dialog/",
+          "file": "ElectricDialog.tsx",
+          "size_lines":      106,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Dialog.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/dialog/",
+          "size_lines":      106,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Alert",
+      "kebab_name": "alert",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/alert/",
+          "file": "ElectricAlert.tsx",
+          "size_lines":       89,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3Alert.tsx",
+          "size_lines":      104,
+          "modified": "2025-11-28"
+        },
+        "design_system": {
+          "exists": false,
+          "path": "design-system/alert/",
+          "size_lines": 0,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Tabs",
+      "kebab_name": "tabs",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/tabs/",
+          "file": "ElectricTabs.tsx",
+          "size_lines":       98,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Tabs.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/tabs/",
+          "size_lines":       98,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Breadcrumb",
+      "kebab_name": "breadcrumb",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/breadcrumb/",
+          "file": "ElectricBreadcrumb.tsx",
+          "size_lines":       80,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Breadcrumb.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/breadcrumb/",
+          "size_lines":       80,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Badge",
+      "kebab_name": "badge",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/badge/",
+          "file": "ElectricBadge.tsx",
+          "size_lines":       67,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Badge.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/badge/",
+          "size_lines":       67,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Checkbox",
+      "kebab_name": "checkbox",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/checkbox/",
+          "file": "ElectricCheckbox.tsx",
+          "size_lines":       71,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Checkbox.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/checkbox/",
+          "size_lines":       71,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "RadioGroup",
+      "kebab_name": "radio-group",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/radio-group/",
+          "file": "ElectricRadioGroup.tsx",
+          "size_lines":       85,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "RadioGroup.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/radio-group/",
+          "size_lines":       85,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Select",
+      "kebab_name": "select",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/select/",
+          "file": "ElectricSelect.tsx",
+          "size_lines":       53,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Select.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/select/",
+          "size_lines":       53,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Switch",
+      "kebab_name": "switch",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/switch/",
+          "file": "ElectricSwitch.tsx",
+          "size_lines":       71,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Switch.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/switch/",
+          "size_lines":       71,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Slider",
+      "kebab_name": "slider",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/slider/",
+          "file": "ElectricSlider.tsx",
+          "size_lines":       72,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Slider.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/slider/",
+          "size_lines":       72,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Progress",
+      "kebab_name": "progress",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/progress/",
+          "file": "ElectricProgress.tsx",
+          "size_lines":       55,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Progress.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/progress/",
+          "size_lines":       55,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Skeleton",
+      "kebab_name": "skeleton",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/skeleton/",
+          "file": "ElectricSkeleton.tsx",
+          "size_lines":       47,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Skeleton.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/skeleton/",
+          "size_lines":       47,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Divider",
+      "kebab_name": "divider",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/divider/",
+          "file": "ElectricDivider.tsx",
+          "size_lines":       41,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Divider.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/divider/",
+          "size_lines":       41,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Drawer",
+      "kebab_name": "drawer",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/drawer/",
+          "file": "ElectricDrawer.tsx",
+          "size_lines":      105,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Drawer.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/drawer/",
+          "size_lines":      105,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Pagination",
+      "kebab_name": "pagination",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/pagination/",
+          "file": "ElectricPagination.tsx",
+          "size_lines":      158,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Pagination.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/pagination/",
+          "size_lines":      158,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Popover",
+      "kebab_name": "popover",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/popover/",
+          "file": "ElectricPopover.tsx",
+          "size_lines":       82,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Popover.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/popover/",
+          "size_lines":       82,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Tooltip",
+      "kebab_name": "tooltip",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/tooltip/",
+          "file": "ElectricTooltip.tsx",
+          "size_lines":       62,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Tooltip.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/tooltip/",
+          "size_lines":       62,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Avatar",
+      "kebab_name": "avatar",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/avatar/",
+          "file": "ElectricAvatar.tsx",
+          "size_lines":       69,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Avatar.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/avatar/",
+          "size_lines":       69,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "DatePicker",
+      "kebab_name": "date-picker",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/date-picker/",
+          "file": "ElectricDatePicker.tsx",
+          "size_lines":       67,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "DatePicker.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/date-picker/",
+          "size_lines":       67,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Table",
+      "kebab_name": "table",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/table/",
+          "file": "ElectricTable.tsx",
+          "size_lines":      111,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Table.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/table/",
+          "size_lines":      111,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Container",
+      "kebab_name": "container",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/container/",
+          "file": "ElectricContainer.tsx",
+          "size_lines":       45,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Container.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/container/",
+          "size_lines":       45,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Grid",
+      "kebab_name": "grid",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/grid/",
+          "file": "ElectricGrid.tsx",
+          "size_lines":       52,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Grid.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/grid/",
+          "size_lines":       52,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "EmptyState",
+      "kebab_name": "empty-state",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/empty-state/",
+          "file": "ElectricEmptyState.tsx",
+          "size_lines":       56,
+          "modified": "2025-12-02"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "EmptyState.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/empty-state/",
+          "size_lines":       56,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "SearchInput",
+      "kebab_name": "search-input",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/search-input/",
+          "file": "ElectricSearchInput.tsx",
+          "size_lines":       79,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "SearchInput.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/search-input/",
+          "size_lines":       79,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "Textarea",
+      "kebab_name": "textarea",
+      "locations": {
+        "electric": {
+          "exists": true,
+          "path": "electric/textarea/",
+          "file": "ElectricTextarea.tsx",
+          "size_lines":       53,
+          "modified": "2025-11-24"
+        },
+        "ui_m3": {
+          "exists": false,
+          "path": "ui/",
+          "file": "Textarea.tsx",
+          "size_lines": 0,
+          "modified": "N/A"
+        },
+        "design_system": {
+          "exists": true,
+          "path": "design-system/textarea/",
+          "size_lines":       53,
+          "duplicate_of_electric": "true"
+        }
+      },
+      "recommendation": {
+        "action": "KEEP_ELECTRIC",
+        "primary_location": "electric/",
+        "delete_design_system_copy": true,
+        "consolidation_phase": "1"
+      }
+    }
+,
+    {
+      "name": "M3ActionCard",
+      "kebab_name": "action-card",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3ActionCard.tsx",
+          "size_lines":      160
+        },
+        "root_directory": {
+          "exists": false,
+          "path": "M3ActionCard/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/action-card/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "M3JobCard",
+      "kebab_name": "job-card",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3JobCard.tsx",
+          "size_lines":      252
+        },
+        "root_directory": {
+          "exists": false,
+          "path": "M3JobCard/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/job-card/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "M3ProfileCard",
+      "kebab_name": "profile-card",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3ProfileCard.tsx",
+          "size_lines":      199
+        },
+        "root_directory": {
+          "exists": false,
+          "path": "M3ProfileCard/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/profile-card/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "M3Chip",
+      "kebab_name": "Chip",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3Chip.tsx",
+          "size_lines":      164
+        },
+        "root_directory": {
+          "exists": false,
+          "path": "M3Chip/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/Chip/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "M3Menu",
+      "kebab_name": "Menu",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3Menu.tsx",
+          "size_lines":      338
+        },
+        "root_directory": {
+          "exists": false,
+          "path": "M3Menu/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/Menu/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "M3Label",
+      "kebab_name": "Label",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3Label.tsx",
+          "size_lines":       67
+        },
+        "root_directory": {
+          "exists": false,
+          "path": "M3Label/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/Label/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "M3Separator",
+      "kebab_name": "Separator",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3Separator.tsx",
+          "size_lines":       77
+        },
+        "root_directory": {
+          "exists": false,
+          "path": "M3Separator/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/Separator/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "M3Sidebar",
+      "kebab_name": "Sidebar",
+      "type": "m3_specific",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "M3Sidebar.tsx",
+          "size_lines":      106
+        },
+        "root_directory": {
+          "exists": true,
+          "path": "M3Sidebar/"
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_M3_EXPRESSIVE",
+        "new_location": "m3-expressive/Sidebar/",
+        "delete_root_duplicate": true,
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "PageHeader",
+      "kebab_name": "page-header",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "PageHeader.tsx",
+          "size_lines":      306
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/page-header/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "KeywordTag",
+      "kebab_name": "keyword-tag",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "KeywordTag.tsx",
+          "size_lines":      184
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/keyword-tag/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "ATSScoreCircle",
+      "kebab_name": "ats-score-circle",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "ATSScoreCircle.tsx",
+          "size_lines":      168
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/ats-score-circle/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "AnimatedButton",
+      "kebab_name": "animated-button",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "AnimatedButton.tsx",
+          "size_lines":      134
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/animated-button/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "Toast",
+      "kebab_name": "toast",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "Toast.tsx",
+          "size_lines":      147
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/toast/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "AlertDialog",
+      "kebab_name": "alert-dialog",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "AlertDialog.tsx",
+          "size_lines":      215
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/alert-dialog/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "Collapsible",
+      "kebab_name": "collapsible",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "Collapsible.tsx",
+          "size_lines":      120
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/collapsible/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "DropdownMenu",
+      "kebab_name": "dropdown-menu",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "DropdownMenu.tsx",
+          "size_lines":      188
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/dropdown-menu/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "Menu",
+      "kebab_name": "menu",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "Menu.tsx",
+          "size_lines":       69
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/menu/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "ImageWithFallback",
+      "kebab_name": "image-with-fallback",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "ImageWithFallback.tsx",
+          "size_lines":       45
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/image-with-fallback/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "Stepper",
+      "kebab_name": "stepper",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "Stepper.tsx",
+          "size_lines":       84
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/stepper/",
+        "consolidation_phase": "2"
+      }
+    }
+,
+    {
+      "name": "TimelineView",
+      "kebab_name": "timeline-view",
+      "type": "custom_hybrid",
+      "locations": {
+        "ui": {
+          "exists": true,
+          "path": "ui/",
+          "file": "TimelineView.tsx",
+          "size_lines":      122
+        }
+      },
+      "recommendation": {
+        "action": "MOVE_TO_CUSTOM",
+        "new_location": "custom/timeline-view/",
+        "consolidation_phase": "2"
+      }
+    }
+  ],
+  "summary_statistics": {
+    "total_files_analyzed": 100,
+    "files_in_electric": 29,
+    "files_in_ui": 103,
+    "files_in_design_system": 99,
+    "root_m3_directories": 24,
+    "duplicate_count": 126,
+    "redundant_files_to_delete": 226
+  },
+  "consolidation_phases": {
+    "phase_0": "Duplication analysis (THIS REPORT)",
+    "phase_1": "Create m3-expressive/, custom/, barrel exports",
+    "phase_2": "Move M3 and custom components",
+    "phase_3": "Update import paths",
+    "phase_4": "Delete design-system/, ui/, M3*/, backups"
+  },
+  "next_steps": [
+    "Review this analysis report",
+    "Execute Phase 1: Create directory structure",
+    "Verify no build issues",
+    "Execute Phase 2: Move components",
+    "Stop for user verification"
+  ]
+}

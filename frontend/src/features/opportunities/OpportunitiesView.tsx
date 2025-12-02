@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Briefcase, Search } from 'lucide-react';
-import { Container, Card, Button } from '@/components/ui';
+import { Container, Card, Button } from '@/components';
 
 export interface OpportunitiesViewProps {
   onAnalyzeJob?: () => void;

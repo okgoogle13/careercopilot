@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { Person, Briefcase, ArrowLeft, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
-import { Container, Card, Button, Input, Textarea, Grid } from '@/components/ui';
+import { Container, Card, Button, Input, Textarea, Grid } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface ProfileEditorProps {

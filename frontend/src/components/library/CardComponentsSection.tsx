@@ -6,9 +6,9 @@
 
 import React, { useState } from 'react';
 import { Heart } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Card } from '@/components/ui';
-import { Badge } from '@/components/ui/Badge';
+import { Button } from '@/components/electric/button';
+import { Card } from '@/components';
+import { Badge } from '@/components/electric';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function CardComponentsSection() {

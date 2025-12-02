@@ -13,7 +13,7 @@ import {
   Send,
   Eye,
 } from 'lucide-react';
-import { Grid, Card, Badge } from '@/components/ui';
+import { Grid, Card, Badge } from '@/components';
 
 interface JobSearchStatusProps {
   stats?: {

@@ -11,7 +11,7 @@
  */
 
 import * as React from 'react';
-import { ElectricButton, ElectricCard, PopOutGraphic } from '../components/electric';
+import { Button, Card, PopOutGraphic } from '../components/electric';
 
 export function ElectricAlchemistTestKitchen() {
   return (
@@ -31,25 +31,25 @@ export function ElectricAlchemistTestKitchen() {
         <h2 className="text-hero mb-8">Poly-Body Typography Matrix</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Tier 1: Hologram */}
-          <ElectricCard variant="hero">
+          <Card variant="hero">
             <div className="text-data mb-2">TIER 1: HOLOGRAM</div>
             <div className="text-hologram">Magic ✨</div>
             <p className="text-ai mt-4">
               Nabla Color Font - Hyper-expressive gamification layer
             </p>
-          </ElectricCard>
+          </Card>
 
           {/* Tier 2: Hero */}
-          <ElectricCard variant="default">
+          <Card variant="default">
             <div className="text-data mb-2">TIER 2: HERO</div>
             <div className="text-hero">ARCHITECTURAL</div>
             <p className="text-ai mt-4">
               Roboto Flex - Ultra-Wide, Tall Caps, Heavy Weight
             </p>
-          </ElectricCard>
+          </Card>
 
           {/* Tier 3: Voice (Human) */}
-          <ElectricCard variant="default">
+          <Card variant="default">
             <div className="text-data mb-2">TIER 3A: HUMAN VOICE</div>
             <p className="text-human">
               This is the human voice tier. It uses Roboto Serif with optical
@@ -58,10 +58,10 @@ export function ElectricAlchemistTestKitchen() {
             <p className="text-ai mt-4">
               Roboto Serif - Content flow, user input
             </p>
-          </ElectricCard>
+          </Card>
 
           {/* Tier 3: Voice (AI) */}
-          <ElectricCard variant="default">
+          <Card variant="default">
             <div className="text-data mb-2">TIER 3B: AI VOICE</div>
             <p className="text-ai">
               This is the AI voice tier. Efficient, narrow width, optimized for
@@ -70,10 +70,10 @@ export function ElectricAlchemistTestKitchen() {
             <p className="text-ai mt-4">
               Roboto Flex - System output, UI labels
             </p>
-          </ElectricCard>
+          </Card>
 
           {/* Tier 4: Data */}
-          <ElectricCard variant="default">
+          <Card variant="default">
             <div className="text-data mb-2">TIER 4: DATA / SYSTEM</div>
             <div className="text-data">
               TIMESTAMP: 2025-11-23T15:30:00Z
@@ -85,7 +85,7 @@ export function ElectricAlchemistTestKitchen() {
             <p className="text-ai mt-4">
               Roboto Flex Lo-Fi - Hover for glitch effect (weight jumps to 600)
             </p>
-          </ElectricCard>
+          </Card>
         </div>
       </section>
 
@@ -93,29 +93,29 @@ export function ElectricAlchemistTestKitchen() {
       <section className="mb-16">
         <h2 className="text-hero mb-8">Electric Buttons</h2>
         <div className="flex flex-wrap gap-4">
-          <ElectricButton variant="default" size="sm">
+          <Button variant="default" size="sm">
             Default Small
-          </ElectricButton>
-          <ElectricButton variant="default" size="md">
+          </Button>
+          <Button variant="default" size="md">
             Default Medium
-          </ElectricButton>
-          <ElectricButton variant="default" size="lg">
+          </Button>
+          <Button variant="default" size="lg">
             Default Large
-          </ElectricButton>
+          </Button>
         </div>
 
         <div className="flex flex-wrap gap-4 mt-6">
-          <ElectricButton variant="default">Primary</ElectricButton>
-          <ElectricButton variant="secondary">Secondary</ElectricButton>
-          <ElectricButton variant="outline">Outline</ElectricButton>
-          <ElectricButton variant="ghost">Ghost</ElectricButton>
-          <ElectricButton variant="tertiary">Tertiary Accent</ElectricButton>
+          <Button variant="default">Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="tertiary">Tertiary Accent</Button>
         </div>
 
         <div className="mt-6">
-          <ElectricButton variant="default" disabled>
+          <Button variant="default" disabled>
             Disabled State
-          </ElectricButton>
+          </Button>
         </div>
       </section>
 
@@ -124,27 +124,27 @@ export function ElectricAlchemistTestKitchen() {
         <h2 className="text-hero mb-8">Bento Cards</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Standard Card */}
-          <ElectricCard variant="default">
+          <Card variant="default">
             <h3 className="text-hero text-hero-sm mb-4">STANDARD CARD</h3>
             <p className="text-human">
               Surface Container Low background with outline variant border.
               Standard padding: 24px.
             </p>
             <div className="text-data mt-4">CATEGORY: UTILITY</div>
-          </ElectricCard>
+          </Card>
 
           {/* Interactive Card */}
-          <ElectricCard variant="default" interactive>
+          <Card variant="default" interactive>
             <h3 className="text-hero text-hero-sm mb-4">INTERACTIVE</h3>
             <p className="text-human">
               Hover to feel the Tactile Press physics (scale 0.98). Tap for
               scale 0.95.
             </p>
             <div className="text-data mt-4">HOVER ME ↗</div>
-          </ElectricCard>
+          </Card>
 
           {/* Hero Card with Pop-Out */}
-          <ElectricCard
+          <Card
             variant="hero"
             interactive
             popOutGraphic={
@@ -161,7 +161,7 @@ export function ElectricAlchemistTestKitchen() {
               irregular rotation on the title.
             </p>
             <div className="text-data mt-4">STATUS: FEATURED</div>
-          </ElectricCard>
+          </Card>
         </div>
       </section>
 
@@ -200,16 +200,16 @@ export function ElectricAlchemistTestKitchen() {
       <section className="mb-16">
         <h2 className="text-hero mb-8">Motion Physics</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <ElectricCard variant="default">
+          <Card variant="default">
             <h3 className="text-hero text-hero-sm mb-4">TACTILE PRESS</h3>
             <p className="text-human mb-4">
               Buttons and interactive cards press <em>in</em> instead of
               lifting up. Hover: scale 0.98, Tap: scale 0.95.
             </p>
-            <ElectricButton variant="default">Try Me</ElectricButton>
-          </ElectricCard>
+            <Button variant="default">Try Me</Button>
+          </Card>
 
-          <ElectricCard variant="default">
+          <Card variant="default">
             <h3 className="text-hero text-hero-sm mb-4">POP-OUT PARALLAX</h3>
             <p className="text-human mb-4">
               Graphics physically break the card boundary. Hover for y: -15,
@@ -220,7 +220,7 @@ export function ElectricAlchemistTestKitchen() {
                 ⚡
               </div>
             </PopOutGraphic>
-          </ElectricCard>
+          </Card>
         </div>
       </section>
 

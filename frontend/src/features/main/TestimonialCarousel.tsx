@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
-import { Card, Button } from '@/components/ui';
+import { Card, Button } from '@/components';
 import { cn } from '@/lib/utils';
 
 // Simple Star component

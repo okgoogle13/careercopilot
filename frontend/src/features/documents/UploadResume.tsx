@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { Upload, ArrowLeft, ArrowRight } from 'lucide-react';
-import { Container, Card, Button } from '@/components/ui';
+import { Container, Card, Button } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface UploadResumeProps {

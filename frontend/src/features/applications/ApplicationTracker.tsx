@@ -6,8 +6,8 @@
 
 import React, { useState } from 'react';
 import { X, ArrowLeft } from 'lucide-react';
-import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui';
-import { TimelineView } from '@/components/ui/TimelineView';
+import { Button, Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components';
+import { TimelineView } from '@/components/electric';
 
 interface Application {
   id: string;
