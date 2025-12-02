@@ -2,9 +2,10 @@
  * ELECTRIC ALCHEMIST: PROFILE EDITOR
  *
  * Profile editor form using Electric Alchemist Design System v4.4.
+ * PERFORMANCE OPTIMIZED: Memoized handlers and functional state updates
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Person, Briefcase, ArrowLeft, ArrowRight, Sparkles, Loader2 } from 'lucide-react';
 import { Container, Card, Button, Input, Textarea, Grid } from '@/components';
 import { cn } from '@/lib/utils';
@@ -24,7 +25,15 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
     summary: profile?.summary || '',
   });
 
-  const handleGenerateSummary = async () => {
+  // Memoize field change handler using functional updates
+  const handleFieldChange = useCallback((field: keyof typeof formData) => {
+    return (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({ ...prev, [field]: e.target.value }));
+    };
+  }, []);
+
+  // Memoize AI generation handler
+  const handleGenerateSummary = useCallback(async () => {
     setIsGenerating(true);
     // Simulate AI generation
     setTimeout(() => {
@@ -34,7 +43,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
       }));
       setIsGenerating(false);
     }, 2000);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen bg-surface py-8 flex items-center">
@@ -58,18 +67,18 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
               <Input
                 label="Full Name"
                 value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                onChange={handleFieldChange('fullName')}
               />
               <Input
                 label="Email"
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={handleFieldChange('email')}
               />
               <Input
                 label="Phone"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={handleFieldChange('phone')}
               />
             </div>
           </Card>
@@ -87,7 +96,7 @@ export const ProfileEditor: React.FC<ProfileEditorProps> = ({ profile, onNext, o
                 placeholder="Your summary..."
                 rows={4}
                 value={formData.summary}
-                onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
+                onChange={handleFieldChange('summary')}
               />
               <Button
                 variant="outline"

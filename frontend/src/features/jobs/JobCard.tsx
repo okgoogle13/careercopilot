@@ -2,10 +2,10 @@
  * ELECTRIC ALCHEMIST: JOB CARD COMPONENT
  *
  * Job card component using Electric Alchemist Design System v4.4.
- * Composed of Card, Button, Badge, and Avatar atoms.
+ * PERFORMANCE OPTIMIZED: Memoized component and callbacks
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo, memo } from 'react';
 import {
   Bookmark,
   BookmarkCheck,
@@ -60,6 +60,7 @@ export interface JobCardProps {
   onViewDetails?: (jobId: string) => void;
 }
 
+// Move utility functions outside component to prevent recreation
 const formatRelativeTime = (date: Date | string): string => {
   const now = new Date();
   const then = typeof date === 'string' ? new Date(date) : date;
@@ -70,6 +71,17 @@ const formatRelativeTime = (date: Date | string): string => {
   if (diffDays === 1) return '1 day ago';
   if (diffDays < 7) return `${diffDays} days ago`;
   return `${Math.floor(diffDays / 7)} weeks ago`;
+};
+
+const formatSalary = (salary?: JobCardProps['job']['salary']): string | null => {
+  if (!salary) return null;
+  const { min, max, currency, period } = salary;
+  const periodText = period === 'hourly' ? '/hr' : '/year';
+
+  if (min === max) {
+    return `${currency}${min.toLocaleString()}${periodText}`;
+  }
+  return `${currency}${min.toLocaleString()} - ${currency}${max.toLocaleString()}${periodText}`;
 };
 
 const getMatchScoreColor = (score: number) => {
@@ -86,7 +98,7 @@ const getMatchScoreBg = (score: number) => {
   return 'bg-error-container/10';
 };
 
-export const JobCard: React.FC<JobCardProps> = ({
+export const JobCard = memo<JobCardProps>(({
   job,
   variant = 'default',
   saved = false,
@@ -97,27 +109,31 @@ export const JobCard: React.FC<JobCardProps> = ({
 }) => {
   const [isSaved, setIsSaved] = useState(saved);
 
-  const handleSave = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsSaved(!isSaved);
-    onSave?.(job.id);
-  };
+  // Memoize handlers
+  const handleSave = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      setIsSaved((prev) => !prev);
+      onSave?.(job.id);
+    },
+    [job.id, onSave]
+  );
 
-  const handleApply = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onApply?.(job.id);
-  };
+  const handleApply = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+      onApply?.(job.id);
+    },
+    [job.id, onApply]
+  );
 
-  const formatSalary = () => {
-    if (!job.salary) return null;
-    const { min, max, currency, period } = job.salary;
-    const periodText = period === 'hourly' ? '/hr' : '/year';
+  const handleViewDetails = useCallback(() => {
+    onViewDetails?.(job.id);
+  }, [job.id, onViewDetails]);
 
-    if (min === max) {
-      return `${currency}${min.toLocaleString()}${periodText}`;
-    }
-    return `${currency}${min.toLocaleString()} - ${currency}${max.toLocaleString()}${periodText}`;
-  };
+  // Memoize computed values
+  const salaryText = useMemo(() => formatSalary(job.salary), [job.salary]);
+  const postedText = useMemo(() => formatRelativeTime(job.postedDate), [job.postedDate]);
 
   if (variant === 'compact') {
     return (
@@ -125,7 +141,7 @@ export const JobCard: React.FC<JobCardProps> = ({
         variant="default"
         interactive
         className="cursor-pointer"
-        onClick={() => onViewDetails?.(job.id)}
+        onClick={handleViewDetails}
       >
         <div className="flex items-center justify-between gap-4">
           <div className="flex-1 min-w-0">
@@ -185,7 +201,7 @@ export const JobCard: React.FC<JobCardProps> = ({
         'h-full flex flex-col cursor-pointer',
         variant === 'featured' && 'ring-2 ring-primary/20'
       )}
-      onClick={() => onViewDetails?.(job.id)}
+      onClick={handleViewDetails}
     >
       <div className="flex-1 flex flex-col">
         {/* Header */}
@@ -265,15 +281,15 @@ export const JobCard: React.FC<JobCardProps> = ({
             <span className="text-human text-sm">{job.location}</span>
           </div>
 
-          {job.salary && (
+          {salaryText && (
             <div className="flex items-center gap-1.5">
               <DollarSign className="h-4 w-4" />
-              <span className="text-human text-sm">{formatSalary()}</span>
+              <span className="text-human text-sm">{salaryText}</span>
             </div>
           )}
 
           <span className="text-data text-xs">
-            Posted {formatRelativeTime(job.postedDate)}
+            Posted {postedText}
           </span>
         </div>
 
@@ -362,7 +378,7 @@ export const JobCard: React.FC<JobCardProps> = ({
           variant="outline"
           onClick={(e) => {
             e.stopPropagation();
-            onViewDetails?.(job.id);
+            handleViewDetails();
           }}
         >
           <ExternalLink className="h-4 w-4 mr-2" />
@@ -371,7 +387,8 @@ export const JobCard: React.FC<JobCardProps> = ({
       </div>
     </Card>
   );
-};
+});
+
+JobCard.displayName = 'JobCard';
 
 export default JobCard;
-

@@ -2,9 +2,10 @@
  * ELECTRIC ALCHEMIST: DATA TABLE
  *
  * Reusable data table component with sorting and pagination using Electric Alchemist Design System v4.4.
+ * PERFORMANCE OPTIMIZED: Memoized handlers and calculations
  */
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { ChevronUp, ChevronDown, ChevronsUpDown } from 'lucide-react';
 import {
   Table,
@@ -71,42 +72,55 @@ export function DataTable<T extends Record<string, any>>({
   const page = controlledPage ?? uncontrolledPage;
   const rowsPerPage = controlledRowsPerPage ?? uncontrolledRowsPerPage;
 
-  const handleRequestSort = (property: keyof T) => {
-    const isAsc = orderBy === property && order === 'asc';
-    const newOrder = isAsc ? 'desc' : 'asc';
+  // Memoize sort handler
+  const handleRequestSort = useCallback(
+    (property: keyof T) => {
+      const isAsc = orderBy === property && order === 'asc';
+      const newOrder = isAsc ? 'desc' : 'asc';
 
-    setOrder(newOrder);
-    setOrderBy(property);
+      setOrder(newOrder);
+      setOrderBy(property);
 
-    if (onSortChange) {
-      onSortChange(property, newOrder);
-    }
-  };
+      if (onSortChange) {
+        onSortChange(property, newOrder);
+      }
+    },
+    [order, orderBy, onSortChange]
+  );
 
-  const handleChangePage = (newPage: number) => {
-    if (onPageChange) {
-      onPageChange(newPage);
-    } else {
-      setUncontrolledPage(newPage);
-    }
-  };
+  // Memoize page change handler
+  const handleChangePage = useCallback(
+    (newPage: number) => {
+      if (onPageChange) {
+        onPageChange(newPage);
+      } else {
+        setUncontrolledPage(newPage);
+      }
+    },
+    [onPageChange]
+  );
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newRowsPerPage = parseInt(event.target.value, 10);
+  // Memoize rows per page change handler
+  const handleChangeRowsPerPage = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const newRowsPerPage = parseInt(event.target.value, 10);
 
-    if (onRowsPerPageChange) {
-      onRowsPerPageChange(newRowsPerPage);
-    } else {
-      setUncontrolledRowsPerPage(newRowsPerPage);
-    }
+      if (onRowsPerPageChange) {
+        onRowsPerPageChange(newRowsPerPage);
+      } else {
+        setUncontrolledRowsPerPage(newRowsPerPage);
+      }
 
-    if (onPageChange) {
-      onPageChange(0);
-    } else {
-      setUncontrolledPage(0);
-    }
-  };
+      if (onPageChange) {
+        onPageChange(0);
+      } else {
+        setUncontrolledPage(0);
+      }
+    },
+    [onPageChange, onRowsPerPageChange]
+  );
 
+  // Memoize sorted data
   const sortedData = useMemo(() => {
     if (!orderBy || onSortChange) {
       return data;
@@ -130,12 +144,32 @@ export function DataTable<T extends Record<string, any>>({
     });
   }, [data, order, orderBy, onSortChange]);
 
+  // Memoize paginated data
   const paginatedData = useMemo(() => {
     if (!showPagination || onPageChange) {
       return sortedData;
     }
     return sortedData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   }, [sortedData, page, rowsPerPage, onPageChange, showPagination]);
+
+  // Memoize total pages calculation
+  const totalPages = useMemo(
+    () =>
+      onPageChange
+        ? Math.ceil(totalItems / rowsPerPage)
+        : Math.ceil(sortedData.length / rowsPerPage),
+    [onPageChange, totalItems, rowsPerPage, sortedData.length]
+  );
+
+  // Memoize pagination info
+  const paginationInfo = useMemo(
+    () => ({
+      start: page * rowsPerPage + 1,
+      end: Math.min((page + 1) * rowsPerPage, onPageChange ? totalItems : sortedData.length),
+      total: onPageChange ? totalItems : sortedData.length,
+    }),
+    [page, rowsPerPage, onPageChange, totalItems, sortedData.length]
+  );
 
   const defaultEmptyState = (
     <TableRow>
@@ -152,10 +186,6 @@ export function DataTable<T extends Record<string, any>>({
       </div>
     );
   }
-
-  const totalPages = onPageChange
-    ? Math.ceil(totalItems / rowsPerPage)
-    : Math.ceil(sortedData.length / rowsPerPage);
 
   return (
     <div className="w-full overflow-auto">
@@ -233,9 +263,7 @@ export function DataTable<T extends Record<string, any>>({
           </div>
           <div className="flex items-center gap-2">
             <span className="text-data text-sm text-on-surface-variant">
-              {page * rowsPerPage + 1}-
-              {Math.min((page + 1) * rowsPerPage, onPageChange ? totalItems : sortedData.length)} of{' '}
-              {onPageChange ? totalItems : sortedData.length}
+              {paginationInfo.start}-{paginationInfo.end} of {paginationInfo.total}
             </span>
             <div className="flex gap-1">
               <Button
@@ -263,4 +291,3 @@ export function DataTable<T extends Record<string, any>>({
 }
 
 export default DataTable;
-
