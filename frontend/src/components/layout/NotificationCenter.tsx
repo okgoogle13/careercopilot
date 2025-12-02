@@ -2,9 +2,10 @@
  * ELECTRIC ALCHEMIST: NOTIFICATION CENTER COMPONENT
  *
  * Notification center using Electric Alchemist Design System v4.4.
+ * PERFORMANCE OPTIMIZED: Memoized handlers and callbacks
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   Bell,
   X,
@@ -26,39 +27,41 @@ export const NotificationCenter: React.FC = () => {
   const [unreadCount, setUnreadCount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  // Memoize fetch function for stable reference
+  const fetchNotifications = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const notificationsResponse = await notificationService.getNotifications();
+      if (!isApiError(notificationsResponse)) {
+        setNotifications(notificationsResponse.data);
+      } else {
+        console.error('Failed to fetch notifications:', notificationsResponse.message);
+      }
+
+      const countResponse = await notificationService.getUnreadCount();
+      if (!isApiError(countResponse)) {
+        setUnreadCount(countResponse.data.count);
+      } else {
+        console.error('Failed to fetch unread count:', countResponse.message);
+      }
+    } catch (error) {
+      console.error('Error fetching notifications:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   // Fetch notifications on mount and set up polling
   useEffect(() => {
-    const fetchNotifications = async () => {
-      setIsLoading(true);
-      try {
-        const notificationsResponse = await notificationService.getNotifications();
-        if (!isApiError(notificationsResponse)) {
-          setNotifications(notificationsResponse.data);
-        } else {
-          console.error('Failed to fetch notifications:', notificationsResponse.message);
-        }
-
-        const countResponse = await notificationService.getUnreadCount();
-        if (!isApiError(countResponse)) {
-          setUnreadCount(countResponse.data.count);
-        } else {
-          console.error('Failed to fetch unread count:', countResponse.message);
-        }
-      } catch (error) {
-        console.error('Error fetching notifications:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchNotifications();
 
     // Poll for new notifications every 30 seconds
     const interval = setInterval(fetchNotifications, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchNotifications]);
 
-  const handleMarkAsRead = async (id: string) => {
+  // Memoize handlers
+  const handleMarkAsRead = useCallback(async (id: string) => {
     try {
       const response = await notificationService.markAsRead(id);
       if (!isApiError(response)) {
@@ -72,9 +75,9 @@ export const NotificationCenter: React.FC = () => {
     } catch (error) {
       console.error('Error marking notification as read:', error);
     }
-  };
+  }, []);
 
-  const handleMarkAllAsRead = async () => {
+  const handleMarkAllAsRead = useCallback(async () => {
     try {
       const response = await notificationService.markAllAsRead();
       if (!isApiError(response)) {
@@ -86,18 +89,19 @@ export const NotificationCenter: React.FC = () => {
     } catch (error) {
       console.error('Error marking all notifications as read:', error);
     }
-  };
+  }, []);
 
-  const handleDelete = async (notificationId: string) => {
+  const handleDelete = useCallback(async (notificationId: string) => {
     try {
       await notificationService.deleteNotification(notificationId);
       setNotifications((prev) => prev.filter((n) => n.id !== notificationId));
     } catch (error) {
       console.error('Failed to delete notification:', error);
     }
-  };
+  }, []);
 
-  const getNotificationIcon = (type: string) => {
+  // Memoize icon getter
+  const getNotificationIcon = useCallback((type: string) => {
     switch (type) {
       case 'success':
         return <CheckCircle className="h-5 w-5 text-primary" />;
@@ -110,7 +114,63 @@ export const NotificationCenter: React.FC = () => {
       default:
         return <Info className="h-5 w-5 text-on-surface-variant" />;
     }
-  };
+  }, []);
+
+  // Memoize notification items to prevent unnecessary re-renders
+  const notificationItems = useMemo(
+    () =>
+      notifications.map((notification, index) => (
+        <div
+          key={notification.id}
+          className={cn(
+            'flex gap-3 p-3 cursor-pointer transition-colors',
+            !notification.read && 'bg-surface-container',
+            'hover:bg-surface-container-high',
+            index < notifications.length - 1 && 'border-b border-outline-variant'
+          )}
+          onClick={() => !notification.read && handleMarkAsRead(notification.id)}
+        >
+          <div className="flex-shrink-0 mt-0.5">
+            {getNotificationIcon(notification.type || 'info')}
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <p
+                className={cn(
+                  'text-human text-sm flex-1',
+                  notification.read ? 'font-normal' : 'font-semibold'
+                )}
+              >
+                {notification.title}
+              </p>
+              {!notification.read && (
+                <Badge variant="default" className="text-xs">
+                  New
+                </Badge>
+              )}
+            </div>
+            <p className="text-human text-xs text-on-surface-variant mb-1">
+              {notification.message}
+            </p>
+            <p className="text-data text-xs text-on-surface-variant">
+              {new Date(notification.createdAt).toLocaleString()}
+            </p>
+          </div>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(notification.id);
+            }}
+            className="p-1 flex-shrink-0"
+          >
+            <Trash2 className="h-4 w-4" />
+          </Button>
+        </div>
+      )),
+    [notifications, handleMarkAsRead, handleDelete, getNotificationIcon]
+  );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -161,56 +221,7 @@ export const NotificationCenter: React.FC = () => {
               )}
 
               <div className="max-h-[350px] overflow-y-auto space-y-0">
-                {notifications.map((notification, index) => (
-                  <div
-                    key={notification.id}
-                    className={cn(
-                      'flex gap-3 p-3 cursor-pointer transition-colors',
-                      !notification.read && 'bg-surface-container',
-                      'hover:bg-surface-container-high',
-                      index < notifications.length - 1 && 'border-b border-outline-variant'
-                    )}
-                    onClick={() => !notification.read && handleMarkAsRead(notification.id)}
-                  >
-                    <div className="flex-shrink-0 mt-0.5">
-                      {getNotificationIcon(notification.type || 'info')}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <p
-                          className={cn(
-                            'text-human text-sm flex-1',
-                            notification.read ? 'font-normal' : 'font-semibold'
-                          )}
-                        >
-                          {notification.title}
-                        </p>
-                        {!notification.read && (
-                          <Badge variant="default" className="text-xs">
-                            New
-                          </Badge>
-                        )}
-                      </div>
-                      <p className="text-human text-xs text-on-surface-variant mb-1">
-                        {notification.message}
-                      </p>
-                      <p className="text-data text-xs text-on-surface-variant">
-                        {new Date(notification.createdAt).toLocaleString()}
-                      </p>
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(notification.id);
-                      }}
-                      className="p-1 flex-shrink-0"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ))}
+                {notificationItems}
               </div>
             </>
           )}
@@ -221,4 +232,3 @@ export const NotificationCenter: React.FC = () => {
 };
 
 export default NotificationCenter;
-
