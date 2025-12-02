@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/ElectricCard';
+import { Button } from '@/components/electric/button';
+import { Card } from '@/components/electric';
 import { motion } from 'framer-motion';
 
 export const DesignSystemPreview = () => {

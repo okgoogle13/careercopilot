@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Zap, Target, TrendingUp, Award } from 'lucide-react';
-import { Grid, Card } from '@/components/ui';
+import { Grid, Card } from '@/components';
 
 const features = [
   {

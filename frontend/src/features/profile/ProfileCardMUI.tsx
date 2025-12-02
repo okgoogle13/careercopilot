@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Edit, Trash2, Target, TrendingUp } from 'lucide-react';
-import { Card, Button, Badge, Avatar, Progress } from '@/components/ui';
+import { Card, Button, Badge, Avatar, Progress } from '@/components';
 import { cn } from '@/lib/utils';
 
 export interface Profile {

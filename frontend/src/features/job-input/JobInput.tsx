@@ -6,11 +6,11 @@
 
 import React, { useState } from 'react';
 import { ArrowLeft, Link as LinkIcon, FileText, ExternalLink, Loader2 } from 'lucide-react';
-import { Button } from '@/components/ui/Button/Button';
-import { Input } from '@/components/ui/Input';
-import { Textarea } from '@/components/ui/Textarea';
-import { Card } from '@/components/ui';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
+import { Button } from '@/components/electric/button';
+import { Input } from '@/components/electric/input';
+import { Textarea } from '@/components/electric';
+import { Card } from '@/components';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/electric';
 import { motion } from 'framer-motion';
 
 interface JobInputProps {

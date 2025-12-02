@@ -21,13 +21,13 @@ export interface PopOutGraphicProps extends Omit<HTMLMotionProps<'div'>, 'varian
  * Pop-Out Graphic Component
  *
  * @example
- * <ElectricCard popOutGraphic={
+ * <Card popOutGraphic={
  *   <PopOutGraphic>
  *     <svg width="80" height="80">...</svg>
  *   </PopOutGraphic>
  * }>
  *   Card content here
- * </ElectricCard>
+ * </Card>
  */
 export const PopOutGraphic = React.forwardRef<HTMLDivElement, PopOutGraphicProps>(
   ({ className, children, ...props }, ref) => {

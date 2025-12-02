@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { FileText, Plus } from 'lucide-react';
-import { Container, Card, Button } from '@/components/ui';
+import { Container, Card, Button } from '@/components';
 
 export interface DocumentsViewProps {
   onCreateDocument?: () => void;

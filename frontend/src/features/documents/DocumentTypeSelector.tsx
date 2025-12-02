@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { FileText, ArrowLeft } from 'lucide-react';
-import { Card, Button } from '@/components/ui';
+import { Card, Button } from '@/components';
 
 export interface DocumentTypeSelectorProps {
   onSelect: (type: 'resume' | 'cover-letter' | 'selection-criteria') => void;

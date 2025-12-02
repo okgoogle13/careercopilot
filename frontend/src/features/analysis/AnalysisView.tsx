@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { BarChart, Upload } from 'lucide-react';
-import { Container, Card, Button } from '@/components/ui';
+import { Container, Card, Button } from '@/components';
 
 export interface AnalysisViewProps {
   onAnalyzeDocument?: () => void;

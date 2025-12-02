@@ -6,12 +6,12 @@
 
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
-import { Card } from '@/components/ui';
-import { Checkbox } from '@/components/ui/Checkbox';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/RadioGroup';
-import { Slider } from '@/components/ui/Slider';
-import { Button } from '@/components/ui/Button/Button';
-import { Separator } from '@/components/ui/Separator';
+import { Card } from '@/components';
+import { Checkbox } from '@/components/electric';
+import { RadioGroup, RadioGroupItem } from '@/components/electric';
+import { Slider } from '@/components/electric';
+import { Button } from '@/components/electric/button';
+import { Separator } from '@/components/electric';
 
 interface FilterPanelProps {
   onClose?: () => void;
