@@ -1,20 +1,24 @@
-import { Edit, Delete as Trash2 } from '@mui/icons-material';
-import {
-  Button,
-  Card,
-  Typography,
-  Box,
-} from '@mui/material';
+/**
+ * ELECTRIC ALCHEMIST: PROFILE CARD COMPONENT
+ *
+ * Profile card component using Electric Alchemist Design System v4.4.
+ * Composed of Card, Avatar, Button, and Badge atoms.
+ */
 
-import { Avatar, AvatarFallback } from '../ui/avatar';
+import React from 'react';
+import { Edit, Trash2 } from 'lucide-react';
+import { Card } from '@/components/ui';
+import { Avatar } from '@/components/ui/Avatar';
+import { Button } from '@/components/ui/Button/Button';
+import { cn } from '@/lib/utils';
 
-interface ProfileCardProps {
+export interface ProfileCardProps {
   name: string;
   role: string;
   activeApplications: number;
   atsScore: number;
   lastUpdated: string;
-  avatarColor: string;
+  avatarColor?: string;
   onEdit: () => void;
   onDelete: () => void;
   isSelected?: boolean;
@@ -31,116 +35,90 @@ export function ProfileCard({
   onDelete,
   isSelected = false,
 }: ProfileCardProps) {
+  const initials = name
+    .split(' ')
+    .map((n) => n[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
+
   return (
     <Card
-      variant="outlined"
-      sx={{
-        p: 'var(--sys-space-6)',
-        borderRadius: 'var(--sys-shape-corner-medium)',
-        boxShadow: 'var(--sys-elevation-level1)',
-        backgroundColor: isSelected ? 'var(--sys-color-primary-container)' : 'var(--sys-color-surface)',
-        border: isSelected ? '1px solid var(--sys-color-primary)' : '1px solid var(--sys-color-outline-variant)',
-        transition: 'box-shadow var(--sys-motion-duration-short2) var(--sys-motion-easing-standard)',
-        '&:hover': {
-          boxShadow: 'var(--sys-elevation-level2)',
-        },
-      }}
+      variant="interactive"
+      className={cn(
+        isSelected && 'bg-primary-container border-primary',
+        !isSelected && 'bg-surface-container-low'
+      )}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 'var(--sys-space-3)' }}>
-        <Avatar>
-          <AvatarFallback
-            style={{
-              backgroundColor: avatarColor,
-              color: 'var(--sys-color-on-primary-container)',
-              fontFamily: 'var(--sys-type-font-family-brand)',
-              fontWeight: 'var(--sys-type-weight-medium)',
-              fontSize: 'var(--sys-type-size-title-medium)',
-              lineHeight: 'var(--sys-type-line-height-title-medium)',
-            }}
-          >
-            {name
-              .split(' ')
-              .map((n) => n[0])
-              .join('')}
-          </AvatarFallback>
-        </Avatar>
-        <Box>
-          <Typography
-            variant="h3"
-            sx={{
-              fontFamily: 'var(--sys-type-font-family-brand)',
-              fontWeight: 'var(--sys-type-weight-medium)',
-              fontSize: 'var(--sys-type-size-title-large)',
-              lineHeight: 'var(--sys-type-line-height-title-large)',
-              color: 'var(--sys-color-on-surface)',
-            }}
-          >
+      {/* Header with Avatar */}
+      <div className="flex items-center gap-3 mb-4">
+        <Avatar
+          size="lg"
+          initials={initials}
+          className={avatarColor ? `bg-[${avatarColor}]` : undefined}
+        />
+        <div className="flex-1 min-w-0">
+          <h3 className="text-hero text-lg font-medium text-on-surface truncate">
             {name}
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              fontFamily: 'var(--sys-type-font-family-plain)',
-              fontWeight: 'var(--sys-type-weight-regular)',
-              fontSize: 'var(--sys-type-size-body-medium)',
-              lineHeight: 'var(--sys-type-line-height-body-medium)',
-              color: 'var(--sys-color-on-surface-variant)',
-            }}
-          >
+          </h3>
+          <p className="text-human text-sm text-on-surface-variant truncate">
             {role}
-          </Typography>
-        </Box>
-      </Box>
+          </p>
+        </div>
+      </div>
 
-      <Box sx={{ mt: 'var(--sys-space-4)' }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 'var(--sys-space-2)' }}>
-          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>Active Applications:</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>{activeApplications}</Typography>
-        </Box>
+      {/* Stats */}
+      <div className="space-y-2 mb-4">
+        <div className="flex justify-between items-center">
+          <span className="text-human text-sm text-on-surface-variant">
+            Active Applications:
+          </span>
+          <span className="text-human text-sm font-medium text-on-surface">
+            {activeApplications}
+          </span>
+        </div>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 'var(--sys-space-2)' }}>
-          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>ATS Score Average:</Typography>
-          <Typography variant="body1" sx={{ fontWeight: 'var(--sys-type-weight-medium)', color: 'var(--sys-color-on-surface)' }}>{atsScore}%</Typography>
-        </Box>
+        <div className="flex justify-between items-center">
+          <span className="text-human text-sm text-on-surface-variant">
+            ATS Score Average:
+          </span>
+          <span className="text-human text-sm font-medium text-on-surface">
+            {atsScore}%
+          </span>
+        </div>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>Last Updated:</Typography>
-          <Typography variant="body1" sx={{ color: 'var(--sys-color-on-surface-variant)' }}>{lastUpdated}</Typography>
-        </Box>
-      </Box>
+        <div className="flex justify-between items-center">
+          <span className="text-human text-sm text-on-surface-variant">
+            Last Updated:
+          </span>
+          <span className="text-data text-xs text-on-surface-variant">
+            {lastUpdated}
+          </span>
+        </div>
+      </div>
 
-      <Box sx={{ display: 'flex', gap: 'var(--sys-space-2)', pt: 'var(--sys-space-4)' }}>
+      {/* Action Buttons */}
+      <div className="flex gap-2 pt-4 border-t border-outline-variant">
         <Button
-          variant="text"
-          size="small"
+          variant="ghost"
+          size="sm"
           onClick={onEdit}
-          sx={{
-            flex: 1,
-            color: 'var(--sys-color-primary)',
-            '& .MuiButton-startIcon': {
-              width: 'var(--sys-icon-size-medium)',
-              height: 'var(--sys-icon-size-medium)',
-            },
-          }}
-          startIcon={<Edit />}
+          className="flex-1"
         >
+          <Edit className="h-4 w-4" />
         </Button>
         <Button
-          variant="text"
-          size="small"
+          variant="ghost"
+          size="sm"
           onClick={onDelete}
-          sx={{
-            flex: 1,
-            color: 'var(--sys-color-error)',
-            '& .MuiButton-startIcon': {
-              width: 'var(--sys-icon-size-medium)',
-              height: 'var(--sys-icon-size-medium)',
-            },
-          }}
-          startIcon={<Trash2 />}
+          className="flex-1 text-error hover:text-error hover:bg-error-container"
         >
+          <Trash2 className="h-4 w-4" />
         </Button>
-      </Box>
+      </div>
     </Card>
   );
 }
+
+export default ProfileCard;
+
