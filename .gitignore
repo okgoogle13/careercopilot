@@ -107,3 +107,4 @@ claude-artifact-runner/
 
 # Jules Delegation Protocol Output Reports
 /.ai_reports/
+.archive_legacy/
