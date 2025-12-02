@@ -79,3 +79,32 @@ These rules are non-negotiable for maintaining high context quality and low oper
 * **M3 Readiness:** 12% (Target: 70%).
 
 ***
+
+## 6. 🧩 FRONTEND COMPONENT ARCHITECTURE (STRICT)
+**Source of Truth:** `frontend/src/components/` 
+
+We use a 3-namespace strategy. Do NOT create components outside these folders:
+
+1.  **`electric/`** (Production System)
+    * **Status:** Stable, Production-Ready.
+    * **Use for:** All primary UI elements (Buttons, Cards, Inputs).
+    * **Styling:** Tailwind + Framer Motion.
+    * **Imports:** `import { Button } from '@/components/electric'` (No "Electric" prefix).
+
+2.  **`m3-expressive/`** (Migration Target)
+    * **Status:** In-Progress / Experimental.
+    * **Use for:** Components being actively migrated to Material Design 3.
+    * **Styling:** CSS Modules + Design Tokens.
+    * **Imports:** `import { M3Button } from '@/components/m3-expressive'`.
+
+3.  **`custom/`** (Domain Specific)
+    * **Status:** Feature-Specific.
+    * **Use for:** Complex, business-logic-heavy components (e.g., `ApplicationTracker`, `ResumeBuilder`).
+    * **Imports:** `import { ApplicationTracker } from '@/components/custom'`.
+
+**⛔ DO NOT USE:**
+* `@/components/ui` (Deprecated & Deleted)
+* `@/components/design-system` (Deprecated & Deleted)
+* Do not re-introduce "Electric" prefixes in component names (e.g. use `<Button>`, not `<ElectricButton>`).
+
+***
