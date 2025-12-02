@@ -2,13 +2,14 @@
  * ELECTRIC ALCHEMIST: APP SHELL COMPONENT
  *
  * Responsive layout with fixed sidebar on desktop and main content area.
+ * PERFORMANCE OPTIMIZED: Memoized style object
  * Uses Electric Alchemist Design System tokens:
  * - Sidebar: bg-surface-container with asymmetric radius (0 28px 28px 0)
  * - Main: bg-surface
  * - Responsive: Sidebar fixed on desktop (lg:), hidden on mobile
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 
 export interface AppShellProps {
@@ -22,6 +23,9 @@ export interface AppShellProps {
   sidebarContent?: React.ReactNode;
 }
 
+// Constant for asymmetric border radius (moved outside component)
+const ASYMMETRIC_BORDER_RADIUS = '0 28px 28px 0';
+
 /**
  * AppShell Component
  *
@@ -34,13 +38,18 @@ export interface AppShellProps {
  * </AppShell>
  */
 export const AppShell: React.FC<AppShellProps> = ({ children, sidebarContent }) => {
+  // Memoize style object to prevent recreation on every render
+  const sidebarStyle = useMemo(
+    () => ({ borderRadius: ASYMMETRIC_BORDER_RADIUS }),
+    []
+  );
+
   return (
     <div className="min-h-screen flex bg-surface">
       {/* 1. ASYMMETRIC SIDEBAR (Fixed on larger screens) */}
       <motion.aside
         className="fixed left-0 top-0 hidden h-full w-[280px] flex-col bg-surface-container shadow-2xl lg:flex"
-        // Asymmetric Radius: 0 28px 28px 0 (implemented via custom style since Tailwind doesn't support T-R-B-L natively)
-        style={{ borderRadius: '0 28px 28px 0' }}
+        style={sidebarStyle}
       >
         <div className="p-6">
           <h2 className="text-xl text-hero text-primary">A.E. System</h2>

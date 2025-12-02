@@ -1,10 +1,11 @@
 /**
  * Authentication Context
  * Manages global authentication state and token persistence
+ * PERFORMANCE OPTIMIZED: Memoized context value and callbacks
  */
 
 import type { ReactNode } from 'react';
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { 
@@ -49,7 +50,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   }, [token]);
 
-  // Initialize authentication state
+  // Initialize authentication state - memoized for stable reference
   const initializeAuth = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -74,7 +75,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     initializeAuth();
   }, [initializeAuth]);
 
-  const login = async (credentials: LoginCredentials) => {
+  // Memoize login function
+  const login = useCallback(async (credentials: LoginCredentials) => {
     setIsLoading(true);
     try {
       const { user, token } = await authLogin(credentials);
@@ -84,9 +86,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const register = async (data: RegisterData) => {
+  // Memoize register function
+  const register = useCallback(async (data: RegisterData) => {
     setIsLoading(true);
     try {
       const { user, token } = await authRegister(data);
@@ -97,9 +100,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
-  const logout = async () => {
+  // Memoize logout function
+  const logout = useCallback(async () => {
     setIsLoading(true);
     try {
       await authLogout();
@@ -110,35 +114,46 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [navigate]);
 
-  const updateProfile = async (updates: Partial<AuthUser>) => {
+  // Memoize updateProfile function
+  const updateProfile = useCallback(async (updates: Partial<AuthUser>) => {
     try {
       // This would call your profile update endpoint
       // const response = await profileService.updateProfile(updates);
-      // setUser({ ...user, ...updates } as AuthUser);
+      // setUser((prev) => prev ? { ...prev, ...updates } as AuthUser : null);
       // return response;
       throw new Error('Update profile not implemented');
     } catch (error) {
       console.error('Failed to update profile:', error);
       throw error;
     }
-  };
+  }, []);
+
+  // Memoize isAuthenticated calculation
+  const isAuthenticated = useMemo(
+    () => !!user && !!token,
+    [user, token]
+  );
+
+  // Memoize context value to prevent unnecessary re-renders
+  const contextValue = useMemo<AuthContextType>(
+    () => ({
+      user,
+      token,
+      isLoading,
+      isAuthenticated,
+      login,
+      register,
+      logout,
+      updateProfile,
+      initializeAuth,
+    }),
+    [user, token, isLoading, isAuthenticated, login, register, logout, updateProfile, initializeAuth]
+  );
 
   return (
-    <AuthContext.Provider
-      value={{
-        user,
-        token,
-        isLoading,
-        isAuthenticated: !!user && !!token,
-        login,
-        register,
-        logout,
-        updateProfile,
-        initializeAuth,
-      } as AuthContextType}
-    >
+    <AuthContext.Provider value={contextValue}>
       {!isLoading && children}
     </AuthContext.Provider>
   );

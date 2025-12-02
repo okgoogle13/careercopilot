@@ -1,11 +1,11 @@
 /**
- * ELECTRIC ALCHEMIST: DASHBOARD PAGE (Enhanced)
+ * ELECTRIC ALCHEMIST: DASHBOARD PAGE (Enhanced & Optimized)
  *
  * Dashboard page using Electric Alchemist Design System v4.4.
- * Replaces DashboardMUI component.
+ * PERFORMANCE OPTIMIZED: Memoized calculations and callbacks
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import {
   Plus,
   FileText,
@@ -75,9 +75,30 @@ export function DashboardPage({
         ]
   );
 
-  const handleDeleteProfile = (id: string) => {
-    setProfiles(profiles.filter((p) => p.id !== id));
-  };
+  // Memoize expensive calculations
+  const totalApplications = useMemo(
+    () => profiles.reduce((sum, p) => sum + p.applications, 0),
+    [profiles]
+  );
+
+  const avgAtsScore = useMemo(
+    () => (profiles.length > 0
+      ? Math.round(profiles.reduce((sum, p) => sum + p.atsScore, 0) / profiles.length)
+      : 0),
+    [profiles]
+  );
+
+  // Memoize handlers to prevent unnecessary re-renders
+  const handleDeleteProfile = useCallback((id: string) => {
+    setProfiles((prev) => prev.filter((p) => p.id !== id));
+  }, []);
+
+  const handleEditProfile = useCallback(
+    (profile: Profile) => {
+      onEditProfile?.(profile);
+    },
+    [onEditProfile]
+  );
 
   if (isEmpty || profiles.length === 0) {
     return (
@@ -134,9 +155,7 @@ export function DashboardPage({
           <Card variant="default" className="p-6">
             <div className="flex items-center mb-4">
               <Briefcase className="h-5 w-5 text-tertiary mr-2" />
-              <h2 className="text-hero text-2xl font-bold">
-                {profiles.reduce((sum, p) => sum + p.applications, 0)}
-              </h2>
+              <h2 className="text-hero text-2xl font-bold">{totalApplications}</h2>
             </div>
             <p className="text-data text-sm text-on-surface-variant">Applications</p>
           </Card>
@@ -144,12 +163,7 @@ export function DashboardPage({
           <Card variant="default" className="p-6">
             <div className="flex items-center mb-4">
               <TrendingUp className="h-5 w-5 text-secondary mr-2" />
-              <h2 className="text-hero text-2xl font-bold">
-                {Math.round(
-                  profiles.reduce((sum, p) => sum + p.atsScore, 0) / profiles.length
-                )}
-                %
-              </h2>
+              <h2 className="text-hero text-2xl font-bold">{avgAtsScore}%</h2>
             </div>
             <p className="text-data text-sm text-on-surface-variant">Avg ATS Score</p>
           </Card>
@@ -177,7 +191,7 @@ export function DashboardPage({
                 atsScore={profile.atsScore}
                 applications={profile.applications}
                 lastUpdated={profile.lastUpdated}
-                onEdit={() => onEditProfile?.(profile)}
+                onEdit={() => handleEditProfile(profile)}
                 onDelete={() => handleDeleteProfile(profile.id)}
               />
             ))}
