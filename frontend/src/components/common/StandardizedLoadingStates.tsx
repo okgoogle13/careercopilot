@@ -1,14 +1,17 @@
-import { AutorenewRounded, Refresh, FlashOn, CheckCircle } from '@mui/icons-material';
-import { Box } from '@mui/material';
-import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
-import { motion } from 'motion/react';
+/**
+ * ELECTRIC ALCHEMIST: STANDARDIZED LOADING STATES
+ *
+ * Various loading state components with design system tokens.
+ */
+
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Loader2, CheckCircle2, Zap } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Card } from '@/components/ui';
+import { Progress } from '@/components/ui/Progress';
+import { Skeleton } from '@/components/ui/Skeleton';
 
-import { Badge } from '../../ui/badge';
-import { Progress } from '../../ui/progress';
-import { Skeleton } from '../../ui/skeleton';
-
-// Loading state variants
 export type LoadingVariant =
   | 'spinner'
   | 'pulse'
@@ -27,235 +30,143 @@ interface LoadingStateProps {
   className?: string;
 }
 
-// Basic Spinner Loading
-export const SpinnerLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
-  const sizeClasses = {
-    sm: 'w-4 h-4',
-    md: 'w-6 h-6',
-    lg: 'w-8 h-8',
-  };
+const sizeClasses = {
+  sm: 'w-4 h-4',
+  md: 'w-6 h-6',
+  lg: 'w-8 h-8',
+};
 
+export const SpinnerLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
   return (
-    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 2,}}>
+    <div className={cn('flex items-center justify-center gap-2', className)}>
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
       >
-        <AutorenewRounded sx={{}} />
+        <Loader2 className={cn(sizeClasses[size], 'text-primary')} />
       </motion.div>
-      {message && <span sx={{
-      typography: "body1",}}>{message}</span>}
+      {message && <span className="text-human text-base text-on-surface">{message}</span>}
     </div>
   );
 };
 
-// Pulse Loading
 export const PulseLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
-  const sizeClasses = {
-    sm: 'w-3 h-3',
-    md: 'w-4 h-4',
-    lg: 'w-6 h-6',
-  };
-
   return (
-    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 2,}}>
+    <div className={cn('flex items-center justify-center gap-2', className)}>
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
         transition={{ duration: 1.5, repeat: Infinity }}
-        sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }}
+        className={cn(
+          sizeClasses[size],
+          'rounded-full bg-primary-container'
+        )}
       />
-      {message && <span sx={{
-      typography: "body1",}}>{message}</span>}
+      {message && <span className="text-human text-base text-on-surface">{message}</span>}
     </div>
   );
 };
 
-// Dots Loading
 export const DotsLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
-  const sizeClasses = {
+  const dotSizes = {
     sm: 'w-1.5 h-4',
     md: 'w-2 h-6',
     lg: 'w-3 h-8',
   };
-
   return (
-    <div sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 3,}}>
-      <div sx={{
-      display: "flex",
-      gap: 1
-    }}>
+    <div className={cn('flex flex-col items-center justify-center gap-3', className)}>
+      <div className="flex gap-1">
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
             animate={{ y: [0, -8, 0] }}
-            transition={{
-              duration: 0.6,
-              repeat: Infinity,
-              delay: i * 0.1,
-            }}
-            sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }}
+            transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }}
+            className={cn(dotSizes[size], 'rounded-full bg-primary-container')}
           />
         ))}
       </div>
-      {message && <span sx={{
-      typography: "body1",}}>{message}</span>}
+      {message && <span className="text-human text-base text-on-surface">{message}</span>}
     </div>
   );
 };
 
-// Bars Loading
 export const BarsLoading = ({ size = 'md', message, className = '' }: LoadingStateProps) => {
-  const sizeClasses = {
+  const barSizes = {
     sm: 'w-1 h-6',
     md: 'w-1.5 h-8',
     lg: 'w-2 h-12',
   };
-
   return (
-    <div sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 3,}}>
-      <div sx={{
-      display: "flex",
-      gap: 1,
-      alignItems: "flex-end"
-    }}>
+    <div className={cn('flex flex-col items-center justify-center gap-3', className)}>
+      <div className="flex gap-1 items-end">
         {[0, 1, 2, 3, 4].map((i) => (
           <motion.div
             key={i}
             animate={{ scaleY: [0.3, 1, 0.3] }}
-            transition={{
-              duration: 1,
-              repeat: Infinity,
-              delay: i * 0.1,
-            }}
-            sx={{
-      borderRadius: "0.125rem",}}
+            transition={{ duration: 1, repeat: Infinity, delay: i * 0.1 }}
+            className={cn(barSizes[size], 'rounded-sm bg-primary-container')}
           />
         ))}
       </div>
-      {message && <span sx={{
-      typography: "body1",}}>{message}</span>}
+      {message && <span className="text-human text-base text-on-surface">{message}</span>}
     </div>
   );
 };
 
-// Progress Loading
-export const ProgressLoading = ({ progress = 0, message, className = '' }: LoadingStateProps) => {
+export const ProgressLoading = ({
+  progress = 0,
+  message,
+  className = '',
+}: LoadingStateProps) => {
   return (
-    <div sx={{}}>
-      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-        <span sx={{
-      typography: "body1",
-      fontWeight: 500
-    }}>{message || 'Loading...'}</span>
-        <span sx={{
-      typography: "body1",}}>{progress}%</span>
+    <div className={cn('w-full', className)}>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-human text-base font-medium text-on-surface">
+          {message || 'Loading...'}
+        </span>
+        <span className="text-human text-base text-on-surface-variant">{progress}%</span>
       </div>
-      <Progress value={progress} sx={{}} />
+      <Progress value={progress} />
     </div>
   );
 };
 
-// Skeleton Loading
 export const SkeletonLoading = ({
   variant = 'card',
   className = '',
 }: LoadingStateProps & { variant?: 'card' | 'list' | 'profile' }) => {
   if (variant === 'card') {
     return (
-      <Card sx={{
-      p: 6,}}>
-        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-          <Skeleton sx={{
-      borderRadius: "0.75rem"
-    }} />
-          <div sx={{
-      flex: 1
-    }}>
-            <Skeleton sx={{
-      width: "75%"
-    }} />
-            <Skeleton sx={{
-      width: "50%"
-    }} />
+      <Card className={cn('p-6', className)}>
+        <div className="flex items-center gap-3 mb-4">
+          <Skeleton variant="circular" width={48} height={48} />
+          <div className="flex-1">
+            <Skeleton variant="text" width="75%" height={20} className="mb-2" />
+            <Skeleton variant="text" width="50%" height={16} />
           </div>
         </div>
-        <Skeleton sx={{
-      width: "100%"
-    }} />
-        <Skeleton sx={{}} />
-        <div sx={{
-      display: "flex",
-      gap: 2,
-      pt: 2
-    }}>
-          <Skeleton sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
-          <Skeleton sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
+        <Skeleton variant="rectangular" width="100%" height={100} className="mb-4" />
+        <Skeleton variant="text" width="100%" height={16} className="mb-2" />
+        <div className="flex gap-2 pt-2">
+          <Skeleton variant="circular" width={24} height={24} />
+          <Skeleton variant="circular" width={24} height={24} />
         </div>
-        <Skeleton sx={{
-      width: "100%"
-    }} />
+        <Skeleton variant="text" width="100%" height={16} className="mt-4" />
       </Card>
     );
   }
 
   if (variant === 'list') {
     return (
-      <div sx={{}}>
+      <div className={cn('space-y-3', className)}>
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3,
-      p: 3,
-      border: 1,
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-            <Skeleton sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
-            <div sx={{
-      flex: 1
-    }}>
-              <Skeleton sx={{
-      width: "75%"
-    }} />
-              <Skeleton sx={{
-      width: "50%"
-    }} />
+          <div
+            key={i}
+            className="flex items-center gap-3 p-3 border border-outline-variant rounded-[8px]"
+          >
+            <Skeleton variant="circular" width={40} height={40} />
+            <div className="flex-1">
+              <Skeleton variant="text" width="75%" height={16} className="mb-2" />
+              <Skeleton variant="text" width="50%" height={14} />
             </div>
           </div>
         ))}
@@ -265,31 +176,19 @@ export const SkeletonLoading = ({
 
   if (variant === 'profile') {
     return (
-      <Card sx={{
-      p: 6,}}>
-        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4,
-      mb: 6
-    }}>
-          <Skeleton sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
-          <div sx={{
-      flex: 1
-    }}>
-            <Skeleton sx={{}} />
-            <Skeleton sx={{}} />
-            <Skeleton sx={{}} />
+      <Card className={cn('p-6', className)}>
+        <div className="flex items-center gap-4 mb-6">
+          <Skeleton variant="circular" width={80} height={80} />
+          <div className="flex-1">
+            <Skeleton variant="text" width="60%" height={24} className="mb-2" />
+            <Skeleton variant="text" width="40%" height={20} className="mb-2" />
+            <Skeleton variant="text" width="30%" height={16} />
           </div>
         </div>
-        <div sx={{}}>
-          <Skeleton sx={{
-      width: "100%"
-    }} />
-          <Skeleton sx={{}} />
-          <Skeleton sx={{}} />
+        <div className="space-y-2">
+          <Skeleton variant="text" width="100%" height={16} />
+          <Skeleton variant="text" width="90%" height={16} />
+          <Skeleton variant="text" width="80%" height={16} />
         </div>
       </Card>
     );
@@ -298,15 +197,16 @@ export const SkeletonLoading = ({
   return null;
 };
 
-// Shimmer Loading Effect
 export const ShimmerLoading = ({ className = '' }: LoadingStateProps) => {
   return (
-    <div sx={{
-      overflow: "hidden",
-      bgcolor: "gray.200",
-      borderRadius: "var(--sys-shape-radius-sm)",}}>
+    <div
+      className={cn(
+        'overflow-hidden bg-surface-container-low rounded-[8px] relative',
+        className
+      )}
+    >
       <motion.div
-        sx={{}}
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
         initial={{ x: '-100%' }}
         animate={{ x: '100%' }}
         transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
@@ -315,70 +215,35 @@ export const ShimmerLoading = ({ className = '' }: LoadingStateProps) => {
   );
 };
 
-// AI Processing Loading
 export const AIProcessingLoading = ({
   message = 'AI is processing...',
   className = '',
 }: LoadingStateProps) => {
   return (
-    <div sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 4,
-      p: 6,}}>
-      <div sx={{}}>
+    <div className={cn('flex flex-col items-center justify-center gap-4 p-6', className)}>
+      <div className="relative">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-          sx={{
-      border: 2,
-      borderColor: "purple.200",
-      borderRadius: "var(--sys-shape-radius-full)"
-    }}
+          className="w-16 h-16 border-2 border-primary-container/50 rounded-full"
         />
         <motion.div
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}
+          className="absolute inset-0 flex items-center justify-center"
         >
-          <FlashOn sx={{
-      color: "purple.600"
-    }} />
+          <Zap className="h-8 w-8 text-primary" />
         </motion.div>
       </div>
-      <div sx={{
-      textAlign: "center"
-    }}>
-        <p sx={{
-      fontWeight: 500,
-      color: "purple.700"
-    }}>{message}</p>
-        <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 1,
-      mt: 2
-    }}>
+      <div className="text-center">
+        <p className="text-human text-base font-medium text-primary mb-2">{message}</p>
+        <div className="flex items-center justify-center gap-1 mt-2">
           {[0, 1, 2].map((i) => (
             <motion.div
               key={i}
               animate={{ opacity: [0.3, 1, 0.3] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                delay: i * 0.5,
-              }}
-              sx={{
-      bgcolor: "purple.400",
-      borderRadius: "var(--sys-shape-radius-full)"
-    }}
+              transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}
+              className="w-2 h-2 bg-primary-container rounded-full"
             />
           ))}
         </div>
@@ -387,45 +252,30 @@ export const AIProcessingLoading = ({
   );
 };
 
-// Success Loading (completion state)
-export const SuccessLoading = ({ message = 'Complete!', className = '' }: LoadingStateProps) => {
+export const SuccessLoading = ({
+  message = 'Complete!',
+  className = '',
+}: LoadingStateProps) => {
   return (
     <motion.div
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-      sx={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 3,}}
+      className={cn('flex flex-col items-center justify-center gap-3', className)}
     >
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: [0, 1.2, 1] }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        sx={{
-      bgcolor: "green.100",
-      borderRadius: "var(--sys-shape-radius-full)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center"
-    }}
+        className="w-16 h-16 bg-primary-container rounded-full flex items-center justify-center"
       >
-        <CheckCircle sx={{
-      color: "green.600"
-    }} />
+        <CheckCircle2 className="h-8 w-8 text-on-primary-container" />
       </motion.div>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        sx={{
-      typography: "body1",
-      fontWeight: 500,
-      color: "green.700"
-    }}
+        className="text-human text-base font-medium text-primary"
       >
         {message}
       </motion.p>
@@ -433,7 +283,6 @@ export const SuccessLoading = ({ message = 'Complete!', className = '' }: Loadin
   );
 };
 
-// Main LoadingState component that selects the appropriate variant
 export const LoadingState = ({
   variant = 'spinner',
   size = 'md',
@@ -459,6 +308,5 @@ export const LoadingState = ({
   );
 };
 
-// All components are already exported individually above
-
 export default LoadingState;
+

@@ -1,66 +1,48 @@
-import { Card, CardContent, CardHeader, CardActions, Typography, Box } from '@mui/material';
-import { Box } from '@mui/material';
+/**
+ * ELECTRIC ALCHEMIST: LOADING CARD COMPONENT
+ *
+ * Loading state card using Electric Alchemist Design System v4.4.
+ * Composed of Card and Skeleton atoms.
+ */
 
-import { Skeleton } from '../../ui/skeleton';
+import React from 'react';
+import { Card } from '@/components/ui';
+import { Skeleton } from '@/components/ui/Skeleton';
 
 export function LoadingCard() {
   return (
-    <Card sx={{ p: 3 }}>
+    <Card className="p-6">
       {/* Profile Header Section */}
-      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-        <Skeleton sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
-        <div sx={{}}>
-          <Skeleton sx={{}} />
-          <Skeleton sx={{}} />
+      <div className="flex items-center gap-3 mb-4">
+        <Skeleton className="h-12 w-12 rounded-full" />
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-5 w-32" />
+          <Skeleton className="h-4 w-48" />
         </div>
       </div>
 
       {/* Profile Stats Section */}
-      <div sx={{}}>
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-    }}>
-          <Skeleton sx={{}} />
-          <Skeleton sx={{}} />
+      <div className="space-y-2 mb-4">
+        <div className="flex justify-between items-center">
+          <Skeleton className="h-4 w-32" />
+          <Skeleton className="h-4 w-8" />
         </div>
 
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-    }}>
-          <Skeleton sx={{}} />
-          <Skeleton sx={{}} />
+        <div className="flex justify-between items-center">
+          <Skeleton className="h-4 w-32" />
+          <Skeleton className="h-4 w-8" />
         </div>
 
-        <div sx={{
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center"
-    }}>
-          <Skeleton sx={{}} />
-          <Skeleton sx={{}} />
+        <div className="flex justify-between items-center">
+          <Skeleton className="h-4 w-32" />
+          <Skeleton className="h-4 w-16" />
         </div>
       </div>
 
       {/* Action Buttons Section */}
-      <div sx={{
-      display: "flex",
-      gap: 2,
-      pt: 2
-    }}>
-        <Skeleton sx={{
-      flex: 1,}} />
-        <Skeleton sx={{
-      flex: 1,}} />
+      <div className="flex gap-2 pt-4 border-t border-outline-variant">
+        <Skeleton className="h-9 flex-1 rounded-[24px]" />
+        <Skeleton className="h-9 flex-1 rounded-[24px]" />
       </div>
     </Card>
   );
@@ -69,3 +51,8 @@ export function LoadingCard() {
 export function LoadingProfileCard() {
   return <LoadingCard />;
 }
+
+export default LoadingCard;
+
+
+

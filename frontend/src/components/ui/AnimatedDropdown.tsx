@@ -1,6 +1,13 @@
-import { Box, ButtonBase } from '@mui/material';
-import { AnimatePresence, motion } from 'motion/react';
+/**
+ * ELECTRIC ALCHEMIST: ANIMATED DROPDOWN
+ *
+ * Dropdown menu with animated panel and staggered items.
+ * Uses Electric Alchemist design system tokens.
+ */
+
 import React, { useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export interface DropdownItem {
   label: string;
@@ -45,40 +52,9 @@ export interface AnimatedDropdownProps {
 }
 
 /**
- * AnimatedDropdown - Dropdown menu with animated panel and staggered items
+ * AnimatedDropdown Component
  *
- * Features:
- * - Click-outside detection to close
- * - Escape key to close
- * - Staggered item entrance animations (50ms delay per item)
- * - Panel scale + fade animation
- * - Supports controlled and uncontrolled modes
- * - Keyboard accessible
- *
- * @example
- * ```tsx
- * const menuItems = [
- *   { label: 'Profile', value: 'profile', icon: <PersonIcon /> },
- *   { label: 'Settings', value: 'settings', icon: <SettingsIcon /> },
- *   { label: 'Logout', value: 'logout', icon: <LogoutIcon /> },
- * ];
- *
- * <AnimatedDropdown
- *   trigger={<Button>Account Menu</Button>}
- *   items={menuItems}
- *   onSelect={(value) => console.log('Selected:', value)}
- * />
- *
- * // Controlled mode
- * const [menuOpen, setMenuOpen] = useState(false);
- * <AnimatedDropdown
- *   trigger={<IconButton><MoreVertIcon /></IconButton>}
- *   items={menuItems}
- *   open={menuOpen}
- *   onOpenChange={setMenuOpen}
- *   onSelect={handleSelect}
- * />
- * ```
+ * Dropdown menu with animated panel and staggered items.
  */
 export function AnimatedDropdown({
   trigger,
@@ -93,7 +69,6 @@ export function AnimatedDropdown({
   const [internalOpen, setInternalOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Use controlled open if provided, otherwise use internal state
   const isOpen = controlledOpen !== undefined ? controlledOpen : internalOpen;
   const setIsOpen = (value: boolean) => {
     if (controlledOpen !== undefined) {
@@ -131,13 +106,11 @@ export function AnimatedDropdown({
     }
   }, [isOpen]);
 
-  // Handle item selection
   const handleSelect = (value: string) => {
     onSelect(value);
     setIsOpen(false);
   };
 
-  // Determine panel position based on placement
   const getPanelPosition = () => {
     const positions = {
       'bottom-start': { top: '100%', left: 0, marginTop: '8px' },
@@ -149,20 +122,16 @@ export function AnimatedDropdown({
   };
 
   return (
-    <Box
-      ref={dropdownRef}
-      className={className}
-      sx={{ position: 'relative', display: 'inline-block' }}
-    >
+    <div ref={dropdownRef} className={cn('relative inline-block', className)}>
       {/* Trigger */}
-      <Box
+      <div
         onClick={() => setIsOpen(!isOpen)}
-        sx={{ cursor: 'pointer' }}
+        className="cursor-pointer"
         aria-haspopup="true"
         aria-expanded={isOpen}
       >
         {trigger}
-      </Box>
+      </div>
 
       {/* Dropdown Panel */}
       <AnimatePresence>
@@ -175,21 +144,13 @@ export function AnimatedDropdown({
             style={{
               position: 'absolute',
               width: `${width}px`,
-              zIndex: 1300,
+              zIndex: 60, // tooltip z-index
               ...getPanelPosition(),
             }}
           >
-            <Box
+            <div
               role="menu"
-              sx={{
-                bgcolor: 'background.paper',
-                border: 1,
-                borderColor: 'divider',
-                borderRadius: '8px',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                py: 1,
-                overflow: 'hidden',
-              }}
+              className="bg-surface-container border border-outline-variant rounded-[8px] shadow-2xl py-1 overflow-hidden"
             >
               {/* Staggered Menu Items */}
               {items.map((item, index) => (
@@ -199,41 +160,30 @@ export function AnimatedDropdown({
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                 >
-                  <ButtonBase
+                  <button
                     role="menuitem"
                     disabled={item.disabled}
                     onClick={() => !item.disabled && handleSelect(item.value)}
-                    sx={{
-                      width: '100%',
-                      px: 2,
-                      py: 1.5,
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1.5,
-                      textAlign: 'left',
-                      justifyContent: 'flex-start',
-                      '&:hover': {
-                        bgcolor: (theme) => theme.palette.surface.containerHigh,
-                      },
-                      '&:disabled': {
-                        opacity: 0.5,
-                        cursor: 'not-allowed',
-                      },
-                    }}
+                    className={cn(
+                      'w-full px-4 py-3 flex items-center gap-3 text-left text-human text-sm',
+                      'hover:bg-surface-container-high transition-colors',
+                      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary',
+                      item.disabled && 'opacity-50 cursor-not-allowed',
+                      'text-on-surface'
+                    )}
                   >
                     {item.icon && (
-                      <Box sx={{ display: 'flex', fontSize: '20px', color: 'text.secondary' }}>
-                        {item.icon}
-                      </Box>
+                      <div className="flex text-on-surface-variant">{item.icon}</div>
                     )}
-                    <Box sx={{ fontSize: '0.875rem' }}>{item.label}</Box>
-                  </ButtonBase>
+                    <div>{item.label}</div>
+                  </button>
                 </motion.div>
               ))}
-            </Box>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </Box>
+    </div>
   );
 }
+

@@ -1,44 +1,38 @@
-import { Work } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
-import type { SxProps, Theme } from '@mui/material/styles';
+/**
+ * ELECTRIC ALCHEMIST: CAREER COPILOT LOGO COMPONENT
+ *
+ * Logo component with design system tokens.
+ */
+
+import React from 'react';
+import { Briefcase } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface CareerCopilotLogoProps {
   className?: string;
   size?: number;
   variant?: 'full' | 'compact';
-  sx?: SxProps<Theme>;
 }
 
 export function CareerCopilotLogo({
   className = '',
   size = 32,
   variant = 'full',
-  sx,
 }: CareerCopilotLogoProps) {
   return (
-    <Box
-      className={className}
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 1,
-        ...sx,
-      }}
-    >
-      <Work sx={{ fontSize: size, color: 'primary.main' }} />
+    <div className={cn('flex items-center gap-2', className)}>
+      <Briefcase className="text-primary" style={{ fontSize: size }} />
       {variant === 'full' && (
-        <Typography
-          variant="h6"
-          component="span"
-          sx={{
-            fontWeight: 600,
-            color: 'primary.main',
-            fontSize: size / 2,
-          }}
+        <span
+          className="text-hero font-semibold text-primary"
+          style={{ fontSize: size / 2 }}
         >
           Career Copilot
-        </Typography>
+        </span>
       )}
-    </Box>
+    </div>
   );
 }
+
+export default CareerCopilotLogo;
+

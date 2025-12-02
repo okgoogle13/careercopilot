@@ -1,21 +1,14 @@
-import { Favorite as Heart } from '@mui/icons-material';
-import { Box } from '@mui/material';
-import { Button, IconButton, Typography, Box } from '@mui/material';
+/**
+ * ELECTRIC ALCHEMIST: CARD COMPONENTS SECTION
+ *
+ * Documentation section showcasing card components.
+ */
+
 import React, { useState } from 'react';
-
-import { ErrorCard, ErrorProfileCard } from '../common/ErrorCard';
-import { LoadingProfileCard } from '../common/LoadingCard';
-import { Badge } from '../ui/badge';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardAction,
-} from '../ui/card';
-
+import { Heart } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
+import { Card } from '@/components/ui';
+import { Badge } from '@/components/ui/Badge';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function CardComponentsSection() {
@@ -41,274 +34,96 @@ export function CardComponentsSection() {
       title="Card Components"
       description="Five distinct card variants designed for different interaction patterns and data states"
     >
-      {/* Card Variants Overview */}
       <ComponentDemo title="Card Variants Overview">
-        <div sx={{
-      gap: 4
-    }}>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-            <div sx={{
-      border: 1,
-      borderRadius: "var(--sys-shape-radius-sm)",}}></div>
-            <div>
-              <p sx={{
-      fontWeight: 500
-    }}>Default Card</p>
-              <p sx={{}}>
-                Standard card with subtle border for static content
-              </p>
-            </div>
-          </div>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-            <div sx={{
-      border: 1,
-      borderRadius: "var(--sys-shape-radius-sm)",
-      boxShadow: 4,}}></div>
-            <div>
-              <p sx={{
-      fontWeight: 500
-    }}>Interactive Card</p>
-              <p sx={{}}>
-                Hover effects and cursor pointer for clickable content
-              </p>
-            </div>
-          </div>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-            <div sx={{
-      border: 2,
-      borderRadius: "var(--sys-shape-radius-sm)",
-      boxShadow: 4,}}></div>
-            <div>
-              <p sx={{
-      fontWeight: 500
-    }}>Selected Card</p>
-              <p sx={{}}>
-                Prominent purple border and glow for active/selected state
-              </p>
-            </div>
-          </div>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-            <div sx={{
-      border: 1,
-      borderRadius: "var(--sys-shape-radius-sm)",}}></div>
-            <div>
-              <p sx={{
-      fontWeight: 500
-    }}>Loading Card</p>
-              <p sx={{}}>
-                Skeleton placeholders during data loading states
-              </p>
-            </div>
-          </div>
-          <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 3
-    }}>
-            <div sx={{
-      border: 1,
-      borderRadius: "var(--sys-shape-radius-sm)",}}></div>
-            <div>
-              <p sx={{
-      fontWeight: 500
-    }}>Error Card</p>
-              <p sx={{}}>
-                Red-tinted border and background for error states
-              </p>
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Card>
+            <h3 className="text-hero text-lg font-semibold text-on-surface mb-2">
+              Default Card
+            </h3>
+            <p className="text-human text-sm text-on-surface-variant">
+              Standard card with surface container background.
+            </p>
+          </Card>
+
+          <Card variant="interactive">
+            <h3 className="text-hero text-lg font-semibold text-primary mb-2">
+              Interactive Card
+            </h3>
+            <p className="text-human text-sm text-on-surface-variant">
+              Card with tactile press physics on hover/tap.
+            </p>
+          </Card>
+
+          <Card
+            variant="interactive"
+            popOutGraphic={
+              <div className="w-16 h-16 bg-gradient-to-br from-tertiary to-primary rounded-xl flex items-center justify-center text-3xl">
+                ⚡
+              </div>
+            }
+          >
+            <h3 className="text-hero text-lg font-semibold text-on-surface mb-2">
+              Pop-Out Card
+            </h3>
+            <p className="text-human text-sm text-on-surface-variant">
+              Card with pop-out graphic that lifts on hover.
+            </p>
+          </Card>
         </div>
       </ComponentDemo>
 
-      {/* Interactive Profile Cards */}
-      <ComponentDemo title="Profile Cards (Interactive & Selected)">
-        <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      [theme.breakpoints.up('md')]: {},
-      gap: 4
-    }}>
-          {[
-            {
-              id: 'card-1',
-              name: 'Nishant Dougall',
-              role: 'Community Support Worker',
-              applications: 8,
-              atsScore: 92,
-              lastUpdated: '2 hours ago',
-              status: 'Active',
-            },
-            {
-              id: 'card-2',
-              name: 'Nishant Dougall',
-              role: 'Peer Worker',
-              applications: 5,
-              atsScore: 87,
-              lastUpdated: '1 day ago',
-              status: 'Draft',
-            },
-            {
-              id: 'card-3',
-              name: 'Create New Profile',
-              role: 'Add a new job application profile',
-              applications: 0,
-              atsScore: 0,
-              lastUpdated: '',
-              status: 'New',
-            },
-          ].map((profile) => (
+      <ComponentDemo title="Card with Actions">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {['card-1', 'card-2', 'card-3'].map((cardId) => (
             <Card
-              key={profile.id}
-              variant={selectedCard === profile.id ? 'selected' : 'interactive'}
-              onClick={() => handleCardClick(profile.id)}
+              key={cardId}
+              variant="interactive"
+              className={selectedCard === cardId ? 'border-primary border-2' : ''}
+              onClick={() => handleCardClick(cardId)}
             >
-              <CardHeader>
-                <div sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      justifyContent: "space-between"
-    }}>
-                  <div>
-                    <CardTitle>{profile.name}</CardTitle>
-                    <CardDescription>{profile.role}</CardDescription>
-                  </div>
-                  <CardAction>
-                    <Button
-                      variant="text"
-                      size="small"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleFavoriteToggle(profile.id);
-                      }}
-                      sx={{
-      p: 1,}}
-                    >
-                      <Heart
-                        sx={{}}
-                      />
-                    </Button>
-                  </CardAction>
-                </div>
-              </CardHeader>
-              {profile.id !== 'card-3' && (
-                <CardContent>
-                  <div sx={{}}>
-                    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-                      <span sx={{}}>Applications</span>
-                      <Badge variant="secondary">{profile.applications}</Badge>
-                    </div>
-                    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-                      <span sx={{}}>ATS Score</span>
-                      <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 2
-    }}>
-                        <div sx={{
-      borderRadius: "var(--sys-shape-radius-full)",
-      overflow: "hidden"
-    }}>
-                          <div
-                            sx={{
-      height: "100%",
-      borderRadius: "var(--sys-shape-radius-full)"
-    }}
-                            style={{ width: `${profile.atsScore}%` }}
-                          />
-                        </div>
-                        <span sx={{
-      fontWeight: 500
-    }}>{profile.atsScore}%</span>
-                      </div>
-                    </div>
-                    <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-                      <span sx={{}}>Status</span>
-                      <Badge variant={profile.status === 'Active' ? 'default' : 'secondary'}>
-                        {profile.status}
-                      </Badge>
-                    </div>
-                  </div>
-                </CardContent>
-              )}
-              <CardFooter>
-                <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      width: "100%"
-    }}>
-                  <span sx={{}}>
-                    {profile.lastUpdated || 'Click to create'}
-                  </span>
-                  {selectedCard === profile.id && (
-                    <Badge variant="default" sx={{}}>
-                      Selected
-                    </Badge>
-                  )}
-                </div>
-              </CardFooter>
+              <div className="flex items-start justify-between mb-2">
+                <h3 className="text-hero text-lg font-semibold text-on-surface">
+                  Card {cardId}
+                </h3>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleFavoriteToggle(cardId);
+                  }}
+                  className="p-1 rounded-full hover:bg-surface-container-low transition-colors"
+                >
+                  <Heart
+                    className={cn(
+                      'h-5 w-5',
+                      favoriteCards.has(cardId)
+                        ? 'fill-error text-error'
+                        : 'text-on-surface-variant'
+                    )}
+                  />
+                </button>
+              </div>
+              <p className="text-human text-sm text-on-surface-variant mb-4">
+                Click to select, heart to favorite.
+              </p>
+              <div className="flex gap-2">
+                <Button variant="outline" size="sm">
+                  Action
+                </Button>
+                <Button variant="ghost" size="sm">
+                  More
+                </Button>
+              </div>
             </Card>
           ))}
-        </div>
-      </ComponentDemo>
-
-      {/* Loading & Error States */}
-      <ComponentDemo title="Loading & Error Card States">
-        <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 4
-    }}>
-          <div sx={{}}>
-            <h4 sx={{
-      fontWeight: 500
-    }}>Loading Profile Card</h4>
-            <LoadingProfileCard />
-          </div>
-          <div sx={{}}>
-            <h4 sx={{
-      fontWeight: 500
-    }}>Error Profile Card</h4>
-            <ErrorProfileCard onRetry={() => alert('Retrying...')} />
-          </div>
-          <div sx={{}}>
-            <h4 sx={{
-      fontWeight: 500
-    }}>Generic Error Card</h4>
-            <ErrorCard
-              title="Connection Failed"
-              message="Unable to connect to the server."
-              onRetry={() => alert('Retrying connection...')}
-            />
-          </div>
         </div>
       </ComponentDemo>
     </ComponentSection>
   );
 }
+
+function cn(...classes: (string | undefined | null | false)[]): string {
+  return classes.filter(Boolean).join(' ');
+}
+
+export default CardComponentsSection;
+
