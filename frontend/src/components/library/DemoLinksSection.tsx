@@ -1,17 +1,13 @@
-import { AutoAwesome as Sparkles, PlayArrow as Play } from '@mui/icons-material';
-import { Box } from '@mui/material';
-import {
-  Button,
-  IconButton,
-  Card,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Typography,
-  Box,
-} from '@mui/material';
-import React from 'react';
+/**
+ * ELECTRIC ALCHEMIST: DEMO LINKS SECTION
+ *
+ * Documentation section with links to interactive demos.
+ */
 
+import React from 'react';
+import { Sparkles, Play } from 'lucide-react';
+import { Button } from '@/components/ui/Button/Button';
+import { Card } from '@/components/ui';
 import { ComponentSection } from './ComponentDemo';
 
 interface DemoLinksSectionProps {
@@ -24,80 +20,48 @@ export function DemoLinksSection({ onNavigateToAnimated }: DemoLinksSectionProps
       title="Interactive Demos"
       description="Explore advanced component functionality with interactive demonstrations."
     >
-      <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 4
-    }}>
-        <Card variant="elevation">
-          <CardContent sx={{
-      p: 6
-    }}>
-            <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4
-    }}>
-                <div sx={{
-      p: 3,
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                  <Sparkles sx={{}} />
-                </div>
-                <div>
-                  <h3 sx={{
-      fontWeight: 500,
-      mb: 1
-    }}>Animated Components</h3>
-                  <p sx={{}}>
-                    Explore smooth animations and micro-interactions
-                  </p>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card className="p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-primary-container rounded-[8px]">
+                <Sparkles className="h-6 w-6 text-on-primary-container" />
               </div>
-              <Button onClick={onNavigateToAnimated}>Explore</Button>
+              <div>
+                <h3 className="text-hero text-base font-medium text-on-surface mb-1">
+                  Animated Components
+                </h3>
+                <p className="text-human text-sm text-on-surface-variant">
+                  Explore smooth animations and micro-interactions
+                </p>
+              </div>
             </div>
-          </CardContent>
+            <Button onClick={onNavigateToAnimated}>Explore</Button>
+          </div>
         </Card>
 
-        <Card variant="elevation">
-          <CardContent sx={{
-      p: 6
-    }}>
-            <div sx={{
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between"
-    }}>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",
-      gap: 4
-    }}>
-                <div sx={{
-      p: 3,
-      borderRadius: "var(--sys-shape-radius-md)"
-    }}>
-                  <Play sx={{}} />
-                </div>
-                <div>
-                  <h3 sx={{
-      fontWeight: 500,
-      mb: 1
-    }}>State Management Demo</h3>
-                  <p sx={{}}>
-                    Simulate loading states and error scenarios
-                  </p>
-                </div>
+        <Card className="p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-secondary-container rounded-[8px]">
+                <Play className="h-6 w-6 text-on-secondary" />
               </div>
-              <Button>Launch Demo</Button>
+              <div>
+                <h3 className="text-hero text-base font-medium text-on-surface mb-1">
+                  State Management Demo
+                </h3>
+                <p className="text-human text-sm text-on-surface-variant">
+                  Simulate loading states and error scenarios
+                </p>
+              </div>
             </div>
-          </CardContent>
+            <Button variant="outline">Launch Demo</Button>
+          </div>
         </Card>
       </div>
     </ComponentSection>
   );
 }
+
+export default DemoLinksSection;
+

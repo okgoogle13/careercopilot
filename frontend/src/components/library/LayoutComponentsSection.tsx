@@ -1,10 +1,13 @@
+/**
+ * ELECTRIC ALCHEMIST: LAYOUT COMPONENTS SECTION
+ *
+ * Documentation section showcasing layout components.
+ */
+
 import React from 'react';
-import { Box } from '@mui/material';
-
-import { Label } from '../ui/label';
-import { Separator } from '../ui/separator';
-import { Skeleton } from '../ui/skeleton';
-
+import { Label } from '@/components/ui/Label';
+import { Separator } from '@/components/ui/Separator';
+import { Skeleton } from '@/components/ui/Skeleton';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function LayoutComponentsSection() {
@@ -14,47 +17,27 @@ export function LayoutComponentsSection() {
       description="Structural components for organizing content and creating layouts"
     >
       <ComponentDemo title="Separators & Skeletons">
-        <div sx={{}}>
+        <div className="space-y-6">
           <div>
             <Label>Separators</Label>
-            <div sx={{
-      mt: 2
-    }}>
+            <div className="mt-2">
               <div>
-                <p>Content above</p>
-                <Separator sx={{
-      my: 4
-    }} />
-                <p>Content below</p>
+                <p className="text-human text-base text-on-surface">Content above</p>
+                <Separator className="my-4" />
+                <p className="text-human text-base text-on-surface">Content below</p>
               </div>
             </div>
           </div>
           <div>
             <Label>Loading Skeletons</Label>
-            <div sx={{
-      mt: 2
-    }}>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",}}>
-                <Skeleton sx={{
-      borderRadius: "var(--sys-shape-radius-full)"
-    }} />
-                <div sx={{}}>
-                  <Skeleton sx={{
-      w: "250px"
-    }} />
-                  <Skeleton sx={{
-      w: "200px"
-    }} />
+            <div className="mt-2">
+              <div className="flex items-center gap-3">
+                <Skeleton variant="circular" width={40} height={40} />
+                <div className="flex-1">
+                  <Skeleton variant="text" width={250} height={20} className="mb-2" />
+                  <Skeleton variant="text" width={200} height={16} />
                 </div>
               </div>
-              <Skeleton sx={{
-      width: "100%"
-    }} />
-              <Skeleton sx={{
-      width: "75%"
-    }} />
             </div>
           </div>
         </div>
@@ -62,3 +45,6 @@ export function LayoutComponentsSection() {
     </ComponentSection>
   );
 }
+
+export default LayoutComponentsSection;
+

@@ -1,34 +1,26 @@
-import { Button, IconButton, Tooltip } from '@mui/material';
-import { Box } from '@mui/material';
-import React from 'react';
+/**
+ * ELECTRIC ALCHEMIST: INTERACTIVE COMPONENTS SECTION
+ *
+ * Documentation section showcasing interactive components.
+ */
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '../ui/alert-dialog';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/Button/Button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from '../ui/dialog';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-
+  DialogClose,
+} from '@/components/ui/Dialog';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/Popover';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function InteractiveComponentsSection() {
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
-  const [isAlertDialogOpen, setIsAlertDialogOpen] = React.useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   return (
     <ComponentSection
@@ -36,95 +28,57 @@ export function InteractiveComponentsSection() {
       description="Dialogs, popovers, and other interactive overlay components"
     >
       <ComponentDemo title="Dialogs & Modals">
-        <div sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: 4
-    }}>
-          <Button variant="outlined" onClick={() => setIsDialogOpen(true)}>
+        <div className="flex flex-wrap gap-4">
+          <Button variant="outline" onClick={() => setIsDialogOpen(true)}>
             Open Dialog
           </Button>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-            <DialogHeader>
-              <DialogTitle>Dialog Title</DialogTitle>
-              <DialogDescription>
-                This is a dialog description that explains what this dialog is for.
-              </DialogDescription>
-            </DialogHeader>
             <DialogContent>
-              <div sx={{
-      py: 4
-    }}>
-                <p>Dialog content goes here.</p>
-              </div>
+              <DialogClose />
+              <DialogHeader>
+                <DialogTitle>Dialog Title</DialogTitle>
+                <p className="text-human text-sm text-on-surface-variant">
+                  This is a dialog example with design system tokens.
+                </p>
+              </DialogHeader>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+                  Cancel
+                </Button>
+                <Button onClick={() => setIsDialogOpen(false)}>Confirm</Button>
+              </DialogFooter>
             </DialogContent>
-            <DialogFooter>
-              <Button variant="outlined" onClick={() => setIsDialogOpen(false)}>
-                Cancel
-              </Button>
-              <Button onClick={() => setIsDialogOpen(false)}>Confirm</Button>
-            </DialogFooter>
           </Dialog>
-
-          <Button variant="outlined" onClick={() => setIsAlertDialogOpen(true)}>
-            Delete Item
-          </Button>
-          <AlertDialog open={isAlertDialogOpen} onOpenChange={setIsAlertDialogOpen}>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete the item.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel onClick={() => setIsAlertDialogOpen(false)}>
-                Cancel
-              </AlertDialogCancel>
-              <AlertDialogAction onClick={() => setIsAlertDialogOpen(false)}>
-                Delete
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialog>
         </div>
       </ComponentDemo>
 
-      <ComponentDemo title="Popovers & Tooltips">
-        <div sx={{
-      display: "flex",
-      flexWrap: "wrap",
-      gap: 4
-    }}>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outlined">Open Popover</Button>
-            </PopoverTrigger>
-            <PopoverContent sx={{}}>
-              <div sx={{}}>
-                <h4 sx={{
-      fontWeight: 500
-    }}>Popover Title</h4>
-                <p sx={{
-      typography: "body1",}}>
-                  This is a popover with some content inside it.
-                </p>
-                <div sx={{
-      display: "flex",
-      gap: 2
-    }}>
-                  <Button size="small">Action</Button>
-                  <Button variant="outlined" size="small">
-                    Cancel
-                  </Button>
-                </div>
-              </div>
+      <ComponentDemo title="Popovers">
+        <div className="flex flex-wrap gap-4">
+          <Button
+            variant="outline"
+            onClick={(e) => {
+              setAnchorEl(e.currentTarget);
+              setIsPopoverOpen(true);
+            }}
+          >
+            Open Popover
+          </Button>
+          <Popover
+            open={isPopoverOpen}
+            onOpenChange={setIsPopoverOpen}
+            anchorEl={anchorEl}
+          >
+            <PopoverContent>
+              <p className="text-human text-sm text-on-surface">
+                This is a popover with design system tokens.
+              </p>
             </PopoverContent>
           </Popover>
-
-          <Tooltip title="This is a helpful tooltip">
-            <Button variant="outlined">Hover for Tooltip</Button>
-          </Tooltip>
         </div>
       </ComponentDemo>
     </ComponentSection>
   );
 }
+
+export default InteractiveComponentsSection;
+

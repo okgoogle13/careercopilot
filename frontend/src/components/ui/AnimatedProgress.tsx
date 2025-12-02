@@ -1,6 +1,13 @@
-import { Box, Typography } from '@mui/material';
-import { motion } from 'motion/react';
+/**
+ * ELECTRIC ALCHEMIST: ANIMATED PROGRESS
+ *
+ * Animated progress bar with spring physics using Electric Alchemist design system.
+ * Uses design system tokens for colors and styling.
+ */
+
 import React, { useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export interface AnimatedProgressProps {
   /**
@@ -17,7 +24,6 @@ export interface AnimatedProgressProps {
   showPercentage?: boolean;
   /**
    * Whether to animate the progress change (default: true)
-   * If false, progress bar will update instantly
    */
   animated?: boolean;
   /**
@@ -29,53 +35,22 @@ export interface AnimatedProgressProps {
    */
   label?: string;
   /**
-   * Additional className for custom styling
+   * Additional className
    */
   className?: string;
 }
 
 const variantColors: Record<string, string> = {
-  default: '#a855f7', // purple-500
-  success: '#10b981', // green-500
-  warning: '#f59e0b', // orange-500
-  error: '#ef4444', // red-500
+  default: '#D0BCFF', // primary
+  success: '#10b981', // success green
+  warning: '#f59e0b', // warning orange
+  error: '#FF6B9D', // error from tokens
 };
 
 /**
- * AnimatedProgress - Animated progress bar with spring physics
+ * AnimatedProgress Component
  *
- * Features:
- * - Smooth spring animation for natural motion
- * - Multiple color variants (default, success, warning, error)
- * - Optional percentage display
- * - Optional label text
- * - Configurable max value
- * - Can disable animation for instant updates
- *
- * @example
- * ```tsx
- * // Basic usage
- * <AnimatedProgress value={75} />
- *
- * // With label and custom variant
- * <AnimatedProgress value={60} label="Upload Progress" variant="success" />
- *
- * // No animation (instant)
- * <AnimatedProgress value={50} animated={false} />
- *
- * // Custom max value
- * <AnimatedProgress value={150} max={200} />
- *
- * // Controlled progress example
- * const [progress, setProgress] = useState(0);
- * useEffect(() => {
- *   const timer = setInterval(() => {
- *     setProgress(prev => prev >= 100 ? 0 : prev + 10);
- *   }, 500);
- *   return () => clearInterval(timer);
- * }, []);
- * <AnimatedProgress value={progress} />
- * ```
+ * Animated progress bar with spring physics.
  */
 export function AnimatedProgress({
   value,
@@ -86,59 +61,40 @@ export function AnimatedProgress({
   label,
   className,
 }: AnimatedProgressProps) {
-  // Calculate percentage and clamp value
   const clampedValue = Math.min(max, Math.max(0, value));
   const percentage = useMemo(() => (clampedValue / max) * 100, [clampedValue, max]);
 
   const color = variantColors[variant] || variantColors.default;
 
   return (
-    <Box className={className} sx={{ width: '100%' }}>
+    <div className={cn('w-full', className)}>
       {/* Labels */}
       {(showPercentage || label) && (
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            mb: 1,
-          }}
-        >
+        <div className="flex justify-between items-center mb-2">
           {label && (
-            <Typography variant="body2" sx={{ fontWeight: 500 }}>
-              {label}
-            </Typography>
+            <p className="text-human text-sm font-medium text-on-surface">{label}</p>
           )}
           {showPercentage && (
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            <p className="text-human text-sm text-on-surface-variant">
               {Math.round(percentage)}%
-            </Typography>
+            </p>
           )}
-        </Box>
+        </div>
       )}
 
       {/* Progress Bar Container */}
-      <Box
+      <div
         role="progressbar"
         aria-valuenow={clampedValue}
         aria-valuemin={0}
         aria-valuemax={max}
         aria-label={label || `Progress: ${Math.round(percentage)}%`}
-        sx={{
-          width: '100%',
-          height: 12,
-          borderRadius: 9999, // pill shape
-          bgcolor: '#e5e7eb', // gray-200
-          overflow: 'hidden',
-        }}
+        className="w-full h-3 rounded-full bg-surface-container overflow-hidden"
       >
         {/* Progress Fill */}
         <motion.div
-          style={{
-            height: '100%',
-            borderRadius: 9999,
-            backgroundColor: color,
-          }}
+          className="h-full rounded-full"
+          style={{ backgroundColor: color }}
           initial={animated ? { width: '0%' } : { width: `${percentage}%` }}
           animate={{ width: `${percentage}%` }}
           transition={
@@ -151,7 +107,8 @@ export function AnimatedProgress({
               : { duration: 0 }
           }
         />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
+

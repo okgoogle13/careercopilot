@@ -1,16 +1,19 @@
-import React from 'react';
-import { motion, MotionProps } from 'motion/react';
-import styles from './AnimatedButton.module.css';
+/**
+ * ELECTRIC ALCHEMIST: ANIMATED BUTTON
+ *
+ * Button component with motion animations using Electric Alchemist design system.
+ * Replaces CSS modules with Tailwind classes and design system tokens.
+ */
 
-export interface AnimatedButtonProps 
+import React from 'react';
+import { motion, type MotionProps } from 'framer-motion';
+import { cn } from '@/lib/utils';
+
+export interface AnimatedButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'ref'>,
     MotionProps {
   /**
    * Animation style to apply to the button
-   * - scale: Scales up on hover, down on tap
-   * - lift: Raises button slightly on hover
-   * - glow: Adds primary glow effect on hover
-   * - shimmer: Gradient overlay slides across on hover
    */
   animation?: 'scale' | 'lift' | 'glow' | 'shimmer';
   /**
@@ -28,28 +31,23 @@ export interface AnimatedButtonProps
 }
 
 /**
- * AnimatedButton - Native Button with motion animations and M3 design tokens
+ * AnimatedButton Component
  *
- * Provides 4 animation styles:
- * - **scale**: Button scales up on hover (1.05x) and down on tap (0.95x)
- * - **lift**: Button lifts up on hover with shadow increase
- * - **glow**: Primary glow effect appears on hover
- * - **shimmer**: Gradient overlay slides across button on hover
+ * Native Button with motion animations and design system tokens.
  */
-export const AnimatedButton = React.forwardRef<
-  HTMLButtonElement,
-  AnimatedButtonProps
->(
-  ({
-    animation = 'scale',
-    variant = 'contained',
-    size = 'md',
-    children,
-    disabled,
-    className,
-    ...rest
-  }, ref) => {
-    // Animation configurations
+export const AnimatedButton = React.forwardRef<HTMLButtonElement, AnimatedButtonProps>(
+  (
+    {
+      animation = 'scale',
+      variant = 'contained',
+      size = 'md',
+      children,
+      disabled,
+      className,
+      ...rest
+    },
+    ref
+  ) => {
     const animations: Record<string, Partial<MotionProps>> = {
       scale: {
         whileHover: disabled ? {} : { scale: 1.05 },
@@ -65,7 +63,7 @@ export const AnimatedButton = React.forwardRef<
         whileHover: disabled
           ? {}
           : {
-              boxShadow: '0 0 0 8px rgba(103, 80, 164, 0.1)',
+              boxShadow: '0 0 0 8px rgba(208, 188, 255, 0.1)',
             },
         transition: { duration: 0.2 },
       },
@@ -74,41 +72,37 @@ export const AnimatedButton = React.forwardRef<
       },
     };
 
-    const variantClass = `button--${variant}`;
-    const sizeClass = `button--${size}`;
-    const animationClass = `animation--${animation}`;
+    const variantStyles = {
+      contained: 'bg-primary-container text-on-primary-container border-primary-container',
+      outlined: 'bg-transparent text-primary border-outline-variant',
+      text: 'bg-transparent text-primary border-transparent',
+    };
 
-    const buttonClassNames = [
-      styles.button,
-      styles[variantClass],
-      styles[sizeClass],
-      styles[animationClass],
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+    const sizeStyles = {
+      sm: 'h-9 px-3 text-xs',
+      md: 'h-11 px-6 text-sm',
+      lg: 'h-14 px-8 text-base',
+    };
+
+    const baseStyles =
+      'inline-flex items-center justify-center rounded-[24px] border font-ai transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50';
 
     // Shimmer implementation requires special structure
     if (animation === 'shimmer') {
       return (
         <motion.button
           ref={ref}
-          className={buttonClassNames}
+          className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
           disabled={disabled}
           {...rest}
         >
           {/* Shimmer overlay */}
           {!disabled && (
             <motion.div
+              className="absolute inset-0 pointer-events-none"
               style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
                 background:
                   'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
-                pointerEvents: 'none',
               }}
               initial={{ x: '-100%' }}
               whileHover={{ x: '100%' }}
@@ -116,7 +110,7 @@ export const AnimatedButton = React.forwardRef<
             />
           )}
           {/* Button content */}
-          <span style={{ position: 'relative', zIndex: 1 }}>{children}</span>
+          <span className="relative z-10">{children}</span>
         </motion.button>
       );
     }
@@ -125,7 +119,7 @@ export const AnimatedButton = React.forwardRef<
     return (
       <motion.button
         ref={ref}
-        className={buttonClassNames}
+        className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
         disabled={disabled}
         {...animations[animation]}
         {...rest}
@@ -137,3 +131,4 @@ export const AnimatedButton = React.forwardRef<
 );
 
 AnimatedButton.displayName = 'AnimatedButton';
+

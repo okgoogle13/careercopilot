@@ -8,10 +8,10 @@ This file is the single source of truth for standards and workflow. **DO NOT** u
 
 | Component | Stack/Language | Key Requirement |
 | :--- | :--- | :--- |
-| **Frontend** | React 18.2.0 + TypeScript 5.0+ (Vite). | **Styling:** Tailwind CSS (utility-first) + Emotion (MUI theme). |
+| **Frontend** | React 18.2.0 + TypeScript 5.0+ (Vite). | **Styling:** Tailwind/Emotion (Legacy). **M3 Migration uses CSS Modules (See 3.5).** |
 | **Backend** | Python **(3.10-3.12)** / FastAPI / Genkit (Node.js 20). | **Type Safety:** **CRITICAL** TS interfaces $\leftrightarrow$ Pydantic models. |
 | **Database/Cache** | Firebase Cloud Firestore (Primary DB and cache collection `redis_cache`). | **Caching:** Firestore-backed TTL (1 hr default) instead of Redis. |
-| **MUI Version** | Material-UI **v5.16.14** (Targeting migration to M3 Expressive). | **Status:** Migration Readiness $\approx$ 12% (Focus on `electric/` components). |
+| **MUI Version** | Material-UI **v5.16.14** (Targeting migration to M3 Expressive). | **Status:** Migration Readiness $\approx$ 12%. **Tokens:** See Section 3.5. |
 
 ---
 
@@ -35,6 +35,30 @@ These rules are non-negotiable for maintaining high context quality and low oper
 
 ---
 
+## 3.5 🎨 DESIGN TOKEN SYSTEM (Dual Architecture)
+
+| System | Token Source | Status | Critical Rule |
+| :--- | :--- | :--- | :--- |
+| **Electric Alchemist** | `./frontend/src/theme/tokens.json` (184 tokens) | ✅ Production (30 components) | **Solid State:** NO shadows, border-based elevation. |
+| **M3 Expressive** | `./design-system/tokens.json` (342 tokens) | 🔄 Migration (12% → 70%) | **Auto-gen CSS:** NEVER edit `m3-design-tokens.css` directly. |
+
+### Quick Commands
+
+| Task | Command | Documentation |
+| :--- | :--- | :--- |
+| **Build M3 Tokens** | `python3 ./scripts/build-m3-tokens.py` | `docs/design/M3_EXPRESSIVE_DESIGN_SYSTEM.md` |
+| **Validate Tokens** | `python3 ./scripts/validate-design-tokens.py` | `docs/design/DESIGN_SYSTEM_OVERVIEW.md` |
+| **All-in-One Update** | `./scripts/update-design-system.sh` | `docs/design/ELECTRIC_ALCHEMIST_DESIGN_SYSTEM.md` |
+
+### Critical Token Rules
+
+* **R1: No Hardcoding:** **NEVER** hardcode colors/spacing. Use tokens only (`bg-primary-container` or `var(--md-sys-color-primary-50)`).
+* **R2: No Mixing:** **NEVER** mix Electric + M3 tokens in same component. Choose one system per component.
+* **R3: Auto-Gen Files:** **NEVER** edit generated files (`m3-design-tokens.css`, `tailwind-m3-patch.js`). Regenerate via scripts.
+* **R4: WCAG Compliance:** All color combinations **MUST** pass AA/AAA contrast validation (auto-checked by `validate-design-tokens.py`).
+
+---
+
 ## 4. ⚙️ ESSENTIAL COMMAND & ARCHITECTURAL INDEX
 
 | Area | Quick Start Command | Detailed Documentation |
@@ -55,4 +79,3 @@ These rules are non-negotiable for maintaining high context quality and low oper
 * **M3 Readiness:** 12% (Target: 70%).
 
 ***
-.

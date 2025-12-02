@@ -35,7 +35,7 @@ export default function App() {
             <Route path="/analysis" element={<div>Analysis Page</div>} />
             {/* Add other routes as needed */}
           </Routes>
-        </Suspense}
+        </Suspense>
       </AppShell>
     </BrowserRouter>
   );

@@ -1,21 +1,24 @@
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { Box } from '@mui/material';
+/**
+ * ELECTRIC ALCHEMIST: FORM COMPONENTS SECTION
+ *
+ * Documentation section showcasing form components.
+ */
+
 import React, { useState } from 'react';
-
-import { Checkbox } from '../ui/checkbox';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { Slider } from '../ui/slider';
-import { Switch } from '../ui/switch';
-import { Textarea } from '../ui/textarea';
-
+import { Checkbox } from '@/components/ui/Checkbox';
+import { Input } from '@/components/ui/Input';
+import { Label } from '@/components/ui/Label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/RadioGroup';
+import { Select } from '@/components/ui/Select';
+import { Slider } from '@/components/ui/Slider';
+import { Switch } from '@/components/ui/Switch';
+import { Textarea } from '@/components/ui/Textarea';
 import { ComponentSection, ComponentDemo } from './ComponentDemo';
 
 export function FormComponentsSection() {
   const [switchChecked, setSwitchChecked] = useState(false);
   const [checkboxChecked, setCheckboxChecked] = useState(false);
-  const [sliderValue, setSliderValue] = useState([50]);
+  const [sliderValue, setSliderValue] = useState(50);
   const [radioValue, setRadioValue] = useState('option1');
   const [selectValue, setSelectValue] = useState('');
 
@@ -25,63 +28,58 @@ export function FormComponentsSection() {
       description="Input controls and form elements for user data collection"
     >
       <ComponentDemo title="Input Controls">
-        <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6
-    }}>
-          <div sx={{}}>
-            <div sx={{}}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-4">
+            <div>
               <Label htmlFor="text-input">Text Input</Label>
               <Input id="text-input" placeholder="Enter text here..." />
             </div>
-            <div sx={{}}>
+            <div>
               <Label htmlFor="password-input">Password Input</Label>
               <Input id="password-input" type="password" placeholder="Password" />
             </div>
-            <div sx={{}}>
+            <div>
               <Label htmlFor="textarea">Textarea</Label>
               <Textarea id="textarea" placeholder="Enter longer text here..." />
             </div>
           </div>
-          <div sx={{}}>
-            <div sx={{}}>
-              <FormControl fullWidth>
-                <InputLabel>Select</InputLabel>
-                <Select
-                  value={selectValue}
-                  label="Select"
-                  onChange={(e) => setSelectValue(e.target.value)}
-                >
-                  <MenuItem value="option1">Option 1</MenuItem>
-                  <MenuItem value="option2">Option 2</MenuItem>
-                  <MenuItem value="option3">Option 3</MenuItem>
-                </Select>
-              </FormControl>
+          <div className="space-y-4">
+            <div>
+              <Select
+                label="Select"
+                options={[
+                  { label: 'Option 1', value: 'option1' },
+                  { label: 'Option 2', value: 'option2' },
+                  { label: 'Option 3', value: 'option3' },
+                ]}
+                value={selectValue}
+                onChange={(e) => setSelectValue(e.target.value)}
+              />
             </div>
-            <div sx={{}}>
+            <div>
               <Label>Switch</Label>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",}}>
+              <div className="flex items-center">
                 <Switch
                   id="switch"
                   checked={switchChecked}
                   onChange={(e) => setSwitchChecked(e.target.checked)}
                 />
-                <Label htmlFor="switch">Enable notifications</Label>
+                <Label htmlFor="switch" className="ml-3">
+                  Enable notifications
+                </Label>
               </div>
             </div>
-            <div sx={{}}>
+            <div>
               <Label>Checkbox</Label>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",}}>
+              <div className="flex items-center">
                 <Checkbox
                   id="checkbox"
                   checked={checkboxChecked}
                   onChange={(e) => setCheckboxChecked(e.target.checked)}
                 />
-                <Label htmlFor="checkbox">I agree to the terms</Label>
+                <Label htmlFor="checkbox" className="ml-3">
+                  I agree to the terms
+                </Label>
               </div>
             </div>
           </div>
@@ -89,49 +87,34 @@ export function FormComponentsSection() {
       </ComponentDemo>
 
       <ComponentDemo title="Radio Group & Slider">
-        <div sx={{
-      [theme.breakpoints.up('sm')]: {},
-      gap: 6
-    }}>
-          <div sx={{}}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
             <Label>Radio Group</Label>
-            <RadioGroup value={radioValue} onChange={(e) => setRadioValue(e.target.value)}>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",}}>
-                <RadioGroupItem value="option1" id="option1" />
-                <Label htmlFor="option1">Option 1</Label>
-              </div>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",}}>
-                <RadioGroupItem value="option2" id="option2" />
-                <Label htmlFor="option2">Option 2</Label>
-              </div>
-              <div sx={{
-      display: "flex",
-      alignItems: "center",}}>
-                <RadioGroupItem value="option3" id="option3" />
-                <Label htmlFor="option3">Option 3</Label>
-              </div>
+            <RadioGroup
+              name="radio-group"
+              value={radioValue}
+              onChange={(value) => setRadioValue(value)}
+            >
+              <RadioGroupItem value="option1" label="Option 1" />
+              <RadioGroupItem value="option2" label="Option 2" />
+              <RadioGroupItem value="option3" label="Option 3" />
             </RadioGroup>
           </div>
-          <div sx={{}}>
-            <Label>Slider</Label>
+          <div>
             <Slider
-              value={sliderValue}
-              onChange={(e, value) => setSliderValue(Array.isArray(value) ? value : [value])}
+              label="Volume"
+              min={0}
               max={100}
-              step={1}
-              sx={{
-      width: "100%"
-    }}
+              value={sliderValue}
+              onChange={(e) => setSliderValue(Number(e.target.value))}
+              showValue
             />
-            <p sx={{
-      typography: "body1",}}>Value: {sliderValue[0]}</p>
           </div>
         </div>
       </ComponentDemo>
     </ComponentSection>
   );
 }
+
+export default FormComponentsSection;
+

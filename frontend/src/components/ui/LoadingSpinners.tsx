@@ -1,6 +1,13 @@
-import { Box } from '@mui/material';
-import { motion } from 'motion/react';
+/**
+ * ELECTRIC ALCHEMIST: LOADING SPINNERS
+ *
+ * Collection of loading spinner components using Electric Alchemist design system.
+ * Uses Framer Motion for animations and design system tokens for colors.
+ */
+
 import React from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export interface SpinnerProps {
   size?: number;
@@ -9,14 +16,15 @@ export interface SpinnerProps {
 }
 
 /**
- * RotatingSpinner - Single circle with partial border that rotates continuously
+ * RotatingSpinner Component
  *
- * @example
- * ```tsx
- * <RotatingSpinner size={24} color="#A78BFA" />
- * ```
+ * Single circle with partial border that rotates continuously.
  */
-export function RotatingSpinner({ size = 24, color = '#A78BFA', className }: SpinnerProps) {
+export function RotatingSpinner({
+  size = 24,
+  color = '#D0BCFF', // primary color from tokens
+  className,
+}: SpinnerProps) {
   return (
     <motion.div
       className={className}
@@ -36,14 +44,15 @@ export function RotatingSpinner({ size = 24, color = '#A78BFA', className }: Spi
 }
 
 /**
- * PulsingDot - Single filled circle with scale animation
+ * PulsingDot Component
  *
- * @example
- * ```tsx
- * <PulsingDot size={12} color="#A78BFA" />
- * ```
+ * Single filled circle with scale animation.
  */
-export function PulsingDot({ size = 12, color = '#A78BFA', className }: SpinnerProps) {
+export function PulsingDot({
+  size = 12,
+  color = '#D0BCFF',
+  className,
+}: SpinnerProps) {
   return (
     <motion.div
       className={className}
@@ -62,30 +71,20 @@ export function PulsingDot({ size = 12, color = '#A78BFA', className }: SpinnerP
 }
 
 /**
- * BouncingDots - Three circles bouncing with staggered delays
+ * BouncingDots Component
  *
- * @example
- * ```tsx
- * <BouncingDots dotSize={8} color="#A78BFA" />
- * ```
+ * Three circles bouncing with staggered delays.
  */
 export function BouncingDots({
   size = 8,
-  color = '#A78BFA',
+  color = '#D0BCFF',
   className,
 }: SpinnerProps & { dotSize?: number }) {
-  const dotSize = size;
-
   return (
-    <Box
-      className={className}
+    <div
+      className={cn('flex items-center gap-2', className)}
       aria-label="Loading"
       role="status"
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 1,
-      }}
     >
       {[0, 1, 2].map((index) => (
         <motion.div
@@ -98,26 +97,27 @@ export function BouncingDots({
             delay: index * 0.15,
           }}
           style={{
-            width: dotSize,
-            height: dotSize,
+            width: size,
+            height: size,
             backgroundColor: color,
             borderRadius: '50%',
           }}
         />
       ))}
-    </Box>
+    </div>
   );
 }
 
 /**
- * GradientSpinner - Circular border with conic gradient that rotates
+ * GradientSpinner Component
  *
- * @example
- * ```tsx
- * <GradientSpinner size={32} color="#A78BFA" />
- * ```
+ * Circular border with conic gradient that rotates.
  */
-export function GradientSpinner({ size = 32, color = '#A78BFA', className }: SpinnerProps) {
+export function GradientSpinner({
+  size = 32,
+  color = '#D0BCFF',
+  className,
+}: SpinnerProps) {
   return (
     <motion.div
       className={className}
@@ -139,14 +139,15 @@ export function GradientSpinner({ size = 32, color = '#A78BFA', className }: Spi
 }
 
 /**
- * MorphingLoader - Shape-shifting square/circle with morphing border-radius
+ * MorphingLoader Component
  *
- * @example
- * ```tsx
- * <MorphingLoader size={24} color="#A78BFA" />
- * ```
+ * Shape-shifting square/circle with morphing border-radius.
  */
-export function MorphingLoader({ size = 24, color = '#A78BFA', className }: SpinnerProps) {
+export function MorphingLoader({
+  size = 24,
+  color = '#D0BCFF',
+  className,
+}: SpinnerProps) {
   return (
     <motion.div
       className={className}
@@ -172,48 +173,38 @@ export function MorphingLoader({ size = 24, color = '#A78BFA', className }: Spin
 }
 
 /**
- * LoadingSpinners - Component that displays all 5 spinner variants
+ * LoadingSpinners Component
  *
- * Useful for showcasing or demonstrating different loading animations.
- *
- * @example
- * ```tsx
- * <LoadingSpinners />
- * ```
+ * Component that displays all 5 spinner variants for showcasing.
  */
 export function LoadingSpinners() {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 6,
-      }}
-    >
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+    <div className="flex items-center gap-12">
+      <div className="flex flex-col items-center gap-2">
         <RotatingSpinner />
-        <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Rotating</Box>
-      </Box>
+        <div className="text-data text-xs text-on-surface-variant">Rotating</div>
+      </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+      <div className="flex flex-col items-center gap-2">
         <PulsingDot />
-        <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Pulsing</Box>
-      </Box>
+        <div className="text-data text-xs text-on-surface-variant">Pulsing</div>
+      </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+      <div className="flex flex-col items-center gap-2">
         <BouncingDots />
-        <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Bouncing</Box>
-      </Box>
+        <div className="text-data text-xs text-on-surface-variant">Bouncing</div>
+      </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+      <div className="flex flex-col items-center gap-2">
         <GradientSpinner />
-        <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Gradient</Box>
-      </Box>
+        <div className="text-data text-xs text-on-surface-variant">Gradient</div>
+      </div>
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
+      <div className="flex flex-col items-center gap-2">
         <MorphingLoader />
-        <Box sx={{ fontSize: '0.75rem', color: 'text.secondary' }}>Morphing</Box>
-      </Box>
-    </Box>
+        <div className="text-data text-xs text-on-surface-variant">Morphing</div>
+      </div>
+    </div>
   );
 }
+
