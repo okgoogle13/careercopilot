@@ -1,31 +1,73 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { M3Select } from './M3Select';
 import { useState } from 'react';
+import { M3Select, type M3SelectOption } from './M3Select';
+
+/**
+ * M3 Expressive Select Component
+ *
+ * Implements Material Design 3 dropdown select.
+ * Use for single-value selection from a list of options.
+ *
+ * Features:
+ * - Filled and outlined variants
+ * - Multiple color roles
+ * - Three size options
+ * - Keyboard navigation
+ * - Error state support
+ * - Label and helper text
+ * - Disabled state
+ */
 
 const meta: Meta<typeof M3Select> = {
-  title: 'M3/Inputs/Select',
   component: M3Select,
+  title: 'M3 Expressive/Select',
+  parameters: {
+    layout: 'centered',
+  },
   tags: ['autodocs'],
   argTypes: {
-    multiple: {
-      control: 'boolean',
+    variant: {
+      control: 'select',
+      options: ['filled', 'outlined'],
+      description: 'Select style variant',
     },
-    searchable: {
-      control: 'boolean',
+    color: {
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary', 'error'],
+      description: 'Color role from M3 palette',
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+      description: 'Select size',
     },
     disabled: {
       control: 'boolean',
+      description: 'If true, select is disabled',
     },
     error: {
       control: 'boolean',
+      description: 'If true, select is in error state',
+    },
+    label: {
+      control: 'text',
+      description: 'Label text for the select',
+    },
+    helperText: {
+      control: 'text',
+      description: 'Helper text displayed below the select',
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text',
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof M3Select>;
+type Story = StoryObj<typeof meta>;
 
-const sampleOptions = [
+const sampleOptions: M3SelectOption[] = [
   { label: 'Apple', value: 'apple' },
   { label: 'Banana', value: 'banana' },
   { label: 'Cherry', value: 'cherry' },
@@ -36,7 +78,7 @@ const sampleOptions = [
   { label: 'Honeydew', value: 'honeydew' },
 ];
 
-const jobOptions = [
+const jobOptions: M3SelectOption[] = [
   { label: 'Frontend Developer', value: 'frontend' },
   { label: 'Backend Developer', value: 'backend' },
   { label: 'Full Stack Developer', value: 'fullstack' },
@@ -47,55 +89,208 @@ const jobOptions = [
   { label: 'QA Engineer', value: 'qa', disabled: true },
 ];
 
-export const Basic: Story = {
+/**
+ * Default Select (Filled + Primary)
+ */
+export const Default: Story = {
+  args: {
+    variant: 'filled',
+    color: 'primary',
+    size: 'medium',
+    options: sampleOptions,
+    placeholder: 'Select an option',
+  },
+};
+
+/**
+ * All Variants
+ */
+export const Variants: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '300px' }}>
+      <M3Select
+        variant="filled"
+        options={sampleOptions}
+        placeholder="Filled select"
+        label="Filled Variant"
+      />
+      <M3Select
+        variant="outlined"
+        options={sampleOptions}
+        placeholder="Outlined select"
+        label="Outlined Variant"
+      />
+    </div>
+  ),
+};
+
+/**
+ * All Sizes
+ */
+export const Sizes: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
+      <M3Select size="small" options={sampleOptions} placeholder="Small select" label="Small" />
+      <M3Select size="medium" options={sampleOptions} placeholder="Medium select" label="Medium" />
+      <M3Select size="large" options={sampleOptions} placeholder="Large select" label="Large" />
+    </div>
+  ),
+};
+
+/**
+ * All Color Roles
+ */
+export const ColorRoles: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
+      <M3Select color="primary" options={sampleOptions} placeholder="Primary" label="Primary" />
+      <M3Select color="secondary" options={sampleOptions} placeholder="Secondary" label="Secondary" />
+      <M3Select color="tertiary" options={sampleOptions} placeholder="Tertiary" label="Tertiary" />
+      <M3Select color="error" options={sampleOptions} placeholder="Error" label="Error" />
+    </div>
+  ),
+};
+
+/**
+ * Filled Variant
+ */
+export const FilledVariant: Story = {
+  args: {
+    variant: 'filled',
+    options: sampleOptions,
+    placeholder: 'Filled select',
+    label: 'Filled Select',
+  },
+};
+
+/**
+ * Outlined Variant
+ */
+export const OutlinedVariant: Story = {
+  args: {
+    variant: 'outlined',
+    options: sampleOptions,
+    placeholder: 'Outlined select',
+    label: 'Outlined Select',
+  },
+};
+
+/**
+ * With Label
+ */
+export const WithLabel: Story = {
   args: {
     options: sampleOptions,
-    placeholder: 'Select a fruit',
     label: 'Favorite Fruit',
-    helperText: 'Choose your favorite fruit from the list',
+    placeholder: 'Select a fruit',
   },
 };
 
-export const WithDefaultValue: Story = {
+/**
+ * With Helper Text
+ */
+export const WithHelperText: Story = {
   args: {
     options: sampleOptions,
-    defaultValue: 'banana',
-    label: 'Pre-selected Fruit',
-    placeholder: 'Select...',
+    label: 'Select Option',
+    placeholder: 'Choose an option',
+    helperText: 'Please select an option from the list',
   },
 };
 
-export const Searchable: Story = {
+/**
+ * With Label and Helper Text
+ */
+export const WithLabelAndHelper: Story = {
   args: {
-    options: jobOptions,
-    searchable: true,
+    options: sampleOptions,
     label: 'Job Role',
-    placeholder: 'Search and select...',
-    helperText: 'Type to search through options',
+    placeholder: 'Select a role',
+    helperText: 'Choose the position you are applying for',
   },
 };
 
-export const MultiSelect: Story = {
+/**
+ * Disabled State
+ */
+export const Disabled: Story = {
   args: {
+    variant: 'filled',
+    disabled: true,
     options: sampleOptions,
-    multiple: true,
-    label: 'Select Multiple Fruits',
-    placeholder: 'Choose fruits...',
-    helperText: 'Select one or more options',
+    placeholder: 'Disabled select',
+    value: 'apple',
+    label: 'Disabled Select',
   },
 };
 
-export const SearchableMultiSelect: Story = {
+/**
+ * Error State
+ */
+export const ErrorState: Story = {
   args: {
-    options: jobOptions,
-    multiple: true,
-    searchable: true,
-    label: 'Skills',
-    placeholder: 'Search and select skills...',
-    helperText: 'Select all that apply',
+    error: true,
+    options: sampleOptions,
+    label: 'Required Field',
+    placeholder: 'Select an option',
+    errorMessage: 'This field is required',
   },
 };
 
+/**
+ * Error State with Outlined Variant
+ */
+export const ErrorOutlined: Story = {
+  args: {
+    variant: 'outlined',
+    error: true,
+    options: sampleOptions,
+    label: 'Email',
+    errorMessage: 'Please select a valid option',
+  },
+};
+
+/**
+ * All Variants with Error
+ */
+export const VariantsWithError: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '300px' }}>
+      <M3Select
+        variant="filled"
+        error
+        options={sampleOptions}
+        label="Filled Error"
+        errorMessage="This field has an error"
+      />
+      <M3Select
+        variant="outlined"
+        error
+        options={sampleOptions}
+        label="Outlined Error"
+        errorMessage="This field has an error"
+      />
+    </div>
+  ),
+};
+
+/**
+ * All Colors with Error
+ */
+export const ColorsWithError: Story = {
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
+      <M3Select color="primary" error errorMessage="Primary error" options={sampleOptions} />
+      <M3Select color="secondary" error errorMessage="Secondary error" options={sampleOptions} />
+      <M3Select color="tertiary" error errorMessage="Tertiary error" options={sampleOptions} />
+      <M3Select color="error" error errorMessage="Error color error" options={sampleOptions} />
+    </div>
+  ),
+};
+
+/**
+ * With Disabled Options
+ */
 export const WithDisabledOptions: Story = {
   args: {
     options: jobOptions,
@@ -105,184 +300,118 @@ export const WithDisabledOptions: Story = {
   },
 };
 
-export const Disabled: Story = {
-  args: {
-    options: sampleOptions,
-    disabled: true,
-    label: 'Disabled Select',
-    placeholder: 'Cannot select...',
-    helperText: 'This field is disabled',
-  },
-};
-
-export const WithError: Story = {
-  args: {
-    options: sampleOptions,
-    error: true,
-    label: 'Required Field',
-    placeholder: 'Select...',
-    helperText: 'This field is required',
-  },
-};
-
+/**
+ * Large Option List (Scrolling)
+ */
 export const LargeOptionList: Story = {
   args: {
     options: Array.from({ length: 50 }, (_, i) => ({
       label: `Option ${i + 1}`,
       value: `option-${i + 1}`,
     })),
-    searchable: true,
     label: 'Large List',
-    placeholder: 'Search from 50 options...',
-    helperText: 'Demonstrates scrolling and search',
+    placeholder: 'Select from 50 options...',
+    helperText: 'Demonstrates scrolling behavior',
   },
 };
 
-export const ControlledSelect: Story = {
+/**
+ * Form Example
+ */
+export const FormExample: Story = {
   render: () => {
-    const [value, setValue] = useState<string | number | (string | number)[]>('banana');
+    const [role, setRole] = useState<string | number>('');
+    const [experience, setExperience] = useState<string | number>('');
+
+    const experienceOptions: M3SelectOption[] = [
+      { label: '0-1 years', value: 'junior' },
+      { label: '2-5 years', value: 'mid' },
+      { label: '5-10 years', value: 'senior' },
+      { label: '10+ years', value: 'expert' },
+    ];
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <form
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '24px',
+          width: '400px',
+          padding: '24px',
+        }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          alert('Form submitted!');
+        }}
+      >
         <M3Select
+          variant="filled"
+          options={jobOptions}
+          value={role}
+          onChange={setRole}
+          label="Desired Role"
+          placeholder="Select a role..."
+          helperText="Choose the position you're applying for"
+          required
+        />
+        <M3Select
+          variant="outlined"
+          options={experienceOptions}
+          value={experience}
+          onChange={setExperience}
+          label="Years of Experience"
+          placeholder="Select experience level..."
+          required
+        />
+        <button
+          type="submit"
+          style={{
+            padding: '12px 24px',
+            backgroundColor: '#00897B',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Submit
+        </button>
+      </form>
+    );
+  },
+};
+
+/**
+ * Interactive Demo
+ */
+export const Interactive: Story = {
+  render: () => {
+    const [value, setValue] = useState<string | number>('');
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
+        <M3Select
+          variant="filled"
+          color="primary"
+          size="medium"
           options={sampleOptions}
           value={value}
           onChange={setValue}
-          label="Controlled Select"
-          placeholder="Select..."
-          helperText={`Current value: ${value}`}
+          label="Interactive Select"
+          placeholder="Type something..."
+          helperText={`Selected: ${value || 'None'}`}
         />
-        <div style={{ padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
-          <strong>Selected Value:</strong> {String(value)}
-        </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button
-            onClick={() => setValue('apple')}
-            style={{
-              padding: '8px 16px',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              backgroundColor: '#1976d2',
-              color: 'white',
-            }}
-          >
-            Set to Apple
-          </button>
-          <button
-            onClick={() => setValue('cherry')}
-            style={{
-              padding: '8px 16px',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              backgroundColor: '#1976d2',
-              color: 'white',
-            }}
-          >
-            Set to Cherry
-          </button>
-          <button
-            onClick={() => setValue('')}
-            style={{
-              padding: '8px 16px',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              backgroundColor: '#666',
-              color: 'white',
-            }}
-          >
-            Clear
-          </button>
+        <div style={{ padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+          <strong>Selected Value:</strong> {value || 'None'}
         </div>
       </div>
     );
   },
 };
 
-export const ControlledMultiSelect: Story = {
-  render: () => {
-    const [value, setValue] = useState<string | number | (string | number)[]>(['banana', 'cherry']);
-
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <M3Select
-          options={sampleOptions}
-          value={value}
-          onChange={setValue}
-          multiple
-          label="Controlled Multi-Select"
-          placeholder="Select fruits..."
-          helperText={`Selected: ${Array.isArray(value) ? value.join(', ') : value}`}
-        />
-        <div style={{ padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
-          <strong>Selected Values:</strong> [{Array.isArray(value) ? value.join(', ') : value}]
-        </div>
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <button
-            onClick={() => setValue(['apple', 'banana', 'cherry'])}
-            style={{
-              padding: '8px 16px',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              backgroundColor: '#1976d2',
-              color: 'white',
-            }}
-          >
-            Select Three
-          </button>
-          <button
-            onClick={() => setValue([])}
-            style={{
-              padding: '8px 16px',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              backgroundColor: '#666',
-              color: 'white',
-            }}
-          >
-            Clear All
-          </button>
-        </div>
-      </div>
-    );
-  },
-};
-
-export const AllVariants: Story = {
-  render: () => (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-      <M3Select
-        options={sampleOptions}
-        label="Basic Select"
-        placeholder="Select..."
-      />
-      <M3Select
-        options={jobOptions}
-        searchable
-        label="Searchable"
-        placeholder="Search..."
-      />
-      <M3Select
-        options={sampleOptions}
-        multiple
-        label="Multi-Select"
-        placeholder="Choose multiple..."
-      />
-      <M3Select
-        options={sampleOptions}
-        error
-        label="Error State"
-        placeholder="Select..."
-        helperText="Required field"
-      />
-    </div>
-  ),
-};
-
+/**
+ * Keyboard Navigation Demo
+ */
 export const KeyboardNavigation: Story = {
   args: {
     options: sampleOptions,
@@ -292,67 +421,28 @@ export const KeyboardNavigation: Story = {
   },
 };
 
-export const JobApplicationForm: Story = {
+/**
+ * Complete Example
+ */
+export const Complete: Story = {
   render: () => {
-    const [role, setRole] = useState<string | number | (string | number)[]>('');
-    const [skills, setSkills] = useState<string | number | (string | number)[]>([]);
-    const [experience, setExperience] = useState<string | number | (string | number)[]>('');
-
-    const experienceOptions = [
-      { label: '0-1 years', value: 'junior' },
-      { label: '2-5 years', value: 'mid' },
-      { label: '5-10 years', value: 'senior' },
-      { label: '10+ years', value: 'expert' },
-    ];
-
-    const skillOptions = [
-      { label: 'JavaScript', value: 'js' },
-      { label: 'TypeScript', value: 'ts' },
-      { label: 'React', value: 'react' },
-      { label: 'Node.js', value: 'node' },
-      { label: 'Python', value: 'python' },
-      { label: 'SQL', value: 'sql' },
-      { label: 'Docker', value: 'docker' },
-      { label: 'AWS', value: 'aws' },
-    ];
+    const [value, setValue] = useState<string | number>('banana');
 
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '500px' }}>
-        <h3 style={{ margin: 0 }}>Job Application Form</h3>
-
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', width: '300px' }}>
         <M3Select
-          options={jobOptions}
-          value={role}
-          onChange={setRole}
-          label="Desired Role"
-          placeholder="Select a role..."
-          helperText="Choose the position you're applying for"
+          variant="filled"
+          color="primary"
+          size="medium"
+          options={sampleOptions}
+          value={value}
+          onChange={setValue}
+          label="Complete Example"
+          placeholder="Select..."
+          helperText="This is a complete example with all features"
         />
-
-        <M3Select
-          options={skillOptions}
-          value={skills}
-          onChange={setSkills}
-          multiple
-          searchable
-          label="Technical Skills"
-          placeholder="Select your skills..."
-          helperText="Select all that apply"
-        />
-
-        <M3Select
-          options={experienceOptions}
-          value={experience}
-          onChange={setExperience}
-          label="Years of Experience"
-          placeholder="Select experience level..."
-        />
-
-        <div style={{ padding: '16px', backgroundColor: '#f5f5f5', borderRadius: '8px' }}>
-          <strong>Form Data:</strong>
-          <pre style={{ margin: '8px 0 0 0', fontSize: '12px' }}>
-            {JSON.stringify({ role, skills, experience }, null, 2)}
-          </pre>
+        <div style={{ padding: '12px', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+          <strong>Selected:</strong> {value}
         </div>
       </div>
     );
