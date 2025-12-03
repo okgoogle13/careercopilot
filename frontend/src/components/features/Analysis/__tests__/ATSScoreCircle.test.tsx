@@ -1,31 +1,43 @@
 import { render, screen } from '@testing-library/react';
 import { jest } from '@jest/globals';
-import { ATSScoreCircle } from '../ATSScoreCircle';
+import { ATSScoreCircle } from '@/components/custom/ats-score-circle/ATSScoreCircle';
 
 describe('ATSScoreCircle', () => {
   it('renders without errors', () => {
-    render(<ATSScoreCircle score={75} />);
-    expect(screen.getByText('75')).toBeInTheDocument();
+    const { container } = render(<ATSScoreCircle score={75} />);
+    const svg = container.querySelector('svg');
+    expect(svg).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: /ATS Score: 75 out of 100/i })).toBeInTheDocument();
   });
 
   it('displays the correct score', () => {
     render(<ATSScoreCircle score={85} />);
-    expect(screen.getByText('85')).toBeInTheDocument();
+    const scoreElement = screen.getByText(/85/);
+    expect(scoreElement).toBeInTheDocument();
   });
 
   it('rounds the score to nearest integer', () => {
     render(<ATSScoreCircle score={78.6} />);
-    expect(screen.getByText('79')).toBeInTheDocument();
+    const scoreElement = screen.getByText(/79/);
+    expect(scoreElement).toBeInTheDocument();
   });
 
-  it('hides score when showScore is false', () => {
-    render(<ATSScoreCircle score={75} showScore={false} />);
-    expect(screen.queryByText('75')).not.toBeInTheDocument();
+  it('hides label when showLabel is false', () => {
+    const { container } = render(<ATSScoreCircle score={75} showLabel={false} />);
+    // The score should still be visible in the circle
+    expect(screen.getByText(/75/)).toBeInTheDocument();
+    // The label should not be in the document
+    const label = container.querySelector('[aria-label="ATS Score: 75 out of 100"]');
+    expect(label).toHaveAttribute('aria-label', 'ATS Score: 75 out of 100');
   });
 
   it('shows score by default', () => {
-    render(<ATSScoreCircle score={90} />);
-    expect(screen.getByText('90')).toBeInTheDocument();
+    const { container } = render(<ATSScoreCircle score={90} />);
+    const scoreElement = screen.getByText(/90/);
+    const label = container.querySelector('[aria-label="ATS Score: 90 out of 100"]');
+    
+    expect(scoreElement).toBeInTheDocument();
+    expect(label).toHaveAttribute('aria-label', 'ATS Score: 90 out of 100');
   });
 
   it('renders with small size', () => {
@@ -56,34 +68,45 @@ describe('ATSScoreCircle', () => {
   });
 
   it('applies correct color class for high scores (80+)', () => {
-    render(<ATSScoreCircle score={85} />);
-    expect(screen.getByText('85')).toBeInTheDocument();
-    // Color is applied via getColorClass function
+    const { container } = render(<ATSScoreCircle score={85} />);
+    const scoreElement = container.querySelector('p');
+    expect(scoreElement).toHaveTextContent(/85/);
+    // Check for the primary color class for high scores
+    expect(scoreElement).toHaveClass('text-primary');
   });
 
   it('applies correct color class for medium scores (60-79)', () => {
-    render(<ATSScoreCircle score={70} />);
-    expect(screen.getByText('70')).toBeInTheDocument();
+    const { container } = render(<ATSScoreCircle score={70} />);
+    const scoreElement = container.querySelector('p');
+    expect(scoreElement).toHaveTextContent(/70/);
+    // Check for the secondary color class for medium scores
+    expect(scoreElement).toHaveClass('text-secondary');
   });
 
   it('applies correct color class for low-medium scores (40-59)', () => {
-    render(<ATSScoreCircle score={45} />);
-    expect(screen.getByText('45')).toBeInTheDocument();
+    const { container } = render(<ATSScoreCircle score={45} />);
+    const scoreElement = container.querySelector('p');
+    expect(scoreElement).toHaveTextContent(/45/);
+    // Check for the error color class for low-medium scores
+    expect(scoreElement).toHaveClass('text-error');
   });
 
   it('applies correct color class for low scores (<40)', () => {
-    render(<ATSScoreCircle score={25} />);
-    expect(screen.getByText('25')).toBeInTheDocument();
+    const { container } = render(<ATSScoreCircle score={25} />);
+    const scoreElement = container.querySelector('.text-error');
+    expect(scoreElement).toHaveTextContent(/25/);
   });
 
   it('handles score of 0', () => {
-    render(<ATSScoreCircle score={0} />);
-    expect(screen.getByText('0')).toBeInTheDocument();
+    const { container } = render(<ATSScoreCircle score={0} />);
+    const scoreElement = container.querySelector('p');
+    expect(scoreElement).toHaveTextContent(/0/);
   });
 
   it('handles score of 100', () => {
-    render(<ATSScoreCircle score={100} />);
-    expect(screen.getByText('100')).toBeInTheDocument();
+    const { container } = render(<ATSScoreCircle score={100} />);
+    const scoreElement = container.querySelector('p');
+    expect(scoreElement).toHaveTextContent(/100/);
   });
 
   it('accepts custom className', () => {

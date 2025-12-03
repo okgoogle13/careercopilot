@@ -1,62 +1,201 @@
 /**
  * M3 Expressive Stepper Styles
  * Uses Material Design 3 Expressive design tokens
- *
- * Token Reference:
- * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
- * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
- * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
- * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
- * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
  */
 
 /* ===== BASE STEPPER STYLES ===== */
 .m3-stepper {
   display: flex;
+  width: 100%;
+}
+
+.m3-stepper--horizontal {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.m3-stepper--vertical {
+  flex-direction: column;
+}
+
+/* ===== STEP ===== */
+.m3-stepper__step {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+  position: relative;
+}
+
+.m3-stepper--vertical .m3-stepper__step {
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: var(--md-sys-spacing-4);
+}
+
+.m3-stepper__step-connector {
+  display: flex;
   align-items: center;
   justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  flex-shrink: 0;
+  margin-right: var(--md-sys-spacing-4);
 }
 
-/* ===== VARIANT STYLES ===== */
-/* .m3-stepper--variant1 {
-  TODO: Add variant styling
+.m3-stepper__step-content {
+  flex: 1;
+  min-width: 0;
 }
 
-.m3-stepper--variant2 {
-  TODO: Add variant styling
-} */
+.m3-stepper__step-label {
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-titleMedium-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-titleMedium-line-height);
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: var(--md-sys-spacing-1);
+}
 
-/* ===== COLOR ROLES ===== */
-/* .m3-stepper--primary {
+.m3-stepper__step-description {
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+  font-weight: var(--md-sys-typescale-weight-regular);
+  line-height: var(--md-sys-typescale-bodyMedium-line-height);
+  color: var(--md-sys-color-neutral-40);
+}
+
+.m3-stepper__step-optional {
+  font-size: var(--md-sys-typescale-bodySmall-size);
+  color: var(--md-sys-color-neutral-40);
+  margin-left: var(--md-sys-spacing-2);
+}
+
+/* ===== STEP STATES ===== */
+.m3-stepper__step--completed .m3-stepper__step-label {
+  color: var(--md-sys-color-on-surface);
+}
+
+.m3-stepper__step--active .m3-stepper__step-label {
   color: var(--md-sys-color-primary-50);
-  background-color: var(--md-sys-color-primary-container);
+  font-weight: var(--md-sys-typescale-weight-semibold);
 }
 
-.m3-stepper--secondary {
+.m3-stepper--secondary .m3-stepper__step--active .m3-stepper__step-label {
   color: var(--md-sys-color-secondary-50);
-  background-color: var(--md-sys-color-secondary-container);
-} */
-
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-stepper:hover {
-  box-shadow: var(--md-sys-elevation-level1);
 }
 
-.m3-stepper:active {
-  transform: scale(0.98);
-} */
+.m3-stepper--tertiary .m3-stepper__step--active .m3-stepper__step-label {
+  color: var(--md-sys-color-tertiary-50);
+}
 
-/* ===== DISABLED STATE ===== */
-/* .m3-stepper:disabled {
-  opacity: 0.38;
-  cursor: not-allowed;
-} */
+.m3-stepper--error .m3-stepper__step--active .m3-stepper__step-label {
+  color: var(--md-sys-color-error-50);
+}
+
+.m3-stepper__step--pending .m3-stepper__step-label {
+  color: var(--md-sys-color-neutral-40);
+}
+
+/* ===== STEP ICON ===== */
+.m3-stepper__step-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-neutral-40);
+  font-size: 16px;
+}
+
+.m3-stepper__step-icon--completed {
+  background-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-on-primary);
+}
+
+.m3-stepper--secondary .m3-stepper__step-icon--completed {
+  background-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-on-secondary);
+}
+
+.m3-stepper__step--active .m3-stepper__step-icon {
+  background-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-on-primary);
+}
+
+.m3-stepper--secondary .m3-stepper__step--active .m3-stepper__step-icon {
+  background-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-on-secondary);
+}
+
+/* ===== STEP CIRCLE ===== */
+.m3-stepper__step-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--md-sys-shape-corner-full);
+  border: 2px solid var(--md-sys-color-outline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  transition: border-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
+              background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+}
+
+.m3-stepper__step--active .m3-stepper__step-circle {
+  border-color: var(--md-sys-color-primary-50);
+}
+
+.m3-stepper--secondary .m3-stepper__step--active .m3-stepper__step-circle {
+  border-color: var(--md-sys-color-secondary-50);
+}
+
+.m3-stepper__step-circle-inner {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--md-sys-shape-corner-full);
+  background-color: var(--md-sys-color-primary-50);
+}
+
+.m3-stepper--secondary .m3-stepper__step-circle-inner {
+  background-color: var(--md-sys-color-secondary-50);
+}
+
+/* ===== CONNECTOR ===== */
+.m3-stepper__connector {
+  flex: 1;
+  height: 2px;
+  background-color: var(--md-sys-color-outline-variant);
+  margin: 0 var(--md-sys-spacing-2);
+  margin-top: 11px;
+  min-width: 24px;
+}
+
+.m3-stepper--vertical .m3-stepper__connector {
+  width: 2px;
+  height: var(--md-sys-spacing-4);
+  margin: var(--md-sys-spacing-2) 0;
+  margin-left: 11px;
+  min-height: 24px;
+}
+
+.m3-stepper__step--completed + .m3-stepper__connector {
+  background-color: var(--md-sys-color-primary-50);
+}
+
+.m3-stepper--secondary .m3-stepper__step--completed + .m3-stepper__connector {
+  background-color: var(--md-sys-color-secondary-50);
+}
 
 /* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
-  .m3-stepper {
-    /* TODO: Mobile styles */
+@media (max-width: 600px) {
+  .m3-stepper--horizontal {
+    flex-direction: column;
   }
-} */
+
+  .m3-stepper--horizontal .m3-stepper__connector {
+    width: 2px;
+    height: var(--md-sys-spacing-4);
+    margin: var(--md-sys-spacing-2) 0;
+    margin-left: 11px;
+  }
+}

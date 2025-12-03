@@ -2,38 +2,43 @@
  * M3 Expressive List Component
  * Implements Material Design 3 List for CareerCopilot
  *
- * Uses CSS variables from m3-design-tokens.css:
- * - Color: --md-sys-color-*
- * - Shape: --md-sys-shape-corner-*
- * - Typography: --md-sys-typescale-*
- * - Spacing: --md-sys-spacing-*
- * - Motion: --md-sys-motion-*
- * - Elevation: --md-sys-elevation-*
+ * Container for list items. Uses CSS variables from m3-design-tokens.css.
  *
  * NOTE: CSS styles (M3List.css) must be imported in the application root
  * or in pages that use this component.
  */
 
 import React from 'react';
+import './M3List.css';
 
-export interface M3ListProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface M3ListProps {
   /**
-   * [Add your variant prop]
-   * @default 'default'
+   * List items (typically M3ListItem components)
    */
-  // variant?: 'default' | 'variant2';
-
-  /**
-   * [Add your color prop]
-   * @default 'primary'
-   */
-  // color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  children: React.ReactNode;
 
   /**
-   * Component content
+   * If true, list has dividers between items
+   * @default true
    */
-  children?: React.ReactNode;
+  dividers?: boolean;
+
+  /**
+   * If true, list items are dense (smaller padding)
+   * @default false
+   */
+  dense?: boolean;
+
+  /**
+   * If true, list is disabled
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * Custom className
+   */
+  className?: string;
 }
 
 /**
@@ -41,43 +46,44 @@ export interface M3ListProps
  *
  * Example usage:
  * ```tsx
- * <M3List>Content</M3List>
+ * <M3List>
+ *   <M3ListItem>Item 1</M3ListItem>
+ *   <M3ListItem>Item 2</M3ListItem>
+ * </M3List>
  * ```
  */
-export const M3List = React.forwardRef<
-  HTMLDivElement,
-  M3ListProps
->(
-  (
-    {
-      // variant = 'default',
-      // color = 'primary',
-      className = '',
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [
-      'm3-list',
-      // `m3-list--${variant}`,
-      // `m3-list--${color}`,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+export const M3List: React.FC<M3ListProps> = ({
+  children,
+  dividers = true,
+  dense = false,
+  disabled = false,
+  className = '',
+}) => {
+  const classNames = [
+    'm3-list',
+    dividers && 'm3-list--dividers',
+    dense && 'm3-list--dense',
+    disabled && 'm3-list--disabled',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-    return (
-      <div
-        ref={ref}
-        className={classNames}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+  return (
+    <ul className={classNames} role="list">
+      {React.Children.map(children, (child, index) => {
+        if (!React.isValidElement(child)) {
+          return child;
+        }
+
+        return React.cloneElement(child, {
+          key: child.key || index,
+          isLast: index === React.Children.count(children) - 1,
+        });
+      })}
+    </ul>
+  );
+};
 
 M3List.displayName = 'M3List';
 

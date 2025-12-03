@@ -1,62 +1,109 @@
 /**
  * M3 Expressive Tag Styles
  * Uses Material Design 3 Expressive design tokens
- *
- * Token Reference:
- * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
- * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
- * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
- * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
- * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
  */
 
 /* ===== BASE TAG STYLES ===== */
 .m3-tag {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  padding: var(--md-sys-spacing-1) var(--md-sys-spacing-3);
+  border-radius: var(--md-sys-shape-corner-small);
+  font-family: var(--md-sys-typescale-font-plain);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
 }
 
-/* ===== VARIANT STYLES ===== */
-/* .m3-tag--variant1 {
-  TODO: Add variant styling
+/* ===== SIZE VARIANTS ===== */
+.m3-tag--small {
+  font-size: var(--md-sys-typescale-labelSmall-size);
+  padding: var(--md-sys-spacing-1) var(--md-sys-spacing-2);
+  height: 20px;
 }
 
-.m3-tag--variant2 {
-  TODO: Add variant styling
-} */
+.m3-tag--medium {
+  font-size: var(--md-sys-typescale-labelMedium-size);
+  padding: var(--md-sys-spacing-1) var(--md-sys-spacing-3);
+  height: 24px;
+}
 
-/* ===== COLOR ROLES ===== */
-/* .m3-tag--primary {
-  color: var(--md-sys-color-primary-50);
+.m3-tag--large {
+  font-size: var(--md-sys-typescale-labelLarge-size);
+  padding: var(--md-sys-spacing-2) var(--md-sys-spacing-4);
+  height: 28px;
+}
+
+/* ===== VARIANT: FILLED ===== */
+.m3-tag--filled.m3-tag--primary {
   background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
 }
 
-.m3-tag--secondary {
-  color: var(--md-sys-color-secondary-50);
+.m3-tag--filled.m3-tag--secondary {
   background-color: var(--md-sys-color-secondary-container);
-} */
-
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-tag:hover {
-  box-shadow: var(--md-sys-elevation-level1);
+  color: var(--md-sys-color-on-secondary-container);
 }
 
-.m3-tag:active {
-  transform: scale(0.98);
-} */
+.m3-tag--filled.m3-tag--tertiary {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.m3-tag--filled.m3-tag--error {
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.m3-tag--filled.m3-tag--success {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.m3-tag--filled.m3-tag--warning {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* ===== VARIANT: OUTLINED ===== */
+.m3-tag--outlined {
+  background-color: transparent;
+  border: 1px solid;
+}
+
+.m3-tag--outlined.m3-tag--primary {
+  border-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-primary-50);
+}
+
+.m3-tag--outlined.m3-tag--secondary {
+  border-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-secondary-50);
+}
+
+.m3-tag--outlined.m3-tag--tertiary {
+  border-color: var(--md-sys-color-tertiary-50);
+  color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-tag--outlined.m3-tag--error {
+  border-color: var(--md-sys-color-error-50);
+  color: var(--md-sys-color-error-50);
+}
+
+.m3-tag--outlined.m3-tag--success {
+  border-color: var(--md-sys-color-primary-50);
+  color: var(--md-sys-color-primary-50);
+}
+
+.m3-tag--outlined.m3-tag--warning {
+  border-color: var(--md-sys-color-secondary-50);
+  color: var(--md-sys-color-secondary-50);
+}
 
 /* ===== DISABLED STATE ===== */
-/* .m3-tag:disabled {
+.m3-tag--disabled {
   opacity: 0.38;
   cursor: not-allowed;
-} */
-
-/* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
-  .m3-tag {
-    /* TODO: Mobile styles */
-  }
-} */
+}

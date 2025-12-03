@@ -2,38 +2,32 @@
  * M3 Expressive Spinner Component
  * Implements Material Design 3 Spinner for CareerCopilot
  *
- * Uses CSS variables from m3-design-tokens.css:
- * - Color: --md-sys-color-*
- * - Shape: --md-sys-shape-corner-*
- * - Typography: --md-sys-typescale-*
- * - Spacing: --md-sys-spacing-*
- * - Motion: --md-sys-motion-*
- * - Elevation: --md-sys-elevation-*
+ * Indeterminate loading animation. Uses CSS variables from m3-design-tokens.css.
  *
  * NOTE: CSS styles (M3Spinner.css) must be imported in the application root
  * or in pages that use this component.
  */
 
 import React from 'react';
+import './M3Spinner.css';
 
-export interface M3SpinnerProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface M3SpinnerProps {
   /**
-   * [Add your variant prop]
-   * @default 'default'
+   * Size
+   * @default 'medium'
    */
-  // variant?: 'default' | 'variant2';
+  size?: 'small' | 'medium' | 'large';
 
   /**
-   * [Add your color prop]
+   * Color role from M3 palette
    * @default 'primary'
    */
-  // color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
 
   /**
-   * Component content
+   * Custom className
    */
-  children?: React.ReactNode;
+  className?: string;
 }
 
 /**
@@ -41,43 +35,30 @@ export interface M3SpinnerProps
  *
  * Example usage:
  * ```tsx
- * <M3Spinner>Content</M3Spinner>
+ * <M3Spinner />
+ * <M3Spinner size="large" color="secondary" />
  * ```
  */
-export const M3Spinner = React.forwardRef<
-  HTMLDivElement,
-  M3SpinnerProps
->(
-  (
-    {
-      // variant = 'default',
-      // color = 'primary',
-      className = '',
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [
-      'm3-spinner',
-      // `m3-spinner--${variant}`,
-      // `m3-spinner--${color}`,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+export const M3Spinner: React.FC<M3SpinnerProps> = ({
+  size = 'medium',
+  color = 'primary',
+  className = '',
+}) => {
+  const classNames = [
+    'm3-spinner',
+    `m3-spinner--${size}`,
+    `m3-spinner--${color}`,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-    return (
-      <div
-        ref={ref}
-        className={classNames}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
+  return (
+    <div className={classNames} role="status" aria-live="polite" aria-label="Loading">
+      <div className="m3-spinner__circle" />
+    </div>
+  );
+};
 
 M3Spinner.displayName = 'M3Spinner';
 

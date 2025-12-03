@@ -1,16 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { jest } from '@jest/globals';
-import { ATSScoreCircle } from '../ATSScoreCircle';
+import { ATSScoreCircle } from '@/components/custom/ats-score-circle/ATSScoreCircle';
 
 describe('ATSScoreCircle (Library)', () => {
   it('renders without errors', () => {
     render(<ATSScoreCircle score={85} />);
-    expect(screen.getByText('85')).toBeInTheDocument();
+    expect(screen.getByText('85%')).toBeInTheDocument();
   });
 
   it('displays the score', () => {
     render(<ATSScoreCircle score={92} />);
-    expect(screen.getByText('92')).toBeInTheDocument();
+    expect(screen.getByText('92%')).toBeInTheDocument();
   });
 
   it('renders SVG circles', () => {
@@ -19,9 +19,11 @@ describe('ATSScoreCircle (Library)', () => {
     expect(circles.length).toBeGreaterThanOrEqual(2);
   });
 
-  it('hides score when showScore is false', () => {
-    render(<ATSScoreCircle score={80} showScore={false} />);
-    expect(screen.queryByText('80')).not.toBeInTheDocument();
+  it('hides score when showLabel is false', () => {
+    render(<ATSScoreCircle score={80} showLabel={false} />);
+    // Score is still shown, only label is hidden
+    expect(screen.getByText('80%')).toBeInTheDocument();
+    expect(screen.queryByText('ATS Score')).not.toBeInTheDocument();
   });
 
   it('renders with different sizes', () => {
@@ -31,7 +33,7 @@ describe('ATSScoreCircle (Library)', () => {
     const smallSvg = small.querySelector('svg');
     const largeSvg = large.querySelector('svg');
 
-    expect(smallSvg?.getAttribute('width')).toBe('24');
+    expect(smallSvg?.getAttribute('width')).toBe('80');
     expect(largeSvg?.getAttribute('width')).toBe('192');
   });
 

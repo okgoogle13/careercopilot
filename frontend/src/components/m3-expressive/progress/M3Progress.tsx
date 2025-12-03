@@ -2,38 +2,49 @@
  * M3 Expressive Progress Component
  * Implements Material Design 3 Progress for CareerCopilot
  *
- * Uses CSS variables from m3-design-tokens.css:
- * - Color: --md-sys-color-*
- * - Shape: --md-sys-shape-corner-*
- * - Typography: --md-sys-typescale-*
- * - Spacing: --md-sys-spacing-*
- * - Motion: --md-sys-motion-*
- * - Elevation: --md-sys-elevation-*
+ * Progress indicator (bar or circular). Uses CSS variables from m3-design-tokens.css.
  *
  * NOTE: CSS styles (M3Progress.css) must be imported in the application root
  * or in pages that use this component.
  */
 
 import React from 'react';
+import './M3Progress.css';
 
-export interface M3ProgressProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface M3ProgressProps {
   /**
-   * [Add your variant prop]
-   * @default 'default'
+   * Progress value (0-100)
    */
-  // variant?: 'default' | 'variant2';
+  value?: number;
 
   /**
-   * [Add your color prop]
+   * If true, shows indeterminate progress
+   * @default false
+   */
+  indeterminate?: boolean;
+
+  /**
+   * Progress variant
+   * @default 'linear'
+   */
+  variant?: 'linear' | 'circular';
+
+  /**
+   * Color role from M3 palette
    * @default 'primary'
    */
-  // color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
 
   /**
-   * Component content
+   * Size (for circular variant)
+   * @default 'medium'
    */
-  children?: React.ReactNode;
+  size?: 'small' | 'medium' | 'large';
+
+  /**
+   * Custom className
+   */
+  className?: string;
 }
 
 /**
@@ -41,43 +52,73 @@ export interface M3ProgressProps
  *
  * Example usage:
  * ```tsx
- * <M3Progress>Content</M3Progress>
+ * <M3Progress value={50} />
+ * <M3Progress indeterminate variant="circular" />
  * ```
  */
-export const M3Progress = React.forwardRef<
-  HTMLDivElement,
-  M3ProgressProps
->(
-  (
-    {
-      // variant = 'default',
-      // color = 'primary',
-      className = '',
-      children,
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [
-      'm3-progress',
-      // `m3-progress--${variant}`,
-      // `m3-progress--${color}`,
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+export const M3Progress: React.FC<M3ProgressProps> = ({
+  value,
+  indeterminate = false,
+  variant = 'linear',
+  color = 'primary',
+  size = 'medium',
+  className = '',
+}) => {
+  const classNames = [
+    'm3-progress',
+    `m3-progress--${variant}`,
+    `m3-progress--${color}`,
+    variant === 'circular' && `m3-progress--${size}`,
+    indeterminate && 'm3-progress--indeterminate',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const clampedValue = value !== undefined ? Math.min(100, Math.max(0, value)) : 0;
+
+  if (variant === 'circular') {
+    const radius = size === 'small' ? 18 : size === 'large' ? 30 : 24;
+    const circumference = 2 * Math.PI * radius;
+    const offset = indeterminate ? 0 : circumference - (clampedValue / 100) * circumference;
 
     return (
-      <div
-        ref={ref}
-        className={classNames}
-        {...props}
-      >
-        {children}
+      <div className={classNames} role="progressbar" aria-valuenow={indeterminate ? undefined : clampedValue} aria-valuemin={0} aria-valuemax={100}>
+        <svg className="m3-progress__svg" viewBox="0 0 64 64">
+          <circle
+            className="m3-progress__circle-background"
+            cx="32"
+            cy="32"
+            r={radius}
+            fill="none"
+            strokeWidth="4"
+          />
+          <circle
+            className="m3-progress__circle-progress"
+            cx="32"
+            cy="32"
+            r={radius}
+            fill="none"
+            strokeWidth="4"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+          />
+        </svg>
       </div>
     );
   }
-);
+
+  return (
+    <div className={classNames} role="progressbar" aria-valuenow={indeterminate ? undefined : clampedValue} aria-valuemin={0} aria-valuemax={100}>
+      <div className="m3-progress__track">
+        <div
+          className="m3-progress__bar"
+          style={indeterminate ? undefined : { width: `${clampedValue}%` }}
+        />
+      </div>
+    </div>
+  );
+};
 
 M3Progress.displayName = 'M3Progress';
 
