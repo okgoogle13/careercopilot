@@ -12,7 +12,12 @@ export * from './job-card';
 export * from './profile-card';
 
 // Advanced form components
+export * from './input';
 export * from './select';
+export * from './textarea';
+export * from './checkbox';
+export * from './radio';
+export * from './switch';
 export * from './date-picker';
 export * from './chip';
 export * from './menu';
