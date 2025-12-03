@@ -8,6 +8,9 @@ import './styles/m3-design-tokens.css';
 // Electric Alchemist Design System
 import './styles/electric-alchemist.css';
 
+// Global Accessibility Reset
+import './styles/a11y-reset.css';
+
 // import * as Sentry from '@sentry/react';
 import { AuthProvider } from './context/AuthContext';
 import AppWrapper from './components/layout/AppWrapper';

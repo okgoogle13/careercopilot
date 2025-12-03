@@ -212,11 +212,11 @@
 
 .m3-chip__delete:hover {
   opacity: 1;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, var(--md-sys-state-hover-stateLayerOpacity));
 }
 
 .m3-chip__delete:active {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(0, 0, 0, var(--md-sys-state-pressed-stateLayerOpacity));
 }
 
 .m3-chip__delete svg {
