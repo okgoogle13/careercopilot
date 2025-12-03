@@ -61,7 +61,7 @@
 }
 
 .m3-toast__close:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, calc(var(--md-sys-state-hover-stateLayerOpacity) * 1.25));
 }
 
 /* ===== VARIANT STYLES ===== */
