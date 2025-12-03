@@ -15,7 +15,7 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import './M3TextArea.css';
+import './M3Textarea.css';
 
 export interface M3TextAreaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, 'size'> {
