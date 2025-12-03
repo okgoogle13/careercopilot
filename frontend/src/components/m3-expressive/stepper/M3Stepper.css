@@ -1,0 +1,62 @@
+/**
+ * M3 Expressive Stepper Styles
+ * Uses Material Design 3 Expressive design tokens
+ *
+ * Token Reference:
+ * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
+ * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
+ * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
+ * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
+ * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
+ */
+
+/* ===== BASE STEPPER STYLES ===== */
+.m3-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* TODO: Add base styling */
+  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+}
+
+/* ===== VARIANT STYLES ===== */
+/* .m3-stepper--variant1 {
+  TODO: Add variant styling
+}
+
+.m3-stepper--variant2 {
+  TODO: Add variant styling
+} */
+
+/* ===== COLOR ROLES ===== */
+/* .m3-stepper--primary {
+  color: var(--md-sys-color-primary-50);
+  background-color: var(--md-sys-color-primary-container);
+}
+
+.m3-stepper--secondary {
+  color: var(--md-sys-color-secondary-50);
+  background-color: var(--md-sys-color-secondary-container);
+} */
+
+/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
+/* .m3-stepper:hover {
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-stepper:active {
+  transform: scale(0.98);
+} */
+
+/* ===== DISABLED STATE ===== */
+/* .m3-stepper:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+} */
+
+/* ===== RESPONSIVE ===== */
+/* @media (max-width: 600px) {
+  .m3-stepper {
+    /* TODO: Mobile styles */
+  }
+} */

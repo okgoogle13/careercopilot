@@ -1,0 +1,62 @@
+/**
+ * M3 Expressive Dialog Styles
+ * Uses Material Design 3 Expressive design tokens
+ *
+ * Token Reference:
+ * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
+ * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
+ * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
+ * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
+ * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
+ */
+
+/* ===== BASE DIALOG STYLES ===== */
+.m3-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* TODO: Add base styling */
+  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+}
+
+/* ===== VARIANT STYLES ===== */
+/* .m3-dialog--variant1 {
+  TODO: Add variant styling
+}
+
+.m3-dialog--variant2 {
+  TODO: Add variant styling
+} */
+
+/* ===== COLOR ROLES ===== */
+/* .m3-dialog--primary {
+  color: var(--md-sys-color-primary-50);
+  background-color: var(--md-sys-color-primary-container);
+}
+
+.m3-dialog--secondary {
+  color: var(--md-sys-color-secondary-50);
+  background-color: var(--md-sys-color-secondary-container);
+} */
+
+/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
+/* .m3-dialog:hover {
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-dialog:active {
+  transform: scale(0.98);
+} */
+
+/* ===== DISABLED STATE ===== */
+/* .m3-dialog:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+} */
+
+/* ===== RESPONSIVE ===== */
+/* @media (max-width: 600px) {
+  .m3-dialog {
+    /* TODO: Mobile styles */
+  }
+} */
