@@ -1,6 +1,6 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
-import { render } from '../../../test-utils';
-import { CareerIntelligence } from './CareerIntelligence';
+import { render } from '@/test-utils';
+import { CareerIntelligence } from '@/features/career-intelligence/CareerIntelligence';
 
 describe('CareerIntelligence', () => {
   const mockOnBack = jest.fn();

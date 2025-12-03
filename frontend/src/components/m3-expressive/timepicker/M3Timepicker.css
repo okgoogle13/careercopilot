@@ -1,62 +1,10 @@
 /**
- * M3 Expressive Timepicker Styles
+ * M3 Expressive TimePicker Styles
  * Uses Material Design 3 Expressive design tokens
- *
- * Token Reference:
- * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
- * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
- * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
- * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
- * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
  */
 
 /* ===== BASE TIMEPICKER STYLES ===== */
 .m3-timepicker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  display: inline-block;
+  width: 100%;
 }
-
-/* ===== VARIANT STYLES ===== */
-/* .m3-timepicker--variant1 {
-  TODO: Add variant styling
-}
-
-.m3-timepicker--variant2 {
-  TODO: Add variant styling
-} */
-
-/* ===== COLOR ROLES ===== */
-/* .m3-timepicker--primary {
-  color: var(--md-sys-color-primary-50);
-  background-color: var(--md-sys-color-primary-container);
-}
-
-.m3-timepicker--secondary {
-  color: var(--md-sys-color-secondary-50);
-  background-color: var(--md-sys-color-secondary-container);
-} */
-
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-timepicker:hover {
-  box-shadow: var(--md-sys-elevation-level1);
-}
-
-.m3-timepicker:active {
-  transform: scale(0.98);
-} */
-
-/* ===== DISABLED STATE ===== */
-/* .m3-timepicker:disabled {
-  opacity: 0.38;
-  cursor: not-allowed;
-} */
-
-/* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
-  .m3-timepicker {
-    /* TODO: Mobile styles */
-  }
-} */

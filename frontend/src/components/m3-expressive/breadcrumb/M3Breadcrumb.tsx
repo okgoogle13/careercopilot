@@ -1,55 +1,51 @@
 /**
  * M3 Expressive Breadcrumb Component
- * Implements Material Design 3 button with M3 styling
+ * Implements Material Design 3 Breadcrumb for CareerCopilot
  *
- * Uses CSS variables from m3-design-tokens.css:
- * - Color: --md-sys-color-*
- * - Shape: --md-sys-shape-corner-*
- * - Motion: --md-sys-motion-*
- * - Typography: --md-sys-typescale-*
- * - Elevation: --md-sys-elevation-*
+ * Navigation breadcrumb showing the current page hierarchy.
+ * Uses CSS variables from m3-design-tokens.css.
  */
 import React from 'react';
 import './M3Breadcrumb.css';
 
-
-
-export interface M3BreadcrumbProps extends React.buttonAttributes<HTMLButtonElement> {
+export interface M3BreadcrumbItem {
   /**
-   * The variant to use
-   * @default 'filled'
+   * Item label
    */
-  variant?: 'filled' | 'tonal' | 'outlined' | 'text' | 'elevated';
+  label: string;
 
   /**
-   * The color role from M3 palette
-   * @default 'primary'
+   * Item href or path
    */
-  color?: 'primary' | 'secondary' | 'tertiary' | 'error';
+  href?: string;
 
   /**
-   * The size of the component
-   * @default 'medium'
+   * Click handler (if href is not provided)
    */
-  size?: 'small' | 'medium' | 'large';
+  onClick?: () => void;
 
   /**
-   * If true, component is disabled
-   * @default false
+   * If true, item is the current page (last item)
    */
-  disabled?: boolean;
+  current?: boolean;
+}
+
+export interface M3BreadcrumbProps {
+  /**
+   * Breadcrumb items
+   */
+  items: M3BreadcrumbItem[];
 
   /**
-   * Content of the component
+   * Separator between items
+   * @default '/'
    */
-  children?: React.ReactNode;
+  separator?: React.ReactNode;
 
   /**
    * Custom className
    */
   className?: string;
-
-  
 }
 
 /**
@@ -57,49 +53,83 @@ export interface M3BreadcrumbProps extends React.buttonAttributes<HTMLButtonElem
  *
  * Example usage:
  * ```tsx
- * <M3Breadcrumb variant="filled" color="primary">
- *   Click Me
- * </M3Breadcrumb>
+ * <M3Breadcrumb
+ *   items={[
+ *     { label: 'Home', href: '/' },
+ *     { label: 'Products', href: '/products' },
+ *     { label: 'Details', current: true }
+ *   ]}
+ * />
  * ```
  */
-export const M3Breadcrumb = React.forwardRef<HTMLButtonElement, M3BreadcrumbProps>(
-  (
-    {
-      variant = 'filled',
-      color = 'primary',
-      size = 'medium',
-      disabled = false,
-      children,
-      className = '',
-      
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [
-      'm3-breadcrumb',
-      `m3-breadcrumb--${variant}`,
-      `m3-breadcrumb--${color}`,
-      `m3-breadcrumb--${size}`,
-      disabled && 'm3-breadcrumb--disabled',
-      className,
-    ]
-      .filter(Boolean)
-      .join(' ');
+export const M3Breadcrumb: React.FC<M3BreadcrumbProps> = ({
+  items,
+  separator = '/',
+  className = '',
+}) => {
+  if (items.length === 0) return null;
 
-    return (
-      <button
-        ref={ref}
-        className={classNames}
-        disabled={disabled}
-        data-testid="m3-breadcrumb"
-        {...props}
-      >
-        {children}
-      </button>
-    );
-  }
-);
+  const classNames = [
+    'm3-breadcrumb',
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  return (
+    <nav className={classNames} aria-label="Breadcrumb">
+      <ol className="m3-breadcrumb__list">
+        {items.map((item, index) => {
+          const isLast = index === items.length - 1;
+          const isCurrent = item.current || isLast;
+
+          return (
+            <li key={index} className="m3-breadcrumb__item">
+              {isCurrent ? (
+                <span
+                  className="m3-breadcrumb__link m3-breadcrumb__link--current"
+                  aria-current="page"
+                >
+                  {item.label}
+                </span>
+              ) : (
+                <>
+                  {item.href ? (
+                    <a
+                      href={item.href}
+                      className="m3-breadcrumb__link"
+                      onClick={(e) => {
+                        if (item.onClick) {
+                          e.preventDefault();
+                          item.onClick();
+                        }
+                      }}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      className="m3-breadcrumb__link"
+                      onClick={item.onClick}
+                    >
+                      {item.label}
+                    </button>
+                  )}
+                </>
+              )}
+              {!isLast && (
+                <span className="m3-breadcrumb__separator" aria-hidden="true">
+                  {separator}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+};
 
 M3Breadcrumb.displayName = 'M3Breadcrumb';
 

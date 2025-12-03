@@ -8,7 +8,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2, AlertCircle, AlertTriangle, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Card } from './Card';
+import { ElectricCard as Card } from '@/components/electric/card';
 
 export type ToastSeverity = 'success' | 'error' | 'warning' | 'info';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { SettingsPage } from '../SettingsPage';
+import { SettingsPage } from '@/features/pages/SettingsPage';
 
 describe('SettingsPage', () => {
   const mockOnSave = jest.fn();

@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { X, Plus, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { tactilePress } from '@/lib/motion';
-import { Badge } from './Badge';
+import { M3Tag as Badge } from '@/components/m3-expressive/tag';
 
 interface KeywordTagProps {
   keyword: string;
@@ -141,19 +141,31 @@ export function KeywordTagGroup({
           <h4 className="text-hero text-base font-semibold text-on-surface">{title}</h4>
           <div className="flex items-center gap-2">
             {statusCounts.matched && (
-              <Badge variant="outline" className="text-data text-xs font-medium">
-                {statusCounts.matched} matched
-              </Badge>
+              <Badge 
+                label={`${statusCounts.matched} matched`}
+                variant="outlined" 
+                color="primary" 
+                size="small"
+                className="text-data text-xs font-medium"
+              />
             )}
             {statusCounts.missing && (
-              <Badge variant="outline" className="text-data text-xs font-medium">
-                {statusCounts.missing} missing
-              </Badge>
+              <Badge 
+                label={`${statusCounts.missing} missing`}
+                variant="outlined" 
+                color="error" 
+                size="small"
+                className="text-data text-xs font-medium"
+              />
             )}
             {statusCounts.suggested && (
-              <Badge variant="outline" className="text-data text-xs font-medium">
-                {statusCounts.suggested} suggested
-              </Badge>
+              <Badge 
+                label={`${statusCounts.suggested} suggested`}
+                variant="outlined" 
+                color="tertiary" 
+                size="small"
+                className="text-data text-xs font-medium"
+              />
             )}
           </div>
         </div>
@@ -171,9 +183,12 @@ export function KeywordTagGroup({
           />
         ))}
         {hiddenCount > 0 && (
-          <Badge variant="outline" className="cursor-pointer text-data text-xs font-medium">
-            +{hiddenCount} more
-          </Badge>
+          <Badge 
+            label={`+${hiddenCount} more`}
+            variant="outlined" 
+            size="small"
+            className="cursor-pointer text-data text-xs font-medium"
+          />
         )}
       </div>
     </div>

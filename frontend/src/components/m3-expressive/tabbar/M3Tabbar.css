@@ -1,62 +1,144 @@
 /**
- * M3 Expressive Tabbar Styles
+ * M3 Expressive TabBar Styles
  * Uses Material Design 3 Expressive design tokens
- *
- * Token Reference:
- * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
- * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
- * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
- * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
- * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
  */
 
 /* ===== BASE TABBAR STYLES ===== */
 .m3-tabbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: var(--md-sys-color-surface);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.m3-tabbar::-webkit-scrollbar {
+  display: none;
+}
+
+.m3-tabbar--scrollable {
+  overflow-x: auto;
+}
+
+/* ===== INDICATOR ===== */
+.m3-tabbar__indicator {
+  position: absolute;
+  bottom: 0;
+  height: 3px;
+  background-color: var(--md-sys-color-primary-50);
+  border-radius: var(--md-sys-shape-corner-small) var(--md-sys-shape-corner-small) 0 0;
+  transition: left var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard),
+              width var(--md-sys-motion-duration-medium2) var(--md-sys-motion-easing-standard);
+  z-index: 1;
+}
+
+.m3-tabbar--secondary .m3-tabbar__indicator {
+  background-color: var(--md-sys-color-secondary-50);
+}
+
+.m3-tabbar--tertiary .m3-tabbar__indicator {
+  background-color: var(--md-sys-color-tertiary-50);
+}
+
+.m3-tabbar--error .m3-tabbar__indicator {
+  background-color: var(--md-sys-color-error-50);
+}
+
+/* ===== TAB ===== */
+.m3-tabbar__tab {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  gap: var(--md-sys-spacing-2);
+  padding: var(--md-sys-spacing-4) var(--md-sys-spacing-6);
+  min-height: 48px;
+  background: none;
+  border: none;
+  font-family: var(--md-sys-typescale-font-plain);
+  font-size: var(--md-sys-typescale-labelLarge-size);
+  font-weight: var(--md-sys-typescale-weight-medium);
+  line-height: var(--md-sys-typescale-labelLarge-line-height);
+  color: var(--md-sys-color-neutral-40);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard),
+              background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  outline: none;
+  z-index: 2;
 }
 
-/* ===== VARIANT STYLES ===== */
-/* .m3-tabbar--variant1 {
-  TODO: Add variant styling
+.m3-tabbar__tab:hover:not(:disabled) {
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface);
 }
 
-.m3-tabbar--variant2 {
-  TODO: Add variant styling
-} */
+.m3-tabbar__tab:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary-50);
+  outline-offset: -2px;
+}
 
-/* ===== COLOR ROLES ===== */
-/* .m3-tabbar--primary {
+.m3-tabbar__tab--active {
   color: var(--md-sys-color-primary-50);
-  background-color: var(--md-sys-color-primary-container);
+  font-weight: var(--md-sys-typescale-weight-semibold);
 }
 
-.m3-tabbar--secondary {
+.m3-tabbar--secondary .m3-tabbar__tab--active {
   color: var(--md-sys-color-secondary-50);
-  background-color: var(--md-sys-color-secondary-container);
-} */
-
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-tabbar:hover {
-  box-shadow: var(--md-sys-elevation-level1);
 }
 
-.m3-tabbar:active {
-  transform: scale(0.98);
-} */
+.m3-tabbar--tertiary .m3-tabbar__tab--active {
+  color: var(--md-sys-color-tertiary-50);
+}
 
-/* ===== DISABLED STATE ===== */
-/* .m3-tabbar:disabled {
+.m3-tabbar--error .m3-tabbar__tab--active {
+  color: var(--md-sys-color-error-50);
+}
+
+.m3-tabbar__tab--disabled {
   opacity: 0.38;
   cursor: not-allowed;
-} */
+  pointer-events: none;
+}
+
+/* ===== TAB ICON ===== */
+.m3-tabbar__icon {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
+
+/* ===== TAB LABEL ===== */
+.m3-tabbar__label {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== TAB BADGE ===== */
+.m3-tabbar__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--md-sys-spacing-1);
+  background-color: var(--md-sys-color-error-50);
+  color: var(--md-sys-color-on-error);
+  border-radius: var(--md-sys-shape-corner-full);
+  font-size: var(--md-sys-typescale-labelSmall-size);
+  font-weight: var(--md-sys-typescale-weight-semibold);
+  line-height: 1;
+}
 
 /* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
-  .m3-tabbar {
-    /* TODO: Mobile styles */
+@media (max-width: 600px) {
+  .m3-tabbar__tab {
+    padding: var(--md-sys-spacing-3) var(--md-sys-spacing-4);
+    min-height: 40px;
+    font-size: var(--md-sys-typescale-labelMedium-size);
   }
-} */
+}

@@ -643,10 +643,35 @@ yarn test --testPathPattern="M3Card"
    - Verify token consistency across all components
    - Run E2E tests against migrated pages
 
-2. **Styling Fine-Tuning**
+2. **Styling Fine-Tuning** ✅ Tools Ready
    - Review all components for visual consistency
    - Adjust spacing, colors, shadows if needed
    - Compare against M3 design spec
+   
+   **Tools Available:**
+   - `scripts/analyze-m3-styling-consistency.sh` - Consistency analyzer
+   - `scripts/generate-m3-styling-report.py` - Detailed styling report
+   - `scripts/fix-hardcoded-spacing.sh` - Automated spacing fixer
+   - `docs/M3_STYLING_FINE_TUNING_GUIDE.md` - Complete guide
+   - `docs/M3_DESIGN_SPEC_REFERENCE.md` - Token reference
+   
+   **Current Status:**
+   - 2,015 tokens in use (excellent!)
+   - 193 hardcoded spacing values to fix
+   - 6 hardcoded colors to fix
+   - 1 hardcoded shadow to fix
+   
+   **Quick Start:**
+   ```bash
+   # Generate report
+   python3 scripts/generate-m3-styling-report.py
+   
+   # Fix spacing (automated)
+   ./scripts/fix-hardcoded-spacing.sh
+   
+   # Visual review
+   yarn storybook
+   ```
 
 3. **Deprecation & Cleanup**
    - Remove old Electric Alchemist components
