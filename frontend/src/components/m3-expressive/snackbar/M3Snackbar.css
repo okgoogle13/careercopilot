@@ -67,7 +67,7 @@
 }
 
 .m3-snackbar__action:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, calc(var(--md-sys-state-hover-stateLayerOpacity) * 1.25));
 }
 
 .m3-snackbar__close {
@@ -86,5 +86,5 @@
 }
 
 .m3-snackbar__close:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, calc(var(--md-sys-state-hover-stateLayerOpacity) * 1.25));
 }
