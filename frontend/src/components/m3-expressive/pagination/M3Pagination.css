@@ -1,13 +1,6 @@
 /**
  * M3 Expressive Pagination Styles
  * Uses Material Design 3 Expressive design tokens
- *
- * Token Reference:
- * - Colors: var(--md-sys-color-primary-*), var(--md-sys-color-secondary-*), etc.
- * - Spacing: var(--md-sys-spacing-1) through var(--md-sys-spacing-32)
- * - Shapes: var(--md-sys-shape-corner-small), var(--md-sys-shape-corner-medium), etc.
- * - Elevation: var(--md-sys-elevation-level0) through var(--md-sys-elevation-level5)
- * - Motion: var(--md-sys-motion-duration-short1) through var(--md-sys-motion-duration-long4)
  */
 
 /* ===== BASE PAGINATION STYLES ===== */
@@ -15,48 +8,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
 }
 
-/* ===== VARIANT STYLES ===== */
-/* .m3-pagination--variant1 {
-  TODO: Add variant styling
+.m3-pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--md-sys-spacing-2);
+  flex-wrap: wrap;
 }
 
-.m3-pagination--variant2 {
-  TODO: Add variant styling
-} */
-
-/* ===== COLOR ROLES ===== */
-/* .m3-pagination--primary {
-  color: var(--md-sys-color-primary-50);
-  background-color: var(--md-sys-color-primary-container);
+.m3-pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  color: var(--md-sys-color-neutral-40);
+  font-size: var(--md-sys-typescale-bodyMedium-size);
+  user-select: none;
 }
-
-.m3-pagination--secondary {
-  color: var(--md-sys-color-secondary-50);
-  background-color: var(--md-sys-color-secondary-container);
-} */
-
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-pagination:hover {
-  box-shadow: var(--md-sys-elevation-level1);
-}
-
-.m3-pagination:active {
-  transform: scale(0.98);
-} */
-
-/* ===== DISABLED STATE ===== */
-/* .m3-pagination:disabled {
-  opacity: 0.38;
-  cursor: not-allowed;
-} */
 
 /* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
-  .m3-pagination {
-    /* TODO: Mobile styles */
+@media (max-width: 600px) {
+  .m3-pagination__controls {
+    gap: var(--md-sys-spacing-1);
   }
-} */
+}

@@ -13,7 +13,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from './Button/Button';
+import { Button } from '../../m3-expressive/button';
 import { Separator } from './Separator';
 
 interface BreadcrumbItem {

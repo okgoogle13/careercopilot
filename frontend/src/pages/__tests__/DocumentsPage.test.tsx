@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter, useLocation } from 'react-router-dom';
-import { DocumentsPage, type Document } from '@/components/documentsPage';
+import { DocumentsPage } from '@/features/pages/DocumentsPage';
 import '@testing-library/jest-dom';
 
 // Mock react-router-dom

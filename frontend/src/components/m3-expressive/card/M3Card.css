@@ -13,50 +13,93 @@
 /* ===== BASE CARD STYLES ===== */
 .m3-card {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  /* TODO: Add base styling */
-  transition: background-color var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  flex-direction: column;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-neutral-10);
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: var(--md-sys-spacing-4);
+  transition: box-shadow var(--md-sys-motion-duration-medium1) var(--md-sys-motion-easing-standard),
+              transform var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  position: relative;
+  overflow: hidden;
 }
 
-/* ===== VARIANT STYLES ===== */
-/* .m3-card--variant1 {
-  TODO: Add variant styling
+/* ===== ELEVATION VARIANTS ===== */
+.m3-card--elevation-level0 {
+  box-shadow: var(--md-sys-elevation-level0);
 }
 
-.m3-card--variant2 {
-  TODO: Add variant styling
-} */
-
-/* ===== COLOR ROLES ===== */
-/* .m3-card--primary {
-  color: var(--md-sys-color-primary-50);
-  background-color: var(--md-sys-color-primary-container);
-}
-
-.m3-card--secondary {
-  color: var(--md-sys-color-secondary-50);
-  background-color: var(--md-sys-color-secondary-container);
-} */
-
-/* ===== HOVER/ACTIVE/FOCUS STATES ===== */
-/* .m3-card:hover {
+.m3-card--elevation-level1 {
   box-shadow: var(--md-sys-elevation-level1);
 }
 
-.m3-card:active {
-  transform: scale(0.98);
-} */
+.m3-card--elevation-level2 {
+  box-shadow: var(--md-sys-elevation-level2);
+}
 
-/* ===== DISABLED STATE ===== */
-/* .m3-card:disabled {
-  opacity: 0.38;
-  cursor: not-allowed;
-} */
+.m3-card--elevation-level3 {
+  box-shadow: var(--md-sys-elevation-level3);
+}
+
+.m3-card--elevation-level4 {
+  box-shadow: var(--md-sys-elevation-level4);
+}
+
+.m3-card--elevation-level5 {
+  box-shadow: var(--md-sys-elevation-level5);
+}
+
+/* ===== CLICKABLE VARIANT ===== */
+.m3-card--clickable {
+  cursor: pointer;
+}
+
+.m3-card--clickable:hover {
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-card--clickable:focus-visible {
+  outline: 2px solid var(--md-sys-color-primary-50);
+  outline-offset: 2px;
+}
+
+.m3-card--clickable:active {
+  transform: scale(0.98);
+}
+
+/* Hover elevation increase for clickable cards */
+.m3-card--clickable.m3-card--elevation-level0:hover {
+  box-shadow: var(--md-sys-elevation-level1);
+}
+
+.m3-card--clickable.m3-card--elevation-level1:hover {
+  box-shadow: var(--md-sys-elevation-level2);
+}
+
+.m3-card--clickable.m3-card--elevation-level2:hover {
+  box-shadow: var(--md-sys-elevation-level3);
+}
+
+.m3-card--clickable.m3-card--elevation-level3:hover {
+  box-shadow: var(--md-sys-elevation-level4);
+}
+
+.m3-card--clickable.m3-card--elevation-level4:hover {
+  box-shadow: var(--md-sys-elevation-level5);
+}
+
+.m3-card--clickable.m3-card--elevation-level5:hover {
+  box-shadow: var(--md-sys-elevation-level5);
+}
+
+/* ===== OPTIONAL OUTLINE ===== */
+.m3-card[data-outline="true"] {
+  border: 1px solid var(--md-sys-color-outline);
+}
 
 /* ===== RESPONSIVE ===== */
-/* @media (max-width: 600px) {
+@media (max-width: 600px) {
   .m3-card {
-    /* TODO: Mobile styles */
+    padding: var(--md-sys-spacing-3);
   }
-} */
+}

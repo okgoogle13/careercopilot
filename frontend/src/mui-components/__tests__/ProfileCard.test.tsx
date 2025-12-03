@@ -1,5 +1,5 @@
-import { render, screen } from '../../test-utils';
-import { ProfileCard } from '../ProfileCardMUI';
+import { render, screen } from '@/test-utils';
+import { ProfileCard } from '@/features/profile/ProfileCardMUI';
 
 describe('ProfileCard', () => {
   const mockProfile = {
